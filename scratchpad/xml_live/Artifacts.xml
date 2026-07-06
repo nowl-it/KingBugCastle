@@ -1,0 +1,4896 @@
+<Artifacts>
+
+	<!-- 가루 -->
+	<Artifact ID="100">
+		<NameComment>신비한 가루</NameComment>
+		<Type>Dust</Type>
+	</Artifact>
+
+	<!-- 유물 합성석 -->
+	<Artifact ID="501">
+		<NameComment>유물 합성석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>Normal</Level>
+		<Root>501</Root>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_500</MainOptionDesc>
+	</Artifact>
+
+	<Artifact ID="502">
+		<NameComment>킹 유물 합성석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>King</Level>
+		<Root>501</Root>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_500</MainOptionDesc>
+	</Artifact>
+
+	<Artifact ID="503">
+		<NameComment>갓 유물 합성석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>God</Level>
+		<Root>501</Root>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_500</MainOptionDesc>
+	</Artifact>
+
+	<Artifact ID="504">
+		<NameComment>킹갓 유물 합성석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<Root>501</Root>
+
+		<MainOptionDesc>ArtifactOption_500</MainOptionDesc>
+	</Artifact>
+
+	<!-- 황금 유물 합성석 -->
+	<Artifact ID="511">
+		<NameComment>황금 유물 합성석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>Normal</Level>
+		<Root>511</Root>
+
+		<MainOptionDesc>ArtifactOption_510</MainOptionDesc>
+	</Artifact>
+
+	<Artifact ID="512">
+		<NameComment>킹 황금 유물 합성석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>King</Level>
+		<Root>511</Root>
+		<Shortcuts>42</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_510</MainOptionDesc>
+	</Artifact>
+
+	<Artifact ID="513">
+		<NameComment>갓 황금 유물 합성석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>God</Level>
+		<Root>511</Root>
+		<Shortcuts>42</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_510</MainOptionDesc>
+	</Artifact>
+
+	<Artifact ID="514">
+		<NameComment>킹갓 황금 유물 합성석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<Root>511</Root>
+
+		<MainOptionDesc>ArtifactOption_510</MainOptionDesc>
+	</Artifact>
+
+	<Artifact ID="598">
+		<NameComment>신비한 재련석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>Normal</Level>
+		<Root>598</Root>
+		<Sprite>Artifact_Icon_600</Sprite>
+		<Desc>ArtifactDesc_600</Desc>
+		<Shortcuts>23</Shortcuts>
+		
+		<MainOptionDesc>ArtifactOption_598</MainOptionDesc>
+	</Artifact>
+	
+	<Artifact ID="599">
+		<NameComment>킹 신비한 재련석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>King</Level>
+		<Root>598</Root>
+		<Sprite>Artifact_Icon_600</Sprite>
+		<Desc>ArtifactDesc_600</Desc>
+		<Shortcuts>23,29</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_599</MainOptionDesc>
+	</Artifact>
+	
+	<Artifact ID="600">
+		<NameComment>갓 신비한 재련석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>God</Level>
+		<Root>598</Root>
+		<Sprite>Artifact_Icon_600</Sprite>
+		<Desc>ArtifactDesc_600</Desc>
+		<Shortcuts>23,29</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_600</MainOptionDesc>
+	</Artifact>
+	
+	<Artifact ID="601">
+		<NameComment>킹갓 신비한 재련석</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<Root>598</Root>
+		<Sprite>Artifact_Icon_600</Sprite>
+		<Desc>ArtifactDesc_600</Desc>
+		<Shortcuts>1,32,23,42,28</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_601</MainOptionDesc>
+	</Artifact>
+	
+	<!-- 촉매 -->
+	<Artifact ID="701">
+		<NameComment>공격력 촉매</NameComment>
+		<Name>ArtifactName_701</Name>
+		<Type>Catalyst</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<FixOption Count="4" MinLevel="1">AtkPer</FixOption>
+		<Sprite>Artifact_Icon_701</Sprite>
+		<Desc>ArtifactDesc_Catalyst</Desc>
+		<Shortcuts>23</Shortcuts>
+		
+		<MainOptionDesc>ArtifactOption_701</MainOptionDesc>
+		
+		<CatalystTier>1</CatalystTier>
+	</Artifact>
+
+	<Artifact ID="702">
+		<NameComment>체력 촉매</NameComment>
+		<Name>ArtifactName_702</Name>
+		<Type>Catalyst</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<FixOption Count="4" MinLevel="1">HpPer</FixOption>
+		<Sprite>Artifact_Icon_702</Sprite>
+		<Desc>ArtifactDesc_Catalyst</Desc>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_702</MainOptionDesc>
+		
+		<CatalystTier>1</CatalystTier>
+	</Artifact>
+
+	<Artifact ID="703">
+		<NameComment>공격속도 촉매</NameComment>
+		<Name>ArtifactName_703</Name>
+		<Type>Catalyst</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<FixOption Count="4" MinLevel="1">AtkSpeedPer</FixOption>
+		<Sprite>Artifact_Icon_703</Sprite>
+		<Desc>ArtifactDesc_Catalyst</Desc>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_703</MainOptionDesc>
+		
+		<CatalystTier>1</CatalystTier>
+	</Artifact>
+
+	<Artifact ID="704">
+		<NameComment>주문력 촉매</NameComment>
+		<Name>ArtifactName_704</Name>
+		<Type>Catalyst</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<FixOption Count="4" MinLevel="1">MAtkPer</FixOption>
+		<Sprite>Artifact_Icon_704</Sprite>
+		<Desc>ArtifactDesc_Catalyst</Desc>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_704</MainOptionDesc>
+		
+		<CatalystTier>1</CatalystTier>
+	</Artifact>
+
+	<Artifact ID="705">
+		<NameComment>행운의 촉매</NameComment>
+		<Name>ArtifactName_705</Name>
+		<Type>Catalyst</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<FixOption Count="4" MinLevel="4">Any</FixOption>
+		<Sprite>Artifact_Icon_705</Sprite>
+		<Desc>ArtifactDesc_Catalyst</Desc>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_705</MainOptionDesc>
+		
+		<CatalystTier>1</CatalystTier>
+	</Artifact>
+	
+	<Artifact ID="711">
+		<NameComment>빛나는 공격력 촉매</NameComment>
+		<Name>ArtifactName_711</Name>
+		<Type>Catalyst</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<FixOption Count="4" MinLevel="4">AtkPer</FixOption>
+		<Sprite>Artifact_Icon_711</Sprite>
+		<Desc>ArtifactDesc_Catalyst</Desc>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_711</MainOptionDesc>
+		
+		<CatalystTier>2</CatalystTier>
+	</Artifact>
+
+	<Artifact ID="712">
+		<NameComment>빛나는 체력 촉매</NameComment>
+		<Name>ArtifactName_712</Name>
+		<Type>Catalyst</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<FixOption Count="4" MinLevel="4">HpPer</FixOption>
+		<Sprite>Artifact_Icon_712</Sprite>
+		<Desc>ArtifactDesc_Catalyst</Desc>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_712</MainOptionDesc>
+		
+		<CatalystTier>2</CatalystTier>
+	</Artifact>
+
+	<Artifact ID="713">
+		<NameComment>빛나는 공격속도 촉매</NameComment>
+		<Name>ArtifactName_713</Name>
+		<Type>Catalyst</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<FixOption Count="4" MinLevel="4">AtkSpeedPer</FixOption>
+		<Sprite>Artifact_Icon_713</Sprite>
+		<Desc>ArtifactDesc_Catalyst</Desc>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_713</MainOptionDesc>
+		
+		<CatalystTier>2</CatalystTier>
+	</Artifact>
+
+	<Artifact ID="714">
+		<NameComment>빛나는 주문력 촉매</NameComment>
+		<Name>ArtifactName_714</Name>
+		<Type>Catalyst</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<FixOption Count="4" MinLevel="4">MAtkPer</FixOption>
+		<Sprite>Artifact_Icon_714</Sprite>
+		<Desc>ArtifactDesc_Catalyst</Desc>
+		<Shortcuts>23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_714</MainOptionDesc>
+		
+		<CatalystTier>2</CatalystTier>
+	</Artifact>
+	
+	<Artifact ID="801">
+		<NameComment>촉매 선택상자</NameComment>
+		<Name>ArtifactName_801</Name>
+		<Type>CatalystBox</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<Sprite>Artifact_Icon_801</Sprite>
+		<Desc>ArtifactDesc_CatalystBox</Desc>
+		<Shortcuts>1,32,24,28,29</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_801</MainOptionDesc>
+		
+		<CatalystTier>1</CatalystTier>
+	</Artifact>
+
+	<Artifact ID="802">
+		<NameComment>빛나는 촉매 선택상자</NameComment>
+		<Name>ArtifactName_802</Name>
+		<Type>CatalystBox</Type>
+		<FromType>Special</FromType>
+		<Level>KingGod</Level>
+		<Sprite>Artifact_Icon_802</Sprite>
+		<Desc>ArtifactDesc_CatalystBox</Desc>
+		<Shortcuts>24</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_802</MainOptionDesc>
+		
+		<CatalystTier>2</CatalystTier>
+	</Artifact>
+	
+	<!-- 연마석 -->
+	<Artifact ID="901">
+		<NameComment>신비한 연마석</NameComment>
+		<Name>ArtifactName_901</Name>
+		<Type>PolishItem</Type>
+		<FromType>Special</FromType>
+		<Level>Normal</Level>
+		<Sprite>Artifact_Icon_901</Sprite>
+		<Desc>ArtifactDesc_901</Desc>
+		<Shortcuts>2,23</Shortcuts>
+		
+		<MainOptionDesc>ArtifactOption_901</MainOptionDesc>
+		
+		<AddPolishPoint>10</AddPolishPoint>
+	</Artifact>
+	
+	<Artifact ID="902">
+		<NameComment>킹 신비한 연마석</NameComment>
+		<Name>ArtifactName_902</Name>
+		<Type>PolishItem</Type>
+		<FromType>Special</FromType>
+		<Level>King</Level>
+		<Sprite>Artifact_Icon_901</Sprite>
+		<Desc>ArtifactDesc_901</Desc>
+		<Shortcuts>23,2,28,29</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_902</MainOptionDesc>
+
+		<AddPolishPoint>50</AddPolishPoint>
+	</Artifact>
+	
+	<Artifact ID="903">
+		<NameComment>갓 신비한 연마석</NameComment>
+		<Name>ArtifactName_903</Name>
+		<Type>PolishItem</Type>
+		<FromType>Special</FromType>
+		<Level>God</Level>
+		<Sprite>Artifact_Icon_901</Sprite>
+		<Desc>ArtifactDesc_901</Desc>
+		<Shortcuts>2,23</Shortcuts>
+
+		<MainOptionDesc>ArtifactOption_903</MainOptionDesc>
+
+		<AddPolishPoint>100</AddPolishPoint>
+	</Artifact>
+
+	<!-- 상점 일반 -->
+	<Artifact ID="10000">
+		<NameComment>제국의 대검 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopCommon</FromType>
+		<MainOptionDesc>ArtifactBuffDataDesc_10000_Piece</MainOptionDesc>
+		<Root>10001</Root>
+	</Artifact>
+
+	<Artifact ID="10001">
+		<NameComment>제국의 대검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>Normal</Level>
+		<Root>10001</Root>
+		
+		<HideInRogueLike>true</HideInRogueLike>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+			
+			<Actions>
+				<ApplyEventTrigger ID="410001" />
+			</Actions>
+			
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410001</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10002" Inherit="10001">
+		<NameComment>킹 제국의 대검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>King</Level>
+		<Root>10001</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410002" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410002</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10003" Inherit="10001">
+		<NameComment>갓 제국의 대검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>God</Level>
+		<Root>10001</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410003" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410003</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10004" Inherit="10001">
+		<NameComment>킹갓 제국의 대검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>KingGod</Level>
+		<Root>10001</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410004" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410004</BuffDataId>
+	</Artifact>
+	
+	<Artifact ID="10010">
+		<NameComment>왕국의 갑옷 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopCommon</FromType>
+		<MainOptionDesc>ArtifactBuffDataDesc_10010_Piece</MainOptionDesc>
+		<Root>10011</Root>
+	</Artifact>
+
+	<Artifact ID="10011">
+		<NameComment>왕국의 갑옷</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>Normal</Level>
+		<Root>10011</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410011" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410011</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10012" Inherit="10011">
+		<NameComment>킹 왕국의 갑옷</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>King</Level>
+		<Root>10011</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410012" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410012</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10013" Inherit="10011">
+		<NameComment>갓 왕국의 갑옷</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>God</Level>
+		<Root>10011</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410013" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410013</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10014" Inherit="10011">
+		<NameComment>킹갓 왕국의 갑옷</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>KingGod</Level>
+		<Root>10011</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410014" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410014</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10020">
+		<NameComment>영원숲의 활 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopCommon</FromType>
+		<MainOptionDesc>ArtifactBuffDataDesc_10020_Piece</MainOptionDesc>
+		<Root>10021</Root>
+	</Artifact>
+
+	<Artifact ID="10021">
+		<NameComment>영원숲의 활</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>Normal</Level>
+		<Root>10021</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410021" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410021</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10022" Inherit="10021">
+		<NameComment>킹 영원숲의 활</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>King</Level>
+		<Root>10021</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410022" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410022</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10023" Inherit="10021">
+		<NameComment>갓 영원숲의 활</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>God</Level>
+		<Root>10021</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410023" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410023</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10024" Inherit="10021">
+		<NameComment>킹갓 영원숲의 활</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>KingGod</Level>
+		<Root>10021</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410024" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410024</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10030">
+		<NameComment>설원의 지팡이 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopCommon</FromType>
+		<MainOptionDesc>ArtifactBuffDataDesc_10030_Piece</MainOptionDesc>
+		<Root>10031</Root>
+	</Artifact>
+
+	<Artifact ID="10031">
+		<NameComment>설원의 지팡이</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>Normal</Level>
+		<Root>10031</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410031" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410031</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10032" Inherit="10031">
+		<NameComment>킹 설원의 지팡이</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>King</Level>
+		<Root>10031</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410032" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410032</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10033" Inherit="10031">
+		<NameComment>갓 설원의 지팡이</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>God</Level>
+		<Root>10031</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410033" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410033</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="10034" Inherit="10031">
+		<NameComment>킹갓 설원의 지팡이</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopCommon</FromType>
+		<Level>KingGod</Level>
+		<Root>10031</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410034" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410034</BuffDataId>
+	</Artifact>
+
+	<!-- 토벌 상점(구 희귀 유물) -->
+	<Artifact ID="11000">
+		<NameComment>경비대의 뿔피리 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Raid</FromType>
+		<MainOptionDesc>ThemeClearExpPer_Piece</MainOptionDesc>
+		<Root>11001</Root>
+	</Artifact>
+
+	<Artifact ID="11001">
+		<NameComment>경비대의 뿔피리</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>Normal</Level>
+		<Root>11001</Root>
+		<ThemeClearExpPer>30</ThemeClearExpPer>
+		<ThemeClearCardExp>2</ThemeClearCardExp>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11002">
+		<NameComment>킹 경비대의 뿔피리</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>King</Level>
+		<Root>11001</Root>
+
+		<ThemeClearExpPer>40</ThemeClearExpPer>
+		<ThemeClearCardExp>4</ThemeClearCardExp>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11003">
+		<NameComment>갓 경비대의 뿔피리</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>God</Level>
+		<Root>11001</Root>
+
+		<ThemeClearExpPer>50</ThemeClearExpPer>
+		<ThemeClearCardExp>6</ThemeClearCardExp>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11004">
+		<NameComment>킹갓 경비대의 뿔피리</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>KingGod</Level>
+		<Root>11001</Root>
+		<ThemeClearExpPer>60</ThemeClearExpPer>
+		<ThemeClearCardExp>8</ThemeClearCardExp>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11010">
+		<NameComment>고블린의 황금 왕관 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Raid</FromType>
+		<MainOptionDesc>ThemeClearGoldPer_Piece</MainOptionDesc>
+		<Root>11011</Root>
+	</Artifact>
+
+	<Artifact ID="11011">
+		<NameComment>고블린의 황금 왕관</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>Normal</Level>
+		<Root>11011</Root>
+		<CheckDuplicateOption>ThemeClearGoldPer</CheckDuplicateOption>
+		<ThemeClearGoldPer>4</ThemeClearGoldPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11012">
+		<NameComment>킹 고블린의 황금 왕관</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>King</Level>
+		<Root>11011</Root>
+		<CheckDuplicateOption>ThemeClearGoldPer</CheckDuplicateOption>
+		<ThemeClearGoldPer>6</ThemeClearGoldPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11013">
+		<NameComment>갓 고블린의 황금 왕관</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>God</Level>
+		<Root>11011</Root>
+		<CheckDuplicateOption>ThemeClearGoldPer</CheckDuplicateOption>
+		<ThemeClearGoldPer>8</ThemeClearGoldPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11014">
+		<NameComment>킹갓 고블린의 황금 왕관</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>KingGod</Level>
+		<Root>11011</Root>
+		<CheckDuplicateOption>ThemeClearGoldPer</CheckDuplicateOption>
+		<ThemeClearGoldPer>10</ThemeClearGoldPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11020">
+		<NameComment>탐험가의 일지 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Raid</FromType>
+		<MainOptionDesc>EventModeClearRewardPer_Piece</MainOptionDesc>
+		<Root>11021</Root>
+	</Artifact>
+
+	<Artifact ID="11021">
+		<NameComment>탐험가의 일지</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>Normal</Level>
+		<Root>11021</Root>
+		<EventModeClearRewardPer>10</EventModeClearRewardPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11022">
+		<NameComment>킹 탐험가의 일지</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>King</Level>
+		<Root>11021</Root>
+		<EventModeClearRewardPer>13</EventModeClearRewardPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11023">
+		<NameComment>갓 탐험가의 일지</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>God</Level>
+		<Root>11021</Root>
+		<EventModeClearRewardPer>16</EventModeClearRewardPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="11024">
+		<NameComment>킹갓 탐험가의 일지</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Raid</FromType>
+		<Level>KingGod</Level>
+		<Root>11021</Root>
+		<EventModeClearRewardPer>20</EventModeClearRewardPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<!-- 잠식 모드 -->
+	<Artifact ID="12000">
+		<NameComment>영광의 빛 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>51</FromTheme>
+		<MainOptionDesc>BookLevelUpPer_Piece</MainOptionDesc>
+		<Root>12001</Root>
+	</Artifact>
+
+	<Artifact ID="12001">
+		<NameComment>영광의 빛</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>51</FromTheme>
+		<Level>Normal</Level>
+		<Root>12001</Root>
+		<Building0_LvUp>2</Building0_LvUp>
+		<HideInRogueLike>true</HideInRogueLike>
+		<BookLevelUpPer>5</BookLevelUpPer>
+		<LevelLimit>10</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12002">
+		<NameComment>킹 영광의 빛</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>51</FromTheme>
+		<Level>King</Level>
+		<Root>12001</Root>
+		<Building0_LvUp>3</Building0_LvUp>
+		<HideInRogueLike>true</HideInRogueLike>
+		<BookLevelUpPer>10</BookLevelUpPer>
+		<LevelLimit>10</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12003">
+		<NameComment>갓 영광의 빛</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>51</FromTheme>
+		<Level>God</Level>
+		<Root>12001</Root>
+		<Building0_LvUp>4</Building0_LvUp>
+		<HideInRogueLike>true</HideInRogueLike>
+		<BookLevelUpPer>15</BookLevelUpPer>
+		<LevelLimit>10</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12004">
+		<NameComment>킹갓 영광의 빛</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>51</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12001</Root>
+		<Building0_LvUp>5</Building0_LvUp>
+		<HideInRogueLike>true</HideInRogueLike>
+		<BookLevelUpPer>20</BookLevelUpPer>
+		<LevelLimit>10</LevelLimit>
+	</Artifact>
+	
+	<Artifact ID="12010">
+		<NameComment>광열의 망치 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>51</FromTheme>
+		<MainOptionDesc>ItemDoubleLevelUpPer_Piece</MainOptionDesc>
+		<Root>12011</Root>
+	</Artifact>
+
+	<Artifact ID="12011">
+		<NameComment>광열의 망치</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>51</FromTheme>
+		<Level>Normal</Level>
+		<Root>12011</Root>
+		<Building1_LvUp>2</Building1_LvUp>
+		<HideInRogueLike>true</HideInRogueLike>
+		<ItemDoubleLevelUpPer>6</ItemDoubleLevelUpPer>
+		<LevelLimit>15</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12012">
+		<NameComment>킹 광열의 망치</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>51</FromTheme>
+		<Level>King</Level>
+		<Root>12011</Root>
+		<Building1_LvUp>3</Building1_LvUp>
+		<HideInRogueLike>true</HideInRogueLike>
+		<ItemDoubleLevelUpPer>9</ItemDoubleLevelUpPer>
+		<LevelLimit>15</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12013">
+		<NameComment>갓 광열의 망치</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>51</FromTheme>
+		<Level>God</Level>
+		<Root>12011</Root>
+		<Building1_LvUp>4</Building1_LvUp>
+		<HideInRogueLike>true</HideInRogueLike>
+		<ItemDoubleLevelUpPer>12</ItemDoubleLevelUpPer>
+		<LevelLimit>15</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12014">
+		<NameComment>킹갓 광열의 망치</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>51</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12011</Root>
+		<Building1_LvUp>5</Building1_LvUp>
+		<HideInRogueLike>true</HideInRogueLike>
+		<ItemDoubleLevelUpPer>15</ItemDoubleLevelUpPer>
+		<LevelLimit>15</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12020">
+		<NameComment>혈흔 서린 검 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>52</FromTheme>
+		<MainOptionDesc>SaveSuperShieldProb_Piece</MainOptionDesc>
+		<Root>12021</Root>
+	</Artifact>
+
+	<Artifact ID="12021">
+		<NameComment>혈흔 서린 검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>52</FromTheme>
+		<Level>Normal</Level>
+		<Root>12021</Root>
+		<Building2_LvUp>2</Building2_LvUp>
+		<SaveSuperShieldProb>15</SaveSuperShieldProb>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12022">
+		<NameComment>킹 혈흔 서린 검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>52</FromTheme>
+		<Level>King</Level>
+		<Root>12021</Root>
+		<Building2_LvUp>3</Building2_LvUp>
+		<SaveSuperShieldProb>20</SaveSuperShieldProb>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12023">
+		<NameComment>갓 혈흔 서린 검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>52</FromTheme>
+		<Level>God</Level>
+		<Root>12021</Root>
+		<Building2_LvUp>4</Building2_LvUp>
+		<SaveSuperShieldProb>25</SaveSuperShieldProb>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12024">
+		<NameComment>킹갓 혈흔 서린 검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>52</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12021</Root>
+		<Building2_LvUp>5</Building2_LvUp>
+		<SaveSuperShieldProb>30</SaveSuperShieldProb>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12030">
+		<NameComment>수호자의 투구 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>52</FromTheme>
+		<MainOptionDesc>ByMaxHpPerDesc_Piece</MainOptionDesc>
+		<Root>12031</Root>
+	</Artifact>
+
+	<Artifact ID="12031">
+		<NameComment>수호자의 투구</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>52</FromTheme>
+		<Level>Normal</Level>
+		<Root>12031</Root>
+		<Building3_LvUp>2</Building3_LvUp>
+		<BaseAtkSkill>80065</BaseAtkSkill>
+		<BaseAtkSkillCoolTime>2</BaseAtkSkillCoolTime>
+		<ByMaxHpPerDesc>5</ByMaxHpPerDesc>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12032">
+		<NameComment>킹 수호자의 투구</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>52</FromTheme>
+		<Level>King</Level>
+		<Root>12031</Root>
+		<Building3_LvUp>3</Building3_LvUp>
+		<BaseAtkSkill>80066</BaseAtkSkill>
+		<BaseAtkSkillCoolTime>2</BaseAtkSkillCoolTime>
+		<ByMaxHpPerDesc>10</ByMaxHpPerDesc>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12033">
+		<NameComment>갓 수호자의 투구</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>52</FromTheme>
+		<Level>God</Level>
+		<Root>12031</Root>
+		<Building3_LvUp>4</Building3_LvUp>
+		<BaseAtkSkill>80067</BaseAtkSkill>
+		<BaseAtkSkillCoolTime>2</BaseAtkSkillCoolTime>
+		<ByMaxHpPerDesc>15</ByMaxHpPerDesc>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12034">
+		<NameComment>킹갓 수호자의 투구</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>52</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12031</Root>
+		<Building3_LvUp>5</Building3_LvUp>
+		<BaseAtkSkill>80068</BaseAtkSkill>
+		<BaseAtkSkillCoolTime>2</BaseAtkSkillCoolTime>
+		<ByMaxHpPerDesc>20</ByMaxHpPerDesc>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12040">
+		<NameComment>타락한 성배 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>53</FromTheme>
+		<MainOptionDesc>BaseManaToTopUnits_Piece</MainOptionDesc>
+		<Root>12041</Root>
+	</Artifact>
+
+	<Artifact ID="12041">
+		<NameComment>타락한 성배</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>53</FromTheme>
+		<Level>Normal</Level>
+		<Root>12041</Root>
+		<Building4_LvUp>2</Building4_LvUp>
+		<TopUnitsTier>5</TopUnitsTier>
+		<BaseManaToTopUnits>10</BaseManaToTopUnits>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12042">
+		<NameComment>킹 타락한 성배</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>53</FromTheme>
+		<Level>King</Level>
+		<Root>12041</Root>
+		<Building4_LvUp>3</Building4_LvUp>
+		<TopUnitsTier>5</TopUnitsTier>
+		<BaseManaToTopUnits>15</BaseManaToTopUnits>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12043">
+		<NameComment>갓 타락한 성배</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>53</FromTheme>
+		<Level>God</Level>
+		<Root>12041</Root>
+		<Building4_LvUp>4</Building4_LvUp>
+		<TopUnitsTier>5</TopUnitsTier>
+		<BaseManaToTopUnits>20</BaseManaToTopUnits>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12044">
+		<NameComment>킹갓 타락의 성배</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>53</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12041</Root>
+		<Building4_LvUp>5</Building4_LvUp>
+		<TopUnitsTier>5</TopUnitsTier>
+		<BaseManaToTopUnits>25</BaseManaToTopUnits>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>20</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12050">
+		<NameComment>검은 금반지 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>53</FromTheme>
+		<MainOptionDesc>MerchantRefreshCost_Piece</MainOptionDesc>
+		<Root>12051</Root>
+	</Artifact>
+
+	<Artifact ID="12051">
+		<NameComment>검은 금반지</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>53</FromTheme>
+		<Level>Normal</Level>
+		<Root>12051</Root>
+		<Building5_LvUp>2</Building5_LvUp>
+		<MerchantRefreshTime>1</MerchantRefreshTime>
+		<MerchantRefreshCost>3</MerchantRefreshCost>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>5</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12052">
+		<NameComment>킹 검은 금반지</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>53</FromTheme>
+		<Level>King</Level>
+		<Root>12051</Root>
+		<Building5_LvUp>3</Building5_LvUp>
+		<MerchantRefreshTime>1</MerchantRefreshTime>
+		<MerchantRefreshCost>2</MerchantRefreshCost>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>5</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12053">
+		<NameComment>갓 검은 금반지</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>53</FromTheme>
+		<Level>God</Level>
+		<Root>12051</Root>
+		<Building5_LvUp>4</Building5_LvUp>
+		<MerchantRefreshTime>1</MerchantRefreshTime>
+		<MerchantRefreshCost>1</MerchantRefreshCost>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>5</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12054">
+		<NameComment>킹갓 검은 금반지</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>53</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12051</Root>
+		<Building5_LvUp>5</Building5_LvUp>
+		<MerchantRefreshTime>1</MerchantRefreshTime>
+		<MerchantRefreshCost>0</MerchantRefreshCost>
+		<HideInRogueLike>true</HideInRogueLike>
+		<LevelLimit>5</LevelLimit>
+	</Artifact>
+
+	<Artifact ID="12060">
+		<NameComment>용병단 계약서 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>54</FromTheme>
+		<MainOptionDesc>UnitSellGoldUpProb_Piece</MainOptionDesc>
+		<Root>12061</Root>
+	</Artifact>
+
+	<Artifact ID="12061">
+		<NameComment>용병단 계약서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>54</FromTheme>
+		<Level>Normal</Level>
+		<Root>12061</Root>
+		<UnitSellGoldUpProb>35</UnitSellGoldUpProb>
+		<UnitSellGoldUpPer>50</UnitSellGoldUpPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12062">
+		<NameComment>킹 용병단 계약서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>54</FromTheme>
+		<Level>King</Level>
+		<Root>12061</Root>
+		<UnitSellGoldUpProb>45</UnitSellGoldUpProb>
+		<UnitSellGoldUpPer>50</UnitSellGoldUpPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12063">
+		<NameComment>갓 용병단 계약서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>54</FromTheme>
+		<Level>God</Level>
+		<Root>12061</Root>
+		<UnitSellGoldUpProb>55</UnitSellGoldUpProb>
+		<UnitSellGoldUpPer>50</UnitSellGoldUpPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12064">
+		<NameComment>킹갓 용병단 계약서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>54</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12061</Root>
+		<UnitSellGoldUpProb>65</UnitSellGoldUpProb>
+		<UnitSellGoldUpPer>50</UnitSellGoldUpPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12070">
+		<NameComment>정예부대 휘장 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>55</FromTheme>
+		<MainOptionDesc>MinusDamagePerCount_Piece</MainOptionDesc>
+		<Root>12071</Root>
+	</Artifact>
+
+	<Artifact ID="12071">
+		<NameComment>정예부대 휘장</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>55</FromTheme>
+		<Level>Normal</Level>
+		<Root>12071</Root>
+		<AddDamagePer>18</AddDamagePer>
+		<MinusDamagePerCount>3</MinusDamagePerCount>
+		<MinusDamagePerCountMax>18</MinusDamagePerCountMax>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12072">
+		<NameComment>킹 정예부대 휘장</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>55</FromTheme>
+		<Level>King</Level>
+		<Root>12071</Root>
+		<AddDamagePer>36</AddDamagePer>
+		<MinusDamagePerCount>6</MinusDamagePerCount>
+		<MinusDamagePerCountMax>36</MinusDamagePerCountMax>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12073">
+		<NameComment>갓 정예부대 휘장</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>55</FromTheme>
+		<Level>God</Level>
+		<Root>12071</Root>
+		<AddDamagePer>54</AddDamagePer>
+		<MinusDamagePerCount>9</MinusDamagePerCount>
+		<MinusDamagePerCountMax>54</MinusDamagePerCountMax>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12074">
+		<NameComment>킹갓 정예부대 휘장</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>55</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12071</Root>
+		<AddDamagePer>72</AddDamagePer>
+		<MinusDamagePerCount>12</MinusDamagePerCount>
+		<MinusDamagePerCountMax>72</MinusDamagePerCountMax>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12080">
+		<NameComment>민병대의 깃발 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>56</FromTheme>
+		<MainOptionDesc>AddDefPerCount_Piece</MainOptionDesc>
+		<Root>12081</Root>
+	</Artifact>
+
+	<Artifact ID="12081">
+		<NameComment>민병대의 깃발</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>56</FromTheme>
+		<Level>Normal</Level>
+		<Root>12081</Root>
+
+		<AddDefPerCount>2</AddDefPerCount>
+		<AddDefPerCountMax>16</AddDefPerCountMax>
+
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12082">
+		<NameComment>킹 민병대의 깃발</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>56</FromTheme>
+		<Level>King</Level>
+		<Root>12081</Root>
+
+		<AddDefPerCount>3</AddDefPerCount>
+		<AddDefPerCountMax>24</AddDefPerCountMax>
+
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12083">
+		<NameComment>갓 민병대의 깃발</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>56</FromTheme>
+		<Level>God</Level>
+		<Root>12081</Root>
+
+		<AddDefPerCount>4</AddDefPerCount>
+		<AddDefPerCountMax>32</AddDefPerCountMax>
+
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12084">
+		<NameComment>킹갓 민병대의 깃발</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>56</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12081</Root>
+
+		<AddDefPerCount>5</AddDefPerCount>
+		<AddDefPerCountMax>40</AddDefPerCountMax>
+
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12090">
+		<NameComment>결속의 기검 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>57</FromTheme>
+		<MainOptionDesc>AddAtkSpeedPerSameUnit_Piece</MainOptionDesc>
+		<Root>12091</Root>
+	</Artifact>
+
+	<Artifact ID="12091">
+		<NameComment>결속의 기검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>57</FromTheme>
+		<Level>Normal</Level>
+		<Root>12091</Root>
+		<AddAtkSpeedPerSameUnit>20</AddAtkSpeedPerSameUnit>
+		<AddAtkSpeedPerSameUnitMax>80</AddAtkSpeedPerSameUnitMax>
+		<AddDamagePerSameUnit>2</AddDamagePerSameUnit>
+		<AddDamagePerSameUnitMax>8</AddDamagePerSameUnitMax>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12092">
+		<NameComment>킹 결속의 기검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>57</FromTheme>
+		<Level>King</Level>
+		<Root>12091</Root>
+		<AddAtkSpeedPerSameUnit>30</AddAtkSpeedPerSameUnit>
+		<AddAtkSpeedPerSameUnitMax>120</AddAtkSpeedPerSameUnitMax>
+		<AddDamagePerSameUnit>3</AddDamagePerSameUnit>
+		<AddDamagePerSameUnitMax>12</AddDamagePerSameUnitMax>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12093">
+		<NameComment>갓 결속의 기검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>57</FromTheme>
+		<Level>God</Level>
+		<Root>12091</Root>
+		<AddAtkSpeedPerSameUnit>40</AddAtkSpeedPerSameUnit>
+		<AddAtkSpeedPerSameUnitMax>160</AddAtkSpeedPerSameUnitMax>
+		<AddDamagePerSameUnit>4</AddDamagePerSameUnit>
+		<AddDamagePerSameUnitMax>16</AddDamagePerSameUnitMax>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12094">
+		<NameComment>킹갓 결속의 기검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>57</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12091</Root>
+		<AddAtkSpeedPerSameUnit>50</AddAtkSpeedPerSameUnit>
+		<AddAtkSpeedPerSameUnitMax>200</AddAtkSpeedPerSameUnitMax>
+		<AddDamagePerSameUnit>5</AddDamagePerSameUnit>
+		<AddDamagePerSameUnitMax>20</AddDamagePerSameUnitMax>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12100">
+		<NameComment>별빛 수집가 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>58</FromTheme>
+		<MainOptionDesc>AtkPercentagePerDiffUnitLevel_Piece</MainOptionDesc>
+		<Root>12101</Root>
+	</Artifact>
+
+	<Artifact ID="12101">
+		<NameComment>별빛 수집가</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>58</FromTheme>
+		<Level>Normal</Level>
+		<Root>12101</Root>
+
+		<AtkPercentagePerDiffUnitLevel>1.5</AtkPercentagePerDiffUnitLevel>
+
+		<AtkPerDiffUnitLevel>200</AtkPerDiffUnitLevel>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12102">
+		<NameComment>킹 별빛 수집가</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>58</FromTheme>
+		<Level>King</Level>
+		<Root>12101</Root>
+
+		<AtkPercentagePerDiffUnitLevel>2</AtkPercentagePerDiffUnitLevel>
+
+		<AtkPerDiffUnitLevel>200</AtkPerDiffUnitLevel>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12103">
+		<NameComment>갓 별빛 수집가</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>58</FromTheme>
+		<Level>God</Level>
+		<Root>12101</Root>
+
+		<AtkPercentagePerDiffUnitLevel>2.5</AtkPercentagePerDiffUnitLevel>
+
+		<AtkPerDiffUnitLevel>200</AtkPerDiffUnitLevel>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12104">
+		<NameComment>킹갓 별빛 수집가</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>58</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12101</Root>
+
+		<AtkPercentagePerDiffUnitLevel>3</AtkPercentagePerDiffUnitLevel>
+
+		<AtkPerDiffUnitLevel>200</AtkPerDiffUnitLevel>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12110">
+		<NameComment>환영의 가면 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>59</FromTheme>
+		<MainOptionDesc>CloneHighestLevelStatPer_Piece</MainOptionDesc>
+		<Root>12111</Root>
+	</Artifact>
+
+	<Artifact ID="12111">
+		<NameComment>환영의 가면</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>59</FromTheme>
+		<Level>Normal</Level>
+		<Root>12111</Root>
+		<MinusSlot>1</MinusSlot>
+		<CloneHighestLevel>true</CloneHighestLevel>
+		<CloneHighestLevelStatPer>45</CloneHighestLevelStatPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12112">
+		<NameComment>킹 환영의 가면</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>59</FromTheme>
+		<Level>King</Level>
+		<Root>12111</Root>
+		<MinusSlot>1</MinusSlot>
+		<CloneHighestLevel>true</CloneHighestLevel>
+		<CloneHighestLevelStatPer>55</CloneHighestLevelStatPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12113">
+		<NameComment>갓 환영의 가면</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>59</FromTheme>
+		<Level>God</Level>
+		<Root>12111</Root>
+		<MinusSlot>1</MinusSlot>
+		<CloneHighestLevel>true</CloneHighestLevel>
+		<CloneHighestLevelStatPer>65</CloneHighestLevelStatPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12114">
+		<NameComment>킹갓 환영의 가면</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>59</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12111</Root>
+		<MinusSlot>1</MinusSlot>
+		<CloneHighestLevel>true</CloneHighestLevel>
+		<CloneHighestLevelStatPer>75</CloneHighestLevelStatPer>
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="12120">
+		<NameComment>끝없는 공허 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>60</FromTheme>
+		<MainOptionDesc>AddBaseAtkAndMAtkPerDeathStack_Piece</MainOptionDesc>
+		<Root>12121</Root>
+	</Artifact>
+
+	<Artifact ID="12121">
+		<NameComment>끝없는 공허</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>60</FromTheme>
+		<Level>Normal</Level>
+		<Root>12121</Root>
+
+		<TriggerOnTeamDeath>true</TriggerOnTeamDeath>
+		<IsMultiSkill>true</IsMultiSkill>
+		<AddBaseAtkAndMAtkPerDeathStack>15</AddBaseAtkAndMAtkPerDeathStack>
+		<MaxDeathStack>7</MaxDeathStack>
+
+		<RogueLikePossibleFixedBuildings>106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>1</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>1</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="12122">
+		<NameComment>킹 끝없는 공허</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>60</FromTheme>
+		<Level>King</Level>
+		<Root>12121</Root>
+
+		<TriggerOnTeamDeath>true</TriggerOnTeamDeath>
+		<IsMultiSkill>true</IsMultiSkill>
+		<AddBaseAtkAndMAtkPerDeathStack>20</AddBaseAtkAndMAtkPerDeathStack>
+		<MaxDeathStack>7</MaxDeathStack>
+
+		<RogueLikePossibleFixedBuildings>106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>2</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="12123">
+		<NameComment>갓 끝없는 공허</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>60</FromTheme>
+		<Level>God</Level>
+		<Root>12121</Root>
+
+		<TriggerOnTeamDeath>true</TriggerOnTeamDeath>
+		<IsMultiSkill>true</IsMultiSkill>
+		<AddBaseAtkAndMAtkPerDeathStack>25</AddBaseAtkAndMAtkPerDeathStack>
+		<MaxDeathStack>7</MaxDeathStack>
+
+		<RogueLikePossibleFixedBuildings>106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="12124">
+		<NameComment>킹갓 끝없는 공허</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<FromTheme>60</FromTheme>
+		<Level>KingGod</Level>
+		<Root>12121</Root>
+
+		<TriggerOnTeamDeath>true</TriggerOnTeamDeath>
+		<IsMultiSkill>true</IsMultiSkill>
+		<AddBaseAtkAndMAtkPerDeathStack>30</AddBaseAtkAndMAtkPerDeathStack>
+		<MaxDeathStack>7</MaxDeathStack>
+
+		<RogueLikePossibleFixedBuildings>106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>5</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="13000">
+		<NameComment>투지의 철투구 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopSpecial</FromType>
+		<!-- <MainOptionDesc>CCRatioPer_Piece</MainOptionDesc> -->
+		<MainOptionDesc>CCImuneSec_Piece</MainOptionDesc>
+		<Root>13001</Root>
+	</Artifact>
+
+	<Artifact ID="13001">
+		<NameComment>투지의 철투구</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>Normal</Level>
+		<Root>13001</Root>
+		<!-- <CCRatioPer>-25</CCRatioPer> -->
+
+		<CCImuneSec>3</CCImuneSec>
+
+		<RogueLikePossibleFixedBuildings>103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="13002">
+		<NameComment>킹 투지의 철투구</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>King</Level>
+		<Root>13001</Root>
+		<!-- <CCRatioPer>-30</CCRatioPer> -->
+
+		<CCImuneSec>4</CCImuneSec>
+
+		<RogueLikePossibleFixedBuildings>103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="13003">
+		<NameComment>갓 투지의 철투구</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>God</Level>
+		<Root>13001</Root>
+		<!-- <CCRatioPer>-35</CCRatioPer> -->
+
+		<CCImuneSec>5</CCImuneSec>
+
+		<RogueLikePossibleFixedBuildings>103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="13004">
+		<NameComment>킹갓 투지의 철투구</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>KingGod</Level>
+		<Root>13001</Root>
+		<!-- <CCRatioPer>-40</CCRatioPer> -->
+
+		<CCImuneSec>6</CCImuneSec>
+
+		<RogueLikePossibleFixedBuildings>103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="13010">
+		<NameComment>검투사의 방패 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopSpecial</FromType>
+		<MainOptionDesc>SuperShieldToTop3_Piece</MainOptionDesc>
+		<Root>13011</Root>
+	</Artifact>
+
+	<Artifact ID="13011">
+		<NameComment>검투사의 방패</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>Normal</Level>
+		<Root>13011</Root>
+		<SuperShieldToTop3>2</SuperShieldToTop3>
+
+		<RogueLikePossibleFixedBuildings>102,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="13012">
+		<NameComment>킹 검투사의 방패</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>King</Level>
+		<Root>13011</Root>
+		<SuperShieldToTop3>3</SuperShieldToTop3>
+
+		<RogueLikePossibleFixedBuildings>102,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13013">
+		<NameComment>갓 검투사의 방패</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>God</Level>
+		<Root>13011</Root>
+		<SuperShieldToTop3>5</SuperShieldToTop3>
+
+		<RogueLikePossibleFixedBuildings>102,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13014">
+		<NameComment>킹갓 검투사의 방패</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>KingGod</Level>
+		<Root>13011</Root>
+		<SuperShieldToTop3>7</SuperShieldToTop3>
+
+		<RogueLikePossibleFixedBuildings>102,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13020">
+		<NameComment>꿰뚫는 창 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>AtkPerByRange_Piece</MainOptionDesc>
+		<Root>13021</Root>
+	</Artifact>
+
+	<Artifact ID="13021">
+		<NameComment>꿰뚫는 창</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13021</Root>
+		<Range>1</Range>
+		<AtkPerByRange>3</AtkPerByRange>
+		<AtkPerByRangeMaxRange>5</AtkPerByRangeMaxRange>
+
+		<RogueLikePossibleFixedBuildings>100,101</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>1</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift,Element</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13022">
+		<NameComment>킹 꿰뚫는 창</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13021</Root>
+		<Range>1</Range>
+		<AtkPerByRange>4</AtkPerByRange>
+		<AtkPerByRangeMaxRange>5</AtkPerByRangeMaxRange>
+
+		<RogueLikePossibleFixedBuildings>100,101</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift,Element</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13023">
+		<NameComment>갓 꿰뚫는 창</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13021</Root>
+		<Range>1</Range>
+		<AtkPerByRange>5</AtkPerByRange>
+		<AtkPerByRangeMaxRange>5</AtkPerByRangeMaxRange>
+
+		<RogueLikePossibleFixedBuildings>100,101</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift,Element</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13024">
+		<NameComment>킹갓 꿰뚫는 창</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13021</Root>
+		<Range>1</Range>
+		<AtkPerByRange>6</AtkPerByRange>
+		<AtkPerByRangeMaxRange>5</AtkPerByRangeMaxRange>
+
+		<RogueLikePossibleFixedBuildings>100,101</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>5</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift,Element</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>10</RogueLikeRoleLevel>		
+	</Artifact>
+	
+	<Artifact ID="13030">
+		<NameComment>쐐기 비수 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>HealPerDebuff_Piece</MainOptionDesc>
+		<Root>13031</Root>
+	</Artifact>
+
+	<Artifact ID="13031">
+		<NameComment>쐐기 비수</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13031</Root>
+
+		<HealPerDebuff>35</HealPerDebuff>
+		<HealPerDebuffTime>2</HealPerDebuffTime>
+
+		<RogueLikePossibleFixedBuildings>104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness,Swift,Element,Shadow,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="13032">
+		<NameComment>킹 쐐기 비수</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13031</Root>
+
+		<HealPerDebuff>50</HealPerDebuff>
+		<HealPerDebuffTime>2</HealPerDebuffTime>
+
+		<RogueLikePossibleFixedBuildings>104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness,Swift,Element,Shadow,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="13033">
+		<NameComment>갓 쐐기 비수</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13031</Root>
+
+		<HealPerDebuff>65</HealPerDebuff>
+		<HealPerDebuffTime>2</HealPerDebuffTime>
+
+		<RogueLikePossibleFixedBuildings>104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness,Swift,Element,Shadow,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13034">
+		<NameComment>킹갓 쐐기 비수</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13031</Root>
+
+		<HealPerDebuff>80</HealPerDebuff>
+		<HealPerDebuffTime>2</HealPerDebuffTime>
+
+		<RogueLikePossibleFixedBuildings>104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness,Swift,Element,Shadow,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>10</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13040">
+		<NameComment>제사장의 향로 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<!--	TODO: DamagePer를 스킬 피해량 증폭으로 이름 변경 필요	-->
+		<MainOptionDesc>AddDamagePerCooltime_Piece</MainOptionDesc>
+		<Root>13041</Root>
+	</Artifact>
+
+	<Artifact ID="13041">
+		<NameComment>제사장의 향로</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13041</Root>
+
+		<AddSkillDamagePerCooltime>40</AddSkillDamagePerCooltime>
+		<Cooltime>3</Cooltime>
+		<ForceFogPrefab>Fog_05</ForceFogPrefab>
+
+		<RogueLikePossibleFixedBuildings>104</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="13042">
+		<NameComment>킹 제사장의 향로</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13041</Root>
+		<AddSkillDamagePerCooltime>70</AddSkillDamagePerCooltime>
+		<Cooltime>3</Cooltime>
+		<ForceFogPrefab>Fog_05</ForceFogPrefab>
+
+		<RogueLikePossibleFixedBuildings>104</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13043">
+		<NameComment>갓 제사장의 향로</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13041</Root>
+
+		<AddSkillDamagePerCooltime>100</AddSkillDamagePerCooltime>
+		<Cooltime>3</Cooltime>
+		<ForceFogPrefab>Fog_05</ForceFogPrefab>
+
+		<RogueLikePossibleFixedBuildings>104</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13044">
+		<NameComment>킹갓 제사장의 향로</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13041</Root>
+
+		<AddSkillDamagePerCooltime>130</AddSkillDamagePerCooltime>
+		<Cooltime>3</Cooltime>
+		<ForceFogPrefab>Fog_05</ForceFogPrefab>
+
+		<RogueLikePossibleFixedBuildings>104</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>10</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13050">
+		<NameComment>유예의 영약 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopSpecial</FromType>
+		<MainOptionDesc>ToTickDamagePer_Piece</MainOptionDesc>
+		<Root>13051</Root>
+	</Artifact>
+
+	<Artifact ID="13051">
+		<NameComment>유예의 영약</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>Normal</Level>
+		<Root>13051</Root>
+		<HybridDrain>6</HybridDrain>
+		<ToTickDamagePer>30</ToTickDamagePer>
+
+		<RogueLikePossibleFixedBuildings>102,103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>1</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13052">
+		<NameComment>킹 유예의 영약</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>King</Level>
+		<Root>13051</Root>
+		<HybridDrain>9</HybridDrain>
+		<ToTickDamagePer>40</ToTickDamagePer>
+
+		<RogueLikePossibleFixedBuildings>102,103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13053">
+		<NameComment>갓 유예의 영약</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>God</Level>
+		<Root>13051</Root>
+		<HybridDrain>12</HybridDrain>
+		<ToTickDamagePer>50</ToTickDamagePer>
+
+		<RogueLikePossibleFixedBuildings>102,103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13054">
+		<NameComment>킹갓 유예의 영약</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>KingGod</Level>
+		<Root>13051</Root>
+		<HybridDrain>15</HybridDrain>
+		<ToTickDamagePer>60</ToTickDamagePer>
+
+		<RogueLikePossibleFixedBuildings>102,103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>5</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13060">
+		<NameComment>빙결의 족쇄 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>IceToHighestLevel_Piece</MainOptionDesc>
+		<Root>13061</Root>
+	</Artifact>
+
+	<Artifact ID="13061">
+		<NameComment>빙결의 족쇄</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13061</Root>
+		<IceToHighestLevel>true</IceToHighestLevel>
+		<IceTime>2</IceTime>
+		<RogueLikePossibleFixedBuildings>100,101,102,103,104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13062">
+		<NameComment>킹 빙결의 족쇄</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13061</Root>
+		<IceToHighestLevel>true</IceToHighestLevel>
+		<IceTime>3</IceTime>
+		<RogueLikePossibleFixedBuildings>100,101,102,103,104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13063">
+		<NameComment>갓 빙결의 족쇄</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13061</Root>
+		<IceToHighestLevel>true</IceToHighestLevel>
+		<IceTime>4</IceTime>
+		<RogueLikePossibleFixedBuildings>100,101,102,103,104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13064">
+		<NameComment>킹갓 빙결의 족쇄</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13061</Root>
+		<IceToHighestLevel>true</IceToHighestLevel>
+		<IceTime>5</IceTime>
+		<RogueLikePossibleFixedBuildings>100,101,102,103,104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>		
+	</Artifact>
+
+		<Artifact ID="13070">
+		<NameComment>순간이동 주문서 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>DamageHPPerOnTeleport_Piece</MainOptionDesc>
+		<Root>13071</Root>
+	</Artifact>
+
+	<Artifact ID="13071">
+		<NameComment>순간이동 주문서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13071</Root>
+
+		<TeleportDelay>1</TeleportDelay>
+		<InteractionOffTime>1.5</InteractionOffTime>
+
+		<Teleport1X>3</Teleport1X>
+		<Teleport1Y>0</Teleport1Y>
+
+		<Teleport2X>2</Teleport2X>
+		<Teleport2Y>0</Teleport2Y>
+
+		<Teleport3X>4</Teleport3X>
+		<Teleport3Y>0</Teleport3Y>
+
+		<DamageHPPerOnTeleport>50</DamageHPPerOnTeleport>
+
+		<RogueLikePossibleFixedBuildings>101,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13072">
+		<NameComment>킹 순간이동 주문서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13071</Root>
+
+		<TeleportDelay>1</TeleportDelay>
+		<InteractionOffTime>1.5</InteractionOffTime>
+
+		<Teleport1X>3</Teleport1X>
+		<Teleport1Y>0</Teleport1Y>
+
+		<Teleport2X>2</Teleport2X>
+		<Teleport2Y>0</Teleport2Y>
+
+		<Teleport3X>4</Teleport3X>
+		<Teleport3Y>0</Teleport3Y>
+
+		<DamageHPPerOnTeleport>40</DamageHPPerOnTeleport>
+
+		<RogueLikePossibleFixedBuildings>101,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13073">
+		<NameComment>갓 순간이동 주문서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13071</Root>
+
+		<TeleportDelay>1</TeleportDelay>
+		<InteractionOffTime>1.5</InteractionOffTime>
+
+		<Teleport1X>3</Teleport1X>
+		<Teleport1Y>0</Teleport1Y>
+
+		<Teleport2X>2</Teleport2X>
+		<Teleport2Y>0</Teleport2Y>
+
+		<Teleport3X>4</Teleport3X>
+		<Teleport3Y>0</Teleport3Y>
+
+		<DamageHPPerOnTeleport>30</DamageHPPerOnTeleport>
+
+		<RogueLikePossibleFixedBuildings>101,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13074">
+		<NameComment>킹갓 순간이동 주문서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13071</Root>
+
+		<TeleportDelay>1</TeleportDelay>
+		<InteractionOffTime>1.5</InteractionOffTime>
+
+		<Teleport1X>3</Teleport1X>
+		<Teleport1Y>0</Teleport1Y>
+
+		<Teleport2X>2</Teleport2X>
+		<Teleport2Y>0</Teleport2Y>
+
+		<Teleport3X>4</Teleport3X>
+		<Teleport3Y>0</Teleport3Y>
+
+		<DamageHPPerOnTeleport>20</DamageHPPerOnTeleport>
+
+		<RogueLikePossibleFixedBuildings>101,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13080">
+		<NameComment>신성 수류탄 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>ManaLockTime_Piece</MainOptionDesc>
+		<Root>13081</Root>
+	</Artifact>
+
+	<Artifact ID="13081">
+		<NameComment>신성 수류탄</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13081</Root>
+		<!-- <TriggerOnTeamDeath>true</TriggerOnTeamDeath> -->
+		<!-- <ArtifactRangeX>1</ArtifactRangeX> -->
+		<!-- <ArtifactRangeY>1</ArtifactRangeY> -->
+		
+		<!-- Desc 표기용. 실제 수치는 skill에 있는 것으로 적용. 따라서 둘다 맞추어 줘야함 -->
+
+		<ManaLockTime>1</ManaLockTime>
+		<DeathSkill>80000</DeathSkill>
+
+		<RogueLikePossibleFixedBuildings>106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13082">
+		<NameComment>킹 신성 수류탄</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13081</Root>
+		<!-- <TriggerOnTeamDeath>true</TriggerOnTeamDeath> -->
+		<!-- <ArtifactRangeX>1</ArtifactRangeX> -->
+		<!-- <ArtifactRangeY>1</ArtifactRangeY> -->
+
+		<!-- Desc 표기용. 실제 수치는 skill에 있는 것으로 적용. 따라서 둘다 맞추어 줘야함 -->
+
+		<ManaLockTime>2</ManaLockTime>
+		<DeathSkill>80001</DeathSkill>
+
+		<RogueLikePossibleFixedBuildings>106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13083">
+		<NameComment>갓 신성 수류탄</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13081</Root>
+		<!-- <TriggerOnTeamDeath>true</TriggerOnTeamDeath> -->
+		<!-- <ArtifactRangeX>1</ArtifactRangeX> -->
+		<!-- <ArtifactRangeY>1</ArtifactRangeY> -->
+
+		<!-- Desc 표기용. 실제 수치는 skill에 있는 것으로 적용. 따라서 둘다 맞추어 줘야함 -->
+
+		<ManaLockTime>3</ManaLockTime>
+		<DeathSkill>80002</DeathSkill>
+
+		<RogueLikePossibleFixedBuildings>106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13084">
+		<NameComment>킹갓 신성 수류탄</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13081</Root>
+		<!-- <TriggerOnTeamDeath>true</TriggerOnTeamDeath> -->
+		<!-- <ArtifactRangeX>1</ArtifactRangeX> -->
+		<!-- <ArtifactRangeY>1</ArtifactRangeY> -->
+
+		<!-- Desc 표기용. 실제 수치는 skill에 있는 것으로 적용. 따라서 둘다 맞추어 줘야함 -->
+
+		<ManaLockTime>4</ManaLockTime>
+		<DeathSkill>80003</DeathSkill>
+
+		<RogueLikePossibleFixedBuildings>106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>10</RogueLikeRoleLevel>			
+	</Artifact>
+
+
+	<Artifact ID="13090">
+		<NameComment>돌격대의 철퇴 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopSpecial</FromType>
+		<MainOptionDesc>PeriodicKnockback_Piece</MainOptionDesc>
+		<Root>13091</Root>
+	</Artifact>
+
+	<Artifact ID="13091">
+		<NameComment>돌격대의 철퇴</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>Normal</Level>
+		<Root>13091</Root>
+		<BaseAtkSkillHit>80010</BaseAtkSkillHit>
+
+		<BuffAtkPerAtBaseAtkSkillHit>40</BuffAtkPerAtBaseAtkSkillHit>
+
+		<BaseAtkSkillHitCoolTime>10</BaseAtkSkillHitCoolTime>
+		<BaseAtkSkillType>Knockback</BaseAtkSkillType>
+		<!--설명용-->
+		<PeriodicKnockback>10</PeriodicKnockback>
+
+		<CancelWhenAttackIgnoredBySuperShield>true</CancelWhenAttackIgnoredBySuperShield>
+
+		<RogueLikePossibleFixedBuildings>101</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13092">
+		<NameComment>킹 돌격대의 철퇴</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>King</Level>
+		<Root>13091</Root>
+		<BaseAtkSkillHit>80011</BaseAtkSkillHit>
+
+		<BuffAtkPerAtBaseAtkSkillHit>50</BuffAtkPerAtBaseAtkSkillHit>
+
+		<BaseAtkSkillHitCoolTime>9</BaseAtkSkillHitCoolTime>
+		<BaseAtkSkillType>Knockback</BaseAtkSkillType>
+		<!--설명용-->
+		<PeriodicKnockback>9</PeriodicKnockback>
+
+		<CancelWhenAttackIgnoredBySuperShield>true</CancelWhenAttackIgnoredBySuperShield>
+
+		<RogueLikePossibleFixedBuildings>101</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13093">
+		<NameComment>갓 돌격대의 철퇴</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>God</Level>
+		<Root>13091</Root>
+		<BaseAtkSkillHit>80012</BaseAtkSkillHit>
+
+		<BuffAtkPerAtBaseAtkSkillHit>60</BuffAtkPerAtBaseAtkSkillHit>
+
+		<BaseAtkSkillHitCoolTime>8</BaseAtkSkillHitCoolTime>
+		<BaseAtkSkillType>Knockback</BaseAtkSkillType>
+		<!--설명용-->
+		<PeriodicKnockback>8</PeriodicKnockback>
+
+		<CancelWhenAttackIgnoredBySuperShield>true</CancelWhenAttackIgnoredBySuperShield>
+
+		<RogueLikePossibleFixedBuildings>101</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13094">
+		<NameComment>킹갓 돌격대의 철퇴</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>KingGod</Level>
+		<Root>13091</Root>
+		<BaseAtkSkillHit>80013</BaseAtkSkillHit>
+
+		<BuffAtkPerAtBaseAtkSkillHit>70</BuffAtkPerAtBaseAtkSkillHit>
+
+		<BaseAtkSkillHitCoolTime>7</BaseAtkSkillHitCoolTime>
+		<BaseAtkSkillType>Knockback</BaseAtkSkillType>
+		<!--설명용-->
+		<PeriodicKnockback>7</PeriodicKnockback>
+
+		<CancelWhenAttackIgnoredBySuperShield>true</CancelWhenAttackIgnoredBySuperShield>
+
+		<RogueLikePossibleFixedBuildings>101</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13100">
+		<NameComment>희생의 단검 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>StartShieldHpMaxPer_Piece</MainOptionDesc>
+		<Root>13101</Root>
+	</Artifact>
+
+	<Artifact ID="13101">
+		<NameComment>희생의 단검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13101</Root>
+
+		<StartDamageHpCurrentPer>40</StartDamageHpCurrentPer>
+		<StartShieldHpMaxPer>70</StartShieldHpMaxPer>
+
+		<HideInRogueLike>true</HideInRogueLike>			
+	</Artifact>
+
+	<Artifact ID="13102">
+		<NameComment>킹 희생의 단검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13101</Root>
+
+		<StartDamageHpCurrentPer>40</StartDamageHpCurrentPer>
+		<StartShieldHpMaxPer>80</StartShieldHpMaxPer>
+
+		<HideInRogueLike>true</HideInRogueLike>				
+	</Artifact>
+
+	<Artifact ID="13103">
+		<NameComment>갓 희생의 단검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13101</Root>
+
+		<StartDamageHpCurrentPer>40</StartDamageHpCurrentPer>
+		<StartShieldHpMaxPer>90</StartShieldHpMaxPer>
+
+		<HideInRogueLike>true</HideInRogueLike>				
+	</Artifact>
+
+	<Artifact ID="13104">
+		<NameComment>킹갓 희생의 단검</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13101</Root>
+
+		<StartDamageHpCurrentPer>40</StartDamageHpCurrentPer>
+		<StartShieldHpMaxPer>100</StartShieldHpMaxPer>
+
+		<HideInRogueLike>true</HideInRogueLike>				
+	</Artifact>
+
+	<Artifact ID="13110">
+		<NameComment>가시 통나무 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>ShootArtifactSkillRepeatInterval_Piece</MainOptionDesc>
+		<Root>13111</Root>
+	</Artifact>
+
+	<Artifact ID="13111">
+		<NameComment>가시 통나무</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13111</Root>
+		<ShootArtifactSkill>80022</ShootArtifactSkill>
+		<ShootArtifactSkillDelay>1</ShootArtifactSkillDelay>
+		<ShootArtifactSkillRepeat>999</ShootArtifactSkillRepeat>
+		<ShootArtifactSkillRepeatInterval>14</ShootArtifactSkillRepeatInterval>
+		<RogueLikePossibleFixedBuildings>100,101,102,103,104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>					
+	</Artifact>
+
+	<Artifact ID="13112">
+		<NameComment>킹 가시 통나무</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13111</Root>
+		<ShootArtifactSkill>80022</ShootArtifactSkill>
+		<ShootArtifactSkillDelay>1</ShootArtifactSkillDelay>
+		<ShootArtifactSkillRepeat>999</ShootArtifactSkillRepeat>
+		<ShootArtifactSkillRepeatInterval>12</ShootArtifactSkillRepeatInterval>
+		<RogueLikePossibleFixedBuildings>100,101,102,103,104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13113">
+		<NameComment>갓 가시 통나무</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13111</Root>
+		<ShootArtifactSkill>80022</ShootArtifactSkill>
+		<ShootArtifactSkillDelay>1</ShootArtifactSkillDelay>
+		<ShootArtifactSkillRepeat>999</ShootArtifactSkillRepeat>
+		<ShootArtifactSkillRepeatInterval>10</ShootArtifactSkillRepeatInterval>
+		<RogueLikePossibleFixedBuildings>100,101,102,103,104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13114">
+		<NameComment>킹갓 가시 통나무</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13111</Root>
+		<ShootArtifactSkill>80022</ShootArtifactSkill>
+		<ShootArtifactSkillDelay>1</ShootArtifactSkillDelay>
+		<ShootArtifactSkillRepeat>999</ShootArtifactSkillRepeat>
+		<ShootArtifactSkillRepeatInterval>8</ShootArtifactSkillRepeatInterval>
+		<RogueLikePossibleFixedBuildings>100,101,102,103,104,105,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13120">
+		<NameComment>축복의 성물 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopSpecial</FromType>
+		<MainOptionDesc>AddTileDamagePer_Piece</MainOptionDesc>
+		<Root>13121</Root>
+	</Artifact>
+
+	<Artifact ID="13121">
+		<NameComment>축복의 성물</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>Normal</Level>
+		<Root>13121</Root>
+
+		<AddTileBuffPosX>3</AddTileBuffPosX>
+		<AddTileBuffPosY>2</AddTileBuffPosY>
+		<AddTileBuffItem>21012</AddTileBuffItem>
+
+		<AddTileDamagePer>35</AddTileDamagePer>
+		<RogueLikePossibleFixedRoles>Brave,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="13122">
+		<NameComment>킹 축복의 성물</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>King</Level>
+		<Root>13121</Root>
+
+		<AddTileBuffPosX>3</AddTileBuffPosX>
+		<AddTileBuffPosY>2</AddTileBuffPosY>
+		<AddTileBuffItem>21013</AddTileBuffItem>
+
+		<AddTileDamagePer>50</AddTileDamagePer>
+		<RogueLikePossibleFixedRoles>Brave,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13123">
+		<NameComment>갓 축복의 성물</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>God</Level>
+		<Root>13121</Root>
+
+		<AddTileBuffPosX>3</AddTileBuffPosX>
+		<AddTileBuffPosY>2</AddTileBuffPosY>
+		<AddTileBuffItem>21014</AddTileBuffItem>
+
+		<AddTileDamagePer>65</AddTileDamagePer>
+		<RogueLikePossibleFixedRoles>Brave,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13124">
+		<NameComment>킹갓 축복의 성물</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>KingGod</Level>
+		<Root>13121</Root>
+
+		<AddTileBuffPosX>3</AddTileBuffPosX>
+		<AddTileBuffPosY>2</AddTileBuffPosY>
+		<AddTileBuffItem>21015</AddTileBuffItem>
+
+		<AddTileDamagePer>80</AddTileDamagePer>
+		<RogueLikePossibleFixedRoles>Brave,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13130">
+		<NameComment>칼날 왕관 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>MinusDefPerForDesc_Piece</MainOptionDesc>
+		<Root>13131</Root>
+	</Artifact>
+
+	<Artifact ID="13131">
+		<NameComment>칼날 왕관</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13131</Root>
+
+		<AddItemOnce>21020</AddItemOnce>
+
+		<AddItemOnceCount>2</AddItemOnceCount>
+
+		<MinusDefPerForDesc>55</MinusDefPerForDesc>
+		<RogueLikePossibleFixedRoles>Brave,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>1</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="13132">
+		<NameComment>킹 칼날 왕관</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13131</Root>
+
+		<AddItemOnce>21021</AddItemOnce>
+
+		<AddItemOnceCount>2</AddItemOnceCount>
+
+		<MinusDefPerForDesc>45</MinusDefPerForDesc>
+		<RogueLikePossibleFixedRoles>Brave,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>2</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="13133">
+		<NameComment>갓 칼날 왕관</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13131</Root>
+
+		<AddItemOnce>21022</AddItemOnce>
+
+		<AddItemOnceCount>2</AddItemOnceCount>
+
+		<MinusDefPerForDesc>35</MinusDefPerForDesc>
+		<RogueLikePossibleFixedRoles>Brave,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="13134">
+		<NameComment>킹갓 칼날 왕관</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13131</Root>
+
+		<AddItemOnce>21023</AddItemOnce>
+
+		<AddItemOnceCount>2</AddItemOnceCount>
+		
+		<MinusDefPerForDesc>25</MinusDefPerForDesc>
+		<RogueLikePossibleFixedRoles>Brave,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="13140">
+		<NameComment>진격의 군화 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>MoveSpeedPerWhenMovingDesc_Piece</MainOptionDesc>
+		<Root>13141</Root>
+	</Artifact>
+
+	<Artifact ID="13141">
+		<NameComment>진격의 군화</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13141</Root>
+
+		<!-- 기본 제공 추가 이동속도 -->
+		<MoveSpeedPerWhenMovingDesc>10</MoveSpeedPerWhenMovingDesc>
+
+		<!-- 칸마다 증가하는 이속, 피해량, 최대 칸수 모두 이 스킬에 있음 -->
+		<BuffWhenMovingSkill>80050</BuffWhenMovingSkill>
+
+		<!-- 설명용 -->
+		<MoveSpeedPerDesc>16</MoveSpeedPerDesc>
+
+		<AtkPerDesc>5</AtkPerDesc>
+		<MaxBuffOverlapDesc>5</MaxBuffOverlapDesc>
+
+		<RogueLikePossibleFixedBuildings>100,101,105</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>1</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="13142">
+		<NameComment>킹 진격의 군화</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13141</Root>
+
+		<!-- 기본 제공 추가 이동속도 -->
+		<MoveSpeedPerWhenMovingDesc>20</MoveSpeedPerWhenMovingDesc>
+
+		<!-- 칸마다 증가하는 이속, 피해량, 최대 칸수 모두 이 스킬에 있음 -->
+		<BuffWhenMovingSkill>80051</BuffWhenMovingSkill>
+
+		<!-- 설명용 -->
+		<MoveSpeedPerDesc>24</MoveSpeedPerDesc>
+
+		<AtkPerDesc>10</AtkPerDesc>
+		<MaxBuffOverlapDesc>5</MaxBuffOverlapDesc>
+
+		<RogueLikePossibleFixedBuildings>100,101,105</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>2</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="13143">
+		<NameComment>갓 진격의 군화</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13141</Root>
+
+		<!-- 기본 제공 추가 이동속도 -->
+		<MoveSpeedPerWhenMovingDesc>30</MoveSpeedPerWhenMovingDesc>
+		
+		<!-- 칸마다 증가하는 이속, 피해량, 최대 칸수 모두 이 스킬에 있음 -->
+		<BuffWhenMovingSkill>80052</BuffWhenMovingSkill>
+
+		<!-- 설명용 -->
+		<MoveSpeedPerDesc>32</MoveSpeedPerDesc>
+
+		<AtkPerDesc>15</AtkPerDesc>
+		<MaxBuffOverlapDesc>5</MaxBuffOverlapDesc>
+
+		<RogueLikePossibleFixedBuildings>100,101,105</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="13144">
+		<NameComment>킹갓 진격의 군화</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13141</Root>
+
+		<!-- 기본 제공 추가 이동속도 -->
+		<MoveSpeedPerWhenMovingDesc>40</MoveSpeedPerWhenMovingDesc>
+
+		<!-- 칸마다 증가하는 이속, 피해량, 최대 칸수 모두 이 스킬에 있음 -->
+		<BuffWhenMovingSkill>80053</BuffWhenMovingSkill>
+
+		<!-- 설명용 -->
+		<MoveSpeedPerDesc>40</MoveSpeedPerDesc>
+
+		<AtkPerDesc>20</AtkPerDesc>
+		<MaxBuffOverlapDesc>5</MaxBuffOverlapDesc>
+
+		<RogueLikePossibleFixedBuildings>100,101,105</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="13150">
+		<NameComment>단결의 갑옷 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>ShieldMaxHpPerToNearTeamDesc_Piece</MainOptionDesc>
+		<Root>13151</Root>
+	</Artifact>
+
+	<!-- 34시즌 밸런싱 -->
+	<Artifact ID="13151">
+		<NameComment>일반 단결의 갑옷</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13151</Root>
+
+		<RangeType>Rect</RangeType>
+		<RangeX>1</RangeX>
+		<RangeY>1</RangeY>
+		
+		<HideInRogueLike>true</HideInRogueLike>
+		<ShieldMaxHpPerToTeam>8</ShieldMaxHpPerToTeam>
+	</Artifact>
+
+	<Artifact ID="13152" Inherit="13151">
+		<NameComment>킹 단결의 갑옷</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+
+		<Root>13151</Root>
+		<HideInRogueLike>true</HideInRogueLike>
+		<ShieldMaxHpPerToTeam>12</ShieldMaxHpPerToTeam>
+	</Artifact>
+
+	<Artifact ID="13153" Inherit="13151">
+		<NameComment>갓 단결의 갑옷</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+
+		<Root>13151</Root>
+		<HideInRogueLike>true</HideInRogueLike>
+		<ShieldMaxHpPerToTeam>16</ShieldMaxHpPerToTeam>
+	</Artifact>
+
+	<Artifact ID="13154" Inherit="13151">
+		<NameComment>킹갓 단결의 갑옷</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+
+		<Root>13151</Root>
+		<HideInRogueLike>true</HideInRogueLike>
+		<ShieldMaxHpPerToTeam>20</ShieldMaxHpPerToTeam>
+	</Artifact>
+	
+	<Artifact ID="13160">
+		<NameComment>죽음의 서 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>HardMode</FromType>
+		<MainOptionDesc>TeamHealPerWhenKill_Piece</MainOptionDesc>
+		<Root>13161</Root>
+	</Artifact>
+	
+	<Artifact ID="13161">
+		<NameComment>죽음의 서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<Level>Normal</Level>
+		<Root>13161</Root>
+		
+		<HideInRogueLike>true</HideInRogueLike>
+		<BaseExecution>20</BaseExecution>
+		<TeamHealPerWhenKill>10</TeamHealPerWhenKill>
+	</Artifact>
+
+	<Artifact ID="13162" Inherit="13161">
+		<NameComment>킹 죽음의 서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<Level>King</Level>
+		<Root>13161</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+		<BaseExecution>20</BaseExecution>
+		<TeamHealPerWhenKill>15</TeamHealPerWhenKill>
+	</Artifact>
+
+	<Artifact ID="13163" Inherit="13161">
+		<NameComment>갓 죽음의 서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<Level>God</Level>
+		<Root>13161</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+		<BaseExecution>20</BaseExecution>
+		<TeamHealPerWhenKill>20</TeamHealPerWhenKill>
+	</Artifact>
+
+	<Artifact ID="13164" Inherit="13161">
+		<NameComment>킹갓 죽음의 서</NameComment>
+		<Type>Artifact</Type>
+		<FromType>HardMode</FromType>
+		<Level>KingGod</Level>
+		<Root>13161</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+		<BaseExecution>20</BaseExecution>
+		<TeamHealPerWhenKill>25</TeamHealPerWhenKill>
+	</Artifact>
+
+	<Artifact ID="13170">
+		<NameComment>중원의 서약 파편 (중부 전용 유물)</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>ArtifactBuffDataDesc_13170_Piece</MainOptionDesc>
+		<Root>13171</Root>
+	</Artifact>
+
+	<Artifact ID="13171">
+		<NameComment>중원의 서약 (중부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13171</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+		
+		<!-- 아웃게임에서 유물 장착시 조건 체크 -->
+		<RegionCondition>Central</RegionCondition>
+		
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<ReqDeckUnitCount Region="Central" Value="6" />
+			</Conditions>
+			
+			<Actions>
+				<ApplyEventTrigger ID="413171" Once="true" />
+			</Actions>
+			
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>413171</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13172" Inherit="13171">
+		<NameComment>킹 중원의 서약 (중부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13171</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>Central</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413172" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413172</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13173" Inherit="13171">
+		<NameComment>갓 중원의 서약 (중부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13171</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>Central</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413173" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413173</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13174" Inherit="13171">
+		<NameComment>킹갓 중원의 서약 (중부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13171</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>Central</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413174" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413174</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13180">
+		<NameComment>천상의 잔 파편 (남부 전용 유물)</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>ArtifactBuffDataDesc_13180_Piece</MainOptionDesc>
+		<Root>13181</Root>
+		<MinVersion>654</MinVersion>
+	</Artifact>
+
+	<Artifact ID="13181">
+		<NameComment>일반 천상의 잔 (남부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13181</Root>
+		<MinVersion>654</MinVersion>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<!-- 아웃게임에서 유물 장착시 조건 체크 -->
+		<RegionCondition>South</RegionCondition>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<ReqDeckUnitCount Region="South" Value="6" />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="413181" Once="true" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>413181</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13182" Inherit="13181">
+		<NameComment>킹 천상의 잔 (남부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13181</Root>
+		<MinVersion>654</MinVersion>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>South</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413182" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413182</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13183" Inherit="13181">
+		<NameComment>갓 천상의 잔 (남부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13181</Root>
+		<MinVersion>654</MinVersion>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>South</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413183" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413183</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13184" Inherit="13181">
+		<NameComment>킹갓 천상의 잔 (남부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13181</Root>
+		<MinVersion>654</MinVersion>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>South</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413184" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413184</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13190">
+		<NameComment>차가운 뼈의 유산 파편 (북부 전용 유물)</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>ArtifactBuffDataDesc_13190_Piece</MainOptionDesc>
+		<Root>13191</Root>
+	</Artifact>
+
+	<Artifact ID="13191">
+		<NameComment>차가운 뼈의 유산 (북부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13191</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<!-- 아웃게임에서 유물 장착시 조건 체크 -->
+		<RegionCondition>North</RegionCondition>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<ReqDeckUnitCount Region="North" Value="6" />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="413191" Once="true" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>413191</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13192" Inherit="13191">
+		<NameComment>킹 차가운 뼈의 유산 (북부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13191</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>North</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413192" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413192</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13193" Inherit="13191">
+		<NameComment>갓 차가운 뼈의 유산 (북부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13191</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>North</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413193" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413193</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13194" Inherit="13191">
+		<NameComment>킹갓 차가운 뼈의 유산 (북부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13191</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>North</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413194" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413194</BuffDataId>
+	</Artifact>
+	
+	<Artifact ID="13200">
+		<NameComment>오행의 종 파편 (동부 전용 유물)</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>ArtifactBuffDataDesc_13200_Piece</MainOptionDesc>
+		<Root>13201</Root>
+	</Artifact>
+
+	<Artifact ID="13201">
+		<NameComment>오행의 종 (동부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13201</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<!-- 아웃게임에서 유물 장착시 조건 체크 -->
+		<RegionCondition>East</RegionCondition>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<ReqDeckUnitCount Region="East" Value="6" />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="413201" Once="true" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>413201</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13202" Inherit="13201">
+		<NameComment>킹 오행의 종 (동부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13201</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>East</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413202" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413202</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13203" Inherit="13201">
+		<NameComment>갓 오행의 종 (동부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13201</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>East</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413203" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413203</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13204" Inherit="13201">
+		<NameComment>킹갓 오행의 종 (동부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13201</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>East</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413204" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413204</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13210">
+		<NameComment>자연의 규칙 파편 (서부 전용 유물)</NameComment>
+		<Type>Piece</Type>
+		<FromType>Arena</FromType>
+		<MainOptionDesc>ArtifactBuffDataDesc_13210_Piece</MainOptionDesc>
+		<Root>13211</Root>
+	</Artifact>
+
+	<Artifact ID="13211">
+		<NameComment>자연의 규칙 (서부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>Normal</Level>
+		<Root>13211</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<!-- 아웃게임에서 유물 장착시 조건 체크 -->
+		<RegionCondition>West</RegionCondition>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<ReqDeckUnitCount Region="West" Value="6" />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="413211" Once="true" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>413211</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13212" Inherit="13211">
+		<NameComment>킹 자연의 규칙 (서부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>King</Level>
+		<Root>13211</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>West</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413212" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413212</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13213" Inherit="13211">
+		<NameComment>갓 자연의 규칙 (서부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>God</Level>
+		<Root>13211</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>West</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413213" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413213</BuffDataId>
+	</Artifact>
+
+	<Artifact ID="13214" Inherit="13211">
+		<NameComment>킹갓 자연의 규칙 (서부 전용 유물)</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Arena</FromType>
+		<Level>KingGod</Level>
+		<Root>13211</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+
+		<RegionCondition>West</RegionCondition>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="413214" Once="true" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>413214</BuffDataId>
+	</Artifact>
+
+	<!--Artifact ID="13220">
+		<NameComment>불사의 투구 파편</NameComment>
+		<Type>Piece</Type>
+		<Root>13221</Root>
+	</Artifact>
+	
+	<Artifact ID="13221">
+		<NameComment>불사의 투구</NameComment>
+		<Type>Artifact</Type>
+		<Level>Normal</Level>
+		<Root>13221</Root>
+		
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="13222" Inherit="13221">
+		<NameComment>킹 불사의 투구</NameComment>
+		<Type>Artifact</Type>
+		<Level>King</Level>
+		<Root>13221</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="13223" Inherit="13221">
+		<NameComment>갓 불사의 투구</NameComment>
+		<Type>Artifact</Type>
+		<Level>God</Level>
+		<Root>13221</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="13224" Inherit="13221">
+		<NameComment>킹갓 불사의 투구</NameComment>
+		<Type>Artifact</Type>
+		<Level>KingGod</Level>
+		<Root>13221</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="13230">
+		<NameComment>지배의 보석 파편</NameComment>
+		<Type>Piece</Type>
+		<Root>13231</Root>
+	</Artifact>
+	
+	<Artifact ID="13231">
+		<NameComment>지배의 보석</NameComment>
+		<Type>Artifact</Type>
+		<Level>Normal</Level>
+		<Root>13231</Root>
+		
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="13232" Inherit="13231">
+		<NameComment>킹 지배의 보석</NameComment>
+		<Type>Artifact</Type>
+		<Level>King</Level>
+		<Root>13231</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="13233" Inherit="13231">
+		<NameComment>갓 지배의 보석</NameComment>
+		<Type>Artifact</Type>
+		<Level>God</Level>
+		<Root>13231</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="13234" Inherit="13231">
+		<NameComment>킹갓 지배의 보석</NameComment>
+		<Type>Artifact</Type>
+		<Level>KingGod</Level>
+		<Root>13231</Root>
+
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact-->	
+
+	<!-- 상점 특급 -->
+	<Artifact ID="14000">
+		<NameComment>공포 포식자 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopSpecial</FromType>
+		<MainOptionDesc>DamagePerByStageTime_Piece</MainOptionDesc>
+		<Root>14001</Root>
+	</Artifact>
+
+	<Artifact ID="14001">
+		<NameComment>공포 포식자</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>Normal</Level>
+		<Root>14001</Root>
+
+		<DamagePerByStageTime>2</DamagePerByStageTime>
+		<DamagePerByStageTimeMaxValue>60</DamagePerByStageTimeMaxValue>
+		<RogueLikePossibleFixedBuildings>100,103,105</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>1</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="14002">
+		<NameComment>킹 공포 포식자</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>King</Level>
+		<Root>14001</Root>
+
+		<DamagePerByStageTime>4</DamagePerByStageTime>
+		<DamagePerByStageTimeMaxValue>120</DamagePerByStageTimeMaxValue>
+		<RogueLikePossibleFixedBuildings>100,103,105</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>2</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="14003">
+		<NameComment>갓 공포 포식자</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>God</Level>
+		<Root>14001</Root>
+
+		<DamagePerByStageTime>6</DamagePerByStageTime>
+		<DamagePerByStageTimeMaxValue>180</DamagePerByStageTimeMaxValue>
+		<RogueLikePossibleFixedBuildings>100,103,105</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="14004">
+		<NameComment>킹갓 공포 포식자</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>KingGod</Level>
+		<Root>14001</Root>
+
+		<DamagePerByStageTime>8</DamagePerByStageTime>
+		<DamagePerByStageTimeMaxValue>240</DamagePerByStageTimeMaxValue>
+		<RogueLikePossibleFixedBuildings>100,103,105</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>			
+	</Artifact>
+
+
+	<Artifact ID="14010">
+		<NameComment>고대 마법의 지팡이 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopSpecial</FromType>
+		<MainOptionDesc>AddSkillDamagePer_Piece</MainOptionDesc>
+		<Root>14011</Root>
+	</Artifact>
+
+	<Artifact ID="14011">
+		<NameComment>고대 마법의 지팡이</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>Normal</Level>
+		<Root>14011</Root>
+
+		<TotalAttackSpeedPer>-30</TotalAttackSpeedPer>
+		<AddAttackMana>25</AddAttackMana>
+		<AddSkillDamageMul>20</AddSkillDamageMul>
+		<RogueLikePossibleFixedBuildings>104</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>1</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="14012">
+		<NameComment>킹 고대 마법의 지팡이</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>King</Level>
+		<Root>14011</Root>
+
+		<TotalAttackSpeedPer>-30</TotalAttackSpeedPer>
+		<AddAttackMana>25</AddAttackMana>
+		<AddSkillDamageMul>40</AddSkillDamageMul>
+		<RogueLikePossibleFixedBuildings>104</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>2</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="14013">
+		<NameComment>갓 고대 마법의 지팡이</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>God</Level>
+		<Root>14011</Root>
+
+		<TotalAttackSpeedPer>-30</TotalAttackSpeedPer>
+		<AddAttackMana>25</AddAttackMana>
+		<AddSkillDamageMul>60</AddSkillDamageMul>
+		<RogueLikePossibleFixedBuildings>104</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="14014">
+		<NameComment>킹갓 고대 마법의 지팡이</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>KingGod</Level>
+		<Root>14011</Root>
+
+		<TotalAttackSpeedPer>-30</TotalAttackSpeedPer>
+		<AddAttackMana>25</AddAttackMana>
+		<AddSkillDamageMul>80</AddSkillDamageMul>
+		<RogueLikePossibleFixedBuildings>104</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>
+	</Artifact>
+	
+	<Artifact ID="14020">
+		<NameComment>드워프 조준경 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopSpecial</FromType>
+		<MainOptionDesc>MoveStopTimeDesc_Piece</MainOptionDesc>
+		<Root>14021</Root>
+	</Artifact>
+
+	<Artifact ID="14021">
+		<NameComment>드워프 조준경</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>Normal</Level>
+		<Root>14021</Root>
+		
+		<TileBuffItems X="1" Y="1">21030</TileBuffItems>
+		<TileBuffItems X="5" Y="1">21030</TileBuffItems>
+
+		<!-- Desc 출력에 필요 -->
+		<MoveStopTimeDesc/>
+		
+		<RogueLikePossibleFixedBuildings>101,102,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>1</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="14022">
+		<NameComment>킹 드워프 조준경</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>King</Level>
+		<Root>14021</Root>
+
+		<TileBuffItems X="1" Y="1">21031</TileBuffItems>
+		<TileBuffItems X="5" Y="1">21031</TileBuffItems>
+
+		<!-- Desc 출력에 필요 -->
+		<MoveStopTimeDesc/>
+
+		<RogueLikePossibleFixedBuildings>101,102,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>2</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="14023">
+		<NameComment>갓 드워프 조준경</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>God</Level>
+		<Root>14021</Root>
+
+		<TileBuffItems X="1" Y="1">21032</TileBuffItems>
+		<TileBuffItems X="5" Y="1">21032</TileBuffItems>
+
+		<!-- Desc 출력에 필요 -->
+		<MoveStopTimeDesc/>
+
+		<RogueLikePossibleFixedBuildings>101,102,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="14024">
+		<NameComment>킹갓 드워프 조준경</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>KingGod</Level>
+		<Root>14021</Root>
+
+		<TileBuffItems X="1" Y="1">21033</TileBuffItems>
+		<TileBuffItems X="5" Y="1">21033</TileBuffItems>
+
+		<!-- Desc 출력에 필요 -->
+		<MoveStopTimeDesc/>
+
+		<RogueLikePossibleFixedBuildings>101,102,106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>
+	</Artifact>
+
+
+	<Artifact ID="14030">
+		<NameComment>암행사의 삿갓 파편</NameComment>
+		<Type>Piece</Type>
+		<FromType>ShopSpecial</FromType>
+		<MainOptionDesc>MissHpPer_Piece</MainOptionDesc>
+		<Root>14031</Root>
+		
+		<MinVersion>515</MinVersion>
+	</Artifact>
+
+	<Artifact ID="14031">
+		<NameComment>암행사의 삿갓</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>Normal</Level>
+		<Root>14031</Root>
+
+		<MissHpPer>40</MissHpPer>
+		<MissRatioByHpPer>20</MissRatioByHpPer>
+		
+		<RogueLikePossibleFixedBuildings>102, 103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>1</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Shadow,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>
+
+		<MinVersion>515</MinVersion>
+	</Artifact>
+
+	<Artifact ID="14032">
+		<NameComment>킹 암행사의 삿갓</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>King</Level>
+		<Root>14031</Root>
+
+		<MissHpPer>40</MissHpPer>
+		<MissRatioByHpPer>30</MissRatioByHpPer>
+
+		<RogueLikePossibleFixedBuildings>102, 103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Shadow,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>
+
+		<MinVersion>515</MinVersion>
+	</Artifact>
+
+	<Artifact ID="14033">
+		<NameComment>갓 암행사의 삿갓</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>God</Level>
+		<Root>14031</Root>
+
+		<MissHpPer>40</MissHpPer>
+		<MissRatioByHpPer>40</MissRatioByHpPer>
+
+		<RogueLikePossibleFixedBuildings>102, 103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Shadow,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>
+		<MinVersion>515</MinVersion>
+	</Artifact>
+
+	<Artifact ID="14034">
+		<NameComment>킹갓 암행사의 삿갓</NameComment>
+		<Type>Artifact</Type>
+		<FromType>ShopSpecial</FromType>
+		<Level>KingGod</Level>
+		<Root>14031</Root>
+		
+		<MissHpPer>40</MissHpPer>
+		<MissRatioByHpPer>50</MissRatioByHpPer>
+
+		<RogueLikePossibleFixedBuildings>102, 103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>5</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Shadow,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>
+		<MinVersion>515</MinVersion>
+	</Artifact>
+
+	<Artifact ID="15004">
+		<NameComment>4주년 케이크</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Event</FromType>
+		<Level>KingGod</Level>
+		<Sprite>Artifact_Icon_15000</Sprite>
+		<Root>15004</Root>
+
+		<CheckDuplicateOption>ThemeClearGoldPer</CheckDuplicateOption>
+		<ThemeClearGoldPer>5</ThemeClearGoldPer>
+		<BaseHybridDefOnInvade>400</BaseHybridDefOnInvade>
+		
+		<FixedArtifactOptions>
+			<Type>AtkSpeedPer,AtkSpeedPer,AtkSpeedPer,AtkSpeedPer</Type>
+			<Targets>
+				<Target Index="0">1</Target>
+				<Target Index="1">1</Target>
+				<Target Index="2">1</Target>
+				<Target Index="3">1</Target>
+			</Targets>
+			<OptionLevel>5,5,5,5</OptionLevel>
+		</FixedArtifactOptions>
+
+		<HideInRogueLike>true</HideInRogueLike>
+		<EventEndAt>20241203</EventEndAt>
+	</Artifact>
+
+    <Artifact ID="15014">
+        <NameComment>계승자의 휘장</NameComment>
+        <Type>Artifact</Type>
+        <FromType>Event</FromType>
+        <Level>KingGod</Level>
+        <Sprite>Artifact_Icon_15010</Sprite>
+        <Root>15014</Root>
+        <Name>ArtifactName_15010</Name>
+        <Desc>ArtifactDesc_15010</Desc>
+
+        <!-- MakeAllLateComerExceptSlot 레거시 사용x -->
+        <CheckDuplicateOption>MakeAllLateComerExceptSlot</CheckDuplicateOption>
+        <MakeAllLateComerExceptSlot>1</MakeAllLateComerExceptSlot>
+        
+        <EventOptionDesc>ArtifactOptionDesc_Event_15010</EventOptionDesc>
+        <CanChangeOptions>true</CanChangeOptions>
+        <CanDismantle>false</CanDismantle>
+
+        <HideInRogueLike>true</HideInRogueLike>
+        <EventEndAt>20990101</EventEndAt>
+
+        <WorldTriggers>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Actions>
+                <ApplyEventTrigger ID="415014" Once="true" />
+            </Actions>
+
+            <Values>
+            </Values>
+        </WorldTriggers>
+        <BuffDataId>415014</BuffDataId>
+    </Artifact>
+	
+	<Artifact ID="15024">
+		<NameComment>계승자의 깃발</NameComment>
+		<Type>Artifact</Type>
+		<FromType>Event</FromType>
+		<Level>KingGod</Level>
+		<Sprite>Artifact_Icon_15020</Sprite>
+		<Root>15024</Root>
+		<Name>ArtifactName_15020</Name>
+		<Desc>ArtifactDesc_15020</Desc>
+
+		<CheckDuplicateOption>ThemeClearGoldPer</CheckDuplicateOption>
+		<ThemeClearGoldPer>5</ThemeClearGoldPer>
+		<BaseHybridDefOnInvade>400</BaseHybridDefOnInvade>
+		<CanDismantle>false</CanDismantle>
+
+		<FixedArtifactOptions>
+			<Type>AtkSpeedPer,AtkSpeedPer,AtkSpeedPer,AtkSpeedPer</Type>
+			<Targets>
+				<Target Index="0">1</Target>
+				<Target Index="1">1</Target>
+				<Target Index="2">1</Target>
+				<Target Index="3">1</Target>
+			</Targets>
+			<OptionLevel>5,5,5,5</OptionLevel>
+		</FixedArtifactOptions>
+
+		<HideInRogueLike>true</HideInRogueLike>
+		<EventDurationDay>30</EventDurationDay>
+	</Artifact>
+
+	<Artifact ID="15034">
+        <NameComment>계승자의 휘장</NameComment>
+        <Type>Artifact</Type>
+        <FromType>Event</FromType>
+        <Level>KingGod</Level>
+        <Sprite>Artifact_Icon_15010</Sprite>
+        <Root>15034</Root>
+        <Name>ArtifactName_15010</Name>
+        <Desc>ArtifactDesc_15010</Desc>
+
+        <!-- MakeAllLateComerExceptSlot 레거시 사용x -->
+        <CheckDuplicateOption>MakeAllLateComerExceptSlot</CheckDuplicateOption>
+        <MakeAllLateComerExceptSlot>1</MakeAllLateComerExceptSlot>
+        
+        <EventOptionDesc>ArtifactOptionDesc_Event_15010</EventOptionDesc>
+        <CanChangeOptions>true</CanChangeOptions>
+        <CanDismantle>false</CanDismantle>
+
+        <HideInRogueLike>true</HideInRogueLike>
+        <EventEndAt>20990101</EventEndAt>
+
+        <WorldTriggers>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Actions>
+                <ApplyEventTrigger ID="415014" Once="true" />
+            </Actions>
+
+            <Values>
+            </Values>
+        </WorldTriggers>
+        <BuffDataId>415014</BuffDataId>
+		
+		<KGWikiCollectable>false</KGWikiCollectable>
+	</Artifact>
+
+	<Artifact ID="15044">
+        <NameComment>계승자의 휘장</NameComment>
+        <Type>Artifact</Type>
+        <FromType>Event</FromType>
+        <Level>KingGod</Level>
+        <Sprite>Artifact_Icon_15010</Sprite>
+        <Root>15044</Root>
+        <Name>ArtifactName_15010</Name>
+        <Desc>ArtifactDesc_15010</Desc>
+
+        <!-- MakeAllLateComerExceptSlot 레거시 사용x -->
+        <CheckDuplicateOption>MakeAllLateComerExceptSlot</CheckDuplicateOption>
+        <MakeAllLateComerExceptSlot>1</MakeAllLateComerExceptSlot>
+        
+        <EventOptionDesc>ArtifactOptionDesc_Event_15010</EventOptionDesc>
+        <CanChangeOptions>true</CanChangeOptions>
+        <CanDismantle>false</CanDismantle>
+
+        <HideInRogueLike>true</HideInRogueLike>
+        <EventEndAt>20990101</EventEndAt>
+
+        <WorldTriggers>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Actions>
+                <ApplyEventTrigger ID="415014" Once="true" />
+            </Actions>
+
+            <Values>
+            </Values>
+        </WorldTriggers>
+        <BuffDataId>415014</BuffDataId>
+
+		<KGWikiCollectable>false</KGWikiCollectable>
+	</Artifact>
+
+	<Artifact ID="15054">
+        <NameComment>계승자의 휘장</NameComment>
+        <Type>Artifact</Type>
+        <FromType>Event</FromType>
+        <Level>KingGod</Level>
+        <Sprite>Artifact_Icon_15010</Sprite>
+        <Root>15054</Root>
+        <Name>ArtifactName_15010</Name>
+        <Desc>ArtifactDesc_15010</Desc>
+
+        <!-- MakeAllLateComerExceptSlot 레거시 사용x -->
+        <CheckDuplicateOption>MakeAllLateComerExceptSlot</CheckDuplicateOption>
+        <MakeAllLateComerExceptSlot>1</MakeAllLateComerExceptSlot>
+        
+        <EventOptionDesc>ArtifactOptionDesc_Event_15010</EventOptionDesc>
+        <CanChangeOptions>true</CanChangeOptions>
+        <CanDismantle>false</CanDismantle>
+
+        <HideInRogueLike>true</HideInRogueLike>
+        <EventEndAt>20990101</EventEndAt>
+
+        <WorldTriggers>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Actions>
+                <ApplyEventTrigger ID="415014" Once="true" />
+            </Actions>
+
+            <Values>
+            </Values>
+        </WorldTriggers>
+        <BuffDataId>415014</BuffDataId>
+
+		<KGWikiCollectable>false</KGWikiCollectable>
+	</Artifact>
+
+	<Artifact ID="15064">
+        <NameComment>계승자의 휘장</NameComment>
+        <Type>Artifact</Type>
+        <FromType>Event</FromType>
+        <Level>KingGod</Level>
+        <Sprite>Artifact_Icon_15010</Sprite>
+        <Root>15064</Root>
+        <Name>ArtifactName_15010</Name>
+        <Desc>ArtifactDesc_15010</Desc>
+
+        <!-- MakeAllLateComerExceptSlot 레거시 사용x -->
+        <CheckDuplicateOption>MakeAllLateComerExceptSlot</CheckDuplicateOption>
+        <MakeAllLateComerExceptSlot>1</MakeAllLateComerExceptSlot>
+        
+        <EventOptionDesc>ArtifactOptionDesc_Event_15010</EventOptionDesc>
+        <CanChangeOptions>true</CanChangeOptions>
+        <CanDismantle>false</CanDismantle>
+
+        <HideInRogueLike>true</HideInRogueLike>
+        <EventEndAt>20990101</EventEndAt>
+
+        <WorldTriggers>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Actions>
+                <ApplyEventTrigger ID="415014" Once="true" />
+            </Actions>
+
+            <Values>
+            </Values>
+        </WorldTriggers>
+        <BuffDataId>415014</BuffDataId>
+
+		<KGWikiCollectable>false</KGWikiCollectable>
+	</Artifact>
+
+	<Artifact ID="15074">
+        <NameComment>계승자의 휘장</NameComment>
+        <Type>Artifact</Type>
+        <FromType>Event</FromType>
+        <Level>KingGod</Level>
+        <Sprite>Artifact_Icon_15010</Sprite>
+        <Root>15074</Root>
+        <Name>ArtifactName_15010</Name>
+        <Desc>ArtifactDesc_15010</Desc>
+
+        <!-- MakeAllLateComerExceptSlot 레거시 사용x -->
+        <CheckDuplicateOption>MakeAllLateComerExceptSlot</CheckDuplicateOption>
+        <MakeAllLateComerExceptSlot>1</MakeAllLateComerExceptSlot>
+        
+        <EventOptionDesc>ArtifactOptionDesc_Event_15010</EventOptionDesc>
+        <CanChangeOptions>true</CanChangeOptions>
+        <CanDismantle>false</CanDismantle>
+
+        <HideInRogueLike>true</HideInRogueLike>
+        <EventEndAt>20990101</EventEndAt>
+
+        <WorldTriggers>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Actions>
+                <ApplyEventTrigger ID="415014" Once="true" />
+            </Actions>
+
+            <Values>
+            </Values>
+        </WorldTriggers>
+        <BuffDataId>415014</BuffDataId>
+
+		<KGWikiCollectable>false</KGWikiCollectable>
+	</Artifact>
+	
+	<!-- 로그라이크 전용 유물 -->
+	<Artifact ID="20001">
+		<NameComment>로그라이크 제국의 대검</NameComment>
+		<Name>ArtifactName_10000</Name>
+		<Desc>ArtifactDesc_10000</Desc>
+		<Sprite>Artifact_Icon_10000</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410001" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410001</BuffDataId>
+		<RogueLikePossibleFixedBuildings>102</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+
+		<RogueLikePossibleFixedRoles>Brave,Toughness,Swift</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="20002" Inherit="20001">
+		<Level>King</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410002" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410002</BuffDataId>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="20003" Inherit="20001">
+		<Level>God</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410003" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410003</BuffDataId>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="20004" Inherit="20001">
+		<Level>KingGod</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410004" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410004</BuffDataId>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>10</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="20011">
+		<NameComment>로그라이크 왕국의 갑옷</NameComment>
+		<Name>ArtifactName_10010</Name>
+		<Desc>ArtifactDesc_10010</Desc>
+		<Sprite>Artifact_Icon_10010</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410011" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410011</BuffDataId>
+		<RogueLikePossibleFixedBuildings>103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Mystic,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="20012" Inherit="20011">
+		<Level>King</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410012" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410012</BuffDataId>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="20013" Inherit="20011">
+		<Level>God</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410013" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410013</BuffDataId>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="20014" Inherit="20011">
+		<Level>KingGod</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="410014" />
+			</Actions>
+		</WorldTriggers>
+		<BuffDataId>410014</BuffDataId>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>10</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="20021">
+		<NameComment>로그라이크 영원숲의 활</NameComment>
+		<Name>ArtifactName_10020</Name>
+		<Desc>ArtifactDesc_10020</Desc>
+		<Sprite>Artifact_Icon_10020</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410021" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410021</BuffDataId>
+		<RogueLikePossibleFixedBuildings>101</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Swift,Brave</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="20022" Inherit="20021">
+		<Level>King</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410022" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410022</BuffDataId>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="20023" Inherit="20021">
+		<Level>God</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410023" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410023</BuffDataId>
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="20024" Inherit="20021">
+		<Level>KingGod</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410024" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410024</BuffDataId>
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>10</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="20031">
+		<NameComment>로그라이크 설원의 지팡이</NameComment>
+		<Name>ArtifactName_10030</Name>
+		<Desc>ArtifactDesc_10030</Desc>
+		<Sprite>Artifact_Icon_10030</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410031" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410031</BuffDataId>
+		<RogueLikePossibleFixedBuildings>104</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>1</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Element,Shadow,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>		
+	</Artifact>
+
+	<Artifact ID="20032" Inherit="20031">
+		<Level>King</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410032" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410032</BuffDataId>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="20033" Inherit="20031">
+		<Level>God</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410033" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410033</BuffDataId>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="20034" Inherit="20031">
+		<Level>KingGod</Level>
+		<FromType>RogueLike</FromType>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="410034" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<BuffDataId>410034</BuffDataId>
+		<RogueLikeBuildingLevel>5</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>10</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="21001">
+		<NameComment>로그라이크 경비대의 뿔피리</NameComment>
+		<Name>ArtifactName_11000</Name>
+		<Desc>ArtifactDesc_11000</Desc>
+		<Sprite>Artifact_Icon_11000</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+		<RoguelikeExpPer>6</RoguelikeExpPer>
+
+		<RogueLikePossibleFixedBuildings>100</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>1</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness,Swift,Element,Shadow,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>2</RogueLikeRoleLevel>				
+	</Artifact>
+
+	<Artifact ID="21002" Inherit="21001">
+		<Level>King</Level>
+		<RoguelikeExpPer>9</RoguelikeExpPer>
+		<FromType>RogueLike</FromType>
+
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="21003" Inherit="21001">
+		<Level>God</Level>
+		<RoguelikeExpPer>12</RoguelikeExpPer>
+		<FromType>RogueLike</FromType>
+
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="21004" Inherit="21001">
+		<Level>KingGod</Level>
+		<RoguelikeExpPer>15</RoguelikeExpPer>
+		<FromType>RogueLike</FromType>
+
+		<RogueLikeBuildingLevel>5</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="21011">
+		<NameComment>로그라이크 고블린의 황금 왕관</NameComment>
+		<Name>ArtifactName_11010</Name>
+		<Desc>ArtifactDesc_11010</Desc>
+		<Sprite>Artifact_Icon_11010</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+		<RoguelikeGoldPer>6</RoguelikeGoldPer>
+
+		<RogueLikePossibleFixedBuildings>105</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness,Swift,Element,Shadow,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>2</RogueLikeRoleLevel>			
+	</Artifact>
+
+	<Artifact ID="21012" Inherit="21011">
+		<Level>King</Level>
+		<RoguelikeGoldPer>9</RoguelikeGoldPer>
+		<FromType>RogueLike</FromType>
+
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="21013" Inherit="21011">
+		<Level>God</Level>
+		<RoguelikeGoldPer>12</RoguelikeGoldPer>
+		<FromType>RogueLike</FromType>
+
+		<RogueLikeBuildingLevel>6</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="21014" Inherit="21011">
+		<Level>KingGod</Level>
+		<RoguelikeGoldPer>15</RoguelikeGoldPer>
+		<FromType>RogueLike</FromType>
+
+		<RogueLikeBuildingLevel>8</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>	
+	</Artifact>
+	
+	<Artifact ID="22004">
+		<NameComment>로그라이크 영광의 빛</NameComment>
+		<Name>ArtifactName_12000</Name>
+		<Desc>ArtifactDesc_12000</Desc>
+		<Sprite>Artifact_Icon_12000</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLikeBuildingArtifact</FromType>
+		<Level>KingGod</Level>
+		<RogueLikeUpgradeBuildingMaxLevel>true</RogueLikeUpgradeBuildingMaxLevel>
+		<RogueLikePossibleFixedBuildings>100</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+	</Artifact>
+
+	<Artifact ID="22014">
+		<NameComment>로그라이크 광열의 망치</NameComment>
+		<Name>ArtifactName_12010</Name>
+		<Desc>ArtifactDesc_12010</Desc>
+		<Sprite>Artifact_Icon_12010</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLikeBuildingArtifact</FromType>
+		<Level>KingGod</Level>
+		<RogueLikeUpgradeBuildingMaxLevel>true</RogueLikeUpgradeBuildingMaxLevel>
+		<RogueLikePossibleFixedBuildings>101</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+	</Artifact>
+
+	<Artifact ID="22024">
+		<NameComment>로그라이크 혈흔 서린 검</NameComment>
+		<Name>ArtifactName_12020</Name>
+		<Desc>ArtifactDesc_12020</Desc>
+		<Sprite>Artifact_Icon_12020</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLikeBuildingArtifact</FromType>
+		<Level>KingGod</Level>
+		<RogueLikeUpgradeBuildingMaxLevel>true</RogueLikeUpgradeBuildingMaxLevel>
+		<RogueLikePossibleFixedBuildings>102</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+	</Artifact>
+
+	<Artifact ID="22034">
+		<NameComment>로그라이크 수호자의 투구</NameComment>
+		<Name>ArtifactName_12030</Name>
+		<Desc>ArtifactDesc_12030</Desc>
+		<Sprite>Artifact_Icon_12030</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLikeBuildingArtifact</FromType>
+		<Level>KingGod</Level>
+		<RogueLikeUpgradeBuildingMaxLevel>true</RogueLikeUpgradeBuildingMaxLevel>
+		<RogueLikePossibleFixedBuildings>103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+	</Artifact>
+
+	<Artifact ID="22044">
+		<NameComment>로그라이크 타락한 성배</NameComment>
+		<Name>ArtifactName_12040</Name>
+		<Desc>ArtifactDesc_12040</Desc>
+		<Sprite>Artifact_Icon_12040</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLikeBuildingArtifact</FromType>
+		<Level>KingGod</Level>
+		<RogueLikeUpgradeBuildingMaxLevel>true</RogueLikeUpgradeBuildingMaxLevel>
+		<RogueLikePossibleFixedBuildings>104</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+	</Artifact>
+
+	<Artifact ID="22054">
+		<NameComment>로그라이크 검은 금반지</NameComment>
+		<Name>ArtifactName_12050</Name>
+		<Desc>ArtifactDesc_12050</Desc>
+		<Sprite>Artifact_Icon_12050</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLikeBuildingArtifact</FromType>
+		<Level>KingGod</Level>
+		<RogueLikeUpgradeBuildingMaxLevel>true</RogueLikeUpgradeBuildingMaxLevel>
+		<RogueLikePossibleFixedBuildings>105</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+	</Artifact>
+
+	<Artifact ID="22064">
+		<NameComment>로그라이크 죽음의 서</NameComment>
+		<Name>ArtifactName_13160</Name>
+		<Desc>ArtifactDesc_13160</Desc>
+		<Sprite>Artifact_Icon_13160</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLikeBuildingArtifact</FromType>
+		<Level>KingGod</Level>
+		<RogueLikeUpgradeBuildingMaxLevel>true</RogueLikeUpgradeBuildingMaxLevel>
+		<RogueLikePossibleFixedBuildings>106</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+		
+		<ReqRogueLikeDLC>2400</ReqRogueLikeDLC>
+	</Artifact>
+
+	<Artifact ID="22081">
+		<NameComment>로그라이크 민병대의 깃발</NameComment>
+		<Name>ArtifactName_12080</Name>
+		<Desc>ArtifactDesc_12080</Desc>
+		<Sprite>Artifact_Icon_12080</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+		<Root>12081</Root>
+		<AddDefPerCount>0.5</AddDefPerCount>
+		<AddDefPerCountMax>5</AddDefPerCountMax>
+
+		<RogueLikePossibleFixedBuildings>100, 103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>1</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness,Swift,Element,Shadow,Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>2</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="22082" Inherit="22081">
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>King</Level>
+		<Root>12081</Root>
+		<AddDefPerCount>1</AddDefPerCount>
+		<AddDefPerCountMax>10</AddDefPerCountMax>
+
+		<RogueLikePossibleFixedBuildings>100, 103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="22083" Inherit="22081">
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>God</Level>
+		<Root>12081</Root>
+		<AddDefPerCount>1.5</AddDefPerCount>
+		<AddDefPerCountMax>15</AddDefPerCountMax>
+
+		<RogueLikePossibleFixedBuildings>100, 103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="22084" Inherit="22081">
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>KingGod</Level>
+		<Root>12081</Root>
+		<AddDefPerCount>2</AddDefPerCount>
+		<AddDefPerCountMax>20</AddDefPerCountMax>
+
+		<RogueLikePossibleFixedBuildings>100, 103</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>5</RogueLikeBuildingLevel>
+		<RogueLikeRoleLevel>8</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="22111">
+		<NameComment>로그라이크 환영의 가면</NameComment>
+		<Name>ArtifactName_12110</Name>
+		<Desc>ArtifactDesc_12110</Desc>
+		<Sprite>Artifact_Icon_12110</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+		<CloneHighestLevel>true</CloneHighestLevel>
+		<CloneHighestLevelStatPer>45</CloneHighestLevelStatPer>
+		<RogueLikePossibleFixedRoles>Mystic</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>1</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="22112" Inherit="22111">
+		<Level>King</Level>
+		<CloneHighestLevelStatPer>55</CloneHighestLevelStatPer>
+		<FromType>RogueLike</FromType>
+		<RogueLikeRoleLevel>2</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="22113" Inherit="22111">
+		<Level>God</Level>
+		<CloneHighestLevelStatPer>65</CloneHighestLevelStatPer>
+		<FromType>RogueLike</FromType>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="22114" Inherit="22111">
+		<Level>KingGod</Level>
+		<CloneHighestLevelStatPer>75</CloneHighestLevelStatPer>
+		<FromType>RogueLike</FromType>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>	
+	</Artifact>
+
+	<Artifact ID="23101">
+		<NameComment>로그라이크 희생의 단검</NameComment>
+		<Name>ArtifactName_13100</Name>
+		<Desc>ArtifactDesc_13100</Desc>
+		<Sprite>Artifact_Icon_13100</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+		<StartDamageHpCurrentPer>15</StartDamageHpCurrentPer>
+		<StartShieldHpMaxPer>30</StartShieldHpMaxPer>
+
+		<RogueLikePossibleFixedBuildings>102</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>1</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="23102" Inherit="23101">
+		<Level>King</Level>
+		<StartDamageHpCurrentPer>15</StartDamageHpCurrentPer>
+		<StartShieldHpMaxPer>40</StartShieldHpMaxPer>
+		<FromType>RogueLike</FromType>
+
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="23103" Inherit="23101">
+		<Level>God</Level>
+		<StartDamageHpCurrentPer>15</StartDamageHpCurrentPer>
+		<StartShieldHpMaxPer>50</StartShieldHpMaxPer>
+		<FromType>RogueLike</FromType>
+
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="23104" Inherit="23101">
+		<Level>KingGod</Level>
+		<StartDamageHpCurrentPer>15</StartDamageHpCurrentPer>
+		<StartShieldHpMaxPer>60</StartShieldHpMaxPer>
+		<FromType>RogueLike</FromType>
+
+		<RogueLikeBuildingLevel>5</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Toughness,Shadow</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="23151">
+		<NameComment>로그라이크 단결의 갑옷</NameComment>
+		<Name>ArtifactName_13150</Name>
+		<Desc>ArtifactDesc_13150</Desc>
+		<Sprite>Artifact_Icon_13150</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+
+		<RangeType>Rect</RangeType>
+		<RangeX>1</RangeX>
+		<RangeY>1</RangeY>
+
+		<ShieldMaxHpPerToTeam>5</ShieldMaxHpPerToTeam>
+		<RogueLikePossibleFixedBuildings>100</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>1</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>3</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="23152" Inherit="23151">
+		<Level>King</Level>
+		<FromType>RogueLike</FromType>
+
+		<ShieldMaxHpPerToTeam>7.5</ShieldMaxHpPerToTeam>
+		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>4</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="23153" Inherit="23151">
+		<Level>God</Level>
+		<FromType>RogueLike</FromType>
+
+		<ShieldMaxHpPerToTeam>10</ShieldMaxHpPerToTeam>
+		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>5</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="23154" Inherit="23151">
+		<Level>KingGod</Level>
+		<FromType>RogueLike</FromType>
+
+		<ShieldMaxHpPerToTeam>12.5</ShieldMaxHpPerToTeam>
+		<RogueLikeBuildingLevel>5</RogueLikeBuildingLevel>
+		<RogueLikePossibleFixedRoles>Brave,Toughness</RogueLikePossibleFixedRoles>
+		<RogueLikeRoleLevel>6</RogueLikeRoleLevel>
+	</Artifact>
+
+	<Artifact ID="23224">
+		<NameComment>로그라이크 저주받은 투구</NameComment>
+		<Name>ArtifactName_13220</Name>
+		<Desc>ArtifactDesc_13220</Desc>
+		<Sprite>Artifact_Icon_13220</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLikeBuildingArtifact</FromType>
+		<Level>KingGod</Level>
+		<RogueLikeUpgradeBuildingMaxLevel>true</RogueLikeUpgradeBuildingMaxLevel>
+		<RogueLikePossibleFixedBuildings>107</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+		
+		<ReqRogueLikeDLC>2410</ReqRogueLikeDLC>
+	</Artifact>	
+
+	<Artifact ID="23234">
+		<NameComment>로그라이크 지배의 보석</NameComment>
+		<Name>ArtifactName_13230</Name>
+		<Desc>ArtifactDesc_13230</Desc>
+		<Sprite>Artifact_Icon_13230</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLikeBuildingArtifact</FromType>
+		<Level>KingGod</Level>
+		<RogueLikeUpgradeBuildingMaxLevel>true</RogueLikeUpgradeBuildingMaxLevel>
+		<RogueLikePossibleFixedBuildings>108</RogueLikePossibleFixedBuildings>
+		<RogueLikeBuildingLevel>10</RogueLikeBuildingLevel>
+		
+		<ReqRogueLikeDLC>2420</ReqRogueLikeDLC>
+	</Artifact>		
+
+	<Artifact ID="29991">
+		<NameComment>로그라이크 쓸모없는 유물</NameComment>
+		<Name>ArtifactName_29990</Name>
+		<Desc>ArtifactDesc_29990</Desc>
+		<Sprite>Artifact_Icon_29990</Sprite>
+		<Type>Artifact</Type>
+		<FromType>RogueLike</FromType>
+		<Level>Normal</Level>
+		<!-- 어차피 강제로 넣어주는 유물이므로 풀에서 나오지 않게 숨김처리 -->
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="29992" Inherit="29991">
+		<Level>King</Level>
+		<FromType>RogueLike</FromType>
+		<!-- 어차피 강제로 넣어주는 유물이므로 풀에서 나오지 않게 숨김처리 -->
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="29993" Inherit="29991">
+		<Level>God</Level>
+		<FromType>RogueLike</FromType>
+		<!-- 어차피 강제로 넣어주는 유물이므로 풀에서 나오지 않게 숨김처리 -->
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+	<Artifact ID="29994" Inherit="29991">
+		<Level>KingGod</Level>
+		<FromType>RogueLike</FromType>
+		<!-- 어차피 강제로 넣어주는 유물이므로 풀에서 나오지 않게 숨김처리 -->
+		<HideInRogueLike>true</HideInRogueLike>
+	</Artifact>
+
+</Artifacts>

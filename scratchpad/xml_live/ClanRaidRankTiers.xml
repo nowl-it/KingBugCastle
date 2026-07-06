@@ -1,0 +1,145 @@
+<ClanRaidRankTiers>
+	<ClanRaidRankTier ID="0">
+		<NameComment>아이언</NameComment>
+		<ReqBossKill>0</ReqBossKill>
+
+		<TierIcon>Tier_00</TierIcon>
+		<GoldBonus>0</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="10">
+		<NameComment>브론즈 1</NameComment>
+		<ReqBossKill>1</ReqBossKill>
+
+		<TierIcon>Tier_01</TierIcon>
+		<StarIcon>Tier_01_01</StarIcon>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="11">
+		<NameComment>브론즈 2</NameComment>
+		<ReqBossKill>4</ReqBossKill>
+		<ClanTokenReward>120</ClanTokenReward>
+
+		<TierIcon>Tier_01</TierIcon>
+		<StarIcon>Tier_01_02</StarIcon>
+		<GoldBonus>4</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="20">
+		<NameComment>실버 1</NameComment>
+		<ReqBossKill>8</ReqBossKill>
+		<ClanTokenReward>180</ClanTokenReward>
+
+		<TierIcon>Tier_02</TierIcon>
+		<StarIcon>Tier_02_01</StarIcon>
+		<GoldBonus>6</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="21">
+		<NameComment>실버 2</NameComment>
+		<ReqBossKill>12</ReqBossKill>
+		<ClanTokenReward>180</ClanTokenReward>
+
+		<TierIcon>Tier_02</TierIcon>
+		<StarIcon>Tier_02_02</StarIcon>
+		<GoldBonus>6</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="30">
+		<NameComment>골드 1</NameComment>
+		<ReqBossKill>16</ReqBossKill>
+		<ClanTokenReward>300</ClanTokenReward>
+
+		<TierIcon>Tier_03</TierIcon>
+		<StarIcon>Tier_03_01</StarIcon>
+		<GoldBonus>8</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="31">
+		<NameComment>골드 2</NameComment>
+		<ReqBossKill>20</ReqBossKill>
+		<ClanTokenReward>300</ClanTokenReward>
+
+		<TierIcon>Tier_03</TierIcon>
+		<StarIcon>Tier_03_02</StarIcon>
+		<GoldBonus>8</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="40">
+		<NameComment>플래티넘 1</NameComment>
+		<ReqBossKill>24</ReqBossKill>
+		<ClanTokenReward>450</ClanTokenReward>
+
+		<TierIcon>Tier_04</TierIcon>
+		<StarIcon>Tier_04_01</StarIcon>
+		<GoldBonus>10</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="41">
+		<NameComment>플래티넘 2</NameComment>
+		<ReqBossKill>28</ReqBossKill>
+		<ClanTokenReward>450</ClanTokenReward>
+
+		<TierIcon>Tier_04</TierIcon>
+		<StarIcon>Tier_04_02</StarIcon>
+		<GoldBonus>10</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="50">
+		<NameComment>다이아 1</NameComment>
+		<ReqBossKill>32</ReqBossKill>
+		<ClanTokenReward>600</ClanTokenReward>
+
+		<TierIcon>Tier_05</TierIcon>
+		<StarIcon>Tier_05_01</StarIcon>
+		<GoldBonus>12</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="51">
+		<NameComment>다이아 2</NameComment>
+		<ReqBossKill>36</ReqBossKill>
+		<ClanTokenReward>600</ClanTokenReward>
+
+		<TierIcon>Tier_05</TierIcon>
+		<StarIcon>Tier_05_02</StarIcon>
+		<GoldBonus>12</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="60">
+		<NameComment>킹</NameComment>
+		<ReqBossKill>40</ReqBossKill>
+		<ClanTokenReward>1000</ClanTokenReward>
+
+		<TierIcon>Tier_06</TierIcon>
+		<GoldBonus>16</GoldBonus>
+	</ClanRaidRankTier>
+	
+	<ClanRaidRankTier ID="61">
+		<NameComment>킹</NameComment>
+		<ReqBossKill>44</ReqBossKill>
+		<BoxKeyReward>1</BoxKeyReward>
+
+		<TierIcon>Tier_06</TierIcon>
+		<GoldBonus>16</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="70">
+		<NameComment>갓</NameComment>
+		<ReqBossKill>44</ReqBossKill>
+		<ReqRank>25</ReqRank>
+		<BoxKeyReward>1</BoxKeyReward>
+
+		<TierIcon>Tier_07</TierIcon>
+		<GoldBonus>20</GoldBonus>
+	</ClanRaidRankTier>
+
+	<ClanRaidRankTier ID="80">
+		<NameComment>킹갓</NameComment>
+		<ReqBossKill>48</ReqBossKill>
+		<ReqRank>5</ReqRank>
+		<BoxKeyReward>1</BoxKeyReward>
+
+		<TierIcon>Tier_08</TierIcon>
+		<GoldBonus>24</GoldBonus>
+	</ClanRaidRankTier>
+</ClanRaidRankTiers>

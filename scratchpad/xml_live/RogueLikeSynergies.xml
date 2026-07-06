@@ -1,0 +1,2620 @@
+<RogueLikeSynergies>
+	<RogueLikeSynergy ID="10000" Theme="2100">
+		<Comment>중부</Comment>
+		<DescComment>중부의 제단 레벨 +5 상승</DescComment>
+		<Condition Region="Central" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddRogueLikeBuildingLevel Region="Central"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>5</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<AddRogueLikeBuildingLevel Region="Central"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>-5</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10001" Theme="2100" Inherit="10000">
+		<Comment>중부</Comment>
+		<DescComment>중부의 제단 레벨 +10 상승</DescComment>
+		<Condition Region="Central" UnitCount="3"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>10</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-10</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10002" Theme="2100" Inherit="10000">
+		<Comment>중부</Comment>
+		<DescComment>중부의 제단 레벨 +15 상승</DescComment>
+		<Condition Region="Central" UnitCount="4"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>15</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-15</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10003" Theme="2100" Inherit="10000">
+		<Comment>중부</Comment>
+		<DescComment>중부의 제단 레벨 +20 상승</DescComment>
+		<Condition Region="Central" UnitCount="5"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>20</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-20</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10004" Theme="2100" Inherit="10000">
+		<Comment>중부</Comment>
+		<DescComment>중부의 제단 레벨 +25 상승</DescComment>
+		<Condition Region="Central" UnitCount="6"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>25</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-25</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	
+	<RogueLikeSynergy ID="10010" Theme="2100">
+		<Comment>남부</Comment>
+		<DescComment>남부의 제단 레벨 +5 상승</DescComment>
+		<Condition Region="South" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddRogueLikeBuildingLevel Region="South"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>5</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<AddRogueLikeBuildingLevel Region="South"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>-5</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10011" Theme="2100" Inherit="10010">
+		<Comment>남부</Comment>
+		<DescComment>남부의 제단 레벨 +10 상승</DescComment>
+		<Condition Region="South" UnitCount="3"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>10</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-10</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10012" Theme="2100" Inherit="10010">
+		<Comment>남부</Comment>
+		<DescComment>남부의 제단 레벨 +15 상승</DescComment>
+		<Condition Region="South" UnitCount="4"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>15</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-15</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10013" Theme="2100" Inherit="10010">
+		<Comment>남부</Comment>
+		<DescComment>남부의 제단 레벨 +20 상승</DescComment>
+		<Condition Region="South" UnitCount="5"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>20</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-20</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10014" Theme="2100" Inherit="10010">
+		<Comment>남부</Comment>
+		<DescComment>남부의 제단 레벨 +25 상승</DescComment>
+		<Condition Region="South" UnitCount="6"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>25</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-25</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	
+	<RogueLikeSynergy ID="10020" Theme="2100">
+		<Comment>북부</Comment>
+		<DescComment>북부의 제단 레벨 +5 상승</DescComment>
+		<Condition Region="North" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddRogueLikeBuildingLevel Region="North"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>5</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<AddRogueLikeBuildingLevel Region="North"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>-5</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10021" Theme="2100" Inherit="10020">
+		<Comment>북부</Comment>
+		<DescComment>북부의 제단 레벨 +10 상승</DescComment>
+		<Condition Region="North" UnitCount="3"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>10</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-10</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10022" Theme="2100" Inherit="10020">
+		<Comment>북부</Comment>
+		<DescComment>북부의 제단 레벨 +15 상승</DescComment>
+		<Condition Region="North" UnitCount="4"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>15</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-15</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10023" Theme="2100" Inherit="10020">
+		<Comment>북부</Comment>
+		<DescComment>북부의 제단 레벨 +20 상승</DescComment>
+		<Condition Region="North" UnitCount="5"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>20</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-20</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10024" Theme="2100" Inherit="10020">
+		<Comment>북부</Comment>
+		<DescComment>북부의 제단 레벨 +25 상승</DescComment>
+		<Condition Region="North" UnitCount="6"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>25</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-25</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	
+	<RogueLikeSynergy ID="10030" Theme="2100">
+		<Comment>동부</Comment>
+		<DescComment>동부의 제단 레벨 +5 상승</DescComment>
+		<Condition Region="East" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddRogueLikeBuildingLevel Region="East"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>5</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<AddRogueLikeBuildingLevel Region="East"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>-5</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10031" Theme="2100" Inherit="10030">
+		<Comment>동부</Comment>
+		<DescComment>동부의 제단 레벨 +10 상승</DescComment>
+		<Condition Region="East" UnitCount="3"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>10</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-10</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10032" Theme="2100" Inherit="10030">
+		<Comment>동부</Comment>
+		<DescComment>동부의 제단 레벨 +15 상승</DescComment>
+		<Condition Region="East" UnitCount="4"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>15</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-15</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10033" Theme="2100" Inherit="10030">
+		<Comment>동부</Comment>
+		<DescComment>동부의 제단 레벨 +20 상승</DescComment>
+		<Condition Region="East" UnitCount="5"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>20</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-20</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10034" Theme="2100" Inherit="10030">
+		<Comment>동부</Comment>
+		<DescComment>동부의 제단 레벨 +25 상승</DescComment>
+		<Condition Region="East" UnitCount="6"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>25</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-25</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="10040" Theme="2100">
+		<Comment>서부</Comment>
+		<DescComment>서부의 제단 레벨 +5 상승</DescComment>
+		<Condition Region="West" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddRogueLikeBuildingLevel Region="West"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>5</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<AddRogueLikeBuildingLevel Region="West"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>-5</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10041" Theme="2100" Inherit="10040">
+		<Comment>서부</Comment>
+		<DescComment>서부의 제단 레벨 +10 상승</DescComment>
+		<Condition Region="West" UnitCount="3"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>10</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-10</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10042" Theme="2100" Inherit="10040">
+		<Comment>서부</Comment>
+		<DescComment>서부의 제단 레벨 +15 상승</DescComment>
+		<Condition Region="West" UnitCount="4"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>15</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-15</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10043" Theme="2100" Inherit="10040">
+		<Comment>서부</Comment>
+		<DescComment>서부의 제단 레벨 +20 상승</DescComment>
+		<Condition Region="West" UnitCount="5"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>20</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-20</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="10044" Theme="2100" Inherit="10040">
+		<Comment>서부</Comment>
+		<DescComment>서부의 제단 레벨 +25 상승</DescComment>
+		<Condition Region="West" UnitCount="6"/>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>25</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>-25</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20000" Theme="2100">
+		<Comment>형태변환자</Comment>
+		<DescComment>형태변환자가 전투 시작 후 첫 스킬 사용 시 최대 체력 +100%</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Transformer" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo>
+				<Checker Name="Transformer">RogueLikeSynergyTarget</Checker>
+				
+				<BuffOptions>
+					<Conditions>
+						<CastSkill/>
+						<Count Count="1"/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Hp" StatValueType="PerValue" AddHpOnAddMaxHp="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>100</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20001" Theme="2100" Inherit="20000">
+		<Comment>형태변환자</Comment>
+		<DescComment>형태변환자가 전투 시작 후 첫 스킬 사용 시 최대 체력 +100%, 형태변환자가 전투 시작 후 첫 스킬 사용 시 최대 체력 +200%</DescComment>
+		
+		<DescParams>
+			<Const>200</Const>
+		</DescParams>
+		
+		<Condition Synergy="Transformer" UnitCount="3"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+					<Values>
+						<FixedValue>300</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20010" Theme="2100">
+		<Comment>방패대</Comment>
+		<DescComment>방패대의 방어력 +400</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Shielder" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="Shielder">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="HybridDef" StatValueType="BaseValue" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>400</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20011" Theme="2100" Inherit="20010">
+		<Comment>방패대</Comment>
+		<DescComment>방패대의 방어력 +400, 아군의 방어력 +300, 방패대의 방어력 +400</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[3]/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+			<Const>400</Const>
+		</DescParams>
+		
+		<Condition Synergy="Shielder" UnitCount="3"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+					<Values>
+						<FixedValue>800</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="HybridDef" StatValueType="BaseValue" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>300</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="2"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20012" Theme="2100" Inherit="20010">
+		<Comment>방패대</Comment>
+		<DescComment>방패대의 방어력 +400, 아군의 방어력 +300, 방패대의 방어력 +400, 전투 시작 시 모든 아군의 받는 피해량 -60%[4], 방패대 영웅 사망 시마다 15%씩 받는 피해량 수치 감소</DescComment>
+		
+		<DescParams>
+			<InnerText Mag="-1">./WorldTriggers[3]/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+			<InnerText Mag="0.01">./WorldTriggers[3]/BuffInfo/BuffOptions[2]/Values/RogueLikeSynergyStack20012</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Shielder" UnitCount="4"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+					<Values>
+						<FixedValue>800</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Dead />
+					</Conditions>
+
+					<Targets>
+						<Team Count="1" />
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<IncreaseCustomStack Name="RogueLikeSynergyStack20012" Type="World" Max="4"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>1</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="HybridDef" StatValueType="BaseValue" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>300</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="TakeDamage" StatValueType="TotalPerValue" HaveToBind="true" IgnoreCCRatio="true" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-60</FixedValue>
+						<RogueLikeSynergyStack20012>1500</RogueLikeSynergyStack20012>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="2"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="RogueLikeSynergyStack20012"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20020" Theme="2100">
+		<Comment>싸움꾼</Comment>
+		<DescComment>싸움꾼 영웅의 최대체력 +80%</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Fighter" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="Fighter">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Hp" StatValueType="PerValue" AddHpOnAddMaxHp="true" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>80</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20021" Theme="2100" Inherit="20020">
+		<Comment>싸움꾼</Comment>
+		<DescComment>싸움꾼 영웅의 최대체력 +40%[3], 싸움꾼 영웅이의 기본 스탯의 100%를 초과한 최대 체력 10%마다 피해량 5%[3] 증가(최대 100%)</DescComment>
+		
+		<DescParams>
+			<Const>100</Const>
+			<Const>10</Const>
+			<Const>10</Const>
+			<Attribute Name="Max" BaseValue="0">./WorldTriggers[1]/BuffInfo/BuffOptions[2]/BuffContents/AddStat</Attribute>
+		</DescParams>
+		
+		<Condition Synergy="Fighter" UnitCount="3"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Damage" StatValueType="PerValue" HaveToBind="true" Max="150" />
+					</BuffContents>
+
+					<Values>
+						<StatPer StatType="AdditionalHp">100</StatPer>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20030" Theme="2100">
+		<Comment>책략가</Comment>
+		<DescComment>책략가 영웅의 위협 +25</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Tactician" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="Tactician">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="DefPen" StatValueType="BaseValue" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>25</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20031" Theme="2100" Inherit="20030">
+		<Comment>책략가</Comment>
+		<DescComment>책략가 영웅의 위협 +40, 피해를 준 대상에게 3초간 피해량 감소 -30% 적용[상태이상 면역에 영향 받지 않음]</DescComment>
+		
+		<DescParams>
+			<Const>40</Const>
+			<Attribute Name="Time" BaseValue="0">./WorldTriggers[1]/BuffInfo/BuffOptions[2]/BuffContents/AddCustomBuff</Attribute>
+			<InnerText Mag="-1">./WorldTriggers[1]/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Tactician" UnitCount="4"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<BuffOptions>
+					<Values>
+						<FixedValue>65</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<DealDamage/>
+					</Conditions>
+
+					<Targets>
+						<Default/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddCustomBuff Key="ExtraTotalDamagePer" Time="3"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-30</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20040" Theme="2100">
+		<Comment>저격수</Comment>
+		<DescComment>저격수 영웅의 사거리 +1, 대상과의 거리당 주는 피해량 +5%</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText Mag="0.01">./WorldTriggers[1]/BuffInfo/BuffOptions[2]/Values/Dist</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Sniper" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="Sniper">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Range" StatValueType="BaseValue" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>1</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<BeforeDealDamage />
+					</Conditions>
+
+					<Targets>
+						<Default/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddDamagePer />
+					</BuffContents>
+
+					<Values>
+						<Dist>500</Dist>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20041" Theme="2100" Inherit="20040">
+		<Comment>저격수</Comment>
+		<DescComment>저격수 영웅의 사거리 +1, 대상과의 거리당 주는 피해량 +5%</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[3]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Sniper" UnitCount="3"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddCustomBuff Key="AddFirstAndEveryFifthAtkPer" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>300</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20050" Theme="2100">
+		<Comment>사수</Comment>
+		<DescComment>일반 피해 적중 시 2명에게 20%의 특수 피해</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Shooter" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="Shooter">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddCustomBuff Key="ShadowAttack" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>20</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20051" Theme="2100" Inherit="20050">
+		<Comment>사수</Comment>
+		<DescComment>일반 피해 적중 시 2명에게 20%의 특수 피해, 특수 피해량 +80%</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Shooter" UnitCount="3"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="SpecialDamageMul" StatValueType="BaseValue" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>80</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20060" Theme="2100">
+		<Comment>공허지배자</Comment>
+		<DescComment>진영에 배치 가능한 공허의 노예 소환</DescComment>
+		<Condition Synergy="VoidLord" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddCreature UnitID="720901"/>
+			</Actions>
+
+			<Values>
+				<LevelSum RogueLikeSynergyTarget="VoidLord">25</LevelSum>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveCreature ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<UnitLevelUp/>
+			</Conditions>
+			
+			<Actions>
+				<CheckCreature/>
+			</Actions>
+			
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20061" Theme="2100" Inherit="20060">
+		<Comment>공허지배자</Comment>
+		<DescComment>진영에 배치 가능한 공허의 노예 대신에 공허의 사제 소환</DescComment>
+		<Condition Synergy="VoidLord" UnitCount="3"/>
+		<WorldTriggers>
+			<Actions>
+				<AddCreature UnitID="720940"/>
+			</Actions>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20062" Theme="2100" Inherit="20060">
+		<Comment>공허지배자</Comment>
+		<DescComment>진영에 배치 가능한 공허의 파괴자 대신에 공허의 파괴자 소환</DescComment>
+		<Condition Synergy="VoidLord" UnitCount="4"/>
+		<WorldTriggers>
+			<Actions>
+				<AddCreature UnitID="720911"/>
+			</Actions>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20070" Theme="2100">
+		<Comment>소환사</Comment>
+		<DescComment>아군 사망 시 모든 아군의 피해량 +5%(최대 100%)[3]</DescComment>
+		
+		<DescParams>
+			<InnerText Mag="0.01">./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/RogueLikeSynergyStack20070</InnerText>
+			<Attribute Name="Max" BaseValue="0">./WorldTriggers[1]/BuffInfo/BuffOptions[1]/BuffContents/AddStat</Attribute>
+		</DescParams>
+		
+		<Condition Synergy="Summoner" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Damage" StatValueType="PerValue" HaveToBind="true" Max="100" />
+					</BuffContents>
+
+					<Values>
+						<RogueLikeSynergyStack20070>500</RogueLikeSynergyStack20070>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Dead />
+					</Conditions>
+
+					<Targets>
+						<Team Count="1" />
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<IncreaseCustomStack Name="RogueLikeSynergyStack20070" Type="World"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>1</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="RogueLikeSynergyStack20070"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20071" Theme="2100" Inherit="20070">
+		<Comment>소환사</Comment>
+		<DescComment>아군 사망 시 모든 아군의 피해량 +5%(최대 100%)[3], 아군 사망 시 모든 아군에게 30%의 확률로 절대방어 +1</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[3]/Probability</InnerText>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[3]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Summoner" UnitCount="3"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Dead />
+					</Conditions>
+					
+					<Probability>30</Probability>
+
+					<Targets>
+						<Team/>
+					</Targets>
+
+					<RangeInfo>
+						<RangeType>Infinity</RangeType>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddSuperShield/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>1</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20080" Theme="2100">
+		<Comment>마법검사</Comment>
+		<DescComment>전투 시작 시 주문력의 100%만큼 공격력 증가</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/MAtkPer</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="SpellSword" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="SpellSword">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<BattleStart />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Atk" StatValueType="Value" />
+					</BuffContents>
+
+					<Values>
+						<MAtkPer>100</MAtkPer>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20081" Theme="2100" Inherit="20080">
+		<Comment>마법검사</Comment>
+		<DescComment>마법 검사가 전투 시작 시 주문력의 100%만큼 공격력 증가, 마법 검사가 일반 공격시 대상에게 주문력 100%의 일반 피해 추가</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[2]/Values/MAtkPer</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="SpellSword" UnitCount="4"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<AfterAttack />
+					</Conditions>
+
+					<CoolTime>0</CoolTime>
+
+					<Targets>
+						<Default />
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<DealDamage With="NormalMagic"/>
+					</BuffContents>
+
+					<Values>
+						<MAtkPer>100</MAtkPer>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20090" Theme="2100">
+		<Comment>암살자</Comment>
+		<DescComment>암살자가 치명타 확률 +20%, 치명타 피해량 +30%</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Assassin" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="Assassin">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="HybridCriticalProb" StatValueType="BaseValue" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>20</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="HybridCriticalDamageMul" StatValueType="BaseValue" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>30</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20091" Theme="2100" Inherit="20090">
+		<Comment>암살자</Comment>
+		<DescComment>암살자가 치명타 확률 +20%, 치명타 피해량 +30%, 암살자가 치명타 확률 +50%, 100%를 초과한 치명타 확률 1%마다 치명타 피해량 2% 상승</DescComment>
+		
+		<DescParams>
+			<Const>50</Const>
+			<Const>100</Const>
+			<Const>1</Const>
+			<Const>2</Const>
+		</DescParams>
+		
+		<Condition Synergy="Assassin" UnitCount="4"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+					<Values>
+						<FixedValue>70</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<BuffContents>
+						<AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue" HaveToBind="true"/>
+						<AddStat StatType="CriticalDamageMul" StatValueType="BaseValue" HaveToBind="true"/>
+					</BuffContents>
+					
+					<Values>
+						<FixedValue>30</FixedValue>
+						<StatPer StatType="AdditionalCriticalProb">200</StatPer>
+						<StatPer StatType="AdditionalMCriticalProb">200</StatPer>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20100" Theme="2100">
+		<Comment>결속</Comment>
+		<DescComment>결속 영웅의 최종 공/주문력 +30%</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Linker" UnitCount="1"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="Linker">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Atk" StatValueType="TotalPerValue" />
+						<AddStat StatType="MAtk" StatValueType="TotalPerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>30</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20101" Theme="2100">
+		<Comment>결속</Comment>
+		<DescComment>효과 비활성화</DescComment>
+		<Desc></Desc>
+		<DisableSynergy>20100</DisableSynergy>
+		<SynergyCount>-1</SynergyCount>
+		<Condition Synergy="Linker" UnitCount="2"/>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20110" Theme="2100">
+		<Comment>지원가</Comment>
+		<DescComment>모든 아군 영웅들이 2초마다 최대 체력의 30% 치유</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/CoolTime</InnerText>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Supporter" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<DuringBattle />
+					</Conditions>
+
+					<CoolTime>3</CoolTime>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<ManaHeal ApplyFirstTick="true" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>30</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20111" Theme="2100" Inherit="20110">
+		<Comment>지원가</Comment>
+		<DescComment>모든 아군 영웅들이 2초마다 최대 체력의 30% 치유, 모든 아군 영웅들이 3초마다 마나 +30 충전</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[2]/CoolTime</InnerText>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[2]/Values/HpPer</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Supporter" UnitCount="4"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<DuringBattle />
+					</Conditions>
+
+					<CoolTime>2</CoolTime>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<Heal />
+					</BuffContents>
+
+					<Values>
+						<HpPer>30</HpPer>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20112" Theme="2100" Inherit="20110">
+		<Comment>지원가</Comment>
+		<DescComment>모든 아군 영웅들이 2초마다 최대 체력의 30% 치유, 모든 아군 영웅들이 3초마다 마나 +30 충전, 모든 아군 영웅들이 2초마다 1초간 무적</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[3]/CoolTime</InnerText>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[3]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Supporter" UnitCount="6"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<DuringBattle />
+					</Conditions>
+
+					<CoolTime>3</CoolTime>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<ManaHeal />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>30</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<DuringBattle />
+					</Conditions>
+
+					<CoolTime>2</CoolTime>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<SetInvincible />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>1</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20120" Theme="2100">
+		<Comment>주문술사</Comment>
+		<DescComment>주문술사가 전투 시작 시 주문력 300%의 쉴드 획득</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/MAtkPer</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Caster" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="Caster">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<BattleStart />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddShield />
+					</BuffContents>
+
+					<Values>
+						<MAtkPer>300</MAtkPer>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20121" Theme="2100" Inherit="20120">
+		<Comment>주문술사</Comment>
+		<DescComment>주문술사가 전투 시작 시 주문력 100%의 쉴드 획득, 주문술사 영웅이 적 처치 시 가장 가까운 다른 적에게 주문력 300%의 스킬 피해를 주는 마법 폭발 발생</DescComment>
+		
+		<DescParams>
+			<Const>300</Const>
+		</DescParams>
+		
+		<Condition Synergy="Caster" UnitCount="3"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<KillEnemy />
+					</Conditions>
+
+					<Targets>
+						<Self />
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<UseSkill SkillID="9420121"/>
+					</BuffContents>
+
+					<Values>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20130" Theme="2100">
+		<Comment>돌격대</Comment>
+		<DescComment>전투 시작 시 돌격대 영웅이 4초간 받는 피해량 -40%[4], 주는 피해량 + 40%[3]</DescComment>
+		
+		<DescParams>
+			<Attribute Name="Time" BaseValue="0">./WorldTriggers[1]/BuffInfo/BuffOptions[1]/BuffContents/AddStat</Attribute>
+			<InnerText Mag="-1">./WorldTriggers[1]/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="ShockTrooper" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="ShockTrooper">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<BattleStart />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Damage" StatValueType="PerValue" Time="4" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>40</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<BattleStart />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="TakeDamage" StatValueType="TotalPerValue" Time="4" IgnoreCCRatio="true" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-40</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20131" Theme="2100" Inherit="20130">
+		<Comment>돌격대</Comment>
+		<DescComment>전투 시작 시 돌격대 영웅이 4초간 받는 피해량 -40%[4], 주는 피해량 + 40%[3], 전투에서 돌격대 영웅이 이동한 1칸 마다 피해량 +20%(최대 100%)[3]</DescComment>
+		
+		<DescParams>
+			<Const>1</Const>
+			<InnerText Mag="0.01">./WorldTriggers[1]/BuffInfo/BuffOptions[3]/Values/RogueLikeSynergyStack20131</InnerText>
+			<Attribute Name="Max">./WorldTriggers[1]/BuffInfo/BuffOptions[3]/BuffContents/AddStat</Attribute>
+		</DescParams>
+		
+		<Condition Synergy="ShockTrooper" UnitCount="3"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Damage" StatValueType="PerValue" HaveToBind="true" Max="100" />
+					</BuffContents>
+
+					<Values>
+						<RogueLikeSynergyStack20131>2000</RogueLikeSynergyStack20131>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<TileMoveUpdate />
+						<Count Count="5" />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<IncreaseCustomStack Name="RogueLikeSynergyStack20131" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>1</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<BattleStart />
+						<BattleEnd />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<SetCustomStack Name="RogueLikeSynergyStack20131" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>0</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20140" Theme="2100">
+		<Comment>라이벌</Comment>
+		<DescComment>라이벌 영웅의 공격력/주문력 +80%[3]</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Rival" UnitCount="1"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="Rival">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Atk" StatValueType="PerValue" />
+						<AddStat StatType="MAtk" StatValueType="PerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>80</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20141" Theme="2100">
+		<Comment>라이벌</Comment>
+		<DescComment>1 활성화 효과 제거, 라이벌 영웅이 받는 피해량 +30%[4], 공격 횟수 +1(70%의 피해)</DescComment>
+		<DisableSynergy>20140</DisableSynergy>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="Rival" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="Rival">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="TakeDamage" StatValueType="TotalPerValue" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>30</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddCustomBuff Key="AddAtkCountOneAndDamagePer" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>70</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20150" Theme="2100">
+		<Comment>연쇄마법사</Comment>
+		<DescComment>연쇄마법사의 공격속도 + 50%[3], 주문력 + 50%[3]</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="ChainWizard" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="ChainWizard">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="AttackSpeed" StatValueType="PerValue"/>
+						<AddStat StatType="MAtk" StatValueType="PerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>50</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20151" Theme="2100" Inherit="20150">
+		<Comment>연쇄마법사</Comment>
+		<DescComment>연쇄마법사의 공격속도 + 50%[3], 주문력 + 50%[3], 연쇄 마법사가 스킬 사용 시 마다 주문 치명타 확률/피해량 +5%(최대 150%)</DescComment>
+		
+		<DescParams>
+			<InnerText Mag="0.01">./WorldTriggers[1]/BuffInfo/BuffOptions[2]/Values/RogueLikeSynergyStack20150</InnerText>
+			<Attribute Name="Max" BaseValue="0">./WorldTriggers[1]/BuffInfo/BuffOptions[2]/BuffContents/AddStat[1]</Attribute>
+		</DescParams>
+		
+		<Condition Synergy="ChainWizard" UnitCount="4"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="MCriticalProb" StatValueType="BaseValue" HaveToBind="true" Max="150" />
+						<AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue" HaveToBind="true" Max="150" />
+					</BuffContents>
+
+					<Values>
+						<RogueLikeSynergyStack20150>500</RogueLikeSynergyStack20150>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<CastSkill />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<IncreaseCustomStack Name="RogueLikeSynergyStack20150" Max="30" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>1</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+
+	<RogueLikeSynergy ID="20160" Theme="2100">
+		<Comment>토벌대</Comment>
+		<DescComment>토벌대 영웅의 체력 +30%[3] , 주문력 +60%[3]</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="RaidTrooper" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo>
+				<Checker Name="RaidTrooper">RogueLikeSynergyTarget</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Hp" StatValueType="PerValue" AddHpOnAddMaxHp="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>30</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="MAtk" StatValueType="PerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>60</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+	<RogueLikeSynergy ID="20161" Theme="2100" Inherit="20160">
+		<Comment>토벌대</Comment>
+		<DescComment>토벌대 영웅의 체력 +30%[3] , 주문력 +60%[3], 가장 레벨이 높은 토벌대를 대장으로 설정, 대장은 최종 피해량 +30%[4], 받는 피해량 -30%[4]</DescComment>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions[3]/Values/FixedValue</InnerText>
+			<InnerText Mag="-1">./WorldTriggers[1]/BuffInfo/BuffOptions[4]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<Condition Synergy="RaidTrooper" UnitCount="3"/>
+		<WorldTriggers>
+			<BuffInfo>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<BattleStart />
+						<MeIsBestTierUnitInSynergy Synergy="RaidTrooper" />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Damage" StatValueType="TotalPerValue" />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>30</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<BattleStart />
+						<MeIsBestTierUnitInSynergy Synergy="RaidTrooper" />
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-30</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+</RogueLikeSynergies>

@@ -1,0 +1,797 @@
+<BuffDatas>
+    <BuffData ID="410001">
+        <Comment>제국의 대검</Comment>
+        <DescComment>모든 유닛의 공격력 20% 증가</DescComment>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText>./AtkPer</InnerText>
+        </DescParams>
+        
+        <AtkPer>20</AtkPer>
+    </BuffData>
+    <BuffData ID="410002" Inherit="410001">
+        <Comment>킹 제국의 대검</Comment>
+        <DescComment>모든 유닛의 공격력 40% 증가</DescComment>
+        <AtkPer>40</AtkPer>
+    </BuffData>
+    <BuffData ID="410003" Inherit="410001">
+        <Comment>갓 제국의 대검</Comment>
+        <DescComment>모든 유닛의 공격력 60% 증가</DescComment>
+        <AtkPer>60</AtkPer>
+    </BuffData>
+    <BuffData ID="410004" Inherit="410001">
+        <Comment>킹갓 제국의 대검</Comment>
+        <DescComment>모든 유닛의 공격력 80% 증가</DescComment>
+        <AtkPer>80</AtkPer>
+    </BuffData>
+
+    <BuffData ID="410011">
+        <Comment>왕국의 갑옷</Comment>
+        <DescComment>모든 유닛의 체력 20% 증가</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./HpPer</InnerText>
+        </DescParams>
+        
+        <HpPer>20</HpPer>
+    </BuffData>
+    <BuffData ID="410012" Inherit="410011">
+        <Comment>킹 왕국의 갑옷</Comment>
+        <DescComment>모든 유닛의 체력 40% 증가</DescComment>
+        <HpPer>40</HpPer>
+    </BuffData>
+    <BuffData ID="410013" Inherit="410011">
+        <Comment>갓 왕국의 갑옷</Comment>
+        <DescComment>모든 유닛의 체력 60% 증가</DescComment>
+        <HpPer>60</HpPer>
+    </BuffData>
+    <BuffData ID="410014" Inherit="410011">
+        <Comment>킹갓 왕국의 갑옷</Comment>
+        <DescComment>모든 유닛의 체력 80% 증가</DescComment>
+        <HpPer>80</HpPer>
+    </BuffData>
+
+    <BuffData ID="410021">
+        <Comment>영원숲의 활</Comment>
+        <DescComment>모든 유닛의 공격속도 20% 증가</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./AttackSpeedPer</InnerText>
+        </DescParams>
+        
+        <AttackSpeedPer>20</AttackSpeedPer>
+    </BuffData>
+    <BuffData ID="410022" Inherit="410021">
+        <Comment>킹 영원숲의 활</Comment>
+        <DescComment>모든 유닛의 공격속도 40% 증가</DescComment>
+        <AttackSpeedPer>40</AttackSpeedPer>
+    </BuffData>
+    <BuffData ID="410023" Inherit="410021">
+        <Comment>갓 영원숲의 활</Comment>
+        <DescComment>모든 유닛의 공격속도 60% 증가</DescComment>
+        <AttackSpeedPer>60</AttackSpeedPer>
+    </BuffData>
+    <BuffData ID="410024" Inherit="410021">
+        <Comment>킹갓 영원숲의 활</Comment>
+        <DescComment>모든 유닛의 공격속도 80% 증가</DescComment>
+        <AttackSpeedPer>80</AttackSpeedPer>
+    </BuffData>
+
+    <BuffData ID="410031">
+        <Comment>설원의 지팡이</Comment>
+        <DescComment>모든 유닛의 주문력 20% 증가</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./MAtkPer</InnerText>
+        </DescParams>
+        
+        <MAtkPer>20</MAtkPer>
+    </BuffData>
+    <BuffData ID="410032" Inherit="410031">
+        <Comment>킹 설원의 지팡이</Comment>
+        <DescComment>모든 유닛의 주문력 40% 증가</DescComment>
+        <MAtkPer>40</MAtkPer>
+    </BuffData>
+    <BuffData ID="410033" Inherit="410031">
+        <Comment>갓 설원의 지팡이</Comment>
+        <DescComment>모든 유닛의 주문력 60% 증가</DescComment>
+        <MAtkPer>60</MAtkPer>
+    </BuffData>
+    <BuffData ID="410034" Inherit="410031">
+        <Comment>킹갓 설원의 지팡이</Comment>
+        <DescComment>모든 유닛의 주문력 80% 증가</DescComment>
+        <MAtkPer>80</MAtkPer>
+    </BuffData>
+    
+	<BuffData ID="413171">
+        <Comment>중원의 서약</Comment>
+        <DescComment>서로 다른 중부 영웅의 수(n)만큼 모든 영웅의 공격 횟수 +1, 피해량 +(6 * n)%, 방어력 +(25 * n)</DescComment>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <Const>1</Const>
+            <InnerText Mag="0.01">./BuffOptions[1]/Values/FieldUnitCount</InnerText>
+            <InnerText Mag="0.01">./BuffOptions[2]/Values/FieldUnitCount</InnerText>
+            <Const>6</Const>
+        </DescParams>
+
+        <!-- 공격 횟수 증가 -->
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddCustomBuff Key="AddAtkCountOneAndDamagePer" />
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="Central" Unique="true" Max="36">600</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+        <!-- 방어력 증가 -->
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Def" StatValueType="Value" />
+                <AddStat StatType="MDef" StatValueType="Value" />
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="Central" Unique="true" Max="150">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+	</BuffData>
+    <BuffData ID="413172" Inherit="413171">
+        <Comment>킹 중원의 서약</Comment>
+        <DescComment>서로 다른 중부 영웅의 수(n)만큼 모든 영웅의 공격 횟수 +1, 피해량 +(9 * n)%, 방어력 +(50 * n)</DescComment>
+
+        <!-- 공격 횟수 증가 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="Central" Unique="true" Max="54">900</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+        <!-- 방어력 증가 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="Central" Unique="true" Max="300">5000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413173" Inherit="413171">
+        <Comment>갓 중원의 서약</Comment>
+        <DescComment>서로 다른 중부 영웅의 수(n)만큼 모든 영웅의 공격 횟수 +1, 피해량 +(12 * n)%, 방어력 +(75 * n)</DescComment>
+
+        <!-- 공격 횟수 증가 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="Central" Unique="true" Max="72">1200</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+        <!-- 방어력 증가 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="Central" Unique="true" Max="450">7500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413174" Inherit="413171">
+        <Comment>킹갓 중원의 서약</Comment>
+        <DescComment>서로 다른 중부 영웅의 수(n)만큼 모든 영웅의 공격 횟수 +1, 피해량 +(15 * n)%, 방어력 +(100 * n)</DescComment>
+
+        <!-- 공격 횟수 증가 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="Central" Unique="true" Max="90">1500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+        <!-- 방어력 증가 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="Central" Unique="true" Max="600">10000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="413181">
+        <Comment>천상의 잔</Comment>
+		<DescComment>서로 다른 남부 영웅의 수(n)만큼 모든 영웅에게 절대 방어 추가, 아군이 절대방어를 잃을 때마다 피해량 증가</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <Const>1</Const>
+            <InnerText Mag="0.01">./BuffOptions[4]/Values/Artifact_13180_DamagePer</InnerText>
+        </DescParams>
+
+        <!-- 절대 방어 지급 -->
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddSuperShield Max="6" />
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="South" Unique="true">100</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+        <!-- 피해량 증가 CustomStack 초기화 -->
+        <BuffOptions>
+            <Conditions>
+                <BattleStart/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <SetCustomStack Name="Artifact_13180_DamagePer" Type="World"/>
+            </BuffContents>
+            
+            <Values>
+                <FixedValue>0</FixedValue>
+            </Values>
+        </BuffOptions>
+        <!-- 피해량 증가 CustomStack -->
+        <BuffOptions>
+            <Conditions>
+                <SuperShieldBroken />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <IncreaseCustomStack Name="Artifact_13180_DamagePer" Max="30" Type="World"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>1</FixedValue>
+            </Values>
+        </BuffOptions>
+        <!-- 피해량 증가 -->
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue" MaxOverlapCount="30" HaveToBind="true" />
+            </BuffContents>
+
+            <Values>
+                <Artifact_13180_DamagePer>150</Artifact_13180_DamagePer>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413182" Inherit="413181">
+        <Comment>킹 천상의 잔</Comment>
+		<DescComment>서로 다른 남부 영웅의 수(n)만큼 모든 영웅에게 절대 방어 추가, 아군이 절대방어를 잃을 때마다 피해량 증가</DescComment>
+
+        <!-- 절대 방어 지급 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 피해량 증가 CustomStack 초기화 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 피해량 증가 CustomStack -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 피해량 증가 -->
+        <BuffOptions>
+            <Values>
+                <Artifact_13180_DamagePer>200</Artifact_13180_DamagePer>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413183" Inherit="413181">
+        <Comment>갓 천상의 잔</Comment>
+		<DescComment>서로 다른 남부 영웅의 수(n)만큼 모든 영웅에게 절대 방어 추가, 아군이 절대방어를 잃을 때마다 피해량 증가</DescComment>
+
+        <!-- 절대 방어 지급 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 피해량 증가 CustomStack 초기화 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 피해량 증가 CustomStack -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 피해량 증가 -->
+        <BuffOptions>
+            <Values>
+                <Artifact_13180_DamagePer>250</Artifact_13180_DamagePer>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413184" Inherit="413181">
+        <Comment>킹갓 천상의 잔</Comment>
+        <DescComment>서로 다른 남부 영웅의 수(n)만큼 모든 영웅에게 절대 방어 추가, 아군이 절대방어를 잃을 때마다 피해량 증가</DescComment>
+
+        <!-- 절대 방어 지급 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 피해량 증가 CustomStack 초기화-->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 피해량 증가 CustomStack -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 피해량 증가 -->
+        <BuffOptions>
+            <Values>
+                <Artifact_13180_DamagePer>300</Artifact_13180_DamagePer>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="413191">
+        <Comment>차가운 뼈의 유산</Comment>
+        <DescComment>서로 다른 북부 영웅의 수(n)만큼 (2 + n)초간 모든 영웅 상태이상 면역 및 받는 피해 30% 감소</DescComment>
+
+        <DescParams>
+            <InnerText>./BuffOptions/Values/FixedValue</InnerText>
+            <Attribute Name="Value" Mag="-1">./BuffOptions/BuffContents/AddCustomBuffCalcTime[2]</Attribute>
+            <InnerText Mag="0.01">./BuffOptions/Values/FieldUnitCount</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddCustomBuffCalcTime Key="TotalCCRatioPer" Value="-100" />
+                <AddCustomBuffCalcTime Key="TotalTakeDamagePer" Value="-30" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>2</FixedValue>
+                <FieldUnitCount Region="North" Unique="true" Max="6">100</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413192" Inherit="413191">
+        <Comment>킹 차가운 뼈의 유산</Comment>
+        <DescComment>서로 다른 북부 영웅의 수(n)만큼 (2 + n)초간 모든 영웅 상태이상 면역 및 받는 피해 40% 감소</DescComment>
+        
+        <BuffOptions>
+            <BuffContents>
+                <AddCustomBuffCalcTime Key="TotalCCRatioPer" Value="-100" />
+                <AddCustomBuffCalcTime Key="TotalTakeDamagePer" Value="-40" />
+            </BuffContents>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413193" Inherit="413191">
+        <Comment>갓 차가운 뼈의 유산</Comment>
+        <DescComment>서로 다른 북부 영웅의 수(n)만큼 (2 + n)초간 모든 영웅 상태이상 면역 및 받는 피해 50% 감소</DescComment>
+
+        <BuffOptions>
+            <BuffContents>
+                <AddCustomBuffCalcTime Key="TotalCCRatioPer" Value="-100" />
+                <AddCustomBuffCalcTime Key="TotalTakeDamagePer" Value="-50" />
+            </BuffContents>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413194" Inherit="413191">
+        <Comment>킹갓 차가운 뼈의 유산</Comment>
+        <DescComment>서로 다른 북부 영웅의 수(n)만큼 (2 + n)초간 모든 영웅 상태이상 면역 및 받는 피해 60% 감소</DescComment>
+
+        <BuffOptions>
+            <BuffContents>
+                <AddCustomBuffCalcTime Key="TotalCCRatioPer" Value="-100" />
+                <AddCustomBuffCalcTime Key="TotalTakeDamagePer" Value="-60" />
+            </BuffContents>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="413201">
+        <Comment>오행의 종</Comment>
+        <DescComment>서로 다른 동부 영웅의 수(n)만큼 (10 - n)초 후 모든 영웅 체력 +20%, 공격력/주문력 +60%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <Const>10</Const>
+            <InnerText>./BuffOptions[3]/Values/FixedValue</InnerText>
+            <InnerText>./BuffOptions[4]/Values/FixedValue</InnerText>
+            <InnerText Mag="0.01">./BuffOptions[1]/Values/FieldUnitCount</InnerText>
+        </DescParams>
+        
+        <!-- 서로 다른 영웅 수만큼 최초 스택 부여 -->
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <SetCustomStack Name="Stack_BuffData_413200"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="East" Unique="true" Max="6">100</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+        <!-- 스택 매초 증가 -->
+        <BuffOptions>
+            <Conditions>
+                <DuringBattle />
+                <UnderStack StackName="Stack_BuffData_413200" Value="10" />
+            </Conditions>
+
+            <CoolTime>1</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <IncreaseCustomStack Max="10" Name="Stack_BuffData_413200" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>1</FixedValue>
+            </Values>
+
+            <ResetCounters>false</ResetCounters>
+        </BuffOptions>
+        <!-- 체력 증가 -->
+        <BuffOptions>
+            <Conditions>
+                <DuringBattle />
+                <OverStack StackName="Stack_BuffData_413200" Value="9" />
+            </Conditions>
+
+            <CoolTime>9999</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" AddHpOnAddMaxHp="true" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>20</FixedValue>
+            </Values>
+        </BuffOptions>
+        <!-- 공격력/주문력 증가 -->
+        <BuffOptions>
+            <Conditions>
+                <DuringBattle />
+                <OverStack StackName="Stack_BuffData_413200" Value="9" />
+            </Conditions>
+            
+            <CoolTime>9999</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Atk" StatValueType="PerValue" />
+                <AddStat StatType="MAtk" StatValueType="PerValue" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>60</FixedValue>
+            </Values>
+        </BuffOptions>
+        <!-- 배틀 종료시 스택 초기화 -->
+        <BuffOptions>
+            <Conditions>
+                <BattleEnd />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <SetCustomStack Name="Stack_BuffData_413200" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>0</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413202" Inherit="413201">
+        <Comment>킹 오행의 종</Comment>
+        <DescComment>서로 다른 동부 영웅의 수(n)만큼 (10 - n)초 후 모든 영웅 체력 +40%, 공격력/주문력 +90%</DescComment>
+        
+        <!-- 서로 다른 영웅 수만큼 최초 스택 부여 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 스택 매초 증가 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 체력 증가 -->
+        <BuffOptions>
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+        <!-- 공격력/주문력 증가 -->
+        <BuffOptions>
+            <Values>
+                <FixedValue>90</FixedValue>
+            </Values>
+        </BuffOptions>
+        <!-- 배틀 종료시 스택 초기화 -->
+        <BuffOptions>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413203" Inherit="413201">
+        <Comment>갓 오행의 종</Comment>
+        <DescComment>서로 다른 동부 영웅의 수(n)만큼 (10 - n)초 후 모든 영웅 체력 +60%, 공격력/주문력 +120%</DescComment>
+
+        <!-- 서로 다른 영웅 수만큼 최초 스택 부여 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 스택 매초 증가 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 체력 증가 -->
+        <BuffOptions>
+            <Values>
+                <FixedValue>60</FixedValue>
+            </Values>
+        </BuffOptions>
+        <!-- 공격력/주문력 증가 -->
+        <BuffOptions>
+            <Values>
+                <FixedValue>120</FixedValue>
+            </Values>
+        </BuffOptions>
+        <!-- 배틀 종료시 스택 초기화 -->
+        <BuffOptions>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413204" Inherit="413201">
+        <Comment>킹갓 오행의 종</Comment>
+        <DescComment>서로 다른 동부 영웅의 수(n)만큼 (10 - n)초 후 모든 영웅 체력 +80%, 공격력/주문력 +150%</DescComment>
+
+        <!-- 서로 다른 영웅 수만큼 최초 스택 부여 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 스택 매초 증가 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 체력 증가 -->
+        <BuffOptions>
+            <Values>
+                <FixedValue>80</FixedValue>
+            </Values>
+        </BuffOptions>
+        <!-- 공격력/주문력 증가 -->
+        <BuffOptions>
+            <Values>
+                <FixedValue>150</FixedValue>
+            </Values>
+        </BuffOptions>
+        <!-- 배틀 종료시 스택 초기화 -->
+        <BuffOptions>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="413211">
+        <Comment>자연의 규칙</Comment>
+        <DescComment>서로 다른 서부 영웅의 수(n)만큼 전방 2열 영웅의 최종 받는 피해량 -4 * n%
+            후방 2열 영웅의 최종 주는 피해량 +3 * n%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText Mag="-0.01">./BuffOptions[1]/Values/FieldUnitCount</InnerText>
+            <InnerText Mag="0.01">./BuffOptions[2]/Values/FieldUnitCount</InnerText>
+        </DescParams>
+
+        <!-- 전방 2열 받는 피해량 감소 -->
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+                <TilePosY Type="GreaterEqual" Value="2" />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true" />
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="West" Unique="true" Min="-24">-400</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+        <!-- 후방 2열 주는 피해량 증가 -->
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+                <TilePosY Type="Less" Value="2" />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="TotalPerValue" />
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="West" Unique="true" Max="18">300</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413212" Inherit="413211">
+        <Comment>킹 자연의 규칙</Comment>
+        <DescComment>서로 다른 서부 영웅의 수(n)만큼 전방 2열 영웅의 최종 받는 피해량 -6 * n%
+            후방 2열 영웅의 최종 주는 피해량 +4 * n%</DescComment>
+        
+        <!-- 전방 2열 받는 피해량 감소 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="West" Unique="true" Min="-36">-600</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+        <!-- 후방 2열 주는 피해량 증가 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="West" Unique="true" Max="24">400</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413213" Inherit="413211">
+        <Comment>갓 자연의 규칙</Comment>
+        <DescComment>서로 다른 서부 영웅의 수(n)만큼 전방 2열 영웅의 최종 받는 피해량 -8 * n%
+            후방 2열 영웅의 최종 주는 피해량 +5 * n%</DescComment>
+
+        <!-- 전방 2열 받는 피해량 감소 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="West" Unique="true" Min="-48">-800</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+        <!-- 후방 2열 주는 피해량 증가 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="West" Unique="true" Max="30">500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="413214" Inherit="413211">
+        <Comment>킹갓 자연의 규칙</Comment>
+        <DescComment>서로 다른 서부 영웅의 수(n)만큼 전방 2열 영웅의 최종 받는 피해량 -10 * n%
+            후방 2열 영웅의 최종 주는 피해량 +6 * n%</DescComment>
+
+        <!-- 전방 2열 받는 피해량 감소 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="West" Unique="true" Min="-60">-1000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+        <!-- 후방 2열 주는 피해량 증가 -->
+        <BuffOptions>
+            <Values>
+                <FieldUnitCount Region="West" Unique="true" Max="36">600</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="415014">
+        <Comment>계승자의 휘장</Comment>
+        <DescComment>습격 및 원정에서 선발 영웅의 공격속도 +40% (선발 영웅이 없을 경우 효과없음)</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <!-- 공격 속도 증가 -->
+        <BuffOptions>
+            <Conditions>
+                <Once />
+                <IsInvasionOrEventBattle />
+                <MeIsFirstComerUnit />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="AttackSpeed" StatValueType="TotalPerValue" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+</BuffDatas>

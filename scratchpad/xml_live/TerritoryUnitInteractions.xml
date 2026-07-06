@@ -1,0 +1,161 @@
+<TerritoryUnitInteractions>
+    <TerritoryUnitInteraction>
+        <Type>Default</Type>
+        <Content>Balloon</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_00</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10280" With="10390" />
+            <Unit ID="10390" With="10300" />
+            <Unit ID="10030" With="10040" />
+            <Unit ID="10040" With="10030,10020,10090,10210" />
+            <Unit ID="10050" With="10040,10020" />
+            <Unit ID="10090" With="10030,10040,10020" />
+            <Unit ID="10210" With="10090" />
+            <Unit ID="10480" With="10030,10040,10050" />
+            <Unit ID="10320" With="10150" />
+            <Unit ID="10150" With="10090,10320" />
+            <Unit ID="10220" With="10020" />
+        </Units>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_01</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10090" With="10220" />
+            <Unit ID="10150" With="10220" />
+            <Unit ID="10220" With="10090" />
+        </Units>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_02</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10280" With="10310" />
+            <Unit ID="10030" With="10050" />
+            <Unit ID="10050" With="10030,10210,10090" />
+            <Unit ID="10210" With="10050" />
+            <Unit ID="10310" With="10280" />
+        </Units>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_03</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10040" With="10640" />
+            <Unit ID="10020" With="10640" />
+            <Unit ID="10090" With="10640" />
+            <Unit ID="10210" With="10480" />
+            <Unit ID="10150" With="10640" />
+        </Units>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_04</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10280" With="10020,10640" />
+            <Unit ID="10480" With="10210" />
+            <Unit ID="10320" With="10220,10640" />
+        </Units>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_05</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10280" With="10090,10190" />
+            <Unit ID="10390" With="10150" />
+            <Unit ID="10030" With="10300" />
+            <Unit ID="10020" With="10220" />
+            <Unit ID="10090" With="10280" />
+            <Unit ID="10640" With="10020" />
+            <Unit ID="10220" With="10640" />
+        </Units>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_06</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10020" With="10280" />
+            <Unit ID="10210" With="10020" />
+            <Unit ID="10480" With="10020" />
+            <Unit ID="10640" With="10280" />
+        </Units>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_07</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10280" With="10390" />
+            <Unit ID="10390" With="10280" />
+            <Unit ID="10040" With="10480" />
+            <Unit ID="10090" With="10210,10480,10150" />
+            <Unit ID="10150" With="10090" />
+            <Unit ID="10300" With="10390" />
+        </Units>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_08</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10280" With="10300,10190,10240" />
+            <Unit ID="10030" With="10280,10050" />
+            <Unit ID="10040" With="10050" />
+            <Unit ID="10090" With="10210" />
+            <Unit ID="10210" With="10480" />
+            <Unit ID="10480" With="10030" />
+        </Units>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_09</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10280" With="10030,10020" />
+            <Unit ID="10210" With="10090" />
+            <Unit ID="10480" With="10210" />
+        </Units>
+    </TerritoryUnitInteraction>
+    
+    <TerritoryUnitInteraction>
+        <Type>Emoji</Type>
+        <Content>Emoji_Balloon_10</Content>
+        <PositionX>18</PositionX>
+        <PositionY Mul="Height">0.9</PositionY>
+        <Units>
+            <Unit ID="10040" With="10030" />
+        </Units>
+    </TerritoryUnitInteraction>
+</TerritoryUnitInteractions>

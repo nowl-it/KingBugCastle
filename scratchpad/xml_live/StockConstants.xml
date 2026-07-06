@@ -1,0 +1,93 @@
+<StockConstants>
+    <EventData>
+        <RoundHour>1</RoundHour>
+        <MaxRound>486</MaxRound>
+        <StartAt>20251022_180000</StartAt>
+        <EndAt>20251112_000000</EndAt>
+        <ShopEndAt>20251118_235900</ShopEndAt>
+        <HintTokenCost>100</HintTokenCost>
+        <DailyTokenWage>10000</DailyTokenWage>
+        <RoundBuyLimit>10</RoundBuyLimit>
+        <SettlementTimeStart>5900</SettlementTimeStart>
+        <SettlementTimeEnd>0000</SettlementTimeEnd>
+    </EventData>
+    <StockDatas>
+        <StockData ID="1">
+            <Name>StockName_1</Name>
+            <NameComment>길서스 무기고</NameComment>
+            <Portrait>NPC_002</Portrait>
+        </StockData>
+        <StockData ID="2">
+            <Name>StockName_2</Name>
+            <NameComment>황금 고블린</NameComment>
+            <Portrait>NPC_010</Portrait>
+        </StockData>
+        <StockData ID="3">
+            <Name>StockName_3</Name>
+            <NameComment>앨리스 잡화점</NameComment>
+            <Portrait>NPC_004</Portrait>
+        </StockData>
+        <StockData ID="4">
+            <Name>StockName_4</Name>
+            <NameComment>암시장</NameComment>
+            <Portrait>NPC_006</Portrait>
+        </StockData>
+        <StockData ID="5">
+            <Name>StockName_5</Name>
+            <NameComment>아람 상회</NameComment>
+            <Portrait>NPC_011</Portrait>
+        </StockData>
+    </StockDatas>
+    <MissionRewards>
+        <MissionReward HighestTokenRequired="30000">
+            <Reward Type="Key" ID="370" Count="30" Index="0"/>
+            <Reward Type="Gold" Count="100000" Index="1"/>
+            <Reward Type="UnitExpItem" Count="3000" Index="2"/>
+        </MissionReward>
+        <MissionReward HighestTokenRequired="60000">
+            <Reward Type="Cash" Count="200" Index="3"/>
+            <Reward Type="NewUnitGacha" Count="1" Index="4"/>
+            <Reward Type="InventoryItem" ID="3101" Count="5" Index="5"/>
+        </MissionReward>
+        <MissionReward HighestTokenRequired="90000">
+            <Reward Type="UnitSoulItem" ID="130" Count="300" Index="6"/>
+            <Reward Type="InventoryItem" ID="4101" Count="5" Index="7"/>
+            <Reward Type="Key" ID="302" Count="10" Index="8"/>
+        </MissionReward>
+        <MissionReward HighestTokenRequired="120000">
+            <Reward Type="InventoryItem" ID="3200" Count="2" Index="9"/>
+            <Reward Type="Artifact" ID="902" Count="5" Index="10"/>
+            <Reward Type="Key" ID="352" Count="10" Index="11"/>
+        </MissionReward>
+        <MissionReward HighestTokenRequired="150000">
+            <Reward Type="Key" ID="390" Count="10" Index="12"/>
+            <Reward Type="Treasure_Special" Count="1" Index="13"/>
+        </MissionReward>
+    </MissionRewards>
+    <PremiumMissionRewards>
+        <MissionReward HighestTokenRequired="30000">
+            <Reward Type="Key" ID="371" Count="30" Index="0"/>
+            <Reward Type="Gold" Count="200000" Index="1"/>
+            <Reward Type="UnitExpItem" Count="5000" Index="2"/>
+        </MissionReward>
+        <MissionReward HighestTokenRequired="60000">
+            <Reward Type="Cash" Count="300" Index="3"/>
+            <Reward Type="NewUnitGacha" Count="2" Index="4"/>
+            <Reward Type="InventoryItem" ID="3102" Count="5" Index="5"/>
+        </MissionReward>
+        <MissionReward HighestTokenRequired="90000">
+            <Reward Type="UnitSoulItem" ID="130" Count="500" Index="6"/>
+            <Reward Type="InventoryItem" ID="4102" Count="5" Index="7"/>
+            <Reward Type="Key" ID="305" Count="20" Index="8"/>
+        </MissionReward>
+        <MissionReward HighestTokenRequired="120000">
+            <Reward Type="InventoryItem" ID="3200" Count="3" Index="9"/>
+            <Reward Type="Artifact" ID="903" Count="5" Index="10"/>
+            <Reward Type="Key" ID="352" Count="20" Index="11"/>
+        </MissionReward>
+        <MissionReward HighestTokenRequired="150000">
+            <Reward Type="Key" ID="390" Count="20" Index="12"/>
+            <Reward Type="Treasure_Special" Count="1" Index="13"/>
+        </MissionReward>
+    </PremiumMissionRewards>
+</StockConstants>

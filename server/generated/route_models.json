@@ -1,0 +1,1439 @@
+{
+ "/accessory": {
+  "method": "AccessoryEquip",
+  "response": "AccessoryResultResponseModel",
+  "score": 1.0
+ },
+ "/accessory/add-exp": {
+  "method": "AccessoryAddExp",
+  "response": "AccessoryResultResponseModel",
+  "score": 1.5
+ },
+ "/accessory/change-sub-stat": {
+  "method": "AccessoryChangeSubStat",
+  "response": "AccessoryResultResponseModel",
+  "score": 1.5
+ },
+ "/accessory/dismantle": {
+  "method": "AccessoryDismantle",
+  "response": "AccessoryResultResponseModel",
+  "score": 1.5
+ },
+ "/accessory/equip-tutorial": {
+  "method": "AccessoryEquipTutorial",
+  "response": "AccessoryResultResponseModel",
+  "score": 1.5
+ },
+ "/accessory/preset": {
+  "method": "AccessorySetPreset",
+  "response": "AccessoryPresetResponseModel",
+  "score": 1.17
+ },
+ "/accessory/release-equip": {
+  "method": "AccessoryReleaseEquip",
+  "response": "AccessoryResultResponseModel",
+  "score": 1.5
+ },
+ "/accessory/set-preset": {
+  "method": "AccessorySetPreset",
+  "response": "AccessoryPresetResponseModel",
+  "score": 1.5
+ },
+ "/accessory/set-preset-name": {
+  "method": "AccessorySetPresetName",
+  "response": "AccessoryPresetResponseModel",
+  "score": 1.5
+ },
+ "/accessory/set-state-all": {
+  "method": "AccessorySetState",
+  "response": "AccessoryResultResponseModel",
+  "score": 1.38
+ },
+ "/artifact/crafting": {
+  "method": "ArtifactCrafting",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.5
+ },
+ "/artifact/dismantle": {
+  "method": "ArtifactDismantle",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.5
+ },
+ "/artifact/equip": {
+  "method": "ArtifactEquip",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.5
+ },
+ "/artifact/fetch-reroll": {
+  "method": "ArtifactFetchReroll",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.5
+ },
+ "/artifact/gacha": {
+  "method": "ArtifactGachaTest",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.17
+ },
+ "/artifact/inventory": {
+  "method": "FetchArtifactInventory",
+  "response": "ArtifactInventoryResponseModel",
+  "score": 1.17
+ },
+ "/artifact/merge": {
+  "method": "ArtifactMerge",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.5
+ },
+ "/artifact/open-catalyst-box": {
+  "method": "OpenCatalystBox",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.38
+ },
+ "/artifact/polish": {
+  "method": "ArtifactPolish",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.5
+ },
+ "/artifact/polish/replace-option-slot-idx": {
+  "method": "ArtifactPolish_ReplaceOptionSlotIdx",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.5
+ },
+ "/artifact/set-favorites": {
+  "method": "ArtifactSetFavorites",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.5
+ },
+ "/artifact/set-reroll": {
+  "method": "ArtifactSetReroll",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.5
+ },
+ "/artifact/smart-reroll": {
+  "method": "ArtifactSmartReroll",
+  "response": "ArtifactResultResponseModel",
+  "score": 1.5
+ },
+ "/auth/checkPatchVersion": {
+  "method": "CheckPatchVersion",
+  "response": "ResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/auth/getPatchFolder": {
+  "method": "GetPatchFolder",
+  "response": "PatchFolderResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/auth/link": {
+  "method": "Auth",
+  "response": "AuthResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/auth/login": {
+  "method": "Login",
+  "response": "AuthResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/auth/register": {
+  "method": "Auth",
+  "response": "AuthResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/auth/shake-hand": {
+  "method": "ShakeHand",
+  "response": "ResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/auth/transfer": {
+  "method": "AccountTransfer",
+  "response": "TransferResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/auth/transfer/code": {
+  "method": "Auth",
+  "response": "AuthResponseModel",
+  "score": 1.17
+ },
+ "/auth/xcd": {
+  "method": "XigncodeReport",
+  "response": "ResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/auth/xcdSeed": {
+  "method": "GetXigncodeSeed",
+  "response": "AuthResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/card/all": {
+  "method": "GetAllCards",
+  "response": "CardListResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/card/buySkin": {
+  "method": "BuySkin",
+  "response": "CardResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/card/equipSkin": {
+  "method": "EquipSkin",
+  "response": "ResponseModel",
+  "score": 1.33
+ },
+ "/card/fast-upgrade": {
+  "method": "FastLevelUp",
+  "response": "CardResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/card/set-random-skin-apply": {
+  "method": "SetRandomSkinApply",
+  "response": "CardSkinEtcResponseModel",
+  "score": 1.4
+ },
+ "/card/set-skin-favorite": {
+  "method": "SetSkinFavorite",
+  "response": "CardSkinEtcResponseModel",
+  "score": 1.38
+ },
+ "/card/upgrade": {
+  "method": "LevelUpCard",
+  "response": "CardResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/card/upgradePotentialTier": {
+  "method": "UpgradePotentialTier",
+  "response": "CardResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/card/useCandy": {
+  "method": "UseCandy",
+  "response": "CardWithCandiesResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/card/useUnitExpItem": {
+  "method": "UseUnitExpItem",
+  "response": "ResponseModel",
+  "score": 1.4
+ },
+ "/card/useUnitSoulItem": {
+  "method": "UseUnitSoulItem",
+  "response": "ResponseModel",
+  "score": 1.4
+ },
+ "/card/useUnitSoulItemToExp": {
+  "method": "UseUnitSoulItemToExp",
+  "response": "ResponseModel",
+  "score": 1.43
+ },
+ "/card/useUnitSoulToExp": {
+  "method": "UseUnitSoulToExp",
+  "response": "ResponseModel",
+  "score": 1.42
+ },
+ "/clan": {
+  "method": "FetchClan",
+  "response": "ClanResponseModel",
+  "score": 1.0
+ },
+ "/clan/attendance": {
+  "method": "ClanAttendanceCheck",
+  "response": "ClanAttendanceResponseModel",
+  "score": 1.17
+ },
+ "/clan/banMember": {
+  "method": "BanClanMember",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/changeMaster": {
+  "method": "ChangeClanMaster",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/changeMemberRole": {
+  "method": "ChangeClanMemberRole",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/changeRoleName": {
+  "method": "ChangeClanRoleName",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/clan/chat": {
+  "method": "ClanChat",
+  "response": "ClanChatResponseModel",
+  "score": 1.5
+ },
+ "/clan/create": {
+  "method": "CreateClan",
+  "response": "CreateClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/currentSeq": {
+  "method": "GetCurrentSeq",
+  "response": "ClanSeqResponseModel",
+  "score": 1.0
+ },
+ "/clan/delete": {
+  "method": "DeleteClan",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/deleteChat": {
+  "method": "DeleteClanChat",
+  "response": "ClanChatResponseModel",
+  "score": 1.5
+ },
+ "/clan/fetchChat": {
+  "method": "FetchClan",
+  "response": "ClanResponseModel",
+  "score": 1.33
+ },
+ "/clan/info": {
+  "method": "FetchClan",
+  "response": "ClanResponseModel",
+  "score": 0.75
+ },
+ "/clan/leave": {
+  "method": "LeaveClan",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/mandateMaster": {
+  "method": "MandateClanMaster",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/modifyIntro": {
+  "method": "ModifyClanIntro",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/modifyJoinType": {
+  "method": "ModifyClanJoinType",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/modifyMark": {
+  "method": "ModifyClanMark",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/modify-name": {
+  "method": "ModifyClanName",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/modifyNotice": {
+  "method": "ModifyClanNotice",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/modifyTag": {
+  "method": "ModifyClanTag",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/nameCheck": {
+  "method": "ClanNameCheck",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/processRequestJoin": {
+  "method": "ProcessRequestJoinClan",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/raid": {
+  "method": "FetchClanRaid",
+  "response": "ClanRaidResponseModel",
+  "score": 1.17
+ },
+ "/clan/raid/best-deck": {
+  "method": "DeleteClanRaidDeck",
+  "response": "ClanRaidDeckInfoResponseModel",
+  "score": 1.12
+ },
+ "/clan/raid/currentState": {
+  "method": "FetchClanRaidCurrentState",
+  "response": "ClanRaidMemberDamageSumResponseModel",
+  "score": 1.3
+ },
+ "/clan/raid/deck": {
+  "method": "DeleteClanRaidDeck",
+  "response": "ClanRaidDeckInfoResponseModel",
+  "score": 1.25
+ },
+ "/clan/raid/end": {
+  "method": "EndClanRaid",
+  "response": "ClanRaidResponseModel",
+  "score": 1.5
+ },
+ "/clan/raid/support": {
+  "method": "ClanSupport",
+  "response": "ClanSupportResponseModel",
+  "score": 1.33
+ },
+ "/clan/ranking": {
+  "method": "GetClanRanking",
+  "response": "ClanRankingResponseModel",
+  "score": 1.17
+ },
+ "/clan/refreshChat": {
+  "method": "RefreshClanChat",
+  "response": "ClanChatResponseModel",
+  "score": 1.5
+ },
+ "/clan/requestJoin": {
+  "method": "RequestJoinClan",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/requestSupport": {
+  "method": "ClanRequestSupport",
+  "response": "ClanResponseModel",
+  "score": 1.5
+ },
+ "/clan/search": {
+  "method": "SearchClan",
+  "response": "SearchClanResponseModel",
+  "score": 1.5
+ },
+ "/colosseum": {
+  "method": "FetchPlayerColosseum",
+  "response": "PlayerColosseumInfoResponseModel",
+  "score": 0.83
+ },
+ "/colosseum/all-tier-rewards": {
+  "method": "ColosseumReceiveAllRewards",
+  "response": "PvPReceiveRewardResponseModel",
+  "score": 1.12
+ },
+ "/colosseum/complete-round-data": {
+  "method": "SaveCompleteColosseumRoundData",
+  "response": "ResponseModel",
+  "score": 1.3
+ },
+ "/colosseum/create-custom-match": {
+  "method": "CreateColosseumCustomMatch",
+  "response": "ColosseumCustomMatchResponseModel",
+  "score": 1.5
+ },
+ "/colosseum/fetch-log-detail": {
+  "method": "FetchColosseumGameLog",
+  "response": "ColosseumLogResponseModel",
+  "score": 1.12
+ },
+ "/colosseum/fetch-log-history": {
+  "method": "FetchColosseumGameLog",
+  "response": "ColosseumLogResponseModel",
+  "score": 1.12
+ },
+ "/colosseum/fetch-players-data": {
+  "method": "FetchColosseumPlayersData",
+  "response": "ColosseumPlayerDataResponseModel",
+  "score": 1.5
+ },
+ "/colosseum/fetch-statistics-data": {
+  "method": "FetchColosseumStatisticsData",
+  "response": "ColosseumStatisticsResponseModel",
+  "score": 1.5
+ },
+ "/colosseum/match": {
+  "method": "CreateColosseumCustomMatch",
+  "response": "ColosseumCustomMatchResponseModel",
+  "score": 1.0
+ },
+ "/colosseum/match/cancel": {
+  "method": "CancelColosseumMatching",
+  "response": "ResponseModel",
+  "score": 1.0
+ },
+ "/colosseum/match/ping": {
+  "method": "PingColosseumMatchingResult",
+  "response": "ColosseumMatchResponseModel",
+  "score": 0.83
+ },
+ "/colosseum/test-single-play": {
+  "method": "TestColosseumSinglePlay",
+  "response": "ColosseumMatchResponseModel",
+  "score": 1.5
+ },
+ "/customevent/complete": {
+  "method": "CompleteTutorial",
+  "response": "ResponseModel",
+  "score": 0.75
+ },
+ "/deck": {
+  "method": "GetDeck",
+  "response": "DeckResponseModel",
+  "score": 1.0
+ },
+ "/deck/buyDeckSlot": {
+  "method": "BuyDeckSlot",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/deck/set": {
+  "method": "SetDeck",
+  "response": "DeckResponseModel",
+  "score": 1.5
+ },
+ "/deck/setAllPotential": {
+  "method": "SetDeck",
+  "response": "DeckResponseModel",
+  "score": 1.25
+ },
+ "/deck/set-deck-slot-name": {
+  "method": "SetDeckSlotName",
+  "response": "DeckResponseModel",
+  "score": 1.5
+ },
+ "/deck/setPotential": {
+  "method": "SetDeck",
+  "response": "DeckResponseModel",
+  "score": 1.33
+ },
+ "/decoration": {
+  "method": "FetchDecorationInfo",
+  "response": "PlayerDecorationInfoResponseModel",
+  "score": 0.83
+ },
+ "/decoration/advisor/contract": {
+  "method": "ContractAdvisor",
+  "response": "AdvisorResponseModel",
+  "score": 1.33
+ },
+ "/decoration/advisor/equip": {
+  "method": "EquipAdvisor",
+  "response": "ResponseModel",
+  "score": 1.33
+ },
+ "/decoration/advisor/extend": {
+  "method": "ExtendAdvisor",
+  "response": "AdvisorResponseModel",
+  "score": 1.33
+ },
+ "/decoration/advisor/timeout": {
+  "method": "ContractAdvisor",
+  "response": "AdvisorResponseModel",
+  "score": 0.67
+ },
+ "/decoration/login-skin/equip": {
+  "method": "EquipLoginSkin",
+  "response": "LoginSceneIllustDataResponseModel",
+  "score": 1.38
+ },
+ "/decoration/map-skin/buy": {
+  "method": "BuyMapSkin",
+  "response": "BuyMapSkinResponseModel",
+  "score": 1.38
+ },
+ "/decoration/map-skin/equip": {
+  "method": "EquipMapSkin",
+  "response": "ResponseModel",
+  "score": 1.38
+ },
+ "/decoration/map-skin/favorite": {
+  "method": "SetFavoriteMapSkin",
+  "response": "ResponseModel",
+  "score": 1.12
+ },
+ "/EarlyAccessModeInfos/EarlyAccessModeInfo": {
+  "method": "CanEarlyAccessMode",
+  "response": "ResponseModel",
+  "score": 1.05
+ },
+ "/eventcache": {
+  "method": null,
+  "response": "ResponseModel",
+  "score": 0
+ },
+ "/event-card-collecting/apply": {
+  "method": "ApplyEventCard",
+  "response": "PlayerEventCardCollectingResponseModel",
+  "score": 1.38
+ },
+ "/event-card-collecting/collect": {
+  "method": "FetchPlayerEventCardCollecting",
+  "response": "PlayerEventCardCollectingResponseModel",
+  "score": 0.97
+ },
+ "/event-card-collecting/exchange": {
+  "method": "ExchangeEventCard",
+  "response": "EventCardExchangeResponseModel",
+  "score": 1.38
+ },
+ "/event-card-collecting/fetch": {
+  "method": "FetchPlayerEventCardCollecting",
+  "response": "PlayerEventCardCollectingResponseModel",
+  "score": 1.3
+ },
+ "/event-card-collecting/receive-reward": {
+  "method": "EventCardCollectionReceiveReward",
+  "response": "EventCardCollectionReceiveRewardResponseModel",
+  "score": 1.2
+ },
+ "/flag/set": {
+  "method": "SetFlag",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/game": {
+  "method": "GameStart",
+  "response": "GameStartResponseModel",
+  "score": 1.0
+ },
+ "/game/adBonus": {
+  "method": "GameAdBonus",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/game/check-dimension-rift-complete-success": {
+  "method": "CheckDimensionRiftCompleteSuccess",
+  "response": "GameResponseModel",
+  "score": 1.42
+ },
+ "/game/complete": {
+  "method": "CompleteGame",
+  "response": "GameResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/game/eventMode": {
+  "method": "GetEventMode",
+  "response": "EventModeResponseModel",
+  "score": 1.0
+ },
+ "/game/skip": {
+  "method": "GameSkip",
+  "response": "GameResponseModel",
+  "score": 1.5
+ },
+ "/game/start": {
+  "method": "StartGame",
+  "response": "GameStartResponseModel",
+  "pinned": true,
+  "score": 1.0
+ },
+ "/ingame-coupon": {
+  "method": "UseCoupon",
+  "response": "ResponseModel",
+  "score": 0.75
+ },
+ "/invasion/record": {
+  "method": "FetchInvasionRecords",
+  "response": "InvasionRecordsResponseModel",
+  "score": 0.58
+ },
+ "/invasion/reward": {
+  "method": "ReceiveInvasionReward",
+  "response": "ReceiveInvasionRewardResponseModel",
+  "score": 1.17
+ },
+ "/invasion/reward/receive": {
+  "method": "ReceiveInvasionReward",
+  "response": "ReceiveInvasionRewardResponseModel",
+  "score": 1.5
+ },
+ "/invasion/reward/receive-all": {
+  "method": "ReceiveInvasionRewardAll",
+  "response": "ReceiveInvasionRewardResponseModel",
+  "score": 1.5
+ },
+ "/kgc-main": {
+  "method": null,
+  "response": "ResponseModel",
+  "score": 0
+ },
+ "/kgc-ranking": {
+  "method": "GetRanking",
+  "response": "RankingResponseModel",
+  "score": 0.75
+ },
+ "/kg-marble": {
+  "method": "KGMarbleData",
+  "response": "KGMarbleResponseModel",
+  "score": 1.17
+ },
+ "/kg-marble/execute-event": {
+  "method": "KGMarbleExecuteEvent",
+  "response": "KGMarbleResponseModel",
+  "score": 1.5
+ },
+ "/kg-marble/reward": {
+  "method": "KGMarbleGetReward",
+  "response": "KGMarbleResponseModel",
+  "score": 1.25
+ },
+ "/kg-marble/roll": {
+  "method": "KGMarbleRollDice",
+  "response": "KGMarbleResponseModel",
+  "score": 1.25
+ },
+ "/kg-marble/set-player": {
+  "method": "KGMarbleSetPlayer",
+  "response": "KGMarbleResponseModel",
+  "score": 1.5
+ },
+ "/kg-wiki": {
+  "method": "FetchKGWiki",
+  "response": "KGWikiResponseModel",
+  "score": 1.17
+ },
+ "/kg-wiki/insert-wiki": {
+  "method": "KGWikiInsertWiki",
+  "response": "KGWikiResponseModel",
+  "score": 1.5
+ },
+ "/kg-wiki/rift-weapon/archive": {
+  "method": "RiftWeaponArchive",
+  "response": "RiftWeaponResultResponseModel",
+  "score": 1.3
+ },
+ "/kg-wiki/rift-weapon/archive-delete": {
+  "method": "RiftWeaponArchiveDelete",
+  "response": "KGWikiResponseModel",
+  "score": 1.33
+ },
+ "/lib/terminfo": {
+  "method": null,
+  "response": "ResponseModel",
+  "score": 0
+ },
+ "/lobby": {
+  "method": null,
+  "response": "ResponseModel",
+  "score": 0
+ },
+ "/mission": {
+  "method": "CheckMission",
+  "response": "MissionResponseModel",
+  "score": 1.0
+ },
+ "/mission/reward-all": {
+  "method": "GetMissionRewardAll",
+  "response": "MissionRewardResponseModel",
+  "score": 1.25
+ },
+ "/mission/reward/goal": {
+  "method": "GetMissionGoalReward",
+  "response": "MissionRewardResponseModel",
+  "score": 1.25
+ },
+ "/mission/roguelike": {
+  "method": "CheckMission",
+  "response": "MissionResponseModel",
+  "score": 0.75
+ },
+ "/mission/roguelike/check": {
+  "method": "CheckMission",
+  "response": "MissionResponseModel",
+  "score": 1.33
+ },
+ "/mission/roguelike-statistics": {
+  "method": "CheckMission",
+  "response": "MissionResponseModel",
+  "score": 0.67
+ },
+ "/mission/roguelike/update": {
+  "method": "CheckMission",
+  "response": "MissionResponseModel",
+  "score": 0.67
+ },
+ "/nameTag/inventory": {
+  "method": "FetchNameTagInventory",
+  "response": "NameTagInventoryResponseModel",
+  "score": 1.25
+ },
+ "/nameTag/set": {
+  "method": "SetNameTag",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/pass": {
+  "method": "FetchSeasonPass",
+  "response": "SeasonPassResponseModel",
+  "score": 0.83
+ },
+ "/pass/all-rewards": {
+  "method": "ReceiveSeasonPassAllRewards",
+  "response": "SeasonPassReceiveRewardResponseModel",
+  "score": 1.1
+ },
+ "/pass/bonusReward": {
+  "method": "ReceiveBonusReward",
+  "response": "SeasonPassReceiveRewardResponseModel",
+  "score": 1.0
+ },
+ "/pass/buyLevel": {
+  "method": "BuyLevel",
+  "response": "SeasonPassBuyLevelResponseModel",
+  "score": 1.33
+ },
+ "/pass/passEventBooster": {
+  "method": "FetchSeasonPassEventBooster",
+  "response": "SeasonPassEventBoosterResponseModel",
+  "score": 1.1
+ },
+ "/pass/reroll-mission": {
+  "method": "RerollPassMission",
+  "response": "RerollPassMissionResponseModel",
+  "score": 1.5
+ },
+ "/pass/reward": {
+  "method": "GetYearEventPassReward",
+  "response": "YearEventReceiveRewardResponseModel",
+  "score": 0.9
+ },
+ "/player": {
+  "method": "GetPlayerInfo",
+  "response": "PlayerDataResponseModel",
+  "score": 0.83
+ },
+ "/player/ad": {
+  "method": "AdLog",
+  "response": "AdLogResponseModel",
+  "score": 0.75
+ },
+ "/player/add-inventory-count": {
+  "method": "AddInventoryCount",
+  "response": "PlayerInventoryCountResponseModel",
+  "score": 1.38
+ },
+ "/player/building": {
+  "method": "SaveBuilding",
+  "response": "BuildingResponseModel",
+  "score": 0.75
+ },
+ "/player/building/point": {
+  "method": "BuyBuildingPoint",
+  "response": "BuildingResponseModel",
+  "score": 1.0
+ },
+ "/player/building/resetPoint": {
+  "method": "ResetBuildingPoint",
+  "response": "BuildingResponseModel",
+  "score": 1.38
+ },
+ "/player/building/save": {
+  "method": "SaveBuilding",
+  "response": "BuildingResponseModel",
+  "score": 1.33
+ },
+ "/player/changeProfileIcon": {
+  "method": "ChangeProfileIconId",
+  "response": "ResponseModel",
+  "score": 1.12
+ },
+ "/player/completeKingGakReturnEvent": {
+  "method": "CompleteKingGakReturnEvent",
+  "response": "ResponseModel",
+  "score": 1.42
+ },
+ "/player/currencies": {
+  "method": "GetPlayerCurrencies",
+  "response": "PlayerCurrenciesResponseModel",
+  "score": 1.17
+ },
+ "/player/dailyAttendanceEvents": {
+  "method": "GetDailyAttendanceEvents",
+  "response": "DailyAttendanceEventsResponseModel",
+  "score": 1.12
+ },
+ "/player/daily-consumed-currencies": {
+  "method": "GetPlayerDailyConsumedCurrencies",
+  "response": "PlayerCurrenciesResponseModel",
+  "score": 1.3
+ },
+ "/player/early-access-mode": {
+  "method": "CanEarlyAccessMode",
+  "response": "ResponseModel",
+  "score": 1.12
+ },
+ "/player/game-skip-information": {
+  "method": "GameSkip",
+  "response": "GameResponseModel",
+  "score": 1.25
+ },
+ "/player/getInventory": {
+  "method": "GetInventory",
+  "response": "InventoryResponseModel",
+  "score": 1.33
+ },
+ "/player/heart/recover": {
+  "method": "RecoverHeart",
+  "response": "PlayerDataResponseModel",
+  "score": 1.33
+ },
+ "/player/initialize-journey": {
+  "method": "InitializeJourney",
+  "response": "JourneyRewardResponseModel",
+  "score": 1.33
+ },
+ "/player/journey-reward": {
+  "method": "GetJourneyReward",
+  "response": "JourneyRewardResponseModel",
+  "score": 1.0
+ },
+ "/player/receive-skin-box-alternate-reward": {
+  "method": "ReceiveSkinBoxAlternateReward",
+  "response": "UseSkinBoxInventoryItemResponseModel",
+  "score": 1.42
+ },
+ "/player/rename": {
+  "method": "GetPlayerInfo",
+  "response": "PlayerDataResponseModel",
+  "score": 0.58
+ },
+ "/player/surprise-attendance-event": {
+  "method": "GetPlayerSurpriseAttendanceEvent",
+  "response": "SurpriseAttendanceEventResponseModel",
+  "score": 1.3
+ },
+ "/player/surprise-attendance-event-daily-attendance-reward": {
+  "method": "GetSurpriseAttendanceEventDailyAttendanceReward",
+  "response": "SurpriseAttendanceEventReceiveRewardResponseModel",
+  "score": 1.25
+ },
+ "/player/tutorial/complete": {
+  "method": "CompleteTutorial",
+  "response": "ResponseModel",
+  "score": 1.33
+ },
+ "/player/tutorial/progress-mission": {
+  "method": "ProgressTutorialMission",
+  "response": "ResponseModel",
+  "score": 1.38
+ },
+ "/player/tutorial-status": {
+  "method": "GetPlayerTutorialStatus",
+  "response": "KeyValuesResponseModel",
+  "score": 1.25
+ },
+ "/player/useInventory": {
+  "method": "UseInventory",
+  "response": "UseInventoryResponseModel",
+  "score": 1.33
+ },
+ "/player/use-reward-box-inventory-item": {
+  "method": "UseRewardBoxInventoryItem",
+  "response": "UseRewardBoxInventoryItemResponseModel",
+  "score": 1.42
+ },
+ "/player/use-skin-box-inventory-item": {
+  "method": "UseSkinBoxInventoryItem",
+  "response": "UseSkinBoxInventoryItemResponseModel",
+  "score": 1.42
+ },
+ "/player/year-event": {
+  "method": "GetYearEvent",
+  "response": "FifthHalfYearEventResponseModel",
+  "score": 1.0
+ },
+ "/player/year-event-attendance-reward": {
+  "method": "GetYearEventAttendanceReward",
+  "response": "YearEventReceiveRewardResponseModel",
+  "score": 1.2
+ },
+ "/player/year-event-pass-reward": {
+  "method": "GetYearEventPassReward",
+  "response": "YearEventReceiveRewardResponseModel",
+  "score": 1.2
+ },
+ "/post": {
+  "method": "ReceivePost",
+  "response": "PostReceiveResponseModel",
+  "score": 1.0
+ },
+ "/post/receive": {
+  "method": "ReceivePost",
+  "response": "PostReceiveResponseModel",
+  "score": 1.5
+ },
+ "/pvp/all-rewards": {
+  "method": "ColosseumReceiveAllRewards",
+  "response": "PvPReceiveRewardResponseModel",
+  "score": 0.83
+ },
+ "/pvp/dormant-progress": {
+  "method": "PvpDormantProgress",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/pvp/fetch-log-detail": {
+  "method": "FetchArenaGameLog",
+  "response": "ArenaLogResponseModel",
+  "score": 0.75
+ },
+ "/pvp/fetch-log-history": {
+  "method": "FetchArenaGameLog",
+  "response": "ArenaLogResponseModel",
+  "score": 0.75
+ },
+ "/pvp/fetch-statistics-data": {
+  "method": "FetchArenaStatisticsData",
+  "response": "ArenaStatisticsResponseModel",
+  "score": 1.12
+ },
+ "/pvp/info": {
+  "method": "GetPlayerInfo",
+  "response": "PlayerDataResponseModel",
+  "score": 0.58
+ },
+ "/pvp/matching": {
+  "method": "PvPMatching",
+  "response": "PvPMatchResponseModel",
+  "score": 0.58
+ },
+ "/pvp/test-matching": {
+  "method": "TestPvPMatching",
+  "response": "PvPMatchResponseModel",
+  "score": 0.83
+ },
+ "/pvp/win-reward": {
+  "method": "GetArenaWinReward",
+  "response": "ArenaWinRewardResponseModel",
+  "score": 0.83
+ },
+ "/resources/": {
+  "method": null,
+  "response": "ResponseModel",
+  "score": 0
+ },
+ "/rift-weapon": {
+  "method": "RiftWeaponEquip",
+  "response": "RiftWeaponResultResponseModel",
+  "score": 1.17
+ },
+ "/rift-weapon/buy-rift-gauge": {
+  "method": "BuyRiftGauge",
+  "response": "RiftCrystalResultResponseModel",
+  "score": 1.38
+ },
+ "/rift-weapon/crystal-charge": {
+  "method": "RiftCrystalCharge",
+  "response": "RiftCrystalResultResponseModel",
+  "score": 1.38
+ },
+ "/rift-weapon/crystal-destroy": {
+  "method": "RiftCrystalDestroy",
+  "response": "RiftCrystalResultResponseModel",
+  "score": 1.38
+ },
+ "/rift-weapon/crystal-inventory": {
+  "method": "FetchRiftWeaponInventory",
+  "response": "RiftWeaponInventoryResponseModel",
+  "score": 1.12
+ },
+ "/rift-weapon/dismantle": {
+  "method": "RiftWeaponDismantle",
+  "response": "RiftWeaponResultResponseModel",
+  "score": 1.5
+ },
+ "/rift-weapon/equip": {
+  "method": "RiftWeaponEquip",
+  "response": "RiftWeaponResultResponseModel",
+  "score": 1.5
+ },
+ "/rift-weapon/release-equip": {
+  "method": "RiftWeaponReleaseEquip",
+  "response": "RiftWeaponResultResponseModel",
+  "score": 1.5
+ },
+ "/rift-weapon/re-roll": {
+  "method": "RiftWeaponEquip",
+  "response": "RiftWeaponResultResponseModel",
+  "score": 0.92
+ },
+ "/rift-weapon/reset-weapon": {
+  "method": "RiftWeaponResetWeapon",
+  "response": "RiftWeaponResultResponseModel",
+  "score": 1.5
+ },
+ "/rift-weapon/set-crystal-state": {
+  "method": "RiftWeaponSetState",
+  "response": "RiftWeaponResultResponseModel",
+  "score": 1.4
+ },
+ "/rift-weapon/set-state": {
+  "method": "RiftWeaponSetState",
+  "response": "RiftWeaponResultResponseModel",
+  "score": 1.5
+ },
+ "/rift-weapon/upgrade": {
+  "method": "RiftWeaponUpgrade",
+  "response": "RiftWeaponResultResponseModel",
+  "score": 1.5
+ },
+ "/rogueLike/delete-roguelike": {
+  "method": "DeleteRogueLikeData",
+  "response": "DeleteRogueLikeDataResponseModel",
+  "score": 1.12
+ },
+ "/rogueLike/endFloor": {
+  "method": "EndRogueLikeFloor",
+  "response": "EndRogueLikeFloorResponseModel",
+  "score": 1.5
+ },
+ "/rogueLike/load-rogueLike-data": {
+  "method": "LoadRogueLikeData",
+  "response": "RogueLikeGameDataResponseModel",
+  "score": 1.5
+ },
+ "//RogueLikeRoom": {
+  "method": "RogueLikeRevive",
+  "response": "ResponseModel",
+  "score": 1.0
+ },
+ "/rogueLike/save-own-card-snapshot": {
+  "method": "SaveRogueLikeOwnCardSnapshot",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/rogueLike/save-rogueLike": {
+  "method": "SaveRogueLikeData",
+  "response": "ResponseModel",
+  "score": 1.25
+ },
+ "/rogueLike/startFloor": {
+  "method": "StartRogueLikeFloor",
+  "response": "StartRogueLikeFloorResponseModel",
+  "score": 1.5
+ },
+ "/seasonal-event/fetch": {
+  "method": "FetchPlayerSeasonalEventData",
+  "response": "PlayerSeasonalEventDataResponseModel",
+  "score": 1.1
+ },
+ "/shop": {
+  "method": "GetShop",
+  "response": "ShopResponseModel",
+  "score": 1.0
+ },
+ "/shop/caniap": {
+  "method": "GetShop",
+  "response": "ShopResponseModel",
+  "score": 0.75
+ },
+ "/shop/caniap-and-add-to-restore-needed-iaps": {
+  "method": "CanIAPAndAddToRestoreNeededIAPs",
+  "response": "ResponseModel",
+  "score": 0.87
+ },
+ "/shop/caniap_new": {
+  "method": "GetShop",
+  "response": "ShopResponseModel",
+  "score": 0.67
+ },
+ "/shop/check-treasure-wish-list-valid": {
+  "method": "CheckTreasureWishListValid",
+  "response": "ResponseModel",
+  "score": 1.42
+ },
+ "/shop/choice-package-unit": {
+  "method": "ChoicePackageUnit",
+  "response": "ResponseModel",
+  "score": 1.38
+ },
+ "/shop/choice-treasure-pickup-ceil": {
+  "method": "ChoiceTreasurePickupCeil",
+  "response": "ResponseModel",
+  "score": 1.4
+ },
+ "/shop-event/cumulative-purchase": {
+  "method": "FetchShopEventCumulativePurchase",
+  "response": "ShopEventCumulativePurchaseResponseModel",
+  "score": 1.3
+ },
+ "/shop-event/cumulative-purchase/claim": {
+  "method": "ClaimShopEventCumulativePurchaseReward",
+  "response": "ShopEventCumulativePurchaseClaimResponseModel",
+  "score": 1.33
+ },
+ "/shop/get-restore-needed-iaps": {
+  "method": "GetShop",
+  "response": "ShopResponseModel",
+  "score": 1.2
+ },
+ "/shop/get-treasure-wish-list": {
+  "method": "GetTreasureWishList",
+  "response": "TreasureWishListResponseModel",
+  "score": 1.4
+ },
+ "/shop/iap": {
+  "method": "GetShop",
+  "response": "ShopResponseModel",
+  "score": 0.75
+ },
+ "/shop/refreshDailyShop": {
+  "method": "RefreshDailyShop",
+  "response": "ShopResponseModel",
+  "score": 1.5
+ },
+ "/shop/remove-from-restore-needed-iaps": {
+  "method": "RemoveFromRestoreNeededIAPs",
+  "response": "ResponseModel",
+  "score": 1.0
+ },
+ "/shop/save-custom-pickups": {
+  "method": "SaveCustomPickups",
+  "response": "ResponseModel",
+  "score": 1.38
+ },
+ "/shop/save-treasure-wish-list": {
+  "method": "SaveTreasureWishList",
+  "response": "ResponseModel",
+  "score": 1.4
+ },
+ "/stock-event/buy-hint": {
+  "method": "BuyStockHint",
+  "response": "StockEventBuyHintResponseModel",
+  "score": 1.38
+ },
+ "/stock-event/daily-attendance": {
+  "method": "GiveStockEventDailyAttendanceReward",
+  "response": "StockEventDailyAttendanceResponseModel",
+  "score": 1.17
+ },
+ "/stock-event/mission": {
+  "method": "ReceiveStockEventMissionReward",
+  "response": "StockEventMissionResponseModel",
+  "score": 1.1
+ },
+ "/stock-event/my-info": {
+  "method": "GetStockEventMyInfo",
+  "response": "StockEventMyInfoResponseModel",
+  "score": 1.3
+ },
+ "/stock-event/orders": {
+  "method": "GetStockEventRanking",
+  "response": "StockEventRankingResponseModel",
+  "score": 0.83
+ },
+ "/stock-event/ranking": {
+  "method": "GetStockEventRanking",
+  "response": "StockEventRankingResponseModel",
+  "score": 1.25
+ },
+ "/story-mode": {
+  "method": "StoryModeLoadGameData",
+  "response": "StoryModeResponseModel",
+  "score": 0.9
+ },
+ "/story-mode/challenge/info": {
+  "method": "FetchChallengeMode",
+  "response": "ChallengeModeResponseModel",
+  "score": 0.92
+ },
+ "/story-mode/challenge/reward": {
+  "method": "ChallengeModeReward",
+  "response": "ChallengeModeResponseModel",
+  "score": 1.38
+ },
+ "/story-mode/chest-reward": {
+  "method": "StoryModeClaimChestReward",
+  "response": "ResponseModel",
+  "score": 1.3
+ },
+ "/story-mode/delete": {
+  "method": "StoryModeDeleteGameData",
+  "response": "ResponseModel",
+  "score": 1.1
+ },
+ "/story-mode/save": {
+  "method": "StoryModeSaveGameData",
+  "response": "ResponseModel",
+  "score": 1.1
+ },
+ "/territory/alchemy-new": {
+  "method": "TerritoryAlchemy",
+  "response": "TerritoryAlchemyResponseModel",
+  "score": 1.33
+ },
+ "/territory/assign-units": {
+  "method": "AssignUnitsToBuilding",
+  "response": "TerritoryAssignUnitsResponseModel",
+  "score": 0.83
+ },
+ "/territory/attendance-check": {
+  "method": "TerritoryCheckAttendance",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/territory/build": {
+  "method": "BuildTerritoryBuilding",
+  "response": "TerritoryBuildBuildingResponseModel",
+  "score": 1.17
+ },
+ "/territory/equip-skin": {
+  "method": "EquipTerritorySkin",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/territory/fetch": {
+  "method": "FetchPlayerTerritory",
+  "response": "PlayerTerritoryResponseModel",
+  "score": 1.17
+ },
+ "/territory/fetch-stat-buffs": {
+  "method": "FetchTerritoryStatBuffs",
+  "response": "TerritoryStatBuffPerResponseModel",
+  "score": 1.5
+ },
+ "/territory/hunting/complete-hunting-immediately": {
+  "method": "CompleteImmediatelyTerritoryHunting",
+  "response": "TerritoryEndHuntingResponseModel",
+  "score": 1.5
+ },
+ "/territory/hunting/end": {
+  "method": "TerritoryEndHunting",
+  "response": "TerritoryEndHuntingResponseModel",
+  "score": 1.5
+ },
+ "/territory/hunting/fetch": {
+  "method": "FetchTerritoryHunting",
+  "response": "TerritoryHuntingResponseModel",
+  "score": 1.5
+ },
+ "/territory/hunting/start": {
+  "method": "TerritoryStartHunting",
+  "response": "TerritoryStartHuntingResponseModel",
+  "score": 1.5
+ },
+ "/territory/hunting/stop": {
+  "method": "StopTerritoryHunting",
+  "response": "TerritoryEndHuntingResponseModel",
+  "score": 1.5
+ },
+ "/territory/level-sync/assign": {
+  "method": "AssignTerritoryLevelSync",
+  "response": "TerritoryLevelSyncResponseModel",
+  "score": 1.5
+ },
+ "/territory/level-sync/reset-timer": {
+  "method": "ResetLevelSync",
+  "response": "TerritoryAssignUnitsResponseModel",
+  "score": 1.3
+ },
+ "/territory/recover-labor": {
+  "method": "TerritoryRecoverLabor",
+  "response": "TerritoryRecoverLaborResponseModel",
+  "score": 1.5
+ },
+ "/territory/refresh-building": {
+  "method": "RefreshTerritoryBuilding",
+  "response": "TerritoryRefreshBuildingResponseModel",
+  "score": 1.5
+ },
+ "/territory/replace-building": {
+  "method": "ReplaceTerritoryBuilding",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/territory/restaurant/claim": {
+  "method": "TerritoryClaimRestaurantReward",
+  "response": "PlayerCurrenciesResponseModel",
+  "score": 1.25
+ },
+ "/territory/swap-assigned-units": {
+  "method": "SwapAssignedUnitsFromBuildings",
+  "response": "SwapAssignedHeroesFromBuildingsResponseModel",
+  "score": 0.97
+ },
+ "/territory/trade-shop/buy": {
+  "method": "TerritoryBuyTradeShopItem",
+  "response": "TerritoryBuyTradeShopItemResponseModel",
+  "score": 1.3
+ },
+ "/territory-tycoon/attendance-check": {
+  "method": "TerritoryTycoonCheckAttendance",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/territory-tycoon/fetch-token": {
+  "method": "TerritoryTycoonFetchTokenEventToken",
+  "response": "TerritoryTycoonTokenResponseModel",
+  "score": 1.3
+ },
+ "/territory-tycoon/firework": {
+  "method": "TerritoryTycoonFirework",
+  "response": "TerritoryTycoonFireworkResponseModel",
+  "score": 1.5
+ },
+ "/territory-tycoon/recover-seasonal-token": {
+  "method": "TerritoryTycoonRecoverSeasonalEventToken",
+  "response": "PlayerTerritoryTycoonResponseModel",
+  "score": 1.33
+ },
+ "/test/roguelike/reset-all-mission": {
+  "method": "TestResetStarterMission",
+  "response": "ResponseModel",
+  "score": 1.05
+ },
+ "/test/set-dimension-rift-ranking": {
+  "method": "TestSetDimensionRiftRanking",
+  "response": "ResponseModel",
+  "score": 1.5
+ },
+ "/treasure": {
+  "method": "TreasureOvercome",
+  "response": "TreasureResultResponseModel",
+  "score": 1.0
+ },
+ "/treasure/add-exp": {
+  "method": "TreasureAddExp",
+  "response": "TreasureResultResponseModel",
+  "score": 1.5
+ },
+ "/treasure/dismantle": {
+  "method": "TreasureDismantle",
+  "response": "TreasureResultResponseModel",
+  "score": 1.5
+ },
+ "/treasure/equip-tutorial": {
+  "method": "TreasureEquipTutorial",
+  "response": "TreasureResultResponseModel",
+  "score": 1.5
+ },
+ "/treasure/overcome": {
+  "method": "TreasureOvercome",
+  "response": "TreasureResultResponseModel",
+  "score": 1.5
+ },
+ "/treasure/release-equip": {
+  "method": "TreasureReleaseEquip",
+  "response": "TreasureResultResponseModel",
+  "score": 1.5
+ },
+ "/treasure/set-state": {
+  "method": "TreasureSetState",
+  "response": "TreasureResultResponseModel",
+  "score": 1.5
+ },
+ "/trigger/execute": {
+  "method": "ExecuteTriggers",
+  "response": "ExecuteTriggerResponseModel",
+  "score": 0.75
+ },
+ "/trigger/execute-saved": {
+  "method": "ExecuteSavedTriggers",
+  "response": "ExecuteTriggerResponseModel",
+  "score": 1.0
+ }
+}

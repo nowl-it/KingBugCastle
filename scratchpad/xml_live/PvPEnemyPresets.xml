@@ -1,0 +1,1864 @@
+
+<PvPEnemyPresets>
+
+	<!--<PvPEnemyPreset ID="1000">
+	    <CastleName>킹갓캐슬</CastleName>
+	    <KingName>우유들킹</KingName>
+	    <MainBuilding>2</MainBuilding>
+	    <SubBuilding>3</SubBuilding>
+	    <Deck>
+	        <Card>10000</Card>
+	        <Card>10010</Card>
+	        <Card>10020</Card>
+	        <Card>10030</Card>
+	        <Card>10040</Card>
+	        <Card>10050</Card>
+	    </Deck>
+	    <Data>
+			<SpawnData X='2' Y='3' Unit='10000' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='0' Unit='10050' Level='3' Equip1='201' Equip2='400' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10020' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='1' Unit='10040' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10030' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10020' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+	    </Data>
+	    <CardLevelOffset>-8</CardLevelOffset>
+	    <BuildingLevelOffset>2</BuildingLevelOffset>
+	</PvPEnemyPreset>-->
+
+	<PvPEnemyPreset ID="1001">
+		<Theme>103</Theme>
+		<ProfileAvatar>10040</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10040</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>1</SubBuilding>
+		<Artifacts>
+			<Artifact>13011</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10010</Card>
+			<Card>10020</Card>
+			<Card>10040</Card>
+			<Card>10080</Card>
+			<Card>10090</Card>
+			<Card>10050</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10010' Level='4' Equip1='401' Equip2='201' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10020' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10040' Level='5' Equip1='402' Equip2='302' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10080' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='1' Unit='10090' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-15</CardLevelOffset>
+		<BuildingLevelOffset>2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+	
+	<PvPEnemyPreset ID="1002">
+		<Theme>103</Theme>
+		<ProfileAvatar>10090</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10090</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>13051</Artifact>
+			<Artifact>10011</Artifact>
+			<Artifact>13021</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10040</Card>
+			<Card>10060</Card>
+			<Card>10090</Card>
+			<Card>10150</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='1' Unit='10040' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10060' Level='4' Equip1='401' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10090' Level='5' Equip1='303' Equip2='302' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10150' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='3' Unit='10000' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-15</CardLevelOffset>
+		<BuildingLevelOffset>2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1003">
+		<Theme>103</Theme>
+		<ProfileAvatar>10070</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10070</KingName>
+		<MainBuilding>2</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>13001</Artifact>
+			<Artifact>10021</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10010</Card>
+			<Card>10060</Card>
+			<Card>10070</Card>
+			<Card>10110</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10010' Level='5' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10060' Level='4' Equip1='403' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10070' Level='5' Equip1='103' Equip2='302' Equip3='102'/>
+			<SpawnData X='2' Y='1' Unit='10180' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1004">
+		<Theme>103</Theme>
+		<ProfileAvatar>10000</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10000</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>1</SubBuilding>
+		<Artifacts>
+			<Artifact>13101</Artifact>
+			<Artifact>13011</Artifact>
+			<Artifact>13141</Artifact>
+		</Artifacts>
+		<MainArtifact>13101</MainArtifact>
+		<SubArtifact>13011</SubArtifact>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10010</Card>
+			<Card>10020</Card>
+			<Card>10050</Card>
+			<Card>10090</Card>
+			<Card>10170</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10000' Level='5' Equip1='102' Equip2='403' Equip3='302'/>
+			<SpawnData X='0' Y='3' Unit='10010' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='3' Unit='10020' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10050' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10090' Level='3' Equip1='301' Equip2='101' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1005">
+		<Theme>103</Theme>
+		<ProfileAvatar>10010</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10010</KingName>
+		<MainBuilding>0</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>10031</Artifact>
+			<Artifact>13091</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10020</Card>
+			<Card>10030</Card>
+			<Card>10090</Card>
+			<Card>10110</Card>
+			<Card>10170</Card>
+			<Card>10010</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10020' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='2' Unit='10090' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='1' Unit='10110' Level='4' Equip1='301' Equip2='101' Equip3='-1'/>
+			<SpawnData X='2' Y='1' Unit='10170' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='3' Unit='10010' Level='5' Equip1='403' Equip2='102' Equip3='302'/>
+
+		</Data>
+		<CardLevelOffset>-15</CardLevelOffset>
+		<BuildingLevelOffset>2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1006">
+		<Theme>103</Theme>
+		<ProfileAvatar>10020</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10020</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>12081</Artifact>
+			<Artifact>13051</Artifact>
+			<Artifact>13021</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10020</Card>
+			<Card>10040</Card>
+			<Card>10060</Card>
+			<Card>10070</Card>
+			<Card>10120</Card>
+			<Card>10150</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10020' Level='5' Equip1='203' Equip2='202' Equip3='-1'/>
+			<SpawnData X='0' Y='1' Unit='10040' Level='4' Equip1='302' Equip2='401' Equip3='-1'/>
+			<SpawnData X='1' Y='2' Unit='10060' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10070' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='3' Unit='10150' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1007">
+		<Theme>103</Theme>
+		<ProfileAvatar>10030</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10030</KingName>
+		<MainBuilding>0</MainBuilding>
+		<SubBuilding>1</SubBuilding>
+		<Artifacts>
+			<Artifact>13041</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<MainArtifact>13041</MainArtifact>
+		<SubArtifact>10031</SubArtifact>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10020</Card>
+			<Card>10030</Card>
+			<Card>10050</Card>
+			<Card>10080</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='4' Y='3' Unit='10000' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='3' Unit='10020' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='2' Unit='10030' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10180' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10030' Level='5' Equip1='303' Equip2='302' Equip3='202'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1008">
+		<Theme>103</Theme>
+		<ProfileAvatar>10050</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10050</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>13021</Artifact>
+			<Artifact>13081</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10010</Card>
+			<Card>10020</Card>
+			<Card>10050</Card>
+			<Card>10080</Card>
+			<Card>10140</Card>
+			<Card>10150</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='0' Y='3' Unit='10010' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10020' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10050' Level='5' Equip1='102' Equip2='302' Equip3='301'/>
+			<SpawnData X='2' Y='3' Unit='10140' Level='4' Equip1='402' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='3' Unit='10150' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1009">
+		<Theme>103</Theme>
+		<ProfileAvatar>10080</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10080</KingName>
+		<MainBuilding>2</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>12121</Artifact>
+			<Artifact>13001</Artifact>
+			<Artifact>13081</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10080</Card>
+			<Card>10090</Card>
+			<Card>10150</Card>
+			<Card>10180</Card>
+			<Card>10110</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='1' Y='3' Unit='10000' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='2' Unit='10080' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10090' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='3' Unit='10150' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='1' Unit='10180' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='2' Unit='10080' Level='5' Equip1='-1' Equip2='-1' Equip3='-1'/>
+
+		</Data>
+		<CardLevelOffset>-15</CardLevelOffset>
+		<BuildingLevelOffset>2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1010">
+		<Theme>103</Theme>
+		<ProfileAvatar>10140</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10140</KingName>
+		<MainBuilding>0</MainBuilding>
+		<SubBuilding>3</SubBuilding>
+		<Artifacts>
+			<Artifact>10031</Artifact>
+			<Artifact>10021</Artifact>
+			<Artifact>13051</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10020</Card>
+			<Card>10090</Card>
+			<Card>10100</Card>
+			<Card>10120</Card>
+			<Card>10140</Card>
+			<Card>10170</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='0' Y='3' Unit='10020' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='1' Unit='10100' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10120' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10140' Level='5' Equip1='402' Equip2='302' Equip3='401'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1011">
+		<Theme>103</Theme>
+		<ProfileAvatar>10150</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10150</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>3</SubBuilding>
+		<Artifacts>
+			<Artifact>10011</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10010</Card>
+			<Card>10030</Card>
+			<Card>10070</Card>
+			<Card>10120</Card>
+			<Card>10150</Card>
+			<Card>10170</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='4' Y='2' Unit='10030' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='2' Unit='10070' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='1' Unit='10120' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10150' Level='5' Equip1='202' Equip2='203' Equip3='-1'/>
+			<SpawnData X='6' Y='1' Unit='10170' Level='4' Equip1='302' Equip2='401' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1012">
+		<Theme>103</Theme>
+		<ProfileAvatar>10120</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10120</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>13031</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10060</Card>
+			<Card>10090</Card>
+			<Card>10120</Card>
+			<Card>10150</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='4' Y='3' Unit='10000' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10090' Level='3' Equip1='301' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='1' Unit='10120' Level='5' Equip1='303' Equip2='102' Equip3='-1'/>
+			<SpawnData X='1' Y='3' Unit='10150' Level='4' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='2' Unit='10180' Level='3' Equip1='401' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1013">
+		<Theme>103</Theme>
+		<ProfileAvatar>10110</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10110</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>1</SubBuilding>
+		<Artifacts>
+			<Artifact>10001</Artifact>
+			<Artifact>10021</Artifact>
+			<Artifact>13141</Artifact>
+		</Artifacts>
+		<MainArtifact>10001</MainArtifact>
+		<SubArtifact>10021</SubArtifact>
+		<Deck>
+			<Card>10010</Card>
+			<Card>10020</Card>
+			<Card>10040</Card>
+			<Card>10110</Card>
+			<Card>10150</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='1' Y='3' Unit='10010' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='3' Unit='10020' Level='5' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10040' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='1' Unit='10110' Level='5' Equip1='103' Equip2='102' Equip3='302'/>
+			<SpawnData X='0' Y='1' Unit='10180' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1014">
+		<Theme>103</Theme>
+		<ProfileAvatar>10100</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10100</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>1</SubBuilding>
+		<Artifacts>
+			<Artifact>13011</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10020</Card>
+			<Card>10070</Card>
+			<Card>10080</Card>
+			<Card>10100</Card>
+			<Card>10140</Card>
+			<Card>10030</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10020' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='3' Unit='10070' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='3' Unit='10080' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10100' Level='5' Equip1='302' Equip2='402' Equip3='101'/>
+			<SpawnData X='5' Y='3' Unit='10140' Level='4' Equip1='401' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='3' Unit='10030' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1015">
+		<Theme>103</Theme>
+		<ProfileAvatar>10060</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10060</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>12081</Artifact>
+			<Artifact>13101</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10010</Card>
+			<Card>10020</Card>
+			<Card>10060</Card>
+			<Card>10140</Card>
+			<Card>10150</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10000' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='3' Unit='10010' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='3' Unit='10020' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10060' Level='5' Equip1='302' Equip2='401' Equip3='102'/>
+			<SpawnData X='2' Y='3' Unit='10140' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10150' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1016">
+		<Theme>103</Theme>
+		<ProfileAvatar>10170</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10170</KingName>
+		<MainBuilding>0</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>10031</Artifact>
+			<Artifact>10011</Artifact>
+			<Artifact>13141</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10010</Card>
+			<Card>10050</Card>
+			<Card>10080</Card>
+			<Card>10120</Card>
+			<Card>10140</Card>
+			<Card>10170</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='4' Y='3' Unit='10010' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10080' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='2' Unit='10120' Level='3' Equip1='101' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='3' Unit='10140' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='2' Unit='10170' Level='5' Equip1='302' Equip2='402' Equip3='401'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1017">
+		<Theme>103</Theme>
+		<ProfileAvatar>10180</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10180</KingName>
+		<MainBuilding>0</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>13111</Artifact>
+			<Artifact>13081</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10030</Card>
+			<Card>10070</Card>
+			<Card>10090</Card>
+			<Card>10150</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='1' Y='2' Unit='10000' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='2' Unit='10070' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10090' Level='3' Equip1='301' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10150' Level='4' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='2' Unit='10180' Level='5' Equip1='303' Equip2='102' Equip3='402'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1018">
+		<Theme>103</Theme>
+		<ProfileAvatar>10040</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10040</KingName>
+		<MainBuilding>2</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>10011</Artifact>
+			<Artifact>13041</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10010</Card>
+			<Card>10020</Card>
+			<Card>10030</Card>
+			<Card>10040</Card>
+			<Card>10060</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='1' Unit='10000' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10010' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10020' Level='4' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10030' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10040' Level='5' Equip1='303' Equip2='101' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1019">
+		<Theme>103</Theme>
+		<ProfileAvatar>10090</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10090</KingName>
+		<MainBuilding>2</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>12081</Artifact>
+			<Artifact>12121</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10010</Card>
+			<Card>10020</Card>
+			<Card>10040</Card>
+			<Card>10060</Card>
+			<Card>10090</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10010' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='3' Unit='10020' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='1' Unit='10040' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='2' Unit='10060' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10090' Level='3' Equip1='303' Equip2='302' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10180' Level='1' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10020' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='3' Unit='10010' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='2' Unit='10060' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='1' Unit='10040' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='1' Unit='10180' Level='1' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1020">
+		<Theme>103</Theme>
+		<ProfileAvatar>10070</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10070</KingName>
+		<MainBuilding>2</MainBuilding>
+		<SubBuilding>3</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>12071</Artifact>
+			<Artifact>13051</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10070</Card>
+			<Card>10090</Card>
+			<Card>10110</Card>
+			<Card>10150</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='2' Unit='10070' Level='7' Equip1='103' Equip2='402' Equip3='302'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1021">
+		<Theme>103</Theme>
+		<ProfileAvatar>10000</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10000</KingName>
+		<MainBuilding>0</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>10031</Artifact>
+			<Artifact>13051</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10010</Card>
+			<Card>10030</Card>
+			<Card>10040</Card>
+			<Card>10050</Card>
+			<Card>10060</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10000' Level='5' Equip1='402' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10010' Level='4' Equip1='402' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10030' Level='4' Equip1='402' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='1' Unit='10040' Level='3' Equip1='402' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='1' Unit='10050' Level='3' Equip1='402' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1022">
+		<Theme>103</Theme>
+		<ProfileAvatar>10010</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10010</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>10011</Artifact>
+			<Artifact>12081</Artifact>
+			<Artifact>12121</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10010</Card>
+			<Card>10020</Card>
+			<Card>10140</Card>
+			<Card>10150</Card>
+			<Card>10030</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='1' Y='3' Unit='10000' Level='2' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10010' Level='4' Equip1='203' Equip2='202' Equip3='-1'/>
+			<SpawnData X='2' Y='3' Unit='10020' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='3' Unit='10140' Level='2' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10150' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='3' Unit='10010' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='3' Unit='10010' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1023">
+		<Theme>103</Theme>
+		<ProfileAvatar>10020</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10020</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>10011</Artifact>
+			<Artifact>12091</Artifact>
+			<Artifact>12121</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10010</Card>
+			<Card>10020</Card>
+			<Card>10030</Card>
+			<Card>10070</Card>
+			<Card>10120</Card>
+			<Card>10170</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10020' Level='3' Equip1='202' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='3' Unit='10020' Level='3' Equip1='202' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='3' Unit='10020' Level='3' Equip1='202' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='3' Unit='10020' Level='3' Equip1='202' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10020' Level='3' Equip1='202' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='3' Unit='10020' Level='3' Equip1='202' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='3' Unit='10020' Level='3' Equip1='202' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1024">
+		<Theme>103</Theme>
+		<ProfileAvatar>10030</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10030</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>12091</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10030</Card>
+			<Card>10060</Card>
+			<Card>10090</Card>
+			<Card>10120</Card>
+			<Card>10140</Card>
+			<Card>10150</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10030' Level='5' Equip1='103' Equip2='303' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10030' Level='4' Equip1='102' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10030' Level='4' Equip1='302' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='1' Unit='10030' Level='3' Equip1='301' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10030' Level='3' Equip1='101' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1025">
+		<Theme>103</Theme>
+		<ProfileAvatar>10050</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10050</KingName>
+		<MainBuilding>2</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10050</Card>
+			<Card>10070</Card>
+			<Card>10080</Card>
+			<Card>10090</Card>
+			<Card>10100</Card>
+			<Card>10150</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='0' Y='1' Unit='10050' Level='5' Equip1='303' Equip2='302' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10150' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='1' Unit='10050' Level='5' Equip1='403' Equip2='402' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1026">
+		<Theme>103</Theme>
+		<ProfileAvatar>10080</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10080</KingName>
+		<MainBuilding>2</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>12121</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>12091</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10070</Card>
+			<Card>10080</Card>
+			<Card>10090</Card>
+			<Card>10100</Card>
+			<Card>10060</Card>
+			<Card>10010</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='0' Y='3' Unit='10080' Level='1' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='3' Unit='10080' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10080' Level='2' Equip1='401' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10080' Level='3' Equip1='402' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10080' Level='2' Equip1='401' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='3' Unit='10080' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='3' Unit='10080' Level='1' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='2' Unit='10080' Level='1' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='2' Unit='10080' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10080' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10080' Level='4' Equip1='403' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='3' Unit='10080' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='2' Unit='10080' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='2' Unit='10080' Level='1' Equip1='-1' Equip2='-1' Equip3='-1'/>
+
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1027">
+		<Theme>103</Theme>
+		<ProfileAvatar>10140</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10140</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>12071</Artifact>
+			<Artifact>13051</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10040</Card>
+			<Card>10100</Card>
+			<Card>10110</Card>
+			<Card>10120</Card>
+			<Card>10140</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='2' Unit='10140' Level='7' Equip1='303' Equip2='302' Equip3='402'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1028">
+		<Theme>103</Theme>
+		<ProfileAvatar>10150</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10150</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>12091</Artifact>
+			<Artifact>12121</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10050</Card>
+			<Card>10100</Card>
+			<Card>10150</Card>
+			<Card>10170</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='0' Y='0' Unit='10150' Level='1' Equip1='302' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='0' Unit='10150' Level='1' Equip1='302' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='1' Unit='10150' Level='3' Equip1='302' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10150' Level='2' Equip1='302' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10150' Level='3' Equip1='302' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10150' Level='2' Equip1='302' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10150' Level='3' Equip1='302' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1029">
+		<Theme>103</Theme>
+		<ProfileAvatar>10120</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10120</KingName>
+		<MainBuilding>0</MainBuilding>
+		<SubBuilding>1</SubBuilding>
+		<Artifacts>
+			<Artifact>13011</Artifact>
+			<Artifact>12121</Artifact>
+			<Artifact>13141</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10060</Card>
+			<Card>10080</Card>
+			<Card>10120</Card>
+			<Card>10140</Card>
+			<Card>10150</Card>
+			<Card>10170</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='1' Unit='10120' Level='5' Equip1='302' Equip2='102' Equip3='301'/>
+			<SpawnData X='5' Y='3' Unit='10140' Level='5' Equip1='201' Equip2='401' Equip3='-1'/>
+			<SpawnData X='1' Y='3' Unit='10150' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10120' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='1' Unit='10120' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1030">
+		<Theme>103</Theme>
+		<ProfileAvatar>10110</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10110</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>13021</Artifact>
+			<Artifact>13011</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10040</Card>
+			<Card>10050</Card>
+			<Card>10110</Card>
+			<Card>10120</Card>
+			<Card>10170</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='1' Unit='10040' Level='5' Equip1='301' Equip2='401' Equip3='-1'/>
+			<SpawnData X='4' Y='1' Unit='10050' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10110' Level='5' Equip1='101' Equip2='302' Equip3='103'/>
+			<SpawnData X='5' Y='1' Unit='10170' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10180' Level='5' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1031">
+		<Theme>103</Theme>
+		<ProfileAvatar>10100</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10100</KingName>
+		<MainBuilding>2</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>13011</Artifact>
+			<Artifact>13111</Artifact>
+			<Artifact>13051</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10030</Card>
+			<Card>10100</Card>
+			<Card>10120</Card>
+			<Card>10140</Card>
+			<Card>10150</Card>
+			<Card>10170</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='2' Unit='10100' Level='6' Equip1='403' Equip2='102' Equip3='301'/>
+			<SpawnData X='4' Y='2' Unit='10120' Level='6' Equip1='303' Equip2='202' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1032">
+		<Theme>103</Theme>
+		<ProfileAvatar>10060</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10060</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>3</SubBuilding>
+		<Artifacts>
+			<Artifact>12081</Artifact>
+			<Artifact>12091</Artifact>
+			<Artifact>12121</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10020</Card>
+			<Card>10070</Card>
+			<Card>10080</Card>
+			<Card>10110</Card>
+			<Card>10150</Card>
+			<Card>10060</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='0' Y='2' Unit='10060' Level='2' Equip1='400' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10060' Level='1' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10060' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='2' Unit='10060' Level='1' Equip1='400' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10060' Level='3' Equip1='401' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='1' Unit='10060' Level='4' Equip1='401' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10060' Level='3' Equip1='302' Equip2='401' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10060' Level='2' Equip1='400' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='2' Unit='10060' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='2' Unit='10060' Level='1' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-6</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1033">
+		<Theme>103</Theme>
+		<ProfileAvatar>10170</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10170</KingName>
+		<MainBuilding>2</MainBuilding>
+		<SubBuilding>1</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>12071</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<MainArtifact>10021</MainArtifact>
+		<SubArtifact>12071</SubArtifact>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10020</Card>
+			<Card>10070</Card>
+			<Card>10080</Card>
+			<Card>10090</Card>
+			<Card>10170</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10020' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10170' Level='6' Equip1='303' Equip2='402' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>-10</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+	
+	<PvPEnemyPreset ID="1034">
+		<Theme>103</Theme>
+		<ProfileAvatar>10180</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10180</KingName>
+		<MainBuilding>0</MainBuilding>
+		<SubBuilding>1</SubBuilding>
+		<Artifacts>
+			<Artifact>10001</Artifact>
+			<Artifact>10021</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10000</Card>
+			<Card>10010</Card>
+			<Card>10040</Card>
+			<Card>10060</Card>
+			<Card>10090</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10000' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='1' Unit='10040' Level='3' Equip1='301' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10060' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10090' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10180' Level='5' Equip1='103' Equip2='302' Equip3='101'/>
+		</Data>
+		<CardLevelOffset>-13</CardLevelOffset>
+		<BuildingLevelOffset>-2</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1035">
+		<Theme>103</Theme>
+		<ProfileAvatar>10190</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10190</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>3</SubBuilding>
+		<Artifacts>
+			<Artifact>13091</Artifact>
+			<Artifact>12091</Artifact>
+			<Artifact>12121</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10190</Card>
+			<Card>10100</Card>
+			<Card>10220</Card>
+			<Card>10180</Card>
+			<Card>10090</Card>
+			<Card>10020</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='0' Y='0' Unit='10220' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='0' Unit='10220' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='0' Unit='10220' Level='3' Equip1='302' Equip2='102' Equip3='-1'/>
+			<SpawnData X='5' Y='0' Unit='10220' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10190' Level='5' Equip1='202' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10180' Level='3' Equip1='103' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10100' Level='3' Equip1='402' Equip2='302' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1036">
+		<Theme>103</Theme>
+		<ProfileAvatar>10200</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10200</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>13021</Artifact>
+			<Artifact>13051</Artifact>
+			<Artifact>13141</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10200</Card>
+			<Card>10000</Card>
+			<Card>10020</Card>
+			<Card>10150</Card>
+			<Card>10090</Card>
+			<Card>10040</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10150' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10000' Level='4' Equip1='201' Equip2='101' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10020' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10200' Level='5' Equip1='402' Equip2='302' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1037">
+		<Theme>103</Theme>
+		<ProfileAvatar>10210</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10210</KingName>
+		<MainBuilding>2</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>13001</Artifact>
+			<Artifact>10021</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10210</Card>
+			<Card>10230</Card>
+			<Card>10020</Card>
+			<Card>10150</Card>
+			<Card>10090</Card>
+			<Card>10040</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='1' Y='3' Unit='10230' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='3' Unit='10230' Level='3' Equip1='401' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10230' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10230' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10210' Level='6' Equip1='302' Equip2='102' Equip3='201'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1038">
+		<Theme>103</Theme>
+		<ProfileAvatar>10220</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10220</KingName>
+		<MainBuilding>5</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>12091</Artifact>
+			<Artifact>13021</Artifact>
+			<Artifact>13091</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10220</Card>
+			<Card>10230</Card>
+			<Card>10020</Card>
+			<Card>10150</Card>
+			<Card>10090</Card>
+			<Card>10040</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10020' Level='4' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='0' Unit='10220' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='0' Unit='10220' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='0' Unit='10220' Level='5' Equip1='103' Equip2='302' Equip3='401'/>
+			<SpawnData X='4' Y='0' Unit='10220' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='0' Unit='10220' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1039">
+		<Theme>103</Theme>
+		<ProfileAvatar>10230</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10230</KingName>
+		<MainBuilding>0</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>13001</Artifact>
+			<Artifact>10021</Artifact>
+			<Artifact>13141</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10230</Card>
+			<Card>10070</Card>
+			<Card>10020</Card>
+			<Card>10150</Card>
+			<Card>10090</Card>
+			<Card>10040</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10230' Level='7' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10070' Level='6' Equip1='103' Equip2='402' Equip3='303'/>
+			<SpawnData X='3' Y='1' Unit='10090' Level='4' Equip1='302' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1040">
+		<Theme>103</Theme>
+		<ProfileAvatar>10240</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10240</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>13051</Artifact>
+			<Artifact>13011</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10240</Card>
+			<Card>10070</Card>
+			<Card>10010</Card>
+			<Card>10000</Card>
+			<Card>10090</Card>
+			<Card>10200</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10240' Level='6' Equip1='201' Equip2='101' Equip3='402'/>
+			<SpawnData X='5' Y='2' Unit='10200' Level='5' Equip1='403' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10090' Level='4' Equip1='302' Equip2='301' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1041">
+		<Theme>103</Theme>
+		<ProfileAvatar>10250</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10250</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>12071</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10250</Card>
+			<Card>10190</Card>
+			<Card>10010</Card>
+			<Card>10000</Card>
+			<Card>10020</Card>
+			<Card>10030</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10250' Level='6' Equip1='302' Equip2='403' Equip3='-1'/>
+			<SpawnData X='1' Y='2' Unit='10190' Level='5' Equip1='202' Equip2='101' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1042">
+		<Theme>103</Theme>
+		<ProfileAvatar>10260</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10260</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>12071</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>13141</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10260</Card>
+			<Card>10040</Card>
+			<Card>10050</Card>
+			<Card>10010</Card>
+			<Card>10030</Card>
+			<Card>10020</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='2' Unit='10260' Level='7' Equip1='303' Equip2='403' Equip3='402'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1043">
+		<Theme>103</Theme>
+		<ProfileAvatar>10270</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10270</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>3</SubBuilding>
+		<Artifacts>
+			<Artifact>13021</Artifact>
+			<Artifact>10021</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10270</Card>
+			<Card>10200</Card>
+			<Card>10100</Card>
+			<Card>10240</Card>
+			<Card>10120</Card>
+			<Card>10020</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10020' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10100' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10240' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='1' Unit='10270' Level='5' Equip1='303' Equip2='302' Equip3='402'/>
+			<SpawnData X='4' Y='1' Unit='10200' Level='5' Equip1='102' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1044">
+		<Theme>103</Theme>
+		<ProfileAvatar>10280</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10280</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>12071</Artifact>
+			<Artifact>13071</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10280</Card>
+			<Card>10000</Card>
+			<Card>10020</Card>
+			<Card>10040</Card>
+			<Card>10030</Card>
+			<Card>10010</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='0' Unit='10280' Level='7' Equip1='403' Equip2='403' Equip3='303'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1045">
+		<Theme>103</Theme>
+		<ProfileAvatar>10290</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10290</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>5</SubBuilding>
+		<Artifacts>
+			<Artifact>13101</Artifact>
+			<Artifact>12081</Artifact>
+			<Artifact>12121</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10290</Card>
+			<Card>10020</Card>
+			<Card>10000</Card>
+			<Card>10110</Card>
+			<Card>10090</Card>
+			<Card>10060</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10000' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10020' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10000' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10290' Level='5' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='1' Unit='10110' Level='3' Equip1='302' Equip2='101' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10090' Level='3' Equip1='301' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='1' Unit='10060' Level='3' Equip1='402' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1046">
+		<Theme>103</Theme>
+		<ProfileAvatar>10300</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10300</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>13111</Artifact>
+			<Artifact>13011</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10300</Card>
+			<Card>10230</Card>
+			<Card>10000</Card>
+			<Card>10110</Card>
+			<Card>10010</Card>
+			<Card>10030</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10000' Level='4' Equip1='202' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='0' Y='2' Unit='10230' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10300' Level='7' Equip1='302' Equip2='403' Equip3='-1'/>
+			<SpawnData X='5' Y='1' Unit='10290' Level='2' Equip1='101' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1047">
+		<Theme>103</Theme>
+		<ProfileAvatar>10310</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10310</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>12071</Artifact>
+			<Artifact>13001</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10310</Card>
+			<Card>10080</Card>
+			<Card>10020</Card>
+			<Card>10050</Card>
+			<Card>10040</Card>
+			<Card>10000</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='1' Y='3' Unit='10310' Level='6' Equip1='102' Equip2='302' Equip3='403'/>
+			<SpawnData X='3' Y='3' Unit='10080' Level='5' Equip1='202' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1048">
+		<Theme>103</Theme>
+		<ProfileAvatar>10320</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10320</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>13021</Artifact>
+			<Artifact>13111</Artifact>
+			<Artifact>13141</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10320</Card>
+			<Card>10230</Card>
+			<Card>10020</Card>
+			<Card>10000</Card>
+			<Card>10030</Card>
+			<Card>10010</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10000' Level='4' Equip1='401' Equip2='201' Equip3='-1'/>
+			<SpawnData X='0' Y='2' Unit='10230' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10320' Level='5' Equip1='103' Equip2='303' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1049">
+		<Theme>103</Theme>
+		<ProfileAvatar>10180</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10180</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>13111</Artifact>
+			<Artifact>10011</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10180</Card>
+			<Card>10190</Card>
+			<Card>10020</Card>
+			<Card>10100</Card>
+			<Card>10040</Card>
+			<Card>10060</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10100' Level='4' Equip1='202' Equip2='301' Equip3='-1'/>
+			<SpawnData X='1' Y='2' Unit='10180' Level='5' Equip1='302' Equip2='102' Equip3='402'/>
+			<SpawnData X='3' Y='2' Unit='10020' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='2' Unit='10190' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1050">
+		<Theme>103</Theme>
+		<ProfileAvatar>10190</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10190</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>12091</Artifact>
+			<Artifact>13091</Artifact>
+			<Artifact>13051</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10190</Card>
+			<Card>10200</Card>
+			<Card>10020</Card>
+			<Card>10100</Card>
+			<Card>10010</Card>
+			<Card>10030</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='1' Y='3' Unit='10190' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10190' Level='5' Equip1='202' Equip2='301' Equip3='402'/>
+			<SpawnData X='5' Y='3' Unit='10190' Level='4' Equip1='101' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='1' Unit='10190' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='1' Unit='10190' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1051">
+		<Theme>103</Theme>
+		<ProfileAvatar>10200</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10200</KingName>
+		<MainBuilding>3</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>10031</Artifact>
+			<Artifact>13021</Artifact>
+			<Artifact>13061</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10200</Card>
+			<Card>10240</Card>
+			<Card>10040</Card>
+			<Card>10020</Card>
+			<Card>10100</Card>
+			<Card>10050</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10240' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10100' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10020' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10050' Level='4' Equip1='101' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10200' Level='5' Equip1='403' Equip2='302' Equip3='-1'/>
+			<SpawnData X='5' Y='1' Unit='10040' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1052">
+		<Theme>103</Theme>
+		<ProfileAvatar>10210</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10210</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>12091</Artifact>
+			<Artifact>13001</Artifact>
+			<Artifact>13141</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10210</Card>
+			<Card>10020</Card>
+			<Card>10200</Card>
+			<Card>10030</Card>
+			<Card>10000</Card>
+			<Card>10050</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10210' Level='6' Equip1='101' Equip2='303' Equip3='202'/>
+			<SpawnData X='3' Y='1' Unit='10200' Level='5' Equip1='402' Equip2='302' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1053">
+		<Theme>103</Theme>
+		<ProfileAvatar>10220</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10220</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>5</SubBuilding>
+		<Artifacts>
+			<Artifact>12091</Artifact>
+			<Artifact>12101</Artifact>
+			<Artifact>12121</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10220</Card>
+			<Card>10000</Card>
+			<Card>10040</Card>
+			<Card>10020</Card>
+			<Card>10030</Card>
+			<Card>10060</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10020' Level='4' Equip1='201' Equip2='401' Equip3='-1'/>
+			<SpawnData X='0' Y='2' Unit='10220' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='2' Unit='10220' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10220' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10220' Level='4' Equip1='303' Equip2='102' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10220' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='2' Unit='10220' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='2' Unit='10220' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1054">
+		<Theme>103</Theme>
+		<ProfileAvatar>10230</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10230</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>2</SubBuilding>
+		<Artifacts>
+			<Artifact>10001</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>13051</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10230</Card>
+			<Card>10320</Card>
+			<Card>10070</Card>
+			<Card>10060</Card>
+			<Card>10030</Card>
+			<Card>10080</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10230' Level='6' Equip1='103' Equip2='101' Equip3='401'/>
+			<SpawnData X='4' Y='3' Unit='10230' Level='1' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='1' Unit='10320' Level='5' Equip1='303' Equip2='102' Equip3='302'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1055">
+		<Theme>103</Theme>
+		<ProfileAvatar>10240</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10240</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>5</SubBuilding>
+		<Artifacts>
+			<Artifact>10031</Artifact>
+			<Artifact>12081</Artifact>
+			<Artifact>13081</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10240</Card>
+			<Card>10000</Card>
+			<Card>10290</Card>
+			<Card>10150</Card>
+			<Card>10020</Card>
+			<Card>10190</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='0' Y='3' Unit='10000' Level='3' Equip1='202' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='3' Unit='10290' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='3' Unit='10240' Level='5' Equip1='102' Equip2='302' Equip3='403'/>
+			<SpawnData X='3' Y='3' Unit='10150' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10020' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='6' Y='0' Unit='10190' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1056">
+		<Theme>103</Theme>
+		<ProfileAvatar>10250</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10250</KingName>
+		<MainBuilding>4</MainBuilding>
+		<SubBuilding>1</SubBuilding>
+		<Artifacts>
+			<Artifact>13011</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>14031</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10250</Card>
+			<Card>10080</Card>
+			<Card>10310</Card>
+			<Card>10100</Card>
+			<Card>10020</Card>
+			<Card>10090</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='3' Y='3' Unit='10250' Level='6' Equip1='403' Equip2='402' Equip3='302'/>
+			<SpawnData X='5' Y='3' Unit='10310' Level='3' Equip1='101' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='2' Unit='10080' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1057">
+		<Theme>103</Theme>
+		<ProfileAvatar>10260</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="2">UnitName_10260</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>0</SubBuilding>
+		<Artifacts>
+			<Artifact>12091</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>13081</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10260</Card>
+			<Card>10060</Card>
+			<Card>10000</Card>
+			<Card>10040</Card>
+			<Card>10010</Card>
+			<Card>10030</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='1' Y='3' Unit='10260' Level='2' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='3' Unit='10260' Level='4' Equip1='101' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10260' Level='6' Equip1='403' Equip2='102' Equip3='202'/>
+			<SpawnData X='4' Y='3' Unit='10260' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='3' Unit='10260' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1058">
+		<Theme>103</Theme>
+		<ProfileAvatar>10270</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10270</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>10021</Artifact>
+			<Artifact>10031</Artifact>
+			<Artifact>12121</Artifact>
+		</Artifacts>
+		<Deck>
+			<Card>10270</Card>
+			<Card>10090</Card>
+			<Card>10000</Card>
+			<Card>10150</Card>
+			<Card>10120</Card>
+			<Card>10180</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10150' Level='4' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10000' Level='3' Equip1='201' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='1' Y='1' Unit='10270' Level='5' Equip1='403' Equip2='402' Equip3='301'/>
+			<SpawnData X='3' Y='1' Unit='10090' Level='3' Equip1='302' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='5' Y='1' Unit='10190' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='0' Unit='10120' Level='4' Equip1='101' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+
+	<PvPEnemyPreset ID="1059">
+		<Theme>103</Theme>
+		<ProfileAvatar>10290</ProfileAvatar>
+		<CastleName Postfix="2">Text_KingGod</CastleName>
+		<KingName Postfix="1">UnitName_10290</KingName>
+		<MainBuilding>1</MainBuilding>
+		<SubBuilding>4</SubBuilding>
+		<Artifacts>
+			<Artifact>13121</Artifact>
+			<Artifact>13081</Artifact>
+			<Artifact>13091</Artifact>
+		</Artifacts>
+		<MainArtifact>13121</MainArtifact>
+		<SubArtifact>13081</SubArtifact>
+		<Deck>
+			<Card>10290</Card>
+			<Card>10060</Card>
+			<Card>10090</Card>
+			<Card>10010</Card>
+			<Card>10190</Card>
+			<Card>10110</Card>
+		</Deck>
+		<Data>
+			<SpawnData X='2' Y='3' Unit='10010' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='3' Y='3' Unit='10290' Level='5' Equip1='202' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='4' Y='3' Unit='10190' Level='3' Equip1='-1' Equip2='-1' Equip3='-1'/>
+			<SpawnData X='2' Y='2' Unit='10060' Level='4' Equip1='402' Equip2='401' Equip3='-1'/>
+			<SpawnData X='3' Y='2' Unit='10110' Level='3' Equip1='302' Equip2='301' Equip3='101'/>
+			<SpawnData X='4' Y='2' Unit='10090' Level='3' Equip1='302' Equip2='-1' Equip3='-1'/>
+		</Data>
+		<CardLevelOffset>0</CardLevelOffset>
+		<BuildingLevelOffset>0</BuildingLevelOffset>
+	</PvPEnemyPreset>
+</PvPEnemyPresets>

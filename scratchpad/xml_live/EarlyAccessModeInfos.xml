@@ -1,0 +1,2699 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EarlyAccessModeInfos>
+    <EarlyAccessModeInfo ID="1520">
+        <StartAt>20250205_000000</StartAt>
+        <EndAt>20250210_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+            <TestUnit>
+                <UnitID>10710</UnitID>
+                <CardLevel>20</CardLevel>
+                <PotentialTier>1</PotentialTier>
+            </TestUnit>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30017</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+        <!-- 장신구 -->
+        <TestAccessories>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMDef" Value="60" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMDef" Value="60" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="60" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="60" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefPen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="3" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefPen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="3" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefDen</MainStat>
+                <SubStats>
+                    <SubStat Key="HpPer" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="HpPer" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="3" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefDen</MainStat>
+                <SubStats>
+                    <SubStat Key="HpPer" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="HpPer" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="3" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="60" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="60" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMDef" Value="60" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>0</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMDef" Value="60" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefPen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefPen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>1</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>HpPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>HpPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>HpPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>HpPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseCriticalDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="1.5" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseCriticalDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="1.5" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMCriticalDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="MAtkPer" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="MAtkPer" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="1.5" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>2</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMCriticalDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="MAtkPer" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="MAtkPer" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="1.5" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>3</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>3</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>3</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>3</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>3</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>3</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>3</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefDen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>3</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefDen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>3</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>3</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>4</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>4</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>4</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>4</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>4</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AttackSpeedPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>4</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AttackSpeedPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>4</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseSpecialDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="3" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>4</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseSpecialDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="3" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>5</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>5</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>5</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>5</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>5</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AttackSpeedPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                 <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>5</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AttackSpeedPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>5</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseSpecialDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="3" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>5</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseSpecialDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="3" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>6</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>6</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>6</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>6</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>6</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>6</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>6</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>HpPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                 <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>6</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>HpPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>6</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>6</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDef" Value="40" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>7</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>7</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                 <FixedBonusSubStat Key="BaseMCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>7</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>7</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>7</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AttackSpeedPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>7</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AttackSpeedPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>7</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMCriticalDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AttackSpeedPer" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="AttackSpeedPer" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>7</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMCriticalDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AttackSpeedPer" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="AttackSpeedPer" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>8</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>8</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>8</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>8</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>8</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefDen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>8</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefDen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>8</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>8</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+              <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>HpPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>HpPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalProb" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>HpPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>HpPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalProb" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseMCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseMCriticalProb" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseCriticalDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>9</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseCriticalDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                    <SubStat Key="BaseCriticalDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2" />
+            </TestAccessory>
+         <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefPen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefPen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>10</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>    
+          <TestAccessory>
+                <Synergy>11</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>11</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+                      <TestAccessory>
+                <Synergy>11</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="MAtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="MAtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>11</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="MAtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="MAtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>11</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>11</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>11</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AttackSpeedPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>11</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AttackSpeedPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>11</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseSpecialDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="3" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>11</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseSpecialDamageMul</MainStat>
+                <SubStats>
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="AtkPer" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                    <SubStat Key="BaseSpecialDamageMul" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="3" />
+            </TestAccessory>    
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefPen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefPen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseDefPen" Value="3" />
+                    <SubStat Key="BaseMDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+            </TestAccessory>      
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>AtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>1</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>MAtkPer</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>2</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefDen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>3</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDefDen</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>
+            <TestAccessory>
+                <Synergy>12</Synergy>
+                <Type>4</Type>
+                <Rarity>3</Rarity>
+                <Level>20</Level>
+                <MainStat>BaseMDef</MainStat>
+                <SubStats>
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDef" Value="60" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                    <SubStat Key="BaseDefDen" Value="3" />
+                </SubStats>
+                <FixedBonusSubStat Key="BaseDefDen" Value="2" />
+            </TestAccessory>                
+        </TestAccessories>
+    
+        
+    </EarlyAccessModeInfo>
+
+    <EarlyAccessModeInfo ID="1530" Inherit="1520">
+        <StartAt>20250226_000000</StartAt>
+        <EndAt>20250312_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30018</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1540" Inherit="1520">
+        <StartAt>20250326_000000</StartAt>
+        <EndAt>20250407_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+            <TestUnit>
+                <UnitID>10720</UnitID>
+                <CardLevel>20</CardLevel>
+                <PotentialTier>1</PotentialTier>
+            </TestUnit>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30019</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1550" Inherit="1520">
+        <StartAt>20250501_000000</StartAt>
+        <EndAt>20250505_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30020</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1551" Inherit="1520">
+        <StartAt>20250515_000000</StartAt>
+        <EndAt>20250519_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30021</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1560" Inherit="1520">
+        <StartAt>20250529_000000</StartAt>
+        <EndAt>20250602_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+            <TestUnit>
+                <UnitID>10730</UnitID>
+                <CardLevel>20</CardLevel>
+                <PotentialTier>1</PotentialTier>
+            </TestUnit>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30022</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1570" Inherit="1520">
+        <StartAt>20250626_000000</StartAt>
+        <EndAt>20250630_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30023</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1580" Inherit="1520">
+        <StartAt>20250718_000000</StartAt>
+        <EndAt>20250721_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+            <TestUnit>
+                <UnitID>10740</UnitID>
+                <CardLevel>20</CardLevel>
+                <PotentialTier>1</PotentialTier>
+            </TestUnit>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30024</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>    
+    <EarlyAccessModeInfo ID="1581" Inherit="1520">
+        <StartAt>20250807_000000</StartAt>
+        <EndAt>20250811_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30025</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>    
+    <EarlyAccessModeInfo ID="1590" Inherit="1520">
+        <StartAt>20250821_000000</StartAt>
+        <EndAt>20250825_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+            <TestUnit>
+                <UnitID>90070</UnitID>
+                <CardLevel>20</CardLevel>
+                <PotentialTier>1</PotentialTier>
+            </TestUnit>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30026</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo> 
+    <EarlyAccessModeInfo ID="1600" Inherit="1520">
+        <StartAt>20250918_000000</StartAt>
+        <EndAt>20250922_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>50000</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>     
+<EarlyAccessModeInfo ID="1601" Inherit="1520">
+        <StartAt>20251002_000000</StartAt>
+        <EndAt>20251006_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30027</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+<EarlyAccessModeInfo ID="1610" Inherit="1520">
+        <StartAt>20251016_000000</StartAt>
+        <EndAt>20251020_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+            <TestUnit>
+                <UnitID>10750</UnitID>
+                <CardLevel>20</CardLevel>
+                <PotentialTier>1</PotentialTier>
+            </TestUnit>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30028</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>    
+<EarlyAccessModeInfo ID="1620" Inherit="1520">
+        <StartAt>20251113_000000</StartAt>
+        <EndAt>20251117_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30029</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>       
+<EarlyAccessModeInfo ID="1630" Inherit="1520">
+        <StartAt>20251211_000000</StartAt>
+        <EndAt>20251215_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+            <TestUnit>
+                <UnitID>10760</UnitID>
+                <CardLevel>20</CardLevel>
+                <PotentialTier>1</PotentialTier>
+            </TestUnit>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30031</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>        
+<EarlyAccessModeInfo ID="1621" Inherit="1520">
+        <StartAt>20251127_000000</StartAt>
+        <EndAt>20251201_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30030</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>            
+    <EarlyAccessModeInfo ID="1640" Inherit="1520">
+        <StartAt>20260108_000000</StartAt>
+        <EndAt>20260112_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+            <TestUnit>
+                <UnitID>102500</UnitID>
+                <CardLevel>20</CardLevel>
+                <PotentialTier>1</PotentialTier>
+            </TestUnit>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30032</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1641" Inherit="1520">
+        <StartAt>20260122_000000</StartAt>
+        <EndAt>20260126_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30033</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1650" Inherit="1520">
+        <StartAt>20260205_000000</StartAt>
+        <EndAt>20260209_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+            <TestUnit>
+                <UnitID>10770</UnitID>
+                <CardLevel>20</CardLevel>
+                <PotentialTier>1</PotentialTier>
+            </TestUnit>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30034</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1660" Inherit="1520">
+        <StartAt>20260305_000000</StartAt>
+        <EndAt>20260309_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30035</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>  
+    <EarlyAccessModeInfo ID="1670" Inherit="1520">
+        <StartAt>20260403_000000</StartAt>
+        <EndAt>20260406_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>50001</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>       
+    <EarlyAccessModeInfo ID="1680" Inherit="1520">
+        <StartAt>20260430_000000</StartAt>
+        <EndAt>20260504_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30036</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>       
+    <EarlyAccessModeInfo ID="1681" Inherit="1520">
+        <StartAt>20260514_000000</StartAt>
+        <EndAt>20260518_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30037</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>          
+    <EarlyAccessModeInfo ID="1690" Inherit="1520">
+        <StartAt>20260528_000000</StartAt>
+        <EndAt>20260601_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30038</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>         
+    <EarlyAccessModeInfo ID="1691" Inherit="1520">
+        <StartAt>20260611_000000</StartAt>
+        <EndAt>20260615_105959</EndAt>
+        <!-- 보구 -->
+        <TestDimensionUnits>
+            <TestDimensionUnit>
+                <UnitID>10780</UnitID>
+                <CardLevel>20</CardLevel>
+                <Overcome>5</Overcome>
+            </TestDimensionUnit>
+        </TestDimensionUnits>
+        <TestTreasures>
+        </TestTreasures>
+    </EarlyAccessModeInfo>    
+    <EarlyAccessModeInfo ID="1700" Inherit="1520">
+        <StartAt>20260625_000000</StartAt>
+        <EndAt>20260629_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30039</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>          
+    <EarlyAccessModeInfo ID="1701" Inherit="1520">
+        <StartAt>20260709_000000</StartAt>
+        <EndAt>20260713_105959</EndAt>
+        <TestDimensionUnits>
+            <TestDimensionUnit>
+                <UnitID>10790</UnitID>
+                <CardLevel>20</CardLevel>
+                <Overcome>5</Overcome>
+            </TestDimensionUnit>
+        </TestDimensionUnits>        
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30040</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>           
+</EarlyAccessModeInfos>

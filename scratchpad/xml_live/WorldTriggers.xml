@@ -1,0 +1,1684 @@
+<WorldTriggers>
+	<!-- 데이터 분류
+		 - id 10000~19999 : 그랜드 아레나 버프
+		 - id 20000~49999 : 스토리 모드 스테이지 기믹
+	 -->
+	
+	<!-- Pool 1 -->
+	<WorldTrigger ID="10000">
+		<DescComment>대상 영웅의 받는 피해량 -40%</DescComment>
+		
+		<Type>GrandArena</Type>
+		
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo ToAll="true">
+				<Checker Pool="0">GrandArenaBuffGroup</Checker>
+				
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-40</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+	</WorldTrigger>
+	
+	<WorldTrigger ID="10010">
+		<DescComment>대상 영웅의 주는 피해량 +40%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker Pool="0">GrandArenaBuffGroup</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Damage" StatValueType="TotalPerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>40</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+	
+	<WorldTrigger ID="10020">
+		<DescComment>대상 영웅의 기본 마나 충전 +40%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker Pool="0">GrandArenaBuffGroup</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="BaseMana" StatValueType="BaseValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>40</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+	
+	<WorldTrigger ID="10030">
+		<DescComment>대상 영웅의 최종 공격 속도 +40%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker Pool="0">GrandArenaBuffGroup</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="AttackSpeed" StatValueType="TotalPerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>40</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+	
+	<WorldTrigger ID="10040">
+		<DescComment>대상 영웅의 방어력 +750</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker Pool="0">GrandArenaBuffGroup</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="HybridDef" StatValueType="BaseValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>750</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+	
+	<WorldTrigger ID="10050">
+		<DescComment>대상 영웅의 절대 방어 +5</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker Pool="0">GrandArenaBuffGroup</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<BattleStart/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddSuperShield/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>5</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="10060">
+		<DescComment>대상 영웅의 시작 마나 +100%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker Pool="0">GrandArenaBuffGroup</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddCustomBuff Key="BattleStartManaPer"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>100</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="10070">
+		<DescComment>모든 영웅의 최종 최대 체력 +40%, 주는 피해량 -40%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText Coloring="F33000">./WorldTriggers/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Hp" StatValueType="TotalPerValue" AddHpOnAddMaxHp="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>40</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Damage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-40</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="10080">
+		<DescComment>모든 영웅의 주문 피해 +40%, 물리 피해량 -40%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText Coloring="F33000">./WorldTriggers/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<AdjustDamage With="NormalMagic,SkillMagic,ExtraMagic"/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<MultTotalDamagePer/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>40</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<AdjustDamage With="NormalPhysical,SkillPhysical,ExtraPhysical"/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<MultTotalDamagePer/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-40</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="10090">
+		<DescComment>모든 영웅의 물리 피해 +40%, 주문 피해량 -40%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText Coloring="F33000">./WorldTriggers/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<AdjustDamage With="NormalPhysical,SkillPhysical,ExtraPhysical"/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<MultTotalDamagePer/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>40</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<AdjustDamage With="NormalMagic,SkillMagic,ExtraMagic"/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<MultTotalDamagePer/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-40</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="10100">
+		<DescComment>모든 영웅의 스킬 피해 +40%, 일반 피해량 -40%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText Coloring="F33000">./WorldTriggers/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<AdjustDamage With="SkillPhysical,SkillMagic"/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<MultTotalDamagePer/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>40</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<AdjustDamage With="NormalPhysical,NormalMagic"/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<MultTotalDamagePer/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-40</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+	
+	<WorldTrigger ID="10110">
+		<DescComment>모든 영웅의 일반 피해 +40%, 스킬 피해량 -40%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText Coloring="F33000">./WorldTriggers/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<AdjustDamage With="NormalPhysical,NormalMagic"/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<MultTotalDamagePer/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>40</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<AdjustDamage With="SkillPhysical,SkillMagic"/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<MultTotalDamagePer/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-40</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+	
+	<WorldTrigger ID="10120">
+		<DescComment>모든 영웅의 피해 +40%, 방어력 -750</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText Coloring="F33000">./WorldTriggers/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Damage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>40</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="HybridDef" StatValueType="BaseValue" IgnoreCCRatio="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-750</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="10130">
+		<DescComment>모든 영웅의 이동속도 +100%, 사거리 -10</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText Coloring="F33000">./WorldTriggers/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="MoveSpeed" StatValueType="PerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>100</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Range" StatValueType="BaseValue" IgnoreCCRatio="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-10</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="10140">
+		<DescComment>모든 영웅의 회복량 +100%, 처형률 -50%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+			<InnerText Coloring="F33000">./WorldTriggers/BuffInfo/BuffOptions[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="HealEfficiency" StatValueType="PerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>100</FixedValue>
+					</Values>
+				</BuffOptions>
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Execution" StatValueType="BaseValue" IgnoreCCRatio="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-50</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="10150">
+		<DescComment>효과없음</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+		</DescParams>
+	</WorldTrigger>
+
+	<WorldTrigger ID="10160">
+		<DescComment>대상 영웅 3초 은신</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker Pool="0">GrandArenaBuffGroup</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<BattleStart/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<Cloaking />
+					</BuffContents>
+
+					<Values>
+						<FixedValue>3</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+	
+	<!-- Pool 2 -->
+	<WorldTrigger ID="11000">
+		<DescComment>대상 영웅 한 기당 최대 체력 +20%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/GrandArenaBuffValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Hp" StatValueType="TotalPerValue" ReleaseBindWhenBattleStart="true" Max="60" HaveToBind="true" AddHpOnAddMaxHp="true"/>
+					</BuffContents>
+
+					<Values>
+						<GrandArenaBuffValue>20</GrandArenaBuffValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="11010">
+		<DescComment>대상 영웅 한 기당 주문력 +35%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/GrandArenaBuffValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="MAtk" StatValueType="TotalPerValue" ReleaseBindWhenBattleStart="true" Max="105" HaveToBind="true"/>
+					</BuffContents>
+
+					<Values>
+						<GrandArenaBuffValue>35</GrandArenaBuffValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="11020">
+		<DescComment>대상 영웅 한 기당 공격력 +35%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/GrandArenaBuffValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Atk" StatValueType="TotalPerValue" ReleaseBindWhenBattleStart="true" Max="105" HaveToBind="true"/>
+					</BuffContents>
+
+					<Values>
+						<GrandArenaBuffValue>35</GrandArenaBuffValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="11030">
+		<DescComment>대상 영웅 한 기당 공격속도 +20%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/GrandArenaBuffValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="AttackSpeed" StatValueType="TotalPerValue" ReleaseBindWhenBattleStart="true" Max="60" HaveToBind="true"/>
+					</BuffContents>
+
+					<Values>
+						<GrandArenaBuffValue>20</GrandArenaBuffValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="11040">
+		<DescComment>대상 영웅 한 기당 수호 +30</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/GrandArenaBuffValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="DefDen" StatValueType="BaseValue" ReleaseBindWhenBattleStart="true" Max="90" HaveToBind="true"/>
+					</BuffContents>
+
+					<Values>
+						<GrandArenaBuffValue>30</GrandArenaBuffValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="11050">
+		<DescComment>대상 영웅 한 기당 위협 +30</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/GrandArenaBuffValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="DefPen" StatValueType="BaseValue" ReleaseBindWhenBattleStart="true" Max="90" HaveToBind="true"/>
+					</BuffContents>
+
+					<Values>
+						<GrandArenaBuffValue>30</GrandArenaBuffValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="11060">
+		<DescComment>대상 영웅 한 기당 방어력 +250</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/GrandArenaBuffValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Def" StatValueType="BaseValue" ReleaseBindWhenBattleStart="true" Max="750" HaveToBind="true"/>
+						<AddStat StatType="MDef" StatValueType="BaseValue" ReleaseBindWhenBattleStart="true" Max="750" HaveToBind="true"/>
+					</BuffContents>
+
+					<Values>
+						<GrandArenaBuffValue>250</GrandArenaBuffValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="11070">
+		<DescComment>대상 영웅 한 기당 치명타 피해량 +30%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/GrandArenaBuffValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="CriticalDamageMul" StatValueType="BaseValue" ReleaseBindWhenBattleStart="true" Max="90" HaveToBind="true"/>
+						<AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue" ReleaseBindWhenBattleStart="true" Max="90" HaveToBind="true"/>
+					</BuffContents>
+
+					<Values>
+						<GrandArenaBuffValue>30</GrandArenaBuffValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<WorldTrigger ID="11080">
+		<DescComment>효과없음</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+		</DescParams>
+	</WorldTrigger>
+
+	<WorldTrigger ID="11090">
+		<DescComment>대상 영웅 한 기당 회피율 +15%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/GrandArenaBuffValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="MissRatio" StatValueType="BaseValue" ReleaseBindWhenBattleStart="true" Max="45" HaveToBind="true"/>
+					</BuffContents>
+
+					<Values>
+						<GrandArenaBuffValue>15</GrandArenaBuffValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+</WorldTriggers>

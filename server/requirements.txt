@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+pycryptodome
+UnityPy
+mitmproxy

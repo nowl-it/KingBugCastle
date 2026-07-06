@@ -1,0 +1,2392 @@
+<!-- ID 규칙
+	만의 자리: 등급 (1: 일반, 2: 고급, 3: 희귀, 4: 영웅, 5: 전설, 6: 초월, 7: 신화)
+	단, Grade 태그는 0, 1, 2, 3, 4, 5, 6
+	
+	천, 백, 십의 자리: 인덱스 (000 ~ 999)
+	일의 자리: 크로마 (0, 1, 2, ...)
+	
+	* 붙은 건 필수
+	1)* Prefab: 맵 프리팹 이름
+	1-1) Preset: 크로마처럼 사용할 프리셋 넘버 (default: 0)
+	2) UseBerserkPreset: 연전연승 효과 적용 여부 (default: false)
+	3) Sprite (default: MapSkinSprite_{id})
+	4)* Grade (0: 일반, 1: 고급, 2: 희귀, 3: 영웅, 4: 전설, 5: 초월, 6: 신화)
+	5) AvailableTheme (default: 201,202,3000)
+	6) LoginSkin: 함께 딸려오는 로그인 화면 ID
+	7) MinVersion (default: 156000)
+	8) AlternateRewards: 가챠에서 중복 획득 시 대체 보상
+	9)* CashPrice (9-1이 false일 경우 없어도 됨)
+	9-1) CashPurchaseAvailable (default: true)
+	10)* SkinTokenPrice (10-1이 false일 경우 없어도 됨)
+	10-1) SkinTokenPurchaseAvailable (default: true)
+	10-2) PremiumSkinToken (default: false)
+	11) InfoTag (Skins.xml과 동일하게)
+	12) Default (default: false)
+	13) CanPurchase (default: true)
+	
+	미정) 전용 BGM, 전용 시작 연출, 전용 파티클, 연출 오브젝트
+-->
+
+<MapSkins>
+	<MapSkin ID="10000">
+		<Comment>기본</Comment>
+		<BigSprite>MapSkinSprite_Big_10000</BigSprite>
+		
+		<Grade>0</Grade>
+		
+		<MinVersion>156000</MinVersion>
+		<Default>true</Default>
+		
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="10010">
+		<Comment>고블린 습격!</Comment>
+		<Name>ThemeName_1</Name>
+		<Prefab>Field_01</Prefab>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10020">
+		<Comment>도적단 습격!</Comment>
+		<Name>ThemeName_2</Name>
+		<Prefab>Field_02</Prefab>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10030">
+		<Comment>슬라임 습격!</Comment>
+		<Name>ThemeName_3</Name>
+		<Prefab>Field_03</Prefab>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10040">
+		<Comment>언데드 습격!</Comment>
+		<Name>ThemeName_4</Name>
+		<Prefab>Field_04</Prefab>
+		<Fog>Fog_01</Fog>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10050">
+		<Comment>엘프 습격!</Comment>
+		<Name>ThemeName_5</Name>
+		<Prefab>Field_05</Prefab>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10060">
+		<Comment>오크 습격!</Comment>
+		<Name>ThemeName_6</Name>
+		<Prefab>Field_06</Prefab>
+		<Fog>Fog_02</Fog>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10070">
+		<Comment>악령 습격!</Comment>
+		<Name>ThemeName_7</Name>
+		<Prefab>Field_07</Prefab>
+		<Fog>Fog_02</Fog>
+		<Effect>GhostEffect</Effect>
+		<Effect Delay='1'>GhostEffect</Effect>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10080">
+		<Comment>뱀파이어 습격!</Comment>
+		<Name>ThemeName_8</Name>
+		<Prefab>Field_08</Prefab>
+		<Effect>Bat</Effect>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10090">
+		<Comment>서리부족 습격!</Comment>
+		<Name>ThemeName_9</Name>
+		<Prefab>Field_09</Prefab>
+		<Fog>Fog_09</Fog>
+		<Effect>Snow</Effect>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10100">
+		<Comment>공허 습격!</Comment>
+		<Name>ThemeName_10</Name>
+		<Prefab>Field_10</Prefab>
+		<Fog>Fog_03</Fog>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10110">
+		<Comment>시련의 탑 I</Comment>
+		<Prefab>Tower_01</Prefab>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10120">
+		<Comment>시련의 탑 II</Comment>
+		<Desc>MapSkinDesc_10110</Desc>
+		<Prefab>Tower_05</Prefab>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10130">
+		<Comment>시련의 탑 III</Comment>
+		<Desc>MapSkinDesc_10110</Desc>
+		<Prefab>Tower_06</Prefab>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="10140">
+		<Comment>시련의 탑 IV</Comment>
+		<Desc>MapSkinDesc_10110</Desc>
+		<Prefab>Tower_11</Prefab>
+
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="3" />
+
+		<!-- 구매 -->
+		<CashPrice>119</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>24</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20000">
+		<Comment>[잠식]고블린 습격!</Comment>
+		<Name>ThemeName_51</Name>
+		<Prefab>Field_51</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20010">
+		<Comment>[잠식]도적단 습격!</Comment>
+		<Name>ThemeName_52</Name>
+		<Prefab>Field_52</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20020">
+		<Comment>[잠식]슬라임 습격!</Comment>
+		<Name>ThemeName_53</Name>
+		<Prefab>Field_53</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20030">
+		<Comment>[잠식]언데드 습격!</Comment>
+		<Name>ThemeName_54</Name>
+		<Prefab>Field_54</Prefab>
+		<Fog>Fog_02</Fog>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20040">
+		<Comment>[잠식]엘프 습격!</Comment>
+		<Name>ThemeName_55</Name>
+		<Prefab>Field_55</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20050">
+		<Comment>[잠식]오크 습격!</Comment>
+		<Name>ThemeName_56</Name>
+		<Prefab>Field_56</Prefab>
+		<Fog>Fog_02</Fog>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20060">
+		<Comment>[잠식]악령 습격!</Comment>
+		<Name>ThemeName_57</Name>
+		<Prefab>Field_57</Prefab>
+		<Fog>Fog_02</Fog>
+		<Effect>GhostEffect_02</Effect>
+		<Effect Delay='1'>GhostEffect_02</Effect>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20070">
+		<Comment>[잠식]뱀파이어 습격!</Comment>
+		<Name>ThemeName_58</Name>
+		<Prefab>Field_58</Prefab>
+		<Effect>Bat</Effect>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20080">
+		<Comment>[잠식]서리부족 습격!</Comment>
+		<Name>ThemeName_59</Name>
+		<Prefab>Field_59</Prefab>
+		<Fog>Fog_09</Fog>
+		<Effect>Snow</Effect>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20090">
+		<Comment>[잠식]공허 습격!</Comment>
+		<Name>ThemeName_60</Name>
+		<Prefab>Field_60</Prefab>
+		<Fog>Fog_04</Fog>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20100">
+		<Comment>(구)달맞이 축제!</Comment>
+		<Name>SeasonalEventName_Season8</Name>
+		<Prefab>Seasonal_Event_Moon_Old</Prefab>
+		<IconSprite>SeasonalEventToken_Moon</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20120">
+		<Comment>(구)건국제!</Comment>
+		<Name>SeasonalEventName_Season16</Name>
+		<Prefab>Seasonal_Event_Founding_Old</Prefab>
+		<IconSprite>SeasonalEventToken_Founding</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20130">
+		<Comment>(구)파도 축제!</Comment>
+		<Name>SeasonalEventName_Season18</Name>
+		<Prefab>Seasonal_Event_Sea_Old</Prefab>
+		<IconSprite>SeasonalEventToken_Sea</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20140">
+		<Comment>(구)동화 축제!</Comment>
+		<Name>SeasonalEventName_Season20</Name>
+		<Prefab>Seasonal_Event_Fairytale_Old</Prefab>
+		<IconSprite>SeasonalEventToken_Fairytale</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20150">
+		<Comment>(구)낙엽 축제!</Comment>
+		<Name>SeasonalEventName_Season10</Name>
+		<Prefab>Seasonal_Event_Fall_Old</Prefab>
+		<IconSprite>SeasonalEventToken_Fall</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20160">
+		<Comment>(구)붉은달 축제!</Comment>
+		<Name>SeasonalEventName_Season35</Name>
+		<Prefab>Seasonal_Event_Redmoon_Old</Prefab>
+		<IconSprite>SeasonalEventToken_Redmoon</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20170">
+		<Comment>(구)눈꽃 축제!</Comment>
+		<Name>SeasonalEventName_Season36</Name>
+		<Prefab>Seasonal_Event_Snow_Old</Prefab>
+		<IconSprite>SeasonalEventToken_Snow</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20180">
+		<Comment>(구)성탄제!</Comment>
+		<Name>SeasonalEventName_Season37</Name>
+		<Prefab>Seasonal_Event_Holiday_Old</Prefab>
+		<IconSprite>SeasonalEventToken_Holiday</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20190">
+		<Comment>(구)해맞이 축제!</Comment>
+		<Name>SeasonalEventName_Season38</Name>
+		<Prefab>Seasonal_Event_New_Old</Prefab>
+		<IconSprite>SeasonalEventToken_New</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20200">
+		<Comment>(구)동부무투제!</Comment>
+		<Name>SeasonalEventName_Season39</Name>
+		<Prefab>Seasonal_Event_East_Old</Prefab>
+		<IconSprite>SeasonalEventToken_East</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20210">
+		<Comment>(구)개화제!</Comment>
+		<Name>SeasonalEventName_Season40</Name>
+		<Prefab>Seasonal_Event_Flower_Old</Prefab>
+		<IconSprite>SeasonalEventToken_Flower</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20220">
+		<Comment>(구)신성제!</Comment>
+		<Name>SeasonalEventName_Season43</Name>
+		<Prefab>Seasonal_Event_Holy_Old</Prefab>
+		<IconSprite>SeasonalEventToken_Holy</IconSprite>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20230">
+		<Comment>연맹전</Comment>
+		<Name>ClanBattleTitle</Name>
+		<Prefab>Raid_Skin_00</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20240">
+		<Comment>영웅의 제단!</Comment>
+		<Prefab>Raid_Skin_01</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20250">
+		<Comment>대장장이의 제단!</Comment>
+		<Prefab>Raid_Skin_02</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20260">
+		<Comment>피의 제단!</Comment>
+		<Prefab>Raid_Skin_03</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20270">
+		<Comment>거신의 제단!</Comment>
+		<Prefab>Raid_Skin_04</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20280">
+		<Comment>마법사의 제단!</Comment>
+		<Prefab>Raid_Skin_05</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="20290">
+		<Comment>탐욕의 제단!</Comment>
+		<Prefab>Raid_Skin_06</Prefab>
+
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+
+		<!-- 구매 -->
+		<CashPrice>139</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>28</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>false</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30000">
+		<Comment>대균열 I</Comment>
+		<Prefab>RogueLike_00</Prefab>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30010">
+		<Comment>대균열 II</Comment>
+		<Desc>MapSkinDesc_30000</Desc>
+		<Prefab>RogueLike_01</Prefab>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30020">
+		<Comment>대균열 III</Comment>
+		<Desc>MapSkinDesc_30000</Desc>
+		<Prefab>RogueLike_02</Prefab>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30030">
+		<Comment>대균열IV</Comment>
+		<Desc>MapSkinDesc_30000</Desc>
+		<Prefab>RogueLike_03</Prefab>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30040">
+		<Comment>대균열 V</Comment>
+		<Desc>MapSkinDesc_30000</Desc>
+		<Prefab>RogueLike_04</Prefab>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30050">
+		<Comment>대균열 VI</Comment>
+		<Desc>MapSkinDesc_30000</Desc>
+		<Prefab>RogueLike_05</Prefab>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30060">
+		<Comment>시련의 탑 V</Comment>
+		<Desc>MapSkinDesc_10110</Desc>
+		<Prefab>Tower_10a</Prefab>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30070">
+		<Comment>시련의 탑 VI</Comment>
+		<Desc>MapSkinDesc_10110</Desc>
+		<Prefab>Tower_10b</Prefab>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30080">
+		<Comment>시련의 탑 VII</Comment>
+		<Desc>MapSkinDesc_10110</Desc>
+		<Prefab>Tower_15a</Prefab>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30090">
+		<Comment>시련의 탑 VIII</Comment>
+		<Desc>MapSkinDesc_10110</Desc>
+		<Prefab>Tower_15b</Prefab>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30100">
+		<Comment>요리 축제</Comment>
+		<Name>SeasonalEventMode_Season42</Name>
+		<Prefab>Seasonal_Event_Cooking</Prefab>
+		<IconSprite>SeasonalEventToken_Cooking</IconSprite>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30110">
+		<Comment>신성제</Comment>
+		<Name>SeasonalEventMode_Season43</Name>
+		<Desc>MapSkinDesc_20220</Desc>
+		<Prefab>Seasonal_Event_Holy</Prefab>
+		<IconSprite>SeasonalEventToken_Holy</IconSprite>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30120">
+		<Comment>파도 축제</Comment>
+		<Name>SeasonalEventMode_Season44</Name>
+		<Desc>MapSkinDesc_20130</Desc>
+		<Prefab>Seasonal_Event_Sea</Prefab>
+		<IconSprite>SeasonalEventToken_Sea</IconSprite>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30130">
+		<Comment>비룡제</Comment>
+		<Name>SeasonalEventMode_Season46</Name>
+		<Prefab>Seasonal_Event_Dragon</Prefab>
+		<IconSprite>SeasonalEventToken_Dragon</IconSprite>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30140">
+		<Comment>붉은달 축제</Comment>
+		<Name>SeasonalEventMode_Season47</Name>
+		<Desc>MapSkinDesc_20160</Desc>
+		<Prefab>Seasonal_Event_Redmoon</Prefab>
+		<IconSprite>SeasonalEventToken_Redmoon</IconSprite>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30150">
+		<Comment>동화 축제</Comment>
+		<Name>SeasonalEventMode_Season48</Name>
+		<Desc>MapSkinDesc_20140</Desc>
+		<Prefab>Seasonal_Event_Fairytale</Prefab>
+		<IconSprite>SeasonalEventToken_Fairytale</IconSprite>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30160">
+		<Comment>눈싸움 축제</Comment>
+		<Name>SeasonalEventMode_Season49</Name>
+		<Prefab>Seasonal_Event_Snow</Prefab>
+		<IconSprite>SeasonalEventToken_Snow</IconSprite>
+
+		<Grade>2</Grade>
+		<ParticleEffect>true</ParticleEffect>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30170">
+		<Comment>성탄제</Comment>
+		<Name>SeasonalEventMode_Season50</Name>
+		<Desc>MapSkinDesc_20180</Desc>
+		<Prefab>Seasonal_Event_Holiday</Prefab>
+		<IconSprite>SeasonalEventToken_Holiday</IconSprite>
+
+		<Grade>2</Grade>
+		<ParticleEffect>true</ParticleEffect>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30180">
+		<Comment>해맞이 축제</Comment>
+		<Name>SeasonalEventMode_Season51</Name>
+		<Desc>MapSkinDesc_20190</Desc>
+		<Prefab>Seasonal_Event_New</Prefab>
+		<IconSprite>SeasonalEventToken_New</IconSprite>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30190">
+		<Comment>동부무투제</Comment>
+		<Name>SeasonalEventMode_Season52</Name>
+		<Desc>MapSkinDesc_20200</Desc>
+		<Prefab>Seasonal_Event_East</Prefab>
+		<IconSprite>SeasonalEventToken_East</IconSprite>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30200">
+		<Comment>개화제</Comment>
+		<Name>SeasonalEventMode_Season53</Name>
+		<Desc>MapSkinDesc_20210</Desc>
+		<Prefab>Seasonal_Event_Flower</Prefab>
+		<IconSprite>SeasonalEventToken_Flower</IconSprite>
+
+		<Grade>2</Grade>
+		<ParticleEffect>true</ParticleEffect>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="30210">
+		<Comment>건국제</Comment>
+		<Name>SeasonalEventMode_Season54</Name>
+		<Prefab>Seasonal_Event_Founding</Prefab>
+		<IconSprite>SeasonalEventToken_Founding</IconSprite>
+
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 구매 -->
+		<CashPrice>169</CashPrice>
+		<CashPurchaseAvailable>true</CashPurchaseAvailable>
+		<SkinTokenPrice>2</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40000">
+		<Comment>용살단 습격!</Comment>
+		<Name>ThemeName_11</Name>
+		<Prefab>Field_Skin_11</Prefab>
+		<Fog>Fog_11</Fog>
+
+		<Grade>3</Grade>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40001" Inherit="40000">
+		<Comment>용살단 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40002" Inherit="40000">
+		<Comment>용살단 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40010">
+		<Comment>공허엘프 습격!</Comment>
+		<Name>ThemeName_12</Name>
+		<Prefab>Field_Skin_12</Prefab>
+		<Fog>Fog_12</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40011" Inherit="40010">
+		<Comment>공허엘프 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40012" Inherit="40010">
+		<Comment>공허엘프 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40020">
+		<Comment>동부군 습격!</Comment>
+		<Name>ThemeName_13</Name>
+		<Prefab>Field_Skin_13</Prefab>
+		<Fog>Fog_13</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40021" Inherit="40020">
+		<Comment>동부군 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40022" Inherit="40020">
+		<Comment>동부군 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40030">
+		<Comment>용기사 습격!</Comment>
+		<Name>ThemeName_14</Name>
+		<Prefab>Field_Skin_14</Prefab>
+		<Fog>Fog_05</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40031" Inherit="40030">
+		<Comment>용기사 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40032" Inherit="40030">
+		<Comment>용기사 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40040">
+		<Comment>엘레도르 습격!</Comment>
+		<Name>ThemeName_15</Name>
+		<Prefab>Field_Skin_15</Prefab>
+		<Fog>Fog_05</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40041" Inherit="40040">
+		<Comment>엘레도르 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40042" Inherit="40040">
+		<Comment>엘레도르 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40050">
+		<Comment>우드엘프 습격!</Comment>
+		<Name>ThemeName_16</Name>
+		<Prefab>Field_Skin_16</Prefab>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40051" Inherit="40050">
+		<Comment>우드엘프 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40052" Inherit="40050">
+		<Comment>우드엘프 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40060">
+		<Comment>야수 습격!</Comment>
+		<Name>ThemeName_17</Name>
+		<Prefab>Field_Skin_17</Prefab>
+		<Fog>Fog_12</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40061" Inherit="40060">
+		<Comment>야수 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40062" Inherit="40060">
+		<Comment>야수 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40070">
+		<Comment>[잠식] 용살단 습격!</Comment>
+		<Name>ThemeName_61</Name>
+		<Prefab>Field_Skin_61</Prefab>
+		<Fog>Fog_04</Fog>
+
+		<Grade>3</Grade>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40071" Inherit="40070">
+		<Comment>[잠식] 용살단 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40072" Inherit="40070">
+		<Comment>[잠식] 용살단 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40080">
+		<Comment>[잠식] 공허엘프 습격!</Comment>
+		<Name>ThemeName_62</Name>
+		<Prefab>Field_Skin_62</Prefab>
+		<Fog>Fog_04</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40081" Inherit="40080">
+		<Comment>[잠식] 공허엘프 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40082" Inherit="40080">
+		<Comment>[잠식] 공허엘프 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40090">
+		<Comment>[잠식] 동부군 습격!</Comment>
+		<Name>ThemeName_63</Name>
+		<Prefab>Field_Skin_63</Prefab>
+		<Fog>Fog_04</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40091" Inherit="40090">
+		<Comment>[잠식] 동부군 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40092" Inherit="40090">
+		<Comment>[잠식] 동부군 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40100">
+		<Comment>[잠식] 용기사 습격!</Comment>
+		<Name>ThemeName_64</Name>
+		<Prefab>Field_Skin_64</Prefab>
+		<Fog>Fog_04</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40101" Inherit="40100">
+		<Comment>[잠식] 용기사 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40102" Inherit="40100">
+		<Comment>[잠식] 용기사 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40110">
+		<Comment>[잠식] 엘레도르 습격!</Comment>
+		<Name>ThemeName_65</Name>
+		<Prefab>Field_Skin_65</Prefab>
+		<Fog>Fog_04</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40111" Inherit="40110">
+		<Comment>[잠식] 엘레도르 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40112" Inherit="40110">
+		<Comment>[잠식] 엘레도르 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40120">
+		<Comment>[잠식] 우드엘프 습격!</Comment>
+		<Name>ThemeName_66</Name>
+		<Prefab>Field_Skin_66</Prefab>
+		<Fog>Fog_04</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40121" Inherit="40120">
+		<Comment>[잠식] 우드엘프 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40122" Inherit="40120">
+		<Comment>[잠식] 우드엘프 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40130">
+		<Comment>[잠식] 야수 습격!</Comment>
+		<Name>ThemeName_67</Name>
+		<Prefab>Field_Skin_67</Prefab>
+		<Fog>Fog_04</Fog>
+
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40131" Inherit="40130">
+		<Comment>[잠식] 야수 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40132" Inherit="40130">
+		<Comment>[잠식] 야수 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40140">
+		<Comment> 닌자 습격!</Comment>
+		<Name>ThemeName_18</Name>
+		<Prefab>Field_Skin_18</Prefab>
+		
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40141" Inherit="40140">
+		<Comment>닌자 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40142" Inherit="40140">
+		<Comment>닌자 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>	
+
+	<MapSkin ID="40150">
+		<Comment>[잠식] 닌자 습격!</Comment>
+		<Name>ThemeName_68</Name>
+		<Prefab>Field_Skin_68</Prefab>
+		
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40151" Inherit="40150">
+		<Comment>[잠식]닌자 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40152" Inherit="40150">
+		<Comment>[잠식]닌자 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40160">
+		<Comment>제국 습격!</Comment>
+		<Name>ThemeName_19</Name>
+		<Prefab>Field_Skin_19</Prefab>
+		
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>164000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40161" Inherit="40160">
+		<Comment>제국 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40162" Inherit="40160">
+		<Comment>제국 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>	
+
+	<MapSkin ID="40170">
+		<Comment>[잠식] 제국 습격!</Comment>
+		<Name>ThemeName_69</Name>
+		<Prefab>Field_Skin_69</Prefab>
+		
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>164000</MinVersion>
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40171" Inherit="40170">
+		<Comment>[잠식]제국 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40172" Inherit="40170">
+		<Comment>[잠식]제국 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40180">
+		<Comment>드래곤 습격!</Comment>
+		<Name>ThemeName_20</Name>
+		<Prefab>Field_Skin_20</Prefab>
+		
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>167000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40181" Inherit="40180">
+		<Comment>드래곤 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40182" Inherit="40180">
+		<Comment>드래곤 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>	
+
+	<MapSkin ID="40190">
+		<Comment>[잠식] 드래곤 습격!</Comment>
+		<Name>ThemeName_70</Name>
+		<Prefab>Field_Skin_70</Prefab>
+		
+		<Grade>3</Grade>
+		<ParticleEffect>true</ParticleEffect>
+		<UseBerserkPreset>true</UseBerserkPreset>
+
+		<MinVersion>167000</MinVersion>
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="InventoryItem" ID="2011" Count="2" />
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPrice>6</SkinTokenPrice>
+		<SkinTokenPurchaseAvailable>true</SkinTokenPurchaseAvailable>
+		<PremiumSkinToken>true</PremiumSkinToken>
+
+		<!-- 태그 -->
+		<InfoTag>SummonSkin</InfoTag>
+	</MapSkin>
+
+	<MapSkin ID="40191" Inherit="40190">
+		<Comment>[잠식]드래곤 습격!</Comment>
+		<Preset>1</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+
+	<MapSkin ID="40192" Inherit="40190">
+		<Comment>[잠식]드래곤 습격!</Comment>
+		<Preset>2</Preset>
+
+		<!-- 구매 -->
+		<CanPurchase>false</CanPurchase>
+	</MapSkin>
+</MapSkins>

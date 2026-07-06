@@ -1,0 +1,104 @@
+<DimensionRiftSeasonDatas>
+    <DimensionRiftSeasonData ID="59">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70120</ChallengeBoss>
+        <SeasonAdvantageRegion>East</SeasonAdvantageRegion>
+        <SeasonPenaltyRole>Brave</SeasonPenaltyRole>
+        <!-- 시즌별로 바꿔가면서 작성 -->
+        <!--        <SeasonAdvantageRole></SeasonAdvantageRole>-->
+        <!--        <SeasonPenaltyRegion></SeasonPenaltyRegion>-->
+        <SeasonAdvantageBuffId>600000</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600100</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>
+    <DimensionRiftSeasonData ID="60">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70110</ChallengeBoss>
+        <!--SeasonAdvantageRegion>South</SeasonAdvantageRegion>
+        <SeasonPenaltyRole>Brave</SeasonPenaltyRole-->
+        <!-- 시즌별로 바꿔가면서 작성 -->
+        <SeasonAdvantageRole>Swift</SeasonAdvantageRole>
+        <SeasonPenaltyRegion>North</SeasonPenaltyRegion>
+        <SeasonAdvantageBuffId>600002</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600105</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>    
+    <DimensionRiftSeasonData ID="61">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70100</ChallengeBoss>
+        <SeasonAdvantageRegion>West</SeasonAdvantageRegion>
+        <SeasonPenaltyRole>Mystic</SeasonPenaltyRole>
+        <SeasonAdvantageBuffId>600000</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600110</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>      
+    <DimensionRiftSeasonData ID="62">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70120</ChallengeBoss>
+        <SeasonAdvantageRole>Brave</SeasonAdvantageRole>
+        <SeasonPenaltyRegion>South</SeasonPenaltyRegion>
+        <SeasonAdvantageBuffId>600004</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600108</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>     
+    <DimensionRiftSeasonData ID="63">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70110</ChallengeBoss>
+        <SeasonAdvantageRegion>South</SeasonAdvantageRegion>
+        <SeasonPenaltyRole>Toughness</SeasonPenaltyRole>
+        <SeasonAdvantageBuffId>600000</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600110</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>    
+    <DimensionRiftSeasonData ID="64">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70100</ChallengeBoss>
+        <SeasonAdvantageRole>Element</SeasonAdvantageRole>
+        <SeasonPenaltyRegion>North</SeasonPenaltyRegion>
+        <SeasonAdvantageBuffId>600000</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600100</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>           
+    <DimensionRiftSeasonData ID="65">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70120</ChallengeBoss>
+        <SeasonAdvantageRegion>North</SeasonAdvantageRegion>
+        <SeasonPenaltyRole>Swift</SeasonPenaltyRole>
+        <SeasonAdvantageBuffId>600000</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600105</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>  
+    <DimensionRiftSeasonData ID="66">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70110</ChallengeBoss>
+        <SeasonAdvantageRole>Shadow</SeasonAdvantageRole>
+        <SeasonPenaltyRegion>Central</SeasonPenaltyRegion>
+        <SeasonAdvantageBuffId>600000</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600100</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>                
+    <DimensionRiftSeasonData ID="67">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70100</ChallengeBoss>
+        <SeasonAdvantageRegion>Central</SeasonAdvantageRegion>
+        <SeasonPenaltyRole>Brave</SeasonPenaltyRole>
+        <SeasonAdvantageBuffId>600000</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600100</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>          
+    <DimensionRiftSeasonData ID="68">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70120</ChallengeBoss>
+        <SeasonAdvantageRole>Mystic</SeasonAdvantageRole>
+        <SeasonPenaltyRegion>East</SeasonPenaltyRegion>
+        <SeasonAdvantageBuffId>600000</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600100</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>       
+    <DimensionRiftSeasonData ID="69">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70110</ChallengeBoss>
+        <SeasonAdvantageRegion>East</SeasonAdvantageRegion>
+        <SeasonPenaltyRole>Element</SeasonPenaltyRole>
+        <SeasonAdvantageBuffId>600000</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600100</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>   
+    <DimensionRiftSeasonData ID="70">
+        <ChallengeElites>721050,721150,721280,721350,721460,721580</ChallengeElites>
+        <ChallengeBoss>70100</ChallengeBoss>
+        <SeasonAdvantageRole>Swift</SeasonAdvantageRole>
+        <SeasonPenaltyRegion>South</SeasonPenaltyRegion>
+        <SeasonAdvantageBuffId>600000</SeasonAdvantageBuffId>
+        <SeasonPenaltyBuffId>600100</SeasonPenaltyBuffId>
+    </DimensionRiftSeasonData>                    
+</DimensionRiftSeasonDatas>

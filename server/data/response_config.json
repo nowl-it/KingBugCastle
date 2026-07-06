@@ -1,0 +1,114 @@
+{
+  "server": {"patchFolder": "2026_06_26", "serverVersion": "170.1.00"},
+  "player": {
+    "defaults": {
+      "name": "KingBug", "castleName": "BugCastle",
+      "accountId": 1, "accountType": 1,
+      "cash": 999999, "paidCash": 0, "gold": 999999999,
+      "level": 99, "exp": 0, "heart": 999,
+      "bestClearedStage": 15, "bestClearedTheme": 15,
+      "bestClearedHardStage": 15, "bestClearedHardTheme": 15,
+      "currentDeckPreset": 0, "hasFreeRename": true,
+      "playedCount": 999, "winCount": 999,
+      "eventFlag": 0, "clanAttendance": false,
+      "rogueLikeGameIndex": 0, "dimensionRiftGameIndex": 0,
+      "rogueLikePlayedCount": 999, "rogueLikeCleared": true,
+      "profileIconId": 10260
+    },
+    "listDefaults": {
+      "eventModeRecordValue": 15, "eventModeRecordCount": 10,
+      "rogueLikeBuildingChallengeLevelRecordValue": 15, "rogueLikeBuildingChallengeLevelRecordCount": 10,
+      "currentRankingValue": 1, "currentRankingCount": 20,
+      "currentHardRankingValue": 1, "currentHardRankingCount": 20
+    },
+    "_invasionComment": "ThemeSelectPanel.OnClickGameStart builds its Invasion theme carousel (_themes list) directly from this server-reported range; the FIRST entry is what the client sends as 'theme' to /game/start for chapter I-1. Real Invasion themes are ONLY 16-20 and 66-70 (dump.cs: Theme16BattleObserver .. Theme70BattleObserver, the only classes deriving InvasionBattleObserver) - a range starting at 1 makes the client submit theme=1 (Story Chapter 1), which has no InvasionBattleObserver subclass, hanging the battle-load screen. Also: ProfilePanel.ReloadChallenge indexes per unlockedDifficulty tier -> shorter list throws IndexOutOfRangeException. Real content caps at 5 difficulty tiers per theme (InvasionRewards.xml only defines suffix 01-05, Easy~King); InvasionDifficultyBar.SetDifficulty (arm32 RVA 0x20FBC48) calls an index/bounds-checked getter with the raw unclamped difficulty before its own later clamp to [1,5] - a value >5 throws there too.",
+    "invasionThemeRanges": [[16, 21], [66, 71]],
+    "invasionUnlockedDifficulty": 5
+  },
+  "pvpInfo": {
+    "fixed": {
+      "season": 1, "semiSeason": 1, "pvpEnabled": true, "theme": 0,
+      "score": 1000, "tier": 1, "rank": 0, "winCount": 0, "loseCount": 0,
+      "maxScore": 1000, "maxTier": 1, "victoryCount": 0, "deckRecordDifficulty": 0
+    },
+    "seasonDayOffsets": [30, 60, 90],
+    "nextSeasonDayOffsets": [31, 61, 91]
+  },
+  "colosseum": {
+    "fixed": {
+      "season": 1, "score": 1000, "tier": 1, "rank": 0, "maxScore": 1000,
+      "maxTier": 1, "winCount": 0, "loseCount": 0, "victoryCount": 0,
+      "colosseumEnabled": true, "semiSeason": 2, "theme": 3000, "allTierRewards": []
+    },
+    "seasonDayOffsets": [30, 60],
+    "nextSeasonDayOffsets": [31, 61]
+  },
+  "pass": {
+    "_comment": "passSeason MUST be a valid SeasonPasses.xml ID or WorldPanel.Reload throws (GameManager.passModel.passSeason -> ResourceBase.Get(id) NRE if id absent).",
+    "fixed": {
+      "enabled": true, "passSeason": 70, "passLevel": 1, "passPoint": 0, "passExp": 0,
+      "rewards": [], "bonusRewards": [], "allRewards": [],
+      "receivedPassRewards": [], "receivedPassOnlyRewards": [],
+      "receivedPremiumOnlyRewards": [], "receivedBonusRewards": [],
+      "seasonalEventModes": [], "seasonalEventModesDailyPlayCount": [],
+      "missionRerollCountPairs": []
+    },
+    "seasonStartDayOffset": -10,
+    "seasonUntilDayOffset": 30,
+    "nextSeasonStartDayOffset": 31
+  },
+  "gameStart": {"heartCostThemeThreshold": 6, "heartCostLow": 1, "heartCostHigh": 2},
+  "gameComplete": {
+    "baseGold": 500, "goldPerTheme": 100, "winBonusGold": 1000,
+    "baseExp": 100, "expPerTheme": 20, "expPerLevel": 1000,
+    "fixed": {
+      "addCash": 0, "addHeart": 0, "unitExpItem": 0, "unitSoulItem": 0,
+      "adBonusGold": 0, "adBonusRemainCount": 3,
+      "rankedIn": false, "addRankScore": 0, "rankScore": 0, "rankTier": 0,
+      "ppRewardCount": 0, "isFirstPvpPlay": false, "isFirstEventModePlay": false,
+      "addArtifactCounts": [], "addArtifactIds": [], "artifacts": [],
+      "addAccessories": [], "addArenaToken": 0, "addPassPoint": 0,
+      "addCardExpCardIds": [], "addCardExpCounts": [],
+      "addSeasonalEventToken": 0, "addClanToken": 0, "clanBossRemainHp": 0,
+      "hotTimeBonusValue": 0, "addClanPoint": 0, "addHardModeToken": 0,
+      "colosseumScore": 0, "colosseumScoreDelta": 0, "colosseumTier": 0,
+      "rogueLikeScore": 0, "challengeRankRegistered": false
+    }
+  },
+  "clanCreate": {
+    "mark": 0, "level": 1, "memberCount": 1, "maxMemberCount": 30,
+    "intro": "", "notice": "", "joinType": 0, "exp": 0
+  },
+  "pvpInfoDirect": {
+    "season": 1, "semiSeason": 1, "pvpEnabled": true,
+    "seasonUntilAtDates": ["3000-01-01", "3000-02-01", "3000-03-01", "3000-04-01"],
+    "nextSeasonStartAtDates": ["3000-01-01", "3000-02-01", "3000-03-01", "3000-04-01"],
+    "theme": 0, "score": 1000, "tier": 1, "rank": 0,
+    "bestScore": 1000, "bestTier": 1,
+    "winCount": 0, "loseCount": 0, "victoryCount": 0,
+    "maxScore": 1000, "maxTier": 1,
+    "deckRecordDifficulty": 0,
+    "starterBuffRank": 0,
+    "semiSeasonScoreDatas": [],
+    "deckInfo": {
+      "id": 0, "season": 1, "score": 1000, "tier": 1,
+      "accountId": 1, "playerName": "DevKing", "castleName": "DevCastle",
+      "profileIcon": 0, "flagId": 0, "nameTagId": 0, "mapSkinId": 0,
+      "cards": [], "buildings": [], "pvpDeckRecordData": [],
+      "artifacts": [], "potentials": []
+    },
+    "deckRecord": [],
+    "receivedRewards": [],
+    "currentDeckPlayCount": 0,
+    "arenaTokenBonusCount": 0,
+    "dormantScoreDecreaseAt": "3000-01-01",
+    "semiSeasonBannedHeroIds": [],
+    "semiSeasonBannedTreasureIds": [],
+    "currentSemiSeasonWinCount": 0,
+    "winRewardReceived": [],
+    "remainTrainingCount": 0,
+    "remainRetryCount": 0,
+    "retryPrice": 0,
+    "freeRetryChance": 0
+  }
+}

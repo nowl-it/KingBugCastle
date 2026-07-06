@@ -1,0 +1,718 @@
+<RogueLikeSettings>
+	<RogueLikeSetting ID="2000">
+		<StartWorld>100</StartWorld>
+		<MiniBossPool>70000,70010,70020,70030,70040,70140,70150,70160</MiniBossPool>
+		
+		<!-- 대균열/차원의 균열 구분 태그 -->
+		<SelectFirstHero>true</SelectFirstHero>
+		<UseAccessory>false</UseAccessory>
+		<UseTreasure>false</UseTreasure>
+		<RogueLikeSystemType>GreatRiftSystem</RogueLikeSystemType>
+		<ModeName>RogueLike</ModeName>
+		<ExcludeEventRooms>
+			Event_MagicAlter,
+			Event_SleepingMonster,
+			Event_RetireBlacksmith,
+			Event_HiddenShop,
+			Event_AllChange,
+			Event_BloodChest,
+			Event_CopyCat,
+			Event_Omikuji,
+			Event_GoldGoblin,
+			Event_AngryBoy,
+			Event_SlothMonster,
+			Event_SweetOffer,
+			Event_PrideMan,
+			Event_ItemEater,
+			Event_Jealous,
+			Event_Mausoleum,
+			Event_IncreaseSwift,
+			Event_IncreaseToughness,
+			Event_IncreaseElement,
+			Event_IncreaseMystic,
+			Event_IncreaseShadow,
+			Event_IncreaseBrave
+		</ExcludeEventRooms>
+		
+		<HeartCost>5</HeartCost>
+		<PayHeartEveryFloor>true</PayHeartEveryFloor>
+
+		<ArtifactRerollOptionItem>30050</ArtifactRerollOptionItem>
+		<!-- 제단 킹, 갓, 킹갓 룬 해금 위한 제단 레벨 -->
+		<RequireBuildingLevelsForRune>6,11,16</RequireBuildingLevelsForRune>
+		<!-- 보유 유물 개수에 따른 유물 보상 확률 -->
+		<NewArtifactProb>100,50,30,0,0</NewArtifactProb>
+		
+		<!-- 유닛 관련 -->
+		<MaxUnitCount>12</MaxUnitCount>
+		<UnitMaxLevel>32</UnitMaxLevel>
+		<UnitTierTerm>8</UnitTierTerm>
+		<UnitGetPotentialLevel PotentialReqLevel="4">5</UnitGetPotentialLevel>
+		<UnitGetPotentialLevel PotentialReqLevel="8">13</UnitGetPotentialLevel>
+		<UnitGetPotentialLevel PotentialReqLevel="16">21</UnitGetPotentialLevel>
+
+		<UnitSizeIncPerLevel>0.0125</UnitSizeIncPerLevel>
+		<UnitAttackSpeedPerIncPerLevel>0.02</UnitAttackSpeedPerIncPerLevel>
+		<UnitMaxShieldPerByHp>400</UnitMaxShieldPerByHp>
+		<HpDmgValueRatio>2.5</HpDmgValueRatio>
+		<!-- 만렙(33) 데이터 지우지 말것 -->
+		<UnitLevelDatas>
+			<UnitLevelData Level="1" 	 NeedExp="0"	 StatPer="1"/>
+			<UnitLevelData Level="2" 	 NeedExp="100"	 StatPer="1.5"/>
+			<UnitLevelData Level="3" 	 NeedExp="110"	 StatPer="2.18"/>
+			<UnitLevelData Level="4" 	 NeedExp="120"	 StatPer="3.05"/>
+			<UnitLevelData Level="5" 	 NeedExp="130"	 StatPer="4.11"/>
+			<UnitLevelData Level="6" 	 NeedExp="140"	 StatPer="5.34"/>
+			<UnitLevelData Level="7" 	 NeedExp="150"	 StatPer="6.08"/>
+			<UnitLevelData Level="8" 	 NeedExp="160"	 StatPer="8.02"/>
+			<UnitLevelData Level="9" 	 NeedExp="170"	 StatPer="9.46"/>
+			<UnitLevelData Level="10"	 NeedExp="300"	 StatPer="10.97"/>
+			<UnitLevelData Level="11"	 NeedExp="320"	 StatPer="12.29"/>
+			<UnitLevelData Level="12"	 NeedExp="340"	 StatPer="13.64"/>
+			<UnitLevelData Level="13"	 NeedExp="360"	 StatPer="15"/>
+			<UnitLevelData Level="14"	 NeedExp="380"	 StatPer="16.43"/>
+			<UnitLevelData Level="15"	 NeedExp="400"	 StatPer="17.91"/>
+			<UnitLevelData Level="16"	 NeedExp="420"	 StatPer="19.43"/>
+			<UnitLevelData Level="17"	 NeedExp="440"	 StatPer="20.99"/>
+			<UnitLevelData Level="18"	 NeedExp="500"	 StatPer="22.56"/>
+			<UnitLevelData Level="19"	 NeedExp="540"	 StatPer="24.14"/>
+			<UnitLevelData Level="20"	 NeedExp="580"	 StatPer="25.76"/>
+			<UnitLevelData Level="21"	 NeedExp="620"	 StatPer="27.4"/>
+			<UnitLevelData Level="22"	 NeedExp="660"	 StatPer="29.08"/>
+			<UnitLevelData Level="23"	 NeedExp="700"	 StatPer="30.76"/>
+			<UnitLevelData Level="24"	 NeedExp="740"	 StatPer="32.45"/>
+			<UnitLevelData Level="25"	 NeedExp="780"	 StatPer="34.14"/>
+			<UnitLevelData Level="26"	 NeedExp="1000"	 StatPer="35.82"/>
+			<UnitLevelData Level="27"	 NeedExp="1080"	 StatPer="37.46"/>
+			<UnitLevelData Level="28"	 NeedExp="1160"	 StatPer="39.07"/>
+			<UnitLevelData Level="29"	 NeedExp="1240"	 StatPer="40.64"/>
+			<UnitLevelData Level="30"	 NeedExp="1320"	 StatPer="42.14"/>
+			<UnitLevelData Level="31"	 NeedExp="1380"	 StatPer="43.57"/>
+			<UnitLevelData Level="32"	 NeedExp="1420"	 StatPer="44.92"/>
+			<UnitLevelData Level="33"	 NeedExp="0"	 StatPer="44.92"/>
+		</UnitLevelDatas>
+
+		<!-- 유물 관련 -->
+		<MaxArtifactCount>4</MaxArtifactCount>
+
+		<!-- 보상 관련 -->
+		<BattleRewardRandomItemTiers Index="0">
+			<BattleRewardRandomItemTier Floor="1" OptionCount="2">60.00,25.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="1" OptionCount="3">70.00,20.00,10.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="1" OptionCount="4">75.00,20.00,5.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="2">50.00,30.00,20.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="3">60.00,25.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="4">65.00,25.00,10.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="2">35.00,35.00,30.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="3">45.00,35.00,20.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="4">50.00,35.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="2">25.00,40.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="3">35.00,40.00,25.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="4">45.00,40.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="2">20.00,40.00,40.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="3">30.00,35.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="4">40.00,30.00,30.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="2">10.00,45.00,45.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="3">20.00,40.00,40.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="4">30.00,35.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="2">0.00,50.00,50.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="3">0.00,55.00,45.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="4">0.00,65.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="2">0.00,35.00,65.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="3">0.00,25.00,75.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="4">0.00,20.00,80.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="2">0.00,35.00,65.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="3">0.00,25.00,75.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="4">0.00,20.00,80.00,0.00</BattleRewardRandomItemTier>
+		</BattleRewardRandomItemTiers>
+
+		<BattleRewardRandomItemTiers Index="1">
+			<BattleRewardRandomItemTier Floor="1" OptionCount="2">70.00,25.00,5.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="1" OptionCount="3">75.00,22.00,3.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="1" OptionCount="4">83.00,15.00,2.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="2">60.00,25.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="3">70.00,20.00,10.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="4">75.00,20.00,5.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="2">50.00,30.00,20.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="3">60.00,25.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="4">65.00,25.00,10.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="2">35.00,35.00,30.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="3">45.00,35.00,20.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="4">50.00,35.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="2">25.00,40.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="3">35.00,40.00,25.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="4">45.00,40.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="2">20.00,40.00,40.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="3">30.00,35.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="4">40.00,30.00,30.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="2">10.00,45.00,45.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="3">20.00,40.00,40.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="4">30.00,35.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="2">0.00,50.00,50.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="3">0.00,55.00,45.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="4">0.00,65.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="2">0.00,50.00,50.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="3">0.00,55.00,45.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="4">0.00,65.00,35.00,0.00</BattleRewardRandomItemTier>
+		</BattleRewardRandomItemTiers>
+
+		<EliteRewardRandomItemTiers Index="0">
+			<EliteRewardRandomItemTier Floor="1" OptionCount="2">0.00,50.00,50.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="1" OptionCount="3">0.00,60.00,40.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="1" OptionCount="4">0.00,70.00,30.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="2" OptionCount="2">0.00,50.00,50.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="2" OptionCount="3">0.00,60.00,40.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="2" OptionCount="4">0.00,70.00,30.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="3" OptionCount="2">0.00,50.00,50.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="3" OptionCount="3">0.00,60.00,40.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="3" OptionCount="4">0.00,70.00,30.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="4" OptionCount="2">0.00,0.00,75.00,25.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="4" OptionCount="3">0.00,0.00,82.50,17.50</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="4" OptionCount="4">0.00,0.00,87.50,12.50</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="5" OptionCount="2">0.00,0.00,70.00,30.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="5" OptionCount="3">0.00,0.00,80.00,20.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="5" OptionCount="4">0.00,0.00,85.00,15.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="6" OptionCount="2">0.00,0.00,35.00,65.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="6" OptionCount="3">0.00,0.00,50.00,50.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="6" OptionCount="4">0.00,0.00,60.00,40.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="7" OptionCount="2">0.00,0.00,0.00,100.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="7" OptionCount="3">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="7" OptionCount="4">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="8" OptionCount="2">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="8" OptionCount="3">0.00,0.00,0.00,100.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="8" OptionCount="4">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="9" OptionCount="2">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="9" OptionCount="3">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="9" OptionCount="4">0.00,0.00,0.00,100.00</EliteRewardRandomItemTier>
+		</EliteRewardRandomItemTiers>
+
+		<BattleRewardRandomItemTypePers>
+			<BattleRewardRandomItemTypePer Type="Hero">5</BattleRewardRandomItemTypePer>
+			<BattleRewardRandomItemTypePer Type="Equip">15</BattleRewardRandomItemTypePer>
+			<BattleRewardRandomItemTypePer Type="Rune">30</BattleRewardRandomItemTypePer>
+			<BattleRewardRandomItemTypePer Type="Artifact">45</BattleRewardRandomItemTypePer>
+			<BattleRewardRandomItemTypePer Type="Gold">5</BattleRewardRandomItemTypePer>
+		</BattleRewardRandomItemTypePers>
+
+		<!-- 가격 관련 -->
+		<ItemPrices>
+			<ItemPrice Type="Rune">100,200,500,1000</ItemPrice>
+			<ItemPrice Type="Equip">100,200,500,1000</ItemPrice>
+			<ItemPrice Type="Artifact">400,800,1200,1600</ItemPrice>
+		</ItemPrices>
+
+		<!-- 마지막 보스 ID -->
+		<FinalBossId>70100,70110,70120</FinalBossId>
+
+		<!-- 챌린지 내용 -->
+		<Challenges>
+			<Challenge Level="-5">
+				<SetBattleClearDefaultRewardHealPer>40</SetBattleClearDefaultRewardHealPer>
+				<BattleClearDefaultRewardGoldMultiplier>15</BattleClearDefaultRewardGoldMultiplier>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="4">0.1792,0.5248,1,0</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="5">0,0.2352,0.5716,1</SecondRewardBattleRoomGenPer>
+			</Challenge>
+
+			<Challenge Level="-4">
+				<SetBattleClearLostHpPerHealPer>100</SetBattleClearLostHpPerHealPer>
+			</Challenge>
+
+			<Challenge Level="-3">
+				<HpAndShieldGainPer>140</HpAndShieldGainPer>
+			</Challenge>
+
+			<Challenge Level="-2">
+				<SetBattleClearDefaultRewardHealPer>30</SetBattleClearDefaultRewardHealPer>
+				<BattleClearDefaultRewardGoldMultiplier>12</BattleClearDefaultRewardGoldMultiplier>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="4">0.3125,0.6875,1,0</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="5">0,0.4069,0.7438,1</SecondRewardBattleRoomGenPer>
+			</Challenge>
+
+			<Challenge Level="-1">
+				<SpawnAllMerchants>true</SpawnAllMerchants>
+			</Challenge>
+
+			<Challenge Level="0">
+				<SecondRewardBattleRoomGenPer TotalRoomCount="4">0.4752,0.8208,1,0</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="5">0,0.6826,0.9130,1</SecondRewardBattleRoomGenPer>
+				<RemoveEvents>10260,10270,10280,10290,10300,10310</RemoveEvents>
+			</Challenge>
+
+			<Challenge Level="1">
+				<UseFogOfWar>true</UseFogOfWar>
+			</Challenge>
+
+			<Challenge Level="2">
+				<SetBattleClearLostHpPerHealPer>15</SetBattleClearLostHpPerHealPer>
+			</Challenge>
+
+			<Challenge Level="3">
+				<AddEnemiesExceptBossStatPer Floor="1">105</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="2">105</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="3">105</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="4">110</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="5">110</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="6">110</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="7">115</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="8">115</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="9">115</AddEnemiesExceptBossStatPer>
+			</Challenge>
+
+			<Challenge Level="4">
+				<AddJunkItem>6</AddJunkItem>
+			</Challenge>
+
+			<Challenge Level="5">
+				<HpAndShieldGainPer>85</HpAndShieldGainPer>
+			</Challenge>
+
+			<Challenge Level="6">
+				<RemoveEvents>10060,10100,10150,10210,10250,10180</RemoveEvents>
+			</Challenge>
+
+			<Challenge Level="7">
+				<SetBattleClearDefaultRewardHealPer>10</SetBattleClearDefaultRewardHealPer>
+				<BattleClearDefaultRewardGoldMultiplier>5</BattleClearDefaultRewardGoldMultiplier>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="4">0.4752,0.8208,1,0</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="5">0,0.6826,0.9130,1</SecondRewardBattleRoomGenPer>
+				<BattleRewardRandomItemTiersIndex>1</BattleRewardRandomItemTiersIndex>
+			</Challenge>
+
+			<Challenge Level="8">
+				<AddBossStatPer Floor="1">105</AddBossStatPer>
+				<AddBossStatPer Floor="2">105</AddBossStatPer>
+				<AddBossStatPer Floor="3">105</AddBossStatPer>
+				<AddBossStatPer Floor="4">110</AddBossStatPer>
+				<AddBossStatPer Floor="5">110</AddBossStatPer>
+				<AddBossStatPer Floor="6">110</AddBossStatPer>
+				<AddBossStatPer Floor="7">115</AddBossStatPer>
+				<AddBossStatPer Floor="8">115</AddBossStatPer>
+				<AddBossStatPer Floor="9">115</AddBossStatPer>
+			</Challenge>
+
+			<Challenge Level="9">
+				<AddJunkArtifact>1</AddJunkArtifact>
+			</Challenge>
+
+			<Challenge Level="10">
+				<AddEnemiesExceptBossStatPer Floor="1">110</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="2">110</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="3">110</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="4">120</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="5">120</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="6">120</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="7">130</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="8">130</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="9">130</AddEnemiesExceptBossStatPer>
+			</Challenge>
+
+			<Challenge Level="11">
+				<MerchantMinusOnePer>50</MerchantMinusOnePer>
+			</Challenge>
+
+			<Challenge Level="12">
+				<HpAndShieldGainPer>70</HpAndShieldGainPer>
+			</Challenge>
+
+			<Challenge Level="13">
+				<ReduceBossClearReward>true</ReduceBossClearReward>
+			</Challenge>
+
+			<Challenge Level="14">
+				<AddArtifactRandomBuildingLevel>-1</AddArtifactRandomBuildingLevel>
+			</Challenge>
+
+			<Challenge Level="15">
+				<AddBossStatPer Floor="1">110</AddBossStatPer>
+				<AddBossStatPer Floor="2">110</AddBossStatPer>
+				<AddBossStatPer Floor="3">110</AddBossStatPer>
+				<AddBossStatPer Floor="4">120</AddBossStatPer>
+				<AddBossStatPer Floor="5">120</AddBossStatPer>
+				<AddBossStatPer Floor="6">120</AddBossStatPer>
+				<AddBossStatPer Floor="7">130</AddBossStatPer>
+				<AddBossStatPer Floor="8">130</AddBossStatPer>
+				<AddBossStatPer Floor="9">130</AddBossStatPer>
+			</Challenge>
+		</Challenges>
+	</RogueLikeSetting>
+	
+	<RogueLikeSetting ID="2100">
+		<StartWorld>200</StartWorld>
+		<MiniBossPool>70000,70010,70020,70030,70040,70140,70150,70160</MiniBossPool>
+		
+		<!-- 대균열/차원의 균열 구분 태그 -->
+		<EasyFirstHeroRoom>true</EasyFirstHeroRoom>
+		<SelectFirstHero>false</SelectFirstHero>
+		<UseAccessory>true</UseAccessory>
+		<UseTreasure>true</UseTreasure>
+		<UseCapturedOwnCardSnapshot>true</UseCapturedOwnCardSnapshot>
+		<DefaultFixedAccessories>3000,3001,3002,3003,3004</DefaultFixedAccessories>
+		<DefaultTreasure Overcome="10" Level="30">20099</DefaultTreasure>
+		<ExpBoostByOutGameCardLevel>1.5</ExpBoostByOutGameCardLevel>
+		<ExpBoostByOutGamePotential>10</ExpBoostByOutGamePotential>
+		<NewHeroAddLevelByOutGameCardLevel>10</NewHeroAddLevelByOutGameCardLevel>
+		<CanBuyNewHeroOnlyOncePerMerchant>true</CanBuyNewHeroOnlyOncePerMerchant>
+		<EnemyStatPer Type="Atk">150</EnemyStatPer>
+		<EnemyStatPer Type="MAtk">150</EnemyStatPer>
+		<EnemyStatPer Type="Hp">150</EnemyStatPer>
+		<RogueLikeSystemType>DimensionRiftSystem</RogueLikeSystemType>
+		<ModeName>DimensionRift</ModeName>
+		<ExcludeEventRooms>
+			Event_BloodRedEquipment,
+			Event_HunterEncounter,
+			Event_Prison,
+			Event_Mausoleum
+		</ExcludeEventRooms>
+		
+		<HeartCost>30</HeartCost>
+		<PayHeartEveryFloor>false</PayHeartEveryFloor>
+		<ReturnHeartOnRunEndByFloor>20,18,16,14,12,10,0,0,0</ReturnHeartOnRunEndByFloor>
+		
+		<ArtifactRerollOptionItem>30090</ArtifactRerollOptionItem>
+		<!-- 제단 킹, 갓, 킹갓 룬 해금 위한 제단 레벨 -->
+		<RequireBuildingLevelsForRune>5,10,15</RequireBuildingLevelsForRune>
+		<!-- 보유 유물 개수에 따른 유물 보상 확률 -->
+		<NewArtifactProb>100,70,50,30,0</NewArtifactProb>
+		
+		<!-- 클래스 레벨 데이터 (차원의 균열 전용) -->
+		<RoleMaxLevel>20</RoleMaxLevel>
+		<RoleLevelDatas>
+			<RoleLevelData Level="2" Value="1">UnlockAccessorySlot</RoleLevelData>
+			<RoleLevelData Level="3">UnlockTreasure</RoleLevelData>
+			<RoleLevelData Level="3" Value="7">AddTreasureMaxLevel</RoleLevelData>
+			<RoleLevelData Level="4" Value="2">UnlockAccessorySlot</RoleLevelData>
+			<RoleLevelData Level="5" Value="8">AddTreasureMaxLevel</RoleLevelData>
+			<RoleLevelData Level="6" Value="3">UnlockAccessorySlot</RoleLevelData>
+			<RoleLevelData Level="7" Value="8">AddTreasureMaxLevel</RoleLevelData>
+			<RoleLevelData Level="8" Value="4">UnlockAccessorySlot</RoleLevelData>
+			<RoleLevelData Level="9" Value="8">AddTreasureMaxLevel</RoleLevelData>
+			<RoleLevelData Level="10" Value="0">UnlockAccessorySlot</RoleLevelData>
+			<RoleLevelData Level="11" Value="25" Index="1">AddAccessorySlotValuePer</RoleLevelData>
+			<RoleLevelData Level="12" Value="25" Index="2">AddAccessorySlotValuePer</RoleLevelData>
+			<RoleLevelData Level="13" Value="25" Index="3">AddAccessorySlotValuePer</RoleLevelData>
+			<RoleLevelData Level="14" Value="25" Index="4">AddAccessorySlotValuePer</RoleLevelData>
+			<RoleLevelData Level="15" Value="25" Index="0">AddAccessorySlotValuePer</RoleLevelData>
+			<RoleLevelData Level="16" Value="25" Index="1">AddAccessorySlotValuePer</RoleLevelData>
+			<RoleLevelData Level="17" Value="25" Index="2">AddAccessorySlotValuePer</RoleLevelData>
+			<RoleLevelData Level="18" Value="25" Index="3">AddAccessorySlotValuePer</RoleLevelData>
+			<RoleLevelData Level="19" Value="25" Index="4">AddAccessorySlotValuePer</RoleLevelData>
+			<RoleLevelData Level="20" Value="25" Index="0">AddAccessorySlotValuePer</RoleLevelData>
+		</RoleLevelDatas>
+
+		<!-- 유닛 관련 -->
+		<InitialUnitCount>1</InitialUnitCount>
+		<MaxUnitCount>10</MaxUnitCount>
+		<UnitMaxLevel>32</UnitMaxLevel>
+		<UnitTierTerm>8</UnitTierTerm>
+		<UnitGetPotentialLevel PotentialReqLevel="4">5</UnitGetPotentialLevel>
+		<UnitGetPotentialLevel PotentialReqLevel="8">13</UnitGetPotentialLevel>
+		<UnitGetPotentialLevel PotentialReqLevel="16">21</UnitGetPotentialLevel>
+
+		<UnitSizeIncPerLevel>0.0125</UnitSizeIncPerLevel>
+		<UnitAttackSpeedPerIncPerLevel>0.02</UnitAttackSpeedPerIncPerLevel>
+		<UnitMaxShieldPerByHp>400</UnitMaxShieldPerByHp>
+		<HpDmgValueRatio>2.5</HpDmgValueRatio>
+		<!-- 만렙(33) 데이터 지우지 말것 -->
+		<UnitLevelDatas>
+			<UnitLevelData Level="1" 	 NeedExp="0"	 StatPer="1"/>
+			<UnitLevelData Level="2" 	 NeedExp="100"	 StatPer="1.5"/>
+			<UnitLevelData Level="3" 	 NeedExp="110"	 StatPer="2.18"/>
+			<UnitLevelData Level="4" 	 NeedExp="120"	 StatPer="3.05"/>
+			<UnitLevelData Level="5" 	 NeedExp="130"	 StatPer="4.11"/>
+			<UnitLevelData Level="6" 	 NeedExp="140"	 StatPer="5.34"/>
+			<UnitLevelData Level="7" 	 NeedExp="150"	 StatPer="6.08"/>
+			<UnitLevelData Level="8" 	 NeedExp="160"	 StatPer="8.02"/>
+			<UnitLevelData Level="9" 	 NeedExp="170"	 StatPer="9.46"/>
+			<UnitLevelData Level="10"	 NeedExp="300"	 StatPer="10.97"/>
+			<UnitLevelData Level="11"	 NeedExp="320"	 StatPer="12.29"/>
+			<UnitLevelData Level="12"	 NeedExp="340"	 StatPer="13.64"/>
+			<UnitLevelData Level="13"	 NeedExp="360"	 StatPer="15"/>
+			<UnitLevelData Level="14"	 NeedExp="380"	 StatPer="16.43"/>
+			<UnitLevelData Level="15"	 NeedExp="400"	 StatPer="17.91"/>
+			<UnitLevelData Level="16"	 NeedExp="420"	 StatPer="19.43"/>
+			<UnitLevelData Level="17"	 NeedExp="440"	 StatPer="20.99"/>
+			<UnitLevelData Level="18"	 NeedExp="500"	 StatPer="22.56"/>
+			<UnitLevelData Level="19"	 NeedExp="540"	 StatPer="24.14"/>
+			<UnitLevelData Level="20"	 NeedExp="580"	 StatPer="25.76"/>
+			<UnitLevelData Level="21"	 NeedExp="620"	 StatPer="27.4"/>
+			<UnitLevelData Level="22"	 NeedExp="660"	 StatPer="29.08"/>
+			<UnitLevelData Level="23"	 NeedExp="700"	 StatPer="30.76"/>
+			<UnitLevelData Level="24"	 NeedExp="740"	 StatPer="32.45"/>
+			<UnitLevelData Level="25"	 NeedExp="780"	 StatPer="34.14"/>
+			<UnitLevelData Level="26"	 NeedExp="1000"	 StatPer="35.82"/>
+			<UnitLevelData Level="27"	 NeedExp="1080"	 StatPer="37.46"/>
+			<UnitLevelData Level="28"	 NeedExp="1160"	 StatPer="39.07"/>
+			<UnitLevelData Level="29"	 NeedExp="1240"	 StatPer="40.64"/>
+			<UnitLevelData Level="30"	 NeedExp="1320"	 StatPer="42.14"/>
+			<UnitLevelData Level="31"	 NeedExp="1380"	 StatPer="43.57"/>
+			<UnitLevelData Level="32"	 NeedExp="1420"	 StatPer="44.92"/>
+			<UnitLevelData Level="33"	 NeedExp="0"	 StatPer="44.92"/>
+		</UnitLevelDatas>
+
+		<!-- 유물 관련 -->
+		<MaxArtifactCount>4</MaxArtifactCount>
+
+		<!-- 보상 관련 -->
+		<BattleRewardRandomItemTiers Index="0">
+			<BattleRewardRandomItemTier Floor="1" OptionCount="2">60.00,25.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="1" OptionCount="3">70.00,20.00,10.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="1" OptionCount="4">75.00,20.00,5.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="2">50.00,30.00,20.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="3">60.00,25.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="4">65.00,25.00,10.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="2">35.00,35.00,30.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="3">45.00,35.00,20.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="4">50.00,35.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="2">25.00,40.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="3">35.00,40.00,25.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="4">45.00,40.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="2">20.00,40.00,40.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="3">30.00,35.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="4">40.00,30.00,30.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="2">10.00,45.00,45.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="3">20.00,40.00,40.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="4">30.00,35.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="2">0.00,50.00,50.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="3">0.00,55.00,45.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="4">0.00,65.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="2">0.00,35.00,65.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="3">0.00,25.00,75.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="4">0.00,20.00,80.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="2">0.00,35.00,65.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="3">0.00,25.00,75.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="4">0.00,20.00,80.00,0.00</BattleRewardRandomItemTier>
+		</BattleRewardRandomItemTiers>
+
+		<BattleRewardRandomItemTiers Index="1">
+			<BattleRewardRandomItemTier Floor="1" OptionCount="2">70.00,25.00,5.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="1" OptionCount="3">75.00,22.00,3.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="1" OptionCount="4">83.00,15.00,2.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="2">60.00,25.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="3">70.00,20.00,10.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="2" OptionCount="4">75.00,20.00,5.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="2">50.00,30.00,20.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="3">60.00,25.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="3" OptionCount="4">65.00,25.00,10.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="2">35.00,35.00,30.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="3">45.00,35.00,20.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="4" OptionCount="4">50.00,35.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="2">25.00,40.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="3">35.00,40.00,25.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="5" OptionCount="4">45.00,40.00,15.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="2">20.00,40.00,40.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="3">30.00,35.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="6" OptionCount="4">40.00,30.00,30.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="2">10.00,45.00,45.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="3">20.00,40.00,40.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="7" OptionCount="4">30.00,35.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="2">0.00,50.00,50.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="3">0.00,55.00,45.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="8" OptionCount="4">0.00,65.00,35.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="2">0.00,50.00,50.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="3">0.00,55.00,45.00,0.00</BattleRewardRandomItemTier>
+			<BattleRewardRandomItemTier Floor="9" OptionCount="4">0.00,65.00,35.00,0.00</BattleRewardRandomItemTier>
+		</BattleRewardRandomItemTiers>
+
+		<EliteRewardRandomItemTiers Index="0">
+			<EliteRewardRandomItemTier Floor="1" OptionCount="2">0.00,50.00,50.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="1" OptionCount="3">0.00,60.00,40.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="1" OptionCount="4">0.00,70.00,30.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="2" OptionCount="2">0.00,50.00,50.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="2" OptionCount="3">0.00,60.00,40.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="2" OptionCount="4">0.00,70.00,30.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="3" OptionCount="2">0.00,50.00,50.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="3" OptionCount="3">0.00,60.00,40.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="3" OptionCount="4">0.00,70.00,30.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="4" OptionCount="2">0.00,0.00,75.00,25.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="4" OptionCount="3">0.00,0.00,82.50,17.50</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="4" OptionCount="4">0.00,0.00,87.50,12.50</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="5" OptionCount="2">0.00,0.00,70.00,30.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="5" OptionCount="3">0.00,0.00,80.00,20.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="5" OptionCount="4">0.00,0.00,85.00,15.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="6" OptionCount="2">0.00,0.00,35.00,65.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="6" OptionCount="3">0.00,0.00,50.00,50.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="6" OptionCount="4">0.00,0.00,60.00,40.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="7" OptionCount="2">0.00,0.00,0.00,100.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="7" OptionCount="3">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="7" OptionCount="4">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="8" OptionCount="2">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="8" OptionCount="3">0.00,0.00,0.00,100.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="8" OptionCount="4">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="9" OptionCount="2">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="9" OptionCount="3">0.00,0.00,0.00,0.00</EliteRewardRandomItemTier>
+			<EliteRewardRandomItemTier Floor="9" OptionCount="4">0.00,0.00,0.00,100.00</EliteRewardRandomItemTier>
+		</EliteRewardRandomItemTiers>
+
+		<BattleRewardRandomItemTypePers>
+<!--			<BattleRewardRandomItemTypePer Type="Hero">5</BattleRewardRandomItemTypePer>-->
+			<BattleRewardRandomItemTypePer Type="Equip">15</BattleRewardRandomItemTypePer>
+			<BattleRewardRandomItemTypePer Type="Rune">30</BattleRewardRandomItemTypePer>
+			<BattleRewardRandomItemTypePer Type="Artifact">45</BattleRewardRandomItemTypePer>
+			<BattleRewardRandomItemTypePer Type="Gold">5</BattleRewardRandomItemTypePer>
+		</BattleRewardRandomItemTypePers>
+
+		<!-- 가격 관련 -->
+		<ItemPrices>
+			<ItemPrice Type="Rune">100,200,500,1000</ItemPrice>
+			<ItemPrice Type="Equip">100,200,500,1000</ItemPrice>
+			<ItemPrice Type="Artifact">400,800,1200,1600</ItemPrice>
+		</ItemPrices>
+
+		<!-- 마지막 보스 ID -->
+		<FinalBossId>70240</FinalBossId>
+
+		<!-- 챌린지 내용 -->
+		<Challenges>
+			<Challenge Level="-5">
+				<SetBattleClearDefaultRewardHealPer>40</SetBattleClearDefaultRewardHealPer>
+				<BattleClearDefaultRewardGoldMultiplier>15</BattleClearDefaultRewardGoldMultiplier>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="1">1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="2">0,1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="3">0.3,0.7,1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="4">0.1792,0.5248,1,0</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="5">0,0.2352,0.5716,1</SecondRewardBattleRoomGenPer>
+			</Challenge>
+
+			<Challenge Level="-4">
+				<SetBattleClearLostHpPerHealPer>100</SetBattleClearLostHpPerHealPer>
+			</Challenge>
+
+			<Challenge Level="-3">
+				<HpAndShieldGainPer>140</HpAndShieldGainPer>
+			</Challenge>
+
+			<Challenge Level="-2">
+				<SetBattleClearDefaultRewardHealPer>30</SetBattleClearDefaultRewardHealPer>
+				<BattleClearDefaultRewardGoldMultiplier>12</BattleClearDefaultRewardGoldMultiplier>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="1">1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="2">0,1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="3">0.4,0.6,1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="4">0.3125,0.6875,1,0</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="5">0,0.4069,0.7438,1</SecondRewardBattleRoomGenPer>
+			</Challenge>
+
+			<Challenge Level="-1">
+				<SpawnAllMerchants>true</SpawnAllMerchants>
+			</Challenge>
+
+			<Challenge Level="0">
+				<SecondRewardBattleRoomGenPer TotalRoomCount="1">1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="2">0,1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="3">0.4,0.6,1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="4">0.4752,0.8208,1,0</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="5">0,0.6826,0.9130,1</SecondRewardBattleRoomGenPer>
+				<RemoveEvents>10260,10270,10280,10290,10300,10310</RemoveEvents>
+			</Challenge>
+
+			<Challenge Level="1">
+				<UseFogOfWar>true</UseFogOfWar>
+			</Challenge>
+
+			<Challenge Level="2">
+				<SetBattleClearLostHpPerHealPer>15</SetBattleClearLostHpPerHealPer>
+			</Challenge>
+
+			<Challenge Level="3">
+				<AddEnemiesExceptBossStatPer Floor="1">105</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="2">105</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="3">105</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="4">110</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="5">110</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="6">110</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="7">115</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="8">115</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="9">115</AddEnemiesExceptBossStatPer>
+			</Challenge>
+
+			<Challenge Level="4">
+				<AddJunkItem>6</AddJunkItem>
+			</Challenge>
+
+			<Challenge Level="5">
+				<AddEnemyThemeValue>2</AddEnemyThemeValue>
+				<AddBattleAndEliteStageOffset>2000000</AddBattleAndEliteStageOffset>
+			</Challenge>
+
+			<Challenge Level="6">
+				<RemoveEvents>10060,10100,10150,10210,10250,10180</RemoveEvents>
+			</Challenge>
+
+			<Challenge Level="7">
+				<SetBattleClearDefaultRewardHealPer>10</SetBattleClearDefaultRewardHealPer>
+				<BattleClearDefaultRewardGoldMultiplier>5</BattleClearDefaultRewardGoldMultiplier>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="1">1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="2">0,1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="3">0.4,0.6,1</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="4">0.4752,0.8208,1,0</SecondRewardBattleRoomGenPer>
+				<SecondRewardBattleRoomGenPer TotalRoomCount="5">0,0.6826,0.9130,1</SecondRewardBattleRoomGenPer>
+				<BattleRewardRandomItemTiersIndex>1</BattleRewardRandomItemTiersIndex>
+			</Challenge>
+
+			<Challenge Level="8">
+				<BossDamagePerByFloor>20</BossDamagePerByFloor>
+			</Challenge>
+
+			<Challenge Level="9">
+				<SetRevivedUnitBattleClearHealToZero>true</SetRevivedUnitBattleClearHealToZero>
+			</Challenge>
+
+			<Challenge Level="10">
+				<AddEnemyThemeValue>4</AddEnemyThemeValue>
+				<AddBattleAndEliteStageOffset>4000000</AddBattleAndEliteStageOffset>
+			</Challenge>
+
+			<Challenge Level="11">
+				<MerchantMinusOnePer>50</MerchantMinusOnePer>
+			</Challenge>
+
+			<Challenge Level="12">
+				<PlayerTotalTakeDamagePer>15</PlayerTotalTakeDamagePer>
+			</Challenge>
+
+			<Challenge Level="13">
+				<ReduceBossClearReward>true</ReduceBossClearReward>
+			</Challenge>
+
+			<Challenge Level="14">
+				<AddBossStatPer Floor="1">150</AddBossStatPer>
+				<AddBossStatPer Floor="2">200</AddBossStatPer>
+				<AddBossStatPer Floor="3">250</AddBossStatPer>
+				<AddBossStatPer Floor="4">180</AddBossStatPer>
+				<AddBossStatPer Floor="5">190</AddBossStatPer>
+				<AddBossStatPer Floor="6">200</AddBossStatPer>
+				<AddBossStatPer Floor="7">200</AddBossStatPer>
+				<AddBossStatPer Floor="8">200</AddBossStatPer>
+				<AddBossStatPer Floor="9">200</AddBossStatPer>
+			</Challenge>
+
+			<Challenge Level="15">
+				<AddEnemyThemeValue>6</AddEnemyThemeValue>
+				<AddBattleAndEliteStageOffset>6000000</AddBattleAndEliteStageOffset>
+			</Challenge>
+			
+			<Challenge Level="16" Seasonal="True">
+				<AddChallengeWorld>203</AddChallengeWorld>
+				
+				<ChallengeBuff StatType="Hp" ValueType="TotalPer">180</ChallengeBuff>
+				<ChallengeBuff StatType="Atk" ValueType="TotalPer">30</ChallengeBuff>
+				<ChallengeBuff StatType="MAtk" ValueType="TotalPer">30</ChallengeBuff>
+				<ChallengeBuff StatType="AttackSpeed" ValueType="Per">50</ChallengeBuff>
+				<ChallengeBuff StatType="HybridDef" ValueType="Value">300</ChallengeBuff>
+				
+				<AddEnemiesExceptBossStatPer Floor="10">115</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="11">115</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="12">115</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="13">115</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="14">115</AddEnemiesExceptBossStatPer>
+				<AddEnemiesExceptBossStatPer Floor="15">115</AddEnemiesExceptBossStatPer>
+				<AddBossStatPer Floor="9">200</AddBossStatPer>
+				<AddBossStatPer Floor="10">200</AddBossStatPer>
+				<AddBossStatPer Floor="11">200</AddBossStatPer>
+				<AddBossStatPer Floor="12">200</AddBossStatPer>
+				<AddBossStatPer Floor="13">200</AddBossStatPer>
+				<AddBossStatPer Floor="14">200</AddBossStatPer>
+				<AddBossStatPer Floor="15">200</AddBossStatPer>
+			</Challenge>
+		</Challenges>
+	</RogueLikeSetting>
+</RogueLikeSettings>

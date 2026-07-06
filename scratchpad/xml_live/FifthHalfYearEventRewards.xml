@@ -1,0 +1,174 @@
+<FifthHalfYearEventRewards>
+    <FifthHalfYearEventReward ID="1">
+        <PassRewards>
+            <PassReward Day="1">
+                <Reward Type="InventoryItem" ID="601" Count="5" />
+            </PassReward>
+    
+            <PassReward Day="2">
+                <Reward Type="Gold" Count="50000" />
+            </PassReward>
+    
+            <PassReward Day="3">
+                <Reward Type="InventoryItem" ID="601" Count="5" />
+            </PassReward>
+    
+            <PassReward Day="4">
+                <Reward Type="Gold" Count="50000" />
+            </PassReward>
+    
+            <PassReward Day="5">
+                <Reward Type="Artifact" ID="12074" Count="1"/>
+            </PassReward>
+    
+            <PassReward Day="6">
+                <Reward Type="InventoryItem" ID="800" Count="4" />
+            </PassReward>
+    
+            <PassReward Day="7">
+                <Reward Type="Artifact" ID="12114" Count="1"/>
+            </PassReward>
+    
+            <PassReward Day="8">
+                <Reward Type="InventoryItem" ID="800" Count="4" />
+            </PassReward>
+    
+            <PassReward Day="9">
+                <Reward Type="Key" ID="370" Count="20" />
+            </PassReward>
+    
+            <PassReward Day="10">
+                <Reward Type="InventoryItem" ID="3101" Count="10" />
+            </PassReward>
+
+            <PassReward Day="11">
+                <Reward Type="Treasure" ID="30002" Count="1" />
+            </PassReward>
+
+            <PassReward Day="12">
+                <Reward Type="InventoryItem" ID="3101" Count="10" />
+            </PassReward>
+
+            <PassReward Day="13">
+                <Reward Type="InventoryItem" ID="6110" Count="1" />
+            </PassReward>
+
+            <PassReward Day="14">
+                <Reward Type="InventoryItem" ID="4101" Count="20" />
+            </PassReward>
+
+            <PassReward Day="15">
+                <Reward Type="Cash" Count="200" />
+            </PassReward>
+
+            <PassReward Day="16">
+                <Reward Type="Treasure" ID="30002" Count="1" />
+            </PassReward>
+
+            <PassReward Day="17">
+                <Reward Type="InventoryItem" ID="3101" Count="10" />
+            </PassReward>
+
+            <PassReward Day="18">
+                <Reward Type="Key" ID="370" Count="20" />
+            </PassReward>
+    
+            <PassReward Day="19">
+                <Reward Type="InventoryItem" ID="3101" Count="10" />
+            </PassReward>
+
+            <PassReward Day="20">
+                <Reward Type="Key" ID="370" Count="20" />
+            </PassReward>
+    
+            <PassReward Day="21">
+                <Reward Type="InventoryItem" ID="3101" Count="10" />
+            </PassReward>
+
+            <PassReward Day="22">
+                <Reward Type="InventoryItem" ID="7000" Count="1" />
+            </PassReward>
+
+            <PassReward Day="23">
+                <Reward Type="InventoryItem" ID="163" Count="1" />
+            </PassReward>
+
+            <PassReward Day="24">
+                <Reward Type="Key" ID="370" Count="20" />
+            </PassReward>
+    
+            <PassReward Day="25">
+                <Reward Type="InventoryItem" ID="3101" Count="10" />
+            </PassReward>
+
+            <PassReward Day="26">
+                <Reward Type="InventoryItem" ID="7000" Count="1" />
+            </PassReward>
+
+            <PassReward Day="27">
+                <Reward Type="InventoryItem" ID="163" Count="1" />
+            </PassReward>
+
+            <PassReward Day="28">
+                <Reward Type="Key" ID="370" Count="20" />
+            </PassReward>
+    
+            <PassReward Day="29">
+                <Reward Type="InventoryItem" ID="3101" Count="10" />
+            </PassReward>
+
+            <PassReward Day="30">
+                <Reward Type="InventoryItem" ID="8125" Count="1" />
+            </PassReward>
+        </PassRewards>
+        
+        <!-- 출석 누적 보상 -->
+        <AttendanceRewards>            
+            <AttendanceReward Day="1">
+                <Reward Type="NewUnitGachaItem" Count="5" />
+            </AttendanceReward>
+            
+            <AttendanceReward Day="2">
+                <Reward Type="NewUnitGachaItem" Count="5" />
+            </AttendanceReward>
+            
+            <AttendanceReward Day="3">
+                <Reward Type="NewUnitGachaItem" Count="6" />
+            </AttendanceReward>
+            
+            <AttendanceReward Day="4">
+                <Reward Type="NewUnitGachaItem" Count="6" />
+            </AttendanceReward>
+            
+            <AttendanceReward Day="5">
+                <Reward Type="NewUnitGachaItem" Count="7" />
+            </AttendanceReward>
+            
+            <AttendanceReward Day="6">
+                <Reward Type="NewUnitGachaItem" Count="7" />
+            </AttendanceReward>
+            
+            <AttendanceReward Day="7">
+                <Reward Type="NewUnitGachaItem" Count="8" />
+            </AttendanceReward>
+            
+            <AttendanceReward Day="8">
+                <Reward Type="NewUnitGachaItem" Count="8" />
+            </AttendanceReward>
+            
+            <AttendanceReward Day="9">
+                <Reward Type="NewUnitGachaItem" Count="9" />
+            </AttendanceReward>
+            
+            <AttendanceReward Day="10">
+                <Reward Type="NewUnitGachaItem" Count="9" />
+            </AttendanceReward>
+        </AttendanceRewards>
+        <!-- 출석 연속 보상 -->
+        <ContinuousReward>
+            <Reward Type="Gold" Count="100000" />
+            <Reward Type="UnitExpItem" Count="1000" />
+            <Reward Type="UnitSoulItem" ID="130" Count="300" />
+        </ContinuousReward>
+    </FifthHalfYearEventReward>
+</FifthHalfYearEventRewards>

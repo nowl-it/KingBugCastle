@@ -1,0 +1,14 @@
+<SkinReturnShopInfos>
+    <!--
+        <Title> 스킨 복각 상점 이름
+        <EventType> 무슨 이벤트인지 (ShopItem에 등록한 EventType과 일치)
+        <StartAt> YYYYMMDD_HHMMSS
+        <EndAt> YYYYMMDD_HHMMSS
+    -->
+    <SkinReturnShopInfo ID='1'>
+        <Title>FifthHalfYear</Title>
+        <EventType>FifthHalfYearPassSkinReturn</EventType>
+        <StartAt>20260409_000000</StartAt>
+        <EndAt>20260506_235900</EndAt>
+    </SkinReturnShopInfo>
+</SkinReturnShopInfos>

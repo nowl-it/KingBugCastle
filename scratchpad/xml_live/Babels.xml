@@ -1,0 +1,84 @@
+<!--
+    BabelPanelBackground : 탑 선택 배경 이미지
+    GroupUnitSprite : 탑 선택 잡졸 유닛 이미지
+    NPCSprite : 탑 선택 대장 유닛 이미지
+    FloorBackGround : 탑 내부 배경 이미지
+    BabelFlagSprite : 인게임 깃발 이미지
+-->
+<Babels>
+    <Babel ID="0">
+        <Theme>400</Theme>
+        <!--월요일 0-->
+        <OpenDays>0,1,2,3,4,5,6</OpenDays>
+        <Region>Unknown</Region>
+        <StagesPrefix>040000000</StagesPrefix>
+        <MaxFloor>210</MaxFloor>
+        
+        <GroupUnitSprite></GroupUnitSprite>
+        <NPCSprite></NPCSprite>
+        <BabelFlagSprite>Object_18</BabelFlagSprite>
+    </Babel>
+    
+    <Babel ID="1">
+
+        <Theme>401</Theme>
+        <!--월요일 0-->
+        <OpenDays>0,5,6</OpenDays>
+        <Region>Central</Region>
+        <StagesPrefix>040100000</StagesPrefix>
+        <MaxFloor>210</MaxFloor>
+
+        <GroupUnitSprite>Babel_NPC_Soldier_00</GroupUnitSprite>
+        <NPCSprite>Babel_NPC_00</NPCSprite>
+        <BabelFlagSprite>Object_18_00</BabelFlagSprite>
+    </Babel>
+    
+    <Babel ID="2">
+        <Theme>402</Theme>
+        <OpenDays>1,5,6</OpenDays>
+        <Region>South</Region>
+        <StagesPrefix>040200000</StagesPrefix>
+        <MaxFloor>210</MaxFloor>
+
+        <GroupUnitSprite>Babel_NPC_Soldier_01</GroupUnitSprite>
+        <NPCSprite>Babel_NPC_01</NPCSprite>
+        <BabelFlagSprite>Object_18_01</BabelFlagSprite>
+    </Babel>
+
+    <Babel ID="3">
+        <Theme>403</Theme>
+        <OpenDays>2,5,6</OpenDays> 
+        <Region>North</Region>
+        <StagesPrefix>040300000</StagesPrefix>
+        <MaxFloor>210</MaxFloor>
+
+        <GroupUnitSprite>Babel_NPC_Soldier_03</GroupUnitSprite>
+        <NPCSprite>Babel_NPC_03</NPCSprite>
+        <BabelFlagSprite>Object_18_03</BabelFlagSprite>
+    </Babel>
+
+    <Babel ID="4">
+        <Theme>404</Theme>
+        <OpenDays>3,5,6</OpenDays>      
+        <Region>East</Region>
+        <StagesPrefix>040400000</StagesPrefix>
+        <MaxFloor>210</MaxFloor>
+
+        <GroupUnitSprite>Babel_NPC_Soldier_02</GroupUnitSprite>
+        <NPCSprite>Babel_NPC_02</NPCSprite>
+        <BabelFlagSprite>Object_18_02</BabelFlagSprite>
+    </Babel>
+
+    <Babel ID="5">
+        <Theme>405</Theme>
+        <!--OpenDays>4,5,6</OpenDays-->  
+        <OpenDays>0,1,2,3,4,5,6</OpenDays>            
+        <Region>West</Region>
+        <StagesPrefix>040500000</StagesPrefix>
+        <MaxFloor>210</MaxFloor>
+
+        <GroupUnitSprite>Babel_NPC_Soldier_04</GroupUnitSprite>
+        <NPCSprite>Babel_NPC_04</NPCSprite>
+        <BabelFlagSprite>Object_18_04</BabelFlagSprite>
+    </Babel>
+</Babels>

@@ -1,0 +1,1235 @@
+<!-- 
+    ※ <Buffs>와 <BuffOptions>는 Inherit되지 않음 ※
+ -->
+
+<AccessorySynergyBuffs>
+    <!-- 강철 세트 -->
+    <AccessorySynergyBuff ID="10000">
+        <Comment>방어력 + 300</Comment>
+        
+        <Count>2</Count>
+        <Synergy>0</Synergy>
+        
+        <Type>NumericKeyValues</Type>
+        
+        <DescParams>
+            <InnerText>./Buffs/BaseHybridDef</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <BaseHybridDef>300</BaseHybridDef>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10001" Inherit="10000">
+        <Comment>최종 체력 + 30%</Comment>
+        
+        <Count>3</Count>
+        
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText>./Buffs/TotalHpPer</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <TotalHpPer>30</TotalHpPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10002" Inherit="10000">
+        <Comment>최종 방어력 성급 당 15% 상승</Comment>
+        
+        <Count>5</Count>
+        
+        <Type>BuffOption</Type>
+       
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/UnitLevel</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <AddStat StatType="Def" StatValueType="TotalPerValue" HaveToBind="true"/>
+                <AddStat StatType="MDef" StatValueType="TotalPerValue" HaveToBind="true"/>
+            </BuffContents>
+            
+            <Values>
+                <UnitLevel>15</UnitLevel>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    
+    <!-- 두려움 세트 -->
+    <AccessorySynergyBuff ID="10010">
+        <Comment>위협 + 40</Comment>
+        
+        <Count>2</Count>
+        <Synergy>1</Synergy>
+        
+        <Type>NumericKeyValues</Type>
+        
+        <DescParams>
+            <InnerText>./Buffs/BaseDefPen</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <BaseDefPen>40</BaseDefPen>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10011" Inherit="10010">
+        <Comment>최종 위협 + 30%</Comment>
+        
+        <Count>3</Count>
+        
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText>./Buffs/TotalDefPenPer</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <TotalDefPenPer>30</TotalDefPenPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10012" Inherit="10010">
+        <Comment>주 공격 대상에게 위협의 기본 효과 + 40%</Comment>
+        
+        <Count>5</Count>
+        
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText BaseValue="-100">./BuffOptions[1]/Values/DefPen</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions>
+                <DealDamage/>
+                <TargetIsFixedTarget/>
+            </Conditions>
+            
+            <Targets>
+                <Default/>
+            </Targets>
+            
+            <RangeInfo>
+                <RangeType>Infinity</RangeType>
+            </RangeInfo>
+            
+            <BuffContents>
+                <AddCustomBuff Key="DefPenBuff" Time="1"/>
+            </BuffContents>
+            
+            <Values>
+                <DefPen>140</DefPen>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    
+    <!-- 예리 세트 -->
+    <AccessorySynergyBuff ID="10020">
+        <Comment>치명타 확률 + 20%</Comment>
+        
+        <Count>2</Count>
+        <Synergy>2</Synergy>
+        
+        <Type>NumericKeyValues</Type>
+        
+        <DescParams>
+            <InnerText>./Buffs/BaseHybridCriticalProb</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <BaseHybridCriticalProb>20</BaseHybridCriticalProb>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10021" Inherit="10020">
+        <Comment>치명타 피해 + 25%</Comment>
+        
+        <Count>3</Count>
+        
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText>./Buffs/BaseHybridCriticalDamageMul</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <BaseHybridCriticalDamageMul>25</BaseHybridCriticalDamageMul>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10022" Inherit="10020">
+        <Comment>치명타 확률 + 20%, 치명타 피해량 +10%
+        치명타 확률/피해 계산할 때 물리/주문 중 더 높은 수치로 적용</Comment>
+        
+        <Count>5</Count>
+        
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <AddStat StatType="HybridCriticalProb" StatValueType="BaseValue"/>
+            </BuffContents>
+            
+            <Values>
+                <FixedValue>20</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="HybridCriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>10</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddCustomBuff Key="ApplyCriticalHighest" UseBooleanKeyValue="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>1</FixedValue>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    
+    <!-- 바다 세트 -->
+    <AccessorySynergyBuff ID="10030">
+        <Comment>위안 + 40</Comment>
+        
+        <Count>2</Count>
+        <Synergy>3</Synergy>
+        
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText>./Buffs/BaseDefDen</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <BaseDefDen>40</BaseDefDen>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10031" Inherit="10030">
+        <Comment>최종 위안 + 30%</Comment>
+        
+        <Count>3</Count>
+        
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText>./Buffs/TotalDefDenPer</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <TotalDefDenPer>30</TotalDefDenPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10032" Inherit="10030">
+        <Comment>위안 기본 효과 만큼의 방어력 획득</Comment>
+        
+        <Count>5</Count>
+        
+        <Type>BuffOption</Type>
+        
+        <BuffOptions>
+            <Conditions>
+                <BattleStart/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <AddStat StatType="Def" StatValueType="BaseValue" HaveToBind="true"/>
+                <AddStat StatType="MDef" StatValueType="BaseValue" HaveToBind="true"/>
+            </BuffContents>
+            
+            <Values>
+                <DefDen>100</DefDen>
+                <Values Type="Multiply">
+                    <DefDen>100</DefDen>
+                    <DefDenExtraDefPer>0.01</DefDenExtraDefPer>
+                </Values>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    
+    <!-- 바람 세트 -->
+    <AccessorySynergyBuff ID="10040">
+        <Comment>공격 속도 + 60%</Comment>
+        
+        <Count>2</Count>
+        <Synergy>4</Synergy>
+        
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText>./Buffs/AttackSpeedPer</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <AttackSpeedPer>60</AttackSpeedPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10041" Inherit="10040">
+        <Comment>치명타 확률 -20% 최종 특수 피해 +80%</Comment>
+        
+        <Count>3</Count>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText Coloring="F33000">./Buffs/BaseHybridCriticalProb</InnerText>
+            <InnerText>./Buffs/AddTotalSpecialDamagePer</InnerText>
+        </DescParams>
+
+        <Buffs>
+            <BaseHybridCriticalProb>-20</BaseHybridCriticalProb>
+            <AddTotalSpecialDamagePer>80</AddTotalSpecialDamagePer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10042" Inherit="10040">
+        <Comment>최종 공격력 - 15%, 일반 공격 시 20%의 특수 피해로 2명 추가 공격</Comment>
+        
+        <Count>5</Count>
+        
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText Coloring="F33000">./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+            <Const>2</Const>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <AddStat StatType="Atk" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+            
+            <Values>
+                <FixedValue>-15</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <ShadowAttack/>
+            </BuffContents>
+            
+            <Values>
+                <FixedValue>20</FixedValue>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    
+    <!-- 야만 세트 -->
+    <AccessorySynergyBuff ID="10050">
+        <Comment>공격력 + 60%</Comment>
+        
+        <Count>2</Count>
+        <Synergy>5</Synergy>
+        
+        <Type>NumericKeyValues</Type>
+        
+        <DescParams>
+            <InnerText>./Buffs/AtkPer</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <AtkPer>60</AtkPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10051" Inherit="10050">
+        <Comment>최종 공격력 - 10%, 스킬 사용 후 3명에게 피해량 50% 연쇄 공격</Comment>
+        
+        <Count>3</Count>
+        
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText Coloring="F33000">./BuffOptions[1]/Values/FixedValue</InnerText>
+            <Const>3</Const>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <AddStat StatType="Atk" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+            
+            <Values>
+                <FixedValue>-10</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <Bolt/>
+            </BuffContents>
+            
+            <Values>
+                <FixedValue>50</FixedValue>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10052" Inherit="10050">
+        <Comment>치명타 확률 -40% 최종 특수 피해 + 120%</Comment>
+        
+        <Count>5</Count>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText Coloring="F33000">./Buffs/BaseHybridCriticalProb</InnerText>
+            <InnerText>./Buffs/AddTotalSpecialDamagePer</InnerText>
+        </DescParams>
+
+        <Buffs>
+            <BaseHybridCriticalProb>-40</BaseHybridCriticalProb>
+            <AddTotalSpecialDamagePer>120</AddTotalSpecialDamagePer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    
+    <!-- 금강 세트 -->
+    <AccessorySynergyBuff ID="10060">
+        <Comment>최종 체력 + 30%</Comment>
+
+        <Count>2</Count>
+        <Synergy>6</Synergy>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText>./Buffs/TotalHpPer</InnerText>
+        </DescParams>
+
+        <Buffs>
+            <TotalHpPer>30</TotalHpPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10061" Inherit="10060">
+        <Comment>받는 최종 피해 30% 감소, 주는 최종 피해 30% 감소</Comment>
+
+        <Count>3</Count>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText Mag="-1" Coloring="F33000">./Buffs/TotalDamagePer</InnerText>
+            <InnerText Mag="-1">./Buffs/TotalTakeDamagePer</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <TotalDamagePer>-30</TotalDamagePer>
+            <TotalTakeDamagePer>-30</TotalTakeDamagePer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10062" Inherit="10060">
+        <Comment>피격 시 마나 +5, 전투 시작 시 최대 체력 100%만큼 실드 획득</Comment>
+
+        <Count>5</Count>
+
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText>./BuffOptions[2]/Values/HpPer</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="DamagedMana" StatValueType="BaseValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>5</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <BattleStart/>
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddShield IgnoreMasterValueRatio="true" />
+            </BuffContents>
+
+            <Values>
+                <HpPer>100</HpPer>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    
+    <!-- 계약 세트 -->
+    <AccessorySynergyBuff ID="10070">
+        <Comment>주문력 +60%</Comment>
+
+        <Count>2</Count>
+        <Synergy>7</Synergy>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText>./Buffs/MAtkPer</InnerText>
+        </DescParams>
+
+        <Buffs>
+            <MAtkPer>60</MAtkPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10071" Inherit="10070">
+        <Comment>스킬 사용에 필요한 마나 +45, 주문 치명타 확률 +50%</Comment>
+
+        <Count>3</Count>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText Coloring="F33000">./Buffs/BaseMaxMana</InnerText>
+            <InnerText>./Buffs/BaseMCriticalProb</InnerText>
+        </DescParams>
+
+        <Buffs>
+            <BaseMaxMana>45</BaseMaxMana>
+            <BaseMCriticalProb>50</BaseMCriticalProb>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10072" Inherit="10070">
+        <Comment>최대마나량 * 0.4 만큼 주문 치명타 피해량 증가, 기본 마나 충전 +40%</Comment>
+
+        <Count>5</Count>
+
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/ManaPer</InnerText>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue" HaveToBind="true"/>
+            </BuffContents>
+
+            <Values>
+                <ManaPer>40</ManaPer>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="BaseMana" StatValueType="BaseValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+
+
+
+    <!-- 온기 세트 -->
+    <AccessorySynergyBuff ID="10080">
+        <Comment>최종 공/주문력 -70%, 최종 주는 치유량 +300%</Comment>
+
+        <Count>2</Count>
+        <Synergy>8</Synergy>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText Coloring="F33000">./Buffs/TotalAtkPer</InnerText>
+            <InnerText>./Buffs/TotalHealEfficiencyPer</InnerText>
+        </DescParams>
+
+        <Buffs>
+            <TotalAtkPer>-70</TotalAtkPer>
+            <TotalMAtkPer>-70</TotalMAtkPer>
+            <TotalHealEfficiencyPer>300</TotalHealEfficiencyPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10081" Inherit="10080">
+        <Comment>최종 수호 +30%, 회복 시 3초간 받는 피해량 감소 -10%</Comment>
+
+        <Count>3</Count>
+
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <Attribute Name="Time">./BuffOptions[2]/BuffContents/AddStat</Attribute>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="DefDen" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Heal/>
+            </Conditions>
+            
+            <Targets>
+                <Default/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" Time="3" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-10</FixedValue>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10082" Inherit="10080">
+        <Comment>주 회복 대상에게 가호 부여</Comment>
+
+        <Count>5</Count>
+
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <Const>3</Const>
+            <InnerText>./BuffOptions[1]/CoolTime</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Heal/>
+            </Conditions>
+            
+            <CoolTime>0.5</CoolTime>
+
+            <Targets>
+                <Default/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <GiveGuard />
+            </BuffContents>
+
+            <Values>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    
+    <!-- 사수 세트 -->
+    <AccessorySynergyBuff ID="10090">
+        <Comment>최종 주문력 -70%, 최종 공격력 +40%</Comment>
+
+        <Count>2</Count>
+        <Synergy>9</Synergy>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText Coloring="F33000">./Buffs/TotalMAtkPer</InnerText>
+            <InnerText>./Buffs/TotalAtkPer</InnerText>
+        </DescParams>
+
+        <Buffs>
+            <TotalMAtkPer>-70</TotalMAtkPer>
+            <TotalAtkPer>40</TotalAtkPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10091" Inherit="10090">
+        <Comment>사거리 + 2, 보유한 사거리 1마다 물리 치명타 피해량 +8% (최대 80%)</Comment>
+
+        <Count>3</Count>
+
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <Const>1</Const>
+            <InnerText>./BuffOptions[2]/Values/Range</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <AddStat StatType="Range" StatValueType="Value" />
+            </BuffContents>
+            
+            <Values>
+                <FixedValue>2</FixedValue>
+            </Values>
+        </BuffOptions>
+        
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue" HaveToBind="true" Max="80" />
+            </BuffContents>
+            
+            <Values>
+                <Range>8</Range>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10092" Inherit="10090">
+        <Comment>전투 시작 시 3초간 은신, 전투 시작 후 3초 후 물리 치명타 확률 +40%</Comment>
+        
+        <Count>5</Count>
+        
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText>./BuffOptions[2]/Delay</InnerText>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions>
+                <BattleStart/>
+            </Conditions>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <Cloaking/>
+            </BuffContents>
+            
+            <Values>
+                <FixedValue>3</FixedValue>
+            </Values>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Delay>3</Delay>
+            
+            <Conditions>
+                <BattleStart/>
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="CriticalProb" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+            
+    </AccessorySynergyBuff>
+
+    <!-- 억압 세트 -->
+    <AccessorySynergyBuff ID="10100">
+        <Comment>위협 +15[2]. 상태이상이 적중한 대상에게 1.5초간 위협 40당 상태이상 저항력 -10%[5] (최대 50%)</Comment>
+
+        <Count>2</Count>
+        <Synergy>10</Synergy>
+
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <Attribute Name="Time">./BuffOptions[2]/BuffContents/AddCustomBuff</Attribute>
+            <Const>-10</Const>
+            <Attribute Name="Max" Mag="100">./BuffOptions[2]/Values/DefPenNoLevel</Attribute>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="DefPen" StatValueType="BaseValue" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>15</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <HandleGiveHardCC />
+            </Conditions>
+
+            <Targets>
+                <Default/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddCustomBuff Key="CCRatioAccessorySynergy10" Time="5" ApplyCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <DefPenNoLevel Max="0.5">0.25</DefPenNoLevel>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10101" Inherit="10100">
+        <Comment>위협 +25[2], 시작 마나 +100%</Comment>
+
+        <Count>3</Count>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText>./Buffs/BaseDefPen</InnerText>
+            <InnerText>./Buffs/BattleStartManaPer</InnerText>
+        </DescParams>
+
+        <Buffs>
+            <BaseDefPen>25</BaseDefPen>
+            <BattleStartManaPer>100</BattleStartManaPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10102" Inherit="10100">
+        <Comment>대상에게 상태이상 적중 시 자신의 최종 위협 +5%[4](최대 50%)</Comment>
+
+        <Count>5</Count>
+
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText Mag="0.01">./BuffOptions[2]/Values/AccessorySynergy10</InnerText>
+            <Attribute Name="Max" Mag="5">./BuffOptions[1]/BuffContents/IncreaseCustomStack</Attribute>
+            <InnerText>./BuffOptions[1]/TargetCoolTime</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <HandleGiveHardCC />
+            </Conditions>
+
+            <TargetCoolTime>3</TargetCoolTime>
+            <ApplyCoolTimeOnDefaultTarget>true</ApplyCoolTimeOnDefaultTarget>
+            
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <IncreaseCustomStack Name="AccessorySynergy10" Max="10"/>
+            </BuffContents>
+
+            <Values>
+                <EnemyCount>100</EnemyCount>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="DefPen" StatValueType="TotalPerValue" HaveToBind="true"/>
+            </BuffContents>
+
+            <Values>
+                <AccessorySynergy10>500</AccessorySynergy10>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+
+    <!-- 절명 세트 -->
+    <AccessorySynergyBuff ID="10110">
+        <Comment>스킬 사용 시마다 특수 피해량 +10% (최대 40%)</Comment>
+
+        <Count>2</Count>
+        <Synergy>11</Synergy>
+
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText Mag="5">./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <CastSkill />
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="SpecialDamageMul" StatValueType="BaseValue" MaxOverlapCount="5" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>10</FixedValue>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10111" Inherit="10110">
+        <Comment>최종 특수 피해량 +25%. 정신 집중 영웅이거나 최대 마나/기교/공허 수치 45 이하의 영웅은 대신 최종 치명타 피해량 -50% 및 최종 특수 피해량 +100%</Comment>
+
+        <Count>3</Count>
+
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <Attribute Name="Value1">./BuffOptions[2]/Values/AccessorySynergy_11</Attribute>
+            <InnerText>./BuffOptions[1]/Values/AccessorySynergy_11</InnerText>
+            <Attribute Coloring="F33000" Name="Value2">./BuffOptions[1]/Values/AccessorySynergy_11</Attribute>
+            <Attribute Name="Value2">./BuffOptions[2]/Values/AccessorySynergy_11</Attribute>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="MCriticalDamageMul" StatValueType="TotalPerValue" IgnoreCCRatio="true" HaveToBind="true"/>
+                <AddStat StatType="CriticalDamageMul" StatValueType="TotalPerValue" IgnoreCCRatio="true" HaveToBind="true"/>
+            </BuffContents>
+
+            <Values>
+                <AccessorySynergy_11 Value1="0" Value2="-50">45</AccessorySynergy_11>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <BindTotalSpecialDamageStat />
+            </BuffContents>
+
+            <Values>
+                <AccessorySynergy_11 Value1="25" Value2="100">45</AccessorySynergy_11>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10112" Inherit="10110">
+        <Comment>최종 공격력/주문력 -10%, 물리/주문 스킬 피해 시 대상에게 15%의 특수 피해</Comment>
+
+        <Count>5</Count>
+
+        <Type>BuffOption</Type>
+
+        <DescParams>
+            <InnerText Coloring="F33000">./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="MAtk" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+                <AddStat StatType="Atk" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-10</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <DealDamage With="SkillMagic,SkillPhysical" />
+            </Conditions>
+
+            <Targets>
+                <Default/>
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <DealDamagePer With="Special"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>20</FixedValue>
+            </Values>
+        </BuffOptions>
+    </AccessorySynergyBuff>
+    
+    <AccessorySynergyBuff ID="10120">
+        <Comment>모든 장신구 세부 옵션 효과 +30%</Comment>
+
+        <Count>2</Count>
+        <Synergy>12</Synergy>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+            <InnerText>./Buffs/AddAccessorySubStatPer</InnerText>
+        </DescParams>
+        
+        <Buffs>
+            <AddAccessorySubStatPer>30</AddAccessorySubStatPer>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10121">
+        <Comment>효과없음</Comment>
+
+        <Count>3</Count>
+        <Synergy>12</Synergy>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+        </DescParams>
+
+        <Buffs>
+        </Buffs>
+    </AccessorySynergyBuff>
+    <AccessorySynergyBuff ID="10122">
+        <Comment>효과없음</Comment>
+
+        <Count>5</Count>
+        <Synergy>12</Synergy>
+
+        <Type>NumericKeyValues</Type>
+
+        <DescParams>
+        </DescParams>
+
+        <Buffs>
+        </Buffs>
+    </AccessorySynergyBuff>
+    
+</AccessorySynergyBuffs>

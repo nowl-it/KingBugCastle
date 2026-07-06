@@ -1,0 +1,629 @@
+<EventTriggers>
+	<EventTrigger ID="150000">
+		<Comment>궁극의 제련 1단계</Comment>
+		<DescComment>가장 성급이 높은 영웅이 공격 시 4초간 대상의 내면을 실체화 시킨다. 광역 공격 혹은 추가 공격의 대상이 될 수 있다. 본체는 내면이 받는 피해의 200%만큼 피해를 입는다. (쿨타임 4초)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" HighestUnit="1" Value="150000"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="150010">
+		<Comment>수호신의 금강 1단계</Comment>
+		<DescComment>최고 성급의 영웅이 매 전투 시작 시 받는 피해 감소 -10%, 피해 반사 +10%, 최대 체력 + 10%\n(최대 5중첩)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" HighestUnit="1" Value="150010"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="150020">
+		<Comment>마신의 폭주 1단계</Comment>
+		<DescComment>최고 성급의 영웅이 스킬 사용 시 무작위의 대상에게 동일한 스킬 1회 더 사용</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" HighestUnit="1" Value="150020"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="150030">
+		<Comment>악마의 피 1단계</Comment>
+		<DescComment>최고 성급의 영웅의 공격/스킬 흡혈 +50%\n1초마다 체력이 80% 이상일 경우 최대 체력의 25%를 소모하고 중첩이 가능한 공격속도 +120%, 이동속도 +30% 버프를 4초간 획득</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" HighestUnit="1" Value="150030"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160000">
+		<Comment>영웅의 힘 1단계</Comment>
+		<DescComment>모든 영웅이 장착한 모든 장비 1개 당 주는 피해 +3% , 받는 피해 -3%\n(최대 15회 중첩)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="160000"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160011">
+		<Comment>신기루 장비 2단계</Comment>
+		<DescComment>가장 성급이 낮은 4명의 영웅이 무작위 갓 아이템 1개 장착</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" LowestUnit="4" Value="160011"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160012">
+		<Comment>신기루 장비 3단계</Comment>
+		<DescComment>가장 성급이 낮은 4명의 영웅이 무작위 킹갓 아이템 1개 장착</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" LowestUnit="4" Value="160012"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160020">
+		<Comment>정예 부대 1단계</Comment>
+		<DescComment>가장 성급이 높은 영웅 4명의 장착 장비의 능력치가 25% 상승합니다.</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" HighestUnit="4" Value="160020"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160070">
+		<Comment>끈질긴 전투 1단계</Comment>
+		<DescComment>전투 시작 시 모든 영웅 받는 피해 -80%, 최종 주는 피해 -20%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="160070"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160080">
+		<Comment>대장 공략 1단계</Comment>
+		<DescComment>모든 영웅이 보스 몬스터에게 받는 피해 -70%, 최종 주는 피해 +30%, 보스 몬스터의 받는 회복량 -70%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="160080"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+		<EnemyUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="160081"/>
+			</EventTrigger>
+		</EnemyUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160090">
+		<Comment>음양조화 1,2,3단계</Comment>
+        <DescComment>모든 영웅이 일반 공격 시 주문 치명타 확률 1% / 주문 치명타 피해량 +2% (최대 50중첩)
+            모든 영웅이 스킬 사용 시 물리 치명타 확률 2.5% / 물리 치명타 피해량 +5% (최대 20중첩)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="160090"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160100">
+		<Comment>무작위 모루 최종 공격력</Comment>
+		<DescComment>최종 공격력 30%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="160100"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160101">
+		<Comment>무작위 모루 최종 주문력</Comment>
+		<DescComment>최종 주문력 30%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="160101"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160102">
+		<Comment>무작위 모루 최종 공격속도</Comment>
+		<DescComment>최종 공격속도 30%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="160102"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160103">
+		<Comment>무작위 모루 최종 최대체력</Comment>
+		<DescComment>최종 최대 체력 100%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="160103"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160110">
+		<Comment>베테랑 1단계</Comment>
+		<DescComment>모든 영웅의 피해량 15% 증가, 매 라운드 시작 시 피해량 +2%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="160110"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160121">
+		<Comment>배수의 진 2단계</Comment>
+		<DescComment>깃발이 1개일 때, 모든 영웅의 최종 주는 피해량 +50%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="160121"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="160131">
+		<Comment>가시 통나무 2단계</Comment>
+		<DescComment>침공 대상 전투 시작 시 대상 진영을 2칸 밀쳐내는 가시 통나무 소환</DescComment>
+		<EnemyUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="TriggerUnitUseSkill" HighestUnit="1" Value="80050"/>
+			</EventTrigger>
+		</EnemyUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170000">
+		<Comment>겨울 갑옷 1단계</Comment>
+		<DescComment>북부 영웅 3기 이상 배치 시, 모든 영웅의 받는 피해 -25%, 최대 체력 +30%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="170000"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170010">
+		<Comment>신수의 가호 1단계</Comment>
+		<DescComment>동부 영웅 3기 이상 배치 시, 모든 영웅이 주는 피해량 + 20% 매 3초 마다 마나 최대로 회복</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="170010"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170020">
+		<Comment>영원의 재생력 1단계</Comment>
+		<DescComment>서부 영웅 3기 이상 배치 시, 모든 영웅의 최대 체력 +25%, 치유/흡혈/보호막 증가량 +100%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="170020"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170030">
+		<Comment>제국의 무력 1단계</Comment>
+		<DescComment>남부 영웅을 4기 이상 배치 시 첫 번째 적 처치 시 모든 적 2초간 공포 및 최종 주는 피해량 +20%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="170030"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170040">
+		<Comment>영웅의 기상 1단계</Comment>
+		<DescComment>중부 영웅 3기 이상 배치 시, 공격력 +30%, 주문력 +30%, 공격속도 +50%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="170040"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170050">
+		<Comment>용기 증진 1단계</Comment>
+		<DescComment>전투 시작 시 용기 클래스 영웅이 주변 3X3 범위의 아군에게 최대 체력의 70% 쉴드 부여</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" TargetRole="Brave" Value="170050"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170060">
+		<Comment>강인한 전열 1단계</Comment>
+		<DescComment>강인 클래스 영웅의 받는 피해 -25%, 최대 체력 +25%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" TargetRole="Toughness" Value="170060"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170070">
+		<Comment>원소 폭주 1단계</Comment>
+		<DescComment>원소 클래스 영웅이 스킬 사용 시마다 (최대 마나 X 0.4)%만큼 주문력 상승, 라운드 종료 후 상승량 초기화\n(최대 200%)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" TargetRole="Element" Value="170070"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170080">
+		<Comment>신속의 바람 1단계</Comment>
+		<DescComment>신속 클래스 영웅의 공격속도 3초마다 40% 상승\n(최대 200%)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" TargetRole="Swift" Value="170080"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170090">
+		<Comment>신비학자 1단계</Comment>
+		<DescComment>신비 클래스 영웅의 공격력 +100%, 주문력 +100%, 아군 사망 시 -20%\n(최대 -100%)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" TargetRole="Mystic" Value="170090"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="170100">
+		<Comment>그림자 속으로 1단계</Comment>
+		<DescComment>그림자 영웅의 체력이 전투 중 처음 50% 이하가 되면, 주는 피해량 +50% 및 1.5초 동안 은신</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" TargetRole="Shadow" Value="170100"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+    <EventTrigger ID="200000">
+        <Comment>전투 시작 후 모든 마물 체력 회복</Comment>
+        <HideInGame>true</HideInGame>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="200000"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="200010">
+        <Comment>전투 시작 후 모든 마물 물리 방어력 증가 버프 바인딩</Comment>
+        <HideInGame>true</HideInGame>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="200010"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="200020">
+        <Comment>전투 시작 후 모든 마물 주문 방어력 증가 버프 바인딩</Comment>
+        <HideInGame>true</HideInGame>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="200020"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+	
+	<EventTrigger ID="211060">
+		<Comment>기절에 걸린 적에게 절대방어 +3 부여</Comment>
+		<Name>EventTriggerName_51001</Name>
+		<Icon>EventTrigger_211060</Icon>
+		<EnemyUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ReceiveCC"/>
+				<Event Type="AddSuperShieldToSelf" Value="3"/>
+			</EventTrigger>
+		</EnemyUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="211061">
+		<Comment>기절에 걸린 적에게 절대방어 +5 부여</Comment>
+		<Name>EventTriggerName_51001</Name>
+		<Icon>EventTrigger_211060</Icon>
+		<EnemyUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ReceiveCC"/>
+				<Event Type="AddSuperShieldToSelf" Value="5"/>
+			</EventTrigger>
+		</EnemyUnitEvents>
+	</EventTrigger>
+	
+	<EventTrigger ID="211070">
+		<Comment>마나 요구량 30% 증가</Comment>
+		<Name>EventTriggerName_51003</Name>
+		<Icon>EventTrigger_211070</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="211070"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="211071">
+		<Comment>마나 요구량 50% 증가</Comment>
+		<Name>EventTriggerName_51003</Name>
+		<Icon>EventTrigger_211070</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="211071"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="212060">
+		<Comment>아군 영웅에게 매초 전체 체력의 3% 지속 피해</Comment>
+		<Name>EventTriggerName_51008</Name>
+		<Icon>EventTrigger_212060</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="212060"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="212061">
+		<Comment>아군 영웅에게 매초 전체 체력의 5% 지속 피해</Comment>
+		<Name>EventTriggerName_51008</Name>
+		<Icon>EventTrigger_212060</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="212061"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="213060">
+		<Comment>아군 영웅의 공격속도 30% 감소</Comment>
+		<Name>EventTriggerName_51010</Name>
+		<Icon>EventTrigger_213060</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="213060"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="213061">
+		<Comment>아군 영웅의 공격속도 50% 감소</Comment>
+		<Name>EventTriggerName_51010</Name>
+		<Icon>EventTrigger_213060</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="213061"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="213070">
+		<Comment>아군 영웅의 최종 주문력 15% 감소</Comment>
+		<Name>EventTriggerName_51006</Name>
+		<Icon>EventTrigger_213070</Icon>
+		<RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="213070"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="213071">
+		<Comment>아군 영웅의 최종 주문력 25% 감소</Comment>
+		<Name>EventTriggerName_51006</Name>
+		<Icon>EventTrigger_213070</Icon>
+		<RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="213071"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="213090">
+		<Comment>아군 영웅의 최종 공격력 15% 감소</Comment>
+		<Name>EventTriggerName_51002</Name>
+		<Icon>EventTrigger_213090</Icon>
+		<RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="213090"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="213091">
+		<Comment>아군 영웅의 최종 공격력 25% 감소</Comment>
+		<Name>EventTriggerName_51002</Name>
+		<Icon>EventTrigger_213090</Icon>
+		<RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="213091"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="214020">
+		<Comment>5초 후 아군 영웅의 마나 회복 5초 간 차단</Comment>
+		<Name>EventTriggerName_51007</Name>
+		<Icon>EventTrigger_214020</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="214020"/>
+				<Delay>5</Delay>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="214021">
+		<Comment>5초 후 아군 영웅의 마나 회복 8초 간 차단</Comment>
+		<Name>EventTriggerName_51007</Name>
+		<Icon>EventTrigger_214020</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="214021"/>
+				<Delay>5</Delay>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="214030">
+		<Comment>5초 후 아군 영웅 흡혈 6초 간 금지</Comment>
+		<Name>EventTriggerName_51005</Name>
+		<Icon>EventTrigger_214030</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="214030"/>
+				<Delay>5</Delay>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="214031">
+		<Comment>5초 후 아군 영웅 흡혈 10초 간 금지</Comment>
+		<Name>EventTriggerName_51005</Name>
+		<Icon>EventTrigger_214030</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="214032"/>
+				<Delay>5</Delay>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="214040">
+		<Comment>피격 시 절대방어가 3배로 감소</Comment>
+		<Name>EventTriggerName_51009</Name>
+		<Icon>EventTrigger_214040</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="214040"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="214041">
+		<Comment>피격 시 절대방어가 5배로 감소</Comment>
+		<Name>EventTriggerName_51009</Name>
+		<Icon>EventTrigger_214040</Icon>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="214041"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	
+	<EventTrigger ID="214050">
+		<Comment>용살단 졸개</Comment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				 <Trigger Type="StartBattle"/>
+				 <Event Type="AddBuffToSelf" Value="214050"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	
+	<EventTrigger ID="214060">
+		<Comment>꿰뚫는 송곳니</Comment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				 <Trigger Type="StartBattle"/>
+				 <Event Type="AddBuffToSelf" Value="214060"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	
+	<EventTrigger ID="214070">
+		<Comment>춤추는 혓바닥</Comment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				 <Trigger Type="StartBattle"/>
+				 <Event Type="AddBuffToSelf" Value="214070"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	
+	<EventTrigger ID="214080">
+		<Comment>부수는 어금니</Comment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				 <Trigger Type="StartBattle"/>
+				 <Event Type="AddBuffToSelf" Value="214080"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	
+	<EventTrigger ID="214090">
+		<Comment>날카로운 발톱</Comment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				 <Trigger Type="StartBattle"/>
+				 <Event Type="AddBuffToSelf" Value="214090"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+    <EventTrigger ID="215100">
+		<Name>EventTriggerName_215100</Name>
+		<Icon>EventTrigger_215100</Icon>
+        <Comment>전투 시작 후 3초간 모든 영웅 사거리 최대치 7x7로 고정</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="215100"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="215101">
+		<Name>EventTriggerName_215100</Name>
+		<Icon>EventTrigger_215100</Icon>
+        <Comment>전투 시작 후 5초간 모든 영웅 사거리 최대치 7x7로 고정</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="215101"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+</EventTriggers>

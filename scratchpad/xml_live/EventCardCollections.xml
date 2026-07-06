@@ -1,0 +1,163 @@
+<!-- xml 정보
+    ID 규칙
+        (1) xx000: 시즌에 따라 새로 만들어지는 인덱스
+        (2) 00xxx: 해당 시즌의 컬렉션 인덱스
+    
+    필드 구성
+        (1) <ID>
+        (2) <Name> (default: EventCardCollectionName_{ID})
+        (3) <EventCardList>
+        (4) <Reward>
+-->
+<EventCardCollections>
+    <EventCardCollection ID="10000">
+        <Comment>No.1 위대한 자</Comment>
+        <EventCardList>10000,10002,10001</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="UnitSoulItem" ID="130" Count="100" />
+    </EventCardCollection>
+    <EventCardCollection ID="10001">
+        <Comment>No.2 너와, 나</Comment>
+        <EventCardList>10007,10015,10020</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Cash" Count="300" />
+    </EventCardCollection>
+    <EventCardCollection ID="10002">
+        <Comment>No.3 결속</Comment>
+        <EventCardList>10018,10010,10020</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Key" ID="302" Count="5" />
+    </EventCardCollection>
+    <EventCardCollection ID="10003">
+        <Comment>No.4 인내</Comment>
+        <EventCardList>10001,10014,10019</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Key" ID="370" Count="5" />
+    </EventCardCollection>
+    <EventCardCollection ID="10004">
+        <Comment>No.5 자연의 수호자</Comment>
+        <EventCardList>10010,10007,10013</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="UnitSoulItem" ID="130" Count="100" />
+    </EventCardCollection>
+    <EventCardCollection ID="10005">
+        <Comment>No.6 침묵</Comment>
+        <EventCardList>10015,10011,10013</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Artifact" ID="801" Count="8" />
+    </EventCardCollection>
+    <EventCardCollection ID="10006">
+        <Comment>No.7 거룩한 밤</Comment>
+        <EventCardList>10006,10010,10017</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Artifact" ID="601" Count="10" />
+    </EventCardCollection>
+    <EventCardCollection ID="10007">
+        <Comment>No.8 성전사</Comment>
+        <EventCardList>10019,10004,10000</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="InventoryItem" ID="3200" Count="1" />
+    </EventCardCollection>
+    <EventCardCollection ID="10008">
+        <Comment>No.9 넌 못 지나간다</Comment>
+        <EventCardList>10013,10015,10003</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="UnitSoulItem" ID="130" Count="100" />
+    </EventCardCollection>
+    <EventCardCollection ID="10009">
+        <Comment>No.10 여정</Comment>
+        <EventCardList>10009,10005,10018</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Key" ID="370" Count="10" />
+    </EventCardCollection>
+    <EventCardCollection ID="10010">
+        <Comment>No.11 각자의 신념</Comment>
+        <EventCardList>10004,10014,10013</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="InventoryItem" ID="3200" Count="1" />
+    </EventCardCollection>
+    <EventCardCollection ID="10011">
+        <Comment>No.12 불변</Comment>
+        <EventCardList>10014,10007,10000</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Key" ID="390" Count="10" />
+    </EventCardCollection>
+    <EventCardCollection ID="10012">
+        <Comment>No.13 쥐도 새도 모르게</Comment>
+        <EventCardList>10011,10006,10003</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Key" ID="370" Count="10" />
+    </EventCardCollection>
+    <EventCardCollection ID="10013">
+        <Comment>No.14 불과 얼음과 대지</Comment>
+        <EventCardList>10016,10002,10007</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Artifact" ID="903" Count="5" />
+    </EventCardCollection>
+    <EventCardCollection ID="10014">
+        <Comment>No.15 마법 학술회</Comment>
+        <EventCardList>10002,10012,10008</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="InventoryItem" ID="4102" Count="10" />
+    </EventCardCollection>
+    <EventCardCollection ID="10015">
+        <Comment>No.16 엇갈린 의도</Comment>
+        <EventCardList>10017,10012,10013</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Key" ID="390" Count="10" />
+    </EventCardCollection>
+    <EventCardCollection ID="10016">
+        <Comment>No.17 조화</Comment>
+        <EventCardList>10013,10005,10016</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Artifact" ID="601" Count="10" />
+    </EventCardCollection>
+    <EventCardCollection ID="10017">
+        <Comment>No.18 해는 지지 않는다</Comment>
+        <EventCardList>10012,10015,10008</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type='NewUnitGachaItem' Count='1' />
+    </EventCardCollection>
+    <EventCardCollection ID="10018">
+        <Comment>No.19 찬란한 빛</Comment>
+        <EventCardList>10009,10004,10016</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type='NewUnitGachaItem' Count='1' />
+    </EventCardCollection>
+    <EventCardCollection ID="10019">
+        <Comment>No.20 비극</Comment>
+        <EventCardList>10020,10006,10015</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type='NewUnitGachaItem' Count='1' />
+    </EventCardCollection>
+    <EventCardCollection ID="10020">
+        <Comment>No.21 기사단</Comment>
+        <EventCardList>10019,10018,10000</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type='NewUnitGachaItem' Count='1' />
+    </EventCardCollection>
+    <EventCardCollection ID="10021">
+        <Comment>No.22 타격대</Comment>
+        <EventCardList>10003,10009,10001</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type='NewUnitGachaItem' Count='1' />
+    </EventCardCollection>
+    <EventCardCollection ID="10022">
+        <Comment>No.23 뻗어나가는 힘</Comment>
+        <EventCardList>10008,10011,10002</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="Key" ID="390" Count="10" />
+    </EventCardCollection>
+    <EventCardCollection ID="10023">
+        <Comment>No.24 격려</Comment>
+        <EventCardList>10005,10018,10009</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="InventoryItem" ID="5601" Count="1" />
+    </EventCardCollection>
+    <EventCardCollection ID="10024">
+        <Comment>No.25 이야기의 끝</Comment>
+        <EventCardList>10009,10005,10012</EventCardList>
+        <AvailableSeason>55</AvailableSeason>
+        <Reward Type="InventoryItem" ID="3200" Count="1" />
+    </EventCardCollection>
+</EventCardCollections>

@@ -1,0 +1,551 @@
+<!-- ID 규칙
+	만의 자리: 등급 (1: 일반, 2: 고급, 3: 희귀, 4: 영웅, 5: 전설, 6: 초월, 7: 신화)
+	단, Grade 태그는 0, 1, 2, 3, 4, 5, 6
+	
+	천, 백, 십의 자리: 인덱스 (000 ~ 999)
+	일의 자리: 만일을 대비하여 남겨둠 (0, 1, 2, ...)
+	
+	* 붙은 건 필수
+	1)* Sprite
+	2)* Grade (0: 일반, 1: 고급, 2: 희귀, 3: 영웅, 4: 전설, 5: 초월, 6: 신화)
+	3) MinVersion (default: 156000)
+	4) Permanent (default: false)
+	5) ContractDays (default: 14)
+	6) ExtendCount (default: 4)
+	7) CanContract (default: true)
+	8)* ContractPrice
+	9)* ExtendPrice
+	10) TodoListBadgePosXOffset (default: 0)
+	10-1) TodoListBadgePosYOffset (default: 0)
+	11) Default (default: false)
+	12) Hidden (default: false)
+-->
+
+<Advisors>
+	<Advisor ID="10000">
+		<Comment>중부 전령</Comment>
+
+		<Sprite>Soldier_01</Sprite>
+		<Grade>0</Grade>
+		
+		<MinVersion>156000</MinVersion>
+		
+		<Default>true</Default>
+		
+		<!-- 구매 -->
+		<CanContract>false</CanContract>
+	</Advisor>
+	
+	<Advisor ID="10010">
+		<Comment>남부 병사</Comment>
+
+		<Sprite>Soldier_04</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+	</Advisor>
+
+	<Advisor ID="10020">
+		<Comment>동부 병사</Comment>
+
+		<Sprite>Soldier_05</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+	</Advisor>
+
+	<Advisor ID="10030">
+		<Comment>서부 병사</Comment>
+
+		<Sprite>Soldier_06</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+	</Advisor>
+
+	<Advisor ID="10040">
+		<Comment>북부 병사</Comment>
+
+		<Sprite>Soldier_07</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+	</Advisor>
+
+	<Advisor ID="10050">
+		<Comment>고블린</Comment>
+
+		<Sheet>Unit_20010</Sheet>
+		<Sprite>Unit_20010_0</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+
+		<!-- UI -->		
+		<SpriteOffsetX>1</SpriteOffsetX>
+		<SpriteOffsetY>-3</SpriteOffsetY>
+	</Advisor>
+
+	<Advisor ID="10060">
+		<Comment>슬라임</Comment>
+
+		<Sheet>Unit_20210</Sheet>
+		<Sprite>Unit_20210_0</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetY>-10</SpriteOffsetY>
+	</Advisor>
+
+	<Advisor ID="10070">
+		<Comment>언데드 마법사</Comment>
+
+		<Sheet>Unit_20340</Sheet>
+		<Sprite>Unit_20340_0</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-0.5</SpriteOffsetX>
+		<SpriteScale>0.75</SpriteScale>
+		<TodoListBadgePosYOffset>25</TodoListBadgePosYOffset>
+	</Advisor>
+
+	<Advisor ID="10080">
+		<Comment>엘프 마법사</Comment>
+
+		<Sheet>Unit_20410</Sheet>
+		<Sprite>Unit_20410_0</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetY>-4</SpriteOffsetY>
+	</Advisor>
+
+	<Advisor ID="10090">
+		<Comment>빙의된 총사</Comment>
+
+		<Sheet>Unit_20610</Sheet>
+		<Sprite>Unit_20610_0</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+	</Advisor>
+
+	<Advisor ID="10100">
+		<Comment>박쥐</Comment>
+
+		<Sheet>Unit_20700</Sheet>
+		<Sprite>Unit_20700_0</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+		
+		<!-- UI -->
+		<SpriteOffsetY>-5</SpriteOffsetY>
+	</Advisor>
+
+	<Advisor ID="10110">
+		<Comment>서리 골렘 파편</Comment>
+
+		<Sheet>Unit_20800</Sheet>
+		<Sprite>Unit_20800_0</Sprite>
+		<Grade>0</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>10</ContractPrice>
+		<ExtendPrice>2</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-1</SpriteOffsetX>
+	</Advisor>
+
+	<Advisor ID="20000">
+		<Comment>고블린 라이더</Comment>
+
+		<Sheet>Unit_20030</Sheet>
+		<Sprite>Unit_20030_0</Sprite>
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>20</ContractPrice>
+		<ExtendPrice>4</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-1</SpriteOffsetX>
+		<SpriteOffsetY>-7</SpriteOffsetY>
+		<SpriteScale>0.8</SpriteScale>
+		<TodoListBadgePosYOffset>20</TodoListBadgePosYOffset>
+	</Advisor>
+
+	<Advisor ID="20010">
+		<Comment>슬라임 총사</Comment>
+
+		<Sheet>Unit_20230</Sheet>
+		<Sprite>Unit_20230_0</Sprite>
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>20</ContractPrice>
+		<ExtendPrice>4</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-1</SpriteOffsetX>
+	</Advisor>
+
+	<Advisor ID="20020">
+		<Comment>엘프 기수</Comment>
+
+		<Sheet>Unit_20430</Sheet>
+		<Sprite>Unit_20430_0</Sprite>
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>20</ContractPrice>
+		<ExtendPrice>4</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteScale>0.7</SpriteScale>
+		<TodoListBadgePosYOffset>35</TodoListBadgePosYOffset>
+	</Advisor>
+
+	<Advisor ID="20030">
+		<Comment>노스페라투 군병</Comment>
+
+		<Sheet>Unit_21300</Sheet>
+		<Sprite>Unit_21300_0</Sprite>
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>20</ContractPrice>
+		<ExtendPrice>4</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetY>-9</SpriteOffsetY>
+		<SpriteScale>0.8</SpriteScale>
+	</Advisor>
+
+	<Advisor ID="20040">
+		<Comment>위습</Comment>
+
+		<Sheet>Unit_21570</Sheet>
+		<Sprite>Unit_21570_0</Sprite>
+		<Grade>1</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>20</ContractPrice>
+		<ExtendPrice>4</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-1</SpriteOffsetX>
+	</Advisor>
+
+	<Advisor ID="30000">
+		<Comment>춤추는 혓바닥</Comment>
+
+		<Sheet>Unit_21020</Sheet>
+		<Sprite>Unit_21020_0</Sprite>
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>50</ContractPrice>
+		<ExtendPrice>10</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetY>-3</SpriteOffsetY>
+		<SpriteScale>0.85</SpriteScale>
+	</Advisor>
+
+	<Advisor ID="30010">
+		<Comment>역병 의사</Comment>
+
+		<Sheet>Unit_21620</Sheet>
+		<Sprite>Unit_21620_0</Sprite>
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>50</ContractPrice>
+		<ExtendPrice>10</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-1</SpriteOffsetX>
+		<SpriteScale>0.85</SpriteScale>
+		<TodoListBadgePosYOffset>10</TodoListBadgePosYOffset>
+	</Advisor>
+
+	<Advisor ID="30020">
+		<Comment>화로의 관리자</Comment>
+
+		<Sheet>Unit_21440</Sheet>
+		<Sprite>Unit_21440_0</Sprite>
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>50</ContractPrice>
+		<ExtendPrice>10</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteScale>0.8</SpriteScale>
+		<TodoListBadgePosYOffset>10</TodoListBadgePosYOffset>
+	</Advisor>
+
+	<Advisor ID="30030">
+		<Comment>황금 고블린</Comment>
+
+		<Sprite>Unit_30010</Sprite>
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>50</ContractPrice>
+		<ExtendPrice>10</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-3.5</SpriteOffsetX>
+		<SpriteOffsetY>4</SpriteOffsetY>
+		<SpriteScale>1.1</SpriteScale>
+	</Advisor>
+
+	<Advisor ID="30040">
+		<Comment>서리 토템</Comment>
+
+		<Sprite>Unit_20830</Sprite>
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>50</ContractPrice>
+		<ExtendPrice>10</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-1</SpriteOffsetX>
+		<SpriteOffsetY>1</SpriteOffsetY>
+	</Advisor>
+
+	<Advisor ID="30050">
+		<Comment>환영의 가면</Comment>
+
+		<Sheet>Artifact_12110</Sheet>
+		<Sprite>Artifact_12110_0</Sprite>
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>50</ContractPrice>
+		<ExtendPrice>10</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-1</SpriteOffsetX>
+	</Advisor>
+
+	<Advisor ID="30060">
+		<Comment>서리 토템</Comment>
+
+		<Sprite>Unit_99999</Sprite>
+		<Grade>2</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>50</ContractPrice>
+		<ExtendPrice>10</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-1</SpriteOffsetX>
+		<SpriteOffsetY>5</SpriteOffsetY>		
+	</Advisor>
+
+	<Advisor ID="40000">
+		<Comment>앨리스</Comment>
+
+		<Sprite>Unit_79900</Sprite>
+		<Grade>3</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>100</ContractPrice>
+		<ExtendPrice>20</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-5</SpriteOffsetX>
+	</Advisor>
+
+	<Advisor ID="40010">
+		<Comment>아슬린</Comment>
+
+		<Sprite>Unit_79903</Sprite>
+		<Grade>3</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>100</ContractPrice>
+		<ExtendPrice>20</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>-1</SpriteOffsetX>
+		<SpriteOffsetY>1</SpriteOffsetY>
+	</Advisor>
+
+	<Advisor ID="40020">
+		<Comment>아메드</Comment>
+
+		<Sprite>Unit_79902</Sprite>
+		<Grade>3</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>100</ContractPrice>
+		<ExtendPrice>20</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>1</SpriteOffsetX>
+		<SpriteOffsetY>1</SpriteOffsetY>
+		<TodoListBadgePosYOffset>7</TodoListBadgePosYOffset>
+	</Advisor>
+
+	<Advisor ID="40030">
+		<Comment>살리드</Comment>
+
+		<Sprite>Unit_79904</Sprite>
+		<Grade>3</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>100</ContractPrice>
+		<ExtendPrice>20</ExtendPrice>
+
+		<!-- UI -->
+		<TodoListBadgePosYOffset>10</TodoListBadgePosYOffset>
+	</Advisor>
+
+	<Advisor ID="40040">
+		<Comment>의문의 고대인</Comment>
+
+		<Sprite>Unit_79905</Sprite>
+		<Grade>3</Grade>
+
+		<MinVersion>156000</MinVersion>
+
+		<!-- 구매 -->
+		<ContractPrice>100</ContractPrice>
+		<ExtendPrice>20</ExtendPrice>
+
+		<!-- UI -->
+		<SpriteOffsetX>0.5</SpriteOffsetX>
+		<SpriteOffsetY>2</SpriteOffsetY>
+	</Advisor>
+
+    <Advisor ID="40050">
+        <Comment>렘</Comment>
+
+        <Sheet>Unit_70250</Sheet>
+        <Sprite>Unit_70250_0</Sprite>
+        <Grade>3</Grade>
+
+        <MinVersion>160100</MinVersion>
+
+        <Permanent>true</Permanent>
+
+        <!-- 구매 -->
+        <CanContract>false</CanContract>
+        <Hidden>true</Hidden>
+
+        <SpriteOffsetY>-8</SpriteOffsetY>
+        <TodoListBadgePosYOffset>10</TodoListBadgePosYOffset>
+    </Advisor>
+
+    <Advisor ID="40060">
+        <Comment>엘레나</Comment>
+
+        <Sheet>Unit_50030</Sheet>
+        <Sprite>Unit_50030_4</Sprite>
+        <Grade>3</Grade>
+
+        <MinVersion>167100</MinVersion>
+
+        <Permanent>true</Permanent>
+
+        <!-- 구매 -->
+        <CanContract>false</CanContract>
+        <Hidden>true</Hidden>
+
+		<!-- 구매 -->
+		<ContractPrice>100</ContractPrice>
+		<ExtendPrice>20</ExtendPrice>
+
+
+        <SpriteOffsetY>-8</SpriteOffsetY>
+        <TodoListBadgePosYOffset>10</TodoListBadgePosYOffset>
+
+    </Advisor>	
+</Advisors>

@@ -1,0 +1,58 @@
+{
+  "artifact": {
+    "optCountByLevel": {"Normal": 1, "King": 2, "God": 3, "KingGod": 4},
+    "typesPool": ["AtkSpeedPer"],
+    "maxRollLvs": 6,
+    "safePositions": [1],
+    "optionSlots": 4,
+    "count": 1,
+    "polishPoint": 0,
+    "customType": 0
+  },
+  "accessory": {
+    "count": 10,
+    "accountId": 1,
+    "unitId": 0,
+    "slot": 0,
+    "typeCount": 4,
+    "rarity": 4,
+    "level": 1,
+    "exp": 0,
+    "synergy": 0,
+    "state": 0,
+    "data": {"mainStat": "ATK", "subStats": []},
+    "subStats": [],
+    "subStatScores": [],
+    "coolTimeEndAt": "2000-01-01T00:00:00.000Z",
+    "usedThemeList": [],
+    "isEarlyAccessModeTestAccessory": false
+  },
+  "treasure": {
+    "_comment": "TreasureConstants.xml Overcome=10 -> MaxLevel=30 (highest tier).",
+    "accountId": 1,
+    "level": 30,
+    "exp": 0,
+    "overcome": 10,
+    "unitId": 0,
+    "state": 0,
+    "coolTimeEndAt": "2000-01-01T00:00:00.000Z",
+    "usedThemeList": [],
+    "isEarlyAccessModeTestTreasure": false
+  },
+  "riftWeapon": {
+    "_comment": "RiftWeaponConstants.xml LevelInformation: Special rarity (idx 2) caps at level 40.",
+    "buildingIndexes": [],
+    "level": 40,
+    "rarity": 2,
+    "broken": false,
+    "subStat": [],
+    "state": 1
+  },
+  "riftCrystal": {
+    "mainBuildingIdx": 0,
+    "buildingLevels": [],
+    "rarity": 0,
+    "ceilCount": 0,
+    "state": 0
+  }
+}

@@ -1,0 +1,63 @@
+# Build artifacts
+.rebuild*/
+.tmp*/
+.tmp_patch/
+
+# Large binary / tool directories (re-downloadable)
+unity/
+tools/
+ghidra/
+il2cpp/
+frida/
+xml_history/
+# Admin panel build artifacts (reinstall with pnpm install)
+server/admin/node_modules/
+server/admin/.next/
+
+# APK and archive files
+apk/
+KingBugCastle_share/
+KingBugCastle_share.zip
+.deploy/
+*.apk
+*.aab
+*.xapk
+
+# Redroid data (permission denied + large)
+redroid-data/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+/tmp/
+
+# Scratchpad temp/binary (re-generatable)
+scratchpad/original_apk/
+scratchpad/arm64_dump/
+scratchpad/arm64_dump_out/
+scratchpad/xml_repack_test/
+scratchpad/mitm_capture/
+scratchpad/*.png
+scratch/
+
+# AI tool caches
+.fallow/
+.claude/
+.codegraph/
+
+# Editor/IDE config
+.obsidian/
+.cursor/
+opencode.jsonc
+.mcp.json
+
+# Training / Personal data
+documentation/

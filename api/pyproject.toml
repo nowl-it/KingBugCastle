@@ -1,0 +1,18 @@
+[project]
+name = "kgc-api"
+version = "0.1.0"
+description = "King God Castle API client"
+requires-python = ">=3.11"
+dependencies = [
+    "msgpack>=1.1.2",
+    "pycryptodome>=3.23.0",
+    "requests>=2.32",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipython",
+]
+
+[tool.uv]
+package = false

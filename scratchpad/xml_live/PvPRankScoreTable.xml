@@ -1,0 +1,32 @@
+<PvPRankScoreTable>
+    <ScoreData ReqScore="0" WinScore="80" LoseScore="-53"/>
+    <ScoreData ReqScore="100" WinScore="79" LoseScore="-56"/>
+    <ScoreData ReqScore="200" WinScore="71" LoseScore="-53"/>
+    <ScoreData ReqScore="300" WinScore="71" LoseScore="-55"/>
+    <ScoreData ReqScore="400" WinScore="66" LoseScore="-53"/>
+    <ScoreData ReqScore="500" WinScore="66" LoseScore="-54"/>
+    <ScoreData ReqScore="600" WinScore="61" LoseScore="-52"/>
+    <ScoreData ReqScore="800" WinScore="57" LoseScore="-50"/>
+    <ScoreData ReqScore="900" WinScore="57" LoseScore="-51"/>
+    <ScoreData ReqScore="1000" WinScore="53" LoseScore="-48"/>
+    <ScoreData ReqScore="1100" WinScore="52" LoseScore="-49"/>
+    <ScoreData ReqScore="1200" WinScore="48" LoseScore="-46"/>
+    <ScoreData ReqScore="1300" WinScore="47" LoseScore="-46"/>
+    <ScoreData ReqScore="1400" WinScore="43" LoseScore="-43"/>
+    <ScoreData ReqScore="1600" WinScore="40" LoseScore="-40"/>
+    <ScoreData ReqScore="1700" WinScore="36" LoseScore="-36"/>
+    <ScoreData ReqScore="1800" WinScore="32" LoseScore="-32"/>
+    <ScoreData ReqScore="1900" WinScore="29" LoseScore="-29"/>
+    <ScoreData ReqScore="2000" WinScore="20"  LoseScore="-24"/>
+    <ScoreData ReqScore="2600" WinScore="19"  LoseScore="-24"/>
+    <ScoreData ReqScore="2900" WinScore="18"  LoseScore="-24"/>
+    <ScoreData ReqScore="3200" WinScore="17"  LoseScore="-24"/>
+    <ScoreData ReqScore="3500" WinScore="16"  LoseScore="-24"/>
+    <ScoreData ReqScore="3800" WinScore="15"  LoseScore="-24"/>
+    <ScoreData ReqScore="4100" WinScore="14"  LoseScore="-24"/>
+    <ScoreData ReqScore="4700" WinScore="13" LoseScore="-24"/>
+    <ScoreData ReqScore="5300" WinScore="12" LoseScore="-24"/>
+    <ScoreData ReqScore="5900" WinScore="11" LoseScore="-24"/>
+    <ScoreData ReqScore="6500" WinScore="10" LoseScore="-24"/>
+    <ScoreData ReqScore="7100" WinScore="9" LoseScore="-24"/>
+</PvPRankScoreTable>

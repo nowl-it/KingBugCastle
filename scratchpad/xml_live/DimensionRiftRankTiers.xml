@@ -1,0 +1,133 @@
+<!-- Reward는 표기를 위해 차용. 실제 지급은 쿼리에서 진행함에 주의 -->
+<DimensionRiftRankTiers>
+	<DimensionRiftRankTier ID="10">
+		<NameComment>브론즈</NameComment>
+		<ReqScore>0</ReqScore>
+
+		<TierIcon>Tier_01</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8300" Count="1"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+	
+	<DimensionRiftRankTier ID="20">
+		<NameComment>실버</NameComment>
+		<ReqScore>150000</ReqScore>
+
+		<TierIcon>Tier_02</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8300" Count="2"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+	
+	<DimensionRiftRankTier ID="30">
+		<NameComment>골드</NameComment>
+		<ReqScore>300000</ReqScore>
+
+		<TierIcon>Tier_03</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8301" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8200" Count="1"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+	
+	<DimensionRiftRankTier ID="40">
+		<NameComment>플래티넘</NameComment>
+		<ReqScore>450000</ReqScore>
+
+		<TierIcon>Tier_04</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8301" Count="2"/>
+			<RewardItem Type="InventoryItem" ID="8200" Count="1"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+	
+	<DimensionRiftRankTier ID="50">
+		<NameComment>다이아</NameComment>
+		<ReqScore>550000</ReqScore>
+
+		<TierIcon>Tier_05</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8120" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8302" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8200" Count="1"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+	
+	<DimensionRiftRankTier ID="60">
+		<NameComment>킹</NameComment>
+		<ReqScore>600000</ReqScore>
+
+		<TierIcon>Tier_06</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8122" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8302" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8200" Count="1"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+	
+	<DimensionRiftRankTier ID="70">
+		<NameComment>갓(31~100위)</NameComment>
+		<ReqScore>600000</ReqScore>
+		<ReqRank>100</ReqRank>
+
+		<TierIcon>Tier_07</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8123" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8302" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8200" Count="2"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+	
+	<DimensionRiftRankTier ID="71">
+		<NameComment>갓+(11~30위)</NameComment>
+		<ReqScore>600000</ReqScore>
+		<ReqRank>30</ReqRank>
+
+		<TierIcon>Tier_07</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8125" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8302" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8200" Count="2"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+	
+	<DimensionRiftRankTier ID="80">
+		<NameComment>킹갓(6~10위)</NameComment>
+		<ReqScore>600000</ReqScore>
+		<ReqRank>10</ReqRank>
+
+		<TierIcon>Tier_08</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8127" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8302" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8200" Count="2"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+	
+	<DimensionRiftRankTier ID="81">
+		<NameComment>킹갓+ (2~5위)</NameComment>
+		<ReqScore>600000</ReqScore>
+		<ReqRank>5</ReqRank>
+
+		<TierIcon>Tier_08</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8128" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8302" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8200" Count="2"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+	
+	<DimensionRiftRankTier ID="82">
+		<NameComment>킹갓++ (1위)</NameComment>
+		<ReqScore>600000</ReqScore>
+		<ReqRank>1</ReqRank>
+
+		<TierIcon>Tier_08</TierIcon>
+		<RewardItems>
+			<RewardItem Type="InventoryItem" ID="8130" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8302" Count="1"/>
+			<RewardItem Type="InventoryItem" ID="8200" Count="2"/>
+		</RewardItems>
+	</DimensionRiftRankTier>
+</DimensionRiftRankTiers>

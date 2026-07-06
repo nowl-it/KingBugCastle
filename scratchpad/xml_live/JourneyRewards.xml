@@ -1,0 +1,68 @@
+<JourneyRewards>
+    <JourneyReward ID='1'>
+        <RewardItem ID='0'>
+            <Time>00:05:00</Time>
+            <Reward Type='Gold' Count='1000'/>
+        </RewardItem>
+        <RewardItem ID='1'>
+            <Time>00:05:00</Time>
+            <Reward Type='UnitExpItem' Count='10'/>
+        </RewardItem>
+        <RewardItem ID='2'>
+            <Time>00:20:00</Time>
+            <Reward Type='Key' ID='300' Count='4'/>
+        </RewardItem>
+        <RewardItem ID='3'>
+            <Time>01:00:00</Time>
+            <Reward Type='InventoryItem' ID='152' Count='1'/>
+        </RewardItem>
+        <RewardItem ID='4'>
+            <Time>12:00:00</Time>
+            <Reward Type='Key' ID='301' Count='4'/>
+        </RewardItem>
+        <RewardItem ID='5'>
+            <Time>00:10:00</Time>
+            <Reward Type='InventoryItem' ID='150' Count='1'/>
+        </RewardItem>
+        <RewardItem ID='6'>
+            <Time>00:30:00</Time>
+            <Reward Type='InventoryItem' ID='151' Count='1'/>
+        </RewardItem>
+        <RewardItem ID='7'>
+            <Time>12:00:00</Time>
+            <Reward Type='Key' ID='302' Count='4'/>
+        </RewardItem>
+        <RewardItem ID='8'>
+            <Time>00:30:00</Time>
+            <Reward Type='InventoryItem' ID='2206' Count='5'/>
+        </RewardItem>
+        <RewardItem ID='9'>
+            <Time>12:00:00</Time>
+            <Reward Type='Key' ID='352' Count='4'/>
+        </RewardItem>
+        <RewardItem ID='10'>
+            <Time>12:00:00</Time>
+            <Reward Type='InventoryItem' ID='152' Count='1'/>
+        </RewardItem>
+        <RewardItem ID='11'>
+            <Time>12:00:00</Time>
+            <Reward Type='Artifact' ID='502' Count='1'/>
+        </RewardItem>
+        <RewardItem ID='12'>
+            <Time>12:00:00</Time>
+            <Reward Type='Token_SKIN' Count='10'/>
+        </RewardItem>
+        <RewardItem ID='13'>
+            <Time>12:00:00</Time>
+            <Reward Type='Artifact' ID='513' Count='1'/>
+        </RewardItem>
+        <RewardItem ID='14'>
+            <Time>12:00:00</Time>
+            <Reward Type='UnitSoulItem' Count='20'/>
+        </RewardItem>
+        <RewardItem ID='15'>
+            <Time>12:00:00</Time>
+            <Reward Type='NewUnitGachaItem' Count='1'/>
+        </RewardItem>
+    </JourneyReward>
+</JourneyRewards>

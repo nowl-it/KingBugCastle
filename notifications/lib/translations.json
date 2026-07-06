@@ -1,0 +1,167 @@
+{
+    "en": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**New {platform} version available**\n\n{icon} **v {version}**{previous}\n\n[Open Store ↗]({store_url})",
+        "APP_PREV": "\n📅 Previous: v {last_version}",
+        "PATCH_TITLE": "📦 KGC Patch · {latest_fmt}",
+        "PATCH_BODY": "**New CDN patch is live**\n\n🆕**{latest_fmt}**{previous}{days_diff}",
+        "PATCH_PREV": "\n📅 Previous: {last_fmt}",
+        "PATCH_DAYS": "\n⏱️ {days_diff} day(s) since last patch",
+        "NOTICE_TITLE": "📢 KGC Notice · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[Read full notice ↗]({notice_url})"
+    },
+    "zh": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**新的{platform}版本可用**\n\n{icon} **v {version}**{previous}\n\n[开店 ↗]({store_url})",
+        "APP_PREV": "📅 上一篇：v {last_version}",
+        "PATCH_TITLE": "📦 KGC 补丁 · {latest_fmt}",
+        "PATCH_BODY": "**新的 CDN 补丁已上线**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 上一篇：{last_fmt}",
+        "PATCH_DAYS": "⏱️ 自上次补丁以来{days_diff}天",
+        "NOTICE_TITLE": "📢KGC通知·{notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[阅读完整通知 ↗]({notice_url})"
+    },
+    "ja": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**新しい{platform}バージョンが利用可能**\n\n{icon} **v {version}**{previous}\n\n[ストアを開く ↗]({store_url})",
+        "APP_PREV": "📅 前: v {last_version}",
+        "PATCH_TITLE": "📦 KGC パッチ · {latest_fmt}",
+        "PATCH_BODY": "**新しい CDN パッチが公開されました**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 前: {last_fmt}",
+        "PATCH_DAYS": "⏱️ 前回のパッチから{days_diff}日",
+        "NOTICE_TITLE": "📢 KGC 通知 · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[注意事項を全文お読みください ↗]({notice_url})"
+    },
+    "vi": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**Đã có phiên bản {platform} mới**\n\n{icon} **v {version}**{previous}\n\n[Mở cửa hàng ↗]({store_url})",
+        "APP_PREV": "📅 Trước: v {last_version}",
+        "PATCH_TITLE": "📦 Bản vá KGC · {latest_fmt}",
+        "PATCH_BODY": "**Bản vá CDN mới đã có sẵn**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 Trước: {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} ngày kể từ bản vá cuối cùng",
+        "NOTICE_TITLE": "📢 Thông báo của KGC · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[Đọc đầy đủ thông báo ↗]({notice_url})"
+    },
+    "th": {
+        "APP_TITLE": "{icon} KGC {platform} · กับ {version}",
+        "APP_BODY": "**มีเวอร์ชัน {platform} ใหม่**\n\n{icon}**กับ {version}**{previous}\n\n[เปิดร้านค้า ↗]({store_url})",
+        "APP_PREV": "📅 ก่อนหน้า: v {last_version}",
+        "PATCH_TITLE": "📦 แพตช์ KGC · {latest_fmt}",
+        "PATCH_BODY": "**แพทช์ CDN ใหม่เผยแพร่แล้ว**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 ก่อนหน้า: {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} วันนับตั้งแต่แพตช์ที่แล้ว",
+        "NOTICE_TITLE": "📢 ประกาศ KGC · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[อ่านประกาศฉบับเต็ม ↗]({notice_url})"
+    },
+    "de": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**Neue {platform} Version verfügbar**\n\n{icon} **v {version}**{previous}\n\n[Store öffnen ↗]({store_url})",
+        "APP_PREV": "📅 Vorheriger Artikel: v {last_version}",
+        "PATCH_TITLE": "📦 KGC-Patch · {latest_fmt}",
+        "PATCH_BODY": "**Neuer CDN-Patch ist live**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 Zurück: {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} Tag(e) seit dem letzten Patch",
+        "NOTICE_TITLE": "📢 KGC-Hinweis · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[Vollständigen Hinweis lesen ↗]({notice_url})"
+    },
+    "es": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**Nueva versión {platform} disponible**\n\n{icon} **v {version}**{previous}\n\n[Abrir tienda ↗]({store_url})",
+        "APP_PREV": "📅 Anterior:v {last_version}",
+        "PATCH_TITLE": "📦 Parche KGC · {latest_fmt}",
+        "PATCH_BODY": "**El nuevo parche CDN está disponible**\n\n🆕**{latest_fmt}**{previous}{days_diff}",
+        "PATCH_PREV": "📅 Anterior: {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} día(s) desde el último parche",
+        "NOTICE_TITLE": "📢 Aviso KGC · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[Leer aviso completo ↗]({notice_url})"
+    },
+    "fr": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**Nouvelle version {platform} disponible**\n\n{icon}**contre {version}**{previous}\n\n[Ouvrir la boutique ↗]({store_url})",
+        "APP_PREV": "📅 Précédent : v {last_version}",
+        "PATCH_TITLE": "📦 Patch KGC · {latest_fmt}",
+        "PATCH_BODY": "**Le nouveau patch CDN est en ligne**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 Précédent : {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} jour(s) depuis le dernier patch",
+        "NOTICE_TITLE": "📢 Avis KGC · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[Lire l'avis complet ↗]({notice_url})"
+    },
+    "pt": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**Nova versão {platform} disponível**\n\n{icon} **v {version}**{previous}\n\n[Loja aberta ↗]({store_url})",
+        "APP_PREV": "📅 Anterior: v {last_version}",
+        "PATCH_TITLE": "📦 Atualização KGC · {latest_fmt}",
+        "PATCH_BODY": "**Novo patch CDN está ativo**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 Anterior: {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} dia(s) desde a última atualização",
+        "NOTICE_TITLE": "📢 Aviso KGC · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[Leia o aviso completo ↗]({notice_url})"
+    },
+    "it": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**Disponibile la nuova versione {platform}**\n\n {icon} **v {version}**{previous} \n\n[Apri negozio ↗]({store_url})",
+        "APP_PREV": "📅 Precedente: v {last_version}",
+        "PATCH_TITLE": "📦Patch KGC · {latest_fmt}",
+        "PATCH_BODY": "**La nuova patch CDN è attiva**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 Precedente: {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} giorno/i dall'ultima patch",
+        "NOTICE_TITLE": "📢 Avviso KGC · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[Leggi l'avviso completo ↗]({notice_url})"
+    },
+    "ru": {
+        "APP_TITLE": "{icon} КГК {platform} · v {version}",
+        "APP_BODY": "**Доступна новая версия {platform}**\n\n{icon} **v {version}**{previous}\n\n[Открыть магазин ↗]({store_url})",
+        "APP_PREV": "📅 Предыдущий: v {last_version}",
+        "PATCH_TITLE": "📦 Патч KGC · {latest_fmt}",
+        "PATCH_BODY": "**Новый патч CDN уже доступен**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 Предыдущий: {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} дней с момента последнего обновления",
+        "NOTICE_TITLE": "📢 Уведомление KGC · {notice_title}",
+        "NOTICE_BODY": "**Х0Х**\n\n{excerpt}\n\n[Читать полное уведомление ↗]({notice_url})"
+    },
+    "ar": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**يتوفر إصدار {platform} الجديد**\n\n{icon} **v {version}**{previous}\n\n[افتح المتجر ↗]({store_url})",
+        "APP_PREV": "📅 السابق: v {last_version}",
+        "PATCH_TITLE": "📦 تصحيح KGC · {latest_fmt}",
+        "PATCH_BODY": "**تم نشر تصحيح CDN الجديد**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 السابق: {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} يوم (أيام) منذ التصحيح الأخير",
+        "NOTICE_TITLE": "📢 إشعار KGC · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[اقرأ الإشعار كاملاً ↗]({notice_url})"
+    },
+    "id": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**Versi {platform} baru tersedia**\n\n{icon} **v {version}**{previous}\n\n[Buka Toko ↗]({store_url})",
+        "APP_PREV": "📅 Sebelumnya: v {last_version}",
+        "PATCH_TITLE": "📦 Tambalan KGC · {latest_fmt}",
+        "PATCH_BODY": "**Patch CDN baru sudah aktif**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 Sebelumnya: {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} hari sejak patch terakhir",
+        "NOTICE_TITLE": "📢 Pemberitahuan KGC · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[Baca pemberitahuan selengkapnya ↗]({notice_url})"
+    },
+    "pl": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**Dostępna nowa wersja {platform}**\n\n{icon} **v {version}**{previous}\n\n[Otwórz sklep ↗]({store_url})",
+        "APP_PREV": "📅 Poprzedni: v {last_version}",
+        "PATCH_TITLE": "📦 Łatka KGC · {latest_fmt}",
+        "PATCH_BODY": "**Nowa łatka CDN jest już dostępna**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 Poprzedni: {last_fmt}",
+        "PATCH_DAYS": "⏱️ {days_diff} dni od ostatniej aktualizacji",
+        "NOTICE_TITLE": "📢 Powiadomienie KGC · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[Przeczytaj całe powiadomienie ↗]({notice_url})"
+    },
+    "tr": {
+        "APP_TITLE": "{icon} KGC {platform} · v {version}",
+        "APP_BODY": "**Yeni {platform} sürümü mevcut**\n\n{icon} **v {version}**{previous}\n\n[Mağazayı Aç ↗]({store_url})",
+        "APP_PREV": "📅 Önceki: v {last_version}",
+        "PATCH_TITLE": "📦 KGC Yaması · {latest_fmt}",
+        "PATCH_BODY": "**Yeni CDN yaması yayında**\n\n🆕**{latest_fmt}**{previous}{days_diff} ",
+        "PATCH_PREV": "📅 Önceki: {last_fmt}",
+        "PATCH_DAYS": "⏱️ Son yamadan bu yana {days_diff} gün",
+        "NOTICE_TITLE": "📢 KGC Bildirimi · {notice_title}",
+        "NOTICE_BODY": "**{notice_title}**\n\n{excerpt}\n\n[Bildirimin tamamını okuyun ↗]({notice_url})"
+    }
+}

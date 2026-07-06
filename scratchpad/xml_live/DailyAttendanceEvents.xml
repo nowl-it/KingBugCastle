@@ -1,0 +1,352 @@
+<DailyAttendanceEvents>
+	<DailyAttendanceEvent ID="1">
+		<EventID>1</EventID>
+		<Day>0</Day>
+
+        <NameComment>일반 소환서</NameComment>
+        <KeyID>300</KeyID>
+        <KeyCount>1</KeyCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="2">
+		<EventID>1</EventID>
+		<Day>1</Day>
+
+        <NameComment>금화 500</NameComment>
+        <Gold>500</Gold>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="3">
+		<EventID>1</EventID>
+		<Day>2</Day>
+
+        <NameComment>보석 10</NameComment>
+        <Cash>10</Cash>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="4">
+		<EventID>1</EventID>
+		<Day>3</Day>
+
+        <NameComment>일반 유물상자</NameComment>
+        <KeyID>350</KeyID>
+        <KeyCount>1</KeyCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="5">
+		<EventID>1</EventID>
+		<Day>4</Day>
+
+        <NameComment>금화 500</NameComment>
+        <Gold>500</Gold>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="6">
+		<EventID>1</EventID>
+		<Day>5</Day>
+
+        <NameComment>경험의 서 15개</NameComment>
+        <UnitExpCount>15</UnitExpCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="7">
+		<EventID>1</EventID>
+		<Day>6</Day>
+
+        <NameComment>보석 20</NameComment>
+        <Cash>20</Cash>
+	</DailyAttendanceEvent>
+
+	<!--출석체크 2.0-->
+
+	<DailyAttendanceEvent ID="10">
+		<EventID>2</EventID>
+		<Day>0</Day>
+
+        <NameComment>1일차 : 경험의 서 20</NameComment>
+		<UnitExpCount>20</UnitExpCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="11">
+		<EventID>2</EventID>
+		<Day>1</Day>
+
+        <NameComment>2일차 : 금화 1000</NameComment>
+        <Gold>1000</Gold>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="12">
+		<EventID>2</EventID>
+		<Day>2</Day>
+
+        <NameComment>3일차 : 일반 열쇠 1</NameComment>
+        <KeyID>350</KeyID>
+        <KeyCount>1</KeyCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="13">
+		<EventID>2</EventID>
+		<Day>3</Day>
+
+        <NameComment>4일차 : 일반 소환서 1</NameComment>
+        <KeyID>300</KeyID>
+        <KeyCount>1</KeyCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="14">
+		<EventID>2</EventID>
+		<Day>4</Day>
+
+        <NameComment>5일차 : 경험의 서 30</NameComment>
+		<UnitExpCount>30</UnitExpCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="15">
+		<EventID>2</EventID>
+		<Day>5</Day>
+
+        <NameComment>6일차 : 금화 1500</NameComment>
+        <Gold>1500</Gold>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="16">
+		<EventID>2</EventID>
+		<Day>6</Day>
+
+        <NameComment>7일차 : 왕의 열쇠 1</NameComment>
+        <KeyID>351</KeyID>
+        <KeyCount>1</KeyCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="17">
+		<EventID>2</EventID>
+		<Day>7</Day>
+
+		<NameComment>8일차 : 왕의 소환서 1</NameComment>
+		<KeyID>301</KeyID>
+		<KeyCount>1</KeyCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="18">
+		<EventID>2</EventID>
+		<Day>8</Day>
+
+		<NameComment>9일차 : 경험의 서 40</NameComment>
+		<UnitExpCount>40</UnitExpCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="19">
+		<EventID>2</EventID>
+		<Day>9</Day>
+
+		<NameComment>10일차 : 금화 2000</NameComment>
+		<Gold>2000</Gold>
+		<Icon>ShopItem_403</Icon>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="20">
+		<EventID>2</EventID>
+		<Day>10</Day>
+
+		<NameComment>11일차 : 신의 열쇠 1</NameComment>
+		<KeyID>352</KeyID>
+		<KeyCount>1</KeyCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="21">
+		<EventID>2</EventID>
+		<Day>11</Day>
+
+		<NameComment>12일차 : 신의 소환서 1</NameComment>
+		<KeyID>302</KeyID>
+		<KeyCount>1</KeyCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="22">
+		<EventID>2</EventID>
+		<Day>12</Day>
+
+		<NameComment>13일차 : 보석 50</NameComment>
+		<Cash>50</Cash>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="23">
+		<EventID>2</EventID>
+		<Day>13</Day>
+
+		<NameComment>14일차 : 신의 소환서 2</NameComment>
+		<KeyID>302</KeyID>
+		<KeyCount>2</KeyCount>
+	</DailyAttendanceEvent>
+	
+	<!-- 시련의 탑 복귀 이벤트 -->
+
+	<DailyAttendanceEvent ID="24">
+		<EventID>3</EventID>
+		<Day>0</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>골드 1500 + 식량 50 + 원정깃발 3개</NameComment>
+		
+		<Gold>1500</Gold>
+		<Heart>50</Heart>
+		<EventFlag>3</EventFlag>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="25">
+		<EventID>3</EventID>
+		<Day>1</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>경험의 서 50 + 식량 50 + 원정깃발 3개</NameComment>
+		
+		<UnitExpCount>50</UnitExpCount>
+		<Heart>50</Heart>
+		<EventFlag>3</EventFlag>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="26">
+		<EventID>3</EventID>
+		<Day>2</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>신의 소환서 x 2 + 식량 50 + 원정깃발 3개</NameComment>
+
+		<KeyID>302</KeyID>
+		<KeyCount>2</KeyCount>
+		<Heart>50</Heart>
+		<EventFlag>3</EventFlag>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="27">
+		<EventID>3</EventID>
+		<Day>3</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>보석 50 + 식량 50 + 원정깃발 3개</NameComment>
+		
+		<Cash>50</Cash>
+		<Heart>50</Heart>
+		<EventFlag>3</EventFlag>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="28">
+		<EventID>3</EventID>
+		<Day>4</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>골드 3000 + 식량 50 + 원정깃발 3개</NameComment>
+		
+		<Gold>3000</Gold>
+		<Heart>50</Heart>
+		<EventFlag>3</EventFlag>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="29">
+		<EventID>3</EventID>
+		<Day>5</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>신의 유물 상자 x 2 + 식량 50 + 원정깃발 3개</NameComment>
+
+		<KeyID>352</KeyID>
+		<KeyCount>2</KeyCount>
+		<Heart>50</Heart>
+		<EventFlag>3</EventFlag>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="30">
+		<EventID>3</EventID>
+		<Day>6</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>신규 영웅 소환서 + 식량 50 + 원정깃발 3개</NameComment>
+
+		<NewUnitGacha>1</NewUnitGacha>
+		<Heart>50</Heart>
+		<EventFlag>3</EventFlag>
+	</DailyAttendanceEvent>
+
+	<!-- 상시 복귀 이벤트 -->
+
+	<DailyAttendanceEvent ID="40">
+		<EventID>4</EventID>
+		<Day>0</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>골드 1500 + 왕의 교환증서 2개</NameComment>
+
+        <InventoryItem ID="600" Count="2"/>
+		<Gold>1500</Gold>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="41">
+		<EventID>4</EventID>
+		<Day>1</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>경험의 서 50 + 왕의 교환증서 2개</NameComment>
+
+        <InventoryItem ID="600" Count="2"/>
+		<UnitExpCount>50</UnitExpCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="42">
+		<EventID>4</EventID>
+		<Day>2</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>신의 소환서 x 2 + 왕의 교환증서 2개</NameComment>
+
+        <InventoryItem ID="600" Count="2"/>
+		<KeyID>302</KeyID>
+		<KeyCount>2</KeyCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="43">
+		<EventID>4</EventID>
+		<Day>3</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>보석 50 + 왕의 교환증서 2개</NameComment>
+
+        <InventoryItem ID="600" Count="2"/>
+		<Cash>50</Cash>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="44">
+		<EventID>4</EventID>
+		<Day>4</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>골드 3000 + 왕의 교환증서 2개</NameComment>
+
+        <InventoryItem ID="600" Count="2"/>
+		<Gold>3000</Gold>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="45">
+		<EventID>4</EventID>
+		<Day>5</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>신의 유물 상자 x 2 + 왕의 교환증서 2개</NameComment>
+
+        <InventoryItem ID="600" Count="2"/>
+		<KeyID>352</KeyID>
+		<KeyCount>2</KeyCount>
+	</DailyAttendanceEvent>
+
+	<DailyAttendanceEvent ID="46">
+		<EventID>4</EventID>
+		<Day>6</Day>
+		<CanRecieveOnce>true</CanRecieveOnce>
+
+		<NameComment>신규 영웅 소환서 + 왕의 교환증서 2개</NameComment>
+
+        <InventoryItem ID="600" Count="2"/>
+		<NewUnitGacha>1</NewUnitGacha>
+	</DailyAttendanceEvent>
+	
+	
+</DailyAttendanceEvents>

@@ -1,0 +1,975 @@
+<!--
+
+    NameComment, DescComment 는 실제로 사용하는 값이 아니며 참고용
+
+-->
+
+<Buildings>
+    <Building ID='0'>
+        <NameComment>영웅의 제단</NameComment>
+        <Index>0</Index>
+        <Color>369DFF</Color>
+        <LevelColor>00CCFF</LevelColor>
+        <LevelGlowColor>1D4BE7</LevelGlowColor>
+
+        <HideThemes>2000,2100</HideThemes>
+        
+        <Effect Key='GenLevelUpPer' DescComment="소환시 레벨업 {Value}%">
+            <Value Level='1'>1</Value>
+            <Value Level='2'>2</Value>
+            <Value Level='3'>3</Value>
+            <Value Level='4'>4</Value>
+            <Value Level='5'>5</Value>
+            <Value Level='6'>6</Value>
+            <Value Level='7'>7</Value>
+            <Value Level='8'>8</Value>
+            <Value Level='9'>9</Value>
+            <Value Level='10'>10</Value>
+            <Value Level='11'>11</Value>
+            <Value Level='12'>12</Value>
+            <Value Level='13'>13</Value>
+            <Value Level='14'>14</Value>
+            <Value Level='15'>15</Value>
+        </Effect>
+
+        <Effect Key='MergeLevelUpPer' DescComment="합성시 레벨업 {Value}%">
+            <Value Level='5'>5</Value>
+            <Value Level='6'>6</Value>
+            <Value Level='7'>7</Value>
+            <Value Level='8'>8</Value>
+            <Value Level='9'>9</Value>
+            <Value Level='10'>10</Value>
+            <Value Level='11'>11</Value>
+            <Value Level='12'>12</Value>
+            <Value Level='13'>13</Value>
+            <Value Level='14'>14</Value>
+            <Value Level='15'>15</Value>
+        </Effect>
+
+        <Effect Key='StartGiveItem' DescComment="시작시 {Item:Value} 지급">
+            <Value Level='10'>10000</Value>
+            <Value Level='15'>10001</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='1'>
+        <NameComment>대장장이의 제단</NameComment>
+        <Index>1</Index>
+        <Color>FFA74E</Color>
+        <LevelColor>FFA74E</LevelColor>
+        <LevelGlowColor>FE5400</LevelGlowColor>
+
+        <HideThemes>2000,2100</HideThemes>
+
+        <Effect Key='WeaponUp' DescComment="제련시 {Value}% 확률로 티어업">
+            <Value Level='1'>2</Value>
+            <Value Level='2'>4</Value>
+            <Value Level='3'>6</Value>
+            <Value Level='4'>8</Value>
+            <Value Level='5'>10</Value>
+            <Value Level='6'>12</Value>
+            <Value Level='7'>14</Value>
+            <Value Level='8'>16</Value>
+            <Value Level='9'>18</Value>
+            <Value Level='10'>20</Value>
+            <Value Level='11'>22</Value>
+            <Value Level='12'>24</Value>
+            <Value Level='13'>26</Value>
+            <Value Level='14'>28</Value>
+            <Value Level='15'>30</Value>
+        </Effect>
+
+        <Effect Key='StartRandomBonus' DescComment="시작시 {Value}티어 제련">
+            <Value Level='5'>1</Value>
+            <Value Level='10'>2</Value>
+            <Value Level='15'>3</Value>
+        </Effect>
+
+        <Effect Key='RerollCount' DescComment="제련 재감정 {Value}회">
+            <Value Level='10'>1</Value>
+            <Value Level='15'>2</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='2'>
+        <NameComment>피의 제단</NameComment>
+        <Index>2</Index>
+        <Color>FF0000</Color>
+        <LevelColor>000000</LevelColor>
+        <LevelGlowColor>FF0000</LevelGlowColor>
+
+        <HideThemes>2000,2100</HideThemes>
+
+        <Effect Key='HybridDrain' DescComment="공격/스킬 흡혈 {Value}%">
+            <Value Level='1'>2</Value>
+            <Value Level='2'>4</Value>
+            <Value Level='3'>6</Value>
+            <Value Level='4'>8</Value>
+            <Value Level='5'>10</Value>
+            <Value Level='6'>12</Value>
+            <Value Level='7'>14</Value>
+            <Value Level='8'>16</Value>
+            <Value Level='9'>18</Value>
+            <Value Level='10'>20</Value>
+            <Value Level='11'>22</Value>
+            <Value Level='12'>24</Value>
+            <Value Level='13'>26</Value>
+            <Value Level='14'>28</Value>
+            <Value Level='15'>30</Value>
+        </Effect>
+
+        <Effect Key='TotalAtkPer' DescComment="최종 공격력 증가">
+            <Value Level='5'>2.5</Value>
+            <Value Level='6'>2.75</Value>
+            <Value Level='7'>3</Value>
+            <Value Level='8'>3.25</Value>
+            <Value Level='9'>3.5</Value>
+            <Value Level='10'>3.75</Value>
+            <Value Level='11'>4</Value>
+            <Value Level='12'>4.25</Value>
+            <Value Level='13'>4.5</Value>
+            <Value Level='14'>4.75</Value>
+            <Value Level='15'>5</Value>
+        </Effect>
+
+        <Effect Key='SuperShield' DescComment="공격 무시 {Value}회">
+            <Value Level='10'>2</Value>
+            <Value Level='15'>3</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='3'>
+        <NameComment>거신의 제단</NameComment>
+        <Index>3</Index>
+        <Color>69FFC2</Color>
+        <LevelColor>88FFAA</LevelColor>
+        <LevelGlowColor>03A177</LevelGlowColor>
+
+        <HideThemes>2000,2100</HideThemes>
+
+        <Effect Key='BaseHybridDef' DescComment="방어력 증가">
+            <Value Level='1'>15</Value>
+            <Value Level='2'>30</Value>
+            <Value Level='3'>45</Value>
+            <Value Level='4'>60</Value>
+            <Value Level='5'>75</Value>
+            <Value Level='6'>90</Value>
+            <Value Level='7'>105</Value>
+            <Value Level='8'>120</Value>
+            <Value Level='9'>135</Value>
+            <Value Level='10'>150</Value>
+            <Value Level='11'>165</Value>
+            <Value Level='12'>180</Value>
+            <Value Level='13'>195</Value>
+            <Value Level='14'>210</Value>
+            <Value Level='15'>225</Value>
+        </Effect>
+
+        <Effect Key='TotalHpPer' DescComment="최종 체력 증가">
+            <Value Level='5'>2.5</Value>
+            <Value Level='6'>2.75</Value>
+            <Value Level='7'>3</Value>
+            <Value Level='8'>3.25</Value>
+            <Value Level='9'>3.5</Value>
+            <Value Level='10'>3.75</Value>
+            <Value Level='11'>4</Value>
+            <Value Level='12'>4.25</Value>
+            <Value Level='13'>4.5</Value>
+            <Value Level='14'>4.75</Value>
+            <Value Level='15'>5</Value>
+        </Effect>
+
+        <!-- <Effect Key='DamageReflect' DescComment="피해 반사 {Value}%"> -->
+        <Effect Key='DamageReflect' DescComment="피해 반사 {Value}%">
+            <Value Level='10'>10</Value>
+            <Value Level='15'>20</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='4'>
+        <NameComment>마법사의 제단</NameComment>
+        <Index>4</Index>
+        <Color>EF6BFF</Color>
+        <LevelColor>FF71EE</LevelColor>
+        <LevelGlowColor>9D08D1</LevelGlowColor>
+
+        <HideThemes>2000,2100</HideThemes>
+
+        <Effect Key='BattleStartMana' DescComment="전투 시작 마나 +{Value}%">
+            <Value Level='1'>5</Value>
+            <Value Level='2'>10</Value>
+            <Value Level='3'>15</Value>
+            <Value Level='4'>20</Value>
+            <Value Level='5'>25</Value>
+            <Value Level='6'>30</Value>
+            <Value Level='7'>35</Value>
+            <Value Level='8'>40</Value>
+            <Value Level='9'>45</Value>
+            <Value Level='10'>50</Value>
+            <Value Level='11'>55</Value>
+            <Value Level='12'>60</Value>
+            <Value Level='13'>65</Value>
+            <Value Level='14'>70</Value>
+            <Value Level='15'>75</Value>
+        </Effect>
+
+        <Effect Key='TotalMAtkPer' DescComment="최종 주문력 증가">
+            <Value Level='5'>2.5</Value>
+            <Value Level='6'>2.75</Value>
+            <Value Level='7'>3</Value>
+            <Value Level='8'>3.25</Value>
+            <Value Level='9'>3.5</Value>
+            <Value Level='10'>3.75</Value>
+            <Value Level='11'>4</Value>
+            <Value Level='12'>4.25</Value>
+            <Value Level='13'>4.5</Value>
+            <Value Level='14'>4.75</Value>
+            <Value Level='15'>5</Value>
+        </Effect>
+
+        <Effect Key='ManaHealPerByKill' DescComment="처치시 마나 회복 {Value}%">
+            <Value Level='10'>50</Value>
+            <Value Level='15'>99</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='5'>
+        <NameComment>탐욕의 제단</NameComment>
+        <Index>5</Index>
+        <Color>FFCE62</Color>
+        <LevelColor>FFE762</LevelColor>
+        <LevelGlowColor>FF9200</LevelGlowColor>
+
+        <HideThemes>2000,2100</HideThemes>
+
+        <Effect Key='StartGoldBonus' DescComment="시작 은화 +{Value}">
+            <Value Level='1'>1</Value>
+            <Value Level='2'>2</Value>
+            <Value Level='3'>3</Value>
+            <Value Level='4'>4</Value>
+            <Value Level='5'>6</Value>
+            <Value Level='6'>7</Value>
+            <Value Level='7'>8</Value>
+            <Value Level='8'>9</Value>
+            <Value Level='9'>10</Value>
+            <Value Level='10'>12</Value>
+            <Value Level='11'>13</Value>
+            <Value Level='12'>14</Value>
+            <Value Level='13'>15</Value>
+            <Value Level='14'>16</Value>
+            <Value Level='15'>18</Value>
+        </Effect>
+
+        <Effect Key='BossGoldBonus' DescComment="보스 스테이지 은화 +{Value}">
+            <Value Level='5'>5</Value>
+            <Value Level='6'>6</Value>
+            <Value Level='7'>7</Value>
+            <Value Level='8'>8</Value>
+            <Value Level='9'>9</Value>
+            <Value Level='10'>10</Value>
+            <Value Level='11'>11</Value>
+            <Value Level='12'>12</Value>
+            <Value Level='13'>13</Value>
+            <Value Level='14'>14</Value>
+            <Value Level='15'>15</Value>
+        </Effect>
+        
+        <Effect Key='MerchantSale' DescComment="상인이 제공하는 상품 20%, 40% 할인">
+            <Value Level='10'>20</Value>
+            <Value Level='15'>40</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='100'>
+        <Name>BuildingName_0</Name>
+        <NameComment>로그라이크 영웅의 제단</NameComment>
+        <Index>0</Index>
+        <Color>369DFF</Color>
+        <LevelColor>00CCFF</LevelColor>
+        <LevelGlowColor>1D4BE7</LevelGlowColor>
+
+        <AvailableThemes>2000,2100</AvailableThemes>
+
+        <Effect Key='AddExpPerNotMaxLevels' DescComment="진영 내 최대 레벨이 아닌 영웅 추가 경험치 {Value}%">
+            <Value Level='1'>1</Value>
+            <Value Level='2'>2</Value>
+            <Value Level='3'>3</Value>
+            <Value Level='4'>4</Value>
+            <Value Level='5'>5</Value>
+            <Value Level='6'>6</Value>
+            <Value Level='7'>7</Value>
+            <Value Level='8'>8</Value>
+            <Value Level='9'>9</Value>
+            <Value Level='10'>10</Value>
+            <Value Level='11'>11</Value>
+            <Value Level='12'>12</Value>
+            <Value Level='13'>13</Value>
+            <Value Level='14'>14</Value>
+            <Value Level='15'>15</Value>
+            <Value Level='16'>16</Value>
+            <Value Level='17'>17</Value>
+            <Value Level='18'>18</Value>
+            <Value Level='19'>19</Value>
+            <Value Level='20'>20</Value>
+            <Value Level='21'>21</Value>
+            <Value Level='22'>22</Value>
+            <Value Level='23'>23</Value>
+            <Value Level='24'>24</Value>
+            <Value Level='25'>25</Value>
+        </Effect>
+
+        <Effect Key='NewHeroAddLevel' DescComment="신규 영웅 등상 시 레벨 + {Value}">
+            <Value Level='5'>1</Value>
+            <Value Level='6'>1</Value>
+            <Value Level='7'>1</Value>
+            <Value Level='8'>1</Value>
+            <Value Level='9'>1</Value>
+            <Value Level='10'>2</Value>
+            <Value Level='11'>2</Value>
+            <Value Level='12'>2</Value>
+            <Value Level='13'>2</Value>
+            <Value Level='14'>2</Value>
+            <Value Level='15'>3</Value>
+            <Value Level='16'>3</Value>
+            <Value Level='17'>3</Value>
+            <Value Level='18'>3</Value>
+            <Value Level='19'>3</Value>
+            <Value Level='20'>4</Value>
+            <Value Level='21'>4</Value>
+            <Value Level='22'>4</Value>
+            <Value Level='23'>4</Value>
+            <Value Level='24'>4</Value>
+            <Value Level='25'>5</Value>
+        </Effect>
+
+        <Effect Key='DamagePerByEquippedItemCount' DescComment="장착한 장비 하나 당 주는 피해 {Value}% 증가">
+            <Value Level='10' MaxValue="10">1</Value>
+            <Value Level='15' MaxValue="20">2</Value>
+            <Value Level='20' MaxValue="30">3</Value>
+            <Value Level='25' MaxValue="40">4</Value>
+        </Effect>
+
+        <Effect Key='DefPerByEquippedRuneCount' DescComment="장착한 룬 하나 당 받는 피해 {Value}% 감소">
+            <Value Level='20' MaxValue="20">2</Value>
+            <Value Level='25' MaxValue="40">3</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='101'>
+        <Name>BuildingName_1</Name>
+        <NameComment>로그라이크 대장장이의 제단</NameComment>
+        <Index>1</Index>
+        <Color>FF8128</Color>
+        <LevelColor>FF8128</LevelColor>
+        <LevelGlowColor>DD4600</LevelGlowColor>
+
+        <AvailableThemes>2000,2100</AvailableThemes>
+
+        <Effect Key='StatPer' DescComment="모든 장비의 기본 옵션 +{Value}%">
+            <Value Level='1'>2</Value>
+            <Value Level='2'>4</Value>
+            <Value Level='3'>6</Value>
+            <Value Level='4'>8</Value>
+            <Value Level='5'>10</Value>
+            <Value Level='6'>12</Value>
+            <Value Level='7'>14</Value>
+            <Value Level='8'>16</Value>
+            <Value Level='9'>18</Value>
+            <Value Level='10'>20</Value>
+            <Value Level='11'>22</Value>
+            <Value Level='12'>24</Value>
+            <Value Level='13'>26</Value>
+            <Value Level='14'>28</Value>
+            <Value Level='15'>30</Value>
+            <Value Level='16'>32</Value>
+            <Value Level='17'>34</Value>
+            <Value Level='18'>36</Value>
+            <Value Level='19'>38</Value>
+            <Value Level='20'>40</Value>
+            <Value Level='21'>42</Value>
+            <Value Level='22'>44</Value>
+            <Value Level='23'>46</Value>
+            <Value Level='24'>48</Value>
+            <Value Level='25'>50</Value>
+        </Effect>
+
+        <Effect Key='AddDamagePer' DescComment="공격 시 대상에게 추가 피해 +{Value}%">
+            <Value Level='5'>5</Value>
+            <Value Level='6'>6</Value>
+            <Value Level='7'>7</Value>
+            <Value Level='8'>8</Value>
+            <Value Level='9'>9</Value>
+            <Value Level='10'>10</Value>
+            <Value Level='11'>11</Value>
+            <Value Level='12'>12</Value>
+            <Value Level='13'>13</Value>
+            <Value Level='14'>14</Value>
+            <Value Level='15'>15</Value>
+            <Value Level='16'>16</Value>
+            <Value Level='17'>17</Value>
+            <Value Level='18'>18</Value>
+            <Value Level='19'>19</Value>
+            <Value Level='20'>20</Value>
+            <Value Level='21'>21</Value>
+            <Value Level='22'>22</Value>
+            <Value Level='23'>23</Value>
+            <Value Level='24'>24</Value>
+            <Value Level='25'>25</Value>
+        </Effect>
+
+        <Effect Key='AddWhiteDamagePer' DescComment="장비, 룬, 유물, 제단에 의한 추가 피해 +{Value}%">
+            <Value Level='10'>20</Value>
+            <Value Level='15'>40</Value>
+            <Value Level='20'>60</Value>
+            <Value Level='25'>80</Value>
+        </Effect>
+
+        <Effect Key='AddPhilosopherItem' DescComment="다량/소량의 은화를 소모하는 현자의 돌 획득">
+            <!-- Item Id -->
+            <Value Level='20'>30002</Value>
+            <Value Level='25'>30003</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='102'>
+        <Name>BuildingName_2</Name>
+        <NameComment>로그라이크 피의 제단</NameComment>
+        <Index>2</Index>
+        <Color>FF0000</Color>
+        <LevelColor>000000</LevelColor>
+        <LevelGlowColor>FF0000</LevelGlowColor>
+
+        <AvailableThemes>2000,2100</AvailableThemes>
+
+        <Effect Key='HybridDrain' DescComment="공격/주문 흡혈 {Value}%">
+            <Value Level='1'>2</Value>
+            <Value Level='2'>4</Value>
+            <Value Level='3'>6</Value>
+            <Value Level='4'>8</Value>
+            <Value Level='5'>10</Value>
+            <Value Level='6'>12</Value>
+            <Value Level='7'>14</Value>
+            <Value Level='8'>16</Value>
+            <Value Level='9'>18</Value>
+            <Value Level='10'>20</Value>
+            <Value Level='11'>22</Value>
+            <Value Level='12'>24</Value>
+            <Value Level='13'>26</Value>
+            <Value Level='14'>28</Value>
+            <Value Level='15'>30</Value>
+            <Value Level='16'>32</Value>
+            <Value Level='17'>34</Value>
+            <Value Level='18'>36</Value>
+            <Value Level='19'>38</Value>
+            <Value Level='20'>40</Value>
+            <Value Level='21'>42</Value>
+            <Value Level='22'>44</Value>
+            <Value Level='23'>46</Value>
+            <Value Level='24'>48</Value>
+            <Value Level='25'>50</Value>
+        </Effect>
+
+        <Effect Key='TotalAtkPer' DescComment="최종 공격력 증가">
+            <Value Level='5'>2.5</Value>
+            <Value Level='6'>2.75</Value>
+            <Value Level='7'>3</Value>
+            <Value Level='8'>3.25</Value>
+            <Value Level='9'>3.5</Value>
+            <Value Level='10'>3.75</Value>
+            <Value Level='11'>4</Value>
+            <Value Level='12'>4.25</Value>
+            <Value Level='13'>4.5</Value>
+            <Value Level='14'>4.75</Value>
+            <Value Level='15'>5</Value>
+            <Value Level='16'>5.25</Value>
+            <Value Level='17'>5.5</Value>
+            <Value Level='18'>5.75</Value>
+            <Value Level='19'>6</Value>
+            <Value Level='20'>6.25</Value>
+            <Value Level='21'>6.5</Value>
+            <Value Level='22'>6.75</Value>
+            <Value Level='23'>7</Value>
+            <Value Level='24'>7.25</Value>
+            <Value Level='25'>7.5</Value>
+        </Effect>
+
+        <Effect Key= 'SuperShield' DescComment="전투 시작 시 절대 방어 {Value}회">
+            <Value Level='10'>2</Value>
+            <Value Level='15'>3</Value>
+            <Value Level='20'>4</Value>
+            <Value Level='25'>5</Value>
+        </Effect>
+        
+        <Effect Key='AddAttackSpeedPerByLostHpPer' DescComment="잃은 체력 10% 당 공격 속도 {Value}% 증가">
+            <Value Level='20' MaxValue="300">15</Value>
+            <Value Level='25' MaxValue="500">25</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='103'>
+        <Name>BuildingName_3</Name>
+        <NameComment>로그라이크 거신의 제단</NameComment>
+        <Index>3</Index>
+        <Color>69FFC2</Color>
+        <LevelColor>88FFAA</LevelColor>
+        <LevelGlowColor>03A177</LevelGlowColor>
+
+        <AvailableThemes>2000,2100</AvailableThemes>
+
+        <Effect Key='BaseHybridDef' DescComment="방어력 증가">
+            <Value Level='1'>15</Value>
+            <Value Level='2'>30</Value>
+            <Value Level='3'>45</Value>
+            <Value Level='4'>60</Value>
+            <Value Level='5'>75</Value>
+            <Value Level='6'>90</Value>
+            <Value Level='7'>105</Value>
+            <Value Level='8'>120</Value>
+            <Value Level='9'>135</Value>
+            <Value Level='10'>150</Value>
+            <Value Level='11'>165</Value>
+            <Value Level='12'>180</Value>
+            <Value Level='13'>195</Value>
+            <Value Level='14'>210</Value>
+            <Value Level='15'>225</Value>
+            <Value Level='16'>24</Value>
+            <Value Level='17'>255</Value>
+            <Value Level='18'>270</Value>
+            <Value Level='19'>285</Value>
+            <Value Level='20'>300</Value>
+            <Value Level='21'>315</Value>
+            <Value Level='22'>330</Value>
+            <Value Level='23'>345</Value>
+            <Value Level='24'>360</Value>
+            <Value Level='25'>375</Value>
+        </Effect>
+
+        <Effect Key='TotalHpPer' DescComment="최종 체력 증가">
+            <Value Level='5'>2.5</Value>
+            <Value Level='6'>2.75</Value>
+            <Value Level='7'>3</Value>
+            <Value Level='8'>3.25</Value>
+            <Value Level='9'>3.5</Value>
+            <Value Level='10'>3.75</Value>
+            <Value Level='11'>4</Value>
+            <Value Level='12'>4.25</Value>
+            <Value Level='13'>4.5</Value>
+            <Value Level='14'>4.75</Value>
+            <Value Level='15'>5</Value>
+            <Value Level='16'>5.25</Value>
+            <Value Level='17'>5.5</Value>
+            <Value Level='18'>5.75</Value>
+            <Value Level='19'>6</Value>
+            <Value Level='20'>6.25</Value>
+            <Value Level='21'>6.5</Value>
+            <Value Level='22'>6.75</Value>
+            <Value Level='23'>7</Value>
+            <Value Level='24'>7.25</Value>
+            <Value Level='25'>7.5</Value>
+        </Effect>
+
+        <Effect Key='NearAttackByMaxHpPer' DescComment="주변 최대 체력의 {Value}% 불태우기">
+            <Value Level='10'>2.5</Value>
+            <Value Level='15'>5</Value>
+            <Value Level='20'>7.5</Value>
+            <Value Level='25'>10</Value>
+        </Effect>
+
+        <Effect Key='DamagePerByMaxHp' DescComment="최대 체력의 {Value} 당 피해량 1% 증가 (최대 {MaxValue})">
+            <!-- Skill Id -->
+            <Value Level='20' MaxValue="100">2000</Value>
+            <Value Level='25' MaxValue="150">1500</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='104'>
+        <Name>BuildingName_4</Name>
+        <NameComment>로그라이크 마법사의 제단</NameComment>
+        <Index>4</Index>
+        <Color>EF6BFF</Color>
+        <LevelColor>FF71EE</LevelColor>
+        <LevelGlowColor>9D08D1</LevelGlowColor>
+
+        <AvailableThemes>2000,2100</AvailableThemes>
+
+        <Effect Key='BattleStartMana' DescComment="전투 시작 마나 +{Value}%">
+            <Value Level='1'>5</Value>
+            <Value Level='2'>10</Value>
+            <Value Level='3'>15</Value>
+            <Value Level='4'>20</Value>
+            <Value Level='5'>25</Value>
+            <Value Level='6'>30</Value>
+            <Value Level='7'>35</Value>
+            <Value Level='8'>40</Value>
+            <Value Level='9'>45</Value>
+            <Value Level='10'>50</Value>
+            <Value Level='11'>55</Value>
+            <Value Level='12'>60</Value>
+            <Value Level='13'>65</Value>
+            <Value Level='14'>70</Value>
+            <Value Level='15'>75</Value>
+            <Value Level='16'>80</Value>
+            <Value Level='17'>85</Value>
+            <Value Level='18'>90</Value>
+            <Value Level='19'>95</Value>
+            <Value Level='20'>100</Value>
+            <Value Level='21'>105</Value>
+            <Value Level='22'>110</Value>
+            <Value Level='23'>115</Value>
+            <Value Level='24'>120</Value>
+            <Value Level='25'>125</Value>
+        </Effect>
+
+        <Effect Key='TotalMAtkPer' DescComment="최종 주문력 증가">
+            <Value Level='5'>2.5</Value>
+            <Value Level='6'>2.75</Value>
+            <Value Level='7'>3</Value>
+            <Value Level='8'>3.25</Value>
+            <Value Level='9'>3.5</Value>
+            <Value Level='10'>3.75</Value>
+            <Value Level='11'>4</Value>
+            <Value Level='12'>4.25</Value>
+            <Value Level='13'>4.5</Value>
+            <Value Level='14'>4.75</Value>
+            <Value Level='15'>5</Value>
+            <Value Level='16'>5.25</Value>
+            <Value Level='17'>5.5</Value>
+            <Value Level='18'>5.75</Value>
+            <Value Level='19'>6</Value>
+            <Value Level='20'>6.25</Value>
+            <Value Level='21'>6.5</Value>
+            <Value Level='22'>6.75</Value>
+            <Value Level='23'>7</Value>
+            <Value Level='24'>7.25</Value>
+            <Value Level='25'>7.5</Value>
+        </Effect>
+
+        <Effect Key='ManaHealPerByKill' DescComment="처치시 마나 회복 {Value}%">
+            <Value Level='10'>50</Value>
+            <Value Level='15'>99</Value>
+            <Value Level='20'>150</Value>
+            <Value Level='25'>200</Value>
+        </Effect>
+        
+        <Effect Key='MAtkPerByOverManaPer' DescComment="초과 마나량 1%당 주문력 피해 {Value}% 증가">
+            <Value Level='20' MaxValue="75">1.25</Value>
+            <Value Level='25' MaxValue="150">2.5</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='105'>
+        <Name>BuildingName_5</Name>
+        <NameComment>로그라이크 탐욕의 제단</NameComment>
+        <Index>5</Index>
+        <Color>FFF03C</Color>
+        <LevelColor>FFF03C</LevelColor>
+        <LevelGlowColor>DE9400</LevelGlowColor>
+
+        <AvailableThemes>2000,2100</AvailableThemes>
+
+        <Effect Key='SaleMerchantPrice' DescComment="상인의 상품 가격 {Value}% 할인">
+            <Value Level='1'>1</Value>
+            <Value Level='2'>2</Value>
+            <Value Level='3'>3</Value>
+            <Value Level='4'>4</Value>
+            <Value Level='5'>5</Value>
+            <Value Level='6'>6</Value>
+            <Value Level='7'>7</Value>
+            <Value Level='8'>8</Value>
+            <Value Level='9'>9</Value>
+            <Value Level='10'>10</Value>
+            <Value Level='11'>11</Value>
+            <Value Level='12'>12</Value>
+            <Value Level='13'>13</Value>
+            <Value Level='14'>14</Value>
+            <Value Level='15'>15</Value>
+            <Value Level='16'>16</Value>
+            <Value Level='17'>17</Value>
+            <Value Level='18'>18</Value>
+            <Value Level='19'>19</Value>
+            <Value Level='20'>20</Value>
+            <Value Level='21'>21</Value>
+            <Value Level='22'>22</Value>
+            <Value Level='23'>23</Value>
+            <Value Level='24'>24</Value>
+            <Value Level='25'>25</Value>
+        </Effect>
+
+        <Effect Key='GodReward' DescComment="층 시작 시 {Value}단계 탐욕의 신의 선물 제공">
+            <Value Level='5'>1</Value>
+            <Value Level='10'>2</Value>
+            <Value Level='15'>3</Value>
+            <Value Level='20'>4</Value>
+            <Value Level='25'>5</Value>
+        </Effect>
+
+        <Effect Key='SpawnBuilding5Merchant' DescComment="탐욕의 상인 등장 {Value}회 목록 재설정 가능">
+            <Value Level='10'>0</Value>
+            <Value Level='15'>1</Value>
+            <Value Level='20'>2</Value>
+            <Value Level='25'>3</Value>
+        </Effect>
+
+        <Effect Key='AddGodItem' DescComment="탐욕의 신의 하사품 {Value}회 획득">
+            <Value Level='20'>1</Value>
+            <Value Level='25'>2</Value>
+        </Effect>
+    </Building>
+    
+    <Building ID='106'>
+        <Name>BuildingName_6</Name>
+        <NameComment>로그라이크 사신의 제단</NameComment>
+        <Index>6</Index>
+        <Color>82F0FF</Color>
+        <LevelColor>82F0FF</LevelColor>
+        <LevelGlowColor>00828C</LevelGlowColor>
+
+        <AvailableThemes>2000,2100</AvailableThemes>
+        
+        <NeedBuy>true</NeedBuy>
+
+        <Effect Key='BaseExecution' DescComment="체력 {Value}% 미만 적 처형">
+            <Value Level="1">0.5</Value>
+            <Value Level="2">1.0</Value>
+            <Value Level="3">1.5</Value>
+            <Value Level="4">2.0</Value>
+            <Value Level="5">2.5</Value>
+            <Value Level="6">3.0</Value>
+            <Value Level="7">3.5</Value>
+            <Value Level="8">4.0</Value>
+            <Value Level="9">4.5</Value>
+            <Value Level="10">5.0</Value>
+            <Value Level="11">5.5</Value>
+            <Value Level="12">6.0</Value>
+            <Value Level="13">6.5</Value>
+            <Value Level="14">7.0</Value>
+            <Value Level="15">7.5</Value>
+            <Value Level="16">8.0</Value>
+            <Value Level="17">8.5</Value>
+            <Value Level="18">9.0</Value>
+            <Value Level="19">9.5</Value>
+            <Value Level="20">10.0</Value>
+            <Value Level="21">10.5</Value>
+            <Value Level="22">11.0</Value>
+            <Value Level="23">11.5</Value>
+            <Value Level="24">12.0</Value>
+            <Value Level="25">12.5</Value>
+        </Effect>
+
+        <Effect Key='HealPerWhenEnemyDies' DescComment="적 사망 시 모든 아군의 체력 {Value}% 회복">
+            <Value Level="5">4</Value>
+            <Value Level="10">8</Value>
+            <Value Level="15">12</Value>
+            <Value Level="20">16</Value>
+            <Value Level="25">20</Value>
+        </Effect>
+
+        <Effect Key='AddDefWhenTeammateDies' DescComment="아군 사망 시 방어력 증가">
+            <Value Level="10" MaxValue="120">10</Value>
+            <Value Level="15" MaxValue="180">15</Value>
+            <Value Level="20" MaxValue="240">20</Value>
+            <Value Level="25" MaxValue="300">25</Value>
+        </Effect>
+
+        <Effect Key='AddDamagePerWhenUnitDies' DescComment="아군 및 적 사망 시 모든 아군이 주는 피해 {Value}% 증가">
+            <Value Level="20" MaxValue="80">4</Value>
+            <Value Level="25" MaxValue="120">6</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='107'>
+        <Name>BuildingName_7</Name>
+        <NameComment>로그라이크 불사의 제단</NameComment>
+        <Index>7</Index>
+        <Color>ff2473</Color>
+        <LevelColor>ff2473</LevelColor>
+        <LevelGlowColor>6B0035</LevelGlowColor>
+
+        <AvailableThemes>2000,2100</AvailableThemes>
+
+        <NeedBuy>true</NeedBuy>
+
+        <Effect Key='AddAtkMAtkPerByLostHpPer' DescComment="잃은 체력 1%마다 공/주 {Value}% 상승">
+            <Value Level="1">0.2</Value>
+            <Value Level="2">0.4</Value>
+            <Value Level="3">0.6</Value>
+            <Value Level="4">0.8</Value>
+            <Value Level="5">1.0</Value>
+            <Value Level="6">1.2</Value>
+            <Value Level="7">1.4</Value>
+            <Value Level="8">1.6</Value>
+            <Value Level="9">1.8</Value>
+            <Value Level="10">2.0</Value>
+            <Value Level="11">2.2</Value>
+            <Value Level="12">2.4</Value>
+            <Value Level="13">2.6</Value>
+            <Value Level="14">2.8</Value>
+            <Value Level="15">3.0</Value>
+            <Value Level="16">3.2</Value>
+            <Value Level="17">3.4</Value>
+            <Value Level="18">3.6</Value>
+            <Value Level="19">3.8</Value>
+            <Value Level="20">4.0</Value>
+            <Value Level="21">4.2</Value>
+            <Value Level="22">4.4</Value>
+            <Value Level="23">4.6</Value>
+            <Value Level="24">4.8</Value>
+            <Value Level="25">5.0</Value>    
+        </Effect>
+
+        <Effect Key='TotalTakeDamagePer' DescComment="받는 피해량 {Value}% 증가">
+            <Value Level="5">6.5</Value>
+            <Value Level="6">7.0</Value>
+            <Value Level="7">7.5</Value>
+            <Value Level="8">8.0</Value>
+            <Value Level="9">8.5</Value>
+            <Value Level="10">9.0</Value>
+            <Value Level="11">9.5</Value>
+            <Value Level="12">10.0</Value>
+            <Value Level="13">10.5</Value>
+            <Value Level="14">11.0</Value>
+            <Value Level="15">11.5</Value>
+            <Value Level="16">12.0</Value>
+            <Value Level="17">12.5</Value>
+            <Value Level="18">13.0</Value>
+            <Value Level="19">13.5</Value>
+            <Value Level="20">14.0</Value>
+            <Value Level="21">14.5</Value>
+            <Value Level="22">15.0</Value>
+            <Value Level="23">15.5</Value>
+            <Value Level="24">16.0</Value>
+            <Value Level="25">16.5</Value>   
+        </Effect>
+
+        <Effect Key='DamagePer' DescComment="주는 피해량 {Value}% 증가">
+            <Value Level="5">10</Value>
+            <Value Level="6">11</Value>
+            <Value Level="7">12</Value>
+            <Value Level="8">13</Value>
+            <Value Level="9">14</Value>
+            <Value Level="10">15</Value>
+            <Value Level="11">16</Value>
+            <Value Level="12">17</Value>
+            <Value Level="13">18</Value>
+            <Value Level="14">19</Value>
+            <Value Level="15">20</Value>
+            <Value Level="16">21</Value>
+            <Value Level="17">22</Value>
+            <Value Level="18">23</Value>
+            <Value Level="19">24</Value>
+            <Value Level="20">25</Value>
+            <Value Level="21">26</Value>
+            <Value Level="22">27</Value>
+            <Value Level="23">28</Value>
+            <Value Level="24">29</Value>
+            <Value Level="25">30</Value>  
+        </Effect>
+
+        <Effect Key='BattleStartInvincible' DescComment="전투 시작 시 {Value}초 무적">
+            <Value Level="10">2</Value>
+            <Value Level="15">2</Value>
+            <Value Level="20">2</Value>
+            <Value Level="25">2</Value>
+        </Effect>
+
+        <Effect Key='AddDamagePerWhenInvincible' DescComment="무적 시 피해량 +{Value}%[3]">
+            <Value Level="10">20</Value>
+            <Value Level="15">40</Value>
+            <Value Level="20">60</Value>
+            <Value Level="25">80</Value>
+        </Effect>
+        
+        <Effect Key='AddTotalDamagePerByTotalInvincibleTime' DescComment="무적 상태 일때 1초마다 최종 피해량 {Value}% 증가(최대 100%)[4]">
+            <Value Level="20" MaxValue="90">6</Value>
+            <Value Level="25" MaxValue="150">10</Value>
+        </Effect>
+    </Building>
+
+    <Building ID='108'>
+        <Name>BuildingName_8</Name>
+        <NameComment>로그라이크 지배의 제단</NameComment>
+        <Index>8</Index>
+        <Color>805dff</Color>
+        <LevelColor>805dff</LevelColor>
+        <LevelGlowColor>45009A</LevelGlowColor>
+
+        <AvailableThemes>2000,2100</AvailableThemes>
+
+        <NeedBuy>true</NeedBuy>
+        
+        <BuffTiles>
+            <Value Level="1">22000</Value>
+            <Value Level="5">22010</Value>
+            <Value Level="10">22020</Value>
+            <Value Level="20">22030</Value>
+        </BuffTiles>
+
+        <Effect Key='AddRelativeAtk' DescComment="전투 시작 시 칸에 배치된 영웅 공격력의 {Value}%[5]를 기본 능력치를 환산하여 자신을 제외한 모든 아군에게 부여 하는 “선임 병사” [역할 칸] 생성">
+            <Value Level="1">1.5</Value>
+            <Value Level="2">3</Value>
+            <Value Level="3">4.5</Value>
+            <Value Level="4">6</Value>
+            <Value Level="5">7.5</Value>
+            <Value Level="6">9</Value>
+            <Value Level="7">10.5</Value>
+            <Value Level="8">12</Value>
+            <Value Level="9">13.5</Value>
+            <Value Level="10">15</Value>
+            <Value Level="11">16.5</Value>
+            <Value Level="12">18</Value>
+            <Value Level="13">19.5</Value>
+            <Value Level="14">21</Value>
+            <Value Level="15">22.5</Value>
+            <Value Level="16">24</Value>
+            <Value Level="17">25.5</Value>
+            <Value Level="18">27</Value>
+            <Value Level="19">28.5</Value>
+            <Value Level="20">30</Value>
+            <Value Level="21">31.5</Value>
+            <Value Level="22">33</Value>
+            <Value Level="23">34.5</Value>
+            <Value Level="24">36</Value>
+            <Value Level="25">37.5</Value> 
+        </Effect>
+
+        <Effect Key='AddRelativeMAtk' DescComment="전투 시작 시 칸에 배치된 영웅 주문력의 {Value}%[5]를 기본 능력치를 환산하여 자신을 제외한 모든 아군에게 부여 하는 “선임 병사” [역할 칸] 생성">
+            <Value Level="5">7.5</Value>
+            <Value Level="6">9</Value>
+            <Value Level="7">10.5</Value>
+            <Value Level="8">12</Value>
+            <Value Level="9">13.5</Value>
+            <Value Level="10">15</Value>
+            <Value Level="11">16.5</Value>
+            <Value Level="12">18</Value>
+            <Value Level="13">19.5</Value>
+            <Value Level="14">21</Value>
+            <Value Level="15">22.5</Value>
+            <Value Level="16">24</Value>
+            <Value Level="17">25.5</Value>
+            <Value Level="18">27</Value>
+            <Value Level="19">28.5</Value>
+            <Value Level="20">30</Value>
+            <Value Level="21">31.5</Value>
+            <Value Level="22">33</Value>
+            <Value Level="23">34.5</Value>
+            <Value Level="24">36</Value>
+            <Value Level="25">37.5</Value>
+        </Effect>
+
+        <Effect Key='AddShieldPer' DescComment="전투 시작 시 해당 영웅 체력의 {Value}%를 모든 아군에게 쉴드로 부여하는 “돌격대장” [역할 칸] 생성">
+            <Value Level="10">10</Value>
+            <Value Level="15">15</Value>
+            <Value Level="20">20</Value>
+            <Value Level="25">25</Value>
+        </Effect>
+
+        <Effect Key='AddRelativeAttackSpeed' DescComment="전투 시작 시 해당 영웅 공격속도의 {Value}%[3] 를 기본 능력치로 환산하여 자신을 제외한 모든 아군에게 부여하는 “최고사령관” [역할 칸] 생성">
+            <Value Level="20">30</Value>
+            <Value Level="21">31.5</Value>
+            <Value Level="22">33</Value>
+            <Value Level="23">34.5</Value>
+            <Value Level="24">36</Value>
+            <Value Level="25">37.5</Value>
+        </Effect>
+    </Building>
+</Buildings>

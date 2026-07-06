@@ -1,0 +1,180 @@
+<RiftWeaponConstants>
+    <!-- 등급 별 레벨 정보 -->
+    <LevelInformation>
+        <Information Rarity="Common" Start="0" Max="10"/>
+        <Information Rarity="Rare" Start="5" Max="15"/>
+        <Information Rarity="Special" Start="15" Max="40"/>
+    </LevelInformation>
+    
+    <!-- 레벨 별 발생 이벤트 정보 -->
+    <LevelEvent>
+        <Event Level="0" SubStatLevels="0,0,0" Score="10" />
+        <Event Level="1" SubStatLevels="1,0,0" Score="120" />
+        <Event Level="2" SubStatLevels="2,0,0" Score="140" />
+        <Event Level="3" SubStatLevels="3,0,0" Score="160" />
+        <Event Level="4" SubStatLevels="4,0,0" Score="180" />
+        <Event Level="5" SubStatLevels="4,1,0" Score="300" />
+        <Event Level="6" SubStatLevels="5,1,0" Score="320" />
+        <Event Level="7" SubStatLevels="5,2,0" Score="340" />
+        <Event Level="8" SubStatLevels="6,2,0" Score="360" />
+        <Event Level="9" SubStatLevels="6,3,0" Score="380" />
+        <Event Level="10" SubStatLevels="6,3,1" Score="500" />
+        <Event Level="11" SubStatLevels="6,4,1" Score="520" />
+        <Event Level="12" SubStatLevels="6,4,2" Score="540" />
+        <Event Level="13" SubStatLevels="7,4,2" Score="560" />
+        <Event Level="14" SubStatLevels="7,4,3" Score="580" />
+        <Event Level="15" SubStatLevels="8,4,3" UpgradeTargetIdx="0" Score="840" />
+        <Event Level="16" SubStatLevels="8,4,4" Score="860" />
+        <Event Level="17" SubStatLevels="9,4,4" Score="960" />
+        <Event Level="18" SubStatLevels="9,5,4" Score="980" />
+        <Event Level="19" SubStatLevels="9,5,5" Score="1000" />
+        <Event Level="20" SubStatLevels="10,6,6" Score="1140" />
+        <Event Level="21" SubStatLevels="10,6,7" Score="1160" />
+        <Event Level="22" SubStatLevels="10,7,7" Score="1180" />
+        <Event Level="23" SubStatLevels="11,7,7" Score="1280" />
+        <Event Level="24" SubStatLevels="11,7,8" Score="1540" />
+        <Event Level="25" SubStatLevels="11,8,8" UpgradeTargetIdx="1" Score="1800" />
+        <Event Level="26" SubStatLevels="11,8,9" Score="1900" />
+        <Event Level="27" SubStatLevels="11,9,9" Score="2000" />
+        <Event Level="28" SubStatLevels="12,9,9" Score="2100" />
+        <Event Level="29" SubStatLevels="12,10,9" Score="2200" />
+        <Event Level="30" SubStatLevels="13,10,9" Score="2700" />
+        <Event Level="31" SubStatLevels="13,11,9" Score="2800" />
+        <Event Level="32" SubStatLevels="13,11,10" Score="2900" />
+        <Event Level="33" SubStatLevels="13,12,10" Score="3000" />
+        <Event Level="34" SubStatLevels="13,12,11" Score="3100" />
+        <Event Level="35" SubStatLevels="13,13,11" Score="3600" />
+        <Event Level="36" SubStatLevels="14,13,12" Score="4000" />
+        <Event Level="37" SubStatLevels="14,14,13" Score="4800" />
+        <Event Level="38" SubStatLevels="15,14,14" Score="5400" />
+        <Event Level="39" SubStatLevels="15,15,15" Score="6000" />
+        <Event Level="40" SubStatLevels="16,16,16" Score="6900" />
+    </LevelEvent>
+    
+    <!-- 강화 정보 -->
+    <LevelCost>
+        <Cost Level="1" Success="100" Fail="0" Down="0" Broken="0" Cost="10" CashCost="-1"/>
+        <Cost Level="2" Success="100" Fail="0" Down="0" Broken="0" Cost="20" CashCost="-1"/>
+        <Cost Level="3" Success="100" Fail="0" Down="0" Broken="0" Cost="30" CashCost="-1"/>
+        <Cost Level="4" Success="100" Fail="0" Down="0" Broken="0" Cost="40" CashCost="-1"/>
+        <Cost Level="5" Success="100" Fail="0" Down="0" Broken="0" Cost="50" CashCost="-1"/>
+        <Cost Level="6" Success="90" Fail="10" Down="0" Broken="0" Cost="60" CashCost="-1"/>
+        <Cost Level="7" Success="90" Fail="10" Down="0" Broken="0" Cost="70" CashCost="-1"/>
+        <Cost Level="8" Success="90" Fail="10" Down="0" Broken="0" Cost="80" CashCost="-1"/>
+        <Cost Level="9" Success="90" Fail="10" Down="0" Broken="0" Cost="90" CashCost="-1"/>
+        <Cost Level="10" Success="80" Fail="20" Down="0" Broken="0" Cost="100" CashCost="-1"/>
+        <Cost Level="11" Success="80" Fail="20" Down="0" Broken="0" Cost="110" CashCost="-1"/>
+        <Cost Level="12" Success="80" Fail="20" Down="0" Broken="0" Cost="120" CashCost="-1"/>
+        <Cost Level="13" Success="70" Fail="30" Down="0" Broken="0" Cost="130" CashCost="-1"/>
+        <Cost Level="14" Success="70" Fail="30" Down="0" Broken="0" Cost="140" CashCost="-1"/>
+        <Cost Level="15" Success="70" Fail="30" Down="0" Broken="0" Cost="150" CashCost="-1"/>
+        <Cost Level="16" Success="60" Fail="40" Down="0" Broken="0" Cost="70" CashCost="-1"/>
+        <Cost Level="17" Success="60" Fail="0" Down="40" Broken="0" Cost="84" CashCost="-1"/>
+        <Cost Level="18" Success="60" Fail="0" Down="40" Broken="0" Cost="98" CashCost="-1"/>
+        <Cost Level="19" Success="60" Fail="0" Down="40" Broken="0" Cost="112" CashCost="-1"/>
+        <Cost Level="20" Success="60" Fail="0" Down="40" Broken="0" Cost="126" CashCost="-1"/>
+        <Cost Level="21" Success="50" Fail="48" Down="0" Broken="2" Cost="245" CashCost="10"/>
+        <Cost Level="22" Success="50" Fail="0" Down="48" Broken="2" Cost="280" CashCost="10"/>
+        <Cost Level="23" Success="50" Fail="0" Down="48" Broken="2" Cost="315" CashCost="10"/>
+        <Cost Level="24" Success="50" Fail="0" Down="48" Broken="2" Cost="350" CashCost="10"/>
+        <Cost Level="25" Success="50" Fail="0" Down="48" Broken="2" Cost="385" CashCost="10"/>
+        <Cost Level="26" Success="40" Fail="57" Down="0" Broken="3" Cost="490" CashCost="15"/>
+        <Cost Level="27" Success="40" Fail="0" Down="57" Broken="3" Cost="525" CashCost="15"/>
+        <Cost Level="28" Success="40" Fail="0" Down="57" Broken="3" Cost="560" CashCost="15"/>
+        <Cost Level="29" Success="40" Fail="0" Down="57" Broken="3" Cost="595" CashCost="15"/>
+        <Cost Level="30" Success="40" Fail="0" Down="57" Broken="3" Cost="630" CashCost="15"/>
+        <Cost Level="31" Success="30" Fail="66" Down="0" Broken="4" Cost="840" CashCost="30"/>
+        <Cost Level="32" Success="30" Fail="0" Down="66" Broken="4" Cost="875" CashCost="30"/>
+        <Cost Level="33" Success="30" Fail="0" Down="66" Broken="4" Cost="910" CashCost="30"/>
+        <Cost Level="34" Success="30" Fail="0" Down="66" Broken="4" Cost="945" CashCost="-1"/>
+        <Cost Level="35" Success="30" Fail="0" Down="66" Broken="4" Cost="980" CashCost="-1"/>
+        <Cost Level="36" Success="25" Fail="70" Down="0" Broken="5" Cost="1260" CashCost="-1"/>
+        <Cost Level="37" Success="25" Fail="0" Down="70" Broken="5" Cost="1295" CashCost="-1"/>
+        <Cost Level="38" Success="25" Fail="0" Down="70" Broken="5" Cost="1330" CashCost="-1"/>
+        <Cost Level="39" Success="25" Fail="0" Down="70" Broken="5" Cost="1365" CashCost="-1"/>
+        <Cost Level="40" Success="25" Fail="0" Down="70" Broken="5" Cost="1400" CashCost="-1"/>
+        
+        <GoldCostRatio>5</GoldCostRatio>
+    </LevelCost>
+    
+    <!-- 균열 장비 레벨 별 메인 옵션 수치 -->
+    <MainStatOptionLevelValue>30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110</MainStatOptionLevelValue>
+    
+    <!-- 세부 옵션 레벨 별 제단 옵션 수치 계수 -->
+    <BuildingOptionSlotLevelValue>6,7,8,9,10,11,12,20,25,30,35,40,60,70,85,100</BuildingOptionSlotLevelValue>
+    
+    <!-- 버프 별 추가되는 옵션 레벨 -->
+    <BuildingOptionAddEffectLevelTable>0,13</BuildingOptionAddEffectLevelTable>
+
+    <!-- 세부 옵션 레벨 별 제단 옵션 수치 계수 -->
+    <AccessoryOptionSlotLevelValue>
+        <Value StatIdx="0">10,11,12,13,15,20,25,30,35,40,45,50,55,60,65,70</Value>
+        <Value StatIdx="1">4,5,6,7,8,9,11,13,15,17,19,21,24,27,30</Value>
+        <Value StatIdx="2">4,5,6,7,8,9,11,13,15,17,19,21,24,27</Value>
+        <Value StatIdx="3">4,5,6,7,8,9,11,13,15,17,19,21,24</Value>
+        <Value StatIdx="4">4,5,6,7,8,9,11,13,15,17,19,21</Value>
+        <Value StatIdx="5">4,5,6,7,8,9,11,13,15,17,19</Value>
+    </AccessoryOptionSlotLevelValue>
+    
+    <!-- 등급 별 재련 비용 -->
+    <RerollCost>
+        <Cost Rarity="Common" GoldCost="1000"/>
+        <Cost Rarity="Rare" GoldCost="3000"/>
+        <Cost Rarity="Special" GoldCost="10000"/>
+    </RerollCost>
+    
+    <!-- 등급 별 분해 보상 -->
+    <DismantleRewards>
+        <DismantleReward Rarity="Common">
+            <Reward Type="InventoryItem" ID="8000" Count="40"/>
+        </DismantleReward>
+        <DismantleReward Rarity="Rare">
+            <Reward Type="InventoryItem" ID="8000" Count="200"/>
+        </DismantleReward>
+        <DismantleReward Rarity="Special">
+            <Reward Type="InventoryItem" ID="8000" Count="500"/>
+        </DismantleReward>
+    </DismantleRewards>
+    
+    <!-- 균열 장비 초기화 시 소모 보석 -->
+    <RiftWeaponResetCashCost>250</RiftWeaponResetCashCost>
+    
+    <!-- 균열 장비 초기화 시 지정 레벨 -->
+    <RiftWeaponResetLevel>15</RiftWeaponResetLevel>
+    
+    <!-- 균열 장비 세부 옵션 갯수 -->
+    <RiftWeaponSubStatCount>3</RiftWeaponSubStatCount>
+    
+    <!-- 균열 장비 인벤토리 보유량 정보 -->
+    <InventoryCountInfo Base="100" Max="300" Add="10" Cash="20"/>
+    
+    <!-- 균열 수정 인벤토리 보유량 정보 -->
+    <CrystalInventoryCountInfo Base="10" Max="9999" Add="1" Cash="-1"/>
+    
+    <!-- 균열 수정 사용 정보 -->
+    <RiftCrystalData>
+        <CrystalData Rarity="Common" Common="100" Rare="0" Special="0" Dust="25~75" Gauge="20"/>
+        <CrystalData Rarity="UnCommon" Common="74.5" Rare="25" Special="0.5" Dust="50~150" Gauge="35" Ceil="300"/>
+        <CrystalData Rarity="Rare" Common="49" Rare="50" Special="1" Dust="100~200" Gauge="50" Ceil="150"/>
+        <CrystalData Rarity="Epic" Common="23.5" Rare="75" Special="1.5" Dust="150~300" Gauge="65" Ceil="100"/>
+        <CrystalData Rarity="Legendary" Common="0" Rare="98" Special="2" Dust="200~400" Gauge="80" Ceil="70"/>
+    </RiftCrystalData>
+    
+    <!-- 균열 수정 파괴 시 추가 보상 획득 위한 식량 필요량 -->
+    <CrystalDestroyBonusHeartCost>15</CrystalDestroyBonusHeartCost>
+    
+    <!-- 핫타임 시 균열 수정 추가 획득 확룔 -->
+    <HotTimeAddRiftCrystalProb>30</HotTimeAddRiftCrystalProb>
+
+    <!-- 균열 게이지 일일 충전량 -->
+    <DailyRiftGaugeAddValue>50</DailyRiftGaugeAddValue>
+    
+    <!-- 균열 게이지 최대 충전량 -->
+    <RiftGaugeMaxValue>1000</RiftGaugeMaxValue>
+    
+    <!-- 균열 게이지 구매 비용 및 지급량 -->
+    <RiftGaugeBuyInformation Cost="10,20,30,30,30,30,30,30,30,30">100</RiftGaugeBuyInformation>
+    
+    <!-- 확정 강화권 최대 레벨 -->
+    <RiftWeaponMaxCouponUpgradableLevel>30</RiftWeaponMaxCouponUpgradableLevel>
+</RiftWeaponConstants>

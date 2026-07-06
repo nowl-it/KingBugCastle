@@ -1,0 +1,2258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Missions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Mission ID="90001">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>로그라이크 1층 클리어</DescComment>
+		<Condition Type="RogueLikeClearFloor" Value="1"/>
+		<Param Value="1" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="1">RogueLikeClearFloorDesc</DescFormat>
+		<TitleFormat Arg0="1">RogueLikeClearFloorTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90002">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>로그라이크 2층 클리어</DescComment>
+		<Condition Type="RogueLikeClearFloor" Value="1"/>
+		<Param Value="2" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="2">RogueLikeClearFloorDesc</DescFormat>
+		<TitleFormat Arg0="2">RogueLikeClearFloorTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90003">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>로그라이크 3층 클리어</DescComment>
+		<Condition Type="RogueLikeClearFloor" Value="1"/>
+		<Param Value="3" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="3">RogueLikeClearFloorDesc</DescFormat>
+		<TitleFormat Arg0="3">RogueLikeClearFloorTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90004">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>로그라이크 4층 클리어</DescComment>
+		<Condition Type="RogueLikeClearFloor" Value="1"/>
+		<Param Value="4" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="4">RogueLikeClearFloorDesc</DescFormat>
+		<TitleFormat Arg0="4">RogueLikeClearFloorTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90005">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>로그라이크 5층 클리어</DescComment>
+		<Condition Type="RogueLikeClearFloor" Value="1"/>
+		<Param Value="5" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="5">RogueLikeClearFloorDesc</DescFormat>
+		<TitleFormat Arg0="5">RogueLikeClearFloorTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90006">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>로그라이크 6층 클리어</DescComment>
+		<Condition Type="RogueLikeClearFloor" Value="1"/>
+		<Param Value="6" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="6">RogueLikeClearFloorDesc</DescFormat>
+		<TitleFormat Arg0="6">RogueLikeClearFloorTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90007">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>로그라이크 7층 클리어</DescComment>
+		<Condition Type="RogueLikeClearFloor" Value="1"/>
+		<Param Value="7" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="7">RogueLikeClearFloorDesc</DescFormat>
+		<TitleFormat Arg0="7">RogueLikeClearFloorTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90008">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>로그라이크 8층 클리어</DescComment>
+		<Condition Type="RogueLikeClearFloor" Value="1"/>
+		<Param Value="8" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="8">RogueLikeClearFloorDesc</DescFormat>
+		<TitleFormat Arg0="8">RogueLikeClearFloorTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90009">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>로그라이크 9층 클리어</DescComment>
+		<Condition Type="RogueLikeClearFloor" Value="1"/>
+		<Param Value="9" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20020"/>
+		<Icon>Achievement_Icon_90001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="9">RogueLikeClearFloorDesc</DescFormat>
+		<TitleFormat Arg0="9">RogueLikeClearFloorTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90010">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영광의 빛 획득</DescComment>
+		<Condition Type="RogueLikeGetBuildingArtifact" Value="1"/>
+		<Param Value="0" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90010</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12000">RogueLikeGetBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeGetBuildingArtifactTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90011">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>광열의 망치 획득</DescComment>
+		<Condition Type="RogueLikeGetBuildingArtifact" Value="1"/>
+		<Param Value="1" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90011</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12010">RogueLikeGetBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeGetBuildingArtifactTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90012">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>혈흔서린 검 획득</DescComment>
+		<Condition Type="RogueLikeGetBuildingArtifact" Value="1"/>
+		<Param Value="2" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90012</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12020">RogueLikeGetBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeGetBuildingArtifactTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90013">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>수호자의 투구 획득</DescComment>
+		<Condition Type="RogueLikeGetBuildingArtifact" Value="1"/>
+		<Param Value="3" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90013</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12030">RogueLikeGetBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeGetBuildingArtifactTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90014">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>타락의 성배 획득</DescComment>
+		<Condition Type="RogueLikeGetBuildingArtifact" Value="1"/>
+		<Param Value="4" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90014</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12040">RogueLikeGetBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeGetBuildingArtifactTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90015">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>검은 금반지 획득</DescComment>
+		<Condition Type="RogueLikeGetBuildingArtifact" Value="1"/>
+		<Param Value="5" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90015</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12050">RogueLikeGetBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeGetBuildingArtifactTitle_5</TitleFormat>
+	</Mission>
+	<Mission ID="90016">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영광의 빛을 보유하고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithBuildingArtifact" Value="1"/>
+		<Param Value="0" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90016</Icon>
+		<StartCondition Type="MissionClear" Value="90010"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12000">RogueLikeClearWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithBuildingArtifactTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90017">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>광열의 망치를 보유하고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithBuildingArtifact" Value="1"/>
+		<Param Value="1" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90017</Icon>
+		<StartCondition Type="MissionClear" Value="90011"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12010">RogueLikeClearWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithBuildingArtifactTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90018">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>혈흔서린 검을 보유하고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithBuildingArtifact" Value="1"/>
+		<Param Value="2" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90018</Icon>
+		<StartCondition Type="MissionClear" Value="90012"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12020">RogueLikeClearWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithBuildingArtifactTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90019">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>수호자의 투구를 보유하고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithBuildingArtifact" Value="1"/>
+		<Param Value="3" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90019</Icon>
+		<StartCondition Type="MissionClear" Value="90013"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12030">RogueLikeClearWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithBuildingArtifactTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90020">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>타락의 성배를 보유하고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithBuildingArtifact" Value="1"/>
+		<Param Value="4" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90020</Icon>
+		<StartCondition Type="MissionClear" Value="90014"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12040">RogueLikeClearWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithBuildingArtifactTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90021">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>검은 금반지를 보유하고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithBuildingArtifact" Value="1"/>
+		<Param Value="5" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90021</Icon>
+		<StartCondition Type="MissionClear" Value="90015"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12050">RogueLikeClearWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithBuildingArtifactTitle_5</TitleFormat>
+	</Mission>
+	<Mission ID="90022">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영웅 만렙 달성</DescComment>
+		<Condition Type="RogueLikeAchieveHeroMaxLevel" Value="1"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90022</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeAchieveHeroMaxLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveHeroMaxLevelTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90023">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영웅의 제단 레벨 25레벨 달성</DescComment>
+		<Condition Type="RogueLikeAchieveBuildingMaxLevel" Value="1"/>
+		<Param Value="0" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90023</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_0">RogueLikeAchieveBuildingMaxLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveBuildingMaxLevelTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90024">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>대장장이의 제단 레벨 25레벨 달성</DescComment>
+		<Condition Type="RogueLikeAchieveBuildingMaxLevel" Value="1"/>
+		<Param Value="1" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90024</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_1">RogueLikeAchieveBuildingMaxLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveBuildingMaxLevelTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90025">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>피의 제단 레벨 25레벨 달성</DescComment>
+		<Condition Type="RogueLikeAchieveBuildingMaxLevel" Value="1"/>
+		<Param Value="2" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90025</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_2">RogueLikeAchieveBuildingMaxLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveBuildingMaxLevelTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90026">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>거신의 제단 레벨 25레벨 달성</DescComment>
+		<Condition Type="RogueLikeAchieveBuildingMaxLevel" Value="1"/>
+		<Param Value="3" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90026</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_3">RogueLikeAchieveBuildingMaxLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveBuildingMaxLevelTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90027">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>마법사의 제단 레벨 25레벨 달성</DescComment>
+		<Condition Type="RogueLikeAchieveBuildingMaxLevel" Value="1"/>
+		<Param Value="4" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90027</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_4">RogueLikeAchieveBuildingMaxLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveBuildingMaxLevelTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90028">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>탐욕의 제단 레벨 25레벨 달성</DescComment>
+		<Condition Type="RogueLikeAchieveBuildingMaxLevel" Value="1"/>
+		<Param Value="5" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90028</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_5">RogueLikeAchieveBuildingMaxLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveBuildingMaxLevelTitle_5</TitleFormat>
+	</Mission>
+	<Mission ID="90029">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>무 60초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70120" Value="1"/>
+		<Param Value="60" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90029</Icon>
+		<StartCondition Type="MissionClear" Value="90008"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70120" Arg1="60">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90030">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>무 40초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70120" Value="1"/>
+		<Param Value="40" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90029</Icon>
+		<StartCondition Type="MissionClear" Value="90029"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70120" Arg1="40">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90031">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>무 20초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70120" Value="1"/>
+		<Param Value="20" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90029</Icon>
+		<StartCondition Type="MissionClear" Value="90030"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70120" Arg1="20">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90032">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>무 10초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70120" Value="1"/>
+		<Param Value="10" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90029</Icon>
+		<StartCondition Type="MissionClear" Value="90031"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70120" Arg1="10">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90033">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 모드 개방</DescComment>
+		<Condition Type="RogueLikeUnlockChallenge" Value="1"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90033</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeUnlockChallengeDesc</DescFormat>
+		<TitleFormat>RogueLikeUnlockChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90034">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>비기너 모드 개방</DescComment>
+		<Condition Type="RogueLikeUnlockBeginner" Value="1"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90034</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeUnlockBeginnerDesc</DescFormat>
+		<TitleFormat>RogueLikeUnlockBeginnerTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90035">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영웅 12명 보유</DescComment>
+		<Condition Type="RogueLikeAchieveHeroCount" Value="1"/>
+		<Param Value="12" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90035</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="12">RogueLikeAchieveHeroCountDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveHeroCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90036">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>보유 은화 1000개 달성</DescComment>
+		<Condition Type="RogueLikeAchieveGold" Value="1"/>
+		<Param Value="1000" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90036</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="1000">RogueLikeAchieveGoldDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeAchieveGoldTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90037">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>보유 은화 5000개 달성</DescComment>
+		<Condition Type="RogueLikeAchieveGold" Value="1"/>
+		<Param Value="5000" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90036</Icon>
+		<StartCondition Type="MissionClear" Value="90036"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="5000">RogueLikeAchieveGoldDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeAchieveGoldTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90038">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>보유 은화 10000개 달성</DescComment>
+		<Condition Type="RogueLikeAchieveGold" Value="1"/>
+		<Param Value="10000" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90036</Icon>
+		<StartCondition Type="MissionClear" Value="90037"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="10000">RogueLikeAchieveGoldDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeAchieveGoldTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90039">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>보유 은화 20000개 달성</DescComment>
+		<Condition Type="RogueLikeAchieveGold" Value="1"/>
+		<Param Value="20000" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90036</Icon>
+		<StartCondition Type="MissionClear" Value="90038"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="20000">RogueLikeAchieveGoldDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeAchieveGoldTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90040">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>보유 은화 30000개 달성</DescComment>
+		<Condition Type="RogueLikeAchieveGold" Value="1"/>
+		<Param Value="30000" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90036</Icon>
+		<StartCondition Type="MissionClear" Value="90039"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="30000">RogueLikeAchieveGoldDesc</DescFormat>
+		<TitleFormat Arg0="V">RogueLikeAchieveGoldTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90041">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>보유 은화 40000개 달성</DescComment>
+		<Condition Type="RogueLikeAchieveGold" Value="1"/>
+		<Param Value="40000" MatchType="GreaterEqual"/>
+		<Reward Type="Flag" Value="20000"/>
+		<Icon>Achievement_Icon_90036</Icon>
+		<StartCondition Type="MissionClear" Value="90040"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="40000">RogueLikeAchieveGoldDesc</DescFormat>
+		<TitleFormat Arg0="VI">RogueLikeAchieveGoldTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90042">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 영웅의 제단 룬 수집</DescComment>
+		<Condition Type="RogueLikeCollectBuildingRune" Value="6"/>
+		<Param Value="0" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90042</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_0">RogueLikeCollectBuildingRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectBuildingRuneTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90043">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 대장장이의 제단 룬 수집</DescComment>
+		<Condition Type="RogueLikeCollectBuildingRune" Value="6"/>
+		<Param Value="1" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90043</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_1">RogueLikeCollectBuildingRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectBuildingRuneTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90044">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 피의 제단 룬 수집</DescComment>
+		<Condition Type="RogueLikeCollectBuildingRune" Value="6"/>
+		<Param Value="2" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90044</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_2">RogueLikeCollectBuildingRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectBuildingRuneTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90045">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 거신의 제단 룬 수집</DescComment>
+		<Condition Type="RogueLikeCollectBuildingRune" Value="6"/>
+		<Param Value="3" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90045</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_3">RogueLikeCollectBuildingRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectBuildingRuneTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90046">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 마법사의 제단 룬 수집</DescComment>
+		<Condition Type="RogueLikeCollectBuildingRune" Value="6"/>
+		<Param Value="4" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90046</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_4">RogueLikeCollectBuildingRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectBuildingRuneTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90047">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 탐욕의 제단 룬 수집</DescComment>
+		<Condition Type="RogueLikeCollectBuildingRune" Value="6"/>
+		<Param Value="5" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90047</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_5">RogueLikeCollectBuildingRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectBuildingRuneTitle_5</TitleFormat>
+	</Mission>
+	<Mission ID="90048">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 룬 수집</DescComment>
+		<Condition Type="RogueLikeCollectAllRune" Value="46"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90048</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeCollectAllRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectAllRuneTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90049">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 유물 수집</DescComment>
+		<Condition Type="RogueLikeCollectAllArtifact" Value="34"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90049</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeCollectAllArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectAllArtifactTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90050">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 영웅 수집</DescComment>
+		<Condition Type="RogueLikeCollectAllHero" Value="65"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90050</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeCollectAllHeroDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectAllHeroTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90051">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 하사품 수집</DescComment>
+		<Condition Type="RogueLikeCollectAllGodItem" Value="7"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90051</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeCollectAllGodItemDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectAllGodItemTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90052">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>게임 1회 플레이</DescComment>
+		<Condition Type="RogueLikePlayCount" Value="1"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90052</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="1">RogueLikePlayCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikePlayCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90053">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>게임 10회 플레이</DescComment>
+		<Condition Type="RogueLikePlayCount" Value="10"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90052</Icon>
+		<StartCondition Type="MissionClear" Value="90052"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="10">RogueLikePlayCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikePlayCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90054">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>게임 50회 플레이</DescComment>
+		<Condition Type="RogueLikePlayCount" Value="50"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90052</Icon>
+		<StartCondition Type="MissionClear" Value="90053"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="50">RogueLikePlayCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikePlayCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90055">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>게임 100회 플레이</DescComment>
+		<Condition Type="RogueLikePlayCount" Value="100"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90052</Icon>
+		<StartCondition Type="MissionClear" Value="90054"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="100">RogueLikePlayCountDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikePlayCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90056">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영웅 500회 사망</DescComment>
+		<Condition Type="RogueLikeHeroDeathCount" Value="500"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90056</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="500">RogueLikeHeroDeathCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeHeroDeathCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90057">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영웅 3000회 사망</DescComment>
+		<Condition Type="RogueLikeHeroDeathCount" Value="3000"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90056</Icon>
+		<StartCondition Type="MissionClear" Value="90056"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="3000">RogueLikeHeroDeathCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeHeroDeathCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90058">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영웅 5000회 사망</DescComment>
+		<Condition Type="RogueLikeHeroDeathCount" Value="5000"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90056</Icon>
+		<StartCondition Type="MissionClear" Value="90057"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="5000">RogueLikeHeroDeathCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeHeroDeathCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90059">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>적 1000기 처치</DescComment>
+		<Condition Type="RogueLikeKillCount" Value="1000"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90059</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="1000">RogueLikeKillCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeKillCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90060">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>적 5000기 처치</DescComment>
+		<Condition Type="RogueLikeKillCount" Value="5000"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90059</Icon>
+		<StartCondition Type="MissionClear" Value="90059"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="5000">RogueLikeKillCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeKillCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90061">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>적 10000기 처치</DescComment>
+		<Condition Type="RogueLikeKillCount" Value="10000"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90059</Icon>
+		<StartCondition Type="MissionClear" Value="90060"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="10000">RogueLikeKillCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeKillCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90062">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>대균열 30회 클리어</DescComment>
+		<Condition Type="RogueLikeClearCount" Value="30"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90062</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="30">RogueLikeClearCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90063">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>대균열 50회 클리어</DescComment>
+		<Condition Type="RogueLikeClearCount" Value="50"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90062</Icon>
+		<StartCondition Type="MissionClear" Value="90062"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="50">RogueLikeClearCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90064">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>대균열 100회 클리어</DescComment>
+		<Condition Type="RogueLikeClearCount" Value="100"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90062</Icon>
+		<StartCondition Type="MissionClear" Value="90063"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="100">RogueLikeClearCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90065">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>대균열 200회 클리어</DescComment>
+		<Condition Type="RogueLikeClearCount" Value="200"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90062</Icon>
+		<StartCondition Type="MissionClear" Value="90064"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="200">RogueLikeClearCountDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90066">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>사라스 10회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="10"/>
+		<Param Value="70060" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90066</Icon>
+		<StartCondition Type="MissionClear" Value="90007"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70060" Arg1="10">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeBossKillCountTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90067">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>사라스 50회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="50"/>
+		<Param Value="70060" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90066</Icon>
+		<StartCondition Type="MissionClear" Value="90066"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70060" Arg1="50">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeBossKillCountTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90068">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>사라스 100회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="100"/>
+		<Param Value="70060" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20040"/>
+		<Icon>Achievement_Icon_90066</Icon>
+		<StartCondition Type="MissionClear" Value="90067"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70060" Arg1="100">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeBossKillCountTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90069">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>균열의 자매들 10회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="10"/>
+		<Param Value="70070" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90069</Icon>
+		<StartCondition Type="MissionClear" Value="90008"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70070" Arg1="10">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeBossKillCountTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90070">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>균열의 자매들 50회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="50"/>
+		<Param Value="70070" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90069</Icon>
+		<StartCondition Type="MissionClear" Value="90069"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70070" Arg1="50">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeBossKillCountTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90071">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>균열의 자매들 100회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="100"/>
+		<Param Value="70070" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20050"/>
+		<Icon>Achievement_Icon_90069</Icon>
+		<StartCondition Type="MissionClear" Value="90070"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70070" Arg1="100">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeBossKillCountTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90072">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>무 10회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="10"/>
+		<Param Value="70120" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90072</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70120" Arg1="10">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeBossKillCountTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90073">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>무 50회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="50"/>
+		<Param Value="70120" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90072</Icon>
+		<StartCondition Type="MissionClear" Value="90072"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70120" Arg1="50">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeBossKillCountTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90074">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>무 100회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="100"/>
+		<Param Value="70120" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20060"/>
+		<Icon>Achievement_Icon_90072</Icon>
+		<StartCondition Type="MissionClear" Value="90073"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70120" Arg1="100">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeBossKillCountTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90075">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>이벤트 10회 경험</DescComment>
+		<Condition Type="RogueLikeEnterEventCount" Value="10"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90075</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="10">RogueLikeEnterEventCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeEnterEventCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90076">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>이벤트 50회 경험</DescComment>
+		<Condition Type="RogueLikeEnterEventCount" Value="50"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90075</Icon>
+		<StartCondition Type="MissionClear" Value="90075"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="50">RogueLikeEnterEventCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeEnterEventCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90077">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>이벤트 100회 경험</DescComment>
+		<Condition Type="RogueLikeEnterEventCount" Value="100"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90075</Icon>
+		<StartCondition Type="MissionClear" Value="90076"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="100">RogueLikeEnterEventCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeEnterEventCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90078">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>은화 100,000소비</DescComment>
+		<Condition Type="RogueLikeUsedGold" Value="100000"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90078</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="100000">RogueLikeUsedGoldDesc</DescFormat>
+		<TitleFormat>RogueLikeUsedGoldTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90079">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>은화 500,000소비</DescComment>
+		<Condition Type="RogueLikeUsedGold" Value="500000"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90078</Icon>
+		<StartCondition Type="MissionClear" Value="90078"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="500000">RogueLikeUsedGoldDesc</DescFormat>
+		<TitleFormat>RogueLikeUsedGoldTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90080">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>은화 1,000,000소비</DescComment>
+		<Condition Type="RogueLikeUsedGold" Value="1000000"/>
+		<Param/>
+		<Reward Type="Flag" Value="20010"/>
+		<Icon>Achievement_Icon_90078</Icon>
+		<StartCondition Type="MissionClear" Value="90079"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="1000000">RogueLikeUsedGoldDesc</DescFormat>
+		<TitleFormat>RogueLikeUsedGoldTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90081">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>소비 아이템 사용하지 않고 클리어</DescComment>
+		<Condition Type="RogueLikeDontUseInstantItem" Value="1"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90081</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeDontUseInstantItemDesc</DescFormat>
+		<TitleFormat>RogueLikeDontUseInstantItemTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90082">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영웅의 제단만 이용해서 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithOnlyBuilding" Value="1"/>
+		<Param Value="0" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90082</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_0">RogueLikeClearWithOnlyBuildingDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithOnlyBuildingTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90083">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>대장장이의 제단만 이용해서 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithOnlyBuilding" Value="1"/>
+		<Param Value="1" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90083</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_1">RogueLikeClearWithOnlyBuildingDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithOnlyBuildingTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90084">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>피의 제단만 이용해서 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithOnlyBuilding" Value="1"/>
+		<Param Value="2" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90084</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_2">RogueLikeClearWithOnlyBuildingDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithOnlyBuildingTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90085">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>거신의 제단만 이용해서 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithOnlyBuilding" Value="1"/>
+		<Param Value="3" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90085</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_3">RogueLikeClearWithOnlyBuildingDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithOnlyBuildingTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90086">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>마법사의 제단만 이용해서 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithOnlyBuilding" Value="1"/>
+		<Param Value="4" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90086</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_4">RogueLikeClearWithOnlyBuildingDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithOnlyBuildingTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90087">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>탐욕의 제단만 이용해서 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithOnlyBuilding" Value="1"/>
+		<Param Value="5" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90087</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_5">RogueLikeClearWithOnlyBuildingDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithOnlyBuildingTitle_5</TitleFormat>
+	</Mission>
+	<Mission ID="90088">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>3명 이하의 영웅으로 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxHeroCount" Value="1"/>
+		<Param Value="3" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90088</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="3">RogueLikeClearMaxHeroCountDesc</DescFormat>
+		<TitleFormat>RogueLikeClearMaxHeroCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90089">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>제단 유물 없이 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithoutBuildingArtifact" Value="1"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90089</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeClearWithoutBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithoutBuildingArtifactTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90090">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>유물 없이 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithoutArtifact" Value="1"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90090</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeClearWithoutArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithoutArtifactTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90091">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>제단 룬 없이 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithoutBuildingRune" Value="1"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90091</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeClearWithoutBuildingRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithoutBuildingRuneTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90092">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영웅이 죽지 않고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithoutHeroDeath" Value="1"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90092</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat>RogueLikeClearWithoutHeroDeathDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithoutHeroDeathTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90093">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>층 마다 9개 이하의 방만을 입장하고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithMaxRoomCountPerFloor" Value="1"/>
+		<Param Value="9" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90093</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="9">RogueLikeClearWithMaxRoomCountPerFloorDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithMaxRoomCountPerFloorTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90094">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>모든 제단 레벨 5 이상으로 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithAllBuildingLevel" Value="1"/>
+		<Param Value="5" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90094</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="5">RogueLikeClearWithAllBuildingLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithAllBuildingLevelTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90095">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 1단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="1" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="1">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90096">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 2단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="2" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90095"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="2">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90097">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 3단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="3" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90096"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="3">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90098">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 4단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="4" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90097"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="4">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90099">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 5단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="5" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90098"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="5">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="V">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90100">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 6단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="6" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90099"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="6">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="VI">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90101">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 7단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="7" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90100"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="7">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="VII">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90102">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 8단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="8" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90101"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="8">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="VIII">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90103">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 9단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="9" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90102"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="9">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="IX">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90104">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 10단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="10" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90103"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="10">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="X">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90105">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 11단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="11" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90104"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="11">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="XI">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90106">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 12단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="12" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90105"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="12">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="XII">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90107">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 13단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="13" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90106"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="13">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="XIII">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90108">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 14단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="14" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90107"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="14">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="XIV">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90109">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 15단계 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="1"/>
+		<Param Value="15" MatchType="GreaterEqual"/>
+		<Reward Type="Flag" Value="20030"/>
+		<Icon>Achievement_Icon_90095</Icon>
+		<StartCondition Type="MissionClear" Value="90108"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="15">RogueLikeClearChallengeDesc</DescFormat>
+		<TitleFormat Arg0="XV">RogueLikeClearChallengeTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90110">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 15단계 5회 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="5"/>
+		<Param Value="15" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90110</Icon>
+		<StartCondition Type="MissionClear" Value="90109"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="15" Arg1="5">RogueLikeClearChallengeDesc_0</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearChallengeTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90111">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 15단계 10회 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="10"/>
+		<Param Value="15" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90110</Icon>
+		<StartCondition Type="MissionClear" Value="90110"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="15" Arg1="10">RogueLikeClearChallengeDesc_0</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearChallengeTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90112">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>챌린지 15단계 15회 클리어</DescComment>
+		<Condition Type="RogueLikeClearChallenge" Value="15"/>
+		<Param Value="15" MatchType="GreaterEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90110</Icon>
+		<StartCondition Type="MissionClear" Value="90111"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="15" Arg1="15">RogueLikeClearChallengeDesc_0</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearChallengeTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90113">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영광의 빛을 보유하고 15단계 챌린지 1회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="1"/>
+		<Param Value="0" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90113</Icon>
+		<StartCondition Type="MissionClear" Value="90109"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12000" Arg1="1">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90114">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영광의 빛을 보유하고 15단계 챌린지 3회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="3"/>
+		<Param Value="0" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90113</Icon>
+		<StartCondition Type="MissionClear" Value="90113"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12000" Arg1="3">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90115">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영광의 빛을 보유하고 15단계 챌린지 5회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="5"/>
+		<Param Value="0" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90113</Icon>
+		<StartCondition Type="MissionClear" Value="90114"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12000" Arg1="5">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90116">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>영광의 빛을 보유하고 15단계 챌린지 10회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="10"/>
+		<Param Value="0" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20070"/>
+		<Icon>Achievement_Icon_90113</Icon>
+		<StartCondition Type="MissionClear" Value="90115"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12000" Arg1="10">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_0</TitleFormat>
+	</Mission>
+	<Mission ID="90117">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>광열의 망치를 보유하고 15단계 챌린지 1회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="1"/>
+		<Param Value="1" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90117</Icon>
+		<StartCondition Type="MissionClear" Value="90109"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12010" Arg1="1">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90118">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>광열의 망치를 보유하고 15단계 챌린지 3회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="3"/>
+		<Param Value="1" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90117</Icon>
+		<StartCondition Type="MissionClear" Value="90117"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12010" Arg1="3">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90119">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>광열의 망치를 보유하고 15단계 챌린지 5회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="5"/>
+		<Param Value="1" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90117</Icon>
+		<StartCondition Type="MissionClear" Value="90118"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12010" Arg1="5">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90120">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>광열의 망치를 보유하고 15단계 챌린지 10회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="10"/>
+		<Param Value="1" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20080"/>
+		<Icon>Achievement_Icon_90117</Icon>
+		<StartCondition Type="MissionClear" Value="90119"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12010" Arg1="10">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_1</TitleFormat>
+	</Mission>
+	<Mission ID="90121">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>혈흔서린 검을 보유하고 15단계 챌린지 1회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="1"/>
+		<Param Value="2" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90121</Icon>
+		<StartCondition Type="MissionClear" Value="90109"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12020" Arg1="1">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90122">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>혈흔서린 검을 보유하고 15단계 챌린지 3회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="3"/>
+		<Param Value="2" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90121</Icon>
+		<StartCondition Type="MissionClear" Value="90121"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12020" Arg1="3">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90123">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>혈흔서린 검을 보유하고 15단계 챌린지 5회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="5"/>
+		<Param Value="2" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90121</Icon>
+		<StartCondition Type="MissionClear" Value="90122"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12020" Arg1="5">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90124">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>혈흔서린 검을 보유하고 15단계 챌린지 10회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="10"/>
+		<Param Value="2" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20090"/>
+		<Icon>Achievement_Icon_90121</Icon>
+		<StartCondition Type="MissionClear" Value="90123"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12020" Arg1="10">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_2</TitleFormat>
+	</Mission>
+	<Mission ID="90125">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>수호자의 투구를 보유하고 15단계 챌린지 1회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="1"/>
+		<Param Value="3" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90125</Icon>
+		<StartCondition Type="MissionClear" Value="90109"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12030" Arg1="1">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90126">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>수호자의 투구를 보유하고 15단계 챌린지 3회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="3"/>
+		<Param Value="3" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90125</Icon>
+		<StartCondition Type="MissionClear" Value="90125"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12030" Arg1="3">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90127">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>수호자의 투구를 보유하고 15단계 챌린지 5회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="5"/>
+		<Param Value="3" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90125</Icon>
+		<StartCondition Type="MissionClear" Value="90126"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12030" Arg1="5">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90128">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>수호자의 투구를 보유하고 15단계 챌린지 10회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="10"/>
+		<Param Value="3" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20100"/>
+		<Icon>Achievement_Icon_90125</Icon>
+		<StartCondition Type="MissionClear" Value="90127"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12030" Arg1="10">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90129">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>타락의 성배를 보유하고 15단계 챌린지 1회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="1"/>
+		<Param Value="4" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90129</Icon>
+		<StartCondition Type="MissionClear" Value="90109"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12040" Arg1="1">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90130">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>타락의 성배를 보유하고 15단계 챌린지 3회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="3"/>
+		<Param Value="4" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90129</Icon>
+		<StartCondition Type="MissionClear" Value="90129"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12040" Arg1="3">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90131">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>타락의 성배를 보유하고 15단계 챌린지 5회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="5"/>
+		<Param Value="4" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90129</Icon>
+		<StartCondition Type="MissionClear" Value="90130"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12040" Arg1="5">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90132">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>타락의 성배를 보유하고 15단계 챌린지 10회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="10"/>
+		<Param Value="4" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20110"/>
+		<Icon>Achievement_Icon_90129</Icon>
+		<StartCondition Type="MissionClear" Value="90131"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12040" Arg1="10">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90133">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>검은 금반지를 보유하고 15단계 챌린지 1회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="1"/>
+		<Param Value="5" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90133</Icon>
+		<StartCondition Type="MissionClear" Value="90109"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12050" Arg1="1">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_5</TitleFormat>
+	</Mission>
+	<Mission ID="90134">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>검은 금반지를 보유하고 15단계 챌린지 3회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="3"/>
+		<Param Value="5" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90133</Icon>
+		<StartCondition Type="MissionClear" Value="90133"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12050" Arg1="3">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_5</TitleFormat>
+	</Mission>
+	<Mission ID="90135">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>검은 금반지를 보유하고 15단계 챌린지 5회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="5"/>
+		<Param Value="5" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90133</Icon>
+		<StartCondition Type="MissionClear" Value="90134"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12050" Arg1="5">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_5</TitleFormat>
+	</Mission>
+	<Mission ID="90136">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>검은 금반지를 보유하고 15단계 챌린지 10회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="10"/>
+		<Param Value="5" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20120"/>
+		<Icon>Achievement_Icon_90133</Icon>
+		<StartCondition Type="MissionClear" Value="90135"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_12050" Arg1="10">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_5</TitleFormat>
+	</Mission>
+	<Mission ID="90137">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>도전과제 40개 달성</DescComment>
+		<Condition Type="RogueLikeAchievementClearCount" Value="40"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90137</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="40">RogueLikeAchievementClearCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeAchievementClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90138">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>도전과제 60개 달성</DescComment>
+		<Condition Type="RogueLikeAchievementClearCount" Value="60"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90137</Icon>
+		<StartCondition Type="MissionClear" Value="90137"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="60">RogueLikeAchievementClearCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeAchievementClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90139">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>도전과제 80개 달성</DescComment>
+		<Condition Type="RogueLikeAchievementClearCount" Value="80"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90137</Icon>
+		<StartCondition Type="MissionClear" Value="90138"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="80">RogueLikeAchievementClearCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeAchievementClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90140">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>도전과제 100개 달성</DescComment>
+		<Condition Type="RogueLikeAchievementClearCount" Value="100"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90137</Icon>
+		<StartCondition Type="MissionClear" Value="90139"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="100">RogueLikeAchievementClearCountDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeAchievementClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90141">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>도전과제 120개 달성</DescComment>
+		<Condition Type="RogueLikeAchievementClearCount" Value="120"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90137</Icon>
+		<StartCondition Type="MissionClear" Value="90140"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="120">RogueLikeAchievementClearCountDesc</DescFormat>
+		<TitleFormat Arg0="V">RogueLikeAchievementClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90142">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>도전과제 140개 달성</DescComment>
+		<Condition Type="RogueLikeAchievementClearCount" Value="140"/>
+		<Param/>
+		<Reward Type="Flag" Value="20130"/>
+		<Icon>Achievement_Icon_90137</Icon>
+		<StartCondition Type="MissionClear" Value="90141"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="140">RogueLikeAchievementClearCountDesc</DescFormat>
+		<TitleFormat Arg0="VI">RogueLikeAchievementClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90143">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>묠누즈 60초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70100" Value="1"/>
+		<Param Value="60" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90143</Icon>
+		<StartCondition Type="MissionClear" Value="90008"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70100" Arg1="60">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90144">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>묠누즈 40초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70100" Value="1"/>
+		<Param Value="40" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90143</Icon>
+		<StartCondition Type="MissionClear" Value="90143"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70100" Arg1="40">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90145">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>묠누즈 20초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70100" Value="1"/>
+		<Param Value="20" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90143</Icon>
+		<StartCondition Type="MissionClear" Value="90144"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70100" Arg1="20">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90146">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>묠누즈 10초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70100" Value="1"/>
+		<Param Value="10" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90143</Icon>
+		<StartCondition Type="MissionClear" Value="90145"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70100" Arg1="10">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90147">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>묠누즈 10회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="10"/>
+		<Param Value="70100" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90147</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70100" Arg1="10">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeBossKillCountTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90148">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>묠누즈 50회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="50"/>
+		<Param Value="70100" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90147</Icon>
+		<StartCondition Type="MissionClear" Value="90147"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70100" Arg1="50">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeBossKillCountTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90149">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>묠누즈 100회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="100"/>
+		<Param Value="70100" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20180"/>
+		<Icon>Achievement_Icon_90147</Icon>
+		<StartCondition Type="MissionClear" Value="90148"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70100" Arg1="100">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeBossKillCountTitle_3</TitleFormat>
+	</Mission>
+	<Mission ID="90150">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>젠'엘 60초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70110" Value="1"/>
+		<Param Value="60" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90150</Icon>
+		<StartCondition Type="MissionClear" Value="90008"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70110" Arg1="60">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90151">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>젠'엘 40초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70110" Value="1"/>
+		<Param Value="40" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90150</Icon>
+		<StartCondition Type="MissionClear" Value="90150"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70110" Arg1="40">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90152">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>젠'엘 20초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70110" Value="1"/>
+		<Param Value="20" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90150</Icon>
+		<StartCondition Type="MissionClear" Value="90151"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70110" Arg1="20">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90153">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>젠'엘 10초 안에 처치</DescComment>
+		<Condition Type="RogueLikeKillTimeUnit_70110" Value="1"/>
+		<Param Value="10" MatchType="LessEqual"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90150</Icon>
+		<StartCondition Type="MissionClear" Value="90152"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70110" Arg1="10">RogueLikeKillTimeUnitDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeKillTimeUnitTitle</TitleFormat>
+	</Mission>
+	<Mission ID="90154">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>젠'엘 10회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="10"/>
+		<Param Value="70110" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90154</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70110" Arg1="10">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeBossKillCountTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90155">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>젠'엘 50회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="50"/>
+		<Param Value="70110" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_90154</Icon>
+		<StartCondition Type="MissionClear" Value="90154"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70110" Arg1="50">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeBossKillCountTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90156">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>젠'엘 100회 처치</DescComment>
+		<Condition Type="RogueLikeBossKillCount" Value="100"/>
+		<Param Value="70110" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20190"/>
+		<Icon>Achievement_Icon_90154</Icon>
+		<StartCondition Type="MissionClear" Value="90155"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="UnitName_70110" Arg1="100">RogueLikeBossKillCountDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeBossKillCountTitle_4</TitleFormat>
+	</Mission>
+	<Mission ID="90157">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>도전과제 150개 달성</DescComment>
+		<Condition Type="RogueLikeAchievementClearCount" Value="150"/>
+		<Param/>
+		<Reward/>
+		<Icon>Achievement_Icon_90137</Icon>
+		<StartCondition Type="MissionClear" Value="90142"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="150">RogueLikeAchievementClearCountDesc</DescFormat>
+		<TitleFormat Arg0="VII">RogueLikeAchievementClearCountTitle</TitleFormat>
+	</Mission>
+	<Mission ID="91001">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 죽음의 서 획득</DescComment>
+		<Condition Type="RogueLikeGetBuildingArtifact" Value="1"/>
+		<Param Value="6" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_91001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13160">RogueLikeGetBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeGetBuildingArtifactTitle_6</TitleFormat>
+		<ReqRogueLikeDLC>2400</ReqRogueLikeDLC>
+	</Mission>
+	<Mission ID="91002">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 죽음의 서 보유하고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithBuildingArtifact" Value="1"/>
+		<Param Value="6" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_91002</Icon>
+		<StartCondition Type="MissionClear" Value="91001"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13160">RogueLikeClearWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithBuildingArtifactTitle_6</TitleFormat>
+		<ReqRogueLikeDLC>2400</ReqRogueLikeDLC>
+	</Mission>
+	<Mission ID="91003">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 사신의 제단 25레벨 달성</DescComment>
+		<Condition Type="RogueLikeAchieveBuildingMaxLevel" Value="1"/>
+		<Param Value="6" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_91003</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_6">RogueLikeAchieveBuildingMaxLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveBuildingMaxLevelTitle_6</TitleFormat>
+		<ReqRogueLikeDLC>2400</ReqRogueLikeDLC>
+	</Mission>
+	<Mission ID="91004">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 사신의 제단 모든 룬 수집</DescComment>
+		<Condition Type="RogueLikeCollectBuildingRune" Value="6"/>
+		<Param Value="6" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_91004</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_6">RogueLikeCollectBuildingRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectBuildingRuneTitle_6</TitleFormat>
+		<ReqRogueLikeDLC>2400</ReqRogueLikeDLC>
+	</Mission>
+	<Mission ID="91005">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 사신의 제단만 사용해서 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithOnlyBuilding" Value="1"/>
+		<Param Value="6" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_91005</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_6">RogueLikeClearWithOnlyBuildingDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithOnlyBuildingTitle_6</TitleFormat>
+		<ReqRogueLikeDLC>2400</ReqRogueLikeDLC>
+	</Mission>
+	<Mission ID="91006">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 죽음의 서 보유하고 15단계 챌린지 1회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="1"/>
+		<Param Value="6" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_91006</Icon>
+		<StartCondition Type="MissionClear" Value="90109"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13160" Arg1="1">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_6</TitleFormat>
+		<ReqRogueLikeDLC>2400</ReqRogueLikeDLC>
+	</Mission>
+	<Mission ID="91007">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 죽음의 서 보유하고 15단계 챌린지 3회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="3"/>
+		<Param Value="6" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_91006</Icon>
+		<StartCondition Type="MissionClear" Value="91006"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13160" Arg1="3">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_6</TitleFormat>
+		<ReqRogueLikeDLC>2400</ReqRogueLikeDLC>
+	</Mission>
+	<Mission ID="91008">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 죽음의 서 보유하고 15단계 챌린지 5회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="5"/>
+		<Param Value="6" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_91006</Icon>
+		<StartCondition Type="MissionClear" Value="91007"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13160" Arg1="5">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_6</TitleFormat>
+		<ReqRogueLikeDLC>2400</ReqRogueLikeDLC>
+	</Mission>
+	<Mission ID="91009">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 죽음의 서 보유하고 15단계 챌린지 10회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="10"/>
+		<Param Value="6" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20200"/>
+		<Icon>Achievement_Icon_91006</Icon>
+		<StartCondition Type="MissionClear" Value="91008"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13160" Arg1="10">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_6</TitleFormat>
+		<ReqRogueLikeDLC>2400</ReqRogueLikeDLC>
+	</Mission>
+	<Mission ID="92001">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 불사 유물 획득</DescComment>
+		<Condition Type="RogueLikeGetBuildingArtifact" Value="1"/>
+		<Param Value="7" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_92001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13220">RogueLikeGetBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeGetBuildingArtifactTitle_7</TitleFormat>
+		<ReqRogueLikeDLC>2410</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="92002">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 불사 유물 보유하고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithBuildingArtifact" Value="1"/>
+		<Param Value="7" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_92002</Icon>
+		<StartCondition Type="MissionClear" Value="92001"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13220">RogueLikeClearWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithBuildingArtifactTitle_7</TitleFormat>
+		<ReqRogueLikeDLC>2410</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="92003">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 불사 제단 25레벨 달성</DescComment>
+		<Condition Type="RogueLikeAchieveBuildingMaxLevel" Value="1"/>
+		<Param Value="7" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_92003</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_7">RogueLikeAchieveBuildingMaxLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveBuildingMaxLevelTitle_7</TitleFormat>
+		<ReqRogueLikeDLC>2410</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="92004">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 불사의 제단 모든 룬 수집</DescComment>
+		<Condition Type="RogueLikeCollectBuildingRune" Value="6"/>
+		<Param Value="7" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_92004</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_7">RogueLikeCollectBuildingRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectBuildingRuneTitle_7</TitleFormat>
+		<ReqRogueLikeDLC>2410</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="92005">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 불사의 제단만 사용해서 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithOnlyBuilding" Value="1"/>
+		<Param Value="7" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_92005</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_7">RogueLikeClearWithOnlyBuildingDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithOnlyBuildingTitle_7</TitleFormat>
+		<ReqRogueLikeDLC>2410</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="92006">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 불사 유물 보유하고 15단계 챌린지 1회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="1"/>
+		<Param Value="7" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_92006</Icon>
+		<StartCondition Type="MissionClear" Value="90109"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13220" Arg1="1">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_7</TitleFormat>
+		<ReqRogueLikeDLC>2410</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="92007">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 불사 유물 보유하고 15단계 챌린지 3회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="3"/>
+		<Param Value="7" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_92006</Icon>
+		<StartCondition Type="MissionClear" Value="92006"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13220" Arg1="3">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_7</TitleFormat>
+		<ReqRogueLikeDLC>2410</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="92008">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 불사 유물 보유하고 15단계 챌린지 5회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="5"/>
+		<Param Value="7" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_92006</Icon>
+		<StartCondition Type="MissionClear" Value="92007"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13220" Arg1="5">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_7</TitleFormat>
+		<ReqRogueLikeDLC>2410</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="92009">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 불사 유물 보유하고 15단계 챌린지 10회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="10"/>
+		<Param Value="7" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20210"/>
+		<Reward/>
+		<Icon>Achievement_Icon_92006</Icon>
+		<StartCondition Type="MissionClear" Value="92008"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13220" Arg1="10">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_7</TitleFormat>
+		<ReqRogueLikeDLC>2410</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="93001">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 지배 유물 획득</DescComment>
+		<Condition Type="RogueLikeGetBuildingArtifact" Value="1"/>
+		<Param Value="8" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_93001</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13230">RogueLikeGetBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeGetBuildingArtifactTitle_8</TitleFormat>
+		<ReqRogueLikeDLC>2420</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="93002">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 지배 유물 보유하고 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithBuildingArtifact" Value="1"/>
+		<Param Value="8" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_93002</Icon>
+		<StartCondition Type="MissionClear" Value="93001"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13230">RogueLikeClearWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithBuildingArtifactTitle_8</TitleFormat>
+		<ReqRogueLikeDLC>2420</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="93003">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 지배 제단 25레벨 달성</DescComment>
+		<Condition Type="RogueLikeAchieveBuildingMaxLevel" Value="1"/>
+		<Param Value="8" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_93003</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_8">RogueLikeAchieveBuildingMaxLevelDesc</DescFormat>
+		<TitleFormat>RogueLikeAchieveBuildingMaxLevelTitle_8</TitleFormat>
+		<ReqRogueLikeDLC>2420</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="93004">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 지배의 제단 모든 룬 수집</DescComment>
+		<Condition Type="RogueLikeCollectBuildingRune" Value="6"/>
+		<Param Value="8" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_93004</Icon>
+		<StartCondition/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_8">RogueLikeCollectBuildingRuneDesc</DescFormat>
+		<TitleFormat>RogueLikeCollectBuildingRuneTitle_8</TitleFormat>
+		<ReqRogueLikeDLC>2420</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="93005">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 지배의 제단만 사용해서 클리어</DescComment>
+		<Condition Type="RogueLikeClearWithOnlyBuilding" Value="1"/>
+		<Param Value="8" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_93005</Icon>
+		<StartCondition Type="MissionClear" Value="90009"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="BuildingName_8">RogueLikeClearWithOnlyBuildingDesc</DescFormat>
+		<TitleFormat>RogueLikeClearWithOnlyBuildingTitle_8</TitleFormat>
+		<ReqRogueLikeDLC>2420</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="93006">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 지배 유물 보유하고 15단계 챌린지 1회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="1"/>
+		<Param Value="8" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_93006</Icon>
+		<StartCondition Type="MissionClear" Value="90109"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13230" Arg1="1">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="I">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_8</TitleFormat>
+		<ReqRogueLikeDLC>2420</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="93007">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 지배 유물 보유하고 15단계 챌린지 3회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="3"/>
+		<Param Value="8" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_93006</Icon>
+		<StartCondition Type="MissionClear" Value="93006"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13230" Arg1="3">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="II">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_8</TitleFormat>
+		<ReqRogueLikeDLC>2420</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="93008">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 지배 유물 보유하고 15단계 챌린지 5회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="5"/>
+		<Param Value="8" MatchType="Equal"/>
+		<Reward/>
+		<Icon>Achievement_Icon_93006</Icon>
+		<StartCondition Type="MissionClear" Value="93007"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13230" Arg1="5">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="III">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_8</TitleFormat>
+		<ReqRogueLikeDLC>2420</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+	<Mission ID="93009">
+		<Type>GreatRiftAchievement</Type>
+		<DescComment>[DLC] 지배 유물 보유하고 15단계 챌린지 10회 클리어</DescComment>
+		<Condition Type="RogueLikeClearMaxChallengeWithBuildingArtifact" Value="10"/>
+		<Param Value="8" MatchType="Equal"/>
+		<Reward Type="Flag" Value="20220"/>
+		<Reward/>
+		<Icon>Achievement_Icon_93006</Icon>
+		<StartCondition Type="MissionClear" Value="93008"/>
+		<Category>RogueLike</Category>
+		<DescFormat Arg0="ArtifactName_13230" Arg1="10">RogueLikeClearMaxChallengeWithBuildingArtifactDesc</DescFormat>
+		<TitleFormat Arg0="IV">RogueLikeClearMaxChallengeWithBuildingArtifactTitle_8</TitleFormat>
+		<ReqRogueLikeDLC>2420</ReqRogueLikeDLC>
+		<MinVersion>159000</MinVersion>
+	</Mission>
+</Missions>

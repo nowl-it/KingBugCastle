@@ -1,0 +1,43 @@
+<DimensionUnitConstants>
+
+    <!-- 초월 최대 수치 -->
+    <OvercomeMax>5</OvercomeMax>
+
+    <!-- 차원 동기화 최대 레벨 -->
+    <DimensionLevelMax>10</DimensionLevelMax>
+
+    <!-- index = 현재 동기화 레벨, 값 = 다음 레벨로 올리는 데 필요한 차원의 잔향 -->
+    <DimensionLevelCost>
+        <Cost Level="0" Value="2500" />
+        <Cost Level="1" Value="3300" />
+        <Cost Level="2" Value="4200" />
+        <Cost Level="3" Value="12000" />
+        <Cost Level="4" Value="19000" />
+        <Cost Level="5" Value="29000" />
+        <Cost Level="6" Value="36000" />
+        <Cost Level="7" Value="42000" />
+        <Cost Level="8" Value="48000" />
+        <Cost Level="9" Value="54000" />
+    </DimensionLevelCost>
+
+    <!-- 차원 동기화 레벨(1~10) 별 전투력 계수 -->
+    <DimensionSyncCoefficient>
+        <Coefficient Level="1" Value="0.12" />
+        <Coefficient Level="2" Value="0.24" />
+        <Coefficient Level="3" Value="0.36" />
+        <Coefficient Level="4" Value="0.44" />
+        <Coefficient Level="5" Value="0.52" />
+        <Coefficient Level="6" Value="0.6" />
+        <Coefficient Level="7" Value="0.63" />
+        <Coefficient Level="8" Value="0.66" />
+        <Coefficient Level="9" Value="0.68" />
+        <Coefficient Level="10" Value="0.7" />
+    </DimensionSyncCoefficient>
+
+    <!-- 해당 돌파 달성 시 기본스킨 크로마를 보상 지급. (2돌파 -> 크로마 0, 5돌파 -> 크로마 1) -->
+    <OvercomeSkinRewardAt>
+        <Overcome Value="2" />
+        <Overcome Value="5" />
+    </OvercomeSkinRewardAt>
+
+</DimensionUnitConstants>

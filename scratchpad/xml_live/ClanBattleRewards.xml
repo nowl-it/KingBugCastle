@@ -1,0 +1,27 @@
+<!-- 연맹전 최초 클리어 보상 리소스 -->
+<ClanBattleRewards>
+    <ClanBattleReward ID="1">
+        <Difficulty>0</Difficulty>
+        <Reward Type="Key" ID="300" Count="1" />
+    </ClanBattleReward>
+
+    <ClanBattleReward ID="2">
+        <Difficulty>1</Difficulty>
+        <Reward Type="Key" ID="301" Count="1" />
+    </ClanBattleReward>
+
+    <ClanBattleReward ID="3">
+        <Difficulty>2</Difficulty>
+        <Reward Type="Key" ID="301" Count="1" />
+    </ClanBattleReward>
+
+    <ClanBattleReward ID="4">
+        <Difficulty>3</Difficulty>
+        <Reward Type="Key" ID="302" Count="1" />
+    </ClanBattleReward>
+
+    <ClanBattleReward ID="5">
+        <Difficulty>4</Difficulty>
+        <Reward Type="Key" ID="302" Count="2" />
+    </ClanBattleReward>
+</ClanBattleRewards>

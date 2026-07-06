@@ -1,0 +1,2157 @@
+{
+ "Auth": {
+  "request": null,
+  "response": "AuthResponseModel",
+  "args": "string id, string cookie = \"\""
+ },
+ "Login": {
+  "request": null,
+  "response": "AuthResponseModel",
+  "args": "string token, string cookie = \"\""
+ },
+ "Register": {
+  "request": "RegisterRequestModel",
+  "response": "AuthResponseModel",
+  "args": "RegisterRequestModel requestModel"
+ },
+ "CheckUsePatch": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string platform"
+ },
+ "GetPatchFolder": {
+  "request": null,
+  "response": "PatchFolderResponseModel",
+  "args": ""
+ },
+ "ShakeHand": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "CheckPatchVersion": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string version"
+ },
+ "GetXigncodeSeed": {
+  "request": null,
+  "response": "AuthResponseModel",
+  "args": ""
+ },
+ "XigncodeValidCheck": {
+  "request": null,
+  "response": "AuthResponseModel",
+  "args": "string cookie"
+ },
+ "GetPlayerInfo": {
+  "request": null,
+  "response": "PlayerDataResponseModel",
+  "args": ""
+ },
+ "GetPlayerTutorialStatus": {
+  "request": null,
+  "response": "KeyValuesResponseModel",
+  "args": ""
+ },
+ "GetPlayerCurrencies": {
+  "request": null,
+  "response": "PlayerCurrenciesResponseModel",
+  "args": ""
+ },
+ "GetPlayerDailyConsumedCurrencies": {
+  "request": null,
+  "response": "PlayerCurrenciesResponseModel",
+  "args": ""
+ },
+ "GetLoginSceneIllustData": {
+  "request": null,
+  "response": "LoginSceneIllustDataResponseModel",
+  "args": ""
+ },
+ "Exception": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string msg, string type"
+ },
+ "RecoverHeart": {
+  "request": null,
+  "response": "PlayerDataResponseModel",
+  "args": ""
+ },
+ "GetOtherPlayerInfo": {
+  "request": null,
+  "response": "OtherPlayerDataResponseModel",
+  "args": "int targetId"
+ },
+ "ChangeProfileIconId": {
+  "request": "ChangeProfileIconRequestModel",
+  "response": "ResponseModel",
+  "args": "ChangeProfileIconRequestModel requestModel"
+ },
+ "GetDailyAttendanceEvents": {
+  "request": null,
+  "response": "DailyAttendanceEventsResponseModel",
+  "args": ""
+ },
+ "XigncodeReport": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string code, string info"
+ },
+ "CustomEvent": {
+  "request": null,
+  "response": "PlayerDataResponseModel",
+  "args": "int id"
+ },
+ "CompleteKingGakReturnEvent": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "GetAprilFoolsReward": {
+  "request": null,
+  "response": "RewardListResponseModel",
+  "args": "int rewardIdx"
+ },
+ "CompleteTutorial": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string statusKey"
+ },
+ "ProgressTutorialMission": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int number"
+ },
+ "LogClickNotice": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int version"
+ },
+ "AddInventoryCount": {
+  "request": "InventoryCountRequestModel",
+  "response": "PlayerInventoryCountResponseModel",
+  "args": "InventoryCountRequestModel model"
+ },
+ "GetGameSkipInformation": {
+  "request": null,
+  "response": "GameSkipInfoResponseModel",
+  "args": ""
+ },
+ "GetBuildingInfo": {
+  "request": null,
+  "response": "BuildingResponseModel",
+  "args": ""
+ },
+ "BuyBuildingPoint": {
+  "request": null,
+  "response": "BuildingResponseModel",
+  "args": ""
+ },
+ "ResetBuildingPoint": {
+  "request": "BuildingRequestModel",
+  "response": "BuildingResponseModel",
+  "args": "BuildingRequestModel model"
+ },
+ "SaveBuilding": {
+  "request": "BuildingRequestModel",
+  "response": "BuildingResponseModel",
+  "args": "BuildingRequestModel requestModel"
+ },
+ "GetJourneyReward": {
+  "request": "JourneyRewardRequestModel",
+  "response": "JourneyRewardResponseModel",
+  "args": "JourneyRewardRequestModel requestModel"
+ },
+ "InitializeJourney": {
+  "request": null,
+  "response": "JourneyRewardResponseModel",
+  "args": ""
+ },
+ "GetYearEvent": {
+  "request": null,
+  "response": "FifthHalfYearEventResponseModel",
+  "args": ""
+ },
+ "GetYearEventAttendanceReward": {
+  "request": null,
+  "response": "YearEventReceiveRewardResponseModel",
+  "args": ""
+ },
+ "GetYearEventPassReward": {
+  "request": null,
+  "response": "YearEventReceiveRewardResponseModel",
+  "args": ""
+ },
+ "BuyYearEventPassPoint": {
+  "request": null,
+  "response": "YearEventBuyPassPointResponseModel",
+  "args": "int buyCount"
+ },
+ "GetPlayerSurpriseAttendanceEvent": {
+  "request": null,
+  "response": "SurpriseAttendanceEventResponseModel",
+  "args": ""
+ },
+ "GetSurpriseAttendanceEventDailyAttendanceReward": {
+  "request": null,
+  "response": "SurpriseAttendanceEventReceiveRewardResponseModel",
+  "args": ""
+ },
+ "CanEarlyAccessMode": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "CheckEarlyAccessModeCode": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string code"
+ },
+ "GetStockEventMyInfo": {
+  "request": null,
+  "response": "StockEventMyInfoResponseModel",
+  "args": ""
+ },
+ "GetStockPrices": {
+  "request": null,
+  "response": "StockEventPricesResponseModel",
+  "args": "int stockId, int count"
+ },
+ "GetOrders": {
+  "request": null,
+  "response": "StockEventTransactionsResponseModel",
+  "args": "int stockId"
+ },
+ "GetStockEventRanking": {
+  "request": null,
+  "response": "StockEventRankingResponseModel",
+  "args": ""
+ },
+ "CreateOrder": {
+  "request": "StockEventOrdersRequestModel",
+  "response": "StockEventOrdersResponseModel",
+  "args": "StockEventOrdersRequestModel requestModel"
+ },
+ "GiveStockEventDailyAttendanceReward": {
+  "request": null,
+  "response": "StockEventDailyAttendanceResponseModel",
+  "args": ""
+ },
+ "BuyStockHint": {
+  "request": null,
+  "response": "StockEventBuyHintResponseModel",
+  "args": ""
+ },
+ "ReceiveStockEventMissionReward": {
+  "request": "StockEventMissionRequestModel",
+  "response": "StockEventMissionResponseModel",
+  "args": "StockEventMissionRequestModel requestModel"
+ },
+ "GameStart": {
+  "request": "GameStartRequestModel",
+  "response": "GameStartResponseModel",
+  "args": "GameStartRequestModel requestModel"
+ },
+ "GameComplete": {
+  "request": "GameCompleteRequestModel",
+  "response": "GameResponseModel",
+  "args": "GameCompleteRequestModel requestModel"
+ },
+ "GameSkip": {
+  "request": "GameSkipRequestModel",
+  "response": "GameResponseModel",
+  "args": "GameSkipRequestModel requestModel"
+ },
+ "GameRevive": {
+  "request": null,
+  "response": "GameResponseModel",
+  "args": "bool useReviveCoupon"
+ },
+ "GameAdBonus": {
+  "request": "GameAdBonusRequestModel",
+  "response": "ResponseModel",
+  "args": "GameAdBonusRequestModel requestModel"
+ },
+ "GetRanking": {
+  "request": null,
+  "response": "RankingResponseModel",
+  "args": "int theme, bool useCache = True"
+ },
+ "GetEventMode": {
+  "request": null,
+  "response": "EventModeResponseModel",
+  "args": ""
+ },
+ "FetchPvPInfo": {
+  "request": null,
+  "response": "PvPInfoResponseModel",
+  "args": ""
+ },
+ "PvPMatching": {
+  "request": "ArenaMatchingRequestModel",
+  "response": "PvPMatchResponseModel",
+  "args": "ArenaMatchingRequestModel model"
+ },
+ "TestPvPMatching": {
+  "request": null,
+  "response": "PvPMatchResponseModel",
+  "args": ""
+ },
+ "PvPReceiveAllRewards": {
+  "request": "PvPReceiveRewardRequestModel",
+  "response": "PvPReceiveRewardResponseModel",
+  "args": "PvPReceiveRewardRequestModel model"
+ },
+ "GetPvPRanking": {
+  "request": null,
+  "response": "PvPRankingResponseModel",
+  "args": "int season, bool useCache = True"
+ },
+ "FetchArenaStatisticsData": {
+  "request": null,
+  "response": "ArenaStatisticsResponseModel",
+  "args": ""
+ },
+ "FetchArenaLatestGamesLog": {
+  "request": "ArenaLogRequestModel",
+  "response": "ArenaLogResponseModel",
+  "args": "ArenaLogRequestModel model"
+ },
+ "FetchArenaGameLog": {
+  "request": "ArenaLogRequestModel",
+  "response": "ArenaLogResponseModel",
+  "args": "ArenaLogRequestModel model"
+ },
+ "PvpDormantProgress": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "GetPvPLeagueRanking": {
+  "request": null,
+  "response": "LeagueRankingResponseModel",
+  "args": "int leagueSeason, bool useCache = False"
+ },
+ "GetPvPHallOfFame": {
+  "request": null,
+  "response": "PvPRankingResponseModel",
+  "args": "int leagueSeason, bool useCache = False"
+ },
+ "GetArenaWinReward": {
+  "request": "ArenaWinRewardRequestModel",
+  "response": "ArenaWinRewardResponseModel",
+  "args": "ArenaWinRewardRequestModel model"
+ },
+ "TestSetDormantTimeLeft": {
+  "request": null,
+  "response": "PvPInfoResponseModel",
+  "args": "int minuteLeft"
+ },
+ "TestClearPvPDeckPool": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestRemovePvPDeck": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int deckId"
+ },
+ "TestArenaSetWinCount": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int count"
+ },
+ "TestArenaClearWinRewardReceived": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestSetArenaStartSeason": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "GetAllCards": {
+  "request": null,
+  "response": "CardListResponseModel",
+  "args": ""
+ },
+ "GetCard": {
+  "request": null,
+  "response": "CardResponseModel",
+  "args": "int cardId"
+ },
+ "UpgradeCard": {
+  "request": "UpgradeCardRequestModel",
+  "response": "CardWithCandiesResponseModel",
+  "args": "UpgradeCardRequestModel upgradeCardRequestModel"
+ },
+ "FastUpgradeCard": {
+  "request": "FastUpgradeCardRequestModel",
+  "response": "CardResponseModel",
+  "args": "FastUpgradeCardRequestModel model"
+ },
+ "BuySkin": {
+  "request": "BuySkinRequestModel",
+  "response": "BuySkinResponseModel",
+  "args": "BuySkinRequestModel model"
+ },
+ "EquipSkin": {
+  "request": "EquipSkinRequestModel",
+  "response": "ResponseModel",
+  "args": "EquipSkinRequestModel model"
+ },
+ "UseUnitExpItem": {
+  "request": "UseUnitExpItemRequestModel",
+  "response": "ResponseModel",
+  "args": "UseUnitExpItemRequestModel model"
+ },
+ "UseUnitSoulItem": {
+  "request": "UseUnitExpItemRequestModel",
+  "response": "ResponseModel",
+  "args": "UseUnitExpItemRequestModel model"
+ },
+ "UseUnitSoulToExp": {
+  "request": "UseUnitExpItemRequestModel",
+  "response": "ResponseModel",
+  "args": "UseUnitExpItemRequestModel model"
+ },
+ "UseUnitSoulItemToExp": {
+  "request": "UseUnitExpItemRequestModel",
+  "response": "ResponseModel",
+  "args": "UseUnitExpItemRequestModel model"
+ },
+ "UseCandy": {
+  "request": "UpgradeCardRequestModel",
+  "response": "CardWithCandiesResponseModel",
+  "args": "UpgradeCardRequestModel model"
+ },
+ "UpgradeCardPotentialTier": {
+  "request": "UpgradeCardRequestModel",
+  "response": "CardWithCandiesResponseModel",
+  "args": "UpgradeCardRequestModel upgradeCardRequestModel"
+ },
+ "SetSkinFavorite": {
+  "request": "CardSkinEtcRequestModel",
+  "response": "CardSkinEtcResponseModel",
+  "args": "CardSkinEtcRequestModel model"
+ },
+ "SetRandomSkinApply": {
+  "request": "CardSkinEtcRequestModel",
+  "response": "CardSkinEtcResponseModel",
+  "args": "CardSkinEtcRequestModel model"
+ },
+ "GetDeck": {
+  "request": null,
+  "response": "DeckResponseModel",
+  "args": ""
+ },
+ "AddToDeck": {
+  "request": "DeckRequestModel",
+  "response": "DeckResponseModel",
+  "args": "DeckRequestModel requestModel"
+ },
+ "RemoveFromDeck": {
+  "request": "DeckRequestModel",
+  "response": "DeckResponseModel",
+  "args": "DeckRequestModel requestModel"
+ },
+ "SetDeck": {
+  "request": "DeckRequestModel",
+  "response": "DeckResponseModel",
+  "args": "DeckRequestModel requestModel"
+ },
+ "BuyDeckSlot": {
+  "request": "DeckRequestModel",
+  "response": "ResponseModel",
+  "args": "DeckRequestModel model"
+ },
+ "SetAllCardPotential": {
+  "request": "SetCardPotentialRequestModel",
+  "response": "DeckResponseModel",
+  "args": "SetCardPotentialRequestModel requestModel"
+ },
+ "SetCardPotential": {
+  "request": "SetCardPotentialRequestModel",
+  "response": "DeckResponseModel",
+  "args": "SetCardPotentialRequestModel requestModel"
+ },
+ "SetDeckSlotName": {
+  "request": "DeckNameRequestModel",
+  "response": "DeckResponseModel",
+  "args": "DeckNameRequestModel requestModel"
+ },
+ "GetShop": {
+  "request": null,
+  "response": "ShopResponseModel",
+  "args": ""
+ },
+ "BuyShopItem": {
+  "request": "BuyRequestModel",
+  "response": "BuyResponseModel",
+  "args": "BuyRequestModel requestModel"
+ },
+ "CanIAP": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "CanIAP_New": {
+  "request": "IAPBuyRequestModel",
+  "response": "ResponseModel",
+  "args": "IAPBuyRequestModel model"
+ },
+ "CanIAPAndAddToRestoreNeededIAPs": {
+  "request": "CanIAPAndAddToRestoreNeededIAPsRequestModel",
+  "response": "ResponseModel",
+  "args": "CanIAPAndAddToRestoreNeededIAPsRequestModel requestModel"
+ },
+ "BuyIAP": {
+  "request": "IAPBuyRequestModel",
+  "response": "BuyResponseModel",
+  "args": "IAPBuyRequestModel requestModel"
+ },
+ "RefreshDailyShop": {
+  "request": null,
+  "response": "ShopResponseModel",
+  "args": ""
+ },
+ "GetRestoreNeededIAPs": {
+  "request": null,
+  "response": "GetRestoreNeededIAPsResponseModel",
+  "args": ""
+ },
+ "RemoveFromRestoreNeededIAPs": {
+  "request": "RemoveFromRestoreNeededIAPsRequestModel",
+  "response": "ResponseModel",
+  "args": "RemoveFromRestoreNeededIAPsRequestModel requestModel"
+ },
+ "ChoicePackageUnit": {
+  "request": "ChoicePackageUnitRequestModel",
+  "response": "ResponseModel",
+  "args": "ChoicePackageUnitRequestModel model"
+ },
+ "ChoiceTreasurePickupCeil": {
+  "request": "ChoiceTreasurePickupCeilRequestModel",
+  "response": "ResponseModel",
+  "args": "ChoiceTreasurePickupCeilRequestModel model"
+ },
+ "SaveTreasureWishList": {
+  "request": "TreasureWishListRequestModel",
+  "response": "ResponseModel",
+  "args": "TreasureWishListRequestModel model"
+ },
+ "GetTreasureWishList": {
+  "request": null,
+  "response": "TreasureWishListResponseModel",
+  "args": ""
+ },
+ "CheckTreasureWishListValid": {
+  "request": "TreasureCheckWishListValidRequestModel",
+  "response": "ResponseModel",
+  "args": "TreasureCheckWishListValidRequestModel model"
+ },
+ "GetAllMissions": {
+  "request": null,
+  "response": "MissionResponseModel",
+  "args": ""
+ },
+ "CheckMission": {
+  "request": null,
+  "response": "MissionResponseModel",
+  "args": "List<string> condTypes"
+ },
+ "GetMissionRewardAll": {
+  "request": "MissionRewardRequestModel",
+  "response": "MissionRewardResponseModel",
+  "args": "MissionRewardRequestModel requestModel"
+ },
+ "GetMissionGoalReward": {
+  "request": null,
+  "response": "MissionRewardResponseModel",
+  "args": ""
+ },
+ "GetAllPosts": {
+  "request": null,
+  "response": "PostResponseModel",
+  "args": ""
+ },
+ "ReceivePost": {
+  "request": "PostReceiveRequestModel",
+  "response": "PostReceiveResponseModel",
+  "args": "PostReceiveRequestModel requestModel"
+ },
+ "LeftAccount": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "ChangeNickname": {
+  "request": "ChangeNicknameRequestModel",
+  "response": "ResponseModel",
+  "args": "ChangeNicknameRequestModel requestModel"
+ },
+ "AdLog": {
+  "request": "AdRequestModel",
+  "response": "AdLogResponseModel",
+  "args": "AdRequestModel requestModel"
+ },
+ "GetAccountTransferCode": {
+  "request": null,
+  "response": "TransferCodeResponseModel",
+  "args": ""
+ },
+ "AccountTransfer": {
+  "request": "TransferRequestModel",
+  "response": "TransferResponseModel",
+  "args": "TransferRequestModel requestModel"
+ },
+ "LinkAccount": {
+  "request": "TransferRequestModel",
+  "response": "TransferCodeResponseModel",
+  "args": "TransferRequestModel requestModel"
+ },
+ "FetchArtifactInventory": {
+  "request": null,
+  "response": "ArtifactInventoryResponseModel",
+  "args": ""
+ },
+ "ArtifactGachaTest": {
+  "request": "TestRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "ArtifactCrafting": {
+  "request": "ArtifactRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactRequestModel model"
+ },
+ "ArtifactMerge": {
+  "request": "ArtifactRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactRequestModel model"
+ },
+ "ArtifactDismantle": {
+  "request": "ArtifactDismantleRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactDismantleRequestModel model"
+ },
+ "ArtifactReroll": {
+  "request": "ArtifactRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactRequestModel model, bool useGold"
+ },
+ "ArtifactSmartReroll": {
+  "request": "ArtifactRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactRequestModel model"
+ },
+ "ArtifactFetchReroll": {
+  "request": null,
+  "response": "ArtifactResultResponseModel",
+  "args": ""
+ },
+ "ArtifactSetReroll": {
+  "request": "ArtifactRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactRequestModel model"
+ },
+ "ArtifactPolish": {
+  "request": "ArtifactRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactRequestModel model"
+ },
+ "ArtifactPolish_ReplaceOptionSlotIdx": {
+  "request": "ArtifactRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactRequestModel model"
+ },
+ "OpenCatalystBox": {
+  "request": "CatalystBoxRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "CatalystBoxRequestModel model"
+ },
+ "ArtifactEquip": {
+  "request": "ArtifactRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactRequestModel model"
+ },
+ "ArtifactSetFavorites": {
+  "request": "ArtifactRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactRequestModel model"
+ },
+ "ArtifactDevOptionSet": {
+  "request": "ArtifactDevOptionSetRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "ArtifactDevOptionSetRequestModel model"
+ },
+ "FetchSeasonPass": {
+  "request": null,
+  "response": "SeasonPassResponseModel",
+  "args": ""
+ },
+ "BuyLevel": {
+  "request": null,
+  "response": "SeasonPassBuyLevelResponseModel",
+  "args": ""
+ },
+ "ReceiveSeasonPassAllRewards": {
+  "request": "SeasonPassReceiveRewardRequestModel",
+  "response": "SeasonPassReceiveRewardResponseModel",
+  "args": "SeasonPassReceiveRewardRequestModel model"
+ },
+ "ReceiveReward": {
+  "request": "SeasonPassReceiveRewardRequestModel",
+  "response": "SeasonPassReceiveRewardResponseModel",
+  "args": "SeasonPassReceiveRewardRequestModel model"
+ },
+ "ReceiveBonusReward": {
+  "request": "SeasonPassReceiveRewardRequestModel",
+  "response": "SeasonPassReceiveRewardResponseModel",
+  "args": "SeasonPassReceiveRewardRequestModel model"
+ },
+ "FetchSeasonPassEventBooster": {
+  "request": null,
+  "response": "SeasonPassEventBoosterResponseModel",
+  "args": ""
+ },
+ "RerollPassMission": {
+  "request": "RerollPassMissionRequestModel",
+  "response": "RerollPassMissionResponseModel",
+  "args": "RerollPassMissionRequestModel model"
+ },
+ "FetchClan": {
+  "request": null,
+  "response": "ClanResponseModel",
+  "args": ""
+ },
+ "FetchOtherClan": {
+  "request": "ClanRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ClanRequestModel model"
+ },
+ "CreateClan": {
+  "request": "CreateClanRequestModel",
+  "response": "CreateClanResponseModel",
+  "args": "CreateClanRequestModel model"
+ },
+ "ClanNameCheck": {
+  "request": "CreateClanRequestModel",
+  "response": "ClanResponseModel",
+  "args": "CreateClanRequestModel model"
+ },
+ "LeaveClan": {
+  "request": null,
+  "response": "ClanResponseModel",
+  "args": ""
+ },
+ "BanClanMember": {
+  "request": "ClanRoleRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ClanRoleRequestModel model"
+ },
+ "DeleteClan": {
+  "request": null,
+  "response": "ClanResponseModel",
+  "args": ""
+ },
+ "RequestJoinClan": {
+  "request": "ClanRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ClanRequestModel model"
+ },
+ "ProcessRequestJoinClan": {
+  "request": null,
+  "response": "ClanResponseModel",
+  "args": "ProcessRequestJoinClanModel model"
+ },
+ "SearchClan": {
+  "request": "SearchClanRequestModel",
+  "response": "SearchClanResponseModel",
+  "args": "SearchClanRequestModel model"
+ },
+ "ClanChat": {
+  "request": "ClanChatRequestModel",
+  "response": "ClanChatResponseModel",
+  "args": "ClanChatRequestModel model"
+ },
+ "ClanRequestSupport": {
+  "request": null,
+  "response": "ClanResponseModel",
+  "args": "ClanRequestSupportModel model"
+ },
+ "ClanSupport": {
+  "request": "ClanChatSeqIdRequestModel",
+  "response": "ClanSupportResponseModel",
+  "args": "ClanChatSeqIdRequestModel model, bool all"
+ },
+ "ModifyClanMark": {
+  "request": "ModifyClanRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ModifyClanRequestModel model"
+ },
+ "ModifyClanName": {
+  "request": "ModifyClanRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ModifyClanRequestModel model"
+ },
+ "ModifyClanJoinType": {
+  "request": "ModifyClanRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ModifyClanRequestModel model"
+ },
+ "ModifyClanIntro": {
+  "request": "ModifyClanRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ModifyClanRequestModel model"
+ },
+ "ModifyClanNotice": {
+  "request": "ModifyClanRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ModifyClanRequestModel model"
+ },
+ "ModifyClanTag": {
+  "request": "ModifyClanRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ModifyClanRequestModel model"
+ },
+ "ChangeClanMaster": {
+  "request": "ClanRoleRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ClanRoleRequestModel model"
+ },
+ "MandateClanMaster": {
+  "request": "ClanRoleRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ClanRoleRequestModel model"
+ },
+ "ChangeClanMemberRole": {
+  "request": "ClanRoleRequestModel",
+  "response": "ClanResponseModel",
+  "args": "ClanRoleRequestModel model"
+ },
+ "ChangeClanRoleName": {
+  "request": "ChangeClanRoleNameRequestModel",
+  "response": "ResponseModel",
+  "args": "ChangeClanRoleNameRequestModel model"
+ },
+ "DeleteClanChat": {
+  "request": "ClanChatSeqIdRequestModel",
+  "response": "ClanChatResponseModel",
+  "args": "ClanChatSeqIdRequestModel model"
+ },
+ "RefreshClanChat": {
+  "request": null,
+  "response": "ClanChatResponseModel",
+  "args": ""
+ },
+ "GetCurrentSeq": {
+  "request": null,
+  "response": "ClanSeqResponseModel",
+  "args": ""
+ },
+ "FetchChat": {
+  "request": "ClanChatSeqIdRequestModel",
+  "response": "ClanChatResponseModel",
+  "args": "ClanChatSeqIdRequestModel model"
+ },
+ "ClanAttendanceCheck": {
+  "request": null,
+  "response": "ClanAttendanceResponseModel",
+  "args": ""
+ },
+ "GetClanPointRanking": {
+  "request": null,
+  "response": "ClanPointRankingResponseModel",
+  "args": "bool weekly"
+ },
+ "GetClanRanking": {
+  "request": null,
+  "response": "ClanRankingResponseModel",
+  "args": ""
+ },
+ "FetchClanRaid": {
+  "request": null,
+  "response": "ClanRaidResponseModel",
+  "args": ""
+ },
+ "EndClanRaid": {
+  "request": "ClanRaidEndBattleRequestModel",
+  "response": "ClanRaidResponseModel",
+  "args": "ClanRaidEndBattleRequestModel model"
+ },
+ "SetClanRaidDeckPreset": {
+  "request": "ClanRaidDeckRequestModel",
+  "response": "ResponseModel",
+  "args": "ClanRaidDeckRequestModel requestModel"
+ },
+ "DeleteClanRaidDeck": {
+  "request": null,
+  "response": "ClanRaidDeckInfoResponseModel",
+  "args": "int deckIdx"
+ },
+ "FetchClanRaidSupporters": {
+  "request": null,
+  "response": "ClanRaidSupportResponseModel",
+  "args": ""
+ },
+ "SetClanRaidDeckName": {
+  "request": null,
+  "response": "ClanRaidDeckInfoResponseModel",
+  "args": "int deckIdx, string deckName"
+ },
+ "SetClanRaidSupportUnit": {
+  "request": null,
+  "response": "ClanRaidSupporterSettingResponseModel",
+  "args": "int unitId"
+ },
+ "FetchClanRaidCurrentState": {
+  "request": null,
+  "response": "ClanRaidMemberDamageSumResponseModel",
+  "args": ""
+ },
+ "FetchClanRaidBestDecks": {
+  "request": null,
+  "response": "ClanRaidBestDeckResponseModel",
+  "args": ""
+ },
+ "TestResetRemainBattleCount": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestSetGoldBonus": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int goldBonusTier"
+ },
+ "TestSetBossKillCount": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int killCount"
+ },
+ "TestResetDeckSetCount": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestResetDeckBattleCount": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int idx"
+ },
+ "TestAccountClone": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string id"
+ },
+ "UseCoupon": {
+  "request": "CouponRequestModel",
+  "response": "ResponseModel",
+  "args": "CouponRequestModel model"
+ },
+ "FetchFlagInventory": {
+  "request": null,
+  "response": "FlagInventoryResponseModel",
+  "args": "int targetId = -1"
+ },
+ "FetchEquippedFlag": {
+  "request": null,
+  "response": "FlagResponseModel",
+  "args": "int targetId = -1"
+ },
+ "SetFlag": {
+  "request": "FlagRequestModel",
+  "response": "ResponseModel",
+  "args": "FlagRequestModel model"
+ },
+ "FetchNameTagInventory": {
+  "request": null,
+  "response": "NameTagInventoryResponseModel",
+  "args": ""
+ },
+ "SetNameTag": {
+  "request": "NameTagRequestModel",
+  "response": "ResponseModel",
+  "args": "NameTagRequestModel model"
+ },
+ "FetchDecorationInfo": {
+  "request": null,
+  "response": "PlayerDecorationInfoResponseModel",
+  "args": ""
+ },
+ "SetFavoriteMapSkin": {
+  "request": "SetFavoriteMapSkinRequestModel",
+  "response": "ResponseModel",
+  "args": "SetFavoriteMapSkinRequestModel model"
+ },
+ "BuyMapSkin": {
+  "request": "BuyMapSkinRequestModel",
+  "response": "BuyMapSkinResponseModel",
+  "args": "BuyMapSkinRequestModel model"
+ },
+ "EquipMapSkin": {
+  "request": "MapSkinRequestModel",
+  "response": "ResponseModel",
+  "args": "MapSkinRequestModel model"
+ },
+ "ContractAdvisor": {
+  "request": "AdvisorRequestModel",
+  "response": "AdvisorResponseModel",
+  "args": "AdvisorRequestModel model"
+ },
+ "ExtendAdvisor": {
+  "request": "AdvisorRequestModel",
+  "response": "AdvisorResponseModel",
+  "args": "AdvisorRequestModel model"
+ },
+ "EquipAdvisor": {
+  "request": "AdvisorRequestModel",
+  "response": "ResponseModel",
+  "args": "AdvisorRequestModel model"
+ },
+ "AdvisorTimeOut": {
+  "request": "AdvisorRequestModel",
+  "response": "ResponseModel",
+  "args": "AdvisorRequestModel model"
+ },
+ "EquipLoginSkin": {
+  "request": "LoginSkinRequestModel",
+  "response": "LoginSceneIllustDataResponseModel",
+  "args": "LoginSkinRequestModel model"
+ },
+ "GetInventory": {
+  "request": null,
+  "response": "InventoryResponseModel",
+  "args": ""
+ },
+ "UseInventory": {
+  "request": "UseInventoryRequestModel",
+  "response": "UseInventoryResponseModel",
+  "args": "UseInventoryRequestModel model"
+ },
+ "UseRewardBoxInventoryItem": {
+  "request": "UseRewardBoxInventoryItemRequestModel",
+  "response": "UseRewardBoxInventoryItemResponseModel",
+  "args": "UseRewardBoxInventoryItemRequestModel model"
+ },
+ "UseSkinBoxInventoryItem": {
+  "request": "UseSkinBoxInventoryItemRequestModel",
+  "response": "UseSkinBoxInventoryItemResponseModel",
+  "args": "UseSkinBoxInventoryItemRequestModel model"
+ },
+ "ReceiveSkinBoxAlternateReward": {
+  "request": "UseSkinBoxInventoryItemRequestModel",
+  "response": "UseSkinBoxInventoryItemResponseModel",
+  "args": "UseSkinBoxInventoryItemRequestModel model"
+ },
+ "SaveRogueLikeData": {
+  "request": "RogueLikeGameDataRequestModel",
+  "response": "ResponseModel",
+  "args": "RogueLikeGameDataRequestModel model"
+ },
+ "SaveRogueLikeOwnCardSnapshot": {
+  "request": "RogueLikeSaveOwnCardRequestModel",
+  "response": "ResponseModel",
+  "args": "RogueLikeSaveOwnCardRequestModel model"
+ },
+ "FetchRogueLikeSeasonInfo": {
+  "request": null,
+  "response": "RogueLikeSeasonInfoResponseModel",
+  "args": "int themeId"
+ },
+ "LoadRogueLikeData": {
+  "request": "RogueLikeLoadSaveDataRequestModel",
+  "response": "RogueLikeGameDataResponseModel",
+  "args": "RogueLikeLoadSaveDataRequestModel model"
+ },
+ "DeleteRogueLikeData": {
+  "request": "RogueLikeDeleteDataRequestModel",
+  "response": "DeleteRogueLikeDataResponseModel",
+  "args": "RogueLikeDeleteDataRequestModel model"
+ },
+ "GetRogueLikeRanking": {
+  "request": null,
+  "response": "RogueLikeRankingResponseModel",
+  "args": "int challenge = -1, bool useCache = True"
+ },
+ "GetRogueLikeBuildingRanking": {
+  "request": null,
+  "response": "RogueLikeRankingResponseModel",
+  "args": "int building, bool useCache = True"
+ },
+ "GetDimensionRiftRanking": {
+  "request": null,
+  "response": "RogueLikeRankingResponseModel",
+  "args": "bool useCache = True"
+ },
+ "RogueLikeRevive": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "bool useReviveCoupon, int themeId"
+ },
+ "RogueLikeCanReviveByAd": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int themeId"
+ },
+ "StartRogueLikeFloor": {
+  "request": "StartRogueLikeFloorRequestModel",
+  "response": "StartRogueLikeFloorResponseModel",
+  "args": "StartRogueLikeFloorRequestModel model"
+ },
+ "EndRogueLikeFloor": {
+  "request": "EndRogueLikeFloorRequestModel",
+  "response": "EndRogueLikeFloorResponseModel",
+  "args": "EndRogueLikeFloorRequestModel model"
+ },
+ "CheckDimensionRiftCompleteSuccess": {
+  "request": "GameCompleteRequestModel",
+  "response": "GameResponseModel",
+  "args": "GameCompleteRequestModel model"
+ },
+ "TestSetDimensionRiftRanking": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "GetRogueLikeOutGameData": {
+  "request": null,
+  "response": "RogueLikeOutGameDataResponseModel",
+  "args": "int themeId"
+ },
+ "CheckRogueLikeMission": {
+  "request": "RogueLikeMissionRequestModel",
+  "response": "RogueLikeMissionResponseModel",
+  "args": "RogueLikeMissionRequestModel model"
+ },
+ "CheckRogueLikeMissionOnClear": {
+  "request": null,
+  "response": "RogueLikeMissionResponseModel",
+  "args": "int themeId"
+ },
+ "GetAllRogueLikeMissions": {
+  "request": null,
+  "response": "RogueLikeMissionDataResponseModel",
+  "args": ""
+ },
+ "GetAllRogueLikeMissionsStatistics": {
+  "request": null,
+  "response": "RogueLikeMissionStatisticsResponseModel",
+  "args": ""
+ },
+ "GetUpdatedRogueLikeMissions": {
+  "request": null,
+  "response": "RogueLikeMissionDataResponseModel",
+  "args": ""
+ },
+ "UpdateRogueLikePlayCount": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int playCount"
+ },
+ "UpdateRogueLikeClearCount": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int clearCount"
+ },
+ "UpdateRogueLikeMissionClearCount": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int clearCount"
+ },
+ "ResetRogueLikeMission": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int missionId"
+ },
+ "ResetAllRogueLikeMission": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "SaveCustomPickups": {
+  "request": "CustomPickupsRequestModel",
+  "response": "ResponseModel",
+  "args": "CustomPickupsRequestModel model"
+ },
+ "LoadCustomPickups": {
+  "request": null,
+  "response": "CustomPickupsResponseModel",
+  "args": "int gachaId"
+ },
+ "FetchPlayerTerritory": {
+  "request": null,
+  "response": "PlayerTerritoryResponseModel",
+  "args": ""
+ },
+ "FetchTerritoryStatBuffs": {
+  "request": null,
+  "response": "TerritoryStatBuffPerResponseModel",
+  "args": ""
+ },
+ "TerritoryRecoverLabor": {
+  "request": null,
+  "response": "TerritoryRecoverLaborResponseModel",
+  "args": ""
+ },
+ "TerritoryCheckAttendance": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "BuildTerritoryBuilding": {
+  "request": "TerritoryBuildBuildingRequestModel",
+  "response": "TerritoryBuildBuildingResponseModel",
+  "args": "TerritoryBuildBuildingRequestModel model"
+ },
+ "RefreshTerritoryBuilding": {
+  "request": "TerritoryRefreshBuildingRequestModel",
+  "response": "TerritoryRefreshBuildingResponseModel",
+  "args": "TerritoryRefreshBuildingRequestModel model"
+ },
+ "StoreTerritoryBuilding": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int posIndex"
+ },
+ "UnStoreTerritoryBuilding": {
+  "request": null,
+  "response": "TerritoryBuildingResponseModel",
+  "args": "int buildingId, int posIndex"
+ },
+ "RemoveTerritoryBuilding": {
+  "request": null,
+  "response": "TerritoryCurrencyResponseModel",
+  "args": "int posIndex"
+ },
+ "ReplaceTerritoryBuilding": {
+  "request": "TerritoryReplaceBuildingRequestModel",
+  "response": "ResponseModel",
+  "args": "TerritoryReplaceBuildingRequestModel model"
+ },
+ "UpgradeTerritoryBuilding": {
+  "request": null,
+  "response": "TerritoryBuildBuildingResponseModel",
+  "args": "int posIndex"
+ },
+ "AssignUnitsToBuilding": {
+  "request": "AssignUnitsToBuildingRequestModel",
+  "response": "TerritoryAssignUnitsResponseModel",
+  "args": "AssignUnitsToBuildingRequestModel model"
+ },
+ "SwapAssignedUnitsFromBuildings": {
+  "request": "SwapAssignedUnitsFromBuildingsRequestModel",
+  "response": "SwapAssignedHeroesFromBuildingsResponseModel",
+  "args": "SwapAssignedUnitsFromBuildingsRequestModel model"
+ },
+ "TerritoryCollectLabor": {
+  "request": null,
+  "response": "TerritoryCollectLaborResponseModel",
+  "args": "int amount"
+ },
+ "AssignTerritoryLevelSync": {
+  "request": "AssignTerritoryLevelSyncRequestModel",
+  "response": "TerritoryLevelSyncResponseModel",
+  "args": "AssignTerritoryLevelSyncRequestModel model"
+ },
+ "ResetLevelSync": {
+  "request": "ResetTerritoryLevelSyncTimerRequestModel",
+  "response": "TerritoryAssignUnitsResponseModel",
+  "args": "ResetTerritoryLevelSyncTimerRequestModel model"
+ },
+ "TerritoryStartHunting": {
+  "request": "TerritoryHuntingRequestModel",
+  "response": "TerritoryStartHuntingResponseModel",
+  "args": "TerritoryHuntingRequestModel model"
+ },
+ "StopTerritoryHunting": {
+  "request": "TerritoryHuntingRequestModel",
+  "response": "TerritoryEndHuntingResponseModel",
+  "args": "TerritoryHuntingRequestModel model"
+ },
+ "CompleteImmediatelyTerritoryHunting": {
+  "request": "TerritoryHuntingRequestModel",
+  "response": "TerritoryEndHuntingResponseModel",
+  "args": "TerritoryHuntingRequestModel model"
+ },
+ "TerritoryEndHunting": {
+  "request": "TerritoryHuntingRequestModel",
+  "response": "TerritoryEndHuntingResponseModel",
+  "args": "TerritoryHuntingRequestModel model"
+ },
+ "FetchTerritoryHunting": {
+  "request": null,
+  "response": "TerritoryHuntingResponseModel",
+  "args": ""
+ },
+ "TerritoryAlchemy": {
+  "request": "TerritoryAlchemyRequestModel",
+  "response": "TerritoryAlchemyResponseModel",
+  "args": "TerritoryAlchemyRequestModel model"
+ },
+ "UpgradeImmediatelyTerritoryBuilding": {
+  "request": null,
+  "response": "TerritoryBuildBuildingResponseModel",
+  "args": "int posIndex, int territoryType"
+ },
+ "TerritoryBuyTradeShopItem": {
+  "request": "TerritoryBuyTradeShopItemRequestModel",
+  "response": "TerritoryBuyTradeShopItemResponseModel",
+  "args": "TerritoryBuyTradeShopItemRequestModel model"
+ },
+ "TerritoryClaimRestaurantReward": {
+  "request": null,
+  "response": "PlayerCurrenciesResponseModel",
+  "args": ""
+ },
+ "EquipTerritorySkin": {
+  "request": "TerritorySkinRequestModel",
+  "response": "ResponseModel",
+  "args": "TerritorySkinRequestModel model"
+ },
+ "TerritoryTycoonRecoverSeasonalEventToken": {
+  "request": null,
+  "response": "PlayerTerritoryTycoonResponseModel",
+  "args": ""
+ },
+ "TerritoryTycoonFetchTokenEventToken": {
+  "request": null,
+  "response": "TerritoryTycoonTokenResponseModel",
+  "args": ""
+ },
+ "TerritoryTycoonCheckAttendance": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TerritoryTycoonCollectGoldToken": {
+  "request": null,
+  "response": "TerritoryTycoonTokenResponseModel",
+  "args": "int amount"
+ },
+ "TerritoryTycoonFirework": {
+  "request": null,
+  "response": "TerritoryTycoonFireworkResponseModel",
+  "args": ""
+ },
+ "FetchPlayerColosseum": {
+  "request": null,
+  "response": "PlayerColosseumInfoResponseModel",
+  "args": ""
+ },
+ "FetchColosseumPlayersData": {
+  "request": null,
+  "response": "ColosseumPlayerDataResponseModel",
+  "args": "string gameId"
+ },
+ "FetchColosseumAddressByGameID": {
+  "request": null,
+  "response": "ColosseumMatchResponseModel",
+  "args": "string gameId"
+ },
+ "CheckColosseumReenterEndGame": {
+  "request": null,
+  "response": "ColosseumEndGameReenterResponseModel",
+  "args": "string gameId"
+ },
+ "RequestColosseumMatchmaking": {
+  "request": "ColosseumMatchRequestModel",
+  "response": "ResponseModel",
+  "args": "ColosseumMatchRequestModel model"
+ },
+ "ColosseumGetReward": {
+  "request": null,
+  "response": "RewardListResponseModel",
+  "args": "int index, int gameEndRewardIndex, string gameId, bool upgrade"
+ },
+ "ColosseumReceiveAllRewards": {
+  "request": "PvPReceiveRewardRequestModel",
+  "response": "PvPReceiveRewardResponseModel",
+  "args": "PvPReceiveRewardRequestModel model"
+ },
+ "GetColosseumOpenMissionReward": {
+  "request": null,
+  "response": "RewardListResponseModel",
+  "args": "int rewardIdx"
+ },
+ "GetColosseumRanking": {
+  "request": null,
+  "response": "ColosseumRankingResponseModel",
+  "args": "int season, bool useCache = False"
+ },
+ "GetColosseumLeagueRanking": {
+  "request": null,
+  "response": "LeagueRankingResponseModel",
+  "args": "int leagueSeason, bool useCache = False"
+ },
+ "GetColosseumHallOfFame": {
+  "request": null,
+  "response": "ColosseumRankingResponseModel",
+  "args": "int leagueSeason, bool useCache = False"
+ },
+ "GetChallengeModeRanking": {
+  "request": null,
+  "response": "ChallengeModeRankingResponseModel",
+  "args": "int season, bool useCache = False"
+ },
+ "ColosseumReenterTried": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string gameId"
+ },
+ "ColosseumReenterSucceed": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string gameId"
+ },
+ "ColosseumRecordMinimumRank": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string gameId, int rank"
+ },
+ "FetchColosseumStatisticsData": {
+  "request": null,
+  "response": "ColosseumStatisticsResponseModel",
+  "args": ""
+ },
+ "FetchColosseumLatestGamesLog": {
+  "request": "ColosseumLogRequestModel",
+  "response": "ColosseumLogResponseModel",
+  "args": "ColosseumLogRequestModel model"
+ },
+ "FetchColosseumGameLog": {
+  "request": "ColosseumLogRequestModel",
+  "response": "ColosseumLogResponseModel",
+  "args": "ColosseumLogRequestModel model"
+ },
+ "FetchPlayerTreasure": {
+  "request": null,
+  "response": "TreasureInventoryResponseModel",
+  "args": ""
+ },
+ "TreasureOvercome": {
+  "request": "TreasureRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TreasureRequestModel model"
+ },
+ "TreasureEquip": {
+  "request": "TreasureRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TreasureRequestModel model, bool useTicket"
+ },
+ "TreasureEquipTutorial": {
+  "request": "TreasureRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TreasureRequestModel model"
+ },
+ "TreasureReleaseEquip": {
+  "request": "TreasureRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TreasureRequestModel model"
+ },
+ "TreasureDismantle": {
+  "request": "TreasureDismantleRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TreasureDismantleRequestModel model"
+ },
+ "TreasureSetState": {
+  "request": "TreasureRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TreasureRequestModel model"
+ },
+ "TreasureAddExp": {
+  "request": "TreasureRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TreasureRequestModel model"
+ },
+ "FetchPlayerAccessory": {
+  "request": null,
+  "response": "AccessoryInventoryResponseModel",
+  "args": ""
+ },
+ "AccessoryEquip": {
+  "request": "AccessoryEquipRequestModel",
+  "response": "AccessoryResultResponseModel",
+  "args": "AccessoryEquipRequestModel model, bool useTicket"
+ },
+ "AccessoryEquipTutorial": {
+  "request": "AccessoryEquipRequestModel",
+  "response": "AccessoryResultResponseModel",
+  "args": "AccessoryEquipRequestModel model"
+ },
+ "AccessoryReleaseEquip": {
+  "request": "AccessoryRequestModel",
+  "response": "AccessoryResultResponseModel",
+  "args": "AccessoryRequestModel model"
+ },
+ "AccessoryDismantle": {
+  "request": "AccessoryDismantleRequestModel",
+  "response": "AccessoryResultResponseModel",
+  "args": "AccessoryDismantleRequestModel model"
+ },
+ "AccessorySetState": {
+  "request": "AccessorySetStateRequestModel",
+  "response": "AccessoryResultResponseModel",
+  "args": "AccessorySetStateRequestModel model"
+ },
+ "AccessoryAddExp": {
+  "request": "AccessoryRequestModel",
+  "response": "AccessoryResultResponseModel",
+  "args": "AccessoryRequestModel model"
+ },
+ "AccessoryChangeSubStat": {
+  "request": "AccessoryChangeSubStatRequestModel",
+  "response": "AccessoryResultResponseModel",
+  "args": "AccessoryChangeSubStatRequestModel model"
+ },
+ "FetchPlayerAccessoryPreset": {
+  "request": null,
+  "response": "AccessoryPresetResponseModel",
+  "args": ""
+ },
+ "AccessorySetPreset": {
+  "request": "AccessorySetPresetRequestModel",
+  "response": "AccessoryPresetResponseModel",
+  "args": "AccessorySetPresetRequestModel model"
+ },
+ "AccessorySetPresetName": {
+  "request": "AccessoryPresetNameRequestModel",
+  "response": "AccessoryPresetResponseModel",
+  "args": "AccessoryPresetNameRequestModel model"
+ },
+ "FetchPlayerSeasonalEventData": {
+  "request": null,
+  "response": "PlayerSeasonalEventDataResponseModel",
+  "args": ""
+ },
+ "FetchPlayerEventCardCollecting": {
+  "request": null,
+  "response": "PlayerEventCardCollectingResponseModel",
+  "args": ""
+ },
+ "EventCardGacha": {
+  "request": null,
+  "response": "EventCardGachaResponseModel",
+  "args": "bool isFreeGacha"
+ },
+ "EventCardCollectionReceiveReward": {
+  "request": "EventCardCollectionReceiveRewardRequestModel",
+  "response": "EventCardCollectionReceiveRewardResponseModel",
+  "args": "EventCardCollectionReceiveRewardRequestModel model"
+ },
+ "CollectEventCardToCollection": {
+  "request": "EventCardCollectingRequestModel",
+  "response": "PlayerEventCardCollectingResponseModel",
+  "args": "EventCardCollectingRequestModel model"
+ },
+ "ApplyEventCard": {
+  "request": "EventCardCollectingRequestModel",
+  "response": "PlayerEventCardCollectingResponseModel",
+  "args": "EventCardCollectingRequestModel model"
+ },
+ "ExchangeEventCard": {
+  "request": "EventCardExchangeRequestModel",
+  "response": "EventCardExchangeResponseModel",
+  "args": "EventCardExchangeRequestModel model"
+ },
+ "FetchInvasionRecords": {
+  "request": null,
+  "response": "InvasionRecordsResponseModel",
+  "args": ""
+ },
+ "FetchInvasionRewardDatas": {
+  "request": null,
+  "response": "InvasionRewardDatasResponseModel",
+  "args": ""
+ },
+ "ReceiveInvasionRewardAll": {
+  "request": "ReceiveInvasionRewardAllRequestModel",
+  "response": "ReceiveInvasionRewardResponseModel",
+  "args": "ReceiveInvasionRewardAllRequestModel model"
+ },
+ "ReceiveInvasionReward": {
+  "request": "ReceiveInvasionRewardRequestModel",
+  "response": "ReceiveInvasionRewardResponseModel",
+  "args": "ReceiveInvasionRewardRequestModel model"
+ },
+ "FetchPlayerBabel": {
+  "request": null,
+  "response": "BabelResponseModel",
+  "args": ""
+ },
+ "FetchRiftWeaponInventory": {
+  "request": null,
+  "response": "RiftWeaponInventoryResponseModel",
+  "args": ""
+ },
+ "RiftWeaponEquip": {
+  "request": "RiftWeaponRequestModel",
+  "response": "RiftWeaponResultResponseModel",
+  "args": "RiftWeaponRequestModel model"
+ },
+ "RiftWeaponReleaseEquip": {
+  "request": "RiftWeaponRequestModel",
+  "response": "RiftWeaponResultResponseModel",
+  "args": "RiftWeaponRequestModel model"
+ },
+ "RiftWeaponUpgrade": {
+  "request": "RiftWeaponRequestModel",
+  "response": "RiftWeaponResultResponseModel",
+  "args": "RiftWeaponRequestModel model"
+ },
+ "RiftWeaponReroll": {
+  "request": "RiftWeaponRequestModel",
+  "response": "RiftWeaponResultResponseModel",
+  "args": "RiftWeaponRequestModel model"
+ },
+ "RiftWeaponDismantle": {
+  "request": "RiftWeaponRequestModel",
+  "response": "RiftWeaponResultResponseModel",
+  "args": "RiftWeaponRequestModel model"
+ },
+ "RiftWeaponResetWeapon": {
+  "request": "RiftWeaponRequestModel",
+  "response": "RiftWeaponResultResponseModel",
+  "args": "RiftWeaponRequestModel model"
+ },
+ "RiftWeaponSetState": {
+  "request": "RiftWeaponRequestModel",
+  "response": "RiftWeaponResultResponseModel",
+  "args": "RiftWeaponRequestModel model"
+ },
+ "FetchRiftCrystalInventory": {
+  "request": null,
+  "response": "RiftCrystalInventoryResponseModel",
+  "args": ""
+ },
+ "RiftCrystalCharge": {
+  "request": "RiftCrystalRequestModel",
+  "response": "RiftCrystalResultResponseModel",
+  "args": "RiftCrystalRequestModel model"
+ },
+ "RiftCrystalDestroy": {
+  "request": "RiftCrystalRequestModel",
+  "response": "RiftCrystalResultResponseModel",
+  "args": "RiftCrystalRequestModel model"
+ },
+ "RiftCrystalSetState": {
+  "request": "RiftCrystalRequestModel",
+  "response": "RiftCrystalResultResponseModel",
+  "args": "RiftCrystalRequestModel model"
+ },
+ "BuyRiftGauge": {
+  "request": null,
+  "response": "RiftCrystalResultResponseModel",
+  "args": ""
+ },
+ "FetchShopEventCumulativePurchase": {
+  "request": null,
+  "response": "ShopEventCumulativePurchaseResponseModel",
+  "args": ""
+ },
+ "ClaimShopEventCumulativePurchaseReward": {
+  "request": "ShopEventCumulativePurchaseClaimRequestModel",
+  "response": "ShopEventCumulativePurchaseClaimResponseModel",
+  "args": "ShopEventCumulativePurchaseClaimRequestModel model"
+ },
+ "ExecuteTriggers": {
+  "request": "TriggerRequestModel",
+  "response": "ExecuteTriggerResponseModel",
+  "args": "TriggerRequestModel model"
+ },
+ "ExecuteSavedTriggers": {
+  "request": null,
+  "response": "ExecuteTriggerResponseModel",
+  "args": ""
+ },
+ "TestColosseumSinglePlay": {
+  "request": null,
+  "response": "ColosseumMatchResponseModel",
+  "args": ""
+ },
+ "TestColosseumFreeMatching": {
+  "request": null,
+  "response": "ColosseumMatchResponseModel",
+  "args": "int botNum"
+ },
+ "PingColosseumMatchingResult": {
+  "request": null,
+  "response": "ColosseumMatchResponseModel",
+  "args": ""
+ },
+ "CancelColosseumMatching": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "CreateColosseumCustomMatch": {
+  "request": null,
+  "response": "ColosseumCustomMatchResponseModel",
+  "args": ""
+ },
+ "JoinColosseumCustomMatch": {
+  "request": null,
+  "response": "ColosseumCustomMatchResponseModel",
+  "args": "string matchId"
+ },
+ "SaveColosseumRoundData": {
+  "request": "SaveColosseumRoundDataRequestModel",
+  "response": "ResponseModel",
+  "args": "SaveColosseumRoundDataRequestModel model, string gameId"
+ },
+ "SaveCompleteColosseumRoundData": {
+  "request": "SaveCompleteColosseumRoundDataRequestModel",
+  "response": "ResponseModel",
+  "args": "SaveCompleteColosseumRoundDataRequestModel model"
+ },
+ "CompleteCustomEvent": {
+  "request": "CustomEventRequestModel",
+  "response": "ResponseModel",
+  "args": "CustomEventRequestModel model"
+ },
+ "KGMarbleData": {
+  "request": null,
+  "response": "KGMarbleResponseModel",
+  "args": ""
+ },
+ "KGMarbleRollDice": {
+  "request": "KGMarbleRequestModel",
+  "response": "KGMarbleResponseModel",
+  "args": "KGMarbleRequestModel model"
+ },
+ "KGMarbleExecuteEvent": {
+  "request": "KGMarbleRequestModel",
+  "response": "KGMarbleResponseModel",
+  "args": "KGMarbleRequestModel model"
+ },
+ "KGMarbleSetPlayer": {
+  "request": "KGMarbleRequestModel",
+  "response": "KGMarbleResponseModel",
+  "args": "KGMarbleRequestModel model"
+ },
+ "KGMarbleGetReward": {
+  "request": "KGMarbleRequestModel",
+  "response": "KGMarbleResponseModel",
+  "args": "KGMarbleRequestModel model"
+ },
+ "GetUnitStatistics": {
+  "request": null,
+  "response": "UnitStatisticsResponseModel",
+  "args": "int unitId, bool forceRefresh = False"
+ },
+ "FetchKGWiki": {
+  "request": null,
+  "response": "KGWikiResponseModel",
+  "args": ""
+ },
+ "KGWikiInsertWiki": {
+  "request": "KGWikiRequestModel",
+  "response": "KGWikiResponseModel",
+  "args": "KGWikiRequestModel model"
+ },
+ "RiftWeaponArchive": {
+  "request": "KGWikiRequestModel",
+  "response": "RiftWeaponResultResponseModel",
+  "args": "KGWikiRequestModel model"
+ },
+ "RiftWeaponArchiveDelete": {
+  "request": "KGWikiRequestModel",
+  "response": "KGWikiResponseModel",
+  "args": "KGWikiRequestModel model"
+ },
+ "StoryModeLoadGameData": {
+  "request": null,
+  "response": "StoryModeResponseModel",
+  "args": ""
+ },
+ "StoryModeSaveGameData": {
+  "request": "StoryModeRequestModel",
+  "response": "ResponseModel",
+  "args": "StoryModeRequestModel model"
+ },
+ "StoryModeDeleteGameData": {
+  "request": "StoryModeRequestModel",
+  "response": "ResponseModel",
+  "args": "StoryModeRequestModel model"
+ },
+ "StoryModeClaimChestReward": {
+  "request": "StoryModeChestRewardRequestModel",
+  "response": "ResponseModel",
+  "args": "StoryModeChestRewardRequestModel model"
+ },
+ "FetchChallengeMode": {
+  "request": null,
+  "response": "ChallengeModeResponseModel",
+  "args": ""
+ },
+ "ChallengeModeReward": {
+  "request": "ChallengeModeRequestModel",
+  "response": "ChallengeModeResponseModel",
+  "args": "ChallengeModeRequestModel model"
+ },
+ "TerritoryAddLabor": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "TerritoryAddCore": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "TerritoryBuildingSetTime": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "TerritoryHuntingSetTime": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "TerritoryHuntingSetId": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "TerritoryRefreshFlagTime": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TerritorySetLastLaborAt": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TerritorySetLastTokenAt": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "TerritoryClearTradeShopBuyLimit": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TerritorySetLevelSyncUntilAt": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int buildingId, int posIndex, int unitId"
+ },
+ "AddExp": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "AddGold": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "AddCash": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "AddHeart": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "AddCard": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "AddCardExp": {
+  "request": "DeckRequestModel",
+  "response": "ResponseModel",
+  "args": "DeckRequestModel requestModel"
+ },
+ "AddRanking": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "RegisterPvPDeckPool": {
+  "request": "PvPDeckPoolRequestModel",
+  "response": "ResponseModel",
+  "args": "PvPDeckPoolRequestModel requestModel"
+ },
+ "FetchPvPDeck": {
+  "request": "TestRequestModel",
+  "response": "PvPMatchResponseModel",
+  "args": "TestRequestModel requestModel"
+ },
+ "FetchEventPackageShopInfo": {
+  "request": null,
+  "response": "ShopResponseModel",
+  "args": ""
+ },
+ "TestResetLastLogin": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestSetClanScore": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int score"
+ },
+ "TestSetClanGoldBonus": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int clanBonus, int clanV2Bonus"
+ },
+ "TestResetCustomGrowthPackage": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestResetDailyShopRefreshCount": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "DevSetUnitBundlePackageUntilAt": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestSetArtifactPolishPoint": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestSetLastLogined": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestSetReturnAttendanceDay": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestSetReturnEventEnd": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestAddFixArtifact": {
+  "request": "TestFixArtifactRequestModel",
+  "response": "ArtifactResultResponseModel",
+  "args": "TestFixArtifactRequestModel model"
+ },
+ "TestAddTreasure": {
+  "request": "TestRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestTreasureCoolTime": {
+  "request": "TestRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestAddAccessories": {
+  "request": "TestRequestModel",
+  "response": "AccessoryResultResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestAddAllConsumable": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestAccessoryCoolTime": {
+  "request": "TestRequestModel",
+  "response": "AccessoryResultResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestAccessoryMigration": {
+  "request": null,
+  "response": "AccessoryResultResponseModel",
+  "args": "int accessoryUID"
+ },
+ "TestAddFixAccessory": {
+  "request": null,
+  "response": "AccessoryResultResponseModel",
+  "args": "AccessoryModel accessoryModel, int generateCount"
+ },
+ "TestAccessoryFullData": {
+  "request": null,
+  "response": "AccessoryResultResponseModel",
+  "args": "int accessoryUID"
+ },
+ "TestAccessoryStatSave": {
+  "request": "AccessoryTestStatRequestModel",
+  "response": "AccessoryResultResponseModel",
+  "args": "AccessoryTestStatRequestModel model"
+ },
+ "TestSetJourneyRewardRemainTime": {
+  "request": "TestRequestModel",
+  "response": "JourneyRewardResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestResetFourthYearEvent": {
+  "request": null,
+  "response": "FourthYearEventResponseModel",
+  "args": ""
+ },
+ "TestResetFourthYearEventPass": {
+  "request": null,
+  "response": "FourthYearEventResponseModel",
+  "args": ""
+ },
+ "TestSetFourthYearDay": {
+  "request": null,
+  "response": "FourthYearEventResponseModel",
+  "args": "bool isPassDay, int day"
+ },
+ "TestResetYearEvent": {
+  "request": null,
+  "response": "FifthHalfYearEventResponseModel",
+  "args": ""
+ },
+ "TestSetYearEventAttendanceDay": {
+  "request": null,
+  "response": "FifthHalfYearEventResponseModel",
+  "args": "int lastRewardDay, int day, bool isContinuous"
+ },
+ "TestResetSurpriseAttendanceEvent": {
+  "request": null,
+  "response": "SurpriseAttendanceEventResponseModel",
+  "args": ""
+ },
+ "TestSetSurpriseAttendanceDay": {
+  "request": null,
+  "response": "SurpriseAttendanceEventResponseModel",
+  "args": "int lastRewardDay, int day, bool isContinuous"
+ },
+ "DevDeleteAllPassMissions": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "DevAddPassMission": {
+  "request": null,
+  "response": "DevAddPassMissionResponseModel",
+  "args": "int missionId"
+ },
+ "DevResetCustomPickups": {
+  "request": null,
+  "response": "CustomPickupsResponseModel",
+  "args": "int gachaId"
+ },
+ "TestResetCumulativePurchaseEvent": {
+  "request": null,
+  "response": "ShopEventCumulativePurchaseResponseModel",
+  "args": "int eventId"
+ },
+ "TestSetCumulativePurchaseEventItemCount": {
+  "request": null,
+  "response": "ShopEventCumulativePurchaseResponseModel",
+  "args": "int eventId, int itemCount"
+ },
+ "TestSetStockEventTimeOffset": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "long offsetMillis, bool force = False"
+ },
+ "TestForceRefreshStockEventRanking": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestResetStockEventPlayerState": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "DevSetInvasionSkipCount": {
+  "request": "TestRequestModel",
+  "response": "GameSkipInfoResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "DevSetBabelStage": {
+  "request": null,
+  "response": "BabelResponseModel",
+  "args": "int babelId, int stage"
+ },
+ "TestClearStarterMission": {
+  "request": "TestRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestResetStarterMission": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestClearRepeatedMission": {
+  "request": "TestRequestModel",
+  "response": "TreasureResultResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestResetRepeatedMission": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int type"
+ },
+ "DevSetEventCardPoint": {
+  "request": null,
+  "response": "EventCardGachaResponseModel",
+  "args": "int point"
+ },
+ "TestRiftWeapon": {
+  "request": "TestRequestModel",
+  "response": "RiftCrystalResultResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "GetDevServers": {
+  "request": null,
+  "response": "ServerListResponse",
+  "args": ""
+ },
+ "GetDefaultInfraRankingServer": {
+  "request": null,
+  "response": "ServerListResponse",
+  "args": "bool useReplica"
+ },
+ "TestArenaTopmostDeck": {
+  "request": null,
+  "response": "TestGetDeckResponseModel",
+  "args": ""
+ },
+ "TestColosseumTopmostDeck": {
+  "request": null,
+  "response": "TestGetDeckResponseModel",
+  "args": ""
+ },
+ "TestChallengeTopmostDeck": {
+  "request": null,
+  "response": "TestGetDeckResponseModel",
+  "args": ""
+ },
+ "TestKGMarbleRequest": {
+  "request": "TestRequestModel",
+  "response": "KGMarbleResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestTerritoryResetRestaurant": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": ""
+ },
+ "TestStoryRequest": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel model"
+ }
+}

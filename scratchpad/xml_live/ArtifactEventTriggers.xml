@@ -1,0 +1,387 @@
+<!-- 유물 이벤트 트리거는 4 뒤에 유물 ID를 붙인다. -->
+
+<EventTriggers>
+	<EventTrigger ID="410001">
+		<Comment>제국의 대검</Comment>
+		<DescComment>모든 유닛의 공격력 20% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410001"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410002">
+		<Comment>킹 제국의 대검</Comment>
+		<DescComment>모든 유닛의 공격력 40% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410002"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410003">
+		<Comment>갓 제국의 대검</Comment>
+		<DescComment>모든 유닛의 공격력 60% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410003"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410004">
+		<Comment>킹갓 제국의 대검</Comment>
+		<DescComment>모든 유닛의 공격력 80% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410004"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="410011">
+		<Comment>왕국의 갑옷</Comment>
+		<DescComment>모든 유닛의 체력 20% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410011"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410012">
+		<Comment>킹 왕국의 갑옷</Comment>
+		<DescComment>모든 유닛의 체력 40% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410012"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410013">
+		<Comment>갓 왕국의 갑옷</Comment>
+		<DescComment>모든 유닛의 체력 60% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410013"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410014">
+		<Comment>킹갓 왕국의 갑옷</Comment>
+		<DescComment>모든 유닛의 체력 80% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410014"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="410021">
+		<Comment>영원숲의 활</Comment>
+		<DescComment>모든 유닛의 공격속도 20% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410021"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410022">
+		<Comment>킹 영원숲의 활</Comment>
+		<DescComment>모든 유닛의 공격속도 40% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410022"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410023">
+		<Comment>갓 영원숲의 활</Comment>
+		<DescComment>모든 유닛의 공격속도 60% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410023"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410024">
+		<Comment>킹갓 영원숲의 활</Comment>
+		<DescComment>모든 유닛의 공격속도 80% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410024"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="410031">
+		<Comment>설원의 지팡이</Comment>
+		<DescComment>모든 유닛의 주문력 20% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410031"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410032">
+		<Comment>킹 설원의 지팡이</Comment>
+		<DescComment>모든 유닛의 주문력 40% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410032"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410033">
+		<Comment>갓 설원의 지팡이</Comment>
+		<DescComment>모든 유닛의 주문력 60% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410033"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="410034">
+		<Comment>킹갓 설원의 지팡이</Comment>
+		<DescComment>모든 유닛의 주문력 80% 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="ClearUnitBuffs"/>
+				<Event Type="AddBuffToSelf" Value="410034"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	
+	<EventTrigger ID="413171">
+		<Comment>중원의 서약</Comment>
+		<DescComment>서로 다른 중부 영웅의 수(n)만큼 모든 영웅의 공격 횟수 +1, 피해량 +(6 * n)%, 방어력 +(25 * n)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413171"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413172">
+		<Comment>킹 중원의 서약</Comment>
+		<DescComment>서로 다른 중부 영웅의 수(n)만큼 모든 영웅의 공격 횟수 +1, 피해량 +(9 * n)%, 방어력 +(50 * n)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413172"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413173">
+		<Comment>갓 중원의 서약</Comment>
+		<DescComment>서로 다른 중부 영웅의 수(n)만큼 모든 영웅의 공격 횟수 +1, 피해량 +(12 * n)%, 방어력 +(75 * n)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413173"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413174">
+		<Comment>킹갓 중원의 서약</Comment>
+		<DescComment>서로 다른 중부 영웅의 수(n)만큼 모든 영웅의 공격 횟수 +1, 피해량 +(15 * n)%, 방어력 +(100 * n)</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413174"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="413181">
+		<Comment>천상의 잔</Comment>
+		<DescComment>서로 다른 남부 영웅의 수(n)만큼 모든 영웅에게 절대 방어 추가, 아군이 절대방어를 잃을 때마다 피해량 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413181"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413182">
+		<Comment>킹 천상의 잔</Comment>
+		<DescComment>서로 다른 남부 영웅의 수(n)만큼 모든 영웅에게 절대 방어 추가, 아군이 절대방어를 잃을 때마다 피해량 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413182"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413183">
+		<Comment>갓 천상의 잔</Comment>
+		<DescComment>서로 다른 남부 영웅의 수(n)만큼 모든 영웅에게 절대 방어 추가, 아군이 절대방어를 잃을 때마다 피해량 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413183"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413184">
+		<Comment>킹갓 천상의 잔</Comment>
+		<DescComment>서로 다른 남부 영웅의 수(n)만큼 모든 영웅에게 절대 방어 추가, 아군이 절대방어를 잃을 때마다 피해량 증가</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413184"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="413191">
+		<Comment>차가운 뼈의 유산</Comment>
+		<DescComment>서로 다른 북부 영웅의 수(n)만큼 (2 + n)초간 모든 영웅 상태이상 면역 및 받는 피해 30% 감소</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413191"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413192">
+		<Comment>킹 차가운 뼈의 유산</Comment>
+		<DescComment>서로 다른 북부 영웅의 수(n)만큼 (2 + n)초간 모든 영웅 상태이상 면역 및 받는 피해 40% 감소</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413192"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413193">
+		<Comment>갓 차가운 뼈의 유산</Comment>
+		<DescComment>서로 다른 북부 영웅의 수(n)만큼 (2 + n)초간 모든 영웅 상태이상 면역 및 받는 피해 50% 감소</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413193"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413194">
+		<Comment>킹갓 차가운 뼈의 유산</Comment>
+		<DescComment>서로 다른 북부 영웅의 수(n)만큼 (2 + n)초간 모든 영웅 상태이상 면역 및 받는 피해 60% 감소</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413194"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="413201">
+		<Comment>오행의 종</Comment>
+		<DescComment>서로 다른 동부 영웅의 수(n)만큼 (10 - n)초 후 모든 영웅 체력 +20%, 공격력/주문력 +60%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413201"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413202">
+		<Comment>킹 오행의 종</Comment>
+		<DescComment>서로 다른 동부 영웅의 수(n)만큼 (10 - n)초 후 모든 영웅 체력 +40%, 공격력/주문력 +90%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413202"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413203">
+		<Comment>갓 오행의 종</Comment>
+		<DescComment>서로 다른 동부 영웅의 수(n)만큼 (10 - n)초 후 모든 영웅 체력 +60%, 공격력/주문력 +120%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413203"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413204">
+		<Comment>킹갓 오행의 종</Comment>
+		<DescComment>서로 다른 동부 영웅의 수(n)만큼 (10 - n)초 후 모든 영웅 체력 +80%, 공격력/주문력 +150%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413204"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+	<EventTrigger ID="413211">
+		<Comment>자연의 규칙</Comment>
+		<DescComment>서로 다른 서부 영웅의 수(n)만큼 전방 2열 영웅의 최종 받는 피해량 -4 * n%
+						후방 2열 영웅의 최종 주는 피해량 +3 * n%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413211"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413212">
+		<Comment>킹 자연의 규칙</Comment>
+		<DescComment>서로 다른 서부 영웅의 수(n)만큼 전방 2열 영웅의 최종 받는 피해량 -6 * n%
+			후방 2열 영웅의 최종 주는 피해량 +4 * n%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413212"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413213">
+		<Comment>갓 자연의 규칙</Comment>
+		<DescComment>서로 다른 서부 영웅의 수(n)만큼 전방 2열 영웅의 최종 받는 피해량 -8 * n%
+			후방 2열 영웅의 최종 주는 피해량 +5 * n%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413213"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+	<EventTrigger ID="413214">
+		<Comment>킹갓 자연의 규칙</Comment>
+		<DescComment>서로 다른 서부 영웅의 수(n)만큼 전방 2열 영웅의 최종 받는 피해량 -10 * n%
+			후방 2열 영웅의 최종 주는 피해량 +6 * n%</DescComment>
+		<PlayerUnitEvents>
+			<EventTrigger>
+				<Trigger Type="StartBattle"/>
+				<Event Type="AddBuffToSelf" Value="413214"/>
+			</EventTrigger>
+		</PlayerUnitEvents>
+	</EventTrigger>
+
+    <EventTrigger ID="415014">
+        <Comment>계승자의 휘장</Comment>
+        <DescComment>습격 및 원정에서 선발 영웅의 공격속도 +40% (선발 영웅이 없을 경우 효과없음)</DescComment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="415014"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+</EventTriggers>

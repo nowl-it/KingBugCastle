@@ -1,0 +1,695 @@
+<!-- xml 정보
+	ID 사용 범위 : 10000 ~ 39999
+	ID 규칙 : 
+		(1) x0000 : 희귀도 (1 ~ 3)
+		(2) 0x000 : 한정판 여부 (천의 자리가 5 이상이면 한정) -> LimitedEdition 태그 true 사용
+		(3) 00xxx : 인덱스 (000 ~ 999)
+		
+	필드 구성 :
+		(1) <ID>
+		(2) <Name> (default : TreasureName_{ID})
+		(3) <SubName> (default : TreasureSubName_{ID})
+		(4) <Desc> (default : TreasureDesc_{ID})
+		(5) <SkillDesc> (default : TreasureSkillDesc_{ID})
+		(6) <SkillIcon> (default : TreasureSkillIcon_{ID})
+		(7) <Comment> (not used)
+		(8) <Role> (default : None)
+		(9) <Rarity> (default : None)
+		(10) <BuffDataStartID>
+		(11) <IconName> (default : TreasureIcon_{ID})
+		(12) <IllustName> (default : TreasureIllust_{ID})
+		(13) <CardIllustName> (default : TreasureCardIllust_{ID})
+		(14) <CardIllustFrame>
+			if targetRole != none => (default : Treasure_Frame_{(int)rarity - 1}_{targetRole})
+			else => (default : Treasure_Frame_{(int)rarity - 1})
+		(15) <MinVersion>
+		(16) <Color> (default: FFFFFF)
+		(17) <SubNameColor> (default: FFFFFF)
+		(18) <LimitedEdition> (default: false)
+		(19) <CanGacha> (default: true)
+		
+-->
+<Treasures>
+	<Treasure ID="10000">
+		<Comment>검은 갑옷</Comment>
+		<Rarity>Common</Rarity>
+		<BuffDataStartID>3100000</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+	
+	<Treasure ID="10001">
+		<Comment>녹슨 검</Comment>
+		<Rarity>Common</Rarity>
+		<BuffDataStartID>3100010</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+	
+	<Treasure ID="10002">
+		<Comment>수습 지팡이</Comment>
+		<Rarity>Common</Rarity>
+		<BuffDataStartID>3100020</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="10003">
+		<Comment>대련용 목검</Comment>
+		<Rarity>Common</Rarity>
+		<BuffDataStartID>3100030</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="10004">
+		<Comment>허수아비</Comment>
+		<Rarity>Common</Rarity>
+		<BuffDataStartID>3100040</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="10005">
+		<Comment>겨울호수 팔찌</Comment>
+		<Rarity>Common</Rarity>
+		<BuffDataStartID>3100050</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="10006">
+		<Comment>어금니 목걸이</Comment>
+		<Rarity>Common</Rarity>
+		<BuffDataStartID>3100060</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="20000">
+		<Comment>그림자 단검</Comment>
+		<Rarity>Rare</Rarity>
+		<BuffDataStartID>3200000</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="20001">
+		<Comment>거인의 도끼</Comment>
+		<Rarity>Rare</Rarity>
+		<BuffDataStartID>3200010</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="20002">
+		<Comment>중부 대검</Comment>
+		<Rarity>Rare</Rarity>
+		<BuffDataStartID>3200020</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="20003">
+		<Comment>진격의 북</Comment>
+		<Rarity>Rare</Rarity>
+		<BuffDataStartID>3200030</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="20004">
+		<Comment>마법 갑주</Comment>
+		<Rarity>Rare</Rarity>
+		<BuffDataStartID>3200040</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="20005">
+		<Comment>기사단 깃발</Comment>
+		<Rarity>Rare</Rarity>
+		<BuffDataStartID>3200050</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="20006">
+		<Comment>징벌의 망치</Comment>
+		<Rarity>Rare</Rarity>
+		<BuffDataStartID>3200060</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="20007">
+		<Comment>노장의 전술서</Comment>
+		<Rarity>Rare</Rarity>
+		<BuffDataStartID>3200070</BuffDataStartID>
+		<Color>8381EE</Color>
+	</Treasure>
+
+	<Treasure ID="20099">
+		<Comment>차원의 균열 보정 보구</Comment>
+		<Rarity>Rare</Rarity>
+		<BuffDataStartID>3200990</BuffDataStartID>
+		<Color>8381EE</Color>
+		<CanGacha>false</CanGacha>
+		<ExtraDefault>true</ExtraDefault>
+		<KGWikiCollectable>false</KGWikiCollectable>
+	</Treasure>
+
+	<Treasure ID="30000">
+		<Comment>엘로스(Elos) - 영원의 활</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Swift</Role>
+		<BuffDataStartID>3300000</BuffDataStartID>
+		<RecommendedUnitIds>10320</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>68EEBC</SubNameColor>
+	</Treasure>
+
+	<Treasure ID="30001">
+		<Comment>혈화 - 피의 검</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Shadow</Role>
+		<BuffDataStartID>3300010</BuffDataStartID>
+		<RecommendedUnitIds>10280</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>EB4860</SubNameColor>
+	</Treasure>
+
+	<Treasure ID="30002">
+		<Comment>맹세 - 수호의 성물</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Mystic</Role>
+		<BuffDataStartID>3300020</BuffDataStartID>
+		<RecommendedUnitIds>10230,10510,10560</RecommendedUnitIds>
+		<WishListRecommendPriority>1</WishListRecommendPriority>
+		<Color>8381EE</Color>
+		<SubNameColor>FEEEAA</SubNameColor>
+	</Treasure>
+
+	<Treasure ID="30003">
+		<Comment>뮤어(Mur) - 불굴의 방패</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Toughness</Role>
+		<BuffDataStartID>3300030</BuffDataStartID>
+		<RecommendedUnitIds>10500</RecommendedUnitIds>
+		<WishListRecommendPriority>2</WishListRecommendPriority>
+		<Color>8381EE</Color>
+		<SubNameColor>B7BFD4</SubNameColor>
+	</Treasure>
+
+	<Treasure ID="30004">
+		<Comment>청수 - 현무의 보주</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Element</Role>
+		<BuffDataStartID>3300040</BuffDataStartID>
+		<RecommendedUnitIds>10200</RecommendedUnitIds>
+		<WishListRecommendPriority>1</WishListRecommendPriority>
+		<Color>8381EE</Color>
+		<SubNameColor>C27FFB</SubNameColor>
+	</Treasure>
+
+	<Treasure ID="30005">
+		<Comment>희망 - 용기의 빛</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Brave</Role>
+		<BuffDataStartID>3300050</BuffDataStartID>
+		<RecommendedUnitIds>10210,10620</RecommendedUnitIds>
+		<WishListRecommendPriority>2</WishListRecommendPriority>
+		<Color>8381EE</Color>
+		<SubNameColor>FEA06B</SubNameColor>
+	</Treasure>
+
+	<Treasure ID="30006">
+		<Comment>영원한 심장 - 핏빛 구체</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Shadow</Role>
+		<BuffDataStartID>3300060</BuffDataStartID>
+		<RecommendedUnitIds>10490</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>EB4860</SubNameColor>
+		<CardIllustOffsetX>-30</CardIllustOffsetX>
+	</Treasure>
+
+	<Treasure ID="30007">
+		<Comment>아니마노미콘 - 황금의 고서</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Mystic</Role>
+		<BuffDataStartID>3300070</BuffDataStartID>
+		<RecommendedUnitIds>10630</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>FEEEAA</SubNameColor>
+		
+		<MinVersion>571</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30008">
+		<Comment>끝없는 탐식 - 공허의 대검</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Toughness</Role>
+		<BuffDataStartID>3300080</BuffDataStartID>
+		<RecommendedUnitIds>10640</RecommendedUnitIds>
+		<WishListRecommendPriority>1</WishListRecommendPriority>
+		<Color>8381EE</Color>
+		<SubNameColor>B7BFD4</SubNameColor>
+
+		<MinVersion>589</MinVersion>
+	</Treasure>
+	
+	<Treasure ID="30009">
+		<Comment>화우 - 흩날리는 불화살</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Swift</Role>
+		<BuffDataStartID>3300090</BuffDataStartID>
+		<RecommendedUnitIds>10110</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>68EEBC</SubNameColor>
+		
+		<RecommendedUnitIds>10110</RecommendedUnitIds>
+
+		<MinVersion>601</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30010">
+		<Comment>괴력의 룬 - 대지의 문양</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Element</Role>
+		<BuffDataStartID>3300100</BuffDataStartID>
+		<RecommendedUnitIds>10660</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>C27FFB</SubNameColor>
+
+		<MinVersion>608</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30011">
+		<Comment>블랙메인 - 불굴의 깃발</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Brave</Role>
+		<BuffDataStartID>3300110</BuffDataStartID>
+		<RecommendedUnitIds>10670</RecommendedUnitIds>
+		<WishListRecommendPriority>1</WishListRecommendPriority>
+		<Color>8381EE</Color>
+		<SubNameColor>FEA06B</SubNameColor>
+		<CardIllustOffsetX>30</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+
+		<MinVersion>-1</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30012">
+		<Comment>야성 - 들끓는 피</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Shadow</Role>
+		<BuffDataStartID>3300120</BuffDataStartID>
+		<RecommendedUnitIds>10120</RecommendedUnitIds>
+		<WishListRecommendPriority>1</WishListRecommendPriority>
+		<Color>2E30C8</Color>
+		<SubNameColor>EB4860</SubNameColor>
+
+		<MinVersion>-1</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30013">
+		<Comment>필라카스 - 공허의 눈</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Toughness</Role>
+		<BuffDataStartID>3300130</BuffDataStartID>
+		<RecommendedUnitIds>10680</RecommendedUnitIds>
+		<Color>2E30C8</Color>
+		<SubNameColor>B7BFD4</SubNameColor>
+
+		<MinVersion>-1</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30014">
+		<Comment>메이르나</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Swift</Role>
+		<BuffDataStartID>3300140</BuffDataStartID>
+		<RecommendedUnitIds>10690</RecommendedUnitIds>
+		<WishListRecommendPriority>1</WishListRecommendPriority>
+		<Color>8381EE</Color>
+		<SubNameColor>68EEBC</SubNameColor>
+		<CardIllustOffsetX>-30</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+
+		<MinVersion>-1</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30015">
+		<Comment>우르카브 - 혼령의 창</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Mystic</Role>
+		<BuffDataStartID>3300150</BuffDataStartID>
+		<RecommendedUnitIds>10180</RecommendedUnitIds>
+		<WishListRecommendPriority>2</WishListRecommendPriority>
+		<Color>8381EE</Color>
+		<SubNameColor>FEEEAA</SubNameColor>
+
+		<MinVersion>-1</MinVersion>
+	</Treasure>
+	
+	<Treasure ID="30016">
+		<Comment>베일리온 - 끝없는 힘의 대검</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Shadow</Role>
+		<BuffDataStartID>3300160</BuffDataStartID>
+		<RecommendedUnitIds>10700</RecommendedUnitIds>
+		<WishListRecommendPriority>2</WishListRecommendPriority>
+		<Color>8381EE</Color>
+		<SubNameColor>EB4860</SubNameColor>
+		<CardIllustOffsetX>-30</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+
+		<MinVersion>654</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30017">
+		<Comment>이실리안</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Mystic</Role>
+		<BuffDataStartID>3300170</BuffDataStartID>
+	    <RecommendedUnitIds>10710</RecommendedUnitIds>		
+		<Color>8381EE</Color>
+		<SubNameColor>FEEEAA</SubNameColor>
+		<CardIllustOffsetX>0</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+
+		<MinVersion>152100</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30018">
+		<Comment>철벽의 투지</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Toughness</Role>
+		<BuffDataStartID>3300180</BuffDataStartID>
+		<RecommendedUnitIds>10000</RecommendedUnitIds>
+		<Color>2E30C8</Color>
+		<SubNameColor>B7BFD4</SubNameColor>
+		<CardIllustOffsetX>-10</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+
+		<MinVersion>153100</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30019">
+		<Comment>루푸스 베인</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Swift</Role>
+		<BuffDataStartID>3300190</BuffDataStartID>
+		<RecommendedUnitIds>10720</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>68EEBC</SubNameColor>
+		<CardIllustOffsetX>-10</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+
+		<MinVersion>154100</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30020">
+		<Comment>에테르나</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Brave</Role>
+		<BuffDataStartID>3300200</BuffDataStartID>
+		<RecommendedUnitIds>10140</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>FEA06B</SubNameColor>
+		<CardIllustOffsetX>-10</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+
+		<MinVersion>155100</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30021">
+		<Comment>루멘플레어</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Element</Role>
+		<BuffDataStartID>3300210</BuffDataStartID>
+		<RecommendedUnitIds>10300</RecommendedUnitIds>	
+		<Color>8381EE</Color>
+		<SubNameColor>C27FFB</SubNameColor>
+		<CardIllustOffsetX>-10</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		
+		<MinVersion>156000</MinVersion>
+	</Treasure>
+	
+	<Treasure ID="30022">
+		<Comment>케노케이르</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Mystic</Role>
+		<BuffDataStartID>3300220</BuffDataStartID>
+		<RecommendedUnitIds>10730</RecommendedUnitIds>	
+		<Color>8381EE</Color>
+		<SubNameColor>FEEEAA</SubNameColor>
+		<CardIllustOffsetX>-10</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		
+		<MinVersion>156100</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30023">
+		<Comment>천둥매</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Swift</Role>
+		<BuffDataStartID>3300230</BuffDataStartID>
+		<RecommendedUnitIds>10270</RecommendedUnitIds>	
+		<Color>8381EE</Color>
+		<SubNameColor>68EEBC</SubNameColor>
+		<CardIllustOffsetX>-70</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		<MinVersion>157100</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30024">
+		<Comment>유수지서</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Element</Role>
+		<BuffDataStartID>3300240</BuffDataStartID>
+		<RecommendedUnitIds>10740</RecommendedUnitIds>	
+		<Color>8381EE</Color>
+		<SubNameColor>C27FFB</SubNameColor>
+		<CardIllustOffsetX>-10</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		<MinVersion>158100</MinVersion>
+	</Treasure>
+	
+	<Treasure ID="30025">
+		<Comment>아니마넥트</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Shadow</Role>
+		<BuffDataStartID>3300250</BuffDataStartID>
+		<RecommendedUnitIds>10390</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>EB4860</SubNameColor>
+		<CardIllustOffsetX>0</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		<MinVersion>159000</MinVersion>
+	</Treasure>
+    
+    <Treasure ID="30026">
+        <Comment>염월</Comment>
+        <Rarity>Special</Rarity>
+        <Role>Toughness</Role>
+        <BuffDataStartID>3300260</BuffDataStartID>
+		<RecommendedUnitIds>10070</RecommendedUnitIds>	
+		<Color>2E30C8</Color>
+		<SubNameColor>B7BFD4</SubNameColor>
+        <CardIllustOffsetX>0</CardIllustOffsetX>
+        <CardIllustOffsetY>0</CardIllustOffsetY>
+        <MinVersion>159100</MinVersion>
+    </Treasure>
+
+	<Treasure ID="30027">
+		<Comment>템페스터</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Swift</Role>
+		<BuffDataStartID>3300270</BuffDataStartID>
+		<RecommendedUnitIds>10220</RecommendedUnitIds>	
+		<Color>8381EE</Color>
+		<SubNameColor>68EEBC</SubNameColor>
+		<CardIllustOffsetX>0</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		<MinVersion>161000</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30028">
+		<Comment>카엘루스</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Toughness</Role>
+		<BuffDataStartID>3300280</BuffDataStartID>
+		<RecommendedUnitIds>10750</RecommendedUnitIds>	
+		<Color>2E30C8</Color>
+		<SubNameColor>B7BFD4</SubNameColor>
+		<CardIllustOffsetX>0</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		<MinVersion>161100</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30029">
+		<Comment>트릭스터</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Element</Role>
+		<BuffDataStartID>3300290</BuffDataStartID>
+		<RecommendedUnitIds>10170</RecommendedUnitIds>	
+		<Color>8381EE</Color>
+		<SubNameColor>C27FFB</SubNameColor>
+		<CardIllustOffsetX>0</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		<MinVersion>162100</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30030">
+		<Comment>트리그바른</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Mystic</Role>
+		<BuffDataStartID>3300300</BuffDataStartID>
+		<RecommendedUnitIds>10370</RecommendedUnitIds>	
+		<Color>8381EE</Color>
+		<SubNameColor>FEEEAA</SubNameColor>
+		<CardIllustOffsetX>0</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		<MinVersion>163000</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30031">
+		<Comment>베르뮬</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Element</Role>
+		<BuffDataStartID>3300310</BuffDataStartID>
+		<RecommendedUnitIds>10760</RecommendedUnitIds>	
+		<Color>8381EE</Color>
+		<SubNameColor>C27FFB</SubNameColor>
+		<CardIllustOffsetX>0</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		<MinVersion>163100</MinVersion>
+	</Treasure>
+
+    <Treasure ID="30032">
+        <Comment>코르디시카</Comment>
+        <Rarity>Special</Rarity>
+        <Role>Shadow</Role>
+        <BuffDataStartID>3300320</BuffDataStartID>
+		<RecommendedUnitIds>10250</RecommendedUnitIds>	
+        <Color>8381EE</Color>
+        <SubNameColor>EB4860</SubNameColor>
+        <CardIllustOffsetX>0</CardIllustOffsetX>
+        <CardIllustOffsetY>0</CardIllustOffsetY>
+        <MinVersion>164100</MinVersion>
+    </Treasure>
+
+    <Treasure ID="30033">
+        <Comment>센크라드</Comment>
+        <Rarity>Special</Rarity>
+        <Role>Brave</Role>
+        <BuffDataStartID>3300330</BuffDataStartID>
+		<RecommendedUnitIds>10480</RecommendedUnitIds>	
+        <Color>8381EE</Color>
+        <SubNameColor>FEA06B</SubNameColor>
+        <CardIllustOffsetX>0</CardIllustOffsetX>
+        <CardIllustOffsetY>0</CardIllustOffsetY>
+        <MinVersion>165000</MinVersion>
+    </Treasure>
+
+    <Treasure ID="30034">
+        <Comment>앵화</Comment>
+        <Rarity>Special</Rarity>
+        <Role>Swift</Role>
+        <BuffDataStartID>3300340</BuffDataStartID>
+		<RecommendedUnitIds>10770</RecommendedUnitIds>	
+        <Color>8381EE</Color>
+        <SubNameColor>68EEBC</SubNameColor>
+        <CardIllustOffsetX>0</CardIllustOffsetX>
+        <CardIllustOffsetY>0</CardIllustOffsetY>
+        <MinVersion>165100</MinVersion>
+    </Treasure>
+
+    <Treasure ID="30035">
+        <Comment>반룡패월도</Comment>
+        <Rarity>Special</Rarity>
+        <Role>Toughness</Role>
+        <BuffDataStartID>3300350</BuffDataStartID>
+		<RecommendedUnitIds>10260</RecommendedUnitIds>	
+        <Color>2E30C8</Color>
+        <SubNameColor>B7BFD4</SubNameColor>
+        <CardIllustOffsetX>0</CardIllustOffsetX>
+        <CardIllustOffsetY>0</CardIllustOffsetY>
+        <MinVersion>166100</MinVersion>
+    </Treasure>
+
+	<Treasure ID="30036">
+		<Comment>결사의 의지</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Brave</Role>
+		<BuffDataStartID>3300360</BuffDataStartID>
+		<RecommendedUnitIds>10420</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>FEA06B</SubNameColor>
+		<CardIllustOffsetX>0</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		<MinVersion>168100</MinVersion>
+	</Treasure>
+
+    <Treasure ID="30037">
+        <Comment>순수</Comment>
+        <Rarity>Special</Rarity>
+        <Role>Element</Role>
+        <BuffDataStartID>3300370</BuffDataStartID>
+        <RecommendedUnitIds>10150</RecommendedUnitIds>
+        <Color>8381EE</Color>
+        <SubNameColor>C27FFB</SubNameColor>
+        <MinVersion>169000</MinVersion>
+    </Treasure>
+
+    <Treasure ID="30038">
+        <Comment>세령의 멋진 보구</Comment>
+        <Rarity>Special</Rarity>
+        <Role>Mystic</Role>
+        <BuffDataStartID>3300380</BuffDataStartID>
+        <RecommendedUnitIds>10560</RecommendedUnitIds>
+        <Color>8381EE</Color>
+        <SubNameColor>FEEEAA</SubNameColor>
+        <MinVersion>169100</MinVersion>
+    </Treasure>
+
+    <Treasure ID="30039">
+        <Comment>네리아 이격의 멋진 보구</Comment>
+        <Rarity>Special</Rarity>
+        <Role>Shadow</Role>
+        <BuffDataStartID>3300390</BuffDataStartID>
+        <RecommendedUnitIds>10780</RecommendedUnitIds>
+        <Color>8381EE</Color>
+        <SubNameColor>EB4860</SubNameColor>
+        <MinVersion>170100</MinVersion>
+    </Treasure>
+	
+	<Treasure ID="30040">
+		<Comment>무용</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Swift</Role>
+		<BuffDataStartID>3300400</BuffDataStartID>
+        <RecommendedUnitIds>10310</RecommendedUnitIds>
+        <Color>8381EE</Color>
+        <SubNameColor>68EEBC</SubNameColor>
+        <MinVersion>171000</MinVersion>		
+	</Treasure>
+    
+    <Treasure ID="50000">
+        <Comment>아펠피시아</Comment>
+        <Rarity>Special</Rarity>
+        <LimitedEdition>true</LimitedEdition>
+        
+        <Role>Brave</Role>
+        <BuffDataStartID>3500000</BuffDataStartID>
+		<RecommendedUnitIds>10210</RecommendedUnitIds>	
+        <Color>8381EE</Color>
+        <SubNameColor>FEA06B</SubNameColor>
+        <CardIllustOffsetX>0</CardIllustOffsetX>
+        <CardIllustOffsetY>0</CardIllustOffsetY>
+        <MinVersion>160100</MinVersion>
+    </Treasure>
+
+    <Treasure ID="50001">
+        <Comment>아나테마</Comment>
+        <Rarity>Special</Rarity>
+        <LimitedEdition>true</LimitedEdition>
+
+        <Role>Mystic</Role>
+        <BuffDataStartID>3500010</BuffDataStartID>  
+        <Color>8381EE</Color>
+        <SubNameColor>FEEEAA</SubNameColor>
+        <CardIllustOffsetX>0</CardIllustOffsetX>
+        <CardIllustOffsetY>0</CardIllustOffsetY>
+        <MinVersion>167100</MinVersion>
+    </Treasure>
+</Treasures>

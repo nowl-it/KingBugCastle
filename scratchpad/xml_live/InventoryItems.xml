@@ -1,0 +1,2180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<InventoryItems xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<InventoryItem ID="100">
+		<NameComment>유닛 경험치</NameComment>
+		<Name>ShopItemName_100</Name>
+		<AdminToolOnlyName>{0} 영웅의 경험치</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_100</Desc>
+		<Sprite>ShopItem_110</Sprite>
+		<NameFormatting>UnitName</NameFormatting>
+		<DescFormatting>UnitName</DescFormatting>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+	<InventoryItem ID="110">
+		<NameComment>경험의 서</NameComment>
+		<Name>ShopItemName_110</Name>
+		<AdminToolOnlyName>경험의 서</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_110</Desc>
+		<Sprite>ShopItem_110</Sprite>
+ 		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+		<Shortcuts>6,7,1,21,17,16</Shortcuts>
+		<InventoryCategory>Hero</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="120">
+		<NameComment>레벨업 UI 표시용 영웅의 증표</NameComment>
+		<Name>HeroSoul</Name>
+		<AdminToolOnlyName>영웅의 증표</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_120</Desc>
+		<Sprite>ShopItem_120</Sprite>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+		<Shortcuts>22</Shortcuts>
+		<ShortCut Type="Gacha"/>
+	</InventoryItem>
+	<InventoryItem ID="130">
+		<NameComment>왕의 증표</NameComment>
+		<Name>UnitSoulItem</Name>
+		<AdminToolOnlyName>왕의 증표</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_130</Desc>
+		<Sprite>ShopItem_130</Sprite>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+		<Shortcuts>1,32,7,22,28,29</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Hero</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="150">
+		<NameComment>성장의 조각 (황금의 사탕)</NameComment>
+		<Name>InventoryItemName_150</Name>
+		<AdminToolOnlyName>성장의 조각</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_150</Desc>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+		<Shortcuts>41</Shortcuts>
+		<CandyType>Gold</CandyType>
+		<ReqCardLevelMax>9</ReqCardLevelMax>
+		<EfficiencyCardLevelMin>7</EfficiencyCardLevelMin>
+		<ShortCut Type="Arena" Value="TokenShop"/>
+		<InventoryCategory>Hero</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="151">
+		<NameComment>경험의 함 (경험의 사탕)</NameComment>
+		<Name>InventoryItemName_151</Name>
+		<AdminToolOnlyName>경험의 함</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_151</Desc>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+		<Shortcuts>41</Shortcuts>
+		<CandyType>Exp</CandyType>
+		<ReqCardLevelMax>9</ReqCardLevelMax>
+		<EfficiencyCardLevelMin>7</EfficiencyCardLevelMin>
+		<ShortCut Type="Arena" Value="TokenShop"/>
+		<InventoryCategory>Hero</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="152">
+		<NameComment>힘의 함 (레벨업 사탕)</NameComment>
+		<Name>InventoryItemName_152</Name>
+		<AdminToolOnlyName>힘의 함</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_152</Desc>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+		<Shortcuts>42</Shortcuts>
+		<CandyType>LvUp</CandyType>
+		<ReqCardLevelMax>9</ReqCardLevelMax>
+		<EfficiencyCardLevelMin>7</EfficiencyCardLevelMin>
+		<ShortCut Type="Clan" Value="TokenShop"/>
+		<InventoryCategory>Hero</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="155">
+		<NameComment>킹 성장의 조각 (킹 황금의 사탕)</NameComment>
+		<Name>InventoryItemName_155</Name>
+		<AdminToolOnlyName>킹등급 성장의 조각</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_155</Desc>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+		<Shortcuts>42</Shortcuts>
+		<CandyType>Gold</CandyType>
+		<ReqCardLevelMax>15</ReqCardLevelMax>
+		<EfficiencyCardLevelMin>14</EfficiencyCardLevelMin>
+		<ShortCut Type="Clan" Value="TokenShop"/>
+		<InventoryCategory>Hero</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="156">
+		<NameComment>킹 경험의 함 (킹 경험의 사탕)</NameComment>
+		<Name>InventoryItemName_156</Name>
+		<AdminToolOnlyName>킹등급 경험의 함</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_156</Desc>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+		<Shortcuts>42</Shortcuts>
+		<CandyType>Exp</CandyType>
+		<ReqCardLevelMax>15</ReqCardLevelMax>
+		<EfficiencyCardLevelMin>14</EfficiencyCardLevelMin>
+		<ShortCut Type="Clan" Value="TokenShop"/>
+		<InventoryCategory>Hero</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="157">
+		<NameComment>킹 힘의 함 (킹 레벨업 사탕)</NameComment>
+		<Name>InventoryItemName_157</Name>
+		<AdminToolOnlyName>킹등급 힘의 함</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_157</Desc>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+		<Shortcuts>41</Shortcuts>
+		<CandyType>LvUp</CandyType>
+		<ReqCardLevelMax>15</ReqCardLevelMax>
+		<EfficiencyCardLevelMin>14</EfficiencyCardLevelMin>
+		<ShortCut Type="Arena" Value="TokenShop"/>
+		<InventoryCategory>Hero</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="163">
+		<NameComment>킹갓 힘의 함 (킹갓 레벨업 사탕)</NameComment>
+		<Name>InventoryItemName_163</Name>
+		<AdminToolOnlyName>킹갓 힘의 함</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_163</Desc>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+        <Shortcuts>28</Shortcuts>
+		<CandyType>LvUp</CandyType>
+		<ReqCardLevelMax>29</ReqCardLevelMax>
+		<EfficiencyCardLevelMin>25</EfficiencyCardLevelMin>
+        <ShortCut Type="None"/>
+		<InventoryCategory>Hero</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="170">
+		<NameComment>영웅 각성석 (각성 등급업 사탕)</NameComment>
+		<Name>InventoryItemName_170</Name>
+		<AdminToolOnlyName>영웅 각성석</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_170</Desc>
+		<ItemTooltipType>CardLevelUpItem</ItemTooltipType>
+		<Type>CardLevelUpItem</Type>
+		<CandyType>PotentialTierUp</CandyType>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Hero</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="300">
+		<NameComment>일반 소환서</NameComment>
+		<Name>ShopItemName_300</Name>
+		<AdminToolOnlyName>일반 소환서</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_300</Desc>
+		<Sprite>ShopItem_300_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<Shortcuts>1,34,29</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Gacha</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="301">
+		<NameComment>왕의 소환서</NameComment>
+		<Name>ShopItemName_301</Name>
+		<AdminToolOnlyName>왕의 소환서</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_301</Desc>
+		<Sprite>ShopItem_301_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<Shortcuts>1,32,35</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Gacha</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="302">
+		<NameComment>신의 소환서</NameComment>
+		<Name>ShopItemName_302</Name>
+		<AdminToolOnlyName>신의 소환서</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_302</Desc>
+		<Sprite>ShopItem_302_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<Shortcuts>1,28</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Gacha</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="303">
+		<NameComment>신규 영웅 소환서</NameComment>
+		<Name>ShopItemName_303</Name>
+		<AdminToolOnlyName>신규 영웅 소환서</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_303</Desc>
+		<Sprite>ShopItem_303_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<Shortcuts>28</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Gacha</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="305">
+		<NameComment>축복의 소환서</NameComment>
+		<Name>ShopItemName_305</Name>
+		<AdminToolOnlyName>축복의 소환서</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_305</Desc>
+		<Sprite>ShopItem_305_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<Shortcuts>1,8</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="350">
+		<NameComment>일반 유물 열쇠</NameComment>
+		<Name>ShopItemName_350</Name>
+		<AdminToolOnlyName>일반 유물 열쇠</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_350</Desc>
+		<Sprite>ShopItem_350_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Gacha</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="351">
+		<NameComment>왕의 유물 열쇠</NameComment>
+		<Name>ShopItemName_351</Name>
+		<AdminToolOnlyName>왕의 유물 열쇠</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_351</Desc>
+		<Sprite>ShopItem_351_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<Shortcuts>1,29</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Gacha</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="352">
+		<NameComment>신의 유물 열쇠</NameComment>
+		<Name>ShopItemName_352</Name>
+		<AdminToolOnlyName>신의 유물 열쇠</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_352</Desc>
+		<Sprite>ShopItem_352_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<Shortcuts>1,28,29</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Gacha</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="370">
+		<NameComment>보구 소환석</NameComment>
+		<Name>ShopItemName_370</Name>
+		<AdminToolOnlyName>보구 소환석</AdminToolOnlyName>
+		<Desc>ShopItemDesc_370</Desc>
+		<Sprite>ShopItem_370_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<Shortcuts>1,32,16,41,28</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="371">
+		<NameComment>축복의 소환석</NameComment>
+		<Name>ShopItemName_371</Name>
+		<AdminToolOnlyName>축복의 소환석</AdminToolOnlyName>
+		<Desc>ShopItemDesc_371</Desc>
+		<Sprite>ShopItem_371_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<Shortcuts>1,13</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="390">
+		<NameComment>신비한 마법 원단</NameComment>
+		<Name>ShopItemName_390</Name>
+		<AdminToolOnlyName>신비한 마법 원단</AdminToolOnlyName>
+		<Desc>ShopItemDesc_390</Desc>
+		<Sprite>ShopItem_390_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<ShortCuts></ShortCuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Currency</InventoryCategory>
+		<MinVersion>156000</MinVersion>
+	</InventoryItem>
+	<InventoryItem ID="500">
+		<NameComment>원정 깃발</NameComment>
+		<Name>InventoryItemName_500</Name>
+		<AdminToolOnlyName>원정 깃발</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_500</Desc>
+		<Sprite>Event_Token</Sprite>
+		<ItemTooltipType>PlayCurrency</ItemTooltipType>
+		<Shortcuts>18</Shortcuts>
+		<ShortCut Type="EventMode"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="510">
+		<NameComment>1000번 이벤트 모드 깃발</NameComment>
+		<Name>InventoryItemName_510</Name>
+		<AdminToolOnlyName>이벤트 깃발</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_510</Desc>
+		<Sprite>Event_Token_01</Sprite>
+		<ItemTooltipType>PlayCurrency</ItemTooltipType>
+		<ShortCut Type="SeasonalEventMode"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="511">
+		<NameComment>1001번 이벤트 모드 깃발</NameComment>
+		<Name>InventoryItemName_510</Name>
+		<AdminToolOnlyName>이벤트 깃발</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_510</Desc>
+		<Sprite>Event_Token_01</Sprite>
+		<ItemTooltipType>PlayCurrency</ItemTooltipType>
+		<ShortCut Type="SeasonalEventMode"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="520">
+		<NameComment>시련의 탑 깃발</NameComment>
+		<Name>InventoryItemName_520</Name>
+		<AdminToolOnlyName>시련의 탑 깃발</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_520</Desc>
+		<Sprite>Tower_Ticket</Sprite>
+		<ItemTooltipType>PlayCurrency</ItemTooltipType>
+		<ShortCut Type="Tower"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="530">
+		<NameComment>조사단 깃발</NameComment>
+		<Name>InventoryItemName_530</Name>
+		<AdminToolOnlyName>조사단 깃발</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_530</Desc>
+		<ItemTooltipType>PlayCurrency</ItemTooltipType>
+		<Shortcuts>30</Shortcuts>
+		<ShortCut Type="Territory" Value="Hunting"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="600">
+		<NameComment>왕의 교환 증서</NameComment>
+		<Name>InventoryItemName_600</Name>
+		<AdminToolOnlyName>왕의 교환 증서</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_600</Desc>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<Type>Voucher</Type>
+		<Heart>20</Heart>
+		<EventFlag>3</EventFlag>
+		<TowerTicket>1</TowerTicket>
+		<TerritoryHuntingTicket>3</TerritoryHuntingTicket>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="601">
+		<NameComment>식량 교환 증서</NameComment>
+		<Name>InventoryItemName_601</Name>
+		<AdminToolOnlyName>식량 교환 증서</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_601</Desc>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<Type>Voucher</Type>
+		<Heart>20</Heart>
+		<VoucherType>Heart</VoucherType>
+		<Shortcuts>1</Shortcuts>
+		<ShortCut Type="BuyHeart"/>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="602">
+		<NameComment>깃발 교환 증서</NameComment>
+		<Name>InventoryItemName_602</Name>
+		<AdminToolOnlyName>깃발 교환 증서</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_602</Desc>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<Type>Voucher</Type>
+		<EventFlag>3</EventFlag>
+		<TowerTicket>1</TowerTicket>
+		<TerritoryHuntingTicket>3</TerritoryHuntingTicket>
+		<VoucherType>Currency_Flag</VoucherType>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="700">
+		<NameComment>연금석</NameComment>
+		<Name>InventoryItemName_700</Name>
+		<AdminToolOnlyName>연금석</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_700</Desc>
+		<ItemTooltipType>Territory</ItemTooltipType>
+		<AlchemyExchangeRatioID>700</AlchemyExchangeRatioID>
+		<Shortcuts>30</Shortcuts>
+		<ShortCut Type="Territory" Value="Hunting"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+<!--	<InventoryItem ID="701">-->
+<!--		<NameComment>킹 연금의 정수</NameComment>-->
+<!--		<Name>InventoryItemName_701</Name>-->
+<!--		<Desc>InventoryItemDesc_701</Desc>-->
+<!--		<ItemTooltipType>Territory</ItemTooltipType>-->
+<!--		<AlchemyExchangeRatioID>701</AlchemyExchangeRatioID>-->
+<!--		<Shortcuts>30</Shortcuts>-->
+<!--		<ShortCut Type="Territory" Value="Hunting"/>-->
+<!--		<InventoryCategory>Currency</InventoryCategory>-->
+<!--	</InventoryItem>-->
+<!--	<InventoryItem ID="702">-->
+<!--		<NameComment>갓 연금의 정수</NameComment>-->
+<!--		<Name>InventoryItemName_702</Name>-->
+<!--		<Desc>InventoryItemDesc_702</Desc>-->
+<!--		<ItemTooltipType>Territory</ItemTooltipType>-->
+<!--		<AlchemyExchangeRatioID>702</AlchemyExchangeRatioID>-->
+<!--		<Shortcuts>30</Shortcuts>-->
+<!--		<ShortCut Type="Territory" Value="Hunting"/>-->
+<!--		<InventoryCategory>Currency</InventoryCategory>-->
+<!--	</InventoryItem>-->
+<!--	<InventoryItem ID="703">-->
+<!--		<NameComment>가챠 연금의 정수</NameComment>-->
+<!--		<Name>InventoryItemName_703</Name>-->
+<!--		<Desc>InventoryItemDesc_703</Desc>-->
+<!--		<ItemTooltipType>Territory</ItemTooltipType>-->
+<!--		<AlchemyExchangeRatioID>703</AlchemyExchangeRatioID>-->
+<!--		<Shortcuts>22</Shortcuts>-->
+<!--		<ShortCut Type="Gacha"/>-->
+<!--		<InventoryCategory>Currency</InventoryCategory>-->
+<!--	</InventoryItem>-->
+	<InventoryItem ID="800">
+		<NameComment>대장장이의 증표</NameComment>
+		<Name>InventoryItemName_800</Name>
+		<AdminToolOnlyName>대장장이의 증표</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_800</Desc>
+		<Shortcuts>1,28,35</Shortcuts>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<ForceImageScale>1</ForceImageScale>
+	</InventoryItem>
+	<!-- 기타 -->
+	<InventoryItem ID="2000">
+		<NameComment>초보자 임무 코인</NameComment>
+		<Name>InventoryItemName_2000</Name>
+		<AdminToolOnlyName>초보자 임무 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2000</Desc>
+		<Sprite>Beginner_Token</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2001">
+		<NameComment>스킨 토큰</NameComment>
+		<Name>InventoryItemName_2001</Name>
+		<AdminToolOnlyName>스킨 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2001</Desc>
+		<Sprite>ShopItem_SkinToken</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<TokenType>SKIN</TokenType>
+		<Shortcuts>35</Shortcuts>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2002">
+		<NameComment>아레나 토큰</NameComment>
+		<Name>InventoryItemName_2002</Name>
+		<AdminToolOnlyName>전장 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2002</Desc>
+		<Sprite>Arena_Token</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<TokenType>ARENA</TokenType>
+		<Shortcuts>40</Shortcuts>
+		<ShortCut Type="Arena"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2003">
+		<NameComment>연맹전 토큰</NameComment>
+		<Name>InventoryItemName_2003</Name>
+		<AdminToolOnlyName>토벌전 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2003</Desc>
+		<Sprite>Clan_Battle_Token</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<TokenType>CLAN</TokenType>
+		<Shortcuts>27</Shortcuts>
+		<ShortCut Type="Clan"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2004">
+		<NameComment>이벤트 토큰</NameComment>
+		<Name>InventoryItemName_2004</Name>
+		<AdminToolOnlyName>이벤트 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2004</Desc>
+		<Sprite>SeasonalEventToken_S26</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<TokenType>SEASONAL_EVENT</TokenType>
+		<Shortcuts>15</Shortcuts>
+		<ShortCut Type="Theme"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2005">
+		<NameComment>잠식 토큰</NameComment>
+		<Name>InventoryItemName_2005</Name>
+		<AdminToolOnlyName>잠식 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2005</Desc>
+		<Sprite>Hard_Mode_Token</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<TokenType>HARD_MODE</TokenType>
+		<Shortcuts>19,37</Shortcuts>
+		<ShortCut Type="Theme" Value="Hard"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2006">
+		<NameComment>콜로세움 출시 이벤트 미션 포인트</NameComment>
+		<Name>InventoryItemName_2006</Name>
+		<AdminToolOnlyName>격전의 전장 이벤트 포인트</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2006</Desc>
+		<Sprite>Colosseum_Open_Mission_Point</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<ShortCut Type="Colosseum"/>
+	</InventoryItem>
+	<InventoryItem ID="2007">
+		<NameComment>짙은 잠식 토큰</NameComment>
+		<Name>InventoryItemName_2007</Name>
+		<AdminToolOnlyName>짙은 잠식 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2007</Desc>
+		<Sprite>Hard_Mode_Token2</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<TokenType>HARD_MODE2</TokenType>
+		<Shortcuts>20</Shortcuts>
+		<ShortCut Type="Theme" Value="Hard2"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2008">
+		<NameComment>해변축제 브론즈 토큰</NameComment>
+		<Name>InventoryItemName_2008</Name>
+		<AdminToolOnlyName>해변축제 브론즈 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2008</Desc>
+		<Sprite>TerritoryTycoonBronzeToken_Beach</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<TokenType>TerritoryTycoonToken_Bronze</TokenType>
+		<ShortCut Type="SeasonalEventMode" Value="TerritoryTycoon"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2009">
+		<NameComment>해변축제 실버 토큰</NameComment>
+		<Name>InventoryItemName_2009</Name>
+		<AdminToolOnlyName>해변축제 실버 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2009</Desc>
+		<Sprite>TerritoryTycoonSilverToken_Beach</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<TokenType>TerritoryTycoonToken_Silver</TokenType>
+		<ShortCut Type="SeasonalEventMode" Value="TerritoryTycoon"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2010">
+		<NameComment>해변축제 골드 토큰</NameComment>
+		<Name>InventoryItemName_2010</Name>
+		<AdminToolOnlyName>해변축제 골드 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2010</Desc>
+		<Sprite>TerritoryTycoonGoldToken_Beach</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<TokenType>TerritoryTycoonToken_Gold</TokenType>
+		<ShortCut Type="SeasonalEventMode" Value="TerritoryTycoon"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2011">
+		<NameComment>고급 스킨 토큰</NameComment>
+		<Name>InventoryItemName_2011</Name>
+		<AdminToolOnlyName>고급 스킨 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2011</Desc>
+		<Sprite>ShopItem_PremiumSkinToken</Sprite>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<ShortCut Type="None" />
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2012">
+		<NameComment>일일 미션 포인트</NameComment>
+		<Name>InventoryItemName_2012</Name>
+		<AdminToolOnlyName>일일 임무 포인트</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2012</Desc>
+		<Sprite>Mission_DailyPointIcon_00</Sprite>
+		<ItemTooltipType>Etc</ItemTooltipType>
+	</InventoryItem>
+	<InventoryItem ID="2013">
+		<NameComment>주간 미션 포인트</NameComment>
+		<Name>InventoryItemName_2013</Name>
+		<AdminToolOnlyName>주간 임무 포인트</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2013</Desc>
+		<Sprite>Mission_WeekendPointIcon_00</Sprite>
+		<ItemTooltipType>Etc</ItemTooltipType>
+	</InventoryItem>
+	<InventoryItem ID="2014">
+		<NameComment>챌린지 토큰</NameComment>
+		<Name>InventoryItemName_2014</Name>
+		<AdminToolOnlyName>챌린지 토큰</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2014</Desc>
+		<ItemTooltipType>Token</ItemTooltipType>
+		<TokenType>CHALLENGE</TokenType>
+		<ItemTooltipType>Currency</ItemTooltipType>
+	</InventoryItem>
+	<InventoryItem ID="2015">
+		<NameComment>5.5주년 패스 포인트</NameComment>
+		<Name>InventoryItemName_2015</Name>
+		<AdminToolOnlyName>5.5주년 패스 포인트</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2015</Desc>
+		<Sprite>Pass_Icon_05</Sprite>
+		<ItemTooltipType>Etc</ItemTooltipType>
+	</InventoryItem>
+	<InventoryItem ID="2100">
+		<NameComment>식량</NameComment>
+		<Name>InventoryItemName_2100</Name>
+		<AdminToolOnlyName>식량</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2100</Desc>
+		<Sprite>Meat_Icon</Sprite>
+		<ItemTooltipType>PlayCurrency</ItemTooltipType>
+		<Shortcuts>34,25</Shortcuts>
+		<ShortCut Type="BuyHeart"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2101">
+		<NameComment>금화</NameComment>
+		<Name>InventoryItemName_2101</Name>
+		<AdminToolOnlyName>금화</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2101</Desc>
+		<Sprite>Gold_Icon</Sprite>
+		<ItemTooltipType>Currency</ItemTooltipType>
+		<Shortcuts>11,9,1,17,15,16</Shortcuts>
+		<ShortCut Type="Shop" Value="Gold"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2102">
+		<NameComment>보석</NameComment>
+		<Name>InventoryItemName_2102</Name>
+		<AdminToolOnlyName>보석</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2102</Desc>
+		<Sprite>Cash_Icon</Sprite>
+		<ItemTooltipType>Currency</ItemTooltipType>
+		<Shortcuts>12,9,1,32,33</Shortcuts>
+		<ShortCut Type="Shop" Value="Cash"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2103">
+		<NameComment>신비한 가루</NameComment>
+		<Name>InventoryItemName_2103</Name>
+		<AdminToolOnlyName>신비한 가루</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2103</Desc>
+		<Sprite>Artifact_Icon_01b</Sprite>
+		<ItemTooltipType>ArtifactItem</ItemTooltipType>
+		<Shortcuts>36,4</Shortcuts>
+		<ShortCut Type="Inventory" Value="ArtifactDismantle"/>
+		<InventoryCategory>Artifact</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2104">
+		<NameComment>패스포인트</NameComment>
+		<Name>InventoryItemName_2104</Name>
+		<AdminToolOnlyName>패스 포인트</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2104</Desc>
+		<Sprite>Pass_Icon_03</Sprite>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<Shortcuts>15</Shortcuts>
+		<ShortCut Type="Theme"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2105">
+		<NameComment>기사단의 훈장</NameComment>
+		<Name>InventoryItemName_2105</Name>
+		<AdminToolOnlyName>기사단의 훈장</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2105</Desc>
+		<ItemTooltipType>Territory</ItemTooltipType>
+		<Shortcuts>14</Shortcuts>
+		<ShortCut Type="Theme" Value="LowestBuildingCoreUnearnedTheme"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2106">
+		<NameComment>사령관의 훈장</NameComment>
+		<Name>InventoryItemName_2106</Name>
+		<AdminToolOnlyName>사령관의 훈장</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2106</Desc>
+		<ItemTooltipType>Territory</ItemTooltipType>
+		<Shortcuts>14</Shortcuts>
+		<ShortCut Type="Theme" Value="LowestTownHallCoreUnearnedTheme"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2107">
+		<NameComment>성 경험치</NameComment>
+		<Name>InventoryItemName_2107</Name>
+		<AdminToolOnlyName>성 경험치</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2107</Desc>
+		<Sprite>Exp_Icon</Sprite>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<Shortcuts>15</Shortcuts>
+		<ShortCut Type="GameList"/>
+	</InventoryItem>
+	<InventoryItem ID="2108">
+		<NameComment>연맹 경험치</NameComment>
+		<Name>InventoryItemName_2108</Name>
+		<AdminToolOnlyName>연맹 경험치</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2108</Desc>
+		<Sprite>ClanExp_Icon</Sprite>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<Shortcuts>27</Shortcuts>
+		<ShortCut Type="Clan"/>
+	</InventoryItem>
+	<InventoryItem ID="2109">
+		<NameComment>활력</NameComment>
+		<Name>InventoryItemName_2109</Name>
+		<AdminToolOnlyName>활력</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2109</Desc>
+		<ItemTooltipType>Territory</ItemTooltipType>
+		<Sprite>Labor_Icon_UI_01</Sprite>
+		<Shortcuts>31</Shortcuts>
+		<ShortCut Type="Territory" Value="TownHall"/>
+		<InventoryCategory>Currency</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="2200">
+		<NameComment>스킨</NameComment>
+		<Name>InventoryItemName_2200</Name>
+		<AdminToolOnlyName>스킨</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2200</Desc>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+	<InventoryItem ID="2201">
+		<NameComment>깃발</NameComment>
+		<Name>InventoryItemName_2201</Name>
+		<AdminToolOnlyName>깃발</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2201</Desc>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+	<InventoryItem ID="2202">
+		<NameComment>테두리</NameComment>
+		<Name>InventoryItemName_2202</Name>
+		<AdminToolOnlyName>테두리</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2202</Desc>
+		<ItemTooltipType>Profile</ItemTooltipType>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+	<!-- 엘도르, 루나디아 축제 때 만들었으나 개발 과정에서 버려진 사용하지 않는 아이템-->
+	<InventoryItem ID="2203">
+		<NameComment>스킨 교환권</NameComment>
+		<Name>InventoryItemName_2203</Name>
+		<AdminToolOnlyName>스킨 교환권</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2203</Desc>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+	<InventoryItem ID="2204">
+		<NameComment>보구 대기시간 초기화권</NameComment>
+		<Name>InventoryItemName_2204</Name>
+		<AdminToolOnlyName>보구 대기시간 초기화권</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2204</Desc>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+	<InventoryItem ID="2205">
+		<NameComment>장신구 대기시간 초기화권</NameComment>
+		<Name>InventoryItemName_2205</Name>
+		<AdminToolOnlyName>장신구 대기시간 초기화권</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2205</Desc>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+	<InventoryItem ID="2206">
+		<NameComment>무료 부활권</NameComment>
+		<Name>InventoryItemName_2206</Name>
+		<AdminToolOnlyName>무료 부활권</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2206</Desc>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+	<InventoryItem ID="2207">
+		<NameComment>맵 스킨</NameComment>
+		<Name>MapSkin</Name>
+		<Desc>MapSkin</Desc>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+	<InventoryItem ID="2208">
+		<NameComment>로그인 스킨</NameComment>
+		<Name>LoginScreen</Name>
+		<Desc>LoginScreen</Desc>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+    <InventoryItem ID="2209">
+        <NameComment>조언자</NameComment>
+        <Name>Advisor</Name>
+        <AdminToolOnlyName>조언자</AdminToolOnlyName>
+        <Desc>Advisor</Desc>
+        <ItemTooltipType>Etc</ItemTooltipType>
+        <ShortCut Type="None"/>
+    </InventoryItem>
+	<InventoryItem ID="2300">
+		<NameComment>영지 건물</NameComment>
+		<Name>InventoryItemName_2300</Name>
+		<AdminToolOnlyName>영지 건물</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2300</Desc>
+		<ItemTooltipType>Territory</ItemTooltipType>
+		<ShortCut Type="None"/>
+	</InventoryItem>
+	
+	<InventoryItem ID="2400">
+		<NameComment>사신의 제단</NameComment>
+		<Name>InventoryItemName_2400</Name>
+		<AdminToolOnlyName>사신의 제단</AdminToolOnlyName>
+		<Desc>InventoryItemName_2400</Desc>
+		<Tier>1</Tier>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<ShortCut Type="None"/>
+
+		<RogueLikeBuildingIdx>6</RogueLikeBuildingIdx>
+	</InventoryItem>
+	<InventoryItem ID="2401">
+		<NameComment>사신의 제단</NameComment>
+		<Name>InventoryItemName_2400</Name>
+		<AdminToolOnlyName>사신의 제단</AdminToolOnlyName>
+		<Desc>InventoryItemName_2400</Desc>
+		<Tier>2</Tier>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<ShortCut Type="None"/>
+
+		<RogueLikeBuildingIdx>6</RogueLikeBuildingIdx>
+		<AddDimensionRiftRegionSynergyReroll>1</AddDimensionRiftRegionSynergyReroll>
+		
+		<AddMaxRiftCrystalInventory>1</AddMaxRiftCrystalInventory>
+		<NeedRiftGaugeReduceAmount>5</NeedRiftGaugeReduceAmount>
+		<RiftWeaponDustAddAmountPer>10</RiftWeaponDustAddAmountPer>
+	</InventoryItem>
+	
+	<InventoryItem ID="2410">
+		<NameComment>불사의 제단</NameComment>
+		<Name>InventoryItemName_2410</Name>
+		<AdminToolOnlyName>불사의 제단</AdminToolOnlyName>
+		<Desc>InventoryItemName_2410</Desc>
+		<Tier>1</Tier>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<ShortCut Type="None"/>
+		
+		<RogueLikeBuildingIdx>7</RogueLikeBuildingIdx>
+	</InventoryItem>
+	<InventoryItem ID="2411">
+		<NameComment>불사의 제단 프리미엄</NameComment>
+		<Name>InventoryItemName_2410</Name>
+		<AdminToolOnlyName>불사의 제단 프리미엄</AdminToolOnlyName>
+		<Desc>InventoryItemName_2410</Desc>
+		<Tier>2</Tier>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<ShortCut Type="None"/>
+
+		<RogueLikeBuildingIdx>7</RogueLikeBuildingIdx>
+		<AddDimensionRiftRegionSynergyReroll>1</AddDimensionRiftRegionSynergyReroll>
+		
+		<AddMaxRiftCrystalInventory>1</AddMaxRiftCrystalInventory>
+		<NeedRiftGaugeReduceAmount>5</NeedRiftGaugeReduceAmount>
+		<RiftWeaponDustAddAmountPer>10</RiftWeaponDustAddAmountPer>
+	</InventoryItem>
+	
+	<InventoryItem ID="2420">
+		<NameComment>지배의 제단</NameComment>
+		<Name>InventoryItemName_2420</Name>
+		<AdminToolOnlyName>지배의 제단</AdminToolOnlyName>
+		<Desc>InventoryItemName_2420</Desc>
+		<Tier>1</Tier>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<ShortCut Type="None"/>
+
+		<RogueLikeBuildingIdx>8</RogueLikeBuildingIdx>
+	</InventoryItem>
+	<InventoryItem ID="2421">
+		<NameComment>지배의 제단 프리미엄</NameComment>
+		<Name>InventoryItemName_2410</Name>
+		<AdminToolOnlyName>지배의 제단 프리미엄</AdminToolOnlyName>
+		<Desc>InventoryItemName_2410</Desc>
+		<Tier>2</Tier>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<ShortCut Type="None"/>
+
+		<RogueLikeBuildingIdx>8</RogueLikeBuildingIdx>
+		<AddDimensionRiftRegionSynergyReroll>1</AddDimensionRiftRegionSynergyReroll>
+		
+		<AddMaxRiftCrystalInventory>1</AddMaxRiftCrystalInventory>
+		<NeedRiftGaugeReduceAmount>5</NeedRiftGaugeReduceAmount>
+		<RiftWeaponDustAddAmountPer>10</RiftWeaponDustAddAmountPer>
+	</InventoryItem>
+	
+	<InventoryItem ID="2430">
+		<NameComment>영웅/대장장이/피의 제단 프리미엄</NameComment>
+		<Name>InventoryItemName_2430</Name>
+		<AdminToolOnlyName>영웅/대장장이/피의 제단 프리미엄</AdminToolOnlyName>
+		<Desc>InventoryItemName_2430</Desc>
+		<Tier>1</Tier>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<ShortCut Type="None"/>
+
+		<RogueLikeTargetBuildingsKey>HeroBalcksmithBloodBuilding</RogueLikeTargetBuildingsKey>
+		<RogueLikeBonusBuildingIdx>0,1,2</RogueLikeBonusBuildingIdx>
+		<AddDimensionRiftRegionSynergyReroll>1</AddDimensionRiftRegionSynergyReroll>
+
+		<DimensionRiftNeedHeartReduceAmount>2</DimensionRiftNeedHeartReduceAmount>
+		<AddMaxRiftCrystalInventory>1</AddMaxRiftCrystalInventory>
+		<NeedRiftGaugeReduceAmount>5</NeedRiftGaugeReduceAmount>
+		<RiftWeaponDustAddAmountPer>10</RiftWeaponDustAddAmountPer>
+	</InventoryItem>
+	
+	<InventoryItem ID="2440">
+		<NameComment>거신/마법사/탐욕의 제단 프리미엄</NameComment>
+		<Name>InventoryItemName_2440</Name>
+		<AdminToolOnlyName>거신/마법사/탐욕의 제단 프리미엄</AdminToolOnlyName>
+		<Desc>InventoryItemName_2440</Desc>
+		<Tier>1</Tier>
+		<ItemTooltipType>Etc</ItemTooltipType>
+		<ShortCut Type="None"/>
+		
+		<RogueLikeTargetBuildingsKey>GiantMagicianGleedBuilding</RogueLikeTargetBuildingsKey>
+		<RogueLikeBonusBuildingIdx>3,4,5</RogueLikeBonusBuildingIdx>
+		<AddDimensionRiftRegionSynergyReroll>1</AddDimensionRiftRegionSynergyReroll>
+
+		<DimensionRiftNeedHeartReduceAmount>2</DimensionRiftNeedHeartReduceAmount>
+		<AddMaxRiftCrystalInventory>1</AddMaxRiftCrystalInventory>
+		<NeedRiftGaugeReduceAmount>5</NeedRiftGaugeReduceAmount>
+		<RiftWeaponDustAddAmountPer>10</RiftWeaponDustAddAmountPer>
+	</InventoryItem>
+	<!-- 보구 관련 아이템 -->
+	<!-- 3000번대
+		000번 | 교환 가능 재화
+		100번 | 경험치 재료
+		200번 | 초월재료 -->
+	<InventoryItem ID="3000">
+		<NameComment>보구의 파편</NameComment>
+		<Name>InventoryItemName_2500</Name>
+		<AdminToolOnlyName>보구의 파편</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2500</Desc>
+		<AddTreasureExp>30</AddTreasureExp>
+		<ItemTooltipType>Treasure</ItemTooltipType>
+		<InventoryCategory>Currency</InventoryCategory>
+		<Shortcuts>1,3</Shortcuts>
+	</InventoryItem>
+	<InventoryItem ID="3001">
+		<NameComment>보구의 별</NameComment>
+		<Name>InventoryItemName_3001</Name>
+		<AdminToolOnlyName>보구의 별조각</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_3001</Desc>
+		<ItemTooltipType>Treasure</ItemTooltipType>
+		<InventoryCategory>Currency</InventoryCategory>
+		<Shortcuts>28,29</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="3100">
+		<NameComment>보구의 원석</NameComment>
+		<Name>InventoryItemName_2510</Name>
+		<AdminToolOnlyName>보구의 원석</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2510</Desc>
+		<AddTreasureExp>150</AddTreasureExp>
+		<ItemTooltipType>Treasure</ItemTooltipType>
+		<InventoryCategory>Currency</InventoryCategory>
+		<Shortcuts>28</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="3101">
+		<NameComment>킹 보구의 원석</NameComment>
+		<Name>InventoryItemName_2520</Name>
+		<AdminToolOnlyName>킹 보구의 원석</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2520</Desc>
+		<AddTreasureExp>450</AddTreasureExp>
+		<ItemTooltipType>Treasure</ItemTooltipType>
+		<ForceImageScale>0.6</ForceImageScale>
+		<InventoryCategory>Currency</InventoryCategory>
+		<Shortcuts>1,32,41</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="3102">
+		<NameComment>갓 보구의 원석</NameComment>
+		<Name>InventoryItemName_2530</Name>
+		<AdminToolOnlyName>갓 보구의 원석</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2530</Desc>
+		<AddTreasureExp>1350</AddTreasureExp>
+		<ItemTooltipType>Treasure</ItemTooltipType>
+		<ForceImageScale>0.6</ForceImageScale>
+		<InventoryCategory>Currency</InventoryCategory>
+		<Shortcuts>1</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="3200">
+		<NameComment>초월의 주괴</NameComment>
+		<Name>InventoryItemName_2540</Name>
+		<AdminToolOnlyName>초월의 주괴</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2540</Desc>
+		<TreasureOvercomeMaterial>true</TreasureOvercomeMaterial>
+		<ItemTooltipType>Treasure</ItemTooltipType>
+		<InventoryCategory>Currency</InventoryCategory>
+		<Shortcuts>1,32,39,38,28</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="3300">
+		<NameComment>무작위 일반 보구</NameComment>
+		<AdminToolOnlyName>무작위 일반 보구</AdminToolOnlyName>
+		<TreasureRarity>Common</TreasureRarity>
+		<ItemTooltipType>Treasure</ItemTooltipType>
+		<HideInInventory>true</HideInInventory>
+		<Shortcuts>28</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="3301">
+		<NameComment>무작위 희귀 보구</NameComment>
+		<AdminToolOnlyName>무작위 희귀 보구</AdminToolOnlyName>
+		<TreasureRarity>Rare</TreasureRarity>
+		<ItemTooltipType>Treasure</ItemTooltipType>
+		<HideInInventory>true</HideInInventory>
+		<Shortcuts>28</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="3302">
+		<NameComment>무작위 특급 보구</NameComment>
+		<AdminToolOnlyName>무작위 특급 보구</AdminToolOnlyName>
+		<TreasureRarity>Special</TreasureRarity>
+		<ItemTooltipType>Treasure</ItemTooltipType>
+		<HideInInventory>true</HideInInventory>
+		<Shortcuts>28</Shortcuts>
+		
+		<NameFormat LocalizeTextArg0="TreasureRarityShort_Special">RandomTreasureFormat</NameFormat>
+	</InventoryItem>
+<!-- 장신구 관련 아이템 -->
+	<!-- 4000번대
+		000번 | 교환 가능 재화
+		100번 | 경험치 재료
+		200번 | 초월재료 -->
+	<InventoryItem ID="4000">
+		<NameComment>장신구 파편</NameComment>
+		<Name>InventoryItemName_2550</Name>
+		<AdminToolOnlyName>장신구 파편</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2550</Desc>
+		<AddAccessoryExp>50</AddAccessoryExp>
+		<ItemTooltipType>Accessory</ItemTooltipType>
+		<InventoryCategory>Currency</InventoryCategory>
+		<Shortcuts>5</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="4100">
+		<NameComment>장신구 강화석</NameComment>
+		<Name>InventoryItemName_2560</Name>
+		<AdminToolOnlyName>장신구 강화석</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2560</Desc>
+		<AddAccessoryExp>150</AddAccessoryExp>
+		<ItemTooltipType>Accessory</ItemTooltipType>
+		<InventoryCategory>Currency</InventoryCategory>
+		<Shortcuts>37,28</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="4101">
+		<NameComment>킹 장신구 강화석</NameComment>
+		<Name>InventoryItemName_2570</Name>
+		<AdminToolOnlyName>킹 장신구 강화석</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2570</Desc>
+		<AddAccessoryExp>450</AddAccessoryExp>
+		<ItemTooltipType>Accessory</ItemTooltipType>
+		<InventoryCategory>Currency</InventoryCategory>
+		<Shortcuts>1,32,42</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="4102">
+		<NameComment>갓 장신구 강화석</NameComment>
+		<Name>InventoryItemName_2580</Name>
+		<AdminToolOnlyName>갓 장신구 강화석</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_2580</Desc>
+		<AddAccessoryExp>1350</AddAccessoryExp>
+		<ItemTooltipType>Accessory</ItemTooltipType>
+		<InventoryCategory>Currency</InventoryCategory>
+		<Shortcuts>1</Shortcuts>
+		
+	</InventoryItem>
+	
+	<InventoryItem ID="4200">
+		<NameComment>변환석</NameComment>
+		<AdminToolOnlyName>변환석</AdminToolOnlyName>
+	</InventoryItem>
+	<InventoryItem ID="4201">
+		<NameComment>강화 전체 초기화</NameComment>
+		<AdminToolOnlyName>강화 전체 초기화</AdminToolOnlyName>
+	</InventoryItem>
+	<InventoryItem ID="4202">
+		<NameComment>강화 한 단계 초기화</NameComment>
+		<AdminToolOnlyName>강화 한 단계 초기화</AdminToolOnlyName>
+	</InventoryItem>
+	
+	<!-- 5000~ : 세트 선택 상자
+		5500~ : 특급 장신구 선택 상자
+		6000~ : 고정형 상자
+		7000~ : 확률형 상자
+	 -->
+	
+	<InventoryItem ID="5000">
+		<NameComment>특급 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5000</Name>
+		<AdminToolOnlyName>특급 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5000</RewardBoxInventoryDataID>
+		<InventorySortingOrder>5499</InventorySortingOrder>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<Shortcuts>28,29</Shortcuts>
+	</InventoryItem>
+	
+	<InventoryItem ID="5001">
+		<NameComment>강철의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5001</Name>
+		<AdminToolOnlyName>강철의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5001</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	
+	<InventoryItem ID="5002">
+		<NameComment>두려움의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5002</Name>
+		<AdminToolOnlyName>두려움의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5002</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	
+	<InventoryItem ID="5003">
+		<NameComment>예리의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5003</Name>
+		<AdminToolOnlyName>예리의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5003</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5004">
+		<NameComment>바다의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5004</Name>
+		<AdminToolOnlyName>바다의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5004</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5005">
+		<NameComment>바람의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5005</Name>
+		<AdminToolOnlyName>바람의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5005</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5006">
+		<NameComment>야만의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5006</Name>
+		<AdminToolOnlyName>야만의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5006</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	
+	<InventoryItem ID="5007">
+		<NameComment>금강의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5007</Name>
+		<AdminToolOnlyName>금강의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5007</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	
+	<InventoryItem ID="5008">
+		<NameComment>계약의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5008</Name>
+		<AdminToolOnlyName>계약의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5008</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5009">
+		<NameComment>영원의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5009</Name>
+		<AdminToolOnlyName>영원의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5009</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5010">
+		<NameComment>월광의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5010</Name>
+		<AdminToolOnlyName>월광의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5010</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5011">
+		<NameComment>억압의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5011</Name>
+		<AdminToolOnlyName>억압의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5011</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5012">
+		<NameComment>절명의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5012</Name>
+		<AdminToolOnlyName>절명의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5012</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>	
+
+	<InventoryItem ID="5013">
+		<NameComment>승천의 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_5013</Name>
+		<AdminToolOnlyName>승천의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5013</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>		
+	
+	<InventoryItem ID="5500">
+		<NameComment>특급 장신구 선택 상자(~ 금강)</NameComment>
+		<Name>InventoryItemName_5000</Name>
+		<AdminToolOnlyName>특급 장신구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5000</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5500</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<Shortcuts>28,29</Shortcuts>
+	</InventoryItem>
+	
+	<InventoryItem ID="5501">
+		<NameComment>특급 장신구 선택 상자(~ 계약)</NameComment>
+		<Name>InventoryItemName_5000</Name>
+		<AdminToolOnlyName>특급 장신구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5000</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5501</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<Shortcuts>28,29</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="5502">
+		<NameComment>특급 장신구 선택 상자(~ 영원)</NameComment>
+		<Name>InventoryItemName_5000</Name>
+		<AdminToolOnlyName>특급 장신구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5000</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5502</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<Shortcuts>28,29</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="5503">
+		<NameComment>특급 장신구 선택 상자(~ 월광)</NameComment>
+		<Name>InventoryItemName_5000</Name>
+		<AdminToolOnlyName>특급 장신구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5000</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5503</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<Shortcuts>28,29</Shortcuts>
+	</InventoryItem>	
+
+	<InventoryItem ID="5504">
+		<NameComment>특급 장신구 선택 상자(~ 억압)</NameComment>
+		<Name>InventoryItemName_5000</Name>
+		<AdminToolOnlyName>특급 장신구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5000</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5504</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<Shortcuts>28,29</Shortcuts>
+		</InventoryItem>
+
+	<InventoryItem ID="5505">
+		<NameComment>특급 장신구 선택 상자(~ 절명)</NameComment>
+		<Name>InventoryItemName_5000</Name>
+		<AdminToolOnlyName>특급 장신구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5000</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5505</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<Shortcuts>28,29</Shortcuts>
+		</InventoryItem>
+		
+	<InventoryItem ID="5506">
+		<NameComment>특급 장신구 선택 상자(~ 승천)</NameComment>
+		<Name>InventoryItemName_5000</Name>
+		<AdminToolOnlyName>특급 장신구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5000</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5506</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		<Shortcuts>28,29</Shortcuts>
+		</InventoryItem>			
+	
+	<InventoryItem ID="5600">
+		<NameComment>4주년 후발대 선택상자</NameComment>
+		<Name>InventoryItemName_5600</Name>
+		<AdminToolOnlyName>4주년 후발대 영웅 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5600</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5600</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5601">
+		<NameComment>4.5주년 패스 스킨 선택상자</NameComment>
+		<Name>InventoryItemName_5601</Name>
+		<AdminToolOnlyName>4.5주년 기념 패스스킨 선택상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5601</Sprite>
+		<Desc>InventoryItemDesc_SkinBox</Desc>
+		<DescFormatting>Season</DescFormatting>
+		<Season>47</Season>
+
+		<Type>SkinBoxInventory</Type>
+		<SkinCatalog>FOURTH_AND_HALF_YEAR</SkinCatalog>
+		
+		<AlternateReward Type="Cash" Count="100" />
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5602">
+		<NameComment>6초월 인기 보구 선택 상자</NameComment>
+		<Name>InventoryItemName_5602</Name>
+		<AdminToolOnlyName>4주년 후발대 영웅 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5602</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>	
+
+	<InventoryItem ID="5603">
+		<NameComment>2026-05-21 30038 오류, 위시리스트 선택 상자</NameComment>
+		<Name>InventoryItemName_5603</Name>
+		<AdminToolOnlyName>2026-05-21 30038 오류, 위시리스트 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5603</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	
+	<InventoryItem ID="5604">
+		<NameComment>2026-06-17 30039 오류, 위시리스트 선택 상자</NameComment>
+		<Name>InventoryItemName_5603</Name>
+		<AdminToolOnlyName>2026-06-17 30039 오류, 위시리스트 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5604</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<!-- 6000 ~ : 고정형 상자 -->
+	
+	<InventoryItem ID="6000">
+		<NameComment>초급자 미션 보상 바람 장신구 세트 상자</NameComment>
+		<Name>InventoryItemName_6000</Name>
+		<AdminToolOnlyName>바람 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6000</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6000</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+    <!-- 잠식 습격 2 장신구 세트 보상 추가 -->
+    <InventoryItem ID="6100">
+		<NameComment>잠식 II-1 쉬움 보상 예리 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6100</Name>
+		<AdminToolOnlyName>예리 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6100</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6100</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+    <InventoryItem ID="6101">
+		<NameComment>잠식 II-2 쉬움 보상 야만 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6101</Name>
+		<AdminToolOnlyName>야만 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6101</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6101</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+    <InventoryItem ID="6102">
+		<NameComment>잠식 II-3 쉬움 보상 바다 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6102</Name>
+		<AdminToolOnlyName>바다 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6102</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6102</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+    <InventoryItem ID="6103">
+		<NameComment>잠식 II-4 쉬움 보상 금강 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6103</Name>
+		<AdminToolOnlyName>금강 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6103</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6103</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+    <InventoryItem ID="6104">
+		<NameComment>잠식 II-5 쉬움 보상 계약 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6104</Name>
+		<AdminToolOnlyName>계약 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6104</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6104</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+    <InventoryItem ID="6105">
+		<NameComment>잠식 II-6 쉬움 보상 영원 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6105</Name>
+		<AdminToolOnlyName>영원 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6105</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6105</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+    <InventoryItem ID="6106">
+		<NameComment>잠식 II-7 쉬움 보상 침묵 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6106</Name>
+		<AdminToolOnlyName>월광 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6106</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6106</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="6107">
+		<NameComment>잠식 II-8 쉬움 보상 억압 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6107</Name>
+		<AdminToolOnlyName>억압 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6107</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6107</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="6108">
+		<NameComment>잠식 II-9 쉬움 보상 절명 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6108</Name>
+		<AdminToolOnlyName>절명 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6108</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6108</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="6109">
+		<NameComment>잠식 II-10 쉬움 보상 승천 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6109</Name>
+		<AdminToolOnlyName>승천 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6109</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6109</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>	
+
+    <InventoryItem ID="6110">
+		<NameComment>5.5주년 월광 세트 장신구 상자</NameComment>
+		<Name>InventoryItemName_6106</Name>
+		<AdminToolOnlyName>월광 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_6106</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6110</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>	
+	
+	<InventoryItem ID="6300">
+		<NameComment>사르굴라 패키지 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_6300</Name>
+		<AdminToolOnlyName>강철 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5001</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6300</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="6400">
+		<NameComment>설날 패키지 월광 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_6400</Name>
+		<AdminToolOnlyName>설날 월광 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5010</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6400</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>	
+
+	<InventoryItem ID="6500">
+		<NameComment>벨리나 패키지 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_6500</Name>
+		<AdminToolOnlyName>계약 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5008</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6500</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>	
+	
+	<!-- 7000 ~ : 확률형 선택 상자 -->
+    <InventoryItem ID="7000">
+		<NameComment>장신구 보조 옵션 변경권 랜덤 상자</NameComment>
+		<Name>InventoryItemName_7000</Name>
+		<AdminToolOnlyName>장신구 보조 능력치 변경권 랜덤 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_ProbableBox</Desc>
+        <Shortcuts>28</Shortcuts>
+        
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>7000</RewardBoxInventoryDataID>
+        
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+    <InventoryItem ID="7001">
+		<NameComment>습격 후반부 세트 무작위 장신구 상자</NameComment>
+		<Name>InventoryItemName_7001</Name>
+		<AdminToolOnlyName>습격 후반부 세트 무작위 장신구 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_ProbableBox</Desc>
+		<Sprite>InventoryItem_5000</Sprite>
+        
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>7001</RewardBoxInventoryDataID>
+        
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>	
+
+    <InventoryItem ID="7100">
+		<NameComment>챌린지 토큰 상자</NameComment>
+		<Name>InventoryItemName_7100</Name>
+		<AdminToolOnlyName>챌린지 토큰 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_ProbableBox</Desc>
+		<Sprite>InventoryItem_7100</Sprite>
+        
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>7100</RewardBoxInventoryDataID>
+        
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>		
+	
+	<InventoryItem ID="8000">
+		<NameComment>균열 장비 신비한 가루</NameComment>
+		<Name>InventoryItemName_8000</Name>
+		<AdminToolOnlyName>차원의 파편</AdminToolOnlyName>
+		<Sprite>InventoryItem_8000</Sprite>
+		<Desc>InventoryItemDesc_8000</Desc>
+		
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	
+	<InventoryItem ID="8100">
+		<NameComment>균열의 기운</NameComment>
+		<AdminToolOnlyName>균열의 기운</AdminToolOnlyName>
+	</InventoryItem>
+
+	<InventoryItem ID="8120">
+		<NameComment>100% 특급 균열 장비 +20 강화권</NameComment>
+		<AdminToolOnlyName>100% 특급 균열 장비 +20 강화권</AdminToolOnlyName>
+		<NameFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemNameFormat_8100</NameFormat>
+		<DescFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemDescFormat_8100</DescFormat>
+		<Sprite>InventoryItem_8100</Sprite>
+		
+		<SetRiftWeaponLevel>20</SetRiftWeaponLevel>
+		<SetRiftWeaponLevelProb>100</SetRiftWeaponLevelProb>
+		<SetRiftWeaponLevelRarityOnly>Special</SetRiftWeaponLevelRarityOnly>
+
+		<Shortcuts>43</Shortcuts>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="8122">
+		<NameComment>100% 특급 균열 장비 +22 강화권</NameComment>
+		<AdminToolOnlyName>100% 특급 균열 장비 +22 강화권</AdminToolOnlyName>
+		<NameFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemNameFormat_8100</NameFormat>
+		<DescFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemDescFormat_8100</DescFormat>
+		<Sprite>InventoryItem_8100</Sprite>
+		
+		<SetRiftWeaponLevel>22</SetRiftWeaponLevel>
+		<SetRiftWeaponLevelProb>100</SetRiftWeaponLevelProb>
+		<SetRiftWeaponLevelRarityOnly>Special</SetRiftWeaponLevelRarityOnly>
+
+		<Shortcuts>43</Shortcuts>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="8123">
+		<NameComment>100% 특급 균열 장비 +23 강화권</NameComment>
+		<AdminToolOnlyName>100% 특급 균열 장비 +23 강화권</AdminToolOnlyName>
+		<NameFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemNameFormat_8100</NameFormat>
+		<DescFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemDescFormat_8100</DescFormat>
+		<Sprite>InventoryItem_8100</Sprite>
+		
+		<SetRiftWeaponLevel>23</SetRiftWeaponLevel>
+		<SetRiftWeaponLevelProb>100</SetRiftWeaponLevelProb>
+		<SetRiftWeaponLevelRarityOnly>Special</SetRiftWeaponLevelRarityOnly>
+
+		<Shortcuts>43</Shortcuts>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="8125">
+		<NameComment>100% 특급 균열 장비 +25 강화권</NameComment>
+		<AdminToolOnlyName>100% 특급 균열 장비 +25 강화권</AdminToolOnlyName>
+		<NameFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemNameFormat_8100</NameFormat>
+		<DescFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemDescFormat_8100</DescFormat>
+		<Sprite>InventoryItem_8100</Sprite>
+		
+		<SetRiftWeaponLevel>25</SetRiftWeaponLevel>
+		<SetRiftWeaponLevelProb>100</SetRiftWeaponLevelProb>
+		<SetRiftWeaponLevelRarityOnly>Special</SetRiftWeaponLevelRarityOnly>
+
+		<Shortcuts>43</Shortcuts>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="8127">
+		<NameComment>100% 특급 균열 장비 +27 강화권</NameComment>
+		<AdminToolOnlyName>100% 특급 균열 장비 +27 강화권</AdminToolOnlyName>
+		<NameFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemNameFormat_8100</NameFormat>
+		<DescFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemDescFormat_8100</DescFormat>
+		<Sprite>InventoryItem_8100</Sprite>
+		
+		<SetRiftWeaponLevel>27</SetRiftWeaponLevel>
+		<SetRiftWeaponLevelProb>100</SetRiftWeaponLevelProb>
+		<SetRiftWeaponLevelRarityOnly>Special</SetRiftWeaponLevelRarityOnly>
+
+		<Shortcuts>43</Shortcuts>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="8128">
+		<NameComment>100% 특급 균열 장비 +28 강화권</NameComment>
+		<AdminToolOnlyName>100% 특급 균열 장비 +28 강화권</AdminToolOnlyName>
+		<NameFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemNameFormat_8100</NameFormat>
+		<DescFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemDescFormat_8100</DescFormat>
+		<Sprite>InventoryItem_8100</Sprite>
+
+		<SetRiftWeaponLevel>28</SetRiftWeaponLevel>
+		<SetRiftWeaponLevelProb>100</SetRiftWeaponLevelProb>
+		<SetRiftWeaponLevelRarityOnly>Special</SetRiftWeaponLevelRarityOnly>
+
+		<Shortcuts>43</Shortcuts>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	<InventoryItem ID="8130">
+		<NameComment>100% 특급 균열 장비 +30 강화권</NameComment>
+		<AdminToolOnlyName>100% 특급 균열 장비 +30 강화권</AdminToolOnlyName>
+		<NameFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemNameFormat_8100</NameFormat>
+		<DescFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemDescFormat_8100</DescFormat>
+		<Sprite>InventoryItem_8100</Sprite>
+
+		<SetRiftWeaponLevel>30</SetRiftWeaponLevel>
+		<SetRiftWeaponLevelProb>100</SetRiftWeaponLevelProb>
+		<SetRiftWeaponLevelRarityOnly>Special</SetRiftWeaponLevelRarityOnly>
+
+		<Shortcuts>43</Shortcuts>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="8133">
+		<NameComment>100% 특급 균열 장비 +33 강화권</NameComment>
+		<AdminToolOnlyName>100% 특급 균열 장비 +33 강화권</AdminToolOnlyName>
+		<NameFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemNameFormat_8100</NameFormat>
+		<DescFormat InnerTextArg0="SetRiftWeaponLevel">InventoryItemDescFormat_8100</DescFormat>
+		<Sprite>InventoryItem_8100</Sprite>
+
+		<SetRiftWeaponLevel>33</SetRiftWeaponLevel>
+		<SetRiftWeaponLevelProb>100</SetRiftWeaponLevelProb>
+		<SetRiftWeaponLevelRarityOnly>Special</SetRiftWeaponLevelRarityOnly>
+
+		<Shortcuts>43</Shortcuts>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>	
+	
+	<InventoryItem ID="8200">
+		<NameComment>강화 불능 해제권</NameComment>
+		<Name>InventoryItemName_8200</Name>
+		<AdminToolOnlyName>균열장비 강화불능 해제권</AdminToolOnlyName>
+		<Sprite>InventoryItem_8200</Sprite>
+		<Desc>InventoryItemDesc_8200</Desc>
+		<Shortcuts>43</Shortcuts>
+		
+		<ResetRiftWeaponBroken>true</ResetRiftWeaponBroken>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="8300">
+		<NameComment>균열 가루 꾸러미 (소)</NameComment>
+		<Name>InventoryItemName_8300</Name>
+		<AdminToolOnlyName>차원의 파편 꾸러미 (소)</AdminToolOnlyName>
+		<Sprite>InventoryItem_8300</Sprite>
+		<Desc>InventoryItemDesc_8300</Desc>
+		<Shortcuts>43</Shortcuts>
+
+		<Type>InstantRewardBox</Type>
+		<RewardBoxInventoryDataID>8300</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	
+	<InventoryItem ID="8301">
+		<NameComment>균열 가루 꾸러미 (중)</NameComment>
+		<Name>InventoryItemName_8301</Name>
+		<AdminToolOnlyName>차원의 파편 꾸러미 (중)</AdminToolOnlyName>
+		<Sprite>InventoryItem_8301</Sprite>
+		<Desc>InventoryItemDesc_8301</Desc>
+		<Shortcuts>43</Shortcuts>
+		<Type>InstantRewardBox</Type>
+		<RewardBoxInventoryDataID>8301</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+	
+	<InventoryItem ID="8302">
+		<NameComment>균열 가루 꾸러미 (대)</NameComment>
+		<Name>InventoryItemName_8302</Name>
+		<AdminToolOnlyName>차원의 파편 꾸러미 (대)</AdminToolOnlyName>
+		<Sprite>InventoryItem_8302</Sprite>
+		<Desc>InventoryItemDesc_8302</Desc>
+		<Shortcuts>43</Shortcuts>
+
+		<Type>InstantRewardBox</Type>
+		<RewardBoxInventoryDataID>8302</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+    <InventoryItem ID="8400">
+        <NameComment>장신구 보조 옵션 변경권 (공격력%)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (공격력%)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="Atk">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="Atk">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>AtkPer</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8401">
+        <NameComment>장신구 보조 옵션 변경권 (주문력%)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (주문력%)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="MAtk">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="MAtk">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>MAtkPer</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8402">
+        <NameComment>장신구 보조 옵션 변경권 (체력%)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (체력%)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="Hp">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="Hp">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>HpPer</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8403">
+        <NameComment>장신구 보조 옵션 변경권 (공격속도%)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (공격속도%)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="AttackSpeed">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="AttackSpeed">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>AttackSpeedPer</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8404">
+        <NameComment>장신구 보조 옵션 변경권 (물리 방어력)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (물리 방어력)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="Def">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="Def">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>BaseDef</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8405">
+        <NameComment>장신구 보조 옵션 변경권 (주문 방어력)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (주문 방어력)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="MDef">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="MDef">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>BaseMDef</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8406">
+        <NameComment>장신구 보조 옵션 변경권 (물리 치명타 확률%)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (물리 치명타 확률%)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="CriticalProb">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="CriticalProb">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>BaseCriticalProb</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8407">
+        <NameComment>장신구 보조 옵션 변경권 (물리 치명타 피해량%)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (물리 치명타 피해량%)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="CriticalDamageMul">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="CriticalDamageMul">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>BaseCriticalDamageMul</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8408">
+        <NameComment>장신구 보조 옵션 변경권 (주문 치명타 확률%)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (주문 치명타 확률%)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="MCriticalProb">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="MCriticalProb">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>BaseMCriticalProb</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8409">
+        <NameComment>장신구 보조 옵션 변경권 (주문 치명타 피해량%)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (주문 치명타 피해량%)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="MCriticalDamageMul">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="MCriticalDamageMul">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>BaseMCriticalDamageMul</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8410">
+        <NameComment>장신구 보조 옵션 변경권 (특수 피해량%)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (특수 피해량%)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="SpecialDamageMul">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="SpecialDamageMul">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>BaseSpecialDamageMul</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8411">
+        <NameComment>장신구 보조 옵션 변경권 (위협)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (위협)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="DefPen">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="DefPen">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>BaseDefPen</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="8412">
+        <NameComment>장신구 보조 옵션 변경권 (수호)</NameComment>
+        <AdminToolOnlyName>장신구 보조 옵션 변경권 (수호)</AdminToolOnlyName>
+        <NameFormat LocalizeTextArg0="DefDen">InventoryItemNameFormat_8400</NameFormat>
+        <DescFormat LocalizeTextArg0="DefDen">InventoryItemDescFormat_8400</DescFormat>
+        <Shortcuts>28</Shortcuts>
+
+        <Type>ChangeAccessorySubStatItem</Type>
+        <SetAccessorySubStat>BaseDefDen</SetAccessorySubStat>
+
+        <ItemTooltipType>Consumable</ItemTooltipType>
+        <InventoryCategory>Consumable</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="9000">
+        <NameComment>아펠피시아 업데이트 패키지 누적 결제 이벤트 토큰</NameComment>
+        <Name>InventoryItemName_9000</Name>
+        <AdminToolOnlyName>누적 결제 이벤트 토큰</AdminToolOnlyName>
+        <Desc>InventoryItemDesc_9000</Desc>
+        <Sprite>ShopEvent_Token</Sprite>
+        <HideInInventory>true</HideInInventory>
+        <ItemTooltipType>Token</ItemTooltipType>
+        <ShortCut Type="None"/>
+        <InventoryCategory>Currency</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="9001">
+        <NameComment>5주년 주식 투자 이벤트 살리드 토큰</NameComment>
+        <Name>InventoryItemName_9001</Name>
+        <AdminToolOnlyName>5주년 주식 투자 이벤트 살리드 토큰</AdminToolOnlyName>
+        <Desc>InventoryItemDesc_9001</Desc>
+        <Sprite>StockEventToken</Sprite>
+        <HideInInventory>true</HideInInventory>
+        <ItemTooltipType>Token</ItemTooltipType>
+        <ShortCut Type="None"/>
+        <InventoryCategory>Currency</InventoryCategory>
+    </InventoryItem>
+
+    <InventoryItem ID="9002">
+        <NameComment>아나테마 업데이트 패키지 누적 결제 이벤트 토큰</NameComment>
+        <Name>InventoryItemName_9000</Name>
+        <AdminToolOnlyName>누적 결제 이벤트 토큰</AdminToolOnlyName>
+        <Desc>InventoryItemDesc_9000</Desc>
+        <Sprite>ShopEvent_Token</Sprite>
+        <HideInInventory>true</HideInInventory>
+        <ItemTooltipType>Token</ItemTooltipType>
+        <ShortCut Type="None"/>
+        <InventoryCategory>Currency</InventoryCategory>
+    </InventoryItem>
+
+	<!-- 오직 보상 내용 보여주기의 용도 -->
+	<InventoryItem ID="9100">
+		<NameComment>5.5주년 연속 출석 보상</NameComment>
+		<Name>ContinuousAttendanceReward</Name>
+		<AdminToolOnlyName>5.5주년 연속 출석 보상</AdminToolOnlyName>
+		<Sprite>InventoryItem_7100</Sprite>
+		<Desc>RewardBoxInventoryDesc_6000</Desc>
+
+		<Type>InstantRewardBox</Type>
+		<RewardBoxInventoryDataID>9100</RewardBoxInventoryDataID>
+
+		<HideInInventory>true</HideInInventory>
+    </InventoryItem>	
+	
+	<InventoryItem ID="10000">
+		<NameComment>차원의 핵</NameComment>
+		<AdminToolOnlyName>차원의 핵</AdminToolOnlyName>
+		
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+
+		<Shortcuts>47</Shortcuts>
+	</InventoryItem>
+
+	<InventoryItem ID="10010">
+		<NameComment>차원의 잔향</NameComment>
+		<AdminToolOnlyName>차원의 잔향</AdminToolOnlyName>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+
+		<Shortcuts>49,47</Shortcuts>
+	</InventoryItem>
+	<InventoryItem ID="10020">
+		<NameComment>차원 영웅 돌파권</NameComment>
+		<AdminToolOnlyName>차원 영웅 돌파권</AdminToolOnlyName>
+		
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+
+		<Shortcuts>48</Shortcuts>
+	</InventoryItem>
+	
+	<InventoryItem ID="70000">
+		<NameComment>이격 영웅 소환서</NameComment>
+		<Name>ShopItemName_70000</Name>
+		<AdminToolOnlyName>이격 영웅 소환서</AdminToolOnlyName>
+		<Desc>ShopItemDesc_70000</Desc>
+		<Sprite>ShopItem_70000_Key</Sprite>
+		<ItemTooltipType>Key</ItemTooltipType>
+		<ShortCut Type="None"/>
+		<InventoryCategory>Currency</InventoryCategory>
+
+		<Shortcuts>49,8</Shortcuts>
+	</InventoryItem>
+</InventoryItems>

@@ -1,0 +1,1913 @@
+<!-- xml 정보
+    ID 사용 규칙 : 
+        (1) xx00 : 대상 테마 ID (Themes.xml ID)
+        (2) 00xx : 대상 난이도 (쉬움 ~ 킹 -> 1 ~ 5)
+        
+    필드 구성 :
+        (1) Rewards : 클리어 보상
+        (2) PassPrewards : 패스 구매 시 추가 클리어 보상
+-->
+<InvasionRewards>
+    
+    <InvasionReward ID="101">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="102">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="103">
+        <Rewards>
+            <Key ID="300" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="104">
+        <Rewards>
+            <Key ID="301" Count="2"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="105">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="201">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="202">
+        <Rewards>
+            <Card ID="10100"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="203">
+        <Rewards>
+            <Key ID="301" Count="2"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="204">
+        <Rewards>
+            <Key ID="302" Count="2"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="205">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="301">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="302">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="303">
+        <Rewards>
+            <Key ID="301" Count="2"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="304">
+        <Rewards>
+            <Key ID="302" Count="2"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="305">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="401">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="402">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="403">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="404">
+        <Rewards>
+            <Key ID="301" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="405">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="501">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="502">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="503">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="504">
+        <Rewards>
+            <Cash Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="505">
+        <Rewards>
+            <NewUnitGachaItem Count="1"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <NewUnitGachaItem Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="601">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="602">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="603">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="604">
+        <Rewards>
+            <Key ID="301" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="605">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="701">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="702">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="703">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="704">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="705">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="801">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="802">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="803">
+        <Rewards>
+            <Key ID="301" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="804">
+        <Rewards>
+            <Cash Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="805">
+        <Rewards>
+            <NewUnitGachaItem Count="1"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <NewUnitGachaItem Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="901">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="902">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="903">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="904">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="905">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1001">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1002">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1003">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1004">
+        <Rewards>
+            <Cash Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="302" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1005">
+        <Rewards>
+            <NewUnitGachaItem Count="1"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <NewUnitGachaItem Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1101">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1102">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1103">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1104">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1105">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3200" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1201">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1202">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1203">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1204">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1205">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3200" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1301">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1302">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1303">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1304">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1305">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3200" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1401">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1402">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1403">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1404">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1405">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3200" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1501">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1502">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1503">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1504">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1505">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3200" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1601">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="5602" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1602">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1603">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+             <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1604">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+             <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1605">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Treasure_Special Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1701">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1702">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1703">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1704">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1705">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Treasure_Special Count="1"/>
+        </PassRewards>
+    </InvasionReward>    
+
+    <InvasionReward ID="1801">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1802">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1803">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1804">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+           <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1805">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Treasure_Special Count="1"/>
+        </PassRewards>
+    </InvasionReward>       
+
+	<!-- 습격 2-9 -->
+    <InvasionReward ID="1901">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1902">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1903">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1904">
+        <Rewards>
+            <Key ID="302" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3101" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="1905">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Treasure_Special Count="1"/>
+        </PassRewards>
+    </InvasionReward>       
+
+	<!-- 습격 2-10 -->
+	<InvasionReward ID="2001">
+		<Rewards>
+			<Cash Count="10"/>
+		</Rewards>
+		<PassRewards>
+			<InventoryItem ID="3101" Count="2"/>
+		</PassRewards>
+	</InvasionReward>
+
+	<InvasionReward ID="2002">
+		<Rewards>
+			<InventoryItem ID="601" Count="3"/>
+		</Rewards>
+		<PassRewards>
+			<InventoryItem ID="3101" Count="2"/>
+		</PassRewards>
+	</InvasionReward>
+
+	<InvasionReward ID="2003">
+		<Rewards>
+			<InventoryItem ID="163" Count="1"/>
+		</Rewards>
+		<PassRewards>
+			<InventoryItem ID="3101" Count="3"/>
+		</PassRewards>
+	</InvasionReward>
+
+	<InvasionReward ID="2004">
+		<Rewards>
+			<Key ID="302" Count="4"/>
+		</Rewards>
+		<PassRewards>
+			<InventoryItem ID="3101" Count="3"/>
+		</PassRewards>
+	</InvasionReward>
+
+	<InvasionReward ID="2005">
+		<Rewards>
+			<Cash Count="20"/>
+		</Rewards>
+		<PassRewards>
+            <Treasure_Special Count="1"/>
+		</PassRewards>
+	</InvasionReward>
+
+    <InvasionReward ID="5101">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5102">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5103">
+        <Rewards>
+            <Key ID="350" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5104">
+        <Rewards>
+            <Key ID="351" Count="2"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5105">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="512" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5201">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5202">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5203">
+        <Rewards>
+            <Key ID="351" Count="2"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5204">
+        <Rewards>
+            <Key ID="352" Count="2"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5205">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="512" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5301">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5302">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5303">
+        <Rewards>
+            <Key ID="351" Count="2"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5304">
+        <Rewards>
+            <Key ID="352" Count="2"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5305">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="512" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5401">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5402">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5403">
+        <Rewards>
+            <Artifact ID="600" Count="3"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5404">
+        <Rewards>
+            <Key ID="351" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5405">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="513" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5501">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5502">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5503">
+        <Rewards>
+            <Key ID="351" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5504">
+        <Rewards>
+            <Cash Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5505">
+        <Rewards>
+            <Artifact ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="513" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5601">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5602">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5603">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5604">
+        <Rewards>
+            <Key ID="351" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5605">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5701">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5702">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5703">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5704">
+        <Rewards>
+            <Key ID="352" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5705">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5801">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5802">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5803">
+        <Rewards>
+            <Key ID="351" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5804">
+        <Rewards>
+            <Cash Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5805">
+        <Rewards>
+            <Artifact ID="801" Count="2"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5901">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5902">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5903">
+        <Rewards>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5904">
+        <Rewards>
+            <Key ID="352" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="5905">
+        <Rewards>
+            <Cash Count="20"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6001">
+        <Rewards>
+            <Cash Count="10"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6002">
+        <Rewards>
+            <InventoryItem ID="601" Count="3"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6003">
+        <Rewards>
+            <Key ID="352" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="2"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6004">
+        <Rewards>
+            <Cash Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="801" Count="3"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6005">
+        <Rewards>
+            <Artifact ID="801" Count="2"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Artifact ID="601" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6101">
+        <Rewards>
+            <InventoryItem ID="6100" Count="1"/>
+            <Key ID="370" Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6102">
+        <Rewards>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6103">
+        <Rewards>
+            <InventoryItem ID="3101" Count="3"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6104">
+        <Rewards>
+            <InventoryItem ID="4101" Count="3"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6105">
+        <Rewards>
+            <Cash Count="30"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3200" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6201">
+        <Rewards>
+            <InventoryItem ID="6101" Count="1"/>
+            <Key ID="370" Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6202">
+        <Rewards>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6203">
+        <Rewards>
+            <InventoryItem ID="3101" Count="5"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6204">
+        <Rewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6205">
+        <Rewards>
+            <Cash Count="30"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3200" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6301">
+        <Rewards>
+            <InventoryItem ID="6102" Count="1"/>
+            <Key ID="370" Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6302">
+        <Rewards>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6303">
+        <Rewards>
+            <InventoryItem ID="3101" Count="7"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6304">
+        <Rewards>
+            <InventoryItem ID="4101" Count="7"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6305">
+        <Rewards>
+            <Cash Count="30"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3200" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6401">
+        <Rewards>
+            <InventoryItem ID="6103" Count="1"/>
+            <Key ID="370" Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6402">
+        <Rewards>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6403">
+        <Rewards>
+            <InventoryItem ID="3102" Count="2"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6404">
+        <Rewards>
+            <InventoryItem ID="4102" Count="2"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6405">
+        <Rewards>
+            <Cash Count="30"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3200" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+    
+    <InvasionReward ID="6501">
+        <Rewards>
+            <InventoryItem ID="6104" Count="1"/> 
+            <Key ID="370" Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6502">
+        <Rewards>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6503">
+        <Rewards>
+            <InventoryItem ID="3102" Count="3"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6504">
+        <Rewards>
+            <InventoryItem ID="4102" Count="3"/>
+        </Rewards>
+        <PassRewards>
+            <Key ID="370" Count="5"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6505">
+        <Rewards>
+            <Cash Count="30"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="3200" Count="1"/>
+        </PassRewards>
+    </InvasionReward>
+
+    <InvasionReward ID="6601">
+        <Rewards>
+            <InventoryItem ID="6105" Count="1"/> 
+            <Key ID="370" Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>        
+    </InvasionReward>
+
+    <InvasionReward ID="6602">
+        <Rewards>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>          
+    </InvasionReward>
+
+    <InvasionReward ID="6603">
+        <Rewards>
+            <InventoryItem ID="3102" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>          
+    </InvasionReward>
+
+    <InvasionReward ID="6604">
+        <Rewards>
+            <InventoryItem ID="4102" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>                   
+    </InvasionReward>
+
+    <InvasionReward ID="6605">
+        <Rewards>
+            <Cash Count="30"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="7001" Count="1"/>
+        </PassRewards>            
+    </InvasionReward>
+
+    <InvasionReward ID="6701">
+        <Rewards>
+            <InventoryItem ID="6106" Count="1"/> 
+            <Key ID="370" Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>                  
+    </InvasionReward>
+
+    <InvasionReward ID="6702">
+        <Rewards>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>                  
+    </InvasionReward>
+
+    <InvasionReward ID="6703">
+        <Rewards>
+            <InventoryItem ID="3102" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>                  
+    </InvasionReward>
+
+    <InvasionReward ID="6704">
+        <Rewards>
+            <InventoryItem ID="4102" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>                  
+    </InvasionReward>
+
+    <InvasionReward ID="6705">
+        <Rewards>
+            <Cash Count="30"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="7001" Count="1"/>
+        </PassRewards>          
+    </InvasionReward>
+
+	<!-- 잠식 2-8 -->
+	<InvasionReward ID="6801">
+        <Rewards>
+            <InventoryItem ID="6107" Count="1"/>
+            <Key ID="370" Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>               
+    </InvasionReward>
+
+    <InvasionReward ID="6802">
+        <Rewards>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>               
+    </InvasionReward>
+
+    <InvasionReward ID="6803">
+        <Rewards>
+            <InventoryItem ID="3102" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>               
+    </InvasionReward>
+
+    <InvasionReward ID="6804">
+        <Rewards>
+            <InventoryItem ID="4102" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>               
+    </InvasionReward>
+
+    <InvasionReward ID="6805">
+        <Rewards>
+            <Cash Count="30"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="7001" Count="1"/>
+        </PassRewards>             
+    </InvasionReward>
+
+	<!-- 잠식 2-9 -->
+	<InvasionReward ID="6901">
+        <Rewards>
+            <InventoryItem ID="6108" Count="1"/>
+            <Key ID="370" Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>            
+    </InvasionReward>
+
+    <InvasionReward ID="6902">
+        <Rewards>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>            
+    </InvasionReward>
+
+    <InvasionReward ID="6903">
+        <Rewards>
+            <InventoryItem ID="3102" Count="4"/>
+            <InventoryItem ID="2106" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>            
+    </InvasionReward>
+
+    <InvasionReward ID="6904">
+        <Rewards>
+            <InventoryItem ID="4102" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>            
+    </InvasionReward>
+
+    <InvasionReward ID="6905">
+        <Rewards>
+            <Cash Count="30"/>
+            <InventoryItem ID="2105" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="7001" Count="1"/>
+        </PassRewards>           
+    </InvasionReward>
+	<!-- 잠식 2-10 -->
+	<InvasionReward ID="7001">
+        <Rewards>
+            <InventoryItem ID="6109" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>            
+    </InvasionReward>
+
+    <InvasionReward ID="7002">
+        <Rewards>
+            <Key ID="370" Count="20"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>            
+    </InvasionReward>
+
+    <InvasionReward ID="7003">
+        <Rewards>
+            <InventoryItem ID="7000" Count="1"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>            
+    </InvasionReward>
+
+    <InvasionReward ID="7004">
+        <Rewards>
+            <InventoryItem ID="4102" Count="4"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="4101" Count="5"/>
+        </PassRewards>            
+    </InvasionReward>
+
+    <InvasionReward ID="7005">
+        <Rewards>
+            <Cash Count="30"/>
+        </Rewards>
+        <PassRewards>
+            <InventoryItem ID="7001" Count="1"/>
+        </PassRewards>          
+    </InvasionReward>    
+</InvasionRewards>

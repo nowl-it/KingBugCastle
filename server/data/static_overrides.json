@@ -1,0 +1,611 @@
+{
+  "/auth/shake-hand": {},
+  "/auth/xcd": {},
+  "/player/dailyAttendanceEvents": {
+    "attendedDays": 1,
+    "events": []
+  },
+  "/player/surprise-attendance-event": {
+    "attendedDays": 1
+  },
+  "/player/daily-consumed-currencies": {},
+  "/player/game-skip-information": {},
+  "/game/adBonus": {
+    "adBonusGold": 1000,
+    "adBonusRemainCount": 2
+  },
+  "/mission/reward/goal": {
+    "missions": [],
+    "missionGoal": 0,
+    "missionKeyStack": 0
+  },
+  "/pvp/all-rewards": {},
+  "/pvp/win-reward": {},
+  "/pvp/dormant-progress": {},
+  "/colosseum/all-tier-rewards": {},
+  "/colosseum/match": {
+    "success": true,
+    "matchMakingSecond": 0
+  },
+  "/clan/attendance": {},
+  "/clan/fetchChat": {
+    "chats": []
+  },
+  "/clan/refreshChat": {
+    "chats": []
+  },
+  "/clan/search": {
+    "clans": [],
+    "totalCount": 0
+  },
+  "/clan/ranking": {
+    "clanRankings": [],
+    "myClanRanking": null
+  },
+  "/clan/raid": {
+    "season": 1,
+    "bossId": 42500,
+    "bossLevel": 1,
+    "bossHp": 1000000,
+    "maxBossHp": 1000000,
+    "phase": 1
+  },
+  "/rogueLike/season-info": {
+    "seasonInfo": {},
+    "seasonRewards": []
+  },
+  "/rogueLike/startFloor": {
+    "errorCode": 0,
+    "cards": []
+  },
+  "/rogueLike/endFloor": {
+    "addGold": 500,
+    "cards": []
+  },
+  "/rogueLike/save-rogueLike": {},
+  "/rogueLike/out-game": {
+    "rogueLikeOutGameStatus": {
+      "collectedRune": {},
+      "collectedDLCRune": {},
+      "collectedArtifact": {},
+      "collectedHero": {},
+      "collectedGodItem": {},
+      "totalEventCount": 0,
+      "totalDeathCount": 0,
+      "totalUsedGold": 0,
+      "totalKillCount": 0,
+      "bossKillCount": {}
+    },
+    "totalClearCount": 0
+  },
+  "/rogueLike/load-rogueLike-data": {
+    "rogueLikeSaveData": "",
+    "rogueLikeOwnCardSnapshot": "",
+    "state": "",
+    "saveVersion": 0,
+    "lastHeartPaidFloor": 0,
+    "lastGameStartedSeason": 0
+  },
+  "/mission/roguelike": {
+    "rogueLikeMissions": [],
+    "rogueLikeSeasonMissions": [],
+    "totalScore": 0
+  },
+  "/mission/roguelike/check": {},
+  "/mission/roguelike/update": {},
+  "/ranking": {
+    "rankings": [],
+    "myRank": 0
+  },
+  "/story-mode": {
+    "storyClearInfos": []
+  },
+  "/story-mode/save": {
+    "storyClearInfos": []
+  },
+  "/story-mode/chest-reward": {
+    "storyClearInfos": []
+  },
+  "/story-mode/delete": {
+    "storyClearInfos": []
+  },
+  "/decoration": {
+    "flagInfo": {
+      "flagsModel": [],
+      "equipedFlag": {
+        "flagId": 0,
+        "season": 0
+      }
+    },
+    "nameTagInfo": {
+      "nameTagsModel": [],
+      "equippedNameTag": {
+        "nameTagId": 0
+      }
+    },
+    "mapSkinInfo": {
+      "mapSkinList": []
+    },
+    "advisorInfo": {
+      "advisorList": []
+    },
+    "loginSkinInfo": {
+      "loginSkinList": []
+    },
+    "equipInfo": {
+      "appliedMapSkinData": {},
+      "appliedAdvisor": 0,
+      "appliedLoginSkin": 0,
+      "loginSceneIllustData": null
+    }
+  },
+  "/territory/hunting/fetch": {},
+  "/territory/hunting/start": {},
+  "/territory/hunting/end": {},
+  "/territory/hunting/stop": {},
+  "/customevent/complete": {
+    "completed": false
+  },
+  "/seasonal-event/fetch": {
+    "events": [],
+    "currentEventId": 0
+  },
+  "/EarlyAccessModeInfos/EarlyAccessModeInfo": {},
+  "/lobby": {},
+  "/post": {
+    "posts": []
+  },
+  "/post/receive": {
+    "posts": [],
+    "rewards": []
+  },
+  "/trigger/execute": {},
+  "/trigger/execute-saved": {},
+  "/flag/set": {},
+  "/nameTag/inventory": {
+    "nameTags": []
+  },
+  "/nameTag/set": {},
+  "/incgame-coupon": {},
+  "/test/roguelike/reset-all-mission": {},
+  "/test/set-dimension-rift-ranking": {},
+  "/shop": {
+    "dailyItems": [],
+    "gachaItems": [],
+    "goldItems": [],
+    "cashItems": [],
+    "packageItems": [],
+    "playerPackageItems": [],
+    "eventPackageItems": [],
+    "eventShopItems": [],
+    "specialEventShopItems": [],
+    "skinReturnShopItems": [],
+    "arenaShopItems": [],
+    "clanShopItems": [],
+    "challengeShopItems": [],
+    "hardModeShopItems": [],
+    "newGachaItems": [],
+    "newHeroSkinPackageItems": [],
+    "eventPackageItemsUntilAt": null,
+    "gachaKeys": [],
+    "gachaStacks": [],
+    "availableTimeLimitGachas": [],
+    "artifactBoxStack": [],
+    "artifactBoxKey": [],
+    "remainAdHeart": 0,
+    "dailyBuyHeartCount": 0,
+    "nextRefreshTime": null,
+    "nextBox2FreeTime": null,
+    "godSkinPackageInformation": [],
+    "godSkinSalePackageInformation": [],
+    "refreshCount": 0,
+    "adShopCount": 0,
+    "dailyShopAdCount": 0,
+    "dailyShopRefreshFreeCount": 0,
+    "events": []
+  },
+  "/kg-wiki": {
+    "unitWiki": {
+      "wikiElements": [
+        {
+          "dataId": 10000,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10010,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10020,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10030,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10040,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10050,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10060,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10070,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10080,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10090,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10100,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10110,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10120,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10140,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10150,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10170,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10180,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10190,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10200,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10210,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10220,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10230,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10240,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10250,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10260,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10270,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10280,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10290,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10300,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10310,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10320,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10330,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10340,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10350,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10360,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10370,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10380,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10390,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10410,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10420,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10430,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10440,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10450,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10480,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10490,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10500,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10510,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10520,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10530,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10540,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10560,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10570,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10580,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10590,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10600,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10620,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10630,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10640,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10660,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10670,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10680,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10690,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10700,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10710,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10720,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10730,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10740,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10750,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10760,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10770,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10780,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10790,
+          "rewarded": true,
+          "collected": true
+        },
+        {
+          "dataId": 10800,
+          "rewarded": true,
+          "collected": true
+        }
+      ],
+      "percentage": 0
+    },
+    "artifactWiki": {
+      "wikiElements": [],
+      "percentage": 0
+    },
+    "treasureWiki": {
+      "wikiElements": [],
+      "percentage": 0
+    },
+    "accessoryWiki": {
+      "wikiElements": [],
+      "percentage": 0
+    },
+    "riftWeaponWiki": {
+      "wikiElements": [],
+      "percentage": 0
+    },
+    "unitVoiceWiki": {
+      "wikiElements": [],
+      "percentage": 0
+    },
+    "skinWiki": {
+      "wikiElements": [],
+      "percentage": 0
+    },
+    "cutsceneWiki": {
+      "wikiElements": [],
+      "percentage": 0
+    },
+    "storyInventoryWiki": {
+      "wikiElements": [],
+      "percentage": 0
+    }
+  }
+}
