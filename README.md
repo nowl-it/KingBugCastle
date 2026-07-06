@@ -30,6 +30,21 @@ By dumping the IL2CPP metadata and intercepting network traffic, we have success
 
 ---
 
+## 🛠️ Environment & Prerequisites
+
+To successfully run the backend and deployment scripts, your system must meet the following environment requirements:
+
+* **OS**: Linux (Ubuntu/Debian recommended) or macOS. (Windows requires WSL2).
+* **Python**: Python 3.11 or higher. (A `.venv` virtual environment is highly recommended).
+* **System Tools**:
+  * `apktool` (for unpacking/repacking APKs)
+  * `apksigner` (for signing the patched APK)
+  * `adb` (Android Debug Bridge, for installing onto device/emulator)
+* **Emulator**: If testing locally, **redroid** Docker container is highly recommended and must be run with `androidboot.redroid_gpu_mode=guest` (swiftshader) to avoid vsync/choreographer crashes.
+* **Dependencies**: Run `pip install -r server/requirements.txt` to install FastAPI, Uvicorn, LIEF, and other dependencies.
+
+---
+
 ## 🗺️ Architecture & Workflow
 
 ```mermaid
