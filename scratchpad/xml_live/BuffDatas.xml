@@ -1,0 +1,4865 @@
+<!--
+        스테이터스 사용가능한 타입들
+        CurrentHp,
+        Hp,
+        CurrentMp,
+        Mp,
+        AttackSpeed, (소숫점 단위로 사용)
+        Atk,
+        MoveSpeed,
+        MAtk,
+-->
+
+<BuffDatas>
+    <BuffData ID="1">
+        <Type>StatusBuff</Type>
+        <Comment>스테이터스 버프 예시</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>5</Duration>
+        <!--새 버프-->
+        <AtkPer>20</AtkPer>
+    </BuffData>
+
+    <BuffData ID="2">
+        <Type>DotDamageBuff</Type>
+        <IntervalSecond>1</IntervalSecond>
+        <Comment>도트뎀 버프 예시</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>5</Duration>
+    </BuffData>
+
+    <!-- 로그라이크 선택지방 보상용 버프데이터들 (60xxx) -->
+    <BuffData ID="60001">
+        <Type>StatusBuff</Type>
+        <Comment>피해량 -45</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <TotalDamagePer>-45</TotalDamagePer>
+    </BuffData>
+
+    <BuffData ID="60002">
+        <Type>TickIntervalBuff</Type>
+        <Comment>전투 시작 시 현재 체력 -65% 피해</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Stack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>0.12</Duration>
+        <TickTime>0.1</TickTime>
+        <TickConsumeHp>0</TickConsumeHp>
+        <TickConsumeByHpRatio>65</TickConsumeByHpRatio>
+        <DontDieByTick>true</DontDieByTick>
+    </BuffData>
+
+    <BuffData ID="60003">
+        <Type>TickIntervalBuff</Type>
+        <Comment>전투 시작 시 최대 체력 -30% 피해</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Stack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>0.12</Duration>
+        <TickTime>0.1</TickTime>
+        <TickDamage>0</TickDamage>
+        <TickDamageByMaxHpRatio>30</TickDamageByMaxHpRatio>
+    </BuffData>
+
+    <BuffData ID="60004">
+        <Type>StatusBuff</Type>
+        <Comment>치유량 -50%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <TotalHealAdaptabilityPer>-50</TotalHealAdaptabilityPer>
+    </BuffData>
+
+    <BuffData ID="60005">
+        <Type>StatusBuff</Type>
+        <Comment>최대 체력 -30%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <HpPer>-30</HpPer>
+    </BuffData>
+
+    <BuffData ID="60006">
+        <Type>StatusBuff</Type>
+        <Comment>최대 체력 -60%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <HpPer>-60</HpPer>
+    </BuffData>
+
+    <BuffData ID="60007">
+        <Type>StatusBuff</Type>
+        <Comment>총 공격속도 -20%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <TotalAttackSpeedPer>-20</TotalAttackSpeedPer>
+    </BuffData>
+
+    <BuffData ID="60008">
+        <Type>StatusBuff</Type>
+        <Comment>피해량 +50%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <DamagePer>50</DamagePer>
+    </BuffData>
+
+    <BuffData ID="60009">
+        <Type>StatusBuff</Type>
+        <Comment>받는 피해량 +50%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <TakeDamagePer>50</TakeDamagePer>
+    </BuffData>
+
+    <BuffData ID="60010">
+        <Type>StatusBuff</Type>
+        <Comment>피해량 -70%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <DamagePer>-70</DamagePer>
+    </BuffData>
+
+    <BuffData ID="60011">
+        <Type>StatusBuff</Type>
+        <Comment>방어력 +200</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <BaseHybridDef>200</BaseHybridDef>
+    </BuffData>
+
+    <BuffData ID="60012">
+        <Type>StatusBuff</Type>
+        <Comment>상태이상 면역</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <TotalCCRatioPer>-100</TotalCCRatioPer>
+    </BuffData>
+
+    <!-- 로그라이크 시련의 방용 버프데이터들 (61xxx) -->
+    <BuffData ID="61001">
+        <Type>StatusBuff</Type>
+        <Comment>로그라이크 아군 영웅의 공격력 50% 감소</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <!--새 버프-->
+        <AtkPer>-50</AtkPer>
+    </BuffData>
+
+    <BuffData ID="61002">
+        <Type>StatusBuff</Type>
+        <Comment>로그라이크 아군 마나 요구량 150% 디버프</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <!--새 버프-->
+        <MaxManaPer>50</MaxManaPer>
+    </BuffData>
+
+    <BuffData ID="610030">
+        <Type>StatusBuff</Type>
+        <Comment>로그라이크 적군 평타 흡혈 50% 버프</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <!--새 버프-->
+        <Drain>50</Drain>
+    </BuffData>
+
+    <BuffData ID="610031">
+        <Type>StatusBuff</Type>
+        <Comment>로그라이크 적군 스킬 흡혈 50% 버프</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <!--새 버프-->
+        <MagicDrain>50</MagicDrain>
+    </BuffData>
+
+    <BuffData ID="610040">
+        <Type>StatusBuff</Type>
+        <Comment>로그라이크 아군 평타 흡혈 불가 디버프</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <!--새 버프-->
+        <RemoveDrain>true</RemoveDrain>
+    </BuffData>
+
+    <BuffData ID="61005">
+        <Type>StatusBuff</Type>
+        <Comment>로그라이크 아군 영웅의 주문력 50% 감소</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <!--새 버프-->
+        <MAtkPer>-50</MAtkPer>
+    </BuffData>
+    
+    <BuffData ID="61006">
+        <Type>TickIntervalBuff</Type>
+        <Comment>로그라이크 매 초마다 아군 체력 3%만큼 피해 디버프</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Stack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <TickTime>1</TickTime>
+        <TickDamage>0</TickDamage>
+        <TickDamageByMaxHpRatio>3</TickDamageByMaxHpRatio>
+    </BuffData>
+
+    <BuffData ID="61007">
+        <Type>StatusBuff</Type>
+        <Comment>로그라이크 아군 전투 시작후 절대 방어 생성 차단</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <!--새 버프-->
+        <TotalSuperShieldAdaptabilityPer>-100</TotalSuperShieldAdaptabilityPer>
+    </BuffData>
+
+    <BuffData ID="510081">
+        <Type>TickIntervalBuff</Type>
+        <Comment>탑 매 초마다 아군 체력 5%만큼 피해 디버프</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Stack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <TickTime>1</TickTime>
+        <TickDamage>0</TickDamage>
+        <TickDamageByMaxHpRatio>100</TickDamageByMaxHpRatio>
+    </BuffData>
+
+    <BuffData ID="3000510">
+        <Type>StatusBuff</Type>
+        <Comment>적의 공격력 100% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>ResetAndStack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <!--새 버프-->
+        <AtkPer>100</AtkPer>
+    </BuffData>
+
+    <BuffData ID="3000511" Inherit="30005100">
+        <Comment>적의 주문력 100% 증가</Comment>
+        <!--새 버프-->
+        <MAtkPer>100</MAtkPer>
+    </BuffData>
+
+    <BuffData ID="3000512" Inherit="30005100">
+        <Comment>적의 체력 100% 증가</Comment>
+        <!--새 버프-->
+        <HpPer>100</HpPer>
+    </BuffData>
+
+    <BuffData ID="52002" Inherit="51008">
+        <Type>TickIntervalBuff</Type>
+        <Comment>탑 매 초마다 아군 체력 100%만큼 피해 디버프</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Stack</StackType>
+        <MaxStackCount>1</MaxStackCount>
+        <Duration>-1</Duration>
+        <TickTime>1</TickTime>
+        <TickDamage>0</TickDamage>
+        <TickDamageByMaxHpRatio>100</TickDamageByMaxHpRatio>
+    </BuffData>
+
+    <!-- 아레나 버프 (7xxxx) -->
+    <BuffData ID="70000">
+        <Type>FromBuffOption</Type>
+        <Comment>그림자 영웅 한 기당 아군 영웅 최대 체력 8% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" Max="40" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Shadow">800</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70001">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해, 주는 피해 20% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Defense" StatValueType="PerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-20</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>20</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="70002">
+        <Type>FromBuffOption</Type>
+        <Comment>신비 영웅 한 기당 아군 영웅 최대 체력 15% 증가 (최대 45%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" Max="45" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <!-- value 입력은 % 값 x 100 해서 설정하면 됩니다. (15%) -->
+                <FieldUnitCount Role="Mystic">1500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70003">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 20% 감소, 주는 피해 20% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Defense" StatValueType="PerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>20</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>20</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70004">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Defense" StatValueType="PerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70005">
+        <Type>FromBuffOption</Type>
+        <Comment>중부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <!-- value 입력은 % 값 x 100 해서 설정하면 됩니다. (20%) -->
+                <FieldUnitCount Region="Central">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70006">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Defense" StatValueType="PerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70007">
+        <Type>FromBuffOption</Type>
+        <Comment>북부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <!-- value 입력은 % 값 x 100 해서 설정하면 됩니다. (20%) -->
+                <FieldUnitCount Region="North">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70008">
+        <Type>FromBuffOption</Type>
+        <Comment>주는 피해 30% 증가, 사거리 + 1</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Range" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>2</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70009">
+        <Type>FromBuffOption</Type>
+        <Comment>서부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <!-- value 입력은 % 값 x 100 해서 설정하면 됩니다. (20%) -->
+                <FieldUnitCount Region="West">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70010">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Defense" StatValueType="PerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70011">
+        <Type>FromBuffOption</Type>
+        <Comment>남부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <!-- value 입력은 % 값 x 100 해서 설정하면 됩니다. (20%) -->
+                <FieldUnitCount Region="South">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70012">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Defense" StatValueType="PerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70013">
+        <Type>FromBuffOption</Type>
+        <Comment>동부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <!-- value 입력은 % 값 x 100 해서 설정하면 됩니다. (20%) -->
+                <FieldUnitCount Region="East">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70014">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Defense" StatValueType="PerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70015">
+        <Type>FromBuffOption</Type>
+        <Comment>중부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <!-- value 입력은 % 값 x 100 해서 설정하면 됩니다. (20%) -->
+                <FieldUnitCount Region="Central">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70016">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Defense" StatValueType="PerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70017">
+        <Type>FromBuffOption</Type>
+        <Comment>그림자 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Shadow">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70018">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70019">
+        <Type>FromBuffOption</Type>
+        <Comment>강인 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Toughness">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70020">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70021">
+        <Type>FromBuffOption</Type>
+        <Comment>신속 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Swift">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70022">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70023">
+        <Type>FromBuffOption</Type>
+        <Comment>용기 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Brave">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70024">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70025">
+        <Type>FromBuffOption</Type>
+        <Comment>원소 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Element">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+     <BuffData ID="70026">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Defense" StatValueType="PerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70027">
+        <Type>FromBuffOption</Type>
+        <Comment>신비 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Mystic">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70028">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Defense" StatValueType="PerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70029">
+        <Type>FromBuffOption</Type>
+        <Comment>서부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="West">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70030">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70031">
+        <Type>FromBuffOption</Type>
+        <Comment>남부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="South">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70032">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70033">
+        <Type>FromBuffOption</Type>
+        <Comment>동부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="East">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70034">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 30% 감소, 주는 피해 30% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-30</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70035">
+        <Type>FromBuffOption</Type>
+        <Comment>중부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="60" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="Central">2000</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70036">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70037">
+        <Type>FromBuffOption</Type>
+        <Comment>북부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="North">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70038">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70039">
+        <Type>FromBuffOption</Type>
+        <Comment>신속 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Swift">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="70040">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70041">
+        <Type>FromBuffOption</Type>
+        <Comment>신비 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Mystic">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70042">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70043">
+        <Type>FromBuffOption</Type>
+        <Comment>그림자 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Shadow">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70044">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70045">
+        <Type>FromBuffOption</Type>
+        <Comment>강인 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Toughness">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70046">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70047">
+        <Type>FromBuffOption</Type>
+        <Comment>용기 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Brave">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+        <BuffData ID="70048">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70049">
+        <Type>FromBuffOption</Type>
+        <Comment>남부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="South">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+        <BuffData ID="70050">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70051">
+        <Type>FromBuffOption</Type>
+        <Comment>서부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="West">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+        <BuffData ID="70052">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70053">
+        <Type>FromBuffOption</Type>
+        <Comment>중부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="Central">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+        <BuffData ID="70054">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70055">
+        <Type>FromBuffOption</Type>
+        <Comment>동부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="East">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+     <BuffData ID="70056">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70057">
+        <Type>FromBuffOption</Type>
+        <Comment>북부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="North">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+     <BuffData ID="70058">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70059">
+        <Type>FromBuffOption</Type>
+        <Comment>용기 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Brave">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+     <BuffData ID="70060">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70061">
+        <Type>FromBuffOption</Type>
+        <Comment>원소 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Element">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>    
+     <BuffData ID="70062">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70063">
+        <Type>FromBuffOption</Type>
+        <Comment>신비 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Mystic">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>        
+     <BuffData ID="70064">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70065">
+        <Type>FromBuffOption</Type>
+        <Comment>그림자 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Shadow">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>    
+     <BuffData ID="70066">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70067">
+        <Type>FromBuffOption</Type>
+        <Comment>신속 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Swift">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70068">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70069">
+        <Type>FromBuffOption</Type>
+        <Comment>강인 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Toughness">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>    
+     <BuffData ID="70070">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70071">
+        <Type>FromBuffOption</Type>
+        <Comment>용기 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Brave">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>                     
+    <BuffData ID="70072">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70073">
+        <Type>FromBuffOption</Type>
+        <Comment>남부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="South">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>    
+     <BuffData ID="70074">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70075">
+        <Type>FromBuffOption</Type>
+        <Comment>북부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="North">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>       
+  <BuffData ID="70076">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70077">
+        <Type>FromBuffOption</Type>
+        <Comment>중부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="Central">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>    
+     <BuffData ID="70078">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70079">
+        <Type>FromBuffOption</Type>
+        <Comment>동부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="East">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData> 
+  <BuffData ID="70080">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70081">
+        <Type>FromBuffOption</Type>
+        <Comment>서부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="West">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>    
+     <BuffData ID="70082">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70083">
+        <Type>FromBuffOption</Type>
+        <Comment>남부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="South">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>           
+  <BuffData ID="70084">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70085">
+        <Type>FromBuffOption</Type>
+        <Comment>북부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="North">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>    
+     <BuffData ID="70086">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70087">
+        <Type>FromBuffOption</Type>
+        <Comment>중부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="Central">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70088">
+        <Type>FromBuffOption</Type>
+        <Comment>내 진영과 상대 진영의 모든 영웅 중 위협 스탯이 가장 높은 영웅의 진영에 최종 피해량 +20%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+                <IsBestStatTeam StatType="DefPen"/>
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="TotalPerValue" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>20</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70089">
+        <Type>FromBuffOption</Type>
+        <Comment>내 진영과 상대 진영의 모든 영웅 중 수호 스탯이 가장 높은 영웅의 진영에 받는 피해량 -20%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+                <IsBestStatTeam StatType="DefDen"/>
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-20</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70090">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70091">
+        <Type>FromBuffOption</Type>
+        <Comment>동부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="East">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70092">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70093">
+        <Type>FromBuffOption</Type>
+        <Comment>서부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="West">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70094">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70095">
+        <Type>FromBuffOption</Type>
+        <Comment>남부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="South">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70096">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70097">
+        <Type>FromBuffOption</Type>
+        <Comment>북부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="North">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>    
+    <BuffData ID="70098">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70099">
+        <Type>FromBuffOption</Type>
+        <Comment>중부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="Central">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70100">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70101">
+        <Type>FromBuffOption</Type>
+        <Comment>동부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="East">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>        
+    <BuffData ID="70102">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70103">
+        <Type>FromBuffOption</Type>
+        <Comment>서부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="West">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70104">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70105">
+        <Type>FromBuffOption</Type>
+        <Comment>남부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Region="South">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>    
+    <BuffData ID="70106">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70107">
+        <Type>FromBuffOption</Type>
+        <Comment>강인 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Toughness">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="70104">
+        <Type>FromBuffOption</Type>
+        <Comment>받는 피해 35% 감소, 주는 피해 40% 증가</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-35</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="70105">
+        <Type>FromBuffOption</Type>
+        <Comment>남부 영웅 한 기당 아군 영웅 최대 체력 25% 증가 (최대 75%)</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Hp" StatValueType="PerValue" HaveToBind="true" ReleaseBindWhenBattleStart="true" Max="75" AddHpOnAddMaxHp="true"/>
+            </BuffContents>
+
+            <Values>
+                <FieldUnitCount Role="Brave">2500</FieldUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>              
+</BuffDatas>

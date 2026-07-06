@@ -1,0 +1,912 @@
+<BuffDatas>
+    <BuffData ID="600000">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 균열 점수 +20000점</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <SetCustomStack Name="AdvantageRogueLikeScore" Unique="false"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>20000</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600001">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅의 최종 공격력/주문력 +70%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Atk" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>70</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="MAtk" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>70</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600002">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅의 최종 피해량 +30%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="1">./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600003">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅의 받는 피해 -50%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="-1">./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-50</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600004">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅의 최종 치명/특수 피해량 +60%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="1">./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText Mag="1">./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="HybridCriticalDamageMul" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>60</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="SpecialDamageMul" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>60</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600005">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅의 기본 마나충전 +40%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="BaseMana" StatValueType="BaseValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600006">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅의 수호/위협 +50</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="DefDen" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>50</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="DefPen" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>50</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600007">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅의 방어력 +500</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="HybridDef" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>500</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600008">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅의 일반/스킬 증폭 +60%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="SkillDamageMul" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>60</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="AttackDamageMul" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>60</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600009">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅의 처형률 +30%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+                <DimensionRiftSeasonalAdvantage />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Execution" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="600100">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 균열 점수 -30000점</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="-1">./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+                <DimensionRiftSeasonalPenalty />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <SetCustomStack Name="PenaltyRogueLikeScore" Unique="false"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-30000</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600101">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 내 모든 영웅의 치명/특수 피해량 -40%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="-1">./BuffOptions[1]/Values/DimensionRiftPenaltyUnitCount</InnerText>
+            <InnerText Mag="-1">./BuffOptions[2]/Values/DimensionRiftPenaltyUnitCount</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="HybridCriticalDamageMul" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <DimensionRiftPenaltyUnitCount>-40</DimensionRiftPenaltyUnitCount>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="SpecialDamageMul" StatValueType="PerValue"/>
+            </BuffContents>
+
+            <Values>
+                <DimensionRiftPenaltyUnitCount>-40</DimensionRiftPenaltyUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600102">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 내 모든 영웅의 받는 피해량 +30%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="1">./BuffOptions[1]/Values/DimensionRiftPenaltyUnitCount</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <DimensionRiftPenaltyUnitCount>30</DimensionRiftPenaltyUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600103">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 내 모든 영웅의 최종 피해량 -25%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="-1">./BuffOptions[1]/Values/DimensionRiftPenaltyUnitCount</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <DimensionRiftPenaltyUnitCount>-25</DimensionRiftPenaltyUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600104">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 내 모든 영웅의 최종 공격력/주문력 -30%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="-1">./BuffOptions[1]/Values/DimensionRiftPenaltyUnitCount</InnerText>
+            <InnerText Mag="-1">./BuffOptions[2]/Values/DimensionRiftPenaltyUnitCount</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Atk" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <DimensionRiftPenaltyUnitCount>-30</DimensionRiftPenaltyUnitCount>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="MAtk" StatValueType="TotalPerValue"/>
+            </BuffContents>
+
+            <Values>
+                <DimensionRiftPenaltyUnitCount>-30</DimensionRiftPenaltyUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600105">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 은화 획득량 -20%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="-1">./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+                <DimensionRiftSeasonalPenalty />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <SetCustomStack Name="AddTotalGoldBuffPer" Unique="false"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-20</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600106">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 내 모든 영웅의 수호/위협 -80</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="-1">./BuffOptions[1]/Values/DimensionRiftPenaltyUnitCount</InnerText>
+            <InnerText Mag="-1">./BuffOptions[2]/Values/DimensionRiftPenaltyUnitCount</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="DefDen" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <DimensionRiftPenaltyUnitCount>-80</DimensionRiftPenaltyUnitCount>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="DefPen" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <DimensionRiftPenaltyUnitCount>-80</DimensionRiftPenaltyUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600107">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 내 모든 영웅의 방어력 -500</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="-1">./BuffOptions[1]/Values/DimensionRiftPenaltyUnitCount</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="HybridDef" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <DimensionRiftPenaltyUnitCount>-500</DimensionRiftPenaltyUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600108">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 경험치 획득량 -20%</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText Mag="-1">./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+                <DimensionRiftSeasonalPenalty />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <SetCustomStack Name="AddTotalRogueLikeExpBuffPer" Unique="false"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-20</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="600109">
+        <Type>FromBuffOption</Type>
+        <Comment>소속 영웅 보유 수 만큼 내 모든 영웅의 최대 마나 +50</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/DimensionRiftPenaltyUnitCount</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="MaxMana" StatValueType="Value"/>
+            </BuffContents>
+
+            <Values>
+                <DimensionRiftPenaltyUnitCount>50</DimensionRiftPenaltyUnitCount>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="600110">
+        <Type>FromBuffOption</Type>
+        <Comment>효과 없음</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <DescParams>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <SetCustomStack Name="NoEffect"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>1</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+</BuffDatas>

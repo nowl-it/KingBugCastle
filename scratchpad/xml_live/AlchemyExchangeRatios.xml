@@ -1,0 +1,51 @@
+<AlchemyExchangeRatios>
+
+    <AlchemyExchangeRatio ID="1">
+        <Currency>Labor</Currency>
+        <Ratio>0.01</Ratio>
+        <Limit>20000</Limit>
+    </AlchemyExchangeRatio>
+
+    <AlchemyExchangeRatio ID="2">
+        <Currency>Dust</Currency>
+        <Ratio>0.2</Ratio>
+        <Limit>1000</Limit>
+    </AlchemyExchangeRatio>
+
+    <AlchemyExchangeRatio ID="3">
+        <Currency>UnitExp</Currency>
+        <Ratio>3</Ratio>
+        <Limit>700</Limit>
+    </AlchemyExchangeRatio>
+
+    <AlchemyExchangeRatio ID="4">
+        <Currency>UnitSoul</Currency>
+        <Ratio>8</Ratio>
+        <Limit>100</Limit>
+    </AlchemyExchangeRatio>
+
+    <AlchemyExchangeRatio ID="5">
+        <Currency>RiftWeaponDust</Currency>
+        <Unit>1</Unit>
+        <Ratio>0.1</Ratio>
+        <Limit>1000</Limit>
+    </AlchemyExchangeRatio>
+
+    <AlchemyExchangeRatio ID="6">
+        <Currency>HardModeToken</Currency>
+        <Ratio>0.05</Ratio>
+        <Limit>2000</Limit>
+    </AlchemyExchangeRatio>
+
+    <AlchemyExchangeRatio ID="7">
+        <Currency>HardModeToken2</Currency>
+        <Ratio>0.1</Ratio>
+        <Limit>1000</Limit>
+    </AlchemyExchangeRatio>
+
+    <AlchemyExchangeRatio ID="700">
+        <Currency>Ratio_700</Currency>
+        <Ratio>1</Ratio>
+        <Limit>9999</Limit>
+    </AlchemyExchangeRatio>
+</AlchemyExchangeRatios>

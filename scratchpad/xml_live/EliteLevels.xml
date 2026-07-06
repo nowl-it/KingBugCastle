@@ -1,0 +1,234 @@
+<EliteLevels>
+	<EliteLevel ID="300051">
+		<Type>EventTrigger</Type>
+		<Desc>Vegita, what does scouter say about his power level?                     It's over {Value}!!!!</Desc>
+		<MaxLevel>5</MaxLevel>
+		<!-- 1레벨 올리는데 필요한 포인트의 양(예: 적 성급 n성 증가 도전) -->
+		<LevelRatio>1</LevelRatio>
+		<!-- 적용할 이벤트 트리거 -->
+		<!-- 해당 이벤트 트리거에 들어있는 버프데이터에 ValueRatio 계수를 곱해준 뒤 실제 인게임에 적용함 -->
+		<EventTrigger>0</EventTrigger>
+		
+		<!-- ValueRatio, RewardRatio를 레벨마다 각각 설정해주고 싶을 경우 LevelDatas에 MaxLevel만큼 레벨 순서대로 넣어주면 됨 -->
+		<LevelDatas>
+			<LevelData ValueRatio="0" RewardRatio="0"/>
+			<LevelData ValueRatio="1800" RewardRatio="30"/>
+			<LevelData ValueRatio="3600" RewardRatio="60"/>
+			<LevelData ValueRatio="5400" RewardRatio="90"/>
+			<LevelData ValueRatio="7200" RewardRatio="120"/>
+			<LevelData ValueRatio="9000" RewardRatio="150"/>
+		</LevelDatas>
+	</EliteLevel>
+	
+	<EliteLevel ID="51002">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_51002</Desc>
+		<MaxLevel>3</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>510020</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="0" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="35" RewardRatio="15" BuffDuration="-1"/>
+			<LevelData ValueRatio="65" RewardRatio="30" BuffDuration="-1"/>
+			<LevelData ValueRatio="95"  RewardRatio="45" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+
+	<EliteLevel ID="51003">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_51003</Desc>
+		<MaxLevel>3</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>510030</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="0" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="50" RewardRatio="10" BuffDuration="-1"/>
+			<LevelData ValueRatio="75" RewardRatio="15" BuffDuration="-1"/>
+			<LevelData ValueRatio="100" RewardRatio="20" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+
+	<EliteLevel ID="51004">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_51004</Desc>
+		<MaxLevel>3</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>510040</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="0" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="50" RewardRatio="15" BuffDuration="-1"/>
+			<LevelData ValueRatio="100" RewardRatio="30" BuffDuration="-1"/>
+			<LevelData ValueRatio="200" RewardRatio="60" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+
+	<EliteLevel ID="51005">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_51005</Desc>
+		<MaxLevel>3</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>51003</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="100" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="70" RewardRatio="15" BuffDuration="-1"/>
+			<LevelData ValueRatio="30" RewardRatio="30" BuffDuration="-1"/>
+			<LevelData ValueRatio="0" RewardRatio="60" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+
+	<EliteLevel ID="51006">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_51006</Desc>
+		<MaxLevel>3</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>510060</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="0" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="35" RewardRatio="15" BuffDuration="-1"/>
+			<LevelData ValueRatio="65" RewardRatio="30" BuffDuration="-1"/>
+			<LevelData ValueRatio="95" RewardRatio="45" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+
+	<EliteLevel ID="51007">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_51007</Desc>
+		<MaxLevel>3</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>51007</EventTrigger>
+		<LevelDatas>
+			<LevelData BuffDuration="0" ValueRatio="100" RewardRatio="0"/>
+			<LevelData BuffDuration="3" ValueRatio="100" RewardRatio="10"/>
+			<LevelData BuffDuration="5" ValueRatio="100" RewardRatio="15"/>
+			<LevelData BuffDuration="10" ValueRatio="100" RewardRatio="30"/>
+		</LevelDatas>
+	</EliteLevel>
+
+	<!-- 시탑 마나충전 차단이 무한으로 지속되는 버그 수정 용 임시 데이터 -->
+	<!-- <EliteLevel ID="5100700">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_51007</Desc>
+		<MaxLevel>3</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>51007</EventTrigger>
+		<LevelDatas>
+			<LevelData BuffDuration="1" RewardRatio="0"/>
+			<LevelData BuffDuration="3" RewardRatio="10"/>
+			<LevelData BuffDuration="5" RewardRatio="15"/>
+			<LevelData BuffDuration="10" RewardRatio="30"/>
+		</LevelDatas>
+	</EliteLevel> -->
+	
+	<EliteLevel ID="51008">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_51008</Desc>
+		<MaxLevel>3</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>510081</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="0" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="2" RewardRatio="10" BuffDuration="-1"/>
+			<LevelData ValueRatio="5" RewardRatio="20" BuffDuration="-1"/>
+			<LevelData ValueRatio="10" RewardRatio="40" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+
+	<EliteLevel ID="51010">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_51010</Desc>
+		<MaxLevel>3</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>510100</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="0" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="15" RewardRatio="30" BuffDuration="-1"/>
+			<LevelData ValueRatio="25" RewardRatio="50" BuffDuration="-1"/>
+			<LevelData ValueRatio="35" RewardRatio="70" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+	
+	<!--BuffDuration="1"-->
+	<EliteLevel ID="52001">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_52001</Desc>
+		<MaxLevel>10</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>52001</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="0" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="120" RewardRatio="25" BuffDuration="-1"/>
+			<LevelData ValueRatio="240" RewardRatio="50" BuffDuration="-1"/>
+			<LevelData ValueRatio="360" RewardRatio="75" BuffDuration="-1"/>
+			<LevelData ValueRatio="480" RewardRatio="100" BuffDuration="-1"/>
+			<LevelData ValueRatio="600" RewardRatio="125" BuffDuration="-1"/>
+			<LevelData ValueRatio="720" RewardRatio="150" BuffDuration="-1"/>
+			<LevelData ValueRatio="840" RewardRatio="175" BuffDuration="-1"/>
+			<LevelData ValueRatio="960" RewardRatio="200" BuffDuration="-1"/>
+			<LevelData ValueRatio="1080" RewardRatio="225" BuffDuration="-1"/>
+			<LevelData ValueRatio="1200" RewardRatio="250" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+	
+	<EliteLevel ID="52002">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_52001</Desc>
+		<MaxLevel>10</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>52001</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="000" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="90" RewardRatio="25" BuffDuration="-1"/>
+			<LevelData ValueRatio="180" RewardRatio="50" BuffDuration="-1"/>
+			<LevelData ValueRatio="270" RewardRatio="75" BuffDuration="-1"/>
+			<LevelData ValueRatio="360" RewardRatio="100" BuffDuration="-1"/>
+			<LevelData ValueRatio="450" RewardRatio="125" BuffDuration="-1"/>
+			<LevelData ValueRatio="540" RewardRatio="150" BuffDuration="-1"/>
+			<LevelData ValueRatio="630" RewardRatio="175" BuffDuration="-1"/>
+			<LevelData ValueRatio="720" RewardRatio="200" BuffDuration="-1"/>
+			<LevelData ValueRatio="810" RewardRatio="225" BuffDuration="-1"/>
+			<LevelData ValueRatio="900" RewardRatio="250" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+	
+	<EliteLevel ID="52003">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_52001</Desc>
+		<MaxLevel>10</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>52001</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="0" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="60" RewardRatio="25" BuffDuration="-1"/>
+			<LevelData ValueRatio="120" RewardRatio="50" BuffDuration="-1"/>
+			<LevelData ValueRatio="180" RewardRatio="75" BuffDuration="-1"/>
+			<LevelData ValueRatio="240" RewardRatio="100" BuffDuration="-1"/>
+			<LevelData ValueRatio="300" RewardRatio="125" BuffDuration="-1"/>
+			<LevelData ValueRatio="360" RewardRatio="150" BuffDuration="-1"/>
+			<LevelData ValueRatio="420" RewardRatio="175" BuffDuration="-1"/>
+			<LevelData ValueRatio="480" RewardRatio="200" BuffDuration="-1"/>
+			<LevelData ValueRatio="540" RewardRatio="225" BuffDuration="-1"/>
+			<LevelData ValueRatio="600" RewardRatio="250" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+	<EliteLevel ID="52004">
+		<Type>EventTrigger</Type>
+		<Desc>EliteLevelsDesc_52001</Desc>
+		<MaxLevel>10</MaxLevel>
+		<LevelRatio>1</LevelRatio>
+		<EventTrigger>52001</EventTrigger>
+		<LevelDatas>
+			<LevelData ValueRatio="0" RewardRatio="0" BuffDuration="-1"/>
+			<LevelData ValueRatio="30" RewardRatio="25" BuffDuration="-1"/>
+			<LevelData ValueRatio="60" RewardRatio="50" BuffDuration="-1"/>
+			<LevelData ValueRatio="90" RewardRatio="75" BuffDuration="-1"/>
+			<LevelData ValueRatio="120" RewardRatio="100" BuffDuration="-1"/>
+			<LevelData ValueRatio="150" RewardRatio="125" BuffDuration="-1"/>
+			<LevelData ValueRatio="180" RewardRatio="150" BuffDuration="-1"/>
+			<LevelData ValueRatio="210" RewardRatio="175" BuffDuration="-1"/>
+			<LevelData ValueRatio="240" RewardRatio="200" BuffDuration="-1"/>
+			<LevelData ValueRatio="270" RewardRatio="225" BuffDuration="-1"/>
+			<LevelData ValueRatio="300" RewardRatio="250" BuffDuration="-1"/>
+		</LevelDatas>
+	</EliteLevel>
+	
+</EliteLevels>

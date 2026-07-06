@@ -1,0 +1,637 @@
+
+<!--
+
+	1000번대: 일반 마크
+	2000번대: 국가 마크
+
+	<SortIndex> 는 기본값이 ID 로 설정됨
+
+-->
+
+<ClanMarks>
+
+	<ClanMark ID='1000'>
+		<Image>Clan_1000</Image>
+	</ClanMark>
+
+	<ClanMark ID='1001'>
+		<Image>Clan_1001</Image>
+	</ClanMark>
+
+	<ClanMark ID='1002'>
+		<Image>Clan_1002</Image>
+	</ClanMark>
+
+	<ClanMark ID='1003'>
+		<Image>Clan_1003</Image>
+	</ClanMark>
+
+	<ClanMark ID='1004'>
+		<Image>Clan_1004</Image>
+	</ClanMark>
+
+	<ClanMark ID='1005'>
+		<Image>Clan_1005</Image>
+	</ClanMark>
+
+	<ClanMark ID='1006'>
+		<Image>Clan_1006</Image>
+	</ClanMark>
+
+	<ClanMark ID='1007'>
+		<Image>Clan_1007</Image>
+	</ClanMark>
+
+	<ClanMark ID='1008'>
+		<Image>Clan_1008</Image>
+	</ClanMark>
+
+	<ClanMark ID='1009'>
+		<Image>Clan_1009</Image>
+	</ClanMark>
+
+	<ClanMark ID='1010'>
+		<Image>Clan_1010</Image>
+	</ClanMark>
+
+	<ClanMark ID='1011'>
+		<Image>Clan_1011</Image>
+	</ClanMark>
+
+	<ClanMark ID='1012'>
+		<Image>Clan_1012</Image>
+	</ClanMark>
+
+	<ClanMark ID='1013'>
+		<Image>Clan_1013</Image>
+	</ClanMark>
+
+	<ClanMark ID='1014'>
+		<Image>Clan_1014</Image>
+	</ClanMark>
+
+	<ClanMark ID='1015'>
+		<Image>Clan_1015</Image>
+	</ClanMark>
+
+	<ClanMark ID='1016'>
+		<Image>Clan_1016</Image>
+	</ClanMark>
+
+	<ClanMark ID='1017'>
+		<Image>Clan_1017</Image>
+	</ClanMark>
+
+	<ClanMark ID='1018'>
+		<Image>Clan_1018</Image>
+	</ClanMark>
+
+	<ClanMark ID='1019'>
+		<Image>Clan_1019</Image>
+	</ClanMark>
+
+	<ClanMark ID='1020'>
+		<Image>Clan_1020</Image>
+	</ClanMark>
+
+	<ClanMark ID='1021'>
+		<Image>Clan_1021</Image>
+	</ClanMark>
+
+	<ClanMark ID='1022'>
+		<Image>Clan_1022</Image>
+	</ClanMark>
+
+	<ClanMark ID='1023'>
+		<Image>Clan_1023</Image>
+	</ClanMark>
+
+	<ClanMark ID='1024'>
+		<Image>Clan_1024</Image>
+	</ClanMark>
+
+	<ClanMark ID='1025'>
+		<Image>Clan_1025</Image>
+	</ClanMark>
+
+	<ClanMark ID='1026'>
+		<Image>Clan_1026</Image>
+	</ClanMark>
+
+	<ClanMark ID='1027'>
+		<Image>Clan_1027</Image>
+	</ClanMark>
+
+	<ClanMark ID='1028'>
+		<Image>Clan_1028</Image>
+	</ClanMark>
+
+	<ClanMark ID='1029'>
+		<Image>Clan_1029</Image>
+	</ClanMark>
+
+	<ClanMark ID='1030'>
+		<Image>Clan_1030</Image>
+	</ClanMark>
+
+	<ClanMark ID='1031'>
+		<Image>Clan_1031</Image>
+	</ClanMark>
+
+	<ClanMark ID='1032'>
+		<Image>Clan_1032</Image>
+	</ClanMark>
+
+	<ClanMark ID='1033'>
+		<Image>Clan_1033</Image>
+	</ClanMark>
+
+	<ClanMark ID='1034'>
+		<Image>Clan_1034</Image>
+	</ClanMark>
+
+	<ClanMark ID='1035'>
+		<Image>Clan_1035</Image>
+	</ClanMark>
+
+	<ClanMark ID='1036'>
+		<Image>Clan_1036</Image>
+	</ClanMark>
+
+	<ClanMark ID='1037'>
+		<Image>Clan_1037</Image>
+	</ClanMark>
+
+	<ClanMark ID='1038'>
+		<Image>Clan_1038</Image>
+	</ClanMark>
+
+	<ClanMark ID='1039'>
+		<Image>Clan_1039</Image>
+	</ClanMark>
+
+	<ClanMark ID='1040'>
+		<Image>Clan_1040</Image>
+	</ClanMark>
+
+	<ClanMark ID='1041'>
+		<Image>Clan_1041</Image>
+	</ClanMark>
+
+	<ClanMark ID='1042'>
+		<Image>Clan_1042</Image>
+	</ClanMark>
+
+	<ClanMark ID='1043'>
+		<Image>Clan_1043</Image>
+	</ClanMark>
+
+	<ClanMark ID='1044'>
+		<Image>Clan_1044</Image>
+	</ClanMark>
+
+	<ClanMark ID='1045'>
+		<Image>Clan_1045</Image>
+	</ClanMark>
+
+	<ClanMark ID='1046'>
+		<Image>Clan_1046</Image>
+	</ClanMark>
+
+	<ClanMark ID='1047'>
+		<Image>Clan_1047</Image>
+	</ClanMark>
+
+	<ClanMark ID='1048'>
+		<Image>Clan_1048</Image>
+	</ClanMark>
+
+	<ClanMark ID='1049'>
+		<Image>Clan_1049</Image>
+	</ClanMark>
+
+	<ClanMark ID='1050'>
+		<Image>Clan_1050</Image>
+	</ClanMark>
+
+	<ClanMark ID='1051'>
+		<Image>Clan_1051</Image>
+	</ClanMark>
+
+	<ClanMark ID='1052'>
+		<Image>Clan_1052</Image>
+	</ClanMark>
+
+	<ClanMark ID='1053'>
+		<Image>Clan_1053</Image>
+	</ClanMark>
+
+
+	<ClanMark ID='2000'>
+		<!--한국-->
+		<Image>Clan_Korea</Image>
+		<SortIndex>1101</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2001'>
+		<!--대만-->
+		<Image>Clan_Taiwan</Image>
+		<SortIndex>2001</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2002'>
+		<!--홍콩-->
+		<Image>Clan_Hongkong</Image>
+		<SortIndex>800</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2003'>
+		<!--중국-->
+		<Image>Clan_China</Image>
+		<SortIndex>303</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2004'>
+		<!--일본-->
+		<Image>Clan_Japan</Image>
+		<SortIndex>1000</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2005'>
+		<!--미국-->
+		<Image>Clan_US</Image>
+		<SortIndex>2103</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2006'>
+		<!--캐나다-->
+		<Image>Clan_Canada</Image>
+		<SortIndex>301</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2007'>
+		<!--호주-->
+		<Image>Clan_Australia</Image>
+		<SortIndex>102</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2008'>
+		<!--뉴질랜드-->
+		<Image>Clan_Newzealand</Image>
+		<SortIndex>1402</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2009'>
+		<!--아일랜드-->
+		<Image>Clan_Ireland</Image>
+		<SortIndex>903</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2010'>
+		<!--영국-->
+		<Image>Clan_UK</Image>
+		<SortIndex>2101</SortIndex>
+	</ClanMark>
+	
+	<ClanMark ID='2011'>
+		<!--프랑스-->
+		<Image>Clan_French</Image>
+		<SortIndex>601</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2012'>
+		<!--독일-->
+		<Image>Clan_Germany</Image>
+		<SortIndex>700</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2013'>
+		<!--네덜란드-->
+		<Image>Clan_Nederland</Image>
+		<SortIndex>1400</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2014'>
+		<!--스페인-->
+		<Image>Clan_Spain</Image>
+		<SortIndex>1901</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2015'>
+		<!--이탈리아-->
+		<Image>Clan_Italy</Image>
+		<SortIndex>905</SortIndex>
+	</ClanMark>
+	
+	<ClanMark ID='2016'>
+		<!--포르투칼-->
+		<Image>Clan_Portugal</Image>
+		<SortIndex>1604</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2017'>
+		<!--폴란드-->
+		<Image>Clan_Poland</Image>
+		<SortIndex>1603</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2018'>
+		<!--벨기에-->
+		<Image>Clan_Belgium</Image>
+		<SortIndex>204</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2019'>
+		<!--스위스-->
+		<Image>Clan_Swiss</Image>
+		<SortIndex>1903</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2020'>
+		<!--오스트리아-->
+		<Image>Clan_Austria</Image>
+		<SortIndex>103</SortIndex>
+	</ClanMark>
+	
+	<ClanMark ID='2021'>
+		<!--노르웨이-->
+		<Image>Clan_Norway</Image>
+		<SortIndex>1403</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2022'>
+		<!--스웨덴-->
+		<Image>Clan_Sweden</Image>
+		<SortIndex>1902</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2023'>
+		<!--핀란드-->
+		<Image>Clan_Finland</Image>
+		<SortIndex>600</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2024'>
+		<!--덴마크-->
+		<Image>Clan_Denmark</Image>
+		<SortIndex>400</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2025'>
+		<!--룩셈부르크-->
+		<Image>Clan_Luxembourg</Image>
+		<SortIndex>1201</SortIndex>
+	</ClanMark>
+	
+	<ClanMark ID='2026'>
+		<!--그리스-->
+		<Image>Clan_Greece</Image>
+		<SortIndex>701</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2027'>
+		<!--싱가포르-->
+		<Image>Clan_Singapore</Image>
+		<SortIndex>1900</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2028'>
+		<!--베트남-->
+		<Image>Clan_Vietnam</Image>
+		<SortIndex>2201</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2029'>
+		<!--필리핀-->
+		<Image>Clan_Philippines</Image>
+		<SortIndex>1602</SortIndex>
+	</ClanMark>
+	
+	<ClanMark ID='2030'>
+		<!--태국-->
+		<Image>Clan_Tailand</Image>
+		<SortIndex>2000</SortIndex>
+	</ClanMark>
+	
+	<ClanMark ID='2031'>
+		<!--인도네시아-->
+		<Image>Clan_Indonesia</Image>
+		<SortIndex>901</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2032'>
+		<!--말레이시아-->
+		<Image>Clan_Malaysia</Image>
+		<SortIndex>1300</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2033'>
+		<!--인도-->
+		<Image>Clan_India</Image>
+		<SortIndex>900</SortIndex>
+	</ClanMark>
+	
+	<ClanMark ID='2034'>
+		<!--브라질-->
+		<Image>Clan_Brazil</Image>
+		<SortIndex>206</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2035'>
+		<!--멕시코-->
+		<Image>Clan_Mexico</Image>
+		<SortIndex>1301</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2036'>
+		<!--아르헨티나-->
+		<Image>Clan_Argentina</Image>
+		<SortIndex>101</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2037'>
+		<!--이스라엘-->
+		<Image>Clan_Israel</Image>
+		<SortIndex>904</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2038'>
+		<!--바레인-->
+		<Image>Clan_Bahrain</Image>
+		<SortIndex>200</SortIndex>
+	</ClanMark>
+	
+	<ClanMark ID='2039'>
+		<!--카타르-->
+		<Image>Clan_Qatar</Image>
+		<SortIndex>1700</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2040'>
+		<!--아랍에미레이트-->
+		<Image>Clan_UAE</Image>
+		<SortIndex>2100</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2041'>
+		<!--이집트-->
+		<Image>Clan_Egypt</Image>
+		<SortIndex>501</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2042'>
+		<!--러시아-->
+		<Image>Clan_Russia</Image>
+		<SortIndex>1801</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2043'>
+		<!--우크라이나-->
+		<Image>Clan_Ukraine</Image>
+		<SortIndex>2102</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2044'>
+		<!--터키-->
+		<Image>Clan_Turkey</Image>
+		<SortIndex>2003</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2045'>
+		<!--칠레-->
+		<Image>Clan_Chile</Image>
+		<SortIndex>302</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2046'>
+		<!--콜롬비아-->
+		<Image>Clan_Colombia</Image>
+		<SortIndex>304</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2047'>
+		<!--체코-->
+		<Image>Clan_Czech</Image>
+		<SortIndex>305</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2048'>
+		<!--페루-->
+		<Image>Clan_Peru</Image>
+		<SortIndex>1601</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2049'>
+		<!--카자흐스탄-->
+		<Image>Clan_Kazakhstan</Image>
+		<SortIndex>1100</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2050'>
+		<!--헝가리-->
+		<Image>Clan_Hungary</Image>
+		<SortIndex>801</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2051'>
+		<!--루마니아-->
+		<Image>Clan_Romania</Image>
+		<SortIndex>1800</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2052'>
+		<!--방글라데시-->
+		<Image>Clan_Bangladesh</Image>
+		<SortIndex>201</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2053'>
+		<!--이라크-->
+		<Image>Clan_Iraq</Image>
+		<SortIndex>902</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2054'>
+		<!--파키스탄-->
+		<Image>Clan_Pakistan</Image>
+		<SortIndex>1600</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2055'>
+		<!--알제리아-->
+		<Image>Clan_Algeria</Image>
+		<SortIndex>100</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2056'>
+		<!--베네수엘라-->
+		<Image>Clan_Venezuela</Image>
+		<SortIndex>2200</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2058'>
+		<!--모로코-->
+		<Image>Clan_Morocco</Image>
+		<SortIndex>1302</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2059'>
+		<!--미얀마-->
+		<Image>Clan_Myanmar</Image>
+		<SortIndex>1303</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2060'>
+		<!--에콰도르-->
+		<Image>Clan_Ecuador</Image>
+		<SortIndex>500</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2061'>
+		<!--우즈베키스탄-->
+		<Image>Clan_Uzbekistan</Image>
+		<SortIndex>2104</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2062'>
+		<!--도미니카공화국-->
+		<Image>Clan_Dominican Republic</Image>
+		<SortIndex>401</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2063'>
+		<!--벨라루스-->
+		<Image>Clan_Belarus</Image>
+		<SortIndex>203</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2064'>
+		<!--튀니지-->
+		<Image>Clan_tunisia</Image>
+		<SortIndex>2001</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2065'>
+		<!--볼리비아-->
+		<Image>Clan_Bolivia</Image>
+		<SortIndex>205</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2066'>
+		<!--네팔-->
+		<Image>Clan_Nepal</Image>
+		<SortIndex>1401</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2067'>
+		<!--라오스-->
+		<Image>Clan_Laos</Image>
+		<SortIndex>1200</SortIndex>
+	</ClanMark>
+
+	<ClanMark ID='2068'>
+		<!--캄보디아-->
+		<Image>Clan_Cambodia</Image>
+		<SortIndex>300</SortIndex>
+	</ClanMark>
+</ClanMarks>

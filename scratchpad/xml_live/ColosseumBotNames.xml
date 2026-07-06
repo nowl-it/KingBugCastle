@@ -1,0 +1,2003 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ColosseumBotNames xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ColosseumBotName ID="1">
+		<PlayerName>King</PlayerName>
+		<CastleName>스카이</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="2">
+		<PlayerName>우</PlayerName>
+		<CastleName>Castle</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="3">
+		<PlayerName>왕</PlayerName>
+		<CastleName>성</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="4">
+		<PlayerName>우왕좌</PlayerName>
+		<CastleName>King</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="5">
+		<PlayerName>Arthur</PlayerName>
+		<CastleName>킹갓</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="6">
+		<PlayerName>킹</PlayerName>
+		<CastleName>Camelot</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="7">
+		<PlayerName>1</PlayerName>
+		<CastleName>Kingdom</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="8">
+		<PlayerName>마</PlayerName>
+		<CastleName>TEMPEST</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="9">
+		<PlayerName>버거</PlayerName>
+		<CastleName>HELL</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="10">
+		<PlayerName>세종대</PlayerName>
+		<CastleName>왕</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="11">
+		<PlayerName>shadow</PlayerName>
+		<CastleName>Avalon</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="12">
+		<PlayerName>zero</PlayerName>
+		<CastleName>1</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="13">
+		<PlayerName>아서</PlayerName>
+		<CastleName>남</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="14">
+		<PlayerName>God</PlayerName>
+		<CastleName>이</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="15">
+		<PlayerName>a</PlayerName>
+		<CastleName>shadow</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="16">
+		<PlayerName>alex</PlayerName>
+		<CastleName>Valhalla</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="17">
+		<PlayerName>오</PlayerName>
+		<CastleName>김</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="18">
+		<PlayerName>의자</PlayerName>
+		<CastleName>Dragon</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="19">
+		<PlayerName>K</PlayerName>
+		<CastleName>GOD</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="20">
+		<PlayerName>kirito</PlayerName>
+		<CastleName>킹</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="21">
+		<PlayerName>잉어</PlayerName>
+		<CastleName>Asgard</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="22">
+		<PlayerName>Rimuru</PlayerName>
+		<CastleName>SKY</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="23">
+		<PlayerName>LUCIFER</PlayerName>
+		<CastleName>Dark</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="24">
+		<PlayerName>BOB</PlayerName>
+		<CastleName>캐슬</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="25">
+		<PlayerName>DARK</PlayerName>
+		<CastleName>Nazarick</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="26">
+		<PlayerName>王</PlayerName>
+		<CastleName>마왕</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="27">
+		<PlayerName>Jack</PlayerName>
+		<CastleName>A</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="28">
+		<PlayerName>Leo</PlayerName>
+		<CastleName>darkness</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="29">
+		<PlayerName>킹갓</PlayerName>
+		<CastleName>BLACK</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="30">
+		<PlayerName>대</PlayerName>
+		<CastleName>삼</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="31">
+		<PlayerName>123</PlayerName>
+		<CastleName>신</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="32">
+		<PlayerName>Dragon</PlayerName>
+		<CastleName>유</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="33">
+		<PlayerName>짜</PlayerName>
+		<CastleName>KONOHA</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="34">
+		<PlayerName>max</PlayerName>
+		<CastleName>Home</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="35">
+		<PlayerName>나</PlayerName>
+		<CastleName>Hyrule</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="36">
+		<PlayerName>10</PlayerName>
+		<CastleName>롯데</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="37">
+		<PlayerName>g</PlayerName>
+		<CastleName>Heaven</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="38">
+		<PlayerName>ghost</PlayerName>
+		<CastleName>K</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="39">
+		<PlayerName>Lord</PlayerName>
+		<CastleName>Death</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="40">
+		<PlayerName>H</PlayerName>
+		<CastleName>웅성웅</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="41">
+		<PlayerName>성</PlayerName>
+		<CastleName>winterfell</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="42">
+		<PlayerName>아</PlayerName>
+		<CastleName>demon</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="43">
+		<PlayerName>gg</PlayerName>
+		<CastleName>인</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="44">
+		<PlayerName>이</PlayerName>
+		<CastleName>castelo</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="45">
+		<PlayerName>LUCAS</PlayerName>
+		<CastleName>Clover</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="46">
+		<PlayerName>여</PlayerName>
+		<CastleName>Gg</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="47">
+		<PlayerName>d</PlayerName>
+		<CastleName>킹갓캐슬</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="48">
+		<PlayerName>T</PlayerName>
+		<CastleName>안시</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="49">
+		<PlayerName>John</PlayerName>
+		<CastleName>10</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="50">
+		<PlayerName>Alexander</PlayerName>
+		<CastleName>Nazarik</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="51">
+		<PlayerName>S</PlayerName>
+		<CastleName>ZERO</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="52">
+		<PlayerName>kai</PlayerName>
+		<CastleName>MORDOR</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="53">
+		<PlayerName>Leon</PlayerName>
+		<CastleName>城堡</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="54">
+		<PlayerName>Demon</PlayerName>
+		<CastleName>Fort</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="55">
+		<PlayerName>Daniel</PlayerName>
+		<CastleName>좀비고</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="56">
+		<PlayerName>국</PlayerName>
+		<CastleName>moon</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="57">
+		<PlayerName>ACE</PlayerName>
+		<CastleName>Aincrad</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="58">
+		<PlayerName>어서</PlayerName>
+		<CastleName>사</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="59">
+		<PlayerName>Artur</PlayerName>
+		<CastleName>Yggdrasil</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="60">
+		<PlayerName>J</PlayerName>
+		<CastleName>void</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="61">
+		<PlayerName>david</PlayerName>
+		<CastleName>아</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="62">
+		<PlayerName>James</PlayerName>
+		<CastleName>완</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="63">
+		<PlayerName>광개토대</PlayerName>
+		<CastleName>Arcadia</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="64">
+		<PlayerName>Diablo</PlayerName>
+		<CastleName>백</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="65">
+		<PlayerName>M</PlayerName>
+		<CastleName>2</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="66">
+		<PlayerName>X</PlayerName>
+		<CastleName>정</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="67">
+		<PlayerName>Gabriel</PlayerName>
+		<CastleName>Ragnarok</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="68">
+		<PlayerName>L</PlayerName>
+		<CastleName>화</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="69">
+		<PlayerName>wolf</PlayerName>
+		<CastleName>오</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="70">
+		<PlayerName>Loki</PlayerName>
+		<CastleName>Eden</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="71">
+		<PlayerName>Ainz</PlayerName>
+		<CastleName>123</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="72">
+		<PlayerName>Death</PlayerName>
+		<CastleName>H</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="73">
+		<PlayerName>VUA</PlayerName>
+		<CastleName>X</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="74">
+		<PlayerName>Ragnar</PlayerName>
+		<CastleName>g</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="75">
+		<PlayerName>RED</PlayerName>
+		<CastleName>LoL</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="76">
+		<PlayerName>OVERLORD</PlayerName>
+		<CastleName>S</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="77">
+		<PlayerName>이리</PlayerName>
+		<CastleName>뉴</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="78">
+		<PlayerName>Dante</PlayerName>
+		<CastleName>갓</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="79">
+		<PlayerName>신</PlayerName>
+		<CastleName>한</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="80">
+		<PlayerName>black</PlayerName>
+		<CastleName>Olympus</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="81">
+		<PlayerName>왕왕</PlayerName>
+		<CastleName>EBENGRAD</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="82">
+		<PlayerName>Rei</PlayerName>
+		<CastleName>UTOPIA</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="83">
+		<PlayerName>sam</PlayerName>
+		<CastleName>수</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="84">
+		<PlayerName>Hades</PlayerName>
+		<CastleName>bastion</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="85">
+		<PlayerName>용</PlayerName>
+		<CastleName>D</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="86">
+		<PlayerName>좀비고</PlayerName>
+		<CastleName>empire</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="87">
+		<PlayerName>Z</PlayerName>
+		<CastleName>무지</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="88">
+		<PlayerName>9</PlayerName>
+		<CastleName>castillo</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="89">
+		<PlayerName>플레이어</PlayerName>
+		<CastleName>t</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="90">
+		<PlayerName>Y</PlayerName>
+		<CastleName>모래</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="91">
+		<PlayerName>luffy</PlayerName>
+		<CastleName>나</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="92">
+		<PlayerName>Alucard</PlayerName>
+		<CastleName>개</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="93">
+		<PlayerName>DIO</PlayerName>
+		<CastleName>abyss</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="94">
+		<PlayerName>Kuro</PlayerName>
+		<CastleName>하늘</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="95">
+		<PlayerName>Shin</PlayerName>
+		<CastleName>DOOM</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="96">
+		<PlayerName>V</PlayerName>
+		<CastleName>Narnia</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="97">
+		<PlayerName>lol</PlayerName>
+		<CastleName>uwu</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="98">
+		<PlayerName>Shiro</PlayerName>
+		<CastleName>Paradise</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="99">
+		<PlayerName>7</PlayerName>
+		<CastleName>Stronghold</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="100">
+		<PlayerName>REAPER</PlayerName>
+		<CastleName>7</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="101">
+		<PlayerName>Angel</PlayerName>
+		<CastleName>Hogwarts</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="102">
+		<PlayerName>F</PlayerName>
+		<CastleName>chaos</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="103">
+		<PlayerName>Jay</PlayerName>
+		<CastleName>여</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="104">
+		<PlayerName>Rey</PlayerName>
+		<CastleName>마</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="105">
+		<PlayerName>Ken</PlayerName>
+		<CastleName>B</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="106">
+		<PlayerName>sky</PlayerName>
+		<CastleName>Moonlight</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="107">
+		<PlayerName>11</PlayerName>
+		<CastleName>Z</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="108">
+		<PlayerName>Adam</PlayerName>
+		<CastleName>castlevani</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="109">
+		<PlayerName>Kong</PlayerName>
+		<CastleName>light</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="110">
+		<PlayerName>odin</PlayerName>
+		<CastleName>Darkcastle</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="111">
+		<PlayerName>Chris</PlayerName>
+		<CastleName>Lord</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="112">
+		<PlayerName>Zeus</PlayerName>
+		<CastleName>M</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="113">
+		<PlayerName>神</PlayerName>
+		<CastleName>5</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="114">
+		<PlayerName>쿠</PlayerName>
+		<CastleName>박</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="115">
+		<PlayerName>김</PlayerName>
+		<CastleName>Greyskull</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="116">
+		<PlayerName>MOON</PlayerName>
+		<CastleName>남한산</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="117">
+		<PlayerName>정력</PlayerName>
+		<CastleName>우</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="118">
+		<PlayerName>Gilgamesh</PlayerName>
+		<CastleName>ROSE</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="119">
+		<PlayerName>바이</PlayerName>
+		<CastleName>L</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="120">
+		<PlayerName>meliodas</PlayerName>
+		<CastleName>Kamelot</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="121">
+		<PlayerName>hunter</PlayerName>
+		<CastleName>Neverland</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="122">
+		<PlayerName>raven</PlayerName>
+		<CastleName>J</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="123">
+		<PlayerName>Kira</PlayerName>
+		<CastleName>sparta</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="124">
+		<PlayerName>kevin</PlayerName>
+		<CastleName>fortress</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="125">
+		<PlayerName>Q</PlayerName>
+		<CastleName>9</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="126">
+		<PlayerName>안녕</PlayerName>
+		<CastleName>Gondor</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="127">
+		<PlayerName>8</PlayerName>
+		<CastleName>Nightmare</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="128">
+		<PlayerName>unknown</PlayerName>
+		<CastleName>Midgard</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="129">
+		<PlayerName>Ray</PlayerName>
+		<CastleName>Y</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="130">
+		<PlayerName>갓</PlayerName>
+		<CastleName>freedom</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="131">
+		<PlayerName>MASTER</PlayerName>
+		<CastleName>VietNam</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="132">
+		<PlayerName>e</PlayerName>
+		<CastleName>북두칠</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="133">
+		<PlayerName>B</PlayerName>
+		<CastleName>혈기왕</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="134">
+		<PlayerName>mark</PlayerName>
+		<CastleName>overLorD</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="135">
+		<PlayerName>Akira</PlayerName>
+		<CastleName>Pendragon</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="136">
+		<PlayerName>Pedro</PlayerName>
+		<CastleName>고</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="137">
+		<PlayerName>joker</PlayerName>
+		<CastleName>Underworld</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="138">
+		<PlayerName>Ryan</PlayerName>
+		<CastleName>Inferno</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="139">
+		<PlayerName>ash</PlayerName>
+		<CastleName>Ghost</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="140">
+		<PlayerName>Dan</PlayerName>
+		<CastleName>Viking</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="141">
+		<PlayerName>jin</PlayerName>
+		<CastleName>Alexandria</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="142">
+		<PlayerName>Yuki</PlayerName>
+		<CastleName>Phoenix</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="143">
+		<PlayerName>12</PlayerName>
+		<CastleName>Liones</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="144">
+		<PlayerName>tom</PlayerName>
+		<CastleName>Akatsuki</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="145">
+		<PlayerName>nick</PlayerName>
+		<CastleName>해왕</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="146">
+		<PlayerName>패</PlayerName>
+		<CastleName>Babylon</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="147">
+		<PlayerName>가</PlayerName>
+		<CastleName>지</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="148">
+		<PlayerName>JOE</PlayerName>
+		<CastleName>e</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="149">
+		<PlayerName>0</PlayerName>
+		<CastleName>tower</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="150">
+		<PlayerName>해</PlayerName>
+		<CastleName>fairytail</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="151">
+		<PlayerName>FOX</PlayerName>
+		<CastleName>명왕</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="152">
+		<PlayerName>Victor</PlayerName>
+		<CastleName>STAR</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="153">
+		<PlayerName>nero</PlayerName>
+		<CastleName>IDK</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="154">
+		<PlayerName>6</PlayerName>
+		<CastleName>킹덤</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="155">
+		<PlayerName>스타</PlayerName>
+		<CastleName>Demacia</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="156">
+		<PlayerName>Ali</PlayerName>
+		<CastleName>F</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="157">
+		<PlayerName>5</PlayerName>
+		<CastleName>RED</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="158">
+		<PlayerName>Asura</PlayerName>
+		<CastleName>감</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="159">
+		<PlayerName>Leonidas</PlayerName>
+		<CastleName>Crimson</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="160">
+		<PlayerName>mike</PlayerName>
+		<CastleName>UNKNOWN</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="161">
+		<PlayerName>나는</PlayerName>
+		<CastleName>Dungeon</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="162">
+		<PlayerName>P</PlayerName>
+		<CastleName>Vinland</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="163">
+		<PlayerName>jojo</PlayerName>
+		<CastleName>Sanctuary</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="164">
+		<PlayerName>N</PlayerName>
+		<CastleName>bruh</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="165">
+		<PlayerName>Naruto</PlayerName>
+		<CastleName>night</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="166">
+		<PlayerName>huy</PlayerName>
+		<CastleName>Dream</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="167">
+		<PlayerName>킹왕짱</PlayerName>
+		<CastleName>0</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="168">
+		<PlayerName>Sora</PlayerName>
+		<CastleName>oblivion</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="169">
+		<PlayerName>라이온</PlayerName>
+		<CastleName>soul</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="170">
+		<PlayerName>Michael</PlayerName>
+		<CastleName>Haven</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="171">
+		<PlayerName>R</PlayerName>
+		<CastleName>만리장</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="172">
+		<PlayerName>Light</PlayerName>
+		<CastleName>금</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="173">
+		<PlayerName>Silver</PlayerName>
+		<CastleName>Rome</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="174">
+		<PlayerName>감자</PlayerName>
+		<CastleName>sun</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="175">
+		<PlayerName>william</PlayerName>
+		<CastleName>Noxus</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="176">
+		<PlayerName>Luna</PlayerName>
+		<CastleName>o</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="177">
+		<PlayerName>진</PlayerName>
+		<CastleName>wolf</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="178">
+		<PlayerName>앙</PlayerName>
+		<CastleName>BIG</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="179">
+		<PlayerName>Ben</PlayerName>
+		<CastleName>11</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="180">
+		<PlayerName>응애</PlayerName>
+		<CastleName>하</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="181">
+		<PlayerName>Richard</PlayerName>
+		<CastleName>6</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="182">
+		<PlayerName>호</PlayerName>
+		<CastleName>성성</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="183">
+		<PlayerName>Phoenix</PlayerName>
+		<CastleName>XXX</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="184">
+		<PlayerName>Ren</PlayerName>
+		<CastleName>Pandora</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="185">
+		<PlayerName>soul</PlayerName>
+		<CastleName>hope</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="186">
+		<PlayerName>noah</PlayerName>
+		<CastleName>12</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="187">
+		<PlayerName>asta</PlayerName>
+		<CastleName>Atlantis</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="188">
+		<PlayerName>ZEN</PlayerName>
+		<CastleName>Uchiha</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="189">
+		<PlayerName>O</PlayerName>
+		<CastleName>titan</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="190">
+		<PlayerName>KAISER</PlayerName>
+		<CastleName>Infinity</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="191">
+		<PlayerName>Killer</PlayerName>
+		<CastleName>8</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="192">
+		<PlayerName>2</PlayerName>
+		<CastleName>C</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="193">
+		<PlayerName>REX</PlayerName>
+		<CastleName>SAO</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="194">
+		<PlayerName>Edward</PlayerName>
+		<CastleName>Onepiece</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="195">
+		<PlayerName>BOSS</PlayerName>
+		<CastleName>Eternal</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="196">
+		<PlayerName>Madara</PlayerName>
+		<CastleName>양</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="197">
+		<PlayerName>더</PlayerName>
+		<CastleName>XD</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="198">
+		<PlayerName>일루</PlayerName>
+		<CastleName>앙</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="199">
+		<PlayerName>RYU</PlayerName>
+		<CastleName>house</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="200">
+		<PlayerName>ivan</PlayerName>
+		<CastleName>Sunny</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="201">
+		<PlayerName>아더</PlayerName>
+		<CastleName>wonderland</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="202">
+		<PlayerName>I</PlayerName>
+		<CastleName>조</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="203">
+		<PlayerName>hi</PlayerName>
+		<CastleName>Roma</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="204">
+		<PlayerName>theking</PlayerName>
+		<CastleName>Troy</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="205">
+		<PlayerName>1234567890</PlayerName>
+		<CastleName>박지</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="206">
+		<PlayerName>lucky</PlayerName>
+		<CastleName>가</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="207">
+		<PlayerName>Panda</PlayerName>
+		<CastleName>Celestial</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="208">
+		<PlayerName>Void</PlayerName>
+		<CastleName>devil</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="209">
+		<PlayerName>Kratos</PlayerName>
+		<CastleName>N</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="210">
+		<PlayerName>Carlos</PlayerName>
+		<CastleName>THE</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="211">
+		<PlayerName>Blue</PlayerName>
+		<CastleName>강</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="212">
+		<PlayerName>long</PlayerName>
+		<CastleName>대한민국</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="213">
+		<PlayerName>juan</PlayerName>
+		<CastleName>wano</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="214">
+		<PlayerName>DARKNESS</PlayerName>
+		<CastleName>rock</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="215">
+		<PlayerName>player</PlayerName>
+		<CastleName>WHITE</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="216">
+		<PlayerName>Snow</PlayerName>
+		<CastleName>Terra</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="217">
+		<PlayerName>하늘</PlayerName>
+		<CastleName>Q</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="218">
+		<PlayerName>똥</PlayerName>
+		<CastleName>666</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="219">
+		<PlayerName>bruh</PlayerName>
+		<CastleName>하울의움직이는</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="220">
+		<PlayerName>ZORO</PlayerName>
+		<CastleName>내</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="221">
+		<PlayerName>Vlad</PlayerName>
+		<CastleName>I</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="222">
+		<PlayerName>ARES</PlayerName>
+		<CastleName>VN</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="223">
+		<PlayerName>greed</PlayerName>
+		<CastleName>NO</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="224">
+		<PlayerName>성</PlayerName>
+		<CastleName>고양이</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="225">
+		<PlayerName>Jj</PlayerName>
+		<CastleName>안</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="226">
+		<PlayerName>C</PlayerName>
+		<CastleName>ELYSIUM</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="227">
+		<PlayerName>國王</PlayerName>
+		<CastleName>kingcastle</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="228">
+		<PlayerName>기</PlayerName>
+		<CastleName>BOB</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="229">
+		<PlayerName>하이</PlayerName>
+		<CastleName>북극</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="230">
+		<PlayerName>Luke</PlayerName>
+		<CastleName>CAT</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="231">
+		<PlayerName>Miguel</PlayerName>
+		<CastleName>Stormwind</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="232">
+		<PlayerName>Hi</PlayerName>
+		<CastleName>진</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="233">
+		<PlayerName>바보</PlayerName>
+		<CastleName>Anime</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="234">
+		<PlayerName>knight</PlayerName>
+		<CastleName>조선</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="235">
+		<PlayerName>도</PlayerName>
+		<CastleName>행</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="236">
+		<PlayerName>루나</PlayerName>
+		<CastleName>albion</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="237">
+		<PlayerName>하</PlayerName>
+		<CastleName>왕국</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="238">
+		<PlayerName>킹갓캐슬</PlayerName>
+		<CastleName>Celestia</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="239">
+		<PlayerName>Itachi</PlayerName>
+		<CastleName>hi</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="240">
+		<PlayerName>Art</PlayerName>
+		<CastleName>엘프고</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="241">
+		<PlayerName>guts</PlayerName>
+		<CastleName>스카이캐슬</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="242">
+		<PlayerName>night</PlayerName>
+		<CastleName>P</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="243">
+		<PlayerName>Link</PlayerName>
+		<CastleName>城</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="244">
+		<PlayerName>charles</PlayerName>
+		<CastleName>Aurora</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="245">
+		<PlayerName>samuel</PlayerName>
+		<CastleName>호</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="246">
+		<PlayerName>UwU</PlayerName>
+		<CastleName>ROYAL</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="247">
+		<PlayerName>jason</PlayerName>
+		<CastleName>kings</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="248">
+		<PlayerName>AAA</PlayerName>
+		<CastleName>Inazuma</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="249">
+		<PlayerName>Andrew</PlayerName>
+		<CastleName>Citadel</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="250">
+		<PlayerName>Alan</PlayerName>
+		<CastleName>W</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="251">
+		<PlayerName>solomon</PlayerName>
+		<CastleName>검</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="252">
+		<PlayerName>frost</PlayerName>
+		<CastleName>어</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="253">
+		<PlayerName>Phantom</PlayerName>
+		<CastleName>마법의</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="254">
+		<PlayerName>sans</PlayerName>
+		<CastleName>1234567890</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="255">
+		<PlayerName>명</PlayerName>
+		<CastleName>OK</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="256">
+		<PlayerName>NOOB</PlayerName>
+		<CastleName>R</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="257">
+		<PlayerName>Hiro</PlayerName>
+		<CastleName>최</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="258">
+		<PlayerName>minh</PlayerName>
+		<CastleName>국내</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="259">
+		<PlayerName>zack</PlayerName>
+		<CastleName>목</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="260">
+		<PlayerName>ME</PlayerName>
+		<CastleName>Storm</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="261">
+		<PlayerName>정조</PlayerName>
+		<CastleName>Grayskull</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="262">
+		<PlayerName>DEVIL</PlayerName>
+		<CastleName>AnorLondo</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="263">
+		<PlayerName>Luis</PlayerName>
+		<CastleName>감수</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="264">
+		<PlayerName>샌즈</PlayerName>
+		<CastleName>기</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="265">
+		<PlayerName>우왕자</PlayerName>
+		<CastleName>상</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="266">
+		<PlayerName>Ice</PlayerName>
+		<CastleName>응애</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="267">
+		<PlayerName>Slayer</PlayerName>
+		<CastleName>horizon</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="268">
+		<PlayerName>Ethan</PlayerName>
+		<CastleName>똥</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="269">
+		<PlayerName>Levi</PlayerName>
+		<CastleName>Blue</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="270">
+		<PlayerName>라이언</PlayerName>
+		<CastleName>맛있</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="271">
+		<PlayerName>kim</PlayerName>
+		<CastleName>Immortal</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="272">
+		<PlayerName>Nova</PlayerName>
+		<CastleName>경복궁</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="273">
+		<PlayerName>Anos</PlayerName>
+		<CastleName>Maria</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="274">
+		<PlayerName>사</PlayerName>
+		<CastleName>Dawn</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="275">
+		<PlayerName>Henry</PlayerName>
+		<CastleName>서</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="276">
+		<PlayerName>rin</PlayerName>
+		<CastleName>Golden</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="277">
+		<PlayerName>콩</PlayerName>
+		<CastleName>castel</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="278">
+		<PlayerName>Matt</PlayerName>
+		<CastleName>Blood</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="279">
+		<PlayerName>diego</PlayerName>
+		<CastleName>Legion</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="280">
+		<PlayerName>LION</PlayerName>
+		<CastleName>수원화</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="281">
+		<PlayerName>w</PlayerName>
+		<CastleName>123456789</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="282">
+		<PlayerName>aaron</PlayerName>
+		<CastleName>VALHALA</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="283">
+		<PlayerName>Grim</PlayerName>
+		<CastleName>카멜롯</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="284">
+		<PlayerName>사람</PlayerName>
+		<CastleName>GOLD</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="285">
+		<PlayerName>Chaos</PlayerName>
+		<CastleName>Hell</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="286">
+		<PlayerName>무</PlayerName>
+		<CastleName>바다</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="287">
+		<PlayerName>욜</PlayerName>
+		<CastleName>3</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="288">
+		<PlayerName>Jake</PlayerName>
+		<CastleName>Godcastle</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="289">
+		<PlayerName>ok</PlayerName>
+		<CastleName>love</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="290">
+		<PlayerName>Alpha</PlayerName>
+		<CastleName>krepost</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="291">
+		<PlayerName>Tony</PlayerName>
+		<CastleName>OlimpO</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="292">
+		<PlayerName>rafael</PlayerName>
+		<CastleName>Luna</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="293">
+		<PlayerName>와</PlayerName>
+		<CastleName>silver</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="294">
+		<PlayerName>lee</PlayerName>
+		<CastleName>thunder</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="295">
+		<PlayerName>뀨</PlayerName>
+		<CastleName>Fire</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="296">
+		<PlayerName>Kk</PlayerName>
+		<CastleName>Majapahit</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="297">
+		<PlayerName>대마</PlayerName>
+		<CastleName>그냥</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="298">
+		<PlayerName>Haru</PlayerName>
+		<CastleName>good</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="299">
+		<PlayerName>test</PlayerName>
+		<CastleName>OMEGA</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="300">
+		<PlayerName>아잉</PlayerName>
+		<CastleName>Dead</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="301">
+		<PlayerName>u</PlayerName>
+		<CastleName>IMPERIUM</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="302">
+		<PlayerName>ggg</PlayerName>
+		<CastleName>공주</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="303">
+		<PlayerName>바나나</PlayerName>
+		<CastleName>sus</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="304">
+		<PlayerName>Nathan</PlayerName>
+		<CastleName>AAA</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="305">
+		<PlayerName>현</PlayerName>
+		<CastleName>dom</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="306">
+		<PlayerName>만두</PlayerName>
+		<CastleName>王</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="307">
+		<PlayerName>킹콩</PlayerName>
+		<CastleName>ARK</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="308">
+		<PlayerName>Jeff</PlayerName>
+		<CastleName>U</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="309">
+		<PlayerName>복면가</PlayerName>
+		<CastleName>고구려</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="310">
+		<PlayerName>DarkLord</PlayerName>
+		<CastleName>TheCastle</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="311">
+		<PlayerName>Josh</PlayerName>
+		<CastleName>윤</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="312">
+		<PlayerName>sUn</PlayerName>
+		<CastleName>ice</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="313">
+		<PlayerName>yuri</PlayerName>
+		<CastleName>야</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="314">
+		<PlayerName>Rain</PlayerName>
+		<CastleName>좀비</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="315">
+		<PlayerName>조</PlayerName>
+		<CastleName>용</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="316">
+		<PlayerName>Axel</PlayerName>
+		<CastleName>평양</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="317">
+		<PlayerName>blank</PlayerName>
+		<CastleName>Nexus</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="318">
+		<PlayerName>Lancelot</PlayerName>
+		<CastleName>장</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="319">
+		<PlayerName>연</PlayerName>
+		<CastleName>킹왕짱</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="320">
+		<PlayerName>하루</PlayerName>
+		<CastleName>Britania</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="321">
+		<PlayerName>crimson</PlayerName>
+		<CastleName>Lion</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="322">
+		<PlayerName>Yami</PlayerName>
+		<CastleName>Yes</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="323">
+		<PlayerName>Arturo</PlayerName>
+		<CastleName>HAREM</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="324">
+		<PlayerName>cc</PlayerName>
+		<CastleName>Diamond</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="325">
+		<PlayerName>Cat</PlayerName>
+		<CastleName>zamok</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="326">
+		<PlayerName>666</PlayerName>
+		<CastleName>LEGEND</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="327">
+		<PlayerName>아도니스</PlayerName>
+		<CastleName>sss</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="328">
+		<PlayerName>Thomas</PlayerName>
+		<CastleName>Adonis</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="329">
+		<PlayerName>Darius</PlayerName>
+		<CastleName>winter</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="330">
+		<PlayerName>Jose</PlayerName>
+		<CastleName>GGG</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="331">
+		<PlayerName>kingdom</PlayerName>
+		<CastleName>phantom</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="332">
+		<PlayerName>No</PlayerName>
+		<CastleName>Thanh</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="333">
+		<PlayerName>potato</PlayerName>
+		<CastleName>Banana</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="334">
+		<PlayerName>제</PlayerName>
+		<CastleName>imperial</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="335">
+		<PlayerName>Neo</PlayerName>
+		<CastleName>감자</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="336">
+		<PlayerName>Karma</PlayerName>
+		<CastleName>blackstone</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="337">
+		<PlayerName>Kyle</PlayerName>
+		<CastleName>웅</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="338">
+		<PlayerName>Nam</PlayerName>
+		<CastleName>잉</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="339">
+		<PlayerName>Will</PlayerName>
+		<CastleName>Deez</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="340">
+		<PlayerName>eren</PlayerName>
+		<CastleName>치킨</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="341">
+		<PlayerName>ian</PlayerName>
+		<CastleName>데마시아</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="342">
+		<PlayerName>Maximus</PlayerName>
+		<CastleName>무</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="343">
+		<PlayerName>잉</PlayerName>
+		<CastleName>World</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="344">
+		<PlayerName>Alice</PlayerName>
+		<CastleName>Tokyo</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="345">
+		<PlayerName>JESUS</PlayerName>
+		<CastleName>Windsor</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="346">
+		<PlayerName>공주</PlayerName>
+		<CastleName>드래곤</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="347">
+		<PlayerName>Robert</PlayerName>
+		<CastleName>AAA</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="348">
+		<PlayerName>돼지</PlayerName>
+		<CastleName>Nova</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="349">
+		<PlayerName>cloud</PlayerName>
+		<CastleName>Raven</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="350">
+		<PlayerName>crow</PlayerName>
+		<CastleName>Emperor</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="351">
+		<PlayerName>NameLess</PlayerName>
+		<CastleName>ONE</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="352">
+		<PlayerName>Jacob</PlayerName>
+		<CastleName>중</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="353">
+		<PlayerName>유</PlayerName>
+		<CastleName>각</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="354">
+		<PlayerName>응</PlayerName>
+		<CastleName>NOOB</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="355">
+		<PlayerName>Grey</PlayerName>
+		<CastleName>garden</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="356">
+		<PlayerName>Escanor</PlayerName>
+		<CastleName>fortaleza</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="357">
+		<PlayerName>캐슬</PlayerName>
+		<CastleName>knight</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="358">
+		<PlayerName>George</PlayerName>
+		<CastleName>안녕</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="359">
+		<PlayerName>111</PlayerName>
+		<CastleName>한국</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="360">
+		<PlayerName>Andy</PlayerName>
+		<CastleName>JOJO</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="361">
+		<PlayerName>rose</PlayerName>
+		<CastleName>MASTER</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="362">
+		<PlayerName>리치</PlayerName>
+		<CastleName>듬성듬</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="363">
+		<PlayerName>맛초</PlayerName>
+		<CastleName>CRYSTAL</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="364">
+		<PlayerName>빨리</PlayerName>
+		<CastleName>혜</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="365">
+		<PlayerName>치킨</PlayerName>
+		<CastleName>황</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="366">
+		<PlayerName>몰라</PlayerName>
+		<CastleName>바보</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="367">
+		<PlayerName>eric</PlayerName>
+		<CastleName>Pro</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="368">
+		<PlayerName>Nico</PlayerName>
+		<CastleName>1234</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="369">
+		<PlayerName>123456789</PlayerName>
+		<CastleName>KingdomCome</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="370">
+		<PlayerName>draco</PlayerName>
+		<CastleName>구</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="371">
+		<PlayerName>peter</PlayerName>
+		<CastleName>Midgar</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="372">
+		<PlayerName>Atlas</PlayerName>
+		<CastleName>아잉</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="373">
+		<PlayerName>xxx</PlayerName>
+		<CastleName>Dreamland</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="374">
+		<PlayerName>1234</PlayerName>
+		<CastleName>Necropolis</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="375">
+		<PlayerName>어</PlayerName>
+		<CastleName>산</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="376">
+		<PlayerName>Bruno</PlayerName>
+		<CastleName>별</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="377">
+		<PlayerName>Logan</PlayerName>
+		<CastleName>fallen</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="378">
+		<PlayerName>momonga</PlayerName>
+		<CastleName>Alabasta</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="379">
+		<PlayerName>야</PlayerName>
+		<CastleName>come</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="380">
+		<PlayerName>Kaito</PlayerName>
+		<CastleName>alpha</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="381">
+		<PlayerName>준</PlayerName>
+		<CastleName>天空之城</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="382">
+		<PlayerName>HERO</PlayerName>
+		<CastleName>Hades</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="383">
+		<PlayerName>star</PlayerName>
+		<CastleName>kk</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="384">
+		<PlayerName>Aa</PlayerName>
+		<CastleName>달</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="385">
+		<PlayerName>악어</PlayerName>
+		<CastleName>Berlin</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="386">
+		<PlayerName>Pablo</PlayerName>
+		<CastleName>eclipse</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="387">
+		<PlayerName>kingkong</PlayerName>
+		<CastleName>Casa</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="388">
+		<PlayerName>띵</PlayerName>
+		<CastleName>Lothric</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="389">
+		<PlayerName>NAME</PlayerName>
+		<CastleName>대</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="390">
+		<PlayerName>hh</PlayerName>
+		<CastleName>하이</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="391">
+		<PlayerName>THOR</PlayerName>
+		<CastleName>악마</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="392">
+		<PlayerName>Adrian</PlayerName>
+		<CastleName>쿠키</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="393">
+		<PlayerName>isaac</PlayerName>
+		<CastleName>Hellsing</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="394">
+		<PlayerName>유리</PlayerName>
+		<CastleName>KaerMorhen</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="395">
+		<PlayerName>고양이</PlayerName>
+		<CastleName>potato</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="396">
+		<PlayerName>Tempest</PlayerName>
+		<CastleName>War</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="397">
+		<PlayerName>felipe</PlayerName>
+		<CastleName>hunter</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="398">
+		<PlayerName>Felix</PlayerName>
+		<CastleName>happy</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="399">
+		<PlayerName>liam</PlayerName>
+		<CastleName>Tartarus</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="400">
+		<PlayerName>내가</PlayerName>
+		<CastleName>Ukraine</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="401">
+		<PlayerName>Aizen</PlayerName>
+		<CastleName>Lost</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="402">
+		<PlayerName>Azazel</PlayerName>
+		<CastleName>어썸피스</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="403">
+		<PlayerName>cain</PlayerName>
+		<CastleName>atlas</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="404">
+		<PlayerName>hhh</PlayerName>
+		<CastleName>Galaxy</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="405">
+		<PlayerName>JULIUS</PlayerName>
+		<CastleName>에메랄드</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="406">
+		<PlayerName>neko</PlayerName>
+		<CastleName>OWO</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="407">
+		<PlayerName>Queen</PlayerName>
+		<CastleName>도</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="408">
+		<PlayerName>Ark</PlayerName>
+		<CastleName>뀨</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="409">
+		<PlayerName>DRAGO</PlayerName>
+		<CastleName>Sakura</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="410">
+		<PlayerName>dave</PlayerName>
+		<CastleName>주</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="411">
+		<PlayerName>Emperor</PlayerName>
+		<CastleName>Asura</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="412">
+		<PlayerName>무명</PlayerName>
+		<CastleName>BOSS</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="413">
+		<PlayerName>あ</PlayerName>
+		<CastleName>Excalibur</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="414">
+		<PlayerName>哈哈</PlayerName>
+		<CastleName>Destiny</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="415">
+		<PlayerName>벅</PlayerName>
+		<CastleName>KingsLand</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="416">
+		<PlayerName>악마</PlayerName>
+		<CastleName>Lucky</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="417">
+		<PlayerName>3</PlayerName>
+		<CastleName>vania</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="418">
+		<PlayerName>천</PlayerName>
+		<CastleName>神</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="419">
+		<PlayerName>pro</PlayerName>
+		<CastleName>sol</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="420">
+		<PlayerName>DemonKing</PlayerName>
+		<CastleName>kim</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="421">
+		<PlayerName>한</PlayerName>
+		<CastleName>김일</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="422">
+		<PlayerName>썩쏘</PlayerName>
+		<CastleName>몰라</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="423">
+		<PlayerName>우왕</PlayerName>
+		<CastleName>Brasil</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="424">
+		<PlayerName>momo</PlayerName>
+		<CastleName>Slayer</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="425">
+		<PlayerName>nightmare</PlayerName>
+		<CastleName>Dragons</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="426">
+		<PlayerName>Yu</PlayerName>
+		<CastleName>Vanguard</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="427">
+		<PlayerName>성기사</PlayerName>
+		<CastleName>KILLER</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="428">
+		<PlayerName>Blaze</PlayerName>
+		<CastleName>TheKing</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="429">
+		<PlayerName>Fenrir</PlayerName>
+		<CastleName>Lionheart</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="430">
+		<PlayerName>davi</PlayerName>
+		<CastleName>호그와트</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="431">
+		<PlayerName>drake</PlayerName>
+		<CastleName>GLORY</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="432">
+		<PlayerName>수</PlayerName>
+		<CastleName>Forest</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="433">
+		<PlayerName>Rick</PlayerName>
+		<CastleName>cc</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="434">
+		<PlayerName>ABC</PlayerName>
+		<CastleName>zzz</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="435">
+		<PlayerName>CASTLE</PlayerName>
+		<CastleName>Snow</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="436">
+		<PlayerName>Xavier</PlayerName>
+		<CastleName>Ionia</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="437">
+		<PlayerName>Goku</PlayerName>
+		<CastleName>응</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="438">
+		<PlayerName>Simon</PlayerName>
+		<CastleName>kuy</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="439">
+		<PlayerName>Tim</PlayerName>
+		<CastleName>Erebor</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="440">
+		<PlayerName>크</PlayerName>
+		<CastleName>우리</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="441">
+		<PlayerName>좀비</PlayerName>
+		<CastleName>Imperio</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="442">
+		<PlayerName>사자</PlayerName>
+		<CastleName>민</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="443">
+		<PlayerName>Sin</PlayerName>
+		<CastleName>유리</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="444">
+		<PlayerName>winter</PlayerName>
+		<CastleName>Midnight</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="445">
+		<PlayerName>어쩔티비</PlayerName>
+		<CastleName>공</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="446">
+		<PlayerName>Han</PlayerName>
+		<CastleName>whiterun</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="447">
+		<PlayerName>joseph</PlayerName>
+		<CastleName>Gym</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="448">
+		<PlayerName>Joshua</PlayerName>
+		<CastleName>azeloth</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="449">
+		<PlayerName>JUN</PlayerName>
+		<CastleName>cloud</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="450">
+		<PlayerName>Marcus</PlayerName>
+		<CastleName>Skyrin</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="451">
+		<PlayerName>yuu</PlayerName>
+		<CastleName>구름</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="452">
+		<PlayerName>나다</PlayerName>
+		<CastleName>Stone</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="453">
+		<PlayerName>Merlin</PlayerName>
+		<CastleName>ABC</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="454">
+		<PlayerName>Sebastian</PlayerName>
+		<CastleName>Qwerty</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="455">
+		<PlayerName>Duck</PlayerName>
+		<CastleName>fox</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="456">
+		<PlayerName>쇼</PlayerName>
+		<CastleName>Waka</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="457">
+		<PlayerName>Evan</PlayerName>
+		<CastleName>魔王城</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="458">
+		<PlayerName>Marco</PlayerName>
+		<CastleName>AD</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="459">
+		<PlayerName>Martin</PlayerName>
+		<CastleName>와</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="460">
+		<PlayerName>XD</PlayerName>
+		<CastleName>지옥</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="461">
+		<PlayerName>Dream</PlayerName>
+		<CastleName>DD</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="462">
+		<PlayerName>Justin</PlayerName>
+		<CastleName>칠</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="463">
+		<PlayerName>kami</PlayerName>
+		<CastleName>Shiro</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="464">
+		<PlayerName>亚瑟</PlayerName>
+		<CastleName>초코</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="465">
+		<PlayerName>enzo</PlayerName>
+		<CastleName>newcastle</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="466">
+		<PlayerName>神王</PlayerName>
+		<CastleName>Aa</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="467">
+		<PlayerName>염라대</PlayerName>
+		<CastleName>111</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="468">
+		<PlayerName>그냥</PlayerName>
+		<CastleName>land</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="469">
+		<PlayerName>거북</PlayerName>
+		<CastleName>Rohan</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="470">
+		<PlayerName>왕자</PlayerName>
+		<CastleName>달빛</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="471">
+		<PlayerName>초코</PlayerName>
+		<CastleName>Destroyer</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="472">
+		<PlayerName>유희</PlayerName>
+		<CastleName>Niflheim</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="473">
+		<PlayerName>dd</PlayerName>
+		<CastleName>4</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="474">
+		<PlayerName>julian</PlayerName>
+		<CastleName>Orion</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="475">
+		<PlayerName>kingbob</PlayerName>
+		<CastleName>PALACE</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="476">
+		<PlayerName>부</PlayerName>
+		<CastleName>KingGod</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="477">
+		<PlayerName>duy</PlayerName>
+		<CastleName>haha</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="478">
+		<PlayerName>KKK</PlayerName>
+		<CastleName>리</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="479">
+		<PlayerName>OMEGA</PlayerName>
+		<CastleName>Shadows</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="480">
+		<PlayerName>ATHUR</PlayerName>
+		<CastleName>Weev</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="481">
+		<PlayerName>dylan</PlayerName>
+		<CastleName>Angel</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="482">
+		<PlayerName>Nope</PlayerName>
+		<CastleName>hee</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="483">
+		<PlayerName>Orion</PlayerName>
+		<CastleName>Meow</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="484">
+		<PlayerName>루</PlayerName>
+		<CastleName>Zion</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="485">
+		<PlayerName>paul</PlayerName>
+		<CastleName>Schloss</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="486">
+		<PlayerName>sus</PlayerName>
+		<CastleName>우주</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="487">
+		<PlayerName>White</PlayerName>
+		<CastleName>MAX</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="488">
+		<PlayerName>BaNaNa</PlayerName>
+		<CastleName>vua</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="489">
+		<PlayerName>saber</PlayerName>
+		<CastleName>아발론</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="490">
+		<PlayerName>vincent</PlayerName>
+		<CastleName>Twilight</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="491">
+		<PlayerName>고</PlayerName>
+		<CastleName>Hh</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="492">
+		<PlayerName>Pendragon</PlayerName>
+		<CastleName>Guardian</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="493">
+		<PlayerName>爸爸</PlayerName>
+		<CastleName>Heavenly</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="494">
+		<PlayerName>오리</PlayerName>
+		<CastleName>Heavenhold</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="495">
+		<PlayerName>Jonathan</PlayerName>
+		<CastleName>Hero</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="496">
+		<PlayerName>Midas</PlayerName>
+		<CastleName>LIGMA</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="497">
+		<PlayerName>Steve</PlayerName>
+		<CastleName>Laputa</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="498">
+		<PlayerName>AKI</PlayerName>
+		<CastleName>ss</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="499">
+		<PlayerName>Azrael</PlayerName>
+		<CastleName>12345</CastleName>
+	</ColosseumBotName>
+	<ColosseumBotName ID="500">
+		<PlayerName>khang</PlayerName>
+		<CastleName>Hollow</CastleName>
+	</ColosseumBotName>
+</ColosseumBotNames>

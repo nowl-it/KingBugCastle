@@ -1,0 +1,2415 @@
+<Constants>
+<!-- UnitNeedExp -->
+    <Constant ID="1">
+        <Type>UnitNeedExp</Type>
+        <Index>0</Index>
+        <Value>5</Value>
+    </Constant>
+    <Constant ID="2">
+        <Type>UnitNeedExp</Type>
+        <Index>1</Index>
+        <Value>8</Value>
+    </Constant>
+    <Constant ID="3">
+        <Type>UnitNeedExp</Type>
+        <Index>2</Index>
+        <Value>10</Value>
+    </Constant>
+    <Constant ID="4">
+        <Type>UnitNeedExp</Type>
+        <Index>3</Index>
+        <Value>20</Value>
+    </Constant>
+    <Constant ID="5">
+        <Type>UnitNeedExp</Type>
+        <Index>4</Index>
+        <Value>50</Value>
+    </Constant>
+    <Constant ID="6">
+        <Type>UnitNeedExp</Type>
+        <Index>5</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="7">
+        <Type>UnitNeedExp</Type>
+        <Index>6</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="8">
+        <Type>UnitNeedExp</Type>
+        <Index>7</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="9">
+        <Type>UnitNeedExp</Type>
+        <Index>8</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="10">
+        <Type>UnitNeedExp</Type>
+        <Index>9</Index>
+        <Value>250</Value>
+    </Constant>
+    <Constant ID="11">
+        <Type>UnitNeedExp</Type>
+        <Index>10</Index>
+        <Value>250</Value>
+    </Constant>
+    <Constant ID="12">
+        <Type>UnitNeedExp</Type>
+        <Index>11</Index>
+        <Value>300</Value>
+    </Constant>
+    <Constant ID="13">
+        <Type>UnitNeedExp</Type>
+        <Index>12</Index>
+        <Value>300</Value>
+    </Constant>
+    <Constant ID="14">
+        <Type>UnitNeedExp</Type>
+        <Index>13</Index>
+        <Value>350</Value>
+    </Constant>
+    <Constant ID="15">
+        <Type>UnitNeedExp</Type>
+        <Index>14</Index>
+        <Value>350</Value>
+    </Constant>
+    <Constant ID="16">
+        <Type>UnitNeedExp</Type>
+        <Index>15</Index>
+        <Value>1000</Value>
+    </Constant>
+    <Constant ID="17">
+        <Type>UnitNeedExp</Type>
+        <Index>16</Index>
+        <Value>1000</Value>
+    </Constant>
+    <Constant ID="18">
+        <Type>UnitNeedExp</Type>
+        <Index>17</Index>
+        <Value>1500</Value>
+    </Constant>
+    <Constant ID="19">
+        <Type>UnitNeedExp</Type>
+        <Index>18</Index>
+        <Value>1500</Value>
+    </Constant>
+    <Constant ID="20">
+        <Type>UnitNeedExp</Type>
+        <Index>19</Index>
+        <Value>10000</Value>
+    </Constant>
+    <Constant ID="21">
+        <Type>UnitNeedExp</Type>
+        <Index>20</Index>
+        <Value>15000</Value>
+    </Constant>
+    <Constant ID="22">
+        <Type>UnitNeedExp</Type>
+        <Index>21</Index>
+        <Value>20000</Value>
+    </Constant>
+    <Constant ID="23">
+        <Type>UnitNeedExp</Type>
+        <Index>22</Index>
+        <Value>25000</Value>
+    </Constant>
+    <Constant ID="24">
+        <Type>UnitNeedExp</Type>
+        <Index>23</Index>
+        <Value>30000</Value>
+    </Constant>
+    <Constant ID="25">
+        <Type>UnitNeedExp</Type>
+        <Index>24</Index>
+        <Value>500000</Value>
+    </Constant>
+    <Constant ID="26">
+        <Type>UnitNeedExp</Type>
+        <Index>25</Index>
+        <Value>750000</Value>
+    </Constant>
+    <Constant ID="27">
+        <Type>UnitNeedExp</Type>
+        <Index>26</Index>
+        <Value>1000000</Value>
+    </Constant>
+    <Constant ID="28">
+        <Type>UnitNeedExp</Type>
+        <Index>27</Index>
+        <Value>1250000</Value>
+    </Constant>
+    <Constant ID="29">
+        <Type>UnitNeedExp</Type>
+        <Index>28</Index>
+        <Value>1500000</Value>
+    </Constant>
+
+
+<!-- UnitLvUpCost -->
+    <Constant ID="51">
+        <Type>UnitLvUpCost</Type>
+        <Index>0</Index>
+        <Value>40</Value>
+    </Constant>
+    <Constant ID="52">
+        <Type>UnitLvUpCost</Type>
+        <Index>1</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="53">
+        <Type>UnitLvUpCost</Type>
+        <Index>2</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="54">
+        <Type>UnitLvUpCost</Type>
+        <Index>3</Index>
+        <Value>400</Value>
+    </Constant>
+    <Constant ID="55">
+        <Type>UnitLvUpCost</Type>
+        <Index>4</Index>
+        <Value>1000</Value>
+    </Constant>
+    <Constant ID="56">
+        <Type>UnitLvUpCost</Type>
+        <Index>5</Index>
+        <Value>2000</Value>
+    </Constant>
+    <Constant ID="57">
+        <Type>UnitLvUpCost</Type>
+        <Index>6</Index>
+        <Value>4000</Value>
+    </Constant>
+    <Constant ID="58">
+        <Type>UnitLvUpCost</Type>
+        <Index>7</Index>
+        <Value>4000</Value>
+    </Constant>
+    <Constant ID="59">
+        <Type>UnitLvUpCost</Type>
+        <Index>8</Index>
+        <Value>4000</Value>
+    </Constant>
+    <Constant ID="60">
+        <Type>UnitLvUpCost</Type>
+        <Index>9</Index>
+        <Value>5000</Value>
+    </Constant>
+    <Constant ID="61">
+        <Type>UnitLvUpCost</Type>
+        <Index>10</Index>
+        <Value>5000</Value>
+    </Constant>
+    <Constant ID="62">
+        <Type>UnitLvUpCost</Type>
+        <Index>11</Index>
+        <Value>6000</Value>
+    </Constant>
+    <Constant ID="63">
+        <Type>UnitLvUpCost</Type>
+        <Index>12</Index>
+        <Value>6000</Value>
+    </Constant>
+    <Constant ID="64">
+        <Type>UnitLvUpCost</Type>
+        <Index>13</Index>
+        <Value>7000</Value>
+    </Constant>
+    <Constant ID="65">
+        <Type>UnitLvUpCost</Type>
+        <Index>14</Index>
+        <Value>7000</Value>
+    </Constant>
+    <Constant ID="66">
+        <Type>UnitLvUpCost</Type>
+        <Index>15</Index>
+        <Value>12500</Value>
+    </Constant>
+    <Constant ID="67">
+        <Type>UnitLvUpCost</Type>
+        <Index>16</Index>
+        <Value>12500</Value>
+    </Constant>
+    <Constant ID="68">
+        <Type>UnitLvUpCost</Type>
+        <Index>17</Index>
+        <Value>15000</Value>
+    </Constant>
+    <Constant ID="69">
+        <Type>UnitLvUpCost</Type>
+        <Index>18</Index>
+        <Value>15000</Value>
+    </Constant>
+    <Constant ID="70">
+        <Type>UnitLvUpCost</Type>
+        <Index>19</Index>
+        <Value>50000</Value>
+    </Constant>
+    <Constant ID="71">
+        <Type>UnitLvUpCost</Type>
+        <Index>20</Index>
+        <Value>50000</Value>
+    </Constant>
+    <Constant ID="72">
+        <Type>UnitLvUpCost</Type>
+        <Index>21</Index>
+        <Value>50000</Value>
+    </Constant>
+    <Constant ID="73">
+        <Type>UnitLvUpCost</Type>
+        <Index>22</Index>
+        <Value>50000</Value>
+    </Constant>
+    <Constant ID="74">
+        <Type>UnitLvUpCost</Type>
+        <Index>23</Index>
+        <Value>50000</Value>
+    </Constant>
+    <Constant ID="75">
+        <Type>UnitLvUpCost</Type>
+        <Index>24</Index>
+        <Value>100000</Value>
+    </Constant>
+    <Constant ID="76">
+        <Type>UnitLvUpCost</Type>
+        <Index>25</Index>
+        <Value>100000</Value>
+    </Constant>
+    <Constant ID="77">
+        <Type>UnitLvUpCost</Type>
+        <Index>26</Index>
+        <Value>100000</Value>
+    </Constant>
+    <Constant ID="78">
+        <Type>UnitLvUpCost</Type>
+        <Index>27</Index>
+        <Value>100000</Value>
+    </Constant>
+    <Constant ID="79">
+        <Type>UnitLvUpCost</Type>
+        <Index>28</Index>
+        <Value>100000</Value>
+    </Constant>
+    
+<!--UnitNeedSoul-->
+
+    <Constant ID="100">
+        <Type>UnitNeedSoul</Type>
+        <Index>15</Index>
+        <Value>125</Value>
+    </Constant>
+    <Constant ID="101">
+        <Type>UnitNeedSoul</Type>
+        <Index>16</Index>
+        <Value>125</Value>
+    </Constant>
+    <Constant ID="102">
+        <Type>UnitNeedSoul</Type>
+        <Index>17</Index>
+        <Value>175</Value>
+    </Constant>
+    <Constant ID="103">
+        <Type>UnitNeedSoul</Type>
+        <Index>18</Index>
+        <Value>175</Value>
+    </Constant>
+    <Constant ID="104">
+        <Type>UnitNeedSoul</Type>
+        <Index>19</Index>
+        <Value>2000</Value>
+    </Constant>
+    <Constant ID="105">
+        <Type>UnitNeedSoul</Type>
+        <Index>20</Index>
+        <Value>4000</Value>
+    </Constant>
+    <Constant ID="106">
+        <Type>UnitNeedSoul</Type>
+        <Index>21</Index>
+        <Value>6000</Value>
+    </Constant>
+    <Constant ID="107">
+        <Type>UnitNeedSoul</Type>
+        <Index>22</Index>
+        <Value>8000</Value>
+    </Constant>
+    <Constant ID="108">
+        <Type>UnitNeedSoul</Type>
+        <Index>23</Index>
+        <Value>10000</Value>
+    </Constant>
+    <Constant ID="109">
+        <Type>UnitNeedSoul</Type>
+        <Index>24</Index>
+        <Value>100000</Value>
+    </Constant>
+    <Constant ID="110">
+        <Type>UnitNeedSoul</Type>
+        <Index>25</Index>
+        <Value>200000</Value>
+    </Constant>
+    <Constant ID="111">
+        <Type>UnitNeedSoul</Type>
+        <Index>26</Index>
+        <Value>300000</Value>
+    </Constant>
+    <Constant ID="112">
+        <Type>UnitNeedSoul</Type>
+        <Index>27</Index>
+        <Value>400000</Value>
+    </Constant>
+    <Constant ID="113">
+        <Type>UnitNeedSoul</Type>
+        <Index>28</Index>
+        <Value>500000</Value>
+    </Constant>
+
+
+    <!-- BuildingPointCost -->
+    <Constant ID="151">
+        <Type>BuildingPointCost</Type>
+        <Index>0</Index>
+        <Value>0</Value>
+    </Constant>
+    <Constant ID="152">
+        <Type>BuildingPointCost</Type>
+        <Index>1</Index>
+        <Value>20</Value>
+    </Constant>
+    <Constant ID="153">
+        <Type>BuildingPointCost</Type>
+        <Index>2</Index>
+        <Value>40</Value>
+    </Constant>
+    <Constant ID="154">
+        <Type>BuildingPointCost</Type>
+        <Index>3</Index>
+        <Value>80</Value>
+    </Constant>
+    <Constant ID="155">
+        <Type>BuildingPointCost</Type>
+        <Index>4</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="156">
+        <Type>BuildingPointCost</Type>
+        <Index>5</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="157">
+        <Type>BuildingPointCost</Type>
+        <Index>6</Index>
+        <Value>300</Value>
+    </Constant>
+    <Constant ID="158">
+        <Type>BuildingPointCost</Type>
+        <Index>7</Index>
+        <Value>400</Value>
+    </Constant>
+    <Constant ID="159">
+        <Type>BuildingPointCost</Type>
+        <Index>8</Index>
+        <Value>500</Value>
+    </Constant>
+    <Constant ID="160">
+        <Type>BuildingPointCost</Type>
+        <Index>9</Index>
+        <Value>600</Value>
+    </Constant>
+    <Constant ID="161">
+        <Type>BuildingPointCost</Type>
+        <Index>10</Index>
+        <Value>700</Value>
+    </Constant>
+    <Constant ID="162">
+        <Type>BuildingPointCost</Type>
+        <Index>11</Index>
+        <Value>800</Value>
+    </Constant>
+    <Constant ID="163">
+        <Type>BuildingPointCost</Type>
+        <Index>12</Index>
+        <Value>900</Value>
+    </Constant>
+    <Constant ID="164">
+        <Type>BuildingPointCost</Type>
+        <Index>13</Index>
+        <Value>1000</Value>
+    </Constant>
+    <Constant ID="165">
+        <Type>BuildingPointCost</Type>
+        <Index>14</Index>
+        <Value>1200</Value>
+    </Constant>
+    <Constant ID="166">
+        <Type>BuildingPointCost</Type>
+        <Index>15</Index>
+        <Value>1400</Value>
+    </Constant>
+    <Constant ID="167">
+        <Type>BuildingPointCost</Type>
+        <Index>16</Index>
+        <Value>1600</Value>
+    </Constant>
+    <Constant ID="168">
+        <Type>BuildingPointCost</Type>
+        <Index>17</Index>
+        <Value>1800</Value>
+    </Constant>
+    <Constant ID="169">
+        <Type>BuildingPointCost</Type>
+        <Index>18</Index>
+        <Value>2000</Value>
+    </Constant>
+    <Constant ID="170">
+        <Type>BuildingPointCost</Type>
+        <Index>19</Index>
+        <Value>2500</Value>
+    </Constant>
+    <Constant ID="171">
+        <Type>BuildingPointCost</Type>
+        <Index>20</Index>
+        <Value>3000</Value>
+    </Constant>
+    <Constant ID="172">
+        <Type>BuildingPointCost</Type>
+        <Index>21</Index>
+        <Value>3500</Value>
+    </Constant>
+    <Constant ID="173">
+        <Type>BuildingPointCost</Type>
+        <Index>22</Index>
+        <Value>4000</Value>
+    </Constant>
+    <Constant ID="174">
+        <Type>BuildingPointCost</Type>
+        <Index>23</Index>
+        <Value>4500</Value>
+    </Constant>
+    <Constant ID="175">
+        <Type>BuildingPointCost</Type>
+        <Index>24</Index>
+        <Value>5000</Value>
+    </Constant>
+    
+<!-- UnitPotentialUpgradeExp -->
+    <Constant ID="200">
+        <Type>UnitPotentialUpgradeExp</Type>
+        <Index>0</Index>
+        <Value>1000</Value>
+    </Constant>
+
+<!-- UnitPotentialUpgradeGold -->
+    <Constant ID="210">
+        <Type>UnitPotentialUpgradeGold</Type>
+        <Index>0</Index>
+        <Value>20000</Value>
+    </Constant>
+
+<!-- UnitPotentialUpgradeSoul -->
+    <Constant ID="220">
+        <Type>UnitPotentialUpgradeSoul</Type>
+        <Index>0</Index>
+        <Value>150</Value>
+    </Constant>
+
+<!-- PlayerNeedExp_Old -->
+    <Constant ID="251">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>0</Index>
+        <Value>50</Value>
+    </Constant>
+    <Constant ID="252">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>1</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="253">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>2</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="254">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>3</Index>
+        <Value>300</Value>
+    </Constant>
+    <Constant ID="255">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>4</Index>
+        <Value>400</Value>
+    </Constant>
+    <Constant ID="256">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>5</Index>
+        <Value>500</Value>
+    </Constant>
+    <Constant ID="257">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>6</Index>
+        <Value>600</Value>
+    </Constant>
+    <Constant ID="258">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>7</Index>
+        <Value>700</Value>
+    </Constant>
+    <Constant ID="259">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>8</Index>
+        <Value>800</Value>
+    </Constant>
+    <Constant ID="260">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>9</Index>
+        <Value>900</Value>
+    </Constant>
+    <Constant ID="261">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>10</Index>
+        <Value>1000</Value>
+    </Constant>
+    <Constant ID="262">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>11</Index>
+        <Value>1200</Value>
+    </Constant>
+    <Constant ID="263">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>12</Index>
+        <Value>1400</Value>
+    </Constant>
+    <Constant ID="264">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>13</Index>
+        <Value>1600</Value>
+    </Constant>
+    <Constant ID="265">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>14</Index>
+        <Value>1800</Value>
+    </Constant>
+    <Constant ID="266">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>15</Index>
+        <Value>2000</Value>
+    </Constant>
+    <Constant ID="267">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>16</Index>
+        <Value>2400</Value>
+    </Constant>
+    <Constant ID="268">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>17</Index>
+        <Value>2800</Value>
+    </Constant>
+    <Constant ID="269">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>18</Index>
+        <Value>3200</Value>
+    </Constant>
+    <Constant ID="270">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>19</Index>
+        <Value>3600</Value>
+    </Constant>
+    <Constant ID="271">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>20</Index>
+        <Value>4000</Value>
+    </Constant>
+    <Constant ID="272">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>21</Index>
+        <Value>4500</Value>
+    </Constant>
+    <Constant ID="273">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>22</Index>
+        <Value>5000</Value>
+    </Constant>
+    <Constant ID="274">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>23</Index>
+        <Value>6000</Value>
+    </Constant>
+    <Constant ID="275">
+        <Type>PlayerNeedExp_Old</Type>
+        <Index>24</Index>
+        <Value>9999999</Value>
+    </Constant>
+
+<!-- FoodBoosterMaxLevel -->
+    <Constant ID="300">
+        <Type>FoodBoosterMaxLevel</Type>
+        <Index>0</Index>
+        <Value>4</Value>
+    </Constant>
+
+<!-- FoodBoosterCost -->
+    <Constant ID="301">
+        <Type>FoodBoosterCost</Type>
+        <Index>0</Index>
+        <Value>5</Value>
+    </Constant>
+    <Constant ID="302">
+        <Type>FoodBoosterCost</Type>
+        <Index>1</Index>
+        <Value>10</Value>
+    </Constant>
+    <Constant ID="303">
+        <Type>FoodBoosterCost</Type>
+        <Index>2</Index>
+        <Value>15</Value>
+    </Constant>
+    <Constant ID="304">
+        <Type>FoodBoosterCost</Type>
+        <Index>3</Index>
+        <Value>20</Value>
+    </Constant>
+
+<!-- FoodBoosterReward -->
+    <Constant ID="311">
+        <Type>FoodBoosterReward</Type>
+        <Index>0</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="312">
+        <Type>FoodBoosterReward</Type>
+        <Index>1</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="313">
+        <Type>FoodBoosterReward</Type>
+        <Index>2</Index>
+        <Value>300</Value>
+    </Constant>
+    <Constant ID="314">
+        <Type>FoodBoosterReward</Type>
+        <Index>3</Index>
+        <Value>400</Value>
+    </Constant>
+
+<!-- InvasionDifficultyReward -->
+    <Constant ID="321">
+        <Type>InvasionDifficultyReward</Type>
+        <Index>0</Index>
+        <Value>0</Value>
+    </Constant>
+    <Constant ID="322">
+        <Type>InvasionDifficultyReward</Type>
+        <Index>1</Index>
+        <Value>25</Value>
+    </Constant>
+    <Constant ID="323">
+        <Type>InvasionDifficultyReward</Type>
+        <Index>2</Index>
+        <Value>50</Value>
+    </Constant>
+    <Constant ID="324">
+        <Type>InvasionDifficultyReward</Type>
+        <Index>3</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="325">
+        <Type>InvasionDifficultyReward</Type>
+        <Index>4</Index>
+        <Value>150</Value>
+    </Constant>
+
+<!-- FlagBoosterMaxLevel -->
+    <Constant ID="350">
+        <Type>FlagBoosterMaxLevel</Type>
+        <Index>0</Index>
+        <Value>3</Value>
+    </Constant>
+    
+<!-- FlagBoosterCost -->
+    <Constant ID="351">
+        <Type>FlagBoosterCost</Type>
+        <Index>0</Index>
+        <Value>1</Value>
+    </Constant>
+    <Constant ID="352">
+        <Type>FlagBoosterCost</Type>
+        <Index>1</Index>
+        <Value>2</Value>
+    </Constant>
+    <Constant ID="353">
+        <Type>FlagBoosterCost</Type>
+        <Index>2</Index>
+        <Value>3</Value>
+    </Constant>
+
+<!-- FlagBoosterReward -->
+    <Constant ID="361">
+        <Type>FlagBoosterReward</Type>
+        <Index>0</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="362">
+        <Type>FlagBoosterReward</Type>
+        <Index>1</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="363">
+        <Type>FlagBoosterReward</Type>
+        <Index>2</Index>
+        <Value>300</Value>
+    </Constant>
+<!-- 소탕에서만 사용 -->
+    <Constant ID="364">
+        <Type>FlagBoosterReward</Type>
+        <Index>3</Index>
+        <Value>400</Value>
+    </Constant>
+    <Constant ID="365">
+        <Type>FlagBoosterReward</Type>
+        <Index>4</Index>
+        <Value>500</Value>
+    </Constant>
+    <Constant ID="366">
+        <Type>FlagBoosterReward</Type>
+        <Index>5</Index>
+        <Value>600</Value>
+    </Constant>
+
+<!-- ArenaTokenReward -->
+    <Constant ID="400">
+        <Type>ArenaTokenReward</Type>
+        <Index>0</Index>
+        <Value>6</Value>
+    </Constant>
+    <Constant ID="401">
+        <Type>ArenaTokenReward</Type>
+        <Index>1</Index>
+        <Value>8</Value>
+    </Constant>
+    <Constant ID="402">
+        <Type>ArenaTokenReward</Type>
+        <Index>2</Index>
+        <Value>10</Value>
+    </Constant>
+    <Constant ID="403">
+        <Type>ArenaTokenReward</Type>
+        <Index>3</Index>
+        <Value>12</Value>
+    </Constant>
+    <Constant ID="404">
+        <Type>ArenaTokenReward</Type>
+        <Index>4</Index>
+        <Value>14</Value>
+    </Constant>
+    <Constant ID="405">
+        <Type>ArenaTokenReward</Type>
+        <Index>5</Index>
+        <Value>16</Value>
+    </Constant>
+
+<!-- DeckSlot -->
+    <Constant ID="500">
+        <Type>DeckSlot</Type>
+        <Index>0</Index>
+        <Value>0</Value>
+    </Constant>
+    <Constant ID="501">
+        <Type>DeckSlot</Type>
+        <Index>1</Index>
+        <Value>0</Value>
+    </Constant>
+    <Constant ID="502">
+        <Type>DeckSlot</Type>
+        <Index>2</Index>
+        <Value>0</Value>
+    </Constant>
+    <Constant ID="503">
+        <Type>DeckSlot</Type>
+        <Index>4</Index>
+        <Value>50</Value>
+    </Constant>
+    <Constant ID="504">
+        <Type>DeckSlot</Type>
+        <Index>5</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="505">
+        <Type>DeckSlot</Type>
+        <Index>6</Index>
+        <Value>150</Value>
+    </Constant>
+    <Constant ID="506">
+        <Type>DeckSlot</Type>
+        <Index>7</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="507">
+        <Type>DeckSlot</Type>
+        <Index>8</Index>
+        <Value>250</Value>
+    </Constant>
+    <Constant ID="508">
+        <Type>DeckSlot</Type>
+        <Index>9</Index>
+        <Value>300</Value>
+    </Constant>
+    <Constant ID="509">
+        <Type>DeckSlot</Type>
+        <Index>10</Index>
+        <Value>350</Value>
+    </Constant>
+    <Constant ID="510">
+        <Type>DeckSlot</Type>
+        <Index>11</Index>
+        <Value>400</Value>
+    </Constant>
+
+    <Constant ID="600">
+        <Type>FoodMax</Type>
+        <Index>0</Index>
+        <Value>20</Value>
+    </Constant>
+
+    <Constant ID="601">
+        <Type>FoodMax</Type>
+        <Index>3</Index>
+        <Value>25</Value>
+    </Constant>
+
+    <Constant ID="602">
+        <Type>FoodMax</Type>
+        <Index>6</Index>
+        <Value>30</Value>
+    </Constant>
+
+    <Constant ID="603">
+        <Type>FoodMax</Type>
+        <Index>9</Index>
+        <Value>35</Value>
+    </Constant>
+
+    <Constant ID="604">
+        <Type>FoodMax</Type>
+        <Index>12</Index>
+        <Value>40</Value>
+    </Constant>
+
+    <Constant ID="605">
+        <Type>FoodMax</Type>
+        <Index>15</Index>
+        <Value>45</Value>
+    </Constant>
+
+    <Constant ID="606">
+        <Type>FoodMax</Type>
+        <Index>18</Index>
+        <Value>50</Value>
+    </Constant>
+
+    <Constant ID="607">
+        <Type>FoodMax</Type>
+        <Index>21</Index>
+        <Value>55</Value>
+    </Constant>
+
+    <Constant ID="608">
+        <Type>FoodMax</Type>
+        <Index>24</Index>
+        <Value>60</Value>
+    </Constant>
+
+    <Constant ID="610">
+        <Type>HeartMax</Type>
+        <Index>0</Index>
+        <Value>50</Value>
+    </Constant>
+
+    <Constant ID="611">
+        <Type>HeartMax</Type>
+        <Index>3</Index>
+        <Value>63</Value>
+    </Constant>
+
+    <Constant ID="612">
+        <Type>HeartMax</Type>
+        <Index>6</Index>
+        <Value>75</Value>
+    </Constant>
+
+    <Constant ID="613">
+        <Type>HeartMax</Type>
+        <Index>9</Index>
+        <Value>88</Value>
+    </Constant>
+
+    <Constant ID="614">
+        <Type>HeartMax</Type>
+        <Index>12</Index>
+        <Value>100</Value>
+    </Constant>
+
+    <Constant ID="615">
+        <Type>HeartMax</Type>
+        <Index>15</Index>
+        <Value>113</Value>
+    </Constant>
+
+    <Constant ID="616">
+        <Type>HeartMax</Type>
+        <Index>18</Index>
+        <Value>125</Value>
+    </Constant>
+
+    <Constant ID="617">
+        <Type>HeartMax</Type>
+        <Index>21</Index>
+        <Value>138</Value>
+    </Constant>
+
+    <Constant ID="618">
+        <Type>HeartMax</Type>
+        <Index>24</Index>
+        <Value>150</Value>
+    </Constant>
+
+<!-- RerollPassMission -->
+    <Constant ID="710">
+        <Type>RerollPassMission</Type>
+        <Index>1</Index>
+        <Value>100</Value>
+    </Constant>
+
+    <Constant ID="711">
+        <Type>RerollPassMission</Type>
+        <Index>2</Index>
+        <Value>200</Value>
+    </Constant>
+
+    <Constant ID="712">
+        <Type>RerollPassMission</Type>
+        <Index>3</Index>
+        <Value>300</Value>
+    </Constant>
+
+    <Constant ID="713">
+        <Type>RerollPassMission</Type>
+        <Index>4</Index>
+        <Value>400</Value>
+    </Constant>
+
+    <Constant ID="714">
+        <Type>RerollPassMission</Type>
+        <Index>5</Index>
+        <Value>500</Value>
+    </Constant>
+    
+<!-- 영지 조사단 임무 리롤 -->
+    <Constant ID="720">
+        <Type>HuntingRefreshCost</Type>
+        <Index>0</Index>
+        <Value>500</Value>
+    </Constant>
+    <Constant ID="721">
+        <Type>HuntingRefreshCost</Type>
+        <Index>1</Index>
+        <Value>1000</Value>
+    </Constant>
+    <Constant ID="722">
+        <Type>HuntingRefreshCost</Type>
+        <Index>2</Index>
+        <Value>2000</Value>
+    </Constant>
+    <Constant ID="723">
+        <Type>HuntingRefreshCost</Type>
+        <Index>3</Index>
+        <Value>4000</Value>
+    </Constant>
+    <Constant ID="724">
+        <Type>HuntingRefreshCost</Type>
+        <Index>4</Index>
+        <Value>8000</Value>
+    </Constant>
+
+<!-- 유물 (Legacy) -->
+    <Constant ID="800">
+        <Type>RerollArtifactCash</Type>
+        <Index>0</Index>
+        <List>true</List>
+        <Value>5,10,15,20</Value>
+    </Constant>
+
+    <Constant ID="801">
+        <Type>RerollArtifactCash</Type>
+        <Index>1</Index>
+        <List>true</List>
+        <Value>0,5,10,15</Value>
+    </Constant>
+
+    <Constant ID="802">
+        <Type>RerollArtifactCash</Type>
+        <Index>2</Index>
+        <List>true</List>
+        <Value>0,0,5,10</Value>
+    </Constant>
+
+    <Constant ID="803">
+        <Type>RerollArtifactCash</Type>
+        <Index>3</Index>
+        <List>true</List>
+        <Value>0,0,0,5</Value>
+    </Constant>
+
+    <Constant ID="804">
+        <Type>RerollArtifactCash</Type>
+        <Index>4</Index>
+        <List>true</List>
+        <Value>0,0,0,0</Value>
+    </Constant>
+
+    <Constant ID="810">
+        <Type>RerollArtifactGold</Type>
+        <Index>0</Index>
+        <List>true</List>
+        <Value>250,1000,2000,4000</Value>
+    </Constant>
+
+    <Constant ID="811">
+        <Type>RerollArtifactGold</Type>
+        <Index>1</Index>
+        <List>true</List>
+        <Value>0,750,1750,3750</Value>
+    </Constant>
+
+    <Constant ID="812">
+        <Type>RerollArtifactGold</Type>
+        <Index>2</Index>
+        <List>true</List>
+        <Value>0,0,750,2750</Value>
+    </Constant>
+
+    <Constant ID="813">
+        <Type>RerollArtifactGold</Type>
+        <Index>3</Index>
+        <List>true</List>
+        <Value>0,0,0,750</Value>
+    </Constant>
+
+    <Constant ID="814">
+        <Type>RerollArtifactGold</Type>
+        <Index>4</Index>
+        <List>true</List>
+        <Value>0,0,0,0</Value>
+    </Constant>
+    
+    <Constant ID="820">
+       <Type>ArtifactLockPolishPoint</Type>
+        <Index>0</Index>
+        <Value>60</Value>
+    </Constant>
+
+    <Constant ID="821">
+        <Type>ArtifactLockPolishPoint</Type>
+        <Index>1</Index>
+        <Value>250</Value>
+    </Constant>
+
+    <Constant ID="822">
+        <Type>ArtifactLockPolishPoint</Type>
+        <Index>2</Index>
+        <Value>500</Value>
+    </Constant>
+
+    <Constant ID="823">
+       <Type>ArtifactLockPolishPoint</Type>
+        <Index>3</Index>
+        <Value>1000</Value>
+    </Constant>
+    
+    <Constant ID="830">
+       <Type>ArtifactStonePolishPoint</Type>
+        <Index>0</Index>
+        <Value>1250</Value>
+    </Constant>
+    
+    <Constant ID="831">
+       <Type>ArtifactStonePolishPoint</Type>
+        <Index>1</Index>
+        <Value>1500</Value>
+    </Constant>
+    
+    <Constant ID="832">
+       <Type>ArtifactStonePolishPoint</Type>
+        <Index>2</Index>
+        <Value>1750</Value>
+    </Constant>
+    
+    <Constant ID="833">
+       <Type>ArtifactStonePolishPoint</Type>
+        <Index>3</Index>
+        <Value>2000</Value>
+    </Constant>
+
+    <Constant ID="840">
+        <Type>ArtifactCatalystPolishPoint</Type>
+        <Index>0</Index>
+        <Value>3000</Value>
+    </Constant>
+    
+    <Constant ID="841">
+        <Type>ArtifactCatalystPolishPoint</Type>
+        <Index>1</Index>
+        <Value>5000</Value>
+    </Constant>
+    
+    <Constant ID="850">
+        <Type>ArtifactNeedPolishPointByRank</Type>
+        <Index>0</Index>
+        <Value>40</Value>
+    </Constant>
+
+    <Constant ID="851">
+        <Type>ArtifactNeedPolishPointByRank</Type>
+        <Index>1</Index>
+        <Value>80</Value>
+    </Constant>
+
+    <Constant ID="852">
+        <Type>ArtifactNeedPolishPointByRank</Type>
+        <Index>2</Index>
+        <Value>120</Value>
+    </Constant>
+
+    <Constant ID="853">
+        <Type>ArtifactNeedPolishPointByRank</Type>
+        <Index>3</Index>
+        <Value>240</Value>
+    </Constant>
+
+    <Constant ID="854">
+        <Type>ArtifactNeedPolishPointByRank</Type>
+        <Index>4</Index>
+        <Value>400</Value>
+    </Constant>
+
+    <Constant ID="860">
+        <Type>ArtifactPolishPointToReplace</Type>
+        <Index>0</Index>
+        <Value>800</Value>
+    </Constant>
+    
+    <!-- PlayerNeedExp -->
+    <Constant ID="1001">
+        <Type>PlayerNeedExp</Type>
+        <Index>0</Index>
+        <Value>40</Value>
+    </Constant>
+    <Constant ID="1002">
+        <Type>PlayerNeedExp</Type>
+        <Index>1</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="1003">
+        <Type>PlayerNeedExp</Type>
+        <Index>2</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="1004">
+        <Type>PlayerNeedExp</Type>
+        <Index>3</Index>
+        <Value>300</Value>
+    </Constant>
+    <Constant ID="1005">
+        <Type>PlayerNeedExp</Type>
+        <Index>4</Index>
+        <Value>400</Value>
+    </Constant>
+    <Constant ID="1006">
+        <Type>PlayerNeedExp</Type>
+        <Index>5</Index>
+        <Value>500</Value>
+    </Constant>
+    <Constant ID="1007">
+        <Type>PlayerNeedExp</Type>
+        <Index>6</Index>
+        <Value>600</Value>
+    </Constant>
+    <Constant ID="1008">
+        <Type>PlayerNeedExp</Type>
+        <Index>7</Index>
+        <Value>700</Value>
+    </Constant>
+    <Constant ID="1009">
+        <Type>PlayerNeedExp</Type>
+        <Index>8</Index>
+        <Value>800</Value>
+    </Constant>
+    <Constant ID="1010">
+        <Type>PlayerNeedExp</Type>
+        <Index>9</Index>
+        <Value>900</Value>
+    </Constant>
+    <Constant ID="1011">
+        <Type>PlayerNeedExp</Type>
+        <Index>10</Index>
+        <Value>1000</Value>
+    </Constant>
+    <Constant ID="1012">
+        <Type>PlayerNeedExp</Type>
+        <Index>11</Index>
+        <Value>1200</Value>
+    </Constant>
+    <Constant ID="1013">
+        <Type>PlayerNeedExp</Type>
+        <Index>12</Index>
+        <Value>1400</Value>
+    </Constant>
+    <Constant ID="1014">
+        <Type>PlayerNeedExp</Type>
+        <Index>13</Index>
+        <Value>1600</Value>
+    </Constant>
+    <Constant ID="1015">
+        <Type>PlayerNeedExp</Type>
+        <Index>14</Index>
+        <Value>1800</Value>
+    </Constant>
+    <Constant ID="1016">
+        <Type>PlayerNeedExp</Type>
+        <Index>15</Index>
+        <Value>2000</Value>
+    </Constant>
+    <Constant ID="1017">
+        <Type>PlayerNeedExp</Type>
+        <Index>16</Index>
+        <Value>2400</Value>
+    </Constant>
+    <Constant ID="1018">
+        <Type>PlayerNeedExp</Type>
+        <Index>17</Index>
+        <Value>2800</Value>
+    </Constant>
+    <Constant ID="1019">
+        <Type>PlayerNeedExp</Type>
+        <Index>18</Index>
+        <Value>3200</Value>
+    </Constant>
+    <Constant ID="1020">
+        <Type>PlayerNeedExp</Type>
+        <Index>19</Index>
+        <Value>3600</Value>
+    </Constant>
+    <Constant ID="1021">
+        <Type>PlayerNeedExp</Type>
+        <Index>20</Index>
+        <Value>4000</Value>
+    </Constant>
+    <Constant ID="1022">
+        <Type>PlayerNeedExp</Type>
+        <Index>21</Index>
+        <Value>4500</Value>
+    </Constant>
+    <Constant ID="1023">
+        <Type>PlayerNeedExp</Type>
+        <Index>22</Index>
+        <Value>5000</Value>
+    </Constant>
+    <Constant ID="1024">
+        <Type>PlayerNeedExp</Type>
+        <Index>23</Index>
+        <Value>6000</Value>
+    </Constant>
+    <Constant ID="1025">
+        <Type>PlayerNeedExp</Type>
+        <Index>24</Index>
+        <Value>7000</Value>
+    </Constant>
+    <Constant ID="1026">
+        <Type>PlayerNeedExp</Type>
+        <Index>25</Index>
+        <Value>8000</Value>
+    </Constant>
+    <Constant ID="1027">
+        <Type>PlayerNeedExp</Type>
+        <Index>26</Index>
+        <Value>9000</Value>
+    </Constant>
+    <Constant ID="1028">
+        <Type>PlayerNeedExp</Type>
+        <Index>27</Index>
+        <Value>10000</Value>
+    </Constant>
+    <Constant ID="1029">
+        <Type>PlayerNeedExp</Type>
+        <Index>28</Index>
+        <Value>12000</Value>
+    </Constant>
+    <Constant ID="1030">
+        <Type>PlayerNeedExp</Type>
+        <Index>29</Index>
+        <Value>14000</Value>
+    </Constant>
+    <Constant ID="1031">
+        <Type>PlayerNeedExp</Type>
+        <Index>30</Index>
+        <Value>16000</Value>
+    </Constant>
+    <Constant ID="1032">
+        <Type>PlayerNeedExp</Type>
+        <Index>31</Index>
+        <Value>18000</Value>
+    </Constant>
+    <Constant ID="1033">
+        <Type>PlayerNeedExp</Type>
+        <Index>32</Index>
+        <Value>20000</Value>
+    </Constant>
+    <Constant ID="1034">
+        <Type>PlayerNeedExp</Type>
+        <Index>33</Index>
+        <Value>22000</Value>
+    </Constant>
+    <Constant ID="1035">
+        <Type>PlayerNeedExp</Type>
+        <Index>34</Index>
+        <Value>24000</Value>
+    </Constant>
+    <Constant ID="1036">
+        <Type>PlayerNeedExp</Type>
+        <Index>35</Index>
+        <Value>26000</Value>
+    </Constant>
+    <Constant ID="1037">
+        <Type>PlayerNeedExp</Type>
+        <Index>36</Index>
+        <Value>28000</Value>
+    </Constant>
+    <Constant ID="1038">
+        <Type>PlayerNeedExp</Type>
+        <Index>37</Index>
+        <Value>30000</Value>
+    </Constant>
+    <Constant ID="1039">
+        <Type>PlayerNeedExp</Type>
+        <Index>38</Index>
+        <Value>32000</Value>
+    </Constant>
+    <Constant ID="1040">
+        <Type>PlayerNeedExp</Type>
+        <Index>39</Index>
+        <Value>34000</Value>
+    </Constant>
+    <Constant ID="1041">
+        <Type>PlayerNeedExp</Type>
+        <Index>40</Index>
+        <Value>36000</Value>
+    </Constant>
+    <Constant ID="1042">
+        <Type>PlayerNeedExp</Type>
+        <Index>41</Index>
+        <Value>38000</Value>
+    </Constant>
+    <Constant ID="1043">
+        <Type>PlayerNeedExp</Type>
+        <Index>42</Index>
+        <Value>40000</Value>
+    </Constant>
+    <Constant ID="1044">
+        <Type>PlayerNeedExp</Type>
+        <Index>43</Index>
+        <Value>42000</Value>
+    </Constant>
+    <Constant ID="1045">
+        <Type>PlayerNeedExp</Type>
+        <Index>44</Index>
+        <Value>44000</Value>
+    </Constant>
+    <Constant ID="1046">
+        <Type>PlayerNeedExp</Type>
+        <Index>45</Index>
+        <Value>46000</Value>
+    </Constant>
+    <Constant ID="1047">
+        <Type>PlayerNeedExp</Type>
+        <Index>46</Index>
+        <Value>48000</Value>
+    </Constant>
+    <Constant ID="1048">
+        <Type>PlayerNeedExp</Type>
+        <Index>47</Index>
+        <Value>50000</Value>
+    </Constant>
+    <Constant ID="1049">
+        <Type>PlayerNeedExp</Type>
+        <Index>48</Index>
+        <Value>55000</Value>
+    </Constant>
+    <Constant ID="1050">
+        <Type>PlayerNeedExp</Type>
+        <Index>49</Index>
+        <Value>60000</Value>
+    </Constant>
+    <Constant ID="1051">
+        <Type>PlayerNeedExp</Type>
+        <Index>50</Index>
+        <Value>65000</Value>
+    </Constant>
+    <Constant ID="1052">
+        <Type>PlayerNeedExp</Type>
+        <Index>51</Index>
+        <Value>70000</Value>
+    </Constant>
+    <Constant ID="1053">
+        <Type>PlayerNeedExp</Type>
+        <Index>52</Index>
+        <Value>75000</Value>
+    </Constant>
+    <Constant ID="1054">
+        <Type>PlayerNeedExp</Type>
+        <Index>53</Index>
+        <Value>80000</Value>
+    </Constant>
+    <Constant ID="1055">
+        <Type>PlayerNeedExp</Type>
+        <Index>54</Index>
+        <Value>85000</Value>
+    </Constant>
+    <Constant ID="1056">
+        <Type>PlayerNeedExp</Type>
+        <Index>55</Index>
+        <Value>90000</Value>
+    </Constant>
+    <Constant ID="1057">
+        <Type>PlayerNeedExp</Type>
+        <Index>56</Index>
+        <Value>95000</Value>
+    </Constant>
+    <Constant ID="1058">
+        <Type>PlayerNeedExp</Type>
+        <Index>57</Index>
+        <Value>100000</Value>
+    </Constant>
+    <Constant ID="1059">
+        <Type>PlayerNeedExp</Type>
+        <Index>58</Index>
+        <Value>110000</Value>
+    </Constant>
+    <Constant ID="1060">
+        <Type>PlayerNeedExp</Type>
+        <Index>59</Index>
+        <Value>120000</Value>
+    </Constant>
+    <Constant ID="1061">
+        <Type>PlayerNeedExp</Type>
+        <Index>60</Index>
+        <Value>130000</Value>
+    </Constant>
+    <Constant ID="1062">
+        <Type>PlayerNeedExp</Type>
+        <Index>61</Index>
+        <Value>140000</Value>
+    </Constant>
+    <Constant ID="1063">
+        <Type>PlayerNeedExp</Type>
+        <Index>62</Index>
+        <Value>150000</Value>
+    </Constant>
+    <Constant ID="1064">
+        <Type>PlayerNeedExp</Type>
+        <Index>63</Index>
+        <Value>160000</Value>
+    </Constant>
+    <Constant ID="1065">
+        <Type>PlayerNeedExp</Type>
+        <Index>64</Index>
+        <Value>170000</Value>
+    </Constant>
+    <Constant ID="1066">
+        <Type>PlayerNeedExp</Type>
+        <Index>65</Index>
+        <Value>180000</Value>
+    </Constant>
+    <Constant ID="1067">
+        <Type>PlayerNeedExp</Type>
+        <Index>66</Index>
+        <Value>190000</Value>
+    </Constant>
+    <Constant ID="1068">
+        <Type>PlayerNeedExp</Type>
+        <Index>67</Index>
+        <Value>200000</Value>
+    </Constant>
+    <Constant ID="1069">
+        <Type>PlayerNeedExp</Type>
+        <Index>68</Index>
+        <Value>220000</Value>
+    </Constant>
+    <Constant ID="1070">
+        <Type>PlayerNeedExp</Type>
+        <Index>69</Index>
+        <Value>240000</Value>
+    </Constant>
+    <Constant ID="1071">
+        <Type>PlayerNeedExp</Type>
+        <Index>70</Index>
+        <Value>260000</Value>
+    </Constant>
+    <Constant ID="1072">
+        <Type>PlayerNeedExp</Type>
+        <Index>71</Index>
+        <Value>280000</Value>
+    </Constant>
+    <Constant ID="1073">
+        <Type>PlayerNeedExp</Type>
+        <Index>72</Index>
+        <Value>300000</Value>
+    </Constant>
+    <Constant ID="1074">
+        <Type>PlayerNeedExp</Type>
+        <Index>73</Index>
+        <Value>320000</Value>
+    </Constant>
+    <Constant ID="1075">
+        <Type>PlayerNeedExp</Type>
+        <Index>74</Index>
+        <Value>340000</Value>
+    </Constant>
+    <Constant ID="1076">
+        <Type>PlayerNeedExp</Type>
+        <Index>75</Index>
+        <Value>360000</Value>
+    </Constant>
+    <Constant ID="1077">
+        <Type>PlayerNeedExp</Type>
+        <Index>76</Index>
+        <Value>380000</Value>
+    </Constant>
+    <Constant ID="1078">
+        <Type>PlayerNeedExp</Type>
+        <Index>77</Index>
+        <Value>400000</Value>
+    </Constant>
+    <Constant ID="1079">
+        <Type>PlayerNeedExp</Type>
+        <Index>78</Index>
+        <Value>420000</Value>
+    </Constant>
+    <Constant ID="1080">
+        <Type>PlayerNeedExp</Type>
+        <Index>79</Index>
+        <Value>440000</Value>
+    </Constant>
+    <Constant ID="1081">
+        <Type>PlayerNeedExp</Type>
+        <Index>80</Index>
+        <Value>460000</Value>
+    </Constant>
+    <Constant ID="1082">
+        <Type>PlayerNeedExp</Type>
+        <Index>81</Index>
+        <Value>480000</Value>
+    </Constant>
+    <Constant ID="1083">
+        <Type>PlayerNeedExp</Type>
+        <Index>82</Index>
+        <Value>500000</Value>
+    </Constant>
+    <Constant ID="1084">
+        <Type>PlayerNeedExp</Type>
+        <Index>83</Index>
+        <Value>520000</Value>
+    </Constant>
+    <Constant ID="1085">
+        <Type>PlayerNeedExp</Type>
+        <Index>84</Index>
+        <Value>540000</Value>
+    </Constant>
+    <Constant ID="1086">
+        <Type>PlayerNeedExp</Type>
+        <Index>85</Index>
+        <Value>560000</Value>
+    </Constant>
+    <Constant ID="1087">
+        <Type>PlayerNeedExp</Type>
+        <Index>86</Index>
+        <Value>580000</Value>
+    </Constant>
+    <Constant ID="1088">
+        <Type>PlayerNeedExp</Type>
+        <Index>87</Index>
+        <Value>600000</Value>
+    </Constant>
+    <Constant ID="1089">
+        <Type>PlayerNeedExp</Type>
+        <Index>88</Index>
+        <Value>620000</Value>
+    </Constant>
+    <Constant ID="1090">
+        <Type>PlayerNeedExp</Type>
+        <Index>89</Index>
+        <Value>640000</Value>
+    </Constant>
+    <Constant ID="1091">
+        <Type>PlayerNeedExp</Type>
+        <Index>90</Index>
+        <Value>660000</Value>
+    </Constant>
+    <Constant ID="1092">
+        <Type>PlayerNeedExp</Type>
+        <Index>91</Index>
+        <Value>680000</Value>
+    </Constant>
+    <Constant ID="1093">
+        <Type>PlayerNeedExp</Type>
+        <Index>92</Index>
+        <Value>700000</Value>
+    </Constant>
+    <Constant ID="1094">
+        <Type>PlayerNeedExp</Type>
+        <Index>93</Index>
+        <Value>720000</Value>
+    </Constant>
+    <Constant ID="1095">
+        <Type>PlayerNeedExp</Type>
+        <Index>94</Index>
+        <Value>740000</Value>
+    </Constant>
+    <Constant ID="1096">
+        <Type>PlayerNeedExp</Type>
+        <Index>95</Index>
+        <Value>760000</Value>
+    </Constant>
+    <Constant ID="1097">
+        <Type>PlayerNeedExp</Type>
+        <Index>96</Index>
+        <Value>780000</Value>
+    </Constant>
+    <Constant ID="1098">
+        <Type>PlayerNeedExp</Type>
+        <Index>97</Index>
+        <Value>800000</Value>
+    </Constant>
+    <Constant ID="1099">
+        <Type>PlayerNeedExp</Type>
+        <Index>98</Index>
+        <Value>820000</Value>
+    </Constant>
+    <Constant ID="1100">
+        <Type>PlayerNeedExp</Type>
+        <Index>99</Index>
+        <Value>999999999</Value>
+    </Constant>
+    
+    <Constant ID="1500">
+        <Type>InventoryETCSortPriority</Type>
+        <Text>true</Text>
+        <Value>Consumable,Currency,Artifact,Hero,Gacha</Value>
+    </Constant>
+    <Constant ID="1502">
+        <Type>InventoryArtifactFromTypeSortPriority</Type>
+        <Text>true</Text>
+        <Value>ShopCommon,ShopRare,ShopSpecial,Arena,HardMode,Raid</Value>
+    </Constant>
+    <Constant ID="1503">
+        <Type>InventoryAccessoryTypeSortPriority</Type>
+        <Text>true</Text>
+        <Value>Necklace,Bracelet,Ring,Earring</Value>
+    </Constant>
+    
+    <Constant ID="1600">
+        <Type>DeckSlotNameMaxLength</Type>
+        <Value>20</Value>
+    </Constant>
+    
+    <Constant ID="2001">
+        <Type>CombatPower</Type>
+        <Index>1</Index>
+        <Value>100</Value>
+    </Constant>
+
+    <Constant ID="2002">
+        <Type>CombatPower</Type>
+        <Index>2</Index>
+        <Value>150</Value>
+    </Constant>
+    <Constant ID="2003">
+        <Type>CombatPower</Type>
+        <Index>3</Index>
+        <Value>200</Value>
+    </Constant>
+    <Constant ID="2004">
+        <Type>CombatPower</Type>
+        <Index>4</Index>
+        <Value>350</Value>
+    </Constant>
+    <Constant ID="2005">
+        <Type>CombatPower</Type>
+        <Index>5</Index>
+        <Value>450</Value>
+    </Constant>
+    <Constant ID="2006">
+        <Type>CombatPower</Type>
+        <Index>6</Index>
+        <Value>550</Value>
+    </Constant>
+    <Constant ID="2007">
+        <Type>CombatPower</Type>
+        <Index>7</Index>
+        <Value>650</Value>
+    </Constant>
+    <Constant ID="2008">
+        <Type>CombatPower</Type>
+        <Index>8</Index>
+        <Value>850</Value>
+    </Constant>
+    <Constant ID="2009">
+        <Type>CombatPower</Type>
+        <Index>9</Index>
+        <Value>1000</Value>
+    </Constant>
+    <Constant ID="2010">
+        <Type>CombatPower</Type>
+        <Index>10</Index>
+        <Value>1150</Value>
+    </Constant>
+    <Constant ID="2011">
+        <Type>CombatPower</Type>
+        <Index>11</Index>
+        <Value>1300</Value>
+    </Constant>
+    <Constant ID="2012">
+        <Type>CombatPower</Type>
+        <Index>12</Index>
+        <Value>1450</Value>
+    </Constant>
+    <Constant ID="2013">
+        <Type>CombatPower</Type>
+        <Index>13</Index>
+        <Value>1600</Value>
+    </Constant>
+    <Constant ID="2014">
+        <Type>CombatPower</Type>
+        <Index>14</Index>
+        <Value>1750</Value>
+    </Constant>
+    <Constant ID="2015">
+        <Type>CombatPower</Type>
+        <Index>15</Index>
+        <Value>1900</Value>
+    </Constant>
+    <Constant ID="2016">
+        <Type>CombatPower</Type>
+        <Index>16</Index>
+        <Value>2200,3200</Value>
+        <List>true</List>
+    </Constant>
+    <Constant ID="2017">
+        <Type>CombatPower</Type>
+        <Index>17</Index>
+        <Value>3500</Value>
+    </Constant>
+    <Constant ID="2018">
+        <Type>CombatPower</Type>
+        <Index>18</Index>
+        <Value>3800</Value>
+    </Constant>
+    <Constant ID="2019">
+        <Type>CombatPower</Type>
+        <Index>19</Index>
+        <Value>4100</Value>
+    </Constant>
+    <Constant ID="2020">
+        <Type>CombatPower</Type>
+        <Index>20</Index>
+        <Value>4400</Value>
+    </Constant>
+    <Constant ID="2021">
+        <Type>CombatPower</Type>
+        <Index>21</Index>
+        <Value>4700</Value>
+    </Constant>
+    <Constant ID="2022">
+        <Type>CombatPower</Type>
+        <Index>22</Index>
+        <Value>5000</Value>
+    </Constant>
+    <Constant ID="2023">
+        <Type>CombatPower</Type>
+        <Index>23</Index>
+        <Value>5300</Value>
+    </Constant>
+    <Constant ID="2024">
+        <Type>CombatPower</Type>
+        <Index>24</Index>
+        <Value>5600</Value>
+    </Constant>
+    <Constant ID="2025">
+        <Type>CombatPower</Type>
+        <Index>25</Index>
+        <Value>5900</Value>
+    </Constant>
+    <Constant ID="2026">
+        <Type>CombatPower</Type>
+        <Index>26</Index>
+        <Value>6200</Value>
+    </Constant>
+    <Constant ID="2027">
+        <Type>CombatPower</Type>
+        <Index>27</Index>
+        <Value>6500</Value>
+    </Constant>
+    <Constant ID="2028">
+        <Type>CombatPower</Type>
+        <Index>28</Index>
+        <Value>6800</Value>
+    </Constant>
+    <Constant ID="2029">
+        <Type>CombatPower</Type>
+        <Index>29</Index>
+        <Value>7100</Value>
+    </Constant>
+    <Constant ID="2030">
+        <Type>CombatPower</Type>
+        <Index>30</Index>
+        <Value>7400</Value>
+    </Constant>
+    
+    <Constant ID="2101">
+        <Type>HuntingRankReward</Type>
+        <Index>1</Index>
+        <Value>40</Value>
+    </Constant>
+    <Constant ID="2102">
+        <Type>HuntingRankReward</Type>
+        <Index>2</Index>
+        <Value>60</Value>
+    </Constant>
+    <Constant ID="2103">
+        <Type>HuntingRankReward</Type>
+        <Index>3</Index>
+        <Value>80</Value>
+    </Constant>
+    <Constant ID="2104">
+        <Type>HuntingRankReward</Type>
+        <Index>4</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="2105">
+        <Type>HuntingRankReward</Type>
+        <Index>5</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="2106">
+        <Type>HuntingRankReward</Type>
+        <Index>6</Index>
+        <Value>100</Value>
+    </Constant>
+    
+    <Constant ID="2200">
+        <Type>HuntingFoodBoosterCost</Type>
+        <Index>0</Index>
+        <Value>5</Value>
+    </Constant>
+    <Constant ID="2201">
+        <Type>HuntingFoodBoosterCost</Type>
+        <Index>1</Index>
+        <Value>10</Value>
+    </Constant>
+    <Constant ID="2202">
+        <Type>HuntingFoodBoosterCost</Type>
+        <Index>2</Index>
+        <Value>15</Value>
+    </Constant>
+    <Constant ID="2203">
+        <Type>HuntingFoodBoosterCost</Type>
+        <Index>3</Index>
+        <Value>20</Value>
+    </Constant>
+
+    <Constant ID="2300">
+        <Type>HuntingFoodBoosterReward</Type>
+        <Index>0</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="2301">
+        <Type>HuntingFoodBoosterReward</Type>
+        <Index>1</Index>
+        <Value>180</Value>
+    </Constant>
+    <Constant ID="2302">
+        <Type>HuntingFoodBoosterReward</Type>
+        <Index>2</Index>
+        <Value>250</Value>
+    </Constant>
+    <Constant ID="2303">
+        <Type>HuntingFoodBoosterReward</Type>
+        <Index>3</Index>
+        <Value>310</Value>
+    </Constant>
+    
+    <Constant ID="2401">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>1</Index>
+        <Value>100</Value>
+    </Constant>
+    <Constant ID="2402">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>2</Index>
+        <Value>120</Value>
+    </Constant>
+    <Constant ID="2403">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>3</Index>
+        <Value>140</Value>
+    </Constant>
+    <Constant ID="2404">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>4</Index>
+        <Value>170</Value>
+    </Constant>
+    <Constant ID="2405">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>5</Index>
+        <Value>190</Value>
+    </Constant>
+    <Constant ID="2406">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>6</Index>
+        <Value>210</Value>
+    </Constant>
+    <Constant ID="2407">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>7</Index>
+        <Value>230</Value>
+    </Constant>
+    <Constant ID="2408">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>8</Index>
+        <Value>260</Value>
+    </Constant>
+    <Constant ID="2409">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>9</Index>
+        <Value>280</Value>
+    </Constant>
+    <Constant ID="2410">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>10</Index>
+        <Value>300</Value>
+    </Constant>
+    <Constant ID="2411">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>11</Index>
+        <Value>320</Value>
+    </Constant>
+    <Constant ID="2412">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>12</Index>
+        <Value>340</Value>
+    </Constant>
+    <Constant ID="2413">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>13</Index>
+        <Value>360</Value>
+    </Constant>
+    <Constant ID="2414">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>14</Index>
+        <Value>380</Value>
+    </Constant>
+    <Constant ID="2415">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>15</Index>
+        <Value>400</Value>
+    </Constant>
+    <Constant ID="2416">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>16</Index>
+        <Value>420</Value>
+    </Constant>
+    <Constant ID="2417">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>17</Index>
+        <Value>440</Value>
+    </Constant>
+    <Constant ID="2418">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>18</Index>
+        <Value>460</Value>
+    </Constant>
+    <Constant ID="2419">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>19</Index>
+        <Value>480</Value>
+    </Constant>
+    <Constant ID="2420">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>20</Index>
+        <Value>500</Value>
+    </Constant>
+    <Constant ID="2421">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>21</Index>
+        <Value>510</Value>
+    </Constant>
+    <Constant ID="2422">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>22</Index>
+        <Value>520</Value>
+    </Constant>
+    <Constant ID="2423">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>23</Index>
+        <Value>530</Value>
+    </Constant>
+    <Constant ID="2424">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>24</Index>
+        <Value>540</Value>
+    </Constant>
+    <Constant ID="2425">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>25</Index>
+        <Value>550</Value>
+    </Constant>
+    <Constant ID="2426">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>26</Index>
+        <Value>560</Value>
+    </Constant>
+    <Constant ID="2427">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>27</Index>
+        <Value>570</Value>
+    </Constant>
+    <Constant ID="2428">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>28</Index>
+        <Value>580</Value>
+    </Constant>
+    <Constant ID="2429">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>29</Index>
+        <Value>590</Value>
+    </Constant>
+    <Constant ID="2430">
+        <Type>UnitAssignmentBenefitPer</Type>
+        <Index>30</Index>
+        <Value>600</Value>
+    </Constant>
+    
+    <Constant ID="2450">
+        <Type>UnitAssignmentRoleBonusPer</Type>
+        <Index>1</Index>
+        <Value>500</Value>
+    </Constant>
+    <Constant ID="2451">
+        <Type>UnitAssignmentRoleBonusPer</Type>
+        <Index>2</Index>
+        <Value>1000</Value>
+    </Constant>
+    <Constant ID="2452">
+        <Type>UnitAssignmentRoleBonusPer</Type>
+        <Index>3</Index>
+        <Value>2000</Value>
+    </Constant>
+    <Constant ID="2453">
+        <Type>UnitAssignmentRoleBonusPer</Type>
+        <Index>4</Index>
+        <Value>3500</Value>
+    </Constant>
+    <Constant ID="2454">
+        <Type>UnitAssignmentRoleBonusPer</Type>
+        <Index>5</Index>
+        <Value>5000</Value>
+    </Constant>
+    
+    <Constant ID="2460">
+        <Type>UnitAssignmentRoleStatBonusPer</Type>
+        <Index>1</Index>
+        <Value>500</Value>
+    </Constant>
+    <Constant ID="2461">
+        <Type>UnitAssignmentRoleStatBonusPer</Type>
+        <Index>2</Index>
+        <Value>1000</Value>
+    </Constant>
+    <Constant ID="2462">
+        <Type>UnitAssignmentRoleStatBonusPer</Type>
+        <Index>3</Index>
+        <Value>2000</Value>
+    </Constant>
+    <Constant ID="2463">
+        <Type>UnitAssignmentRoleStatBonusPer</Type>
+        <Index>4</Index>
+        <Value>3000</Value>
+    </Constant>
+    <Constant ID="2464">
+        <Type>UnitAssignmentRoleStatBonusPer</Type>
+        <Index>5</Index>
+        <Value>4000</Value>
+    </Constant>
+    
+    <Constant ID="2500">
+        <Type>AccessoryCombatPower</Type>
+        <Value>3</Value>
+    </Constant>
+    <Constant ID="2501">
+        <Type>AccessorySynergyCombatPower</Type>
+        <Value>180</Value>
+    </Constant>
+    
+    <Constant ID="2600">
+        <Type>TreasureCombatPower</Type>
+        <Index>1</Index>
+        <Value>30</Value>
+    </Constant>
+    <Constant ID="2601">
+        <Type>TreasureCombatPower</Type>
+        <Index>2</Index>
+        <Value>60</Value>
+    </Constant>
+    <Constant ID="2602">
+        <Type>TreasureCombatPower</Type>
+        <Index>3</Index>
+        <Value>90</Value>
+    </Constant>
+    
+    <!-- Level Limits -->
+    <Constant ID="4000">
+        <Type>LevelLimit_DeleteDataWhenLeft</Type>
+        <Value>3</Value>
+    </Constant>
+    
+    <!-- 현재 이 값은 아래 seasonPass에 종속시켜서 더 이상 보지 않음-->
+    <Constant ID="4001">
+        <Type>LevelLimit_IngameMissionIndicator</Type>
+        <Value>4</Value>
+    </Constant>
+
+    <Constant ID="4002">
+        <Type>LevelLimit_ShopDailyDelivery</Type>
+        <Value>7</Value>
+    </Constant>
+
+    <Constant ID="4003">
+        <Type>LevelLimit_NewHeroPackage</Type>
+        <Value>8</Value>
+    </Constant>
+
+    <Constant ID="4004">
+        <Type>LevelLimit_OfferWall</Type>
+        <Value>3</Value>
+    </Constant>
+    
+    <Constant ID="4005">
+        <Type>LevelLimit_GodSkinPackage</Type>
+        <Value>5</Value>
+    </Constant>
+    
+    <Constant ID="4006">
+        <Type>LevelLimit_CustomGrowthPackage</Type>
+        <Value>5</Value>
+    </Constant>
+
+    <Constant ID="4007">
+        <Type>LevelLimit_CartPackage</Type>
+        <Value>4</Value>
+    </Constant>
+
+    <Constant ID="4008">
+        <Type>LevelLimit_Advisor</Type>
+        <Value>5</Value>
+    </Constant>
+
+    <Constant ID="4009">
+        <Type>LevelLimit_FirstPackage</Type>
+        <Value>5</Value>
+    </Constant>
+
+    <Constant ID="4010">
+        <Type>LevelLimit_EventMode</Type>
+        <Value>6</Value>
+    </Constant>
+
+    <Constant ID="4011">
+        <Type>LevelLimit_Clan</Type>
+        <Value>13</Value>
+    </Constant>
+
+    <Constant ID="4013">
+        <Type>LevelLimit_SeasonalEventMode</Type>
+        <Value>8</Value>
+    </Constant>
+
+    <Constant ID="4014">
+        <Type>LevelLimit_EventPackage</Type>
+        <Value>7</Value>
+    </Constant>
+
+    <Constant ID="4015">
+        <Type>LevelLimit_HardMode</Type>
+        <Value>7</Value>
+    </Constant>
+
+    <Constant ID="4016">
+        <Type>LevelLimit_Territory</Type>
+        <Value>10</Value>
+    </Constant>
+
+    <Constant ID="4017">
+        <Type>LevelLimit_RogueLike</Type>
+        <Value>30</Value>
+    </Constant>
+
+    <Constant ID="4018">
+        <Type>LevelLimit_Colosseum</Type>
+        <Value>20</Value>
+    </Constant>
+
+    <Constant ID="4019">
+        <Type>LevelLimit_Arena</Type>
+        <Value>12</Value>
+    </Constant>
+
+    <Constant ID="4021">
+        <Type>LevelLimit_ArtifactSlot</Type>
+        <List>true</List>
+        <Value>7,17,25</Value>
+    </Constant>
+
+    <Constant ID="4022">
+        <Type>LevelLimit_ArtifactSupport</Type>
+        <Value>5</Value>
+    </Constant>
+
+    <Constant ID="4023">
+        <Type>LevelLimit_TerritoryFirstSupport</Type>
+        <Value>8</Value>
+    </Constant>
+
+    <Constant ID="4024">
+        <Type>LevelLimit_Missions</Type>
+        <Value>3</Value>
+    </Constant>
+
+    <Constant ID="4025">
+        <Type>LevelLimit_SeasonPass</Type>
+        <Value>4</Value>
+    </Constant>
+
+    <Constant ID="4026">
+        <Type>LevelLimit_IngameAutoMerge</Type>
+        <Value>5</Value>
+    </Constant>
+
+    <Constant ID="4027">
+        <Type>LevelLimit_IngameDevilTierUp</Type>
+        <Value>4</Value>
+    </Constant>
+
+    <Constant ID="4028">
+        <Type>LevelLimit_GameListBoxSeason</Type>
+        <Value>6</Value>
+    </Constant>
+
+    <Constant ID="4029">
+        <Type>LevelLimit_Treasure</Type>
+        <Value>15</Value>
+    </Constant>
+
+    <Constant ID="4030">
+        <Type>LevelLimit_Hero_PickUp</Type>
+        <Value>7</Value>
+    </Constant>
+
+    <Constant ID="4031">
+        <Type>LevelLimit_Babel</Type>
+        <Value>9</Value>
+    </Constant>
+    
+    <Constant ID="4032">
+        <Type>LevelLimit_EarlyAccess</Type>
+        <Value>60</Value>
+    </Constant>
+
+    <Constant ID="4033">
+        <Type>LevelLimit_PackageShop</Type>
+        <Value>3</Value>
+    </Constant>
+    
+    <Constant ID="4034">
+        <Type>LevelLimit_StarterMission</Type>
+        <Value>4</Value>
+    </Constant>
+
+    <Constant ID="4035">
+        <Type>LevelLimit_FirstStepPackage</Type>
+        <Value>5</Value>
+    </Constant>
+
+    <Constant ID="4036">
+        <Type>LevelLimit_Decoration</Type>
+        <Value>12</Value>
+    </Constant>
+    
+    <Constant ID="4037">
+        <Type>LevelLimit_GreatRift</Type>
+        <Value>30</Value>
+    </Constant>
+    
+    <Constant ID="4038">
+        <Type>LevelLimit_DimensionRift</Type>
+        <Value>40</Value>
+    </Constant>
+
+    <Constant ID="4039">
+        <Type>LevelLimit_UnitExtLevelUp</Type>
+        <Value>60</Value>
+    </Constant>
+
+    <Constant ID="4040">
+        <Type>LevelLimit_SummonTwentyOver</Type>
+        <Value>40</Value>
+    </Constant>
+
+    <Constant ID="4041">
+        <Type>LevelLimit_StockEvent</Type>
+        <Value>8</Value>
+    </Constant>
+
+    <Constant ID="4042">
+        <Type>LevelLimit_FirstComer</Type>
+        <Value>4</Value>
+    </Constant>
+
+    <Constant ID="4043">
+        <Type>LevelLimit_Building</Type>
+        <Value>5</Value>
+    </Constant>
+
+    <Constant ID="4044">
+        <Type>LevelLimit_BuildingList</Type>
+        <List>true</List>
+        <Value>10,15,20,20,20,5</Value>
+    </Constant>
+
+    <Constant ID="4045">
+        <Type>LevelLimit_KGWiki</Type>
+        <Value>7</Value>
+    </Constant>
+    
+    <Constant ID="4046">
+        <Type>LevelLimit_StoryMode</Type>
+        <Value>6</Value>
+    </Constant>
+    
+    <!-- 영웅 빠른 레벨업 보석 소모비용 -->
+    <Constant ID="5000">
+        <Type>CardFastLevelUpCost</Type>
+        <List>true</List>
+        <Value>1,2,3,10,20,35,70,70,70,85,85,100,100,115,115,350,350,450,450</Value>
+    </Constant>
+</Constants>

@@ -1,0 +1,3023 @@
+<ColosseumAbilities>
+	<ColosseumAbility ID="10000">
+		<Comment>은화 상자 1단계</Comment>
+		<DescComment>30 은화 획득</DescComment>
+		<Weight>10</Weight>
+        <DescParams>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+        </DescParams>
+        <WorldTriggers>
+            <Conditions>
+                <ImmediatelyOnceWithoutReenter />
+            </Conditions>
+
+            <Actions>
+                <AddGold />
+            </Actions>
+
+            <Values>
+                <FixedValue>40</FixedValue>
+            </Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10001" Inherit="10000">
+		<Comment>은화 상자 2단계</Comment>
+		<DescComment>60 은화 획득</DescComment>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>60</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10002" Inherit="10000">
+		<Comment>은화 상자 3단계</Comment>
+		<DescComment>90 은화 획득</DescComment>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>90</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10010">
+		<Comment>한 놈 탈락! 1단계</Comment>
+		<DescComment>다른 플레이어 탈락 시 은화 80 획득</DescComment>
+		<Weight>15</Weight>
+        <DescParams>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+        </DescParams>
+        <WorldTriggers>
+            <Conditions>
+                <PlayerLose />
+            </Conditions>
+
+            <Actions>
+                <AddGold />
+            </Actions>
+
+            <Values>
+                <FixedValue>80</FixedValue>
+            </Values>
+        </WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10011" Inherit="10010">
+		<Comment>한 놈 탈락! 2단계</Comment>
+		<DescComment>다른 플레이어 탈락 시 은화 80 획득</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10020">
+		<Comment>약탈 1단계</Comment>
+		<DescComment>침공 성공 시 은화를 20개 획득합니다.</DescComment>
+		<Weight>30</Weight>
+		<DescParams>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+                <InvadeSuccess />
+			</Conditions>
+
+			<Actions>
+				<AddGold/>
+			</Actions>
+
+			<Values>
+				<FixedValue>25</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10030">
+		<Comment>징병 1단계</Comment>
+		<DescComment>5 라운드 동안 매 라운드마다 고급 영웅 소환서 2회 획득</DescComment>
+		<Weight>10</Weight>
+		<DescParams>
+			<Attribute Name="Value" BaseValue="1">./WorldTriggers/Conditions/TriggerCount</Attribute>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<RepresentativeValue Type="/4">
+			<Counter Name="TriggerCount" BaseValue="3" Mag="-1">1</Counter>
+		</RepresentativeValue>
+
+		<CheckActive>1</CheckActive>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<AddItem ID="10053" />
+			</Actions>
+
+			<Values>
+				<FixedValue>3</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+                <TriggerCount Value="3"/>
+			</Conditions>
+
+			<Actions>
+				<AddItem ID="10053" />
+			</Actions>
+
+			<Values>
+				<FixedValue>3</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10031" Inherit="10030">
+		<Comment>징병 2단계</Comment>
+		<DescComment>5 라운드 동안 매 라운드마다 고급 영웅 소환서 4회 획득</DescComment>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>4</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>4</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10032" Inherit="10030">
+		<Comment>징병 3단계</Comment>
+		<DescComment>5 라운드 동안 매 라운드마다 고급 영웅 소환서 6회 획득</DescComment>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>6</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>6</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10040">
+		<Comment>현상금 1단계</Comment>
+		<DescComment>정예 라운드 은화 20개 획득</DescComment>
+		<Weight>30</Weight>
+		<DescParams>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="6"/>
+				<StageStart Stage="11"/>
+				<StageStart Stage="16"/>
+				<StageStart Stage="21"/>
+			</Conditions>
+
+			<Actions>
+				<AddGold/>
+			</Actions>
+
+			<Values>
+				<FixedValue>25</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10050">
+		<Comment>다다익선 1단계</Comment>
+		<DescComment>진영 크기 7 도달 시 50은화 획득</DescComment>
+		<Weight>30</Weight>
+		<DescParams>
+			<Attribute Name="SlotCount">./WorldTriggers/Conditions/AddSlot</Attribute>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<AddSlot SlotCount="7"/>
+			</Conditions>
+
+			<Actions>
+				<AddGold/>
+			</Actions>
+
+			<Values>
+				<FixedValue>50</FixedValue>
+			</Values>
+		</WorldTriggers>
+		
+		<AppearWhenSlotCountLess>7</AppearWhenSlotCountLess>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10061">
+		<Comment>탐욕의 하사품 2단계</Comment>
+		<DescComment>무작위 탐욕의 하사품을 획득</DescComment>
+		<Weight>30</Weight>
+		<DescParams>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<AddItem Type="GodItem" />
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+    <ColosseumAbility ID="10062" Inherit="10061">
+        <Comment>탐욕의 하사품 3단계</Comment>
+        <DescComment>무작위 탐욕의 하사품을 획득</DescComment>
+    </ColosseumAbility>
+
+	<ColosseumAbility ID="10070">
+		<Comment>연금술 1단계</Comment>
+		<DescComment>일정 은화를 소모하여 장비를 동일 등급의 무작위 장비로 변환하는 현자의 돌 획득, 은화 20 지급</DescComment>
+		<Weight>10</Weight>
+		<DescParams>
+			<InnerText>./WorldTriggers[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter/>
+			</Conditions>
+
+			<Actions>
+				<AddItem ID="25003"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<AddGold />
+			</Actions>
+
+			<Values>
+				<FixedValue>20</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10071" Inherit="10070">
+		<Comment>연금술 2단계</Comment>
+		<DescComment>일정 은화를 소모하여 장비를 동일 등급의 무작위 장비로 변환하는 현자의 돌 획득, 은화 20 지급</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10072" Inherit="10070">
+		<Comment>연금술 3단계</Comment>
+		<DescComment>일정 은화를 소모하여 장비를 동일 등급의 무작위 장비로 변환하는 현자의 돌 획득, 은화 20 지급</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10080">
+		<Comment>왕의 검 1단계</Comment>
+		<DescComment>매 영웅 6성 달성 시마다 무작위 갓 아이템 1개 획득</DescComment>
+		<Weight>15</Weight>
+		<DescParams>
+			<Attribute Name="Level">./WorldTriggers/Conditions/UnitLevelUp</Attribute>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<UnitLevelUp Level="6"/>
+			</Conditions>
+
+			<Actions>
+				<AddItem Tier="3"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<!--
+		<AppearWhenNoUnitLevel>7</AppearWhenNoUnitLevel> -->
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10081" Inherit="10080">
+		<Comment>왕의 검 2단계</Comment>
+		<DescComment>매 영웅 6성 달성 시마다 무작위 갓 아이템 1개 획득</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10090">
+		<Comment>보급 계약 1단계</Comment>
+		<DescComment>매 라운드 시작 시 무작위 1티어 장비 획득</DescComment>
+		<Weight>30</Weight>
+		<DescParams>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<StageStart/>
+			</Conditions>
+			<Actions>
+				<AddItem Tier="1"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="10100">
+		<Comment>담금질 1단계</Comment>
+		<DescComment>즉시 킹갓 아이템 1개 획득</DescComment>
+		<Weight>30</Weight>
+		<DescParams>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+			<Actions>
+				<AddItem Tier="4"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+
+		<AppearWhenBeforeStage>7</AppearWhenBeforeStage>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="20000">
+		<Comment>신의 불꽃 1단계</Comment>
+		<DescComment>모든 제단의 레벨 +7\n{1} / {2} / {3} / {4} / {5} / {6}</DescComment>
+		<Category>BuildingLevel</Category>
+		<Weight>25</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddBuildingLevel Index="0"/>
+				<AddBuildingLevel Index="1"/>
+				<AddBuildingLevel Index="2"/>
+				<AddBuildingLevel Index="3"/>
+				<AddBuildingLevel Index="4"/>
+				<AddBuildingLevel Index="5"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>7</FixedValue>
+			</Values>
+		</WorldTriggers>
+		
+		<ShowBuildingLevel>true</ShowBuildingLevel>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="20001" Inherit="20000">
+		<Comment>신의 불꽃 2단계</Comment>
+		<DescComment>모든 제단의 레벨 +7\n{1} / {2} / {3} / {4} / {5} / {6}</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="20010">
+		<Comment>성장 강화 1단계</Comment>
+		<DescComment>영웅, 대장장이, 탐욕의 제단 레벨 +10\n{1} 단계 재련 1회\n{1} / {2} / {3} / {4} / {5} / {6}</DescComment>
+		<Category>BuildingLevel</Category>
+		<Weight>25</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+            <InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+			<Attribute Name="Tier">./WorldTriggers[2]/Actions/ShowRandomItem</Attribute>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddBuildingLevel Index="0"/>
+				<AddBuildingLevel Index="1"/>
+				<AddBuildingLevel Index="5"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>10</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<ShowRandomItem Tier="2" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+
+		<ShowBuildingLevel>true</ShowBuildingLevel>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="20011" Inherit="20010">
+		<Comment>성장 강화 2단계</Comment>
+		<DescComment>영웅, 대장장이, 탐욕의 제단 레벨 +10\n{1} / {2} / {3} / {4} / {5} / {6}</DescComment>
+
+		<WorldTriggers>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Actions>
+				<ShowRandomItem Tier="3" />
+			</Actions>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="20020">
+		<Comment>체급 강화 1단계</Comment>
+		<DescComment>피, 거신, 마법사의 제단 레벨 +10\n{1} / {2} / {3} / {4} / {5} / {6}</DescComment>
+		<Category>BuildingLevel</Category>
+		<Weight>25</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddBuildingLevel Index="2"/>
+				<AddBuildingLevel Index="3"/>
+				<AddBuildingLevel Index="4"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>10</FixedValue>
+			</Values>
+		</WorldTriggers>
+
+		<ShowBuildingLevel>true</ShowBuildingLevel>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="20021" Inherit="20020">
+		<Comment>체급 강화 2단계</Comment>
+		<DescComment>피, 거신, 마법사의 제단 레벨 +10\n{1} / {2} / {3} / {4} / {5} / {6}</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="30001">
+		<Comment>단골 2단계</Comment>
+		<DescComment>매 라운드 처음 구매하는 소환석의 가격 -2 토큰</DescComment>
+		<Category>InvadeShop</Category>
+		<Weight>50</Weight>
+		<DescParams>
+            <InnerText Mag="-1">./WorldTriggers[3]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+				<OverStack StackName="Stack_Ability_30001" Value="0"/>
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemCost />
+			</Actions>
+
+			<Values>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+				<OverStack StackName="Stack_Ability_30001" Value="0"/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Ability_30001" />
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemCost />
+			</Actions>
+
+			<Values>
+				<FixedValue>-2</FixedValue>
+			</Values>
+
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Ability_30001" />
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BuyInvadeItem />
+				<OverStack StackName="Stack_Ability_30001" Value="0"/>
+			</Conditions>
+			
+			<Actions>
+				<AddInvadeItemCost />
+			</Actions>
+			
+			<Values>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BuyInvadeItem />
+				<OverStack StackName="Stack_Ability_30001" Value="0"/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Ability_30001" />
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="30011">
+		<Comment>까다로운 손님 2단계</Comment>
+		<DescComment>침공 상점 새로고침 시마다 모든 소환석의 가격 -1 토큰, 소환석 구매 시 할인 초기화</DescComment>
+		<Category>InvadeShop</Category>
+		<Weight>50</Weight>
+		<DescParams>
+            <InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+			<Const>4</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemCost />
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<InvadeShopReroll />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemCost />
+			</Actions>
+
+			<Values>
+				<FixedValue>-1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<InvadeShopReroll />
+			</Conditions>
+
+			<Actions>
+				<IncreaseCustomStack Name="Stack_Ability_30011" />
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BuyInvadeItem />
+			</Conditions>
+			
+			<Actions>
+				<AddInvadeItemCost />
+			</Actions>
+			
+			<Values>
+				<Stack_Ability_30011>100</Stack_Ability_30011>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BuyInvadeItem />
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Ability_30011"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="30021">
+		<Comment>수비 집중 2단계</Comment>
+		<DescComment>매 라운드 시작 시 은화 16 획득, 모든 소환석의 가격 +1 토큰</DescComment>
+		<Category>InvadeShop</Category>
+		<Weight>50</Weight>
+		<DescParams>
+            <InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+			<InnerText>./WorldTriggers[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+			</Conditions>
+
+			<Actions>
+				<AddGold />
+			</Actions>
+
+			<Values>
+				<FixedValue>14</FixedValue>
+			</Values>
+
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemCost />
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="30031">
+		<Comment>양보단 질 2단계</Comment>
+		<DescComment>보스 소환석의 가격 -2 토큰, 보스 소환석의 등장 확률 소폭 증가</DescComment>
+		<Category>InvadeShop</Category>
+		<Weight>25</Weight>
+		<DescParams>
+            <InnerText Mag="-1">./AddBossInvadeItemCost</InnerText>
+			<InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<AddBossInvadeItemCost>-2</AddBossInvadeItemCost>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemProbPer IsBoss="true" />
+			</Actions>
+
+			<Values>
+				<FixedValue>15</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="30032" Inherit="30031">
+		<Comment>양보단 질 3단계</Comment>
+		<DescComment>보스 소환석의 가격 -2 토큰, 보스 소환석의 등장 확률 대폭 증가</DescComment>
+		<Desc>ColosseumAbilityDesc_30032</Desc>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>70</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="30042">
+		<Comment>마물 소환사 3단계</Comment>
+		<DescComment>모든 소환서의 가격 -1 토큰, 매 라운드 시작 시 침공 토큰 1개 소모</DescComment>
+		<Category>InvadeShop</Category>
+		<Weight>50</Weight>
+		<DescParams>
+			<InnerText Mag="-1">./WorldTriggers[1]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemCost />
+			</Actions>
+
+			<Values>
+				<FixedValue>-1</FixedValue>
+			</Values>
+
+		</WorldTriggers>
+
+		<WorldTriggers>
+			<Conditions>
+				<ReadyPhaseStart />
+			</Conditions>
+
+			<Actions>
+				<AddInvadePoint />
+			</Actions>
+
+			<Values>
+				<FixedValue>-1</FixedValue>
+			</Values>
+
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="30052">
+		<Comment>헤드헌터 3단계</Comment>
+		<DescComment>모든 소환석의 가격 +1 토큰, 소환석 상점에서 4티어 이상 소환석 등장확률 증가</DescComment>
+		<Category>InvadeShop</Category>
+		<Weight>50</Weight>
+		<DescParams>
+            <InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+			<Const>4</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemCost />
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemProbPer Tiers="1,2,3" />
+			</Actions>
+
+			<Values>
+				<FixedValue>-100</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="40000">
+		<Comment>훈장 수여식 1단계</Comment>
+		<DescComment>무공 훈장을 2개 획득</DescComment>
+		<Weight>10</Weight>
+		<DescParams>
+            <Attribute Name="Value">./WorldTriggers/Conditions/TriggerCount</Attribute>
+            <InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<RepresentativeValue Type="/2">
+			<Counter Name="TriggerCount" BaseValue="2" Mag="-1">0</Counter>
+		</RepresentativeValue>
+		
+		<CheckActive>0</CheckActive>
+
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+				<TriggerCount Value="2" />
+			</Conditions>
+
+			<Actions>
+				<AddItem ID="10040"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="40001" Inherit="40000">
+		<Comment>훈장 수여식 2단계</Comment>
+		<DescComment>무공 훈장을 3개 획득</DescComment>
+		<RepresentativeValue Type="/3">
+			<Counter Name="TriggerCount" BaseValue="3" Mag="-1">0</Counter>
+		</RepresentativeValue>
+		
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+				<TriggerCount Value="3" />
+			</Conditions>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="40002" Inherit="40000">
+		<Comment>훈장 수여식 3단계</Comment>
+		<DescComment>무공 훈장을 4개 획득</DescComment>
+		<RepresentativeValue Type="/4">
+			<Counter Name="TriggerCount" BaseValue="4" Mag="-1">0</Counter>
+		</RepresentativeValue>
+		
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+				<TriggerCount Value="4" />
+			</Conditions>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="40010">
+		<Comment>승급 1단계</Comment>
+		<DescComment>전략 레벨 업 시, (전략 레벨-1)티어의 무작위 몬스터 소환석 2개 획득</DescComment>
+		<Weight>30</Weight>
+		<DescParams>
+			<Const>1</Const>
+            <InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<AbilityLevelUp Level="2" />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem Tier="1"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<AbilityLevelUp Level="3" />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem Tier="2"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<AbilityLevelUp Level="4" />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem Tier="3"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<AbilityLevelUp Level="5" />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem Tier="4"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<AbilityLevelUp Level="6" />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem Tier="5"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<AbilityLevelUp Level="7" />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem Tier="6"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="40021">
+		<Comment>복수심 2단계</Comment>
+		<DescComment>라운드 패배 시 침공 토큰 5개 은화 15개 추가 획득</DescComment>
+		<Weight>15</Weight>
+		<DescParams>
+			<InnerText Mag="0.01">./WorldTriggers[1]/Values/Stack_Ability_40021</InnerText>
+			<InnerText>./WorldTriggers[3]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ReadyPhaseStart />
+			</Conditions>
+
+			<Actions>
+				<AddInvadePoint />
+			</Actions>
+
+			<Values>
+				<Stack_Ability_40021>500</Stack_Ability_40021>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ReadyPhaseStart />
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Ability_40021" />
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleLose />
+			</Conditions>
+
+			<Actions>
+				<AddGold />
+			</Actions>
+
+			<Values>
+				<FixedValue>15</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BattleLose />
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Ability_40021" />
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="40022" Inherit="40021">
+		<Comment>복수심 3단계</Comment>
+		<DescComment>라운드 패배 시 침공 토큰 5개 은화 15개 추가 획득</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="50001">
+		<Comment>궁극의 제련 2단계</Comment>
+		<DescComment>최고 성급의 영웅이 일반 공격 시 대상의 복제된 신체를 4초간 생성. 복제는 직접 공격 불가. 광역 공격/추가 공격의 대상 가능. 본체는 복제가 받는 피해의 200%의 피해 (쿨타임 4초)</DescComment>
+		<Category>HighestLevel</Category>
+		<Weight>25</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>4</Const>
+			<Const>200</Const>
+			<Const>4</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="150000" />
+			</Actions>
+
+			<Values>
+
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="50002" Inherit="50001">
+		<Comment>궁극의 제련 3단계</Comment>
+		<DescComment>최고 성급의 영웅이 일반 공격 시 대상의 복제된 신체를 4초간 생성. 복제는 직접 공격 불가. 광역 공격/추가 공격의 대상 가능. 본체는 복제가 받는 피해의 200%의 피해 (쿨타임 4초)</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="50011">
+		<Comment>수호신의 금강 2단계</Comment>
+		<DescComment>최고 성급의 영웅이 매 전투 시작 시 받는 피해 감소 -10%, 피해 반사 +10%, 최대 체력 + 10%\n(최대 5중첩)</DescComment>
+		<Category>HighestLevel</Category>
+		<Weight>25</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>10</Const>
+			<Const>10</Const>
+			<Const>25</Const>
+			<Const>7</Const>
+		</DescParams>
+
+		<RepresentativeValue Type="">
+			<CustomStack Mag="1">Stack_Ability_50010</CustomStack>
+		</RepresentativeValue>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="150010" />
+			</Actions>
+
+			<Values>
+
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<TriggerCount Value="7" />
+			</Conditions>
+
+			<Actions>
+				<IncreaseCustomStack Name="Stack_Ability_50010" />
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="50012" Inherit="50011">
+		<Comment>수호신의 금강 3단계</Comment>
+		<DescComment>최고 성급의 영웅이 매 전투 시작 시 받는 피해 감소 -10%, 피해 반사 +10%, 최대 체력 + 10%\n(최대 5중첩)</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="50021">
+		<Comment>마신의 폭주 2단계</Comment>
+		<DescComment>최고 성급의 영웅이 스킬 사용 시 무작위의 대상에게 동일한 스킬 1회 더 사용</DescComment>
+		<Category>HighestLevel</Category>
+		<Weight>25</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>1</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="150020" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="50022" Inherit="50021">
+		<Comment>마신의 폭주 3단계</Comment>
+		<DescComment>최고 성급의 영웅이 스킬 사용 시 무작위의 대상에게 동일한 스킬 1회 더 사용</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="50031">
+		<Comment>악마의 피 2단계</Comment>
+		<DescComment>최고 성급의 영웅의 공격/스킬 흡혈 +50%\n1초마다 체력이 80% 이상일 경우 최대 체력의 25%를 소모하고 중첩이 가능한 공격속도 +120%, 이동속도 +30% 버프를 4초간 획득</DescComment>
+		<Category>HighestLevel</Category>
+		<Weight>25</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>50</Const>
+			<Const>1</Const>
+			<Const>80</Const>
+			<Const>25</Const>
+			<Const>40</Const>
+			<Const>30</Const>
+			<Const>4</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="150030" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="50032" Inherit="50031">
+		<Comment>악마의 피 3단계</Comment>
+		<DescComment>최고 성급의 영웅의 공격/스킬 흡혈 +50%\n1초마다 체력이 80% 이상일 경우 최대 체력의 25%를 소모하고 중첩이 가능한 공격속도 +120%, 이동속도 +30% 버프를 4초간 획득</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60000">
+		<Comment>영웅의 힘 1단계</Comment>
+		<DescComment>모든 영웅이 장착한 모든 장비 1개 당 최종 주는 피해 +3% , 받는 피해 -6%\n(최대 10회 중첩)</DescComment>
+		<Weight>10</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>1</Const>
+			<Const>6</Const>
+			<Const>6</Const>
+			<Const>10</Const>
+		</DescParams>
+
+		<RepresentativeValue Type="">
+			<EquipItmeCount Mag="1" Max="10" />
+		</RepresentativeValue>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160000" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60001" Inherit="60000">
+		<Comment>영웅의 힘 2단계</Comment>
+		<DescComment>모든 영웅이 장착한 모든 장비 1개 당 주는 피해 +3% , 받는 피해 -3%\n(최대 10회 중첩)</DescComment>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60002" Inherit="60000">
+		<Comment>영웅의 힘 3단계</Comment>
+		<DescComment>모든 영웅이 장착한 모든 장비 1개 당 주는 피해 +3% , 받는 피해 -3%\n(최대 10회 중첩)</DescComment>
+		<WorldTriggers>
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60011">
+		<Comment>신기루 장비 2단계</Comment>
+		<DescComment>가장 성급이 낮은 영웅 4명에게 무작위 갓 아이템 1개 장착</DescComment>
+		<Desc>ColosseumAbilityDesc_60011</Desc>
+		<Weight>15</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+
+        <Disabled>true</Disabled>
+        
+		<DescParams>
+			<Const>4</Const>
+			<Const>1</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160011" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60012" Inherit="60011">
+		<Comment>신기루 장비 3단계</Comment>
+		<DescComment>가장 성급이 낮은 영웅 4명에게 무작위 킹갓 아이템 1개 장착</DescComment>
+		<Desc>ColosseumAbilityDesc_60012</Desc>
+		<WorldTriggers>
+			<Actions>
+				<ApplyEventTrigger ID="160012" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60020">
+		<Comment>정예 부대 1단계</Comment>
+		<DescComment>가장 성급이 높은 영웅 4명의 장착 장비의 능력치가 25% 상승합니다.</DescComment>
+		<Weight>10</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>4</Const>
+			<Const>25</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160020" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60021" Inherit="60020">
+		<Comment>정예 부대 2단계</Comment>
+		<DescComment>가장 성급이 높은 영웅 4명의 장착 장비의 능력치가 25% 상승합니다.</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60022" Inherit="60020">
+		<Comment>정예 부대 3단계</Comment>
+		<DescComment>가장 성급이 높은 영웅 4명의 장착 장비의 능력치가 25% 상승합니다.</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60030">
+		<Comment>날카로운 검 1단계</Comment>
+		<DescComment>갓소드 획득</DescComment>
+		<Weight>10</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<Desc>ColosseumAbilityDesc_60030</Desc>
+		<DescParams>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<AddItem ID="102"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60031" Inherit="60030">
+		<Comment>날카로운 검 2단계</Comment>
+		<DescComment>갓소드 + 킹소드 획득</DescComment>
+		<Desc>ColosseumAbilityDesc_60031</Desc>
+		<WorldTriggers>
+            <Actions>
+                <AddItem ID="102"/>
+                <AddItem ID="101"/>
+            </Actions>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60032" Inherit="60030">
+		<Comment>날카로운 검 3단계</Comment>
+		<DescComment>갓소드 + 갓소드 획득</DescComment>
+		<Desc>ColosseumAbilityDesc_60032</Desc>
+		<DescParams>
+			<Const>2</Const>
+		</DescParams>
+		<WorldTriggers>
+            <Actions>
+                <AddItem ID="102"/>
+            </Actions>
+
+            <Values>
+                <FixedValue>2</FixedValue>
+            </Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60040">
+		<Comment>신비한 지팡이 1단계</Comment>
+		<DescComment>갓태프 획득</DescComment>
+		<Weight>10</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<Desc>ColosseumAbilityDesc_60040</Desc>
+		<DescParams>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<AddItem ID="402"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60041" Inherit="60040">
+		<Comment>신비한 지팡이 2단계</Comment>
+		<DescComment>갓태프 + 킹태프 획득</DescComment>
+		<Desc>ColosseumAbilityDesc_60041</Desc>
+		<WorldTriggers>
+            <Actions>
+                <AddItem ID="402"/>
+                <AddItem ID="401"/>
+            </Actions>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60042" Inherit="60040">
+		<Comment>신비한 지팡이 3단계</Comment>
+		<DescComment>갓태프 + 갓태프 획득</DescComment>
+		<Desc>ColosseumAbilityDesc_60042</Desc>
+		<DescParams>
+			<Const>2</Const>
+		</DescParams>
+		<WorldTriggers>
+            <Actions>
+                <AddItem ID="402"/>
+            </Actions>
+
+            <Values>
+                <FixedValue>2</FixedValue>
+            </Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60050">
+		<Comment>빠른 활 1단계</Comment>
+		<DescComment>갓보우 획득</DescComment>
+		<Desc>ColosseumAbilityDesc_60050</Desc>
+		<Weight>10</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddItem ID="302"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60051" Inherit="60050">
+		<Comment>빠른 활 2단계</Comment>
+		<DescComment>갓보우 + 킹보우 획득</DescComment>
+		<Desc>ColosseumAbilityDesc_60051</Desc>
+		<WorldTriggers>
+            <Actions>
+                <AddItem ID="302"/>
+                <AddItem ID="301"/>
+            </Actions>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60052" Inherit="60050">
+		<Comment>빠른 활 3단계</Comment>
+		<DescComment>갓보우 + 갓보우 획득</DescComment>
+		<Desc>ColosseumAbilityDesc_60052</Desc>
+		<DescParams>
+			<Const>2</Const>
+		</DescParams>
+		<WorldTriggers>
+            <Actions>
+                <AddItem ID="302"/>
+            </Actions>
+
+            <Values>
+                <FixedValue>2</FixedValue>
+            </Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60060">
+		<Comment>단단한 갑옷 1단계</Comment>
+		<DescComment>갓갑옷 획득</DescComment>
+		<Desc>ColosseumAbilityDesc_60060</Desc>
+		<Weight>10</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddItem ID="202"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60061" Inherit="60060">
+		<Comment>단단한 갑옷 2단계</Comment>
+		<DescComment>갓갑옷 + 킹갑옷 획득</DescComment>
+		<Desc>ColosseumAbilityDesc_60061</Desc>
+		<WorldTriggers>
+            <Actions>
+                <AddItem ID="202"/>
+                <AddItem ID="201"/>
+            </Actions>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60062" Inherit="60060">
+		<Comment>단단한 갑옷 3단계</Comment>
+		<DescComment>갓갑옷 + 갓갑옷 획득</DescComment>
+		<Desc>ColosseumAbilityDesc_60062</Desc>
+		<DescParams>
+			<Const>2</Const>
+		</DescParams>
+		<WorldTriggers>
+            <Actions>
+                <AddItem ID="202"/>
+            </Actions>
+
+            <Values>
+                <FixedValue>2</FixedValue>
+            </Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60070">
+		<Comment>끈질긴 전투 1단계</Comment>
+		<DescComment>전투 시작 시 모든 영웅 받는 피해 -80%, 최종 주는 피해 -20%</DescComment>
+		<Weight>10</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>-80</Const>
+			<Const>-20</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160070" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60071" Inherit="60070">
+		<Comment>끈질긴 전투 2단계</Comment>
+		<DescComment>전투 시작 시 모든 영웅 받는 피해 -80%, 최종 주는 피해 -20%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60072" Inherit="60070">
+		<Comment>끈질긴 전투 3단계</Comment>
+		<DescComment>전투 시작 시 모든 영웅 받는 피해 -80%, 최종 주는 피해 -20%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60080">
+		<Comment>대장 공략 1단계</Comment>
+		<DescComment>모든 영웅이 보스 몬스터에게 받는 피해 -70%, 최종 주는 피해 +30%, 보스 몬스터의 받는 회복량 -70%</DescComment>
+		<Weight>10</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>-70</Const>
+			<Const>30</Const>
+			<Const>-70</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160080" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60081" Inherit="60080">
+		<Comment>대장 공략 2단계</Comment>
+		<DescComment>모든 영웅이 보스 몬스터에게 받는 피해 -70%, 최종 주는 피해 +30%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60082" Inherit="60080">
+		<Comment>대장 공략 3단계</Comment>
+		<DescComment>모든 영웅이 보스 몬스터에게 받는 피해 -70%, 최종 주는 피해 +30%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60090">
+		<Comment>음양조화 1단계</Comment>
+		<DescComment>모든 영웅이 일반 공격 시 주문 치명타 확률 1% / 주문 치명타 피해량 +2% (최대 50중첩)
+            모든 영웅이 스킬 사용 시 물리 치명타 확률 2.5% / 물리 치명타 피해량 +5% (최대 20중첩)</DescComment>
+		<Weight>10</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>50</Const>
+			<Const>1</Const>
+			<Const>2</Const>
+			<Const>20</Const>
+			<Const>2.5</Const>
+			<Const>5</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160090"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60091" Inherit="60090">
+		<Comment>음양조화 2단계</Comment>
+		<DescComment>모든 영웅이 일반 공격 시마다 주문력 2% 상승, 스킬 사용 시마다 공격력 30% 상승\n(최대 150%)</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60092" Inherit="60090">
+		<Comment>음양조화 3단계</Comment>
+		<DescComment>모든 영웅이 일반 공격 시마다 주문력 2% 상승, 스킬 사용 시마다 공격력 30% 상승\n(최대 150%)</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60100">
+		<Comment>무작위 모루 1단계</Comment>
+		<DescComment>모든 영웅이 매 라운드 시작 시 최종 공격력 +20%, 최종 주문력 60%, 공격속도 +30%, 최대 체력 120% 중 무작위 버프 1개 획득</DescComment>
+		<Weight>10</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>20</Const>
+			<Const>30</Const>
+			<Const>60</Const>
+			<Const>120</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Ability_60100"/>
+			</Actions>
+
+			<Values>
+				<RandomRangeInt MinInclusive="0" MaxExclusive="4" />
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<UnderStack StackName="Stack_Ability_60100" Value="1" />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160100" Once="true" />
+			</Actions>
+
+			<Values>
+				<FixedValue>100</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<OverStack StackName="Stack_Ability_60100" Value="0" />
+				<UnderStack StackName="Stack_Ability_60100" Value="2" />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160101" Once="true" />
+			</Actions>
+
+			<Values>
+				<FixedValue>100</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<OverStack StackName="Stack_Ability_60100" Value="1" />
+				<UnderStack StackName="Stack_Ability_60100" Value="3" />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160102" Once="true" />
+			</Actions>
+
+			<Values>
+				<FixedValue>100</FixedValue>
+			</Values>
+		</WorldTriggers>
+        <WorldTriggers>
+            <Conditions>
+                <BattleStart />
+                <OverStack StackName="Stack_Ability_60100" Value="2" />
+                <UnderStack StackName="Stack_Ability_60100" Value="4" />
+            </Conditions>
+
+            <Actions>
+                <ApplyEventTrigger ID="160103" Once="true" />
+            </Actions>
+
+            <Values>
+                <FixedValue>100</FixedValue>
+            </Values>
+        </WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60101" Inherit="60100">
+		<Comment>무작위 모루 2단계</Comment>
+		<DescComment>모든 영웅이 매 라운드 시작 시 최종 공격력 +30%, 최종 주문력 30%, 최종 공격속도 +30%, 최종 최대 체력 100% 중 무작위 버프 1개 획득</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60102" Inherit="60100">
+		<Comment>무작위 모루 3단계</Comment>
+		<DescComment>모든 영웅이 매 라운드 시작 시 최종 공격력 +30%, 최종 주문력 30%, 최종 공격속도 +30%, 최종 최대 체력 100% 중 무작위 버프 1개 획득</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60110">
+		<Comment>베테랑 1단계</Comment>
+		<DescComment>모든 영웅의 피해량 15% 증가, 매 라운드 시작 시 피해량 +3%</DescComment>
+		<Weight>30</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>15</Const>
+			<InnerText>./WorldTriggers[2]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<RepresentativeValue Type="%">
+			<CustomStack BaseValue="15">Stack_Ability_60110</CustomStack>
+		</RepresentativeValue>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160110"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+			</Conditions>
+
+			<Actions>
+				<IncreaseCustomStack Name="Stack_Ability_60110"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>3</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60121">
+		<Comment>배수의 진 2단계</Comment>
+		<DescComment>깃발이 1개일 때, 모든 영웅의 최종 주는 피해량 +50%</DescComment>
+		<Weight>15</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>1</Const>
+			<Const>50</Const>
+		</DescParams>
+
+		<CheckActive>0</CheckActive>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+				<Life Value="1"/>
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160121"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<Life Value="1"/>
+				<TriggerCount Value="1"/>
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="160121"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="60122" Inherit="60121">
+		<Comment>배수의 진 3단계</Comment>
+		<DescComment>깃발이 1개일 때, 모든 영웅의 공격력 +50%, 주문력 +50%, 공격속도 +100%</DescComment>
+	</ColosseumAbility>
+
+    <ColosseumAbility ID="60131">
+        <Comment>가시 통나무 2단계</Comment>
+        <DescComment>침공 대상 전투 시작 시 대상 진영을 2칸 밀쳐내는 가시 통나무 소환</DescComment>
+        <Weight>25</Weight>
+        <ApplyAfterBattle>true</ApplyAfterBattle>
+        <DescParams>
+            <Const>2</Const>
+        </DescParams>
+
+        <CheckActive>0</CheckActive>
+        
+        <WorldTriggers>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Actions>
+                <ApplyEventTriggerToOpponent ID="160131" Once="true" />
+            </Actions>
+
+            <Values>
+            </Values>
+        </WorldTriggers>
+    </ColosseumAbility>
+
+    <ColosseumAbility ID="60132" Inherit="60131">
+        <Comment>가시 통나무 3단계</Comment>
+        <DescComment>침공 대상 전투 시작 시 대상 진영을 2칸 밀쳐내는 가시 통나무 소환</DescComment>
+    </ColosseumAbility>
+
+	<ColosseumAbility ID="70000">
+		<Comment>겨울 갑옷 1단계</Comment>
+		<DescComment>북부 영웅 4기 이상 배치 시 최종 최대 체력 +200%</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Attribute Name="Value">./WorldTriggers/Conditions/ReqFieldUnitCount</Attribute>
+			<Const>150</Const>
+		</DescParams>
+
+		<CheckActive>0</CheckActive>
+		
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<ReqFieldUnitCount Region="North" Value="4"/>
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170000" Once="true"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		
+		<AppearWhenRegionUnit3>North</AppearWhenRegionUnit3>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70001" Inherit="70000">
+		<Comment>겨울 갑옷 2단계</Comment>
+		<DescComment>북부 영웅 4기 이상 배치 시 최종 최대 체력 +200%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70002" Inherit="70000">
+		<Comment>겨울 갑옷 3단계</Comment>
+		<DescComment>북부 영웅 4기 이상 배치 시 최종 최대 체력 +200%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70010">
+		<Comment>신수의 가호 1단계</Comment>
+		<DescComment>동부 영웅을 4기 이상 배치 시 모든 영웅 위협 +30, 기본 마나 충전 +30%</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Attribute Name="Value">./WorldTriggers/Conditions/ReqFieldUnitCount</Attribute>
+			<Const>30</Const>
+			<Const>30</Const>
+		</DescParams>
+
+		<CheckActive>0</CheckActive>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<ReqFieldUnitCount Region="East" Value="4" />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170010" Once="true"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+
+		<AppearWhenRegionUnit3>East</AppearWhenRegionUnit3>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70011" Inherit="70010">
+		<Comment>신수의 가호 2단계</Comment>
+		<DescComment>동부 영웅을 4기 이상 배치 시 모든 영웅 위협 +30, 기본 마나 충전 +30%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70012" Inherit="70010">
+		<Comment>신수의 가호 3단계</Comment>
+		<DescComment>동부 영웅을 4기 이상 배치 시 모든 영웅 위협 +30, 기본 마나 충전 +30%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70020">
+		<Comment>영원의 재생력 1단계</Comment>
+		<DescComment>서부 영웅을 4기 이상 배치 시 모든 영웅 받는 피해량 -60%, 수호 +30</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Attribute Name="Value">./WorldTriggers/Conditions/ReqFieldUnitCount</Attribute>
+			<Const>60</Const>
+			<Const>30</Const>
+		</DescParams>
+
+		<CheckActive>0</CheckActive>
+		
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<ReqFieldUnitCount Region="West" Value="4" />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170020" Once="true"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+
+		<AppearWhenRegionUnit3>West</AppearWhenRegionUnit3>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70021" Inherit="70020">
+		<Comment>영원의 재생력 2단계</Comment>
+		<DescComment>서부 영웅을 4기 이상 배치 시 모든 영웅 받는 피해량 -60%, 수호 +30</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70022" Inherit="70020">
+		<Comment>영원의 재생력 3단계</Comment>
+		<DescComment>서부 영웅을 4기 이상 배치 시 모든 영웅 받는 피해량 -60%, 수호 +30</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70030">
+		<Comment>제국의 무력 1단계</Comment>
+		<DescComment>남부 영웅을 4기 이상 배치 시 첫 번째 적 처치 시 모든 적 2초간 공포 및 최종 주는 피해량 +20%</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Attribute Name="Value">./WorldTriggers/Conditions/ReqFieldUnitCount</Attribute>
+			<Const>2</Const>
+			<Const>40</Const>
+		</DescParams>
+
+		<CheckActive>0</CheckActive>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<ReqFieldUnitCount Region="South" Value="4" />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170030" Once="true"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+
+		<AppearWhenRegionUnit3>South</AppearWhenRegionUnit3>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70031" Inherit="70030">
+		<Comment>제국의 무력 2단계</Comment>
+		<DescComment>남부 영웅을 4기 이상 배치 시 첫 번째 적 처치 시 모든 적 2초간 공포 및 최종 주는 피해량 +20%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70032" Inherit="70030">
+		<Comment>제국의 무력 3단계</Comment>
+		<DescComment>남부 영웅을 4기 이상 배치 시 첫 번째 적 처치 시 모든 적 2초간 공포 및 최종 주는 피해량 +20%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70040">
+		<Comment>영웅의 기상 1단계</Comment>
+		<DescComment>중부 영웅 3기 이상 배치 시, 공격력 +70%, 주문력 +70%, 공격속도 +70%</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Attribute Name="Value">./WorldTriggers/Conditions/ReqFieldUnitCount</Attribute>
+			<Const>60</Const>
+			<Const>60</Const>
+			<Const>60</Const>
+		</DescParams>
+
+		<CheckActive>0</CheckActive>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+				<ReqFieldUnitCount Region="Central" Value="3"/>
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170040" Once="true"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+
+		<AppearWhenRegionUnit3>Central</AppearWhenRegionUnit3>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70041" Inherit="70040">
+		<Comment>영웅의 기상 2단계</Comment>
+		<DescComment>중부 영웅 3기 이상 배치 시, 공격력 +70%, 주문력 +70%, 공격속도 +70%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70042" Inherit="70040">
+		<Comment>영웅의 기상 3단계</Comment>
+		<DescComment>중부 영웅 3기 이상 배치 시, 공격력 +70%, 주문력 +70%, 공격속도 +70%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70050">
+		<Comment>용기 증진 1단계</Comment>
+		<DescComment>용기 영웅들에게 부활 1회 부여 및 부활 후 받는 피해량 -60% 부여</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>1</Const>
+			<Const>-60</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170050" Once="true"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+
+		<AppearWhenRoleLevel5>Brave</AppearWhenRoleLevel5>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70051" Inherit="70050">
+		<Comment>용기 증진 2단계</Comment>
+		<DescComment>용기 영웅들에게 부활 1회 부여 및 부활 후 받는 피해량 -60% 부여</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70052" Inherit="70050">
+		<Comment>용기 증진 3단계</Comment>
+		<DescComment>용기 영웅들에게 부활 1회 부여 및 부활 후 받는 피해량 -60% 부여</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70060">
+		<Comment>강인한 전열 1단계</Comment>
+		<DescComment>전투 시작 시 강인 영웅들에게 2초간 무적 및 상태이상 면역 부여</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>2</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170060" Once="true"/>
+			</Actions>
+
+			<Values>
+
+			</Values>
+		</WorldTriggers>
+
+		<AppearWhenRoleLevel5>Toughness</AppearWhenRoleLevel5>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70061" Inherit="70060">
+		<Comment>강인한 전열 2단계</Comment>
+		<DescComment>전투 시작 시 강인 영웅들에게 2초간 무적 및 상태이상 면역 부여</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70062" Inherit="70060">
+		<Comment>강인한 전열 3단계</Comment>
+		<DescComment>전투 시작 시 강인 영웅들에게 2초간 무적 및 상태이상 면역 부여</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70070">
+		<Comment>원소 폭주 1단계</Comment>
+		<DescComment>원소 영웅들이 스킬을 사용할 때마다 치명타 피해량 +10% (최대 150%)</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>10</Const>
+			<Const>150</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170070" Once="true"/>
+			</Actions>
+
+			<Values>
+
+			</Values>
+		</WorldTriggers>
+
+		<AppearWhenRoleLevel5>Element</AppearWhenRoleLevel5>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70071" Inherit="70070">
+		<Comment>원소 폭주 2단계</Comment>
+		<DescComment>원소 영웅들이 스킬을 사용할 때마다 치명타 피해량 +10% (최대 150%)</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70072" Inherit="70070">
+		<Comment>원소 폭주 3단계</Comment>
+		<DescComment>원소 영웅들이 스킬을 사용할 때마다 치명타 피해량 +10% (최대 150%)</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70080">
+		<Comment>신속의 바람 1단계</Comment>
+		<DescComment>신속 영웅들의 최종 공격속도 +40%, 이동속도 +100%</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>40</Const>
+			<Const>100</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170080" Once="true"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+
+		<AppearWhenRoleLevel5>Swift</AppearWhenRoleLevel5>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70081" Inherit="70080">
+		<Comment>신속의 바람 2단계</Comment>
+		<DescComment>신속 영웅들의 최종 공격속도 +40%, 이동속도 +100%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70082" Inherit="70080">
+		<Comment>신속의 바람 3단계</Comment>
+		<DescComment>신속 영웅들의 최종 공격속도 +40%, 이동속도 +100%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70090">
+		<Comment>신비학자 1단계</Comment>
+		<DescComment>신비 클래스 영웅의 공격력 +100%, 주문력 +100%, 아군 사망 시 -10%\n(최대 -100%)</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>100</Const>
+			<Const>100</Const>
+			<Const>10</Const>
+			<Const>100</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170090" Once="true"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+
+		<AppearWhenRoleLevel5>Mystic</AppearWhenRoleLevel5>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70091" Inherit="70090">
+		<Comment>신비학자 2단계</Comment>
+		<DescComment>신비 클래스 영웅의 공격력 +100%, 주문력 +100%, 아군 사망 시 -10%\n(최대 -100%)</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70092" Inherit="70090">
+		<Comment>신비학자 3단계</Comment>
+		<DescComment>신비 클래스 영웅의 공격력 +100%, 주문력 +100%, 아군 사망 시 -10%\n(최대 -100%)</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70100">
+		<Comment>그림자 속으로 1단계</Comment>
+		<DescComment>전투 당 1회 그림자 영웅들이 죽음에 이르는 피해를 받을 경우 체력 1로 생존하고 절대방어 +10 및 2초간 은신 획득</DescComment>
+		<Category>UnitRegionOrRole</Category>
+		<Weight>50</Weight>
+		<ApplyAfterBattle>true</ApplyAfterBattle>
+		<DescParams>
+			<Const>1</Const>
+			<Const>10</Const>
+			<Const>2</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart />
+			</Conditions>
+
+			<Actions>
+				<ApplyEventTrigger ID="170100" Once="true"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		
+		<AppearWhenRoleLevel5>Shadow</AppearWhenRoleLevel5>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70101" Inherit="70100">
+		<Comment>그림자 속으로 2단계</Comment>
+		<DescComment>전투 당 1회 그림자 영웅들이 죽음에 이르는 피해를 받을 경우 체력 1로 생존하고 절대방어 +10 및 2초간 은신 획득</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="70102" Inherit="70100">
+		<Comment>그림자 속으로 3단계</Comment>
+		<DescComment>전투 당 1회 그림자 영웅들이 죽음에 이르는 피해를 받을 경우 체력 1로 생존하고 절대방어 +10 및 2초간 은신 획득</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80001">
+		<Comment>고블린 로드 2단계</Comment>
+		<DescComment>차우 소환석 1개 획득, 소환석 상점 고블린 챕터 비용 -1토큰, 등장 빈도 증가</DescComment>
+		<Category>InvadeChapter,InvadeShop</Category>
+		<Weight>20</Weight>
+        <Theme>1</Theme>
+		<DescParams>
+            <InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+			<Const>1</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem ID="13000"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ReplaceInvadeItem IDs="10010,10011/10020,10021/11020,11022/12010,12013/13000,13002"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UnlockInvadeItem IDs="10012,10013,10022,10023,11021,11023,12011,12012,13001"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80002">
+		<Comment>고블린 로드 3단계</Comment>
+		<DescComment>차우 소환석 1개 획득, 소환석 상점 고블린 챕터 비용 -2토큰, 등장 빈도 증가</DescComment>
+		<Category>InvadeChapter,InvadeShop</Category>
+		<Weight>20</Weight>
+        <Theme>1</Theme>
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+			<Const>2</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem ID="13000"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ReplaceInvadeItem IDs="10010,10014/10020,10024/11020,11025/12010,12016/13000,13004"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UnlockInvadeItem IDs="10015,10016,10025,10026,11024,11026,12014,12015,13003"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80011">
+		<Comment>도적단장 2단계</Comment>
+		<DescComment>침공 상점의 8번째 새로고침마다, 상점에 마라 소환석 등장</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>40</Weight>
+        <Theme>2</Theme>
+		<DescParams>
+			<InnerText>./SelectUnitAtRerollCount</InnerText>
+		</DescParams>
+
+		<RepresentativeValue Type="%">
+			<CustomStack BaseValue="20">Stack_Ability_60110</CustomStack>
+		</RepresentativeValue>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UpgradeInvadeItem Theme="2" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<SelectUnitID>13010</SelectUnitID>
+		<SelectUnitAtRerollCount>8</SelectUnitAtRerollCount>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80020">
+		<Comment>슬라임 군단 1단계</Comment>
+		<DescComment>5배수 라운드 시작 시 점점 티어가 상승된 슬라임 소환석을 다수 지급</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>40</Weight>
+        <Theme>3</Theme>
+		<DescParams>
+		</DescParams>
+
+		<!-- 5라운드 : 소라임x1, 슬라임x1, 기사라임x1 -->
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="5"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="10050"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="5"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="11100"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="5"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="12100"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+
+		<!-- 10라운드 : 슬라임x1, 기사라임x2 -->
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="10"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="11100"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="10"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="12100"/>
+			</Actions>
+			<Values>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+
+		<!-- 15라운드 : 기사라임x1, 총사라임x1, 장군라임x1 -->
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="15"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="12100"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="15"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="12110"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="15"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="13100"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+
+		<!-- 20라운드 : 총사라임x1, 장군라임x1, 킹라임x1 -->
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="20"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="12110"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="20"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="13100"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="20"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="14000"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+
+		<!-- 25라운드 : 장군라임x1, 킹라임x2 -->
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="25"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="13100"/>
+			</Actions>
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="25"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="14000"/>
+			</Actions>
+			<Values>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+
+		<!-- 30라운드 : 킹라임x3 -->
+		<WorldTriggers>
+			<Conditions>
+				<StageStart Stage="30"/>
+			</Conditions>
+			<Actions>
+				<AddInvadeItem ID="14000"/>
+			</Actions>
+			<Values>
+				<FixedValue>3</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80030">
+		<Comment>언데드의 땅 1단계</Comment>
+		<DescComment>네크로맨서, 고위 네크로맨서 및 리치가 스킬로 소환한 언데드 공격력 +100%, 주문력 +100%, 절대 방어 +1</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>20</Weight>
+        <Theme>4</Theme>
+		<DescParams>
+            <InnerText>./WorldTriggers/Values/FixedValue[1]</InnerText>
+            <InnerText>./WorldTriggers/Values/FixedValue[2]</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UpgradeInvadeItem Theme="4" />
+			</Actions>
+
+			<Values>
+				<FixedValue>100</FixedValue>
+				<FixedValue>100</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80031" Inherit="80030">
+		<Comment>언데드의 땅 2단계</Comment>
+		<DescComment>네크로맨서, 고위 네크로맨서 및 리치가 스킬로 소환한 언데드 공격력 +100%, 주문력 +100%, 절대 방어 +1</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80040">
+		<Comment>정예 엘프 1단계</Comment>
+		<DescComment>엘프 소환석의 가격 +2 토큰, 엘프 몬스터의 체력, 공격력, 주문력 +200%</DescComment>
+		<Category>InvadeChapter,InvadeShop</Category>
+		<Weight>20</Weight>
+        <Theme>5</Theme>
+		<DescParams>
+			<Const>2</Const>
+			<Const>200</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UpgradeInvadeItem Theme="5" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80041" Inherit="80040">
+		<Comment>정예 엘프 2단계</Comment>
+		<DescComment>엘프 소환석의 가격 +2 토큰, 엘프 몬스터의 체력, 공격력, 주문력 +200%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80050">
+		<Comment>피의 오크 1단계</Comment>
+		<DescComment>오크 몬스터의 승리 시 효과가 +50%</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>20</Weight>
+        <Theme>6</Theme>
+		<DescParams>
+			<InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UpgradeInvadeItem Theme="6" />
+			</Actions>
+
+			<Values>
+				<FixedValue>50</FixedValue>
+			</Values>
+
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80051" Inherit="80050">
+		<Comment>피의 오크 2단계</Comment>
+		<DescComment>오크 몬스터의 승리 시 효과가 +50%</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80061">
+		<Comment>악령의 저주 2단계</Comment>
+		<DescComment>침공 시 상대에게 적용하는 시련의 효과 +66% 강화</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>20</Weight>
+        <Theme>7</Theme>
+		<DescParams>
+			<InnerText>./WorldTriggers/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UpgradeInvadeItem Theme="7" />
+			</Actions>
+
+			<Values>
+				<FixedValue>66</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<ReplaceInvadeItem IDs="13070,13071/13090,13092/15140,15141"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80062" Inherit="80061">
+		<Comment>악령의 저주 3단계</Comment>
+		<DescComment>침공 시 상대에게 적용하는 시련의 효과 +66% 강화</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80072">
+		<Comment>뱀파이어 로드 3단계</Comment>
+		<DescComment>매 3 라운드마다 노스페라투를 소환석 획득</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>40</Weight>
+        <Theme>8</Theme>
+		<DescParams>
+			<Attribute Name="Value" BaseValue="1">./WorldTriggers[3]/Conditions/OverStack</Attribute>
+		</DescParams>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem ID="15110"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+			</Conditions>
+
+			<Actions>
+				<IncreaseCustomStack Name="Stack_Ability_80072"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+				<OverStack StackName="Stack_Ability_80072" Value="2" />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem ID="15110"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<StageStart />
+				<OverStack StackName="Stack_Ability_80072" Value="2" />
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Ability_80072"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80081">
+		<Comment>서리 심장 2단계</Comment>
+		<DescComment>침공한 서리부족 소환석 1개 당 상대 필드에 서리부족 토템 1개 추가 소환</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>20</Weight>
+        <Theme>9</Theme>
+		<DescParams>
+			<InnerText>./WorldTriggers/Values/FixedValue[1]</InnerText>
+			<InnerText>./WorldTriggers/Values/FixedValue[2]</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UpgradeInvadeItem Theme="9" />
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80082" Inherit="80081">
+		<Comment>서리 심장 3단계</Comment>
+		<DescComment>침공한 서리부족 소환석 1개 당 상대 필드에 서리부족 토템 1개 추가 소환</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80092">
+		<Comment>공허 침식 3단계</Comment>
+		<DescComment>침공 상점에 공허 소환석만 등장</DescComment>
+		<Category>InvadeChapter,InvadeShop</Category>
+		<Weight>30</Weight>
+        <Theme>10</Theme>
+		<DescParams>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemProbPer Themes="1,2,3,4,5,6,7,8,9,11,12,13,14,15"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>-100</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+	
+	<ColosseumAbility ID="80100">
+		<Comment>용살의 의지</Comment>
+		<DescComment>용살단 소환석의 효과 2배</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>20</Weight>
+        <Theme>11</Theme>
+		<DescParams>
+			<Const>100</Const>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Ability_80100" />
+			</Actions>
+
+			<Values>
+				<FixedValue>200</FixedValue>
+			</Values>
+
+		</WorldTriggers>
+	</ColosseumAbility>
+	<ColosseumAbility ID="80101" Inherit="80100">
+		<Comment>용살의 의지</Comment>
+		<DescComment>용살단 소환석의 효과 2배</DescComment>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80110">
+		<Comment>끝없는 잠식 1단계</Comment>
+		<DescComment>공허엘프 소환석 마물 데스스킬 추가</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>20</Weight>
+        <Theme>12</Theme>
+		<DescParams>
+			<InnerText>./WorldTriggers/Values/FixedValue[1]</InnerText>
+			<InnerText>./WorldTriggers/Values/FixedValue[2]</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UpgradeInvadeItem Theme="12" />
+			</Actions>
+
+			<Values>
+				<FixedValue>2</FixedValue>
+				<FixedValue>600</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+	
+	<ColosseumAbility ID="80111" Inherit="80110">
+	</ColosseumAbility>
+	
+	<ColosseumAbility ID="80112" Inherit="80110">
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80121">
+		<Comment>장원 급제 2단계</Comment>
+		<DescComment>다음부터 나오는 동부군 소환석 업그레이드</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>20</Weight>
+        <Theme>13</Theme>
+		<DescParams>
+			<InnerText>./WorldTriggers/Values/FixedValue[1]</InnerText>
+			<InnerText>./WorldTriggers/Values/FixedValue[2]</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UpgradeInvadeItem Theme="13" RefreshWaiting="false"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+				<FixedValue>2</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80130">
+		<Comment>용의 분노 1단계</Comment>
+		<DescComment>깃발을 잃을 시 용기사 소환석이 한 단계 높은 소환석으로 승급 및 노스페라투 군병, 피의 마법사 각 1개씩 지급</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>20</Weight>
+        <Theme>14</Theme>
+		<DescParams>
+			<Localize>UnitName_21300</Localize>
+			<Localize>UnitName_21310</Localize>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UpgradeInvadeItem Theme="14" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItem ID="10111" />
+				<AddInvadeItem ID="11151" />
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+
+	<ColosseumAbility ID="80141">
+		<Comment>천상의 불꽃 2단계</Comment>
+		<DescComment>모든 제단의 레벨 +5 및 제단 레벨 15 도달 시 연관된 소환석 1기 추가 소환</DescComment>
+		<Category>InvadeChapter</Category>
+		<Weight>20</Weight>
+        <Theme>15</Theme>
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+			<InnerText>./WorldTriggers[2]/Values/FixedValue[1]</InnerText>
+			<InnerText>./WorldTriggers[2]/Values/FixedValue[2]</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddBuildingLevel Index="0"/>
+				<AddBuildingLevel Index="1"/>
+				<AddBuildingLevel Index="2"/>
+				<AddBuildingLevel Index="3"/>
+				<AddBuildingLevel Index="4"/>
+				<AddBuildingLevel Index="5"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>5</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<UpgradeInvadeItem Theme="15" />
+			</Actions>
+
+			<Values>
+				<FixedValue>15</FixedValue>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumAbility>
+</ColosseumAbilities>

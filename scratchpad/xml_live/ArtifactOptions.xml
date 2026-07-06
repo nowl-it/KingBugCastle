@@ -1,0 +1,123 @@
+<ArtifactOptions>
+
+	<ArtifactOption ID="100" Type="AtkPer">
+		<Values>4,3,2</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="101" Type="AtkPer">
+		<Values>5,4,3</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="102" Type="AtkPer">
+		<Values>7,5,4</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="103" Type="AtkPer">
+		<Values>8,7,5</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="104" Type="AtkPer">
+		<Values>10,8,7</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="105" Type="AtkPer">
+		<Values>12,9,8</Values>
+	</ArtifactOption>
+
+	<ArtifactOption ID="150" Type="Atk">
+		<Values>0,0,0</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="151" Type="Atk">
+		<Values>8,4,3</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="152" Type="Atk">
+		<Values>12,7,5</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="153" Type="Atk">
+		<Values>16,10,7</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="154" Type="Atk">
+		<Values>0,0,0</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="155" Type="Atk">
+		<Values>20,13,9</Values>
+	</ArtifactOption>
+	
+	<ArtifactOption ID="200" Type="MAtkPer">
+		<Values>8,6,5</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="201" Type="MAtkPer">
+		<Values>12,10,7</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="202" Type="MAtkPer">
+		<Values>16,12,10</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="203" Type="MAtkPer">
+		<Values>19,16,12</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="204" Type="MAtkPer">
+		<Values>24,19,16</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="205" Type="MAtkPer">
+		<Values>28,22,18</Values>
+	</ArtifactOption>
+
+	<ArtifactOption ID="300" Type="HpPer">
+		<Values>5,4,3</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="301" Type="HpPer">
+		<Values>7,5,4</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="302" Type="HpPer">
+		<Values>8,7,5</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="303" Type="HpPer">
+		<Values>10,8,7</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="304" Type="HpPer">
+		<Values>12,9,8</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="305" Type="HpPer">
+		<Values>16,12,10</Values>
+	</ArtifactOption>
+
+	<ArtifactOption ID="350" Type="Shield">
+		<ValueMul>15</ValueMul>
+		<Values>0,0,0</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="351" Type="Shield">
+		<ValueMul>15</ValueMul>
+		<Values>8,4,3</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="352" Type="Shield">
+		<ValueMul>15</ValueMul>
+		<Values>12,7,5</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="353" Type="Shield">
+		<ValueMul>15</ValueMul>
+		<Values>16,10,7</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="354" Type="Shield">
+		<ValueMul>15</ValueMul>
+		<Values>0,0,0</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="355" Type="Shield">
+		<ValueMul>15</ValueMul>
+		<Values>20,13,9</Values>
+	</ArtifactOption>
+
+	<ArtifactOption ID="400" Type="AtkSpeedPer">
+		<Values>7,5,4</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="401" Type="AtkSpeedPer">
+		<Values>10,8,6</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="402" Type="AtkSpeedPer">
+		<Values>13,10,8</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="403" Type="AtkSpeedPer">
+		<Values>16,13,10</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="404" Type="AtkSpeedPer">
+		<Values>20,16,13</Values>
+	</ArtifactOption>
+	<ArtifactOption ID="405" Type="AtkSpeedPer">
+		<Values>24,18,15</Values>
+	</ArtifactOption>
+	
+</ArtifactOptions>

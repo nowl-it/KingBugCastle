@@ -1,0 +1,153 @@
+<!-- xml 정보
+    ID 규칙:
+        (1) xx000: 시즌에 따라 새로 만들어지는 인덱스
+        (2) 00xxx: 해당 시즌의 카드 인덱스 (특수카드는 999부터 역순으로)
+        
+    필드 구성
+        (1) <ID>
+        (2) <Name> (default: EventCardName_{ID})
+        (3) <IllustName> (default: EventCard_Illust_{ID})
+        (4) <BuffDataID> (규칙: 5{ID})
+        (5) <ShowInList> (default: true)
+        (6) <HasReward> (default: false)
+        (7) <CanApply> (default: true)
+        (8) <AvatarSprite> (규칙 : Avatar_{index}, default : Avatar_Default)
+        
+-->
+<EventCards>
+    <EventCard ID="10000">
+        <Comment>영웅 셸다</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510000</BuffDataID>
+        <AvatarSprite>Avatar_000_00</AvatarSprite>
+    </EventCard>
+    <EventCard ID="10001">
+        <Comment>국왕 에반</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510001</BuffDataID>
+        <AvatarSprite>Avatar_003_03</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10002">
+        <Comment>서리여왕 프리아</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510002</BuffDataID>
+        <AvatarSprite>Avatar_004_01</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10003">
+        <Comment>징벌의 왕 아라미스</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510003</BuffDataID>
+        <AvatarSprite>Avatar_005_03</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10004">
+        <Comment>신성왕 알베론</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510004</BuffDataID>
+        <AvatarSprite>Avatar_006_02</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10005">
+        <Comment>선율의 여왕 바드리</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510005</BuffDataID>
+        <AvatarSprite>Avatar_009_03</AvatarSprite>
+    </EventCard>
+    <EventCard ID="10006">
+        <Comment>라이카</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510006</BuffDataID>
+        <AvatarSprite>Avatar_012</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10007">
+        <Comment>릴리와 샤샤</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510007</BuffDataID>
+        <AvatarSprite>Avatar_015</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10008">
+        <Comment>쥬피테르</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510008</BuffDataID>
+        <AvatarSprite>Avatar_017</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10009">
+        <Comment>멜</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510009</BuffDataID>
+        <AvatarSprite>Avatar_021</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10010">
+        <Comment>신월의 여왕 루니아르</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510010</BuffDataID>
+        <AvatarSprite>Avatar_023_02</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10011">
+        <Comment>그림자왕 카인</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510011</BuffDataID>
+        <AvatarSprite>Avatar_025_04</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10012">
+        <Comment>운명의 여왕 헬라</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510012</BuffDataID>
+        <AvatarSprite>Avatar_030_02</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10013">
+        <Comment>미르실</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510013</BuffDataID>
+        <AvatarSprite>Avatar_033</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10014">
+        <Comment>태산</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510014</BuffDataID>
+        <AvatarSprite>Avatar_034</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10015">
+        <Comment>리에</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510015</BuffDataID>
+        <AvatarSprite>Avatar_039</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10016">
+        <Comment>에스테아</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510016</BuffDataID>
+        <AvatarSprite>Avatar_044</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10017">
+        <Comment>오필리아</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510017</BuffDataID>
+        <AvatarSprite>Avatar_049</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10018">
+        <Comment>마노</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510018</BuffDataID>
+        <AvatarSprite>Avatar_051</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10019">
+        <Comment>빅토리아</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510019</BuffDataID>
+        <AvatarSprite>Avatar_052</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10020">
+        <Comment>엘레나와 카라단</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510020</BuffDataID>
+        <AvatarSprite>Avatar_50030</AvatarSprite>        
+    </EventCard>
+    <EventCard ID="10999">
+        <Comment>킹갓캐슬!</Comment>
+        <AvailableSeason>55</AvailableSeason>
+        <BuffDataID>510999</BuffDataID>
+        <ShowInList>false</ShowInList>
+        <HasReward>true</HasReward>
+        <CanApply>false</CanApply>
+        <AvatarSprite>Avatar_Default</AvatarSprite>            
+    </EventCard>
+</EventCards>

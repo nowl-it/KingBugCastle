@@ -1,0 +1,68 @@
+<ClanRankTiers>
+
+	<ClanRankTier ID="0">
+		<NameComment>아이언</NameComment>
+		<ReqPoint>0</ReqPoint>
+		<TierIcon>Tier_00</TierIcon>
+		<GoldBonus>0</GoldBonus>
+	</ClanRankTier>
+
+	<ClanRankTier ID="10">
+		<NameComment>브론즈 1</NameComment>
+		<ReqPoint>500000</ReqPoint>
+		<TierIcon>Tier_01</TierIcon>
+		<GoldBonus>2</GoldBonus>
+	</ClanRankTier>
+
+	<ClanRankTier ID="20">
+		<NameComment>실버 1</NameComment>
+		<ReqPoint>1000000</ReqPoint>
+		<TierIcon>Tier_02</TierIcon>
+		<GoldBonus>3</GoldBonus>
+	</ClanRankTier>
+
+	<ClanRankTier ID="30">
+		<NameComment>골드 1</NameComment>
+		<ReqPoint>1500000</ReqPoint>
+		<TierIcon>Tier_03</TierIcon>
+		<GoldBonus>4</GoldBonus>
+	</ClanRankTier>
+
+	<ClanRankTier ID="40">
+		<NameComment>플래티넘 1</NameComment>
+		<ReqPoint>2000000</ReqPoint>
+		<TierIcon>Tier_04</TierIcon>
+		<GoldBonus>5</GoldBonus>
+	</ClanRankTier>
+
+	<ClanRankTier ID="50">
+		<NameComment>다이아 1</NameComment>
+		<ReqPoint>3500000</ReqPoint>
+		<TierIcon>Tier_05</TierIcon>
+		<GoldBonus>6</GoldBonus>
+	</ClanRankTier>
+
+	<ClanRankTier ID="60">
+		<NameComment>킹</NameComment>
+		<ReqPoint>5000000</ReqPoint>
+		<TierIcon>Tier_06</TierIcon>
+		<GoldBonus>8</GoldBonus>
+	</ClanRankTier>
+
+	<ClanRankTier ID="70">
+		<NameComment>갓</NameComment>
+		<ReqPoint>5500000</ReqPoint>
+		<ReqRank>100</ReqRank>
+		<TierIcon>Tier_07</TierIcon>
+		<GoldBonus>10</GoldBonus>
+	</ClanRankTier>
+
+	<ClanRankTier ID="80">
+		<NameComment>킹갓</NameComment>
+		<ReqPoint>6000000</ReqPoint>
+		<ReqRank>10</ReqRank>
+		<TierIcon>Tier_08</TierIcon>
+		<GoldBonus>12</GoldBonus>
+	</ClanRankTier>
+
+</ClanRankTiers>

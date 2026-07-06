@@ -1,0 +1,106 @@
+<ColosseumSettings>
+	<!-- 적용할 타로 Setting (ColosseumTarotSettings.xml ID) -->
+	<ApplyTarotSetting>1</ApplyTarotSetting>
+	<!-- 적용할 타로 기간 -->
+	<!-- TODO: 이거 시즌으로 바꿔주세요 -->
+	<ApplyTarotStartDate>20240910</ApplyTarotStartDate>
+	<ApplyTarotEndDate>25671212</ApplyTarotEndDate>
+	
+	<!-- 이번 시즌 사용할 테마 -->
+	<CurrentSeasonTheme>1,3,6,7,8,10,12,13,14,15</CurrentSeasonTheme>
+	
+    <!-- 봇이 이번 시즌에서 밴 된 테마의 전략을 보유하고 있다면 아래 전략 중 보유하지 않은 랜덤한 하나로 변경 -->
+	<BotBannedAbilityFallbackPool>
+        <!-- 1티어 : 체급 강화, 영웅의 힘, 끈질긴 전투, 대장 공략, 음양조화, 무작위 모루, 베테랑 -->
+        20020,60000,60070,60080,60090,60100,60110,
+        <!-- 2티어 : 체급 강화, 궁극의 제련, 수호신의 금강, 마신의 폭주, 악마의 피, 영웅의 힘, 끈질긴 전투, 대장 공략, 음양조화, 무작위 모루, 배수의 진 -->
+        20021,50001,50011,50021,50031,60001,60071,60081,60091,60101,60121,
+        <!-- 3티어 : 궁극의 제련, 수호신의 금강, 마신의 폭주, 악마의 피, 영웅의 힘, 끈질긴 전투, 대장 공략, 음양조화, 무작위 모루, 배수의 진 -->
+        50002,50012,50022,50032,60002,60072,60082,60092,60102,60122
+    </BotBannedAbilityFallbackPool>
+	
+    <!-- 최대 전략 레벨 -->
+	<MaxAbilityLevel>7</MaxAbilityLevel>
+	
+	<!-- 전략 레벨 필요 경험치 -->
+	<AbilityLevelNeedExp>0,40,70,120,200,300,420</AbilityLevelNeedExp>
+	
+	<!-- 전략 리롤 카운트 -->
+	<AbilityRerollCount>5</AbilityRerollCount>
+	
+	<!-- 최대 침공 포인트 -->
+	<MaxInvadePoint>10</MaxInvadePoint>
+	
+	<!-- 최대 침공 포인트 증가량 -->
+	<IncreaseInvadePointAmount>2</IncreaseInvadePointAmount>
+	
+	<!-- 침공 상점 새로고침 비용 -->
+	<InvadeShopRerollCost>1</InvadeShopRerollCost>
+	
+	<!-- 보상 강화 상자 확률 (핫타임 적용 시) -->
+	<HotTimeBonusRewardProb>1</HotTimeBonusRewardProb>
+	
+	<!-- 보상 강화 상자 확률 (핫타임 미적용 시) -->
+	<BonusRewardProb>0.2</BonusRewardProb>
+
+	<!-- 보상 강화 상자 배율 -->
+	<BonusRewardPer>0.5</BonusRewardPer>
+	
+	<!-- 침공 소환서 등급 별 등장 확률 -->
+	<InvadeItemProbability>
+		<Value>100,0,0,0,0,0</Value>
+		<Value>60,30,10,0,0,0</Value>
+		<Value>45,35,15,5,0,0</Value>
+		<Value>30,40,15,10,5,0</Value>
+		<Value>24,30,20,15,10,1</Value>
+		<Value>14,20,25,20,18,3</Value>
+		<Value>6,8,30,27,24,5</Value>
+	</InvadeItemProbability>
+	
+	<!-- 페이즈 별 진행 시간 -->
+	<PhaseTimeLengths>
+		<PhaseTimeLength Phase="ReadyPhase" Length="30,45,55,55,55"/>
+		<PhaseTimeLength Phase="BattlePhase" Length="12,18,24,30"/>
+		<PhaseTimeLength Phase="ChoiceTarotPhase" Length="10"/>
+		<PhaseTimeLength Phase="RandomTarotPhase" Length="10"/>
+	</PhaseTimeLengths>
+	
+	<!-- 연승 횟수 당 관중의 열기 (7승 이상은 코드에서 계산) -->
+	<EnemyBerserkValue>10,20,40,80,120,200,-1</EnemyBerserkValue>
+	
+	<!-- 관중의 열기 1 당 스탯 증가량 (%) -->
+	<StatPerByBerserkValue Type="Atk">2</StatPerByBerserkValue>
+	<StatPerByBerserkValue Type="MAtk">2</StatPerByBerserkValue>
+	<StatPerByBerserkValue Type="AttackSpeed">0.4</StatPerByBerserkValue>
+	<StatPerByBerserkValue Type="Hp">2.5</StatPerByBerserkValue>
+	<StatPerByBerserkValue Type="HybridDef">8</StatPerByBerserkValue>
+	<StatPerByBerserkValue Type="CCRatio">1.3</StatPerByBerserkValue>
+	
+	<!-- 전원 승리 시 베이스 열기 증가량 -->
+	<BerserkBaseValueAddAmount>6</BerserkBaseValueAddAmount>
+	<!-- 패배 전투 개수 당 베이스 열기 감소량 -->
+	<DecreaseEnemyBerserkBaseValue>0,10,20,30</DecreaseEnemyBerserkBaseValue>
+	
+	<!-- 게임 종료 후 보상 상자에 요구되는 라운드 수-->
+	<RewardRequireRounds>5,10,15</RewardRequireRounds>
+	<!-- 보상 상자 고기 가격 -->
+	<!-- 수정 시 서버 Constants 수정 필요 -->
+	<RewardHeartCosts>5,10,20</RewardHeartCosts>
+	
+	<!-- 침공 대상 패배 시 획득하는 전략 경험치 -->
+	<AbilityExpsWhenOpponentTargetLose>70,100,130,160</AbilityExpsWhenOpponentTargetLose>
+	
+	<!-- 모두가 연승 시 추가로 올라가는 기본 열기 값 -->
+	<BerserkBaseValueStreakAmount>1</BerserkBaseValueStreakAmount>
+
+	<OpenMissionRewards>
+		<Reward Point="1000" Type="Flag" ID="50000" Count="1"/>
+		<Reward Point="2000" Type="Gold" ID="-1" Count="20000"/>
+		<Reward Point="3000" Type="NameTag" ID="50000" Count="1"/>
+		<Reward Point="4000" Type="NewUnitGachaItem" Count="1"/>
+		<Reward Point="5000" Type="TerritoryBuilding" ID="50001" Count="1"/>
+	</OpenMissionRewards>
+	
+	<!-- 풀 초기화 몇 라운드 마다 할 지 -->
+	<PoolClearStage>100</PoolClearStage>
+</ColosseumSettings>

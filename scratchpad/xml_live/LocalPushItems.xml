@@ -1,0 +1,68 @@
+<LocalPushItems>
+	<LocalPushItem ID="1">
+		<PushComment>식량 꽉 참 알림</PushComment>
+		<Title>LocalPushItemTitle_1</Title>
+		<SubTitle>LocalPushItemSubTitle_1</SubTitle>
+		<Content>LocalPushItemContent_1</Content>
+		<Condition>
+			<ConditionType>Time</ConditionType>
+			<ConditionValue>FoodFull</ConditionValue>
+		</Condition>
+		<OnOffKey>Push_Food</OnOffKey>
+	</LocalPushItem>
+
+	<LocalPushItem ID="2">
+		<PushComment>자정 초기화</PushComment>
+		<Title>LocalPushItemTitle_2</Title>
+		<SubTitle>LocalPushItemSubTitle_2</SubTitle>
+		<Content>LocalPushItemContent_2</Content>
+		<Condition>
+			<ConditionType>Time</ConditionType>
+			<ConditionValue>MidNight</ConditionValue>
+		</Condition>
+		<IsRepeat>True</IsRepeat>
+		<!-- warning : 시간 간격이 아닌 해당 시간에 알림을 예약하는 구조로 
+		우연히 무리 없이 동작하게 되어 있어 추후 관련 푸시 추가 시 유의할 것 -->
+		<RepeatInterval>1440</RepeatInterval>
+		<OnOffKey>Push_Flag</OnOffKey>
+	</LocalPushItem>
+
+	<LocalPushItem ID="3">
+		<PushComment>지원 요청</PushComment>
+		<Title>LocalPushItemTitle_3</Title>
+		<SubTitle>LocalPushItemSubTitle_3</SubTitle>
+		<Content>LocalPushItemContent_3</Content>
+		<Condition>
+			<ConditionType>Time</ConditionType>
+			<ConditionValue>ClanSupport</ConditionValue>
+		</Condition>
+		<OnOffKey>Push_AllianceSupport</OnOffKey>
+	</LocalPushItem>
+
+	
+	<!-- 영지 -->
+	<LocalPushItem ID="101">
+		<PushComent>활력 최대치</PushComent>
+		<TItle>LocalPushItemTitle_101</TItle>
+		<SubTitle>LocalPushItemSubTitle_101</SubTitle>
+		<Content>LocalPushItemContent_101</Content>
+		<Condition>
+			<ConditionType>Time</ConditionType>
+			<ConditionValue>TerritoryMaxStoredLabor</ConditionValue>
+		</Condition>
+		<OnOffKey>Push_TerritoryMaxStoredLabor</OnOffKey>
+	</LocalPushItem>
+	
+	<LocalPushItem ID="102">
+		<PushComent>조사 완료</PushComent>
+		<TItle>LocalPushItemTitle_102</TItle>
+		<SubTitle>LocalPushItemSubTitle_102</SubTitle>
+		<Content>LocalPushItemContent_102</Content>
+		<Condition>
+			<ConditionType>Time</ConditionType>
+			<ConditionValue>TerritoryHunting</ConditionValue>
+		</Condition>
+		<OnOffKey>Push_TerritoryHunting</OnOffKey>
+		<HasManyData>true</HasManyData>
+	</LocalPushItem>
+</LocalPushItems>

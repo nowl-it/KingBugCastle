@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bản tin cập nhật chi tiết King God Castle - Patch 2026_06_26. Bao gồm Tướng mới Alter Ophelia và chỉnh sửa Thánh Tích.">
+    <title>KGC Patch Notes | 2026_06_26</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Highlight.js Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', (event) => { hljs.highlightAll(); });</script>
+    
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #18181b;
+            --text-muted: #71717a;
+            --border-color: #e4e4e7;
+            --accent: #27272a;
+            --warning-border: #f59e0b;
+            --warning-bg: #fffbeb;
+            --code-bg: #fafafa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        .meta-info {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .disclaimer-box {
+            background-color: var(--warning-bg);
+            border-left: 3px solid var(--warning-border);
+            padding: 20px;
+            margin-bottom: 40px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .disclaimer-box strong {
+            color: #b45309;
+            margin-bottom: 6px;
+        }
+
+        .disclaimer-box p {
+            color: #78350f;
+            margin-bottom: 12px;
+        }
+
+        section {
+            margin-bottom: 48px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .title-icon {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Hero Header */
+        .hero-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .hero-portrait {
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            object-fit: cover;
+        }
+
+        .hero-title h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .hero-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .info-card {
+            background: #fcfcfc;
+            border-radius: 6px;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Lists */
+        ul {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        .data-tag {
+            background: #f4f4f5;
+            border: 1px solid #e4e4e7;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #3f3f46;
+        }
+
+        .highlight-bold {
+            font-weight: 600;
+        }
+
+        /* Code Block Styling overrides for Highlight.js */
+        pre {
+            margin: 12px 0 20px 0;
+        }
+
+        pre code.hljs {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            color: #27272a;
+            font-weight: bold;
+        }
+
+        /* Artifacts */
+        .artifact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+        }
+
+        .artifact-item {
+            display: flex;
+            gap: 20px;
+        }
+
+        .artifact-icon {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .artifact-detail {
+            flex-grow: 1;
+        }
+
+        .artifact-detail h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .artifact-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .table-stats {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+
+        .table-stats th, .table-stats td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table-stats th {
+            background: #fafafa;
+            color: var(--text-muted);
+            font-weight: 500;
+            width: 40%;
+        }
+
+        .table-stats td.new-value {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .table-stats td.old-value {
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        @media (max-width: 600px) {
+            .artifact-item {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .hero-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="meta-info">Phân tích XML CDN LIVE</div>
+            <h1>Bản Tin Cập Nhật KGC</h1>
+            <p class="subtitle">Patch 2026_06_26 • Cập nhật dữ liệu hệ thống nội bộ</p>
+        </header>
+
+        <div class="disclaimer-box">
+            <strong>Trạng thái bản vá: CHƯA ÁP DỤNG VÀO GAME THỰC TẾ (PRELOAD)</strong>
+            <p>Dữ liệu này được trích xuất hoàn toàn từ máy chủ phân phối nội dung (CDN LIVE) ngày 2026_06_26. Đây là dạng <strong>preload</strong> (dữ liệu tải trước ngầm) để chuẩn bị cho bản cập nhật kế tiếp. Người chơi trong game hiện tại <strong>chưa trải nghiệm được các thay đổi này</strong> cho tới khi nhà phát hành tiến hành bảo trì máy chủ và nâng cấp phiên bản client.</p>
+            <p><strong>Bằng chứng Master Data:</strong> Cấu hình của Alter Ophelia cũng như các sự kiện đi kèm đều chứa thuộc tính <span class="data-tag">MinVersion</span> yêu cầu client tối thiểu đạt <strong>1.71.00</strong> (mã nội bộ: <code>171000</code>). Phiên bản game hiện tại trên thiết bị người chơi mới chỉ là <strong>1.70.03</strong> (mã nội bộ: <code>170003</code>).</p>
+            <pre><code class="language-xml">&lt;!-- Trích lục từ Units.xml --&gt;
+&lt;Unit ID="10790"&gt;
+    &lt;Comment&gt;이격 오필리아&lt;/Comment&gt;
+    &lt;MinVersion&gt;171000&lt;/MinVersion&gt; &lt;!-- Chặn client &lt; 1.71.00 --&gt;
+&lt;/Unit&gt;</code></pre>
+        </div>
+
+        <section id="new-hero">
+            <h2>
+                <img src="assets/Portrait_079.png" class="title-icon" alt="Hero Icon">
+                Tướng Mới: Alter Ophelia
+            </h2>
+            
+            <div class="hero-header">
+                <img src="assets/Portrait_079.png" alt="Alter Ophelia Portrait" class="hero-portrait">
+                <div class="hero-title">
+                    <h3>이격 오필리아 (Ophelia - Quý bà thép)</h3>
+                    <p>Phiên bản Dị Chiều của Ophelia, vai trò Quân sư Hỗ trợ chiến thuật.</p>
+                </div>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Unit ID / Gốc</div>
+                    <div class="info-value"><span class="data-tag">10790</span> / <span class="data-tag">10490</span></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Lớp / Khu Vực / Thế Lực</div>
+                    <div class="info-value">Dũng Mãnh / Miền Trung / Chiến Lược Gia</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Tầm Đánh</div>
+                    <div class="info-value">2x2 <span style="font-size: 0.85rem; color: var(--text-muted);">(ArrowSpeed: 700)</span></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Thuộc Tính</div>
+                    <div class="info-value">Anh Hùng Dị Chiều</div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 12px; font-size: 1.1rem; font-weight: 600;">Hoạt Ảnh Nhân Vật (Interactive Sprite Viewer)</h3>
+            <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; background: #fafafa; margin-bottom: 28px;">
+                <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+                    <!-- Canvas Viewport -->
+                    <div style="background: #f1f5f9; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px; display: flex; align-items: center; justify-content: center; width: 150px; height: 180px; flex-shrink: 0; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);">
+                        <canvas id="spriteCanvas" width="120" height="150" style="image-rendering: pixelated; width: 120px; height: 150px; display: block;"></canvas>
+                    </div>
+                    
+                    <!-- Controls -->
+                    <div style="flex-grow: 1; min-width: 250px;">
+                        <div style="margin-bottom: 12px;">
+                            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600;">Hướng nhìn (Direction)</label>
+                            <select id="dirSelect" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--border-color); background: white; font-family: inherit; font-size: 0.9rem; color: var(--text-main); font-weight: 500;">
+                                <option value="0">Hướng Nam / Trước (Row 0)</option>
+                                <option value="1">Hướng Đông / Bên (Row 1)</option>
+                                <option value="2">Hướng Bắc / Sau (Row 2)</option>
+                            </select>
+                        </div>
+                        
+                        <div style="margin-bottom: 12px;">
+                            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600;">Hành động (Action)</label>
+                            <select id="actionSelect" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--border-color); background: white; font-family: inherit; font-size: 0.9rem; color: var(--text-main); font-weight: 500;">
+                                <option value="idle">Đứng chờ (Idle - Frame 0-2)</option>
+                                <option value="walk">Di chuyển (Walk - Frame 0,3,1,3)</option>
+                                <option value="attack">Tấn công/Kỹ năng (Action - Frame 4-5)</option>
+                                <option value="all">Toàn bộ chu kỳ (Full - Frame 0-5)</option>
+                            </select>
+                        </div>
+                        
+                        <div style="margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600;">
+                                <label>Tốc độ (Speed)</label>
+                                <span id="fpsVal" style="color: var(--text-main); font-family: monospace;">8 FPS</span>
+                            </div>
+                            <input type="range" id="fpsSlider" min="2" max="20" value="8" style="width: 100%; accent-color: var(--accent);">
+                        </div>
+                        
+                        <div style="display: flex; gap: 8px;">
+                            <button id="playBtn" style="padding: 6px 14px; border-radius: 4px; border: none; background: var(--text-main); color: white; font-weight: 600; cursor: pointer; font-size: 0.8rem;">Pause</button>
+                            <button id="stepBtn" style="padding: 6px 14px; border-radius: 4px; border: 1px solid var(--border-color); background: white; color: var(--text-main); font-weight: 600; cursor: pointer; font-size: 0.8rem;">Bước tiếp (Step)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+            (function() {
+                const canvas = document.getElementById('spriteCanvas');
+                const ctx = canvas.getContext('2d');
+                const dirSelect = document.getElementById('dirSelect');
+                const actionSelect = document.getElementById('actionSelect');
+                const fpsSlider = document.getElementById('fpsSlider');
+                const fpsVal = document.getElementById('fpsVal');
+                const playBtn = document.getElementById('playBtn');
+                const stepBtn = document.getElementById('stepBtn');
+                
+                const spriteSheet = new Image();
+                spriteSheet.src = 'assets/Unit_10790_Sheet.png';
+                
+                let spriteData = null;
+                let isPlaying = true;
+                let currentSeqIndex = 0;
+                let lastFrameTime = 0;
+                
+                fetch('assets/Unit_10790_Sheet.json')
+                    .then(r => r.json())
+                    .then(data => {
+                        spriteData = data;
+                        if (spriteSheet.complete && spriteSheet.naturalWidth > 0) {
+                            requestAnimationFrame(animate);
+                        }
+                    });
+                
+                spriteSheet.onload = () => {
+                    if (spriteData) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+                
+                function getFrameSequence() {
+                    const action = actionSelect.value;
+                    if (action === 'idle') return [0, 1, 2];
+                    if (action === 'walk') return [0, 3, 1, 3];
+                    if (action === 'attack') return [4, 5];
+                    return [0, 1, 2, 3, 4, 5];
+                }
+                
+                function animate(time) {
+                    if (!lastFrameTime) lastFrameTime = time;
+                    const fps = parseInt(fpsSlider.value);
+                    const interval = 1000 / fps;
+                    
+                    if (isPlaying) {
+                        const delta = time - lastFrameTime;
+                        if (delta >= interval) {
+                            const seq = getFrameSequence();
+                            currentSeqIndex++;
+                            if (currentSeqIndex >= seq.length) {
+                                currentSeqIndex = 0;
+                            }
+                            lastFrameTime = time - (delta % interval);
+                        }
+                    }
+                    
+                    drawFrame();
+                    
+                    if (isPlaying) {
+                        requestAnimationFrame(animate);
+                    }
+                }
+                
+                function drawFrame() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    if (!spriteData) return;
+                    
+                    const seq = getFrameSequence();
+                    const frameOffset = seq[currentSeqIndex % seq.length];
+                    
+                    const dirOffset = parseInt(dirSelect.value) * 6; // 0, 6, 12
+                    const frameIndex = dirOffset + frameOffset;
+                    
+                    const sprite = spriteData[frameIndex];
+                    if (!sprite) return;
+                    
+                    const rect = sprite.rect;
+                    const pivot = sprite.pivot;
+                    
+                    const sx = rect.x;
+                    const sy = 390 - (rect.y + rect.h);
+                    const sw = rect.w;
+                    const sh = rect.h;
+                    
+                    // Align pivot in the center of the canvas horizontally, and at 75% height vertically
+                    const anchorX = canvas.width / 2;
+                    const anchorY = canvas.height * 0.75;
+                    
+                    const dx = anchorX - (pivot.x * rect.w);
+                    const dy = anchorY - ((1 - pivot.y) * rect.h);
+                    const dw = rect.w;
+                    const dh = rect.h;
+                    
+                    if (spriteSheet.complete && spriteSheet.naturalWidth > 0) {
+                        ctx.drawImage(
+                            spriteSheet,
+                            sx, sy, sw, sh,
+                            dx, dy, dw, dh
+                        );
+                    }
+                }
+                
+                actionSelect.onchange = () => {
+                    currentSeqIndex = 0;
+                    drawFrame();
+                };
+                
+                dirSelect.onchange = () => {
+                    drawFrame();
+                };
+                
+                fpsSlider.oninput = () => {
+                    fpsVal.textContent = fpsSlider.value + ' FPS';
+                };
+                
+                playBtn.onclick = () => {
+                    isPlaying = !isPlaying;
+                    if (isPlaying) {
+                        playBtn.textContent = 'Pause';
+                        lastFrameTime = 0;
+                        requestAnimationFrame(animate);
+                    } else {
+                        playBtn.textContent = 'Play';
+                    }
+                };
+                
+                stepBtn.onclick = () => {
+                    isPlaying = false;
+                    playBtn.textContent = 'Play';
+                    const seq = getFrameSequence();
+                    currentSeqIndex++;
+                    if (currentSeqIndex >= seq.length) {
+                        currentSeqIndex = 0;
+                    }
+                    drawFrame();
+                };
+            })();
+            </script>
+
+            <h3 style="margin-bottom: 12px; font-size: 1.1rem; font-weight: 600;">Cơ Chế Kỹ Năng (Skill ID: 10790 & 1079000)</h3>
+            <ul>
+                <li><span class="highlight-bold">Trạng thái Khởi điểm:</span> Kích hoạt <span class="data-tag">SetInvincible</span> (Bất Tử) trong 1 giây đầu <span class="data-tag">BattleStart</span>. HP khởi điểm: 200, Mana: 120 (BattleStartMana: 0).</li>
+                <li><span class="highlight-bold">Kỹ Năng Chính (TileTick):</span> Tiêu hao 120 Mana để niệm phép (BuffChannelingTime = 5s), thiết lập vùng <span class="data-tag">SplashRange</span>. Gây <span class="data-tag">TickDamage</span> mỗi giây liên tục trong 4 giây.</li>
+                <li><span class="highlight-bold">Sát thương kỹ năng:</span> Gây sát thương phép lên địch bằng 100% MAtk ở mỗi Tick.</li>
+                <li><span class="highlight-bold">Tăng tiến sức mạnh vùng:</span> Diện tích vùng <span class="data-tag">SplashRange</span> tỷ lệ thuận với bậc kỹ năng: Bậc 1 (2x2), Bậc 2 (3x3 - Scale 1.4x), Bậc 3 (4x4 - Scale 1.8x), Bậc 4 (5x5 - Scale 2.2x).</li>
+                <li><span class="highlight-bold">Buff Đồng minh (<span class="data-tag">BuffToTeamSkillTarget: 107905</span>):</span> Cung cấp +50% Tốc Đánh (AttackSpeed) và +50% Tốc Chạy (MoveSpeed) làm mới mỗi giây trong vùng.</li>
+                <li><span class="highlight-bold">Debuff Kẻ địch (<span class="data-tag">BuffToAttackTarget: 1079005</span>):</span> Áp dụng Làm Chậm 50% (Slow: 50, ApplyCCRatio: true).</li>
+            </ul>
+
+            <pre><code class="language-xml">&lt;!-- Chi tiết cấu hình Kỹ Năng Trận Pháp (Skills.xml) --&gt;
+&lt;Skill ID="1079000"&gt;
+    &lt;AtkType&gt;TileTick&lt;/AtkType&gt;
+    &lt;TargetType&gt;AllIncludeMe&lt;/TargetType&gt;
+    &lt;BuffChannelingTime&gt;5&lt;/BuffChannelingTime&gt;
+    &lt;TickAttackTime&gt;4&lt;/TickAttackTime&gt;
+    &lt;TickAttackInterval&gt;1&lt;/TickAttackInterval&gt;
+    &lt;MAtkPer Target="Damage"&gt;100&lt;/MAtkPer&gt;
+    &lt;BuffToTeamSkillTarget&gt;107905&lt;/BuffToTeamSkillTarget&gt;
+    &lt;BuffToAttackTarget&gt;1079005&lt;/BuffToAttackTarget&gt;
+&lt;/Skill&gt;</code></pre>
+
+            <h3 style="margin-bottom: 12px; font-size: 1.1rem; font-weight: 600;">Năng Lực Thức Tỉnh (Overcome & Dimension Stats)</h3>
+            <ul>
+                <li><span class="highlight-bold">Thức tỉnh 1 & 5:</span> Triệt tiêu buff Tốc độ đánh (<span class="data-tag">AttackSpeedPerUnit=0</span>), thay thế bằng +50 Xuyên Kháng Phép/Giáp (<span class="data-tag">DefDen: 50</span>).</li>
+                <li><span class="highlight-bold">Thức tỉnh 2:</span> Vòng sáng gia cố thêm +75 Kháng Sát Thương (<span class="data-tag">Guard: 75</span>).</li>
+                <li><span class="highlight-bold">Chỉ số Dị Chiều (Dimension Stat):</span> Bổ sung tĩnh: +350 HP, +50 MAtk và +30 Xuyên Giáp/Kháng (DefDen).</li>
+            </ul>
+
+            <pre><code class="language-xml">&lt;!-- Thức tỉnh & Chỉ số Dị Chiều (Units.xml) --&gt;
+&lt;Overcome ReqOvercome="1" TargetSkill="107905"&gt;
+    &lt;AttackSpeedPerUnit10790&gt;0&lt;/AttackSpeedPerUnit10790&gt;
+    &lt;DefDen Target="AttackSpeedPerUnit10790"&gt;50&lt;/DefDen&gt;
+&lt;/Overcome&gt;
+&lt;DimensionStat&gt;
+    &lt;Level Step="1"&gt;&lt;Stat Type="Hp" Value="125" /&gt;&lt;/Level&gt;
+    &lt;Level Step="2"&gt;&lt;Stat Type="MAtk" Value="30" /&gt;&lt;/Level&gt;
+    &lt;Level Step="4"&gt;&lt;Stat Type="DefDen" ValueType="BaseValue" Value="10" /&gt;&lt;/Level&gt;
+&lt;/DimensionStat&gt;</code></pre>
+
+            <h3 style="margin-bottom: 12px; font-size: 1.1rem; font-weight: 600; margin-top: 24px;">Lịch Sử Căn Chỉnh Hệ Thống (Rework giữa bản 06_16 và 06_26)</h3>
+            <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.95rem;">Ghi nhận các thay đổi lớn của nhà phát triển trong giai đoạn thử nghiệm trước khi chính thức đưa vào tệp preload:</p>
+            <ul>
+                <li><span class="highlight-bold">Thay đổi Quốc tịch (Region):</span> Chuyển từ <span class="data-tag">Region: North</span> (Bắc quốc) sang <span class="data-tag">Region: Central</span> (Miền Trung).</li>
+                <li><span class="highlight-bold">Căn chỉnh lại Sprite hiển thị:</span> Thông số <span class="data-tag">SpriteOffsetY</span> đổi từ `-35` thành `20` để sửa lỗi lệch hiển thị hình ảnh Pixel Art của mô hình nhân vật trên sân đấu.</li>
+                <li><span class="highlight-bold">Bổ sung Trí tuệ Nhân tạo:</span> Thêm cấu hình <span class="data-tag">AIType: Unit10790AI</span> để điều khiển cơ chế trận pháp thông minh riêng biệt.</li>
+                <li><span class="highlight-bold">Làm lại hệ thống thức tỉnh:</span> Loại bỏ toàn bộ các kỹ năng thức tỉnh cũ (107901 - 107904) và thay hoàn toàn bằng cơ chế cụ thể tăng Xuyên Giáp/Kháng (DefDen) và Kháng Sát Thương (Guard) trực tiếp cho đồng đội.</li>
+            </ul>
+        </section>
+
+        <section id="artifacts">
+            <h2>
+                <img src="assets/Artifact_Icon_12030.png" class="title-icon" alt="Balance Icon">
+                Cân Bằng Thánh Tích
+            </h2>
+            <img src="assets/Main_Arenainvasion.png" style="width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 20px; display: block;" alt="Arena Invasion Banner">
+            <p style="margin-bottom: 24px; color: var(--text-muted); font-size: 0.95rem;">Các điều chỉnh hệ số gốc (Base) trực tiếp trên file <code>Artifacts.xml</code>.</p>
+
+            <div class="artifact-list">
+                <div class="artifact-item">
+                    <img src="assets/Artifact_Icon_12030.png" class="artifact-icon" alt="Guardian's Helmet">
+                    <div class="artifact-detail">
+                        <h3>Mũ Giáp Hộ Vệ (Root ID: 12030)</h3>
+                        <p class="artifact-desc">Thông số <span class="data-tag">BaseAtkSkillCoolTime</span> được điều chỉnh giảm một nửa cho các ID từ 12031 đến 12034.</p>
+                        <table class="table-stats">
+                            <tr>
+                                <th>Chỉ Số</th>
+                                <th>Cũ</th>
+                                <th>Mới</th>
+                            </tr>
+                            <tr>
+                                <td>BaseAtkSkillCoolTime</td>
+                                <td class="old-value">4s</td>
+                                <td class="new-value">2s</td>
+                            </tr>
+                        </table>
+                        <pre><code class="language-xml">&lt;!-- Thay đổi trong Artifacts.xml --&gt;
+&lt;Artifact ID="12031"&gt;
+    &lt;BaseAtkSkillCoolTime&gt;2&lt;/BaseAtkSkillCoolTime&gt; &lt;!-- Cũ: 4 --&gt;
+&lt;/Artifact&gt;</code></pre>
+                    </div>
+                </div>
+
+                <div class="artifact-item">
+                    <img src="assets/Artifact_Icon_13050.png" class="artifact-icon" alt="Elixir of Respite">
+                    <div class="artifact-detail">
+                        <h3>Linh Dược Gây Tê (Root ID: 13050)</h3>
+                        <p class="artifact-desc">Thông số <span class="data-tag">ToTickDamagePer</span> tăng đều 5% trên mọi cấp bậc, gia tăng khả năng hấp thụ sốc sát thương.</p>
+                        <table class="table-stats">
+                            <tr>
+                                <th>Cấp Độ (ID)</th>
+                                <th>Cũ</th>
+                                <th>Mới</th>
+                            </tr>
+                            <tr>
+                                <td>Thường (13051)</td>
+                                <td class="old-value">25%</td>
+                                <td class="new-value">30%</td>
+                            </tr>
+                            <tr>
+                                <td>King (13054)</td>
+                                <td class="old-value">55%</td>
+                                <td class="new-value">60%</td>
+                            </tr>
+                        </table>
+                        <pre><code class="language-xml">&lt;!-- Thay đổi trong Artifacts.xml --&gt;
+&lt;Artifact ID="13051"&gt;
+    &lt;ToTickDamagePer&gt;30&lt;/ToTickDamagePer&gt; &lt;!-- Cũ: 25 --&gt;
+&lt;/Artifact&gt;</code></pre>
+                    </div>
+                </div>
+
+                <div class="artifact-item">
+                    <img src="assets/Artifact_Icon_13070.png" class="artifact-icon" alt="Teleport Scroll">
+                    <div class="artifact-detail">
+                        <h3>Cuộn Thần Chú Dịch Chuyển Tức Thời (Root ID: 13070)</h3>
+                        <p class="artifact-desc">Cải thiện tốc độ cast dịch chuyển và gia tăng thời gian miễn nhiễm sau khi chạm đất.</p>
+                        <table class="table-stats">
+                            <tr>
+                                <th>Chỉ Số</th>
+                                <th>Cũ</th>
+                                <th>Mới</th>
+                            </tr>
+                            <tr>
+                                <td>TeleportDelay</td>
+                                <td class="old-value">1.3s</td>
+                                <td class="new-value">1.0s</td>
+                            </tr>
+                            <tr>
+                                <td>InteractionOffTime</td>
+                                <td class="old-value">1.3s</td>
+                                <td class="new-value">1.5s</td>
+                            </tr>
+                        </table>
+                        <pre><code class="language-xml">&lt;!-- Thay đổi trong Artifacts.xml --&gt;
+&lt;Artifact ID="13071"&gt;
+    &lt;TeleportDelay&gt;1&lt;/TeleportDelay&gt; &lt;!-- Cũ: 1.3 --&gt;
+    &lt;InteractionOffTime&gt;1.5&lt;/InteractionOffTime&gt; &lt;!-- Cũ: 1.3 --&gt;
+&lt;/Artifact&gt;</code></pre>
+                    </div>
+                </div>
+
+                <div class="artifact-item">
+                    <img src="assets/Artifact_Icon_12040.png" class="artifact-icon" alt="Corrupted Holy Grail">
+                    <div class="artifact-detail">
+                        <h3>Chén Thánh Tha Hóa (Root ID: 12040)</h3>
+                        <p class="artifact-desc">Bổ sung trường dữ liệu <span class="data-tag">TopUnitsTier</span> với giá trị <strong>5</strong>, mở rộng phạm vi kích hoạt cho Tướng bậc Vàng.</p>
+                        <pre><code class="language-xml">&lt;!-- Thay đổi trong Artifacts.xml --&gt;
+&lt;Artifact ID="12041"&gt;
+    &lt;TopUnitsTier&gt;5&lt;/TopUnitsTier&gt; &lt;!-- Cũ: None --&gt;
+&lt;/Artifact&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="others">
+            <h2>
+                <img src="assets/Grand_Arena_Icon.png" class="title-icon" alt="Other Updates">
+                Cân Bằng Boss Clan Raid & Bảo Cụ
+            </h2>
+            <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 0.95rem;">Ghi nhận các sửa đổi chỉ số Boss và vật phẩm đặc biệt giữa hai bản vá:</p>
+            
+            <h3 style="margin-bottom: 8px; font-size: 1.1rem; font-weight: 600;">1. Nerf Mạnh Sứ Đồ Pháp Sư (Boss Clan Raid - ID: 42400)</h3>
+            <p style="margin-bottom: 12px; font-size: 0.95rem;">Boss giảm tần suất đánh và thời gian duy trì hiệu ứng bất lợi lên người chơi:</p>
+            <table class="table-stats">
+                <tr>
+                    <th>Chỉ Số / Cơ Chế</th>
+                    <th>Cũ (06_16)</th>
+                    <th>Mới (06_26)</th>
+                </tr>
+                <tr>
+                    <td>Giãn cách đòn đánh (AttackInterval)</td>
+                    <td class="old-value">1.0s</td>
+                    <td class="new-value">2.0s (Nerf)</td>
+                </tr>
+                <tr>
+                    <td>Thời gian duy trì [Lõi Mana] (BuffTime)</td>
+                    <td class="old-value">20s</td>
+                    <td class="new-value">10s (Nerf)</td>
+                </tr>
+            </table>
+            <pre><code class="language-xml">&lt;!-- Cấu hình điều chỉnh Boss (Units.xml) --&gt;
+&lt;Unit ID="42400"&gt;
+    &lt;AttackInterval&gt;2&lt;/AttackInterval&gt; &lt;!-- Cũ: 1 --&gt;
+    &lt;BuffTime&gt;10&lt;/BuffTime&gt; &lt;!-- Cũ: 20 --&gt;
+&lt;/Unit&gt;</code></pre>
+
+            <h3 style="margin-bottom: 8px; font-size: 1.1rem; font-weight: 600; margin-top: 24px;">2. Cập Nhật Bảo Cụ Đặc Biệt (Treasures.xml)</h3>
+            <ul>
+                <li><span class="highlight-bold">Bảo cụ Xung Động Đỏ Thẫm (Crimson Urge - ID 30039):</span> Cập nhật thêm tướng đề xuất sử dụng là <strong>Alter Neria (ID: 10780)</strong>.</li>
+            </ul>
+
+            <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; background: #fafafa; margin-top: 16px; margin-bottom: 24px; display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex-shrink: 0; width: 140px; text-align: center;">
+                    <img src="assets/TreasureIllust_30040.png" style="width: 120px; height: 120px; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover; box-shadow: 0 4px 6px rgba(0,0,0,0.05);" alt="Vô Ảnh Ilust">
+                    <div style="font-size: 0.8rem; font-weight: 600; margin-top: 8px; color: var(--text-main);">Bảo Cụ: Vô Ảnh</div>
+                    <div style="font-size: 0.75rem; color: #6366f1; font-weight: 500;">(ID: 30040)</div>
+                </div>
+                <div style="flex-grow: 1; min-width: 250px;">
+                    <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">Bảo Cụ Mới: Vô Ảnh (Thanh Kiếm Nhanh Nhất)</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; font-style: italic; line-height: 1.4;">"Người sở hữu thanh kiếm nhanh nhất ở Miền Đông. Khoảnh khắc hắn rút kiếm, thứ duy nhất bạn cảm nhận được chỉ là dấu ấn lạnh trên gáy."</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 8px;"><strong>Tướng khuyên dùng:</strong> <span class="data-tag">Zuo Bai (Tả Bối - ID: 10310)</span></p>
+                    <p style="font-size: 0.9rem; margin-bottom: 8px; font-weight: 600;">Cơ chế kỹ năng (Chém Bóng Đỏ - Cực Hạn):</p>
+                    <ul style="font-size: 0.85rem; padding-left: 20px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 4px;">
+                        <li><span class="highlight-bold">Kích hoạt gốc:</span> Mỗi khi xông tới (Dash) hoặc dịch chuyển tức thời, gắn dấu ấn <span class="data-tag">[Áp Đảo]</span> lên kẻ địch gần nhất. Khi gây sát thương lên mục tiêu có dấu này, chắc chắn gây thêm sát thương phép kỹ năng bằng <span class="data-tag">[2 * Cấp Bảo Cụ]% Lực Phép</span> và xóa dấu ấn.</li>
+                        <li><span class="highlight-bold">Cấp I:</span> Diệt địch có dấu [Áp Đảo] giúp sát thương bảo cụ bỏ qua <span class="data-tag">10% phòng thủ</span> mục tiêu (cộng dồn tối đa <span class="data-tag">50%</span>).</li>
+                        <li><span class="highlight-bold">Cấp II:</span> Ngoài sát thương phép, còn chắc chắn gây thêm sát thương kỹ năng vật lý bằng <span class="data-tag">15% Lực Tấn Công</span>.</li>
+                        <li><span class="highlight-bold">Cấp III:</span> Hạ gục 4 kẻ địch có dấu [Áp Đảo] giúp tăng <span class="data-tag">+200% Sát thương</span> và <span class="data-tag">+1500 Phòng thủ (Vật lý & Phép)</span> đến hết trận đấu.</li>
+                        <li><span class="highlight-bold">Cấp IV:</span> Gia tăng lượng sát thương kỹ năng vật lý cộng thêm lên thành <span class="data-tag">30% Lực Tấn Công</span>.</li>
+                        <li><span class="highlight-bold">Cấp V:</span> Lượng xuyên phòng thủ tăng mạnh lên thành <span class="data-tag">20% mỗi cộng dồn</span> (tối đa đạt <span class="data-tag">100% Xuyên Giáp/Kháng</span>).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <pre><code class="language-xml">&lt;!-- Trích lục cấu hình từ Treasures.xml &amp; TreasureBuffDatas.xml --&gt;
+&lt;Treasure ID="30040"&gt;
+    &lt;RecommendedUnitIds&gt;10310&lt;/RecommendedUnitIds&gt; &lt;!-- Zuo Bai --&gt;
+    &lt;BuffDataStartID&gt;3300400&lt;/BuffDataStartID&gt;
+    &lt;MinVersion&gt;171000&lt;/MinVersion&gt;
+&lt;/Treasure&gt;
+&lt;BuffData ID="3300403" Inherit="3300402"&gt;
+    &lt;!-- Mốc Cấp III: Buff 200% Sát thương và 1500 Thủ khi diệt 4 địch Áp Đảo --&gt;
+    &lt;OverStack StackName="Stack_30040_Killcount" Value="4" /&gt;
+    &lt;AddStat StatType="Damage" StatValueType="PerValue" /&gt;&lt;FixedValue&gt;200&lt;/FixedValue&gt;
+    &lt;AddStat StatType="Def" StatValueType="BaseValue" /&gt;&lt;FixedValue&gt;1500&lt;/FixedValue&gt;
+&lt;/BuffData&gt;</code></pre>
+
+            <h3 style="margin-bottom: 8px; font-size: 1.1rem; font-weight: 600; margin-top: 24px;">3. Chi Tiết Cấu Trúc Khác</h3>
+            <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 0.95rem;">Ghi nhận các thay đổi cấu trúc dữ liệu chính xác trên các file cấu hình hệ thống:</p>
+            
+            <!-- 3.1 Surprise Attendance -->
+            <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; background: #fafafa; margin-bottom: 24px;">
+                <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 12px; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+                    <span style="display: inline-block; width: 8px; height: 16px; background: var(--text-main); border-radius: 2px;"></span>
+                    Sự kiện đăng nhập kỷ niệm Anh Hùng Dị Chiều (ID: 3)
+                </h4>
+                <ul style="font-size: 0.9rem; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+                    <li>Thời gian diễn ra: Từ <strong>18/06/2026 đến 01/07/2026</strong>.</li>
+                    <li>Hình ảnh đại diện: Ảnh minh họa của <strong>Alter Neria (Illust ID: Unit_Illust_10780)</strong>.</li>
+                    <li>Phần thưởng tích lũy 7 ngày: Nhận tổng cộng <strong>20 Chìa Khóa Thứ Nguyên</strong> (Key ID: 70000).</li>
+                    <li>Phần thưởng điểm danh liên tục: <strong>100,000 Vàng</strong>.</li>
+                </ul>
+            </div>
+
+            <!-- 3.2 Colosseum -->
+            <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; background: #fafafa; margin-bottom: 24px;">
+                <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 12px; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+                    <span style="display: inline-block; width: 8px; height: 16px; background: var(--text-main); border-radius: 2px;"></span>
+                    Điều Chỉnh Bể Chủ Đề Đấu Trường Đấu Sĩ (ColosseumSettings.xml)
+                </h4>
+                <img src="assets/Colosseum_Castle.png" style="width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 16px; display: block;" alt="Colosseum Castle Banner">
+                <p style="font-size: 0.9rem; margin-bottom: 12px;">Thay đổi danh sách chủ đề mùa giải hiện tại (<span class="data-tag">CurrentSeasonTheme</span>): Loại bỏ 2 chủ đề cũ và thay bằng 2 chủ đề mới.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 12px;">
+                    <!-- Theme 2 -->
+                    <div style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; text-align: center;">
+                        <img src="assets/Themes_Units_2.png" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--border-color); object-fit: cover; margin-bottom: 8px;" alt="Bandit Raid">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: #ef4444;">Chủ Đề 2 (Loại Bỏ)</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Tập Kích Băng Cướp!</div>
+                    </div>
+                    <!-- Theme 9 -->
+                    <div style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; text-align: center;">
+                        <img src="assets/Themes_Units_9.png" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--border-color); object-fit: cover; margin-bottom: 8px;" alt="Frost Tribe Raid">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: #ef4444;">Chủ Đề 9 (Loại Bỏ)</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Tập Kích Tộc Sương Giá!</div>
+                    </div>
+                    <!-- Theme 13 -->
+                    <div style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; text-align: center;">
+                        <img src="assets/Themes_Units_13.png" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--border-color); object-fit: cover; margin-bottom: 8px;" alt="East Army Raid">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: #22c55e;">Chủ Đề 13 (Thêm Mới)</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Tập Kích Đông Phương Quân!</div>
+                    </div>
+                    <!-- Theme 14 -->
+                    <div style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; text-align: center;">
+                        <img src="assets/Themes_Units_14.png" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--border-color); object-fit: cover; margin-bottom: 8px;" alt="Dragon Knight Raid">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: #22c55e;">Chủ Đề 14 (Thêm Mới)</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Tập Kích Hiệp Sĩ Rồng!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3.3 Grand Arena -->
+            <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; background: #fafafa; margin-bottom: 24px;">
+                <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 12px; color: var(--text-main); display: flex; align-items: center; gap: 10px;">
+                    <img src="assets/Grand_Arena_Icon.png" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;" alt="Grand Arena Icon">
+                    Thiết Lập Đợt Buff Đại Đấu Trường Mới (ArenaSettings.xml)
+                </h4>
+                <p style="font-size: 0.9rem; margin-bottom: 12px;">Bổ sung 2 cơ chế Buff Đại Đấu Trường mới dành riêng cho <strong>Mùa Giải 70</strong> (Season 70):</p>
+                <ul style="font-size: 0.85rem; padding-left: 20px; display: flex; flex-direction: column; gap: 12px;">
+                    <li>
+                        <span class="highlight-bold" style="color: #1d4ed8;">Kỳ 1 (SemiSeason 1):</span> Tăng mạnh khả năng chống chịu và né tránh cho các hệ/phe <strong>Unknown</strong> (Chưa rõ) &amp; <strong>Toughness</strong> (Kiên Cường).
+                        <ul style="margin-top: 6px; margin-bottom: 0; padding-left: 15px; display: flex; flex-direction: column; gap: 4px;">
+                            <li><span class="highlight-bold">Hiệu ứng 1 (WorldTrigger 10140):</span> Áp dụng cho mọi anh hùng: <strong>+100% Lượng chữa trị gây ra</strong> và <strong>-50% Xác suất bị xử tử</strong>.</li>
+                            <li><span class="highlight-bold">Hiệu ứng 2 (WorldTrigger 11090):</span> Áp dụng riêng cho các tướng mục tiêu (Unknown/Toughness): <strong>+15% Tỉ lệ né</strong> cho mỗi anh hùng mục tiêu đứng trên sân (tối đa 3 cộng dồn, đạt tối đa <strong>+45% Né tránh</strong>).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="highlight-bold" style="color: #b45309;">Kỳ 2 (SemiSeason 2):</span> Tập trung gia cố lá chắn tuyệt đối cho các hệ/phe <strong>North</strong> (Bắc quốc) &amp; <strong>None</strong> (Không).
+                        <ul style="margin-top: 6px; margin-bottom: 0; padding-left: 15px; display: flex; flex-direction: column; gap: 4px;">
+                            <li><span class="highlight-bold">Hiệu ứng 1 (WorldTrigger 10050):</span> Áp dụng riêng cho các tướng mục tiêu (North/None): <strong>Nhận thêm +5 Phòng thủ tuyệt đối</strong> khi bắt đầu chiến đấu.</li>
+                            <li><span class="highlight-bold">Hiệu ứng 2 (WorldTrigger 11080):</span> <strong>Không có hiệu ứng</strong> buff đối với các hệ/phe khác.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+        </section>
+
+    </div>
+
+</body>
+</html>

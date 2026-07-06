@@ -1,0 +1,770 @@
+<ColosseumRankTiers>
+
+	<ColosseumRankTier ID="10">
+		<NameComment>브론즈</NameComment>
+		<ReqScore>0</ReqScore>
+		<WinScore>300</WinScore>
+		<LoseScore>-70</LoseScore>
+		
+		<GameEndReward>
+			<GoldRewards>500,1000,2500</GoldRewards>
+			<HardModeTokenRewards>0,30,30</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>500,800,1700</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,36,72</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>8</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>15</BuildingLevelSum>
+		<FixArtifactOptionCount>0</FixArtifactOptionCount>
+		
+		<TierIcon>Tier_01</TierIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="100"/>
+    </RewardItems>				
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="11">
+		<NameComment>브론즈 1성</NameComment>
+		<ReqScore>100</ReqScore>
+		<WinScore>278</WinScore>
+		<LoseScore>-70</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>500,1000,2500</GoldRewards>
+			<HardModeTokenRewards>0,30,30</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>500,800,1700</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,36,72</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>8.5</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>15</BuildingLevelSum>
+		<FixArtifactOptionCount>0</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='Gold' Count='200' />
+		<TierIcon>Tier_01</TierIcon>
+		<StarIcon>Tier_01_01</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="100"/>
+    </RewardItems>				
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="12">
+		<NameComment>브론즈 2성</NameComment>
+		<ReqScore>200</ReqScore>
+		<WinScore>258</WinScore>
+		<LoseScore>-72</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>500,1000,2500</GoldRewards>
+			<HardModeTokenRewards>0,30,30</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>500,800,1700</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,36,72</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>9</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>16</BuildingLevelSum>
+		<FixArtifactOptionCount>0</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='SelectExp' Count='50' />
+		<TierIcon>Tier_01</TierIcon>
+		<StarIcon>Tier_01_02</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="100"/>
+    </RewardItems>				
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="13">
+		<NameComment>브론즈 3성</NameComment>
+		<ReqScore>300</ReqScore>
+		<WinScore>238</WinScore>
+		<LoseScore>-72</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>500,1000,2500</GoldRewards>
+			<HardModeTokenRewards>0,30,30</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>500,800,1700</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,36,72</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>9.5</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>16</BuildingLevelSum>
+		<FixArtifactOptionCount>0</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='Cash' Count='10' />
+		<TierIcon>Tier_01</TierIcon>
+		<StarIcon>Tier_01_03</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="100"/>
+    </RewardItems>		
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="20">
+		<NameComment>실버</NameComment>
+		<ReqScore>400</ReqScore>
+		<WinScore>218</WinScore>
+		<LoseScore>-74</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>650,1300,3250</GoldRewards>
+			<HardModeTokenRewards>0,40,40</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>650,1050,2200</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,48,96</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>10</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>17</BuildingLevelSum>
+		<FixArtifactOptionCount>0</FixArtifactOptionCount>
+
+		<Reward Type='BoxKey' ID='301' Count='2' />
+		<TierIcon>Tier_02</TierIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="300"/>
+    </RewardItems>		
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="21">
+		<NameComment>실버 1성</NameComment>
+		<ReqScore>500</ReqScore>
+		<WinScore>200</WinScore>
+		<LoseScore>-74</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>650,1300,3250</GoldRewards>
+			<HardModeTokenRewards>0,40,40</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>650,1050,2200</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,48,96</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>10.5</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>17</BuildingLevelSum>
+		<FixArtifactOptionCount>0</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='Gold' Count='300' />
+		<TierIcon>Tier_02</TierIcon>
+		<StarIcon>Tier_02_01</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="300"/>
+    </RewardItems>		
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="22">
+		<NameComment>실버 2성</NameComment>
+		<ReqScore>600</ReqScore>
+		<WinScore>182</WinScore>
+		<LoseScore>-76</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>650,1300,3250</GoldRewards>
+			<HardModeTokenRewards>0,40,40</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>650,1050,2200</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,48,96</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>11</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>18</BuildingLevelSum>
+		<FixArtifactOptionCount>0</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='SelectExp' Count='50' />
+		<TierIcon>Tier_02</TierIcon>
+		<StarIcon>Tier_02_02</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="300"/>
+    </RewardItems>		
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="23">
+		<NameComment>실버 3성</NameComment>
+		<ReqScore>700</ReqScore>
+		<WinScore>166</WinScore>
+		<LoseScore>-76</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>650,1300,3250</GoldRewards>
+			<HardModeTokenRewards>0,40,40</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>650,1050,2200</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,48,96</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>11.5</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>18</BuildingLevelSum>
+		<FixArtifactOptionCount>0</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='Cash' Count='15' />
+		<TierIcon>Tier_02</TierIcon>
+		<StarIcon>Tier_02_03</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="300"/>
+    </RewardItems>			
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="30">
+		<NameComment>골드</NameComment>
+		<ReqScore>800</ReqScore>
+		<WinScore>152</WinScore>
+		<LoseScore>-78</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>800,1600,4000</GoldRewards>
+			<HardModeTokenRewards>0,50,50</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>800,1100,2700</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,60,120</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>12</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>19</BuildingLevelSum>
+		<FixArtifactOptionCount>0</FixArtifactOptionCount>
+
+		<Reward Type='BoxKey' ID='302' Count='2' />
+		<TierIcon>Tier_03</TierIcon>
+	<RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="500"/>
+    </RewardItems>	
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="31">
+		<NameComment>골드 1성</NameComment>
+		<ReqScore>900</ReqScore>
+		<WinScore>139</WinScore>
+		<LoseScore>-78</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>800,1600,4000</GoldRewards>
+			<HardModeTokenRewards>0,50,50</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>800,1100,2700</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,60,120</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>12.5</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>19</BuildingLevelSum>
+		<FixArtifactOptionCount>1</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='Gold' Count='500' />
+		<TierIcon>Tier_03</TierIcon>
+		<StarIcon>Tier_03_01</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="500"/>
+    </RewardItems>			
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="32">
+		<NameComment>골드 2성</NameComment>
+		<ReqScore>1000</ReqScore>
+		<WinScore>126</WinScore>
+		<LoseScore>-80</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>800,1600,4000</GoldRewards>
+			<HardModeTokenRewards>0,50,50</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>800,1100,2700</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,60,120</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>13</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>20</BuildingLevelSum>
+		<FixArtifactOptionCount>1</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='SelectExp' Count='50' />
+		<TierIcon>Tier_03</TierIcon>
+		<StarIcon>Tier_03_02</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="500"/>
+    </RewardItems>			
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="33">
+		<NameComment>골드 3성</NameComment>
+		<ReqScore>1100</ReqScore>
+		<WinScore>120</WinScore>
+		<LoseScore>-80</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>800,1600,4000</GoldRewards>
+			<HardModeTokenRewards>0,50,50</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>800,1100,2700</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,60,120</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>13.5</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>21</BuildingLevelSum>
+		<FixArtifactOptionCount>1</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='Cash' Count='20' />
+		<TierIcon>Tier_03</TierIcon>
+		<StarIcon>Tier_03_03</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="500"/>
+    </RewardItems>					
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="40">
+		<NameComment>플래티넘</NameComment>
+		<ReqScore>1200</ReqScore>
+		<WinScore>114</WinScore>
+		<LoseScore>-80</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1100,2200,5500</GoldRewards>
+			<HardModeTokenRewards>0,60,60</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1100,1800,3900</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,72,144</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>14</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>22</BuildingLevelSum>
+		<FixArtifactOptionCount>2</FixArtifactOptionCount>
+
+		<Reward Type='BoxKey' ID='370' Count='5' />
+		<TierIcon>Tier_04</TierIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1000"/>
+    </RewardItems>					
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="41">
+		<NameComment>플래티넘 1성</NameComment>
+		<ReqScore>1300</ReqScore>
+		<WinScore>108</WinScore>
+		<LoseScore>-78</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1100,2200,5500</GoldRewards>
+			<HardModeTokenRewards>0,60,60</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1100,1800,3900</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,72,144</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>14.5</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>23</BuildingLevelSum>
+		<FixArtifactOptionCount>2</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='Gold' Count='800' />
+		<TierIcon>Tier_04</TierIcon>
+		<StarIcon>Tier_04_01</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1000"/>
+    </RewardItems>					
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="42">
+		<NameComment>플래티넘 2성</NameComment>
+		<ReqScore>1400</ReqScore>
+		<WinScore>104</WinScore>
+		<LoseScore>-76</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1100,2200,5500</GoldRewards>
+			<HardModeTokenRewards>0,60,60</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1100,1800,3900</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,72,144</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>15</ExpectCardLevel>
+		<PotentialCardCount>0</PotentialCardCount>
+		<BuildingLevelSum>24</BuildingLevelSum>
+		<FixArtifactOptionCount>2</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='InventoryItem' ID='3000' Count='10' />
+		<TierIcon>Tier_04</TierIcon>
+		<StarIcon>Tier_04_02</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1000"/>
+    </RewardItems>					
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="43">
+		<NameComment>플래티넘 3성</NameComment>
+		<ReqScore>1500</ReqScore>
+		<WinScore>100</WinScore>
+		<LoseScore>-74</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1100,2200,5500</GoldRewards>
+			<HardModeTokenRewards>0,60,60</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1100,1800,3900</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,72,144</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>15</ExpectCardLevel>
+		<PotentialCardCount>1</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>2</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='Cash' Count='25' />
+		<TierIcon>Tier_04</TierIcon>
+		<StarIcon>Tier_04_03</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1000"/>
+    </RewardItems>			
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="50">
+		<NameComment>다이아</NameComment>
+		<ReqScore>1600</ReqScore>
+		<WinScore>96</WinScore>
+		<LoseScore>-72</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1450,2900,7200</GoldRewards>
+			<HardModeTokenRewards>0,70,70</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1450,2450,5500</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,84,168</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>15.5</ExpectCardLevel>
+		<PotentialCardCount>2</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+
+		<Reward Type='BoxKey' ID='370' Count='5' />
+		<TierIcon>Tier_05</TierIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1500"/>
+    </RewardItems>			
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="51">
+		<NameComment>다이아 1성</NameComment>
+		<ReqScore>1700</ReqScore>
+		<WinScore>92</WinScore>
+		<LoseScore>-70</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1450,2900,7200</GoldRewards>
+			<HardModeTokenRewards>0,70,70</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1450,2450,5500</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,84,168</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>16</ExpectCardLevel>
+		<PotentialCardCount>2</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='Gold' Count='1000' />
+		<TierIcon>Tier_05</TierIcon>
+		<StarIcon>Tier_05_01</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1500"/>
+    </RewardItems>			
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="52">
+		<NameComment>다이아 2성</NameComment>
+		<ReqScore>1800</ReqScore>
+		<WinScore>88</WinScore>
+		<LoseScore>-68</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1450,2900,7200</GoldRewards>
+			<HardModeTokenRewards>0,70,70</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1450,2450,5500</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,84,168</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>16</ExpectCardLevel>
+		<PotentialCardCount>3</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='InventoryItem' ID='3000' Count='20' />
+		<TierIcon>Tier_05</TierIcon>
+		<StarIcon>Tier_05_02</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1500"/>
+    </RewardItems>			
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="53">
+		<NameComment>다이아 3성</NameComment>
+		<ReqScore>1900</ReqScore>
+		<WinScore>84</WinScore>
+		<LoseScore>-66</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1450,2900,7200</GoldRewards>
+			<HardModeTokenRewards>0,70,70</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1450,2450,5500</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,84,168</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>16</ExpectCardLevel>
+		<PotentialCardCount>4</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+		<Reward Type='Cash' Count='30' />
+		<TierIcon>Tier_05</TierIcon>
+		<StarIcon>Tier_05_03</StarIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1500"/>
+    </RewardItems>			
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="60">
+		<NameComment>킹</NameComment>
+		<ReqScore>2000</ReqScore>
+		<WinScore>80</WinScore>
+		<LoseScore>-64</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1750,3500,8750</GoldRewards>
+			<HardModeTokenRewards>0,80,80</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1750,3000,6650</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,96,192</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>17</ExpectCardLevel>
+		<PotentialCardCount>5</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+
+		<Reward Type='InventoryItem' ID='3200' Count='1' />
+		<TierIcon>Tier_06</TierIcon>
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="2000"/>
+    </RewardItems>			
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="61">
+		<NameComment>킹+</NameComment>
+		<ReqScore>2100</ReqScore>
+		<WinScore>74</WinScore>
+		<LoseScore>-62</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1750,3500,8750</GoldRewards>
+			<HardModeTokenRewards>0,80,80</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1750,3000,6650</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,96,192</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>18</ExpectCardLevel>
+		<PotentialCardCount>6</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+		<HideInRewardUI>true</HideInRewardUI>
+		<HideInRankRewardUI>true</HideInRankRewardUI>
+
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="2000"/>
+    </RewardItems>			
+
+		<TierIcon>Tier_06</TierIcon>
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="70">
+		<NameComment>갓(31~100위)</NameComment>
+		<ReqScore>2200</ReqScore>
+		<ReqRank>100</ReqRank>
+		<WinScore>62</WinScore>
+		<LoseScore>-60</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1750,3500,8750</GoldRewards>
+			<HardModeTokenRewards>0,80,80</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1750,3000,6650</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,96,192</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>20</ExpectCardLevel>
+		<PotentialCardCount>6</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+
+	    <RewardItems>
+            <RewardItem Type="Cash" Count="300"/>
+        </RewardItems>
+
+		<TierIcon>Tier_07</TierIcon>
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="71">
+		<NameComment>갓+(11~30위)</NameComment>
+		<ReqScore>2200</ReqScore>
+		<ReqRank>30</ReqRank>
+		<WinScore>62</WinScore>
+		<LoseScore>-60</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1750,3500,8750</GoldRewards>
+			<HardModeTokenRewards>0,80,80</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1750,3000,6650</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,96,192</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>20</ExpectCardLevel>
+		<PotentialCardCount>6</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+		<HideInRewardUI>true</HideInRewardUI>
+
+		<TierIcon>Tier_07</TierIcon>
+
+	    <RewardItems>
+            <RewardItem Type="Cash" Count="500"/>
+        </RewardItems>		
+		<HideInRewardUI>true</HideInRewardUI>
+
+	</ColosseumRankTier>	
+
+	<ColosseumRankTier ID="80">
+		<NameComment>킹갓(6~10위)</NameComment>
+		<ReqScore>2400</ReqScore>
+		<ReqRank>10</ReqRank>
+		<WinScore>56</WinScore>
+		<LoseScore>-60</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1750,3500,8750</GoldRewards>
+			<HardModeTokenRewards>0,80,80</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1750,3000,6650</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,96,192</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>20</ExpectCardLevel>
+		<PotentialCardCount>6</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+
+		<TierIcon>Tier_08</TierIcon>
+	    <RewardItems>
+            <RewardItem Type="Cash" Count="700"/>
+        </RewardItems>		
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="81">
+		<NameComment>킹갓(2~5위)</NameComment>
+		<ReqScore>2400</ReqScore>
+		<ReqRank>5</ReqRank>
+		<WinScore>56</WinScore>
+		<LoseScore>-60</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1750,3500,8750</GoldRewards>
+			<HardModeTokenRewards>0,80,80</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1750,3000,6650</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,96,192</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>20</ExpectCardLevel>
+		<PotentialCardCount>6</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+		<HideInRewardUI>true</HideInRewardUI>
+
+		<TierIcon>Tier_08</TierIcon>
+	    <RewardItems>
+            <RewardItem Type="Cash" Count="1000"/>
+        </RewardItems>
+	</ColosseumRankTier>
+
+	<ColosseumRankTier ID="82">
+		<NameComment>킹갓(1위)</NameComment>
+		<ReqScore>2400</ReqScore>
+		<ReqRank>1</ReqRank>
+		<WinScore>56</WinScore>
+		<LoseScore>-60</LoseScore>
+
+		<GameEndReward>
+			<GoldRewards>1750,3500,8750</GoldRewards>
+			<HardModeTokenRewards>0,80,80</HardModeTokenRewards>
+		</GameEndReward>
+		<GameEndReward Condition="BestClearedHardTheme" Value="61">
+			<GoldRewards>1750,3000,6650</GoldRewards>
+			<HardModeTokenRewards TokenLevel="2">0,96,192</HardModeTokenRewards>
+		</GameEndReward>
+
+		<ExpectCardLevel>20</ExpectCardLevel>
+		<PotentialCardCount>6</PotentialCardCount>
+		<BuildingLevelSum>25</BuildingLevelSum>
+		<FixArtifactOptionCount>3</FixArtifactOptionCount>
+		
+		<TierIcon>Tier_08</TierIcon>
+	    <RewardItems>
+            <RewardItem Type="Cash" Count="1500"/>
+        </RewardItems>
+		<HideInRewardUI>true</HideInRewardUI>
+	</ColosseumRankTier>	
+
+</ColosseumRankTiers>

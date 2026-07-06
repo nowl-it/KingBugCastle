@@ -1,0 +1,78 @@
+<TowerAccruedScoreRewards>
+	
+	<TowerAccruedScoreReward ID="1">
+		<ReqScore>50000</ReqScore>
+		<Reward Type='Gold' Count='2000'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="2">
+		<ReqScore>100000</ReqScore>
+		<Reward Type='SelectUnitExp' Count='30'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="3">
+		<ReqScore>150000</ReqScore>
+		<Reward Type='Gold' Count='2000'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="4">
+		<ReqScore>200000</ReqScore>
+		<Reward Type='SelectUnitExp' Count='30'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="5">
+		<ReqScore>300000</ReqScore>
+		<Reward Type='Key' ID="302" Count='1'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="6">
+		<ReqScore>400000</ReqScore>
+		<Reward Type='Gold' Count='2500'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="7">
+		<ReqScore>500000</ReqScore>
+		<Reward Type='SelectUnitExp' Count='40'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="8">
+		<ReqScore>600000</ReqScore>
+		<Reward Type='Gold' Count='2500'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="9">
+		<ReqScore>700000</ReqScore>
+		<Reward Type='SelectUnitExp' Count='40'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="10">
+		<ReqScore>850000</ReqScore>
+		<Reward Type='Key' ID="302" Count='1'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="11">
+		<ReqScore>1000000</ReqScore>
+		<Reward Type='Gold' Count='3000'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="12">
+		<ReqScore>1150000</ReqScore>
+		<Reward Type='SelectUnitExp' Count='50'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="13">
+		<ReqScore>1300000</ReqScore>
+		<Reward Type='Gold' Count='3000'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="14">
+		<ReqScore>1500000</ReqScore>
+		<Reward Type='SelectUnitExp' Count='50'/>
+	</TowerAccruedScoreReward>
+
+	<TowerAccruedScoreReward ID="15">
+		<ReqScore>1800000</ReqScore>
+		<Reward Type='Key' ID="302" Count='1'/>
+	</TowerAccruedScoreReward>
+	
+</TowerAccruedScoreRewards>

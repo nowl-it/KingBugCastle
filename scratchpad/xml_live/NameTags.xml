@@ -1,0 +1,504 @@
+<NameTags>
+	<!-- 기본 -->
+	<NameTag ID="10000">
+		<Name>기사단의 명찰</Name>
+		<Desc>명예로운 중부 기사단의 명찰</Desc>
+
+		<Type>None</Type>
+	</NameTag>
+
+	<!-- 시즌 명찰 > 현재 시즌 아이템 -->
+	<!-- 아레나 -->
+	<!--해당 ID 명찰은 아레나 티어 명찰을 보여줌-->
+	<NameTag ID="10001">
+		<Name>아레나 티어 명찰</Name>
+		<Type>PvPTier</Type>
+
+		<Prefab>NameTag_10000</Prefab>
+	</NameTag>
+	<NameTag ID="10100">
+		<Name>아레나 브론즈 명찰</Name>
+		<Desc>시즌 아레나 브론즈 명찰</Desc>
+
+		<Type>PvP</Type>
+		<Tier>1</Tier>
+	</NameTag>
+	<NameTag ID="10110">
+		<Name>아레나 실버 명찰</Name>
+		<Desc>시즌 아레나 실버 명찰</Desc>
+
+		<Type>PvP</Type>
+		<Tier>2</Tier>
+	</NameTag>
+	<NameTag ID="10120">
+		<Name>아레나 골드 명찰</Name>
+		<Desc>시즌 아레나 골드 명찰</Desc>
+
+		<Type>PvP</Type>
+		<Tier>3</Tier>
+	</NameTag>
+	<NameTag ID="10130">
+		<Name>아레나 플래티넘 명찰</Name>
+		<Desc>시즌 아레나 플래티넘 명찰</Desc>
+
+		<Type>PvP</Type>
+		<Tier>4</Tier>
+	</NameTag>
+	<NameTag ID="10140">
+		<Name>아레나 다이아몬드 명찰</Name>
+		<Desc>시즌 아레나 다이아몬드 명찰</Desc>
+
+		<Type>PvP</Type>
+		<Tier>5</Tier>
+	</NameTag>
+	<NameTag ID="10150">
+		<Name>아레나 킹 명찰</Name>
+		<Desc>시즌 아레나 킹 명찰</Desc>
+
+		<Type>PvP</Type>
+		<Tier>6</Tier>
+	</NameTag>
+	<NameTag ID="10160">
+		<Name>아레나 갓 명찰</Name>
+		<Desc>시즌 아레나 갓 명찰</Desc>
+
+		<Type>PvP</Type>
+		<Tier>7</Tier>
+	</NameTag>
+	<NameTag ID="10170">
+		<Name>아레나 킹갓 명찰</Name>
+		<Desc>시즌 아레나 킹갓 명찰</Desc>
+
+		<Type>PvP</Type>
+		<Tier>8</Tier>
+	</NameTag>
+	<!-- 시련의 탑 -->
+	<!--해당 ID 명찰은 시련의 탑 티어 명찰을 보여줌-->
+	<NameTag ID="10201">
+		<Name>시련의 탑 티어 명찰</Name>
+		<Type>TowerTier</Type>
+
+		<Prefab>NameTag_10000</Prefab>
+	</NameTag>
+	<NameTag ID="10200">
+		<Name>시련의 탑 브론즈 명찰</Name>
+		<Desc>시즌 시련의 탑 브론즈 명찰</Desc>
+
+		<Type>Tower</Type>
+		<Tier>1</Tier>
+	</NameTag>
+	<NameTag ID="10210">
+		<Name>시련의 탑 실버 명찰</Name>
+		<Desc>시즌 시련의 탑 실버 명찰</Desc>
+
+		<Type>Tower</Type>
+		<Tier>2</Tier>
+	</NameTag>
+	<NameTag ID="10220">
+		<Name>시련의 탑 골드 명찰</Name>
+		<Desc>시즌 시련의 탑 골드 명찰</Desc>
+
+		<Type>Tower</Type>
+		<Tier>3</Tier>
+	</NameTag>
+	<NameTag ID="10230">
+		<Name>시련의 탑 플래티넘 명찰</Name>
+		<Desc>시즌 시련의 탑 플래티넘 명찰</Desc>
+
+		<Type>Tower</Type>
+		<Tier>4</Tier>
+	</NameTag>
+	<NameTag ID="10240">
+		<Name>시련의 탑 다이아몬드 명찰</Name>
+		<Desc>시즌 시련의 탑 다이아몬드 명찰</Desc>
+
+		<Type>Tower</Type>
+		<Tier>5</Tier>
+	</NameTag>
+	<NameTag ID="10250">
+		<Name>시련의 탑 킹 명찰</Name>
+		<Desc>시즌 시련의 탑 킹 명찰</Desc>
+
+		<Type>Tower</Type>
+		<Tier>6</Tier>
+	</NameTag>
+	<NameTag ID="10260">
+		<Name>시련의 탑 갓 명찰</Name>
+		<Desc>시즌 시련의 탑 갓 명찰</Desc>
+
+		<Type>Tower</Type>
+		<Tier>7</Tier>
+	</NameTag>
+	<NameTag ID="10270">
+		<Name>시련의 탑 킹갓 명찰</Name>
+		<Desc>시즌 시련의 탑 킹갓 명찰</Desc>
+
+		<Type>Tower</Type>
+		<Tier>8</Tier>
+	</NameTag>
+	<!-- 격전 -->
+	<!--해당 ID 명찰은 격전 티어 명찰을 보여줌-->
+	<NameTag ID="10301">
+		<Name>격전 티어 명찰</Name>
+		<Type>ColosseumTier</Type>
+
+		<Prefab>NameTag_10000</Prefab>
+	</NameTag>
+	<NameTag ID="10300">
+		<Name>격전 브론즈 명찰</Name>
+		<Desc>시즌 격전 브론즈 명찰</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>1</Tier>
+	</NameTag>
+	<NameTag ID="10310">
+		<Name>격전 실버 명찰</Name>
+		<Desc>시즌 격전 실버 명찰</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>2</Tier>
+	</NameTag>
+	<NameTag ID="10320">
+		<Name>격전 골드 명찰</Name>
+		<Desc>시즌 격전 골드 명찰</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>3</Tier>
+	</NameTag>
+	<NameTag ID="10330">
+		<Name>격전 플래티넘 명찰</Name>
+		<Desc>시즌 격전 플래티넘 명찰</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>4</Tier>
+	</NameTag>
+	<NameTag ID="10340">
+		<Name>격전 다이아몬드 명찰</Name>
+		<Desc>시즌 격전 다이아몬드 명찰</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>5</Tier>
+	</NameTag>
+	<NameTag ID="10350">
+		<Name>격전 킹 명찰</Name>
+		<Desc>시즌 격전 킹 명찰</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>6</Tier>
+	</NameTag>
+	<NameTag ID="10360">
+		<Name>격전 갓 명찰</Name>
+		<Desc>시즌 격전 갓 명찰</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>7</Tier>
+	</NameTag>
+	<NameTag ID="10370">
+		<Name>격전 킹갓 명찰</Name>
+		<Desc>시즌 격전 킹갓 명찰</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>8</Tier>
+	</NameTag>
+	<!-- 명예 시즌 명찰 > 아레나 종료시 보상 아이템 -->
+	<!-- 아레나 -->
+	<NameTag ID="15100">
+		<Name>명예 아레나 브론즈 명찰</Name>
+		<Desc>명예 시즌 아레나 브론즈 명찰</Desc>
+
+		<Type>PvPReward</Type>
+		<Tier>1</Tier>
+	</NameTag>
+	<NameTag ID="15110">
+		<Name>명예 아레나 실버 명찰</Name>
+		<Desc>명예 시즌 아레나 실버 명찰</Desc>
+
+		<Type>PvPReward</Type>
+		<Tier>2</Tier>
+	</NameTag>
+	<NameTag ID="15120">
+		<Name>명예 아레나 골드 명찰</Name>
+		<Desc>명예 시즌 아레나 골드 명찰</Desc>
+
+		<Type>PvPReward</Type>
+		<Tier>3</Tier>
+	</NameTag>
+	<NameTag ID="15130">
+		<Name>명예 아레나 플래티넘 명찰</Name>
+		<Desc>명예 시즌 아레나 플래티넘 명찰</Desc>
+
+		<Type>PvPReward</Type>
+		<Tier>4</Tier>
+	</NameTag>
+	<NameTag ID="15140">
+		<Name>명예 아레나 다이아몬드 명찰</Name>
+		<Desc>명예 시즌 아레나 다이아몬드 명찰</Desc>
+
+		<Type>PvPReward</Type>
+		<Tier>5</Tier>
+	</NameTag>
+	<NameTag ID="15150">
+		<Name>명예 아레나 킹 명찰</Name>
+		<Desc>명예 시즌 아레나 킹 명찰</Desc>
+
+		<Type>PvPReward</Type>
+		<Tier>6</Tier>
+	</NameTag>
+	<NameTag ID="15160">
+		<Name>명예 아레나 갓 명찰</Name>
+		<Desc>명예 시즌 아레나 갓 명찰</Desc>
+
+		<Type>PvPReward</Type>
+		<Tier>7</Tier>
+	</NameTag>
+	<NameTag ID="15170">
+		<Name>명예 아레나 킹갓 명찰</Name>
+		<Desc>명예 시즌 아레나 킹갓 명찰</Desc>
+
+		<Type>PvPReward</Type>
+		<Tier>8</Tier>
+	</NameTag>
+	<!-- 시련의 탑 -->
+	<NameTag ID="15200">
+		<Name>명예 시련의 탑 브론즈 명찰</Name>
+		<Desc>명예 시즌 시련의 탑 브론즈 명찰</Desc>
+
+		<Type>TowerReward</Type>
+		<Tier>1</Tier>
+	</NameTag>
+	<NameTag ID="15210">
+		<Name>명예 시련의 탑 실버 명찰</Name>
+		<Desc>명예 시즌 시련의 탑 실버 명찰</Desc>
+
+		<Type>TowerReward</Type>
+		<Tier>2</Tier>
+	</NameTag>
+	<NameTag ID="15220">
+		<Name>명예 시련의 탑 골드 명찰</Name>
+		<Desc>명예 시즌 시련의 탑 골드 명찰</Desc>
+
+		<Type>TowerReward</Type>
+		<Tier>3</Tier>
+	</NameTag>
+	<NameTag ID="15230">
+		<Name>명예 시련의 탑 플래티넘 명찰</Name>
+		<Desc>명예 시즌 시련의 탑 플래티넘 명찰</Desc>
+
+		<Type>TowerReward</Type>
+		<Tier>4</Tier>
+	</NameTag>
+	<NameTag ID="15240">
+		<Name>명예 시련의 탑 다이아몬드 명찰</Name>
+		<Desc>명예 시즌 시련의 탑 다이아몬드 명찰</Desc>
+
+		<Type>TowerReward</Type>
+		<Tier>5</Tier>
+	</NameTag>
+	<NameTag ID="15250">
+		<Name>명예 시련의 탑 킹 명찰</Name>
+		<Desc>명예 시즌 시련의 탑 킹 명찰</Desc>
+
+		<Type>TowerReward</Type>
+		<Tier>6</Tier>
+	</NameTag>
+	<NameTag ID="15260">
+		<Name>명예 시련의 탑 갓 명찰</Name>
+		<Desc>명예 시즌 시련의 탑 갓 명찰</Desc>
+
+		<Type>TowerReward</Type>
+		<Tier>7</Tier>
+	</NameTag>
+	<NameTag ID="15270">
+		<Name>명예 시련의 탑 킹갓 명찰</Name>
+		<Desc>명예 시즌 시련의 탑 킹갓 명찰</Desc>
+
+		<Type>TowerReward</Type>
+		<Tier>8</Tier>
+	</NameTag>
+	<!-- 격전의 전장 -->
+	<NameTag ID="15300">
+		<Name>명예 격전의 전장 브론즈 명찰</Name>
+		<Desc>명예 시즌 격전의 전장 브론즈 명찰</Desc>
+
+		<Type>ColosseumReward</Type>
+		<Tier>1</Tier>
+	</NameTag>
+	<NameTag ID="15310">
+		<Name>명예 격전의 전장 실버 명찰</Name>
+		<Desc>명예 시즌 격전의 전장 실버 명찰</Desc>
+
+		<Type>ColosseumReward</Type>
+		<Tier>2</Tier>
+	</NameTag>
+	<NameTag ID="15320">
+		<Name>명예 격전의 전장 골드 명찰</Name>
+		<Desc>명예 시즌 격전의 전장 골드 명찰</Desc>
+
+		<Type>ColosseumReward</Type>
+		<Tier>3</Tier>
+	</NameTag>
+	<NameTag ID="15330">
+		<Name>명예 격전의 전장 플래티넘 명찰</Name>
+		<Desc>명예 시즌 격전의 전장 플래티넘 명찰</Desc>
+
+		<Type>ColosseumReward</Type>
+		<Tier>4</Tier>
+	</NameTag>
+	<NameTag ID="15340">
+		<Name>명예 격전의 전장 다이아몬드 명찰</Name>
+		<Desc>명예 시즌 격전의 전장 다이아몬드 명찰</Desc>
+
+		<Type>ColosseumReward</Type>
+		<Tier>5</Tier>
+	</NameTag>
+	<NameTag ID="15350">
+		<Name>명예 격전의 전장 킹 명찰</Name>
+		<Desc>명예 시즌 격전의 전장 킹 명찰</Desc>
+
+		<Type>ColosseumReward</Type>
+		<Tier>6</Tier>
+	</NameTag>
+	<NameTag ID="15360">
+		<Name>명예 격전의 전장 갓 명찰</Name>
+		<Desc>명예 시즌 격전의 전장 갓 명찰</Desc>
+
+		<Type>ColosseumReward</Type>
+		<Tier>7</Tier>
+	</NameTag>
+	<NameTag ID="15370">
+		<Name>명예 격전의 전장 킹갓 명찰</Name>
+		<Desc>명예 시즌 격전의 전장 킹갓 명찰</Desc>
+
+		<Type>ColosseumReward</Type>
+		<Tier>8</Tier>
+	</NameTag>
+	<!-- 업적 -->
+	<NameTag ID="20000">
+		<Name>40레벨 프로필 테두리</Name>
+		<Desc>성 레벨 40 달성 프로필 테두리</Desc>
+		<Type>Level</Type>
+		<Tier>1</Tier>
+	</NameTag>
+	<NameTag ID="20010">
+		<Name>60레벨 프로필 테두리</Name>
+		<Desc>성 레벨 60 달성 프로필 테두리</Desc>
+		<Type>Level</Type>
+		<Tier>2</Tier>
+	</NameTag>
+	<NameTag ID="20020">
+		<Name>80레벨 프로필 테두리</Name>
+		<Desc>성 레벨 80 달성 프로필 테두리</Desc>
+		<Type>Level</Type>
+		<Tier>3</Tier>
+	</NameTag>
+	<NameTag ID="20030">
+		<Name>100레벨 프로필 테두리</Name>
+		<Desc>성 레벨 100 달성 프로필 테두리</Desc>
+		<Type>Level</Type>
+		<Tier>4</Tier>
+	</NameTag>
+
+<!--상품-->
+	<NameTag ID="40000">
+		<FlagName>빛의 여신의 테두리</FlagName>
+		<Prefab>NameTag_40000</Prefab>
+		<Sprite>Frame_40000[Frame_40000_0]</Sprite>
+		<Desc>빛의 여신의 가호가 깃든 테두리</Desc>
+		<Type>Reward</Type>
+		<MinVersion>364</MinVersion>
+	</NameTag>
+	<NameTag ID="40010">
+		<FlagName>번개의 신의 테두리</FlagName>
+		<Prefab>NameTag_40010</Prefab>
+		<Sprite>Frame_40010[Frame_40010_0]</Sprite>
+		<Desc>번개의 신의 가호가 깃든 테두리</Desc>
+		<Type>Reward</Type>
+		<MinVersion>421</MinVersion>
+	</NameTag>
+	<NameTag ID="40020">
+		<FlagName>종말의 여의 신의 테두리</FlagName>
+		<Prefab>NameTag_40020</Prefab>
+		<Sprite>Frame_40020[Frame_40020_0]</Sprite>
+		<Desc>종말의 여신의 가호가 깃든 테두리</Desc>
+		<Type>Reward</Type>
+		<MinVersion>515</MinVersion>
+	</NameTag>
+	<NameTag ID="40030">
+		<FlagName>달의 여신의 테두리</FlagName>
+		<Prefab>NameTag_40030</Prefab>
+		<Sprite>Frame_40030[Frame_40030_0]</Sprite>
+		<Desc>달의 여신의 가호가 깃든 테두리</Desc>
+		<Type>Reward</Type>
+		<MinVersion>515</MinVersion>
+	</NameTag>
+	<NameTag ID="40040">
+		<FlagName>창조의 여신의 테두리</FlagName>
+		<Prefab>NameTag_40040</Prefab>
+		<Sprite>Frame_40040[Frame_40040_0]</Sprite>
+		<Desc>창조의 여신의 가호가 깃든 테두리</Desc>
+		<Type>Reward</Type>
+		<MinVersion>155000</MinVersion>
+	</NameTag>
+	<NameTag ID="40050">
+		<FlagName>혼돈의 여신의 테두리</FlagName>
+		<Prefab>NameTag_40050</Prefab>
+		<Sprite>Frame_40050[Frame_40050_0]</Sprite>
+		<Desc>혼돈의 여신의 가호가 깃든 테두리</Desc>
+		<Type>Reward</Type>
+		<MinVersion>161100</MinVersion>
+	</NameTag>
+	<NameTag ID="40060">
+		<FlagName>지배의 여신의 테두리</FlagName>
+		<Prefab>NameTag_40060</Prefab>
+		<Sprite>Frame_40060[Frame_40060_0]</Sprite>
+		<Desc>지배의 여신의 가호가 깃든 테두리</Desc>
+		<Type>Reward</Type>
+		<MinVersion>168000</MinVersion>
+	</NameTag>
+	
+	
+<!-- 콜로세움 -->
+	<NameTag ID="50000">
+		<FlagName>격전 시작의 테두리</FlagName>
+		<Desc>격전 베타시즌을 함께한 사람들에게 주어진 테두리</Desc>
+		<Type>Reward</Type>
+		<Minversion>422</Minversion>
+	</NameTag>
+
+<!-- 콜라보 -->
+	<NameTag ID="60000">
+		<FlagName>엑시스 콜라보 테두리</FlagName>
+		<Desc>엑시스 콜라보 테두리</Desc>
+		<Type>Reward</Type>
+		<Minversion>152000</Minversion>
+	</NameTag>
+    
+<!-- 이벤트-->
+    <NameTag ID="70000">
+        <FlagName>차원의 균열 테마 테두리</FlagName>
+        <Desc>누적 결제 이벤트 보상</Desc>
+        <Type>Reward</Type>
+        <Minversion>160100</Minversion>
+    </NameTag>
+
+    <NameTag ID="70010">
+        <FlagName>5주년 투자왕 테두리</FlagName>
+        <Desc>5주년 주식 이벤트 보상, 1단계</Desc>
+        <Type>Reward</Type>
+        <Minversion>161100</Minversion>
+    </NameTag>
+
+    <NameTag ID="70020">
+        <FlagName>5주년 투자왕 테두리</FlagName>
+        <Desc>5주년 주식 이벤트 보상, 2단계</Desc>
+        <Type>Reward</Type>
+        <Minversion>161100</Minversion>
+    </NameTag>
+
+    <NameTag ID="70030">
+        <FlagName>누적 결제 이벤트 테두리</FlagName>
+        <Desc>누적 결제 이벤트 보상</Desc>
+        <Type>Reward</Type>
+        <Minversion>167100</Minversion>
+    </NameTag>	
+</NameTags>

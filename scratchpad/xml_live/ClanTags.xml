@@ -1,0 +1,155 @@
+<!--
+	0번대: 언어 (Type: Language)
+		언어는 Value를 Localize하지 않는다.
+
+	1000번대: 키워드 (Type: Keyword)
+-->
+
+<ClanTags>
+	<!-- 연맹 언어 -->
+	<ClanTag ID="1">
+		<Type>Language</Type>
+		<Value>한국어</Value>
+		<Locale>KR</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="2">
+		<Type>Language</Type>
+		<Value>English</Value>
+		<Locale>EN_US</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="3">
+		<Type>Language</Type>
+		<Value>日本語</Value>
+		<Locale>JA</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="4">
+		<Type>Language</Type>
+		<Value>Español</Value>
+		<Locale>ES_LA</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="5">
+		<Type>Language</Type>
+		<Value>Français</Value>
+		<Locale>FR</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="6">
+		<Type>Language</Type>
+		<Value>Deutsch</Value>
+		<Locale>DE</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="7">
+		<Type>Language</Type>
+		<Value>Português</Value>
+		<Locale>PT_BR</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="8">
+		<Type>Language</Type>
+		<Value>Русский</Value>
+		<Locale>RU</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="9">
+		<Type>Language</Type>
+		<Value>ภาษาไทย</Value>
+		<Locale>TH</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="10">
+		<Type>Language</Type>
+		<Value>Tiếng Việt</Value>
+		<Locale>VI</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="11">
+		<Type>Language</Type>
+		<Value>简体中文</Value>
+		<Locale>ZH_CH</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="12">
+		<Type>Language</Type>
+		<Value>繁體中文</Value>
+		<Locale>ZH_TW</Locale>
+	</ClanTag>
+	
+	<ClanTag ID="13">
+		<Type>Language</Type>
+		<Value>Bahasa</Value>
+	</ClanTag>
+	
+	<ClanTag ID="14">
+		<Type>Language</Type>
+		<Value>Wikang Tagalog</Value>
+	</ClanTag>
+	
+	<ClanTag ID="15">
+		<Type>Language</Type>
+		<Value>हिन्दी</Value>
+		<Locale>AR</Locale>
+	</ClanTag>
+	
+	
+	<!-- 연맹 키워드 -->
+	<ClanTag ID="1001">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1001</Value>
+	</ClanTag>
+	
+	<ClanTag ID="1002">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1002</Value>
+	</ClanTag>
+	
+	<ClanTag ID="1003">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1003</Value>
+	</ClanTag>
+	
+	<ClanTag ID="1004">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1004</Value>
+	</ClanTag>
+	
+	<ClanTag ID="1005">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1005</Value>
+	</ClanTag>
+	
+	<ClanTag ID="1006">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1006</Value>
+	</ClanTag>
+	
+	<ClanTag ID="1007">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1007</Value>
+	</ClanTag>
+	
+	<ClanTag ID="1008">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1008</Value>
+	</ClanTag>
+	
+	<ClanTag ID="1009">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1009</Value>
+	</ClanTag>
+	
+	<ClanTag ID="1010">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1010</Value>
+	</ClanTag>
+	
+	<ClanTag ID="1011">
+		<Type>Keyword</Type>
+		<Value>ClanKeyword_1011</Value>
+	</ClanTag>
+	
+</ClanTags>

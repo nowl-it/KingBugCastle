@@ -1,0 +1,340 @@
+<Cutscenes>
+    <Cutscene ID="10000">
+        <Title>RogueLike</Title>
+        <Name>StoryName_1</Name>
+        <LockedAlert>StoryUnlockCondition_1</LockedAlert>
+        
+        <UIBackGroundSprite>RogueLike_Title</UIBackGroundSprite>
+        <UIMainSprite>RogueLike_Unit</UIMainSprite>
+        
+        <Characters>
+            <Character Name="Amet" NameKey="UnitName_79902" Portrait="NPC_000" PortColor="ad9073"/>
+            <Character Name="Aslyn" NameKey="UnitName_79903" Portrait="NPC_003" PortColor="ffcf84"/>
+            <Character Name="Evan" NameKey="UnitName_10030" Portrait="Portrait_003" PortColor="5672ba"/>
+            <Character Name="Bardrey" NameKey="UnitName_10090" Portrait="Portrait_009" PortColor="C3996E"/>
+            <Character Name="Alice" NameKey="UnitName_79900" Portrait="NPC_004" PortColor="e35547"/>
+            <Character Name="Saleed" NameKey="UnitName_79904" Portrait="NPC_005" PortColor="d14657"/>
+            <Character Name="Ren" NameKey="UnitName_10280" Portrait="Portrait_028" PortColor="ed5356"/>
+            <Character Name="Rossette" NameKey="UnitName_10240" Portrait="Portrait_024" PortColor="a73939"/>
+            <Character Name="Extra" NameKey="Cutscene_10000_Char_1" Portrait="NPC_007" PortColor="d14657"/>
+            <Character Name="Leonhardt" NameKey="UnitName_10020" Portrait="Portrait_002" PortColor="A66351"/>
+            <Character Name="Guilsus" NameKey="UnitName_79901" Portrait="NPC_002" PortColor="645050"/>
+            <Character Name="Zuobai" NameKey="UnitName_10310" Portrait="Portrait_031" PortColor="a7403e"/>
+            <Character Name="Haerang" NameKey="UnitName_10360" Portrait="Portrait_036" PortColor="456bb1"/>
+            <Character Name="Chungah" NameKey="UnitName_10260" Portrait="Portrait_026" PortColor="2ba996"/>
+            <Character Name="Jinju" NameKey="UnitName_10620" Portrait="Portrait_062" PortColor="e59947"/>
+            <Character Name="Hanla" NameKey="Cutscene_10000_Char_2" Portrait="NPC_009" PortColor="a7403e"/>
+            <Character Name="Suha" NameKey="Cutscene_10000_Char_3" Portrait="NPC_008" PortColor="456bb1"/>
+        </Characters>
+        
+        <Scripts>
+            <WaitForAnimation/>
+            <Dialogue Char="Amet">Cutscene_10000_10</Dialogue>
+            <WaitForAnimation/>
+            <Dialogue Char="Aslyn">Cutscene_10000_20</Dialogue>
+            <HideDialoguePanel/>
+            <WaitForAnimation/>
+            <Dialogue Char="Aslyn">Cutscene_10000_30</Dialogue>
+            <Dialogue Char="Evan">Cutscene_10000_40</Dialogue>
+            <HideDialoguePanel/>
+            
+            <WaitForAnimation/>
+            <Dialogue Char="Bardrey">Cutscene_10000_50</Dialogue>
+            <Dialogue Char="Alice">Cutscene_10000_60</Dialogue>
+            <WaitForAnimation/>
+            <Dialogue Char="Saleed">Cutscene_10000_70</Dialogue>
+            <WaitForAnimation/>
+            <Dialogue Char="Bardrey">Cutscene_10000_80</Dialogue>
+            <Dialogue Char="Saleed">Cutscene_10000_90</Dialogue>
+            <HideDialoguePanel/>
+
+            <WaitForAnimation/>
+            <Dialogue Char="Ren">Cutscene_10000_100</Dialogue>
+            <WaitForAnimation/>
+            <Dialogue Char="Rossette">Cutscene_10000_110</Dialogue>
+            <Dialogue Char="Ren">Cutscene_10000_120</Dialogue>
+            <Dialogue Char="Rossette">Cutscene_10000_130</Dialogue>
+            <HideDialoguePanel/>
+        
+            <WaitForAnimation/>
+            <Dialogue Char="Aslyn">Cutscene_10000_140</Dialogue>
+            <Dialogue Char="Amet">Cutscene_10000_150</Dialogue>
+            <Dialogue Char="Aslyn">Cutscene_10000_160</Dialogue>
+
+            <WaitForAnimation/>
+            <Dialogue Char="Extra">Cutscene_10000_170</Dialogue>
+            <Dialogue Char="Saleed">Cutscene_10000_180</Dialogue>
+            <Dialogue Char="Saleed">Cutscene_10000_190</Dialogue>
+
+            <WaitForAnimation/>
+            <Dialogue Char="Leonhardt">Cutscene_10000_200</Dialogue>
+            <Dialogue Char="Guilsus">Cutscene_10000_210</Dialogue>
+
+            <WaitForAnimation/>
+            <Dialogue Char="Zuobai">Cutscene_10000_220</Dialogue>
+            <WaitForAnimation/>
+            <Dialogue Char="Haerang">Cutscene_10000_230</Dialogue>
+            <Dialogue Char="Zuobai">Cutscene_10000_240</Dialogue>
+            <Dialogue Char="Chungah">Cutscene_10000_250</Dialogue>
+            <WaitForAnimation/>
+            <Dialogue Char="Jinju">Cutscene_10000_260</Dialogue>
+            <Dialogue Char="Hanla">Cutscene_10000_270</Dialogue>
+            <WaitForAnimation/>
+            <Dialogue Char="Suha">Cutscene_10000_280</Dialogue>
+            <WaitForAnimation/>
+            <Dialogue Char="Aslyn">Cutscene_10000_290</Dialogue>
+            <WaitForAnimation/>
+        </Scripts>
+    </Cutscene>
+    
+    <Cutscene ID="20000">
+        <Title>DimensionRift</Title>
+        <Name>StoryName_2</Name>
+        <LockedAlert>StoryUnlockCondition_2</LockedAlert>
+
+        <UIBackGroundSprite>RogueLike_Title_02</UIBackGroundSprite>
+        <UIMainSprite>RogueLike_Unit_02</UIMainSprite>
+    </Cutscene>
+
+    <Cutscene ID="20010">
+        <Title>DimensionRift</Title>
+        <Name>StoryName_3</Name>
+        <LockedAlert>StoryUnlockCondition_3</LockedAlert>
+       
+        <UIBackGroundSprite>RogueLike_Title_02</UIBackGroundSprite>
+        <UIMainSprite>RogueLike_Unit_02</UIMainSprite>
+    </Cutscene>
+
+     <Cutscene ID="20020">
+         <Title>AttackMode</Title>
+         <Name>StoryName_0</Name>
+         <LockedAlert>StoryUnlockCondition_0</LockedAlert>
+
+         <UIBackGroundSprite>Themes_Background_19</UIBackGroundSprite>
+         <UIMainSprite>Themes_Units_19</UIMainSprite>
+         
+         <Theme>19</Theme>
+         
+        <Characters>
+            <Character Name="Leonhardt" NameKey="UnitName_10020" Portrait="Portrait_10020" PortColor="5672ba"/>
+            <Character Name="Bahum" NameKey="Cutscene_20020_Char_1" Portrait="NPC_012" PortColor="5672ba"/>
+            <Character Name="Kalina" NameKey="UnitName_21850" Portrait="Portrait_21850" PortColor="5672ba"/>
+        </Characters>    
+         
+         <Scripts>
+             <WaitForAnimation/>
+             
+             <Dialogue Char="Leonhardt">CutScene_20020_10</Dialogue>
+             <HideDialoguePanel/>
+             <WaitForAnimation/>
+             
+             <Dialogue Char="Leonhardt">CutScene_20020_20</Dialogue>
+             <WaitForAnimation/>
+             
+             <Dialogue Char="Kalina">CutScene_20020_30</Dialogue>
+             <HideDialoguePanel/>
+             <WaitForAnimation/>
+             
+             <Dialogue Char="Leonhardt">CutScene_20020_40</Dialogue>
+             <HideDialoguePanel/>
+             <WaitForAnimation/>
+             
+             <Dialogue Char="Bahum">CutScene_20020_50</Dialogue>
+             <WaitForAnimation/>
+             
+             <Dialogue Char="Bahum">CutScene_20020_60</Dialogue>
+             <Dialogue Char="Bahum">CutScene_20020_70</Dialogue>
+             <HideDialoguePanel/>
+             <WaitForAnimation/>
+             
+             <Dialogue Char="Leonhardt">CutScene_20020_80</Dialogue>
+             <WaitForAnimation/>
+             
+             <Dialogue Char="Leonhardt">CutScene_20020_90</Dialogue>
+             <HideDialoguePanel/>
+             <WaitForAnimation/>
+         </Scripts>
+    </Cutscene>
+    
+    <Cutscene ID="1010100">
+
+        <Title>Story</Title>
+        <Name>CutsceneName_1010100</Name>
+        <LockedAlert>StoryUnlockCondition_3</LockedAlert>
+
+        <UIBackGroundSprite>StoryCutscen_Title_1010100</UIBackGroundSprite>
+        <UIMainSprite>StoryCutscen_Title_1010100</UIMainSprite>        
+
+        <Characters>
+            <Character Name="P_Mel" NameKey="UnitName_10210" Portrait="Portrait_021" PortColor="5672ba"/>
+            <Character Name="P_Granfa" NameKey="UnitName_10000001" Portrait="Portrait_100024" PortColor="5672ba"/>
+            <Character Name="P_Unknown" NameKey="UnitName_100016" Portrait="Portrait_061_Unknown" PortColor="5672ba"/>
+            <Character Name="P_Saras" NameKey="UnitName_70060" Portrait="Portrait_061_Cinematic" PortColor="5672ba"/>
+            <Character Name="P_Goblins_1" NameKey="CutsceneActorName_1010100_0" Portrait="Portrait_25000" PortColor="5672ba"/>
+            <Character Name="P_LonelyGril" NameKey="UnitName_100010" Portrait="Portrait_100014" PortColor="5672ba"/>                        
+        </Characters>    
+         
+         <Scripts>
+             <WaitForAnimation/>          
+             <Dialogue Char="P_Mel">Cutscene_1010100_10</Dialogue>
+             <HideDialoguePanel/>
+
+             <WaitForAnimation/> 
+             <Dialogue Char="P_Mel">Cutscene_1010100_20</Dialogue>
+             <Dialogue Char="P_LonelyGril">Cutscene_1010100_30</Dialogue>
+             <HideDialoguePanel/>    
+             
+             <WaitForAnimation/>
+             <Dialogue Char="P_Mel">Cutscene_1010100_40</Dialogue>
+             <HideDialoguePanel/>           
+
+             <WaitForAnimation/> 
+             <Dialogue Char="P_Mel">Cutscene_1010100_50</Dialogue>
+             <HideDialoguePanel/>  
+
+             <WaitForAnimation/>
+             <Dialogue Char="P_Mel">Cutscene_1010100_60</Dialogue>    
+             <Dialogue Char="P_Granfa">Cutscene_1010100_70</Dialogue>         
+             <Dialogue Char="P_Mel">Cutscene_1010100_80</Dialogue>   
+             <Dialogue Char="P_Granfa">Cutscene_1010100_90</Dialogue>     
+             <Dialogue Char="P_Mel">Cutscene_1010100_100</Dialogue>  
+             <Dialogue Char="P_Mel">Cutscene_1010100_110</Dialogue>
+             <Dialogue Char="P_Mel">Cutscene_1010100_120</Dialogue>  
+             <Dialogue Char="P_Granfa">Cutscene_1010100_130</Dialogue>
+             <Dialogue Char="P_Granfa">Cutscene_1010100_140</Dialogue> 
+             <Dialogue Char="P_Mel">Cutscene_1010100_150</Dialogue>             
+             <HideDialoguePanel/>           
+
+             <WaitForAnimation/>          
+             <Dialogue Char="P_Granfa">Cutscene_1010100_160</Dialogue>
+             <HideDialoguePanel/> 
+
+             <WaitForAnimation/>  
+             <Dialogue Char="P_Unknown">Cutscene_1010100_170</Dialogue>
+             <Dialogue Char="P_Unknown">Cutscene_1010100_180</Dialogue>
+             <Dialogue Char="P_Granfa">Cutscene_1010100_190</Dialogue>  
+             <Dialogue Char="P_Granfa">Cutscene_1010100_200</Dialogue>
+             <Dialogue Char="P_Unknown">Cutscene_1010100_210</Dialogue>
+             <Dialogue Char="P_Granfa">Cutscene_1010100_220</Dialogue>
+             <Dialogue Char="P_Granfa">Cutscene_1010100_230</Dialogue>    
+             <Dialogue Char="P_Unknown">Cutscene_1010100_240</Dialogue>
+             <HideDialoguePanel/>
+             
+             <WaitForAnimation/>  
+             <Dialogue Char="P_Granfa">Cutscene_1010100_250</Dialogue>
+             <Dialogue Char="P_Mel">Cutscene_1010100_260</Dialogue> 
+             <HideDialoguePanel/> 
+
+             <WaitForAnimation/>  
+             <Dialogue Char="P_Granfa">Cutscene_1010100_270</Dialogue>
+             <HideDialoguePanel/>
+
+             <WaitForAnimation/>
+             <Dialogue Char="P_Mel">Cutscene_1010100_280</Dialogue>
+             <Dialogue Char="P_Unknown">Cutscene_1010100_290</Dialogue>
+             <Dialogue Char="P_Unknown">Cutscene_1010100_300</Dialogue>
+             <HideDialoguePanel/>
+
+             <WaitForAnimation/>
+             <Dialogue Char="P_Unknown">Cutscene_1010100_310</Dialogue>
+             <HideDialoguePanel/> 
+
+             <WaitForAnimation/>
+             <Dialogue Char="P_Unknown">Cutscene_1010100_320</Dialogue>
+             <Dialogue Char="P_Mel">Cutscene_1010100_330</Dialogue>
+             <Dialogue Char="P_Unknown">Cutscene_1010100_340</Dialogue>
+             <Dialogue Char="P_Granfa">Cutscene_1010100_350</Dialogue>
+             <HideDialoguePanel/> 
+
+             <WaitForAnimation/>             
+             <Dialogue Char="P_Unknown">Cutscene_1010100_360</Dialogue>   
+             <Dialogue Char="P_Saras">Cutscene_1010100_370</Dialogue> 
+             <HideDialoguePanel/>
+
+             <WaitForAnimation/>
+             <Dialogue Char="P_Granfa">Cutscene_1010100_380</Dialogue>           
+             <Dialogue Char="P_Mel">Cutscene_1010100_390</Dialogue>
+             <HideDialoguePanel/>
+
+             <WaitForAnimation/>
+             <Dialogue Char="P_Mel">Cutscene_1010100_400</Dialogue>
+             <HideDialoguePanel/>
+             <WaitForAnimation/>
+         </Scripts>                        
+
+        <MinVersion>168000</MinVersion>
+    </Cutscene>
+
+    <Cutscene ID="1010101">
+
+        <Title>Story</Title>
+        <Name>CutsceneName_1010101</Name>
+        <LockedAlert>StoryUnlockCondition_3</LockedAlert>
+        
+        <UIBackGroundSprite>StoryCutscen_Title_1010101</UIBackGroundSprite>
+        <UIMainSprite>StoryCutscen_Title_1010101</UIMainSprite>         
+
+        <Characters>
+            <Character Name="P_Mel" NameKey="UnitName_10210" Portrait="Portrait_021" PortColor="5672ba"/>  
+        </Characters>    
+         
+         <Scripts>
+            <!-- 처음 -->
+             <WaitForAnimation/>          
+             <Dialogue Char="P_Mel">Cutscene_1010101_10</Dialogue>
+             <HideDialoguePanel/>
+
+             <WaitForAnimation/>          
+             <Dialogue Char="P_Mel">Cutscene_1010101_20</Dialogue>
+             <HideDialoguePanel/>
+
+             <WaitForAnimation/>   
+             <Dialogue Char="P_Mel">Cutscene_1010101_30</Dialogue>     
+             <HideDialoguePanel/>
+
+             <WaitForAnimation/>   
+             <Dialogue Char="P_Mel">Cutscene_1010101_40</Dialogue>                                
+             <HideDialoguePanel/>
+
+             <WaitForAnimation/>          
+             <Dialogue Char="P_Mel">Cutscene_1010101_50</Dialogue>
+             <HideDialoguePanel/>         
+
+            <!-- 사이드 씬 -->             
+
+             <WaitForAnimation/>          
+             <Dialogue Char="P_Mel">Cutscene_1010101_60</Dialogue>
+             <HideDialoguePanel/>  
+
+             <WaitForAnimation/>  
+             <Dialogue Char="P_Mel">Cutscene_1010101_70</Dialogue>
+             <HideDialoguePanel/>  
+
+             <WaitForAnimation/>     
+             <Dialogue Char="P_Mel">Cutscene_1010101_80</Dialogue>
+             <HideDialoguePanel/>     
+
+             <WaitForAnimation/>     
+             <Dialogue Char="P_Mel">Cutscene_1010101_90</Dialogue>
+             <Dialogue Char="P_Mel">Cutscene_1010101_100</Dialogue>
+             <HideDialoguePanel/>     
+
+            <!-- 빛 나오는 씬 -->
+             <WaitForAnimation/>     
+             <Dialogue Char="P_Mel">Cutscene_1010101_110</Dialogue>  
+             <HideDialoguePanel/>  
+
+             <WaitForAnimation/>    
+             <Dialogue Char="P_Mel">Cutscene_1010101_120</Dialogue>
+             <Dialogue Char="P_Mel">Cutscene_1010101_130</Dialogue>
+             <HideDialoguePanel/>  
+
+             <WaitForAnimation/>  
+             <Dialogue Char="P_Mel">Cutscene_1010101_140</Dialogue>                       
+             <HideDialoguePanel/>
+             <WaitForAnimation/>
+         </Scripts>    
+        
+        <MinVersion>168000</MinVersion>
+    </Cutscene>
+</Cutscenes>

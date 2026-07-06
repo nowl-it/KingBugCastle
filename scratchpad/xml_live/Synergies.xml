@@ -1,0 +1,32 @@
+<Synergies>
+    <!-- <Synergy ID="0">
+        <Name>기사단</Name>
+
+        <Unit>10010</Unit>
+        <Unit>10020</Unit>
+        <Unit>10030</Unit>
+
+        <HpPer>10</HpPer>
+        <Desc>기사단원들의 체력 +10%</Desc>
+    </Synergy>
+
+    <Synergy ID="1">
+        <Name>성직자</Name>
+
+        <Unit>10040</Unit>
+        <Unit>10060</Unit>
+
+        <MAtkPer>10</MAtkPer>
+        <Desc>마법사들의 주문력 +10%</Desc>
+    </Synergy>
+
+    <Synergy ID="2">
+        <Name>탱커</Name>
+
+        <Unit>10000</Unit>
+        <Unit>10020</Unit>
+
+        <ShieldPer>20</ShieldPer>
+        <Desc>전투시작시 탱커들의 체력의 20%만큼 방어막 생성</Desc>
+    </Synergy> -->
+</Synergies>

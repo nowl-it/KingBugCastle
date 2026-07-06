@@ -1,0 +1,413 @@
+<!-- xml 구조 : 노션 페이지(킹갓캐슬 -> 개발팀 -> 트리거 시스템) 참고 
+-->
+
+<Triggers>
+    <!-- 10000 ~ 습격 -->
+    
+    <Trigger ID="10000">
+        <NameComment>챕터 I-2 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="2" Difficulty="5"/>
+        </TriggerInfo>
+        
+        <Action>Package</Action>
+        
+        <ShopItemID>110000</ShopItemID>
+        
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="10010">
+        <NameComment>챕터 I-4 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="4" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110010</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="10020">
+        <NameComment>챕터 I-6 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="6" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110020</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="10030">
+        <NameComment>챕터 I-8 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="8" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110030</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="10040">
+        <NameComment>챕터 I-10 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="10" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110040</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="10050">
+        <NameComment>챕터 II-2 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="12" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110050</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="10060">
+        <NameComment>챕터 II-4 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="14" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110060</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="10070">
+        <NameComment>챕터 II-6 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="16" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110070</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="10080">
+        <NameComment>챕터 II-8 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="18" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110080</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="10090">
+        <NameComment>챕터 II-10 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="20" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110090</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="10100">
+        <NameComment>[잠식] 챕터 I-2 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="52" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110100</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+        
+        <Visible>false</Visible>
+    </Trigger>
+    <Trigger ID="10110">
+        <NameComment>[잠식] 챕터 I-4 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="54" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110110</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+        
+        <Visible>false</Visible>
+    </Trigger>
+    <Trigger ID="10120">
+        <NameComment>[잠식] 챕터 I-6 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="56" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110120</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+        
+        <Visible>false</Visible>
+    </Trigger>
+    <Trigger ID="10130">
+        <NameComment>[잠식] 챕터 I-8 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="58" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110130</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+
+        <Visible>false</Visible>
+    </Trigger>
+    <Trigger ID="10140">
+        <NameComment>[잠식] 챕터 I-10 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="60" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110140</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+
+        <Visible>false</Visible>
+    </Trigger>
+    <Trigger ID="10150">
+        <NameComment>[잠식] 챕터 II-2 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="62" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110150</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+
+        <Visible>false</Visible>
+    </Trigger>
+    <Trigger ID="10160">
+        <NameComment>[잠식] 챕터 II-4 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="64" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110160</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+
+        <Visible>false</Visible>
+    </Trigger>
+    <Trigger ID="10170">
+        <NameComment>[잠식] 챕터 II-6 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="66" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110170</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+
+        <Visible>false</Visible>
+    </Trigger>
+    <Trigger ID="10180">
+        <NameComment>[잠식] 챕터 II-8 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="68" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110180</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+
+        <Visible>false</Visible>
+    </Trigger>
+    <Trigger ID="10190">
+        <NameComment>[잠식] 챕터 II-10 킹 클리어 - 패키지</NameComment>
+        <TriggerInfo>
+            <ThemeClear Theme="70" Difficulty="5"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>110190</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+
+        <Visible>false</Visible>
+    </Trigger>
+    
+    <!-- 20000 ~ 유물 -->
+    
+    <!-- 30000 ~ 보구 -->
+    
+    <Trigger ID="30000">
+        <NameComment>특급 보구 획득 - 패키지</NameComment>
+        <TriggerInfo>
+            <AddTreasure Rarity="Special"/>
+        </TriggerInfo>
+        
+        <Action>Package</Action>
+        
+        <ShopItemID>130000</ShopItemID>
+        
+        <Repeat>Daily</Repeat>
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+
+    <!-- 40000 ~ 장신구 -->
+    
+    <Trigger ID="40000">
+        <NameComment>특급 장신구 획득 - 패키지</NameComment>
+        <TriggerInfo>
+            <AddAccessory Rarity="Special"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>140000</ShopItemID>
+
+        <Repeat>Daily</Repeat>
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+
+    <!-- 50000 ~ 균열 장비 -->
+    
+    <Trigger ID="50000">
+        <NameComment>특급 균열 장비 획득 - 패키지</NameComment>
+        <TriggerInfo>
+            <AddRiftWeapon Rarity="Special"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>150000</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="50010">
+        <NameComment>특급 균열 장비 강화(+20) - 패키지</NameComment>
+        <TriggerInfo>
+            <RiftWeaponUpgrade Rarity="Special" Level="20" Result="0"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>150010</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    <Trigger ID="50020">
+        <NameComment>특급 균열 장비 강화(+33) - 패키지</NameComment>
+        <TriggerInfo>
+            <RiftWeaponUpgrade Rarity="Special" Level="33" Result="0"/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>150020</ShopItemID>
+
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+
+    <!-- 70000 ~ 특정 기간 -->
+    
+    <Trigger ID="70000">
+        <NameComment>격주 토요일 - 패키지</NameComment>
+        <TriggerInfo>
+            <Login/>
+        </TriggerInfo>
+        
+        <ExecuteCondition>
+            <PlayerLevel Level="15" Compare="GreaterEqual"/>
+        </ExecuteCondition>
+
+        <Action>Package</Action>
+        
+        <ShopItemID>170000,170010,170020</ShopItemID>
+        <UntilAtFromStartOfDay>true</UntilAtFromStartOfDay>
+        
+        <ExecuteStartAt>20250913</ExecuteStartAt>
+        <ExecuteDayInterval>14</ExecuteDayInterval>
+        
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    
+    <Trigger ID="71000">
+        <NameComment>핫타임 중 일일 첫 로그인 - 패키지</NameComment>
+        <TriggerInfo>
+            <Login/>
+        </TriggerInfo>
+        
+        <ExecuteCondition>
+            <DuringHotTime/>
+        </ExecuteCondition>
+        
+        <Action>Package</Action>
+        
+        <ShopItemID>171000,171010</ShopItemID>
+        <UntilAtFromStartOfDay>true</UntilAtFromStartOfDay>
+        
+        <Repeat>Daily</Repeat>
+        <MaxTriggerCount>1</MaxTriggerCount>
+    </Trigger>
+    
+    <!-- 80000 ~ 재화 소모 -->
+    
+    <Trigger ID="80000">
+        <NameComment>일일 고기 소모(200개) - 패키지</NameComment>
+        <TriggerInfo>
+            <UseHeart/>
+        </TriggerInfo>
+        
+        <Action>Package</Action>
+        
+        <ShopItemID>180000</ShopItemID>
+        
+        <Repeat>Daily</Repeat>
+        <MaxTriggerCount>200</MaxTriggerCount>
+        <ReqTriggerCount>200</ReqTriggerCount>
+    </Trigger>
+    <Trigger ID="80010">
+        <NameComment>일일 고기 소모(400개) - 패키지</NameComment>
+        <TriggerInfo>
+            <UseHeart/>
+        </TriggerInfo>
+
+        <Action>Package</Action>
+
+        <ShopItemID>180010</ShopItemID>
+
+        <Repeat>Daily</Repeat>
+        <MaxTriggerCount>400</MaxTriggerCount>
+        <ReqTriggerCount>400</ReqTriggerCount>
+    </Trigger>
+</Triggers>

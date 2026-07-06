@@ -1,0 +1,43 @@
+<!-- ID 규칙
+	만의자리: 큰 범주에서 구분(아직 미정)
+	천, 백, 십의 자리: 인덱스 (000 ~ 999)
+	일의 자리: 예비 (0, 1, 2, ...)
+	
+	* 붙은 건 필수
+	1) Default (default: false)
+	2)* MinVersion (default: 999999)
+	3) ComingSoon (default: 999999)
+-->
+
+<TerritorySkins>
+	<TerritorySkin ID="10000">
+		<Comment>기본 스킨(중부)</Comment>
+		
+		<Default>true</Default>
+		<MinVersion>165000</MinVersion>
+	</TerritorySkin>
+
+	<TerritorySkin ID="10010">
+		<Comment>북부 스킨</Comment>
+		<ComingSoon>165000</ComingSoon>
+	</TerritorySkin>
+
+	<TerritorySkin ID="10020">
+		<Comment>서부 스킨</Comment>
+		<ComingSoon>165000</ComingSoon>
+	</TerritorySkin>
+	
+	<TerritorySkin ID="10030">
+		<Comment>동부 스킨</Comment>
+		<ComingSoon>165000</ComingSoon>
+		<Prefix>_01</Prefix>
+		<ShopItemId>3001</ShopItemId>
+	</TerritorySkin>
+
+	<TerritorySkin ID="10040">
+		<Comment>남부 스킨</Comment>
+		<MinVersion>165000</MinVersion>
+		<Prefix>_00</Prefix>
+		<ShopItemId>3000</ShopItemId>
+	</TerritorySkin>
+</TerritorySkins>

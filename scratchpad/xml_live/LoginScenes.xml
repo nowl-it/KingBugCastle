@@ -1,0 +1,250 @@
+<!-- ID 규칙 : 100xx
+xx = 시즌
+
+ex : 40시즌 - 10040
+ex : 40시즌 중 추가 - 100400, 100401, 100402......
+-->
+
+<!-- ID 규칙 : 200xx
+xx = 챕터
+
+ex : 챕터 13 - 20013, 잠식은 뒤에 0붙이기
+ex : 중간에 추가  - 200130, 200131,....
+-->
+
+<!-- ID 규칙 : 300xx (특별한 카테고리 없이 로그인 씬이 바뀔 경우)
+xx = 인덱스
+
+ -->
+
+<LoginScenes>
+    <LoginScene ID="1">
+        <Illust>Title</Illust>
+        <IllustOffsetX>-40</IllustOffsetX>
+        <IllustOffsetY>12</IllustOffsetY>
+        <IllustScale>0.88</IllustScale>
+        <EffectColor>50AAFF</EffectColor>
+        <BottomGradientColor>41A4F4</BottomGradientColor> 
+    </LoginScene>
+    
+    <LoginScene ID="2">
+        <Illust>Title_Story_1010100</Illust>
+        <IllustOffsetX>-40</IllustOffsetX>
+        <IllustOffsetY>12</IllustOffsetY>
+        <IllustScale>0.88</IllustScale>
+        <EffectColor>FFEFAD</EffectColor>
+        <BottomGradientColor>41A4F4</BottomGradientColor>
+    </LoginScene>
+    
+    
+    <LoginScene ID="10037">
+        <Illust>Unit_Illust_10390_04</Illust>
+        <IllustOffsetX>7</IllustOffsetX>
+        <IllustOffsetY>77</IllustOffsetY>
+        <IllustScale>1.1</IllustScale>
+        <EffectColor>73E0FF</EffectColor>
+        <BottomGradientColor>41A4F4</BottomGradientColor>
+    </LoginScene>
+    
+    <LoginScene ID="10038">
+        <Illust>Unit_Illust_10340_04</Illust>
+        <IllustOffsetX>-40</IllustOffsetX>
+        <IllustOffsetY>40</IllustOffsetY>
+        <IllustScale>1.1</IllustScale>
+        <EffectColor>FFD4B4</EffectColor>
+        <BottomGradientColor>FFD4B4</BottomGradientColor>
+    </LoginScene>
+
+    <LoginScene ID="10039">
+        <Illust>Unit_Illust_10430_04</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>50</IllustOffsetY>
+        <IllustRotation>-1</IllustRotation>
+        <IllustScale>1</IllustScale>
+        <EffectColor>CC4F55</EffectColor>
+        <BottomGradientColor>CC4F55</BottomGradientColor>
+    </LoginScene>
+    
+    <LoginScene ID="10040">
+        <Illust>Title_02</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>50</IllustOffsetY>
+        <IllustRotation>-1</IllustRotation>
+        <IllustScale>1</IllustScale>
+        <EffectColor>faffed</EffectColor>
+        <BottomGradientColor>faffed</BottomGradientColor>
+    </LoginScene>
+
+    <LoginScene ID="100400">
+        <Illust>Unit_Illust_10370_04</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>50</IllustOffsetY>
+        <IllustRotation>-1</IllustRotation>
+        <IllustScale>0.9</IllustScale>
+        <EffectColor>F9E1B0</EffectColor>
+        <BottomGradientColor>F9E1B0</BottomGradientColor>
+    </LoginScene>
+
+    <LoginScene ID="10041">
+        <Illust>Unit_Illust_10440_04</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>50</IllustOffsetY>
+        <IllustRotation>-1</IllustRotation>
+        <IllustScale>1.1</IllustScale>
+        <EffectColor>FFEBC9</EffectColor>
+        <BottomGradientColor>FFEBC9</BottomGradientColor>
+    </LoginScene>
+
+    <LoginScene ID="100410">
+        <Illust>Title_02</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>40</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>0.6</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+    
+    <LoginScene ID="10045">
+        <Illust>Title_Beach_Event</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>1</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+    
+    <LoginScene ID="10047">
+        <Illust>Title_BloodMoon_Event</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>1</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+    
+    <LoginScene ID="10052">
+        <Illust>Title_East_Martial_Tournament_Event</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>1</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+
+    <LoginScene ID="20013">
+        <Illust>Title_Chapter_13</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>1</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+    
+    <LoginScene ID="200130">
+        <Illust>Title_Chapter_13_Hard</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>1</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+
+    <LoginScene ID="20014">
+        <Illust>Title_Chapter_14</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>0.7</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+    
+    <LoginScene ID="20015">
+        <Illust>Title_Chapter_15</Illust>
+        <IllustOffsetX>6</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>0.7</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+    
+    <LoginScene ID="200150">
+        <Illust>Title_Chapter_15_Hard</Illust>
+        <IllustOffsetX>6</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>0.7</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+    
+    <LoginScene ID="30000">
+        <Illust>Title_Holiday_Event</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>1</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+    
+    <LoginScene ID="30001">
+        <Illust>Title_Newyear_Event</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>0.75</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+    
+    <LoginScene ID="30002">
+        <Illust>Title_Flower_Event</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>0.75</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+
+    <LoginScene ID="30003">
+        <Illust>Title_Beach_Event_01</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>50</IllustOffsetY>
+        <IllustRotation>-1</IllustRotation>
+        <IllustScale>1.1</IllustScale>
+        <EffectColor>FFEBC9</EffectColor>
+        <BottomGradientColor>FFEBC9</BottomGradientColor>
+    </LoginScene>
+    
+    <LoginScene ID="30004">
+        <Illust>Title_Beach_Event_01</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <!-- <IllustRotation>-1</IllustRotation> -->
+        <IllustScale>1</IllustScale>
+        <!--<EffectColor>83c3f9</EffectColor>-->
+        <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
+</LoginScenes>

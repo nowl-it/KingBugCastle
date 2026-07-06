@@ -1,0 +1,1449 @@
+<!-- RiftWeaponBuffs.xml : 균열 장비 장착 효과 데이터
+
+    - 제단 옵션 -
+    <BuffData ID={buff id} Building={building indexes}/>
+    
+    building indexes : 제단 인덱스 (Buildings.xml id)
+    buff id : 제단 내 버프 고유 ID
+    
+    실제 RiftWeaponModel 에는 building Index - buff ID Pair 로 저장됨.
+    
+    - - - -
+    
+    - 장신구 옵션 -
+    <BuffData ID={buff id} AccessoryStat={stat indexes}/>
+    
+    stat indexes : 스탯 인덱스
+    buff id : 제단 내 버프 고유 ID
+    
+    실제 RiftWeaponModel 에는 building Index - buff ID Pair 로 저장됨.
+    
+    1000~ : 물리 치명타 확률 및 물리 치명타 피해량
+    2000~ : 마법 치명타 확률 및 마법 치명타 피해량
+    3000~: 수호
+    4000~ : 위협
+    5000~ : 특수 피해량
+    6000~ : 물리 방어력 및 마법 방어력
+    
+    BuffContent Values
+    - RiftWeaponAccessoryStat : x를 초과하는 장신구의 대상 스탯 합의 y 당 계수
+        StatTypes : 검사할 스탯 타입 배열
+        Over : x를 초과하는 <- x 지정
+        Bound : 스탯 합의 y 당 <- y 지정
+        LevelValueIdx : RiftWeaponConstants.xml AccessoryOptionSlotLevelValue StatIdx
+    
+    - - - -
+    
+ -->
+
+<RiftWeaponBuffs>
+    <BuffData ID="0" Building="-1,0,1,2,5,6,7,8">
+        <Comment>추가 공격력 +x%</Comment>
+        
+        <Sprite>PotentialIcon_01</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="Atk" StatValueType="PerValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>4</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="10" Building="-1,0,1,4,5,6,8">
+        <Comment>추가 주문력 +x%</Comment>
+
+        <Sprite>PotentialIcon_02</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="MAtk" StatValueType="PerValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>6</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="20" Building="-1,0,1,2,4,5,8">
+        <Comment>추가 공격속도 +x%</Comment>
+
+        <Sprite>PotentialIcon_06</Sprite>
+
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="AttackSpeed" StatValueType="PerValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>5</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="30" Building="-1,0,3,5,7,8">
+        <Comment>주가 체력 +x%</Comment>
+
+        <Sprite>PotentialIcon_03</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="Hp" StatValueType="PerValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>4</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="40" Building="-1,0,3,8">
+        <Comment>수호 +x</Comment>
+
+        <Sprite>PotentialIcon_32</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="DefDen" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>0.7</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="50" Building="-1,0,4,6">
+        <Comment>위협 +x</Comment>
+
+        <Sprite>PotentialIcon_26</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="DefPen" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>0.7</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="60" Building="1,4,8">
+        <Comment>일반 공격 시 마나 충전 +x</Comment>
+
+        <Sprite>PotentialIcon_09</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="AttackMana" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio RoundDigits="0">0.5000001</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="70" Building="2">
+        <Comment>물리 치명타 확률 +x%</Comment>
+
+        <Sprite>PotentialIcon_36</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="CriticalProb" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>1</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="80" Building="4">
+        <Comment>주문 치명타 확률 +x%</Comment>
+
+        <Sprite>PotentialIcon_37</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="MCriticalProb" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>1</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="90" Building="-1,2,6">
+        <Comment>물리 치명타 피해량 +x%</Comment>
+
+        <Sprite>PotentialIcon_36</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>1</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="100" Building="-1,4,6">
+        <Comment>주문 치명타 피해량 +x%</Comment>
+
+        <Sprite>PotentialIcon_37</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>1</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="110" Building="-1,1,6">
+        <Comment>특수 피해량 +x%</Comment>
+
+        <Sprite>PotentialIcon_38</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="SpecialDamageMul" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>1</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="120" Building="2,6,7">
+        <Comment>절대 방어 +x회</Comment>
+
+        <Sprite>PotentialIcon_22</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <BattleStart/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddSuperShield/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio RoundDigits="0">0.3000001</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="130" Building="1">
+        <Comment>스킬 사용 후 일반 피해 시 3명에게 x%의 특수 피해</Comment>
+
+        <Sprite>PotentialIcon_38</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <Bolt/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>2</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="140" Building="3,7,8">
+        <Comment>물리 방어력 +x</Comment>
+
+        <Sprite>PotentialIcon_39</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="Def" StatValueType="BaseValue" /> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>20</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="150" Building="3,7,8">
+        <Comment>주문 방어력 +x</Comment>
+
+        <Sprite>PotentialIcon_40</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="MDef" StatValueType="BaseValue" /> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>20</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="160" Building="1,2,4">
+        <Comment>사거리 +x 증가</Comment>
+
+        <Sprite>PotentialIcon_05</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="Range" StatValueType="BaseValue" /> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio RoundDigits="0">0.2000001</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="170" Building="2,7">
+        <Comment>물리 흡혈 +x%</Comment>
+
+        <Sprite>PotentialIcon_25</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="Drain" StatValueType="BaseValue" /> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>1</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="180" Building="4,7">
+        <Comment>주문 흡혈 +x%</Comment>
+
+        <Sprite>PotentialIcon_25</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="MagicDrain" StatValueType="BaseValue" /> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>1.5</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="190" Building="-1,0,3,6,7">
+        <Comment>방어력 +x</Comment>
+
+        <Sprite>PotentialIcon_07</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="Def" StatValueType="BaseValue"/>
+                <AddStat StatType="MDef" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>10</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="200" Building="1,2">
+        <Comment>일반 피해 적중 시 2명에게 x%의 특수 피해</Comment>
+
+        <Sprite>PotentialIcon_38</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <ShadowAttack />
+            </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>1</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="210" Building="3">
+        <Comment>매 초 체력의 +x% 쉴드 생성</Comment>
+
+        <Sprite>PotentialIcon_16</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddCustomBuff Key="AutoShieldHealPer" />
+            </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>0.5</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="220" Building="0,3">
+        <Comment>피격 시 마나 +x</Comment>
+
+        <Sprite>PotentialIcon_09</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="DamagedMana" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio RoundDigits="0">0.3000001</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="230" Building="3">
+        <Comment>받는 피해량 및 주는 피해량 x% 감소</Comment>
+
+        <Sprite>PotentialIcon_18</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/> </BuffContents>
+            <Values> <RiftWeaponOption_230_0/> </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="Damage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/> </BuffContents>
+            <Values> <RiftWeaponOption_230_0/> </Values>
+            
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="240" Building="5">
+        <Comment>장착 장비 티어 합 1 당 주는 피해량 +x%</Comment>
+
+        <Sprite>PotentialIcon_10</Sprite>
+        
+        <DescParams>
+            <CalculatedDescValue>0</CalculatedDescValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="Damage" StatValueType="TotalPerValue" HaveToBind="true"/> </BuffContents>
+            <Values> <RiftWeaponOption_240_0/> </Values>
+        </BuffOptions>
+        
+        <BuffOptions>
+            <IsDescOption>true</IsDescOption>
+            <Values> <RiftWeaponOption_240_0_Base/> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="250" Building="5">
+        <Comment>장착 장비 티어 합 1 당 받는 피해량 -x%</Comment>
+
+        <Sprite>PotentialIcon_18</Sprite>        
+
+        <DescParams>
+            <CalculatedDescValue>0</CalculatedDescValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" HaveToBind="true" IgnoreCCRatio="true"/> </BuffContents>
+            <Values> <RiftWeaponOption_250_0/> </Values>
+        </BuffOptions>
+        
+        <BuffOptions>
+            <IsDescOption>true</IsDescOption>
+            <Values> <RiftWeaponOption_250_0_Base/> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="260" Building="5">
+        <Comment>영웅 성급 당 주는 피해량 +x%</Comment>
+
+        <Sprite>PotentialIcon_10</Sprite>
+        
+        <DescParams>
+            <CalculatedDescValue>0</CalculatedDescValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="Damage" StatValueType="TotalPerValue" HaveToBind="true"/> </BuffContents>
+            <Values> <RiftWeaponOption_260_0/> </Values>
+        </BuffOptions>
+        
+        <BuffOptions>
+            <IsDescOption>true</IsDescOption>
+            <Values> <RiftWeaponOption_260_0_Base/> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="270" Building="5">
+        <Comment>영웅 성급 당 받는 피해량 -x%</Comment>
+
+        <Sprite>PotentialIcon_18</Sprite>
+        
+        <DescParams>
+            <CalculatedDescValue>0</CalculatedDescValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" HaveToBind="true" IgnoreCCRatio="true"/> </BuffContents>
+            <Values> <RiftWeaponOption_270_0/> </Values>
+        </BuffOptions>
+        
+        <BuffOptions>
+            <IsDescOption>true</IsDescOption>
+            <Values> <RiftWeaponOption_270_0_Base/> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="280" Building="1" Tier="1">
+        <Comment>처음 및 매 5회째 일반 피해의 주는 피해량 +x%</Comment>
+
+        <Sprite>PotentialIcon_10</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddCustomBuff Key="AddFirstAndEveryFifthAtkPer" /> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>4</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="290" Building="7" Tier="1">
+        <Comment>사망 시 x%의 체력 / 마나로 부활</Comment>
+        <Comment>부활 이후 최종 받는 피해량 -y% (Lv. 13 이상)</Comment>
+
+        <Sprite>PotentialIcon_42</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <BattleStart/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddReviveCount ReviveCount="1" /> </BuffContents>
+            <Values> <RiftWeaponOption_290_0/> </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="291" Inherit="290">
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+            <CalculatedValue Mag="-1">1</CalculatedValue>
+        </DescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions> <BeforeDead/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/> </BuffContents>
+            <Values> <RiftWeaponOption_290_1/> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="300" Building="4" Tier="1">
+        <Comment>매 2번째 스킬 연속 2회 사용 (x% 피해)</Comment>
+
+        <Sprite>PotentialIcon_30</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddReUseSkillCount Bound="2"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>3</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="310" Building="2" Tier="1">
+        <Comment>공격 횟수 +1 (x% 피해)</Comment>
+
+        <Sprite>PotentialIcon_30</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddCustomBuff Key="AddAtkCountOneAndDamagePer"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>2</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="320" Building="0" Tier="1">
+        <Comment>기본 마나 충전 +x%</Comment>
+        <Comment>전투 시작 시 자신 및 세로 1칸 내에 있는 아군 공격 속도 +y% (Lv. 13 이상)</Comment>
+
+        <Sprite>PotentialIcon_04</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="BaseMana" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponOption_320_0/> </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="321" Inherit="320">
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+            <CalculatedValue>1</CalculatedValue>
+        </DescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions><BattleStart /></Conditions>
+            <Targets><Team /></Targets>
+            <RangeInfo>
+                <RangeType>Rect</RangeType>
+                <RangeX>1</RangeX>
+                <RangeY>0</RangeY>
+                <RangeStrategy>Random</RangeStrategy>
+            </RangeInfo>
+            <BuffContents><AddStat StatType="AttackSpeed" StatValueType="PerValue" HaveToBind="true"/></BuffContents>
+            <Values> <RiftWeaponOption_320_1/> </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+                <TileMove />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Field />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Rect</RangeType>
+                <RangeX>1</RangeX>
+                <RangeY>0</RangeY>
+                <RangeStrategy>Random</RangeStrategy>
+            </RangeInfo>
+
+            <BuffContents>
+                <ShowTileEffect Prefab="Fx_Item_40132a" />
+            </BuffContents>
+
+            <Values>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="330" Building="5" Tier="1">
+        <Comment>일반 공격 피해량 +x%</Comment>
+        <Comment>일반 피해 시 20% 확률로 y초간 기절 (Lv. 13 이상)</Comment>
+
+        <Sprite>PotentialIcon_10</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="AttackDamageMul" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>1</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="331" Inherit="330">
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+            <CalculatedValue>1</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Values> <FixedValue>40</FixedValue> </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddCustomBuff Key="AttackStunPer"/> </BuffContents>
+            <Values> <RiftWeaponOption_330_1/> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="340" Building="6" Tier="1">
+        <Comment>체력 x% 미만 적 처형</Comment>
+        <Comment>적 처치 시 최대 체력의 y% 회복 및 최대 체력 y%의 쉴드 획득 (Lv. 13 이상)</Comment>
+
+        <Sprite>PotentialIcon_33</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddStat StatType="Execution" StatValueType="BaseValue"/> </BuffContents>
+            <Values> <RiftWeaponOption_340_0/> </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="341" Inherit="340">
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+            <CalculatedValue>1</CalculatedValue>
+        </DescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions> <KillEnemy/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents> <AddCustomBuff Key="KillGoldBonus" /> </BuffContents>
+            <Values> <RiftWeaponOption_340_1/> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="350" Building="3" Tier="1">
+        <Comment>매 초 주변 x칸 내 적의 회복 효과를 1초간 y% 감소시키고 자신 최대 체력의 z% 주문 스킬 피해</Comment>
+
+        <Sprite>PotentialIcon_15</Sprite>
+        
+        <DescParams>
+            <CalculatedDescValue>0</CalculatedDescValue>
+            <Attribute Name="Time">./BuffOptions[1]/BuffContents/AddStat</Attribute>
+            <CalculatedValue Mag="-1">0</CalculatedValue>
+            <CalculatedValue>1</CalculatedValue>
+        </DescParams>
+        
+        <BuffOptions>
+            <CoolTime>1</CoolTime>
+            
+            <Conditions> <DuringBattle/> </Conditions>
+            <Targets> <Enemy/> </Targets>
+            <RangeInfo> <RangeType>Infinity</RangeType> </RangeInfo>
+            <BuffContents> <AddStat StatType="HealAdaptability" StatValueType="TotalPerValue" Time="1"/> </BuffContents>
+            <Values> <RiftWeaponOption_350_0/> </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <CoolTime>1</CoolTime>
+            
+            <Conditions> <DuringBattle/> </Conditions>
+            <Targets> <Enemy/> </Targets>
+            <RangeInfo>
+                <RangeType>Infinity</RangeType>
+            </RangeInfo>
+            <BuffContents> <DealDamage With="ExtraMagic" /> </BuffContents>
+            <Values> <RiftWeaponOption_350_1/> </Values>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions><Once /></Conditions>
+            <Targets><Self/></Targets>
+            <RangeInfo><RangeType>Self</RangeType></RangeInfo>
+            <BuffContents><ShowEffect /></BuffContents>
+            <Values></Values>
+            <Effect Type='Self'>
+                <Prefab>Item_007a</Prefab>
+                <CenterAlign>true</CenterAlign>
+                <ZLevel>Ground</ZLevel>
+                <Loop>true</Loop>
+            </Effect>
+        </BuffOptions>
+        
+        <BuffOptions>
+            <IsDescOption>true</IsDescOption>
+            <Values> <RiftWeaponOption_350_0_Desc/> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="360" Building="8" Tier="1">
+        <Comment>이로운 효과를 준 본인 제외 모든 아군의 마나 회복, ccRatio 부여</Comment>
+
+        <Sprite>PotentialIcon_06</Sprite>
+        
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+            <InnerText>./BuffOptions[1]/TargetCoolTime</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+            <TargetCoolTime>2</TargetCoolTime>
+            
+            <Conditions> <HandleDefDen/> </Conditions>
+            <Targets> <Default/> </Targets>
+            <RangeInfo> <RangeType>Infinity</RangeType> </RangeInfo>
+            <BuffContents> <ManaHeal ApplyFirstTick="true" /> </BuffContents>
+            <Values> <RiftWeaponOption_360_0/> </Values>
+        </BuffOptions>
+    </BuffData>
+    <BuffData ID="361" Inherit="360">
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+            <InnerText>./BuffOptions[1]/TargetCoolTime</InnerText>
+            <CalculatedDescValue>0</CalculatedDescValue>
+            <Attribute Name="Time">./BuffOptions[2]/BuffContents/AddStat</Attribute>
+            <InnerText>./BuffOptions[2]/TargetCoolTime</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+            <TargetCoolTime>2</TargetCoolTime>
+            
+            <Conditions> <HandleDefDen/> </Conditions>
+            <Targets> <Default/> </Targets>
+            <RangeInfo> <RangeType>Infinity</RangeType> </RangeInfo>
+            <BuffContents> <AddStat StatType="CCRatio" StatValueType="TotalPerValue" Time="2" IgnoreCCRatio="true"/> </BuffContents>
+            <Values> <RiftWeaponOption_360_1/> </Values>
+        </BuffOptions>
+
+        <BuffOptions>
+            <IsDescOption>true</IsDescOption>
+            <Values> <RiftWeaponOption_360_1_Desc/> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <!-- 물리 치명타 확률 및 물리 치명타 피해량 -->
+    <BuffData ID="1000" AccessoryStat="0" Tier="0">
+        <Comment>물리 치명타 피해량 +x%</Comment>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>10</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="1001" AccessoryStat="0" Tier="1">
+        <Comment>55% 초과하는 장신구의 (물리 치명타 피해량 + 확률) 20 당 물리 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="CriticalProb,CriticalDamageMul"
+                      Over="55" Bound="20" LevelValueIdx="1">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="1002" AccessoryStat="0" Tier="2">
+        <Comment>38,000 초과하는 장신구 장비 점수 1,500 당 물리 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore Over="38000" Bound="1500"
+                       LevelValueIdx="2">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="1003" AccessoryStat="0" Tier="3">
+        <Comment>38,000 초과하는 장신구 장비 점수 1,500 당 물리 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="CriticalProb,CriticalDamageMul"
+                                              Over="105" Bound="7" LevelValueIdx="3">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="1004" AccessoryStat="0" Tier="4">
+        <Comment>38,000 초과하는 장신구 장비 점수 1,500 당 물리 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore Over="42000" Bound="700"
+                                               LevelValueIdx="4">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="1005" AccessoryStat="0" Tier="5">
+        <Comment>38,000 초과하는 장신구 장비 점수 1,500 당 물리 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="CriticalProb,CriticalDamageMul"
+                                              Over="155" Bound="3" LevelValueIdx="5">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <!-- 주문 치명타 확률 및 주문 치명타 피해량 -->
+    <BuffData ID="2000" AccessoryStat="1" Tier="0">
+        <Comment>주문 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>10</RiftWeaponBuildingRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="2001" AccessoryStat="1" Tier="1">
+        <Comment>55% 초과하는 장신구의 (주문 치명타 피해량 + 확률) 20 당 주문 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="MCriticalProb,MCriticalDamageMul"
+                                              Over="55" Bound="20" LevelValueIdx="1">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="2002" AccessoryStat="1" Tier="2">
+        <Comment>38,000 초과하는 장신구 장비 점수 1,500 당 주문 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore Over="38000" Bound="1500"
+                                               LevelValueIdx="2">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="2003" AccessoryStat="1" Tier="3">
+        <Comment>38,000 초과하는 장신구 장비 점수 1,500 당 주문 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="MCriticalProb,MCriticalDamageMul"
+                                              Over="105" Bound="7" LevelValueIdx="3">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="2004" AccessoryStat="1" Tier="4">
+        <Comment>38,000 초과하는 장신구 장비 점수 1,500 당 주문 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore Over="42000" Bound="700"
+                                               LevelValueIdx="4">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="2005" AccessoryStat="1" Tier="5">
+        <Comment>38,000 초과하는 장신구 장비 점수 1,500 당 주문 치명타 피해량 +x%</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="MCriticalProb,MCriticalDamageMul"
+                                              Over="155" Bound="3" LevelValueIdx="5">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <!-- 수호 -->
+    <BuffData ID="3000" AccessoryStat="2" Tier="0">
+        <Comment>수호 +x</Comment>
+        
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefDen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryRatio LevelValueIdx="0">1</RiftWeaponAccessoryRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="3001" AccessoryStat="2" Tier="1">
+        <Comment>45 초과하는 장신구 수호 20당 수호 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefDen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseDefDen"
+                        Over="45" Bound="20" LevelValueIdx="1">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3002" AccessoryStat="2" Tier="2">
+        <Comment>38,000 초과하는 장신구 장비점수 1,500당 수호 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefDen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore 
+                    Over="38000" Bound="1500" LevelValueIdx="2">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3003" AccessoryStat="2" Tier="3">
+        <Comment>85 초과하는 장신구 수호 7당 수호 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefDen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseDefDen"
+                                              Over="85" Bound="7" LevelValueIdx="3">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3004" AccessoryStat="2" Tier="4">
+        <Comment>42,000 초과하는 장신구 장비점수 700당 수호 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefDen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore
+                    Over="42000" Bound="700" LevelValueIdx="4">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="3005" AccessoryStat="2" Tier="5">
+        <Comment>125 초과하는 장신구 수호 3당 수호 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefDen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseDefDen"
+                                              Over="125" Bound="3" LevelValueIdx="5">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <!-- 위협 -->
+    <BuffData ID="4000" AccessoryStat="3" Tier="0">
+        <Comment>위협 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefPen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryRatio LevelValueIdx="0">1</RiftWeaponAccessoryRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="4001" AccessoryStat="3" Tier="1">
+        <Comment>45 초과하는 장신구 위협 20당 위협 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefPen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseDefPen"
+                                              Over="45" Bound="20" LevelValueIdx="1">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="4002" AccessoryStat="3" Tier="2">
+        <Comment>38,000 초과하는 장신구 장비점수 1,500당 위협 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefPen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore
+                    Over="38000" Bound="1500" LevelValueIdx="2">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="4003" AccessoryStat="3" Tier="3">
+        <Comment>85 초과하는 장신구 위협 7당 위협 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefPen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseDefPen"
+                                              Over="85" Bound="7" LevelValueIdx="3">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="4004" AccessoryStat="3" Tier="4">
+        <Comment>42,000 초과하는 장신구 장비점수 700당 위협 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefPen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore
+                    Over="42000" Bound="700" LevelValueIdx="4">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="4005" AccessoryStat="3" Tier="5">
+        <Comment>125 초과하는 장신구 위협 3당 위협 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="DefPen" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseDefPen"
+                                              Over="125" Bound="3" LevelValueIdx="5">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <!-- 특수 피해량 -->
+    <BuffData ID="5000" AccessoryStat="4" Tier="0">
+        <Comment>특수 피해량 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="SpecialDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryRatio LevelValueIdx="0">1</RiftWeaponAccessoryRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="5001" AccessoryStat="4" Tier="1">
+        <Comment>45 초과하는 장신구 특수 피해량 20당 특수 피해량 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="SpecialDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseSpecialDamageMul"
+                                              Over="45" Bound="20" LevelValueIdx="1">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="5002" AccessoryStat="4" Tier="2">
+        <Comment>38,000 초과하는 장신구 장비점수 1,500당 특수 피해량 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="SpecialDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore
+                    Over="38000" Bound="1500" LevelValueIdx="2">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="5003" AccessoryStat="4" Tier="3">
+        <Comment>85 초과하는 장신구 특수 피해량 7당 특수 피해량 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="SpecialDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseSpecialDamageMul"
+                                              Over="85" Bound="7" LevelValueIdx="3">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="5004" AccessoryStat="4" Tier="4">
+        <Comment>42,000 초과하는 장신구 장비점수 700당 특수 피해량 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="SpecialDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore
+                    Over="42000" Bound="700" LevelValueIdx="4">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="5005" AccessoryStat="4" Tier="5">
+        <Comment>125 초과하는 장신구 특수 피해량 3당 특수 피해량 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="SpecialDamageMul" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseSpecialDamageMul"
+                                              Over="125" Bound="3" LevelValueIdx="5">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+    
+    <!-- 물리 방어력 및 마법 방어력 -->
+    <BuffData ID="6000" AccessoryStat="5" Tier="0">
+        <Comment>방어력 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="Def" StatValueType="BaseValue"/>
+                <AddStat StatType="MDef" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryRatio LevelValueIdx="0">10</RiftWeaponAccessoryRatio> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="6001" AccessoryStat="5" Tier="1">
+        <Comment>1050 초과하는 장신구 방어력 400당 방어력 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="Def" StatValueType="BaseValue"/>
+                <AddStat StatType="MDef" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseDef,BaseMDef"
+                                              Over="1050" Bound="400" LevelValueIdx="1">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="6002" AccessoryStat="5" Tier="2">
+        <Comment>38,000 초과하는 장신구 장비점수 1,500당 방어력 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="Def" StatValueType="BaseValue"/>
+                <AddStat StatType="MDef" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore
+                    Over="38000" Bound="1500" LevelValueIdx="2">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="6003" AccessoryStat="5" Tier="3">
+        <Comment>2050 초과하는 장신구 방어력 140당 방어력 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="Def" StatValueType="BaseValue"/>
+                <AddStat StatType="MDef" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseDef,BaseMDef"
+                                              Over="2050" Bound="140" LevelValueIdx="3">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="6004" AccessoryStat="5" Tier="4">
+        <Comment>42,000 초과하는 장신구 장비점수 700당 방어력 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="Def" StatValueType="BaseValue"/>
+                <AddStat StatType="MDef" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryScore
+                    Over="42000" Bound="700" LevelValueIdx="4">1</RiftWeaponAccessoryScore> </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="6005" AccessoryStat="5" Tier="5">
+        <Comment>3050 초과하는 장신구 방어력 60당 방어력 +x</Comment>
+
+        <BuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> </RangeInfo>
+            <BuffContents>
+                <AddStat StatType="Def" StatValueType="BaseValue"/>
+                <AddStat StatType="MDef" StatValueType="BaseValue"/>
+            </BuffContents>
+            <Values> <RiftWeaponAccessoryStat StatTypes="BaseDef,BaseMDef"
+                                              Over="3050" Bound="60" LevelValueIdx="5">1</RiftWeaponAccessoryStat> </Values>
+        </BuffOptions>
+    </BuffData>
+</RiftWeaponBuffs>

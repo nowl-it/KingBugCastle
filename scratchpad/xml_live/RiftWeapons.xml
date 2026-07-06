@@ -1,0 +1,92 @@
+<!-- xml 정보
+	ID 사용 범위 : 10000 ~ 16999
+	ID 규칙 : 
+		(1) 1x000 : 대상 클래스 (0 ~ 5)
+		(3) 10xxx : 인덱스 (000 ~ 999)
+		
+	필드 구성 :
+		(1) <ID>
+		(2) <Comment> (not used)
+		(3) <Name> (default : TreasureName_{ID})
+		(4) <Desc> (default : TreasureDesc_{ID})
+		(5) <ItemRecipe> : 아이템 조합 레시피
+		(6) <ResultItemID> : 조합 성공 시 제작되는 아이템 ID (Items.xml)
+		(7) <Role> (default : None)
+		(8) <Prefab> (default : RiftWeaponPrefab_{ID})
+		(8) <MinVersion>
+		
+-->
+<RiftWeapons>
+	<RiftWeapon ID="10000">
+		<Comment>균열 장비 - 장창</Comment>
+
+		<ItemRecipe>
+			<Item EquipType="Armor" Tier="3"/>
+			<Item EquipType="Bow" Tier="3"/>
+		</ItemRecipe>
+
+		<ResultItemID>2000</ResultItemID>
+		<Role>Brave</Role>
+	</RiftWeapon>
+	
+	<RiftWeapon ID="11000">
+		<Comment>균열 장비 - 가면</Comment>
+
+		<ItemRecipe>
+			<Item EquipType="Staff" Tier="3"/>
+			<Item EquipType="Armor" Tier="3"/>
+		</ItemRecipe>
+
+		<ResultItemID>2100</ResultItemID>
+		<Role>Mystic</Role>
+	</RiftWeapon>
+
+	<RiftWeapon ID="12000">
+		<Comment>균열 장비 - 단검</Comment>
+
+		<ItemRecipe>
+			<Item EquipType="Sword" Tier="3"/>
+			<Item EquipType="Staff" Tier="3"/>
+		</ItemRecipe>
+
+		<ResultItemID>2200</ResultItemID>
+		<Role>Shadow</Role>
+	</RiftWeapon>
+
+	<RiftWeapon ID="13000">
+		<Comment>균열 장비 - 오브</Comment>
+
+		<ItemRecipe>
+			<Item EquipType="Bow" Tier="3"/>
+			<Item EquipType="Staff" Tier="3"/>
+		</ItemRecipe>
+
+		<ResultItemID>2300</ResultItemID>
+		<Role>Element</Role>
+	</RiftWeapon>
+
+	<RiftWeapon ID="14000">
+		<Comment>균열 장비 - 방패</Comment>
+
+		<ItemRecipe>
+			<Item EquipType="Sword" Tier="3"/>
+			<Item EquipType="Armor" Tier="3"/>
+		</ItemRecipe>
+
+		<ResultItemID>2400</ResultItemID>
+		<Role>Toughness</Role>
+	</RiftWeapon>
+
+	<RiftWeapon ID="15000">
+		<Comment>균열 장비 - 쌍검</Comment>
+
+		<ItemRecipe>
+			<Item EquipType="Sword" Tier="3"/>
+			<Item EquipType="Bow" Tier="3"/>
+		</ItemRecipe>
+
+		<ResultItemID>2500</ResultItemID>
+		<Role>Swift</Role>
+	</RiftWeapon>
+
+</RiftWeapons>

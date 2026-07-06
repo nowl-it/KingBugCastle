@@ -1,0 +1,1697 @@
+<!-- xml 규칙
+synergy * 10에서 시작. 같은 set 단위 내에서는 10단위로 뜁니다.
+(ex) 강철 0,1,2... 두려움 10,11,12... 바람 40,41,42...)
+그 상위 단위를 뛸 때는 장신구가 두자리 가짓수는 될거같으니 1000단위(장신구 종류 최대 100개)로 뜁니다.
+
+AccessoryConstants.xml의 AccessoryLevelEvent 정보에 따른 순서대로 구성된 데이터를 넣어주서야 합니다. (unlock 4개 + upgrade 5개) or (unlock 3개 + upgrade 3개 + unlock 1개 + upgrade 1개)
+ex : rarity 2인데 subStat이 unlock 4개가 연속으로 있으면 4레벨에서 upgrade가 아닌 unlock이 됩니다.
+이 때 8개에 미달한 경우 나머지는 AccessoryLevelEvent 규칙에 따라 자동 할당됨.
+첫 unlock 슬롯은 무조건 AccessoryLevelEvent 개수 맞춰서 넣어야합니다.
+
+0번대 : inherit용으로 쓸 template
+1000~: 초보자 미션 클리어 보상
+2000~: 잠식 습격 첫 클리어 지급 보상
+3000~: 차원의 균열 보정 장신구
+4000~: 패키지 상품 선택 장신구
+추후에 규칙이 추가되면 기입 부탁드립니다.
+-->
+
+<!-- Inherit 구조
+Inherit의 경우 SubStat만 규칙이 있는데,
+inherit된 것과 level이 같고 subStat node가 없을 때만 inherit됩니다. 그 외에는 새로 작성하셔야 합니다.
+-->
+
+<FixedAccessoryPresets>
+    <FixedAccessoryPreset ID="0">
+        <DescComment>강철 목걸이</DescComment>
+        <Synergy>0</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>MAtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseMDef" Value="40" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseMDef" Value="40" />
+            <SubStat Key="BaseMDef" Value="40" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="30"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="1">
+        <DescComment>강철 팔찌</DescComment>
+        <Synergy>0</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseMDef" Value="40" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseMDef" Value="40" />
+            <SubStat Key="BaseMDef" Value="40" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMDef" Value="40" />
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="2">
+        <DescComment>강철 반지</DescComment>
+        <Synergy>0</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDefPen</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />            
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefPen" Value="2" />
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="3">
+        <DescComment>강철 귀걸이</DescComment>
+        <Synergy>0</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseMDef" Value="40" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseMDef" Value="40" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="40" />
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="10">
+        <DescComment>두려움 목걸이</DescComment>
+        <Synergy>1</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefPen" Value="1.5" />
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="11">
+        <DescComment>두려움 팔찌</DescComment>
+        <Synergy>1</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefPen" Value="1.5" />
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="12">
+        <DescComment>두려움 반지</DescComment>
+        <Synergy>1</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDefPen</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefPen" Value="1.5" />
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="13">
+        <DescComment>두려움 귀걸이</DescComment>
+        <Synergy>1</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefPen" Value="1.5" />
+    </FixedAccessoryPreset>
+    
+    <FixedAccessoryPreset ID="40">
+        <DescComment>바람 목걸이</DescComment>
+        <Synergy>4</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="AtkPer" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="AtkPer" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="1.5" />
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="41">
+        <DescComment>바람 팔찌</DescComment>
+        <Synergy>4</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="1.5" />
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="42">
+        <DescComment>바람 반지</DescComment>
+        <Synergy>4</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AttackSpeedPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+        </SubStats>
+         <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="1.5" />
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="43">
+        <DescComment>바람 귀걸이</DescComment>
+        <Synergy>4</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseSpecialDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="AtkPer" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="AtkPer" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+            <SubStat Key="BaseSpecialDamageMul" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2" />
+    </FixedAccessoryPreset>
+    
+    <FixedAccessoryPreset ID="1000" Inherit="0">
+        <DescComment>StarterMissionReward 강철 목걸이</DescComment>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="1001" Inherit="1">
+        <DescComment>StarterMissionReward 강철 팔찌</DescComment>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="1002" Inherit="2">
+        <DescComment>StarterMissionReward 강철 반지</DescComment>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="1003" Inherit="3">
+        <DescComment>StarterMissionReward 강철 귀걸이</DescComment>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="1010" Inherit="10">
+        <DescComment>StarterMissionReward 두려움 목걸이</DescComment>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="1011" Inherit="11">
+        <DescComment>StarterMissionReward 두려움 팣찌</DescComment>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="1012" Inherit="12">
+        <DescComment>StarterMissionReward 두려움 반지</DescComment>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="1013" Inherit="13">
+        <DescComment>StarterMissionReward 두려움 귀걸이</DescComment>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="1040" Inherit="40">
+        <DescComment>StarterMissionReward 바람 목걸이</DescComment>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="1041" Inherit="41">
+        <DescComment>StarterMissionReward 바람 팔찌</DescComment>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="1042" Inherit="42">
+        <DescComment>StarterMissionReward 바람 반지</DescComment>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="1043" Inherit="43">
+        <DescComment>StarterMissionReward 바람 귀걸이</DescComment>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2000">
+        <DescComment>잠식 II-1 쉬움 - 목걸이</DescComment>
+        <Synergy>2</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2001">
+        <DescComment>잠식 II-1 쉬움 - 팔찌</DescComment>
+        <Synergy>2</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2002">
+        <DescComment>잠식 II-1 쉬움 - 반지</DescComment>
+        <Synergy>2</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>HpPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2003">
+        <DescComment>잠식 II-1 쉬움 - 귀걸이</DescComment>
+        <Synergy>2</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="AtkPer" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>            
+            <SubStat Key="AtkPer" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2010">
+        <DescComment>잠식 II-2 쉬움 - 목걸이</DescComment>
+        <Synergy>5</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>    
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="1.5"/>  
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2011">
+        <DescComment>잠식 II-2 쉬움 - 팔찌</DescComment>
+        <Synergy>5</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/> 
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="1.5"/> 
+        </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2012">
+        <DescComment>잠식 II-2 쉬움 - 반지</DescComment>
+        <Synergy>5</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AttackSpeedPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="1.5"/>
+        </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2013">
+        <DescComment>잠식 II-2 쉬움 - 귀걸이</DescComment>
+        <Synergy>5</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseSpecialDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="AtkPer" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>            
+            <SubStat Key="AtkPer" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2020">
+        <DescComment>잠식 II-3 쉬움 - 목걸이</DescComment>
+        <Synergy>3</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>MAtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2021">
+        <DescComment>잠식 II-3 쉬움 - 팔찌</DescComment>
+        <Synergy>3</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2022">
+        <DescComment>잠식 II-3 쉬움 - 반지</DescComment>
+        <Synergy>3</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDefDen</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2023">
+        <DescComment>잠식 II-3 쉬움 - 귀걸이</DescComment>
+        <Synergy>3</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2030">
+        <DescComment>잠식 II-4 쉬움 - 목걸이</DescComment>
+        <Synergy>6</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>MAtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="30"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2031">
+        <DescComment>잠식 II-4 쉬움 - 팔찌</DescComment>
+        <Synergy>6</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>         
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="30"/>   
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2032">
+        <DescComment>잠식 II-4 쉬움 - 반지</DescComment>
+        <Synergy>6</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>HpPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="30"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2033">
+        <DescComment>잠식 II-4 쉬움 - 귀걸이</DescComment>
+        <Synergy>6</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="30"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2040">
+        <DescComment>잠식 II-5 쉬움 - 목걸이</DescComment>
+        <Synergy>7</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>MAtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMCriticalProb" Value="2"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>            
+            <SubStat Key="BaseMCriticalProb" Value="2"/>
+            <SubStat Key="BaseMCriticalProb" Value="2"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMCriticalProb" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2041">
+        <DescComment>잠식 II-5 쉬움 - 팔찌</DescComment>
+        <Synergy>7</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2042">
+        <DescComment>잠식 II-5 쉬움 - 반지</DescComment>
+        <Synergy>7</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AttackSpeedPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseMCriticalProb" Value="2"/>            
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseMCriticalProb" Value="2"/>
+            <SubStat Key="BaseMCriticalProb" Value="2"/>            
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2043">
+        <DescComment>잠식 II-5 쉬움 - 귀걸이</DescComment>
+        <Synergy>7</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+            <SubStat Key="MAtkPer" Value="2"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="2"/>
+            <SubStat Key="MAtkPer" Value="2"/>            
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2050">
+        <DescComment>잠식 II-6 쉬움 - 목걸이</DescComment>
+        <Synergy>8</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>MAtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2051">
+        <DescComment>잠식 II-6 쉬움 - 팔찌</DescComment>
+        <Synergy>8</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2052">
+        <DescComment>잠식 II-6 쉬움 - 반지</DescComment>
+        <Synergy>8</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDefDen</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2053">
+        <DescComment>잠식 II-6 쉬움 - 귀걸이</DescComment>
+        <Synergy>8</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+            <SubStat Key="BaseDefDen" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2060">
+        <DescComment>잠식 II-7 쉬움 - 목걸이</DescComment>
+        <Synergy>9</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>       
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>     
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2061">
+        <DescComment>잠식 II-7 쉬움 - 팔찌</DescComment>
+        <Synergy>9</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2062">
+        <DescComment>잠식 II-7 쉬움 - 반지</DescComment>
+        <Synergy>9</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AttackSpeedPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+            <SubStat Key="BaseCriticalProb" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2063">
+        <DescComment>잠식 II-7 쉬움 - 귀걸이</DescComment>
+        <Synergy>9</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="AtkPer" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+            <SubStat Key="AtkPer" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2070">
+        <DescComment>잠식 II-8 쉬움 - 억압 목걸이</DescComment>
+        <Synergy>10</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefPen" Value="1.5" />
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2071">
+        <DescComment>잠식 II-8 쉬움 - 억압 팔찌</DescComment>
+        <Synergy>10</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefPen" Value="1.5" />
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2072">
+        <DescComment>잠식 II-8 쉬움 - 억압 반지</DescComment>
+        <Synergy>10</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDefPen</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefPen" Value="1.5" />
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2073">
+        <DescComment>잠식 II-8 쉬움 - 억압 귀걸이</DescComment>
+        <Synergy>10</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDef" Value="40" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+            <SubStat Key="BaseDefPen" Value="2" />
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefPen" Value="1.5" />
+    </FixedAccessoryPreset>
+
+	<FixedAccessoryPreset ID="2080">
+        <DescComment>잠식 II-9 쉬움 - 절명 목걸이</DescComment>
+        <Synergy>11</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>    
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2081">
+        <DescComment>잠식 II-9 쉬움 - 절명 팔찌</DescComment>
+        <Synergy>11</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2082">
+        <DescComment>잠식 II-9 쉬움 - 절명 반지</DescComment>
+        <Synergy>11</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>HpPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2083">
+        <DescComment>잠식 II-9 쉬움 - 절명 귀걸이</DescComment>
+        <Synergy>11</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="AtkPer" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>            
+            <SubStat Key="AtkPer" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+	<FixedAccessoryPreset ID="2090">
+        <DescComment>잠식 II-10 쉬움 - 승천 목걸이</DescComment>
+        <Synergy>12</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>            
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>    
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="40"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2091">
+        <DescComment>잠식 II-10 쉬움 - 승천 팔찌</DescComment>
+        <Synergy>12</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMDef" Value="40"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2092">
+        <DescComment>잠식 II-10 쉬움 - 승천 반지</DescComment>
+        <Synergy>12</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>HpPer</MainStat>
+        <SubStats>
+            <SubStat Key="HpPer" Value="2"/>
+            <SubStat Key="AttackSpeedPer" Value="2"/>            
+            <SubStat Key="HpPer" Value="2"/>
+            <SubStat Key="AttackSpeedPer" Value="2"/>
+            <SubStat Key="AttackSpeedPer" Value="2"/>
+            <SubStat Key="AttackSpeedPer" Value="2"/>
+        </SubStats>
+        <FixedBonusSubStat Key="AttackSpeedPer" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="2093">
+        <DescComment>잠식 II-10 쉬움 - 승천 귀걸이(물방)</DescComment>
+        <Synergy>12</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>            
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="40"/>
+    </FixedAccessoryPreset>    
+
+    <FixedAccessoryPreset ID="2094">
+        <DescComment>잠식 II-10 쉬움 - 승천 귀걸이(마방)</DescComment>
+        <Synergy>12</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseDef" Value="40"/>            
+            <SubStat Key="BaseDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+            <SubStat Key="BaseMDef" Value="40"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMDef" Value="40"/>
+    </FixedAccessoryPreset>     
+
+    <FixedAccessoryPreset ID="3000" Inherit="2">
+        <DescComment>대균열 보정 반지(만능 슬롯)</DescComment>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="140" />
+            <SubStat Key="BaseMDef" Value="120" />
+        </SubStats>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="3001" Inherit="0">
+        <DescComment>대균열 보정 목걸이</DescComment>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="140" />
+            <SubStat Key="BaseMDef" Value="120" />
+        </SubStats>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="3002" Inherit="1">
+        <DescComment>대균열 보정 팔찌</DescComment>
+        <MainStat>HpPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="140" />
+            <SubStat Key="BaseMDef" Value="120" />
+        </SubStats>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="3003" Inherit="2">
+        <DescComment>대균열 보정 반지</DescComment>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="140" />
+            <SubStat Key="BaseMDef" Value="120" />
+        </SubStats>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="3004" Inherit="3">
+        <DescComment>강철 귀걸이</DescComment>
+        <MainStat>BaseSpecialDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="140" />
+            <SubStat Key="BaseMDef" Value="120" />
+        </SubStats>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4000">
+        <DescComment>아펠피시아 업데이트 패키지 A 상품 선택 - 목걸이 1</DescComment>
+        <Synergy>4</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseSpecialDamageMul" Value="16.5"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4001">
+        <DescComment>아펠피시아 업데이트 패키지 A 상품 선택 - 목걸이 2</DescComment>
+        <Synergy>4</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>MAtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseSpecialDamageMul" Value="16.5"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4002">
+        <DescComment>아펠피시아 업데이트 패키지 B 상품 선택 - 팔찌 1</DescComment>
+        <Synergy>4</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseSpecialDamageMul" Value="16.5"/>
+            <SubStat Key="BaseDef" Value="80"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4003">
+        <DescComment>아펠피시아 업데이트 패키지 B 상품 선택 - 팔찌 2</DescComment>
+        <Synergy>4</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseSpecialDamageMul" Value="16.5"/>
+            <SubStat Key="BaseDef" Value="80"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4004">
+        <DescComment>아펠피시아 업데이트 패키지 C 상품 선택 - 반지 1</DescComment>
+        <Synergy>4</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>AttackSpeedPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseSpecialDamageMul" Value="16.5"/>
+            <SubStat Key="BaseDef" Value="80"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4005">
+        <DescComment>아펠피시아 업데이트 패키지 C 상품 선택 - 반지 2</DescComment>
+        <Synergy>4</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>HpPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseSpecialDamageMul" Value="16.5"/>
+            <SubStat Key="BaseDef" Value="80"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4006">
+        <DescComment>아펠피시아 업데이트 패키지 D 상품 선택 - 귀고리 1</DescComment>
+        <Synergy>4</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseSpecialDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseSpecialDamageMul" Value="16.5"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4010">
+        <DescComment>갓스킨 사르굴라 강철 세트 - 목걸이 1</DescComment>
+        <Synergy>0</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="240"/>
+            <SubStat Key="BaseMDef" Value="180"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="30"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4011">
+        <DescComment>갓스킨 사르굴라 강철 세트 - 팔찌 1</DescComment>
+        <Synergy>0</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="240"/>
+            <SubStat Key="BaseMDef" Value="180"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="30"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4012">
+        <DescComment>갓스킨 사르굴라 강철 세트 - 팔찌 1</DescComment>
+        <Synergy>0</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMDef" Value="240"/>
+            <SubStat Key="BaseDef" Value="180"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMDef" Value="30"/>
+    </FixedAccessoryPreset>    
+
+    <FixedAccessoryPreset ID="4013">
+        <DescComment>갓스킨 사르굴라 강철 세트 - 반지 1</DescComment>
+        <Synergy>0</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>HpPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="240"/>
+            <SubStat Key="BaseMDef" Value="180"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="30"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4014">
+        <DescComment>갓스킨 사르굴라 강철 세트 - 귀고리 1</DescComment>
+        <Synergy>0</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseSpecialDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="240"/>
+            <SubStat Key="BaseMDef" Value="180"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+            <SubStat Key="BaseMDef" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="30"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4020">
+        <DescComment>설날 업데이트 패키지 - 목걸이</DescComment>
+        <Synergy>9</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalDamageMul" Value="16"/>
+            <SubStat Key="BaseCriticalProb" Value="4"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4021">
+        <DescComment>설날 업데이트 패키지 - 팔찌</DescComment>
+        <Synergy>9</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalDamageMul" Value="16"/>
+            <SubStat Key="BaseCriticalProb" Value="4"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4022">
+        <DescComment>설날 업데이트 패키지 - 반지</DescComment>
+        <Synergy>9</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>AttackSpeedPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalDamageMul" Value="16"/>
+            <SubStat Key="BaseCriticalProb" Value="4"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4023">
+        <DescComment>설날 업데이트 패키지 - 귀고리</DescComment>
+        <Synergy>9</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalDamageMul" Value="16"/>
+            <SubStat Key="BaseCriticalProb" Value="4"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4024">
+        <DescComment>설날 업데이트 패키지 - 귀고리</DescComment>
+        <Synergy>9</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalDamageMul" Value="16"/>
+            <SubStat Key="BaseCriticalProb" Value="4"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>    
+
+    <FixedAccessoryPreset ID="4030">
+        <DescComment>잠식 패스 패키지 - 계약 귀고리</DescComment>
+        <Synergy>7</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseMCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMCriticalDamageMul" Value="16"/>
+            <SubStat Key="BaseMCriticalProb" Value="4"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4031">
+        <DescComment>잠식 패스 패키지 - 영원 반지</DescComment>
+        <Synergy>8</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseDefDen</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDefDen" Value="16"/>
+            <SubStat Key="HpPer" Value="4"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4032">
+        <DescComment>잠식 패스 패키지 - 억압 반지</DescComment>
+        <Synergy>10</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseDefPen</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDefPen" Value="16"/>
+            <SubStat Key="HpPer" Value="4"/>
+            <SubStat Key="BaseDefPen" Value="0"/>
+            <SubStat Key="BaseDefPen" Value="0"/>
+            <SubStat Key="BaseDefPen" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefPen" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4033">
+        <DescComment>잠식 패스 패키지 - 절명 귀고리</DescComment>
+        <Synergy>11</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseSpecialDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseSpecialDamageMul" Value="16"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+            <SubStat Key="BaseSpecialDamageMul" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseSpecialDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4034">
+        <DescComment>잠식 패스 패키지 - 승천 반지</DescComment>
+        <Synergy>12</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseDefDen</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDefDen" Value="16"/>
+            <SubStat Key="HpPer" Value="4"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="2"/>
+    </FixedAccessoryPreset>    
+    
+    <FixedAccessoryPreset ID="4035">
+        <DescComment>아나테마 업데이트 패키지 A 상품 선택 - 목걸이 1</DescComment>
+        <Synergy>8</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>MAtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDefDen" Value="16"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4036">
+        <DescComment>아나테마 업데이트 패키지 A 상품 선택 - 목걸이 2</DescComment>
+        <Synergy>8</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDefDen" Value="16"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4037">
+        <DescComment>아나테마 업데이트 패키지 B 상품 선택 - 팔찌 1</DescComment>
+        <Synergy>8</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDefDen" Value="16"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4038">
+        <DescComment>아나테마 업데이트 패키지 B 상품 선택 - 팔찌 2</DescComment>
+        <Synergy>8</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDefDen" Value="16"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4039">
+        <DescComment>아펠피시아 업데이트 패키지 C 상품 선택 - 귀고리 1</DescComment>
+        <Synergy>8</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDefDen" Value="16"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4040">
+        <DescComment>아펠피시아 업데이트 패키지 C 상품 선택 - 귀고리 2</DescComment>
+        <Synergy>8</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDefDen" Value="16"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDefDen" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4041">
+        <DescComment>아나테마 업데이트 패키지 D 상품 선택 - 반지 1</DescComment>
+        <Synergy>8</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>12</Level>
+       <MainStat>BaseDefDen</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDefDen" Value="16"/>
+            <SubStat Key="AttackSpeedPer" Value="4"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+            <SubStat Key="BaseDefDen" Value="0"/>
+        </SubStats>
+         <FixedBonusSubStat Key="BaseDefDen" Value="2"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4050">
+        <DescComment>갓스킨 벨리나 계약 세트 - 목걸이 1</DescComment>
+        <Synergy>7</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>MAtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMCriticalDamageMul" Value="10"/>    
+            <SubStat Key="BaseMCriticalProb" Value="9"/>         
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalProb" Value="0"/>
+            <SubStat Key="BaseMCriticalProb" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4051">
+        <DescComment>갓스킨 벨리나 계약 세트 - 팔찌 1</DescComment>
+        <Synergy>7</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMCriticalDamageMul" Value="10"/>    
+            <SubStat Key="BaseMCriticalProb" Value="9"/>         
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalProb" Value="0"/>
+            <SubStat Key="BaseMCriticalProb" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset> 
+
+    <FixedAccessoryPreset ID="4052">
+        <DescComment>갓스킨 벨리나 계약 세트 - 반지 1</DescComment>
+        <Synergy>7</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AttackSpeedPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMCriticalDamageMul" Value="10"/>    
+            <SubStat Key="BaseMCriticalProb" Value="9"/>         
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalProb" Value="0"/>
+            <SubStat Key="BaseMCriticalProb" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset> 
+    <FixedAccessoryPreset ID="4053">
+        <DescComment>갓스킨 벨리나 계약 세트 - 귀고리 1</DescComment>
+        <Synergy>7</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMCriticalDamageMul" Value="10"/>    
+            <SubStat Key="BaseMCriticalProb" Value="9"/>         
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalProb" Value="0"/>
+            <SubStat Key="BaseMCriticalProb" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>    
+
+    <FixedAccessoryPreset ID="4054">
+        <DescComment>갓스킨 사벨리나 계약 세트 - 귀고리 2</DescComment>
+        <Synergy>7</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMCriticalDamageMul" Value="10"/>    
+            <SubStat Key="BaseMCriticalProb" Value="9"/>         
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalDamageMul" Value="0"/>
+            <SubStat Key="BaseMCriticalProb" Value="0"/>
+            <SubStat Key="BaseMCriticalProb" Value="0"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2"/>
+    </FixedAccessoryPreset>
+    
+<FixedAccessoryPreset ID="4065">
+        <DescComment>5.5주년 - 목걸이</DescComment>
+        <Synergy>9</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>       
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>     
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4066">
+        <DescComment>5.5주년  - 팔찌</DescComment>
+        <Synergy>9</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>    
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>     
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4067">
+        <DescComment>5.5주년  - 반지</DescComment>
+        <Synergy>9</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AttackSpeedPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>    
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>     
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4068">
+        <DescComment>5.5주년  - 귀걸이</DescComment>
+        <Synergy>9</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalProb" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="3"/>    
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>     
+    </FixedAccessoryPreset>
+
+</FixedAccessoryPresets>

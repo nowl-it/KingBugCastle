@@ -1,0 +1,396 @@
+<RankTiers>
+
+	<RankTier ID="10">
+		<NameComment>브론즈</NameComment>
+		<ReqScore>0</ReqScore>
+		<WinScore>80</WinScore>
+		<LoseScore>-53</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="100"/>
+    </RewardItems>						
+
+		<TierIcon>Tier_01</TierIcon>
+	</RankTier>
+
+	<RankTier ID="11">
+		<NameComment>브론즈 1성</NameComment>
+		<ReqScore>100</ReqScore>
+		<WinScore>79</WinScore>
+		<LoseScore>-56</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="100"/>
+    </RewardItems>						
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='Gold' Count='200' />
+		<TierIcon>Tier_01</TierIcon>
+		<StarIcon>Tier_01_01</StarIcon>
+	</RankTier>
+
+	<RankTier ID="12">
+		<NameComment>브론즈 2성</NameComment>
+		<ReqScore>200</ReqScore>
+		<WinScore>71</WinScore>
+		<LoseScore>-53</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="100"/>
+    </RewardItems>						
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='SelectExp' Count='50' />
+		<TierIcon>Tier_01</TierIcon>
+		<StarIcon>Tier_01_02</StarIcon>
+	</RankTier>
+
+	<RankTier ID="13">
+		<NameComment>브론즈 3성</NameComment>
+		<ReqScore>300</ReqScore>
+		<WinScore>71</WinScore>
+		<LoseScore>-55</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="100"/>
+    </RewardItems>					
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='Cash' Count='10' />
+		<TierIcon>Tier_01</TierIcon>
+		<StarIcon>Tier_01_03</StarIcon>
+	</RankTier>
+
+	<RankTier ID="20">
+		<NameComment>실버</NameComment>
+		<ReqScore>400</ReqScore>
+		<WinScore>66</WinScore>
+		<LoseScore>-53</LoseScore>
+	<RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="300"/>
+    </RewardItems>				
+
+		<Reward Type='BoxKey' ID='301' Count='2' />
+		<TierIcon>Tier_02</TierIcon>
+	</RankTier>
+
+	<RankTier ID="21">
+		<NameComment>실버 1성</NameComment>
+		<ReqScore>500</ReqScore>
+		<WinScore>66</WinScore>
+		<LoseScore>-54</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="300"/>
+    </RewardItems>				
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+	
+
+		<Reward Type='Gold' Count='300' />
+		<TierIcon>Tier_02</TierIcon>
+		<StarIcon>Tier_02_01</StarIcon>
+	</RankTier>
+
+	<RankTier ID="22">
+		<NameComment>실버 2성</NameComment>
+		<ReqScore>600</ReqScore>
+		<WinScore>61</WinScore>
+		<LoseScore>-52</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="300"/>
+    </RewardItems>					
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='SelectExp' Count='50' />
+		<TierIcon>Tier_02</TierIcon>
+		<StarIcon>Tier_02_02</StarIcon>
+	</RankTier>
+
+	<RankTier ID="23">
+		<NameComment>실버 3성</NameComment>
+		<ReqScore>700</ReqScore>
+		<WinScore>61</WinScore>
+		<LoseScore>-52</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="300"/>
+    </RewardItems>			
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='Cash' Count='15' />
+		<TierIcon>Tier_02</TierIcon>
+		<StarIcon>Tier_02_03</StarIcon>
+	</RankTier>
+
+	<RankTier ID="30">
+		<NameComment>골드</NameComment>
+		<ReqScore>800</ReqScore>
+		<WinScore>57</WinScore>
+		<LoseScore>-50</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="500"/>
+    </RewardItems>			
+
+		<Reward Type='BoxKey' ID='302' Count='2' />
+		<TierIcon>Tier_03</TierIcon>
+	</RankTier>
+
+	<RankTier ID="31">
+		<NameComment>골드 1성</NameComment>
+		<ReqScore>900</ReqScore>
+		<WinScore>57</WinScore>
+		<LoseScore>-51</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="500"/>
+    </RewardItems>			
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='Gold' Count='500' />
+		<TierIcon>Tier_03</TierIcon>
+		<StarIcon>Tier_03_01</StarIcon>
+	</RankTier>
+
+	<RankTier ID="32">
+		<NameComment>골드 2성</NameComment>
+		<ReqScore>1000</ReqScore>
+		<WinScore>53</WinScore>
+		<LoseScore>-48</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="500"/>
+    </RewardItems>		
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+	
+
+		<Reward Type='SelectExp' Count='50' />
+		<TierIcon>Tier_03</TierIcon>
+		<StarIcon>Tier_03_02</StarIcon>
+	</RankTier>
+
+	<RankTier ID="33">
+		<NameComment>골드 3성</NameComment>
+		<ReqScore>1100</ReqScore>
+		<WinScore>52</WinScore>
+		<LoseScore>-49</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="500"/>
+    </RewardItems>	
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='Cash' Count='20' />
+		<TierIcon>Tier_03</TierIcon>
+		<StarIcon>Tier_03_03</StarIcon>
+	</RankTier>
+
+	<RankTier ID="40">
+		<NameComment>플래티넘</NameComment>
+		<ReqScore>1200</ReqScore>
+		<WinScore>48</WinScore>
+		<LoseScore>-46</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1000"/>
+    </RewardItems>			
+
+		<Reward Type='BoxKey' ID='370' Count='5' />
+		<TierIcon>Tier_04</TierIcon>
+	</RankTier>
+
+	<RankTier ID="41">
+		<NameComment>플래티넘 1성</NameComment>
+		<ReqScore>1300</ReqScore>
+		<WinScore>47</WinScore>
+		<LoseScore>-46</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1000"/>
+    </RewardItems>			
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='Gold' Count='800' />
+		<TierIcon>Tier_04</TierIcon>
+		<StarIcon>Tier_04_01</StarIcon>
+	</RankTier>
+
+	<RankTier ID="42">
+		<NameComment>플래티넘 2성</NameComment>
+		<ReqScore>1400</ReqScore>
+		<WinScore>43</WinScore>
+		<LoseScore>-43</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1000"/>
+    </RewardItems>			
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='InventoryItem' ID='3000' Count='10' />
+		<TierIcon>Tier_04</TierIcon>
+		<StarIcon>Tier_04_02</StarIcon>
+	</RankTier>
+
+	<RankTier ID="43">
+		<NameComment>플래티넘 3성</NameComment>
+		<ReqScore>1500</ReqScore>
+		<WinScore>43</WinScore>
+		<LoseScore>-43</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1000"/>
+    </RewardItems>			
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='Cash' Count='25' />
+		<TierIcon>Tier_04</TierIcon>
+		<StarIcon>Tier_04_03</StarIcon>
+	</RankTier>
+
+	<RankTier ID="50">
+		<NameComment>다이아</NameComment>
+		<ReqScore>1600</ReqScore>
+		<WinScore>40</WinScore>
+		<LoseScore>-40</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1500"/>
+    </RewardItems>			
+
+		<Reward Type='BoxKey' ID='370' Count='5' />
+		<TierIcon>Tier_05</TierIcon>
+	</RankTier>
+
+	<RankTier ID="51">
+		<NameComment>다이아 1성</NameComment>
+		<ReqScore>1700</ReqScore>
+		<WinScore>36</WinScore>
+		<LoseScore>-36</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1500"/>
+    </RewardItems>			
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='Gold' Count='1000' />
+		<TierIcon>Tier_05</TierIcon>
+		<StarIcon>Tier_05_01</StarIcon>
+	</RankTier>
+
+	<RankTier ID="52">
+		<NameComment>다이아 2성</NameComment>
+		<ReqScore>1800</ReqScore>
+		<WinScore>32</WinScore>
+		<LoseScore>-32</LoseScore>
+	<RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1500"/>
+    </RewardItems>	
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='InventoryItem' ID='3000' Count='20' />
+		<TierIcon>Tier_05</TierIcon>
+		<StarIcon>Tier_05_02</StarIcon>
+	</RankTier>
+
+	<RankTier ID="53">
+		<NameComment>다이아 3성</NameComment>
+		<ReqScore>1900</ReqScore>
+		<WinScore>29</WinScore>
+		<LoseScore>-29</LoseScore>
+	 <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="1500"/>
+    </RewardItems>		
+	<HideInRankRewardUI>true</HideInRankRewardUI>
+
+
+		<Reward Type='Cash' Count='30' />
+		<TierIcon>Tier_05</TierIcon>
+		<StarIcon>Tier_05_03</StarIcon>
+	</RankTier>
+
+	<RankTier ID="60">
+		<NameComment>킹</NameComment>
+		<ReqScore>2000</ReqScore>
+		<WinScore>20</WinScore>
+		<LoseScore>-24</LoseScore>
+
+    <RewardItems>
+        <RewardItem Type="InventoryItem" ID="2002" Count="2000"/>
+    </RewardItems>		
+
+		<Reward Type='InventoryItem' ID='3200' Count='1' />
+		<TierIcon>Tier_06</TierIcon>
+	</RankTier>
+
+	<RankTier ID="70">
+		<NameComment>갓(31~100위)</NameComment>
+		<ReqScore>2200</ReqScore>
+		<ReqRank>100</ReqRank>
+		<WinScore>17</WinScore>
+		<LoseScore>-24</LoseScore>
+
+	<RewardItems>
+        <RewardItem Type="Cash" Count="300"/>
+    </RewardItems>			
+
+		<TierIcon>Tier_07</TierIcon>
+	</RankTier>
+
+	<RankTier ID="71">
+		<NameComment>갓(11~30위)</NameComment>
+		<ReqScore>2200</ReqScore>
+		<ReqRank>30</ReqRank>
+		<WinScore>17</WinScore>
+		<LoseScore>-24</LoseScore>
+		<HideInRewardUI>true</HideInRewardUI>
+
+	<RewardItems>
+        <RewardItem Type="Cash" Count="500"/>
+    </RewardItems>			
+
+		<TierIcon>Tier_07</TierIcon>
+	</RankTier>	
+
+	<RankTier ID="80">
+		<NameComment>킹갓(6~10위)</NameComment>
+		<ReqScore>2400</ReqScore>
+		<ReqRank>10</ReqRank>
+		<WinScore>15</WinScore>
+		<LoseScore>-24</LoseScore>
+
+	<RewardItems>
+        <RewardItem Type="Cash" Count="700"/>
+    </RewardItems>		
+
+		<TierIcon>Tier_08</TierIcon>
+	</RankTier>
+
+	<RankTier ID="81">
+		<NameComment>킹갓(2~5위)</NameComment>
+		<ReqScore>2400</ReqScore>
+		<ReqRank>5</ReqRank>
+		<WinScore>15</WinScore>
+		<LoseScore>-24</LoseScore>
+		<HideInRewardUI>true</HideInRewardUI>
+
+	<RewardItems>
+        <RewardItem Type="Cash" Count="1000"/>
+    </RewardItems>		
+
+
+		<TierIcon>Tier_08</TierIcon>
+	</RankTier>
+
+	<RankTier ID="82">
+		<NameComment>킹갓(1위)</NameComment>
+		<ReqScore>2400</ReqScore>
+		<ReqRank>1</ReqRank>
+		<WinScore>15</WinScore>
+		<LoseScore>-24</LoseScore>
+		
+		<HideInRewardUI>true</HideInRewardUI>
+
+	<RewardItems>
+        <RewardItem Type="Cash" Count="1500"/>
+    </RewardItems>
+
+		<TierIcon>Tier_08</TierIcon>
+	</RankTier>
+
+</RankTiers>

@@ -1,0 +1,341 @@
+﻿<Colors>
+    <!-- 기본 -->
+    <Color ID="1000">
+        <Desc>킹갓패스</Desc>
+        <Type>SeasonPass</Type>
+        <Value>FFD462</Value>
+    </Color>
+    <Color ID="1001">
+        <Desc>기간 한정</Desc>
+        <Type>Skin_Limited</Type>
+        <Value>51FFED</Value>
+    </Color>
+    <Color ID="1002">
+        <Desc>초회 한정</Desc>
+        <Type>Skin_FirstTimeOnly</Type>
+        <Value>FD5F86</Value>
+    </Color>
+    <Color ID="1003">
+        <Desc>이벤트</Desc>
+        <Type>Event</Type>
+        <Value>4AFDB1</Value>
+    </Color>
+    <Color ID="1004">
+        <Desc>잠식</Desc>
+        <Type>HardMode</Type>
+        <Value>7F51FF</Value>
+    </Color>
+    <Color ID="1005">
+        <Desc>스킨 소환</Desc>
+        <Type>SummonSkin</Type>
+        <Value>F5D470</Value>
+    </Color>
+    
+    <!-- 시즌 -->
+    <Color ID="2000">
+        <Desc>해맞이 축제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>0</Index>
+        <Value>FFAB54</Value>
+    </Color>
+    <Color ID="2001">
+        <Desc>동부 무투제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>1</Index>
+        <Value>BC8E66</Value>
+    </Color>
+    <Color ID="2002">
+        <Desc>개화제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>2</Index>
+        <Value>FFA5BC</Value>
+    </Color>
+    <Color ID="2003">
+        <Desc>건국제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>3</Index>
+        <Value>EAEAEA</Value>
+    </Color>
+    <Color ID="2004">
+        <Desc>신성제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>4</Index>
+        <Value>FFD789</Value>
+    </Color>
+    <Color ID="2005">
+        <Desc>파도축제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>5</Index>
+        <Value>5D9BFF</Value>
+    </Color>
+    <Color ID="2006">
+        <Desc>동화축제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>6</Index>
+        <Value>63FB84</Value>
+    </Color>
+    <Color ID="2007">
+        <Desc>북부 마물제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>7</Index>
+        <Value>E06256</Value>
+    </Color>
+    <Color ID="2008">
+        <Desc>할로윈 축제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>8</Index>
+        <Value>786AF1</Value>
+    </Color>
+    <Color ID="2009">
+        <Desc>눈꽃축제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>9</Index>
+        <Value>A1F7FF</Value>
+    </Color>
+    <Color ID="2010">
+        <Desc>성탄제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>10</Index>
+        <Value>D6FF67</Value>
+    </Color>
+    <Color ID="2011">
+        <Desc>엘도르 축제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>11</Index>
+        <Value>51B0FF</Value>
+    </Color>
+    <Color ID="2012">
+        <Desc>루나디아 축제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>12</Index>
+        <Value>FFAC04</Value>
+    </Color>
+    <Color ID="2013">
+        <Desc>비룡제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>13</Index>
+        <Value>FFD145</Value>
+    </Color>
+    <Color ID="2014">
+        <Desc>붉은달 축제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>14</Index>
+        <Value>EE5B5D</Value>
+    </Color>
+    <Color ID="2015">
+        <Desc>요리축제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>15</Index>
+        <Value>FFD789</Value>
+    </Color>
+    <Color ID="2016">
+        <Desc>교단제</Desc>
+        <Type>Skin_Season</Type>
+        <Index>16</Index>
+        <Value>FFD789</Value>
+    </Color>
+    
+    <Color ID="2100">
+        <Desc>일반 등급 스킨</Desc>
+        <Type>SkinGrade</Type>
+        <Index>0</Index>
+        <Value>DDDDDD</Value>
+    </Color>
+
+    <Color ID="2101">
+        <Desc>고급 등급 스킨</Desc>
+        <Type>SkinGrade</Type>
+        <Index>1</Index>
+        <Value>70FF8B</Value>
+    </Color>
+
+    <Color ID="2102">
+        <Desc>희귀 등급 스킨</Desc>
+        <Type>SkinGrade</Type>
+        <Index>2</Index>
+        <Value>70D4FF</Value>
+    </Color>
+
+    <Color ID="2103">
+        <Desc>영웅 등급 스킨</Desc>
+        <Type>SkinGrade</Type>
+        <Index>3</Index>
+        <Value>E670FF</Value>
+    </Color>
+
+    <Color ID="2104">
+        <Desc>전설 등급 스킨</Desc>
+        <Type>SkinGrade</Type>
+        <Index>4</Index>
+        <Value>FFDA70</Value>
+    </Color>
+
+    <Color ID="2105">
+        <Desc>초월 등급 스킨</Desc>
+        <Type>SkinGrade</Type>
+        <Index>5</Index>
+        <Value>FF39CA</Value>
+    </Color>
+
+    <Color ID="2106">
+        <Desc>신화 등급 스킨</Desc>
+        <Type>SkinGrade</Type>
+        <Index>6</Index>
+        <Value>FF5965</Value>
+    </Color>
+    
+    <!--갓급 스킨-->
+    <Color ID="3000">
+        <Desc>빛의 여신 멜</Desc>
+        <Type>GodSkin</Type>
+        <Index>0</Index>
+        <Value>FFDEA8</Value>
+    </Color>
+    <Color ID="3001">
+        <Desc>뇌신 자백</Desc>
+        <Type>GodSkin</Type>
+        <Index>1</Index>
+        <Value>A0B7FF</Value>
+    </Color>
+    <Color ID="3002">
+        <Desc>종말의 여신 렌</Desc>
+        <Type>GodSkin</Type>
+        <Index>2</Index>
+        <Value>EA1A32</Value>
+    </Color>
+    <Color ID="3003">
+        <Desc>달의 여신 티아</Desc>
+        <Type>GodSkin</Type>
+        <Index>3</Index>
+        <Value>CFE4F4</Value>
+    </Color>
+    <Color ID="3004">
+        <Desc>창조의 여신 가람</Desc>
+        <Type>GodSkin</Type>
+        <Index>4</Index>
+        <Value>e8cea2</Value>
+    </Color>
+    <Color ID="3005">
+        <Desc>혼돈의 여신 사르굴라</Desc>
+        <Type>GodSkin</Type>
+        <Index>5</Index>
+        <Value>6b56eb</Value>
+    </Color>
+    <Color ID="3006">
+        <Desc>지배의 여신 사르굴라</Desc>
+        <Type>GodSkin</Type>
+        <Index>6</Index>
+        <Value>E7CB8A</Value>
+    </Color>
+    
+    <Color ID="10001">
+        <Type>ThemeColor</Type>
+        <Index>1</Index>
+        <Value>66bf68</Value>
+    </Color>
+    <Color ID="10002">
+        <Type>ThemeColor</Type>
+        <Index>2</Index>
+        <Value>be4938</Value>
+    </Color>
+    <Color ID="10003">
+        <Type>ThemeColor</Type>
+        <Index>3</Index>
+        <Value>ffa70e</Value>
+    </Color>
+    <Color ID="10004">
+        <Type>ThemeColor</Type>
+        <Index>4</Index>
+        <Value>b2a8a8</Value>
+    </Color>
+    <Color ID="10005">
+        <Type>ThemeColor</Type>
+        <Index>5</Index>
+        <Value>289cf4</Value>
+    </Color>
+    <Color ID="10006">
+        <Type>ThemeColor</Type>
+        <Index>6</Index>
+        <Value>a33d66</Value>
+    </Color>
+    <Color ID="10007">
+        <Type>ThemeColor</Type>
+        <Index>7</Index>
+        <Value>4ad7c8</Value>
+    </Color>
+    <Color ID="10008">
+        <Type>ThemeColor</Type>
+        <Index>8</Index>
+        <Value>a665b9</Value>
+    </Color>
+    <Color ID="10009">
+        <Type>ThemeColor</Type>
+        <Index>9</Index>
+        <Value>c4def8</Value>
+    </Color>
+    <Color ID="10010">
+        <Type>ThemeColor</Type>
+        <Index>10</Index>
+        <Value>728bfb</Value>
+    </Color>
+    <Color ID="10011">
+        <Type>ThemeColor</Type>
+        <Index>11</Index>
+        <Value>fb6850</Value>
+    </Color>
+    <Color ID="10012">
+        <Type>ThemeColor</Type>
+        <Index>12</Index>
+        <Value>6055ff</Value>
+    </Color>
+    <Color ID="10013">
+        <Type>ThemeColor</Type>
+        <Index>13</Index>
+        <Value>8f7171</Value>
+    </Color>
+        <Color ID="10014">
+        <Type>ThemeColor</Type>
+        <Index>14</Index>
+        <Value>8E403A</Value>
+    </Color>
+        <Color ID="10015">
+        <Type>ThemeColor</Type>
+        <Index>15</Index>
+        <Value>FFFE91</Value>
+    </Color>
+    
+    <Color ID="11000">
+        <Type>ArtifactOption_AtkPer</Type>
+        <Value>FF6D25</Value>
+    </Color>
+    <Color ID="11001">
+        <Type>ArtifactOption_MAtkPer</Type>
+        <Value>2571DE</Value>
+    </Color>
+    <Color ID="11002">
+        <Type>ArtifactOption_AtkSpeedPer</Type>
+        <Value>31B86A</Value>
+    </Color>
+    <Color ID="11003">
+        <Type>ArtifactOption_HpPer</Type>
+        <Value>D32D24</Value>
+    </Color>
+
+    <Color ID="12000">
+        <Type>NormalMissionSubTap_0</Type>
+        <Value>C85455</Value>
+    </Color>
+    <Color ID="12001">
+        <Type>NormalMissionSubTap_1</Type>
+        <Value>5982E7</Value>
+    </Color>
+    <Color ID="12002">
+        <Type>NormalMissionSubTap_2</Type>
+        <Value>66A467</Value>
+    </Color>
+    <Color ID="12003">
+        <Type>NormalMissionSubTap_3</Type>
+        <Value>989898</Value>
+    </Color>
+
+</Colors>

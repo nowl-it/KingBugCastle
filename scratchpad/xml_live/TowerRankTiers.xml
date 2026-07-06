@@ -1,0 +1,108 @@
+<TowerRankTiers>
+	<TowerRankTier ID="10">
+		<NameComment>시련의탑 브론즈</NameComment>
+		<ReqScore>0</ReqScore>
+
+		<Reward Type='Key' ID="302" Count='1' />
+		<TierIcon>Tier_01</TierIcon>
+		<StarIcon>Tier_01_03</StarIcon>
+	</TowerRankTier>
+
+	<TowerRankTier ID="20">
+		<NameComment>시련의탑 실버</NameComment>
+		<ReqScore>100000</ReqScore>
+
+		<Reward Type='Key' ID="302" Count='1' />
+		<TierIcon>Tier_02</TierIcon>
+		<StarIcon>Tier_02_03</StarIcon>
+	</TowerRankTier>
+
+	<TowerRankTier ID="30">
+		<NameComment>시련의탑 골드</NameComment>
+		<ReqScore>150000</ReqScore>
+
+		<Reward Type='Key' ID="302" Count='1' />
+		<TierIcon>Tier_03</TierIcon>
+		<StarIcon>Tier_03_03</StarIcon>
+	</TowerRankTier>
+
+	<TowerRankTier ID="40">
+		<NameComment>시련의탑 플래티넘</NameComment>
+		<ReqScore>200000</ReqScore>
+
+		<Reward Type='Key' ID="302" Count='2' />
+		<TierIcon>Tier_04</TierIcon>
+		<StarIcon>Tier_04_03</StarIcon>
+	</TowerRankTier>
+
+	<TowerRankTier ID="50">
+		<NameComment>시련의탑 다이아</NameComment>
+		<ReqScore>250000</ReqScore>
+
+		<Reward Type='Key' ID="302" Count='2' />
+		<TierIcon>Tier_05</TierIcon>
+		<StarIcon>Tier_05_03</StarIcon>
+	</TowerRankTier>
+
+	<TowerRankTier ID="60">
+		<NameComment>시련의탑 킹</NameComment>
+		<ReqScore>300000</ReqScore>
+
+		<Reward Type='Key' ID="302" Count='4' />
+		<TierIcon>Tier_06</TierIcon>
+		<StarIcon>Tier_06_03</StarIcon>
+	</TowerRankTier>
+
+	<TowerRankTier ID="70">
+		<NameComment>시련의탑 갓</NameComment>
+		<ReqScore>320000</ReqScore>
+		<ReqRank>100</ReqRank>
+
+		<Reward Type='Key' ID="302" Count='4' />
+		<Reward Type='UnitSoulItem' Count='10' />
+		<TierIcon>Tier_07</TierIcon>
+		<StarIcon>Tier_07_03</StarIcon>
+	</TowerRankTier>
+
+	<TowerRankTier ID="80">
+		<NameComment>시련의탑 킹갓</NameComment>
+		<ReqScore>340000</ReqScore>
+		<ReqRank>10</ReqRank>
+
+		<Reward Type='Key' ID="302" Count='4' />
+		<Reward Type='UnitSoulItem' Count='20' />
+		<TierIcon>Tier_08</TierIcon>
+		<StarIcon>Tier_08_03</StarIcon>
+	</TowerRankTier>
+
+	<TowerRankTier ID="81">
+		<NameComment>시련의탑 3위(보상용)</NameComment>
+
+		<ReqScore>2000000000</ReqScore>
+		<Reward Type='Key' ID="302" Count='4' />
+		<Reward Type='UnitSoulItem' Count='30' />
+		<TierIcon>Tier_08</TierIcon>
+		<StarIcon>Tier_08_03</StarIcon>
+	</TowerRankTier>
+
+	<TowerRankTier ID="82">
+		<NameComment>시련의탑 2위(보상용)</NameComment>
+
+		<ReqScore>2000000000</ReqScore>
+		<Reward Type='Key' ID="302" Count='4' />
+		<Reward Type='UnitSoulItem' Count='50' />
+		<TierIcon>Tier_08</TierIcon>
+		<StarIcon>Tier_08_03</StarIcon>
+	</TowerRankTier>
+
+	<TowerRankTier ID="83">
+		<NameComment>시련의탑 1위(보상용)</NameComment>
+
+		<ReqScore>2000000000</ReqScore>
+		<Reward Type='Key' ID="302" Count='4' />
+		<Reward Type='UnitSoulItem' Count='70' />
+		<TierIcon>Tier_08</TierIcon>
+		<StarIcon>Tier_08_03</StarIcon>
+	</TowerRankTier>
+
+</TowerRankTiers>

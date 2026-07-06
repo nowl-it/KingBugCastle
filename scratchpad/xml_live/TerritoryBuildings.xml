@@ -1,0 +1,1587 @@
+<TerritoryBuildings>
+    <!-- 회관 -->
+    <TerritoryBuilding ID="10000">
+        <NameComment>회관 0레벨</NameComment>
+        <Name>TerritoryBuildingName_10000</Name>
+        <Desc>TerritoryBuildingDesc_10000</Desc>
+        <Category>Building</Category>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10001" Inherit="10000">
+        <NameComment>회관 1레벨</NameComment>
+        <LaborPrice>0</LaborPrice>
+        <TownHallCorePrice>0</TownHallCorePrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>2000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>50</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10101,10701,10801</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+        <CanCollectLabor>true</CanCollectLabor>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10002" Inherit="10001">
+        <NameComment>회관 2레벨</NameComment>
+        <TownHallCorePrice>1</TownHallCorePrice>
+        <GoldPrice>400</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>4000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>65</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10102,10201,10301,10401,10501,10601</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10003" Inherit="10002">
+        <NameComment>회관 3레벨</NameComment>
+        <TownHallCorePrice>2</TownHallCorePrice>
+        <GoldPrice>800</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>6000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>70</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10103,10202,10702,10802,10901</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10004" Inherit="10003">
+        <NameComment>회관 4레벨</NameComment>
+        <TownHallCorePrice>2</TownHallCorePrice>
+        <GoldPrice>1200</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>8000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>85</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10104,10203,10302,10502,10602</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10005" Inherit="10004">
+        <NameComment>회관 5레벨</NameComment>
+        <TownHallCorePrice>3</TownHallCorePrice>
+        <GoldPrice>1600</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>11000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>100</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10105,10204,10402,10902</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10006" Inherit="10005">
+        <NameComment>회관 6레벨</NameComment>
+        <TownHallCorePrice>3</TownHallCorePrice>
+        <GoldPrice>3000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>14000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>115</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10106,10205,10303,10703,10803</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10007" Inherit="10006">
+        <NameComment>회관 7레벨</NameComment>
+        <TownHallCorePrice>4</TownHallCorePrice>
+        <GoldPrice>8000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>17000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>130</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10107,10206,10403,10503,10603</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">4</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10008" Inherit="10007">
+        <NameComment>회관 8레벨</NameComment>
+        <TownHallCorePrice>4</TownHallCorePrice>
+        <GoldPrice>16000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>20000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>145</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10108,10304,10903</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">5</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10009" Inherit="10008">
+        <NameComment>회관 9레벨</NameComment>
+        <TownHallCorePrice>4</TownHallCorePrice>
+        <GoldPrice>24000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>24000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>160</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10109,10305,11001</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">5</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10010" Inherit="10009">
+        <NameComment>회관 10레벨</NameComment>
+        <TownHallCorePrice>4</TownHallCorePrice>
+        <GoldPrice>32000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>28000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>175</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10110,10404,10904,10504,10704,11002</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">6</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10011" Inherit="10010">
+        <NameComment>회관 11레벨</NameComment>
+        <TownHallCorePrice>5</TownHallCorePrice>
+        <GoldPrice>40000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>32000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>190</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10111,10306,10905,11003</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">6</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10012" Inherit="10011">
+        <NameComment>회관 12레벨</NameComment>
+        <TownHallCorePrice>6</TownHallCorePrice>
+        <GoldPrice>48000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxStoredLabor>36000</MaxStoredLabor>
+        <Specs>
+            <LaborGen>205</LaborGen>
+            <UnlockedBuilding ShowOnlyAtUpgrade="true">10112,10604,10804,11004</UnlockedBuilding>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">7</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddLaborGenPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <!-- 여관 -->
+    <TerritoryBuilding ID="10100">
+        <NameComment>여관 0레벨</NameComment>
+        <Name>TerritoryBuildingName_10100</Name>
+        <Desc>TerritoryBuildingDesc_10100</Desc>
+        <Category>Building</Category>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10101" Inherit="10100">
+        <NameComment>여관 1레벨</NameComment>
+        <LaborPrice>0</LaborPrice>
+        <CorePrice>0</CorePrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>1</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>4000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10102" Inherit="10101">
+        <NameComment>여관 2레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>200</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>2</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>8000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10103" Inherit="10102">
+        <NameComment>여관 3레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>400</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>3</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>12000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10104" Inherit="10103">
+        <NameComment>여관 4레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>600</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>4</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>16000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10105" Inherit="10104">
+        <NameComment>여관 5레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>800</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>5</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>22000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10106" Inherit="10105">
+        <NameComment>여관 6레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>1500</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>6</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>28000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10107" Inherit="10106">
+        <NameComment>여관 7레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>4000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>7</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>34000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10108" Inherit="10107">
+        <NameComment>여관 8레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>8000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>8</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>40000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10109" Inherit="10108">
+        <NameComment>여관 9레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>12000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>9</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>48000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">4</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10110" Inherit="10109">
+        <NameComment>여관 10레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>16000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>10</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>56000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">4</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10111" Inherit="10110">
+        <NameComment>여관 11레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>20000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>11</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>64000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">5</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10112" Inherit="10111">
+        <NameComment>여관 12레벨</NameComment>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>24000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>12</ReqTownHallLevel>
+        <Specs>
+            <AddMaxLabor>72000</AddMaxLabor>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">5</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddMaxLaborPer</UnitAssignmentBenefit>
+    </TerritoryBuilding>
+    <!-- 영웅의 성소 -->
+    <TerritoryBuilding ID="10200">
+        <NameComment>영웅의 성소 0레벨</NameComment>
+        <Name>TerritoryBuildingName_10200</Name>
+        <Desc>TerritoryBuildingDesc_10200_2</Desc>
+        <Panel>TerritoryLevelSyncPanel</Panel>
+        <JobTime>24:00:00</JobTime>
+        <Category>Building</Category>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10201" Inherit="10200">
+        <NameComment>영웅의 성소 1레벨</NameComment>
+        <LaborPrice>2000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>200</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>2</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount Hide="true">1</MaxUnitAssignCount>
+            <SyncLevel>8</SyncLevel>
+            <SyncPotentialTier Format="TerritoryBuildingSpec_SyncPotentialTier{0}">0</SyncPotentialTier>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10202" Inherit="10201">
+        <NameComment>영웅의 성소 2레벨</NameComment>
+        <LaborPrice>4000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>500</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>3</ReqTownHallLevel>
+        <Specs>
+            <SyncLevel>10</SyncLevel>
+            <SyncPotentialTier Format="TerritoryBuildingSpec_SyncPotentialTier{0}">0</SyncPotentialTier>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10203" Inherit="10202">
+        <NameComment>영웅의 성소 3레벨</NameComment>
+        <LaborPrice>6000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>1000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>4</ReqTownHallLevel>
+        <Specs>
+            <SyncLevel>12</SyncLevel>
+            <SyncPotentialTier Format="TerritoryBuildingSpec_SyncPotentialTier{0}">0</SyncPotentialTier>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10204" Inherit="10203">
+        <NameComment>영웅의 성소 4레벨</NameComment>
+        <LaborPrice>8000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>2000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>5</ReqTownHallLevel>
+        <Specs>
+            <SyncLevel>14</SyncLevel>
+            <SyncPotentialTier Format="TerritoryBuildingSpec_SyncPotentialTier{0}">0</SyncPotentialTier>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10205" Inherit="10204">
+        <NameComment>영웅의 성소 5레벨</NameComment>
+        <LaborPrice>11000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>4000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>6</ReqTownHallLevel>
+        <Specs>
+            <SyncLevel>16</SyncLevel>
+            <SyncPotentialTier Format="TerritoryBuildingSpec_SyncPotentialTier{0}">0</SyncPotentialTier>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10206" Inherit="10205">
+        <NameComment>영웅의 성소 6레벨</NameComment>
+        <LaborPrice>14000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>8000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>7</ReqTownHallLevel>
+        <Specs>
+            <SyncLevel>16</SyncLevel>
+            <SyncPotentialTier Format="TerritoryBuildingSpec_SyncPotentialTier{0}">1</SyncPotentialTier>
+        </Specs>
+    </TerritoryBuilding>
+    <!-- 조사단 -->
+    <TerritoryBuilding ID="10300">
+        <NameComment>조사단 0레벨</NameComment>
+        <Name>TerritoryBuildingName_10300</Name>
+        <Desc>TerritoryBuildingDesc_10300</Desc>
+        <Panel>TerritoryHuntingPanel</Panel>
+        <Category>Building</Category>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10301" Inherit="10300">
+        <NameComment>조사단 1레벨</NameComment>
+        <LaborPrice>1000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>100</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+		<ReqTownHallLevel>2</ReqTownHallLevel>
+		<Ticket>530</Ticket>
+		<Specs>
+			<MaxTickets Hide="true">2</MaxTickets>
+			<RecoverCountPerDay>2</RecoverCountPerDay>
+			<MaxDifficulty Format="TerritoryHuntingDifficulty_{0}">1</MaxDifficulty>
+			<MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+			<RewardBonusPer Hide="true">0</RewardBonusPer>
+		</Specs>
+        <UnitAssignmentBenefit>ShortenTimePer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Brave</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10302" Inherit="10301">
+        <NameComment>조사단 2레벨</NameComment>
+        <LaborPrice>5000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>500</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>4</ReqTownHallLevel>
+        <Ticket>530</Ticket>
+        <Specs>
+            <MaxTickets Hide="true">3</MaxTickets>
+            <RecoverCountPerDay>3</RecoverCountPerDay>
+            <MaxDifficulty Format="TerritoryHuntingDifficulty_{0}">2</MaxDifficulty>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>ShortenTimePer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Brave</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10303" Inherit="10302">
+        <NameComment>조사단 3레벨</NameComment>
+        <LaborPrice>10000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>1000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>6</ReqTownHallLevel>
+        <Ticket>530</Ticket>
+        <Specs>
+            <MaxTickets Hide="true">4</MaxTickets>
+            <RecoverCountPerDay>4</RecoverCountPerDay>
+            <MaxDifficulty Format="TerritoryHuntingDifficulty_{0}">3</MaxDifficulty>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>ShortenTimePer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Brave</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10304" Inherit="10303">
+        <NameComment>조사단 4레벨</NameComment>
+        <LaborPrice>40000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>4000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>8</ReqTownHallLevel>
+        <Ticket>530</Ticket>
+        <Specs>
+            <MaxTickets Hide="true">5</MaxTickets>
+            <RecoverCountPerDay>5</RecoverCountPerDay>
+            <MaxDifficulty Format="TerritoryHuntingDifficulty_{0}">4</MaxDifficulty>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>ShortenTimePer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Brave</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10305" Inherit="10304">
+        <NameComment>조사단 5레벨</NameComment>
+        <LaborPrice>50000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>5000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>9</ReqTownHallLevel>
+        <Ticket>530</Ticket>
+        <Specs>
+            <MaxTickets Hide="true">5</MaxTickets>
+            <RecoverCountPerDay>5</RecoverCountPerDay>
+            <MaxDifficulty Format="TerritoryHuntingDifficulty_{0}">5</MaxDifficulty>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">4</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>ShortenTimePer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Brave</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10306" Inherit="10305">
+        <NameComment>조사단 6레벨</NameComment>
+        <LaborPrice>70000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>7000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+		<ReqTownHallLevel>11</ReqTownHallLevel>
+		<Ticket>530</Ticket>
+		<Specs>
+			<MaxTickets Hide="true">5</MaxTickets>
+			<RecoverCountPerDay>5</RecoverCountPerDay>
+			<MaxUnitAssignCount ShowOnlyAtUpgrade="true">5</MaxUnitAssignCount>
+			<RewardBonusPer>30</RewardBonusPer>
+        </Specs>
+        <UnitAssignmentBenefit>ShortenTimePer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Brave</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <!-- 연금 공방 -->
+    <TerritoryBuilding ID="10400">
+        <NameComment>연금 공방 0레벨</NameComment>
+        <Name>TerritoryBuildingName_10400</Name>
+        <Desc>TerritoryBuildingDesc_10400</Desc>
+        <Panel>TerritoryAlchemyPanel</Panel>
+        <Category>Building</Category>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10401" Inherit="10400">
+        <NameComment>연금 공방 1레벨</NameComment>
+        <LaborPrice>1000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>100</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>2</ReqTownHallLevel>
+        <Specs>
+            <MaxItemLevel>2</MaxItemLevel>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddJackpotPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Mystic</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10402" Inherit="10401">
+        <NameComment>연금 공방 2레벨</NameComment>
+        <LaborPrice>15000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>1500</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>5</ReqTownHallLevel>
+        <Specs>
+            <MaxItemLevel>3</MaxItemLevel>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddJackpotPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Mystic</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10403" Inherit="10402">
+        <NameComment>연금 공방 3레벨</NameComment>
+        <LaborPrice>40000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>4000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>7</ReqTownHallLevel>
+        <Specs>
+            <MaxItemLevel>4</MaxItemLevel>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddJackpotPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Mystic</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10404" Inherit="10403">
+        <NameComment>연금 공방 4레벨</NameComment>
+        <LaborPrice>60000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>6000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>10</ReqTownHallLevel>
+        <Specs>
+            <MaxItemLevel>5</MaxItemLevel>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">4</MaxUnitAssignCount>
+        </Specs>
+        <UnitAssignmentBenefit>AddJackpotPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Mystic</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <!-- 검술 훈련소 -->
+    <TerritoryBuilding ID="10500">
+        <NameComment>검술 훈련소 0레벨</NameComment>
+        <Name>TerritoryBuildingName_10500</Name>
+        <Desc>TerritoryBuildingDesc_10500</Desc>
+        <Category>Building</Category>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10501" Inherit="10500">
+        <NameComment>검술 훈련소 1레벨</NameComment>
+        <LaborPrice>1000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>100</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>2</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddAtkPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Shadow</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10502" Inherit="10501">
+        <NameComment>검술 훈련소 2레벨</NameComment>
+        <LaborPrice>3000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>500</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>4</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddAtkPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Shadow</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10503" Inherit="10502">
+        <NameComment>검술 훈련소 3레벨</NameComment>
+        <LaborPrice>8000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>4000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>7</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddAtkPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Shadow</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10504" Inherit="10503">
+        <NameComment>검술 훈련소 4레벨</NameComment>
+        <LaborPrice>20000</LaborPrice>
+        <CorePrice>3</CorePrice>
+        <GoldPrice>8000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>10</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">4</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddAtkPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Shadow</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <!-- 체력 단련소 -->
+    <TerritoryBuilding ID="10600">
+        <NameComment>체력 단련소 0레벨</NameComment>
+        <Name>TerritoryBuildingName_10600</Name>
+        <Desc>TerritoryBuildingDesc_10600</Desc>
+        <Category>Building</Category>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10601" Inherit="10600">
+        <NameComment>체력 단련소 1레벨</NameComment>
+        <LaborPrice>1000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>100</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>2</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddHpPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Toughness</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10602" Inherit="10601">
+        <NameComment>체력 단련소 2레벨</NameComment>
+        <LaborPrice>3000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>500</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>4</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddHpPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Toughness</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10603" Inherit="10602">
+        <NameComment>체력 단련소 3레벨</NameComment>
+        <LaborPrice>8000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>4000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>7</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddHpPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Toughness</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10604" Inherit="10603">
+        <NameComment>체력 단련소 4레벨</NameComment>
+        <LaborPrice>20000</LaborPrice>
+        <CorePrice>3</CorePrice>
+        <GoldPrice>8000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>12</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">4</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddHpPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Toughness</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <!-- 마법 수련소 -->
+    <TerritoryBuilding ID="10700">
+        <NameComment>마법 수련소 0레벨</NameComment>
+        <Name>TerritoryBuildingName_10700</Name>
+        <Desc>TerritoryBuildingDesc_10700</Desc>
+        <Category>Building</Category>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10701" Inherit="10700">
+        <NameComment>마법 수련소 1레벨</NameComment>
+        <LaborPrice>1000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>100</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>1</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddMAtkPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Element</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10702" Inherit="10701">
+        <NameComment>마법 수련소 2레벨</NameComment>
+        <LaborPrice>3000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>500</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>3</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddMAtkPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Element</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10703" Inherit="10702">
+        <NameComment>마법 수련소 3레벨</NameComment>
+        <LaborPrice>8000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>4000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>6</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddMAtkPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Element</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10704" Inherit="10703">
+        <NameComment>마법 수련소 4레벨</NameComment>
+        <LaborPrice>20000</LaborPrice>
+        <CorePrice>3</CorePrice>
+        <GoldPrice>8000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>10</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">4</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddMAtkPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Element</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <!-- 궁술 연습소 -->
+    <TerritoryBuilding ID="10800">
+        <NameComment>궁술 연습소 0레벨</NameComment>
+        <Name>TerritoryBuildingName_10800</Name>
+        <Desc>TerritoryBuildingDesc_10800</Desc>
+        <Category>Building</Category>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10801" Inherit="10800">
+        <NameComment>궁술 연습소 1레벨</NameComment>
+        <LaborPrice>1000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>100</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>1</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">1</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddAtkSpeedPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Swift</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10802" Inherit="10801">
+        <NameComment>궁술 연습소 2레벨</NameComment>
+        <LaborPrice>3000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>500</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>3</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">2</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddAtkSpeedPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Swift</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10803" Inherit="10802">
+        <NameComment>궁술 연습소 3레벨</NameComment>
+        <LaborPrice>8000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>4000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>6</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">3</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddAtkSpeedPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Swift</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10804" Inherit="10803">
+        <NameComment>궁술 연습소 4레벨</NameComment>
+        <LaborPrice>20000</LaborPrice>
+        <CorePrice>3</CorePrice>
+        <GoldPrice>8000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>12</ReqTownHallLevel>
+        <Specs>
+            <MaxUnitAssignCount ShowOnlyAtUpgrade="true">4</MaxUnitAssignCount>
+        </Specs>
+        <HasAssignmentBenefitStat>true</HasAssignmentBenefitStat>
+        <UnitAssignmentBenefit>AddAtkSpeedPerBuffPer</UnitAssignmentBenefit>
+        <AssignmentBonusRole>Swift</AssignmentBonusRole>
+    </TerritoryBuilding>
+    <!-- 무역상 -->
+    <TerritoryBuilding ID="10900">
+        <NameComment>무역상 0레벨</NameComment>
+        <Name>TerritoryBuildingName_10900</Name>
+        <Desc>TerritoryBuildingDesc_10900</Desc>
+        <Panel>TerritoryTradeShopPanel</Panel>
+        <Category>Building</Category>
+        <MinVersion>586</MinVersion>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10901" Inherit="10900">
+        <NameComment>무역상 1레벨</NameComment>
+        <LaborPrice>2500</LaborPrice>
+        <CorePrice>0</CorePrice>
+        <GoldPrice>250</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>3</ReqTownHallLevel>
+        <Specs>
+            <UnlockedTradeShop>10000</UnlockedTradeShop>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10902" Inherit="10901">
+        <NameComment>무역상 2레벨</NameComment>
+        <LaborPrice>7500</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>750</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>5</ReqTownHallLevel>
+        <Specs>
+            <UnlockedTradeShop>10100</UnlockedTradeShop>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10903" Inherit="10902">
+        <NameComment>무역상 3레벨</NameComment>
+        <LaborPrice>40000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>4000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>8</ReqTownHallLevel>
+        <Specs>
+            <UnlockedTradeShop>10200</UnlockedTradeShop>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10904" Inherit="10903">
+        <NameComment>무역상 4레벨</NameComment>
+        <LaborPrice>50000</LaborPrice>
+        <CorePrice>1</CorePrice>
+        <GoldPrice>5000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>10</ReqTownHallLevel>
+        <Specs>
+            <UnlockedTradeShop>10300</UnlockedTradeShop>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="10905" Inherit="10904">
+        <NameComment>무역상 5레벨</NameComment>
+        <LaborPrice>60000</LaborPrice>
+        <CorePrice>3</CorePrice>
+        <GoldPrice>6000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>11</ReqTownHallLevel>
+        <Specs>
+            <UnlockedTradeShop>10400</UnlockedTradeShop>
+        </Specs>
+    </TerritoryBuilding>
+    <!-- 식당 -->
+    <TerritoryBuilding ID="11000">
+        <NameComment>식당 0레벨</NameComment>
+        <Name>TerritoryBuildingName_11000</Name>
+        <Desc>TerritoryBuildingDesc_11000</Desc>
+        <Panel>TerritoryRestaurantPanel</Panel>
+        <Category>Building</Category>
+        <MinVersion>164000</MinVersion>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="11001" Inherit="11000">
+        <NameComment>식당 1레벨</NameComment>
+        <LaborPrice>15000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>20000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>9</ReqTownHallLevel>
+        <Specs>
+            <ProduceHeartAmount>15</ProduceHeartAmount>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="11002" Inherit="11001">
+        <NameComment>식당 2레벨</NameComment>
+        <LaborPrice>20000</LaborPrice>
+        <CorePrice>2</CorePrice>
+        <GoldPrice>30000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>10</ReqTownHallLevel>
+        <Specs>
+            <ProduceHeartAmount>30</ProduceHeartAmount>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="11003" Inherit="11002">
+        <NameComment>식당 3레벨</NameComment>
+        <LaborPrice>30000</LaborPrice>
+        <CorePrice>3</CorePrice>
+        <GoldPrice>45000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>11</ReqTownHallLevel>
+        <Specs>
+            <ProduceHeartAmount>45</ProduceHeartAmount>
+        </Specs>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="11004" Inherit="11003">
+        <NameComment>식당 4레벨</NameComment>
+        <LaborPrice>45000</LaborPrice>
+        <CorePrice>3</CorePrice>
+        <GoldPrice>60000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ReqTownHallLevel>12</ReqTownHallLevel>
+        <Specs>
+            <ProduceHeartAmount>60</ProduceHeartAmount>
+        </Specs>
+    </TerritoryBuilding>
+    <!-- 꾸미기 -->
+    <TerritoryBuilding ID="20000">
+        <NameComment>마나석 0레벨</NameComment>
+        <Name>TerritoryBuildingName_20000</Name>
+        <Desc>TerritoryBuildingDesc_20000</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>10000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxCount>99</MaxCount>
+        <Sound>se_territory_building_etc</Sound>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="20001" Inherit="20000">
+        <NameComment>마나석 1레벨</NameComment>
+        <Name>TerritoryBuildingName_20000</Name>
+        <Desc>TerritoryBuildingDesc_20000</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>10000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="20100">
+        <NameComment>기사의 석상 0레벨</NameComment>
+        <Name>TerritoryBuildingName_20100</Name>
+        <Desc>TerritoryBuildingDesc_20100</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>10000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxCount>99</MaxCount>
+        <Sound>se_territory_building_etc</Sound>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="20101" Inherit="20100">
+        <NameComment>기사단 석상 1레벨</NameComment>
+        <Name>TerritoryBuildingName_20100</Name>
+        <Desc>TerritoryBuildingDesc_20100</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>10000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="20200">
+        <NameComment>분수대 0레벨</NameComment>
+        <Name>TerritoryBuildingName_20200</Name>
+        <Desc>TerritoryBuildingDesc_20200</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>10000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxCount>99</MaxCount>
+        <Sound>se_territory_building_etc</Sound>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="20201" Inherit="20200">
+        <NameComment>분수대 1레벨</NameComment>
+        <Name>TerritoryBuildingName_20200</Name>
+        <Desc>TerritoryBuildingDesc_20200</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>10000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="20300">
+        <NameComment>성의 고목 0레벨</NameComment>
+        <Name>TerritoryBuildingName_20300</Name>
+        <Desc>TerritoryBuildingDesc_20300</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>10000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <MaxCount>99</MaxCount>
+        <Sound>se_territory_building_etc</Sound>
+    </TerritoryBuilding>
+    <TerritoryBuilding ID="20301" Inherit="20300">
+        <NameComment>성의 고목 1레벨</NameComment>
+        <Name>TerritoryBuildingName_20300</Name>
+        <Desc>TerritoryBuildingDesc_20300</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>10000</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+    <!-- 갓 스킨 -->
+    <TerritoryBuilding ID="40000">
+        <NameComment>빛의 여신상 0레벨</NameComment>
+        <Name>TerritoryBuildingName_40000</Name>
+        <Desc>TerritoryBuildingDesc_40000</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ShowOnlyIfHas>true</ShowOnlyIfHas>
+        <Sound>se_unit_1021005_skill</Sound>
+        <UseSkin>false</UseSkin>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40001" Inherit="40000">
+        <NameComment>빛의 여신상 1레벨</NameComment>
+        <Name>TerritoryBuildingName_40000</Name>
+        <Desc>TerritoryBuildingDesc_40000</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40100">
+        <NameComment>번개의 신상 0레벨</NameComment>
+        <Name>TerritoryBuildingName_40100</Name>
+        <Desc>TerritoryBuildingDesc_40100</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ShowOnlyIfHas>true</ShowOnlyIfHas>
+        <Sound>se_unit_1031005_skill</Sound>
+        <UseSkin>false</UseSkin>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40101" Inherit="40100">
+        <NameComment>번개의 신상 1레벨</NameComment>
+        <Name>TerritoryBuildingName_40100</Name>
+        <Desc>TerritoryBuildingDesc_40100</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40200">
+        <NameComment>종말의 신상 0레벨</NameComment>
+        <Name>TerritoryBuildingName_40200</Name>
+        <Desc>TerritoryBuildingDesc_40200</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ShowOnlyIfHas>true</ShowOnlyIfHas>
+        <Sound>se_unit_1028005_skill</Sound>
+        <UseSkin>false</UseSkin>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40201" Inherit="40200">
+        <NameComment>종말의 신상 1레벨</NameComment>
+        <Name>TerritoryBuildingName_40200</Name>
+        <Desc>TerritoryBuildingDesc_40200</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40300">
+        <NameComment>달의 신상 0레벨</NameComment>
+        <Name>TerritoryBuildingName_40300</Name>
+        <Desc>TerritoryBuildingDesc_40300</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ShowOnlyIfHas>true</ShowOnlyIfHas>
+        <Sound>se_unit_1032007_skill</Sound>
+        <UseSkin>false</UseSkin>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40301" Inherit="40300">
+        <NameComment>달의 신상 1레벨</NameComment>
+        <Name>TerritoryBuildingName_40300</Name>
+        <Desc>TerritoryBuildingDesc_40300</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40400">
+        <NameComment>창조의 신상 0레벨</NameComment>
+        <Name>TerritoryBuildingName_40400</Name>
+        <Desc>TerritoryBuildingDesc_40400</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ShowOnlyIfHas>true</ShowOnlyIfHas>
+        <Sound>se_unit_1058004_skill2_7star</Sound>
+        <UseSkin>false</UseSkin>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40401" Inherit="40400">
+        <NameComment>창조의 신상 1레벨</NameComment>
+        <Name>TerritoryBuildingName_40400</Name>
+        <Desc>TerritoryBuildingDesc_40400</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40500">
+        <NameComment>혼돈의 신상 0레벨</NameComment>
+        <Name>TerritoryBuildingName_40500</Name>
+        <Desc>TerritoryBuildingDesc_40500</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ShowOnlyIfHas>true</ShowOnlyIfHas>
+        <Sound>se_unit_10640_04_skill</Sound>
+        <UseSkin>false</UseSkin>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40501" Inherit="40500">
+        <NameComment>혼돈의 신상 1레벨</NameComment>
+        <Name>TerritoryBuildingName_40500</Name>
+        <Desc>TerritoryBuildingDesc_40500</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+    
+    <TerritoryBuilding ID="40600">
+        <NameComment>지배의 신상 0레벨</NameComment>
+        <Name>TerritoryBuildingName_40600</Name>
+        <Desc>TerritoryBuildingDesc_40600</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ShowOnlyIfHas>true</ShowOnlyIfHas>
+        <Sound>se_unit_10630_04_skill_1</Sound>
+        <UseSkin>false</UseSkin>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="40601" Inherit="40600">
+        <NameComment>지배의 신상 1레벨</NameComment>
+        <Name>TerritoryBuildingName_40600</Name>
+        <Desc>TerritoryBuildingDesc_40600</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="50000">
+        <NameComment>격전 시작의 석상 0레벨</NameComment>
+        <Name>TerritoryBuildingName_50000</Name>
+        <Desc>TerritoryBuildingDesc_50000</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <ShowOnlyIfHas>true</ShowOnlyIfHas>
+        <Minversion>422</Minversion>
+        <UseSkin>false</UseSkin>
+    </TerritoryBuilding>
+
+    <TerritoryBuilding ID="50001" Inherit="50000">
+        <NameComment>격전 시작의 석상 1레벨</NameComment>
+        <Name>TerritoryBuildingName_50000</Name>
+        <Desc>TerritoryBuildingDesc_50000</Desc>
+        <Category>Decoration</Category>
+        <CanStore>true</CanStore>
+        <LaborPrice>0</LaborPrice>
+        <GoldPrice>0</GoldPrice>
+        <UpgradeTime>00:00:00</UpgradeTime>
+        <Minversion>422</Minversion>
+    </TerritoryBuilding>
+
+	<TerritoryBuilding ID="100000">
+		<NameComment>해변축제 바닷가재 낚시터 0레벨</NameComment>
+		<Name>TerritoryBuildingName_100000</Name>
+		<Desc>TerritoryBuildingDesc_100000</Desc>
+		<Icon>Event_Fishing_04</Icon>
+		<IconScale>3</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Fishing</EventBuildingType>
+		<Prefab>TerritoryBuilding_100000</Prefab>
+		<Sound>se_territory_building_100000</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="100001" Inherit="100000">
+		<NameComment>해변축제 바닷가재 낚시터 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>1</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>90</SeasonalTokenPrice>
+		<UpgradeTime>01:00:00</UpgradeTime>
+		<Specs>
+			<BronzeTokenGen>10</BronzeTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="100100">
+		<NameComment>해변축제 잉어 낚시터 0레벨</NameComment>
+		<Name>TerritoryBuildingName_100100</Name>
+		<Desc>TerritoryBuildingDesc_100100</Desc>
+		<Icon>Event_Fishing_04</Icon>
+		<IconScale>3</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Fishing</EventBuildingType>
+		<Prefab>TerritoryBuilding_100100</Prefab>
+		<Sound>se_territory_building_100000</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="100101" Inherit="100100">
+		<NameComment>해변축제 잉어 낚시터 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>3</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>120</SeasonalTokenPrice>
+		<UpgradeTime>02:00:00</UpgradeTime>
+		<Specs>
+			<BronzeTokenGen>15</BronzeTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="100200">
+		<NameComment>해변축제 대게 낚시터 0레벨</NameComment>
+		<Name>TerritoryBuildingName_100200</Name>
+		<Desc>TerritoryBuildingDesc_100200</Desc>
+		<Icon>Event_Fishing_04</Icon>
+		<IconScale>3</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Fishing</EventBuildingType>
+		<Prefab>TerritoryBuilding_100200</Prefab>
+		<Sound>se_territory_building_100000</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="100201" Inherit="100200">
+		<NameComment>해변축제 대게 낚시터 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>5</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>150</SeasonalTokenPrice>
+		<UpgradeTime>04:00:00</UpgradeTime>
+		<Specs>
+			<BronzeTokenGen>20</BronzeTokenGen>
+			<GoldTokenGen>1</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="100300">
+		<NameComment>해변축제 상어 낚시터 0레벨</NameComment>
+		<Name>TerritoryBuildingName_100300</Name>
+		<Desc>TerritoryBuildingDesc_100300</Desc>
+		<Icon>Event_Fishing_04</Icon>
+		<IconScale>3</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Fishing</EventBuildingType>
+		<Prefab>TerritoryBuilding_100300</Prefab>
+		<Sound>se_territory_building_100000</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="100301" Inherit="100300">
+		<NameComment>해변축제 상어 낚시터 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>7</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>180</SeasonalTokenPrice>
+		<UpgradeTime>08:00:00</UpgradeTime>
+		<Specs>
+			<BronzeTokenGen>25</BronzeTokenGen>
+			<SilverTokenGen>5</SilverTokenGen>
+			<GoldTokenGen>1</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="101000">
+		<NameComment>해변축제 수박 좌판 0레벨</NameComment>
+		<Name>TerritoryBuildingName_101000</Name>
+		<Desc>TerritoryBuildingDesc_101000</Desc>
+		<Icon>Event_Stall_02</Icon>
+		<IconScale>2</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Stall</EventBuildingType>
+		<Prefab>TerritoryBuilding_101000</Prefab>
+		<Sound>se_territory_building_etc</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="101001" Inherit="101000">
+		<NameComment>해변축제 수박 좌판 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>2</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>105</SeasonalTokenPrice>
+		<UpgradeTime>01:00:00</UpgradeTime>
+		<Specs>
+			<SilverTokenGen>3</SilverTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="101100">
+		<NameComment>해변축제 생선 구이 좌판 0레벨</NameComment>
+		<Name>TerritoryBuildingName_101100</Name>
+		<Desc>TerritoryBuildingDesc_101100</Desc>
+		<Icon>Event_Stall_01</Icon>
+		<IconScale>2</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Stall</EventBuildingType>
+		<Prefab>TerritoryBuilding_101100</Prefab>
+		<Sound>se_territory_building_etc</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="101101" Inherit="101100">
+		<NameComment>해변축제 생선 구이 좌판 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>4</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>135</SeasonalTokenPrice>
+		<UpgradeTime>02:00:00</UpgradeTime>
+		<Specs>
+			<SilverTokenGen>5</SilverTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="101200">
+		<NameComment>해변축제 기념품 좌판 0레벨</NameComment>
+		<Name>TerritoryBuildingName_101200</Name>
+		<Desc>TerritoryBuildingDesc_101200</Desc>
+		<Icon>Event_Stall_04</Icon>
+		<IconScale>2</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Stall</EventBuildingType>
+		<Prefab>TerritoryBuilding_101200</Prefab>
+		<Sound>se_territory_building_etc</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="101201" Inherit="101200">
+		<NameComment>해변축제 기념품 좌판 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>6</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>165</SeasonalTokenPrice>
+		<UpgradeTime>04:00:00</UpgradeTime>
+		<Specs>
+			<SilverTokenGen>7</SilverTokenGen>
+			<GoldTokenGen>1</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="101300">
+		<NameComment>해변축제 횟집 좌판 0레벨</NameComment>
+		<Name>TerritoryBuildingName_101300</Name>
+		<Desc>TerritoryBuildingDesc_101300</Desc>
+		<Icon>Event_Stall_03</Icon>
+		<IconScale>2</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Stall</EventBuildingType>
+		<Prefab>TerritoryBuilding_101300</Prefab>
+		<Sound>se_territory_building_etc</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="101301" Inherit="101300">
+		<NameComment>해변축제 횟집 좌판 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>8</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>195</SeasonalTokenPrice>
+		<UpgradeTime>08:00:00</UpgradeTime>
+		<Specs>
+			<SilverTokenGen>10</SilverTokenGen>
+			<GoldTokenGen>1</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="102000">
+		<NameComment>해변축제 음료수 가게 0레벨</NameComment>
+		<Name>TerritoryBuildingName_102000</Name>
+		<Desc>TerritoryBuildingDesc_102000</Desc>
+		<Icon>Event_Shop_06</Icon>
+		<IconScale>1.5</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Shop</EventBuildingType>
+		<Prefab>TerritoryBuilding_102000</Prefab>
+		<Sound>se_territory_building_10100</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="102001" Inherit="102000">
+		<NameComment>해변축제 음료수 가게 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>1</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>90</SeasonalTokenPrice>
+		<UpgradeTime>01:00:00</UpgradeTime>
+		<Specs>
+			<GoldTokenGen>1</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="102100">
+		<NameComment>해변축제 아이스크림 가게 0레벨</NameComment>
+		<Name>TerritoryBuildingName_102100</Name>
+		<Desc>TerritoryBuildingDesc_102100</Desc>
+		<Icon>Event_Shop_05</Icon>
+		<IconScale>1.5</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Shop</EventBuildingType>
+		<Prefab>TerritoryBuilding_102100</Prefab>
+		<Sound>se_territory_building_10100</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="102101" Inherit="102100">
+		<NameComment>해변축제 아이스크림 가게 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>2</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>105</SeasonalTokenPrice>
+		<UpgradeTime>01:00:00</UpgradeTime>
+		<Specs>
+			<BronzeTokenGen>5</BronzeTokenGen>
+			<GoldTokenGen>1</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="102200">
+		<NameComment>해변축제 해변 모자 가게 0레벨</NameComment>
+		<Name>TerritoryBuildingName_102200</Name>
+		<Desc>TerritoryBuildingDesc_102200</Desc>
+		<Icon>Event_Shop_02</Icon>
+		<IconScale>1.5</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Shop</EventBuildingType>
+		<Prefab>TerritoryBuilding_102200</Prefab>
+		<Sound>se_territory_building_10100</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="102201" Inherit="102200">
+		<NameComment>해변축제 해변 모자 가게 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>3</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>120</SeasonalTokenPrice>
+		<UpgradeTime>02:00:00</UpgradeTime>
+		<Specs>
+			<SilverTokenGen>3</SilverTokenGen>
+			<GoldTokenGen>2</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="102300">
+		<NameComment>해변축제 망고 빙수 가게 0레벨</NameComment>
+		<Name>TerritoryBuildingName_102300</Name>
+		<Desc>TerritoryBuildingDesc_102300</Desc>
+		<Icon>Event_Shop_04</Icon>
+		<IconScale>1.5</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Shop</EventBuildingType>
+		<Prefab>TerritoryBuilding_102300</Prefab>
+		<Sound>se_territory_building_10100</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="102301" Inherit="102300">
+		<NameComment>해변축제 망고 빙수 가게 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>4</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>135</SeasonalTokenPrice>
+		<UpgradeTime>02:00:00</UpgradeTime>
+		<Specs>
+			<BronzeTokenGen>10</BronzeTokenGen>
+			<GoldTokenGen>2</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="102400">
+		<NameComment>해변축제 물놀이용품 가게 0레벨</NameComment>
+		<Name>TerritoryBuildingName_102400</Name>
+		<Desc>TerritoryBuildingDesc_102400</Desc>
+		<Icon>Event_Shop_01</Icon>
+		<IconScale>1.5</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Shop</EventBuildingType>
+		<Prefab>TerritoryBuilding_102400</Prefab>
+		<Sound>se_territory_building_10100</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="102401" Inherit="102400">
+		<NameComment>해변축제 물놀이용품 가게 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>5</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>150</SeasonalTokenPrice>
+		<UpgradeTime>04:00:00</UpgradeTime>
+		<Specs>
+			<BronzeTokenGen>5</BronzeTokenGen>
+			<SilverTokenGen>5</SilverTokenGen>
+			<GoldTokenGen>3</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="102500">
+		<NameComment>해변축제 장난감물총 가게 0레벨</NameComment>
+		<Name>TerritoryBuildingName_102500</Name>
+		<Desc>TerritoryBuildingDesc_102500</Desc>
+		<Icon>Event_Shop_03</Icon>
+		<IconScale>1.5</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Shop</EventBuildingType>
+		<Prefab>TerritoryBuilding_102500</Prefab>
+		<Sound>se_territory_building_10100</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="102501" Inherit="102500">
+		<NameComment>해변축제 장난감물총 가게 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>6</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>165</SeasonalTokenPrice>
+		<UpgradeTime>04:00:00</UpgradeTime>
+		<Specs>
+			<BronzeTokenGen>15</BronzeTokenGen>
+			<GoldTokenGen>3</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="102600">
+		<NameComment>해변축제 고급 음료 가게 0레벨</NameComment>
+		<Name>TerritoryBuildingName_102600</Name>
+		<Desc>TerritoryBuildingDesc_102600</Desc>
+		<Icon>Event_Shop_08</Icon>
+		<IconScale>1.5</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Shop</EventBuildingType>
+		<Prefab>TerritoryBuilding_102600</Prefab>
+		<Sound>se_territory_building_10100</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="102601" Inherit="102600">
+		<NameComment>해변축제 고급 음료 가게 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>7</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>180</SeasonalTokenPrice>
+		<UpgradeTime>08:00:00</UpgradeTime>
+		<Specs>
+			<BronzeTokenGen>5</BronzeTokenGen>
+			<SilverTokenGen>7</SilverTokenGen>
+			<GoldTokenGen>4</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+
+	<TerritoryBuilding ID="102700">
+		<NameComment>해변축제 고급 아이스크림 가게 0레벨</NameComment>
+		<Name>TerritoryBuildingName_102700</Name>
+		<Desc>TerritoryBuildingDesc_102700</Desc>
+		<Icon>Event_Shop_09</Icon>
+		<IconScale>1.5</IconScale>
+		<Category>Building</Category>
+		<EventBuildingType>TerritoryTycoon_Beach_Shop</EventBuildingType>
+		<Prefab>TerritoryBuilding_102700</Prefab>
+		<Sound>se_territory_building_10100</Sound>
+	</TerritoryBuilding>
+	<TerritoryBuilding ID="102701" Inherit="102700">
+		<NameComment>해변축제 고급 아이스크림 가게 1레벨</NameComment>
+		<ReqTerritoryTycoonLevel>8</ReqTerritoryTycoonLevel>
+		<SeasonalTokenPrice>195</SeasonalTokenPrice>
+		<UpgradeTime>08:00:00</UpgradeTime>
+		<Specs>
+			<BronzeTokenGen>20</BronzeTokenGen>
+			<SilverTokenGen>3</SilverTokenGen>
+			<GoldTokenGen>4</GoldTokenGen>
+		</Specs>
+	</TerritoryBuilding>
+	
+</TerritoryBuildings>

@@ -1,0 +1,382 @@
+<ColosseumLeagueInfo>
+	<LeagueInfo ID="1">
+		<NameComment>시작의 리그</NameComment>
+		
+		<FromSeason>39</FromSeason>
+		<EndSeason>41</EndSeason>
+
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+		
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1000006</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">100000600</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">100000601</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+	<LeagueInfo ID="2">
+		<NameComment>여명의 리그</NameComment>
+
+		<FromSeason>42</FromSeason>
+		<EndSeason>44</EndSeason>
+
+		<!-- {} 포인트 보상에서 {}에 해당하는 스트링(없을시 리그 이름) -->
+<!--		<RewardTitleLeagueName>ColosseumLeagueName_1</RewardTitleLeagueName>-->
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+		
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1009005</RewardSkin>
+				<RewardSkin Type="PvP">1009005</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">100900500</RewardSkin>
+				<RewardSkin Type="PvP">100900500</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">100900501</RewardSkin>
+				<RewardSkin Type="PvP">100900501</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+	<LeagueInfo ID="3">
+		<NameComment>불새의 리그</NameComment>
+
+		<FromSeason>45</FromSeason>
+		<EndSeason>47</EndSeason>
+
+		<!-- {} 포인트 보상에서 {}에 해당하는 스트링(없을시 리그 이름) -->
+		<!--		<RewardTitleLeagueName>ColosseumLeagueName_1</RewardTitleLeagueName>-->
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1011006</RewardSkin>
+				<RewardSkin Type="PvP">1031006</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">101100600</RewardSkin>
+				<RewardSkin Type="PvP">103100600</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">101100601</RewardSkin>
+				<RewardSkin Type="PvP">103100601</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+	<LeagueInfo ID="4">
+		<NameComment>분투의 리그</NameComment>
+
+		<FromSeason>48</FromSeason>
+		<EndSeason>50</EndSeason>
+
+		<!-- {} 포인트 보상에서 {}에 해당하는 스트링(없을시 리그 이름) -->
+		<!--		<RewardTitleLeagueName>ColosseumLeagueName_1</RewardTitleLeagueName>-->
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1007006</RewardSkin>
+				<RewardSkin Type="PvP">1002005</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">100700600</RewardSkin>
+				<RewardSkin Type="PvP">100200500</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">100700601</RewardSkin>
+				<RewardSkin Type="PvP">100200501</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+	<LeagueInfo ID="5">
+		<NameComment>신념의 리그</NameComment>
+
+		<FromSeason>51</FromSeason>
+		<EndSeason>53</EndSeason>
+
+		<!-- {} 포인트 보상에서 {}에 해당하는 스트링(없을시 리그 이름) -->
+		<!--		<RewardTitleLeagueName>ColosseumLeagueName_1</RewardTitleLeagueName>-->
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1004008</RewardSkin>
+				<RewardSkin Type="PvP">1003005</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">100400800</RewardSkin>
+				<RewardSkin Type="PvP">100300500</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">100400801</RewardSkin>
+				<RewardSkin Type="PvP">100300501</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+	<LeagueInfo ID="6">
+		<NameComment>결단의 리그</NameComment>
+
+		<FromSeason>54</FromSeason>
+		<EndSeason>56</EndSeason>
+
+		<!-- {} 포인트 보상에서 {}에 해당하는 스트링(없을시 리그 이름) -->
+		<!--		<RewardTitleLeagueName>ColosseumLeagueName_1</RewardTitleLeagueName>-->
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1005007</RewardSkin>
+				<RewardSkin Type="PvP">1035005</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">100500700</RewardSkin>
+				<RewardSkin Type="PvP">103500500</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">100500701</RewardSkin>
+				<RewardSkin Type="PvP">103500501</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+	<LeagueInfo ID="7">
+		<NameComment>무릉의 리그</NameComment>
+
+		<FromSeason>57</FromSeason>
+		<EndSeason>59</EndSeason>
+
+		<!-- {} 포인트 보상에서 {}에 해당하는 스트링(없을시 리그 이름) -->
+		<!--		<RewardTitleLeagueName>ColosseumLeagueName_1</RewardTitleLeagueName>-->
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1036005</RewardSkin>
+				<RewardSkin Type="PvP">1034006</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">103600500</RewardSkin>
+				<RewardSkin Type="PvP">103400600</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">103600501</RewardSkin>
+				<RewardSkin Type="PvP">103400601</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+	<LeagueInfo ID="8">
+		<NameComment>암영의 리그</NameComment>
+
+		<FromSeason>60</FromSeason>
+		<EndSeason>62</EndSeason>
+
+		<!-- {} 포인트 보상에서 {}에 해당하는 스트링(없을시 리그 이름) -->
+		<!--		<RewardTitleLeagueName>ColosseumLeagueName_1</RewardTitleLeagueName>-->
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1010006</RewardSkin>
+				<RewardSkin Type="PvP">1012005</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">101000600</RewardSkin>
+				<RewardSkin Type="PvP">101200500</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">101000601</RewardSkin>
+				<RewardSkin Type="PvP">101200501</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+	<LeagueInfo ID="9">
+		<NameComment>증명의 리그</NameComment>
+
+		<FromSeason>63</FromSeason>
+		<EndSeason>65</EndSeason>
+
+		<!-- {} 포인트 보상에서 {}에 해당하는 스트링(없을시 리그 이름) -->
+		<!--		<RewardTitleLeagueName>ColosseumLeagueName_1</RewardTitleLeagueName>-->
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1021006</RewardSkin>
+				<RewardSkin Type="PvP">1014006</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">102100600</RewardSkin>
+				<RewardSkin Type="PvP">101400600</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">102100601</RewardSkin>
+				<RewardSkin Type="PvP">101400601</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+	<LeagueInfo ID="10">
+		<NameComment>격동의 리그</NameComment>
+
+		<FromSeason>66</FromSeason>
+		<EndSeason>68</EndSeason>
+
+		<!-- {} 포인트 보상에서 {}에 해당하는 스트링(없을시 리그 이름) -->
+		<!--		<RewardTitleLeagueName>ColosseumLeagueName_1</RewardTitleLeagueName>-->
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1020008</RewardSkin>
+				<RewardSkin Type="PvP">1008004</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">102000800</RewardSkin>
+				<RewardSkin Type="PvP">100800400</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">102000801</RewardSkin>
+				<RewardSkin Type="PvP">100800401</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+	<LeagueInfo ID="11">
+		<NameComment>유대의 리그</NameComment>
+
+		<FromSeason>69</FromSeason>
+		<EndSeason>71</EndSeason>
+
+		<!-- {} 포인트 보상에서 {}에 해당하는 스트링(없을시 리그 이름) -->
+		<!--		<RewardTitleLeagueName>ColosseumLeagueName_1</RewardTitleLeagueName>-->
+		<!-- 이 아래는 UI용으로만 개말되었고 실제 지급로직은 쿼리에 하드코딩 되어있으므로 변경 필요할시 참고 -->
+		<TopRewardPoints>100,90,80,75,70,68,66,64,62,60</TopRewardPoints>
+
+		<Rewards>
+			<Reward>
+				<Tier>1</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>1</ReqValue>
+				<RewardSkin Type="Colosseum">1023005</RewardSkin>
+				<RewardSkin Type="PvP">1056004</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>2</Tier>
+				<ReqType>Point</ReqType>
+				<ReqValue>40</ReqValue>
+				<RewardSkin Type="Colosseum">102300500</RewardSkin>
+				<RewardSkin Type="PvP">105600400</RewardSkin>
+			</Reward>
+			<Reward>
+				<Tier>3</Tier>
+				<ReqType>Rank</ReqType>
+				<ReqValue>50</ReqValue>
+				<RewardSkin Type="Colosseum">102300501</RewardSkin>
+				<RewardSkin Type="PvP">105600401</RewardSkin>
+			</Reward>
+		</Rewards>
+	</LeagueInfo>
+</ColosseumLeagueInfo>
