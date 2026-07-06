@@ -112,3 +112,14 @@ Want to understand how we dumped IL2CPP, mapped the 280+ routes, defeated SSL pi
 ## 🤝 Contributing
 
 This project relies on continuous mapping as the game updates. If you find an unmapped route returning a `500` or an empty object, capture the real traffic using `mitmproxy`, find the matching model in `server/generated/models.json`, and add the override in `server.py` or `server/data/static_overrides.json`.
+
+---
+
+## 💖 Support & Donate
+
+If you found this project helpful for your research, reverse-engineering learning, or just had fun messing around with the private server, consider supporting the development! Maintaining this project requires constant teardowns of new game updates.
+
+<a href="https://www.buymeacoffee.com/nowl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 50px !important;width: 217px !important;" ></a>
+<a href="https://ko-fi.com/nowl" target="_blank"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Buy Me a Coffee at ko-fi.com" style="height: 50px !important;width: 217px !important;" ></a>
+
+*(Don't forget to update these placeholder links to your actual donation links!)*
