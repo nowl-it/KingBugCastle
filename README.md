@@ -47,25 +47,33 @@ To successfully run the backend and deployment scripts, your system must meet th
 
 ## 🗺️ Architecture & Workflow
 
+The private server emulator is designed to intercept and process all traffic from the game client by fully replicating the backend architecture of King God Castle.
+
+### System Components
+
+1. **FastAPI Backend Emulator (`server.py`)**: Acts as the central game server (`axis-game.awesomepiece.com`). It serves over 280+ dynamically mapped REST endpoints. Instead of relying on a traditional database, all state and logic are driven by flat JSON files located in `server/data/` (for static rules) and `server/state/player.json` (for live player progression).
+2. **Binary Patcher (`rebuild_arm64.py`)**: Before the game can connect to the emulator, the client's `libil2cpp.so` must be modified. This automated pipeline injects assembly to bypass SSL pinning (forcing `CertificateHandler.ValidateCertificate` to always return true) and skips NRE (NullReferenceException) triggers in the UI.
+3. **Local XML CDN**: The game downloads "Patch Assets" (XML tables) at boot. We mirror the official S3 CDN locally. The backend directs the game to our local CDN (`kgc-cdn-1.awesomepiece.com`), allowing us to inject custom items, text modifications, and rule changes via `rebuild_xml_bundle.py`.
+4. **XIGNCODE3 Stub**: The proprietary anti-cheat module prevents the game from booting if it can't reach the Wellbia servers. We replace the heavy `libxigncode.so` with a lightweight 8KB C-stub that successfully fakes the `/auth/xcdSeed` handshake, entirely bypassing the local integrity checks.
+
 ```mermaid
 graph TD
     Client[📱 Android Client / Emulator]
     FastAPI[⚡ Local FastAPI Server]
     CDN[📦 Local XML CDN]
-    XIGNCODE[🛡️ Xigncode Stub]
+    XIGNCODE[🛡️ 8KB Xigncode Stub]
     Data[(JSON Data & State)]
 
-    Client -- "HTTPS (Bypassed TLS)" --> FastAPI
-    Client -- "Fetch XML Updates" --> CDN
+    Client -- "HTTPS (Bypassed TLS via ARM64 Patch)" --> FastAPI
+    Client -- "Fetch XML Patch Bundles" --> CDN
     FastAPI <--> Data
-    Client <--> XIGNCODE
+    Client <-->|"Faked Seed Handshake"| XIGNCODE
     
     style Client fill:#2D3748,stroke:#4A5568
     style FastAPI fill:#009688,stroke:#00796B
     style Data fill:#D69E2E,stroke:#B7791F
     style CDN fill:#3182CE,stroke:#2B6CB0
 ```
-
 ---
 
 ## 🧭 Documentation Hub
