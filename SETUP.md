@@ -22,14 +22,30 @@ All five must be on your `PATH`. `python3 setup.py` checks them and prints what'
 
 ## 2. Supply the game files
 
-The game APK is **not** in this repo (copyright + 1 GB). Download the real
-**King God Castle v170.1.00, arm64** XAPK from APKPure and drop it into `apk/`:
+The game APK is **not** in this repo (copyright + 1 GB). Use the built-in
+`kgc-cli` tool to download the correct **King God Castle v170.1.00, arm64** XAPK:
 
+```bash
+mkdir -p apk && ./kgc-cli download -v 170.1.00 -o apk/
 ```
-apk/com.awesomepiece.castle@170.1.00.xapk
-```
+
+> **Why `kgc-cli`?** APKs from third-party sites (APKPure, etc.) often strip
+> `libil2cpp.so` (the IL2CPP runtime binary). `kgc-cli` downloads a complete
+> XAPK with all native libraries included. If you use a manually-downloaded XAPK
+> and the build fails with `libil2cpp.so not found`, re-download with `kgc-cli`.
 
 ## 3. Setup
+
+Create a Python virtual environment (recommended — some distros block system-wide
+`pip install` with `externally-managed-environment`):
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate        # Linux/macOS
+# .venv\Scripts\activate         # Windows
+```
+
+Then run setup and install dependencies:
 
 ```bash
 python3 setup.py                       # checks tools, extracts XAPK, makes a debug key
@@ -44,8 +60,8 @@ patch accepts the self-signed cert). `setup.py` generates `server/cert.pem` +
 
 ```bash
 cd server
-python3 -m uvicorn server:app --host 0.0.0.0 --port 8080 &
-python3 -m uvicorn server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem --ssl-certfile cert.pem &
+../.venv/bin/python -m uvicorn server:app --host 0.0.0.0 --port 8080 &
+../.venv/bin/python -m uvicorn server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem --ssl-certfile cert.pem &
 ```
 
 (On Windows, run the two commands in two terminals, or use `serve_public.sh` under WSL/Git-Bash.)
@@ -73,7 +89,7 @@ Confirm with `adb devices`. Then **bake `127.0.0.1` and install** (side-by-side 
 `com.nowl.castle`, "King Bug Castle" - does not touch the real game):
 
 ```bash
-ADB_SERIAL=<serial> python3 server/rebuild_arm64_mod.py --host 127.0.0.1
+ADB_SERIAL=<serial> .venv/bin/python server/rebuild_arm64_mod.py --host 127.0.0.1
 ```
 
 **Route the device's :443 to your server's :8443** (no root needed):
@@ -122,3 +138,44 @@ KGC_REBUILD_NATIVE=1 ...   # forces libmain_wrapper.so recompile (auto-finds NDK
 
 The build auto-derives everything from the repo root. Override via env if needed:
 `KGC_ROOT`, `KGC_XAPK` (extracted-splits dir), `KGC_WORK` (build scratch), `ADB_SERIAL`.
+
+---
+
+## Troubleshooting
+
+### `libil2cpp.so not found` in config APK
+
+The XAPK from third-party sites (APKPure, etc.) may strip the IL2CPP native
+binary. Re-download using the repo's built-in tool:
+
+```bash
+./kgc-cli download -v 170.1.00 -o apk/
+rm -rf apk/xapk_extracted && python3 setup.py
+```
+
+### `externally-managed-environment` on pip install
+
+Some distros (Arch, Fedora, etc.) block system-wide pip. Use a virtual
+environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r server/requirements.txt
+```
+
+### Google Play Services missing on redroid
+
+redroid without GApps can't initialize Firebase. The game will show errors like
+`Firebase modules failed to initialize` and `NullReferenceException` at login.
+This is expected — the server still handles all API requests. To add GApps, use
+a redroid image with Google Play Services (e.g. `redroid/redroid:12.0.0-gms-latest`).
+
+### `adb reverse` stops working after reboot
+
+`adb reverse` is per-connection. Re-run after replugging USB or restarting the
+emulator:
+
+```bash
+adb -s <serial> reverse tcp:443 tcp:8443
+```

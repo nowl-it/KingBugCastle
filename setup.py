@@ -34,6 +34,17 @@ def warn(m): print(f"  [warn] {m}")
 def err(m):  print(f"  [FAIL] {m}")
 
 
+def check_python():
+    print("== Python environment ==")
+    in_venv = sys.prefix != sys.base_prefix
+    if in_venv:
+        ok(f"venv active ({sys.prefix})")
+    else:
+        warn("no venv detected — some distros block 'pip install' system-wide")
+        warn("recommended: python3 -m venv .venv && source .venv/bin/activate")
+    return True
+
+
 def check_tools():
     print("== external tools ==")
     missing = []
@@ -57,8 +68,9 @@ def extract_xapk():
         return True
     xapks = sorted(APK_DIR.glob("*.xapk")) + sorted(APK_DIR.glob("*.zip"))
     if not xapks:
-        err(f"no game XAPK found. Download com.awesomepiece.castle (v170.1.00, arm64) "
-            f"from APKPure and drop the .xapk into {APK_DIR}/")
+        err(f"no game XAPK found. Use the built-in kgc-cli tool:")
+        err(f"  mkdir -p {APK_DIR} && ./kgc-cli download -v 170.1.00 -o {APK_DIR}")
+        err(f"(Manual download from APKPure may strip libil2cpp.so and cause build failures.)")
         APK_DIR.mkdir(exist_ok=True)
         return False
     src = xapks[0]
@@ -140,6 +152,7 @@ def _gen_cert_py(cert, keyf):
 def main():
     print(f"KGC private server setup  ({OSX})\n")
     tools = check_tools()
+    check_python()
     xapk = extract_xapk()
     key = gen_keystore()
     gen_cert()
@@ -147,9 +160,10 @@ def main():
     if not (tools and xapk and key):
         print("  Fix the [FAIL] items above, then re-run: python3 setup.py")
         sys.exit(1)
-    print("  1. pip install -r server/requirements.txt")
-    print("  2. Start server:  cd server && python3 -m uvicorn server:app --host 0.0.0.0 --port 8080")
-    print("  3. Build + install the client for YOUR device - see SETUP.md")
+    print("  1. Create a venv (recommended):  python3 -m venv .venv && source .venv/bin/activate")
+    print("  2. pip install -r server/requirements.txt")
+    print("  3. Start server:  cd server && ../.venv/bin/python -m uvicorn server:app --host 0.0.0.0 --port 8080")
+    print("  4. Build + install the client for YOUR device - see SETUP.md")
     print("     (redroid / BlueStacks / LDPlayer / real phone all covered there).")
     print("\n  Done. See SETUP.md for device networking per target.")
 
