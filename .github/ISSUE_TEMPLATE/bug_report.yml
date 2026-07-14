@@ -1,0 +1,50 @@
+name: 🐛 Bug Report
+description: Create a report to help us improve King Bug Castle
+title: "[BUG] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please ensure you have read the [README](https://github.com/nowl-it/kgc-private-server/blob/main/README.md) and [SETUP](https://github.com/nowl-it/kgc-private-server/blob/main/SETUP.md) docs before submitting.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Tell us what happened...
+    validations:
+      required: true
+  - type: input
+    id: client_version
+    attributes:
+      label: Client Version
+      description: The version of the client you are using (e.g. 170.1.00)
+      placeholder: "170.1.00"
+    validations:
+      required: true
+  - type: input
+    id: emulator
+    attributes:
+      label: Emulator / Device
+      description: e.g. BlueStacks, LDPlayer, redroid, or Real Device
+      placeholder: "BlueStacks 5"
+    validations:
+      required: true
+  - type: textarea
+    id: server_logs
+    attributes:
+      label: Server Logs
+      description: Paste any relevant output from the server console or `uvicorn` logs.
+      render: shell
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Start the server via `python3 -m uvicorn server:app --port 8080`
+        2. Open the game and tap on ...
+        3. See error ...
+    validations:
+      required: true
