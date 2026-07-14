@@ -1,5 +1,5 @@
 {
-  "server": {"patchFolder": "2026_06_26", "serverVersion": "170.1.00"},
+  "server": {"patchFolder": "2026_07_09", "serverVersion": "170.1.00"},
   "player": {
     "defaults": {
       "name": "KingBug", "castleName": "BugCastle",
@@ -23,7 +23,7 @@
     },
     "_invasionComment": "ThemeSelectPanel.OnClickGameStart builds its Invasion theme carousel (_themes list) directly from this server-reported range; the FIRST entry is what the client sends as 'theme' to /game/start for chapter I-1. Real Invasion themes are ONLY 16-20 and 66-70 (dump.cs: Theme16BattleObserver .. Theme70BattleObserver, the only classes deriving InvasionBattleObserver) - a range starting at 1 makes the client submit theme=1 (Story Chapter 1), which has no InvasionBattleObserver subclass, hanging the battle-load screen. Also: ProfilePanel.ReloadChallenge indexes per unlockedDifficulty tier -> shorter list throws IndexOutOfRangeException. Real content caps at 5 difficulty tiers per theme (InvasionRewards.xml only defines suffix 01-05, Easy~King); InvasionDifficultyBar.SetDifficulty (arm32 RVA 0x20FBC48) calls an index/bounds-checked getter with the raw unclamped difficulty before its own later clamp to [1,5] - a value >5 throws there too.",
     "invasionThemeRanges": [[16, 21], [66, 71]],
-    "invasionUnlockedDifficulty": 5
+    "invasionUnlockedDifficulty": 6
   },
   "pvpInfo": {
     "fixed": {

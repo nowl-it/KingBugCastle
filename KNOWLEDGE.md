@@ -3,6 +3,17 @@
 > Game: **King God Castle** (KGC) - com.awesomepiece.castle
 > Version phân tích chính: **v169.1.x** (Android ARM64)
 
+> **Cập nhật (2026-07-14):** Client active hiện là **v170.1.00** (arm64), dump ở
+> `il2cpp/v170.0.03/`. Server config `patchFolder` = `2026_07_09`. Các đường dẫn `v169.1.05`
+> bên dưới là snapshot lịch sử của lần phân tích gốc. AES key `b53019bb76da6b34` vẫn dùng cho
+> v170. Các hệ thống mới (accessory unlock gate theo invasion difficulty, Inbox/Post + custom
+> mail `@raw:`, native il2cpp hook methodPointer-swap vs inline-detour) được ghi ở
+> **`AGENTS.md`** và **`.claude/CLAUDE.md`** - không lặp lại ở đây.
+>
+> **Playbook vận hành** (grant item/skin/treasure, unlock content theo `MinVersion`, làm màn
+> hình nộm test, edit master-data + push CDN bundle, crypto API) → **[`docs/`](docs/README.md)**.
+> Two-plane model (server state vs client master-data bundle) là mấu chốt - đọc `docs/README.md`.
+
 ---
 
 ## Mục Lục
@@ -329,4 +340,5 @@ Per-tier `<Name>`/`<Desc>` override có thể set trực tiếp trong skill defi
 
 ---
 
-*Tổng hợp từ: source code, IL2CPP RE, XML data parsing. Cập nhật: 2026-07-05.*
+*Tổng hợp từ: source code, IL2CPP RE, XML data parsing. Cập nhật: 2026-07-14.*
+*Playbook thao tác (save-edit, unlock, stage/dummy, CDN, crypto): [`docs/`](docs/README.md).*

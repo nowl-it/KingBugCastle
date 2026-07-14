@@ -9,8 +9,11 @@ for the derivation).
 
 import sys, struct, zipfile, zlib, pathlib, subprocess, shutil, os
 
-XAPK = pathlib.Path("/home/nowl/Code/kgc/.deploy/xapk_extracted")
-WORK = pathlib.Path("/home/nowl/Code/kgc/.rebuild3")
+# Paths auto-derive from the repo root (this file lives in <repo>/server/), so a
+# fresh clone works with no edits. Override via env for non-standard layouts.
+REPO = pathlib.Path(os.environ.get("KGC_ROOT") or pathlib.Path(__file__).resolve().parents[1])
+XAPK = pathlib.Path(os.environ.get("KGC_XAPK") or REPO / "apk" / "xapk_extracted")
+WORK = pathlib.Path(os.environ.get("KGC_WORK") or REPO / ".rebuild3")
 
 ORIG_APKS = {
     "base": XAPK / "com.awesomepiece.castle.apk",
@@ -18,8 +21,8 @@ ORIG_APKS = {
     "base_assets": XAPK / "base_assets.apk",
 }
 
-XC_STUB = pathlib.Path("/home/nowl/Code/kgc/server/xigncode_stub/arm64/libxigncode.so")
-KEYSTORE = pathlib.Path("/home/nowl/Code/kgc/.debug.keystore")
+XC_STUB = REPO / "server" / "xigncode_stub" / "arm64" / "libxigncode.so"
+KEYSTORE = REPO / ".debug.keystore"
 if not KEYSTORE.exists():
     KEYSTORE = pathlib.Path.home() / ".android" / "debug.keystore"
 
@@ -59,10 +62,10 @@ ALL_PATCHES = [
     # below are still the v170.0.03 ones - not re-derived since inactive.
     # (0x3198970, "deck-reload", bytes.fromhex("ff0302d1fd7b02a9"), RET_FALSE),
     # (0x3197894, "deck-reload2", bytes.fromhex("ff4305d1eb2b0d6d"), RET_FALSE),
-    # PvPPanel.<Init>d__77.MoveNext -> early return. NOT re-derived for
-    # v170.1.00 (compiler-generated async state machine, harder to relocate
-    # by name); left disabled rather than guessed.
-    # (0x324BB70, "pvp-init", bytes.fromhex("ff8303d1fd7b08a9"), RET_FALSE),
+    # PvPPanel.<Init>d__77.MoveNext -> early return.
+    # v170.1.00 offset derived by shifting v170.0.03 Offset 0x324BB70 by -0x1674
+    # (PvP-region shift, verified via GetReceivableWinRewardCount at 0x3245178).
+    (0x324A4FC, "pvp-init", bytes.fromhex("ff8303d1fd7b08a9"), RET_FALSE),
     # GameManager.IsYearEventAvailable -> always return false.
     # Original: str x30,[sp,#-0x20]! ; stp x20,x19,[sp,#0x10]
     # Same pattern as IsKGMarbleAvailable - null data dictionary.
@@ -83,6 +86,10 @@ ALL_PATCHES = [
     # Original: str x30,[sp,#-0x20]!; stp x20,x19,[sp,#0x10]
     # Same pattern as IsKGMarbleAvailable.
     (0x304CBE4, "season-event", bytes.fromhex("fe0f1ef8f44f01a9"), RET_FALSE),
+    # GameManager.IsAccessoryUnlocked -> always return true.
+    # Original: bl ...; mov w1,w0; mov w2,w19; bl ...
+    # Unlocks accessory feature (normally requires clearing II-1).
+    (0x3059C88, "accessory", bytes.fromhex("af8cec97e103002a"), RET_TRUE),
 ]
 
 

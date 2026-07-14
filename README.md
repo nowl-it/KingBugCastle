@@ -34,14 +34,11 @@ By dumping the IL2CPP metadata and intercepting network traffic, we have success
 
 To successfully run the backend and deployment scripts, your system must meet the following environment requirements:
 
-* **OS**: Linux (Ubuntu/Debian recommended) or macOS. (Windows requires WSL2).
-* **Python**: Python 3.11 or higher. (A `.venv` virtual environment is highly recommended).
-* **System Tools**:
-  * `apktool` (for unpacking/repacking APKs)
-  * `apksigner` (for signing the patched APK)
-  * `adb` (Android Debug Bridge, for installing onto device/emulator)
-* **Emulator**: If testing locally, **redroid** Docker container is highly recommended and must be run with `androidboot.redroid_gpu_mode=guest` (swiftshader) to avoid vsync/choreographer crashes.
-* **Dependencies**: Run `pip install -r server/requirements.txt` to install FastAPI, Uvicorn, LIEF, and other dependencies.
+* **OS**: **Linux, macOS, or Windows.** The server and build pipeline are pure Python + a few Java/adb CLI tools. (redroid is Linux-only, but BlueStacks / LDPlayer / real devices work on any OS.)
+* **Python**: Python 3.9 or higher.
+* **System Tools** (all on `PATH`): `apktool`, `apksigner`, `zipalign`, `adb`, and a JRE. `python3 setup.py` checks them and prints per-OS install hints. **No Android NDK/SDK needed** - the native `.so` pieces ship prebuilt.
+* **Device**: any of **redroid** (Linux/Docker, run with `androidboot.redroid_gpu_mode=guest`), **BlueStacks**, **LDPlayer**, or a **real Android phone** (USB debugging).
+* **One-shot setup**: `python3 setup.py` then `pip install -r server/requirements.txt`. See **[SETUP.md](SETUP.md)**.
 
 ---
 
@@ -54,14 +51,14 @@ The private server emulator is designed to intercept and process all traffic fro
 1. **FastAPI Backend Emulator (`server.py`)**: Acts as the central game server (`axis-game.awesomepiece.com`). It serves over 280+ dynamically mapped REST endpoints. Instead of relying on a traditional database, all state and logic are driven by flat JSON files located in `server/data/` (for static rules) and `server/state/player.json` (for live player progression).
 2. **Binary Patcher (`rebuild_arm64.py`)**: Before the game can connect to the emulator, the client's `libil2cpp.so` must be modified. This automated pipeline injects assembly to bypass SSL pinning (forcing `CertificateHandler.ValidateCertificate` to always return true) and skips NRE (NullReferenceException) triggers in the UI.
 3. **Local XML CDN**: The game downloads "Patch Assets" (XML tables) at boot. We mirror the official S3 CDN locally. The backend directs the game to our local CDN (`kgc-cdn-1.awesomepiece.com`), allowing us to inject custom items, text modifications, and rule changes via `rebuild_xml_bundle.py`.
-4. **XIGNCODE3 Stub**: The proprietary anti-cheat module prevents the game from booting if it can't reach the Wellbia servers. We replace the heavy `libxigncode.so` with a lightweight 8KB C-stub that successfully fakes the `/auth/xcdSeed` handshake, entirely bypassing the local integrity checks.
+4. **XIGNCODE3 Stub + native hook host (`jni/stub.cpp`)**: The proprietary anti-cheat module prevents the game from booting if it can't reach the Wellbia servers. We replace the heavy `libxigncode.so` with our own native library that registers no-op `ZCWAVE_*` JNI methods (faking the `/auth/xcdSeed` handshake and bypassing local integrity checks), then goes further — a worker thread dlopen's `libil2cpp.so` and installs il2cpp method hooks for in-game features (an in-battle GameUnit stat poller, and a custom Inbox-mail text hook). Two hook techniques are used depending on how the target method is invoked (methodPointer swap for Unity engine messages, inline detour for direct C# calls).
 
 ```mermaid
 graph TD
     Client[📱 Android Client / Emulator]
     FastAPI[⚡ Local FastAPI Server]
     CDN[📦 Local XML CDN]
-    XIGNCODE[🛡️ 8KB Xigncode Stub]
+    XIGNCODE[🛡️ Xigncode Stub + il2cpp hooks]
     Data[(JSON Data & State)]
 
     Client -- "HTTPS (Bypassed TLS via ARM64 Patch)" --> FastAPI
@@ -80,8 +77,16 @@ graph TD
 
 We have heavily documented the entire teardown and rebuild process. Depending on what you want to do, pick your path:
 
+### 🚀 Run your own server (start here)
+Cloned the repo and want your own working server + a client for redroid / BlueStacks / LDPlayer / a real phone?
+👉 **Read [SETUP.md](SETUP.md)** - one script, any OS, any device.
+
+### 🛠️ Operate & modify your server (grant items, unlock content, build test stages)
+Server running and you want to grant currency/skins/treasures, un-gate content, or make an all-dummy
+test stage? 👉 **Read the [Operator Knowledge Base](docs/README.md)** - practical playbooks.
+
 ### 👨‍💻 For Backend Developers & Contributors
-Want to spin up the local server, patch your own APK, and start modifying API responses?
+Want to dig into the server internals, patch pipeline, and API responses?
 👉 **Read the [Server Setup Guide & Workflow](server/README.md)**
 
 ### 🎮 For End-Users / Players
@@ -98,6 +103,7 @@ Want to understand how we dumped IL2CPP, mapped the 280+ routes, defeated SSL pi
 
 | Directory | Purpose |
 | --- | --- |
+| 📁 `docs/` | Operator knowledge base - playbooks for granting items, unlocking content, editing stages/master data ([`docs/README.md`](docs/README.md)). |
 | 📁 `server/` | The core FastAPI backend and automated ARM64 patching scripts (`rebuild_arm64.py`, `deploy.sh`). |
 | 📁 `server/data/` | Static JSON models and response templates (Docs: [`server/data/README.md`](server/data/README.md)). |
 | 📁 `api/` | Auxiliary integrations and external tool endpoints. |

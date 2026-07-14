@@ -36,8 +36,13 @@ The MCP server returns "not initialized." Ask the user: *"I notice this project 
 
 ## Project Context
 
+> **Operator playbooks** (grant items/skins/treasures, un-gate `MinVersion` content, build a
+> training-dummy stage, edit master data + push the CDN xml bundle, AES crypto): see **`docs/`**
+> at the repo root (`docs/README.md`). This file stays focused on binary patches, RVAs, and
+> il2cpp internals.
+
 ### Goal
-Private server emulator for King God Castle (arm64). Game uses FastAPI server (port 8080) + TLS proxy (port 8443). Device connects via `adb reverse tcp:80 tcp:8080; adb reverse tcp:443 tcp:8443`. Hosts file on device redirects 5 domains → 127.0.0.1.
+Private server emulator for King God Castle (arm64). Game uses a FastAPI server on port 8080 (HTTP) + a second uvicorn on port 8443 (TLS, `--ssl-keyfile key.pem --ssl-certfile cert.pem`; the old standalone `tls_proxy.py` is gone). Device connects via `adb reverse tcp:80 tcp:8080; adb reverse tcp:443 tcp:8443`. Hosts file on device redirects the API domains → 127.0.0.1.
 
 ### Critical Finding: PvPInfoResponseModel.GetCurrentSeasonUntilAt()
 - RVA: **0x2CC27FC** (NOT 0x2CC288C which is GetNextSeasonStartAt)
@@ -67,7 +72,11 @@ Three patches at addresses (in APK libil2cpp.so):
 
 (v170.0.03 offsets were 0x2CB6594 / 0x596E418 / 0x596CB28 — shifted on the version bump, see ARM64 Patch Inventory below for derivation method.)
 
-XIGNCODE stub replaces real libxigncode.so (510KB → 8KB).
+XIGNCODE stub replaces real libxigncode.so. It is no longer a bare no-op: `server/jni/stub.cpp`
+compiles to a native il2cpp poller + UI hooks (~350KB, padded back to the original 510KB so the
+patch-set size check passes). It still registers no-op JNI `ZCWAVE_*` methods (boots past the
+anti-cheat), then a worker thread dlopen's `libil2cpp.so` and installs hooks (GameUnit stat poller
+on `BattleManager.Update`; custom-mail hook on `PostListItem.Set`). See "il2cpp hook techniques" below.
 
 ### Route Model Gap
 Many endpoints lack routes in `routes.txt`. The `route_models.json` heuristic maps paths to models by name similarity. Unknown paths return empty `ResponseModel`. To handle missing models, add OVERRIDES in `server.py` which bypass `build_model` and return raw dict. The direct FastAPI handler (`@app.get/post`) takes priority if registered BEFORE the `for _r in ROUTE_MODELS` loop.
@@ -167,3 +176,79 @@ Text keys added in `scratchpad/xml_live/Strings_*.xml` (EN+VI only):
 - Unit: `UnitName_10810`, `UnitSubName_10800`, `UnitRealName_10800`, etc.
 - Lore: `UnitConstellation/Hobby/Talent/Likes/Hates/Note_10800`
 - All values end with `(nowl)` per user request (2026-07-05).
+
+### Accessory / treasure / rift-weapon unlock gate (invasion difficulty)
+Content unlock for accessory (trang sức), treasure, rift-weapon keys off **invasion cleared
+difficulty**, NOT hard-mode clears. Constants in `ResourceChallengeSeason.Constants`:
+TreasureUnlockDifficulty=1, **AccessoryUnlockDifficulty=6**, RiftWeaponUnlockDifficulty=11,
+MaxDifficulty=25. Invasion stage naming maps to tiers: I-1..I-5 = diff 1-5, **II-1 = diff 6**.
+The "[Corruption]" tag on the lock text (`Mode_Hard`=="Corruption") is a red herring — it is the
+invasion difficulty tier that gates, not `bestClearedHardTheme`.
+
+Client aggregates `GetInvasionClearedDifficulty(theme)` = `records.First(x=>x.theme==theme).difficulty`
+vs the constant. `ThemeDifficultyRecordModel{theme@0x8, difficulty@0xC(=cleared), unlockedDifficulty@0x10}`.
+
+**Server (2026-07-11)**: `data/response_config.json` `invasionUnlockedDifficulty` = **6** (was 5;
+set `>=11` to also unlock rift-weapon). `server.py` `r_player()` emits per-theme records with
+`"difficulty": unlocked` — it previously used the loop var `d` (1..unlocked), so `.First().difficulty`
+returned 1 and accessory(6)/rift(11) stayed locked while treasure(1) worked (masking the bug). The
+`d`-loop still pads the list length for `ProfilePanel.ReloadChallenge` per-tier indexing.
+
+Broken-accessory fix: `make_accessory()` used an invalid `data.mainStat="ATK"` (garbage 99.9% stats +
+blank names). `load_corruption_accessories()` now builds the 4 real Invasion II-1 reward accessories
+from `FixedAccessoryPresets.xml` IDs 2000-2003 (valid stat keys AtkPer/MAtkPer/BaseCriticalProb/etc).
+
+### Inbox (Post) system + custom mail text
+Inbox = "Post" internally. Direct handlers in `server.py` (registered before the ROUTE_MODELS loop):
+- `GET /post` → `PostResponseModel{posts:[PostData]}` (generated route_models wrongly mapped it to
+  PostReceiveResponseModel with no `posts`, so a direct handler is required).
+- `POST /post/receive` ← `{postId, receiveAll, targetUnit}` → `PostReceiveResponseModel{rewardListResponseData}`
+  (grants Gold/Cash/Heart to player currency, removes the claimed post).
+- `POST /admin/sendmail` — send a mail into `st["posts"]`.
+
+`PostData = {id, type, title, text, rewardType, rewardId, rewardAmount, untilAt}`. Mail lives in
+`st["posts"]` (persists, removed on claim). **`title`/`text` are localization KEYS**, run through
+`Localizer` by `PostListItem.Set`; an unresolved key falls back to `Post_Title_Default` ("You got a
+gift") / `Post_Content_Default`. reward/untilAt render literally.
+
+**Custom (non-localized) title/text without a CDN Strings rebuild**: server prefixes the field with
+`@raw:` (`_process_posts()` in `server.py`); the native `PostListItem.Set` hook strips the prefix and
+writes the literal straight into the `Text` via `set_text`, bypassing the Localizer. Mail without the
+prefix localizes normally. Lets a central server push arbitrary per-mail custom text to distributed
+clients with no bundle rebuild.
+
+**Reward types** (`PostData.rewardType` string + `rewardId` + `rewardAmount`). `RewardResponseData`
+= `{type, id, count}` uses the same vocabulary; `ResourceInventoryItem.GetByRewardTypeAndID(type,id)`
+resolves the icon. On claim, `server.py` `_grant_reward()` mutates player state; the client re-fetches
+`/player`, `/player/getInventory`, `/card/all` so the grant appears (no client-side apply). Handled:
+- **Gold / Cash / Heart** -> currency (`st.gold/cash/heart`).
+- **Item** -> `st.inventory` (`itemIds`/`counts`), `rewardId` = `InventoryItems.xml` id. Covers all 173
+  inventory items incl. `RewardBoxInventory`/`InstantRewardBox` (the game's own bundle-gift mechanism),
+  vouchers, `CardLevelUpItem`, accessory-substat items. **This is the safe way to gift artifacts/
+  treasures/accessories** - send a reward box, the player opens it.
+- **Unit / Card** -> adds hero to `st.cards` (all heroes already owned on the god account, so usually a
+  no-op). **UnitSoul** -> `st.cards[str(id)].soul += count` (soul shards).
+- **Artifact / Treasure / Accessory** -> render in the mail but are NOT auto-granted into state:
+  directly injecting owned artifacts/accessories can trip client panel invariants (see the
+  ArtifactOptionUI crash above). Gift them as an Item reward box instead.
+
+The dashboard exposes the full sendable catalog via `GET /api/catalog` (Item 173 / Unit 71 / UnitSoul 71
+/ Artifact 318 / Treasure 59 / Accessory 108, names resolved from `Strings_EN_US`) with a searchable id
+picker; see the "Web dashboard" note in `server/README.md`.
+
+### il2cpp hook techniques (`server/jni/stub.cpp`)
+Two ways to hook a managed method from the stub `.so`. Picking wrong = hook installs ("success" log)
+but the handler never fires:
+1. **methodPointer swap** (`*(void**)methodInfo = &Hooked`): ONLY intercepts methods the **Unity engine
+   invokes via MethodInfo.methodPointer** — MonoBehaviour messages (`Update`/`OnEnable`/`Awake`/`Start`).
+   `BattleManager.Update` (stat poller) uses this. Invisible to C#→C# calls.
+2. **inline detour** (`install_inline_hook()`): patches the compiled function prologue (16-byte absolute
+   jump `LDR X17,#8; BR X17; .quad dest`) + an mmap'd trampoline (16 stolen bytes + jump back to
+   target+16) for the original. Intercepts **all callers including direct C#→C# compiled calls**, because
+   `obj.Method(arg)` compiles to a direct `bl` to the native function and never derefs methodPointer.
+   Guard: aborts if any of the 4 stolen prologue instrs is PC-relative (ADR/ADRP/LDR-literal/B/BL/B.cond/
+   CBZ/TBZ) — can't relocate them; most prologues (stp/mov/sub sp) are PIC so it works.
+
+`PostListItem.Set` (the custom-mail hook) needed #2: it's rendered via a UITableView cell callback
+(direct C# call), and neither `PostListItem` nor `PostBoxPanel` defines any Unity message. First
+attempt used #1 → "Hooked successfully" but the handler never ran. Verified in-game 2026-07-11.

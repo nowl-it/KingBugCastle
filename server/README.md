@@ -1,7 +1,7 @@
 # KGC private server (emulator)
 
 Reverse-engineered private server for **King God Castle** (`com.awesomepiece.castle`),
-reconstructed from the il2cpp dump of client `v169.1.05` (compatible 170.0.0x).
+reconstructed from the il2cpp dump of client `v170.0.03` (active client `v170.1.00`, arm64).
 Goal: boot the real client against a server you control for offline testing /
 mechanic experimentation.
 
@@ -9,6 +9,8 @@ mechanic experimentation.
 > the backend; it does not modify or distribute the client.
 
 **Start here:**
+- **[../SETUP.md](../SETUP.md)** — first-run: clone → `setup.py` → run your own server,
+  on any OS, against redroid / BlueStacks / LDPlayer / a real phone.
 - **[WORKFLOW.md](WORKFLOW.md)** — day-to-day edit/test/deploy loop, "which file do I
   edit" table, rules that have caused real crashes when violated.
 - **[data/README.md](data/README.md)** — schema of the 4 JSON files under `data/`.
@@ -154,9 +156,11 @@ server/
   server.py              FastAPI emulator (run this)
   deploy.sh              full pipeline: patch+sign+install+start (arm32 target)
   rebuild_arm64.py       arm64 client rebuild (SSL+NRE stubs, sign, install)
-  rebuild_arm64_mod.py   side-by-side variant (com.nowl.castle)
+  rebuild_arm64_mod.py   side-by-side variant (com.nowl.castle); --share bakes a
+                          server host + packages KingBugCastle.xapk (see ../SHARE.md)
+  serve_public.sh        run the server bound 0.0.0.0 (HTTP :8080 + TLS :8443) for
+                          remote players; Cloudflare-Tunnel / public-IP / LAN guidance
   rebuild_xml_bundle.py  CDN XML bundle patcher
-  make_share.sh          bundle patched client + server into a shareable zip
   data/                  response data as JSON (static_overrides, response_config,
                           item_templates, default_player) - edit these, not code
   state/player.json      editable save (live source of truth after first boot)
@@ -170,7 +174,51 @@ server/
     dump_real_api.py mitm_fake_auth.py
   tests/                 assert-based sanity checks
     test_artifact.py
-  admin/                 Next.js admin panel (pnpm install to set up)
+  dashboard.py           unified web dashboard server (:8081) - see below
+  webui/                 the single web UI (Battle Tracker + Admin), static files
   real_cdn/              cloned CDN bundles served verbatim at /patch/{path}
-  xigncode_stub/         no-op libxigncode.so (disables XIGNCODE3 anti-tamper)
+  jni/                   stub.cpp -> libxigncode.so (ndk-build); native il2cpp
+                          poller + UI hooks. Output copied to xigncode_stub/arm64/
+  xigncode_stub/         libxigncode.so replacement: registers no-op XIGNCODE3 JNI
+                          methods, then hooks il2cpp (GameUnit stat poller on
+                          BattleManager.Update; custom-mail hook on PostListItem.Set)
 ```
+
+## Web dashboard — `dashboard.py` + `webui/` (:8081)
+
+One web UI + one server. Replaced the old split (a static `tracker_ui/`, its `log_tracker.py`
+backend, and a dead Next.js `admin/` skeleton). Run it and open http://localhost:8081/:
+
+```bash
+cd server && python3 dashboard.py     # or: uvicorn dashboard:app --port 8081
+```
+
+Two tabs:
+- **Battle Tracker** — live in-battle hero stats over WebSocket `/ws`. `dashboard.py` reads
+  `adb -s $ADB_SERIAL logcat -s XignCodeStub`, parses the native poller's output (resolving
+  buff/skill ids to names from `scratchpad/xml_live/Strings_*.xml`), and broadcasts hero updates.
+- **Admin** — acts directly on the game state JSON (`state/players/*.json`, `state/player.json`),
+  the same files `server.py` reads per request (edits apply on the client's next fetch, no
+  restart): server status, per-player currency/level/name editor, and mail send/delete. Mail is
+  appended to a player's `posts` array; `server.py` serves it (wrapping title/text with `@raw:`
+  so the literal text renders, bypassing the Localizer). Mail can carry a **reward**: currencies,
+  or any item from `GET /api/catalog` (Item/Unit/UnitSoul/Artifact/Treasure/Accessory, names from
+  `Strings_EN_US`) via a searchable id picker - `server.py` `_grant_reward()` mutates state on claim
+  (Item -> inventory incl. reward boxes; UnitSoul -> hero soul; Artifact/Treasure/Accessory are
+  display-only, gift them as an Item reward box). REST under `/api/*`.
+
+`ADB_SERIAL` env var overrides the device serial (default `localhost:5556`).
+
+## Native stub (XIGNCODE replacement) — `jni/stub.cpp`
+
+More than a no-op: after registering stub `ZCWAVE_*` JNI methods (so the client boots past the
+anti-cheat), a worker thread dlopen's `libil2cpp.so` and installs hooks. Two hook techniques —
+see `AGENTS.md` "il2cpp hook techniques":
+- **methodPointer swap** — only intercepts Unity engine messages (e.g. `BattleManager.Update`, the
+  in-battle GameUnit stat poller that feeds the `dashboard.py` Battle Tracker tab).
+- **inline detour** (`install_inline_hook`) — needed for direct C#→C# calls like `PostListItem.Set`
+  (custom Inbox mail title/text: server prefixes `@raw:`, the hook strips it and writes the literal
+  via `set_text`, bypassing the Localizer — no CDN Strings rebuild needed).
+
+Build: `ndk-build` in `server/`, then `cp libs/arm64-v8a/libxigncode.so xigncode_stub/arm64/` and
+run `rebuild_arm64.py` / `rebuild_arm64_mod.py`.

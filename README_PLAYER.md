@@ -1,35 +1,28 @@
-# King Bug Castle — how to play
+# King Bug Castle - how to play
 
-> **Note to developers**: This is the instruction manual included in the generated distribution zip (`make_share.sh`). If you are setting up the project from the git repository, see `server/README.md` instead.
 A fan-made private-server build of King God Castle. Not affiliated with Awesomepiece.
+Research / interoperability use only.
 
-You have: `apk/` (3 signed APKs), `server/` (the backend), `start_server.sh`.
+You received a single file: **`KingBugCastle.xapk`**. The server address is already baked
+in - **no root, no hosts file, no config**. It installs side-by-side with the real game
+(different package `com.nowl.castle`), so you can keep both.
 
-## 1. Run the server (on a PC on your LAN)
-```bash
-./start_server.sh          # listens on 0.0.0.0:8080
-```
-Note the PC's LAN IP (e.g. `192.168.1.50`): `ip addr` / `ipconfig`.
+## Install (Android)
 
-## 2. Install the client (Android, root required)
-```bash
-adb install-multiple -r apk/base_signed.apk apk/split_base_assets_signed.apk apk/split_config_signed.apk
-```
+1. Install a split-APK installer from the Play Store - **APKPure** or **SAI (Split APKs Installer)**.
+2. Open `KingBugCastle.xapk` with it and tap Install. (SAI: "Install APKs" → pick the `.xapk`.)
+3. Launch **King Bug Castle**.
 
-## 3. Point the game at your server
-The client talks plain HTTP. Add to the device `/system/etc/hosts`
-(needs root: `mount -o rw,remount /`), replacing `SERVER_IP` with your PC's LAN IP:
-```
-SERVER_IP axis-game.awesomepiece.com
-SERVER_IP kgc-k8s-1.awesomepiece.com
-SERVER_IP isekai-lobbyserver.awesomepiece.com
-SERVER_IP castle-infra-server-65408603887.asia-northeast3.run.app
-SERVER_IP kgc-cdn-1.awesomepiece.com
-```
-The client hits port 80. Either run the server on `:80` (edit `start_server.sh`
-to `--port 80`, needs root) or redirect 80→8080 on the server
-(`socat TCP-LISTEN:80,fork TCP:127.0.0.1:8080`).
+That's it. The game connects to the server the host runs - as long as their server is up and
+reachable, you boot straight past the title screen.
 
-## 4. Launch
-Open **King Bug Castle**. It boots past login and talks to your server.
-Edit `server/state/player.json` to change your save (gold, level, units…).
+> If it hangs on a loading/patch screen, the server is down or the baked host isn't reachable
+> from your network - ask whoever shared the file.
+
+## Notes
+
+- Your progress lives on the **host's** server, not the real Awesomepiece servers. It is a
+  private sandbox; nothing you do here touches your real account.
+- Updates: if the host changes their server address or ships new content, they hand out a new
+  `.xapk` - reinstall it over the old one.
+- Uninstall any time like a normal app; it won't affect the real King God Castle.

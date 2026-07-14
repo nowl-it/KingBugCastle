@@ -198,7 +198,18 @@
 
 	<!-- 1챕터 고블린 습격! -->
 	<Stage ID='101' Theme='1' Inherit='1'>
-		<ValueSum>2</ValueSum>
+		<ValueSum>0</ValueSum>
+		<SpawnData Y='1'>
+			<Spawn ID='99999' Pos='1' Level='1'/>
+			<Spawn ID='99999' Pos='2' Level='1'/>
+			<Spawn ID='99999' Pos='3' Level='1'/>
+			<Spawn ID='99999' Pos='4' Level='1'/>
+			<Spawn ID='99999' Pos='5' Level='1'/>
+		</SpawnData>
+		<SpawnData Y='2'>
+			<Spawn ID='99999' Pos='2' Level='1'/>
+			<Spawn ID='99999' Pos='4' Level='1'/>
+		</SpawnData>
 	</Stage>
 
 	<Stage ID='102' Theme='1' Inherit='2'>
@@ -246,12 +257,18 @@
 		<ReplacePVPStage>11001</ReplacePVPStage>
 	</Stage>
 
-	<Stage ID='11001' Theme='1' Difficulty="1" Inherit='10'>
-		<ValueSum>5</ValueSum>
-		<SpawnData Y='0'>
-		</SpawnData>
+	<Stage ID='11001' Theme='1' Difficulty="1">
+		<ValueSum>0</ValueSum>
 		<SpawnData Y='1'>
-			<Spawn ID='20030' Pos='3' Level='2' Boss='1'/>
+			<Spawn ID='99999' Pos='1' Level='1'/>
+			<Spawn ID='99999' Pos='2' Level='1'/>
+			<Spawn ID='99999' Pos='3' Level='1'/>
+			<Spawn ID='99999' Pos='4' Level='1'/>
+			<Spawn ID='99999' Pos='5' Level='1'/>
+		</SpawnData>
+		<SpawnData Y='2'>
+			<Spawn ID='99999' Pos='2' Level='1'/>
+			<Spawn ID='99999' Pos='4' Level='1'/>
 		</SpawnData>
 	</Stage>
 

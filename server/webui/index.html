@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGC Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/ui/styles.css?v=3">
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-mark">KGC</div>
+            <div class="header-titles">
+                <h1>Dashboard</h1>
+                <span class="subtitle">Private server control &middot; King God Castle</span>
+            </div>
+        </div>
+        <nav class="tabs">
+            <button class="tab active" data-tab="tracker">Battle Tracker</button>
+            <button class="tab" data-tab="admin">Admin</button>
+        </nav>
+        <div class="header-right">
+            <span class="hero-count" id="hero-count">0 heroes</span>
+            <span id="connection-status" class="status-badge disconnected">
+                <span class="status-dot"></span><span class="status-label">Disconnected</span>
+            </span>
+        </div>
+    </header>
+
+    <!-- ============ TRACKER ============ -->
+    <main id="view-tracker" class="view active">
+        <div id="hero-grid" class="hero-grid">
+            <div class="empty-state" id="empty-state">
+                <div class="empty-icon">&#9876;</div>
+                <p>Waiting for battle data&hellip;</p>
+                <span>Enter an Invasion battle to populate hero cards.</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============ ADMIN ============ -->
+    <main id="view-admin" class="view admin-view">
+        <section class="status-row" id="status-row">
+            <div class="stat-card"><div class="sc-val" id="st-version">—</div><div class="sc-lbl">Version</div></div>
+            <div class="stat-card"><div class="sc-val" id="st-patch">—</div><div class="sc-lbl">Patch Folder</div></div>
+            <div class="stat-card"><div class="sc-val" id="st-players">—</div><div class="sc-lbl">Players</div></div>
+            <div class="stat-card"><div class="sc-val" id="st-heroes">—</div><div class="sc-lbl">Heroes Loaded</div></div>
+        </section>
+
+        <div class="admin-grid">
+            <!-- player list -->
+            <div class="panel">
+                <div class="panel-head">
+                    <h2>Players</h2>
+                    <button class="btn ghost" id="btn-refresh">Refresh</button>
+                </div>
+                <div id="player-list" class="player-list"></div>
+            </div>
+
+            <!-- editor + mail -->
+            <div class="panel" id="editor-panel">
+                <div class="panel-head"><h2 id="editor-title">Select a player</h2></div>
+                <div id="editor-body" class="editor-body">
+                    <div class="editor-empty">Pick a player on the left to edit currencies &amp; send mail.</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="/ui/app.js?v=4"></script>
+</body>
+</html>
