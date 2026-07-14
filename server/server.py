@@ -802,6 +802,12 @@ def make_artifact(i, art_id):
         lvs_list.append(max_roll_lvs)
         locks.append(False)
 
+    for idx in range(opt_count, 4):
+        opt_data.append({"targets": safe_positions, "type": "None", "value": 0, "level": 0})
+        types_list.append("None")
+        lvs_list.append(0)
+        locks.append(False)
+
     return {
         "id": i,
         "artifactId": art_id,

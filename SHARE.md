@@ -34,7 +34,7 @@ SHARE_HOST=kgc.yourdomain.com python3 server/rebuild_arm64_mod.py --share
 #   or:  python3 server/rebuild_arm64_mod.py --share --host 203.0.113.7
 ```
 
-Output: `KingBugCastle.xapk` at the repo root. Same 12 SSL/NRE patches + XIGNCODE stub as the
+Output: `KingBugCastle.xapk` at the repo root. Same 14 patches + XIGNCODE stub as the
 normal build, renamed to `com.nowl.castle` (installs beside the real game). Hand this file to
 players with `README_PLAYER.md`.
 
