@@ -1,10 +1,10 @@
-name: Download game APK
+name: Download game XAPK
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Game version to download (e.g. 170.1.00)'
+        description: 'Game version (e.g. 170.1.00)'
         required: true
         default: '170.1.00'
         type: string
@@ -15,16 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install apkeep
-        run: |
-          curl -LO https://github.com/EFForg/apkeep/releases/download/0.16.0/apkeep-x86_64-unknown-linux-gnu
-          chmod +x apkeep-x86_64-unknown-linux-gnu
-          sudo mv apkeep-x86_64-unknown-linux-gnu /usr/local/bin/apkeep
-
-      - name: Download game XAPK
+      - name: Download game XAPK via kgc-cli
         run: |
           mkdir -p apk
-          apkeep -a "com.awesomepiece.castle@${{ github.event.inputs.version || '170.1.00' }}" -d apk-pure apk/
+          ./kgc-cli download -v "${{ github.event.inputs.version || '170.1.00' }}" -o apk/
 
       - name: Upload XAPK as artifact
         uses: actions/upload-artifact@v4
