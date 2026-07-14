@@ -137,6 +137,7 @@
 
 	<Treasure ID="20099">
 		<Comment>차원의 균열 보정 보구</Comment>
+		<MinVersion>999999</MinVersion>
 		<Rarity>Rare</Rarity>
 		<BuffDataStartID>3200990</BuffDataStartID>
 		<Color>8381EE</Color>
@@ -661,7 +662,7 @@
         <RecommendedUnitIds>10310</RecommendedUnitIds>
         <Color>8381EE</Color>
         <SubNameColor>68EEBC</SubNameColor>
-        <MinVersion>171000</MinVersion>		
+        <MinVersion>170100</MinVersion>
 	</Treasure>
     
     <Treasure ID="50000">

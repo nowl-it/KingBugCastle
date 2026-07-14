@@ -54,6 +54,15 @@ ROOT = pathlib.Path(__file__).parent
 G = ROOT / "generated"
 MODELS = json.loads((G / "models.json").read_text())
 ROUTE_MODELS = json.loads((G / "route_models.json").read_text())
+ROUTE_MODELS.update({
+    "/treasure": {"method": "Treasure", "response": "TreasureResultResponseModel"},
+    "/treasure/equip": {"method": "TreasureEquip", "response": "TreasureResultResponseModel"},
+    "/treasure/add-exp": {"method": "TreasureAddExp", "response": "TreasureResultResponseModel"},
+    "/treasure/dismantle": {"method": "TreasureDismantle", "response": "TreasureResultResponseModel"},
+    "/treasure/release-equip": {"method": "TreasureReleaseEquip", "response": "TreasureResultResponseModel"},
+    "/treasure/set-state": {"method": "TreasureSetState", "response": "TreasureResultResponseModel"},
+    "/treasure/overcome": {"method": "TreasureOvercome", "response": "TreasureResultResponseModel"},
+})
 STATE_FILE = ROOT / "state" / "player.json"
 PLAYERS_DIR = ROOT / "state" / "players"
 PLAYERS_DIR.mkdir(parents=True, exist_ok=True)
@@ -216,7 +225,10 @@ def _all_treasure_ids():
         min_ver = re.search(r'<MinVersion>(\d+)</MinVersion>', blk)
         if min_ver and int(min_ver.group(1)) > 170100:
             continue
-        ids.append(int(m.group(1)))
+        tid = int(m.group(1))
+        if tid == 20099:
+            continue
+        ids.append(tid)
     return ids
 
 def _all_rift_weapon_ids():
@@ -413,6 +425,7 @@ def r_player(body, st):
         "cash": st.get("cash", d["cash"]), "paidCash": st.get("paidCash", d["paidCash"]),
         "gold": st.get("gold", d["gold"]), "level": st.get("level", d["level"]),
         "exp": st.get("exp", d["exp"]), "heart": st.get("heart", d["heart"]),
+        "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999,
         "lastHeartTime": st.get("lastHeartTime", now_iso(0)),
         "bestClearedStage": st.get("bestClearedStage", d["bestClearedStage"]),
         "bestClearedTheme": st.get("bestClearedTheme", d["bestClearedTheme"]),
@@ -424,7 +437,12 @@ def r_player(body, st):
         "rogueLikePlayedCount": st.get("rogueLikePlayedCount", d["rogueLikePlayedCount"]),
         "rogueLikeCleared": st.get("rogueLikeCleared", d["rogueLikeCleared"]),
         "invasionDifficultyRecords": [
-            {"theme": i, "difficulty": d, "unlockedDifficulty": unlocked}
+            # difficulty = highest CLEARED tier (GetInvasionClearedDifficulty reads
+            # .First(theme).difficulty) - must be `unlocked`, not the loop var, or the
+            # first per-theme record reports cleared=1 and content gates (accessory@6,
+            # riftweapon@11) stay locked. The d-loop only pads list length for
+            # ProfilePanel.ReloadChallenge's per-tier indexing.
+            {"theme": i, "difficulty": unlocked, "unlockedDifficulty": unlocked}
             for i in _INVASION_THEMES + _PREREQ_THEMES
             for d in range(1, unlocked + 1)
         ],
@@ -445,7 +463,12 @@ def r_player(body, st):
         "tokens": st.get("tokens", []),
         # profileIconId must be a real Unit ID (ResourceBase<Unit>.Get lookup) - a
         # non-resolving id gives a blank/white avatar.
-        "keyValues": st.get("keyValues", [{"key": "profileIconId", "value": d["profileIconId"]}]),
+        "keyValues": st.get("keyValues", [{"key": "profileIconId", "value": d["profileIconId"]}]) + [
+            {"key": "InventoryCount_Treasure", "value": "999"},
+            {"key": "InventoryCount_Accessory", "value": "999"},
+            {"key": "InventoryCount_RiftWeapon", "value": "999"},
+            {"key": "InventoryCount_AccessoryPreset", "value": "999"},
+        ],
         "attendedCustomEvents": st.get("attendedCustomEvents", []),
         "customEventDatas": st.get("customEventDatas", []),
         "eventMissionData": st.get("eventMissionData", []),
@@ -607,6 +630,57 @@ def r_card_buy_skin(body, st):
             "skins": [skin_id], "favoriteSkinIds": [], "currentSkin": skin_id,
             "randomSkinApply": False, "playerGold": 0, "playerCash": 0, "soul": 0}
 
+def _card_view(c, st):
+    """Standard card response shape (no level mutation)."""
+    return {
+        "unitId": c["unitId"], "level": c.get("level", 1), "exp": c.get("exp", 0),
+        "potentialTier": c.get("potentialTier", 0),
+        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
+        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
+        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
+        "soul": c.get("soul", 0),
+        "originLevel": c.get("level", 1), "originPotentialTier": c.get("potentialTier", 0),
+        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
+    }
+
+def r_card_equip_skin(body, st):
+    # EquipSkinRequestModel = {unit, skin}  (NOT unitId/skinId)
+    unit_id = body.get("unit", body.get("unitId", 0))
+    skin_id = body.get("skin", body.get("skinId", 0))
+    cards = st.setdefault("cards", {})
+    c = cards.get(str(unit_id))
+    if c is not None and (skin_id == 0 or skin_id in c.get("skins", [])):
+        c["currentSkin"] = skin_id
+        save_state(st)
+    return _card_view(c or {"unitId": unit_id, "currentSkin": skin_id}, st)
+
+def r_card_set_skin_favorite(body, st):
+    # CardSkinEtcRequestModel = {unitId, skinId, flag}
+    unit_id = body.get("unitId", body.get("unit", 0))
+    skin_id = body.get("skinId", body.get("skin", 0))
+    flag = body.get("flag", True)
+    cards = st.setdefault("cards", {})
+    c = cards.get(str(unit_id))
+    if c is not None:
+        fav = c.setdefault("favoriteSkinIds", [])
+        if flag and skin_id not in fav:
+            fav.append(skin_id)
+        elif not flag and skin_id in fav:
+            fav.remove(skin_id)
+        save_state(st)
+    return _card_view(c or {"unitId": unit_id}, st)
+
+def r_card_set_random_skin(body, st):
+    # CardSkinEtcRequestModel = {unitId, skinId, flag}
+    unit_id = body.get("unitId", body.get("unit", 0))
+    flag = body.get("flag", True)
+    cards = st.setdefault("cards", {})
+    c = cards.get(str(unit_id))
+    if c is not None:
+        c["randomSkinApply"] = bool(flag)
+        save_state(st)
+    return _card_view(c or {"unitId": unit_id}, st)
+
 def r_deck(body, st):
     decks = st.get("decks", DEFAULT_DECKS)
     deck_infos = [{"deck": d["deck"], "potential": d.get("potential", []),
@@ -744,10 +818,10 @@ def make_artifact(i, art_id):
         "createdAt": now_iso()
     }
 
-def make_accessory(i):
+def make_accessory(i, unit_id=0):
     t = ITEM_TEMPLATES["accessory"]
     return {
-        "id": i, "accountId": t["accountId"], "unitId": t["unitId"], "slot": t["slot"],
+        "id": i, "accountId": t["accountId"], "unitId": unit_id, "slot": t["slot"],
         "type": (i % t["typeCount"]) + 1,
         "rarity": t["rarity"], "level": t["level"], "exp": t["exp"], "synergy": t["synergy"], "state": t["state"],
         "data": t["data"], "subStats": t["subStats"], "subStatScores": t["subStatScores"],
@@ -756,6 +830,77 @@ def make_accessory(i):
         "usedThemeList": t["usedThemeList"],
         "isEarlyAccessModeTestAccessory": t["isEarlyAccessModeTestAccessory"],
     }
+
+def _acc_perscore(key):
+    # AccessoryConstants.xml: BaseDef/BaseMDef roll in ValuePerScore=20 units; every other
+    # substat uses ValueByScore=1. score = summed value / perScore.
+    return 20.0 if key in ("BaseDef", "BaseMDef") else 1.0
+
+def load_corruption_accessories():
+    """Real 'Corruption II-1' first-clear reward accessories (FixedAccessoryPreset 2000-2003,
+    one per type) - the exact items the client grants for clearing the stage that unlocks the
+    accessory system. Mirrors AccessoryModel (data.mainStat + data.subStats[{key,value}]) so
+    the client renders proper name/stats/grade instead of the 99.9% garbage a fabricated
+    template with an invalid mainStat produced."""
+    import xml.etree.ElementTree as ET
+    root = ET.parse(XML_DIR / "FixedAccessoryPresets.xml").getroot()
+    out, inst = [], 1
+    for p in root.findall("FixedAccessoryPreset"):
+        if p.get("ID", "") not in ("2000", "2001", "2002", "2003"):
+            continue
+        rolls = [(s.get("Key"), float(s.get("Value"))) for s in p.findall("./SubStats/SubStat")]
+        fb = p.find("FixedBonusSubStat")
+        if fb is not None:
+            rolls.append((fb.get("Key"), float(fb.get("Value"))))
+        scores = {}
+        for k, v in rolls:
+            scores[k] = scores.get(k, 0.0) + v / _acc_perscore(k)
+        out.append({
+            "id": inst, "accountId": 1, "unitId": 0, "slot": 0,
+            "type": int(p.findtext("Type", "1")), "rarity": int(p.findtext("Rarity", "3")),
+            "level": int(p.findtext("Level", "20")), "exp": 0,
+            "synergy": int(p.findtext("Synergy", "0")), "state": 0,
+            "data": {"mainStat": p.findtext("MainStat", "AtkPer"),
+                     "subStats": [{"key": k, "value": v} for k, v in rolls]},
+            "subStats": list(scores.keys()), "subStatScores": [round(s, 3) for s in scores.values()],
+            "coolTimeEndAt": "2000-01-01T00:00:00.000Z",
+            "createdAt": now_iso(), "updatedAt": now_iso(),
+            "usedThemeList": [], "isEarlyAccessModeTestAccessory": False,
+        })
+        inst += 1
+    return out
+
+def get_st_accessories(st):
+    if "accessories" not in st:
+        import copy
+        st["accessories"] = copy.deepcopy(DEFAULT_ACCESSORIES)
+    return st["accessories"]
+
+def r_accessory(body, st):
+    accs = get_st_accessories(st)
+    target_id = body.get("targetId", 0)
+    unit_id = body.get("unitId", 0)
+    if target_id and unit_id:
+        for a in accs:
+            if a["unitId"] == unit_id:
+                a["unitId"] = 0
+            if a["id"] == target_id:
+                a["unitId"] = unit_id
+        save_state(st)
+    return {"accessories": accs, "presets": []}
+
+def r_accessory_release(body, st):
+    accs = get_st_accessories(st)
+    target_id = body.get("targetId", 0)
+    if target_id:
+        for a in accs:
+            if a["id"] == target_id:
+                a["unitId"] = 0
+        save_state(st)
+    return {"accessories": accs, "presets": []}
+
+def r_accessory_result(body, st):
+    return {"accessories": get_st_accessories(st), "deletedAccessories": [], "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": [], "addedExpItems": 0}
 
 def make_treasure(i, tr_id):
     t = ITEM_TEMPLATES["treasure"]
@@ -787,7 +932,7 @@ def make_rift_crystal(i, rw_id):
 
 DEFAULT_ARTIFACTS = [make_artifact(i + 1, aid) for i, aid in enumerate(ALL_ARTIFACT_IDS)]
 DEFAULT_TREASURES = [make_treasure(i + 1, tid) for i, tid in enumerate(ALL_TREASURE_IDS)]
-DEFAULT_ACCESSORIES = [make_accessory(i + 1) for i in range(ITEM_TEMPLATES["accessory"]["count"])]
+DEFAULT_ACCESSORIES = load_corruption_accessories() or [make_accessory(i + 1) for i in range(ITEM_TEMPLATES["accessory"]["count"])]
 DEFAULT_RIFT_WEAPONS = []
 DEFAULT_RIFT_CRYSTALS = [make_rift_crystal(i + 1, rwid) for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
 ARTIFACT_BY_ID = {a["id"]: a for a in DEFAULT_ARTIFACTS}
@@ -835,11 +980,39 @@ def r_artifact_result(body, st):
             "changeEquipped": False, "polishItemAdded": False,
             "results": DEFAULT_ARTIFACTS}
 
+def get_st_treasures(st):
+    if "treasures" not in st:
+        import copy
+        st["treasures"] = copy.deepcopy(DEFAULT_TREASURES)
+    return st["treasures"]
+
 def r_treasure(body, st):
-    return {"treasures": DEFAULT_TREASURES}
+    tr = get_st_treasures(st)
+    target_id = body.get("targetId", 0)
+    unit_id = body.get("unitId", 0)
+    if target_id and unit_id:
+        for t in tr:
+            if t["unitId"] == unit_id:
+                t["unitId"] = 0
+            if t["id"] == target_id:
+                t["unitId"] = unit_id
+        save_state(st)
+    return {"treasures": tr, "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999, "maxTreasureCount": 9999, "deletedTreasures": [], "inventories": []}
+
+def r_treasure_equip(body, st):
+    return r_treasure(body, st)
+
+def r_treasure_release(body, st):
+    tr = get_st_treasures(st)
+    inv_id = body.get("targetId")
+    for t in tr:
+        if t["id"] == inv_id:
+            t["unitId"] = 0
+    save_state(st)
+    return r_treasure(body, st)
 
 def r_treasure_add_exp(body, st):
-    return {"treasures": DEFAULT_TREASURES, "addExpItems": [], "deletedTreasures": [], "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": [], "addedExpItems": 0}
+    return {"treasures": get_st_treasures(st), "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999, "maxTreasureCount": 9999, "addExpItems": [], "deletedTreasures": [], "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": [], "addedExpItems": 0}
 
 def r_rift_weapon(body, st):
     return {"riftWeapons": DEFAULT_RIFT_WEAPONS, "equippedWeapons": {}, "riftCrystals": DEFAULT_RIFT_CRYSTALS, "deletedRiftWeapons": [], "deletedCrystals": [], "riftGauge": 0, "rewardListResponseData": None, "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "playerHeart": st.get("heart", 0), "upgradeState": 0, "equippedWeaponIds": []}
@@ -883,6 +1056,10 @@ DYNAMIC_OVERRIDES = {
     "/player/tutorial-status": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
     "/player/tutorial/complete": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
     "/player/getInventory": r_player_inventory,
+    "/player/add-inventory-count": lambda b, st: {
+        "playerCash": st.get("cash", 0),
+        "inventoryCount": 999
+    },
     "/player/rename": lambda b, st: {"name": b.get("name", "DevKing")},
     "/player/building": lambda b, st: {"buildingPoint": st.get("buildingPoints", 25), "buildingData": _get_building_data(st)},
     "/player/building/point": lambda b, st: {"buildingPoint": st.get("buildingPoints", 25), "buildingData": _get_building_data(st)},
@@ -902,9 +1079,9 @@ DYNAMIC_OVERRIDES = {
     "/card/useUnitSoulItemToExp": r_card_use_candy,
     "/card/useUnitSoulToExp": r_card_use_candy,
     "/card/buySkin": r_card_buy_skin,
-    "/card/equipSkin": r_card_upgrade,
-    "/card/set-random-skin-apply": r_card_upgrade,
-    "/card/set-skin-favorite": r_card_upgrade,
+    "/card/equipSkin": r_card_equip_skin,
+    "/card/set-random-skin-apply": r_card_set_random_skin,
+    "/card/set-skin-favorite": r_card_set_skin_favorite,
     "/deck": r_deck,
     "/deck/set": r_deck_set,
     "/deck/setPotential": r_deck_set_potential,
@@ -931,11 +1108,12 @@ DYNAMIC_OVERRIDES = {
     "/artifact/open-catalyst-box": r_artifact_result,
     "/artifact/set-favorites": r_artifact_result,
     "/treasure": r_treasure,
+    "/treasure/equip": r_treasure_equip,
     "/treasure/add-exp": r_treasure_add_exp,
     "/treasure/dismantle": r_treasure,
-    "/treasure/equip-tutorial": r_treasure,
+    "/treasure/equip-tutorial": r_treasure_equip,
     "/treasure/overcome": r_treasure,
-    "/treasure/release-equip": r_treasure,
+    "/treasure/release-equip": r_treasure_release,
     "/treasure/set-state": r_treasure,
     "/rift-weapon": r_rift_weapon,
     "/rift-weapon/upgrade": r_rift_weapon,
@@ -969,8 +1147,16 @@ DYNAMIC_OVERRIDES = {
     "/territory/recover-labor": lambda b, st: {"storedLabor": 100, "lastLaborAt": now_iso(0)},
     "/territory/level-sync/assign": r_territory_fetch,
     "/territory/trade-shop/buy": r_territory_fetch,
-    "/accessory": lambda b, st: {"accessories": DEFAULT_ACCESSORIES, "presets": []},
-    "/accessory/equip-tutorial": lambda b, st: {"accessories": DEFAULT_ACCESSORIES},
+    "/accessory": r_accessory,
+    "/accessory/equip-tutorial": lambda b, st: {"accessories": get_st_accessories(st)},
+    "/accessory/add-exp": r_accessory_result,
+    "/accessory/dismantle": lambda b, st: {"accessories": get_st_accessories(st), "deletedAccessories": b.get("accessoryIds", []), "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": [], "addedExpItems": 0},
+    "/accessory/release-equip": r_accessory_release,
+    "/accessory/set-state-all": r_accessory_result,
+    "/accessory/change-sub-stat": r_accessory_result,
+    "/accessory/preset": lambda b, st: {"presets": []},
+    "/accessory/set-preset": lambda b, st: {"presets": []},
+    "/accessory/set-preset-name": lambda b, st: {"presets": []},
 }
 
 # Pure-literal routes (no st/body dependency) load straight from JSON; wrap each
@@ -1044,14 +1230,49 @@ def make_handler(path):
 
 # Direct route handlers - must be registered BEFORE route_models to bypass build_model
 @app.get("/accessory")
-@app.post("/accessory")
 async def accessory_inventory_direct(request: Request):
     st = load_state()
     host = request.headers.get("host", "?")
-    admin_log(f"[{host}] DIRECT /accessory -> AccessoryInventoryResponseModel")
+    admin_log(f"[{host}] DIRECT GET /accessory -> AccessoryInventoryResponseModel")
     payload = {
         "code": 200, "msg": None, "success": True,
-        "accessories": DEFAULT_ACCESSORIES
+        "accessories": get_st_accessories(st)
+    }
+    return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
+
+@app.post("/accessory")
+async def accessory_equip_direct(request: Request):
+    st = load_state()
+    host = request.headers.get("host", "?")
+    raw = await request.body()
+    body = {}
+    if raw:
+        try:
+            body = aes_decrypt(raw)
+        except Exception:
+            try:
+                body = json.loads(raw)
+            except Exception:
+                pass
+    admin_log(f"[{host}] DIRECT POST /accessory -> AccessoryResultResponseModel")
+    accs = get_st_accessories(st)
+    target_ids = body.get("targetIds", [])
+    unit_id = body.get("unitId", 0)
+    if target_ids and unit_id:
+        for a in accs:
+            if a["unitId"] == unit_id:
+                a["unitId"] = 0
+            if a["id"] in target_ids:
+                a["unitId"] = unit_id
+        save_state(st)
+    payload = {
+        "code": 200, "msg": None, "success": True,
+        "accessories": accs,
+        "deletedAccessories": [],
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "inventories": [],
+        "addedExpItems": 0
     }
     return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
 
@@ -1085,6 +1306,138 @@ async def invasion_record_direct(request: Request):
     payload = {
         "code": 200, "msg": None, "success": True,
         "difficultyRecords": records
+    }
+    return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
+
+# Inbox (Post) - GET /post lists mail (PostResponseModel.posts), POST /post/receive claims
+# (PostReceiveRequestModel{postId,receiveAll} -> PostReceiveResponseModel.rewardListResponseData).
+# Mail lives in state so it persists and disappears once claimed. Reward grant is applied to
+# player currency on claim so the send->receive->grant flow is real, not cosmetic.
+@app.post("/admin/sendmail")
+async def admin_send_mail(request: Request):
+    st = load_state()
+    body = await request.json()
+    if "posts" not in st:
+        st["posts"] = []
+    next_id = max((p["id"] for p in st["posts"]), default=0) + 1
+    title = body.get("title", "")
+    text = body.get("text", "")
+    for f in (title, text):
+        if f.startswith("@raw:"):
+            f = f[5:]
+    st["posts"].append({
+        "id": next_id,
+        "type": body.get("type", "Normal"),
+        "title": title,
+        "text": text,
+        "rewardType": body.get("rewardType", ""),
+        "rewardId": body.get("rewardId", 0),
+        "rewardAmount": body.get("rewardAmount", 0),
+        "untilAt": now_iso(body.get("untilDays", 30)),
+    })
+    save_state(st)
+    return {"code": 200, "success": True, "postId": next_id}
+
+def _default_posts():
+    return [{
+        "id": 1, "type": "Normal",
+        "title": "NOwL Private Server",
+        "text": "Chào mừng đến private server! Thư test custom title/text. Nhận 1000 Vàng nhé.",
+        "rewardType": "Gold", "rewardId": 0, "rewardAmount": 1000,
+        "untilAt": now_iso(30),
+    }]
+
+def get_st_posts(st):
+    if "posts" not in st:
+        st["posts"] = _default_posts()
+    return st["posts"]
+
+def _grant_reward(st, rt, rid, amt):
+    """Apply a claimed mail reward to player state. Currencies, inventory items, and hero
+    souls/cards persist here; the client re-fetches /player, /player/getInventory and /card/all
+    after a claim so the granted state appears. Complex owned-content (Artifact/Treasure/
+    Accessory) is intentionally NOT auto-granted into state - it can trip client panel
+    invariants (see AGENTS.md ArtifactOptionUI crash); gift those as an Item reward box
+    (InventoryItems.xml Type=RewardBoxInventory/InstantRewardBox) which the player opens."""
+    if rt == "Gold":
+        st["gold"] = st.get("gold", 0) + amt
+    elif rt == "Cash":
+        st["cash"] = st.get("cash", 0) + amt
+    elif rt == "Heart":
+        st["heart"] = st.get("heart", 0) + amt
+    elif rt == "Item" and rid:
+        inv = st.setdefault("inventory", {"itemIds": [], "counts": []})
+        ids = inv.setdefault("itemIds", [])
+        cnts = inv.setdefault("counts", [])
+        if rid in ids:
+            cnts[ids.index(rid)] += (amt or 1)
+        else:
+            ids.append(rid)
+            cnts.append(amt or 1)
+    elif rt in ("Unit", "Card") and rid:
+        st.setdefault("cards", {}).setdefault(str(rid), {"unitId": rid, **SEED["cardTemplate"]})
+    elif rt == "UnitSoul" and rid:
+        c = st.setdefault("cards", {}).setdefault(str(rid), {"unitId": rid, **SEED["cardTemplate"]})
+        c["soul"] = c.get("soul", 0) + amt
+
+def _ensure_raw_prefix(s: str) -> str:
+    return s if s.startswith("@raw:") else "@raw:" + s
+
+def _process_posts(posts: list) -> list:
+    out = []
+    for p in posts:
+        p = dict(p)
+        if isinstance(p.get("title"), str):
+            p["title"] = _ensure_raw_prefix(p["title"])
+        if isinstance(p.get("text"), str):
+            p["text"] = _ensure_raw_prefix(p["text"])
+        out.append(p)
+    return out
+
+@app.get("/post")
+async def post_list_direct(request: Request):
+    st = load_state()
+    host = request.headers.get("host", "?")
+    admin_log(f"[{host}] DIRECT GET /post -> PostResponseModel")
+    payload = {"code": 200, "msg": None, "success": True, "posts": _process_posts(get_st_posts(st))}
+    return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
+
+@app.post("/post/receive")
+async def post_receive_direct(request: Request):
+    st = load_state()
+    host = request.headers.get("host", "?")
+    raw = await request.body()
+    body = {}
+    if raw:
+        try:
+            body = aes_decrypt(raw)
+        except Exception:
+            try:
+                body = json.loads(raw)
+            except Exception:
+                pass
+    posts = get_st_posts(st)
+    post_id = body.get("postId", 0)
+    receive_all = body.get("receiveAll", False)
+    claimed = [p for p in posts if receive_all or p["id"] == post_id]
+    reward_list = []
+    for p in claimed:
+        amt = p.get("rewardAmount", 0)
+        rt = p.get("rewardType", "")
+        rid = p.get("rewardId", 0)
+        _grant_reward(st, rt, rid, amt)
+        if amt or rid:
+            reward_list.append({"type": rt, "id": rid, "count": amt})
+    st["posts"] = [p for p in posts if p not in claimed]
+    save_state(st)
+    admin_log(f"[{host}] DIRECT POST /post/receive claimed={len(claimed)} -> PostReceiveResponseModel")
+    payload = {
+        "code": 200, "msg": None, "success": True,
+        "rewardListResponseData": {
+            "rewardList": reward_list,
+            "artifactResult": None, "treasureResult": None, "accessoryResult": None,
+        },
+        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "playerHeart": st.get("heart", 0),
     }
     return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
 

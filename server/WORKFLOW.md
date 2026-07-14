@@ -3,7 +3,9 @@
 For anyone (human or AI) editing `server/`. Read this before touching `server.py` or
 `data/*.json`. For the god-account data-completion task specifically, see
 `documentation/GOD_ACCOUNT_DATA_AGENT_PROMPT.md` (self-contained agent brief). For arm64
-binary patches / RVA tables, see `AGENTS.md` at the repo root.
+binary patches / RVA tables, see `AGENTS.md` at the repo root. For operator playbooks
+(grant items/skins/treasures, un-gate content, build a dummy stage, push a CDN bundle,
+crypto API), see **[`../docs/`](../docs/README.md)**.
 
 ## Where does my change go?
 
@@ -15,6 +17,7 @@ binary patches / RVA tables, see `AGENTS.md` at the repo root.
 | Player identity/currency/card-template/deck seed defaults | `data/default_player.json` |
 | New route logic (state mutation, computed values) | `server.py` — add to `DYNAMIC_OVERRIDES` |
 | A binary patch to the client `.so` | `rebuild_arm64.py` (arm64, live target) — NOT `patchers/patch_apk_inplace.py` (arm32, legacy, only used by `deploy.sh`) |
+| A client-side UI behavior / il2cpp method hook (custom mail text, in-battle stat poller) | `jni/stub.cpp` — `ndk-build` in `server/`, then `cp libs/arm64-v8a/libxigncode.so xigncode_stub/arm64/` and rerun `rebuild_arm64.py`/`rebuild_arm64_mod.py`. Pick the right hook technique (methodPointer swap vs inline detour) — see `AGENTS.md` "il2cpp hook techniques" |
 | The build/patch/sign/install pipeline itself | `deploy.sh` (arm32) or `rebuild_arm64.py` (arm64) |
 
 Rule of thumb: if the value doesn't change based on `st`/`body`, it's data — put it in
@@ -40,6 +43,15 @@ whole point was "should be trivial to read/change without touching code").
    The combined pkill+restart often reports a spurious "Exit code 144" from the `pkill`
    half even when the restart itself succeeds — don't trust the exit code, check
    `ss -tlnp` and retry the `nohup` line alone if nothing is listening.
+
+   The device talks HTTPS, so a **second uvicorn on :8443** must also run (the standalone
+   `tls_proxy.py` is gone — it's just uvicorn with TLS):
+   ```bash
+   nohup uvicorn server:app --host 0.0.0.0 --port 8443 \
+     --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_tls.log 2>&1 &
+   ```
+   Both are the same app; restart both after a code/data edit. Device wiring:
+   `adb reverse tcp:80 tcp:8080; adb reverse tcp:443 tcp:8443`.
 4. If you touched anything artifact-related, run the regression check (184 artifacts,
    4 tiers, catches the `targets.Count == opt_count` invariant regressing):
    ```bash

@@ -30,6 +30,7 @@
         <NameComment>고블린 습격!</NameComment>
         <ThemeSeason>1</ThemeSeason>
 
+        <StartGold>1000</StartGold>
         <GoldRewardRatio>8</GoldRewardRatio>
         <ExpRewardRatio>4</ExpRewardRatio>
 
@@ -461,6 +462,7 @@
     </Theme>
 
     <Theme ID='16'>
+        <StartGold>1000</StartGold>
         <TimeBonus>10</TimeBonus>
         <ThemeSeason>2</ThemeSeason>
         <NameComment></NameComment>
