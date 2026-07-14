@@ -60,7 +60,7 @@ GET  /player                     -> PlayerDataResponseModel
 GET  /player/currencies, /card/all, /deck, /treasure, /shop, ... (~280 more)
 ```
 
-Success responses need `code: 0` and all model fields at typed defaults so Newtonsoft deserializes
+Success responses need `code: 200` and all model fields at typed defaults so Newtonsoft deserializes
 without crashing. `server.py` fills the important screens from `state/*.json`; everything else returns a
 wire-valid empty model. XIGNCODE3 is client-side anti-cheat — the server only answers the seed
 handshake, a stub seed is enough for the API.

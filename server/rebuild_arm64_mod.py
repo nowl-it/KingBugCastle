@@ -83,8 +83,7 @@ def main():
     WORK.mkdir(parents=True, exist_ok=True)
     outputs = {name: WORK / src.name for name, src in ORIG_APKS.items()}
     for name, dst in outputs.items():
-        if not dst.exists():
-            shutil.copy2(ORIG_APKS[name], dst)
+        shutil.copy2(ORIG_APKS[name], dst)
 
     print("=== Renaming label -> King Bug Castle ===")
     subprocess.run([sys.executable, str(PATCHERS / "patch_rename.py"),

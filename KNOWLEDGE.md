@@ -82,7 +82,7 @@ Dự án nghiên cứu / datamine King God Castle gồm:
 ### Encryption
 
 ```
-Protocol:  AES-128-ECB, zero padding
+Protocol:  AES-128-ECB, space padding
 Key v169+: b53019bb76da6b34  (v165-168: cnf1tl65djs2wp3g)
 POST body: aes_encrypt(json) -> hex string
 Response:  raw binary AES-ECB -> msgpack hoặc JSON
@@ -106,11 +106,11 @@ Xigncode cookie format: `926988XXXX_<md5_device_fingerprint>_<md5_checksum>`. ac
 
 ```python
 {
-    "version": "169.0.03",
+    "version": "170.1.00",
     "x-unity-version": "2022.3.62f3",
     "encryptedwithhex": "true",
     "Content-Type": "application/json",
-    "User-Agent": "ProductName/169.0.03.0 CFNetwork/3860.300.31 Darwin/25.2.0",
+    "User-Agent": "ProductName/170.1.00.0 CFNetwork/3860.300.31 Darwin/25.2.0",
 }
 ```
 
@@ -155,7 +155,7 @@ player = get_player_info()
 
 ## 4. IL2CPP Reverse Engineering
 
-### Files (`il2cpp/v169.1.05/`)
+### Files (`il2cpp/v170.0.03/`)
 
 | File | Mô tả |
 |------|-------|
@@ -333,7 +333,7 @@ Per-tier `<Name>`/`<Desc>` override có thể set trực tiếp trong skill defi
 | Vấn đề | File |
 |--------|------|
 | API endpoint | `api/<module>/<module>.md` |
-| RVA hàm | `il2cpp/v169.1.05/dump.cs` |
+| RVA hàm | `il2cpp/v170.0.03/dump.cs` |
 | Skin / Unit / String | `xml_history/<date>/.../*.xml` |
 | Skill data | `scratchpad/xml_live/Skills.xml` |
 | String keys (live) | `scratchpad/xml_live/Strings_*.xml` |

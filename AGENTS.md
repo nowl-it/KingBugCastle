@@ -81,7 +81,7 @@ on `BattleManager.Update`; custom-mail hook on `PostListItem.Set`). See "il2cpp 
 ### Route Model Gap
 Many endpoints lack routes in `routes.txt`. The `route_models.json` heuristic maps paths to models by name similarity. Unknown paths return empty `ResponseModel`. To handle missing models, add OVERRIDES in `server.py` which bypass `build_model` and return raw dict. The direct FastAPI handler (`@app.get/post`) takes priority if registered BEFORE the `for _r in ROUTE_MODELS` loop.
 
-### ARM64 Patch Inventory (12 active in rebuild_arm64.py, v170.1.00 offsets)
+### ARM64 Patch Inventory (14 active in rebuild_arm64.py, v170.1.00 offsets)
 All patches apply to `config.arm64_v8a.apk` → `lib/arm64-v8a/libil2cpp.so`. Offsets below are **v170.1.00** — re-derived 2026-07-05 via a fresh Il2CppDumper run against this version's own arm64 binary (previous rows were v170.0.03; bumping versions shifts every offset even though the underlying prologue bytes stayed byte-identical). Method: dump.cs's `Offset` field (`= RVA - 0x4000`) matches `patch_apk()`'s raw file-offset convention 1:1 (verified against the known-working v170.0.03 SSL offsets before trusting it for the rest).
 
 | # | Offset | Label | Original bytes | Patch | Purpose |
@@ -98,13 +98,14 @@ All patches apply to `config.arm64_v8a.apk` → `lib/arm64-v8a/libil2cpp.so`. Of
 | 10 | 0x349BAB4 | content-alert | `fe0f1bf8fa6701a9` | `e0031f2ac0035fd6` | `WorldPanel.ReloadNewContentAlert()` early return |
 | 11 | 0x304CCEC | card-event | `fe0f1ef8f44f01a9` | `e0031f2ac0035fd6` | `GameManager.IsEventCardCollectingAvailable()` → false |
 | 12 | 0x304CBE4 | season-event | `fe0f1ef8f44f01a9` | `e0031f2ac0035fd6` | `GameManager.IsSpecialSeasonalEventOpened()` → false |
+| 13 | 0x324A4FC | pvp-init | `ff8303d1fd7b08a9` | `e0031f2ac0035fd6` | `PvPPanel.<Init>d__77.MoveNext()` early return |
+| 14 | 0x3059C88 | accessory | `af8cec97e103002a` | `20008052c0035fd6` | `GameManager.IsAccessoryUnlocked()` → true |
 
 **Inactive / not re-derived** (still commented out in `rebuild_arm64.py`, offsets below are stale v170.0.03 — don't trust them if re-enabling, re-derive first):
 | Label | v170.0.03 offset | Purpose | Why inactive |
 |---|---|---|---|
 | deck-reload | 0x3198970 | `DeckPanel.ReloadDeck()` early return | disabled 2026-07-02 for a root-cause investigation, never re-enabled |
 | deck-reload2 | 0x3197894 | `DeckPanel.Reload()` early return | same |
-| pvp-init | 0x324BB70 | `PvPPanel.<Init>d__77.MoveNext()` early return | compiler-generated async state machine, harder to relocate by name in the new dump — skipped rather than guessed |
 
 **Patch pattern**: `RET_FALSE` = `e0031f2ac0035fd6` = `mov x0,#0; ret`. SSL uses `RET_TRUE` = `20008052c0035fd6` = `mov w0,#1; ret`.
 

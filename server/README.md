@@ -75,7 +75,7 @@ To clone and run this project from scratch, you need:
    cd server
    pip install -r requirements.txt
    ```
-3. **Original APKs**: You must obtain the original game files (v170.0.03 or v170.1.00) before you can patch and deploy:
+3. **Original APKs**: You must obtain the original game files (v170.1.00) before you can patch and deploy:
    - Download the original XAPK (e.g., from APKPure).
    - Rename the `.xapk` extension to `.zip` and extract it.
    - Place `base.apk`, `split_config.apk`, and `split_base_assets.apk` into the `apk/` folder at the root of the project (create the folder if it doesn't exist).
