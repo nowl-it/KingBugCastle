@@ -1,0 +1,51 @@
+<StoryFields>
+    <StoryField ID="1010100">
+    </StoryField>
+    <StoryField ID="1010101">
+    </StoryField>
+    <StoryField ID="1010102">
+    </StoryField>
+    <StoryField ID="1010103">
+    </StoryField>
+    <StoryField ID="1010104">
+    </StoryField>            
+    <StoryField ID="1010105">
+    </StoryField>
+
+    <StoryField ID="2010100">
+    </StoryField>
+    <StoryField ID="2010200">
+    </StoryField>
+    <StoryField ID="2010300">
+    </StoryField>
+    <StoryField ID="2010400">
+    </StoryField>
+    <StoryField ID="2010500">
+    </StoryField>
+    <StoryField ID="2010600">
+    </StoryField>
+
+    <StoryField ID="3010100">
+        <NameFormatType>ChallengeDifficulty</NameFormatType>
+    </StoryField>
+    <StoryField ID="3010101">
+        <NameFormatType>ChallengeDifficulty</NameFormatType>
+    </StoryField>
+    <StoryField ID="3010102">
+        <NameFormatType>ChallengeDifficulty</NameFormatType>
+    </StoryField>
+    <StoryField ID="3010103">
+        <NameFormatType>ChallengeDifficulty</NameFormatType>
+    </StoryField>
+    
+    <StoryField ID="9000000">
+    </StoryField>
+    <StoryField ID="9000001">
+    </StoryField>
+    <StoryField ID="9000002">
+    </StoryField>
+    <StoryField ID="9000003">
+    </StoryField>
+    <StoryField ID="9000004">
+    </StoryField>
+</StoryFields>

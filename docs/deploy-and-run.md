@@ -18,11 +18,31 @@ uvicorn server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem --ssl-certfi
   master-data/bundle change you **must restart both** to serve the new bytes.
 - Player state (`state/*.json`) is **not** cached — `load_state()` reads it per request. State edits
   are live without a restart.
-- Dashboard (optional): `python3 dashboard.py` → http://localhost:8081/ (Battle Tracker + Admin).
+- Dashboard: `python3 dashboard.py` → http://localhost:8081/ — the admin UI (players, heroes, items,
+  accessories, mail, battle tracker, server logs/routes/CDN). `server/run.sh` starts it alongside both
+  game-server processes with `--reload`, which is the normal way to run all three in development.
+  Its front end is vendored Vue 3 with no build step: edit `server/webui/**` and refresh the browser.
+- `/admin` on `:8080` is **not** a UI — it redirects to the dashboard. Its `/admin/api/*` routes are
+  live and the dashboard proxies them (and creates new saves through them).
 
 ### Restarting cleanly
 
-Background jobs die with the shell, so launch each detached and on its own:
+Easiest: **`server/run.sh`** manages the whole stack (both game listeners + dashboard, all with
+`--reload`) and also wires the device on start. Subcommands:
+
+```bash
+cd server
+./run.sh              # (re)start everything; kills any running copy first, then wires the device
+./run.sh stop         # kill game + dashboard
+./run.sh restart      # = ./run.sh
+./run.sh device       # re-wire the emulator only (adb reverse is per-connection; re-run after it restarts)
+ADB_SERIAL=127.0.0.1:5555 ./run.sh   # override the device serial (default localhost:5556 = redroid)
+```
+
+`run.sh` on start runs `wire_device()`: `adb connect $ADB_SERIAL`, `reverse tcp:443→:8443` /
+`tcp:80→:8080`, and clears any stale global proxy — all non-fatal, so no device = servers still come up.
+
+To launch each process by hand instead (background jobs die with the shell, so detach each):
 
 ```bash
 pkill -f "uvicorn server:app"
@@ -53,22 +73,28 @@ USB phone — all support `adb reverse`.
 # 1. Build + install the side-by-side test app (com.nowl.castle, "King Bug Castle")
 ADB_SERIAL=<serial> python3 server/rebuild_arm64_mod.py --host 127.0.0.1
 
-# 2. Route :443 -> :8443 (re-run after replug / emulator restart — it is per-connection)
+# 2. Route :443 -> :8443 (re-run after replug / emulator restart — it is per-connection).
+#    `server/run.sh` does exactly this on start; `./run.sh device` re-does it alone.
 adb -s <serial> reverse tcp:443 tcp:8443
 adb -s <serial> reverse tcp:80  tcp:8080     # optional (CDN is https, usually not needed)
 
-# 3. Launch
+# 3. Launch. The v170.1.00 mod build uses MainActivity; the v171 build launches via
+#    AirbridgeActivity instead (see docs/v171-private-build.md).
 adb -s <serial> shell am start -n com.nowl.castle/com.awesomepiece.castle.MainActivity
 ```
 
 Healthy boot in logcat: `LibMainWrap → libxigncode.so → libmain_real.so → Unity il2cpp`, then
 `Hooked BattleManager.Update` / `Hooked PostListItem.Set`. Then the TLS log fills with `200 OK`.
 
+> The steps above are the **v170.1.00** client. **v171.0.00** needs a different builder
+> (`build_v171_private.py`), a different launcher activity, and plain HTTP instead of TLS — see
+> [v171-private-build.md](v171-private-build.md).
+
 For **remote players** (no adb) you bake a public host instead — see [../SHARE.md](../SHARE.md).
 
 ## Push a master-data change to the client
 
-Any edit under `scratchpad/xml_live/*.xml` (stage spawns, skins, text, `MinVersion`) reaches the client
+Any edit under `server/xml_live/*.xml` (stage spawns, skins, text, `MinVersion`) reaches the client
 only through the CDN xml bundle:
 
 ```bash
@@ -83,5 +109,5 @@ re-downloads the bundle on next launch. Details: [cdn-master-data.md](cdn-master
 
 ## Server-only state change
 
-Editing `state/player.json` (or `state/players/<pid>.json`) takes effect on the client's **next fetch**
-of the relevant endpoint — no restart, no re-download. See [save-editing.md](save-editing.md).
+Editing a player row in `state/players.db` (dashboard, or `playerdb.load/save`) takes effect on the
+client's **next fetch** of the relevant endpoint — no restart, no re-download. See [save-editing.md](save-editing.md).

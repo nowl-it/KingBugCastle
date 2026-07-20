@@ -1,9 +1,18 @@
 {
   "artifact": {
-    "optCountByLevel": {"Normal": 1, "King": 2, "God": 3, "KingGod": 4},
-    "typesPool": ["AtkSpeedPer"],
+    "optCountByLevel": {
+      "Normal": 1,
+      "King": 2,
+      "God": 3,
+      "KingGod": 4
+    },
+    "typesPool": [
+      "AtkSpeedPer"
+    ],
     "maxRollLvs": 6,
-    "safePositions": [1],
+    "safePositions": [
+      1
+    ],
     "optionSlots": 4,
     "count": 1,
     "polishPoint": 0,
@@ -15,12 +24,15 @@
     "unitId": 0,
     "slot": 0,
     "typeCount": 4,
-    "rarity": 4,
+    "rarity": 3,
     "level": 1,
     "exp": 0,
-    "synergy": 0,
+    "synergy": 20,
     "state": 0,
-    "data": {"mainStat": "ATK", "subStats": []},
+    "data": {
+      "mainStat": "AtkPer",
+      "subStats": []
+    },
     "subStats": [],
     "subStatScores": [],
     "coolTimeEndAt": "2000-01-01T00:00:00.000Z",
@@ -49,9 +61,11 @@
     "state": 1
   },
   "riftCrystal": {
+    "_comment": "rarity: ResourceRiftWeaponConstant.CrystalRarity 1-5 (Common..Legendary). 0 = None, whose name key RiftCrystalNameKeyword_None does not exist in any locale - the client then shows the raw key. buildingLevels is built by make_rift_crystal: one level per altar (Buildings.xml ids 100+), main altar strictly highest because GetMaxBuildingIdx returns the first maximum.",
     "mainBuildingIdx": 0,
-    "buildingLevels": [],
-    "rarity": 0,
+    "mainBuildingLevel": 15,
+    "otherBuildingLevel": 0,
+    "rarity": 5,
     "ceilCount": 0,
     "state": 0
   }

@@ -1,0 +1,2679 @@
+<Themes>
+    <Theme ID='-1'>
+        <NameComment>방어 훈련!</NameComment>
+        <UseBarricade>false</UseBarricade>
+        <ArtifactEnabled>false</ArtifactEnabled>
+        <BuildingEnabled>false</BuildingEnabled>
+        <TerritoryBuffEnabled>false</TerritoryBuffEnabled>
+        <SetCardLevel>false</SetCardLevel>
+        <CanSurrender>false</CanSurrender>
+        <MaxStage>5</MaxStage>
+    </Theme>
+    
+    <Theme ID='-10'>
+        <NameComment>스킨 미리 보기</NameComment>
+        <UseBarricade>false</UseBarricade>
+        <ArtifactEnabled>false</ArtifactEnabled>
+        <BuildingEnabled>false</BuildingEnabled>
+        <TerritoryBuffEnabled>false</TerritoryBuffEnabled>
+        <SetCardLevel>false</SetCardLevel>
+        <CanSurrender>false</CanSurrender>
+        <MaxStage>1</MaxStage>
+        <IsSkinPreview>true</IsSkinPreview>
+        <FixCamposToField>true</FixCamposToField>
+        <ResetField>true</ResetField>
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+    </Theme>
+
+    <Theme ID='1'>
+        <NameComment>고블린 습격!</NameComment>
+        <ThemeSeason>1</ThemeSeason>
+
+        <GoldRewardRatio>8</GoldRewardRatio>
+        <ExpRewardRatio>4</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>30</BaseExp>
+
+        <ClearGold>20</ClearGold>
+        <ClearExp>30</ClearExp>
+
+        <Map>Field_01</Map>
+        <Barricade>Barricade_01a</Barricade>
+		<Barricade>Barricade_01b</Barricade>
+		<Barricade>Barricade_01c</Barricade>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+        
+        <MaxStage>10</MaxStage>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>500,600,800,1300,1900</RecommendedCombatPower>
+        <BossUnit>20040</BossUnit>
+    </Theme>
+
+    <Theme ID='2'>
+        <NameComment>도적단 습격!</NameComment>
+        <ThemeSeason>1</ThemeSeason>
+        <TimeBonus>2</TimeBonus>
+
+        <GoldRewardRatio>9.6</GoldRewardRatio>
+        <ExpRewardRatio>4.8</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>36</BaseExp>
+
+        <ClearGold>24</ClearGold>
+        <ClearExp>36</ClearExp>
+
+        <Map>Field_02</Map>
+        <Barricade>Barricade_02a</Barricade>
+		<Barricade>Barricade_02b</Barricade>
+		<Barricade>Barricade_02c</Barricade>
+
+        <RewardGaugeIcons>1,7,12,11</RewardGaugeIcons>
+
+        <ReqPrevThemeDifficulty>2</ReqPrevThemeDifficulty>
+        
+        <MaxStage>10</MaxStage>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>700,900,1100,1900,2800</RecommendedCombatPower>
+        <BossUnit>20140</BossUnit>
+    </Theme>
+
+    <Theme ID='3'>
+        <NameComment>슬라임 습격!</NameComment>
+        <ThemeSeason>1</ThemeSeason>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>8.64</GoldRewardRatio>
+        <ExpRewardRatio>5.76</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>43</BaseExp>
+
+        <ClearGold>30</ClearGold>
+        <ClearExp>43</ClearExp>
+
+        <Map>Field_03</Map>
+        <Barricade>Barricade_03a</Barricade>
+		<Barricade>Barricade_03b</Barricade>
+		<Barricade>Barricade_03c</Barricade>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <ReqPrevThemeDifficulty>2</ReqPrevThemeDifficulty>
+        
+        <MaxStage>15</MaxStage>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>1200,1350,1650,2500,3500</RecommendedCombatPower>
+        <BossUnit>20250</BossUnit>
+    </Theme>
+
+    <Theme ID='4'>
+        <NameComment>언데드 습격!</NameComment>
+        <ThemeSeason>1</ThemeSeason>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>10.38</GoldRewardRatio>
+        <ExpRewardRatio>5.19</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>52</BaseExp>
+
+        <ClearGold>35</ClearGold>
+        <ClearExp>52</ClearExp>
+
+        <Map>Field_04</Map>
+        <Barricade>Barricade_04a</Barricade>
+		<Barricade>Barricade_04b</Barricade>
+		<Barricade>Barricade_04c</Barricade>
+        <Fog>Fog_01</Fog>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+        
+        <MaxStage>15</MaxStage>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>2000,2300,2600,3800,5300</RecommendedCombatPower>
+        <BossUnit>20350</BossUnit>
+    </Theme>
+
+    <Theme ID='5'>
+        <NameComment>엘프 습격!</NameComment>
+        <ThemeSeason>1</ThemeSeason>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>8.30</GoldRewardRatio>
+        <ExpRewardRatio>4.15</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>63</BaseExp>
+
+        <ClearGold>42</ClearGold>
+        <ClearExp>63</ClearExp>
+
+        <Map>Field_05</Map>
+        <Barricade>Barricade_05a</Barricade>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+        
+        <MaxStage>20</MaxStage>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>3000,3750,4500,7200,10000</RecommendedCombatPower>
+        <BossUnit>20440</BossUnit>
+    </Theme>
+
+    <Theme ID='6'>
+        <NameComment>오크 습격!</NameComment>
+        <ThemeSeason>1</ThemeSeason>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>10</GoldRewardRatio>
+        <ExpRewardRatio>5</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>75</BaseExp>
+
+        <ClearGold>50</ClearGold>
+        <ClearExp>75</ClearExp>
+
+        <Map>Field_06</Map>
+
+        <Barricade>Barricade_06a</Barricade>
+        <Barricade>Barricade_06b</Barricade>
+        <Barricade>Barricade_06c</Barricade>
+		<Fog>Fog_02</Fog>
+        
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <MaxStage>20</MaxStage>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>4500,5500,6500,10000,14500</RecommendedCombatPower>
+        <BossUnit>20550</BossUnit>
+    </Theme>
+
+    <Theme ID='7'>
+        <NameComment>악령 습격!</NameComment>
+        <ThemeSeason>1</ThemeSeason>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>12</GoldRewardRatio>
+        <ExpRewardRatio>6</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>90</BaseExp>
+
+        <ClearGold>60</ClearGold>
+        <ClearExp>90</ClearExp>
+
+        <Map>Field_07</Map>
+
+        <Barricade>Barricade_07a</Barricade>
+        <Barricade>Barricade_07b</Barricade>
+        <Barricade>Barricade_07c</Barricade>
+        <Fog>Fog_02</Fog>
+        
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+        
+        <Effect>GhostEffect</Effect>
+        <Effect Delay='1'>GhostEffect</Effect>
+
+        <MaxStage>20</MaxStage>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>6000,7500,9000,14500,21000</RecommendedCombatPower>
+        <BossUnit>20670</BossUnit>
+    </Theme>
+
+    <Theme ID='8'>
+        <NameComment></NameComment>
+        <ThemeSeason>1</ThemeSeason>
+        <TimeBonus>10</TimeBonus>
+
+        <GoldRewardRatio>14.4</GoldRewardRatio>
+        <ExpRewardRatio>7.2</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>108</BaseExp>
+
+        <ClearGold>72</ClearGold>
+        <ClearExp>108</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <Map>Field_08</Map>
+
+        <Barricade>Barricade_08a</Barricade>
+        <Barricade>Barricade_08b</Barricade>
+        <Barricade>Barricade_08c</Barricade>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+        
+        <Effect>Bat</Effect>
+
+        <!-- <MinVersion>75</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>8000,10000,12000,19000,28000</RecommendedCombatPower>
+        <BossUnit>20750</BossUnit>
+    </Theme>
+
+    <Theme ID='9'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>17.28</GoldRewardRatio>
+        <ExpRewardRatio>8.6</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>128</BaseExp>
+
+        <ClearGold>85</ClearGold>
+        <ClearExp>128</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <Map>Field_09</Map>
+
+        <Barricade>Barricade_09a</Barricade>
+        <Barricade>Barricade_09b</Barricade>
+        <Barricade>Barricade_09c</Barricade>
+        <Barricade>Barricade_09d</Barricade>
+        <Barricade>Barricade_09e</Barricade>
+        <Barricade>Barricade_09f</Barricade>
+        
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <Effect>Snow</Effect>
+        <Fog>Fog_09</Fog>
+
+        <!-- <MinVersion>110</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>11000,14000,17000,27500,40000</RecommendedCombatPower>
+        <BossUnit>20860</BossUnit>
+    </Theme>
+
+    <Theme ID='10'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>20</GoldRewardRatio>
+        <ExpRewardRatio>10.32</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>155</BaseExp>
+
+        <ClearGold>100</ClearGold>
+        <ClearExp>155</ClearExp>
+
+        <MaxStage>20</MaxStage>
+        
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+        
+        <Map>Field_10</Map>
+        <Barricade>Barricade_10a</Barricade>
+		<Barricade>Barricade_10b</Barricade>
+		<Barricade>Barricade_10c</Barricade>
+        <Barricade>Barricade_10d</Barricade>
+        <Barricade>Barricade_10e</Barricade>
+        <Fog>Fog_03</Fog>
+
+        <!-- <MinVersion>191</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>15000,18000,21000,32000,46000</RecommendedCombatPower>
+        <BossUnit>20950</BossUnit>
+    </Theme>
+
+    <Theme ID='11'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>30</GoldRewardRatio>
+        <ExpRewardRatio>13</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>180</BaseExp>
+
+        <ClearGold>150</ClearGold>
+        <ClearExp>180</ClearExp>
+
+        <MaxStage>20</MaxStage>
+        
+        <ReqPrevThemeDifficulty>3</ReqPrevThemeDifficulty>
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+        
+        <Map>Field_11</Map>
+		<Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_11</Fog>
+
+        <MinVersion>479</MinVersion>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>30000,35000,43000,55000,78000</RecommendedCombatPower>
+        <BossUnit>21050</BossUnit>
+    </Theme>
+    
+    <Theme ID='12'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>34</GoldRewardRatio>
+        <ExpRewardRatio>14.5</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>200</BaseExp>
+
+        <ClearGold>170</ClearGold>
+        <ClearExp>180</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <Map>Field_12</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_12</Fog>
+         <MinVersion>509</MinVersion>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>40000,45000,53000,66000,91000</RecommendedCombatPower>
+        <BossUnit>21150</BossUnit>
+    </Theme>
+
+    <Theme ID='13'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>38</GoldRewardRatio>
+        <ExpRewardRatio>16</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>200</BaseExp>
+
+        <ClearGold>190</ClearGold>
+        <ClearExp>180</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <Map>Field_13</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_13</Fog>
+        <MinVersion>549</MinVersion>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>50000,55000,63000,77000,104000</RecommendedCombatPower>
+        <BossUnit>21280</BossUnit>
+    </Theme>
+    
+    <Theme ID='14'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>43</GoldRewardRatio>
+        <ExpRewardRatio>17.5</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>200</BaseExp>
+
+        <ClearGold>210</ClearGold>
+        <ClearExp>180</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <Map>Field_14</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_05</Fog>
+        <MinVersion>586</MinVersion>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>60000,65000,73000,88000,117000</RecommendedCombatPower>
+        <BossUnit>21350</BossUnit>
+    </Theme>
+    
+    <Theme ID='15'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>47.5</GoldRewardRatio>
+        <ExpRewardRatio>19</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>200</BaseExp>
+
+        <ClearGold>240</ClearGold>
+        <ClearExp>180</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <Map>Field_15</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_05</Fog>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>70000,75000,80000,108000,130000</RecommendedCombatPower>
+        <BossUnit>21460</BossUnit>
+    </Theme>
+
+    <Theme ID='16'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>52</GoldRewardRatio>
+        <ExpRewardRatio>20.5</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>200</BaseExp>
+
+        <ClearGold>240</ClearGold>
+        <ClearExp>180</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <BattleObserver>Theme16BattleObserver</BattleObserver>
+        
+        <Map>Field_16</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <ReqPrevThemeDifficulty>3</ReqPrevThemeDifficulty>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>100000,110000,120000,140000,160000</RecommendedCombatPower>
+        <BossUnit>21580</BossUnit>
+    </Theme>
+    
+    <Theme ID='17'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>56.5</GoldRewardRatio>
+        <ExpRewardRatio>22</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>200</BaseExp>
+
+        <ClearGold>240</ClearGold>
+        <ClearExp>180</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <BattleObserver>Theme17BattleObserver</BattleObserver>
+        
+        <Map>Field_17</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_12</Fog>        
+        <ReqPrevThemeDifficulty>3</ReqPrevThemeDifficulty>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>150000,165000,180000,200000,220000</RecommendedCombatPower>
+        <BossUnit>21670</BossUnit>
+    </Theme>
+
+    <Theme ID='18'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>61.0</GoldRewardRatio>
+        <ExpRewardRatio>23.5</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>200</BaseExp>
+
+        <ClearGold>240</ClearGold>
+        <ClearExp>180</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <BattleObserver>Theme18BattleObserver</BattleObserver>
+        
+        <Map>Field_18</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_12</Fog>        
+        <ReqPrevThemeDifficulty>3</ReqPrevThemeDifficulty>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>200000,250000,300000,400000,500000</RecommendedCombatPower>
+        <BossUnit>21770</BossUnit>
+    </Theme>
+
+    <Theme ID='19'>
+        <TimeBonus>10</TimeBonus>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+
+        <GoldRewardRatio>65.5</GoldRewardRatio>
+        <ExpRewardRatio>25.0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>200</BaseExp>
+
+        <ClearGold>240</ClearGold>
+        <ClearExp>180</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+        <BattleObserver>Theme19BattleObserver</BattleObserver>
+        
+        <Map>Field_19</Map>
+        <Barricade>Barricade_Invisible</Barricade>       
+        <ReqPrevThemeDifficulty>3</ReqPrevThemeDifficulty>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <RecommendedCombatPower>300000,350000,400000,500000,700000</RecommendedCombatPower>
+        <BossUnit>21850</BossUnit>
+
+        <ThemeSeason>2</ThemeSeason>
+        <RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+    </Theme>
+
+	<!-- 습격 2-10 와 마지막이다 -->
+	<Theme ID='20'>
+		<StartGold>10</StartGold> <!-- 습격 2-10은 시작 시 추가 은화 지급 -->
+		<TimeBonus>10</TimeBonus>
+		<ThemeSeason>2</ThemeSeason>
+		<NameComment></NameComment>
+
+		<GoldRewardRatio>69</GoldRewardRatio>
+		<ExpRewardRatio>26.5</ExpRewardRatio>
+
+		<BaseGold>0</BaseGold>
+		<BaseExp>200</BaseExp>
+
+		<ClearGold>240</ClearGold>
+		<ClearExp>180</ClearExp>
+
+		<MaxStage>20</MaxStage>
+
+		<RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+
+		<BattleObserver>Theme20BattleObserver</BattleObserver>
+
+		<Map>Field_20</Map>
+		<Barricade>Barricade_Invisible</Barricade>
+		<ReqPrevThemeDifficulty>3</ReqPrevThemeDifficulty>
+		<UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+		<RecommendedCombatPower>400000,450000,500000,750000,1000000</RecommendedCombatPower>
+		<BossUnit>21960</BossUnit>
+
+		<ThemeSeason>2</ThemeSeason>
+		<RewardGaugeIcons>1,11,12,11</RewardGaugeIcons>
+	</Theme>
+
+    <Theme ID='51'>
+        <Name>ThemeName_1</Name>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment>고블린 습격!</NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>6</GoldRewardRatio>
+        <ExpRewardRatio>3</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>45</BaseExp>
+
+        <ClearGold>30</ClearGold>
+        <ClearExp>45</ClearExp>
+
+        <Map>Field_51</Map>
+        <Barricade>Barricade_51a</Barricade>
+		<Barricade>Barricade_51b</Barricade>
+		<Barricade>Barricade_51c</Barricade>
+        
+        <RewardGaugeIcons>4,11,12,11</RewardGaugeIcons>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <ArtifactRewards>12050</ArtifactRewards>
+        <MaxStage>20</MaxStage>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenCount>6</HardModeTokenCount>
+        <BossUnit>25040</BossUnit>
+    </Theme>
+
+    <Theme ID='52'>
+        <Name>ThemeName_2</Name>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment>도적단 습격!</NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>7.2</GoldRewardRatio>
+        <ExpRewardRatio>3.6</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>54</BaseExp>
+
+        <ClearGold>36</ClearGold>
+        <ClearExp>54</ClearExp>
+
+        <Map>Field_52</Map>
+        <Barricade>Barricade_52a</Barricade>
+        <Barricade>Barricade_52b</Barricade>
+        <Barricade>Barricade_52c</Barricade>
+        
+        <RewardGaugeIcons>4,11,12,11</RewardGaugeIcons>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <ArtifactRewards>12000</ArtifactRewards>
+        <MaxStage>20</MaxStage>
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenCount>7</HardModeTokenCount>
+        <BossUnit>25140</BossUnit>
+    </Theme>
+
+    <Theme ID='53'>
+        <Name>ThemeName_3</Name>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment>슬라임 습격!</NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>8.64</GoldRewardRatio>
+        <ExpRewardRatio>4.32</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>65</BaseExp>
+
+        <ClearGold>43</ClearGold>
+        <ClearExp>65</ClearExp>
+
+        <Map>Field_53</Map>
+        <Barricade>Barricade_53a</Barricade>
+		<Barricade>Barricade_53b</Barricade>
+		<Barricade>Barricade_53c</Barricade>
+        
+        <RewardGaugeIcons>4,11,12,11</RewardGaugeIcons>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <ArtifactRewards>12010</ArtifactRewards>
+        <MaxStage>20</MaxStage>
+
+        <!-- <MinVersion>59</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenCount>8</HardModeTokenCount>
+        <BossUnit>25250</BossUnit>
+    </Theme>
+
+    <Theme ID='54'>
+        <ThemeSeason>1</ThemeSeason>
+        <Name>ThemeName_4</Name>
+        <NameComment>언데드 습격!</NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>10.4</GoldRewardRatio>
+        <ExpRewardRatio>5.2</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>78</BaseExp>
+
+        <ClearGold>52</ClearGold>
+        <ClearExp>78</ClearExp>
+
+        <Map>Field_54</Map>
+        <Barricade>Barricade_54a</Barricade>
+		<Barricade>Barricade_54b</Barricade>
+		<Barricade>Barricade_54c</Barricade>
+        <Fog>Fog_02</Fog>
+        
+        <RewardGaugeIcons>4,11,12,11</RewardGaugeIcons>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <ArtifactRewards>12060,12020,12050</ArtifactRewards>
+        <MaxStage>20</MaxStage>
+
+        <!-- <MinVersion>61</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenCount>9</HardModeTokenCount>
+        <BossUnit>25350</BossUnit>
+    </Theme>
+
+    <Theme ID='55'>
+        <Name>ThemeName_5</Name>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment>엘프 습격!</NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>12.5</GoldRewardRatio>
+        <ExpRewardRatio>6.2</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>93</BaseExp>
+
+        <ClearGold>62</ClearGold>
+        <ClearExp>93</ClearExp>
+
+        <Map>Field_55</Map>
+        <Barricade>Barricade_55a</Barricade>
+        <Barricade>Barricade_55b</Barricade>
+        <Barricade>Barricade_55c</Barricade>
+        
+        <RewardGaugeIcons>4,11,12,11</RewardGaugeIcons>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <ArtifactRewards>12070,12040,12000</ArtifactRewards>
+        <MaxStage>20</MaxStage>
+
+        <!-- <MinVersion>62</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenCount>10.5</HardModeTokenCount>
+        <BossUnit>25440</BossUnit>
+    </Theme>
+
+    <Theme ID='56'>
+        <Name>ThemeName_6</Name>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment>오크 습격!</NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>15</GoldRewardRatio>
+        <ExpRewardRatio>7.5</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>112.5</BaseExp>
+
+        <ClearGold>75</ClearGold>
+        <ClearExp>112.5</ClearExp>
+
+        <Map>Field_56</Map>
+
+        <Barricade>Barricade_56a</Barricade>
+        <Barricade>Barricade_56b</Barricade>
+        <Barricade>Barricade_56c</Barricade>
+		<Fog>Fog_02</Fog>
+        
+        <RewardGaugeIcons>4,11,12,11</RewardGaugeIcons>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <ArtifactRewards>12080,12030,12010</ArtifactRewards>
+        <MaxStage>20</MaxStage>
+
+        <!-- <MinVersion>66</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenCount>12</HardModeTokenCount>
+        <BossUnit>25550</BossUnit>
+    </Theme>
+
+    <Theme ID='57'>
+        <Name>ThemeName_7</Name>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment>언데드 습격!</NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>18</GoldRewardRatio>
+        <ExpRewardRatio>9</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>135</BaseExp>
+
+        <ClearGold>90</ClearGold>
+        <ClearExp>135</ClearExp>
+
+        <Map>Field_57</Map>
+
+        <Barricade>Barricade_57a</Barricade>
+        <Barricade>Barricade_57b</Barricade>
+        <Barricade>Barricade_57c</Barricade>
+        <Fog>Fog_02</Fog>
+        
+        <RewardGaugeIcons>4,11,12,11</RewardGaugeIcons>
+        
+        <Effect>GhostEffect_02</Effect>
+        <Effect Delay='1'>GhostEffect_02</Effect>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <ArtifactRewards>12090,12070,12060</ArtifactRewards>
+        <MaxStage>20</MaxStage>
+
+        <!-- <MinVersion>69</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenCount>13.5</HardModeTokenCount>
+        <BossUnit>25670</BossUnit>
+    </Theme>
+
+    <Theme ID='58'>
+        <Name>ThemeName_8</Name>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>21.6</GoldRewardRatio>
+        <ExpRewardRatio>10.8</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>162</BaseExp>
+
+        <ClearGold>108</ClearGold>
+        <ClearExp>162</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <Map>Field_58</Map>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Barricade>Barricade_58a</Barricade>
+        <Barricade>Barricade_58b</Barricade>
+        <Barricade>Barricade_58c</Barricade>
+        
+        <RewardGaugeIcons>4,11,12,11</RewardGaugeIcons>
+
+        <Effect>Bat</Effect>
+
+        <ArtifactRewards>12100,12080,12060</ArtifactRewards>
+        <!-- <MinVersion>86</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenCount>15</HardModeTokenCount>
+        <BossUnit>25750</BossUnit>
+    </Theme>
+
+    <Theme ID='59'>
+        <Name>ThemeName_9</Name>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>26</GoldRewardRatio>
+        <ExpRewardRatio>13</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>195</BaseExp>
+
+        <ClearGold>130</ClearGold>
+        <ClearExp>195</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <Map>Field_59</Map>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Barricade>Barricade_59a</Barricade>
+        <Barricade>Barricade_59b</Barricade>
+        <Barricade>Barricade_59c</Barricade>
+        <Barricade>Barricade_59d</Barricade>
+        <Barricade>Barricade_59e</Barricade>
+        <Barricade>Barricade_59f</Barricade>
+        
+        <RewardGaugeIcons>4,11,12,11</RewardGaugeIcons>
+
+        <Effect>Snow</Effect>
+        <Fog>Fog_09</Fog>
+
+        <ArtifactRewards>12110,12080,12070</ArtifactRewards>
+        <!-- <MinVersion>120</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenCount>16.5</HardModeTokenCount>
+        <BossUnit>25860</BossUnit>
+    </Theme>
+
+    <Theme ID='60'>
+        <Name>ThemeName_10</Name>
+        <ThemeSeason>1</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>31</GoldRewardRatio>
+        <ExpRewardRatio>15.5</ExpRewardRatio>
+        
+        <BaseGold>0</BaseGold>
+        <BaseExp>233</BaseExp>
+
+        <ClearGold>155</ClearGold>
+        <ClearExp>233</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_60</Map>
+        <Barricade>Barricade_60a</Barricade>
+		<Barricade>Barricade_60b</Barricade>
+		<Barricade>Barricade_60c</Barricade>
+        <Barricade>Barricade_60d</Barricade>
+        <Barricade>Barricade_60e</Barricade>
+        <Fog>Fog_04</Fog>
+        
+        <RewardGaugeIcons>4,11,12,11</RewardGaugeIcons>
+
+        <ArtifactRewards>12120,12110,12100</ArtifactRewards>
+        <!-- <MinVersion>196</MinVersion> -->
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenCount>18</HardModeTokenCount>
+        <BossUnit>25950</BossUnit>
+    </Theme>
+    
+    <Theme ID='61'>
+        <Name>ThemeName_11</Name>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>1</MinAvailableDifficulty>
+
+        <GoldRewardRatio>33</GoldRewardRatio>
+        <ExpRewardRatio>19.5</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>240</BaseExp>
+
+        <ClearGold>165</ClearGold>
+        <ClearExp>240</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_61</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_04</Fog>
+
+        <ReqPrevThemeDifficulty>3</ReqPrevThemeDifficulty>
+        <AccessoryRewardSynergies>0,1</AccessoryRewardSynergies>
+        <RewardGaugeIcons>14,11,12,11</RewardGaugeIcons>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenLevel>2</HardModeTokenLevel>
+        <HardModeTokenCount>22</HardModeTokenCount>
+<!--        <MinVersion>561</MinVersion> -->
+        <BossUnit>26050</BossUnit>
+    </Theme>
+    <Theme ID='62'>
+        <Name>ThemeName_12</Name>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>37.4</GoldRewardRatio>
+        <ExpRewardRatio>21.0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>240</BaseExp>
+
+        <ClearGold>187</ClearGold>
+        <ClearExp>240</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_62</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_04</Fog>
+
+        <AccessoryRewardSynergies>2,4</AccessoryRewardSynergies>
+        <RewardGaugeIcons>14,11,12,11</RewardGaugeIcons>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenLevel>2</HardModeTokenLevel>
+        <HardModeTokenCount>25</HardModeTokenCount>
+<!--        <MinVersion>561</MinVersion> -->
+        <BossUnit>26150</BossUnit>
+    </Theme>
+    <Theme ID='63'>
+        <Name>ThemeName_13</Name>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>41.8</GoldRewardRatio>
+        <ExpRewardRatio>22.5</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>240</BaseExp>
+
+        <ClearGold>209</ClearGold>
+        <ClearExp>240</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_63</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_04</Fog>
+
+        <AccessoryRewardSynergies>3,5</AccessoryRewardSynergies>
+        <RewardGaugeIcons>14,11,12,11</RewardGaugeIcons>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenLevel>2</HardModeTokenLevel>
+        <HardModeTokenCount>28</HardModeTokenCount>
+<!--        <MinVersion>561</MinVersion> -->
+        <BossUnit>26280</BossUnit>
+    </Theme>
+    <Theme ID='64'>
+        <Name>ThemeName_14</Name>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>47.3</GoldRewardRatio>
+        <ExpRewardRatio>24</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>240</BaseExp>
+
+        <ClearGold>231</ClearGold>
+        <ClearExp>240</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_64</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_04</Fog>
+
+        <AccessoryRewardSynergies>6,1,2</AccessoryRewardSynergies>
+        <RewardGaugeIcons>14,11,12,11</RewardGaugeIcons>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenLevel>2</HardModeTokenLevel>
+        <HardModeTokenCount>32</HardModeTokenCount>
+        <MinVersion>604</MinVersion>
+        <BossUnit>26350</BossUnit>
+    </Theme>
+    <Theme ID='65'>
+        <Name>ThemeName_15</Name>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>52.25</GoldRewardRatio>
+        <ExpRewardRatio>25.5</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>240</BaseExp>
+
+        <ClearGold>264</ClearGold>
+        <ClearExp>240</ClearExp>
+
+        <MaxStage>20</MaxStage>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_65</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_04</Fog>
+
+        <AccessoryRewardSynergies>7,0,5</AccessoryRewardSynergies>
+        <RewardGaugeIcons>14,11,12,11</RewardGaugeIcons>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenLevel>2</HardModeTokenLevel>
+        <HardModeTokenCount>36</HardModeTokenCount>
+        <BossUnit>26460</BossUnit>
+    </Theme>
+    <Theme ID='66'>
+        <Name>ThemeName_16</Name>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>57.2</GoldRewardRatio>
+        <ExpRewardRatio>27</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>240</BaseExp>
+
+        <ClearGold>297</ClearGold>
+        <ClearExp>240</ClearExp>
+
+        <MaxStage>20</MaxStage>
+        <BattleObserver>Theme66BattleObserver</BattleObserver>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_66</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_04</Fog>
+
+        <AccessoryRewardSynergies>3,4,8</AccessoryRewardSynergies>
+        <RewardGaugeIcons>14,11,12,11</RewardGaugeIcons>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenLevel>2</HardModeTokenLevel>
+        <HardModeTokenCount>40</HardModeTokenCount>
+        <BossUnit>26580</BossUnit>
+    </Theme>
+    <Theme ID='67'>
+        <Name>ThemeName_17</Name>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>59</GoldRewardRatio>
+        <ExpRewardRatio>28</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>240</BaseExp>
+
+        <ClearGold>297</ClearGold>
+        <ClearExp>240</ClearExp>
+
+        <MaxStage>20</MaxStage>
+        <BattleObserver>Theme67BattleObserver</BattleObserver>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_67</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_04</Fog>
+
+        <AccessoryRewardSynergies>9,6,1</AccessoryRewardSynergies>
+        <RewardGaugeIcons>14,11,12,11</RewardGaugeIcons>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenLevel>2</HardModeTokenLevel>
+        <HardModeTokenCount>44</HardModeTokenCount>
+        <BossUnit>26670</BossUnit>
+    </Theme>    
+    <Theme ID='68'>
+        <Name>ThemeName_18</Name>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>61</GoldRewardRatio>
+        <ExpRewardRatio>28.5</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>240</BaseExp>
+
+        <ClearGold>320</ClearGold>
+        <ClearExp>240</ClearExp>
+
+        <MaxStage>20</MaxStage>
+        <BattleObserver>Theme68BattleObserver</BattleObserver>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_68</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_04</Fog>
+
+        <AccessoryRewardSynergies>10,7,0</AccessoryRewardSynergies>
+        <RewardGaugeIcons>14,11,12,11</RewardGaugeIcons>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenLevel>2</HardModeTokenLevel>
+        <HardModeTokenCount>48</HardModeTokenCount>
+        <BossUnit>26770</BossUnit>
+    </Theme>
+	<Theme ID='69'>
+        <Name>ThemeName_19</Name>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>63</GoldRewardRatio>
+        <ExpRewardRatio>29</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>240</BaseExp>
+
+        <ClearGold>340</ClearGold>
+        <ClearExp>240</ClearExp>
+
+        <MaxStage>20</MaxStage>
+        <BattleObserver>Theme69BattleObserver</BattleObserver>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_69</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_04</Fog>
+
+        <AccessoryRewardSynergies>11,8,2</AccessoryRewardSynergies>
+        <RewardGaugeIcons>14,11,12,11</RewardGaugeIcons>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenLevel>2</HardModeTokenLevel>
+        <HardModeTokenCount>52</HardModeTokenCount>
+        <BossUnit>26850</BossUnit>
+    </Theme>
+	<Theme ID='70'>
+		<StartGold>10</StartGold> <!-- 잠식 2-10은 시작 시 추가 은화 지급 -->
+		<TimeBonus>10</TimeBonus>
+        <Name>ThemeName_20</Name>
+        <ThemeSeason>2</ThemeSeason>
+        <NameComment></NameComment>
+        <HardMode>true</HardMode>
+        <MinAvailableDifficulty>5</MinAvailableDifficulty>
+
+        <GoldRewardRatio>65</GoldRewardRatio>
+        <ExpRewardRatio>29.5</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>240</BaseExp>
+
+        <ClearGold>360</ClearGold>
+        <ClearExp>240</ClearExp>
+
+        <MaxStage>20</MaxStage>
+        <BattleObserver>Theme70BattleObserver</BattleObserver>
+
+        <NormalMusic>Normal_Hard</NormalMusic>
+        <BattleMusic>Battle_Hard</BattleMusic>
+        <BossMusic>Boss_Hard</BossMusic>
+
+        <Map>Field_70</Map>
+        <Barricade>Barricade_Invisible</Barricade>
+        <Fog>Fog_04</Fog>
+
+        <AccessoryRewardSynergies>12,3,5</AccessoryRewardSynergies>
+        <RewardGaugeIcons>14,11,12,11</RewardGaugeIcons>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <HardModeTokenLevel>2</HardModeTokenLevel>
+        <HardModeTokenCount>56</HardModeTokenCount>
+        <BossUnit>26960</BossUnit>
+        
+        <MinVersion>167000</MinVersion>
+    </Theme>
+
+    <Theme ID='101'>
+        <NameComment>황금 고블린!</NameComment>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Field_01</Map>
+        <Barricade>Barricade_01a</Barricade>
+
+        <StartGold>100</StartGold>
+        <Time>15</Time>
+
+        <TimeBonus>100</TimeBonus>
+
+        <EventMode>true</EventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <UseEventBox>true</UseEventBox>
+        <FastRandomItem>true</FastRandomItem>
+
+        <Stages>
+            <PickStage ID='1'>
+                <Stage>10100</Stage>
+                <Stage>10101</Stage>
+                <Stage>10102</Stage>
+                <Stage>10103</Stage>
+                <Stage>10104</Stage>
+            </PickStage>
+        </Stages>
+
+        <ReqLevel>5</ReqLevel>
+        <MaxRewardGold>55</MaxRewardGold>
+        <MaxDifficulty>15</MaxDifficulty>
+        <DifficultyToStatPer>40</DifficultyToStatPer>
+        <DifficultyToRewardPer>100</DifficultyToRewardPer>
+        
+        <MaxStage>1</MaxStage>
+
+        <LobbyRewardIcon>Gold_Icon</LobbyRewardIcon>
+    </Theme>
+
+    <Theme ID='102'>
+        <NameComment>보스 러쉬</NameComment>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Field_01</Map>
+
+        <Barricade>Barricade_01a</Barricade>
+		<Barricade>Barricade_01b</Barricade>
+		<Barricade>Barricade_01c</Barricade>
+
+        <StartGold>50</StartGold>
+
+        <EventMode>true</EventMode>
+
+        <DevilRateBase>0</DevilRateBase>
+        <DevilRateWin>0</DevilRateWin>
+
+        <MerchantCheckTerm>1</MerchantCheckTerm>
+        <!-- <Revivable>false</Revivable> -->
+        
+        <ReqLevel>5</ReqLevel>
+        <MaxRewardGold>450</MaxRewardGold>
+        <BaseRewardValue>2</BaseRewardValue>
+        <DifficultyToRewardValue>0.5</DifficultyToRewardValue>
+
+        <SpawnByStageTheme>true</SpawnByStageTheme>
+        <SetStageByDifficulty>true</SetStageByDifficulty>
+        <SetUnitLevelBySpawnSet>true</SetUnitLevelBySpawnSet>
+        
+        <MaxStage>10</MaxStage>
+
+        <MaxDifficulty>12</MaxDifficulty>
+
+        <RandomItems>1,0,1,0,2,0,2,0,3,0</RandomItems>
+        <Merchants>0,1,0,2,0,2,0,3,0,0</Merchants>
+
+        <SpawnSet Difficulty='1'>
+            <Stages>115,120,215,220,31501,320,41501,420,515,520</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='2'>
+            <Stages>5115,5120,5215,5220,5315,5320,5415,5420,5515,5520</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='3'>
+            <Stages>215,220,31501,320,41501,420,515,520,615,620</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='4'>
+            <Stages>5215,5220,5315,5320,5415,5420,5515,5520,5615,5620</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='5'>
+            <Stages>31501,320,41501,420,515,520,615,620,715,720</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='6'>
+            <Stages>5315,5320,5415,5420,5515,5520,5615,5620,5715,5720</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='7'>
+            <Stages>41501,420,515,520,615,620,715,720,815,820</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='8'>
+            <Stages>5415,5420,5515,5520,5615,5620,5715,5720,5815,5820</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='9'>
+            <Stages>515,520,615,620,715,720,815,820,915,920</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='10'>
+            <Stages>5515,5520,5615,5620,5715,5720,5815,5820,5915,5920</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='11'>
+            <Stages>615,620,715,720,815,820,915,920,1015,1020</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+
+        <SpawnSet Difficulty='12'>
+            <Stages>5615,5620,5715,5720,5815,5820,5915,5920,6015,6020</Stages>
+            <Levels>3,3,4,4,5,5,6,6,7,7</Levels>
+        </SpawnSet>
+        
+        <LobbyRewardIcon>MiniItem_110</LobbyRewardIcon>
+    </Theme>
+
+    <Theme ID='103'>
+        <NameComment>영웅습격?!</NameComment>
+
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Field_01</Map>
+        <Barricade>Barricade_01a</Barricade>
+
+        <StartGold>125</StartGold>
+
+        <StartItem>101</StartItem>
+        <StartItem>201</StartItem>
+        <StartItem>301</StartItem>
+        <StartItem>401</StartItem>
+
+        <TimeBonus>5</TimeBonus>
+
+        <EventMode>true</EventMode>
+        <PvPMode>true</PvPMode>
+        <GetItemByKill>false</GetItemByKill>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <UseEventBox>true</UseEventBox>
+        <FastRandomItem>true</FastRandomItem>
+        <ShowStageNum>true</ShowStageNum>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <RoundEndCamMove>false</RoundEndCamMove>
+        <SetUnitCardLevelByDifficulty>true</SetUnitCardLevelByDifficulty>
+        <!-- <UnitCardLevelCorrection>2</UnitCardLevelCorrection> -->
+        <ReqLevel>5</ReqLevel>
+        <MaxRewardGold>450</MaxRewardGold>
+
+        <MaxStage>7</MaxStage>
+        <BaseRewardValue>3</BaseRewardValue>
+        <DifficultyToRewardValue>1</DifficultyToRewardValue>
+        <MaxDifficulty>14</MaxDifficulty>
+
+        <LobbyRewardIcon>Pass_Icon_03</LobbyRewardIcon>
+    </Theme>
+
+    <Theme ID='201'>
+        <NameComment>PVP 습격!</NameComment>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <!-- 주의! eliteLevel이 UI와 순서가 다름 -->
+        <!--규모, 적 1성증가,  아이템 , 목숨 - 1 -->
+        <!-- <FixEliteLevels>1,1,2,2</FixEliteLevels> -->
+        <!-- <EnemyPoolTheme>3</EnemyPoolTheme> -->
+
+        <MaxStage>6</MaxStage>
+        <LateComersCount>3</LateComersCount>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <ShowStageNum>true</ShowStageNum>
+        <MerchantCheckTerm>1</MerchantCheckTerm>
+        <DevilRateBase>1</DevilRateBase>
+        <FixedDevilCondition>EnemyLevelUp_1</FixedDevilCondition>
+        <ResetMerchantEveryStage>true</ResetMerchantEveryStage>
+
+        <PvPDeckRecord>true</PvPDeckRecord>
+        <UseBarricade>false</UseBarricade>
+        <EventMode>true</EventMode>
+        <GameSave>false</GameSave>
+        <CanSurrender>false</CanSurrender>
+        <!-- <UseEventBox>true</UseEventBox> -->
+        <FastRandomItem>true</FastRandomItem>
+        <ReqLevel>12</ReqLevel>
+    </Theme>
+
+    <Theme ID='202'>
+        <NameComment>PVP</NameComment>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic>PvP</NormalMusic>
+        <BattleMusic>PvP</BattleMusic>
+        <BossMusic>PvP</BossMusic>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Field_01</Map>
+        <Barricade>Barricade_01a</Barricade>
+
+        <StartGold>0</StartGold>
+
+        <TimeBonus>5</TimeBonus>
+
+        <EventMode>true</EventMode>
+        <PvPMode>true</PvPMode>
+        <GetItemByKill>false</GetItemByKill>
+        <RankedPvP>true</RankedPvP>
+        <MasterValueRatio>0.2</MasterValueRatio>
+        <MasterAddCCRatio>-0.5</MasterAddCCRatio>
+        <DefaultDef>500</DefaultDef>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <!-- <UseEventBox>true</UseEventBox> -->
+        <FastRandomItem>true</FastRandomItem>
+        <ShowStageNum>true</ShowStageNum>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+        <RoundEndCamMove>false</RoundEndCamMove>
+        <InitialCam>0</InitialCam>
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <PauseComment>PvPPauseComment</PauseComment>
+        <FixCamposToField>true</FixCamposToField>
+        <DisableWaitingField>false</DisableWaitingField>
+
+
+        <MaxRewardGold>450</MaxRewardGold>
+
+        <MaxStage>5</MaxStage>
+        <ReqLevel>12</ReqLevel>
+    </Theme>
+
+    <Theme ID='203'>
+        <NameComment>단독 토벌전 덱 구성</NameComment>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+        <StartGold>10</StartGold>
+
+        <StageSplit>3</StageSplit>
+
+		<Map>Raid_00</Map>
+
+        <MaxStage>6</MaxStage>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <ShowStageNum>true</ShowStageNum>
+        <MerchantCheckTerm>3</MerchantCheckTerm>
+        <DevilRateBase>-100</DevilRateBase>
+        <FixedDevilCondition>EnemyLevelUp_1</FixedDevilCondition>
+        <ResetMerchantEveryStage>true</ResetMerchantEveryStage>
+        <GiveAllGoldWhenLose>true</GiveAllGoldWhenLose>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+
+        <ClanBattleDeckRecord>true</ClanBattleDeckRecord>
+        <UseBarricade>false</UseBarricade>
+        <EventMode>true</EventMode>
+        <LateComersCount>3</LateComersCount>
+        <GameSave>false</GameSave>
+        <!-- <CanSurrender>false</CanSurrender> -->
+        <!-- <UseEventBox>true</UseEventBox> -->
+        <FastRandomItem>true</FastRandomItem>
+        <ReqLevel>6</ReqLevel>
+
+        <NormalMusic>Normal_Raid</NormalMusic>
+        <BattleMusic>Battle_Raid</BattleMusic>
+        <BossMusic>Battle_Raid</BossMusic>
+    </Theme>
+
+    <Theme ID='204'>
+        <NameComment>단독 토벌전</NameComment>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic></NormalMusic>
+        <BattleMusic>Boss_Raid</BattleMusic>
+        <BossMusic>Boss_Raid</BossMusic>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+		<Map>Raid_00</Map>
+        <Barricade>Barricade_01a</Barricade>
+
+        <StartGold>0</StartGold>
+
+        <TimeBonus>5</TimeBonus>
+
+        <EventMode>true</EventMode>
+        <ClanBattle>true</ClanBattle>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <!-- <UseEventBox>true</UseEventBox> -->
+        <FastRandomItem>true</FastRandomItem>
+        <ShowStageNum>true</ShowStageNum>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+        <RoundEndCamMove>false</RoundEndCamMove>
+        <InitialCam>0</InitialCam>
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <PauseComment>PvPPauseComment</PauseComment>
+        <CanSurrender>false</CanSurrender>
+        <FixCamposToField>true</FixCamposToField>
+        <DisableWaitingField>false</DisableWaitingField>
+
+        <MaxRewardGold>450</MaxRewardGold>
+
+        <MaxStage>1</MaxStage>
+        <ReqLevel>6</ReqLevel>
+    </Theme>
+
+    <Theme ID='205'>
+        <NameComment>연맹 토벌전 덱 구성</NameComment>
+        <Name>ThemeName_203</Name>
+        
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+        <StartGold>10</StartGold>
+
+        <StageSplit>3</StageSplit>
+
+        <Map>Raid_00</Map>
+
+        <MaxStage>11</MaxStage>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <ShowStageNum>true</ShowStageNum>
+        <MerchantCheckTerm>3</MerchantCheckTerm>
+        <DevilRateBase>-100</DevilRateBase>
+        <FixedDevilCondition>EnemyLevelUp_1</FixedDevilCondition>
+        <ResetMerchantEveryStage>true</ResetMerchantEveryStage>
+        <GiveAllGoldWhenLose>true</GiveAllGoldWhenLose>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+
+        <ClanBattleDeckRecord>true</ClanBattleDeckRecord>
+        <UseBarricade>false</UseBarricade>
+        <EventMode>true</EventMode>
+        <LateComersCount>3</LateComersCount>
+        <GameSave>false</GameSave>
+        <!-- <CanSurrender>false</CanSurrender> -->
+        <!-- <UseEventBox>true</UseEventBox> -->
+        <FastRandomItem>true</FastRandomItem>
+        <ReqLevel>6</ReqLevel>
+
+        <NormalMusic>Normal_Raid</NormalMusic>
+        <BattleMusic>Battle_Raid</BattleMusic>
+        <BossMusic>Battle_Raid</BossMusic>
+    </Theme>
+
+    <Theme ID='206'>
+        <NameComment>연맹 토벌전</NameComment>
+        <Name>ThemeName_204</Name>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic></NormalMusic>
+        <BattleMusic>Boss_Raid</BattleMusic>
+        <BossMusic>Boss_Raid</BossMusic>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Raid_00</Map>
+        <Barricade>Barricade_01a</Barricade>
+
+        <StartGold>0</StartGold>
+
+        <TimeBonus>5</TimeBonus>
+
+        <EventMode>true</EventMode>
+        <ClanBattle>true</ClanBattle>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <!-- <UseEventBox>true</UseEventBox> -->
+        <FastRandomItem>true</FastRandomItem>
+        <ShowStageNum>true</ShowStageNum>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+        <RoundEndCamMove>false</RoundEndCamMove>
+        <InitialCam>0</InitialCam>
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <PauseComment>PvPPauseComment</PauseComment>
+        <CanSurrender>false</CanSurrender>
+        <FixCamposToField>true</FixCamposToField>
+        <DisableWaitingField>false</DisableWaitingField>
+
+        <MaxRewardGold>450</MaxRewardGold>
+
+        <MaxStage>1</MaxStage>
+        <ReqLevel>6</ReqLevel>
+    </Theme>
+    
+    <Theme ID='207'>
+        <NameComment>연맹 토벌전 덱 구성</NameComment>
+        <Name>ThemeName_203</Name>
+        
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+        <StartGold>10</StartGold>
+
+        <StageSplit>3</StageSplit>
+
+        <Map>Raid_00</Map>
+
+        <MaxStage>11</MaxStage>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <ShowStageNum>true</ShowStageNum>
+        <MerchantCheckTerm>3</MerchantCheckTerm>
+        <DevilRateBase>-100</DevilRateBase>
+        <FixedDevilCondition>EnemyLevelUp_1</FixedDevilCondition>
+        <ResetMerchantEveryStage>true</ResetMerchantEveryStage>
+        <GiveAllGoldWhenLose>true</GiveAllGoldWhenLose>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+
+        <ClanRaidDeckRecord>true</ClanRaidDeckRecord>
+        <UseBarricade>false</UseBarricade>
+        <EventMode>true</EventMode>
+        <HeroGenStage1Enabled>false</HeroGenStage1Enabled>
+        <LateComersCount>3</LateComersCount>
+        <GameSave>false</GameSave>
+        <!-- <CanSurrender>false</CanSurrender> -->
+        <!-- <UseEventBox>true</UseEventBox> -->
+        <FastRandomItem>true</FastRandomItem>
+        <ReqLevel>6</ReqLevel>
+
+        <NormalMusic>Normal_Raid</NormalMusic>
+        <BattleMusic>Battle_Raid</BattleMusic>
+        <BossMusic>Battle_Raid</BossMusic>
+    </Theme>
+    
+    <Theme ID='208'>
+        <NameComment>연맹 토벌전</NameComment>
+        <Name>ThemeName_204</Name>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic></NormalMusic>
+        <BattleMusic>Boss_Raid</BattleMusic>
+        <BossMusic>Boss_Raid</BossMusic>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Raid_00</Map>
+        <Barricade>Barricade_01a</Barricade>
+
+        <StartGold>0</StartGold>
+
+        <TimeBonus>5</TimeBonus>
+
+        <EventMode>true</EventMode>
+        <ClanRaid>true</ClanRaid>
+        <ResetActiveSkillCooldownEachBattle>true</ResetActiveSkillCooldownEachBattle>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <!-- <UseEventBox>true</UseEventBox> -->
+        <FastRandomItem>true</FastRandomItem>
+        <ShowStageNum>true</ShowStageNum>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+        <RoundEndCamMove>false</RoundEndCamMove>
+        <InitialCam>0</InitialCam>
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <PauseComment>PvPPauseComment</PauseComment>
+        <CanSurrender>false</CanSurrender>
+        <FixCamposToField>true</FixCamposToField>
+        <DisableWaitingField>false</DisableWaitingField>
+
+        <MaxRewardGold>450</MaxRewardGold>
+
+        <MaxStage>1</MaxStage>
+        <ReqLevel>6</ReqLevel>
+    </Theme>
+    
+    <Theme ID="300">
+        <NameComment>(구) 시련의 탑</NameComment>
+        
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+        
+		<Map>Tower_01</Map>
+        <Barricade>Tower_Barricade_00a</Barricade>
+        <Barricade>Tower_Barricade_00b</Barricade>
+        <Barricade>Tower_Barricade_00c</Barricade>
+        <Barricade>Tower_Barricade_00d</Barricade>
+        <Barricade>Tower_Barricade_00e</Barricade>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+        
+        <StartGold>125</StartGold>
+
+        <StartItem>101</StartItem>
+        <StartItem>201</StartItem>
+        <StartItem>301</StartItem>
+        <StartItem>401</StartItem>
+
+        <StartItem>10000</StartItem>
+        <StartItem>10001</StartItem>
+        <StartItem>10002</StartItem>
+
+        <StartItem>10051</StartItem>
+        
+        <Tower>true</Tower>
+        <ResetActiveSkillCooldownEachBattle>true</ResetActiveSkillCooldownEachBattle>
+        
+        <EventMode>true</EventMode>
+        <UseEventBox>true</UseEventBox>
+        <Revivable>false</Revivable>
+        
+        <RandomItemLimit>10</RandomItemLimit>
+        <FreeMerchantRefreshCount>2</FreeMerchantRefreshCount>
+        
+        <MaxStage>10</MaxStage>
+        <ReqLevel>20</ReqLevel>
+
+        <TimeBonus>5</TimeBonus>
+
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <FastRandomItem>true</FastRandomItem>
+        <ShowStageNum>true</ShowStageNum>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <PreserveEnemyItemsOnReBatch>true</PreserveEnemyItemsOnReBatch>
+        <RoundEndCamMove>false</RoundEndCamMove>
+        <DecreaseLifeWhenSkipStage>true</DecreaseLifeWhenSkipStage>
+        <GetItemByKill>false</GetItemByKill>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+        <LoseWhenStageTimerOver>true</LoseWhenStageTimerOver>
+        <LateComersCount>0</LateComersCount>
+
+        <DevilRateBase>0</DevilRateBase>
+        <DevilRateWin>0</DevilRateWin>
+        <MerchantCheckTerm>10</MerchantCheckTerm>
+
+        <NormalMusic>Tower_Lobby</NormalMusic>
+        <BattleMusic>Tower_Battle</BattleMusic>
+        <BossWaitMusic>Tower_Wait_Boss</BossWaitMusic>
+        <BossMusic>Tower_Boss</BossMusic>
+        
+        <UseFoodBoosterLevel>true</UseFoodBoosterLevel>
+    </Theme>
+    <Theme ID="302">
+        <NameComment>시탑 - 2챕터</NameComment>
+    </Theme>
+    <Theme ID="304">
+        <NameComment>시탑 - 4챕터</NameComment>
+    </Theme>
+    <Theme ID="305">
+        <NameComment>시탑 - 5챕터</NameComment>
+    </Theme>
+    <Theme ID="306">
+        <NameComment>시탑 - 6챕터</NameComment>
+    </Theme>
+    <Theme ID="352">
+        <NameComment>시탑 - 2챕터 잠식</NameComment>
+    </Theme>
+    <Theme ID="354">
+        <NameComment>시탑 - 4챕터 잠식</NameComment>
+    </Theme>
+    <Theme ID="355">
+        <NameComment>시탑 - 5챕터 잠식</NameComment>
+        <HardMode>true</HardMode>
+    </Theme>
+    <Theme ID="356">
+        <NameComment>시탑 - 6챕터 잠식</NameComment>
+        <HardMode>true</HardMode>
+    </Theme>
+    
+    <Theme ID="400">
+        <NameComment>(신) 시련의 탑</NameComment>
+        
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic>Tower_Lobby</NormalMusic>
+        <BattleMusic>Tower_Battle</BattleMusic>
+        <BossWaitMusic>Tower_Wait_Boss</BossWaitMusic>
+        <BossMusic>Tower_Boss</BossMusic>
+
+        <Barricade>Tower_Barricade_00a</Barricade>
+        <Barricade>Tower_Barricade_00b</Barricade>
+        <Barricade>Tower_Barricade_00c</Barricade>
+        <Barricade>Tower_Barricade_00d</Barricade>
+        <Barricade>Tower_Barricade_00e</Barricade>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Tower_01</Map>
+
+        <StartGold>0</StartGold>
+        
+        <StartUnitLevels>7,7,7,7,7,7</StartUnitLevels>
+        
+        <Babel>true</Babel>
+        <ResetActiveSkillCooldownEachBattle>true</ResetActiveSkillCooldownEachBattle>
+        <EventMode>true</EventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <Revivable>false</Revivable>
+        <MaxStage>210</MaxStage>
+        
+        <ShowDeckPreviewAltarInPausePanel>false</ShowDeckPreviewAltarInPausePanel>
+        <ShowDeckPreviewRiftWeaponInPausePanel>false</ShowDeckPreviewRiftWeaponInPausePanel>
+
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <LateComersCount>0</LateComersCount>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <UseNoButtons>true</UseNoButtons>
+        <CanSellUnit>false</CanSellUnit>
+        <BuildingEnabled>false</BuildingEnabled>
+    </Theme>
+
+    <Theme ID="401">
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic>Tower_Lobby</NormalMusic>
+        <BattleMusic>Tower_Battle</BattleMusic>
+        <BossWaitMusic>Tower_Wait_Boss</BossWaitMusic>
+        <BossMusic>Tower_Boss</BossMusic>
+
+        <Barricade>Tower_Barricade_00a</Barricade>
+        <Barricade>Tower_Barricade_00b</Barricade>
+        <Barricade>Tower_Barricade_00c</Barricade>
+        <Barricade>Tower_Barricade_00d</Barricade>
+        <Barricade>Tower_Barricade_00e</Barricade>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Tower_01</Map>
+
+        <StartGold>0</StartGold>
+
+        <StartUnitLevels>7,7,7,7,7,7</StartUnitLevels>
+
+        <Babel>true</Babel>
+        <ResetActiveSkillCooldownEachBattle>true</ResetActiveSkillCooldownEachBattle>
+        <EventMode>true</EventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <Revivable>false</Revivable>
+        <MaxStage>210</MaxStage>
+
+        <ShowDeckPreviewAltarInPausePanel>false</ShowDeckPreviewAltarInPausePanel>
+        <ShowDeckPreviewRiftWeaponInPausePanel>false</ShowDeckPreviewRiftWeaponInPausePanel>
+
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <HeroGenStage1Enabled>false</HeroGenStage1Enabled>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <UseNoButtons>true</UseNoButtons>
+        <CanSellUnit>false</CanSellUnit>
+        <BuildingEnabled>false</BuildingEnabled>
+    </Theme>
+
+    <Theme ID="402">
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic>Tower_Lobby</NormalMusic>
+        <BattleMusic>Tower_Battle</BattleMusic>
+        <BossWaitMusic>Tower_Wait_Boss</BossWaitMusic>
+        <BossMusic>Tower_Boss</BossMusic>
+
+          <Barricade>Tower_Barricade_00a</Barricade>
+        <Barricade>Tower_Barricade_00b</Barricade>
+        <Barricade>Tower_Barricade_00c</Barricade>
+        <Barricade>Tower_Barricade_00d</Barricade>
+        <Barricade>Tower_Barricade_00e</Barricade>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Tower_01</Map>
+
+        <StartGold>0</StartGold>
+
+        <StartUnitLevels>7,7,7,7,7,7</StartUnitLevels>
+
+        <Babel>true</Babel>
+        <ResetActiveSkillCooldownEachBattle>true</ResetActiveSkillCooldownEachBattle>
+        <EventMode>true</EventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <Revivable>false</Revivable>
+        <MaxStage>210</MaxStage>
+
+        <ShowDeckPreviewAltarInPausePanel>false</ShowDeckPreviewAltarInPausePanel>
+        <ShowDeckPreviewRiftWeaponInPausePanel>false</ShowDeckPreviewRiftWeaponInPausePanel>
+
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <HeroGenStage1Enabled>false</HeroGenStage1Enabled>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <UseNoButtons>true</UseNoButtons>
+        <CanSellUnit>false</CanSellUnit>
+        <BuildingEnabled>false</BuildingEnabled>
+    </Theme>
+
+    <Theme ID="403">
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic>Tower_Lobby</NormalMusic>
+        <BattleMusic>Tower_Battle</BattleMusic>
+        <BossWaitMusic>Tower_Wait_Boss</BossWaitMusic>
+        <BossMusic>Tower_Boss</BossMusic>
+
+
+        <Barricade>Tower_Barricade_00a</Barricade>
+        <Barricade>Tower_Barricade_00b</Barricade>
+        <Barricade>Tower_Barricade_00c</Barricade>
+        <Barricade>Tower_Barricade_00d</Barricade>
+        <Barricade>Tower_Barricade_00e</Barricade>
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Tower_01</Map>
+
+        <StartGold>0</StartGold>
+
+        <StartUnitLevels>7,7,7,7,7,7</StartUnitLevels>
+
+        <Babel>true</Babel>
+        <ResetActiveSkillCooldownEachBattle>true</ResetActiveSkillCooldownEachBattle>
+        <EventMode>true</EventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <Revivable>false</Revivable>
+        <MaxStage>210</MaxStage>
+
+        <ShowDeckPreviewAltarInPausePanel>false</ShowDeckPreviewAltarInPausePanel>
+        <ShowDeckPreviewRiftWeaponInPausePanel>false</ShowDeckPreviewRiftWeaponInPausePanel>
+
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <HeroGenStage1Enabled>false</HeroGenStage1Enabled>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <UseNoButtons>true</UseNoButtons>
+        <CanSellUnit>false</CanSellUnit>
+        <BuildingEnabled>false</BuildingEnabled>
+    </Theme>
+
+    <Theme ID="404">
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic>Tower_Lobby</NormalMusic>
+        <BattleMusic>Tower_Battle</BattleMusic>
+        <BossWaitMusic>Tower_Wait_Boss</BossWaitMusic>
+        <BossMusic>Tower_Boss</BossMusic>
+
+        <Barricade>Tower_Barricade_00a</Barricade>
+        <Barricade>Tower_Barricade_00b</Barricade>
+        <Barricade>Tower_Barricade_00c</Barricade>
+        <Barricade>Tower_Barricade_00d</Barricade>
+        <Barricade>Tower_Barricade_00e</Barricade>
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Tower_01</Map>
+
+        <StartGold>0</StartGold>
+
+        <StartUnitLevels>7,7,7,7,7,7</StartUnitLevels>
+
+        <Babel>true</Babel>
+        <ResetActiveSkillCooldownEachBattle>true</ResetActiveSkillCooldownEachBattle>
+        <EventMode>true</EventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <Revivable>false</Revivable>
+        <MaxStage>210</MaxStage>
+
+        <ShowDeckPreviewAltarInPausePanel>false</ShowDeckPreviewAltarInPausePanel>
+        <ShowDeckPreviewRiftWeaponInPausePanel>false</ShowDeckPreviewRiftWeaponInPausePanel>
+
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <HeroGenStage1Enabled>false</HeroGenStage1Enabled>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <UseNoButtons>true</UseNoButtons>
+        <CanSellUnit>false</CanSellUnit>
+        <BuildingEnabled>false</BuildingEnabled>
+    </Theme>
+
+    <Theme ID="405">
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic>Tower_Lobby</NormalMusic>
+        <BattleMusic>Tower_Battle</BattleMusic>
+        <BossWaitMusic>Tower_Wait_Boss</BossWaitMusic>
+        <BossMusic>Tower_Boss</BossMusic>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Tower_01</Map>
+
+        <StartGold>0</StartGold>
+
+        <StartUnitLevels>7,7,7,7,7,7</StartUnitLevels>
+
+        <Babel>true</Babel>
+        <ResetActiveSkillCooldownEachBattle>true</ResetActiveSkillCooldownEachBattle>
+        <EventMode>true</EventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <Revivable>false</Revivable>
+        <MaxStage>210</MaxStage>
+
+        <ShowDeckPreviewAltarInPausePanel>false</ShowDeckPreviewAltarInPausePanel>
+        <ShowDeckPreviewRiftWeaponInPausePanel>false</ShowDeckPreviewRiftWeaponInPausePanel>
+
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <HeroGenStage1Enabled>false</HeroGenStage1Enabled>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <UseNoButtons>true</UseNoButtons>
+        <CanSellUnit>false</CanSellUnit>
+        <BuildingEnabled>false</BuildingEnabled>
+    </Theme>
+
+    <Theme ID='1000'>
+        <NameComment>시즌 축제 이벤트</NameComment>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Seasonal_Event_Sea</Map>
+        <Barricade>Barricade_01a</Barricade>
+
+        <StartGold>25</StartGold>
+
+        <StartUnitLevels>3,3,3,3,3,3</StartUnitLevels>
+        <StartSpawnLevelUp>999</StartSpawnLevelUp>
+        <SpawnLevelUpLevel>2</SpawnLevelUpLevel>
+        <RoundHpHealPer>0</RoundHpHealPer>
+        <!-- <MasterValueRatio>0.5</MasterValueRatio> -->
+
+        <!-- <StartItem>101</StartItem> -->
+        <!-- <StartItem>201</StartItem> -->
+        <!-- <StartItem>301</StartItem> -->
+        <!-- <StartItem>401</StartItem> -->
+        <!-- <StartItem>10001</StartItem> -->
+
+        <TimeBonus>10</TimeBonus>
+
+        <HeroRevive>false</HeroRevive>
+        <Revivable>false</Revivable>
+
+        <ClearTokens>4,5,6</ClearTokens>
+        <ClearTokenBaseRounds>0,5,10</ClearTokenBaseRounds>
+
+        <!-- <FixEliteLevels>0,0,0,2</FixEliteLevels> -->
+        <StartLife>1</StartLife>
+        <EventMode>true</EventMode>
+        <SeasonalEventMode>true</SeasonalEventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <!-- <UseEventBox>true</UseEventBox> -->
+        <UseSpecialButtons>true</UseSpecialButtons>
+        <CanSellUnit>false</CanSellUnit>
+
+        <DevilRateBase>0</DevilRateBase>
+        <DevilRateWin>0</DevilRateWin>
+
+        <LateComersCount>0</LateComersCount>
+        
+        <MaxStage>15</MaxStage>
+
+        <LobbyRewardIcon>SeasonalEventToken_Sea</LobbyRewardIcon>
+    </Theme>
+
+    <Theme ID='1001'>
+        <NameComment>시즌 축제 이벤트2: 누가 이길까?</NameComment>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <QuizMode>true</QuizMode>
+        <Map>Seasonal_Event_Sea</Map>
+        <ModeBackgroundSprite>Themes_Background_1000_S71</ModeBackgroundSprite>
+        <Barricade>Barricade_01a</Barricade>
+
+        <ShowDeckPreviewInPausePanel>false</ShowDeckPreviewInPausePanel>
+
+        <StartGold>0</StartGold>
+
+        <TimeBonus>10</TimeBonus>
+
+        <Revivable>false</Revivable>
+
+        <BaseToken>45</BaseToken>
+        <ClearTokens>4</ClearTokens>
+        <ClearTokenBaseRounds>0</ClearTokenBaseRounds>
+
+        <EventMode>true</EventMode>
+        <SeasonalEventMode>true</SeasonalEventMode>
+        <UseBarricade>false</UseBarricade>
+        <GameSave>false</GameSave>
+        <UseEventBox>true</UseEventBox>
+        <CanSellUnit>false</CanSellUnit>
+        <GetItemByKill>false</GetItemByKill>
+
+        <DevilRateBase>0</DevilRateBase>
+        <DevilRateWin>0</DevilRateWin>
+
+        <ArtifactEnabled>false</ArtifactEnabled>
+        <BuildingEnabled>false</BuildingEnabled>
+        <CardLevelEnabled>false</CardLevelEnabled>
+        <TerritoryBuffEnabled>false</TerritoryBuffEnabled>
+        <ResetField>true</ResetField>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <RoundEndCamMove>false</RoundEndCamMove>
+        <InitialCam>0</InitialCam>
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <DragUnitEnabled>false</DragUnitEnabled>
+        <FixCamposToField>true</FixCamposToField>
+        <DisableWaitingField>false</DisableWaitingField>
+        
+        <LateComersCount>0</LateComersCount>
+
+        <!-- <MaxStage>110</MaxStage>  -->
+        <MaxStage>8</MaxStage>
+        <RandomStage>true</RandomStage>
+        
+        <!-- 테스트 시에만 주석을 해제하여 사용 -->
+<!--        <RepeatLastStageAtLackOfStage>true</RepeatLastStageAtLackOfStage>-->
+        
+        <LobbyRewardIcon>SeasonalEventToken_Beach</LobbyRewardIcon>
+    </Theme>
+
+    <Theme ID='1002'>
+        <NameComment>가을축제 이벤트</NameComment>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Event_01</Map>
+        <Barricade>Barricade_01a</Barricade>
+
+        <StartGold>25</StartGold>
+
+        <StartUnitLevels>3,3,3,3,3,3</StartUnitLevels>
+        <StartSpawnLevelUp>999</StartSpawnLevelUp>
+        <StartSelectItems>4</StartSelectItems>
+        <SpawnLevelUpLevel>2</SpawnLevelUpLevel>
+        <RoundHpHealPer>0</RoundHpHealPer>
+        <!-- <MasterValueRatio>0.5</MasterValueRatio> -->
+
+        <!-- <StartItem>101</StartItem> -->
+        <!-- <StartItem>201</StartItem> -->
+        <!-- <StartItem>301</StartItem> -->
+        <!-- <StartItem>401</StartItem> -->
+        <!-- <StartItem>10001</StartItem> -->
+
+        <TimeBonus>100</TimeBonus>
+
+        <HeroRevive>false</HeroRevive>
+        <Revivable>false</Revivable>
+
+        <!-- <FixEliteLevels>0,0,0,2</FixEliteLevels> -->
+        <StartLife>1</StartLife>
+        <EventMode>true</EventMode>
+        <SeasonalEventMode>true</SeasonalEventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <!-- <UseEventBox>true</UseEventBox> -->
+        <UseSpecialButtons>true</UseSpecialButtons>
+        <CanSellUnit>false</CanSellUnit>
+
+        <DevilRateBase>0</DevilRateBase>
+        <DevilRateWin>0</DevilRateWin>
+
+        <MaxStage>8</MaxStage>
+    </Theme>
+
+    <Theme ID='2000'>
+        <NameComment>대균열</NameComment>
+
+        <TerritoryBuffEnabled>false</TerritoryBuffEnabled>
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>RogueLike_00</Map>
+        <Barricade>Barricade_01a</Barricade>
+		<Barricade>Barricade_01b</Barricade>
+		<Barricade>Barricade_01c</Barricade>
+        <BackgroundSprite>RogueLike_Title</BackgroundSprite>
+        <UnitsSprite>RogueLike_Unit</UnitsSprite>
+
+        <StartGold>10</StartGold>
+
+        <SetSlot>28</SetSlot>
+        <StartSpawnLevelUp>999</StartSpawnLevelUp>
+        <RoundHpHealPer>0</RoundHpHealPer>
+        <!-- <MasterValueRatio>0.5</MasterValueRatio> -->
+
+        <!-- <StartItem>101</StartItem> -->
+        <!-- <StartItem>201</StartItem> -->
+        <!-- <StartItem>301</StartItem> -->
+        <!-- <StartItem>401</StartItem> -->
+        <!-- <StartItem>10001</StartItem> -->
+
+        <!-- <HeroRevive>false</HeroRevive> -->
+        <Revivable>true</Revivable>
+
+        <StartLife>1</StartLife>
+        <EventMode>true</EventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>true</GameSave>
+        <UseNoButtons>true</UseNoButtons>
+        <CanSellUnit>false</CanSellUnit>
+        <RogueLike>true</RogueLike>
+        <RogueLikeType>GreatRift</RogueLikeType>
+        
+        <ShowDeckPreviewInPausePanel>false</ShowDeckPreviewInPausePanel>
+        
+        <GetItemByKill>false</GetItemByKill>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <UseMapPool>true</UseMapPool>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+
+        <DevilRateBase>0</DevilRateBase>
+        <DevilRateWin>0</DevilRateWin>
+
+        <MaxStage>999</MaxStage>
+
+        <LobbyRewardIcon>SeasonalEventToken_S21</LobbyRewardIcon>
+        
+        <GoldAreaActive>false</GoldAreaActive>
+    </Theme>
+    
+    <Theme ID='2100'>
+        <NameComment>차원의 균열</NameComment>
+
+        <CameraSize>450</CameraSize>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>RogueLike_00</Map>
+        <Barricade>Barricade_01a</Barricade>
+        <Barricade>Barricade_01b</Barricade>
+        <Barricade>Barricade_01c</Barricade>
+        <BackgroundSprite>RogueLike_Title_02</BackgroundSprite>
+        <UnitsSprite>RogueLike_Unit_02</UnitsSprite>
+
+        <StartGold>10</StartGold>
+
+        <SetSlot>28</SetSlot>
+        <StartSpawnLevelUp>999</StartSpawnLevelUp>
+        <RoundHpHealPer>0</RoundHpHealPer>
+        <Revivable>true</Revivable>
+
+        <StartLife>1</StartLife>
+        <EventMode>true</EventMode>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>true</GameSave>
+        <UseNoButtons>true</UseNoButtons>
+        <CanSellUnit>false</CanSellUnit>
+        <RogueLike>true</RogueLike>
+        <RogueLikeType>DimensionRift</RogueLikeType>
+        
+        <ShowDeckPreviewInPausePanel>false</ShowDeckPreviewInPausePanel>
+        
+        <GetItemByKill>false</GetItemByKill>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <UseMapPool>true</UseMapPool>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+        <DevilRateBase>0</DevilRateBase>
+        <DevilRateWin>0</DevilRateWin>
+
+        <MaxStage>999</MaxStage>
+
+        <LobbyRewardIcon>SeasonalEventToken_S21</LobbyRewardIcon>
+
+        <GoldAreaActive>false</GoldAreaActive>
+    </Theme>
+    
+    <Theme ID="3000">
+        <NameComment>콜로세움</NameComment>
+
+        <CameraSize>450</CameraSize>
+        
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>30</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>30</ClearExp>
+
+        <Map>Colosseum_00</Map>
+        <CastlePrefab>Castle_02</CastlePrefab>
+
+        <StartLife>5</StartLife>
+        <MaxStage>30</MaxStage>
+        
+        <BattleCount>4</BattleCount>
+        <LateComersCount>3</LateComersCount>
+        
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <DecreaseLifeWhenSkipStage>true</DecreaseLifeWhenSkipStage>
+
+        <DevilRateBase>0</DevilRateBase>
+        <DevilRateWin>0</DevilRateWin>
+
+        <NormalMusic>Colosseum_Ready</NormalMusic>
+        <BattleMusic>Colosseum_Battle</BattleMusic>
+
+        <EventMode>true</EventMode>
+        <Colosseum>true</Colosseum>
+        <CheckSurvived>true</CheckSurvived>
+        <UseFixedUpdate>true</UseFixedUpdate>
+        <UseBarricade>false</UseBarricade>
+        <GameSave>false</GameSave>
+        
+        <UpgradeSlotCost>5,5,10,10,15,20,25,30,35,40,45,50</UpgradeSlotCost>
+    </Theme>
+    
+    <Theme ID="4000">
+        <NameComment>스토리 모드</NameComment>
+        
+        <StoryMode>true</StoryMode>
+        
+        <EventMode>true</EventMode>
+        <GameSave>false</GameSave>
+        <UseBarricade>false</UseBarricade>
+        
+        <PauseComment>PauseCommentStoryMode</PauseComment>
+        
+        <ShowDeckPreviewInPausePanel>false</ShowDeckPreviewInPausePanel>
+        
+        <TerritoryBuffEnabled>false</TerritoryBuffEnabled>
+        
+        <Revivable>false</Revivable>
+    </Theme>
+
+    <Theme ID="4100">
+        <NameComment>스토리 모드(챌린지)</NameComment>
+
+        <EventMode>true</EventMode>
+        <StoryMode>true</StoryMode>
+        <ChallengeMode>true</ChallengeMode>
+        <GameSave>false</GameSave>
+        <CastlePrefab>Castle_03</CastlePrefab>
+
+        <PauseComment>PauseCommentStoryMode</PauseComment>
+        
+        <UseBarricade>false</UseBarricade>
+        
+        <ShowDeckPreviewInPausePanel>false</ShowDeckPreviewInPausePanel>
+        
+        <Revivable>false</Revivable>
+    </Theme>
+</Themes>

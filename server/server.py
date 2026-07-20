@@ -9,7 +9,8 @@ state persistence for cards, decks, inventory, missions, and game loop.
 
 Run:  uvicorn server:app --host 0.0.0.0 --port 8080
 """
-import json, time, secrets, datetime, pathlib, threading, hashlib, os, sys, subprocess
+import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, threading, hashlib, os, sys, subprocess
+import playerdb
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, PlainTextResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
@@ -63,32 +64,14 @@ ROUTE_MODELS.update({
     "/treasure/set-state": {"method": "TreasureSetState", "response": "TreasureResultResponseModel"},
     "/treasure/overcome": {"method": "TreasureOvercome", "response": "TreasureResultResponseModel"},
 })
-STATE_FILE = ROOT / "state" / "player.json"
-PLAYERS_DIR = ROOT / "state" / "players"
-PLAYERS_DIR.mkdir(parents=True, exist_ok=True)
+STATE_DIR = ROOT / "state"
+STATE_DIR.mkdir(parents=True, exist_ok=True)
 
-# ── Migrate legacy single player.json to players/ ──
-def _migrate_legacy_player():
-    if not STATE_FILE.exists():
-        return
-    try:
-        st = json.loads(STATE_FILE.read_text())
-    except Exception:
-        return
-    pid = st.get("uid", "dev-0001")
-    pfile = PLAYERS_DIR / f"{pid}.json"
-    if not pfile.exists():
-        admin_log(f"[admin] migrated {pid} from legacy player.json")
-        pfile.write_text(json.dumps(st, indent=1))
-    # Also ensure at least one valid player entry exists in the active file
-    for fp in PLAYERS_DIR.glob("*.json"):
-        try:
-            json.loads(fp.read_text())
-        except Exception:
-            fp.unlink()
-
-_migrate_legacy_player()
-STATE_LOCK = threading.Lock()
+# Player state lives in state/players.db (SQLite, WAL). The old JSON files are
+# imported once and then left alone as a cold backup - they are NOT read again.
+_migrated = playerdb.migrate_from_json(STATE_DIR)
+if _migrated:
+    admin_log(f"[state] migrated {_migrated} player(s) from JSON into {playerdb.DB_PATH.name}")
 
 # All response data that isn't request-time-computed logic lives under data/ as
 # JSON - editable without touching code, and the shape mirrors what a future
@@ -116,37 +99,59 @@ _STATIC_ALIASES = {
 for _alias, _canonical in _STATIC_ALIASES.items():
     STATIC_OVERRIDES[_alias] = STATIC_OVERRIDES[_canonical]
 
+def next_reset_iso(days=1):
+    """Next UTC-midnight rollover boundary, `days` out.
+
+    `tomorrow` / `nextWeek` are DERIVED, never served from stored state.
+    Scene_Lobby.Update polls `if (now >= playerData.tomorrow_) FetchNextDay()`
+    once a second, and FetchNextDay re-runs the whole login + lobby fetch chain.
+    A stored value is frozen at account-creation time, so the check goes
+    permanently true and the client re-logins at 1 Hz forever.
+    """
+    midnight = datetime.datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    return (midnight + datetime.timedelta(days=days)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+
 def now_iso(delta_days=0):
     return (datetime.datetime.utcnow() + datetime.timedelta(days=delta_days)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
+# Set per request from the `accesstoken` header (see resolve_player middleware).
+# None = no session -> fall back to the admin-selected active player, which is
+# what every single-player setup and the whole pre-login boot sequence relies on.
+CURRENT_UID = contextvars.ContextVar("current_uid", default=None)
+
+# Auto-creating a save for an unknown account id is right for a real multi-player
+# server and wrong for a single-player one, where a reinstall or a cleared cache
+# would mint a fresh empty save and look exactly like losing your progress.
+MULTIPLAYER = os.environ.get("KGC_MULTIPLAYER") == "1"
+MAX_PLAYERS = int(os.environ.get("KGC_MAX_PLAYERS") or 200)
+admin_log(f"[state] identity mode: {'multiplayer (account id -> own save)' if MULTIPLAYER else 'single-player (everyone -> active save)'}")
+
 def load_state():
-    with STATE_LOCK:
-        if STATE_FILE.exists():
-            st = json.loads(STATE_FILE.read_text())
-            _sync_player_backup(st)
+    """State of the player this request belongs to.
+
+    Identity comes from the `accesstoken` header, bound to a uid at login. With
+    no session (pre-login boot, CDN, admin UI) this is the active player.
+    """
+    uid = CURRENT_UID.get() or playerdb.active()
+    if uid:
+        st = playerdb.load(uid)
+        if st is not None:
             return st
-        st = DEFAULT_PLAYER.copy()
-        STATE_FILE.write_text(json.dumps(st, indent=1))
-        _sync_player_backup(st)
-        return st
+    st = copy.deepcopy(DEFAULT_PLAYER)
+    uid = st.get("uid", "dev-0001")
+    playerdb.save(uid, st)
+    playerdb.set_active(uid)
+    return st
 
 def save_state(st):
-    with STATE_LOCK:
-        STATE_FILE.write_text(json.dumps(st, indent=1))
-        _sync_player_backup(st)
-
-def _sync_player_backup(st):
-    """Sync active player to their own file in players/"""
-    pid = st.get("uid", "dev-0001")
-    pfile = PLAYERS_DIR / f"{pid}.json"
-    pfile.write_text(json.dumps(st, indent=1))
+    playerdb.save(st.get("uid", "dev-0001"), st)
 
 def patch_state(st, updates):
     st.update(updates)
     save_state(st)
 
-# Prefer user-edited master data in scratchpad/xml_live, then CDN-synced.
-_XML_LIVE = ROOT.parent / "scratchpad" / "xml_live"
+# Prefer user-edited master data in server/xml_live, then CDN-synced.
+_XML_LIVE = ROOT / "xml_live"
 XML_DIR = _XML_LIVE if _XML_LIVE.is_dir() else ROOT.parent / "xml" / PATCH_FOLDER
 assert XML_DIR.is_dir(), f"XML master data not found: {XML_DIR}"
 admin_log(f"[xml] master data dir: {XML_DIR} ({len(list(XML_DIR.iterdir()))} files)")
@@ -237,6 +242,32 @@ def _all_rift_weapon_ids():
     txt = (XML_DIR / "RiftWeapons.xml").read_text(encoding="utf-8")
     txt = re.sub(r'<!--.*?-->', '', txt, flags=re.DOTALL)
     return [int(m) for m in re.findall(r'<RiftWeapon ID="(\d+)"', txt)]
+
+def _rift_building_count():
+    """How many altars a rift crystal carries a level for.
+
+    Buildings.xml holds two ranges: the 6 in-battle altars (ids 0-5) and the
+    upgradeable altars (ids 100+) that `BuildingName_0..N` name and that
+    RiftWeaponBuffs.xml's `Building` attribute indexes into ("building indexes :
+    제단 인덱스 (Buildings.xml id)" per that file's own header).
+
+    `RiftCrystalModel.buildingLevels` is one level per altar in that second range,
+    positioned by each entry's own `<Index>` (0-8), not by its id. `GetMaxBuildingIdx`
+    (v171 RVA 0x2CCA1B4) walks the whole list and returns the index of the largest
+    value, so a list shorter than the altar count silently hides every altar past its
+    end - which is why a 3-element list always resolved to altar 0 ("Rift Crystal of
+    Hero") no matter what the crystal was meant to be.
+
+    Parsed with ElementTree, not a regex: Buildings.xml quotes its attributes with
+    single quotes, so the `ID="..."` pattern the other loaders here use matches nothing
+    and would silently report zero altars.
+    """
+    import xml.etree.ElementTree as _ET
+    root = _ET.parse(XML_DIR / "Buildings.xml").getroot()
+    idxs = [int(b.findtext("Index") or -1) for b in root
+            if (b.findtext("Name") or "").startswith("BuildingName_")]
+    assert idxs, "Buildings.xml has no BuildingName_* altars - rift crystals would be empty"
+    return max(idxs) + 1
 
 def _all_inventory_item_ids():
     """Consumables/keys/tokens/boxes from InventoryItems.xml."""
@@ -342,18 +373,64 @@ def card_to_dict(c):
 def cards_list(st):
     return [card_to_dict(c) for c in st.get("cards", {}).values()]
 
+# The client's account id for the request being handled: `?id=` on /auth/auth,
+# or `id` in the /auth/register body. Only r_login reads it.
+CURRENT_LOGIN_ID = contextvars.ContextVar("current_login_id", default=None)
+
+def _uid_for_login(login_id, prev_token):
+    """Which player a login belongs to.
+
+    Order: known account id -> the session the presented token already belongs to
+    (/auth/login carries a token, not an id) -> new player, but only in
+    multiplayer mode -> the active player.
+    """
+    uid = playerdb.uid_for_login(login_id) or playerdb.uid_for_token(prev_token)
+    if uid and playerdb.load(uid) is not None:
+        return uid
+    if MULTIPLAYER and login_id:
+        uid = "p-" + hashlib.sha1(login_id.encode()).hexdigest()[:12]
+        if playerdb.load(uid) is None:
+            # The account id is client-supplied and unauthenticated, so anyone who
+            # can reach /auth/register can mint saves. Cap it - without this a loop
+            # fills the disk.
+            if playerdb.count() >= MAX_PLAYERS:
+                admin_log(f"[auth] refused new player: at KGC_MAX_PLAYERS={MAX_PLAYERS}")
+                return playerdb.active()
+            st = copy.deepcopy(DEFAULT_PLAYER)
+            st["uid"] = uid
+            st["accountCreatedAt"] = now_iso(0)
+            playerdb.save(uid, st)
+            admin_log(f"[auth] new player {uid}")
+        playerdb.bind_login(login_id, uid)
+        return uid
+    return playerdb.active()
+
 def r_login(body, st):
     # All date-ish fields must be non-null parseable strings: HandleAuthResponse
     # does DateTime.Parse on expiredAt / serverTime / blockedUntilAt -> null throws
     # ArgumentNullException.
+    login_id = CURRENT_LOGIN_ID.get() or body.get("id") or ""
+    # No bind_login() here: in single-player mode _uid_for_login falls back to the
+    # ACTIVE player, and recording that as "account X owns save Y" would pin every
+    # account that ever logged in to it - permanently, so a later switch to
+    # multiplayer would still hand them all the same save. Only the multiplayer
+    # branch, which actually owns the account, writes that mapping.
+    uid = _uid_for_login(login_id, body.get("token"))
+    token = "DEV." + secrets.token_hex(16)
+    playerdb.bind_session(token, uid)   # every later request identifies via this
+    CURRENT_UID.set(uid)                # rest of THIS request is already this player
+    # login_id is a bearer credential (whoever presents it gets that save), and
+    # admin_log feeds the dashboard log view - record a fingerprint, not the id.
+    fp = hashlib.sha1(login_id.encode()).hexdigest()[:8] if login_id else "-"
+    admin_log(f"[auth] login id#{fp} -> uid={uid}")
     return {
-        "accessToken": "DEV." + secrets.token_hex(16),
+        "accessToken": token,
         "expiredAt": now_iso(7),
         "seed": secrets.token_hex(8),
         "serverTime": now_iso(0),
         "blockedUntilAt": now_iso(0),
         "blockedComment": "",
-        "loginId": st.get("uid", "dev-0001"),
+        "loginId": uid,
     }
 
 
@@ -454,8 +531,8 @@ def r_player(body, st):
         "dimensionRiftGameIndex": st.get("dimensionRiftGameIndex", d["dimensionRiftGameIndex"]),
         "currentRanking": st.get("currentRanking", [ld["currentRankingValue"]] * ld["currentRankingCount"]),
         "currentHardRanking": st.get("currentHardRanking", [ld["currentHardRankingValue"]] * ld["currentHardRankingCount"]),
-        "tomorrow": st.get("tomorrow", now_iso(1)),
-        "nextWeek": st.get("nextWeek", now_iso(7)),
+        "tomorrow": next_reset_iso(1),
+        "nextWeek": next_reset_iso(7),
         "hasFreeRename": st.get("hasFreeRename", d["hasFreeRename"]),
         "eventFlag": st.get("eventFlag", d["eventFlag"]),
         "eventPlayedCount": st.get("eventPlayedCount", 0),
@@ -464,9 +541,18 @@ def r_player(body, st):
         # profileIconId must be a real Unit ID (ResourceBase<Unit>.Get lookup) - a
         # non-resolving id gives a blank/white avatar.
         "keyValues": st.get("keyValues", [{"key": "profileIconId", "value": d["profileIconId"]}]) + [
+            # AccessorySubStatGrade.Set() opens with GetKeyValueInt("AccessoryRenewal")
+            # and SetActive(false)s the whole grade badge unless it is 1 - which is
+            # why substats rendered with no tier. It is the ONLY reader of the flag
+            # (verified by scanning every reference to the literal), so turning it
+            # on enables the badge and nothing else. Tier itself is
+            # Utility.LowerBound(AccessorySubStatScoreRange, score), thresholds from
+            # AccessoryConstants.xml: 1, 4.5, 8.5, 13.5, 18.5, 22.5, 26.5.
+            {"key": "AccessoryRenewal", "value": "1"},
             {"key": "InventoryCount_Treasure", "value": "999"},
             {"key": "InventoryCount_Accessory", "value": "999"},
             {"key": "InventoryCount_RiftWeapon", "value": "999"},
+            {"key": "InventoryCount_RiftCrystal", "value": "999"},
             {"key": "InventoryCount_AccessoryPreset", "value": "999"},
         ],
         "attendedCustomEvents": st.get("attendedCustomEvents", []),
@@ -878,7 +964,6 @@ def load_corruption_accessories():
 
 def get_st_accessories(st):
     if "accessories" not in st:
-        import copy
         st["accessories"] = copy.deepcopy(DEFAULT_ACCESSORIES)
     return st["accessories"]
 
@@ -928,19 +1013,72 @@ def make_rift_weapon(i, rw_id):
         "createdAt": now_iso(), "updatedAt": now_iso(),
     }
 
-def make_rift_crystal(i, rw_id):
+RIFT_BUILDING_COUNT = _rift_building_count()
+# CrystalRarity (ResourceRiftWeaponConstant.CrystalRarity): None=0, Common=1, UnCommon=2,
+# Rare=3, Epic=4, Legendary=5. Rarity 0 names the crystal via the key
+# `RiftCrystalNameKeyword_None`, which does not exist in any locale - the client then
+# renders the raw key. Only 1-5 have a keyword (Faded/Ordinary/King/God/King God).
+RIFT_CRYSTAL_RARITIES = {1: "Common", 2: "UnCommon", 3: "Rare", 4: "Epic", 5: "Legendary"}
+# Altars cap at level 15 ("You have an Altar with more than 15 points" / the 16 entries
+# of RiftWeaponConstants.xml BuildingOptionSlotLevelValue = levels 0..15).
+RIFT_BUILDING_MAX_LEVEL = 15
+
+def make_rift_crystal(i, rw_id, main_idx=None):
     t = ITEM_TEMPLATES["riftCrystal"]
+    main_idx = t["mainBuildingIdx"] if main_idx is None else main_idx
+    main_idx %= max(RIFT_BUILDING_COUNT, 1)
+    level = min(int(t["mainBuildingLevel"]), RIFT_BUILDING_MAX_LEVEL)
+    other = min(int(t["otherBuildingLevel"]), RIFT_BUILDING_MAX_LEVEL)
+    # One level per altar, with the main altar strictly highest: GetMaxBuildingIdx
+    # returns the FIRST maximum, so an all-equal list would name every crystal after
+    # altar 0 regardless of mainBuildingIdx.
+    levels = [other] * RIFT_BUILDING_COUNT
+    levels[main_idx] = max(level, other + 1)
+    rarity = int(t["rarity"])
+    assert rarity in RIFT_CRYSTAL_RARITIES, (
+        f"riftCrystal rarity {rarity} has no RiftCrystalNameKeyword_* string; "
+        f"valid: {sorted(RIFT_CRYSTAL_RARITIES)}")
     return {
-        "id": i, "weaponId": rw_id, "mainBuildingIdx": t["mainBuildingIdx"],
-        "buildingLevels": t["buildingLevels"], "rarity": t["rarity"], "ceilCount": t["ceilCount"], "state": t["state"],
+        "id": i, "weaponId": rw_id, "mainBuildingIdx": main_idx,
+        "buildingLevels": levels, "rarity": rarity,
+        "ceilCount": t["ceilCount"], "state": t["state"],
         "createdAt": now_iso(), "updatedAt": now_iso(),
     }
+
+def _repair_rift_crystals(crystals):
+    """Upgrade crystals saved before the shape was understood. Returns True if anything
+    changed, so the caller can persist.
+
+    Two legacy defects, both of which the client renders rather than rejects:
+      * rarity 0 (CrystalRarity.None) -> the name resolves `RiftCrystalNameKeyword_None`,
+        a key that exists in no locale, so the panel shows the raw key;
+      * buildingLevels shorter than the altar count -> GetMaxBuildingIdx can only ever
+        return an index inside the short list, so every crystal named itself after
+        altar 0 and the altars past the end contributed nothing.
+    """
+    t = ITEM_TEMPLATES["riftCrystal"]
+    changed = False
+    for c in crystals:
+        if c.get("rarity") not in RIFT_CRYSTAL_RARITIES:
+            c["rarity"] = int(t["rarity"])
+            changed = True
+        levels = c.get("buildingLevels") or []
+        if len(levels) != RIFT_BUILDING_COUNT:
+            main = int(c.get("mainBuildingIdx", 0)) % max(RIFT_BUILDING_COUNT, 1)
+            other = min(int(t["otherBuildingLevel"]), RIFT_BUILDING_MAX_LEVEL)
+            # Keep whatever levels the save already had; only extend to full width.
+            fixed = [min(int(v), RIFT_BUILDING_MAX_LEVEL) for v in levels[:RIFT_BUILDING_COUNT]]
+            fixed += [other] * (RIFT_BUILDING_COUNT - len(fixed))
+            fixed[main] = max(min(int(t["mainBuildingLevel"]), RIFT_BUILDING_MAX_LEVEL), other + 1)
+            c["buildingLevels"] = fixed
+            c["mainBuildingIdx"] = main
+            changed = True
+    return changed
 
 DEFAULT_ARTIFACTS = [make_artifact(i + 1, aid) for i, aid in enumerate(ALL_ARTIFACT_IDS)]
 DEFAULT_TREASURES = [make_treasure(i + 1, tid) for i, tid in enumerate(ALL_TREASURE_IDS)]
 DEFAULT_ACCESSORIES = load_corruption_accessories() or [make_accessory(i + 1) for i in range(ITEM_TEMPLATES["accessory"]["count"])]
-DEFAULT_RIFT_WEAPONS = []
-DEFAULT_RIFT_CRYSTALS = [make_rift_crystal(i + 1, rwid) for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
+DEFAULT_RIFT_WEAPONS = [make_rift_weapon(i + 1, rwid) for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
 ARTIFACT_BY_ID = {a["id"]: a for a in DEFAULT_ARTIFACTS}
 
 # ArtifactRequestModel.targetId = the equipped artifact's instance `id` (dump.cs
@@ -988,7 +1126,6 @@ def r_artifact_result(body, st):
 
 def get_st_treasures(st):
     if "treasures" not in st:
-        import copy
         st["treasures"] = copy.deepcopy(DEFAULT_TREASURES)
     return st["treasures"]
 
@@ -1021,7 +1158,10 @@ def r_treasure_add_exp(body, st):
     return {"treasures": get_st_treasures(st), "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999, "maxTreasureCount": 9999, "addExpItems": [], "deletedTreasures": [], "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": [], "addedExpItems": 0}
 
 def r_rift_weapon(body, st):
-    return {"riftWeapons": DEFAULT_RIFT_WEAPONS, "equippedWeapons": {}, "riftCrystals": DEFAULT_RIFT_CRYSTALS, "deletedRiftWeapons": [], "deletedCrystals": [], "riftGauge": 0, "rewardListResponseData": None, "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "playerHeart": st.get("heart", 0), "upgradeState": 0, "equippedWeaponIds": []}
+    rift_crystals = st.setdefault("riftCrystals", [])
+    if _repair_rift_crystals(rift_crystals):
+        save_state(st)
+    return {"riftWeapons": DEFAULT_RIFT_WEAPONS, "equippedWeapons": {}, "riftCrystals": rift_crystals, "deletedRiftWeapons": [], "deletedCrystals": [], "riftGauge": 0, "rewardListResponseData": None, "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "playerHeart": st.get("heart", 0), "upgradeState": 0, "equippedWeaponIds": []}
 
 def r_clan(body, st):
     # clan:null -> GameManager.clan stays null -> HasClan() false -> profile's
@@ -1174,6 +1314,55 @@ OVERRIDES.update(DYNAMIC_OVERRIDES)
 SERVER_START_TIME = time.time()
 
 app = FastAPI(title="KGC private server", version=SERVER_VERSION)
+_STATE_GATE = asyncio.Lock()
+
+ADMIN_TOKEN = os.environ.get("KGC_ADMIN_TOKEN")
+_LOOPBACK = {"127.0.0.1", "::1", "localhost"}
+
+@app.middleware("http")
+async def guard_admin(request: Request, call_next):
+    """The 26 /admin routes can rewrite or delete any player's save.
+
+    serve_public.sh binds 0.0.0.0 so remote players can reach the game API - which
+    exposes these too. Require KGC_ADMIN_TOKEN when it is set; with no token
+    configured, allow loopback only. Note a reverse proxy or tunnel makes every
+    request look like loopback, which is why serve_public.sh refuses to start
+    without a token.
+    """
+    if request.url.path.startswith("/admin"):
+        if ADMIN_TOKEN:
+            sent = request.headers.get("x-admin-token") or request.query_params.get("admin_token") or ""
+            if not secrets.compare_digest(sent, ADMIN_TOKEN):
+                return JSONResponse({"error": "admin token required"}, status_code=403)
+        elif (request.client.host if request.client else None) not in _LOOPBACK:
+            return JSONResponse(
+                {"error": "admin API is loopback-only; set KGC_ADMIN_TOKEN to allow remote access"},
+                status_code=403)
+    return await call_next(request)
+
+@app.middleware("http")
+async def serialize_state_writes(request: Request, call_next):
+    """One request at a time may read-modify-write player state.
+
+    Handlers load state, mutate it and save it as separate steps, so without
+    this the :8080 and :8443 processes interleave and one silently discards the
+    other's changes. CDN traffic never touches state - skip it, it is the bulk
+    of the bytes.
+    """
+    if request.url.path.startswith("/patch/"):
+        return await call_next(request)
+    # Resolve identity BEFORE taking the lock: the ContextVar must be set in this
+    # task so the child task call_next() spawns inherits it.
+    token = CURRENT_UID.set(playerdb.uid_for_token(request.headers.get("accesstoken")))
+    try:
+        # asyncio.Lock first: flock blocks the thread, so a second request in THIS
+        # process waiting on it would freeze the event loop and never let the holder
+        # finish. Serialize in-process, then contend with the other process.
+        async with _STATE_GATE:
+            with playerdb.write_lock():
+                return await call_next(request)
+    finally:
+        CURRENT_UID.reset(token)
 
 @app.get("/")
 def health():
@@ -1216,6 +1405,9 @@ async def respond(path: str, request: Request):
                     admin_log(f"[DECK/SET DECRYPT FAIL] raw_len={len(raw)} raw_hex={raw[:64].hex()}")
                 body = {}
     info = ROUTE_MODELS.get(path, {"response": "ResponseModel", "method": None})
+    # /auth/auth carries the account id as ?id=, /auth/register as body.id.
+    if path.startswith("/auth/"):
+        CURRENT_LOGIN_ID.set(request.query_params.get("id") or body.get("id") or "")
     overlay = OVERRIDES[path](body, st) if path in OVERRIDES else None
     if overlay is None and path not in ROUTE_MODELS:
         model_name = "ResponseModel"
@@ -1288,11 +1480,9 @@ async def rift_weapon_inventory_direct(request: Request):
     st = load_state()
     host = request.headers.get("host", "?")
     admin_log(f"[{host}] DIRECT /rift-weapon -> RiftWeaponInventoryResponseModel")
-    payload = {
-        "code": 200, "msg": None, "success": True,
-        "riftWeapons": DEFAULT_RIFT_WEAPONS,
-        "equippedWeapons": {}
-    }
+    payload = r_rift_weapon({}, st)
+    payload["code"] = 200
+    payload["success"] = True
     return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
 
 @app.get("/invasion/record")
@@ -1469,83 +1659,67 @@ async def pvp_info_direct(request: Request):
     return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
 
 # ── Admin Panel ─────────────────────────────────────────────────────────
-ADMIN_HTML = (ROOT / "admin.html").read_text(encoding="utf-8") if (ROOT / "admin.html").exists() else ""
+# The UI lives in dashboard.py (:8081) - a Vue app served from webui/. This route used
+# to render admin.html, but that file has not existed for a long time, so /admin was
+# quietly serving a blank page. The /admin/api/* routes below are still live: the
+# dashboard proxies them for the server-side views, and creates players through them so
+# the "new save" shape stays defined in exactly one place.
+DASHBOARD_URL = os.environ.get("KGC_DASHBOARD_URL", "http://127.0.0.1:8081")
 
 # ── Multi-player helpers ──
 def _list_players():
-    files = sorted(PLAYERS_DIR.glob("*.json"))
     result = []
-    for f in files:
-        try:
-            data = json.loads(f.read_text())
-            result.append({
-                "id": f.stem,
-                "name": data.get("name", "Unknown"),
-                "uid": data.get("uid", ""),
-                "level": data.get("level", 1),
-                "gold": data.get("gold", 0),
-                "cash": data.get("cash", 0),
-                "castleName": data.get("castleName", ""),
-                "cards": len(data.get("cards", {})),
-                "fileSize": f.stat().st_size,
-                "updatedAt": datetime.datetime.fromtimestamp(f.stat().st_mtime).strftime("%Y-%m-%d %H:%M"),
-            })
-        except Exception:
-            result.append({"id": f.stem, "name": f"[invalid] {f.stem}", "error": True})
+    for uid, data, updated in playerdb.all_players():
+        if data is None:
+            result.append({"id": uid, "name": f"[invalid] {uid}", "error": True})
+            continue
+        result.append({
+            "id": uid,
+            "name": data.get("name", "Unknown"),
+            "uid": data.get("uid", ""),
+            "level": data.get("level", 1),
+            "gold": data.get("gold", 0),
+            "cash": data.get("cash", 0),
+            "castleName": data.get("castleName", ""),
+            "cards": len(data.get("cards", {})),
+            "updatedAt": datetime.datetime.fromtimestamp(updated).strftime("%Y-%m-%d %H:%M"),
+        })
     return result
 
 def _load_player_by_id(pid):
-    f = PLAYERS_DIR / f"{pid}.json"
-    if f.exists():
-        return json.loads(f.read_text())
-    return None
+    return playerdb.load(pid)
 
 def _save_player_by_id(pid, data):
-    f = PLAYERS_DIR / f"{pid}.json"
-    f.write_text(json.dumps(data, indent=1))
+    playerdb.save(pid, data)
 
 def _delete_player_by_id(pid):
-    f = PLAYERS_DIR / f"{pid}.json"
-    if f.exists():
-        f.unlink()
+    playerdb.delete(pid)
 
 def _switch_active(pid):
-    """Copy player pid to the active player.json"""
-    data = _load_player_by_id(pid)
-    if data:
-        STATE_FILE.write_text(json.dumps(data, indent=1))
-        return True
-    return False
+    """Point the game client at player pid."""
+    if playerdb.load(pid) is None:
+        return False
+    playerdb.set_active(pid)
+    return True
 
 def _load_or_create_active():
-    """Ensure at least one player exists and load it."""
-    if STATE_FILE.exists():
-        return json.loads(STATE_FILE.read_text())
-    players = _list_players()
-    if players:
-        _switch_active(players[0]["id"])
-        return json.loads(STATE_FILE.read_text())
-    # Create default player
-    st = DEFAULT_PLAYER.copy()
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
-    return st
+    return load_state()
 
 @app.get("/admin")
 async def admin_page():
-    return HTMLResponse(ADMIN_HTML)
+    return HTMLResponse(
+        f'<!doctype html><meta charset="utf-8"><title>KGC admin</title>'
+        f'<body style="font:15px system-ui;background:#0b0f17;color:#e6ecf7;padding:40px">'
+        f'<h1 style="font-size:18px">The admin UI moved</h1>'
+        f'<p>It is now the dashboard at <a style="color:#7aa8ff" href="{DASHBOARD_URL}">{DASHBOARD_URL}</a> '
+        f'(<code>python3 server/dashboard.py</code>).</p>'
+        f'<p style="color:#6d7c99">This server still serves the <code>/admin/api/*</code> endpoints '
+        f'the dashboard calls.</p>')
 
 @app.get("/admin/api/info")
 async def admin_info():
     players = _list_players()
-    active = None
-    if STATE_FILE.exists():
-        try:
-            ad = json.loads(STATE_FILE.read_text())
-            active = ad.get("uid")
-        except Exception:
-            pass
+    active = playerdb.active()
     return {
         "version": SERVER_VERSION, "patchFolder": PATCH_FOLDER,
         "routes": len(ROUTE_MODELS) + len(OVERRIDES),
@@ -1563,7 +1737,7 @@ async def admin_list_players():
 async def admin_create_player(body: dict):
     name = body.get("name", "NewPlayer")
     uid = body.get("uid", "player-" + secrets.token_hex(4))
-    st = DEFAULT_PLAYER.copy()
+    st = copy.deepcopy(DEFAULT_PLAYER)   # deep: a shallow copy shares nested dicts with the template
     st["name"] = name
     st["uid"] = uid
     st["accountCreatedAt"] = now_iso(0)
@@ -1577,14 +1751,7 @@ async def admin_create_player(body: dict):
 async def admin_delete_player(body: dict):
     pid = body.get("uid", "")
     _delete_player_by_id(pid)
-    # If active was this player, switch to first available
-    active = json.loads(STATE_FILE.read_text()).get("uid") if STATE_FILE.exists() else None
-    if active == pid:
-        players = _list_players()
-        if players:
-            _switch_active(players[0]["id"])
-        else:
-            STATE_FILE.unlink(missing_ok=True)
+    # playerdb.active() falls back to the first remaining row on its own.
     return {"ok": True}
 
 @app.post("/admin/api/players/switch")
@@ -1607,20 +1774,13 @@ async def admin_save_player_by_id(pid: str, body: dict):
     existing = _load_player_by_id(pid) or {}
     existing.update(body)
     _save_player_by_id(pid, existing)
-    # If this is the active player, also sync to player.json
-    active = json.loads(STATE_FILE.read_text()).get("uid") if STATE_FILE.exists() else None
-    if active == pid:
-        STATE_FILE.write_text(json.dumps(existing, indent=1))
     return {"ok": True}
 
 @app.post("/admin/api/players/{pid}/reset")
 async def admin_reset_player_by_id(pid: str):
-    st = DEFAULT_PLAYER.copy()
+    st = copy.deepcopy(DEFAULT_PLAYER)
     st["uid"] = pid
     _save_player_by_id(pid, st)
-    active = json.loads(STATE_FILE.read_text()).get("uid") if STATE_FILE.exists() else None
-    if active == pid:
-        STATE_FILE.write_text(json.dumps(st, indent=1))
     return {"ok": True}
 
 # ── Legacy single-player endpoints (target active) ──
@@ -1684,18 +1844,14 @@ async def admin_save_active_player(body: dict):
               "missions", "tutorialKeyValues", "eventFlag"):
         if k in body:
             st[k] = body[k]
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    # Also sync to the player's own file
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
+    save_state(st)
     return {"ok": True}
 
 @app.post("/admin/api/player/reset")
 async def admin_reset_active_player():
-    st = DEFAULT_PLAYER.copy()
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
+    st = copy.deepcopy(DEFAULT_PLAYER)
+    st["uid"] = playerdb.active() or st.get("uid", "dev-0001")   # reset the data, keep the identity
+    save_state(st)
     return {"ok": True}
 
 @app.post("/admin/api/heroes/save")
@@ -1703,9 +1859,7 @@ async def admin_save_heroes(body: dict):
     st = _load_or_create_active()
     if "cards" in body:
         st["cards"] = body["cards"]
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
+    save_state(st)
     return {"ok": True}
 
 @app.post("/admin/api/heroes/give-all")
@@ -1721,9 +1875,7 @@ async def admin_give_all_heroes():
         sid = str(hid)
         if sid not in cards:
             cards[sid] = {"unitId": hid, **template}
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
+    save_state(st)
     return {"ok": True, "count": len(cards)}
 
 @app.post("/admin/api/decks/save")
@@ -1731,9 +1883,7 @@ async def admin_save_decks(body: dict):
     st = _load_or_create_active()
     if "decks" in body:
         st["decks"] = body["decks"]
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
+    save_state(st)
     return {"ok": True}
 
 @app.post("/admin/api/artifacts/give-all")
@@ -1743,6 +1893,29 @@ async def admin_give_all_artifacts():
 @app.post("/admin/api/treasures/give-all")
 async def admin_give_all_treasures():
     return {"ok": True, "count": len(DEFAULT_TREASURES)}
+
+# One crystal per weapon, each pointed at a different altar so the set actually covers
+# distinct options instead of six copies of "Rift Crystal of Hero".
+DEFAULT_RIFT_CRYSTALS = [make_rift_crystal(i + 1, rwid, main_idx=i)
+                         for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
+
+@app.post("/admin/api/rift-crystals/grant")
+async def admin_grant_rift_crystals(request: Request):
+    body = await request.json()
+    weapon_id = body.get("weaponId", 0)
+    st = _load_or_create_active()
+    rift_crystals = st.setdefault("riftCrystals", [])
+    max_id = max((c["id"] for c in rift_crystals), default=0)
+    match = [t for t in DEFAULT_RIFT_CRYSTALS if t["weaponId"] == weapon_id]
+    if not match:
+        return {"ok": False, "error": f"no template for weaponId {weapon_id}"}
+    new = dict(match[0])
+    new["id"] = max_id + 1
+    new["createdAt"] = now_iso()
+    new["updatedAt"] = now_iso()
+    rift_crystals.append(new)
+    save_state(st)
+    return {"ok": True, "crystal": new}
 
 @app.post("/admin/api/state/reload")
 async def admin_reload_state():
@@ -1777,7 +1950,7 @@ async def admin_system():
         "uptimeStr": f"{uptime//3600}h{(uptime%3600)//60}m{uptime%60}s",
         "routeCount": len(ROUTE_MODELS),
         "overrideCount": len(OVERRIDES),
-        "playerCount": len(list(PLAYERS_DIR.glob("*.json"))),
+        "playerCount": playerdb.count(),
         "cdmFiles": len(_CDN_FILES),
         "logLines": len(LOG_BUF),
     }

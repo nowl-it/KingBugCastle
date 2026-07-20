@@ -1,5 +1,6 @@
 fastapi
 uvicorn
+watchfiles        # run.sh --reload; without it uvicorn falls back to StatReload and silently ignores --reload-include
 pycryptodome
 UnityPy
 mitmproxy

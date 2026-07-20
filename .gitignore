@@ -82,3 +82,23 @@ opencode.jsonc
 # Training / Personal data
 documentation/
 reports/
+
+# player state (SQLite WAL + lock); JSON files below are the pre-migration backup
+server/state/players.db-wal
+server/state/players.db-shm
+server/state/.write.lock
+
+# Agentmemory runtime store (state_store.db + stream_store, binary; not KGC project data)
+data/
+
+# Live player save (runtime state; WAL/shm/lock already ignored above)
+server/state/players.db
+server/state/pre-sqlite-backup/
+
+# Refused build path — emulator/anti-cheat bypass, never distribute
+server/build_v171_emulator.py
+
+# Project scratch + legacy JSON saves (runtime state, superseded by players.db)
+scratchpad/
+server/state/player.json
+server/state/players/

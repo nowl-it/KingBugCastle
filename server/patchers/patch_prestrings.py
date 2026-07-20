@@ -7,7 +7,7 @@ import sys, os, io, zipfile, pathlib, hashlib
 import UnityPy
 
 APK = pathlib.Path(sys.argv[1])
-XML_DIR = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else pathlib.Path.home() / "Code/kgc/scratchpad/xml_live"
+XML_DIR = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else pathlib.Path(__file__).resolve().parent.parent / "xml_live"
 
 # Map locale codes to their asset names
 LOCALE_NAMES = {

@@ -196,7 +196,7 @@ cd server && python3 dashboard.py     # or: uvicorn dashboard:app --port 8081
 Two tabs:
 - **Battle Tracker** — live in-battle hero stats over WebSocket `/ws`. `dashboard.py` reads
   `adb -s $ADB_SERIAL logcat -s XignCodeStub`, parses the native poller's output (resolving
-  buff/skill ids to names from `scratchpad/xml_live/Strings_*.xml`), and broadcasts hero updates.
+  buff/skill ids to names from `server/xml_live/Strings_*.xml`), and broadcasts hero updates.
 - **Admin** — acts directly on the game state JSON (`state/players/*.json`, `state/player.json`),
   the same files `server.py` reads per request (edits apply on the client's next fetch, no
   restart): server status, per-player currency/level/name editor, and mail send/delete. Mail is

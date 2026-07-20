@@ -21,6 +21,17 @@ cd "$(dirname "$0")"
 HTTP_PORT="${HTTP_PORT:-8080}"
 TLS_PORT="${TLS_PORT:-8443}"
 
+# The /admin routes can rewrite or delete any player's save, and binding 0.0.0.0
+# exposes them to every remote player. The loopback-only fallback is not enough
+# here: behind a tunnel or reverse proxy every request arrives FROM loopback.
+if [ -z "${KGC_ADMIN_TOKEN:-}" ]; then
+  echo "[!] refusing to serve publicly without KGC_ADMIN_TOKEN - /admin would be open to everyone."
+  echo "    KGC_ADMIN_TOKEN=\$(openssl rand -hex 24) ./serve_public.sh"
+  echo "    then send it as the  x-admin-token  header (or ?admin_token=) when you use /admin."
+  exit 1
+fi
+export KGC_ADMIN_TOKEN
+
 echo "[+] HTTP  server  0.0.0.0:${HTTP_PORT}"
 uvicorn server:app --host 0.0.0.0 --port "${HTTP_PORT}" > /tmp/kgc_pub_http.log 2>&1 &
 P1=$!

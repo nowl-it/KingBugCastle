@@ -112,8 +112,47 @@ fi
 
 echo ""
 
+# ─── Bundle fingerprint ─────────────────────────────────────────
+# The devs republish the SAME patch folder in place (seen 2026-07-20: the
+# 2026_07_14 xml bundle was overwritten with a localization pass, an Audakia
+# stat nerf, and official text for unit 10810). Folder-name comparison alone is
+# blind to that. GCS returns the object md5 as the ETag, so one HEAD request
+# fingerprints the bundle without downloading 4.5MB.
+ETAG_FILE="$HOME/.local/share/kgc_cdn_last_xml_etag"
+bundle_url="${CDN_BASE}/patch/LIVE/${latest}/ANDROID/xml"
+etag=$(curl -sfI "$bundle_url" 2>/dev/null | grep -i '^etag:' | tr -d '"\r' | awk '{print $2}')
+last_etag=""
+[[ -f "$ETAG_FILE" ]] && last_etag=$(cat "$ETAG_FILE")
+
+echo -e "  CDN xml bundle etag: ${BOLD}${etag:-"(unavailable)"}${NC}"
+if [[ -n "$etag" ]]; then
+    echo -e "  Last seen etag:      ${BOLD}${last_etag:-"(none)"}${NC}"
+    echo "$etag" > "$ETAG_FILE"
+fi
+echo ""
+
 # ─── Update Detection ───────────────────────────────────────────
 if [[ "$latest" == "$last" ]]; then
+    # Same folder, different bytes = in-place republish. Report it as an update.
+    if [[ -n "$etag" && -n "$last_etag" && "$etag" != "$last_etag" ]]; then
+        echo -e "${GREEN}${BOLD}[★] REPUBLISH DETECTED: folder ${latest} unchanged, xml bundle rewritten${NC}"
+        echo -e "    ${DIM}${last_etag} → ${etag}${NC}"
+        echo ""
+        echo -e "${CYAN}── Action Items ──${NC}"
+        echo -e "  ${YELLOW}▸${NC} Fetch the new pristine snapshot:"
+        echo -e "    ${DIM}./kgc-cli config fetch -o /tmp/kgc_xml && ./kgc-cli config extract -o xml_history/${latest} /tmp/kgc_xml/xml_bundle_*${NC}"
+        echo -e "  ${YELLOW}▸${NC} Re-base local edits onto it, then rebuild the served bundle:"
+        echo -e "    ${DIM}python3 server/rebase_xml_live.py xml_history/${latest} && python3 server/rebuild_xml_bundle.py${NC}"
+        if command -v notify-send &>/dev/null; then
+            DISPLAY="${DISPLAY:-:0}" notify-send -u critical -a "KGC Watcher" \
+                "🏰 KGC CDN republish" "${latest} rewritten in place" &
+        fi
+        curl -sf -H "Title: 🏰 KGC republish ${latest}" -H "Tags: game,kgc,update" \
+            -d "Dev ghi đè lại chính folder ${latest}. Bundle xml đổi nội dung nhưng giữ nguyên tên - cần fetch lại." \
+            "$NTFY_TOPIC" &>/dev/null || true
+        exit 0
+    fi
+
     echo -e "${GREEN}[✓] No update. CDN is at: ${latest}${NC}"
     echo ""
 

@@ -1,0 +1,175 @@
+<ArenaSettings>
+    <!-- 승리 횟수별 보상 -->
+    <!-- 보상 변경시 arena_auto_receive_win_count_reward 쿼리의 수치도 변경해야 함! -->
+    <WinRewards>
+        <WinReward Step="0" WinCount="3">
+            <Reward Type="Token_ARENA" Count="50"/>
+        </WinReward>
+        <WinReward Step="1" WinCount="8">
+            <Reward Type="Token_ARENA" Count="150"/>
+        </WinReward>
+        <WinReward Step="2" WinCount="18">
+            <Reward Type="Token_ARENA" Count="300"/>
+        </WinReward>
+        <WinReward Step="3" WinCount="30">
+            <Reward Type="Token_ARENA" Count="500"/>
+        </WinReward>
+        <WinReward Step="4" WinCount="45">
+            <Reward Type="Token_ARENA" Count="1000"/>
+        </WinReward>
+    </WinRewards>
+    
+    <!-- 평가전 일일 횟수 -->
+    <DailyTrainingCount>5</DailyTrainingCount>
+    
+    <!-- 전장의 축복 등급 갯수 -->
+    <StarterBuffRankCount>5</StarterBuffRankCount>
+    
+    <!-- 전장의 축복 버프 -->
+    <StarterBuffInformation>
+        <StarterBuffs ScoreMin="800" ScoreMax="1399">
+            <StarterBuff Rank="0">
+                <RiftWeaponLock/>
+            </StarterBuff>
+            <StarterBuff Rank="1">
+                <AccessoryLock/>
+                <RiftWeaponLock/>
+            </StarterBuff>
+            <StarterBuff Rank="2">
+                <ArtifactLock>2</ArtifactLock>
+                <TreasureLock/>
+                <AccessoryLock/>
+                <RiftWeaponLock/>
+            </StarterBuff>
+            <StarterBuff Rank="3">
+                <UnitLevelMax>16</UnitLevelMax>
+                <PotentialLock/>
+                <ArtifactLock/>
+                <TreasureLock/>
+                <AccessoryLock/>
+                <RiftWeaponLock/>
+            </StarterBuff>
+            <StarterBuff Rank="4">
+                <UnitLevelMax>12</UnitLevelMax>
+                <PotentialLock/>
+                <ArtifactLock/>
+                <TreasureLock/>
+                <AccessoryLock/>
+                <RiftWeaponLock/>
+            </StarterBuff>
+        </StarterBuffs>
+
+        <StarterBuffs ScoreMin="1400" ScoreMax="1999">
+            <StarterBuff Rank="0">
+                <RiftWeaponLock/>
+            </StarterBuff>
+            <StarterBuff Rank="1">
+                <AccessoryLock/>
+                <RiftWeaponLock/>
+            </StarterBuff>
+            <StarterBuff Rank="2">
+                <TreasureLock/>
+                <AccessoryLock/>
+                <RiftWeaponLock/>
+            </StarterBuff>
+            <StarterBuff Rank="3">
+                <UnitLevelMax>18</UnitLevelMax>
+                <ArtifactLock>1,2</ArtifactLock>
+                <TreasureLock/>
+                <AccessoryLock/>
+                <RiftWeaponLock/>
+            </StarterBuff>
+            <StarterBuff Rank="4">
+                <UnitLevelMax>14</UnitLevelMax>
+                <PotentialLock/>
+                <ArtifactLock/>
+                <TreasureLock/>
+                <AccessoryLock/>
+                <RiftWeaponLock/>
+            </StarterBuff>
+        </StarterBuffs>
+    </StarterBuffInformation>
+
+    <!-- 모든 영웅 혹은 효과 없음은 클래스라면 None, 지역이라면 Unknown 으로 설정해야 함-->
+    <GrandArenaBuffs>
+        <GrandArenaBuff Season="64" SemiSeason="1">
+            <BuffTargets>Toughness,Central</BuffTargets>
+            <WorldTriggers>10000,11000</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="64" SemiSeason="2">
+            <BuffTargets>None,Central</BuffTargets>
+            <WorldTriggers>10000,11000</WorldTriggers>
+        </GrandArenaBuff>
+        
+        <GrandArenaBuff Season="65" SemiSeason="1">
+            <BuffTargets>Unknown,Element</BuffTargets>
+            <WorldTriggers>10100,11050</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="65" SemiSeason="2">
+            <BuffTargets>East,Brave</BuffTargets>
+            <WorldTriggers>10060,11040</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="66" SemiSeason="1">
+            <BuffTargets>Unknown,Swift</BuffTargets>
+            <WorldTriggers>10080,11030</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="66" SemiSeason="2">
+            <BuffTargets>Element,South</BuffTargets>
+            <WorldTriggers>10010,11010</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="67" SemiSeason="1">
+            <BuffTargets>Unknown,Toughness</BuffTargets>
+            <WorldTriggers>10130,11070</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="67" SemiSeason="2">
+            <BuffTargets>None,South</BuffTargets>
+            <WorldTriggers>10070,11030</WorldTriggers>
+        </GrandArenaBuff>        
+
+        <GrandArenaBuff Season="68" SemiSeason="1">
+            <BuffTargets>East,Swift</BuffTargets>
+            <WorldTriggers>10050,11000</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="68" SemiSeason="2">
+            <BuffTargets>Brave,North</BuffTargets>
+            <WorldTriggers>10000,11060</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="69" SemiSeason="1">
+            <BuffTargets>Mystic,West</BuffTargets>
+            <WorldTriggers>10160,11010</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="69" SemiSeason="2">
+            <BuffTargets>Central,Shadow</BuffTargets>
+            <WorldTriggers>10020,11050</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="70" SemiSeason="1">
+            <BuffTargets>Unknown,Toughness</BuffTargets>
+            <WorldTriggers>10140,11090</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="70" SemiSeason="2">
+            <BuffTargets>North,None</BuffTargets>
+            <WorldTriggers>10050,11080</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="71" SemiSeason="1">
+            <BuffTargets>East,Element</BuffTargets>
+            <WorldTriggers>10000,11030</WorldTriggers>
+        </GrandArenaBuff>
+
+        <GrandArenaBuff Season="71" SemiSeason="2">
+            <BuffTargets>Unknown,Brave</BuffTargets>
+            <WorldTriggers>10080,11070</WorldTriggers>
+        </GrandArenaBuff>
+    </GrandArenaBuffs>
+</ArenaSettings>

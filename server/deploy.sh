@@ -91,7 +91,7 @@ python3 "$SCRIPT_DIR/patchers/patch_metadata_http.py" "$WORK_DIR/split_base_asse
 # ---- Inject full localization into local PreStrings TextAssets (offline UI strings) ----
 # The CDN-served full string set is 404'd by us, so without this the UI shows raw loc keys.
 # Overwrite each PreStrings_<locale> with the full Strings_<locale>.xml so Localizer has all keys.
-XML_DIR="${KGC_XML_DIR:-$HOME/Code/kgc/scratchpad/xml_live}"
+XML_DIR="${KGC_XML_DIR:-$(cd "$(dirname "$0")" && pwd)/xml_live}"
 if [ -d "$XML_DIR" ]; then
     log "Injecting full localization strings (PreStrings <- $XML_DIR)..."
     python3 "$SCRIPT_DIR/patchers/patch_prestrings.py" "$WORK_DIR/split_base_assets_patched.apk" "$XML_DIR" || warn "PreStrings inject failed (UI will show raw keys)"

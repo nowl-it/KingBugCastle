@@ -2,7 +2,7 @@
 
 Stage enemy composition lives **client-side** in `Stages.xml` (inside the CDN xml bundle). The server's
 `/game/start` response does **not** carry spawn data (only `code/cards/gameId/...`) — the client reads
-`Stages.xml` locally. So to change what monsters appear, edit `scratchpad/xml_live/Stages.xml` and push
+`Stages.xml` locally. So to change what monsters appear, edit `server/xml_live/Stages.xml` and push
 the bundle ([cdn-master-data.md](cdn-master-data.md)).
 
 ## Stage ID scheme

@@ -7,21 +7,53 @@ this — the client reads the bundle directly. This is data plane 2 (see [README
 
 ## Source of truth
 
-- **Edit** `scratchpad/xml_live/*.xml` (~143 files: `Units`, `Skills`, `Skins`, `Stages`, `Treasures`,
-  every `Strings_<locale>`, …). `server.py` also reads this dir (`XML_DIR`) for its JSON API, and it is
-  what `rebuild_xml_bundle.py` packs into the bundle. **Do not** edit `xml/2026_06_26/` — that's a
-  pristine reference clone, not what anything reads.
+- **Edit** `server/xml_live/*.xml` (~143 files: `Units`, `Skills`, `Skins`, `Stages`, `Treasures`,
+  every `Strings_<locale>`, …). `server.py` reads this dir (`XML_DIR`) for its JSON API, and it is
+  what `rebuild_xml_bundle.py` packs into the bundle. The fallback `xml/<patchFolder>/` is a
+  pristine reference clone from the CDN fetch — never edit it.
 
-## Workflow
+## Our edits live in code, not in xml_live
+
+Every change we make on top of the devs' pristine data is a function in the
+**`server/local_mods/`** package — one idempotent `apply(xml_dir)`, the single source
+of truth. A data refresh overwrites `xml_live` wholesale and then replays these, so we
+never hand-merge 143 files. The 5 mods (all real fixes, no fabricated numbers):
+
+1. `CCRatio -100 → 0` — enemies become crowd-control-able
+2. Treasure 30040 (Shadowless) gate → `170100` — shows on a fallback v170 client
+3. Stage 101 dummy spawns — chapter I-1 walk-over clearable for testing
+4. `UnitPanelData` 10800/10810 — Cathy/Alessia Profile tab (devs shipped no entry)
+5. Cathy Overcome field typo — `{Overcome:...AuraDamagePer}` → `...AuraTotalDamagePer`
+   (the value 10/20 is real in Units.xml; only the string's field name was wrong)
+
+`apply()` is idempotent and appends a **WARN** when an anchor is gone (the devs
+restructured a block we patch) — that is the one thing a human must resolve.
+`python3 server/local_mods/__init__.py --check` self-tests all five.
+
+## Workflow — two refresh paths, both replay local_mods
 
 ```bash
-# 1. edit scratchpad/xml_live/<File>.xml
-python3 server/rebuild_xml_bundle.py     # rewrites real_cdn/xml + updates AssetHash.txt (new md5)
-# 2. restart BOTH uvicorns — they cache real_cdn/ at import (see deploy-and-run.md)
-# 3. clear the device's downloaded bundle cache before next launch
-adb -s <serial> shell "rm -rf /sdcard/Android/data/com.nowl.castle/files/UnityCache"
+# NEW PATCH (devs cut a new CDN folder): fetch, normalize changed files, replay mods,
+# rebuild bundle, bump patchFolder:
+python3 server/refresh_master_data.py            # --dry-run / --no-bump available
+
+# REPUBLISH (devs rewrote the SAME folder in place — folder name unchanged, so the
+# diff above sees nothing; check_cdn_update.sh flags it via the bundle etag):
+kgc-cli config fetch -o /tmp/kgc_xml
+kgc-cli config extract -o xml_history/<date> /tmp/kgc_xml/xml_bundle_*
+python3 server/rebase_xml_live.py xml_history/<date>   # wipe xml_live from pristine + replay mods
+
+# Then, for either path:
+python3 server/rebuild_xml_bundle.py             # real_cdn/xml + AssetHash
+# Restart BOTH uvicorns — they cache real_cdn/ at import (see deploy-and-run.md).
+# The client re-downloads when AssetHash's md5 changes; clearing cache is belt-and-braces:
+adb -s <serial> shell "rm -rf /sdcard/Android/data/com.nowl.castle/files/UnityCache/Shared/xml"
 adb -s <serial> shell am force-stop com.nowl.castle
 ```
+
+Both paths keep `xml_live` uniformly LF (the CDN ships CRLF). Version gates +
+`serverVersion` are deliberately NOT bumped — they track the deployed client APK, not
+the newest game version.
 
 The `xml` line in `AssetHash.txt` (format `<name>:<md5hex>_<sizeInt>`) changes on every rebuild. The
 client's CDN check compares hashes and **re-downloads** the bundle when it differs — so the hash change

@@ -7,14 +7,27 @@
 #include <time.h>
 #include <vector>
 #include <string.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <errno.h>
 
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, "XignCodeStub", __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "XignCodeStub", __VA_ARGS__)
 
 // --- XIGNCODE STUB METHODS ---
-static jint    z_int(JNIEnv* e, jclass c, ...)        { return 0; }
-static void    z_void(JNIEnv* e, jclass c, ...)       { }
-static jstring z_str(JNIEnv* e, jclass c, ...)        { return e->NewStringUTF(""); }
+static jint     z_int(JNIEnv* e, jclass c, ...)       { return 0; }
+static void     z_void(JNIEnv* e, jclass c, ...)      { }
+static jstring  z_str(JNIEnv* e, jclass c, ...)       { return e->NewStringUTF(""); }
+static jstring  z_str_seed(JNIEnv* e, jclass c, jstring seed) {
+    if (!seed) return e->NewStringUTF("dummy_cookie");
+    const char* utf = e->GetStringUTFChars(seed, nullptr);
+    if (!utf) return e->NewStringUTF("dummy_cookie");
+    // Return the seed itself as the cookie (server might accept non-empty)
+    jstring result = e->NewStringUTF(utf);
+    e->ReleaseStringUTFChars(seed, utf);
+    return result;
+}
+static jboolean z_true(JNIEnv* e, jclass c, ...)      { return JNI_TRUE; }
 
 static const JNINativeMethod kMethods[] = {
     {"ZCWAVE_Initialize",            "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/wellbia/xigncode/XigncodeClientSystem$Callback;Lcom/wellbia/xigncode/XigncodeCallback;)I", (void*)z_int},
@@ -25,14 +38,48 @@ static const JNINativeMethod kMethods[] = {
     {"ZCWAVE_OnServerConnect",       "()I",                                    (void*)z_int},
     {"ZCWAVE_OnServerDisconnect",    "()I",                                    (void*)z_int},
     {"ZCWAVE_GetCooke",              "()Ljava/lang/String;",                   (void*)z_str},
-    {"ZCWAVE_GetCookie2",            "(Ljava/lang/String;)Ljava/lang/String;", (void*)z_str},
-    {"ZCWAVE_GetCookie3",            "(Ljava/lang/String;)Ljava/lang/String;", (void*)z_str},
+    {"ZCWAVE_GetCookie2",            "(Ljava/lang/String;)Ljava/lang/String;", (void*)z_str_seed},
+    {"ZCWAVE_GetCookie3",            "(Ljava/lang/String;)Ljava/lang/String;", (void*)z_str_seed},
     {"ZCWAVE_OnActivityPause",       "()V",                                    (void*)z_void},
     {"ZCWAVE_OnActivityResume",      "()V",                                    (void*)z_void},
     {"ZCWAVE_SetApplicationContext", "(Landroid/content/Context;)V",           (void*)z_void},
     {"ZCWAVE_SetDeviceId",           "(Ljava/lang/String;)V",                  (void*)z_void},
     {"ZCWAVE_SetResolutionInfo",     "(II)V",                                  (void*)z_void},
     {"ZCWAVE_SetUserInfo",           "(Ljava/lang/String;)V",                  (void*)z_void},
+};
+
+// v171 adds a second XIGNCODE class, AppSignClientSystem (app-signature check),
+// hit on Guest Login. Its native descriptors differ from XigncodeClientSystem
+// (callbacks are erased to Object; extra Guard* value-obfuscation API). Without
+// these registered, JNI falls back to a dynamic symbol lookup that our stub .so
+// doesn't export -> UnsatisfiedLinkError -> NoClassDefFoundError -> login fails.
+static const JNINativeMethod kAppSignMethods[] = {
+    {"ZCWAVE_Initialize",            "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)I", (void*)z_int},
+    {"ZCWAVE_InitializeEx",          "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;Landroid/app/Activity;I)I", (void*)z_int},
+    {"ZCWAVE_InitializeExEx",        "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;Landroid/content/Context;I)I", (void*)z_int},
+    {"ZCWAVE_Cleanup",               "()I",                                    (void*)z_int},
+    {"ZCWAVE_GetRevision",           "()I",                                    (void*)z_int},
+    {"ZCWAVE_Notify",                "(I)V",                                   (void*)z_void},
+    {"ZCWAVE_OnReceive",             "([B)I",                                  (void*)z_int},
+    {"ZCWAVE_OnServerConnect",       "()I",                                    (void*)z_int},
+    {"ZCWAVE_OnServerDisconnect",    "()I",                                    (void*)z_int},
+    {"ZCWAVE_GetCooke",              "()Ljava/lang/String;",                   (void*)z_str},
+    {"ZCWAVE_GetCookie2",            "(Ljava/lang/String;)Ljava/lang/String;", (void*)z_str_seed},
+    {"ZCWAVE_GetCookie3",            "(Ljava/lang/String;)Ljava/lang/String;", (void*)z_str_seed},
+    {"ZCWAVE_OnActivityPause",       "()V",                                    (void*)z_void},
+    {"ZCWAVE_OnActivityResume",      "()V",                                    (void*)z_void},
+    {"ZCWAVE_SetApplicationContext", "(Landroid/content/Context;)V",           (void*)z_void},
+    {"ZCWAVE_SetDeviceId",           "(Ljava/lang/String;)V",                  (void*)z_void},
+    {"ZCWAVE_SetResolutionInfo",     "(II)V",                                  (void*)z_void},
+    {"ZCWAVE_SetUserInfo",           "(Ljava/lang/String;)V",                  (void*)z_void},
+    {"ZCWAVE_GuardAlloc",            "()I",                                    (void*)z_int},
+    {"ZCWAVE_GuardFree",             "(I)V",                                   (void*)z_void},
+    {"ZCWAVE_GuardGetKey",           "(I)I",                                   (void*)z_int},
+    {"ZCWAVE_GuardGetSalt",          "(I)I",                                   (void*)z_int},
+    {"ZCWAVE_GuardGetTimestamp",     "(I)I",                                   (void*)z_int},
+    {"ZCWAVE_GuardUpdateTimestamp",  "(I)V",                                   (void*)z_void},
+    {"ZCWAVE_GuardValidate",         "(I)Z",                                   (void*)z_true},
+    {"nativeOnHackDetectedCallback", "(ILjava/lang/String;)V",                 (void*)z_void},
 };
 
 void* worker_thread(void* arg);
@@ -49,9 +96,19 @@ static void start_worker() {
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
     JNIEnv* env = 0;
     if (vm->GetEnv((void**)&env, JNI_VERSION_1_6) != JNI_OK) return JNI_ERR;
+    // v171 loads "xigncode" from AppSignClientSystem.<clinit>, so XigncodeClientSystem
+    // may not exist here. A failed FindClass leaves a pending exception; clear it
+    // unconditionally or the NEXT JNI call (FindClass/RegisterNatives) aborts the VM.
     jclass cls = env->FindClass("com/wellbia/xigncode/XigncodeClientSystem");
+    if (env->ExceptionCheck()) env->ExceptionClear();
     if (cls) {
         env->RegisterNatives(cls, kMethods, sizeof(kMethods)/sizeof(kMethods[0]));
+        if (env->ExceptionCheck()) env->ExceptionClear();
+    }
+    jclass appsign = env->FindClass("com/wellbia/xigncode/AppSignClientSystem");
+    if (env->ExceptionCheck()) env->ExceptionClear();
+    if (appsign) {
+        env->RegisterNatives(appsign, kAppSignMethods, sizeof(kAppSignMethods)/sizeof(kAppSignMethods[0]));
         if (env->ExceptionCheck()) env->ExceptionClear();
     }
     pthread_once(&init_once, start_worker);
@@ -455,12 +512,242 @@ void* worker_thread(void* arg) {
     LOGI("Worker thread started. Polling for libil2cpp.so...");
     
     void* handle = nullptr;
+    int poll_count = 0;
     while (!handle) {
         handle = dlopen("libil2cpp.so", RTLD_NOLOAD);
-        if (!handle) sleep(1);
+        if (!handle) {
+            poll_count++;
+            // v171+: libaledatic.so may load il2cpp under a memfd name that
+            // dlopen(RTLD_NOLOAD) can't see. After 30s, fall back to scanning
+            // /proc/self/maps for any memfd region containing ELF magic.
+            if (poll_count >= 30 && (poll_count % 10) == 0) {
+                LOGI("dlopen poll failed %ds, scanning /proc/self/maps for memfd il2cpp...", poll_count);
+                FILE* maps = fopen("/proc/self/maps", "r");
+                if (maps) {
+                    char line[1024];
+                    while (fgets(line, sizeof(line), maps)) {
+                        if (!strstr(line, "memfd:") && !strstr(line, "libil2cpp")) continue;
+                        if (!strstr(line, "r-xp")) continue;  // executable text segment
+                        uintptr_t start, end;
+                        sscanf(line, "%lx-%lx", &start, &end);
+                        // Verify ELF magic at start
+                        if (end - start > 0x100 && *(uint32_t*)start == 0x464C457F) {
+                            LOGI("Found ELF in memfd region 0x%lx-0x%lx, trying dlopen via /proc/self/fd", start, end);
+                            // Extract fd number from the maps line path
+                            char* fd_path = strstr(line, "/memfd:");
+                            if (!fd_path) fd_path = strstr(line, "/proc/self/fd/");
+                            // Try opening with the linker namespace path
+                            char fd_buf[128];
+                            // Scan for /proc/self/fd/<N> in the line
+                            char* proc_fd = strstr(line, "/proc/self/fd/");
+                            if (proc_fd) {
+                                sscanf(proc_fd, "%127s", fd_buf);
+                                handle = dlopen(fd_buf, RTLD_NOLOAD);
+                                if (handle) { LOGI("dlopen(%s) succeeded!", fd_buf); break; }
+                            }
+                        }
+                    }
+                    fclose(maps);
+                }
+            }
+            if (poll_count >= 120) {
+                LOGE("Gave up waiting for libil2cpp.so after %ds", poll_count);
+                return nullptr;
+            }
+            sleep(1);
+        }
     }
     
-    LOGI("libil2cpp.so is loaded! Waiting 5s for classes to register...");
+    LOGI("libil2cpp.so is loaded (poll took %ds)!", poll_count);
+
+    // --- Dump decrypted libil2cpp from process memory ---
+    // Only runs when the trigger file exists. Create it with:
+    //   adb shell touch /sdcard/kgc_dump_il2cpp
+    // After dump completes, the trigger file is removed.
+    bool do_dump = (access("/sdcard/kgc_dump_il2cpp", F_OK) == 0);
+    if (do_dump) {
+        LOGI("Dump trigger found — dumping decrypted il2cpp from memory...");
+        FILE* maps = fopen("/proc/self/maps", "r");
+        if (!maps) {
+            LOGE("Failed to open /proc/self/maps for dump");
+        } else {
+            char line[1024];
+            uintptr_t base = 0, last_end = 0;
+            FILE* out = fopen("/sdcard/il2cpp_dumped.so", "wb");
+            if (!out) {
+                LOGE("Failed to create /sdcard/il2cpp_dumped.so — check permissions");
+            }
+            while (fgets(line, sizeof(line), maps)) {
+                // Match both "libil2cpp.so" and memfd regions (v171 loader)
+                if (!strstr(line, "libil2cpp.so") && !strstr(line, "memfd:")) continue;
+                // For memfd, verify it's the il2cpp ELF (check once at first r-xp segment)
+                uintptr_t start, end;
+                char perm[8];
+                sscanf(line, "%lx-%lx %4s", &start, &end, perm);
+                if (perm[0] != 'r') continue;
+                // If this is a memfd line and we haven't found base yet, check ELF magic
+                if (!base && strstr(line, "memfd:") && !strstr(line, "libil2cpp")) {
+                    if (end - start < 0x100 || *(uint32_t*)start != 0x464C457F) continue;
+                }
+                if (!base) {
+                    base = start;
+                    LOGI("libil2cpp base = 0x%lx", (unsigned long)base);
+                }
+                if (out) {
+                    if (last_end && start > last_end) {
+                        size_t gap = start - last_end;
+                        void* zeros = calloc(1, gap);
+                        if (zeros) { fwrite(zeros, 1, gap, out); free(zeros); }
+                        LOGI("  gap 0x%lx-0x%lx (%zu KB)", (unsigned long)last_end, (unsigned long)start, gap / 1024);
+                    }
+                    size_t sz = end - start;
+                    void* buf = malloc(sz);
+                    if (buf) {
+                        memcpy(buf, (void*)start, sz);
+                        fwrite(buf, 1, sz, out);
+                        free(buf);
+                    }
+                    LOGI("  %s 0x%lx-0x%lx (%zu KB) -> dumped", perm, (unsigned long)start, (unsigned long)end, sz / 1024);
+                    last_end = end;
+                }
+            }
+            if (out) {
+                long total = ftell(out);
+                fclose(out);
+                LOGI("Dumped %ld bytes (%ld MB) to /sdcard/il2cpp_dumped.so", total, total / (1024*1024));
+            }
+            fclose(maps);
+        }
+        // Remove trigger so we don't dump every boot
+        unlink("/sdcard/kgc_dump_il2cpp");
+        LOGI("Removed dump trigger file.");
+    } else {
+        LOGI("No dump trigger (/sdcard/kgc_dump_il2cpp) — skipping memory dump.");
+    }
+
+    // --- Dump global-metadata.dat (only in dump mode) ---
+    if (do_dump) {
+        // global-metadata.dat is plaintext in base_assets.apk at
+        // assets/bin/Data/Managed/Metadata/global-metadata.dat.
+        // Try common installed-APK paths for both package ids.
+        const char* metaSearchDirs[] = {
+            "/data/app/",  // Android expands to /data/app/<pkg>-<hash>/
+            nullptr
+        };
+        const char* packages[] = {
+            "com.nowl.castle",
+            "com.awesomepiece.castle",
+            nullptr
+        };
+        bool foundMeta = false;
+        // Scan /proc/self/maps for the base_assets.apk path (most reliable).
+        FILE* maps2 = fopen("/proc/self/maps", "r");
+        if (maps2) {
+            char line2[1024];
+            char apk_path[512] = {0};
+            while (fgets(line2, sizeof(line2), maps2)) {
+                if (strstr(line2, "base_assets.apk") || strstr(line2, "base.apk")) {
+                    // Extract path (last field after spaces)
+                    char* p = strrchr(line2, ' ');
+                    if (!p) p = strrchr(line2, '\t');
+                    if (p) {
+                        ++p;
+                        // Trim newline
+                        char* nl = strchr(p, '\n');
+                        if (nl) *nl = 0;
+                        strncpy(apk_path, p, sizeof(apk_path)-1);
+                        break;
+                    }
+                }
+            }
+            fclose(maps2);
+            if (apk_path[0]) {
+                LOGI("Found APK via maps: %s", apk_path);
+                // global-metadata.dat is stored (compress_type=0) in split APKs.
+                // Parse the ZIP to find it.
+                FILE* apk = fopen(apk_path, "rb");
+                if (apk) {
+                    // Quick scan: find the local file header for global-metadata.dat
+                    // by searching for the filename in the ZIP central directory.
+                    fseek(apk, 0, SEEK_END);
+                    long apk_size = ftell(apk);
+                    // Search EOCD backwards
+                    long eocd_pos = -1;
+                    for (long off = apk_size - 22; off >= apk_size - 65557 && off >= 0; --off) {
+                        fseek(apk, off, SEEK_SET);
+                        uint8_t sig[4];
+                        if (fread(sig, 1, 4, apk) == 4 && sig[0]==0x50 && sig[1]==0x4B && sig[2]==0x05 && sig[3]==0x06) {
+                            eocd_pos = off;
+                            break;
+                        }
+                    }
+                    if (eocd_pos >= 0) {
+                        fseek(apk, eocd_pos + 10, SEEK_SET);
+                        uint16_t total_entries;
+                        uint32_t cd_size, cd_offset;
+                        fread(&total_entries, 2, 1, apk);
+                        fread(&cd_size, 4, 1, apk);
+                        fread(&cd_offset, 4, 1, apk);
+                        fseek(apk, cd_offset, SEEK_SET);
+                        for (uint16_t e = 0; e < total_entries; ++e) {
+                            uint32_t sig;
+                            fread(&sig, 4, 1, apk);
+                            if (sig != 0x02014B50) break;
+                            uint16_t fnlen, extralen, commentlen;
+                            fseek(apk, 4, SEEK_CUR); // version-made-by, version-needed
+                            uint16_t flags, method;
+                            fread(&flags, 2, 1, apk);
+                            fread(&method, 2, 1, apk);
+                            fseek(apk, 8, SEEK_CUR); // time, crc
+                            uint32_t comp_size, uncomp_size;
+                            fread(&comp_size, 4, 1, apk);
+                            fread(&uncomp_size, 4, 1, apk);
+                            fread(&fnlen, 2, 1, apk);
+                            fread(&extralen, 2, 1, apk);
+                            fread(&commentlen, 2, 1, apk);
+                            fseek(apk, 4, SEEK_CUR); // disk#, internal attrs
+                            fseek(apk, 4, SEEK_CUR); // external attrs
+                            uint32_t lh_offset;
+                            fread(&lh_offset, 4, 1, apk);
+                            char fname[512];
+                            uint16_t readlen = fnlen < 511 ? fnlen : 511;
+                            fread(fname, 1, readlen, apk);
+                            fname[readlen] = 0;
+                            if (fnlen > readlen) fseek(apk, fnlen - readlen, SEEK_CUR);
+                            fseek(apk, extralen + commentlen, SEEK_CUR);
+                            if (strstr(fname, "global-metadata.dat")) {
+                                // Jump to local file header
+                                fseek(apk, lh_offset + 26, SEEK_SET);
+                                uint16_t lh_fnlen, lh_extralen;
+                                fread(&lh_fnlen, 2, 1, apk);
+                                fread(&lh_extralen, 2, 1, apk);
+                                fseek(apk, lh_fnlen + lh_extralen, SEEK_CUR);
+                                if (method == 0) {
+                                    void* meta_buf = malloc(uncomp_size);
+                                    if (meta_buf) {
+                                        fread(meta_buf, 1, uncomp_size, apk);
+                                        FILE* o = fopen("/sdcard/global-metadata.dat", "wb");
+                                        if (o) { fwrite(meta_buf, 1, uncomp_size, o); fclose(o); }
+                                        free(meta_buf);
+                                        LOGI("global-metadata.dat (%u B) extracted from %s", uncomp_size, apk_path);
+                                        foundMeta = true;
+                                    }
+                                } else {
+                                    LOGI("global-metadata.dat is compressed (method=%u), can't extract inline", method);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    fclose(apk);
+                }
+            }
+        }
+        if (!foundMeta)
+            LOGI("global-metadata.dat: not found via /proc/self/maps scan");
+    }
+
+    LOGI("Waiting 5s for classes to register...");
     sleep(5);
     
     auto il2cpp_domain_get = (il2cpp_domain_get_t)GetIl2CppSymbol(handle, "il2cpp_domain_get");

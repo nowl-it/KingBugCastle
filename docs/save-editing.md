@@ -1,28 +1,43 @@
 # Save Editing — grant currency, items, units, skins, treasures
 
-All player-owned state lives in JSON the server reads **per request** (`load_state()`), so edits are
+All player-owned state lives in SQLite the server reads **per request** (`load_state()`), so edits are
 live — no restart, no client re-download. This is data plane 1 (see [README](README.md)).
 
 ## Where state lives
 
-- `server/state/player.json` — the master save (`STATE_FILE`).
-- `server/state/players/<pid>.json` — per-player mirror (e.g. `dev-0001.json`), kept in sync by
-  `sync_player()`. **Edit both** to be safe if you touch the file directly.
+- `server/state/players.db` — one row per player (`uid`, JSON blob). Accessed only through
+  `server/playerdb.py`; WAL mode so the `:8080` and `:8443` processes and the dashboard can all
+  write safely.
+- `server/state/pre-sqlite-backup/` — the old `player.json` + `players/*.json`, imported once and
+  **no longer read**. Editing them does nothing.
 - Seed for a fresh save: `server/data/default_player.json`.
+
+Do not edit the DB with a plain read-modify-write from another script while the server is running —
+take `playerdb.write_lock()` around it, the same lock the request middleware holds.
 
 Top-level keys: `gold cash paidCash heart level exp name cards decks inventoryItems treasures
 equippedArtifacts missions tokens buildingPoints ...`.
 
 ## Easiest path — the Admin dashboard
 
-`python3 server/dashboard.py` → http://localhost:8081/ → **Admin** tab. Edits `state/players/*.json`
-directly: currency / level / name, plus **send mail with a reward** (currencies or any item from
-`GET /api/catalog` — Item / Unit / UnitSoul / Artifact / Treasure / Accessory). No restart needed.
+`server/run.sh` (or `python3 server/dashboard.py`) → http://localhost:8081/. Edits `players.db`
+through `playerdb`, so no restart is needed — the next `/player` fetch sees it. Tabs:
+
+| Tab | What you can change |
+|---|---|
+| **Players** | create / clone / activate / delete a save; name, castle name, currencies, level, best-cleared stage & theme, building points, win counts; **raw JSON editor** for the whole save |
+| **Heroes** | grant one hero or all of them; edit level, soul, potential tier; remove a hero |
+| **Items** | set any inventory item's count (0 removes it), add from the full item catalog |
+| **Accessories** | read-only view grouped by synergy set, with the same grade badge the client computes |
+| **Mail** | send to one save or broadcast to every save, with a reward picker over the whole catalog (Item / Unit / UnitSoul / Artifact / Treasure / Accessory) |
+
+The raw JSON editor replaces the entire save — the `uid` is pinned back to the row key on write,
+everything else is taken verbatim, and there is no undo.
 
 ## Currency / level / name
 
-Plain top-level fields. Set them in the JSON and the next `/player` or `/player/currencies` fetch
-reflects it:
+Plain top-level fields inside the row's JSON blob. Set them (dashboard, or
+`playerdb.load/save`) and the next `/player` or `/player/currencies` fetch reflects it:
 
 ```json
 { "gold": 99999999, "cash": 999999, "heart": 100, "level": 200, "name": "Tester" }

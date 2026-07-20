@@ -1,0 +1,23 @@
+{
+  "targetId": 999,
+  "unitId": 0,
+  "state": 0,
+  "expItems": [
+    {
+      "id": 4000,
+      "count": 0
+    },
+    {
+      "id": 4100,
+      "count": 3
+    },
+    {
+      "id": 4101,
+      "count": 1
+    },
+    {
+      "id": 4102,
+      "count": 3
+    }
+  ]
+}

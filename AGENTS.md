@@ -109,6 +109,93 @@ All patches apply to `config.arm64_v8a.apk` → `lib/arm64-v8a/libil2cpp.so`. Of
 
 **Patch pattern**: `RET_FALSE` = `e0031f2ac0035fd6` = `mov x0,#0; ret`. SSL uses `RET_TRUE` = `20008052c0035fd6` = `mov w0,#1; ret`.
 
+### ARM64 Patch Inventory — v171.0.00 private build (`server/build_v171_private.py`)
+
+v171 ships **no on-disk `libil2cpp.so`** (XIGNCODE NEO packs + encrypts it inside `libaledatic.so`).
+The build injects the offline-recovered `il2cpp/v171.0.00/libil2cpp_v171_ssl.so` and NOPs the NEO
+unpack path — see [docs/mftl-extraction.md](docs/mftl-extraction.md) for the recovery recipe and
+[docs/v171-private-build.md](docs/v171-private-build.md) for the operator playbook.
+
+**`libil2cpp_v171_ssl.so` must be pristine + exactly 3 patches.** It rotted over several sessions
+(2026-07-19): 21 stray bytes, including a `b 0x3503ba8` that had overwritten `mov w8,#-2` inside
+`Scene_Login.<CheckUseAssetBundle>d__79.MoveNext` @ RVA `0x3503b7c`. That stray branch jumped back
+into the state-1 await setup = infinite UniTask recursion = stack-overflow SIGSEGV on "Loading
+resources", which was misdiagnosed for two sessions as an inherent IL2CPP UniTask bug. Regenerate as
+plain `libil2cpp_v171.so` + only these three — `server/patchers/make_v171_ssl_so.py` does exactly that,
+and `--check` validates the existing file (both SSL patches present, two known-rot anchors intact,
+**zero** stray bytes vs pristine). Never hand-patch this file in place:
+
+| Raw file offset | Method | Patch |
+|---|---|---|
+| 0x2CB68D8 | `PinnedCertHandler.ValidateCertificate` | `20008052c0035fd6` (RET_TRUE) |
+| 0x596EF64 | `UnityTlsProvider.ValidateCertificate` | same |
+| 0x596D674 | `MobileTlsContext.ValidateCertificate` | same |
+
+> **Two offset conventions coexist — do not mix them.** The 3 SSL rows above are **raw file offsets**.
+> Everything else below comes from `il2cpp/v171.0.00/script.json` `ScriptMethod[].Address`, which is an
+> **RVA**; file offset = `RVA - 0x4000`. Tombstone `pc` values are RVAs too, so resolve crash frames via
+> `script.json`, never by parsing `dump.cs` offsets.
+
+Patches the build applies on top (all idempotent, each guarded by an expected-prologue check that
+`raise SystemExit`s on a mismatch rather than corrupting the binary):
+
+| RVA | File offset | Label | Original bytes | Patch | Purpose |
+|---|---|---|---|---|---|
+| — | 0x303C6C0 | firebase | `fe0f1bf8` | `c0035fd6` | `GameManager.CheckFirebase()` → `ret`. FCM init is fatal in the v171 login coroutine and needs Play Services; unused on a private server |
+| 0x325658C | 0x325258C | pvp-init | `ff8303d1fd7b08a9` | `e0031f2ac0035fd6` | `PvPPanel.<Init>d__77.MoveNext()` early return |
+| 0x3251208 | 0x324D208 | pvp-reward | `fe0f1bf8fa6701a9` | `e0031f2ac0035fd6` | `PvPPanel.GetReceivableWinRewardCount()` → 0 |
+| 0x32C1EA8 | 0x32BDEA8 | shop-growth | `fe0f1af8fc6f01a9` | `e0031f2ac0035fd6` | `PackageItem.InitCustomGrowthPackage()` early return |
+| 0x32C3F78 | 0x32BFF78 | shop-season | `ff4301d1fe6701a9` | `e0031f2ac0035fd6` | `PackageItem.InitSeasonPassPackage()` early return |
+| 0x3055F58 | 0x3051F58 | year-event | `fe0f1ef8f44f01a9` | `e0031f2ac0035fd6` | `GameManager.IsYearEventAvailable()` → false |
+| 0x3058038 | 0x3054038 | card-event | `fe0f1ef8f44f01a9` | `e0031f2ac0035fd6` | `GameManager.IsEventCardCollectingAvailable()` → false |
+| 0x3057F30 | 0x3053F30 | season-event | `fe0f1ef8f44f01a9` | `e0031f2ac0035fd6` | `GameManager.IsSpecialSeasonalEventOpened()` → false |
+| 0x303D528 | 0x3039528 | babel-data | `fe0f1df8f65701a9` | `e0031f2ac0035fd6` | `GameManager.GetBabelData()` → null (caller null-checks) |
+| 0x34A7B2C | 0x34A3B2C | content-alert | `fe0f1bf8fa6701a9` | `e0031f2ac0035fd6` | `WorldPanel.ReloadNewContentAlert()` early return |
+| 0x3062DF0 | 0x305EDF0 | accessory | `fe0f1ff8088c40f9` | `20008052c0035fd6` | `GameManager.IsAccessoryUnlocked()` → true |
+
+The NRE stubs are a straight port of the v170 set (rows 5-14 of the v170 table above) — every prologue
+came back **byte-identical**, only the offsets moved, which is what confirms the `script.json` mapping.
+v170's `WorldPanel.IsKGMarbleAvailable` has **no v171 counterpart** and was dropped.
+
+**Do NOT enable `KGC_ASSETBYPASS`.** That opt-in patch rewrites the `Scene_Login.CheckUseAssetBundle`
+kickoff to tail-call `LoadAfterAssetBundle(this, true)`. It was built to dodge the recursion above,
+which turned out to be the corrupt-`.so` artifact — and it actively breaks the client: skipping
+`usePatch`/`getPatchFolder` means the CDN `xml` bundle (Strings + fonts) never downloads, so every
+label in the game renders as garbled/mirrored glyphs. Kept only as a debug escape hatch.
+
+**Host rebinding needs two passes.** `patch_hosts.py` walks only the il2cpp **stringLiteral table**;
+two backend URLs live as **field/parameter default values** and are unreachable to it
+(`https://castle-infra-server-…run.app`, `https://kgc-cdn-1.awesomepiece.com/patch/`). Left unpatched,
+the client silently talks to the real backend. `server/patchers/patch_leftover_hosts.py` does a raw
+same-length rebind (path preserved, null-padded so no offset shifts, CRC fixed) and runs right after
+`patch_metadata_http.py`. Verify with a metadata scan that **0** real hosts remain.
+
+### Daily-reset boundary — `tomorrow` must be derived, never stored
+
+`Scene_Lobby.Update` (RVA `0x34EA5F0`+) runs, once per second-tick:
+
+```
+now = DateTime.UtcNow
+if (now >= playerData.tomorrow_)      // DateTime.op_GreaterThanOrEqual @ 0x5745244
+    FetchNextDay(...)                 // Scene_Base.FetchNextDay @ 0x34DBEA8
+```
+
+`Scene_Base.<FetchNextDay>d__41.MoveNext` calls `RestAPI.Login` (@ `0x2C46FB4`) and re-runs the entire
+lobby fetch chain. So a `tomorrow` in the past makes the client **re-login at 1 Hz forever** — 17
+requests/second, lobby still rendering and interactive, nothing in logcat (it is normal control flow,
+not an exception). `Scene_Territory.Update` has the same call.
+
+`server.py` used to serve `st.get("tomorrow", …)` from the player save, where it was frozen at
+account-creation time — so every account entered the loop the day after signup. Now derived via
+`next_reset_iso()` (next UTC midnight, and `+7d` for `nextWeek`). Regression test:
+`server/tests/test_daily_reset.py`. `PlayerDataResponseModel.tomorrow` is at field offset `0xD0`.
+
+**Method for finding this class of bug**: a fixed-period request loop with no exception is a client
+timer, not a retry. Resolve the endpoint's C# entry point, then raw-scan the `.so` for `BL`
+instructions targeting its RVA to get callers (`(w>>26)==0x25`, sign-extend `imm26`, `target =
+site + imm*4`; file offset = `RVA - 0x4000`). That is how `Scene_Lobby.Update` was found from
+`POST /auth/login` in two hops.
+
 ### Known One-Time Lobby NRE (not blocking)
 - `WorldPanel.Reload()` at IL offset 0x00000 — fires once during init, does not repeat. The stack trace doesn't show sub-calls, suggesting a direct field access on a null component. Hard to pinpoint without RVA; non-blocking since the lobby still renders.
 
@@ -159,11 +246,12 @@ values (unresolved client JSON-parser quirk, Frida-blocked from further diagnosi
 above); current server caps `idx` at 1 element. Full writeup:
 `documentation/GOD_ACCOUNT_DATA_AGENT_PROMPT.md`.
 
-### CDN xml bundle patching (master data + Strings text) — see CLAUDE.md for full writeup
+### CDN xml bundle patching (master data + Strings text) — see docs/cdn-master-data.md
 Full workflow, the "no XML comments in Strings_*.xml" gotcha (breaks Localizer runtime
 registration for the whole locale, cost ~10 failed attempts to isolate on 2026-07-05),
 and the Skill/Unit `<Name>`/`<Desc>`/`<SubName>` key-redirect trick are documented in
-`.claude/CLAUDE.md` under "CDN xml bundle patching". Tool: `server/rebuild_xml_bundle.py`.
+`docs/cdn-master-data.md`. Tool: `server/rebuild_xml_bundle.py` or
+`server/refresh_master_data.py` (full CDN refresh + local mods + bundle rebuild in one shot).
 Pristine bundle backup: `server/real_cdn/xml.bak` (md5 `779193a15d1377a7b8c2e6edfbe94095`).
 
 ### Cathy (10800-10810) skill tiers + text keys
@@ -171,7 +259,7 @@ Tiers 1-4: `Skill<N> → TransformSkill<1080N> → BuffAtCastSkill<10800N>`
 (BaseDef/BaseMDef: 200→300→400→500). Bug fix: `Skill ID="10808" Inherit="108200"` → `"10805"`.
 Unit 10810 SubName redirects to `UnitSubName_10800` (not `UnitSubName_10810`).
 
-Text keys added in `scratchpad/xml_live/Strings_*.xml` (EN+VI only):
+Text keys added in `server/xml_live/Strings_*.xml` (EN+VI only):
 - Skill: `SkillName_10800`, `SkillDesc_10800_Short/Long`
 - Overcomes: `Overcome_10800_0` through `_4` (Def/MDef per tier)
 - Unit: `UnitName_10810`, `UnitSubName_10800`, `UnitRealName_10800`, etc.

@@ -16,7 +16,7 @@ The client's version is an **integer**, not the dotted string: v170.1.00 → **`
    `_all_treasure_ids()`, and content-gate checks around lines 169/201/226). These decide what the
    server hands out / treats as released. Grep `170100` to find them; bump when the client version bumps.
 
-2. **Client-side master data** — the `<MinVersion>` tag inside the entry in `scratchpad/xml_live/*.xml`.
+2. **Client-side master data** — the `<MinVersion>` tag inside the entry in `server/xml_live/*.xml`.
    Even if the server grants ownership, the client may hide or mis-render an entry whose local
    `MinVersion` is in the future. Lower it to the current version so the client treats it as released.
 
@@ -25,7 +25,7 @@ The client's version is an **integer**, not the dotted string: v170.1.00 → **`
 Example: treasure `30040` "Shadowless / Vô Ảnh" (a v171 Legacy) on a v170.1.00 client (done 2026-07-14):
 
 ```xml
-<!-- scratchpad/xml_live/Treasures.xml -->
+<!-- server/xml_live/Treasures.xml -->
 <Treasure ID="30040">
   ...
   <MinVersion>171000</MinVersion>   <!-- change to 170100 -->

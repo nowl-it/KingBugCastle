@@ -1,0 +1,510 @@
+<SkillTagParseRules>
+	<SkillTagParseRule ID="1">
+		<Tag>ChannelingTime</Tag>
+        <!--Round, Floor, Ceil-->
+		<RoundingRule>Round</RoundingRule>
+        <!--10^-2까지 (반올림)-->
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="2">
+		<Tag>CloneSkillTime</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="3">
+		<Tag>Time</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="4">
+		<Tag>Time:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="5">
+		<Tag>Time:MAtkPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="6">
+		<Tag>TimeDesc</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="7">
+		<Tag>TotalAttackTime</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="8">
+		<Tag>TotemTime</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="9">
+		<Tag>TransformTime</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="10">
+		<Tag>AddSuperShieldPerTargetHit</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="11">
+		<Tag>AddTechniqueAtMiss</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="12">
+		<Tag>AtkCount</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="13">
+		<Tag>AttackCount</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="14">
+		<Tag>AttackCount:BaseValue</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="15">
+		<Tag>AttackCountRealTime</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="16">
+		<Tag>Bolt</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="17">
+		<Tag>BuffAtSkillEndMaxOverlap</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="18">
+		<Tag>Chain+1</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="19">
+		<Tag>Knockback</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="20">
+		<Tag>MaxBuffOverlap</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="21">
+		<Tag>NeedComboCount:BaseValue</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="22">
+		<Tag>RemoveBuffAfterAttackCount</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="23">
+		<Tag>SelfSuperMAtkShield</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="24">
+		<Tag>SuperMAtkShieldToSelfForDesc</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="25">
+		<Tag>CharmTime</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="26">
+		<Tag>FearTime</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="27">
+		<Tag>GrabTimer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="28">
+		<Tag>IceTime</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="29">
+		<Tag>ManaDrainInterval</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="30">
+		<Tag>SilenceTime</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="31">
+		<Tag>StunTime</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="32">
+		<Tag>TickAttackTime</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="33">
+		<Tag>TrapDuration</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="34">
+		<Tag>AddAtkSpeedPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="35">
+		<Tag>AddDamagePerByHitCount</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="36">
+		<Tag>AddDamagePerEveryAtkCount</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="37">
+		<Tag>AddExecution</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="38">
+		<Tag>AddSkillDamagePer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="39">
+		<Tag>AtkPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="40">
+		<Tag>AtkSpeedByBaseAtkSpeedPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="41">
+		<Tag>ExtraTotalAttackSpeedPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="42">
+		<Tag>ExtraTotalAttackSpeedPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="43">
+		<Tag>AttackSpeedPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="44">
+		<Tag>AttackSpeedPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="45">
+		<Tag>AttackSpeedPer:MAtkPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="46">
+		<Tag>AttackSpeedPerForDesc</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="47">
+		<Tag>BuffDamageReduction</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="48">
+		<Tag>BuffTransferDamageReduction</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="49">
+		<Tag>ComboSkillDamageMultiplierDesc</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="50">
+		<Tag>ConnectedAtkBuffPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="51">
+		<Tag>ConnectedAtkBuffPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="52">
+		<Tag>ConnectedMAtkBuffPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="53">
+		<Tag>Damage:AtkPer</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="54">
+		<Tag>Damage:AtkPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="55">
+		<Tag>Damage:AtkPer:MAtkPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="56">
+		<Tag>DamageForDesc:AtkPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="57">
+		<Tag>DamagePerForDesc</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="58">
+		<Tag>Drain</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="59">
+		<Tag>Heal:AtkPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="60">
+		<Tag>HpPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="61">
+		<Tag>IgnoreDamageOverMaxHpPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="62">
+		<Tag>LostHpRatioAtk</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="63">
+		<Tag>ManaDrain</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="64">
+		<Tag>MAtkByMaxHpPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="65">
+		<Tag>MaxHpRatioAtk:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="66">
+		<Tag>MaxValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="67">
+		<Tag>MissRatio</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="68">
+		<Tag>MoveSpeedPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="69">
+		<Tag>MoveSpeedPer:-100</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="70">
+		<Tag>NextPhysicalMagicDamageBuff:AtkPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="71">
+		<Tag>OverwriteAtkByParent</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="72">
+		<Tag>OverwriteAtkByParent:MAtkPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="73">
+		<Tag>OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="74">
+		<Tag>OverwriteHpByParent:HpPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="75">
+		<Tag>ReducedDamageToAttack</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="76">
+		<Tag>ReflectPerToAllEnemy</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="77">
+		<Tag>SelfShield:HpPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="78">
+		<Tag>Shield:AtkPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="79">
+		<Tag>ShieldBossDefPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="80">
+		<Tag>SkillTriggerHPRatio</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="81">
+		<Tag>Slow</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="82">
+		<Tag>TickConsumeHp:HpPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="83">
+		<Tag>TickHeal:HpPer:BaseValue</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="84">
+		<Tag>TickHealPer:-100</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="85">
+		<Tag>TotalHealAdaptabilityPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="86">
+		<Tag>TotalTakeDamagePer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="87">
+		<Tag>Value</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="88">
+		<Tag>Damage:MAtkPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="89">
+		<Tag>SummonUnitAtkForDesc</Tag>
+		<RoundingRule>Floor</RoundingRule>
+		<Digit>0</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="90">
+		<Tag>TransformHpForDesc</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>0</Digit>
+		<Postfix>%</Postfix>
+		<Color>00ff00</Color>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="91">
+		<Tag>TransformAtkForDesc</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>0</Digit>
+		<Postfix>%</Postfix>
+		<Color>00ff00</Color>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="92">
+		<Tag>TransformIncreaseAtkSpeedForDesc</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>0</Digit>
+		<Prefix>+</Prefix>
+		<Postfix>%</Postfix>
+		<Color>00ff00</Color>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="93">
+		<Tag>TransformIncreaseMAtkForDesc</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>0</Digit>
+		<Prefix>+</Prefix>
+		<Postfix>%</Postfix>
+		<Color>00ff00</Color>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="94">
+		<Tag>ConditionalStun</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="95">
+		<Tag>ExtraTotalAttackSpeedPer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>0</Digit>
+		<UseAbs>true</UseAbs>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="96">
+		<Tag>MaxHpRatioAtk</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="97">
+		<Tag>BossTempParam</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="98">
+		<Tag>TickDamageInterval</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="99">
+		<Tag>Unit30000040AI_ExcessAtkSpdToFinalDamagePer</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-1</Digit>
+	</SkillTagParseRule>
+</SkillTagParseRules>

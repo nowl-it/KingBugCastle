@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
 Rebuild the CDN xml AssetBundle by replacing each TextAsset's m_Script
-with the corresponding file from scratchpad/xml_live.
+with the corresponding file from server/xml_live.
 
 Usage: python3 rebuild_xml_bundle.py [xml_dir] [bundle_path]
-  Defaults: xml_dir  = ../scratchpad/xml_live
+  Defaults: xml_dir  = ../server/xml_live
             bundle   = real_cdn/xml
 
 CRITICAL GOTCHA (found 2026-07-05, cost ~10 failed attempts to isolate):
@@ -17,7 +17,7 @@ pristine file and worked before. This is NOT a size/delta issue - a 1.7KB
 batch with zero comments worked fine; a much smaller edit WITH a comment
 failed. Skills.xml/Units.xml/ActiveSkills.xml are unaffected (they're read
 by a different, more tolerant parser) - comments there are fine.
-After editing scratchpad/xml_live/Strings_*.xml, always grep for '<!--'
+After editing server/xml_live/Strings_*.xml, always grep for '<!--'
 before running this script.
 
 After running: restart uvicorn (server.py caches real_cdn/ file bytes at
@@ -34,7 +34,7 @@ except ImportError:
     sys.exit(1)
 
 ROOT = pathlib.Path(__file__).parent
-XML_DIR = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT.parent / "scratchpad" / "xml_live"
+XML_DIR = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "xml_live"
 BUNDLE  = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "real_cdn" / "xml"
 
 assert XML_DIR.is_dir(), f"XML dir not found: {XML_DIR}"

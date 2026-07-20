@@ -1,0 +1,592 @@
+<ChallengeSeasons>
+    <!-- 시즌이 변경되어도 자주 바뀌지 않는 값은 여기에 --> 
+    <ChallengeSeason ID="0">
+        <!-- 기본 해금 난이도 -->
+        <DefaultUnlockDifficulty>11</DefaultUnlockDifficulty>
+
+        <!-- 미션 정보 -->
+        <MissionRewards>
+            <Mission Type="ClearDifficulty" Value="1">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="3">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="5">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="7">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="9">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="11">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="13">
+                <Reward Type="ChallengeToken" Count="2000"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="15">
+                <Reward Type="ChallengeToken" Count="2000"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="17">
+                <Reward Type="ChallengeToken" Count="2000"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="19">
+                <Reward Type="ChallengeToken" Count="2500"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="21">
+                <Reward Type="ChallengeToken" Count="3500"/>
+            </Mission>
+
+            <Mission Type="ClearBattleIndex" Value="0">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="1">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="2">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+        </MissionRewards>
+
+        <!-- 랭크 보상 -->
+        <RankRewards>
+            <RankReward Rank="1" Difficulty="11">
+                <Reward Type="ChallengeToken" Count="25000"/>
+            </RankReward>
+            <RankReward Rank="2~5" Difficulty="11">
+                <Reward Type="ChallengeToken" Count="18000"/>
+            </RankReward>
+            <RankReward Rank="6~10" Difficulty="11">
+                <Reward Type="ChallengeToken" Count="12000"/>
+            </RankReward>
+            <RankReward Rank="11~30" Difficulty="11">
+                <Reward Type="ChallengeToken" Count="9000"/>
+            </RankReward>
+            <RankReward Rank="31~100" Difficulty="11">
+                <Reward Type="ChallengeToken" Count="7000"/>
+            </RankReward>
+            <RankReward RankPer="10">
+                <Reward Type="ChallengeToken" Count="6000"/>
+            </RankReward>
+            <RankReward RankPer="11~30">
+                <Reward Type="ChallengeToken" Count="5000"/>
+            </RankReward>
+            <RankReward RankPer="31~50">
+                <Reward Type="ChallengeToken" Count="4000"/>
+            </RankReward>
+            <RankReward RankPer="51~75">
+                <Reward Type="ChallengeToken" Count="3000"/>
+            </RankReward>
+            <RankReward RankPer="76~90">
+                <Reward Type="ChallengeToken" Count="2000"/>
+            </RankReward>
+            <RankReward RankPer="91~100">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </RankReward>
+        </RankRewards>
+
+        <!-- 일일 보상 (클리어한 난이도 별 1일 1회, 차원의 잔향 + 골드) -->
+        <DailyRewards>
+            <DailyReward Difficulty="1"><Reward Type="InventoryItem" ID="10010" Count="100"/><Reward Type="Gold" Count="500"/></DailyReward>
+            <DailyReward Difficulty="2"><Reward Type="InventoryItem" ID="10010" Count="200"/><Reward Type="Gold" Count="1300"/></DailyReward>
+            <DailyReward Difficulty="3"><Reward Type="InventoryItem" ID="10010" Count="300"/><Reward Type="Gold" Count="2900"/></DailyReward>
+            <DailyReward Difficulty="4"><Reward Type="InventoryItem" ID="10010" Count="400"/><Reward Type="Gold" Count="4900"/></DailyReward>
+            <DailyReward Difficulty="5"><Reward Type="InventoryItem" ID="10010" Count="600"/><Reward Type="Gold" Count="7300"/></DailyReward>
+            <DailyReward Difficulty="6"><Reward Type="InventoryItem" ID="10010" Count="900"/><Reward Type="Gold" Count="10000"/></DailyReward>
+            <DailyReward Difficulty="7"><Reward Type="InventoryItem" ID="10010" Count="1100"/><Reward Type="Gold" Count="12900"/></DailyReward>
+            <DailyReward Difficulty="8"><Reward Type="InventoryItem" ID="10010" Count="1300"/><Reward Type="Gold" Count="16200"/></DailyReward>
+            <DailyReward Difficulty="9"><Reward Type="InventoryItem" ID="10010" Count="1600"/><Reward Type="Gold" Count="19600"/></DailyReward>
+            <DailyReward Difficulty="10"><Reward Type="InventoryItem" ID="10010" Count="1900"/><Reward Type="Gold" Count="23300"/></DailyReward>
+            <DailyReward Difficulty="11"><Reward Type="InventoryItem" ID="10010" Count="2200"/><Reward Type="Gold" Count="27400"/></DailyReward>
+            <DailyReward Difficulty="12"><Reward Type="InventoryItem" ID="10010" Count="2600"/><Reward Type="Gold" Count="31600"/></DailyReward>
+            <DailyReward Difficulty="13"><Reward Type="InventoryItem" ID="10010" Count="2900"/><Reward Type="Gold" Count="35700"/></DailyReward>
+            <DailyReward Difficulty="14"><Reward Type="InventoryItem" ID="10010" Count="3300"/><Reward Type="Gold" Count="40400"/></DailyReward>
+            <DailyReward Difficulty="15"><Reward Type="InventoryItem" ID="10010" Count="3700"/><Reward Type="Gold" Count="45000"/></DailyReward>
+            <DailyReward Difficulty="16"><Reward Type="InventoryItem" ID="10010" Count="4100"/><Reward Type="Gold" Count="49900"/></DailyReward>
+            <DailyReward Difficulty="17"><Reward Type="InventoryItem" ID="10010" Count="4600"/><Reward Type="Gold" Count="55100"/></DailyReward>
+            <DailyReward Difficulty="18"><Reward Type="InventoryItem" ID="10010" Count="5100"/><Reward Type="Gold" Count="60400"/></DailyReward>
+            <DailyReward Difficulty="19"><Reward Type="InventoryItem" ID="10010" Count="5500"/><Reward Type="Gold" Count="65600"/></DailyReward>
+            <DailyReward Difficulty="20"><Reward Type="InventoryItem" ID="10010" Count="6100"/><Reward Type="Gold" Count="71300"/></DailyReward>
+            <DailyReward Difficulty="21"><Reward Type="InventoryItem" ID="10010" Count="6600"/><Reward Type="Gold" Count="76200"/></DailyReward>
+            <DailyReward Difficulty="22"><Reward Type="InventoryItem" ID="10010" Count="7000"/><Reward Type="Gold" Count="81900"/></DailyReward>
+            <DailyReward Difficulty="23"><Reward Type="InventoryItem" ID="10010" Count="7500"/><Reward Type="Gold" Count="87800"/></DailyReward>
+            <DailyReward Difficulty="24"><Reward Type="InventoryItem" ID="10010" Count="7900"/><Reward Type="Gold" Count="93800"/></DailyReward>
+            <DailyReward Difficulty="25"><Reward Type="InventoryItem" ID="10010" Count="8000"/><Reward Type="Gold" Count="100000"/></DailyReward>
+        </DailyRewards>
+    </ChallengeSeason>
+
+    <!-- 67 시즌 -->
+    <ChallengeSeason ID="67" Inherit="0">
+        <!-- 영웅 수 제한 -->
+        <UnitCount>5</UnitCount>
+        
+        <!-- 대상 스테이지 -->
+        <Stages>430101000,430101001,430101002,430101003</Stages>
+        
+        <!-- Stories.xml ID -->
+        <StoryID>3010100</StoryID>
+        
+        <!-- 페이지 index -->
+        <StoryPageIndex>0</StoryPageIndex>
+        
+        <!-- 난이도 별 적 스탯 강화 계수 (복리) -->
+        <EnemyStatPerBase Type="Atk,MAtk" From="1">1.2</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Atk,MAtk" From="11">1.3</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="1">1.8</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="11">2.4</EnemyStatPerBase>
+        
+        <!-- 미션 정보 (프리시즌) -->
+        <MissionRewards>
+            <Mission Type="ClearDifficulty" Value="1">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="3">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="5">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="7">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="9">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="11">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="13">
+                <Reward Type="InventoryItem" ID="7100" Count="1"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="15">
+                <Reward Type="InventoryItem" ID="7100" Count="1"/>
+            </Mission>
+
+            <Mission Type="PlayDay" Value="1">
+                <Reward Type="InventoryItem" ID="7100" Count="1"/>
+            </Mission>
+            <Mission Type="PlayDay" Value="3">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="PlayDay" Value="5">
+                <Reward Type="InventoryItem" ID="7100" Count="3"/>
+            </Mission>
+
+            <Mission Type="ClearBattleIndex" Value="0">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="1">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="2">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+        </MissionRewards>
+        
+        <!-- 랭크 보상 (프리시즌) -->
+        <RankRewards>
+            <RankReward Rank="1" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="25"/>
+            </RankReward>
+            <RankReward Rank="2~5" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="18"/>
+            </RankReward>
+            <RankReward Rank="6~10" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="12"/>
+            </RankReward>
+            <RankReward Rank="11~30" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="9"/>
+            </RankReward>
+            <RankReward Rank="31~100" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="7"/>
+            </RankReward>
+            <RankReward RankPer="10">
+                <Reward Type="InventoryItem" ID="7100" Count="6"/>
+            </RankReward>
+            <RankReward RankPer="11~30">
+                <Reward Type="InventoryItem" ID="7100" Count="5"/>
+            </RankReward>
+            <RankReward RankPer="31~50">
+                <Reward Type="InventoryItem" ID="7100" Count="4"/>
+            </RankReward>
+            <RankReward RankPer="51~75">
+                <Reward Type="InventoryItem" ID="7100" Count="3"/>
+            </RankReward>
+            <RankReward RankPer="76~90">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </RankReward>
+            <RankReward RankPer="91~100">
+                <Reward Type="InventoryItem" ID="7100" Count="1"/>
+            </RankReward>
+        </RankRewards>
+    </ChallengeSeason>
+    
+    <!-- 68 시즌 -->
+    <ChallengeSeason ID="68" Inherit="0">
+        <!-- 영웅 수 제한 -->
+        <UnitCount>5</UnitCount>
+        
+        <!-- 대상 스테이지 -->
+        <Stages>430101000,430101001,430101002,430101003</Stages>
+        
+        <!-- Stories.xml ID -->
+        <StoryID>3010100</StoryID>
+        
+        <!-- 페이지 index -->
+        <StoryPageIndex>0</StoryPageIndex>
+        
+        <!-- 난이도 별 적 스탯 강화 계수 (복리) -->
+        <EnemyStatPerBase Type="Atk,MAtk" From="1">1.2</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Atk,MAtk" From="11">1.3</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="1">1.8</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="11">2.4</EnemyStatPerBase>
+        
+        <!-- 미션 정보 (프리시즌) -->
+        <MissionRewards>
+            <Mission Type="ClearDifficulty" Value="1">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="3">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="5">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="7">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="9">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="11">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="13">
+                <Reward Type="InventoryItem" ID="7100" Count="1"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="15">
+                <Reward Type="InventoryItem" ID="7100" Count="1"/>
+            </Mission>
+
+            <Mission Type="PlayDay" Value="1">
+                <Reward Type="InventoryItem" ID="7100" Count="1"/>
+            </Mission>
+            <Mission Type="PlayDay" Value="3">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="PlayDay" Value="5">
+                <Reward Type="InventoryItem" ID="7100" Count="3"/>
+            </Mission>
+
+            <Mission Type="ClearBattleIndex" Value="0">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="1">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="2">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+        </MissionRewards>
+        
+        <!-- 랭크 보상 (프리시즌) -->
+        <RankRewards>
+            <RankReward Rank="1" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="25"/>
+            </RankReward>
+            <RankReward Rank="2~5" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="18"/>
+            </RankReward>
+            <RankReward Rank="6~10" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="12"/>
+            </RankReward>
+            <RankReward Rank="11~30" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="9"/>
+            </RankReward>
+            <RankReward Rank="31~100" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="7"/>
+            </RankReward>
+            <RankReward RankPer="10">
+                <Reward Type="InventoryItem" ID="7100" Count="6"/>
+            </RankReward>
+            <RankReward RankPer="11~30">
+                <Reward Type="InventoryItem" ID="7100" Count="5"/>
+            </RankReward>
+            <RankReward RankPer="31~50">
+                <Reward Type="InventoryItem" ID="7100" Count="4"/>
+            </RankReward>
+            <RankReward RankPer="51~75">
+                <Reward Type="InventoryItem" ID="7100" Count="3"/>
+            </RankReward>
+            <RankReward RankPer="76~90">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </RankReward>
+            <RankReward RankPer="91~100">
+                <Reward Type="InventoryItem" ID="7100" Count="1"/>
+            </RankReward>
+        </RankRewards>
+    </ChallengeSeason>
+    
+    <!-- 69 시즌 -->
+    <ChallengeSeason ID="69" Inherit="0">
+        <!-- 영웅 수 제한 -->
+        <UnitCount>6</UnitCount>
+
+        <!-- 대상 스테이지 -->
+        <Stages>430069000,430069001,430069002,430069003</Stages>
+
+        <!-- Stories.xml ID -->
+        <StoryID>3010100</StoryID>
+        
+        <RefStoryID>3010100</RefStoryID>
+
+        <!-- 페이지 index -->
+        <StoryPageIndex>0</StoryPageIndex>
+
+        <!-- 난이도 별 적 스탯 강화 계수 (복리) -->
+        <EnemyStatPerBase Type="Atk,MAtk" From="1">1.2</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Atk,MAtk" From="11">1.3</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="1">1.5</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="11">5.0</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="12">1.8</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="21">3.0</EnemyStatPerBase>
+
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="1">1.15</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="11">1.2</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Hp" From="1">1.2</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Hp" From="11">1.3</NormalEnemyStatPerBase>
+
+        <!-- 미션 정보 (프리시즌) -->
+        <MissionRewards>
+            <Mission Type="ClearDifficulty" Value="1">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="3">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="5">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="7">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="9">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="11">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="13">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="15">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="17">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="19">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>                        
+
+            <Mission Type="ClearBattleIndex" Value="0">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="1">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="2">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </Mission>
+        </MissionRewards>
+
+        <!-- 랭크 보상 (프리시즌) -->
+        <RankRewards>
+            <RankReward Rank="1" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="25"/>
+            </RankReward>
+            <RankReward Rank="2~5" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="18"/>
+            </RankReward>
+            <RankReward Rank="6~10" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="12"/>
+            </RankReward>
+            <RankReward Rank="11~30" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="9"/>
+            </RankReward>
+            <RankReward Rank="31~100" Difficulty="11">
+                <Reward Type="InventoryItem" ID="7100" Count="7"/>
+            </RankReward>
+            <RankReward RankPer="10">
+                <Reward Type="InventoryItem" ID="7100" Count="6"/>
+            </RankReward>
+            <RankReward RankPer="11~30">
+                <Reward Type="InventoryItem" ID="7100" Count="5"/>
+            </RankReward>
+            <RankReward RankPer="31~50">
+                <Reward Type="InventoryItem" ID="7100" Count="4"/>
+            </RankReward>
+            <RankReward RankPer="51~75">
+                <Reward Type="InventoryItem" ID="7100" Count="3"/>
+            </RankReward>
+            <RankReward RankPer="76~90">
+                <Reward Type="InventoryItem" ID="7100" Count="2"/>
+            </RankReward>
+            <RankReward RankPer="91~100">
+                <Reward Type="InventoryItem" ID="7100" Count="1"/>
+            </RankReward>
+        </RankRewards>
+    </ChallengeSeason>
+
+    <!-- 70 시즌 (도전의 신전 정식 시즌 / 뱀파이어) -->
+    <ChallengeSeason ID="70" Inherit="0">
+        <!-- 영웅 수 제한 (4인 덱) -->
+        <UnitCount>4</UnitCount>
+
+        <!-- 대상 스테이지 -->
+        <Stages>430070000,430070001,430070002,430070003</Stages>
+
+        <!-- Stories.xml ID -->
+        <StoryID>3010100</StoryID>
+
+        <!-- 페이지 index -->
+        <StoryPageIndex>0</StoryPageIndex>
+        
+        <RefStoryID>2010100</RefStoryID>
+
+        <!-- 난이도 별 적 스탯 강화 계수 (복리) / TODO: 밸런싱 확정 필요 -->
+        <EnemyStatPerBase Type="Atk,MAtk" From="1">1.2</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Atk,MAtk" From="11">1.3</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="1">2.4</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="11">10.0</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="12">1.75</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="21">3.0</EnemyStatPerBase>
+
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="1">1.15</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="11">1.2</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Hp" From="1">1.2</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Hp" From="12">1.3</NormalEnemyStatPerBase>
+
+        <!-- 미션 정보 -->
+        <MissionRewards>
+            <Mission Type="ClearDifficulty" Value="1">
+                <Reward Type="Key" ID="70000" Count="5"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="3">
+                <Reward Type="Key" ID="70000" Count="5"/>
+            </Mission>            
+            <Mission Type="ClearDifficulty" Value="5">
+                <Reward Type="ChallengeToken" Count="2000"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="6">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>            
+            <Mission Type="ClearDifficulty" Value="8">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="10">
+                <Reward Type="ChallengeToken" Count="2500"/>
+            </Mission>            
+            <Mission Type="ClearDifficulty" Value="11">
+                <Reward Type="Key" ID="70000" Count="15"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="14">
+                <Reward Type="ChallengeToken" Count="3500"/>
+            </Mission>                 
+            <Mission Type="ClearDifficulty" Value="17">
+                <Reward Type="Key" ID="70000" Count="15"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="20">
+                <Reward Type="ChallengeToken" Count="4000"/>
+            </Mission>
+
+            <Mission Type="ClearBattleIndex" Value="0">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="1">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="2">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+        </MissionRewards>
+    </ChallengeSeason>
+
+    <!-- 70 시즌 (도전의 신전 정식 시즌 / 뱀파이어) -->
+    <ChallengeSeason ID="71" Inherit="0">
+        <!-- 영웅 수 제한 (8인 덱) -->
+        <UnitCount>8</UnitCount>
+
+        <!-- 대상 스테이지 -->
+        <Stages>430071000,430071001,430071002,430071003</Stages>
+
+        <!-- Stories.xml ID -->
+        <StoryID>3010100</StoryID>
+
+        <!-- 페이지 index -->
+        <StoryPageIndex>0</StoryPageIndex>
+        
+        <RefStoryID>2010100</RefStoryID>
+
+        <!-- 난이도 별 적 스탯 강화 계수 (복리) / TODO: 밸런싱 확정 필요 -->
+        <EnemyStatPerBase Type="Atk,MAtk" From="1">1.2</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Atk,MAtk" From="11">1.3</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="1">2.4</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="11">10.0</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="12">1.75</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="21">3.0</EnemyStatPerBase>
+
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="1">1.15</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="11">1.2</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Hp" From="1">1.2</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Hp" From="12">1.3</NormalEnemyStatPerBase>
+
+        <!-- 미션 정보 -->
+        <MissionRewards>
+            <Mission Type="ClearDifficulty" Value="1">
+                <Reward Type="Key" ID="70000" Count="5"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="3">
+                <Reward Type="Key" ID="70000" Count="5"/>
+            </Mission>            
+            <Mission Type="ClearDifficulty" Value="5">
+                <Reward Type="ChallengeToken" Count="2000"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="6">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>            
+            <Mission Type="ClearDifficulty" Value="8">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="10">
+                <Reward Type="ChallengeToken" Count="2500"/>
+            </Mission>            
+            <Mission Type="ClearDifficulty" Value="11">
+                <Reward Type="Key" ID="70000" Count="15"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="14">
+                <Reward Type="ChallengeToken" Count="3500"/>
+            </Mission>                 
+            <Mission Type="ClearDifficulty" Value="17">
+                <Reward Type="Key" ID="70000" Count="15"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="20">
+                <Reward Type="ChallengeToken" Count="4000"/>
+            </Mission>
+
+            <Mission Type="ClearBattleIndex" Value="0">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="1">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="2">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+        </MissionRewards>
+    </ChallengeSeason>
+
+</ChallengeSeasons>

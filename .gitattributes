@@ -1,8 +1,18 @@
-server/real_cdn/xml filter=lfs diff=lfs merge=lfs -text
-server/real_cdn/xml.bak filter=lfs diff=lfs merge=lfs -text
+# Auto-detect text files and normalize to LF
+* text=auto
+
+# CDN binary asset bundles — change every data refresh
+server/real_cdn/xml         filter=lfs diff=lfs merge=lfs -text
+server/real_cdn/xml.bak     filter=lfs diff=lfs merge=lfs -text
 server/real_cdn/*assetbundle filter=lfs diff=lfs merge=lfs -text
-kgc-cli filter=lfs diff=lfs merge=lfs -text
+
+# CLI binary
+kgc-cli                     filter=lfs diff=lfs merge=lfs -text
+
+# Native shared libraries (built from source; .cpp in git)
 server/xigncode_stub/**/*.so filter=lfs diff=lfs merge=lfs -text
-assets/*.png filter=lfs diff=lfs merge=lfs -text
-reports/assets/**/*.png filter=lfs diff=lfs merge=lfs -text
-reports/assets/**/*.gif filter=lfs diff=lfs merge=lfs -text
+
+# Game asset images (tracked for docs/reports)
+assets/*.png                filter=lfs diff=lfs merge=lfs -text
+reports/assets/**/*.png     filter=lfs diff=lfs merge=lfs -text
+reports/assets/**/*.gif     filter=lfs diff=lfs merge=lfs -text
