@@ -16,9 +16,9 @@ crypto API), see **[`../docs/`](../docs/README.md)**.
 | A template field for artifact/accessory/treasure/rift-weapon/rift-crystal | `data/item_templates.json` |
 | Player identity/currency/card-template/deck seed defaults | `data/default_player.json` |
 | New route logic (state mutation, computed values) | `server.py` — add to `DYNAMIC_OVERRIDES` |
-| A binary patch to the client `.so` | `rebuild_arm64.py` (arm64, live target) — NOT `patchers/patch_apk_inplace.py` (arm32, legacy, only used by `deploy.sh`) |
+| A binary patch to the client `.so` | `rebuild_arm64.py` (arm64, the live target) |
 | A client-side UI behavior / il2cpp method hook (custom mail text, in-battle stat poller) | `jni/stub.cpp` — `ndk-build` in `server/`, then `cp libs/arm64-v8a/libxigncode.so xigncode_stub/arm64/` and rerun `rebuild_arm64.py`/`rebuild_arm64_mod.py`. Pick the right hook technique (methodPointer swap vs inline detour) — see `AGENTS.md` "il2cpp hook techniques" |
-| The build/patch/sign/install pipeline itself | `deploy.sh` (arm32) or `rebuild_arm64.py` (arm64) |
+| The build/patch/sign/install pipeline itself | `rebuild_arm64.py` (replaces the real app) or `rebuild_arm64_mod.py` (side-by-side King Bug Castle) |
 
 Rule of thumb: if the value doesn't change based on `st`/`body`, it's data — put it in
 `data/`, not in a Python literal. See `git log` for the 2026-07-02 refactor that moved

@@ -154,7 +154,6 @@ destroyed-mutex crash). swiftshader is slower but renders correctly and is stabl
 ```
 server/
   server.py              FastAPI emulator (run this)
-  deploy.sh              full pipeline: patch+sign+install+start (arm32 target)
   rebuild_arm64.py       arm64 client rebuild (SSL+NRE stubs, sign, install)
   rebuild_arm64_mod.py   side-by-side variant (com.nowl.castle); --share bakes a
                           server host + packages KingBugCastle.xapk (see ../SHARE.md)
@@ -163,13 +162,13 @@ server/
   rebuild_xml_bundle.py  CDN XML bundle patcher
   data/                  response data as JSON (static_overrides, response_config,
                           item_templates, default_player) - edit these, not code
-  state/player.json      editable save (live source of truth after first boot)
+  state/players.db       player state (SQLite/WAL, via playerdb.py - edit through the dashboard)
   generated/             models.json, restapi.json, routes.txt, route_models.json
   pipeline/              dump.cs -> generated/*.json (run when dump.cs changes)
     extract_models.py
     map_routes.py
-  patchers/              internal deps of deploy.sh (arm32 binary patches)
-    patch_apk_inplace.py patch_metadata_http.py patch_prestrings.py patch_rename.py
+  patchers/              APK binary patchers used by the rebuild scripts
+    patch_metadata_http.py patch_hosts.py patch_rename.py patch_package_id*.py ...
   capture/               ground-truth capture tools (hit the real backend, dump JSON)
     dump_real_api.py mitm_fake_auth.py
   tests/                 assert-based sanity checks
