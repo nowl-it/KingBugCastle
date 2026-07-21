@@ -5,7 +5,7 @@ System.loadLibrary() can find libxigncode.so in the native lib directory.
 extractNativeLibs=false (Unity default) stores all .so inside the APK zip;
 Java's loadLibrary requires them extracted on some Android versions.
 """
-import sys, subprocess, tempfile, shutil, pathlib, re
+import sys, subprocess, tempfile, shutil, pathlib
 
 APK = pathlib.Path(sys.argv[1]).resolve()
 

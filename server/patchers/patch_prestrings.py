@@ -3,7 +3,7 @@
 Replace PreStrings GUID files' m_Script with the full Strings_XX.xml content.
 This makes PreInitialize load ALL strings, bypassing the CDN-dependent LoadStrings call.
 """
-import sys, os, io, zipfile, pathlib, hashlib
+import sys, os, io, zipfile, pathlib
 import UnityPy
 
 APK = pathlib.Path(sys.argv[1])

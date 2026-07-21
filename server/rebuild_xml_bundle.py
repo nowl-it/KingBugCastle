@@ -25,7 +25,7 @@ import time - see _CDN_FILES in server.py) and clear the device's
 UnityCache (files/UnityCache under the app's external data dir) before
 the next launch, or the client will keep using its previously-cached copy.
 """
-import sys, os, pathlib, shutil
+import sys, pathlib, shutil
 
 try:
     import UnityPy

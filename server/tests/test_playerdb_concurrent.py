@@ -4,7 +4,7 @@ This is the failure the JSON-file store had: :8080 and :8443 are separate
 processes, threading.Lock guards nothing between them, and write_text() is not
 atomic - so one side's save clobbered the other's, or left a truncated file.
 """
-import json, os, subprocess, sys, tempfile, pathlib
+import os, subprocess, sys, tempfile, pathlib
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 

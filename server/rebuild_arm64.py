@@ -56,12 +56,9 @@ ALL_PATCHES = [
     # IndexOutOfRange because winRewardReceived is empty and an inner array
     # at [model+0x220][0xc0] is also empty.
     (0x3245178, "pvp-reward", bytes.fromhex("fe0f1bf8fa6701a9"), RET_FALSE),
-    # DeckPanel.ReloadDeck / DeckPanel.Reload -> TEMPORARILY UNPATCHED to
-    # capture the real crash (root-cause investigation, 2026-07-02). Restore
-    # these two RET_FALSE stubs before any non-debug deploy. NOTE: offsets
-    # below are still the v170.0.03 ones - not re-derived since inactive.
-    # (0x3198970, "deck-reload", bytes.fromhex("ff0302d1fd7b02a9"), RET_FALSE),
-    # (0x3197894, "deck-reload2", bytes.fromhex("ff4305d1eb2b0d6d"), RET_FALSE),
+    # DeckPanel.ReloadDeck / DeckPanel.Reload once had RET_FALSE stubs here. They were
+    # dropped on 2026-07-02 to capture the real crash and have never been needed since -
+    # the lobby renders without them. Don't re-add without re-deriving the offsets.
     # PvPPanel.<Init>d__77.MoveNext -> early return.
     # v170.1.00 offset derived by shifting v170.0.03 Offset 0x324BB70 by -0x1674
     # (PvP-region shift, verified via GetReceivableWinRewardCount at 0x3245178).

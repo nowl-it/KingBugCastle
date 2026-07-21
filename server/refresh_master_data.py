@@ -20,7 +20,7 @@ track the deployed client APK, not the newest game version (see docs).
 
 After a successful run: restart uvicorn + clear the device UnityCache before launch.
 """
-import sys, os, re, json, shutil, subprocess, pathlib, glob, tempfile
+import sys, re, json, subprocess, pathlib, glob, tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent           # server/
 REPO = ROOT.parent

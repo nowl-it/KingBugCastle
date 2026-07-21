@@ -130,7 +130,10 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
 
 def replace_xigncode(apk_path):
     print(f"[*] Replacing libxigncode.so with stub in {apk_path.name}...")
-    stub_data = (REPO / "server" / "jni" / "libxigncode.so").read_bytes()
+    # Same canonical stub rebuild_arm64.py uses. There used to be a second copy at
+    # jni/libxigncode.so that only this build read, and the two silently drifted a day
+    # apart - one arm64 stub, one path. stub.cpp branches on v170/v171 at runtime.
+    stub_data = (REPO / "server" / "xigncode_stub" / "arm64" / "libxigncode.so").read_bytes()
     tmp = pathlib.Path(tempfile.mktemp(suffix=".apk"))
     with zipfile.ZipFile(apk_path, "r") as zin:
         with zipfile.ZipFile(tmp, "w") as zout:

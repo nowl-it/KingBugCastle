@@ -9,7 +9,7 @@ every other entry's raw bytes verbatim (cheap: assets are ZIP_STORED).
 
 Usage: python3 patch_package_id_light.py <apk> <old_pkg> <new_pkg>
 """
-import sys, zipfile, zlib, struct, pathlib, shutil
+import sys, zipfile, struct, pathlib, shutil
 
 APK = pathlib.Path(sys.argv[1]).resolve()
 OLD = sys.argv[2]

@@ -9,10 +9,10 @@ state persistence for cards, decks, inventory, missions, and game loop.
 
 Run:  uvicorn server:app --host 0.0.0.0 --port 8080
 """
-import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, threading, hashlib, os, sys, subprocess
+import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, hashlib, os, sys
 import playerdb
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse, PlainTextResponse, Response, HTMLResponse
+from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
 
 AES_KEY = b"b53019bb76da6b34"
@@ -593,7 +593,7 @@ def r_game_complete(body, st):
     win = body.get("win", False)
     theme = body.get("theme", 1)
     stage = body.get("stage", 1)
-    gs = _game_store.pop(gid, {})
+    _game_store.pop(gid, None)
     add_gold = gc["baseGold"] + theme * gc["goldPerTheme"] + (gc["winBonusGold"] if win else 0)
     add_exp = gc["baseExp"] + theme * gc["expPerTheme"]
     st["gold"] += add_gold
@@ -1397,10 +1397,10 @@ async def respond(path: str, request: Request):
     if raw:
         try:
             body = aes_decrypt(raw)
-        except Exception as e1:
+        except Exception:
             try:
                 body = json.loads(raw)
-            except Exception as e2:
+            except Exception:
                 if path == "/deck/set":
                     admin_log(f"[DECK/SET DECRYPT FAIL] raw_len={len(raw)} raw_hex={raw[:64].hex()}")
                 body = {}
@@ -1488,7 +1488,6 @@ async def rift_weapon_inventory_direct(request: Request):
 @app.get("/invasion/record")
 @app.post("/invasion/record")
 async def invasion_record_direct(request: Request):
-    st = load_state()
     host = request.headers.get("host", "?")
     admin_log(f"  [{host}] DIRECT /invasion/record -> InvasionRecordsResponseModel")
     
@@ -1641,18 +1640,8 @@ async def post_receive_direct(request: Request):
 @app.get("/pvp/info")
 @app.post("/pvp/info")
 async def pvp_info_direct(request: Request):
-    st = load_state()
+    # The response is fixed config, so the request body is never read - don't decrypt it.
     host = request.headers.get("host", "?")
-    body = {}
-    raw = await request.body()
-    if raw:
-        try:
-            body = aes_decrypt(raw)
-        except Exception:
-            try:
-                body = json.loads(raw)
-            except Exception:
-                body = {}
     payload = {"code": 200, "msg": None, "success": True}
     payload.update(RCFG["pvpInfoDirect"])
     admin_log(f"[{host}] PVP DIRECT /pvp/info -> seasonUntilAtDates={len(payload['seasonUntilAtDates'])}")

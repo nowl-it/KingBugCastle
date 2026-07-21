@@ -5,7 +5,7 @@ Rules: KGC_ADMIN_TOKEN set -> the token is required from everyone; unset ->
 loopback only. serve_public.sh refuses to start without a token, because behind a
 tunnel every request looks like loopback.
 """
-import os, sys, pathlib, tempfile
+import sys, pathlib, tempfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 

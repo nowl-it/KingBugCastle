@@ -38,7 +38,6 @@ def main():
 
     st["riftCrystals"] = crystals
     playerdb.save(UID, st)
-    total = len(ALL_RIFT_WEAPON_IDS) * ALTAR_COUNT * (ALTAR_COUNT - 1)
     print(f"Deleted {old_count} old crystals")
     print(f"Created {len(crystals)} crystals ({len(ALL_RIFT_WEAPON_IDS)} weapons × {ALTAR_COUNT} main × {ALTAR_COUNT-1} sub)")
 
