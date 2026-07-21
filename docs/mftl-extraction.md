@@ -197,7 +197,72 @@ il2cpp/v171.0.00/
 `server/xml_live/` (server source, unrelated to NEO).
 
 Re-running the unpack on a future NEO build only needs the original
-`libaledatic.so` from that version's `config.arm64_v8a.apk` plus this recipe.
+packer `.so` from that version's `config.arm64_v8a.apk` plus this recipe.
+It is no longer called `libaledatic.so` - see the next section.
+
+---
+
+## v171.0.01: NEO repack, names rotated, payload no longer compressed
+
+Released 2026-07-22, one day after the 2026_07_21 master-data patch. It is an
+**anti-cheat-only release: zero gameplay content changed.** Evidence, all three
+independent:
+
+- **Addressables catalog**: 10,324 `m_InternalIds` in both builds, and the only
+  differing entry is the prefabs bundle's own content-hash filename
+  (`prefabs_assets_all_c4e16f42….bundle` → `…_e47d8bf5….bundle`). No asset added,
+  removed, or renamed. That bundle is +17 bytes with an identical block table and
+  the same Unity `2022.3.62f3` - a rebuild artifact, not new content.
+- **global-metadata.dat** (+16 B): exactly four string changes, listed below.
+- **CDN**: still `2026_07_21`, same xml bundle etag `bd378814…`.
+
+### What actually changed
+
+| | v171.0.00 | v171.0.01 |
+|---|---|---|
+| Packer lib | `libaledatic.so`, 25 MB | `librolineng.so`, **114,492,014 B** |
+| NEO data blob (base apk) | `assets/usinisse.wio` | `assets/kisessta.fis` |
+| XIGNCODE exports | - | `ZCWAVE_GetCookie2`, `ZCWAVE_SetUserInfo` |
+| Backend endpoint | `/auth/xcdSeed` | + `/auth/xcdSeed?version=` |
+| Unity package build hash | `1.0.0+f8109562…` | `1.0.0+253f024e…` |
+
+Both packer libs carry `SONAME = libappsign4a.so`, so the on-disk filename is
+rotated per build - **never key an unpack script off the filename**; match the
+SONAME, or just take the one `.so` in the config split that has no `libunity`/
+`libmain`/Firebase name.
+
+The renamed asset and lib are *not* in `global-metadata.dat` (they live in the
+dex loader), which is why the metadata delta is only 16 bytes.
+
+### The payload stopped being compressed
+
+`librolineng.so` is one 111 MB `PT_LOAD` R segment at file offset `0x344000`
+(`FileSiz 0x69ec26d`, ending exactly at EOF). Entropy sampled across it:
+
+```
+  0.0 MB  7.98   encrypted/packed header
+  2-22 MB 3.0    low - structured tables (pointer arrays)
+ 24-95 MB 6.1-6.7  ARM64 machine code, in the clear
+ 97-102 MB 0.00  zero padding
+```
+
+`grep -ac` finds plaintext `il2cpp` (21), `UnityEngine` (30), `mscorlib` (13)
+inside it. The old build was a 25 MB AES+LZMA blob at 7.99 entropy end to end.
+So the AES-256-CBC → LZMA stage of this recipe appears to be **gone**, replaced
+by a mostly-cleartext memory image. If a future build ever needs unpacking,
+start by carving that segment - do not assume the five-layer chain still applies.
+
+### Why the mod was not rebuilt for it
+
+Nothing to gain. The private server does not validate XIGNCODE, so the hardened
+anti-cheat is irrelevant to it, and the content is byte-for-byte the same game.
+`server/build_v171_private.py` stays pinned to the archived
+`apk/com.awesomepiece.castle@171.0.00.xapk`. `apk/com.awesomepiece.castle@171.0.01.xapk`
+is archived for reference only.
+
+`scripts/check_cdn_update.sh` now also watches the store version - the CDN folder
+and the client release move independently, and this one was invisible to the
+old folder-and-etag check.
 
 ---
 

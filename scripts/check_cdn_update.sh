@@ -115,6 +115,38 @@ fi
 
 echo ""
 
+# ─── Client APK version ─────────────────────────────────────────
+# The store client and the CDN patch folder move independently: on 2026-07-22 the
+# store went 171.0.00 → 171.0.01 while the CDN stayed on 2026_07_21. Watching only
+# the CDN misses client-side releases entirely (that one was a XIGNCODE repack).
+# Every lookup here ends in `|| true` - `set -e` plus a no-match kills the script.
+echo -e "${CYAN}── Client APK version ──${NC}"
+VER_FILE="$HOME/.local/share/kgc_last_apk_version"
+store_ver=""
+if command -v apkeep &>/dev/null; then
+    store_ver=$(apkeep -a com.awesomepiece.castle -l 2>/dev/null \
+        | grep '^|' | tr ',' '\n' | tr -d '| ' | grep -E '^[0-9.]+$' | sort -V | tail -1 || true)
+fi
+local_ver=$(ls -1 "$PROJECT_DIR/apk"/com.awesomepiece.castle@*.xapk 2>/dev/null \
+    | sed 's/.*@//; s/\.xapk$//' | sort -V | tail -1 || true)
+last_ver=""
+[[ -f "$VER_FILE" ]] && last_ver=$(cat "$VER_FILE")
+
+echo -e "  Store latest:  ${BOLD}${store_ver:-"(unavailable)"}${NC}"
+echo -e "  Local archive: ${BOLD}${local_ver:-"(none)"}${NC}"
+
+if [[ -n "$store_ver" && "$store_ver" != "$local_ver" ]]; then
+    echo -e "${GREEN}${BOLD}[★] NEW CLIENT VERSION: ${local_ver:-"(none)"} → ${store_ver}${NC}"
+    echo -e "  ${YELLOW}▸${NC} ${DIM}apkeep -a com.awesomepiece.castle@${store_ver} -d apk-pure apk/${NC}"
+    if [[ "$store_ver" != "$last_ver" ]]; then
+        curl -sf -H "Title: 🏰 KGC client ${store_ver}" -H "Tags: game,kgc,update" \
+            -d "Store có client mới: ${local_ver:-"(none)"} → ${store_ver}. CDN vẫn ở ${latest}." \
+            "$NTFY_TOPIC" &>/dev/null || true
+    fi
+fi
+[[ -n "$store_ver" ]] && echo "$store_ver" > "$VER_FILE"
+echo ""
+
 # ─── Bundle fingerprint ─────────────────────────────────────────
 # The devs republish the SAME patch folder in place (seen 2026-07-20: the
 # 2026_07_14 xml bundle was overwritten with a localization pass, an Audakia
