@@ -90,11 +90,15 @@ def main():
     if NO_BUMP or not patch_date:
         print("[5/5] patchFolder bump skipped")
     else:
-        cfg = json.loads(CONFIG.read_text())
-        old = cfg["server"]["patchFolder"]
+        # Surgical string replace, not a json.load/dumps round-trip: the file is
+        # hand-indented and full of long _comment keys, and re-serializing it turns a
+        # one-word bump into a 500-line reformat diff.
+        raw = CONFIG.read_text()
+        old = json.loads(raw)["server"]["patchFolder"]
         if old != patch_date:
-            cfg["server"]["patchFolder"] = patch_date
-            CONFIG.write_text(json.dumps(cfg, indent=2) + "\n")
+            new = re.sub(r'("patchFolder"\s*:\s*")[^"]+(")', r"\g<1>%s\g<2>" % patch_date, raw, count=1)
+            assert json.loads(new)["server"]["patchFolder"] == patch_date, "patchFolder bump did not take"
+            CONFIG.write_text(new)
             print(f"[5/5] patchFolder {old} -> {patch_date}")
         else:
             print(f"[5/5] patchFolder already {patch_date}")

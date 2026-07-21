@@ -103,11 +103,14 @@ else
     echo -e "  Local IOS snapshots: ${DIM}(none)${NC}"
 fi
 
-# Check server PATCH_FOLDER
+# Check the server's advertised patchFolder (lives in response_config.json, not server.py).
+# Every lookup here must be non-fatal: `set -e` turns a no-match grep into a silent abort
+# that skips the etag/republish section below - that bug hid a republish once already.
 server_patch=""
-if [[ -f "$PROJECT_DIR/server/server.py" ]]; then
-    server_patch=$(grep -oP 'PATCH_FOLDER\s*=\s*"([^"]+)"' "$PROJECT_DIR/server/server.py" | grep -oP '"[^"]+"' | tr -d '"')
-    echo -e "  Server PATCH_FOLDER: ${BOLD}${server_patch:-"(not set)"}${NC}"
+cfg="$PROJECT_DIR/server/data/response_config.json"
+if [[ -f "$cfg" ]]; then
+    server_patch=$(grep -oP '"patchFolder"\s*:\s*"\K[^"]+' "$cfg" || true)
+    echo -e "  Server patchFolder: ${BOLD}${server_patch:-"(not set)"}${NC}"
 fi
 
 echo ""

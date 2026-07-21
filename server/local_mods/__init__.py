@@ -48,6 +48,10 @@ def _write(p, s):
 
 
 # ── 1. CCRatio -100 (crowd-control immune) -> 0 ───────────────────────────────
+# The devs did this themselves in patch 2026_07_21 - 135 bosses went -100 -> 0 - so as of
+# that snapshot this mod only still bites unit 30000000, the new Story-Challenge boss they
+# deliberately left immune. Keep it: it is a no-op when there is nothing left to zero, and
+# a revert on their side silently restores boss CC-immunity otherwise.
 def _apply_ccratio(xml_dir, warns):
     p = pathlib.Path(xml_dir) / "Units.xml"
     txt = _read(p)

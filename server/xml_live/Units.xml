@@ -35251,6 +35251,7 @@
 		<AttackMana>0</AttackMana>
 		<DamagedManaRatio>0</DamagedManaRatio>
 		<CanIce>false</CanIce>
+		<CCRatio>0</CCRatio>
 
 		<AIType>HpShareAI</AIType>
 		<ReBatch>false</ReBatch>
