@@ -65,6 +65,15 @@ ROUTE_MODELS.update({
     "/treasure/set-state": {"method": "TreasureSetState", "response": "TreasureResultResponseModel"},
     "/treasure/overcome": {"method": "TreasureOvercome", "response": "TreasureResultResponseModel"},
 })
+# map_routes.py pairs a route with a RestAPI method by name similarity and drops
+# what it cannot score, so 70 real v171 routes had no model and were answered with a
+# bare ResponseModel - the right envelope, none of the fields the client reads.
+# data/route_models_extra.json hand-maps them; route_coverage.py reports the gap.
+ROUTE_MODELS.update({
+    p: {"method": v.get("_method"), "response": v["response"]}
+    for p, v in json.loads((ROOT / "data" / "route_models_extra.json").read_text()).items()
+    if not p.startswith("_")
+})
 STATE_DIR = ROOT / "state"
 STATE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -1515,13 +1524,10 @@ async def respond(path: str, request: Request):
         CURRENT_LOGIN_ID.set(request.query_params.get("id") or body.get("id") or "")
     overlay = OVERRIDES[path](body, st) if path in OVERRIDES else None
     if overlay is None and path not in ROUTE_MODELS:
-        model_name = "ResponseModel"
-        if "/territory/recover-labor" in path: model_name = "TerritoryRecoverLaborResponseModel"
-        elif "/invasion/reward" in path: model_name = "ReceiveInvasionRewardResponseModel"
-        elif "/mission/check" in path: model_name = "MissionResponseModel"
-        else:
-            admin_log(f"[UNKNOWN PATH] {request.method} {path}")
-        info = {"response": model_name, "method": None}
+        # Every route the v171 client can call is now mapped (route_models.json plus
+        # data/route_models_extra.json), so reaching here means either a route the
+        # string-table scan missed or a client newer than this server.
+        admin_log(f"[UNKNOWN PATH] {request.method} {path}")
     payload = build_model(info["response"], overlay)
     admin_log(f"[{host}] {request.method} {path} -> {info.get('response')}")
     return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})

@@ -93,9 +93,10 @@
   },
   "/mission/roguelike/check": {},
   "/mission/roguelike/update": {},
-  "/ranking": {
-    "rankings": [],
-    "myRank": 0
+  "/ranking/ranking": {
+    "rankingType": 0,
+    "ranking": [],
+    "playerRank": 0
   },
   "/story-mode": {
     "storyClearInfos": []
@@ -166,7 +167,7 @@
     "nameTags": []
   },
   "/nameTag/set": {},
-  "/incgame-coupon": {},
+  "/ingame-coupon": {},
   "/test/roguelike/reset-all-mission": {},
   "/test/set-dimension-rift-ranking": {},
   "/shop": {
