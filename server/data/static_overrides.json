@@ -86,11 +86,6 @@
   },
   "/mission/roguelike/check": {},
   "/mission/roguelike/update": {},
-  "/ranking/ranking": {
-    "rankingType": 0,
-    "ranking": [],
-    "playerRank": 0
-  },
   "/story-mode": {
     "storyClearInfos": []
   },

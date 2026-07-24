@@ -2195,6 +2195,90 @@ def r_dimension_overcome(body, st):
                                     XML_DIR),
             "remainTicket": _item_count(st, dimension.TICKET)}
 
+# --- Leaderboards -------------------------------------------------------------
+# Every board answered an empty model, so each one rendered as a blank list with no
+# row for the player either. There is nobody else on a private server, so the honest
+# board is one row: you, first. An empty `ranking` with a filled `playerRank` is not
+# the same thing - several panels read the list to find themselves and show "unranked"
+# when they cannot.
+
+def _rank_row(st, score=0, extra=None):
+    d = _PC["defaults"]
+    deco = _deco(st)
+    row = {"rank": 1, "score": int(score),
+           "accountId": st.get("accountId", d["accountId"]),
+           "userName": st.get("name", d["name"]),
+           "castleName": st.get("castleName", d["castleName"]),
+           "kingPostfix": 0, "castlePostfix": 0,
+           "flagId": deco["flag"]["flagId"], "nameTagId": deco["nameTag"],
+           "profileIcon": d["profileIconId"], "tier": 0}
+    row.update(extra or {})
+    return row
+
+def _board(st, score=0, extra=None, player_key="playerRank"):
+    row = _rank_row(st, score, extra)
+    return {"ranking": [row], player_key: dict(row)}
+
+def r_ranking(body, st):
+    """The generic board. `score` is a long here and `deck` replaces the cosmetics."""
+    d = _PC["defaults"]
+    row = {"rank": 1, "score": int(st.get("bestClearedTheme", 0)) * 100
+                               + int(st.get("bestClearedStage", 0)),
+           "accountId": st.get("accountId", d["accountId"]),
+           "userName": st.get("name", d["name"]),
+           "castleName": st.get("castleName", d["castleName"]),
+           "kingPostfix": 0, "castlePostfix": 0,
+           "deck": _deck_units(st)}
+    return {"rankingType": str(body.get("rankingType", "")), "ranking": [row],
+            "playerRank": dict(row)}
+
+def _deck_units(st):
+    """The current preset's hero ids. The board draws these as portraits, so an empty
+    list is a row of blank slots - fall back to the first non-empty preset rather than
+    show nothing when the selected one has never been filled."""
+    decks = st.get("decks") or []
+    cur = st.get("currentDeckPreset", 0)
+    order = ([decks[cur]] if cur < len(decks) else []) + list(decks)
+    for deck in order:
+        units = deck.get("deck", []) if isinstance(deck, dict) else deck
+        got = [u for u in units if isinstance(u, int) and u]
+        if got:
+            return got
+    return []
+
+def r_pvp_ranking(body, st):
+    return _board(st, st.get("pvpScore", 0), {"tier": st.get("pvpTier", 0)})
+
+def r_colosseum_ranking(body, st):
+    return _board(st, st.get("colosseumScore", 0), {"tier": st.get("colosseumTier", 0)})
+
+def r_roguelike_ranking(body, st):
+    return _board(st, st.get("rogueLikeScore", 0),
+                  {"challenge": st.get("rogueLikeChallenge", 0),
+                   "building": st.get("rogueLikeBuilding", 0)})
+
+def r_challenge_ranking(body, st):
+    cs = _challenge_state(st)
+    row = _rank_row(st, cs.get("bestDifficulty", 0))
+    # ChallengeModeRankingData has no flag/nameTag/tier but does carry a percentile.
+    for k in ("flagId", "tier"):
+        row.pop(k, None)
+    row["rankPer"] = 100.0
+    return {"ranking": [row], "playerRank": dict(row)}
+
+def r_clan_point_ranking(body, st):
+    """Clans are their own entity, and there is exactly one here: the player's."""
+    row = {"rank": 1, "clanPoint": st.get("clanPoint", 0), "clanTier": 0,
+           "battleTier": 0, "clanId": st.get("clanId", 0),
+           "clanName": st.get("clanName", ""), "markId": 0}
+    return {"ranking": [row] if row["clanId"] else [], "playerClanRank": row}
+
+def r_unit_statistics(body, st):
+    """Usage rates across the playerbase. One player means no meaningful sample, and
+    inventing one would put fake percentages under real hero names."""
+    return {"topPotentialUsage": [], "topTreasureUsage": [], "topAccessoryUsage": []}
+
+
 # --- Babel: the six towers ----------------------------------------------------
 
 def _babel(st):
@@ -2521,6 +2605,19 @@ DYNAMIC_OVERRIDES = {
     "/game": r_game_start,
     "/game/revive": r_game_revive,
     "/babel": r_babel,
+    "/ranking/ranking": r_ranking,
+    "/ranking/pvp-ranking": r_pvp_ranking,
+    "/ranking/pvp-hall-of-fame": r_pvp_ranking,
+    "/ranking/pvp-league-ranking": r_pvp_ranking,
+    "/ranking/colosseum-ranking": r_colosseum_ranking,
+    "/ranking/colosseum-hall-of-fame": r_colosseum_ranking,
+    "/ranking/colosseum-league-ranking": r_colosseum_ranking,
+    "/ranking/roguelike-ranking": r_roguelike_ranking,
+    "/ranking/roguelike-building-ranking": r_roguelike_ranking,
+    "/ranking/dimension-rift-ranking": r_roguelike_ranking,
+    "/ranking/challenge-mode-ranking": r_challenge_ranking,
+    "/ranking/clan-point-ranking": r_clan_point_ranking,
+    "/statistics/unit": r_unit_statistics,
     "/player/dailyAttendanceEvents": r_daily_attendance_events,
     "/player/surprise-attendance-event": r_surprise_attendance,
     "/player/surprise-attendance-event-daily-attendance-reward": r_surprise_attendance_reward,
