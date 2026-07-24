@@ -21,12 +21,6 @@
     "matchMakingSecond": 0
   },
   "/clan/attendance": {},
-  "/clan/fetchChat": {
-    "chats": []
-  },
-  "/clan/refreshChat": {
-    "chats": []
-  },
   "/clan/search": {
     "clans": [],
     "totalCount": 0

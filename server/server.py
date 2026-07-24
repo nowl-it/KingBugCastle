@@ -1684,6 +1684,236 @@ def r_clan(body, st):
     # god account that never joined one.
     return {"clan": None, "role": 0, "requestSupportCooltime": now_iso(-1)}
 
+# --- Clan ---------------------------------------------------------------------
+# A private server has one player, so it has a clan of one. All 28 remaining clan
+# routes answered an empty model: the clan could be created but never read back,
+# renamed, chatted in, or left.
+#
+# Constants.ClanRole: Requested -1, None 0, Member1..3 1..3, SubMaster 9, Master 10.
+# The old /clan/create lambda handed the founder role 1, so the client hid every
+# management control from the person who had just made the clan.
+CLAN_MASTER = 10
+CLAN_REQUESTED = -1
+
+def _clan(st):
+    return st.get("clan")
+
+def _clan_new(st, body):
+    c = dict(RCFG["clanCreate"])
+    c.update({
+        "id": 1,
+        "name": (body.get("name") or "Clan").strip(),
+        "markId": int(body.get("markId", body.get("mark", 0)) or 0),
+        "language": int(body.get("language", 0) or 0),
+        "keywords": list(body.get("keywords") or []),
+        "joinType": int(body.get("joinType", 0) or 0),
+        "intro": body.get("intro", ""),
+        "notice": body.get("notice", ""),
+        "tag": body.get("tag", ""),
+        "point": 0, "tier": 0, "battleTier": 0,
+        "contribution": 0, "weeklyContribution": 0,
+        "roleNames": [], "chats": [], "seq": 0,
+    })
+    st["clan"] = c
+    st["clanId"] = c["id"]
+    st["clanName"] = c["name"]
+    return c
+
+def _clan_member(st):
+    d = _PC["defaults"]
+    deco = _deco(st)
+    c = _clan(st) or {}
+    return {"accountId": st.get("accountId", d["accountId"]), "role": CLAN_MASTER,
+            "castleName": st.get("castleName", d["castleName"]),
+            "userName": st.get("name", d["name"]),
+            "contribution": c.get("contribution", 0),
+            "weeklyContribution": c.get("weeklyContribution", 0),
+            "profileIconId": d["profileIconId"], "profileIconBackgroundId": 0,
+            "flagId": deco["flag"]["flagId"], "nameTagId": deco["nameTag"],
+            "lastLogined": now_iso(0), "playerLevel": st.get("level", 1)}
+
+def _clan_model(st):
+    c = _clan(st)
+    if not c:
+        return None
+    d = _PC["defaults"]
+    return {"id": c["id"], "name": c["name"], "markId": c.get("markId", 0),
+            "language": c.get("language", 0), "keywords": c.get("keywords", []),
+            "joinType": c.get("joinType", 0), "intro": c.get("intro", ""),
+            "battleTier": c.get("battleTier", 0), "tier": c.get("tier", 0),
+            "point": c.get("point", 0), "contribution": c.get("contribution", 0),
+            "weeklyContribution": c.get("weeklyContribution", 0),
+            "memberCount": 1, "maxMemberCount": c.get("maxMemberCount", 30),
+            "masterName": st.get("name", d["name"]),
+            "masterAccountId": st.get("accountId", d["accountId"]),
+            "nameBanned": False, "roleNames": c.get("roleNames", []),
+            "notice": c.get("notice", ""), "members": [_clan_member(st)],
+            "chats": c.get("chats", []), "joinRequests": [],
+            "goldBonusTier": 0,
+            # The only member is the master, so there is nobody to hand it to.
+            "canMandateMaster": False,
+            "clanRaidRank": 1 if c else 0, "clanPointRank": 1 if c else 0,
+            "weeklyClanPointRank": 1 if c else 0}
+
+def r_clan(body, st):
+    """The clan the player is in, or null.
+
+    clan:null keeps GameManager.HasClan() false, which is right for an account that
+    never joined one - a fake clan object here would show every account a clan it
+    does not have."""
+    c = _clan(st)
+    return {"clan": _clan_model(st), "role": CLAN_MASTER if c else 0,
+            "requestSupportCooltime": now_iso(-1),
+            "supportCompletedModel": None,
+            "seasonUntilAtDate": next_reset_iso(7),
+            "nextSeasonStartAtDate": next_reset_iso(8),
+            "clanRaidEnabled": bool(c),
+            "clanRaidUntilAtDate": next_reset_iso(7),
+            "nextClanRaidStartAtDate": next_reset_iso(8),
+            "canReceiveClanPointAt": now_iso(-1),
+            "canPlayClanRaidAt": now_iso(-1),
+            "clanRaidLockedByLeaveUntilAt": now_iso(-1)}
+
+def r_clan_create(body, st):
+    if not _clan(st):
+        _clan_new(st, body)
+        save_state(st)
+    return r_clan(body, st)
+
+def _clan_modify(field, cast=str):
+    """Most of the clan management routes set one field and re-read the clan."""
+    def handler(body, st, _f=field, _c=cast):
+        c = _clan(st)
+        if c is not None:
+            for key in (_f, "name", "value"):
+                if key in body:
+                    c[_f] = _c(body[key])
+                    break
+            if _f == "name":
+                st["clanName"] = c["name"]
+            save_state(st)
+        return r_clan(body, st)
+    return handler
+
+def r_clan_leave(body, st):
+    """Leaving disbands it: there is nobody left to inherit a clan of one."""
+    st.pop("clan", None)
+    st["clanId"] = 0
+    st["clanName"] = ""
+    save_state(st)
+    return r_clan(body, st)
+
+def r_clan_name_check(body, st):
+    """Nothing to collide with on a one-player server, so every name is free. The
+    response is still the full clan read - the panel re-renders from it."""
+    return r_clan(body, st)
+
+def r_clan_chat(body, st):
+    """Post a line. Chat lives in the clan record so it survives a restart, and is
+    trimmed - the client re-reads the whole list on every refresh."""
+    c = _clan(st)
+    if c is None:
+        return {"chats": []}
+    msg = body.get("message", body.get("text", ""))
+    if msg:
+        c["seq"] = c.get("seq", 0) + 1
+        c.setdefault("chats", []).append({
+            "seqId": c["seq"], "type": int(body.get("type", 0) or 0),
+            "accountId": st.get("accountId", _PC["defaults"]["accountId"]),
+            "sender": st.get("name", _PC["defaults"]["name"]),
+            "message": msg, "targetUnit": int(body.get("targetUnit", 0) or 0),
+            "count": 0, "maxCount": 0, "createdAt": now_iso(0), "canSupport": False})
+        c["chats"] = c["chats"][-100:]
+        save_state(st)
+    return {"chats": c.get("chats", [])}
+
+def r_clan_fetch_chat(body, st):
+    c = _clan(st) or {}
+    return {"chats": c.get("chats", [])}
+
+def r_clan_delete_chat(body, st):
+    c = _clan(st)
+    if c is not None:
+        seq = int(body.get("seqId", body.get("id", 0)) or 0)
+        c["chats"] = [m for m in c.get("chats", []) if m["seqId"] != seq]
+        save_state(st)
+    return r_clan_fetch_chat(body, st)
+
+def r_clan_seq(body, st):
+    return {"seqId": (_clan(st) or {}).get("seq", 0)}
+
+def r_clan_role_name(body, st):
+    """roleNames is a sparse list of {role, name} overrides, so a renamed rank
+    replaces its entry rather than appending a second one for the same role."""
+    c = _clan(st)
+    if c is not None:
+        role = int(body.get("role", 0) or 0)
+        name = body.get("name", "")
+        names = [r for r in c.get("roleNames", []) if r.get("role") != role]
+        if name:
+            names.append({"role": role, "name": name})
+        c["roleNames"] = names
+        save_state(st)
+    return r_clan(body, st)
+
+def r_clan_noop_member(body, st):
+    """Ban/promote/demote/mandate/kick, and the join-request flow.
+
+    There is exactly one member and they are the master, so every one of these is a
+    no-op by construction rather than by omission - answering the clan read keeps the
+    panel consistent instead of leaving it on stale data."""
+    return r_clan(body, st)
+
+def r_clan_raid_deck(body, st):
+    c = _clan(st) or {}
+    decks = c.setdefault("raidDecks", []) if _clan(st) else []
+    if _clan(st) is not None and (body.get("deck") or body.get("units")):
+        idx = int(body.get("index", 0) or 0)
+        while len(decks) <= idx:
+            decks.append({"index": len(decks), "name": "", "deck": [], "potential": []})
+        decks[idx] = {"index": idx,
+                      "name": body.get("name", decks[idx].get("name", "")),
+                      "deck": body.get("deck") or body.get("units") or [],
+                      "potential": body.get("potential") or []}
+        save_state(st)
+    return {"decks": decks, "bestDeck": decks[0] if decks else None}
+
+def r_clan_raid_delete_deck(body, st):
+    c = _clan(st)
+    if c is not None:
+        idx = int(body.get("index", -1))
+        decks = c.get("raidDecks", [])
+        if 0 <= idx < len(decks):
+            decks.pop(idx)
+            for i, d in enumerate(decks):
+                d["index"] = i
+            save_state(st)
+    return r_clan_raid_deck({}, st)
+
+def r_clan_raid_state(body, st):
+    """Damage is per member and there is one member, so the sum is the player's."""
+    d = _PC["defaults"]
+    dmg = (_clan(st) or {}).get("raidDamage", 0)
+    return {"memberDamages": [{"accountId": st.get("accountId", d["accountId"]),
+                               "userName": st.get("name", d["name"]),
+                               "damage": dmg}] if _clan(st) else [],
+            "totalDamage": dmg}
+
+def r_clan_raid_end(body, st):
+    c = _clan(st)
+    if c is not None:
+        c["raidDamage"] = max(c.get("raidDamage", 0), int(body.get("damage", 0) or 0))
+        save_state(st)
+    return dict(STATIC_OVERRIDES["/clan/raid"])
+
+def r_clan_support(body, st):
+    """Support is one member handing another a hero. With one member there is nobody
+    to ask and nobody to answer, so the lists stay empty and the cooldown stays clear
+    rather than pretending a request is pending."""
+    return {"supports": [], "requestSupportCooltime": now_iso(-1),
+            "supportCompletedModel": None}
+
+
 def r_pass(body, st):
     c = RCFG["pass"]
     out = {"seasonStartAtDate": now_iso(c["seasonStartDayOffset"]),
@@ -2537,8 +2767,37 @@ DYNAMIC_OVERRIDES = {
     "/rift-weapon/buy-rift-gauge": r_rift_weapon,
     "/clan": r_clan,
     "/clan/info": r_clan,
-    "/clan/create": lambda b, st: {"clan": {**RCFG["clanCreate"], "id": 1, "name": b.get("name", "DevClan"),
-        "masterName": st.get("name", "DevKing")}, "role": 1, "requestSupportCooltime": now_iso(0)},
+    "/clan/create": r_clan_create,
+    "/clan/leave": r_clan_leave,
+    "/clan/delete": r_clan_leave,
+    "/clan/nameCheck": r_clan_name_check,
+    "/clan/modify-name": _clan_modify("name"),
+    "/clan/modifyIntro": _clan_modify("intro"),
+    "/clan/modifyNotice": _clan_modify("notice"),
+    "/clan/modifyTag": _clan_modify("tag"),
+    "/clan/modifyMark": _clan_modify("markId", int),
+    "/clan/modifyJoinType": _clan_modify("joinType", int),
+    "/clan/changeRoleName": r_clan_role_name,
+    "/clan/chat": r_clan_chat,
+    "/clan/fetchChat": r_clan_fetch_chat,
+    "/clan/refreshChat": r_clan_fetch_chat,
+    "/clan/deleteChat": r_clan_delete_chat,
+    "/clan/currentSeq": r_clan_seq,
+    "/clan/banMember": r_clan_noop_member,
+    "/clan/changeMaster": r_clan_noop_member,
+    "/clan/mandateMaster": r_clan_noop_member,
+    "/clan/changeMemberRole": r_clan_noop_member,
+    "/clan/requestJoin": r_clan_noop_member,
+    "/clan/processRequestJoin": r_clan_noop_member,
+    "/clan/raid/deck": r_clan_raid_deck,
+    "/clan/raid/best-deck": r_clan_raid_deck,
+    "/clan/raid/deck-name": r_clan_raid_deck,
+    "/clan/raid/delete-deck": r_clan_raid_delete_deck,
+    "/clan/raid/currentState": r_clan_raid_state,
+    "/clan/raid/end": r_clan_raid_end,
+    "/clan/raid/support": r_clan_support,
+    "/clan/support": r_clan_support,
+    "/clan/requestSupport": r_clan_support,
     "/pass": r_pass,
     "/pass/reward": r_pass,
     "/pass/all-rewards": r_pass,
