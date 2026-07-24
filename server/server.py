@@ -17,6 +17,7 @@ import missions
 import challenge
 import territory
 import decoration
+import dimension
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
@@ -390,6 +391,11 @@ def card_to_dict(c):
         "originLevel": c["level"], "originPotentialTier": c.get("potentialTier", 0),
         "isLevelSynced": False, "isTemporaryRecruited": False,
         "createdAt": now_iso(-30),
+        # Null for an ordinary hero, which is correct; a dimension hero needs it or
+        # its sync panel opens with no level, no gauge and no next cost.
+        "dimensionUnit": dimension.model(c["unitId"], c.get("dimensionLevel", 0),
+                                         c.get("dimensionGauge", 0),
+                                         c.get("overcome", 0), XML_DIR),
     }
 
 def cards_list(st):
@@ -2120,6 +2126,82 @@ def r_advisor_equip(body, st):
     return _deco_full(st)
 
 
+# --- Dimension heroes ---------------------------------------------------------
+
+def _card(st, unit_id):
+    return st.setdefault("cards", {}).get(str(unit_id))
+
+def r_card(body, st):
+    """One card. The client asks for a single hero after upgrading it; answering with
+    the whole roster is wrong shape, and answering with nothing blanks the panel."""
+    unit_id = int(body.get("unitId", body.get("id", 0)) or 0)
+    c = _card(st, unit_id)
+    if c is None:
+        return {"unitId": unit_id, "level": 1, "exp": 0, "potentialTier": 0,
+                "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
+                "randomSkinApply": False, "playerGold": st.get("gold", 0),
+                "playerCash": st.get("cash", 0), "soul": 0, "originLevel": 1,
+                "originPotentialTier": 0, "isLevelSynced": False,
+                "isTemporaryRecruited": False, "createdAt": now_iso(-30),
+                "dimensionUnit": dimension.model(unit_id, xml_dir=XML_DIR)}
+    out = card_to_dict(c)
+    out["playerGold"] = st.get("gold", 0)
+    out["playerCash"] = st.get("cash", 0)
+    return out
+
+def r_dimension_upgrade(body, st):
+    """Spend 차원의 잔향 to raise one sync level.
+
+    One level per call, not one per affordable step: the panel animates a single
+    level-up and re-reads the card, so jumping several would desync the display from
+    the state it just paid for."""
+    unit_id = int(body.get("unitId", 0) or 0)
+    c = _card(st, unit_id)
+    if c is None or dimension.model(unit_id, xml_dir=XML_DIR) is None:
+        return r_card(body, st)
+    level = c.get("dimensionLevel", 0)
+    cost = dimension.next_cost(level, XML_DIR)
+    if cost and _item_count(st, dimension.REMNANT) >= cost:
+        _take_item(st, dimension.REMNANT, cost)
+        c["dimensionLevel"] = level + 1
+        c["dimensionGauge"] = 0
+        save_state(st)
+    return r_card(body, st)
+
+def r_dimension_overcome(body, st):
+    """Spend 차원 영웅 돌파권, one per step, up to OvercomeMax."""
+    unit_id = int(body.get("unitId", 0) or 0)
+    count = max(1, int(body.get("count", 1) or 1))
+    c = _card(st, unit_id)
+    if c is None or dimension.model(unit_id, xml_dir=XML_DIR) is None:
+        return {"unit": dimension.model(unit_id, xml_dir=XML_DIR),
+                "remainTicket": _item_count(st, dimension.TICKET)}
+    room = dimension.overcome_max(XML_DIR) - c.get("overcome", 0)
+    step = min(count, room, _item_count(st, dimension.TICKET))
+    if step > 0:
+        _take_item(st, dimension.TICKET, step)
+        c["overcome"] = c.get("overcome", 0) + step
+        save_state(st)
+    return {"unit": dimension.model(unit_id, c.get("dimensionLevel", 0),
+                                    c.get("dimensionGauge", 0), c.get("overcome", 0),
+                                    XML_DIR),
+            "remainTicket": _item_count(st, dimension.TICKET)}
+
+def r_game_revive(body, st):
+    """Reviving mid-battle. The coupon is free; otherwise it costs cash, and a player
+    who cannot pay must not be revived silently for nothing."""
+    gc = RCFG["gameComplete"]
+    if not body.get("useReviveCoupon"):
+        price = gc.get("revivePrice", 30)
+        if st.get("cash", 0) < price:
+            return {"msg": "not enough cash", "playerGold": st.get("gold", 0),
+                    "playerLevel": st.get("level", 1), "playerExp": st.get("exp", 0)}
+        st["cash"] -= price
+        save_state(st)
+    return {"addGold": 0, "addExp": 0, "playerGold": st.get("gold", 0),
+            "playerLevel": st.get("level", 1), "playerExp": st.get("exp", 0)}
+
+
 # Dynamic overrides: routes whose response genuinely depends on request-time
 # state/body (auth tokens, st.get() reads, mutations) or config wiring. Pure
 # literal responses live in data/static_overrides.json instead (merged in below).
@@ -2288,6 +2370,12 @@ DYNAMIC_OVERRIDES = {
     "/nameTag/inventory": r_nametag_inventory,
     "/nameTag/set": r_nametag_set,
     "/player/get-login-scene-illust-data": r_login_scene_illust,
+    "/card": r_card,
+    "/dimension-unit/upgrade": r_dimension_upgrade,
+    "/dimension-unit/overcome": r_dimension_overcome,
+    # The v171 client uses both spellings of the battle-start route.
+    "/game": r_game_start,
+    "/game/revive": r_game_revive,
 }
 
 # Pure-literal routes (no st/body dependency) load straight from JSON; wrap each
