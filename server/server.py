@@ -13,6 +13,7 @@ import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, hashl
 import playerdb
 import rewardbox
 import shop
+import missions
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
@@ -638,6 +639,11 @@ def r_game_complete(body, st):
         elif theme == st.get("bestClearedTheme", 0) and stage > st.get("bestClearedStage", 0):
             st["bestClearedStage"] = stage
     st["playedCount"] = st.get("playedCount", 0) + 1
+    bump(st, "playGame")
+    bump(st, "playTheme", sub=theme)
+    if win:
+        bump(st, "clearGame")
+        bump(st, "clearTheme", sub=theme)
     if st.get("exp", 0) >= gc["expPerLevel"]:
         st["level"] += st["exp"] // gc["expPerLevel"]
         st["exp"] = st["exp"] % gc["expPerLevel"]
@@ -1004,10 +1010,15 @@ def _shop_buy(body, st):
 
     if kind == "gold":
         st["gold"] = st.get("gold", 0) - cost
+        bump(st, "useGold", cost)
     elif kind == "cash":
         st["cash"] = st.get("cash", 0) - cost
     elif kind == "item":
         _take_item(st, cur_id, cost)
+    shop_counter = {"ArenaShop": "useArenaShop", "ClanShop": "useClanShop",
+                    "EventShop": "useEventShop"}.get(el.findtext("Type"))
+    if shop_counter:
+        bump(st, shop_counter, amount)
 
     rewards = []
     for r in shop.rewards_of(el):
@@ -1032,13 +1043,122 @@ def r_shop_refresh(body, st):
     save_state(st)
     return r_shop({}, st)
 
+def counters(st):
+    """Server-side progress tallies for the mission conditions this server can see.
+
+    Only the routes below write here, so a counter can never advance for something
+    that did not actually go through the server - see missions.py on why a mission it
+    cannot observe stays unclaimable rather than being marked complete."""
+    return st.setdefault("counters", {})
+
+def bump(st, key, n=1, sub=None):
+    c = counters(st)
+    if sub is None:
+        c[key] = c.get(key, 0) + n
+    else:
+        d = c.setdefault(key, {})
+        d[str(sub)] = d.get(str(sub), 0) + n
+
+def _claimed_missions(st):
+    return set(st.setdefault("claimedMissions", []))
+
+# Routes whose mere occurrence is a mission condition. Kept as a table applied in
+# respond() rather than an increment inside each handler, because several of these
+# paths share one handler (every /artifact/* mutation returns r_artifact_result), so
+# per-handler bumps could not tell them apart.
+_PATH_COUNTERS = {
+    "/artifact/crafting": "artifactCraft",
+    "/artifact/merge": "artifactMerge",
+    "/artifact/dismantle": "artifactDismantle",
+    "/artifact/polish": "artifactPolish",
+    "/artifact/set-reroll": "artifactReforge",
+    "/artifact/smart-reroll": "artifactReforge",
+    "/artifact/gacha": "artifactGacha",
+    "/accessory/dismantle": "accessoryDismantle",
+    "/accessory/add-exp": "accessoryLevelUp",
+    "/player/heart/recover": "chargeHeart",
+    "/pvp/matching": "playArena",
+    "/colosseum": "playArena",
+    "/clan/requestSupport": "clanSupport",
+    "/clan/support": "clanSupport",
+}
+
 def r_mission(body, st):
-    return {"missions": st.get("missions", []), "missionGoal": 0, "missionKeyStack": 0}
+    return {"missions": missions.listing(st, counters(st), _claimed_missions(st),
+                                         now_iso(0), XML_DIR),
+            "missionGoal": st.get("missionGoal", 0),
+            "missionKeyStack": st.get("missionKeyStack", 0)}
+
+def _grant_mission_reward(st, r):
+    """Apply one Missions.xml reward. Returns it in RewardResponseData shape.
+
+    A `Key` reward names a ShopItem: normally its <KeyItem> inventory row, but the
+    artifact boxes have no KeyItem and are counted in artifactBoxKey by box index
+    instead, so those go to a different store entirely."""
+    rt, rid, amt = r["type"], r["id"], r["count"]
+    if rt == "Key":
+        item = missions.key_item_for(rid, XML_DIR)
+        if item:
+            _grant_reward(st, "Item", item, amt)
+            return {"type": "Item", "id": item, "count": amt}
+        box = missions.artifact_box_for(rid, XML_DIR)
+        if box is not None:
+            keys = st.setdefault("artifactBoxKey", [0, 0, 0, 0])
+            while len(keys) <= box:
+                keys.append(0)
+            keys[box] += amt
+            return {"type": "ArtifactBoxKey", "id": box, "count": amt}
+        return {"type": "Key", "id": rid, "count": amt}
+    if rt == "CardOrSoul":
+        rt = "UnitSoul" if str(rid) in st.get("cards", {}) else "Unit"
+    if rt == "CardExp":
+        card = st.setdefault("cards", {}).get(str(rid))
+        if card is not None:
+            card["exp"] = card.get("exp", 0) + amt
+        return {"type": "CardExp", "id": rid, "count": amt}
+    if rt == "FixedAccessory":
+        acc = rewardbox.make_fixed_accessory(rid, _next_accessory_id(st), XML_DIR, now_iso(0))
+        if acc:
+            get_st_accessories(st).append(acc)
+            return {"type": "Accessory", "id": acc["id"], "count": 1}
+        return {"type": "FixedAccessory", "id": rid, "count": amt}
+    if rt in ("Gold", "Cash", "Heart", "Item", "Unit", "UnitSoul"):
+        _grant_reward(st, rt, rid, amt)
+    return {"type": rt, "id": rid, "count": amt}
+
+def _claim_missions(st, ids):
+    """Claim every cleared, unclaimed mission in `ids`. Returns the reward list."""
+    claimed = _claimed_missions(st)
+    catalog = missions.load(XML_DIR)
+    out = []
+    for mid in ids:
+        m = catalog.get(int(mid))
+        if m is None or int(mid) in claimed:
+            continue
+        if missions.progress(m, st, counters(st)) < missions.goal_value(m):
+            continue
+        for r in missions.rewards_of(m):
+            out.append(_grant_mission_reward(st, r))
+        claimed.add(int(mid))
+        bump(st, "missionClear")
+    st["claimedMissions"] = sorted(claimed)
+    save_state(st)
+    return out
 
 def r_mission_reward_all(body, st):
-    st["missions"] = []
-    save_state(st)
-    return {"missions": [], "missionGoal": 0, "missionKeyStack": 0}
+    """Claim missions. Despite the name this is also the single-mission claim.
+
+    GetMissionRewardAll takes a `missionIdList` (MissionRewardRequestModel), so the
+    client sends one id to claim one and several to claim a batch - there is no
+    separate per-mission route. An empty list means "everything I can claim"."""
+    ids = (body.get("missionIdList") or body.get("missionIds")
+           or ([body["missionId"]] if body.get("missionId") else [])
+           or list(missions.load(XML_DIR)))
+    rewards = _claim_missions(st, ids)
+    admin_log(f"[mission] claim {len(ids)} requested -> {len(rewards)} rewards")
+    return {"keyStack": st.get("missionKeyStack", 0), "goal": st.get("missionGoal", 0),
+            "passModel": None, "playerTerritoryTycoon": None,
+            "rewardListResponseData": _reward_list_data(rewards)}
 
 def r_event_cache(body, st):
     return {"events": []}
@@ -1460,6 +1580,7 @@ DYNAMIC_OVERRIDES = {
     "/deck/set-deck-slot-name": r_deck,
     "/mission": r_mission,
     "/mission/reward-all": r_mission_reward_all,
+    "/mission/check": r_mission,
     "/eventcache": r_event_cache,
     "/pvp/info": r_pvp_info,
     "/pvp/matching": r_pvp_info,
@@ -1632,6 +1753,9 @@ async def respond(path: str, request: Request):
     # /auth/auth carries the account id as ?id=, /auth/register as body.id.
     if path.startswith("/auth/"):
         CURRENT_LOGIN_ID.set(request.query_params.get("id") or body.get("id") or "")
+    if path in _PATH_COUNTERS:
+        bump(st, _PATH_COUNTERS[path])
+        save_state(st)
     overlay = OVERRIDES[path](body, st) if path in OVERRIDES else None
     if overlay is None and path not in ROUTE_MODELS:
         # Every route the v171 client can call is now mapped (route_models.json plus
