@@ -2947,6 +2947,130 @@ def r_rogue_statistics(body, st):
     one would print made-up percentages next to real mission names."""
     return {"rogueLikeMissionStatistics": [], "totalRogueLikeUser": 1}
 
+# --- The four seasonal mini-games ---------------------------------------------
+# Territory Tycoon, the stock event, KG Marble and event-card collecting. All 23 of
+# their routes answered an empty auto-generated model, which for these means null
+# lists and null sub-models - and every one of these panels dereferences those
+# before it checks whether the event is running.
+#
+# Three of the four have a window in master data and every window has closed:
+# StockConstants runs 2025-10-22 to 2025-11-12, the event cards are season 55
+# against the current 71, and KG Marble's board is handed out by the server, which
+# is not handing one out. So the correct answer is a well-formed "no event", not an
+# empty body. Territory Tycoon is the exception: its tokens are ordinary inventory
+# items, so its numbers are real.
+
+# InventoryItems.xml 2008/2009/2010 해변축제 브론즈/실버/골드 토큰, same pinning
+# missions.py uses.
+TYCOON_TOKENS = {"bronzeToken": 2008, "silverToken": 2009, "goldToken": 2010}
+
+def _tycoon_tokens(st):
+    return {k: _item_count(st, item) for k, item in TYCOON_TOKENS.items()}
+
+def r_tycoon_tokens(body, st):
+    out = _tycoon_tokens(st)
+    out["storedGoldToken"] = st.get("tycoonStoredGold", 0)
+    return out
+
+def r_tycoon_collect_gold(body, st):
+    """Move banked gold tokens into the inventory, where every other panel reads
+    them from. Nothing banked means nothing moves, rather than a free token."""
+    stored = int(st.get("tycoonStoredGold", 0))
+    if stored > 0:
+        _grant_reward(st, "Item", TYCOON_TOKENS["goldToken"], stored)
+        st["tycoonStoredGold"] = 0
+        save_state(st)
+    return r_tycoon_tokens(body, st)
+
+def r_tycoon_firework(body, st):
+    out = _tycoon_tokens(st)
+    out["tycoonPoint"] = st.get("tycoonPoint", 0)
+    out["skipRewardUsedCount"] = st.get("tycoonSkipRewardUsed", 0)
+    return out
+
+def r_tycoon_player(body, st):
+    out = _tycoon_tokens(st)
+    out.update({"level": st.get("tycoonLevel", 1),
+                "storedGoldToken": st.get("tycoonStoredGold", 0),
+                "skipRewardUsedCount": st.get("tycoonSkipRewardUsed", 0),
+                "buildings": st.get("tycoonBuildings", [])})
+    return out
+
+def r_stock_my_info(body, st):
+    """The stock event's own wallet. Its token is not an inventory item - it only
+    exists inside the event - so it lives on the save under its own key."""
+    return {"currentTokenCount": st.get("stockTokens", 0),
+            "highestTokenCount": st.get("stockTokensHigh", 0),
+            "remainingBuyCount": 0, "shopState": 0, "premiumShopState": 0,
+            "timeOffset": 0, "hints": [], "portfolios": [],
+            "nextDailyAttendanceDate": now_iso(1)}
+
+def r_stock_attendance(body, st):
+    """The daily wage. The event has ended, so it pays nothing - reported as a zero
+    reward with the real balance, not as an empty body the panel reads as a
+    failure."""
+    return {"rewardTokenCount": 0,
+            "currentTokenCount": st.get("stockTokens", 0),
+            "highestTokenCount": st.get("stockTokensHigh", 0),
+            "nextDailyAttendanceDate": now_iso(1)}
+
+def r_stock_buy_hint(body, st):
+    """A hint costs tokens and names a stock in a round. With no round running there
+    is nothing to hint at, so no token is taken."""
+    return {"hint": None, "currentTokenCount": st.get("stockTokens", 0)}
+
+def r_stock_mission(body, st):
+    return {"state": 0, "rewardList": _reward_list_data([])}
+
+def r_stock_ranking(body, st):
+    """One player, so one row - the same shape the other boards use."""
+    d = _PC["defaults"]
+    deco = _deco(st)
+    row = {"round": 0, "userRank": 1, "percentileRank": 100.0,
+           "accountId": st.get("accountId", d["accountId"]),
+           "rateOfReturn": 0.0,
+           "profile": {"userName": st.get("name", d["name"]),
+                       "castleName": st.get("castleName", d["castleName"]),
+                       "kingPostfix": 0, "castlePostfix": 0,
+                       "profileIcon": d["profileIconId"], "nameTagId": deco["nameTag"]}}
+    return {"playerRanking": row, "ranking": [row]}
+
+def r_marble(body, st):
+    """KG Marble. The board itself comes from the server and there is none to hand
+    out, so `init` is false and every list is present but empty - the panel walks
+    boardData and rewards by index before it looks at init."""
+    return {"init": False,
+            "kgMarbleModel": {"accountId": st.get("accountId", 0), "round": 0,
+                              "dailyRound": 0, "boardData": [], "boardExecuted": [],
+                              "position": 0, "player": st.get("marblePlayer", 0),
+                              "boughtPass": False, "dailyFreeCount": 0,
+                              "rewards": [], "passRewards": [], "executeEvents": []},
+            "rewardRet": _reward_list_data([]), "addedEventIdx": -1,
+            "diceValueSum": 0, "diceValues": [], "reverseMove": False,
+            "teleportMove": False, "eventTokenCount": 0, "forceBoardRefresh": False}
+
+def r_marble_set_player(body, st):
+    """Which token the player moves around the board. Cosmetic, and the only part
+    of the mode that means anything with no board running."""
+    st["marblePlayer"] = int(body.get("player", 0) or 0)
+    save_state(st)
+    return r_marble(body, st)
+
+def r_event_cards(body, st):
+    """Event-card collecting. The cards in master data are season 55 against the
+    current 71, so there is no collection to be part-way through."""
+    return {"collectionStates": {}, "eventCardCounts": {}, "appliedEventCard": 0,
+            "point": 0, "collectionCompleted": False, "freeGachaAvailable": False}
+
+def r_event_cards_exchange(body, st):
+    return {"playerEventCardCollectingResponseModel": r_event_cards(body, st),
+            "exchangedEventCardId": 0}
+
+def r_event_cards_reward(body, st):
+    return {"playerEventCardCollectingResponseModel": r_event_cards(body, st),
+            "rewardListData": _reward_list_data([])}
+
+
 # --- Account transfer ---------------------------------------------------------
 # Moving a save to another device: one side asks for a code, the other redeems it.
 # The code is the whole security model - whoever has it gets the save - so it is
@@ -3439,6 +3563,29 @@ DYNAMIC_OVERRIDES = {
     "/invasion/reward/receive-all": r_invasion_reward_all,
     "/mission/check": r_mission,
     "/eventcache": r_event_cache,
+    "/territory-tycoon/fetch-token": r_tycoon_tokens,
+    "/territory-tycoon/collect-gold-token": r_tycoon_collect_gold,
+    "/territory-tycoon/firework": r_tycoon_firework,
+    "/territory-tycoon/recover-seasonal-token": r_tycoon_player,
+    "/territory-tycoon/attendance-check": r_ack,
+    "/stock-event/my-info": r_stock_my_info,
+    "/stock-event/daily-attendance": r_stock_attendance,
+    "/stock-event/buy-hint": r_stock_buy_hint,
+    "/stock-event/mission": r_stock_mission,
+    "/stock-event/ranking": r_stock_ranking,
+    "/stock-event/orders": r_stock_ranking,
+    "/stock-event/prices": r_stock_my_info,
+    "/kg-marble": r_marble,
+    "/kg-marble/roll": r_marble,
+    "/kg-marble/reward": r_marble,
+    "/kg-marble/execute-event": r_marble,
+    "/kg-marble/set-player": r_marble_set_player,
+    "/event-card-collecting/fetch": r_event_cards,
+    "/event-card-collecting/apply": r_event_cards,
+    "/event-card-collecting/collect": r_event_cards,
+    "/event-card-collecting/gacha": r_event_cards,
+    "/event-card-collecting/exchange": r_event_cards_exchange,
+    "/event-card-collecting/receive-reward": r_event_cards_reward,
     "/auth/transfer": r_transfer_issue,
     "/auth/transfer/code": r_transfer_redeem,
     # GameManager.usePatch is hardcoded to 1 in the binary, so this answer is
