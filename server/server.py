@@ -11,6 +11,7 @@ Run:  uvicorn server:app --host 0.0.0.0 --port 8080
 """
 import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, hashlib, os, sys
 import playerdb
+import rewardbox
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
@@ -818,6 +819,106 @@ def r_player_inventory(body, st):
     inv = st.get("inventory", {"itemIds": [], "counts": []})
     return {"itemIds": inv.get("itemIds", []), "counts": inv.get("counts", [])}
 
+def _inventory(st):
+    return st.setdefault("inventory", {"itemIds": [], "counts": []})
+
+def _inventory_models(st):
+    """The inventory as List<InventoryItem> ({id, count}) - the shape the use-item
+    responses return, as opposed to the parallel-array shape /player/getInventory uses."""
+    inv = _inventory(st)
+    return [{"id": i, "count": c}
+            for i, c in zip(inv.get("itemIds", []), inv.get("counts", []))]
+
+def _item_count(st, item_id):
+    inv = _inventory(st)
+    ids = inv.get("itemIds", [])
+    return inv.get("counts", [])[ids.index(item_id)] if item_id in ids else 0
+
+def _take_item(st, item_id, n=1):
+    """Spend n of an item. Returns how many were actually spent (0 if the player has none).
+
+    The count is clamped rather than refused: the client sends what its own cached
+    inventory believes, and a stale cache should not brick the item behind an error."""
+    inv = _inventory(st)
+    ids, cnts = inv.setdefault("itemIds", []), inv.setdefault("counts", [])
+    if item_id not in ids:
+        return 0
+    i = ids.index(item_id)
+    n = max(0, min(n, cnts[i]))
+    cnts[i] -= n
+    if cnts[i] <= 0:
+        ids.pop(i)
+        cnts.pop(i)
+    return n
+
+def _next_accessory_id(st):
+    return max((a.get("id", 0) for a in get_st_accessories(st)), default=0) + 1
+
+def _open_reward_box(st, item_id, select_idx=None, times=1):
+    """Open `times` copies of a reward box item, granting everything it yields.
+
+    Returns the flat reward list for the client's popup. Accessories are appended to
+    the player's accessory list here (they are fully specified, unlike artifacts, so
+    they do not trip a client panel invariant); treasures stay display-only."""
+    spent = _take_item(st, item_id, times)
+    rewards = []
+    for _ in range(spent):
+        got, accs = rewardbox.open_box(item_id, select_idx, XML_DIR,
+                                       next_id=_next_accessory_id(st), now=now_iso(0))
+        if accs:
+            get_st_accessories(st).extend(accs)
+        for r in got:
+            rt = r["type"]
+            if rt == "CardOrSoul":
+                # Already own the hero -> the copy converts to soul, same as live.
+                rt = "UnitSoul" if str(r["id"]) in st.get("cards", {}) else "Unit"
+            if rt not in ("Accessory", "Treasure"):
+                _grant_reward(st, rt, r["id"], r["count"])
+        rewards += got
+    return rewards
+
+def _reward_list_data(rewards):
+    return {"rewardList": rewards, "artifactResult": None,
+            "treasureResult": None, "accessoryResult": None}
+
+def r_use_inventory(body, st):
+    """Consume a plain inventory item.
+
+    InventoryItems.xml carries no effect payload (only tooltip/category metadata), and
+    the client applies the visible effect itself off that metadata, so the server's job
+    is to spend the item and hand back the authoritative inventory.
+    ponytail: no per-item effect table; add one if an item turns out to need server state."""
+    item_id = body.get("itemID") or body.get("itemId") or 0
+    _take_item(st, item_id, max(1, body.get("count") or 1))
+    save_state(st)
+    return {"playerHeart": st.get("heart", 0), "eventFlag": 0,
+            "inventoryItems": _inventory_models(st)}
+
+def r_use_reward_box(body, st):
+    item_id = body.get("itemId") or body.get("itemID") or 0
+    rewards = _open_reward_box(st, item_id, body.get("selectIdx"),
+                               max(1, body.get("count") or 1))
+    save_state(st)
+    return {"rewardList": _reward_list_data(rewards),
+            "addedRewardList": _reward_list_data([]),
+            "boxRewardInventory": {"id": item_id, "count": _item_count(st, item_id)}}
+
+def r_use_skin_box(body, st):
+    """Skin boxes name their own prize: the client sends the skin the player picked."""
+    item_id = body.get("itemId") or body.get("itemID") or 0
+    skin_id = body.get("skinId") or 0
+    spent = _take_item(st, item_id, 1)
+    if spent and skin_id:
+        unit = str(skin_id // 1000)
+        card = st.setdefault("cards", {}).get(unit)
+        if card is not None and skin_id not in card.setdefault("skins", []):
+            card["skins"].append(skin_id)
+    save_state(st)
+    return {"rewardList": _reward_list_data(
+                [{"type": "Skin", "id": skin_id, "count": 1}] if spent else []),
+            "skin": skin_id,
+            "boxRewardInventory": {"id": item_id, "count": _item_count(st, item_id)}}
+
 def r_mission(body, st):
     return {"missions": st.get("missions", []), "missionGoal": 0, "missionKeyStack": 0}
 
@@ -1202,6 +1303,10 @@ DYNAMIC_OVERRIDES = {
     "/player/tutorial-status": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
     "/player/tutorial/complete": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
     "/player/getInventory": r_player_inventory,
+    "/player/useInventory": r_use_inventory,
+    "/player/use-reward-box-inventory-item": r_use_reward_box,
+    "/player/use-skin-box-inventory-item": r_use_skin_box,
+    "/player/receive-skin-box-alternate-reward": r_use_skin_box,
     "/player/add-inventory-count": lambda b, st: {
         "playerCash": st.get("cash", 0),
         "inventoryCount": 999
