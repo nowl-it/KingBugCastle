@@ -12,6 +12,7 @@ Run:  uvicorn server:app --host 0.0.0.0 --port 8080
 import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, hashlib, os, sys
 import playerdb
 import rewardbox
+import shop
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
@@ -119,7 +120,6 @@ admin_log(f"[gate] serverVersion {SERVER_VERSION} -> content gate {CONTENT_GATE}
 # Multiple routes sharing one canonical static payload (avoids duplicating the
 # same blob under several keys in static_overrides.json).
 _STATIC_ALIASES = {
-    "/shop/refreshDailyShop": "/shop",
     "/decoration/advisor/contract": "/decoration",
     "/decoration/advisor/equip": "/decoration",
     "/decoration/advisor/extend": "/decoration",
@@ -950,6 +950,88 @@ def r_use_skin_box(body, st):
             "skin": skin_id,
             "boxRewardInventory": {"id": item_id, "count": _item_count(st, item_id)}}
 
+def _shop_buys(st):
+    """itemId (as a string key, so it survives a JSON round-trip) -> times bought."""
+    return st.setdefault("shopBuys", {})
+
+def r_shop(body, st):
+    """List the shop, or buy from it.
+
+    GetShop and BuyShopItem share the /shop path (GET lists, POST buys) - the same
+    split /accessory uses. Rather than depend on the verb, which respond() does not
+    pass down, a request carrying an itemId is a purchase; a bare one is a listing.
+    That is also self-correcting if the client ever POSTs /shop just to refresh."""
+    base = dict(STATIC_OVERRIDES["/shop"])
+    if body.get("itemId"):
+        base.update(_shop_buy(body, st))
+        save_state(st)
+    base.update(shop.build(CONTENT_GATE, _shop_buys(st), now_iso(0), XML_DIR))
+    base["nextRefreshTime"] = next_reset_iso(1)
+    base["playerGold"] = st.get("gold", 0)
+    base["playerCash"] = st.get("cash", 0)
+    base["playerHeart"] = st.get("heart", 0)
+    return base
+
+def _shop_buy(body, st):
+    """Charge for a shop item and grant it. Returns the BuyResponseModel-ish extras.
+
+    Real-money items are granted without charging: there is no store behind this
+    server, so refusing them would make every package permanently unbuyable."""
+    item_id = int(body.get("itemId") or 0)
+    amount = max(1, int(body.get("buyAmount") or 1))
+    el = shop.find(item_id, XML_DIR)
+    if el is None:
+        admin_log(f"[shop] refused: item {item_id} is not in ShopItems.xml")
+        return {"msg": "no such shop item", "soldOut": True}
+
+    buys = _shop_buys(st)
+    bought = buys.get(str(item_id), 0)
+    limit = shop._int(el, "BuyLimit", -1)
+    if limit >= 0 and bought + amount > limit:
+        amount = max(0, limit - bought)
+        if amount == 0:
+            admin_log(f"[shop] refused: item {item_id} at its BuyLimit {limit}")
+            return {"msg": "buy limit reached", "soldOut": True}
+
+    kind, cur_id, unit_price = shop.price_of(el)
+    cost = unit_price * amount
+    if kind == "gold" and st.get("gold", 0) < cost:
+        return {"msg": "not enough gold", "soldOut": False}
+    if kind == "cash" and st.get("cash", 0) < cost:
+        return {"msg": "not enough cash", "soldOut": False}
+    if kind == "item" and _item_count(st, cur_id) < cost:
+        return {"msg": f"not enough of item {cur_id}", "soldOut": False}
+
+    if kind == "gold":
+        st["gold"] = st.get("gold", 0) - cost
+    elif kind == "cash":
+        st["cash"] = st.get("cash", 0) - cost
+    elif kind == "item":
+        _take_item(st, cur_id, cost)
+
+    rewards = []
+    for r in shop.rewards_of(el):
+        r = {**r, "count": r["count"] * amount}
+        # Artifact/Treasure/Skin are reported for the reward popup but not written
+        # into state - the same policy the mail rewards follow.
+        if r["type"] not in ("Artifact", "Treasure", "Skin"):
+            _grant_reward(st, r["type"], r["id"], r["count"])
+        rewards.append(r)
+    buys[str(item_id)] = bought + amount
+    admin_log(f"[shop] bought {item_id} x{amount} for {cost} {kind} -> {len(rewards)} rewards")
+    return {"gachaRewardResponseData": _reward_list_data(rewards),
+            "inventoryItems": _inventory_models(st), "soldOut": False}
+
+def r_shop_refresh(body, st):
+    """Refreshing the daily shop clears its per-item buy counts, which is what makes
+    the daily items buyable again."""
+    for sid in list(_shop_buys(st)):
+        el = shop.find(sid, XML_DIR)
+        if el is not None and el.findtext("Type") == "DailyShop":
+            _shop_buys(st).pop(sid, None)
+    save_state(st)
+    return r_shop({}, st)
+
 def r_mission(body, st):
     return {"missions": st.get("missions", []), "missionGoal": 0, "missionKeyStack": 0}
 
@@ -1333,6 +1415,12 @@ DYNAMIC_OVERRIDES = {
     "/player/currencies": lambda b, st: {"gold": st.get("gold", 0), "cash": st.get("cash", 0), "heart": st.get("heart", 0)},
     "/player/tutorial-status": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
     "/player/tutorial/complete": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
+    "/shop": r_shop,
+    "/shop/iap": r_shop,
+    "/shop/caniap": r_shop,
+    "/shop/caniap_new": r_shop,
+    "/shop/get-restore-needed-iaps": r_shop,
+    "/shop/refreshDailyShop": r_shop_refresh,
     "/player/getInventory": r_player_inventory,
     "/player/useInventory": r_use_inventory,
     "/player/use-reward-box-inventory-item": r_use_reward_box,
