@@ -1043,6 +1043,106 @@ def r_shop_refresh(body, st):
     save_state(st)
     return r_shop({}, st)
 
+def _invasion_rewards():
+    """InvasionRewards.xml as {(theme, difficulty): {"Rewards": [...], "PassRewards": [...]}}.
+
+    The entry id encodes both: 101 is theme 1 difficulty 1, 6905 is theme 69
+    difficulty 5. Each section lists tag-named rewards (Cash, Key, InventoryItem,
+    Artifact, ...) with ID/Count attributes."""
+    import xml.etree.ElementTree as _ET
+    root = _ET.parse(XML_DIR / "InvasionRewards.xml").getroot()
+    out = {}
+    for e in root:
+        if not e.get("ID"):
+            continue
+        rid = int(e.get("ID"))
+        theme, diff = divmod(rid, 100)
+        sections = {}
+        for sec in ("Rewards", "PassRewards"):
+            node = e.find(sec)
+            sections[sec] = [] if node is None else [
+                {"type": t.tag, "id": int(t.get("ID", 0)), "count": int(t.get("Count", 1))}
+                for t in node]
+        out[(theme, diff)] = sections
+    return out
+
+INVASION_REWARDS = _invasion_rewards()
+admin_log(f"[invasion] {len(INVASION_REWARDS)} theme/difficulty reward rows")
+
+def _invasion_claimed(st):
+    """theme -> bitmask of claimed difficulties, matching the client's `rewardState`."""
+    return st.setdefault("invasionRewardState", {})
+
+def _invasion_grant(st, rewards):
+    """Apply one invasion reward row. Shares the mission reward mapping - the tag
+    names are the same vocabulary (Key names a ShopItem, Artifact is display-only)."""
+    out = []
+    for r in rewards:
+        t = r["type"]
+        if t == "InventoryItem":
+            _grant_reward(st, "Item", r["id"], r["count"])
+            out.append({"type": "Item", "id": r["id"], "count": r["count"]})
+        elif t in ("Cash", "Gold", "Heart"):
+            _grant_reward(st, t, 0, r["count"])
+            out.append({"type": t, "id": 0, "count": r["count"]})
+        elif t == "Card":
+            out.append(_grant_mission_reward(st, {"type": "CardOrSoul", **r}))
+        elif t == "Key":
+            out.append(_grant_mission_reward(st, {"type": "Key", **r}))
+        else:
+            # Artifact / Treasure_Special / NewUnitGachaItem: shown, not written into
+            # state, per the existing _grant_reward policy.
+            out.append({"type": t, "id": r["id"], "count": r["count"]})
+    return out
+
+def _invasion_claim(st, theme, difficulty, with_pass):
+    """Claim one theme/difficulty. Returns the reward list; empty if not eligible."""
+    unlocked = RCFG["player"]["invasionUnlockedDifficulty"]
+    if not (1 <= difficulty <= unlocked):
+        return []
+    row = INVASION_REWARDS.get((theme, difficulty))
+    if row is None:
+        return []
+    mask = _invasion_claimed(st).get(str(theme), 0)
+    bit = 1 << (difficulty - 1)
+    if mask & bit:
+        return []
+    rewards = _invasion_grant(st, row["Rewards"])
+    if with_pass:
+        rewards += _invasion_grant(st, row["PassRewards"])
+    _invasion_claimed(st)[str(theme)] = mask | bit
+    return rewards
+
+def r_invasion_reward(body, st):
+    """GET lists what is claimable, POST claims one theme/difficulty.
+
+    Same GET/POST split as /shop and /accessory: a request naming a theme is a claim,
+    a bare one is a listing. ReceiveInvasionRewardRequestModel is {theme, difficulty,
+    pass}, so `theme` is the discriminator the client already sends."""
+    if not body.get("theme"):
+        return {"rewardDatas": [
+            {"theme": t, "difficulty": d,
+             "rewards": row["Rewards"], "passRewards": row["PassRewards"],
+             "received": bool(_invasion_claimed(st).get(str(t), 0) & (1 << (d - 1)))}
+            for (t, d), row in sorted(INVASION_REWARDS.items())]}
+    theme = int(body["theme"])
+    rewards = _invasion_claim(st, theme, int(body.get("difficulty") or 1),
+                              bool(body.get("pass")))
+    save_state(st)
+    admin_log(f"[invasion] theme {theme} d{body.get('difficulty')} -> {len(rewards)} rewards")
+    return {"rewardListData": _reward_list_data(rewards),
+            "rewardState": _invasion_claimed(st).get(str(theme), 0)}
+
+def r_invasion_reward_all(body, st):
+    """Claim every unclaimed, unlocked difficulty across every theme."""
+    with_pass = bool(body.get("pass"))
+    rewards = []
+    for theme, diff in sorted(INVASION_REWARDS):
+        rewards += _invasion_claim(st, theme, diff, with_pass)
+    save_state(st)
+    admin_log(f"[invasion] receive-all -> {len(rewards)} rewards")
+    return {"rewardListData": _reward_list_data(rewards), "rewardState": 0}
+
 def counters(st):
     """Server-side progress tallies for the mission conditions this server can see.
 
@@ -1580,6 +1680,9 @@ DYNAMIC_OVERRIDES = {
     "/deck/set-deck-slot-name": r_deck,
     "/mission": r_mission,
     "/mission/reward-all": r_mission_reward_all,
+    "/invasion/reward": r_invasion_reward,
+    "/invasion/reward/receive": r_invasion_reward,
+    "/invasion/reward/receive-all": r_invasion_reward_all,
     "/mission/check": r_mission,
     "/eventcache": r_event_cache,
     "/pvp/info": r_pvp_info,
