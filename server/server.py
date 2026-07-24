@@ -14,6 +14,7 @@ import playerdb
 import rewardbox
 import shop
 import missions
+import challenge
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
@@ -644,6 +645,13 @@ def r_game_complete(body, st):
     if win:
         bump(st, "clearGame")
         bump(st, "clearTheme", sub=theme)
+        # Challenge runs report their difficulty alongside the theme; without this the
+        # challenge reward track can never advance past zero. Themes below 4000 are
+        # the ordinary story/invasion ones and carry no challenge difficulty.
+        if theme >= _CHALLENGE_THEME_MIN and body.get("difficulty"):
+            cs = _challenge_state(st)
+            cs["bestDifficulty"] = max(cs["bestDifficulty"], int(body["difficulty"]))
+            cs["clearedBattles"] = max(cs["clearedBattles"], int(stage) + 1)
     if st.get("exp", 0) >= gc["expPerLevel"]:
         st["level"] += st["exp"] // gc["expPerLevel"]
         st["exp"] = st["exp"] % gc["expPerLevel"]
@@ -1142,6 +1150,76 @@ def r_invasion_reward_all(body, st):
     save_state(st)
     admin_log(f"[invasion] receive-all -> {len(rewards)} rewards")
     return {"rewardListData": _reward_list_data(rewards), "rewardState": 0}
+
+# Challenge/roguelike themes start at 4000 (the Season 71 Story-Challenge boss 30000000
+# sits on theme 4100); the story and invasion themes are all below it.
+_CHALLENGE_THEME_MIN = 4000
+
+def _challenge_state(st):
+    st.setdefault("challenge", {"bestDifficulty": 0, "clearedBattles": 0,
+                                "claimed": [], "dailyClaimedOn": ""})
+    return st["challenge"]
+
+def r_challenge_info(body, st):
+    cs = _challenge_state(st)
+    entries = challenge.track(xml_dir=XML_DIR)
+    return {"bestClearedDifficulty": cs["bestDifficulty"],
+            "unlockedDifficulty": challenge.unlocked_difficulty(xml_dir=XML_DIR),
+            # Parallel to challenge.track()'s document order: 0 = not earned,
+            # 1 = earned but unclaimed, 2 = claimed. Re-ordering the track would
+            # silently misalign every index the client sends back.
+            "rewardStates": [
+                2 if i in cs["claimed"] else
+                1 if challenge.earned(e, cs["bestDifficulty"], cs["clearedBattles"]) else 0
+                for i, e in enumerate(entries)],
+            "rewardResponse": None, "seasonEnabled": True,
+            "startAt": now_iso(-30), "endAt": now_iso(30)}
+
+def _challenge_grant(st, rewards):
+    """Challenge rewards reuse the mission vocabulary, so Key still resolves through
+    the ShopItem it names instead of landing in the inventory as item 0."""
+    return [_grant_mission_reward(st, r) for r in rewards]
+
+def r_challenge_reward(body, st):
+    """Claim one track entry, or every earned one when no index is given."""
+    cs = _challenge_state(st)
+    entries = challenge.track(xml_dir=XML_DIR)
+    idx = body.get("index", body.get("rewardIdx"))
+    want = [int(idx)] if idx is not None else range(len(entries))
+    rewards = []
+    for i in want:
+        if not (0 <= i < len(entries)) or i in cs["claimed"]:
+            continue
+        if not challenge.earned(entries[i], cs["bestDifficulty"], cs["clearedBattles"]):
+            continue
+        rewards += _challenge_grant(st, entries[i]["rewards"])
+        cs["claimed"].append(i)
+    cs["claimed"].sort()
+    save_state(st)
+    admin_log(f"[challenge] claimed {len(rewards)} rewards, track {len(cs['claimed'])}/{len(entries)}")
+    out = r_challenge_info(body, st)
+    out["rewardResponse"] = _reward_list_data(rewards)
+    return out
+
+def r_challenge_daily(body, st):
+    """One claim per UTC day, paying the tier for the best difficulty reached."""
+    cs = _challenge_state(st)
+    today = now_iso(0)[:10]
+    if cs.get("dailyClaimedOn") == today:
+        out = r_challenge_info(body, st)
+        out["rewardResponse"] = _reward_list_data([])
+        return out
+    tiers = challenge.daily_track(xml_dir=XML_DIR)
+    best = cs["bestDifficulty"]
+    tier = max((d for d in tiers if d <= best), default=None)
+    rewards = _challenge_grant(st, tiers[tier]) if tier is not None else []
+    if rewards:
+        cs["dailyClaimedOn"] = today
+    save_state(st)
+    admin_log(f"[challenge] daily tier {tier} -> {len(rewards)} rewards")
+    out = r_challenge_info(body, st)
+    out["rewardResponse"] = _reward_list_data(rewards)
+    return out
 
 def counters(st):
     """Server-side progress tallies for the mission conditions this server can see.
@@ -1680,6 +1758,9 @@ DYNAMIC_OVERRIDES = {
     "/deck/set-deck-slot-name": r_deck,
     "/mission": r_mission,
     "/mission/reward-all": r_mission_reward_all,
+    "/story-mode/challenge/info": r_challenge_info,
+    "/story-mode/challenge/reward": r_challenge_reward,
+    "/story-mode/challenge/daily-reward": r_challenge_daily,
     "/invasion/reward": r_invasion_reward,
     "/invasion/reward/receive": r_invasion_reward,
     "/invasion/reward/receive-all": r_invasion_reward_all,
