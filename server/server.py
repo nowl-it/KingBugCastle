@@ -2947,6 +2947,126 @@ def r_rogue_statistics(body, st):
     one would print made-up percentages next to real mission names."""
     return {"rogueLikeMissionStatistics": [], "totalRogueLikeUser": 1}
 
+# --- Account transfer ---------------------------------------------------------
+# Moving a save to another device: one side asks for a code, the other redeems it.
+# The code is the whole security model - whoever has it gets the save - so it is
+# random, single-use, and expires.
+
+TRANSFER_TTL_HOURS = 24
+
+def r_transfer_issue(body, st):
+    """Mint a transfer code for this save, replacing any code still outstanding."""
+    code = secrets.token_hex(4).upper()
+    st["transfer"] = {"code": code, "expiresAt": now_iso(seconds=TRANSFER_TTL_HOURS * 3600)}
+    save_state(st)
+    admin_log(f"[auth] transfer code issued for uid={st.get('uid', '?')}")
+    return {"userId": code}
+
+def _transfer_lookup(code):
+    """The uid holding an unexpired copy of `code`. Scans every save, which is fine
+    at KGC_MAX_PLAYERS and avoids a second table that could drift out of sync."""
+    if not code:
+        return None
+    for uid, saved, _updated in playerdb.all_players():
+        t = (saved or {}).get("transfer") or {}
+        if t.get("code") == code and t.get("expiresAt", "") > now_iso(0):
+            return uid
+    return None
+
+def r_transfer_redeem(body, st):
+    """Redeem a code: bind the caller's login to the save that issued it and hand
+    back a session for it. A wrong or expired code logs nobody in."""
+    code = (body.get("code") or body.get("userId") or "").strip().upper()
+    uid = _transfer_lookup(code)
+    if uid is None:
+        admin_log("[auth] transfer redeem refused: unknown or expired code")
+        return {"success": False, "msg": "invalid transfer code"}
+    src = playerdb.load(uid) or {}
+    src.pop("transfer", None)           # single use
+    playerdb.save(uid, src)
+    login_id = CURRENT_LOGIN_ID.get() or body.get("id") or ""
+    if MULTIPLAYER and login_id:
+        # Only multiplayer owns the account table; in single-player _uid_for_login
+        # ignores login ids entirely and writing one here would pin it forever.
+        playerdb.bind_login(login_id, uid)
+    token = "DEV." + secrets.token_hex(16)
+    playerdb.bind_session(token, uid)
+    CURRENT_UID.set(uid)
+    admin_log(f"[auth] transfer redeemed -> uid={uid}")
+    return {"accessToken": token, "expiredAt": now_iso(7),
+            "seed": secrets.token_hex(8), "serverTime": now_iso(0),
+            "blockedUntilAt": now_iso(0), "blockedComment": "", "loginId": uid}
+
+
+# --- The last few odds and ends -----------------------------------------------
+
+def r_event_mode(body, st):
+    """Which limited-time battle modes are open. Every list must be present - the
+    panel zips them together by index, and a null list is a NullReference before it
+    ever gets to check whether the mode is empty. No event mode is running, so they
+    are all empty rather than absent."""
+    return {"eventModes": [], "eventModeFlags": [], "eventModeHeartCost": [],
+            "eventModeMaxPlayCount": [], "allEventModes": [], "eventModeFlagCost": []}
+
+def r_wiki(body, st):
+    """The wiki's per-category unlock state. Percentages are computed by the client
+    from the element list, so an absent category reads as 0% rather than crashing."""
+    empty = {"wikiElements": [], "percentage": 0}
+    return {k: dict(empty) for k in
+            ("unitWiki", "artifactWiki", "treasureWiki", "accessoryWiki",
+             "riftWeaponWiki", "cutsceneWiki", "storyInventoryWiki")} | \
+           {"riftWeaponArchives": st.get("riftWeaponArchives", [])}
+
+def r_wiki_archive(body, st):
+    """Archive a rift weapon so its rolled options can be looked at later."""
+    archives = st.setdefault("riftWeaponArchives", [])
+    wid = int(body.get("riftWeaponId", body.get("id", 0)) or 0)
+    weapon = next((w for w in DEFAULT_RIFT_WEAPONS if w.get("id") == wid), None)
+    if weapon and not any(a.get("id") == wid for a in archives):
+        archives.append(weapon)
+        save_state(st)
+    return {"riftWeapons": archives, "deletedRiftWeapons": [],
+            "rewardListResponseData": None, "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0), "upgradeState": 0,
+            "equippedWeaponIds": []}
+
+def r_wiki_archive_delete(body, st):
+    wid = int(body.get("riftWeaponId", body.get("id", 0)) or 0)
+    st["riftWeaponArchives"] = [a for a in st.get("riftWeaponArchives", [])
+                                if a.get("id") != wid]
+    save_state(st)
+    return r_wiki(body, st)
+
+def r_pass_reroll_mission(body, st):
+    """Reroll one pass mission for gold. The client redraws the row from
+    newMissionData, so handing back the same mission is a visible no-op - which is
+    the honest answer when there is no second mission to swap in."""
+    price = RCFG.get("pass", {}).get("rerollPrice", 0)
+    count = int(st.get("passRerollCount", 0))
+    if price and st.get("gold", 0) < price:
+        return {"newMissionData": None, "rerollCount": count,
+                "playerGold": st.get("gold", 0)}
+    st["gold"] = st.get("gold", 0) - price
+    st["passRerollCount"] = count + 1
+    save_state(st)
+    return {"newMissionData": None, "rerollCount": st["passRerollCount"],
+            "playerGold": st.get("gold", 0)}
+
+def r_cumulative_purchase(body, st):
+    """Cumulative-spend events. Every window in ShopEventInfos.xml has closed, so
+    there is no event to have spent into - `states` is empty, not absent."""
+    return {"states": st.get("shopEventStates", {})}
+
+def r_cumulative_purchase_claim(body, st):
+    return {"eventId": int(body.get("eventId", 0) or 0), "state": 0,
+            "rewardList": _reward_list_data([])}
+
+def r_cloud_run_services(body, st):
+    """Infrastructure discovery. The real backend answers with the regional service
+    endpoints it wants the client to use; here everything is this server, so the
+    honest answer is an empty list and the client keeps its configured host."""
+    return {"services": [], "ranking": []}
+
 # --- Shop bookkeeping ---------------------------------------------------------
 # Nine shop routes answered an empty model. None of them buy anything - they are the
 # places where the player's own choices are stored: which treasures they want out of
@@ -3319,6 +3439,28 @@ DYNAMIC_OVERRIDES = {
     "/invasion/reward/receive-all": r_invasion_reward_all,
     "/mission/check": r_mission,
     "/eventcache": r_event_cache,
+    "/auth/transfer": r_transfer_issue,
+    "/auth/transfer/code": r_transfer_redeem,
+    # GameManager.usePatch is hardcoded to 1 in the binary, so this answer is
+    # advisory only - but it has to be the truthful one, since the CDN check runs
+    # either way and we serve real cloned bundles.
+    "/auth/usePatch": lambda b, st: {"usePatch": True},
+    "/game/eventMode": r_event_mode,
+    "/game/check-dimension-rift-complete-success": r_ack,
+    "/kg-wiki/insert-wiki": r_wiki,
+    "/kg-wiki/rift-weapon/archive": r_wiki_archive,
+    "/kg-wiki/rift-weapon/archive-delete": r_wiki_archive_delete,
+    "/pass/reroll-mission": r_pass_reroll_mission,
+    "/shop-event/cumulative-purchase": r_cumulative_purchase,
+    "/shop-event/cumulative-purchase/claim": r_cumulative_purchase_claim,
+    "/api/cloud-run/services": r_cloud_run_services,
+    "/api/cloud-run/default-ranking": r_cloud_run_services,
+    "/kgc-main": r_ack,
+    "/kgc-ranking": r_ranking,
+    "/seasonal-event/april-fools/reward": lambda b, st: {
+        "rewardListResponseData": _reward_list_data([])},
+    "/artifact/reroll": r_artifact_result,
+    "/artifact/polish/replace-option-slot-idx": r_artifact_result,
     "/rogueLike/save-rogueLike": r_rogue_save,
     "/rogueLike/load-rogueLike-data": r_rogue_load,
     "/rogueLike/save-own-card-snapshot": r_rogue_snapshot,
