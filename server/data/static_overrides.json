@@ -110,36 +110,6 @@
   "/story-mode/delete": {
     "storyClearInfos": []
   },
-  "/decoration": {
-    "flagInfo": {
-      "flagsModel": [],
-      "equipedFlag": {
-        "flagId": 0,
-        "season": 0
-      }
-    },
-    "nameTagInfo": {
-      "nameTagsModel": [],
-      "equippedNameTag": {
-        "nameTagId": 0
-      }
-    },
-    "mapSkinInfo": {
-      "mapSkinList": []
-    },
-    "advisorInfo": {
-      "advisorList": []
-    },
-    "loginSkinInfo": {
-      "loginSkinList": []
-    },
-    "equipInfo": {
-      "appliedMapSkinData": {},
-      "appliedAdvisor": 0,
-      "appliedLoginSkin": 0,
-      "loginSceneIllustData": null
-    }
-  },
   "/territory/hunting/fetch": {},
   "/territory/hunting/start": {},
   "/territory/hunting/end": {},
@@ -162,11 +132,6 @@
   },
   "/trigger/execute": {},
   "/trigger/execute-saved": {},
-  "/flag/set": {},
-  "/nameTag/inventory": {
-    "nameTags": []
-  },
-  "/nameTag/set": {},
   "/ingame-coupon": {},
   "/test/roguelike/reset-all-mission": {},
   "/test/set-dimension-rift-ranking": {},
