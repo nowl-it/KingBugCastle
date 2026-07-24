@@ -12,14 +12,6 @@
     "missionGoal": 0,
     "missionKeyStack": 0
   },
-  "/pvp/all-rewards": {},
-  "/pvp/win-reward": {},
-  "/pvp/dormant-progress": {},
-  "/colosseum/all-tier-rewards": {},
-  "/colosseum/match": {
-    "success": true,
-    "matchMakingSecond": 0
-  },
   "/clan/attendance": {},
   "/clan/search": {
     "clans": [],
