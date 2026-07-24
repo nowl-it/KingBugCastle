@@ -19,6 +19,7 @@ import territory
 import decoration
 import dimension
 import attendance
+import babel
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
@@ -618,6 +619,7 @@ def r_game_start(body, st):
 
 def r_game_complete(body, st):
     gc = RCFG["gameComplete"]
+    babel_rewards = []
     gid = body.get("gameId", "")
     win = body.get("win", False)
     theme = body.get("theme", 1)
@@ -647,6 +649,9 @@ def r_game_complete(body, st):
             cs = _challenge_state(st)
             cs["bestDifficulty"] = max(cs["bestDifficulty"], int(body["difficulty"]))
             cs["clearedBattles"] = max(cs["clearedBattles"], int(stage) + 1)
+        # A Babel floor pays its own reward on first clear; nothing else advances the
+        # tower, so without this hook every tower stays on floor 0 forever.
+        babel_rewards = _babel_clear(st, theme, int(stage))
     if st.get("exp", 0) >= gc["expPerLevel"]:
         st["level"] += st["exp"] // gc["expPerLevel"]
         st["exp"] = st["exp"] % gc["expPerLevel"]
@@ -654,6 +659,8 @@ def r_game_complete(body, st):
     out = {"addGold": add_gold, "addExp": add_exp,
            "playerGold": st["gold"], "playerLevel": st["level"], "playerExp": st["exp"]}
     out.update(gc["fixed"])
+    if babel_rewards:
+        out["rewardListData"] = _reward_list_data(babel_rewards)
     return out
 
 def r_card_all(body, st):
@@ -2188,6 +2195,40 @@ def r_dimension_overcome(body, st):
                                     XML_DIR),
             "remainTicket": _item_count(st, dimension.TICKET)}
 
+# --- Babel: the six towers ----------------------------------------------------
+
+def _babel(st):
+    return st.setdefault("babel", {})     # babelId (str) -> {"floor": n, "passes": []}
+
+def r_babel(body, st):
+    b = _babel(st)
+    out = []
+    for bid, t in sorted(babel.towers(XML_DIR).items()):
+        rec = b.get(str(bid), {})
+        nxt = babel.next_open(bid, xml_dir=XML_DIR)
+        out.append({"id": bid,
+                    "available": babel.available(bid, xml_dir=XML_DIR),
+                    "maxClearedFloor": rec.get("floor", 0),
+                    "boughtPasses": rec.get("passes", []),
+                    "availableAt": nxt.strftime("%Y-%m-%dT%H:%M:%S.000Z") if nxt else ""})
+    return {"babels": out}
+
+def _babel_clear(st, theme, floor):
+    """Record a cleared floor and pay it, once. Returns the granted rewards.
+
+    Only a new best floor pays: the towers can be re-run for practice, and paying
+    every run turns floor 1 of an always-open tower into an unlimited faucet."""
+    bid = babel.theme_to_id(XML_DIR).get(theme)
+    if bid is None:
+        return []
+    rec = _babel(st).setdefault(str(bid), {"floor": 0, "passes": []})
+    if floor <= rec["floor"] or floor > babel.towers(XML_DIR)[bid]["maxFloor"]:
+        return []
+    rec["floor"] = floor
+    return [_grant_mission_reward(st, r)
+            for r in babel.floor_reward(theme, floor, XML_DIR)]
+
+
 # --- Attendance check-ins -----------------------------------------------------
 # Neither system has a claim route: the reads grant. The check-in is opening the
 # game that day, which is why the reward tables carry no button.
@@ -2479,6 +2520,7 @@ DYNAMIC_OVERRIDES = {
     # The v171 client uses both spellings of the battle-start route.
     "/game": r_game_start,
     "/game/revive": r_game_revive,
+    "/babel": r_babel,
     "/player/dailyAttendanceEvents": r_daily_attendance_events,
     "/player/surprise-attendance-event": r_surprise_attendance,
     "/player/surprise-attendance-event-daily-attendance-reward": r_surprise_attendance_reward,
