@@ -740,17 +740,11 @@ def r_card_upgrade_potential(body, st):
     if key in cards:
         cards[key]["potentialTier"] = min(20, cards[key].get("potentialTier", 0) + 1)
         save_state(st)
-    c = cards.get(key, {"unitId": unit_id, "level": 1})
-    return {
-        "unitId": c["unitId"], "level": c["level"], "exp": c.get("exp", 0),
-        "potentialTier": c["potentialTier"],
-        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
-        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
-        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
-        "soul": c.get("soul", 0),
-        "originLevel": c["level"], "originPotentialTier": c["potentialTier"],
-        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
-    }
+    # The fallback needs potentialTier: without it, upgrading a hero the save does
+    # not have raised KeyError and the route answered 500 instead of a card.
+    c = cards.get(key, {"unitId": unit_id, "level": 1, "potentialTier": 0})
+    return {**card_to_dict(c),
+            "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0)}
 
 def r_card_buy_skin(body, st):
     unit_id = body.get("unitId", 0)
