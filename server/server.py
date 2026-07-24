@@ -94,6 +94,28 @@ ITEM_TEMPLATES = json.loads((DATA_DIR / "item_templates.json").read_text())
 PATCH_FOLDER = RCFG["server"]["patchFolder"]
 SERVER_VERSION = RCFG["server"]["serverVersion"]
 
+def _content_gate(version):
+    """Master-data MinVersion cutoff, derived from serverVersion.
+
+    MinVersion is a 6-digit build code: "170.1.00" -> 170100, "171.0.00" -> 171000.
+    An entry above the gate is content the deployed client cannot render yet, so it
+    is filtered out of the hero/artifact/treasure/shop listings.
+
+    This used to be three separate `> 170100` literals, which stayed behind when the
+    build moved to 171.0.00 - the server advertised v171 while hiding every v171
+    hero, artifact and treasure from its own listings. Deriving it means the gate
+    cannot drift from the version again. KGC_CONTENT_GATE overrides it, which is
+    required if you deploy the v170.1.00 client against this server."""
+    env = os.environ.get("KGC_CONTENT_GATE")
+    if env:
+        return int(env)
+    parts = [int(p) for p in version.split(".")]
+    parts += [0] * (3 - len(parts))
+    return parts[0] * 1000 + parts[1] * 100 + parts[2]
+
+CONTENT_GATE = _content_gate(SERVER_VERSION)
+admin_log(f"[gate] serverVersion {SERVER_VERSION} -> content gate {CONTENT_GATE}")
+
 # Multiple routes sharing one canonical static payload (avoids duplicating the
 # same blob under several keys in static_overrides.json).
 _STATIC_ALIASES = {
@@ -181,7 +203,7 @@ def _all_hero_ids():
             visible = re.search(r'<Visible>(false|False)</Visible>', blk)
             summoner = re.search(r'<Summoner>', blk)
             min_ver = re.search(r'<MinVersion>(\d+)</MinVersion>', blk)
-            is_unreleased = min_ver and int(min_ver.group(1)) > 170100
+            is_unreleased = min_ver and int(min_ver.group(1)) > CONTENT_GATE
             if not visible and not summoner and not is_unreleased:
                 ids.append(uid)
     return ids
@@ -213,7 +235,7 @@ def _all_artifact_ids():
         if from_type and from_type.group(1) in ("Special", "RogueLike", "RogueLikeBuildingArtifact", "Event"):
             continue
         min_ver = re.search(r'<MinVersion>(\d+)</MinVersion>', blk)
-        if min_ver and int(min_ver.group(1)) > 170100:
+        if min_ver and int(min_ver.group(1)) > CONTENT_GATE:
             continue
         level_m = re.search(r'<Level>(.*?)</Level>', blk)
         level = level_m.group(1) if level_m else "Normal"
@@ -238,7 +260,7 @@ def _all_treasure_ids():
         if not m:
             continue
         min_ver = re.search(r'<MinVersion>(\d+)</MinVersion>', blk)
-        if min_ver and int(min_ver.group(1)) > 170100:
+        if min_ver and int(min_ver.group(1)) > CONTENT_GATE:
             continue
         tid = int(m.group(1))
         if tid == 20099:
