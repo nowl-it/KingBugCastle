@@ -24,13 +24,13 @@ import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+import missions
+
 ROOT = Path(__file__).resolve().parent
 DEFAULT_XML = ROOT / "xml_live"
 
-# Reward Type -> the inventory row it is really n of, same pinning as missions.py.
+# Reward types resolve through missions.reward_attrs, which owns the token map.
 ARENA_TOKEN = 2002
-TOKEN_ITEMS = {"Token_ARENA": ARENA_TOKEN, "ArenaToken": ARENA_TOKEN,
-               "Token_COLOSSEUM": ARENA_TOKEN}
 
 _cache = {}
 
@@ -42,14 +42,6 @@ def _root(name, xml_dir):
     return _cache[key]
 
 
-def _reward(el):
-    t = el.get("Type") or ""
-    out = {"type": TOKEN_ITEMS.get(t) and "Item" or t,
-           "id": int(el.get("ID", TOKEN_ITEMS.get(t, 0)) or 0),
-           "count": int(el.get("Count", 1) or 1)}
-    if t == "InventoryItem":
-        out["type"] = "Item"
-    return out
 
 
 _BRACKET = re.compile(r"\((\d+)(?:~(\d+))?위\)")
@@ -79,7 +71,7 @@ def tiers(xml_dir=DEFAULT_XML):
             "reqScore": int(el.findtext("ReqScore", 0) or 0),
             "winScore": int(el.findtext("WinScore", 0) or 0),
             "loseScore": int(el.findtext("LoseScore", 0) or 0),
-            "rewards": [_reward(r) for r in (items if items is not None else [])],
+            "rewards": [missions.reward_attrs(r) for r in (items if items is not None else [])],
         })
     return sorted(out, key=lambda t: t["id"])
 
@@ -145,7 +137,7 @@ def arena_win_steps(xml_dir=DEFAULT_XML):
     for el in (node if node is not None else []):
         out.append({"step": int(el.get("Step", 0) or 0),
                     "winCount": int(el.get("WinCount", 0) or 0),
-                    "rewards": [_reward(r) for r in el.findall("Reward")]})
+                    "rewards": [missions.reward_attrs(r) for r in el.findall("Reward")]})
     return sorted(out, key=lambda s: s["step"])
 
 

@@ -21,6 +21,7 @@ import dimension
 import attendance
 import babel
 import colosseum
+import player_events
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
@@ -137,8 +138,9 @@ def next_reset_iso(days=1):
     midnight = datetime.datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
     return (midnight + datetime.timedelta(days=days)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
-def now_iso(delta_days=0):
-    return (datetime.datetime.utcnow() + datetime.timedelta(days=delta_days)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+def now_iso(delta_days=0, seconds=0):
+    return (datetime.datetime.utcnow() + datetime.timedelta(days=delta_days, seconds=seconds)
+            ).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
 # Set per request from the `accesstoken` header (see resolve_player middleware).
 # None = no session -> fall back to the admin-selected active player, which is
@@ -2698,6 +2700,194 @@ def r_ack(body, st):
     nothing to keep (a cancelled match, a re-entry attempt) but still must answer."""
     return {}
 
+
+# --- The rest of /player ------------------------------------------------------
+# Seventeen /player routes answered an empty model. Most are one-way telemetry the
+# client posts and never reads back (an ad watched, an exception, a notice clicked)
+# and an acknowledgement is the whole correct answer. The three that carry state are
+# the profile icon, the journey ladder and the anniversary event.
+
+def _key_values(st):
+    """The player's own key-values, as a list of {key, value} the client reads."""
+    return st.setdefault("keyValues", [{"key": "profileIconId",
+                                        "value": _PC["defaults"]["profileIconId"]}])
+
+def _set_key_value(st, key, value):
+    for kv in _key_values(st):
+        if kv.get("key") == key:
+            kv["value"] = value
+            return
+    _key_values(st).append({"key": key, "value": value})
+
+def _key_value(st, key, default=None):
+    for kv in _key_values(st):
+        if kv.get("key") == key:
+            return kv.get("value")
+    return default
+
+def r_change_profile_icon(body, st):
+    """profileIconId must stay a real Unit id - ResourceBase<Unit>.Get is what draws
+    the avatar, and an id that does not resolve gives a blank white circle."""
+    icon = int(body.get("profileIconId", body.get("iconId", 0)) or 0)
+    if str(icon) in st.get("cards", {}):
+        _set_key_value(st, "profileIconId", icon)
+        save_state(st)
+    return {"keyValues": _key_values(st)}
+
+def r_player_ad(body, st):
+    """Rewarded-video counter. Nothing here plays an ad, but the count is what the
+    button reads to decide whether it is still offering one today."""
+    st["dailyAdCount"] = int(st.get("dailyAdCount", 0)) + 1
+    save_state(st)
+    return {"dailyAdCount": st["dailyAdCount"]}
+
+def r_player_other(body, st):
+    """Another player's profile. There is one save here, so it is this one - which is
+    also what the clan and leaderboard panels link to."""
+    d = _PC["defaults"]
+    deco = _deco(st)
+    return {"name": st.get("name", d["name"]),
+            "castleName": st.get("castleName", d["castleName"]),
+            "kingPostfix": 0, "castlePostfix": 0,
+            "profileIconId": _key_value(st, "profileIconId", d["profileIconId"]),
+            "profileIconBackgroundId": 0, "nameTagId": deco["nameTag"],
+            "level": st.get("level", 1), "exp": st.get("exp", 0),
+            "invasionDifficultyRecords": [], "eventModeRecord": [],
+            "rogueLikeBuildingChallengeLevelRecord": [],
+            "babelRecord": [b["floor"] for b in _babel(st).values()] or [0],
+            "winCount": st.get("pvpWin", 0), "heroCount": len(st.get("cards", {})),
+            "currentAltar": 0, "currentDeck": _pvp_card_infos(st),
+            "currentPotential": [], "firstComerIndex": 0,
+            "currentRanking": [], "currentHardRanking": [],
+            "clanId": st.get("clanId", 0), "clanMark": 0,
+            "clanRole": st.get("clanRole", 0), "clanName": st.get("clanName", ""),
+            "clanTier": 0, "clanRoleNames": []}
+
+# --- Journey ------------------------------------------------------------------
+# The client drives this entirely off two key-values it reads back off the response,
+# not off a model field: JourneyLastRewardId and JourneyNextRewardTime.
+
+JOURNEY_LAST = "JourneyLastRewardId"
+JOURNEY_NEXT = "JourneyNextRewardTime"
+
+def _journey_arm(st, last_id):
+    """Point the ladder at the reward after `last_id` and start its clock."""
+    nxt = player_events.journey_next(last_id, XML_DIR)
+    _set_key_value(st, JOURNEY_LAST, str(last_id))
+    _set_key_value(st, JOURNEY_NEXT, "" if nxt is None
+                   else now_iso(seconds=nxt["wait"]))
+    return nxt
+
+def r_journey_init(body, st):
+    """Start the ladder. Re-initialising an armed journey must not reset its timer,
+    or the panel becomes a way to never wait."""
+    if _key_value(st, JOURNEY_NEXT) is None:
+        _journey_arm(st, -1)
+        save_state(st)
+    return {"rewardList": _reward_list_data([]), "keyValues": _key_values(st)}
+
+def r_journey_reward(body, st):
+    """Claim the reward whose wait has elapsed, then arm the next one."""
+    last = int(_key_value(st, JOURNEY_LAST, -1) or -1)
+    due = _key_value(st, JOURNEY_NEXT)
+    item = player_events.journey_next(last, XML_DIR)
+    if item is None or not due or now_iso(0) < due:
+        return {"rewardList": _reward_list_data([]), "keyValues": _key_values(st)}
+    paid = [_grant_mission_reward(st, item["reward"])]
+    _journey_arm(st, item["id"])
+    save_state(st)
+    admin_log(f"[journey] reward {item['id']} claimed -> {paid}")
+    return {"rewardList": _reward_list_data(paid), "keyValues": _key_values(st)}
+
+# --- Anniversary event --------------------------------------------------------
+# FifthHalfYearEventRewards.xml carries no dates of its own, so whether the event is
+# running is the server's call and lives in response_config.
+
+def _year_state(st):
+    y = st.setdefault("yearEvent", {})
+    y.setdefault("startedAt", now_iso(RCFG["yearEvent"]["startDayOffset"]))
+    y.setdefault("lastAttendanceDay", 0)
+    y.setdefault("lastPassDay", 0)
+    y.setdefault("passPoint", 0)
+    y.setdefault("continuous", True)
+    return y
+
+def _year_day(st):
+    y = _year_state(st)
+    start = datetime.datetime.fromisoformat(y["startedAt"].replace("Z", ""))
+    cfg = RCFG["yearEvent"]
+    return min(player_events.elapsed_days(start), cfg["lengthDays"]), start
+
+def r_year_event(body, st):
+    cfg = RCFG["yearEvent"]
+    y = _year_state(st)
+    day, start = _year_day(st)
+    save_state(st)
+    return {"eventStartAt": y["startedAt"],
+            "eventUntilAt": now_iso(cfg["startDayOffset"] + cfg["lengthDays"]),
+            "currentAttendanceDay": day if cfg["enabled"] else 0,
+            "lastAttendanceRewardDay": y["lastAttendanceDay"],
+            "isContinuous": y["continuous"],
+            "lastPassRewardDay": y["lastPassDay"],
+            "passPoint": y["passPoint"]}
+
+def _year_claim(st, track, table):
+    """Pay every unclaimed day of a track up to today. Both tracks pay per day and
+    only once, so the last claimed day is the whole bookkeeping."""
+    cfg = RCFG["yearEvent"]
+    y = _year_state(st)
+    if not cfg["enabled"]:
+        return []
+    day, _ = _year_day(st)
+    paid = []
+    for d in sorted(table):
+        if d <= y[track] or d > day:
+            continue
+        for r in table[d]:
+            paid.append(_grant_mission_reward(st, r))
+        y[track] = d
+    return paid
+
+def r_year_attendance_reward(body, st):
+    table = player_events.year_attendance_rewards(XML_DIR)
+    paid = _year_claim(st, "lastAttendanceDay", table)
+    y = _year_state(st)
+    # The continuous bonus is paid on top, once, when the board is completed
+    # without a gap - claiming the last day late still leaves isContinuous true
+    # here because there is nobody to break the streak on a single-player save.
+    if y["lastAttendanceDay"] >= max(table or [0]) and not y.get("continuousPaid"):
+        for r in player_events.year_continuous_reward(XML_DIR):
+            paid.append(_grant_mission_reward(st, r))
+        y["continuousPaid"] = True
+    save_state(st)
+    return {"eventResponseModel": r_year_event(body, st),
+            "rewardListResponseData": _reward_list_data(paid)}
+
+def r_year_pass_reward(body, st):
+    paid = _year_claim(st, "lastPassDay", player_events.year_pass_rewards(XML_DIR))
+    save_state(st)
+    return {"eventResponseModel": r_year_event(body, st),
+            "rewardListResponseData": _reward_list_data(paid)}
+
+def r_year_buy_pass_point(body, st):
+    """Buy pass points with cash. Refuses rather than going negative - the client
+    re-reads the balance from this response."""
+    cfg = RCFG["yearEvent"]
+    y = _year_state(st)
+    price = cfg["buyPassPointCashPrice"]
+    if st.get("cash", 0) >= price:
+        st["cash"] -= price
+        y["passPoint"] += cfg["buyPassPointCount"]
+        save_state(st)
+    return {"eventResponseModel": r_year_event(body, st),
+            "playerCash": st.get("cash", 0)}
+
+def r_early_access(body, st):
+    """Early-access test windows are dated in EarlyAccessModeInfos.xml and every one
+    of them has closed, so there is nothing to enter. Reported as closed rather than
+    left empty, which the panel reads as a failed request."""
+    return {"earlyAccessModeId": 0, "applied": False, "keyValues": _key_values(st)}
+
 # --- Leaderboards -------------------------------------------------------------
 # Every board answered an empty model, so each one rendered as a blank list with no
 # row for the player either. There is nobody else on a private server, so the honest
@@ -3001,6 +3191,25 @@ DYNAMIC_OVERRIDES = {
     "/invasion/reward/receive-all": r_invasion_reward_all,
     "/mission/check": r_mission,
     "/eventcache": r_event_cache,
+    "/player/ad": r_player_ad,
+    "/player/changeProfileIcon": r_change_profile_icon,
+    "/player/other": r_player_other,
+    "/player/initialize-journey": r_journey_init,
+    "/player/journey-reward": r_journey_reward,
+    "/player/year-event": r_year_event,
+    "/player/year-event-attendance-reward": r_year_attendance_reward,
+    "/player/year-event-pass-reward": r_year_pass_reward,
+    "/player/year-event-buy-pass-point": r_year_buy_pass_point,
+    "/player/early-access-mode": r_early_access,
+    "/player/early-access-mode-code": r_early_access,
+    "/player/tutorial/progress-mission": lambda b, st: {
+        "keyValues": st.get("tutorialKeyValues", [])},
+    # One-way telemetry: posted, never read back.
+    "/player/exception": r_ack,
+    "/player/xcdReport": r_ack,
+    "/player/customEvent": r_ack,
+    "/player/logClickNotice": r_ack,
+    "/player/completeKingGakReturnEvent": r_ack,
     "/pvp/info": r_pvp_info,
     "/pvp/matching": r_arena_matching,
     "/pvp/test-matching": r_arena_matching,

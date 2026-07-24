@@ -17,6 +17,8 @@ import datetime
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+import missions
+
 ROOT = Path(__file__).resolve().parent
 DEFAULT_XML = ROOT / "xml_live"
 
@@ -91,20 +93,13 @@ def floors(xml_dir=DEFAULT_XML):
         if el.get("ID") is None:
             continue
         out[int(el.get("ID"))] = {
-            "reward": [_reward(r) for r in el.findall("Reward")],
-            "passReward": [_reward(r) for r in el.findall("PassReward")],
+            "reward": [missions.reward_attrs(r) for r in el.findall("Reward")],
+            "passReward": [missions.reward_attrs(r) for r in el.findall("PassReward")],
             "power": int(el.findtext("RecommendedCombatPower", 0)),
         }
     return out
 
 
-def _reward(r):
-    t = r.get("Type") or ""
-    cnt = int(r.get("Count", 1))
-    rid = int(r.get("ID", 0))
-    if t == "InventoryItem":
-        return {"type": "Item", "id": rid, "count": cnt}
-    return {"type": t, "id": rid, "count": cnt}
 
 
 def floor_reward(theme, floor, xml_dir=DEFAULT_XML):

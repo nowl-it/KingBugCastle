@@ -42,7 +42,10 @@ ITEM_REWARDS = {
     "UnitSoulItem": 130,
     "BeginnerMissionCoin": 2000,
     "SkinToken": 2001,
+    "Token_SKIN": 2001,
     "ArenaToken": 2002,
+    "Token_ARENA": 2002,
+    "Token_COLOSSEUM": 2002,
     "ClanToken": 2003,
     "Token_SEASONAL_EVENT": 2004,
     "TerritoryTycoonToken_Bronze": 2008,
@@ -60,6 +63,23 @@ DISPLAY_ONLY = {
     "PassPoint_FifthHalfYear", "MissionPoint_Daily", "MissionPoint_Weekly",
     "ColosseumOpenMissionPoint",
 }
+
+
+def reward_attrs(el):
+    """A reward written the `Type`/`ID`/`Count` way, in _grant_reward's vocabulary.
+
+    Missions.xml is the odd one out (Value/Amount, see rewards_of); every other
+    table - babel floors, colosseum tiers, journey, the anniversary event - writes
+    the count in `Count` and the id in `ID`. Kept here beside ITEM_REWARDS so the
+    token-to-inventory-row mapping has one home rather than a copy per table."""
+    t = el.get("Type") or ""
+    rid = int(el.get("ID", 0) or 0)
+    count = int(float(el.get("Count", 1) or 1))
+    if t in ITEM_REWARDS:
+        return {"type": "Item", "id": ITEM_REWARDS[t], "count": count}
+    if t == "InventoryItem":
+        return {"type": "Item", "id": rid, "count": count}
+    return {"type": t, "id": rid, "count": count}
 
 _cache = {}
 
