@@ -2882,6 +2882,134 @@ def r_year_buy_pass_point(body, st):
     return {"eventResponseModel": r_year_event(body, st),
             "playerCash": st.get("cash", 0)}
 
+# --- Roguelike ----------------------------------------------------------------
+# The run itself lives entirely client-side: the client serialises the whole thing
+# into one opaque string and posts it. The server's only job is to hold that string
+# so a run survives closing the app - which is exactly what the static placeholder
+# could not do, since it always answered with an empty save.
+
+def _rogue(st, theme):
+    return st.setdefault("rogueLike", {}).setdefault(str(int(theme or 0)), {
+        "saveData": "", "ownCardSnapshot": "", "state": "", "saveVersion": 0,
+        "lastHeartPaidFloor": 0, "lastGameStartedSeason": 0})
+
+def r_rogue_save(body, st):
+    """Store the run blob. An empty blob is a legitimate 'run over' write, so it is
+    stored as sent rather than being treated as a missing field."""
+    r = _rogue(st, body.get("themeId", 0))
+    r["saveData"] = body.get("rogueLikeSaveData", "")
+    r["state"] = body.get("state", "")
+    r["saveVersion"] = int(body.get("saveVersion", 0) or 0)
+    save_state(st)
+    return {}
+
+def r_rogue_snapshot(body, st):
+    """The hero roster the run was started with, frozen so later lobby upgrades do
+    not change a run in progress."""
+    r = _rogue(st, body.get("themeId", 0))
+    r["ownCardSnapshot"] = body.get("ownCardSnapshot", "")
+    save_state(st)
+    return {}
+
+def r_rogue_load(body, st):
+    r = _rogue(st, body.get("themeId", 0))
+    save_state(st)
+    return {"rogueLikeSaveData": r["saveData"],
+            "rogueLikeOwnCardSnapshot": r["ownCardSnapshot"],
+            "state": r["state"], "saveVersion": r["saveVersion"],
+            "lastHeartPaidFloor": r["lastHeartPaidFloor"],
+            "lastGameStartedSeason": r["lastGameStartedSeason"]}
+
+def r_rogue_delete(body, st):
+    """Abandon a run. The game index has to move, or the client keeps replaying the
+    same index and the next run's saves collide with the deleted one's."""
+    theme = body.get("rogueLikeThemeId", body.get("themeId", 0))
+    st.setdefault("rogueLike", {}).pop(str(int(theme or 0)), None)
+    st["rogueLikeGameIndex"] = int(st.get("rogueLikeGameIndex", 0)) + 1
+    save_state(st)
+    admin_log(f"[roguelike] run on theme {theme} deleted -> "
+              f"index {st['rogueLikeGameIndex']}")
+    return {"rogueLikeGameIndex": st["rogueLikeGameIndex"],
+            "dimensionRiftGameIndex": st.get("dimensionRiftGameIndex", 0),
+            "returnHeart": 0}
+
+def r_rogue_revive(body, st):
+    """Reviving inside a run costs the same cash as reviving in a normal battle."""
+    return r_game_revive(body, st)
+
+def r_rogue_can_revive_by_ad(body, st):
+    """No ad network is wired up here, so the ad revive is never offered - reported
+    as unavailable rather than left empty, which the button reads as an error."""
+    return {"canReviveByAd": False, "remainCount": 0}
+
+def r_rogue_statistics(body, st):
+    """Clear rates across the playerbase. One player is not a sample, and inventing
+    one would print made-up percentages next to real mission names."""
+    return {"rogueLikeMissionStatistics": [], "totalRogueLikeUser": 1}
+
+# --- Shop bookkeeping ---------------------------------------------------------
+# Nine shop routes answered an empty model. None of them buy anything - they are the
+# places where the player's own choices are stored: which treasures they want out of
+# a box, which heroes they pinned to a custom-pickup banner, and which purchases the
+# store still owes them.
+
+# ResourceTreasure.Rarity. The wish list is keyed by it, and Newtonsoft writes an
+# enum dictionary key as its name, so the keys have to be the names.
+TREASURE_RARITIES = ["Common", "Rare", "Special"]
+
+def r_treasure_wish_list(body, st):
+    saved = st.get("treasureWishList", {})
+    return {"wishList": {r: list(saved.get(r, [])) for r in TREASURE_RARITIES}}
+
+def r_save_treasure_wish_list(body, st):
+    """Store the wish list, keeping only ids that are really treasures - a wish for
+    something that does not exist comes back as a blank row in the panel."""
+    sent = body.get("wishList") or {}
+    known = set(ALL_TREASURE_IDS)
+    out = {}
+    for rarity in TREASURE_RARITIES:
+        ids = sent.get(rarity) or sent.get(str(TREASURE_RARITIES.index(rarity) + 1)) or []
+        out[rarity] = [int(i) for i in ids if int(i) in known]
+    st["treasureWishList"] = out
+    save_state(st)
+    return {"wishList": out}
+
+def r_custom_pickups(body, st):
+    """The heroes pinned to a custom-pickup banner, per banner id."""
+    banner = str(body.get("shopItemId", body.get("id", 0)) or 0)
+    return {"customPickups": list(st.get("customPickups", {}).get(banner, []))}
+
+def r_save_custom_pickups(body, st):
+    banner = str(body.get("shopItemId", body.get("id", 0)) or 0)
+    picks = [int(i) for i in (body.get("customPickups") or []) if int(i)]
+    st.setdefault("customPickups", {})[banner] = picks
+    save_state(st)
+    return {"customPickups": picks}
+
+def r_shop_choice(body, st):
+    """A package that lets the buyer choose - a hero, or which treasure a pickup
+    ceiling pays out. The choice is recorded so the panel stops asking; the item
+    itself is granted by the purchase route that precedes this."""
+    key = "packageChoices" if "unitId" in body else "pickupChoices"
+    choice = int(body.get("unitId", body.get("treasureId", 0)) or 0)
+    if choice:
+        st.setdefault(key, {})[str(body.get("shopItemId", 0) or 0)] = choice
+        save_state(st)
+    return {}
+
+def r_iap_restore_add(body, st):
+    """A purchase the store charged for but the server has not yet delivered. There
+    is no store here, so nothing is ever owed - but the list has to answer, because
+    the client blocks the shop while it believes a restore is pending."""
+    return {"restoreNeededIaps": st.get("restoreNeededIaps", [])}
+
+def r_iap_restore_remove(body, st):
+    pending = st.get("restoreNeededIaps", [])
+    sku = body.get("productId") or body.get("sku")
+    st["restoreNeededIaps"] = [p for p in pending if p != sku]
+    save_state(st)
+    return {"restoreNeededIaps": st["restoreNeededIaps"]}
+
 def r_early_access(body, st):
     """Early-access test windows are dated in EarlyAccessModeInfos.xml and every one
     of them has closed, so there is nothing to enter. Reported as closed rather than
@@ -3191,6 +3319,29 @@ DYNAMIC_OVERRIDES = {
     "/invasion/reward/receive-all": r_invasion_reward_all,
     "/mission/check": r_mission,
     "/eventcache": r_event_cache,
+    "/rogueLike/save-rogueLike": r_rogue_save,
+    "/rogueLike/load-rogueLike-data": r_rogue_load,
+    "/rogueLike/save-own-card-snapshot": r_rogue_snapshot,
+    "/rogueLike/delete-roguelike": r_rogue_delete,
+    "/rogueLike/revive": r_rogue_revive,
+    "/rogueLike/can-revive-by-ad": r_rogue_can_revive_by_ad,
+    "/mission/roguelike-statistics": r_rogue_statistics,
+    "/mission/roguelike/check-on-clear": r_ack,
+    # /test/* are the client's own dev buttons. They exist in the build, so they
+    # must answer, but nothing here is meant to rewrite a save from a debug menu.
+    "/test/roguelike/clear-count": r_ack,
+    "/test/roguelike/play-count": r_ack,
+    "/test/roguelike/mission-clear-count": r_ack,
+    "/test/roguelike/reset-mission": r_ack,
+    "/shop/get-treasure-wish-list": r_treasure_wish_list,
+    "/shop/save-treasure-wish-list": r_save_treasure_wish_list,
+    "/shop/check-treasure-wish-list-valid": r_treasure_wish_list,
+    "/shop/load-custom-pickups": r_custom_pickups,
+    "/shop/save-custom-pickups": r_save_custom_pickups,
+    "/shop/choice-package-unit": r_shop_choice,
+    "/shop/choice-treasure-pickup-ceil": r_shop_choice,
+    "/shop/caniap-and-add-to-restore-needed-iaps": r_iap_restore_add,
+    "/shop/remove-from-restore-needed-iaps": r_iap_restore_remove,
     "/player/ad": r_player_ad,
     "/player/changeProfileIcon": r_change_profile_icon,
     "/player/other": r_player_other,

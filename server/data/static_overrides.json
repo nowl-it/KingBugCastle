@@ -41,7 +41,6 @@
     "addGold": 500,
     "cards": []
   },
-  "/rogueLike/save-rogueLike": {},
   "/rogueLike/out-game": {
     "rogueLikeOutGameStatus": {
       "collectedRune": {},
@@ -56,14 +55,6 @@
       "bossKillCount": {}
     },
     "totalClearCount": 0
-  },
-  "/rogueLike/load-rogueLike-data": {
-    "rogueLikeSaveData": "",
-    "rogueLikeOwnCardSnapshot": "",
-    "state": "",
-    "saveVersion": 0,
-    "lastHeartPaidFloor": 0,
-    "lastGameStartedSeason": 0
   },
   "/mission/roguelike": {
     "rogueLikeMissions": [],
