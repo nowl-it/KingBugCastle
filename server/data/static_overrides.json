@@ -1,13 +1,6 @@
 {
   "/auth/shake-hand": {},
   "/auth/xcd": {},
-  "/player/dailyAttendanceEvents": {
-    "attendedDays": 1,
-    "events": []
-  },
-  "/player/surprise-attendance-event": {
-    "attendedDays": 1
-  },
   "/player/daily-consumed-currencies": {},
   "/player/game-skip-information": {},
   "/game/adBonus": {
