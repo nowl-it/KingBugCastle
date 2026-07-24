@@ -142,6 +142,44 @@ def now_iso(delta_days=0, seconds=0):
     return (datetime.datetime.utcnow() + datetime.timedelta(days=delta_days, seconds=seconds)
             ).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
+def body_int(value, default=0, lo=None, hi=None):
+    """A number out of a request body, as an int, within bounds.
+
+    Request fields arrive as whatever the client's serialiser produced. A field
+    that comes back as "2" instead of 2 makes `max(1, count)` raise TypeError and
+    the route answers 500; a negative index reaches a Python list and quietly
+    writes to the wrong end of it, which is worse than crashing. Both are read
+    through here rather than guarded per handler."""
+    try:
+        n = int(float(value))
+    except (TypeError, ValueError):
+        return default
+    if lo is not None:
+        n = max(lo, n)
+    if hi is not None:
+        n = min(hi, n)
+    return n
+
+def body_list(value, of=None):
+    """A list field out of a request body. `of` filters/converts each element.
+
+    A field the client sends as null, a bare number, or an object is not a list,
+    and iterating it raises before the handler gets to validate anything."""
+    if not isinstance(value, (list, tuple)):
+        return []
+    if of is None:
+        return list(value)
+    out = []
+    for v in value:
+        try:
+            out.append(of(v))
+        except (TypeError, ValueError, AttributeError):
+            continue
+    return out
+
+def body_str(value, default=""):
+    return value.strip() if isinstance(value, str) else default
+
 # Set per request from the `accesstoken` header (see resolve_player middleware).
 # None = no session -> fall back to the admin-selected active player, which is
 # what every single-player setup and the whole pre-login boot sequence relies on.
@@ -339,6 +377,12 @@ DEFAULT_CARDS = {
 # against decompiled bounds).
 DEFAULT_DECKS = SEED["decks"]
 DECK_SLOTS = len(DEFAULT_DECKS[0]["deck"])
+# Every "pad this list up to the index the client asked for" loop needs a ceiling.
+# The index is client-supplied and unauthenticated, so without one a single request
+# naming preset 999999999 makes the server allocate until it dies.
+DECK_PRESETS = len(DEFAULT_DECKS)
+BUILDING_PRESETS = 10          # _get_building_data pads to this
+CLAN_RAID_DECKS = 10
 
 def _pad_deck(deck, potential):
     # Client (DraggableUnitCard.SwapCard, Ghidra-confirmed) crashes on drag-swap
@@ -417,6 +461,7 @@ def _uid_for_login(login_id, prev_token):
     (/auth/login carries a token, not an id) -> new player, but only in
     multiplayer mode -> the active player.
     """
+    login_id = str(login_id or "")
     uid = playerdb.uid_for_login(login_id) or playerdb.uid_for_token(prev_token)
     if uid and playerdb.load(uid) is not None:
         return uid
@@ -442,7 +487,9 @@ def r_login(body, st):
     # All date-ish fields must be non-null parseable strings: HandleAuthResponse
     # does DateTime.Parse on expiredAt / serverTime / blockedUntilAt -> null throws
     # ArgumentNullException.
-    login_id = CURRENT_LOGIN_ID.get() or body.get("id") or ""
+    # str(): the id is a bearer credential the client picks, and it is hashed - a
+    # numeric one used to raise AttributeError on .encode() and 500 the whole login.
+    login_id = str(CURRENT_LOGIN_ID.get() or body.get("id") or "")
     # No bind_login() here: in single-player mode _uid_for_login falls back to the
     # ACTIVE player, and recording that as "account X owns save Y" would pin every
     # account that ever logged in to it - permanently, so a later switch to
@@ -480,7 +527,7 @@ def _get_building_data(st):
     return presets
 
 def r_building_save(body, st):
-    preset = body.get("preset", 0)
+    preset = body_int(body.get("preset"), 0, lo=0, hi=BUILDING_PRESETS - 1)
     levels = body.get("levels", [0] * 6)
     presets = _get_building_data(st)
     while len(presets) <= preset:
@@ -491,7 +538,7 @@ def r_building_save(body, st):
     return {"buildingPoint": st.get("buildingPoints", 25), "buildingData": presets}
 
 def r_building_reset_point(body, st):
-    preset = body.get("preset", 0)
+    preset = body_int(body.get("preset"), 0, lo=0, hi=BUILDING_PRESETS - 1)
     presets = _get_building_data(st)
     while len(presets) <= preset:
         presets.append({"buildingLevels": [0]*6})
@@ -599,8 +646,8 @@ def r_player(body, st):
 def r_game_start(body, st):
     print(f"  [GAME/START] body={body}")
     gc = RCFG["gameStart"]
-    theme = body.get("theme", 1)
-    stage = body.get("stage", 1)
+    theme = body_int(body.get("theme"), 1, lo=0)
+    stage = body_int(body.get("stage"), 1, lo=0)
     heart_cost = gc["heartCostLow"] if theme <= gc["heartCostThemeThreshold"] else gc["heartCostHigh"]
     heart = max(0, st.get("heart", 999) - heart_cost)
     st["heart"] = heart
@@ -623,10 +670,10 @@ def r_game_start(body, st):
 def r_game_complete(body, st):
     gc = RCFG["gameComplete"]
     babel_rewards = []
-    gid = body.get("gameId", "")
-    win = body.get("win", False)
-    theme = body.get("theme", 1)
-    stage = body.get("stage", 1)
+    gid = body_str(body.get("gameId"))
+    win = bool(body.get("win", False))
+    theme = body_int(body.get("theme"), 1, lo=0)
+    stage = body_int(body.get("stage"), 1, lo=0)
     _game_store.pop(gid, None)
     add_gold = gc["baseGold"] + theme * gc["goldPerTheme"] + (gc["winBonusGold"] if win else 0)
     add_exp = gc["baseExp"] + theme * gc["expPerTheme"]
@@ -650,7 +697,8 @@ def r_game_complete(body, st):
         # the ordinary story/invasion ones and carry no challenge difficulty.
         if theme >= _CHALLENGE_THEME_MIN and body.get("difficulty"):
             cs = _challenge_state(st)
-            cs["bestDifficulty"] = max(cs["bestDifficulty"], int(body["difficulty"]))
+            cs["bestDifficulty"] = max(cs["bestDifficulty"],
+                                       body_int(body.get("difficulty"), 0))
             cs["clearedBattles"] = max(cs["clearedBattles"], int(stage) + 1)
         # A Babel floor pays its own reward on first clear; nothing else advances the
         # tower, so without this hook every tower stays on floor 0 forever.
@@ -734,7 +782,7 @@ def r_card_use_candy(body, st):
     }
 
 def r_card_upgrade_potential(body, st):
-    unit_id = body.get("unitId", 0)
+    unit_id = body_int(body.get("unitId"), 0)
     cards = st.setdefault("cards", {})
     key = str(unit_id)
     if key in cards:
@@ -819,11 +867,14 @@ def r_deck(body, st):
     return {"deckInfos": deck_infos, "defaultPotentialInfo": st.get("defaultPotential", {"unit": [], "potential": []})}
 
 def r_deck_set(body, st):
-    preset_idx = body.get("presetIdx", 0)
+    # `or []` rather than a get() default: the client sends the key with a null
+    # value when a preset is empty, and a default only fires on a missing key.
+    preset_idx = body_int(body.get("presetIdx"), 0, lo=0, hi=DECK_PRESETS - 1)
     decks = st.setdefault("decks", list(DEFAULT_DECKS))
     admin_log(f"[DECK/SET] preset={preset_idx} body_keys={list(body.keys())}")
-    deck, potential = _pad_deck(body.get("deck", []), body.get("potential", []))
-    first_comer = body.get("firstComerIndex", 0)
+    deck, potential = _pad_deck(body_list(body.get("deck")),
+                                body_list(body.get("potential")))
+    first_comer = body_int(body.get("firstComerIndex"), 0, lo=0)
     while len(decks) <= preset_idx:
         decks.append({"deck": [0] * DECK_SLOTS, "potential": [0] * DECK_SLOTS, "firstComerIndex": 0})
     decks[preset_idx] = {"deck": deck, "potential": potential, "firstComerIndex": first_comer}
@@ -834,10 +885,10 @@ def r_deck_set(body, st):
             "defaultPotentialInfo": st.get("defaultPotential", {"unit": [], "potential": []})}
 
 def r_deck_set_potential(body, st):
-    preset_idx = body.get("presetIdx", 0)
-    idx = body.get("idx", 0)
-    unit_id = body.get("unitId", 0)
-    potential = body.get("potential", 0)
+    preset_idx = body_int(body.get("presetIdx"), 0, lo=0, hi=DECK_PRESETS - 1)
+    idx = body_int(body.get("idx"), 0, lo=0, hi=DECK_SLOTS - 1)
+    unit_id = body_int(body.get("unitId"), 0)
+    potential = body_int(body.get("potential"), 0)
     decks = st.setdefault("decks", list(DEFAULT_DECKS))
     admin_log(f"[DECK/SET-POTENTIAL] preset={preset_idx} idx={idx} unitId={unit_id} potential={potential}")
     while len(decks) <= preset_idx:
@@ -853,9 +904,9 @@ def r_deck_set_potential(body, st):
     return r_deck({}, st)
 
 def r_deck_set_all_potential(body, st):
-    potentials = body.get("potentials", [])
-    st["defaultPotential"] = {"unit": [p.get("unitId", 0) for p in potentials],
-                               "potential": [p.get("potential", 0) for p in potentials]}
+    potentials = [p for p in body_list(body.get("potentials")) if isinstance(p, dict)]
+    st["defaultPotential"] = {"unit": [body_int(p.get("unitId"), 0) for p in potentials],
+                              "potential": [body_int(p.get("potential"), 0) for p in potentials]}
     save_state(st)
     return r_deck({}, st)
 
@@ -933,7 +984,7 @@ def r_use_inventory(body, st):
     is to spend the item and hand back the authoritative inventory.
     ponytail: no per-item effect table; add one if an item turns out to need server state."""
     item_id = body.get("itemID") or body.get("itemId") or 0
-    _take_item(st, item_id, max(1, body.get("count") or 1))
+    _take_item(st, item_id, body_int(body.get("count"), 1, lo=1))
     save_state(st)
     return {"playerHeart": st.get("heart", 0), "eventFlag": 0,
             "inventoryItems": _inventory_models(st)}
@@ -941,7 +992,7 @@ def r_use_inventory(body, st):
 def r_use_reward_box(body, st):
     item_id = body.get("itemId") or body.get("itemID") or 0
     rewards = _open_reward_box(st, item_id, body.get("selectIdx"),
-                               max(1, body.get("count") or 1))
+                               body_int(body.get("count"), 1, lo=1))
     save_state(st)
     return {"rewardList": _reward_list_data(rewards),
             "addedRewardList": _reward_list_data([]),
@@ -990,8 +1041,8 @@ def _shop_buy(body, st):
 
     Real-money items are granted without charging: there is no store behind this
     server, so refusing them would make every package permanently unbuyable."""
-    item_id = int(body.get("itemId") or 0)
-    amount = max(1, int(body.get("buyAmount") or 1))
+    item_id = body_int(body.get("itemId"), 0)
+    amount = body_int(body.get("buyAmount"), 1, lo=1)
     el = shop.find(item_id, XML_DIR)
     if el is None:
         admin_log(f"[shop] refused: item {item_id} is not in ShopItems.xml")
@@ -1132,8 +1183,8 @@ def r_invasion_reward(body, st):
              "rewards": row["Rewards"], "passRewards": row["PassRewards"],
              "received": bool(_invasion_claimed(st).get(str(t), 0) & (1 << (d - 1)))}
             for (t, d), row in sorted(INVASION_REWARDS.items())]}
-    theme = int(body["theme"])
-    rewards = _invasion_claim(st, theme, int(body.get("difficulty") or 1),
+    theme = body_int(body.get("theme"), 0)
+    rewards = _invasion_claim(st, theme, body_int(body.get("difficulty"), 1),
                               bool(body.get("pass")))
     save_state(st)
     admin_log(f"[invasion] theme {theme} d{body.get('difficulty')} -> {len(rewards)} rewards")
@@ -1183,8 +1234,8 @@ def r_challenge_reward(body, st):
     """Claim one track entry, or every earned one when no index is given."""
     cs = _challenge_state(st)
     entries = challenge.track(xml_dir=XML_DIR)
-    idx = body.get("index", body.get("rewardIdx"))
-    want = [int(idx)] if idx is not None else range(len(entries))
+    idx = body.get("index") if body.get("index") is not None else body.get("rewardIdx")
+    want = [body_int(idx, -1)] if idx is not None else range(len(entries))
     rewards = []
     for i in want:
         if not (0 <= i < len(entries)) or i in cs["claimed"]:
@@ -1308,15 +1359,17 @@ def _claim_missions(st, ids):
     claimed = _claimed_missions(st)
     catalog = missions.load(XML_DIR)
     out = []
-    for mid in ids:
-        m = catalog.get(int(mid))
-        if m is None or int(mid) in claimed:
+    # Coerced here, not in the caller: the id list arrives straight off the request
+    # and every claim route funnels through this loop.
+    for mid in body_list(ids, int):
+        m = catalog.get(mid)
+        if m is None or mid in claimed:
             continue
         if missions.progress(m, st, counters(st)) < missions.goal_value(m):
             continue
         for r in missions.rewards_of(m):
             out.append(_grant_mission_reward(st, r))
-        claimed.add(int(mid))
+        claimed.add(mid)
         bump(st, "missionClear")
     st["claimedMissions"] = sorted(claimed)
     save_state(st)
@@ -1328,8 +1381,8 @@ def r_mission_reward_all(body, st):
     GetMissionRewardAll takes a `missionIdList` (MissionRewardRequestModel), so the
     client sends one id to claim one and several to claim a batch - there is no
     separate per-mission route. An empty list means "everything I can claim"."""
-    ids = (body.get("missionIdList") or body.get("missionIds")
-           or ([body["missionId"]] if body.get("missionId") else [])
+    ids = (body_list(body.get("missionIdList") or body.get("missionIds"), int)
+           or ([body_int(body.get("missionId"), 0)] if body.get("missionId") else [])
            or list(missions.load(XML_DIR)))
     rewards = _claim_missions(st, ids)
     admin_log(f"[mission] claim {len(ids)} requested -> {len(rewards)} rewards")
@@ -1599,9 +1652,9 @@ def r_artifact_inventory(body, st):
             "playerCash": st.get("cash", 0)}
 
 def r_artifact_equip(body, st):
-    target_id = body.get("targetId", 0)
-    index = body.get("index", 0)
-    deck_preset = body.get("deckPreset", 0)
+    target_id = body_int(body.get("targetId"), 0)
+    index = body_int(body.get("index"), 0)
+    deck_preset = body_int(body.get("deckPreset"), 0)
     equipped = [e for e in st.get("equippedArtifacts", [])
                 if not (e.get("deckPreset", 0) == deck_preset and e.get("index", 0) == index)]
     if target_id and target_id in ARTIFACT_BY_ID:
@@ -1685,14 +1738,14 @@ def _clan_new(st, body):
     c = dict(RCFG["clanCreate"])
     c.update({
         "id": 1,
-        "name": (body.get("name") or "Clan").strip(),
-        "markId": int(body.get("markId", body.get("mark", 0)) or 0),
-        "language": int(body.get("language", 0) or 0),
-        "keywords": list(body.get("keywords") or []),
-        "joinType": int(body.get("joinType", 0) or 0),
-        "intro": body.get("intro", ""),
-        "notice": body.get("notice", ""),
-        "tag": body.get("tag", ""),
+        "name": body_str(body.get("name")) or "Clan",
+        "markId": body_int(body.get("markId") or body.get("mark"), 0),
+        "language": body_int(body.get("language"), 0),
+        "keywords": body_list(body.get("keywords")),
+        "joinType": body_int(body.get("joinType"), 0),
+        "intro": body_str(body.get("intro")),
+        "notice": body_str(body.get("notice")),
+        "tag": body_str(body.get("tag")),
         "point": 0, "tier": 0, "battleTier": 0,
         "contribution": 0, "weeklyContribution": 0,
         "roleNames": [], "chats": [], "seq": 0,
@@ -1801,10 +1854,10 @@ def r_clan_chat(body, st):
     if msg:
         c["seq"] = c.get("seq", 0) + 1
         c.setdefault("chats", []).append({
-            "seqId": c["seq"], "type": int(body.get("type", 0) or 0),
+            "seqId": c["seq"], "type": body_int(body.get("type"), 0),
             "accountId": st.get("accountId", _PC["defaults"]["accountId"]),
             "sender": st.get("name", _PC["defaults"]["name"]),
-            "message": msg, "targetUnit": int(body.get("targetUnit", 0) or 0),
+            "message": msg, "targetUnit": body_int(body.get("targetUnit"), 0),
             "count": 0, "maxCount": 0, "createdAt": now_iso(0), "canSupport": False})
         c["chats"] = c["chats"][-100:]
         save_state(st)
@@ -1817,7 +1870,7 @@ def r_clan_fetch_chat(body, st):
 def r_clan_delete_chat(body, st):
     c = _clan(st)
     if c is not None:
-        seq = int(body.get("seqId", body.get("id", 0)) or 0)
+        seq = body_int(body.get("seqId") or body.get("id"), 0)
         c["chats"] = [m for m in c.get("chats", []) if m["seqId"] != seq]
         save_state(st)
     return r_clan_fetch_chat(body, st)
@@ -1830,7 +1883,7 @@ def r_clan_role_name(body, st):
     replaces its entry rather than appending a second one for the same role."""
     c = _clan(st)
     if c is not None:
-        role = int(body.get("role", 0) or 0)
+        role = body_int(body.get("role"), 0)
         name = body.get("name", "")
         names = [r for r in c.get("roleNames", []) if r.get("role") != role]
         if name:
@@ -1851,7 +1904,7 @@ def r_clan_raid_deck(body, st):
     c = _clan(st) or {}
     decks = c.setdefault("raidDecks", []) if _clan(st) else []
     if _clan(st) is not None and (body.get("deck") or body.get("units")):
-        idx = int(body.get("index", 0) or 0)
+        idx = body_int(body.get("index"), 0, lo=0, hi=CLAN_RAID_DECKS - 1)
         while len(decks) <= idx:
             decks.append({"index": len(decks), "name": "", "deck": [], "potential": []})
         decks[idx] = {"index": idx,
@@ -1864,7 +1917,7 @@ def r_clan_raid_deck(body, st):
 def r_clan_raid_delete_deck(body, st):
     c = _clan(st)
     if c is not None:
-        idx = int(body.get("index", -1))
+        idx = body_int(body.get("index"), -1)
         decks = c.get("raidDecks", [])
         if 0 <= idx < len(decks):
             decks.pop(idx)
@@ -1885,7 +1938,7 @@ def r_clan_raid_state(body, st):
 def r_clan_raid_end(body, st):
     c = _clan(st)
     if c is not None:
-        c["raidDamage"] = max(c.get("raidDamage", 0), int(body.get("damage", 0) or 0))
+        c["raidDamage"] = max(c.get("raidDamage", 0), body_int(body.get("damage"), 0))
         save_state(st)
     return dict(STATIC_OVERRIDES["/clan/raid"])
 
@@ -1928,7 +1981,11 @@ def _terr_labor(st):
     return labor
 
 def _terr_at(t, pos):
-    return next((b for b in t["buildings"] if b["posIndex"] == int(pos)), None)
+    """The building at a slot. Coerces here rather than in each caller: every
+    territory route that names a slot resolves it through this one function, and a
+    slot sent as null or a string used to raise before the caller saw it."""
+    pos = body_int(pos, -1)
+    return next((b for b in t["buildings"] if b["posIndex"] == pos), None)
 
 def r_territory_fetch(body, st):
     t = _terr(st)
@@ -1969,10 +2026,10 @@ def r_territory_build(body, st):
     /territory/build carries an id, /territory/upgrade-building only a posIndex - both
     land here because both resolve to "the next level of what belongs at this slot"."""
     t = _terr(st)
-    pos = int(body.get("posIndex", 0))
+    pos = body_int(body.get("posIndex"), 0)
     existing = _terr_at(t, pos)
     if body.get("id"):
-        bid = int(body["id"])
+        bid = body_int(body.get("id"), 0)
     elif existing:
         bid = existing["buildingId"] + 1
         if territory.level(bid) > territory.max_level(bid, XML_DIR):
@@ -2026,8 +2083,8 @@ def r_territory_store(body, st):
 
 def r_territory_unstore(body, st):
     t = _terr(st)
-    bid = int(body.get("buildingId", 0))
-    pos = int(body.get("posIndex", 0))
+    bid = body_int(body.get("buildingId"), 0)
+    pos = body_int(body.get("posIndex"), 0)
     row = next((s for s in t["stored"] if s["buildingId"] == bid), None)
     if row and _terr_at(t, pos) is None:
         row["count"] -= 1
@@ -2045,7 +2102,7 @@ def r_territory_replace(body, st):
     if a is not None and b is not None:
         a["posIndex"], b["posIndex"] = b["posIndex"], a["posIndex"]
     elif a is not None and body.get("targetPosIndex") is not None:
-        a["posIndex"] = int(body["targetPosIndex"])
+        a["posIndex"] = body_int(body.get("targetPosIndex"), a["posIndex"])
     save_state(st)
     return r_territory_fetch({}, st)
 
@@ -2065,7 +2122,7 @@ def r_territory_assign(body, st):
     b = _terr_at(t, body.get("posIndex", -1))
     if b is None:
         return r_territory_fetch({}, st)
-    units = [int(u) for u in (body.get("unitIds") or body.get("units") or [])]
+    units = body_list(body.get("unitIds") or body.get("units"), int)
     cap = territory.spec(b["buildingId"], "MaxUnitAssignCount", 0, XML_DIR)
     units = units[:cap]
     for other in t["buildings"]:
@@ -2080,7 +2137,7 @@ def r_territory_assign(body, st):
 
 def r_territory_hunting_start(body, st):
     t = _terr(st)
-    hid = int(body.get("huntingId", 0))
+    hid = body_int(body.get("huntingId"), 0)
     h = territory.huntings(XML_DIR).get(hid)
     if h is None:
         return {**r_territory_fetch({}, st), "msg": f"no such hunting {hid}"}
@@ -2094,7 +2151,7 @@ def r_territory_hunting_start(body, st):
 def r_territory_hunting_end(body, st):
     """Finish a run and pay it out. Ending one that was never started pays nothing."""
     t = _terr(st)
-    hid = int(body.get("huntingId", 0))
+    hid = body_int(body.get("huntingId"), 0)
     row = next((x for x in t["hunting"] if x["huntingId"] == hid), None)
     if row is None:
         return {**r_territory_fetch({}, st), "rewardListData": _reward_list_data([])}
@@ -2110,7 +2167,7 @@ def r_territory_hunting_end(body, st):
 
 def r_territory_hunting_stop(body, st):
     t = _terr(st)
-    hid = int(body.get("huntingId", 0))
+    hid = body_int(body.get("huntingId"), 0)
     t["hunting"] = [x for x in t["hunting"] if x["huntingId"] != hid]
     save_state(st)
     return r_territory_fetch({}, st)
@@ -2118,7 +2175,7 @@ def r_territory_hunting_stop(body, st):
 def r_territory_trade_buy(body, st):
     """Buy from the trade shop. Priced in inventory items, per currency index."""
     _, items = territory.trade_shop(xml_dir=XML_DIR)
-    uid = int(body.get("uid", body.get("itemId", 0)))
+    uid = body_int(body.get("uid") if body.get("uid") is not None else body.get("itemId"), 0)
     item = next((i for i in items if i["id"] == uid or i["itemId"] == uid), None)
     if item is None:
         return {**r_territory_fetch({}, st), "msg": f"no such trade item {uid}"}
@@ -2128,7 +2185,7 @@ def r_territory_trade_buy(body, st):
     if item["buyLimit"] >= 0 and bought >= item["buyLimit"]:
         return {**r_territory_fetch({}, st), "msg": "buy limit reached"}
     currencies, _ = territory.trade_shop(xml_dir=XML_DIR)
-    idx = int(body.get("currencyIndex", item["prices"][0]["index"]))
+    idx = body_int(body.get("currencyIndex"), item["prices"][0]["index"])
     price = next((p["price"] for p in item["prices"] if p["index"] == idx),
                  item["prices"][0]["price"])
     cur = next((c["id"] for c in currencies if c["index"] == idx), 0)
@@ -2148,7 +2205,7 @@ def r_territory_trade_buy(body, st):
 def r_territory_equip_skin(body, st):
     t = _terr(st)
     sk, _ = territory.skins(CONTENT_GATE, XML_DIR)
-    sid = int(body.get("skinId", body.get("id", 0)))
+    sid = body_int(body.get("skinId") or body.get("id"), 0)
     if sid in sk:
         t["equippedSkin"] = sid
         save_state(st)
@@ -2226,9 +2283,9 @@ def r_flag_inventory(body, st):
 
 def r_flag_set(body, st):
     d = _deco(st)
-    fid = int(body.get("id", body.get("flagId", 0)) or 0)
+    fid = body_int(body.get("id") or body.get("flagId"), 0)
     if fid in decoration.ids("flags", CONTENT_GATE, XML_DIR) or fid == 0:
-        d["flag"] = {"flagId": fid, "season": int(body.get("season", 0) or 0)}
+        d["flag"] = {"flagId": fid, "season": body_int(body.get("season"), 0)}
         save_state(st)
     return dict(d["flag"])
 
@@ -2237,7 +2294,7 @@ def r_nametag_inventory(body, st):
 
 def r_nametag_set(body, st):
     d = _deco(st)
-    nid = int(body.get("id", body.get("nameTagId", 0)) or 0)
+    nid = body_int(body.get("id") or body.get("nameTagId"), 0)
     if nid in decoration.ids("nameTags", CONTENT_GATE, XML_DIR) or nid == 0:
         d["nameTag"] = nid
         save_state(st)
@@ -2245,7 +2302,7 @@ def r_nametag_set(body, st):
 
 def r_map_skin_equip(body, st):
     d = _deco(st)
-    sid = int(body.get("skinId", 0) or 0)
+    sid = body_int(body.get("skinId"), 0)
     if sid in decoration.ids("mapSkins", CONTENT_GATE, XML_DIR):
         d["mapSkin"] = sid
         save_state(st)
@@ -2253,7 +2310,7 @@ def r_map_skin_equip(body, st):
 
 def r_map_skin_favorite(body, st):
     d = _deco(st)
-    sid = int(body.get("skinId", 0) or 0)
+    sid = body_int(body.get("skinId"), 0)
     fav = d["favoriteMapSkins"]
     if body.get("set", True):
         if sid not in fav:
@@ -2266,7 +2323,7 @@ def r_map_skin_favorite(body, st):
 def r_map_skin_buy(body, st):
     """Owned already, so this only charges. Refusing outright would leave the buy
     button dead; charging keeps the token economy honest for anyone who cares."""
-    sid = int(body.get("skinId", 0) or 0)
+    sid = body_int(body.get("skinId"), 0)
     if body.get("useSkinToken"):
         price = decoration.token_price("mapSkins", sid, "SkinTokenPrice", XML_DIR)
         if price and _item_count(st, decoration.SKIN_TOKEN) >= price:
@@ -2280,7 +2337,7 @@ def r_map_skin_buy(body, st):
 
 def r_login_skin_equip(body, st):
     d = _deco(st)
-    sid = int(body.get("skinId", 0) or 0)
+    sid = body_int(body.get("skinId"), 0)
     if sid in decoration.ids("loginSkins", CONTENT_GATE, XML_DIR):
         d["loginSkin"] = sid
         save_state(st)
@@ -2298,7 +2355,7 @@ def _advisor_response(st, aid):
 
 def r_advisor_contract(body, st):
     d = _deco(st)
-    aid = int(body.get("advisorId", 0) or 0)
+    aid = body_int(body.get("advisorId"), 0)
     if aid in decoration.ids("advisors", CONTENT_GATE, XML_DIR):
         price = decoration.token_price("advisors", aid, "ContractPrice", XML_DIR) or 0
         if price:
@@ -2312,7 +2369,7 @@ def r_advisor_extend(body, st):
     """Extends from the current expiry, not from now - extending early must not throw
     away the time already paid for."""
     d = _deco(st)
-    aid = int(body.get("advisorId", 0) or 0)
+    aid = body_int(body.get("advisorId"), 0)
     c = d["contracts"].get(str(aid))
     if c and c.get("remainExtend", 0) > 0:
         price = decoration.token_price("advisors", aid, "ExtendPrice", XML_DIR) or 0
@@ -2331,7 +2388,7 @@ def r_advisor_timeout(body, st):
     """The client reports a contract it believes has run out; drop it and fall back to
     the default advisor so the lobby is never left with nobody standing there."""
     d = _deco(st)
-    aid = int(body.get("advisorId", 0) or 0)
+    aid = body_int(body.get("advisorId"), 0)
     d["contracts"].pop(str(aid), None)
     if d["advisor"] == aid:
         d["advisor"] = decoration.DEFAULT_ADVISOR
@@ -2340,7 +2397,7 @@ def r_advisor_timeout(body, st):
 
 def r_advisor_equip(body, st):
     d = _deco(st)
-    aid = int(body.get("advisorId", 0) or 0)
+    aid = body_int(body.get("advisorId"), 0)
     if aid in decoration.ids("advisors", CONTENT_GATE, XML_DIR):
         d["advisor"] = aid
         save_state(st)
@@ -2355,7 +2412,7 @@ def _card(st, unit_id):
 def r_card(body, st):
     """One card. The client asks for a single hero after upgrading it; answering with
     the whole roster is wrong shape, and answering with nothing blanks the panel."""
-    unit_id = int(body.get("unitId", body.get("id", 0)) or 0)
+    unit_id = body_int(body.get("unitId") or body.get("id"), 0)
     c = _card(st, unit_id)
     if c is None:
         return {"unitId": unit_id, "level": 1, "exp": 0, "potentialTier": 0,
@@ -2376,7 +2433,7 @@ def r_dimension_upgrade(body, st):
     One level per call, not one per affordable step: the panel animates a single
     level-up and re-reads the card, so jumping several would desync the display from
     the state it just paid for."""
-    unit_id = int(body.get("unitId", 0) or 0)
+    unit_id = body_int(body.get("unitId"), 0)
     c = _card(st, unit_id)
     if c is None or dimension.model(unit_id, xml_dir=XML_DIR) is None:
         return r_card(body, st)
@@ -2391,8 +2448,8 @@ def r_dimension_upgrade(body, st):
 
 def r_dimension_overcome(body, st):
     """Spend 차원 영웅 돌파권, one per step, up to OvercomeMax."""
-    unit_id = int(body.get("unitId", 0) or 0)
-    count = max(1, int(body.get("count", 1) or 1))
+    unit_id = body_int(body.get("unitId"), 0)
+    count = body_int(body.get("count"), 1, lo=1)
     c = _card(st, unit_id)
     if c is None or dimension.model(unit_id, xml_dir=XML_DIR) is None:
         return {"unit": dimension.model(unit_id, xml_dir=XML_DIR),
@@ -2586,8 +2643,8 @@ def r_colosseum_complete_round(body, st):
     win = bool(body.get("win", body.get("isWin", False)))
     delta = _pvp_record(st, "colosseum", win)
     _pvp_log(st, "colosseum", win, delta,
-             {"gameId": str(body.get("gameId", "")), "rank": int(body.get("rank", 0) or 0),
-              "round": int(body.get("round", 0) or 0)})
+             {"gameId": str(body.get("gameId", "")), "rank": body_int(body.get("rank"), 0),
+              "round": body_int(body.get("round"), 0)})
     save_state(st)
     admin_log(f"[colosseum] round {'win' if win else 'loss'} {delta:+d} "
               f"-> {st['colosseumScore']}")
@@ -2597,7 +2654,7 @@ def r_colosseum_complete_round(body, st):
 def r_colosseum_round_data(body, st):
     """Snapshot of a round in progress. Nothing to keep - the client replays its own
     rounds - but it must answer, or the battle stalls waiting on the round save."""
-    return {"round": int(body.get("round", 0) or 0)}
+    return {"round": body_int(body.get("round"), 0)}
 
 def r_colosseum_logs(body, st):
     _pvp_state(st, "colosseum")
@@ -2722,7 +2779,7 @@ def _key_value(st, key, default=None):
 def r_change_profile_icon(body, st):
     """profileIconId must stay a real Unit id - ResourceBase<Unit>.Get is what draws
     the avatar, and an id that does not resolve gives a blank white circle."""
-    icon = int(body.get("profileIconId", body.get("iconId", 0)) or 0)
+    icon = body_int(body.get("profileIconId") or body.get("iconId"), 0)
     if str(icon) in st.get("cards", {}):
         _set_key_value(st, "profileIconId", icon)
         save_state(st)
@@ -2883,7 +2940,7 @@ def r_year_buy_pass_point(body, st):
 # could not do, since it always answered with an empty save.
 
 def _rogue(st, theme):
-    return st.setdefault("rogueLike", {}).setdefault(str(int(theme or 0)), {
+    return st.setdefault("rogueLike", {}).setdefault(str(body_int(theme, 0)), {
         "saveData": "", "ownCardSnapshot": "", "state": "", "saveVersion": 0,
         "lastHeartPaidFloor": 0, "lastGameStartedSeason": 0})
 
@@ -2893,7 +2950,7 @@ def r_rogue_save(body, st):
     r = _rogue(st, body.get("themeId", 0))
     r["saveData"] = body.get("rogueLikeSaveData", "")
     r["state"] = body.get("state", "")
-    r["saveVersion"] = int(body.get("saveVersion", 0) or 0)
+    r["saveVersion"] = body_int(body.get("saveVersion"), 0)
     save_state(st)
     return {}
 
@@ -2918,7 +2975,7 @@ def r_rogue_delete(body, st):
     """Abandon a run. The game index has to move, or the client keeps replaying the
     same index and the next run's saves collide with the deleted one's."""
     theme = body.get("rogueLikeThemeId", body.get("themeId", 0))
-    st.setdefault("rogueLike", {}).pop(str(int(theme or 0)), None)
+    st.setdefault("rogueLike", {}).pop(str(body_int(theme, 0)), None)
     st["rogueLikeGameIndex"] = int(st.get("rogueLikeGameIndex", 0)) + 1
     save_state(st)
     admin_log(f"[roguelike] run on theme {theme} deleted -> "
@@ -3046,7 +3103,7 @@ def r_marble(body, st):
 def r_marble_set_player(body, st):
     """Which token the player moves around the board. Cosmetic, and the only part
     of the mode that means anything with no board running."""
-    st["marblePlayer"] = int(body.get("player", 0) or 0)
+    st["marblePlayer"] = body_int(body.get("player"), 0)
     save_state(st)
     return r_marble(body, st)
 
@@ -3094,7 +3151,7 @@ def _transfer_lookup(code):
 def r_transfer_redeem(body, st):
     """Redeem a code: bind the caller's login to the save that issued it and hand
     back a session for it. A wrong or expired code logs nobody in."""
-    code = (body.get("code") or body.get("userId") or "").strip().upper()
+    code = body_str(body.get("code") or body.get("userId")).upper()
     uid = _transfer_lookup(code)
     if uid is None:
         admin_log("[auth] transfer redeem refused: unknown or expired code")
@@ -3102,7 +3159,7 @@ def r_transfer_redeem(body, st):
     src = playerdb.load(uid) or {}
     src.pop("transfer", None)           # single use
     playerdb.save(uid, src)
-    login_id = CURRENT_LOGIN_ID.get() or body.get("id") or ""
+    login_id = str(CURRENT_LOGIN_ID.get() or body.get("id") or "")
     if MULTIPLAYER and login_id:
         # Only multiplayer owns the account table; in single-player _uid_for_login
         # ignores login ids entirely and writing one here would pin it forever.
@@ -3138,7 +3195,7 @@ def r_wiki(body, st):
 def r_wiki_archive(body, st):
     """Archive a rift weapon so its rolled options can be looked at later."""
     archives = st.setdefault("riftWeaponArchives", [])
-    wid = int(body.get("riftWeaponId", body.get("id", 0)) or 0)
+    wid = body_int(body.get("riftWeaponId") or body.get("id"), 0)
     weapon = next((w for w in DEFAULT_RIFT_WEAPONS if w.get("id") == wid), None)
     if weapon and not any(a.get("id") == wid for a in archives):
         archives.append(weapon)
@@ -3149,7 +3206,7 @@ def r_wiki_archive(body, st):
             "equippedWeaponIds": []}
 
 def r_wiki_archive_delete(body, st):
-    wid = int(body.get("riftWeaponId", body.get("id", 0)) or 0)
+    wid = body_int(body.get("riftWeaponId") or body.get("id"), 0)
     st["riftWeaponArchives"] = [a for a in st.get("riftWeaponArchives", [])
                                 if a.get("id") != wid]
     save_state(st)
@@ -3176,7 +3233,7 @@ def r_cumulative_purchase(body, st):
     return {"states": st.get("shopEventStates", {})}
 
 def r_cumulative_purchase_claim(body, st):
-    return {"eventId": int(body.get("eventId", 0) or 0), "state": 0,
+    return {"eventId": body_int(body.get("eventId"), 0), "state": 0,
             "rewardList": _reward_list_data([])}
 
 def r_cloud_run_services(body, st):
@@ -3202,12 +3259,13 @@ def r_treasure_wish_list(body, st):
 def r_save_treasure_wish_list(body, st):
     """Store the wish list, keeping only ids that are really treasures - a wish for
     something that does not exist comes back as a blank row in the panel."""
-    sent = body.get("wishList") or {}
+    sent = body.get("wishList")
+    sent = sent if isinstance(sent, dict) else {}
     known = set(ALL_TREASURE_IDS)
     out = {}
     for rarity in TREASURE_RARITIES:
-        ids = sent.get(rarity) or sent.get(str(TREASURE_RARITIES.index(rarity) + 1)) or []
-        out[rarity] = [int(i) for i in ids if int(i) in known]
+        ids = sent.get(rarity) or sent.get(str(TREASURE_RARITIES.index(rarity) + 1))
+        out[rarity] = [i for i in body_list(ids, int) if i in known]
     st["treasureWishList"] = out
     save_state(st)
     return {"wishList": out}
@@ -3219,7 +3277,7 @@ def r_custom_pickups(body, st):
 
 def r_save_custom_pickups(body, st):
     banner = str(body.get("shopItemId", body.get("id", 0)) or 0)
-    picks = [int(i) for i in (body.get("customPickups") or []) if int(i)]
+    picks = [i for i in body_list(body.get("customPickups"), int) if i]
     st.setdefault("customPickups", {})[banner] = picks
     save_state(st)
     return {"customPickups": picks}
@@ -3229,7 +3287,7 @@ def r_shop_choice(body, st):
     ceiling pays out. The choice is recorded so the panel stops asking; the item
     itself is granted by the purchase route that precedes this."""
     key = "packageChoices" if "unitId" in body else "pickupChoices"
-    choice = int(body.get("unitId", body.get("treasureId", 0)) or 0)
+    choice = body_int(body.get("unitId") or body.get("treasureId"), 0)
     if choice:
         st.setdefault(key, {})[str(body.get("shopItemId", 0) or 0)] = choice
         save_state(st)
