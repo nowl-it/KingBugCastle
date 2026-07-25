@@ -203,6 +203,13 @@ def main():
     # the API over plain HTTP instead (metadata https->http below); allow cleartext.
     if "usesCleartextTraffic" not in txt:
         txt = txt.replace("<application ", '<application android:usesCleartextTraffic="true" ', 1)
+    # Deep-link scheme for the Google web-login return (google_login.py -> browser
+    # navigates kingbugcastle://auth?id=...). Without this the launcher activity
+    # never receives the link. The native Google-button->OpenURL hook + the
+    # deep-link->login bridge in jni/stub.cpp are the other half; see
+    # docs/multi-account-login.md "Google login via web".
+    from patchers import patch_deeplink
+    txt = patch_deeplink.add_scheme(txt, os.environ.get("GLOGIN_SCHEME", "kingbugcastle"))
     manifest.write_text(txt, encoding="utf-8")
     
     out = WORK / "rebuilt_base.apk"

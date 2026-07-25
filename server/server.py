@@ -3994,6 +3994,11 @@ SERVER_START_TIME = time.time()
 app = FastAPI(title="KGC private server", version=SERVER_VERSION)
 _STATE_GATE = asyncio.Lock()
 
+# Google login web flow (client's Google button -> /glogin -> deep link back).
+import google_login
+google_login.register(app)
+admin_log(f"[auth] google login {'ENABLED' if google_login.enabled() else 'not configured'}")
+
 ADMIN_TOKEN = os.environ.get("KGC_ADMIN_TOKEN")
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 
