@@ -70,6 +70,12 @@ def count():
     with _conn() as c:
         return c.execute("SELECT COUNT(*) FROM players").fetchone()[0]
 
+def account_count():
+    """How many login ids are bound to a save. Zero means no account has ever
+    logged in, which is what first-login save adoption keys off."""
+    with _conn() as c:
+        return c.execute("SELECT COUNT(*) FROM accounts").fetchone()[0]
+
 def active():
     """uid of the player the game client is currently served."""
     with _conn() as c:

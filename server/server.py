@@ -185,10 +185,14 @@ def body_str(value, default=""):
 # what every single-player setup and the whole pre-login boot sequence relies on.
 CURRENT_UID = contextvars.ContextVar("current_uid", default=None)
 
-# Auto-creating a save for an unknown account id is right for a real multi-player
-# server and wrong for a single-player one, where a reinstall or a cleared cache
-# would mint a fresh empty save and look exactly like losing your progress.
-MULTIPLAYER = os.environ.get("KGC_MULTIPLAYER") == "1"
+# Each login id (Guest_xxx, or a Google/Apple account id) gets its own save, and
+# the same id restores the same save on any device - that is what makes the server
+# multi-account and cross-device. Default on. The one hazard it carries is that a
+# Guest id regenerates when the app is reinstalled with its cache cleared, minting
+# a fresh empty save that looks like lost progress - which is exactly the problem a
+# stable Google/Apple id solves, and why those logins exist. Force the old
+# single-player behaviour (everyone -> the active save) with KGC_MULTIPLAYER=0.
+MULTIPLAYER = os.environ.get("KGC_MULTIPLAYER", "1") != "0"
 MAX_PLAYERS = int(os.environ.get("KGC_MAX_PLAYERS") or 200)
 admin_log(f"[state] identity mode: {'multiplayer (account id -> own save)' if MULTIPLAYER else 'single-player (everyone -> active save)'}")
 
@@ -514,18 +518,28 @@ def cards_list(st):
 # or `id` in the /auth/register body. Only r_login reads it.
 CURRENT_LOGIN_ID = contextvars.ContextVar("current_login_id", default=None)
 
-def _uid_for_login(login_id, prev_token):
+def _uid_for_login(login_id, prev_token, acct_type=None):
     """Which player a login belongs to.
 
     Order: known account id -> the session the presented token already belongs to
-    (/auth/login carries a token, not an id) -> new player, but only in
-    multiplayer mode -> the active player.
+    (/auth/login carries a token, not an id) -> first-login adoption of a lone
+    existing save -> a fresh per-account save (multiplayer) -> the active player.
     """
     login_id = str(login_id or "")
     uid = playerdb.uid_for_login(login_id) or playerdb.uid_for_token(prev_token)
     if uid and playerdb.load(uid) is not None:
         return uid
     if MULTIPLAYER and login_id:
+        # Migration: a server that has been single-player until now holds exactly
+        # one save and no bound accounts. Hand that save to the first login rather
+        # than orphan it behind a fresh empty account - otherwise flipping to
+        # multi-account reads as "my progress is gone" on the very next launch.
+        if playerdb.account_count() == 0 and playerdb.count() == 1:
+            sole = playerdb.active()
+            if sole and playerdb.load(sole) is not None:
+                playerdb.bind_login(login_id, sole)
+                admin_log(f"[auth] adopted lone save {sole} for the first account")
+                return sole
         uid = "p-" + hashlib.sha1(login_id.encode()).hexdigest()[:12]
         if playerdb.load(uid) is None:
             # The account id is client-supplied and unauthenticated, so anyone who
@@ -537,8 +551,10 @@ def _uid_for_login(login_id, prev_token):
             st = copy.deepcopy(DEFAULT_PLAYER)
             st["uid"] = uid
             st["accountCreatedAt"] = now_iso(0)
+            if acct_type is not None:
+                st["accountType"] = acct_type
             playerdb.save(uid, st)
-            admin_log(f"[auth] new player {uid}")
+            admin_log(f"[auth] new player {uid} (accountType={acct_type})")
         playerdb.bind_login(login_id, uid)
         return uid
     return playerdb.active()
@@ -550,12 +566,22 @@ def r_login(body, st):
     # str(): the id is a bearer credential the client picks, and it is hashed - a
     # numeric one used to raise AttributeError on .encode() and 500 the whole login.
     login_id = str(CURRENT_LOGIN_ID.get() or body.get("id") or "")
+    # Constants.AccountType: 0 Test, 1 Google, 2 GameCenter, 3 AppleID, 4 Guest.
+    # Only /auth/register carries it; None on the token-refresh paths.
+    acct_type = body_int(body["type"], None) if isinstance(body, dict) and "type" in body else None
     # No bind_login() here: in single-player mode _uid_for_login falls back to the
     # ACTIVE player, and recording that as "account X owns save Y" would pin every
     # account that ever logged in to it - permanently, so a later switch to
     # multiplayer would still hand them all the same save. Only the multiplayer
     # branch, which actually owns the account, writes that mapping.
-    uid = _uid_for_login(login_id, body.get("token"))
+    uid = _uid_for_login(login_id, body.get("token"), acct_type)
+    # Remember which social login this account used, so PlayerDataResponseModel
+    # reports the right accountType (Google vs Guest) and the client shows it.
+    if acct_type is not None:
+        acct = playerdb.load(uid)
+        if acct is not None and acct.get("accountType") != acct_type:
+            acct["accountType"] = acct_type
+            playerdb.save(uid, acct)
     token = "DEV." + secrets.token_hex(16)
     playerdb.bind_session(token, uid)   # every later request identifies via this
     CURRENT_UID.set(uid)                # rest of THIS request is already this player

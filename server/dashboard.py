@@ -222,7 +222,7 @@ def api_status():
         "trackerClients": len(connected_clients),
         "adbSerial": ADB_SERIAL,
         "serverUrl": SERVER_URL,
-        "multiplayer": os.environ.get("KGC_MULTIPLAYER") == "1",
+        "multiplayer": os.environ.get("KGC_MULTIPLAYER", "1") != "0",   # default on, matches server.py
         "authMode": "token" if ADMIN_TOKEN else "loopback-only",
         "gamedata": gamedata.summary(),
     }
