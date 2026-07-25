@@ -216,6 +216,66 @@ def patch_state(st, updates):
     st.update(updates)
     save_state(st)
 
+# --- Multiple accounts --------------------------------------------------------
+# Boards, matchmaking and "other player" lookups used to read only the current
+# save, so every one of them showed the requesting player as the entire world -
+# rank 1 of one, matched against your own deck. These pull from every registered
+# account instead. With one account the result is identical to before (you, rank
+# 1), so single-player setups are unaffected.
+# ponytail: each call json-parses every player row. Fine at MAX_PLAYERS=200 for
+# panels opened by hand; add a cached score index if the population ever grows.
+
+def _current_uid():
+    return CURRENT_UID.get() or playerdb.active()
+
+def _all_states(st):
+    """(uid, state) for every registered player, the current one taken from the
+    live `st` so its this-request edits show, not a stale DB read."""
+    me = _current_uid()
+    out, seen = [], False
+    for uid, s, _ in playerdb.all_players():
+        if s is None:
+            continue
+        if uid == me:
+            s, seen = st, True
+        out.append((uid, s))
+    if not seen:
+        out.append((me, st))
+    return out
+
+def _leaderboard(st, row_fn, score_key="score", player_key="playerRank",
+                 ranking_key="ranking"):
+    """One row per account, sorted by score desc with real ranks, plus the current
+    player's own row. `row_fn(state)` builds the score-bearing row for any player."""
+    me = _current_uid()
+    rows = [(uid, row_fn(s)) for uid, s in _all_states(st)]
+    rows.sort(key=lambda ur: ur[1].get(score_key, 0), reverse=True)
+    ranking, mine = [], None
+    for i, (uid, r) in enumerate(rows, 1):
+        r["rank"] = i
+        ranking.append(r)
+        if uid == me:
+            mine = dict(r)
+    return {ranking_key: ranking, player_key: mine or (ranking[0] if ranking else row_fn(st))}
+
+def _opponents(st, n, build, fallback=True):
+    """Up to n real other players as opponents. With `fallback`, a solo server
+    offers yourself (what the mode's own practice match does); without it, an empty
+    list (for slots the client bot-fills)."""
+    me = _current_uid()
+    others = [s for uid, s, _ in playerdb.all_players() if s is not None and uid != me]
+    picks = others[:n] or ([st] if fallback else [])
+    return [build(s) for s in picks]
+
+def _player_by_id(target_id, st):
+    """Resolve a player by their accountId (the client's `targetId`). Unknown or
+    absent id -> the current player, since a solo server has only the one."""
+    if target_id:
+        for uid, s, _ in playerdb.all_players():
+            if s is not None and int(s.get("accountId", 0) or 0) == int(target_id):
+                return s
+    return st
+
 # Prefer user-edited master data in server/xml_live, then CDN-synced.
 _XML_LIVE = ROOT / "xml_live"
 XML_DIR = _XML_LIVE if _XML_LIVE.is_dir() else ROOT.parent / "xml" / PATCH_FOLDER
@@ -2678,7 +2738,10 @@ def r_colosseum_statistics(body, st):
                           "countsByRank": counts}]}
 
 def r_colosseum_players(body, st):
-    return {"colosseumPlayerDataList": [_colosseum_player(st)],
+    # Colosseum is a 4-player mode: you plus up to three real opponents. The client
+    # bot-fills whatever is short, so a solo server still starts.
+    return {"colosseumPlayerDataList": [_colosseum_player(st)]
+                                        + _opponents(st, 3, _colosseum_player, fallback=False),
             "isCustomMatch": bool(body.get("isCustomMatch", False))}
 
 def r_colosseum_tier_rewards(body, st):
@@ -2732,9 +2795,9 @@ def r_arena_statistics(body, st):
                           "trainingCount": st.get(p + "Training", 0)}]}
 
 def r_arena_matching(body, st):
-    """PvPMatchResponseModel. There is one player, so the opponent offered is the
-    player's own deck - which is what the mode's training mode does anyway."""
-    return {"targets": [_pvp_deck_info(st)]}
+    """PvPMatchResponseModel. Offer up to three real opponents; a solo server falls
+    back to the player's own deck, which is what training mode does anyway."""
+    return {"targets": _opponents(st, 3, _pvp_deck_info)}
 
 def r_colosseum_match(body, st):
     """ColosseumMatchResponseModel. No realtime match server exists here, so the
@@ -2793,8 +2856,10 @@ def r_player_ad(body, st):
     return {"dailyAdCount": st["dailyAdCount"]}
 
 def r_player_other(body, st):
-    """Another player's profile. There is one save here, so it is this one - which is
-    also what the clan and leaderboard panels link to."""
+    """Another player's profile, looked up by the client's `targetId` (their
+    accountId). Unknown id falls back to the current player, so a solo server still
+    answers - which is also what the clan and leaderboard panels link to."""
+    st = _player_by_id(body_int(body.get("targetId"), 0), st)
     d = _PC["defaults"]
     deco = _deco(st)
     return {"name": st.get("name", d["name"]),
@@ -3332,22 +3397,27 @@ def _rank_row(st, score=0, extra=None):
     row.update(extra or {})
     return row
 
-def _board(st, score=0, extra=None, player_key="playerRank"):
-    row = _rank_row(st, score, extra)
-    return {"ranking": [row], player_key: dict(row)}
+def _board(st, score_of, extra_of=None, player_key="playerRank"):
+    """A board across every account. `score_of(state)` and `extra_of(state)` build
+    the per-player score and cosmetics; _leaderboard sorts and ranks them."""
+    def row_fn(s):
+        return _rank_row(s, score_of(s), extra_of(s) if extra_of else None)
+    return _leaderboard(st, row_fn, player_key=player_key)
 
 def r_ranking(body, st):
     """The generic board. `score` is a long here and `deck` replaces the cosmetics."""
     d = _PC["defaults"]
-    row = {"rank": 1, "score": int(st.get("bestClearedTheme", 0)) * 100
-                               + int(st.get("bestClearedStage", 0)),
-           "accountId": st.get("accountId", d["accountId"]),
-           "userName": st.get("name", d["name"]),
-           "castleName": st.get("castleName", d["castleName"]),
-           "kingPostfix": 0, "castlePostfix": 0,
-           "deck": _deck_units(st)}
-    return {"rankingType": str(body.get("rankingType", "")), "ranking": [row],
-            "playerRank": dict(row)}
+    def row_fn(s):
+        return {"score": int(s.get("bestClearedTheme", 0)) * 100
+                                 + int(s.get("bestClearedStage", 0)),
+                "accountId": s.get("accountId", d["accountId"]),
+                "userName": s.get("name", d["name"]),
+                "castleName": s.get("castleName", d["castleName"]),
+                "kingPostfix": 0, "castlePostfix": 0,
+                "deck": _deck_units(s)}
+    out = _leaderboard(st, row_fn)
+    out["rankingType"] = str(body.get("rankingType", ""))
+    return out
 
 def _deck_units(st):
     """The current preset's hero ids. The board draws these as portraits, so an empty
@@ -3364,24 +3434,27 @@ def _deck_units(st):
     return []
 
 def r_pvp_ranking(body, st):
-    return _board(st, st.get("pvpScore", 0), {"tier": st.get("pvpTier", 0)})
+    return _board(st, lambda s: s.get("pvpScore", 0),
+                  lambda s: {"tier": s.get("pvpTier", 0)})
 
 def r_colosseum_ranking(body, st):
-    return _board(st, st.get("colosseumScore", 0), {"tier": st.get("colosseumTier", 0)})
+    return _board(st, lambda s: s.get("colosseumScore", 0),
+                  lambda s: {"tier": s.get("colosseumTier", 0)})
 
 def r_roguelike_ranking(body, st):
-    return _board(st, st.get("rogueLikeScore", 0),
-                  {"challenge": st.get("rogueLikeChallenge", 0),
-                   "building": st.get("rogueLikeBuilding", 0)})
+    return _board(st, lambda s: s.get("rogueLikeScore", 0),
+                  lambda s: {"challenge": s.get("rogueLikeChallenge", 0),
+                             "building": s.get("rogueLikeBuilding", 0)})
 
 def r_challenge_ranking(body, st):
-    cs = _challenge_state(st)
-    row = _rank_row(st, cs.get("bestDifficulty", 0))
-    # ChallengeModeRankingData has no flag/nameTag/tier but does carry a percentile.
-    for k in ("flagId", "tier"):
-        row.pop(k, None)
-    row["rankPer"] = 100.0
-    return {"ranking": [row], "playerRank": dict(row)}
+    def row_fn(s):
+        row = _rank_row(s, _challenge_state(s).get("bestDifficulty", 0))
+        # ChallengeModeRankingData has no flag/nameTag/tier but carries a percentile.
+        for k in ("flagId", "tier"):
+            row.pop(k, None)
+        row["rankPer"] = 100.0
+        return row
+    return _leaderboard(st, row_fn)
 
 def r_clan_point_ranking(body, st):
     """Clans are their own entity, and there is exactly one here: the player's."""
