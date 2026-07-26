@@ -249,6 +249,33 @@ void* setTextMethod      = nullptr;   // UnityEngine.UI.Text::set_text(string)
 typedef double (*GetStatFunc)(void* _this, int32_t type, bool fromStatPanel, void* methodInfo);
 GetStatFunc getStat = nullptr;
 
+// --- Google login -> our web login (works around the GPGS package/cert wall) ---
+// The client's Google button normally calls Google Play Games sign-in, which can't
+// authenticate this repacked build. Detour it to Application.OpenURL(<web login>),
+// so pressing it opens our /glogin page in the device browser instead. The browser
+// reaches the server through the same adb-reverse loopback the game uses.
+#ifndef KGC_GLOGIN_URL
+#define KGC_GLOGIN_URL "http://127.0.0.1/glogin"
+#endif
+typedef void (*GoogleLoginFunc)(void* _this, void* methodInfo);
+GoogleLoginFunc origGoogleLogin = nullptr;   // trampoline; unused - we skip GPGS entirely
+void* g_openUrlMethod = nullptr;             // UnityEngine.Application::OpenURL(string)
+
+void HookedGoogleLogin(void* _this, void* methodInfo) {
+    LOGI("Google button -> opening web login %s", KGC_GLOGIN_URL);
+    if (g_openUrlMethod && str_new && rt_invoke) {
+        void* url = str_new(KGC_GLOGIN_URL);
+        void* params[1] = { url };
+        void* exc = nullptr;
+        rt_invoke(g_openUrlMethod, nullptr, params, &exc);
+        if (exc) LOGE("Google hook: OpenURL threw an exception");
+    } else {
+        LOGE("Google hook: OpenURL not resolved (openUrl=%p new=%p invoke=%p)",
+             g_openUrlMethod, (void*)str_new, (void*)rt_invoke);
+    }
+    // Intentionally NOT calling origGoogleLogin: the GPGS path is what we replace.
+}
+
 void HookedUpdate(void* _this, void* methodInfo) {
     if (origUpdate) {
         origUpdate(_this, methodInfo);
@@ -466,22 +493,68 @@ static void write_abs_jump(void* at, void* dest) {
     p[1] = 0xD61F0220u;   // BR  X17
     memcpy(p + 2, &dest, sizeof(dest));
 }
-// Patch `target` prologue -> HookedSet; return trampoline that runs the 16 stolen
-// bytes then jumps to target+16 (i.e. calls the original). Null if prologue unsafe.
+// Materialize a 64-bit constant into Xd with MOVZ + 3x MOVK. Always 4 insns (no
+// zero-halfword shortcut - simpler, and the trampoline has room). Returns count.
+static int emit_mov_imm64(uint32_t* out, uint32_t rd, uint64_t val) {
+    out[0] = 0xD2800000u | ((uint32_t)( val        & 0xFFFF) << 5) | rd; // MOVZ Xd,#h0
+    out[1] = 0xF2A00000u | ((uint32_t)((val >> 16) & 0xFFFF) << 5) | rd; // MOVK Xd,#h1,LSL16
+    out[2] = 0xF2C00000u | ((uint32_t)((val >> 32) & 0xFFFF) << 5) | rd; // MOVK Xd,#h2,LSL32
+    out[3] = 0xF2E00000u | ((uint32_t)((val >> 48) & 0xFFFF) << 5) | rd; // MOVK Xd,#h3,LSL48
+    return 4;
+}
+// Decode the 21-bit signed immediate of an ADR/ADRP (immhi[23:5], immlo[30:29]).
+static int64_t adr_imm(uint32_t x) {
+    int64_t imm = (((int64_t)(x >> 5) & 0x7FFFF) << 2) | ((x >> 29) & 0x3);
+    if (imm & 0x100000) imm |= ~(int64_t)0x1FFFFF;   // sign-extend from bit 20
+    return imm;
+}
+// Patch `target` prologue -> hook; return a trampoline that runs the 4 stolen
+// instructions then jumps to target+16 (i.e. calls the original). ADRP/ADR among
+// the stolen instructions are relocated - their result is PC-relative, so copied
+// verbatim to a different address they'd compute the wrong pointer; instead we
+// materialize the address they'd have produced at the ORIGINAL site. Returns null
+// only if a stolen instruction is a PC-relative branch or literal load (can't be
+// trivially relocated) - a function prologue almost never starts with one.
 static void* install_inline_hook(void* target, void* hook) {
     uint32_t* t = (uint32_t*)target;
     for (int i = 0; i < 4; ++i) {
-        if (insn_pc_relative(t[i])) {
-            LOGE("inline hook: stolen insn %d is PC-relative (%08x) - aborting", i, t[i]);
+        uint32_t x = t[i];
+        bool adrp = (x & 0x9F000000u) == 0x90000000u;
+        bool adr  = (x & 0x9F000000u) == 0x10000000u;
+        bool bad  = ((x & 0x3B000000u) == 0x18000000u)   // LDR/LDRSW literal
+                 || ((x & 0x7C000000u) == 0x14000000u)   // B / BL
+                 || ((x & 0xFF000010u) == 0x54000000u)   // B.cond
+                 || ((x & 0x7E000000u) == 0x34000000u)   // CBZ / CBNZ
+                 || ((x & 0x7E000000u) == 0x36000000u);  // TBZ / TBNZ
+        if (bad && !adrp && !adr) {
+            LOGE("inline hook: stolen insn %d not relocatable (%08x) - aborting", i, x);
             return nullptr;
         }
     }
-    void* tramp = mmap(nullptr, 64, PROT_READ | PROT_WRITE | PROT_EXEC,
+    uint32_t buf[4 * 4 + 4];   // worst case: 4 ADRP -> 4 insns each, + 4-insn jump
+    int n = 0;
+    for (int i = 0; i < 4; ++i) {
+        uint32_t x = t[i];
+        uintptr_t pc = (uintptr_t)&t[i];
+        if ((x & 0x9F000000u) == 0x90000000u) {          // ADRP Xd, page
+            uintptr_t addr = (pc & ~(uintptr_t)0xFFF) + (adr_imm(x) << 12);
+            n += emit_mov_imm64(&buf[n], x & 0x1F, addr);
+        } else if ((x & 0x9F000000u) == 0x10000000u) {   // ADR Xd, imm
+            n += emit_mov_imm64(&buf[n], x & 0x1F, pc + adr_imm(x));
+        } else {
+            buf[n++] = x;
+        }
+    }
+    buf[n++] = 0x58000051u;                          // LDR X17, #8
+    buf[n++] = 0xD61F0220u;                           // BR  X17
+    uintptr_t cont = (uintptr_t)target + 16;
+    memcpy(&buf[n], &cont, 8); n += 2;
+
+    void* tramp = mmap(nullptr, sizeof(buf), PROT_READ | PROT_WRITE | PROT_EXEC,
                        MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
     if (tramp == MAP_FAILED) return nullptr;
-    memcpy(tramp, target, 16);
-    write_abs_jump((char*)tramp + 16, (char*)target + 16);
-    __builtin___clear_cache((char*)tramp, (char*)tramp + 32);
+    memcpy(tramp, buf, n * 4);
+    __builtin___clear_cache((char*)tramp, (char*)tramp + n * 4);
 
     long psz = sysconf(_SC_PAGESIZE);
     void* pg = (void*)((uintptr_t)target & ~(uintptr_t)(psz - 1));
@@ -872,6 +945,30 @@ void* worker_thread(void* arg) {
         }
     } else {
         LOGE("Inbox hook: PostListItem class not found");
+    }
+
+    // --- Google login -> web redirect hook ---
+    // Detour Scene_Login.OnClickGoogleLogin so the button opens our /glogin page
+    // (Application.OpenURL) rather than the GPGS sign-in that can't authenticate
+    // this build. Inline detour, not a methodPointer swap: a uGUI onClick caches
+    // the delegate at AddListener (before we run), so swapping the MethodInfo
+    // pointer would not affect the already-registered click.
+    void* applicationClass = il2cpp_class_from_name(unityEngineCoreImage, "UnityEngine", "Application");
+    if (applicationClass) g_openUrlMethod = class_get_method(applicationClass, "OpenURL", 1);
+    void* sceneLoginClass = il2cpp_class_from_name(assemblyCSharpImage, "", "Scene_Login");
+    if (sceneLoginClass && g_openUrlMethod) {
+        void* glMethod = class_get_method(sceneLoginClass, "OnClickGoogleLogin", 0);
+        if (glMethod) {
+            void* glFn = *(void**)glMethod;
+            origGoogleLogin = (GoogleLoginFunc)install_inline_hook(glFn, (void*)HookedGoogleLogin);
+            if (origGoogleLogin) LOGI("Hooked Scene_Login.OnClickGoogleLogin -> web login!");
+            else LOGE("Google hook: inline detour failed (unsafe prologue)");
+        } else {
+            LOGE("Google hook: OnClickGoogleLogin not found");
+        }
+    } else {
+        LOGE("Google hook: Application=%p OpenURL=%p Scene_Login=%p",
+             applicationClass, g_openUrlMethod, sceneLoginClass);
     }
 
     il2cpp_thread_detach(thread);

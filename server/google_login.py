@@ -43,6 +43,11 @@ CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
 CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "")
 PUBLIC_URL = os.environ.get("GLOGIN_PUBLIC_URL", "").rstrip("/")
 SCHEME = os.environ.get("GLOGIN_SCHEME", "kingbugcastle")
+# Dev mode: exercise the whole client loop (button -> web -> deep link -> login)
+# WITHOUT a real Google OAuth client. /glogin serves a page with a couple of test
+# accounts whose buttons fire the deep link directly. Never leave this on in prod -
+# it lets anyone log in as any dev id.
+DEV = os.environ.get("GLOGIN_DEV") == "1"
 _STATE_SECRET = (os.environ.get("GLOGIN_STATE_SECRET") or secrets.token_hex(16)).encode()
 
 AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth"
@@ -148,6 +153,26 @@ def return_page(account_id):
     return _RETURN_PAGE.format(link=link, link_js=json.dumps(link))
 
 
+_DEV_PAGE = """<!doctype html><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>KBC dev login</title>
+<style>body{{font-family:system-ui;text-align:center;padding:2rem;background:#111;color:#eee}}
+a.btn{{display:block;margin:1rem auto;max-width:20rem;padding:.9rem;background:#357;color:#fff;
+border-radius:.6rem;text-decoration:none;font-weight:600}}</style>
+<h2>Dev login (no Google)</h2>
+<p>Pick a test account. Real Google is off (GLOGIN_DEV=1).</p>
+{buttons}
+"""
+
+
+def dev_page():
+    """A no-Google stand-in for the consent screen: buttons that fire the deep link
+    for a few fixed dev accounts, so the client loop can be tested end to end."""
+    ids = ["google_devA", "google_devB", "google_devC"]
+    buttons = "".join(f'<a class=btn href="{deep_link(i)}">Login as {i}</a>' for i in ids)
+    return _DEV_PAGE.format(buttons=buttons)
+
+
 def register(app):
     """Add /glogin and /glogin/callback to the FastAPI app. No-op-ish if unconfigured
     (the routes exist but explain they are off)."""
@@ -156,10 +181,12 @@ def register(app):
     @app.get("/glogin")
     def glogin_start():
         if not enabled():
+            if DEV:
+                return HTMLResponse(dev_page())
             return HTMLResponse(
                 "<h3>Google login is not configured.</h3><p>Set GOOGLE_CLIENT_ID, "
-                "GOOGLE_CLIENT_SECRET and GLOGIN_PUBLIC_URL. See "
-                "docs/multi-account-login.md.</p>", status_code=503)
+                "GOOGLE_CLIENT_SECRET and GLOGIN_PUBLIC_URL, or GLOGIN_DEV=1 to test "
+                "without Google. See docs/multi-account-login.md.</p>", status_code=503)
         return RedirectResponse(authorize_url())
 
     @app.get("/glogin/callback")

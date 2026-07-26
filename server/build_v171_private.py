@@ -225,6 +225,15 @@ def main():
     # SIGSEGVs under ndk_translation, so the stub is required on redroid anyway.
     replace_xigncode(outputs["config"])
 
+    # Load libxigncode.so at app start (JNI_OnLoad of the libmain wrapper) instead of
+    # waiting for XIGNCODE's own login-time init. Without this the stub - and its
+    # il2cpp hooks - only come up AFTER the login screen renders, so the Google-login
+    # button hook is not installed when the button is first pressed. The wrapper
+    # dlopens libxigncode (RTLD_GLOBAL) then forwards JNI_OnLoad to libmain_real.so.
+    print("[+] Installing libmain wrapper (early-load libxigncode for the login hooks)...")
+    subprocess.run([sys.executable, str(REPO / "server" / "patchers" / "patch_replace_libmain.py"),
+                    str(outputs["config"])], check=True)
+
     print(f"\n[+] Rebinding backend hosts -> {SHARE_HOST} (private server)...")
     subprocess.run([sys.executable, str(REPO / "server" / "patchers" / "patch_hosts.py"),
                     str(outputs["base_assets"]), SHARE_HOST], check=True)
