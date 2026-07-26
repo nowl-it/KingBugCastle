@@ -116,7 +116,7 @@ The build injects the offline-recovered `il2cpp/v171.0.00/libil2cpp_v171_ssl.so`
 unpack path — see [docs/mftl-extraction.md](docs/mftl-extraction.md) for the recovery recipe and
 [docs/v171-private-build.md](docs/v171-private-build.md) for the operator playbook.
 
-**`libil2cpp_v171_ssl.so` must be pristine + exactly 3 patches.** It rotted over several sessions
+**`libil2cpp_v171_ssl.so` must be pristine + the 3 SSL patches only.** It rotted over several sessions
 (2026-07-19): 21 stray bytes, including a `b 0x3503ba8` that had overwritten `mov w8,#-2` inside
 `Scene_Login.<CheckUseAssetBundle>d__79.MoveNext` @ RVA `0x3503b7c`. That stray branch jumped back
 into the state-1 await setup = infinite UniTask recursion = stack-overflow SIGSEGV on "Loading
@@ -156,6 +156,51 @@ Patches the build applies on top (all idempotent, each guarded by an expected-pr
 The NRE stubs are a straight port of the v170 set (rows 5-14 of the v170 table above) — every prologue
 came back **byte-identical**, only the offsets moved, which is what confirms the `script.json` mapping.
 v170's `WorldPanel.IsKGMarbleAvailable` has **no v171 counterpart** and was dropped.
+
+### Scene_Lobby.Init continuation fix (ldr → mov on `GameManager_TypeInfo`)
+
+`Scene_Lobby.Init` (RVA `0x34E53B4`) has a guard at +48 that checks a one-time init flag at
+`0x6C9A750` (byte). First call: runs the 38-call class_init block. Second call: falls through to
+the continuation at +516, which loads `x23 = GOT[0x67F6E70]` (`R_AARCH64_RELATIVE` addend
+`0x69C8518` = `GameManager_TypeInfo`). The continuation dereferences x23:
+
+```
+ldr x0, [x23]           // x0 = *(GameManager_TypeInfo) = klass field
+ldr w8, [x0, #0xe0]     // cctor_finished — SIGSEGV if klass is bad
+```
+
+Under ndk_translation the TypeInfo klass self-pointer fixup (`0x2001ba1f` → self-pointer) never
+runs. The compressed file-time value `0x2001ba1f` stays in the struct — not a valid address —
+so `[x0, #0xe0]` SIGSEGVs → `il2cpp_format_stack_trace("")` → empty-trace NRE → black lobby.
+
+**Fix**: replace each `ldr x0, [x23]` (4 bytes `e0 02 40 f9`) with `mov x0, x23`
+(`e0 03 17 aa`) at every occurrence in the continuation (18 sites, RVAs listed below). Since
+klass is supposed to be a self-pointer (`== &GameManager_TypeInfo`), skipping the indirection
+is semantically identical in a healthy runtime and corrects the null dereference when it isn't:
+
+| RVA | File offset | Role |
+|---|---|---|
+| `0x34E55B8` | `0x34E15B8` | first cctor_finished check in continuation |
+| `0x34E55E8` | `0x34E15E8` | cctor_finished check (after class_init) |
+| `0x34E55F8` | `0x34E15F8` | parent field read |
+| `0x34E5870` | `0x34E1870` | cctor_finished check |
+| `0x34E589C` | `0x34E189C` | cctor_finished check |
+| `0x34E58AC` | `0x34E18AC` | parent field read |
+| `0x34E58EC` | `0x34E18EC` | cctor_finished check |
+| `0x34E58FC` | `0x34E18FC` | parent field read |
+| `0x34E5944` | `0x34E1944` | cctor_finished check |
+| `0x34E5954` | `0x34E1954` | parent field read |
+| `0x34E59A8` | `0x34E19A8` | cctor_finished check |
+| `0x34E59B8` | `0x34E19B8` | parent field read |
+| `0x34E5AE8` | `0x34E1AE8` | cctor_finished check |
+| `0x34E5B14` | `0x34E1B14` | cctor_finished check |
+| `0x34E5B24` | `0x34E1B24` | parent field read |
+| `0x34E5B50` | `0x34E1B50` | cctor_finished check |
+| `0x34E5B7C` | `0x34E1B7C` | cctor_finished check |
+| `0x34E5B8C` | `0x34E1B8C` | parent field read |
+
+The `LDR_PATCHES` constant in `build_v171_private.py` applies these at build time, guarded by
+a 4-byte prologue check against `e00240f9`.
 
 **Do NOT enable `KGC_ASSETBYPASS`.** That opt-in patch rewrites the `Scene_Login.CheckUseAssetBundle`
 kickoff to tail-call `LoadAfterAssetBundle(this, true)`. It was built to dodge the recursion above,

@@ -72,6 +72,38 @@ NRE_STUBS = [
     (0x3062df0, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
 ]
 
+# Scene_Lobby.Init @ RVA 0x34E53B4: the klass self-pointer fixup for
+# GameManager_TypeInfo (GOT[0x67f6e70]) never runs under ndk_translation,
+# leaving the first qword (klass) as the compressed file-time offset
+# 0x2001ba1f instead of a real self-pointer. The continuation at +516
+# dereferences this via `ldr x0, [x23]` and then reads fields through it,
+# crashing with SIGSEGV → NRE (black lobby). Fix: replace `ldr x0, [x23]`
+# with `mov x0, x23` at every occurrence in the continuation. Since the
+# klass SHOULD be a self-pointer (= &GameManager_TypeInfo), this is
+# semantically identical on a healthy runtime and corrects the null
+# dereference when it's not. 18 occurrences, each 4 bytes.
+# ldr x0, [x23] = e0 02 40 f9 → mov x0, x23 = e0 03 17 aa
+LDR_PATCHES = [
+    (0x34E55B8, 'e00240f9', 'e00317aa'),
+    (0x34E55E8, 'e00240f9', 'e00317aa'),
+    (0x34E55F8, 'e00240f9', 'e00317aa'),
+    (0x34E5870, 'e00240f9', 'e00317aa'),
+    (0x34E589C, 'e00240f9', 'e00317aa'),
+    (0x34E58AC, 'e00240f9', 'e00317aa'),
+    (0x34E58EC, 'e00240f9', 'e00317aa'),
+    (0x34E58FC, 'e00240f9', 'e00317aa'),
+    (0x34E5944, 'e00240f9', 'e00317aa'),
+    (0x34E5954, 'e00240f9', 'e00317aa'),
+    (0x34E59A8, 'e00240f9', 'e00317aa'),
+    (0x34E59B8, 'e00240f9', 'e00317aa'),
+    (0x34E5AE8, 'e00240f9', 'e00317aa'),
+    (0x34E5B14, 'e00240f9', 'e00317aa'),
+    (0x34E5B24, 'e00240f9', 'e00317aa'),
+    (0x34E5B50, 'e00240f9', 'e00317aa'),
+    (0x34E5B7C, 'e00240f9', 'e00317aa'),
+    (0x34E5B8C, 'e00240f9', 'e00317aa'),
+]
+
 def patch_aledatic_and_inject_il2cpp(apk_path):
     print(f"[*] Patching libaledatic.so and injecting libil2cpp.so into {apk_path.name}...")
     tmp = pathlib.Path(tempfile.mktemp(suffix=".apk"))
@@ -92,6 +124,16 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
             raise SystemExit(f"{label}: unexpected bytes at 0x{off:x}: {cur.hex()}")
         il2_data[off:off+8] = new
         print(f"  [+] stubbed {label} @ 0x{off:x} -> {new.hex()}")
+    for rva, orig_hex, new_hex in LDR_PATCHES:
+        off = rva - 0x4000
+        cur = bytes(il2_data[off:off+4])
+        new = bytes.fromhex(new_hex)
+        if cur == new:
+            continue
+        if cur != bytes.fromhex(orig_hex):
+            raise SystemExit(f"ldr_patch 0x{rva:x}: unexpected bytes at 0x{off:x}: {cur.hex()}")
+        il2_data[off:off+4] = new
+        print(f"  [+] patched ldr->mov @ 0x{rva:x} (file 0x{off:x})")
     il2_data = bytes(il2_data)
     with zipfile.ZipFile(apk_path, "r") as zin:
         with zipfile.ZipFile(tmp, "w") as zout:
