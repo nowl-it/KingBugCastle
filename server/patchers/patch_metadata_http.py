@@ -165,7 +165,6 @@ if IS_APK:
     # update CRC-32 in local header and central directory
     new_crc = zlib.crc32(bytes(data)) & 0xFFFFFFFF
     struct.pack_into('<I', apk_data, info.header_offset + 14, new_crc)
-<<<<<<< HEAD
     tgt = APK_ENTRY.encode()
     pos = meta_end
     while True:
@@ -177,19 +176,6 @@ if IS_APK:
             struct.pack_into("<I", apk_data, pos + 16, new_crc)
             print(f"[+] CRC updated: 0x{new_crc:08x}")
             break
-=======
-    cd_sig = b'PK\x01\x02'
-    target = APK_ENTRY.encode()
-    pos = meta_end
-    while pos < len(apk_data) - 4:
-        if apk_data[pos:pos+4] == b'PK\x01\x02':
-            fn_len = struct.unpack_from('<H', apk_data, pos + 28)[0]
-            fn = bytes(apk_data[pos+46:pos+46+fn_len])
-            if fn == target:
-                struct.pack_into('<I', apk_data, pos + 16, new_crc)
-                print(f"[+] CRC updated: 0x{new_crc:08x}")
-                break
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
         pos += 1
     INPUT.write_bytes(apk_data)
     print(f"[+] Written: {INPUT}")

@@ -103,7 +103,6 @@ else
     echo -e "  Local IOS snapshots: ${DIM}(none)${NC}"
 fi
 
-<<<<<<< HEAD
 # Check the server's advertised patchFolder (lives in response_config.json, not server.py).
 # Every lookup here must be non-fatal: `set -e` turns a no-match grep into a silent abort
 # that skips the etag/republish section below - that bug hid a republish once already.
@@ -112,18 +111,10 @@ cfg="$PROJECT_DIR/server/data/response_config.json"
 if [[ -f "$cfg" ]]; then
     server_patch=$(grep -oP '"patchFolder"\s*:\s*"\K[^"]+' "$cfg" || true)
     echo -e "  Server patchFolder: ${BOLD}${server_patch:-"(not set)"}${NC}"
-=======
-# Check server PATCH_FOLDER
-server_patch=""
-if [[ -f "$PROJECT_DIR/server/server.py" ]]; then
-    server_patch=$(grep -oP 'PATCH_FOLDER\s*=\s*"([^"]+)"' "$PROJECT_DIR/server/server.py" | grep -oP '"[^"]+"' | tr -d '"')
-    echo -e "  Server PATCH_FOLDER: ${BOLD}${server_patch:-"(not set)"}${NC}"
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 fi
 
 echo ""
 
-<<<<<<< HEAD
 # ─── Client APK version ─────────────────────────────────────────
 # The store client and the CDN patch folder move independently: on 2026-07-22 the
 # store went 171.0.00 → 171.0.01 while the CDN stayed on 2026_07_21. Watching only
@@ -197,10 +188,6 @@ if [[ "$latest" == "$last" ]]; then
         exit 0
     fi
 
-=======
-# ─── Update Detection ───────────────────────────────────────────
-if [[ "$latest" == "$last" ]]; then
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     echo -e "${GREEN}[✓] No update. CDN is at: ${latest}${NC}"
     echo ""
 

@@ -104,11 +104,7 @@ Want to understand how we dumped IL2CPP, mapped the 280+ routes, defeated SSL pi
 | Directory | Purpose |
 | --- | --- |
 | 📁 `docs/` | Operator knowledge base - playbooks for granting items, unlocking content, editing stages/master data ([`docs/README.md`](docs/README.md)). |
-<<<<<<< HEAD
 | 📁 `server/` | The core FastAPI backend and automated ARM64 patching scripts (`rebuild_arm64.py`, `rebuild_arm64_mod.py`). |
-=======
-| 📁 `server/` | The core FastAPI backend and automated ARM64 patching scripts (`rebuild_arm64.py`, `deploy.sh`). |
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 | 📁 `server/data/` | Static JSON models and response templates (Docs: [`server/data/README.md`](server/data/README.md)). |
 | 📁 `api/` | Auxiliary integrations and external tool endpoints. |
 | 📁 `scripts/` | Shell and Python automation scripts for fetching CDN data and extracting assets. |

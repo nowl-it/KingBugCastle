@@ -17,21 +17,13 @@ extern "C" jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     void* mh = dlopen("libmain_real.so", RTLD_NOW);
     if (!mh) {
         __android_log_print(ANDROID_LOG_FATAL, LOG_TAG, "libmain_real.so FAILED: %s", dlerror());
-<<<<<<< HEAD
         return JNI_VERSION_1_6;
-=======
-        return JNI_ERR;
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     }
 
     auto real_onload = reinterpret_cast<jint(*)(JavaVM*, void*)>(dlsym(mh, "JNI_OnLoad"));
     if (!real_onload) {
         __android_log_print(ANDROID_LOG_FATAL, LOG_TAG, "dlsym JNI_OnLoad FAILED: %s", dlerror());
-<<<<<<< HEAD
         return JNI_VERSION_1_6;
-=======
-        return JNI_ERR;
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     }
 
     __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "forwarding to real JNI_OnLoad...");

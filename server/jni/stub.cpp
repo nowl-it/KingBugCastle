@@ -7,21 +7,17 @@
 #include <time.h>
 #include <vector>
 #include <string.h>
-<<<<<<< HEAD
 #include <stdio.h>
 #include <sys/stat.h>
 #include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, "XignCodeStub", __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "XignCodeStub", __VA_ARGS__)
 
 // --- XIGNCODE STUB METHODS ---
-<<<<<<< HEAD
 static jint     z_int(JNIEnv* e, jclass c, ...)       { return 0; }
 static void     z_void(JNIEnv* e, jclass c, ...)      { }
 static jstring  z_str(JNIEnv* e, jclass c, ...)       { return e->NewStringUTF(""); }
@@ -35,11 +31,6 @@ static jstring  z_str_seed(JNIEnv* e, jclass c, jstring seed) {
     return result;
 }
 static jboolean z_true(JNIEnv* e, jclass c, ...)      { return JNI_TRUE; }
-=======
-static jint    z_int(JNIEnv* e, jclass c, ...)        { return 0; }
-static void    z_void(JNIEnv* e, jclass c, ...)       { }
-static jstring z_str(JNIEnv* e, jclass c, ...)        { return e->NewStringUTF(""); }
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 static const JNINativeMethod kMethods[] = {
     {"ZCWAVE_Initialize",            "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/wellbia/xigncode/XigncodeClientSystem$Callback;Lcom/wellbia/xigncode/XigncodeCallback;)I", (void*)z_int},
@@ -50,13 +41,8 @@ static const JNINativeMethod kMethods[] = {
     {"ZCWAVE_OnServerConnect",       "()I",                                    (void*)z_int},
     {"ZCWAVE_OnServerDisconnect",    "()I",                                    (void*)z_int},
     {"ZCWAVE_GetCooke",              "()Ljava/lang/String;",                   (void*)z_str},
-<<<<<<< HEAD
     {"ZCWAVE_GetCookie2",            "(Ljava/lang/String;)Ljava/lang/String;", (void*)z_str_seed},
     {"ZCWAVE_GetCookie3",            "(Ljava/lang/String;)Ljava/lang/String;", (void*)z_str_seed},
-=======
-    {"ZCWAVE_GetCookie2",            "(Ljava/lang/String;)Ljava/lang/String;", (void*)z_str},
-    {"ZCWAVE_GetCookie3",            "(Ljava/lang/String;)Ljava/lang/String;", (void*)z_str},
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     {"ZCWAVE_OnActivityPause",       "()V",                                    (void*)z_void},
     {"ZCWAVE_OnActivityResume",      "()V",                                    (void*)z_void},
     {"ZCWAVE_SetApplicationContext", "(Landroid/content/Context;)V",           (void*)z_void},
@@ -65,7 +51,6 @@ static const JNINativeMethod kMethods[] = {
     {"ZCWAVE_SetUserInfo",           "(Ljava/lang/String;)V",                  (void*)z_void},
 };
 
-<<<<<<< HEAD
 // v171 adds a second XIGNCODE class, AppSignClientSystem (app-signature check),
 // hit on Guest Login. Its native descriptors differ from XigncodeClientSystem
 // (callbacks are erased to Object; extra Guard* value-obfuscation API). Without
@@ -100,8 +85,6 @@ static const JNINativeMethod kAppSignMethods[] = {
     {"nativeOnHackDetectedCallback", "(ILjava/lang/String;)V",                 (void*)z_void},
 };
 
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 void* worker_thread(void* arg);
 
 static pthread_once_t init_once = PTHREAD_ONCE_INIT;
@@ -116,28 +99,21 @@ static void start_worker() {
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
     JNIEnv* env = 0;
     if (vm->GetEnv((void**)&env, JNI_VERSION_1_6) != JNI_OK) return JNI_ERR;
-<<<<<<< HEAD
     // v171 loads "xigncode" from AppSignClientSystem.<clinit>, so XigncodeClientSystem
     // may not exist here. A failed FindClass leaves a pending exception; clear it
     // unconditionally or the NEXT JNI call (FindClass/RegisterNatives) aborts the VM.
     jclass cls = env->FindClass("com/wellbia/xigncode/XigncodeClientSystem");
     if (env->ExceptionCheck()) env->ExceptionClear();
-=======
-    jclass cls = env->FindClass("com/wellbia/xigncode/XigncodeClientSystem");
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     if (cls) {
         env->RegisterNatives(cls, kMethods, sizeof(kMethods)/sizeof(kMethods[0]));
         if (env->ExceptionCheck()) env->ExceptionClear();
     }
-<<<<<<< HEAD
     jclass appsign = env->FindClass("com/wellbia/xigncode/AppSignClientSystem");
     if (env->ExceptionCheck()) env->ExceptionClear();
     if (appsign) {
         env->RegisterNatives(appsign, kAppSignMethods, sizeof(kAppSignMethods)/sizeof(kAppSignMethods[0]));
         if (env->ExceptionCheck()) env->ExceptionClear();
     }
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     pthread_once(&init_once, start_worker);
     return JNI_VERSION_1_6;
 }
@@ -276,7 +252,6 @@ void* setTextMethod      = nullptr;   // UnityEngine.UI.Text::set_text(string)
 typedef double (*GetStatFunc)(void* _this, int32_t type, bool fromStatPanel, void* methodInfo);
 GetStatFunc getStat = nullptr;
 
-<<<<<<< HEAD
 // --- Google login -> our web login (works around the GPGS package/cert wall) ---
 // The client's Google button normally calls Google Play Games sign-in, which can't
 // authenticate this repacked build. Detour it to Application.OpenURL(<web login>),
@@ -430,8 +405,6 @@ void HookedLobbyAwake(void* _this, void* mi) {
     LOGI("HookedLobbyAwake EXIT (origLobbyAwake returned)");
 }
 
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 void HookedUpdate(void* _this, void* methodInfo) {
     if (origUpdate) {
         origUpdate(_this, methodInfo);
@@ -649,7 +622,6 @@ static void write_abs_jump(void* at, void* dest) {
     p[1] = 0xD61F0220u;   // BR  X17
     memcpy(p + 2, &dest, sizeof(dest));
 }
-<<<<<<< HEAD
 // Materialize a 64-bit constant into Xd with MOVZ + 3x MOVK. Always 4 insns (no
 // zero-halfword shortcut - simpler, and the trampoline has room). Returns count.
 static int emit_mov_imm64(uint32_t* out, uint32_t rd, uint64_t val) {
@@ -712,24 +684,6 @@ static void* install_inline_hook(void* target, void* hook) {
     if (tramp == MAP_FAILED) return nullptr;
     memcpy(tramp, buf, n * 4);
     __builtin___clear_cache((char*)tramp, (char*)tramp + n * 4);
-=======
-// Patch `target` prologue -> HookedSet; return trampoline that runs the 16 stolen
-// bytes then jumps to target+16 (i.e. calls the original). Null if prologue unsafe.
-static void* install_inline_hook(void* target, void* hook) {
-    uint32_t* t = (uint32_t*)target;
-    for (int i = 0; i < 4; ++i) {
-        if (insn_pc_relative(t[i])) {
-            LOGE("inline hook: stolen insn %d is PC-relative (%08x) - aborting", i, t[i]);
-            return nullptr;
-        }
-    }
-    void* tramp = mmap(nullptr, 64, PROT_READ | PROT_WRITE | PROT_EXEC,
-                       MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    if (tramp == MAP_FAILED) return nullptr;
-    memcpy(tramp, target, 16);
-    write_abs_jump((char*)tramp + 16, (char*)target + 16);
-    __builtin___clear_cache((char*)tramp, (char*)tramp + 32);
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
     long psz = sysconf(_SC_PAGESIZE);
     void* pg = (void*)((uintptr_t)target & ~(uintptr_t)(psz - 1));
@@ -760,7 +714,6 @@ void* worker_thread(void* arg) {
     LOGI("Worker thread started. Polling for libil2cpp.so...");
     
     void* handle = nullptr;
-<<<<<<< HEAD
     int poll_count = 0;
     while (!handle) {
         handle = dlopen("libil2cpp.so", RTLD_NOLOAD);
@@ -997,14 +950,6 @@ void* worker_thread(void* arg) {
     }
 
     LOGI("Waiting 5s for classes to register...");
-=======
-    while (!handle) {
-        handle = dlopen("libil2cpp.so", RTLD_NOLOAD);
-        if (!handle) sleep(1);
-    }
-    
-    LOGI("libil2cpp.so is loaded! Waiting 5s for classes to register...");
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     sleep(5);
     
     auto il2cpp_domain_get = (il2cpp_domain_get_t)GetIl2CppSymbol(handle, "il2cpp_domain_get");
@@ -1131,7 +1076,6 @@ void* worker_thread(void* arg) {
         LOGE("Inbox hook: PostListItem class not found");
     }
 
-<<<<<<< HEAD
     // --- Google login -> web redirect hook ---
     // Detour Scene_Login.OnClickGoogleLogin so the button opens our /glogin page
     // (Application.OpenURL) rather than the GPGS sign-in that can't authenticate
@@ -1199,8 +1143,6 @@ void* worker_thread(void* arg) {
              gmClass, g_gmGet, g_gmCctor, sceneLobbyClass);
     }
 
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     il2cpp_thread_detach(thread);
     return nullptr;
 }

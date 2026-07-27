@@ -112,7 +112,6 @@ def main():
     struct.pack_into('<I', apk_data, hdr + 14, new_crc)  # local header CRC
     tgt = entry.encode()
     pos = me
-<<<<<<< HEAD
     while True:
         pos = apk_data.find(b"PK\x01\x02", pos)
         if pos < 0:
@@ -121,14 +120,6 @@ def main():
         if bytes(apk_data[pos + 46:pos + 46 + l]) == tgt:
             struct.pack_into("<I", apk_data, pos + 16, new_crc)
             break
-=======
-    while pos < len(apk_data) - 4:
-        if apk_data[pos:pos + 4] == b'PK\x01\x02':
-            l = struct.unpack_from('<H', apk_data, pos + 28)[0]
-            if bytes(apk_data[pos + 46:pos + 46 + l]) == tgt:
-                struct.pack_into('<I', apk_data, pos + 16, new_crc)  # central dir CRC
-                break
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
         pos += 1
     apk.write_bytes(apk_data)
     print(f"[+] rebound {patched} literal(s) -> {target.decode()}  (CRC {new_crc:#010x})")

@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 """Extract all bảo cụ (Treasure) assets from KGC v169.1.04 into ~/Downloads/baoCu/"""
 
-<<<<<<< HEAD
-=======
-import os
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 import re
 import shutil
 from pathlib import Path

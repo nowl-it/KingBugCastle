@@ -9,7 +9,6 @@ state persistence for cards, decks, inventory, missions, and game loop.
 
 Run:  uvicorn server:app --host 0.0.0.0 --port 8080
 """
-<<<<<<< HEAD
 import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, hashlib, os, sys
 import playerdb
 import rewardbox
@@ -25,11 +24,6 @@ import colosseum
 import player_events
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
-=======
-import json, time, secrets, datetime, pathlib, threading, hashlib, os, sys, subprocess
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse, PlainTextResponse, Response, HTMLResponse
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 from Crypto.Cipher import AES
 
 AES_KEY = b"b53019bb76da6b34"
@@ -81,7 +75,6 @@ ROUTE_MODELS.update({
     "/treasure/set-state": {"method": "TreasureSetState", "response": "TreasureResultResponseModel"},
     "/treasure/overcome": {"method": "TreasureOvercome", "response": "TreasureResultResponseModel"},
 })
-<<<<<<< HEAD
 # map_routes.py pairs a route with a RestAPI method by name similarity and drops
 # what it cannot score, so 70 real v171 routes had no model and were answered with a
 # bare ResponseModel - the right envelope, none of the fields the client reads.
@@ -99,34 +92,6 @@ STATE_DIR.mkdir(parents=True, exist_ok=True)
 _migrated = playerdb.migrate_from_json(STATE_DIR)
 if _migrated:
     admin_log(f"[state] migrated {_migrated} player(s) from JSON into {playerdb.DB_PATH.name}")
-=======
-STATE_FILE = ROOT / "state" / "player.json"
-PLAYERS_DIR = ROOT / "state" / "players"
-PLAYERS_DIR.mkdir(parents=True, exist_ok=True)
-
-# ── Migrate legacy single player.json to players/ ──
-def _migrate_legacy_player():
-    if not STATE_FILE.exists():
-        return
-    try:
-        st = json.loads(STATE_FILE.read_text())
-    except Exception:
-        return
-    pid = st.get("uid", "dev-0001")
-    pfile = PLAYERS_DIR / f"{pid}.json"
-    if not pfile.exists():
-        admin_log(f"[admin] migrated {pid} from legacy player.json")
-        pfile.write_text(json.dumps(st, indent=1))
-    # Also ensure at least one valid player entry exists in the active file
-    for fp in PLAYERS_DIR.glob("*.json"):
-        try:
-            json.loads(fp.read_text())
-        except Exception:
-            fp.unlink()
-
-_migrate_legacy_player()
-STATE_LOCK = threading.Lock()
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 # All response data that isn't request-time-computed logic lives under data/ as
 # JSON - editable without touching code, and the shape mirrors what a future
@@ -139,7 +104,6 @@ ITEM_TEMPLATES = json.loads((DATA_DIR / "item_templates.json").read_text())
 PATCH_FOLDER = RCFG["server"]["patchFolder"]
 SERVER_VERSION = RCFG["server"]["serverVersion"]
 
-<<<<<<< HEAD
 def _content_gate(version):
     """Master-data MinVersion cutoff, derived from serverVersion.
 
@@ -251,53 +215,11 @@ def load_state():
 
 def save_state(st):
     playerdb.save(st.get("uid", "dev-0001"), st)
-=======
-# Multiple routes sharing one canonical static payload (avoids duplicating the
-# same blob under several keys in static_overrides.json).
-_STATIC_ALIASES = {
-    "/shop/refreshDailyShop": "/shop",
-    "/decoration/advisor/contract": "/decoration",
-    "/decoration/advisor/equip": "/decoration",
-    "/decoration/advisor/extend": "/decoration",
-    "/decoration/map-skin/equip": "/decoration",
-    "/decoration/map-skin/buy": "/decoration",
-    "/decoration/map-skin/favorite": "/decoration",
-    "/decoration/login-skin/equip": "/decoration",
-}
-for _alias, _canonical in _STATIC_ALIASES.items():
-    STATIC_OVERRIDES[_alias] = STATIC_OVERRIDES[_canonical]
-
-def now_iso(delta_days=0):
-    return (datetime.datetime.utcnow() + datetime.timedelta(days=delta_days)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
-
-def load_state():
-    with STATE_LOCK:
-        if STATE_FILE.exists():
-            st = json.loads(STATE_FILE.read_text())
-            _sync_player_backup(st)
-            return st
-        st = DEFAULT_PLAYER.copy()
-        STATE_FILE.write_text(json.dumps(st, indent=1))
-        _sync_player_backup(st)
-        return st
-
-def save_state(st):
-    with STATE_LOCK:
-        STATE_FILE.write_text(json.dumps(st, indent=1))
-        _sync_player_backup(st)
-
-def _sync_player_backup(st):
-    """Sync active player to their own file in players/"""
-    pid = st.get("uid", "dev-0001")
-    pfile = PLAYERS_DIR / f"{pid}.json"
-    pfile.write_text(json.dumps(st, indent=1))
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 def patch_state(st, updates):
     st.update(updates)
     save_state(st)
 
-<<<<<<< HEAD
 # --- Multiple accounts --------------------------------------------------------
 # Boards, matchmaking and "other player" lookups used to read only the current
 # save, so every one of them showed the requesting player as the entire world -
@@ -360,10 +282,6 @@ def _player_by_id(target_id, st):
 
 # Prefer user-edited master data in server/xml_live, then CDN-synced.
 _XML_LIVE = ROOT / "xml_live"
-=======
-# Prefer user-edited master data in scratchpad/xml_live, then CDN-synced.
-_XML_LIVE = ROOT.parent / "scratchpad" / "xml_live"
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 XML_DIR = _XML_LIVE if _XML_LIVE.is_dir() else ROOT.parent / "xml" / PATCH_FOLDER
 assert XML_DIR.is_dir(), f"XML master data not found: {XML_DIR}"
 admin_log(f"[xml] master data dir: {XML_DIR} ({len(list(XML_DIR.iterdir()))} files)")
@@ -383,11 +301,7 @@ def _all_hero_ids():
             visible = re.search(r'<Visible>(false|False)</Visible>', blk)
             summoner = re.search(r'<Summoner>', blk)
             min_ver = re.search(r'<MinVersion>(\d+)</MinVersion>', blk)
-<<<<<<< HEAD
             is_unreleased = min_ver and int(min_ver.group(1)) > CONTENT_GATE
-=======
-            is_unreleased = min_ver and int(min_ver.group(1)) > 170100
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
             if not visible and not summoner and not is_unreleased:
                 ids.append(uid)
     return ids
@@ -419,11 +333,7 @@ def _all_artifact_ids():
         if from_type and from_type.group(1) in ("Special", "RogueLike", "RogueLikeBuildingArtifact", "Event"):
             continue
         min_ver = re.search(r'<MinVersion>(\d+)</MinVersion>', blk)
-<<<<<<< HEAD
         if min_ver and int(min_ver.group(1)) > CONTENT_GATE:
-=======
-        if min_ver and int(min_ver.group(1)) > 170100:
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
             continue
         level_m = re.search(r'<Level>(.*?)</Level>', blk)
         level = level_m.group(1) if level_m else "Normal"
@@ -448,11 +358,7 @@ def _all_treasure_ids():
         if not m:
             continue
         min_ver = re.search(r'<MinVersion>(\d+)</MinVersion>', blk)
-<<<<<<< HEAD
         if min_ver and int(min_ver.group(1)) > CONTENT_GATE:
-=======
-        if min_ver and int(min_ver.group(1)) > 170100:
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
             continue
         tid = int(m.group(1))
         if tid == 20099:
@@ -467,7 +373,6 @@ def _all_rift_weapon_ids():
     txt = re.sub(r'<!--.*?-->', '', txt, flags=re.DOTALL)
     return [int(m) for m in re.findall(r'<RiftWeapon ID="(\d+)"', txt)]
 
-<<<<<<< HEAD
 def _rift_building_count():
     """How many altars a rift crystal carries a level for.
 
@@ -494,8 +399,6 @@ def _rift_building_count():
     assert idxs, "Buildings.xml has no BuildingName_* altars - rift crystals would be empty"
     return max(idxs) + 1
 
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 def _all_inventory_item_ids():
     """Consumables/keys/tokens/boxes from InventoryItems.xml."""
     import re
@@ -538,15 +441,12 @@ DEFAULT_CARDS = {
 # against decompiled bounds).
 DEFAULT_DECKS = SEED["decks"]
 DECK_SLOTS = len(DEFAULT_DECKS[0]["deck"])
-<<<<<<< HEAD
 # Every "pad this list up to the index the client asked for" loop needs a ceiling.
 # The index is client-supplied and unauthenticated, so without one a single request
 # naming preset 999999999 makes the server allocate until it dies.
 DECK_PRESETS = len(DEFAULT_DECKS)
 BUILDING_PRESETS = 10          # _get_building_data pads to this
 CLAN_RAID_DECKS = 10
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 def _pad_deck(deck, potential):
     # Client (DraggableUnitCard.SwapCard, Ghidra-confirmed) crashes on drag-swap
@@ -604,20 +504,16 @@ def card_to_dict(c):
         "originLevel": c["level"], "originPotentialTier": c.get("potentialTier", 0),
         "isLevelSynced": False, "isTemporaryRecruited": False,
         "createdAt": now_iso(-30),
-<<<<<<< HEAD
         # Null for an ordinary hero, which is correct; a dimension hero needs it or
         # its sync panel opens with no level, no gauge and no next cost.
         "dimensionUnit": dimension.model(c["unitId"], c.get("dimensionLevel", 0),
                                          c.get("dimensionGauge", 0),
                                          c.get("overcome", 0), XML_DIR),
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     }
 
 def cards_list(st):
     return [card_to_dict(c) for c in st.get("cards", {}).values()]
 
-<<<<<<< HEAD
 # The client's account id for the request being handled: `?id=` on /auth/auth,
 # or `id` in the /auth/register body. Only r_login reads it.
 CURRENT_LOGIN_ID = contextvars.ContextVar("current_login_id", default=None)
@@ -663,13 +559,10 @@ def _uid_for_login(login_id, prev_token, acct_type=None):
         return uid
     return playerdb.active()
 
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 def r_login(body, st):
     # All date-ish fields must be non-null parseable strings: HandleAuthResponse
     # does DateTime.Parse on expiredAt / serverTime / blockedUntilAt -> null throws
     # ArgumentNullException.
-<<<<<<< HEAD
     # str(): the id is a bearer credential the client picks, and it is hashed - a
     # numeric one used to raise AttributeError on .encode() and 500 the whole login.
     login_id = str(CURRENT_LOGIN_ID.get() or body.get("id") or "")
@@ -698,16 +591,11 @@ def r_login(body, st):
     admin_log(f"[auth] login id#{fp} -> uid={uid}")
     return {
         "accessToken": token,
-=======
-    return {
-        "accessToken": "DEV." + secrets.token_hex(16),
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
         "expiredAt": now_iso(7),
         "seed": secrets.token_hex(8),
         "serverTime": now_iso(0),
         "blockedUntilAt": now_iso(0),
         "blockedComment": "",
-<<<<<<< HEAD
         "loginId": uid,
     }
 
@@ -723,11 +611,6 @@ def mint_session_token(login_id, acct_type=1):
     admin_log(f"[glogin] minted token for uid={uid}")
     return token
 
-=======
-        "loginId": st.get("uid", "dev-0001"),
-    }
-
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 
 def _get_building_data(st):
@@ -742,11 +625,7 @@ def _get_building_data(st):
     return presets
 
 def r_building_save(body, st):
-<<<<<<< HEAD
     preset = body_int(body.get("preset"), 0, lo=0, hi=BUILDING_PRESETS - 1)
-=======
-    preset = body.get("preset", 0)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     levels = body.get("levels", [0] * 6)
     presets = _get_building_data(st)
     while len(presets) <= preset:
@@ -757,11 +636,7 @@ def r_building_save(body, st):
     return {"buildingPoint": st.get("buildingPoints", 25), "buildingData": presets}
 
 def r_building_reset_point(body, st):
-<<<<<<< HEAD
     preset = body_int(body.get("preset"), 0, lo=0, hi=BUILDING_PRESETS - 1)
-=======
-    preset = body.get("preset", 0)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     presets = _get_building_data(st)
     while len(presets) <= preset:
         presets.append({"buildingLevels": [0]*6})
@@ -834,13 +709,8 @@ def r_player(body, st):
         "dimensionRiftGameIndex": st.get("dimensionRiftGameIndex", d["dimensionRiftGameIndex"]),
         "currentRanking": st.get("currentRanking", [ld["currentRankingValue"]] * ld["currentRankingCount"]),
         "currentHardRanking": st.get("currentHardRanking", [ld["currentHardRankingValue"]] * ld["currentHardRankingCount"]),
-<<<<<<< HEAD
         "tomorrow": next_reset_iso(1),
         "nextWeek": next_reset_iso(7),
-=======
-        "tomorrow": st.get("tomorrow", now_iso(1)),
-        "nextWeek": st.get("nextWeek", now_iso(7)),
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
         "hasFreeRename": st.get("hasFreeRename", d["hasFreeRename"]),
         "eventFlag": st.get("eventFlag", d["eventFlag"]),
         "eventPlayedCount": st.get("eventPlayedCount", 0),
@@ -849,7 +719,6 @@ def r_player(body, st):
         # profileIconId must be a real Unit ID (ResourceBase<Unit>.Get lookup) - a
         # non-resolving id gives a blank/white avatar.
         "keyValues": st.get("keyValues", [{"key": "profileIconId", "value": d["profileIconId"]}]) + [
-<<<<<<< HEAD
             # AccessorySubStatGrade.Set() opens with GetKeyValueInt("AccessoryRenewal")
             # and SetActive(false)s the whole grade badge unless it is 1 - which is
             # why substats rendered with no tier. It is the ONLY reader of the flag
@@ -862,11 +731,6 @@ def r_player(body, st):
             {"key": "InventoryCount_Accessory", "value": "999"},
             {"key": "InventoryCount_RiftWeapon", "value": "999"},
             {"key": "InventoryCount_RiftCrystal", "value": "999"},
-=======
-            {"key": "InventoryCount_Treasure", "value": "999"},
-            {"key": "InventoryCount_Accessory", "value": "999"},
-            {"key": "InventoryCount_RiftWeapon", "value": "999"},
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
             {"key": "InventoryCount_AccessoryPreset", "value": "999"},
         ],
         "attendedCustomEvents": st.get("attendedCustomEvents", []),
@@ -880,13 +744,8 @@ def r_player(body, st):
 def r_game_start(body, st):
     print(f"  [GAME/START] body={body}")
     gc = RCFG["gameStart"]
-<<<<<<< HEAD
     theme = body_int(body.get("theme"), 1, lo=0)
     stage = body_int(body.get("stage"), 1, lo=0)
-=======
-    theme = body.get("theme", 1)
-    stage = body.get("stage", 1)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     heart_cost = gc["heartCostLow"] if theme <= gc["heartCostThemeThreshold"] else gc["heartCostHigh"]
     heart = max(0, st.get("heart", 999) - heart_cost)
     st["heart"] = heart
@@ -908,20 +767,12 @@ def r_game_start(body, st):
 
 def r_game_complete(body, st):
     gc = RCFG["gameComplete"]
-<<<<<<< HEAD
     babel_rewards = []
     gid = body_str(body.get("gameId"))
     win = bool(body.get("win", False))
     theme = body_int(body.get("theme"), 1, lo=0)
     stage = body_int(body.get("stage"), 1, lo=0)
     _game_store.pop(gid, None)
-=======
-    gid = body.get("gameId", "")
-    win = body.get("win", False)
-    theme = body.get("theme", 1)
-    stage = body.get("stage", 1)
-    gs = _game_store.pop(gid, {})
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     add_gold = gc["baseGold"] + theme * gc["goldPerTheme"] + (gc["winBonusGold"] if win else 0)
     add_exp = gc["baseExp"] + theme * gc["expPerTheme"]
     st["gold"] += add_gold
@@ -934,7 +785,6 @@ def r_game_complete(body, st):
         elif theme == st.get("bestClearedTheme", 0) and stage > st.get("bestClearedStage", 0):
             st["bestClearedStage"] = stage
     st["playedCount"] = st.get("playedCount", 0) + 1
-<<<<<<< HEAD
     bump(st, "playGame")
     bump(st, "playTheme", sub=theme)
     if win:
@@ -951,8 +801,6 @@ def r_game_complete(body, st):
         # A Babel floor pays its own reward on first clear; nothing else advances the
         # tower, so without this hook every tower stays on floor 0 forever.
         babel_rewards = _babel_clear(st, theme, int(stage))
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     if st.get("exp", 0) >= gc["expPerLevel"]:
         st["level"] += st["exp"] // gc["expPerLevel"]
         st["exp"] = st["exp"] % gc["expPerLevel"]
@@ -960,11 +808,8 @@ def r_game_complete(body, st):
     out = {"addGold": add_gold, "addExp": add_exp,
            "playerGold": st["gold"], "playerLevel": st["level"], "playerExp": st["exp"]}
     out.update(gc["fixed"])
-<<<<<<< HEAD
     if babel_rewards:
         out["rewardListData"] = _reward_list_data(babel_rewards)
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return out
 
 def r_card_all(body, st):
@@ -1035,35 +880,17 @@ def r_card_use_candy(body, st):
     }
 
 def r_card_upgrade_potential(body, st):
-<<<<<<< HEAD
     unit_id = body_int(body.get("unitId"), 0)
-=======
-    unit_id = body.get("unitId", 0)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     cards = st.setdefault("cards", {})
     key = str(unit_id)
     if key in cards:
         cards[key]["potentialTier"] = min(20, cards[key].get("potentialTier", 0) + 1)
         save_state(st)
-<<<<<<< HEAD
     # The fallback needs potentialTier: without it, upgrading a hero the save does
     # not have raised KeyError and the route answered 500 instead of a card.
     c = cards.get(key, {"unitId": unit_id, "level": 1, "potentialTier": 0})
     return {**card_to_dict(c),
             "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0)}
-=======
-    c = cards.get(key, {"unitId": unit_id, "level": 1})
-    return {
-        "unitId": c["unitId"], "level": c["level"], "exp": c.get("exp", 0),
-        "potentialTier": c["potentialTier"],
-        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
-        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
-        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
-        "soul": c.get("soul", 0),
-        "originLevel": c["level"], "originPotentialTier": c["potentialTier"],
-        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
-    }
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 def r_card_buy_skin(body, st):
     unit_id = body.get("unitId", 0)
@@ -1138,7 +965,6 @@ def r_deck(body, st):
     return {"deckInfos": deck_infos, "defaultPotentialInfo": st.get("defaultPotential", {"unit": [], "potential": []})}
 
 def r_deck_set(body, st):
-<<<<<<< HEAD
     # `or []` rather than a get() default: the client sends the key with a null
     # value when a preset is empty, and a default only fires on a missing key.
     preset_idx = body_int(body.get("presetIdx"), 0, lo=0, hi=DECK_PRESETS - 1)
@@ -1147,13 +973,6 @@ def r_deck_set(body, st):
     deck, potential = _pad_deck(body_list(body.get("deck")),
                                 body_list(body.get("potential")))
     first_comer = body_int(body.get("firstComerIndex"), 0, lo=0)
-=======
-    preset_idx = body.get("presetIdx", 0)
-    decks = st.setdefault("decks", list(DEFAULT_DECKS))
-    admin_log(f"[DECK/SET] preset={preset_idx} body_keys={list(body.keys())}")
-    deck, potential = _pad_deck(body.get("deck", []), body.get("potential", []))
-    first_comer = body.get("firstComerIndex", 0)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     while len(decks) <= preset_idx:
         decks.append({"deck": [0] * DECK_SLOTS, "potential": [0] * DECK_SLOTS, "firstComerIndex": 0})
     decks[preset_idx] = {"deck": deck, "potential": potential, "firstComerIndex": first_comer}
@@ -1164,17 +983,10 @@ def r_deck_set(body, st):
             "defaultPotentialInfo": st.get("defaultPotential", {"unit": [], "potential": []})}
 
 def r_deck_set_potential(body, st):
-<<<<<<< HEAD
     preset_idx = body_int(body.get("presetIdx"), 0, lo=0, hi=DECK_PRESETS - 1)
     idx = body_int(body.get("idx"), 0, lo=0, hi=DECK_SLOTS - 1)
     unit_id = body_int(body.get("unitId"), 0)
     potential = body_int(body.get("potential"), 0)
-=======
-    preset_idx = body.get("presetIdx", 0)
-    idx = body.get("idx", 0)
-    unit_id = body.get("unitId", 0)
-    potential = body.get("potential", 0)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     decks = st.setdefault("decks", list(DEFAULT_DECKS))
     admin_log(f"[DECK/SET-POTENTIAL] preset={preset_idx} idx={idx} unitId={unit_id} potential={potential}")
     while len(decks) <= preset_idx:
@@ -1190,15 +1002,9 @@ def r_deck_set_potential(body, st):
     return r_deck({}, st)
 
 def r_deck_set_all_potential(body, st):
-<<<<<<< HEAD
     potentials = [p for p in body_list(body.get("potentials")) if isinstance(p, dict)]
     st["defaultPotential"] = {"unit": [body_int(p.get("unitId"), 0) for p in potentials],
                               "potential": [body_int(p.get("potential"), 0) for p in potentials]}
-=======
-    potentials = body.get("potentials", [])
-    st["defaultPotential"] = {"unit": [p.get("unitId", 0) for p in potentials],
-                               "potential": [p.get("potential", 0) for p in potentials]}
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     save_state(st)
     return r_deck({}, st)
 
@@ -1206,7 +1012,6 @@ def r_player_inventory(body, st):
     inv = st.get("inventory", {"itemIds": [], "counts": []})
     return {"itemIds": inv.get("itemIds", []), "counts": inv.get("counts", [])}
 
-<<<<<<< HEAD
 def _inventory(st):
     return st.setdefault("inventory", {"itemIds": [], "counts": []})
 
@@ -1682,36 +1487,10 @@ def r_mission_reward_all(body, st):
     return {"keyStack": st.get("missionKeyStack", 0), "goal": st.get("missionGoal", 0),
             "passModel": None, "playerTerritoryTycoon": None,
             "rewardListResponseData": _reward_list_data(rewards)}
-=======
-def r_mission(body, st):
-    return {"missions": st.get("missions", []), "missionGoal": 0, "missionKeyStack": 0}
-
-def r_mission_reward_all(body, st):
-    st["missions"] = []
-    save_state(st)
-    return {"missions": [], "missionGoal": 0, "missionKeyStack": 0}
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 def r_event_cache(body, st):
     return {"events": []}
 
-<<<<<<< HEAD
-=======
-def r_pvp_info(body, st):
-    c = RCFG["pvpInfo"]
-    out = {"seasonUntilAtDates": [now_iso(n) for n in c["seasonDayOffsets"]],
-           "nextSeasonStartAtDates": [now_iso(n) for n in c["nextSeasonDayOffsets"]]}
-    out.update(c["fixed"])
-    return out
-
-def r_colosseum(body, st):
-    c = RCFG["colosseum"]
-    out = {"seasonUntilAtDates": [now_iso(n) for n in c["seasonDayOffsets"]],
-           "nextSeasonStartAtDates": [now_iso(n) for n in c["nextSeasonDayOffsets"]]}
-    out.update(c["fixed"])
-    return out
-
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 ALL_ARTIFACT_IDS, ARTIFACT_LEVELS = _all_artifact_ids()
 ALL_TREASURE_IDS = _all_treasure_ids()
@@ -1833,10 +1612,6 @@ def load_corruption_accessories():
 
 def get_st_accessories(st):
     if "accessories" not in st:
-<<<<<<< HEAD
-=======
-        import copy
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
         st["accessories"] = copy.deepcopy(DEFAULT_ACCESSORIES)
     return st["accessories"]
 
@@ -1886,7 +1661,6 @@ def make_rift_weapon(i, rw_id):
         "createdAt": now_iso(), "updatedAt": now_iso(),
     }
 
-<<<<<<< HEAD
 RIFT_BUILDING_COUNT = _rift_building_count()
 # CrystalRarity (ResourceRiftWeaponConstant.CrystalRarity): None=0, Common=1, UnCommon=2,
 # Rare=3, Epic=4, Legendary=5. Rarity 0 names the crystal via the key
@@ -1953,21 +1727,6 @@ DEFAULT_ARTIFACTS = [make_artifact(i + 1, aid) for i, aid in enumerate(ALL_ARTIF
 DEFAULT_TREASURES = [make_treasure(i + 1, tid) for i, tid in enumerate(ALL_TREASURE_IDS)]
 DEFAULT_ACCESSORIES = load_corruption_accessories() or [make_accessory(i + 1) for i in range(ITEM_TEMPLATES["accessory"]["count"])]
 DEFAULT_RIFT_WEAPONS = [make_rift_weapon(i + 1, rwid) for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
-=======
-def make_rift_crystal(i, rw_id):
-    t = ITEM_TEMPLATES["riftCrystal"]
-    return {
-        "id": i, "weaponId": rw_id, "mainBuildingIdx": t["mainBuildingIdx"],
-        "buildingLevels": t["buildingLevels"], "rarity": t["rarity"], "ceilCount": t["ceilCount"], "state": t["state"],
-        "createdAt": now_iso(), "updatedAt": now_iso(),
-    }
-
-DEFAULT_ARTIFACTS = [make_artifact(i + 1, aid) for i, aid in enumerate(ALL_ARTIFACT_IDS)]
-DEFAULT_TREASURES = [make_treasure(i + 1, tid) for i, tid in enumerate(ALL_TREASURE_IDS)]
-DEFAULT_ACCESSORIES = load_corruption_accessories() or [make_accessory(i + 1) for i in range(ITEM_TEMPLATES["accessory"]["count"])]
-DEFAULT_RIFT_WEAPONS = []
-DEFAULT_RIFT_CRYSTALS = [make_rift_crystal(i + 1, rwid) for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 ARTIFACT_BY_ID = {a["id"]: a for a in DEFAULT_ARTIFACTS}
 
 # ArtifactRequestModel.targetId = the equipped artifact's instance `id` (dump.cs
@@ -1991,15 +1750,9 @@ def r_artifact_inventory(body, st):
             "playerCash": st.get("cash", 0)}
 
 def r_artifact_equip(body, st):
-<<<<<<< HEAD
     target_id = body_int(body.get("targetId"), 0)
     index = body_int(body.get("index"), 0)
     deck_preset = body_int(body.get("deckPreset"), 0)
-=======
-    target_id = body.get("targetId", 0)
-    index = body.get("index", 0)
-    deck_preset = body.get("deckPreset", 0)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     equipped = [e for e in st.get("equippedArtifacts", [])
                 if not (e.get("deckPreset", 0) == deck_preset and e.get("index", 0) == index)]
     if target_id and target_id in ARTIFACT_BY_ID:
@@ -2021,10 +1774,6 @@ def r_artifact_result(body, st):
 
 def get_st_treasures(st):
     if "treasures" not in st:
-<<<<<<< HEAD
-=======
-        import copy
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
         st["treasures"] = copy.deepcopy(DEFAULT_TREASURES)
     return st["treasures"]
 
@@ -2057,14 +1806,10 @@ def r_treasure_add_exp(body, st):
     return {"treasures": get_st_treasures(st), "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999, "maxTreasureCount": 9999, "addExpItems": [], "deletedTreasures": [], "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": [], "addedExpItems": 0}
 
 def r_rift_weapon(body, st):
-<<<<<<< HEAD
     rift_crystals = st.setdefault("riftCrystals", [])
     if _repair_rift_crystals(rift_crystals):
         save_state(st)
     return {"riftWeapons": DEFAULT_RIFT_WEAPONS, "equippedWeapons": {}, "riftCrystals": rift_crystals, "deletedRiftWeapons": [], "deletedCrystals": [], "riftGauge": 0, "rewardListResponseData": None, "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "playerHeart": st.get("heart", 0), "upgradeState": 0, "equippedWeaponIds": []}
-=======
-    return {"riftWeapons": DEFAULT_RIFT_WEAPONS, "equippedWeapons": {}, "riftCrystals": DEFAULT_RIFT_CRYSTALS, "deletedRiftWeapons": [], "deletedCrystals": [], "riftGauge": 0, "rewardListResponseData": None, "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "playerHeart": st.get("heart", 0), "upgradeState": 0, "equippedWeaponIds": []}
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 def r_clan(body, st):
     # clan:null -> GameManager.clan stays null -> HasClan() false -> profile's
@@ -2073,7 +1818,6 @@ def r_clan(body, st):
     # god account that never joined one.
     return {"clan": None, "role": 0, "requestSupportCooltime": now_iso(-1)}
 
-<<<<<<< HEAD
 # --- Clan ---------------------------------------------------------------------
 # A private server has one player, so it has a clan of one. All 28 remaining clan
 # routes answered an empty model: the clan could be created but never read back,
@@ -2304,8 +2048,6 @@ def r_clan_support(body, st):
             "supportCompletedModel": None}
 
 
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 def r_pass(body, st):
     c = RCFG["pass"]
     out = {"seasonStartAtDate": now_iso(c["seasonStartDayOffset"]),
@@ -2314,7 +2056,6 @@ def r_pass(body, st):
     out.update(c["fixed"])
     return out
 
-<<<<<<< HEAD
 def _terr(st):
     """The player's territory, seeded with a level 1 town hall on first access.
 
@@ -3915,14 +3656,6 @@ def r_game_revive(body, st):
         save_state(st)
     return {"addGold": 0, "addExp": 0, "playerGold": st.get("gold", 0),
             "playerLevel": st.get("level", 1), "playerExp": st.get("exp", 0)}
-=======
-def r_territory(body, st):
-    return {"territories": [], "labor": 100, "maxLabor": 100, "buildingPoints": st.get("buildingPoints", 25)}
-
-def r_territory_fetch(body, st):
-    return {"territories": [], "labor": 100, "maxLabor": 100, "buildingPoints": st.get("buildingPoints", 25),
-            "huntingData": None, "restaurantData": None, "tradeShopData": None}
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 
 # Dynamic overrides: routes whose response genuinely depends on request-time
@@ -3940,7 +3673,6 @@ DYNAMIC_OVERRIDES = {
     "/player/currencies": lambda b, st: {"gold": st.get("gold", 0), "cash": st.get("cash", 0), "heart": st.get("heart", 0)},
     "/player/tutorial-status": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
     "/player/tutorial/complete": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
-<<<<<<< HEAD
     "/shop": r_shop,
     "/shop/iap": r_shop,
     "/shop/caniap": r_shop,
@@ -3952,9 +3684,6 @@ DYNAMIC_OVERRIDES = {
     "/player/use-reward-box-inventory-item": r_use_reward_box,
     "/player/use-skin-box-inventory-item": r_use_skin_box,
     "/player/receive-skin-box-alternate-reward": r_use_skin_box,
-=======
-    "/player/getInventory": r_player_inventory,
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     "/player/add-inventory-count": lambda b, st: {
         "playerCash": st.get("cash", 0),
         "inventoryCount": 999
@@ -3989,7 +3718,6 @@ DYNAMIC_OVERRIDES = {
     "/deck/set-deck-slot-name": r_deck,
     "/mission": r_mission,
     "/mission/reward-all": r_mission_reward_all,
-<<<<<<< HEAD
     "/story-mode/challenge/info": r_challenge_info,
     "/story-mode/challenge/reward": r_challenge_reward,
     "/story-mode/challenge/daily-reward": r_challenge_daily,
@@ -4117,13 +3845,6 @@ DYNAMIC_OVERRIDES = {
     "/colosseum/fetch-statistics-data": r_colosseum_statistics,
     "/colosseum/get-reward": r_colosseum_tier_rewards,
     "/colosseum/all-tier-rewards": r_colosseum_tier_rewards,
-=======
-    "/eventcache": r_event_cache,
-    "/pvp/info": r_pvp_info,
-    "/pvp/matching": r_pvp_info,
-    "/colosseum": r_colosseum,
-    "/colosseum/test-single-play": r_colosseum,
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     "/artifact/inventory": r_artifact_inventory,
     "/artifact/equip": r_artifact_equip,
     "/artifact/crafting": r_artifact_result,
@@ -4159,7 +3880,6 @@ DYNAMIC_OVERRIDES = {
     "/rift-weapon/buy-rift-gauge": r_rift_weapon,
     "/clan": r_clan,
     "/clan/info": r_clan,
-<<<<<<< HEAD
     "/clan/create": r_clan_create,
     "/clan/leave": r_clan_leave,
     "/clan/delete": r_clan_leave,
@@ -4191,10 +3911,6 @@ DYNAMIC_OVERRIDES = {
     "/clan/raid/support": r_clan_support,
     "/clan/support": r_clan_support,
     "/clan/requestSupport": r_clan_support,
-=======
-    "/clan/create": lambda b, st: {"clan": {**RCFG["clanCreate"], "id": 1, "name": b.get("name", "DevClan"),
-        "masterName": st.get("name", "DevKing")}, "role": 1, "requestSupportCooltime": now_iso(0)},
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     "/pass": r_pass,
     "/pass/reward": r_pass,
     "/pass/all-rewards": r_pass,
@@ -4203,7 +3919,6 @@ DYNAMIC_OVERRIDES = {
     "/pass/passEventBooster": r_pass,
     "/territory": r_territory,
     "/territory/fetch": r_territory_fetch,
-<<<<<<< HEAD
     "/territory/build": r_territory_build,
     "/territory/upgrade-building": r_territory_build,
     "/territory/upgrade-building-immediately": r_territory_upgrade_now,
@@ -4229,15 +3944,6 @@ DYNAMIC_OVERRIDES = {
     "/territory/hunting/fetch": r_territory_fetch,
     "/territory/hunting/complete-hunting-immediately": r_territory_hunting_end,
     "/territory/trade-shop/buy": r_territory_trade_buy,
-=======
-    "/territory/build": r_territory,
-    "/territory/attendance-check": r_territory,
-    "/territory/assign-units": r_territory_fetch,
-    "/territory/swap-assigned-units": r_territory_fetch,
-    "/territory/recover-labor": lambda b, st: {"storedLabor": 100, "lastLaborAt": now_iso(0)},
-    "/territory/level-sync/assign": r_territory_fetch,
-    "/territory/trade-shop/buy": r_territory_fetch,
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     "/accessory": r_accessory,
     "/accessory/equip-tutorial": lambda b, st: {"accessories": get_st_accessories(st)},
     "/accessory/add-exp": r_accessory_result,
@@ -4248,7 +3954,6 @@ DYNAMIC_OVERRIDES = {
     "/accessory/preset": lambda b, st: {"presets": []},
     "/accessory/set-preset": lambda b, st: {"presets": []},
     "/accessory/set-preset-name": lambda b, st: {"presets": []},
-<<<<<<< HEAD
     "/accessory/equip": r_accessory,
     "/decoration": r_decoration,
     "/decoration/map-skin/equip": r_map_skin_equip,
@@ -4288,8 +3993,6 @@ DYNAMIC_OVERRIDES = {
     "/player/dailyAttendanceEvents": r_daily_attendance_events,
     "/player/surprise-attendance-event": r_surprise_attendance,
     "/player/surprise-attendance-event-daily-attendance-reward": r_surprise_attendance_reward,
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 }
 
 # Pure-literal routes (no st/body dependency) load straight from JSON; wrap each
@@ -4301,7 +4004,6 @@ OVERRIDES.update(DYNAMIC_OVERRIDES)
 SERVER_START_TIME = time.time()
 
 app = FastAPI(title="KGC private server", version=SERVER_VERSION)
-<<<<<<< HEAD
 _STATE_GATE = asyncio.Lock()
 
 # Google login web flow (client's Google button -> /glogin -> deep link back).
@@ -4356,8 +4058,6 @@ async def serialize_state_writes(request: Request, call_next):
                 return await call_next(request)
     finally:
         CURRENT_UID.reset(token)
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 @app.get("/")
 def health():
@@ -4392,7 +4092,6 @@ async def respond(path: str, request: Request):
     if raw:
         try:
             body = aes_decrypt(raw)
-<<<<<<< HEAD
         except Exception:
             try:
                 body = json.loads(raw)
@@ -4430,25 +4129,6 @@ async def respond(path: str, request: Request):
         # data/route_models_extra.json), so reaching here means either a route the
         # string-table scan missed or a client newer than this server.
         admin_log(f"[UNKNOWN PATH] {request.method} {path}")
-=======
-        except Exception as e1:
-            try:
-                body = json.loads(raw)
-            except Exception as e2:
-                if path == "/deck/set":
-                    admin_log(f"[DECK/SET DECRYPT FAIL] raw_len={len(raw)} raw_hex={raw[:64].hex()}")
-                body = {}
-    info = ROUTE_MODELS.get(path, {"response": "ResponseModel", "method": None})
-    overlay = OVERRIDES[path](body, st) if path in OVERRIDES else None
-    if overlay is None and path not in ROUTE_MODELS:
-        model_name = "ResponseModel"
-        if "/territory/recover-labor" in path: model_name = "TerritoryRecoverLaborResponseModel"
-        elif "/invasion/reward" in path: model_name = "ReceiveInvasionRewardResponseModel"
-        elif "/mission/check" in path: model_name = "MissionResponseModel"
-        else:
-            admin_log(f"[UNKNOWN PATH] {request.method} {path}")
-        info = {"response": model_name, "method": None}
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     payload = build_model(info["response"], overlay)
     admin_log(f"[{host}] {request.method} {path} -> {info.get('response')}")
     return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
@@ -4512,26 +4192,14 @@ async def rift_weapon_inventory_direct(request: Request):
     st = load_state()
     host = request.headers.get("host", "?")
     admin_log(f"[{host}] DIRECT /rift-weapon -> RiftWeaponInventoryResponseModel")
-<<<<<<< HEAD
     payload = r_rift_weapon({}, st)
     payload["code"] = 200
     payload["success"] = True
-=======
-    payload = {
-        "code": 200, "msg": None, "success": True,
-        "riftWeapons": DEFAULT_RIFT_WEAPONS,
-        "equippedWeapons": {}
-    }
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
 
 @app.get("/invasion/record")
 @app.post("/invasion/record")
 async def invasion_record_direct(request: Request):
-<<<<<<< HEAD
-=======
-    st = load_state()
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     host = request.headers.get("host", "?")
     admin_log(f"  [{host}] DIRECT /invasion/record -> InvasionRecordsResponseModel")
     
@@ -4684,7 +4352,6 @@ async def post_receive_direct(request: Request):
 @app.get("/pvp/info")
 @app.post("/pvp/info")
 async def pvp_info_direct(request: Request):
-<<<<<<< HEAD
     # The request body is never read - the response depends only on saved state.
     # pvpInfoDirect stays the base because it carries the fields that were tuned
     # against the live client (deckRecord, retry counts, ban lists); r_pvp_info then
@@ -4693,27 +4360,10 @@ async def pvp_info_direct(request: Request):
     payload = {"code": 200, "msg": None, "success": True}
     payload.update(RCFG["pvpInfoDirect"])
     payload.update(r_pvp_info({}, load_state()))
-=======
-    st = load_state()
-    host = request.headers.get("host", "?")
-    body = {}
-    raw = await request.body()
-    if raw:
-        try:
-            body = aes_decrypt(raw)
-        except Exception:
-            try:
-                body = json.loads(raw)
-            except Exception:
-                body = {}
-    payload = {"code": 200, "msg": None, "success": True}
-    payload.update(RCFG["pvpInfoDirect"])
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     admin_log(f"[{host}] PVP DIRECT /pvp/info -> seasonUntilAtDates={len(payload['seasonUntilAtDates'])}")
     return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
 
 # ── Admin Panel ─────────────────────────────────────────────────────────
-<<<<<<< HEAD
 # The UI lives in dashboard.py (:8081) - a Vue app served from webui/. This route used
 # to render admin.html, but that file has not existed for a long time, so /admin was
 # quietly serving a blank page. The /admin/api/* routes below are still live: the
@@ -4770,89 +4420,11 @@ async def admin_page():
         f'(<code>python3 server/dashboard.py</code>).</p>'
         f'<p style="color:#6d7c99">This server still serves the <code>/admin/api/*</code> endpoints '
         f'the dashboard calls.</p>')
-=======
-ADMIN_HTML = (ROOT / "admin.html").read_text(encoding="utf-8") if (ROOT / "admin.html").exists() else ""
-
-# ── Multi-player helpers ──
-def _list_players():
-    files = sorted(PLAYERS_DIR.glob("*.json"))
-    result = []
-    for f in files:
-        try:
-            data = json.loads(f.read_text())
-            result.append({
-                "id": f.stem,
-                "name": data.get("name", "Unknown"),
-                "uid": data.get("uid", ""),
-                "level": data.get("level", 1),
-                "gold": data.get("gold", 0),
-                "cash": data.get("cash", 0),
-                "castleName": data.get("castleName", ""),
-                "cards": len(data.get("cards", {})),
-                "fileSize": f.stat().st_size,
-                "updatedAt": datetime.datetime.fromtimestamp(f.stat().st_mtime).strftime("%Y-%m-%d %H:%M"),
-            })
-        except Exception:
-            result.append({"id": f.stem, "name": f"[invalid] {f.stem}", "error": True})
-    return result
-
-def _load_player_by_id(pid):
-    f = PLAYERS_DIR / f"{pid}.json"
-    if f.exists():
-        return json.loads(f.read_text())
-    return None
-
-def _save_player_by_id(pid, data):
-    f = PLAYERS_DIR / f"{pid}.json"
-    f.write_text(json.dumps(data, indent=1))
-
-def _delete_player_by_id(pid):
-    f = PLAYERS_DIR / f"{pid}.json"
-    if f.exists():
-        f.unlink()
-
-def _switch_active(pid):
-    """Copy player pid to the active player.json"""
-    data = _load_player_by_id(pid)
-    if data:
-        STATE_FILE.write_text(json.dumps(data, indent=1))
-        return True
-    return False
-
-def _load_or_create_active():
-    """Ensure at least one player exists and load it."""
-    if STATE_FILE.exists():
-        return json.loads(STATE_FILE.read_text())
-    players = _list_players()
-    if players:
-        _switch_active(players[0]["id"])
-        return json.loads(STATE_FILE.read_text())
-    # Create default player
-    st = DEFAULT_PLAYER.copy()
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
-    return st
-
-@app.get("/admin")
-async def admin_page():
-    return HTMLResponse(ADMIN_HTML)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 @app.get("/admin/api/info")
 async def admin_info():
     players = _list_players()
-<<<<<<< HEAD
     active = playerdb.active()
-=======
-    active = None
-    if STATE_FILE.exists():
-        try:
-            ad = json.loads(STATE_FILE.read_text())
-            active = ad.get("uid")
-        except Exception:
-            pass
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return {
         "version": SERVER_VERSION, "patchFolder": PATCH_FOLDER,
         "routes": len(ROUTE_MODELS) + len(OVERRIDES),
@@ -4870,11 +4442,7 @@ async def admin_list_players():
 async def admin_create_player(body: dict):
     name = body.get("name", "NewPlayer")
     uid = body.get("uid", "player-" + secrets.token_hex(4))
-<<<<<<< HEAD
     st = copy.deepcopy(DEFAULT_PLAYER)   # deep: a shallow copy shares nested dicts with the template
-=======
-    st = DEFAULT_PLAYER.copy()
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     st["name"] = name
     st["uid"] = uid
     st["accountCreatedAt"] = now_iso(0)
@@ -4888,18 +4456,7 @@ async def admin_create_player(body: dict):
 async def admin_delete_player(body: dict):
     pid = body.get("uid", "")
     _delete_player_by_id(pid)
-<<<<<<< HEAD
     # playerdb.active() falls back to the first remaining row on its own.
-=======
-    # If active was this player, switch to first available
-    active = json.loads(STATE_FILE.read_text()).get("uid") if STATE_FILE.exists() else None
-    if active == pid:
-        players = _list_players()
-        if players:
-            _switch_active(players[0]["id"])
-        else:
-            STATE_FILE.unlink(missing_ok=True)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return {"ok": True}
 
 @app.post("/admin/api/players/switch")
@@ -4922,29 +4479,13 @@ async def admin_save_player_by_id(pid: str, body: dict):
     existing = _load_player_by_id(pid) or {}
     existing.update(body)
     _save_player_by_id(pid, existing)
-<<<<<<< HEAD
-=======
-    # If this is the active player, also sync to player.json
-    active = json.loads(STATE_FILE.read_text()).get("uid") if STATE_FILE.exists() else None
-    if active == pid:
-        STATE_FILE.write_text(json.dumps(existing, indent=1))
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return {"ok": True}
 
 @app.post("/admin/api/players/{pid}/reset")
 async def admin_reset_player_by_id(pid: str):
-<<<<<<< HEAD
     st = copy.deepcopy(DEFAULT_PLAYER)
     st["uid"] = pid
     _save_player_by_id(pid, st)
-=======
-    st = DEFAULT_PLAYER.copy()
-    st["uid"] = pid
-    _save_player_by_id(pid, st)
-    active = json.loads(STATE_FILE.read_text()).get("uid") if STATE_FILE.exists() else None
-    if active == pid:
-        STATE_FILE.write_text(json.dumps(st, indent=1))
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return {"ok": True}
 
 # ── Legacy single-player endpoints (target active) ──
@@ -5008,28 +4549,14 @@ async def admin_save_active_player(body: dict):
               "missions", "tutorialKeyValues", "eventFlag"):
         if k in body:
             st[k] = body[k]
-<<<<<<< HEAD
     save_state(st)
-=======
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    # Also sync to the player's own file
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return {"ok": True}
 
 @app.post("/admin/api/player/reset")
 async def admin_reset_active_player():
-<<<<<<< HEAD
     st = copy.deepcopy(DEFAULT_PLAYER)
     st["uid"] = playerdb.active() or st.get("uid", "dev-0001")   # reset the data, keep the identity
     save_state(st)
-=======
-    st = DEFAULT_PLAYER.copy()
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return {"ok": True}
 
 @app.post("/admin/api/heroes/save")
@@ -5037,13 +4564,7 @@ async def admin_save_heroes(body: dict):
     st = _load_or_create_active()
     if "cards" in body:
         st["cards"] = body["cards"]
-<<<<<<< HEAD
     save_state(st)
-=======
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return {"ok": True}
 
 @app.post("/admin/api/heroes/give-all")
@@ -5059,13 +4580,7 @@ async def admin_give_all_heroes():
         sid = str(hid)
         if sid not in cards:
             cards[sid] = {"unitId": hid, **template}
-<<<<<<< HEAD
     save_state(st)
-=======
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return {"ok": True, "count": len(cards)}
 
 @app.post("/admin/api/decks/save")
@@ -5073,13 +4588,7 @@ async def admin_save_decks(body: dict):
     st = _load_or_create_active()
     if "decks" in body:
         st["decks"] = body["decks"]
-<<<<<<< HEAD
     save_state(st)
-=======
-    STATE_FILE.write_text(json.dumps(st, indent=1))
-    pid = st.get("uid", "dev-0001")
-    _save_player_by_id(pid, st)
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     return {"ok": True}
 
 @app.post("/admin/api/artifacts/give-all")
@@ -5090,7 +4599,6 @@ async def admin_give_all_artifacts():
 async def admin_give_all_treasures():
     return {"ok": True, "count": len(DEFAULT_TREASURES)}
 
-<<<<<<< HEAD
 # One crystal per weapon, each pointed at a different altar so the set actually covers
 # distinct options instead of six copies of "Rift Crystal of Hero".
 DEFAULT_RIFT_CRYSTALS = [make_rift_crystal(i + 1, rwid, main_idx=i)
@@ -5114,8 +4622,6 @@ async def admin_grant_rift_crystals(request: Request):
     save_state(st)
     return {"ok": True, "crystal": new}
 
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 @app.post("/admin/api/state/reload")
 async def admin_reload_state():
     _load_or_create_active()
@@ -5149,11 +4655,7 @@ async def admin_system():
         "uptimeStr": f"{uptime//3600}h{(uptime%3600)//60}m{uptime%60}s",
         "routeCount": len(ROUTE_MODELS),
         "overrideCount": len(OVERRIDES),
-<<<<<<< HEAD
         "playerCount": playerdb.count(),
-=======
-        "playerCount": len(list(PLAYERS_DIR.glob("*.json"))),
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
         "cdmFiles": len(_CDN_FILES),
         "logLines": len(LOG_BUF),
     }

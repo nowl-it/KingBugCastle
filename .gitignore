@@ -82,7 +82,6 @@ opencode.jsonc
 # Training / Personal data
 documentation/
 reports/
-<<<<<<< HEAD
 
 # player state (SQLite WAL + lock); JSON files below are the pre-migration backup
 server/state/players.db-wal
@@ -103,5 +102,3 @@ server/build_v171_emulator.py
 scratchpad/
 server/state/player.json
 server/state/players/
-=======
->>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
