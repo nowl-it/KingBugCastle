@@ -26,7 +26,10 @@ jobs:
       - name: Install System Dependencies
         run: |
           sudo apt-get update 
-          sudo apt-get install -y zipalign apksigner default-jre unzip curl wget apktool
+          sudo apt-get install -y zipalign apksigner default-jre unzip curl wget
+          sudo curl -sL -o /usr/local/bin/apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
+          sudo curl -sL -o /usr/local/bin/apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v3.0.3/apktool_3.0.3.jar
+          sudo chmod +x /usr/local/bin/apktool /usr/local/bin/apktool.jar
 
       - name: Install Python Dependencies
         run: |
