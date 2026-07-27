@@ -21,18 +21,25 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
       - name: Install System Dependencies
-        run: sudo apt-get update && sudo apt-get install -y zipalign apksigner default-jre unzip curl wget
+        run: |
+          sudo apt-get update 
+          sudo apt-get install -y zipalign apksigner default-jre unzip curl wget apktool
+
+      - name: Install Python Dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Download and Extract Base XAPK
         run: |
           mkdir -p apk/xapk_extracted_v171
-          wget -O base.xapk --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "${{ github.event.inputs.base_xapk_url }}"
+          wget --tries=3 --timeout=15 -O base.xapk --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "${{ github.event.inputs.base_xapk_url }}"
           unzip base.xapk -d apk/xapk_extracted_v171/
           rm base.xapk
 
-      - name: Generate Debug Keystore
+      - name: Setup Keystore
         run: |
           mkdir -p ~/.android
           keytool -genkeypair -v -keystore ~/.android/debug.keystore \
@@ -50,3 +57,4 @@ jobs:
         with:
           name: KingBugCastle_v171
           path: KingBugCastle_v171.xapk
+          if-no-files-found: error
