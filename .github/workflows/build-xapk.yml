@@ -28,7 +28,7 @@ jobs:
       - name: Download and Extract Base XAPK
         run: |
           mkdir -p apk/xapk_extracted_v171
-          wget -qO base.xapk "${{ github.event.inputs.base_xapk_url }}"
+          wget -O base.xapk --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "${{ github.event.inputs.base_xapk_url }}"
           unzip base.xapk -d apk/xapk_extracted_v171/
           rm base.xapk
 
