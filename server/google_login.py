@@ -131,8 +131,10 @@ def authorize_url():
     return f"{AUTH_URL}?{q}"
 
 
-def deep_link(account_id):
-    return f"{SCHEME}://auth?id={urllib.parse.quote(account_id)}"
+def deep_link_token(token):
+    """The return deep link. Carries a ready session token (not a raw id): the client
+    sets it as RestAPI.accessToken and loads straight into the account's save."""
+    return f"{SCHEME}://auth?token={urllib.parse.quote(token)}"
 
 
 _RETURN_PAGE = """<!doctype html><meta charset=utf-8>
@@ -148,8 +150,23 @@ border-radius:.6rem;text-decoration:none;font-weight:600}}</style>
 """
 
 
+# Application.absoluteURL is stripped from the client (the game never uses it), so
+# the app can't read the return deep link. Instead the picked ACCOUNT ID is parked
+# here; the app's native poller fetches it from /glogin/pending and drives the
+# client's own Scene_Login.Auth(id) - the full auth handshake, ending at the lobby.
+# We pass the id, not a session token: just setting a token skips /auth, and the
+# client bails with "Unable to fetch player data". Single slot: a private server
+# with one player logging in at a time.
+# ponytail: one global slot, no per-device keying. Key it by a device id in the
+# deep link if two people ever log in at the same second.
+_PENDING = {"id": ""}
+
+
 def return_page(account_id):
-    link = deep_link(account_id)
+    """Park the account id for the poller, and hand back a page that deep-links back
+    into the app to foreground it (the id travels via the poll, not the link)."""
+    _PENDING["id"] = account_id
+    link = f"{SCHEME}://auth"
     return _RETURN_PAGE.format(link=link, link_js=json.dumps(link))
 
 
@@ -169,7 +186,7 @@ def dev_page():
     """A no-Google stand-in for the consent screen: buttons that fire the deep link
     for a few fixed dev accounts, so the client loop can be tested end to end."""
     ids = ["google_devA", "google_devB", "google_devC"]
-    buttons = "".join(f'<a class=btn href="{deep_link(i)}">Login as {i}</a>' for i in ids)
+    buttons = "".join(f'<a class=btn href="/glogin/go?id={i}">Login as {i}</a>' for i in ids)
     return _DEV_PAGE.format(buttons=buttons)
 
 
@@ -207,6 +224,24 @@ def register(app):
                                 f"<pre>{type(e).__name__}</pre>", status_code=502)
         return HTMLResponse(return_page(account_id_for_sub(sub)))
 
+    @app.get("/glogin/go")
+    def glogin_go(id: str = ""):
+        """Mint a token for a chosen account id and hand back the deep link. The dev
+        page's buttons point here; only accepts the dev ids unless real Google is on
+        (a raw id here would otherwise let anyone log in as any account)."""
+        if not id or (not enabled() and not (DEV and id.startswith("google_dev"))):
+            return HTMLResponse("<h3>Not allowed.</h3>", status_code=403)
+        return HTMLResponse(return_page(id))
+
+    @app.get("/glogin/pending")
+    def glogin_pending():
+        """The app's native poller reads the just-picked account id here (plain text,
+        not AES - it's not a game-API route). Returned once, then cleared."""
+        from fastapi.responses import PlainTextResponse
+        acc = _PENDING["id"]
+        _PENDING["id"] = ""
+        return PlainTextResponse(acc)
+
 
 if __name__ == "__main__":   # self-check: state round-trip + id derivation + return page
     s = make_state()
@@ -221,6 +256,5 @@ if __name__ == "__main__":   # self-check: state round-trip + id derivation + re
     payload = base64.urlsafe_b64encode(json.dumps({"sub": "1088x7"}).encode()).rstrip(b"=").decode()
     assert sub_from_id_token(f"h.{payload}.s") == "1088x7"
     assert account_id_for_sub("1088x7") == "google_1088x7"
-    assert deep_link("google_1088x7") == "kingbugcastle://auth?id=google_1088x7"
-    assert "kingbugcastle://auth?id=google_1088x7" in return_page("google_1088x7")
+    assert deep_link_token("abc123") == "kingbugcastle://auth?token=abc123"
     print("google_login self-check ok")

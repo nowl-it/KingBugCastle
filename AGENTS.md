@@ -152,6 +152,7 @@ Patches the build applies on top (all idempotent, each guarded by an expected-pr
 | 0x303D528 | 0x3039528 | babel-data | `fe0f1df8f65701a9` | `e0031f2ac0035fd6` | `GameManager.GetBabelData()` → null (caller null-checks) |
 | 0x34A7B2C | 0x34A3B2C | content-alert | `fe0f1bf8fa6701a9` | `e0031f2ac0035fd6` | `WorldPanel.ReloadNewContentAlert()` early return |
 | 0x3062DF0 | 0x305EDF0 | accessory | `fe0f1ff8088c40f9` | `20008052c0035fd6` | `GameManager.IsAccessoryUnlocked()` → true |
+| 0x32DB7F0 | 0x32D77F0 | shop-init | `08aa01f0...` (28 bytes) | `881a40b968120034...` (28 bytes) | `ShopItem.Init()` empty list crash bypass. Checks `Count == 0` and skips `get_Item(0)` to prevent SIGSEGV/IndexOutOfRange |
 
 The NRE stubs are a straight port of the v170 set (rows 5-14 of the v170 table above) — every prologue
 came back **byte-identical**, only the offsets moved, which is what confirms the `script.json` mapping.

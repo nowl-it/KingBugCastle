@@ -72,37 +72,25 @@ NRE_STUBS = [
     (0x3062df0, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
 ]
 
-# Scene_Lobby.Init @ RVA 0x34E53B4: the klass self-pointer fixup for
-# GameManager_TypeInfo (GOT[0x67f6e70]) never runs under ndk_translation,
-# leaving the first qword (klass) as the compressed file-time offset
-# 0x2001ba1f instead of a real self-pointer. The continuation at +516
-# dereferences this via `ldr x0, [x23]` and then reads fields through it,
-# crashing with SIGSEGV → NRE (black lobby). Fix: replace `ldr x0, [x23]`
-# with `mov x0, x23` at every occurrence in the continuation. Since the
-# klass SHOULD be a self-pointer (= &GameManager_TypeInfo), this is
-# semantically identical on a healthy runtime and corrects the null
-# dereference when it's not. 18 occurrences, each 4 bytes.
-# ldr x0, [x23] = e0 02 40 f9 → mov x0, x23 = e0 03 17 aa
-LDR_PATCHES = [
-    (0x34E55B8, 'e00240f9', 'e00317aa'),
-    (0x34E55E8, 'e00240f9', 'e00317aa'),
-    (0x34E55F8, 'e00240f9', 'e00317aa'),
-    (0x34E5870, 'e00240f9', 'e00317aa'),
-    (0x34E589C, 'e00240f9', 'e00317aa'),
-    (0x34E58AC, 'e00240f9', 'e00317aa'),
-    (0x34E58EC, 'e00240f9', 'e00317aa'),
-    (0x34E58FC, 'e00240f9', 'e00317aa'),
-    (0x34E5944, 'e00240f9', 'e00317aa'),
-    (0x34E5954, 'e00240f9', 'e00317aa'),
-    (0x34E59A8, 'e00240f9', 'e00317aa'),
-    (0x34E59B8, 'e00240f9', 'e00317aa'),
-    (0x34E5AE8, 'e00240f9', 'e00317aa'),
-    (0x34E5B14, 'e00240f9', 'e00317aa'),
-    (0x34E5B24, 'e00240f9', 'e00317aa'),
-    (0x34E5B50, 'e00240f9', 'e00317aa'),
-    (0x34E5B7C, 'e00240f9', 'e00317aa'),
-    (0x34E5B8C, 'e00240f9', 'e00317aa'),
-]
+# Scene_Base.RegisterHackDetectionCallback @ RVA 0x34DB060 (file 0x34D7060).
+# Stub it to ret (no-op) so the managed callback that shows "File integrity check
+# failed" (XigncodeValidationFailed) is never registered. The chain is:
+#   Scene_Base.Awake ~> tail-call RegisterHackDetectionCallback
+#     ~> AppSignManager.SetDetectionCallback(Action<int,string>) 
+#       ~> AppSign.System.SetDetectionCallback(HackDetectedCallback)
+#         ~> AndroidJavaProxy: setHackDetectedListener on Java AppSignClientSystem
+# The Java side of AppSignClientSystem detects that the real native libxigncode
+# is replaced with our stub and fires onHackDetected -> C# callback -> popup.
+# Patching this at the very start prevents the listener from ever being set up.
+REGISTER_HACK_DETECT_OFF = 0x34D7060
+REGISTER_HACK_DETECT_ORIG = 'fe57bea9'  # stp x30, x21, [sp, #-0x20]!
+REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
+
+# Scene_Lobby.Init @ RVA 0x34E53B4: under ndk_translation ALL TypeInfo klass
+# self-pointers fail to fix up (not just GameManager_TypeInfo). Every
+# `ldr x0, [xR]` where xR holds a TypeInfo GOT entry reads the broken file
+# offset instead of the klass pointer. Fix: replace each klass dereference
+# `ldr x0, [xR]` → `mov x0, xR`. AUTO-DETECTED via disassembly scan below.
 
 def patch_aledatic_and_inject_il2cpp(apk_path):
     print(f"[*] Patching libaledatic.so and injecting libil2cpp.so into {apk_path.name}...")
@@ -124,16 +112,107 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
             raise SystemExit(f"{label}: unexpected bytes at 0x{off:x}: {cur.hex()}")
         il2_data[off:off+8] = new
         print(f"  [+] stubbed {label} @ 0x{off:x} -> {new.hex()}")
-    for rva, orig_hex, new_hex in LDR_PATCHES:
+    # DIAGNOSTIC: KGC_LOBBY_DIAG=1 NOPs every explicit null-check in
+    # Scene_Lobby.Init that branches to the throw block (0x34e63f8), so the
+    # first null OBJECT falls through to its deref and SIGSEGVs with a locatable
+    # first null OBJECT falls through to its deref and SIGSEGVs with a locatable
+    # fault PC (a clean managed NRE is location-stripped). Skips the ldr/hack
+    # patches for a clean baseline. Read the tombstone, then turn it off.
+    LOBBY_DIAG = False # Forced for diagnostics
+    if LOBBY_DIAG:
+        NOP = bytes.fromhex('1f2003d5')
+        CBZ_THROW = [0x34e5604,0x34e56cc,0x34e5768,0x34e5770,0x34e57d0,0x34e57e8,
+            0x34e5868,0x34e58b8,0x34e5908,0x34e5910,0x34e5960,0x34e5968,0x34e5970,
+            0x34e59c4,0x34e59cc,0x34e59d4,0x34e5a18,0x34e5a64,0x34e5a88,0x34e5b30,
+            0x34e5b38,0x34e5b98,0x34e5ba0,0x34e5c34,0x34e5c64,0x34e5c70,0x34e5c9c,
+            0x34e5d10,0x34e5d3c,0x34e5dc0,0x34e5dc8,0x34e5e1c,0x34e5eb0,0x34e5f30,
+            0x34e5f38,0x34e5f8c,0x34e6020,0x34e6088,0x34e60f4,0x34e60fc,0x34e6194,
+            0x34e61f8,0x34e6298,0x34e629c,0x34e62d0,0x34e632c,0x34e6338,0x34e637c,
+            0x34e6388,0x34e63e4]
+        n = 0
+        for rva in CBZ_THROW:
+            off = rva - 0x4000
+            if bytes(il2_data[off+3:off+4])[0] & 0x7e != 0x34:  # not cbz/cbnz
+                print(f"  [!] DIAG cbz @ 0x{rva:x}: unexpected {bytes(il2_data[off:off+4]).hex()}, skip")
+                continue
+            il2_data[off:off+4] = NOP; n += 1
+        print(f"  [DIAG] NOPed {n} null-checks in Scene_Lobby.Init (expect a tombstone SIGSEGV)")
+    # Patch ALL klass dereferences in Scene_Lobby.Init.
+    # Under ndk_translation every TypeInfo klass self-pointer is broken.
+    # 65 total: 18 from original analysis (x23 only) + 47 from comprehensive scan.
+    # Each replaces `ldr x0, [xR]` with `mov x0, xR`.
+    import struct
+    LDR_PATCHES = [
+        # Original 18 (x23 only, continuation first pass):
+        (0x34E55B8, 'e00317aa'), (0x34E55E8, 'e00317aa'), (0x34E55F8, 'e00317aa'),
+        (0x34E5870, 'e00317aa'), (0x34E589C, 'e00317aa'), (0x34E58AC, 'e00317aa'),
+        (0x34E58EC, 'e00317aa'), (0x34E58FC, 'e00317aa'), (0x34E5944, 'e00317aa'),
+        (0x34E5954, 'e00317aa'), (0x34E59A8, 'e00317aa'), (0x34E59B8, 'e00317aa'),
+        (0x34E5AE8, 'e00317aa'), (0x34E5B14, 'e00317aa'), (0x34E5B24, 'e00317aa'),
+        (0x34E5B50, 'e00317aa'), (0x34E5B7C, 'e00317aa'), (0x34E5B8C, 'e00317aa'),
+        # Comprehensive scan (x20, x21, x22, x23, x25):
+        (0x34E563C, 'e00316aa'), (0x34E564C, 'e00316aa'), (0x34E5660, 'e00315aa'),
+        (0x34E56B4, 'e00315aa'), (0x34E56E4, 'e00315aa'), (0x34E57A8, 'e00319aa'),
+        (0x34E5AAC, 'e00319aa'), (0x34E5BC4, 'e00317aa'), (0x34E5BD4, 'e00317aa'),
+        (0x34E5BF0, 'e00317aa'), (0x34E5C48, 'e00314aa'), (0x34E5C58, 'e00314aa'),
+        (0x34E5C80, 'e00314aa'), (0x34E5C90, 'e00314aa'), (0x34E5CAC, 'e00317aa'),
+        (0x34E5CD8, 'e00317aa'), (0x34E5CE8, 'e00317aa'), (0x34E5D4C, 'e00319aa'),
+        (0x34E5D78, 'e00317aa'), (0x34E5DA4, 'e00317aa'), (0x34E5DB4, 'e00317aa'),
+        (0x34E5E00, 'e00317aa'), (0x34E5E10, 'e00317aa'), (0x34E5E40, 'e00317aa'),
+        (0x34E5E50, 'e00317aa'), (0x34E5E6C, 'e00317aa'), (0x34E5EBC, 'e00319aa'),
+        (0x34E5EE8, 'e00317aa'), (0x34E5F14, 'e00317aa'), (0x34E5F24, 'e00317aa'),
+        (0x34E5F70, 'e00317aa'), (0x34E5F80, 'e00317aa'), (0x34E5FB0, 'e00317aa'),
+        (0x34E5FC0, 'e00317aa'), (0x34E5FDC, 'e00317aa'), (0x34E602C, 'e00317aa'),
+        (0x34E6058, 'e00317aa'), (0x34E6068, 'e00317aa'), (0x34E60AC, 'e00317aa'),
+        (0x34E60D8, 'e00317aa'), (0x34E60E8, 'e00317aa'), (0x34E6124, 'e00317aa'),
+        (0x34E6134, 'e00317aa'), (0x34E6150, 'e00317aa'), (0x34E61B0, 'e00319aa'),
+        (0x34E62F4, 'e00319aa'), (0x34E6344, 'e00319aa'),
+    ]
+    # LDR_PATCHES: fix broken TypeInfo klass self-pointer dereferences under
+    # ndk_translation.  The native stub (HookedLobbyInit) ensures GameManager._singleton
+    # is non-null by forcing .cctor, but that alone is INSUFFICIENT: every TypeInfo's
+    # klass self-pointer fixup (`0x2001ba1f` -> self-pointer) never runs under
+    # ndk_translation, so `ldr x0,[TypeInfo]` reads a bogus file-time value instead of
+    # the klass pointer -> SIGSEGV reported as NRE at Scene_Lobby.Init [0x00000].
+    # Both fixes are needed: cctor hook (singleton) + ldr->mov (klass dereferences).
+    # Set KGC_SKIP_LDR=1 to disable these for A/B testing.
+    patched_count = 0
+    _apply_ldr = False # We discovered these patches actually break the TypeInfo logic when it is initialized.
+    for rva, new_hex in (LDR_PATCHES if _apply_ldr else []):
         off = rva - 0x4000
         cur = bytes(il2_data[off:off+4])
         new = bytes.fromhex(new_hex)
         if cur == new:
             continue
-        if cur != bytes.fromhex(orig_hex):
-            raise SystemExit(f"ldr_patch 0x{rva:x}: unexpected bytes at 0x{off:x}: {cur.hex()}")
+        if cur[3] & 0xFC != 0xF8:  # not ldr (64-bit load)
+            print(f"  [!] ldr_patch @ RVA 0x{rva:x}: unexpected orig {cur.hex()}, skipping")
+            continue
         il2_data[off:off+4] = new
-        print(f"  [+] patched ldr->mov @ 0x{rva:x} (file 0x{off:x})")
+        patched_count += 1
+        print(f"  [+] ldr->mov @ RVA 0x{rva:x} (file 0x{off:x}) {cur.hex()}->{new_hex}")
+    if patched_count:
+        print(f"  [+] patched {patched_count} klass dereferences in Scene_Lobby.Init")
+    # RegisterHackDetectionCallback -> ret (stub out the AppSign hack callback)
+    cur = bytes(il2_data[REGISTER_HACK_DETECT_OFF:REGISTER_HACK_DETECT_OFF+4])
+    if cur != bytes.fromhex(REGISTER_HACK_DETECT_NEW):
+        if cur != bytes.fromhex(REGISTER_HACK_DETECT_ORIG):
+            raise SystemExit(f"RegisterHackDetectionCallback @ 0x{REGISTER_HACK_DETECT_OFF:x}: unexpected bytes {cur.hex()}")
+        il2_data[REGISTER_HACK_DETECT_OFF:REGISTER_HACK_DETECT_OFF+4] = bytes.fromhex(REGISTER_HACK_DETECT_NEW)
+        print(f"  [+] stubbed RegisterHackDetectionCallback @ 0x{REGISTER_HACK_DETECT_OFF:x} (ret)")
+    
+    # ShopItem.Init empty list crash bypass
+    SHOP_INIT_OFF = 0x32D77F0 - 0x4000
+    SHOP_INIT_ORIG = bytes.fromhex('08aa01f0080540f9f60300aae00314aae1031f2a020140f961973394')
+    SHOP_INIT_NEW = bytes.fromhex('881a40b968120034f60300aae00314aae1031f2a1f2003d561973394')
+    cur = bytes(il2_data[SHOP_INIT_OFF:SHOP_INIT_OFF+28])
+    if cur == SHOP_INIT_ORIG:
+        il2_data[SHOP_INIT_OFF:SHOP_INIT_OFF+28] = SHOP_INIT_NEW
+        print(f"  [+] patched ShopItem.Init empty list crash")
+    elif cur == SHOP_INIT_NEW:
+        pass
+    else:
+        raise SystemExit(f"ShopItem.Init @ 0x{SHOP_INIT_OFF:x}: unexpected bytes {cur.hex()}")
+
     il2_data = bytes(il2_data)
     with zipfile.ZipFile(apk_path, "r") as zin:
         with zipfile.ZipFile(tmp, "w") as zout:

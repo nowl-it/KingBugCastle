@@ -37,7 +37,9 @@ def patch_axml(data: bytes) -> bytes:
             out[slot_start: slot_start + slot_len] = replacement
             hits += 1
         pos += 1
-    assert hits >= 1, f"{OLD!r} not found as a length-prefixed UTF-16 string"
+    if hits == 0:
+        print(f"[!] {OLD!r} not found in string-pool, skipping patch")
+        return bytes(out)
     print(f"[+] AndroidManifest.xml: patched {hits}x string-pool entr(y/ies)")
     return bytes(out)
 

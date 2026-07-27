@@ -10,6 +10,9 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, "XignCodeStub", __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "XignCodeStub", __VA_ARGS__)
@@ -274,6 +277,132 @@ void HookedGoogleLogin(void* _this, void* methodInfo) {
              g_openUrlMethod, (void*)str_new, (void*)rt_invoke);
     }
     // Intentionally NOT calling origGoogleLogin: the GPGS path is what we replace.
+}
+
+// --- Web-login return bridge (Piece 2) ---
+// Application.absoluteURL is stripped from the client, so the app can't read the
+// return deep link. Instead: the web flow parks the picked session token on the
+// server; a background thread here polls /glogin/pending for it (native socket GET,
+// off the main thread - a blocking fetch in Update would freeze the UI); and the
+// Scene_Login.Update hook (main thread) applies it - set RestAPI.accessToken, call
+// FetchInfo to load the lobby - because il2cpp/scene work must be on the Unity thread.
+typedef void (*SLUpdateFunc)(void* _this, void* mi);
+SLUpdateFunc origSceneLoginUpdate = nullptr;
+void* g_authMethod = nullptr;                // Scene_Login::Auth(string id) - full login
+static char g_poll_id[160] = {0};
+static volatile bool g_have_id = false;      // set by poll thread, read by Update
+static bool g_login_done = false;
+
+static void write_abs_jump(void* at, void* dest);   // defined in the inline-hook section below
+
+// Diagnostic: capture Scene_Lobby.Init's managed exception + stack trace.
+// REMOVED: it wrapped Init in rt_invoke which caught a managed NRE (empty trace
+// under ndk_translation) that was always there but masked by the SIGSEGV before
+// LDR patches. The rt_invoke wrapper itself may interfere with Unity's init flow.
+// Uncomment the block at the hook site to re-enable.
+
+// GET /glogin/pending on 127.0.0.1:80 (adb-reverse / host-rebind -> our server).
+// Returns body length, or -1. Plain HTTP, plain text body (not a game-API route).
+static int http_get_pending(char* buf, int buflen) {
+    int fd = socket(AF_INET, SOCK_STREAM, 0);
+    if (fd < 0) return -1;
+    struct sockaddr_in sa; memset(&sa, 0, sizeof(sa));
+    sa.sin_family = AF_INET; sa.sin_port = htons(80);
+    sa.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+    struct timeval tv = {3, 0};
+    setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
+    setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv));
+    if (connect(fd, (struct sockaddr*)&sa, sizeof(sa)) != 0) { close(fd); return -1; }
+    const char* req = "GET /glogin/pending HTTP/1.0\r\nHost: 127.0.0.1\r\n\r\n";
+    write(fd, req, strlen(req));
+    char resp[1024]; int total = 0, r;
+    while ((r = read(fd, resp + total, sizeof(resp) - 1 - total)) > 0) {
+        total += r; if (total >= (int)sizeof(resp) - 1) break;
+    }
+    close(fd);
+    if (total <= 0) return -1;
+    resp[total] = 0;
+    char* body = strstr(resp, "\r\n\r\n");
+    if (!body) return -1;
+    body += 4;
+    int bl = strlen(body);
+    while (bl > 0 && (body[bl-1]=='\n' || body[bl-1]=='\r' || body[bl-1]==' ')) body[--bl] = 0;
+    if (bl <= 0 || bl >= buflen) return -1;
+    memcpy(buf, body, bl + 1);
+    return bl;
+}
+
+void* login_poll_thread(void* arg) {
+    for (int i = 0; i < 3600 && !g_have_id; ++i) {   // ~2h, stops on first id
+        char id[160];
+        int n = http_get_pending(id, sizeof(id));
+        if (n > 0 && (unsigned char)id[0] > 0x20) {   // any non-empty account id
+            strncpy(g_poll_id, id, sizeof(g_poll_id) - 1);
+            g_have_id = true;
+            LOGI("login poll: got account id '%s'", g_poll_id);
+            break;
+        }
+        sleep(2);
+    }
+    return nullptr;
+}
+
+void HookedSceneLoginUpdate(void* _this, void* mi) {
+    if (origSceneLoginUpdate) origSceneLoginUpdate(_this, mi);
+    // Let the login scene settle before driving Auth - calling it in the first frames
+    // of boot fails ("Unable to fetch player data"). ~120 frames ≈ 2s.
+    static int frames = 0;
+    if (++frames < 120) return;
+    if (g_login_done || !g_have_id || !g_authMethod || !str_new || !rt_invoke) return;
+    LOGI("web login: Scene_Login.Auth(\"%s\") - full handshake", g_poll_id);
+    void* idstr = str_new(g_poll_id);
+    void* params[1] = { idstr };
+    void* exc = nullptr;
+    rt_invoke(g_authMethod, _this, params, &exc);   // real auth -> HandleAuthResponse -> lobby
+    if (exc) LOGE("web login: Scene_Login.Auth threw an exception");
+    g_login_done = true;
+}
+
+// --- Scene_Lobby.Init GameManager-singleton guard ---
+// Root cause of the black lobby (RE-confirmed via tombstone): Scene_Lobby.Init does
+//   GameManager._singleton.Init()
+// but reads _singleton (GameManager static field 0) as null, so GameManager.Init runs
+// on a null `this` and derefs this+0x1b0 (_inited) -> SIGSEGV, which il2cpp reports as
+// a NullReferenceException in Scene_Lobby.Init (black lobby, popups still render).
+// _singleton is created in GameManager..cctor, which il2cpp's runtime_class_init should
+// trigger before the static read - but under ndk_translation the class-init is marked
+// done without the managed .cctor actually running, so _singleton stays null. Fix: on
+// Init entry, if GameManager.Get() returns null, force the .cctor to run, then Init.
+typedef void (*LobbyAwakeFunc)(void* _this, void* mi);
+static LobbyAwakeFunc origLobbyAwake = nullptr;
+static void* g_gmGet = nullptr;      // GameManager.Get()  -> _singleton
+static void* g_gmCctor = nullptr;    // GameManager..cctor -> creates+assigns _singleton
+
+// Hook Awake (not Init) because Scene_Lobby.Awake() -> Init() is a same-class
+// direct call (compiler emits `bl` not via MethodInfo), so swapping Init's
+// MethodInfo pointer never intercepts. Awake IS called by Unity via the
+// MethodInfo table, so the pointer swap works here.
+void HookedLobbyAwake(void* _this, void* mi) {
+    LOGI("HookedLobbyAwake ENTER: this=%p mi=%p", _this, mi);
+    if (g_gmGet && g_gmCctor && rt_invoke) {
+        void* exc = nullptr;
+        void* inst = rt_invoke(g_gmGet, nullptr, nullptr, &exc);
+        LOGI("HookedLobbyAwake: GameManager.Get() = %p (exc=%p)", inst, exc);
+        if (!inst) {
+            LOGI("HookedLobbyAwake: GameManager._singleton is null - forcing .cctor");
+            void* e2 = nullptr;
+            rt_invoke(g_gmCctor, nullptr, nullptr, &e2);
+            void* e3 = nullptr;
+            inst = rt_invoke(g_gmGet, nullptr, nullptr, &e3);
+            LOGI("HookedLobbyAwake: after forced .cctor, singleton=%p", inst);
+        }
+    } else {
+        LOGI("HookedLobbyAwake: SKIP guard (gmGet=%p gmCctor=%p rt_invoke=%p)",
+             g_gmGet, g_gmCctor, (void*)rt_invoke);
+    }
+    LOGI("HookedLobbyAwake: calling origLobbyAwake=%p", (void*)origLobbyAwake);
+    if (origLobbyAwake) origLobbyAwake(_this, mi);
+    LOGI("HookedLobbyAwake EXIT (origLobbyAwake returned)");
 }
 
 void HookedUpdate(void* _this, void* methodInfo) {
@@ -969,6 +1098,49 @@ void* worker_thread(void* arg) {
     } else {
         LOGE("Google hook: Application=%p OpenURL=%p Scene_Login=%p",
              applicationClass, g_openUrlMethod, sceneLoginClass);
+    }
+
+    // --- Web-login return bridge: hook Scene_Login.Update (main thread) + poller ---
+    if (sceneLoginClass) g_authMethod = class_get_method(sceneLoginClass, "Auth", 1);
+    void* slUpdate = sceneLoginClass ? class_get_method(sceneLoginClass, "Update", 0) : nullptr;
+    if (slUpdate && g_authMethod) {
+        origSceneLoginUpdate = (SLUpdateFunc)*(void**)slUpdate;
+        long ps = sysconf(_SC_PAGESIZE);
+        void* pg2 = (void*)((uintptr_t)slUpdate & ~(uintptr_t)(ps - 1));
+        mprotect(pg2, ps, PROT_READ | PROT_WRITE | PROT_EXEC);
+        *(void**)slUpdate = (void*)HookedSceneLoginUpdate;
+        pthread_t pt;
+        pthread_create(&pt, nullptr, login_poll_thread, nullptr);
+        LOGI("Hooked Scene_Login.Update + started login poller (web-login bridge)!");
+    } else {
+        LOGE("web-login bridge not wired: auth=%p update=%p", g_authMethod, slUpdate);
+    }
+
+    // --- Scene_Lobby.Awake GameManager-singleton guard (fixes the black lobby) ---
+    // Hook Awake, not Init: Awake->Init is a same-class direct call (compiler bl),
+    // so Init's MethodInfo pointer is never consulted at call time. Awake IS
+    // dispatched by Unity via the MethodInfo table, so the pointer swap works.
+    // Must use MethodInfo pointer swap, NOT install_inline_hook (ndk_translation
+    // JIT-translates arm64 before we patch -> inline detours never fire).
+    void* gmClass = il2cpp_class_from_name(assemblyCSharpImage, "", "GameManager");
+    if (gmClass) {
+        g_gmGet   = class_get_method(gmClass, "Get", 0);
+        g_gmCctor = class_get_method(gmClass, ".cctor", 0);
+    }
+    void* sceneLobbyClass = il2cpp_class_from_name(assemblyCSharpImage, "", "Scene_Lobby");
+    if (sceneLobbyClass && g_gmGet && g_gmCctor) {
+        void* lobbyAwakeM = class_get_method(sceneLobbyClass, "Awake", 0);
+        if (lobbyAwakeM) {
+            origLobbyAwake = (LobbyAwakeFunc)*(void**)lobbyAwakeM;
+            long ps = sysconf(_SC_PAGESIZE);
+            void* pg = (void*)((uintptr_t)lobbyAwakeM & ~(uintptr_t)(ps - 1));
+            mprotect(pg, ps, PROT_READ | PROT_WRITE | PROT_EXEC);
+            *(void**)lobbyAwakeM = (void*)HookedLobbyAwake;
+            LOGI("Hooked Scene_Lobby.Awake (methodPointer swap, singleton guard)!");
+        } else LOGE("Scene_Lobby.Awake hook: Awake method not found");
+    } else {
+        LOGE("Scene_Lobby.Awake hook not wired: gm=%p get=%p cctor=%p lobby=%p",
+             gmClass, g_gmGet, g_gmCctor, sceneLobbyClass);
     }
 
     il2cpp_thread_detach(thread);

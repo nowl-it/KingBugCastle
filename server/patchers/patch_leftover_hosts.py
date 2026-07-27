@@ -76,12 +76,14 @@ crc = zlib.crc32(bytes(data)) & 0xFFFFFFFF
 struct.pack_into("<I", apk, hdr + 14, crc)
 tgt = entry.encode()
 pos = me
-while pos < len(apk) - 4:
-    if apk[pos:pos + 4] == b"PK\x01\x02":
-        l = struct.unpack_from("<H", apk, pos + 28)[0]
-        if bytes(apk[pos + 46:pos + 46 + l]) == tgt:
-            struct.pack_into("<I", apk, pos + 16, crc)
-            break
+while True:
+    pos = apk.find(b"PK\x01\x02", pos)
+    if pos < 0:
+        break
+    l = struct.unpack_from("<H", apk, pos + 28)[0]
+    if bytes(apk[pos + 46:pos + 46 + l]) == tgt:
+        struct.pack_into("<I", apk, pos + 16, crc)
+        break
     pos += 1
 APK.write_bytes(apk)
 print(f"[+] rebound {patched} leftover URL(s); CRC {crc:#010x}")

@@ -6,9 +6,9 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-# Emulator/device serial. redroid defaults to localhost:5556 (matches dashboard.py);
+# Emulator/device serial. redroid defaults to localhost:5555 (matches dashboard.py);
 # override for BlueStacks/LDPlayer/real phone: ADB_SERIAL=127.0.0.1:5555 ./run.sh
-ADB_SERIAL="${ADB_SERIAL:-localhost:5556}"
+ADB_SERIAL="${ADB_SERIAL:-localhost:5555}"
 
 stop() {
     pkill -f "uvicorn server:app" 2>/dev/null || true

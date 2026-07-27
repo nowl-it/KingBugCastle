@@ -60,14 +60,19 @@ def check_start_redirects_to_google_with_a_signed_state():
     print("ok start: 302 to Google, redirect_uri and signed state present")
 
 
-def check_callback_returns_the_deep_link(monkeypatch=None):
+def check_callback_parks_the_account_id_for_the_poller():
+    """The callback resolves the Google sub to google_<sub>, parks it for the app's
+    poller (/glogin/pending), and deep-links back to foreground the app. The client's
+    own Auth(id) does the real login - so the flow carries the id, not a token."""
     _configure()
     google_login._exchange_code = lambda code, redirect_uri: {"id_token": _fake_id_token("42abc")}
     state = google_login.make_state()
     r = client.get(f"/glogin/callback?code=xyz&state={state}")
-    assert r.status_code == 200, r.status_code
-    assert "kingbugcastle://auth?id=google_42abc" in r.text, r.text[:200]
-    print("ok callback: sub 42abc -> kingbugcastle://auth?id=google_42abc")
+    assert r.status_code == 200 and "kingbugcastle://auth" in r.text, r.text[:200]
+    p = client.get("/glogin/pending")
+    assert p.text == "google_42abc", f"poller would get {p.text!r}, not google_42abc"
+    assert client.get("/glogin/pending").text == "", "pending id was not cleared after read"
+    print("ok callback: sub 42abc -> pending id google_42abc (cleared after one read)")
 
 
 def check_a_forged_state_is_refused():
@@ -99,7 +104,7 @@ def check_the_emitted_id_lands_on_its_own_save():
 if __name__ == "__main__":
     check_unconfigured_is_a_clear_503()
     check_start_redirects_to_google_with_a_signed_state()
-    check_callback_returns_the_deep_link()
+    check_callback_parks_the_account_id_for_the_poller()
     check_a_forged_state_is_refused()
     check_the_emitted_id_lands_on_its_own_save()
     print("\nall google-login checks passed")

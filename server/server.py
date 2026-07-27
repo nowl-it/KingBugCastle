@@ -599,6 +599,18 @@ def r_login(body, st):
         "loginId": uid,
     }
 
+def mint_session_token(login_id, acct_type=1):
+    """Resolve (or create) the save for `login_id` and bind a fresh session token to
+    it, without a full /auth round-trip. The Google web-login flow calls this so the
+    deep link can carry a ready-to-use token: the client sets it as RestAPI.accessToken
+    and the next /player request lands on this account's save. acct_type default 1 =
+    Google (Constants.AccountType)."""
+    uid = _uid_for_login(str(login_id or ""), None, acct_type)
+    token = "DEV." + secrets.token_hex(16)
+    playerdb.bind_session(token, uid)
+    admin_log(f"[glogin] minted token for uid={uid}")
+    return token
+
 
 
 def _get_building_data(st):
