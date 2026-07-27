@@ -109,6 +109,7 @@ All patches apply to `config.arm64_v8a.apk` → `lib/arm64-v8a/libil2cpp.so`. Of
 
 **Patch pattern**: `RET_FALSE` = `e0031f2ac0035fd6` = `mov x0,#0; ret`. SSL uses `RET_TRUE` = `20008052c0035fd6` = `mov w0,#1; ret`.
 
+<<<<<<< HEAD
 ### ARM64 Patch Inventory — v171.0.00 private build (`server/build_v171_private.py`)
 
 v171 ships **no on-disk `libil2cpp.so`** (XIGNCODE NEO packs + encrypts it inside `libaledatic.so`).
@@ -242,6 +243,8 @@ instructions targeting its RVA to get callers (`(w>>26)==0x25`, sign-extend `imm
 site + imm*4`; file offset = `RVA - 0x4000`). That is how `Scene_Lobby.Update` was found from
 `POST /auth/login` in two hops.
 
+=======
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 ### Known One-Time Lobby NRE (not blocking)
 - `WorldPanel.Reload()` at IL offset 0x00000 — fires once during init, does not repeat. The stack trace doesn't show sub-calls, suggesting a direct field access on a null component. Hard to pinpoint without RVA; non-blocking since the lobby still renders.
 
@@ -292,12 +295,20 @@ values (unresolved client JSON-parser quirk, Frida-blocked from further diagnosi
 above); current server caps `idx` at 1 element. Full writeup:
 `documentation/GOD_ACCOUNT_DATA_AGENT_PROMPT.md`.
 
+<<<<<<< HEAD
 ### CDN xml bundle patching (master data + Strings text) — see docs/cdn-master-data.md
 Full workflow, the "no XML comments in Strings_*.xml" gotcha (breaks Localizer runtime
 registration for the whole locale, cost ~10 failed attempts to isolate on 2026-07-05),
 and the Skill/Unit `<Name>`/`<Desc>`/`<SubName>` key-redirect trick are documented in
 `docs/cdn-master-data.md`. Tool: `server/rebuild_xml_bundle.py` or
 `server/refresh_master_data.py` (full CDN refresh + local mods + bundle rebuild in one shot).
+=======
+### CDN xml bundle patching (master data + Strings text) — see CLAUDE.md for full writeup
+Full workflow, the "no XML comments in Strings_*.xml" gotcha (breaks Localizer runtime
+registration for the whole locale, cost ~10 failed attempts to isolate on 2026-07-05),
+and the Skill/Unit `<Name>`/`<Desc>`/`<SubName>` key-redirect trick are documented in
+`.claude/CLAUDE.md` under "CDN xml bundle patching". Tool: `server/rebuild_xml_bundle.py`.
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 Pristine bundle backup: `server/real_cdn/xml.bak` (md5 `779193a15d1377a7b8c2e6edfbe94095`).
 
 ### Cathy (10800-10810) skill tiers + text keys
@@ -305,7 +316,11 @@ Tiers 1-4: `Skill<N> → TransformSkill<1080N> → BuffAtCastSkill<10800N>`
 (BaseDef/BaseMDef: 200→300→400→500). Bug fix: `Skill ID="10808" Inherit="108200"` → `"10805"`.
 Unit 10810 SubName redirects to `UnitSubName_10800` (not `UnitSubName_10810`).
 
+<<<<<<< HEAD
 Text keys added in `server/xml_live/Strings_*.xml` (EN+VI only):
+=======
+Text keys added in `scratchpad/xml_live/Strings_*.xml` (EN+VI only):
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 - Skill: `SkillName_10800`, `SkillDesc_10800_Short/Long`
 - Overcomes: `Overcome_10800_0` through `_4` (Def/MDef per tier)
 - Unit: `UnitName_10810`, `UnitSubName_10800`, `UnitRealName_10800`, etc.

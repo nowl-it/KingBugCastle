@@ -154,6 +154,10 @@ destroyed-mutex crash). swiftshader is slower but renders correctly and is stabl
 ```
 server/
   server.py              FastAPI emulator (run this)
+<<<<<<< HEAD
+=======
+  deploy.sh              full pipeline: patch+sign+install+start (arm32 target)
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
   rebuild_arm64.py       arm64 client rebuild (SSL+NRE stubs, sign, install)
   rebuild_arm64_mod.py   side-by-side variant (com.nowl.castle); --share bakes a
                           server host + packages KingBugCastle.xapk (see ../SHARE.md)
@@ -162,13 +166,22 @@ server/
   rebuild_xml_bundle.py  CDN XML bundle patcher
   data/                  response data as JSON (static_overrides, response_config,
                           item_templates, default_player) - edit these, not code
+<<<<<<< HEAD
   state/players.db       player state (SQLite/WAL, via playerdb.py - edit through the dashboard)
+=======
+  state/player.json      editable save (live source of truth after first boot)
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
   generated/             models.json, restapi.json, routes.txt, route_models.json
   pipeline/              dump.cs -> generated/*.json (run when dump.cs changes)
     extract_models.py
     map_routes.py
+<<<<<<< HEAD
   patchers/              APK binary patchers used by the rebuild scripts
     patch_metadata_http.py patch_hosts.py patch_rename.py patch_package_id*.py ...
+=======
+  patchers/              internal deps of deploy.sh (arm32 binary patches)
+    patch_apk_inplace.py patch_metadata_http.py patch_prestrings.py patch_rename.py
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
   capture/               ground-truth capture tools (hit the real backend, dump JSON)
     dump_real_api.py mitm_fake_auth.py
   tests/                 assert-based sanity checks
@@ -195,7 +208,11 @@ cd server && python3 dashboard.py     # or: uvicorn dashboard:app --port 8081
 Two tabs:
 - **Battle Tracker** — live in-battle hero stats over WebSocket `/ws`. `dashboard.py` reads
   `adb -s $ADB_SERIAL logcat -s XignCodeStub`, parses the native poller's output (resolving
+<<<<<<< HEAD
   buff/skill ids to names from `server/xml_live/Strings_*.xml`), and broadcasts hero updates.
+=======
+  buff/skill ids to names from `scratchpad/xml_live/Strings_*.xml`), and broadcasts hero updates.
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 - **Admin** — acts directly on the game state JSON (`state/players/*.json`, `state/player.json`),
   the same files `server.py` reads per request (edits apply on the client's next fetch, no
   restart): server status, per-player currency/level/name editor, and mail send/delete. Mail is

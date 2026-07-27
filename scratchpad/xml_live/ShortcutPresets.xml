@@ -1,0 +1,146 @@
+<ShortcutPresets>
+    <ShortcutPreset ID="1">
+        <ShortCut Type="World" Value="Pass"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="2">
+        <ShortCut Type="ArtifactCraft" Value="Reroll"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="3">
+        <ShortCut Type="Inventory" Value="TreasureDismantle" />
+    </ShortcutPreset>
+    <ShortcutPreset ID="4">
+        <ShortCut Type="Inventory" Value="ArtifactDismantle"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="5">
+        <ShortCut Type="Inventory" Value="AccessoryDismantle"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="6">
+        <ShortCut Type="Shop" Value="Daily"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="7">
+        <ShortCut Type="Shop" Value="Growth"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="8">
+        <ShortCut Type="Shop" Value="BoxKey"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="9">
+        <ShortCut Type="Shop" Value="Cash"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="10">
+        <ShortCut Type="Shop" Value="OfferWall"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="11">
+        <ShortCut Type="Shop" Value="GoldCart"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="12">
+        <ShortCut Type="Shop" Value="CashCart"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="13">
+        <ShortCut Type="Shop" Value="Event"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="14">
+        <ShortCut Type="GameList" Value="InvasionReward"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="15">
+        <ShortCut Type="Theme" Value="Normal"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="16">
+        <ShortCut Type="Babel"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="17">
+        <ShortCut Type="EventMode"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="18">
+        <ShortCut Type="EventMode" Value="Flag" />
+    </ShortcutPreset>
+    <ShortcutPreset ID="19">
+        <ShortCut Type="Theme" Value="Hard"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="20">
+        <ShortCut Type="Theme" Value="Hard2"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="21">
+        <ShortCut Type="Gacha" Value="300"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="22">
+        <ShortCut Type="Gacha" Value="301"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="23">
+        <ShortCut Type="Gacha" Value="351"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="24">
+        <ShortCut Type="Gacha" Value="352"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="25">
+        <ShortCut Type="BuyHeart"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="26">
+        <ShortCut Type="ClanRaid" Value="ReadyBattle"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="27">
+        <ShortCut Type="Clan"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="28">
+        <ShortCut Type="Territory" Value="TradeShop"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="29">
+        <ShortCut Type="Territory" Value="Alchemy"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="30">
+        <ShortCut Type="Territory" Value="Hunting"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="31">
+        <ShortCut Type="Territory" Value="TownHall"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="32">
+        <ShortCut Type="SeasonalEventMode" Value="TokenShop"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="33">
+        <ShortCut Type="Mission" Value="Normal"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="34">
+        <ShortCut Type="Mission" Value="Daily"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="35">
+        <ShortCut Type="Mission" Value="Weekly"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="36">
+        <ShortCut Type="GameList" Value="TokenShop"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="37">
+        <ShortCut Type="GameList" Value="Token2Shop"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="38">
+        <ShortCut Type="Colosseum" Value="RankReward"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="39">
+        <ShortCut Type="Arena" Value="RankReward"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="40">
+        <ShortCut Type="Arena"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="41">
+        <ShortCut Type="Arena" Value="TokenShop"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="42">
+        <ShortCut Type="Clan" Value="TokenShop"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="43">
+        <ShortCut Type="RogueLike" Value="DimensionRift"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="44">
+        <ShortCut Type="PvP" />
+    </ShortcutPreset>
+    <ShortcutPreset ID="45">
+        <ShortCut Type="Territory" Value="Restaurant"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="47">
+        <ShortCut Type="Gacha" Value="DimensionUnitGacha"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="48">
+        <ShortCut Type="Story" Value="TokenShop"/>
+    </ShortcutPreset>
+    <ShortcutPreset ID="49">
+        <ShortCut Type="Story" Value="3010100"/>
+    </ShortcutPreset>
+</ShortcutPresets>

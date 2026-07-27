@@ -1,0 +1,367 @@
+<RogueLikeRooms>
+    <RogueLikeRoom Type="Start" Category="None">
+        <FixedSpawns>
+            <Spawn ID="79000" X="3" Y="2"/>
+        </FixedSpawns>
+    </RogueLikeRoom>
+    
+    <RogueLikeRoom Type="DimensionRiftStart" Category="None">
+        <FixedSpawns>
+            <Spawn ID="79100" X="3" Y="2"/>
+        </FixedSpawns>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Battle" Category="Battle">
+        <RoomClearDefaultRewardType>Battle</RoomClearDefaultRewardType>
+        <AllowDuplicate>true</AllowDuplicate>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Elite" Category="Elite">
+        <RoomClearDefaultRewardType>Elite</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Boss" Category="Boss">
+        <StageID World="100">200000000</StageID>
+        <StageID World="101">200000000</StageID>
+        <StageID World="102">200000000</StageID>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Shop" Category="Shop">
+        <StageID>200000000</StageID>
+ 
+        
+        <FixedSpawns>
+            <Spawn ID="79900" X="-1" Y="3"/>
+        </FixedSpawns>
+        <RandomSpawns Count="2" ForceSpawnUnseenUnitAfterFloor="3">
+            <Spawn ID="79901" X="-2" Y="3"/>
+            <Spawn ID="79902" X="-2" Y="3"/>
+            <Spawn ID="79903" X="-2" Y="3"/>
+            <Spawn ID="79904" X="-2" Y="3"/>
+        </RandomSpawns>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="EquipShop" Category="Shop">
+        <StageID>200000000</StageID>
+
+
+        <FixedSpawns>
+            <Spawn ID="79901" X="-1" Y="3"/>
+        </FixedSpawns>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="RuneShop" Category="Shop">
+        <StageID>200000000</StageID>
+
+
+        <FixedSpawns>
+            <Spawn ID="79902" X="-1" Y="3"/>
+        </FixedSpawns>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="RareItemShop" Category="Shop">
+        <StageID>200000000</StageID>
+
+
+        <FixedSpawns>
+            <Spawn ID="79904" X="-1" Y="3"/>
+        </FixedSpawns>
+    </RogueLikeRoom>
+    
+    <RogueLikeRoom Type="DimensionRiftShop" Category="Shop">
+        <StageID>200000000</StageID>
+
+        <FixedSpawns>
+            <Spawn ID="79900" X="-1" Y="3"/>
+        </FixedSpawns>
+        <RandomSpawns Count="2" ForceSpawnUnseenUnitAfterFloor="3">
+            <Spawn ID="79901" X="-2" Y="3"/>
+            <Spawn ID="79902" X="-2" Y="3"/>
+            <Spawn ID="79903" X="-2" Y="3" ForceNotSpawnSeenAfterFloor="2"/>
+            <Spawn ID="79904" X="-2" Y="3"/>
+        </RandomSpawns>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="BuildingArtifact" Category="Special">
+        <StageID>200000000</StageID>
+        <!-- <Map>Tower_15a</Map> -->
+
+        <FixedSpawns>
+            <Spawn ID="79910" Y="3"/>
+        </FixedSpawns>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Exchange" Category="Special">
+        <StageID>200000000</StageID>
+        <!-- <Map>Tower_10a</Map> -->
+
+        <RandomSpawns Count="1~3">
+            <Spawn ID="79920" Y="3"/>
+            <Spawn ID="79921" Y="3"/>
+            <Spawn ID="79922" Y="3"/>
+        </RandomSpawns>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="HeroSummon" Category="Special">
+        <AllowDuplicate>true</AllowDuplicate>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Trial" Category="Special">
+
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Trial_Accepted" Category="Special">
+        <RoomClearDefaultRewardType>Elite</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Trial_Declined" Category="Special">
+        <RoomClearDefaultRewardType>Battle</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+    
+    <RogueLikeRoom Type="Event_BloodRedEquipment" Category="Special">
+        <EnterEvent>10000</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_DarkKnight" Category="Special">
+        <EnterEvent>10010</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_StrangeOldWoman" Category="Special">
+        <EnterEvent>10020</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_StrangeBlackSmith" Category="Special">
+        <EnterEvent>10030</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_GoldenTotem" Category="Special">
+        <EnterEvent>10040</EnterEvent>
+        <RoomClearDefaultRewardType>Battle</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_HighPressureSelling" Category="Special">
+        <GenFromFloor>2</GenFromFloor>
+        <EnterEvent>10050</EnterEvent>
+        <RoomClearDefaultRewardType>Elite</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_LabOfAlchemist" Category="Special">
+        <EnterEvent>10060</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Mushroom" Category="Special">
+        <EnterEvent>10070</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_BrightLight" Category="Special">
+        <EnterEvent>10080</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_SlimeDen" Category="Special">
+        <EnterEvent>10090</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Crusader" Category="Special">
+        <EnterEvent>10100</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_CorpseOfAdventurer" Category="Special">
+        <GenFromFloor>2</GenFromFloor>
+        <EnterEvent>10110</EnterEvent>
+        <RoomClearDefaultRewardType>Elite</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_RuneInsideOfBush" Category="Special">
+        <EnterEvent>10120</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_HunterEncounter" Category="Special">
+        <EnterEvent>10130</EnterEvent>
+        <RoomClearDefaultRewardType>Battle</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Arena" Category="Special">
+        <EnterEvent>10140</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Mausoleum" Category="Special">
+        <GenFromFloor>3</GenFromFloor>
+        <EnterEvent>10150</EnterEvent>
+        <RoomClearDefaultRewardType>Battle</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Genie" Category="Special">
+        <GenFromFloor>4</GenFromFloor>
+        <EnterEvent>10160</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_TheTruth" Category="Special">
+        <GenFromFloor>2</GenFromFloor>
+        <EnterEvent>10170</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Library" Category="Special">
+        <EnterEvent>10180</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_PeopleAndMonster" Category="Special">
+        <EnterEvent>10190</EnterEvent>
+        <RoomClearDefaultRewardType>Battle</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Prison" Category="Special">
+        <EnterEvent>10200</EnterEvent>
+        <RoomClearDefaultRewardType>Battle</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_FishingGround" Category="Special">
+        <EnterEvent>10210</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Bandit" Category="Special">
+        <EnterEvent>10220</EnterEvent>
+        <RoomClearDefaultRewardType>Battle</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <!-- <RogueLikeRoom Type="Event_Minstrel" Category="Special">
+        <EnterEvent>10230</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_ElfTribal" Category="Special">
+        <EnterEvent>10240</EnterEvent>
+    </RogueLikeRoom> -->
+
+    <RogueLikeRoom Type="Event_WoundedHerbalist" Category="Special">
+        <EnterEvent>10250</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_UnluckyMushroom" Category="Special">
+        <EnterEvent>10260</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_KillerRabbit" Category="Special">
+        <EnterEvent>10270</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Trap" Category="Special">
+        <EnterEvent>10280</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Trial" Category="Special">
+        <EnterEvent>10290</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_TrappedHero" Category="Special">
+        <EnterEvent>10300</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Mimic" Category="Special">
+        <EnterEvent>10310</EnterEvent>
+    </RogueLikeRoom>
+    
+    <RogueLikeRoom Type="Event_MagicAlter" Category="Special">
+        <GenUntilFloor>9</GenUntilFloor>
+        <EnterEvent>10320</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_SleepingMonster" Category="Special">
+        <GenFromFloor>3</GenFromFloor>
+        <GenUntilFloor>7</GenUntilFloor>
+        <EnterEvent>10330</EnterEvent>
+        <RoomClearDefaultRewardType>Elite</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_RetireBlacksmith" Category="Special">
+        <GenFromFloor>3</GenFromFloor>
+        <GenUntilFloor>5</GenUntilFloor>
+        <EnterEvent>10340</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_HiddenShop" Category="Special">
+        <EnterEvent>10350</EnterEvent>
+        <RoomClearDefaultRewardType>Elite</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_AllChange" Category="Special">
+        <GenFromFloor>3</GenFromFloor>
+        <GenUntilFloor>5</GenUntilFloor>        
+        <EnterEvent>10360</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_BloodChest" Category="Special">
+        <GenFromFloor>2</GenFromFloor>
+        <GenUntilFloor>5</GenUntilFloor>   
+        <EnterEvent>10370</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_CopyCat" Category="Special">
+        <GenFromFloor>5</GenFromFloor>
+        <EnterEvent>10380</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Omikuji" Category="Special">
+        <GenFromFloor>4</GenFromFloor>
+        <EnterEvent>10390</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_GoldGoblin" Category="Special">
+        <GenFromFloor>2</GenFromFloor>
+        <GenUntilFloor>6</GenUntilFloor>      
+        <EnterEvent>10400</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_AngryBoy" Category="Special">
+        <EnterEvent>10410</EnterEvent>
+        <RoomClearDefaultRewardType>Elite</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_SlothMonster" Category="Special">
+        <EnterEvent>10420</EnterEvent>
+        <RoomClearDefaultRewardType>Elite</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_SweetOffer" Category="Special">
+        <EnterEvent>10430</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_PrideMan" Category="Special">
+        <EnterEvent>10440</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_ItemEater" Category="Special">
+        <EnterEvent>10450</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_Jealous" Category="Special">
+        <EnterEvent>10460</EnterEvent>
+        <RoomClearDefaultRewardType>Battle</RoomClearDefaultRewardType>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_IncreaseSwift" Category="Special">
+        <EnterEvent>10470</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_IncreaseToughness" Category="Special">
+        <EnterEvent>10480</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_IncreaseElement" Category="Special">
+        <EnterEvent>10490</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_IncreaseMystic" Category="Special">
+        <EnterEvent>10500</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_IncreaseShadow" Category="Special">
+        <EnterEvent>10510</EnterEvent>
+    </RogueLikeRoom>
+
+    <RogueLikeRoom Type="Event_IncreaseBrave" Category="Special">
+        <EnterEvent>10520</EnterEvent>
+    </RogueLikeRoom>
+    
+    <RogueLikeRoom Type="ChangeRegionAndBuildingPair" Category="Special">
+        <StageID>200000000</StageID>
+    </RogueLikeRoom>
+</RogueLikeRooms>

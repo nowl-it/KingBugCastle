@@ -1,0 +1,210 @@
+<!-- ID 규칙
+	만의 자리: 등급 (1: 일반, 2: 고급, 3: 희귀, 4: 영웅, 5: 전설, 6: 초월, 7: 신화)
+	단, Grade 태그는 0, 1, 2, 3, 4, 5, 6
+	
+	천, 백, 십의 자리: 인덱스 (000 ~ 999)
+	일의 자리: 예비 (0, 1, 2, ...)
+	
+	* 붙은 건 필수
+	1) MapSkin: 해당 로그인 스킨을 포함하는 맵 스킨의 ID
+	2) Default (default: false)
+	3) MinVersion (default: 156000)
+	4)* Grade (0: 일반, 1: 고급, 2: 희귀, 3: 영웅, 4: 전설, 5: 초월, 6: 신화)
+	5)* LoginSceneId: LoginScenes.xml에서 적용할 대상의 id를 기입
+-->
+
+<LoginSkins>
+	<LoginSkin ID="10000">
+		<Comment>기본 로그인</Comment>
+
+		<Sprite>Title</Sprite>
+		
+		<Default>true</Default>
+		
+		<MinVersion>156000</MinVersion>
+		<Grade>0</Grade>
+		<LoginSceneId>1</LoginSceneId>
+	</LoginSkin>
+	
+	<LoginSkin ID="10010">
+		<Comment>기본 로그인 - 2026 스토리모드 1부</Comment>
+
+		<Sprite>Title_Story_1010100</Sprite>
+
+		<Default>true</Default>
+
+		<MinVersion>168000</MinVersion>
+		<Grade>0</Grade>
+		<LoginSceneId>2</LoginSceneId>
+		
+		<Scale>1.3</Scale>
+		<OffsetX>-60</OffsetX>
+		<OffsetY>-5</OffsetY>
+
+		<PreviewScale>0.8</PreviewScale>
+		<PreviewOffsetX>-60</PreviewOffsetX>
+		<PreviewOffsetY>-5</PreviewOffsetY>
+	</LoginSkin>
+	
+	<LoginSkin ID="20000">
+		<Comment>해변 축제</Comment>
+		<IconSprite>SeasonalEventToken_Beach</IconSprite>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>1</Grade>
+		<LoginSceneId>10045</LoginSceneId>
+		<Sprite>Title_Beach_Event</Sprite>
+		
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+	</LoginSkin>
+
+	<LoginSkin ID="20010">
+		<Comment>Blood Moon Event</Comment>
+		<Name>SeasonalEventMode_Season35</Name>
+		<IconSprite>SeasonalEventToken_RedMoon</IconSprite>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>1</Grade>
+		<LoginSceneId>10047</LoginSceneId>
+		<Sprite>Title_BloodMoon_Event</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+	</LoginSkin>
+
+	<LoginSkin ID="20020">
+		<Comment>Holiday Event</Comment>
+		<Name>SeasonalEventMode_Season37</Name>
+		<IconSprite>SeasonalEventToken_Holiday</IconSprite>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>1</Grade>
+		<LoginSceneId>30000</LoginSceneId>
+		<Sprite>Title_Holiday_Event</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+	</LoginSkin>
+
+	<LoginSkin ID="20030">
+		<Comment>Newyear Event</Comment>
+		<Name>SeasonalEventMode_Season38</Name>
+		<IconSprite>SeasonalEventToken_New</IconSprite>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>1</Grade>
+		<LoginSceneId>30001</LoginSceneId>
+		<Sprite>Title_Newyear_Event</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+	</LoginSkin>
+
+	<LoginSkin ID="20040">
+		<Comment>East Martial Tournament Event</Comment>
+		<Name>SeasonalEventMode_Season52</Name>
+		<IconSprite>SeasonalEventToken_East</IconSprite>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>1</Grade>
+		<LoginSceneId>10052</LoginSceneId>
+		<Sprite>Title_East_Martial_Tournament_Event</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+	</LoginSkin>
+
+	<LoginSkin ID="20050">
+		<Comment>Flower Event</Comment>
+		<Name>SeasonalEventMode_Season53</Name>
+		<IconSprite>SeasonalEventToken_Flower</IconSprite>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>1</Grade>
+		<LoginSceneId>30002</LoginSceneId>
+		<Sprite>Title_Flower_Event</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="5" />
+	</LoginSkin>
+
+	<LoginSkin ID="30000">
+		<Comment>Chapter 13</Comment>
+		<Name>ThemeName_13</Name>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>2</Grade>
+		<LoginSceneId>20013</LoginSceneId>
+		<Sprite>Title_Chapter_13</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+	</LoginSkin>
+
+	<LoginSkin ID="30010">
+		<Comment>Chapter 14</Comment>
+		<Name>ThemeName_14</Name>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>2</Grade>
+		<LoginSceneId>20014</LoginSceneId>
+		<Sprite>Title_Chapter_14</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+	</LoginSkin>
+
+	<LoginSkin ID="30020">
+		<Comment>Chapter 15</Comment>
+		<Name>ThemeName_15</Name>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>2</Grade>
+		<LoginSceneId>20015</LoginSceneId>
+		<Sprite>Title_Chapter_15</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+	</LoginSkin>
+
+	<LoginSkin ID="30030">
+		<Comment>Chapter 13 Hard</Comment>
+		<Name>ThemeName_63</Name>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>2</Grade>
+		<LoginSceneId>200130</LoginSceneId>
+		<Sprite>Title_Chapter_13_Hard</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+	</LoginSkin>
+
+	<LoginSkin ID="30040">
+		<Comment>Chapter 15 Hard</Comment>
+		<Name>ThemeName_65</Name>
+
+		<MinVersion>156000</MinVersion>
+		<Grade>2</Grade>
+		<LoginSceneId>200150</LoginSceneId>
+		<Sprite>Title_Chapter_15_Hard</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+	</LoginSkin>
+	
+	<LoginSkin ID="30050">
+		<Comment>Beach Festival Event 2025</Comment>
+		<IconSprite>SeasonalEventToken_Beach</IconSprite>
+
+		<MinVersion>158000</MinVersion>
+		<Grade>2</Grade>
+		<LoginSceneId>30004</LoginSceneId>
+		<Sprite>Title_Beach_Event_01</Sprite>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+	</LoginSkin>
+
+</LoginSkins>

@@ -9,7 +9,11 @@ every other entry's raw bytes verbatim (cheap: assets are ZIP_STORED).
 
 Usage: python3 patch_package_id_light.py <apk> <old_pkg> <new_pkg>
 """
+<<<<<<< HEAD
 import sys, zipfile, struct, pathlib, shutil
+=======
+import sys, zipfile, zlib, struct, pathlib, shutil
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 APK = pathlib.Path(sys.argv[1]).resolve()
 OLD = sys.argv[2]
@@ -37,9 +41,13 @@ def patch_axml(data: bytes) -> bytes:
             out[slot_start: slot_start + slot_len] = replacement
             hits += 1
         pos += 1
+<<<<<<< HEAD
     if hits == 0:
         print(f"[!] {OLD!r} not found in string-pool, skipping patch")
         return bytes(out)
+=======
+    assert hits >= 1, f"{OLD!r} not found as a length-prefixed UTF-16 string"
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
     print(f"[+] AndroidManifest.xml: patched {hits}x string-pool entr(y/ies)")
     return bytes(out)
 

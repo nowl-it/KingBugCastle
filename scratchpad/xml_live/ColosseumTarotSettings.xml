@@ -1,0 +1,18 @@
+<ColosseumTarotSettings>
+	<ColosseumTarotSetting ID="1">
+		<ChoiceRounds>7,12,17</ChoiceRounds>
+		<ChoiceTarotOptionCounts>3,3,3</ChoiceTarotOptionCounts>
+		<ChoiceTarotPool>10000,10010,10020,10030,10040,10050,10060,10070,10080,10090,10100,10110</ChoiceTarotPool>
+		<ChoiceUserSelector>
+			<LowestHp FromPhase="2"/>
+			<HighestGold/>
+			<HighestInvadeItemTierSum/>
+			<LowestFieldSize/>
+			<HighestAbilityExpSum/>
+			<HighestBerserkValue FromPhase="2"/>
+		</ChoiceUserSelector>
+		
+		<RandomRounds>22</RandomRounds>
+		<RandomTarotPool>20000,20010,20020,20030,20040</RandomTarotPool>
+	</ColosseumTarotSetting>
+</ColosseumTarotSettings>

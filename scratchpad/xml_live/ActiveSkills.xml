@@ -1,0 +1,238 @@
+<!-- 차원 영웅 개전 스킬 데이터.
+    각 노드는 Units.xml 의 <ActiveSkill>{ID}</ActiveSkill> 에서 참조된다.
+
+    필드 설명:
+        CooldownStage       : 사용 후 n 스테이지(라운드)의 쿨타임
+        EffectDurationStage : 효과 지속 라운드 수 (생략 시 사용 라운드에만 적용)
+        TargetCount         : 대상 수.
+                              -1 = 전 아군 적용 (광역, 예약 가능)
+                               N(>0) = 최대 N명 선택 (모자라게 선택해도 사용/쿨타임 정상 진행)
+        BuffOptions         : 적용 효과 (BuffOption 형식; ResourceAccessorySynergyBuff 와 동일 포맷)
+
+    ReqOvercome (노드 단위):
+        - 한 family 의 ActiveSkill 들은 id 가 연속한다. baseId(=Units.xml <ActiveSkill>) + i 로 i=0..5 의 variant.
+        - 각 variant 노드 안에 <ReqOvercome>N</ReqOvercome> 으로 활성화 돌파 수치를 명시.
+        - 적용 시 GetVariantFor(baseId, overcomeLevel) 가 reqOvercome <= overcomeLevel 인 항목 중
+          reqOvercome 이 가장 큰 항목을 선택. (예: 영웅 돌파 4, variant 0/1/3 만 정의되어 있으면 3 선택.)
+-->
+<ActiveSkills>
+    <!-- 이격 네리아 개전 스킬.
+         이격 네리아 중 한 명을 지정 → 전투 시작 시 지정 영웅의 기교 +50% (3돌 강화 시 +100%). 쿨타임 전투 5회.
+         TargetType=SameUnit : 발동 영웅과 동일한 영웅 인스턴스만 지정 가능. -->
+    <ActiveSkill ID="10780">
+        <CooldownStage>4</CooldownStage>
+        <TargetCount>1</TargetCount>
+        <TargetType>SameUnit</TargetType>
+        <ReqOvercome>0</ReqOvercome>
+        
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <!-- 시작 기교 100% -->
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+            <Targets>
+                <Self/>
+            </Targets>
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+            <BuffContents>
+                <AddSkillEnergyPer/>
+            </BuffContents>
+            <Values>
+                <FixedValue>100</FixedValue>
+            </Values>
+        </BuffOptions>
+    </ActiveSkill>
+
+    <!-- 3돌 강화 variant : 기교 +100% & 생존한 적 1명 당 최종 피해량 +10% 획득 (최대 100%) -->
+    <ActiveSkill ID="10783" Inherit="10780">
+        <ReqOvercome>3</ReqOvercome>
+        
+        <Desc>ActiveSkillDesc_10783</Desc>
+        
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText Mag="0.01">./BuffOptions[2]/Values/AliveEnemyCount</InnerText>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <!-- 시작 기교 100% -->
+        <BuffOptions>
+        </BuffOptions>
+
+        <!-- 생존한 적 1명 당 최종 피해량 +10% 획득 (최대 100%) -->
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="TotalPerValue" MaxOverlapCount="1" HaveToBind="true" />
+            </BuffContents>
+
+            <Values Type="Min">
+                <AliveEnemyCount>1000</AliveEnemyCount>
+                <FixedValue>100</FixedValue>
+            </Values>
+        </BuffOptions>
+    </ActiveSkill>
+
+    <!-- 이격 오필리아 개전 스킬 
+        다음 전투 시작 시 1초간 무적 -->
+    <ActiveSkill ID="10790">
+        <CooldownStage>6</CooldownStage>
+        <TargetCount>-1</TargetCount>
+        <TargetType>Any</TargetType>
+        <ReqOvercome>0</ReqOvercome>
+
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <BattleStart/>
+            </Conditions>
+            <Targets>
+                <Self/>
+            </Targets>
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+            <BuffContents>
+                <SetInvincible/>
+            </BuffContents>
+            <Values>
+                <FixedValue>1</FixedValue>
+            </Values>
+        </BuffOptions>
+    </ActiveSkill>
+
+    <!-- 3돌 강화 variant : 1 → 1.5초 무적 -->
+    <ActiveSkill ID="10793" Inherit="10790">
+        <ReqOvercome>3</ReqOvercome>
+
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+            <InnerText>./BuffOptions/Values/FixedValue[2]</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+            <Values>
+                <FixedValue>1</FixedValue>
+                <FixedValue>0.5</FixedValue>
+            </Values>
+        </BuffOptions>
+    </ActiveSkill>
+    
+    <!-- 이격 캐시 개전 스킬 -->
+    <ActiveSkill ID="10800">
+        <CooldownStage>5</CooldownStage>
+        <TargetCount>-1</TargetCount>
+        <TargetType>SameUnit</TargetType>
+        <ReqOvercome>0</ReqOvercome>
+        <!-- Name/Desc/BuffOptions were never set by dev (this whole ActiveSkill is a stub -
+             no locale has ActiveSkillName_10800/ActiveSkillDesc_10800, and there's no real
+             BuffOptions - dev never implemented this skill's actual effect). Redirected to
+             Ophelia 10790's keys - injecting NEW Strings_VI/EN_US content via UnityPy resave
+             reliably breaks Localizer runtime registration (tested 5+ times); only redirecting
+             to an EXISTING pristine-file key actually renders. -->
+        <Name>ActiveSkillName_10800</Name>
+        <Desc>ActiveSkillDesc_10800</Desc>
+
+        <DescParams>
+        </DescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+    </ActiveSkill>
+
+    <!--스토리 모드 용 복제-->
+    <ActiveSkill ID="20010780">
+        <CooldownStage>5</CooldownStage>
+        <TargetCount>1</TargetCount>
+        <TargetType>SameUnit</TargetType>
+        <ReqOvercome>0</ReqOvercome>
+        <Name>ActiveSkillName_10780</Name>
+        <Desc>ActiveSkillDesc_10780</Desc>
+        <Icon>ActiveSkillIcon_10780</Icon>
+
+        <DescParams>
+            <InnerText>./BuffOptions/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <!-- 시작 기교 100% -->
+        <BuffOptions>
+            <Conditions>
+                <Once/>
+            </Conditions>
+            <Targets>
+                <Self/>
+            </Targets>
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+            <BuffContents>
+                <AddSkillEnergyPer/>
+            </BuffContents>
+            <Values>
+                <FixedValue>100</FixedValue>
+            </Values>
+        </BuffOptions>
+    </ActiveSkill>
+
+    <!-- 3돌 강화 variant : 기교 +100% -->
+    <ActiveSkill ID="20010783" Inherit="20010780">
+        <Name>ActiveSkillName_10780</Name>
+        <Desc>ActiveSkillDesc_10783</Desc>
+        <Icon>ActiveSkillIcon_10780</Icon>
+        <ReqOvercome>3</ReqOvercome>
+
+        <DescParams>
+            <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText Mag="0.01">./BuffOptions[2]/Values/AliveEnemyCount</InnerText>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <!-- 시작 기교 100% -->
+        <BuffOptions>
+        </BuffOptions>
+
+        <!-- 생존한 적 1명 당 최종 피해량 +10% 획득 (최대 100%) -->
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="TotalPerValue" MaxOverlapCount="1" HaveToBind="true" />
+            </BuffContents>
+
+            <Values Type="Min">
+                <AliveEnemyCount>1000</AliveEnemyCount>
+                <FixedValue>100</FixedValue>
+            </Values>
+        </BuffOptions>
+    </ActiveSkill>
+</ActiveSkills>

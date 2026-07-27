@@ -1,0 +1,662 @@
+<AccessoryConstants>
+    <!-- 장신구 종류 정보 -->
+    <AccessoryTypeInformation>
+        <AccessoryType>
+            <Type>Necklace</Type>
+            <MainStats>AtkPer,MAtkPer</MainStats>
+        </AccessoryType>
+        <AccessoryType>
+            <Type>Bracelet</Type>
+            <MainStats>BaseDef,BaseMDef</MainStats>
+        </AccessoryType>
+        <AccessoryType>
+            <Type>Ring</Type>
+            <MainStats>HpPer,AttackSpeedPer,BaseDefPen,BaseDefDen</MainStats>
+        </AccessoryType>
+        <AccessoryType>
+            <Type>Earring</Type>
+            <MainStats>BaseCriticalDamageMul,BaseMCriticalDamageMul,BaseDef,BaseMDef,BaseSpecialDamageMul</MainStats>
+        </AccessoryType>
+    </AccessoryTypeInformation>
+    
+    <!-- 장신구 메인 스탯 정보 -->
+    <MainStatInformation>
+        <MainStatInfo>
+            <StatTypeStr>AtkPer</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>0.5</IncreaseByLevel>
+            <SubStats>
+                <AtkPer/>
+                <AttackSpeedPer/>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseCriticalProb/>
+                <BaseCriticalDamageMul/>
+                <BaseSpecialDamageMul/>
+                <BaseDefPen/>
+                <BaseDefDen/>
+            </SubStats>
+        </MainStatInfo>
+        <MainStatInfo>
+            <StatTypeStr>MAtkPer</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>0.5</IncreaseByLevel>
+            <SubStats>
+                <AttackSpeedPer/>
+                <MAtkPer/>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseMCriticalProb/>
+                <BaseMCriticalDamageMul/>
+                <BaseSpecialDamageMul/>
+                <BaseDefPen/>
+                <BaseDefDen/>
+            </SubStats>
+        </MainStatInfo>
+        <MainStatInfo>
+            <StatTypeStr>HpPer</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>0.5</IncreaseByLevel>
+            <SubStats>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseCriticalProb/>
+                <BaseMCriticalProb/>
+                <BaseCriticalDamageMul/>
+                <BaseMCriticalDamageMul/>
+                <BaseSpecialDamageMul/>
+                <BaseDefPen/>
+                <BaseDefDen/>
+            </SubStats>
+        </MainStatInfo>
+        <MainStatInfo>
+            <StatTypeStr>AttackSpeedPer</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>0.5</IncreaseByLevel>
+            <SubStats>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseCriticalProb/>
+                <BaseMCriticalProb/>
+                <BaseCriticalDamageMul/>
+                <BaseMCriticalDamageMul/>
+                <BaseSpecialDamageMul/>
+                <BaseDefPen/>
+                <BaseDefDen/>
+            </SubStats>
+        </MainStatInfo>
+        <MainStatInfo>
+            <StatTypeStr>BaseCriticalDamageMul</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>0.5</IncreaseByLevel>
+            <SubStats>
+                <AtkPer/>
+                <HpPer/>
+                <AttackSpeedPer/>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseCriticalDamageMul/>
+                <BaseSpecialDamageMul/>
+            </SubStats>
+        </MainStatInfo>
+        <MainStatInfo>
+            <StatTypeStr>BaseMCriticalDamageMul</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>0.5</IncreaseByLevel>
+            <SubStats>
+                <HpPer/>
+                <AttackSpeedPer/>
+                <MAtkPer/>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseMCriticalDamageMul/>
+                <BaseSpecialDamageMul/>
+            </SubStats>
+        </MainStatInfo>
+        <MainStatInfo>
+            <StatTypeStr>BaseSpecialDamageMul</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>0.5</IncreaseByLevel>
+            <SubStats>
+                <AtkPer/>
+                <HpPer/>
+                <AttackSpeedPer/>
+                <MAtkPer/>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseSpecialDamageMul/>
+            </SubStats>
+        </MainStatInfo>
+        <MainStatInfo>
+            <StatTypeStr>BaseDef</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>10</IncreaseByLevel>
+            <SubStats>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseCriticalDamageMul/>
+                <BaseMCriticalDamageMul/>
+                <BaseSpecialDamageMul/>
+                <BaseDefPen/>
+                <BaseDefDen/>
+            </SubStats>
+        </MainStatInfo>
+        <MainStatInfo>
+            <StatTypeStr>BaseMDef</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>10</IncreaseByLevel>
+            <SubStats>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseCriticalDamageMul/>
+                <BaseMCriticalDamageMul/>
+                <BaseSpecialDamageMul/>
+                <BaseDefPen/>
+                <BaseDefDen/>
+            </SubStats>
+        </MainStatInfo>
+        <MainStatInfo>
+            <StatTypeStr>BaseDefPen</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>0.5</IncreaseByLevel>
+            <SubStats>
+                <AtkPer/>
+                <HpPer/>
+                <AttackSpeedPer/>
+                <MAtkPer/>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseDefPen/>
+            </SubStats>
+        </MainStatInfo>
+        <MainStatInfo>
+            <StatTypeStr>BaseDefDen</StatTypeStr>
+            <Value>0</Value>
+            <IncreaseByLevel>0.5</IncreaseByLevel>
+            <SubStats>
+                <AtkPer/>
+                <HpPer/>
+                <AttackSpeedPer/>
+                <MAtkPer/>
+                <BaseDef/>
+                <BaseMDef/>
+                <BaseDefDen/>
+            </SubStats>
+        </MainStatInfo>
+    </MainStatInformation>
+    
+    <!-- 장신구 보조 스탯 정보 -->
+    <!-- IncreaseRandomValues 노드는 개편 이후 사용되지 않는다. -->
+    <SubStatInformation>
+        <SubStatInfo>
+            <StatTypeStr>AtkPer</StatTypeStr>
+            <ValueByScore>1</ValueByScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>MAtkPer</StatTypeStr>
+            <ValueByScore>1</ValueByScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>HpPer</StatTypeStr>
+            <ValueByScore>1</ValueByScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>AttackSpeedPer</StatTypeStr>
+            <ValueByScore>1</ValueByScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>BaseDef</StatTypeStr>
+            <ValuePerScore>20</ValuePerScore>
+            <IncreaseRandomValues>40,50,60,70,80</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>BaseMDef</StatTypeStr>
+            <ValuePerScore>20</ValuePerScore>
+            <IncreaseRandomValues>40,50,60,70,80</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>BaseCriticalProb</StatTypeStr>
+            <ValuePerScore>1</ValuePerScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>BaseCriticalDamageMul</StatTypeStr>
+            <ValuePerScore>1</ValuePerScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>BaseMCriticalProb</StatTypeStr>
+            <ValuePerScore>1</ValuePerScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>BaseMCriticalDamageMul</StatTypeStr>
+            <ValuePerScore>1</ValuePerScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>BaseSpecialDamageMul</StatTypeStr>
+            <ValuePerScore>1</ValuePerScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>BaseDefPen</StatTypeStr>
+            <ValuePerScore>1</ValuePerScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+        <SubStatInfo>
+            <StatTypeStr>BaseDefDen</StatTypeStr>
+            <ValuePerScore>1</ValuePerScore>
+            <IncreaseRandomValues>2,2.5,3,3.5,4</IncreaseRandomValues>
+        </SubStatInfo>
+    </SubStatInformation>
+    
+    <!-- 장신구 레벨업 소모 비용 -->
+    <AccessoryLevelCost>
+        <Cost Level="1" NeedExp="0" NeedGold="0"/>
+        <Cost Level="2" NeedExp="45" NeedGold="60"/>
+        <Cost Level="3" NeedExp="50" NeedGold="65"/>
+        <Cost Level="4" NeedExp="55" NeedGold="75"/>
+        <Cost Level="5" NeedExp="60" NeedGold="90"/>
+        <Cost Level="6" NeedExp="70" NeedGold="105"/>
+        <Cost Level="7" NeedExp="80" NeedGold="125"/>
+        <Cost Level="8" NeedExp="90" NeedGold="150"/>
+        <Cost Level="9" NeedExp="110" NeedGold="180"/>
+        <Cost Level="10" NeedExp="130" NeedGold="210"/>
+        <Cost Level="11" NeedExp="160" NeedGold="240"/>
+        <Cost Level="12" NeedExp="200" NeedGold="300"/>
+        <Cost Level="13" NeedExp="250" NeedGold="360"/>
+        <Cost Level="14" NeedExp="300" NeedGold="430"/>
+        <Cost Level="15" NeedExp="350" NeedGold="510"/>
+        <Cost Level="16" NeedExp="400" NeedGold="600"/>
+        <Cost Level="17" NeedExp="500" NeedGold="700"/>
+        <Cost Level="18" NeedExp="600" NeedGold="850"/>
+        <Cost Level="19" NeedExp="700" NeedGold="1000"/>
+        <Cost Level="20" NeedExp="800" NeedGold="1150"/>
+    </AccessoryLevelCost>
+    
+    <!-- 장신구 레벨 별 이벤트 정보 -->
+    <AccessoryLevelEvent>
+        <Common>
+            <Event Level="1" Type="UnlockSlot" Value="2"/>
+            <Event Level="4" Type="UpgradeSlot" Value="1"/>
+            <Event Level="8" Type="UpgradeSlot" Value="1"/>
+            <Event Level="12" Type="UnlockSlot" Value="1"/>
+            <Event Level="16" Type="UnlockSlot" Value="1"/>
+            <Event Level="20" Type="UpgradeSlot" Value="1"/>
+        </Common>
+
+        <Rare>
+            <Event Level="1" Type="UnlockSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="30"/>
+                    <Percentage Score="2" Prob="20"/>
+                    <Percentage Score="3" Prob="15"/>
+                    <Percentage Score="4" Prob="15"/>
+                    <Percentage Score="5" Prob="20"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="4" Type="UpgradeSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="35"/>
+                    <Percentage Score="1.5" Prob="20"/>
+                    <Percentage Score="2" Prob="15"/>
+                    <Percentage Score="2.5" Prob="15"/>
+                    <Percentage Score="3" Prob="15"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="8" Type="UpgradeSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="35"/>
+                    <Percentage Score="1.5" Prob="20"/>
+                    <Percentage Score="2" Prob="15"/>
+                    <Percentage Score="2.5" Prob="15"/>
+                    <Percentage Score="3" Prob="15"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="12" Type="UpgradeSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="35"/>
+                    <Percentage Score="1.5" Prob="20"/>
+                    <Percentage Score="2" Prob="15"/>
+                    <Percentage Score="2.5" Prob="15"/>
+                    <Percentage Score="3" Prob="15"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="16" Type="UpgradeSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="35"/>
+                    <Percentage Score="1.5" Prob="20"/>
+                    <Percentage Score="2" Prob="15"/>
+                    <Percentage Score="2.5" Prob="15"/>
+                    <Percentage Score="3" Prob="15"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="20" Type="UpgradeSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="35"/>
+                    <Percentage Score="1.5" Prob="20"/>
+                    <Percentage Score="2" Prob="15"/>
+                    <Percentage Score="2.5" Prob="15"/>
+                    <Percentage Score="3" Prob="15"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="1" Type="UpgradeHighestSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="30"/>
+                    <Percentage Score="1.5" Prob="50"/>
+                    <Percentage Score="2" Prob="20"/>
+                </PercentageTable>
+            </Event>
+        </Rare>
+
+        <Special>
+            <Event Level="1" Type="UnlockSlot" Value="2">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="10"/>
+                    <Percentage Score="1.5" Prob="14"/>
+                    <Percentage Score="2" Prob="14"/>
+                    <Percentage Score="2.5" Prob="20"/>
+                    <Percentage Score="3" Prob="14"/>
+                    <Percentage Score="3.5" Prob="14"/>
+                    <Percentage Score="4" Prob="14"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="4" Type="UpgradeSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="10"/>
+                    <Percentage Score="1.5" Prob="14"/>
+                    <Percentage Score="2" Prob="14"/>
+                    <Percentage Score="2.5" Prob="20"/>
+                    <Percentage Score="3" Prob="14"/>
+                    <Percentage Score="3.5" Prob="14"/>
+                    <Percentage Score="4" Prob="14"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="8" Type="UpgradeSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="10"/>
+                    <Percentage Score="1.5" Prob="14"/>
+                    <Percentage Score="2" Prob="14"/>
+                    <Percentage Score="2.5" Prob="20"/>
+                    <Percentage Score="3" Prob="14"/>
+                    <Percentage Score="3.5" Prob="14"/>
+                    <Percentage Score="4" Prob="14"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="12" Type="UpgradeSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="10"/>
+                    <Percentage Score="1.5" Prob="14"/>
+                    <Percentage Score="2" Prob="14"/>
+                    <Percentage Score="2.5" Prob="20"/>
+                    <Percentage Score="3" Prob="14"/>
+                    <Percentage Score="3.5" Prob="14"/>
+                    <Percentage Score="4" Prob="14"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="16" Type="UpgradeSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="10"/>
+                    <Percentage Score="1.5" Prob="14"/>
+                    <Percentage Score="2" Prob="14"/>
+                    <Percentage Score="2.5" Prob="20"/>
+                    <Percentage Score="3" Prob="14"/>
+                    <Percentage Score="3.5" Prob="14"/>
+                    <Percentage Score="4" Prob="14"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="20" Type="UpgradeSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="10"/>
+                    <Percentage Score="1.5" Prob="14"/>
+                    <Percentage Score="2" Prob="14"/>
+                    <Percentage Score="2.5" Prob="20"/>
+                    <Percentage Score="3" Prob="14"/>
+                    <Percentage Score="3.5" Prob="14"/>
+                    <Percentage Score="4" Prob="14"/>
+                </PercentageTable>
+            </Event>
+            <Event Level="1" Type="UpgradeHighestSlot" Value="1">
+                <PercentageTable>
+                    <Percentage Score="1" Prob="30"/>
+                    <Percentage Score="1.5" Prob="50"/>
+                    <Percentage Score="2" Prob="20"/>
+                </PercentageTable>
+            </Event>
+        </Special>
+    </AccessoryLevelEvent>
+    <LegacyAccessoryLevelEvent>
+        <Common>
+            <Event Level="1" Type="UnlockSlot" Value="2"/>
+            <Event Level="4" Type="UpgradeSlot" Value="1"/>
+            <Event Level="8" Type="UpgradeSlot" Value="1"/>
+            <Event Level="12" Type="UnlockSlot" Value="1"/>
+            <Event Level="16" Type="UnlockSlot" Value="1"/>
+            <Event Level="20" Type="UpgradeSlot" Value="1"/>
+        </Common>
+
+        <Rare>
+            <Event Level="1" Type="UnlockSlot" Value="3"/>
+            <Event Level="4" Type="UpgradeSlot" Value="1"/>
+            <Event Level="8" Type="UpgradeSlot" Value="1"/>
+            <Event Level="12" Type="UpgradeSlot" Value="1"/>
+            <Event Level="16" Type="UnlockSlot" Value="1"/>
+            <Event Level="20" Type="UpgradeSlot" Value="1"/>
+        </Rare>
+
+        <Special>
+            <Event Level="1" Type="UnlockSlot" Value="4"/>
+            <Event Level="4" Type="UpgradeSlot" Value="1"/>
+            <Event Level="8" Type="UpgradeSlot" Value="1"/>
+            <Event Level="12" Type="UpgradeSlot" Value="1"/>
+            <Event Level="16" Type="UpgradeSlot" Value="1"/>
+            <Event Level="20" Type="UpgradeSlot" Value="1"/>
+        </Special>
+    </LegacyAccessoryLevelEvent>
+
+    <!-- 장신구 분해 보상 정보 -->
+    <AccessoryDismantleInfo>
+        <DismantleInfo Level="1">
+            <InventoryItem ID="4000" Count="1"/>
+        </DismantleInfo>
+        <DismantleInfo Level="2">
+            <InventoryItem ID="4000" Count="1"/>
+        </DismantleInfo>
+        <DismantleInfo Level="3">
+            <InventoryItem ID="4000" Count="1"/>
+        </DismantleInfo>
+        <DismantleInfo Level="4">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="1"/>
+        </DismantleInfo>
+        <DismantleInfo Level="5">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="1"/>
+        </DismantleInfo>
+        <DismantleInfo Level="6">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="1"/>
+        </DismantleInfo>
+        <DismantleInfo Level="7">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="2"/>
+        </DismantleInfo>
+        <DismantleInfo Level="8">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="3"/>
+        </DismantleInfo>
+        <DismantleInfo Level="9">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="3"/>
+        </DismantleInfo>
+        <DismantleInfo Level="10">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="4"/>
+        </DismantleInfo>
+        <DismantleInfo Level="11">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="5"/>
+        </DismantleInfo>
+        <DismantleInfo Level="12">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="6"/>
+        </DismantleInfo>
+        <DismantleInfo Level="13">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="7"/>
+        </DismantleInfo>
+        <DismantleInfo Level="14">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="8"/>
+        </DismantleInfo>
+        <DismantleInfo Level="15">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="10"/>
+        </DismantleInfo>
+        <DismantleInfo Level="16">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="13"/>
+        </DismantleInfo>
+        <DismantleInfo Level="17">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="15"/>
+        </DismantleInfo>
+        <DismantleInfo Level="18">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="18"/>
+        </DismantleInfo>
+        <DismantleInfo Level="19">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="22"/>
+        </DismantleInfo>
+        <DismantleInfo Level="20">
+            <InventoryItem ID="4000" Count="1"/>
+            <InventoryItem ID="4100" Count="27"/>
+        </DismantleInfo>
+    </AccessoryDismantleInfo>
+
+    <!-- 쿨타임 (단위 : 분) -->
+    <EquipCoolTime>600</EquipCoolTime>
+    <!-- 쿨타임 시간 별 소모 금화 (단위 : 1시간) -->
+    <CoolTimeGold Minute="60" TicketId="2205">100</CoolTimeGold>
+    <!-- 장신구 희귀도 랜덤 기본값 -->
+    <AccessoryRarityProb>0,80,20</AccessoryRarityProb>
+
+    <!-- 습격 장신구 희귀도 랜덤 기본값 -->
+    <InvasionAccessoryRarityProb>
+        <Prob>0,85,15</Prob>
+        <Prob>0,85,15</Prob>
+        <Prob>0,80,20</Prob>
+        <Prob>0,70,30</Prob>
+        <Prob>0,60,40</Prob>
+    </InvasionAccessoryRarityProb>
+
+    <!-- 장신구 스탯 점수 범위 별 색깔 -->
+    <AccessoryStatColorByValue>
+        <Stats>
+            <AtkPer>6999,10999,14999</AtkPer>
+            <MAtkPer>6999,10999,14999</MAtkPer>
+            <HpPer>6999,10999,14999</HpPer>
+            <AttackSpeedPer>6999,10999,14999</AttackSpeedPer>
+            <BaseDef>6999,10999,14999</BaseDef>
+            <BaseMDef>6999,10999,14999</BaseMDef>
+            <BaseCriticalProb>3999,5999,7999</BaseCriticalProb>
+            <BaseCriticalDamageMul>6999,10999,14999</BaseCriticalDamageMul>
+            <BaseMCriticalProb>3999,5999,7999</BaseMCriticalProb>
+            <BaseMCriticalDamageMul>6999,10999,14999</BaseMCriticalDamageMul>
+            <BaseSpecialDamageMul>6999,10999,14999</BaseSpecialDamageMul>
+            <BaseDefPen>6999,10999,14999</BaseDefPen>
+            <BaseDefDen>6999,10999,14999</BaseDefDen>
+        </Stats>
+        <Color>AAAAAA,FFFFFF,4692FF,FF2DF6</Color>
+    </AccessoryStatColorByValue>
+    
+    <!-- 장신구 세트 별 색깔 -->
+    <AccessoryColorBySynergy>
+        <Color Synergy="0">8381ee</Color>
+        <Color Synergy="1">ee007b</Color>
+        <Color Synergy="2">ffbb3d</Color>
+        <Color Synergy="3">1e96f9</Color>
+        <Color Synergy="4">26ea80</Color>
+        <Color Synergy="5">ff7127</Color>
+        <Color Synergy="6">ea7682</Color>
+        <Color Synergy="7">c54acd</Color>
+        <Color Synergy="8">00BFC4</Color>
+        <Color Synergy="9">EE2A3B</Color>
+        <Color Synergy="10">754DC1</Color>
+        <Color Synergy="11">466FFF</Color>
+        <Color Synergy="12">fffae3</Color>
+    </AccessoryColorBySynergy>
+    
+    <!-- 분해 시 고가치 아이템 팝업 출력 레벨 -->
+    <DismantleAlertLevel>16</DismantleAlertLevel>
+    
+    <!-- 인벤토리 보유량 정보 -->
+    <InventoryCountInfo Base="300" Max="1200" Add="10" Cash="10"/>
+
+    <!-- 장신구 프리셋 정보 -->
+    <AccessoryPreset>
+        <InventoryCountInfo Base="10" Max="50" Add="1" Cash="10"/>
+        <NameMaxLength>30</NameMaxLength>
+    </AccessoryPreset>
+    
+    <!-- 스탯 별 색 정보 -->
+    <StatTypeColorInformation>
+        <StatColor Type="Atk">FF6C25</StatColor>
+        <StatColor Type="MAtk">3286FC</StatColor>
+        <StatColor Type="AttackDamageMul">DDDDDD</StatColor>
+        <StatColor Type="AttackSpeed">31B86A</StatColor>
+        <StatColor Type="MoveSpeed">A9A9A9</StatColor>
+        <StatColor Type="CriticalDamageMul">FFB2EF</StatColor>
+        <StatColor Type="CriticalProb">FFB2EF</StatColor>
+        <StatColor Type="MCriticalDamageMul">66E6FF</StatColor>
+        <StatColor Type="MCriticalProb">66E6FF</StatColor>
+        <StatColor Type="SkillDamageMul">8E65E8</StatColor>
+        <StatColor Type="Damage">FFAD01</StatColor>
+        <StatColor Type="TakeDamage">FFAD01</StatColor>
+        <StatColor Type="DefDen">FFCF63</StatColor>
+        <StatColor Type="DefPen">B16E4F</StatColor>
+        <StatColor Type="Hp">F8473F</StatColor>
+        <StatColor Type="HybridDrain">F8473F</StatColor>
+        <StatColor Type="Def">FF6C25</StatColor>
+        <StatColor Type="MDef">3286FC</StatColor>
+        <StatColor Type="BaseHybridDef">DDDDDD</StatColor>
+        <StatColor Type="Range">FF6C25</StatColor>
+        <StatColor Type="SpecialDamageMul">DDDDDD</StatColor>
+        <StatColor Type="SuperShieldAdaptability">DDDDDD</StatColor>
+        <StatColor Type="MaxMana">3286FC</StatColor>
+        <StatColor Type="MissRatio">12EDB9</StatColor>
+    </StatTypeColorInformation>
+    
+    <!-- 장신구 점수 범위 별 텍스트 색상 -->
+    <ScoreTextColorInformation>
+        <Range>4999,5999,6999</Range>
+        <Color>AAAAAA,FFFFFF,4692FF,FF2DF6</Color>
+    </ScoreTextColorInformation>
+    
+    <!-- 스탯 리스트 (정렬된 상태) -->
+    <AccessoryStatList>
+        <AtkPer/>
+        <MAtkPer/>
+        <HpPer/>
+        <AttackSpeedPer/>
+        <BaseCriticalProb/>
+        <BaseMCriticalProb/>
+        <BaseCriticalDamageMul/>
+        <BaseMCriticalDamageMul/>
+        <BaseSpecialDamageMul/>
+        <BaseHybridDef/>
+        <BaseDef/>
+        <BaseMDef/>
+        <BaseDefPen/>
+        <BaseDefDen/>
+    </AccessoryStatList>
+    
+    <!-- 세부 스탯 범위 점수 -->
+    <AccessorySubStatScoreRange>1,4.5,8.5,13.5,18.5,22.5,26.5</AccessorySubStatScoreRange>
+</AccessoryConstants>

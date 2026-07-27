@@ -1,0 +1,226 @@
+<ClanTiers>
+    <ClanTier ID="1">
+        <Level>1</Level>
+        <ReqPoint>6000</ReqPoint>
+        
+        <ClanShopSale Tier="0">0</ClanShopSale>
+        <AttendanceToken Tier="0">50</AttendanceToken>
+        <AttendancePoint Tier="0">50</AttendancePoint>
+        <MaxClanMember Tier="0">20</MaxClanMember>
+        <GoldBonus Tier="0">0</GoldBonus>
+        <HeroSupport Tier="0">
+            <CountPerRequest>2</CountPerRequest>
+            <DailyCountPerMember>20</DailyCountPerMember>
+            <CardExpPerRequest>10</CardExpPerRequest>
+            <Reward Type="Gold" Count="25" />
+            <Reward Type="Exp" Count="25" />
+            <Reward Type="Token_CLAN" Count="2" />
+            <Reward Type="ClanPoint" Count="2" />
+        </HeroSupport>
+    </ClanTier>
+    
+    <ClanTier ID="2" Inherit="1">
+        <Level>2</Level>
+        <ReqPoint>7000</ReqPoint>
+        
+        <ClanShopSale Tier="1">2</ClanShopSale>
+    </ClanTier>
+    
+    <ClanTier ID="3" Inherit="2">
+        <Level>3</Level>
+        <ReqPoint>8000</ReqPoint>
+        
+        <MaxClanMember Tier="1">21</MaxClanMember>
+    </ClanTier>
+
+    <ClanTier ID="4" Inherit="3">
+        <Level>4</Level>
+        <ReqPoint>9000</ReqPoint>
+
+        <AttendanceToken Tier="1">60</AttendanceToken>
+        <AttendancePoint Tier="1">60</AttendancePoint>
+    </ClanTier>
+
+    <ClanTier ID="5" Inherit="4">
+        <Level>5</Level>
+        <ReqPoint>10000</ReqPoint>
+
+        <ClanShopSale Tier="2">4</ClanShopSale>
+    </ClanTier>
+
+    <ClanTier ID="6" Inherit="5">
+        <Level>6</Level>
+        <ReqPoint>12000</ReqPoint>
+
+        <MaxClanMember Tier="2">22</MaxClanMember>
+    </ClanTier>
+
+    <ClanTier ID="7" Inherit="6">
+        <Level>7</Level>
+        <ReqPoint>14000</ReqPoint>
+
+        <HeroSupport Tier="1">
+            <CountPerRequest>3</CountPerRequest>
+            <DailyCountPerMember>30</DailyCountPerMember>
+            <CardExpPerRequest>15</CardExpPerRequest>
+            <Reward Type="Gold" Count="25" />
+            <Reward Type="Exp" Count="25" />
+            <Reward Type="Token_CLAN" Count="2" />
+            <Reward Type="ClanPoint" Count="2" />
+        </HeroSupport>
+    </ClanTier>
+
+    <ClanTier ID="8" Inherit="7">
+        <Level>8</Level>
+        <ReqPoint>16000</ReqPoint>
+
+        <GoldBonus Tier="1">2</GoldBonus>
+    </ClanTier>
+
+    <ClanTier ID="9" Inherit="8">
+        <Level>9</Level>
+        <ReqPoint>18000</ReqPoint>
+
+        <MaxClanMember Tier="3">23</MaxClanMember>
+    </ClanTier>
+
+    <ClanTier ID="10" Inherit="9">
+        <Level>10</Level>
+        <ReqPoint>20000</ReqPoint>
+
+        <AttendanceToken Tier="2">70</AttendanceToken>
+        <AttendancePoint Tier="2">70</AttendancePoint>
+    </ClanTier>
+
+    <ClanTier ID="11" Inherit="10">
+        <Level>11</Level>
+        <ReqPoint>25000</ReqPoint>
+
+        <ClanShopSale Tier="3">6</ClanShopSale>
+    </ClanTier>
+
+    <ClanTier ID="12" Inherit="11">
+        <Level>12</Level>
+        <ReqPoint>30000</ReqPoint>
+
+        <MaxClanMember Tier="4">24</MaxClanMember>
+    </ClanTier>
+
+    <ClanTier ID="13" Inherit="12">
+        <Level>13</Level>
+        <ReqPoint>35000</ReqPoint>
+
+        <GoldBonus Tier="2">4</GoldBonus>
+    </ClanTier>
+
+    <ClanTier ID="14" Inherit="13">
+        <Level>14</Level>
+        <ReqPoint>40000</ReqPoint>
+
+        <HeroSupport Tier="2">
+            <CountPerRequest>4</CountPerRequest>
+            <DailyCountPerMember>40</DailyCountPerMember>
+            <CardExpPerRequest>20</CardExpPerRequest>
+            <Reward Type="Gold" Count="25" />
+            <Reward Type="Exp" Count="25" />
+            <Reward Type="Token_CLAN" Count="2" />
+            <Reward Type="ClanPoint" Count="2" />
+        </HeroSupport>
+    </ClanTier>
+
+    <ClanTier ID="15" Inherit="14">
+        <Level>15</Level>
+        <ReqPoint>50000</ReqPoint>
+
+        <MaxClanMember Tier="5">25</MaxClanMember>
+    </ClanTier>
+
+    <ClanTier ID="16" Inherit="15">
+        <Level>16</Level>
+        <ReqPoint>60000</ReqPoint>
+
+        <AttendanceToken Tier="3">80</AttendanceToken>
+        <AttendancePoint Tier="3">80</AttendancePoint>
+    </ClanTier>
+
+    <ClanTier ID="17" Inherit="16">
+        <Level>17</Level>
+        <ReqPoint>70000</ReqPoint>
+
+        <GoldBonus Tier="3">6</GoldBonus>
+    </ClanTier>
+
+    <ClanTier ID="18" Inherit="17">
+        <Level>18</Level>
+        <ReqPoint>80000</ReqPoint>
+
+        <HeroSupport Tier="3">
+            <CountPerRequest>5</CountPerRequest>
+            <DailyCountPerMember>50</DailyCountPerMember>
+            <CardExpPerRequest>25</CardExpPerRequest>
+            <Reward Type="Gold" Count="25" />
+            <Reward Type="Exp" Count="25" />
+            <Reward Type="Token_CLAN" Count="2" />
+            <Reward Type="ClanPoint" Count="2" />
+        </HeroSupport>
+    </ClanTier>
+
+    <ClanTier ID="19" Inherit="18">
+        <Level>19</Level>
+        <ReqPoint>90000</ReqPoint>
+
+        <AttendanceToken Tier="4">90</AttendanceToken>
+        <AttendancePoint Tier="4">90</AttendancePoint>
+    </ClanTier>
+
+    <ClanTier ID="20" Inherit="19">
+        <Level>20</Level>
+        <ReqPoint>100000</ReqPoint>
+
+        <ClanShopSale Tier="4">8</ClanShopSale>
+    </ClanTier>
+
+    <ClanTier ID="21" Inherit="20">
+        <Level>21</Level>
+        <ReqPoint>120000</ReqPoint>
+
+        <GoldBonus Tier="4">8</GoldBonus>
+    </ClanTier>
+
+    <ClanTier ID="22" Inherit="21">
+        <Level>22</Level>
+        <ReqPoint>140000</ReqPoint>
+
+        <AttendanceToken Tier="5">100</AttendanceToken>
+        <AttendancePoint Tier="5">100</AttendancePoint>
+    </ClanTier>
+
+    <ClanTier ID="23" Inherit="22">
+        <Level>23</Level>
+        <ReqPoint>160000</ReqPoint>
+
+        <HeroSupport Tier="4">
+            <CountPerRequest>6</CountPerRequest>
+            <DailyCountPerMember>60</DailyCountPerMember>
+            <CardExpPerRequest>30</CardExpPerRequest>
+            <Reward Type="Gold" Count="25" />
+            <Reward Type="Exp" Count="25" />
+            <Reward Type="Token_CLAN" Count="2" />
+            <Reward Type="ClanPoint" Count="2" />
+        </HeroSupport>
+    </ClanTier>
+
+    <ClanTier ID="24" Inherit="23">
+        <Level>24</Level>
+        <ReqPoint>180000</ReqPoint>
+
+        <ClanShopSale Tier="5">10</ClanShopSale>
+    </ClanTier>
+
+    <ClanTier ID="25" Inherit="24">
+        <Level>25</Level>
+        <ReqPoint>999999999</ReqPoint>
+        
+        <GoldBonus Tier="5">10</GoldBonus>
+    </ClanTier>
+</ClanTiers>

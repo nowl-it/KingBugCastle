@@ -1,0 +1,722 @@
+<Flags>
+<!-- 기본 -->
+	<Flag ID="10000">
+		<FlagName>기사단의 깃발</FlagName>
+		<Desc>명예로운 중부 기사단의 깃발</Desc>
+		
+		<Type>None</Type>
+	</Flag>
+
+<!-- 시즌 깃발 > 현재 시즌 아이템 -->
+	<!-- 아레나 -->
+		<!--해당 ID 깃발은 아레나 티어 깃발을 보여줌-->
+		<Flag ID="10001">
+			<FlagName>아레나 티어 깃발</FlagName>
+			<Type>PvPTier</Type>
+	
+			<Prefab>Flag_10000</Prefab>
+		</Flag>
+		<Flag ID="10100">
+			<FlagName>아레나 브론즈 깃발</FlagName>
+			<Desc>시즌 아레나 브론즈 깃발</Desc>
+			
+			<Type>PvP</Type>
+			<Tier>1</Tier>
+			
+			<Color>f2b681</Color>
+		</Flag>
+		<Flag ID="10110">
+			<FlagName>아레나 실버 깃발</FlagName>
+			<Desc>시즌 아레나 실버 깃발</Desc>
+			
+			<Type>PvP</Type>
+			<Tier>2</Tier>
+			
+			<Color>e3e3e3</Color>
+		</Flag>
+		<Flag ID="10120">
+			<FlagName>아레나 골드 깃발</FlagName>
+			<Desc>시즌 아레나 골드 깃발</Desc>
+			
+			<Type>PvP</Type>
+			<Tier>3</Tier>
+			
+			<Color>f9d881</Color>
+		</Flag>
+		<Flag ID="10130">
+			<FlagName>아레나 플래티넘 깃발</FlagName>
+			<Desc>시즌 아레나 플래티넘 깃발</Desc>
+			
+			<Type>PvP</Type>
+			<Tier>4</Tier>
+			
+			<Color>affbd0</Color>
+		</Flag>
+		<Flag ID="10140">
+			<FlagName>아레나 다이아몬드 깃발</FlagName>
+			<Desc>시즌 아레나 다이아몬드 깃발</Desc>
+			
+			<Type>PvP</Type>
+			<Tier>5</Tier>
+			
+			<Color>c9e5f3</Color>
+		</Flag>
+		<Flag ID="10150">
+			<FlagName>아레나 킹 깃발</FlagName>
+			<Desc>시즌 아레나 킹 깃발</Desc>
+			
+			<Type>PvP</Type>
+			<Tier>6</Tier>
+			
+			<Color>f0edef</Color>
+		</Flag>
+		<Flag ID="10160">
+			<FlagName>아레나 갓 깃발</FlagName>
+			<Desc>시즌 아레나 갓 깃발</Desc>
+			
+			<Type>PvP</Type>
+			<Tier>7</Tier>
+			
+			<Color>f9e9a2</Color>
+		</Flag>
+		<Flag ID="10170">
+			<FlagName>아레나 킹갓 깃발</FlagName>
+			<Desc>시즌 아레나 킹갓 깃발</Desc>
+			
+			<Type>PvP</Type>
+			<Tier>8</Tier>
+			
+			<Color>e2f5ff</Color>
+		</Flag>
+	<!-- 시련의 탑 -->
+		<!--해당 ID 깃발은 시련의 탑 티어 깃발을 보여줌-->
+		<Flag ID="10201">
+			<FlagName>시련의 탑 티어 깃발</FlagName>
+			<Type>TowerTier</Type>
+	
+			<Prefab>Flag_10000</Prefab>
+		</Flag>
+		<Flag ID="10200">
+			<FlagName>시련의 탑 브론즈 깃발</FlagName>
+			<Desc>시즌 시련의 탑 브론즈 깃발</Desc>
+			
+			<Type>Tower</Type>
+			<Tier>1</Tier>
+			
+			<Color>f2b681</Color>
+		</Flag>
+		<Flag ID="10210">
+			<FlagName>시련의 탑 실버 깃발</FlagName>
+			<Desc>시즌 시련의 탑 실버 깃발</Desc>
+			
+			<Type>Tower</Type>
+			<Tier>2</Tier>
+			
+			<Color>e3e3e3</Color>
+		</Flag>
+		<Flag ID="10220">
+			<FlagName>시련의 탑 골드 깃발</FlagName>
+			<Desc>시즌 시련의 탑 골드 깃발</Desc>
+			
+			<Type>Tower</Type>
+			<Tier>3</Tier>
+			
+			<Color>f9d881</Color>
+		</Flag>
+		<Flag ID="10230">
+			<FlagName>시련의 탑 플래티넘 깃발</FlagName>
+			<Desc>시즌 시련의 탑 플래티넘 깃발</Desc>
+			
+			<Type>Tower</Type>
+			<Tier>4</Tier>
+			
+			<Desc>시즌 아레나 플래티넘 깃발</Desc>
+		</Flag>
+		<Flag ID="10240">
+			<FlagName>시련의 탑 다이아몬드 깃발</FlagName>
+			<Desc>시즌 시련의 탑 다이아몬드 깃발</Desc>
+			
+			<Type>Tower</Type>
+			<Tier>5</Tier>
+			
+			<Color>c9e5f3</Color>
+		</Flag>
+		<Flag ID="10250">
+			<FlagName>시련의 탑 킹 깃발</FlagName>
+			<Desc>시즌 시련의 탑 킹 깃발</Desc>
+			
+			<Type>Tower</Type>
+			<Tier>6</Tier>
+			
+			<Color>f0edef</Color>
+		</Flag>
+		<Flag ID="10260">
+			<FlagName>시련의 탑 갓 깃발</FlagName>
+			<Desc>시즌 시련의 탑 갓 깃발</Desc>
+			
+			<Type>Tower</Type>
+			<Tier>7</Tier>
+			
+			<Color>f9e9a2</Color>
+		</Flag>
+		<Flag ID="10270">
+			<FlagName>시련의 탑 킹갓 깃발</FlagName>
+			<Desc>시즌 시련의 탑 킹갓 깃발</Desc>
+			
+			<Type>Tower</Type>
+			<Tier>8</Tier>
+			
+			<Color>e2f5ff</Color>
+		</Flag>
+	<!-- 격전 -->
+	<!--해당 ID 깃발은 격전 티어 깃발을 보여줌-->
+	<Flag ID="10301">
+		<FlagName>격전 티어 깃발</FlagName>
+		<Type>ColosseumTier</Type>
+
+		<Prefab>Flag_10300</Prefab>
+	</Flag>
+	<Flag ID="10300">
+		<FlagName>격전 브론즈 깃발</FlagName>
+		<Desc>시즌 격전 브론즈 깃발</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>1</Tier>
+
+		<Color>f2b681</Color>
+	</Flag>
+	<Flag ID="10310">
+		<FlagName>격전 실버 깃발</FlagName>
+		<Desc>시즌 격전 실버 깃발</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>2</Tier>
+
+		<Color>e3e3e3</Color>
+	</Flag>
+	<Flag ID="10320">
+		<FlagName>격전 골드 깃발</FlagName>
+		<Desc>시즌 격전 골드 깃발</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>3</Tier>
+
+		<Color>f9d881</Color>
+	</Flag>
+	<Flag ID="10330">
+		<FlagName>격전 플래티넘 깃발</FlagName>
+		<Desc>시즌 격전 플래티넘 깃발</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>4</Tier>
+
+		<Desc>시즌 아레나 플래티넘 깃발</Desc>
+	</Flag>
+	<Flag ID="10340">
+		<FlagName>격전 다이아몬드 깃발</FlagName>
+		<Desc>시즌 격전 다이아몬드 깃발</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>5</Tier>
+
+		<Color>c9e5f3</Color>
+	</Flag>
+	<Flag ID="10350">
+		<FlagName>격전 킹 깃발</FlagName>
+		<Desc>시즌 격전 킹 깃발</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>6</Tier>
+
+		<Color>f0edef</Color>
+	</Flag>
+	<Flag ID="10360">
+		<FlagName>격전 갓 깃발</FlagName>
+		<Desc>시즌 격전 갓 깃발</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>7</Tier>
+
+		<Color>f9e9a2</Color>
+	</Flag>
+	<Flag ID="10370">
+		<FlagName>격전 킹갓 깃발</FlagName>
+		<Desc>시즌 격전 킹갓 깃발</Desc>
+
+		<Type>Colosseum</Type>
+		<Tier>8</Tier>
+
+		<Color>e2f5ff</Color>
+	</Flag>
+		
+<!-- 명예 시즌 깃발 > 아레나 종료시 보상 아이템 -->
+	<!-- 아레나 -->
+		<Flag ID="15100">
+			<FlagName>명예 아레나 브론즈 깃발</FlagName>
+			<Desc>명예 시즌 아레나 브론즈 깃발</Desc>
+			
+			<Type>PvPReward</Type>
+			<Tier>1</Tier>
+			
+			<Color>f2b681</Color>
+
+			<SeasonOffsetY>3</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15110">
+			<FlagName>명예 아레나 실버 깃발</FlagName>
+			<Desc>명예 시즌 아레나 실버 깃발</Desc>
+			
+			<Type>PvPReward</Type>
+			<Tier>2</Tier>
+			
+			<Color>e3e3e3</Color>
+
+			<SeasonOffsetY>3</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15120">
+			<FlagName>명예 아레나 골드 깃발</FlagName>
+			<Desc>명예 시즌 아레나 골드 깃발</Desc>
+			
+			<Type>PvPReward</Type>
+			<Tier>3</Tier>
+			
+			<Color>f9d881</Color>
+
+			<SeasonOffsetY>3</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15130">
+			<FlagName>명예 아레나 플래티넘 깃발</FlagName>
+			<Desc>명예 시즌 아레나 플래티넘 깃발</Desc>
+			
+			<Type>PvPReward</Type>
+			<Tier>4</Tier>
+			
+			<Color>affbd0</Color>
+
+			<SeasonOffsetY>3</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15140">
+			<FlagName>명예 아레나 다이아몬드 깃발</FlagName>
+			<Desc>명예 시즌 아레나 다이아몬드 깃발</Desc>
+			
+			<Type>PvPReward</Type>
+			<Tier>5</Tier>
+			
+			<Color>c9e5f3</Color>
+
+			<SeasonOffsetY>3</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15150">
+			<FlagName>명예 아레나 킹 깃발</FlagName>
+			<Desc>명예 시즌 아레나 킹 깃발</Desc>
+			
+			<Type>PvPReward</Type>
+			<Tier>6</Tier>
+			
+			<Color>f0edef</Color>
+
+			<SeasonOffsetY>3</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15160">
+			<FlagName>명예 아레나 갓 깃발</FlagName>
+			<Desc>명예 시즌 아레나 갓 깃발</Desc>
+			
+			<Type>PvPReward</Type>
+			<Tier>7</Tier>
+			
+			<Color>f9e9a2</Color>
+
+			<SeasonOffsetY>3</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15170">
+			<FlagName>명예 아레나 킹갓 깃발</FlagName>
+			<Desc>명예 시즌 아레나 킹갓 깃발</Desc>
+			
+			<Type>PvPReward</Type>
+			<Tier>8</Tier>
+			
+			<Color>e2f5ff</Color>
+
+			<SeasonOffsetY>3</SeasonOffsetY>
+		</Flag>
+	<!-- 시련의 탑 -->
+		<Flag ID="15200">
+			<FlagName>명예 시련의 탑 브론즈 깃발</FlagName>
+			<Desc>명예 시즌 시련의 탑 브론즈 깃발</Desc>
+			
+			<Type>TowerReward</Type>
+			<Tier>1</Tier>
+			
+			<Color>f2b681</Color>
+		</Flag>
+		<Flag ID="15210">
+			<FlagName>명예 시련의 탑 실버 깃발</FlagName>
+			<Desc>명예 시즌 시련의 탑 실버 깃발</Desc>
+			
+			<Type>TowerReward</Type>
+			<Tier>2</Tier>
+			
+			<Color>e3e3e3</Color>
+		</Flag>
+		<Flag ID="15220">
+			<FlagName>명예 시련의 탑 골드 깃발</FlagName>
+			<Desc>명예 시즌 시련의 탑 골드 깃발</Desc>
+			
+			<Type>TowerReward</Type>
+			<Tier>3</Tier>
+			
+			<Color>f9d881</Color>
+		</Flag>
+		<Flag ID="15230">
+			<FlagName>명예 시련의 탑 플래티넘 깃발</FlagName>
+			<Desc>명예 시즌 시련의 탑 플래티넘 깃발</Desc>
+			
+			<Type>TowerReward</Type>
+			<Tier>4</Tier>
+			
+			<Color>affbd0</Color>
+		</Flag>
+		<Flag ID="15240">
+			<FlagName>명예 시련의 탑 다이아몬드 깃발</FlagName>
+			<Desc>명예 시즌 시련의 탑 다이아몬드 깃발</Desc>
+			
+			<Type>TowerReward</Type>
+			<Tier>5</Tier>
+			
+			<Color>c9e5f3</Color>
+		</Flag>
+		<Flag ID="15250">
+			<FlagName>명예 시련의 탑 킹 깃발</FlagName>
+			<Desc>명예 시즌 시련의 탑 킹 깃발</Desc>
+			
+			<Type>TowerReward</Type>
+			<Tier>6</Tier>
+			
+			<Color>f0edef</Color>
+		</Flag>
+		<Flag ID="15260">
+			<FlagName>명예 시련의 탑 갓 깃발</FlagName>
+			<Desc>명예 시즌 시련의 탑 갓 깃발</Desc>
+			
+			<Type>TowerReward</Type>
+			<Tier>7</Tier>
+			
+			<Color>f9e9a2</Color>
+		</Flag>
+		<Flag ID="15270">
+			<FlagName>명예 시련의 탑 킹갓 깃발</FlagName>
+			<Desc>명예 시즌 시련의 탑 킹갓 깃발</Desc>
+			
+			<Type>TowerReward</Type>
+			<Tier>8</Tier>
+			
+			<Color>e2f5ff</Color>
+		</Flag>
+	<!-- 격전의 전장 -->
+		<Flag ID="15300">
+			<Desc>명예 시즌 격전의 전장 브론즈 깃발</Desc>
+			<FlagName>명예 격전의 전장 브론즈 깃발</FlagName>
+
+			<Type>ColosseumReward</Type>
+			<Tier>1</Tier>
+	
+			<Color>f2b681</Color>
+
+			<SeasonOffsetY>6</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15310">
+			<FlagName>명예 격전의 전장 실버 깃발</FlagName>
+			<Desc>명예 시즌 격전의 전장 실버 깃발</Desc>
+
+			<Type>ColosseumReward</Type>
+			<Tier>2</Tier>
+	
+			<Color>e3e3e3</Color>
+
+			<SeasonOffsetY>6</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15320">
+			<FlagName>명예 격전의 전장 골드 깃발</FlagName>
+			<Desc>명예 시즌 격전의 전장 골드 깃발</Desc>
+
+			<Type>ColosseumReward</Type>
+			<Tier>3</Tier>
+	
+			<Color>f9d881</Color>
+
+			<SeasonOffsetY>6</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15330">
+			<FlagName>명예 격전의 전장 플래티넘 깃발</FlagName>
+			<Desc>명예 시즌 격전의 전장 플래티넘 깃발</Desc>
+
+			<Type>ColosseumReward</Type>
+			<Tier>4</Tier>
+	
+			<Color>affbd0</Color>
+
+			<SeasonOffsetY>6</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15340">
+			<FlagName>명예 격전의 전장 다이아몬드 깃발</FlagName>
+			<Desc>명예 시즌 격전의 전장 다이아몬드 깃발</Desc>
+
+			<Type>ColosseumReward</Type>
+			<Tier>5</Tier>
+	
+			<Color>c9e5f3</Color>
+
+			<SeasonOffsetY>6</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15350">
+			<FlagName>명예 격전의 전장 킹 깃발</FlagName>
+			<Desc>명예 시즌 격전의 전장 킹 깃발</Desc>
+
+			<Type>ColosseumReward</Type>
+			<Tier>6</Tier>
+	
+			<Color>f0edef</Color>
+
+			<SeasonOffsetY>6</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15360">
+			<FlagName>명예 격전의 전장 갓 깃발</FlagName>
+			<Desc>명예 시즌 격전의 전장 갓 깃발</Desc>
+
+			<Type>ColosseumReward</Type>
+			<Tier>7</Tier>
+	
+			<Color>f9e9a2</Color>
+
+			<SeasonOffsetY>6</SeasonOffsetY>
+		</Flag>
+		<Flag ID="15370">
+			<FlagName>명예 격전의 전장 킹갓 깃발</FlagName>
+			<Desc>명예 시즌 격전의 전장 킹갓 깃발</Desc>
+
+			<Type>ColosseumReward</Type>
+			<Tier>8</Tier>
+	
+			<Color>e2f5ff</Color>
+
+			<SeasonOffsetY>6</SeasonOffsetY>
+		</Flag>
+<!-- 업적 -->
+		<Flag ID="20000">
+			<FlagName>은화상자</FlagName>
+			<Desc>은화수집 업적 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20010">
+			<FlagName>여관 간판</FlagName>
+			<Desc>은화수집 업적 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20020">
+			<FlagName>공허 추종자의 표식</FlagName>
+			<Desc>9층 최초 클리어 업적 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20030">
+			<FlagName>공허 교단 깃발</FlagName>
+			<Desc>15단계 챌린지 최고 난이도 클리어 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20040">
+			<FlagName>황금율 교단 깃발</FlagName>
+			<Desc>사라스 100회 처치 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20050">
+			<FlagName>황금율 신관 깃발</FlagName>
+			<Desc>세자매 100회 처치 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20060">
+			<FlagName>강력한 심연의 존재 깃발</FlagName>
+			<Desc>무 100회 처치 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20070">
+			<FlagName>영웅의 제단 깃발</FlagName>
+			<Desc>영웅의 제단 최고레벨 10회 클리어 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20080">
+			<FlagName>대장장이의 제단 깃발</FlagName>
+			<Desc>대장장이의 제단 최고레벨 10회 클리어 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20090">
+			<FlagName>피의 제단 깃발</FlagName>
+			<Desc>피의 제단 최고레벨 10회 클리어 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20100">
+			<FlagName>거신의 제단 깃발</FlagName>
+			<Desc>거신의 제단 최고레벨 10회 클리어 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20110">
+			<FlagName>마법사의 제단 깃발</FlagName>
+			<Desc>마법사의 제단 최고레벨 10회 클리어 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20120">
+			<FlagName>탐욕의 제단 깃발</FlagName>
+			<Desc>탐욕의 제단 최고레벨 10회 클리어 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20130">
+			<FlagName>상급 기사단 깃발</FlagName>
+			<Desc>도전과제 100% 클리어</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20140">
+			<FlagName>30레벨 깃발</FlagName>
+			<Desc>30레벨 달성</Desc>
+			<Type>Level</Type>
+			<Tier>1</Tier>
+		</Flag>
+		<Flag ID="20150">
+			<FlagName>50레벨 깃발</FlagName>
+			<Desc>50레벨 달성</Desc>
+			<Type>Level</Type>
+			<Tier>2</Tier>
+		</Flag>
+		<Flag ID="20160">
+			<FlagName>70레벨 깃발</FlagName>
+			<Desc>70레벨 달성</Desc>
+			<Type>Level</Type>
+			<Tier>3</Tier>
+		</Flag>
+		<Flag ID="20170">
+			<FlagName>90레벨 깃발</FlagName>
+			<Desc>90레벨 달성</Desc>
+			<Type>Level</Type>
+			<Tier>4</Tier>
+		</Flag>
+		<Flag ID="20180">
+			<FlagName>묠누즈 100회 처치 깃발</FlagName>
+			<Desc>묠누즈 100회 처치 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20190">
+			<FlagName>젠'엘 100회 처치 깃발</FlagName>
+			<Desc>젠'엘 100회 처치 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20200">
+			<FlagName>사신의 제단 깃발</FlagName>
+			<Desc>사신의 제단 최고레벨 10회 클리어 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20210">
+			<FlagName>불사의 제단 깃발</FlagName>
+			<Desc>불사의 제단 최고레벨 10회 클리어 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+		<Flag ID="20220">
+			<FlagName>지배의 제단 깃발</FlagName>
+			<Desc>지배의 제단 최고레벨 10회 클리어 보상</Desc>
+			<Type>Achievement</Type>
+		</Flag>
+<!-- 상점 -->
+		<!-- <Flag ID="30000">
+			<FlagName>아레나 깃발 1단계</FlagName>
+			<Desc>아레나 깃발 1단계</Desc>
+			<Type>Shop</Type>
+		</Flag>
+		<Flag ID="30010">
+			<FlagName>아레나 깃발 2단계</FlagName>
+			<Desc>아레나 깃발 2단계</Desc>
+			<Type>Shop</Type>
+		</Flag>
+		<Flag ID="30020">
+			<FlagName>아레나 깃발 3단계</FlagName>
+			<Desc>아레나 깃발 3단계</Desc>
+			<Type>Shop</Type>
+		</Flag> -->
+<!-- 상품 -->
+	<Flag ID="40000">
+		<FlagName>빛의 여신의 깃발</FlagName>
+		<Desc>빛의 여신의 가호가 깃든 깃발</Desc>
+		<Type>Reward</Type>
+		<PreviewOffsetY>-20</PreviewOffsetY>
+		<SpriteOffsetY>-30</SpriteOffsetY>
+	</Flag>
+	<Flag ID="40010">
+		<FlagName>번개의 신의 깃발</FlagName>
+		<Desc>빛의 여신의 가호가 깃든 깃발</Desc>
+		<Type>Reward</Type>
+		<PreviewOffsetY>-20</PreviewOffsetY>
+		<SpriteOffsetY>-30</SpriteOffsetY>
+	</Flag>
+	<Flag ID="40020">
+		<FlagName>종말의 여신의 깃발</FlagName>
+		<Desc>빛의 여신의 가호가 깃든 깃발</Desc>
+		<Type>Reward</Type>
+		<PreviewOffsetY>-20</PreviewOffsetY>
+		<SpriteOffsetY>-30</SpriteOffsetY>
+	</Flag>
+	<Flag ID="40030">
+		<FlagName>달의 여신의 깃발</FlagName>
+		<Desc>달의 여신의 가호가 깃든 깃발</Desc>
+		<Type>Reward</Type>
+		<PreviewOffsetY>-20</PreviewOffsetY>
+		<SpriteOffsetY>-30</SpriteOffsetY>
+	</Flag>
+	<Flag ID="40040">
+		<FlagName>창조의 여신의 깃발</FlagName>
+		<Desc>창조의 여신의 가호가 깃든 깃발</Desc>
+		<Type>Reward</Type>
+		<PreviewOffsetY>-20</PreviewOffsetY>
+		<SpriteOffsetY>-30</SpriteOffsetY>
+	</Flag>
+	<Flag ID="40050">
+		<FlagName>혼돈의 여신의 깃발</FlagName>
+		<Desc>혼돈의 여신의 가호가 깃든 깃발</Desc>
+		<Type>Reward</Type>
+		<PreviewOffsetY>-20</PreviewOffsetY>
+	</Flag>
+	<Flag ID="40060">
+		<FlagName>지배의 여신의 깃발</FlagName>
+		<Desc>지배의 여신의 가호가 깃든 깃발</Desc>
+		<Type>Reward</Type>
+		<PreviewOffsetY>-20</PreviewOffsetY>
+	</Flag>
+	
+<!-- 콜로세움 -->
+	<Flag ID="50000">
+		<FlagName>격전 시작의 깃발</FlagName>
+		<Desc>격전 베타시즌을 함께한 사람들에게 주어진 깃발</Desc>
+		<Type>Reward</Type>
+		<PreviewOffsetY>-20</PreviewOffsetY>
+		<SpriteOffsetY>-30</SpriteOffsetY>
+	</Flag>
+    
+<!-- 이벤트-->
+    <Flag ID="70000">
+        <FlagName>차원의 균열 테마 깃발</FlagName>
+        <Desc>누적 결제 이벤트 보상</Desc>
+        <Type>Reward</Type>
+    </Flag>
+    
+    <Flag ID="70010">
+        <FlagName>5주년 투자왕 깃발</FlagName>
+        <Desc>5주년 주식 이벤트 보상, 1단계</Desc>
+        <Type>Reward</Type>
+    </Flag>
+    
+    <Flag ID="70020">
+        <FlagName>5주년 투자왕 깃발</FlagName>
+        <Desc>5주년 주식 이벤트 보상, 2단계</Desc>
+        <Type>Reward</Type>
+    </Flag>
+
+    <Flag ID="70030">
+        <FlagName>시련의탑 깃발</FlagName>
+        <Desc>누적 결제 이벤트 보상</Desc>
+        <Type>Reward</Type>
+    </Flag>	
+</Flags>

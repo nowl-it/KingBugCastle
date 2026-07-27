@@ -20,9 +20,12 @@ It complements the other docs — read those for the *why* and the *internals*:
 | Playbook | Use it to |
 |----------|-----------|
 | **[deploy-and-run.md](deploy-and-run.md)** | Start the two servers, connect a device, push a change to the client |
+<<<<<<< HEAD
 | **[v171-private-build.md](v171-private-build.md)** | Build/run the **v171** client (XIGNCODE NEO unpack, injected il2cpp, HTTP-not-TLS) |
 | **[mftl-extraction.md](mftl-extraction.md)** | Recover `libil2cpp.so` from the v171 XIGNCODE NEO container |
 | **[v171-emulator-note.md](v171-emulator-note.md)** | Player-facing note (VI): why stock v171 won't run on an emulator |
+=======
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 | **[save-editing.md](save-editing.md)** | Grant currency / items / units / skins / treasures by editing player state or sending mail |
 | **[content-unlock.md](content-unlock.md)** | Unlock version-gated content (`MinVersion`) — treasures, skins, units, stages |
 | **[stages-and-spawns.md](stages-and-spawns.md)** | How stage enemies are defined; build a training-dummy test stage |
@@ -38,7 +41,11 @@ There are **two separate data planes**, and knowing which one a change lands in 
    **live per-request** (`load_state()` re-reads the file each call) — no restart, no client re-download.
 
 2. **Client master data** — the CDN **xml AssetBundle** (`server/real_cdn/xml`), built from
+<<<<<<< HEAD
    `server/xml_live/*.xml`. Controls what the *game client itself* reads: stage spawns, skin/unit/
+=======
+   `scratchpad/xml_live/*.xml`. Controls what the *game client itself* reads: stage spawns, skin/unit/
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
    treasure definitions, localized text, `MinVersion` gates. Edits here need
    `rebuild_xml_bundle.py` → server restart → client re-download (AssetHash change).
 

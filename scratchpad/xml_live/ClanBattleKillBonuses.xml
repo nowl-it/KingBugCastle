@@ -1,0 +1,56 @@
+<ClanBattleKillBonuses>
+    <ClanBattleKillBonus ID="1">
+        <Difficulty>0</Difficulty>
+        <ReqKill>1</ReqKill>
+        <ReduceHp>5</ReduceHp>
+        <Rewards>
+            <Reward Type="ClanToken" Count="50" />
+        </Rewards>
+    </ClanBattleKillBonus>
+    
+    <ClanBattleKillBonus ID="2">
+        <Difficulty>1</Difficulty>
+        <ReqKill>1, 5</ReqKill>
+        <ReduceHp>5, 10</ReduceHp>
+        <Rewards>
+            <Reward Type="ClanToken" Count="50" />
+            <Reward Type="ClanToken" Count="70" />
+        </Rewards>
+    </ClanBattleKillBonus>
+    
+    <ClanBattleKillBonus ID="3">
+        <Difficulty>2</Difficulty>
+        <ReqKill>1, 5, 10</ReqKill>
+        <ReduceHp>5, 10, 15</ReduceHp>
+        <Rewards>
+            <Reward Type="ClanToken" Count="50" />
+            <Reward Type="ClanToken" Count="70" />
+            <Reward Type="ClanToken" Count="150" />
+        </Rewards>
+    </ClanBattleKillBonus>
+    
+    <ClanBattleKillBonus ID="4">
+        <Difficulty>3</Difficulty>
+        <ReqKill>1, 5, 10, 20</ReqKill>
+        <ReduceHp>5, 10, 15, 20</ReduceHp>
+        <Rewards>
+            <Reward Type="ClanToken" Count="50" />
+            <Reward Type="ClanToken" Count="70" />
+            <Reward Type="ClanToken" Count="150" />
+            <Reward Type="ClanToken" Count="300" />
+        </Rewards>
+    </ClanBattleKillBonus>
+    
+    <ClanBattleKillBonus ID="5">
+        <Difficulty>4</Difficulty>
+        <ReqKill>1, 5, 10, 20, 40</ReqKill>
+        <ReduceHp>5, 10, 15, 20, 25</ReduceHp>
+        <Rewards>
+            <Reward Type="ClanToken" Count="50" />
+            <Reward Type="ClanToken" Count="70" />
+            <Reward Type="ClanToken" Count="150" />
+            <Reward Type="ClanToken" Count="300" />
+            <Reward Type="ClanToken" Count="500" />
+        </Rewards>
+    </ClanBattleKillBonus>
+</ClanBattleKillBonuses>

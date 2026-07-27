@@ -1,0 +1,137 @@
+<TerritoryTradeShops>
+    <TerritoryTradeShop ID="10000">
+        <!-- 사용 가능 재화 -->
+        <AvailableCurrencies>
+            <Currency Type="InventoryItem" ID="3000" Index="0"/>
+            <Currency Type="InventoryItem" ID="3001" Index="1"/>
+        </AvailableCurrencies>
+        
+        <!-- 판매 물품 리스트 -->
+        <TradeItems>
+            <TradeItem Type="InventoryItem" ID="3200" BuyLimit="-1" ItemId="10001">
+                <Currency Index="1" Price="8"/>
+            </TradeItem>
+            <TradeItem Type="Treasure_Special" BuyLimit="1" ItemId="10002">
+                <Currency Index="1" Price="20"/>
+            </TradeItem>
+            <TradeItem Type="Key" ID="370" BuyLimit="10" ItemId="10003">
+                <Currency Index="1" Price="1"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="3001" BuyLimit="5" ItemId="10004">
+                <Currency Index="0" Price="5"/>
+            </TradeItem>
+        </TradeItems>
+    </TerritoryTradeShop>
+
+    <TerritoryTradeShop ID="10100">
+        <!-- 사용 가능 재화 -->
+        <AvailableCurrencies>
+            <Currency Type="Cash" Index="0"/>
+        </AvailableCurrencies>
+
+        <!-- 판매 물품 리스트 -->
+        <TradeItems>
+            <TradeItem Type="Key" ID="302" BuyLimit="4" ItemId="10101">
+                <Currency Index="0" Price="30"/>
+            </TradeItem>
+            <TradeItem Type="Key" ID="352" BuyLimit="4" ItemId="10102">
+                <Currency Index="0" Price="40"/>
+            </TradeItem>
+            <TradeItem Type="UnitSoulItem" Count="30" BuyLimit="5" ItemId="10103">
+                <Currency Index="0" Price="50"/>
+            </TradeItem>
+            <TradeItem Type="UnitExpItem" Count="200" BuyLimit="5" ItemId="10104">
+                <Currency Index="0" Price="30"/>
+            </TradeItem>
+            <TradeItem Type="NewUnitGachaItem" BuyLimit="5" ItemId="10105">
+                <Currency Index="0" Price="149"/>
+            </TradeItem>
+        </TradeItems>
+    </TerritoryTradeShop>
+
+    <TerritoryTradeShop ID="10200">
+        <!-- 사용 가능 재화 -->
+        <AvailableCurrencies>
+            <Currency Type="Artifact" ID="100" Index="0"/>
+        </AvailableCurrencies>
+
+        <!-- 판매 물품 리스트 -->
+        <TradeItems>
+            <TradeItem Type="Artifact" ID="601" BuyLimit="5" ItemId="10201">
+                <Currency Index="0" Price="800"/>
+            </TradeItem>
+            <TradeItem Type="Artifact" ID="801" BuyLimit="5" ItemId="10202">
+                <Currency Index="0" Price="1000"/>
+            </TradeItem>
+            <TradeItem Type="Artifact" ID="902" BuyLimit="5" ItemId="10203">
+                <Currency Index="0" Price="2500"/>
+            </TradeItem>
+        </TradeItems>
+    </TerritoryTradeShop>
+
+    <TerritoryTradeShop ID="10300">
+        <!-- 사용 가능 재화 -->
+        <AvailableCurrencies>
+            <Currency Type="Gold" Index="0"/>
+        </AvailableCurrencies>
+
+        <!-- 판매 물품 리스트 -->
+        <TradeItems>
+            <TradeItem Type="Key" ID="370" BuyLimit="5" ItemId="10301">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5000" BuyLimit="5" ItemId="10302">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5500" BuyLimit="5" ItemId="10302" Version="1">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5501" BuyLimit="5" ItemId="10302" Version="2">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5502" BuyLimit="5" ItemId="10302" Version="3">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5503" BuyLimit="5" ItemId="10302" Version="4">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+			<TradeItem Type="InventoryItem" ID="5504" BuyLimit="5" ItemId="10302" Version="5">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+			<TradeItem Type="InventoryItem" ID="5505" BuyLimit="5" ItemId="10302" Version="6">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5506" BuyLimit="5" ItemId="10302" Version="7">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="800" BuyLimit="1" ItemId="10305">
+                <Currency Index="0" Price="50000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="3100" BuyLimit="10" ItemId="10303">
+                <Currency Index="0" Price="4000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="4100" BuyLimit="10" ItemId="10304">
+                <Currency Index="0" Price="2000"/>
+            </TradeItem>
+        </TradeItems>
+    </TerritoryTradeShop>
+    
+    <TerritoryTradeShop ID="10400">
+        <RefreshSetting StartAt="20251201" IntervalWeek="2"/>
+        
+        <!-- 사용 가능 재화 -->
+        <AvailableCurrencies>
+            <Currency Type="InventoryItem" ID="700" Index="0"/>
+        </AvailableCurrencies>
+
+        <!-- 판매 물품 리스트 -->
+        <TradeItems>
+            <TradeItem Type="InventoryItem" BuyLimit="1" ID="163" ItemId="10401">
+                <Currency Index="0" Price="100"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" BuyLimit="1" ID="7000" ItemId="10402">
+                <Currency Index="0" Price="100"/>
+            </TradeItem>
+        </TradeItems>
+    </TerritoryTradeShop>
+</TerritoryTradeShops>

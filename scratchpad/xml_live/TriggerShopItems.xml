@@ -1,0 +1,492 @@
+<ShopItems>
+    <ShopItem ID="110000">
+        <NameComment>챕터 I-2 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>10</Efficiency>
+        <ValueAmount>100</ValueAmount>
+        <MoneyPrice>2500</MoneyPrice>
+        <DolarPrice>1.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>6</TimeLimit>
+        <ProductID>event_pakage_tier_2</ProductID>
+        <BoxKey ID="302" Count="4" />
+    </ShopItem>
+    
+    <ShopItem ID="110010">
+        <NameComment>챕터 I-4 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>10</Efficiency>
+        <ValueAmount>240</ValueAmount>
+        <MoneyPrice>5900</MoneyPrice>
+        <DolarPrice>4.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>6</TimeLimit>
+        <ProductID>event_pakage_tier_5</ProductID>
+        <InventoryItem ID="152" Count="3" />
+    </ShopItem>
+    
+    <ShopItem ID="110020">
+        <NameComment>챕터 I-6 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>10</Efficiency>
+        <ValueAmount>400</ValueAmount>
+        <MoneyPrice>9900</MoneyPrice>
+        <DolarPrice>7.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>6</TimeLimit>
+        <ProductID>event_pakage_tier_8</ProductID>
+        <InventoryItem ID="157" Count="3" />
+    </ShopItem>
+    
+    <ShopItem ID="110030">
+        <NameComment>챕터 I-8 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>10</Efficiency>
+        <ValueAmount>1300</ValueAmount>
+        <MoneyPrice>25000</MoneyPrice>
+        <DolarPrice>19.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>6</TimeLimit>
+        <ProductID>event_pakage_tier_20</ProductID>
+        <InventoryItem ID="170" Count="1" />
+        <Cash>200</Cash>
+    </ShopItem>
+    
+    <ShopItem ID="110040">
+        <NameComment>챕터 I-10 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>10</Efficiency>
+        <ValueAmount>2500</ValueAmount>
+        <MoneyPrice>49000</MoneyPrice>
+        <DolarPrice>39.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>6</TimeLimit>
+        <ProductID>event_pakage_tier_40</ProductID>
+        <Cash>800</Cash>
+        <SoulItemCount>750</SoulItemCount>
+    </ShopItem>
+    
+    <ShopItem ID="110050">
+        <NameComment>챕터 II-2 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>10</Efficiency>
+        <ValueAmount>1300</ValueAmount>
+        <MoneyPrice>25000</MoneyPrice>
+        <DolarPrice>19.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>6</TimeLimit>
+        <ProductID>event_pakage_tier_20</ProductID>
+        <BoxKey ID="370" Count="50" />
+        <TreasureIds>30002</TreasureIds>
+        <TreasureCounts>1</TreasureCounts>
+    </ShopItem>
+    
+    <ShopItem ID="110060">
+        <NameComment>챕터 II-4 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>10</Efficiency>
+        <ValueAmount>2500</ValueAmount>
+        <MoneyPrice>49000</MoneyPrice>
+        <DolarPrice>39.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>6</TimeLimit>
+        <ProductID>event_pakage_tier_40</ProductID>
+        <BoxKey ID="370" Count="50" />
+        <TreasureIds>30002</TreasureIds>
+        <TreasureCounts>3</TreasureCounts>
+    </ShopItem>
+    
+    <ShopItem ID="110070">
+        <NameComment>챕터 II-6 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>10</Efficiency>
+        <ValueAmount>5000</ValueAmount>
+        <MoneyPrice>99000</MoneyPrice>
+        <DolarPrice>79.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>6</TimeLimit>
+        <ProductID>event_pakage_tier_56</ProductID>
+        <InventoryItem ID="3200" Count="20" />
+        <BoxKey ID="370" Count="200" />
+    </ShopItem>
+    
+    <ShopItem ID="110080">
+        <NameComment>챕터 II-8 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>10</Efficiency>
+        <ValueAmount>5000</ValueAmount>
+        <MoneyPrice>99000</MoneyPrice>
+        <DolarPrice>79.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>6</TimeLimit>
+        <ProductID>event_pakage_tier_56</ProductID>
+        <InventoryItem ID="3200" Count="40" />
+        <BoxKey ID="370" Count="100" />
+    </ShopItem>
+    
+    <ShopItem ID="110090">
+        <NameComment>챕터 II-10 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>10</Efficiency>
+        <ValueAmount>2500</ValueAmount>
+        <MoneyPrice>49000</MoneyPrice>
+        <DolarPrice>39.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>6</TimeLimit>
+        <ProductID>event_pakage_tier_40</ProductID>
+        <InventoryItem ID="163" Count="3" />
+        <InventoryItem ID="3200" Count="20" />
+    </ShopItem>
+    
+    <ShopItem ID="110100">
+        <NameComment>[잠식]  I-2 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>170000</MinVersion>
+        <Efficiency>10</Efficiency>
+    </ShopItem>
+    
+    <ShopItem ID="110110">
+        <NameComment>[잠식]  I-4 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>170000</MinVersion>
+        <Efficiency>10</Efficiency>
+    </ShopItem>
+    
+    <ShopItem ID="110120">
+        <NameComment>[잠식]  I-6 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>170000</MinVersion>
+        <Efficiency>10</Efficiency>
+    </ShopItem>
+    
+    <ShopItem ID="110130">
+        <NameComment>[잠식]  I-8 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>170000</MinVersion>
+        <Efficiency>10</Efficiency>
+    </ShopItem>
+    
+    <ShopItem ID="110140">
+        <NameComment>[잠식]  I-10 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>170000</MinVersion>
+        <Efficiency>10</Efficiency>
+    </ShopItem>
+    
+    <ShopItem ID="110150">
+        <NameComment>[잠식]  II-2 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>170000</MinVersion>
+        <Efficiency>10</Efficiency>
+    </ShopItem>
+    
+    <ShopItem ID="110160">
+        <NameComment>[잠식]  II-4 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>170000</MinVersion>
+        <Efficiency>10</Efficiency>
+    </ShopItem>
+    
+    <ShopItem ID="110170">
+        <NameComment>[잠식]  II-6 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>170000</MinVersion>
+        <Efficiency>10</Efficiency>
+    </ShopItem>
+    
+    <ShopItem ID="110180">
+        <NameComment>[잠식]  II-8 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>170000</MinVersion>
+        <Efficiency>10</Efficiency>
+    </ShopItem>
+    
+    <ShopItem ID="110190">
+        <NameComment>[잠식]  II-10 킹 클리어 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>170000</MinVersion>
+        <Efficiency>10</Efficiency>
+    </ShopItem>
+    
+    <ShopItem ID="120000" />
+    
+    <ShopItem ID="130000">
+        <NameComment>보구 강화 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>5</Efficiency>
+        <ValueAmount>250</ValueAmount>
+        <MoneyPrice>5900</MoneyPrice>
+        <DolarPrice>4.99</DolarPrice>
+        <BuyLimit>3</BuyLimit>
+        <TimeLimit>3</TimeLimit>
+        <ProductID>event_pakage_tier_5</ProductID>
+        <InventoryItem ID="3102" Count="10" />
+        <Gold>50000</Gold>
+    </ShopItem>
+    
+    <ShopItem ID="140000">
+        <NameComment>장신구 강화 패키지</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>5</Efficiency>
+        <ValueAmount>250</ValueAmount>
+        <MoneyPrice>9900</MoneyPrice>
+        <DolarPrice>7.99</DolarPrice>
+        <BuyLimit>3</BuyLimit>
+        <TimeLimit>3</TimeLimit>
+        <ProductID>event_pakage_tier_8</ProductID>
+        <InventoryItem ID="4102" Count="20" />
+        <Gold>50000</Gold>
+    </ShopItem>
+    
+    <ShopItem ID="150000">
+        <NameComment>균열장비 강화 패키지 I</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>5</Efficiency>
+        <ValueAmount>500</ValueAmount>
+        <MoneyPrice>25000</MoneyPrice>
+        <DolarPrice>19.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <ProductID>event_pakage_tier_20</ProductID>
+        <InventoryItem ID="8200" Count="1" />
+        <InventoryItem ID="8302" Count="5" />
+        <Cash>1000</Cash>
+        <TimeLimit>72</TimeLimit>
+    </ShopItem>
+    
+    <ShopItem ID="150010">
+        <NameComment>균열장비 강화 패키지 II</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>5</Efficiency>
+        <ValueAmount>1000</ValueAmount>
+        <MoneyPrice>49000</MoneyPrice>
+        <DolarPrice>39.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <ProductID>event_pakage_tier_40</ProductID>
+        <InventoryItem ID="8125" Count="1" />
+        <InventoryItem ID="8200" Count="1" />
+        <Cash>2500</Cash>
+        <TimeLimit>72</TimeLimit>
+    </ShopItem>
+    
+    <ShopItem ID="150020">
+        <NameComment>균열장비 강화 패키지 III</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>5</Efficiency>
+        <ValueAmount>2500</ValueAmount>
+        <MoneyPrice>99000</MoneyPrice>
+        <DolarPrice>79.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <ProductID>event_pakage_tier_56</ProductID>
+        <InventoryItem ID="8130" Count="1" />
+        <InventoryItem ID="8200" Count="1" />
+        <Cash>4000</Cash>
+        <TimeLimit>72</TimeLimit>
+    </ShopItem>
+    
+    <ShopItem ID="160000" />
+    
+    <ShopItem ID="170000">
+        <NameComment>주말 플레이 부스트 패키지 I</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>5</Efficiency>
+        <ValueAmount>200</ValueAmount>
+        <MoneyPrice>4900</MoneyPrice>
+        <DolarPrice>3.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TimeLimit>48</TimeLimit>
+        <ProductID>event_pakage_tier_4</ProductID>
+        <InventoryItem ID="601" Count="20" />
+    </ShopItem>
+    
+    <ShopItem ID="170010">
+        <NameComment>주말 플레이 부스트 패키지 II</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>5</Efficiency>
+        <ValueAmount>500</ValueAmount>
+        <MoneyPrice>25000</MoneyPrice>
+        <DolarPrice>19.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TimeLimit>48</TimeLimit>
+        <ProductID>event_pakage_tier_20</ProductID>
+        <BoxKey ID="370" Count="80" />
+    </ShopItem>
+    
+    <ShopItem ID="170020">
+        <NameComment>주말 플레이 부스트 패키지 III</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>5</Efficiency>
+        <ValueAmount>2500</ValueAmount>
+        <MoneyPrice>99000</MoneyPrice>
+        <DolarPrice>79.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TimeLimit>48</TimeLimit>
+        <ProductID>event_pakage_tier_56</ProductID>
+        <InventoryItem ID="601" Count="50" />
+        <InventoryItem ID="3200" Count="6" />
+        <Cash>3500</Cash>
+    </ShopItem>
+    
+    <ShopItem ID='171000'>
+        <NameComment>핫타임 식량 증서 팝업 패키지</NameComment>
+        <Name>ShopItemName_1053</Name>
+        <Type>Package</Type>
+
+        <BuyLimit>1</BuyLimit>
+
+        <InventoryItem ID="601" Count="5"/>
+        <Sprite>InventoryItem_601</Sprite>
+
+        <MoneyPrice>1200</MoneyPrice>
+        <DolarPrice>0.99</DolarPrice>
+        <ProductID>event_pakage_tier_1</ProductID>
+
+        <ValueAmount>120</ValueAmount>
+        <RecommendPriority>2010</RecommendPriority>
+        <Efficiency>10</Efficiency>
+        
+        <PlayerPackage>true</PlayerPackage>
+        <TimeLimit>24</TimeLimit>
+
+        <PackageItemCount>1</PackageItemCount>
+
+        <Visible>false</Visible>
+        <EffectColor>FFD264</EffectColor>
+
+        <MinVersion>160000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='171010'>
+        <NameComment>핫타임 킹 식량 증서 팝업 패키지</NameComment>
+        <Name>ShopItemName_1054</Name>
+        <Type>Package</Type>
+
+        <BuyLimit>1</BuyLimit>
+
+        <InventoryItem ID="601" Count="15"/>
+        <Sprite>InventoryItem_601</Sprite>
+
+        <MoneyPrice>3900</MoneyPrice>
+        <DolarPrice>2.99</DolarPrice>
+        <ProductID>event_pakage_tier_3</ProductID>
+
+        <ValueAmount>360</ValueAmount>
+        <RecommendPriority>2010</RecommendPriority>
+        <Efficiency>10</Efficiency>
+
+        <PlayerPackage>true</PlayerPackage>
+        <TimeLimit>24</TimeLimit>
+
+        <PackageItemCount>1</PackageItemCount>
+
+        <Visible>false</Visible>
+        <EffectColor>FFD264</EffectColor>
+
+        <MinVersion>160000</MinVersion>
+    </ShopItem>
+    
+    <ShopItem ID="180000">
+        <NameComment>고기 보충 패키지 I</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>5</Efficiency>
+        <ValueAmount>200</ValueAmount>
+        <MoneyPrice>4900</MoneyPrice>
+        <DolarPrice>3.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>3</TimeLimit>
+        <ProductID>event_pakage_tier_4</ProductID>
+        <InventoryItem ID="601" Count="10" />
+    </ShopItem>
+    
+    <ShopItem ID="180010">
+        <NameComment>고기 보충 패키지 II</NameComment>
+        <Type>Package</Type>
+        <PlayerPackage>true</PlayerPackage>
+        <Visible>false</Visible>
+        <MinVersion>160000</MinVersion>
+        <Efficiency>5</Efficiency>
+        <ValueAmount>400</ValueAmount>
+        <MoneyPrice>9900</MoneyPrice>
+        <DolarPrice>7.99</DolarPrice>
+        <BuyLimit>1</BuyLimit>
+        <TimeLimit>3</TimeLimit>
+        <ProductID>event_pakage_tier_8</ProductID>
+        <InventoryItem ID="601" Count="20" />
+    </ShopItem>
+</ShopItems>

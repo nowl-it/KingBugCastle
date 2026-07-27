@@ -1,0 +1,2887 @@
+<!--
+    사용 가능한 Trigger Type :
+        StartBattle, 전투 시작 시
+        PerSecond, n초 마다
+        GetHit, 피격 시
+        Dead, 사망 시
+        BaseAttackCount, 공격 n회 마다
+        SkillAttackCount, 스킬 사용 n회 마다
+        HpRatio, HP 일정 % 도달 시 (반복 발동)
+        HpRatioOnce, HP 일정 % 도달 시 (일회성)
+        TargetAttack, 대상 공격 시 마다
+        TargetKill, 대상 사망 시 마다
+        ReceiveHeal, 힐 받을 때 마다
+        GiveHeal, 힐 줄 때마다
+        GiveDamage, 대미지 받을 때 마다
+        ReceiveCC, 해당 CC를 받았을 때 (ValueType으로 해당 CC 지정)
+    
+    사용 가능한 Event Type :
+        SpawnPlayerUnit, 플레이어 스폰
+        SpawnEnemyUnit, 적 스폰
+        GiveGold, 골드 주기
+        SelfHeal, 자힐
+        AddBuffToTarget, 대상에게 버프 주기
+        AddBuffToSelf,    나에게 버프 주기
+        AddShieldPerToSelf, 나에게 최대체력 비례 실드 주기
+        HealManaToMaxAndSetAttackFlag 스킬 연속 n회 사용 
+        SetHpDrain 평타 흡혈 스탯 설정
+        SetSkillHpDrain, 마법 흡혈 스탯 설정 
+        AddMaxManaPer 최대 마나량 증가 
+        AddSuperShieldToSelf 절대 방어 추가
+        AddBuffsToSelfByUnitCount 배치된 유닛 수에 비례하여 버프 중첩 횟수가 달라짐
+-->
+
+<EventTriggers>
+    <!-- <EventTrigger ID="1">
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="1"/>
+            </EventTrigger>
+
+           <EventTrigger>
+               <Trigger Type="GetHit"/>
+               <Event Type="SelfHeal" Value="10"/>
+           </EventTrigger>
+
+           <EventTrigger>
+               <Trigger Type="BaseAttackCount" Value="5"/>
+               <Event Type="GiveGold" Value="5"/>
+           </EventTrigger>
+          
+           <EventTrigger>
+               <Trigger Type="SkillAttackCount" Value="5"/>
+               <Event Type="GiveGold" Value="5"/>
+           </EventTrigger>
+
+           <EventTrigger>
+               <Trigger Type="GiveDamage" Value="5"/>
+               <Event Type="GiveGold" Value="5"/>
+           </EventTrigger>
+
+           <EventTrigger>
+               <Trigger Type="GiveDamage" Value="5"/>
+               <Event Type="GiveGold" Value="5"/>
+           </EventTrigger>
+          
+           <EventTrigger>
+               <Trigger Type="TargetKill"/>
+               <Event Type="GiveGold" Value="5"/>
+           </EventTrigger>
+          
+           <EventTrigger>
+               <Trigger Type="StartBattle"/>
+               <Event Type="GiveGold" Value="5"/>
+           </EventTrigger>
+          
+           <EventTrigger>
+               <Trigger Type="PerSecond" Value="10"/>
+               <Event Type="SelfHeal" Value="10"/>
+           </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+           <EventTrigger>
+               <Trigger Type="Dead"/>
+               <Event Type="SpawnEnemyUnit" Value="20200"/>
+           </EventTrigger>
+        </EnemyUnitEvents>
+
+        <AllUnitEvents>
+        </AllUnitEvents>
+        
+        <Comment>예시 트리거 데이터</Comment>
+    </EventTrigger> -->
+
+    <EventTrigger ID="20000">
+        <Icon>PotentialIcon_10020_02</Icon>
+        <Comment>20층 보스 전용</Comment>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="Dead" Value="50040"/>
+                <Event Type="SpawnEnemyUnit">
+                    <Spawn ID="60520" Level="5" SpawnPeriod ="5"/>
+                </Event>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="Dead" Value="50050"/>
+                <Event Type="SpawnEnemyUnit">
+                    <Spawn ID="60320" Level="5" SpawnPeriod ="5"/>
+                </Event>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <!-- 5(시련의 탑 전역 버프), 001(시즌번호), 1(전역 버프 인덱스)-->
+    <EventTrigger ID="50011">
+        <Comment>매 3번째 스킬 연속 2회 사용</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="SkillAttackCount" Value="2"/>
+                <Event Type="HealManaToMaxAndSetAttackFlag" Value="0"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+        <SelectedColor>ffe484</SelectedColor>
+    </EventTrigger>
+    
+    <EventTrigger ID="50012">
+        <Comment>아군의 체력이 최초로 50% 이하가 될 때 3초 간 전체 체력의 45% 회복</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="HpRatioOnce" Value="50"/>
+                <Event Type="AddBuffToSelf" Value="50012"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+        <SelectedColor>d5fffa</SelectedColor>
+    </EventTrigger>
+
+    <EventTrigger ID="50013">
+        <Comment>배치된 아군 영웅 수에 따라 주는 피해량의 7% 추가피해 제공 (최대 49%)</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffsToSelfByUnitCount" Value="50013"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+        <SelectedColor>adffc7</SelectedColor>
+    </EventTrigger>
+    
+    <EventTrigger ID="50014">
+        <Comment>일정량의 은화를 소모하여 아이템을 동일 등급의 랜덤 아이템으로 변환하는 현자의 돌 소환</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartGame"/>
+                <Event Type="AddItem" Value="25003"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+        <SelectedColor>b4adff</SelectedColor>
+    </EventTrigger>
+
+    <!--51(시련의 탑 디버프),001(디버프 인덱스)  -->
+    <EventTrigger ID="51001">
+        <Comment>기절에 걸린 적에게 절대방어 +5 부여</Comment>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ReceiveCC"/>
+                <Event Type="AddSuperShieldToSelf" Value="5"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="51002">
+        <Comment>아군 영웅의 공격력 65% 감소</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="51002"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="510020">
+        <Comment>아군 영웅의 공격력 100% 감소</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="510020"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+    
+    <EventTrigger ID="51003">
+        <Comment>마나 요구량 150% 증가</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="51003"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="510030">
+        <Comment>마나 요구량 100% 증가</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="510030"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="51004">
+        <Comment>적들의 흡혈 수치 50% 증가</Comment>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="510040"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="510041"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="510040">
+        <Comment>적들의 흡혈 수치 50% 증가</Comment>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="51004"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="51005">
+        <Comment>아군 영웅 흡혈 금지</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="510050"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+
+    <EventTrigger ID="51006">
+        <Comment>아군 영웅의 주문력 65% 감소</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="51006"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="510060">
+        <Comment>아군 영웅의 주문력 100% 감소</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="510060"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="51007">
+        <Comment>아군 영웅의 마나 회복 5초 간 차단</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="51007"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="51008">
+        <Comment>매 초 마다, 각 아군 영웅 전체 체력의 5% 지속 피해</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="51008"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="51009">
+        <Comment>아군 영웅의 절대 방어 생성 차단</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="51009"/>
+            </EventTrigger>
+<!--            <EventTrigger>-->
+<!--                <Trigger Type="ClearUnitBuffs"/>-->
+<!--                <Event Type="AddBuffToSelf" Value="51011"/>-->
+<!--            </EventTrigger>-->
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="51010">
+        <Comment>아군 영웅의 공격속도 35% 감소</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="51010"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="510100">
+        <Comment>아군 영웅의 공격속도 100% 감소</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="510100"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="510081">
+        <Comment>매 초 마다, 각 아군 영웅 전체 체력의 5% 지속 피해(도전)</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="510081"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <!--시련의 탑 도전용 이벤트 트리거  -->
+    <EventTrigger ID="52001">
+        <Comment>적의 모든 스탯 (EliteLevel.Value)% 증가</Comment>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="3000510"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="3000511"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="3000512"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    
+    <!-- 시련의 탑 버프 -->
+    <EventTrigger ID="53001">
+        <Comment>신비 유닛 모든 스탯 50% 증가</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="53007"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="53008"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="53009"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="53010"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+    
+    <EventTrigger ID="53002">
+        <Comment>원소 유닛 모든 스탯 50% 증가</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="53007"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="53008"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="53009"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="53010"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+    
+    <EventTrigger ID="53003">
+        <Comment>신속 유닛 모든 스탯 50% 증가</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="53007"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="53008"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="53009"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="53010"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="53004">
+        <Comment>강인 유닛 모든 스탯 50% 증가</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="53007"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="53008"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="53009"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="53010"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="53005">
+        <Comment>용기 유닛 모든 스탯 50% 증가</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="53007"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="53008"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="53009"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="53010"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="53006">
+        <Comment>그림자 유닛 모든 스탯 50% 증가</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="53007"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="53008"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="53009"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="53010"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+    
+    <!-- 로그라이크 선택지방 보상용 이벤트 트리거들 -->
+    <EventTrigger ID="60000">
+        <Comment>전투 시작시 아군에게 절대방어 +1 부여</Comment>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddSuperShieldToSelf" Value="1"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60001">
+        <Comment>모든 영웅들이 피해량 -45%[4] (1라운드)</Comment>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="60001"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60002">
+        <Comment>전투 시작 시 최대 체력 -65% 피해</Comment>
+        <RemoveAfterBattleCount>2</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="60002"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60003">
+        <Comment>모든 영웅 전투 시작 시 체력의 -30% 피해 (3라운드)</Comment>
+        <RemoveAfterBattleCount>3</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="60003"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60004">
+        <Comment>모든 영웅 치유감소 효과 50%[4] 부여 (3라운드)</Comment>
+        <RemoveAfterBattleCount>3</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="60004"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60005">
+        <Comment>모든 영웅의 최대 체력 -30%[3] (3라운드)</Comment>
+        <RemoveAfterBattleCount>3</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="60005"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60006">
+        <Comment>가장 성급이 높은 영웅의 최대 체력 -60%[3] (3라운드)</Comment>
+        <RemoveAfterBattleCount>3</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" HighestUnit="1" Value="60006"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60007">
+        <Comment>모든 영웅의 총 공격속도 -20%[4] (3라운드)</Comment>
+        <RemoveAfterBattleCount>3</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="60007"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60008">
+        <Comment>모든 영웅이 가하는 피해 +50% (5라운드)</Comment>
+        <RemoveAfterBattleCount>5</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="60008"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60009">
+        <Comment>모든 영웅이 받는 피해 +50% (5라운드)</Comment>
+        <RemoveAfterBattleCount>5</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="60009"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60010">
+        <Comment>가장 성급이 높은 영웅이 가하는 피해량 -70% (2라운드)</Comment>
+        <RemoveAfterBattleCount>2</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" HighestUnit="1" Value="60010"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60011">
+        <Comment>모든 영웅의 방어력 +200[2] (10라운드)</Comment>
+        <RemoveAfterBattleCount>10</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="60011"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="60012">
+        <Comment>모든 영웅이 상태 이상 면역[2] (2라운드)</Comment>
+        <RemoveAfterBattleCount>2</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="60012"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <!--61(로그라이크 시련의 방 디버프),001(디버프 인덱스)  -->
+    <EventTrigger ID="61001">
+        <Comment>아군 영웅의 공격력 50% 감소</Comment>
+        <RogueLikeTrial>true</RogueLikeTrial>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="61001"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="61002">
+        <Comment>마나 요구량 150% 증가</Comment>
+        <RogueLikeTrial>true</RogueLikeTrial>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="61002"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="61003">
+        <Comment>적들의 흡혈 수치 50% 증가</Comment>
+        <RogueLikeTrial>true</RogueLikeTrial>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="610030"/>
+            </EventTrigger>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="610031"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="61004">
+        <Comment>아군 영웅 흡혈 금지</Comment>
+        <RogueLikeTrial>true</RogueLikeTrial>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="610040"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+
+    <EventTrigger ID="61005">
+        <Comment>아군 영웅의 주문력 50% 감소</Comment>
+        <RogueLikeTrial>true</RogueLikeTrial>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="61005"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="61006">
+        <Comment>매 초 마다, 각 아군 영웅 전체 체력의 3% 지속 피해</Comment>
+        <RogueLikeTrial>true</RogueLikeTrial>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="AddBuffToSelf" Value="61006"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="61007">
+        <Comment>아군 영웅의 절대 방어 생성 차단</Comment>
+        <RogueLikeTrial>true</RogueLikeTrial>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="61007"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="62000">
+        <Comment>로그라이크 보스방 전용</Comment>
+        <HideInGame>true</HideInGame>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="SpawnEnemyUnit">
+                    <Spawn ID="730000" Level="1" SpawnPeriod="3" PositionType="Random"/>
+                </Event>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="62001">
+        <Comment>로그라이크 최종 보스방 전용</Comment>
+        <HideInGame>true</HideInGame>
+        <RemoveAfterBattleCount>1</RemoveAfterBattleCount>
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="StartBattle"/>
+                <Event Type="SpawnEnemyUnit">
+                    <Spawn ID="730004" Level="1" SpawnPeriod="3" PositionType="Random"/>
+                </Event>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70000">
+        <Comment>그림자 영웅 한 기당 최대 체력 8% 증가</Comment>
+        <ApplyArenaSeason>31</ApplyArenaSeason>
+        <TargetRole>Shadow</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70000"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+        
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70000"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    
+    <EventTrigger ID="70001">
+        <Comment>남부 영웅 받는 피해, 주는 피해 20% 증가</Comment>
+        <ApplyArenaSeason>31</ApplyArenaSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="South" Value="70001"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+        
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="South" Value="70001"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    
+    <EventTrigger ID="70002">
+        <Comment>신비 영웅 한 기당 최대 체력 15% 증가</Comment>
+        <ApplyArenaSeason>32</ApplyArenaSeason>
+        <TargetRole>Mystic</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70002"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70002"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70003">
+        <Comment>동부 영웅 받는 피해 20% 감소, 주는 피해 20% 증가</Comment>
+        <ApplyArenaSeason>32</ApplyArenaSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70003"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70003"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70004">
+        <Comment>모든 그림자 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>33</ApplyArenaSeason>
+        <TargetRole>Shadow</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70004"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70004"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70005">
+        <Comment>중부 영웅 한 기 당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>33</ApplyArenaSeason>
+        <TargetRegion>Central</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70005"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70005"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70006">
+        <Comment>모든 강인 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>34</ApplyArenaSeason>
+        <TargetRole>Toughness</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="70006"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="70006"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70007">
+        <Comment>북부 영웅 한 기 당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>34</ApplyArenaSeason>
+        <TargetRegion>North</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70007"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70007"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70008">
+        <Comment>모든 신속 영웅이 피해 증가 +30%, 사거리 + 1</Comment>
+        <ApplyArenaSeason>35</ApplyArenaSeason>
+        <TargetRole>Swift</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70008"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70008"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70009">
+        <Comment>서부 영웅 한 기당 아군 영웅 최대 체력 20% 증가 (최대 60%)</Comment>
+        <ApplyArenaSeason>35</ApplyArenaSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70009"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70009"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70010">
+        <Comment>모든 용기 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>36</ApplyArenaSeason>
+        <TargetRole>Brave</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="70010"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="70010"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70011">
+        <Comment>남부 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>36</ApplyArenaSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70011"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70011"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70012">
+        <Comment>모든 원소 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>37</ApplyArenaSeason>
+        <TargetRole>Element</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70012"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70012"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70013">
+        <Comment>동부 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>37</ApplyArenaSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70013"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70013"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70014">
+        <Comment>모든 신비 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>38</ApplyArenaSeason>
+        <TargetRole>Mystic</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="70014"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="70014"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70015">
+        <Comment>중부 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>38</ApplyArenaSeason>
+        <TargetRegion>Central</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70015"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70015"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70016">
+        <Comment>모든 북부 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>39</ApplyArenaSeason>
+        <TargetRegion>North</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="North" Value="70016"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="North" Value="70016"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70017">
+        <Comment>그림자 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>39</ApplyArenaSeason>
+        <TargetRole>Shadow</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70017"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70017"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70018">
+        <Comment>모든 서부 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>40</ApplyArenaSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="West" Value="70018"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="West" Value="70018"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70019">
+        <Comment>강인 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>40</ApplyArenaSeason>
+        <TargetRole>Toughness</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70019"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70019"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70020">
+        <Comment>모든 남부 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>41</ApplyArenaSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="South" Value="70020"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="South" Value="70020"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70021">
+        <Comment>신속 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>41</ApplyArenaSeason>
+        <TargetRole>Swift</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70021"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70021"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70022">
+        <Comment>모든 동부 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>42</ApplyArenaSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70022"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70022"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70023">
+        <Comment>용기 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>42</ApplyArenaSeason>
+        <TargetRole>Brave</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70023"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70023"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70024">
+        <Comment>모든 중부 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>43</ApplyArenaSeason>
+        <TargetRegion>Central</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="Central" Value="70024"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="Central" Value="70024"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70025">
+        <Comment>원소 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>43</ApplyArenaSeason>
+        <TargetRole>Element</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70025"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70025"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    
+    <EventTrigger ID="70026">
+        <Comment>모든 북부 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>44</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>North</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="North" Value="70026"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="North" Value="70026"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70027">
+        <Comment>신비 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>44</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Mystic</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70027"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70027"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70028">
+        <Comment>모든 그림자 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>45</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Shadow</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70028"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70028"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70029">
+        <Comment>서부 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>45</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70029"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70029"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70030">
+        <Comment>모든 신속 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>45</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Swift</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70030"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70030"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70031">
+        <Comment>남부 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>45</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70031"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70031"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70032">
+        <Comment>모든 강인 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>46</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Toughness</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="70032"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="70032"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70033">
+        <Comment>동부 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>46</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70033"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70033"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70034">
+        <Comment>모든 용기 영웅이 받는 피해 감소 +30% 및 피해 증가 +30%</Comment>
+        <ApplyArenaSeason>46</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Brave</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="70034"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="70034"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70035">
+        <Comment>중부 영웅 한 기당 모든 아군 영웅의 최대체력 +20% (최대 60%)</Comment>
+        <ApplyArenaSeason>46</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>Central</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70035"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70035"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70036">
+        <Comment>모든 원소 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>47</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Element</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70036"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70036"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70037">
+        <Comment>북부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>47</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>North</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70037"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70037"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70038">
+        <Comment>모든 남부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>47</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="South" Value="70038"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="South" Value="70038"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70039">
+        <Comment>신속 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>47</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Swift</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70039"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70039"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70040">
+        <Comment>모든 서부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>48</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="West" Value="70040"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="West" Value="70040"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70041">
+        <Comment>신비 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>48</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Mystic</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70041"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70041"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70042">
+        <Comment>모든 중부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>48</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>Central</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="Central" Value="70042"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="Central" Value="70042"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70043">
+        <Comment>그림자 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>48</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Shadow</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70043"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70043"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70044">
+        <Comment>모든 동부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>49</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70044"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70044"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70045">
+        <Comment>강인 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>49</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Toughness</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70045"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70045"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70046">
+        <Comment>모든 북부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>49</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>North</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="North" Value="70046"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="North" Value="70046"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70047">
+        <Comment>용기 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>49</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Brave</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70047"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70047"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+        <EventTrigger ID="70048">
+        <Comment>모든 원소 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>50</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Element</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70048"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70048"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70049">
+        <Comment>남부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>50</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70049"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70049"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+            <EventTrigger ID="70050">
+        <Comment>모든 신비 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>50</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Mystic</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="70050"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="70050"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70051">
+        <Comment>서부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>50</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70051"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70051"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70052">
+        <Comment>모든 그림자 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>51</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Shadow</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70052"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70052"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70053">
+        <Comment>중부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>51</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>Central</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70053"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70053"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70054">
+        <Comment>모든 신속 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>51</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Swift</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70054"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70054"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70055">
+        <Comment>동부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>51</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70055"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70055"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70056">
+        <Comment>모든 강인 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>52</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Toughness</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="70056"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="70056"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70057">
+        <Comment>북부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>52</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>North</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70057"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70057"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70058">
+        <Comment>모든 남부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>52</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="South" Value="70058"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="South" Value="70058"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70059">
+        <Comment>용기 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>52</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Brave</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70059"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70059"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70060">
+        <Comment>모든 서부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>53</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="West" Value="70060"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="West" Value="70060"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70061">
+        <Comment>원소 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>53</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Element</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70061"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70061"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70062">
+        <Comment>모든 동부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>53</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70062"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70062"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70063">
+        <Comment>신비 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>53</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Mystic</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70063"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70063"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70064">
+        <Comment>모든 중부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>54</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>Central</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="Central" Value="70064"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="Central" Value="70064"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70065">
+        <Comment>그림자 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>54</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Shadow</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70065"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70065"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70066">
+        <Comment>모든 북부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>54</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>North</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="North" Value="70066"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="North" Value="70066"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70067">
+        <Comment>신속 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>54</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Swift</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70067"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70067"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>           
+    <EventTrigger ID="70068">
+        <Comment>모든 동부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>55</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70068"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70068"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70069">
+        <Comment>강인 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>55</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Toughness</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70069"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70069"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70070">
+        <Comment>모든 서부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>55</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="West" Value="70070"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="West" Value="70070"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70071">
+        <Comment>용기 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>55</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Brave</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70071"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70071"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>         
+    <EventTrigger ID="70072">
+        <Comment>모든 원소 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>56</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Element</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70072"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70072"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70073">
+        <Comment>남부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>56</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70073"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70073"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70074">
+        <Comment>모든 신비 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>56</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Mystic</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="70074"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="70074"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70075">
+        <Comment>북부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>56</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>North</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70075"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70075"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>  
+    <EventTrigger ID="70076">
+        <Comment>모든 그림자 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>57</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Shadow</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70076"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70076"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70077">
+        <Comment>중부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>57</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>Central</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70077"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70077"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70078">
+        <Comment>모든 신속 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>57</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Swift</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70078"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70078"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70079">
+        <Comment>동부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>57</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70079"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70079"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70080">
+        <Comment>모든 강인 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>58</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Toughness</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="70080"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="70080"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70081">
+        <Comment>서부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>58</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70081"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70081"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70082">
+        <Comment>모든 용기 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>58</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Brave</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="70082"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="70082"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70083">
+        <Comment>남부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>58</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70083"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70083"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70084">
+        <Comment>모든 원소 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>59</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Element</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70084"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70084"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70085">
+        <Comment>북부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>59</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>North</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70085"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70085"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70086">
+        <Comment>모든 신비 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>59</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Mystic</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="70086"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="70086"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70087">
+        <Comment>중부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>59</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>Central</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70087"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70087"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70088">
+        <Comment>내 진영과 상대 진영의 모든 영웅 중 위협 스탯이 가장 높은 영웅의 진영에 최종 피해량 +20%</Comment>
+        <PermanentArenaTrigger>true</PermanentArenaTrigger>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70088"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70088"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70089">
+        <Comment>내 진영과 상대 진영의 모든 영웅 중 수호 스탯이 가장 높은 영웅의 진영에 받는 피해량 -20%</Comment>
+        <PermanentArenaTrigger>true</PermanentArenaTrigger>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70089"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70089"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70090">
+        <Comment>모든 그림자 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>60</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Shadow</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70090"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70090"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70091">
+        <Comment>동부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>60</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70091"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70091"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70092">
+        <Comment>모든 신속 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <ApplyArenaSeason>60</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Swift</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70092"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70092"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70093">
+        <Comment>서부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <ApplyArenaSeason>60</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70093"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70093"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70094">
+        <Comment>모든 강인 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <Desc>EventTriggerDesc_70090</Desc>
+        <ApplyArenaSeason>61</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Toughness</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="70094"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Toughness" Value="70094"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70095">
+        <Comment>남부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <Desc>EventTriggerDesc_70091</Desc>
+        <ApplyArenaSeason>61</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70095"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70095"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70096">
+        <Comment>모든 용기 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <Desc>EventTriggerDesc_70092</Desc>
+        <ApplyArenaSeason>61</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Brave</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="70096"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Brave" Value="70096"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70097">
+        <Comment>북부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <Desc>EventTriggerDesc_70093</Desc>
+        <ApplyArenaSeason>61</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>North</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70097"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70097"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>    
+    <EventTrigger ID="70098">
+        <Comment>모든 원소 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <Desc>EventTriggerDesc_70090</Desc>
+        <ApplyArenaSeason>62</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Element</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70098"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Element" Value="70098"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70099">
+        <Comment>중부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <Desc>EventTriggerDesc_70091</Desc>
+        <ApplyArenaSeason>62</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>Central</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70099"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70099"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70100">
+        <Comment>모든 신비 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <Desc>EventTriggerDesc_70092</Desc>
+        <ApplyArenaSeason>62</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Mystic</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="70100"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Mystic" Value="70100"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70101">
+        <Comment>동부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <Desc>EventTriggerDesc_70093</Desc>
+        <ApplyArenaSeason>62</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70101"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70101"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>        
+    <EventTrigger ID="70102">
+        <Comment>모든 그림자 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <Desc>EventTriggerDesc_70090</Desc>
+        <ApplyArenaSeason>63</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Shadow</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70102"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Shadow" Value="70102"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70103">
+        <Comment>서부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <Desc>EventTriggerDesc_70091</Desc>
+        <ApplyArenaSeason>63</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70103"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70103"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70104">
+        <Comment>모든 신속 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <Desc>EventTriggerDesc_70092</Desc>
+        <ApplyArenaSeason>63</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Swift</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70104"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRole="Swift" Value="70104"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70105">
+        <Comment>남부 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <Desc>EventTriggerDesc_70093</Desc>
+        <ApplyArenaSeason>63</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>South</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70105"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70105"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>          
+    <EventTrigger ID="70106">
+        <Comment>모든 동부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <Desc>EventTriggerDesc_70090</Desc>
+        <ApplyArenaSeason>64</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRegion>East</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70106"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="East" Value="70106"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70107">
+        <Comment>강인 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <Desc>EventTriggerDesc_70091</Desc>
+        <ApplyArenaSeason>64</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>1</ApplyArenaSemiSeason>
+        <TargetRole>Toughness</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70107"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70107"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+    <EventTrigger ID="70108">
+        <Comment>모든 서부 영웅이 받는 피해 감소 +35% 및 피해 증가 +40%</Comment>
+        <Desc>EventTriggerDesc_70092</Desc>
+        <ApplyArenaSeason>64</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRegion>West</TargetRegion>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="West" Value="70108"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" TargetRegion="West" Value="70108"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>
+
+    <EventTrigger ID="70109">
+        <Comment>용기 영웅 한 기당 모든 아군 영웅의 최대체력 +25% (최대 75%)</Comment>
+        <Desc>EventTriggerDesc_70093</Desc>
+        <ApplyArenaSeason>64</ApplyArenaSeason>
+        <ApplyArenaSemiSeason>2</ApplyArenaSemiSeason>
+        <TargetRole>Brave</TargetRole>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70109"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+
+        <EnemyUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70109"/>
+            </EventTrigger>
+        </EnemyUnitEvents>
+    </EventTrigger>           
+</EventTriggers>

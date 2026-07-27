@@ -1,0 +1,110 @@
+<FourthYearEventRewards>
+    <FourthYearEventReward ID='1'>
+        <RequireHeart>20</RequireHeart>
+        <!-- 20고기 보상 + 패스 보상 -->
+        <PassRewards>
+            <PassReward Day='1'>
+                <HeartReward Type='Gold' Count='10000' />
+                <PassOnlyReward Type='Gold' Count='20000' />
+            </PassReward>
+    
+            <PassReward Day='2'>
+                <HeartReward Type='InventoryItem' ID='152' Count='1' />
+                <PassOnlyReward Type='InventoryItem' ID="157" Count='1' />
+            </PassReward>
+    
+            <PassReward Day='3'>
+                <HeartReward Type='Key' ID='301' Count='4' />
+                <PassOnlyReward Type='Key' ID='302' Count='4' />
+            </PassReward>
+    
+            <PassReward Day='4'>
+                <HeartReward Type='Key' ID='351' Count='4' />
+                <PassOnlyReward Type='Key' ID='352' Count='4' />
+            </PassReward>
+    
+            <PassReward Day='5'>
+                <HeartReward Type='Artifact' ID='15004' Count='1'/>
+                <PassOnlyReward Type='InventoryItem' ID='5600' Count='1' />
+            </PassReward>
+    
+            <PassReward Day='6'>
+                <HeartReward Type='Cash' Count='50' />
+                <PassOnlyReward Type='Cash' Count='100' />
+            </PassReward>
+    
+            <PassReward Day='7'>
+                <HeartReward Type='UnitSoulItem' Count='50' />
+                <PassOnlyReward Type='UnitSoulItem' Count='100' />
+            </PassReward>
+    
+            <PassReward Day='8'>
+                <HeartReward Type='InventoryItem' ID='4101' Count='3' />
+                <PassOnlyReward Type='InventoryItem' ID='4102' Count='3' />
+            </PassReward>
+    
+            <PassReward Day='9'>
+                <HeartReward Type='InventoryItem' ID='3101' Count='3' />
+                <PassOnlyReward Type='InventoryItem' ID='3102' Count='3' />
+            </PassReward>
+    
+            <PassReward Day='10'>
+                <HeartReward Type='InventoryItem' ID='170' Count='1' />
+                <PassOnlyReward Type='InventoryItem' ID='5600' Count='1' />
+            </PassReward>
+        </PassRewards>
+        
+        <!-- 출석 누적 보상 -->
+        <AttendanceRewards>
+            <!-- 실제로 수령 자체는 1일에 가능 -->
+            <AttendanceReward Day='0'>
+                <Reward Type='CardOrSoul' ID='10320' Count='1' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='1'>
+                <Reward Type='NewUnitGachaItem' Count='1' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='2'>
+                <Reward Type='NewUnitGachaItem' Count='1' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='3'>
+                <Reward Type='NewUnitGachaItem' Count='1' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='4'>
+                <Reward Type='NewUnitGachaItem' Count='1' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='5'>
+                <Reward Type='NewUnitGachaItem' Count='1' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='6'>
+                <Reward Type='NewUnitGachaItem' Count='1' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='7'>
+                <Reward Type='NewUnitGachaItem' Count='1' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='8'>
+                <Reward Type='NewUnitGachaItem' Count='1' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='9'>
+                <Reward Type='NewUnitGachaItem' Count='1' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='10'>
+                <Reward Type='NewUnitGachaItem' Count='1' />
+            </AttendanceReward>
+
+            <!-- 실제로 수령 자체는 10일에 가능 -->
+            <AttendanceReward Day='11'>
+                <Reward Type='Skin' ID='1032004' Count='1' />
+            </AttendanceReward>
+        </AttendanceRewards>
+    </FourthYearEventReward>
+</FourthYearEventRewards>

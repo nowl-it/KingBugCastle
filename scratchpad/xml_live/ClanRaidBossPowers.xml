@@ -1,0 +1,121 @@
+<!-- xml 정보
+	ID 사용 규칙 : 해당 보스 Unit ID와 동일하도록 설정
+	필드 구성 :
+		(1) <Comment> (not used)
+		(2) <BossPowerList>
+		(3) <AddPowerMaxAmount>
+		(4) <RemovePowerMaxAmount>
+		(5) <Values>
+			"Idx" : 코드에서 읽어오기 위한 고윳값
+			"Comment" (not used)	
+			(5-1) <Value>
+				"Start" : 비율에 맞춰 대응시키기 위한 시작점
+				"End" : 비율에 맞춰 대응시키기 위한 끝점 (default : Start 값)
+-->
+<ClanRaidBossPowers>
+	<ClanRaidBossPower ID="42200">
+		<Comment>[단독 토벌전] 피의 사도</Comment>
+
+		<BossPowerList>999,1999,2999,3999,4999,5999,6999,7999,8999,9999</BossPowerList>
+
+		<AddPowerMaxAmount>1499</AddPowerMaxAmount>
+		<RemovePowerMaxAmount>999</RemovePowerMaxAmount>
+
+		<Values Idx="0" Comment="플래티넘~킹 주는 피해량 비율 (%)">
+			<Value Start="4000"/>
+			<Value Start="4000" End="3180"/>
+			<Value Start="3180" End="2360"/>
+			<Value Start="2360" End="1540"/>
+			<Value Start="1540" End="0"/>
+			<Value Start="0" End="-20"/>
+			<Value Start="-20" End="-40"/>
+			<Value Start="-40" End="-65"/>
+			<Value Start="-65" End="-90"/>
+			<Value Start="-90"/>
+		</Values>
+
+		<Values Idx="1" Comment="브론즈~골드 주는 피해량 비율 (%)">
+			<Value Start="4000"/>
+			<Value Start="4000" End="3180"/>
+			<Value Start="3180" End="2360"/>
+			<Value Start="2360" End="1540"/>
+			<Value Start="1540" End="0"/>
+			<Value Start="0" End="-10"/>
+			<Value Start="-10" End="-20"/>
+			<Value Start="-20" End="-30"/>
+			<Value Start="-30" End="-40"/>
+			<Value Start="-40"/>
+		</Values>
+
+		<Values Idx="2" Comment="주는 회복량 비율 (%)">
+			<Value Start="0"/>
+			<Value Start="0"/>
+			<Value Start="0"/>
+			<Value Start="0"/>
+			<Value Start="0"/>
+			<Value Start="0"/>
+			<Value Start="0"/>
+			<Value Start="0"/>
+			<Value Start="0"/>
+			<Value Start="0"/>
+		</Values>
+
+		<Values Idx="3" Comment="데미지 계수">
+			<Value Start="1200"/>
+			<Value Start="1200"/>
+			<Value Start="1200"/>
+			<Value Start="1200" End="1600"/>
+			<Value Start="1600" End="20000"/>
+			<Value Start="20000" End="30000"/>
+			<Value Start="30000" End="40000"/>
+			<Value Start="40000" End="65000"/>
+			<Value Start="65000" End="200000"/>
+			<Value Start="200000"/>
+		</Values>
+
+		<Values Idx="4" Comment="회복 계수">
+			<Value Start="18000"/>
+			<Value Start="18000" End="45000"/>
+			<Value Start="45000" End="67500"/>
+			<Value Start="67500" End="90000"/>
+			<Value Start="90000" End="150000"/>
+			<Value Start="150000" End="180000"/>
+			<Value Start="180000" End="240000"/>
+			<Value Start="240000" End="300000"/>
+			<Value Start="300000" End="375000"/>
+			<Value Start="375000"/>
+		</Values>
+	</ClanRaidBossPower>
+
+	<ClanRaidBossPower ID="42500">
+		<Comment>탐욕의 사도</Comment>
+
+		<BossPowerList>999,1999,2999,3999,4999,5999,6999,7999,8999,9999</BossPowerList>
+
+		<Values Idx="0" Comment="물리 데미지 기운 상승량 계수">
+			<Value Start="200000"/>
+			<Value Start="200000" End="65000"/>
+			<Value Start="65000" End="40000"/>
+			<Value Start="40000" End="30000"/>
+			<Value Start="30000" End="20000"/>
+			<Value Start="20000" End="1600"/>
+			<Value Start="1600" End="1200"/>
+			<Value Start="1200"/>
+			<Value Start="1200"/>
+			<Value Start="1200"/>
+		</Values>
+
+		<Values Idx="1" Comment="주문 데미지 기운 하락량 계수">
+			<Value Start="1200"/>
+			<Value Start="1200"/>
+			<Value Start="1200"/>
+			<Value Start="1600" End="1200"/>
+			<Value Start="20000" End="1600"/>
+			<Value Start="30000" End="20000"/>
+			<Value Start="40000" End="30000"/>
+			<Value Start="65000" End="40000"/>
+			<Value Start="200000" End="65000"/>
+			<Value Start="200000"/>
+		</Values>
+	</ClanRaidBossPower>
+</ClanRaidBossPowers>

@@ -1,0 +1,423 @@
+<!--제단, 소환, 교환방은 반드시 이 순서대로 RoomGenData 넣을것!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+<RogueLikeWorlds>
+	
+	<RogueLikeWorld ID="100">
+		<Name>첫 번째 균열</Name>
+		<Icon>Boss_Tag_Icon_20040</Icon>
+		<NextWorld>101</NextWorld>
+		
+		<EnemyTheme>2001,2002,2003</EnemyTheme>
+		<EliteTheme>2010</EliteTheme>
+		
+		<StatPer>5,10,15,20,25,30,35,40</StatPer>
+
+		<Floors>
+			<Floor>
+				<BossType>Altar</BossType>
+				<BossLevel>1</BossLevel>
+				<BossStatPer>40</BossStatPer>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+
+				<FixedBattleStage>200010000,200010001,200010002,200010003,200010004</FixedBattleStage>
+
+				<BattleStagePoolStartID>200010005</BattleStagePoolStartID>
+				<BattleStagePoolEndID>200010049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>200010050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>200010099</EliteStagePoolEndID>
+			</Floor>
+			
+			<Floor>
+				<BossType>Altar</BossType>
+				<BossLevel>2</BossLevel>
+				<BossStatPer>50</BossStatPer>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+
+				<BattleStagePoolStartID>200020000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>200020049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>200020050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>200020099</EliteStagePoolEndID>
+			</Floor>
+			
+			<Floor>
+				<BossType>Altar</BossType>
+				<BossLevel>3</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="BuildingArtifact">100</RoomGenData>
+
+				<BattleStagePoolStartID>200030000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>200030049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>200030050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>200030099</EliteStagePoolEndID>
+			</Floor>
+		</Floors>
+		
+	</RogueLikeWorld>
+
+	<RogueLikeWorld ID="101">
+		<Name>두 번째 균열</Name>
+		<Icon>Boss_Tag_Icon_20040</Icon>
+		<NextWorld>102</NextWorld>
+
+		<EnemyTheme>2004,2005,2006</EnemyTheme>
+		<EliteTheme>2010</EliteTheme>
+
+		<StatPer>25,50,75,100,125,150,175,200</StatPer>
+
+		<Floors>
+			<Floor>
+				<BossType>Altar</BossType>
+				<BossLevel>4</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="BuildingArtifact">100</RoomGenData>
+				<BattleStagePoolStartID>200040000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>200040049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>200040050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>200040099</EliteStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>Altar</BossType>
+				<BossLevel>5</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<BattleStagePoolStartID>200050000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>200050049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>200050050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>200050099</EliteStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>WorldBoss</BossType>
+				<BossLevel>6</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="Exchange">30</RoomGenData>
+
+				<BattleStagePoolStartID>200060000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>200060049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>200060050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>200060099</EliteStagePoolEndID>
+				<BossStagePoolStartID>201060000</BossStagePoolStartID>
+				<BossStagePoolEndID>201060000</BossStagePoolEndID>
+			</Floor>
+		</Floors>
+
+	</RogueLikeWorld>
+
+	<RogueLikeWorld ID="102">
+		<Name>세 번째 균열</Name>
+		<Icon>Boss_Tag_Icon_20040</Icon>
+		<NextWorld>-1</NextWorld>
+
+		<EnemyTheme>2007,2008,2009,2010</EnemyTheme>
+		<EliteTheme>2010</EliteTheme>
+
+		<StatPer>40,80,120,160,200,240,280,320</StatPer>
+
+		<Floors>
+			<Floor>
+				<BossType>WorldBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="Exchange">50</RoomGenData>
+
+				<BattleStagePoolStartID>200070000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>200070049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>200070050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>200070099</EliteStagePoolEndID>
+				<BossStagePoolStartID>201070000</BossStagePoolStartID>
+				<BossStagePoolEndID>201070000</BossStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>WorldBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="Exchange">50</RoomGenData>
+
+				<BattleStagePoolStartID>200080000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>200080049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>200080050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>200080099</EliteStagePoolEndID>
+				<BossStagePoolStartID>201080000</BossStagePoolStartID>
+				<BossStagePoolEndID>201080000</BossStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>FinalBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="Exchange">100</RoomGenData>
+
+				<BattleStagePoolStartID>200090000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>200090049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>200090050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>200090099</EliteStagePoolEndID>
+				<BossStagePoolStartID>200000000</BossStagePoolStartID>
+				<BossStagePoolEndID>200000000</BossStagePoolEndID>
+			</Floor>
+		</Floors>
+
+	</RogueLikeWorld>
+
+	<RogueLikeWorld ID="200">
+		<Name>첫 번째 차원의 균열</Name>
+		<Icon>Boss_Tag_Icon_20040</Icon>
+		<NextWorld>201</NextWorld>
+
+		<EnemyTheme>2001,2002,2003</EnemyTheme>
+		<EliteTheme>2010</EliteTheme>
+
+		<Floors>
+			<Floor>
+				<BossType>Altar</BossType>
+				<BossLevel>1</BossLevel>
+				<BossStatPer>40</BossStatPer>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+
+				<FixedBattleStage>210010000,210010001,210010002,210010003,210010004</FixedBattleStage>
+
+				<BattleStagePoolStartID>210010005</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210010049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>210010050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>210010099</EliteStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>Altar</BossType>
+				<BossLevel>2</BossLevel>
+				<BossStatPer>50</BossStatPer>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+				<RoomGenData Type="ChangeRegionAndBuildingPair">100</RoomGenData>
+				<RoomGenData Type="DimensionRiftShop">100</RoomGenData>
+
+				<BattleStagePoolStartID>210020000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210020049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>210020050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>210020099</EliteStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>Altar</BossType>
+				<BossLevel>3</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+				<RoomGenData Type="ChangeRegionAndBuildingPair">100</RoomGenData>
+				<RoomGenData Type="DimensionRiftShop">100</RoomGenData>
+
+				<BattleStagePoolStartID>210030000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210030049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>210030050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>210030099</EliteStagePoolEndID>
+			</Floor>
+		</Floors>
+
+	</RogueLikeWorld>
+
+	<RogueLikeWorld ID="201">
+		<Name>두 번째 차원의 균열</Name>
+		<Icon>Boss_Tag_Icon_20040</Icon>
+		<NextWorld>202</NextWorld>
+
+		<EnemyTheme>2004,2005,2006</EnemyTheme>
+		<EliteTheme>2010</EliteTheme>
+
+		<StatPer>25,50,75,100,125,150,175,200</StatPer>
+
+		<Floors>
+			<Floor>
+				<BossType>Altar</BossType>
+				<BossLevel>4</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+				<RoomGenData Type="DimensionRiftShop">100</RoomGenData>
+				
+				<BattleStagePoolStartID>210040000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210040049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>210040050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>210040099</EliteStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>Altar</BossType>
+				<BossLevel>5</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+				<RoomGenData Type="DimensionRiftShop">100</RoomGenData>
+				
+				<BattleStagePoolStartID>210050000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210050049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>210050050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>210050099</EliteStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>WorldBoss</BossType>
+				<BossLevel>6</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+				<RoomGenData Type="Exchange">30</RoomGenData>
+				<RoomGenData Type="DimensionRiftShop">100</RoomGenData>
+
+				<BattleStagePoolStartID>210060000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210060049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>210060050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>210060099</EliteStagePoolEndID>
+				<BossStagePoolStartID>211060000</BossStagePoolStartID>
+				<BossStagePoolEndID>211060000</BossStagePoolEndID>
+			</Floor>
+		</Floors>
+
+	</RogueLikeWorld>
+
+	<RogueLikeWorld ID="202">
+		<Name>세 번째 차원의 균열</Name>
+		<Icon>Boss_Tag_Icon_20040</Icon>
+		<NextWorld>-1</NextWorld>
+
+		<EnemyTheme>2007,2008,2009,2010</EnemyTheme>
+		<EliteTheme>2010</EliteTheme>
+
+		<StatPer>40,80,120,160,200,240,280,320</StatPer>
+
+		<Floors>
+			<Floor>
+				<BossType>WorldBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="HeroSummon">100</RoomGenData>
+				<RoomGenData Type="Exchange">50</RoomGenData>
+				<RoomGenData Type="DimensionRiftShop">100</RoomGenData>
+				
+				<BattleStagePoolStartID>210070000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210070049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>210070050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>210070099</EliteStagePoolEndID>
+				<BossStagePoolStartID>211070000</BossStagePoolStartID>
+				<BossStagePoolEndID>211070000</BossStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>WorldBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="Exchange">50</RoomGenData>
+				<RoomGenData Type="DimensionRiftShop">100</RoomGenData>
+
+				<BattleStagePoolStartID>210080000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210080049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>210080050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>210080099</EliteStagePoolEndID>
+				<BossStagePoolStartID>211080000</BossStagePoolStartID>
+				<BossStagePoolEndID>211080000</BossStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>FinalBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+				<RoomGenData Type="Exchange">100</RoomGenData>
+				<RoomGenData Type="DimensionRiftShop">100</RoomGenData>
+
+				<BattleStagePoolStartID>210090000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210090049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>210090050</EliteStagePoolStartID>
+				<EliteStagePoolEndID>210090099</EliteStagePoolEndID>
+				<BossStagePoolStartID>200000000</BossStagePoolStartID>
+				<BossStagePoolEndID>200000000</BossStagePoolEndID>
+			</Floor>
+		</Floors>
+	</RogueLikeWorld>
+	
+	<RogueLikeWorld ID="203">
+		<Name>도전! 차원의 균열</Name>
+		<Icon>Boss_Tag_Icon_20040</Icon>
+		<NextWorld>-1</NextWorld>
+
+		<EnemyTheme>2007,2008,2009,2010</EnemyTheme>
+		<EliteTheme>2010</EliteTheme>
+
+		<StatPer>40,80,120,160,200,240,280,320</StatPer>
+
+		<Floors>
+			<Floor>
+				<BossType>ChallengeBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+
+				<BattleStagePoolStartID>210090000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210090049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>219010000</EliteStagePoolStartID>
+				<EliteStagePoolEndID>219010005</EliteStagePoolEndID>
+				<BossStagePoolStartID>200000000</BossStagePoolStartID>
+				<BossStagePoolEndID>200000000</BossStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>ChallengeBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+
+				<BattleStagePoolStartID>210090000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210090049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>219010000</EliteStagePoolStartID>
+				<EliteStagePoolEndID>219010005</EliteStagePoolEndID>
+				<BossStagePoolStartID>200000000</BossStagePoolStartID>
+				<BossStagePoolEndID>200000000</BossStagePoolEndID>
+			</Floor>
+			
+			<Floor>
+				<BossType>ChallengeBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+
+				<BattleStagePoolStartID>210090000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210090049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>219010000</EliteStagePoolStartID>
+				<EliteStagePoolEndID>219010005</EliteStagePoolEndID>
+				<BossStagePoolStartID>200000000</BossStagePoolStartID>
+				<BossStagePoolEndID>200000000</BossStagePoolEndID>
+			</Floor>
+			
+			<Floor>
+				<BossType>ChallengeBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+
+				<BattleStagePoolStartID>210090000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210090049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>219010000</EliteStagePoolStartID>
+				<EliteStagePoolEndID>219010005</EliteStagePoolEndID>
+				<BossStagePoolStartID>200000000</BossStagePoolStartID>
+				<BossStagePoolEndID>200000000</BossStagePoolEndID>
+			</Floor>
+			
+			<Floor>
+				<BossType>ChallengeBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+
+				<BattleStagePoolStartID>210090000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210090049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>219010000</EliteStagePoolStartID>
+				<EliteStagePoolEndID>219010005</EliteStagePoolEndID>
+				<BossStagePoolStartID>200000000</BossStagePoolStartID>
+				<BossStagePoolEndID>200000000</BossStagePoolEndID>
+			</Floor>
+
+			<Floor>
+				<BossType>ChallengeBoss</BossType>
+				<BossLevel>7</BossLevel>
+				<BossStatPer>100</BossStatPer>
+
+				<BattleStagePoolStartID>210090000</BattleStagePoolStartID>
+				<BattleStagePoolEndID>210090049</BattleStagePoolEndID>
+				<EliteStagePoolStartID>219010000</EliteStagePoolStartID>
+				<EliteStagePoolEndID>219010005</EliteStagePoolEndID>
+				<BossStagePoolStartID>200000000</BossStagePoolStartID>
+				<BossStagePoolEndID>200000000</BossStagePoolEndID>
+			</Floor>
+		</Floors>
+	</RogueLikeWorld>
+</RogueLikeWorlds>

@@ -1,0 +1,176 @@
+<TerritoryAlchemyItems>
+
+    <TerritoryAlchemyItem ID="1">
+        <Level>1</Level>
+        <ReqPoint>200</ReqPoint>
+        
+        <Rewards Index="0">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="Key" ID="300" Count="2" />
+            <Reward Type="Key" ID="300" Count="3" />
+            <Reward Type="Key" ID="300" Count="4" />
+        </Rewards>
+        
+        <Rewards Index="1">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="UnitExpItem" Count="15" />
+            <Reward Type="UnitExpItem" Count="30" />
+            <Reward Type="UnitExpItem" Count="45" />
+        </Rewards>
+        
+    </TerritoryAlchemyItem>
+
+    <TerritoryAlchemyItem ID="2">
+        <Level>2</Level>
+        <ReqPoint>200</ReqPoint>
+
+
+        <Rewards Index="0">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="UnitSoulItem" Count="10" />
+            <Reward Type="UnitSoulItem" Count="20" />
+            <Reward Type="UnitSoulItem" Count="30" />
+        </Rewards>
+
+        <Rewards Index="1">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="UnitExpItem" Count="100" />
+            <Reward Type="UnitExpItem" Count="200" />
+            <Reward Type="UnitExpItem" Count="300" />
+        </Rewards>
+
+        <Rewards Index="2">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="Key" ID="351" Count="1" />
+            <Reward Type="Key" ID="351" Count="2" />
+            <Reward Type="Key" ID="351" Count="3" />
+        </Rewards>
+
+    </TerritoryAlchemyItem>
+
+    <TerritoryAlchemyItem ID="3">
+        <Level>3</Level>
+        <ReqPoint>400</ReqPoint>
+
+
+        <Rewards Index="0">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="UnitSoulItem" Count="20" />
+            <Reward Type="UnitSoulItem" Count="40" />
+            <Reward Type="UnitSoulItem" Count="60" />
+        </Rewards>
+
+        <Rewards Index="1">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="UnitExpItem" Count="200" />
+            <Reward Type="UnitExpItem" Count="400" />
+            <Reward Type="UnitExpItem" Count="600" />
+        </Rewards>
+
+        <Rewards Index="2">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="Key" ID="352" Count="1" />
+            <Reward Type="Key" ID="352" Count="2" />
+            <Reward Type="Key" ID="352" Count="3" />
+        </Rewards>
+
+    </TerritoryAlchemyItem>
+
+    <TerritoryAlchemyItem ID="4">
+        <Level>4</Level>
+        <ReqPoint>800</ReqPoint>
+
+
+        <Rewards Index="0">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="Artifact" ID="802" Count="1" />
+            <Reward Type="Artifact" ID="802" Count="2" />
+            <Reward Type="Artifact" ID="802" Count="3" />
+        </Rewards>
+
+        <Rewards Index="1">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="Artifact" ID="903" Count="1" />
+            <Reward Type="Artifact" ID="903" Count="2" />
+            <Reward Type="Artifact" ID="903" Count="3" />
+        </Rewards>
+
+    </TerritoryAlchemyItem>
+    
+    <TerritoryAlchemyItem ID="5">
+        <Level>5</Level>
+        <ReqPoint>1600</ReqPoint>
+
+
+        <Rewards Index="0">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="InventoryItem" ID="5000" Count="1" />
+            <Reward Type="InventoryItem" ID="5000" Count="2" />
+            <Reward Type="InventoryItem" ID="5000" Count="3" />
+        </Rewards>
+        
+        <Rewards Index="0" Version="1">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="InventoryItem" ID="5500" Count="1" />
+            <Reward Type="InventoryItem" ID="5500" Count="2" />
+            <Reward Type="InventoryItem" ID="5500" Count="3" />
+        </Rewards>
+        
+        <Rewards Index="0" Version="2">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="InventoryItem" ID="5501" Count="1" />
+            <Reward Type="InventoryItem" ID="5501" Count="2" />
+            <Reward Type="InventoryItem" ID="5501" Count="3" />
+        </Rewards>
+
+        <Rewards Index="0" Version="3">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="InventoryItem" ID="5502" Count="1" />
+            <Reward Type="InventoryItem" ID="5502" Count="2" />
+            <Reward Type="InventoryItem" ID="5502" Count="3" />
+        </Rewards>
+        
+        <Rewards Index="0" Version="4">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="InventoryItem" ID="5503" Count="1" />
+            <Reward Type="InventoryItem" ID="5503" Count="2" />
+            <Reward Type="InventoryItem" ID="5503" Count="3" />
+        </Rewards>
+
+		<Rewards Index="0" Version="5">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="InventoryItem" ID="5504" Count="1" />
+            <Reward Type="InventoryItem" ID="5504" Count="2" />
+            <Reward Type="InventoryItem" ID="5504" Count="3" />
+        </Rewards>
+
+		<Rewards Index="0" Version="6">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="InventoryItem" ID="5505" Count="1" />
+            <Reward Type="InventoryItem" ID="5505" Count="2" />
+            <Reward Type="InventoryItem" ID="5505" Count="3" />
+        </Rewards>
+
+        <Rewards Index="0" Version="7">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="InventoryItem" ID="5506" Count="1" />
+            <Reward Type="InventoryItem" ID="5506" Count="2" />
+            <Reward Type="InventoryItem" ID="5506" Count="3" />
+        </Rewards>
+
+        <Rewards Index="1">
+            <JackpotPer>15,5</JackpotPer>
+            <Reward Type="InventoryItem" ID="3001" Count="1" />
+            <Reward Type="InventoryItem" ID="3001" Count="2" />
+            <Reward Type="InventoryItem" ID="3001" Count="3" />
+        </Rewards>
+
+    </TerritoryAlchemyItem>
+    
+    <TerritoryAlchemyItem ID="6">
+        <Level>6</Level>
+        <ReqPoint>99999999</ReqPoint>
+        <Enabled>false</Enabled>
+    </TerritoryAlchemyItem>
+    
+</TerritoryAlchemyItems>

@@ -1,0 +1,116 @@
+<ShopEventInfos>
+    <ShopEventInfo ID="100">
+        <Type>CumulativePurchaseEvent</Type>
+        
+        <StartAt>20250925_000000</StartAt>
+        <EndAt>20251008_235900</EndAt>
+        
+        <MinLevel>15</MinLevel>
+        <MinVersion>160100</MinVersion>
+        
+        <Lobby>
+            <Name>CumulativePurchaseEvent</Name>
+            <Icon>Icon_CumulativePurchaseEvent</Icon>
+        </Lobby>
+        
+        <EventBanner>
+            <Name>CumulativePurchaseEventBannerName</Name>
+            <Target>TreasurePickUp50000</Target>
+            <Prefab>ShopEventBanner</Prefab>
+            <ImagePrefab>ShopEventBannerImage_100</ImagePrefab>
+        </EventBanner>
+        
+        <EventPanel>
+            <Name>CumulativePurchaseEvent</Name>
+            <Info>CumulativePurchaseEventPanelInfo_100</Info>
+            <Desc>CumulativePurchaseEventPanelDesc_100</Desc>
+            <ImagePrefab>ShopEventBannerImage_100</ImagePrefab>
+        </EventPanel>
+        
+        <EventRewards RequiredEventInventoryItemID="9000">
+            <EventReward Required="0">
+                <Reward Type="InventoryItem" ID="601" Count="3"/>
+            </EventReward>
+            <EventReward Required="10">
+                <Reward Type="Gold" Count="30000"/>
+            </EventReward>
+            <EventReward Required="30">
+                <Reward Type="Advisor" ID="40050"/>
+            </EventReward>
+            <EventReward Required="100">
+                <Reward Type="InventoryItem" ID="3102" Count="5"/>
+            </EventReward>
+            <EventReward Required="150">
+                <Reward Type="Flag" ID="70000"/>
+            </EventReward>
+            <EventReward Required="250">
+                <Reward Type="Key" ID="370" Count="50"/>
+            </EventReward>
+            <EventReward Required="300">
+                <Reward Type="NameTag" ID="70000"/>
+            </EventReward>
+            <EventReward Required="400">
+                <Reward Type="InventoryItem" ID="3200" Count="6"/>
+            </EventReward>
+        </EventRewards>
+    </ShopEventInfo>
+
+    <ShopEventInfo ID="101">
+        <Type>CumulativePurchaseEvent</Type>
+        
+        <StartAt>20260409_000000</StartAt>
+        <EndAt>20260422_235900</EndAt>
+        
+        <MinLevel>15</MinLevel>
+        <MinVersion>167100</MinVersion>
+        
+        <Lobby>
+            <Name>CumulativePurchaseEvent</Name>
+            <Icon>Icon_CumulativePurchaseEvent</Icon>
+        </Lobby>
+        
+        <EventBanner>
+            <Name>CumulativePurchaseEventBannerName</Name>
+            <Target>TreasurePickUp50001</Target>
+            <Prefab>ShopEventBanner</Prefab>
+            <ImagePrefab>ShopEventBannerImage_101</ImagePrefab>
+        </EventBanner>
+        
+        <EventPanel>
+            <Name>CumulativePurchaseEvent</Name>
+            <Info>CumulativePurchaseEventPanelInfo_101</Info>
+            <Desc>CumulativePurchaseEventPanelDesc_101</Desc>
+            <ImagePrefab>ShopEventBannerImage_101</ImagePrefab>
+        </EventPanel>
+        
+        <EventRewards RequiredEventInventoryItemID="9002">
+            <EventReward Required="0">
+                <Reward Type="InventoryItem" ID="601" Count="3"/>
+            </EventReward>
+            <EventReward Required="10">
+                <Reward Type="Gold" Count="30000"/>
+            </EventReward>
+            <EventReward Required="30">
+                <Reward Type="Advisor" ID="40060"/>
+            </EventReward>
+            <EventReward Required="100">
+                <Reward Type="InventoryItem" ID="3102" Count="5"/>
+            </EventReward>
+            <EventReward Required="150">
+                <Reward Type="Flag" ID="70030"/>
+            </EventReward>
+            <EventReward Required="250">
+                <Reward Type="Key" ID="370" Count="50"/>
+            </EventReward>
+            <EventReward Required="300">
+                <Reward Type="NameTag" ID="70030"/>
+            </EventReward>
+            <EventReward Required="380">
+                <Reward Type="InventoryItem" ID="163" Count="2"/>
+            </EventReward>            
+            <EventReward Required="450">
+                <Reward Type="InventoryItem" ID="3200" Count="6"/>
+            </EventReward>
+        </EventRewards>
+    </ShopEventInfo>    
+</ShopEventInfos>

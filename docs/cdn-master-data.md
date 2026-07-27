@@ -7,6 +7,7 @@ this — the client reads the bundle directly. This is data plane 2 (see [README
 
 ## Source of truth
 
+<<<<<<< HEAD
 - **Edit** `server/xml_live/*.xml` (~143 files: `Units`, `Skills`, `Skins`, `Stages`, `Treasures`,
   every `Strings_<locale>`, …). `server.py` reads this dir (`XML_DIR`) for its JSON API, and it is
   what `rebuild_xml_bundle.py` packs into the bundle. The fallback `xml/<patchFolder>/` is a
@@ -55,6 +56,24 @@ Both paths keep `xml_live` uniformly LF (the CDN ships CRLF). Version gates +
 `serverVersion` are deliberately NOT bumped — they track the deployed client APK, not
 the newest game version.
 
+=======
+- **Edit** `scratchpad/xml_live/*.xml` (~143 files: `Units`, `Skills`, `Skins`, `Stages`, `Treasures`,
+  every `Strings_<locale>`, …). `server.py` also reads this dir (`XML_DIR`) for its JSON API, and it is
+  what `rebuild_xml_bundle.py` packs into the bundle. **Do not** edit `xml/2026_06_26/` — that's a
+  pristine reference clone, not what anything reads.
+
+## Workflow
+
+```bash
+# 1. edit scratchpad/xml_live/<File>.xml
+python3 server/rebuild_xml_bundle.py     # rewrites real_cdn/xml + updates AssetHash.txt (new md5)
+# 2. restart BOTH uvicorns — they cache real_cdn/ at import (see deploy-and-run.md)
+# 3. clear the device's downloaded bundle cache before next launch
+adb -s <serial> shell "rm -rf /sdcard/Android/data/com.nowl.castle/files/UnityCache"
+adb -s <serial> shell am force-stop com.nowl.castle
+```
+
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 The `xml` line in `AssetHash.txt` (format `<name>:<md5hex>_<sizeInt>`) changes on every rebuild. The
 client's CDN check compares hashes and **re-downloads** the bundle when it differs — so the hash change
 is what actually pushes your edit. Confirm the client re-fetched by watching the TLS log for

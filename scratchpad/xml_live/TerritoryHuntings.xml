@@ -1,0 +1,5483 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TerritoryHuntings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<TerritoryHunting ID="10101">
+		<NameComment>고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>100</RewardAmount>
+		<ReqCombatPower>500</ReqCombatPower>
+		<MinLevel>2</MinLevel>
+		<MaxLevel>3</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10102">
+		<NameComment>고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>180</RewardAmount>
+		<ReqCombatPower>1050</ReqCombatPower>
+		<MinLevel>3</MinLevel>
+		<MaxLevel>4</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10103">
+		<NameComment>고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>350</RewardAmount>
+		<ReqCombatPower>2500</ReqCombatPower>
+		<MinLevel>7</MinLevel>
+		<MaxLevel>9</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10104">
+		<NameComment>고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>500</RewardAmount>
+		<ReqCombatPower>4550</ReqCombatPower>
+		<MinLevel>10</MinLevel>
+		<MaxLevel>14</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10105">
+		<NameComment>고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>800</RewardAmount>
+		<ReqCombatPower>7200</ReqCombatPower>
+		<MinLevel>14</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10106">
+		<NameComment>고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1050</RewardAmount>
+		<ReqCombatPower>10450</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>18</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10201">
+		<NameComment>도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>135</RewardAmount>
+		<ReqCombatPower>750</ReqCombatPower>
+		<MinLevel>3</MinLevel>
+		<MaxLevel>4</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10202">
+		<NameComment>도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>220</RewardAmount>
+		<ReqCombatPower>1400</ReqCombatPower>
+		<MinLevel>4</MinLevel>
+		<MaxLevel>6</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10203">
+		<NameComment>도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>400</RewardAmount>
+		<ReqCombatPower>3000</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>10</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10204">
+		<NameComment>도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>560</RewardAmount>
+		<ReqCombatPower>5200</ReqCombatPower>
+		<MinLevel>11</MinLevel>
+		<MaxLevel>15</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10205">
+		<NameComment>도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>885</RewardAmount>
+		<ReqCombatPower>7900</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10206">
+		<NameComment>도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1150</RewardAmount>
+		<ReqCombatPower>11250</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>19</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10301">
+		<NameComment>슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>170</RewardAmount>
+		<ReqCombatPower>1000</ReqCombatPower>
+		<MinLevel>3</MinLevel>
+		<MaxLevel>4</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10302">
+		<NameComment>슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>260</RewardAmount>
+		<ReqCombatPower>1750</ReqCombatPower>
+		<MinLevel>5</MinLevel>
+		<MaxLevel>7</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10303">
+		<NameComment>슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>450</RewardAmount>
+		<ReqCombatPower>3500</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>11</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10304">
+		<NameComment>슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>620</RewardAmount>
+		<ReqCombatPower>5850</ReqCombatPower>
+		<MinLevel>12</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10305">
+		<NameComment>슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>970</RewardAmount>
+		<ReqCombatPower>8600</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10306">
+		<NameComment>슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1250</RewardAmount>
+		<ReqCombatPower>12050</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10401">
+		<NameComment>언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>205</RewardAmount>
+		<ReqCombatPower>1250</ReqCombatPower>
+		<MinLevel>4</MinLevel>
+		<MaxLevel>5</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10402">
+		<NameComment>언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>300</RewardAmount>
+		<ReqCombatPower>2100</ReqCombatPower>
+		<MinLevel>6</MinLevel>
+		<MaxLevel>8</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10403">
+		<NameComment>언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>500</RewardAmount>
+		<ReqCombatPower>4000</ReqCombatPower>
+		<MinLevel>9</MinLevel>
+		<MaxLevel>12</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10404">
+		<NameComment>언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>680</RewardAmount>
+		<ReqCombatPower>6500</ReqCombatPower>
+		<MinLevel>13</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10405">
+		<NameComment>언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1055</RewardAmount>
+		<ReqCombatPower>9300</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10406">
+		<NameComment>언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1350</RewardAmount>
+		<ReqCombatPower>12850</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10501">
+		<NameComment>엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>240</RewardAmount>
+		<ReqCombatPower>1500</ReqCombatPower>
+		<MinLevel>4</MinLevel>
+		<MaxLevel>6</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10502">
+		<NameComment>엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>340</RewardAmount>
+		<ReqCombatPower>2450</ReqCombatPower>
+		<MinLevel>7</MinLevel>
+		<MaxLevel>9</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10503">
+		<NameComment>엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>550</RewardAmount>
+		<ReqCombatPower>4500</ReqCombatPower>
+		<MinLevel>10</MinLevel>
+		<MaxLevel>14</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10504">
+		<NameComment>엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>740</RewardAmount>
+		<ReqCombatPower>7150</ReqCombatPower>
+		<MinLevel>14</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10505">
+		<NameComment>엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1140</RewardAmount>
+		<ReqCombatPower>10000</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>18</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10506">
+		<NameComment>엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1450</RewardAmount>
+		<ReqCombatPower>13650</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10601">
+		<NameComment>오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>275</RewardAmount>
+		<ReqCombatPower>1750</ReqCombatPower>
+		<MinLevel>5</MinLevel>
+		<MaxLevel>7</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10602">
+		<NameComment>오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>380</RewardAmount>
+		<ReqCombatPower>2800</ReqCombatPower>
+		<MinLevel>7</MinLevel>
+		<MaxLevel>9</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10603">
+		<NameComment>오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>600</RewardAmount>
+		<ReqCombatPower>5000</ReqCombatPower>
+		<MinLevel>11</MinLevel>
+		<MaxLevel>15</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10604">
+		<NameComment>오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>800</RewardAmount>
+		<ReqCombatPower>7800</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10605">
+		<NameComment>오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1225</RewardAmount>
+		<ReqCombatPower>10700</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>19</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10606">
+		<NameComment>오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1550</RewardAmount>
+		<ReqCombatPower>14450</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10701">
+		<NameComment>악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>310</RewardAmount>
+		<ReqCombatPower>2000</ReqCombatPower>
+		<MinLevel>6</MinLevel>
+		<MaxLevel>8</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10702">
+		<NameComment>악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>420</RewardAmount>
+		<ReqCombatPower>3150</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>10</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10703">
+		<NameComment>악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>650</RewardAmount>
+		<ReqCombatPower>5500</ReqCombatPower>
+		<MinLevel>12</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10704">
+		<NameComment>악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>860</RewardAmount>
+		<ReqCombatPower>8450</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10705">
+		<NameComment>악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1310</RewardAmount>
+		<ReqCombatPower>11400</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10706">
+		<NameComment>악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1650</RewardAmount>
+		<ReqCombatPower>15250</ReqCombatPower>
+		<MinLevel>18</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10801">
+		<NameComment>뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>345</RewardAmount>
+		<ReqCombatPower>2250</ReqCombatPower>
+		<MinLevel>6</MinLevel>
+		<MaxLevel>8</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10802">
+		<NameComment>뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>460</RewardAmount>
+		<ReqCombatPower>3500</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>11</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10803">
+		<NameComment>뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>700</RewardAmount>
+		<ReqCombatPower>6000</ReqCombatPower>
+		<MinLevel>12</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10804">
+		<NameComment>뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>920</RewardAmount>
+		<ReqCombatPower>9100</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10805">
+		<NameComment>뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1395</RewardAmount>
+		<ReqCombatPower>12100</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10806">
+		<NameComment>뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1750</RewardAmount>
+		<ReqCombatPower>16050</ReqCombatPower>
+		<MinLevel>19</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10901">
+		<NameComment>서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>370</RewardAmount>
+		<ReqCombatPower>2500</ReqCombatPower>
+		<MinLevel>7</MinLevel>
+		<MaxLevel>9</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10902">
+		<NameComment>서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>500</RewardAmount>
+		<ReqCombatPower>3850</ReqCombatPower>
+		<MinLevel>9</MinLevel>
+		<MaxLevel>12</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10903">
+		<NameComment>서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>750</RewardAmount>
+		<ReqCombatPower>6500</ReqCombatPower>
+		<MinLevel>13</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10904">
+		<NameComment>서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>980</RewardAmount>
+		<ReqCombatPower>9750</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>18</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10905">
+		<NameComment>서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1480</RewardAmount>
+		<ReqCombatPower>12800</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="10906">
+		<NameComment>서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1850</RewardAmount>
+		<ReqCombatPower>16850</ReqCombatPower>
+		<MinLevel>19</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11001">
+		<NameComment>공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>405</RewardAmount>
+		<ReqCombatPower>2750</ReqCombatPower>
+		<MinLevel>7</MinLevel>
+		<MaxLevel>9</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11002">
+		<NameComment>공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>540</RewardAmount>
+		<ReqCombatPower>4200</ReqCombatPower>
+		<MinLevel>9</MinLevel>
+		<MaxLevel>13</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11003">
+		<NameComment>공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>800</RewardAmount>
+		<ReqCombatPower>7000</ReqCombatPower>
+		<MinLevel>14</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11004">
+		<NameComment>공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1040</RewardAmount>
+		<ReqCombatPower>10400</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>18</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11005">
+		<NameComment>공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1565</RewardAmount>
+		<ReqCombatPower>13500</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11006">
+		<NameComment>공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1950</RewardAmount>
+		<ReqCombatPower>17650</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11101">
+		<NameComment>용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>440</RewardAmount>
+		<ReqCombatPower>3000</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>10</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11102">
+		<NameComment>용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>580</RewardAmount>
+		<ReqCombatPower>4550</ReqCombatPower>
+		<MinLevel>10</MinLevel>
+		<MaxLevel>14</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11103">
+		<NameComment>용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>850</RewardAmount>
+		<ReqCombatPower>7500</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11104">
+		<NameComment>용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1100</RewardAmount>
+		<ReqCombatPower>11050</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>19</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11105">
+		<NameComment>용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1650</RewardAmount>
+		<ReqCombatPower>14200</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11106">
+		<NameComment>용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2050</RewardAmount>
+		<ReqCombatPower>18450</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11201">
+		<NameComment>공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>475</RewardAmount>
+		<ReqCombatPower>3250</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>11</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11202">
+		<NameComment>공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>620</RewardAmount>
+		<ReqCombatPower>4900</ReqCombatPower>
+		<MinLevel>11</MinLevel>
+		<MaxLevel>15</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11203">
+		<NameComment>공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>900</RewardAmount>
+		<ReqCombatPower>8000</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11204">
+		<NameComment>공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1160</RewardAmount>
+		<ReqCombatPower>11700</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11205">
+		<NameComment>공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1735</RewardAmount>
+		<ReqCombatPower>14900</ReqCombatPower>
+		<MinLevel>18</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11206">
+		<NameComment>공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2150</RewardAmount>
+		<ReqCombatPower>19250</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11301">
+		<NameComment>동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>510</RewardAmount>
+		<ReqCombatPower>3500</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>11</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11302">
+		<NameComment>동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>660</RewardAmount>
+		<ReqCombatPower>5250</ReqCombatPower>
+		<MinLevel>11</MinLevel>
+		<MaxLevel>15</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11303">
+		<NameComment>동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>950</RewardAmount>
+		<ReqCombatPower>8500</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11304">
+		<NameComment>동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1220</RewardAmount>
+		<ReqCombatPower>12350</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11305">
+		<NameComment>동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1820</RewardAmount>
+		<ReqCombatPower>15600</ReqCombatPower>
+		<MinLevel>18</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11306">
+		<NameComment>동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2250</RewardAmount>
+		<ReqCombatPower>20050</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11401">
+		<NameComment>중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>545</RewardAmount>
+		<ReqCombatPower>3750</ReqCombatPower>
+		<MinLevel>9</MinLevel>
+		<MaxLevel>12</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11402">
+		<NameComment>중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>700</RewardAmount>
+		<ReqCombatPower>5600</ReqCombatPower>
+		<MinLevel>12</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11403">
+		<NameComment>중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1000</RewardAmount>
+		<ReqCombatPower>9000</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11404">
+		<NameComment>중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1280</RewardAmount>
+		<ReqCombatPower>13000</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11405">
+		<NameComment>중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1905</RewardAmount>
+		<ReqCombatPower>16300</ReqCombatPower>
+		<MinLevel>19</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11406">
+		<NameComment>중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2350</RewardAmount>
+		<ReqCombatPower>20850</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11501">
+		<NameComment>2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>580</RewardAmount>
+		<ReqCombatPower>4000</ReqCombatPower>
+		<MinLevel>9</MinLevel>
+		<MaxLevel>12</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11502">
+		<NameComment>2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>740</RewardAmount>
+		<ReqCombatPower>5950</ReqCombatPower>
+		<MinLevel>12</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11503">
+		<NameComment>2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1050</RewardAmount>
+		<ReqCombatPower>9500</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11504">
+		<NameComment>2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1340</RewardAmount>
+		<ReqCombatPower>13650</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11505">
+		<NameComment>2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1990</RewardAmount>
+		<ReqCombatPower>17000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11506">
+		<NameComment>2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2450</RewardAmount>
+		<ReqCombatPower>21650</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11601">
+		<NameComment>2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>615</RewardAmount>
+		<ReqCombatPower>4250</ReqCombatPower>
+		<MinLevel>9</MinLevel>
+		<MaxLevel>13</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11602">
+		<NameComment>2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>780</RewardAmount>
+		<ReqCombatPower>6300</ReqCombatPower>
+		<MinLevel>13</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11603">
+		<NameComment>2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1100</RewardAmount>
+		<ReqCombatPower>10000</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>18</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11604">
+		<NameComment>2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1400</RewardAmount>
+		<ReqCombatPower>14300</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11605">
+		<NameComment>2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>2075</RewardAmount>
+		<ReqCombatPower>17700</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11606">
+		<NameComment>2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2550</RewardAmount>
+		<ReqCombatPower>22450</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11701">
+		<NameComment>2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>650</RewardAmount>
+		<ReqCombatPower>4500</ReqCombatPower>
+		<MinLevel>10</MinLevel>
+		<MaxLevel>14</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11702">
+		<NameComment>2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>820</RewardAmount>
+		<ReqCombatPower>6650</ReqCombatPower>
+		<MinLevel>13</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11703">
+		<NameComment>2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1150</RewardAmount>
+		<ReqCombatPower>10500</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>19</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11704">
+		<NameComment>2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1460</RewardAmount>
+		<ReqCombatPower>14950</ReqCombatPower>
+		<MinLevel>18</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11705">
+		<NameComment>2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>2160</RewardAmount>
+		<ReqCombatPower>18400</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11706">
+		<NameComment>2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2650</RewardAmount>
+		<ReqCombatPower>23250</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11801">
+		<NameComment>2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>685</RewardAmount>
+		<ReqCombatPower>4750</ReqCombatPower>
+		<MinLevel>10</MinLevel>
+		<MaxLevel>14</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11802">
+		<NameComment>2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>860</RewardAmount>
+		<ReqCombatPower>7000</ReqCombatPower>
+		<MinLevel>14</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11803">
+		<NameComment>2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1200</RewardAmount>
+		<ReqCombatPower>11000</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>19</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11804">
+		<NameComment>2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1520</RewardAmount>
+		<ReqCombatPower>15600</ReqCombatPower>
+		<MinLevel>18</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11805">
+		<NameComment>2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>2245</RewardAmount>
+		<ReqCombatPower>19100</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11806">
+		<NameComment>2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2750</RewardAmount>
+		<ReqCombatPower>24050</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11901">
+		<NameComment>2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>720</RewardAmount>
+		<ReqCombatPower>5000</ReqCombatPower>
+		<MinLevel>11</MinLevel>
+		<MaxLevel>15</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11902">
+		<NameComment>2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>900</RewardAmount>
+		<ReqCombatPower>7350</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11903">
+		<NameComment>2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1250</RewardAmount>
+		<ReqCombatPower>11500</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11904">
+		<NameComment>2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1580</RewardAmount>
+		<ReqCombatPower>16250</ReqCombatPower>
+		<MinLevel>19</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11905">
+		<NameComment>2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>2330</RewardAmount>
+		<ReqCombatPower>19800</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="11906">
+		<NameComment>2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2850</RewardAmount>
+		<ReqCombatPower>24850</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="12001">
+		<NameComment>2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>755</RewardAmount>
+		<ReqCombatPower>5250</ReqCombatPower>
+		<MinLevel>11</MinLevel>
+		<MaxLevel>15</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="12002">
+		<NameComment>2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>940</RewardAmount>
+		<ReqCombatPower>7700</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="12003">
+		<NameComment>2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1300</RewardAmount>
+		<ReqCombatPower>12000</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="12004">
+		<NameComment>2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1640</RewardAmount>
+		<ReqCombatPower>16900</ReqCombatPower>
+		<MinLevel>19</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="12005">
+		<NameComment>2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>2415</RewardAmount>
+		<ReqCombatPower>20500</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="12006">
+		<NameComment>2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>false</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2950</RewardAmount>
+		<ReqCombatPower>25650</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20101">
+		<NameComment>잠식 고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>100</RewardAmount>
+		<ReqCombatPower>800</ReqCombatPower>
+		<MinLevel>3</MinLevel>
+		<MaxLevel>4</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20102">
+		<NameComment>잠식 고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>180</RewardAmount>
+		<ReqCombatPower>1800</ReqCombatPower>
+		<MinLevel>5</MinLevel>
+		<MaxLevel>7</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20103">
+		<NameComment>잠식 고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>350</RewardAmount>
+		<ReqCombatPower>4000</ReqCombatPower>
+		<MinLevel>9</MinLevel>
+		<MaxLevel>12</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20104">
+		<NameComment>잠식 고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>500</RewardAmount>
+		<ReqCombatPower>7000</ReqCombatPower>
+		<MinLevel>14</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20105">
+		<NameComment>잠식 고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>800</RewardAmount>
+		<ReqCombatPower>11000</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>19</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20106">
+		<NameComment>잠식 고블린 임무</NameComment>
+		<Name>HuntingTheme_Name_1</Name>
+		<Sprite>Themes_Units_1</Sprite>
+		<Theme>1</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1050</RewardAmount>
+		<ReqCombatPower>15000</ReqCombatPower>
+		<MinLevel>18</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20201">
+		<NameComment>잠식 도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>135</RewardAmount>
+		<ReqCombatPower>1200</ReqCombatPower>
+		<MinLevel>4</MinLevel>
+		<MaxLevel>5</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20202">
+		<NameComment>잠식 도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>220</RewardAmount>
+		<ReqCombatPower>2400</ReqCombatPower>
+		<MinLevel>7</MinLevel>
+		<MaxLevel>8</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20203">
+		<NameComment>잠식 도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>400</RewardAmount>
+		<ReqCombatPower>4800</ReqCombatPower>
+		<MinLevel>10</MinLevel>
+		<MaxLevel>14</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20204">
+		<NameComment>잠식 도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>560</RewardAmount>
+		<ReqCombatPower>8000</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20205">
+		<NameComment>잠식 도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>885</RewardAmount>
+		<ReqCombatPower>12100</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20206">
+		<NameComment>잠식 도적단 임무</NameComment>
+		<Name>HuntingTheme_Name_2</Name>
+		<Sprite>Themes_Units_2</Sprite>
+		<Theme>2</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1150</RewardAmount>
+		<ReqCombatPower>16200</ReqCombatPower>
+		<MinLevel>19</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20301">
+		<NameComment>잠식 슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>170</RewardAmount>
+		<ReqCombatPower>1600</ReqCombatPower>
+		<MinLevel>5</MinLevel>
+		<MaxLevel>7</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20302">
+		<NameComment>잠식 슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>260</RewardAmount>
+		<ReqCombatPower>3000</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>10</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20303">
+		<NameComment>잠식 슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>450</RewardAmount>
+		<ReqCombatPower>5600</ReqCombatPower>
+		<MinLevel>12</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20304">
+		<NameComment>잠식 슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>620</RewardAmount>
+		<ReqCombatPower>9000</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20305">
+		<NameComment>잠식 슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>970</RewardAmount>
+		<ReqCombatPower>13200</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20306">
+		<NameComment>잠식 슬라임 임무</NameComment>
+		<Name>HuntingTheme_Name_3</Name>
+		<Sprite>Themes_Units_3</Sprite>
+		<Theme>3</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1250</RewardAmount>
+		<ReqCombatPower>17400</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20401">
+		<NameComment>잠식 언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>205</RewardAmount>
+		<ReqCombatPower>2000</ReqCombatPower>
+		<MinLevel>6</MinLevel>
+		<MaxLevel>8</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20402">
+		<NameComment>잠식 언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>300</RewardAmount>
+		<ReqCombatPower>3600</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>11</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20403">
+		<NameComment>잠식 언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>500</RewardAmount>
+		<ReqCombatPower>6400</ReqCombatPower>
+		<MinLevel>13</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20404">
+		<NameComment>잠식 언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>680</RewardAmount>
+		<ReqCombatPower>10000</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>18</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20405">
+		<NameComment>잠식 언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1055</RewardAmount>
+		<ReqCombatPower>14300</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20406">
+		<NameComment>잠식 언데드 임무</NameComment>
+		<Name>HuntingTheme_Name_4</Name>
+		<Sprite>Themes_Units_4</Sprite>
+		<Theme>4</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1350</RewardAmount>
+		<ReqCombatPower>18600</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20501">
+		<NameComment>잠식 엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>240</RewardAmount>
+		<ReqCombatPower>2400</ReqCombatPower>
+		<MinLevel>7</MinLevel>
+		<MaxLevel>8</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20502">
+		<NameComment>잠식 엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>340</RewardAmount>
+		<ReqCombatPower>4200</ReqCombatPower>
+		<MinLevel>9</MinLevel>
+		<MaxLevel>13</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20503">
+		<NameComment>잠식 엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>550</RewardAmount>
+		<ReqCombatPower>7200</ReqCombatPower>
+		<MinLevel>14</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20504">
+		<NameComment>잠식 엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>740</RewardAmount>
+		<ReqCombatPower>11000</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>19</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20505">
+		<NameComment>잠식 엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1140</RewardAmount>
+		<ReqCombatPower>15400</ReqCombatPower>
+		<MinLevel>18</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20506">
+		<NameComment>잠식 엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_5</Name>
+		<Sprite>Themes_Units_5</Sprite>
+		<Theme>5</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1450</RewardAmount>
+		<ReqCombatPower>19800</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20601">
+		<NameComment>잠식 오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>275</RewardAmount>
+		<ReqCombatPower>2800</ReqCombatPower>
+		<MinLevel>7</MinLevel>
+		<MaxLevel>9</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20602">
+		<NameComment>잠식 오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>380</RewardAmount>
+		<ReqCombatPower>4800</ReqCombatPower>
+		<MinLevel>10</MinLevel>
+		<MaxLevel>14</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20603">
+		<NameComment>잠식 오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>600</RewardAmount>
+		<ReqCombatPower>8000</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20604">
+		<NameComment>잠식 오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>800</RewardAmount>
+		<ReqCombatPower>12000</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20605">
+		<NameComment>잠식 오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1225</RewardAmount>
+		<ReqCombatPower>16500</ReqCombatPower>
+		<MinLevel>19</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20606">
+		<NameComment>잠식 오크 임무</NameComment>
+		<Name>HuntingTheme_Name_6</Name>
+		<Sprite>Themes_Units_6</Sprite>
+		<Theme>6</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1550</RewardAmount>
+		<ReqCombatPower>21000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20701">
+		<NameComment>잠식 악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>310</RewardAmount>
+		<ReqCombatPower>3200</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>10</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20702">
+		<NameComment>잠식 악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>420</RewardAmount>
+		<ReqCombatPower>5400</ReqCombatPower>
+		<MinLevel>11</MinLevel>
+		<MaxLevel>15</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20703">
+		<NameComment>잠식 악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>650</RewardAmount>
+		<ReqCombatPower>8800</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20704">
+		<NameComment>잠식 악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>860</RewardAmount>
+		<ReqCombatPower>13000</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20705">
+		<NameComment>잠식 악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1310</RewardAmount>
+		<ReqCombatPower>17600</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20706">
+		<NameComment>잠식 악령 임무</NameComment>
+		<Name>HuntingTheme_Name_7</Name>
+		<Sprite>Themes_Units_7</Sprite>
+		<Theme>7</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1650</RewardAmount>
+		<ReqCombatPower>22200</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20801">
+		<NameComment>잠식 뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>345</RewardAmount>
+		<ReqCombatPower>3600</ReqCombatPower>
+		<MinLevel>8</MinLevel>
+		<MaxLevel>11</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20802">
+		<NameComment>잠식 뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>460</RewardAmount>
+		<ReqCombatPower>6000</ReqCombatPower>
+		<MinLevel>12</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20803">
+		<NameComment>잠식 뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>700</RewardAmount>
+		<ReqCombatPower>9600</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20804">
+		<NameComment>잠식 뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>920</RewardAmount>
+		<ReqCombatPower>14000</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20805">
+		<NameComment>잠식 뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1395</RewardAmount>
+		<ReqCombatPower>18700</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20806">
+		<NameComment>잠식 뱀파이어 임무</NameComment>
+		<Name>HuntingTheme_Name_8</Name>
+		<Sprite>Themes_Units_8</Sprite>
+		<Theme>8</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1750</RewardAmount>
+		<ReqCombatPower>23400</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20901">
+		<NameComment>잠식 서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>370</RewardAmount>
+		<ReqCombatPower>4000</ReqCombatPower>
+		<MinLevel>9</MinLevel>
+		<MaxLevel>12</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20902">
+		<NameComment>잠식 서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>500</RewardAmount>
+		<ReqCombatPower>6600</ReqCombatPower>
+		<MinLevel>13</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20903">
+		<NameComment>잠식 서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>750</RewardAmount>
+		<ReqCombatPower>10400</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>18</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20904">
+		<NameComment>잠식 서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>980</RewardAmount>
+		<ReqCombatPower>15000</ReqCombatPower>
+		<MinLevel>18</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20905">
+		<NameComment>잠식 서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1480</RewardAmount>
+		<ReqCombatPower>19800</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="20906">
+		<NameComment>잠식 서리부족 임무</NameComment>
+		<Name>HuntingTheme_Name_9</Name>
+		<Sprite>Themes_Units_9</Sprite>
+		<Theme>9</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1850</RewardAmount>
+		<ReqCombatPower>24600</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21001">
+		<NameComment>잠식 공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>405</RewardAmount>
+		<ReqCombatPower>4400</ReqCombatPower>
+		<MinLevel>10</MinLevel>
+		<MaxLevel>13</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21002">
+		<NameComment>잠식 공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>540</RewardAmount>
+		<ReqCombatPower>7200</ReqCombatPower>
+		<MinLevel>14</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21003">
+		<NameComment>잠식 공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>800</RewardAmount>
+		<ReqCombatPower>11200</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>19</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21004">
+		<NameComment>잠식 공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1040</RewardAmount>
+		<ReqCombatPower>16000</ReqCombatPower>
+		<MinLevel>19</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21005">
+		<NameComment>잠식 공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1565</RewardAmount>
+		<ReqCombatPower>20900</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21006">
+		<NameComment>잠식 공허 임무</NameComment>
+		<Name>HuntingTheme_Name_10</Name>
+		<Sprite>Themes_Units_10</Sprite>
+		<Theme>10</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>1950</RewardAmount>
+		<ReqCombatPower>25800</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>1</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21101">
+		<NameComment>잠식 용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>440</RewardAmount>
+		<ReqCombatPower>4800</ReqCombatPower>
+		<MinLevel>10</MinLevel>
+		<MaxLevel>14</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21102">
+		<NameComment>잠식 용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>580</RewardAmount>
+		<ReqCombatPower>7800</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21103">
+		<NameComment>잠식 용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>850</RewardAmount>
+		<ReqCombatPower>12000</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21104">
+		<NameComment>잠식 용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1100</RewardAmount>
+		<ReqCombatPower>17000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21105">
+		<NameComment>잠식 용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1650</RewardAmount>
+		<ReqCombatPower>22000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21106">
+		<NameComment>잠식 용살단 임무</NameComment>
+		<Name>HuntingTheme_Name_11</Name>
+		<Sprite>Themes_Units_11</Sprite>
+		<Theme>11</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2050</RewardAmount>
+		<ReqCombatPower>27000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21201">
+		<NameComment>잠식 공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>475</RewardAmount>
+		<ReqCombatPower>5200</ReqCombatPower>
+		<MinLevel>11</MinLevel>
+		<MaxLevel>15</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21202">
+		<NameComment>잠식 공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>620</RewardAmount>
+		<ReqCombatPower>8400</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21203">
+		<NameComment>잠식 공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>900</RewardAmount>
+		<ReqCombatPower>12800</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21204">
+		<NameComment>잠식 공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1160</RewardAmount>
+		<ReqCombatPower>18000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21205">
+		<NameComment>잠식 공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1735</RewardAmount>
+		<ReqCombatPower>23100</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21206">
+		<NameComment>잠식 공허엘프 임무</NameComment>
+		<Name>HuntingTheme_Name_12</Name>
+		<Sprite>Themes_Units_12</Sprite>
+		<Theme>12</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2150</RewardAmount>
+		<ReqCombatPower>28200</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21301">
+		<NameComment>잠식 동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>510</RewardAmount>
+		<ReqCombatPower>5600</ReqCombatPower>
+		<MinLevel>12</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21302">
+		<NameComment>잠식 동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>660</RewardAmount>
+		<ReqCombatPower>9000</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21303">
+		<NameComment>잠식 동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>950</RewardAmount>
+		<ReqCombatPower>13600</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21304">
+		<NameComment>잠식 동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1220</RewardAmount>
+		<ReqCombatPower>19000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21305">
+		<NameComment>잠식 동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1820</RewardAmount>
+		<ReqCombatPower>24200</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21306">
+		<NameComment>잠식 동부군 임무</NameComment>
+		<Name>HuntingTheme_Name_13</Name>
+		<Sprite>Themes_Units_13</Sprite>
+		<Theme>13</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2250</RewardAmount>
+		<ReqCombatPower>29400</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21401">
+		<NameComment>잠식 중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>545</RewardAmount>
+		<ReqCombatPower>6000</ReqCombatPower>
+		<MinLevel>12</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21402">
+		<NameComment>잠식 중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>700</RewardAmount>
+		<ReqCombatPower>9600</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21403">
+		<NameComment>잠식 중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1000</RewardAmount>
+		<ReqCombatPower>14400</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21404">
+		<NameComment>잠식 중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1280</RewardAmount>
+		<ReqCombatPower>20000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21405">
+		<NameComment>잠식 중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1905</RewardAmount>
+		<ReqCombatPower>25300</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21406">
+		<NameComment>잠식 중부 기사단 임무</NameComment>
+		<Name>HuntingTheme_Name_14</Name>
+		<Sprite>Themes_Units_14</Sprite>
+		<Theme>14</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2350</RewardAmount>
+		<ReqCombatPower>30600</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21501">
+		<NameComment>잠식 2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>580</RewardAmount>
+		<ReqCombatPower>6400</ReqCombatPower>
+		<MinLevel>13</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21502">
+		<NameComment>잠식 2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>740</RewardAmount>
+		<ReqCombatPower>10200</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>18</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21503">
+		<NameComment>잠식 2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1050</RewardAmount>
+		<ReqCombatPower>15200</ReqCombatPower>
+		<MinLevel>18</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21504">
+		<NameComment>잠식 2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1340</RewardAmount>
+		<ReqCombatPower>21000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21505">
+		<NameComment>잠식 2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>1990</RewardAmount>
+		<ReqCombatPower>26400</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21506">
+		<NameComment>잠식 2-5이름 임무</NameComment>
+		<Name>HuntingTheme_Name_15</Name>
+		<Sprite>Themes_Units_15</Sprite>
+		<Theme>15</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2450</RewardAmount>
+		<ReqCombatPower>31800</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21601">
+		<NameComment>잠식 2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>615</RewardAmount>
+		<ReqCombatPower>6800</ReqCombatPower>
+		<MinLevel>14</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21602">
+		<NameComment>잠식 2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>780</RewardAmount>
+		<ReqCombatPower>10800</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>19</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21603">
+		<NameComment>잠식 2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1100</RewardAmount>
+		<ReqCombatPower>16000</ReqCombatPower>
+		<MinLevel>19</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21604">
+		<NameComment>잠식 2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1400</RewardAmount>
+		<ReqCombatPower>22000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21605">
+		<NameComment>잠식 2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>2075</RewardAmount>
+		<ReqCombatPower>27500</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21606">
+		<NameComment>잠식 2-6이름 임무</NameComment>
+		<Name>HuntingTheme_Name_16</Name>
+		<Sprite>Themes_Units_16</Sprite>
+		<Theme>16</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2550</RewardAmount>
+		<ReqCombatPower>33000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21701">
+		<NameComment>잠식 2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>650</RewardAmount>
+		<ReqCombatPower>7200</ReqCombatPower>
+		<MinLevel>14</MinLevel>
+		<MaxLevel>16</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21702">
+		<NameComment>잠식 2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>820</RewardAmount>
+		<ReqCombatPower>11400</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21703">
+		<NameComment>잠식 2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1150</RewardAmount>
+		<ReqCombatPower>16800</ReqCombatPower>
+		<MinLevel>19</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21704">
+		<NameComment>잠식 2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1460</RewardAmount>
+		<ReqCombatPower>23000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21705">
+		<NameComment>잠식 2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>2160</RewardAmount>
+		<ReqCombatPower>28600</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21706">
+		<NameComment>잠식 2-7이름 임무</NameComment>
+		<Name>HuntingTheme_Name_17</Name>
+		<Sprite>Themes_Units_17</Sprite>
+		<Theme>17</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2650</RewardAmount>
+		<ReqCombatPower>34200</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21801">
+		<NameComment>잠식 2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>685</RewardAmount>
+		<ReqCombatPower>7600</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21802">
+		<NameComment>잠식 2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>860</RewardAmount>
+		<ReqCombatPower>12000</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21803">
+		<NameComment>잠식 2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1200</RewardAmount>
+		<ReqCombatPower>17600</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21804">
+		<NameComment>잠식 2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1520</RewardAmount>
+		<ReqCombatPower>24000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21805">
+		<NameComment>잠식 2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>2245</RewardAmount>
+		<ReqCombatPower>29700</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21806">
+		<NameComment>잠식 2-8이름 임무</NameComment>
+		<Name>HuntingTheme_Name_18</Name>
+		<Sprite>Themes_Units_18</Sprite>
+		<Theme>18</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2750</RewardAmount>
+		<ReqCombatPower>35400</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21901">
+		<NameComment>잠식 2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>720</RewardAmount>
+		<ReqCombatPower>8000</ReqCombatPower>
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21902">
+		<NameComment>잠식 2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>900</RewardAmount>
+		<ReqCombatPower>12600</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21903">
+		<NameComment>잠식 2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1250</RewardAmount>
+		<ReqCombatPower>18400</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21904">
+		<NameComment>잠식 2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1580</RewardAmount>
+		<ReqCombatPower>25000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21905">
+		<NameComment>잠식 2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>2330</RewardAmount>
+		<ReqCombatPower>30800</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="21906">
+		<NameComment>잠식 2-9이름 임무</NameComment>
+		<Name>HuntingTheme_Name_19</Name>
+		<Sprite>Themes_Units_19</Sprite>
+		<Theme>19</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2850</RewardAmount>
+		<ReqCombatPower>36600</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="22001">
+		<NameComment>잠식 2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>1</Difficulty>
+		<RewardAmount>755</RewardAmount>
+		<ReqCombatPower>8400</ReqCombatPower>
+		<MinLevel>16</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="22002">
+		<NameComment>잠식 2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>2</Difficulty>
+		<RewardAmount>940</RewardAmount>
+		<ReqCombatPower>13200</ReqCombatPower>
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="22003">
+		<NameComment>잠식 2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>3</Difficulty>
+		<RewardAmount>1300</RewardAmount>
+		<ReqCombatPower>19200</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="22004">
+		<NameComment>잠식 2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>4</Difficulty>
+		<RewardAmount>1640</RewardAmount>
+		<ReqCombatPower>26000</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="22005">
+		<NameComment>잠식 2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>5</Difficulty>
+		<RewardAmount>2415</RewardAmount>
+		<ReqCombatPower>31900</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+	<TerritoryHunting ID="22006">
+		<NameComment>잠식 2-10이름 임무</NameComment>
+		<Name>HuntingTheme_Name_20</Name>
+		<Sprite>Themes_Units_20</Sprite>
+		<Theme>20</Theme>
+		<HardMode>true</HardMode>
+		<Difficulty>6</Difficulty>
+		<RewardAmount>2950</RewardAmount>
+		<ReqCombatPower>37800</ReqCombatPower>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<ReqHeroCount>4</ReqHeroCount>
+		<ThemeSeason>2</ThemeSeason>
+	</TerritoryHunting>
+
+
+	<!-- 2025-12-17 영지 개편 이후 신규 조사단 -->
+	<TerritoryHunting ID="30101">
+		<NameComment>습격 I-1(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>1</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>50</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30102">
+		<NameComment>습격 I-1(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>1</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>91</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30103">
+		<NameComment>습격 I-1(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>1</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>176</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30104">
+		<NameComment>습격 I-1(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>1</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>252</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30105">
+		<NameComment>습격 I-1(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>1</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>404</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="30201">
+		<NameComment>습격 I-2(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>2</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>60</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30202">
+		<NameComment>습격 I-2(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>2</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>111</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30203">
+		<NameComment>습격 I-2(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>2</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>202</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30204">
+		<NameComment>습격 I-2(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>2</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>283</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30205">
+		<NameComment>습격 I-2(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>2</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>447</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="30301">
+		<NameComment>습격 I-3(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>3</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>85</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30302">
+		<NameComment>습격 I-3(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>3</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>131</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30303">
+		<NameComment>습격 I-3(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>3</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>227</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30304">
+		<NameComment>습격 I-3(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>3</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>313</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30305">
+		<NameComment>습격 I-3(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>3</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>490</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="30401">
+		<NameComment>습격 I-4(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>4</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>103</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30402">
+		<NameComment>습격 I-4(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>4</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>151</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30403">
+		<NameComment>습격 I-4(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>4</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>252</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30404">
+		<NameComment>습격 I-4(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>4</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>343</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30405">
+		<NameComment>습격 I-4(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>4</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>533</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="30501">
+		<NameComment>습격 I-5(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>5</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>121</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30502">
+		<NameComment>습격 I-5(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>5</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>171</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30503">
+		<NameComment>습격 I-5(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>5</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>278</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30504">
+		<NameComment>습격 I-5(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>5</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>374</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30505">
+		<NameComment>습격 I-5(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>5</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>576</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="30601">
+		<NameComment>습격 I-6(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>6</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>139</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30602">
+		<NameComment>습격 I-6(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>6</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>192</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30603">
+		<NameComment>습격 I-6(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>6</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>303</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30604">
+		<NameComment>습격 I-6(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>6</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>404</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30605">
+		<NameComment>습격 I-6(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>6</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>619</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="30701">
+		<NameComment>습격 I-7(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>7</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>156</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30702">
+		<NameComment>습격 I-7(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>7</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>212</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30703">
+		<NameComment>습격 I-7(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>7</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>328</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30704">
+		<NameComment>습격 I-7(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>7</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>434</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30705">
+		<NameComment>습격 I-7(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>7</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>662</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="30801">
+		<NameComment>습격 I-8(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>8</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>174</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30802">
+		<NameComment>습격 I-8(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>8</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>232</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30803">
+		<NameComment>습격 I-8(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>8</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>353</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30804">
+		<NameComment>습격 I-8(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>8</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>465</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30805">
+		<NameComment>습격 I-8(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>8</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>705</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="30901">
+		<NameComment>습격 I-9(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>9</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>187</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30902">
+		<NameComment>습격 I-9(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>9</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>252</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30903">
+		<NameComment>습격 I-9(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>9</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>379</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30904">
+		<NameComment>습격 I-9(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>9</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>495</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="30905">
+		<NameComment>습격 I-9(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>9</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>748</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="31001">
+		<NameComment>습격 I-10(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>10</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>204</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31002">
+		<NameComment>습격 I-10(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>10</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>273</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31003">
+		<NameComment>습격 I-10(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>10</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>404</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31004">
+		<NameComment>습격 I-10(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>10</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>525</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31005">
+		<NameComment>습격 I-10(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>10</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<AlchemyStone>791</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="31101">
+		<NameComment>습격 II-1(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>11</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>222</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31102">
+		<NameComment>습격 II-1(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>11</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>293</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31103">
+		<NameComment>습격 II-1(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>11</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>429</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31104">
+		<NameComment>습격 II-1(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>11</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>556</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31105">
+		<NameComment>습격 II-1(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>11</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>834</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="31201">
+		<NameComment>습격 II-2(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>12</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>240</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31202">
+		<NameComment>습격 II-2(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>12</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>313</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31203">
+		<NameComment>습격 II-2(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>12</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>455</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31204">
+		<NameComment>습격 II-2(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>12</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>586</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31205">
+		<NameComment>습격 II-2(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>12</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>877</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="31301">
+		<NameComment>습격 II-3(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>13</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>257</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31302">
+		<NameComment>습격 II-3(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>13</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>333</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31303">
+		<NameComment>습격 II-3(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>13</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>480</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31304">
+		<NameComment>습격 II-3(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>13</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>616</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31305">
+		<NameComment>습격 II-3(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>13</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>920</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="31401">
+		<NameComment>습격 II-4(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>14</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>275</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31402">
+		<NameComment>습격 II-4(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>14</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>353</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31403">
+		<NameComment>습격 II-4(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>14</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>505</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31404">
+		<NameComment>습격 II-4(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>14</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>647</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31405">
+		<NameComment>습격 II-4(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>14</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>963</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="31501">
+		<NameComment>습격 II-5(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>15</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>293</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31502">
+		<NameComment>습격 II-5(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>15</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>374</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31503">
+		<NameComment>습격 II-5(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>15</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>530</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31504">
+		<NameComment>습격 II-5(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>15</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>677</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31505">
+		<NameComment>습격 II-5(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>15</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>1006</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="31601">
+		<NameComment>습격 II-6(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>16</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>311</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31602">
+		<NameComment>습격 II-6(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>16</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>394</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31603">
+		<NameComment>습격 II-6(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>16</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>556</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31604">
+		<NameComment>습격 II-6(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>16</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>707</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31605">
+		<NameComment>습격 II-6(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>16</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>1049</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="31701">
+		<NameComment>습격 II-7(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>17</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>328</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31702">
+		<NameComment>습격 II-7(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>17</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>414</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31703">
+		<NameComment>습격 II-7(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>17</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>581</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31704">
+		<NameComment>습격 II-7(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>17</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>738</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31705">
+		<NameComment>습격 II-7(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>17</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>1092</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="31801">
+		<NameComment>습격 II-8(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>18</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>346</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31802">
+		<NameComment>습격 II-8(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>18</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>434</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31803">
+		<NameComment>습격 II-8(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>18</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>606</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31804">
+		<NameComment>습격 II-8(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>18</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>768</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31805">
+		<NameComment>습격 II-8(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>18</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>1135</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="31901">
+		<NameComment>습격 II-9(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>19</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>364</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31902">
+		<NameComment>습격 II-9(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>19</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>455</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31903">
+		<NameComment>습격 II-9(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>19</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>632</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31904">
+		<NameComment>습격 II-9(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>19</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>799</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="31905">
+		<NameComment>습격 II-9(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>19</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>1178</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="32001">
+		<NameComment>습격 II-10(쉬움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>20</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>381</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="32002">
+		<NameComment>습격 II-10(보통)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>20</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>475</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="32003">
+		<NameComment>습격 II-10(어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>20</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>657</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="32004">
+		<NameComment>습격 II-10(매우 어려움)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>20</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>829</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="32005">
+		<NameComment>습격 II-10(킹)</NameComment>
+		<Mode>Invasion</Mode>
+		<MainReward Type='Gold' />
+		<Theme>20</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<AlchemyStone>1221</AlchemyStone>
+	</TerritoryHunting>
+
+	<!-- 잠식 -->
+	<TerritoryHunting ID="40101">
+		<NameComment>[잠식]습격 I-1(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>51</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>42</HardModeToken>
+		<AlchemyStone>50</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40102">
+		<NameComment>[잠식]습격 I-1(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>51</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>53</HardModeToken>
+		<AlchemyStone>91</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40103">
+		<NameComment>[잠식]습격 I-1(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>51</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>55</HardModeToken>
+		<AlchemyStone>176</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40104">
+		<NameComment>[잠식]습격 I-1(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>51</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>59</HardModeToken>
+		<AlchemyStone>252</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40105">
+		<NameComment>[잠식]습격 I-1(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>51</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>63</HardModeToken>
+		<AlchemyStone>404</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="40201">
+		<NameComment>[잠식]습격 I-2(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>52</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>42</HardModeToken>
+		<AlchemyStone>60</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40202">
+		<NameComment>[잠식]습격 I-2(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>52</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>55</HardModeToken>
+		<AlchemyStone>111</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40203">
+		<NameComment>[잠식]습격 I-2(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>52</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>57</HardModeToken>
+		<AlchemyStone>202</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40204">
+		<NameComment>[잠식]습격 I-2(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>52</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>62</HardModeToken>
+		<AlchemyStone>283</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40205">
+		<NameComment>[잠식]습격 I-2(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>52</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>67</HardModeToken>
+		<AlchemyStone>447</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="40301">
+		<NameComment>[잠식]습격 I-3(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>53</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>42</HardModeToken>
+		<AlchemyStone>85</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40302">
+		<NameComment>[잠식]습격 I-3(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>53</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>56</HardModeToken>
+		<AlchemyStone>131</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40303">
+		<NameComment>[잠식]습격 I-3(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>53</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>59</HardModeToken>
+		<AlchemyStone>227</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40304">
+		<NameComment>[잠식]습격 I-3(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>53</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>64</HardModeToken>
+		<AlchemyStone>313</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40305">
+		<NameComment>[잠식]습격 I-3(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>53</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>70</HardModeToken>
+		<AlchemyStone>490</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="40401">
+		<NameComment>[잠식]습격 I-4(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>54</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>70</HardModeToken>
+		<AlchemyStone>103</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40402">
+		<NameComment>[잠식]습격 I-4(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>54</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>85</HardModeToken>
+		<AlchemyStone>151</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40403">
+		<NameComment>[잠식]습격 I-4(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>54</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>90</HardModeToken>
+		<AlchemyStone>252</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40404">
+		<NameComment>[잠식]습격 I-4(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>54</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>95</HardModeToken>
+		<AlchemyStone>343</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40405">
+		<NameComment>[잠식]습격 I-4(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>54</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>102</HardModeToken>
+		<AlchemyStone>533</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="40501">
+		<NameComment>[잠식]습격 I-5(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>55</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>70</HardModeToken>
+		<AlchemyStone>121</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40502">
+		<NameComment>[잠식]습격 I-5(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>55</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>88</HardModeToken>
+		<AlchemyStone>171</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40503">
+		<NameComment>[잠식]습격 I-5(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>55</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>92</HardModeToken>
+		<AlchemyStone>278</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40504">
+		<NameComment>[잠식]습격 I-5(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>55</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>100</HardModeToken>
+		<AlchemyStone>374</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40505">
+		<NameComment>[잠식]습격 I-5(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>55</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>106</HardModeToken>
+		<AlchemyStone>576</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="40601">
+		<NameComment>[잠식]습격 I-6(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>56</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>70</HardModeToken>
+		<AlchemyStone>139</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40602">
+		<NameComment>[잠식]습격 I-6(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>56</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>91</HardModeToken>
+		<AlchemyStone>192</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40603">
+		<NameComment>[잠식]습격 I-6(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>56</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>95</HardModeToken>
+		<AlchemyStone>303</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40604">
+		<NameComment>[잠식]습격 I-6(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>56</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>104</HardModeToken>
+		<AlchemyStone>404</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40605">
+		<NameComment>[잠식]습격 I-6(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>56</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>112</HardModeToken>
+		<AlchemyStone>619</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="40701">
+		<NameComment>[잠식]습격 I-7(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>57</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>98</HardModeToken>
+		<AlchemyStone>156</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40702">
+		<NameComment>[잠식]습격 I-7(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>57</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>118</HardModeToken>
+		<AlchemyStone>212</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40703">
+		<NameComment>[잠식]습격 I-7(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>57</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>126</HardModeToken>
+		<AlchemyStone>328</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40704">
+		<NameComment>[잠식]습격 I-7(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>57</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>138</HardModeToken>
+		<AlchemyStone>434</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40705">
+		<NameComment>[잠식]습격 I-7(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>57</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>146</HardModeToken>
+		<AlchemyStone>662</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="40801">
+		<NameComment>[잠식]습격 I-8(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>58</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>98</HardModeToken>
+		<AlchemyStone>174</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40802">
+		<NameComment>[잠식]습격 I-8(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>58</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>125</HardModeToken>
+		<AlchemyStone>232</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40803">
+		<NameComment>[잠식]습격 I-8(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>58</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>130</HardModeToken>
+		<AlchemyStone>353</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40804">
+		<NameComment>[잠식]습격 I-8(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>58</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>140</HardModeToken>
+		<AlchemyStone>465</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40805">
+		<NameComment>[잠식]습격 I-8(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>58</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>151</HardModeToken>
+		<AlchemyStone>705</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="40901">
+		<NameComment>[잠식]습격 I-9(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>59</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>98</HardModeToken>
+		<AlchemyStone>187</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40902">
+		<NameComment>[잠식]습격 I-9(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>59</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>127</HardModeToken>
+		<AlchemyStone>252</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40903">
+		<NameComment>[잠식]습격 I-9(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>59</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>133</HardModeToken>
+		<AlchemyStone>379</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40904">
+		<NameComment>[잠식]습격 I-9(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>59</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>144</HardModeToken>
+		<AlchemyStone>495</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="40905">
+		<NameComment>[잠식]습격 I-9(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>59</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>155</HardModeToken>
+		<AlchemyStone>748</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="41001">
+		<NameComment>[잠식]습격 I-10(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>60</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>126</HardModeToken>
+		<AlchemyStone>204</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41002">
+		<NameComment>[잠식]습격 I-10(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>60</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>158</HardModeToken>
+		<AlchemyStone>273</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41003">
+		<NameComment>[잠식]습격 I-10(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>60</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>164</HardModeToken>
+		<AlchemyStone>404</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41004">
+		<NameComment>[잠식]습격 I-10(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>60</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>176</HardModeToken>
+		<AlchemyStone>525</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41005">
+		<NameComment>[잠식]습격 I-10(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken' />
+		<Theme>60</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>1</ThemeSeason>
+		<HardModeToken>189</HardModeToken>
+		<AlchemyStone>791</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="41101">
+		<NameComment>[잠식]습격 II-1(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>61</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>45</HardModeToken>
+		<AlchemyStone>222</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41102">
+		<NameComment>[잠식]습격 II-1(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>61</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>63</HardModeToken>
+		<AlchemyStone>293</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41103">
+		<NameComment>[잠식]습격 II-1(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>61</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>77</HardModeToken>
+		<AlchemyStone>429</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41104">
+		<NameComment>[잠식]습격 II-1(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>61</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>98</HardModeToken>
+		<AlchemyStone>556</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41105">
+		<NameComment>[잠식]습격 II-1(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>61</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>119</HardModeToken>
+		<AlchemyStone>834</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="41201">
+		<NameComment>[잠식]습격 II-2(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>62</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>45</HardModeToken>
+		<AlchemyStone>240</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41202">
+		<NameComment>[잠식]습격 II-2(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>62</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>66</HardModeToken>
+		<AlchemyStone>313</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41203">
+		<NameComment>[잠식]습격 II-2(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>62</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>80</HardModeToken>
+		<AlchemyStone>455</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41204">
+		<NameComment>[잠식]습격 II-2(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>62</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>102</HardModeToken>
+		<AlchemyStone>586</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41205">
+		<NameComment>[잠식]습격 II-2(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>62</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>125</HardModeToken>
+		<AlchemyStone>877</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="41301">
+		<NameComment>[잠식]습격 II-3(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>63</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>45</HardModeToken>
+		<AlchemyStone>257</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41302">
+		<NameComment>[잠식]습격 II-3(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>63</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>69</HardModeToken>
+		<AlchemyStone>333</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41303">
+		<NameComment>[잠식]습격 II-3(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>63</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>83</HardModeToken>
+		<AlchemyStone>480</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41304">
+		<NameComment>[잠식]습격 II-3(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>63</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>106</HardModeToken>
+		<AlchemyStone>616</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41305">
+		<NameComment>[잠식]습격 II-3(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>63</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>130</HardModeToken>
+		<AlchemyStone>920</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="41401">
+		<NameComment>[잠식]습격 II-4(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>64</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>45</HardModeToken>
+		<AlchemyStone>275</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41402">
+		<NameComment>[잠식]습격 II-4(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>64</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>71</HardModeToken>
+		<AlchemyStone>353</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41403">
+		<NameComment>[잠식]습격 II-4(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>64</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>87</HardModeToken>
+		<AlchemyStone>505</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41404">
+		<NameComment>[잠식]습격 II-4(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>64</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>112</HardModeToken>
+		<AlchemyStone>647</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41405">
+		<NameComment>[잠식]습격 II-4(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>64</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>136</HardModeToken>
+		<AlchemyStone>963</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="41501">
+		<NameComment>[잠식]습격 II-5(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>65</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>45</HardModeToken>
+		<AlchemyStone>293</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41502">
+		<NameComment>[잠식]습격 II-5(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>65</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>76</HardModeToken>
+		<AlchemyStone>374</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41503">
+		<NameComment>[잠식]습격 II-5(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>65</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>91</HardModeToken>
+		<AlchemyStone>530</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41504">
+		<NameComment>[잠식]습격 II-5(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>65</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>118</HardModeToken>
+		<AlchemyStone>677</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41505">
+		<NameComment>[잠식]습격 II-5(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>65</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>143</HardModeToken>
+		<AlchemyStone>1006</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="41601">
+		<NameComment>[잠식]습격 II-6(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>66</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>45</HardModeToken>
+		<AlchemyStone>311</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41602">
+		<NameComment>[잠식]습격 II-6(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>66</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>78</HardModeToken>
+		<AlchemyStone>394</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41603">
+		<NameComment>[잠식]습격 II-6(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>66</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>95</HardModeToken>
+		<AlchemyStone>556</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41604">
+		<NameComment>[잠식]습격 II-6(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>66</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>125</HardModeToken>
+		<AlchemyStone>707</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41605">
+		<NameComment>[잠식]습격 II-6(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>66</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>150</HardModeToken>
+		<AlchemyStone>1049</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="41701">
+		<NameComment>[잠식]습격 II-7(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>67</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>45</HardModeToken>
+		<AlchemyStone>328</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41702">
+		<NameComment>[잠식]습격 II-7(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>67</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>81</HardModeToken>
+		<AlchemyStone>414</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41703">
+		<NameComment>[잠식]습격 II-7(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>67</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>100</HardModeToken>
+		<AlchemyStone>581</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41704">
+		<NameComment>[잠식]습격 II-7(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>67</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>127</HardModeToken>
+		<AlchemyStone>738</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41705">
+		<NameComment>[잠식]습격 II-7(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>67</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>157</HardModeToken>
+		<AlchemyStone>1092</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="41801">
+		<NameComment>[잠식]습격 II-8(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>68</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>45</HardModeToken>
+		<AlchemyStone>346</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41802">
+		<NameComment>[잠식]습격 II-8(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>68</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>85</HardModeToken>
+		<AlchemyStone>434</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41803">
+		<NameComment>[잠식]습격 II-8(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>68</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>104</HardModeToken>
+		<AlchemyStone>606</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41804">
+		<NameComment>[잠식]습격 II-8(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>68</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>133</HardModeToken>
+		<AlchemyStone>768</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41805">
+		<NameComment>[잠식]습격 II-8(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>68</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>164</HardModeToken>
+		<AlchemyStone>1135</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="41901">
+		<NameComment>[잠식]습격 II-9(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>69</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>45</HardModeToken>
+		<AlchemyStone>364</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41902">
+		<NameComment>[잠식]습격 II-9(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>69</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>88</HardModeToken>
+		<AlchemyStone>455</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41903">
+		<NameComment>[잠식]습격 II-9(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>69</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>108</HardModeToken>
+		<AlchemyStone>632</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41904">
+		<NameComment>[잠식]습격 II-9(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>69</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>139</HardModeToken>
+		<AlchemyStone>799</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="41905">
+		<NameComment>[잠식]습격 II-9(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>69</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>171</HardModeToken>
+		<AlchemyStone>1178</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="42001">
+		<NameComment>[잠식]습격 II-10(쉬움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>70</Theme>
+		<Difficulty>1</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>45</HardModeToken>
+		<AlchemyStone>381</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="42002">
+		<NameComment>[잠식]습격 II-10(보통)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>70</Theme>
+		<Difficulty>2</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>91</HardModeToken>
+		<AlchemyStone>475</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="42003">
+		<NameComment>[잠식]습격 II-10(어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>70</Theme>
+		<Difficulty>3</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>112</HardModeToken>
+		<AlchemyStone>657</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="42004">
+		<NameComment>[잠식]습격 II-10(매우 어려움)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>70</Theme>
+		<Difficulty>4</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>144</HardModeToken>
+		<AlchemyStone>829</AlchemyStone>
+	</TerritoryHunting>
+	<TerritoryHunting ID="42005">
+		<NameComment>[잠식]습격 II-10(킹)</NameComment>
+		<Mode>HardMode</Mode>
+		<MainReward Type='HardModeToken2' />
+		<Theme>70</Theme>
+		<Difficulty>5</Difficulty>
+		<ThemeSeason>2</ThemeSeason>
+		<HardModeToken>178</HardModeToken>
+		<AlchemyStone>1221</AlchemyStone>
+	</TerritoryHunting>
+
+	<TerritoryHunting ID="50000">
+		<NameComment>차원의 균열 0단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>0</Difficulty>
+		<Gold>825</Gold>
+		<Exp>434</Exp>
+		<AlchemyStone>222</AlchemyStone>
+		<RiftWeaponDust>114</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50001">
+		<NameComment>차원의 균열 1단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>1</Difficulty>
+		<Gold>1002</Gold>
+		<Exp>525</Exp>
+		<AlchemyStone>257</AlchemyStone>
+		<RiftWeaponDust>134</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50002">
+		<NameComment>차원의 균열 2단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>2</Difficulty>
+		<Gold>1179</Gold>
+		<Exp>630</Exp>
+		<AlchemyStone>293</AlchemyStone>
+		<RiftWeaponDust>155</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50003">
+		<NameComment>차원의 균열 3단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>3</Difficulty>
+		<Gold>1356</Gold>
+		<Exp>756</Exp>
+		<AlchemyStone>328</AlchemyStone>
+		<RiftWeaponDust>174</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50004">
+		<NameComment>차원의 균열 4단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>4</Difficulty>
+		<Gold>1533</Gold>
+		<Exp>910</Exp>
+		<AlchemyStone>364</AlchemyStone>
+		<RiftWeaponDust>193</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50005">
+		<NameComment>차원의 균열 5단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>5</Difficulty>
+		<Gold>1710</Gold>
+		<Exp>1086</Exp>
+		<AlchemyStone>429</AlchemyStone>
+		<RiftWeaponDust>213</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50006">
+		<NameComment>차원의 균열 6단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>6</Difficulty>
+		<Gold>1887</Gold>
+		<Exp>1218</Exp>
+		<AlchemyStone>480</AlchemyStone>
+		<RiftWeaponDust>234</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50007">
+		<NameComment>차원의 균열 7단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>7</Difficulty>
+		<Gold>2064</Gold>
+		<Exp>1260</Exp>
+		<AlchemyStone>530</AlchemyStone>
+		<RiftWeaponDust>255</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50008">
+		<NameComment>차원의 균열 8단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>8</Difficulty>
+		<Gold>2241</Gold>
+		<Exp>1302</Exp>
+		<AlchemyStone>581</AlchemyStone>
+		<RiftWeaponDust>281</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50009">
+		<NameComment>차원의 균열 9단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>9</Difficulty>
+		<Gold>2418</Gold>
+		<Exp>1344</Exp>
+		<AlchemyStone>632</AlchemyStone>
+		<RiftWeaponDust>306</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50010">
+		<NameComment>차원의 균열 10단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>10</Difficulty>
+		<Gold>2595</Gold>
+		<Exp>1386</Exp>
+		<AlchemyStone>834</AlchemyStone>
+		<RiftWeaponDust>331</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50011">
+		<NameComment>차원의 균열 11단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>11</Difficulty>
+		<Gold>2772</Gold>
+		<Exp>1428</Exp>
+		<AlchemyStone>920</AlchemyStone>
+		<RiftWeaponDust>357</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50012">
+		<NameComment>차원의 균열 12단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>12</Difficulty>
+		<Gold>2949</Gold>
+		<Exp>1449</Exp>
+		<AlchemyStone>1006</AlchemyStone>
+		<RiftWeaponDust>381</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50013">
+		<NameComment>차원의 균열 13단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>13</Difficulty>
+		<Gold>3126</Gold>
+		<Exp>1470</Exp>
+		<AlchemyStone>1092</AlchemyStone>
+		<RiftWeaponDust>406</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50014">
+		<NameComment>차원의 균열 14단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>14</Difficulty>
+		<Gold>3303</Gold>
+		<Exp>1512</Exp>
+		<AlchemyStone>1178</AlchemyStone>
+		<RiftWeaponDust>430</RiftWeaponDust>
+	</TerritoryHunting>
+	<TerritoryHunting ID="50015">
+		<NameComment>차원의 균열 15단계</NameComment>
+		<Mode>DimensionRift</Mode>
+		<MainReward Type='RiftWeaponDust' />
+		<Theme>2100</Theme>
+		<Difficulty>15</Difficulty>
+		<Gold>3480</Gold>
+		<Exp>1534</Exp>
+		<AlchemyStone>1221</AlchemyStone>
+		<RiftWeaponDust>455</RiftWeaponDust>
+	</TerritoryHunting>
+</TerritoryHuntings>

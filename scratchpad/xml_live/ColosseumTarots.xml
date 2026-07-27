@@ -1,0 +1,568 @@
+<ColosseumTarots>
+	<ColosseumTarot ID="10000">
+		<Comment>바보</Comment>
+		<DescComment>현재 보유한 은화 3당 1은화 감소</DescComment>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter/>
+			</Conditions>
+
+			<Actions>
+				<AddGold/>
+			</Actions>
+
+			<Values>
+				<OwnGold>-33</OwnGold>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="10010">
+		<Comment>마술사</Comment>
+		<DescComment>현재 보유한 은화 2당 1은화 획득</DescComment>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter/>
+			</Conditions>
+
+			<Actions>
+				<AddGold/>
+			</Actions>
+
+			<Values>
+				<OwnGold>50</OwnGold>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="10020">
+		<Comment>여교황</Comment>
+		<DescComment>다음 3라운드간 방어에 실패해 깃발을 잃으면 30은화 획득</DescComment>
+		<DescParams>
+			<Attribute Name="Value" BaseValue="0">./WorldTriggers[2]/Conditions/TriggerCount</Attribute>
+			<InnerText>./WorldTriggers[3]/Values/FixedValue</InnerText>
+		</DescParams>
+		
+		<WorldTriggers>
+			<Conditions>
+				<StageStart/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10020"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+		 <WorldTriggers>
+			<Conditions>
+				<TriggerCount Value="3"/>
+				<StageStart/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10020"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<OverStack StackName="Stack_Tarot_10020" Value="0"/>
+				<BattleLose/>
+			</Conditions>
+
+			<Actions>
+				<AddGold/>
+			</Actions>
+
+			<Values>
+				<FixedValue>30</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="10030">
+		<Comment>황제</Comment>
+		<DescComment>이번 라운드에 진영 확장 비용 30% 감소</DescComment>
+		<DescParams>
+			<InnerText Mag="-1">./WorldTriggers[1]/Values/SlotUpgradeCost</InnerText>
+		</DescParams>
+		
+		<WorldTriggers>
+			<Conditions>
+				<TriggerCount Value="1"/>
+				<ReadyPhaseStart/>
+			</Conditions>
+
+			<Actions>
+				<AddSlotUpgradeCost/>
+			</Actions>
+
+			<Values>
+				<SlotUpgradeCost>-30</SlotUpgradeCost>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ReadyPhaseStart/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10030"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<TriggerCount Value="1"/>
+				<ReadyPhaseStart/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10030"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<OverStack StackName="Stack_Tarot_10030" Value="0"/>
+				<AddSlot/>
+			</Conditions>
+
+			<Actions>
+				<AddSlotUpgradeCost/>
+			</Actions>
+
+			<Values>
+				<SlotUpgradeCost>-30</SlotUpgradeCost>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="10040">
+		<Comment>교황</Comment>
+		<DescComment>가장 성급이 높은 영웅의 성급을 하나 상승</DescComment>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter/>
+			</Conditions>
+
+			<Actions>
+				<HighestLevelUnitLevelUp/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="10050">
+		<Comment>연인</Comment>
+		<DescComment>진영을 하나 확장</DescComment>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter/>
+			</Conditions>
+
+			<Actions>
+				<AddItem ID="10022"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="10060">
+		<Comment>전차</Comment>
+		<DescComment>다음 3라운드간 침공 성공시 3티어 장비 획득</DescComment>
+		<DescParams>
+			<Attribute Name="Value" BaseValue="0">./WorldTriggers[2]/Conditions/TriggerCount</Attribute>
+		</DescParams>
+		
+		<WorldTriggers>
+			<Conditions>
+				<StageStart/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10060"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<TriggerCount Value="3"/>
+				<StageStart/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10060"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<OverStack StackName="Stack_Tarot_10060" Value="0"/>
+                <InvadeSuccess/>
+			</Conditions>
+
+			<Actions>
+				<AddItem Tier="3"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="10070">
+		<Comment>은둔자</Comment>
+		<DescComment>다음 3라운드간 전투 시작 시 보유한 소환석 중 무작위로 1개 제거, 소환석이 없다면 다음 라운드의 콜로세움 토큰을 5개 제거</DescComment>
+		<DescParams>
+			<Attribute Name="Value" BaseValue="0">./WorldTriggers[3]/Conditions/TriggerCount</Attribute>
+			<InnerText>./WorldTriggers[4]/Values/FixedValue</InnerText>
+			<InnerText Mag="-1">./WorldTriggers[5]/Values/FixedValue</InnerText>
+		</DescParams>
+
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10070"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<BattleStart/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10070"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<TriggerCount Value="3"/>
+				<BattleStart/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10070"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<UnderStack StackName="Stack_Tarot_10070" Value="1"/>
+				<InvadeItemCountOver Value="0"/>
+				<BattleStart/>
+			</Conditions>
+
+			<Actions>
+				<RemoveInvadeItem/>
+				<SetCustomStack Name="Stack_Tarot_10070"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<UnderStack StackName="Stack_Tarot_10070" Value="1"/>
+				<ReadyPhaseStart/>
+			</Conditions>
+
+			<Actions>
+				<AddInvadePoint/>
+			</Actions>
+
+			<Values>
+				<FixedValue>-5</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="10080">
+		<Comment>운명</Comment>
+		<DescComment>영웅이 장착 중인 장비를 모두 장착 해제하고 은화 10 획득, 이번 라운드에만 유지되는 연금술의 돌 획득</DescComment>
+		<DescParams>
+			<InnerText>./WorldTriggers[6]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ReadyPhaseStart/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10080"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<TriggerCount Value="1"/>
+				<ReadyPhaseStart/>
+			</Conditions>
+
+			<Actions>
+				<SetCustomStack Name="Stack_Tarot_10080"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>0</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<OverStack StackName="Stack_Tarot_10080" Value="0"/>
+				<TriggerCount Value="1"/>
+				<ReadyPhaseStart/>
+			</Conditions>
+
+			<Actions>
+				<RemoveItem ID="25004"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<TriggerCount Value="1"/>
+				<ReadyPhaseStart/>
+			</Conditions>
+
+			<Actions>
+				<AddItem ID="25004"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter/>
+			</Conditions>
+
+			<Actions>
+				<EquipItem ID="30000"/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter/>
+			</Conditions>
+
+			<Actions>
+				<AddGold/>
+			</Actions>
+
+			<Values>
+				<FixedValue>10</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="10090">
+		<Comment>별</Comment>
+		<DescComment>다음 3라운드간 전투 시작 시 보유한 소환석 중 무작위로 1개 복사</DescComment>
+		<DescParams>
+			<Attribute Name="Value" BaseValue="0">./WorldTriggers[1]/Conditions/TriggerCount</Attribute>
+			<InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<TriggerCount Value="3"/>
+				<BattleStart/>
+			</Conditions>
+
+			<Actions>
+				<CopyInvadeItem/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+
+	<ColosseumTarot ID="10100">
+		<Comment>달</Comment>
+		<DescComment>이후 15초간 판매하는 1성 유닛이 주는 은화량 +1</DescComment>
+		<DescParams>
+			<Attribute Name="Time" BaseValue="0">./WorldTriggers[1]/Actions/AddSellPriceOnLevel1UnitForSeconds</Attribute>
+			<Attribute Name="AddGold" BaseValue="0">./WorldTriggers[1]/Actions/AddSellPriceOnLevel1UnitForSeconds</Attribute>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<TriggerCount Value="1"/>
+				<ReadyPhaseStart/>
+			</Conditions>
+
+			<Actions>
+				<AddSellPriceOnLevel1UnitForSeconds AddGold="1" Time="15"/>
+			</Actions>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="10110">
+		<Comment>태양</Comment>
+		<DescComment>이번 라운드의 모든 소환이 고급 영웅 소환서로 적용, 이번 라운드에서 영웅 판매 불가</DescComment>
+
+		<WorldTriggers>
+			<Conditions>
+				<TriggerCount Value="1"/>
+				<ReadyPhaseStart/>
+			</Conditions>
+
+			<Actions>
+				<UnlimitedSpawnLevelUpAndPreventSellUnit/>
+			</Actions>
+
+			<Values>
+				<FixedValue>1</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="20000">
+		<Comment>힘</Comment>
+		<DescComment>이후 모든 소환석의 등장 개체 수 2배</DescComment>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<EnableDoubleInvadeUnit/>
+			</Actions>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="20010">
+		<Comment>매달린 사람</Comment>
+		<DescComment>이후 소환석 상점에서 5,6티어 등장 확률 증가</DescComment>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce />
+			</Conditions>
+
+			<Actions>
+				<AddInvadeItemTierProbPer Tiers="5,6" />
+			</Actions>
+
+			<Values>
+				<FixedValue>200</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+
+	<ColosseumTarot ID="20020">
+		<Comment>죽음</Comment>
+		<DescComment>이후 격전의 열기 +30</DescComment>
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnceWithoutReenter/>
+			</Conditions>
+
+			<Actions>
+				<AddConstantEnemyBerserkValue TriggerID="20020"/>
+			</Actions>
+			
+			<Values>
+				<FixedValue>30</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="20030">
+		<Comment>악마</Comment>
+		<DescComment>악마 스테이지 등장</DescComment>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<EnableDevilStage/>
+			</Actions>
+		</WorldTriggers>
+	</ColosseumTarot>
+	
+	<ColosseumTarot ID="20040">
+		<Comment>탑</Comment>
+		<DescComment>이후 매 턴 소환석 새로고침 10회 무료</DescComment>
+		<DescParams>
+			<InnerText>./WorldTriggers[1]/Values/FixedValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<StageStart/>
+			</Conditions>
+
+			<Actions>
+				<AddInvadeShopRerollCount />
+			</Actions>
+
+			<Values>
+				<FixedValue>10</FixedValue>
+			</Values>
+		</WorldTriggers>
+	</ColosseumTarot>
+</ColosseumTarots>

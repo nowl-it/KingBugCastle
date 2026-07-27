@@ -1,0 +1,92 @@
+<ArtifactConstants>
+    <!-- 제작 시 소모 가루 -->
+    <CraftDustCost>25,50,100</CraftDustCost>
+    <!-- 분해 시 지급 가루 -->
+    <DismantleDustReward>
+        <Piece>10,20,25</Piece>
+        <Normal>28,56,70</Normal>
+        <King>100,180,230</King>
+        <God>310,520,650</God>
+        <KingGod>810,1650,2000</KingGod>
+    </DismantleDustReward>
+    <!-- 합성 시 필요 골드 -->
+    <MergeCost>
+        <Normal>0,0,0</Normal>
+        <King>400,600,800</King>
+        <God>1000,1500,2000</God>
+        <KingGod>4000,6000,8000</KingGod>
+    </MergeCost>
+    <!-- 재련 시 필요 골드 -->
+    <RerollGoldCost Count="0">
+        <Piece>250,375,500</Piece>
+        <Normal>0,0,0</Normal>
+        <King>0,0,0</King>
+        <God>0,0,0</God>
+        <KingGod>0,0,0</KingGod>
+    </RerollGoldCost>
+    <RerollGoldCost Count="1">
+        <Piece>1000,1500,2000</Piece>
+        <Normal>750,1125,1500</Normal>
+        <King>0,0,0</King>
+        <God>0,0,0</God>
+        <KingGod>0,0,0</KingGod>
+    </RerollGoldCost>
+    <RerollGoldCost Count="2">
+        <Piece>2000,3000,4000</Piece>
+        <Normal>1750,2625,3500</Normal>
+        <King>750,1125,1500</King>
+        <God>0,0,0</God>
+        <KingGod>0,0,0</KingGod>
+    </RerollGoldCost>
+    <RerollGoldCost Count="3">
+        <Piece>4000,6000,8000</Piece>
+        <Normal>3750,5625,7500</Normal>
+        <King>2750,4125,5500</King>
+        <God>750,1125,1500</God>
+        <KingGod>0,0,0</KingGod>
+    </RerollGoldCost>
+    <!-- 재련 시 필요 보석 -->
+    <RerollCashCost Count="0">
+        <Piece>5,8,10</Piece>
+        <Normal>0,0,0</Normal>
+        <King>0,0,0</King>
+        <God>0,0,0</God>
+        <KingGod>0,0,0</KingGod>
+    </RerollCashCost>
+    <RerollCashCost Count="1">
+        <Piece>10,15,20</Piece>
+        <Normal>5,8,10</Normal>
+        <King>0,0,0</King>
+        <God>0,0,0</God>
+        <KingGod>0,0,0</KingGod>
+    </RerollCashCost>
+    <RerollCashCost Count="2">
+        <Piece>15,22,30</Piece>
+        <Normal>10,15,20</Normal>
+        <King>5,8,10</King>
+        <God>0,0,0</God>
+        <KingGod>0,0,0</KingGod>
+    </RerollCashCost>
+    <RerollCashCost Count="3">
+        <Piece>20,30,40</Piece>
+        <Normal>15,22,30</Normal>
+        <King>10,15,20</King>
+        <God>5,8,10</God>
+        <KingGod>0,0,0</KingGod>
+    </RerollCashCost>
+    <!-- 옵션 잠금 시 연마 점수 -->
+    <LockPolishPoint>60,250,500,1000</LockPolishPoint>
+    <!-- 재련석 사용 시 연마 점수 -->
+    <RerollItemPolishPoint>1250,1500,1750,2000</RerollItemPolishPoint>
+    <!-- 촉매 사용 시 연마 점수 -->
+    <CatalystPolishPoint>3000,5000</CatalystPolishPoint>
+    <!-- 연마 시 점수 필요량 -->
+    <ArtifactPolishPointByRank>
+        <One>10,20,40</One>
+        <Two>20,40,80</Two>
+        <Three>30,60,120</Three>
+        <Four>60,120,240</Four>
+        <Five>100,200,400</Five>
+    </ArtifactPolishPointByRank>
+    <ArtifactPolishPointToReplace>200,400,800</ArtifactPolishPointToReplace>
+</ArtifactConstants>

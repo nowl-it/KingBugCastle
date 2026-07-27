@@ -1,0 +1,12 @@
+<CustomEventRewards>
+    <CustomEventReward ID="1">
+        <Reward Type="Skin" ID="1050005" Count="1" />
+        <Reward Type="NameTag" ID="60000" Count="1" />
+        <Reward Type="CardOrSoul" ID="10500" Count="1" />
+    </CustomEventReward>
+    
+    <CustomEventReward ID="2">
+        <Reward Type="Skin" ID="1058005" Count="1" />
+        <Reward Type="CardOrSoul" ID="10580" Count="1" />
+    </CustomEventReward>
+</CustomEventRewards>

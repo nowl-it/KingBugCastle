@@ -3,11 +3,19 @@
 Replace PreStrings GUID files' m_Script with the full Strings_XX.xml content.
 This makes PreInitialize load ALL strings, bypassing the CDN-dependent LoadStrings call.
 """
+<<<<<<< HEAD
 import sys, os, io, zipfile, pathlib
 import UnityPy
 
 APK = pathlib.Path(sys.argv[1])
 XML_DIR = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else pathlib.Path(__file__).resolve().parent.parent / "xml_live"
+=======
+import sys, os, io, zipfile, pathlib, hashlib
+import UnityPy
+
+APK = pathlib.Path(sys.argv[1])
+XML_DIR = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else pathlib.Path.home() / "Code/kgc/scratchpad/xml_live"
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
 
 # Map locale codes to their asset names
 LOCALE_NAMES = {

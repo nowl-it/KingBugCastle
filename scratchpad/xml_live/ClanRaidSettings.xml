@@ -1,0 +1,29 @@
+<ClanRaidSettings>
+	<!-- 보스별 추천 조합 -->
+	<RecommendedParties>
+		<RecommendedParty BossID="41000">10210,10300,10590,10640</RecommendedParty>
+		<RecommendedParty BossID="41100">10100,10120,10310,10410,10480</RecommendedParty>
+		<RecommendedParty BossID="41200">10070,10090,10110,10380,10390,10600</RecommendedParty>
+		<RecommendedParty BossID="41300">10090,10370,10390,10540</RecommendedParty>
+		<RecommendedParty BossID="41400">10090,10350,10370,10560</RecommendedParty>
+		<RecommendedParty BossID="41500">10010,10020,10100,10120,10360</RecommendedParty>
+		<RecommendedParty BossID="42000">10040,10080,10300,10560,10570</RecommendedParty>
+		<RecommendedParty BossID="42100">10040,10080,10090,10560,10730</RecommendedParty>
+		<RecommendedParty BossID="42200">10060,10200,10330,10440</RecommendedParty>
+		<RecommendedParty BossID="42300">10000,10370,10670,10730,10740</RecommendedParty>
+		<RecommendedParty BossID="42400">10170,10560,10630,10670,10690</RecommendedParty>
+		<RecommendedParty BossID="42500">10090,10110,10200,10670,10690</RecommendedParty>
+
+	</RecommendedParties>
+
+
+	<!-- 표기용 -->
+	<!-- 최상위 연맹 보상 표기 (필요 순위, 보구 뽑기권 보상량, 금화 보너스) -->
+	<ClanRankRewardReqRanks>1,2,3,5,10,15,20,25</ClanRankRewardReqRanks>
+	<ClanRankRewardAmounts>30,25,20,15,13,10,5,3</ClanRankRewardAmounts>
+	<ClanRankRewardGoldBonus>24,24,24,24,20,20,20,20</ClanRankRewardGoldBonus>
+
+	<!-- 표기용 -->
+	<!-- 처치 보너스 최대 킬수 (현재 킹-16) -->
+	<BossKillRewardMaxKillCount>103</BossKillRewardMaxKillCount>
+</ClanRaidSettings>

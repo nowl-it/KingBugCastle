@@ -1,0 +1,344 @@
+<BuffDatas>
+    <BuffData ID='510000'>
+        <Comment>영웅 셸다</Comment>
+        <DescComment>습격에서 전투 시작 시 모든 영웅들에게 절대 방어 +2</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./BuffOptions/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddSuperShield />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>2</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID='510001'>
+        <Comment>국왕 에반</Comment>
+        <DescComment>습격에서 모든 영웅들의 일반 공격 피해 증폭 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./AttackDamageMul</InnerText>
+        </DescParams>
+        
+        <AttackDamageMul>15</AttackDamageMul>
+    </BuffData>
+
+    <BuffData ID='510002'>
+        <Comment>서리여왕 프리아</Comment>
+        <DescComment>습격에서 모든 영웅들의 주문 치명타 피해량 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./BaseMCriticalDamageMul</InnerText>
+        </DescParams>
+        
+        <BaseMCriticalDamageMul>15</BaseMCriticalDamageMul>
+    </BuffData>
+
+    <BuffData ID='510003'>
+        <Comment>징벌의 왕 아라미스</Comment>
+        <DescComment>습격에서 모든 영웅들의 공격속도 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./AttackSpeedPer</InnerText>
+        </DescParams>
+        
+        <AttackSpeedPer>15</AttackSpeedPer>
+    </BuffData>
+
+    <BuffData ID='510004'>
+        <Comment>신성왕 알베론</Comment>
+        <DescComment>습격에서 전투 시작 시 모든 영웅들에게 체력의 10%만큼 쉴드 부여</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./BuffOptions/Values/HpPer</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddShield />
+            </BuffContents>
+
+            <Values>
+                <HpPer>10</HpPer>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID='510005'>
+        <Comment>선율의 여왕 바드리</Comment>
+        <DescComment>습격에서 모든 영웅들의 시작 시 마나 +10%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./BattleStartManaPer</InnerText>
+        </DescParams>
+        
+        <BattleStartManaPer>10</BattleStartManaPer>
+    </BuffData>
+
+    <BuffData ID='510006'>
+        <Comment>라이카</Comment>
+        <DescComment>습격에서 모든 영웅들이 가하는 피해량 +10%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./DamagePer</InnerText>
+        </DescParams>
+        
+        <DamagePer>10</DamagePer>
+    </BuffData>
+    
+    <BuffData ID='510007'>
+        <Comment>릴리와 샤샤</Comment>
+        <DescComment>습격에서 모든 영웅이 매 초마다 체력의 4%를 치유</DescComment>
+        <Duration>-1</Duration>
+        
+        <DescParams>
+            <InnerText>./BuffOptions/Values/HpPer</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+            <Conditions>
+                <BattleStart />
+            </Conditions>
+            
+            <Targets>
+                <Self />
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <Heal TickTime="1" TickCount="999999" ForceBlockTrigger="true" />
+            </BuffContents>
+            
+            <Values>
+                <HpPer>4</HpPer>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID='510008'>
+        <Comment>쥬피테르</Comment>
+        <DescComment>습격에서 모든 영웅들의 특수 피해량 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./SpecialDamageMul</InnerText>
+        </DescParams>
+        
+        <SpecialDamageMul>15</SpecialDamageMul>
+    </BuffData>
+
+    <BuffData ID='510009'>
+        <Comment>멜</Comment>
+        <DescComment>습격에서 모든 영웅들의 위협 +15</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./DefPen</InnerText>
+        </DescParams>
+
+        <DefPen>15</DefPen>
+    </BuffData>
+
+    <BuffData ID='510010'>
+        <Comment>신월의 여왕 루니아르</Comment>
+        <DescComment>습격에서 모든 영웅들의 주문력 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./MAtkPer</InnerText>
+        </DescParams>
+        
+        <MAtkPer>15</MAtkPer>
+    </BuffData>
+
+    <BuffData ID='510011'>
+        <Comment>그림자왕 카인</Comment>
+        <DescComment>습격에서 모든 영웅들의 물리 치명타 피해량 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./BaseCriticalDamageMul</InnerText>
+        </DescParams>
+        
+        <BaseCriticalDamageMul>15</BaseCriticalDamageMul>
+    </BuffData>
+
+    <BuffData ID='510012'>
+        <Comment>운명의 여왕 헬라</Comment>
+        <DescComment>습격에서 모든 영웅들의 스킬 피해 증폭 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./SkillDamageMul</InnerText>
+        </DescParams>
+        
+        <SkillDamageMul>15</SkillDamageMul>
+    </BuffData>
+
+    <BuffData ID='510013'>
+        <Comment>미르실</Comment>
+        <DescComment>습격에서 모든 영웅들이 받는 치유량 +10%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./HealAdaptabilityPer</InnerText>
+        </DescParams>
+        
+        <HealAdaptabilityPer>10</HealAdaptabilityPer>
+    </BuffData>
+
+    <BuffData ID='510014'>
+        <Comment>태산</Comment>
+        <DescComment>습격에서 모든 영웅들의 체력 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./HpPer</InnerText>
+        </DescParams>
+        
+        <HpPer>15</HpPer>
+    </BuffData>
+
+    <BuffData ID='510015'>
+        <Comment>리에</Comment>
+        <DescComment>습격에서 모든 영웅들의 치명타 피해량 +10%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./BaseCriticalDamageMul</InnerText>
+        </DescParams>
+        
+        <BaseCriticalDamageMul>10</BaseCriticalDamageMul>
+        <BaseMCriticalDamageMul>10</BaseMCriticalDamageMul>
+    </BuffData>
+
+    <BuffData ID='510016'>
+        <Comment>에스테아</Comment>
+        <DescComment>습격에서 모든 영웅들의 수호 +15</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./DefDen</InnerText>
+        </DescParams>
+        
+        <DefDen>15</DefDen>
+    </BuffData>
+
+    <BuffData ID='510017'>
+        <Comment>오필리아</Comment>
+        <DescComment>습격에서 모든 영웅들의 흡혈량 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./Drain</InnerText>
+        </DescParams>
+        
+        <Drain>15</Drain>
+        <MagicDrain>15</MagicDrain>
+    </BuffData>
+
+    <BuffData ID='510018'>
+        <Comment>마노</Comment>
+        <DescComment>습격에서 모든 영웅들의 공격력 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./AtkPer</InnerText>
+        </DescParams>
+        
+        <AtkPer>15</AtkPer>
+    </BuffData>
+
+    <BuffData ID='510019'>
+        <Comment>빅토리아</Comment>
+        <DescComment>습격에서 모든 영웅들의 상태 이상 저항 +15%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText Mag="-100">./BuffOptions/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="CCRatio" StatValueType="Value" HaveToBind="true" IgnoreCCRatio="true" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-0.15</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID='510020'>
+        <Comment>엘레나와 카라단</Comment>
+        <DescComment>습격에서 모든 영웅들의 공격력 +7.5%, 주문력 +7.5%</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <InnerText>./AtkPer</InnerText>
+            <InnerText>./MAtkPer</InnerText>
+        </DescParams>
+        
+        <AtkPer>7.5</AtkPer>
+        <MAtkPer>7.5</MAtkPer>
+    </BuffData>
+
+    <BuffData ID='510999'>
+        <Comment>킹갓캐슬!</Comment>
+        <DescComment>카드 획득 시 금화 획득</DescComment>
+        <Duration>-1</Duration>
+
+        <DescParams>
+            <Const>1500</Const>
+            <Const>2500</Const>
+        </DescParams>
+    </BuffData>
+</BuffDatas>

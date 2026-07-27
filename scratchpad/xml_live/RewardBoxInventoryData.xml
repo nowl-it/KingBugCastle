@@ -1,0 +1,1026 @@
+﻿<!-- RewardBoxInventoryData.xml : 상자 인벤토리 보상 정보 
+
+ID 규칙 : InventoryItems.xml 과 통일시키기
+
+필드 정보 :
+<NameComment> (not used)
+<Type> : 상자 타입 (확률형 : Probable, 고정형 : Fixable, 선택형 : Selectable)
+-->
+
+<RewardBoxInventoryData>
+    <RewardBoxInventoryData ID="5000">
+        <NameComment>특급 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+        
+        <Rewards>
+            <Reward Type="InventoryItem" ID="5001" Count="1"/>
+            <Reward Type="InventoryItem" ID="5002" Count="1"/>
+            <Reward Type="InventoryItem" ID="5003" Count="1"/>
+            <Reward Type="InventoryItem" ID="5004" Count="1"/>
+            <Reward Type="InventoryItem" ID="5005" Count="1"/>
+            <Reward Type="InventoryItem" ID="5006" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5001">
+        <NameComment>강철의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+        
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special" 
+                AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special" 
+                AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special" 
+                AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special" 
+                AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="0" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5002">
+        <NameComment>두려움의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="1" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+    
+    <RewardBoxInventoryData ID="5003">
+        <NameComment>예리의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="2" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+    
+    <RewardBoxInventoryData ID="5004">
+        <NameComment>바다의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="3" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5005">
+        <NameComment>바람의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="4" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5006">
+        <NameComment>야만의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="5" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+    
+    <RewardBoxInventoryData ID="5007">
+        <NameComment>금강의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="6" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+    
+    <RewardBoxInventoryData ID="5008">
+        <NameComment>계약의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="7" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5009">
+        <NameComment>영원의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="8" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5010">
+        <NameComment>월광의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="9" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+	<RewardBoxInventoryData ID="5011">
+		<NameComment>억압의 장신구 선택 상자</NameComment>
+		<Type>Selectable</Type>
+
+		<RewardCount>1</RewardCount>
+
+		<Rewards>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Ring" AccMainStat="HpPer" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="10" AccRarity="Special"
+				AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+		</Rewards>
+	</RewardBoxInventoryData>
+
+	<RewardBoxInventoryData ID="5012">
+		<NameComment>절명의 장신구 선택 상자</NameComment>
+		<Type>Selectable</Type>
+
+		<RewardCount>1</RewardCount>
+
+		<Rewards>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Ring" AccMainStat="HpPer" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+			<Reward Type="Accessory" AccSynergy="11" AccRarity="Special"
+				AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+		</Rewards>
+	</RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5013">
+        <NameComment>승천의 장신구 선택 상자</NameComment>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="AtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Necklace" AccMainStat="MAtkPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Bracelet" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Ring" AccMainStat="HpPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Ring" AccMainStat="AttackSpeedPer" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefPen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Ring" AccMainStat="BaseDefDen" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMCriticalDamageMul" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseMDef" Count="1"/>
+            <Reward Type="Accessory" AccSynergy="12" AccRarity="Special"
+                    AccType="Earring" AccMainStat="BaseSpecialDamageMul" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+		
+    <RewardBoxInventoryData ID="5500">
+        <NameComment>특급 장신구 선택 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5500</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="InventoryItem" ID="5001" Count="1"/>
+            <Reward Type="InventoryItem" ID="5002" Count="1"/>
+            <Reward Type="InventoryItem" ID="5003" Count="1"/>
+            <Reward Type="InventoryItem" ID="5004" Count="1"/>
+            <Reward Type="InventoryItem" ID="5005" Count="1"/>
+            <Reward Type="InventoryItem" ID="5006" Count="1"/>
+            <Reward Type="InventoryItem" ID="5007" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+    
+    <RewardBoxInventoryData ID="5501">
+        <NameComment>특급 장신구 선택 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5500</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="InventoryItem" ID="5001" Count="1"/>
+            <Reward Type="InventoryItem" ID="5002" Count="1"/>
+            <Reward Type="InventoryItem" ID="5003" Count="1"/>
+            <Reward Type="InventoryItem" ID="5004" Count="1"/>
+            <Reward Type="InventoryItem" ID="5005" Count="1"/>
+            <Reward Type="InventoryItem" ID="5006" Count="1"/>
+            <Reward Type="InventoryItem" ID="5007" Count="1"/>
+            <Reward Type="InventoryItem" ID="5008" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5502">
+        <NameComment>특급 장신구 선택 상자(~영원)</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5500</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="InventoryItem" ID="5001" Count="1"/>
+            <Reward Type="InventoryItem" ID="5002" Count="1"/>
+            <Reward Type="InventoryItem" ID="5003" Count="1"/>
+            <Reward Type="InventoryItem" ID="5004" Count="1"/>
+            <Reward Type="InventoryItem" ID="5005" Count="1"/>
+            <Reward Type="InventoryItem" ID="5006" Count="1"/>
+            <Reward Type="InventoryItem" ID="5007" Count="1"/>
+            <Reward Type="InventoryItem" ID="5008" Count="1"/>
+            <Reward Type="InventoryItem" ID="5009" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5503">
+        <NameComment>특급 장신구 선택 상자(~월광)</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5500</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="InventoryItem" ID="5001" Count="1"/>
+            <Reward Type="InventoryItem" ID="5002" Count="1"/>
+            <Reward Type="InventoryItem" ID="5003" Count="1"/>
+            <Reward Type="InventoryItem" ID="5004" Count="1"/>
+            <Reward Type="InventoryItem" ID="5005" Count="1"/>
+            <Reward Type="InventoryItem" ID="5006" Count="1"/>
+            <Reward Type="InventoryItem" ID="5007" Count="1"/>
+            <Reward Type="InventoryItem" ID="5008" Count="1"/>
+            <Reward Type="InventoryItem" ID="5009" Count="1"/>
+            <Reward Type="InventoryItem" ID="5010" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>   
+
+	<RewardBoxInventoryData ID="5504">
+        <NameComment>특급 장신구 선택 상자(~억압)</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5500</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="InventoryItem" ID="5001" Count="1"/>
+            <Reward Type="InventoryItem" ID="5002" Count="1"/>
+            <Reward Type="InventoryItem" ID="5003" Count="1"/>
+            <Reward Type="InventoryItem" ID="5004" Count="1"/>
+            <Reward Type="InventoryItem" ID="5005" Count="1"/>
+            <Reward Type="InventoryItem" ID="5006" Count="1"/>
+            <Reward Type="InventoryItem" ID="5007" Count="1"/>
+            <Reward Type="InventoryItem" ID="5008" Count="1"/>
+            <Reward Type="InventoryItem" ID="5009" Count="1"/>
+            <Reward Type="InventoryItem" ID="5010" Count="1"/>
+            <Reward Type="InventoryItem" ID="5011" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+	<RewardBoxInventoryData ID="5505">
+        <NameComment>특급 장신구 선택 상자(~절명)</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5500</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="InventoryItem" ID="5001" Count="1"/>
+            <Reward Type="InventoryItem" ID="5002" Count="1"/>
+            <Reward Type="InventoryItem" ID="5003" Count="1"/>
+            <Reward Type="InventoryItem" ID="5004" Count="1"/>
+            <Reward Type="InventoryItem" ID="5005" Count="1"/>
+            <Reward Type="InventoryItem" ID="5006" Count="1"/>
+            <Reward Type="InventoryItem" ID="5007" Count="1"/>
+            <Reward Type="InventoryItem" ID="5008" Count="1"/>
+            <Reward Type="InventoryItem" ID="5009" Count="1"/>
+            <Reward Type="InventoryItem" ID="5010" Count="1"/>
+            <Reward Type="InventoryItem" ID="5011" Count="1"/>
+            <Reward Type="InventoryItem" ID="5012" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+	<RewardBoxInventoryData ID="5506">
+        <NameComment>특급 장신구 선택 상자(~ 승천)</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5500</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="InventoryItem" ID="5001" Count="1"/>
+            <Reward Type="InventoryItem" ID="5002" Count="1"/>
+            <Reward Type="InventoryItem" ID="5003" Count="1"/>
+            <Reward Type="InventoryItem" ID="5004" Count="1"/>
+            <Reward Type="InventoryItem" ID="5005" Count="1"/>
+            <Reward Type="InventoryItem" ID="5006" Count="1"/>
+            <Reward Type="InventoryItem" ID="5007" Count="1"/>
+            <Reward Type="InventoryItem" ID="5008" Count="1"/>
+            <Reward Type="InventoryItem" ID="5009" Count="1"/>
+            <Reward Type="InventoryItem" ID="5010" Count="1"/>
+            <Reward Type="InventoryItem" ID="5011" Count="1"/>
+            <Reward Type="InventoryItem" ID="5012" Count="1"/>
+            <Reward Type="InventoryItem" ID="5013" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>    
+    
+    <RewardBoxInventoryData ID="5600">
+        <NameComment>4주년 후발대 선택 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5600</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="CardOrSoul" ID="10060" Count="1"/>
+            <Reward Type="CardOrSoul" ID="10090" Count="1"/>
+            <Reward Type="CardOrSoul" ID="10120" Count="1"/>
+            <Reward Type="CardOrSoul" ID="10150" Count="1"/>
+            <Reward Type="CardOrSoul" ID="10180" Count="1"/>
+            <Reward Type="CardOrSoul" ID="10230" Count="1"/>
+            <Reward Type="CardOrSoul" ID="10290" Count="1"/>
+            <Reward Type="CardOrSoul" ID="10510" Count="1"/>
+            <Reward Type="CardOrSoul" ID="10560" Count="1"/>
+            <Reward Type="CardOrSoul" ID="10670" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5602">
+        <NameComment>6초월 인기 보구 선택 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5602</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Treasure" ID="30000" Count="7"/>
+            <Reward Type="Treasure" ID="30001" Count="7"/>
+            <Reward Type="Treasure" ID="30002" Count="7"/>
+            <Reward Type="Treasure" ID="30003" Count="7"/>
+            <Reward Type="Treasure" ID="30004" Count="7"/>
+            <Reward Type="Treasure" ID="30005" Count="7"/>
+            <Reward Type="Treasure" ID="30008" Count="7"/>
+            <Reward Type="Treasure" ID="30011" Count="7"/>
+            <Reward Type="Treasure" ID="30012" Count="7"/>
+            <Reward Type="Treasure" ID="30014" Count="7"/>
+            <Reward Type="Treasure" ID="30015" Count="7"/>
+            <Reward Type="Treasure" ID="30021" Count="7"/>
+
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="5603">
+        <NameComment>2026-05-21 30038 오류, 위시리스트 선택 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5603</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Treasure" ID="30002" Count="1"/>
+            <Reward Type="Treasure" ID="30007" Count="1"/>
+            <Reward Type="Treasure" ID="30015" Count="1"/>
+            <Reward Type="Treasure" ID="30017" Count="1"/>
+            <Reward Type="Treasure" ID="30022" Count="1"/>
+            <Reward Type="Treasure" ID="30030" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+    
+    <RewardBoxInventoryData ID="5604">
+        <NameComment>2026-06-18 30039 오류, 위시리스트 선택 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_5603</RewardBoxDesc>
+        <Type>Selectable</Type>
+
+        <RewardCount>1</RewardCount>
+
+        <Rewards>
+            <Reward Type="Treasure" ID="30001" Count="1"/>
+            <Reward Type="Treasure" ID="30006" Count="1"/>
+            <Reward Type="Treasure" ID="30012" Count="1"/>
+            <Reward Type="Treasure" ID="30016" Count="1"/>
+            <Reward Type="Treasure" ID="30025" Count="1"/>
+            <Reward Type="Treasure" ID="30032" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+    
+    <RewardBoxInventoryData ID="6000">
+		<NameComment>초급자 미션 보상 바람 장신구 세트 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="1040" Count="1"/>
+            <Reward Type="FixedAccessory" ID="1041" Count="1"/>
+            <Reward Type="FixedAccessory" ID="1042" Count="1"/>
+            <Reward Type="FixedAccessory" ID="1042" Count="1"/>
+            <Reward Type="FixedAccessory" ID="1043" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <!-- 잠식 습격 2 장신구 세트 보상 추가 -->
+    <RewardBoxInventoryData ID="6100">
+		<NameComment>잠식 II-1 쉬움 보상 예리 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="2000" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2001" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2002" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2003" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2003" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="6101">
+		<NameComment>잠식 II-2 쉬움 보상 야만 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="2010" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2011" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2012" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2013" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2013" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="6102">
+		<NameComment>잠식 II-3 쉬움 보상 바다 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="2020" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2021" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2022" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2022" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2023" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="6103">
+		<NameComment>잠식 II-4 쉬움 보상 금강 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="2030" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2031" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2032" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2032" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2033" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="6104">
+		<NameComment>잠식 II-5 쉬움 보상 계약 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="2040" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2041" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2042" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2043" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2043" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="6105">
+		<NameComment>잠식 II-6 쉬움 보상 영원 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="2050" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2051" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2052" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2052" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2053" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="6106">
+		<NameComment>잠식 II-7 쉬움 보상 월광 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="2060" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2061" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2062" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2063" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2063" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+	<RewardBoxInventoryData ID="6107">
+		<NameComment>잠식 II-8 쉬움 보상 억압 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="2070" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2071" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2072" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2072" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2073" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+	<RewardBoxInventoryData ID="6108">
+		<NameComment>잠식 II-9 쉬움 보상 절명 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="2080" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2081" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2082" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2082" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2083" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>    
+	<RewardBoxInventoryData ID="6109">
+		<NameComment>잠식 II-10 쉬움 보상 승천 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="2090" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2091" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2092" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2093" Count="1"/>
+            <Reward Type="FixedAccessory" ID="2094" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>     
+	<RewardBoxInventoryData ID="6110">
+		<NameComment>5.5주년 월광 세트 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="4065" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4066" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4067" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4068" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4068" Count="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>      
+
+    <RewardBoxInventoryData ID="6300">
+		<NameComment>사르굴라 패키지 장신구 선택 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="4010" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4011" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4012" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4013" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4014" Count="1"/>
+        </Rewards>
+        <Rewards>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="6400">
+		<NameComment>설날 패키지 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="4020" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4021" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4022" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4023" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4024" Count="1"/>
+        </Rewards>
+        <Rewards>
+        </Rewards>
+    </RewardBoxInventoryData>    
+
+    <RewardBoxInventoryData ID="6500">
+		<NameComment>벨리나 패키지 장신구 선택 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+        <Type>Fixable</Type>
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="4050" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4051" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4052" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4053" Count="1"/>
+            <Reward Type="FixedAccessory" ID="4054" Count="1"/>
+        </Rewards>
+        <Rewards>
+        </Rewards>
+    </RewardBoxInventoryData>    
+
+    <RewardBoxInventoryData ID="7000">
+		<NameComment>장신구 보조 옵션 변경권 랜덤 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_7000</RewardBoxDesc>
+        <Type>Probable</Type>
+        <Rewards>
+            <Reward Type="InventoryItem" ID="8400" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8401" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8402" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8403" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8404" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8405" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8406" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8407" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8408" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8409" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8410" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8411" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="8412" Count="1" Prob="1"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="7001">
+		<NameComment>습격 후반부 세트 무작위 장신구 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_7001</RewardBoxDesc>
+        <Type>Probable</Type>
+        <Rewards>
+            <Reward Type="FixedAccessory" ID="4030" Count="1" Prob="1"/>
+            <Reward Type="FixedAccessory" ID="4031" Count="1" Prob="1"/>
+            <Reward Type="FixedAccessory" ID="4032" Count="1" Prob="1"/>
+            <Reward Type="FixedAccessory" ID="4033" Count="1" Prob="1"/>
+            <Reward Type="FixedAccessory" ID="4034" Count="1" Prob="1"/>
+        </Rewards>
+        <Rewards>
+        </Rewards>
+    </RewardBoxInventoryData>        
+
+    <RewardBoxInventoryData ID="7100">
+        <NameComment>챌린지 토큰 상자</NameComment>
+        <RewardBoxDesc>RewardBoxInventoryDesc_7100</RewardBoxDesc>
+        <Type>Probable</Type>
+        <Rewards>
+            <Reward Type="InventoryItem" ID="3200" Count="1" Prob="1"/>
+            <Reward Type="InventoryItem" ID="7000" Count="1" Prob="1"/>
+            <Reward Type="Key" ID="370" Count="5" Prob="2"/>
+            <Reward Type="Key" ID="70000" Count="5" Prob="2"/>
+            <Reward Type="Cash" ID="-1" Count="100" Prob="2"/>
+            <Reward Type="InventoryItem" ID="3101" Count="5" Prob="3"/>
+            <Reward Type="InventoryItem" ID="4101" Count="5" Prob="3"/>
+            <Reward Type="UnitSoulItem" ID="130" Count="100" Prob="3"/>
+            <Reward Type="Gold" ID="-1" Count="50000" Prob="3"/>                        
+        </Rewards>
+        <Rewards>
+        </Rewards>
+    </RewardBoxInventoryData>           
+    
+    <RewardBoxInventoryData ID="8300">
+        <NameComment>균열 가루 꾸러미 (소)</NameComment>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="InventoryItem" ID="8000" Min="300" Max="1000"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+    
+    <RewardBoxInventoryData ID="8301">
+        <NameComment>균열 가루 꾸러미 (중)</NameComment>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="InventoryItem" ID="8000" Min="1000" Max="3000"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+    
+    <RewardBoxInventoryData ID="8302">
+        <NameComment>균열 가루 꾸러미 (대)</NameComment>
+        <Type>Fixable</Type>
+
+        <Rewards>
+            <Reward Type="InventoryItem" ID="8000" Min="3000" Max="10000"/>
+        </Rewards>
+    </RewardBoxInventoryData>
+
+    <RewardBoxInventoryData ID="9100">
+        <NameComment>5.5주년 연속 출석 보상</NameComment>
+        <Type>Fixable</Type>
+        
+        <RewardBoxDesc>RewardBoxInventoryDesc_6000</RewardBoxDesc>
+
+        <Rewards>
+            <Reward Type="Gold" Count="100000" />
+            <Reward Type="UnitExpItem" Count="1000" />
+            <Reward Type="UnitSoulItem" ID="130" Count="300" />
+        </Rewards>
+    </RewardBoxInventoryData>
+</RewardBoxInventoryData>

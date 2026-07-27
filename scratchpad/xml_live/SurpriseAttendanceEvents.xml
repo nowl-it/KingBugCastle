@@ -1,0 +1,145 @@
+<SurpriseAttendanceEvents>
+    <!--
+        <Title> 출석체크 이름
+        <ParticipateStartAt> 이벤트 참가 가능한 첫 날짜 YYYYMMDD
+        <ParticipateEndAt> 이벤트 참가 가능한 마지막 날짜 YYYYMMDD
+        <Type> 며칠짜리인지 (5, 7, 10, 14 중 하나)
+        <MaxDay> 참가한 시점부터 이벤트 열려있는 일수
+        <AttendanceRewards> N일간의 보상 목록 (N은 5, 7, 10, 14 중 하나여야 함)
+        <ContinuousReward> 연속 출석 보상 (없을 수도 있음)
+        <Icon> 진입 버튼 아이콘
+        <Illust> 일러스트
+        <IllustOffsetX>, <IllustOffsetY> 일러스트 오프셋
+        <IllustScale> 일러스트 스케일
+    -->
+    <SurpriseAttendanceEvent ID='1'>
+        <Title>Christmas_Attendance_Event</Title>
+        <ParticipateStartAt>20251218</ParticipateStartAt>
+        <ParticipateEndAt>20251230</ParticipateEndAt>
+        <Type>7</Type>
+        <MaxDay>14</MaxDay>
+        <AttendanceRewards>
+            <AttendanceReward Day='1'>
+                <Reward Type='Gold' Count='300000' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='2'>
+                <Reward Type='Key' ID='370' Count='10' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='3'>
+                <Reward Type='InventoryItem' ID='3101' Count='15' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='4'>
+                <Reward Type='Key' ID='390' Count='10' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='5'>
+                <Reward Type='Key' ID='352' Count='20' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='6'>
+                <Reward Type="Treasure_Special" Count="1"/>
+            </AttendanceReward>
+            
+            <AttendanceReward Day='7'>
+                <Reward Type='InventoryItem' ID='163' Count='1' />
+            </AttendanceReward>
+        </AttendanceRewards>
+        <ContinuousReward Type='InventoryItem' ID='601' Count='2' />
+        <Icon>SeasonalEventToken_Holiday</Icon>
+        <Illust>Unit_Illust_10040_03</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>-50</IllustOffsetY>
+        <IllustScale>1.5</IllustScale>
+    </SurpriseAttendanceEvent>
+
+  <SurpriseAttendanceEvent ID='2'>
+        <Title>FifthHalfYearAttendanceEventTitle</Title>
+        <ParticipateStartAt>20260409</ParticipateStartAt>
+        <ParticipateEndAt>20260415</ParticipateEndAt>
+        <Type>7</Type>
+        <MaxDay>10</MaxDay>
+        <AttendanceRewards>
+            <AttendanceReward Day='1'>
+                <Reward Type='InventoryItem' ID='601' Count='10' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='2'>
+                <Reward Type='Key' ID='390' Count='10' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='3'>
+                <Reward Type='InventoryItem' ID='3101' Count='15' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='4'>
+                <Reward Type='InventoryItem' ID='5506' Count='10' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='5'>
+                <Reward Type='InventoryItem' ID='7000' Count='2' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='6'>
+                <Reward Type="InventoryItem" ID='163' Count="1"/>
+            </AttendanceReward>
+            
+            <AttendanceReward Day='7'>
+                <Reward Type='InventoryItem' ID='3200' Count='2' />
+            </AttendanceReward>
+        </AttendanceRewards>
+        <ContinuousReward Type='Key' ID='370' Count='10' />
+        <Icon>SeasonalEventToken_DailyAttandence</Icon>
+        <IconScale>0.75</IconScale>
+        <Illust>NPC_Illust_Luminesera</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>-50</IllustOffsetY>
+        <IllustScale>1.5</IllustScale>
+    </SurpriseAttendanceEvent>    
+
+  <SurpriseAttendanceEvent ID='3'>
+        <Title>DimensionHeroAttendanceEventTitle</Title>
+        <ParticipateStartAt>20260618</ParticipateStartAt>
+        <ParticipateEndAt>20260701</ParticipateEndAt>
+        <Type>7</Type>
+        <MaxDay>10</MaxDay>
+        <AttendanceRewards>
+            <AttendanceReward Day='1'>
+                <Reward Type='Key' ID='70000' Count='2' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='2'>
+                <Reward Type='Key' ID='70000' Count='2' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='3'>
+                <Reward Type='Key' ID='70000' Count='3' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='4'>
+                <Reward Type='Key' ID='70000' Count='3' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='5'>
+                <Reward Type='Key' ID='70000' Count='3' />
+            </AttendanceReward>
+            
+            <AttendanceReward Day='6'>
+                <Reward Type="Key" ID='70000' Count="3"/>
+            </AttendanceReward>
+            
+            <AttendanceReward Day='7'>
+                <Reward Type='Key' ID='70000' Count='4' />
+            </AttendanceReward>
+        </AttendanceRewards>
+        <ContinuousReward Type='Gold'  Count='100000' />
+        <Icon>ShopItem_70000_Up</Icon>
+        <IconScale>0.75</IconScale>
+        <Illust>Unit_Illust_10780</Illust>
+        <IllustOffsetX>-30</IllustOffsetX>
+        <IllustOffsetY>-50</IllustOffsetY>
+        <IllustScale>1.3</IllustScale>
+    </SurpriseAttendanceEvent>        
+</SurpriseAttendanceEvents>

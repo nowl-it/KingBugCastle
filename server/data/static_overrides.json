@@ -1,6 +1,16 @@
 {
   "/auth/shake-hand": {},
   "/auth/xcd": {},
+<<<<<<< HEAD
+=======
+  "/player/dailyAttendanceEvents": {
+    "attendedDays": 1,
+    "events": []
+  },
+  "/player/surprise-attendance-event": {
+    "attendedDays": 1
+  },
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
   "/player/daily-consumed-currencies": {},
   "/player/game-skip-information": {},
   "/game/adBonus": {
@@ -12,7 +22,25 @@
     "missionGoal": 0,
     "missionKeyStack": 0
   },
+<<<<<<< HEAD
   "/clan/attendance": {},
+=======
+  "/pvp/all-rewards": {},
+  "/pvp/win-reward": {},
+  "/pvp/dormant-progress": {},
+  "/colosseum/all-tier-rewards": {},
+  "/colosseum/match": {
+    "success": true,
+    "matchMakingSecond": 0
+  },
+  "/clan/attendance": {},
+  "/clan/fetchChat": {
+    "chats": []
+  },
+  "/clan/refreshChat": {
+    "chats": []
+  },
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
   "/clan/search": {
     "clans": [],
     "totalCount": 0
@@ -41,6 +69,10 @@
     "addGold": 500,
     "cards": []
   },
+<<<<<<< HEAD
+=======
+  "/rogueLike/save-rogueLike": {},
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
   "/rogueLike/out-game": {
     "rogueLikeOutGameStatus": {
       "collectedRune": {},
@@ -56,6 +88,17 @@
     },
     "totalClearCount": 0
   },
+<<<<<<< HEAD
+=======
+  "/rogueLike/load-rogueLike-data": {
+    "rogueLikeSaveData": "",
+    "rogueLikeOwnCardSnapshot": "",
+    "state": "",
+    "saveVersion": 0,
+    "lastHeartPaidFloor": 0,
+    "lastGameStartedSeason": 0
+  },
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
   "/mission/roguelike": {
     "rogueLikeMissions": [],
     "rogueLikeSeasonMissions": [],
@@ -63,6 +106,13 @@
   },
   "/mission/roguelike/check": {},
   "/mission/roguelike/update": {},
+<<<<<<< HEAD
+=======
+  "/ranking": {
+    "rankings": [],
+    "myRank": 0
+  },
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
   "/story-mode": {
     "storyClearInfos": []
   },
@@ -75,6 +125,39 @@
   "/story-mode/delete": {
     "storyClearInfos": []
   },
+<<<<<<< HEAD
+=======
+  "/decoration": {
+    "flagInfo": {
+      "flagsModel": [],
+      "equipedFlag": {
+        "flagId": 0,
+        "season": 0
+      }
+    },
+    "nameTagInfo": {
+      "nameTagsModel": [],
+      "equippedNameTag": {
+        "nameTagId": 0
+      }
+    },
+    "mapSkinInfo": {
+      "mapSkinList": []
+    },
+    "advisorInfo": {
+      "advisorList": []
+    },
+    "loginSkinInfo": {
+      "loginSkinList": []
+    },
+    "equipInfo": {
+      "appliedMapSkinData": {},
+      "appliedAdvisor": 0,
+      "appliedLoginSkin": 0,
+      "loginSceneIllustData": null
+    }
+  },
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
   "/territory/hunting/fetch": {},
   "/territory/hunting/start": {},
   "/territory/hunting/end": {},
@@ -97,7 +180,16 @@
   },
   "/trigger/execute": {},
   "/trigger/execute-saved": {},
+<<<<<<< HEAD
   "/ingame-coupon": {},
+=======
+  "/flag/set": {},
+  "/nameTag/inventory": {
+    "nameTags": []
+  },
+  "/nameTag/set": {},
+  "/incgame-coupon": {},
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
   "/test/roguelike/reset-all-mission": {},
   "/test/set-dimension-rift-ranking": {},
   "/shop": {
@@ -539,4 +631,8 @@
       "percentage": 0
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 093e0fe102ea49cdcba6cf7470dbe680f57f95d5
