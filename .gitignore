@@ -7,7 +7,8 @@
 unity/
 tools/
 ghidra/
-il2cpp/
+il2cpp/*
+!il2cpp/*/libil2cpp_v*_ssl.so
 frida/
 xml_history/
 # Admin panel build artifacts (reinstall with pnpm install)
