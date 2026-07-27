@@ -90,7 +90,7 @@ server/state/players.db-shm
 server/state/.write.lock
 
 # Agentmemory runtime store (state_store.db + stream_store, binary; not KGC project data)
-data/
+/data/
 
 # Live player save (runtime state; WAL/shm/lock already ignored above)
 server/state/players.db
