@@ -12,7 +12,7 @@ on:
         required: false
         default: "https://github.com/nowl-it/kgc-private-server/releases/download/stock-v171.1.00/com.awesomepiece.castle@171.1.00.xapk"
       tag:
-        description: "Version, used as release name 'King Bug Castle <tag>' (e.g. v171.1.00); if it already exists a timestamp suffix is appended"
+        description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v171.1.00); if it already exists a timestamp suffix is appended"
         required: false
         default: "v171.1.00"
 
@@ -65,30 +65,63 @@ jobs:
         run: |
           python3 server/build_v171_private.py --share
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: KingBugCastle_v171
-          path: KingBugCastle_v171.xapk
-          if-no-files-found: error
-
-      - name: Create GitHub Release
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Resolve Version
         run: |
           TAG="${{ github.event.inputs.tag }}"
           [ -z "$TAG" ] && TAG="v171.1.00"
           if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             TAG="$TAG-$(date +%Y%m%d-%H%M%S)"
           fi
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+
+      - name: Prepare Release Asset
+        run: |
+          cp KingBugCastle_v171.xapk "KingBugCastle_${TAG}.xapk"
+          ls -lh "KingBugCastle_${TAG}.xapk"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: KingBugCastle_${{ env.TAG }}
+          path: KingBugCastle_${{ env.TAG }}.xapk
+          if-no-files-found: error
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
           cat > notes.md <<EOF
-          Private-server client (v171.1.00).
+          ## King Bug Castle — Private-Server Client
 
-          - Signed with a throwaway debug keystore — the game's own update/obfuscation is disabled, so this APK is not updatable through the real store.
+          Custom client (v171.1.00, arm64) for the King Bug Castle private-server project: the
+          original King God Castle v171.1.00 game with compatibility patches so it connects to a
+          self-hosted private server instead of the official backend.
 
-          Install: side-load the \`.xapk\` with any APKMirror-style installer, or \`adb install-multiple\` the three \`.apk\` files inside it.
+          ### What is inside
+          - Game version: v171.1.00 (arm64)
+          - SSL verification bypass — works with self-signed server certificates
+          - Anti-cheat (XIGNCODE NEO) stub — the game boots normally without the official packer
+          - Stability fixes — patched crash/NRE sources (lobby, shop, PvP panels, event popups)
+          - Custom mail support — the server can push its own notification text
+          - Signed with a throwaway debug keystore
+
+          ### Install
+          1. Install with any XAPK-style installer (APKMirror Installer / APKPure), or unpack the
+             archive and run \`adb install-multiple\` on the three \`.apk\` files inside.
+          2. Open the app. A guest account is created automatically on first launch; Google
+             sign-in is also supported.
+          3. If a storage-permission prompt appears, allow it (needed by some patches on first
+             run).
+
+          ### Notes & troubleshooting
+          - The client cannot be updated through the official store — reinstall the new file
+            whenever a new version is released.
+          - First launch takes longer than usual (one-time unpacking).
+          - If the screen stays black after the splash, force-close and relaunch once.
+          - Close screen-recording apps if UI elements stop responding (some Unity versions
+            conflict with them).
           EOF
-          gh release create "$TAG" KingBugCastle_v171.xapk \
+          gh release create "$TAG" "KingBugCastle_${TAG}.xapk" \
             --repo "$GITHUB_REPOSITORY" \
             --latest \
             --title "King Bug Castle $TAG" \
