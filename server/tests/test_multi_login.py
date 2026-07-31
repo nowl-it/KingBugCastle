@@ -40,8 +40,8 @@ def check_multiplayer_is_the_default():
     print("ok default: KGC_MULTIPLAYER on by default")
 
 
-def check_first_login_adopts_the_lone_existing_save():
-    # Stand in for a server that has run single-player: exactly one save, no accounts.
+def _seed_lone_legacy_save():
+    """Stand in for a server that has run single-player: one save, no accounts."""
     st = server.copy.deepcopy(server.DEFAULT_PLAYER)
     st["uid"] = "legacy-0001"
     st["gold"] = 777777
@@ -49,7 +49,24 @@ def check_first_login_adopts_the_lone_existing_save():
     playerdb.set_active("legacy-0001")
     assert playerdb.account_count() == 0 and playerdb.count() == 1
 
+
+def check_a_lone_save_is_not_adopted_by_default():
+    """A wiped-then-rebuilt server must not hand its leftover save to the next
+    Guest. This is the regression: a fresh Guest login landed on the old test save."""
+    _seed_lone_legacy_save()
+    assert not server.ADOPT_LONE_SAVE, "adoption must be opt-in"
+    _, uid = _login("Guest_stranger", GUEST)
+    assert uid != "legacy-0001", "a stranger's Guest login was given the existing save"
+    assert playerdb.load("legacy-0001")["gold"] == 777777, "the lone save was touched"
+    playerdb.delete(uid)
+    print("ok no-adopt: a fresh Guest gets its own save, not the leftover one")
+
+
+def check_first_login_adopts_the_lone_existing_save():
+    _seed_lone_legacy_save()
+    server.ADOPT_LONE_SAVE = True                       # KGC_ADOPT_LONE_SAVE=1
     out, uid = _login("Google_alice", GOOGLE)
+    server.ADOPT_LONE_SAVE = False
     assert uid == "legacy-0001", f"first login did not adopt the lone save: {uid}"
     assert playerdb.load(uid)["gold"] == 777777, "the adopted save lost its data"
     assert playerdb.load(uid)["accountType"] == GOOGLE, "login type not recorded"
@@ -91,6 +108,7 @@ def check_single_player_override_still_works():
 
 if __name__ == "__main__":
     check_multiplayer_is_the_default()
+    check_a_lone_save_is_not_adopted_by_default()
     check_first_login_adopts_the_lone_existing_save()
     check_a_different_account_gets_its_own_save()
     check_same_id_restores_same_save_on_another_device()

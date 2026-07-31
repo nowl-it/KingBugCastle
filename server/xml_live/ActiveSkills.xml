@@ -160,7 +160,7 @@
                 <RangeType>Self</RangeType>
             </RangeInfo>
             <BuffContents>
-                <AddStat StatType="CCRatio" IgnoreCCRatio="true" StatValueType="TotalPerValue" MaxOverlapCount="1" />
+                <AddCustomBuff Key="TotalCCRatioPer" />
             </BuffContents>
             <Values>
                 <FixedValue>-100</FixedValue>
@@ -171,6 +171,8 @@
     <!-- 3돌 강화 variant : 모든 이격 캐시에게 부활 1회 부여 -->
     <ActiveSkill ID="10803" Inherit="10800">
         <ReqOvercome>3</ReqOvercome>
+
+        <Desc>ActiveSkillDesc_10803</Desc>
 
         <DescParams>
             <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
@@ -189,7 +191,7 @@
                 <RangeType>Self</RangeType>
             </RangeInfo>
             <BuffContents>
-                <AddReviveCount MaxHpPer="100" MaxManaPer="100" Category="Unit" />
+                <AddReviveCount MaxHpPer="100" MaxManaPer="100" Category="Treasure" />
             </BuffContents>
             <Values>
                 <FixedValue>1</FixedValue>

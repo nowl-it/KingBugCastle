@@ -45,9 +45,9 @@ fields (id, tier-derived option count, etc.) stay in code since they come from p
 — only the constant/template parts live here.
 
 `artifact.optCountByLevel`/`typesPool`/`maxRollLvs`/`safePositions` directly control the
-`ArtifactOptionUI.Init` crash-avoidance invariant documented in `AGENTS.md` and
-`documentation/GOD_ACCOUNT_DATA_AGENT_PROMPT.md` — don't change `safePositions` to more
-than 1 element without re-reading that writeup first (it reproduces a client-side crash).
+`ArtifactOptionUI.Init` crash-avoidance invariant documented in `AGENTS.md` — don't change
+`safePositions` to more than 1 element without re-reading that writeup first (it reproduces
+a client-side crash).
 
 ## `default_player.json`
 

@@ -8,13 +8,20 @@ gate, you can flip these on early.
 ## The integer version
 
 The client's version is an **integer**, not the dotted string: v170.1.00 → **`170100`**, v171.0.00 →
-`171000`. Master-data `<MinVersion>N</MinVersion>` means "released at client version ≥ N".
+`171000`, v171.1.00 → `171100`. Master-data `<MinVersion>N</MinVersion>` means "released at client
+version ≥ N".
 
 ## Two gates to lower
 
-1. **Server-side grant filter** — `server.py` has `> 170100` thresholds in a few places (e.g.
-   `_all_treasure_ids()`, and content-gate checks around lines 169/201/226). These decide what the
-   server hands out / treats as released. Grep `170100` to find them; bump when the client version bumps.
+1. **Server-side grant filter** — one value, `CONTENT_GATE`, **derived** from `serverVersion` in
+   `server/data/response_config.json` (`"171.1.00"` → `171100`). It decides what the server hands
+   out and treats as released. There is nothing to grep and bump any more: set `serverVersion` to
+   match the client you deploy and the gate follows. `KGC_CONTENT_GATE=<int>` overrides it for a
+   one-off test.
+
+   > Keep it in step with the deployed client. A server left a patch behind hides content the
+   > client can already render - at `171000` against a v171.1.00 client, five entries in
+   > `ShopItems`/`Gachas`/`Treasures` gated at exactly `171100` stayed invisible.
 
 2. **Client-side master data** — the `<MinVersion>` tag inside the entry in `server/xml_live/*.xml`.
    Even if the server grants ownership, the client may hide or mis-render an entry whose local
@@ -46,6 +53,6 @@ Then:
   data-ahead content does).
 - **`ArtifactOptionUI` crash risk** for directly-granted Artifact/Treasure/Accessory — prefer the normal
   ownership path (release gate + default grant) over mail-granting them raw.
-- When you **bump the whole client to a new version**, update the `170100` thresholds in `server.py`,
-  `response_config.json` (`serverVersion`, `patchFolder`), and re-derive ARM64 patch offsets — see
-  [../AGENTS.md](../AGENTS.md) and the version-bump discussion in the project notes.
+- When you **bump the whole client to a new version**, set `serverVersion` (and usually
+  `patchFolder`) in `response_config.json` - the gate follows from it - and re-derive the ARM64
+  patch offsets, which do NOT carry across a version bump. See [../AGENTS.md](../AGENTS.md).

@@ -1459,7 +1459,7 @@
 		<!-- 스킬 -->
 		<Skill>10150</Skill>
 		<!-- 소환해제 -->
-		<ReleaseBaseMana>0</ReleaseBaseMana>
+		<ReleaseBaseSkillEnergy>0</ReleaseBaseSkillEnergy>
 		<ReleaseFromTargetWhenReleaseTransform>true</ReleaseFromTargetWhenReleaseTransform>
 		<RestoreHpPerWhenReleaseTransform>true</RestoreHpPerWhenReleaseTransform>
 		<MovePosYWhenReleaseTransform>-3</MovePosYWhenReleaseTransform>
@@ -5545,6 +5545,7 @@
 		<!-- 능력치 -->
 		<Hp>150</Hp>
 		<Mana>100</Mana>
+		<BattleStartMana>0</BattleStartMana>
 		<Atk>15</Atk>
 		<MAtk>65</MAtk>
 		<AttackInterval>1</AttackInterval>
@@ -5569,42 +5570,46 @@
 		</Effect>
 		<!-- 스킬 -->
 		<Skill>10570</Skill>
+		<!-- AI -->
+		<AIType>Unit10570AI</AIType>
 		
 		<!-- 특성 -->
 		<Potential ReqLevel='4' TargetSkill="10570">
-			<DescComment>스킬로 적 처치시 스킬 횟수 1회 추가(최대 2회)</DescComment>
-			<AddCurSkillAtkCountAtSkillKill>1</AddCurSkillAtkCountAtSkillKill>
-			<MaxAddCurSkillAtkCountAtSkillKill>2</MaxAddCurSkillAtkCountAtSkillKill>
-			<PotentialIcon>PotentialIcon_30</PotentialIcon>
+			<DescComment>스킬로 적 처치 시 최대 마나의 (100 - 발사한 비전 마법 수 * 10)%만큼의 마나 획득</DescComment>
+			<PotentialIcon>PotentialIcon_09</PotentialIcon>
+			<Unit10570AI_ManaHealPerAtSkillKill>100</Unit10570AI_ManaHealPerAtSkillKill>
+			<Unit10570AI_ManaHealPerAtSkillKillAddAtkCount>-10</Unit10570AI_ManaHealPerAtSkillKillAddAtkCount>
 		</Potential>
 		<Potential ReqLevel='4' TargetSkill="105720">
-			<DescComment>스킬로 적 처치시 스킬 횟수 1회 추가(최대 2회)</DescComment>
-			<AddCurSkillAtkCountAtSkillKill>1</AddCurSkillAtkCountAtSkillKill>
-			<MaxAddCurSkillAtkCountAtSkillKill>2</MaxAddCurSkillAtkCountAtSkillKill>
+			<DescComment>스킬로 적 처치 시 최대 마나의 (100 - 발사한 비전 마법 수 * 10)%만큼의 마나 획득</DescComment>
+			<Unit10570AI_ManaHealPerAtSkillKill>100</Unit10570AI_ManaHealPerAtSkillKill>
+			<Unit10570AI_ManaHealPerAtSkillKillAddAtkCount>-10</Unit10570AI_ManaHealPerAtSkillKillAddAtkCount>
 		</Potential>
 
 		<Potential ReqLevel='8' TargetSkill="105700">
-			<DescComment>스킬로 적 처치 시 잔여 스킬의 피해량 +50%(최대 1회, 다음 스킬에는 미적용)</DescComment>
-			<BuffAtKill>10575</BuffAtKill>
-			<PotentialIcon>PotentialIcon_10</PotentialIcon>
+			<DescComment>비전 마법 발사 시마다 비전 마법으로 주는 최종 피해량 +15%, 스킬 재사용 시 초기화</DescComment>
+			<PotentialIcon>PotentialIcon_15</PotentialIcon>
+			<AddDamagePerEveryAtkCount>15</AddDamagePerEveryAtkCount>
 		</Potential>
 		<Potential ReqLevel='8' TargetSkill="1057010">
-			<DescComment>스킬로 적 처치 시 잔여 스킬의 피해량 +50%(최대 1회, 다음 스킬에는 미적용)</DescComment>
-			<BuffAtKill>10575</BuffAtKill>
+			<DescComment>비전 마법 발사 시마다 비전 마법으로 주는 최종 피해량 +15%, 스킬 재사용 시 초기화</DescComment>
+			<AddDamagePerEveryAtkCount>15</AddDamagePerEveryAtkCount>
 		</Potential>
 
 		<Potential ReqLevel='16' Tier='1' TargetSkill="105700">
-			<DescComment>스킬 사용 시 주문력의 30%만큼의 쉴드 생성 (중첩 가능)</DescComment>
-			<SelfShieldEveryAttack>0</SelfShieldEveryAttack>
-			<MAtkPer Target="SelfShieldEveryAttack">30</MAtkPer>
+			<DescComment>비전 마법 발사 시마다 최대 체력의 20% 회복. 연속으로 발사 시마다 최대 체력의 20%만큼 추가 회복 (최대 5연속까지 중첩)</DescComment>
+			<Unit10570AI_SelfHealEveryAttack>0</Unit10570AI_SelfHealEveryAttack>
+			<HpPer Target="Unit10570AI_SelfHealEveryAttack">20</HpPer>
+			<Unit10570AI_SelfHealEveryAttackAddAtkCount>0</Unit10570AI_SelfHealEveryAttackAddAtkCount>
+			<HpPer Target="Unit10570AI_SelfHealEveryAttackAddAtkCount">20</HpPer>
+			<Unit10570AI_SelfHealEveryAttackAddAtkCountLimit>5</Unit10570AI_SelfHealEveryAttackAddAtkCountLimit>
 		</Potential>
 
 		<Potential ReqLevel='16' Tier='1' Slot="2">
-			<DescComment>비전 마법을 3줄로 증가, 주문력 30% 감소</DescComment>
+			<DescComment>스킬의 범위가 3칸으로 변경, 스킬로 발사한 비전 마법이 피해를 주기 전 대상의 쉴드를 파괴</DescComment>
 			<PotentialChangeSkillID>105720</PotentialChangeSkillID>
 			<PotentialChangeInfoSkill>105720</PotentialChangeInfoSkill>
-			<TotalMAtkPer>-30</TotalMAtkPer>
-		<MinVersion>498</MinVersion>
+			<MinVersion>498</MinVersion>
 		</Potential>
 
 		<!-- 가하는 피해 1.0배 -->
@@ -7907,15 +7912,17 @@
         <RogueLikeNewHeroPanelOffsetY>-47</RogueLikeNewHeroPanelOffsetY>
         <RogueLikeNewHeroPanelOffsetX>-10</RogueLikeNewHeroPanelOffsetX>
         <!-- 능력치 -->
-        <Hp>180</Hp>
+        <Hp>200</Hp>
         <Mana>0</Mana>
-        <Atk>25</Atk>
-        <MAtk>30</MAtk>
-        <AttackInterval>0.8</AttackInterval>
+        <Atk>20</Atk>
+        <MAtk>18</MAtk>
+        <AttackInterval>1.4</AttackInterval>
         <!-- 기교 -->
         <SkillEnergyType>Technique</SkillEnergyType>
+		<ReleaseBaseSkillEnergy>0</ReleaseBaseSkillEnergy>
         <Technique>120</Technique>
-        <Unit10800AI_BattleStartTechnique>120</Unit10800AI_BattleStartTechnique>
+        <BattleStartTechnique>120</BattleStartTechnique>
+		<ReleaseTransformReserverHp>true</ReleaseTransformReserverHp>
         <!-- 기본공격 -->
         <AtkType>Melee</AtkType>
         <!-- 사거리 -->
@@ -7937,6 +7944,11 @@
 			<ZLevel>UnitOver</ZLevel>
 			<RotationType>Angle</RotationType>
 		</Effect>
+		<Effect Type='ReviveTrigger'>
+			<Prefab>Fx_1049010</Prefab>
+			<ZLevel>UnitOver</ZLevel>
+			<Sound>se_unit_21145_skill</Sound>
+		</Effect>
 
         <TransformUnit>10810</TransformUnit>
         
@@ -7948,9 +7960,9 @@
         <!-- 개전 스킬 :  -->
         <ActiveSkill>10800</ActiveSkill>
 
-        <!-- 1돌 : 폭주 상태에서 주변 5x5 범위 내 적이 하나 이상 존재할 경우 매 초 최종 주는 피해량 +10% (적이 존재하지 않으면 초기화) -->
+        <!-- 1돌 : 폭주 상태 장판 적중 효과에 피증 추가 -->
         <Overcome ReqOvercome="1" TargetSkill="10800">
-            <Unit10800AI_AuraTotalDamagePer>10</Unit10800AI_AuraTotalDamagePer>
+            <Unit10800AI_AuraDamagePer>1</Unit10800AI_AuraDamagePer>
         </Overcome>
 
         <!-- 2돌 : 폭주할 때마다 뱀파이어 형태의 최종 최대 체력 15% 증가 -->
@@ -7964,13 +7976,15 @@
 
         <!-- 4돌 : 폭주할 때마다 뱀파이어 형태의 최종 최대 체력 15% 증가 -->
         <Overcome ReqOvercome="4" TargetSkill="10800">
-            <Unit10800AI_TotalHpPer>30</Unit10800AI_TotalHpPer>
+            <Unit10800AI_TotalHpPer>15</Unit10800AI_TotalHpPer>
         </Overcome>
 
-        <!-- 5돌 : 폭주 상태에서 주변 5x5 범위 내 적이 하나 이상 존재할 경우 매 초 최종 주는 피해량 +10% (적이 존재하지 않으면 초기화) -->
+		<!-- 5돌 : 폭주 상태 장판 적중 효과에 피증 추가 -->
         <Overcome ReqOvercome="5" TargetSkill="10800">
-            <Unit10800AI_AuraTotalDamagePer>20</Unit10800AI_AuraTotalDamagePer>
+            <Unit10800AI_AuraDamagePer>1</Unit10800AI_AuraDamagePer>
         </Overcome>
+
+		<TransformHpForDesc>150</TransformHpForDesc>
 
         <!-- 가하는 피해 1배 -->
         <ThemeDamageModulator>
@@ -7984,23 +7998,23 @@
         <RogueLikeSynergies>Transformer</RogueLikeSynergies>
 
         <!-- 버전 -->
-        <MinVersion>999999</MinVersion>
+        <MinVersion>172000</MinVersion>
 
         <!-- 차원 영웅 -->
         <IsDimensionUnit>true</IsDimensionUnit>
-        <DimensionStat>
-            <Level Step="1"><Stat Type="Atk" Value="20"/></Level>
-            <Level Step="2"><Stat Type="Hp" Value="150"/></Level>
-            <Level Step="3"><Stat Type="Atk" Value="20"/></Level>
-            <Level Step="4"><Stat Type="MAtk" Value="15"/></Level>
-            <Level Step="5"><Stat Type="Hp" Value="100"/></Level>
-            <Level Step="6"><Stat Type="MAtk" Value="15"/></Level>
-            <Level Step="7"><Stat Type="Atk" Value="7"/></Level>
-            <Level Step="8"><Stat Type="MAtk" Value="5"/></Level>
-            <Level Step="9"><Stat Type="MAtk" Value="5"/></Level>
-            <Level Step="10"><Stat Type="Atk" Value="7"/></Level>
-        </DimensionStat>
-        <OriginalUnit>10490</OriginalUnit>
+		<DimensionStat>
+			<Level Step="1"><Stat Type="Hp" Value="135"/></Level>
+			<Level Step="2"><Stat Type="MAtk" Value="21"/></Level>
+			<Level Step="3"><Stat Type="Hp" Value="135"/></Level>
+			<Level Step="4"><Stat Type="AttackSpeed" ValueType="PerValue" Value="20"/></Level>
+			<Level Step="5"><Stat Type="MAtk" Value="15"/></Level>
+			<Level Step="6"><Stat Type="AttackSpeed" ValueType="PerValue" Value="20"/></Level>
+			<Level Step="7"><Stat Type="Hp" Value="65"/></Level>
+			<Level Step="8"><Stat Type="AttackSpeed" ValueType="PerValue" Value="10"/></Level>
+			<Level Step="9"><Stat Type="AttackSpeed" ValueType="PerValue" Value="10"/></Level>
+			<Level Step="10"><Stat Type="Hp" Value="65"/></Level>
+		</DimensionStat>
+        <OriginalUnit>10430</OriginalUnit>
     </Unit>
 
     <!-- 이격 캐시 (폭주) -->
@@ -8029,15 +8043,15 @@
         <IllustOffsetY>20</IllustOffsetY>
         <GradationColor>8B0000</GradationColor>
         <!-- 능력치 -->
-        <Hp>360</Hp>
+        <Hp>300</Hp>
         <Mana>0</Mana>
-        <Atk>25</Atk>
-        <MAtk>30</MAtk>
-        <AttackInterval>0.8</AttackInterval>
-        <!-- 기교 : 폭주 중에는 기본 공격으로 기교를 획득하지 않고 오라 틱 피해로만 획득 -->
+		<Atk>20</Atk>
+		<MAtk>18</MAtk>
+        <AttackInterval>1.4</AttackInterval>
         <SkillEnergyType>Technique</SkillEnergyType>
         <Technique>120</Technique>
-        <AttackTechnique>0</AttackTechnique>
+        <AttackTechnique>15</AttackTechnique>
+		<ReleaseTransformReserverHp>true</ReleaseTransformReserverHp>
 
         <!-- 스킬 -->
         <Skill>10810</Skill>
@@ -8065,12 +8079,11 @@
         <!-- 오라 설정 (Unit10800AI에서 me.transformed=true일 때만 사용) -->
         <AuraTick>0.25</AuraTick>
         <AuraMAtkPer>100</AuraMAtkPer>
-        <AuraDrain>100</AuraDrain>
-        <AuraSkill>10812</AuraSkill>
+        <AuraSkill>108100</AuraSkill>
         <Unit10800AI_AuraHalfRange>2</Unit10800AI_AuraHalfRange>
-        <Unit10800AI_RushSkill>10811</Unit10800AI_RushSkill>
+        <Unit10800AI_RushSkill>10815</Unit10800AI_RushSkill>
         <!-- 오라 틱으로 피해를 입힐 때마다(틱당 1회) 기교 5 획득 -->
-        <Unit10800AI_AuraTechnique>5</Unit10800AI_AuraTechnique>
+        <Unit10800AI_AuraTechnique>3</Unit10800AI_AuraTechnique>
         
         <Effect Type='Aura'>
             <Prefab>Fx_10810f</Prefab>
@@ -8086,6 +8099,13 @@
             <ZLevel>UnitOver</ZLevel>
         </Effect>
 
+		<Overcome ReqOvercome="1" TargetSkill="10800">
+			<DescAuraDamagePer>2</DescAuraDamagePer>
+		</Overcome>
+		<Overcome ReqOvercome="5" TargetSkill="10800">
+			<DescAuraDamagePer>2</DescAuraDamagePer>
+		</Overcome>
+
         <!-- 가하는 피해 1배 -->
         <ThemeDamageModulator>
             <Modulator Theme='3000'>0.0</Modulator>
@@ -8098,22 +8118,22 @@
         <RogueLikeSynergies>Transformer</RogueLikeSynergies>
         
         <!-- 버전 -->
-        <MinVersion>999999</MinVersion>
+        <MinVersion>172000</MinVersion>
 
         <!-- 차원 영웅 -->
         <IsDimensionUnit>true</IsDimensionUnit>
-        <DimensionStat>
-            <Level Step="1"><Stat Type="Atk" Value="20"/></Level>
-            <Level Step="2"><Stat Type="Hp" Value="150"/></Level>
-            <Level Step="3"><Stat Type="Atk" Value="20"/></Level>
-            <Level Step="4"><Stat Type="MAtk" Value="15"/></Level>
-            <Level Step="5"><Stat Type="Hp" Value="100"/></Level>
-            <Level Step="6"><Stat Type="MAtk" Value="15"/></Level>
-            <Level Step="7"><Stat Type="Atk" Value="7"/></Level>
-            <Level Step="8"><Stat Type="MAtk" Value="5"/></Level>
-            <Level Step="9"><Stat Type="MAtk" Value="5"/></Level>
-            <Level Step="10"><Stat Type="Atk" Value="7"/></Level>
-        </DimensionStat>
+		<DimensionStat>
+			<Level Step="1"><Stat Type="Hp" Value="200"/></Level>
+			<Level Step="2"><Stat Type="MAtk" Value="21"/></Level>
+			<Level Step="3"><Stat Type="Hp" Value="200"/></Level>
+			<Level Step="4"><Stat Type="AttackSpeed" ValueType="PerValue" Value="20"/></Level>
+			<Level Step="5"><Stat Type="MAtk" Value="15"/></Level>
+			<Level Step="6"><Stat Type="AttackSpeed" ValueType="PerValue" Value="20"/></Level>
+			<Level Step="7"><Stat Type="Hp" Value="100"/></Level>
+			<Level Step="8"><Stat Type="AttackSpeed" ValueType="PerValue" Value="10"/></Level>
+			<Level Step="9"><Stat Type="AttackSpeed" ValueType="PerValue" Value="10"/></Level>
+			<Level Step="10"><Stat Type="Hp" Value="100"/></Level>
+		</DimensionStat>
         <OriginalUnit>10430</OriginalUnit>
     </Unit>
 

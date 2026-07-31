@@ -1,9 +1,7 @@
 # Workflow — private server dev loop
 
 For anyone (human or AI) editing `server/`. Read this before touching `server.py` or
-`data/*.json`. For the god-account data-completion task specifically, see
-`documentation/GOD_ACCOUNT_DATA_AGENT_PROMPT.md` (self-contained agent brief). For arm64
-binary patches / RVA tables, see `AGENTS.md` at the repo root. For operator playbooks
+`data/*.json`. For arm64 binary patches / RVA tables, see `AGENTS.md` at the repo root. For operator playbooks
 (grant items/skins/treasures, un-gate content, build a dummy stage, push a CDN bundle,
 crypto API), see **[`../docs/`](../docs/README.md)**.
 
@@ -15,8 +13,9 @@ crypto API), see **[`../docs/`](../docs/README.md)**.
 | A constant used by a response that DOES have per-request logic (dates, `st.get()` fallback, formulas) | `data/response_config.json`, referenced from the existing handler in `server.py` |
 | A template field for artifact/accessory/treasure/rift-weapon/rift-crystal | `data/item_templates.json` |
 | Player identity/currency/card-template/deck seed defaults | `data/default_player.json` |
-| New route logic (state mutation, computed values) | `server.py` — add to `DYNAMIC_OVERRIDES` |
-| A binary patch to the client `.so` | `rebuild_arm64.py` (arm64, the live target) |
+| New route logic (state mutation, computed values) | The module that owns that subsystem — `clan.py`, `pvp.py`, `shop_routes.py`, `territory_routes.py`, `decoration_routes.py`, `seasonal.py`, `mini_games.py`, `roster.py`, `inbox.py`, `direct_routes.py`, `admin_api.py`. Only wiring and the leftover handlers live in `server.py` now. |
+| A route in a subsystem that has no module yet | `server.py` — add to `DYNAMIC_OVERRIDES`, or start a module with the same `handlers()` / `register(app, srv)` shape |
+| A binary patch to the client `.so` | `rebuild_arm64.py` (v170) or `build_v171_private.py` (v171). Offsets are per-version — re-derive from that version's own `dump.cs`, never shift the other set. |
 | A client-side UI behavior / il2cpp method hook (custom mail text, in-battle stat poller) | `jni/stub.cpp` — `ndk-build` in `server/`, then `cp libs/arm64-v8a/libxigncode.so xigncode_stub/arm64/` and rerun `rebuild_arm64.py`/`rebuild_arm64_mod.py`. Pick the right hook technique (methodPointer swap vs inline detour) — see `AGENTS.md` "il2cpp hook techniques" |
 | The build/patch/sign/install pipeline itself | `rebuild_arm64.py` (replaces the real app) or `rebuild_arm64_mod.py` (side-by-side King Bug Castle) |
 
@@ -75,7 +74,7 @@ whole point was "should be trivial to read/change without touching code").
    into one test cycle, you won't know which one worked or introduced a new regression.
 
 ## Rules (violating these has caused real crashes — see `AGENTS.md` and
-`documentation/GOD_ACCOUNT_DATA_AGENT_PROMPT.md` for the full incident write-ups)
+`../KNOWLEDGE.md` for the full incident write-ups)
 
 - **Never guess a response shape or a value constraint.** Shape comes from
   `il2cpp/v170.0.03/dump.cs` (grep the `*ResponseModel` class). Value constraints (array
@@ -105,11 +104,12 @@ whole point was "should be trivial to read/change without touching code").
   JSON is read once at import time into module-level globals (`RCFG`, `STATIC_OVERRIDES`,
   `ITEM_TEMPLATES`, `DEFAULT_ARTIFACTS`, etc.), so a running process won't pick up file
   changes.
-- **`state/player.json` is live save data, not a template.** Deleting it regenerates from
-  `DEFAULT_PLAYER` (built from `data/default_player.json` + XML-derived id lists) on next
-  boot — don't hand-edit it expecting the change to survive a state-mutating request, and
-  don't treat edits to `data/default_player.json` as retroactively applying to an existing
-  save.
+- **`state/players.db` is live save data, not a template.** Player state is SQLite now
+  (one row per account, always through `playerdb.py`; the old `state/player.json` +
+  `state/players/*.json` were imported once and are gone). Deleting the DB regenerates
+  from `DEFAULT_PLAYER` (built from `data/default_player.json` + XML-derived id lists) on
+  next registration — and edits to `data/default_player.json` do NOT apply retroactively to
+  an existing save. Edit a live save from the dashboard, not by hand.
 
 ## Sanity-check commands
 

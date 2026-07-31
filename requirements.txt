@@ -1,0 +1,21 @@
+# Server runtime. Install into a venv, not the system Python:
+#
+#   python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+#
+# server/run.sh picks .venv/bin up automatically when it exists. Distro Pythons
+# (Arch, Debian) refuse a system-wide `pip install` anyway, and upgrading FastAPI
+# in /usr would move it for every other project on the machine.
+#
+# Pinned to a floor, not an exact version: these are the versions this server is
+# tested against, and anything newer in the same line has been fine.
+fastapi>=0.140.13
+uvicorn[standard]>=0.51.0     # [standard] brings uvloop + httptools + websockets
+watchfiles>=1.2.0             # run.sh --reload; without it uvicorn silently falls back to
+                              # StatReload, watches only .py, and ignores --reload-include
+pycryptodome>=3.23.0          # AES-128-ECB for the game API
+httpx>=0.28.1                 # dashboard -> game-server admin proxy
+
+# --- optional, tooling only (not needed to run the server) -------------------
+# UnityPy>=1.25.2             # asset/bundle work: rebuild_xml_bundle.py, extractors
+# mitmproxy>=12               # server/capture/: recording the real backend
+# psycopg[binary]>=3.2        # only if KGC_DB_URL points at PostgreSQL

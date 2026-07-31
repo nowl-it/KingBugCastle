@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Extract all bảo cụ (Treasure) assets from KGC v169.1.04 into ~/Downloads/baoCu/"""
+"""Extract all bảo cụ (Treasure) assets from KGC v169.1.04 into ~/Downloads/baoCu/
+
+STALE: the `unity/` tree this reads was dropped (see .claude/CLAUDE.md "Dir layout"),
+and the paths below are absolute to one machine. Kept for reference only - point
+UNITY_BASE/XML_DIR at a fresh AssetRipper export before running it.
+"""
 
 import re
 import shutil

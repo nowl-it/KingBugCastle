@@ -2,8 +2,9 @@
 Main=15, sub=14 (main strictly higher so GetMaxBuildingIdx picks the right one).
 Run: python3 grant_rift_crystals.py
 """
+import pathlib
 import sys
-sys.path.insert(0, "/home/nowl/Code/kgc/server")
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import playerdb
 
 UID = "dev-0001"

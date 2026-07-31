@@ -5776,8 +5776,8 @@ You cannot join the Raid for this season after leaving.</String>
   <String Key="ClanBattleModifier_13">Anguished</String>
   <String Key="ClanBattleModifier_14">Overwhelming</String>
   <String Key="UserLockedClanBattleAlert">This user cannot participate in this season's Alliance Raid.</String>
-  <String Key="UpdateNoticeVersion">170000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/39d1c2e0-6f0e-804a-acc0-f507558ede41</String>
+  <String Key="UpdateNoticeVersion">171100</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Are you sure you want to disband the Alliance?</String>
   <String Key="Clan_Menu_LeaveConfirm">Are you sure you want to leave the Alliance?</String>
   <String Key="RogueLike_ReleaseAtLevel">Unlocked at level {0}</String>
@@ -6863,14 +6863,14 @@ The mark is generated every 3 sec</String>
   <String Key="ShopItemName_1160">Dragon Slayer Invasion Package</String>
   <String Key="UnitName_10570">Farael</String>
   <String Key="UnitSubName_10570">Arcane Mage</String>
-  <String Key="Potential_10570_0">Additionally casts Arcane Spell once when an enemy is killed with &lt;Arcane Scattershot&gt; (max 2 stacks)</String>
-  <String Key="Potential_10570_1">+50% final damage dealt by remaining Arcane Spell when an enemy is killed with &lt;Arcane Scattershot&gt; (can't be stacked)</String>
+  <String Key="Potential_10570_0">Upon killing an enemy with &lt;Arcane Scattershot&gt;, restore 0~90% of Max MP. The fewer arcane bolts fired before the kill, the more MP is restored</String>
+  <String Key="Potential_10570_1">During &lt;Arcane Scattershot&gt;, damage gradually increases by 15% (unlimited Stacks)</String>
   <String Key="SkinDesc_Default_10570">Farael used to cause worries even among the elves, as he could not wield his mana properly despite his overflowing motivation. One day, he ran into Mel and her party, who had happened to visit the Elven Kingdom. Determined to prove his worth, he departed from the Eternal Forest with them.</String>
   <String Key="SkillName_10570">Arcane Scattershot</String>
   <String Key="SkillDesc_10570">Casts Arcane Spell toward a target, dealing {105700@Damage:MAtkPer} damage {AttackCount} time(s) to all blocks within one random direction among the four directions. When the target is killed, the remaining Arcane Spell is cast to another nearby enemy.</String>
   <String Key="MissionDesc_10357">Play using Farael</String>
   <String Key="Name_Potential_10570_2">Undulating Mana</String>
-  <String Key="Potential_10570_2">Generates Protection equal to 30% of Spell Power whenever casting each Arcane Spell of &lt;Arcane Scattershot&gt;</String>
+  <String Key="Potential_10570_2">Each arcane bolt from &lt;Arcane Scattershot&gt; restores 20% of Max HP, plus an additional 20% of Max HP for each consecutive shot (up to 100% healing)</String>
   <String Key="SkinName_1057000">Farael the Apprentice Mage</String>
   <String Key="SkinDesc_1057000">Farael was born with an unfathomable amount of mana. Others expected him to grow up to be a great mage, but he failed to meet such expectations as he could not properly wield his overflowing mana upon reaching maturity. Had it not been for a being who cared for Farael to keep his spirits high, he might have even gone as far as to forgo the art of magic.</String>
   <String Key="ReportType_Teaming">Teaming: Behavior of forming teams using elements outside of the game</String>
@@ -6999,8 +6999,7 @@ A hero that uses TP can gain additional TP in a special way.</String>
   <String Key="BuildingEffect_TotalHpPer">+{Value}% final HP</String>
   <String Key="BuildingEffect_TotalMAtkPer">+{Value}% final Spell Power</String>
   <String Key="Name_Potential_10570_3">Dispersion of Mana</String>
-  <String Key="Potential_10570_3">Increases Arcane Spell's area of damage to 3 blocks
--30% final Spell Power</String>
+  <String Key="Potential_10570_3">&lt;Arcane Scattershot&gt;'s damage Range increases to 3 tiles and destroys the target's Protection before dealing damage</String>
   <String Key="RestartColosseum">Would you like to rejoin the Strife Battlefield match that was in progress?</String>
   <String Key="ColosseumReenterWaitForBattleEnds">Waiting for the current battle to end...</String>
   <String Key="Shop_Tab_Special">Special Product</String>
@@ -9392,8 +9391,8 @@ All of the dolls' stats follow Rie's stats at the time the Machina is summoned.<
   <String Key="SkillDesc_10550_Short">Stone Spirit's normal attack deals {Unit@OverwriteAtkByParent} spell damage, which is {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% of Elizabeth's Spell Power. Stone Spirit has {Unit@OverwriteHpByParent:HpPer:BaseValue}% of Elizabeth's HP and {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% of their Spell Power, Attack Speed, and Movement Speed.</String>
   <String Key="SkillAltDesc_10550_Short">Stone Spirit's normal attack deals {Unit@OverwriteAtkByParent} spell damage, which is {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% of Elizabeth's Spell Power. Stone Spirit has {Unit@OverwriteHpByParent:HpPer:BaseValue}% of Elizabeth's HP and {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% of their Spell Power, Attack Speed, and Movement Speed.</String>
   <String Key="SkillDesc_10560_Short">Grants {ConnectedMAtkBuffPer}% of Spell Power to the linked target and amplifies their skill damage by {BaseSkillDamageMul}% for {Time} sec. (Cannot link to a target that is already linked)</String>
-  <String Key="SkillDesc_10570_Short">Casts Arcane Spell, dealing {105700@Damage:MAtkPer} damage {AttackCount} time(s) to enemies in all blocks within one random direction among the four directions.</String>
-  <String Key="SkillDesc_105720_Short">Casts Arcane Spell, dealing {105700@Damage:MAtkPer} damage {AttackCount} time(s) to enemies in {1057011@SplashRangeY} block(s) within one random direction among the four directions.</String>
+  <String Key="SkillDesc_10570_Short">Continuously fires arcane bolts that deal {105700@Damage:MAtkPer} damage to all tiles in 1 of 4 random directions.</String>
+  <String Key="SkillDesc_105720_Short">Continuously fires arcane bolts that destroy Protection and deal {105700@Damage:MAtkPer} damage in 1 of 4 random directions across {1057011@SplashRangeY} tiles.</String>
   <String Key="SkillDesc_105721_Short">Casts Arcane Spell, dealing {105700@Damage:MAtkPer} damage {AttackCount} time(s) to enemies in {1057011@SplashRangeX} block(s) within one random direction among the four directions.</String>
   <String Key="SkillDesc_10580_Short">Upon taking damage, has a {Unit@MissRatio}% chance to negate the damage and obtain {Unit@AddTechniqueAtMiss} TP. When TP is full, charges at the target to deal {Damage:MAtkPer} damage and then {10585@TickDamage:AtkPer} damage {10585@AttackCount} time(s).</String>
   <String Key="SkillDesc_10600_Short">Summons {SummonUnitCountForDesc} hallucination(s) that last for {10605@Time} sec. The hallucinations are not targetable and deal damage equal to (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% of Saras's ATK.</String>
@@ -9461,8 +9460,8 @@ All of the dolls' stats follow Rie's stats at the time the Machina is summoned.<
   <String Key="SkillDesc_10530_Long">For {Time} sec., Menace +{BaseDefPen}, and normal attacks deal damage equal to {10535@Damage:AtkPer:BaseValue}% of ATK to all nearby enemies within {10535@SplashRangeSum} tiles. The main target also takes {105300@TickDamage} Spell Normal damage {105300@DescTickCount} times over {105300@Time} sec.</String>
   <String Key="SkillDesc_10540_Long">Elizabeth recalls all Stone Spirits she summoned, then deals {10550@Damage:BaseValue}+{10550@Damage:MAtkPer} damage to all enemies within {10550@SplashRangeX}{X}{10550@SplashRangeY} range near the Stone Spirits and stuns them for {10550@StunTime} sec. Elizabeth summons {SummonCountForDesc} Stone Spirit(s) again. (Max {Unit@GlobalMaxSummonCount} Stone Spirits on the battlefield)</String>
   <String Key="SkillDesc_10560_Long">Before the battle starts, Saeryung links herself and the nearest ally. She uses the spell that has been passed down for generations to grant {ConnectedMAtkBuffPer}% of Spell Power to the linked target for {Time} sec. The granted stats increase the target hero's stats by converting Saeryung's stats into the target hero's basic stats. Saeryung amplifies the linked target's skill damage by {BaseSkillDamageMul}%. (Multiple Saeryungs cannot link to the same target.)</String>
-  <String Key="SkillDesc_10570_Long">Farael casts Arcane Spell that lashes out in a random direction. The spell deals {105700@Damage:MAtkPer} damage {AttackCount} time(s) to enemies in all blocks within one random direction among the four directions. When the target is killed, the remaining Arcane Spell is cast to another nearby enemy.</String>
-  <String Key="SkillDesc_105720_Long">Farael casts Arcane Spell that lashes out in a random direction. The spell deals {105700@Damage:MAtkPer} damage {AttackCount} time(s) to enemies in {1057011@SplashRangeY} block(s) within one random direction among the four directions. When the target is killed, the remaining Arcane Spell is cast to another nearby enemy.</String>
+  <String Key="SkillDesc_10570_Long">Fires unpredictable arcane bolts. Targets the enemy with the highest HP and deals {105700@Damage:MAtkPer} damage to all tiles in 1 of 4 random directions every {AttackDelay} sec. It does not stop until the caster is inflicted with Restrict movement or the target is defeated.</String>
+  <String Key="SkillDesc_105720_Long">Fires unpredictable arcane bolts. Targets the enemy with the highest HP and destroys the Protection of all enemies in 1 of 4 random directions across {1057011@SplashRangeY} tiles every {AttackDelay} sec., then deals {105700@Damage:MAtkPer} damage. It does not stop until the caster is inflicted with Restrict movement or the target is defeated.</String>
   <String Key="SkillDesc_105721_Long">Farael casts Arcane Spell that lashes out in a random direction. The spell deals {105700@Damage:MAtkPer} damage {AttackCount} time(s) to enemies in {1057011@SplashRangeX} block(s) within one random direction among the four directions. When the target is killed, the remaining Arcane Spell is cast to another nearby enemy.</String>
   <String Key="SkillDesc_10580_Long">Upon taking damage, Garam has a {Unit@MissRatio}% chance of evading. Successful evasion negates damage and crowd controls and also grants {Unit@AddTechniqueAtMiss} TP. When TP is full, she charges at the target to deal {Damage:MAtkPer} spell damage, then inflicts {10585@AttackCount} normal attack(s) with damage equal to {10585@TickDamage:AtkPer:BaseValue}% of her ATK.</String>
   <String Key="SkillDesc_10600_Long">Saras calls upon the power of the void to summon {SummonUnitCountForDesc} hallucination(s) that last for {10605@Time} sec. The hallucinations are not targetable and deal damage equal to (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% of Saras's ATK.</String>
@@ -13090,9 +13089,9 @@ Would you like to proceed?</String>
   <String Key="ItemName_40632">Lieutenant</String>
   <String Key="ItemDesc_40632">Creates a [Lieutenant Role Block] with {0}% effect on a different random block when deployed on a [Role Block] (cannot equip duplicate Lieutenant Runes)</String>
   <String Key="ItemName_40643">Dominator</String>
-  <String Key="ItemDesc_40643">Gains +{0}% bonus effect from the [Role Block]
-While the Dominator is alive, heroes who began the battle on a block not chosen as a [Role Block] are revived {1} sec after dying
-You instantly lose the battle when the Dominator dies</String>
+  <String Key="ItemDesc_40643">Obtain an additional +{0}% of [Role Slot] effect
+While the Dominator is alive, Heroes except the Dominator Revive {1} sec. after death
+When the Dominator is killed, immediate Battle Defeat</String>
   <String Key="BuildingEffect_BaseHybridDef">+{Value} DEF</String>
   <String Key="BuildingEffect_BattleStartMana">+{Value}% initial MP</String>
   <String Key="BuildingEffect_BattleStartMana_Long">Increases base MP Recovery.</String>
@@ -17953,4 +17952,60 @@ After Battle starts, Obtain +{11}% Crowd control resistance and +{12}% Spell DEF
   <String Key="Overcome_10800_3">Each time Frenzy activates, Vampire Form Final Max HP +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_4">Whenever Vampire Form's Nearby Damage effect deals damage, Damage Dealt in Vampire Form +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="UnitName_10810">Alessia</String>
+  <String Key="LeagueName_12">League of Warmth</String>
+  <String Key="SkinDesc_1044005">&lt;i&gt;Reward for participating in the League of Warmth in Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400500">&lt;i&gt;Reward for reaching point milestones in the League of Warmth in Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400501">&lt;i&gt;Reward for placing in the Ranking of the League of Warmth in Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_1071004">&lt;i&gt;Reward for participating in the League of Warmth in Battle&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100400">&lt;i&gt;Reward for reaching point milestones in the League of Warmth in Battle&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100401">&lt;i&gt;Reward for placing in the Ranking of the League of Warmth in Battle&lt;/i&gt;</String>
+  <String Key="SkinName_1057002">Morning Star King Farael</String>
+  <String Key="SkinDesc_1057002">&lt;i&gt;The noblest starlight born in the early dawn will become the brightest light to break through the darkness.&lt;/i&gt;</String>
+  <String Key="SuperShieldModulator">Obtain Mighty Block</String>
+  <String Key="BuildingEffect_BaseDamageReflect">+{Value}% Reflect damage
+(halved for spell damage)</String>
+  <String Key="BuildingEffect_BaseDamageReflect_Long">Hero reflects damage based on a percentage of incoming damage.</String>
+  <String Key="TreasureName_30042">Perataus</String>
+  <String Key="TreasureSubName_30042">Pitch-Black Shield</String>
+  <String Key="TreasureDesc_30042">Behemus's Shield is not just for defense. Behemus's Fierce Charge with his massive Shield can crumple even the strongest armor in an instant.</String>
+  <String Key="TreasureSkillName_30042">Plunge</String>
+  <String Key="BuffDataName_3300421">Shatter I</String>
+  <String Key="BuffDataName_3300422">Dent I</String>
+  <String Key="BuffDataName_3300423">Neutralization</String>
+  <String Key="BuffDataName_3300424">Dent II</String>
+  <String Key="BuffDataName_3300425">Shatter II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Perataus Pickup Special Shop</String>
+  <String Key="SpecialPackage_1680">Perataus Package 1</String>
+  <String Key="SpecialPackage_1681">Perataus Package 2</String>
+  <String Key="SpecialPackage_1682">Perataus Package 3</String>
+  <String Key="BuffDataDesc_3300421">Damage transfer +{1}x for every {0} Menace</String>
+  <String Key="BuffDataDesc_3300422">Physical damage taken by enemies with Unstable +{0}%</String>
+  <String Key="BuffDataDesc_3300423">Whenever Unstable is removed, all allies Obtain +{0} Mighty Block for each enemy it is removed from</String>
+  <String Key="BuffDataDesc_3300424">Physical damage taken by enemies with Unstable +{0}%</String>
+  <String Key="BuffDataDesc_3300425">Damage transfer +{1}x for every {0} Menace</String>
+  <String Key="TreasureSkillDesc_3300420">When you deal Skill damage to an enemy, apply Unstable to the target
+If an ally deals Physical damage equal to at least {0}% of the target's max HP to an enemy with Unstable, {1}% of that damage is transferred as Special damage to another enemy with Unstable, then Unstable is removed from all enemies
+&lt;color=#808080&gt;&lt;i&gt;This effect is shared even if different Heroes apply Unstable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">When you deal Skill damage to an enemy, apply Unstable to the target
+If an ally deals Physical damage equal to at least {0}% of the target's max HP to an enemy with Unstable, {1}% of that damage is transferred as Special damage to another enemy with Unstable, then Unstable is removed from all enemies
+Damage transfer +{3}x for every {2} Menace
+&lt;color=#808080&gt;&lt;i&gt;This effect is shared even if different Heroes apply Unstable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">When you deal Skill damage to an enemy, apply Unstable to the target
+If an ally deals Physical damage equal to at least {0}% of the target's max HP to an enemy with Unstable, {1}% of that damage is transferred as Special damage to another enemy with Unstable, then Unstable is removed from all enemies
+Damage transfer +{3}x for every {2} Menace
+Physical damage taken by enemies with Unstable +{4}%
+This increase to Physical damage taken does not Stack. Only the highest value applies
+&lt;color=#808080&gt;&lt;i&gt;This effect is shared even if different Heroes apply Unstable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">When you deal Skill damage to an enemy, apply Unstable to the target
+If an ally deals Physical damage equal to at least {0}% of the target's max HP to an enemy with Unstable, {1}% of that damage is transferred as Special damage to another enemy with Unstable, then Unstable is removed from all enemies
+Damage transfer +{3}x for every {2} Menace
+Physical damage taken by enemies with Unstable +{4}%
+This increase to Physical damage taken does not Stack. Only the highest value applies
+Whenever Unstable is removed, all allies Obtain +{5} Mighty Block for each enemy it is removed from
+&lt;color=#808080&gt;&lt;i&gt;This effect is shared even if different Heroes apply Unstable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="SpecialShop_TreasureDoublePickUp10014">Legacy Pickup Special Shop</String>
+  <String Key="SpecialPackage_1676">Legacy Pickup Summoning Stone Package 1</String>
+  <String Key="SpecialPackage_1677">Legacy Pickup Summoning Stone Package 2</String>
+  <String Key="SpecialPackage_1678">Caelus Package</String>
+  <String Key="SpecialPackage_1679">Trickster Package</String>
 </Strings>

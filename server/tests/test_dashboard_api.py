@@ -58,7 +58,9 @@ def test_guard():
     outsider = TestClient(dashboard.app, client=("10.0.0.9", 55002))
     for path in ("/api/status", "/api/players", "/api/player/t-1"):
         r = outsider.get(path)
-        assert r.status_code == 403, f"{path} reachable from a remote peer: {r.status_code}"
+        # 401 since the guard grew accounts: "who are you" now precedes "go away".
+        assert r.status_code in (401, 403), \
+            f"{path} reachable from a remote peer: {r.status_code}"
     # The websocket guard is separate code - a middleware-only check leaves it open.
     try:
         with outsider.websocket_connect("/ws"):

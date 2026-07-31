@@ -14,15 +14,17 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import playerdb
 playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
 
+from tests.seed import one_account
+one_account()          # multiplayer mode does not mint a save; give load_state() one
 import server
 
 
 def check_a_transfer_code_moves_one_save():
     st = server.load_state()
-    code = server.r_transfer_issue({}, st)["userId"]
+    code = server.r_transfer_issue({}, st)["secretCode"]
     assert code and len(code) >= 8, f"code {code!r} is too short to be a credential"
     assert server._transfer_lookup(code) == st["uid"], "the code does not find its save"
-    out = server.r_transfer_redeem({"code": code}, server.load_state())
+    out = server.r_transfer_redeem({"secretCode": code}, server.load_state())
     assert out.get("accessToken"), f"redeeming a valid code failed: {out}"
     assert playerdb.uid_for_token(out["accessToken"]) == st["uid"], \
         "the session points at a different save"
@@ -31,9 +33,9 @@ def check_a_transfer_code_moves_one_save():
 
 def check_a_code_is_single_use():
     st = server.load_state()
-    code = server.r_transfer_issue({}, st)["userId"]
-    server.r_transfer_redeem({"code": code}, server.load_state())
-    again = server.r_transfer_redeem({"code": code}, server.load_state())
+    code = server.r_transfer_issue({}, st)["secretCode"]
+    server.r_transfer_redeem({"secretCode": code}, server.load_state())
+    again = server.r_transfer_redeem({"secretCode": code}, server.load_state())
     assert again.get("success") is False, "the same code transferred the save twice"
     assert "accessToken" not in again
     print("ok single use: a spent code is refused")
@@ -47,22 +49,22 @@ def check_an_expired_code_is_refused():
     server.save_state(st)
     code = st["transfer"]["code"]
     assert server._transfer_lookup(code) is None, "an expired code still resolves"
-    assert server.r_transfer_redeem({"code": code}, server.load_state()) \
+    assert server.r_transfer_redeem({"secretCode": code}, server.load_state()) \
         .get("success") is False
     print("ok expiry: a stale code is refused")
 
 
 def check_a_guessed_code_gets_nothing():
     for guess in ("", "AAAAAAAA", "0", None):
-        out = server.r_transfer_redeem({"code": guess}, server.load_state())
+        out = server.r_transfer_redeem({"secretCode": guess}, server.load_state())
         assert "accessToken" not in out, f"code {guess!r} logged somebody in"
     print("ok guessing: no code but the real one works")
 
 
 def check_issuing_again_replaces_the_old_code():
     st = server.load_state()
-    first = server.r_transfer_issue({}, st)["userId"]
-    second = server.r_transfer_issue({}, server.load_state())["userId"]
+    first = server.r_transfer_issue({}, st)["secretCode"]
+    second = server.r_transfer_issue({}, server.load_state())["secretCode"]
     assert first != second, "two issues produced the same code"
     assert server._transfer_lookup(first) is None, \
         "the previous code still works - two live codes for one save"

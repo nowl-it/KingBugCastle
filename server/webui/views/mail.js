@@ -28,6 +28,57 @@ export default {
     const newEmoji = computed(() => [...(form.value.title + form.value.text)]
       .some((c) => c.codePointAt(0) >= 0x1F900));
 
+    const getEmoji = (type) => {
+      const typeEmojis = {
+        Gold: '💰', Cash: '💎', Heart: '❤️', Item: '📦',
+        Unit: '👤', UnitSoul: '👻', Card: '🃏', Artifact: '👑', Treasure: '🏆', Accessory: '💍'
+      };
+      return typeEmojis[type] || '🎁';
+    };
+
+    const getRewardImageFilename = (type, id) => {
+      if (!id) return null;
+      switch(type) {
+        case 'Unit':
+        case 'UnitSoul': return `Unit_Illust_${id}.png`;
+        case 'Item': return `Item_${id}.png`;
+        case 'Artifact': return `Artifact_Icon_${id}.png`;
+        case 'Treasure': return `TreasureIllust_${id}.png`;
+        case 'Accessory': return `AccessoryIcon_${id}.png`;
+      }
+      return null;
+    };
+
+    const selectedRewardPreviewHtml = computed(() => {
+      if (!needsId.value || !form.value.rewardType) return '';
+      const id = parseInt(form.value.rewardId, 10);
+      if (!id || !rewardList.value) return '';
+      const item = rewardList.value.find(r => r.id === id);
+      const emoji = getEmoji(form.value.rewardType);
+      const file = getRewardImageFilename(form.value.rewardType, id);
+      let iconHtml = emoji;
+      if (file) {
+        iconHtml = `<img src="/ui/assets/icons/${file}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; margin-right: 4px; margin-top: -2px" onerror="this.onerror=null; this.outerHTML='${emoji}';" />`;
+      }
+      return item ? `${iconHtml} <span>${item.name}` + (item.sub && item.sub !== 'None' ? ` [${item.sub}]` : '') + '</span>' : '';
+    });
+
+    const getRewardDisplayHtml = (p) => {
+      if (!p.rewardType) return '';
+      const emoji = getEmoji(p.rewardType);
+      let name = '';
+      if (store.catalog && store.catalog[p.rewardType] && p.rewardId) {
+        const item = store.catalog[p.rewardType].find(r => r.id === p.rewardId);
+        if (item) name = ` — ${item.name}` + (item.sub && item.sub !== 'None' ? ` [${item.sub}]` : '');
+      }
+      const file = getRewardImageFilename(p.rewardType, p.rewardId);
+      let iconHtml = emoji;
+      if (file) {
+        iconHtml = `<img src="/ui/assets/icons/${file}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; margin-right: 4px; margin-top: -2px" onerror="this.onerror=null; this.outerHTML='${emoji}';" />`;
+      }
+      return `${iconHtml} <span>${p.rewardType}${name} &times; ${fmt.num(p.rewardAmount)}${p.rewardId ? ` (id ${p.rewardId})` : ''}</span>`;
+    };
+
     const send = async () => {
       const title = form.value.title.trim().replace(/^(@raw:\s*)+/i, '');
       const text = form.value.text.trim().replace(/^(@raw:\s*)+/i, '');
@@ -57,7 +108,7 @@ export default {
       if (ok) { await load(); store.loadPlayers(); }
     };
 
-    return { store, posts, form, broadcast, needsId, rewardList, isGrantable, newEmoji, send, del, fmt };
+    return { store, posts, form, broadcast, needsId, rewardList, isGrantable, newEmoji, selectedRewardPreviewHtml, getRewardDisplayHtml, send, del, fmt };
   },
   template: `
     <div class="grid cols-2">
@@ -80,8 +131,8 @@ export default {
               <select class="select" v-model="form.rewardType">
                 <option value="">None</option>
                 <optgroup label="Currency"><option>Gold</option><option>Cash</option><option>Heart</option></optgroup>
-                <optgroup label="Granted"><option>Item</option><option>Unit</option><option>UnitSoul</option><option>Card</option></optgroup>
-                <optgroup label="Display only"><option>Artifact</option><option>Treasure</option><option>Accessory</option></optgroup>
+                <optgroup label="Granted"><option>Item</option><option>Unit</option><option>UnitSoul</option><option>Card</option><option>Treasure</option></optgroup>
+                <optgroup label="Display only"><option>Artifact</option><option>Accessory</option></optgroup>
               </select>
             </div>
             <div class="field">
@@ -101,6 +152,9 @@ export default {
                 <option v-for="r in rewardList" :key="r.id"
                         :value="r.id + ' — ' + r.name + (r.sub ? ' [' + r.sub + ']' : '')"></option>
               </datalist>
+              <div v-if="selectedRewardPreviewHtml" style="margin-top:4px;font-size:12px;color:var(--text-dim); display:flex; align-items:center;">
+                <span style="margin-right: 4px">↳ Selected:</span> <strong v-html="selectedRewardPreviewHtml" style="display:flex; align-items:center;"></strong>
+              </div>
             </div>
             <div class="field">
               <label>Expires (days)</label>
@@ -108,6 +162,10 @@ export default {
             </div>
           </div>
 
+          <span class="hint" v-if="form.rewardType === 'Treasure'" style="color:var(--warn)">
+            A default save already owns every treasure - gifting one it already has claims as
+            nothing. Check the save's treasure list first.
+          </span>
           <span class="hint" v-if="newEmoji" style="color:var(--warn)">
             Emoji beyond Unicode 6.0 render blank in game (old bundled font). Prefer 😀👍❤️🔥👑💰.
           </span>
@@ -141,10 +199,9 @@ export default {
               <button class="btn danger sm" @click="del(p.id)">Delete</button>
             </div>
             <div v-if="p.text" style="font-size:12.5px;color:var(--text-dim);margin-top:4px">{{ p.text }}</div>
-            <div class="meta" v-if="p.rewardType">
-              {{ p.rewardType }} ×{{ fmt.num(p.rewardAmount) }}
-              <span v-if="p.rewardId"> · id {{ p.rewardId }}</span>
-              · until {{ (p.untilAt || '').slice(0, 10) }}
+            <div class="meta" v-if="p.rewardType" style="display:flex; align-items:center;">
+              <span v-html="getRewardDisplayHtml(p)" style="display:flex; align-items:center;"></span>
+              <span style="margin-left:4px">· until {{ (p.untilAt || '').slice(0, 10) }}</span>
             </div>
           </div>
           <div v-if="!posts.length" class="empty"><span class="icon">✉</span>Inbox is empty.</div>

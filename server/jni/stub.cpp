@@ -170,6 +170,39 @@ std::string utf16_to_utf8(const uint16_t* chars, int32_t length) {
     return result;
 }
 
+typedef void* (*il2cpp_string_new_t)(const char*);
+il2cpp_string_new_t str_new = nullptr;
+
+typedef void (*AutoRegisterImplFunc)(void* _this, void* id, void* methodInfo);
+AutoRegisterImplFunc origAutoRegisterImpl = nullptr;
+
+void HookedAutoRegisterImpl(void* _this, void* id, void* methodInfo) {
+    int len = id ? *(int32_t*)((char*)id + 0x10) : 0;
+    if (len == 0) {
+        static char device_id[64] = {0};
+        if (device_id[0] == 0) {
+            FILE* f = fopen("/data/data/com.nowl.castle/guest_id.txt", "r");
+            if (f) {
+                fgets(device_id, sizeof(device_id), f);
+                fclose(f);
+            } else {
+                srand(time(NULL) ^ getpid());
+                sprintf(device_id, "guest-%d-%d", rand(), rand());
+                f = fopen("/data/data/com.nowl.castle/guest_id.txt", "w");
+                if (f) {
+                    fputs(device_id, f);
+                    fclose(f);
+                }
+            }
+            LOGI("HookedAutoRegisterImpl injected persistent ID: %s", device_id);
+        }
+        if (str_new) {
+            id = str_new(device_id);
+        }
+    }
+    if (origAutoRegisterImpl) origAutoRegisterImpl(_this, id, methodInfo);
+}
+
 struct Il2CppArray {
     void* klass;
     void* monitor;
@@ -235,7 +268,7 @@ il2cpp_class_get_parent_t class_get_parent = nullptr;
 il2cpp_class_get_field_from_name_t g_field_from_name = nullptr;
 
 typedef void* (*il2cpp_string_new_t)(const char* str);
-il2cpp_string_new_t str_new = nullptr;
+
 
 // --- Inbox (PostListItem.Set) hook: render server-supplied raw title/text ---
 // Server marks a custom string with the "@raw:" prefix; the hook strips it and writes the
@@ -1083,9 +1116,18 @@ void* worker_thread(void* arg) {
     // the delegate at AddListener (before we run), so swapping the MethodInfo
     // pointer would not affect the already-registered click.
     void* applicationClass = il2cpp_class_from_name(unityEngineCoreImage, "UnityEngine", "Application");
-    if (applicationClass) g_openUrlMethod = class_get_method(applicationClass, "OpenURL", 1);
+    if (applicationClass)    g_openUrlMethod = class_get_method(applicationClass, "OpenURL", 1);
+    
     void* sceneLoginClass = il2cpp_class_from_name(assemblyCSharpImage, "", "Scene_Login");
     if (sceneLoginClass && g_openUrlMethod) {
+        void* autoRegMethod = class_get_method(sceneLoginClass, "<AutoRegister>g__AutoRegisterImpl|134_0", 1);
+        if (autoRegMethod) {
+            void* autoRegFn = *(void**)autoRegMethod;
+            origAutoRegisterImpl = (AutoRegisterImplFunc)install_inline_hook(autoRegFn, (void*)HookedAutoRegisterImpl);
+            if (origAutoRegisterImpl) LOGI("Hooked Scene_Login.AutoRegisterImpl -> persistent local ID!");
+            else LOGE("AutoRegister hook: inline detour failed");
+        }
+
         void* glMethod = class_get_method(sceneLoginClass, "OnClickGoogleLogin", 0);
         if (glMethod) {
             void* glFn = *(void**)glMethod;

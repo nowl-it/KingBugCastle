@@ -9,7 +9,7 @@ state persistence for cards, decks, inventory, missions, and game loop.
 
 Run:  uvicorn server:app --host 0.0.0.0 --port 8080
 """
-import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, hashlib, os, sys
+import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, hashlib, os, sys, random
 import playerdb
 import rewardbox
 import shop
@@ -20,22 +20,29 @@ import decoration
 import dimension
 import attendance
 import babel
+import clan
 import colosseum
 import player_events
+# import mini_games
+import roster
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
 
 AES_KEY = b"b53019bb76da6b34"
 
-LOG_BUF = []
+# Shared primitives now live in common.py so domain modules can use them without
+# importing server.py back. Re-exported under their old names: every handler below,
+# and the tests, call them unqualified.
+from common import (LOG_BUF, admin_log, trace, now_iso, next_reset_iso,
+                    body_int, body_list, body_str, date_default)
 
-def admin_log(*args):
-    msg = datetime.datetime.now().strftime("%H:%M:%S") + " " + " ".join(str(a) for a in args)
-    LOG_BUF.append(msg)
-    if len(LOG_BUF) > 500:
-        LOG_BUF[:] = LOG_BUF[-400:]
-    print(*args, file=sys.stderr)
+# Cross-account reads (boards, matchmaking, player lookup) live in roster.py. Kept
+# under their old private names so handlers and srv.* lookups did not have to move.
+from roster import (all_states as _all_states, board as _board, current_uid as _current_uid,
+                    deck_units as _deck_units, leaderboard as _leaderboard,
+                    opponents as _opponents, player_by_id as _player_by_id,
+                    rank_row as _rank_row)
 
 def aes_encrypt(payload: dict) -> bytes:
     # Space-pad to 16-byte blocks (NOT PKCS7): the client's Newtonsoft JSON reader
@@ -45,6 +52,11 @@ def aes_encrypt(payload: dict) -> bytes:
     if len(raw) % 16:
         raw += b" " * (16 - len(raw) % 16)
     return AES.new(AES_KEY, AES.MODE_ECB).encrypt(raw)
+
+def encrypted_response(payload: dict) -> Response:
+    """Standard AES-encrypted JSON response the game client expects."""
+    return Response(aes_encrypt(payload), media_type="application/json",
+                    headers={"encryptedWithHex": "true"})
 
 def aes_decrypt(data: bytes) -> dict:
     # Some request bodies (e.g. /deck/set) arrive as ASCII hex text of the
@@ -62,29 +74,15 @@ def aes_decrypt(data: bytes) -> dict:
     text = raw.decode("utf-8", "ignore").lstrip()
     return json.JSONDecoder().raw_decode(text)[0]
 
-ROOT = pathlib.Path(__file__).parent
-G = ROOT / "generated"
-MODELS = json.loads((G / "models.json").read_text())
-ROUTE_MODELS = json.loads((G / "route_models.json").read_text())
-ROUTE_MODELS.update({
-    "/treasure": {"method": "Treasure", "response": "TreasureResultResponseModel"},
-    "/treasure/equip": {"method": "TreasureEquip", "response": "TreasureResultResponseModel"},
-    "/treasure/add-exp": {"method": "TreasureAddExp", "response": "TreasureResultResponseModel"},
-    "/treasure/dismantle": {"method": "TreasureDismantle", "response": "TreasureResultResponseModel"},
-    "/treasure/release-equip": {"method": "TreasureReleaseEquip", "response": "TreasureResultResponseModel"},
-    "/treasure/set-state": {"method": "TreasureSetState", "response": "TreasureResultResponseModel"},
-    "/treasure/overcome": {"method": "TreasureOvercome", "response": "TreasureResultResponseModel"},
-})
-# map_routes.py pairs a route with a RestAPI method by name similarity and drops
-# what it cannot score, so 70 real v171 routes had no model and were answered with a
-# bare ResponseModel - the right envelope, none of the fields the client reads.
-# data/route_models_extra.json hand-maps them; route_coverage.py reports the gap.
-ROUTE_MODELS.update({
-    p: {"method": v.get("_method"), "response": v["response"]}
-    for p, v in json.loads((ROOT / "data" / "route_models_extra.json").read_text()).items()
-    if not p.startswith("_")
-})
-STATE_DIR = ROOT / "state"
+# Paths, response config and the content gate live in config.py - a domain module
+# needs RCFG/XML_DIR and cannot import server.py back. Re-exported under their old
+# names so every handler below reads unqualified.
+from config import (ROOT, DATA_DIR, STATE_DIR, MODELS, RCFG, STATIC_OVERRIDES,
+                    ITEM_TEMPLATES, CONFIG_FILE, PATCH_FOLDER, SERVER_VERSION,
+                    CONTENT_GATE, XML_DIR)
+import config
+
+ROUTE_MODELS = config.load_route_models()
 STATE_DIR.mkdir(parents=True, exist_ok=True)
 
 # Player state lives in state/players.db (SQLite, WAL). The old JSON files are
@@ -92,199 +90,18 @@ STATE_DIR.mkdir(parents=True, exist_ok=True)
 _migrated = playerdb.migrate_from_json(STATE_DIR)
 if _migrated:
     admin_log(f"[state] migrated {_migrated} player(s) from JSON into {playerdb.DB_PATH.name}")
-
-# All response data that isn't request-time-computed logic lives under data/ as
-# JSON - editable without touching code, and the shape mirrors what a future
-# SQL migration would look like (one table/row per file/key).
-DATA_DIR = ROOT / "data"
-RCFG = json.loads((DATA_DIR / "response_config.json").read_text())
-STATIC_OVERRIDES = json.loads((DATA_DIR / "static_overrides.json").read_text())
-ITEM_TEMPLATES = json.loads((DATA_DIR / "item_templates.json").read_text())
-
-PATCH_FOLDER = RCFG["server"]["patchFolder"]
-SERVER_VERSION = RCFG["server"]["serverVersion"]
-
-def _content_gate(version):
-    """Master-data MinVersion cutoff, derived from serverVersion.
-
-    MinVersion is a 6-digit build code: "170.1.00" -> 170100, "171.0.00" -> 171000.
-    An entry above the gate is content the deployed client cannot render yet, so it
-    is filtered out of the hero/artifact/treasure/shop listings.
-
-    This used to be three separate `> 170100` literals, which stayed behind when the
-    build moved to 171.0.00 - the server advertised v171 while hiding every v171
-    hero, artifact and treasure from its own listings. Deriving it means the gate
-    cannot drift from the version again. KGC_CONTENT_GATE overrides it, which is
-    required if you deploy the v170.1.00 client against this server."""
-    env = os.environ.get("KGC_CONTENT_GATE")
-    if env:
-        return int(env)
-    parts = [int(p) for p in version.split(".")]
-    parts += [0] * (3 - len(parts))
-    return parts[0] * 1000 + parts[1] * 100 + parts[2]
-
-CONTENT_GATE = _content_gate(SERVER_VERSION)
 admin_log(f"[gate] serverVersion {SERVER_VERSION} -> content gate {CONTENT_GATE}")
-
-def next_reset_iso(days=1):
-    """Next UTC-midnight rollover boundary, `days` out.
-
-    `tomorrow` / `nextWeek` are DERIVED, never served from stored state.
-    Scene_Lobby.Update polls `if (now >= playerData.tomorrow_) FetchNextDay()`
-    once a second, and FetchNextDay re-runs the whole login + lobby fetch chain.
-    A stored value is frozen at account-creation time, so the check goes
-    permanently true and the client re-logins at 1 Hz forever.
-    """
-    midnight = datetime.datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
-    return (midnight + datetime.timedelta(days=days)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
-
-def now_iso(delta_days=0, seconds=0):
-    return (datetime.datetime.utcnow() + datetime.timedelta(days=delta_days, seconds=seconds)
-            ).strftime("%Y-%m-%dT%H:%M:%S.000Z")
-
-def body_int(value, default=0, lo=None, hi=None):
-    """A number out of a request body, as an int, within bounds.
-
-    Request fields arrive as whatever the client's serialiser produced. A field
-    that comes back as "2" instead of 2 makes `max(1, count)` raise TypeError and
-    the route answers 500; a negative index reaches a Python list and quietly
-    writes to the wrong end of it, which is worse than crashing. Both are read
-    through here rather than guarded per handler."""
-    try:
-        n = int(float(value))
-    except (TypeError, ValueError):
-        return default
-    if lo is not None:
-        n = max(lo, n)
-    if hi is not None:
-        n = min(hi, n)
-    return n
-
-def body_list(value, of=None):
-    """A list field out of a request body. `of` filters/converts each element.
-
-    A field the client sends as null, a bare number, or an object is not a list,
-    and iterating it raises before the handler gets to validate anything."""
-    if not isinstance(value, (list, tuple)):
-        return []
-    if of is None:
-        return list(value)
-    out = []
-    for v in value:
-        try:
-            out.append(of(v))
-        except (TypeError, ValueError, AttributeError):
-            continue
-    return out
-
-def body_str(value, default=""):
-    return value.strip() if isinstance(value, str) else default
-
-# Set per request from the `accesstoken` header (see resolve_player middleware).
-# None = no session -> fall back to the admin-selected active player, which is
-# what every single-player setup and the whole pre-login boot sequence relies on.
-CURRENT_UID = contextvars.ContextVar("current_uid", default=None)
-
-# Each login id (Guest_xxx, or a Google/Apple account id) gets its own save, and
-# the same id restores the same save on any device - that is what makes the server
-# multi-account and cross-device. Default on. The one hazard it carries is that a
-# Guest id regenerates when the app is reinstalled with its cache cleared, minting
-# a fresh empty save that looks like lost progress - which is exactly the problem a
-# stable Google/Apple id solves, and why those logins exist. Force the old
-# single-player behaviour (everyone -> the active save) with KGC_MULTIPLAYER=0.
-MULTIPLAYER = os.environ.get("KGC_MULTIPLAYER", "1") != "0"
-MAX_PLAYERS = int(os.environ.get("KGC_MAX_PLAYERS") or 200)
-admin_log(f"[state] identity mode: {'multiplayer (account id -> own save)' if MULTIPLAYER else 'single-player (everyone -> active save)'}")
-
-def load_state():
-    """State of the player this request belongs to.
-
-    Identity comes from the `accesstoken` header, bound to a uid at login. With
-    no session (pre-login boot, CDN, admin UI) this is the active player.
-    """
-    uid = CURRENT_UID.get() or playerdb.active()
-    if uid:
-        st = playerdb.load(uid)
-        if st is not None:
-            return st
-    st = copy.deepcopy(DEFAULT_PLAYER)
-    uid = st.get("uid", "dev-0001")
-    playerdb.save(uid, st)
-    playerdb.set_active(uid)
-    return st
-
-def save_state(st):
-    playerdb.save(st.get("uid", "dev-0001"), st)
-
-def patch_state(st, updates):
-    st.update(updates)
-    save_state(st)
-
-# --- Multiple accounts --------------------------------------------------------
-# Boards, matchmaking and "other player" lookups used to read only the current
-# save, so every one of them showed the requesting player as the entire world -
-# rank 1 of one, matched against your own deck. These pull from every registered
-# account instead. With one account the result is identical to before (you, rank
-# 1), so single-player setups are unaffected.
-# ponytail: each call json-parses every player row. Fine at MAX_PLAYERS=200 for
-# panels opened by hand; add a cached score index if the population ever grows.
-
-def _current_uid():
-    return CURRENT_UID.get() or playerdb.active()
-
-def _all_states(st):
-    """(uid, state) for every registered player, the current one taken from the
-    live `st` so its this-request edits show, not a stale DB read."""
-    me = _current_uid()
-    out, seen = [], False
-    for uid, s, _ in playerdb.all_players():
-        if s is None:
-            continue
-        if uid == me:
-            s, seen = st, True
-        out.append((uid, s))
-    if not seen:
-        out.append((me, st))
-    return out
-
-def _leaderboard(st, row_fn, score_key="score", player_key="playerRank",
-                 ranking_key="ranking"):
-    """One row per account, sorted by score desc with real ranks, plus the current
-    player's own row. `row_fn(state)` builds the score-bearing row for any player."""
-    me = _current_uid()
-    rows = [(uid, row_fn(s)) for uid, s in _all_states(st)]
-    rows.sort(key=lambda ur: ur[1].get(score_key, 0), reverse=True)
-    ranking, mine = [], None
-    for i, (uid, r) in enumerate(rows, 1):
-        r["rank"] = i
-        ranking.append(r)
-        if uid == me:
-            mine = dict(r)
-    return {ranking_key: ranking, player_key: mine or (ranking[0] if ranking else row_fn(st))}
-
-def _opponents(st, n, build, fallback=True):
-    """Up to n real other players as opponents. With `fallback`, a solo server
-    offers yourself (what the mode's own practice match does); without it, an empty
-    list (for slots the client bot-fills)."""
-    me = _current_uid()
-    others = [s for uid, s, _ in playerdb.all_players() if s is not None and uid != me]
-    picks = others[:n] or ([st] if fallback else [])
-    return [build(s) for s in picks]
-
-def _player_by_id(target_id, st):
-    """Resolve a player by their accountId (the client's `targetId`). Unknown or
-    absent id -> the current player, since a solo server has only the one."""
-    if target_id:
-        for uid, s, _ in playerdb.all_players():
-            if s is not None and int(s.get("accountId", 0) or 0) == int(target_id):
-                return s
-    return st
-
-# Prefer user-edited master data in server/xml_live, then CDN-synced.
-_XML_LIVE = ROOT / "xml_live"
-XML_DIR = _XML_LIVE if _XML_LIVE.is_dir() else ROOT.parent / "xml" / PATCH_FOLDER
-assert XML_DIR.is_dir(), f"XML master data not found: {XML_DIR}"
 admin_log(f"[xml] master data dir: {XML_DIR} ({len(list(XML_DIR.iterdir()))} files)")
+
+# Identity, the save template and the read/write path live in state.py so handler
+# modules can persist without importing server.py back. Re-exported under their old
+# names; _registration_allowed keeps its underscore because tests reach for it.
+from state import (CURRENT_UID, CURRENT_IP, MULTIPLAYER, MAX_PLAYERS, ADOPT_LONE_SAVE,
+                   NEW_PLAYER_PER_IP, NEW_PLAYER_WINDOW,
+                   load_state, save_state, patch_state,
+                   registration_allowed as _registration_allowed)
+import state
+state.announce()
 
 def _all_hero_ids():
     """Playable heroes = <Type>Player</Type>, id 1xxxx, from Units.xml."""
@@ -446,7 +263,7 @@ DECK_SLOTS = len(DEFAULT_DECKS[0]["deck"])
 # naming preset 999999999 makes the server allocate until it dies.
 DECK_PRESETS = len(DEFAULT_DECKS)
 BUILDING_PRESETS = 10          # _get_building_data pads to this
-CLAN_RAID_DECKS = 10
+from clan import CLAN_RAID_DECKS
 
 def _pad_deck(deck, potential):
     # Client (DraggableUnitCard.SwapCard, Ghidra-confirmed) crashes on drag-swap
@@ -476,6 +293,9 @@ DEFAULT_PLAYER = {
     "eventFlag": 0,
     "tokens": [],
 }
+# state.load_state() needs the template, and it is only complete here - the hero,
+# item and deck lists above are content-gated against master data.
+state.use_default_player(DEFAULT_PLAYER)
 
 _game_store = {}
 
@@ -492,6 +312,17 @@ def build_model(name, overlay=None):
     out["success"] = True
     if overlay:
         out.update(overlay)
+    if spec:
+        # AFTER the overlay, not before. The client hands date-shaped strings to
+        # DateTime.Parse, which throws on null AND on "" - and the nulls do not only
+        # come from unset defaults. data/static_overrides.json writes some literally
+        # (`"eventPackageItemsUntilAt": null`) and a handler writes `"passEndedAt": ""`,
+        # so filling defaults alone left seven routes still carrying an unparseable
+        # value. A handler that means "no deadline" has to say so with a date, because
+        # null is not something the client can read.
+        for f in spec["fields"]:
+            if f["jtype"] == "string" and not out.get(f["name"]):
+                out[f["name"]] = date_default(f["name"], now_iso) or out.get(f["name"])
     return out
 
 def card_to_dict(c):
@@ -530,11 +361,11 @@ def _uid_for_login(login_id, prev_token, acct_type=None):
     if uid and playerdb.load(uid) is not None:
         return uid
     if MULTIPLAYER and login_id:
-        # Migration: a server that has been single-player until now holds exactly
-        # one save and no bound accounts. Hand that save to the first login rather
-        # than orphan it behind a fresh empty account - otherwise flipping to
-        # multi-account reads as "my progress is gone" on the very next launch.
-        if playerdb.account_count() == 0 and playerdb.count() == 1:
+        # One-shot migration for a server that was single-player until now: hand its
+        # lone unbound save to the first login instead of orphaning it. Off by
+        # default - it is indistinguishable from a hijack once the migration is
+        # done, and it silently gave a fresh Guest the old test save.
+        if ADOPT_LONE_SAVE and playerdb.account_count() == 0 and playerdb.count() == 1:
             sole = playerdb.active()
             if sole and playerdb.load(sole) is not None:
                 playerdb.bind_login(login_id, sole)
@@ -545,11 +376,20 @@ def _uid_for_login(login_id, prev_token, acct_type=None):
             # The account id is client-supplied and unauthenticated, so anyone who
             # can reach /auth/register can mint saves. Cap it - without this a loop
             # fills the disk.
+            # Refuse, never fall back to playerdb.active(): that handed whoever hit
+            # the cap a stranger's save, with a session bound to it.
             if playerdb.count() >= MAX_PLAYERS:
                 admin_log(f"[auth] refused new player: at KGC_MAX_PLAYERS={MAX_PLAYERS}")
-                return playerdb.active()
+                return None
+            ip = CURRENT_IP.get()
+            if not _registration_allowed(ip):
+                admin_log(f"[auth] rate-limited new player from {ip} "
+                          f"({NEW_PLAYER_PER_IP}/{NEW_PLAYER_WINDOW}s)")
+                return None
             st = copy.deepcopy(DEFAULT_PLAYER)
             st["uid"] = uid
+            st["name"] = f"Player{random.randint(1000, 9999)}"
+            st["castleName"] = f"Castle{random.randint(1000, 9999)}"
             st["accountCreatedAt"] = now_iso(0)
             if acct_type is not None:
                 st["accountType"] = acct_type
@@ -575,6 +415,10 @@ def r_login(body, st):
     # multiplayer would still hand them all the same save. Only the multiplayer
     # branch, which actually owns the account, writes that mapping.
     uid = _uid_for_login(login_id, body.get("token"), acct_type)
+    if uid is None:
+        # No save and none may be created (cap or rate limit). Nothing to bind a
+        # session to; the alternative was logging the caller into someone else.
+        return {"success": False, "msg": "cannot create an account right now"}
     # Remember which social login this account used, so PlayerDataResponseModel
     # reports the right accountType (Google vs Guest) and the client shows it.
     if acct_type is not None:
@@ -596,7 +440,7 @@ def r_login(body, st):
         "serverTime": now_iso(0),
         "blockedUntilAt": now_iso(0),
         "blockedComment": "",
-        "loginId": uid,
+        "loginId": login_id,
     }
 
 def mint_session_token(login_id, acct_type=1):
@@ -646,12 +490,38 @@ def r_building_reset_point(body, st):
     return {"buildingPoint": st.get("buildingPoints", 25), "buildingData": presets}
 
 
+def r_player_rename(body, st):
+    """POST /player/rename - RestAPI.ChangeNickname.
+
+    Request is ChangeNicknameRequestModel{userName, castleName, kingPostfix, castlePostfix},
+    response is ChangeNicknameResponseModel{playerCash} (path confirmed from the literal at
+    .data slot 0x67fe0f0 in the v171 lib). This used to be a lambda that echoed
+    {"name": ...} back: wrong field for the model, and it never wrote state, so the popup
+    closed and the next /player served the old name. Rename stays free here - the client
+    only charges cash when hasFreeRename is false, and we keep it true.
+    """
+    name = body_str(body.get("userName")) or body_str(body.get("name"))
+    castle = body_str(body.get("castleName"))
+    if name:
+        st["name"] = name
+    if castle:
+        st["castleName"] = castle
+    st["kingPostfix"] = body_int(body.get("kingPostfix"), st.get("kingPostfix", 0))
+    st["castlePostfix"] = body_int(body.get("castlePostfix"), st.get("castlePostfix", 0))
+    save_state(st)
+    # The route is mapped to PlayerDataResponseModel, so `playerCash` alone left every
+    # other player field at its zero default - if the client rebinds the player from
+    # this response it reads a level-0, no-gold account. Answer with the real player
+    # and keep `playerCash` alongside it.
+    return {**r_player({}, st), "playerCash": st.get("cash", 0)}
+
+
 
 # ProfilePanel.ReloadChallenge indexes invasion/difficulty records per
 # unlockedDifficulty tier (up to 15) -> a shorter list throws
 # IndexOutOfRangeException, aborting Reload() before name/avatar/clan/date ever
 # get set (root cause of the whole profile-popup bug batch).
-_PC = RCFG["player"]
+from config import PLAYER_DEFAULTS as _PC
 _INVASION_THEMES = [t for a, b in _PC["invasionThemeRanges"] for t in range(a, b)]
 # Theme 16 (Invasion I-1) requires ReqPrevThemeDifficulty=3 on the PREVIOUS theme (15,
 # the last Story chapter) - ThemeSelectPanel.IsThemeLocked looks this up by ID-1 in the
@@ -675,7 +545,7 @@ def r_player(body, st):
     return {
         "accountId": st.get("accountId", d["accountId"]),
         "name": st.get("name", d["name"]), "castleName": st.get("castleName", d["castleName"]),
-        "kingPostfix": 0, "castlePostfix": 0,
+        "kingPostfix": st.get("kingPostfix", 0), "castlePostfix": st.get("castlePostfix", 0),
         "uid": st.get("uid", "dev-0001"), "accountType": st.get("accountType", d["accountType"]),
         "cash": st.get("cash", d["cash"]), "paidCash": st.get("paidCash", d["paidCash"]),
         "gold": st.get("gold", d["gold"]), "level": st.get("level", d["level"]),
@@ -1062,16 +932,33 @@ def _open_reward_box(st, item_id, select_idx=None, times=1):
             get_st_accessories(st).extend(accs)
         for r in got:
             rt = r["type"]
-            if rt == "CardOrSoul":
-                # Already own the hero -> the copy converts to soul, same as live.
-                rt = "UnitSoul" if str(r["id"]) in st.get("cards", {}) else "Unit"
+            if rt in ("Key", "CardOrSoul"):
+                # Same tags Missions.xml uses, so share the resolver: a Key names a
+                # ShopItem whose <KeyItem> is the real inventory row, and a CardOrSoul
+                # converts to soul when the hero is already owned. It grants and returns
+                # the reward already in RewardResponseData shape.
+                rewards.append(_grant_mission_reward(st, r))
+                continue
             if rt not in ("Accessory", "Treasure"):
                 _grant_reward(st, rt, r["id"], r["count"])
-        rewards += got
+            rewards.append(r)
     return rewards
 
+# RewardResponseData.type is matched against a fixed vocabulary of strings - the same
+# ones the master data uses (InventoryItem / Key / UnitSoulItem / CardSoul / Card /
+# Gold / Cash / Heart / Artifact / Treasure / Skin ...), which the client compares in
+# ResourceInventoryItem.GetByRewardTypeAndID. **There is no "Item"**: an unmatched type
+# resolves to no ResourceInventoryItem, and the reward then renders with a wrong icon
+# and a nonsense count in the results popup (what "Temple of Challenge Reward Chest
+# gives x999 of the wrong thing" was). The server's own vocabulary is shorter and used
+# by _grant_reward; translate at the wire boundary only, so state keys never move.
+_WIRE_TYPE = {"Item": "InventoryItem", "Unit": "Card", "UnitSoul": "CardSoul"}
+
+def _wire_rewards(rewards):
+    return [{**r, "type": _WIRE_TYPE.get(r.get("type"), r.get("type"))} for r in rewards]
+
 def _reward_list_data(rewards):
-    return {"rewardList": rewards, "artifactResult": None,
+    return {"rewardList": _wire_rewards(rewards), "artifactResult": None,
             "treasureResult": None, "accessoryResult": None}
 
 def r_use_inventory(body, st):
@@ -1111,93 +998,6 @@ def r_use_skin_box(body, st):
                 [{"type": "Skin", "id": skin_id, "count": 1}] if spent else []),
             "skin": skin_id,
             "boxRewardInventory": {"id": item_id, "count": _item_count(st, item_id)}}
-
-def _shop_buys(st):
-    """itemId (as a string key, so it survives a JSON round-trip) -> times bought."""
-    return st.setdefault("shopBuys", {})
-
-def r_shop(body, st):
-    """List the shop, or buy from it.
-
-    GetShop and BuyShopItem share the /shop path (GET lists, POST buys) - the same
-    split /accessory uses. Rather than depend on the verb, which respond() does not
-    pass down, a request carrying an itemId is a purchase; a bare one is a listing.
-    That is also self-correcting if the client ever POSTs /shop just to refresh."""
-    base = dict(STATIC_OVERRIDES["/shop"])
-    if body.get("itemId"):
-        base.update(_shop_buy(body, st))
-        save_state(st)
-    base.update(shop.build(CONTENT_GATE, _shop_buys(st), now_iso(0), XML_DIR))
-    base["nextRefreshTime"] = next_reset_iso(1)
-    base["playerGold"] = st.get("gold", 0)
-    base["playerCash"] = st.get("cash", 0)
-    base["playerHeart"] = st.get("heart", 0)
-    return base
-
-def _shop_buy(body, st):
-    """Charge for a shop item and grant it. Returns the BuyResponseModel-ish extras.
-
-    Real-money items are granted without charging: there is no store behind this
-    server, so refusing them would make every package permanently unbuyable."""
-    item_id = body_int(body.get("itemId"), 0)
-    amount = body_int(body.get("buyAmount"), 1, lo=1)
-    el = shop.find(item_id, XML_DIR)
-    if el is None:
-        admin_log(f"[shop] refused: item {item_id} is not in ShopItems.xml")
-        return {"msg": "no such shop item", "soldOut": True}
-
-    buys = _shop_buys(st)
-    bought = buys.get(str(item_id), 0)
-    limit = shop._int(el, "BuyLimit", -1)
-    if limit >= 0 and bought + amount > limit:
-        amount = max(0, limit - bought)
-        if amount == 0:
-            admin_log(f"[shop] refused: item {item_id} at its BuyLimit {limit}")
-            return {"msg": "buy limit reached", "soldOut": True}
-
-    kind, cur_id, unit_price = shop.price_of(el)
-    cost = unit_price * amount
-    if kind == "gold" and st.get("gold", 0) < cost:
-        return {"msg": "not enough gold", "soldOut": False}
-    if kind == "cash" and st.get("cash", 0) < cost:
-        return {"msg": "not enough cash", "soldOut": False}
-    if kind == "item" and _item_count(st, cur_id) < cost:
-        return {"msg": f"not enough of item {cur_id}", "soldOut": False}
-
-    if kind == "gold":
-        st["gold"] = st.get("gold", 0) - cost
-        bump(st, "useGold", cost)
-    elif kind == "cash":
-        st["cash"] = st.get("cash", 0) - cost
-    elif kind == "item":
-        _take_item(st, cur_id, cost)
-    shop_counter = {"ArenaShop": "useArenaShop", "ClanShop": "useClanShop",
-                    "EventShop": "useEventShop"}.get(el.findtext("Type"))
-    if shop_counter:
-        bump(st, shop_counter, amount)
-
-    rewards = []
-    for r in shop.rewards_of(el):
-        r = {**r, "count": r["count"] * amount}
-        # Artifact/Treasure/Skin are reported for the reward popup but not written
-        # into state - the same policy the mail rewards follow.
-        if r["type"] not in ("Artifact", "Treasure", "Skin"):
-            _grant_reward(st, r["type"], r["id"], r["count"])
-        rewards.append(r)
-    buys[str(item_id)] = bought + amount
-    admin_log(f"[shop] bought {item_id} x{amount} for {cost} {kind} -> {len(rewards)} rewards")
-    return {"gachaRewardResponseData": _reward_list_data(rewards),
-            "inventoryItems": _inventory_models(st), "soldOut": False}
-
-def r_shop_refresh(body, st):
-    """Refreshing the daily shop clears its per-item buy counts, which is what makes
-    the daily items buyable again."""
-    for sid in list(_shop_buys(st)):
-        el = shop.find(sid, XML_DIR)
-        if el is not None and el.findtext("Type") == "DailyShop":
-            _shop_buys(st).pop(sid, None)
-    save_state(st)
-    return r_shop({}, st)
 
 def _invasion_rewards():
     """InvasionRewards.xml as {(theme, difficulty): {"Rewards": [...], "PassRewards": [...]}}.
@@ -1811,243 +1611,6 @@ def r_rift_weapon(body, st):
         save_state(st)
     return {"riftWeapons": DEFAULT_RIFT_WEAPONS, "equippedWeapons": {}, "riftCrystals": rift_crystals, "deletedRiftWeapons": [], "deletedCrystals": [], "riftGauge": 0, "rewardListResponseData": None, "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "playerHeart": st.get("heart", 0), "upgradeState": 0, "equippedWeaponIds": []}
 
-def r_clan(body, st):
-    # clan:null -> GameManager.clan stays null -> HasClan() false -> profile's
-    # clanInfoBox hidden. A fake clan object here (even self-authored) makes
-    # GameManager.HasClan() true for every account, which is wrong for a fresh
-    # god account that never joined one.
-    return {"clan": None, "role": 0, "requestSupportCooltime": now_iso(-1)}
-
-# --- Clan ---------------------------------------------------------------------
-# A private server has one player, so it has a clan of one. All 28 remaining clan
-# routes answered an empty model: the clan could be created but never read back,
-# renamed, chatted in, or left.
-#
-# Constants.ClanRole: Requested -1, None 0, Member1..3 1..3, SubMaster 9, Master 10.
-# The old /clan/create lambda handed the founder role 1, so the client hid every
-# management control from the person who had just made the clan.
-CLAN_MASTER = 10
-CLAN_REQUESTED = -1
-
-def _clan(st):
-    return st.get("clan")
-
-def _clan_new(st, body):
-    c = dict(RCFG["clanCreate"])
-    c.update({
-        "id": 1,
-        "name": body_str(body.get("name")) or "Clan",
-        "markId": body_int(body.get("markId") or body.get("mark"), 0),
-        "language": body_int(body.get("language"), 0),
-        "keywords": body_list(body.get("keywords")),
-        "joinType": body_int(body.get("joinType"), 0),
-        "intro": body_str(body.get("intro")),
-        "notice": body_str(body.get("notice")),
-        "tag": body_str(body.get("tag")),
-        "point": 0, "tier": 0, "battleTier": 0,
-        "contribution": 0, "weeklyContribution": 0,
-        "roleNames": [], "chats": [], "seq": 0,
-    })
-    st["clan"] = c
-    st["clanId"] = c["id"]
-    st["clanName"] = c["name"]
-    return c
-
-def _clan_member(st):
-    d = _PC["defaults"]
-    deco = _deco(st)
-    c = _clan(st) or {}
-    return {"accountId": st.get("accountId", d["accountId"]), "role": CLAN_MASTER,
-            "castleName": st.get("castleName", d["castleName"]),
-            "userName": st.get("name", d["name"]),
-            "contribution": c.get("contribution", 0),
-            "weeklyContribution": c.get("weeklyContribution", 0),
-            "profileIconId": d["profileIconId"], "profileIconBackgroundId": 0,
-            "flagId": deco["flag"]["flagId"], "nameTagId": deco["nameTag"],
-            "lastLogined": now_iso(0), "playerLevel": st.get("level", 1)}
-
-def _clan_model(st):
-    c = _clan(st)
-    if not c:
-        return None
-    d = _PC["defaults"]
-    return {"id": c["id"], "name": c["name"], "markId": c.get("markId", 0),
-            "language": c.get("language", 0), "keywords": c.get("keywords", []),
-            "joinType": c.get("joinType", 0), "intro": c.get("intro", ""),
-            "battleTier": c.get("battleTier", 0), "tier": c.get("tier", 0),
-            "point": c.get("point", 0), "contribution": c.get("contribution", 0),
-            "weeklyContribution": c.get("weeklyContribution", 0),
-            "memberCount": 1, "maxMemberCount": c.get("maxMemberCount", 30),
-            "masterName": st.get("name", d["name"]),
-            "masterAccountId": st.get("accountId", d["accountId"]),
-            "nameBanned": False, "roleNames": c.get("roleNames", []),
-            "notice": c.get("notice", ""), "members": [_clan_member(st)],
-            "chats": c.get("chats", []), "joinRequests": [],
-            "goldBonusTier": 0,
-            # The only member is the master, so there is nobody to hand it to.
-            "canMandateMaster": False,
-            "clanRaidRank": 1 if c else 0, "clanPointRank": 1 if c else 0,
-            "weeklyClanPointRank": 1 if c else 0}
-
-def r_clan(body, st):
-    """The clan the player is in, or null.
-
-    clan:null keeps GameManager.HasClan() false, which is right for an account that
-    never joined one - a fake clan object here would show every account a clan it
-    does not have."""
-    c = _clan(st)
-    return {"clan": _clan_model(st), "role": CLAN_MASTER if c else 0,
-            "requestSupportCooltime": now_iso(-1),
-            "supportCompletedModel": None,
-            "seasonUntilAtDate": next_reset_iso(7),
-            "nextSeasonStartAtDate": next_reset_iso(8),
-            "clanRaidEnabled": bool(c),
-            "clanRaidUntilAtDate": next_reset_iso(7),
-            "nextClanRaidStartAtDate": next_reset_iso(8),
-            "canReceiveClanPointAt": now_iso(-1),
-            "canPlayClanRaidAt": now_iso(-1),
-            "clanRaidLockedByLeaveUntilAt": now_iso(-1)}
-
-def r_clan_create(body, st):
-    if not _clan(st):
-        _clan_new(st, body)
-        save_state(st)
-    return r_clan(body, st)
-
-def _clan_modify(field, cast=str):
-    """Most of the clan management routes set one field and re-read the clan."""
-    def handler(body, st, _f=field, _c=cast):
-        c = _clan(st)
-        if c is not None:
-            for key in (_f, "name", "value"):
-                if key in body:
-                    c[_f] = _c(body[key])
-                    break
-            if _f == "name":
-                st["clanName"] = c["name"]
-            save_state(st)
-        return r_clan(body, st)
-    return handler
-
-def r_clan_leave(body, st):
-    """Leaving disbands it: there is nobody left to inherit a clan of one."""
-    st.pop("clan", None)
-    st["clanId"] = 0
-    st["clanName"] = ""
-    save_state(st)
-    return r_clan(body, st)
-
-def r_clan_name_check(body, st):
-    """Nothing to collide with on a one-player server, so every name is free. The
-    response is still the full clan read - the panel re-renders from it."""
-    return r_clan(body, st)
-
-def r_clan_chat(body, st):
-    """Post a line. Chat lives in the clan record so it survives a restart, and is
-    trimmed - the client re-reads the whole list on every refresh."""
-    c = _clan(st)
-    if c is None:
-        return {"chats": []}
-    msg = body.get("message", body.get("text", ""))
-    if msg:
-        c["seq"] = c.get("seq", 0) + 1
-        c.setdefault("chats", []).append({
-            "seqId": c["seq"], "type": body_int(body.get("type"), 0),
-            "accountId": st.get("accountId", _PC["defaults"]["accountId"]),
-            "sender": st.get("name", _PC["defaults"]["name"]),
-            "message": msg, "targetUnit": body_int(body.get("targetUnit"), 0),
-            "count": 0, "maxCount": 0, "createdAt": now_iso(0), "canSupport": False})
-        c["chats"] = c["chats"][-100:]
-        save_state(st)
-    return {"chats": c.get("chats", [])}
-
-def r_clan_fetch_chat(body, st):
-    c = _clan(st) or {}
-    return {"chats": c.get("chats", [])}
-
-def r_clan_delete_chat(body, st):
-    c = _clan(st)
-    if c is not None:
-        seq = body_int(body.get("seqId") or body.get("id"), 0)
-        c["chats"] = [m for m in c.get("chats", []) if m["seqId"] != seq]
-        save_state(st)
-    return r_clan_fetch_chat(body, st)
-
-def r_clan_seq(body, st):
-    return {"seqId": (_clan(st) or {}).get("seq", 0)}
-
-def r_clan_role_name(body, st):
-    """roleNames is a sparse list of {role, name} overrides, so a renamed rank
-    replaces its entry rather than appending a second one for the same role."""
-    c = _clan(st)
-    if c is not None:
-        role = body_int(body.get("role"), 0)
-        name = body.get("name", "")
-        names = [r for r in c.get("roleNames", []) if r.get("role") != role]
-        if name:
-            names.append({"role": role, "name": name})
-        c["roleNames"] = names
-        save_state(st)
-    return r_clan(body, st)
-
-def r_clan_noop_member(body, st):
-    """Ban/promote/demote/mandate/kick, and the join-request flow.
-
-    There is exactly one member and they are the master, so every one of these is a
-    no-op by construction rather than by omission - answering the clan read keeps the
-    panel consistent instead of leaving it on stale data."""
-    return r_clan(body, st)
-
-def r_clan_raid_deck(body, st):
-    c = _clan(st) or {}
-    decks = c.setdefault("raidDecks", []) if _clan(st) else []
-    if _clan(st) is not None and (body.get("deck") or body.get("units")):
-        idx = body_int(body.get("index"), 0, lo=0, hi=CLAN_RAID_DECKS - 1)
-        while len(decks) <= idx:
-            decks.append({"index": len(decks), "name": "", "deck": [], "potential": []})
-        decks[idx] = {"index": idx,
-                      "name": body.get("name", decks[idx].get("name", "")),
-                      "deck": body.get("deck") or body.get("units") or [],
-                      "potential": body.get("potential") or []}
-        save_state(st)
-    return {"decks": decks, "bestDeck": decks[0] if decks else None}
-
-def r_clan_raid_delete_deck(body, st):
-    c = _clan(st)
-    if c is not None:
-        idx = body_int(body.get("index"), -1)
-        decks = c.get("raidDecks", [])
-        if 0 <= idx < len(decks):
-            decks.pop(idx)
-            for i, d in enumerate(decks):
-                d["index"] = i
-            save_state(st)
-    return r_clan_raid_deck({}, st)
-
-def r_clan_raid_state(body, st):
-    """Damage is per member and there is one member, so the sum is the player's."""
-    d = _PC["defaults"]
-    dmg = (_clan(st) or {}).get("raidDamage", 0)
-    return {"memberDamages": [{"accountId": st.get("accountId", d["accountId"]),
-                               "userName": st.get("name", d["name"]),
-                               "damage": dmg}] if _clan(st) else [],
-            "totalDamage": dmg}
-
-def r_clan_raid_end(body, st):
-    c = _clan(st)
-    if c is not None:
-        c["raidDamage"] = max(c.get("raidDamage", 0), body_int(body.get("damage"), 0))
-        save_state(st)
-    return dict(STATIC_OVERRIDES["/clan/raid"])
-
-def r_clan_support(body, st):
-    """Support is one member handing another a hero. With one member there is nobody
-    to ask and nobody to answer, so the lists stay empty and the cooldown stays clear
-    rather than pretending a request is pending."""
-    return {"supports": [], "requestSupportCooltime": now_iso(-1),
-            "supportCompletedModel": None}
-
-
 def r_pass(body, st):
     c = RCFG["pass"]
     out = {"seasonStartAtDate": now_iso(c["seasonStartDayOffset"]),
@@ -2056,450 +1619,9 @@ def r_pass(body, st):
     out.update(c["fixed"])
     return out
 
-def _terr(st):
-    """The player's territory, seeded with a level 1 town hall on first access.
-
-    Level 0 is the "not built yet" placeholder: starting there gives a stored-labor
-    cap of 0, so the player could never bank the labor a first upgrade costs and the
-    plot would be permanently stuck."""
-    t = st.setdefault("territory", {})
-    if "buildings" not in t:
-        t.update({"buildings": territory.starting_layout(XML_DIR), "storedLabor": 0,
-                  "lastLaborAt": now_iso(0), "stored": [], "hunting": [],
-                  "levelSync": [], "tradeShop": [], "equippedSkin": 0})
-    return t
-
-def _terr_labor(st):
-    """Current labor, rebased so the accrual clock restarts from now."""
-    t = _terr(st)
-    labor, _ = territory.accrued_labor(t.get("storedLabor", 0), t.get("lastLaborAt", ""),
-                                       t["buildings"], xml_dir=XML_DIR)
-    t["storedLabor"] = labor
-    t["lastLaborAt"] = now_iso(0)
-    return labor
-
-def _terr_at(t, pos):
-    """The building at a slot. Coerces here rather than in each caller: every
-    territory route that names a slot resolves it through this one function, and a
-    slot sent as null or a string used to raise before the caller saw it."""
-    pos = body_int(pos, -1)
-    return next((b for b in t["buildings"] if b["posIndex"] == pos), None)
-
-def r_territory_fetch(body, st):
-    t = _terr(st)
-    labor = _terr_labor(st)
-    sk, default = territory.skins(CONTENT_GATE, XML_DIR)
-    if not t.get("equippedSkin"):
-        t["equippedSkin"] = default
-    save_state(st)
-    return {"labor": labor, "storedLabor": labor,
-            "buildingDatas": t["buildings"], "lastLaborAt": t["lastLaborAt"],
-            "statBuffPers": t.get("statBuffPers", []),
-            "storedBuildings": t["stored"], "playerHuntingData": t["hunting"],
-            "playerLevelSyncData": t["levelSync"],
-            "tickets": [], "playerTradeShopItemData": t["tradeShop"],
-            "passEndedAt": "", "skins": sk, "equippedSkin": t["equippedSkin"],
-            # The lobby's own territory summary still reads these two.
-            "buildingPoints": st.get("buildingPoints", 25),
-            "maxLabor": territory.max_stored_labor(t["buildings"], XML_DIR)}
-
-def r_territory(body, st):
-    return r_territory_fetch(body, st)
-
-def _terr_pay(st, bid):
-    """Charge a build/upgrade. Returns None on success, else why it was refused."""
-    c = territory.cost(bid, XML_DIR)
-    labor = _terr_labor(st)
-    if labor < c["labor"]:
-        return f"not enough labor ({labor} < {c['labor']})"
-    if st.get("gold", 0) < c["gold"]:
-        return f"not enough gold ({st.get('gold', 0)} < {c['gold']})"
-    _terr(st)["storedLabor"] = labor - c["labor"]
-    st["gold"] = st.get("gold", 0) - c["gold"]
-    return None
-
-def r_territory_build(body, st):
-    """Place a new building, or upgrade the one already at that slot.
-
-    /territory/build carries an id, /territory/upgrade-building only a posIndex - both
-    land here because both resolve to "the next level of what belongs at this slot"."""
-    t = _terr(st)
-    pos = body_int(body.get("posIndex"), 0)
-    existing = _terr_at(t, pos)
-    if body.get("id"):
-        bid = body_int(body.get("id"), 0)
-    elif existing:
-        bid = existing["buildingId"] + 1
-        if territory.level(bid) > territory.max_level(bid, XML_DIR):
-            return {**r_territory_fetch({}, st), "msg": "already at max level"}
-    else:
-        return {**r_territory_fetch({}, st), "msg": "nothing to upgrade at this slot"}
-
-    if bid not in territory.buildings(XML_DIR):
-        return {**r_territory_fetch({}, st), "msg": f"no such building {bid}"}
-    why = _terr_pay(st, bid)
-    if why:
-        return {**r_territory_fetch({}, st), "msg": why}
-
-    secs = 0 if body.get("immediately") else territory.upgrade_seconds(bid, XML_DIR)
-    end = now_iso(0) if not secs else (
-        datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(seconds=secs)
-    ).strftime("%Y-%m-%dT%H:%M:%S.000Z")
-    if existing:
-        existing["buildingId"] = bid
-        existing["upgradeEndAt"] = end
-    else:
-        t["buildings"].append({"buildingId": bid, "posIndex": pos, "assignedUnits": [],
-                               "upgradeEndAt": end, "lastTokenAt": "", "data": ""})
-    save_state(st)
-    admin_log(f"[territory] slot {pos} -> building {bid}, done at {end}")
-    out = r_territory_fetch({}, st)
-    out.update({"buildingCore": 0, "townHallCore": 0, "gold": st.get("gold", 0),
-                "cash": st.get("cash", 0), "seasonalToken": 0, "refreshRet": None})
-    return out
-
-def r_territory_upgrade_now(body, st):
-    return r_territory_build({**body, "immediately": True}, st)
-
-def r_territory_remove(body, st):
-    t = _terr(st)
-    b = _terr_at(t, body.get("posIndex", -1))
-    if b:
-        t["buildings"].remove(b)
-        save_state(st)
-    return r_territory_fetch({}, st)
-
-def r_territory_store(body, st):
-    """Move a building off the plot into storage. Only <CanStore> ones may go."""
-    t = _terr(st)
-    b = _terr_at(t, body.get("posIndex", -1))
-    if b and territory.can_store(b["buildingId"], XML_DIR):
-        t["buildings"].remove(b)
-        t["stored"].append({"buildingId": b["buildingId"], "count": 1})
-        save_state(st)
-    return r_territory_fetch({}, st)
-
-def r_territory_unstore(body, st):
-    t = _terr(st)
-    bid = body_int(body.get("buildingId"), 0)
-    pos = body_int(body.get("posIndex"), 0)
-    row = next((s for s in t["stored"] if s["buildingId"] == bid), None)
-    if row and _terr_at(t, pos) is None:
-        row["count"] -= 1
-        if row["count"] <= 0:
-            t["stored"].remove(row)
-        t["buildings"].append({"buildingId": bid, "posIndex": pos, "assignedUnits": [],
-                               "upgradeEndAt": "", "lastTokenAt": "", "data": ""})
-        save_state(st)
-    return r_territory_fetch({}, st)
-
-def r_territory_replace(body, st):
-    """Swap two slots. Both may be empty, one, or neither."""
-    t = _terr(st)
-    a, b = _terr_at(t, body.get("posIndex", -1)), _terr_at(t, body.get("targetPosIndex", -1))
-    if a is not None and b is not None:
-        a["posIndex"], b["posIndex"] = b["posIndex"], a["posIndex"]
-    elif a is not None and body.get("targetPosIndex") is not None:
-        a["posIndex"] = body_int(body.get("targetPosIndex"), a["posIndex"])
-    save_state(st)
-    return r_territory_fetch({}, st)
-
-def r_territory_collect_labor(body, st):
-    """Bank the accrued labor. `amount` moves it into the spendable pool."""
-    labor = _terr_labor(st)
-    save_state(st)
-    return {"labor": labor, "storedLabor": labor}
-
-def r_territory_assign(body, st):
-    """Assign heroes to a building, capped by its <MaxUnitAssignCount>.
-
-    A hero may only work one building at a time, so assigning them here removes them
-    from wherever they were - otherwise the same hero could stack the labor bonus on
-    every building at once."""
-    t = _terr(st)
-    b = _terr_at(t, body.get("posIndex", -1))
-    if b is None:
-        return r_territory_fetch({}, st)
-    units = body_list(body.get("unitIds") or body.get("units"), int)
-    cap = territory.spec(b["buildingId"], "MaxUnitAssignCount", 0, XML_DIR)
-    units = units[:cap]
-    for other in t["buildings"]:
-        if other is not b:
-            other["assignedUnits"] = [u for u in other.get("assignedUnits", [])
-                                      if u not in units]
-    b["assignedUnits"] = units
-    save_state(st)
-    out = r_territory_fetch({}, st)
-    out["assignedUnits"] = units
-    return out
-
-def r_territory_hunting_start(body, st):
-    t = _terr(st)
-    hid = body_int(body.get("huntingId"), 0)
-    h = territory.huntings(XML_DIR).get(hid)
-    if h is None:
-        return {**r_territory_fetch({}, st), "msg": f"no such hunting {hid}"}
-    t["hunting"] = [x for x in t["hunting"] if x["huntingId"] != hid]
-    t["hunting"].append({"huntingId": hid, "specialCount": 0, "normalCount": 0,
-                         "passApplied": False, "shortenPer": 0.0,
-                         "startAt": now_iso(0), "endAt": now_iso(0)})
-    save_state(st)
-    return {**r_territory_fetch({}, st), "playerHuntingData": t["hunting"]}
-
-def r_territory_hunting_end(body, st):
-    """Finish a run and pay it out. Ending one that was never started pays nothing."""
-    t = _terr(st)
-    hid = body_int(body.get("huntingId"), 0)
-    row = next((x for x in t["hunting"] if x["huntingId"] == hid), None)
-    if row is None:
-        return {**r_territory_fetch({}, st), "rewardListData": _reward_list_data([])}
-    rewards = []
-    for r in territory.hunting_rewards(hid, XML_DIR):
-        if r["type"] in ("Gold", "Cash", "Heart", "Item"):
-            _grant_reward(st, r["type"], r["id"], r["count"])
-        rewards.append(r)
-    t["hunting"].remove(row)
-    save_state(st)
-    admin_log(f"[territory] hunting {hid} -> {len(rewards)} rewards")
-    return {**r_territory_fetch({}, st), "rewardListData": _reward_list_data(rewards)}
-
-def r_territory_hunting_stop(body, st):
-    t = _terr(st)
-    hid = body_int(body.get("huntingId"), 0)
-    t["hunting"] = [x for x in t["hunting"] if x["huntingId"] != hid]
-    save_state(st)
-    return r_territory_fetch({}, st)
-
-def r_territory_trade_buy(body, st):
-    """Buy from the trade shop. Priced in inventory items, per currency index."""
-    _, items = territory.trade_shop(xml_dir=XML_DIR)
-    uid = body_int(body.get("uid") if body.get("uid") is not None else body.get("itemId"), 0)
-    item = next((i for i in items if i["id"] == uid or i["itemId"] == uid), None)
-    if item is None:
-        return {**r_territory_fetch({}, st), "msg": f"no such trade item {uid}"}
-    t = _terr(st)
-    row = next((r for r in t["tradeShop"] if r["uid"] == item["id"]), None)
-    bought = row["buyCount"] if row else 0
-    if item["buyLimit"] >= 0 and bought >= item["buyLimit"]:
-        return {**r_territory_fetch({}, st), "msg": "buy limit reached"}
-    currencies, _ = territory.trade_shop(xml_dir=XML_DIR)
-    idx = body_int(body.get("currencyIndex"), item["prices"][0]["index"])
-    price = next((p["price"] for p in item["prices"] if p["index"] == idx),
-                 item["prices"][0]["price"])
-    cur = next((c["id"] for c in currencies if c["index"] == idx), 0)
-    if _item_count(st, cur) < price:
-        return {**r_territory_fetch({}, st), "msg": f"not enough of item {cur}"}
-    _take_item(st, cur, price)
-    _grant_reward(st, "Item", item["itemId"] or item["id"], 1)
-    if row:
-        row["buyCount"] = bought + 1
-    else:
-        t["tradeShop"].append({"uid": item["id"], "itemVersion": 0, "buyCount": 1})
-    save_state(st)
-    return {**r_territory_fetch({}, st),
-            "rewardListData": _reward_list_data(
-                [{"type": "Item", "id": item["itemId"] or item["id"], "count": 1}])}
-
-def r_territory_equip_skin(body, st):
-    t = _terr(st)
-    sk, _ = territory.skins(CONTENT_GATE, XML_DIR)
-    sid = body_int(body.get("skinId") or body.get("id"), 0)
-    if sid in sk:
-        t["equippedSkin"] = sid
-        save_state(st)
-    return r_territory_fetch({}, st)
-
-def r_territory_stat_buffs(body, st):
-    return {"statBuffPers": _terr(st).get("statBuffPers", [])}
 
 
-# --- Decoration: flags, name tags, map skins, login skins, advisors -----------
-# The tab used to be one fixed payload with five empty lists. Every other kind of
-# owned content is granted in full on this server, so the cosmetics are too; only
-# what is equipped is per-player state.
-
-def _deco(st):
-    d = st.setdefault("decoration", {})
-    d.setdefault("flag", {"flagId": 0, "season": 0})
-    d.setdefault("nameTag", 0)
-    d.setdefault("favoriteMapSkins", [])
-    d.setdefault("mapSkin", decoration.default_id("mapSkins", CONTENT_GATE, XML_DIR))
-    d.setdefault("loginSkin", decoration.default_id("loginSkins", CONTENT_GATE, XML_DIR))
-    d.setdefault("advisor", decoration.DEFAULT_ADVISOR)
-    d.setdefault("contracts", {})
-    return d
-
-def _deco_flags(st):
-    d = _deco(st)
-    return {"flagsModel": [{"flagId": i, "season": 0}
-                           for i in decoration.ids("flags", CONTENT_GATE, XML_DIR)],
-            "equipedFlag": dict(d["flag"])}
-
-def _deco_nametags(st):
-    d = _deco(st)
-    return {"nameTagsModel": [{"nameTagId": i}
-                              for i in decoration.ids("nameTags", CONTENT_GATE, XML_DIR)],
-            "equippedNameTag": {"nameTagId": d["nameTag"]}}
-
-def _deco_advisors(st):
-    """One AdvisorInfo per advisor. An advisor with no contract row still appears -
-    the panel lists what exists and reads contractUntilAt to decide the state, so
-    omitting it would hide the advisor rather than show it as un-contracted."""
-    d = _deco(st)
-    out = []
-    for i in decoration.ids("advisors", CONTENT_GATE, XML_DIR):
-        c = d["contracts"].get(str(i), {})
-        out.append({"advisorId": i,
-                    "contractUntilAt": c.get("until", ""),
-                    "remainExtendCount": c.get("remainExtend", decoration.EXTEND_COUNT)})
-    return {"advisorList": out}
-
-def _deco_full(st):
-    d = _deco(st)
-    return {
-        "flagInfo": _deco_flags(st),
-        "nameTagInfo": _deco_nametags(st),
-        "mapSkinInfo": {"mapSkinList": [
-            {"skinId": i, "isFavorite": i in d["favoriteMapSkins"], "owned": True}
-            for i in decoration.ids("mapSkins", CONTENT_GATE, XML_DIR)]},
-        "advisorInfo": _deco_advisors(st),
-        "loginSkinInfo": {"loginSkinList": decoration.ids("loginSkins", CONTENT_GATE, XML_DIR)},
-        # appliedMapSkinData is Dictionary<int,int> and the only map-skin API taking a
-        # second number is SetMapSkin(resMapSkin, probability), so it is read here as
-        # skin id -> weight. One equipped skin is that skin at 100.
-        "equipInfo": {"appliedMapSkinData": {str(d["mapSkin"]): 100},
-                      "appliedAdvisor": d["advisor"],
-                      "appliedLoginSkin": d["loginSkin"],
-                      "loginSceneIllustData": decoration.login_scene(d["loginSkin"], XML_DIR)},
-    }
-
-def r_decoration(body, st):
-    return _deco_full(st)
-
-def r_flag_inventory(body, st):
-    return _deco_flags(st)
-
-def r_flag_set(body, st):
-    d = _deco(st)
-    fid = body_int(body.get("id") or body.get("flagId"), 0)
-    if fid in decoration.ids("flags", CONTENT_GATE, XML_DIR) or fid == 0:
-        d["flag"] = {"flagId": fid, "season": body_int(body.get("season"), 0)}
-        save_state(st)
-    return dict(d["flag"])
-
-def r_nametag_inventory(body, st):
-    return _deco_nametags(st)
-
-def r_nametag_set(body, st):
-    d = _deco(st)
-    nid = body_int(body.get("id") or body.get("nameTagId"), 0)
-    if nid in decoration.ids("nameTags", CONTENT_GATE, XML_DIR) or nid == 0:
-        d["nameTag"] = nid
-        save_state(st)
-    return {"nameTagId": d["nameTag"]}
-
-def r_map_skin_equip(body, st):
-    d = _deco(st)
-    sid = body_int(body.get("skinId"), 0)
-    if sid in decoration.ids("mapSkins", CONTENT_GATE, XML_DIR):
-        d["mapSkin"] = sid
-        save_state(st)
-    return _deco_full(st)
-
-def r_map_skin_favorite(body, st):
-    d = _deco(st)
-    sid = body_int(body.get("skinId"), 0)
-    fav = d["favoriteMapSkins"]
-    if body.get("set", True):
-        if sid not in fav:
-            fav.append(sid)
-    elif sid in fav:
-        fav.remove(sid)
-    save_state(st)
-    return _deco_full(st)
-
-def r_map_skin_buy(body, st):
-    """Owned already, so this only charges. Refusing outright would leave the buy
-    button dead; charging keeps the token economy honest for anyone who cares."""
-    sid = body_int(body.get("skinId"), 0)
-    if body.get("useSkinToken"):
-        price = decoration.token_price("mapSkins", sid, "SkinTokenPrice", XML_DIR)
-        if price and _item_count(st, decoration.SKIN_TOKEN) >= price:
-            _take_item(st, decoration.SKIN_TOKEN, price)
-    _deco(st)["mapSkin"] = sid if sid in decoration.ids("mapSkins", CONTENT_GATE, XML_DIR) \
-        else _deco(st)["mapSkin"]
-    save_state(st)
-    return {"skinId": sid, "playerCash": st.get("cash", 0),
-            "playerSkinToken": _item_count(st, decoration.SKIN_TOKEN),
-            "playerPremiumSkinToken": 0}
-
-def r_login_skin_equip(body, st):
-    d = _deco(st)
-    sid = body_int(body.get("skinId"), 0)
-    if sid in decoration.ids("loginSkins", CONTENT_GATE, XML_DIR):
-        d["loginSkin"] = sid
-        save_state(st)
-    return decoration.login_scene(d["loginSkin"], XML_DIR) or {}
-
-def r_login_scene_illust(body, st):
-    return decoration.login_scene(_deco(st)["loginSkin"], XML_DIR) or {}
-
-def _advisor_response(st, aid):
-    c = _deco(st)["contracts"].get(str(aid), {})
-    return {"advisorId": aid, "contractUntilAt": c.get("until", ""),
-            "remainExtendCount": c.get("remainExtend", decoration.EXTEND_COUNT),
-            "playerSkinToken": _item_count(st, decoration.SKIN_TOKEN),
-            "advisorInfo": _deco_advisors(st)}
-
-def r_advisor_contract(body, st):
-    d = _deco(st)
-    aid = body_int(body.get("advisorId"), 0)
-    if aid in decoration.ids("advisors", CONTENT_GATE, XML_DIR):
-        price = decoration.token_price("advisors", aid, "ContractPrice", XML_DIR) or 0
-        if price:
-            _take_item(st, decoration.SKIN_TOKEN, min(price, _item_count(st, decoration.SKIN_TOKEN)))
-        d["contracts"][str(aid)] = {"until": decoration.contract_until(),
-                                    "remainExtend": decoration.EXTEND_COUNT}
-        save_state(st)
-    return _advisor_response(st, aid)
-
-def r_advisor_extend(body, st):
-    """Extends from the current expiry, not from now - extending early must not throw
-    away the time already paid for."""
-    d = _deco(st)
-    aid = body_int(body.get("advisorId"), 0)
-    c = d["contracts"].get(str(aid))
-    if c and c.get("remainExtend", 0) > 0:
-        price = decoration.token_price("advisors", aid, "ExtendPrice", XML_DIR) or 0
-        if price:
-            _take_item(st, decoration.SKIN_TOKEN, min(price, _item_count(st, decoration.SKIN_TOKEN)))
-        try:
-            base = datetime.datetime.strptime(c["until"], "%Y-%m-%dT%H:%M:%S.000Z")
-        except (KeyError, ValueError):
-            base = None
-        c["until"] = decoration.contract_until(base, decoration.EXTEND_DAYS)
-        c["remainExtend"] -= 1
-        save_state(st)
-    return _advisor_response(st, aid)
-
-def r_advisor_timeout(body, st):
-    """The client reports a contract it believes has run out; drop it and fall back to
-    the default advisor so the lobby is never left with nobody standing there."""
-    d = _deco(st)
-    aid = body_int(body.get("advisorId"), 0)
-    d["contracts"].pop(str(aid), None)
-    if d["advisor"] == aid:
-        d["advisor"] = decoration.DEFAULT_ADVISOR
-    save_state(st)
-    return _advisor_response(st, aid)
-
-def r_advisor_equip(body, st):
-    d = _deco(st)
-    aid = body_int(body.get("advisorId"), 0)
-    if aid in decoration.ids("advisors", CONTENT_GATE, XML_DIR):
-        d["advisor"] = aid
-        save_state(st)
-    return _deco_full(st)
+from decoration import block as _deco
 
 
 # --- Dimension heroes ---------------------------------------------------------
@@ -2563,289 +1685,6 @@ def r_dimension_overcome(body, st):
                                     XML_DIR),
             "remainTicket": _item_count(st, dimension.TICKET)}
 
-# --- Colosseum and Arena ------------------------------------------------------
-# Twenty-two routes answered an empty model, so both PvP panels opened onto nothing:
-# no match log, no statistics, no tier rewards to claim, and a score frozen at the
-# 1000 the config seeds. What is missing is progression, not matchmaking - the live
-# game plays these over a websocket against a real opponent, and there is no second
-# player here, so the honest shape is a mode you play against the bot side that
-# already exists client-side, with the server keeping score.
-#
-# Score, tier boundaries and every reward come from master data (colosseum.py). The
-# server owns the running total; the client owns the battle.
-
-# Both modes keep flat state keys so the leaderboards can read a score without
-# knowing anything about this section.
-_PVP_MODES = {
-    "colosseum": {"prefix": "colosseum", "config": "colosseum"},
-    "arena": {"prefix": "pvp", "config": "pvpInfo"},
-}
-
-def _pvp_state(st, mode):
-    """(prefix, seeded config) for a mode, so a fresh save starts where the panel
-    expects rather than at zero."""
-    m = _PVP_MODES[mode]
-    cfg = RCFG[m["config"]]["fixed"]
-    p = m["prefix"]
-    st.setdefault(p + "Score", cfg.get("score", 1000))
-    st.setdefault(p + "Win", 0)
-    st.setdefault(p + "Lose", 0)
-    st.setdefault(p + "Claimed", [])
-    st.setdefault(p + "Logs", [])
-    return p, cfg
-
-def _pvp_record(st, mode, win):
-    """Apply one finished game. Returns the score delta so the result popup can
-    show it - the client draws the arrow off this number, not off the new total."""
-    p, _ = _pvp_state(st, mode)
-    before = int(st[p + "Score"])
-    after = colosseum.apply_result(before, win, XML_DIR)
-    st[p + "Score"] = after
-    st[p + "Win" if win else p + "Lose"] += 1
-    st[p + "Tier"] = colosseum.tier_for(after, int(st.get(p + "Rank", 0)), XML_DIR)["id"]
-    return after - before
-
-def _pvp_log(st, mode, win, delta, extra=None):
-    """Append a match to the mode's history, newest last, capped.
-
-    The panel re-reads the whole list every time it opens, so it cannot grow
-    without bound; 50 is more than the log view scrolls through."""
-    p, cfg = _pvp_state(st, mode)
-    logs = st[p + "Logs"]
-    # The id counts every game ever played, not the length of the kept list -
-    # deriving it from len() makes ids repeat as soon as the cap starts trimming,
-    # and the log view keys its rows on them.
-    st[p + "LogSeq"] = int(st.get(p + "LogSeq", 0)) + 1
-    entry = {"logId": st[p + "LogSeq"], "myScoreDelta": delta,
-             "semiSeason": cfg.get("semiSeason", 1),
-             "startedAt": now_iso(0), "endedAt": now_iso(0), "win": win}
-    entry.update(extra or {})
-    logs.append(entry)
-    del logs[:-50]
-    return entry
-
-def _pvp_deck_preview(st, mode, log_id=0):
-    """A DeckInfoPreview row: who played, drawn beside each log line."""
-    d = _PC["defaults"]
-    deco = _deco(st)
-    return {"logId": log_id, "accountId": st.get("accountId", d["accountId"]),
-            "playerName": st.get("name", d["name"]),
-            "castleName": st.get("castleName", d["castleName"]),
-            "playerLevel": st.get("level", 1), "profileIcon": d["profileIconId"],
-            "nameTagId": deco["nameTag"]}
-
-def _pvp_card_infos(st):
-    """CardInfo[] for the current deck. The opponent preview draws portraits from
-    this, so an empty array is a row of blank slots."""
-    out = []
-    for unit_id in _deck_units(st):
-        c = _card(st, unit_id) or {}
-        out.append({"cardId": unit_id, "level": c.get("level", 1),
-                    "skin": c.get("currentSkin", 0),
-                    "potentialTier": c.get("potentialTier", 0),
-                    "overcome": c.get("overcome", 0),
-                    "dimensionLevel": c.get("dimensionLevel", 0),
-                    "isLevelSyncApplied": False,
-                    "treasure": None, "accessories": []})
-    return out
-
-def _colosseum_player(st):
-    """ColosseumPlayerData for the one player there is."""
-    d = _PC["defaults"]
-    deco = _deco(st)
-    return {"userId": str(st.get("accountId", d["accountId"])),
-            "cardInfos": _pvp_card_infos(st),
-            "potentials": [], "firstComerIndex": 0, "artifactModels": [],
-            "buildingLevels": _get_building_data(st)[0].get("buildingLevels", []),
-            "territoryStatBuffPers": [],
-            "riftWeaponModels": [],
-            "castleName": st.get("castleName", d["castleName"]),
-            "userName": st.get("name", d["name"]),
-            "profileIconId": d["profileIconId"], "nameTagId": deco["nameTag"],
-            "mapSkinId": deco["mapSkin"], "flagModel": dict(deco["flag"]),
-            "isBot": False, "roundData": [], "reported": False, "blinded": False}
-
-def _pvp_deck_info(st, mode="arena"):
-    """PvPDeckInfo - the arena's equivalent of the colosseum player block."""
-    p, cfg = _pvp_state(st, mode)
-    d = _PC["defaults"]
-    deco = _deco(st)
-    return {"id": 0, "season": cfg.get("season", 1), "score": int(st[p + "Score"]),
-            "tier": colosseum.tier_for(int(st[p + "Score"]), 0, XML_DIR)["id"],
-            "accountId": st.get("accountId", d["accountId"]),
-            "playerName": st.get("name", d["name"]),
-            "castleName": st.get("castleName", d["castleName"]),
-            "profileIcon": d["profileIconId"], "flagId": deco["flag"]["flagId"],
-            "nameTagId": deco["nameTag"], "mapSkinId": deco["mapSkin"],
-            "cards": _pvp_card_infos(st), "buildings": [], "pvpDeckRecordData": [],
-            "artifacts": [], "potentials": [], "territoryStatBuffPers": [],
-            "riftWeapons": [], "encryptedUID": "", "playerLevel": st.get("level", 1)}
-
-def _pvp_season_dates(cfg_key):
-    c = RCFG[cfg_key]
-    return ([now_iso(n) for n in c["seasonDayOffsets"]],
-            [now_iso(n) for n in c["nextSeasonDayOffsets"]])
-
-def _semi_season_scores(st, prefix, count):
-    """One {score, rank} per semi-season. SetTier reads this by semi-season index,
-    so a list shorter than the current semi-season leaves the tier badge blank."""
-    score = int(st.get(prefix + "Score", 0))
-    return [{"score": score, "rank": int(st.get(prefix + "Rank", 0))}
-            for _ in range(max(1, count))]
-
-def r_pvp_info(body, st):
-    p, cfg = _pvp_state(st, "arena")
-    until, nxt = _pvp_season_dates("pvpInfo")
-    out = dict(cfg)
-    score = int(st[p + "Score"])
-    out.update({
-        "seasonUntilAtDates": until, "nextSeasonStartAtDates": nxt,
-        "score": score, "tier": colosseum.tier_for(score, 0, XML_DIR)["id"],
-        "maxScore": max(score, int(st.get(p + "BestScore", score))),
-        "winCount": st[p + "Win"], "loseCount": st[p + "Lose"],
-        "semiSeasonScoreDatas": _semi_season_scores(st, p, cfg.get("semiSeason", 1)),
-        "deckInfo": _pvp_deck_info(st), "receivedRewards": list(st[p + "Claimed"]),
-        "winRewardReceived": list(st.setdefault(p + "WinSteps", [])),
-        "currentSemiSeasonWinCount": st[p + "Win"],
-    })
-    out["maxTier"] = colosseum.tier_for(out["maxScore"], 0, XML_DIR)["id"]
-    return out
-
-def r_colosseum(body, st):
-    p, cfg = _pvp_state(st, "colosseum")
-    until, nxt = _pvp_season_dates("colosseum")
-    out = dict(cfg)
-    score = int(st[p + "Score"])
-    rank = int(st.get(p + "Rank", 0))
-    out.update({
-        "seasonUntilAtDates": until, "nextSeasonStartAtDates": nxt,
-        "score": score, "tier": colosseum.tier_for(score, rank, XML_DIR)["id"],
-        "rank": rank,
-        "maxScore": max(score, int(st.get(p + "BestScore", score))),
-        "winCount": st[p + "Win"], "loseCount": st[p + "Lose"],
-        "gameCount": st[p + "Win"] + st[p + "Lose"],
-        "bestScore": max(score, int(st.get(p + "BestScore", score))),
-        "receivedRewards": list(st[p + "Claimed"]),
-        "semiSeasonScoreDatas": _semi_season_scores(st, p, cfg.get("semiSeason", 1)),
-        # ponytail: the free-reward box count is not in any XML we parse, and a
-        # wrong length indexes out of range. Empty is the length the client can
-        # loop over safely; size it once a box is known to exist.
-        "freeRewardCountPerBox": [],
-    })
-    out["bestTier"] = colosseum.tier_for(out["bestScore"], rank, XML_DIR)["id"]
-    out["maxTier"] = out["bestTier"]
-    return out
-
-def r_colosseum_complete_round(body, st):
-    """One colosseum round finished. `win` decides the score move."""
-    win = bool(body.get("win", body.get("isWin", False)))
-    delta = _pvp_record(st, "colosseum", win)
-    _pvp_log(st, "colosseum", win, delta,
-             {"gameId": str(body.get("gameId", "")), "rank": body_int(body.get("rank"), 0),
-              "round": body_int(body.get("round"), 0)})
-    save_state(st)
-    admin_log(f"[colosseum] round {'win' if win else 'loss'} {delta:+d} "
-              f"-> {st['colosseumScore']}")
-    return {"score": st["colosseumScore"], "scoreDelta": delta,
-            "tier": st.get("colosseumTier", 0)}
-
-def r_colosseum_round_data(body, st):
-    """Snapshot of a round in progress. Nothing to keep - the client replays its own
-    rounds - but it must answer, or the battle stalls waiting on the round save."""
-    return {"round": body_int(body.get("round"), 0)}
-
-def r_colosseum_logs(body, st):
-    _pvp_state(st, "colosseum")
-    logs = []
-    for e in reversed(st["colosseumLogs"]):
-        logs.append({"logId": e["logId"], "myScoreDelta": e["myScoreDelta"],
-                     "semiSeason": e["semiSeason"], "startedAt": e["startedAt"],
-                     "gameId": e.get("gameId", ""), "endedAt": e["endedAt"],
-                     "playerDecks": [dict(_pvp_deck_preview(st, "colosseum", e["logId"]),
-                                          rank=e.get("rank", 1),
-                                          round=e.get("round", 0), isBot=False)]})
-    return {"logList": logs, "targetUserData": _colosseum_player(st)}
-
-def r_colosseum_statistics(body, st):
-    p, cfg = _pvp_state(st, "colosseum")
-    # countsByRank is a placement histogram: index 0 is first place. One entry per
-    # possible rank, which the mode fixes at four players.
-    counts = [st[p + "Win"], st[p + "Lose"], 0, 0]
-    return {"dataList": [{"semiSeason": cfg.get("semiSeason", 1),
-                          "winCount": st[p + "Win"], "loseCount": st[p + "Lose"],
-                          "countsByRank": counts}]}
-
-def r_colosseum_players(body, st):
-    # Colosseum is a 4-player mode: you plus up to three real opponents. The client
-    # bot-fills whatever is short, so a solo server still starts.
-    return {"colosseumPlayerDataList": [_colosseum_player(st)]
-                                        + _opponents(st, 3, _colosseum_player, fallback=False),
-            "isCustomMatch": bool(body.get("isCustomMatch", False))}
-
-def r_colosseum_tier_rewards(body, st):
-    """Claim every tier reward the player's best score has earned.
-
-    Rewards are per tier and pay once, so the claimed set is what stops a score
-    that crosses the same boundary twice from paying twice."""
-    p, _ = _pvp_state(st, "colosseum")
-    best = max(int(st[p + "Score"]), int(st.get(p + "BestScore", 0)))
-    tier = colosseum.tier_for(best, int(st.get(p + "Rank", 0)), XML_DIR)
-    claimed = set(st[p + "Claimed"])
-    rewards, new_ids = colosseum.tier_rewards_up_to(tier["id"], claimed, XML_DIR)
-    for r in rewards:
-        _grant_reward(st, r["type"], r["id"], r["count"])
-    st[p + "Claimed"] = sorted(claimed | set(new_ids))
-    save_state(st)
-    admin_log(f"[colosseum] tier rewards up to {tier['id']} -> {len(rewards)} rewards")
-    return {"rewardListResponseData": _reward_list_data(rewards),
-            "receivedRewards": st[p + "Claimed"]}
-
-def r_arena_win_reward(body, st):
-    """The arena's cumulative win-count steps from ArenaSettings.xml."""
-    p, _ = _pvp_state(st, "arena")
-    steps = set(st.setdefault(p + "WinSteps", []))
-    rewards, new_ids = colosseum.arena_rewards_for(st[p + "Win"], steps, XML_DIR)
-    for r in rewards:
-        _grant_reward(st, r["type"], r["id"], r["count"])
-    st[p + "WinSteps"] = sorted(steps | set(new_ids))
-    save_state(st)
-    return {"rewardListResponseData": _reward_list_data(rewards),
-            "winRewardReceived": st[p + "WinSteps"]}
-
-def r_arena_logs(body, st):
-    _pvp_state(st, "arena")
-    me = _pvp_deck_preview(st, "arena")
-    logs = []
-    for e in reversed(st["pvpLogs"]):
-        row = dict(me, logId=e["logId"], score=int(st["pvpScore"]),
-                   tier=st.get("pvpTier", 0))
-        logs.append({"logId": e["logId"], "myScoreDelta": e["myScoreDelta"],
-                     "semiSeason": e["semiSeason"], "startedAt": e["startedAt"],
-                     "myDeckId": 0, "myDeck": row, "enemyDeckId": 0,
-                     "enemyDeck": dict(row, playerName=e.get("enemyName", "Bot"))})
-    return {"logList": logs, "targetUserData": _pvp_deck_info(st)}
-
-def r_arena_statistics(body, st):
-    p, cfg = _pvp_state(st, "arena")
-    return {"trainingCount": st.get(p + "Training", 0),
-            "dataList": [{"semiSeason": cfg.get("semiSeason", 1),
-                          "winCount": st[p + "Win"], "loseCount": st[p + "Lose"],
-                          "trainingCount": st.get(p + "Training", 0)}]}
-
-def r_arena_matching(body, st):
-    """PvPMatchResponseModel. Offer up to three real opponents; a solo server falls
-    back to the player's own deck, which is what training mode does anyway."""
-    return {"targets": _opponents(st, 3, _pvp_deck_info)}
-
-def r_colosseum_match(body, st):
-    """ColosseumMatchResponseModel. No realtime match server exists here, so the
-    address is empty and the client falls through to its own bot stage - the same
-    path /colosseum/test-single-play takes."""
-    return {"gameId": str(body.get("gameId") or f"local-{int(time.time())}"),
-            "serverAddress": ""}
-
-def r_colosseum_custom_match(body, st):
-    return {"lobbyId": str(body.get("lobbyId") or ""), "endPoint": ""}
 
 def r_ack(body, st):
     """Bare acknowledgement. Several colosseum routes report progress the server has
@@ -2902,7 +1741,7 @@ def r_player_other(body, st):
     deco = _deco(st)
     return {"name": st.get("name", d["name"]),
             "castleName": st.get("castleName", d["castleName"]),
-            "kingPostfix": 0, "castlePostfix": 0,
+            "kingPostfix": st.get("kingPostfix", 0), "castlePostfix": st.get("castlePostfix", 0),
             "profileIconId": _key_value(st, "profileIconId", d["profileIconId"]),
             "profileIconBackgroundId": 0, "nameTagId": deco["nameTag"],
             "level": st.get("level", 1), "exp": st.get("exp", 0),
@@ -2910,319 +1749,15 @@ def r_player_other(body, st):
             "rogueLikeBuildingChallengeLevelRecord": [],
             "babelRecord": [b["floor"] for b in _babel(st).values()] or [0],
             "winCount": st.get("pvpWin", 0), "heroCount": len(st.get("cards", {})),
-            "currentAltar": 0, "currentDeck": _pvp_card_infos(st),
+            "currentAltar": 0, "currentDeck": pvp.card_infos(st),
             "currentPotential": [], "firstComerIndex": 0,
             "currentRanking": [], "currentHardRanking": [],
             "clanId": st.get("clanId", 0), "clanMark": 0,
             "clanRole": st.get("clanRole", 0), "clanName": st.get("clanName", ""),
             "clanTier": 0, "clanRoleNames": []}
 
-# --- Journey ------------------------------------------------------------------
-# The client drives this entirely off two key-values it reads back off the response,
-# not off a model field: JourneyLastRewardId and JourneyNextRewardTime.
-
-JOURNEY_LAST = "JourneyLastRewardId"
-JOURNEY_NEXT = "JourneyNextRewardTime"
-
-def _journey_arm(st, last_id):
-    """Point the ladder at the reward after `last_id` and start its clock."""
-    nxt = player_events.journey_next(last_id, XML_DIR)
-    _set_key_value(st, JOURNEY_LAST, str(last_id))
-    _set_key_value(st, JOURNEY_NEXT, "" if nxt is None
-                   else now_iso(seconds=nxt["wait"]))
-    return nxt
-
-def r_journey_init(body, st):
-    """Start the ladder. Re-initialising an armed journey must not reset its timer,
-    or the panel becomes a way to never wait."""
-    if _key_value(st, JOURNEY_NEXT) is None:
-        _journey_arm(st, -1)
-        save_state(st)
-    return {"rewardList": _reward_list_data([]), "keyValues": _key_values(st)}
-
-def r_journey_reward(body, st):
-    """Claim the reward whose wait has elapsed, then arm the next one."""
-    last = int(_key_value(st, JOURNEY_LAST, -1) or -1)
-    due = _key_value(st, JOURNEY_NEXT)
-    item = player_events.journey_next(last, XML_DIR)
-    if item is None or not due or now_iso(0) < due:
-        return {"rewardList": _reward_list_data([]), "keyValues": _key_values(st)}
-    paid = [_grant_mission_reward(st, item["reward"])]
-    _journey_arm(st, item["id"])
-    save_state(st)
-    admin_log(f"[journey] reward {item['id']} claimed -> {paid}")
-    return {"rewardList": _reward_list_data(paid), "keyValues": _key_values(st)}
-
-# --- Anniversary event --------------------------------------------------------
-# FifthHalfYearEventRewards.xml carries no dates of its own, so whether the event is
-# running is the server's call and lives in response_config.
-
-def _year_state(st):
-    y = st.setdefault("yearEvent", {})
-    y.setdefault("startedAt", now_iso(RCFG["yearEvent"]["startDayOffset"]))
-    y.setdefault("lastAttendanceDay", 0)
-    y.setdefault("lastPassDay", 0)
-    y.setdefault("passPoint", 0)
-    y.setdefault("continuous", True)
-    return y
-
-def _year_day(st):
-    y = _year_state(st)
-    start = datetime.datetime.fromisoformat(y["startedAt"].replace("Z", ""))
-    cfg = RCFG["yearEvent"]
-    return min(player_events.elapsed_days(start), cfg["lengthDays"]), start
-
-def r_year_event(body, st):
-    cfg = RCFG["yearEvent"]
-    y = _year_state(st)
-    day, start = _year_day(st)
-    save_state(st)
-    return {"eventStartAt": y["startedAt"],
-            "eventUntilAt": now_iso(cfg["startDayOffset"] + cfg["lengthDays"]),
-            "currentAttendanceDay": day if cfg["enabled"] else 0,
-            "lastAttendanceRewardDay": y["lastAttendanceDay"],
-            "isContinuous": y["continuous"],
-            "lastPassRewardDay": y["lastPassDay"],
-            "passPoint": y["passPoint"]}
-
-def _year_claim(st, track, table):
-    """Pay every unclaimed day of a track up to today. Both tracks pay per day and
-    only once, so the last claimed day is the whole bookkeeping."""
-    cfg = RCFG["yearEvent"]
-    y = _year_state(st)
-    if not cfg["enabled"]:
-        return []
-    day, _ = _year_day(st)
-    paid = []
-    for d in sorted(table):
-        if d <= y[track] or d > day:
-            continue
-        for r in table[d]:
-            paid.append(_grant_mission_reward(st, r))
-        y[track] = d
-    return paid
-
-def r_year_attendance_reward(body, st):
-    table = player_events.year_attendance_rewards(XML_DIR)
-    paid = _year_claim(st, "lastAttendanceDay", table)
-    y = _year_state(st)
-    # The continuous bonus is paid on top, once, when the board is completed
-    # without a gap - claiming the last day late still leaves isContinuous true
-    # here because there is nobody to break the streak on a single-player save.
-    if y["lastAttendanceDay"] >= max(table or [0]) and not y.get("continuousPaid"):
-        for r in player_events.year_continuous_reward(XML_DIR):
-            paid.append(_grant_mission_reward(st, r))
-        y["continuousPaid"] = True
-    save_state(st)
-    return {"eventResponseModel": r_year_event(body, st),
-            "rewardListResponseData": _reward_list_data(paid)}
-
-def r_year_pass_reward(body, st):
-    paid = _year_claim(st, "lastPassDay", player_events.year_pass_rewards(XML_DIR))
-    save_state(st)
-    return {"eventResponseModel": r_year_event(body, st),
-            "rewardListResponseData": _reward_list_data(paid)}
-
-def r_year_buy_pass_point(body, st):
-    """Buy pass points with cash. Refuses rather than going negative - the client
-    re-reads the balance from this response."""
-    cfg = RCFG["yearEvent"]
-    y = _year_state(st)
-    price = cfg["buyPassPointCashPrice"]
-    if st.get("cash", 0) >= price:
-        st["cash"] -= price
-        y["passPoint"] += cfg["buyPassPointCount"]
-        save_state(st)
-    return {"eventResponseModel": r_year_event(body, st),
-            "playerCash": st.get("cash", 0)}
-
-# --- Roguelike ----------------------------------------------------------------
-# The run itself lives entirely client-side: the client serialises the whole thing
-# into one opaque string and posts it. The server's only job is to hold that string
-# so a run survives closing the app - which is exactly what the static placeholder
-# could not do, since it always answered with an empty save.
-
-def _rogue(st, theme):
-    return st.setdefault("rogueLike", {}).setdefault(str(body_int(theme, 0)), {
-        "saveData": "", "ownCardSnapshot": "", "state": "", "saveVersion": 0,
-        "lastHeartPaidFloor": 0, "lastGameStartedSeason": 0})
-
-def r_rogue_save(body, st):
-    """Store the run blob. An empty blob is a legitimate 'run over' write, so it is
-    stored as sent rather than being treated as a missing field."""
-    r = _rogue(st, body.get("themeId", 0))
-    r["saveData"] = body.get("rogueLikeSaveData", "")
-    r["state"] = body.get("state", "")
-    r["saveVersion"] = body_int(body.get("saveVersion"), 0)
-    save_state(st)
-    return {}
-
-def r_rogue_snapshot(body, st):
-    """The hero roster the run was started with, frozen so later lobby upgrades do
-    not change a run in progress."""
-    r = _rogue(st, body.get("themeId", 0))
-    r["ownCardSnapshot"] = body.get("ownCardSnapshot", "")
-    save_state(st)
-    return {}
-
-def r_rogue_load(body, st):
-    r = _rogue(st, body.get("themeId", 0))
-    save_state(st)
-    return {"rogueLikeSaveData": r["saveData"],
-            "rogueLikeOwnCardSnapshot": r["ownCardSnapshot"],
-            "state": r["state"], "saveVersion": r["saveVersion"],
-            "lastHeartPaidFloor": r["lastHeartPaidFloor"],
-            "lastGameStartedSeason": r["lastGameStartedSeason"]}
-
-def r_rogue_delete(body, st):
-    """Abandon a run. The game index has to move, or the client keeps replaying the
-    same index and the next run's saves collide with the deleted one's."""
-    theme = body.get("rogueLikeThemeId", body.get("themeId", 0))
-    st.setdefault("rogueLike", {}).pop(str(body_int(theme, 0)), None)
-    st["rogueLikeGameIndex"] = int(st.get("rogueLikeGameIndex", 0)) + 1
-    save_state(st)
-    admin_log(f"[roguelike] run on theme {theme} deleted -> "
-              f"index {st['rogueLikeGameIndex']}")
-    return {"rogueLikeGameIndex": st["rogueLikeGameIndex"],
-            "dimensionRiftGameIndex": st.get("dimensionRiftGameIndex", 0),
-            "returnHeart": 0}
-
-def r_rogue_revive(body, st):
-    """Reviving inside a run costs the same cash as reviving in a normal battle."""
-    return r_game_revive(body, st)
-
-def r_rogue_can_revive_by_ad(body, st):
-    """No ad network is wired up here, so the ad revive is never offered - reported
-    as unavailable rather than left empty, which the button reads as an error."""
-    return {"canReviveByAd": False, "remainCount": 0}
-
-def r_rogue_statistics(body, st):
-    """Clear rates across the playerbase. One player is not a sample, and inventing
-    one would print made-up percentages next to real mission names."""
-    return {"rogueLikeMissionStatistics": [], "totalRogueLikeUser": 1}
-
-# --- The four seasonal mini-games ---------------------------------------------
-# Territory Tycoon, the stock event, KG Marble and event-card collecting. All 23 of
-# their routes answered an empty auto-generated model, which for these means null
-# lists and null sub-models - and every one of these panels dereferences those
-# before it checks whether the event is running.
-#
-# Three of the four have a window in master data and every window has closed:
-# StockConstants runs 2025-10-22 to 2025-11-12, the event cards are season 55
-# against the current 71, and KG Marble's board is handed out by the server, which
-# is not handing one out. So the correct answer is a well-formed "no event", not an
-# empty body. Territory Tycoon is the exception: its tokens are ordinary inventory
-# items, so its numbers are real.
-
-# InventoryItems.xml 2008/2009/2010 해변축제 브론즈/실버/골드 토큰, same pinning
-# missions.py uses.
-TYCOON_TOKENS = {"bronzeToken": 2008, "silverToken": 2009, "goldToken": 2010}
-
-def _tycoon_tokens(st):
-    return {k: _item_count(st, item) for k, item in TYCOON_TOKENS.items()}
-
-def r_tycoon_tokens(body, st):
-    out = _tycoon_tokens(st)
-    out["storedGoldToken"] = st.get("tycoonStoredGold", 0)
-    return out
-
-def r_tycoon_collect_gold(body, st):
-    """Move banked gold tokens into the inventory, where every other panel reads
-    them from. Nothing banked means nothing moves, rather than a free token."""
-    stored = int(st.get("tycoonStoredGold", 0))
-    if stored > 0:
-        _grant_reward(st, "Item", TYCOON_TOKENS["goldToken"], stored)
-        st["tycoonStoredGold"] = 0
-        save_state(st)
-    return r_tycoon_tokens(body, st)
-
-def r_tycoon_firework(body, st):
-    out = _tycoon_tokens(st)
-    out["tycoonPoint"] = st.get("tycoonPoint", 0)
-    out["skipRewardUsedCount"] = st.get("tycoonSkipRewardUsed", 0)
-    return out
-
-def r_tycoon_player(body, st):
-    out = _tycoon_tokens(st)
-    out.update({"level": st.get("tycoonLevel", 1),
-                "storedGoldToken": st.get("tycoonStoredGold", 0),
-                "skipRewardUsedCount": st.get("tycoonSkipRewardUsed", 0),
-                "buildings": st.get("tycoonBuildings", [])})
-    return out
-
-def r_stock_my_info(body, st):
-    """The stock event's own wallet. Its token is not an inventory item - it only
-    exists inside the event - so it lives on the save under its own key."""
-    return {"currentTokenCount": st.get("stockTokens", 0),
-            "highestTokenCount": st.get("stockTokensHigh", 0),
-            "remainingBuyCount": 0, "shopState": 0, "premiumShopState": 0,
-            "timeOffset": 0, "hints": [], "portfolios": [],
-            "nextDailyAttendanceDate": now_iso(1)}
-
-def r_stock_attendance(body, st):
-    """The daily wage. The event has ended, so it pays nothing - reported as a zero
-    reward with the real balance, not as an empty body the panel reads as a
-    failure."""
-    return {"rewardTokenCount": 0,
-            "currentTokenCount": st.get("stockTokens", 0),
-            "highestTokenCount": st.get("stockTokensHigh", 0),
-            "nextDailyAttendanceDate": now_iso(1)}
-
-def r_stock_buy_hint(body, st):
-    """A hint costs tokens and names a stock in a round. With no round running there
-    is nothing to hint at, so no token is taken."""
-    return {"hint": None, "currentTokenCount": st.get("stockTokens", 0)}
-
-def r_stock_mission(body, st):
-    return {"state": 0, "rewardList": _reward_list_data([])}
-
-def r_stock_ranking(body, st):
-    """One player, so one row - the same shape the other boards use."""
-    d = _PC["defaults"]
-    deco = _deco(st)
-    row = {"round": 0, "userRank": 1, "percentileRank": 100.0,
-           "accountId": st.get("accountId", d["accountId"]),
-           "rateOfReturn": 0.0,
-           "profile": {"userName": st.get("name", d["name"]),
-                       "castleName": st.get("castleName", d["castleName"]),
-                       "kingPostfix": 0, "castlePostfix": 0,
-                       "profileIcon": d["profileIconId"], "nameTagId": deco["nameTag"]}}
-    return {"playerRanking": row, "ranking": [row]}
-
-def r_marble(body, st):
-    """KG Marble. The board itself comes from the server and there is none to hand
-    out, so `init` is false and every list is present but empty - the panel walks
-    boardData and rewards by index before it looks at init."""
-    return {"init": False,
-            "kgMarbleModel": {"accountId": st.get("accountId", 0), "round": 0,
-                              "dailyRound": 0, "boardData": [], "boardExecuted": [],
-                              "position": 0, "player": st.get("marblePlayer", 0),
-                              "boughtPass": False, "dailyFreeCount": 0,
-                              "rewards": [], "passRewards": [], "executeEvents": []},
-            "rewardRet": _reward_list_data([]), "addedEventIdx": -1,
-            "diceValueSum": 0, "diceValues": [], "reverseMove": False,
-            "teleportMove": False, "eventTokenCount": 0, "forceBoardRefresh": False}
-
-def r_marble_set_player(body, st):
-    """Which token the player moves around the board. Cosmetic, and the only part
-    of the mode that means anything with no board running."""
-    st["marblePlayer"] = body_int(body.get("player"), 0)
-    save_state(st)
-    return r_marble(body, st)
-
-def r_event_cards(body, st):
-    """Event-card collecting. The cards in master data are season 55 against the
-    current 71, so there is no collection to be part-way through."""
-    return {"collectionStates": {}, "eventCardCounts": {}, "appliedEventCard": 0,
-            "point": 0, "collectionCompleted": False, "freeGachaAvailable": False}
-
-def r_event_cards_exchange(body, st):
-    return {"playerEventCardCollectingResponseModel": r_event_cards(body, st),
-            "exchangedEventCardId": 0}
-
-def r_event_cards_reward(body, st):
-    return {"playerEventCardCollectingResponseModel": r_event_cards(body, st),
-            "rewardListData": _reward_list_data([])}
+# --- Mini-games ----------------------------------------------------------------
+# Roguelike, Territory Tycoon, stock event, KG Marble, event-card collecting
 
 
 # --- Account transfer ---------------------------------------------------------
@@ -3238,7 +1773,7 @@ def r_transfer_issue(body, st):
     st["transfer"] = {"code": code, "expiresAt": now_iso(seconds=TRANSFER_TTL_HOURS * 3600)}
     save_state(st)
     admin_log(f"[auth] transfer code issued for uid={st.get('uid', '?')}")
-    return {"userId": code}
+    return {"secretCode": code}
 
 def _transfer_lookup(code):
     """The uid holding an unexpired copy of `code`. Scans every save, which is fine
@@ -3254,7 +1789,7 @@ def _transfer_lookup(code):
 def r_transfer_redeem(body, st):
     """Redeem a code: bind the caller's login to the save that issued it and hand
     back a session for it. A wrong or expired code logs nobody in."""
-    code = body_str(body.get("code") or body.get("userId")).upper()
+    code = body_str(body.get("secretCode")).upper()
     uid = _transfer_lookup(code)
     if uid is None:
         admin_log("[auth] transfer redeem refused: unknown or expired code")
@@ -3273,7 +1808,7 @@ def r_transfer_redeem(body, st):
     admin_log(f"[auth] transfer redeemed -> uid={uid}")
     return {"accessToken": token, "expiredAt": now_iso(7),
             "seed": secrets.token_hex(8), "serverTime": now_iso(0),
-            "blockedUntilAt": now_iso(0), "blockedComment": "", "loginId": uid}
+            "blockedUntilAt": now_iso(0), "blockedComment": "", "loginId": uid, "userId": uid}
 
 
 # --- The last few odds and ends -----------------------------------------------
@@ -3344,168 +1879,6 @@ def r_cloud_run_services(body, st):
     endpoints it wants the client to use; here everything is this server, so the
     honest answer is an empty list and the client keeps its configured host."""
     return {"services": [], "ranking": []}
-
-# --- Shop bookkeeping ---------------------------------------------------------
-# Nine shop routes answered an empty model. None of them buy anything - they are the
-# places where the player's own choices are stored: which treasures they want out of
-# a box, which heroes they pinned to a custom-pickup banner, and which purchases the
-# store still owes them.
-
-# ResourceTreasure.Rarity. The wish list is keyed by it, and Newtonsoft writes an
-# enum dictionary key as its name, so the keys have to be the names.
-TREASURE_RARITIES = ["Common", "Rare", "Special"]
-
-def r_treasure_wish_list(body, st):
-    saved = st.get("treasureWishList", {})
-    return {"wishList": {r: list(saved.get(r, [])) for r in TREASURE_RARITIES}}
-
-def r_save_treasure_wish_list(body, st):
-    """Store the wish list, keeping only ids that are really treasures - a wish for
-    something that does not exist comes back as a blank row in the panel."""
-    sent = body.get("wishList")
-    sent = sent if isinstance(sent, dict) else {}
-    known = set(ALL_TREASURE_IDS)
-    out = {}
-    for rarity in TREASURE_RARITIES:
-        ids = sent.get(rarity) or sent.get(str(TREASURE_RARITIES.index(rarity) + 1))
-        out[rarity] = [i for i in body_list(ids, int) if i in known]
-    st["treasureWishList"] = out
-    save_state(st)
-    return {"wishList": out}
-
-def r_custom_pickups(body, st):
-    """The heroes pinned to a custom-pickup banner, per banner id."""
-    banner = str(body.get("shopItemId", body.get("id", 0)) or 0)
-    return {"customPickups": list(st.get("customPickups", {}).get(banner, []))}
-
-def r_save_custom_pickups(body, st):
-    banner = str(body.get("shopItemId", body.get("id", 0)) or 0)
-    picks = [i for i in body_list(body.get("customPickups"), int) if i]
-    st.setdefault("customPickups", {})[banner] = picks
-    save_state(st)
-    return {"customPickups": picks}
-
-def r_shop_choice(body, st):
-    """A package that lets the buyer choose - a hero, or which treasure a pickup
-    ceiling pays out. The choice is recorded so the panel stops asking; the item
-    itself is granted by the purchase route that precedes this."""
-    key = "packageChoices" if "unitId" in body else "pickupChoices"
-    choice = body_int(body.get("unitId") or body.get("treasureId"), 0)
-    if choice:
-        st.setdefault(key, {})[str(body.get("shopItemId", 0) or 0)] = choice
-        save_state(st)
-    return {}
-
-def r_iap_restore_add(body, st):
-    """A purchase the store charged for but the server has not yet delivered. There
-    is no store here, so nothing is ever owed - but the list has to answer, because
-    the client blocks the shop while it believes a restore is pending."""
-    return {"restoreNeededIaps": st.get("restoreNeededIaps", [])}
-
-def r_iap_restore_remove(body, st):
-    pending = st.get("restoreNeededIaps", [])
-    sku = body.get("productId") or body.get("sku")
-    st["restoreNeededIaps"] = [p for p in pending if p != sku]
-    save_state(st)
-    return {"restoreNeededIaps": st["restoreNeededIaps"]}
-
-def r_early_access(body, st):
-    """Early-access test windows are dated in EarlyAccessModeInfos.xml and every one
-    of them has closed, so there is nothing to enter. Reported as closed rather than
-    left empty, which the panel reads as a failed request."""
-    return {"earlyAccessModeId": 0, "applied": False, "keyValues": _key_values(st)}
-
-# --- Leaderboards -------------------------------------------------------------
-# Every board answered an empty model, so each one rendered as a blank list with no
-# row for the player either. There is nobody else on a private server, so the honest
-# board is one row: you, first. An empty `ranking` with a filled `playerRank` is not
-# the same thing - several panels read the list to find themselves and show "unranked"
-# when they cannot.
-
-def _rank_row(st, score=0, extra=None):
-    d = _PC["defaults"]
-    deco = _deco(st)
-    row = {"rank": 1, "score": int(score),
-           "accountId": st.get("accountId", d["accountId"]),
-           "userName": st.get("name", d["name"]),
-           "castleName": st.get("castleName", d["castleName"]),
-           "kingPostfix": 0, "castlePostfix": 0,
-           "flagId": deco["flag"]["flagId"], "nameTagId": deco["nameTag"],
-           "profileIcon": d["profileIconId"], "tier": 0}
-    row.update(extra or {})
-    return row
-
-def _board(st, score_of, extra_of=None, player_key="playerRank"):
-    """A board across every account. `score_of(state)` and `extra_of(state)` build
-    the per-player score and cosmetics; _leaderboard sorts and ranks them."""
-    def row_fn(s):
-        return _rank_row(s, score_of(s), extra_of(s) if extra_of else None)
-    return _leaderboard(st, row_fn, player_key=player_key)
-
-def r_ranking(body, st):
-    """The generic board. `score` is a long here and `deck` replaces the cosmetics."""
-    d = _PC["defaults"]
-    def row_fn(s):
-        return {"score": int(s.get("bestClearedTheme", 0)) * 100
-                                 + int(s.get("bestClearedStage", 0)),
-                "accountId": s.get("accountId", d["accountId"]),
-                "userName": s.get("name", d["name"]),
-                "castleName": s.get("castleName", d["castleName"]),
-                "kingPostfix": 0, "castlePostfix": 0,
-                "deck": _deck_units(s)}
-    out = _leaderboard(st, row_fn)
-    out["rankingType"] = str(body.get("rankingType", ""))
-    return out
-
-def _deck_units(st):
-    """The current preset's hero ids. The board draws these as portraits, so an empty
-    list is a row of blank slots - fall back to the first non-empty preset rather than
-    show nothing when the selected one has never been filled."""
-    decks = st.get("decks") or []
-    cur = st.get("currentDeckPreset", 0)
-    order = ([decks[cur]] if cur < len(decks) else []) + list(decks)
-    for deck in order:
-        units = deck.get("deck", []) if isinstance(deck, dict) else deck
-        got = [u for u in units if isinstance(u, int) and u]
-        if got:
-            return got
-    return []
-
-def r_pvp_ranking(body, st):
-    return _board(st, lambda s: s.get("pvpScore", 0),
-                  lambda s: {"tier": s.get("pvpTier", 0)})
-
-def r_colosseum_ranking(body, st):
-    return _board(st, lambda s: s.get("colosseumScore", 0),
-                  lambda s: {"tier": s.get("colosseumTier", 0)})
-
-def r_roguelike_ranking(body, st):
-    return _board(st, lambda s: s.get("rogueLikeScore", 0),
-                  lambda s: {"challenge": s.get("rogueLikeChallenge", 0),
-                             "building": s.get("rogueLikeBuilding", 0)})
-
-def r_challenge_ranking(body, st):
-    def row_fn(s):
-        row = _rank_row(s, _challenge_state(s).get("bestDifficulty", 0))
-        # ChallengeModeRankingData has no flag/nameTag/tier but carries a percentile.
-        for k in ("flagId", "tier"):
-            row.pop(k, None)
-        row["rankPer"] = 100.0
-        return row
-    return _leaderboard(st, row_fn)
-
-def r_clan_point_ranking(body, st):
-    """Clans are their own entity, and there is exactly one here: the player's."""
-    row = {"rank": 1, "clanPoint": st.get("clanPoint", 0), "clanTier": 0,
-           "battleTier": 0, "clanId": st.get("clanId", 0),
-           "clanName": st.get("clanName", ""), "markId": 0}
-    return {"ranking": [row] if row["clanId"] else [], "playerClanRank": row}
-
-def r_unit_statistics(body, st):
-    """Usage rates across the playerbase. One player means no meaningful sample, and
-    inventing one would put fake percentages under real hero names."""
-    return {"topPotentialUsage": [], "topTreasureUsage": [], "topAccessoryUsage": []}
-
 
 # --- Babel: the six towers ----------------------------------------------------
 
@@ -3673,12 +2046,6 @@ DYNAMIC_OVERRIDES = {
     "/player/currencies": lambda b, st: {"gold": st.get("gold", 0), "cash": st.get("cash", 0), "heart": st.get("heart", 0)},
     "/player/tutorial-status": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
     "/player/tutorial/complete": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
-    "/shop": r_shop,
-    "/shop/iap": r_shop,
-    "/shop/caniap": r_shop,
-    "/shop/caniap_new": r_shop,
-    "/shop/get-restore-needed-iaps": r_shop,
-    "/shop/refreshDailyShop": r_shop_refresh,
     "/player/getInventory": r_player_inventory,
     "/player/useInventory": r_use_inventory,
     "/player/use-reward-box-inventory-item": r_use_reward_box,
@@ -3688,7 +2055,7 @@ DYNAMIC_OVERRIDES = {
         "playerCash": st.get("cash", 0),
         "inventoryCount": 999
     },
-    "/player/rename": lambda b, st: {"name": b.get("name", "DevKing")},
+    "/player/rename": r_player_rename,
     "/player/building": lambda b, st: {"buildingPoint": st.get("buildingPoints", 25), "buildingData": _get_building_data(st)},
     "/player/building/point": lambda b, st: {"buildingPoint": st.get("buildingPoints", 25), "buildingData": _get_building_data(st)},
     "/player/building/save": r_building_save,
@@ -3726,31 +2093,8 @@ DYNAMIC_OVERRIDES = {
     "/invasion/reward/receive-all": r_invasion_reward_all,
     "/mission/check": r_mission,
     "/eventcache": r_event_cache,
-    "/territory-tycoon/fetch-token": r_tycoon_tokens,
-    "/territory-tycoon/collect-gold-token": r_tycoon_collect_gold,
-    "/territory-tycoon/firework": r_tycoon_firework,
-    "/territory-tycoon/recover-seasonal-token": r_tycoon_player,
-    "/territory-tycoon/attendance-check": r_ack,
-    "/stock-event/my-info": r_stock_my_info,
-    "/stock-event/daily-attendance": r_stock_attendance,
-    "/stock-event/buy-hint": r_stock_buy_hint,
-    "/stock-event/mission": r_stock_mission,
-    "/stock-event/ranking": r_stock_ranking,
-    "/stock-event/orders": r_stock_ranking,
-    "/stock-event/prices": r_stock_my_info,
-    "/kg-marble": r_marble,
-    "/kg-marble/roll": r_marble,
-    "/kg-marble/reward": r_marble,
-    "/kg-marble/execute-event": r_marble,
-    "/kg-marble/set-player": r_marble_set_player,
-    "/event-card-collecting/fetch": r_event_cards,
-    "/event-card-collecting/apply": r_event_cards,
-    "/event-card-collecting/collect": r_event_cards,
-    "/event-card-collecting/gacha": r_event_cards,
-    "/event-card-collecting/exchange": r_event_cards_exchange,
-    "/event-card-collecting/receive-reward": r_event_cards_reward,
-    "/auth/transfer": r_transfer_issue,
-    "/auth/transfer/code": r_transfer_redeem,
+    "/auth/transfer/code": r_transfer_issue,
+    "/auth/transfer": r_transfer_redeem,
     # GameManager.usePatch is hardcoded to 1 in the binary, so this answer is
     # advisory only - but it has to be the truthful one, since the CDN check runs
     # either way and we serve real cloned bundles.
@@ -3766,18 +2110,11 @@ DYNAMIC_OVERRIDES = {
     "/api/cloud-run/services": r_cloud_run_services,
     "/api/cloud-run/default-ranking": r_cloud_run_services,
     "/kgc-main": r_ack,
-    "/kgc-ranking": r_ranking,
+    "/kgc-ranking": roster.r_ranking,
     "/seasonal-event/april-fools/reward": lambda b, st: {
         "rewardListResponseData": _reward_list_data([])},
     "/artifact/reroll": r_artifact_result,
-    "/artifact/polish/replace-option-slot-idx": r_artifact_result,
-    "/rogueLike/save-rogueLike": r_rogue_save,
-    "/rogueLike/load-rogueLike-data": r_rogue_load,
-    "/rogueLike/save-own-card-snapshot": r_rogue_snapshot,
-    "/rogueLike/delete-roguelike": r_rogue_delete,
-    "/rogueLike/revive": r_rogue_revive,
-    "/rogueLike/can-revive-by-ad": r_rogue_can_revive_by_ad,
-    "/mission/roguelike-statistics": r_rogue_statistics,
+"/artifact/polish/replace-option-slot-idx": r_artifact_result,
     "/mission/roguelike/check-on-clear": r_ack,
     # /test/* are the client's own dev buttons. They exist in the build, so they
     # must answer, but nothing here is meant to rewrite a save from a debug menu.
@@ -3785,26 +2122,9 @@ DYNAMIC_OVERRIDES = {
     "/test/roguelike/play-count": r_ack,
     "/test/roguelike/mission-clear-count": r_ack,
     "/test/roguelike/reset-mission": r_ack,
-    "/shop/get-treasure-wish-list": r_treasure_wish_list,
-    "/shop/save-treasure-wish-list": r_save_treasure_wish_list,
-    "/shop/check-treasure-wish-list-valid": r_treasure_wish_list,
-    "/shop/load-custom-pickups": r_custom_pickups,
-    "/shop/save-custom-pickups": r_save_custom_pickups,
-    "/shop/choice-package-unit": r_shop_choice,
-    "/shop/choice-treasure-pickup-ceil": r_shop_choice,
-    "/shop/caniap-and-add-to-restore-needed-iaps": r_iap_restore_add,
-    "/shop/remove-from-restore-needed-iaps": r_iap_restore_remove,
     "/player/ad": r_player_ad,
     "/player/changeProfileIcon": r_change_profile_icon,
     "/player/other": r_player_other,
-    "/player/initialize-journey": r_journey_init,
-    "/player/journey-reward": r_journey_reward,
-    "/player/year-event": r_year_event,
-    "/player/year-event-attendance-reward": r_year_attendance_reward,
-    "/player/year-event-pass-reward": r_year_pass_reward,
-    "/player/year-event-buy-pass-point": r_year_buy_pass_point,
-    "/player/early-access-mode": r_early_access,
-    "/player/early-access-mode-code": r_early_access,
     "/player/tutorial/progress-mission": lambda b, st: {
         "keyValues": st.get("tutorialKeyValues", [])},
     # One-way telemetry: posted, never read back.
@@ -3813,38 +2133,6 @@ DYNAMIC_OVERRIDES = {
     "/player/customEvent": r_ack,
     "/player/logClickNotice": r_ack,
     "/player/completeKingGakReturnEvent": r_ack,
-    "/pvp/info": r_pvp_info,
-    "/pvp/matching": r_arena_matching,
-    "/pvp/test-matching": r_arena_matching,
-    "/pvp/fetch-log-history": r_arena_logs,
-    "/pvp/fetch-log-detail": r_arena_logs,
-    "/pvp/fetch-statistics-data": r_arena_statistics,
-    "/pvp/win-reward": r_arena_win_reward,
-    "/pvp/all-rewards": r_arena_win_reward,
-    "/pvp/dormant-progress": r_ack,
-    "/colosseum": r_colosseum,
-    "/colosseum/test-single-play": r_colosseum_match,
-    "/colosseum/test-free-match": r_colosseum_match,
-    "/colosseum/match": r_colosseum_match,
-    "/colosseum/match/ping": r_colosseum_match,
-    "/colosseum/server-address": r_colosseum_match,
-    "/colosseum/match/cancel": r_ack,
-    "/colosseum/create-custom-match": r_colosseum_custom_match,
-    "/colosseum/join-custom-match": r_colosseum_custom_match,
-    "/colosseum/round-data": r_colosseum_round_data,
-    "/colosseum/complete-round-data": r_colosseum_complete_round,
-    "/colosseum/check-end": r_ack,
-    "/colosseum/record-minimum-rank": r_ack,
-    "/colosseum/reenter-tried": r_ack,
-    "/colosseum/reenter-succeed": r_ack,
-    "/colosseum/open-mission-reward": lambda b, st: {
-        "rewardListResponseData": _reward_list_data([])},
-    "/colosseum/fetch-players-data": r_colosseum_players,
-    "/colosseum/fetch-log-history": r_colosseum_logs,
-    "/colosseum/fetch-log-detail": r_colosseum_logs,
-    "/colosseum/fetch-statistics-data": r_colosseum_statistics,
-    "/colosseum/get-reward": r_colosseum_tier_rewards,
-    "/colosseum/all-tier-rewards": r_colosseum_tier_rewards,
     "/artifact/inventory": r_artifact_inventory,
     "/artifact/equip": r_artifact_equip,
     "/artifact/crafting": r_artifact_result,
@@ -3878,72 +2166,13 @@ DYNAMIC_OVERRIDES = {
     "/rift-weapon/crystal-destroy": r_rift_weapon,
     "/rift-weapon/crystal-inventory": r_rift_weapon,
     "/rift-weapon/buy-rift-gauge": r_rift_weapon,
-    "/clan": r_clan,
-    "/clan/info": r_clan,
-    "/clan/create": r_clan_create,
-    "/clan/leave": r_clan_leave,
-    "/clan/delete": r_clan_leave,
-    "/clan/nameCheck": r_clan_name_check,
-    "/clan/modify-name": _clan_modify("name"),
-    "/clan/modifyIntro": _clan_modify("intro"),
-    "/clan/modifyNotice": _clan_modify("notice"),
-    "/clan/modifyTag": _clan_modify("tag"),
-    "/clan/modifyMark": _clan_modify("markId", int),
-    "/clan/modifyJoinType": _clan_modify("joinType", int),
-    "/clan/changeRoleName": r_clan_role_name,
-    "/clan/chat": r_clan_chat,
-    "/clan/fetchChat": r_clan_fetch_chat,
-    "/clan/refreshChat": r_clan_fetch_chat,
-    "/clan/deleteChat": r_clan_delete_chat,
-    "/clan/currentSeq": r_clan_seq,
-    "/clan/banMember": r_clan_noop_member,
-    "/clan/changeMaster": r_clan_noop_member,
-    "/clan/mandateMaster": r_clan_noop_member,
-    "/clan/changeMemberRole": r_clan_noop_member,
-    "/clan/requestJoin": r_clan_noop_member,
-    "/clan/processRequestJoin": r_clan_noop_member,
-    "/clan/raid/deck": r_clan_raid_deck,
-    "/clan/raid/best-deck": r_clan_raid_deck,
-    "/clan/raid/deck-name": r_clan_raid_deck,
-    "/clan/raid/delete-deck": r_clan_raid_delete_deck,
-    "/clan/raid/currentState": r_clan_raid_state,
-    "/clan/raid/end": r_clan_raid_end,
-    "/clan/raid/support": r_clan_support,
-    "/clan/support": r_clan_support,
-    "/clan/requestSupport": r_clan_support,
+    **clan.handlers(),
     "/pass": r_pass,
     "/pass/reward": r_pass,
     "/pass/all-rewards": r_pass,
     "/pass/bonusReward": r_pass,
     "/pass/buyLevel": r_pass,
     "/pass/passEventBooster": r_pass,
-    "/territory": r_territory,
-    "/territory/fetch": r_territory_fetch,
-    "/territory/build": r_territory_build,
-    "/territory/upgrade-building": r_territory_build,
-    "/territory/upgrade-building-immediately": r_territory_upgrade_now,
-    "/territory/remove-building": r_territory_remove,
-    "/territory/store-building": r_territory_store,
-    "/territory/unstore-building": r_territory_unstore,
-    "/territory/replace-building": r_territory_replace,
-    "/territory/refresh-building": r_territory_fetch,
-    "/territory/collect-labor": r_territory_collect_labor,
-    "/territory/recover-labor": r_territory_collect_labor,
-    "/territory/assign-units": r_territory_assign,
-    "/territory/swap-assigned-units": r_territory_assign,
-    "/territory/level-sync/assign": r_territory_fetch,
-    "/territory/level-sync/reset-timer": r_territory_fetch,
-    "/territory/attendance-check": r_territory_fetch,
-    "/territory/alchemy-new": r_territory_fetch,
-    "/territory/restaurant/claim": r_territory_fetch,
-    "/territory/fetch-stat-buffs": r_territory_stat_buffs,
-    "/territory/equip-skin": r_territory_equip_skin,
-    "/territory/hunting/start": r_territory_hunting_start,
-    "/territory/hunting/end": r_territory_hunting_end,
-    "/territory/hunting/stop": r_territory_hunting_stop,
-    "/territory/hunting/fetch": r_territory_fetch,
-    "/territory/hunting/complete-hunting-immediately": r_territory_hunting_end,
-    "/territory/trade-shop/buy": r_territory_trade_buy,
     "/accessory": r_accessory,
     "/accessory/equip-tutorial": lambda b, st: {"accessories": get_st_accessories(st)},
     "/accessory/add-exp": r_accessory_result,
@@ -3955,21 +2184,6 @@ DYNAMIC_OVERRIDES = {
     "/accessory/set-preset": lambda b, st: {"presets": []},
     "/accessory/set-preset-name": lambda b, st: {"presets": []},
     "/accessory/equip": r_accessory,
-    "/decoration": r_decoration,
-    "/decoration/map-skin/equip": r_map_skin_equip,
-    "/decoration/map-skin/buy": r_map_skin_buy,
-    "/decoration/map-skin/favorite": r_map_skin_favorite,
-    "/decoration/login-skin/equip": r_login_skin_equip,
-    "/decoration/advisor/contract": r_advisor_contract,
-    "/decoration/advisor/extend": r_advisor_extend,
-    "/decoration/advisor/equip": r_advisor_equip,
-    "/decoration/advisor/timeout": r_advisor_timeout,
-    "/flag/inventory": r_flag_inventory,
-    "/flag/equipedFlag": lambda b, st: dict(_deco(st)["flag"]),
-    "/flag/set": r_flag_set,
-    "/nameTag/inventory": r_nametag_inventory,
-    "/nameTag/set": r_nametag_set,
-    "/player/get-login-scene-illust-data": r_login_scene_illust,
     "/card": r_card,
     "/dimension-unit/upgrade": r_dimension_upgrade,
     "/dimension-unit/overcome": r_dimension_overcome,
@@ -3977,63 +2191,165 @@ DYNAMIC_OVERRIDES = {
     "/game": r_game_start,
     "/game/revive": r_game_revive,
     "/babel": r_babel,
-    "/ranking/ranking": r_ranking,
-    "/ranking/pvp-ranking": r_pvp_ranking,
-    "/ranking/pvp-hall-of-fame": r_pvp_ranking,
-    "/ranking/pvp-league-ranking": r_pvp_ranking,
-    "/ranking/colosseum-ranking": r_colosseum_ranking,
-    "/ranking/colosseum-hall-of-fame": r_colosseum_ranking,
-    "/ranking/colosseum-league-ranking": r_colosseum_ranking,
-    "/ranking/roguelike-ranking": r_roguelike_ranking,
-    "/ranking/roguelike-building-ranking": r_roguelike_ranking,
-    "/ranking/dimension-rift-ranking": r_roguelike_ranking,
-    "/ranking/challenge-mode-ranking": r_challenge_ranking,
-    "/ranking/clan-point-ranking": r_clan_point_ranking,
-    "/statistics/unit": r_unit_statistics,
     "/player/dailyAttendanceEvents": r_daily_attendance_events,
     "/player/surprise-attendance-event": r_surprise_attendance,
     "/player/surprise-attendance-event-daily-attendance-reward": r_surprise_attendance_reward,
 }
-
-# Pure-literal routes (no st/body dependency) load straight from JSON; wrap each
-# in a lambda returning the same shared dict (build_model only reads from it via
-# .update(), never mutates it, so no copy is needed).
-OVERRIDES = {path: (lambda b, st, r=resp: r) for path, resp in STATIC_OVERRIDES.items()}
-OVERRIDES.update(DYNAMIC_OVERRIDES)
 
 SERVER_START_TIME = time.time()
 
 app = FastAPI(title="KGC private server", version=SERVER_VERSION)
 _STATE_GATE = asyncio.Lock()
 
+# A public server holds other people's progress. Cron is the textbook answer and
+# nobody sets it up, so this runs in-process; playerdb.backup_if_due does the
+# due-check under the cross-process lock, which is what stops :8080 and :8443 both
+# firing. KGC_BACKUP_HOURS=0 turns it off (use your own backups instead).
+BACKUP_HOURS = float(os.environ.get("KGC_BACKUP_HOURS") or 24)
+
+
+@app.on_event("startup")
+async def periodic_backup():
+    if BACKUP_HOURS <= 0:
+        admin_log("[state] automatic backups off (KGC_BACKUP_HOURS=0)")
+        return
+
+    async def loop():
+        interval = BACKUP_HOURS * 3600
+        while True:
+            try:
+                # to_thread: the lock and the copy are blocking, and this must not
+                # stall the event loop while a player is mid-request.
+                dst = await asyncio.to_thread(playerdb.backup_if_due, interval)
+                if dst:
+                    admin_log(f"[state] backup -> {dst.name}")
+            except Exception as e:
+                admin_log(f"[state] backup failed: {type(e).__name__}: {e}")
+            await asyncio.sleep(min(3600, interval))
+
+    asyncio.create_task(loop())
+
 # Google login web flow (client's Google button -> /glogin -> deep link back).
 import google_login
 google_login.register(app)
 admin_log(f"[auth] google login {'ENABLED' if google_login.enabled() else 'not configured'}")
 
+# Behind Cloudflare Tunnel, nginx, or any port-forward that rewrites the source, every
+# request arrives from 127.0.0.1 - so the per-IP limits below collapse into a single
+# bucket shared by every player on earth, and five new accounts an hour becomes the
+# whole server's budget. The forwarded header is the real address, but it is also
+# trivially forged by anyone talking to us directly, so trusting it is opt-in and
+# belongs ONLY on a deployment where a proxy is the sole way in.
+TRUST_PROXY = os.environ.get("KGC_TRUST_PROXY") == "1"
+
+
+def client_ip(request):
+    peer = request.client.host if request.client else "-"
+    if not TRUST_PROXY:
+        return peer
+    fwd = request.headers.get("cf-connecting-ip") or request.headers.get("x-forwarded-for", "")
+    # x-forwarded-for is a chain; the leftmost entry is the original client.
+    return fwd.split(",")[0].strip() or peer
+
+
 ADMIN_TOKEN = os.environ.get("KGC_ADMIN_TOKEN")
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
+ADMIN_COOKIE = "kgc_admin"          # same session cookie the dashboard issues
+
+
+def _admin_ok(request):
+    """Whether this request may touch /admin. Three ladders, most specific first.
+
+    The loopback fallback is last and weakest: behind a tunnel or any reverse proxy
+    EVERY request arrives from loopback, so it is only safe on a box nobody else can
+    reach. It is therefore refused outright once a real credential exists - the hole
+    it plugged was serve_public.sh accepting a dashboard account instead of a token,
+    which left this middleware with nothing to check and everything to allow.
+    """
+    if ADMIN_TOKEN:
+        sent = (request.headers.get("x-admin-token")
+                or request.query_params.get("admin_token") or "")
+        return secrets.compare_digest(sent, ADMIN_TOKEN)
+    if playerdb.admin_count():
+        token = (request.cookies.get(ADMIN_COOKIE)
+                 or request.headers.get("x-admin-token") or "")
+        return playerdb.admin_for_token(token) is not None
+    # client_ip, not the raw peer: with KGC_TRUST_PROXY on we can tell a real remote
+    # player apart from the proxy in front of us, and this check stops lying.
+    return client_ip(request) in _LOOPBACK
+
 
 @app.middleware("http")
 async def guard_admin(request: Request, call_next):
-    """The 26 /admin routes can rewrite or delete any player's save.
+    """The /admin routes can rewrite or delete any player's save.
 
     serve_public.sh binds 0.0.0.0 so remote players can reach the game API - which
-    exposes these too. Require KGC_ADMIN_TOKEN when it is set; with no token
-    configured, allow loopback only. Note a reverse proxy or tunnel makes every
-    request look like loopback, which is why serve_public.sh refuses to start
-    without a token.
+    exposes these too.
     """
-    if request.url.path.startswith("/admin"):
-        if ADMIN_TOKEN:
-            sent = request.headers.get("x-admin-token") or request.query_params.get("admin_token") or ""
-            if not secrets.compare_digest(sent, ADMIN_TOKEN):
-                return JSONResponse({"error": "admin token required"}, status_code=403)
-        elif (request.client.host if request.client else None) not in _LOOPBACK:
-            return JSONResponse(
-                {"error": "admin API is loopback-only; set KGC_ADMIN_TOKEN to allow remote access"},
-                status_code=403)
+    if request.url.path.startswith("/admin") and not _admin_ok(request):
+        return JSONResponse(
+            {"error": "admin credentials required", "login": True}, status_code=403)
     return await call_next(request)
+
+# A public server is reachable by anyone, and every route does real work (master-data
+# lookups, a state read-modify-write under a cross-process lock). This is the ceiling
+# on how fast one address can drive that, so a single misbehaving client - or a bored
+# one with curl - cannot starve everyone else.
+# ponytail: fixed window per process, no burst smoothing. Two uvicorns and a human
+# operator; move it to Redis if this ever fronts real traffic.
+# 600/min is deliberately generous. A lobby boot is a burst of ~60-80 requests, and
+# the address is often shared: friends behind one NAT, or - without KGC_TRUST_PROXY -
+# every player on the server behind one tunnel. Too tight and legitimate players fail
+# to boot, which looks exactly like the server being down. It still bounds a runaway
+# client to something the state lock can absorb.
+RATE_LIMIT = int(os.environ.get("KGC_RATE_LIMIT") or 600)      # requests
+RATE_WINDOW = int(os.environ.get("KGC_RATE_WINDOW") or 60)     # seconds
+_rate_hits = {}
+
+
+def _rate_ok(ip, now=None):
+    if RATE_LIMIT <= 0:
+        return True                       # KGC_RATE_LIMIT=0 turns it off
+    now = time.time() if now is None else now
+    window = int(now // RATE_WINDOW)
+    key, count = _rate_hits.get(ip, (None, 0))
+    if key != window:
+        if len(_rate_hits) > 5000:        # bound it: drop everyone from older windows
+            _rate_hits.clear()
+        _rate_hits[ip] = (window, 1)
+        return True
+    if count >= RATE_LIMIT:
+        return False
+    _rate_hits[ip] = (window, count + 1)
+    return True
+
+
+@app.middleware("http")
+async def rate_limit(request: Request, call_next):
+    # The CDN is static bytes off a dict and is what a fresh install hammers hardest
+    # (six bundles, one after another) - limiting it would break first launches.
+    if request.url.path.startswith("/patch/"):
+        return await call_next(request)
+    if not _rate_ok(client_ip(request)):
+        return JSONResponse({"error": "too many requests"}, status_code=429,
+                            headers={"retry-after": str(RATE_WINDOW)})
+    return await call_next(request)
+
+
+# The real client's biggest body is a roguelike save blob, a few KB. Starlette buffers
+# the whole body in memory before a handler sees it, so with no cap one POST of a few
+# hundred MB is a one-line denial of service against a public server.
+MAX_BODY = int(os.environ.get("KGC_MAX_BODY") or 1_000_000)
+
+
+@app.middleware("http")
+async def limit_body_size(request: Request, call_next):
+    declared = request.headers.get("content-length")
+    if declared and declared.isdigit() and int(declared) > MAX_BODY:
+        admin_log(f"[limit] rejected {declared}-byte body on {request.url.path}")
+        return JSONResponse({"error": "request body too large"}, status_code=413)
+    return await call_next(request)
+
 
 @app.middleware("http")
 async def serialize_state_writes(request: Request, call_next):
@@ -4049,6 +2365,7 @@ async def serialize_state_writes(request: Request, call_next):
     # Resolve identity BEFORE taking the lock: the ContextVar must be set in this
     # task so the child task call_next() spawns inherits it.
     token = CURRENT_UID.set(playerdb.uid_for_token(request.headers.get("accesstoken")))
+    ip_token = CURRENT_IP.set(client_ip(request))
     try:
         # asyncio.Lock first: flock blocks the thread, so a second request in THIS
         # process waiting on it would freeze the event loop and never let the holder
@@ -4058,6 +2375,7 @@ async def serialize_state_writes(request: Request, call_next):
                 return await call_next(request)
     finally:
         CURRENT_UID.reset(token)
+        CURRENT_IP.reset(ip_token)
 
 @app.get("/")
 def health():
@@ -4084,10 +2402,31 @@ async def cdn_patch(path: str, request: Request):
         return Response(data, media_type="text/plain")
     return Response(data, media_type="application/octet-stream")
 
+async def _read_capped(request):
+    """The body, refusing to buffer more than MAX_BODY of it.
+
+    The Content-Length middleware covers every real client request, but a chunked
+    upload declares no length - and `request.body()` buffers the whole thing before
+    anyone can check it. Reading the stream ourselves means an attacker gets one
+    MAX_BODY allocation, not one per gigabyte they feel like sending.
+    """
+    chunks, total = [], 0
+    async for chunk in request.stream():
+        total += len(chunk)
+        if total > MAX_BODY:
+            raise ValueError(f"body exceeded {MAX_BODY} bytes")
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
 async def respond(path: str, request: Request):
     st = load_state()
     host = request.headers.get("host", "?")
-    raw = await request.body()
+    try:
+        raw = await _read_capped(request)
+    except ValueError as e:
+        admin_log(f"[limit] {path}: {e}")
+        return JSONResponse({"error": "request body too large"}, status_code=413)
     body = {}
     if raw:
         try:
@@ -4099,6 +2438,13 @@ async def respond(path: str, request: Request):
                 if path == "/deck/set":
                     admin_log(f"[DECK/SET DECRYPT FAIL] raw_len={len(raw)} raw_hex={raw[:64].hex()}")
                 body = {}
+    # A body of `5`, `"x"` or `[1,2]` is valid JSON but not an object, and every
+    # handler below indexes it like a dict. Coerce here rather than guarding each
+    # one: `/auth/register` with a bare integer body reached `body.get("id")` and
+    # 500'd, which the client cannot parse (it wants the AES envelope) - it sits on
+    # the loading screen instead of failing.
+    if not isinstance(body, dict):
+        body = {}
     # Many routes carry their arguments in the query string, not the body:
     # /territory/upgrade-building?posIndex={0}, /card?cardId={0}, /player/other?targetId={0}.
     # Handlers only ever saw the body, so every one of those arrived as an empty dict
@@ -4123,14 +2469,22 @@ async def respond(path: str, request: Request):
     if path in _PATH_COUNTERS:
         bump(st, _PATH_COUNTERS[path])
         save_state(st)
-    overlay = OVERRIDES[path](body, st) if path in OVERRIDES else None
+    try:
+        overlay = OVERRIDES[path](body, st) if path in OVERRIDES else None
+    except Exception as e:
+        # One player sending one bad body must not 500 - the client cannot parse a
+        # FastAPI error page (it expects the AES envelope) and would sit on the
+        # loading screen. Fall back to the route's empty model, which is the same
+        # shape it would get from a route with no handler.
+        admin_log(f"[HANDLER ERROR] {path}: {type(e).__name__}: {e}")
+        overlay = None
     if overlay is None and path not in ROUTE_MODELS:
         # Every route the v171 client can call is now mapped (route_models.json plus
         # data/route_models_extra.json), so reaching here means either a route the
         # string-table scan missed or a client newer than this server.
         admin_log(f"[UNKNOWN PATH] {request.method} {path}")
     payload = build_model(info["response"], overlay)
-    admin_log(f"[{host}] {request.method} {path} -> {info.get('response')}")
+    trace(f"[{host}] {request.method} {path} -> {info.get('response')}")
     return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
 
 def make_handler(path):
@@ -4138,134 +2492,14 @@ def make_handler(path):
         return await respond(path, request)
     return h
 
-# Direct route handlers - must be registered BEFORE route_models to bypass build_model
-@app.get("/accessory")
-async def accessory_inventory_direct(request: Request):
-    st = load_state()
-    host = request.headers.get("host", "?")
-    admin_log(f"[{host}] DIRECT GET /accessory -> AccessoryInventoryResponseModel")
-    payload = {
-        "code": 200, "msg": None, "success": True,
-        "accessories": get_st_accessories(st)
-    }
-    return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
-
-@app.post("/accessory")
-async def accessory_equip_direct(request: Request):
-    st = load_state()
-    host = request.headers.get("host", "?")
-    raw = await request.body()
-    body = {}
-    if raw:
-        try:
-            body = aes_decrypt(raw)
-        except Exception:
-            try:
-                body = json.loads(raw)
-            except Exception:
-                pass
-    admin_log(f"[{host}] DIRECT POST /accessory -> AccessoryResultResponseModel")
-    accs = get_st_accessories(st)
-    target_ids = body.get("targetIds", [])
-    unit_id = body.get("unitId", 0)
-    if target_ids and unit_id:
-        for a in accs:
-            if a["unitId"] == unit_id:
-                a["unitId"] = 0
-            if a["id"] in target_ids:
-                a["unitId"] = unit_id
-        save_state(st)
-    payload = {
-        "code": 200, "msg": None, "success": True,
-        "accessories": accs,
-        "deletedAccessories": [],
-        "playerGold": st.get("gold", 0),
-        "playerCash": st.get("cash", 0),
-        "inventories": [],
-        "addedExpItems": 0
-    }
-    return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
-
-@app.get("/rift-weapon")
-@app.post("/rift-weapon")
-async def rift_weapon_inventory_direct(request: Request):
-    st = load_state()
-    host = request.headers.get("host", "?")
-    admin_log(f"[{host}] DIRECT /rift-weapon -> RiftWeaponInventoryResponseModel")
-    payload = r_rift_weapon({}, st)
-    payload["code"] = 200
-    payload["success"] = True
-    return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
-
-@app.get("/invasion/record")
-@app.post("/invasion/record")
-async def invasion_record_direct(request: Request):
-    host = request.headers.get("host", "?")
-    admin_log(f"  [{host}] DIRECT /invasion/record -> InvasionRecordsResponseModel")
-    
-    unlocked = RCFG["player"]["invasionUnlockedDifficulty"]
-    themes = [t for a, b in RCFG["player"]["invasionThemeRanges"] for t in range(a, b)] + _PREREQ_THEMES
-    records = []
-    for t in themes:
-        for d in range(1, unlocked + 1):
-            records.append({"theme": t, "difficulty": d, "unlockedDifficulty": unlocked})
-            
-    payload = {
-        "code": 200, "msg": None, "success": True,
-        "difficultyRecords": records
-    }
-    return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
-
-# Inbox (Post) - GET /post lists mail (PostResponseModel.posts), POST /post/receive claims
-# (PostReceiveRequestModel{postId,receiveAll} -> PostReceiveResponseModel.rewardListResponseData).
-# Mail lives in state so it persists and disappears once claimed. Reward grant is applied to
-# player currency on claim so the send->receive->grant flow is real, not cosmetic.
-@app.post("/admin/sendmail")
-async def admin_send_mail(request: Request):
-    st = load_state()
-    body = await request.json()
-    if "posts" not in st:
-        st["posts"] = []
-    next_id = max((p["id"] for p in st["posts"]), default=0) + 1
-    title = body.get("title", "")
-    text = body.get("text", "")
-    for f in (title, text):
-        if f.startswith("@raw:"):
-            f = f[5:]
-    st["posts"].append({
-        "id": next_id,
-        "type": body.get("type", "Normal"),
-        "title": title,
-        "text": text,
-        "rewardType": body.get("rewardType", ""),
-        "rewardId": body.get("rewardId", 0),
-        "rewardAmount": body.get("rewardAmount", 0),
-        "untilAt": now_iso(body.get("untilDays", 30)),
-    })
-    save_state(st)
-    return {"code": 200, "success": True, "postId": next_id}
-
-def _default_posts():
-    return [{
-        "id": 1, "type": "Normal",
-        "title": "NOwL Private Server",
-        "text": "Chào mừng đến private server! Thư test custom title/text. Nhận 1000 Vàng nhé.",
-        "rewardType": "Gold", "rewardId": 0, "rewardAmount": 1000,
-        "untilAt": now_iso(30),
-    }]
-
-def get_st_posts(st):
-    if "posts" not in st:
-        st["posts"] = _default_posts()
-    return st["posts"]
-
 def _grant_reward(st, rt, rid, amt):
     """Apply a claimed mail reward to player state. Currencies, inventory items, and hero
     souls/cards persist here; the client re-fetches /player, /player/getInventory and /card/all
-    after a claim so the granted state appears. Complex owned-content (Artifact/Treasure/
-    Accessory) is intentionally NOT auto-granted into state - it can trip client panel
-    invariants (see AGENTS.md ArtifactOptionUI crash); gift those as an Item reward box
-    (InventoryItems.xml Type=RewardBoxInventory/InstantRewardBox) which the player opens."""
+    after a claim so the granted state appears. Treasure is granted as a real owned instance
+    (same shape make_treasure builds for the default inventory). Artifact/Accessory stay
+    display-only - they trip client panel invariants (see AGENTS.md ArtifactOptionUI crash);
+    gift those as an Item reward box (InventoryItems.xml Type=RewardBoxInventory/
+    InstantRewardBox) which the player opens."""
     if rt == "Gold":
         st["gold"] = st.get("gold", 0) + amt
     elif rt == "Cash":
@@ -4286,403 +2520,80 @@ def _grant_reward(st, rt, rid, amt):
     elif rt == "UnitSoul" and rid:
         c = st.setdefault("cards", {}).setdefault(str(rid), {"unitId": rid, **SEED["cardTemplate"]})
         c["soul"] = c.get("soul", 0) + amt
+    elif rt == "Treasure" and rid:
+        # A default save already owns every treasure, so this only fires for a save
+        # whose treasure list was trimmed. Duplicates are skipped - the client keys the
+        # treasure panel on treasureId and shows a second copy as an empty slot.
+        tr = get_st_treasures(st)
+        if not any(t.get("treasureId") == rid for t in tr):
+            tr.append(make_treasure(max((t.get("id", 0) for t in tr), default=0) + 1, rid))
 
-def _ensure_raw_prefix(s: str) -> str:
-    return s if s.startswith("@raw:") else "@raw:" + s
-
-def _process_posts(posts: list) -> list:
-    out = []
-    for p in posts:
-        p = dict(p)
-        if isinstance(p.get("title"), str):
-            p["title"] = _ensure_raw_prefix(p["title"])
-        if isinstance(p.get("text"), str):
-            p["text"] = _ensure_raw_prefix(p["text"])
-        out.append(p)
-    return out
-
-@app.get("/post")
-async def post_list_direct(request: Request):
-    st = load_state()
-    host = request.headers.get("host", "?")
-    admin_log(f"[{host}] DIRECT GET /post -> PostResponseModel")
-    payload = {"code": 200, "msg": None, "success": True, "posts": _process_posts(get_st_posts(st))}
-    return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
-
-@app.post("/post/receive")
-async def post_receive_direct(request: Request):
-    st = load_state()
-    host = request.headers.get("host", "?")
-    raw = await request.body()
-    body = {}
-    if raw:
-        try:
-            body = aes_decrypt(raw)
-        except Exception:
-            try:
-                body = json.loads(raw)
-            except Exception:
-                pass
-    posts = get_st_posts(st)
-    post_id = body.get("postId", 0)
-    receive_all = body.get("receiveAll", False)
-    claimed = [p for p in posts if receive_all or p["id"] == post_id]
-    reward_list = []
-    for p in claimed:
-        amt = p.get("rewardAmount", 0)
-        rt = p.get("rewardType", "")
-        rid = p.get("rewardId", 0)
-        _grant_reward(st, rt, rid, amt)
-        if amt or rid:
-            reward_list.append({"type": rt, "id": rid, "count": amt})
-    st["posts"] = [p for p in posts if p not in claimed]
-    save_state(st)
-    admin_log(f"[{host}] DIRECT POST /post/receive claimed={len(claimed)} -> PostReceiveResponseModel")
-    payload = {
-        "code": 200, "msg": None, "success": True,
-        "rewardListResponseData": {
-            "rewardList": reward_list,
-            "artifactResult": None, "treasureResult": None, "accessoryResult": None,
-        },
-        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "playerHeart": st.get("heart", 0),
-    }
-    return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
-
-# Direct PvP handler - must be registered BEFORE route_models to take priority
-@app.get("/pvp/info")
-@app.post("/pvp/info")
-async def pvp_info_direct(request: Request):
-    # The request body is never read - the response depends only on saved state.
-    # pvpInfoDirect stays the base because it carries the fields that were tuned
-    # against the live client (deckRecord, retry counts, ban lists); r_pvp_info then
-    # overlays the parts that actually move, so a win shows up here too.
-    host = request.headers.get("host", "?")
-    payload = {"code": 200, "msg": None, "success": True}
-    payload.update(RCFG["pvpInfoDirect"])
-    payload.update(r_pvp_info({}, load_state()))
-    admin_log(f"[{host}] PVP DIRECT /pvp/info -> seasonUntilAtDates={len(payload['seasonUntilAtDates'])}")
-    return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
-
-# ── Admin Panel ─────────────────────────────────────────────────────────
-# The UI lives in dashboard.py (:8081) - a Vue app served from webui/. This route used
-# to render admin.html, but that file has not existed for a long time, so /admin was
-# quietly serving a blank page. The /admin/api/* routes below are still live: the
-# dashboard proxies them for the server-side views, and creates players through them so
-# the "new save" shape stays defined in exactly one place.
-DASHBOARD_URL = os.environ.get("KGC_DASHBOARD_URL", "http://127.0.0.1:8081")
-
-# ── Multi-player helpers ──
-def _list_players():
-    result = []
-    for uid, data, updated in playerdb.all_players():
-        if data is None:
-            result.append({"id": uid, "name": f"[invalid] {uid}", "error": True})
-            continue
-        result.append({
-            "id": uid,
-            "name": data.get("name", "Unknown"),
-            "uid": data.get("uid", ""),
-            "level": data.get("level", 1),
-            "gold": data.get("gold", 0),
-            "cash": data.get("cash", 0),
-            "castleName": data.get("castleName", ""),
-            "cards": len(data.get("cards", {})),
-            "updatedAt": datetime.datetime.fromtimestamp(updated).strftime("%Y-%m-%d %H:%M"),
-        })
-    return result
-
-def _load_player_by_id(pid):
-    return playerdb.load(pid)
-
-def _save_player_by_id(pid, data):
-    playerdb.save(pid, data)
-
-def _delete_player_by_id(pid):
-    playerdb.delete(pid)
-
-def _switch_active(pid):
-    """Point the game client at player pid."""
-    if playerdb.load(pid) is None:
-        return False
-    playerdb.set_active(pid)
-    return True
-
-def _load_or_create_active():
-    return load_state()
-
-@app.get("/admin")
-async def admin_page():
-    return HTMLResponse(
-        f'<!doctype html><meta charset="utf-8"><title>KGC admin</title>'
-        f'<body style="font:15px system-ui;background:#0b0f17;color:#e6ecf7;padding:40px">'
-        f'<h1 style="font-size:18px">The admin UI moved</h1>'
-        f'<p>It is now the dashboard at <a style="color:#7aa8ff" href="{DASHBOARD_URL}">{DASHBOARD_URL}</a> '
-        f'(<code>python3 server/dashboard.py</code>).</p>'
-        f'<p style="color:#6d7c99">This server still serves the <code>/admin/api/*</code> endpoints '
-        f'the dashboard calls.</p>')
-
-@app.get("/admin/api/info")
-async def admin_info():
-    players = _list_players()
-    active = playerdb.active()
-    return {
-        "version": SERVER_VERSION, "patchFolder": PATCH_FOLDER,
-        "routes": len(ROUTE_MODELS) + len(OVERRIDES),
-        "players": players,
-        "playerCount": len(players),
-        "activePlayerId": active,
-    }
-
-# ── Player CRUD ──
-@app.get("/admin/api/players")
-async def admin_list_players():
-    return {"players": _list_players()}
-
-@app.post("/admin/api/players/create")
-async def admin_create_player(body: dict):
-    name = body.get("name", "NewPlayer")
-    uid = body.get("uid", "player-" + secrets.token_hex(4))
-    st = copy.deepcopy(DEFAULT_PLAYER)   # deep: a shallow copy shares nested dicts with the template
-    st["name"] = name
-    st["uid"] = uid
-    st["accountCreatedAt"] = now_iso(0)
-    st["lastHeartTime"] = now_iso(0)
-    st["tomorrow"] = now_iso(1)
-    st["nextWeek"] = now_iso(7)
-    _save_player_by_id(uid, st)
-    return {"ok": True, "uid": uid}
-
-@app.post("/admin/api/players/delete")
-async def admin_delete_player(body: dict):
-    pid = body.get("uid", "")
-    _delete_player_by_id(pid)
-    # playerdb.active() falls back to the first remaining row on its own.
-    return {"ok": True}
-
-@app.post("/admin/api/players/switch")
-async def admin_switch_player(body: dict):
-    pid = body.get("uid", "")
-    if _switch_active(pid):
-        return {"ok": True}
-    return {"ok": False, "error": "Player not found"}
-
-@app.get("/admin/api/players/{pid}")
-async def admin_get_player_by_id(pid: str):
-    data = _load_player_by_id(pid)
-    if not data:
-        return {"error": "not found"}
-    return data
-
-@app.post("/admin/api/players/{pid}/save")
-async def admin_save_player_by_id(pid: str, body: dict):
-    # body may contain partial updates or full state
-    existing = _load_player_by_id(pid) or {}
-    existing.update(body)
-    _save_player_by_id(pid, existing)
-    return {"ok": True}
-
-@app.post("/admin/api/players/{pid}/reset")
-async def admin_reset_player_by_id(pid: str):
-    st = copy.deepcopy(DEFAULT_PLAYER)
-    st["uid"] = pid
-    _save_player_by_id(pid, st)
-    return {"ok": True}
-
-# ── Legacy single-player endpoints (target active) ──
-@app.get("/admin/api/player")
-async def admin_get_active_player():
-    st = _load_or_create_active()
-    fields = {
-        "accountId": st.get("accountId", 1),
-        "uid": st.get("uid", ""),
-        "name": st.get("name", ""),
-        "castleName": st.get("castleName", ""),
-        "level": st.get("level", 1),
-        "exp": st.get("exp", 0),
-        "gold": st.get("gold", 0),
-        "cash": st.get("cash", 0),
-        "paidCash": st.get("paidCash", 0),
-        "heart": st.get("heart", 0),
-        "bestClearedStage": st.get("bestClearedStage", 1),
-        "bestClearedTheme": st.get("bestClearedTheme", 1),
-        "bestClearedHardStage": st.get("bestClearedHardStage", 1),
-        "bestClearedHardTheme": st.get("bestClearedHardTheme", 1),
-        "currentDeckPreset": st.get("currentDeckPreset", 0),
-        "playedCount": st.get("playedCount", 0),
-        "winCount": st.get("winCount", 0),
-        "hasFreeRename": st.get("hasFreeRename", True),
-        "buildingPoints": st.get("buildingPoints", 25),
-        "accountCreatedAt": st.get("accountCreatedAt", ""),
-        "lastHeartTime": st.get("lastHeartTime", ""),
-        "tomorrow": st.get("tomorrow", ""),
-        "nextWeek": st.get("nextWeek", ""),
-        "eventFlag": st.get("eventFlag", 0),
-        "cards": st.get("cards", {}),
-        "decks": st.get("decks", []),
-        "inventory": st.get("inventory", {"itemIds": [], "counts": []}),
-        "equippedArtifacts": st.get("equippedArtifacts", []),
-        "buildingPresets": st.get("buildingPresets", []),
-        "altarPoints": st.get("altarPoints", []),
-        "altarLevels": st.get("altarLevels", []),
-        "tokens": st.get("tokens", []),
-        "missions": st.get("missions", []),
-        "tutorialKeyValues": st.get("tutorialKeyValues", []),
-    }
-    return fields
-
-SKIP_KEYS = {"cards", "inventory", "decks", "equippedArtifacts", "buildingPresets",
-              "altarPoints", "altarLevels", "tokens"}
-
-@app.post("/admin/api/player/save")
-async def admin_save_active_player(body: dict):
-    st = _load_or_create_active()
-    for k in ("name", "castleName", "level", "exp", "bestClearedStage", "bestClearedTheme",
-              "bestClearedHardStage", "bestClearedHardTheme", "playedCount", "winCount",
-              "hasFreeRename", "currentDeckPreset", "gold", "cash", "paidCash", "heart",
-              "buildingPoints"):
-        if k in body:
-            st[k] = body[k]
-    for k in ("tomorrow", "nextWeek", "accountCreatedAt", "lastHeartTime"):
-        if k in body:
-            st[k] = body[k]
-    for k in ("inventory", "tokens", "buildingPresets", "altarPoints", "altarLevels",
-              "missions", "tutorialKeyValues", "eventFlag"):
-        if k in body:
-            st[k] = body[k]
-    save_state(st)
-    return {"ok": True}
-
-@app.post("/admin/api/player/reset")
-async def admin_reset_active_player():
-    st = copy.deepcopy(DEFAULT_PLAYER)
-    st["uid"] = playerdb.active() or st.get("uid", "dev-0001")   # reset the data, keep the identity
-    save_state(st)
-    return {"ok": True}
-
-@app.post("/admin/api/heroes/save")
-async def admin_save_heroes(body: dict):
-    st = _load_or_create_active()
-    if "cards" in body:
-        st["cards"] = body["cards"]
-    save_state(st)
-    return {"ok": True}
-
-@app.post("/admin/api/heroes/give-all")
-async def admin_give_all_heroes():
-    st = _load_or_create_active()
-    template = {
-        "level": 30, "exp": 0, "potentialTier": 1,
-        "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
-        "randomSkinApply": False, "soul": 999
-    }
-    cards = st.setdefault("cards", {})
-    for hid in ALL_HERO_IDS:
-        sid = str(hid)
-        if sid not in cards:
-            cards[sid] = {"unitId": hid, **template}
-    save_state(st)
-    return {"ok": True, "count": len(cards)}
-
-@app.post("/admin/api/decks/save")
-async def admin_save_decks(body: dict):
-    st = _load_or_create_active()
-    if "decks" in body:
-        st["decks"] = body["decks"]
-    save_state(st)
-    return {"ok": True}
-
-@app.post("/admin/api/artifacts/give-all")
-async def admin_give_all_artifacts():
-    return {"ok": True, "count": len(DEFAULT_ARTIFACTS)}
-
-@app.post("/admin/api/treasures/give-all")
-async def admin_give_all_treasures():
-    return {"ok": True, "count": len(DEFAULT_TREASURES)}
-
+# ── Admin, Inbox, Direct routes ──
+# Registered before ROUTE_MODELS so they take priority over the generic dispatcher.
 # One crystal per weapon, each pointed at a different altar so the set actually covers
 # distinct options instead of six copies of "Rift Crystal of Hero".
 DEFAULT_RIFT_CRYSTALS = [make_rift_crystal(i + 1, rwid, main_idx=i)
                          for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
 
-@app.post("/admin/api/rift-crystals/grant")
-async def admin_grant_rift_crystals(request: Request):
-    body = await request.json()
-    weapon_id = body.get("weaponId", 0)
-    st = _load_or_create_active()
-    rift_crystals = st.setdefault("riftCrystals", [])
-    max_id = max((c["id"] for c in rift_crystals), default=0)
-    match = [t for t in DEFAULT_RIFT_CRYSTALS if t["weaponId"] == weapon_id]
-    if not match:
-        return {"ok": False, "error": f"no template for weaponId {weapon_id}"}
-    new = dict(match[0])
-    new["id"] = max_id + 1
-    new["createdAt"] = now_iso()
-    new["updatedAt"] = now_iso()
-    rift_crystals.append(new)
-    save_state(st)
-    return {"ok": True, "crystal": new}
+import admin_api
+import inbox
+import direct_routes
+import decoration_routes
+import pvp
+import territory_routes
+import shop_routes
+import seasonal
+import mini_games
+admin_api.register(app, sys.modules[__name__])
+inbox.register(app, sys.modules[__name__])
+decoration_routes.register(app, sys.modules[__name__])
+pvp.register(app, sys.modules[__name__])
+territory_routes.register(app, sys.modules[__name__])
+shop_routes.register(app, sys.modules[__name__])
+seasonal.register(app, sys.modules[__name__])
+roster.register(app, sys.modules[__name__])
+mini_games.register(app, sys.modules[__name__])
+# Last: its /pvp/info reads srv.PVP_OVERRIDES, which pvp.register above installs.
+direct_routes.register(app, sys.modules[__name__])
+DYNAMIC_OVERRIDES.update(DECORATION_OVERRIDES)
+DYNAMIC_OVERRIDES.update(MINI_GAME_OVERRIDES)
+DYNAMIC_OVERRIDES.update(PVP_OVERRIDES)
+DYNAMIC_OVERRIDES.update(TERRITORY_OVERRIDES)
+DYNAMIC_OVERRIDES.update(SHOP_OVERRIDES)
+DYNAMIC_OVERRIDES.update(SEASONAL_OVERRIDES)
+DYNAMIC_OVERRIDES.update(RANKING_OVERRIDES)
 
-@app.post("/admin/api/state/reload")
-async def admin_reload_state():
-    _load_or_create_active()
-    return {"ok": True}
+# Every extracted handler is re-exported here under the name it had while it lived in
+# this file. The tests and the dashboard reach for `server.r_shop`, `server.r_clan`,
+# `server.r_territory_fetch` and 80 more; rewriting 36 test files to chase a handler
+# between modules is churn that would have to happen again on the next extraction, and
+# it is also what makes a handler moving out of here a silent breakage rather than a
+# failed import. One loop, one place to look.
+for _mod in (clan, pvp, shop_routes, roster, seasonal, mini_games,
+             territory_routes, decoration_routes, inbox, direct_routes):
+    for _n in dir(_mod):
+        # Handlers and their helpers, plus the module's own SHOUTY constants
+        # (CLAN_MASTER, TYCOON_TOKENS, JOURNEY_LAST, ...) which callers pin against.
+        if _n.startswith("__") or _n in ("srv", "app"):
+            continue
+        if _n.startswith(("r_", "get_st_", "_")) or _n.isupper():
+            globals().setdefault(_n, getattr(_mod, _n))
+del _mod, _n
 
-CONFIG_FILE = DATA_DIR / "response_config.json"
-
-@app.get("/admin/api/config")
-async def admin_get_config():
-    return json.loads(CONFIG_FILE.read_text())
-
-@app.post("/admin/api/config/save")
-async def admin_save_config(body: dict):
-    CONFIG_FILE.write_text(json.dumps(body, indent=2))
-    global RCFG
-    RCFG = body
-    return {"ok": True}
-
-@app.get("/admin/api/logs")
-async def admin_get_logs():
-    return LOG_BUF[-100:]
-
-@app.get("/admin/api/system")
-async def admin_system():
-    uptime = int(time.time() - SERVER_START_TIME)
-    return {
-        "version": SERVER_VERSION,
-        "patchFolder": PATCH_FOLDER,
-        "startTime": datetime.datetime.fromtimestamp(SERVER_START_TIME).strftime("%Y-%m-%d %H:%M:%S"),
-        "uptime": uptime,
-        "uptimeStr": f"{uptime//3600}h{(uptime%3600)//60}m{uptime%60}s",
-        "routeCount": len(ROUTE_MODELS),
-        "overrideCount": len(OVERRIDES),
-        "playerCount": playerdb.count(),
-        "cdmFiles": len(_CDN_FILES),
-        "logLines": len(LOG_BUF),
-    }
-
-@app.get("/admin/api/routes")
-async def admin_routes():
-    items = []
-    for path, model in sorted(ROUTE_MODELS.items()):
-        is_overridden = path in OVERRIDES
-        items.append({
-            "path": path,
-            "model": model.__class__.__name__ if hasattr(model, '__class__') else str(model)[:60],
-            "overridden": is_overridden,
-        })
-    return {"routes": items, "total": len(items)}
-
-@app.get("/admin/api/cdn")
-async def admin_cdn():
-    items = []
-    for name, data in sorted(_CDN_FILES.items()):
-        items.append({"name": name, "size": len(data)})
-    return {"files": items, "total": len(items)}
-
-@app.post("/admin/api/restart")
-async def admin_restart():
-    import os, sys
-    os.execl(sys.executable, sys.executable, "-m", "uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8080")
+# OVERRIDES is what respond() dispatches on, and it is built HERE - after every
+# handler group has been merged into DYNAMIC_OVERRIDES. It used to be built right
+# after the DYNAMIC_OVERRIDES literal, which was correct until the decoration and
+# mini-game handlers moved into their own modules and merged in below: the snapshot
+# had already been taken, so ~30 routes silently answered an empty model. Nothing
+# caught it, because route_coverage was reading DYNAMIC_OVERRIDES rather than the
+# table that actually dispatches.
+#
+# Pure-literal routes (no st/body dependency) load straight from JSON; wrap each in a
+# lambda returning the same shared dict (build_model only reads it via .update(),
+# never mutates it, so no copy is needed).
+OVERRIDES = {path: (lambda b, st, r=resp: r) for path, resp in STATIC_OVERRIDES.items()}
+OVERRIDES.update(DYNAMIC_OVERRIDES)
+assert set(DYNAMIC_OVERRIDES) <= set(OVERRIDES), "a handler group registered too late"
 
 for _r in ROUTE_MODELS:
     app.add_api_route(_r, make_handler(_r), methods=["GET", "POST", "PUT"])

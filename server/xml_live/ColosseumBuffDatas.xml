@@ -1091,6 +1091,29 @@
                 <FixedValue>30</FixedValue>
             </Values>
         </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <HealManaPer />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
 	</BuffData>
 	<BuffData ID="170020">
 		<Comment>영원의 재생력 1단계</Comment>
@@ -1172,7 +1195,7 @@
 
             <BuffContents>
                 <UseSkill SkillID="8170030" />
-                <AddStat StatType="Damage" StatValueType="TotalPerValue" Time="2" />
+                <AddStat StatType="Damage" StatValueType="TotalPerValue" />
             </BuffContents>
 
             <Values>

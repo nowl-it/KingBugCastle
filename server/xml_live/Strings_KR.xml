@@ -5794,8 +5794,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ClanBattleModifier_13">고뇌하는</String>
   <String Key="ClanBattleModifier_14">압도적인</String>
   <String Key="UserLockedClanBattleAlert">해당 유저는 이번 시즌 연맹 토벌전을 진행할 수 없습니다.</String>
-  <String Key="UpdateNoticeVersion">170000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3981c2e0-6f0e-801c-9a60-e6f4b3a2218f</String>
+  <String Key="UpdateNoticeVersion">171100</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-809f-bc66-d45024b836f0</String>
   <String Key="Clan_Menu_DeleteConfirm">정말 연맹을 해체하시겠습니까?</String>
   <String Key="Clan_Menu_LeaveConfirm">정말 연맹을 탈퇴하시겠습니까?</String>
   <String Key="RogueLike_ReleaseAtLevel">레벨 {0} 해금</String>
@@ -6878,14 +6878,14 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ShopItemName_1160">용살단 습격 패키지</String>
   <String Key="UnitName_10570">파라엘</String>
   <String Key="UnitSubName_10570">비전 마법사</String>
-  <String Key="Potential_10570_0">&lt;비전 난사&gt;로 적 처치 시 비전 마법 1회 추가 시전 (최대 2회)</String>
-  <String Key="Potential_10570_1">&lt;비전 난사&gt;로 적 처치 시 남은 비전 마법 최종 주는 피해량 +50% (중복 불가)</String>
+  <String Key="Potential_10570_0">&lt;비전 난사&gt;로 적 처치 시 최대 마나의 0~90% 충전. 적 처치시까지 발사한 비전 마법 수가 적을수록 충전량 상승</String>
+  <String Key="Potential_10570_1">&lt;비전 난사&gt; 사용 중 피해량이 15%씩 점차 증가 (무제한 중첩 가능)</String>
   <String Key="SkinDesc_Default_10570">파라엘은 넘치는 의욕에 비해 마나를 잘 다루지 못해 엘프들 사이에서도 골칫거리로 여겨졌습니다. 그는 어느 날 엘프 왕국을 방문한 멜 일행을 만났고, 자신의 능력을 보여주겠다며 그들과 함께 영원숲을 떠났습니다.</String>
   <String Key="SkillName_10570">비전 난사</String>
   <String Key="SkillDesc_10570">대상을 향해 무작위 네 방향 중 한 방향의 모든 칸에 {105700@Damage:MAtkPer}피해를 주는 비전 마법을 {AttackCount}회 시전합니다. 대상이 사망한다면 남은 비전 마법을 가까운 적에게 사용합니다.</String>
   <String Key="MissionDesc_10357">파라엘을 사용하여 플레이</String>
   <String Key="Name_Potential_10570_2">넘실거리는 마나</String>
-  <String Key="Potential_10570_2">&lt;비전 난사&gt;의 각 비전 마법 사용 시마다 자신에게 주문력의 30% 쉴드를 생성</String>
+  <String Key="Potential_10570_2">&lt;비전 난사&gt;의 각 비전 마법 사용 시마다 최대 체력의 20% 회복, 연속으로 발사 시마다 최대 체력의 20%만큼 추가 회복 (최대 100% 회복)</String>
   <String Key="SkinName_1057000">수습마법사 파라엘</String>
   <String Key="SkinDesc_1057000">파라엘은 차원이 다른 마나량을 보유한 채 태어났습니다. 그러나 대마법사가 될 것이라는 기대와 달리 성장한 파라엘은 자신의 넘치는 마나를 잘 다루지 못하였습니다. 그의 의욕을 꺾이지 않게 보살펴준 한 존재가 없었다면 그는 일찌감치 마법을 포기했을지도 모릅니다.</String>
   <String Key="ReportType_Teaming">티밍 : 게임 외적인 요소로 팀을 이루는 행위</String>
@@ -7014,8 +7014,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="BuildingEffect_TotalHpPer">최종 체력 +{Value}%</String>
   <String Key="BuildingEffect_TotalMAtkPer">최종 주문력 +{Value}%</String>
   <String Key="Name_Potential_10570_3">마력 분산</String>
-  <String Key="Potential_10570_3">비전 마법의 피해 범위가 3칸으로 증가
- 최종 주문력 -30%</String>
+  <String Key="Potential_10570_3">&lt;비전 난사&gt;의 피해 범위가 3칸으로 증가 및 피해를 주기 전 대상의 쉴드를 파괴</String>
   <String Key="RestartColosseum">진행 중이던 격전의 전장에 다시 참여하시겠습니까?</String>
   <String Key="ColosseumReenterWaitForBattleEnds">현재 진행 중인 전투 종료를 기다리는 중입니다...</String>
   <String Key="Shop_Tab_Special">특별 상품</String>
@@ -9430,8 +9429,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SkillDesc_10550_Short">돌 정령은 일반 공격 시 엘리자베스 주문력 {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}%인 {Unit@OverwriteAtkByParent}의 주문 피해를 입히며, 엘리자베스 체력의 {Unit@OverwriteHpByParent:HpPer:BaseValue}%와 주문력/공격속도/이동속도의 {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}%를 가집니다.</String>
   <String Key="SkillAltDesc_10550_Short">돌 정령은 일반 공격 시 엘리자베스 주문력 {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}%인 {Unit@OverwriteAtkByParent}의 주문 피해를 입히며, 엘리자베스 체력의 {Unit@OverwriteHpByParent:HpPer:BaseValue}%와 주문력/공격속도/이동속도의 {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}%를 가집니다.</String>
   <String Key="SkillDesc_10560_Short">연결된 대상에게 {Time}초간 주문력의 {ConnectedMAtkBuffPer}%를 결속하고, 스킬 피해량을 {BaseSkillDamageMul}% 증폭시킵니다. (동일 영웅에게 중복 결속 불가)</String>
-  <String Key="SkillDesc_10570_Short">무작위 네 방향 중 한 방향의 모든 칸에 {105700@Damage:MAtkPer}의 피해를 주는 비전 마법을 {AttackCount}회 시전합니다.</String>
-  <String Key="SkillDesc_105720_Short">무작위 네 방향 중 한 방향으로 {1057011@SplashRangeY}칸에 {105700@Damage:MAtkPer}의 피해를 주는 비전 마법을 {AttackCount}회 시전합니다.</String>
+  <String Key="SkillDesc_10570_Short">무작위 네 방향 중 한 방향의 모든 칸에 {105700@Damage:MAtkPer}의 피해를 주는 비전 마법을 지속적으로 발사합니다.</String>
+  <String Key="SkillDesc_105720_Short">무작위 네 방향 중 한 방향의 너비 {1057011@SplashRangeY}칸에 쉴드를 파괴하고 {105700@Damage:MAtkPer}의 피해를 주는 비전 마법을 지속적으로 발사합니다.</String>
   <String Key="SkillDesc_105721_Short">무작위 네 방향 중 한 방향으로 {1057011@SplashRangeX}칸에 {105700@Damage:MAtkPer}의 피해를 주는 비전 마법을 {AttackCount}회 시전합니다.</String>
   <String Key="SkillDesc_10580_Short">피해를 받을 때 {Unit@MissRatio}%확률로 완전히 무효화하고, 기교를 {Unit@AddTechniqueAtMiss} 획득합니다. 기교가 최대가 되면 대상에게 돌진해 {Damage:MAtkPer}의 피해와 {10585@TickDamage:AtkPer}의 피해를 {10585@AttackCount}회 가합니다.</String>
   <String Key="SkillDesc_10600_Short">{10605@Time}초 동안 유지되는 환영을 {SummonUnitCountForDesc}기 소환합니다. 환영은 대상으로 지정할 수 없으며 사라스 공격력의 (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})%의 피해를 입힙니다.</String>
@@ -9499,8 +9498,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SkillDesc_10530_Long">{Time}초동안 위협이 {BaseDefPen} 증가하고 일반 공격이 주변 {10535@SplashRangeSum}칸 내의 모든 적에게 공격력의 {10535@Damage:AtkPer:BaseValue}%만큼 피해를 입힙니다. 주 대상에게는 추가로 {105300@Time}초에 걸쳐 {105300@TickDamage}의 주문 일반 피해를 {105300@DescTickCount}회 입힙니다.</String>
   <String Key="SkillDesc_10540_Long">자신이 불러낸 모든 돌 정령을 역소환하고, 돌 정령 주변 {10550@SplashRangeX}{X}{10550@SplashRangeY} 범위의 모든 적들에게 {10550@Damage:BaseValue}+{10550@Damage:MAtkPer}의 피해와 {10550@StunTime}초간 기절을 부여합니다. 다시 돌 정령을 {SummonCountForDesc}기 소환합니다. (돌 정령 최대 {Unit@GlobalMaxSummonCount}기 존재)</String>
   <String Key="SkillDesc_10560_Long">전투 시작 전, 가장 가까운 아군과 연결합니다. 가문 대대로 내려오는 술법으로, {Time}초간 연결된 대상에게 주문력의 {ConnectedMAtkBuffPer}%를 결속합니다. 결속된 스탯은 세령의 스탯을 대상 영웅의 기본 능력치로 환산하여 대상 영웅의 능력치를 상승시킵니다. 결속 대상의 스킬 피해량을 {BaseSkillDamageMul}% 증폭시킵니다. (여러명의 세령이 동일한 영웅에게 결속할 수 없습니다.)</String>
-  <String Key="SkillDesc_10570_Long">어디로 나갈지 모르는 비전 마법을 발사합니다. 대상을 향해 무작위 네 방향 중 한 방향의 모든 칸에 {105700@Damage:MAtkPer}의 피해를 {AttackCount}회 줍니다. 대상이 사망한다면 남은 비전 마법을 가까운 적에게 사용합니다.</String>
-  <String Key="SkillDesc_105720_Long">어디로 나갈지 모르는 비전 마법을 발사합니다. 대상을 향해 무작위 네 방향 중 한 방향으로 {1057011@SplashRangeY}칸에 있는 모든 적에게 {105700@Damage:MAtkPer}의 피해를 가하는 비전 마법을 {AttackCount}회 시전합니다. 대상이 사망한다면 남은 비전 마법을 가까운 적에게 사용합니다.</String>
+  <String Key="SkillDesc_10570_Long">어디로 나갈지 모르는 비전 마법을 발사합니다. 가장 체력이 높은 대상을 향해 {AttackDelay}초마다 무작위 네 방향 중 한 방향의 모든 칸에 {105700@Damage:MAtkPer}의 피해를 줍니다. 이동불가 상태에 빠지거나 대상이 사망할 때까지 멈추지 않습니다.</String>
+  <String Key="SkillDesc_105720_Long">어디로 나갈지 모르는 비전 마법을 발사합니다. 가장 체력이 높은 대상을 향해 {AttackDelay}초마다 무작위 네 방향 중 한 방향 너비 {1057011@SplashRangeY}칸에 있는 모든 적의 쉴드를 파괴하고 {105700@Damage:MAtkPer}의 피해를 줍니다. 이동불가 상태에 빠지거나 대상이 사망할 때까지 멈추지 않습니다.</String>
   <String Key="SkillDesc_105721_Long">어디로 나갈지 모르는 비전 마법을 발사합니다. 대상을 향해 무작위 네 방향 중 한 방향으로 {1057011@SplashRangeX}칸에 있는 모든 적에게 {105700@Damage:MAtkPer}의 피해를 가하는 비전 마법을 {AttackCount}회 시전합니다. 대상이 사망한다면 남은 비전 마법을 가까운 적에게 사용합니다.</String>
   <String Key="SkillDesc_10580_Long">가람이 피해를 받을 때 {Unit@MissRatio}%확률로 회피하여 피해와 방해효과를 무효화하고 기교를 {Unit@AddTechniqueAtMiss} 획득합니다. 기교가 최대가 되면 대상에게 돌진하여 {Damage:MAtkPer}의 주문 피해를 입히고, 공격력의 {10585@TickDamage:AtkPer:BaseValue}%에 해당하는 일반 공격을 {10585@AttackCount}회 가합니다.</String>
   <String Key="SkillDesc_10600_Long">사라스가 공허의 힘을 빌어 {10605@Time}초 동안 유지되는 환영을 {SummonUnitCountForDesc}기 소환합니다. 환영은 대상으로 지정할 수 없으며 사라스 공격력의 (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})%의 피해를 입힙니다.</String>
@@ -13128,7 +13127,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ItemDesc_40632">[역할 칸]에 배치 시 다른 무작위 칸에 {0}%의 효과 지닌 [부관 역할 칸] 생성, 부관 룬은 중복 장착 불가</String>
   <String Key="ItemName_40643">지배자</String>
   <String Key="ItemDesc_40643">[역할 칸]의 효과를 +{0}% 추가 획득
-지배자 생존 시 [역할 칸]이 아닌 칸에서 전투 시작한 영웅은 사망 후 {1}초 후 부활
+지배자 생존 시 지배자를 제외한 영웅은 사망 후 {1}초 후 부활
 지배자 사망 시 즉시 전투 패배</String>
   <String Key="BuildingEffect_BaseHybridDef">방어력 +{Value}</String>
   <String Key="BuildingEffect_BattleStartMana">전투 시작 마나 +{Value}%</String>
@@ -17995,4 +17994,60 @@ D = 1 ~ 4</String>
   <String Key="Overcome_10800_3">폭주할 때마다 뱀파이어 형태의 최종 최대 체력 +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_4">뱀파이어 형태의 주변 피해 효과로 피해를 입힐 때마다 뱀파이어 형태일 때 주는 피해량 +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="UnitName_10810">알레시아</String>
+  <String Key="LeagueName_12">온기의 리그</String>
+  <String Key="SkinDesc_1044005">&lt;i&gt;아레나 온기의 리그 참여 보상&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400500">&lt;i&gt;아레나 온기의 리그 포인트 달성 보상&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400501">&lt;i&gt;아레나 온기의 리그 랭킹 달성 보상&lt;/i&gt;</String>
+  <String Key="SkinDesc_1071004">&lt;i&gt;격전 온기의 리그 참여 보상&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100400">&lt;i&gt;격전 온기의 리그 포인트 달성 보상&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100401">&lt;i&gt;격전 온기의 리그 랭킹 달성 보상&lt;/i&gt;</String>
+  <String Key="SkinName_1057002">샛별왕 파라엘</String>
+  <String Key="SkinDesc_1057002">&lt;i&gt;이른 새벽에 태어나는 가장 고고한 별빛은, 어둠을 헤쳐나가는 가장 밝은 빛으로 매듭지어지리라.&lt;/i&gt;</String>
+  <String Key="SuperShieldModulator">절대 방어 획득</String>
+  <String Key="BuildingEffect_BaseDamageReflect">피해 반사 {Value}%
+(주문 피해 반감)</String>
+  <String Key="BuildingEffect_BaseDamageReflect_Long">영웅이 입은 피해의 일부를 적에게 반사시킵니다.</String>
+  <String Key="TreasureName_30042">페라타우스</String>
+  <String Key="TreasureSubName_30042">칠흑 방패</String>
+  <String Key="TreasureDesc_30042">베히무스의 방패는 단순히 방어만을 하기 위한 것이 아닙니다. 육중한 방패를 앞새운 베히무스의 맹렬한 돌진은 아무리 강력한 외갑도 한순간에 찌그러뜨립니다.</String>
+  <String Key="TreasureSkillName_30042">강하</String>
+  <String Key="BuffDataName_3300421">분쇄 I</String>
+  <String Key="BuffDataName_3300422">찌그러뜨리기 I</String>
+  <String Key="BuffDataName_3300423">무력화</String>
+  <String Key="BuffDataName_3300424">찌그러뜨리기 II</String>
+  <String Key="BuffDataName_3300425">분쇄 II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">페라타우스 픽업 특별 상점</String>
+  <String Key="SpecialPackage_1680">페라타우스 패키지 1</String>
+  <String Key="SpecialPackage_1681">페라타우스 패키지 2</String>
+  <String Key="SpecialPackage_1682">페라타우스 패키지 3</String>
+  <String Key="BuffDataDesc_3300421">위협 {0}당 피해 전달 +{1}배</String>
+  <String Key="BuffDataDesc_3300422">불안정 상태인 적의 받는 물리 피해 +{0}%</String>
+  <String Key="BuffDataDesc_3300423">불안정 상태가 제거될 때마다 제거된 적 하나 당 모든 아군 절대방어 +{0}</String>
+  <String Key="BuffDataDesc_3300424">불안정 상태인 적의 받는 물리 피해 +{0}%</String>
+  <String Key="BuffDataDesc_3300425">위협 {0}당 피해 전달 +{1}배</String>
+  <String Key="TreasureSkillDesc_3300420">적에게 스킬 피해를 입히면 대상에게 불안정 상태를 부여
+불안정 상태인 적에게 아군이 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
+&lt;color=#808080&gt;&lt;i&gt;서로 다른 영웅이 불안정 상태를 부여해도 효과가 공유됩니다.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">적에게 스킬 피해를 입히면 대상에게 불안정 상태를 부여
+불안정 상태인 적에게 아군이 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
+위협 {2}당 피해 전달 +{3}배
+&lt;color=#808080&gt;&lt;i&gt;서로 다른 영웅이 불안정 상태를 부여해도 효과가 공유됩니다.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">적에게 스킬 피해를 입히면 대상에게 불안정 상태를 부여
+불안정 상태인 적에게 아군이 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
+위협 {2}당 피해 전달 +{3}배
+불안정 상태인 적의 받는 물리 피해 +{4}%
+받는 물리 피해 증가는 중첩되지 않으며 가장 높은 수치로 적용
+&lt;color=#808080&gt;&lt;i&gt;서로 다른 영웅이 불안정 상태를 부여해도 효과가 공유됩니다.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">적에게 스킬 피해를 입히면 대상에게 불안정 상태를 부여
+불안정 상태인 적에게 아군이 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
+위협 {2}당 피해 전달 +{3}배
+불안정 상태인 적의 받는 물리 피해 +{4}%
+받는 물리 피해 증가는 중첩되지 않으며 가장 높은 수치로 적용
+불안정 상태가 제거될 때마다 제거된 적 하나 당 모든 아군 절대방어 +{5}
+&lt;color=#808080&gt;&lt;i&gt;서로 다른 영웅이 불안정 상태를 부여해도 효과가 공유됩니다.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="SpecialShop_TreasureDoublePickUp10014">보구 픽업 특별 상점</String>
+  <String Key="SpecialPackage_1676">보구 픽업 소환석 패키지 1</String>
+  <String Key="SpecialPackage_1677">보구 픽업 소환석 패키지 2</String>
+  <String Key="SpecialPackage_1678">카엘루스 패키지</String>
+  <String Key="SpecialPackage_1679">트릭스터 패키지</String>
 </Strings>

@@ -8389,6 +8389,49 @@
         <ImageMaskEnabled>false</ImageMaskEnabled>
     </Gacha>
 
+    <Gacha ID="8002" Parent="100">
+        <Name>GachaName_8000</Name>
+        <Desc>GachaDesc_8000</Desc>
+        <Type>DimensionUnitGacha</Type>
+        <KeyItem>70000</KeyItem>
+
+        <ResultTableDesc>DimensionUnitGachaDesc_Normal</ResultTableDesc>
+
+        <Visible>true</Visible>
+        <Permanent>false</Permanent>
+        <MinVersion>172000</MinVersion>
+        <StartDate>20260813</StartDate>
+        <EndDate>20260909</EndDate>
+
+        <UseStack>false</UseStack>
+
+        <GachaCeil Key="DimGachaCeil_PickUp" Target="0" ResetOnTargetHit="true">80</GachaCeil>
+        <TargetRateIncrement IncreaseAfter="60" Target="0" DecreasePool="NonFixedRate" DecreaseMode="Weighted">4</TargetRateIncrement>
+        <Results>
+            <Result IsReward="true" Type="Unit" ID="10800" Rate="0.5" FixedRate="true"/>
+            <Result IsReward="true" Type="Unit" ID="10430" Rate="1.5" FixedRate="true"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="1" Rate="24"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="2" Rate="16"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="3" Rate="8"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="100" Rate="24"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="300" Rate="16"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="500" Rate="8"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="1500" Rate="2"/>
+        </Results>
+
+        <BackgroundPrefab>GachaShopPanelBG_Pickup_Dimension</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>F5B0A0</BackgroundPrefabGachaNameTextColor>
+
+        <Images>
+            <Image Name="Gacha_Background_03" ScaleX="5" ScaleY="5" Y="-45" X="60" Color="5D3235"/>
+            <Image Name="fx_glow" ScaleX="15" ScaleY="15" Y="0" X="0" Color="5D3235"/>
+            <Image Name="Gacha_Glow" ScaleX="3.5" ScaleY="2.5" Y="-27" X="12" Color="8B4444"/>
+            <Image Name="Gacha_Glow" ScaleX="2" ScaleY="2" Y="252" X="0" Color="A85555"/>
+            <Image Name="Unit_Illust_10800" ScaleX="1" ScaleY="1" Y="126" X="0" Color="FFFFFF"/>
+        </Images>
+        <ImageMaskEnabled>false</ImageMaskEnabled>
+    </Gacha>
+
     <Gacha ID="9000">
         <Name>GachaName_9000</Name>
         <Desc>HeroSummonDesc</Desc>

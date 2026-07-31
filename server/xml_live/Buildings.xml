@@ -179,8 +179,7 @@
             <Value Level='15'>5</Value>
         </Effect>
 
-        <!-- <Effect Key='DamageReflect' DescComment="피해 반사 {Value}%"> -->
-        <Effect Key='DamageReflect' DescComment="피해 반사 {Value}%">
+        <Effect Key='BaseDamageReflect' DescComment="피해 반사 {Value}%">
             <Value Level='10'>10</Value>
             <Value Level='15'>20</Value>
         </Effect>

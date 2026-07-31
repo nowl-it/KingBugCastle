@@ -43,7 +43,15 @@ def main():
     tok = server.CURRENT_UID.set(uid_b)
     assert server.load_state()["uid"] == uid_b, "load_state ignored the request identity"
     server.CURRENT_UID.reset(tok)
-    assert server.load_state()["uid"] == playerdb.active(), "no session must fall back to active"
+    # And with NO session it must not follow anybody's. This used to fall back to
+    # playerdb.active() - the save the dashboard last selected - which on a public
+    # port handed that save's contents, and its writes, to any request that arrived
+    # without a token. The fallback survives only in single-player mode, where there
+    # is one save and nobody to impersonate.
+    anon = server.load_state()
+    assert anon["uid"] != playerdb.active(), \
+        "a request with no session still lands on the active player's save"
+    assert anon.get("_ephemeral"), "the throwaway save is missing its no-persist marker"
 
     # Single-player mode: an unknown id must reuse the active save, not mint one.
     server.MULTIPLAYER = False

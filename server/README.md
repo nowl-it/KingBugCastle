@@ -16,9 +16,8 @@ mechanic experimentation.
 - **[data/README.md](data/README.md)** — schema of the 4 JSON files under `data/`.
 - **[../AGENTS.md](../AGENTS.md)** (repo root) — arm64 patch inventory + RVA map, kept
   current with every Ghidra-verified finding.
-- **[../documentation/GOD_ACCOUNT_DATA_AGENT_PROMPT.md](../documentation/GOD_ACCOUNT_DATA_AGENT_PROMPT.md)**
-  — self-contained brief for delegating the god-account data-completion task to a fresh
-  agent; also doubles as the fullest incident write-up of crashes found so far.
+- **[../KNOWLEDGE.md](../KNOWLEDGE.md)** — dated session log: what was found, what broke,
+  and why. The fullest incident write-ups live here.
 
 ## What it is
 
@@ -192,21 +191,54 @@ backend, and a dead Next.js `admin/` skeleton). Run it and open http://localhost
 cd server && python3 dashboard.py     # or: uvicorn dashboard:app --port 8081
 ```
 
-Two tabs:
-- **Battle Tracker** — live in-battle hero stats over WebSocket `/ws`. `dashboard.py` reads
-  `adb -s $ADB_SERIAL logcat -s XignCodeStub`, parses the native poller's output (resolving
-  buff/skill ids to names from `server/xml_live/Strings_*.xml`), and broadcasts hero updates.
-- **Admin** — acts directly on the game state JSON (`state/players/*.json`, `state/player.json`),
-  the same files `server.py` reads per request (edits apply on the client's next fetch, no
-  restart): server status, per-player currency/level/name editor, and mail send/delete. Mail is
-  appended to a player's `posts` array; `server.py` serves it (wrapping title/text with `@raw:`
-  so the literal text renders, bypassing the Localizer). Mail can carry a **reward**: currencies,
-  or any item from `GET /api/catalog` (Item/Unit/UnitSoul/Artifact/Treasure/Accessory, names from
-  `Strings_EN_US`) via a searchable id picker - `server.py` `_grant_reward()` mutates state on claim
-  (Item -> inventory incl. reward boxes; UnitSoul -> hero soul; Artifact/Treasure/Accessory are
-  display-only, gift them as an Item reward box). REST under `/api/*`.
+Vue 3, vendored at `webui/vendor/` and wired by an importmap in `index.html`: no npm, no
+build step, and no CDN request (the page is served over a tunnel or to a device with no
+internet, so every asset must be same-origin). Edit a file, refresh the browser.
 
-`ADB_SERIAL` env var overrides the device serial (default `localhost:5556`).
+Nine tabs:
+
+| Tab | What it does |
+|-----|--------------|
+| **Overview** | Server + master-data health at a glance |
+| **Players** | Create / clone / activate / delete saves, field editor, raw-JSON editor |
+| **Heroes** | Owned vs missing, edit level/soul/potential, grant one or all |
+| **Items** | Inventory counts, add from the catalog |
+| **Accessories** | Grouped by synergy, with the in-game grade badge |
+| **Mail** | Per-player or broadcast, catalog reward picker, inbox |
+| **Battle Tracker** | Live in-battle hero stats over WebSocket `/ws` |
+| **Server** | Proxied system / logs / routes / CDN / config |
+| **Account** | Who you are, which guard rung is live, admin accounts, sign out |
+
+Notes on two of them:
+
+- **Battle Tracker** reads `adb -s $ADB_SERIAL logcat -s XignCodeStub`, parses the native
+  poller's output (resolving buff/skill ids to names from `server/xml_live/Strings_*.xml`),
+  and broadcasts hero updates. `ADB_SERIAL` overrides the device (default `localhost:5556`).
+- **Mail** appends to a player's `posts`; `server.py` serves it, wrapping title/text with
+  `@raw:` so literal text renders instead of a Localizer key. Mail can carry a **reward**:
+  currencies, or anything from `GET /api/catalog` via a searchable id picker.
+  `_grant_reward()` mutates state on claim (Item -> inventory incl. reward boxes;
+  UnitSoul -> hero soul; Artifact/Treasure/Accessory are display-only, gift them as an Item
+  reward box).
+
+Player state lives in `state/players.db` (SQLite/WAL) and is reached through `playerdb.py` -
+the same rows `server.py` reads per request, so edits apply on the client's next fetch with
+no restart. REST under `/api/*`.
+
+**The Account tab is how you harden the dashboard.** With no admin account and no
+`KGC_ADMIN_TOKEN`, the only guard is a loopback check, which stops guarding the moment a
+tunnel or reverse proxy is in front of it - every request then arrives from loopback. The
+tab shows which rung is live, warns with a banner while it is the weakest one, and creates
+the first account without dropping to `--create-admin` on the CLI. See `docs/public-hosting.md`.
+
+### Checking the UI
+
+Templates are strings compiled at runtime, so a typo does not throw - the tab just renders
+blank. This turns that into a failure with a line number:
+
+```bash
+node webui/check_templates.mjs      # imports every module, compiles every template
+```
 
 ## Native stub (XIGNCODE replacement) — `jni/stub.cpp`
 

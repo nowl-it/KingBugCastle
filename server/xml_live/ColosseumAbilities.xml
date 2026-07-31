@@ -1938,7 +1938,7 @@
 		<ApplyAfterBattle>true</ApplyAfterBattle>
 		<DescParams>
 			<Attribute Name="Value">./WorldTriggers/Conditions/ReqFieldUnitCount</Attribute>
-			<Const>60</Const>
+			<Const>-60</Const>
 			<Const>30</Const>
 		</DescParams>
 
@@ -1980,7 +1980,7 @@
 		<DescParams>
 			<Attribute Name="Value">./WorldTriggers/Conditions/ReqFieldUnitCount</Attribute>
 			<Const>2</Const>
-			<Const>40</Const>
+			<Const>20</Const>
 		</DescParams>
 
 		<CheckActive>0</CheckActive>

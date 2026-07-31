@@ -208,3 +208,119 @@ address**. Parse `.rela.dyn`, look up the addend, then map it through Il2CppDump
 prompt — output is already written by then, ignore it).
 
 Test: `server/tests/test_accessory_grade.py`.
+
+
+## 2026-07-30: the v171.1.00 packer was unpacked — TARA **v4**, not the v3 chain
+
+The private client now runs on **v171.1.00's own game code**. Previously it borrowed the
+v171.0.00 `libil2cpp.so` and had to splice that build's `global-metadata.dat` in beside it;
+neither is needed any more. Tool: `server/patchers/unpack_neo.py` (offline, `--self-check`).
+
+### What the earlier note got wrong
+
+"v171.0.01 stopped compressing the payload" was measured on the payload **tail**. The head is
+still encrypted and there is still a TARA container - it moved into the payload segment and
+went to version 4:
+
+| | v3 (v171.0.00) | v4 (v171.1.00) |
+|---|---|---|
+| container | separate MFTL wrapper | TARA at payload `+0x262` |
+| stream cipher | AES-256-CBC, IV = 0 | **ChaCha20**, 12-byte nonce |
+| compression | LZMA | **LZ4 block** |
+| coverage | the whole 113 MB image | the first **4 MB**; the rest is cleartext |
+
+Running the v3 recipe on a v4 container yields plausible-looking garbage rather than an error,
+which is why every stage in the script asserts on its own output.
+
+### Three things that cost time
+
+- **The AEAD shape is a lie.** The decoder's call takes a 12-byte nonce (`w4 = 0xc`) like an
+  AEAD, but the ciphertext starts at `nonce + 12` with **no tag between them**. Assuming a
+  16-byte tag shifts the stream and LZ4 fails with a corrupt-input error.
+- **`usize` is 4 MB, not the lib size.** v4 only encrypts the head. Where the cleartext tail
+  begins is recorded **nowhere** - there is a 610-byte alignment gap in this build. Find it by
+  requiring that the section-header table the decrypted head declares actually parses.
+- **Shape alone cannot pick the RSA key.** Three `.rodata` blobs pass the `N || E = 65537`
+  test (`0x24225e`, `0x242600`, `0x2428bc`); only the last is the container key. Try each and
+  keep the one whose public op yields PKCS#1 padding **and** a key that begins `7f454c46` -
+  the key IS the target ELF's own first 32 header bytes, because the packer stashes the header
+  it overwrote. A key that looks like an ELF header is the success signal, not a bug.
+
+### Finding the decoder without xrefs
+
+Raw-scan `.text` for the TARA magic built as an immediate (`movz w9,#0x4154` + `movk
+w9,#0x4152,lsl#16`) - three hits, one decoder per container version; the one whose version
+compare is `cmp w10,#4` is v4. Its vtable slot `+0x38` leads back through the factory to the
+orchestrator, which is where the RSA blob is copied to the stack as `{ptr, 0x100}`. The cipher
+identifies itself: the init function loads the constant `expand 32-byte k`.
+
+Full writeup: `docs/mftl-extraction.md`.
+
+## 2026-07-31: two bugs that blocked public exposure, neither caught by preflight
+
+`preflight.py` reported "ready to expose" in both cases. It reads configuration; it does not
+attack the server. Both were found by probing a running instance from a non-loopback peer.
+
+### Anyone could read and write the active player's save
+
+With **no token at all**, from any address:
+
+```
+GET  /player                     -> the save the dashboard had selected
+POST /player/rename  (junk token) -> renamed that player's castle
+```
+
+`load_state()` fell back to `playerdb.active()` for any request whose identity it could not
+resolve. That is correct single-player behaviour - one save, an admin UI that needs to see it,
+nobody to impersonate - and a hole the moment the port is public.
+
+Fix: in multiplayer mode a request with no valid session gets a **throwaway save** that
+`save_state()` discards; single-player keeps the fallback. Admin endpoints read
+`playerdb.active()` directly, since they are already past the `/admin` guard.
+
+**`test_identity_routing` was asserting the hole was correct** (`"no session must fall back to
+active"`). A test can pin a vulnerability in place as firmly as it pins a feature.
+
+### A non-object JSON body 500'd the route
+
+`json.loads` accepts `5`, `"x"` and `[1,2]` - all valid JSON, none of them a dict - and every
+handler indexes the body like one. `POST /auth/register` with a bare integer reached
+`body.get("id")` and raised. The client cannot parse a FastAPI error page (it expects the AES
+envelope), so it sits on the loading screen instead of failing. Coerced at the one place the
+body is parsed, not per handler.
+
+### Verified by attacking a live instance, not by reading config
+
+| Probe | Result |
+|---|---|
+| `/admin*` from a remote IP and from loopback | 403 on all 7 endpoints |
+| Two accounts, own tokens | isolated; no-token/forged-token reads see nothing of either |
+| 40 `POST /auth/register` from one IP | 5 saves created |
+| 2 MB body, declared and chunked | 413 |
+| 700 requests from one IP | 429 at request 599 |
+
+Regression: `test_public_hardening.check_no_session_cannot_reach_another_players_save`.
+
+### Also: the content gate was a patch behind
+
+`serverVersion` was `171.0.00` against a v171.1.00 client, so `CONTENT_GATE` sat at `171000`
+and hid the five master-data entries gated at exactly `171100` (Gacha `5052`, Treasure `30041`,
+ShopItems) that the client could render. Bumped; treasures listed 58 → 59.
+
+## 2026-07-31: Account Transfer API bugs and Client JSON resilience
+
+### The API Mismatch (`/auth/transfer` vs `/auth/transfer/code`)
+A bug in the account transfer UI (the generated transfer code input field was completely blank) revealed an inverted endpoint mapping.
+The heuristic that generated `route_models.json` mapped:
+- `/auth/transfer` to `TransferResponseModel` (which is the Redeem action on the client side: `AccountTransfer`).
+- `/auth/transfer/code` to `AuthResponseModel` (which actually corresponds to the Issue action: `GetAccountTransferCode`).
+Because the endpoints were swapped in `server.py` (`DYNAMIC_OVERRIDES`), clicking "Make Code" invoked the Redeem endpoint instead.
+
+### Silent UI Failure on Null
+When the client received the incorrect payload (missing the `secretCode` field) from the Redeem endpoint, `JsonUtility` parsed `secretCode` as `null`. Instead of crashing, the IL2CPP client code (specifically `SettingsPanel.<ShowAccountTransferCode>d__81.MoveNext`) explicitly passed `NULL` (`xzr` in arm64) to `UnityEngine.UI.InputField.set_text()`. This gracefully rendered a blank input field inside the UI popup. 
+
+### `ResponseModel.code` and `isSuccess` Override
+The client's `ResponseModel.code` defaults to `0`, but `server.py`'s `build_model` explicitly overwrites `code = 200` in the JSON payload to signal success across the board. The Unity client's `isSuccess` property evaluates `code == 200` as valid, which is why the aforementioned UI popup opened successfully despite missing data, leading to the confusing "blank code" visual state.
+
+### `JsonUtility` Resilience via Overlay
+`build_model` constructs the response based on the rigid C# model definition but appends additional keys via a Python `dict.update(overlay)`. Even when the server mistakenly built an `AuthResponseModel` (which has no `secretCode` definition) for the Transfer Code endpoint, overlaying `{"secretCode": code}` injected the field into the final JSON. The Unity client, expecting a `TransferCodeResponseModel`, parsed the augmented JSON perfectly. This proves the client's `JsonUtility` will successfully pick up overlay keys even if the server bases its initial payload on the wrong C# model structure.

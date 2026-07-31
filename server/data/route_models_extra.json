@@ -36,16 +36,25 @@
   "/colosseum/server-address":            {"response": "ColosseumMatchResponseModel", "_method": "FetchColosseumAddressByGameID"},
   "/colosseum/test-free-match":           {"response": "ColosseumMatchResponseModel", "_method": "TestColosseumFreeMatching"},
 
+  "/decoration/advisor/timeout":          {"response": "ResponseModel", "_method": "AdvisorTimeOut"},
+
   "/dimension-unit/overcome":             {"response": "CardResponseModel", "_method": "(none - dimension hero overcome acts on a card)"},
   "/dimension-unit/upgrade":              {"response": "CardResponseModel", "_method": "(none - dimension hero upgrade acts on a card)"},
 
   "/event-card-collecting/gacha":         {"response": "EventCardGachaResponseModel", "_method": "EventCardGacha"},
+  "/eventcache":                          {"response": "ResponseModel", "_method": "(none - no RestAPI method; the client only checks code 200)"},
   "/flag/equipedFlag":                    {"response": "FlagResponseModel", "_method": "FetchEquippedFlag"},
   "/flag/inventory":                      {"response": "FlagInventoryResponseModel", "_method": "FetchFlagInventory"},
   "/game/revive":                         {"response": "GameResponseModel", "_method": "GameRevive"},
   "/mission/check":                       {"response": "MissionResponseModel", "_method": "GetAllMissions"},
   "/mission/roguelike/check-on-clear":    {"response": "RogueLikeMissionResponseModel", "_method": "CheckRogueLikeMissionOnClear"},
+  "/kgc-main":                            {"response": "ResponseModel", "_method": "(none - no RestAPI method; a bare ping the client only checks code 200 on)"},
+  "/lobby":                               {"response": "ResponseModel", "_method": "(none - no RestAPI method; a bare ping the client only checks code 200 on)"},
 
+  "/mission/roguelike/update":            {"response": "RogueLikeMissionDataResponseModel", "_method": "GetUpdatedRogueLikeMissions"},
+  "/mission/roguelike-statistics":        {"response": "RogueLikeMissionStatisticsResponseModel", "_method": "GetAllRogueLikeMissionsStatistics"},
+
+  "/player/rename":                       {"response": "ChangeNicknameResponseModel", "_method": "ChangeNickname"},
   "/player/customEvent":                  {"response": "PlayerDataResponseModel", "_method": "CustomEvent"},
   "/player/early-access-mode-code":       {"response": "ResponseModel", "_method": "CheckEarlyAccessModeCode"},
   "/player/exception":                    {"response": "ResponseModel", "_method": "Exception"},
@@ -54,6 +63,11 @@
   "/player/other":                        {"response": "OtherPlayerDataResponseModel", "_method": "GetOtherPlayerInfo"},
   "/player/xcdReport":                    {"response": "AuthResponseModel", "_method": "XigncodeValidCheck"},
   "/player/year-event-buy-pass-point":    {"response": "YearEventBuyPassPointResponseModel", "_method": "BuyYearEventPassPoint"},
+
+  "/pvp/info":                            {"response": "PvPInfoResponseModel", "_method": "FetchPvPInfo"},
+  "/pvp/matching":                        {"response": "PvPMatchResponseModel", "_method": "PvPMatching"},
+
+  "/shop/caniap_new":                     {"response": "ResponseModel", "_method": "CanIAP_New"},
 
   "/ranking/ranking":                     {"response": "RankingResponseModel", "_method": "GetRanking"},
   "/ranking/challenge-mode-ranking":      {"response": "ChallengeModeRankingResponseModel", "_method": "GetChallengeModeRanking"},

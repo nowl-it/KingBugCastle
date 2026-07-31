@@ -38,18 +38,34 @@ Output: `KingBugCastle.xapk` at the repo root. Same 14 patches + XIGNCODE stub a
 normal build, renamed to `com.nowl.castle` (installs beside the real game). Hand this file to
 players with `README_PLAYER.md`.
 
+> **This packages the v170.1.00 client.** The v171 builder (`build_v171_private.py`) honours
+> the same `SHARE_HOST`, so the host is baked in correctly, but it **installs over adb and
+> does not package an `.xapk`** — there is no `--share` there yet. To hand out a v171 build
+> you have to zip the three signed APKs from its work directory yourself. v170.1.00 remains
+> the supported hand-out path.
+
 ## 3. Run the server
 
 ```bash
-cd server && ./serve_public.sh        # HTTP :8080  +  HTTPS :8443 (0.0.0.0)
-python3 server/dashboard.py           # admin + battle tracker -> http://localhost:8081
+cd server
+python3 dashboard.py --create-admin <username>   # once - /admin is open without this
+./serve_public.sh                                # HTTP :8080 + HTTPS :8443 (0.0.0.0)
+python3 dashboard.py                             # admin + battle tracker -> :8081
 ```
 
+`serve_public.sh` runs `preflight.py` first and refuses to start if anything about the
+deployment is unsafe. Run `python3 preflight.py` on its own to ask without starting.
+
 - **Cloudflare Tunnel**: point the named tunnel at `http://localhost:8080`; Cloudflare does TLS.
+  Also set `KGC_TRUST_PROXY=1` - behind a tunnel every request looks like `127.0.0.1`,
+  so without it every player shares one rate-limit bucket.
 - **IP / LAN**: forward external `443` → local `8443` (e.g. `socat TCP-LISTEN:443,fork TCP:127.0.0.1:8443`, or a router rule).
 
-Player saves live in `server/state/`. Manage currency / mail / rewards from the dashboard
-(Admin tab) - see `server/README.md`.
+Player saves live in `server/state/players.db`, backed up automatically every 24h into
+`state/backups/`. Manage currency / mail / rewards from the dashboard.
+
+**Read `docs/public-hosting.md` before exposing this to strangers** - limits, backups,
+admin accounts, and why "allow loopback" means "allow the internet" behind a proxy.
 
 ## 4. Verify it actually reaches you (do this once)
 

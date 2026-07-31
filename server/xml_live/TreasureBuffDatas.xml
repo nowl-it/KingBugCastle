@@ -14616,7 +14616,7 @@
     
     <!-- 파라엘의 멋진 보구 -->
     <BuffData ID="3300410">
-        <Comment>전투 시작 시 주문력이 기본 주문력의 [100 + 10 * 보구 레벨]%로 고정됩니다. 성급에 따라 효과가 1/1.5/2/2.5배 증가합니다.</Comment>
+        <Comment>전투 시작 시 주문력이 기본 주문력의 [100 + 10 * 보구 레벨]%로 고정됩니다. 성급에 따라 효과가 1/1.75/2.5/3.25배 증가합니다.</Comment>
 
         <DescParams>
         </DescParams>
@@ -14653,7 +14653,7 @@
                 </Values>
                 <Values>
                     <FixedValue>1</FixedValue>
-                    <StatPer StatType="SkillTierIdx">50</StatPer>
+                    <StatPer StatType="SkillTierIdx">75</StatPer>
                 </Values>
             </Values>
         </BuffOptions>
@@ -14761,7 +14761,7 @@
     </BuffData>
 
     <BuffData ID="3300413" Inherit="3300412">
-        <Comment>전투 시작 후 매 초 상태이상 저항 +5%, 주문 방어력 관통 +5% 획득 (최대 100%)</Comment>
+        <Comment>전투 시작 후 매 초 상태이상 저항 +10%, 주문 방어력 관통 +10% 획득 (최대 100%)</Comment>
 
         <DescParams>
             <InnerText Mag="-1">./BuffOptions[5]/Values/Stack_30041</InnerText>

@@ -5713,8 +5713,8 @@ Você não pode participar de incursões nesta temporada após sair.</String>
   <String Key="ClanBattleModifier_13">Agonizante</String>
   <String Key="ClanBattleModifier_14">Esmagador</String>
   <String Key="UserLockedClanBattleAlert">Este usuário não pode participar de incursões de aliança nesta temporada.</String>
-  <String Key="UpdateNoticeVersion">170000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/39d1c2e0-6f0e-804a-acc0-f507558ede41</String>
+  <String Key="UpdateNoticeVersion">171100</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Quer mesmo dissolver a aliança?</String>
   <String Key="Clan_Menu_LeaveConfirm">Quer realmente sair da aliança?</String>
   <String Key="RogueLike_ReleaseAtLevel">Desbloqueia no Nv. {0}</String>
@@ -6798,14 +6798,14 @@ A marca é gerada a cada 3s.</String>
   <String Key="ShopItemName_1160">Pacote de Invasão de Caça-dragões</String>
   <String Key="UnitName_10570">Farael</String>
   <String Key="UnitSubName_10570">Mago Arcano</String>
-  <String Key="Potential_10570_0">Lança magia arcana adicional 1 vez ao derrotar inimigo com Disparo Arcano (Máx. de 2 vezes)</String>
-  <String Key="Potential_10570_1">+50% de dano final de magia arcana restante ao derrotar inimigo com Disparo Arcano (não acumulável)</String>
+  <String Key="Potential_10570_0">Ao derrotar um inimigo com &lt;Disparo Arcano&gt;, recupera 0~90% da Mana Máx. Quanto menos projéteis arcanos forem disparados antes da derrota, maior a recuperação</String>
+  <String Key="Potential_10570_1">Durante &lt;Disparo Arcano&gt;, o dano aumenta gradualmente em 15% (acúmulo ilimitado)</String>
   <String Key="SkinDesc_Default_10570">Farael não controla sua mana transbordante como gostaria, e isso o fazia ser visto como um estorvo entre os elfos. Um dia, seu caminho cruzou com o de Mel e seu grupo visitando o reino élfico, e partiu para a Floresta Eterna com eles determinado a mostrar suas habilidades.</String>
   <String Key="SkillName_10570">Disparo Arcano</String>
   <String Key="SkillDesc_10570">Lança magia arcana {AttackCount} vez(es) em direção ao alvo, causando dano de {105700@Damage:MAtkPer} em todas as casas de uma direção aleatória. Se o alvo morrer, usa a magia arcana restante no inimigo mais próximo de si.</String>
   <String Key="MissionDesc_10357">Jogue com Farael</String>
   <String Key="Name_Potential_10570_2">Mana Vibrante</String>
-  <String Key="Potential_10570_2">Cria uma barreira de 30% de poder de feitiço em volta de si para cada uso de magia arcana do Disparo Arcano.</String>
+  <String Key="Potential_10570_2">Cada projétil arcano de &lt;Disparo Arcano&gt; recupera 20% da Vida Máx., +20% da Vida Máx. por cada disparo consecutivo (até 100% de cura)</String>
   <String Key="SkinName_1057000">Mago Farael Aprendiz</String>
   <String Key="SkinDesc_1057000">Farael carregava consigo uma mana extraordinária desde seu nascimento. Contudo, indo contra sua expectativa de se tornar um grande mago, ele não conseguia controlá-la devidamente mesmo após crescer. Se ninguém estivesse lá para mantê-lo motivado, é provável que Farael teria desistido da magia cedo demais.</String>
   <String Key="ReportType_Teaming">Teaming: formação de equipe com adversários, indo contra as regras do jogo.</String>
@@ -6934,8 +6934,7 @@ Os Herói utilizando PT podem obter pontos de técnica adicionais por um método
   <String Key="BuildingEffect_TotalHpPer">+ {Value}% de vida final</String>
   <String Key="BuildingEffect_TotalMAtkPer">+ {Value}% de poder de feitiço final</String>
   <String Key="Name_Potential_10570_3">Dissipação de Magia</String>
-  <String Key="Potential_10570_3">Aumenta o alcance de magia arcana para 3 casas
--30% de poder de feitiço final</String>
+  <String Key="Potential_10570_3">A Área de dano de &lt;Disparo Arcano&gt; aumenta para 3 casas e destrói a Barreira do alvo antes de causar dano</String>
   <String Key="RestartColosseum">Deseja retornar ao Campo de Batalha Árdua em andamento?</String>
   <String Key="ColosseumReenterWaitForBattleEnds">Aguardando final de batalha em andamento...</String>
   <String Key="Shop_Tab_Special">Produtos Especiais</String>
@@ -9327,8 +9326,8 @@ Todos os atributos da marionete são definidos no momento da evocação de Makin
   <String Key="SkillDesc_10550_Short">O Espírito de Pedra causa {Unit@OverwriteAtkByParent} de dano de feitiço em ataques normais, que é equivalente a {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% do poder de feitiço de Elizabeth, e possui {Unit@OverwriteHpByParent:HpPer:BaseValue}% da vida de Elizabeth e {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% do poder de feitiço, da velocidade de ataque e da velocidade de movimento de Elizabeth.</String>
   <String Key="SkillAltDesc_10550_Short">O Espírito de Pedra causa {Unit@OverwriteAtkByParent} de dano de feitiço em ataques normais, que é equivalente a {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% do poder de feitiço de Elizabeth, e possui {Unit@OverwriteHpByParent:HpPer:BaseValue}% da vida de Elizabeth e {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% do poder de feitiço, da velocidade de ataque e da velocidade de movimento de Elizabeth.</String>
   <String Key="SkillDesc_10560_Short">Vincula {ConnectedMAtkBuffPer}% do poder de feitiço ao aliado vinculado durante {Time}s e amplifica o dano de habilidade em {BaseSkillDamageMul}%. (Não é possível vincular cumulativamente o mesmo Herói)</String>
-  <String Key="SkillDesc_10570_Short">Lança magia arcana {AttackCount} vez(es), causando dano de {105700@Damage:MAtkPer} em todas as casas de uma direção aleatória.</String>
-  <String Key="SkillDesc_105720_Short">Lança magia arcana {AttackCount} vez(es), causando {105700@Damage:MAtkPer} de dano em {1057011@SplashRangeY} casa(s) de uma direção aleatória.</String>
+  <String Key="SkillDesc_10570_Short">Dispara continuamente projéteis arcanos que causam {105700@Damage:MAtkPer} de dano a todas as casas em 1 de 4 direções aleatórias.</String>
+  <String Key="SkillDesc_105720_Short">Dispara continuamente projéteis arcanos que destroem a Barreira e causam {105700@Damage:MAtkPer} de dano em uma largura de {1057011@SplashRangeY} casas em 1 de 4 direções aleatórias.</String>
   <String Key="SkillDesc_105721_Short">Lança magia arcana {AttackCount} vez(es), causando {105700@Damage:MAtkPer} de dano em {1057011@SplashRangeX} casa(s) de uma direção aleatória.</String>
   <String Key="SkillDesc_10580_Short">Ao receber dano, tem {Unit@MissRatio}% de chance de anular o dano recebido, e obtém {Unit@AddTechniqueAtMiss} de PT. Se o PT alcançar o máx., avança no inimigo, causando {Damage:MAtkPer} e {10585@TickDamage:AtkPer} de danos {10585@AttackCount} vez(es).</String>
   <String Key="SkillDesc_10600_Short">Evoca {SummonUnitCountForDesc} ilusão(ões) que dura(m) {10605@Time}s. Ilusões não podem ser selecionadas como alvos e causam dano equivalente a (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% do ataque de Saras.</String>
@@ -9396,8 +9395,8 @@ Todos os atributos da marionete são definidos no momento da evocação de Makin
   <String Key="SkillDesc_10530_Long">Por {Time} seg., Ameaça +{BaseDefPen}, e os ataques normais causam dano igual a {10535@Damage:AtkPer:BaseValue}% do Ataque a todos os inimigos ao redor em até {10535@SplashRangeSum} casas. O alvo principal também sofre {105300@TickDamage} de Dano Normal de Feitiço {105300@DescTickCount} vezes ao longo de {105300@Time} seg.</String>
   <String Key="SkillDesc_10540_Long">Revoca todos os Espíritos de Pedra evocados por ela e causa {10550@Damage:BaseValue}+{10550@Damage:MAtkPer} de dano a todos os inimigos em uma área de {10550@SplashRangeX}{X}{10550@SplashRangeY} ao redor dos Espíritos de Pedra, atordoando-os por {10550@StunTime}s. Evoca novamente {SummonCountForDesc} Espírito(s) de Pedra. (Máx. de {Unit@GlobalMaxSummonCount} Espíritos de Pedra simultâneos)</String>
   <String Key="SkillDesc_10560_Long">Vincula-se ao aliado mais próximo antes do começo da batalha. Com o feitiço geracional da tribo, atribui {ConnectedMAtkBuffPer}% de seu poder de feitiço ao aliado vinculado como atributo básico por {Time}s. Os atributos básicos do aliado aumentam com a atribuição dos atributos vinculados de Saeryeong. Amplifica dano de habilidade do alvo vinculado em {BaseSkillDamageMul}%. (Várias Saeryeongs não podem vincular o mesmo Herói.)</String>
-  <String Key="SkillDesc_10570_Long">Dispara uma magia arcana imprevisível {AttackCount} vez(es) em direção ao alvo, causando {105700@Damage:MAtkPer} de dano em todas as casas de uma direção aleatória. Se o alvo morrer, usa a magia arcana restante no inimigo mais próximo de si.</String>
-  <String Key="SkillDesc_105720_Long">Dispara uma magia arcana imprevisível, lançando-a {AttackCount} vez(es) em direção ao alvo e causando {105700@Damage:MAtkPer} de dano em {1057011@SplashRangeY} casa(s) de uma direção aleatória. Se o alvo morrer, usa a magia arcana restante no inimigo mais próximo de si. Se o alvo morrer, usa a magia arcana restante no inimigo mais próximo de si.</String>
+  <String Key="SkillDesc_10570_Long">Dispara projéteis arcanos imprevisíveis. Mira no inimigo com mais Vida e, a cada {AttackDelay}s, causa {105700@Damage:MAtkPer} de dano a todas as casas em 1 de 4 direções aleatórias. Não para até sofrer Imobilização ou até o alvo ser derrotado.</String>
+  <String Key="SkillDesc_105720_Long">Dispara projéteis arcanos imprevisíveis. Mira no inimigo com mais Vida e, a cada {AttackDelay}s, destrói a Barreira de todos os inimigos em uma largura de {1057011@SplashRangeY} casas em 1 de 4 direções aleatórias e causa {105700@Damage:MAtkPer} de dano. Não para até sofrer Imobilização ou até o alvo ser derrotado.</String>
   <String Key="SkillDesc_105721_Long">Dispara uma magia arcana imprevisível, lançando-a {AttackCount} vez(es) em direção ao alvo e causando {105700@Damage:MAtkPer} de dano em {1057011@SplashRangeX} casa(s) de uma direção aleatória. Se o alvo morrer, usa a magia arcana restante no inimigo mais próximo de si. Se o alvo morrer, usa a magia arcana restante no inimigo mais próximo de si.</String>
   <String Key="SkillDesc_10580_Long">Quando Garam recebe dano, tem {Unit@MissRatio}% de chance de evadir, anulando dano e penalidades, e obtém {Unit@AddTechniqueAtMiss} de PT. Se o PT alcançar o máx., avança no inimigo, causando {Damage:MAtkPer} de dano de feitiço e infligindo ataque normal {10585@AttackCount} vez(es) equivalente a {10585@TickDamage:AtkPer:BaseValue}% do ataque.</String>
   <String Key="SkillDesc_10600_Long">Saras usa o poder do vazio e evoca {SummonUnitCountForDesc} ilusão(ões) que dura(m) {10605@Time}s. Ilusões não podem ser selecionadas como alvos e causam dano equivalente a (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% do ataque de Saras.</String>
@@ -13030,9 +13029,9 @@ Deseja continuar?</String>
   <String Key="ItemName_40632">Tenente</String>
   <String Key="ItemDesc_40632">Cria [Casa de Função de Tenente] contendo {0}% de efeito em outra casa aleatória ao alocar na [Casa de Função]. A runa de tenente não é cumulativa.</String>
   <String Key="ItemName_40643">Dominador</String>
-  <String Key="ItemDesc_40643">Obtenção adicional de +{0}% de efeito de [Casa de Função]
-Se o dominador sobreviver, após {1}s, ressuscita Herói morto que começou batalha em casa que não é [Casa de Função]
-Derrota imediata na batalha se o dominador morrer</String>
+  <String Key="ItemDesc_40643">Obter +{0}% adicional do efeito de [Slot de Função]
+Enquanto o Dominador estiver vivo, os Heróis, exceto o Dominador, revivem {1} s após morrer
+Ao morrer o Dominador, Derrota imediata na Batalha</String>
   <String Key="BuildingEffect_BaseHybridDef">+{Value} de defesa</String>
   <String Key="BuildingEffect_BattleStartMana">+{Value}% de mana no começo da batalha</String>
   <String Key="BuildingEffect_BattleStartMana_Long">Aumenta a carga de mana básica.</String>
@@ -17893,4 +17892,60 @@ Após o início da Batalha, obtém +{11}% de Resistência a penalidades e +{12}%
   <String Key="Overcome_10800_3">Sempre que Frenesi é ativado, Vida Máx. Final da Forma Vampiro +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_4">Sempre que o efeito de Dano ao Redor da Forma Vampiro causar dano, Dano caus. na Forma Vampiro +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="UnitName_10810">Alessia</String>
+  <String Key="LeagueName_12">Liga do Calor</String>
+  <String Key="SkinDesc_1044005">&lt;i&gt;Recompensa por participar da Liga do Calor na Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400500">&lt;i&gt;Recompensa por alcançar pontos na Liga do Calor na Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400501">&lt;i&gt;Recompensa por entrar na Classificação da Liga do Calor na Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_1071004">&lt;i&gt;Recompensa por participar da Liga do Calor na Batalha&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100400">&lt;i&gt;Recompensa por alcançar pontos na Liga do Calor na Batalha&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100401">&lt;i&gt;Recompensa por entrar na Classificação da Liga do Calor na Batalha&lt;/i&gt;</String>
+  <String Key="SkinName_1057002">Rei da Estrela da Manhã Farael</String>
+  <String Key="SkinDesc_1057002">&lt;i&gt;A mais nobre luz das estrelas, nascida no início do amanhecer, se tornará a luz mais brilhante para atravessar a escuridão.&lt;/i&gt;</String>
+  <String Key="SuperShieldModulator">Obter Defesa Absoluta</String>
+  <String Key="BuildingEffect_BaseDamageReflect">{Value}% de dano refletido
+(metade do dano em caso de feitiços)</String>
+  <String Key="BuildingEffect_BaseDamageReflect_Long">Reflete parte do dano sofrido pelo Herói ao inimigo.</String>
+  <String Key="TreasureName_30042">Perataus</String>
+  <String Key="TreasureSubName_30042">Escudo Negro como Breu</String>
+  <String Key="TreasureDesc_30042">O escudo de Behemus não é só para defesa. O Avanço Feroz de Behemus com seu escudo pesado amassa até a armadura mais resistente num instante.</String>
+  <String Key="TreasureSkillName_30042">Queda</String>
+  <String Key="BuffDataName_3300421">Fratura I</String>
+  <String Key="BuffDataName_3300422">Amassadura I</String>
+  <String Key="BuffDataName_3300423">Neutralização</String>
+  <String Key="BuffDataName_3300424">Amassadura II</String>
+  <String Key="BuffDataName_3300425">Fratura II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Loja Especial do Pickup de Perataus</String>
+  <String Key="SpecialPackage_1680">Pacote de Perataus 1</String>
+  <String Key="SpecialPackage_1681">Pacote de Perataus 2</String>
+  <String Key="SpecialPackage_1682">Pacote de Perataus 3</String>
+  <String Key="BuffDataDesc_3300421">Transferência de dano +{1}x a cada {0} de Ameaça</String>
+  <String Key="BuffDataDesc_3300422">Dano Físico Recebido por inimigos com Instável +{0}%</String>
+  <String Key="BuffDataDesc_3300423">Sempre que Instável for removido, todos os aliados obtêm +{0} de Defesa Absoluta por cada inimigo do qual for removido</String>
+  <String Key="BuffDataDesc_3300424">Dano Físico Recebido por inimigos com Instável +{0}%</String>
+  <String Key="BuffDataDesc_3300425">Transferência de dano +{1}x a cada {0} de Ameaça</String>
+  <String Key="TreasureSkillDesc_3300420">Quando você causa Dano de Habilidade a um inimigo, aplica Instável ao alvo
+Se um aliado causar a um inimigo com Instável Dano Físico igual ou maior que {0}% da Vida máxima do alvo, {1}% desse dano é transferido como Dano Especial a outro inimigo com Instável e, depois, Instável é removido de todos os inimigos
+&lt;color=#808080&gt;&lt;i&gt;Este efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">Quando você causa Dano de Habilidade a um inimigo, aplica Instável ao alvo
+Se um aliado causar a um inimigo com Instável Dano Físico igual ou maior que {0}% da Vida máxima do alvo, {1}% desse dano é transferido como Dano Especial a outro inimigo com Instável e, depois, Instável é removido de todos os inimigos
+Transferência de dano +{3}x a cada {2} de Ameaça
+&lt;color=#808080&gt;&lt;i&gt;Este efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">Quando você causa Dano de Habilidade a um inimigo, aplica Instável ao alvo
+Se um aliado causar a um inimigo com Instável Dano Físico igual ou maior que {0}% da Vida máxima do alvo, {1}% desse dano é transferido como Dano Especial a outro inimigo com Instável e, depois, Instável é removido de todos os inimigos
+Transferência de dano +{3}x a cada {2} de Ameaça
+Dano Físico Recebido por inimigos com Instável +{4}%
+Este aumento de Dano Físico Recebido não se acumula. Só o maior valor é aplicado
+&lt;color=#808080&gt;&lt;i&gt;Este efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">Quando você causa Dano de Habilidade a um inimigo, aplica Instável ao alvo
+Se um aliado causar a um inimigo com Instável Dano Físico igual ou maior que {0}% da Vida máxima do alvo, {1}% desse dano é transferido como Dano Especial a outro inimigo com Instável e, depois, Instável é removido de todos os inimigos
+Transferência de dano +{3}x a cada {2} de Ameaça
+Dano Físico Recebido por inimigos com Instável +{4}%
+Este aumento de Dano Físico Recebido não se acumula. Só o maior valor é aplicado
+Sempre que Instável for removido, todos os aliados obtêm +{5} de Defesa Absoluta por cada inimigo do qual for removido
+&lt;color=#808080&gt;&lt;i&gt;Este efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="SpecialShop_TreasureDoublePickUp10014">Loja Especial do Pickup de Tesouros</String>
+  <String Key="SpecialPackage_1676">Pacote 1 de Pedra de Evocação do Pickup de Tesouros</String>
+  <String Key="SpecialPackage_1677">Pacote 2 de Pedra de Evocação do Pickup de Tesouros</String>
+  <String Key="SpecialPackage_1678">Pacote de Caelus</String>
+  <String Key="SpecialPackage_1679">Pacote de Traquinada</String>
 </Strings>

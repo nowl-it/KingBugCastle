@@ -10701,70 +10701,69 @@
 	
 	<!-- 파라엘 -->
 	<Skill ID="10570">
-		<NameComment>마법 난사</NameComment>
-		<DescComment>무작위 방향에서 주문력의 {MAtkPer}% 피해를 주는 마법을 {AttackCount}회 발사</DescComment>
-		<Icon>Skill_10570</Icon>
-		
-		<AtkType>None</AtkType>
-		<TargetType>Enemy</TargetType>
-		<CancelWhenNoTarget>true</CancelWhenNoTarget>
-		<CancelWhenFixedTargetIsDead>false</CancelWhenFixedTargetIsDead>
-		<CancelWhenStun>true</CancelWhenStun>
+        <NameComment>마법 난사</NameComment>
+        <DescComment>가장 체력이 높은 적을 향해 무작위 방향에서 모든 1칸에 주문력의 100% 피해를 주는 비전 마법을 지속적으로 발사합니다.
+            대상이 사망하거나 이동불가 효과가 적용되면 발사를 멈춥니다.</DescComment>
+        <Icon>Skill_10570</Icon>
 
-		<RangeType>Infinity</RangeType>
-		
-		<Effect Type='SplashPos'>
-			<Prefab>Fx_10570f</Prefab>
-			<ZLevel>UnitOver</ZLevel>
-			<World>true</World>
-			<Sound>se_unit_10570_skill_shot</Sound>
-		</Effect>
+        <AtkType>None</AtkType>
+        <TargetType>Enemy</TargetType>
+        <CancelWhenNoTarget>true</CancelWhenNoTarget>
+        <CancelWhenFixedTargetIsDead>true</CancelWhenFixedTargetIsDead>
+        <CancelWhenStun>true</CancelWhenStun>
 
-		<HitSound>se_unit_10570_skill_hit</HitSound>
+        <RangeType>Infinity</RangeType>
+        <RangeStrategy>HighestHP</RangeStrategy>
 
-		<!-- 랜덤 스킬을 콜백 내부에서 사용하기 위한 태그 -->
-		<UseRandomSkillWithDelay>true</UseRandomSkillWithDelay>
+        <Effect Type='SplashPos'>
+            <Prefab>Fx_10570f</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <World>true</World>
+            <Sound>se_unit_10570_skill_shot</Sound>
+        </Effect>
 
-		<RandomSkill>105701</RandomSkill>
-		<RandomSkill>105702</RandomSkill>
-		<RandomSkill>105703</RandomSkill>
-		<RandomSkill>105704</RandomSkill>
+        <HitSound>se_unit_10570_skill_hit</HitSound>
 
-		<CanRepeatSameSkill>false</CanRepeatSameSkill>
+        <!-- 랜덤 스킬을 콜백 내부에서 사용하기 위한 태그 -->
+        <UseRandomSkillWithDelay>true</UseRandomSkillWithDelay>
 
-		<AttackCount>2</AttackCount>
-		<AttackDelay>0.6</AttackDelay>
-		<SkillEndTrigger>END</SkillEndTrigger>
+        <RandomSkill>105701</RandomSkill>
+        <RandomSkill>105702</RandomSkill>
+        <RandomSkill>105703</RandomSkill>
+        <RandomSkill>105704</RandomSkill>
 
-		<DontChainDamage>true</DontChainDamage>
+        <CanRepeatSameSkill>false</CanRepeatSameSkill>
+
+        <AttackCount>999</AttackCount>
+        <AttackDelay>0.7</AttackDelay>
+        <SkillEndTrigger>END</SkillEndTrigger>
+
+        <DontChainDamage>true</DontChainDamage>
 	</Skill>
 	
 	<Skill ID="10571" Inherit="10570">
+        <AttackDelay>0.6</AttackDelay>
 		<RandomSkill>105701</RandomSkill>
 		<RandomSkill>105702</RandomSkill>
 		<RandomSkill>105703</RandomSkill>
 		<RandomSkill>105704</RandomSkill>
-		
-		<AttackCount>3</AttackCount>
-	</Skill>
+    </Skill>
 
 	<Skill ID="10572" Inherit="10570">
+        <AttackDelay>0.5</AttackDelay>
 		<RandomSkill>105701</RandomSkill>
 		<RandomSkill>105702</RandomSkill>
 		<RandomSkill>105703</RandomSkill>
 		<RandomSkill>105704</RandomSkill>
-		
-		<AttackCount>4</AttackCount>
-	</Skill>
+    </Skill>
 
 	<Skill ID="10573" Inherit="10570">
+        <AttackDelay>0.4</AttackDelay>
 		<RandomSkill>105701</RandomSkill>
 		<RandomSkill>105702</RandomSkill>
 		<RandomSkill>105703</RandomSkill>
 		<RandomSkill>105704</RandomSkill>
-		
-		<AttackCount>5</AttackCount>
-	</Skill>
+    </Skill>
 	
 	<!-- 4개의 공격용 랜덤스킬의 뼈대 역할 -->
 	<Skill ID="105700">
@@ -10777,7 +10776,7 @@
 
 		<TargetType>Enemy</TargetType>
 		<CancelWhenNoTarget>true</CancelWhenNoTarget>
-		<CancelWhenFixedTargetIsDead>false</CancelWhenFixedTargetIsDead>
+		<CancelWhenFixedTargetIsDead>true</CancelWhenFixedTargetIsDead>
 		<CancelWhenStun>true</CancelWhenStun>
 		<ForceUseDefaultTarget>true</ForceUseDefaultTarget>
 		
@@ -10801,6 +10800,8 @@
 		<DamageDelay>0.09</DamageDelay>
 		<DamageDelayType>Dist</DamageDelayType>
 		<AdjustDiagonalDamageDelay>true</AdjustDiagonalDamageDelay>
+        
+        <Unit10570AI_IsArcaneMagic>true</Unit10570AI_IsArcaneMagic>
 		
 		<Effect Type='Shoot'>
 			<Prefab>Fx_10570b</Prefab>
@@ -10813,6 +10814,8 @@
 		<Effect Type='SplashRootIgnoreDelay'>
 			<Prefab>Fx_10570e</Prefab>
 			<ZLevel>UnitOver</ZLevel>
+            <CenterAlign>true</CenterAlign>
+            <World>true</World>
 		</Effect>
 	</Skill>
 	
@@ -10839,17 +10842,6 @@
 		<SplashRangeX>0</SplashRangeX>
 		<SplashRangeY>20</SplashRangeY>
 	</Skill>
-	
-	<Skill ID="10575">
-		<DescComment>스킬로 적 처치시 잔여 스킬 공격에 주문력 50% 증가</DescComment>
-		<AtkType>Melee</AtkType>
-		<TargetType>Self</TargetType>
-		<RangeType>Self</RangeType>
-		<Time>99</Time>
-		
-		<TotalDamagePer>50</TotalDamagePer>
-		<RemoveBuffAtSkill>true</RemoveBuffAtSkill>
-	</Skill>
 
 	<!-- 2각: 3줄짜리 랜덤 뽑기 -->
 	<Skill ID="105720" Inherit="10570">
@@ -10871,39 +10863,36 @@
 	</Skill>
 
 	<Skill ID="105721" Inherit="10570">
-		<LongDesc>SkillDesc_105721_Long</LongDesc>
-		<ShortDesc>SkillDesc_105721_Short</ShortDesc>
+        <LongDesc>SkillDesc_105720_Long</LongDesc>
+        <ShortDesc>SkillDesc_105720_Short</ShortDesc>
 
+        <AttackDelay>0.6</AttackDelay>
 		<RandomSkill>1057011</RandomSkill>
 		<RandomSkill>1057012</RandomSkill>
 		<RandomSkill>1057013</RandomSkill>
 		<RandomSkill>1057014</RandomSkill>
-
-		<AttackCount>3</AttackCount>
 	</Skill>
 
 	<Skill ID="105722" Inherit="10570">
 		<LongDesc>SkillDesc_105720_Long</LongDesc>
 		<ShortDesc>SkillDesc_105720_Short</ShortDesc>
-		
+
+        <AttackDelay>0.5</AttackDelay>
 		<RandomSkill>1057011</RandomSkill>
 		<RandomSkill>1057012</RandomSkill>
 		<RandomSkill>1057013</RandomSkill>
 		<RandomSkill>1057014</RandomSkill>
-
-		<AttackCount>4</AttackCount>
 	</Skill>
 
 	<Skill ID="105723" Inherit="10570">
-		<LongDesc>SkillDesc_105721_Long</LongDesc>
-		<ShortDesc>SkillDesc_105721_Short</ShortDesc>
+        <LongDesc>SkillDesc_105720_Long</LongDesc>
+        <ShortDesc>SkillDesc_105720_Short</ShortDesc>
 
+        <AttackDelay>0.4</AttackDelay>
 		<RandomSkill>1057011</RandomSkill>
 		<RandomSkill>1057012</RandomSkill>
 		<RandomSkill>1057013</RandomSkill>
 		<RandomSkill>1057014</RandomSkill>
-
-		<AttackCount>5</AttackCount>
 	</Skill>
 
 	<Skill ID="1057011" Inherit="105700">
@@ -10911,7 +10900,8 @@
 		<SplashRangeX>20</SplashRangeX>
 		<SplashRangeY>1</SplashRangeY>
 		<ParentSkill>105720</ParentSkill>
-		<ExtraRangeEffectScale>1.5</ExtraRangeEffectScale>
+        <RemoveShieldPer>100</RemoveShieldPer>
+		<ExtraRangeEffectScale>150</ExtraRangeEffectScale>
 		<ExtraSplashRangeType>Rect</ExtraSplashRangeType>
 		<ExtraSplashRangeX>20</ExtraSplashRangeX>
 		<ExtraSplashRangeY>0</ExtraSplashRangeY>
@@ -10922,33 +10912,36 @@
 		<SplashRangeX>1</SplashRangeX>
 		<SplashRangeY>20</SplashRangeY>
 		<ParentSkill>105720</ParentSkill>
-		<ExtraRangeEffectScale>1.5</ExtraRangeEffectScale>
-		<ExtraSplashRangeType>Rect</ExtraSplashRangeType>
-		<ExtraSplashRangeX>0</ExtraSplashRangeX>
-		<ExtraSplashRangeY>20</ExtraSplashRangeY>
-	</Skill>
+        <RemoveShieldPer>100</RemoveShieldPer>
+        <ExtraRangeEffectScale>150</ExtraRangeEffectScale>
+        <ExtraSplashRangeType>Rect</ExtraSplashRangeType>
+        <ExtraSplashRangeX>0</ExtraSplashRangeX>
+        <ExtraSplashRangeY>20</ExtraSplashRangeY>
+    </Skill>
 
 	<Skill ID="1057013" Inherit="105700">
 		<SplashRangeType>DiagonalRect</SplashRangeType>
 		<SplashRangeX>20</SplashRangeX>
 		<SplashRangeY>1</SplashRangeY>
 		<ParentSkill>105720</ParentSkill>
-		<ExtraRangeEffectScale>1.5</ExtraRangeEffectScale>
-		<ExtraSplashRangeType>DiagonalRect</ExtraSplashRangeType>
-		<ExtraSplashRangeX>20</ExtraSplashRangeX>
-		<ExtraSplashRangeY>0</ExtraSplashRangeY>
-	</Skill>
+        <RemoveShieldPer>100</RemoveShieldPer>
+        <ExtraRangeEffectScale>150</ExtraRangeEffectScale>
+        <ExtraSplashRangeType>Rect</ExtraSplashRangeType>
+        <ExtraSplashRangeX>20</ExtraSplashRangeX>
+        <ExtraSplashRangeY>0</ExtraSplashRangeY>
+    </Skill>
 
 	<Skill ID="1057014" Inherit="105700">
 		<SplashRangeType>DiagonalRect</SplashRangeType>
 		<SplashRangeX>1</SplashRangeX>
 		<SplashRangeY>20</SplashRangeY>
 		<ParentSkill>105720</ParentSkill>
-		<ExtraRangeEffectScale>1.5</ExtraRangeEffectScale>
-		<ExtraSplashRangeType>DiagonalRect</ExtraSplashRangeType>
-		<ExtraSplashRangeX>0</ExtraSplashRangeX>
-		<ExtraSplashRangeY>20</ExtraSplashRangeY>
-	</Skill>
+        <RemoveShieldPer>100</RemoveShieldPer>
+        <ExtraRangeEffectScale>150</ExtraRangeEffectScale>
+        <ExtraSplashRangeType>Rect</ExtraSplashRangeType>
+        <ExtraSplashRangeX>0</ExtraSplashRangeX>
+        <ExtraSplashRangeY>20</ExtraSplashRangeY>
+    </Skill>
 
 	<!-- 가람 -->
 	<!-- 돌진 공격 -->
@@ -14893,6 +14886,7 @@
 		<AtkType>Melee</AtkType>
 		<RangeType>Self</RangeType>
 		<TargetType>Self</TargetType>
+        <Unit10800AI_AuraDamagePer>0</Unit10800AI_AuraDamagePer>
 
 		<Unit10800AI_TransformSkill>10805</Unit10800AI_TransformSkill>
 
@@ -14917,8 +14911,7 @@
         <TargetType>Self</TargetType>
 
         <Transform>10810</Transform>
-        <TransformHpPer>100</TransformHpPer>
-        <TransformTime>5</TransformTime>
+        <TransformTime>7</TransformTime>
 
         <BuffAtCastSkill>108000</BuffAtCastSkill>
     </Skill>
@@ -14928,7 +14921,7 @@
     <Skill ID="10807" Inherit="10805">
         <BuffAtCastSkill>108002</BuffAtCastSkill>
     </Skill>
-    <Skill ID="10808" Inherit="108200">
+    <Skill ID="10808" Inherit="10805">
         <BuffAtCastSkill>108003</BuffAtCastSkill>
     </Skill>
 
@@ -14938,7 +14931,7 @@
         <TargetType>Self</TargetType>
         <BuffToSkillTarget>108000</BuffToSkillTarget>
 
-        <Time>5</Time>
+        <Time>7</Time>
         <MaxBuffOverlap>1</MaxBuffOverlap>
         <BaseDef>200</BaseDef>
         <BaseMDef>200</BaseMDef>
@@ -14968,25 +14961,27 @@
 
         <AtkType>Melee</AtkType>
         <TargetType>Enemy</TargetType>
-        <RangeType>Infinity</RangeType>
+        <RangeType>Self</RangeType>
 
         <SplashRangeFrom>Self</SplashRangeFrom>
         <SplashRangeType>Rect</SplashRangeType>
-        <SplashRangeX>3</SplashRangeX>
-        <SplashRangeY>3</SplashRangeY>
+        <SplashRangeX>2</SplashRangeX>
+        <SplashRangeY>2</SplashRangeY>
 
         <FearTime>2</FearTime>
 
         <Damage>0</Damage>
         <HpPer Target="Damage">25</HpPer>
         <ForceDamageType>SkillMagic</ForceDamageType>
+        
+        <DescDamage>0</DescDamage>
+        <MAtkPer Target="DescDamage">100</MAtkPer>
 
         <Effect Type="Self">
             <Prefab>Fx_10810d</Prefab>
             <CenterAlign>true</CenterAlign>
             <ZLevel>UnitOver</ZLevel>
-            <ScaleX>1.5</ScaleX>
-            <ScaleY>1.5</ScaleY>
+            <LevelScale>false</LevelScale>
             <World>true</World>
         </Effect>
         <Effect Type="Target">
@@ -14996,19 +14991,23 @@
         </Effect>
 	</Skill>
 
-    <!-- 변신 진입 시 1회 발동: 5x5 내 적이 가장 많이 들어오는 위치로 돌진 + 새 위치 기준 5x5 공포 -->
-    <Skill ID="10811">
+    <!-- 변신 진입 시 1회 발동: 7x7 내 적이 가장 많이 들어오는 위치로 돌진 + 새 위치 기준 7x7 공포 -->
+    <Skill ID="10815">
         <NameComment>폭주 돌진</NameComment>
         <Icon>Skill_10810</Icon>
 
         <AtkType>Melee</AtkType>
         <TargetType>Enemy</TargetType>
         <RangeType>Infinity</RangeType>
+        <AnimTrigger>TRANSFORM</AnimTrigger>
 
         <SplashRangeFrom>Self</SplashRangeFrom>
         <SplashRangeType>Rect</SplashRangeType>
-        <SplashRangeX>2</SplashRangeX>
-        <SplashRangeY>2</SplashRangeY>
+        <SplashRangeX>3</SplashRangeX>
+        <SplashRangeY>3</SplashRangeY>
+        <AttackSplashOnly>true</AttackSplashOnly>
+        <ReleaseTargetAfterSkill>true</ReleaseTargetAfterSkill>
+        <FixUsingPos>true</FixUsingPos>
 
         <Damage>0</Damage>
         <FearTime>2</FearTime>
@@ -15033,6 +15032,9 @@
 
         <Effect Type="Self">
             <Delay>0.1</Delay>
+            <ScaleX>1.4</ScaleX>
+            <ScaleY>1.4</ScaleY>
+            <LevelScale>false</LevelScale>
             <Prefab>Fx_10810d</Prefab>
             <CenterAlign>true</CenterAlign>
             <ZLevel>UnitOver</ZLevel>
@@ -15040,7 +15042,7 @@
     </Skill>
 
     <!-- 오라 마나순환에 필요한 dummy skill -->
-    <Skill ID="10812">
+    <Skill ID="108100">
     </Skill>
 
 	<!-- 도깨비 스킬-->

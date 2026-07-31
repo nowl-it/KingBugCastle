@@ -11,9 +11,10 @@ an infinite UniTask recursion and a stack-overflow SIGSEGV that looked exactly
 like an engine bug. Two sessions were lost to it. Regenerate here instead of
 patching in place, and the class of bug cannot come back.
 
-    python3 server/patchers/make_v171_ssl_so.py [--check]
+    python3 server/patchers/make_v171_ssl_so.py [VERSION] [--check]
 
---check verifies the existing file instead of writing (exit 1 on mismatch).
+VERSION is a directory under il2cpp/ (default 171.1.00). --check verifies the
+existing file instead of writing (exit 1 on mismatch).
 
 NOTE: the offsets below are RAW FILE OFFSETS, not RVAs. Every other v171 patch
 in this repo uses `RVA - 0x4000` (see AGENTS.md). Do not mix the two.
@@ -21,22 +22,42 @@ in this repo uses `RVA - 0x4000` (see AGENTS.md). Do not mix the two.
 import pathlib, sys
 
 REPO = pathlib.Path(__file__).resolve().parents[2]
-SRC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171.so"
-DST = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
 
 RET_TRUE = bytes.fromhex("20008052c0035fd6")  # mov w0,#1 ; ret
 
-SSL_PATCHES = [
-    (0x2CB68D8, "PinnedCertHandler.ValidateCertificate"),
-    (0x596EF64, "UnityTlsProvider.ValidateCertificate"),
-    (0x596D674, "MobileTlsContext.ValidateCertificate"),
-]
+# Per-version: the 3 SSL entry points and a couple of untouched anchors. Offsets
+# come from that version's own dump.cs (`RVA - 0x4000`); they do NOT carry across
+# a version bump, and reusing them silently patches unrelated code.
+VERSIONS = {
+    "171.0.00": dict(
+        src="libil2cpp_v171.so", dst="libil2cpp_v171_ssl.so",
+        ssl=[(0x2CB68D8, "PinnedCertHandler.ValidateCertificate"),
+             (0x596EF64, "UnityTlsProvider.ValidateCertificate"),
+             (0x596D674, "MobileTlsContext.ValidateCertificate")],
+        anchors=[(0x303C6C0, "fe0f1bf8", "GameManager.CheckFirebase prologue"),
+                 (0x34FFB7C, "28008012", "CheckUseAssetBundle.MoveNext `mov w8,#-2`")],
+    ),
+    # Recovered by server/patchers/unpack_neo.py straight out of the v171.1.00
+    # packer, so this pairs with the SHIPPED global-metadata.dat - no metadata
+    # swap needed, unlike the v171.0.00 lib.
+    "171.1.00": dict(
+        src="libil2cpp_v17110.so", dst="libil2cpp_v17110_ssl.so",
+        ssl=[(0x2CB6E24, "PinnedCertHandler.ValidateCertificate"),
+             (0x59702A4, "UnityTlsProvider.ValidateCertificate"),
+             (0x596E9B4, "MobileTlsContext.ValidateCertificate")],
+        anchors=[(0x2CB6E24, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
+    ),
+}
 
-# Sanity anchors: untouched bytes that the rot corrupted last time.
-ANCHORS = [
-    (0x303C6C0, "fe0f1bf8", "GameManager.CheckFirebase prologue"),
-    (0x34FFB7C, "28008012", "CheckUseAssetBundle.MoveNext `mov w8,#-2`"),
-]
+VERSION = next((a for a in sys.argv[1:] if not a.startswith("-")), "171.1.00")
+if VERSION not in VERSIONS:
+    sys.exit(f"unknown version {VERSION}; known: {', '.join(VERSIONS)}")
+_V = VERSIONS[VERSION]
+SRC = REPO / "il2cpp" / f"v{VERSION}" / _V["src"]
+DST = REPO / "il2cpp" / f"v{VERSION}" / _V["dst"]
+SSL_PATCHES = _V["ssl"]
+# An anchor that names a site we are about to patch is only meaningful pre-patch.
+ANCHORS = [a for a in _V["anchors"] if a[0] not in {o for o, _ in SSL_PATCHES}]
 
 
 def build():
@@ -58,7 +79,12 @@ def check(data):
         if got != want:
             print(f"  [!] CORRUPT: {name} @ 0x{off:x} = {got}, want {want}")
             ok = False
-    # Anything else differing from pristine is rot.
+    # Anything else differing from pristine is rot. Skipped when the pristine lib
+    # is not on disk - v171.0.00's was lost to a `git clean -fdx` and only the
+    # patched copy survives, which is still worth the patch/anchor checks above.
+    if not SRC.exists():
+        print(f"  [~] {SRC.name} absent - skipping the stray-byte diff")
+        return ok
     plain = SRC.read_bytes()
     patched = {o for off, _ in SSL_PATCHES for o in range(off, off + len(RET_TRUE))}
     stray = [i for i in range(len(plain)) if plain[i] != data[i] and i not in patched]

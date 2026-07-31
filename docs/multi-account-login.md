@@ -30,6 +30,14 @@ resolves, in order:
    `default_player.json`. Capped at `KGC_MAX_PLAYERS` (default 200), because the
    id is client-supplied and unauthenticated.
 
+5. **No resolvable identity at all** (no token, an expired one, a forged one) -> a
+   **throwaway save** that `save_state()` discards. It deliberately does NOT fall back
+   to the active save: that fallback meant anyone who could reach the port read and
+   wrote whichever player the dashboard had selected, with no credential (fixed
+   2026-07-31; regression test in `tests/test_public_hardening.py`). Single-player
+   mode (`KGC_MULTIPLAYER=0`) keeps the fallback - there is one save and nobody to
+   impersonate.
+
 `Constants.AccountType` (from the client): `0` Test, `1` Google, `2` GameCenter,
 `3` AppleID, `4` Guest. The register `type` is stored on the save so
 `PlayerDataResponseModel.accountType` reports the right badge.
@@ -65,17 +73,24 @@ A **web** OAuth client has none of the package/cert requirement a native GPGS
 sign-in does - it authenticates a browser, not the APK. So instead of the dead
 native button, the client's Google button is repointed to open our own web login
 page, which does the Google OAuth in the browser and hands the account back to the
-app through the deep link. `server/google_login.py` implements the server half:
+app. `server/google_login.py` is the server half, `jni/stub.cpp` the client half:
 
 ```
-client Google button --OpenURL--> GET /glogin
+client Google button --OpenURL--> GET /glogin            (stub detours OnClickGoogleLogin)
    -> 302 to Google consent (our web client_id, HMAC-signed state)
 Google -> GET /glogin/callback?code&state
    -> exchange code for id_token (server-side, over TLS -> trusted)
    -> read stable `sub`
-   -> HTML that navigates to  kingbugcastle://auth?id=google_<sub>
-app deep-link bridge -> RestAPI.Auth("google_<sub>") -> that account's own save
+   -> park account id `google_<sub>` for the poller, show a return page
+app native poller -> GET /glogin/pending  -> "google_<sub>"
+   -> Scene_Login.Auth("google_<sub>")  (main thread, via the Scene_Login.Update hook)
+   -> full login handshake -> that account's own save
 ```
+
+The **deep link back into the app is not the live path**. `patch_deeplink.py` still installs the
+`kingbugcastle://` intent-filter, but the app cannot reliably read the return URL, so the picked
+account id is parked server-side and a native poller in the XIGNCODE stub fetches it. Handing it to
+`Scene_Login.Auth` (rather than `RestAPI.Auth`) is what makes the login scene actually transition.
 
 `google_<sub>` is stable per Google account, so cross-device restore is automatic
 (the multi-account machinery above keys the save on it). **This half is built and
@@ -85,44 +100,74 @@ tested** (`server/tests/test_google_login.py`; real Google is stubbed).
 
 1. Google Cloud Console -> APIs & Services -> Credentials -> Create OAuth client
    -> **Web application** (NOT Android - that path is the one that needs the cert).
-2. Authorised redirect URI: `<GLOGIN_PUBLIC_URL>/glogin/callback`.
-3. Run the server with:
+2. Authorised redirect URI: `<public base>/glogin/callback`.
+3. Download the client JSON and drop it, unedited, at:
+   ```
+   server/secrets/google_oauth.json        # gitignored; see server/secrets/README.md
+   chmod 600 server/secrets/google_oauth.json
+   ./run.sh                                # or serve_public.sh
+   ```
+   `google_login.py` reads the id, the secret, **and** the public base URL out of it -
+   the base is derived from whichever `redirect_uris` entry ends in `/glogin/callback`,
+   so the value sent to Google always byte-matches the one it holds. That match is
+   otherwise the easiest thing in this whole flow to get wrong.
+
+   Environment variables still win where set, for anyone who prefers them:
    ```
    GOOGLE_CLIENT_ID=...apps.googleusercontent.com \
    GOOGLE_CLIENT_SECRET=... \
    GLOGIN_PUBLIC_URL=https://kgc.example.com \
-   ./run.sh          # or serve_public.sh
+   ./run.sh
    ```
-   Unset -> `/glogin` returns a clear 503 instead of a broken redirect.
+   Prefer the file: a secret on a command line is in `~/.zsh_history` and in the
+   process list, readable by any other user on the box.
 
-### Client half - status (NOT yet verified on device)
+   Nothing configured -> `/glogin` returns a clear 503 instead of a broken redirect.
 
-Three client-side pieces are needed; only the manifest one is done:
+> **The redirect URI has to be reachable from the device's browser, not from your
+> desktop.** On an emulator the browser reaches the server through the same
+> `adb reverse` the game uses, and `run.sh` only maps `:80 -> :8080` and
+> `:443 -> :8443`. So register `http://localhost/glogin/callback` (port 80) and it
+> works as-is; register `http://localhost:8080/...` and you must also run
+> `adb reverse tcp:8080 tcp:8080` after every emulator restart.
 
-- **Deep-link scheme (DONE, static):** `patchers/patch_deeplink.py` adds a
-  `kingbugcastle://` VIEW intent-filter to the launcher activity. Wired into
-  `build_v171_private.py`'s manifest step. Unit-tested.
-- **Google button -> OpenURL (TODO, native, needs device):** inline-detour
-  `Scene_Login.OnClickGoogleLogin` (v171 recovered-lib RVA `0x34FBC00`) in
-  `jni/stub.cpp` so pressing it calls `UnityEngine.Application::OpenURL(<glogin
-  url>)` instead of GPGS. Resolve `Application`/`OpenURL` by name like the existing
-  hooks. Risk: the prologue may be PC-relative, which `install_inline_hook` refuses
-  - a methodPointer swap is the fallback but only fires if the UnityEvent invokes
-  through `MethodInfo->methodPointer` (uncertain for a uGUI onClick registered
-  before the hook). This is the piece that needs on-device iteration.
-- **Deep-link -> login bridge (TODO, native, needs device):** a poller reading
-  `Application::get_absoluteURL()`; on `kingbugcastle://auth?id=X` call
-  `RestAPI.Auth(X)` (static, RVA `0x2C44198`) and set `RestAPI.accessToken`
-  (static field, TypeDefIndex 6647). Open problem: making the login scene progress
-  to the lobby from native - `RestAPI.Auth` only does the HTTP; the AuthResponse
-  handling + scene transition live in `Scene_Login`. Likeliest fix is invoking
-  `Scene_Login.AccountTransferConfirm(code, accountType)` (RVA `0x34FE150`), a
-  complete login-and-transition flow, with a login code minted by the web callback
-  - but that needs the live `Scene_Login` instance, so it has to be worked out on
-  device.
+**No Google at all: `GLOGIN_DEV=1`.** `/glogin` then serves a dev account picker
+instead of redirecting to Google - buttons that hit `/glogin/go?id=<account>`
+directly, which is the same code path from there on. This is how the whole client
+loop is exercised without a Cloud project. Never leave it on for a public server:
+it hands out a session for any account id you can name.
 
-Until the two native pieces are done and verified, the working cross-device path
-on the repacked build is the one below.
+### Client half - status: DONE, verified on device (2026-07-28)
+
+Three client-side pieces, all working on the v171 private build:
+
+- **Deep-link scheme (static):** `patchers/patch_deeplink.py` adds a
+  `kingbugcastle://` VIEW intent-filter to the launcher activity, wired into
+  `build_v171_private.py`'s manifest step. Installed but not on the live path (see
+  above) - kept because it costs nothing and the return page still fires it.
+- **Google button -> OpenURL:** `jni/stub.cpp` inline-detours
+  `Scene_Login.OnClickGoogleLogin` (v171 recovered-lib RVA `0x34FBC00`) and calls
+  `UnityEngine.Application::OpenURL(KGC_GLOGIN_URL)`, resolved by name. The GPGS
+  original is deliberately **not** chained - that path is what we replace. redroid
+  has `org.chromium.webview_shell`, so `OpenURL` resolves to a browser.
+- **Return bridge:** a background thread does a raw-socket
+  `GET /glogin/pending` against `127.0.0.1:80` (adb-reverse / host-rebind), and the
+  `Scene_Login.Update` hook applies the result on the **main thread** by invoking
+  `Scene_Login.Auth(<account id>)` - the full handshake including the scene
+  transition, which `RestAPI.Auth` alone does not do.
+
+Log lines for a good run (`adb logcat -s XignCodeStub`):
+
+```
+Hooked Scene_Login.OnClickGoogleLogin -> web login!
+Hooked Scene_Login.Update + started login poller (web-login bridge)!
+Google button -> opening web login
+login poll: got account id 'google_devA'
+web login: Scene_Login.Auth("google_devA") - full handshake
+```
+
+If those hook lines are missing, the hooks never installed - see the hook gotcha in
+[v171-private-build.md](v171-private-build.md) before debugging the login itself.
 
 ### What works cross-device on the repacked build today
 

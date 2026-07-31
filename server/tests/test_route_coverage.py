@@ -14,6 +14,10 @@ import route_coverage
 
 ROOT = Path(__file__).resolve().parent.parent
 
+# Same bar api_audit flags a mapping as a guess at. Below this, map_routes.py paired
+# the route with a method by name alone and is as often wrong as right.
+WEAK_SCORE = 0.7
+
 
 def check_no_bare_routes():
     r = route_coverage.report()
@@ -36,14 +40,35 @@ def check_extra_models_exist():
 
 
 def check_extra_does_not_shadow():
-    """route_models_extra is for routes map_routes.py MISSED. An entry that also exists
-    in the generated file silently overrides a scored mapping - if that is intended it
-    belongs in the ROUTE_MODELS.update() block in server.py with a reason next to it."""
+    """route_models_extra is for routes map_routes.py missed, and for the ones it
+    GUESSED badly.
+
+    A confidently-scored mapping must not be silently overridden here - if that is
+    intended it belongs in the ROUTE_MODELS.update() block in server.py with a reason.
+    But map_routes.py pairs a route with a method by name similarity and records how
+    sure it was, and below ~0.7 it is usually wrong: /pvp/info scored 0.58 into
+    PlayerDataResponseModel when FetchPvPInfo returns PvPInfoResponseModel, so every
+    field the panel read was the wrong one. Pinning those is the documented fix
+    (api_audit's weak-mapping finding demands it), and the pin has to live here
+    because this file is what server.py merges last.
+
+    So: overriding a low-scored guess is the point; overriding a confident one is the
+    bug. The `_method` key is the receipt that the route was checked against
+    generated/restapi.json by hand.
+    """
     gen = json.loads((ROOT / "generated" / "route_models.json").read_text())
     extra = json.loads((ROOT / "data" / "route_models_extra.json").read_text())
-    dup = [p for p in extra if not p.startswith("_") and p in gen]
-    assert not dup, f"route_models_extra.json shadows generated mappings: {dup}"
-    print("ok: no entry shadows a generated mapping")
+    bad = []
+    for p, v in extra.items():
+        if p.startswith("_") or p not in gen:
+            continue
+        if (gen[p].get("score") or 0) >= WEAK_SCORE:
+            bad.append(f"{p} (generated score {gen[p]['score']})")
+        elif not v.get("_method"):
+            bad.append(f"{p} (overrides a guess with no _method receipt)")
+    assert not bad, ("route_models_extra.json shadows confident generated mappings: "
+                     + str(bad))
+    print("ok: no entry shadows a confident generated mapping")
 
 
 def check_handlers_are_reachable():

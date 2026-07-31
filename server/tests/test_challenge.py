@@ -17,6 +17,8 @@ import playerdb
 playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
 
 import challenge
+from tests.seed import one_account
+one_account()          # multiplayer needs a session; load_state() has no fallback
 import server
 
 
@@ -109,7 +111,9 @@ def check_daily_tier_matches_difficulty():
     st = _fresh(best=best)
     got = server.r_challenge_daily({}, st)["rewardResponse"]["rewardList"]
     assert len(got) == len(want), f"difficulty {best} paid {len(got)}, tier has {len(want)}"
-    for w in want:
+    # The response carries the client's reward vocabulary (Item -> InventoryItem etc.),
+    # the tier table carries the server's - compare through the same translation.
+    for w in server._wire_rewards(want):
         assert any(g["type"] == w["type"] and g["count"] == w["count"] for g in got), \
             f"missing {w} from the difficulty {best} tier"
     print(f"ok daily tier: difficulty {best} paid its own tier ({len(got)} rewards)")

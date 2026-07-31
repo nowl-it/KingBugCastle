@@ -9,7 +9,13 @@ signatures are complete -> enough to reconstruct exact JSON wire shapes.
 """
 import json, re, sys, pathlib
 
-DUMP = sys.argv[1] if len(sys.argv) > 1 else "/home/nowl/Code/kgc/il2cpp/v169.1.05/dump.cs"
+REPO = pathlib.Path(__file__).resolve().parents[2]
+# Default to the newest dump on disk rather than a pinned absolute path - the old
+# default still named v169.1.05 long after the build moved to v171.
+_DUMPS = sorted(REPO.glob("il2cpp/v*/dump.cs"))
+DUMP = sys.argv[1] if len(sys.argv) > 1 else (str(_DUMPS[-1]) if _DUMPS else "")
+if not DUMP:
+    sys.exit("no il2cpp/v*/dump.cs found - pass one as argv[1]")
 OUT = pathlib.Path(__file__).parent.parent / "generated"
 
 src = pathlib.Path(DUMP).read_text(errors="replace")

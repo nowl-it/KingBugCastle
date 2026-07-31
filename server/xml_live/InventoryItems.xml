@@ -412,6 +412,7 @@
 		<NameComment>대장장이의 증표</NameComment>
 		<Name>InventoryItemName_800</Name>
 		<AdminToolOnlyName>대장장이의 증표</AdminToolOnlyName>
+		<Sprite>MiniItem_800</Sprite>
 		<Desc>InventoryItemDesc_800</Desc>
 		<Shortcuts>1,28,35</Shortcuts>
 		<ItemTooltipType>Consumable</ItemTooltipType>

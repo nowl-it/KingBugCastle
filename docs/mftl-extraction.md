@@ -252,13 +252,56 @@ So the AES-256-CBC → LZMA stage of this recipe appears to be **gone**, replace
 by a mostly-cleartext memory image. If a future build ever needs unpacking,
 start by carving that segment - do not assume the five-layer chain still applies.
 
-### Why the mod was not rebuilt for it
+### Building the private client on v171.0.01 (done, boots)
 
-Nothing to gain. The private server does not validate XIGNCODE, so the hardened
-anti-cheat is irrelevant to it, and the content is byte-for-byte the same game.
-`server/build_v171_private.py` stays pinned to the archived
-`apk/com.awesomepiece.castle@171.0.00.xapk`. `apk/com.awesomepiece.castle@171.0.01.xapk`
-is archived for reference only.
+*Superseded by the v171.1.00 section below - kept because the metadata analysis is
+what explains why a mismatched lib/metadata pair fails silently.*
+
+At the time, `server/build_v171_private.py` took the **v171.0.01** APKs. Two things
+had to change; both were silent failures, not crashes, which is why "it just doesn't
+run". (Both `apk/xapk_extracted_v17100/` and `apk/xapk_extracted_v1711/` are on disk
+now - `./kgc-cli download -v <version> --arch arm64 -o apk/` re-fetches any of them.)
+
+**1. The metadata is NOT drop-in compatible - this is the whole story.**
+The "+16 B / 4 strings" delta above is real but badly understates it. The new
+literal `/auth/xcdSeed?version=` was **inserted at stringLiteral index 1545 of
+25730**, immediately after `/auth/xcdSeed` - an insert, not an append. Every
+literal above it shifts index by one, i.e. **94% of all string literals move**.
+`libil2cpp.so` has those indices compiled into its code, so the recovered
+v171.0.00 lib resolves nearly every string to the wrong entry when it runs
+against v171.0.01's `global-metadata.dat`: wrong URLs, wrong resource paths,
+wrong localization keys. Nothing survives that.
+
+Every other metadata section is byte-identical (`attributeData` differs at the
+same size; the rest matches exactly once you account for the +16 B shift), so
+the fix is to ship the matching metadata: `patchers/patch_metadata_swap.py`
+splices `il2cpp/v171.0.00/global-metadata.dat` into `base_assets.apk` (STORED
+entry, zero-padded to the stored size, CRC fixed in local header + central
+directory) **before** `patch_hosts.py` / `patch_metadata_http.py` run.
+
+**2. The NEO loader patch offsets do not shift by a constant.**
+`libaledatic.so` maps `file == VMA`; `librolineng.so` maps `VMA == file - 0x4000`,
+and the loader function itself grew, so its head and tail moved by *different*
+deltas. Deriving the v171.0.01 offsets by adding a constant to the v171.0.00
+ones produced 4 correct sites out of 12, silently skipped 4, and **applied 2 NOPs
+to unrelated `b` instructions in a parser**. The old loop skipped mismatches
+without complaining, which is how that went unnoticed.
+
+Correct sites, matched 1:1 against v171.0.00 by call sequence:
+
+| purpose | v171.0.00 `libaledatic.so` | v171.0.01 `librolineng.so` |
+|---|---|---|
+| integrity bail-outs (`bl` ; `tbnz w0,#31,<fail>`, last is `cbz x0`) | `3d2b8 3d2c0 3d2c8 3d2f8 3d484 3d4c8 3d4e4 3d4f4` | `437b0 437b8 437c0 437f0 43c28 43c6c 43c88 43c98` |
+| payload-parser error returns (`mov w8,#-1` ; `str w8,[sp,#0x94]` ; `b`) | `e5728 e57d0 e57e8 e5870` | `12bd0c 12bdb4 12bdcc 12be54` |
+
+The second group is now found by **pattern**, not offset: the 8-byte prefix
+`08008012 e89700b9` occurs exactly 4x in both libs, at the same relative spacing
+(+0, +0xa8, +0xc0, +0x148). The first group stays a table but now **raises** on a
+byte mismatch. The loader is located by `SONAME = libappsign4a.so`, never by
+filename.
+
+Result: boots to the Terms-of-Service screen and on into the login flow, serving
+`/player/get-login-scene-illust-data?version=171001` and the full CDN patch set.
 
 `scripts/check_cdn_update.sh` now also watches the store version - the CDN folder
 and the client release move independently, and this one was invisible to the
@@ -278,3 +321,107 @@ old folder-and-etag check.
 7. **Layer 2 master key** is an RSA-1024 PUBLIC key at `.rodata 0x2feca2`; its
    public op recovers the AES-256 key, which equals the target ELF's own header
 8. The whole chain is offline + deterministic - no device, root, or RAM dump needed
+
+
+---
+
+## v171.1.00: TARA **v4** - SOLVED
+
+Unpacked 2026-07-30 from the arm64 `libxenerene.so` (`SONAME = libappsign4a.so`).
+Fully automated: `python3 server/patchers/unpack_neo.py <packer.so> <out.so>`
+(`--self-check` runs it against `apk/xapk_extracted_v1711/` and asserts the result).
+
+**Correcting the v171.0.01 note above:** "the payload stopped being compressed" was
+measured on the payload *tail*. The head is still encrypted and there is still a TARA
+container - it moved into the payload and went to version 4.
+
+### Layout
+
+| | value |
+|---|---|
+| payload segment | file `0x344000`, 111,072,093 B (last R-only `PT_LOAD`, runs to EOF) |
+| TARA header | payload `+0x262`, magic `TARA`, **version 4** |
+| encrypted head | payload `0x30e`-`0x15d294`, entropy 8.00 |
+| cleartext tail | payload `0x15d294` onward (610-byte alignment gap after the ciphertext) |
+| result | 113,836,232 B ELF, `SONAME = libil2cpp.so`, 241 `il2cpp_*` exports |
+
+The payload is a **memory image**, not a copy of the on-disk ELF, so probes from the
+v171.0.00 lib appear nowhere in it. Entropy in the tail is ~3.2 for the first ~35 MB
+(pointer tables) and only reads as ARM64 code further in - an instruction-frequency
+check scores 0.05% at tail+0, 72% at tail+40 MB, 77% at tail+80 MB.
+
+### TARA v4 header
+
+```
++0x00  magic "TARA"
++0x04  version = 4          (v3 = 3)
++0x08  0x19ae9a5e
++0x0c  rsa_len = 0x80
++0x10  comp   = 0x15cf86    compressed size
++0x14  usize  = 0x400000    decompressed size - the HEAD only, not the whole lib
++0x18  00 00 00 00 00       (v3 had LZMA props `5d 00 40 00 00` here)
++0x20  RSA block, rsa_len bytes
++0xa0  12-byte ChaCha20 nonce   (= tara + 0x20 + rsa_len)
++0xac  ciphertext, comp bytes
+```
+
+### The chain
+
+1. **RSA-1024 public op** on `tara[0x20 : 0x20+rsa_len]` -> PKCS#1 v1.5 message whose
+   last 32 bytes are the ChaCha20 key. As in v3 the key IS the target ELF's own first
+   32 header bytes - the packer stashes the header it overwrote, so a key that looks
+   like an ELF header is the success signal, not a bug.
+2. **ChaCha20** (v3 used AES-256-CBC), nonce at `+0xa0`, ciphertext immediately after
+   at `+0xac`. The decoder's call signature looks AEAD-shaped (`w4 = 0xc` for the nonce
+   length) but there is **no tag between nonce and ciphertext** - assuming one shifts
+   the stream by 16 bytes and LZ4 then fails.
+3. **LZ4 block** decompress to `usize` (v3 used LZMA `FORMAT_ALONE`) -> the first 4 MB
+   of the ELF.
+4. Concatenate the cleartext tail. Its start is **not recorded anywhere** - find it by
+   requiring that the section header table implied by the head actually parses.
+
+### Finding the RSA key without hardcoding an offset
+
+The 0x100-byte `N || E` blob moves every build (v3's writeup pinned `.rodata 0x2feca2`;
+here it is `0x2428bc`). Walk `adrp`+`add` pairs in `.text` for targets inside `.rodata`
+whose last 4 bytes are a big-endian 65537 after 125 zero bytes.
+
+**Shape alone is not enough**: this build ships three blobs that all pass that test
+(`0x24225e`, `0x242600`, `0x2428bc`) and only the last is the container key. Try each
+and keep the one whose public op yields PKCS#1 padding AND an ELF-header key -
+`unpack_neo.recover_key` does exactly that.
+
+### How the decoder was located
+
+Raw-scan `.text` for the `TARA` magic materialised as an immediate (`movz w9,#0x4154`
++ `movk w9,#0x4152,lsl#16`) - 3 hits, one per version decoder. The one whose version
+compare is `cmp w10,#4` is v4 (`0x8c2ac`). From there the vtable slot `+0x38` at
+`0x32d2f0` leads back through the factory at `0x8bdc8` to the orchestrator at
+`0x97c30`, which is where the RSA blob is copied to the stack as `{ptr, 0x100}`.
+
+The cipher is identified by its own constant: `0x1e2ff4` loads `expand 32-byte k`.
+
+| | v3 (v171.0.00) | v4 (v171.1.00) |
+|---|---|---|
+| container | separate MFTL wrapper | TARA directly in the payload |
+| stream cipher | AES-256-CBC, IV = 0 | ChaCha20, 12-byte nonce |
+| compression | LZMA | LZ4 block |
+| coverage | whole 113 MB image | first 4 MB; rest in cleartext |
+| props field | LZMA props at `+0x18` | zeroed |
+
+### What this changes for the build
+
+`build_v171_private.py` now injects `il2cpp/v171.1.00/libil2cpp_v17110_ssl.so` when
+building from `xapk_extracted_v1711` - the lib unpacked from that build's own packer.
+It pairs with the metadata the APK already ships, so **`patch_metadata_swap.py` no
+longer runs**. Set `KGC_FORCE_V17100=1` to fall back to the v171.0.00 lib + swap.
+
+Every il2cpp offset is per-lib and was re-derived from `il2cpp/v171.1.00/dump.cs` by
+exact class + signature match. All 10 NRE-stub prologues came back byte-identical to
+the v171.0.00 set, which is the cross-check that the re-derivation landed on the same
+methods; the SSL trio is in `make_v171_ssl_so.py` under version `171.1.00`.
+
+`ShopItem.Init`'s patch site does NOT match by bytes across the two builds (the
+immediates changed). It was matched by instruction shape instead - `adrp; ldr x8,[x8,#imm];
+mov x22,x0; mov x0,x20; mov w1,wzr; ldr x2,[x8]; bl; cbz x0` - and the replacement's
+`cbz` displacement recomputed against the new bail-out target.

@@ -82,6 +82,21 @@ specific one that isn't auto-included, append an entry shaped like `make_treasur
 If the treasure is version-gated, the client also needs it un-gated in master data —
 see [content-unlock.md](content-unlock.md). (Granting `30040` "Shadowless/Vô Ảnh" = both planes.)
 
+## Player name / castle name
+
+In game: the nickname popup → `RestAPI.ChangeNickname` → `POST /player/rename`.
+Request is `ChangeNicknameRequestModel{userName, castleName, kingPostfix, castlePostfix}` and the
+response model is `ChangeNicknameResponseModel{playerCash}` — **not** `{name}`. `r_player_rename` in
+`server.py` writes all four fields and saves; renames are free here because the client only charges
+cash when `hasFreeRename` is false, and the server keeps it true.
+
+The trap this hides: the old handler was a lambda reading `body["name"]`, a field the request model
+does not have, so every rename silently stored the default and nothing persisted. If a rename, a
+profile edit, or any small "it accepted my input but nothing changed" bug appears, check the request
+model's real field names in `dump.cs` before anything else.
+
+Editing the save directly works too — `name` / `castleName` in the player row.
+
 ## Mail rewards (safe way to grant almost anything)
 
 `POST /post/receive` → `_grant_reward()` mutates state on claim. Supported reward types:
@@ -92,7 +107,14 @@ see [content-unlock.md](content-unlock.md). (Granting `30040` "Shadowless/Vô �
 | Item | `st.inventory` (id from `InventoryItems.xml`, incl. reward boxes) |
 | Unit / Card | `st.cards` |
 | UnitSoul | `st.cards[id].soul` |
-| Artifact / Treasure / Accessory | **display-only** — gift as an Item reward box instead (direct grant can crash `ArtifactOptionUI`) |
+| Treasure | granted into `st.treasures` (skipped if already owned - a default save owns all 60) |
+| Artifact / Accessory | **display-only** - gift as an Item reward box instead (direct grant can crash `ArtifactOptionUI`) |
+
+The table above is the **server's** vocabulary. On the wire the client needs its own
+(`Item` → `InventoryItem`, `Unit` → `Card`, `UnitSoul` → `CardSoul`); `_wire_rewards()` in
+`server.py` translates inside `_reward_list_data()`. Send an unknown type and the reward renders
+with the wrong icon and a garbage count instead of failing - see the reward-type note in
+[../AGENTS.md](../AGENTS.md).
 
 Send via the dashboard Admin tab or by appending to a player's `posts` array (server serves it with a
 `@raw:` prefix so literal title/text render, bypassing the Localizer). Mechanism: [inbox notes in AGENTS.md].

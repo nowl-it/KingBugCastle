@@ -15,6 +15,8 @@ import playerdb
 playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
 
 import territory
+from tests.seed import one_account
+one_account()          # multiplayer needs a session; load_state() has no fallback
 import server
 
 

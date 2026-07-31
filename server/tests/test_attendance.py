@@ -8,6 +8,7 @@ Neither system has a claim route, so the read is what grants. That makes the fai
 mode expensive rather than cosmetic: this route is called on every lobby refresh, and
 without a per-day cap a fourteen-day board pays out in fourteen taps.
 """
+import contextlib
 import datetime, sys, tempfile
 from pathlib import Path
 
@@ -17,6 +18,8 @@ import playerdb
 playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
 
 import attendance
+from tests.seed import one_account
+one_account()          # multiplayer needs a session; load_state() has no fallback
 import server
 
 
@@ -91,9 +94,27 @@ def check_daily_stops_at_the_end_of_the_board():
 
 
 def check_surprise_event_is_the_live_one():
-    out = server.r_surprise_attendance({}, _fresh())
+    # The window is a date range in master data, so "is one running today" depends on
+    # the calendar, not on the code: the day the last event expires this check starts
+    # failing on a server that is completely correct. Drive the lookup instead - ask
+    # for a day inside a known window and assert THAT event comes back.
+    events = attendance.surprise_events(server.XML_DIR)
+    assert events, "no surprise event in master data - the lookup has nothing to read"
+    want = max(events, key=lambda e: e["start"])
+    mid = (want["start"] + want["end"]) // 2
+    picked = attendance.current_surprise(today=mid, xml_dir=server.XML_DIR)
+    assert picked and picked["id"] == want["id"], \
+        f"day {mid} is inside event {want['id']}'s window but got {picked}"
+    assert attendance.current_surprise(today=want["end"] + 1,
+                                       xml_dir=server.XML_DIR) != picked, \
+        "an expired event is still served the day after it ends"
+
     live = attendance.current_surprise(xml_dir=server.XML_DIR)
-    assert live, "no surprise event is live - this check needs one in the window"
+    if live is None:
+        print(f"ok live: no event today; window lookup picks {want['id']} correctly")
+        return
+
+    out = server.r_surprise_attendance({}, _fresh())
     assert out["eventId"] == live["id"], f"served event {out['eventId']}, live is {live['id']}"
     assert out["currentAttendanceDay"] == 1, "opening the panel did not check in"
     assert out["eventUntilAt"] > datetime.datetime.now(
@@ -103,6 +124,14 @@ def check_surprise_event_is_the_live_one():
 
 
 def check_surprise_reward_pays_each_day_once():
+    # Needs an event running, and whether one is is a date range in master data - so
+    # between events this would assert nothing. Pin one, the same way the continuous
+    # check does, and the claim logic is tested every day of the year.
+    with _pinned_event():
+        _reward_once_body()
+
+
+def _reward_once_body():
     st = _fresh()
     server.r_surprise_attendance({}, st)
     first = server.r_surprise_attendance_reward({}, server.load_state())
@@ -114,16 +143,32 @@ def check_surprise_reward_pays_each_day_once():
     print(f"ok claim: {len(first['rewardListResponseData']['rewardList'])} reward(s) once")
 
 
-def check_surprise_continuous_bonus_needs_the_whole_streak():
-    # The event live today has no ContinuousReward, so running this against it would
-    # assert nothing about the bonus. Drive it with one that does.
-    live = next(e for e in attendance.surprise_events(server.XML_DIR) if e["continuous"])
+@contextlib.contextmanager
+def _pinned_event(want_continuous=False):
+    """Run the block with one surprise event pinned live.
+
+    Whether an event is running today is a date window in master data, so a check
+    that needs one only works while the devs happen to have one open - it broke the
+    day the 2026-07-16 event expired, on a server that was entirely correct. Pinning
+    tests the code instead of the calendar.
+    """
+    events = attendance.surprise_events(server.XML_DIR)
+    live = next((e for e in events if e["continuous"]), None) if want_continuous \
+        else max(events, key=lambda e: e["start"])
+    assert live, "no surprise event in master data to pin"
     real = attendance.current_surprise
     attendance.current_surprise = lambda today=None, xml_dir=None: live
     try:
-        _continuous_body(live)
+        yield live
     finally:
         attendance.current_surprise = real
+
+
+def check_surprise_continuous_bonus_needs_the_whole_streak():
+    # The event live today has no ContinuousReward, so running this against it would
+    # assert nothing about the bonus. Drive it with one that does.
+    with _pinned_event(want_continuous=True) as live:
+        _continuous_body(live)
 
 
 def _continuous_body(live):
@@ -165,6 +210,11 @@ def _continuous_body(live):
 def check_a_new_event_resets_the_board():
     """Boards do not resume across events - the state names its event id for exactly
     this reason."""
+    with _pinned_event():
+        _reset_body()
+
+
+def _reset_body():
     st = _fresh()
     server.r_surprise_attendance({}, st)
     s = server.load_state()

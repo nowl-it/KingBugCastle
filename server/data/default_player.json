@@ -1,24 +1,24 @@
 {
   "player": {
-    "accountId": 1, "uid": "dev-0001", "name": "KingBug", "castleName": "BugCastle",
-    "accountType": 1, "level": 99, "exp": 0,
-    "gold": 999999999, "cash": 999999, "paidCash": 0, "heart": 999,
-    "bestClearedStage": 999, "bestClearedTheme": 99,
-    "bestClearedHardStage": 1, "bestClearedHardTheme": 1,
+    "accountId": 1, "uid": "guest-0001", "name": "NewPlayer", "castleName": "MyCastle",
+    "accountType": 1, "level": 1, "exp": 0,
+    "gold": 0, "cash": 0, "paidCash": 0, "heart": 50,
+    "bestClearedStage": 0, "bestClearedTheme": 1,
+    "bestClearedHardStage": 0, "bestClearedHardTheme": 0,
     "currentDeckPreset": 0, "playedCount": 0, "winCount": 0,
     "hasFreeRename": true
   },
   "cardTemplate": {
-    "level": 30, "exp": 0, "potentialTier": 1,
+    "level": 1, "exp": 0, "potentialTier": 1,
     "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
-    "randomSkinApply": false, "soul": 999
+    "randomSkinApply": false, "soul": 0
   },
-  "invCount": 9999,
+  "invCount": 0,
   "decks": [
-    {"deck": [10150, 10260, 10300, 10360, 10200, 10780], "potential": [0, 0, 0, 0, 0, 0], "firstComerIndex": 0},
-    {"deck": [], "potential": [], "firstComerIndex": 0},
-    {"deck": [], "potential": [], "firstComerIndex": 0},
-    {"deck": [], "potential": [], "firstComerIndex": 0},
-    {"deck": [], "potential": [], "firstComerIndex": 0}
+    {"deck": [10000, 10010, 10020, 10030, 10040, 10050], "potential": [0, 0, 0, 0, 0, 0], "firstComerIndex": 0},
+    {"deck": [10000, 10010, 10020, 10030, 10040, 10050], "potential": [0, 0, 0, 0, 0, 0], "firstComerIndex": 0},
+    {"deck": [10000, 10010, 10020, 10030, 10040, 10050], "potential": [0, 0, 0, 0, 0, 0], "firstComerIndex": 0},
+    {"deck": [10000, 10010, 10020, 10030, 10040, 10050], "potential": [0, 0, 0, 0, 0, 0], "firstComerIndex": 0},
+    {"deck": [10000, 10010, 10020, 10030, 10040, 10050], "potential": [0, 0, 0, 0, 0, 0], "firstComerIndex": 0}
   ]
 }

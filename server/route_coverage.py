@@ -53,14 +53,41 @@ def client_paths(script_json=SCRIPT_JSON):
     return sorted(out)
 
 
-def handled_paths(server_py=ROOT / "server.py"):
-    """Paths with a real handler, by source: dynamic, static, or a direct route."""
-    src = Path(server_py).read_text()
-    block = src[src.index("DYNAMIC_OVERRIDES = {"):src.index("# Pure-literal routes")]
-    dyn = set(re.findall(r'^\s+"(/[^"]+)":', block, flags=re.M))
+def handled_paths():
+    """Paths with a real handler, by source: dynamic, static, or a direct route.
+
+    Imports the server and reads its tables. This used to regex-scrape server.py,
+    which silently under-reported the moment a handler group moved into its own
+    module - `**clan.handlers()` is one line of source and 33 routes.
+    """
+    import sys, pathlib, tempfile
+    if "server" not in sys.modules:
+        import playerdb
+        # Point the store at a throwaway file BEFORE importing server: it resolves
+        # the DB at import time and would otherwise touch the live save. Only when
+        # server is not loaded yet - a caller that already imported it (the test
+        # suite) has its own temp DB set up, and moving DB_PATH out from under it
+        # leaves every later query hitting an empty file.
+        playerdb.DB_PATH = pathlib.Path(tempfile.mkdtemp()) / "coverage.db"
+    import server
+
     static = set(json.loads((ROOT / "data" / "static_overrides.json").read_text()))
-    direct = set(re.findall(r'@app\.(?:get|post)\("(/[^"{]+)"\)', src))
-    return {"dynamic": dyn, "static": static, "direct": direct}
+    # server.OVERRIDES, not DYNAMIC_OVERRIDES: OVERRIDES is what respond() dispatches
+    # on. Reading the source dict reported ~30 decoration and mini-game routes as
+    # handled while they answered an empty model, because they were merged into
+    # DYNAMIC_OVERRIDES after OVERRIDES had already been built from it.
+    dyn = set(server.OVERRIDES) - static
+    # FastAPI's own docs endpoints are not routes we wrote; listing them as extra
+    # handlers is noise in every report. `_NOT_ROUTES` drops the same generated junk
+    # it drops on the client side: route_models.json picked up "/lib/terminfo" and
+    # "/resources/" from the string table, and the ROUTE_MODELS loop dutifully
+    # registered both. Harmless, but they are not handlers anyone wrote.
+    builtin = {"/docs", "/docs/oauth2-redirect", "/redoc", "/openapi.json"}
+    direct = {r.path for r in server.app.routes
+              if getattr(r, "path", "").startswith("/")
+              and "{" not in getattr(r, "path", "")
+              and not _NOT_ROUTES.search(r.path)} - builtin
+    return {"dynamic": dyn, "static": static, "direct": direct - dyn - static}
 
 
 def modelled_paths():
@@ -94,7 +121,11 @@ def report(script_json=SCRIPT_JSON):
         "modelled_only": sorted((paths & modelled) - covered),
         "bare": sorted(paths - covered - modelled),
         "by_source": {k: len(v & paths) for k, v in by_src.items()},
-        "extra_handlers": sorted(covered - paths - {p for p in covered if p.startswith("/admin")}),
+        # Our own infrastructure is not something the client calls; only game
+        # routes belong in this list, or every report reads as full of dead code.
+        "extra_handlers": sorted(covered - paths - {
+            p for p in covered
+            if p.startswith(("/admin", "/glogin", "/patch")) or p in ("/", "//RogueLikeRoom")}),
     }
 
 

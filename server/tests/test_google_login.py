@@ -41,9 +41,13 @@ def _fake_id_token(sub):
 
 
 def check_unconfigured_is_a_clear_503():
+    """503 plus the env vars to set. Asserted on the variable NAMES, not the prose -
+    the wording is user-facing copy and should be free to change."""
     google_login.CLIENT_ID = google_login.CLIENT_SECRET = google_login.PUBLIC_URL = ""
     r = client.get("/glogin")
-    assert r.status_code == 503 and "not configured" in r.text
+    assert r.status_code == 503, r.status_code
+    for name in ("GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "GLOGIN_PUBLIC_URL"):
+        assert name in r.text, f"the 503 does not say to set {name}"
     print("ok off: unconfigured /glogin explains itself with 503")
 
 
@@ -77,9 +81,13 @@ def check_callback_parks_the_account_id_for_the_poller():
 
 def check_a_forged_state_is_refused():
     _configure()
+    google_login._PENDING["id"] = ""
     google_login._exchange_code = lambda *a, **k: {"id_token": _fake_id_token("x")}
     r = client.get("/glogin/callback?code=xyz&state=forged.nonce.deadbeef")
-    assert r.status_code == 400 and "expired or invalid" in r.text
+    assert r.status_code == 400, r.status_code
+    # The part that matters is not the wording but that nothing was parked: a forged
+    # state must be refused BEFORE the exchange, so the poller has nothing to pick up.
+    assert google_login._PENDING["id"] == "", "a forged state still parked an account id"
     print("ok csrf: a forged state is rejected before any token exchange")
 
 

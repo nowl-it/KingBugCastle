@@ -1,6 +1,6 @@
 # Vì sao King God Castle v171 không mở được trên giả lập
 
-*Ghi chú cho người chơi - cập nhật 2026-07-17*
+*Ghi chú cho người chơi - cập nhật 2026-07-31*
 
 ## Hiện tượng
 
@@ -12,7 +12,7 @@ Từ bản **v171.0.00**, game mở lên là văng ngay, không vào được c�
 
 Từ v171, Awesomepiece đổi lớp bảo vệ chống gian lận sang **XIGNCODE NEO** (của hãng Wellbia). Cơ chế mới:
 
-- File code chính của game (`libil2cpp.so`) không còn nằm sẵn trong APK nữa. Nó bị mã hóa, giấu bên trong một thư viện khác (`libaledatic.so`).
+- File code chính của game (`libil2cpp.so`) không còn nằm sẵn trong APK nữa. Nó bị mã hóa, giấu bên trong một thư viện khác (tên file đổi mỗi bản build: `libaledatic.so` ở 171.0.00, `librolineng.so` ở 171.0.01, `libxenerene.so` ở 171.1.00).
 - Lúc khởi động, NEO dùng một kỹ thuật tên **bytehook** để chặn lời gọi nạp thư viện, giải mã code game vào bộ nhớ rồi mới chạy.
 
 Vấn đề: **bytehook không hoạt động được trên giả lập.**

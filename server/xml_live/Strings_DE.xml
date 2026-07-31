@@ -5766,8 +5766,8 @@ Nach dem Verlassen könnt Ihr in dieser Saison nicht am Raid als Allianzmitglied
   <String Key="ClanBattleModifier_13">Leidend</String>
   <String Key="ClanBattleModifier_14">Überwältigend</String>
   <String Key="UserLockedClanBattleAlert">Dieser Nutzer kann in der jetzigen Saison nicht am Raid teilnehmen.</String>
-  <String Key="UpdateNoticeVersion">170000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/39d1c2e0-6f0e-804a-acc0-f507558ede41</String>
+  <String Key="UpdateNoticeVersion">171100</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Möchtet Ihr wirklich die Allianz auflösen?</String>
   <String Key="Clan_Menu_LeaveConfirm">Möchtet Ihr wirklich die Allianz verlassen?</String>
   <String Key="RogueLike_ReleaseAtLevel">Wird ab Lv. {0} freigeschaltet</String>
@@ -6851,14 +6851,14 @@ das den Schaden des nächsten Skills auf einen Gegner um 130% amplifiziert</Stri
   <String Key="ShopItemName_1160">Drachentöter Überfall-Paket</String>
   <String Key="UnitName_10570">Farael</String>
   <String Key="UnitSubName_10570">Arkanmagier</String>
-  <String Key="Potential_10570_0">Verschießt einen zusätzlichen Arkanzauber, wenn ein Gegner durch &lt;Arkane Geschosse&gt; besiegt wurde (Max. 2x)</String>
-  <String Key="Potential_10570_1">+50 % verursachter Gesamtschaden für verbleibende Arkanzauber, wenn ein Gegner durch &lt;Arkane Geschosse&gt; besiegt wurde (nicht stapelbar)</String>
+  <String Key="Potential_10570_0">Lädt beim Besiegen eines Gegners mit &lt;Arkane Geschosse&gt; 0~90% der Max. MP auf. Je weniger arkane Geschosse bis zum Besiegen des Gegners abgefeuert wurden, desto höher die Aufladung</String>
+  <String Key="Potential_10570_1">Während &lt;Arkane Geschosse&gt; steigt der Schaden nach und nach um je 15% (unbegrenzt stapelbar)</String>
   <String Key="SkinDesc_Default_10570">Farael war keineswegs fähig, sich den Umgang mit Mana anzueignen, obwohl er höchst motiviert war, was unter den Elfen des Öfteren Schwierigkeiten mit sich brachte. Er schloss sich daraufhin Mel an, auf die er bei einem ihrer Besuche im Reich der Elfen traf. Er wollte seine Fähigkeiten unter Beweis stellen, weshalb er sich entschloss, mit ihr den zusammen den Ewigwald zu verlassen.</String>
   <String Key="SkillName_10570">Arkane Geschosse</String>
   <String Key="SkillDesc_10570">Wirkt {AttackCount} Arkanzauber, die auf allen Feldern in einer von vier zufälligen Richtungen {105700@Damage:MAtkPer} Schaden verursachen. Wenn das Ziel stirbt, werden die verbleibenden Arkanzauber auf den nächsten Gegner angewendet.</String>
   <String Key="MissionDesc_10357">Beschwört Farael in der Schlacht</String>
   <String Key="Name_Potential_10570_2">Überschwellendes Mana</String>
-  <String Key="Potential_10570_2">Erzeugt bei jedem Arkanzauber von &lt;Arkane Geschosse&gt; einen Schild in Höhe von 30 % der Zaubermacht</String>
+  <String Key="Potential_10570_2">Stellt bei jedem arkanen Geschoss von &lt;Arkane Geschosse&gt; 20% der Max. TP wieder her, plus 20% der Max. TP zusätzlich für jeden Schuss in Folge (max. 100% Heilung)</String>
   <String Key="SkinName_1057000">Magierlehrling Farael</String>
   <String Key="SkinDesc_1057000">Farael wurde mit einer anderen Dimension an Mana geboren, weshalb er, entgegen den Erwartungen, ein Erzmagier zu werden, nicht von klein auf den angemessenen Umgang mit seinem überschwellenden Mana gelernt hatte. Wenn es nicht jemanden gegeben hätte, der seine Motivation aufrechterhalten und sich um ihn gekümmert hätte, hätte er die Magie vielleicht schon früh aufgegeben.</String>
   <String Key="ReportType_Teaming">Teambildung: Die Teambildung mit Hilfsmitteln außerhalb des Spiels</String>
@@ -6987,8 +6987,7 @@ Helden, die SP verwenden, können durch eine besondere Methode zusätzliche SP e
   <String Key="BuildingEffect_TotalHpPer">+{Value} % Gesamt-TP</String>
   <String Key="BuildingEffect_TotalMAtkPer">+{Value} % Gesamt-Zaubermacht</String>
   <String Key="Name_Potential_10570_3">Magiestreuung</String>
-  <String Key="Potential_10570_3">Erweitert den Schadensbereich von Arkanzaubern auf 3 Felder
--30 % Gesamt-Zaubermacht</String>
+  <String Key="Potential_10570_3">Die Schadensreichweite von &lt;Arkane Geschosse&gt; erhöht sich auf 3 Felder und zerstört den Schild des Ziels, bevor Schaden verursacht wird</String>
   <String Key="RestartColosseum">Möchtet Ihr der laufenden Schlacht im Schlachtfeld des erbitterten Kampfs erneut beitreten?</String>
   <String Key="ColosseumReenterWaitForBattleEnds">Bitte wartet, bis die laufende Schlacht beendet ist...</String>
   <String Key="Shop_Tab_Special">Spezialangebote</String>
@@ -9381,8 +9380,8 @@ Alle Werte der Puppen basieren auf den Werten von Rie zum Zeitpunkt der Beschwö
   <String Key="SkillDesc_10550_Short">Der Steingeist verursacht bei einem Normal-ANG Zauber-Schaden in Höhe von {Unit@OverwriteAtkByParent} entsprechend {Unit@OverwriteAtkByParent:MAtkPer:BaseValue} % von Elisabeths Zaubermacht. Ein Steingeist verfügt über {Unit@OverwriteHpByParent:HpPer:BaseValue} % von Elisabeths TP und {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue} % ihrer Zaubermacht/ANG-GESCHW/BEW-GESCHW.</String>
   <String Key="SkillAltDesc_10550_Short">Der Steingeist verursacht bei einem Normal-ANG Zauber-Schaden in Höhe von {Unit@OverwriteAtkByParent} entsprechend {Unit@OverwriteAtkByParent:MAtkPer:BaseValue} % von Elisabeths Zaubermacht. Ein Steingeist verfügt über {Unit@OverwriteHpByParent:HpPer:BaseValue} % von Elisabeths TP und {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue} % ihrer Zaubermacht/ANG-GESCHW/BEW-GESCHW.</String>
   <String Key="SkillDesc_10560_Short">Überträgt dem verbundenen Ziel für {Time} Sek. {ConnectedMAtkBuffPer} % der eigenen Zaubermacht. Der Skill-Schaden wird um {BaseSkillDamageMul} % amplifiziert. (Mehrfache Bindung an denselben Held ist nicht möglich)</String>
-  <String Key="SkillDesc_10570_Short">Wirkt {AttackCount}-mal einen Arkanzauber, die auf allen Feldern in einer von vier zufälligen Richtungen {105700@Damage:MAtkPer} Schaden verursachen.</String>
-  <String Key="SkillDesc_105720_Short">Wirkt {AttackCount}-mal einen Arkanzauber, die auf {1057011@SplashRangeY} Feldern in einer von vier zufälligen Richtungen {105700@Damage:MAtkPer} Schaden verursachen.</String>
+  <String Key="SkillDesc_10570_Short">Feuert fortlaufend arkane Geschosse ab, die allen Feldern in 1 von 4 zufälligen Richtungen {105700@Damage:MAtkPer} Schaden zufügen.</String>
+  <String Key="SkillDesc_105720_Short">Feuert fortlaufend arkane Geschosse ab, die in 1 von 4 zufälligen Richtungen Schilde zerstören und auf einer Breite von {1057011@SplashRangeY} Feldern {105700@Damage:MAtkPer} Schaden zufügen.</String>
   <String Key="SkillDesc_105721_Short">Wirkt {AttackCount}-mal einen Arkanzauber, die auf {1057011@SplashRangeX} Feldern in einer von vier zufälligen Richtungen {105700@Damage:MAtkPer} Schaden verursachen.</String>
   <String Key="SkillDesc_10580_Short">Wenn sie Schaden erleidet, besteht eine {Unit@MissRatio} % Chance, dass sie den Schaden vollständig verhindert und sie erhält {Unit@AddTechniqueAtMiss} SP. Wenn die SP ihr max. Limit erreichen, stürmt sie auf das Ziel zu und verursacht {10585@AttackCount}-mal Schaden in Höhe von {Damage:MAtkPer} und {10585@TickDamage:AtkPer}.</String>
   <String Key="SkillDesc_10600_Short">Beschwört {SummonUnitCountForDesc} Halluzinationen, die für {10605@Time} Sek. bestehen bleiben. Die Halluzinationen können nicht als Ziel gewählt werden und verursachen Schaden in Höhe von (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer}) % von Saras' ANG.</String>
@@ -9450,8 +9449,8 @@ Alle Werte der Puppen basieren auf den Werten von Rie zum Zeitpunkt der Beschwö
   <String Key="SkillDesc_10530_Long">Für {Time} Sek. steigt Einschüchtern um {BaseDefPen}, und Normal-ANGs fügen allen Gegnern innerhalb von {10535@SplashRangeSum} Feldern in der Umgebung Schaden in Höhe von {10535@Damage:AtkPer:BaseValue}% der ANG zu. Dem Hauptziel wird zusätzlich über {105300@Time} Sek. {105300@DescTickCount} Mal Zauber-Normal-Schaden in Höhe von {105300@TickDamage} zugefügt.</String>
   <String Key="SkillDesc_10540_Long">Ruft alle von ihr beschworenen Steingeister zurück und verursacht in {10550@SplashRangeX}{X}{10550@SplashRangeY} Feldern Reichweite um die Steingeister an allen Gegnern {10550@Damage:BaseValue}+{10550@Damage:MAtkPer} Schaden und betäubt sie für {10550@StunTime} Sek. Beschwört daraufhin erneut {SummonCountForDesc} Steingeister. (Es können max. {Unit@GlobalMaxSummonCount} Steingeister existieren)</String>
   <String Key="SkillDesc_10560_Long">Vor Beginn des Kampfes wird eine Verbindung mit dem nächsten Verbündeten hergestellt. Mit einem Zauber, der in der Familie von Generation zu Generation weitergegeben wurde, wird für {Time} Sek. {ConnectedMAtkBuffPer} % der Zaubermacht an das verbundene Ziel übertragen. Der übertragene Wert wird umgerechnet, indem Se-Ryeongs Werte auf die Basiswerte des Zielhelden angewendet werden, wodurch die Werte des Zielhelden erhöht werden. Der Skill-Schaden des verbundenen Ziels wird um {BaseSkillDamageMul} % amplifiziert. (Mehrere Se-Ryeongs können nicht denselben Helden binden.)</String>
-  <String Key="SkillDesc_10570_Long">Feuert einen unvorhersehbaren Arkanzauber ab. Wirkt {AttackCount}-mal einen Arkanzauber, der in Richtung des Ziels auf allen Feldern in einer von vier zufälligen Richtungen {105700@Damage:MAtkPer} Schaden verursacht. Wenn das Ziel stirbt, werden die verbleibenden Arkanzauber auf den nächsten Gegner angewendet.</String>
-  <String Key="SkillDesc_105720_Long">Feuert einen unvorhersehbaren Arkanzauber ab. Wirkt {AttackCount}-mal einen Arkanzauber, der in Richtung des Ziels in einer von vier zufälligen Richtungen an allen Gegner in {1057011@SplashRangeY} Feldern Reichweite {105700@Damage:MAtkPer} Schaden verursacht. Wenn das Ziel stirbt, werden die verbleibenden Arkanzauber auf den nächsten Gegner angewendet.</String>
+  <String Key="SkillDesc_10570_Long">Feuert unberechenbare arkane Geschosse ab. Zielt auf das Ziel mit den höchsten TP und verursacht alle {AttackDelay} Sek. auf allen Feldern in 1 von 4 zufälligen Richtungen {105700@Damage:MAtkPer} Schaden. Hört erst auf, wenn der Anwender bewegungsunfähig wird oder das Ziel besiegt ist.</String>
+  <String Key="SkillDesc_105720_Long">Feuert unberechenbare arkane Geschosse ab. Zielt auf das Ziel mit den höchsten TP und zerstört alle {AttackDelay} Sek. in 1 von 4 zufälligen Richtungen die Schilde aller Gegner auf einer Breite von {1057011@SplashRangeY} Feldern und verursacht {105700@Damage:MAtkPer} Schaden. Hört erst auf, wenn der Anwender bewegungsunfähig wird oder das Ziel besiegt ist.</String>
   <String Key="SkillDesc_105721_Long">Feuert einen unvorhersehbaren Arkanzauber ab. Wirkt {AttackCount}-mal einen Arkanzauber, der in Richtung des Ziels in einer von vier zufälligen Richtungen an allen Gegner in {1057011@SplashRangeX} Feldern Reichweite {105700@Damage:MAtkPer} Schaden verursacht. Wenn das Ziel stirbt, werden die verbleibenden Arkanzauber auf den nächsten Gegner angewendet.</String>
   <String Key="SkillDesc_10580_Long">Wenn Garam Schaden erleidet, hat sie eine {Unit@MissRatio} % Chance, auszuweichen, was den Schaden und Massenkontroll-Effekte komplett verhindert und sie erhält {Unit@AddTechniqueAtMiss} SP. Wenn die SP ihr max. Limit erreichen, stürmt Garam auf das Ziel zu, verursacht {Damage:MAtkPer} Zauber-Schaden und greift {10585@AttackCount}-mal mit einem Normal-ANG an, der Schaden in Höhe von {10585@TickDamage:AtkPer:BaseValue} % des ANG verursacht.</String>
   <String Key="SkillDesc_10600_Long">Saras ruft die Macht der Leere, um {SummonUnitCountForDesc} Halluzinationen zu beschwören, die für {10605@Time} Sek. bestehen bleiben. Die Halluzinationen können nicht als Ziel gewählt werden und verursachen Schaden in Höhe von (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer}) % von Saras' ANG.</String>
@@ -13083,9 +13082,9 @@ Möchtest du fortfahren?</String>
   <String Key="ItemName_40632">Adjutant</String>
   <String Key="ItemDesc_40632">Wenn auf der [Rollenposition] platziert: Erzeugt eine [Adjutantenposition] mit {0} % Effekt an zufälliger Stelle. Adjutanten-Runen können nicht doppelt ausgerüstet werden.</String>
   <String Key="ItemName_40643">Herrscher</String>
-  <String Key="ItemDesc_40643">Erhält zusätzliche +{0} % Effekt der [Rollenposition]
-Wenn Herrscher überlebt: Helden, die außerhalb der [Rollenposition] kämpfen, werden {1} Sek. nach dem Tod wiederbelebt.
-Wenn Herrscher stirbt: sofortige Kampfniederlage</String>
+  <String Key="ItemDesc_40643">Effekt von [Rollen-Slot] +{0}% zusätzlich erhalten
+Solange der Herrscher lebt, werden alle Helden außer ihm {1} Sek. nach dem Tod wiederbelebt
+Beim Tod des Herrschers sofortige Niederlage</String>
   <String Key="BuildingEffect_BaseHybridDef">+{Value} Widerstand</String>
   <String Key="BuildingEffect_BattleStartMana">+{Value} % MP zu Beginn der Runde</String>
   <String Key="BuildingEffect_BattleStartMana_Long">Erhöht die Grund-MP-Regeneration.</String>
@@ -17941,4 +17940,60 @@ Nach Schlachtbeginn: Erhält jede Sekunde +{11}% Massenkontroll-Widerstand und +
   <String Key="Overcome_10800_3">Bei jeder Raserei max. Gesamt-TP in Vampirgestalt +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_4">Jedes Mal, wenn der Umgebungsschaden der Vampirgestalt Schaden verursacht, verursachter Schaden in Vampirgestalt +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="UnitName_10810">Alessia</String>
+  <String Key="LeagueName_12">Liga der Wärme</String>
+  <String Key="SkinDesc_1044005">&lt;i&gt;Belohnung für die Teilnahme an der Liga der Wärme in der Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400500">&lt;i&gt;Belohnung für erreichte Punkte in der Liga der Wärme in der Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400501">&lt;i&gt;Belohnung für die Platzierung in der Rangliste der Liga der Wärme in der Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_1071004">&lt;i&gt;Belohnung für die Teilnahme an der Liga der Wärme im Gefecht&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100400">&lt;i&gt;Belohnung für erreichte Punkte in der Liga der Wärme im Gefecht&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100401">&lt;i&gt;Belohnung für die Platzierung in der Rangliste der Liga der Wärme im Gefecht&lt;/i&gt;</String>
+  <String Key="SkinName_1057002">Morgensternkönig Farael</String>
+  <String Key="SkinDesc_1057002">&lt;i&gt;Das edelste Sternenlicht, geboren im frühen Morgengrauen, wird zum hellsten Licht, das die Dunkelheit durchdringt.&lt;/i&gt;</String>
+  <String Key="SuperShieldModulator">Absolute VERT erhalten</String>
+  <String Key="BuildingEffect_BaseDamageReflect">Reflektiert {Value} % Schaden
+(Skill-Schaden halbiert)</String>
+  <String Key="BuildingEffect_BaseDamageReflect_Long">Reflektiert einen Teil des erlittenen Schadens des Helden auf dem Gegner.</String>
+  <String Key="TreasureName_30042">Perataus</String>
+  <String Key="TreasureSubName_30042">Pechschwarzer Schild</String>
+  <String Key="TreasureDesc_30042">Behemus' Schild ist nicht nur zum Verteidigen da. Sein Heftiger Sturmangriff mit dem schweren Schild verbeult selbst die stärkste Panzerung im Nu.</String>
+  <String Key="TreasureSkillName_30042">Sturz</String>
+  <String Key="BuffDataName_3300421">Zerschmettern I</String>
+  <String Key="BuffDataName_3300422">Verbeulen I</String>
+  <String Key="BuffDataName_3300423">Neutralisierung</String>
+  <String Key="BuffDataName_3300424">Verbeulen II</String>
+  <String Key="BuffDataName_3300425">Zerschmettern II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Perataus Pickup Spezial Shop</String>
+  <String Key="SpecialPackage_1680">Perataus-Paket 1</String>
+  <String Key="SpecialPackage_1681">Perataus-Paket 2</String>
+  <String Key="SpecialPackage_1682">Perataus-Paket 3</String>
+  <String Key="BuffDataDesc_3300421">Für je {0} Einschüchtern: Schadensübertragung +{1}-fach</String>
+  <String Key="BuffDataDesc_3300422">Erlittener physischer Schaden von Gegnern mit Instabil +{0}%</String>
+  <String Key="BuffDataDesc_3300423">Jedes Mal, wenn Instabil entfernt wird, erhalten alle Verbündeten +{0} Absolute VERT pro entferntem Gegner</String>
+  <String Key="BuffDataDesc_3300424">Erlittener physischer Schaden von Gegnern mit Instabil +{0}%</String>
+  <String Key="BuffDataDesc_3300425">Für je {0} Einschüchtern: Schadensübertragung +{1}-fach</String>
+  <String Key="TreasureSkillDesc_3300420">Wenn du einem Gegner Skill-Schaden zufügst, erhält das Ziel Instabil
+Wenn ein Verbündeter einem Gegner mit Instabil physischen Schaden in Höhe von mindestens {0}% der maximalen TP des Ziels zufügt, werden {1}% des Schadens als Spezialschaden auf einen anderen Gegner mit Instabil übertragen, danach wird Instabil von allen entfernt
+&lt;color=#808080&gt;&lt;i&gt;Der Effekt wird geteilt, auch wenn verschiedene Helden Instabil verleihen.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">Wenn du einem Gegner Skill-Schaden zufügst, erhält das Ziel Instabil
+Wenn ein Verbündeter einem Gegner mit Instabil physischen Schaden in Höhe von mindestens {0}% der maximalen TP des Ziels zufügt, werden {1}% des Schadens als Spezialschaden auf einen anderen Gegner mit Instabil übertragen, danach wird Instabil von allen entfernt
+Für je {2} Einschüchtern: Schadensübertragung +{3}-fach
+&lt;color=#808080&gt;&lt;i&gt;Der Effekt wird geteilt, auch wenn verschiedene Helden Instabil verleihen.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">Wenn du einem Gegner Skill-Schaden zufügst, erhält das Ziel Instabil
+Wenn ein Verbündeter einem Gegner mit Instabil physischen Schaden in Höhe von mindestens {0}% der maximalen TP des Ziels zufügt, werden {1}% des Schadens als Spezialschaden auf einen anderen Gegner mit Instabil übertragen, danach wird Instabil von allen entfernt
+Für je {2} Einschüchtern: Schadensübertragung +{3}-fach
+Erlittener physischer Schaden von Gegnern mit Instabil +{4}%
+Die Erhöhung des erlittenen physischen Schadens stapelt sich nicht. Es gilt der höchste Wert
+&lt;color=#808080&gt;&lt;i&gt;Der Effekt wird geteilt, auch wenn verschiedene Helden Instabil verleihen.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">Wenn du einem Gegner Skill-Schaden zufügst, erhält das Ziel Instabil
+Wenn ein Verbündeter einem Gegner mit Instabil physischen Schaden in Höhe von mindestens {0}% der maximalen TP des Ziels zufügt, werden {1}% des Schadens als Spezialschaden auf einen anderen Gegner mit Instabil übertragen, danach wird Instabil von allen entfernt
+Für je {2} Einschüchtern: Schadensübertragung +{3}-fach
+Erlittener physischer Schaden von Gegnern mit Instabil +{4}%
+Die Erhöhung des erlittenen physischen Schadens stapelt sich nicht. Es gilt der höchste Wert
+Jedes Mal, wenn Instabil entfernt wird, erhalten alle Verbündeten +{5} Absolute VERT pro entferntem Gegner
+&lt;color=#808080&gt;&lt;i&gt;Der Effekt wird geteilt, auch wenn verschiedene Helden Instabil verleihen.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="SpecialShop_TreasureDoublePickUp10014">Schmuckstück Pickup Spezial Shop</String>
+  <String Key="SpecialPackage_1676">Schmuckstück Pickup Beschwörungsstein-Paket 1</String>
+  <String Key="SpecialPackage_1677">Schmuckstück Pickup Beschwörungsstein-Paket 2</String>
+  <String Key="SpecialPackage_1678">Caelus-Paket</String>
+  <String Key="SpecialPackage_1679">Trickster-Paket</String>
 </Strings>

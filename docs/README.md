@@ -8,6 +8,7 @@ It complements the other docs — read those for the *why* and the *internals*:
 
 | Doc | Scope |
 |-----|-------|
+| **[../HANDOVER.md](../HANDOVER.md)** | Taking over the project: day-1 checklist, the recurring job, the trap ledger, known debt |
 | **[../README.md](../README.md)** | Project landing, feature list, repo layout |
 | **[../SETUP.md](../SETUP.md)** | First-run: clone → `setup.py` → run your own server |
 | **[../SHARE.md](../SHARE.md)** | Distribute a baked XAPK to remote players |
@@ -20,9 +21,11 @@ It complements the other docs — read those for the *why* and the *internals*:
 | Playbook | Use it to |
 |----------|-----------|
 | **[deploy-and-run.md](deploy-and-run.md)** | Start the two servers, connect a device, push a change to the client |
+| **[public-hosting.md](public-hosting.md)** | Run it where strangers can reach it: preflight, admin accounts, abuse limits, backups |
 | **[v171-private-build.md](v171-private-build.md)** | Build/run the **v171** client (XIGNCODE NEO unpack, injected il2cpp, HTTP-not-TLS) |
-| **[mftl-extraction.md](mftl-extraction.md)** | Recover `libil2cpp.so` from the v171 XIGNCODE NEO container |
+| **[mftl-extraction.md](mftl-extraction.md)** | Recover `libil2cpp.so` from the XIGNCODE NEO container (`server/patchers/unpack_neo.py`) |
 | **[v171-emulator-note.md](v171-emulator-note.md)** | Player-facing note (VI): why stock v171 won't run on an emulator |
+| **[multi-account-login.md](multi-account-login.md)** | Multiple accounts/devices, the web-Google login bridge (`GLOGIN_DEV=1`), transfer codes |
 | **[save-editing.md](save-editing.md)** | Grant currency / items / units / skins / treasures by editing player state or sending mail |
 | **[content-unlock.md](content-unlock.md)** | Unlock version-gated content (`MinVersion`) — treasures, skins, units, stages |
 | **[stages-and-spawns.md](stages-and-spawns.md)** | How stage enemies are defined; build a training-dummy test stage |
@@ -33,9 +36,11 @@ It complements the other docs — read those for the *why* and the *internals*:
 
 There are **two separate data planes**, and knowing which one a change lands in saves hours:
 
-1. **Server state / API responses** — `server/state/*.json` + `server.py` handlers. Controls what the
-   game *account* owns and what the REST API returns (currency, cards, treasures, mail). Edits here are
-   **live per-request** (`load_state()` re-reads the file each call) — no restart, no client re-download.
+1. **Server state / API responses** — `server/state/players.db` (SQLite, one row per player,
+   always through `server/playerdb.py`) + the handlers in `server.py` and the route modules.
+   Controls what the game *account* owns and what the REST API returns (currency, cards,
+   treasures, mail). Edits here are **live per-request** (`load_state()` re-reads the row each
+   call) — no restart, no client re-download.
 
 2. **Client master data** — the CDN **xml AssetBundle** (`server/real_cdn/xml`), built from
    `server/xml_live/*.xml`. Controls what the *game client itself* reads: stage spawns, skin/unit/

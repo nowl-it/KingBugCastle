@@ -10,6 +10,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+import config
 import server
 
 
@@ -23,13 +24,13 @@ def check_parses_versions():
         "171.0": 171000,
     }
     for v, want in cases.items():
-        got = server._content_gate(v)
+        got = config.content_gate(v)
         assert got == want, f"_content_gate({v!r}) = {got}, want {want}"
     print(f"ok: {len(cases)} version strings parse to their build code")
 
 
 def check_tracks_server_version():
-    assert server.CONTENT_GATE == server._content_gate(server.SERVER_VERSION), \
+    assert server.CONTENT_GATE == config.content_gate(server.SERVER_VERSION), \
         "CONTENT_GATE drifted from serverVersion"
     assert not [n for n in dir(server) if n == "CONTENT_GATE"] == [], "CONTENT_GATE missing"
     print(f"ok: serverVersion {server.SERVER_VERSION} -> gate {server.CONTENT_GATE}")
@@ -41,7 +42,7 @@ def check_env_override():
     old = os.environ.get("KGC_CONTENT_GATE")
     os.environ["KGC_CONTENT_GATE"] = "170100"
     try:
-        assert server._content_gate("171.0.00") == 170100, "KGC_CONTENT_GATE ignored"
+        assert config.content_gate("171.0.00") == 170100, "KGC_CONTENT_GATE ignored"
     finally:
         os.environ.pop("KGC_CONTENT_GATE", None)
         if old is not None:
@@ -50,19 +51,40 @@ def check_env_override():
 
 
 def check_gate_actually_filters():
-    """A gate that filters nothing would pass the checks above and still be broken."""
+    """A gate that filters nothing would pass the checks above and still be broken.
+
+    This used to require Treasures.xml to hold something ABOVE the gate, on the
+    assumption that the devs always ship some content early. They do not: once the
+    deployed client caught up to 171.1.00 every gated treasure was released, and the
+    check failed on a server that was completely correct. Drive the filter instead -
+    lower the gate under the highest gated entry and watch that entry disappear. That
+    tests the code, not what the devs happen to have staged this week.
+    """
     import re
     txt = (server.XML_DIR / "Treasures.xml").read_text(encoding="utf-8")
     gated = [int(m) for m in re.findall(r"<MinVersion>(\d+)</MinVersion>", txt)]
-    future = [v for v in gated if v > server.CONTENT_GATE]
-    past = [v for v in gated if v <= server.CONTENT_GATE]
-    assert past, "no treasure is below the gate - the gate is too low to be real"
-    assert future, ("no master-data entry is above the gate, so nothing proves the "
-                    "filter runs; if the devs really shipped everything, relax this")
-    ids = server.ALL_TREASURE_IDS if hasattr(server, "ALL_TREASURE_IDS") else None
-    print(f"ok: gate {server.CONTENT_GATE} splits Treasures.xml into "
-          f"{len(past)} released / {len(future)} unreleased"
-          + (f", {len(ids)} listed" if ids else ""))
+    assert gated, "no treasure carries a MinVersion - the filter has nothing to read"
+    saved = server.CONTENT_GATE
+    listed = server._all_treasure_ids()
+    assert listed, "no treasure is below the gate - the gate is too low to be real"
+
+    # The bar has to drop under something the CURRENT gate lets through, not under
+    # the highest MinVersion in the file: entries staged above the deployed gate are
+    # already filtered out, so lowering to just under one of those changes nothing
+    # and the check passes on a server whose filter never ran.
+    below = [v for v in gated if v <= saved]
+    assert below, f"no treasure is at or under gate {saved} - nothing to filter out"
+    try:
+        server.CONTENT_GATE = max(below) - 1
+        fewer = server._all_treasure_ids()
+    finally:
+        server.CONTENT_GATE = saved
+    assert len(fewer) < len(listed), (
+        f"gate {max(below) - 1} listed the same {len(listed)} treasures as gate "
+        f"{saved} - MinVersion is not being applied")
+    assert server._all_treasure_ids() == listed, "restoring the gate changed the list"
+    print(f"ok: gate {saved} lists {len(listed)} treasures; at {max(below) - 1} it "
+          f"drops {len(listed) - len(fewer)}")
 
 
 def check_no_literal_gates_left():

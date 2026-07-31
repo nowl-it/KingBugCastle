@@ -23,7 +23,14 @@ The account id handed to the app is `google_<sub>`. `sub` is stable per (user,
 OAuth client), so the same Google account restores the same save on any device -
 which is the whole reason to log in with Google rather than as a Guest.
 
-Config (env):
+Config. Easiest way: drop the JSON Google gives you at
+
+    server/secrets/google_oauth.json     (gitignored; `GOOGLE_OAUTH_FILE` overrides)
+
+exactly as downloaded - it carries the id, the secret AND the redirect URI you
+registered, so nothing has to be retyped and the redirect can't drift out of sync
+with the Console. Environment variables override the file when both are present:
+
     GOOGLE_CLIENT_ID       web OAuth client id      (required to enable)
     GOOGLE_CLIENT_SECRET   web OAuth client secret  (required to enable)
     GLOGIN_PUBLIC_URL      public base the browser reaches, e.g.
@@ -37,11 +44,58 @@ Setup in Google Cloud (once, by whoever owns the server):
     Authorised redirect URI:  <GLOGIN_PUBLIC_URL>/glogin/callback
     Scopes needed: openid  (email/profile optional, only for a nicer name)
 """
-import base64, hashlib, hmac, json, os, secrets, time, urllib.parse, urllib.request
+import base64, hashlib, hmac, json, os, pathlib, secrets, time, urllib.parse, urllib.request
 
-CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
-CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "")
-PUBLIC_URL = os.environ.get("GLOGIN_PUBLIC_URL", "").rstrip("/")
+# --- config, from the downloaded client JSON and/or the environment --------------
+SECRETS_DIR = pathlib.Path(__file__).resolve().parent / "secrets"
+OAUTH_FILE = pathlib.Path(os.environ.get("GOOGLE_OAUTH_FILE")
+                          or SECRETS_DIR / "google_oauth.json")
+
+
+def load_client_file(path=None):
+    """(client_id, client_secret, public_url) out of Google's downloaded JSON.
+
+    The file is `{"web": {...}}` for a web client and `{"installed": {...}}` for the
+    desktop kind. Only "web" works here - an installed/Android client is exactly the
+    one that needs a Play Console signing cert - so read that key and no other, and
+    say so rather than half-working.
+
+    public_url comes from `redirect_uris[0]` minus the /glogin/callback suffix. That
+    is deliberate: the redirect_uri we send Google must byte-match one it has on
+    file, and deriving it from the same file removes the only way to get that wrong.
+    """
+    path = pathlib.Path(path or OAUTH_FILE)
+    if not path.exists():
+        return "", "", ""
+    try:
+        blob = json.loads(path.read_text())
+    except (OSError, ValueError) as e:                       # noqa: BLE001
+        print(f"[glogin] {path.name} is not readable JSON: {e}", flush=True)
+        return "", "", ""
+    if "web" not in blob:
+        kind = ", ".join(blob) or "nothing"
+        print(f"[glogin] {path.name} has no 'web' client (found: {kind}). Create an "
+              f"OAuth client of type 'Web application' - the Android/desktop kinds "
+              f"cannot authenticate a repacked build.", flush=True)
+        return "", "", ""
+    web = blob["web"]
+    uris = web.get("redirect_uris") or []
+    base = ""
+    for uri in uris:
+        if uri.endswith("/glogin/callback"):
+            base = uri[: -len("/glogin/callback")]
+            break
+    if uris and not base:
+        print(f"[glogin] none of the redirect_uris in {path.name} end in "
+              f"/glogin/callback: {uris}", flush=True)
+    return web.get("client_id", ""), web.get("client_secret", ""), base.rstrip("/")
+
+
+_f_id, _f_secret, _f_url = load_client_file()
+
+CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID") or _f_id
+CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET") or _f_secret
+PUBLIC_URL = (os.environ.get("GLOGIN_PUBLIC_URL") or _f_url).rstrip("/")
 SCHEME = os.environ.get("GLOGIN_SCHEME", "kingbugcastle")
 # Dev mode: exercise the whole client loop (button -> web -> deep link -> login)
 # WITHOUT a real Google OAuth client. /glogin serves a page with a couple of test
@@ -131,23 +185,52 @@ def authorize_url():
     return f"{AUTH_URL}?{q}"
 
 
-def deep_link_token(token):
-    """The return deep link. Carries a ready session token (not a raw id): the client
-    sets it as RestAPI.accessToken and loads straight into the account's save."""
-    return f"{SCHEME}://auth?token={urllib.parse.quote(token)}"
-
-
-_RETURN_PAGE = """<!doctype html><meta charset=utf-8>
+# One page shell for every screen this module serves. These are the only pages a
+# player ever sees from the server, usually on a phone, often over a slow tunnel -
+# so: one self-contained file, no external CSS, no font or script fetch. The palette
+# matches the dashboard so the two do not look like different products.
+_PAGE = """<!doctype html>
+<html lang=en><head>
+<meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>King Bug Castle</title>
-<style>body{{font-family:system-ui;text-align:center;padding:2rem;background:#111;color:#eee}}
-a.btn{{display:inline-block;margin-top:1.5rem;padding:.9rem 1.6rem;background:#4a7;color:#fff;
-border-radius:.6rem;text-decoration:none;font-weight:600}}</style>
-<h2>Signed in with Google</h2>
-<p>Returning to the game...</p>
-<a class=btn href="{link}">Open King Bug Castle</a>
-<script>location.href={link_js};</script>
+<meta name=color-scheme content=dark>
+<meta name=theme-color content="#0b0f17">
+<meta name=robots content="noindex, nofollow">
+<title>{title}</title>
+<style>
+*{{box-sizing:border-box}}
+body{{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+padding:24px;background:#0b0f17;color:#e6ecf7;
+font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}}
+.card{{width:100%;max-width:26rem;background:linear-gradient(180deg,#151d2e,#111725);
+border:1px solid #1e2739;border-radius:14px;padding:28px 24px;text-align:center;
+box-shadow:0 8px 30px rgba(0,0,0,.35)}}
+.mark{{width:44px;height:44px;margin:0 auto 16px;border-radius:12px;
+background:linear-gradient(135deg,#4f8cff,#9333ea);display:flex;align-items:center;
+justify-content:center;font-weight:700;font-size:15px;color:#fff}}
+h1{{margin:0 0 8px;font-size:17px;font-weight:650}}
+p{{margin:0 0 4px;color:#a3b0c9;font-size:13.5px}}
+p.small{{color:#6d7c99;font-size:12px;margin-top:14px}}
+code{{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:#7aa8ff;
+background:rgba(79,140,255,.1);padding:1px 5px;border-radius:4px}}
+.btn{{display:block;margin:10px 0 0;padding:.85rem 1rem;border-radius:9px;
+text-decoration:none;font-weight:600;font-size:14px;color:#fff;background:#1a2333}}
+.btn.go{{background:linear-gradient(135deg,#4f8cff,#3b6fd4)}}
+.btn.alt{{background:#1a2333;border:1px solid #26314a;color:#e6ecf7}}
+.stack{{margin-top:18px}}
+.bad h1{{color:#f87171}}
+</style></head>
+<body><div class="{cls}">
+<div class=mark>KBC</div>
+{body}
+</div>{tail}</body></html>
 """
+
+
+def _page(title, body, tail="", bad=False):
+    """Render one of the pages above. `tail` is for the one script we ever emit."""
+    return _PAGE.format(title=title, body=body, tail=tail,
+                        cls="card bad" if bad else "card")
 
 
 # Application.absoluteURL is stripped from the client (the game never uses it), so
@@ -167,27 +250,39 @@ def return_page(account_id):
     into the app to foreground it (the id travels via the poll, not the link)."""
     _PENDING["id"] = account_id
     link = f"{SCHEME}://auth"
-    return _RETURN_PAGE.format(link=link, link_js=json.dumps(link))
-
-
-_DEV_PAGE = """<!doctype html><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>KBC dev login</title>
-<style>body{{font-family:system-ui;text-align:center;padding:2rem;background:#111;color:#eee}}
-a.btn{{display:block;margin:1rem auto;max-width:20rem;padding:.9rem;background:#357;color:#fff;
-border-radius:.6rem;text-decoration:none;font-weight:600}}</style>
-<h2>Dev login (no Google)</h2>
-<p>Pick a test account. Real Google is off (GLOGIN_DEV=1).</p>
-{buttons}
-"""
+    return _page(
+        "Signed in - King Bug Castle",
+        "<h1>Signed in</h1>"
+        "<p>Taking you back to the game.</p>"
+        f"<div class=stack><a class='btn go' href='{link}'>Open King Bug Castle</a></div>"
+        "<p class=small>If nothing happens, switch back to the game yourself - "
+        "you are already signed in.</p>",
+        # The redirect is what normally returns the player; the button is the fallback
+        # for browsers that refuse to follow a custom scheme without a real tap.
+        tail=f"<script>location.href={json.dumps(link)};</script>")
 
 
 def dev_page():
     """A no-Google stand-in for the consent screen: buttons that fire the deep link
     for a few fixed dev accounts, so the client loop can be tested end to end."""
     ids = ["google_devA", "google_devB", "google_devC"]
-    buttons = "".join(f'<a class=btn href="/glogin/go?id={i}">Login as {i}</a>' for i in ids)
-    return _DEV_PAGE.format(buttons=buttons)
+    buttons = "".join(
+        f"<a class='btn alt' href='/glogin/go?id={i}'>Sign in as {i}</a>" for i in ids)
+    return _page(
+        "Dev login - King Bug Castle",
+        "<h1>Dev login</h1>"
+        "<p>Real Google is off (<code>GLOGIN_DEV=1</code>). Pick a test account.</p>"
+        f"<div class=stack>{buttons}</div>"
+        "<p class=small>Each id keeps its own save, exactly like a real Google account.</p>")
+
+
+def error_page(title, detail, hint=""):
+    """Every failure a player can hit, in the same shell as the success page. A bare
+    <h3> used to be the whole response, which reads as a broken server rather than a
+    login that needs retrying."""
+    hint_html = f"<p class=small>{hint}</p>" if hint else ""
+    return _page(f"{title} - King Bug Castle",
+                 f"<h1>{title}</h1><p>{detail}</p>{hint_html}", bad=True)
 
 
 def register(app):
@@ -195,42 +290,62 @@ def register(app):
     (the routes exist but explain they are off)."""
     from fastapi.responses import HTMLResponse, RedirectResponse
 
+    _NOT_CONFIGURED = (
+        "Google sign-in is turned off on this server.",
+        "The operator sets <code>GOOGLE_CLIENT_ID</code>, <code>GOOGLE_CLIENT_SECRET</code> "
+        "and <code>GLOGIN_PUBLIC_URL</code> to enable it, or <code>GLOGIN_DEV=1</code> to "
+        "test without Google. See docs/multi-account-login.md.")
+
     @app.get("/glogin")
     def glogin_start():
         if not enabled():
             if DEV:
                 return HTMLResponse(dev_page())
-            return HTMLResponse(
-                "<h3>Google login is not configured.</h3><p>Set GOOGLE_CLIENT_ID, "
-                "GOOGLE_CLIENT_SECRET and GLOGIN_PUBLIC_URL, or GLOGIN_DEV=1 to test "
-                "without Google. See docs/multi-account-login.md.</p>", status_code=503)
+            return HTMLResponse(error_page("Not available", *_NOT_CONFIGURED),
+                                status_code=503)
         return RedirectResponse(authorize_url())
 
     @app.get("/glogin/callback")
     def glogin_callback(code: str = "", state: str = "", error: str = ""):
         if error:
-            return HTMLResponse(f"<h3>Google sign-in was cancelled.</h3><p>{error}</p>",
-                                status_code=400)
+            return HTMLResponse(
+                error_page("Sign-in cancelled",
+                           "Google did not complete the sign-in.",
+                           f"Reason: <code>{error}</code>. Tap the Google button in the "
+                           "game to try again."), status_code=400)
         if not enabled():
-            return HTMLResponse("<h3>Google login is not configured.</h3>", status_code=503)
+            return HTMLResponse(error_page("Not available", *_NOT_CONFIGURED),
+                                status_code=503)
         if not check_state(state):
-            return HTMLResponse("<h3>Login expired or invalid.</h3><p>Please try "
-                                "again from the game.</p>", status_code=400)
+            return HTMLResponse(
+                error_page("Sign-in expired",
+                           "This sign-in link is no longer valid.",
+                           "It is good for 10 minutes. Tap the Google button in the game "
+                           "to start a new one."), status_code=400)
         try:
             tok = _exchange_code(code, _redirect_uri())
             sub = sub_from_id_token(tok["id_token"])
         except Exception as e:                      # noqa: BLE001 - user-facing
-            return HTMLResponse(f"<h3>Could not verify the Google sign-in.</h3>"
-                                f"<pre>{type(e).__name__}</pre>", status_code=502)
+            # The exception type only; the body can carry the client secret back.
+            return HTMLResponse(
+                error_page("Could not verify the sign-in",
+                           "Google answered, but the server could not read the reply.",
+                           f"<code>{type(e).__name__}</code> - if this keeps happening, "
+                           "the operator should check the OAuth client settings."),
+                status_code=502)
         return HTMLResponse(return_page(account_id_for_sub(sub)))
 
     @app.get("/glogin/go")
     def glogin_go(id: str = ""):
-        """Mint a token for a chosen account id and hand back the deep link. The dev
-        page's buttons point here; only accepts the dev ids unless real Google is on
-        (a raw id here would otherwise let anyone log in as any account)."""
+        """Park a chosen account id and hand back the return page. The dev page's
+        buttons point here; only accepts the dev ids unless real Google is on (a raw
+        id here would otherwise let anyone log in as any account)."""
         if not id or (not enabled() and not (DEV and id.startswith("google_dev"))):
-            return HTMLResponse("<h3>Not allowed.</h3>", status_code=403)
+            return HTMLResponse(
+                error_page("Not allowed",
+                           "That account cannot be signed into this way.",
+                           "Only the dev test accounts work while Google is off."),
+                status_code=403)
         return HTMLResponse(return_page(id))
 
     @app.get("/glogin/pending")
@@ -256,5 +371,54 @@ if __name__ == "__main__":   # self-check: state round-trip + id derivation + re
     payload = base64.urlsafe_b64encode(json.dumps({"sub": "1088x7"}).encode()).rstrip(b"=").decode()
     assert sub_from_id_token(f"h.{payload}.s") == "1088x7"
     assert account_id_for_sub("1088x7") == "google_1088x7"
-    assert deep_link_token("abc123") == "kingbugcastle://auth?token=abc123"
+
+    # Every page is one self-contained document: a player hits these over a tunnel,
+    # on a phone, and a single missing asset is a blank screen with no way back.
+    for html in (return_page("google_1"), dev_page(),
+                 error_page("Nope", "detail", "hint")):
+        assert html.startswith("<!doctype html>") and html.rstrip().endswith("</html>")
+        assert "<style>" in html and "</div>" in html
+        assert "http://" not in html and "https://" not in html, "an external asset crept in"
+        assert "{" not in html.split("<style>")[0], "an unfilled format placeholder"
+
+    # The return page must park the id for the poller AND offer the deep link, since
+    # the client cannot read the URL it was sent back with.
+    _PENDING["id"] = ""
+    error_page("Nope", "detail")
+    assert _PENDING["id"] == "", "error_page must not park an id"
+    html = return_page("google_zz")
+    assert _PENDING["id"] == "google_zz"
+    assert f"{SCHEME}://auth" in html, "the return page lost its deep link"
+    _PENDING["id"] = ""
+
+    assert "google_devA" in dev_page() and "/glogin/go?id=" in dev_page()
+
+    # --- the client-JSON loader -------------------------------------------------
+    import tempfile
+    tmp = pathlib.Path(tempfile.mkdtemp())
+
+    good = tmp / "good.json"
+    good.write_text(json.dumps({"web": {
+        "client_id": "cid.apps.googleusercontent.com", "client_secret": "shh",
+        "redirect_uris": ["http://localhost:8080/glogin/callback"]}}))
+    assert load_client_file(good) == ("cid.apps.googleusercontent.com", "shh",
+                                      "http://localhost:8080")
+
+    # An Android/desktop client is the exact thing that cannot work here, so it must
+    # read as unconfigured rather than half-load and fail at the token exchange.
+    bad = tmp / "installed.json"
+    bad.write_text(json.dumps({"installed": {"client_id": "x", "client_secret": "y"}}))
+    assert load_client_file(bad) == ("", "", "")
+
+    assert load_client_file(tmp / "nope.json") == ("", "", ""), "a missing file must be quiet"
+    (tmp / "junk.json").write_text("{not json")
+    assert load_client_file(tmp / "junk.json") == ("", "", "")
+
+    # The redirect we send Google has to byte-match one it holds; deriving it from
+    # the same file is the whole point, so a mismatched suffix must not be guessed at.
+    odd = tmp / "odd.json"
+    odd.write_text(json.dumps({"web": {"client_id": "c", "client_secret": "s",
+                                       "redirect_uris": ["https://x.example/other"]}}))
+    assert load_client_file(odd) == ("c", "s", "")
+
     print("google_login self-check ok")

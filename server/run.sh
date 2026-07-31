@@ -10,9 +10,20 @@ cd "$(dirname "$0")"
 # override for BlueStacks/LDPlayer/real phone: ADB_SERIAL=127.0.0.1:5555 ./run.sh
 ADB_SERIAL="${ADB_SERIAL:-localhost:5555}"
 
+# Prefer the repo venv (requirements.txt installs there) over whatever `uvicorn` a
+# distro Python happens to expose. Falls back to PATH so an existing setup keeps
+# working with no venv at all.
+UVICORN="uvicorn"
+for cand in "../.venv/bin/uvicorn" ".venv/bin/uvicorn"; do
+    if [ -x "$cand" ]; then UVICORN="$(cd "$(dirname "$cand")" && pwd)/$(basename "$cand")"; break; fi
+done
+
 stop() {
     pkill -f "uvicorn server:app" 2>/dev/null || true
     pkill -f "uvicorn dashboard:app" 2>/dev/null || true
+    # The battle tracker's `adb logcat` child does not die with a pkill'd parent -
+    # it is reparented to init and streams forever. They pile up across restarts.
+    pkill -f "adb -s .* logcat -s XignCodeStub" 2>/dev/null || true
 }
 
 # Wire the device to the local server: connect, route its :443/:80 to our TLS/HTTP
@@ -52,14 +63,15 @@ RELOAD=(--reload
 stop   # kill any running copy before relaunching
 sleep 1
 
-uvicorn server:app --host 0.0.0.0 --port 8080 "${RELOAD[@]}" >/tmp/kgc_server.log 2>&1 &
-uvicorn server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem --ssl-certfile cert.pem \
+"$UVICORN" server:app --host 0.0.0.0 --port 8080 "${RELOAD[@]}" >/tmp/kgc_server.log 2>&1 &
+"$UVICORN" server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem --ssl-certfile cert.pem \
         "${RELOAD[@]}" >/tmp/kgc_server_tls.log 2>&1 &
-uvicorn dashboard:app --host 0.0.0.0 --port 8081 "${RELOAD[@]}" >/tmp/kgc_dashboard.log 2>&1 &
+"$UVICORN" dashboard:app --host 0.0.0.0 --port 8081 "${RELOAD[@]}" >/tmp/kgc_dashboard.log 2>&1 &
 
 sleep 4
 grep -q "Application startup complete" /tmp/kgc_server.log     && echo "[ok] http      :8080"
 grep -q "Application startup complete" /tmp/kgc_server_tls.log && echo "[ok] https     :8443"
 grep -q "Application startup complete" /tmp/kgc_dashboard.log  && echo "[ok] dashboard :8081  ->  http://127.0.0.1:8081"
 wire_device
+echo "python:   $UVICORN"
 echo "logs: /tmp/kgc_server.log /tmp/kgc_server_tls.log /tmp/kgc_dashboard.log"

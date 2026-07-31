@@ -109,12 +109,46 @@ All patches apply to `config.arm64_v8a.apk` → `lib/arm64-v8a/libil2cpp.so`. Of
 
 **Patch pattern**: `RET_FALSE` = `e0031f2ac0035fd6` = `mov x0,#0; ret`. SSL uses `RET_TRUE` = `20008052c0035fd6` = `mov w0,#1; ret`.
 
-### ARM64 Patch Inventory — v171.0.00 private build (`server/build_v171_private.py`)
+### ARM64 Patch Inventory — v171 private build (`server/build_v171_private.py`)
 
-v171 ships **no on-disk `libil2cpp.so`** (XIGNCODE NEO packs + encrypts it inside `libaledatic.so`).
-The build injects the offline-recovered `il2cpp/v171.0.00/libil2cpp_v171_ssl.so` and NOPs the NEO
-unpack path — see [docs/mftl-extraction.md](docs/mftl-extraction.md) for the recovery recipe and
+v171 ships **no on-disk `libil2cpp.so`** (XIGNCODE NEO packs + encrypts it inside the packer `.so`).
+The build recovers one and injects it, then NOPs the NEO unpack path — see
+[docs/mftl-extraction.md](docs/mftl-extraction.md) for the unpack recipe and
 [docs/v171-private-build.md](docs/v171-private-build.md) for the operator playbook.
+
+**Default input is v171.1.00** (`KGC_APK_SRC=xapk_extracted_v1711`), and it injects that build's
+**own** game code: `il2cpp/v171.1.00/libil2cpp_v17110_ssl.so`, unpacked out of its packer by
+`patchers/unpack_neo.py`. Lib and metadata come from the same build, so **no metadata swap runs**.
+
+*Fallback* (`KGC_FORCE_V17100=1`, or any older APK source) injects `il2cpp/v171.0.00/
+libil2cpp_v171_ssl.so` and then **must** swap v171.0.00's `global-metadata.dat` into
+`base_assets.apk` (`patchers/patch_metadata_swap.py`, before `patch_hosts` /
+`patch_metadata_http`). That is mandatory, not cosmetic: v171.0.01 **inserted** the literal
+`/auth/xcdSeed?version=` at stringLiteral index 1545 of 25730, shifting 94% of all literal
+indices, and libil2cpp compiles those indices in.
+
+**Every il2cpp offset is per-lib.** The two tables live side by side in `build_v171_private.py`
+(`_NRE_STUBS_V17100` / `_NRE_STUBS_V17110`) and are picked by which lib is injected. They were
+re-derived from each version's own `dump.cs` by exact class + signature match; all 10 stub
+prologues came back byte-identical across the two, which is the cross-check that the
+re-derivation landed on the same methods. `ShopItem.Init` does NOT match by bytes (immediates
+changed) — it is matched by instruction shape, with the replacement's `cbz` displacement
+recomputed against the new bail-out target.
+
+**NEO loader offsets do not shift by a constant between builds** (`libaledatic.so` maps `file == VMA`,
+`librolineng.so` maps `VMA == file - 0x4000`, and the loader function grew):
+
+| purpose | v171.0.00 `libaledatic.so` | v171.0.01 `librolineng.so` / v171.1.00 `libxenerene.so` |
+|---|---|---|
+| integrity bail-outs (`bl` ; `tbnz w0,#31,<fail>`, last is `cbz x0`) | `3d2b8 3d2c0 3d2c8 3d2f8 3d484 3d4c8 3d4e4 3d4f4` | `437b0 437b8 437c0 437f0 43c28 43c6c 43c88 43c98` |
+| parser error returns (`mov w8,#-1` ; `str w8,[sp,#0x94]` ; `b`) | `e5728 e57d0 e57e8 e5870` | `12bd0c 12bdb4 12bdcc 12be54` |
+
+v171.0.01 and v171.1.00 share a column because the packer is the **same binary**: 4 bytes differ
+across 3.3 MB of code and all 12 patch sites sit at identical file offsets.
+
+The second group is located by **pattern** (`08008012 e89700b9`, exactly 4 hits in both libs); the
+first is a table that now **raises** on a byte mismatch instead of skipping quietly. The loader itself
+is found by `SONAME = libappsign4a.so`, never by filename — the filename rotates per build.
 
 **`libil2cpp_v171_ssl.so` must be pristine + the 3 SSL patches only.** It rotted over several sessions
 (2026-07-19): 21 stray bytes, including a `b 0x3503ba8` that had overwritten `mov w8,#-2` inside
@@ -158,50 +192,46 @@ The NRE stubs are a straight port of the v170 set (rows 5-14 of the v170 table a
 came back **byte-identical**, only the offsets moved, which is what confirms the `script.json` mapping.
 v170's `WorldPanel.IsKGMarbleAvailable` has **no v171 counterpart** and was dropped.
 
-### Scene_Lobby.Init continuation fix (ldr → mov on `GameManager_TypeInfo`)
+### The `ldr → mov` klass patches CAUSE the black lobby — keep them OFF (disproven 2026-07-28)
 
-`Scene_Lobby.Init` (RVA `0x34E53B4`) has a guard at +48 that checks a one-time init flag at
-`0x6C9A750` (byte). First call: runs the 38-call class_init block. Second call: falls through to
-the continuation at +516, which loads `x23 = GOT[0x67F6E70]` (`R_AARCH64_RELATIVE` addend
-`0x69C8518` = `GameManager_TypeInfo`). The continuation dereferences x23:
+`LDR_PATCHES` in `build_v171_private.py` (65 sites, grown from an original 18) rewrites every
+`ldr x0, [xR]` in `Scene_Lobby.Init` to `mov x0, xR`. **It is off by default and must stay off.**
+`KGC_APPLY_LDR=1` re-enables it for an A/B.
+
+The theory it was built on — "under ndk_translation the TypeInfo klass self-pointer fixup
+(`0x2001ba1f` → self-pointer) never runs, so `ldr x0,[x23]` yields a bogus address" — is **wrong**.
+`x23` holds the **GOT slot**, and the `ldr` is what loads `Il2CppClass*` out of it. Rewriting it to
+`mov` leaves x0 pointing at the slot itself, so everything downstream reads garbage:
 
 ```
-ldr x0, [x23]           // x0 = *(GameManager_TypeInfo) = klass field
-ldr w8, [x0, #0xe0]     // cctor_finished — SIGSEGV if klass is bad
+ldr x0, [x23]          // x23 = GameManager's Il2CppClass** GOT slot  <- patched to `mov x0,x23`
+ldr x8, [x0, #0xb8]    // klass->static_fields      -> reads slot+0xb8 = garbage
+ldr x0, [x8]           // static field 0 = GameManager._singleton -> null
+cbz x0, <throw NRE>    // <- the NRE that blanks the lobby
+bl  GameManager.Init
 ```
 
-Under ndk_translation the TypeInfo klass self-pointer fixup (`0x2001ba1f` → self-pointer) never
-runs. The compressed file-time value `0x2001ba1f` stays in the struct — not a valid address —
-so `[x0, #0xe0]` SIGSEGVs → `il2cpp_format_stack_trace("")` → empty-trace NRE → black lobby.
+**Proof** (and the reusable technique): `KGC_LOBBY_DIAG=1` NOPs every null-check branch in
+`Scene_Lobby.Init`, so the first null OBJECT falls through to its own dereference and SIGSEGVs with a
+locatable fault PC instead of a location-stripped managed NRE. Tombstone:
 
-**Fix**: replace each `ldr x0, [x23]` (4 bytes `e0 02 40 f9`) with `mov x0, x23`
-(`e0 03 17 aa`) at every occurrence in the continuation (18 sites, RVAs listed below). Since
-klass is supposed to be a self-pointer (`== &GameManager_TypeInfo`), skipping the indirection
-is semantically identical in a healthy runtime and corrects the null dereference when it isn't:
+```
+#00 0x03040134  GameManager$$Init      +0x98   ldrb w8,[x19,#0x1b0]   x19 == 0   <- SIGSEGV
+#01 0x034E5624  Scene_Lobby$$Init      +0x270  bl GameManager.Init
+#02 0x034E368C  Scene_Lobby$$Awake     +0x6E0
+#03 HookedLobbyAwake+372  (libxigncode.so)
+```
 
-| RVA | File offset | Role |
-|---|---|---|
-| `0x34E55B8` | `0x34E15B8` | first cctor_finished check in continuation |
-| `0x34E55E8` | `0x34E15E8` | cctor_finished check (after class_init) |
-| `0x34E55F8` | `0x34E15F8` | parent field read |
-| `0x34E5870` | `0x34E1870` | cctor_finished check |
-| `0x34E589C` | `0x34E189C` | cctor_finished check |
-| `0x34E58AC` | `0x34E18AC` | parent field read |
-| `0x34E58EC` | `0x34E18EC` | cctor_finished check |
-| `0x34E58FC` | `0x34E18FC` | parent field read |
-| `0x34E5944` | `0x34E1944` | cctor_finished check |
-| `0x34E5954` | `0x34E1954` | parent field read |
-| `0x34E59A8` | `0x34E19A8` | cctor_finished check |
-| `0x34E59B8` | `0x34E19B8` | parent field read |
-| `0x34E5AE8` | `0x34E1AE8` | cctor_finished check |
-| `0x34E5B14` | `0x34E1B14` | cctor_finished check |
-| `0x34E5B24` | `0x34E1B24` | parent field read |
-| `0x34E5B50` | `0x34E1B50` | cctor_finished check |
-| `0x34E5B7C` | `0x34E1B7C` | cctor_finished check |
-| `0x34E5B8C` | `0x34E1B8C` | parent field read |
+At that same instant the stub's own `GameManager.Get()` returned a **valid** singleton
+(`HookedLobbyAwake: GameManager.Get() = 0x7f2e14599540`) — the singleton was never the problem, only
+the patched read path was. With `_apply_ldr` off the lobby renders and `HookedLobbyAwake EXIT` logs
+cleanly.
 
-The `LDR_PATCHES` constant in `build_v171_private.py` applies these at build time, guarded by
-a 4-byte prologue check against `e00240f9`.
+Backtrace `pc` values are RVAs; resolve them against `il2cpp/v171.0.00/script.json`
+(`ScriptMethod[].Address` is decimal and is the same RVA space; file offset = `RVA - 0x4000`).
+
+The `HookedLobbyAwake` singleton guard in `jni/stub.cpp` (force `GameManager..cctor` if `Get()` is
+null) is harmless and stays — it simply never has to do anything.
 
 **Do NOT enable `KGC_ASSETBYPASS`.** That opt-in patch rewrites the `Scene_Login.CheckUseAssetBundle`
 kickoff to tail-call `LoadAfterAssetBundle(this, true)`. It was built to dodge the recursion above,
@@ -289,8 +319,7 @@ remaining slots never reaches the `"None"` lookup. `positionIcons`
 (`ArtifactOptionLine.Set`, RVA `0x1CEFA14`) use 1-based `targets.idx` values (1-6, via
 `FUN_02e91408` = `.Contains`). Sending `idx` with >1 element crashes regardless of the
 values (unresolved client JSON-parser quirk, Frida-blocked from further diagnosis — see
-above); current server caps `idx` at 1 element. Full writeup:
-`documentation/GOD_ACCOUNT_DATA_AGENT_PROMPT.md`.
+above); current server caps `idx` at 1 element.
 
 ### CDN xml bundle patching (master data + Strings text) — see docs/cdn-master-data.md
 Full workflow, the "no XML comments in Strings_*.xml" gotcha (breaks Localizer runtime
@@ -354,7 +383,26 @@ clients with no bundle rebuild.
 
 **Reward types** (`PostData.rewardType` string + `rewardId` + `rewardAmount`). `RewardResponseData`
 = `{type, id, count}` uses the same vocabulary; `ResourceInventoryItem.GetByRewardTypeAndID(type,id)`
-resolves the icon. On claim, `server.py` `_grant_reward()` mutates player state; the client re-fetches
+resolves the icon.
+
+> **`RewardResponseData.type` must be a CLIENT type string, and there is no `"Item"`.**
+> `GetByRewardTypeAndID` (v171 RVA `0x363549C`) compares against a fixed literal set -
+> `InventoryItem`, `Key`, `UnitExpItem`, `UnitSoulItem`, `CardSoul`, `Gold`, `Cash`, `Heart`,
+> `Artifact`, `Treasure_*`, `Skin`, `NameTag`, `Flag`, … (dump them by walking its `adrp`+`ldr`
+> slots through `.rela.dyn` → `script.json` `ScriptString`). The same strings are what
+> `<Reward Type="…">` uses across the master data. An unmatched type resolves to no
+> `ResourceInventoryItem`, and the reward then renders with a **wrong icon and a nonsense count** -
+> that is the "Temple of Challenge Reward Chest gives x999 of something else" bug.
+> The server's internal vocabulary (`Item`/`Unit`/`UnitSoul`, what `_grant_reward` and the
+> dashboard use) is translated at the wire boundary by `_wire_rewards()` inside
+> `_reward_list_data()` - every reward-carrying response goes through that one function, so state
+> keys never move. Test: `server/tests/test_reward_vocabulary.py`.
+>
+> **`Key` is a ShopItem id, not an inventory id.** `<Reward Type="Key" ID="370">` means ShopItem
+> 370, whose `<KeyItem>` names the inventory row (370 → **380**, 70000 → **70005**). `rewardbox.py`
+> used to collapse `Key` into `Item` and grant id 370 directly, i.e. the wrong item; it now passes
+> `Key` through and `_open_reward_box` resolves it with `missions.key_item_for()`, the same path
+> mission rewards take. On claim, `server.py` `_grant_reward()` mutates player state; the client re-fetches
 `/player`, `/player/getInventory`, `/card/all` so the grant appears (no client-side apply). Handled:
 - **Gold / Cash / Heart** -> currency (`st.gold/cash/heart`).
 - **Item** -> `st.inventory` (`itemIds`/`counts`), `rewardId` = `InventoryItems.xml` id. Covers all 173
@@ -363,13 +411,26 @@ resolves the icon. On claim, `server.py` `_grant_reward()` mutates player state;
   treasures/accessories** - send a reward box, the player opens it.
 - **Unit / Card** -> adds hero to `st.cards` (all heroes already owned on the god account, so usually a
   no-op). **UnitSoul** -> `st.cards[str(id)].soul += count` (soul shards).
-- **Artifact / Treasure / Accessory** -> render in the mail but are NOT auto-granted into state:
-  directly injecting owned artifacts/accessories can trip client panel invariants (see the
-  ArtifactOptionUI crash above). Gift them as an Item reward box instead.
+- **Treasure** -> appended to `st.treasures` as a real owned instance (`make_treasure()` shape),
+  skipped when `treasureId` is already owned - a duplicate shows as an empty slot in the treasure
+  panel. **A default save owns every released treasure**, so gifting one is normally a visible
+  no-op; check the save's list before concluding the mail system is broken.
+- **Artifact / Accessory** -> render in the mail but are NOT auto-granted into state: directly
+  injecting owned artifacts/accessories can trip client panel invariants (see the ArtifactOptionUI
+  crash above). Gift them as an Item reward box instead.
 
-The dashboard exposes the full sendable catalog via `GET /api/catalog` (Item 173 / Unit 71 / UnitSoul 71
-/ Artifact 318 / Treasure 59 / Accessory 108, names resolved from `Strings_EN_US`) with a searchable id
-picker; see the "Web dashboard" note in `server/README.md`.
+The dashboard exposes the full sendable catalog via `GET /api/catalog` (Item 173 / Unit 73 / UnitSoul 73
+/ Artifact 318 / Treasure 60 / Accessory 108, names resolved from `Strings_EN_US`) with a searchable id
+picker; see the "Web dashboard" note in `server/README.md`. `/api/catalog` also returns
+`grantable` / `displayOnly` — the dashboard groups the reward-type dropdown from those, so moving a
+type between them is a one-line change in `dashboard.py`, not a UI edit.
+
+`POST /admin/sendmail` and the dashboard's `POST /api/player/{pid}/mail` both strip a hand-typed
+`@raw:` before storing (`_process_posts` re-adds it at read time). The server.py copy used to
+rebind its own loop variable and stored the prefix, which then rendered literally in game.
+
+Regression test: `server/tests/test_rename_and_mail.py` (Treasure grant + dedupe, and the rename
+persistence below).
 
 ### il2cpp hook techniques (`server/jni/stub.cpp`)
 Two ways to hook a managed method from the stub `.so`. Picking wrong = hook installs ("success" log)
@@ -383,6 +444,22 @@ but the handler never fires:
    `obj.Method(arg)` compiles to a direct `bl` to the native function and never derefs methodPointer.
    Guard: aborts if any of the 4 stolen prologue instrs is PC-relative (ADR/ADRP/LDR-literal/B/BL/B.cond/
    CBZ/TBZ) — can't relocate them; most prologues (stp/mov/sub sp) are PIC so it works.
+
+**Before debugging a hook, confirm it was installed.** The stub logs exactly one line per hook. All
+three failures below were silent and each cost a session:
+
+- **Wrong `dlopen` handle.** The poll loop used to take `dlopen("libil2cpp.so",RTLD_NOLOAD)` and fall
+  back to the NEO packer (`librolineng.so`). The dex loader loads the packer long **before** Unity
+  loads libil2cpp, so poll 0 returned the packer and every `il2cpp_*` `dlsym` failed — no hooks, only
+  a `Failed to resolve il2cpp_*` line to notice. A handle is now accepted only if it exports
+  `il2cpp_domain_get`. **Tell-tale: `libil2cpp.so is loaded (poll took 0s)` is the bug; 1s+ is right.**
+- **`r-xp` never matches under ndk_translation.** Guest ARM64 pages are mapped `r--p` and executed by
+  the translator, so any `/proc/self/maps` scan filtering on `r-xp` finds nothing and its whole
+  fallback is dead code. Use `dl_iterate_phdr` for a load bias (`dlpi_addr`); libil2cpp's first LOAD
+  is at vaddr 0, so `dlpi_addr + <symbol VMA>` is the runtime address, with no `-0x4000` fudge.
+- **`#if 0` left behind.** A diagnostic session wrapped the Google-login redirect, the
+  `Scene_Login.Update` web-login bridge **and** the `Scene_Lobby.Awake` singleton guard in one
+  `#if 0` block and never restored it. Nothing warned; the button just did nothing.
 
 `PostListItem.Set` (the custom-mail hook) needed #2: it's rendered via a UITableView cell callback
 (direct C# call), and neither `PostListItem` nor `PostBoxPanel` defines any Unity message. First

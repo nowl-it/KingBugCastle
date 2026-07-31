@@ -29,6 +29,14 @@ The game APK is **not** in this repo (copyright + 1 GB). Use the built-in
 mkdir -p apk && ./kgc-cli download -v 170.1.00 -o apk/
 ```
 
+> **Why v170.1.00?** It is the last version that ships `libil2cpp.so` in the APK,
+> so this clone-and-run path patches it directly and needs nothing else. The newer
+> **v171** client packs the code inside XIGNCODE NEO, so the game binary has to be
+> unpacked out of the packer first (`server/patchers/unpack_neo.py`, offline and
+> automatic) before `server/build_v171_private.py` can inject it. That path works
+> and is documented in [docs/v171-private-build.md](docs/v171-private-build.md);
+> it is just a longer first run than this one.
+
 > **Why `kgc-cli`?** APKs from third-party sites (APKPure, etc.) often strip
 > `libil2cpp.so` (the IL2CPP runtime binary). `kgc-cli` downloads a complete
 > XAPK with all native libraries included. If you use a manually-downloaded XAPK

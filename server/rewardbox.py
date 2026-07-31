@@ -37,11 +37,12 @@ ACC_TYPE_IDS = {"Necklace": 1, "Bracelet": 2, "Ring": 3, "Earring": 4}
 # today, but the other two cost nothing to support.
 ACC_RARITY_IDS = {"Common": 1, "Rare": 2, "Special": 3}
 
-# How the XML's reward types map onto _grant_reward's vocabulary in server.py.
-# Everything that is really an inventory row collapses to "Item"; the accessory
-# and treasure types are handled separately because they carry a payload.
-_ITEMISH = {"InventoryItem": "Item", "Key": "Item", "UnitExpItem": "Item",
-            "UnitSoulItem": "Item"}
+# Reward types that name an inventory row directly, so `ID` is an InventoryItems.xml
+# id and the reward collapses to _grant_reward's "Item". `Key` is NOT one of them: it
+# names a ShopItem whose <KeyItem> is the inventory row (ShopItem 370 -> item 380), so
+# it stays a "Key" here and server.py resolves it through missions.key_item_for().
+# Accessory and treasure types are handled separately because they carry a payload.
+_ITEMISH = {"InventoryItem": "Item", "UnitExpItem": "Item", "UnitSoulItem": "Item"}
 
 _cache = {}
 
@@ -223,8 +224,8 @@ def open_box(box_id, select_idx=None, xml_dir=DEFAULT_XML, next_id=1, now="", rn
             out.append({"type": "Item", "id": int(r.get("ID", 0)), "count": _count(r, rng)})
         elif t in ("Gold", "Cash", "Heart"):
             out.append({"type": t, "id": 0, "count": _count(r, rng)})
-        elif t == "CardOrSoul":
-            out.append({"type": "CardOrSoul", "id": int(r.get("ID", 0)), "count": _count(r, rng)})
+        elif t in ("Key", "CardOrSoul"):
+            out.append({"type": t, "id": int(r.get("ID", 0)), "count": _count(r, rng)})
         elif t == "Treasure":
             # Display only - granting a treasure into state trips the client's
             # treasure panel invariants the same way artifacts do (see AGENTS.md).

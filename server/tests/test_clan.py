@@ -17,6 +17,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import playerdb
 playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
 
+from tests.seed import one_account
+one_account()          # multiplayer mode does not mint a save; give load_state() one
 import server
 
 

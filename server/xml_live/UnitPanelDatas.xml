@@ -1358,28 +1358,10 @@
 			<Note/>
 		</ProfileData>
 		<RecommendedStats>
-			<AtkPer/>
-			<AttackSpeed/>
-			<BaseCriticalProb/>
-			<BaseCriticalDamageMul/>
-		</RecommendedStats>
-	</UnitPanelData>
-	<UnitPanelData ID="10810">
-		<Type>Profile</Type>
-		<ProfileData>
-			<RealName/>
-			<Constellation/>
-			<Hobby/>
-			<Talent/>
-			<Likes/>
-			<Hates/>
-			<Note/>
-		</ProfileData>
-		<RecommendedStats>
-			<AtkPer/>
-			<AttackSpeed/>
-			<BaseCriticalProb/>
-			<BaseCriticalDamageMul/>
+			<HpPer/>
+			<Def/>
+			<MDef/>
+			<MAtkPer/>
 		</RecommendedStats>
 	</UnitPanelData>
 </UnitPanelDatas>

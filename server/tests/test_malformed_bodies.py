@@ -19,19 +19,34 @@ Body fields are read through `body_int` / `body_list` / `body_str` rather than
 guarded per handler, so this test is what keeps the next raw `int(body.get(...))`
 from getting in.
 """
-import sys, tempfile
+import os, sys, tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+# This fires several thousand requests from one address, which is exactly what the
+# per-IP limit exists to stop - every route past the first 600 came back 429 and the
+# check read it as a crash. Off for the sweep; test_public_hardening covers the limit
+# itself. Set before importing server: RATE_LIMIT is read once at import.
+os.environ["KGC_RATE_LIMIT"] = "0"
 
 import playerdb
 playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
 
 import route_coverage
+from tests.seed import one_account
+_SEEDED = one_account()   # multiplayer needs a session; load_state() has no fallback
 import server
 from fastapi.testclient import TestClient
 
-client = TestClient(server.app, client=("127.0.0.1", 50000))
+# The requests below must arrive as the SAME player the checks read back with
+# load_state(). Without the header the middleware resolves no identity and
+# multiplayer mode hands the request a throwaway save, so every write lands
+# somewhere the assertions never look.
+_TOKEN = "test-session-token"
+playerdb.bind_session(_TOKEN, _SEEDED["uid"])
+client = TestClient(server.app, client=("127.0.0.1", 50000),
+                    headers={"accesstoken": _TOKEN})
 
 # Every field name any handler reads. One body sets them all at once, which is
 # blunt but means a new handler is covered the moment its field name is added.

@@ -22,6 +22,10 @@ uvicorn server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem --ssl-certfi
   accessories, mail, battle tracker, server logs/routes/CDN). `server/run.sh` starts it alongside both
   game-server processes with `--reload`, which is the normal way to run all three in development.
   Its front end is vendored Vue 3 with no build step: edit `server/webui/**` and refresh the browser.
+- To exercise the in-game **Google login** button, start with `GLOGIN_DEV=1` (dev account picker, no
+  Google Cloud project needed) or the real `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET`/`GLOGIN_PUBLIC_URL`;
+  otherwise `/glogin` returns 503. `GLOGIN_DEV=1` hands out a session for any account id you name -
+  never on a public server. See [multi-account-login.md](multi-account-login.md).
 - `/admin` on `:8080` is **not** a UI — it redirects to the dashboard. Its `/admin/api/*` routes are
   live and the dashboard proxies them (and creates new saves through them).
 
@@ -86,7 +90,7 @@ adb -s <serial> shell am start -n com.nowl.castle/com.awesomepiece.castle.MainAc
 Healthy boot in logcat: `LibMainWrap → libxigncode.so → libmain_real.so → Unity il2cpp`, then
 `Hooked BattleManager.Update` / `Hooked PostListItem.Set`. Then the TLS log fills with `200 OK`.
 
-> The steps above are the **v170.1.00** client. **v171.0.00** needs a different builder
+> The steps above are the **v170.1.00** client. The **v171** build needs a different builder
 > (`build_v171_private.py`), a different launcher activity, and plain HTTP instead of TLS — see
 > [v171-private-build.md](v171-private-build.md).
 

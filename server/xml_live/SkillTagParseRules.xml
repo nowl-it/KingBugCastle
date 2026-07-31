@@ -507,4 +507,14 @@
 		<RoundingRule>Round</RoundingRule>
 		<Digit>-1</Digit>
 	</SkillTagParseRule>
+	<SkillTagParseRule ID="100">
+		<Tag>AuraTick</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
+	<SkillTagParseRule ID="101">
+		<Tag>AttackDelay</Tag>
+		<RoundingRule>Round</RoundingRule>
+		<Digit>-2</Digit>
+	</SkillTagParseRule>
 </SkillTagParseRules>

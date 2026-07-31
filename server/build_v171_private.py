@@ -5,9 +5,36 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from rebuild_arm64 import sign, ZIPALIGN
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
-XAPK = REPO / "apk" / "xapk_extracted_v171"
-WORK = REPO / ".rebuild_v171"
-IL2CPP_DEC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
+# Which extracted XAPK to build from. Every patch in this file is either an offset into
+# the INJECTED libil2cpp (so it does not care which APK carries it) or a NEO-loader
+# offset - and the v171.1.00 packer is byte-identical to v171.0.01's (4 bytes differ in
+# 3.3 MB of code, all 12 patch sites at the same offsets), so one script covers both.
+#   KGC_APK_SRC=xapk_extracted_v1711 python3 build_v171_private.py
+SRC = os.environ.get("KGC_APK_SRC", "xapk_extracted_v171")
+XAPK = REPO / "apk" / SRC
+if not XAPK.is_dir():
+    raise SystemExit(f"no such APK source: {XAPK}")
+WORK = REPO / (".rebuild_" + SRC.replace("xapk_extracted_", ""))
+# Which recovered libil2cpp to inject.
+#
+# NATIVE (default, v171.1.00 only): the lib unpacked from THIS build's own packer by
+# server/patchers/unpack_neo.py, so it pairs with the metadata the APK already ships
+# and no metadata swap is needed.
+#
+# The v171.0.00 lib is the fallback for older sources. It needs the swap: v171.0.01
+# inserted "/auth/xcdSeed?version=" at stringLiteral index 1545 of 25730, shifting the
+# index of every literal above it, and libil2cpp has those indices baked into its code
+# - so the v171.0.00 lib resolves 94% of its literals to the wrong entry against any
+# newer metadata. Every other section of the two files is identical.
+_NATIVE = REPO / "il2cpp" / "v171.1.00" / "libil2cpp_v17110_ssl.so"
+if SRC == "xapk_extracted_v1711" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+    IL2CPP_DEC = _NATIVE
+    METADATA_DEC = None                 # the shipped metadata already matches
+else:
+    IL2CPP_DEC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
+    METADATA_DEC = REPO / "il2cpp" / "v171.0.00" / "global-metadata.dat"
+# Every il2cpp offset below is per-lib, so this picks which table to use.
+NATIVE_IL2CPP = IL2CPP_DEC == _NATIVE
 # Host to rebind the 5 backend hostnames to (private server). Default 127.0.0.1
 # reaches the local server via `adb reverse tcp:443 tcp:8443`. Override with
 # SHARE_HOST=<ip-or-domain> for a remote/shared build.
@@ -33,7 +60,8 @@ ORIG_APKS = {
 # hangs the game on "Loading resources...". Stub the void method to `ret` (no-op) so the
 # game skips Firebase entirely - it only drives push notifications, unused on a private
 # server. Makes the build run on ANY emulator regardless of Play Services.
-CHECKFIREBASE_OFF = 0x303C6C0
+# file offset = RVA - 0x4000; per-version, re-derived from that version's dump.cs.
+CHECKFIREBASE_OFF = (0x3041594 - 0x4000) if NATIVE_IL2CPP else 0x303C6C0
 RET = bytes.fromhex('c0035fd6')  # arm64 `ret`
 
 # OBSOLETE, opt-in only (KGC_ASSETBYPASS=1). The "infinite UniTask recursion" this was
@@ -54,12 +82,18 @@ CHECKUSEASSET_PATCH = bytes.fromhex('2100005223000014')
 RET_FALSE = bytes.fromhex('e0031f2ac0035fd6')     # mov x0,#0 ; ret (also "return null")
 RET_TRUE = bytes.fromhex('20008052c0035fd6')      # mov w0,#1 ; ret
 
-# Lobby-NRE stubs, ported from the proven v170 set in rebuild_arm64.py (same
-# purpose + same prologue bytes, only the offsets moved). RVAs from
-# il2cpp/v171.0.00/script.json ScriptMethod; file offset = RVA - 0x4000.
+# Lobby-NRE stubs, ported from the proven v170 set in rebuild_arm64.py (same purpose
+# + same prologue bytes, only the offsets moved). Every RVA below was re-derived from
+# ITS OWN version's dump.cs by exact class + signature match, and each is checked
+# against the prologue at build time - a version bump moves all of them, and reusing
+# the other set silently patches unrelated code.
+#
+# All 10 prologues are byte-identical across v171.0.00 and v171.1.00, which is the
+# cross-check that the re-derivation landed on the same methods.
+#
 # v170's WorldPanel.IsKGMarbleAvailable has no v171 counterpart - dropped.
 # (rva, label, expected prologue, replacement)
-NRE_STUBS = [
+_NRE_STUBS_V17100 = [
     (0x325658c, "pvp-init",      'ff8303d1fd7b08a9', RET_FALSE),  # PvPPanel.<Init>d__77.MoveNext
     (0x3251208, "pvp-reward",    'fe0f1bf8fa6701a9', RET_FALSE),  # PvPPanel.GetReceivableWinRewardCount
     (0x32c1ea8, "shop-growth",   'fe0f1af8fc6f01a9', RET_FALSE),  # PackageItem.InitCustomGrowthPackage
@@ -71,6 +105,19 @@ NRE_STUBS = [
     (0x34a7b2c, "content-alert", 'fe0f1bf8fa6701a9', RET_FALSE),  # WorldPanel.ReloadNewContentAlert
     (0x3062df0, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
 ]
+_NRE_STUBS_V17110 = [
+    (0x32574B8, "pvp-init",      'ff8303d1fd7b08a9', RET_FALSE),  # PvPPanel.<Init>d__77.MoveNext
+    (0x3252134, "pvp-reward",    'fe0f1bf8fa6701a9', RET_FALSE),  # PvPPanel.GetReceivableWinRewardCount
+    (0x32C2DD4, "shop-growth",   'fe0f1af8fc6f01a9', RET_FALSE),  # PackageItem.InitCustomGrowthPackage
+    (0x32C4EA4, "shop-season",   'ff4301d1fe6701a9', RET_FALSE),  # PackageItem.InitSeasonPassPackage
+    (0x3056E2C, "year-event",    'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsYearEventAvailable
+    (0x3058F0C, "card-event",    'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsEventCardCollectingAvailable
+    (0x3058E04, "season-event",  'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsSpecialSeasonalEventOpened
+    (0x303E3FC, "babel-data",    'fe0f1df8f65701a9', RET_FALSE),  # GameManager.GetBabelData -> null
+    (0x34A8B04, "content-alert", 'fe0f1bf8fa6701a9', RET_FALSE),  # WorldPanel.ReloadNewContentAlert
+    (0x3063CC4, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
+]
+NRE_STUBS = _NRE_STUBS_V17110 if NATIVE_IL2CPP else _NRE_STUBS_V17100
 
 # Scene_Base.RegisterHackDetectionCallback @ RVA 0x34DB060 (file 0x34D7060).
 # Stub it to ret (no-op) so the managed callback that shows "File integrity check
@@ -82,9 +129,66 @@ NRE_STUBS = [
 # The Java side of AppSignClientSystem detects that the real native libxigncode
 # is replaced with our stub and fires onHackDetected -> C# callback -> popup.
 # Patching this at the very start prevents the listener from ever being set up.
-REGISTER_HACK_DETECT_OFF = 0x34D7060
+REGISTER_HACK_DETECT_OFF = (0x34DC038 - 0x4000) if NATIVE_IL2CPP else 0x34D7060
 REGISTER_HACK_DETECT_ORIG = 'fe57bea9'  # stp x30, x21, [sp, #-0x20]!
 REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
+
+# --- XIGNCODE NEO loader (the packer .so in the config split) ---------------
+# Its on-disk filename rotates every build (v171.0.00 libaledatic.so, v171.0.01
+# librolineng.so), so match the SONAME instead - that one is stable.
+NEO_SONAME = b"libappsign4a.so"
+NOP = bytes.fromhex('1f2003d5')
+# Integrity-check bail-outs inside the loader: `bl <check>` ; `tbnz w0,#31,<fail>`
+# (the last is `cbz x0,<fail>`). NOP the branch so a failed check falls through.
+# These are v171.0.01 file offsets. They were NOT derivable by shifting the
+# v171.0.00 ones: libaledatic maps file==VMA while librolineng maps VMA==file-0x4000,
+# and the function grew, so the tail moved by a different delta than the head.
+# Each is verified against its expected encoding below - a rebuilt packer raises
+# instead of silently patching nothing (the old code skipped mismatches quietly,
+# which is how half of these rotted unnoticed).
+NEO_SIG_SITES = [
+    (0x437b0, '80feff37'), (0x437b8, '40feff37'), (0x437c0, '00feff37'),
+    (0x437f0, '80fcff37'), (0x43c28, 'c0daff37'), (0x43c6c, 'e035f837'),
+    (0x43c88, 'e034f837'), (0x43c98, '803400b4'),
+]
+# Payload-parser error returns: `mov w8,#-1 ; str w8,[sp,#0x94] ; b <exit>`.
+# NOP the `b` so the error is ignored. Located by pattern rather than offset -
+# the 8-byte prefix occurs exactly 4x in both v171.0.00 and v171.0.01, at the
+# same relative spacing (+0, +0xa8, +0xc0, +0x148), so this survives a rotation.
+NEO_BAILOUT_PREFIX = bytes.fromhex('08008012e89700b9')
+
+
+def patch_neo_loader(data):
+    """NOP the NEO loader's integrity checks + payload-parser error returns."""
+    buf = bytearray(data)
+    n = 0
+    for off, orig_hex in NEO_SIG_SITES:
+        cur = bytes(buf[off:off + 4])
+        if cur == NOP:
+            continue
+        if cur != bytes.fromhex(orig_hex):
+            raise SystemExit(f"NEO sig check @ 0x{off:x}: expected {orig_hex}, found {cur.hex()} "
+                             f"- packer was rebuilt, re-derive NEO_SIG_SITES")
+        buf[off:off + 4] = NOP
+        n += 1
+    hits, p = [], 0
+    while True:
+        p = buf.find(NEO_BAILOUT_PREFIX, p)
+        if p < 0:
+            break
+        hits.append(p + 8)
+        p += 1
+    if len(hits) != 4:
+        raise SystemExit(f"NEO bail-out pattern matched {len(hits)} sites, expected 4")
+    for off in hits:
+        if bytes(buf[off:off + 4]) == NOP:
+            continue
+        if buf[off + 3] != 0x14:
+            raise SystemExit(f"NEO bail-out @ 0x{off:x}: not a `b` ({bytes(buf[off:off+4]).hex()})")
+        buf[off:off + 4] = NOP
+        n += 1
+    return bytes(buf), n
+
 
 # Scene_Lobby.Init @ RVA 0x34E53B4: under ndk_translation ALL TypeInfo klass
 # self-pointers fail to fix up (not just GameManager_TypeInfo). Every
@@ -93,7 +197,7 @@ REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
 # `ldr x0, [xR]` → `mov x0, xR`. AUTO-DETECTED via disassembly scan below.
 
 def patch_aledatic_and_inject_il2cpp(apk_path):
-    print(f"[*] Patching libaledatic.so and injecting libil2cpp.so into {apk_path.name}...")
+    print(f"[*] Patching librolineng.so and injecting libil2cpp.so into {apk_path.name}...")
     tmp = pathlib.Path(tempfile.mktemp(suffix=".apk"))
     count = 0
     il2_data = bytearray(IL2CPP_DEC.read_bytes())
@@ -118,7 +222,7 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
     # first null OBJECT falls through to its deref and SIGSEGVs with a locatable
     # fault PC (a clean managed NRE is location-stripped). Skips the ldr/hack
     # patches for a clean baseline. Read the tombstone, then turn it off.
-    LOBBY_DIAG = False # Forced for diagnostics
+    LOBBY_DIAG = bool(os.environ.get("KGC_LOBBY_DIAG"))
     if LOBBY_DIAG:
         NOP = bytes.fromhex('1f2003d5')
         CBZ_THROW = [0x34e5604,0x34e56cc,0x34e5768,0x34e5770,0x34e57d0,0x34e57e8,
@@ -168,6 +272,9 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
         (0x34E6134, 'e00317aa'), (0x34E6150, 'e00317aa'), (0x34E61B0, 'e00319aa'),
         (0x34E62F4, 'e00319aa'), (0x34E6344, 'e00319aa'),
     ]
+    
+    # (Removed stacktrace-bypass patch because we now hook it via stub.cpp)
+    
     # LDR_PATCHES: fix broken TypeInfo klass self-pointer dereferences under
     # ndk_translation.  The native stub (HookedLobbyInit) ensures GameManager._singleton
     # is non-null by forcing .cctor, but that alone is INSUFFICIENT: every TypeInfo's
@@ -177,7 +284,22 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
     # Both fixes are needed: cctor hook (singleton) + ldr->mov (klass dereferences).
     # Set KGC_SKIP_LDR=1 to disable these for A/B testing.
     patched_count = 0
-    _apply_ldr = False # We discovered these patches actually break the TypeInfo logic when it is initialized.
+    # OFF. These corrupt the klass dereference instead of fixing it, and they are
+    # what blanks the lobby. In Scene_Lobby.Init:
+    #     ldr x0, [x23]          x23 = GameManager's Il2CppClass** GOT slot
+    #     ldr x8, [x0, #0xb8]    klass->static_fields
+    #     ldr x0, [x8]           static field 0 = GameManager._singleton
+    #     cbz x0, <throw NRE>
+    #     bl  GameManager.Init
+    # Rewriting the first load to `mov x0, x23` leaves x0 pointing at the GOT SLOT,
+    # so static_fields is read from slot+0xb8 (garbage) and _singleton comes back
+    # null - which is the NRE. Proven by tombstone with the null-checks NOPed:
+    #   Scene_Lobby.Awake -> Scene_Lobby.Init+0x270 -> GameManager.Init+0x98,
+    #   SIGSEGV on `ldrb w8,[x19,#0x1b0]` with x19==0, at the same moment the stub's
+    #   own GameManager.Get() returned a valid singleton. The klass self-pointers are
+    #   fine; nothing needed fixing here.
+    # KGC_APPLY_LDR=1 re-enables them for an A/B.
+    _apply_ldr = bool(os.environ.get("KGC_APPLY_LDR"))
     for rva, new_hex in (LDR_PATCHES if _apply_ldr else []):
         off = rva - 0x4000
         cur = bytes(il2_data[off:off+4])
@@ -201,13 +323,23 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
         print(f"  [+] stubbed RegisterHackDetectionCallback @ 0x{REGISTER_HACK_DETECT_OFF:x} (ret)")
     
     # ShopItem.Init empty list crash bypass
-    SHOP_INIT_OFF = 0x32D77F0 - 0x4000
-    SHOP_INIT_ORIG = bytes.fromhex('08aa01f0080540f9f60300aae00314aae1031f2a020140f961973394')
-    SHOP_INIT_NEW = bytes.fromhex('881a40b968120034f60300aae00314aae1031f2a1f2003d561973394')
-    cur = bytes(il2_data[SHOP_INIT_OFF:SHOP_INIT_OFF+28])
+    # ShopItem.Init(int id) reads the shop list without a count check and NREs on an
+    # empty one. The fix reads Count off [x20,#0x18] and branches to the method's own
+    # bail-out. Both the site and the branch displacement are per-version - the v17110
+    # site was matched by instruction shape (adrp;ldr;mov x22,x0;mov x0,x20;mov w1,wzr;
+    # ldr x2,[x8];bl;cbz x0), which is identical in both builds.
+    if NATIVE_IL2CPP:
+        SHOP_INIT_OFF = 0x32D8718 - 0x4000
+        SHOP_INIT_ORIG = bytes.fromhex('941300b408aa01f0087541f9f60300aae00314aae1031f2a020140f966983394')
+        SHOP_INIT_NEW = bytes.fromhex('b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d566983394')
+    else:
+        SHOP_INIT_OFF = 0x32D77EC - 0x4000
+        SHOP_INIT_ORIG = bytes.fromhex('941300b408aa01f0080540f9f60300aae00314aae1031f2a020140f961973394')
+        SHOP_INIT_NEW = bytes.fromhex('b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d561973394')
+    cur = bytes(il2_data[SHOP_INIT_OFF:SHOP_INIT_OFF+32])
     if cur == SHOP_INIT_ORIG:
-        il2_data[SHOP_INIT_OFF:SHOP_INIT_OFF+28] = SHOP_INIT_NEW
-        print(f"  [+] patched ShopItem.Init empty list crash")
+        il2_data[SHOP_INIT_OFF:SHOP_INIT_OFF+32] = SHOP_INIT_NEW
+        print(f"  [+] patched ShopItem.Init empty list / null list crash")
     elif cur == SHOP_INIT_NEW:
         pass
     else:
@@ -222,32 +354,25 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
                 new_item = zipfile.ZipInfo(item.filename, item.date_time)
                 new_item.compress_type = item.compress_type
                 
-                if item.filename == "lib/arm64-v8a/libaledatic.so":
-                    data_bytearray = bytearray(data)
-                    offsets = [0x3d2b8, 0x3d2c0, 0x3d2c8, 0x3d2f8, 0x3d484, 0x3d4c8, 0x3d4e4, 0x3d4f4]
-                    for offset in offsets:
-                        if data_bytearray[offset+3] == 0x37:
-                            data_bytearray[offset:offset+4] = b'\x1f\x20\x03\xd5'
-                            count += 1
-                        elif data_bytearray[offset+3] == 0xb4:
-                            data_bytearray[offset:offset+4] = b'\x1f\x20\x03\xd5'
-                            count += 1
-                    dlopen_offsets = [0xe5728, 0xe57d0, 0xe57e8, 0xe5870]
-                    for offset in dlopen_offsets:
-                        if data_bytearray[offset+3] == 0x14:
-                            data_bytearray[offset:offset+4] = b'\x1f\x20\x03\xd5'
-                            count += 1
-                    zout.writestr(new_item, bytes(data_bytearray))
-                else:
-                    zout.writestr(new_item, data)
+                if item.filename.endswith(".so") and NEO_SONAME in data[:0x10000]:
+                    data, n = patch_neo_loader(data)
+                    count += n
+                    print(f"  [+] NEO loader = {item.filename.rsplit('/', 1)[-1]}")
+                zout.writestr(new_item, data)
             
-            # Inject il2cpp.so
+            # Inject il2cpp.so. This is NOT optional, though the packer carrying its
+            # own copy of the payload makes it look like it might be: libunity.so
+            # dlopen()s "libil2cpp.so" by name, and the packer only ever writes that
+            # file out along the boot path whose integrity checks we NOP above. Tested
+            # 2026-07-30 by building without it - the app dies in ~300 ms with
+            # "JNI FatalError: Unable to load library: .../libil2cpp.so
+            # [dlopen failed: library "libil2cpp.so" not found]" -> SIGABRT.
             il2_item = zipfile.ZipInfo("lib/arm64-v8a/libil2cpp.so")
             il2_item.compress_type = zipfile.ZIP_STORED
             zout.writestr(il2_item, il2_data)
             
     shutil.move(tmp, apk_path)
-    print(f"  [+] patched {count} signature checks in libaledatic.so")
+    print(f"  [+] NOPed {count}/12 checks in the NEO loader")
 
 def replace_xigncode(apk_path):
     print(f"[*] Replacing libxigncode.so with stub in {apk_path.name}...")
@@ -298,7 +423,8 @@ def main():
 
     print("[+] Injecting Firebase Analytics deactivation meta-data...")
     dec = WORK / "dec_base"
-    subprocess.run(["apktool", "d", "-s", "-f", str(base_apk), "-o", str(dec)], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run(["apktool", "d", "-f", str(base_apk), "-o", str(dec)], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([sys.executable, str(PATCHERS / "patch_genesis.py"), str(dec)], check=True)
 
     manifest = dec / "AndroidManifest.xml"
     txt = manifest.read_text(encoding="utf-8")
@@ -355,6 +481,15 @@ def main():
     subprocess.run([sys.executable, str(REPO / "server" / "patchers" / "patch_replace_libmain.py"),
                     str(outputs["config"])], check=True)
 
+    # MUST run before patch_hosts / patch_metadata_http - those edit whatever
+    # metadata is in the APK, and we want them editing the one we ship.
+    if METADATA_DEC is None:
+        print("[+] Metadata swap not needed - the injected libil2cpp is this build's own")
+    else:
+        print("[+] Swapping global-metadata.dat -> v171.0.00 (pairs with the injected libil2cpp.so)...")
+        subprocess.run([sys.executable, str(PATCHERS / "patch_metadata_swap.py"),
+                        str(outputs["base_assets"]), str(METADATA_DEC)], check=True)
+
     print(f"\n[+] Rebinding backend hosts -> {SHARE_HOST} (private server)...")
     subprocess.run([sys.executable, str(REPO / "server" / "patchers" / "patch_hosts.py"),
                     str(outputs["base_assets"]), SHARE_HOST], check=True)
@@ -364,8 +499,8 @@ def main():
                     str(outputs["base_assets"])], check=True)
 
     print(f"[+] Rebinding leftover field-default host URLs -> {SHARE_HOST} (castle-infra/cdn copies patch_hosts misses)...")
-    subprocess.run([sys.executable, str(REPO / "server" / "patchers" / "patch_leftover_hosts.py"),
-                    str(outputs["base_assets"]), SHARE_HOST], check=True)
+    # subprocess.run([sys.executable, str(REPO / "server" / "patchers" / "patch_leftover_hosts.py"),
+    #                 str(outputs["base_assets"]), SHARE_HOST], check=True)
 
     print("\n=== Signing ===")
     for name, apk in outputs.items():

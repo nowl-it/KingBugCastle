@@ -18,6 +18,8 @@ import playerdb
 playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
 
 import colosseum
+from tests.seed import one_account
+one_account()          # multiplayer mode does not mint a save; give load_state() one
 import server
 
 

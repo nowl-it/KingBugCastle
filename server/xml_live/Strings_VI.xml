@@ -5778,8 +5778,8 @@ Sau khi rút khỏi sẽ không thể tham gia Trận Chinh Phạt mùa này v�
   <String Key="ClanBattleModifier_13">Khổ Não</String>
   <String Key="ClanBattleModifier_14">Áp Đảo</String>
   <String Key="UserLockedClanBattleAlert">Người dùng này không thể tham gia Trận Chinh Phạt Liên Minh mùa này.</String>
-  <String Key="UpdateNoticeVersion">170000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/39d1c2e0-6f0e-804a-acc0-f507558ede41</String>
+  <String Key="UpdateNoticeVersion">171100</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Giải thể Liên Minh?</String>
   <String Key="Clan_Menu_LeaveConfirm">Rút khỏi Liên Minh?</String>
   <String Key="RogueLike_ReleaseAtLevel">Mở ở cấp {0}</String>
@@ -6862,14 +6862,14 @@ Dấu Ấn được tái tạo theo chu kỳ 3 giây</String>
   <String Key="ShopItemName_1160">Gói Tập Kích Đội Diệt Rồng</String>
   <String Key="UnitName_10570">Farael</String>
   <String Key="UnitSubName_10570">Pháp Sư Bí Truyền</String>
-  <String Key="Potential_10570_0">Thi triển thêm 1 lần Phép Thuật Bí Truyền khi tiêu diệt được địch bằng &lt;Loạn Xạ Bí Truyền&gt; (Tối đa 2 lần)</String>
-  <String Key="Potential_10570_1">Tổng sát thương Phép Thuật Bí Truyền còn lại gây ra +50% khi tiêu diệt được địch bằng &lt;Loạn Xạ Bí Truyền&gt; (Không cộng dồn)</String>
+  <String Key="Potential_10570_0">Khi tiêu diệt kẻ địch bằng &lt;Loạn Xạ Bí Truyền&gt;, hồi 0~90% Mana tối đa. Càng bắn ít đạn bí truyền trước khi tiêu diệt, lượng hồi càng tăng</String>
+  <String Key="Potential_10570_1">Khi dùng &lt;Loạn Xạ Bí Truyền&gt;, sát thương tăng dần 15% (có thể cộng dồn không giới hạn)</String>
   <String Key="SkinDesc_Default_10570">So với ý chí hừng hực thì Farael lại không thể điều khiển tốt năng lượng nên bị các Elf khác xem như một mối lo ngại. Thế rồi một ngày nọ sau khi gặp nhóm của Mel đến thăm Vương Quốc Elf, Farael đã ngỏ ý muốn chứng minh thực lực của bản thân rồi theo họ rời đến Rừng Vĩnh Cửu.</String>
   <String Key="SkillName_10570">Loạn Xạ Bí Truyền</String>
   <String Key="SkillDesc_10570">Hướng đến mục tiêu và thi triển ngẫu nhiên {AttackCount} lần Phép Thuật Bí Truyền gây {105700@Damage:MAtkPer} sát thương vào tất cả các ô của một trong bốn chiều. Nếu mục tiêu tử trận, chuyển sang sử dụng Phép Thuật Bí Truyền còn lại cho kẻ địch ở gần bản thân nhất.</String>
   <String Key="MissionDesc_10357">Dùng Farael để chơi</String>
   <String Key="Name_Potential_10570_2">Năng Lượng Dâng Trào</String>
-  <String Key="Potential_10570_2">Tạo khiên bằng 30% lực phép cho bản thân mỗi khi sử dụng Phép Thuật Bí Truyền của &lt;Loạn Xạ Bí Truyền&gt;</String>
+  <String Key="Potential_10570_2">Mỗi đạn bí truyền của &lt;Loạn Xạ Bí Truyền&gt; hồi 20% Máu tối đa, và hồi thêm 20% Máu tối đa cho mỗi phát bắn liên tiếp (tối đa 100%)</String>
   <String Key="SkinName_1057000">Pháp Sư Tập Sự Farael</String>
   <String Key="SkinDesc_1057000">Farael sinh ra với nguồn năng lượng của một không gian khác. Tuy nhiên trái ngược với kì vọng sẽ trở thành đại pháp sư thì Farael khi trưởng thành lại không thể điều khiển tốt được nguồn năng lượng trào dâng ấy. Nếu không có người chăm lo, giúp Farael không đánh mất ý chí thì chưa biết chừng cậu đã từ bỏ phép thuật từ sớm.</String>
   <String Key="ReportType_Teaming">Teaming: hành vi lập đội thông qua các yếu tố ngoài game</String>
@@ -6998,8 +6998,7 @@ Anh hùng dùng kỹ xảo có thể nhận được thêm kỹ xảo bằng cá
   <String Key="BuildingEffect_TotalHpPer">Tổng máu +{Value}%</String>
   <String Key="BuildingEffect_TotalMAtkPer">Tổng lực phép +{Value}%</String>
   <String Key="Name_Potential_10570_3">Phân Tán Ma Lực</String>
-  <String Key="Potential_10570_3">Phạm vi sát thương của Phép Thuật Bí Truyền tăng lên 3 ô
-Tổng lực phép -30%</String>
+  <String Key="Potential_10570_3">&lt;Loạn Xạ Bí Truyền&gt; tăng phạm vi sát thương lên 3 ô và phá hủy khiên của mục tiêu trước khi gây sát thương</String>
   <String Key="RestartColosseum">Vào lại trận đấu Chiến Trường Ác Chiến đang diễn ra?</String>
   <String Key="ColosseumReenterWaitForBattleEnds">Chờ kết thúc trận đấu đang diễn ra...</String>
   <String Key="Shop_Tab_Special">Sản Phẩm Đặc Biệt</String>
@@ -9392,8 +9391,8 @@ Mọi chỉ số của hình nhân được tính theo chỉ số của Rie ở 
   <String Key="SkillDesc_10550_Short">Tinh Linh Đá gây {Unit@OverwriteAtkByParent} sát thương phép bằng {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% lực phép của Elizabeth khi tấn công thường và có {Unit@OverwriteHpByParent:HpPer:BaseValue}% máu, {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% lực phép/ tốc độ tấn công/ tốc độ di chuyển của Elizabeth.</String>
   <String Key="SkillAltDesc_10550_Short">Tinh Linh Đá gây {Unit@OverwriteAtkByParent} sát thương phép bằng {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% lực phép của Elizabeth khi tấn công thường và có {Unit@OverwriteHpByParent:HpPer:BaseValue}% máu, {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% lực phép/ tốc độ tấn công/ tốc độ di chuyển của Elizabeth.</String>
   <String Key="SkillDesc_10560_Short">Liên kết {ConnectedMAtkBuffPer}% lực phép trong {Time} giây cho đối tượng liên kết, khuếch đại {BaseSkillDamageMul}% sát thương kỹ năng. (Không thể liên kết trùng lặp cho cùng một anh hùng)</String>
-  <String Key="SkillDesc_10570_Short">Thi triển ngẫu nhiên {AttackCount} lần Phép Thuật Bí Truyền gây {105700@Damage:MAtkPer} sát thương vào tất cả các ô của một trong bốn chiều.</String>
-  <String Key="SkillDesc_105720_Short">Thi triển ngẫu nhiên {AttackCount} lần Phép Thuật Bí Truyền gây {105700@Damage:MAtkPer} sát thương vào {1057011@SplashRangeY} ô của một trong bốn chiều.</String>
+  <String Key="SkillDesc_10570_Short">Liên tục bắn đạn bí truyền, gây {105700@Damage:MAtkPer} sát thương lên mọi ô theo 1 trong 4 hướng ngẫu nhiên.</String>
+  <String Key="SkillDesc_105720_Short">Liên tục bắn đạn bí truyền, phá hủy khiên và gây {105700@Damage:MAtkPer} sát thương trên phạm vi rộng {1057011@SplashRangeY} ô theo 1 trong 4 hướng ngẫu nhiên.</String>
   <String Key="SkillDesc_105721_Short">Thi triển ngẫu nhiên {AttackCount} lần Phép Thuật Bí Truyền gây {105700@Damage:MAtkPer} sát thương vào {1057011@SplashRangeX} ô của một trong bốn chiều.</String>
   <String Key="SkillDesc_10580_Short">Khi chịu sát thương, hoàn toàn vô hiệu hóa với xác suất {Unit@MissRatio}%, và nhận {Unit@AddTechniqueAtMiss} kỹ xảo. Khi kỹ xảo đạt tối đa, xông tới mục tiêu rồi {10585@AttackCount} lần gây {Damage:MAtkPer} sát thương và {10585@TickDamage:AtkPer} sát thương.</String>
   <String Key="SkillDesc_10600_Short">Triệu hồi {SummonUnitCountForDesc} ảo ảnh kéo dài trong {10605@Time} giây. Ảo ảnh không thể bị lấy làm mục tiêu và gây sát thương bằng (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% lực tấn công của Saras.</String>
@@ -9461,8 +9460,8 @@ Mọi chỉ số của hình nhân được tính theo chỉ số của Rie ở 
   <String Key="SkillDesc_10530_Long">Trong {Time} giây, Uy hiếp tăng {BaseDefPen}, và đòn đánh thường gây sát thương bằng {10535@Damage:AtkPer:BaseValue}% Lực tấn công lên toàn bộ kẻ địch xung quanh trong phạm vi {10535@SplashRangeSum} ô. Mục tiêu chính còn nhận {105300@TickDamage} sát thương thường phép {105300@DescTickCount} lần trong {105300@Time} giây.</String>
   <String Key="SkillDesc_10540_Long">Hủy triệu hồi toàn bộ Tinh Linh Đá bản thân đã triệu hồi và gây {10550@Damage:BaseValue}+{10550@Damage:MAtkPer} sát thương cho toàn bộ địch trong phạm vi {10550@SplashRangeX}{X}{10550@SplashRangeY} quanh Tinh Linh Đá và làm choáng chúng trong {10550@StunTime} giây. Triệu hồi lại {SummonCountForDesc} Tinh Linh Đá. (Tồn tại tối đa: {Unit@GlobalMaxSummonCount} Tinh Linh Đá)</String>
   <String Key="SkillDesc_10560_Long">Trước khi khai trận, liên kết với đồng đội ở gần nhất. Khi dùng kỹ năng, bằng thuật pháp được truyền lại qua nhiều thế hệ, liên kết {ConnectedMAtkBuffPer}% lực phép trong {Time} giây cho đối tượng liên kết. Chỉ số liên kết được quy đổi từ chỉ số của Thế Linh sang chỉ số cơ bản của đối tượng anh hùng, khiến chỉ số của đối tượng anh hùng tăng. Khuếch đại {BaseSkillDamageMul}% sát thương kỹ năng của đối tượng liên kết. (Các Thế Linh không thể liên kết với cùng một anh hùng.)</String>
-  <String Key="SkillDesc_10570_Long">Phóng ra Phép Thuật Bí Truyền không biết sẽ đi về đâu. Hướng đến mục tiêu rồi gây {105700@Damage:MAtkPer} sát thương ngẫu nhiên {AttackCount} lần vào tất cả các ô của một trong bốn chiều. Nếu mục tiêu tử trận, chuyển sang sử dụng Phép Thuật Bí Truyền còn lại cho kẻ địch ở gần bản thân nhất.</String>
-  <String Key="SkillDesc_105720_Long">Phóng ra Phép Thuật Bí Truyền không biết sẽ đi về đâu. Hướng đến mục tiêu rồi thi triển ngẫu nhiên {AttackCount} lần Phép Thuật Bí Truyền gây {105700@Damage:MAtkPer} sát thương cho toàn bộ địch trong {1057011@SplashRangeY} ô theo một trong bốn chiều. Nếu mục tiêu tử trận, chuyển sang sử dụng Phép Thuật Bí Truyền còn lại cho kẻ địch ở gần bản thân nhất.</String>
+  <String Key="SkillDesc_10570_Long">Bắn ra đạn bí truyền khó đoán hướng. Nhắm vào kẻ địch có Máu cao nhất, cứ mỗi {AttackDelay} giây gây {105700@Damage:MAtkPer} sát thương lên mọi ô theo 1 trong 4 hướng ngẫu nhiên. Không dừng lại cho đến khi người dùng rơi vào trạng thái bất động hoặc mục tiêu bị tiêu diệt.</String>
+  <String Key="SkillDesc_105720_Long">Bắn ra đạn bí truyền khó đoán hướng. Nhắm vào kẻ địch có Máu cao nhất, cứ mỗi {AttackDelay} giây phá hủy khiên của mọi kẻ địch trong phạm vi rộng {1057011@SplashRangeY} ô theo 1 trong 4 hướng ngẫu nhiên và gây {105700@Damage:MAtkPer} sát thương. Không dừng lại cho đến khi người dùng rơi vào trạng thái bất động hoặc mục tiêu bị tiêu diệt.</String>
   <String Key="SkillDesc_105721_Long">Phóng ra Phép Thuật Bí Truyền không biết sẽ đi về đâu. Hướng đến mục tiêu rồi thi triển ngẫu nhiên {AttackCount} lần Phép Thuật Bí Truyền gây {105700@Damage:MAtkPer} sát thương cho toàn bộ địch trong {1057011@SplashRangeX} ô theo một trong bốn chiều. Nếu mục tiêu tử trận, chuyển sang sử dụng Phép Thuật Bí Truyền còn lại cho kẻ địch ở gần bản thân nhất.</String>
   <String Key="SkillDesc_10580_Long">Khi Gia Lam chịu sát thương, né với xác suất {Unit@MissRatio}%, vô hiệu hóa sát thương và hiệu ứng cản trở rồi nhận {Unit@AddTechniqueAtMiss} kỹ xảo. Khi kỹ xảo đạt tối đa, xông tới mục tiêu rồi gây {Damage:MAtkPer} sát thương phép và ra {10585@AttackCount} đòn tấn công thường một lượng bằng {10585@TickDamage:AtkPer:BaseValue}% lực tấn công.</String>
   <String Key="SkillDesc_10600_Long">Saras mượn sức mạnh Hư Vô để triệu hồi {SummonUnitCountForDesc} ảo ảnh kéo dài trong {10605@Time} giây. Ảo ảnh không thể bị lấy làm mục tiêu và gây sát thương bằng (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% lực tấn công của Saras.</String>
@@ -13090,9 +13089,9 @@ Tiếp tục?</String>
   <String Key="ItemName_40632">Phó Tướng</String>
   <String Key="ItemDesc_40632">Khi bố trí vào [Ô vai trò], hình thành [ô vai trò Phó Tướng] sở hữu {0}% hiệu ứng vào ô ngẫu nhiên khác, không thể gắn trùng lặp Cổ Tự Phó Tướng</String>
   <String Key="ItemName_40643">Người Thống Lĩnh</String>
-  <String Key="ItemDesc_40643">Nhận thêm +{0}% hiệu ứng [Ô vai trò]
-Khi Người Thống Lĩnh còn sống, anh hùng khai trận ở ô không phải [Ô vai trò] hồi sinh sau {1} giây sau khi tử trận
-Bại trận ngay khi Người Thống Lĩnh tử trận</String>
+  <String Key="ItemDesc_40643">Nhận thêm +{0}% hiệu ứng của [Ô Vai Trò]
+Khi Người Thống Lĩnh còn sống, các Anh Hùng trừ Người Thống Lĩnh sẽ hồi sinh sau {1} giây khi tử trận
+Khi Người Thống Lĩnh tử trận, lập tức Thua</String>
   <String Key="BuildingEffect_BaseHybridDef">Lực phòng thủ +{Value}</String>
   <String Key="BuildingEffect_BattleStartMana">Mana khi khai trận +{Value}%</String>
   <String Key="BuildingEffect_BattleStartMana_Long">Tăng lượng nạp mana cơ bản.</String>
@@ -17953,4 +17952,60 @@ Sau khi bắt đầu Chiến Đấu, mỗi giây Nhận được +{11}% kháng h
   <String Key="Overcome_10800_3">Mỗi lần Cuồng nộ kích hoạt, Máu tối đa tổng của dạng Vampire +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_4">Mỗi lần hiệu ứng Sát thương xung quanh của dạng Vampire gây sát thương, Sát thương gây ra khi ở dạng Vampire +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="UnitName_10810">Alessia</String>
+  <String Key="LeagueName_12">Liên Minh Ấm Áp</String>
+  <String Key="SkinDesc_1044005">&lt;i&gt;Phần thưởng tham gia Liên Minh Ấm Áp trong Đấu Trường&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400500">&lt;i&gt;Phần thưởng đạt mốc điểm của Liên Minh Ấm Áp trong Đấu Trường&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400501">&lt;i&gt;Phần thưởng đạt Xếp Hạng của Liên Minh Ấm Áp trong Đấu Trường&lt;/i&gt;</String>
+  <String Key="SkinDesc_1071004">&lt;i&gt;Phần thưởng tham gia Liên Minh Ấm Áp trong Chiến Đấu&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100400">&lt;i&gt;Phần thưởng đạt mốc điểm của Liên Minh Ấm Áp trong Chiến Đấu&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100401">&lt;i&gt;Phần thưởng đạt Xếp Hạng của Liên Minh Ấm Áp trong Chiến Đấu&lt;/i&gt;</String>
+  <String Key="SkinName_1057002">Vương Sao Mai Farael</String>
+  <String Key="SkinDesc_1057002">&lt;i&gt;Ánh sao cao quý nhất sinh ra trong buổi rạng đông sớm sẽ hóa thành ánh sáng rực rỡ nhất, xuyên qua bóng tối.&lt;/i&gt;</String>
+  <String Key="SuperShieldModulator">Nhận được Phòng thủ tuyệt đối</String>
+  <String Key="BuildingEffect_BaseDamageReflect">Phản {Value}% sát thương
+(Sát thương phép: giảm một nửa)</String>
+  <String Key="BuildingEffect_BaseDamageReflect_Long">Phản lại một phần sát thương anh hùng đã chịu cho địch.</String>
+  <String Key="TreasureName_30042">Perataus</String>
+  <String Key="TreasureSubName_30042">Khiên Đen Kịt</String>
+  <String Key="TreasureDesc_30042">Khiên của Behemus không chỉ để phòng thủ. Cú Xông Tới Dữ Dội của Behemus với tấm Khiên nặng có thể làm móp cả lớp giáp mạnh nhất chỉ trong chớp mắt.</String>
+  <String Key="TreasureSkillName_30042">Lao Xuống</String>
+  <String Key="BuffDataName_3300421">Nghiền Nát I</String>
+  <String Key="BuffDataName_3300422">Làm Móp I</String>
+  <String Key="BuffDataName_3300423">Vô Hiệu Hóa</String>
+  <String Key="BuffDataName_3300424">Làm Móp II</String>
+  <String Key="BuffDataName_3300425">Nghiền Nát II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Cửa Hàng Đặc Biệt Pickup Perataus</String>
+  <String Key="SpecialPackage_1680">Gói Perataus 1</String>
+  <String Key="SpecialPackage_1681">Gói Perataus 2</String>
+  <String Key="SpecialPackage_1682">Gói Perataus 3</String>
+  <String Key="BuffDataDesc_3300421">Chuyển sát thương +{1}x cho mỗi {0} Uy hiếp</String>
+  <String Key="BuffDataDesc_3300422">Kẻ địch có Bất Ổn phải nhận sát thương vật lý +{0}%</String>
+  <String Key="BuffDataDesc_3300423">Mỗi khi Bất Ổn bị gỡ, tất cả đồng minh nhận +{0} Phòng thủ tuyệt đối cho mỗi kẻ địch bị gỡ</String>
+  <String Key="BuffDataDesc_3300424">Kẻ địch có Bất Ổn phải nhận sát thương vật lý +{0}%</String>
+  <String Key="BuffDataDesc_3300425">Chuyển sát thương +{1}x cho mỗi {0} Uy hiếp</String>
+  <String Key="TreasureSkillDesc_3300420">Khi gây sát thương kỹ năng lên kẻ địch, áp dụng Bất Ổn lên mục tiêu
+Nếu đồng minh gây sát thương vật lý bằng ít nhất {0}% Máu tối đa của mục tiêu lên kẻ địch có Bất Ổn, {1}% sát thương đó được chuyển thành sát thương đặc biệt sang một kẻ địch khác có Bất Ổn, sau đó gỡ Bất Ổn khỏi tất cả kẻ địch
+&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được dùng chung ngay cả khi các Anh Hùng khác nhau áp dụng Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">Khi gây sát thương kỹ năng lên kẻ địch, áp dụng Bất Ổn lên mục tiêu
+Nếu đồng minh gây sát thương vật lý bằng ít nhất {0}% Máu tối đa của mục tiêu lên kẻ địch có Bất Ổn, {1}% sát thương đó được chuyển thành sát thương đặc biệt sang một kẻ địch khác có Bất Ổn, sau đó gỡ Bất Ổn khỏi tất cả kẻ địch
+Chuyển sát thương +{3}x cho mỗi {2} Uy hiếp
+&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được dùng chung ngay cả khi các Anh Hùng khác nhau áp dụng Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">Khi gây sát thương kỹ năng lên kẻ địch, áp dụng Bất Ổn lên mục tiêu
+Nếu đồng minh gây sát thương vật lý bằng ít nhất {0}% Máu tối đa của mục tiêu lên kẻ địch có Bất Ổn, {1}% sát thương đó được chuyển thành sát thương đặc biệt sang một kẻ địch khác có Bất Ổn, sau đó gỡ Bất Ổn khỏi tất cả kẻ địch
+Chuyển sát thương +{3}x cho mỗi {2} Uy hiếp
+Kẻ địch có Bất Ổn phải nhận sát thương vật lý +{4}%
+Hiệu ứng tăng sát thương vật lý phải nhận này không cộng dồn, chỉ áp dụng giá trị cao nhất
+&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được dùng chung ngay cả khi các Anh Hùng khác nhau áp dụng Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">Khi gây sát thương kỹ năng lên kẻ địch, áp dụng Bất Ổn lên mục tiêu
+Nếu đồng minh gây sát thương vật lý bằng ít nhất {0}% Máu tối đa của mục tiêu lên kẻ địch có Bất Ổn, {1}% sát thương đó được chuyển thành sát thương đặc biệt sang một kẻ địch khác có Bất Ổn, sau đó gỡ Bất Ổn khỏi tất cả kẻ địch
+Chuyển sát thương +{3}x cho mỗi {2} Uy hiếp
+Kẻ địch có Bất Ổn phải nhận sát thương vật lý +{4}%
+Hiệu ứng tăng sát thương vật lý phải nhận này không cộng dồn, chỉ áp dụng giá trị cao nhất
+Mỗi khi Bất Ổn bị gỡ, tất cả đồng minh nhận +{5} Phòng thủ tuyệt đối cho mỗi kẻ địch bị gỡ
+&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được dùng chung ngay cả khi các Anh Hùng khác nhau áp dụng Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="SpecialShop_TreasureDoublePickUp10014">Cửa Hàng Đặc Biệt Pickup Bảo Cụ</String>
+  <String Key="SpecialPackage_1676">Gói Đá Triệu Hồi Pickup Bảo Cụ 1</String>
+  <String Key="SpecialPackage_1677">Gói Đá Triệu Hồi Pickup Bảo Cụ 2</String>
+  <String Key="SpecialPackage_1678">Gói Caelus</String>
+  <String Key="SpecialPackage_1679">Gói Nhóc Tinh Nghịch</String>
 </Strings>

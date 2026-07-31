@@ -145,5 +145,24 @@ def _self_check():
             f"+{EXTEND_COUNT}x{EXTEND_DAYS}d")
 
 
+def block(st):
+    """The player's decoration state, defaults filled in on the save itself.
+
+    setdefault, not `or {...}`: the callers (rank rows, clan rows, the decoration
+    routes) read AND write through this, so handing back a fresh dict each call
+    would silently drop every equip."""
+    import config
+    gate = config.CONTENT_GATE
+    d = st.setdefault("decoration", {})
+    d.setdefault("flag", {"flagId": 0, "season": 0})
+    d.setdefault("nameTag", 0)
+    d.setdefault("favoriteMapSkins", [])
+    d.setdefault("mapSkin", default_id("mapSkins", gate))
+    d.setdefault("loginSkin", default_id("loginSkins", gate))
+    d.setdefault("advisor", DEFAULT_ADVISOR)
+    d.setdefault("contracts", {})
+    return d
+
+
 if __name__ == "__main__":
     _self_check()

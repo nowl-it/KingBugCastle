@@ -138,6 +138,9 @@ nav.tabs button.active {
 	display: flex;
 	align-items: center;
 	gap: 10px;
+	/* wrap: there are five of these now, and without it the last pill is simply cut
+	   off the right edge on a narrow screen */
+	flex-wrap: wrap;
 }
 
 .pill {
@@ -226,6 +229,23 @@ main.content {
 @media (max-width: 900px) {
 	.grid.cols-2 {
 		grid-template-columns: 1fr;
+	}
+}
+
+/* Phone: the brand, the nine tabs and the status pills each get their own row.
+   Left to share, the brand squeezes the tabs into a ragged block beside it. */
+@media (max-width: 760px) {
+	header.topbar {
+		gap: 10px;
+		padding: 10px 12px;
+	}
+	.brand,
+	nav.tabs,
+	.topbar-right {
+		flex: 1 1 100%;
+	}
+	main.content {
+		padding: 12px;
 	}
 }
 
@@ -727,6 +747,47 @@ pre.logs {
 	width: min(520px, 100%);
 	max-height: 88vh;
 	overflow: auto;
+}
+
+/* --- auth gate + banners -------------------------------------------------- */
+.gate {
+	max-width: 460px;
+	margin: 60px auto;
+}
+.gate ul.hint {
+	margin: 6px 0 0;
+	padding-left: 18px;
+}
+.gate ul.hint li {
+	margin: 3px 0;
+}
+
+/* A standing condition, not an event - a toast would scroll away and the operator
+   would never see it again. */
+.banner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+	padding: 10px 14px;
+	margin-bottom: 16px;
+	border-radius: var(--radius-sm);
+	font-size: 12.5px;
+}
+.banner.warn {
+	background: rgba(251, 191, 36, 0.08);
+	border: 1px solid rgba(251, 191, 36, 0.35);
+	color: var(--warn);
+}
+
+button.pill.user {
+	cursor: pointer;
+	font-family: inherit;
+}
+button.pill.user:hover {
+	color: var(--text);
+	border-color: var(--line);
 }
 
 ::-webkit-scrollbar {

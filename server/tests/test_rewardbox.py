@@ -17,6 +17,8 @@ _tmp = tempfile.mkdtemp()
 playerdb.DB_PATH = Path(_tmp) / "players.db"
 
 import rewardbox
+from tests.seed import one_account
+one_account()          # multiplayer mode does not mint a save; give load_state() one
 import server
 
 

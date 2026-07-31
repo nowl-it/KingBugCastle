@@ -5816,8 +5816,8 @@ Vous ne pourrez pas participer aux raids de la saison actuelle en tant que membr
   <String Key="ClanBattleModifier_13">qui râle</String>
   <String Key="ClanBattleModifier_14">suprême</String>
   <String Key="UserLockedClanBattleAlert">Ce joueur ne peut participer au raid de cette saison en tant que membre de clan.</String>
-  <String Key="UpdateNoticeVersion">170000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/39d1c2e0-6f0e-804a-acc0-f507558ede41</String>
+  <String Key="UpdateNoticeVersion">171100</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Voulez-vous vraiment dissoudre le clan ?</String>
   <String Key="Clan_Menu_LeaveConfirm">Voulez-vous vraiment quitter le clan ?</String>
   <String Key="RogueLike_ReleaseAtLevel">Déverrouillé au nv. {0}</String>
@@ -6903,14 +6903,14 @@ génère une marque sur chaque ennemi qui amplifie les DEG de la prochaine comp�
   <String Key="ShopItemName_1160">Pack Dragonicide</String>
   <String Key="UnitName_10570">Farael</String>
   <String Key="UnitSubName_10570">Mage arcanique</String>
-  <String Key="Potential_10570_0">En éliminant l'ennemi avec &lt;Tirs arcaniques&gt;, utilise la magie arcanique 1 fois de plus (jusqu'à 2 fois max).</String>
-  <String Key="Potential_10570_1">En éliminant l'ennemi avec &lt;Tirs arcaniques&gt;, DEG totaux de la magie arcanique restante +50% (non cumulable).</String>
+  <String Key="Potential_10570_0">En éliminant un ennemi avec &lt;Tirs arcaniques&gt;, récupère 0~90% des PM max. Moins de projectiles arcaniques sont tirés avant l'élimination, plus la récupération augmente</String>
+  <String Key="Potential_10570_1">Pendant &lt;Tirs arcaniques&gt;, les dégâts augmentent progressivement de 15% (Cumul illimité)</String>
   <String Key="SkinDesc_Default_10570">Bien qu'il fût un elfe ambitieux, Farael n'arrivait pas à maîtriser son mana et ne s'entendait plus avec ses semblables. Un jour, il rencontra Mel et les camarades de cette dernière qui étaient en visite dans le royaume des elfes. Dans le but de prouver sa valeur, il quitta la forêt éternelle en leur compagnie.</String>
   <String Key="SkillName_10570">Tirs arcaniques</String>
   <String Key="SkillDesc_10570">Utilise une magie arcanique {AttackCount} fois vers la cible, infligeant {105700@Damage:MAtkPer} DEG sur toutes les cases d'une direction aléatoire. Si la cible meurt, lance les coups restants de la magie arcanique sur un ennemi proche du lanceur.</String>
   <String Key="MissionDesc_10357">Combattre avec Farael dans le deck</String>
   <String Key="Name_Potential_10570_2">Mana débordant</String>
-  <String Key="Potential_10570_2">Pour chaque coup de magie arcanique de &lt;Tirs arcaniques&gt;, se confère une barrière à hauteur de 30% de son INT.</String>
+  <String Key="Potential_10570_2">Chaque projectile arcanique de &lt;Tirs arcaniques&gt; restaure 20% des PV max, +20% des PV max pour chaque tir consécutif (jusqu'à 100% de soin)</String>
   <String Key="SkinName_1057000">Farael mage novice</String>
   <String Key="SkinDesc_1057000">Dès sa naissance, Farael possédait un mana exubérant. Mais en grandissant, alors que son entourage crut qu'il deviendrait un grand mage, il se montra incapable de contrôler sa magie débordante. S'il n'avait pas rencontré la personne qui avait pris soin de lui afin qu'il ne perde pas l'espoir, il aurait abandonné la voie de la magie depuis longtemps.</String>
   <String Key="ReportType_Teaming">Teaming : former une équipe avec ses adversaires via les éléments en dehors du jeu</String>
@@ -7039,8 +7039,7 @@ Il est aussi possible d'en obtenir en supplément par des moyens spéciaux.</Str
   <String Key="BuildingEffect_TotalHpPer">PV totaux +{Value}%</String>
   <String Key="BuildingEffect_TotalMAtkPer">INT totale +{Value}%</String>
   <String Key="Name_Potential_10570_3">Diffusion de magie</String>
-  <String Key="Potential_10570_3">Élargit le rayon des DEG infligés par la magie arcanique en 3 cases
-INT totale de Farael -30%</String>
+  <String Key="Potential_10570_3">La Zone de dégâts de &lt;Tirs arcaniques&gt; passe à 3 cases et détruit la Barrière de la cible avant d'infliger des dégâts</String>
   <String Key="RestartColosseum">Voulez-vous réaccéder à la bataille d'acharnement à laquelle vous participiez ?</String>
   <String Key="ColosseumReenterWaitForBattleEnds">Attendez que le combat en cours se termine...</String>
   <String Key="Shop_Tab_Special">Produits spéciaux</String>
@@ -9434,8 +9433,8 @@ Toutes les stats de la Makina sont identiques à celles de Lyé lors de son invo
   <String Key="SkillDesc_10550_Short">Chaque esprit de pierre possède {Unit@OverwriteHpByParent:HpPer:BaseValue}% des PV et {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% de l'INT/AGI/vitesse de déplacement d'Élisabeth, et lors de l'attaque normale, inflige {Unit@OverwriteAtkByParent} DEG d'INT à hauteur de {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% de l'INT d'Élisabeth.</String>
   <String Key="SkillAltDesc_10550_Short">Chaque esprit de pierre possède {Unit@OverwriteHpByParent:HpPer:BaseValue}% des PV et {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% de l'INT/AGI/vitesse de déplacement d'Élisabeth, et lors de l'attaque normale, inflige {Unit@OverwriteAtkByParent} DEG d'INT à hauteur de {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% de l'INT d'Élisabeth.</String>
   <String Key="SkillDesc_10560_Short">Pendant {Time} s, transforme {ConnectedMAtkBuffPer}% de l'INT du lanceur pour les transférer aux stats initiales de la cible enchaînée et amplifie les DEG de compétence de la cible de {BaseSkillDamageMul}%. (Impossible d'enchaîner la même cible avec plusieurs Saeryung)</String>
-  <String Key="SkillDesc_10570_Short">Lance une magie arcanique {AttackCount} fois, infligeant {105700@Damage:MAtkPer} DEG aux ennemis dans toutes les cases d'une direction aléatoire.</String>
-  <String Key="SkillDesc_105720_Short">Lance une magie arcanique {AttackCount} fois, infligeant {105700@Damage:MAtkPer} DEG aux ennemis dans {1057011@SplashRangeY} case(s) d'une direction aléatoire.</String>
+  <String Key="SkillDesc_10570_Short">Tire continuellement des projectiles arcaniques qui infligent {105700@Damage:MAtkPer} de dégâts à toutes les cases dans 1 des 4 directions aléatoires.</String>
+  <String Key="SkillDesc_105720_Short">Tire continuellement des projectiles arcaniques qui détruisent les Barrières et infligent {105700@Damage:MAtkPer} de dégâts sur {1057011@SplashRangeY} cases de large dans 1 des 4 directions aléatoires.</String>
   <String Key="SkillDesc_105721_Short">Lance une magie arcanique {AttackCount} fois, infligeant {105700@Damage:MAtkPer} DEG aux ennemis dans {1057011@SplashRangeX} case(s) d'une direction aléatoire.</String>
   <String Key="SkillDesc_10580_Short">Lorsqu'elle subit des DEG, a {Unit@MissRatio}% de chances de les annuler complètement et d'obtenir {Unit@AddTechniqueAtMiss} PT. Quand les PT sont au max, fonce vers la cible, infligeant {Damage:MAtkPer} DEG, puis {10585@TickDamage:AtkPer} DEG {10585@AttackCount} fois.</String>
   <String Key="SkillDesc_10600_Short">Invoque {SummonUnitCountForDesc} illusions qui durent {10605@Time} s. Une illusion ne peut être ciblée et inflige des DEG à hauteur de (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% de l'ATQ de Saras.</String>
@@ -9503,8 +9502,8 @@ Toutes les stats de la Makina sont identiques à celles de Lyé lors de son invo
   <String Key="SkillDesc_10530_Long">Pendant {Time} sec., la MENACE augmente de {BaseDefPen}, et les attaques normales infligent à tous les ennemis à proximité dans un rayon de {10535@SplashRangeSum} cases des dégâts égaux à {10535@Damage:AtkPer:BaseValue}% de l'ATQ. La cible principale subit aussi {105300@TickDamage} de DEG normaux d'INT {105300@DescTickCount} fois pendant {105300@Time} sec.</String>
   <String Key="SkillDesc_10540_Long">Rappelle tous les esprits de pierre invoqués par le lanceur. Inflige {10550@Damage:BaseValue} + {10550@Damage:MAtkPer} DEG à tous les ennemis dans {10550@SplashRangeX}{X}{10550@SplashRangeY} cases autour de l'emplacement des esprits de pierre et les étourdit pendant {10550@StunTime} s. Invoque à nouveau {SummonCountForDesc} esprit(s) de pierre. ({Unit@GlobalMaxSummonCount} esprit(s) de pierre max sur le terrain)</String>
   <String Key="SkillDesc_10560_Long">Avant le début du combat, s'enchaîne à l'allié le plus proche. Lors de l'utilisation de compétence, applique la technique transmise par la famille pendant {Time} s pour transformer {ConnectedMAtkBuffPer}% de l'INT du lanceur avant de les transférer sur la cible enchaînée, ce qui augmente ses stats initiales. Amplifie les DEG de compétence de la cible de {BaseSkillDamageMul}%. (Il est impossible d'enchaîner la même cible avec plusieurs Saeryung.)</String>
-  <String Key="SkillDesc_10570_Long">Lance vers la cible une magie arcanique imprévisible, infligeant {AttackCount} fois {105700@Damage:MAtkPer} DEG aux ennemis dans toutes les cases d'une direction aléatoire. Si la cible meurt, lance les coups restants de la magie arcanique sur un ennemi proche du lanceur.</String>
-  <String Key="SkillDesc_105720_Long">Lance vers la cible une magie arcanique imprévisible, infligeant {AttackCount} fois {105700@Damage:MAtkPer} DEG à tous les ennemis dans {1057011@SplashRangeY} case(s) d'une direction aléatoire. Si la cible meurt, lance les coups restants de la magie arcanique sur un ennemi proche du lanceur.</String>
+  <String Key="SkillDesc_10570_Long">Tire des projectiles arcaniques imprévisibles. Vise l'ennemi avec le plus de PV et inflige {105700@Damage:MAtkPer} de dégâts à toutes les cases dans 1 des 4 directions aléatoires toutes les {AttackDelay} s. Ne s'arrête pas tant que le lanceur n'est pas sous Immobilisation ou que la cible n'est pas vaincue.</String>
+  <String Key="SkillDesc_105720_Long">Tire des projectiles arcaniques imprévisibles. Vise l'ennemi avec le plus de PV et, toutes les {AttackDelay} s, détruit les Barrières de tous les ennemis sur {1057011@SplashRangeY} cases de large dans 1 des 4 directions aléatoires, puis inflige {105700@Damage:MAtkPer} de dégâts. Ne s'arrête pas tant que le lanceur n'est pas sous Immobilisation ou que la cible n'est pas vaincue.</String>
   <String Key="SkillDesc_105721_Long">Lance vers la cible une magie arcanique imprévisible, infligeant {AttackCount} fois {105700@Damage:MAtkPer} DEG à tous les ennemis dans {1057011@SplashRangeX} case(s) d'une direction aléatoire. Si la cible meurt, lance les coups restants de la magie arcanique sur un ennemi proche du lanceur.</String>
   <String Key="SkillDesc_10580_Long">Lorsqu'elle subit des DEG, a {Unit@MissRatio}% de chances d'esquiver, ce qui lui permet d'annuler les DEG, les maléfices et d'obtenir {Unit@AddTechniqueAtMiss} PT. Quand les PT sont au max, fonce vers la cible, infligeant {Damage:MAtkPer} DEG d'INT, et effectue {10585@AttackCount} attaques normales, infligeant des DEG à hauteur de {10585@TickDamage:AtkPer:BaseValue}% de l'ATQ.</String>
   <String Key="SkillDesc_10600_Long">Avec le pouvoir du néant, invoque {SummonUnitCountForDesc} illusions qui durent {10605@Time} s. Une illusion ne peut être ciblée et inflige des DEG à hauteur de (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt; + {10610@Damage:AtkPer:MAtkPer})% de l'ATQ de Saras.</String>
@@ -13134,9 +13133,9 @@ Voulez-vous continuer ?</String>
   <String Key="ItemName_40632">Adjudant</String>
   <String Key="ItemDesc_40632">Si placé dans une [case de rôle], génère une [case de rôle d'Adjudant] avec {0}% d'effet dans une autre case aléatoire. Ne peut équiper qu'une seule rune Adjudant.</String>
   <String Key="ItemName_40643">Dominateur</String>
-  <String Key="ItemDesc_40643">Effet suppl. de la [case de rôle] +{0}%.
-Si le Dominateur est en vie, les héros ayant commencé le combat hors d'une [case de rôle] ressuscitent {1} s après leur mort.
-Si le Dominateur meurt, le combat se termine immédiatement par une défaite.</String>
+  <String Key="ItemDesc_40643">Obtenir +{0}% supplémentaire de l'effet de [Emplacement de rôle]
+Tant que le Dominateur est en vie, les Héros sauf le Dominateur ressuscitent {1} s après leur mort
+Lors de la mort du Dominateur, Défaite en Combat immédiate</String>
   <String Key="BuildingEffect_BaseHybridDef">DEF +{Value}</String>
   <String Key="BuildingEffect_BattleStartMana">PM +{Value}% au début du combat</String>
   <String Key="BuildingEffect_BattleStartMana_Long">Augmente la charge des PM initiaux.</String>
@@ -18000,4 +17999,60 @@ Après le début du Combat, obtient +{11}% de Résistance aux maléfices et +{12
   <String Key="Overcome_10800_3">À chaque Frénésie, PV max totaux de la Forme vampire +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_4">Chaque fois que l'effet de dégâts à proximité de la Forme vampire inflige des dégâts, DEG infligés en Forme vampire +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="UnitName_10810">Alessia</String>
+  <String Key="LeagueName_12">Ligue de la Chaleur</String>
+  <String Key="SkinDesc_1044005">&lt;i&gt;Récompense de participation à la Ligue de la Chaleur en Arène&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400500">&lt;i&gt;Récompense pour avoir atteint des paliers de points dans la Ligue de la Chaleur en Arène&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400501">&lt;i&gt;Récompense de Classement de la Ligue de la Chaleur en Arène&lt;/i&gt;</String>
+  <String Key="SkinDesc_1071004">&lt;i&gt;Récompense de participation à la Ligue de la Chaleur en Bataille&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100400">&lt;i&gt;Récompense pour avoir atteint des paliers de points dans la Ligue de la Chaleur en Bataille&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100401">&lt;i&gt;Récompense de Classement de la Ligue de la Chaleur en Bataille&lt;/i&gt;</String>
+  <String Key="SkinName_1057002">Roi de l'Étoile du matin Farael</String>
+  <String Key="SkinDesc_1057002">&lt;i&gt;La plus noble lumière des étoiles, née à l'aube, deviendra la lumière la plus éclatante pour percer les ténèbres.&lt;/i&gt;</String>
+  <String Key="SuperShieldModulator">Obtenir Parade</String>
+  <String Key="BuildingEffect_BaseDamageReflect">Réfléchit {Value}% des DEG
+(-50% de DEG d'INT subis)</String>
+  <String Key="BuildingEffect_BaseDamageReflect_Long">Réflexion d'une partie des DEG subis du héros à l'ennemi</String>
+  <String Key="TreasureName_30042">Perataus</String>
+  <String Key="TreasureSubName_30042">Bouclier noir d'encre</String>
+  <String Key="TreasureDesc_30042">Le Bouclier de Behimouth n'est pas seulement fait pour la défense. La Charge féroce de Behimouth, menée avec son lourd Bouclier, cabosse en un instant même l'armure la plus solide.</String>
+  <String Key="TreasureSkillName_30042">Chute</String>
+  <String Key="BuffDataName_3300421">Fracture I</String>
+  <String Key="BuffDataName_3300422">Cabossage I</String>
+  <String Key="BuffDataName_3300423">Neutralisation</String>
+  <String Key="BuffDataName_3300424">Cabossage II</String>
+  <String Key="BuffDataName_3300425">Fracture II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Boutique spéciale du pick-up Perataus</String>
+  <String Key="SpecialPackage_1680">Pack de Perataus 1</String>
+  <String Key="SpecialPackage_1681">Pack de Perataus 2</String>
+  <String Key="SpecialPackage_1682">Pack de Perataus 3</String>
+  <String Key="BuffDataDesc_3300421">Transmission de dégâts +{1}x pour chaque {0} MENACE</String>
+  <String Key="BuffDataDesc_3300422">DEG phys. subis par les ennemis Instables +{0}%</String>
+  <String Key="BuffDataDesc_3300423">Chaque fois qu'Instable est retiré, tous les alliés obtiennent +{0} Parade pour chaque ennemi concerné</String>
+  <String Key="BuffDataDesc_3300424">DEG phys. subis par les ennemis Instables +{0}%</String>
+  <String Key="BuffDataDesc_3300425">Transmission de dégâts +{1}x pour chaque {0} MENACE</String>
+  <String Key="TreasureSkillDesc_3300420">Quand vous infligez des DEG de compétence à un ennemi, la cible reçoit Instable
+Si un allié inflige à un ennemi Instable des DEG phys. égaux à au moins {0}% des PV max de la cible, {1}% de ces dégâts sont transmis comme DEG spéciaux à un autre ennemi Instable, puis Instable est retiré de tous les ennemis
+&lt;color=#808080&gt;&lt;i&gt;Cet effet est partagé même si différents Héros appliquent Instable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">Quand vous infligez des DEG de compétence à un ennemi, la cible reçoit Instable
+Si un allié inflige à un ennemi Instable des DEG phys. égaux à au moins {0}% des PV max de la cible, {1}% de ces dégâts sont transmis comme DEG spéciaux à un autre ennemi Instable, puis Instable est retiré de tous les ennemis
+Transmission de dégâts +{3}x pour chaque {2} MENACE
+&lt;color=#808080&gt;&lt;i&gt;Cet effet est partagé même si différents Héros appliquent Instable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">Quand vous infligez des DEG de compétence à un ennemi, la cible reçoit Instable
+Si un allié inflige à un ennemi Instable des DEG phys. égaux à au moins {0}% des PV max de la cible, {1}% de ces dégâts sont transmis comme DEG spéciaux à un autre ennemi Instable, puis Instable est retiré de tous les ennemis
+Transmission de dégâts +{3}x pour chaque {2} MENACE
+DEG phys. subis par les ennemis Instables +{4}%
+Cette augmentation des DEG phys. subis ne se cumule pas. Seule la valeur la plus élevée s'applique
+&lt;color=#808080&gt;&lt;i&gt;Cet effet est partagé même si différents Héros appliquent Instable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">Quand vous infligez des DEG de compétence à un ennemi, la cible reçoit Instable
+Si un allié inflige à un ennemi Instable des DEG phys. égaux à au moins {0}% des PV max de la cible, {1}% de ces dégâts sont transmis comme DEG spéciaux à un autre ennemi Instable, puis Instable est retiré de tous les ennemis
+Transmission de dégâts +{3}x pour chaque {2} MENACE
+DEG phys. subis par les ennemis Instables +{4}%
+Cette augmentation des DEG phys. subis ne se cumule pas. Seule la valeur la plus élevée s'applique
+Chaque fois qu'Instable est retiré, tous les alliés obtiennent +{5} Parade pour chaque ennemi concerné
+&lt;color=#808080&gt;&lt;i&gt;Cet effet est partagé même si différents Héros appliquent Instable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="SpecialShop_TreasureDoublePickUp10014">Boutique spéciale du pick-up de Trésor</String>
+  <String Key="SpecialPackage_1676">Pack 1 de Pierre d'invocation du pick-up de Trésor</String>
+  <String Key="SpecialPackage_1677">Pack 2 de Pierre d'invocation du pick-up de Trésor</String>
+  <String Key="SpecialPackage_1678">Pack Caelus</String>
+  <String Key="SpecialPackage_1679">Pack Farceurs</String>
 </Strings>

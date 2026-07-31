@@ -7,7 +7,13 @@
 unity/
 tools/
 ghidra/
+# `il2cpp/*` alone excludes the DIRECTORIES, so git never descends into them and
+# the negation below can never match - v171.0.00's lib only ships because it was
+# tracked before this rule existed. Re-include the dirs, exclude their contents,
+# then let the LFS-tracked _ssl libs back in.
 il2cpp/*
+!il2cpp/*/
+il2cpp/*/*
 !il2cpp/*/libil2cpp_v*_ssl.so
 frida/
 xml_history/
@@ -95,6 +101,10 @@ server/state/.write.lock
 # Live player save (runtime state; WAL/shm/lock already ignored above)
 server/state/players.db
 server/state/pre-sqlite-backup/
+# ...and the automatic rotations of it. players.db itself was ignored but this
+# directory was not, so KGC_BACKUP_HOURS quietly staged real player saves for
+# commit - names, castle names, currency, the lot.
+server/state/backups/
 
 # Refused build path — emulator/anti-cheat bypass, never distribute
 server/build_v171_emulator.py
@@ -103,3 +113,19 @@ server/build_v171_emulator.py
 scratchpad/
 server/state/player.json
 server/state/players/
+
+# Anything genuinely secret goes in server/secrets/ and never in git. Ignore the
+# CONTENTS rather than the directory, so a new secret dropped in there is covered
+# without anyone remembering to add a rule - while the README explaining the
+# convention still ships. `server/secrets/` on its own would exclude the directory,
+# git would never descend into it, and the negation below could never match.
+server/secrets/*
+!server/secrets/README.md
+# Belt and braces for the common shapes, wherever they land. Google hands its OAuth
+# client out as a downloaded .json; one `git add .` away from being published, and
+# the secret in it authorises token exchange as us.
+*oauth*.json
+*client_secret*.json
+.env
+.env.*
+server/state/*.bak

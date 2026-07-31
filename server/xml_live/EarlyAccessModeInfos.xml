@@ -2686,7 +2686,7 @@
                 <CardLevel>20</CardLevel>
                 <Overcome>5</Overcome>
             </TestDimensionUnit>
-        </TestDimensionUnits>        
+        </TestDimensionUnits>
         <!-- 보구 -->
         <TestTreasures>
             <TestTreasure>
@@ -2695,5 +2695,31 @@
                 <Overcome>10</Overcome>
             </TestTreasure>
         </TestTreasures>
-    </EarlyAccessModeInfo>           
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1710" Inherit="1520">
+        <StartAt>20260723_000000</StartAt>
+        <EndAt>20260727_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30041</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1711" Inherit="1520">
+        <StartAt>20260806_000000</StartAt>
+        <EndAt>20260810_105959</EndAt>
+        <TestDimensionUnits>
+            <TestDimensionUnit>
+                <UnitID>10800</UnitID>
+                <CardLevel>20</CardLevel>
+                <Overcome>5</Overcome>
+            </TestDimensionUnit>
+        </TestDimensionUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
 </EarlyAccessModeInfos>

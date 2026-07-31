@@ -323,6 +323,7 @@
   <String Key="ExpPerHero">خبرة البطل الواحد</String>
   <String Key="GoldInclude">ذهب مضمون</String>
   <String Key="NewHeroPercentage">إحتمال ظهور الأبطال الجديدة</String>
+  <String Key="ExpShop">Daily Shop</String>
   <String Key="CashShop">متجر الألماس</String>
   <String Key="GoldShop">متجر الذهب</String>
   <String Key="BoxShop">متجر لفيفات الإستدعاء</String>
@@ -362,6 +363,15 @@
   <String Key="Store_Chpater_Pakage_Title">حزمة الفصل 1</String>
   <String Key="Store_Pakage_Desc">تحصل على المنتج المحتوي على مكافآت متنوعة.</String>
   <String Key="PleaseSelectHeroToGive">يرجى إختيار البطل الذي تريد زيادة خبرته.</String>
+  <String Key="ShopExpInfo">In the Daily Shop, you can obtain Daily Shop Currency through 
+&lt;color=#FFD247&gt;Normal Hero Summon&lt;/color&gt; or &lt;color=#FFD247&gt;Normal Relic Summon&lt;/color&gt;
+and spend it here.
+
+Resets daily,
+and the amount of EXP you can buy
+increases with your &lt;color=#FFD247&gt;Castle Level&lt;/color&gt;.
+
+New Hero Summon is only available if there are still Heroes you do not own.</String>
   <String Key="ShopGachaInfo">On every &lt;color=#FFD247&gt;fourth Scroll purchase&lt;/color&gt;, you can purchase an &lt;color=#FFD247&gt;enhanced Scroll&lt;/color&gt; that has &lt;color=#FFD247&gt;double&lt;/color&gt; the value.</String>
   <String Key="ShopArtifactGachaInfo">On every &lt;color=#FFD247&gt;fourth Relic Chest purchase&lt;/color&gt;, you can purchase an &lt;color=#FFD247&gt;enhanced Relic Chest&lt;/color&gt; that has &lt;color=#FFD247&gt;double&lt;/color&gt; the value.</String>
   <String Key="Skin_Token">عملات الجلد</String>
@@ -730,6 +740,7 @@
   <String Key="Potential_10100_1">1 صد مطلق بعد استخدام &lt;هجوم مفاجئ&gt;</String>
   <String Key="Potential_10140_0">شحن مانا +90% في بداية القتال</String>
   <String Key="Potential_10140_1">مدة &lt;تجسد&gt; +1 ثا</String>
+  <String Key="Potential_10150_1">When Shasha's summon is removed, Lily gains 15 MP recovery for each 1 sec. of &lt;Summon Golem&gt; duration (max. 75)</String>
   <String Key="Potential_10170_1">+1 target of &lt;Crackle&gt;</String>
   <String Key="Potential_10190_0">دفع الأعداء إلى الخلف بـ 1 مسافة إضافية لكل &lt;دفاع مكثف&gt;</String>
   <String Key="Potential_10190_1">Grants Protection equal to 100% of Spell Power upon himself and the targeted ally of &lt;Reckless Protection&gt;</String>
@@ -900,9 +911,17 @@ Chance of additional tier-up when combining equipment</String>
   <String Key="SaveSuperShieldProb_Piece">Upgrade Altar of Blood
 Chance to negate the destruction of Mighty Block</String>
   <String Key="Building3_LvUp">تحصين تمثال العملاق +{0}</String>
+  <String Key="ByMaxHpPerDesc">Altar of Giant {0} Enhance
+Upon normal attack: Deals Spell damage equal to {1} of Max HP to nearby enemies in a 5X5 area (Cooldown: 2 sec.)</String>
   <String Key="Building3_LvUp_Piece">تحصين تمثال العملاق</String>
+  <String Key="ByMaxHpPerDesc_Piece">Altar of Giant Enhance
+Upon normal attack: Deals damage based on Max HP to nearby enemies in a 5X5 area (Cooldown: 2 sec.)</String>
   <String Key="Building4_LvUp">تحصين تمثال الساحر +{0}</String>
+  <String Key="BaseManaToTopUnits">Altar of Mage {0} Enhance
+Initial MP +{1} for all allies with 5★ or higher</String>
   <String Key="Building4_LvUp_Piece">تحصين تمثال الساحر</String>
+  <String Key="BaseManaToTopUnits_Piece">Altar of Mage Enhance
+Increases Initial MP of all allies with 5★ or higher</String>
   <String Key="Building5_LvUp">تحصين تمثال الثراء +{0}</String>
   <String Key="MerchantRefreshCost">+{0} Upgrade Altar of Greed
 Pay {1} Silver to refresh the Wandering Merchant's shop once</String>
@@ -1959,6 +1978,10 @@ to exchange them with Event items!</String>
   <String Key="ArtifactName_13080">Holy Grenade</String>
   <String Key="ArtifactDesc_13080">A grenade that is used to purify evil mana at the Holy Church.
 It temporarily reduces mana in the area.</String>
+  <String Key="ManaLockTime">When an ally is killed, emits a shockwave within 2 tiles.
+Removes Mighty Block, Spell Block, and Physical Block from all enemies in range, cancels their current skill, and blocks MP recovery for {0} sec.</String>
+  <String Key="ManaLockTime_Piece">When an ally is killed, emits a shockwave within 2 tiles.
+Removes Mighty Block, Spell Block, and Physical Block from all enemies in range, cancels their current skill, and blocks MP recovery for a certain time</String>
   <String Key="ThemeClearExpPer">+{0} EXP reward of Invasion mode
 {1} additional EXP distributed to deployed heroes</String>
   <String Key="ThemeClearExpPer_Piece">Increase EXP reward of Invasion mode
@@ -2383,6 +2406,7 @@ King's Tokens can be converted into Hero's Tokens of your choice.</String>
 +40% final damage to that target</String>
   <String Key="Potential_10090_2">+1 skill range for &lt;Lilting Melody&gt;</String>
   <String Key="Potential_10100_2">Exposes the 'weakness' of the &lt;Backstab&gt; target, increasing the damage they take by 30% for 10 sec (halved for bosses)</String>
+  <String Key="Potential_10150_2">Upon using &lt;Summon Golem&gt;, fully recovers MP of nearby allies in a 5x5/5x5/7x7/7x7 area</String>
   <String Key="Potential_10190_2">Provokes the enemy attacking the target ally of &lt;Reckless Protection&gt; and increases DEF by 350 for 4 sec</String>
   <String Key="Potential_10210_2">Activates shockwave on attacks, which deals damage equal to the Spell Power with a 33% chance during &lt;Holy Blade Garna&gt;</String>
   <String Key="Potential_10220_2">Upon every 10th normal attack, throws &lt;Mega Bomb&gt; that deals triple damage in 5x5 range</String>
@@ -2745,6 +2769,7 @@ I command thee: protect all beings on this land and enjoy what it offers.&lt;/i&
   <String Key="SeasonalEventMode_Season16">Foundation Day Festival</String>
   <String Key="SeasonalEventName_Season16">Foundation Day Festival</String>
   <String Key="Name_Potential_10320_3">Breeze</String>
+  <String Key="Potential_10150_3">Upon using &lt;Summon Golem&gt;, Charges 5 tiles, then Stuns enemies in the 3x3/3x3/5x5/5x5 area in front for 2 sec. and deals damage equal to 100% of Spell Power</String>
   <String Key="Potential_10100_3">Creates an illusion of Mara with 10% of ATK, Spell Power, and Max HP when using &lt;Backstab&gt;
 -20% final Max HP for Mara</String>
   <String Key="SkinName_1021002">Mel the Warrior of the Empire</String>
@@ -2954,6 +2979,7 @@ Rewards will be sent to your inbox.</String>
   <String Key="MissionType_Beginner">Beginner</String>
   <String Key="MissionDesc_ArtifactCraft">[Blacksmith] Craft {0} Relic(s)</String>
   <String Key="MissionDesc_ArtifactDismantle">[Blacksmith] Dismantle {0} Relic(s)</String>
+  <String Key="MissionDesc_ArtifactGacha">[Summon] Relic Summon {0} times</String>
   <String Key="MissionDesc_ArtifactMerge">[Blacksmith] Combine {0} Relic(s)</String>
   <String Key="MissionDesc_BuildingPoint">[Altar] Reach Altar level {0}</String>
   <String Key="MissionDesc_CardCount">[Hero] Own {0} hero(es) with level {1} or higher</String>
@@ -2963,6 +2989,7 @@ Rewards will be sent to your inbox.</String>
   <String Key="MissionDesc_ClanSupport">[Alliance] Request support {0} time(s)</String>
   <String Key="MissionDesc_DailyLoginCount">Log in daily {0} times in total</String>
   <String Key="MissionDesc_DailyMissionCompleteCount">Complete Daily Quest {0} time(s)</String>
+  <String Key="MissionDesc_Gacha">[Summon] Hero Summon {0} times</String>
   <String Key="MissionDesc_GodTierArtifactCount">[Blacksmith] Craft {0} God Tier Relic(s)</String>
   <String Key="MissionDesc_KingGodTierArtifactCount">[Blacksmith] Craft {0} King God Tier Relic(s)</String>
   <String Key="MissionDesc_JoinClan">[Alliance] Join an Alliance</String>
@@ -3400,11 +3427,13 @@ Only then I shall spare your life. Now, dance!&lt;/i&gt;</String>
   <String Key="ArtifactStackInfoTitle">Enhanced Relic Chest</String>
   <String Key="ArtifactStackInfoDesc">On every &lt;color=#FFD247&gt;fourth Relic Chest purchase&lt;/color&gt;, you can purchase an &lt;color=#FFD247&gt;enhanced Relic Chest&lt;/color&gt; that has &lt;color=#FFD247&gt;double&lt;/color&gt; the value.</String>
   <String Key="GachaName_1000">Firebird's Dance</String>
+  <String Key="GachaDesc_PickUpDefault">When a Hero appears, 1 of the 2 Heroes is &lt;color=#FFD247&gt;guaranteed!&lt;/color&gt;</String>
   <String Key="ShopItemName_305">Scroll of Blessing</String>
   <String Key="EventTriggerName_50014">Alchemy</String>
   <String Key="EventTriggerDesc_50014">Spend a certain amount of Silver to obtain Philosopher's Stone which converts a piece of equipment you own to a random piece of equipment of the same Tier.</String>
   <String Key="ItemName_25003">Philosopher's Stone</String>
   <String Key="ItemDesc_25003">Consumes {0} Silver to convert equipment you own to a random piece of equipment of the same Tier.</String>
+  <String Key="PickupDesc">1 of &lt;color=#FFD264&gt;{1} &amp; {0}&lt;/color&gt; is &lt;color=#FFD264&gt;guaranteed!&lt;/color&gt;</String>
   <String Key="BoxStackKeyResetAlert">Purchase counts are reset every day.</String>
   <String Key="FlagsName_Default">Knights' Banner</String>
   <String Key="FlagsDesc_Default">Honorable Central Region Knights' Banner</String>
@@ -4765,10 +4794,22 @@ The maximum level of the Altar is currently 15, and it can be increased through 
   <String Key="BuyEventFlag">Purchase Expedition Flags</String>
   <String Key="BuyEventFlagComplete">Expedition Flags added.</String>
   <String Key="FlagExchangeRatio">Use to obtain {0} Flag(s)</String>
+  <String Key="InventoryItemDesc_300">A summon scroll written on old parchment.
+Lets you perform 1 Normal Hero Summon.</String>
+  <String Key="InventoryItemDesc_301">A summon scroll written on fine parchment.
+Lets you perform 1 King's Hero Summon.</String>
+  <String Key="InventoryItemDesc_302">A summon scroll decorated with gold.
+Lets you perform 1 God's Hero Summon.</String>
   <String Key="InventoryItemDesc_303">A scroll that contains ultimate power.
 Allows 1 new hero summon.</String>
   <String Key="InventoryItemDesc_305">A scroll that contains the blessing of hope.
 Allows 1 summon of blessing.</String>
+  <String Key="InventoryItemDesc_350">An old Relic Chest.
+Open it to Obtain a Relic.</String>
+  <String Key="InventoryItemDesc_351">A luxurious Relic Chest.
+Open it to Obtain a Relic.</String>
+  <String Key="InventoryItemDesc_352">A special golden Relic Chest.
+Open it to Obtain a Relic.</String>
   <String Key="InventoryItemName_600">King's Exchange Certificate</String>
   <String Key="InventoryItemDesc_600_0">A certificate marked with the king's seal.
 Use it to select and obtain 1 from 20 Supplies/3 Expedition Banners/1 Flag of Trials.</String>
@@ -4869,6 +4910,9 @@ It can be used in crafting Relics.</String>
   <String Key="Skin_FirstTimeOnly_Desc">Cannot be obtained after the first obtainable period</String>
   <String Key="FirstTimeOnly">First time only</String>
   <String Key="VoucherExchangeRatio">Obtain {0} x{1} upon use</String>
+  <String Key="ShopItemName_350">Common Relic Chest</String>
+  <String Key="ShopItemName_351">King's Relic Chest</String>
+  <String Key="ShopItemName_352">God's Relic Chest</String>
   <String Key="PvPDisabled">لا يمكنك دخول الارينا حاليا.</String>
   <String Key="TowerDisabled">Tower of Trials is temporarily closed right now.</String>
   <String Key="RogueLikeDisabled">Great Rift is temporarily closed right now.</String>
@@ -4927,11 +4971,14 @@ Witness my overwhelming power!&lt;/i&gt;</String>
   <String Key="Hero_Awaken_Noti">{0} has reached level 16 and can now be Awakened.
 Upon Awakening, the hero's &lt;color=#FFD247&gt;Awakened Abilities&lt;/color&gt; can be used.</String>
   <String Key="ItemDescSub_40463_07">صد مطلق {0} مرات</String>
+  <String Key="CustomPickupDesc">When a Hero appears, the &lt;color=#FFD247&gt;selected Hero&lt;/color&gt; is &lt;color=#FFD247&gt;guaranteed!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Select Heroes</String>
   <String Key="SelectPickupUnitAgain">Reset</String>
   <String Key="SelectPickupUnitComplete">Selection Complete</String>
   <String Key="GachaName_9000">Welcome Summon</String>
   <String Key="OutgameTutorial_30_01">&lt;color=#ffc13d&gt;Summoning&lt;/color&gt; is essential to call upon new heroes and strengthen the ones you own.</String>
+  <String Key="OutgameTutorial_30_03">To get a new Hero, let's try a &lt;color=#ffc13d&gt;Normal Hero Summon&lt;/color&gt;.</String>
+  <String Key="OutgameTutorial_30_05">To wish your Castle success and growth, this summon will be &lt;color=#ffc13d&gt;free&lt;/color&gt; this time.</String>
   <String Key="OutgameTutorial_30_08">You can check the heroes and EXP you obtained at the &lt;color=#ffc13d&gt;Barracks&lt;/color&gt;.</String>
   <String Key="OutgameTutorial_30_09">You may continue to &lt;color=#ffc13d&gt;strengthen the heroes you own&lt;/color&gt; and summon &lt;color=#ffc13d&gt;new heroes&lt;/color&gt; through summoning.</String>
   <String Key="BuildingEffect_StatPer_Long">Increases equipment's base stats (ATK/Spell Power/Attack Speed/HP).</String>
@@ -5091,6 +5138,8 @@ You &lt;color=#FF0000&gt;cannot change&lt;/color&gt; the selected heroes after s
   <String Key="GachaName_1013">Hunt in the Darkness</String>
   <String Key="Name_Potential_10420_3">No Retreat</String>
   <String Key="Name_Potential_10430_3">Strafe</String>
+  <String Key="Potential_10430_3">The bounce target of &lt;Dancing Bullet&gt; is now random
+Bounce damage 70% → 120%</String>
   <String Key="EliteType5Format">{0} additional Elite Enemy appears</String>
   <String Key="HardModeShopTitle">Corruption Token Shop</String>
   <String Key="Ingame_Setting_DealMeterCheck">Measure Combat Power</String>
@@ -5705,8 +5754,8 @@ You cannot join the Raid for this season after leaving.</String>
   <String Key="ClanBattleModifier_13">Anguished</String>
   <String Key="ClanBattleModifier_14">Overwhelming</String>
   <String Key="UserLockedClanBattleAlert">This user cannot participate in this season's Alliance Raid.</String>
-  <String Key="UpdateNoticeVersion">170000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/39d1c2e0-6f0e-804a-acc0-f507558ede41</String>
+  <String Key="UpdateNoticeVersion">171100</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Are you sure you want to disband the Alliance?</String>
   <String Key="Clan_Menu_LeaveConfirm">Are you sure you want to leave the Alliance?</String>
   <String Key="RogueLike_ReleaseAtLevel">Unlocked at level {0}</String>
@@ -6292,10 +6341,13 @@ No penalty is applied for leaving.</String>
   <String Key="Colosseum_Alert_NetworkChange">Disconnected from the server because a network change was detected.</String>
   <String Key="UnitName_10530">Aenrath</String>
   <String Key="UnitSubName_10530">Eternity's Banished One</String>
+  <String Key="Potential_10530_0">At the start of Battle, Teleports to the point-symmetric position of the deployed tile</String>
+  <String Key="Potential_10530_1">Upon using &lt;Abyss of the Forest&gt;, Attack Speed increases by 100% of Menace</String>
   <String Key="SkinDesc_Default_10530">Aenrath was the watcher of the forest even long before the birth of the current Elven Prince. As fearful as he was of the darkness from the abyss that would reach the elves someday, Aenrath was also fascinated enough to study it. Like many who had fallen to become monsters after fighting so fiercely against them, the abyss tainted Aenrath's heart. One day, he vanished, leaving countless dead bodies of Elven watchers and a shard of a broken sword behind him.</String>
   <String Key="SkillName_10530">Abyss of the Forest</String>
   <String Key="SkillDesc_10530">Ambushes the farthest enemy to deal {Damage:MAtkPer} damage. For {10535@Time} sec, normal attacks deal damage equal to {105300@Damage:AtkPer:BaseValue}% of ATK to all enemies within {105300@SplashRangeX}{X}{105300@SplashRangeY} block(s) nearby.</String>
   <String Key="Name_Potential_10530_2">Shadow Sword</String>
+  <String Key="Potential_10530_2">Once per Battle each, when taking damage that would reduce HP below 100% or 50% of Max HP, ignore that damage and Hide for 2 sec.</String>
   <String Key="SkinName_1053000">Watcher Captain Aenrath</String>
   <String Key="SkinDesc_1053000">Aenrath, known as the disciple of silence, stood as the captain of the watchers for centuries and protected the Eternal Forest long before Tia rose to his rank. When he dwelled among his folk, those who set foot into the forest disappeared without a trace, and a shade shrouded the Elves and the Eternal Forest for years to come.</String>
   <String Key="Colosseum_Left_Popup_Rank1">You have won 1st place because you left during Strife Battlefield.</String>
@@ -6476,6 +6528,7 @@ Depending on the chapters you have cleared, you can purchase various products.
   <String Key="EnableK8sServer">true</String>
   <String Key="EnableK8sServerForIOS">true</String>
   <String Key="Name_Potential_10530_3">Endless Abyss</String>
+  <String Key="Potential_10530_3">When killed: Deals Spell damage equal to 100% of Spell Power 12 times to all enemies in a 5x5 area, piercing 100% of Spell DEF</String>
   <String Key="ColosseumDailyFree">Obtain &lt;color=#FFD247&gt; Round 8, 13 reward for free&lt;/color&gt; once every day.</String>
   <String Key="AppliedDateFormat">Effect applied for &lt;color=#ffd264&gt;{0}&lt;/color&gt; day(s) upon purchase</String>
   <String Key="BoughtSubscribePackage">Subscribed</String>
@@ -6786,17 +6839,22 @@ The mark is generated every 3 sec</String>
   <String Key="ShopItemName_1160">Dragon Slayer Invasion Package</String>
   <String Key="UnitName_10570">Farael</String>
   <String Key="UnitSubName_10570">Arcane Mage</String>
+  <String Key="Potential_10570_0">Upon killing an enemy with &lt;Arcane Scattershot&gt;, restore 0~90% of Max MP. The fewer arcane bolts fired before the kill, the more MP is restored</String>
+  <String Key="Potential_10570_1">During &lt;Arcane Scattershot&gt;, damage gradually increases by 15% (unlimited Stacks)</String>
   <String Key="SkinDesc_Default_10570">Farael used to cause worries even among the elves, as he could not wield his mana properly despite his overflowing motivation. One day, he ran into Mel and her party, who had happened to visit the Elven Kingdom. Determined to prove his worth, he departed from the Eternal Forest with them.</String>
   <String Key="SkillName_10570">Arcane Scattershot</String>
   <String Key="SkillDesc_10570">Casts Arcane Spell toward a target, dealing {105700@Damage:MAtkPer} damage {AttackCount} time(s) to all blocks within one random direction among the four directions. When the target is killed, the remaining Arcane Spell is cast to another nearby enemy.</String>
   <String Key="MissionDesc_10357">Play using Farael</String>
   <String Key="Name_Potential_10570_2">Undulating Mana</String>
+  <String Key="Potential_10570_2">Each arcane bolt from &lt;Arcane Scattershot&gt; restores 20% of Max HP, plus an additional 20% of Max HP for each consecutive shot (up to 100% healing)</String>
   <String Key="SkinName_1057000">Farael the Apprentice Mage</String>
   <String Key="SkinDesc_1057000">Farael was born with an unfathomable amount of mana. Others expected him to grow up to be a great mage, but he failed to meet such expectations as he could not properly wield his overflowing mana upon reaching maturity. Had it not been for a being who cared for Farael to keep his spirits high, he might have even gone as far as to forgo the art of magic.</String>
   <String Key="ReportType_Teaming">Teaming: Behavior of forming teams using elements outside of the game</String>
   <String Key="ArtifactName_14020">Dwarven Scope</String>
   <String Key="ArtifactDesc_14020">A scope that embodies Dwarven technology.
 Although it allows the user to see further and attack more precisely, its weight makes it difficult to be carried around.</String>
+  <String Key="MoveStopTimeDesc_Piece">Marks 2 tiles in the Battlefield as sniper spots. Deployed Heroes gain Mighty Block, are &lt;color=#f33&gt;unable to move&lt;/color&gt; for a certain time, Range +3, and their Normal damage dealt increases on the 1st and every 5th hit</String>
+  <String Key="MoveStopTimeDesc">Marks 2 tiles in the Battlefield as sniper spots. Deployed Heroes gain Mighty Block +{2}, are &lt;color=#f33&gt;unable to move&lt;/color&gt; for {0} sec., Range +3, and their Normal damage dealt increases by +{1}% on the 1st and every 5th hit.</String>
   <String Key="ColosseumBanned">Strife Battlefield entry restricted</String>
   <String Key="GachaName_1036">Cold Smile</String>
   <String Key="Name_Potential_10560_3">Uplift</String>
@@ -6916,6 +6974,7 @@ A hero that uses TP can gain additional TP in a special way.</String>
   <String Key="BuildingEffect_TotalHpPer">+{Value}% final HP</String>
   <String Key="BuildingEffect_TotalMAtkPer">+{Value}% final Spell Power</String>
   <String Key="Name_Potential_10570_3">Dispersion of Mana</String>
+  <String Key="Potential_10570_3">&lt;Arcane Scattershot&gt;'s damage Range increases to 3 tiles and destroys the target's Protection before dealing damage</String>
   <String Key="RestartColosseum">Would you like to rejoin the Strife Battlefield match that was in progress?</String>
   <String Key="ColosseumReenterWaitForBattleEnds">Waiting for the current battle to end...</String>
   <String Key="Shop_Tab_Special">Special Product</String>
@@ -7067,6 +7126,11 @@ Despite its large size, it often goes unnoticed by others.</String>
   <String Key="SkinName_1038003">Kanak the King of Wraiths</String>
   <String Key="SkinDesc_1038003">&lt;i&gt;I have returned, outer beings.
 Your grudges are acknowledged.&lt;/i&gt;</String>
+  <String Key="ColosseumInvadeItemDesc_10090">Damage Dealt to enemies within &lt;color=#8DFFFF&gt;5X5&lt;/color&gt; around this monster +{0}%</String>
+  <String Key="ColosseumInvadeItemDesc_12130">If an enemy within &lt;color=#8DFFFF&gt;5X5&lt;/color&gt; around this monster would take lethal damage, restore {0}% of Max HP</String>
+  <String Key="ColosseumInvadeItemDesc_13130">Total Attack Speed of all enemies within &lt;color=#8DFFFF&gt;5X5&lt;/color&gt; around this monster {0}%</String>
+  <String Key="ColosseumInvadeItemDesc_15160">If an enemy within &lt;color=#8DFFFF&gt;5X5&lt;/color&gt; around this monster would take damage greater than {0}% of Max HP from a single attack, ignore the excess damage and recover {1}% MP,</String>
+  <String Key="ColosseumAbilityDesc_80110">When a monster in the &lt;color=#ffcc00&gt;Void Elf Chapter&lt;/color&gt; is killed, all enemies within &lt;color=#8DFFFF&gt;5X5&lt;/color&gt; nearby gain Mighty Block {0}</String>
   <String Key="ColosseumAbilityName_80110">Endless Corruption</String>
   <String Key="Potential_10380_0">When Kanak kills an enemy that has curse stacks, transfers the curse stacks to a nearby enemy (max 4 times)</String>
   <String Key="Potential_10380_1">-30% damage taken by Kanak from enemies with curse stacks</String>
@@ -8904,6 +8968,8 @@ Maximum attack count of &lt;Full Bloom&gt; increases to 10</String>
   <String Key="Potential_10320_2">Upon being inflicted with movement-restricting crowd control for the first time after the beginning of the battle, instantly removes the crowd control, restores 100% MP, and becomes immune to crowd control for 2 sec.</String>
   <String Key="Potential_10320_3">If there are no targets for &lt;Gust&gt; within 3 range, the first arrow of &lt;Gust&gt; will push the target back by 2 blocks.</String>
   <String Key="Potential_10310_0">At the beginning of the battle, increases ATK by 100% of Spell Power.</String>
+  <String Key="Potential_10310_2">EVA +60% while using &lt;Crimson Slash&gt;
+If an enemy is killed with &lt;Crimson Slash&gt;, the EVA increase remains until the next skill use</String>
   <String Key="PvPShop_Season_Title">S{0} Battlefield Shop</String>
   <String Key="UnitRealName_10290">Agathe</String>
   <String Key="UnitConstellation_10290">Libra</String>
@@ -9264,6 +9330,7 @@ freezing everything eternally.&lt;/i&gt;</String>
   <String Key="SkillDesc_10120_Short">Transforms into a werewolf with increased HP ({Unit@TransformHpForDesc}) and ATK ({Unit@TransformAtkForDesc}).</String>
   <String Key="SkillDesc_10130_Short">Dashes towards the farthest enemy, dealing {Damage:BaseValue}+{Damage:MAtkPer} damage and stunning them for {StunTime} sec.</String>
   <String Key="SkillDesc_10150_Short">Lily summons and mounts Sha-sha the Golem with ({Unit@TransformHpForDesc}) HP and ({Unit@TransformAtkForDesc}) ATK.</String>
+  <String Key="SkillDesc_10160_Short">Heals self and nearby allies in a {SplashRangeX}{X}{SplashRangeY} area for {Heal:BaseValue}+{Heal:MAtkPer} HP.</String>
   <String Key="SkillDesc_10190_Short">Lands in front of the ally at the lead, dealing {Damage:BaseValue}+{Damage:MAtkPer} damage to enemies within {SplashRangeX}{X}{SplashRangeY} blocks and pushing them back by {Knockback} block(s).</String>
   <String Key="SkillDesc_10191_Short">Lands in front of the ally at the lead, dealing {Damage:BaseValue}+{Damage:MAtkPer} damage to enemies within {SplashRangeSum} block(s) nearby and pushing them back by {Knockback} block(s).</String>
   <String Key="SkillDesc_10200_Short">Launches a wave that hits both enemies and allies back and forth {Chain+1} times, dealing {10200@Damage:BaseValue}+{10200@Damage:MAtkPer} damage to the enemy and healing the ally by the same amount.</String>
@@ -9303,10 +9370,13 @@ All of the dolls' stats follow Rie's stats at the time the Machina is summoned.<
   <String Key="SkillDesc_10490_Short">Deals {Damage} damage to enemies within {RangeX}{X}{RangeY} range nearby {AttackCount} time(s) and applies {DrainOnHit}% Spell HP Drain. After dealing damage {Unit@SkillHitCountToChangeSkill} time(s), the Range of skill is increased by {104905@IncreaseSplashRangeForDesc} block(s) on its next use.</String>
   <String Key="SkillDesc_10500_Short">Deals {Damage:BaseValue}+{Damage:MAtkPer} damage {AttackCount} time(s) to enemies within {SplashRangeX}{X}{SplashRangeY} range nearby for {TotalAttackTime} sec. Upon using the skill, Kirdan moves to the location where he can attack the most enemies.</String>
   <String Key="SkillDesc_10525_Short">Mounts her horse to deal {Damage} damage to the enemy and pushes them back by {Knockback} block(s). Increases Movement Speed by {105200@MoveSpeedPer}% and obtains {105205@PriorityShield:MAtkPer} Protection. On the next attack, inflicts a normal attack that deals damage equal to {10520@Damage:AtkPer:BaseValue}% of ATK to enemies within {10520100@SplashRangeX}{X}{10520100@SplashRangeY} blocks in front.</String>
+  <String Key="SkillDesc_10530_Short">For {Time} sec., Menace increases, normal attacks deal damage to nearby targets, and the main target takes {105300@TickDamage} additional damage {105300@DescTickCount} times.</String>
   <String Key="SkillDesc_10540_Short">Recalls all Stone Spirits, then deals {10550@Damage:BaseValue}+{10550@Damage:MAtkPer} damage to enemies within {10550@SplashRangeX}{X}{10550@SplashRangeY} range near the Stone Spirits and stuns them for {10550@StunTime} sec. Summons {SummonCountForDesc} Stone Spirit(s) again. (Max {Unit@GlobalMaxSummonCount} Stone Spirits on the battlefield)</String>
   <String Key="SkillDesc_10550_Short">Stone Spirit's normal attack deals {Unit@OverwriteAtkByParent} spell damage, which is {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% of Elizabeth's Spell Power. Stone Spirit has {Unit@OverwriteHpByParent:HpPer:BaseValue}% of Elizabeth's HP and {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% of their Spell Power, Attack Speed, and Movement Speed.</String>
   <String Key="SkillAltDesc_10550_Short">Stone Spirit's normal attack deals {Unit@OverwriteAtkByParent} spell damage, which is {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% of Elizabeth's Spell Power. Stone Spirit has {Unit@OverwriteHpByParent:HpPer:BaseValue}% of Elizabeth's HP and {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% of their Spell Power, Attack Speed, and Movement Speed.</String>
   <String Key="SkillDesc_10560_Short">Grants {ConnectedMAtkBuffPer}% of Spell Power to the linked target and amplifies their skill damage by {BaseSkillDamageMul}% for {Time} sec. (Cannot link to a target that is already linked)</String>
+  <String Key="SkillDesc_10570_Short">Continuously fires arcane bolts that deal {105700@Damage:MAtkPer} damage to all tiles in 1 of 4 random directions.</String>
+  <String Key="SkillDesc_105720_Short">Continuously fires arcane bolts that destroy Protection and deal {105700@Damage:MAtkPer} damage in 1 of 4 random directions across {1057011@SplashRangeY} tiles.</String>
   <String Key="SkillDesc_105721_Short">Casts Arcane Spell, dealing {105700@Damage:MAtkPer} damage {AttackCount} time(s) to enemies in {1057011@SplashRangeX} block(s) within one random direction among the four directions.</String>
   <String Key="SkillDesc_10580_Short">Upon taking damage, has a {Unit@MissRatio}% chance to negate the damage and obtain {Unit@AddTechniqueAtMiss} TP. When TP is full, charges at the target to deal {Damage:MAtkPer} damage and then {10585@TickDamage:AtkPer} damage {10585@AttackCount} time(s).</String>
   <String Key="SkillDesc_10600_Short">Summons {SummonUnitCountForDesc} hallucination(s) that last for {10605@Time} sec. The hallucinations are not targetable and deal damage equal to (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% of Saras's ATK.</String>
@@ -9333,6 +9403,7 @@ All of the dolls' stats follow Rie's stats at the time the Machina is summoned.<
   <String Key="SkillDesc_1011000_Long_0">Hansi shoots a rain of arrows, dealing damage equal to {1011010@Damage:AtkPer:BaseValue}% of ATK to the target and all enemies near the target within {1011010@SplashRangeSum} block(s) {1011010@AttackCount} time(s) and reducing their final Movement Speed by {1011015@MoveSpeedDebuffPer:BaseValue}%. Then, with the archery technique passed down to the members of the Phoenix family, she increases the attack count of her normal attacks by {10110@AtkCount} for {10110@Time} sec.</String>
   <String Key="SkillDesc_10130_Long">Lycathrope dashes towards the farthest enemy, dealing {Damage:BaseValue}+{Damage:MAtkPer} damage and stunning them for {StunTime} sec.</String>
   <String Key="SkillDesc_10150_Long">Lily summons and mounts Sha-sha the Golem with ({Unit@TransformHpForDesc}) HP and ({Unit@TransformAtkForDesc}) ATK.</String>
+  <String Key="SkillDesc_10160_Long">Uses Energy of the Forest to heal Shasha and nearby allies in a {SplashRangeX}{X}{SplashRangeY} area for {Heal:BaseValue}+{Heal:MAtkPer} HP.</String>
   <String Key="SkillDesc_10190_Long">Behemus lands in front of the ally at the lead, dealing {Damage:BaseValue}+{Damage:MAtkPer} damage to all enemies within {SplashRangeX}{X}{SplashRangeY} blocks and pushing them back by {Knockback} block(s) with the power of his sturdy shields.</String>
   <String Key="SkillDesc_10191_Long">Behemus lands in front of the ally at the lead, dealing {Damage:BaseValue}+{Damage:MAtkPer} damage to all enemies within {SplashRangeSum} block(s) nearby and pushing them back by {Knockback} block(s) with the power of his sturdy shields.</String>
   <String Key="SkillDesc_10200_Long">Yeon launches a wave that hits the nearest target. The wave hits both enemy and ally back and forth {Chain+1} times, dealing {10200@Damage:BaseValue}+{10200@Damage:MAtkPer} damage to the enemy and healing the ally by {10200@Damage:BaseValue}+{10200@Damage:MAtkPer}.</String>
@@ -9370,8 +9441,11 @@ All of the dolls' stats follow Rie's stats at the time the Machina is summoned.<
   <String Key="SkillDesc_10490_Long">Ophelia uses blood magic to deal {Damage} damage to all enemies within {RangeX}{X}{RangeY} range nearby {AttackCount} time(s) and applies {DrainOnHit}% Spell HP Drain. After dealing damage {Unit@SkillHitCountToChangeSkill} time(s), the range of &lt;Blood and Soul&gt; is increased by {104905@IncreaseSplashRangeForDesc} block(s) on its next use.</String>
   <String Key="SkillDesc_10500_Long">Kirdan deals damage {AttackCount:BaseValue} time(s) in total to all enemies within {SplashRangeX}{X}{SplashRangeY} range nearby for {TotalAttackTime} sec, with every {AttackCountAtTickForDesc} attack(s) dealing {Damage:BaseValue}+{Damage:MAtkPer}. He deals damage {IncreaseAttackCountForDesc} more time(s) for every {AttackSpeedPerForDesc}% Attack Speed that exceeds {OverRatioForDesc}%. Upon using this skill, Kirdan moves to the location where he can attack the most enemies.</String>
   <String Key="SkillDesc_10525_Long">Victoria calls her favorite steed Whiterun to mount for {105205@Time} sec, dealing {Damage} damage and pushing them back by {Knockback} block(s) if there is an enemy nearby. While in the mounted state, her Movement Speed increases by {105200@MoveSpeedPer}% and she gains {105205@PriorityShield:MAtkPer} Protection. Upon mounting the horse, she prioritizes pursuing enemies who are pushed back. Victoria dismounts her horse on her next normal attack and deals physical normal damage equal to {10520@Damage:AtkPer:BaseValue}% of ATK to enemies within {10520100@SplashRangeX}{X}{10520100@SplashRangeY} blocks in front.</String>
+  <String Key="SkillDesc_10530_Long">For {Time} sec., Menace +{BaseDefPen}, and normal attacks deal damage equal to {10535@Damage:AtkPer:BaseValue}% of ATK to all nearby enemies within {10535@SplashRangeSum} tiles. The main target also takes {105300@TickDamage} Spell Normal damage {105300@DescTickCount} times over {105300@Time} sec.</String>
   <String Key="SkillDesc_10540_Long">Elizabeth recalls all Stone Spirits she summoned, then deals {10550@Damage:BaseValue}+{10550@Damage:MAtkPer} damage to all enemies within {10550@SplashRangeX}{X}{10550@SplashRangeY} range near the Stone Spirits and stuns them for {10550@StunTime} sec. Elizabeth summons {SummonCountForDesc} Stone Spirit(s) again. (Max {Unit@GlobalMaxSummonCount} Stone Spirits on the battlefield)</String>
   <String Key="SkillDesc_10560_Long">Before the battle starts, Saeryung links herself and the nearest ally. She uses the spell that has been passed down for generations to grant {ConnectedMAtkBuffPer}% of Spell Power to the linked target for {Time} sec. The granted stats increase the target hero's stats by converting Saeryung's stats into the target hero's basic stats. Saeryung amplifies the linked target's skill damage by {BaseSkillDamageMul}%. (Multiple Saeryungs cannot link to the same target.)</String>
+  <String Key="SkillDesc_10570_Long">Fires unpredictable arcane bolts. Targets the enemy with the highest HP and deals {105700@Damage:MAtkPer} damage to all tiles in 1 of 4 random directions every {AttackDelay} sec. It does not stop until the caster is inflicted with Restrict movement or the target is defeated.</String>
+  <String Key="SkillDesc_105720_Long">Fires unpredictable arcane bolts. Targets the enemy with the highest HP and destroys the Protection of all enemies in 1 of 4 random directions across {1057011@SplashRangeY} tiles every {AttackDelay} sec., then deals {105700@Damage:MAtkPer} damage. It does not stop until the caster is inflicted with Restrict movement or the target is defeated.</String>
   <String Key="SkillDesc_105721_Long">Farael casts Arcane Spell that lashes out in a random direction. The spell deals {105700@Damage:MAtkPer} damage {AttackCount} time(s) to enemies in {1057011@SplashRangeX} block(s) within one random direction among the four directions. When the target is killed, the remaining Arcane Spell is cast to another nearby enemy.</String>
   <String Key="SkillDesc_10580_Long">Upon taking damage, Garam has a {Unit@MissRatio}% chance of evading. Successful evasion negates damage and crowd controls and also grants {Unit@AddTechniqueAtMiss} TP. When TP is full, she charges at the target to deal {Damage:MAtkPer} spell damage, then inflicts {10585@AttackCount} normal attack(s) with damage equal to {10585@TickDamage:AtkPer:BaseValue}% of her ATK.</String>
   <String Key="SkillDesc_10600_Long">Saras calls upon the power of the void to summon {SummonUnitCountForDesc} hallucination(s) that last for {10605@Time} sec. The hallucinations are not targetable and deal damage equal to (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% of Saras's ATK.</String>
@@ -10039,6 +10113,10 @@ Converts {3}% of Magic Seed damage to Protection for the user</String>
   <String Key="CurrencyTab_BoxKey">Scroll</String>
   <String Key="IngameTutorial_3_04">&lt;color=#FFC13D&gt;Now, begin the battle.&lt;/color&gt;
 If your Troop is empty at the beginning of the battle, a hero on standby will be deployed automatically.</String>
+  <String Key="CustomPickupSelectUnitDesc">Drag the Hero you want here to select them!
+
+Heroes marked with a star are recommended for beginners.
+(Heroes at max Level or Heroes that can reach max Level cannot be selected.)</String>
   <String Key="Babel">Tower of Trials</String>
   <String Key="BabelFloorFormat_0">{0}F</String>
   <String Key="BabelFloorFormat_1">&lt;i&gt;- {0}F -&lt;/i&gt;</String>
@@ -10916,6 +10994,8 @@ Fight in blood and glory until that day!&lt;/i&gt;</String>
   <String Key="Potential_10010_3">Heals 2% of Max HP each time damage is taken
 Heals 30% HP per second for 3 sec when HP falls to 40% or below for the first time at the beginning of the battle</String>
   <String Key="Potential_10050_3">Uses Triple Shot that deals damage equal to 120/160/200/240% of ATK 3 times instead of &lt;Headshot&gt;</String>
+  <String Key="Potential_10080_2">Range of &lt;Flamebreath&gt; +1 tile, and when at Max MP, &lt;Flamebreath&gt; is used instantly without selecting a target
+While using &lt;Flamebreath&gt;, Final Damage gradually increases by 15% (max. 250%)</String>
   <String Key="ColosseumInvadeItemDesc_10110">Promote to {0}-tier higher Dragon Knight-themed Summoning Stone upon losing a round ({1} Summoning Stone)</String>
   <String Key="ColosseumInvadeItemDesc_11150">Promote to {0}-tier higher Dragon Knight-themed Summoning Stone upon losing a round ({1} Summoning Stone)</String>
   <String Key="ColosseumInvadeItemDesc_12150">Promote to {0}-tier higher Dragon Knight-themed Summoning Stone upon losing a round ({1} Summoning Stone)</String>
@@ -10958,6 +11038,7 @@ If each Altar is level {1} or higher, Eledor Summoning Stone summons {2} additio
   <String Key="ShopItemName_41210">Random Unique Covenant Accessory</String>
   <String Key="ShopItemName_41211">Random Unique Eternity Accessory</String>
   <String Key="OutgameTutorial_30_02">Here, you can try &lt;color=#ffc13d&gt;summoning&lt;/color&gt; to obtain new heroes.</String>
+  <String Key="OutgameTutorial_30_04">&lt;color=#ffc13d&gt;Gold&lt;/color&gt; is needed for Hero Summons. The more times you Summon, the more Gold you need.</String>
   <String Key="OutgameTutorial_30_10">Let's level up the summoned hero Chung Ah.</String>
   <String Key="OutgameTutorial_30_11">You can level up heroes using the &lt;color=#ffc13d&gt;Hero Growth&lt;/color&gt; button.</String>
   <String Key="OutgameTutorial_30_12">Leveling up requires a certain amount of EXP for each level.</String>
@@ -11152,6 +11233,9 @@ and defend against monsters sent by other kings.</String>
   <String Key="OutgameTutorial_180_02">You can select the Troop to use in Strife Battlefield.
 
 This slot reflects the settings of the Barracks slots but does not affect the Barracks slots in return.</String>
+  <String Key="OutgameTutorial_180_03">In Strife Battlefield, the &lt;color=#ffc13d&gt;available monsters&lt;/color&gt; and &lt;color=#ffc13d&gt;Hero stats&lt;/color&gt; are adjusted each season.</String>
+  <String Key="OutgameTutorial_180_04">If you select &lt;color=#ffc13d&gt;Assault Summon Stone&lt;/color&gt; or &lt;color=#ffc13d&gt;Hero Stats Adjustment&lt;/color&gt; from the top tab, the season info for each will be shown here.</String>
+  <String Key="OutgameTutorial_180_05">For more details, please tap this button.</String>
   <String Key="OutgameTutorial_180_06">In Strife Battlefield, you are primarily matched with random opponents,
 but you can also gather with desired kings to proceed with a &lt;color=#ffc13d&gt;Friendly Battle&lt;/color&gt;.</String>
   <String Key="OutgameTutorial_180_07">Then please start &lt;color=#ffc13d&gt;&lt;Strife Battlefield&gt;&lt;/color&gt;!</String>
@@ -12991,9 +13075,6 @@ Would you like to proceed?</String>
   <String Key="ItemName_40632">Lieutenant</String>
   <String Key="ItemDesc_40632">Creates a [Lieutenant Role Block] with {0}% effect on a different random block when deployed on a [Role Block] (cannot equip duplicate Lieutenant Runes)</String>
   <String Key="ItemName_40643">Dominator</String>
-  <String Key="ItemDesc_40643">Gains +{0}% bonus effect from the [Role Block]
-While the Dominator is alive, heroes who began the battle on a block not chosen as a [Role Block] are revived {1} sec after dying
-You instantly lose the battle when the Dominator dies</String>
   <String Key="BuildingEffect_BaseHybridDef">+{Value} DEF</String>
   <String Key="BuildingEffect_BattleStartMana">+{Value}% initial MP</String>
   <String Key="BuildingEffect_BattleStartMana_Long">Increases base MP Recovery.</String>
@@ -13738,7 +13819,7 @@ When taking lethal damage, teleports to the lowest-tier enemy, consuming their H
   <String Key="ArenaDebuffDesc_01">-80% healing during battle</String>
   <String Key="ArenaDebuffDesc_02">-80% Protection during battle</String>
   <String Key="ArenaDebuffDesc_03">-50% crowd control effects during battle</String>
-  <String Key="ArenaDebuffDesc_04">+500 DEF</String>
+  <String Key="ArenaDebuffDesc_04">DEF +500 and Final DEF decreases over time</String>
   <String Key="ArenaDebuffTitle">Arena Effects</String>
   <String Key="Theme68BattleObserverDesc_0">Clear the round without being defeated by Assassin Ninjas or Master Assassin Ninjas</String>
   <String Key="Theme68BattleObserverDesc_1">Defeat all Spirit Mages while they take increased damage after becoming unfrozen</String>
@@ -13874,11 +13955,23 @@ When taking lethal damage, teleports to the lowest-tier enemy, consuming their H
   <String Key="FifthYearEvent">5th Anniversary Eve Event</String>
   <String Key="UnitLevelClearPostTitle">Hero Level Reset Reward</String>
   <String Key="UnitLevelClearPostContent">Hero Level Reset Reward has been delivered!</String>
+  <String Key="GachaListDesc_Normal">Gold appears with equal probability within the listed range.
+If a Hero you already own appears, you Obtain Hero's Token.
+If all Heroes can reach Level 20 or higher, Hero EXP is given as Book of EXP instead, and Hero's Token is given as King's Token instead. &lt;color=#FFD247&gt;You have a 25% chance to get double rewards each time.&lt;/color&gt;</String>
+  <String Key="GachaListDesc_KingGod">Gold appears with equal probability within the listed range.
+Hero EXP is given as Book of EXP instead with a 20% chance.
+If a Hero you already own appears, you Obtain Hero's Token.
+If all Heroes can reach Level 20 or higher, Hero EXP is given as Book of EXP instead, and Hero's Token is given as King's Token instead. &lt;color=#FFD247&gt;You have a 25% chance to get double rewards each time.&lt;/color&gt;</String>
   <String Key="GachaListDesc_PickUp">The chance to earn Gold is equal in the entire indicated range.
 Hero EXP will include EXP of at least 1 Blessing Hero.
 There is a 20% chance that the Hero EXP will be converted into Books of EXP.
 Heroes you own will be converted to random Hero's Tokens.
 If all Heroes can reach level 20 or above, Hero EXP is given as Book of EXP instead, and Hero's Token is given as King's Token instead.</String>
+  <String Key="GachaListDesc_CustomPickUp">Gold appears with equal probability within the listed range.
+Hero EXP is given as Book of EXP instead with a 20% chance.
+If a Hero you already own appears, you Obtain Hero's Token.
+If the Blessed Hero can reach Level 20 or higher, that Hero's EXP is given as Book of EXP instead, and Hero's Token is given as King's Token instead.
+If all Heroes can reach Level 20 or higher, Hero EXP is given as Book of EXP instead, and Hero's Token is given as King's Token instead.</String>
   <String Key="HotTimeAttackModeTitle">Invasion (Normal, Corruption)</String>
   <String Key="HotTimeAttackModeDesc">&lt;color=#FFD145&gt;{0}% increased reward&lt;/color&gt; for Gold, Castle EXP, Corruption Tokens, Deep Corruption Tokens</String>
   <String Key="HotTimeColosseumDesc">&lt;color=#FFD145&gt;{0}% increased reward&lt;/color&gt; always during Hot Time</String>
@@ -13962,6 +14055,9 @@ D: 1 - 4</String>
   <String Key="UnitName_42400">Herald of Mage</String>
   <String Key="SkillDesc_42400">Grants &lt;Mana Core&gt; to the target with the highest Spell Power for {42405@Time} sec. The target with &lt;Mana Core&gt; receives spell damage equal to {424000@TickDamage}% of Spell Power every sec.</String>
   <String Key="SkillDesc_UI_42400">The Herald of Mage uses a skill that grants &lt;Mana Core&gt;, which deals damage to the target with the highest Spell Power.</String>
+  <String Key="Potential_42400_2">Damage Taken from targets without &lt;Mana Core&gt; -50%</String>
+  <String Key="Potential_42400_3">Damage Taken from Heroes who have not used a skill for 1 sec. or more -90%</String>
+  <String Key="Potential_42400_5">Apostle's Damage Taken -60%. Damage Taken +20% for each tile of vertical distance between the attacker and the Apostle</String>
   <String Key="PremiumMission">Premium Mission</String>
   <String Key="GachaName_1079">Bound to the Spearhead</String>
   <String Key="SubName_1064004">Eternal Oblivion</String>
@@ -14078,6 +14174,8 @@ At some point, you find yourself staring at it in a trance.</String>
   <String Key="FlagsDesc_70020">5th Anniversary Event Reward</String>
   <String Key="SkillName_42400">Mana Core</String>
   <String Key="ClanRaidBossGuideText_42400">The Herald of Mage grants &lt;Mana Core&gt; to the hero with the highest Spell Power. The more skills the hero with &lt;Mana Core&gt;uses, the more damage they can inflict on the herald.</String>
+  <String Key="Potential_42400_1">When a target with &lt;Mana Core&gt; uses a skill, &lt;Mana Core&gt; goes out of control. Each time &lt;Mana Core&gt; goes out of control, the Hero with &lt;Mana Core&gt; gains Final Damage +5% (unlimited Stacks). This effect is removed when &lt;Mana Core&gt; is lost</String>
+  <String Key="Potential_42400_4">Each time &lt;Mana Core&gt; goes out of control, the Hero with &lt;Mana Core&gt; also gains Special Damage +5% (unlimited Stacks). This effect is removed when &lt;Mana Core&gt; is lost</String>
   <String Key="RandomTreasureDescFormat">Obtain a random {0} Legacy available in the regular Legacy Summon</String>
   <String Key="InventoryItemName_6300">Steel Set Accessory Chest</String>
   <String Key="FreeBoxKeyTimeLeft">Time left until free summon</String>
@@ -14426,6 +14524,7 @@ This time, I will show you how to &lt;color=#FFC13D&gt;upgrade the Altars&lt;/co
   <String Key="BeginnerHelp_10500">The Altar Ember can be expanded once each time the Castle level increases. It can be expanded up to a maximum of 25, so take your time to upgrade it. As the Ember grows, the Altars will shine more beautifully.</String>
   <String Key="BeginnerHelp_10501">You can retrieve and grant the Altar Ember at any time. Feel free to make use of it.</String>
   <String Key="BeginnerHelp_10700">In the Blacksmith of the Barracks, you can craft Relics that provide significant strength in battle. Properly assigning the completed Relics will give you a great advantage in battle!</String>
+  <String Key="BeginnerHelp_11000">Have you opened a Relic Chest in the Daily Shop? It is full of materials needed to Craft Relics. If you have enough materials, try Crafting an amazing Relic at the Forge!</String>
   <String Key="BeginnerHelp_11001">Have you visited the Dominion? Constructing buildings in the Dominion can make your heroes stronger.</String>
   <String Key="BeginnerHelp_11300">If you designate a Vanguard hero in the Barracks, that hero will appear first in the first 8 summons after the game starts. Make sure to set it if you want to summon the hero you want quickly.
 And... since I am a supporter, please don't send me as a Vanguard!</String>
@@ -14514,6 +14613,7 @@ If all weaknesses fail to be targeted, the 'Demise' trial is applied, preventing
   <String Key="CutScene_20020_80">Ugh... Kalina...</String>
   <String Key="CutScene_20020_90">Everyone, get back!</String>
   <String Key="Cutscene_20020_Char_1">Baum</String>
+  <String Key="Potential_10150_0">Shasha's HP increases to 350% of Lily's HP</String>
   <String Key="Potential_10500_2">+500 DEF and +50% Spell HP Drain when HP is at 50% or below</String>
   <String Key="UseItemCountFormat_1">Use {0}
 (Amount: &lt;color=#ffcf68&gt;{1}&lt;/color&gt;)</String>
@@ -15059,6 +15159,7 @@ Upon using skill within {1} sec after the battle starts, removes {2}% of the cur
   <String Key="Name_Potential_10770_2">Patience</String>
   <String Key="Potential_10770_2">+2% final damage upon attacking the same enemy (max 30 stacks), resets upon attacking a different enemy</String>
   <String Key="Name_Potential_10770_3">Composure</String>
+  <String Key="Potential_10770_3">Final Attack Speed +125%, attack area changes to 7x2 around the target, Final Damage Dealt to the main target -25%, and max Attack Speed Stacks reduced to 10</String>
   <String Key="SkinName_1077000">Spring Shaman Halla</String>
   <String Key="SkinDesc_1077000">&lt;i&gt;In the spring when all things awaken, a shaman of the Phoenix family in the East scatters ember cherry blossoms to pray for beginnings and renewal.&lt;/i&gt;</String>
   <String Key="UnitRealName_10770">Halla</String>
@@ -15268,6 +15369,8 @@ Current refreshes: {3}</String>
   <String Key="EventTriggerDesc_213071">Reduces final Spell Power of ally heroes by 25%</String>
   <String Key="ColosseumInvadeItemDesc_14040">+{0} X round Spell DEF for all monsters in the Troop being assaulted by the monster (applies the highest value of the same effect)</String>
   <String Key="ColosseumInvadeItemDesc_14050">+{0} X round Physical DEF for all monsters in the Troop being assaulted by the monster (applies the highest value of the same effect)</String>
+  <String Key="EventTriggerDesc_214040">When hit, Mighty Block reduction x2</String>
+  <String Key="EventTriggerDesc_214041">When hit, Mighty Block reduction x3</String>
   <String Key="ColosseumAbilityDesc_10100">Obtain {0} King God item(s)</String>
   <String Key="ColosseumAbilityDesc_60000">+{1}% final damage dealt and -{2}% damage taken for every {0} piece(s) of equipment on all heroes
 (max {3} stacks)</String>
@@ -16452,6 +16555,7 @@ Friends' Skill Amplification increases by {6}% of the wielder's Spell DEF
 The rate is the same for every Hero you do not own.</String>
   <String Key="InventoryItemName_5603">Unique Legacy Selection Chest</String>
   <String Key="RewardBoxInventoryDesc_5603">A chest you can open to select and obtain 1 Unique Legacy.</String>
+  <String Key="GachaDesc_PickUpResetAlert">There is an unselectable Hero, so it has been reset automatically.</String>
   <String Key="UnitName_10780">Neria</String>
   <String Key="UnitSubName_10780">Avenger of Madness</String>
   <String Key="SkinDesc_Default_10780">&lt;i&gt;After losing her family to Vampires in the past, Neria formed the 'Red Moon' and now hunts down Vampires that have gone out of control, keeping peace in the border region of Nosferatu territory. But when she hunts Vampires, there is a strange madness in her smile.&lt;/i&gt;</String>
@@ -16910,6 +17014,8 @@ All allies' basic attacks: resource gain +{0}%</String>
   <String Key="SpecialPackage_1666">Tempester Package</String>
   <String Key="SpecialShop_TreasureDoublePickUp10013">Legacy Rate-up Special Shop</String>
   <String Key="ShopItemName_70000">Dimensional Hero Summon Scroll</String>
+  <String Key="ShopItemDesc_70000">A summon scroll with a mysterious aura.
+Lets you perform 1 Dimension Summon.</String>
   <String Key="RewardBoxInventoryDesc_7100">Items can be Obtained based on set probabilities.</String>
   <String Key="DimensionHeroAttendanceEventTitle">Dimensional Hero Celebration Login Event</String>
   <String Key="ReservedText">Reserved</String>
@@ -17488,6 +17594,7 @@ After Battle starts, Obtain +{11}% Crowd control resistance and +{12}% Spell DEF
   <String Key="StoryInventoryItemDesc_230080">At the start of Battle, recover {0}% of Max HP and {1}% of Max MP every second</String>
   <String Key="StoryInventoryItemName_230090">Resistance Flag</String>
   <String Key="StoryInventoryItemDesc_230090">Final ATK of Heroes placed in the front 2 rows +{0}%, Range of Heroes placed in the back 2 rows +{1}</String>
+  <String Key="ColosseumInvadeItemDesc_14100">Damage Taken from enemies whose Range is shorter than or equal to that of the Void Elven Knight {0}%</String>
   <String Key="StoryModeDialogue_2010400_0_0_System">Cathy's camp, right after the Red Moon Invasion.</String>
   <String Key="StoryModeDialogue_2010400_0_1_Vlad">Lady Cathy! What in the world happened!</String>
   <String Key="StoryModeDialogue_2010400_0_2_Vlad">My family has been scattered! Even I barely made it back alive!</String>
@@ -17746,4 +17853,53 @@ After Battle starts, Obtain +{11}% Crowd control resistance and +{12}% Spell DEF
   <String Key="SkinDesc_1070002">&lt;i&gt;Do not fear the abyss. For it is what stands before you now.&lt;/i&gt;</String>
   <String Key="SeasonalEventMode_Season71">Beach Festival</String>
   <String Key="SeasonalEventName_Season71">Beach Festival</String>
+  <String Key="UnitSubName_10800">Half-Vampire</String>
+  <String Key="SkinDesc_Default_10800">&lt;i&gt;Born a Half-Vampire, Cathy grew up facing discrimination and abuse from members of the Nosferatu family. But instead of giving in to despair, Cathy works to build a world where many races can live together.&lt;/i&gt;</String>
+  <String Key="SkillName_10800">Suppressed Instinct</String>
+  <String Key="SkillDesc_10800_Short">Grants self Revive. When revived, transforms into a vampire form and gains stronger skills and stats.</String>
+  <String Key="SkillDesc_10800_Long">Grants self 1 Revive with {Unit@ReviveHpPer}% Max HP. When revived, goes out of control for {10805@TransformTime} sec., transforms into a vampire form with HP {Unit@TransformHpForDesc}, DEF +{108000@BaseDef}, and Spell HP Drain +{108000@MagicDrain}%, appears where she can hit the most enemies, and Terrorizes enemies in a {10815@SplashRangeX}{X}{10815@SplashRangeY} area for {10815@FearTime} sec. Revives granted by this skill do not Stack.</String>
+  <String Key="SkillDesc_10800_Short_2">Grants self Revive. When revived, transforms into a vampire form and gains stronger skills and stats.</String>
+  <String Key="SkillDesc_10800_Long_2">Grants self 1 Revive with {Unit@ReviveHpPer}% Max HP. When revived, goes out of control for {10805@TransformTime} sec., transforms into a vampire form with HP {Unit@TransformHpForDesc}, DEF +{108000@BaseDef}, and Spell HP Drain +{108000@MagicDrain}%, appears where she can hit the most enemies, and Terrorizes enemies in a {10815@SplashRangeX}{X}{10815@SplashRangeY} area for {10815@FearTime} sec. Each time she transforms, the vampire form's Final Max HP increases by +{10800@Unit10800AI_TotalHpPer}%. Revives granted by this skill do not Stack.</String>
+  <String Key="ActiveSkillName_10800">Awakening</String>
+  <String Key="ActiveSkillDesc_10800">At the start of the next Battle, all Half-Vampire Cathys gain Crowd control immunity.</String>
+  <String Key="ActiveSkillDesc_10803">At the start of the next Battle, all Half-Vampire Cathys gain {0} Revives and Crowd control immunity.</String>
+  <String Key="UnitRealName_10800">Alessia Nosferatu</String>
+  <String Key="UnitConstellation_10800">Pisces</String>
+  <String Key="UnitHobby_10800">Relaxing at a southern resort</String>
+  <String Key="UnitTalent_10800">Graceful swordsmanship</String>
+  <String Key="UnitLikes_10800">Blood... flavored pudding</String>
+  <String Key="UnitHates_10800">Neria</String>
+  <String Key="UnitNote_10800">The daughter of Vampire Lord Nosferatu and the family's outcast. Cathy is the nickname her family called her when she was young.</String>
+  <String Key="UnitSubName_10810">Half-Vampire</String>
+  <String Key="SkinDesc_Default_10810">&lt;i&gt;Born a Half-Vampire, Cathy grew up facing discrimination and abuse from members of the Nosferatu family. But instead of giving in to despair, Cathy works to build a world where many races can live together.&lt;/i&gt;</String>
+  <String Key="SkillName_10810">Dominion of Instinct</String>
+  <String Key="SkillDesc_10810_Short">Deals {DescDamage} damage to nearby enemies in a {SplashRangeX}{X}{SplashRangeY} area and gains TP. When TP is full, deals damage equal to {Damage:HpPer:BaseValue}% of Cathy's Max HP to nearby enemies in the {SplashRangeX}{X}{SplashRangeY} area and Terrorizes them.</String>
+  <String Key="SkillDesc_10810_Long">Deals {DescDamage} damage to nearby enemies in a {SplashRangeX}{X}{SplashRangeY} area every {Unit@AuraTick} sec. and gains {Unit@Unit10800AI_AuraTechnique} TP per target. When TP is full, deals damage equal to {Damage:HpPer:BaseValue}% of Cathy's Max HP to nearby enemies in the {SplashRangeX}{X}{SplashRangeY} area and Terrorizes them for {FearTime} sec.</String>
+  <String Key="SkillDesc_10810_Short_1">Deals {DescDamage} damage to nearby enemies in a {SplashRangeX}{X}{SplashRangeY} area and gains TP. When TP is full, deals damage equal to {Damage:HpPer:BaseValue}% of Cathy's Max HP to nearby enemies in the {SplashRangeX}{X}{SplashRangeY} area and Terrorizes them.</String>
+  <String Key="SkillDesc_10810_Long_1">Deals {DescDamage} damage to nearby enemies in a {SplashRangeX}{X}{SplashRangeY} area every {Unit@AuraTick} sec., Damage Dealt +{10800@DescAuraDamagePer}%, and gains {Unit@Unit10800AI_AuraTechnique} TP. When TP is full, deals damage equal to {Damage:HpPer:BaseValue}% of Cathy's Max HP to nearby enemies in the {SplashRangeX}{X}{SplashRangeY} area and Terrorizes them.</String>
+  <String Key="UnitRealName_10810">Alessia Nosferatu</String>
+  <String Key="UnitConstellation_10810">Pisces</String>
+  <String Key="UnitHobby_10810">Relaxing at a southern resort</String>
+  <String Key="UnitTalent_10810">Graceful swordsmanship</String>
+  <String Key="UnitLikes_10810">Blood... flavored pudding</String>
+  <String Key="UnitHates_10810">Neria</String>
+  <String Key="UnitNote_10810">The daughter of Vampire Lord Nosferatu and the family's outcast. Cathy is the nickname her family called her when she was young.</String>
+  <String Key="Overcome_10800_0">Whenever the vampire form's nearby damage effect deals damage, Damage Dealt in vampire form +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
+  <String Key="Overcome_10800_1">Each time Frenzy activates, Vampire Form Final Max HP +{Overcome:Unit10800AI_TotalHpPer}%</String>
+  <String Key="Overcome_10800_2">Additionally, all Half-Vampire Cathys gain {ActiveSkill:10803:0} Revives</String>
+  <String Key="Overcome_10800_3">Each time Frenzy activates, Vampire Form Final Max HP +{Overcome:Unit10800AI_TotalHpPer}%</String>
+  <String Key="Overcome_10800_4">Whenever Vampire Form's Nearby Damage effect deals damage, Damage Dealt in Vampire Form +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
+  <String Key="UnitName_10810">Alessia</String>
+  <String Key="LeagueName_12">League of Warmth</String>
+  <String Key="SkinDesc_1044005">&lt;i&gt;Reward for participating in the League of Warmth in Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400500">&lt;i&gt;Reward for reaching point milestones in the League of Warmth in Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400501">&lt;i&gt;Reward for placing in the Ranking of the League of Warmth in Arena&lt;/i&gt;</String>
+  <String Key="SkinDesc_1071004">&lt;i&gt;Reward for participating in the League of Warmth in Battle&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100400">&lt;i&gt;Reward for reaching point milestones in the League of Warmth in Battle&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100401">&lt;i&gt;Reward for placing in the Ranking of the League of Warmth in Battle&lt;/i&gt;</String>
+  <String Key="SkinName_1057002">Morning Star King Farael</String>
+  <String Key="SkinDesc_1057002">&lt;i&gt;The noblest starlight born in the early dawn will become the brightest light to break through the darkness.&lt;/i&gt;</String>
+  <String Key="BuildingEffect_BaseDamageReflect">+{Value}% Reflect damage
+(halved for spell damage)</String>
+  <String Key="BuildingEffect_BaseDamageReflect_Long">يعكس جزء من الضرر الملحق بالبطل على العدو.</String>
 </Strings>

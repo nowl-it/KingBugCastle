@@ -5768,8 +5768,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ClanBattleModifier_13">ผู้กลัดกลุ้ม</String>
   <String Key="ClanBattleModifier_14">ผู้เหนือกว่า</String>
   <String Key="UserLockedClanBattleAlert">ผู้เล่นนี้ไม่สามารถเข้าร่วมสงครามพิชิตแคลนซีซั่นนี้ได้</String>
-  <String Key="UpdateNoticeVersion">170000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/39d1c2e0-6f0e-804a-acc0-f507558ede41</String>
+  <String Key="UpdateNoticeVersion">171100</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">ต้องการลบแคลนจริงๆ หรือไม่</String>
   <String Key="Clan_Menu_LeaveConfirm">ต้องการออกจากแคลนจริงๆ หรือไม่</String>
   <String Key="RogueLike_ReleaseAtLevel">ปลดล็อกเมื่อถึงเลเวล {0}</String>
@@ -6852,14 +6852,14 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ShopItemName_1160">แพ็กการโจมตีของหน่วยสังหารมังกร</String>
   <String Key="UnitName_10570">ฟาราเอล</String>
   <String Key="UnitSubName_10570">นักเวทลี้ลับ</String>
-  <String Key="Potential_10570_0">เมื่อกำจัดศัตรูด้วย &lt;ยิงรัวลี้ลับ&gt; ร่ายเวทมนตร์ลี้ลับเพิ่มอีก 1 ครั้ง (สูงสุด 2 ครั้ง)</String>
-  <String Key="Potential_10570_1">เมื่อกำจัดศัตรูด้วย &lt;ยิงรัวลี้ลับ&gt; ดาเมจเวทมนตร์ลี้ลับขั้นสุดท้ายที่เหลือ +50% (ไม่สามารถใช้ซ้ำได้)</String>
+  <String Key="Potential_10570_0">เมื่อกำจัดศัตรูด้วย &lt;ยิงรัวลี้ลับ&gt; จะฟื้นฟู 0~90% ของมานาสูงสุด ยิ่งยิงกระสุนลี้ลับก่อนกำจัดศัตรูน้อยเท่าไร ปริมาณที่ฟื้นฟูก็ยิ่งเพิ่มขึ้น</String>
+  <String Key="Potential_10570_1">ระหว่างใช้ &lt;ยิงรัวลี้ลับ&gt; ดาเมจจะค่อย ๆ เพิ่มขึ้นทีละ 15% (ซ้อนทับได้ไม่จำกัด)</String>
   <String Key="SkinDesc_Default_10570">แม้ฟาราเอลจะเป็นผู้ทะเยอทะยาน แต่ฟาราเอลก็ไม่สามารถควบคุมมานาของตัวเองได้ จึงถูกมองว่าเป็นตัวป่วนแม้แต่ในหมู่เอลฟ์ วันหนึ่ง เขาได้พบกับพรรคพวกของเมลล์ที่กำลังไปเยือนอาณาจักรเอลฟ์ เขาจึงเข้าร่วมกับพรรคพวกของเมลล์และออกจากป่านิรันดรเพื่อพิสูจน์ความสามารถของตน</String>
   <String Key="SkillName_10570">ยิงรัวลี้ลับ</String>
   <String Key="SkillDesc_10570">ร่ายเวทมนตร์ลี้ลับที่มอบดาเมจ {105700@Damage:MAtkPer} หน่วยในทุกช่องของทิศใดทิศหนึ่งจากสี่ทิศแบบสุ่มใส่ศัตรู {AttackCount} ครั้ง เมื่อเป้าหมายตาย จะใช้เวทมนตร์ลี้ลับที่เหลือให้กับศัตรูที่อยู่ใกล้ที่สุด</String>
   <String Key="MissionDesc_10357">เล่นโดยมีฟาราเอลอยู่ในทีม</String>
   <String Key="Name_Potential_10570_2">มานาที่ล้นเหลือ</String>
-  <String Key="Potential_10570_2">ทุกครั้งที่ใช้แต่ละเวทมนตร์ลี้ลับของ &lt;ยิงรัวลี้ลับ&gt; สร้างบาเรีย 30% ของเวทมนตร์ให้กับตัวเอง</String>
+  <String Key="Potential_10570_2">กระสุนลี้ลับแต่ละนัดของ &lt;ยิงรัวลี้ลับ&gt; ฟื้นฟู 20% ของพลังชีวิตสูงสุด และฟื้นฟูเพิ่มอีก 20% ของพลังชีวิตสูงสุดทุกครั้งที่ยิงต่อเนื่อง (ฟื้นฟูสูงสุด 100%)</String>
   <String Key="SkinName_1057000">นักเวทฝึกหัด ฟาราเอล</String>
   <String Key="SkinDesc_1057000">ฟาราเอลเกิดมาพร้อมกับปริมาณมานาที่มากอีกระดับ อย่างไรก็ตาม ต่างกับที่คาดไว้ว่าจะเป็นนักเวทผู้ยิ่งใหญ่ ฟาราเอลที่เติบโตขึ้นนั้นไม่สามารถควบคุมมานาที่เหลือล้นของตนได้ หากไม่มีคนที่ดูแลรักษาแรงบันดาลใจของเขา เขาอาจจะเลิกใช้เวทมนตร์ตั้งแต่เนิ่นๆ แล้ว</String>
   <String Key="ReportType_Teaming">Teaming: การสร้างทีมโดยใช้องค์ประกอบอื่นที่ไม่ใช่เกม</String>
@@ -6988,8 +6988,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="BuildingEffect_TotalHpPer">พลังชีวิตสุดท้าย +{Value}%</String>
   <String Key="BuildingEffect_TotalMAtkPer">เวทมนตร์สุดท้าย +{Value}%</String>
   <String Key="Name_Potential_10570_3">กระจายพลังเวท</String>
-  <String Key="Potential_10570_3">เขตดาเมจของเวทมนตร์ลี้ลับเพิ่มขึ้นเป็น 3 ช่อง
-เวทมนตร์สุดท้าย -30%</String>
+  <String Key="Potential_10570_3">เขตดาเมจของ &lt;ยิงรัวลี้ลับ&gt; เพิ่มเป็น 3 ช่อง และทำลายบาเรียของเป้าหมายก่อนมอบดาเมจ</String>
   <String Key="RestartColosseum">ต้องการที่จะเข้าร่วมสนามรบต่อสู้ดุเดือดที่กำลังดำเนินอยู่อีกครั้งหรือไม่</String>
   <String Key="ColosseumReenterWaitForBattleEnds">กำลังรอให้การต่อสู้ที่กำลังดำเนินอยู่จบลง...</String>
   <String Key="Shop_Tab_Special">สินค้าพิเศษ</String>
@@ -9380,8 +9379,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SkillDesc_10550_Short">เมื่อโจมตีธรรมดา วิญญาณก้อนหินจะทำดาเมจเวทมนตร์ {Unit@OverwriteAtkByParent} ที่เท่ากับเวทมนตร์ของอลิซาเบธ {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% และได้รับพลังชีวิตสูงสุดของอลิซาเบธ {Unit@OverwriteHpByParent:HpPer:BaseValue}% กับเวทมนตร์/ความเร็วโจมตี/ความเร็วเคลื่อนที่ {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}%</String>
   <String Key="SkillAltDesc_10550_Short">เมื่อโจมตีธรรมดา วิญญาณก้อนหินจะทำดาเมจเวทมนตร์ {Unit@OverwriteAtkByParent} ที่เท่ากับเวทมนตร์ของอลิซาเบธ {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% และได้รับพลังชีวิตสูงสุดของอลิซาเบธ {Unit@OverwriteHpByParent:HpPer:BaseValue}% กับเวทมนตร์/ความเร็วโจมตี/ความเร็วเคลื่อนที่ {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}%</String>
   <String Key="SkillDesc_10560_Short">แปลงเวทมนตร์ {ConnectedMAtkBuffPer}% เป็นค่าพลังให้กับเป้าหมายที่เชื่อมต่อเป็นเวลา {Time} วินาที ขยายดาเมจสกิล {BaseSkillDamageMul}% (ไม่สามารถเชื่อมต่อซ้ำกับฮีโร่ตัวเดิม)</String>
-  <String Key="SkillDesc_10570_Short">ร่ายเวทมนตร์ลี้ลับที่มอบดาเมจ {105700@Damage:MAtkPer} หน่วยในทุกช่องของทิศใดทิศหนึ่งจากสี่ทิศแบบสุ่ม {AttackCount} ครั้ง</String>
-  <String Key="SkillDesc_105720_Short">ร่ายเวทมนตร์ลี้ลับที่มอบดาเมจ {105700@Damage:MAtkPer} หน่วยใน {1057011@SplashRangeY} ช่องของทิศใดทิศหนึ่งจากสี่ทิศแบบสุ่ม {AttackCount} ครั้ง</String>
+  <String Key="SkillDesc_10570_Short">ยิงกระสุนลี้ลับอย่างต่อเนื่อง มอบดาเมจ {105700@Damage:MAtkPer} แก่ทุกช่องใน 1 จาก 4 ทิศทางแบบแรนด้อม</String>
+  <String Key="SkillDesc_105720_Short">ยิงกระสุนลี้ลับอย่างต่อเนื่อง ทำลายบาเรียและมอบดาเมจ {105700@Damage:MAtkPer} ใน 1 จาก 4 ทิศทางแบบแรนด้อม กว้าง {1057011@SplashRangeY} ช่อง</String>
   <String Key="SkillDesc_105721_Short">ร่ายเวทมนตร์ลี้ลับที่มอบดาเมจ {105700@Damage:MAtkPer} หน่วยใน {1057011@SplashRangeX} ช่องของทิศใดทิศหนึ่งจากสี่ทิศแบบสุ่ม {AttackCount} ครั้ง</String>
   <String Key="SkillDesc_10580_Short">เมื่อได้รับดาเมจ มีโอกาส {Unit@MissRatio}% ที่จะทำให้ไม่มีผลอย่างสิ้นเชิง และได้รับกลวิธี {Unit@AddTechniqueAtMiss} เมื่อมีกลวิธีสูงสุดแล้วและพุ่งใส่เป้าหมาย จะทำดาเมจ {Damage:MAtkPer} หน่วยและดาเมจอีก {10585@TickDamage:AtkPer} หน่วย {10585@AttackCount} ครั้ง</String>
   <String Key="SkillDesc_10600_Short">อัญเชิญภาพหลอน {SummonUnitCountForDesc} ตัวที่คงอยู่นาน {10605@Time} วินาที ภาพหลอนไม่สามารถเป็นเป้าหมาย และจะสร้างดาเมจ (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% ของพลังโจมตีสุรัส</String>
@@ -9449,8 +9448,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SkillDesc_10530_Long">เป็นเวลา {Time} วินาที คุกคามเพิ่มขึ้น {BaseDefPen} และการโจมตีธรรมดาจะสร้างดาเมจเท่ากับ {10535@Damage:AtkPer:BaseValue}% ของพลังโจมตีแก่ศัตรูทั้งหมดในระยะ {10535@SplashRangeSum} ช่องรอบตัว เป้าหมายหลักจะได้รับดาเมจธรรมดาเวทมนตร์ {105300@TickDamage} เพิ่มอีก {105300@DescTickCount} ครั้ง ภายใน {105300@Time} วินาที</String>
   <String Key="SkillDesc_10540_Long">เรียกวิญญาณก้อนหินที่ตัวเองอัญเชิญกลับไป และทำดาเมจ {10550@Damage:BaseValue}+{10550@Damage:MAtkPer} หน่วยแก่ศัตรูทั้งหมดที่อยู่ในเขต {10550@SplashRangeX}{X}{10550@SplashRangeY} รอบๆ วิญญาณก้อนหินและทำให้สตันนาน {10550@StunTime} วินาที อัญเชิญวิญญาณก้อนหิน {SummonCountForDesc} ตัวอีกครั้ง (มีวิญญาณก้อนหินได้สูงสุด {Unit@GlobalMaxSummonCount} ตัว)</String>
   <String Key="SkillDesc_10560_Long">เชื่อมต่อกับพันธมิตรที่อยู่ใกล้ที่สุดก่อนการต่อสู้ เมื่อใช้สกิล ด้วยอาคมที่สืบทอดกันมาจากรุ่นสู่รุ่น จะแปลงเวทมนตร์ {ConnectedMAtkBuffPer}% ของเซรย็องให้เป็นค่าพลังพื้นฐานของฮีโร่เป้าหมาย และเพิ่มค่าพลังของฮีโร่เป้าหมายขึ้นเป็นเวลา {Time} วินาที ขยายดาเมจสกิลของเป้าหมายที่เชื่อมต่อ {BaseSkillDamageMul}% (เซรย็องหลายตัวจะไม่สามารถเชื่อมต่อกับฮีโร่เดียวกันได้)</String>
-  <String Key="SkillDesc_10570_Long">ปล่อยเวทมนตร์ลี้ลับที่ไม่รู้ว่าจะพุ่งไปทางไหน มอบดาเมจ {105700@Damage:MAtkPer} หน่วยในทุกช่องของทิศใดทิศหนึ่งจากสี่ทิศแบบสุ่มใส่ศัตรู {AttackCount} ครั้ง เมื่อเป้าหมายตาย จะใช้เวทมนตร์ลี้ลับที่เหลือให้กับศัตรูที่อยู่ใกล้ที่สุด</String>
-  <String Key="SkillDesc_105720_Long">ปล่อยเวทมนตร์ลี้ลับที่ไม่รู้ว่าจะพุ่งไปทางไหน มอบดาเมจโดยการร่ายเวทมนตร์ลี้ลับ {105700@Damage:MAtkPer} หน่วยใส่ศัตรูทั้งหมดที่อยู่ในเขต {1057011@SplashRangeY} ช่องในทิศใดทิศหนึ่งจากสี่ทิศแบบสุ่มใส่ศัตรูทั้งหมด {AttackCount} ครั้ง</String>
+  <String Key="SkillDesc_10570_Long">ยิงกระสุนลี้ลับที่คาดเดาทิศทางไม่ได้ เล็งใส่ศัตรูที่มีพลังชีวิตสูงสุด และทุก {AttackDelay} วินาที จะมอบดาเมจ {105700@Damage:MAtkPer} แก่ทุกช่องใน 1 จาก 4 ทิศทางแบบแรนด้อม จะไม่หยุดจนกว่าจะติดสถานะห้ามเคลื่อนที่หรือเป้าหมายถูกกำจัด</String>
+  <String Key="SkillDesc_105720_Long">ยิงกระสุนลี้ลับที่คาดเดาทิศทางไม่ได้ เล็งใส่ศัตรูที่มีพลังชีวิตสูงสุด และทุก {AttackDelay} วินาที จะทำลายบาเรียของศัตรูทั้งหมดใน 1 จาก 4 ทิศทางแบบแรนด้อม กว้าง {1057011@SplashRangeY} ช่อง แล้วมอบดาเมจ {105700@Damage:MAtkPer} จะไม่หยุดจนกว่าจะติดสถานะห้ามเคลื่อนที่หรือเป้าหมายถูกกำจัด</String>
   <String Key="SkillDesc_105721_Long">ปล่อยเวทมนตร์ลี้ลับที่ไม่รู้ว่าจะพุ่งไปทางไหน มอบดาเมจโดยการร่ายเวทมนตร์ลี้ลับ {105700@Damage:MAtkPer} หน่วยใส่ศัตรูทั้งหมดที่อยู่ในเขต {1057011@SplashRangeX} ช่องในทิศใดทิศหนึ่งจากสี่ทิศแบบสุ่มใส่ศัตรูทั้งหมด {AttackCount} ครั้ง</String>
   <String Key="SkillDesc_10580_Long">เมื่อการัมได้รับดาเมจ มีโอกาส {Unit@MissRatio}% ที่จะหลบหลีก ทำให้ดาเมจและสถานะผิดปกติไม่มีผล และได้รับกลวิธี {Unit@AddTechniqueAtMiss} เมื่อมีกลวิธีสูงสุดแล้ว จะพุ่งใส่เป้าหมายทำดาเมจเวทมนตร์เป็น {Damage:MAtkPer} หน่วยและโจมตีธรรมดาที่เท่ากับ {10585@TickDamage:AtkPer:BaseValue}% ของพลังโจมตี {10585@AttackCount} ครั้ง</String>
   <String Key="SkillDesc_10600_Long">สุรัสเรียกพลังแห่งความว่างเปล่าอัญเชิญภาพหลอน {SummonUnitCountForDesc} ตัวที่คงอยู่นาน {10605@Time} วินาที ภาพหลอนไม่สามารถเป็นเป้าหมาย และจะสร้างดาเมจ (&lt;color=#ffcc00&gt;{10610@Damage:AtkPer:BaseValue}&lt;/color&gt;+{10610@Damage:AtkPer:MAtkPer})% ของพลังโจมตีสุรัส</String>
@@ -13080,9 +13079,9 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ItemName_40632">นายทหารติดตาม</String>
   <String Key="ItemDesc_40632">เมื่อจัดวางใน [ช่องหน้าที่] จะสร้าง [ช่องหน้าที่นายทหารติดตาม] ที่มีเอฟเฟกต์ {0}% ในช่องสุ่มอื่น, รูนนายทหารติดตามไม่สามารถติดตั้งซ้ำได้</String>
   <String Key="ItemName_40643">ผู้ปกครอง</String>
-  <String Key="ItemDesc_40643">รับเอฟเฟกต์ของ [ช่องหน้าที่] เพิ่มเติม +{0}% 
-เมื่อผู้ปกครองยังมีชีวิตอยู่ ฮีโร่ที่เริ่มการต่อสู้ในช่องที่ไม่ใช่ [ช่องหน้าที่] จะฟื้นคืนชีพ {1} วินาทีหลังจากเมื่อตาย 
-เมื่อผู้ปกครองตายจะแพ้การต่อสู้ทันที</String>
+  <String Key="ItemDesc_40643">ได้รับเอฟเฟกต์ของ [ช่องบทบาท] เพิ่ม +{0}%
+ขณะที่ผู้ปกครองยังมีชีวิต ฮีโร่ที่ไม่ใช่ผู้ปกครองจะฟื้นคืนชีพหลังตาย {1} วินาที
+เมื่อผู้ปกครองตาย จะพ่ายแพ้ในการต่อสู้ทันที</String>
   <String Key="BuildingEffect_BaseHybridDef">พลังป้องกัน +{Value}</String>
   <String Key="BuildingEffect_BattleStartMana">มานาเมื่อเริ่มการต่อสู้ +{Value}%</String>
   <String Key="BuildingEffect_BattleStartMana_Long">เพิ่มปริมาณการเติมมานาพื้นฐาน</String>
@@ -17943,4 +17942,60 @@ D = 1 ~ 4</String>
   <String Key="Overcome_10800_3">ทุกครั้งที่คลุ้มคลั่ง พลังชีวิตสูงสุดสุดท้ายของร่างแวมไพร์ +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_4">ทุกครั้งที่เอฟเฟกต์ดาเมจรอบของร่างแวมไพร์สร้างความเสียหาย ดาเมจที่มอบในร่างแวมไพร์ +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="UnitName_10810">อเลสเซีย</String>
+  <String Key="LeagueName_12">ลีกแห่งความอบอุ่น</String>
+  <String Key="SkinDesc_1044005">&lt;i&gt;รางวัลจากการเข้าร่วมลีกแห่งความอบอุ่นในอารีน่า&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400500">&lt;i&gt;รางวัลเมื่อทำคะแนนถึงเป้าในลีกแห่งความอบอุ่นในอารีน่า&lt;/i&gt;</String>
+  <String Key="SkinDesc_104400501">&lt;i&gt;รางวัลเมื่อติดแรงกิ้งในลีกแห่งความอบอุ่นในอารีน่า&lt;/i&gt;</String>
+  <String Key="SkinDesc_1071004">&lt;i&gt;รางวัลจากการเข้าร่วมลีกแห่งความอบอุ่นในศึกเดือด&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100400">&lt;i&gt;รางวัลเมื่อทำคะแนนถึงเป้าในลีกแห่งความอบอุ่นในศึกเดือด&lt;/i&gt;</String>
+  <String Key="SkinDesc_107100401">&lt;i&gt;รางวัลเมื่อติดแรงกิ้งในลีกแห่งความอบอุ่นในศึกเดือด&lt;/i&gt;</String>
+  <String Key="SkinName_1057002">ราชาดาวรุ่ง ฟาราเอล</String>
+  <String Key="SkinDesc_1057002">&lt;i&gt;แสงดาวอันสูงส่งที่สุดที่ถือกำเนิดในยามรุ่งสาง จะกลายเป็นแสงที่เจิดจ้าที่สุดเพื่อฝ่าความมืด&lt;/i&gt;</String>
+  <String Key="SuperShieldModulator">ได้รับป้องกันเด็ดขาด</String>
+  <String Key="BuildingEffect_BaseDamageReflect">โต้กลับดาเมจ {Value}%
+(ลดดาเมจเวทมนตร์ 50%)</String>
+  <String Key="BuildingEffect_BaseDamageReflect_Long">โต้กลับส่วนหนึ่งของดาเมจที่ฮีโร่ได้รับใส่ศัตรู</String>
+  <String Key="TreasureName_30042">เพราทาอุส</String>
+  <String Key="TreasureSubName_30042">โล่ดำสนิท</String>
+  <String Key="TreasureDesc_30042">โล่ของเบเฮมอธไม่ได้มีไว้แค่ป้องกันเท่านั้น การพุ่งใส่อย่างดุดันของเบเฮมอธพร้อมโล่หนัก สามารถทำให้เกราะที่แข็งแกร่งแค่ไหนก็ยุบได้ในพริบตา</String>
+  <String Key="TreasureSkillName_30042">พุ่งลง</String>
+  <String Key="BuffDataName_3300421">ทลาย I</String>
+  <String Key="BuffDataName_3300422">บุบ I</String>
+  <String Key="BuffDataName_3300423">ไร้พลัง</String>
+  <String Key="BuffDataName_3300424">บุบ II</String>
+  <String Key="BuffDataName_3300425">ทลาย II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">ร้านค้าพิเศษ Pickup เพราทาอุส</String>
+  <String Key="SpecialPackage_1680">แพ็กเกจเพราทาอุส 1</String>
+  <String Key="SpecialPackage_1681">แพ็กเกจเพราทาอุส 2</String>
+  <String Key="SpecialPackage_1682">แพ็กเกจเพราทาอุส 3</String>
+  <String Key="BuffDataDesc_3300421">ทุก {0} คุกคาม ถ่ายโอนดาเมจ +{1} เท่า</String>
+  <String Key="BuffDataDesc_3300422">ดาเมจกายภาพที่ศัตรูติดสถานะไม่เสถียรได้รับ +{0}%</String>
+  <String Key="BuffDataDesc_3300423">ทุกครั้งที่สถานะไม่เสถียรถูกลบ พันธมิตรทั้งหมดได้รับป้องกันเด็ดขาด +{0} ต่อศัตรูที่ถูกลบ 1 ตัว</String>
+  <String Key="BuffDataDesc_3300424">ดาเมจกายภาพที่ศัตรูติดสถานะไม่เสถียรได้รับ +{0}%</String>
+  <String Key="BuffDataDesc_3300425">ทุก {0} คุกคาม ถ่ายโอนดาเมจ +{1} เท่า</String>
+  <String Key="TreasureSkillDesc_3300420">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะทำให้เป้าหมายติดสถานะไม่เสถียร
+ถ้าพันธมิตรสร้างดาเมจกายภาพแก่ศัตรูที่ติดสถานะไม่เสถียร เป็นอย่างน้อย {0}% ของพลังชีวิตสูงสุดของเป้าหมาย จะถ่ายโอน {1}% ของดาเมจนั้นเป็นดาเมจพิเศษไปยังศัตรูอื่นที่ติดสถานะไม่เสถียร แล้วลบสถานะไม่เสถียรจากศัตรูทั้งหมด
+&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่ต่างกันจะทำให้ติดสถานะไม่เสถียร&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะทำให้เป้าหมายติดสถานะไม่เสถียร
+ถ้าพันธมิตรสร้างดาเมจกายภาพแก่ศัตรูที่ติดสถานะไม่เสถียร เป็นอย่างน้อย {0}% ของพลังชีวิตสูงสุดของเป้าหมาย จะถ่ายโอน {1}% ของดาเมจนั้นเป็นดาเมจพิเศษไปยังศัตรูอื่นที่ติดสถานะไม่เสถียร แล้วลบสถานะไม่เสถียรจากศัตรูทั้งหมด
+ทุก {2} คุกคาม ถ่ายโอนดาเมจ +{3} เท่า
+&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่ต่างกันจะทำให้ติดสถานะไม่เสถียร&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะทำให้เป้าหมายติดสถานะไม่เสถียร
+ถ้าพันธมิตรสร้างดาเมจกายภาพแก่ศัตรูที่ติดสถานะไม่เสถียร เป็นอย่างน้อย {0}% ของพลังชีวิตสูงสุดของเป้าหมาย จะถ่ายโอน {1}% ของดาเมจนั้นเป็นดาเมจพิเศษไปยังศัตรูอื่นที่ติดสถานะไม่เสถียร แล้วลบสถานะไม่เสถียรจากศัตรูทั้งหมด
+ทุก {2} คุกคาม ถ่ายโอนดาเมจ +{3} เท่า
+ดาเมจกายภาพที่ศัตรูติดสถานะไม่เสถียรได้รับ +{4}%
+การเพิ่มดาเมจกายภาพที่ได้รับนี้ไม่ซ้อนทับ และใช้เฉพาะค่าสูงที่สุด
+&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่ต่างกันจะทำให้ติดสถานะไม่เสถียร&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะทำให้เป้าหมายติดสถานะไม่เสถียร
+ถ้าพันธมิตรสร้างดาเมจกายภาพแก่ศัตรูที่ติดสถานะไม่เสถียร เป็นอย่างน้อย {0}% ของพลังชีวิตสูงสุดของเป้าหมาย จะถ่ายโอน {1}% ของดาเมจนั้นเป็นดาเมจพิเศษไปยังศัตรูอื่นที่ติดสถานะไม่เสถียร แล้วลบสถานะไม่เสถียรจากศัตรูทั้งหมด
+ทุก {2} คุกคาม ถ่ายโอนดาเมจ +{3} เท่า
+ดาเมจกายภาพที่ศัตรูติดสถานะไม่เสถียรได้รับ +{4}%
+การเพิ่มดาเมจกายภาพที่ได้รับนี้ไม่ซ้อนทับ และใช้เฉพาะค่าสูงที่สุด
+ทุกครั้งที่สถานะไม่เสถียรถูกลบ พันธมิตรทั้งหมดได้รับป้องกันเด็ดขาด +{5} ต่อศัตรูที่ถูกลบ 1 ตัว
+&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่ต่างกันจะทำให้ติดสถานะไม่เสถียร&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="SpecialShop_TreasureDoublePickUp10014">ร้านค้าพิเศษ Pickup ขุมทรัพย์</String>
+  <String Key="SpecialPackage_1676">แพ็กเกจหินอัญเชิญ Pickup ขุมทรัพย์ 1</String>
+  <String Key="SpecialPackage_1677">แพ็กเกจหินอัญเชิญ Pickup ขุมทรัพย์ 2</String>
+  <String Key="SpecialPackage_1678">แพ็กเกจคาเอลุส</String>
+  <String Key="SpecialPackage_1679">แพ็กเกจเจ้าซุกซน</String>
 </Strings>

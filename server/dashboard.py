@@ -25,7 +25,7 @@ import secrets
 from datetime import datetime, timedelta
 
 import httpx
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
+from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 
@@ -37,7 +37,9 @@ app = FastAPI(title="KGC Dashboard")
 BASE = os.path.dirname(os.path.abspath(__file__))
 UI_DIR = os.path.join(BASE, "webui")
 CONFIG_FILE = os.path.join(BASE, "data", "response_config.json")
-ADB_SERIAL = os.environ.get("ADB_SERIAL", "localhost:5556")
+# Must match run.sh's default, or the battle tracker polls a serial with no device
+# behind it and never shows a single stat.
+ADB_SERIAL = os.environ.get("ADB_SERIAL", "localhost:5555")
 SERVER_URL = os.environ.get("KGC_SERVER_URL", "http://127.0.0.1:8080")
 ADMIN_TOKEN = os.environ.get("KGC_ADMIN_TOKEN")
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
@@ -45,18 +47,50 @@ _STATE_GATE = asyncio.Lock()
 
 
 # --- guards -----------------------------------------------------------------
+# Three ways in, checked in this order:
+#   1. an admin account (username + password -> session cookie). Once ANY admin
+#      exists this is the only way in from a non-loopback address, because a
+#      tunnel/reverse proxy makes every request look like loopback.
+#   2. KGC_ADMIN_TOKEN, for scripts and the old bookmarked ?admin_token= links.
+#   3. nothing configured at all -> loopback only, same as before.
+SESSION_COOKIE = "kgc_admin"
+_OPEN_PATHS = {"/api/auth/login", "/api/auth/whoami"}
+
+
+def _session_user(request):
+    return playerdb.admin_for_token(request.cookies.get(SESSION_COOKIE))
+
+
+def _token_ok(request):
+    if not ADMIN_TOKEN:
+        return False
+    sent = request.headers.get("x-admin-token") or request.query_params.get("admin_token") or ""
+    return secrets.compare_digest(sent, ADMIN_TOKEN)
+
+
+def _authorized(request):
+    """(ok, why_not). Static assets are open so the login page itself can load."""
+    path = request.url.path
+    if path in _OPEN_PATHS or not path.startswith(("/api", "/ws")):
+        return True, None
+    if _session_user(request) or _token_ok(request):
+        return True, None
+    if playerdb.admin_count():
+        return False, "sign in to the dashboard"
+    if ADMIN_TOKEN:
+        return False, "admin token required"
+    if (request.client.host if request.client else None) in _LOOPBACK:
+        return True, None
+    return False, ("dashboard is loopback-only; create an admin account "
+                   "(python3 dashboard.py --create-admin <user>) or set KGC_ADMIN_TOKEN")
+
+
 @app.middleware("http")
 async def guard_admin(request, call_next):
-    """This whole app edits saves and sends mail, and it binds 0.0.0.0 - gate it the
-    same way server.py gates /admin: token if configured, else loopback only."""
-    if ADMIN_TOKEN:
-        sent = request.headers.get("x-admin-token") or request.query_params.get("admin_token") or ""
-        if not secrets.compare_digest(sent, ADMIN_TOKEN):
-            return JSONResponse({"error": "admin token required"}, status_code=403)
-    elif (request.client.host if request.client else None) not in _LOOPBACK:
-        return JSONResponse(
-            {"error": "dashboard is loopback-only; set KGC_ADMIN_TOKEN to allow remote access"},
-            status_code=403)
+    """This whole app edits saves and sends mail, and it binds 0.0.0.0 - gate it."""
+    ok, why = _authorized(request)
+    if not ok:
+        return JSONResponse({"error": why, "login": True}, status_code=401)
     return await call_next(request)
 
 
@@ -65,6 +99,20 @@ async def guard_admin(request, call_next):
 # request, so holding it across the proxy call deadlocks both sides until the timeout.
 # The write still happens under a lock - server.py's.
 _DELEGATED = {("POST", "/api/players")}
+
+def _upstream_headers(request):
+    """Credential for the /admin/api/* calls we make against the game server.
+
+    The game port runs the same three-ladder guard we do. A shared token covers it
+    when one is configured; otherwise forward the signed-in operator's own session
+    token, which playerdb resolves on the other side. Sending nothing works only on
+    a loopback-only box, and that is exactly the case a tunnel breaks.
+    """
+    if ADMIN_TOKEN:
+        return {"x-admin-token": ADMIN_TOKEN}
+    tok = request.cookies.get(SESSION_COOKIE)
+    return {"x-admin-token": tok} if tok else {}
+
 
 
 @app.middleware("http")
@@ -101,24 +149,87 @@ async def broadcast(message: dict):
             connected_clients.discard(client)
 
 
+_tracker_proc = None      # the live `adb logcat` child, so shutdown can kill it
+
+
+def _seal_inherited_fds():
+    """Stop children inheriting our listening socket.
+
+    uvicorn --reload hands the worker its listening socket as an *inheritable* fd.
+    Every `adb logcat` we spawn inherits it, and because those children outlive a
+    pkill'd parent they keep :8081 bound - the next start then dies with
+    "Address already in use" while no dashboard is running. Clearing the
+    inheritable flag once at startup fixes it for every child, present and future.
+    """
+    import stat
+    sealed = 0
+    for name in os.listdir("/proc/self/fd"):
+        fd = int(name)
+        try:
+            if stat.S_ISSOCK(os.fstat(fd).st_mode) and os.get_inheritable(fd):
+                os.set_inheritable(fd, False)
+                sealed += 1
+        except OSError:
+            continue          # the fd from listdir itself, already gone
+    if sealed:
+        print(f"[tracker] sealed {sealed} inheritable socket fd(s)", flush=True)
+
+
 async def read_logcat():
     # Self-healing: if the device is absent or adb dies, retry instead of freezing.
     # All async (never subprocess.run) so a missing device never blocks the event
     # loop - the UI and admin API stay responsive with no device connected.
+    global _tracker_proc
+    _seal_inherited_fds()
     while True:
         try:
             print("[tracker] starting adb logcat reader...", flush=True)
             clr = await asyncio.create_subprocess_exec(
                 "adb", "-s", ADB_SERIAL, "logcat", "-c",
                 stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
-            await asyncio.wait_for(clr.wait(), timeout=10)
-            proc = await asyncio.create_subprocess_exec(
+            await _wait_or_kill(clr, 10)
+            _tracker_proc = await asyncio.create_subprocess_exec(
                 "adb", "-s", ADB_SERIAL, "logcat", "-s", "XignCodeStub",
                 stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT)
-            await _pump_logcat(proc)
+            try:
+                await _pump_logcat(_tracker_proc)
+            finally:
+                await _wait_or_kill(_tracker_proc, 2)
+                _tracker_proc = None
         except Exception as e:
             print(f"[tracker] logcat reader error: {e}", flush=True)
         await asyncio.sleep(5)
+
+
+def stop_tracker():
+    """Kill the logcat child on shutdown. `adb logcat` streams forever, so without
+    this it is reparented to init and runs until the machine reboots."""
+    proc = _tracker_proc
+    if proc is None:
+        return
+    try:
+        proc.kill()
+    except (ProcessLookupError, AttributeError):
+        pass
+
+
+async def _wait_or_kill(proc, timeout):
+    """Reap a child, killing it if it overruns.
+
+    `adb -s <serial>` against a serial with no device blocks forever. A bare
+    wait_for() gives up on the coroutine but leaves the process running, so the
+    retry loop above leaked one orphaned adb every cycle - hundreds of them after
+    an afternoon, which is what ate the port on the next restart.
+    """
+    try:
+        await asyncio.wait_for(proc.wait(), timeout=timeout)
+    except (asyncio.TimeoutError, asyncio.CancelledError):
+        try:
+            proc.kill()
+            await proc.wait()
+        except ProcessLookupError:
+            pass
+        raise
 
 
 async def _pump_logcat(process):
@@ -228,8 +339,8 @@ def api_status():
     }
 
 
-GRANTABLE_TYPES = ["Gold", "Cash", "Heart", "Item", "Unit", "UnitSoul", "Card"]
-DISPLAY_ONLY_TYPES = ["Artifact", "Treasure", "Accessory"]
+GRANTABLE_TYPES = ["Gold", "Cash", "Heart", "Item", "Unit", "UnitSoul", "Card", "Treasure"]
+DISPLAY_ONLY_TYPES = ["Artifact", "Accessory"]
 
 
 @app.get("/api/catalog")
@@ -251,7 +362,7 @@ def api_players():
 
 
 @app.post("/api/players")
-async def api_create_player(body: dict):
+async def api_create_player(body: dict, request: Request):
     """Delegated to server.py rather than built here.
 
     A fresh save is not just default_player.json - server.py expands it with the hero
@@ -263,7 +374,7 @@ async def api_create_player(body: dict):
     uid = (body.get("uid") or "player-" + secrets.token_hex(4)).strip()
     if playerdb.load(uid) is not None:
         raise HTTPException(409, f"player {uid} already exists")
-    headers = {"x-admin-token": ADMIN_TOKEN} if ADMIN_TOKEN else {}
+    headers = _upstream_headers(request)
     payload = {"uid": uid, "name": (body.get("name") or "NewPlayer").strip()}
     try:
         async with httpx.AsyncClient(timeout=8.0) as client:
@@ -561,11 +672,11 @@ PROXY_SECTIONS = {"system": "/admin/api/system", "logs": "/admin/api/logs",
 
 
 @app.get("/api/server/{section}")
-async def api_server_proxy(section: str):
+async def api_server_proxy(section: str, request: Request):
     path = PROXY_SECTIONS.get(section)
     if not path:
         raise HTTPException(404, f"unknown section '{section}'")
-    headers = {"x-admin-token": ADMIN_TOKEN} if ADMIN_TOKEN else {}
+    headers = _upstream_headers(request)
     try:
         async with httpx.AsyncClient(timeout=4.0) as client:
             r = await client.get(SERVER_URL + path, headers=headers)
@@ -573,6 +684,88 @@ async def api_server_proxy(section: str):
     except Exception as e:
         # The game server being down is a normal state for this UI, not an error page.
         return {"ok": False, "error": f"{type(e).__name__}: {e}", "serverUrl": SERVER_URL}
+
+
+# --- dashboard auth ---------------------------------------------------------
+@app.get("/api/auth/whoami")
+def api_whoami(request: Request):
+    """What the UI needs to decide between the login form and the app. Open on
+    purpose - it reveals only whether an account exists, never who."""
+    ok, why = _authorized(_Probe(request))
+    return {"user": _session_user(request),
+            "hasAdmins": bool(playerdb.admin_count()),
+            "tokenMode": bool(ADMIN_TOKEN),
+            "authenticated": ok, "reason": why}
+
+
+class _Probe:
+    """Ask _authorized() about a real API path, not about /api/auth/whoami itself."""
+    def __init__(self, request):
+        self.cookies, self.headers = request.cookies, request.headers
+        self.query_params, self.client = request.query_params, request.client
+        self.url = type("U", (), {"path": "/api/players"})()
+
+
+_login_hits = {}
+
+@app.post("/api/auth/login")
+def api_login(request: Request, body: dict):
+    """Password login. Rate-limited per source address: this endpoint is reachable
+    from wherever the dashboard is, and a password is guessable in a way a 32-byte
+    token is not."""
+    ip = request.client.host if request.client else "-"
+    now = datetime.now().timestamp()
+    hits = [t for t in _login_hits.get(ip, []) if now - t < 300]
+    if len(hits) >= 10:
+        _login_hits[ip] = hits
+        raise HTTPException(429, "too many sign-in attempts, wait 5 minutes")
+    hits.append(now)
+    _login_hits[ip] = hits
+
+    token = playerdb.admin_login((body or {}).get("username", ""), (body or {}).get("password", ""))
+    if not token:
+        raise HTTPException(401, "wrong username or password")
+    _login_hits.pop(ip, None)
+    res = JSONResponse({"ok": True, "user": body.get("username")})
+    # Not `secure`: the dashboard is normally served over plain http on a LAN or a
+    # tunnel that terminates TLS itself. httponly + samesite=lax are what stop a
+    # page in another tab from reading or replaying it.
+    res.set_cookie(SESSION_COOKIE, token, httponly=True, samesite="lax",
+                   max_age=playerdb.ADMIN_SESSION_TTL, path="/")
+    return res
+
+
+@app.post("/api/auth/logout")
+def api_logout(request: Request):
+    playerdb.admin_logout(request.cookies.get(SESSION_COOKIE))
+    res = JSONResponse({"ok": True})
+    res.delete_cookie(SESSION_COOKIE, path="/")
+    return res
+
+
+@app.get("/api/auth/admins")
+def api_admins():
+    return {"admins": playerdb.admin_list()}
+
+
+@app.post("/api/auth/admins")
+def api_admin_create(body: dict):
+    username = (body or {}).get("username", "").strip()
+    password = (body or {}).get("password", "")
+    if len(password) < 8:
+        raise HTTPException(400, "password must be at least 8 characters")
+    playerdb.admin_create(username, password)
+    return {"ok": True, "admins": playerdb.admin_list()}
+
+
+@app.delete("/api/auth/admins/{username}")
+def api_admin_delete(username: str, request: Request):
+    if playerdb.admin_count() <= 1:
+        raise HTTPException(400, "cannot delete the last admin - you would lock yourself out")
+    if username == _session_user(request):
+        raise HTTPException(400, "cannot delete the account you are signed in as")
+    playerdb.admin_delete(username)
+    return {"ok": True, "admins": playerdb.admin_list()}
 
 
 # --- UI + WS ----------------------------------------------------------------
@@ -585,10 +778,14 @@ def index():
 async def websocket_endpoint(websocket: WebSocket):
     # HTTP middleware never sees websocket scope, so this needs its own copy of the
     # guard - it streams live battle telemetry to whoever connects.
-    if ADMIN_TOKEN:
+    if playerdb.admin_for_token(websocket.cookies.get(SESSION_COOKIE)):
+        pass
+    elif ADMIN_TOKEN:
         sent = websocket.headers.get("x-admin-token") or websocket.query_params.get("admin_token") or ""
         if not secrets.compare_digest(sent, ADMIN_TOKEN):
             return await websocket.close(code=1008)
+    elif playerdb.admin_count():
+        return await websocket.close(code=1008)
     elif (websocket.client.host if websocket.client else None) not in _LOOPBACK:
         return await websocket.close(code=1008)
     await websocket.accept()
@@ -605,6 +802,33 @@ async def startup_event():
     asyncio.create_task(read_logcat())
 
 
+@app.on_event("shutdown")
+async def shutdown_event():
+    stop_tracker()
+
+
 if __name__ == "__main__":
+    import sys
+    if "--create-admin" in sys.argv:
+        # Bootstrap without a UI: the first account has to be made from the box the
+        # server runs on, because until one exists the dashboard is loopback-only.
+        import getpass
+        i = sys.argv.index("--create-admin")
+        user = sys.argv[i + 1] if len(sys.argv) > i + 1 else input("username: ").strip()
+        pw = getpass.getpass("password: ")
+        if len(pw) < 8:
+            sys.exit("password must be at least 8 characters")
+        if pw != getpass.getpass("repeat: "):
+            sys.exit("passwords do not match")
+        playerdb.init()
+        playerdb.admin_create(user, pw)
+        print(f"admin '{user}' created; sign in at http://127.0.0.1:8081/")
+        sys.exit(0)
+    if "--list-admins" in sys.argv:
+        playerdb.init()
+        for a in playerdb.admin_list():
+            print(a["username"], "last_login:", a["last_login"])
+        sys.exit(0)
+
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8081)

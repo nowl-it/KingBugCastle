@@ -30167,6 +30167,8 @@
 			<Effect Type="SplashRootIgnoreDelay">
 				<Prefab>Fx_10570e_00</Prefab>
 				<ZLevel>UnitOver</ZLevel>
+                <CenterAlign>true</CenterAlign>
+                <World>true</World>
 			</Effect>
 		</ReplaceEffect>
 		<MinVersion>482</MinVersion>
@@ -30216,6 +30218,8 @@
 			<Effect Type="SplashRootIgnoreDelay">
 				<Prefab>Fx_10570e_01</Prefab>
 				<ZLevel>UnitOver</ZLevel>
+                <CenterAlign>true</CenterAlign>
+                <World>true</World>
 			</Effect>
 		</ReplaceEffect>
 		<CashPrice>139</CashPrice>
@@ -30263,6 +30267,8 @@
 			<Effect Type="SplashRootIgnoreDelay">
 				<Prefab>Fx_10570e_01</Prefab>
 				<ZLevel>UnitOver</ZLevel>
+                <CenterAlign>true</CenterAlign>
+                <World>true</World>
 			</Effect>
 		</ReplaceEffect>
 	</Skin>
@@ -30306,6 +30312,8 @@
 			<Effect Type="SplashRootIgnoreDelay">
 				<Prefab>Fx_10570e_01</Prefab>
 				<ZLevel>UnitOver</ZLevel>
+                <CenterAlign>true</CenterAlign>
+                <World>true</World>
 			</Effect>
 		</ReplaceEffect>
 	</Skin>
