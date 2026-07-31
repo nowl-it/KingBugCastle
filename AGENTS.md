@@ -546,5 +546,16 @@ served, arena battles counted).
 - **Dashboard UI build**: esbuild bundle in `server/webui/` (`build.mjs` → `dist/app.js`, one
   minified file, no importmap) — `dashboard.py` serves `webui/dist` when present. Rebuild locally,
   commit `dist/`, then `git pull` on server.
+- **Client release workflow** (`.github/workflows/build-xapk.yml`, manual dispatch): builds
+  `KingBugCastle_v171.xapk` (`KGC_APK_SRC=xapk_extracted_v1711 SHARE_HOST=… --share`, job needs
+  `permissions: contents: write` or `gh release create` 403s) and creates a GitHub Release with the
+  xapk attached (tag input or auto `release-YYYYMMDD-HHMMSS`). Base stock xapk is served from the
+  repo's own **`stock-v171.1.00` release asset** (GitHub CDN, free — never host it on the OCI box:
+  each CI download would burn paid egress). Stock asset `com.awesomepiece.castle@171.1.00.xapk`
+  (1.1GB, uploaded 2026-07-31) is the default `base_xapk_url`.
+- **Zero-cost rule (user-mandated, 2026-07-31)**: nothing may cost real money. GitHub Actions +
+  public-repo release assets are free; the 1.1GB stock xapk and built client xapk are stored there,
+  not on OCI. Keep any large binary off the OCI instance (egress is billed); OCI hosts only the
+  server code + master data.
 - Local dev still runs on 8080/8443 with `--reload`; local port 8081 is taken by adb (redroid), so
   tunnel the dashboard via `ssh -N -L 8082:localhost:8081 …`.
