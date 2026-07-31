@@ -548,15 +548,15 @@ served, arena battles counted).
   commit `dist/`, then `git pull` on server.
 - **Client release workflow** (`.github/workflows/build-xapk.yml`, manual dispatch): builds
   `KingBugCastle_v171.xapk` (`KGC_APK_SRC=xapk_extracted_v1711 SHARE_HOST=… --share`, job needs
-  `permissions: contents: write` or `gh release create` 403s) and creates a GitHub Release with the
-  xapk attached. **Release name = `King Bug Castle <version>`** (version = `tag` input, default
-  **`v171.1.00`**; if that tag already exists a `-YYYYMMDD-HHMMSS` suffix is appended); **notes must
-  never mention the server host / URLs / build command** — keep
-  them generic (install instructions only). The `stock-v171.1.00` release (base source xapk,
-  `com.awesomepiece.castle@171.1.00.xapk`, 1.1GB) is **deleted (release + tag) after every build** —
-  the workflow downloads it from GitHub CDN (free, never from the OCI box: paid egress) during the
-  build, then removes it. To build again, re-create it first from the local copy at
-  `apk/com.awesomepiece.castle@171.1.00.xapk`:
+  `permissions: contents: write` or `gh release create` 403s) and creates a GitHub Release whose
+  **name = `King Bug Castle <version>`** and **asset = `KingBugCastle_<version>.xapk`** (version =
+  `tag` input, default **`v171.1.00`**; if that tag already exists a `-YYYYMMDD-HHMMSS` suffix is
+  appended). **Release notes are detailed but must never mention the server host / URLs / build
+  command** — keep them to generic feature + install + troubleshooting text. The `stock-v171.1.00`
+  release (base source xapk, `com.awesomepiece.castle@171.1.00.xapk`, 1.1GB) is **deleted
+  (release + tag) after every build** — the workflow downloads it from GitHub CDN (free, never
+  from the OCI box: paid egress) during the build, then removes it. To build again, re-create it
+  first from the local copy at `apk/com.awesomepiece.castle@171.1.00.xapk`:
   `gh release create stock-v171.1.00 --title "Stock XAPK v171.1.00 (CI build source)" --notes "…" --latest=false 'apk/com.awesomepiece.castle@171.1.00.xapk'`.
 - **Zero-cost rule (user-mandated, 2026-07-31)**: nothing may cost real money. GitHub Actions +
   public-repo release assets are free; the 1.1GB stock xapk and built client xapk are stored there,
