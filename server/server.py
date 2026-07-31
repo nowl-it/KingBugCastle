@@ -10,6 +10,7 @@ state persistence for cards, decks, inventory, missions, and game loop.
 Run:  uvicorn server:app --host 0.0.0.0 --port 8080
 """
 import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, hashlib, os, sys, random
+import shutil, subprocess
 import playerdb
 import rewardbox
 import shop
@@ -2307,7 +2308,53 @@ async def guard_admin(request: Request, call_next):
 # client to something the state lock can absorb.
 RATE_LIMIT = int(os.environ.get("KGC_RATE_LIMIT") or 600)      # requests
 RATE_WINDOW = int(os.environ.get("KGC_RATE_WINDOW") or 60)     # seconds
+# Blowing the window once is a misbehaving client; blowing it repeatedly is an
+# attacker. After RATE_BAN_AFTER consecutive 429s the address is banned for
+# RATE_BAN_SECONDS: banned requests are refused BEFORE the rate table is touched,
+# so a spammer can no longer burn a state-lock cycle (or the event loop) per
+# request. KGC_IPTABLES_BAN=1 also drops the address at the firewall - needs a
+# sudoers rule granting `sudo -n iptables -I/-D INPUT -s <ip> -j DROP` to the
+# service user, see serve_public.sh. The ban is in-memory per process: the two
+# uvicorns (8080/8443) each keep their own copy, which is fine - the firewall
+# rule is what actually stops the bytes.
+RATE_BAN_AFTER = int(os.environ.get("KGC_RATE_BAN_AFTER") or 5)
+RATE_BAN_SECONDS = int(os.environ.get("KGC_RATE_BAN_SECONDS") or 900)
+IPTABLES_BAN = os.environ.get("KGC_IPTABLES_BAN") == "1"
 _rate_hits = {}
+_banned = {}             # ip -> unban wall-clock timestamp
+_ban_strikes = {}        # ip -> consecutive 429 count
+_IPTABLES = shutil.which("iptables") if IPTABLES_BAN else None
+
+
+def _iptables_rule(action, ip):
+    """action: "-I" (insert, position 1) or "-D" (delete). Never touch the loopback
+    or a proxy address - banning 127.0.0.1 behind a tunnel locks everyone out."""
+    if not _IPTABLES or ":" in ip or ip in _LOOPBACK:
+        return
+    cmd = [_IPTABLES, "-I", "INPUT", "1", "-s", ip, "-j", "DROP"] if action == "-I" \
+        else [_IPTABLES, "-D", "INPUT", "-s", ip, "-j", "DROP"]
+    try:
+        subprocess.run(["sudo", "-n"] + cmd, capture_output=True, timeout=10)
+    except Exception as e:
+        admin_log(f"[ban] iptables {action} {ip} failed: {type(e).__name__}: {e}")
+
+
+async def _unban_later(ip):
+    await asyncio.sleep(RATE_BAN_SECONDS)
+    _banned.pop(ip, None)
+    await asyncio.to_thread(_iptables_rule, "-D", ip)
+
+
+def _ban(ip, now=None):
+    now = time.time() if now is None else now
+    _banned[ip] = now + RATE_BAN_SECONDS
+    _ban_strikes.pop(ip, None)
+    if len(_banned) > 5000:                # bound memory, drop everyone expired
+        _banned.clear()
+    admin_log(f"[ban] {ip} -> {RATE_BAN_SECONDS}s (rate abuse)")
+    if IPTABLES_BAN:
+        _iptables_rule("-I", ip)
+        asyncio.create_task(_unban_later(ip))
 
 
 def _rate_ok(ip, now=None):
@@ -2333,9 +2380,22 @@ async def rate_limit(request: Request, call_next):
     # (six bundles, one after another) - limiting it would break first launches.
     if request.url.path.startswith("/patch/"):
         return await call_next(request)
-    if not _rate_ok(client_ip(request)):
+    ip = client_ip(request)
+    now = time.time()
+    until = _banned.get(ip)
+    if until is not None:
+        if until > now:
+            return JSONResponse({"error": "temporarily banned"}, status_code=429,
+                                headers={"retry-after": str(int(until - now) + 1)})
+        _banned.pop(ip, None)
+    if not _rate_ok(ip, now):
+        strikes = _ban_strikes.get(ip, 0) + 1
+        _ban_strikes[ip] = strikes
+        if strikes >= RATE_BAN_AFTER:
+            _ban(ip, now)
         return JSONResponse({"error": "too many requests"}, status_code=429,
                             headers={"retry-after": str(RATE_WINDOW)})
+    _ban_strikes.pop(ip, None)   # a healthy request earns a clean slate
     return await call_next(request)
 
 

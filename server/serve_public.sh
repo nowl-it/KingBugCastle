@@ -34,6 +34,15 @@ PY_BIN="${UVICORN%/uvicorn}/python"
 export KGC_MAX_PLAYERS="${KGC_MAX_PLAYERS:-200}"
 export KGC_NEW_PLAYER_PER_IP="${KGC_NEW_PLAYER_PER_IP:-5}"
 export KGC_RATE_LIMIT="${KGC_RATE_LIMIT:-600}"
+export KGC_RATE_BAN_AFTER="${KGC_RATE_BAN_AFTER:-5}"
+export KGC_RATE_BAN_SECONDS="${KGC_RATE_BAN_SECONDS:-900}"
+# Firewall-hardening: repeated 429s also get dropped by iptables for the ban
+# duration. OFF by default - it needs a VALID sudoers rule for the service user
+# (a comma in the command spec is a sudoers list separator and fail-closes the
+# whole sudoers include - the 2026-07-31 outage). App-level ban is enough.
+#   ubuntu ALL=(root) NOPASSWD: /usr/sbin/iptables -I INPUT 1 -s * -j DROP
+#   ubuntu ALL=(root) NOPASSWD: /usr/sbin/iptables -D INPUT -s * -j DROP
+export KGC_IPTABLES_BAN="${KGC_IPTABLES_BAN:-0}"
 export KGC_MAX_BODY="${KGC_MAX_BODY:-1000000}"
 # One echoed line per request is an unbounded log file on a server that runs for
 # weeks. The dashboard's log view keeps working - that buffer is capped and in memory.
