@@ -1,14 +1,19 @@
-name: Build Private Server XAPK
+name: Build & Release XAPK
 
 on:
   workflow_dispatch:
     inputs:
       share_host:
-        description: "Your private server host (e.g., kgc.mydomain.com or IP)"
-        required: true
+        description: "Server host baked into the APK (IP or domain)"
+        required: false
+        default: "213.35.110.245"
       base_xapk_url:
         description: "Direct download URL to the raw King God Castle v171 XAPK"
         required: true
+      tag:
+        description: "Release tag (e.g. v1.0.0); leave empty for an auto date tag"
+        required: false
+        default: ""
 
 jobs:
   build:
@@ -26,7 +31,7 @@ jobs:
 
       - name: Install System Dependencies
         run: |
-          sudo apt-get update 
+          sudo apt-get update
           sudo apt-get install -y zipalign apksigner default-jre unzip curl wget
           sudo curl -sL -o /usr/local/bin/apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
           sudo curl -sL -o /usr/local/bin/apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v3.0.3/apktool_3.0.3.jar
@@ -36,11 +41,11 @@ jobs:
         run: |
           pip install -r server/requirements.txt
 
-      - name: Download and Extract Base XAPK
+      - name: Download and Extract Base XAPK (v171.1.00)
         run: |
-          mkdir -p apk/xapk_extracted_v171
+          mkdir -p apk/xapk_extracted_v1711
           wget --tries=3 --timeout=15 -O base.xapk --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "${{ github.event.inputs.base_xapk_url }}"
-          unzip base.xapk -d apk/xapk_extracted_v171/
+          unzip base.xapk -d apk/xapk_extracted_v1711/
           rm base.xapk
 
       - name: Setup Keystore
@@ -53,6 +58,7 @@ jobs:
       - name: Build XAPK Mod
         env:
           SHARE_HOST: ${{ github.event.inputs.share_host }}
+          KGC_APK_SRC: xapk_extracted_v1711
         run: |
           python3 server/build_v171_private.py --share
 
@@ -62,3 +68,26 @@ jobs:
           name: KingBugCastle_v171
           path: KingBugCastle_v171.xapk
           if-no-files-found: error
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHARE_HOST: ${{ github.event.inputs.share_host }}
+        run: |
+          TAG="${{ github.event.inputs.tag }}"
+          [ -z "$TAG" ] && TAG="release-$(date +%Y%m%d-%H%M%S)"
+          cat > notes.md <<EOF
+          Private-server client (v171.1.00).
+
+          - Baked server host: \`$SHARE_HOST\` (HTTP API+CDN, HTTPS TLS)
+          - Base XAPK source: \`${{ github.event.inputs.base_xapk_url }}\`
+          - Build: \`KGC_APK_SRC=xapk_extracted_v1711 SHARE_HOST=$SHARE_HOST python3 server/build_v171_private.py --share\`
+          - Signed with a throwaway debug keystore — the game's own update/obfuscation is disabled, so this APK is not updatable through the real store.
+
+          Install: side-load the \`.xapk\` with any APKMirror-style installer, or \`adb install-multiple\` the three \`.apk\` files inside it.
+          EOF
+          gh release create "$TAG" KingBugCastle_v171.xapk \
+            --repo "$GITHUB_REPOSITORY" \
+            --latest \
+            --title "King Bug Castle $TAG" \
+            --notes-file notes.md
