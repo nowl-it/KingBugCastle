@@ -1,0 +1,24 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "server/**"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run deploy hook on 213.35.110.245
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+          SERVER_HOST_KEY: ${{ vars.SERVER_HOST_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/kgc_deploy
+          chmod 600 ~/.ssh/kgc_deploy
+          echo "$SERVER_HOST_KEY" >> ~/.ssh/known_hosts
+          ssh -i ~/.ssh/kgc_deploy -o IdentitiesOnly=yes \
+            ubuntu@213.35.110.245 "deploy"
