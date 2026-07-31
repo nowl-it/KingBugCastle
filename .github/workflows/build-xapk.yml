@@ -12,7 +12,7 @@ on:
         required: false
         default: "https://github.com/nowl-it/kgc-private-server/releases/download/stock-v171.1.00/com.awesomepiece.castle@171.1.00.xapk"
       tag:
-        description: "Release tag (e.g. v1.0.0); leave empty for an auto date tag"
+        description: "Version, used as release name 'King Bug Castle <tag>' (e.g. 1.0.0); leave empty for an auto version"
         required: false
         default: ""
 
@@ -75,16 +75,12 @@ jobs:
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-          SHARE_HOST: ${{ github.event.inputs.share_host }}
         run: |
           TAG="${{ github.event.inputs.tag }}"
-          [ -z "$TAG" ] && TAG="release-$(date +%Y%m%d-%H%M%S)"
+          [ -z "$TAG" ] && TAG="$(date +%Y%m%d-%H%M%S)"
           cat > notes.md <<EOF
           Private-server client (v171.1.00).
 
-          - Baked server host: \`$SHARE_HOST\` (HTTP API+CDN, HTTPS TLS)
-          - Base XAPK source: \`${{ github.event.inputs.base_xapk_url }}\`
-          - Build: \`KGC_APK_SRC=xapk_extracted_v1711 SHARE_HOST=$SHARE_HOST python3 server/build_v171_private.py --share\`
           - Signed with a throwaway debug keystore — the game's own update/obfuscation is disabled, so this APK is not updatable through the real store.
 
           Install: side-load the \`.xapk\` with any APKMirror-style installer, or \`adb install-multiple\` the three \`.apk\` files inside it.
@@ -94,3 +90,10 @@ jobs:
             --latest \
             --title "King Bug Castle $TAG" \
             --notes-file notes.md
+
+      - name: Cleanup Stock Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete stock-v171.1.00 --repo "$GITHUB_REPOSITORY" --yes --cleanup-tag \
+            || echo "stock release already gone"
