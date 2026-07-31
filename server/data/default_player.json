@@ -9,7 +9,7 @@
     "hasFreeRename": true
   },
   "cardTemplate": {
-    "level": 1, "exp": 0, "potentialTier": 1,
+    "level": 1, "exp": 0, "potentialTier": 0,
     "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
     "randomSkinApply": false, "soul": 0
   },

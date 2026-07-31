@@ -197,7 +197,7 @@ def register(app, srv):
     async def admin_give_all_heroes():
         st = active_state()
         template = {
-            "level": 30, "exp": 0, "potentialTier": 1,
+            "level": 30, "exp": 0, "potentialTier": 0,
             "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
             "randomSkinApply": False, "soul": 999,
         }

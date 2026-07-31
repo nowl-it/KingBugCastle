@@ -234,12 +234,15 @@ INV_COUNT = SEED["invCount"]
 
 # God account: own every hero, level 30. Units.xml only defines Tier='1'
 # potential (ReqLevel=16, matches Constants.PotentialTier.Max=1 in the client) -
-# level 30 >= 16 so potentialTier=1 (awakened) is correct. An earlier retest
-# blamed potentialTier=1 for the DeckPanel boot crash, but Ghidra (2026-07-02,
-# arm32 dump.cs FUN_01e1a018) proved the real cause was deck length vs.
-# DeckPanel.currentDeck's fixed 6-slot UI array (see DEFAULT_DECKS below) -
-# potentialTier was never the culprit, that test just happened to run before
-# the deck-length fix was in place.
+# awakening (thức tỉnh) is a single tier: 0 = not awakened, 1 = awakened (max).
+# Seed potentialTier=0 (default_player.json cardTemplate) so fresh heroes do NOT
+# show the awakened badge (client renders "CardPotentialTier_{tier}"); the client
+# only enables the awaken button at level >= ReqLevel(16) and tier < Max(1).
+# An earlier retest blamed potentialTier=1 for the DeckPanel boot crash, but
+# Ghidra (2026-07-02, arm32 dump.cs FUN_01e1a018) proved the real cause was deck
+# length vs. DeckPanel.currentDeck's fixed 6-slot UI array (see DEFAULT_DECKS
+# below) - potentialTier was never the culprit, that test just happened to run
+# before the deck-length fix was in place.
 DEFAULT_CARDS = {
     str(uid): {"unitId": uid, **SEED["cardTemplate"]}
     for uid in ALL_HERO_IDS
