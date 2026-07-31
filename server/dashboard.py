@@ -1,9 +1,13 @@
 """KGC private-server dashboard (:8081) - the one admin UI.
 
-Serves webui/ (Vue 3, vendored, no build step) and hosts:
+Serves webui/ (Vue 3, vendored) and hosts:
   - WS  /ws              live in-battle hero stats (adb logcat -s XignCodeStub -> parsed -> broadcast)
   - /api/*               admin: players, saves, heroes, inventory, accessories, mail
   - /api/server/*        read-only proxy of server.py's own /admin/api (:8080)
+
+The UI is served from webui/dist when it exists (bundle + minify via
+`npm run build` in webui/) and from the raw webui/ sources otherwise - dev
+edits can be tested with no build step, deployments serve the compiled copy.
 
 State goes through `playerdb`, the same store server.py reads per request, so an edit
 lands on the client's next fetch with no restart. Master-data name lookups live in
@@ -36,6 +40,9 @@ app = FastAPI(title="KGC Dashboard")
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 UI_DIR = os.path.join(BASE, "webui")
+_BUILT_UI = os.path.join(UI_DIR, "dist")
+if os.path.isdir(_BUILT_UI):
+    UI_DIR = _BUILT_UI
 CONFIG_FILE = os.path.join(BASE, "data", "response_config.json")
 # Must match run.sh's default, or the battle tracker polls a serial with no device
 # behind it and never shows a single stat.

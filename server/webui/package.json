@@ -1,0 +1,12 @@
+{
+  "name": "kgc-dashboard-webui",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node check_templates.mjs",
+    "build": "node check_templates.mjs && node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
