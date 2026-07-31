@@ -9,7 +9,8 @@ on:
         default: "213.35.110.245"
       base_xapk_url:
         description: "Direct download URL to the raw King God Castle v171 XAPK"
-        required: true
+        required: false
+        default: "https://github.com/nowl-it/kgc-private-server/releases/download/stock-v171.1.00/com.awesomepiece.castle@171.1.00.xapk"
       tag:
         description: "Release tag (e.g. v1.0.0); leave empty for an auto date tag"
         required: false
@@ -18,6 +19,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
