@@ -533,6 +533,16 @@ served, arena battles counted).
   touched service(s). Dashboard admin: `9OwL` (via `playerdb.admin_create`); UI shows a login form
   once any admin exists, otherwise token input (`KGC_ADMIN_TOKEN=7318bda57802ba3f46c97d60e969bf67
   0727ffb994192350` in kgc.service env). Admin API `GET /api/players?admin_token=…` lists players.
+- **CI/CD (GitHub Actions, since 2026-08-01)**: `.github/workflows/ci.yml` runs the full pytest suite
+  (22 tests, `server/tests/`) on push/PR touching `server/**` — needs `pytest httpx httpx2` installed
+  on top of requirements.txt (fastapi 0.141's TestClient wants `httpx2`; dashboard tests import
+  `httpx`, which mitmproxy no longer pulls in). `.github/workflows/deploy.yml` auto-deploys on push to
+  main touching `server/**` (plus `workflow_dispatch`): SSH with a **restricted deploy key** whose
+  authorized_keys line is `restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh"` — the hook
+  (versioned in-repo) refuses on dirty tracked files, `git pull --ff-only`, then `sudo -n systemctl
+  restart kgc.service` + `kgc-dashboard.service`. Key = GitHub secret `DEPLOY_KEY`, host key pinned
+  as repo variable `SERVER_HOST_KEY` (ed25519; rotate both if the instance is rebuilt). The deploy
+  key can run ONLY the hook — it cannot open a shell.
 - **Dashboard UI build**: esbuild bundle in `server/webui/` (`build.mjs` → `dist/app.js`, one
   minified file, no importmap) — `dashboard.py` serves `webui/dist` when present. Rebuild locally,
   commit `dist/`, then `git pull` on server.
