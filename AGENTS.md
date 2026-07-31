@@ -464,3 +464,77 @@ three failures below were silent and each cost a session:
 `PostListItem.Set` (the custom-mail hook) needed #2: it's rendered via a UITableView cell callback
 (direct C# call), and neither `PostListItem` nor `PostBoxPanel` defines any Unity message. First
 attempt used #1 → "Hooked successfully" but the handler never ran. Verified in-game 2026-07-11.
+
+### Awakening (thức tỉnh) — `potentialTier` semantics (v171.1.00, fixed 2026-08-01)
+
+Awakening = the potential system: **one tier, 0 = not awakened, 1 = awakened (max)**. Client
+constants: `Constants.PotentialTier.Max = 1` (`.cctor` @ RVA `0x2F56C4C`), unlock levels
+`GetFirstSemiPotentialLv=4 / GetSecondSemiPotentialLv=8 / GetPotentialLv=16`. The client renders the
+awakened badge from `CardData.potentialTier` (field @ `0xB8`, ObscuredInt) via localize key
+`CardPotentialTier_` ("Thức tỉnh {tier}" in VI). **Seed `potentialTier` MUST be 0** — the old
+`default_player.json` seeded 1, so every fresh lv1 hero showed "Thức tỉnh 1" and the detail screen
+could not change it.
+
+Client enable rules (decompiled, v171.1.00):
+- `Constants.NeedToUpgradePotentialTier(CardData)` @ RVA `0x2F4EFC4`: returns true only when
+  `level == 16` AND `potentialTier == 0` (drives the upgrade affordance; "16+" unlock text =
+  literal `Cardinfo_16+Potential_Unlocked`).
+- `PotentialButton.Set(...)` @ RVA `0x31C0F20` (called from `CardInfoPanel.ReloadTier1Potentials` @
+  `0x31788C0`): button enabled only if `level >= potential.ReqLevel` (master-data `ResourceUnit.
+  Potential.ReqLevel`, 16 for the tier-1 potentials) and `potentialTier < Max`.
+- Server-side upgrade endpoint already existed and does the right thing: `POST /card/upgradePotentialTier`
+  (`r_card_upgrade_potential`, increments tier, no level check — client gates first).
+- Slot selection: `PotentialButton.SetPotential` → `GameManager.SetPotential` → `POST /deck/setPotential`
+  with `SetCardPotentialRequestModel = {presetIdx, idx, unitId, potential}` — exactly what
+  `r_deck_set_potential` reads.
+
+Fix (commit `95fd9ee`): `data/default_player.json` `cardTemplate.potentialTier` 1 → 0, same in
+`admin_api.py` give-all-heroes. Existing saves must be reset in place (`playerdb.save` loop — no
+`save_player`; API is `save(uid, st)`). Deploy DB had 3 players fixed (dev-0001 + two redroid test
+accounts). A lv30 hero on the god account is unawakened after the fix and can be awakened once via
+the button — by design.
+
+**Static client analysis without Ghidra**: for a small function, disassemble with capstone straight
+off `il2cpp/v171.0.00/libil2cpp_v171_ssl.so` — file offset = `RVA - 0x4000` (dump.cs `RVA:` lines).
+ObscuredInt fields are read as a 20-byte pair (`ldur q0,[x,#+0x14]` + `ldr w8,[x,#+0x14+4]` copied to
+stack) then decrypted via the thunk at RVA `0x2B84070` (`b 0x2B8EB3C`; x1=0). Every "CardData field"
+read in UI code follows this pattern; grep dump.cs for the class, take the method RVA, disassemble.
+String-literals cross-ref: `script.json` `ScriptString[].Address` gives literal VMAs (e.g.
+`CardPotentialTier_` @ `0x6A4A6B0`), but script.json methods carry **no** literal references, so
+identifying the using method still needs raw scanning — prefer decompiling the panel method directly.
+
+### Public OCI deploy (2026-08-01) — `213.35.110.245`
+
+Live private server for real clients; verified working end-to-end on redroid 2026-08-01 (guest
+auto-register + Google web-login bridge → player created on deploy DB, CDN bundle + lobby fetches
+served, arena battles counted).
+
+- **SSH**: `ssh -i /home/nowl/Code/kgc/oracle/ssh-key-2026-07-31.key -o IdentitiesOnly=yes
+  ubuntu@213.35.110.245` (Ubuntu 20.04 x86_64, hostname `instance-20260727-1513`; the key was
+  injected via a **boot-volume swap** through a temp instance `instance-20260801-0037`/
+  `161.118.225.174` — instance OCID
+  `ocid1.instance.oc1.ap-singapore-1.anzwsljrshqxahicq4w3rpscbeu7wabuispdqbmcci2qta2qx4wpgtk2j3uq`).
+  Console connections need `-i` on both hops + `HostKeyAlgorithms=+ssh-rsa
+  PubkeyAcceptedAlgorithms=+ssh-rsa` (serial console only; `exec request failed` is normal).
+- **Services**: `kgc.service` (runs `serve_public.sh`: preflight → HTTP 8080 + TLS 8443 with
+  self-signed `cert.pem`), `kgc-dashboard.service` (dashboard.py :8081). `serve_public.sh` sets
+  `KGC_QUIET=1` and **redirects uvicorn output to `/tmp/kgc_pub_http.log` + `/tmp/kgc_pub_tls.log` —
+  NOT journald**. Trace lines (`[213.35.110.245] CDN GET … -> HIT`, `[auth] login id#… -> uid=…`)
+  live in those files; journald only has systemd/spawn lines.
+- **Exposure**: OCI security list + instance iptables (saved persistent) open 22/80/443/8080/8081/8443;
+  iptables NAT PREROUTING `80→8080`, `443→8443`. Client APK bakes `SHARE_HOST=213.35.110.245`
+  (HTTP for API + CDN, HTTPS for the TLS server; the SSL-bypass patch accepts the self-signed cert).
+- **Python**: 3.8.10 is too old for fastapi≥0.140 — python-build-standalone 3.12.13 installed at
+  `~/py312`, venv rebuilt at `/home/ubuntu/kgc/.venv` (old 3.8 kept as `.venv.38`). `pip install -e .`
+  fails on purpose (needs JRE keytool for APK tooling) — plain `pip install -r requirements.txt` is
+  what the server needs. `git-lfs` required for `libil2cpp_v171_ssl.so`; `script.json` is gitignored
+  and must be rsynced separately from `il2cpp/v171.0.00/`.
+- **Deploy flow**: push to GitHub `nowl-it/kgc-private-server` → on server `git pull` → restart the
+  touched service(s). Dashboard admin: `9OwL` (via `playerdb.admin_create`); UI shows a login form
+  once any admin exists, otherwise token input (`KGC_ADMIN_TOKEN=7318bda57802ba3f46c97d60e969bf67
+  0727ffb994192350` in kgc.service env). Admin API `GET /api/players?admin_token=…` lists players.
+- **Dashboard UI build**: esbuild bundle in `server/webui/` (`build.mjs` → `dist/app.js`, one
+  minified file, no importmap) — `dashboard.py` serves `webui/dist` when present. Rebuild locally,
+  commit `dist/`, then `git pull` on server.
+- Local dev still runs on 8080/8443 with `--reload`; local port 8081 is taken by adb (redroid), so
+  tunnel the dashboard via `ssh -N -L 8082:localhost:8081 …`.
