@@ -8,9 +8,9 @@ on:
         required: false
         default: "kingbugcastle.id.vn"
       base_xapk_url:
-        description: "Direct download URL to the raw King God Castle v171 XAPK"
+        description: "Source XAPK path or URL (defaults to the checked-in v171.1.00 file)"
         required: false
-        default: "https://github.com/nowl-it/kgc-private-server/releases/download/stock-v171.1.00/com.awesomepiece.castle@171.1.00.xapk"
+        default: "apk/com.awesomepiece.castle@171.1.00.xapk"
       tag:
         description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v171.1.00); if it already exists a timestamp suffix is appended"
         required: false
@@ -47,7 +47,12 @@ jobs:
       - name: Download and Extract Base XAPK (v171.1.00)
         run: |
           mkdir -p apk/xapk_extracted_v1711
-          wget --tries=3 --timeout=15 -O base.xapk --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "${{ github.event.inputs.base_xapk_url }}"
+          BASE_XAPK='${{ github.event.inputs.base_xapk_url }}'
+          if [[ "$BASE_XAPK" =~ ^https?:// ]]; then
+            wget --tries=3 --timeout=15 -O base.xapk --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "$BASE_XAPK"
+          else
+            cp "$BASE_XAPK" base.xapk
+          fi
           unzip base.xapk -d apk/xapk_extracted_v1711/
           rm base.xapk
 
