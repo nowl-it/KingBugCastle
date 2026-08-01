@@ -387,6 +387,23 @@ def replace_xigncode(apk_path):
                 if item.filename == "lib/arm64-v8a/libxigncode.so":
                     orig_size = len(zin.read(item.filename))
                     stub_padded = bytearray(stub_data)
+                    
+                    # Patch the KGC_GLOGIN_HOST buffer
+                    # The buffer in stub.cpp is 64 bytes, starting with "127.0.0.1\0" and followed by spaces.
+                    old_host_prefix = b"127.0.0.1\0" + b" " * 20
+                    new_host = SHARE_HOST.encode() + b"\0"
+                    if len(new_host) > 64:
+                        print(f"WARNING: SHARE_HOST {SHARE_HOST} is too long for glogin patch!")
+                        new_host = new_host[:63] + b"\0"
+                    new_host = new_host.ljust(64, b"\0")
+                    
+                    idx = stub_padded.find(old_host_prefix)
+                    if idx != -1:
+                        stub_padded[idx:idx+64] = new_host
+                        print(f"[*] Patched libxigncode.so KGC_GLOGIN_HOST -> {SHARE_HOST}")
+                    else:
+                        print(f"[!] Warning: Could not find KGC_GLOGIN_HOST buffer in libxigncode.so!")
+                        
                     stub_padded.extend(b'\0' * (orig_size - len(stub_padded)))
                     new_item = zipfile.ZipInfo(item.filename, item.date_time)
                     new_item.compress_type = item.compress_type

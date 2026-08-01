@@ -13,6 +13,12 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netdb.h>
+
+// Globals for build-time binary patching of the glogin redirect
+char g_kgc_glogin_host[64] = "127.0.0.1\0" "                                                   ";
+char g_kgc_glogin_port[16] = "8080\0" "          ";
+
 
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, "XignCodeStub", __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "XignCodeStub", __VA_ARGS__)
@@ -290,14 +296,16 @@ GetStatFunc getStat = nullptr;
 // authenticate this repacked build. Detour it to Application.OpenURL(<web login>),
 // so pressing it opens our /glogin page in the device browser instead. The browser
 // reaches the server through the same adb-reverse loopback the game uses.
-#ifndef KGC_GLOGIN_URL
-#define KGC_GLOGIN_URL "http://127.0.0.1/glogin"
-#endif
+// reaches the server through the same adb-reverse loopback the game uses.
+// For public XAPK builds, the python build script binary-patches g_kgc_glogin_host.
+
 typedef void (*GoogleLoginFunc)(void* _this, void* methodInfo);
 GoogleLoginFunc origGoogleLogin = nullptr;   // trampoline; unused - we skip GPGS entirely
 void* g_openUrlMethod = nullptr;             // UnityEngine.Application::OpenURL(string)
 
 void HookedGoogleLogin(void* _this, void* methodInfo) {
+    char KGC_GLOGIN_URL[256];
+    snprintf(KGC_GLOGIN_URL, sizeof(KGC_GLOGIN_URL), "http://%s:%s/glogin", g_kgc_glogin_host, g_kgc_glogin_port);
     LOGI("Google button -> opening web login %s", KGC_GLOGIN_URL);
     if (g_openUrlMethod && str_new && rt_invoke) {
         void* url = str_new(KGC_GLOGIN_URL);
@@ -337,16 +345,35 @@ static void write_abs_jump(void* at, void* dest);   // defined in the inline-hoo
 // GET /glogin/pending on 127.0.0.1:80 (adb-reverse / host-rebind -> our server).
 // Returns body length, or -1. Plain HTTP, plain text body (not a game-API route).
 static int http_get_pending(char* buf, int buflen) {
-    int fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (fd < 0) return -1;
-    struct sockaddr_in sa; memset(&sa, 0, sizeof(sa));
-    sa.sin_family = AF_INET; sa.sin_port = htons(80);
-    sa.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+    struct addrinfo hints, *res;
+    memset(&hints, 0, sizeof(hints));
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    
+    if (getaddrinfo(g_kgc_glogin_host, g_kgc_glogin_port, &hints, &res) != 0) {
+        LOGE("http_get_pending: getaddrinfo failed for %s:%s", g_kgc_glogin_host, g_kgc_glogin_port);
+        return -1;
+    }
+    
+    int fd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+    if (fd < 0) {
+        freeaddrinfo(res);
+        return -1;
+    }
+
     struct timeval tv = {3, 0};
     setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
     setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv));
-    if (connect(fd, (struct sockaddr*)&sa, sizeof(sa)) != 0) { close(fd); return -1; }
-    const char* req = "GET /glogin/pending HTTP/1.0\r\nHost: 127.0.0.1\r\n\r\n";
+    
+    if (connect(fd, res->ai_addr, res->ai_addrlen) != 0) { 
+        close(fd); 
+        freeaddrinfo(res);
+        return -1; 
+    }
+    freeaddrinfo(res);
+    
+    char req[512];
+    snprintf(req, sizeof(req), "GET /glogin/pending HTTP/1.0\r\nHost: %s:%s\r\n\r\n", g_kgc_glogin_host, g_kgc_glogin_port);
     write(fd, req, strlen(req));
     char resp[1024]; int total = 0, r;
     while ((r = read(fd, resp + total, sizeof(resp) - 1 - total)) > 0) {
