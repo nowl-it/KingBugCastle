@@ -748,8 +748,7 @@ def api_admin_delete(username: str, request: Request):
 @app.head("/")
 def index(request: Request):
     print(f"GET / headers={request.headers}")
-    return FileResponse(os.path.join(UI_DIR, "index.html"), headers={"Cache-Control": "no-transform"})
-
+    return FileResponse(os.path.join(UI_DIR, "index.html"), headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
 
 # Next.js static export uses real paths (/players, /heroes, ...). Map any
 # non-API path to the exported file, with an index.html fallback, so direct
@@ -764,17 +763,17 @@ def ui_path(path: str, request: Request):
     clean_path = path.rstrip("/")
     full = os.path.join(UI_DIR, clean_path)
     if os.path.isfile(full):
-        return FileResponse(full, headers={"Cache-Control": "no-transform"})
+        return FileResponse(full, headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
         
     html_file = os.path.join(UI_DIR, f"{clean_path}.html")
     if os.path.isfile(html_file):
-        return FileResponse(html_file, headers={"Cache-Control": "no-transform"})
+        return FileResponse(html_file, headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
         
     index = os.path.join(full, "index.html")
     if os.path.isfile(index):
-        return FileResponse(index, headers={"Cache-Control": "no-transform"})
+        return FileResponse(index, headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
         
-    return FileResponse(os.path.join(UI_DIR, "index.html"), headers={"Cache-Control": "no-transform"})
+    return FileResponse(os.path.join(UI_DIR, "index.html"), headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
 
 
 if __name__ == "__main__":
