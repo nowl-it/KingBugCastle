@@ -45,6 +45,7 @@ jobs:
           test -f apk/xapk_extracted_v1711/com.awesomepiece.castle.apk
           test -f apk/xapk_extracted_v1711/config.arm64_v8a.apk
           test -f apk/xapk_extracted_v1711/base_assets.apk
+          test -f apk/xapk_extracted_v1711/manifest.json
 
       - name: Setup Keystore
         run: |
