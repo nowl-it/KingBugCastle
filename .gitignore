@@ -80,6 +80,9 @@ server/certs/
 .claude/
 .codegraph/
 
+# OCI SSH keys (never publish; oracle/ holds the server rescue keys)
+oracle/
+
 # Editor/IDE config
 .obsidian/
 .cursor/

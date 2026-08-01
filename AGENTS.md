@@ -564,3 +564,9 @@ served, arena battles counted).
   server code + master data.
 - Local dev still runs on 8080/8443 with `--reload`; local port 8081 is taken by adb (redroid), so
   tunnel the dashboard via `ssh -N -L 8082:localhost:8081 …`.
+- **Sudoers syntax gotcha (2026-08-01)**: NEVER write a comma (`,`) in a command specification inside a sudoers file. A comma is parsed as a list separator by sudoers, and if it's placed inside a command path or arguments without escaping, it triggers a parse error. A parse error in *any* include file (like `/etc/sudoers.d/`) will fail-close `sudo` system-wide. Always use `visudo -c -f <file>` to validate syntax before applying.
+- **OCI Recovery & Quotas**:
+  - The `Oracle Cloud Agent Run Command` feature is NOT supported on Ubuntu images (only Oracle Linux / CentOS / Windows), so it cannot be used for emergency root shell access.
+  - E2.1.Micro free-tier quota is consumed by the existence of an instance, even if it is stopped.
+  - ARM A1.Flex instances can be spun up as temporary recovery instances by detaching the boot volume from the broken instance and attaching it to the new ARM instance as the boot volume (if ARM capacity is available).
+  - Never terminate the MAIN instance if you can avoid it, as its ephemeral public IP will be lost. Note: Reserving an IP when not attached to a running instance incurs charges, which violates the zero-cost rule.

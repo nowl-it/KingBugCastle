@@ -1,13 +1,12 @@
 """KGC private-server dashboard (:8081) - the one admin UI.
 
-Serves webui/ (Vue 3, vendored) and hosts:
+Serves webui-next/out (Next.js) and hosts:
   - WS  /ws              live in-battle hero stats (adb logcat -s XignCodeStub -> parsed -> broadcast)
   - /api/*               admin: players, saves, heroes, inventory, accessories, mail
   - /api/server/*        read-only proxy of server.py's own /admin/api (:8080)
 
-The UI is served from webui/dist when it exists (bundle + minify via
-`npm run build` in webui/) and from the raw webui/ sources otherwise - dev
-edits can be tested with no build step, deployments serve the compiled copy.
+The UI is served from webui-next/out when it exists (bundle via
+`npm run build` in webui-next/).
 
 State goes through `playerdb`, the same store server.py reads per request, so an edit
 lands on the client's next fetch with no restart. Master-data name lookups live in
@@ -39,10 +38,9 @@ import playerdb
 app = FastAPI(title="KGC Dashboard")
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-UI_DIR = os.path.join(BASE, "webui")
-_BUILT_UI = os.path.join(UI_DIR, "dist")
-if os.path.isdir(_BUILT_UI):
-    UI_DIR = _BUILT_UI
+UI_DIR = os.path.join(BASE, "webui-next", "out")
+if not os.path.isdir(UI_DIR):
+    os.makedirs(UI_DIR, exist_ok=True)
 CONFIG_FILE = os.path.join(BASE, "data", "response_config.json")
 # Must match run.sh's default, or the battle tracker polls a serial with no device
 # behind it and never shows a single stat.
@@ -778,6 +776,22 @@ def api_admin_delete(username: str, request: Request):
 # --- UI + WS ----------------------------------------------------------------
 @app.get("/")
 def index():
+    return FileResponse(os.path.join(UI_DIR, "index.html"))
+
+
+# Next.js static export uses real paths (/players, /heroes, ...). Map any
+# non-API path to the exported file, with an index.html fallback, so direct
+# loads and refreshes never 404. Registered after every /api route on purpose.
+@app.get("/{path:path}")
+def ui_path(path: str):
+    if path.startswith(("api/", "ws")) or not path:
+        raise HTTPException(404)
+    full = os.path.join(UI_DIR, path)
+    if os.path.isfile(full):
+        return FileResponse(full)
+    index = os.path.join(full, "index.html")
+    if os.path.isfile(index):
+        return FileResponse(index)
     return FileResponse(os.path.join(UI_DIR, "index.html"))
 
 

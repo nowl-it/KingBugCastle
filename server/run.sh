@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Dev stack: game server on HTTP :8080 + TLS :8443, admin dashboard on :8081.
+# Dev stack: game server on HTTP :8080 + TLS :8443, admin API on :8081, next.js on :3000
 # Everything auto-reloads on source AND data edits - no manual restart after editing
-# server.py, dashboard.py, data/*.json or xml_live/*.xml. The dashboard's webui/ is
-# static and served from disk, so front-end edits need only a browser refresh.
+# server.py, dashboard.py, data/*.json or xml_live/*.xml. The Next.js frontend is
+# served locally on :3000 during dev.
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -21,6 +21,7 @@ done
 stop() {
     pkill -f "uvicorn server:app" 2>/dev/null || true
     pkill -f "uvicorn dashboard:app" 2>/dev/null || true
+    pkill -f "next dev" 2>/dev/null || true
     # The battle tracker's `adb logcat` child does not die with a pkill'd parent -
     # it is reparented to init and streams forever. They pile up across restarts.
     pkill -f "adb -s .* logcat -s XignCodeStub" 2>/dev/null || true
@@ -67,11 +68,17 @@ sleep 1
 "$UVICORN" server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem --ssl-certfile cert.pem \
         "${RELOAD[@]}" >/tmp/kgc_server_tls.log 2>&1 &
 "$UVICORN" dashboard:app --host 0.0.0.0 --port 8081 "${RELOAD[@]}" >/tmp/kgc_dashboard.log 2>&1 &
+if [ -d "webui-next" ]; then
+    (cd webui-next && npm run dev > /tmp/kgc_nextjs.log 2>&1 &)
+fi
 
 sleep 4
 grep -q "Application startup complete" /tmp/kgc_server.log     && echo "[ok] http      :8080"
 grep -q "Application startup complete" /tmp/kgc_server_tls.log && echo "[ok] https     :8443"
-grep -q "Application startup complete" /tmp/kgc_dashboard.log  && echo "[ok] dashboard :8081  ->  http://127.0.0.1:8081"
+grep -q "Application startup complete" /tmp/kgc_dashboard.log  && echo "[ok] admin API :8081  ->  http://127.0.0.1:8081"
+if [ -d "webui-next" ]; then
+    echo "[ok] next.js   :3000  ->  http://127.0.0.1:3000"
+fi
 wire_device
 echo "python:   $UVICORN"
-echo "logs: /tmp/kgc_server.log /tmp/kgc_server_tls.log /tmp/kgc_dashboard.log"
+echo "logs: /tmp/kgc_server.log /tmp/kgc_server_tls.log /tmp/kgc_dashboard.log /tmp/kgc_nextjs.log"
