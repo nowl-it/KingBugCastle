@@ -66,7 +66,7 @@ export default function MailPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Mail</h1>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Mail</h1>
         <p className="text-muted-foreground">Plain title/body are localization keys; prefix with <code className="text-xs bg-muted px-1 rounded">@raw:</code> to send literal text.</p>
       </div>
 
@@ -92,6 +92,10 @@ export default function MailPage() {
                 <label className="text-xs text-muted-foreground">Amount</label>
                 <Input type="number" value={rewardAmount} onChange={(e) => setRewardAmount(e.target.value)} className="font-mono" />
               </div>
+            </div>
+            <div className="space-y-1">
+              <label className="text-xs text-muted-foreground">Expires in (days)</label>
+              <Input type="number" value={days} onChange={(e) => setDays(e.target.value)} className="w-full font-mono sm:w-32" />
             </div>
 
             {needsId && (
@@ -120,14 +124,9 @@ export default function MailPage() {
               </>
             )}
 
-            <div className="space-y-1">
-              <label className="text-xs text-muted-foreground">Expires in (days)</label>
-              <Input type="number" value={days} onChange={(e) => setDays(e.target.value)} className="font-mono w-32" />
-            </div>
-
-            <div className="flex gap-2 pt-2">
-              <Button onClick={broadcast} className="flex-1"><Send className="h-4 w-4 mr-1" /> Broadcast to all players</Button>
-              {selectedId && <Button variant="outline" onClick={sendTargeted} className="flex-1"><Mail className="h-4 w-4 mr-1" /> Send to {selectedId}</Button>}
+            <div className="flex flex-col gap-2 pt-2 sm:flex-row">
+              <Button onClick={broadcast} className="sm:flex-1"><Send className="h-4 w-4 mr-1" /> Broadcast to all players</Button>
+              {selectedId && <Button variant="outline" onClick={sendTargeted} className="sm:flex-1"><Mail className="h-4 w-4 mr-1" /> Send to {selectedId}</Button>}
             </div>
           </CardContent>
         </Card>

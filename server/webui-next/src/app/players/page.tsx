@@ -73,15 +73,15 @@ export default function PlayersPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Players</h1>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Players</h1>
           <p className="text-muted-foreground">Manage saves, activate accounts, edit currency and raw state.</p>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="relative">
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="relative flex-1 sm:flex-none">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input placeholder="Search name / id..." value={query} onChange={(e) => setQuery(e.target.value)} className="pl-8 w-64" />
+            <Input placeholder="Search name / id..." value={query} onChange={(e) => setQuery(e.target.value)} className="w-full pl-8 sm:w-64" />
           </div>
           <Button onClick={() => setShowCreate(v => !v)}><Plus className="h-4 w-4 mr-1" /> New player</Button>
         </div>
@@ -90,14 +90,14 @@ export default function PlayersPage() {
       {showCreate && (
         <Card>
           <CardHeader><CardTitle>Create player</CardTitle><CardDescription>Built by the game server (default save + content-version expansion).</CardDescription></CardHeader>
-          <CardContent className="flex items-end gap-3">
-            <div className="space-y-1">
+          <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-end">
+            <div className="flex-1 space-y-1">
               <label className="text-xs text-muted-foreground">Name</label>
               <Input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="e.g. Newbie" />
             </div>
-            <div className="space-y-1">
+            <div className="flex-1 space-y-1">
               <label className="text-xs text-muted-foreground">UID (optional, auto-generated)</label>
-              <Input value={newUid} onChange={(e) => setNewUid(e.target.value)} placeholder="player-xxxx" className="w-56 font-mono" />
+              <Input value={newUid} onChange={(e) => setNewUid(e.target.value)} placeholder="player-xxxx" className="font-mono" />
             </div>
             <Button onClick={handleCreate} disabled={!newName.trim()}>Create</Button>
           </CardContent>
@@ -212,14 +212,14 @@ function PlayerDetail({ pid, onMutate, onActivate, onClone, onDelete }: {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <div className="flex items-start justify-between">
+          <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <CardTitle className="flex items-center gap-2">
                 {sum.name} {sum.active && <Badge variant="secondary">ACTIVE</Badge>}
               </CardTitle>
-              <CardDescription className="font-mono">{pid} · uid {sum.uid} · castle “{sum.castleName || "—"}”</CardDescription>
+              <CardDescription className="break-all font-mono">{pid} · uid {sum.uid} · castle “{sum.castleName || "—"}”</CardDescription>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Button variant="outline" size="sm" onClick={() => onClone(pid)}><Copy className="h-3.5 w-3.5 mr-1" /> Clone</Button>
               {!sum.active && <Button variant="outline" size="sm" onClick={() => onActivate(pid)}><Power className="h-3.5 w-3.5 mr-1" /> Activate</Button>}
               <Button variant="destructive" size="sm" onClick={() => onDelete(pid)}><Trash2 className="h-3.5 w-3.5 mr-1" /> Delete</Button>

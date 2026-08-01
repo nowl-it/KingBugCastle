@@ -36,7 +36,7 @@ export default function AccountPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Account Settings</h1>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Account Settings</h1>
         <p className="text-muted-foreground">Admin accounts for dashboard sign-in.</p>
       </div>
 
@@ -58,14 +58,14 @@ export default function AccountPage() {
           <CardTitle className="text-base flex items-center gap-2"><UserPlus className="h-4 w-4" /> Create admin</CardTitle>
           <CardDescription>Minimum 8-character password. Once at least one admin exists, remote sign-in is required.</CardDescription>
         </CardHeader>
-        <CardContent className="flex items-end gap-3">
-          <div className="space-y-1">
+        <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-end">
+          <div className="flex-1 space-y-1">
             <label className="text-xs text-muted-foreground">Username</label>
-            <Input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="admin" className="w-48" />
+            <Input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="admin" />
           </div>
-          <div className="space-y-1">
+          <div className="flex-1 space-y-1">
             <label className="text-xs text-muted-foreground">Password</label>
-            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="w-64" />
+            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />
           </div>
           <Button onClick={create} disabled={!username.trim() || password.length < 8}>Create</Button>
         </CardContent>

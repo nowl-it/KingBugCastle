@@ -44,10 +44,10 @@ export function PlayerBar() {
   if (!players?.length) return null
 
   return (
-    <div className="flex items-center gap-4 border-b border-border pb-4 mb-6">
+    <div className="flex flex-col gap-3 border-b border-border pb-4 mb-6 sm:flex-row sm:items-center sm:gap-4">
       <span className="text-sm font-medium text-muted-foreground">Active Target:</span>
-      <select 
-        className="flex h-10 w-[300px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+      <select
+        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 sm:w-[300px]"
         value={selectedId || ""}
         onChange={(e) => setSelectedId(e.target.value)}
       >

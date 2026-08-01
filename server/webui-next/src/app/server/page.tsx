@@ -22,7 +22,7 @@ export default function ServerPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Server Diagnostics</h1>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Server Diagnostics</h1>
         <p className="text-muted-foreground">Read-only proxy of the game server's own admin API (:8080). Auto-refreshes every 5s.</p>
       </div>
 

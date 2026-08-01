@@ -50,7 +50,7 @@ export default function ItemsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Items</h1>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Items</h1>
         <p className="text-muted-foreground">Inventory is set by exact count — 0 removes the row. All 173 inventory items available.</p>
       </div>
       <PlayerBar />
@@ -64,7 +64,7 @@ export default function ItemsPage() {
             </CardHeader>
             <CardContent className="p-0">
               {!inv?.length ? <p className="px-4 py-8 text-sm text-muted-foreground">Inventory is empty.</p> : (
-                <Table>
+                <Table className="min-w-[440px]">
                   <TableHeader>
                     <TableRow><TableHead>Item</TableHead><TableHead>Sub</TableHead><TableHead className="w-20 text-right">Count</TableHead><TableHead className="w-16" /></TableRow>
                   </TableHeader>
@@ -110,14 +110,14 @@ export default function ItemsPage() {
                 ))}
                 {!matched.length && <p className="px-3 py-6 text-sm text-muted-foreground">No match.</p>}
               </div>
-              <div className="mt-3 flex items-end gap-2">
+              <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-end">
                 <div className="space-y-1">
                   <label className="text-xs text-muted-foreground">Item ID</label>
-                  <Input type="number" className="w-32 font-mono" value={addId} onChange={(e) => setAddId(e.target.value)} placeholder="e.g. 380" />
+                  <Input type="number" className="w-full font-mono sm:w-32" value={addId} onChange={(e) => setAddId(e.target.value)} placeholder="e.g. 380" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs text-muted-foreground">Count</label>
-                  <Input type="number" className="w-28 font-mono" value={addCount} onChange={(e) => setAddCount(e.target.value)} />
+                  <Input type="number" className="w-full font-mono sm:w-28" value={addCount} onChange={(e) => setAddCount(e.target.value)} />
                 </div>
                 <Button onClick={addItem} disabled={!addId || !addCount}><Plus className="h-4 w-4 mr-1" /> Set</Button>
               </div>

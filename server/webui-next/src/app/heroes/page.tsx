@@ -25,7 +25,7 @@ export default function HeroesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Heroes</h1>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Heroes</h1>
         <p className="text-muted-foreground">Edit levels, souls and awakening tiers of owned heroes; grant missing ones.</p>
       </div>
       <PlayerBar />
@@ -68,11 +68,15 @@ function OwnedTable({ data, onMutate }: { data: any; onMutate: () => void }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Owned ({data.owned.length})</CardTitle>
-        <CardDescription>Inline edits apply immediately via PATCH.</CardDescription>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <CardTitle className="text-base">Owned ({data.owned.length})</CardTitle>
+            <CardDescription>Inline edits apply immediately via PATCH.</CardDescription>
+          </div>
+        </div>
       </CardHeader>
       <CardContent className="p-0">
-        <Table>
+        <Table className="min-w-[760px]">
           <TableHeader>
             <TableRow>
               <TableHead>Hero</TableHead>
@@ -141,12 +145,12 @@ function MissingTable({ data, onMutate }: { data: any; onMutate: () => void }) {
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <CardTitle className="text-base">Missing ({data.missing.length})</CardTitle>
             <CardDescription>Heroes in master data this player does not own yet.</CardDescription>
           </div>
-          <div className="flex items-end gap-2">
+          <div className="flex flex-wrap items-end gap-2">
             <div className="space-y-1">
               <label className="text-xs text-muted-foreground">Level</label>
               <Input type="number" className="h-8 w-20 font-mono" value={level} onChange={(e) => setLevel(e.target.value)} />
@@ -160,7 +164,7 @@ function MissingTable({ data, onMutate }: { data: any; onMutate: () => void }) {
         </div>
       </CardHeader>
       <CardContent className="p-0">
-        <Table>
+        <Table className="min-w-[480px]">
           <TableHeader>
             <TableRow><TableHead>Hero</TableHead><TableHead>Role</TableHead><TableHead className="w-24 text-right">Action</TableHead></TableRow>
           </TableHeader>
