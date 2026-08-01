@@ -1,6 +1,6 @@
 {
   "player": {
-    "accountId": 1, "uid": "guest-0001", "name": "NewPlayer", "castleName": "MyCastle",
+    "accountId": 0, "uid": "guest-0001", "name": "NewPlayer", "castleName": "MyCastle",
     "accountType": 1, "level": 1, "exp": 0,
     "gold": 0, "cash": 0, "paidCash": 0, "heart": 50,
     "bestClearedStage": 0, "bestClearedTheme": 1,

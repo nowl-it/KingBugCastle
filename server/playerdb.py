@@ -367,6 +367,39 @@ def all_players():
             out.append((uid, None, updated))
     return out
 
+def next_account_id():
+    """A fresh, unique accountId (max of existing + 1). The client's
+    targetId/profile lookups key off it, so it must never collide."""
+    best = 0
+    for _uid, s, _ in all_players():
+        if s is not None:
+            v = int(s.get("accountId", 0) or 0)
+            if v > best:
+                best = v
+    return best + 1
+
+def backfill_account_ids():
+    """Make accountId unique across all saves. Templates seed accountId=1, so
+    every pre-2026-08 save collides; this keeps the first row's id stable and
+    reassigns the rest. Idempotent: only touches missing or duplicated ids."""
+    taken = set()
+    changed = 0
+    for uid, s, _ in all_players():
+        if s is None:
+            continue
+        v = int(s.get("accountId", 0) or 0)
+        if v > 0 and v not in taken:
+            taken.add(v)
+            continue
+        nv = next_account_id()
+        while nv in taken:
+            nv += 1
+        s["accountId"] = nv
+        save(uid, s)
+        taken.add(nv)
+        changed += 1
+    return changed
+
 def count():
     with _conn() as c:
         return c.execute("SELECT COUNT(*) FROM players").fetchone()[0]

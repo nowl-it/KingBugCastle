@@ -197,6 +197,32 @@ def test_server_proxy_when_down():
     print("ok proxy: degrades to ok:false instead of erroring")
 
 
+def test_account_id_uniqueness():
+    """Every save must have a distinct accountId: profile lookups (roster
+    player_by_id) resolve the client's targetId against it, so a shared id
+    makes every clan/leaderboard/profile request land on the same player.
+    Exercised through the game server's own admin create (what the dashboard
+    proxies), with a fresh temp DB so the allocation scan is deterministic."""
+    import importlib.util
+    import sys
+    _path = pathlib.Path(__file__).resolve().parent.parent / "server.py"
+    _spec = importlib.util.spec_from_file_location("kgc_game_server", _path)
+    game_module = importlib.util.module_from_spec(_spec)
+    sys.modules["kgc_game_server"] = game_module     # server.py reads sys.modules[__name__]
+    _spec.loader.exec_module(game_module)
+    game_module.ADMIN_TOKEN = None
+    game = TestClient(game_module.app, client=("127.0.0.1", 55002))
+    created = []
+    for name in ("IdOne", "IdTwo", "IdThree"):
+        r = game.post("/admin/api/players/create", json={"name": name})
+        assert r.status_code == 200, r.text
+        created.append(r.json()["uid"])
+    ids = {playerdb.load(u)["accountId"] for u in created}
+    assert len(ids) == 3, f"accountIds collide: {ids}"
+    assert all(v > 0 for v in ids)
+    print("ok accountId: fresh players get unique ids")
+
+
 if __name__ == "__main__":
     test_guard()
     test_crud()
@@ -206,4 +232,5 @@ if __name__ == "__main__":
     test_mail()
     test_server_proxy_when_down()
     test_catalog_and_status()
+    test_account_id_uniqueness()
     print("\nall dashboard API checks passed")

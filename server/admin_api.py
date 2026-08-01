@@ -27,7 +27,7 @@ DASHBOARD_URL = os.environ.get("KGC_DASHBOARD_URL", "http://127.0.0.1:8081")
 # Fields the active-player editor hands back; the grouping mirrors how the dashboard
 # form is laid out. Containers are edited through their own endpoints, not here.
 _PLAYER_FIELDS = {
-    "accountId": 1, "uid": "", "name": "", "castleName": "", "level": 1, "exp": 0,
+    "accountId": 0, "uid": "", "name": "", "castleName": "", "level": 1, "exp": 0,
     "gold": 0, "cash": 0, "paidCash": 0, "heart": 0,
     "bestClearedStage": 1, "bestClearedTheme": 1,
     "bestClearedHardStage": 1, "bestClearedHardTheme": 1,
@@ -120,6 +120,7 @@ def register(app, srv):
         st = copy.deepcopy(srv.DEFAULT_PLAYER)
         st["name"] = body.get("name", "NewPlayer")
         st["uid"] = uid
+        st["accountId"] = playerdb.next_account_id()
         st["accountCreatedAt"] = srv.now_iso(0)
         st["lastHeartTime"] = srv.now_iso(0)
         st["tomorrow"] = srv.now_iso(1)
@@ -157,6 +158,7 @@ def register(app, srv):
     async def admin_reset_player_by_id(pid: str):
         st = copy.deepcopy(srv.DEFAULT_PLAYER)
         st["uid"] = pid
+        st["accountId"] = (playerdb.load(pid) or {}).get("accountId") or playerdb.next_account_id()
         playerdb.save(pid, st)
         return {"ok": True}
 

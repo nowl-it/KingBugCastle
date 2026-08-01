@@ -392,6 +392,7 @@ def _uid_for_login(login_id, prev_token, acct_type=None):
                 return None
             st = copy.deepcopy(DEFAULT_PLAYER)
             st["uid"] = uid
+            st["accountId"] = playerdb.next_account_id()
             st["name"] = f"Player{random.randint(1000, 9999)}"
             st["castleName"] = f"Castle{random.randint(1000, 9999)}"
             st["accountCreatedAt"] = now_iso(0)
@@ -2609,6 +2610,9 @@ import seasonal
 import mini_games
 admin_api.register(app, sys.modules[__name__])
 inbox.register(app, sys.modules[__name__])
+_admin_changed = playerdb.backfill_account_ids()
+if _admin_changed:
+    admin_log(f"[accounts] backfilled {_admin_changed} duplicate/missing accountId(s)")
 decoration_routes.register(app, sys.modules[__name__])
 pvp.register(app, sys.modules[__name__])
 territory_routes.register(app, sys.modules[__name__])
