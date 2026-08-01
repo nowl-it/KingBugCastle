@@ -15,6 +15,7 @@ import datetime
 import json
 import os
 import secrets
+import subprocess
 import time
 
 import config
@@ -321,6 +322,25 @@ def register(app, srv):
         except OSError:
             pass
 
+        processes = []
+        try:
+            output = subprocess.check_output(
+                ["ps", "-eo", "pid,comm,%cpu,%mem", "--sort=-%cpu"],
+                text=True
+            )
+            lines = output.strip().split("\n")
+            for line in lines[1:6]:
+                parts = line.split(None, 3)
+                if len(parts) >= 4:
+                    processes.append({
+                        "pid": parts[0],
+                        "name": parts[1],
+                        "cpu": float(parts[2]),
+                        "mem": float(parts[3])
+                    })
+        except Exception:
+            pass
+
         return {
             "version": srv.SERVER_VERSION,
             "patchFolder": srv.PATCH_FOLDER,
@@ -337,6 +357,7 @@ def register(app, srv):
                     "cores": os.cpu_count() or 1},
             "mem": mem,
             "disk": disk,
+            "processes": processes,
         }
 
     @app.get("/admin/api/routes")

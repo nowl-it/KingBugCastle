@@ -1,13 +1,11 @@
 "use client"
 import { useState, useEffect, useMemo } from "react"
-
-import { useStatus, usePlayers, useServerSection } from "@/lib/api"
+import { useQuery } from "@tanstack/react-query"
+import { useStatus, usePlayers, useServerSection, fetcher } from "@/lib/api"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Users, Settings, HardDrive, Globe, Database, ScrollText, Crown, Coins, Gem, Heart, MemoryStick, Cpu, Server, Timer, BarChart2, Activity } from "lucide-react"
+import { Users, Settings, HardDrive, Globe, Database, ScrollText, Crown, Coins, Gem, Heart, MemoryStick, Cpu, Server, Timer, BarChart2, Activity, ListOrdered } from "lucide-react"
 import Link from "next/link"
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts"
-import useSWR from "swr"
-const fetcher = (url: string) => fetch(url).then(r => r.json());
 
 function Gauge({ label, value, sub, icon: Icon, color }: { label: string; value: string; sub?: string; icon: any; color: string }) {
   return (
@@ -27,10 +25,16 @@ function Gauge({ label, value, sub, icon: Icon, color }: { label: string; value:
 export default function OverviewPage() {
   const { data: status, error } = useStatus()
   const { data: players } = usePlayers()
-  const { data: sys } = useServerSection("system", 10000)
+  const { data: sys } = useServerSection("system", 2000)
   
-  const { data: realtime } = useSWR('/api/stats/realtime', fetcher, { refreshInterval: 2000 })
+  const { data: realtime } = useQuery({
+    queryKey: ['/api/stats/realtime'],
+    queryFn: () => fetcher('/api/stats/realtime'),
+    refetchInterval: 2000
+  })
+
   const [history, setHistory] = useState<any[]>([])
+  const [sysHistory, setSysHistory] = useState<any[]>([])
 
   useEffect(() => {
     if (realtime) {
@@ -41,6 +45,22 @@ export default function OverviewPage() {
       })
     }
   }, [realtime])
+
+  useEffect(() => {
+    if (sys?.ok && sys.data) {
+      setSysHistory(prev => {
+        const d = new Date()
+        const timeStr = `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}:${d.getSeconds().toString().padStart(2, '0')}`
+        const next = [...prev, { 
+          time: timeStr, 
+          cpu: sys.data.cpu.load1,
+          ram: sys.data.mem.percent
+        }]
+        if (next.length > 20) return next.slice(next.length - 20)
+        return next
+      })
+    }
+  }, [sys])
 
   const list = Array.isArray(players) ? players : []
   const totals = list.reduce((acc, p: any) => ({
@@ -82,6 +102,7 @@ export default function OverviewPage() {
   const mem = sysData?.mem
   const disk = sysData?.disk
   const cpu = sysData?.cpu
+  const processes = sysData?.processes || []
   const loadPct = cpu && cpu.cores ? Math.min(100, Math.round((cpu.load1 / cpu.cores) * 100)) : null
 
   const metrics = [
@@ -124,6 +145,69 @@ export default function OverviewPage() {
           <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Host</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {hostMetrics.map((m, i) => <Gauge key={i} {...m} />)}
+          </div>
+          
+          <div className="grid gap-4 md:grid-cols-3 mt-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><Cpu className="w-5 h-5" /> Realtime CPU Load</CardTitle>
+                <CardDescription>System load average (1m).</CardDescription>
+              </CardHeader>
+              <CardContent className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={sysHistory} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="opacity-20" />
+                    <XAxis dataKey="time" fontSize={12} tickLine={false} axisLine={false} />
+                    <YAxis allowDecimals={false} fontSize={12} tickLine={false} axisLine={false} />
+                    <Tooltip contentStyle={{ backgroundColor: 'var(--background)', borderColor: 'var(--border)', borderRadius: '6px' }} />
+                    <Line type="monotone" dataKey="cpu" stroke="currentColor" strokeWidth={2} dot={false} className="stroke-cyan-400" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><MemoryStick className="w-5 h-5" /> Realtime Memory</CardTitle>
+                <CardDescription>System RAM utilization (%).</CardDescription>
+              </CardHeader>
+              <CardContent className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={sysHistory} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="opacity-20" />
+                    <XAxis dataKey="time" fontSize={12} tickLine={false} axisLine={false} />
+                    <YAxis allowDecimals={false} fontSize={12} tickLine={false} axisLine={false} domain={[0, 100]} />
+                    <Tooltip contentStyle={{ backgroundColor: 'var(--background)', borderColor: 'var(--border)', borderRadius: '6px' }} />
+                    <Line type="monotone" dataKey="ram" stroke="currentColor" strokeWidth={2} dot={false} className="stroke-rose-400" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><ListOrdered className="w-5 h-5" /> Top Processes</CardTitle>
+                <CardDescription>Highest CPU consumers.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="divide-y divide-border">
+                  <li className="flex items-center justify-between py-2 text-xs text-muted-foreground uppercase tracking-wider font-semibold">
+                    <span className="w-12">PID</span>
+                    <span className="flex-1">COMMAND</span>
+                    <span className="w-12 text-right">CPU%</span>
+                    <span className="w-12 text-right">MEM%</span>
+                  </li>
+                  {processes.map((p: any) => (
+                    <li key={p.pid} className="flex items-center justify-between py-2 text-sm">
+                      <span className="w-12 font-mono text-muted-foreground">{p.pid}</span>
+                      <span className="flex-1 font-medium truncate pr-2">{p.name}</span>
+                      <span className="w-12 text-right text-cyan-400">{p.cpu}</span>
+                      <span className="w-12 text-right text-rose-400">{p.mem}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </div>
       )}

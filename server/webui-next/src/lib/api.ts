@@ -1,6 +1,6 @@
-import useSWR from 'swr';
+import { useQuery } from '@tanstack/react-query';
 
-// Central fetcher for SWR
+// Central fetcher
 export const fetcher = async (url: string, init?: RequestInit) => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
   const headers = new Headers(init?.headers);
@@ -39,48 +39,101 @@ export const runMutation = async (url: string, init?: RequestInit, successMessag
   }
 };
 
-// SWR Hooks
+// React Query Hooks mapped to SWR signature
+function useMappedQuery(options: any) {
+  const { data, error, isLoading, refetch } = useQuery(options);
+  return { data: data as any, error, isLoading, mutate: refetch };
+}
+
 export function useStatus() {
-  return useSWR('/api/status', fetcher, { refreshInterval: 2000 });
+  return useMappedQuery({
+    queryKey: ['/api/status'],
+    queryFn: () => fetcher('/api/status'),
+    refetchInterval: 2000
+  });
 }
 
 export function useCatalog() {
-  return useSWR('/api/catalog', fetcher, { revalidateOnFocus: false });
+  return useMappedQuery({
+    queryKey: ['/api/catalog'],
+    queryFn: () => fetcher('/api/catalog'),
+    refetchOnWindowFocus: false
+  });
 }
 
 export function usePlayers() {
-  return useSWR('/api/players', fetcher, { refreshInterval: 2000 });
+  return useMappedQuery({
+    queryKey: ['/api/players'],
+    queryFn: () => fetcher('/api/players'),
+    refetchInterval: 2000
+  });
 }
 
 export function usePlayer(pid?: string) {
-  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}` : null, fetcher, { refreshInterval: 2000 });
+  return useMappedQuery({
+    queryKey: pid ? ['/api/player', pid] : [],
+    queryFn: () => pid ? fetcher(`/api/player/${encodeURIComponent(pid)}`) : Promise.resolve(null),
+    enabled: !!pid,
+    refetchInterval: 2000
+  });
 }
 
 export function usePlayerRaw(pid?: string) {
-  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/raw` : null, fetcher, { revalidateOnFocus: false });
+  return useMappedQuery({
+    queryKey: pid ? ['/api/player/raw', pid] : [],
+    queryFn: () => pid ? fetcher(`/api/player/${encodeURIComponent(pid)}/raw`) : Promise.resolve(null),
+    enabled: !!pid,
+    refetchOnWindowFocus: false
+  });
 }
 
 export function useHeroes(pid?: string) {
-  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/heroes` : null, fetcher, { refreshInterval: 2000 });
+  return useMappedQuery({
+    queryKey: pid ? ['/api/player/heroes', pid] : [],
+    queryFn: () => pid ? fetcher(`/api/player/${encodeURIComponent(pid)}/heroes`) : Promise.resolve(null),
+    enabled: !!pid,
+    refetchInterval: 2000
+  });
 }
 
 export function useInventory(pid?: string) {
-  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/inventory` : null, fetcher, { refreshInterval: 2000 });
+  return useMappedQuery({
+    queryKey: pid ? ['/api/player/inventory', pid] : [],
+    queryFn: () => pid ? fetcher(`/api/player/${encodeURIComponent(pid)}/inventory`) : Promise.resolve(null),
+    enabled: !!pid,
+    refetchInterval: 2000
+  });
 }
 
 export function useAccessories(pid?: string) {
-  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/accessories` : null, fetcher, { refreshInterval: 2000 });
+  return useMappedQuery({
+    queryKey: pid ? ['/api/player/accessories', pid] : [],
+    queryFn: () => pid ? fetcher(`/api/player/${encodeURIComponent(pid)}/accessories`) : Promise.resolve(null),
+    enabled: !!pid,
+    refetchInterval: 2000
+  });
 }
 
 export function useServerSection(section: string | null, refreshMs = 2000) {
-  return useSWR(section ? `/api/server/${section}` : null, fetcher,
-    { refreshInterval: section === 'logs' ? refreshMs : 0 });
+  return useMappedQuery({
+    queryKey: section ? ['/api/server', section] : [],
+    queryFn: () => section ? fetcher(`/api/server/${section}`) : Promise.resolve(null),
+    enabled: !!section,
+    refetchInterval: section === 'logs' ? refreshMs : 0
+  });
 }
 
 export function useAdmins() {
-  return useSWR('/api/auth/admins', fetcher);
+  return useMappedQuery({
+    queryKey: ['/api/auth/admins'],
+    queryFn: () => fetcher('/api/auth/admins')
+  });
 }
 
 export function useWhoAmI() {
-  return useSWR('/api/auth/whoami', fetcher, { shouldRetryOnError: false });
+  return useMappedQuery({
+    queryKey: ['/api/auth/whoami'],
+    queryFn: () => fetcher('/api/auth/whoami'),
+    retry: false
+  });
 }
