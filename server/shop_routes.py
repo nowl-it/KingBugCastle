@@ -135,7 +135,7 @@ def _shop_buy(body, st):
         if gacha_el is not None:
             # It's a roll!
             # Check if we should refund the cash/gold we just charged, because they might be using keys!
-            key_item = gacha_el.findtext("KeyItem")
+            key_item = el.findtext("KeyItem") or gacha_el.findtext("KeyItem")
             # If the user has enough keys, and they didn't explicitly request to use cash/gold, we use keys.
             # But wait, the client already checks if they have keys. If they have keys, it sends a request.
             # If they don't, it asks to use gems. In either case, the request comes here.
