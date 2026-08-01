@@ -119,7 +119,7 @@ export function useServerSection(section: string | null, refreshMs = 2000) {
     queryKey: section ? ['/api/server', section] : [],
     queryFn: () => section ? fetcher(`/api/server/${section}`) : Promise.resolve(null),
     enabled: !!section,
-    refetchInterval: section === 'logs' ? refreshMs : 0
+    refetchInterval: refreshMs
   });
 }
 
