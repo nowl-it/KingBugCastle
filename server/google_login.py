@@ -242,26 +242,36 @@ def _page(title, body, tail="", bad=False):
 # with one player logging in at a time.
 # ponytail: one global slot, no per-device keying. Key it by a device id in the
 # deep link if two people ever log in at the same second.
-_PENDING_FILE = pathlib.Path(__file__).parent / "state" / ".glogin_pending"
+def _client_ip(request):
+    peer = request.client.host if request.client else "-"
+    fwd = request.headers.get("cf-connecting-ip") or request.headers.get("x-forwarded-for", "")
+    return fwd.split(",")[0].strip() or peer
 
-def _set_pending(account_id):
-    _PENDING_FILE.write_text(account_id)
 
-def _get_and_clear_pending():
-    if _PENDING_FILE.exists():
-        acc = _PENDING_FILE.read_text().strip()
+def _pending_file(ip: str):
+    import hashlib
+    safe = hashlib.md5(ip.encode()).hexdigest()
+    return pathlib.Path(__file__).parent / "state" / f".glogin_pending_{safe}"
+
+def _set_pending(ip: str, account_id: str):
+    _pending_file(ip).write_text(account_id)
+
+def _get_and_clear_pending(ip: str):
+    f = _pending_file(ip)
+    if f.exists():
+        acc = f.read_text().strip()
         try:
-            _PENDING_FILE.unlink()
+            f.unlink()
         except OSError:
             pass
         return acc
     return ""
 
 
-def return_page(account_id):
+def return_page(request, account_id):
     """Park the account id for the poller, and hand back a page that deep-links back
     into the app to foreground it (the id travels via the poll, not the link)."""
-    _set_pending(account_id)
+    _set_pending(_client_ip(request), account_id)
     link = f"{SCHEME}://auth"
     return _page(
         "Signed in - King Bug Castle",
@@ -301,6 +311,7 @@ def error_page(title, detail, hint=""):
 def register(app):
     """Add /glogin and /glogin/callback to the FastAPI app. No-op-ish if unconfigured
     (the routes exist but explain they are off)."""
+    from fastapi import Request
     from fastapi.responses import HTMLResponse, RedirectResponse
 
     _NOT_CONFIGURED = (
@@ -319,7 +330,7 @@ def register(app):
         return RedirectResponse(authorize_url())
 
     @app.get("/glogin/callback")
-    def glogin_callback(code: str = "", state: str = "", error: str = ""):
+    def glogin_callback(request: Request, code: str = "", state: str = "", error: str = ""):
         if error:
             return HTMLResponse(
                 error_page("Sign-in cancelled",
@@ -346,10 +357,10 @@ def register(app):
                            f"<code>{type(e).__name__}</code> - if this keeps happening, "
                            "the operator should check the OAuth client settings."),
                 status_code=502)
-        return HTMLResponse(return_page(account_id_for_sub(sub)))
+        return HTMLResponse(return_page(request, account_id_for_sub(sub)))
 
     @app.get("/glogin/go")
-    def glogin_go(id: str = ""):
+    def glogin_go(request: Request, id: str = ""):
         """Park a chosen account id and hand back the return page. The dev page's
         buttons point here; only accepts the dev ids unless real Google is on (a raw
         id here would otherwise let anyone log in as any account)."""
@@ -359,14 +370,14 @@ def register(app):
                            "That account cannot be signed into this way.",
                            "Only the dev test accounts work while Google is off."),
                 status_code=403)
-        return HTMLResponse(return_page(id))
+        return HTMLResponse(return_page(request, id))
 
     @app.get("/glogin/pending")
-    def glogin_pending():
+    def glogin_pending(request: Request):
         """The app's native poller reads the just-picked account id here (plain text,
         not AES - it's not a game-API route). Returned once, then cleared."""
         from fastapi.responses import PlainTextResponse
-        acc = _get_and_clear_pending()
+        acc = _get_and_clear_pending(_client_ip(request))
         return PlainTextResponse(acc)
 
 
@@ -386,7 +397,12 @@ if __name__ == "__main__":   # self-check: state round-trip + id derivation + re
 
     # Every page is one self-contained document: a player hits these over a tunnel,
     # on a phone, and a single missing asset is a blank screen with no way back.
-    for html in (return_page("google_1"), dev_page(),
+    class MockRequest:
+        client = None
+        headers = {}
+    mock_req = MockRequest()
+    
+    for html in (return_page(mock_req, "google_1"), dev_page(),
                  error_page("Nope", "detail", "hint")):
         assert html.startswith("<!doctype html>") and html.rstrip().endswith("</html>")
         assert "<style>" in html and "</div>" in html
@@ -395,13 +411,13 @@ if __name__ == "__main__":   # self-check: state round-trip + id derivation + re
 
     # The return page must park the id for the poller AND offer the deep link, since
     # the client cannot read the URL it was sent back with.
-    _get_and_clear_pending()
+    _get_and_clear_pending(_client_ip(mock_req))
     error_page("Nope", "detail")
-    assert _get_and_clear_pending() == "", "error_page must not park an id"
-    html = return_page("google_zz")
-    assert _get_and_clear_pending() == "google_zz"
+    assert _get_and_clear_pending(_client_ip(mock_req)) == "", "error_page must not park an id"
+    html = return_page(mock_req, "google_zz")
+    assert _get_and_clear_pending(_client_ip(mock_req)) == "google_zz"
     assert f"{SCHEME}://auth" in html, "the return page lost its deep link"
-    _get_and_clear_pending()
+    _get_and_clear_pending(_client_ip(mock_req))
 
     assert "google_devA" in dev_page() and "/glogin/go?id=" in dev_page()
 
