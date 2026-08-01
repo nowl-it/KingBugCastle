@@ -13,3 +13,4 @@ assets/*.png                filter=lfs diff=lfs merge=lfs -text
 reports/assets/**/*.png     filter=lfs diff=lfs merge=lfs -text
 reports/assets/**/*.gif     filter=lfs diff=lfs merge=lfs -text
 il2cpp/*/libil2cpp_v*_ssl.so filter=lfs diff=lfs merge=lfs -text
+apk/xapk_extracted_v1711/*.apk filter=lfs diff=lfs merge=lfs -text

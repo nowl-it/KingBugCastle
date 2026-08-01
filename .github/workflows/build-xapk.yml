@@ -7,10 +7,6 @@ on:
         description: "Server host baked into the APK (IP or domain)"
         required: false
         default: "kingbugcastle.id.vn"
-      base_xapk_url:
-        description: "Source XAPK path or URL (defaults to the checked-in v171.1.00 file)"
-        required: false
-        default: "apk/com.awesomepiece.castle@171.1.00.xapk"
       tag:
         description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v171.1.00); if it already exists a timestamp suffix is appended"
         required: false
@@ -44,17 +40,11 @@ jobs:
         run: |
           pip install -r server/requirements.txt
 
-      - name: Download and Extract Base XAPK (v171.1.00)
+      - name: Validate Base XAPK source (v171.1.00)
         run: |
-          mkdir -p apk/xapk_extracted_v1711
-          BASE_XAPK='${{ github.event.inputs.base_xapk_url }}'
-          if [[ "$BASE_XAPK" =~ ^https?:// ]]; then
-            wget --tries=3 --timeout=15 -O base.xapk --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "$BASE_XAPK"
-          else
-            cp "$BASE_XAPK" base.xapk
-          fi
-          unzip base.xapk -d apk/xapk_extracted_v1711/
-          rm base.xapk
+          test -f apk/xapk_extracted_v1711/com.awesomepiece.castle.apk
+          test -f apk/xapk_extracted_v1711/config.arm64_v8a.apk
+          test -f apk/xapk_extracted_v1711/base_assets.apk
 
       - name: Setup Keystore
         run: |
@@ -138,17 +128,6 @@ jobs:
               --latest \
               --title "King Bug Castle $TAG" \
               --notes-file notes.md
-          fi
-
-      - name: Delete Stock Release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          STOCK_TAG=$(echo "${{ github.event.inputs.base_xapk_url }}" | grep -o 'stock-[^/]*')
-          if [ -n "$STOCK_TAG" ]; then
-            echo "Deleting stock release $STOCK_TAG to prevent hosting unmodified APK..."
-            gh release delete "$STOCK_TAG" --yes --repo "$GITHUB_REPOSITORY" || true
-            git push --delete origin "$STOCK_TAG" || true
           fi
 
       - name: Cleanup
