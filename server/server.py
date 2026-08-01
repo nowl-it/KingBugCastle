@@ -398,6 +398,29 @@ def _uid_for_login(login_id, prev_token, acct_type=None):
             st["accountCreatedAt"] = now_iso(0)
             if acct_type is not None:
                 st["accountType"] = acct_type
+                
+            # --- Tier 1 Defaults ---
+            # Max Resources (290909)
+            st["gold"] = 290909
+            st["cash"] = 290909
+            st["heart"] = 290909
+            st["level"] = 100
+            st["exp"] = 9999999
+            # Basic Heroes (Lvl 20)
+            import gamedata
+            for unit_id, info in gamedata.HEROES.items():
+                if info.get("min_version", 0) <= CONTENT_GATE:
+                    if str(unit_id) in st["cards"]:
+                        st["cards"][str(unit_id)]["level"] = 20
+            # Basic Legacies (0*)
+            arts = st.setdefault("artifacts", [])
+            arts.clear()
+            for i, aid in enumerate(ALL_ARTIFACT_IDS):
+                art = make_artifact(i + 1, aid)
+                art["count"] = 1
+                arts.append(art)
+            # -----------------------
+            
             playerdb.save(uid, st)
             admin_log(f"[auth] new player {uid} (accountType={acct_type})")
         playerdb.bind_login(login_id, uid)

@@ -31,7 +31,7 @@ esac
 RELOAD=(--reload
         --reload-dir . --reload-dir xml_live
         --reload-include '*.py' --reload-include '*.json' --reload-include '*.xml'
-        --reload-exclude 'state/*')   # state/ is written by the server itself - watching it = restart loop
+        --reload-exclude 'state/*' --reload-exclude 'webui-next/*')   # state/ is written by the server itself - watching it = restart loop
 
 stop   # kill any running copy before relaunching
 sleep 1

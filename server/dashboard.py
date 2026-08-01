@@ -369,12 +369,64 @@ async def api_player_macro(pid: str, body: dict):
             "itemIds": list(server.ALL_ITEM_IDS),
             "counts": [99999] * len(server.ALL_ITEM_IDS)
         }
-    elif macro == "max_heroes":
+    elif macro == "max_resources":
+        st["gold"] = 290909
+        st["cash"] = 290909
+        st["heart"] = 290909
+        st["level"] = 100
+        st["exp"] = 9999999
+    elif macro == "hero_basic":
+        import server
         cards = st.setdefault("cards", {})
-        for unit_id in gamedata.HEROES:
+        for unit_id, info in gamedata.HEROES.items():
+            if info.get("min_version", 0) <= server.CONTENT_GATE:
+                c = cards.setdefault(str(unit_id), {"unitId": unit_id, **server.SEED["cardTemplate"]})
+                c["level"] = 20
+                c["soul"] = 0
+    elif macro == "hero_advanced":
+        import server
+        cards = st.setdefault("cards", {})
+        for unit_id, info in gamedata.HEROES.items():
+            if info.get("min_version", 0) <= server.CONTENT_GATE:
+                c = cards.setdefault(str(unit_id), {"unitId": unit_id, **server.SEED["cardTemplate"]})
+                c["level"] = 30
+                c["soul"] = 9999
+    elif macro == "hero_max":
+        import server
+        cards = st.setdefault("cards", {})
+        for unit_id, info in gamedata.HEROES.items():
             c = cards.setdefault(str(unit_id), {"unitId": unit_id, **server.SEED["cardTemplate"]})
             c["level"] = 30
-            c["soul"] = 999
+            c["soul"] = 9999
+    elif macro == "legacy_basic":
+        import server
+        arts = st.setdefault("artifacts", [])
+        arts.clear()
+        for i, aid in enumerate(server.ALL_ARTIFACT_IDS):
+            art = server.make_artifact(i + 1, aid)
+            art["count"] = 1 # 0*
+            arts.append(art)
+    elif macro == "legacy_advanced":
+        import server
+        arts = st.setdefault("artifacts", [])
+        arts.clear()
+        for i, aid in enumerate(server.ALL_ARTIFACT_IDS):
+            art = server.make_artifact(i + 1, aid)
+            art["count"] = 99999 # 10*
+            arts.append(art)
+    elif macro == "legacy_max":
+        import server, xml.etree.ElementTree as ET
+        arts = st.setdefault("artifacts", [])
+        arts.clear()
+        tree = ET.parse(server.XML_DIR / "Artifacts.xml")
+        all_relic_ids = [int(el.get("ID")) for el in tree.findall("Artifact") if el.findtext("Type") == "Artifact" and el.findtext("FromType") not in ("Special", "RogueLike", "RogueLikeBuildingArtifact", "Event")]
+        for i, aid in enumerate(all_relic_ids):
+            art = server.make_artifact(i + 1, aid)
+            art["count"] = 99999 # 10*
+            arts.append(art)
+    elif macro == "accessory_admin":
+        import grant_accessories
+        st["accessories"] = grant_accessories.build(pid)
     else:
         raise HTTPException(400, f"unknown macro {macro}")
         
@@ -693,7 +745,8 @@ def api_admin_delete(username: str, request: Request):
 
 # --- UI + WS ----------------------------------------------------------------
 @app.get("/")
-def index():
+def index(request: Request):
+    print(f"GET / headers={request.headers}")
     return FileResponse(os.path.join(UI_DIR, "index.html"))
 
 
@@ -701,7 +754,8 @@ def index():
 # non-API path to the exported file, with an index.html fallback, so direct
 # loads and refreshes never 404. Registered after every /api route on purpose.
 @app.get("/{path:path}")
-def ui_path(path: str):
+def ui_path(path: str, request: Request):
+    print(f"GET /{path} headers={request.headers}")
     if path.startswith(("api/", "ws")) or not path:
         raise HTTPException(404)
         

@@ -248,10 +248,33 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
           <CardDescription>Quickly grant bundles of items and resources without editing individual fields.</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-wrap gap-2">
-            <Button variant="secondary" onClick={() => handleMacro("max_wealth")}>Max Wealth (Gold, Cash, Tokens)</Button>
-            <Button variant="secondary" onClick={() => handleMacro("max_inventory")}>Max All Inventory Items</Button>
-            <Button variant="secondary" onClick={() => handleMacro("max_heroes")}>Max All Heroes</Button>
+          <div className="flex flex-col gap-4">
+            <div>
+              <h4 className="text-sm font-medium mb-2">Resources & Inventory</h4>
+              <div className="flex flex-wrap gap-2">
+                <Button variant="secondary" onClick={() => handleMacro("max_resources")}>Max Resources (290909)</Button>
+                <Button variant="secondary" onClick={() => handleMacro("max_wealth")}>Max Wealth (Gold, Cash, Tokens)</Button>
+                <Button variant="secondary" onClick={() => handleMacro("max_inventory")}>Max All Inventory Items</Button>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-sm font-medium mb-2">Heroes</h4>
+              <div className="flex flex-wrap gap-2">
+                <Button variant="secondary" onClick={() => handleMacro("hero_basic")}>Basic Heroes (Lv.20)</Button>
+                <Button variant="secondary" onClick={() => handleMacro("hero_advanced")}>Advanced Heroes (Lv.30)</Button>
+                <Button variant="secondary" onClick={() => handleMacro("hero_max")}>Max Heroes (+ Unreleased)</Button>
+                <Button variant="secondary" onClick={() => handleMacro("max_heroes")}>Max All Heroes (Old)</Button>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-sm font-medium mb-2">Legacies & Accessories</h4>
+              <div className="flex flex-wrap gap-2">
+                <Button variant="secondary" onClick={() => handleMacro("legacy_basic")}>Basic Legacies (0*)</Button>
+                <Button variant="secondary" onClick={() => handleMacro("legacy_advanced")}>Advanced Legacies (10*)</Button>
+                <Button variant="secondary" onClick={() => handleMacro("legacy_max")}>Max Legacies (+ Unreleased)</Button>
+                <Button variant="secondary" onClick={() => handleMacro("accessory_admin")}>Admin Accessories</Button>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>

@@ -89,6 +89,7 @@ def _load_heroes():
             "name": names.get(uid, f"Unit_{uid}"),
             "role": unit.findtext("Role") or "Unknown",
             "sprite": unit.findtext("Sprite"),
+            "min_version": int(unit.findtext("MinVersion") or 0),
         }
     return out
 

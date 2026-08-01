@@ -125,6 +125,26 @@ def register(app, srv):
         st["lastHeartTime"] = srv.now_iso(0)
         st["tomorrow"] = srv.now_iso(1)
         st["nextWeek"] = srv.now_iso(7)
+        
+        # --- Tier 1 Defaults ---
+        st["gold"] = 290909
+        st["cash"] = 290909
+        st["heart"] = 290909
+        st["level"] = 100
+        st["exp"] = 9999999
+        import gamedata
+        for unit_id, info in gamedata.HEROES.items():
+            if info.get("min_version", 0) <= srv.CONTENT_GATE:
+                if str(unit_id) in st["cards"]:
+                    st["cards"][str(unit_id)]["level"] = 20
+        arts = st.setdefault("artifacts", [])
+        arts.clear()
+        for i, aid in enumerate(srv.ALL_ARTIFACT_IDS):
+            art = srv.make_artifact(i + 1, aid)
+            art["count"] = 1
+            arts.append(art)
+        # -----------------------
+        
         playerdb.save(uid, st)
         return {"ok": True, "uid": uid}
 
