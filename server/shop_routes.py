@@ -176,11 +176,18 @@ def _shop_buy(body, st):
             for pull in gachas_result:
                 for rg in pull["gacha"]:
                     rt = rg["type"]
+                    uid = rg["unitId"]
                     if rt == "UnitExp":
                         rt = "UnitSoul"
                     elif rt == "UnitSoulItem":
                         rt = "Item"
-                    srv._grant_reward(st, rt, rg["unitId"], rg["count"])
+                        if item_id == 301 or item_id == 302:
+                            uid = 201
+                        elif item_id == 303:
+                            uid = 202
+                        else:
+                            uid = 200
+                    srv._grant_reward(st, rt, uid, rg["count"])
         else:
             # Not a banner roll, just buying a scroll (e.g. from event shop)
             total = keys.get(str(item_id), 0) + amount

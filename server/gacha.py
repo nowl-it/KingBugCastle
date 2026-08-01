@@ -18,7 +18,7 @@ def _get_all_units(xml_dir):
         tree = ET.parse(xml_dir / "Units.xml")
         for unit in tree.findall("Unit"):
             uid = int(unit.get("ID", 0))
-            if uid > 0 and unit.findtext("IsObtainable") != "false":
+            if uid > 0 and unit.findtext("Type") == "Player" and unit.findtext("IsObtainable") != "false":
                 _UNITS_CACHE.append(uid)
         if not _UNITS_CACHE:
             _UNITS_CACHE = [10000, 10010, 10020]
@@ -62,6 +62,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML):
     gacha_collections = []
     
     for _ in range(amount):
+        scroll_hero_id = random.choice(units)
         if gacha_el.find("UnitCount") is None:
             num_rolls = 1
         else:
@@ -79,12 +80,14 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML):
                     chosen = p
                     break
 
-            item_id = random.choice(units)
+            item_id = scroll_hero_id
             count = random.randint(chosen["min"], chosen["max"])
             type_str = chosen["type"]
 
             if type_str == "Unit":
                 count = 1
+            elif type_str == "UnitSoulItem":
+                item_id = 0
             elif type_str == "Gold":
                 item_id = 0 # Gold has no item ID usually
 
