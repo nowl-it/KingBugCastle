@@ -745,6 +745,7 @@ def api_admin_delete(username: str, request: Request):
 
 # --- UI + WS ----------------------------------------------------------------
 @app.get("/")
+@app.head("/")
 def index(request: Request):
     print(f"GET / headers={request.headers}")
     return FileResponse(os.path.join(UI_DIR, "index.html"))
@@ -754,6 +755,7 @@ def index(request: Request):
 # non-API path to the exported file, with an index.html fallback, so direct
 # loads and refreshes never 404. Registered after every /api route on purpose.
 @app.get("/{path:path}")
+@app.head("/{path:path}")
 def ui_path(path: str, request: Request):
     print(f"GET /{path} headers={request.headers}")
     if path.startswith(("api/", "ws")) or not path:

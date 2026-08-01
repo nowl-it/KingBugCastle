@@ -6,7 +6,7 @@ on:
       share_host:
         description: "Server host baked into the APK (IP or domain)"
         required: false
-        default: "213.35.110.245"
+        default: "kingbugcastle.id.vn"
       base_xapk_url:
         description: "Direct download URL to the raw King God Castle v171 XAPK"
         required: false

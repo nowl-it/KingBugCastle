@@ -15,10 +15,11 @@ jobs:
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
           SERVER_HOST_KEY: ${{ vars.SERVER_HOST_KEY }}
+          GOOGLE_OAUTH_JSON_B64: ${{ secrets.GOOGLE_OAUTH_JSON_B64 }}
         run: |
           mkdir -p ~/.ssh
           echo "$DEPLOY_KEY" > ~/.ssh/kgc_deploy
           chmod 600 ~/.ssh/kgc_deploy
           echo "$SERVER_HOST_KEY" >> ~/.ssh/known_hosts
           ssh -i ~/.ssh/kgc_deploy -o IdentitiesOnly=yes \
-            ubuntu@213.35.110.245 "deploy"
+            ubuntu@213.35.110.245 "mkdir -p ~/kgc/server/secrets && echo \"\$GOOGLE_OAUTH_JSON_B64\" | base64 -d > ~/kgc/server/secrets/google_oauth.json && deploy"

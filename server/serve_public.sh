@@ -21,8 +21,9 @@ cd "$(dirname "$0")"
 HTTP_PORT="${HTTP_PORT:-8080}"
 TLS_PORT="${TLS_PORT:-8443}"
 
-# Enable DEV login bypass so players can test the game without Google OAuth
-export GLOGIN_DEV=1
+# Inject real Google OAuth client for public testing. Google requires a HTTPS domain.
+export GLOGIN_PUBLIC_URL="https://kingbugcastle.id.vn"
+
 
 # Prefer the repo venv, same as run.sh.
 UVICORN="uvicorn"
