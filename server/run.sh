@@ -6,10 +6,6 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-# Emulator/device serial. redroid defaults to localhost:5555 (matches dashboard.py);
-# override for BlueStacks/LDPlayer/real phone: ADB_SERIAL=127.0.0.1:5555 ./run.sh
-ADB_SERIAL="${ADB_SERIAL:-localhost:5555}"
-
 # Prefer the repo venv (requirements.txt installs there) over whatever `uvicorn` a
 # distro Python happens to expose. Falls back to PATH so an existing setup keeps
 # working with no venv at all.
@@ -22,38 +18,14 @@ stop() {
     pkill -f "uvicorn server:app" 2>/dev/null || true
     pkill -f "uvicorn dashboard:app" 2>/dev/null || true
     pkill -f "next dev" 2>/dev/null || true
-    # The battle tracker's `adb logcat` child does not die with a pkill'd parent -
-    # it is reparented to init and streams forever. They pile up across restarts.
-    pkill -f "adb -s .* logcat -s XignCodeStub" 2>/dev/null || true
-}
-
-# Wire the device to the local server: connect, route its :443/:80 to our TLS/HTTP
-# ports, and clear any leftover global proxy (a stale one on a fresh redroid blackholes
-# every request). adb reverse is per-connection, so this must re-run after the emulator
-# restarts - hence `run.sh device`. All non-fatal: no device = servers still come up.
-wire_device() {
-    if ! command -v adb >/dev/null 2>&1; then
-        echo "[device] adb not on PATH - skipping device wiring"; return 0
-    fi
-    adb connect "$ADB_SERIAL" >/dev/null 2>&1 || true
-    if ! adb -s "$ADB_SERIAL" get-state >/dev/null 2>&1; then
-        echo "[device] $ADB_SERIAL not connected - skipping (start emulator, then: ./run.sh device)"
-        return 0
-    fi
-    adb -s "$ADB_SERIAL" reverse tcp:443 tcp:8443 >/dev/null 2>&1 || true
-    adb -s "$ADB_SERIAL" reverse tcp:80  tcp:8080 >/dev/null 2>&1 || true
-    adb -s "$ADB_SERIAL" shell settings put global http_proxy :0 >/dev/null 2>&1 || true
-    echo "[ok] device    $ADB_SERIAL  ->  :443→:8443  :80→:8080  proxy cleared"
 }
 
 # run.sh stop        -> kill the stack and exit
-# run.sh device      -> (re)wire the emulator only, e.g. after it restarts
 # run.sh restart|""  -> (re)start; start already kills any running copy first
 case "${1:-}" in
     stop)    stop; echo "[stopped] game + dashboard"; exit 0 ;;
-    device)  wire_device; exit 0 ;;
     restart|start|"") ;;
-    *) echo "usage: run.sh [start|stop|restart|device]" >&2; exit 2 ;;
+    *) echo "usage: run.sh [start|stop|restart]" >&2; exit 2 ;;
 esac
 
 RELOAD=(--reload
@@ -79,6 +51,5 @@ grep -q "Application startup complete" /tmp/kgc_dashboard.log  && echo "[ok] adm
 if [ -d "webui-next" ]; then
     echo "[ok] next.js   :3000  ->  http://127.0.0.1:3000"
 fi
-wire_device
 echo "python:   $UVICORN"
 echo "logs: /tmp/kgc_server.log /tmp/kgc_server_tls.log /tmp/kgc_dashboard.log /tmp/kgc_nextjs.log"

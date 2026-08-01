@@ -1,7 +1,6 @@
 """KGC private-server dashboard (:8081) - the one admin UI.
 
 Serves webui-next/out (Next.js) and hosts:
-  - WS  /ws              live in-battle hero stats (adb logcat -s XignCodeStub -> parsed -> broadcast)
   - /api/*               admin: players, saves, heroes, inventory, accessories, mail
   - /api/server/*        read-only proxy of server.py's own /admin/api (:8080)
 
@@ -23,12 +22,11 @@ import asyncio
 import copy
 import json
 import os
-import re
 import secrets
 from datetime import datetime, timedelta
 
 import httpx
-from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect, HTTPException
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 
@@ -42,9 +40,6 @@ UI_DIR = os.path.join(BASE, "webui-next", "out")
 if not os.path.isdir(UI_DIR):
     os.makedirs(UI_DIR, exist_ok=True)
 CONFIG_FILE = os.path.join(BASE, "data", "response_config.json")
-# Must match run.sh's default, or the battle tracker polls a serial with no device
-# behind it and never shows a single stat.
-ADB_SERIAL = os.environ.get("ADB_SERIAL", "localhost:5555")
 SERVER_URL = os.environ.get("KGC_SERVER_URL", "http://127.0.0.1:8080")
 ADMIN_TOKEN = os.environ.get("KGC_ADMIN_TOKEN")
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
@@ -136,146 +131,6 @@ async def serialize_state_writes(request, call_next):
 
 app.mount("/ui", StaticFiles(directory=UI_DIR), name="ui")
 
-connected_clients = set()
-log_pattern = re.compile(r'\[(.*?)\]:\s*(.*)')
-CATALOG = gamedata.load_catalog()
-print(f"[dashboard] gamedata {gamedata.summary()}", flush=True)
-
-
-# --- battle tracker ---------------------------------------------------------
-async def broadcast(message: dict):
-    if not connected_clients:
-        return
-    text = json.dumps(message)
-    for client in list(connected_clients):
-        try:
-            await client.send_text(text)
-        except Exception:
-            connected_clients.discard(client)
-
-
-_tracker_proc = None      # the live `adb logcat` child, so shutdown can kill it
-
-
-def _seal_inherited_fds():
-    """Stop children inheriting our listening socket.
-
-    uvicorn --reload hands the worker its listening socket as an *inheritable* fd.
-    Every `adb logcat` we spawn inherits it, and because those children outlive a
-    pkill'd parent they keep :8081 bound - the next start then dies with
-    "Address already in use" while no dashboard is running. Clearing the
-    inheritable flag once at startup fixes it for every child, present and future.
-    """
-    import stat
-    sealed = 0
-    for name in os.listdir("/proc/self/fd"):
-        fd = int(name)
-        try:
-            if stat.S_ISSOCK(os.fstat(fd).st_mode) and os.get_inheritable(fd):
-                os.set_inheritable(fd, False)
-                sealed += 1
-        except OSError:
-            continue          # the fd from listdir itself, already gone
-    if sealed:
-        print(f"[tracker] sealed {sealed} inheritable socket fd(s)", flush=True)
-
-
-async def read_logcat():
-    # Self-healing: if the device is absent or adb dies, retry instead of freezing.
-    # All async (never subprocess.run) so a missing device never blocks the event
-    # loop - the UI and admin API stay responsive with no device connected.
-    global _tracker_proc
-    _seal_inherited_fds()
-    while True:
-        try:
-            print("[tracker] starting adb logcat reader...", flush=True)
-            clr = await asyncio.create_subprocess_exec(
-                "adb", "-s", ADB_SERIAL, "logcat", "-c",
-                stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
-            await _wait_or_kill(clr, 10)
-            _tracker_proc = await asyncio.create_subprocess_exec(
-                "adb", "-s", ADB_SERIAL, "logcat", "-s", "XignCodeStub",
-                stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT)
-            try:
-                await _pump_logcat(_tracker_proc)
-            finally:
-                await _wait_or_kill(_tracker_proc, 2)
-                _tracker_proc = None
-        except Exception as e:
-            print(f"[tracker] logcat reader error: {e}", flush=True)
-        await asyncio.sleep(5)
-
-
-def stop_tracker():
-    """Kill the logcat child on shutdown. `adb logcat` streams forever, so without
-    this it is reparented to init and runs until the machine reboots."""
-    proc = _tracker_proc
-    if proc is None:
-        return
-    try:
-        proc.kill()
-    except (ProcessLookupError, AttributeError):
-        pass
-
-
-async def _wait_or_kill(proc, timeout):
-    """Reap a child, killing it if it overruns.
-
-    `adb -s <serial>` against a serial with no device blocks forever. A bare
-    wait_for() gives up on the coroutine but leaves the process running, so the
-    retry loop above leaked one orphaned adb every cycle - hundreds of them after
-    an afternoon, which is what ate the port on the next restart.
-    """
-    try:
-        await asyncio.wait_for(proc.wait(), timeout=timeout)
-    except (asyncio.TimeoutError, asyncio.CancelledError):
-        try:
-            proc.kill()
-            await proc.wait()
-        except ProcessLookupError:
-            pass
-        raise
-
-
-async def _pump_logcat(process):
-    while True:
-        line = await process.stdout.readline()
-        if not line:
-            break
-        try:
-            decoded = line.decode("utf-8", errors="replace").strip()
-            marker = "I XignCodeStub: "
-            if marker not in decoded or "]: " not in decoded:
-                continue
-            content = decoded[decoded.find(marker) + len(marker):].strip()
-            match = log_pattern.match(content)
-            if not match:
-                continue
-            name = match.group(1).split("#", 1)[0]
-            hero_info = gamedata.HEROES_BY_NAME.get(name.lower())
-            if not hero_info:
-                continue
-            stats_str = match.group(2)
-            effects = []
-            eff_match = re.search(r"Eff=(\d+\[[^\]]*\])", stats_str)
-            if eff_match:
-                effects = gamedata.resolve_effects(eff_match.group(1))
-                stats_str = stats_str[:eff_match.start()] + stats_str[eff_match.end():]
-            stats = {}
-            for pair in stats_str.split(","):
-                if "=" in pair:
-                    k, v = pair.split("=", 1)
-                    try:
-                        stats[k.strip()] = float(v.strip())
-                    except ValueError:
-                        pass
-            await broadcast({"type": "hero_update", "name": name, "role": hero_info["role"],
-                             "heroId": hero_info["id"], "sprite": hero_info["sprite"],
-                             "stats": stats, "effects": effects})
-        except Exception as e:
-            print(f"[tracker] parse error: {e}", flush=True)
-
-
 # --- state helpers ----------------------------------------------------------
 EDITABLE_FIELDS = {
     "name": str, "castleName": str,
@@ -335,8 +190,6 @@ def api_status():
         "patchFolder": cfg.get("patchFolder", "?"),
         "players": playerdb.count(),
         "activePlayer": playerdb.active(),
-        "trackerClients": len(connected_clients),
-        "adbSerial": ADB_SERIAL,
         "serverUrl": SERVER_URL,
         "multiplayer": os.environ.get("KGC_MULTIPLAYER", "1") != "0",   # default on, matches server.py
         "authMode": "token" if ADMIN_TOKEN else "loopback-only",
@@ -793,39 +646,6 @@ def ui_path(path: str):
     if os.path.isfile(index):
         return FileResponse(index)
     return FileResponse(os.path.join(UI_DIR, "index.html"))
-
-
-@app.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
-    # HTTP middleware never sees websocket scope, so this needs its own copy of the
-    # guard - it streams live battle telemetry to whoever connects.
-    if playerdb.admin_for_token(websocket.cookies.get(SESSION_COOKIE)):
-        pass
-    elif ADMIN_TOKEN:
-        sent = websocket.headers.get("x-admin-token") or websocket.query_params.get("admin_token") or ""
-        if not secrets.compare_digest(sent, ADMIN_TOKEN):
-            return await websocket.close(code=1008)
-    elif playerdb.admin_count():
-        return await websocket.close(code=1008)
-    elif (websocket.client.host if websocket.client else None) not in _LOOPBACK:
-        return await websocket.close(code=1008)
-    await websocket.accept()
-    connected_clients.add(websocket)
-    try:
-        while True:
-            await websocket.receive_text()
-    except WebSocketDisconnect:
-        connected_clients.discard(websocket)
-
-
-@app.on_event("startup")
-async def startup_event():
-    asyncio.create_task(read_logcat())
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    stop_tracker()
 
 
 if __name__ == "__main__":

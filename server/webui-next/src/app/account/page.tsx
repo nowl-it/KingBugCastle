@@ -1,75 +1,93 @@
 "use client"
 
 import { useState } from "react"
-import { useWhoAmI, runMutation } from "@/lib/api"
-import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { useAdmins, useWhoAmI, runMutation } from "@/lib/api"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { UserPlus, ShieldCheck } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Badge } from "@/components/ui/badge"
+import { UserPlus, Trash2, ShieldCheck } from "lucide-react"
 
 export default function AccountPage() {
-  const { data: who, mutate } = useWhoAmI()
+  const { data: who, mutate: mutateWho } = useWhoAmI()
+  const { data: admins, mutate: mutateAdmins } = useAdmins()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [busy, setBusy] = useState(false)
 
-  const handleCreate = async () => {
-    setBusy(true)
-    try {
-      await runMutation('/api/auth/register', {
-        method: 'POST',
-        body: JSON.stringify({ username, password })
-      }, "Admin account created successfully")
-      setUsername("")
-      setPassword("")
-      mutate()
-    } catch (e: any) {
-      alert(e.message)
-    } finally {
-      setBusy(false)
+  const create = async () => {
+    if (username.trim().length < 2) return
+    if (password.length < 8) {
+      window.dispatchEvent(new CustomEvent("kgc:toast", { detail: { message: "Password must be at least 8 characters", type: "error" } }))
+      return
     }
+    await runMutation("/api/auth/admins", { method: "POST", body: JSON.stringify({ username: username.trim(), password }) }, "Admin created")
+    setUsername(""); setPassword("")
+    mutateAdmins(); mutateWho()
   }
 
+  const remove = async (name: string) => {
+    if (!window.confirm(`Delete admin account "${name}"?`)) return
+    await runMutation(`/api/auth/admins/${encodeURIComponent(name)}`, { method: "DELETE" }, "Admin deleted")
+    mutateAdmins(); mutateWho()
+  }
+
+  const list = admins?.admins || []
+
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Account Settings</h1>
-        <p className="text-muted-foreground">Manage administrative access to this dashboard.</p>
+        <p className="text-muted-foreground">Admin accounts for dashboard sign-in.</p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><UserPlus className="w-5 h-5" /> Create Admin Account</CardTitle>
-          <CardDescription>
-            {who?.hasAdmins 
-              ? "The system already has an admin. Creating another one adds an additional user."
-              : "No admin account exists yet. Create one to lock down the dashboard."}
-          </CardDescription>
+          <CardTitle className="text-base">Session</CardTitle>
+          <CardDescription>How the current browser is authenticated.</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Username</label>
-            <Input 
-              value={username} 
-              onChange={e => setUsername(e.target.value)} 
-              placeholder="e.g. root" 
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Password</label>
-            <Input 
-              type="password" 
-              value={password} 
-              onChange={e => setPassword(e.target.value)} 
-              placeholder="Min 8 characters" 
-            />
-          </div>
+        <CardContent className="flex flex-wrap items-center gap-3 text-sm">
+          <Badge variant="secondary"><ShieldCheck className="h-3.5 w-3.5 mr-1" /> {who?.authenticated ? "authenticated" : "not authenticated"}</Badge>
+          {who?.user && <span className="text-muted-foreground">signed in as <span className="font-medium text-foreground">{who.user}</span></span>}
+          <span className="text-muted-foreground">admins configured: {who?.hasAdmins ? "yes" : "no"}</span>
+          <span className="text-muted-foreground">token mode: {who?.tokenMode ? "on" : "off"}</span>
         </CardContent>
-        <CardFooter className="border-t px-6 py-4">
-          <Button onClick={handleCreate} disabled={busy || !username || !password} className="gap-2">
-            <ShieldCheck className="w-4 h-4" /> Create Account
-          </Button>
-        </CardFooter>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base flex items-center gap-2"><UserPlus className="h-4 w-4" /> Create admin</CardTitle>
+          <CardDescription>Minimum 8-character password. Once at least one admin exists, remote sign-in is required.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex items-end gap-3">
+          <div className="space-y-1">
+            <label className="text-xs text-muted-foreground">Username</label>
+            <Input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="admin" className="w-48" />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs text-muted-foreground">Password</label>
+            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="w-64" />
+          </div>
+          <Button onClick={create} disabled={!username.trim() || password.length < 8}>Create</Button>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader><CardTitle className="text-base">Admins ({list.length})</CardTitle></CardHeader>
+        <CardContent className="p-0">
+          <ul className="divide-y divide-border">
+            {list.map((a: any) => (
+              <li key={a.username} className="flex items-center justify-between px-4 py-3">
+                <div>
+                  <span className="text-sm font-medium">{a.username}</span>
+                  {who?.user === a.username && <Badge variant="secondary" className="ml-2 text-[10px]">you</Badge>}
+                  <div className="text-xs text-muted-foreground font-mono">{a.created ? new Date(a.created * 1000).toLocaleString() : ""}</div>
+                </div>
+                <Button variant="ghost" size="sm" className="text-destructive" onClick={() => remove(a.username)}><Trash2 className="h-3.5 w-3.5 mr-1" /> Delete</Button>
+              </li>
+            ))}
+            {!list.length && <p className="px-4 py-8 text-sm text-muted-foreground">No admin accounts — dashboard is token/loopback-only.</p>}
+          </ul>
+        </CardContent>
       </Card>
     </div>
   )

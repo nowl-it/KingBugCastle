@@ -10,7 +10,7 @@ export const fetcher = async (url: string, init?: RequestInit) => {
   }
 
   const res = await fetch(url, { ...init, headers });
-  
+
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     if (res.status === 401) {
@@ -20,7 +20,7 @@ export const fetcher = async (url: string, init?: RequestInit) => {
     }
     throw new Error(err.error || `HTTP error ${res.status}`);
   }
-  
+
   return res.json();
 };
 
@@ -49,11 +49,36 @@ export function useCatalog() {
 }
 
 export function usePlayers() {
-  return useSWR('/api/players', fetcher);
+  return useSWR('/api/players', fetcher, { refreshInterval: 10000 });
 }
 
 export function usePlayer(pid?: string) {
-  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}` : null, fetcher);
+  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}` : null, fetcher, { refreshInterval: 10000 });
+}
+
+export function usePlayerRaw(pid?: string) {
+  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/raw` : null, fetcher, { revalidateOnFocus: false });
+}
+
+export function useHeroes(pid?: string) {
+  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/heroes` : null, fetcher, { refreshInterval: 10000 });
+}
+
+export function useInventory(pid?: string) {
+  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/inventory` : null, fetcher, { refreshInterval: 10000 });
+}
+
+export function useAccessories(pid?: string) {
+  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/accessories` : null, fetcher, { refreshInterval: 10000 });
+}
+
+export function useServerSection(section: string | null, refreshMs = 15000) {
+  return useSWR(section ? `/api/server/${section}` : null, fetcher,
+    { refreshInterval: section === 'logs' ? refreshMs : 0 });
+}
+
+export function useAdmins() {
+  return useSWR('/api/auth/admins', fetcher);
 }
 
 export function useWhoAmI() {

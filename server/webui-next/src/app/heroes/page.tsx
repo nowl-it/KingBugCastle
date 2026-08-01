@@ -1,201 +1,185 @@
 "use client"
 
 import { useState } from "react"
-import { usePlayer, useCatalog, runMutation } from "@/lib/api"
-import { usePlayerSelection, PlayerBar } from "@/components/player-context"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Input } from "@/components/ui/input"
+import { useHeroes, runMutation } from "@/lib/api"
+import { PlayerBar, usePlayerSelection } from "@/components/player-context"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Textarea } from "@/components/ui/textarea"
-import { Search, Save, Trash2, Plus, Edit2 } from "lucide-react"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Check, Plus, Trash2, Sparkles, Save } from "lucide-react"
+
+const ROLE_BADGE: Record<string, string> = {
+  "Warrior": "bg-orange-500/15 text-orange-400 border-orange-500/30",
+  "Archer": "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+  "Mage": "bg-blue-500/15 text-blue-400 border-blue-500/30",
+  "Priest": "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
+  "Assassin": "bg-purple-500/15 text-purple-400 border-purple-500/30",
+}
 
 export default function HeroesPage() {
   const { selectedId } = usePlayerSelection()
-  const { data: player, mutate: mutatePlayer } = usePlayer(selectedId || undefined)
-  const { data: catalog } = useCatalog()
+  const { data, mutate } = useHeroes(selectedId || undefined)
 
-  const [searchTerm, setSearchTerm] = useState("")
-  const [editingHero, setEditingHero] = useState<string | null>(null)
-  const [editJson, setEditJson] = useState("")
-
-  if (!selectedId) return <div className="p-8"><PlayerBar /></div>
-
-  const heroes = player?.heroes || []
-  const catalogUnits = catalog?.units || []
-
-  // Derived arrays
-  const ownedHeroIds = new Set(heroes.map((h: any) => h.id))
-  
-  const filteredCatalog = catalogUnits.filter((u: any) => 
-    !ownedHeroIds.has(u.id) && 
-    (u.id.toLowerCase().includes(searchTerm.toLowerCase()) || 
-     (u.name && u.name.toLowerCase().includes(searchTerm.toLowerCase())))
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Heroes</h1>
+        <p className="text-muted-foreground">Edit levels, souls and awakening tiers of owned heroes; grant missing ones.</p>
+      </div>
+      <PlayerBar />
+      {!selectedId && <Card><CardContent className="py-16 text-center text-muted-foreground">Select a player above.</CardContent></Card>}
+      {selectedId && data && (
+        <>
+          <OwnedTable data={data} onMutate={mutate} />
+          <MissingTable data={data} onMutate={mutate} />
+        </>
+      )}
+    </div>
   )
+}
 
-  const handleGive = async (id: string) => {
-    await runMutation(`/api/player/${encodeURIComponent(selectedId)}/give_hero`, {
-      method: 'POST',
-      body: JSON.stringify({ unit_id: id })
-    }, "Hero granted successfully")
-    mutatePlayer()
-  }
+function OwnedTable({ data, onMutate }: { data: any; onMutate: () => void }) {
+  const { selectedId } = usePlayerSelection()
+  const [drafts, setDrafts] = useState<Record<string, Record<string, string>>>({})
 
-  const handleRemove = async (id: string) => {
-    if (!confirm("Remove this hero?")) return
-    await runMutation(`/api/player/${encodeURIComponent(selectedId)}/remove_hero`, {
-      method: 'POST',
-      body: JSON.stringify({ unit_id: id })
-    }, "Hero removed")
-    mutatePlayer()
-  }
+  const setField = (unitId: number, key: string, value: string) =>
+    setDrafts(prev => ({ ...prev, [unitId]: { ...(prev[unitId] || {}), [key]: value } }))
 
-  const handleStartEdit = (hero: any) => {
-    setEditJson(JSON.stringify(hero, null, 2))
-    setEditingHero(hero.id)
-  }
-
-  const handleSaveEdit = async () => {
-    try {
-      const parsed = JSON.parse(editJson)
-      await runMutation(`/api/player/${encodeURIComponent(selectedId)}/update_hero`, {
-        method: 'POST',
-        body: JSON.stringify(parsed)
-      }, "Hero updated")
-      setEditingHero(null)
-      mutatePlayer()
-    } catch (e: any) {
-      alert("Invalid JSON: " + e.message)
+  const save = async (hero: any) => {
+    const draft = drafts[hero.unitId] || {}
+    const patch: Record<string, number> = {}
+    for (const [k, v] of Object.entries(draft)) {
+      const n = Number(v)
+      if (!Number.isNaN(n) && n !== hero[k]) patch[k] = n
     }
+    if (!Object.keys(patch).length) return
+    await runMutation(`/api/player/${encodeURIComponent(selectedId!)}/heroes/${hero.unitId}`, { method: "PATCH", body: JSON.stringify(patch) }, `Hero ${hero.unitId} updated`)
+    onMutate()
+  }
+
+  const remove = async (hero: any) => {
+    if (!window.confirm(`Remove hero ${hero.unitId} (${hero.name})?`)) return
+    await runMutation(`/api/player/${encodeURIComponent(selectedId!)}/heroes/${hero.unitId}`, { method: "DELETE" }, "Hero removed")
+    onMutate()
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)]">
-      <PlayerBar />
-
-      <div className="flex gap-6 flex-1 min-h-0">
-        <Card className="flex flex-col w-1/3 shadow-sm">
-          <CardHeader className="border-b px-4 py-3">
-            <CardTitle className="text-lg">Unowned Heroes</CardTitle>
-            <div className="relative mt-2">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input 
-                type="text" 
-                placeholder="Search catalog..." 
-                className="pl-9"
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-              />
-            </div>
-          </CardHeader>
-          <div className="flex-1 overflow-auto p-0">
-            <Table>
-              <TableBody>
-                {filteredCatalog.map((u: any) => (
-                  <TableRow key={u.id}>
-                    <TableCell className="font-medium">
-                      {u.name || u.id}
-                      {u.name && <div className="text-xs font-mono text-muted-foreground">{u.id}</div>}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Button size="sm" variant="secondary" onClick={() => handleGive(u.id)} className="h-8">
-                        <Plus className="w-4 h-4 mr-1" /> Give
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-                {filteredCatalog.length === 0 && (
-                  <TableRow>
-                    <TableCell colSpan={2} className="text-center text-muted-foreground py-8">
-                      No unowned heroes match your search.
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </div>
-        </Card>
-
-        <Card className="flex flex-col flex-1 shadow-sm">
-          <CardHeader className="border-b px-4 py-3 flex flex-row items-center justify-between space-y-0">
-            <CardTitle className="text-lg">Owned Heroes ({heroes.length})</CardTitle>
-          </CardHeader>
-          <div className="flex-1 overflow-auto">
-            <Table>
-              <TableHeader className="sticky top-0 bg-background/95 backdrop-blur z-10">
-                <TableRow>
-                  <TableHead>Hero</TableHead>
-                  <TableHead>Level / Tier</TableHead>
-                  <TableHead>Exp</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-base">Owned ({data.owned.length})</CardTitle>
+        <CardDescription>Inline edits apply immediately via PATCH.</CardDescription>
+      </CardHeader>
+      <CardContent className="p-0">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Hero</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead className="w-24">Level</TableHead>
+              <TableHead className="w-24">Exp</TableHead>
+              <TableHead className="w-24">Soul</TableHead>
+              <TableHead className="w-24">Awaken</TableHead>
+              <TableHead className="w-24">Skins</TableHead>
+              <TableHead className="w-40 text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.owned.map((h: any) => {
+              const d = drafts[h.unitId] || {}
+              return (
+                <TableRow key={h.unitId}>
+                  <TableCell>
+                    <div className="font-medium">{h.name}</div>
+                    <div className="text-xs text-muted-foreground font-mono">#{h.unitId}</div>
+                  </TableCell>
+                  <TableCell>
+                    <Badge className={ROLE_BADGE[h.role] || ""} variant="outline">{h.role}</Badge>
+                  </TableCell>
+                  <TableCell><Input type="number" className="h-8 w-20 font-mono" value={d.level ?? h.level} onChange={(e) => setField(h.unitId, "level", e.target.value)} /></TableCell>
+                  <TableCell><Input type="number" className="h-8 w-20 font-mono" value={d.exp ?? h.exp} onChange={(e) => setField(h.unitId, "exp", e.target.value)} /></TableCell>
+                  <TableCell><Input type="number" className="h-8 w-20 font-mono" value={d.soul ?? h.soul} onChange={(e) => setField(h.unitId, "soul", e.target.value)} /></TableCell>
+                  <TableCell><Input type="number" className="h-8 w-20 font-mono" value={d.potentialTier ?? h.potentialTier} onChange={(e) => setField(h.unitId, "potentialTier", e.target.value)} /></TableCell>
+                  <TableCell className="text-sm text-muted-foreground">{h.skins}</TableCell>
+                  <TableCell className="text-right">
+                    <Button variant="ghost" size="sm" onClick={() => save(h)}><Save className="h-3.5 w-3.5" /></Button>
+                    <Button variant="ghost" size="sm" className="text-destructive" onClick={() => remove(h)}><Trash2 className="h-3.5 w-3.5" /></Button>
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {heroes.map((h: any) => {
-                  const cat = catalogUnits.find((u: any) => u.id === h.id)
-                  const name = cat?.name || h.id
-                  const isEditing = editingHero === h.id
+              )
+            })}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  )
+}
 
-                  if (isEditing) {
-                    return (
-                      <TableRow key={h.id} className="bg-muted/30">
-                        <TableCell colSpan={4} className="p-4">
-                          <div className="flex flex-col gap-3">
-                            <div className="flex items-center justify-between">
-                              <span className="font-medium">Editing: {name}</span>
-                              <div className="flex gap-2">
-                                <Button size="sm" variant="ghost" onClick={() => setEditingHero(null)}>Cancel</Button>
-                                <Button size="sm" onClick={handleSaveEdit} className="gap-2"><Save className="w-4 h-4" /> Save</Button>
-                              </div>
-                            </div>
-                            <Textarea 
-                              value={editJson} 
-                              onChange={e => setEditJson(e.target.value)} 
-                              className="font-mono text-xs h-[250px]"
-                            />
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    )
-                  }
+function MissingTable({ data, onMutate }: { data: any; onMutate: () => void }) {
+  const { selectedId } = usePlayerSelection()
+  const [level, setLevel] = useState("30")
+  const [soul, setSoul] = useState("999")
 
-                  return (
-                    <TableRow key={h.id}>
-                      <TableCell>
-                        <div className="font-medium">{name}</div>
-                        <div className="text-xs font-mono text-muted-foreground">{h.id}</div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className="mr-2">Lv {h.level}</Badge>
-                        <Badge variant="secondary">Tier {h.tier}</Badge>
-                      </TableCell>
-                      <TableCell className="font-mono text-sm">{h.exp}</TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          <Button size="icon" variant="ghost" onClick={() => handleStartEdit(h)}>
-                            <Edit2 className="w-4 h-4" />
-                          </Button>
-                          <Button size="icon" variant="ghost" onClick={() => handleRemove(h.id)} className="text-destructive hover:text-destructive hover:bg-destructive/10">
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  )
-                })}
-                {heroes.length === 0 && (
-                  <TableRow>
-                    <TableCell colSpan={4} className="text-center text-muted-foreground py-12">
-                      This player has no heroes.
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+  const grant = async (h: any) => {
+    await runMutation(`/api/player/${encodeURIComponent(selectedId!)}/heroes/${h.unitId}`, { method: "POST" }, `${h.name} granted`)
+    onMutate()
+  }
+
+  const grantAll = async () => {
+    await runMutation(`/api/player/${encodeURIComponent(selectedId!)}/heroes-grant-all`, {
+      method: "POST",
+      body: JSON.stringify({ level: Number(level), soul: Number(soul) }),
+    }, "All missing heroes granted")
+    onMutate()
+  }
+
+  if (!data.missing.length) return (
+    <Card><CardContent className="py-6 flex items-center gap-2 text-muted-foreground"><Check className="h-4 w-4" /> Every hero in master data is owned.</CardContent></Card>
+  )
+
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="text-base">Missing ({data.missing.length})</CardTitle>
+            <CardDescription>Heroes in master data this player does not own yet.</CardDescription>
           </div>
-        </Card>
-      </div>
-    </div>
+          <div className="flex items-end gap-2">
+            <div className="space-y-1">
+              <label className="text-xs text-muted-foreground">Level</label>
+              <Input type="number" className="h-8 w-20 font-mono" value={level} onChange={(e) => setLevel(e.target.value)} />
+            </div>
+            <div className="space-y-1">
+              <label className="text-xs text-muted-foreground">Soul</label>
+              <Input type="number" className="h-8 w-20 font-mono" value={soul} onChange={(e) => setSoul(e.target.value)} />
+            </div>
+            <Button size="sm" onClick={grantAll}><Sparkles className="h-3.5 w-3.5 mr-1" /> Grant all</Button>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="p-0">
+        <Table>
+          <TableHeader>
+            <TableRow><TableHead>Hero</TableHead><TableHead>Role</TableHead><TableHead className="w-24 text-right">Action</TableHead></TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.missing.map((h: any) => (
+              <TableRow key={h.unitId}>
+                <TableCell>
+                  <div className="font-medium">{h.name}</div>
+                  <div className="text-xs text-muted-foreground font-mono">#{h.unitId}</div>
+                </TableCell>
+                <TableCell><Badge className={ROLE_BADGE[h.role] || ""} variant="outline">{h.role}</Badge></TableCell>
+                <TableCell className="text-right">
+                  <Button variant="outline" size="sm" onClick={() => grant(h)}><Plus className="h-3.5 w-3.5 mr-1" /> Grant</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   )
 }

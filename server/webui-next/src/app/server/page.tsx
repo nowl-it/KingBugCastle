@@ -1,105 +1,65 @@
 "use client"
 
 import { useState } from "react"
-import { runMutation } from "@/lib/api"
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Terminal, Database, ShieldAlert, FileJson } from "lucide-react"
+import { useServerSection } from "@/lib/api"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { RefreshCw, Server } from "lucide-react"
+
+const SECTIONS = [
+  { id: "system", label: "System" },
+  { id: "logs", label: "Logs" },
+  { id: "routes", label: "Routes" },
+  { id: "cdn", label: "CDN" },
+  { id: "config", label: "Config" },
+  { id: "info", label: "Info" },
+]
 
 export default function ServerPage() {
-  const [busy, setBusy] = useState(false)
-  const [response, setResponse] = useState("")
-  const [code, setCode] = useState("")
-
-  const runMaintenance = async (action: string) => {
-    setBusy(true)
-    try {
-      if (action === 'reload_config') {
-        const res = await runMutation('/api/server/reload_config', { method: 'POST' }, "Config reloaded")
-        setResponse(JSON.stringify(res, null, 2))
-      } else if (action === 'dump_db') {
-        const res = await runMutation('/api/server/dump_db', { method: 'POST' }, "Database dumped")
-        setResponse(JSON.stringify(res, null, 2))
-      } else if (action === 'clear_cache') {
-        const res = await runMutation('/api/server/clear_cache', { method: 'POST' }, "Cache cleared")
-        setResponse(JSON.stringify(res, null, 2))
-      }
-    } catch (e: any) {
-      setResponse(`Error: ${e.message}`)
-    } finally {
-      setBusy(false)
-    }
-  }
-
-  const runPython = async () => {
-    setBusy(true)
-    try {
-      const res = await runMutation('/api/server/eval', { 
-        method: 'POST',
-        body: JSON.stringify({ code })
-      }, "Code executed")
-      setResponse(JSON.stringify(res, null, 2))
-    } catch (e: any) {
-      setResponse(`Error: ${e.message}`)
-    } finally {
-      setBusy(false)
-    }
-  }
+  const [section, setSection] = useState("system")
+  const { data, error, isLoading, mutate } = useServerSection(section, 5000)
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6">
+    <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Server Diagnostics</h1>
-        <p className="text-muted-foreground">Advanced maintenance and debug tools.</p>
+        <p className="text-muted-foreground">Read-only proxy of the game server's own admin API (:8080). Auto-refreshes every 5s.</p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><ShieldAlert className="w-5 h-5 text-destructive" /> Danger Zone</CardTitle>
-            <CardDescription>Actions here can disrupt gameplay.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Button variant="outline" className="w-full justify-start gap-2" onClick={() => runMaintenance('reload_config')} disabled={busy}>
-              <FileJson className="w-4 h-4" /> Reload Master Data
-            </Button>
-            <Button variant="outline" className="w-full justify-start gap-2" onClick={() => runMaintenance('dump_db')} disabled={busy}>
-              <Database className="w-4 h-4" /> Force Database Flush
-            </Button>
-            <Button variant="outline" className="w-full justify-start gap-2 text-destructive hover:bg-destructive/10" onClick={() => runMaintenance('clear_cache')} disabled={busy}>
-              <ShieldAlert className="w-4 h-4" /> Clear All Caches
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Terminal className="w-5 h-5" /> REPL Access</CardTitle>
-            <CardDescription>Evaluate Python code on the server.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Textarea 
-              className="font-mono text-sm h-[150px] bg-[#09090b] text-[#fafafa] border-border" 
-              placeholder="print('Hello from server')"
-              value={code}
-              onChange={e => setCode(e.target.value)}
-            />
-            <Button className="w-full gap-2" onClick={runPython} disabled={busy || !code}>
-              <Terminal className="w-4 h-4" /> Execute
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="flex flex-wrap gap-2">
+        {SECTIONS.map(s => (
+          <button
+            key={s.id}
+            onClick={() => setSection(s.id)}
+            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${section === s.id ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted/70"}`}
+          >
+            {s.label}
+          </button>
+        ))}
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Execution Output</CardTitle>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="flex items-center gap-2"><Server className="h-4 w-4" /> /api/server/{section}</CardTitle>
+              <CardDescription>{data?.serverUrl || "proxying the game server"}</CardDescription>
+            </div>
+            <div className="flex items-center gap-3">
+              {data && <Badge variant={data.ok ? "secondary" : "destructive"}>{data.ok ? `HTTP ${data.status}` : "down"}</Badge>}
+              <button onClick={() => mutate()} className="text-muted-foreground hover:text-foreground"><RefreshCw className="h-4 w-4" /></button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
-          <pre className="bg-[#09090b] text-[#fafafa] p-4 rounded-md font-mono text-xs overflow-auto min-h-[100px] max-h-[300px]">
-            {response || "No output yet."}
-          </pre>
+          {isLoading && !data && <p className="py-8 text-sm text-muted-foreground">Loading...</p>}
+          {error && <p className="py-8 text-sm text-destructive">Failed: {error.message}</p>}
+          {data && !data.ok && <p className="py-8 text-sm text-muted-foreground">{data.error || "section unavailable"}</p>}
+          {data?.ok && (
+            <pre className="max-h-[60vh] overflow-auto rounded-md bg-muted/40 p-4 font-mono text-xs leading-relaxed">
+              {JSON.stringify(data.data, null, 2)}
+            </pre>
+          )}
         </CardContent>
       </Card>
     </div>

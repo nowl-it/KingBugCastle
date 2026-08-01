@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useStatus, useWhoAmI, runMutation } from "@/lib/api"
-import { LayoutDashboard, Users, UserRound, Package, Diamond, Mail, Activity, Server, Settings, LogOut } from "lucide-react"
+import { LayoutDashboard, Users, UserRound, Package, Diamond, Mail, Server, Settings, LogOut } from "lucide-react"
 
 const NAV_ITEMS = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
@@ -12,7 +12,6 @@ const NAV_ITEMS = [
   { href: "/items", label: "Items", icon: Package },
   { href: "/accessories", label: "Accessories", icon: Diamond },
   { href: "/mail", label: "Mail", icon: Mail },
-  { href: "/tracker", label: "Battle Tracker", icon: Activity },
   { href: "/server", label: "Server Diagnostics", icon: Server },
   { href: "/account", label: "Account Settings", icon: Settings },
 ]
