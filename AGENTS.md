@@ -425,6 +425,24 @@ picker; see the "Web dashboard" note in `server/README.md`. `/api/catalog` also 
 `grantable` / `displayOnly` — the dashboard groups the reward-type dropdown from those, so moving a
 type between them is a one-line change in `dashboard.py`, not a UI edit.
 
+### Dashboard game art — hero portraits + item icons (2026-08-01, commit 8e7377a)
+
+`webui-next/public/assets/{heroes,items}/*.webp` ship real game art, committed in-repo (2.2MB total,
+zero-cost rule: binaries live on GitHub, never on OCI). `Avatar` (heroes page) and `ItemIcon` (items
+page) render `/assets/<dir>/<id>.webp` with letter/icon fallback via `onError`.
+
+- **Heroes (73/73)**: sprites `Unit_Illust_<uid>` (1024px) from `base_assets.apk`
+  `assets/aa/Android/illusts_assets_all_e2c109d34546ff649ffc05fd03601e1f.bundle`; prefer the exact
+  base name over `_FOOL` variants; downscale 256px WebP q85.
+- **Items (156/176)**: sprite name = `InventoryItems.xml` `<Sprite>` value, else `InventoryItem_<id>`;
+  sprites live in `sprites_assets_all_399fdbab3759918334e166259a6f87c3.bundle`, but their atlas
+  textures are **external cab-* dependencies** — UnityPy must load ALL 81 bundles of the APK together
+  (`unzip -j base_assets.apk "assets/aa/Android/*"` to one dir, then `UnityPy.load(dir)`) or the
+  Sprite `.image` lookup fails with `File cab-… not found`. The 20 missing ids (2200s map skins,
+  2400s, 4200s, `SeasonalEventToken_S26`) are CDN-runtime event content — no base sprite exists.
+- Re-extraction tooling was ad-hoc python heredocs; reproduce from this recipe if a version bump
+  shifts bundle names/hashes.
+
 `POST /admin/sendmail` and the dashboard's `POST /api/player/{pid}/mail` both strip a hand-typed
 `@raw:` before storing (`_process_posts` re-adds it at read time). The server.py copy used to
 rebind its own loop variable and stored the prefix, which then rendered literally in game.
