@@ -135,4 +135,10 @@ jobs:
               --notes-file notes.md
           fi
 
+      - name: Cleanup
+        if: always()
+        run: |
+          echo "Cleaning up stock files and build artifacts..."
+          rm -rf apk/xapk_extracted_v1711 KingBugCastle_v171.xapk "KingBugCastle_${TAG}.xapk"
+
 
