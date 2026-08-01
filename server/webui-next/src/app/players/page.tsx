@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Search, Plus, Copy, Power, Trash2, Save, RefreshCw, Crown } from "lucide-react"
+import { Search, Plus, Copy, Trash2, Save, RefreshCw, Crown } from "lucide-react"
 
 const EDITABLE_FIELDS: Record<string, { label: string; type?: string }> = {
   name: { label: "Name" },
@@ -59,11 +59,6 @@ export default function PlayersPage() {
     mutatePlayers()
   }
 
-  const handleActivate = async (pid: string) => {
-    await runMutation(`/api/players/${encodeURIComponent(pid)}/activate`, { method: "POST" }, "Player activated")
-    mutatePlayers()
-  }
-
   const handleDelete = async (pid: string) => {
     if (!window.confirm(`Delete player ${pid}? This is irreversible.`)) return
     await runMutation(`/api/players/${encodeURIComponent(pid)}`, { method: "DELETE" }, "Player deleted")
@@ -76,7 +71,7 @@ export default function PlayersPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Players</h1>
-          <p className="text-muted-foreground">Manage saves, activate accounts, edit currency and raw state.</p>
+          <p className="text-muted-foreground">Manage saves, edit currency and raw state.</p>
         </div>
         <div className="flex flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
           <div className="relative">
@@ -136,7 +131,7 @@ export default function PlayersPage() {
           </CardContent>
         </Card>
 
-        {selectedId ? <PlayerDetail pid={selectedId} onMutate={mutatePlayers} onActivate={handleActivate} onClone={handleClone} onDelete={handleDelete} /> : (
+        {selectedId ? <PlayerDetail pid={selectedId} onMutate={mutatePlayers} onClone={handleClone} onDelete={handleDelete} /> : (
           <Card>
             <CardContent className="py-16 text-center text-muted-foreground">
               Select a player to view or edit their save.
@@ -148,10 +143,9 @@ export default function PlayersPage() {
   )
 }
 
-function PlayerDetail({ pid, onMutate, onActivate, onClone, onDelete }: {
+function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
   pid: string
   onMutate: () => void
-  onActivate: (pid: string) => void
   onClone: (pid: string) => void
   onDelete: (pid: string) => void
 }) {
@@ -221,7 +215,6 @@ function PlayerDetail({ pid, onMutate, onActivate, onClone, onDelete }: {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <Button variant="outline" size="sm" onClick={() => onClone(pid)}><Copy className="h-3.5 w-3.5 mr-1" /> Clone</Button>
-              {!sum.active && <Button variant="outline" size="sm" onClick={() => onActivate(pid)}><Power className="h-3.5 w-3.5 mr-1" /> Activate</Button>}
               <Button variant="destructive" size="sm" onClick={() => onDelete(pid)}><Trash2 className="h-3.5 w-3.5 mr-1" /> Delete</Button>
             </div>
           </div>
