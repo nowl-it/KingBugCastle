@@ -6,9 +6,35 @@ import { PlayerBar, usePlayerSelection } from "@/components/player-context"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Plus, Trash2, Search } from "lucide-react"
+import { Plus, Trash2, Search, Gift, KeyRound, Ticket, ScrollText, TrendingUp, Zap, Package, Sparkles, Boxes } from "lucide-react"
+
+const SUB_STYLE: Record<string, { icon: any; cls: string }> = {
+  "RewardBoxInventory": { icon: Gift, cls: "bg-amber-500/15 text-amber-400" },
+  "InstantRewardBox": { icon: Gift, cls: "bg-amber-500/15 text-amber-400" },
+  "Key": { icon: KeyRound, cls: "bg-yellow-500/15 text-yellow-400" },
+  "CardLevelUpItem": { icon: Sparkles, cls: "bg-violet-500/15 text-violet-400" },
+  "UnitSoul": { icon: Boxes, cls: "bg-rose-500/15 text-rose-400" },
+  "Ticket": { icon: Ticket, cls: "bg-sky-500/15 text-sky-400" },
+  "Pass": { icon: ScrollText, cls: "bg-cyan-500/15 text-cyan-400" },
+  "Exp": { icon: TrendingUp, cls: "bg-emerald-500/15 text-emerald-400" },
+  "Instant": { icon: Zap, cls: "bg-orange-500/15 text-orange-400" },
+}
+
+function subStyle(sub: string) {
+  const key = Object.keys(SUB_STYLE).find(k => (sub || "").toLowerCase().includes(k.toLowerCase()))
+  return (key && SUB_STYLE[key]) || { icon: Package, cls: "bg-muted text-muted-foreground" }
+}
+
+function ItemIcon({ sub, size = "h-10 w-10" }: { sub: string; size?: string }) {
+  const style = subStyle(sub)
+  const Icon = style.icon
+  return (
+    <div className={`flex ${size} shrink-0 items-center justify-center rounded-lg ${style.cls}`}>
+      <Icon className="h-5 w-5" />
+    </div>
+  )
+}
 
 export default function ItemsPage() {
   const { selectedId } = usePlayerSelection()
@@ -59,8 +85,8 @@ export default function ItemsPage() {
         <div className="grid gap-6 lg:grid-cols-2">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Inventory ({inv?.length ?? 0})</CardTitle>
-              <CardDescription>Set count to change quantity; 0 removes.</CardDescription>
+              <CardTitle className="text-base flex items-center gap-2"><Boxes className="h-4 w-4" /> Inventory ({inv?.length ?? 0})</CardTitle>
+              <CardDescription>Counts are read-only here — set or remove from the catalog panel.</CardDescription>
             </CardHeader>
             <CardContent className="p-0">
               {!inv?.length ? <p className="px-4 py-8 text-sm text-muted-foreground">Inventory is empty.</p> : (
@@ -72,11 +98,16 @@ export default function ItemsPage() {
                     {inv.map((it: any) => (
                       <TableRow key={it.id}>
                         <TableCell>
-                          <div className="font-medium">{it.name}</div>
-                          <div className="text-xs text-muted-foreground font-mono">#{it.id}</div>
+                          <div className="flex items-center gap-3">
+                            <ItemIcon sub={it.sub} size="h-9 w-9" />
+                            <div>
+                              <div className="font-medium">{it.name}</div>
+                              <div className="text-xs text-muted-foreground font-mono">#{it.id}</div>
+                            </div>
+                          </div>
                         </TableCell>
                         <TableCell><span className="text-xs text-muted-foreground">{it.sub}</span></TableCell>
-                        <TableCell className="text-right font-mono">{it.count}</TableCell>
+                        <TableCell className="text-right font-mono text-lg">{it.count}</TableCell>
                         <TableCell className="text-right">
                           <Button variant="ghost" size="sm" className="text-destructive" onClick={() => removeItem(it.id)}><Trash2 className="h-3.5 w-3.5" /></Button>
                         </TableCell>
@@ -100,12 +131,13 @@ export default function ItemsPage() {
               </div>
               <div className="max-h-[320px] overflow-y-auto border rounded-md divide-y divide-border">
                 {matched.map((i: any) => (
-                  <button key={i.id} onClick={() => setAddId(String(i.id))} className={`w-full flex items-center justify-between px-3 py-2 text-left hover:bg-muted/50 ${addId === String(i.id) ? "bg-muted/70" : ""}`}>
-                    <div>
-                      <div className="text-sm font-medium">{i.name}</div>
+                  <button key={i.id} onClick={() => setAddId(String(i.id))} className={`w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-muted/50 ${addId === String(i.id) ? "bg-muted/70" : ""}`}>
+                    <ItemIcon sub={i.sub} size="h-9 w-9" />
+                    <div className="min-w-0 flex-1">
+                      <div className="truncate text-sm font-medium">{i.name}</div>
                       <div className="text-xs text-muted-foreground font-mono">#{i.id} · {i.sub}</div>
                     </div>
-                    {addId === String(i.id) && <Badge variant="secondary">picked</Badge>}
+                    {addId === String(i.id) && <Sparkles className="h-4 w-4 text-primary" />}
                   </button>
                 ))}
                 {!matched.length && <p className="px-3 py-6 text-sm text-muted-foreground">No match.</p>}

@@ -1,13 +1,29 @@
 "use client"
 
-import { useStatus, usePlayers } from "@/lib/api"
+import { useStatus, usePlayers, useServerSection } from "@/lib/api"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Users, Settings, HardDrive, Globe, Database, ScrollText, Crown, Coins, Gem, Heart } from "lucide-react"
+import { Users, Settings, HardDrive, Globe, Database, ScrollText, Crown, Coins, Gem, Heart, MemoryStick, Cpu, Server, Timer } from "lucide-react"
 import Link from "next/link"
+
+function Gauge({ label, value, sub, icon: Icon, color }: { label: string; value: string; sub?: string; icon: any; color: string }) {
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium">{label}</CardTitle>
+        <Icon className={`h-4 w-4 ${color}`} />
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">{value}</div>
+        {sub && <div className="text-xs text-muted-foreground">{sub}</div>}
+      </CardContent>
+    </Card>
+  )
+}
 
 export default function OverviewPage() {
   const { data: status, error } = useStatus()
   const { data: players } = usePlayers()
+  const { data: sys } = useServerSection("system", 10000)
 
   if (!status && !error) return <div className="p-8 text-muted-foreground">Loading status...</div>
   if (error) return <div className="p-8 text-destructive">Failed to load system status.</div>
@@ -25,12 +41,25 @@ export default function OverviewPage() {
 
   const top = [...list].sort((a: any, b: any) => (b.level || 0) - (a.level || 0)).slice(0, 5)
 
+  const sysData = sys?.ok ? sys.data : null
+  const mem = sysData?.mem
+  const disk = sysData?.disk
+  const cpu = sysData?.cpu
+  const loadPct = cpu && cpu.cores ? Math.min(100, Math.round((cpu.load1 / cpu.cores) * 100)) : null
+
   const metrics = [
-    { label: "Players", value: status.players, icon: Users },
-    { label: "Server Version", value: status.version, icon: Settings },
-    { label: "Patch Folder", value: status.patchFolder, icon: HardDrive },
-    { label: "Multiplayer", value: status.multiplayer ? "Enabled" : "Disabled", icon: Globe },
+    { label: "Players", value: status.players, icon: Users, color: "text-blue-400" },
+    { label: "Server Version", value: status.version, icon: Settings, color: "text-violet-400" },
+    { label: "Patch Folder", value: status.patchFolder, icon: HardDrive, color: "text-amber-400" },
+    { label: "Multiplayer", value: status.multiplayer ? "Enabled" : "Disabled", icon: Globe, color: "text-emerald-400" },
   ]
+
+  const hostMetrics = sysData ? [
+    { label: "Memory", value: mem ? `${mem.used} / ${mem.total} MB` : "—", sub: mem ? `${mem.percent}% used` : undefined, icon: MemoryStick, color: "text-rose-400" },
+    { label: "CPU load", value: loadPct !== null ? `${loadPct}%` : "—", sub: cpu ? `load 1m ${cpu.load1} · ${cpu.cores} cores` : undefined, icon: Cpu, color: "text-cyan-400" },
+    { label: "Disk", value: disk ? `${disk.used} / ${disk.total} GB` : "—", sub: disk ? `${disk.percent}% used` : undefined, icon: Server, color: "text-lime-400" },
+    { label: "Uptime", value: sysData.uptimeStr || "—", sub: sysData.startTime ? `since ${sysData.startTime}` : undefined, icon: Timer, color: "text-orange-400" },
+  ] : []
 
   return (
     <div className="space-y-6">
@@ -44,7 +73,7 @@ export default function OverviewPage() {
           <Card key={i}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{m.label}</CardTitle>
-              <m.icon className="h-4 w-4 text-muted-foreground" />
+              <m.icon className={`h-4 w-4 ${m.color}`} />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{m.value}</div>
@@ -52,6 +81,15 @@ export default function OverviewPage() {
           </Card>
         ))}
       </div>
+
+      {sysData && (
+        <div>
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Host</h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {hostMetrics.map((m, i) => <Gauge key={i} {...m} />)}
+          </div>
+        </div>
+      )}
 
       <div className="grid gap-4 md:grid-cols-2">
         <Card>

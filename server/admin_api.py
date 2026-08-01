@@ -266,6 +266,39 @@ def register(app, srv):
     @app.get("/admin/api/system")
     async def admin_system():
         uptime = int(time.time() - srv.SERVER_START_TIME)
+
+        # Host metrics, stdlib-only (/proc + statvfs) so nothing new is required on
+        # the OCI box. One-shot /proc/stat deltas are noisy, so CPU is the load
+        # average instead; the dashboard renders it against nproc.
+        load = [0.0, 0.0, 0.0]
+        try:
+            with open("/proc/loadavg") as f:
+                load = [float(x) for x in f.read().split()[:3]]
+        except OSError:
+            pass
+        mem = {"total": 0, "available": 0, "used": 0, "percent": 0.0}
+        try:
+            with open("/proc/meminfo") as f:
+                fields = {}
+                for line in f:
+                    k, _, v = line.partition(":")
+                    fields[k] = int(v.strip().split()[0]) // 1024   # kB -> MB
+            mem["total"] = fields.get("MemTotal", 0)
+            mem["available"] = fields.get("MemAvailable", 0)
+            mem["used"] = max(0, mem["total"] - mem["available"])
+            mem["percent"] = round(100.0 * mem["used"] / mem["total"], 1) if mem["total"] else 0.0
+        except OSError:
+            pass
+        disk = {"total": 0, "free": 0, "used": 0, "percent": 0.0}
+        try:
+            v = os.statvfs(srv.DATA_DIR)
+            disk["total"] = round(v.f_blocks * v.f_frsize / 2**30, 1)      # GB
+            disk["free"] = round(v.f_bavail * v.f_frsize / 2**30, 1)
+            disk["used"] = round(disk["total"] - disk["free"], 1)
+            disk["percent"] = round(100.0 * disk["used"] / disk["total"], 1) if disk["total"] else 0.0
+        except OSError:
+            pass
+
         return {
             "version": srv.SERVER_VERSION,
             "patchFolder": srv.PATCH_FOLDER,
@@ -278,6 +311,10 @@ def register(app, srv):
             "playerCount": playerdb.count(),
             "cdmFiles": len(srv._CDN_FILES),
             "logLines": len(srv.LOG_BUF),
+            "cpu": {"load1": load[0], "load5": load[1], "load15": load[2],
+                    "cores": os.cpu_count() or 1},
+            "mem": mem,
+            "disk": disk,
         }
 
     @app.get("/admin/api/routes")

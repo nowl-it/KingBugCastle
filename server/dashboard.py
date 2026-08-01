@@ -131,6 +131,9 @@ async def serialize_state_writes(request, call_next):
 
 app.mount("/ui", StaticFiles(directory=UI_DIR), name="ui")
 
+CATALOG = gamedata.load_catalog()
+print(f"[dashboard] gamedata {gamedata.summary()}", flush=True)
+
 # --- state helpers ----------------------------------------------------------
 EDITABLE_FIELDS = {
     "name": str, "castleName": str,

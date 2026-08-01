@@ -64,7 +64,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-3 border-b border-border bg-background px-4 sm:gap-x-6 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-50 flex h-16 shrink-0 items-center gap-x-3 border-b border-border bg-background px-4 sm:gap-x-6 sm:px-6 lg:px-8">
         <button
           onClick={() => setNavOpen(v => !v)}
           className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground lg:hidden"
@@ -108,7 +108,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {navOpen && (
           <div className="fixed inset-0 z-30 bg-black/50 lg:hidden" onClick={handleNav} />
         )}
-        <aside className={`fixed inset-y-0 left-0 z-40 w-64 shrink-0 border-r border-border bg-background transition-transform lg:sticky lg:top-16 lg:z-auto lg:h-[calc(100vh-4rem)] lg:translate-x-0 lg:pt-0 lg:transition-none lg:overflow-y-auto ${navOpen ? 'translate-x-0 pt-16' : '-translate-x-full'}`}>
+        <aside className={`fixed bottom-0 left-0 top-16 z-40 w-64 shrink-0 border-r border-border bg-background transition-transform lg:sticky lg:top-16 lg:z-auto lg:h-[calc(100vh-4rem)] lg:translate-x-0 lg:transition-none lg:overflow-y-auto ${navOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           {nav}
         </aside>
 

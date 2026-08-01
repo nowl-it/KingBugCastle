@@ -78,12 +78,12 @@ export default function PlayersPage() {
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Players</h1>
           <p className="text-muted-foreground">Manage saves, activate accounts, edit currency and raw state.</p>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <div className="relative flex-1 sm:flex-none">
+        <div className="flex flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+          <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input placeholder="Search name / id..." value={query} onChange={(e) => setQuery(e.target.value)} className="w-full pl-8 sm:w-64" />
           </div>
-          <Button onClick={() => setShowCreate(v => !v)}><Plus className="h-4 w-4 mr-1" /> New player</Button>
+          <Button onClick={() => setShowCreate(v => !v)} className="w-full sm:w-auto"><Plus className="h-4 w-4 mr-1" /> New player</Button>
         </div>
       </div>
 

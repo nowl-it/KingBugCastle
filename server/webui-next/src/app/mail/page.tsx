@@ -1,22 +1,27 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { useCatalog, usePlayer, runMutation } from "@/lib/api"
+import { useCatalog, usePlayer, usePlayers, runMutation } from "@/lib/api"
 import { PlayerBar, usePlayerSelection } from "@/components/player-context"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Mail, Send, Trash2, Search } from "lucide-react"
+import { Mail, Send, Trash2, Search, Users, UserRound } from "lucide-react"
 
 export default function MailPage() {
-  const { data: catData } = useCatalog()
+  const { data: catData, error: catalogError } = useCatalog()
   const { selectedId } = usePlayerSelection()
   const { data: detail, mutate: mutateDetail } = usePlayer(selectedId || undefined)
+  const { data: players } = usePlayers()
 
   const grantable = catData?.grantable || []
   const catalog = catData?.catalog || {}
+
+  // Recipient mode: "all" (broadcast) or "pick" (one or more players)
+  const [mode, setMode] = useState<"all" | "pick">("all")
+  const [picked, setPicked] = useState<Set<string>>(new Set())
 
   const [title, setTitle] = useState("")
   const [text, setText] = useState("")
@@ -26,6 +31,7 @@ export default function MailPage() {
   const [days, setDays] = useState("30")
   const [pickedId, setPickedId] = useState("")
   const [q, setQ] = useState("")
+  const [pq, setPq] = useState("")
 
   const rewardList = useMemo(() => catalog[rewardType] || [], [catalog, rewardType])
   const matched = useMemo(() => {
@@ -36,7 +42,23 @@ export default function MailPage() {
     return list.slice(0, 20)
   }, [rewardList, q])
 
+  const playerList = useMemo(() => {
+    const arr = Array.isArray(players) ? players : []
+    const query = pq.trim().toLowerCase()
+    return query
+      ? arr.filter((p: any) => (p.name || "").toLowerCase().includes(query) || (p.id || "").toLowerCase().includes(query))
+      : arr
+  }, [players, pq])
+
   const needsId = rewardType !== "Gold" && rewardType !== "Cash" && rewardType !== "Heart"
+
+  const togglePick = (pid: string) => {
+    setPicked(prev => {
+      const next = new Set(prev)
+      if (next.has(pid)) next.delete(pid); else next.add(pid)
+      return next
+    })
+  }
 
   const payload = () => ({
     title,
@@ -47,13 +69,25 @@ export default function MailPage() {
     days: Number(days || 30),
   })
 
-  const broadcast = async () => {
-    await runMutation("/api/mail/broadcast", { method: "POST", body: JSON.stringify(payload()) }, "Mail broadcast to all players")
-  }
-
-  const sendTargeted = async () => {
-    await runMutation(`/api/player/${encodeURIComponent(selectedId!)}/mail`, { method: "POST", body: JSON.stringify(payload()) }, "Mail sent")
-    mutateDetail()
+  const send = async () => {
+    if (!title.trim() && !text.trim()) {
+      window.dispatchEvent(new CustomEvent("kgc:toast", { detail: { message: "Title or body required", type: "error" } }))
+      return
+    }
+    if (mode === "all") {
+      await runMutation("/api/mail/broadcast", { method: "POST", body: JSON.stringify(payload()) }, "Mail broadcast to all players")
+    } else {
+      const targets = [...picked]
+      if (!targets.length) {
+        window.dispatchEvent(new CustomEvent("kgc:toast", { detail: { message: "Pick at least one player", type: "error" } }))
+        return
+      }
+      for (const pid of targets) {
+        await runMutation(`/api/player/${encodeURIComponent(pid)}/mail`, { method: "POST", body: JSON.stringify(payload()) })
+      }
+      window.dispatchEvent(new CustomEvent("kgc:toast", { detail: { message: `Mail sent to ${targets.length} player(s)`, type: "success" } }))
+      if (selectedId) mutateDetail()
+    }
   }
 
   const removePost = async (postId: number) => {
@@ -72,10 +106,58 @@ export default function MailPage() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
-          <CardHeader><CardTitle className="text-base">Compose</CardTitle><CardDescription>Reward types and ids follow the client vocabulary (Key → ShopItem id, Item → InventoryItems id).</CardDescription></CardHeader>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2"><Mail className="h-4 w-4" /> Compose</CardTitle>
+            <CardDescription>Reward types and ids follow the client vocabulary (Key → ShopItem id, Item → InventoryItems id).</CardDescription>
+          </CardHeader>
           <CardContent className="space-y-3">
+            {/* Recipients */}
+            <div className="rounded-md border border-border p-3">
+              <label className="text-xs font-medium text-muted-foreground">Recipients</label>
+              <div className="mt-2 flex gap-4">
+                <label className="flex cursor-pointer items-center gap-2 text-sm">
+                  <input type="radio" name="recipients" checked={mode === "all"} onChange={() => setMode("all")} className="accent-primary" />
+                  <Users className="h-4 w-4 text-muted-foreground" /> All players
+                </label>
+                <label className="flex cursor-pointer items-center gap-2 text-sm">
+                  <input type="radio" name="recipients" checked={mode === "pick"} onChange={() => setMode("pick")} className="accent-primary" />
+                  <UserRound className="h-4 w-4 text-muted-foreground" /> Pick players ({picked.size})
+                </label>
+              </div>
+              {mode === "pick" && (
+                <div className="mt-3 space-y-2">
+                  <div className="relative">
+                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <Input placeholder="Filter players..." value={pq} onChange={(e) => setPq(e.target.value)} className="pl-8 h-9" />
+                  </div>
+                  <div className="max-h-36 overflow-y-auto rounded-md border border-border divide-y divide-border">
+                    {playerList.map((p: any) => (
+                      <label key={p.id} className="flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm hover:bg-muted/50">
+                        <input type="checkbox" checked={picked.has(p.id)} onChange={() => togglePick(p.id)} className="accent-primary" />
+                        <span className="min-w-0 flex-1 truncate">{p.name}</span>
+                        <span className="text-xs text-muted-foreground font-mono">{p.id}</span>
+                      </label>
+                    ))}
+                    {!playerList.length && <p className="px-3 py-4 text-sm text-muted-foreground">No players.</p>}
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[...picked].map(pid => (
+                      <Badge key={pid} variant="secondary" className="gap-1">
+                        {pid}
+                        <button onClick={() => togglePick(pid)} className="text-muted-foreground hover:text-foreground">×</button>
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
             <Input placeholder="Title (localization key or @raw: literal)" value={title} onChange={(e) => setTitle(e.target.value)} />
             <Textarea placeholder="Body (localization key or @raw: literal)" value={text} onChange={(e) => setText(e.target.value)} className="min-h-20" />
+
+            {catalogError && (
+              <p className="text-xs text-destructive">Reward catalog unavailable ({catalogError.message}) — only Gold/Cash/Heart can be attached right now.</p>
+            )}
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
@@ -92,10 +174,6 @@ export default function MailPage() {
                 <label className="text-xs text-muted-foreground">Amount</label>
                 <Input type="number" value={rewardAmount} onChange={(e) => setRewardAmount(e.target.value)} className="font-mono" />
               </div>
-            </div>
-            <div className="space-y-1">
-              <label className="text-xs text-muted-foreground">Expires in (days)</label>
-              <Input type="number" value={days} onChange={(e) => setDays(e.target.value)} className="w-full font-mono sm:w-32" />
             </div>
 
             {needsId && (
@@ -124,10 +202,14 @@ export default function MailPage() {
               </>
             )}
 
-            <div className="flex flex-col gap-2 pt-2 sm:flex-row">
-              <Button onClick={broadcast} className="sm:flex-1"><Send className="h-4 w-4 mr-1" /> Broadcast to all players</Button>
-              {selectedId && <Button variant="outline" onClick={sendTargeted} className="sm:flex-1"><Mail className="h-4 w-4 mr-1" /> Send to {selectedId}</Button>}
+            <div className="space-y-1">
+              <label className="text-xs text-muted-foreground">Expires in (days)</label>
+              <Input type="number" value={days} onChange={(e) => setDays(e.target.value)} className="w-full font-mono sm:w-32" />
             </div>
+
+            <Button onClick={send} className="w-full"><Send className="h-4 w-4 mr-1" />
+              {mode === "all" ? "Broadcast to all players" : `Send to ${picked.size || "..."} player(s)`}
+            </Button>
           </CardContent>
         </Card>
 

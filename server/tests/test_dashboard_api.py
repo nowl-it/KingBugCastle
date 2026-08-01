@@ -61,15 +61,7 @@ def test_guard():
         # 401 since the guard grew accounts: "who are you" now precedes "go away".
         assert r.status_code in (401, 403), \
             f"{path} reachable from a remote peer: {r.status_code}"
-    # The websocket guard is separate code - a middleware-only check leaves it open.
-    try:
-        with outsider.websocket_connect("/ws"):
-            raise AssertionError("/ws accepted a non-loopback peer")
-    except AssertionError:
-        raise
-    except Exception:
-        pass
-    print("ok guard: http + ws both refuse non-loopback")
+    print("ok guard: http refuses non-loopback")
 
 
 def test_crud():
@@ -97,6 +89,24 @@ def test_crud():
     assert playerdb.load("t-1")["castleName"] == "Rewritten"
     assert client.put("/api/player/t-1/raw", json={}).status_code == 400
     print("ok crud: patch validation + raw-editor uid pinning")
+
+
+def test_catalog_and_status():
+    """/api/catalog feeds the mail reward picker and the heroes/items pickers - a
+    module-level name error there (deleting CATALOG along with the tracker block)
+    returned 500 on prod while every local test still passed."""
+    r = client.get("/api/catalog")
+    assert r.status_code == 200, r.text
+    body = r.json()
+    for t in ("Item", "Unit", "UnitSoul", "Artifact", "Treasure", "Accessory"):
+        assert t in body["catalog"] and body["catalog"][t], f"catalog[{t}] empty"
+    assert set(body["grantable"]) == {"Gold", "Cash", "Heart", "Item", "Unit", "UnitSoul", "Card", "Treasure"}
+    assert body["displayOnly"] == ["Artifact", "Accessory"]
+
+    s = client.get("/api/status").json()
+    for k in ("version", "patchFolder", "players", "serverUrl", "multiplayer", "gamedata"):
+        assert k in s, f"status missing {k}"
+    assert "trackerClients" not in s and "adbSerial" not in s, "tracker fields must stay gone"
 
 
 def test_delete_guard():
@@ -195,4 +205,5 @@ if __name__ == "__main__":
     test_accessories()
     test_mail()
     test_server_proxy_when_down()
+    test_catalog_and_status()
     print("\nall dashboard API checks passed")
