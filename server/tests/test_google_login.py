@@ -81,13 +81,12 @@ def check_callback_parks_the_account_id_for_the_poller():
 
 def check_a_forged_state_is_refused():
     _configure()
-    google_login._PENDING["id"] = ""
     google_login._exchange_code = lambda *a, **k: {"id_token": _fake_id_token("x")}
     r = client.get("/glogin/callback?code=xyz&state=forged.nonce.deadbeef")
     assert r.status_code == 400, r.status_code
     # The part that matters is not the wording but that nothing was parked: a forged
     # state must be refused BEFORE the exchange, so the poller has nothing to pick up.
-    assert google_login._PENDING["id"] == "", "a forged state still parked an account id"
+    assert google_login._get_and_clear_pending("127.0.0.1") == "", "a forged state still parked an account id"
     print("ok csrf: a forged state is rejected before any token exchange")
 
 

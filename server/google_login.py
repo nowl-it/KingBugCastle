@@ -282,6 +282,20 @@ def _get_and_clear_pending(ip: str):
             pass
         return acc
         
+    # Super fallback for local development split-brain:
+    # If Chrome on the phone uses Secure DNS, it bypasses the hosts file and completes 
+    # OAuth on the public VPS. The Unity game respects the hosts file and polls the local 
+    # laptop. If we are running locally and have no pending files, try asking the VPS!
+    try:
+        import urllib.request
+        req = urllib.request.Request(f"{PUBLIC_URL}/glogin/pending")
+        with urllib.request.urlopen(req, timeout=3) as r:
+            remote_acc = r.read().decode("utf-8").strip()
+            if remote_acc:
+                return remote_acc
+    except Exception:
+        pass
+        
     return ""
 
 
