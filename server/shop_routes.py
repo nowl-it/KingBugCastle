@@ -14,6 +14,7 @@ top. Uses the `register(app, srv)` pattern.
     python3 shop_routes.py      # self-check
 """
 import shop
+import gacha
 from common import admin_log, body_int, body_list, next_reset_iso, now_iso
 from config import CONTENT_GATE, STATIC_OVERRIDES, XML_DIR
 from state import save_state
@@ -119,14 +120,72 @@ def _shop_buy(body, st):
     # purchase NRE (client froze with the buy modal up). gachaKeys carries the
     # TOTAL held after the buy - the client's SetGachaKey stores the value.
     gacha_keys = []
+    gachas_result = []
+    
     if el.findtext("Type") == "Gacha" and not rewards:
         keys = _gacha_keys(st)
-        total = keys.get(str(item_id), 0) + amount
-        keys[str(item_id)] = total
-        gacha_keys = [{"id": item_id, "count": total}]
+        
+        # Check if this is a gacha roll. If they sent gachaId, or if it's a known gacha item,
+        # we should roll. Actually, we'll just check if it's in Gachas.xml.
+        is_roll = True
+        gacha_id = body_int(body.get("gachaId"), item_id)
+        # Some shop items might be pure scrolls and not actual banners.
+        gacha_el = gacha._get_gacha(gacha_id, XML_DIR)
+        
+        if gacha_el is not None:
+            # It's a roll!
+            # Check if we should refund the cash/gold we just charged, because they might be using keys!
+            key_item = gacha_el.findtext("KeyItem")
+            # If the user has enough keys, and they didn't explicitly request to use cash/gold, we use keys.
+            # But wait, the client already checks if they have keys. If they have keys, it sends a request.
+            # If they don't, it asks to use gems. In either case, the request comes here.
+            # If the client sent `gachaUseGold` = true, or if they have no keys, we charge cash/gold.
+            use_gold = body.get("gachaUseGold", False)
+            keys_held = keys.get(str(key_item)) if key_item else keys.get(str(item_id))
+            if keys_held is None:
+                keys_held = 0
+                
+            used_keys = False
+            if not use_gold and keys_held >= amount:
+                # Use keys instead of the cost we just deducted!
+                used_keys = True
+                keys_held -= amount
+                if key_item:
+                    keys[str(key_item)] = keys_held
+                else:
+                    keys[str(item_id)] = keys_held
+                gacha_keys = [{"id": int(key_item or item_id), "count": keys_held}]
+                
+                # Refund the cost we took earlier!
+                if kind == "gold":
+                    st["gold"] = st.get("gold", 0) + cost
+                    srv.bump(st, "useGold", -cost)
+                elif kind == "cash":
+                    st["cash"] = st.get("cash", 0) + cost
+                elif kind == "item":
+                    st.setdefault("inventory", {})[str(cur_id)] = st["inventory"].get(str(cur_id), 0) + cost
+                    
+            if not used_keys:
+                # Used cash/gold (which we already deducted)
+                gacha_keys = [{"id": int(key_item or item_id), "count": keys_held}]
+                
+            # Now roll the gacha
+            gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR)
+            
+            # Grant the rewards to the player's state
+            for pull in gachas_result:
+                for rg in pull["rewardGacha"]:
+                    # Unit (1), UnitExp (2)
+                    srv._grant_reward(st, "Unit" if rg["type"] == 1 else "UnitExp" if rg["type"] == 2 else "Gold", rg["id"], rg["count"])
+        else:
+            # Not a banner roll, just buying a scroll (e.g. from event shop)
+            total = keys.get(str(item_id), 0) + amount
+            keys[str(item_id)] = total
+            gacha_keys = [{"id": item_id, "count": total}]
+
     return {"gachaRewardResponseData": srv._reward_list_data(rewards),
             "inventoryItems": srv._inventory_models(st), "soldOut": False,
-            "gachas": [], "gachaKeys": gacha_keys}
+            "gachas": gachas_result, "gachaKeys": gacha_keys}
 
 def r_shop_refresh(body, st):
     """Refreshing the daily shop clears its per-item buy counts, which is what makes
