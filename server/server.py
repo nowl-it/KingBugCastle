@@ -2548,6 +2548,20 @@ async def respond(path: str, request: Request):
         # string-table scan missed or a client newer than this server.
         admin_log(f"[UNKNOWN PATH] {request.method} {path}")
     payload = build_model(info["response"], overlay)
+    
+    # Auto-fill common player state variables if the model expects them and the
+    # handler didn't explicitly override them. Missing currencies freeze the client.
+    auto_fields = {
+        "playerGold": lambda: st.get("gold", 0),
+        "playerCash": lambda: st.get("cash", 0),
+        "playerHeart": lambda: st.get("heart", 0),
+        "playerLevel": lambda: st.get("level", 1),
+        "playerExp": lambda: st.get("exp", 0),
+    }
+    for field, get_val in auto_fields.items():
+        if field in payload and (not overlay or field not in overlay):
+            payload[field] = get_val()
+
     trace(f"[{host}] {request.method} {path} -> {info.get('response')}")
     return Response(aes_encrypt(payload), media_type="application/json", headers={"encryptedWithHex": "true"})
 

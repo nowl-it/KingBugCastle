@@ -20,6 +20,18 @@ from state import save_state
 
 srv = None      # the live server module, set by register()
 
+def _gacha_keys(st):
+    """key item id -> total keys held. A gacha scroll's key item is the scroll
+    itself (Gacha 2007's KeyItem is shop item 305; 300/301/302 key themselves),
+    so the client's GachaKey.id is the shop item id, and every banner sharing the
+    scroll (all pickup gachas share 305) counts the same entry."""
+    return st.setdefault("gachaKeys", {})
+
+
+def _gacha_keys_models(st):
+    """Wire shape: [{id, count}] with int ids, as GachaKey deserializes."""
+    return [{"id": int(k), "count": v} for k, v in sorted(_gacha_keys(st).items())]
+
 
 def _shop_buys(st):
     """itemId (as a string key, so it survives a JSON round-trip) -> times bought."""
@@ -41,6 +53,10 @@ def r_shop(body, st):
     base["playerGold"] = st.get("gold", 0)
     base["playerCash"] = st.get("cash", 0)
     base["playerHeart"] = st.get("heart", 0)
+    # gachaKeys in the static base is always [] - carry the player's real key counts
+    # so the banner tabs keep showing what they own after the buy screen closes.
+    base["gachaKeys"] = [{"id": int(k), "count": v}
+                         for k, v in st.get("gachaKeys", {}).items()]
     return base
 
 def _shop_buy(body, st):
@@ -95,8 +111,22 @@ def _shop_buy(body, st):
         rewards.append(r)
     buys[str(item_id)] = bought + amount
     admin_log(f"[shop] bought {item_id} x{amount} for {cost} {kind} -> {len(rewards)} rewards")
+
+    # A gacha scroll (Type Gacha, no <Reward> rows - it is the banner's <KeyItem>
+    # itself) grants the player a key for the pickup banners. The response MUST
+    # carry the list: BuyGachaButtonGroup.HandleUnitGachaResult dereferences
+    # ret.gachas without a null check, and an absent `gachas` made every scroll
+    # purchase NRE (client froze with the buy modal up). gachaKeys carries the
+    # TOTAL held after the buy - the client's SetGachaKey stores the value.
+    gacha_keys = []
+    if el.findtext("Type") == "Gacha" and not rewards:
+        keys = _gacha_keys(st)
+        total = keys.get(str(item_id), 0) + amount
+        keys[str(item_id)] = total
+        gacha_keys = [{"id": item_id, "count": total}]
     return {"gachaRewardResponseData": srv._reward_list_data(rewards),
-            "inventoryItems": srv._inventory_models(st), "soldOut": False}
+            "inventoryItems": srv._inventory_models(st), "soldOut": False,
+            "gachas": [], "gachaKeys": gacha_keys}
 
 def r_shop_refresh(body, st):
     """Refreshing the daily shop clears its per-item buy counts, which is what makes

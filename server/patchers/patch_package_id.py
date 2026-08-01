@@ -21,6 +21,12 @@ try:
     
     # Simple replacements
     reps = [
+        (f'"{OLD}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"',
+         f'"{NEW}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"'),
+         
+        (f'"{OLD}.permission.C2D_MESSAGE"',
+         f'"{NEW}.permission.C2D_MESSAGE"'),
+
         ('<provider android:authorities="com.nowl.castle.firebaseinitprovider" android:directBootAware="true" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider"/>',
          '<provider android:authorities="com.nowl.castle.firebaseinitprovider" android:directBootAware="true" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider" android:enabled="false"/>'),
          

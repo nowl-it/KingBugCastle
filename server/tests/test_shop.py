@@ -163,6 +163,38 @@ def check_no_free_lunch_on_token_shops():
     print("ok token shops: every row has a real price")
 
 
+def check_gacha_scroll_buy_does_not_freeze():
+    """Buying a gacha scroll must answer with `gachas` present (never absent): the
+    client's BuyGachaButtonGroup.HandleUnitGachaResult dereferences ret.gachas and
+    NREs on a missing field, leaving the buy modal up and the whole UI frozen
+    (observed live on v171.1.00). The scroll's own id is the GachaKey id the pickup
+    banners count (every pickup gacha's <KeyItem> is scroll 305 itself), and the
+    count must survive into the next shop listing."""
+    out = server.r_shop({}, _fresh())
+    item_id = None
+    for row in out.get("gachaItems", []):
+        el = shop.find(row["itemId"], server.XML_DIR)
+        kind = shop.price_of(el)[0]
+        if shop.rewards_of(el) == [] and el.findtext("Type") == "Gacha" and kind == "cash":
+            item_id = row["itemId"]
+            break
+    assert item_id, "no cash-priced gacha-scroll row to buy"
+
+    st = _fresh(cash=10 ** 6)
+    out = server.r_shop({"itemId": item_id}, st)
+    assert "gachas" in out, "buy response has no `gachas` - the client NREs on it"
+    assert out["gachas"] == []
+    keys = {k["id"]: k["count"] for k in out.get("gachaKeys", [])}
+    assert keys.get(item_id) == 1, f"scroll buy did not grant key {item_id}: {keys}"
+
+    st = server.load_state()
+    assert st["gachaKeys"].get(str(item_id)) == 1, "key count did not persist"
+    again = server.r_shop({}, server.load_state())
+    keys = {k["id"]: k["count"] for k in again.get("gachaKeys", [])}
+    assert keys.get(item_id) == 1, "persisted key missing from the next listing"
+    print(f"ok gacha scroll: item {item_id} -> key {item_id}, gachas present, count carried")
+
+
 if __name__ == "__main__":
     check_listing_not_empty()
     check_gold_purchase_charges_and_grants()
@@ -171,4 +203,5 @@ if __name__ == "__main__":
     check_refresh_clears_daily_only()
     check_unknown_item_is_harmless()
     check_no_free_lunch_on_token_shops()
+    check_gacha_scroll_buy_does_not_freeze()
     print("\nall shop checks passed")
