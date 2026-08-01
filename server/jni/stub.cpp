@@ -305,7 +305,7 @@ void* g_openUrlMethod = nullptr;             // UnityEngine.Application::OpenURL
 
 void HookedGoogleLogin(void* _this, void* methodInfo) {
     char KGC_GLOGIN_URL[256];
-    snprintf(KGC_GLOGIN_URL, sizeof(KGC_GLOGIN_URL), "http://%s:%s/glogin", g_kgc_glogin_host, g_kgc_glogin_port);
+    snprintf(KGC_GLOGIN_URL, sizeof(KGC_GLOGIN_URL), "https://%s/glogin", g_kgc_glogin_host);
     LOGI("Google button -> opening web login %s", KGC_GLOGIN_URL);
     if (g_openUrlMethod && str_new && rt_invoke) {
         void* url = str_new(KGC_GLOGIN_URL);
