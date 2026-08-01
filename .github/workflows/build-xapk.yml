@@ -135,6 +135,17 @@ jobs:
               --notes-file notes.md
           fi
 
+      - name: Delete Stock Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          STOCK_TAG=$(echo "${{ github.event.inputs.base_xapk_url }}" | grep -o 'stock-[^/]*')
+          if [ -n "$STOCK_TAG" ]; then
+            echo "Deleting stock release $STOCK_TAG to prevent hosting unmodified APK..."
+            gh release delete "$STOCK_TAG" --yes --repo "$GITHUB_REPOSITORY" || true
+            git push --delete origin "$STOCK_TAG" || true
+          fi
+
       - name: Cleanup
         if: always()
         run: |

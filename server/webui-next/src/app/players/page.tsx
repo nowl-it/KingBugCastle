@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Search, Plus, Copy, Trash2, Save, RefreshCw, Crown } from "lucide-react"
+import { Search, Plus, Copy, Trash2, Save, RefreshCw, Crown, Zap } from "lucide-react"
 
 const EDITABLE_FIELDS: Record<string, { label: string; type?: string }> = {
   name: { label: "Name" },
@@ -200,6 +200,12 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
     onMutate()
   }
 
+  const handleMacro = async (macroId: string) => {
+    if (!window.confirm(`Apply macro '${macroId}'? This will overwrite relevant fields.`)) return
+    await runMutation(`/api/player/${encodeURIComponent(pid)}/macro`, { method: "POST", body: JSON.stringify({ macro: macroId }) }, "Macro applied successfully")
+    onMutate()
+  }
+
   if (!detail || !sum) return <Card><CardContent className="py-16 text-center text-muted-foreground">Loading player...</CardContent></Card>
 
   return (
@@ -233,6 +239,20 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
             ))}
           </div>
           <Button className="mt-4" onClick={saveEdits}><Save className="h-4 w-4 mr-1" /> Save fields</Button>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2"><Zap className="h-4 w-4" /> Macro Profiles</CardTitle>
+          <CardDescription>Quickly grant bundles of items and resources without editing individual fields.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-wrap gap-2">
+            <Button variant="secondary" onClick={() => handleMacro("max_wealth")}>Max Wealth (Gold, Cash, Tokens)</Button>
+            <Button variant="secondary" onClick={() => handleMacro("max_inventory")}>Max All Inventory Items</Button>
+            <Button variant="secondary" onClick={() => handleMacro("max_heroes")}>Max All Heroes</Button>
+          </div>
         </CardContent>
       </Card>
 

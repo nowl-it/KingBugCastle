@@ -325,7 +325,23 @@ def reindex_all():
 def load(uid):
     with _conn() as c:
         row = c.execute("SELECT data FROM players WHERE uid=?", (uid,)).fetchone()
-    return json.loads(row[0]) if row else None
+    if not row:
+        return None
+    data = json.loads(row[0])
+    
+    # Self-heal bad hero data from previous summon bugs (e.g. Unit 42110)
+    cards = data.get("cards", {})
+    bad_cids = [cid for cid in cards if not (10000 <= int(cid) < 11000)]
+    for cid in bad_cids:
+        del cards[cid]
+        
+    for d in data.get("decks", []):
+        deck = d.get("deck", [])
+        for i in range(len(deck)):
+            if not (10000 <= deck[i] < 11000) and deck[i] != 0:
+                deck[i] = 10000
+                
+    return data
 
 def save(uid, st):
     blob = json.dumps(st, ensure_ascii=False)

@@ -22,6 +22,7 @@ It complements the other docs — read those for the *why* and the *internals*:
 |----------|-----------|
 | **[deploy-and-run.md](deploy-and-run.md)** | Start the two servers, connect a device, push a change to the client |
 | **[public-hosting.md](public-hosting.md)** | Run it where strangers can reach it: preflight, admin accounts, abuse limits, backups |
+| **[dashboard-macros.md](dashboard-macros.md)** | Using the Next.js Admin Dashboard to quickly grant Macro Profiles to players |
 | **[v171-private-build.md](v171-private-build.md)** | Build/run the **v171** client (XIGNCODE NEO unpack, injected il2cpp, HTTP-not-TLS) |
 | **[mftl-extraction.md](mftl-extraction.md)** | Recover `libil2cpp.so` from the XIGNCODE NEO container (`server/patchers/unpack_neo.py`) |
 | **[v171-emulator-note.md](v171-emulator-note.md)** | Player-facing note (VI): why stock v171 won't run on an emulator |
@@ -49,3 +50,7 @@ There are **two separate data planes**, and knowing which one a change lands in 
 
 > Granting a player a treasure = plane 1. Making that treasure *exist / be un-gated* for the client =
 > plane 2. Most "I changed it but nothing happened" bugs are editing the wrong plane. See each playbook.
+
+### Known Boundaries
+- Player unit IDs are between `10000` and `10999`. Any unit ID outside this range is not a valid player unit and can crash the client if granted in a card array. `server/playerdb.py` will automatically filter these out.
+- Gacha pools have been restricted to this range to prevent granting invalid testing or enemy units.

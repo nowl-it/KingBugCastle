@@ -209,6 +209,31 @@ def api_catalog():
     return {"catalog": CATALOG, "grantable": GRANTABLE_TYPES, "displayOnly": DISPLAY_ONLY_TYPES}
 
 
+@app.get("/api/stats/realtime")
+def api_stats_realtime():
+    import time
+    active = playerdb.active()
+    total_players = 0
+    active_24h = 0
+    total_gold = 0
+    total_cash = 0
+    
+    now = time.time()
+    for pid, st, updated in playerdb.all_players():
+        total_players += 1
+        if now - updated < 86400:
+            active_24h += 1
+        total_gold += st.get("gold", 0)
+        total_cash += st.get("cash", 0)
+        
+    return {
+        "ccu": len(active),
+        "total_players": total_players,
+        "active_24h": active_24h,
+        "total_gold": total_gold,
+        "total_cash": total_cash
+    }
+
 # --- player CRUD ------------------------------------------------------------
 @app.get("/api/players")
 def api_players():
@@ -318,6 +343,43 @@ async def api_player_raw_save(pid: str, body: dict):
     body["uid"] = pid
     _write_state(pid, body)
     return {"ok": True, "summary": _summary(pid, body)}
+
+
+@app.post("/api/player/{pid}/macro")
+async def api_player_macro(pid: str, body: dict):
+    st = _read_state(pid)
+    macro = (body or {}).get("macro")
+    
+    if macro == "max_wealth":
+        st["gold"] = 99999999
+        st["cash"] = 99999999
+        st["heart"] = 99999
+        inv = st.setdefault("inventory", {"itemIds": [], "counts": []})
+        ids = inv.setdefault("itemIds", [])
+        cnts = inv.setdefault("counts", [])
+        for token_id in (204, 207, 211, 210, 206, 203): # Arena, Clan, KingGod, Event, Babel, Raid
+            if token_id in ids:
+                cnts[ids.index(token_id)] = 99999
+            else:
+                ids.append(token_id)
+                cnts.append(99999)
+    elif macro == "max_inventory":
+        import server
+        st["inventory"] = {
+            "itemIds": list(server.ALL_ITEM_IDS),
+            "counts": [99999] * len(server.ALL_ITEM_IDS)
+        }
+    elif macro == "max_heroes":
+        cards = st.setdefault("cards", {})
+        for unit_id in gamedata.HEROES:
+            c = cards.setdefault(str(unit_id), {"unitId": unit_id, **server.SEED["cardTemplate"]})
+            c["level"] = 30
+            c["soul"] = 999
+    else:
+        raise HTTPException(400, f"unknown macro {macro}")
+        
+    _write_state(pid, st)
+    return {"ok": True, "macro": macro, "summary": _summary(pid, st)}
 
 
 # --- heroes (cards) ---------------------------------------------------------
@@ -642,12 +704,20 @@ def index():
 def ui_path(path: str):
     if path.startswith(("api/", "ws")) or not path:
         raise HTTPException(404)
-    full = os.path.join(UI_DIR, path)
+        
+    clean_path = path.rstrip("/")
+    full = os.path.join(UI_DIR, clean_path)
     if os.path.isfile(full):
         return FileResponse(full)
+        
+    html_file = os.path.join(UI_DIR, f"{clean_path}.html")
+    if os.path.isfile(html_file):
+        return FileResponse(html_file)
+        
     index = os.path.join(full, "index.html")
     if os.path.isfile(index):
         return FileResponse(index)
+        
     return FileResponse(os.path.join(UI_DIR, "index.html"))
 
 

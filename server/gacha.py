@@ -24,7 +24,7 @@ def _get_pools(xml_dir):
         tree = ET.parse(xml_dir / "Units.xml")
         for unit in tree.findall("Unit"):
             uid = int(unit.get("ID", 0))
-            if uid > 0 and unit.findtext("Type") == "Player" and unit.findtext("IsObtainable") != "false":
+            if 10000 <= uid <= 10999 and unit.findtext("Type") == "Player" and unit.findtext("IsObtainable") != "false":
                 if uid in king_ids:
                     _UNITS_CACHE["king"].append(uid)
                 else:

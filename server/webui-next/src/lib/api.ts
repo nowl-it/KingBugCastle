@@ -41,7 +41,7 @@ export const runMutation = async (url: string, init?: RequestInit, successMessag
 
 // SWR Hooks
 export function useStatus() {
-  return useSWR('/api/status', fetcher, { refreshInterval: 15000 });
+  return useSWR('/api/status', fetcher, { refreshInterval: 2000 });
 }
 
 export function useCatalog() {
@@ -49,11 +49,11 @@ export function useCatalog() {
 }
 
 export function usePlayers() {
-  return useSWR('/api/players', fetcher, { refreshInterval: 10000 });
+  return useSWR('/api/players', fetcher, { refreshInterval: 2000 });
 }
 
 export function usePlayer(pid?: string) {
-  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}` : null, fetcher, { refreshInterval: 10000 });
+  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}` : null, fetcher, { refreshInterval: 2000 });
 }
 
 export function usePlayerRaw(pid?: string) {
@@ -61,18 +61,18 @@ export function usePlayerRaw(pid?: string) {
 }
 
 export function useHeroes(pid?: string) {
-  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/heroes` : null, fetcher, { refreshInterval: 10000 });
+  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/heroes` : null, fetcher, { refreshInterval: 2000 });
 }
 
 export function useInventory(pid?: string) {
-  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/inventory` : null, fetcher, { refreshInterval: 10000 });
+  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/inventory` : null, fetcher, { refreshInterval: 2000 });
 }
 
 export function useAccessories(pid?: string) {
-  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/accessories` : null, fetcher, { refreshInterval: 10000 });
+  return useSWR(pid ? `/api/player/${encodeURIComponent(pid)}/accessories` : null, fetcher, { refreshInterval: 2000 });
 }
 
-export function useServerSection(section: string | null, refreshMs = 15000) {
+export function useServerSection(section: string | null, refreshMs = 2000) {
   return useSWR(section ? `/api/server/${section}` : null, fetcher,
     { refreshInterval: section === 'logs' ? refreshMs : 0 });
 }
