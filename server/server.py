@@ -2605,6 +2605,11 @@ def _grant_reward(st, rt, rid, amt):
         tr = get_st_treasures(st)
         if not any(t.get("treasureId") == rid for t in tr):
             tr.append(make_treasure(max((t.get("id", 0) for t in tr), default=0) + 1, rid))
+    elif rt == "Artifact" and rid:
+        # Grant an artifact instance directly to the player's inventory
+        arts = st.setdefault("artifacts", [])
+        new_id = max((t.get("id", 0) for t in arts), default=0) + 1
+        arts.append(make_artifact(new_id, rid))
 
 # ── Admin, Inbox, Direct routes ──
 # Registered before ROUTE_MODELS so they take priority over the generic dispatcher.
