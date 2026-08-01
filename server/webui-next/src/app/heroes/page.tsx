@@ -21,11 +21,24 @@ function roleStyle(role: string) {
   return ROLE_STYLE[role] || { badge: "border-slate-500/30 text-slate-400", avatar: "from-slate-500 to-slate-700", label: "?" }
 }
 
-function Avatar({ name, role, size = "h-12 w-12 text-lg" }: { name: string; role: string; size?: string }) {
+function Avatar({ name, role, unitId, size = "h-12 w-12 text-lg" }: { name: string; role: string; unitId: number; size?: string }) {
   const style = roleStyle(role)
+  const [broken, setBroken] = useState(false)
+  const letter = (name || "?").charAt(0).toUpperCase()
+  if (!broken) {
+    return (
+      <img
+        src={`/assets/heroes/${unitId}.webp`}
+        alt={name}
+        title={name}
+        onError={() => setBroken(true)}
+        className={`${size} shrink-0 rounded-full border border-border bg-muted object-cover shadow`}
+      />
+    )
+  }
   return (
     <div className={`flex ${size} shrink-0 items-center justify-center rounded-full bg-gradient-to-br font-bold text-white shadow ${style.avatar}`}>
-      {(name || "?").charAt(0).toUpperCase()}
+      {letter}
     </div>
   )
 }
@@ -102,7 +115,7 @@ function OwnedGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
             <Card key={h.unitId} className="p-0">
               <CardContent className="p-3">
                 <div className="flex items-start gap-3">
-                  <Avatar name={h.name} role={h.role} />
+                  <Avatar name={h.name} role={h.role} unitId={h.unitId} />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       <span className="truncate text-sm font-semibold">{h.name}</span>
@@ -176,7 +189,7 @@ function MissingGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
           return (
             <Card key={h.unitId} className="p-0">
               <CardContent className="flex items-center gap-3 p-3">
-                <Avatar name={h.name} role={h.role} size="h-10 w-10 text-base" />
+                <Avatar name={h.name} role={h.role} unitId={h.unitId} size="h-10 w-10 text-base" />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <span className="truncate text-sm font-semibold">{h.name}</span>

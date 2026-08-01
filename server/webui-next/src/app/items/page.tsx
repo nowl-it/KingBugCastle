@@ -26,9 +26,20 @@ function subStyle(sub: string) {
   return (key && SUB_STYLE[key]) || { icon: Package, cls: "bg-muted text-muted-foreground" }
 }
 
-function ItemIcon({ sub, size = "h-10 w-10" }: { sub: string; size?: string }) {
+function ItemIcon({ sub, id, size = "h-10 w-10" }: { sub: string; id?: number; size?: string }) {
   const style = subStyle(sub)
   const Icon = style.icon
+  const [broken, setBroken] = useState(false)
+  if (id && !broken) {
+    return (
+      <img
+        src={`/assets/items/${id}.webp`}
+        alt={String(id)}
+        onError={() => setBroken(true)}
+        className={`${size} shrink-0 rounded-lg border border-border bg-muted object-cover`}
+      />
+    )
+  }
   return (
     <div className={`flex ${size} shrink-0 items-center justify-center rounded-lg ${style.cls}`}>
       <Icon className="h-5 w-5" />
@@ -99,7 +110,7 @@ export default function ItemsPage() {
                       <TableRow key={it.id}>
                         <TableCell>
                           <div className="flex items-center gap-3">
-                            <ItemIcon sub={it.sub} size="h-9 w-9" />
+                            <ItemIcon sub={it.sub} id={it.id} size="h-9 w-9" />
                             <div>
                               <div className="font-medium">{it.name}</div>
                               <div className="text-xs text-muted-foreground font-mono">#{it.id}</div>
@@ -132,7 +143,7 @@ export default function ItemsPage() {
               <div className="max-h-[320px] overflow-y-auto border rounded-md divide-y divide-border">
                 {matched.map((i: any) => (
                   <button key={i.id} onClick={() => setAddId(String(i.id))} className={`w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-muted/50 ${addId === String(i.id) ? "bg-muted/70" : ""}`}>
-                    <ItemIcon sub={i.sub} size="h-9 w-9" />
+                    <ItemIcon sub={i.sub} id={i.id} size="h-9 w-9" />
                     <div className="min-w-0 flex-1">
                       <div className="truncate text-sm font-medium">{i.name}</div>
                       <div className="text-xs text-muted-foreground font-mono">#{i.id} · {i.sub}</div>
