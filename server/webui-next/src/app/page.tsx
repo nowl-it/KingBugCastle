@@ -42,10 +42,6 @@ export default function OverviewPage() {
     }
   }, [realtime])
 
-  if (!status && !error) return <div className="p-8 text-muted-foreground">Loading status...</div>
-  if (error) return <div className="p-8 text-destructive">Failed to load system status.</div>
-
-  const gd = status.gamedata || {}
   const list = Array.isArray(players) ? players : []
   const totals = list.reduce((acc, p: any) => ({
     gold: acc.gold + (p.gold || 0),
@@ -76,6 +72,11 @@ export default function OverviewPage() {
       { name: "41-50", players: bins[4] },
     ]
   }, [list])
+
+  if (!status && !error) return <div className="p-8 text-muted-foreground">Loading status...</div>
+  if (error) return <div className="p-8 text-destructive">Failed to load system status.</div>
+
+  const gd = status.gamedata || {}
 
   const sysData = sys?.ok ? sys.data : null
   const mem = sysData?.mem
