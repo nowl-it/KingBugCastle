@@ -85,10 +85,6 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML):
 
             if type_str == "Unit":
                 count = 1
-            elif type_str == "UnitExp":
-                type_str = "UnitSoul"
-            elif type_str == "UnitSoulItem":
-                type_str = "Item"
             elif type_str == "Gold":
                 item_id = 0 # Gold has no item ID usually
 
