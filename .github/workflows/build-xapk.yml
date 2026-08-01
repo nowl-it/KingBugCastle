@@ -127,9 +127,4 @@ jobs:
             --title "King Bug Castle $TAG" \
             --notes-file notes.md
 
-      - name: Cleanup Stock Release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh release delete stock-v171.1.00 --repo "$GITHUB_REPOSITORY" --yes --cleanup-tag \
-            || echo "stock release already gone"
+
