@@ -242,13 +242,26 @@ def _page(title, body, tail="", bad=False):
 # with one player logging in at a time.
 # ponytail: one global slot, no per-device keying. Key it by a device id in the
 # deep link if two people ever log in at the same second.
-_PENDING = {"id": ""}
+_PENDING_FILE = pathlib.Path(__file__).parent / "state" / ".glogin_pending"
+
+def _set_pending(account_id):
+    _PENDING_FILE.write_text(account_id)
+
+def _get_and_clear_pending():
+    if _PENDING_FILE.exists():
+        acc = _PENDING_FILE.read_text().strip()
+        try:
+            _PENDING_FILE.unlink()
+        except OSError:
+            pass
+        return acc
+    return ""
 
 
 def return_page(account_id):
     """Park the account id for the poller, and hand back a page that deep-links back
     into the app to foreground it (the id travels via the poll, not the link)."""
-    _PENDING["id"] = account_id
+    _set_pending(account_id)
     link = f"{SCHEME}://auth"
     return _page(
         "Signed in - King Bug Castle",
@@ -353,8 +366,7 @@ def register(app):
         """The app's native poller reads the just-picked account id here (plain text,
         not AES - it's not a game-API route). Returned once, then cleared."""
         from fastapi.responses import PlainTextResponse
-        acc = _PENDING["id"]
-        _PENDING["id"] = ""
+        acc = _get_and_clear_pending()
         return PlainTextResponse(acc)
 
 
@@ -383,13 +395,13 @@ if __name__ == "__main__":   # self-check: state round-trip + id derivation + re
 
     # The return page must park the id for the poller AND offer the deep link, since
     # the client cannot read the URL it was sent back with.
-    _PENDING["id"] = ""
+    _get_and_clear_pending()
     error_page("Nope", "detail")
-    assert _PENDING["id"] == "", "error_page must not park an id"
+    assert _get_and_clear_pending() == "", "error_page must not park an id"
     html = return_page("google_zz")
-    assert _PENDING["id"] == "google_zz"
+    assert _get_and_clear_pending() == "google_zz"
     assert f"{SCHEME}://auth" in html, "the return page lost its deep link"
-    _PENDING["id"] = ""
+    _get_and_clear_pending()
 
     assert "google_devA" in dev_page() and "/glogin/go?id=" in dev_page()
 
