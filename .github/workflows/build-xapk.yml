@@ -69,9 +69,6 @@ jobs:
         run: |
           TAG="${{ github.event.inputs.tag }}"
           [ -z "$TAG" ] && TAG="v171.1.00"
-          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            TAG="$TAG-$(date +%Y%m%d-%H%M%S)"
-          fi
           echo "TAG=$TAG" >> "$GITHUB_ENV"
 
       - name: Prepare Release Asset
@@ -121,10 +118,21 @@ jobs:
           - Close screen-recording apps if UI elements stop responding (some Unity versions
             conflict with them).
           EOF
-          gh release create "$TAG" "KingBugCastle_${TAG}.xapk" \
-            --repo "$GITHUB_REPOSITORY" \
-            --latest \
-            --title "King Bug Castle $TAG" \
-            --notes-file notes.md
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $TAG already exists, updating asset..."
+            gh release upload "$TAG" "KingBugCastle_${TAG}.xapk" \
+              --repo "$GITHUB_REPOSITORY" \
+              --clobber
+            gh release edit "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "King Bug Castle $TAG" \
+              --notes-file notes.md
+          else
+            gh release create "$TAG" "KingBugCastle_${TAG}.xapk" \
+              --repo "$GITHUB_REPOSITORY" \
+              --latest \
+              --title "King Bug Castle $TAG" \
+              --notes-file notes.md
+          fi
 
 
