@@ -174,9 +174,8 @@ def _shop_buy(body, st):
             
             # Grant the rewards to the player's state
             for pull in gachas_result:
-                for rg in pull["rewardGacha"]:
-                    # Unit (1), UnitExp (2)
-                    srv._grant_reward(st, "Unit" if rg["type"] == 1 else "UnitExp" if rg["type"] == 2 else "Gold", rg["id"], rg["count"])
+                for rg in pull["gacha"]:
+                    srv._grant_reward(st, rg["type"], rg["unitId"], rg["count"])
         else:
             # Not a banner roll, just buying a scroll (e.g. from event shop)
             total = keys.get(str(item_id), 0) + amount

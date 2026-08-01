@@ -68,7 +68,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML):
             uc = gacha_el.find("UnitCount")
             num_rolls = random.randint(int(uc.get("Min", 3)), int(uc.get("Max", 3)))
             
-        reward_gachas = []
+        gacha_list = []
         for _ in range(num_rolls):
             r = random.uniform(0, total_weight)
             cum = 0
@@ -78,38 +78,33 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML):
                 if r <= cum:
                     chosen = p
                     break
-            
-            # Map type string to integer type used by client
-            # The client reward types generally are: 1=Unit, 2=UnitExp, etc.
-            type_int = 1
+
             item_id = random.choice(units)
             count = random.randint(chosen["min"], chosen["max"])
-            
-            if chosen["type"] == "Unit":
-                type_int = 1
+            type_str = chosen["type"]
+
+            if type_str == "Unit":
                 count = 1
-            elif chosen["type"] == "UnitExp":
-                type_int = 2
-            elif chosen["type"] == "Gold":
-                type_int = 7
+            elif type_str == "UnitExp":
+                type_str = "UnitSoul"
+            elif type_str == "UnitSoulItem":
+                type_str = "Item"
+            elif type_str == "Gold":
                 item_id = 0 # Gold has no item ID usually
-            elif chosen["type"] == "UnitSoulItem":
-                type_int = 16
-            else:
-                type_int = 1
-                
-            reward_gachas.append({
-                "type": type_int,
-                "id": item_id,
+
+            gacha_list.append({
+                "type": type_str,
+                "unitId": item_id,
                 "count": count,
                 "isNew": True,
                 "gachaCount": 0,
                 "mileageAmount": 0
             })
-            
+
         gacha_collections.append({
-            "gacha": [],
-            "rewardGacha": reward_gachas
+            "gacha": gacha_list,
+            "rewardGacha": [],
+            "upgrade": False
         })
         
     return gacha_collections
