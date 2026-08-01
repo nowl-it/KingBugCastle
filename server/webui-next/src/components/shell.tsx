@@ -108,7 +108,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {navOpen && (
           <div className="fixed inset-0 z-30 bg-black/50 lg:hidden" onClick={handleNav} />
         )}
-        <aside className={`fixed inset-y-0 left-0 z-40 w-64 shrink-0 border-r border-border bg-muted/20 transition-transform lg:static lg:z-auto lg:translate-x-0 ${navOpen ? 'translate-x-0 pt-16' : '-translate-x-full'}`}>
+        <aside className={`fixed inset-y-0 left-0 z-40 w-64 shrink-0 border-r border-border bg-background transition-transform lg:sticky lg:top-16 lg:z-auto lg:h-[calc(100vh-4rem)] lg:translate-x-0 lg:pt-0 lg:transition-none lg:overflow-y-auto ${navOpen ? 'translate-x-0 pt-16' : '-translate-x-full'}`}>
           {nav}
         </aside>
 
