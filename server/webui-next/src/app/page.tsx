@@ -192,17 +192,17 @@ export default function OverviewPage() {
               <CardContent>
                 <ul className="divide-y divide-border">
                   <li className="flex items-center justify-between py-2 text-xs text-muted-foreground uppercase tracking-wider font-semibold">
-                    <span className="w-12">PID</span>
+                    <span className="w-20">PID</span>
                     <span className="flex-1">COMMAND</span>
-                    <span className="w-12 text-right">CPU%</span>
-                    <span className="w-12 text-right">MEM%</span>
+                    <span className="w-16 text-right">CPU%</span>
+                    <span className="w-16 text-right">MEM%</span>
                   </li>
                   {processes.map((p: any) => (
                     <li key={p.pid} className="flex items-center justify-between py-2 text-sm">
-                      <span className="w-12 font-mono text-muted-foreground">{p.pid}</span>
+                      <span className="w-20 font-mono text-muted-foreground">{p.pid}</span>
                       <span className="flex-1 font-medium truncate pr-2">{p.name}</span>
-                      <span className="w-12 text-right text-cyan-400">{p.cpu}</span>
-                      <span className="w-12 text-right text-rose-400">{p.mem}</span>
+                      <span className="w-16 text-right text-cyan-400">{p.cpu}</span>
+                      <span className="w-16 text-right text-rose-400">{p.mem}</span>
                     </li>
                   ))}
                 </ul>
