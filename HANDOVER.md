@@ -457,8 +457,8 @@ Verify with `adb logcat -s XignCodeStub` - you must see one `Hooked …` line pe
 silently did nothing.
 
 The live stub is `server/jni/stub.cpp`, **not** the legacy no-op `xigncode_stub/xigncode_stub.c`.
-Build: `ndk-build` in `server/`, then
-`cp libs/arm64-v8a/libxigncode.so xigncode_stub/arm64/`.
+Build: cmake in `/tmp/stub_build` (see SETUP.md "Rebuilding the native .so"), then
+`cp libxigncode.so server/xigncode_stub/arm64/`.
 
 ### 6e. Custom mail text without a CDN rebuild
 

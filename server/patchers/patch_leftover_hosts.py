@@ -62,7 +62,11 @@ for host in HOSTS:
             pos = end
             continue  # replacement wouldn't fit; leave it
         data[scheme_start:scheme_start + len(new)] = new
-        data[scheme_start + len(new):end] = b"\x00" * (end - scheme_start - len(new))
+        # Pad with /./././ so that the string remains a valid URI (System.Uri normalizes this)
+        # We need to fill (end - scheme_start - len(new)) bytes.
+        pad_len = end - scheme_start - len(new)
+        padding = (b"/." * pad_len)[:pad_len]
+        data[scheme_start + len(new):end] = padding
         print(f"[+] {old.decode('utf-8','replace')!r} -> {new.decode()!r}")
         patched += 1
         pos = end

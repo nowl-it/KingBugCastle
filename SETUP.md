@@ -134,12 +134,26 @@ instead, use `rebuild_arm64.py` (same patches, original package id).
 
 ## Rebuilding the native .so (rare - only after editing the C++)
 
-The prebuilt `.so` ship in the repo. Only if you edit `server/jni/stub.cpp` or
-`libmain_wrapper.cpp` do you need the NDK:
+The prebuilt `.so` ship in the repo. Only if you edit `server/jni/stub.cpp` do you need
+NDK 27 (`ndk;27.2.12479018`). NDK 28 has C++ linking issues (`__libcpp_verbose_abort`
+undefined) — do NOT upgrade.
 
 ```bash
-cd server && ndk-build && cp libs/arm64-v8a/libxigncode.so xigncode_stub/arm64/
-KGC_REBUILD_NATIVE=1 ...   # forces libmain_wrapper.so recompile (auto-finds NDK via ANDROID_NDK_HOME)
+cd /tmp && rm -rf stub_build && mkdir stub_build && cd stub_build
+cat > CMakeLists.txt << 'EOF'
+cmake_minimum_required(VERSION 3.18)
+project(xigncode CXX)
+set(CMAKE_CXX_STANDARD 17)
+add_library(xigncode SHARED /path/to/kgc/server/jni/stub.cpp)
+target_link_libraries(xigncode log dl)
+target_compile_options(xigncode PRIVATE -fno-exceptions -fno-rtti)
+set_target_properties(xigncode PROPERTIES LINK_FLAGS "-Wl,-init,xigncode_stub_init")
+EOF
+cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+      -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24 \
+      -DANDROID_STL=c++_static -DCMAKE_BUILD_TYPE=Release . && cmake --build .
+cp libxigncode.so /path/to/kgc/server/xigncode_stub/arm64/
+cp libxigncode.so /path/to/kgc/server/xigncode_stub/
 ```
 
 ## Path overrides (non-standard layouts)

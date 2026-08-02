@@ -73,10 +73,25 @@ Three patches at addresses (in APK libil2cpp.so):
 (v170.0.03 offsets were 0x2CB6594 / 0x596E418 / 0x596CB28 — shifted on the version bump, see ARM64 Patch Inventory below for derivation method.)
 
 XIGNCODE stub replaces real libxigncode.so. It is no longer a bare no-op: `server/jni/stub.cpp`
-compiles to a native il2cpp poller + UI hooks (~350KB, padded back to the original 510KB so the
+compiles to a native il2cpp poller + UI hooks (~730KB, padded back to the original 510KB so the
 patch-set size check passes). It still registers no-op JNI `ZCWAVE_*` methods (boots past the
 anti-cheat), then a worker thread dlopen's `libil2cpp.so` and installs hooks (GameUnit stat poller
 on `BattleManager.Update`; custom-mail hook on `PostListItem.Set`). See "il2cpp hook techniques" below.
+
+### Google login web-bridge + Cloudflare
+The stub hooks `Scene_Login.OnClickGoogleLogin` to open a browser to `/glogin` (domain from
+`g_kgc_glogin_host`, scheme from `g_kgc_glogin_scheme`). After OAuth callback, a native poller
+thread hits `GET /glogin/pending` every ~1s to retrieve the account ID, then calls
+`Scene_Login.Auth(accountId)` to complete login.
+
+**Cloudflare**: the public domain (`kingbugcastle.id.vn`) goes through Cloudflare, which proxies
+**all** ports (80, 443, 8080, 8443) and redirects HTTP → HTTPS. The raw-socket native poller
+cannot follow HTTPS redirects. Fix: `g_kgc_glogin_poll_host` is patched to the **origin IP**
+(`213.35.110.245`) to bypass Cloudflare entirely. Browser still uses the domain (supports HTTPS).
+Build script: `GLOGIN_POLL_HOST=<ip>` env var (defaults to `SHARE_HOST`; must override for public).
+
+**NDK**: build with cmake (see SETUP.md), NOT ndk-build. NDK 28 has C++ linking issues
+(`__libcpp_verbose_abort` undefined). NDK 27 (`ndk;27.2.12479018`) works.
 
 ### Route Model Gap
 Many endpoints lack routes in `routes.txt`. The `route_models.json` heuristic maps paths to models by name similarity. Unknown paths return empty `ResponseModel`. To handle missing models, add OVERRIDES in `server.py` which bypass `build_model` and return raw dict. The direct FastAPI handler (`@app.get/post`) takes priority if registered BEFORE the `for _r in ROUTE_MODELS` loop.

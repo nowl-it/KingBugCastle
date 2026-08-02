@@ -175,7 +175,7 @@ server/
   dashboard.py           unified web dashboard server (:8081) - see below
   webui/                 the single web UI (Battle Tracker + Admin), static files
   real_cdn/              cloned CDN bundles served verbatim at /patch/{path}
-  jni/                   stub.cpp -> libxigncode.so (ndk-build); native il2cpp
+  jni/                   stub.cpp -> libxigncode.so (cmake + NDK27); native il2cpp
                           poller + UI hooks. Output copied to xigncode_stub/arm64/
   xigncode_stub/         libxigncode.so replacement: registers no-op XIGNCODE3 JNI
                           methods, then hooks il2cpp (GameUnit stat poller on
@@ -251,5 +251,5 @@ see `AGENTS.md` "il2cpp hook techniques":
   (custom Inbox mail title/text: server prefixes `@raw:`, the hook strips it and writes the literal
   via `set_text`, bypassing the Localizer — no CDN Strings rebuild needed).
 
-Build: `ndk-build` in `server/`, then `cp libs/arm64-v8a/libxigncode.so xigncode_stub/arm64/` and
-run `rebuild_arm64.py` / `rebuild_arm64_mod.py`.
+Build: cmake in `/tmp/stub_build` (see SETUP.md), then `cp libxigncode.so xigncode_stub/arm64/` and
+run `build_v171_private.py`.

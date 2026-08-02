@@ -18,6 +18,11 @@
 // Globals for build-time binary patching of the glogin redirect
 char g_kgc_glogin_host[64] = "127.0.0.1\0" "                                                   ";
 char g_kgc_glogin_port[16] = "8080\0" "          ";
+char g_kgc_glogin_scheme[9] = "http\0   ";
+// Separate poll host: the browser opens glogin_host (domain, valid Cloudflare cert),
+// but the native poller must reach the origin directly (Cloudflare redirects HTTP→HTTPS
+// and the raw socket poller can't follow). Build script patches this to the IP address.
+char g_kgc_glogin_poll_host[64] = "127.0.0.1\0" "                                                   ";
 
 
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, "XignCodeStub", __VA_ARGS__)
@@ -305,7 +310,7 @@ void* g_openUrlMethod = nullptr;             // UnityEngine.Application::OpenURL
 
 void HookedGoogleLogin(void* _this, void* methodInfo) {
     char KGC_GLOGIN_URL[256];
-    snprintf(KGC_GLOGIN_URL, sizeof(KGC_GLOGIN_URL), "https://%s/glogin", g_kgc_glogin_host);
+    snprintf(KGC_GLOGIN_URL, sizeof(KGC_GLOGIN_URL), "%s://%s/glogin", g_kgc_glogin_scheme, g_kgc_glogin_host);
     LOGI("Google button -> opening web login %s", KGC_GLOGIN_URL);
     if (g_openUrlMethod && str_new && rt_invoke) {
         void* url = str_new(KGC_GLOGIN_URL);
@@ -342,16 +347,18 @@ static void write_abs_jump(void* at, void* dest);   // defined in the inline-hoo
 // LDR patches. The rt_invoke wrapper itself may interfere with Unity's init flow.
 // Uncomment the block at the hook site to re-enable.
 
-// GET /glogin/pending on 127.0.0.1:80 (adb-reverse / host-rebind -> our server).
+// GET /glogin/pending on origin.
+// Follows HTTP redirects (301/302): if Location is https://, downgrades to http://
+// and uses port 8080 (direct to origin, bypasses Cloudflare's HTTPS redirect).
 // Returns body length, or -1. Plain HTTP, plain text body (not a game-API route).
-static int http_get_pending(char* buf, int buflen) {
+static int http_get_pending_once(const char* host, const char* port, char* buf, int buflen) {
     struct addrinfo hints, *res;
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
     
-    if (getaddrinfo(g_kgc_glogin_host, g_kgc_glogin_port, &hints, &res) != 0) {
-        LOGE("http_get_pending: getaddrinfo failed for %s:%s", g_kgc_glogin_host, g_kgc_glogin_port);
+    if (getaddrinfo(host, port, &hints, &res) != 0) {
+        LOGE("http_get_pending: getaddrinfo failed for %s:%s", host, port);
         return -1;
     }
     
@@ -373,7 +380,7 @@ static int http_get_pending(char* buf, int buflen) {
     freeaddrinfo(res);
     
     char req[512];
-    snprintf(req, sizeof(req), "GET /glogin/pending HTTP/1.0\r\nHost: %s:%s\r\n\r\n", g_kgc_glogin_host, g_kgc_glogin_port);
+    snprintf(req, sizeof(req), "GET /glogin/pending HTTP/1.0\r\nHost: %s:%s\r\n\r\n", host, port);
     write(fd, req, strlen(req));
     char resp[1024]; int total = 0, r;
     while ((r = read(fd, resp + total, sizeof(resp) - 1 - total)) > 0) {
@@ -382,6 +389,50 @@ static int http_get_pending(char* buf, int buflen) {
     close(fd);
     if (total <= 0) return -1;
     resp[total] = 0;
+
+    // Check for 301/302 redirect
+    if (total > 12 && (memcmp(resp, "HTTP/1.0 30", 10) == 0 || memcmp(resp, "HTTP/1.1 30", 10) == 0)) {
+        char* loc = NULL;
+        // Find Location header (case-insensitive search for "location:")
+        char* p = resp;
+        while (*p && p < resp + total) {
+            if (strncasecmp(p, "location:", 9) == 0) {
+                p += 9;
+                while (*p == ' ') p++;
+                loc = p;
+                break;
+            }
+            char* nl = strchr(p, '\n');
+            if (!nl) break;
+            p = nl + 1;
+        }
+        if (loc) {
+            // Trim to end of line
+            char* eol = strchr(loc, '\r');
+            if (!eol) eol = strchr(loc, '\n');
+            if (eol) *eol = 0;
+            LOGI("http_get_pending: following redirect to %s", loc);
+
+            // Parse redirect URL: downgrade https:// to http://, use port 8080
+            const char* rport = "8080";
+            if (strncasecmp(loc, "https://", 8) == 0) {
+                loc += 8;  // skip scheme -> direct to origin on port 8080
+                rport = "8080";
+            } else if (strncasecmp(loc, "http://", 7) == 0) {
+                loc += 7;
+                rport = port;  // keep original port
+            }
+            // Extract host (up to / or : or end)
+            static char rhostbuf[128];
+            int i = 0;
+            while (loc[i] && loc[i] != '/' && loc[i] != ':' && i < (int)sizeof(rhostbuf) - 1)
+                rhostbuf[i] = loc[i], i++;
+            rhostbuf[i] = 0;
+
+            return http_get_pending_once(rhostbuf, rport, buf, buflen);
+        }
+    }
+
     char* body = strstr(resp, "\r\n\r\n");
     if (!body) return -1;
     body += 4;
@@ -390,6 +441,10 @@ static int http_get_pending(char* buf, int buflen) {
     if (bl <= 0 || bl >= buflen) return -1;
     memcpy(buf, body, bl + 1);
     return bl;
+}
+
+static int http_get_pending(char* buf, int buflen) {
+    return http_get_pending_once(g_kgc_glogin_poll_host, g_kgc_glogin_port, buf, buflen);
 }
 
 void* login_poll_thread(void* arg) {

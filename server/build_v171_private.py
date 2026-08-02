@@ -39,11 +39,16 @@ NATIVE_IL2CPP = IL2CPP_DEC == _NATIVE
 # reaches the local server via `adb reverse tcp:443 tcp:8443`. Override with
 # SHARE_HOST=<ip-or-domain> for a remote/shared build.
 SHARE_HOST = os.environ.get("SHARE_HOST", "127.0.0.1")
+# Poll host for the native poller (follows HTTP redirects). Defaults to SHARE_HOST.
+# The poller handles Cloudflare's HTTP->HTTPS redirect by downgrading to HTTP on port8080.
+GLOGIN_POLL_HOST = os.environ.get("GLOGIN_POLL_HOST", SHARE_HOST)
+# Scheme for the browser URL: "http" for local (no TLS cert needed), "https" for public.
+GLOGIN_SCHEME = os.environ.get("GLOGIN_SCHEME", "https" if SHARE_HOST != "127.0.0.1" else "http")
 
 # Private-server identity: rename so it installs side-by-side with the real app.
 OLD_PKG = "com.awesomepiece.castle"
-NEW_PKG = "com.nowl.castle"
-NEW_LABEL = "King Bug Castle"
+NEW_PKG = "com.nowl.castle.test"
+NEW_LABEL = "King Test Castle"
 PATCHERS = REPO / "server" / "patchers"
 
 ORIG_APKS = {
@@ -388,21 +393,50 @@ def replace_xigncode(apk_path):
                     orig_size = len(zin.read(item.filename))
                     stub_padded = bytearray(stub_data)
                     
-                    # Patch the KGC_GLOGIN_HOST buffer
-                    # The buffer in stub.cpp is 64 bytes, starting with "127.0.0.1\0" and followed by spaces.
-                    old_host_prefix = b"127.0.0.1\0" + b" " * 20
-                    new_host = SHARE_HOST.encode() + b"\0"
-                    if len(new_host) > 64:
-                        print(f"WARNING: SHARE_HOST {SHARE_HOST} is too long for glogin patch!")
-                        new_host = new_host[:63] + b"\0"
-                    new_host = new_host.ljust(64, b"\0")
+                    # Patch the KGC_GLOGIN_HOST and KGC_GLOGIN_POLL_HOST buffers
+                    # Both are 64-byte buffers in stub.cpp, starting with "127.0.0.1\0"
+                    # and followed by null/space padding. First occurrence = browser host,
+                    # second = poll host (may differ when Cloudflare is in front).
+                    old_host_pattern = b"127.0.0.1\0"
                     
-                    idx = stub_padded.find(old_host_prefix)
+                    # Patch g_kgc_glogin_host (browser URL host)
+                    new_browser = SHARE_HOST.encode() + b"\0"
+                    if len(new_browser) > 64:
+                        print(f"WARNING: SHARE_HOST {SHARE_HOST} is too long for glogin patch!")
+                        new_browser = new_browser[:63] + b"\0"
+                    new_browser = new_browser.ljust(64, b"\0")
+                    
+                    idx = stub_padded.find(old_host_pattern)
                     if idx != -1:
-                        stub_padded[idx:idx+64] = new_host
+                        stub_padded[idx:idx+64] = new_browser
                         print(f"[*] Patched libxigncode.so KGC_GLOGIN_HOST -> {SHARE_HOST}")
                     else:
                         print(f"[!] Warning: Could not find KGC_GLOGIN_HOST buffer in libxigncode.so!")
+                    
+                    # Patch g_kgc_glogin_poll_host (native poller host = IP, bypasses Cloudflare)
+                    new_poll = GLOGIN_POLL_HOST.encode() + b"\0"
+                    if len(new_poll) > 64:
+                        print(f"WARNING: GLOGIN_POLL_HOST {GLOGIN_POLL_HOST} is too long!")
+                        new_poll = new_poll[:63] + b"\0"
+                    new_poll = new_poll.ljust(64, b"\0")
+                    
+                    idx2 = stub_padded.find(old_host_pattern)
+                    if idx2 != -1:
+                        stub_padded[idx2:idx2+64] = new_poll
+                        print(f"[*] Patched libxigncode.so KGC_GLOGIN_POLL_HOST -> {GLOGIN_POLL_HOST}")
+                    else:
+                        print(f"[!] Warning: Could not find KGC_GLOGIN_POLL_HOST buffer!")
+                    
+                    # Patch g_kgc_glogin_scheme ("http" for local, "https" for public)
+                    old_scheme = b"http\0   "
+                    new_scheme = GLOGIN_SCHEME.encode() + b"\0"
+                    new_scheme = new_scheme.ljust(9, b"\0")
+                    idx3 = stub_padded.find(old_scheme)
+                    if idx3 != -1:
+                        stub_padded[idx3:idx3+9] = new_scheme
+                        print(f"[*] Patched libxigncode.so KGC_GLOGIN_SCHEME -> {GLOGIN_SCHEME}")
+                    else:
+                        print(f"[!] Warning: Could not find KGC_GLOGIN_SCHEME buffer!")
                         
                     stub_padded.extend(b'\0' * (orig_size - len(stub_padded)))
                     new_item = zipfile.ZipInfo(item.filename, item.date_time)
