@@ -47,8 +47,8 @@ GLOGIN_SCHEME = os.environ.get("GLOGIN_SCHEME", "https" if SHARE_HOST != "127.0.
 
 # Private-server identity: rename so it installs side-by-side with the real app.
 OLD_PKG = "com.awesomepiece.castle"
-NEW_PKG = "com.nowl.castle.test"
-NEW_LABEL = "King Test Castle"
+NEW_PKG = "com.nowl.castle"
+NEW_LABEL = "King Bug Castle"
 PATCHERS = REPO / "server" / "patchers"
 
 ORIG_APKS = {
