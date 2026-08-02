@@ -122,7 +122,7 @@ def _shop_buy(body, st):
     gacha_keys = []
     gachas_result = []
     
-    if el.findtext("Type") == "Gacha" and not rewards:
+    if el.findtext("Type") in ("Gacha", "TreasureGacha") and not rewards:
         keys = _gacha_keys(st)
         
         # Check if this is a gacha roll. If they sent gachaId, or if it's a known gacha item,
@@ -131,6 +131,23 @@ def _shop_buy(body, st):
         gacha_id = body_int(body.get("gachaId"), item_id)
         # Some shop items might be pure scrolls and not actual banners.
         gacha_el = gacha._get_gacha(gacha_id, XML_DIR)
+
+        # TreasureGacha: ShopItem IDs (370/371) are not gacha IDs.
+        # Find the default gacha for this KeyItem when the direct lookup fails.
+        if gacha_el is None and el.findtext("Type") == "TreasureGacha":
+            key_item_id = el.findtext("KeyItem")
+            if key_item_id:
+                for gid, ge in gacha._GACHAS_CACHE.items():
+                    if ge.findtext("KeyItem") == key_item_id and ge.get("Permanent") == "true":
+                        gacha_id = gid
+                        gacha_el = ge
+                        break
+                if gacha_el is None:
+                    for gid, ge in gacha._GACHAS_CACHE.items():
+                        if ge.findtext("KeyItem") == key_item_id:
+                            gacha_id = gid
+                            gacha_el = ge
+                            break
         
         if gacha_el is not None:
             # It's a roll!
