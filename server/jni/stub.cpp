@@ -413,23 +413,15 @@ static int http_get_pending_once(const char* host, const char* port, char* buf, 
             if (eol) *eol = 0;
             LOGI("http_get_pending: following redirect to %s", loc);
 
-            // Parse redirect URL: downgrade https:// to http://, use port 8080
+            // Always keep the ORIGINAL host — the Location header may point at
+            // a domain (e.g. kingbugcastle.id.vn) that goes through Cloudflare,
+            // which would redirect HTTP→HTTPS again in an infinite loop.
+            // Downgrade https→http, use port 8080 for direct origin access.
             const char* rport = "8080";
-            if (strncasecmp(loc, "https://", 8) == 0) {
-                loc += 8;  // skip scheme -> direct to origin on port 8080
-                rport = "8080";
-            } else if (strncasecmp(loc, "http://", 7) == 0) {
-                loc += 7;
-                rport = port;  // keep original port
+            if (strncasecmp(loc, "http://", 7) == 0) {
+                rport = port;  // already http: keep original port
             }
-            // Extract host (up to / or : or end)
-            static char rhostbuf[128];
-            int i = 0;
-            while (loc[i] && loc[i] != '/' && loc[i] != ':' && i < (int)sizeof(rhostbuf) - 1)
-                rhostbuf[i] = loc[i], i++;
-            rhostbuf[i] = 0;
-
-            return http_get_pending_once(rhostbuf, rport, buf, buflen);
+            return http_get_pending_once(host, rport, buf, buflen);
         }
     }
 
