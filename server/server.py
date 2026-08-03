@@ -86,6 +86,9 @@ import config
 ROUTE_MODELS = config.load_route_models()
 STATE_DIR.mkdir(parents=True, exist_ok=True)
 
+# Player level cap — client Constants.PlayerMaxLevel = 100
+MAX_PLAYER_LEVEL = 100
+
 # Player state lives in state/players.db (SQLite, WAL). The old JSON files are
 # imported once and then left alone as a cold backup - they are NOT read again.
 _migrated = playerdb.migrate_from_json(STATE_DIR)
@@ -700,8 +703,8 @@ def r_game_complete(body, st):
         # tower, so without this hook every tower stays on floor 0 forever.
         babel_rewards = _babel_clear(st, theme, int(stage))
     if st.get("exp", 0) >= gc["expPerLevel"]:
-        st["level"] += st["exp"] // gc["expPerLevel"]
-        st["exp"] = st["exp"] % gc["expPerLevel"]
+        st["level"] = min(MAX_PLAYER_LEVEL, st["level"] + st["exp"] // gc["expPerLevel"])
+        st["exp"] = st["exp"] % gc["expPerLevel"] if st["level"] < MAX_PLAYER_LEVEL else 0
     save_state(st)
     out = {"addGold": add_gold, "addExp": add_exp,
            "playerGold": st["gold"], "playerLevel": st["level"], "playerExp": st["exp"]}
@@ -2633,6 +2636,16 @@ def _grant_reward(st, rt, rid, amt):
         arts = st.setdefault("artifacts", [])
         new_id = max((t.get("id", 0) for t in arts), default=0) + 1
         arts.append(make_artifact(new_id, rid))
+    elif rt == "SkinToken" and rid:
+        # Skin tokens are inventory item 2001
+        inv = st.setdefault("inventory", {"itemIds": [], "counts": []})
+        ids = inv.setdefault("itemIds", [])
+        cnts = inv.setdefault("counts", [])
+        if rid in ids:
+            cnts[ids.index(rid)] += (amt or 1)
+        else:
+            ids.append(rid)
+            cnts.append(amt or 1)
 
 # ── Admin, Inbox, Direct routes ──
 # Registered before ROUTE_MODELS so they take priority over the generic dispatcher.

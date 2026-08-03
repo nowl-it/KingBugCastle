@@ -9,6 +9,7 @@ _GACHAS_CACHE = None
 _UNITS_CACHE = None
 _TREASURE_CACHE = None
 _ARTIFACT_CACHE = None
+_SKIN_TOKEN_ID = 2001
 
 def _int(el, tag, default=0):
     val = el.findtext(tag)
@@ -85,6 +86,11 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML):
     gacha_el = _get_gacha(gacha_id, xml_dir)
     if gacha_el is None:
         return []
+
+    # Pity tracking: increment stack, return it for the buy response
+    stacks = st.setdefault("gachaStacks", {})
+    stack_key = str(gacha_id)
+    stacks[stack_key] = stacks.get(stack_key, 0) + amount
         
     results = []
     result_pool = []
@@ -164,7 +170,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML):
             if type_str == "Unit":
                 count = 1
             elif type_str == "Gold":
-                item_id = 0 # Gold has no item ID usually
+                item_id = 0
             elif type_str == "Treasure":
                 t_cache = _get_treasures(xml_dir)
                 r_pool = t_cache.get(chosen.get("rarity", "Common")) or t_cache["Common"]
@@ -179,14 +185,23 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML):
                     k = f"{ft}_{lv}"
                     a_pool = a_cache.get(k) or a_cache["all"]
                     item_id = random.choice(a_pool)
+            elif type_str == "SkinToken":
+                item_id = _SKIN_TOKEN_ID
+            elif type_str in ("Skin_Grade", "MapSkin_Grade", "LoginSkin_Grade"):
+                # Grade results -> convert to SkinToken grants
+                grade = int(chosen.get("id", 0)) if chosen.get("id") is not None else 0
+                token_amounts = {0: 5, 1: 10, 2: 20, 3: 50}
+                count = token_amounts.get(grade, 5)
+                item_id = _SKIN_TOKEN_ID
+                type_str = "SkinToken"
+            elif type_str == "UnitExp":
+                type_str = "UnitSoul"
 
             gacha_list.append({
                 "type": type_str,
                 "unitId": item_id,
                 "count": count,
                 "isNew": True,
-                "gachaCount": 0,
-                "mileageAmount": 0
             })
 
         gacha_collections.append({

@@ -504,7 +504,7 @@ async def api_hero_remove(pid: str, unit_id: int):
 
 
 def _new_card(unit_id, level=30, soul=999):
-    return {"unitId": int(unit_id), "level": level, "exp": 0, "potentialTier": 1,
+    return {"unitId": int(unit_id), "level": level, "exp": 0, "potentialTier": 0,
             "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
             "randomSkinApply": False, "soul": soul}
 
