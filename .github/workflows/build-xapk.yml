@@ -7,6 +7,10 @@ on:
         description: "Server host baked into the APK (IP or domain)"
         required: false
         default: "kingbugcastle.id.vn"
+      glogin_poll_host:
+        description: "Host for native glogin poller (IP, bypasses Cloudflare). Defaults to share_host"
+        required: false
+        default: ""
       tag:
         description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v171.1.00); if it already exists a timestamp suffix is appended"
         required: false
@@ -57,6 +61,7 @@ jobs:
       - name: Build XAPK Mod
         env:
           SHARE_HOST: ${{ github.event.inputs.share_host }}
+          GLOGIN_POLL_HOST: ${{ github.event.inputs.glogin_poll_host }}
           KGC_APK_SRC: xapk_extracted_v1711
         run: |
           python3 server/build_v171_private.py --share

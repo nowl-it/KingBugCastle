@@ -41,7 +41,7 @@ NATIVE_IL2CPP = IL2CPP_DEC == _NATIVE
 SHARE_HOST = os.environ.get("SHARE_HOST", "127.0.0.1")
 # Poll host for the native poller (follows HTTP redirects). Defaults to SHARE_HOST.
 # The poller handles Cloudflare's HTTP->HTTPS redirect by downgrading to HTTP on port8080.
-GLOGIN_POLL_HOST = os.environ.get("GLOGIN_POLL_HOST", SHARE_HOST)
+GLOGIN_POLL_HOST = os.environ.get("GLOGIN_POLL_HOST") or SHARE_HOST
 # Scheme for the browser URL: "http" for local (no TLS cert needed), "https" for public.
 GLOGIN_SCHEME = os.environ.get("GLOGIN_SCHEME", "https" if SHARE_HOST != "127.0.0.1" else "http")
 
