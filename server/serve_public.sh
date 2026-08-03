@@ -23,6 +23,8 @@ TLS_PORT="${TLS_PORT:-8443}"
 
 # Inject real Google OAuth client for public testing. Google requires a HTTPS domain.
 export GLOGIN_PUBLIC_URL="https://kingbugcastle.id.vn"
+# Fixed state secret so OAuth state tokens survive server restarts.
+export GLOGIN_STATE_SECRET="${GLOGIN_STATE_SECRET:-a3f7c91e8b2d4f6a0e5c8b3d7f9a2e4c}"
 
 
 # Prefer the repo venv, same as run.sh.
