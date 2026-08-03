@@ -24,7 +24,7 @@
     
     <!-- 보구 소환 아이콘용 가챠 (3999: 상시 소환) -->
     <!-- 4000 ~ 4012는 레거시 -->
-    <Gacha ID="102" Children="3999,5041">
+    <Gacha ID="102" Children="3999,5052">
         <Name>TreasureBox</Name>
         <GachaIcon>Theme_Progress_Bar_Icon_14</GachaIcon>
         <Permanent>true</Permanent>
@@ -7467,6 +7467,9 @@
         <Type>TreasureGacha</Type>
         <LevelLimit>LevelLimit_Treasure</LevelLimit>
 
+        <StartDate>20260212</StartDate>
+        <EndDate>20260225</EndDate>
+
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
 
         <BackgroundPrefab>GachaShopPanelBG_Treasure</BackgroundPrefab>
@@ -8003,9 +8006,6 @@
 
         <Type>TreasureGacha</Type>
         <LevelLimit>LevelLimit_Treasure</LevelLimit>
-
-        <StartDate>20260730</StartDate>
-        <EndDate>20260812</EndDate>
 
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
 
