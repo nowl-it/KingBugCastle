@@ -56,8 +56,10 @@ def r_shop(body, st):
     base["playerGold"] = st.get("gold", 0)
     base["playerCash"] = st.get("cash", 0)
     base["playerHeart"] = st.get("heart", 0)
-    # gachaKeys in the static base is always [] - carry the player's real key counts
-    # so the banner tabs keep showing what they own after the buy screen closes.
+    gss = st.get("gachaStacks", {})
+    base["gachaStacks"] = [{"gachaId": int(k), "stack": v}
+                           for k, v in gss.items() if str(k).isdigit()]
+    base["availableTimeLimitGachas"] = [2007, 3999, 5052, 7000]
     base["gachaKeys"] = [{"id": int(k), "count": v}
                          for k, v in st.get("gachaKeys", {}).items()]
     return base
@@ -257,11 +259,13 @@ def _shop_buy(body, st):
             # Now roll the gacha
             gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR, item_id)
             
-            # Grant the rewards to the player's state
+            # Grant the rewards to the player's state & populate gachaRewardResponseData
             for pull in gachas_result:
                 for rg in pull["gacha"]:
                     rt = rg["type"]
                     uid = rg["unitId"]
+                    cnt = rg["count"]
+                    rewards.append({"type": rt, "id": uid, "count": cnt})
                     if rt == "UnitExp":
                         rt = "UnitSoul"
                     elif rt == "UnitSoulItem":
@@ -272,7 +276,7 @@ def _shop_buy(body, st):
                             uid = 202
                         else:
                             uid = 200
-                    srv._grant_reward(st, rt, uid, rg["count"])
+                    srv._grant_reward(st, rt, uid, cnt)
         else:
             # Not a banner roll, just buying a scroll (e.g. from event shop)
             total = keys.get(str(item_id), 0) + amount

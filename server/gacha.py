@@ -69,7 +69,9 @@ def _get_treasures(xml_dir):
         tree = ET.parse(xml_dir / "Treasures.xml")
         for t in tree.findall("Treasure"):
             tid = int(t.get("ID", 0))
-            if tid > 0:
+            cg = t.findtext("CanGacha")
+            mv = int(t.findtext("MinVersion") or 0)
+            if tid > 0 and cg != "false" and mv <= 171100:
                 r = t.findtext("Rarity")
                 if r in _TREASURE_CACHE:
                     _TREASURE_CACHE[r].append(tid)
