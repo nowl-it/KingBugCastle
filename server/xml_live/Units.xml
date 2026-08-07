@@ -8100,10 +8100,10 @@
         </Effect>
 
 		<Overcome ReqOvercome="1" TargetSkill="10800">
-			<DescAuraDamagePer>2</DescAuraDamagePer>
+			<DescAuraDamagePer>1</DescAuraDamagePer>
 		</Overcome>
 		<Overcome ReqOvercome="5" TargetSkill="10800">
-			<DescAuraDamagePer>2</DescAuraDamagePer>
+			<DescAuraDamagePer>1</DescAuraDamagePer>
 		</Overcome>
 
         <!-- 가하는 피해 1배 -->
@@ -35240,7 +35240,7 @@
 
 		<Boss>true</Boss>
 		<CanIce>false</CanIce>
-		<CCRatio>0</CCRatio>
+		<CCRatio>-100</CCRatio>
 		<Theme>4100</Theme>
 		<Value>0</Value>
 		<Executable>false</Executable>

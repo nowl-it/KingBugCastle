@@ -1713,7 +1713,7 @@
 		<NameComment>균열 장비 신비한 가루</NameComment>
 		<Name>InventoryItemName_8000</Name>
 		<AdminToolOnlyName>차원의 파편</AdminToolOnlyName>
-		<Sprite>InventoryItem_8000</Sprite>
+		<Sprite>MiniItem_8000</Sprite>
 		<Desc>InventoryItemDesc_8000</Desc>
 		
 		<ItemTooltipType>Consumable</ItemTooltipType>
