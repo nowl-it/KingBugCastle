@@ -59,6 +59,7 @@
   "/player/early-access-mode-code":       {"response": "ResponseModel", "_method": "CheckEarlyAccessModeCode"},
   "/player/exception":                    {"response": "ResponseModel", "_method": "Exception"},
   "/player/get-login-scene-illust-data":  {"response": "LoginSceneIllustDataResponseModel", "_method": "GetLoginSceneIllustData"},
+  "/auth":                                {"response": "AuthResponseModel", "_method": "Auth"},
   "/player/logClickNotice":               {"response": "ResponseModel", "_method": "LogClickNotice"},
   "/player/other":                        {"response": "OtherPlayerDataResponseModel", "_method": "GetOtherPlayerInfo"},
   "/player/xcdReport":                    {"response": "AuthResponseModel", "_method": "XigncodeValidCheck"},

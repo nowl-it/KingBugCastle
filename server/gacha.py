@@ -127,7 +127,13 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
     key_item = gacha_el.findtext("KeyItem")
     if key_item:
         keys_to_update.add(str(key_item))
-    
+        
+    gacha_ceil = gacha_el.find("GachaCeil")
+    if gacha_ceil is not None:
+        ceil_key = gacha_ceil.get("Key")
+        if ceil_key:
+            keys_to_update.add(ceil_key)
+
     gtype = gacha_el.findtext("Type") or ""
     if "Treasure" in gtype or parent_id == "102":
         keys_to_update.update({"3999", "370", "371", "102", "131000", "121000", "231052"})
@@ -184,7 +190,8 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                     "min": int(r.get("Min", 1)),
                     "max": int(r.get("Max", r.get("Min", 1))),
                     "id": rid,
-                    "rarity": r.get("Rarity")
+                    "rarity": r.get("Rarity"),
+                    "is_reward": r.get("IsReward") == "true"
                 })
             
     if not result_pool:
@@ -213,6 +220,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
             num_rolls = random.randint(int(uc.get("Min", 3)), int(uc.get("Max", 3)))
             
         gacha_list = []
+        reward_gacha_list = []
         for _ in range(num_rolls):
             r = random.uniform(0, total_weight)
             cum = 0
@@ -224,13 +232,15 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                     break
 
             hero_id = random.choice(all_heroes)
-            count = random.randint(chosen["min"], chosen["max"])
+            count = random.randint(chosen.get("min", 1), chosen.get("max", 1))
             type_str = chosen["type"]
+            is_reward = chosen.get("is_reward", False)
 
+            pull_res = None
             if type_str == "Unit":
-                gacha_list.append({"type": "Unit", "unitId": hero_id, "count": 1, "isNew": True})
+                pull_res = {"type": "Unit", "unitId": hero_id, "count": 1, "isNew": True}
             elif type_str == "Gold":
-                gacha_list.append({"type": "Gold", "unitId": 0, "count": count, "isNew": True})
+                pull_res = {"type": "Gold", "unitId": 0, "count": count, "isNew": True}
             elif type_str in ("Treasure", "TreasureGacha"):
                 rarity = chosen.get("rarity", "Common")
                 t_cache = _get_treasures(xml_dir)
@@ -239,7 +249,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                 else:
                     r_pool = t_cache.get(rarity) or t_cache["Common"]
                     tid = random.choice(r_pool)
-                gacha_list.append({"type": "Treasure", "unitId": tid, "count": 1, "isNew": True})
+                pull_res = {"type": "Treasure", "unitId": tid, "count": 1, "isNew": True}
             elif type_str in ("Artifact", "ArtifactGacha"):
                 a_cache = _get_artifacts(xml_dir)
                 if chosen.get("art_id"):
@@ -250,39 +260,82 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                     k = f"{ft}_{lv}" if ft and lv else None
                     a_pool = (a_cache.get(k) if k else None) or a_cache.get("all") or [501]
                     aid = random.choice(a_pool)
-                gacha_list.append({"type": "Artifact", "unitId": aid, "count": 1, "isNew": True})
+                pull_res = {"type": "Artifact", "unitId": aid, "count": 1, "isNew": True}
             elif type_str in ("SkinToken",):
-                gacha_list.append({"type": "SkinToken", "unitId": _SKIN_TOKEN_ID, "count": count, "isNew": True})
+                pull_res = {"type": "Item", "unitId": 2001, "count": count, "isNew": True}
             elif type_str == "Skin_Grade":
-                grade = chosen.get("id", 0)
-                skins_cache = _get_skins(xml_dir)
-                skin_pool = skins_cache.get(grade) or skins_cache.get("all")
-                sid = random.choice(skin_pool)
-                owned_skins = st.get("skins", [])
-                if sid in owned_skins:
-                    gacha_list.append({"type": "SkinToken", "unitId": _SKIN_TOKEN_ID, "count": 20, "isNew": False})
+                grade = chosen.get("id", "0")
+                import xml.etree.ElementTree as ET
+                import pathlib
+                cache = getattr(gacha, "_SKIN_GRADE_CACHE", None)
+                if cache is None:
+                    cache = {}
+                    try:
+                        tree = ET.parse(pathlib.Path(xml_dir) / "Skins.xml")
+                        for skin in tree.findall("Skin"):
+                            g = skin.findtext("Grade")
+                            if g is not None:
+                                cache.setdefault(g, []).append(int(skin.get("ID")))
+                        gacha._SKIN_GRADE_CACHE = cache
+                    except:
+                        pass
+                pool = cache.get(str(grade))
+                if pool:
+                    import random
+                    sid = random.choice(pool)
+                    is_new = sid not in st.get("skins", [])
+                    pull_res = {"type": "Skin", "unitId": sid, "count": 1, "isNew": is_new}
                 else:
-                    gacha_list.append({"type": "Skin", "unitId": sid, "count": 1, "isNew": True})
+                    pull_res = {"type": "SkinToken", "unitId": 0, "count": 5, "isNew": True}
             elif type_str == "MapSkin_Grade":
                 grade = chosen.get("id", 0)
                 map_skins_cache = _get_map_skins(xml_dir)
                 map_skin_pool = map_skins_cache.get(grade) or map_skins_cache.get("all")
                 msid = random.choice(map_skin_pool)
-                gacha_list.append({"type": "MapSkin", "unitId": msid, "count": 1, "isNew": True})
+                is_new = msid not in st.get("mapSkins", [])
+                pull_res = {"type": "MapSkin", "unitId": msid, "count": 1, "isNew": is_new}
             elif type_str == "LoginSkin_Grade":
-                gacha_list.append({"type": "SkinToken", "unitId": _SKIN_TOKEN_ID, "count": 15, "isNew": True})
+                pull_res = {"type": "Item", "unitId": _SKIN_TOKEN_ID, "count": 15, "isNew": True}
             elif type_str == "UnitExp":
-                gacha_list.append({"type": "UnitSoul", "unitId": hero_id, "count": count, "isNew": True})
+                pull_res = {"type": "UnitSoul", "unitId": hero_id, "count": count, "isNew": True}
             elif type_str == "UnitSoul":
-                gacha_list.append({"type": "UnitSoul", "unitId": hero_id, "count": count, "isNew": True})
+                pull_res = {"type": "UnitSoul", "unitId": hero_id, "count": count, "isNew": True}
             elif type_str == "UnitSoulItem":
-                gacha_list.append({"type": "UnitSoulItem", "unitId": hero_id, "count": count, "isNew": True})
+                pull_res = {"type": "UnitSoulItem", "unitId": hero_id, "count": count, "isNew": True}
             else:
-                gacha_list.append({"type": type_str, "unitId": hero_id, "count": count, "isNew": True})
+                pull_res = {"type": type_str, "unitId": hero_id, "count": count, "isNew": True}
+
+            if pull_res:
+                if is_reward:
+                    _WIRE_TYPE = {"Item": "InventoryItem", "Unit": "Card", "UnitSoul": "CardSoul"}
+                    # Convert pull_res to RewardGachaResult format which contains originReward of type RewardResponseData
+                    reward = {
+                        "originReward": {
+                            "type": _WIRE_TYPE.get(pull_res["type"], pull_res["type"]),
+                            "id": pull_res["unitId"],
+                            "count": pull_res.get("count", 1)
+                        },
+                        "replaceTo": None
+                    }
+                    if pull_res.get("type") == "Skin" and not pull_res.get("isNew"):
+                        reward["replaceTo"] = {
+                            "type": "InventoryItem",
+                            "id": 2001,
+                            "count": 5
+                        }
+                    elif pull_res.get("type") == "MapSkin" and not pull_res.get("isNew"):
+                        reward["replaceTo"] = {
+                            "type": "InventoryItem",
+                            "id": 2011,
+                            "count": 5
+                        }
+                    reward_gacha_list.append(reward)
+                else:
+                    gacha_list.append(pull_res)
 
         gacha_collections.append({
             "gacha": gacha_list,
-            "rewardGacha": [],
+            "rewardGacha": reward_gacha_list,
             "upgrade": False
         })
         

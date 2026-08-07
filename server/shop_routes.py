@@ -34,6 +34,27 @@ def _gacha_keys_models(st):
     return [{"id": int(k), "count": v} for k, v in sorted(_gacha_keys(st).items())]
 
 
+def _build_gacha_ceil(gacha_el, st):
+    """Build BuyResponseModel.gachaCeil dict: {poolId_or_gachaId: current_stack}."""
+    gss = st.get("gachaStacks", {})
+    ceil_dict = {str(k): int(v) for k, v in gss.items() if str(k).isdigit()}
+    import xml.etree.ElementTree as ET
+    import pathlib
+    try:
+        tree = ET.parse(pathlib.Path(XML_DIR) / "Gachas.xml")
+        for g in tree.findall("Gacha"):
+            gid = g.get("ID")
+            for ce in g.findall("GachaCeil"):
+                key = ce.get("Key")
+                if key:
+                    pool_id = ce.get("PoolID") or gid
+                    if pool_id:
+                        ceil_dict[key] = gss.get(str(pool_id), 0)
+    except Exception as e:
+        pass
+    return ceil_dict
+
+
 def _shop_buys(st):
     """itemId (as a string key, so it survives a JSON round-trip) -> times bought."""
     return st.setdefault("shopBuys", {})
@@ -106,18 +127,34 @@ def _shop_buy(body, st):
 
         gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR, item_id)
         for pull in gachas_result:
-            for rg in pull["gacha"]:
+            # Grant main gacha pulls
+            for rg in pull.get("gacha", []):
                 rt = rg["type"]
                 uid = rg["unitId"]
                 if rt == "UnitExp":
                     rt = "UnitSoul"
-                srv._grant_reward(st, rt, uid, rg["count"])
+                srv._grant_reward(st, rt, uid, rg.get("count", 1))
+            
+            # Grant rewardGacha pulls (which use originReward schema)
+            for rg in pull.get("rewardGacha", []):
+                origin = rg.get("originReward", {})
+                if origin:
+                    rt = origin.get("type")
+                    uid = origin.get("id")
+                    if rt == "UnitExp":
+                        rt = "UnitSoul"
+                    srv._grant_reward(st, rt, uid, origin.get("count", 1))
 
         gacha_stacks = []
         gss = st.get("gachaStacks", {})
         if gss:
             for gid_str, cnt in gss.items():
-                gacha_stacks.append({"gachaId": int(gid_str), "stack": cnt})
+                if str(gid_str).isdigit():
+                    gacha_stacks.append({"gachaId": int(gid_str), "stack": cnt})
+        actual_gacha_id = gacha_id
+        if gacha_id == 103:
+            actual_gacha_id = 7000
+        gacha_stack_single = {"gachaId": actual_gacha_id, "stack": gss.get(str(actual_gacha_id), 0)} if actual_gacha_id > 0 else None
 
         return {
             "gachaRewardResponseData": srv._reward_list_data([]),
@@ -125,7 +162,12 @@ def _shop_buy(body, st):
             "soldOut": False,
             "gachas": gachas_result,
             "gachaKeys": gacha_keys,
-            "gachaStack": gacha_stacks
+            "gachaStack": gacha_stack_single,
+            "gachaStacks": gacha_stacks,
+            "gachaCeil": _build_gacha_ceil(gacha_el, st),
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "playerHeart": st.get("heart", 0),
         }
 
     buys = _shop_buys(st)
@@ -267,10 +309,11 @@ def _shop_buy(body, st):
             
             # Grant the rewards to the player's state & populate gachaRewardResponseData
             for pull in gachas_result:
-                for rg in pull["gacha"]:
+                # Add main gacha pulls
+                for rg in pull.get("gacha", []):
                     rt = rg["type"]
                     uid = rg["unitId"]
-                    cnt = rg["count"]
+                    cnt = rg.get("count", 1)
                     rewards.append({"type": rt, "id": uid, "count": cnt})
                     if rt == "UnitExp":
                         rt = "UnitSoul"
@@ -278,6 +321,21 @@ def _shop_buy(body, st):
                         rt = "Item"
                         if item_id == 301 or item_id == 302:
                             uid = 201
+
+                # Add rewardGacha pulls
+                for rg in pull.get("rewardGacha", []):
+                    origin = rg.get("originReward", {})
+                    if origin:
+                        rt = origin.get("type")
+                        uid = origin.get("id")
+                        cnt = origin.get("count", 1)
+                        rewards.append({"type": rt, "id": uid, "count": cnt})
+                        if rt == "UnitExp":
+                            rt = "UnitSoul"
+                        elif rt == "UnitSoulItem":
+                            rt = "Item"
+                            if item_id == 301 or item_id == 302:
+                                uid = 201
                         elif item_id == 303:
                             uid = 202
                         else:
@@ -291,13 +349,20 @@ def _shop_buy(body, st):
 
     # Build gachaStack (single object for BuyResponseModel) and gachaStacks (list for ShopResponseModel)
     gss = st.get("gachaStacks", {})
-    gacha_stacks = [{"gachaId": int(gid_str), "stack": cnt} for gid_str, cnt in gss.items()]
-    gacha_stack_single = {"gachaId": gacha_id, "stack": gss.get(str(gacha_id), 0)} if gacha_id > 0 else None
+    gacha_stacks = [{"gachaId": int(gid_str), "stack": cnt} for gid_str, cnt in gss.items() if str(gid_str).isdigit()]
+    actual_gacha_id = gacha_id
+    if gacha_id == 103:
+        actual_gacha_id = 7000
+    gacha_stack_single = {"gachaId": actual_gacha_id, "stack": gss.get(str(actual_gacha_id), 0)} if actual_gacha_id > 0 else None
 
     return {"gachaRewardResponseData": srv._reward_list_data(rewards),
             "inventoryItems": srv._inventory_models(st), "soldOut": False,
             "gachas": gachas_result, "gachaKeys": gacha_keys,
-            "gachaStack": gacha_stack_single, "gachaStacks": gacha_stacks}
+            "gachaStack": gacha_stack_single, "gachaStacks": gacha_stacks,
+            "gachaCeil": _build_gacha_ceil(gacha_el, st),
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "playerHeart": st.get("heart", 0)}
 
 def r_shop_refresh(body, st):
     """Refreshing the daily shop clears its per-item buy counts, which is what makes
