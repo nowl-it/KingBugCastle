@@ -354,6 +354,8 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
     with zipfile.ZipFile(apk_path, "r") as zin:
         with zipfile.ZipFile(tmp, "w") as zout:
             for item in zin.infolist():
+                if item.filename == "lib/arm64-v8a/libil2cpp.so":
+                    continue
                 data = zin.read(item.filename)
                 
                 new_item = zipfile.ZipInfo(item.filename, item.date_time)

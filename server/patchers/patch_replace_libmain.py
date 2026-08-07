@@ -40,8 +40,10 @@ if not WRAPPER.exists() or os.environ.get("KGC_REBUILD_NATIVE"):
     except subprocess.CalledProcessError:
         print("ERROR: NDK build failed"); sys.exit(1)
 
-orig_size = 0
 with zipfile.ZipFile(APK, "r") as z:
+    if "lib/arm64-v8a/libmain_real.so" in z.namelist():
+        print(f"[+] libmain wrapper already installed in {APK.name}, skipping patch_replace_libmain.")
+        sys.exit(0)
     info = z.getinfo("lib/arm64-v8a/libmain.so")
     orig_size = info.file_size
 
