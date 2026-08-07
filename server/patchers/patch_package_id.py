@@ -16,6 +16,10 @@ try:
     
     pat = re.compile(r'(?<!android:name=")(?<!android:value=")' + re.escape(OLD))
     hits = len(pat.findall(txt))
+    if hits == 0 and NEW in txt:
+        print(f"[patch_package_id] {NEW!r} is already present in {manifest.name}, skipping package ID replacement.")
+        shutil.rmtree(work, ignore_errors=True)
+        sys.exit(0)
     assert hits >= 1, f"{OLD!r} not found (outside class refs) in {manifest}"
     txt = pat.sub(NEW, txt)
     
