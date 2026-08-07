@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Check, Plus, Trash2, Sparkles, Save, UserRound } from "lucide-react"
+import { Check, Plus, Trash2, Sparkles, Save, UserRound, Loader2 } from "lucide-react"
 
 const ROLE_STYLE: Record<string, { badge: string; avatar: string; label: string }> = {
   "Warrior": { badge: "bg-orange-500/15 text-orange-400 border-orange-500/30", avatar: "from-orange-500 to-rose-600", label: "W" },
@@ -45,7 +45,7 @@ function Avatar({ name, role, unitId, size = "h-12 w-12 text-lg" }: { name: stri
 
 export default function HeroesPage() {
   const { selectedId } = usePlayerSelection()
-  const { data, mutate } = useHeroes(selectedId || undefined)
+  const { data, mutate, isLoading } = useHeroes(selectedId || undefined)
 
   return (
     <div className="space-y-6">
@@ -55,6 +55,14 @@ export default function HeroesPage() {
       </div>
       <PlayerBar />
       {!selectedId && <Card><CardContent className="py-16 text-center text-muted-foreground">Select a player above.</CardContent></Card>}
+      {selectedId && isLoading && !data && (
+        <Card>
+          <CardContent className="py-16 flex flex-col items-center justify-center gap-3 text-muted-foreground">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <p className="text-sm font-medium">Loading heroes...</p>
+          </CardContent>
+        </Card>
+      )}
       {selectedId && data && (
         <>
           <OwnedGrid data={data} onMutate={mutate} />

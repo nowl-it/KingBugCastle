@@ -304,6 +304,11 @@ GetStatFunc getStat = nullptr;
 // reaches the server through the same adb-reverse loopback the game uses.
 // For public XAPK builds, the python build script binary-patches g_kgc_glogin_host.
 
+static char g_poll_id[160] = {0};
+static volatile bool g_have_id = false;      // set by poll thread, read by Update
+static bool g_login_done = false;
+void* login_poll_thread(void* arg);
+
 typedef void (*GoogleLoginFunc)(void* _this, void* methodInfo);
 GoogleLoginFunc origGoogleLogin = nullptr;   // trampoline; unused - we skip GPGS entirely
 void* g_openUrlMethod = nullptr;             // UnityEngine.Application::OpenURL(string)
@@ -312,6 +317,11 @@ void HookedGoogleLogin(void* _this, void* methodInfo) {
     char KGC_GLOGIN_URL[256];
     snprintf(KGC_GLOGIN_URL, sizeof(KGC_GLOGIN_URL), "%s://%s/glogin", g_kgc_glogin_scheme, g_kgc_glogin_host);
     LOGI("Google button -> opening web login %s", KGC_GLOGIN_URL);
+    g_have_id = false;
+    g_login_done = false;
+    g_poll_id[0] = 0;
+    pthread_t pt;
+    pthread_create(&pt, nullptr, login_poll_thread, nullptr);
     if (g_openUrlMethod && str_new && rt_invoke) {
         void* url = str_new(KGC_GLOGIN_URL);
         void* params[1] = { url };
@@ -335,9 +345,6 @@ void HookedGoogleLogin(void* _this, void* methodInfo) {
 typedef void (*SLUpdateFunc)(void* _this, void* mi);
 SLUpdateFunc origSceneLoginUpdate = nullptr;
 void* g_authMethod = nullptr;                // Scene_Login::Auth(string id) - full login
-static char g_poll_id[160] = {0};
-static volatile bool g_have_id = false;      // set by poll thread, read by Update
-static bool g_login_done = false;
 
 static void write_abs_jump(void* at, void* dest);   // defined in the inline-hook section below
 
@@ -462,6 +469,12 @@ void HookedSceneLoginUpdate(void* _this, void* mi) {
     if (++frames < 120) return;
     if (g_login_done || !g_have_id || !g_authMethod || !str_new || !rt_invoke) return;
     LOGI("web login: Scene_Login.Auth(\"%s\") - full handshake", g_poll_id);
+    FILE* f = fopen("/data/data/com.nowl.castle/guest_id.txt", "w");
+    if (f) {
+        fputs(g_poll_id, f);
+        fclose(f);
+        LOGI("web login: persisted account ID '%s' to guest_id.txt", g_poll_id);
+    }
     void* idstr = str_new(g_poll_id);
     void* params[1] = { idstr };
     void* exc = nullptr;

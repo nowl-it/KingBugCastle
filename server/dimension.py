@@ -61,12 +61,18 @@ def total_cost(xml_dir=DEFAULT_XML):
     return sum(_consts(xml_dir)["cost"].values())
 
 
+_dimension_ids_cache = {}
+
+
 def dimension_unit_ids(xml_dir=DEFAULT_XML):
     """Every unit flagged IsDimensionUnit, including the 200xxxxx enemy variants -
     the flag is what the panel keys on, not the id range."""
-    root = ET.parse(Path(xml_dir) / "Units.xml").getroot()
-    return {int(u.get("ID")) for u in root
-            if u.get("ID") and (u.findtext("IsDimensionUnit") or "").strip().lower() == "true"}
+    key = str(xml_dir)
+    if key not in _dimension_ids_cache:
+        root = ET.parse(Path(xml_dir) / "Units.xml").getroot()
+        _dimension_ids_cache[key] = {int(u.get("ID")) for u in root
+                                     if u.get("ID") and (u.findtext("IsDimensionUnit") or "").strip().lower() == "true"}
+    return _dimension_ids_cache[key]
 
 
 def model(unit_id, level=0, gauge=0, overcome=0, xml_dir=DEFAULT_XML):

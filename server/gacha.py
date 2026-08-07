@@ -171,21 +171,24 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML):
                 count = 1
             elif type_str == "Gold":
                 item_id = 0
-            elif type_str == "Treasure":
+            elif type_str in ("Treasure", "TreasureGacha"):
+                type_str = "Treasure"
                 t_cache = _get_treasures(xml_dir)
                 r_pool = t_cache.get(chosen.get("rarity", "Common")) or t_cache["Common"]
                 item_id = random.choice(r_pool)
-            elif type_str == "Artifact":
+            elif type_str in ("Artifact", "ArtifactGacha"):
+                type_str = "Artifact"
                 a_cache = _get_artifacts(xml_dir)
                 if chosen.get("art_id"):
                     item_id = int(chosen["art_id"])
                 else:
                     ft = chosen.get("from_type")
                     lv = chosen.get("level")
-                    k = f"{ft}_{lv}"
-                    a_pool = a_cache.get(k) or a_cache["all"]
+                    k = f"{ft}_{lv}" if ft and lv else None
+                    a_pool = (a_cache.get(k) if k else None) or a_cache.get("all") or [501]
                     item_id = random.choice(a_pool)
-            elif type_str == "SkinToken":
+            elif type_str in ("SkinToken", "SkinGacha"):
+                type_str = "SkinToken"
                 item_id = _SKIN_TOKEN_ID
             elif type_str in ("Skin_Grade", "MapSkin_Grade", "LoginSkin_Grade"):
                 # Grade results -> convert to SkinToken grants

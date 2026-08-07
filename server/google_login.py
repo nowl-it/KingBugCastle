@@ -267,20 +267,28 @@ def _get_and_clear_pending(ip: str):
         return acc
     
     # Fallback for IPv4 vs IPv6 mismatch (e.g. Chrome uses IPv6 via Cloudflare, Unity uses IPv4).
-    # If the strict IP hash file is not found, look for ANY pending file.
-    # Since this is a private server, we just pick the most recent one.
+    # If the strict IP hash file is not found, look for ANY recent pending file (<=60s).
     state_dir = pathlib.Path(__file__).parent / "state"
     pending_files = list(state_dir.glob(".glogin_pending_*"))
     if pending_files:
         # Sort by modification time, newest first
         pending_files.sort(key=lambda p: p.stat().st_mtime, reverse=True)
-        fallback_file = pending_files[0]
-        acc = fallback_file.read_text().strip()
-        try:
-            fallback_file.unlink()
-        except OSError:
-            pass
-        return acc
+        now = time.time()
+        for fallback_file in pending_files:
+            mtime = fallback_file.stat().st_mtime
+            if now - mtime > 60:
+                try:
+                    fallback_file.unlink()
+                except OSError:
+                    pass
+                continue
+            acc = fallback_file.read_text().strip()
+            try:
+                fallback_file.unlink()
+            except OSError:
+                pass
+            if acc:
+                return acc
         
     # Super fallback for local development split-brain:
     # If Chrome on the phone uses Secure DNS, it bypasses the hosts file and completes 
