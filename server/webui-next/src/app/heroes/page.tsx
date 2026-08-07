@@ -120,6 +120,7 @@ function OwnedGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
                     <div className="flex items-center gap-2">
                       <span className="truncate text-sm font-semibold">{h.name}</span>
                       <Badge className={`shrink-0 ${style.badge}`} variant="outline">{h.role}</Badge>
+                      {h.isDimensionUnit && <Badge className="shrink-0 bg-violet-500/15 text-violet-400 border-violet-500/30" variant="outline">Dim</Badge>}
                     </div>
                     <div className="text-xs text-muted-foreground font-mono">#{h.unitId} · {h.skins} skins</div>
                   </div>
@@ -129,6 +130,12 @@ function OwnedGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
                   {field(h, "exp", "w-20")}
                   {field(h, "soul")}
                   {field(h, "potentialTier", "w-24")}
+                  {h.isDimensionUnit && (
+                    <>
+                      {field(h, "overcome", "w-16")}
+                      {field(h, "dimensionLevel", "w-16")}
+                    </>
+                  )}
                   <div className="ml-auto flex gap-1">
                     <Button variant="outline" size="icon" className="h-8 w-8" title="Save" onClick={() => save(h)}><Save className="h-3.5 w-3.5" /></Button>
                     <Button variant="outline" size="icon" className="h-8 w-8 text-destructive" title="Remove" onClick={() => remove(h)}><Trash2 className="h-3.5 w-3.5" /></Button>
@@ -147,6 +154,8 @@ function MissingGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
   const { selectedId } = usePlayerSelection()
   const [level, setLevel] = useState("30")
   const [soul, setSoul] = useState("999")
+  const [overcome, setOvercome] = useState("0")
+  const [dimLevel, setDimLevel] = useState("0")
 
   const grant = async (h: any) => {
     await runMutation(`/api/player/${encodeURIComponent(selectedId!)}/heroes/${h.unitId}`, { method: "POST" }, `${h.name} granted`)
@@ -156,7 +165,7 @@ function MissingGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
   const grantAll = async () => {
     await runMutation(`/api/player/${encodeURIComponent(selectedId!)}/heroes-grant-all`, {
       method: "POST",
-      body: JSON.stringify({ level: Number(level), soul: Number(soul) }),
+      body: JSON.stringify({ level: Number(level), soul: Number(soul), overcome: Number(overcome), dimensionLevel: Number(dimLevel) }),
     }, "All missing heroes granted")
     onMutate()
   }
@@ -180,6 +189,14 @@ function MissingGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
             <label className="block text-[10px] uppercase tracking-wide text-muted-foreground">Soul</label>
             <Input type="number" className="h-8 w-20 font-mono" value={soul} onChange={(e) => setSoul(e.target.value)} />
           </div>
+          <div className="space-y-0.5">
+            <label className="block text-[10px] uppercase tracking-wide text-muted-foreground">Overcome</label>
+            <Input type="number" className="h-8 w-16 font-mono" value={overcome} onChange={(e) => setOvercome(e.target.value)} />
+          </div>
+          <div className="space-y-0.5">
+            <label className="block text-[10px] uppercase tracking-wide text-muted-foreground">Dim Level</label>
+            <Input type="number" className="h-8 w-16 font-mono" value={dimLevel} onChange={(e) => setDimLevel(e.target.value)} />
+          </div>
           <Button size="sm" onClick={grantAll}><Sparkles className="h-3.5 w-3.5 mr-1" /> Grant all</Button>
         </div>
       </div>
@@ -194,6 +211,7 @@ function MissingGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
                   <div className="flex items-center gap-2">
                     <span className="truncate text-sm font-semibold">{h.name}</span>
                     <Badge className={`shrink-0 ${style.badge}`} variant="outline">{h.role}</Badge>
+                    {h.isDimensionUnit && <Badge className="shrink-0 bg-violet-500/15 text-violet-400 border-violet-500/30" variant="outline">Dim</Badge>}
                   </div>
                   <div className="text-xs text-muted-foreground font-mono">#{h.unitId}</div>
                 </div>

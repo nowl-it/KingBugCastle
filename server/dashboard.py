@@ -31,6 +31,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 
 import gamedata
+import dimension
 import playerdb
 
 app = FastAPI(title="KGC Dashboard")
@@ -435,7 +436,8 @@ async def api_player_macro(pid: str, body: dict):
 
 
 # --- heroes (cards) ---------------------------------------------------------
-HERO_FIELDS = {"level": int, "exp": int, "potentialTier": int, "soul": int, "currentSkin": int}
+HERO_FIELDS = {"level": int, "exp": int, "potentialTier": int, "soul": int,
+               "currentSkin": int, "overcome": int, "dimensionLevel": int}
 
 
 @app.get("/api/player/{pid}/heroes")
@@ -446,16 +448,20 @@ def api_heroes(pid: str):
     for key, card in cards.items():
         uid = card.get("unitId", key)
         info = gamedata.hero(uid) or {}
+        is_dim = dimension.model(uid, xml_dir=gamedata.XML_DIR) is not None
         owned.append({
             "unitId": int(uid), "name": info.get("name", f"Unit {uid}"),
-            "role": info.get("role", "Unknown"),
+            "role": info.get("role", "Unknown"), "isDimensionUnit": is_dim,
             "level": card.get("level", 0), "exp": card.get("exp", 0),
             "potentialTier": card.get("potentialTier", 0), "soul": card.get("soul", 0),
             "skins": len(card.get("skins") or []), "currentSkin": card.get("currentSkin", 0),
+            "overcome": card.get("overcome", 0),
+            "dimensionLevel": card.get("dimensionLevel", 0),
         })
     owned.sort(key=lambda h: h["unitId"])
     owned_ids = {h["unitId"] for h in owned}
-    missing = [{"unitId": h["id"], "name": h["name"], "role": h["role"]}
+    missing = [{"unitId": h["id"], "name": h["name"], "role": h["role"],
+                "isDimensionUnit": dimension.model(h["id"], xml_dir=gamedata.XML_DIR) is not None}
                for h in sorted(gamedata.HEROES.values(), key=lambda x: x["id"])
                if h["id"] not in owned_ids]
     return {"owned": owned, "missing": missing}
@@ -503,22 +509,26 @@ async def api_hero_remove(pid: str, unit_id: int):
     return {"ok": True}
 
 
-def _new_card(unit_id, level=30, soul=999):
+def _new_card(unit_id, level=30, soul=999, overcome=0, dimension_level=0):
     return {"unitId": int(unit_id), "level": level, "exp": 0, "potentialTier": 0,
             "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
-            "randomSkinApply": False, "soul": soul}
+            "randomSkinApply": False, "soul": soul,
+            "overcome": overcome, "dimensionLevel": dimension_level}
 
 
 @app.post("/api/player/{pid}/heroes-grant-all")
 async def api_heroes_grant_all(pid: str, body: dict = None):
     st = _read_state(pid)
     cards = st.setdefault("cards", {})
-    level = int((body or {}).get("level", 30))
-    soul = int((body or {}).get("soul", 999))
+    b = body or {}
+    level = int(b.get("level", 30))
+    soul = int(b.get("soul", 999))
+    overcome = int(b.get("overcome", 0))
+    dim_level = int(b.get("dimensionLevel", 0))
     added = 0
     for hid in gamedata.HEROES:
         if str(hid) not in cards:
-            cards[str(hid)] = _new_card(hid, level, soul)
+            cards[str(hid)] = _new_card(hid, level, soul, overcome, dim_level)
             added += 1
     _write_state(pid, st)
     return {"ok": True, "added": added, "total": len(cards)}
