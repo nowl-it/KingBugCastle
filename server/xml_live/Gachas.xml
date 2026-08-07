@@ -7,7 +7,7 @@
 <!--        <HideInGachaShopPanel>true</HideInGachaShopPanel>-->
 <!--    </Gacha>-->
     <!-- new 영웅 소환서 아이콘용 가챠 -->
-    <Gacha ID="100" Children="2007">
+    <Gacha ID="100" Children="300">
         <Name>RegularSummon</Name>
         <GachaIcon>Theme_Progress_Bar_Icon_09</GachaIcon>
         <Permanent>true</Permanent>
