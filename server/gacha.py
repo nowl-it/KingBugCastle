@@ -33,17 +33,19 @@ def _get_units(xml_dir):
 def _get_skins(xml_dir):
     global _SKINS_CACHE
     if not _SKINS_CACHE:
-        _SKINS_CACHE = {0: [], 1: [], 2: [], 3: []}
+        _SKINS_CACHE = {0: [], 1: [], 2: [], 3: [], 4: []}
         tree = ET.parse(xml_dir / "Skins.xml")
         for s in tree.findall("Skin"):
             sid = int(s.get("ID", 0))
-            if sid >= 1000000 and s.get("Inherit") is None and not str(sid).endswith("99"):
-                grade = _int(s, "Grade", 0)
-                _SKINS_CACHE.setdefault(grade, []).append(sid)
-                _SKINS_CACHE.setdefault("all", []).append(sid)
-        for k in (0, 1, 2, 3):
+            if 1000000 <= sid <= 1099999 and not str(sid).endswith("99"):
+                g_val = s.findtext("Grade")
+                if g_val is not None and g_val.isdigit():
+                    grade = int(g_val)
+                    _SKINS_CACHE.setdefault(grade, []).append(sid)
+                    _SKINS_CACHE.setdefault("all", []).append(sid)
+        for k in (0, 1, 2, 3, 4):
             if not _SKINS_CACHE.get(k):
-                _SKINS_CACHE[k] = _SKINS_CACHE.get("all", [1000000])
+                _SKINS_CACHE[k] = _SKINS_CACHE.get("all", [1000001])
     return _SKINS_CACHE
 
 def _get_map_skins(xml_dir):
@@ -128,7 +130,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
     
     gtype = gacha_el.findtext("Type") or ""
     if "Treasure" in gtype or parent_id == "102":
-        keys_to_update.update({"3999", "370", "371", "102"})
+        keys_to_update.update({"3999", "370", "371", "102", "131000", "121000", "231052"})
     elif "Unit" in gtype or parent_id == "100":
         keys_to_update.update({"300", "303", "305", "100", "2007"})
     elif "Skin" in gtype or parent_id == "103":
