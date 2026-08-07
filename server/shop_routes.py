@@ -43,10 +43,10 @@ def r_shop(body, st):
 
     GetShop and BuyShopItem share the /shop path (GET lists, POST buys) - the same
     split /accessory uses. Rather than depend on the verb, which respond() does not
-    pass down, a request carrying an itemId is a purchase; a bare one is a listing.
+    pass down, a request carrying an itemId or gachaId is a purchase/roll; a bare one is a listing.
     That is also self-correcting if the client ever POSTs /shop just to refresh."""
     base = dict(STATIC_OVERRIDES["/shop"])
-    if body.get("itemId"):
+    if body.get("itemId") or body.get("gachaId"):
         base.update(_shop_buy(body, st))
         save_state(st)
     base.update(shop.build(CONTENT_GATE, _shop_buys(st), now_iso(0), XML_DIR))
@@ -61,16 +61,62 @@ def r_shop(body, st):
     return base
 
 def _shop_buy(body, st):
-    """Charge for a shop item and grant it. Returns the BuyResponseModel-ish extras.
-
-    Real-money items are granted without charging: there is no store behind this
-    server, so refusing them would make every package permanently unbuyable."""
+    """Charge for a shop item or gacha banner and grant it. Returns the BuyResponseModel-ish extras."""
     item_id = body_int(body.get("itemId"), 0)
+    gacha_id_req = body_int(body.get("gachaId"), 0)
     amount = body_int(body.get("buyAmount"), 1, lo=1)
+    
     el = shop.find(item_id, XML_DIR)
+    gacha_el = gacha._get_gacha(gacha_id_req or item_id, XML_DIR) if (gacha_id_req or item_id) else None
+
+    # Handle direct Gacha banner rolls (where item_id is not in ShopItems.xml)
     if el is None:
-        admin_log(f"[shop] refused: item {item_id} is not in ShopItems.xml")
-        return {"msg": "no such shop item", "soldOut": True}
+        if gacha_el is None:
+            admin_log(f"[shop] refused: item {item_id} / gacha {gacha_id_req} is not found")
+            return {"msg": "no such shop item or gacha", "soldOut": True}
+
+        gacha_id = int(gacha_el.get("ID"))
+        key_item = gacha_el.findtext("KeyItem")
+        keys = _gacha_keys(st)
+        keys_held = keys.get(str(key_item), 0) if key_item else 0
+        use_gold = body.get("gachaUseGold", False)
+
+        if not use_gold and keys_held >= amount:
+            keys_held -= amount
+            if key_item:
+                keys[str(key_item)] = keys_held
+            gacha_keys = [{"id": int(key_item), "count": keys_held}] if key_item else []
+        else:
+            cost_per_pull = 150 if gacha_id in (7000, 103, 201) else 100
+            total_cost = cost_per_pull * amount
+            if st.get("cash", 0) < total_cost:
+                return {"msg": "not enough cash", "soldOut": False}
+            st["cash"] = st.get("cash", 0) - total_cost
+            gacha_keys = [{"id": int(key_item), "count": keys_held}] if key_item else []
+
+        gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR)
+        for pull in gachas_result:
+            for rg in pull["gacha"]:
+                rt = rg["type"]
+                uid = rg["unitId"]
+                if rt == "UnitExp":
+                    rt = "UnitSoul"
+                srv._grant_reward(st, rt, uid, rg["count"])
+
+        gacha_stacks = []
+        gss = st.get("gachaStacks", {})
+        if gss:
+            for gid_str, cnt in gss.items():
+                gacha_stacks.append({"gachaId": int(gid_str), "stack": cnt})
+
+        return {
+            "gachaRewardResponseData": srv._reward_list_data([]),
+            "inventoryItems": srv._inventory_models(st),
+            "soldOut": False,
+            "gachas": gachas_result,
+            "gachaKeys": gacha_keys,
+            "gachaStack": gacha_stacks
+        }
 
     buys = _shop_buys(st)
     bought = buys.get(str(item_id), 0)

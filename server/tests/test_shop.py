@@ -195,6 +195,17 @@ def check_gacha_scroll_buy_does_not_freeze():
     print(f"ok gacha scroll: item {item_id} -> key {item_id}, gachas present, count carried")
 
 
+def check_direct_gacha_banner_rolls():
+    st = _fresh(cash=10000)
+    for gid in (300, 303, 350, 3999, 7000):
+        out = server.r_shop({"gachaId": gid, "buyAmount": 1}, st)
+        st = server.load_state()
+        assert "gachas" in out and len(out["gachas"]) == 1, f"gacha {gid} failed to roll: {out}"
+        assert "gachaRewardResponseData" in out
+        assert out.get("gachas")[0].get("gacha"), f"gacha {gid} returned empty pull"
+    print("ok direct gacha rolls: 300 (Hero), 303 (Legacy), 350 (Artifact), 3999 (Treasure), 7000 (Skin) rolled successfully")
+
+
 if __name__ == "__main__":
     check_listing_not_empty()
     check_gold_purchase_charges_and_grants()
@@ -204,4 +215,5 @@ if __name__ == "__main__":
     check_unknown_item_is_harmless()
     check_no_free_lunch_on_token_shops()
     check_gacha_scroll_buy_does_not_freeze()
+    check_direct_gacha_banner_rolls()
     print("\nall shop checks passed")
