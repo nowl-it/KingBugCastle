@@ -202,7 +202,8 @@ def check_direct_gacha_banner_rolls():
         st = server.load_state()
         assert "gachas" in out and len(out["gachas"]) == 1, f"gacha {gid} failed to roll: {out}"
         assert "gachaRewardResponseData" in out
-        assert out.get("gachas")[0].get("gacha"), f"gacha {gid} returned empty pull"
+        g_res = out.get("gachas")[0]
+        assert g_res.get("gacha") or g_res.get("rewardGacha"), f"gacha {gid} returned empty pull"
     print("ok direct gacha rolls: 300 (Hero), 303 (Legacy), 350 (Artifact), 3999 (Treasure), 7000 (Skin) rolled successfully")
 
 

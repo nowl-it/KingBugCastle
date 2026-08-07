@@ -86,7 +86,7 @@ def r_shop(body, st):
         
     base["gachaStacks"] = [{"gachaId": int(k), "stack": v}
                            for k, v in gss.items() if str(k).isdigit()]
-    base["availableTimeLimitGachas"] = []
+    base["availableTimeLimitGachas"] = [1043, 2007, 5052, 6000, 7000, 8001]
     base["gachaKeys"] = [{"id": int(k), "count": v}
                          for k, v in st.get("gachaKeys", {}).items()]
     return base
@@ -95,6 +95,7 @@ def _shop_buy(body, st):
     """Charge for a shop item or gacha banner and grant it. Returns the BuyResponseModel-ish extras."""
     item_id = body_int(body.get("itemId"), 0)
     gacha_id_req = body_int(body.get("gachaId"), 0)
+    gacha_id = gacha_id_req
     amount = body_int(body.get("buyAmount"), 1, lo=1)
     
     el = shop.find(item_id, XML_DIR)

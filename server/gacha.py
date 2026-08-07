@@ -281,7 +281,6 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                         pass
                 pool = cache.get(str(grade))
                 if pool:
-                    import random
                     sid = random.choice(pool)
                     is_new = sid not in st.get("skins", [])
                     pull_res = {"type": "Skin", "unitId": sid, "count": 1, "isNew": is_new}
