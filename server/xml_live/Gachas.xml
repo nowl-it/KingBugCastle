@@ -7953,7 +7953,7 @@
     </Gacha>
 
     <!-- 왕의 보구 -->
-    <Gacha ID="6000" Parent="102">
+    <Gacha ID="6000">
         <Name>GachaName_6000</Name>
         <Desc>GachaDesc_4010</Desc>
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
