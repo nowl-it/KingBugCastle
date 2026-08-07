@@ -46,6 +46,8 @@ def r_shop(body, st):
     pass down, a request carrying an itemId or gachaId is a purchase/roll; a bare one is a listing.
     That is also self-correcting if the client ever POSTs /shop just to refresh."""
     base = dict(STATIC_OVERRIDES["/shop"])
+    if body:
+        admin_log(f"[shop DEBUG] body keys={list(body.keys())} body={body}")
     if body.get("itemId") or body.get("gachaId"):
         base.update(_shop_buy(body, st))
         save_state(st)
@@ -183,23 +185,42 @@ def _shop_buy(body, st):
         # Find the default gacha for this KeyItem when the direct lookup fails.
         if gacha_el is None:
             key_item_id = el.findtext("KeyItem")
-            if key_item_id:
+            candidates = [key_item_id, str(item_id)] if key_item_id else [str(item_id)]
+            for k_id in candidates:
+                if not k_id:
+                    continue
                 for gid, ge in gacha._GACHAS_CACHE.items():
-                    if ge.findtext("KeyItem") == key_item_id and ge.get("Permanent") == "true":
+                    if ge.findtext("KeyItem") == k_id and ge.get("Permanent") == "true":
                         gacha_id = gid
                         gacha_el = ge
                         break
-                if gacha_el is None:
-                    for gid, ge in gacha._GACHAS_CACHE.items():
-                        if ge.findtext("KeyItem") == key_item_id:
-                            gacha_id = gid
-                            gacha_el = ge
-                            break
+                if gacha_el is not None:
+                    break
+                for gid, ge in gacha._GACHAS_CACHE.items():
+                    if ge.findtext("KeyItem") == k_id:
+                        gacha_id = gid
+                        gacha_el = ge
+                        break
+                if gacha_el is not None:
+                    break
+
+            if gacha_el is None:
+                stype = el.findtext("Type") or ""
+                type_map = {
+                    "TreasureGacha": 3999,
+                    "ArtifactGacha": 350,
+                    "SkinGacha": 7000,
+                    "NewUnitGacha": 303,
+                    "UnitGacha": 300,
+                    "Gacha": 300,
+                }
+                if stype in type_map:
+                    gacha_id = type_map[stype]
+                    gacha_el = gacha._get_gacha(gacha_id, XML_DIR)
         
         if gacha_el is not None:
             # It's a roll!
-            # Check if we should refund the cash/gold we just charged, because they might be using keys!
-            key_item = el.findtext("KeyItem") or gacha_el.findtext("KeyItem")
+            key_item = el.findtext("KeyItem") or gacha_el.findtext("KeyItem") or str(item_id)
             # If the user has enough keys, and they didn't explicitly request to use cash/gold, we use keys.
             # But wait, the client already checks if they have keys. If they have keys, it sends a request.
             # If they don't, it asks to use gems. In either case, the request comes here.
