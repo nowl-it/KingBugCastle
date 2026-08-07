@@ -105,6 +105,9 @@ def main():
         print(f"[+] [{i}] {s.decode('utf-8', 'replace')!r} -> {ns.decode('utf-8', 'replace')!r}")
 
     if not patched:
+        if target in data:
+            print(f"[+] target host {target.decode()!r} is already present in global-metadata.dat, skipping patch_hosts.")
+            return
         sys.exit("[!] no backend host literals found - metadata layout unexpected, aborting")
 
     apk_data[ms:me] = data
