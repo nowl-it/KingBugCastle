@@ -44,8 +44,17 @@ jobs:
         run: |
           pip install -r server/requirements.txt
 
-      - name: Validate Base XAPK source (v171.1.00)
+      - name: Ensure Base XAPK source (v171.1.00)
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
+          if [ ! -f apk/xapk_extracted_v1711/com.awesomepiece.castle.apk ]; then
+            echo "Base XAPK source missing, downloading from release v171.1.00..."
+            mkdir -p apk/xapk_extracted_v1711
+            gh release download v171.1.00 --pattern "*.xapk" --dir /tmp/base_xapk --repo "$GITHUB_REPOSITORY"
+            unzip -o -q /tmp/base_xapk/*.xapk -d apk/xapk_extracted_v1711/
+            rm -rf /tmp/base_xapk
+          fi
           test -f apk/xapk_extracted_v1711/com.awesomepiece.castle.apk
           test -f apk/xapk_extracted_v1711/config.arm64_v8a.apk
           test -f apk/xapk_extracted_v1711/base_assets.apk
