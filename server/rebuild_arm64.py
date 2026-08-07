@@ -175,7 +175,7 @@ def inject_xc_stub(apk_path):
 
 
 def sign(apk_path):
-    subprocess.run([
+    res = subprocess.run([
         APKSIGNER, "sign",
         "--ks", str(KEYSTORE),
         "--ks-key-alias", "androiddebugkey",
@@ -183,7 +183,10 @@ def sign(apk_path):
         "--v1-signing-enabled", "true",
         "--v2-signing-enabled", "true",
         str(apk_path)
-    ], check=True, capture_output=True)
+    ], capture_output=True, text=True)
+    if res.returncode != 0:
+        print(f"[!] apksigner failed on {apk_path.name}:\nSTDERR: {res.stderr}\nSTDOUT: {res.stdout}")
+        sys.exit(res.returncode)
     print(f"  [SIGN] {apk_path.name}")
 
 
