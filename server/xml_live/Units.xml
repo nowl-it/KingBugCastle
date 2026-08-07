@@ -7962,7 +7962,7 @@
 
         <!-- 1돌 : 폭주 상태 장판 적중 효과에 피증 추가 -->
         <Overcome ReqOvercome="1" TargetSkill="10800">
-            <Unit10800AI_AuraDamagePer>1</Unit10800AI_AuraDamagePer>
+            <Unit10800AI_AuraTotalDamagePer>1</Unit10800AI_AuraTotalDamagePer>
         </Overcome>
 
         <!-- 2돌 : 폭주할 때마다 뱀파이어 형태의 최종 최대 체력 15% 증가 -->
@@ -7981,7 +7981,7 @@
 
 		<!-- 5돌 : 폭주 상태 장판 적중 효과에 피증 추가 -->
         <Overcome ReqOvercome="5" TargetSkill="10800">
-            <Unit10800AI_AuraDamagePer>1</Unit10800AI_AuraDamagePer>
+            <Unit10800AI_AuraTotalDamagePer>1</Unit10800AI_AuraTotalDamagePer>
         </Overcome>
 
 		<TransformHpForDesc>150</TransformHpForDesc>
