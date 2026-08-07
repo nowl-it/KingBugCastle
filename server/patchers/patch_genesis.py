@@ -40,8 +40,8 @@ def patch(dec_dir):
     dec_path = Path(dec_dir)
     files = _stubs(dec_path)
     if not files:
-        raise SystemExit("[-] no packer stub found: nothing calls System.exit next to "
-                         "loadLibrary. Did apktool decode the right APK?")
+        print("[patch_genesis] No packer stub found (System.exit already patched or absent), skipping.")
+        return
     n = 0
     for f in files:
         txt = f.read_text(encoding="utf-8")
