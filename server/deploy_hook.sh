@@ -17,6 +17,7 @@ if [ -n "$dirty" ]; then
 fi
 
 GIT_LFS_SKIP_SMUDGE=1 git pull --ff-only origin main
+git lfs pull
 
 sudo -n systemctl restart kgc.service
 sudo -n systemctl restart kgc-dashboard.service
