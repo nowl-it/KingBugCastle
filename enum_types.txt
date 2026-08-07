@@ -1,0 +1,1122 @@
+	public const AdManager.AdType UnityAds = 0;
+public static class Constants.ArtifactCustomType // TypeDefIndex: 321
+	public const Constants.RogueLikeItemType Artifact = 1;
+	public const Constants.RogueLikeItemType Gold = 32;
+	public const Constants.RogueLikeItemType RandomArtifactLvUpItem = 512;
+	public const Constants.RogueLikeItemType ArtifactRerollItem = 1024;
+	public const Constants.RogueLikeItemType UnitDamaged = 4096;
+	public const Constants.RogueLikeItemType AllUnitDamaged = 8192;
+	public const Constants.RogueLikeItemType UnitHealed = 16384;
+	public const Constants.RogueLikeItemType AllUnitHealed = 32768;
+	public const Constants.RogueLikeItemType AddUnitExp = 65536;
+	public const Constants.RogueLikeItemType AddAllUnitExp = 131072;
+	public const Constants.RogueLikeItemType SetUnitHpPer = 262144;
+	public const Constants.RogueLikeItemType UnitRemoved = 524288;
+	public const Constants.RogueLikeItemType ConsumeGold = 1048576;
+	public const Constants.RogueLikeRewardCategory Artifact = 1;
+	public const Constants.RogueLikeRewardCategory Gold = 16;
+	public const Constants.KGWiki.Type Unit = 0;
+	public const Constants.KGWiki.Type Artifact = 1;
+	public const Constants.KGWiki.Type Treasure = 2;
+	public const BuffOption.SimpleValueType Gold = 13;
+	public const BuffOption.SimpleValueType FieldUnitCount = 26;
+	public const StackType Unit = 1;
+public enum StageClearCondition_UnitAlive.AliveType // TypeDefIndex: 599
+	public const StageClearCondition_UnitAlive.AliveType All = 0;
+	public const StageClearCondition_UnitAlive.AliveType UnitIds = 1;
+private sealed class StageClearCondition_UnitAlive.<>c // TypeDefIndex: 600
+	public static readonly StageClearCondition_UnitAlive.<>c <>9; // 0x0
+	public static Func<GameUnit, bool> <>9__7_0; // 0x10
+	internal bool <CheckClearCondition>b__7_0(GameUnit x) { }
+	public const WorldTrigger.Conditions MergeUnit = 7;
+	public const WorldTrigger.Conditions UnitLevelUp = 8;
+	public const WorldTrigger.Conditions ReqFieldUnitCount = 19;
+	public const WorldTrigger.Conditions ReqDeckUnitCount = 24;
+	public ResourceTreasure.Rarity rarity; // 0x14
+	public const ResourceActiveSkill.TargetType SameUnit = 1;
+	public const ResourceAlchemyExchangeRatio.CurrencyType UnitExp = 2;
+	public const ResourceAlchemyExchangeRatio.CurrencyType UnitSoul = 3;
+public enum ResourceArtifact.Type // TypeDefIndex: 731
+	public const ResourceArtifact.Type Dust = 0;
+	public const ResourceArtifact.Type Piece = 1;
+	public const ResourceArtifact.Type Artifact = 2;
+	public const ResourceArtifact.Type CatalystBox = 3;
+	public const ResourceArtifact.Type Catalyst = 4;
+	public const ResourceArtifact.Type PolishItem = 5;
+public enum ResourceArtifact.Level // TypeDefIndex: 732
+	public const ResourceArtifact.Level Normal = 0;
+	public const ResourceArtifact.Level King = 1;
+	public const ResourceArtifact.Level God = 2;
+	public const ResourceArtifact.Level KingGod = 3;
+public enum ResourceArtifact.FromType // TypeDefIndex: 733
+	public const ResourceArtifact.FromType ShopCommon = 0;
+	public const ResourceArtifact.FromType ShopRare = 1;
+	public const ResourceArtifact.FromType ShopSpecial = 2;
+	public const ResourceArtifact.FromType HardMode = 3;
+	public const ResourceArtifact.FromType Arena = 4;
+	public const ResourceArtifact.FromType Special = 5;
+	public const ResourceArtifact.FromType RogueLikeBuildingArtifact = 6;
+	public const ResourceArtifact.FromType RogueLike = 7;
+	public const ResourceArtifact.FromType Event = 8;
+	public const ResourceArtifact.FromType Raid = 9;
+public class ResourceArtifact.FixOption // TypeDefIndex: 734
+	public const int TreasureUnlockDifficulty = 1;
+	public const ResourceColor.Type Skin_Limited = 2;
+	public const ResourceColor.Type Skin_FirstTimeOnly = 3;
+	public const ResourceColor.Type Skin_Season = 6;
+	public const ResourceColor.Type GodSkin = 8;
+	public const ResourceColor.Type SkinGrade = 9;
+	public const ResourceColor.Type ArtifactOption_AtkPer = 10;
+	public const ResourceColor.Type ArtifactOption_MAtkPer = 11;
+	public const ResourceColor.Type ArtifactOption_AtkSpeedPer = 12;
+	public const ResourceColor.Type ArtifactOption_HpPer = 13;
+	public const ResourceColor.Type SummonSkin = 14;
+	public const ResourceColosseumAbility.Category UnitRegionOrRole = 4;
+	public const ResourceConstant.Type UnitNeedExp = 0;
+	public const ResourceConstant.Type UnitLvUpCost = 1;
+	public const ResourceConstant.Type UnitPotentialUpgradeExp = 3;
+	public const ResourceConstant.Type UnitPotentialUpgradeGold = 4;
+	public const ResourceConstant.Type UnitPotentialUpgradeSoul = 5;
+	public const ResourceConstant.Type UnitNeedSoul = 16;
+	public const ResourceConstant.Type TreasureCombatPower = 22;
+	public const ResourceEliteLevel.Type AddEnemyUnitTier = 2;
+	public const ResourceEventTrigger.TargetType PlayerUnit = 0;
+	public const ResourceEventTrigger.TargetType EnemyUnit = 1;
+	public const ResourceEventTrigger.TargetType AllUnit = 2;
+	public const ResourceEventTrigger.TriggerType ClearUnitBuffs = 14;
+	public const ResourceEventTrigger.FromType Artifact = 1;
+	public const ResourceEventTrigger.EventType SpawnPlayerUnit = 0;
+	public const ResourceEventTrigger.EventType SpawnEnemyUnit = 1;
+	public const ResourceEventTrigger.EventType GiveGold = 2;
+	public const ResourceEventTrigger.EventType AddBuffsToSelfByUnitCount = 6;
+	public const ResourceEventTrigger.EventType TriggerUnitUseSkill = 15;
+	public ResourceUnit.Role targetRole; // 0x14
+	public ResourceUnit.Region targetRegion; // 0x18
+	public int highestUnitCount; // 0x1C
+	public int lowestUnitCount; // 0x20
+	public const ResourceGacha.Type UnitGacha = 1;
+	public const ResourceGacha.Type ArtifactGacha = 2;
+	public const ResourceGacha.Type NewUnitGacha = 3;
+	public const ResourceGacha.Type CustomUnitGacha = 4;
+	public const ResourceGacha.Type TreasureGacha = 5;
+	public const ResourceGacha.Type CustomTreasureGacha = 6;
+	public const ResourceGacha.Type SkinGacha = 7;
+	public const ResourceGacha.Type DimensionUnitGacha = 8;
+	public const ResourceInventoryItem.Type SkinBoxInventory = 5;
+	public const ResourceItem.EquipType FromArtifact = 5;
+	public ValueTuple<int, ResourceLeagueInfo.LeagueType>[] rewardSkins; // 0x20
+	public int GetSkinByLeagueType(ResourceLeagueInfo.LeagueType type) { }
+	public const ResourceMission.Type Unit = 4;
+	public const ResourceMission.Category MaxUnitCount = 3;
+	public const ResourceMission.Category MaxUnitLevel = 4;
+	public const ResourceMission.Category InGameGold = 9;
+	public const ResourceMission.EventType SkinReturnShopEvent = 8;
+	public const ResourceRogueLikeRoom.Type BuildingArtifact = 10;
+	public const ResourceRogueLikeRoom.Type Event_GoldenTotem = 23;
+	public const ResourceRogueLikeSetting.RoleLevelData.Type UnlockTreasure = 2;
+	public const ResourceRogueLikeSetting.RoleLevelData.Type AddTreasureMaxLevel = 4;
+	public int passSkin; // 0x60
+	public int passUnit; // 0x64
+	public int passGold; // 0x68
+	public int passPremiumGold; // 0x6C
+	public float passSkinOffsetX; // 0x78
+	public const ResourceShopItem.Type UnitExp = 0;
+	public const ResourceShopItem.Type Unit = 1;
+	public const ResourceShopItem.Type Gold = 3;
+	public const ResourceShopItem.Type SelectUnitExp = 7;
+	public const ResourceShopItem.Type SkinReturnShop = 12;
+	public const ResourceShopItem.Type ArtifactGacha = 13;
+	public const ResourceShopItem.Type UnitSoul = 19;
+	public const ResourceShopItem.Type UnitSoulItem = 20;
+	public const ResourceShopItem.Type NewUnitGacha = 21;
+	public const ResourceShopItem.Type NewHeroSkinPackage = 22;
+	public const ResourceShopItem.Type GoldMine = 23;
+	public const ResourceShopItem.SpecialSeasonalTokenType Gold = 3;
+	public const ResourceSkill.SkillTag Unit10570AI_ManaHealPerAtSkillKill = 2;
+	public const ResourceSkill.SkillTag Unit10570AI_ManaHealPerAtSkillKillAddAtkCount = 3;
+	public const ResourceSkill.SkillTag Unit10570AI_SelfHealEveryAttack = 4;
+	public const ResourceSkill.SkillTag Unit10570AI_SelfHealEveryAttackAddAtkCount = 5;
+	public const ResourceSkill.SkillTag Unit10570AI_SelfHealEveryAttackAddAtkCountLimit = 6;
+	public const ResourceSkill.SkillTag Unit10570AI_IsArcaneMagic = 7;
+	public const ResourceSkill.SkillTag Unit10770AI_MaxHitCount = 15;
+	public const ResourceSkill.SkillTag Unit10770AI_MaxHitCount_4 = 16;
+	public const ResourceSkill.SkillTag Unit10770AI_MaxHitCount_8 = 17;
+	public const ResourceSkill.SkillTag Unit10770AI_MaxHitCount_16 = 18;
+	public const ResourceSkill.SkillTag Unit10770AI_TotalAttackSpeedPerBonusPerHitCount = 19;
+	public const ResourceSkill.SkillTag Unit10770AI_TotalDamagePerBonusWhenMaxHitCount = 20;
+	public const ResourceSkill.SkillTag Unit10770AI_HybridDefValueBonusPerHitCount = 21;
+	public const ResourceSkill.SkillTag Unit10770AI_TotalDamagePerBonusPerHitCount = 22;
+	public const ResourceSkill.SkillTag Unit10800AI_TransformSkill = 23;
+	public const ResourceSkill.SkillTag Unit10800AI_AuraDamagePer = 24;
+	public const ResourceSkill.SkillTag Unit10800AI_TotalHpPer = 25;
+	public const ResourceSkill.TargetType ItemUnit = 13;
+	public const ResourceSkill.RotationType AngleRelativeToFromUnit = 7;
+	public const ResourceSkill.RotationType AngleRelativeToFromUnitFixedHorizontal = 8;
+	public const ResourceSkill.EffectZLevel Unit = 0;
+	public const ResourceSkill.EffectZLevel UnitOver = 4;
+	public const ResourceSkill.SkillTrigger HasSummonUnit = 7;
+public enum ResourceTerritoryUnitInteraction.InteractionTypeInfo.InteractionType // TypeDefIndex: 1154
+	public const ResourceTerritoryUnitInteraction.InteractionTypeInfo.InteractionType None = 0;
+	public const ResourceTerritoryUnitInteraction.InteractionTypeInfo.InteractionType Default = 1;
+	public const ResourceTerritoryUnitInteraction.InteractionTypeInfo.InteractionType Emoji = 2;
+public class ResourceTerritoryUnitInteraction.InteractionTypeInfo // TypeDefIndex: 1155
+	public ResourceTerritoryUnitInteraction.InteractionTypeInfo.InteractionType interactionType; // 0x10
+private sealed class ResourceTerritoryUnitInteraction.<>c__DisplayClass5_0 // TypeDefIndex: 1156
+public enum ResourceTreasure.Rarity // TypeDefIndex: 1165
+	public const ResourceTreasure.Rarity None = 0;
+	public const ResourceTreasure.Rarity Common = 1;
+	public const ResourceTreasure.Rarity Rare = 2;
+	public const ResourceTreasure.Rarity Special = 3;
+public class ResourceTreasure : ResourceBase<ResourceTreasure> // TypeDefIndex: 1166
+	public ResourceUnit.Role targetRole; // 0x40
+	public ResourceTreasure.Rarity rarity; // 0x44
+public enum ResourceUnit.UnitTag // TypeDefIndex: 1178
+	public const ResourceUnit.UnitTag HpShareMajor = 0;
+	public const ResourceUnit.UnitTag SkillQueue = 1;
+	public const ResourceUnit.UnitTag ChallengeBossDescSkills = 2;
+	public const ResourceUnit.UnitTag HpShareTilePosXList = 3;
+	public const ResourceUnit.UnitTag HpShareTilePosYList = 4;
+	public const ResourceUnit.UnitTag HpShareTileTotalDamagePerList = 5;
+	public const ResourceUnit.UnitTag MoonlightUnitId = 6;
+	public const ResourceUnit.UnitTag OverrideMinorID = 7;
+	public const ResourceUnit.UnitTag Phase1_HpPer = 8;
+	public const ResourceUnit.UnitTag Phase2_HpPer = 9;
+	public const ResourceUnit.UnitTag Phase3_HpPer = 10;
+	public const ResourceUnit.UnitTag Phase1_Skill = 11;
+	public const ResourceUnit.UnitTag Phase2_Skill = 12;
+	public const ResourceUnit.UnitTag Phase3_Skill = 13;
+	public const ResourceUnit.UnitTag Phase1_AttackSkill = 14;
+	public const ResourceUnit.UnitTag Phase2_AttackSkill = 15;
+	public const ResourceUnit.UnitTag Phase3_AttackSkill = 16;
+public enum ResourceUnit.Type // TypeDefIndex: 1179
+	public const ResourceUnit.Type None = 0;
+	public const ResourceUnit.Type Player = 1;
+	public const ResourceUnit.Type Enemy = 2;
+	public const ResourceUnit.Type Interactable = 3;
+public enum ResourceUnit.TileSizeType // TypeDefIndex: 1180
+	public const ResourceUnit.TileSizeType Rect = 0;
+	public const ResourceUnit.TileSizeType Custom = 1;
+public enum ResourceUnit.SkillEnergyType // TypeDefIndex: 1181
+	public const ResourceUnit.SkillEnergyType None = 0;
+	public const ResourceUnit.SkillEnergyType Mana = 1;
+	public const ResourceUnit.SkillEnergyType Technique = 2;
+public enum ResourceUnit.Role // TypeDefIndex: 1182
+	public const ResourceUnit.Role None = 0;
+	public const ResourceUnit.Role Brave = 1;
+	public const ResourceUnit.Role Mystic = 2;
+	public const ResourceUnit.Role Shadow = 3;
+	public const ResourceUnit.Role Element = 4;
+	public const ResourceUnit.Role Toughness = 5;
+	public const ResourceUnit.Role Swift = 6;
+public enum ResourceUnit.Region // TypeDefIndex: 1183
+	public const ResourceUnit.Region East = 0;
+	public const ResourceUnit.Region West = 1;
+	public const ResourceUnit.Region South = 2;
+	public const ResourceUnit.Region North = 3;
+	public const ResourceUnit.Region Central = 4;
+	public const ResourceUnit.Region Unknown = 5;
+public enum ResourceUnit.RogueLikeSynergy // TypeDefIndex: 1184
+	public const ResourceUnit.RogueLikeSynergy None = 0;
+	public const ResourceUnit.RogueLikeSynergy Transformer = 1;
+	public const ResourceUnit.RogueLikeSynergy Shielder = 2;
+	public const ResourceUnit.RogueLikeSynergy Fighter = 3;
+	public const ResourceUnit.RogueLikeSynergy Tactician = 4;
+	public const ResourceUnit.RogueLikeSynergy Sniper = 5;
+	public const ResourceUnit.RogueLikeSynergy Shooter = 6;
+	public const ResourceUnit.RogueLikeSynergy VoidLord = 7;
+	public const ResourceUnit.RogueLikeSynergy Summoner = 8;
+	public const ResourceUnit.RogueLikeSynergy SpellSword = 9;
+	public const ResourceUnit.RogueLikeSynergy Assassin = 10;
+	public const ResourceUnit.RogueLikeSynergy Linker = 11;
+	public const ResourceUnit.RogueLikeSynergy Supporter = 12;
+	public const ResourceUnit.RogueLikeSynergy Caster = 13;
+	public const ResourceUnit.RogueLikeSynergy ShockTrooper = 14;
+	public const ResourceUnit.RogueLikeSynergy Rival = 15;
+	public const ResourceUnit.RogueLikeSynergy ChainWizard = 16;
+	public const ResourceUnit.RogueLikeSynergy RaidTrooper = 17;
+private sealed class ResourceUnit.PotentialBase.<>c // TypeDefIndex: 1185
+	public static readonly ResourceUnit.PotentialBase.<>c <>9; // 0x0
+public enum ResourceUnit.Overcome.StepType // TypeDefIndex: 1189
+	public const ResourceUnit.Overcome.StepType None = 0;
+	public const ResourceUnit.Overcome.StepType SkillSpecial1 = 1;
+	public const ResourceUnit.Overcome.StepType SkillCoefficient1 = 2;
+	public const ResourceUnit.Overcome.StepType ActiveSkillUpgrade = 3;
+	public const ResourceUnit.Overcome.StepType SkillCoefficient2 = 4;
+	public const ResourceUnit.Overcome.StepType SkillSpecial2 = 5;
+public class ResourceUnit.Overcome : ResourceUnit.PotentialBase, IEquatable<ResourceUnit.Overcome> // TypeDefIndex: 1190
+	public ResourceUnit.Overcome.StepType stepType { get; }
+	public ResourceUnit.Overcome.StepType get_stepType() { }
+public enum ResourceUnitPanelData.Type // TypeDefIndex: 1210
+	public const ResourceUnitPanelData.Type None = 0;
+	public const ResourceUnitPanelData.Type Profile = 1;
+public class ResourceUnitPanelData : ResourceBase<ResourceUnitPanelData> // TypeDefIndex: 1211
+	public ResourceUnitPanelData.Type type; // 0x20
+	public int sourceUnitId; // 0x0
+	public int sourceUnitId; // 0x10
+private class Scene_Game.UnitData // TypeDefIndex: 1238
+	private GameCompleteRequestModel.EndFieldUnit _endFieldUnit; // 0x10
+	public void .ctor(GameCompleteRequestModel.EndFieldUnit endFieldUnit) { }
+	public List<Scene_Game.ChallengeBattleRetryItemUnitData> items; // 0x20
+	public GameUnit from; // 0x38
+	public const Buff.BuffType Treasure = 9;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag AttackSpeedPerUnit10670 = 6;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag TotalAttackSpeedPerUnit10180 = 7;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag TotalAtkPerUnit10670 = 8;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag TotalAtkPerUnit10180 = 9;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag TotalMAtkPerUnit10670 = 10;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag TotalMAtkPerUnit10180 = 11;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag TotalTakeDamagePerTreasure30011 = 12;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag TotalTakeDamagePerTreasure30017 = 13;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag AttackDamageMulTreasure30011 = 14;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag SkillDamageMulTreasure30011 = 15;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag SkillDamageMulUnit10710 = 16;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag TotalDamagePerUnit10710 = 17;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag TotalDamagePerTreasure30017 = 18;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag MissRatioTreasure30017 = 19;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag HybridDefUnit10730 = 20;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag BaseSkillDamageMulUnit10760 = 22;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag AttackSpeedPerUnit10790 = 23;
+	public const ExtraStatBuffTagList.ExtraStatBuffTag MoveSpeedPerUnit10790 = 24;
+	public static Func<GameUnit, bool> <>9__243_0; // 0x28
+	public static Func<GameUnit, bool> <>9__243_1; // 0x30
+	public static Predicate<ItemUnit> <>9__243_2; // 0x38
+	public static Func<ItemUnit, bool> <>9__243_3; // 0x40
+	public static Func<GameUnit, bool> <>9__243_6; // 0x58
+	public static Comparison<ResourceUnit> <>9__249_1; // 0x68
+public enum GameUnit.ReviveCategory // TypeDefIndex: 2123
+	public const GameUnit.ReviveCategory Unit = 0;
+	public const GameUnit.ReviveCategory Item = 1;
+	public const GameUnit.ReviveCategory Treasure = 2;
+public struct GameUnit.ReviveInfo // TypeDefIndex: 2124
+public struct GameUnit.StageStartData // TypeDefIndex: 2125
+	public ResourceUnit resUnit; // 0x8
+public struct GameUnit.KnockBackData // TypeDefIndex: 2126
+	public const GameManager.CallbackType Gold = 0;
+	public const GameManager.CallbackType Artifact = 12;
+	public const GameManager.CallbackType UnitExpItem = 13;
+	public const GameManager.CallbackType Treasure = 17;
+public enum ArtifactCraftPanel.Tab // TypeDefIndex: 2500
+	public const ArtifactCraftPanel.Tab Craft = 0;
+	public const ArtifactCraftPanel.Tab Merge = 1;
+	public const ArtifactCraftPanel.Tab Reroll = 2;
+	public const ArtifactCraftPanel.Tab Polish = 3;
+	public const ArtifactCraftPanel.Tab None = 4;
+private sealed class ArtifactCraftPanel.<>c // TypeDefIndex: 2501
+	public static readonly ArtifactCraftPanel.<>c <>9; // 0x0
+	public static Func<ResourceArtifact, bool> <>9__67_1; // 0x8
+	public static Predicate<ArtifactModel> <>9__67_3; // 0x10
+public enum ArtifactOptionUI.Size // TypeDefIndex: 2543
+	public const ArtifactOptionUI.Size Big = 0;
+	public const ArtifactOptionUI.Size Normal = 1;
+	public const ArtifactOptionUI.Size Small = 2;
+public class ArtifactOptionUI : MonoBehaviour // TypeDefIndex: 2544
+	public ArtifactOptionUI.Size size; // 0x20
+	public ArtifactOptionLine[] optionLines; // 0x28
+	private ArtifactModel _artifact; // 0x30
+	public void Init(ArtifactModel artifact) { }
+	public void InitNext(ArtifactModel artifact) { }
+public enum ArtifactRerollTab.SubTab // TypeDefIndex: 2568
+	public const ArtifactRerollTab.SubTab Normal = 0;
+	public const ArtifactRerollTab.SubTab Smart = 1;
+private enum ArtifactRerollTab.OptionType // TypeDefIndex: 2569
+	public const ArtifactRerollTab.OptionType None = 0;
+	public const ArtifactRerollTab.OptionType AtkPer = 1;
+	public const ArtifactRerollTab.OptionType MAtkPer = 2;
+	public const ArtifactRerollTab.OptionType AtkSpeedPer = 3;
+	public const ArtifactRerollTab.OptionType HpPer = 4;
+private sealed class ArtifactRerollTab.<>c // TypeDefIndex: 2570
+	public static readonly ArtifactRerollTab.<>c <>9; // 0x0
+	public static Predicate<ArtifactModel> <>9__176_0; // 0x20
+	public static Func<UnitCard, int> <>9__179_1; // 0x28
+	public static Action<DraggableUnitCard> <>9__200_0; // 0x30
+	public static Action<UnitCard> <>9__200_1; // 0x38
+	public static Predicate<ArtifactModel> <>9__208_0; // 0x40
+	public TreasureModel treasure; // 0x38
+	public const DecorationPanel.DecorationCategory MapSkin = 2;
+	public const DecorationPanel.DecorationCategory LoginSkin = 4;
+	public const InventoryMaxCountPanel.Category Treasure = 0;
+	public const InventoryPanel.InventoryCategory Artifact = 1;
+	public const InventoryPanel.InventoryCategory Treasure = 2;
+public class InventoryPanel.TreasureSkillUI // TypeDefIndex: 3143
+	public const LobbyShortCutController.Type ArtifactCraft = 5;
+	public const PackageItem.PackageType GoldMine = 3;
+	public const PackageItem.PackageType UnitBundle = 9;
+	public const PackageItem.PackageType SkinBundle = 10;
+	public static Func<PackageItemArtifactIcon, bool> <>9__48_2; // 0x20
+	public static Func<PackageItemArtifactIcon, bool> <>9__48_3; // 0x28
+public enum TreasureInfoPanel.PanelState // TypeDefIndex: 3844
+	public const TreasureInfoPanel.PanelState None = 0;
+	public const TreasureInfoPanel.PanelState Default = 1;
+	public const TreasureInfoPanel.PanelState Upgrade = 2;
+	public const TreasureInfoPanel.PanelState OwnedTreasures = 3;
+private sealed class TreasureInfoPanel.<>c // TypeDefIndex: 3845
+	public static readonly TreasureInfoPanel.<>c <>9; // 0x0
+	public static Comparison<TreasureModel> <>9__89_1; // 0x18
+	public static Func<ResourceUnit, bool> <>9__55_2; // 0x18
+	public static Func<ResourceUnit, bool> <>9__59_2; // 0x50
+	public const CommonData.ChoiceUserSelectorType HighestGold = 1;
+	public const Scene_Territory.Mode SkinPreview = 3;
+	public static Action<TerritoryUnit> <>9__119_0; // 0x8
+	public static Action<TerritoryUnit> <>9__177_0; // 0x30
+	public const TerritoryMarker.Type AssignLevelSyncUnit = 4;
+	public const TerritoryMarker.Type AssignUnit = 6;
+	public const TerritoryMarker.Type GoldToken = 7;
+	public const TerritoryAlchemyCurrencyPanel.AlchemyCurrencyType UnitExp = 3;
+	public const TerritoryAlchemyCurrencyPanel.AlchemyCurrencyType UnitSoul = 4;
+	public const TerritoryLevelSyncPanel.State SelectSyncedUnit = 1;
+	public const TerritoryTopPanel.TokenType GoldToken = 3;
+	public const RewardBoxItem.Type Gold = 0;
+	public const RewardBoxItem.Type SelectUnitExp = 2;
+	public const RewardBoxItem.Type Artifact = 3;
+	public DraggableArtifactCard artifactCard; // 0x30
+	public const DraggableRange.Type Unit = 0;
+public enum ArtifactWikiElementList.ArtifactFromType // TypeDefIndex: 5338
+	public const ArtifactWikiElementList.ArtifactFromType Shop = 0;
+	public const ArtifactWikiElementList.ArtifactFromType HardMode = 1;
+	public const ArtifactWikiElementList.ArtifactFromType Arena = 2;
+	public const ArtifactWikiElementList.ArtifactFromType Event = 3;
+private sealed class ArtifactWikiElementList.<>c__DisplayClass1_0 // TypeDefIndex: 5339
+	public HashSet<ResourceArtifact.FromType> validFromTypes; // 0x10
+	public static Func<GameUnit, bool> <>9__34_37; // 0x28
+	public static Action<GameUnit> <>9__34_38; // 0x38
+	public static Action<GameUnit> <>9__34_39; // 0x40
+	public static Func<GameUnit, bool> <>9__34_40; // 0x48
+	public static Action<GameUnit> <>9__34_41; // 0x58
+	public static Func<GameUnit, bool> <>9__34_53; // 0x68
+	public static Predicate<GameUnit> <>9__34_54; // 0x78
+	public static Action<GameUnit> <>9__34_18; // 0x80
+	public const KGCRegistryKey Treasure_30031_BuffList = 0;
+	public const KGCRegistryKey Treasure_30033_DamageInfoIdList = 1;
+	public const KGCRegistryKey Treasure_30037_FriendList = 2;
+	[OriginalName("UnitLevelNotifyMessage")]
+// Namespace: UnityEngine.SignInWithApple
+// Namespace: UnityEngine.SignInWithApple
+// Namespace: UnityEngine.SignInWithApple
+public class SignInWithAppleEvent : UnityEvent<SignInWithApple.CallbackArgs> // TypeDefIndex: 7125
+// Namespace: UnityEngine.UI.Extensions
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+[MovedFrom(True, "UnityEditor.UIElements", "UnityEditor.UIElementsModule", null)]
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+public enum AngleUnit // TypeDefIndex: 9511
+	public const AngleUnit Degree = 0;
+	public const AngleUnit Gradian = 1;
+	public const AngleUnit Radian = 2;
+	public const AngleUnit Turn = 3;
+private enum Angle.Unit // TypeDefIndex: 9512
+	public const Angle.Unit Degree = 0;
+	public const Angle.Unit Gradian = 1;
+	public const Angle.Unit Radian = 2;
+	public const Angle.Unit Turn = 3;
+	public const Angle.Unit None = 4;
+// Namespace: UnityEngine.UIElements
+	private Angle.Unit m_Unit; // 0x4
+// Namespace: UnityEngine.UIElements
+public enum LengthUnit // TypeDefIndex: 9549
+	public const LengthUnit Pixel = 0;
+	public const LengthUnit Percent = 1;
+private enum Length.Unit // TypeDefIndex: 9550
+	public const Length.Unit Pixel = 0;
+	public const Length.Unit Percent = 1;
+	public const Length.Unit Auto = 2;
+	public const Length.Unit None = 3;
+// Namespace: UnityEngine.UIElements
+	private Length.Unit m_Unit; // 0x4
+// Namespace: UnityEngine.UIElements
+public enum TimeUnit // TypeDefIndex: 9573
+	public const TimeUnit Second = 0;
+	public const TimeUnit Millisecond = 1;
+// Namespace: UnityEngine.UIElements
+	private TimeUnit m_Unit; // 0x4
+	public TimeUnit unit { get; }
+	public TimeUnit get_unit() { }
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+// Namespace: UnityEngine.UIElements
+public enum Dimension.Unit // TypeDefIndex: 9909
+	public const Dimension.Unit Unitless = 0;
+	public const Dimension.Unit Pixel = 1;
+	public const Dimension.Unit Percent = 2;
+	public const Dimension.Unit Second = 3;
+	public const Dimension.Unit Millisecond = 4;
+	public const Dimension.Unit Degree = 5;
+	public const Dimension.Unit Gradian = 6;
+	public const Dimension.Unit Radian = 7;
+	public const Dimension.Unit Turn = 8;
+// Namespace: UnityEngine.UIElements.StyleSheets
+	public Dimension.Unit unit; // 0x0
+	public void .ctor(float value, Dimension.Unit unit) { }
+public enum UnityTls.unitytls_error_code // TypeDefIndex: 11775
+	public const UnityTls.unitytls_error_code UNITYTLS_SUCCESS = 0;
+	public const UnityTls.unitytls_error_code UNITYTLS_INVALID_ARGUMENT = 1;
+	public const UnityTls.unitytls_error_code UNITYTLS_INVALID_FORMAT = 2;
+	public const UnityTls.unitytls_error_code UNITYTLS_INVALID_PASSWORD = 3;
+	public const UnityTls.unitytls_error_code UNITYTLS_INVALID_STATE = 4;
+	public const UnityTls.unitytls_error_code UNITYTLS_BUFFER_OVERFLOW = 5;
+	public const UnityTls.unitytls_error_code UNITYTLS_OUT_OF_MEMORY = 6;
+	public const UnityTls.unitytls_error_code UNITYTLS_INTERNAL_ERROR = 7;
+	public const UnityTls.unitytls_error_code UNITYTLS_NOT_SUPPORTED = 8;
+	public const UnityTls.unitytls_error_code UNITYTLS_ENTROPY_SOURCE_FAILED = 9;
+	public const UnityTls.unitytls_error_code UNITYTLS_STREAM_CLOSED = 10;
+	public const UnityTls.unitytls_error_code UNITYTLS_USER_CUSTOM_ERROR_START = 1048576;
+	public const UnityTls.unitytls_error_code UNITYTLS_USER_WOULD_BLOCK = 1048577;
+	public const UnityTls.unitytls_error_code UNITYTLS_USER_READ_FAILED = 1048578;
+	public const UnityTls.unitytls_error_code UNITYTLS_USER_WRITE_FAILED = 1048579;
+	public const UnityTls.unitytls_error_code UNITYTLS_USER_UNKNOWN_ERROR = 1048580;
+	public const UnityTls.unitytls_error_code UNITYTLS_USER_CUSTOM_ERROR_END = 2097152;
+public struct UnityTls.unitytls_errorstate // TypeDefIndex: 11776
+	public UnityTls.unitytls_error_code code; // 0x4
+public enum UnityTls.unitytls_x509verify_result // TypeDefIndex: 11782
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_SUCCESS = 0;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_NOT_DONE = 2147483648;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FATAL_ERROR = 4294967295;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_EXPIRED = 1;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_REVOKED = 2;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_CN_MISMATCH = 4;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_NOT_TRUSTED = 8;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_USER_ERROR1 = 65536;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_USER_ERROR2 = 131072;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_USER_ERROR3 = 262144;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_USER_ERROR4 = 524288;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_USER_ERROR5 = 1048576;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_USER_ERROR6 = 2097152;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_USER_ERROR7 = 4194304;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_USER_ERROR8 = 8388608;
+	public const UnityTls.unitytls_x509verify_result UNITYTLS_X509VERIFY_FLAG_UNKNOWN_ERROR = 134217728;
+public sealed class UnityTls.unitytls_x509verify_callback : MulticastDelegate // TypeDefIndex: 11783
+public enum UnityTls.unitytls_ciphersuite // TypeDefIndex: 11786
+	public const UnityTls.unitytls_ciphersuite UNITYTLS_CIPHERSUITE_INVALID = 16777215;
+public enum UnityTls.unitytls_protocol // TypeDefIndex: 11787
+	public const UnityTls.unitytls_protocol UNITYTLS_PROTOCOL_TLS_1_0 = 0;
+	public const UnityTls.unitytls_protocol UNITYTLS_PROTOCOL_TLS_1_1 = 1;
+	public const UnityTls.unitytls_protocol UNITYTLS_PROTOCOL_TLS_1_2 = 2;
+	public const UnityTls.unitytls_protocol UNITYTLS_PROTOCOL_INVALID = 3;
+public struct UnityTls.unitytls_tlsctx_protocolrange // TypeDefIndex: 11788
+	public UnityTls.unitytls_protocol min; // 0x0
+	public UnityTls.unitytls_protocol max; // 0x4
+public sealed class UnityTls.unitytls_tlsctx_write_callback : MulticastDelegate // TypeDefIndex: 11789
+	public virtual IntPtr Invoke(void* userData, byte* data, IntPtr bufferLen, UnityTls.unitytls_errorstate* errorState) { }
+// Namespace: UnityEngine.Experimental.Rendering.Universal
+[MovedFrom("UnityEngine.Experimental.Rendering")]
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+[MovedFrom("UnityEngine.Experimental.Rendering.Universal")]
+// Namespace: UnityEngine.Rendering.Universal
+[MovedFrom("UnityEngine.Experimental.Rendering.Universal")]
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+	public const DefaultMaterialType UnityBuiltinDefault = 4;
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+	[Obsolete("ForwardRenderer has been renamed (UnityUpgradable) -> UniversalRenderer", True)]
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+	[Tooltip("Unity selects a filtering option automatically based on the Render Scale value and the current screen resolution.")]
+	[Tooltip("If the target device does not support Unity shader model 4.5, Unity falls back to the Automatic option.")]
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+[Obsolete("This is obsolete, UnityEngine.Rendering.ShaderVariantLogLevel instead.", False)]
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+	[Tooltip("Specify how much hue to preserve. Values closer to 0 are likely to preserve hue. As values get closer to 1, Unity doesn't correct hue shifts.")]
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngineInternal
+// Namespace: UnityEngineInternal
+	[Obsolete("Batched is obsolete, use Parallel or Single depending on job type. (UnityUpgradable) -> Parallel", False)]
+public enum ProfilerMarkerDataUnit // TypeDefIndex: 13147
+	public const ProfilerMarkerDataUnit Undefined = 0;
+	public const ProfilerMarkerDataUnit TimeNanoseconds = 1;
+	public const ProfilerMarkerDataUnit Bytes = 2;
+	public const ProfilerMarkerDataUnit Count = 3;
+	public const ProfilerMarkerDataUnit Percent = 4;
+	public const ProfilerMarkerDataUnit FrequencyHz = 5;
+// Namespace: Unity.Profiling
+// Namespace: Unity.Profiling
+// Namespace: Unity.Profiling
+// Namespace: Unity.Profiling.LowLevel
+// Namespace: Unity.Profiling.LowLevel.Unsafe
+	private readonly ProfilerMarkerDataUnit unitType; // 0x5
+// Namespace: Unity.IO.LowLevel.Unsafe
+// Namespace: Unity.IO.LowLevel.Unsafe
+// Namespace: Unity.IO.LowLevel.Unsafe
+// Namespace: Unity.IO.LowLevel.Unsafe
+// Namespace: Unity.IO.LowLevel.Unsafe
+// Namespace: Unity.IO.Archive
+// Namespace: Unity.IO.Archive
+// Namespace: Unity.IO.Archive
+// Namespace: Unity.Collections
+// Namespace: Unity.Collections
+// Namespace: Unity.Burst.LowLevel
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+	[Obsolete("WebPlayer export is no longer supported in Unity 5.4+.", True)]
+	[Obsolete("Dashboard widget on Mac OS X export is no longer supported in Unity 5.4+.", True)]
+	[Obsolete("WebPlayer export is no longer supported in Unity 5.4+.", True)]
+	[Obsolete("Xbox360 export is no longer supported in Unity 5.5+.")]
+	[Obsolete("PS3 export is no longer supported in Unity >=5.5.")]
+	[Obsolete("NaCl export is no longer supported in Unity 5.0+.")]
+	[Obsolete("FlashPlayer export is no longer supported in Unity 5.0+.")]
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+	[Obsolete("Enum member DrawIndirect has been deprecated. Use IndirectArguments instead (UnityUpgradable) -> IndirectArguments", False)]
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+public enum SkinWeights // TypeDefIndex: 13348
+	public const SkinWeights None = 0;
+	public const SkinWeights OneBone = 1;
+	public const SkinWeights TwoBones = 2;
+	public const SkinWeights FourBones = 4;
+	public const SkinWeights Unlimited = 255;
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+	[Obsolete("Use LandscapeLeft instead (UnityUpgradable) -> LandscapeLeft", True)]
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+	[Obsolete("Enum member Local has been deprecated. Use TransformZ instead (UnityUpgradable) -> TransformZ", False)]
+// Namespace: UnityEngine
+[NativeHeader("Runtime/Graphics/Mesh/SkinnedMeshRenderer.h")]
+public class SkinnedMeshRenderer : Renderer // TypeDefIndex: 13373
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+[NativeHeader("Runtime/Export/Scripting/UnityEngineObject.bindings.h")]
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+	[Obsolete("Wii U is no longer supported as of Unity 2018.1.")]
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+	private UnityEvent<SpriteRenderer> m_SpriteChangeEvent; // 0x18
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+	public float pixelsPerUnit { get; }
+// Namespace: UnityEngine.Events
+internal class UnityEventTools // TypeDefIndex: 13586
+// Namespace: UnityEngine.Events
+public enum UnityEventCallState // TypeDefIndex: 13595
+	public const UnityEventCallState Off = 0;
+	public const UnityEventCallState EditorAndRuntime = 1;
+	public const UnityEventCallState RuntimeOnly = 2;
+// Namespace: UnityEngine.Events
+// Namespace: UnityEngine.SceneManagement
+// Namespace: UnityEngine.SceneManagement
+// Namespace: UnityEngine.SceneManagement
+// Namespace: UnityEngine.LowLevel
+[MovedFrom("UnityEngine.Experimental.LowLevel")]
+// Namespace: UnityEngine.Rendering
+[Obsolete("ShaderHardwareTier was renamed to GraphicsTier (UnityUpgradable) -> GraphicsTier", False)]
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+[MovedFrom("UnityEngine.Experimental.Rendering")]
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+	[Obsolete("OpenGL2 is no longer supported in Unity 5.5+")]
+	[Obsolete("Direct3D 9 is no longer supported in Unity 2017.2+")]
+	[Obsolete("PS3 is no longer supported in Unity 5.5+")]
+	[Obsolete("Xbox360 is no longer supported in Unity 5.5+")]
+	[Obsolete("PVita is no longer supported as of Unity 2018")]
+	[Obsolete("PlayStationMobile is no longer supported in Unity 5.3+")]
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+[MovedFrom("UnityEngine.Experimental.Rendering")]
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+	private int m_OffsetUnits; // 0x4
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Experimental.GlobalIllumination
+// Namespace: UnityEngine.Experimental.GlobalIllumination
+// Namespace: UnityEngine.Experimental.GlobalIllumination
+// Namespace: UnityEngine.Experimental.GlobalIllumination
+// Namespace: UnityEngine.Experimental.Rendering
+// Namespace: UnityEngine.Experimental.Rendering
+// Namespace: UnityEngine.Experimental.Rendering
+// Namespace: UnityEngine
+// Namespace: UnityEngine.Experimental.Rendering.RenderGraphModule
+// Namespace: UnityEngine.Experimental.Rendering.RenderGraphModule
+// Namespace: UnityEngine.Experimental.Rendering.RenderGraphModule
+// Namespace: UnityEngine.Experimental.Rendering.RenderGraphModule
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+// Namespace: UnityEngine.Rendering
+public class ColorTween.ColorTweenCallback : UnityEvent<Color> // TypeDefIndex: 16544
+public class TMP_InputField.SubmitEvent : UnityEvent<string> // TypeDefIndex: 16588
+public enum TagUnitType // TypeDefIndex: 16615
+	public const TagUnitType Pixels = 0;
+	public const TagUnitType FontUnits = 1;
+	public const TagUnitType Percentage = 2;
+// Namespace: UnityEngine.Localization.Tables
+// Namespace: UnityEngine.Localization.Tables
+// Namespace: UnityEngine.Localization.SmartFormat.Extensions
+// Namespace: UnityEngine.Localization.SmartFormat.Core.Settings
+// Namespace: UnityEngine.Localization.SmartFormat.Core.Settings
+// Namespace: UnityEngine.Localization.Settings
+// Namespace: UnityEngine.Localization.Settings
+// Namespace: UnityEngine.Localization.Settings
+// Namespace: UnityEngine.Localization.Settings
+// Namespace: UnityEngine.Localization.Settings
+// Namespace: UnityEngine.Localization.Pseudo
+// Namespace: UnityEngine.Localization.Metadata
+// Namespace: UnityEngine.Localization.Metadata
+// Namespace: UnityEngine.Localization.Metadata
+// Namespace: UnityEngine.UI
+// Namespace: UnityEngine.UI
+public class InputField.SubmitEvent : UnityEvent<string> // TypeDefIndex: 17365
+// Namespace: UnityEngine.UI
+public enum CanvasScaler.Unit // TypeDefIndex: 17376
+	public const CanvasScaler.Unit Centimeters = 0;
+	public const CanvasScaler.Unit Millimeters = 1;
+	public const CanvasScaler.Unit Inches = 2;
+	public const CanvasScaler.Unit Points = 3;
+	public const CanvasScaler.Unit Picas = 4;
+// Namespace: UnityEngine.UI
+	[Tooltip("If a sprite has this 'Pixels Per Unit' setting, then one pixel in the sprite will cover one unit in the UI.")]
+	protected float m_ReferencePixelsPerUnit; // 0x24
+// Namespace: UnityEngine.UI
+// Namespace: UnityEngine.UI
+// Namespace: UnityEngine.UI
+public class Scrollbar.ScrollEvent : UnityEvent<float> // TypeDefIndex: 17411
+public class ScrollRect.ScrollRectEvent : UnityEvent<Vector2> // TypeDefIndex: 17417
+// Namespace: UnityEngine.UI
+// Namespace: UnityEngine.UI
+public class Slider.SliderEvent : UnityEvent<float> // TypeDefIndex: 17424
+// Namespace: UnityEngine.UI
+public class Toggle.ToggleEvent : UnityEvent<bool> // TypeDefIndex: 17432
+// Namespace: UnityEngine.UI
+public class ColorTween.ColorTweenCallback : UnityEvent<Color> // TypeDefIndex: 17454
+// Namespace: UnityEngine.UI.CoroutineTween
+// Namespace: UnityEngine.EventSystems
+// Namespace: UnityEngine.EventSystems
+// Namespace: UnityEngine.EventSystems
+// Namespace: UnityEngine.EventSystems
+// Namespace: UnityEngine.EventSystems
+// Namespace: UnityEngine.EventSystems
+// Namespace: UnityEngine.EventSystems
+// Namespace: UnityEngine.TextCore.Text
+// Namespace: UnityEngine.TextCore.Text
+// Namespace: UnityEngine.TextCore.Text
+// Namespace: UnityEngine.TextCore.Text
+// Namespace: UnityEngine.TextCore.Text
+	public const ConversionUtility.ConversionType UnityHierarchy = 10;
+// Namespace: Unity.VisualScripting
+// Namespace: Unity.VisualScripting.FullSerializer
+// Namespace: Unity.VisualScripting.FullSerializer
+// Namespace: Unity.VisualScripting.FullSerializer
+	public bool showUnityEditorReport; // 0x2C
+// Namespace: UnityEngine.ResourceManagement.ResourceProviders
+// Namespace: UnityEngine.ResourceManagement.ResourceProviders
+// Namespace: UnityEngine.ResourceManagement.ResourceProviders
+// Namespace: UnityEngine.ResourceManagement.ResourceProviders
+// Namespace: UnityEngine.ResourceManagement.AsyncOperations
+// Namespace: UnityEngine.ResourceManagement.AsyncOperations
+	private IOperationCacheKey <UnityEngine.ResourceManagement.AsyncOperations.ICachable.Key>k__BackingField; // 0xB0
+	private IOperationCacheKey UnityEngine.ResourceManagement.AsyncOperations.ICachable.Key { get; set; }
+// Namespace: UnityEngine.Purchasing
+// Namespace: UnityEngine.Purchasing
+	public abstract INativeStore GetAndroidStore(IUnityCallback callback, AppStore store, IPurchasingBinder binder, IUtil util);
+	public abstract INativeAppleStore GetStorekit(IUnityCallback callback);
+// Namespace: UnityEngine.Purchasing
+// Namespace: UnityEngine.Purchasing
+// Namespace: UnityEngine.Purchasing
+// Namespace: UnityEngine.Purchasing
+public enum SubscriptionPeriodUnit // TypeDefIndex: 18546
+	public const SubscriptionPeriodUnit Day = 0;
+	public const SubscriptionPeriodUnit Month = 1;
+	public const SubscriptionPeriodUnit Week = 2;
+	public const SubscriptionPeriodUnit Year = 3;
+	public const SubscriptionPeriodUnit NotAvailable = 4;
+// Namespace: UnityEngine.Purchasing
+// Namespace: UnityEngine.Purchasing
+	[Obsolete("Use MouseDown instead (UnityUpgradable) -> MouseDown", True)]
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+	[Obsolete("FocusType.Native now behaves the same as FocusType.Passive in all OS cases. (UnityUpgradable) -> Passive", False)]
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine.AddressableAssets
+	public static Action<UnityWebRequest> WebRequestOverride { get; set; }
+// Namespace: UnityEngine.AddressableAssets
+// Namespace: UnityEngine.Android
+// Namespace: UnityEngine.Android
+// Namespace: TapjoyUnity
+// Namespace: TapjoyUnity.Internal
+// Namespace: TapjoyUnity.Internal.SimpleJSON
+	private JSONNode System.Collections.Generic.IEnumerator<TapjoyUnity.Internal.SimpleJSON.JSONNode>.Current { get; }
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine.ParticleSystemJobs
+// Namespace: UnityEngine.ParticleSystemJobs
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: Unity.Properties
+// Namespace: Unity.Properties
+// Namespace: Unity.Services.Analytics
+// Namespace: Unity.Services.Analytics
+	public abstract long ConvertCurrencyToMinorUnits(string currencyCode, double value);
+// Namespace: Unity.Services.Analytics
+// Namespace: UnityEngine.Purchasing
+// Namespace: UnityEngine.Purchasing
+// Namespace: UnityEngine.Purchasing
+// Namespace: UnityEngine.Purchasing
+// Namespace: UnityEngine.Purchasing
+// Namespace: Unity.Notifications.Android
+// Namespace: Unity.Notifications.Android
+// Namespace: Unity.Notifications.Android
+// Namespace: Unity.Notifications.Android
+// Namespace: Unity.Notifications.Android
+// Namespace: Unity.Notifications.Android
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+	[Obsolete("Enum member CollisionDetectionMode2D.None has been deprecated. Use CollisionDetectionMode2D.Discrete instead (UnityUpgradable) -> Discrete", True)]
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: Unity.Burst
+// Namespace: Unity.Burst
+// Namespace: Unity.Burst
+public enum UnityWebRequest.Result // TypeDefIndex: 20441
+	public const UnityWebRequest.Result InProgress = 0;
+	public const UnityWebRequest.Result Success = 1;
+	public const UnityWebRequest.Result ConnectionError = 2;
+	public const UnityWebRequest.Result ProtocolError = 3;
+	public const UnityWebRequest.Result DataProcessingError = 4;
+// Namespace: UnityEngine.Networking
+[NativeHeader("Modules/UnityWebRequest/Public/UnityWebRequest.h")]
+public class UnityWebRequest : IDisposable // TypeDefIndex: 20442
+// Namespace: UnityEngine.Tilemaps
+// Namespace: UnityEngine.Tilemaps
+// Namespace: UnityEngine.Tilemaps
+// Namespace: UnityEngine.TextCore
+// Namespace: UnityEngine.TextCore.LowLevel
+// Namespace: UnityEngine.TextCore.LowLevel
+// Namespace: UnityEngine.TextCore.LowLevel
+// Namespace: UnityEngine.TextCore.LowLevel
+// Namespace: UnityEngine.TextCore.LowLevel
+// Namespace: UnityEngine.TextCore.LowLevel
+// Namespace: UnityEngine.Purchasing.Security
+// Namespace: UnityEngine.Advertisements
+public enum UnityAdsInitializationError // TypeDefIndex: 20777
+	public const UnityAdsInitializationError UNKNOWN = 0;
+	public const UnityAdsInitializationError INTERNAL_ERROR = 1;
+	public const UnityAdsInitializationError INVALID_ARGUMENT = 2;
+	public const UnityAdsInitializationError AD_BLOCKER_DETECTED = 3;
+// Namespace: UnityEngine.Advertisements
+public enum UnityAdsLoadError // TypeDefIndex: 20778
+	public const UnityAdsLoadError INITIALIZE_FAILED = 0;
+	public const UnityAdsLoadError INTERNAL_ERROR = 1;
+	public const UnityAdsLoadError INVALID_ARGUMENT = 2;
+	public const UnityAdsLoadError NO_FILL = 3;
+	public const UnityAdsLoadError TIMEOUT = 4;
+	public const UnityAdsLoadError UNKNOWN = 5;
+// Namespace: UnityEngine.Advertisements
+public enum UnityAdsShowCompletionState // TypeDefIndex: 20779
+	public const UnityAdsShowCompletionState SKIPPED = 0;
+	public const UnityAdsShowCompletionState COMPLETED = 1;
+	public const UnityAdsShowCompletionState UNKNOWN = 2;
+// Namespace: UnityEngine.Advertisements
+public enum UnityAdsShowError // TypeDefIndex: 20780
+	public const UnityAdsShowError NOT_INITIALIZED = 0;
+	public const UnityAdsShowError NOT_READY = 1;
+	public const UnityAdsShowError VIDEO_PLAYER_ERROR = 2;
+	public const UnityAdsShowError INVALID_ARGUMENT = 3;
+	public const UnityAdsShowError NO_CONNECTION = 4;
+	public const UnityAdsShowError ALREADY_SHOWING = 5;
+	public const UnityAdsShowError INTERNAL_ERROR = 6;
+	public const UnityAdsShowError UNKNOWN = 7;
+// Namespace: UnityEngine.Advertisements
+	public abstract IUnityLifecycleManager UnityLifecycleManager { get; }
+	public abstract IUnityLifecycleManager get_UnityLifecycleManager();
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine.XR
+// Namespace: UnityEngine.XR
+// Namespace: UnityEngine.XR
+	[FreeFunction("UnityXRMeshTransformList_Dispose")]
+// Namespace: UnityEngine.XR
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine.SocialPlatforms
+// Namespace: UnityEngine.SocialPlatforms
+// Namespace: UnityEngine.SocialPlatforms
+// Namespace: UnityEngine.SocialPlatforms
+// Namespace: UnityEngine.SocialPlatforms
+// Namespace: UnityEngine.SocialPlatforms
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+// Namespace: UnityEngine
+	public static ILogger UnityLogger { get; }
+	public static ILogger get_UnityLogger() { }
+	public const string ODIN_SERIALIZATION_CAUTIONARY_WARNING_TEXT = "Odin\'s custom serialization protocol is stable and fast. It is built to be fast, reliable and resilient above all.\n\n*Words of caution* \nHowever, caveats apply - there is a reason Unity chose such a drastically limited serialization protocol. It keeps things simple and manageable, and limits how much complexity you can introduce into your data structures. It can be very easy to get carried away and shoot yourself in the foot when all limitations suddenly disappear, and hence we have included this cautionary warning.\n\nWarning words aside, there can of course be valid reasons to use a more powerful serialization protocol such as Odin\'s. However, we advise you to use it wisely and with restraint. After all, with great power comes great responsibility!";
+	public const string ODIN_PREFAB_CAUTIONARY_WARNING_TEXT = "In 2018.3, Unity introduced a new prefab workflow, and in so doing, changed how all prefabs fundamentally work. Despite our best efforts, we have so far been unable to achieve a stable implementation of Odin-serialized prefab modifications on prefab instances and variants in the new prefab workflow.This has nothing to do with Odin serializer itself, which remains rock solid. Odin-serialized ScriptableObjects and non-prefab Components/Behaviours are still perfectly stable - you are only seeing this message because this is an Odin-serialized prefab asset or instance.\n\nUsing prefabs with Odin serialization in 2018.3 and above is considered a *deprecated feature* and is officially unsupported. In short, if you disregard this message and then experience issues, we will not be able to help or support you.\n\nPlease keep all this in mind, if you wish to continue using Odin-serialized prefabs.";
+However, caveats apply - there is a reason Unity chose such a drastically limited serialization protocol. It keeps things simple and manageable, and limits how much complexity you can introduce into your data structures. It can be very easy to get carried away and shoot yourself in the foot when all limitations suddenly disappear, and hence we have included this cautionary warning.
+	[DetailedInfoBox("Click to show warning message.", "In 2018.3, Unity introduced a new prefab workflow, and in so doing, changed how all prefabs fundamentally work. Despite our best efforts, we have so far been unable to achieve a stable implementation of Odin-serialized prefab modifications on prefab instances and variants in the new prefab workflow.This has nothing to do with Odin serializer itself, which remains rock solid. Odin-serialized ScriptableObjects and non-prefab Components/Behaviours are still perfectly stable - you are only seeing this message because this is an Odin-serialized prefab asset or instance.
+private struct UnitySourceGeneratedAssemblyMonoScriptTypes_v1.MonoScriptData // TypeDefIndex: 21137
+[GeneratedCode("Unity.MonoScriptGenerator.MonoScriptInfoGenerator", null)]
+internal class UnitySourceGeneratedAssemblyMonoScriptTypes_v1 // TypeDefIndex: 21138
+// Namespace: UnityEngine.VFX
+// Namespace: UnityEngine
+// Namespace: UnityEngine.XR
+// Namespace: UnityEngine.Analytics
+[NativeHeader("Modules/UnityAnalyticsCommon/Public/UnityAnalyticsCommon.h")]
+	[StaticAccessor("GetUnityAnalyticsCommon()", 0)]
+// Namespace: Unity.Services.Core
+internal class UnityProjectNotLinkedException : ServicesInitializationException // TypeDefIndex: 21402
+// Namespace: Unity.Services.Core
+public interface IUnityServices // TypeDefIndex: 21403
+// Namespace: Unity.Services.Core.Device
+	internal IUserIdentifierProvider UnityAdsIdentifierProvider; // 0x18
+	internal IUserIdentifierProvider UnityAnalyticsIdentifierProvider; // 0x20
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
+// Namespace: UnityEngine.Rendering.Universal
