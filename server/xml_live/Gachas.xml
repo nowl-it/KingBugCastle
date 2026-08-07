@@ -24,7 +24,7 @@
     
     <!-- 보구 소환 아이콘용 가챠 (3999: 상시 소환) -->
     <!-- 4000 ~ 4012는 레거시 -->
-    <Gacha ID="102" Children="3999, 5052, 6000">
+    <Gacha ID="102" Children="3999">
         <Name>TreasureBox</Name>
         <GachaIcon>Theme_Progress_Bar_Icon_14</GachaIcon>
         <Permanent>true</Permanent>
