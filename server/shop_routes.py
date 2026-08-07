@@ -96,7 +96,7 @@ def _shop_buy(body, st):
             st["cash"] = st.get("cash", 0) - total_cost
             gacha_keys = [{"id": int(key_item), "count": keys_held}] if key_item else []
 
-        gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR)
+        gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR, item_id)
         for pull in gachas_result:
             for rg in pull["gacha"]:
                 rt = rg["type"]
@@ -255,7 +255,7 @@ def _shop_buy(body, st):
                 gacha_keys = [{"id": int(key_item or item_id), "count": keys_held}]
                 
             # Now roll the gacha
-            gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR)
+            gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR, item_id)
             
             # Grant the rewards to the player's state
             for pull in gachas_result:

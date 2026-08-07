@@ -82,15 +82,24 @@ def _get_gacha(gacha_id, xml_dir):
                 _GACHAS_CACHE[int(gid)] = g
     return _GACHAS_CACHE.get(gacha_id)
 
-def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML):
+def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
     gacha_el = _get_gacha(gacha_id, xml_dir)
     if gacha_el is None:
         return []
 
-    # Pity tracking: increment stack, return it for the buy response
+    # Pity tracking: increment stack for gacha_id, parent_id, key_item, and item_id
     stacks = st.setdefault("gachaStacks", {})
-    stack_key = str(gacha_id)
-    stacks[stack_key] = stacks.get(stack_key, 0) + amount
+    keys_to_update = {str(gacha_id)}
+    if item_id > 0:
+        keys_to_update.add(str(item_id))
+    parent_id = gacha_el.get("Parent")
+    if parent_id:
+        keys_to_update.add(str(parent_id))
+    key_item = gacha_el.findtext("KeyItem")
+    if key_item:
+        keys_to_update.add(str(key_item))
+    for k in keys_to_update:
+        stacks[k] = stacks.get(k, 0) + amount
         
     results = []
     result_pool = []
