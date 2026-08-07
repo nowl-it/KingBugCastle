@@ -2671,6 +2671,14 @@ def _grant_reward(st, rt, rid, amt):
         else:
             ids.append(rid)
             cnts.append(amt or 1)
+    elif rt == "Skin" and rid:
+        skins = st.setdefault("skins", [])
+        if rid not in skins:
+            skins.append(rid)
+    elif rt == "MapSkin" and rid:
+        map_skins = st.setdefault("mapSkins", [])
+        if rid not in map_skins:
+            map_skins.append(rid)
 
 # ── Admin, Inbox, Direct routes ──
 # Registered before ROUTE_MODELS so they take priority over the generic dispatcher.
