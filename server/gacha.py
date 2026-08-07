@@ -87,7 +87,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
     if gacha_el is None:
         return []
 
-    # Pity tracking: increment stack for gacha_id, parent_id, key_item, and item_id
+    # Pity tracking: increment stack for gacha_id, parent_id, key_item, item_id, and category IDs
     stacks = st.setdefault("gachaStacks", {})
     keys_to_update = {str(gacha_id)}
     if item_id > 0:
@@ -98,6 +98,15 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
     key_item = gacha_el.findtext("KeyItem")
     if key_item:
         keys_to_update.add(str(key_item))
+    
+    gtype = gacha_el.findtext("Type") or ""
+    if "Treasure" in gtype or parent_id == "102":
+        keys_to_update.update({"3999", "370", "371", "102"})
+    elif "Unit" in gtype or parent_id == "100":
+        keys_to_update.update({"300", "303", "305", "100", "2007"})
+    elif "Skin" in gtype or parent_id == "103":
+        keys_to_update.update({"7000", "390", "103"})
+
     for k in keys_to_update:
         stacks[k] = stacks.get(k, 0) + amount
         

@@ -8014,6 +8014,8 @@
 
         <KeyItem>371</KeyItem>
 
+        <Permanent>true</Permanent>
+        <ShowTimeLeft>false</ShowTimeLeft>
         <UseStack>false</UseStack>
 
         <GachaCeil Key="TreasurePickupGachaCeil_Rare" Target="Rare" PoolID="221000">10</GachaCeil>
