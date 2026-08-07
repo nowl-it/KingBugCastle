@@ -2575,6 +2575,9 @@ async def respond(path: str, request: Request):
         body = merged
 
     info = ROUTE_MODELS.get(path, {"response": "ResponseModel", "method": None})
+    resp_model = info["response"]
+    if path == "/shop" and (body.get("itemId") or body.get("gachaId")):
+        resp_model = "BuyResponseModel"
     # /auth/auth carries the account id as ?id=, /auth/register as body.id.
     if path.startswith("/auth/"):
         CURRENT_LOGIN_ID.set(request.query_params.get("id") or body.get("id") or "")
@@ -2595,7 +2598,7 @@ async def respond(path: str, request: Request):
         # data/route_models_extra.json), so reaching here means either a route the
         # string-table scan missed or a client newer than this server.
         admin_log(f"[UNKNOWN PATH] {request.method} {path}")
-    payload = build_model(info["response"], overlay)
+    payload = build_model(resp_model, overlay)
     
     # Auto-fill common player state variables if the model expects them and the
     # handler didn't explicitly override them. Missing currencies freeze the client.

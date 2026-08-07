@@ -279,17 +279,15 @@ def _shop_buy(body, st):
             keys[str(item_id)] = total
             gacha_keys = [{"id": item_id, "count": total}]
 
-    # Build gachaStack list from player state for pity tracking
-    gacha_stacks = []
+    # Build gachaStack (single object for BuyResponseModel) and gachaStacks (list for ShopResponseModel)
     gss = st.get("gachaStacks", {})
-    if gss:
-        for gid_str, cnt in gss.items():
-            gacha_stacks.append({"gachaId": int(gid_str), "stack": cnt})
+    gacha_stacks = [{"gachaId": int(gid_str), "stack": cnt} for gid_str, cnt in gss.items()]
+    gacha_stack_single = {"gachaId": gacha_id, "stack": gss.get(str(gacha_id), 0)} if gacha_id > 0 else None
 
     return {"gachaRewardResponseData": srv._reward_list_data(rewards),
             "inventoryItems": srv._inventory_models(st), "soldOut": False,
             "gachas": gachas_result, "gachaKeys": gacha_keys,
-            "gachaStack": gacha_stacks}
+            "gachaStack": gacha_stack_single, "gachaStacks": gacha_stacks}
 
 def r_shop_refresh(body, st):
     """Refreshing the daily shop clears its per-item buy counts, which is what makes
