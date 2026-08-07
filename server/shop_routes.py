@@ -57,9 +57,15 @@ def r_shop(body, st):
     base["playerCash"] = st.get("cash", 0)
     base["playerHeart"] = st.get("heart", 0)
     gss = st.get("gachaStacks", {})
+    # Sync legacy pity with Ceil pool ID for old users
+    if "5052" in gss and "231052" not in gss:
+        gss["231052"] = gss["5052"]
+    if "3999" in gss and "131000" not in gss:
+        gss["131000"] = gss["3999"]
+        
     base["gachaStacks"] = [{"gachaId": int(k), "stack": v}
                            for k, v in gss.items() if str(k).isdigit()]
-    base["availableTimeLimitGachas"] = [5052]
+    base["availableTimeLimitGachas"] = []
     base["gachaKeys"] = [{"id": int(k), "count": v}
                          for k, v in st.get("gachaKeys", {}).items()]
     return base
