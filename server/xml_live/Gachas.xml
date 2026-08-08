@@ -7,7 +7,7 @@
 <!--        <HideInGachaShopPanel>true</HideInGachaShopPanel>-->
 <!--    </Gacha>-->
     <!-- new 영웅 소환서 아이콘용 가챠 -->
-    <Gacha ID="100" Children="">
+    <Gacha ID="100" Children="300">
         <Name>RegularSummon</Name>
         <GachaIcon>Theme_Progress_Bar_Icon_09</GachaIcon>
         <Permanent>true</Permanent>
@@ -3687,8 +3687,9 @@
         <TagImage>Tier_Tag_03</TagImage>
         <GachaBoxIndex>3</GachaBoxIndex>
     
+        <Permanent>true</Permanent>
         <StartDate>20260730</StartDate>
-        <EndDate>20261231</EndDate>
+        <EndDate>20991231</EndDate>
     
         <UnitCount Min="4" Max="5"/>
         <AllExpToUnitExpItemRate>20</AllExpToUnitExpItemRate>
@@ -7912,8 +7913,9 @@
         <Type>TreasureGacha</Type>
         <LevelLimit>LevelLimit_Treasure</LevelLimit>
 
+        <Permanent>true</Permanent>
         <StartDate>20260730</StartDate>
-        <EndDate>20261231</EndDate>
+        <EndDate>20991231</EndDate>
 
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
 
@@ -8144,8 +8146,9 @@
         <KeyItem>371</KeyItem>
         <UseStack>false</UseStack>
     
+        <Permanent>true</Permanent>
         <StartDate>20260423</StartDate>
-        <EndDate>20261231</EndDate>
+        <EndDate>20991231</EndDate>
     
         <!--아이콘 정렬 순서-->
         <SortingOrder>1</SortingOrder>
