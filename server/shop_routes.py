@@ -19,7 +19,7 @@ from common import admin_log, body_int, body_list, next_reset_iso, now_iso
 from config import CONTENT_GATE, STATIC_OVERRIDES, XML_DIR
 from state import save_state
 
-srv = None      # the live server module, set by register()
+import server as srv
 
 def _gacha_keys(st):
     """key item id -> total keys held. A gacha scroll's key item is the scroll
