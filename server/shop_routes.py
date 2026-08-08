@@ -19,7 +19,14 @@ from common import admin_log, body_int, body_list, next_reset_iso, now_iso
 from config import CONTENT_GATE, STATIC_OVERRIDES, XML_DIR
 from state import save_state
 
-import server as srv
+srv = None      # the live server module, set by register()
+
+def _get_srv():
+    global srv
+    if srv is None:
+        import sys
+        srv = sys.modules.get("server")
+    return srv
 
 def _gacha_keys(st):
     """key item id -> total keys held. A gacha scroll's key item is the scroll
@@ -93,6 +100,7 @@ def r_shop(body, st):
 
 def _shop_buy(body, st):
     """Charge for a shop item or gacha banner and grant it. Returns the BuyResponseModel-ish extras."""
+    srv = _get_srv()
     item_id = body_int(body.get("itemId"), 0)
     gacha_id_req = body_int(body.get("gachaId"), 0)
     gacha_id = gacha_id_req
@@ -394,6 +402,7 @@ def r_treasure_wish_list(body, st):
 def r_save_treasure_wish_list(body, st):
     """Store the wish list, keeping only ids that are really treasures - a wish for
     something that does not exist comes back as a blank row in the panel."""
+    srv = _get_srv()
     sent = body.get("wishList")
     sent = sent if isinstance(sent, dict) else {}
     known = set(srv.ALL_TREASURE_IDS)
@@ -445,6 +454,7 @@ def r_early_access(body, st):
     """Early-access test windows are dated in EarlyAccessModeInfos.xml and every one
     of them has closed, so there is nothing to enter. Reported as closed rather than
     left empty, which the panel reads as a failed request."""
+    srv = _get_srv()
     return {"earlyAccessModeId": 0, "applied": False, "keyValues": srv._key_values(st)}
 
 
