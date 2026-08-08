@@ -2645,7 +2645,13 @@ def _grant_reward(st, rt, rid, amt):
             ids.append(rid)
             cnts.append(amt or 1)
     elif rt in ("Unit", "Card") and rid:
-        st.setdefault("cards", {}).setdefault(str(rid), {"unitId": rid, **SEED["cardTemplate"]})
+        cards = st.setdefault("cards", {})
+        s_rid = str(rid)
+        if s_rid not in cards:
+            cards[s_rid] = {"unitId": rid, **SEED["cardTemplate"]}
+        else:
+            c = cards[s_rid]
+            c["soul"] = c.get("soul", 0) + 150 * (amt or 1)
     elif rt == "UnitSoul" and rid:
         c = st.setdefault("cards", {}).setdefault(str(rid), {"unitId": rid, **SEED["cardTemplate"]})
         c["soul"] = c.get("soul", 0) + amt
