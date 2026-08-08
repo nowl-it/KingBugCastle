@@ -128,17 +128,19 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
     if key_item:
         keys_to_update.add(str(key_item))
         
-    gacha_ceil = gacha_el.find("GachaCeil")
-    if gacha_ceil is not None:
-        ceil_key = gacha_ceil.get("Key")
-        if ceil_key:
-            keys_to_update.add(ceil_key)
+    for ce in gacha_el.findall("GachaCeil"):
+        ck = ce.get("Key")
+        if ck:
+            keys_to_update.add(ck)
+        cp = ce.get("PoolID")
+        if cp:
+            keys_to_update.add(str(cp))
 
     gtype = gacha_el.findtext("Type") or ""
     if "Treasure" in gtype or parent_id == "102":
-        keys_to_update.update({"3999", "370", "371", "102", "131000", "121000", "231052"})
+        keys_to_update.update({"3999", "370", "371", "102", "131000", "121000", "231052", "5052", "6004", "335000"})
     elif "Unit" in gtype or parent_id == "100":
-        keys_to_update.update({"300", "303", "305", "100", "2007"})
+        keys_to_update.update({"300", "303", "305", "100", "2007", "8001", "1000"})
     elif "Skin" in gtype or parent_id == "103":
         keys_to_update.update({"7000", "390", "103"})
 
