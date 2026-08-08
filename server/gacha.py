@@ -72,8 +72,9 @@ def _get_treasures(xml_dir):
         for t in tree.findall("Treasure"):
             tid = int(t.get("ID", 0))
             cg = t.findtext("CanGacha")
+            le = t.findtext("LimitedEdition")
             mv = int(t.findtext("MinVersion") or 0)
-            if tid > 0 and cg != "false" and mv <= 171100:
+            if tid > 0 and cg != "false" and le != "true" and mv <= 171100:
                 r = t.findtext("Rarity")
                 if r in _TREASURE_CACHE:
                     _TREASURE_CACHE[r].append(tid)
@@ -308,7 +309,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                 pull_res = {"type": type_str, "unitId": hero_id, "count": count, "isNew": True}
 
             if pull_res:
-                if is_reward:
+                if is_reward and gtype == "SkinGacha":
                     _WIRE_TYPE = {"Item": "InventoryItem", "Unit": "Card", "UnitSoul": "CardSoul"}
                     # Convert pull_res to RewardGachaResult format which contains originReward of type RewardResponseData
                     reward = {

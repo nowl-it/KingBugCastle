@@ -49,7 +49,7 @@ def _build_gacha_ceil(gacha_el, st):
                 if key:
                     pool_id = ce.get("PoolID") or gid
                     if pool_id:
-                        ceil_dict[key] = gss.get(str(pool_id), 0)
+                        ceil_dict[key] = gss.get(key, gss.get(str(pool_id), gss.get(str(gid), 0)))
     except Exception as e:
         pass
     return ceil_dict
@@ -322,6 +322,7 @@ def _shop_buy(body, st):
                         rt = "Item"
                         if item_id == 301 or item_id == 302:
                             uid = 201
+                    srv._grant_reward(st, rt, uid, cnt)
 
                 # Add rewardGacha pulls
                 for rg in pull.get("rewardGacha", []):
