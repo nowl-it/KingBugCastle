@@ -42,7 +42,7 @@
     </Gacha>
     
     
-    <Gacha ID="300" Parent="100">
+    <Gacha ID="300" Parent="None">
         <Name>ShopItemName_300</Name>
         <Desc>HeroSummonDesc</Desc>
         <ResultTableDesc>GachaListDesc_Normal</ResultTableDesc>
