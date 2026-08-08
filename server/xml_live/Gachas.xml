@@ -8227,7 +8227,7 @@
 
         <UseStack>false</UseStack>
 
-        <GachaCeil Key="DimGachaCeil_PickUp" Target="0" ResetOnTargetHit="true">80</GachaCeil>
+        <GachaCeil Key="DimGachaCeil_PickUp" Target="80" ResetOnTargetHit="true">80</GachaCeil>
         <TargetRateIncrement IncreaseAfter="60" Target="0" DecreasePool="NonFixedRate" DecreaseMode="Weighted">4</TargetRateIncrement>
         <Results>
             <Result IsReward="true" Type="Unit" ID="10790" Rate="0.5" FixedRate="true"/>
