@@ -7913,8 +7913,8 @@
         <Type>TreasureGacha</Type>
         <LevelLimit>LevelLimit_Treasure</LevelLimit>
 
-        <StartDate>20260730</StartDate>
-        <EndDate>20291231</EndDate>
+        <StartDate>20260808</StartDate>
+        <EndDate>20260822</EndDate>
         <ShowTimeLeft>true</ShowTimeLeft>
 
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
