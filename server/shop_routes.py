@@ -56,7 +56,13 @@ def _build_gacha_ceil(gacha_el, st):
                 if key:
                     pool_id = ce.get("PoolID") or gid
                     if pool_id:
-                        ceil_dict[key] = gss.get(key, gss.get(str(pool_id), gss.get(str(gid), 0)))
+                        val_text = ce.text
+                        target_attr = ce.get("Target")
+                        limit = int(val_text) if (val_text and val_text.isdigit()) else (int(target_attr) if (target_attr and target_attr.isdigit()) else 100)
+                        cur_stack = gss.get(key, gss.get(str(pool_id), gss.get(str(gid), 0)))
+                        if limit > 0 and cur_stack >= limit:
+                            cur_stack = cur_stack % limit
+                        ceil_dict[key] = cur_stack
     except Exception as e:
         pass
     return ceil_dict

@@ -145,8 +145,21 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
     elif "Skin" in gtype or parent_id == "103":
         keys_to_update.update({"7000", "390", "103"})
 
-    for k in keys_to_update:
-        stacks[k] = stacks.get(k, 0) + amount
+    primary_ceil_key = None
+    primary_limit = 80
+    for ce in gacha_el.findall("GachaCeil"):
+        ck = ce.get("Key")
+        if ck:
+            val_text = ce.text
+            target_attr = ce.get("Target")
+            lim = int(val_text) if (val_text and val_text.isdigit()) else (int(target_attr) if (target_attr and target_attr.isdigit()) else 80)
+            primary_ceil_key = ck
+            primary_limit = lim
+            break
+
+    if primary_ceil_key and primary_limit > 0:
+        if stacks.get(primary_ceil_key, 0) >= primary_limit:
+            stacks[primary_ceil_key] = stacks[primary_ceil_key] % primary_limit
 
     result_pool = []
     
@@ -210,12 +223,18 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
         for p in pickups_el.findall("Pickup"):
             pid = p.get("PoolID")
             if pid:
-                # e.g. PoolID 231052 -> Treasure ID 30041 (Audakia)
                 pickup_treasures.append(30041)
 
     gacha_collections = []
     
     for _ in range(amount):
+        for k in keys_to_update:
+            stacks[k] = stacks.get(k, 0) + 1
+
+        is_pity_hit = False
+        if primary_ceil_key and primary_limit > 0 and stacks.get(primary_ceil_key, 0) >= primary_limit:
+            is_pity_hit = True
+
         if gacha_el.find("UnitCount") is None:
             num_rolls = 1
         else:
@@ -225,86 +244,115 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
         gacha_list = []
         reward_gacha_list = []
         for _ in range(num_rolls):
-            r = random.uniform(0, total_weight)
-            cum = 0
-            chosen = result_pool[-1]
-            for p in result_pool:
-                cum += p["weight"]
-                if r <= cum:
-                    chosen = p
-                    break
+            if is_pity_hit:
+                is_reward = False
+                if gacha_id == 8001:
+                    pull_res = {"type": "Unit", "unitId": 10790, "count": 1, "isNew": True}
+                elif gacha_id == 2007:
+                    c_pick = st.get("customPickups", {}).get("2007", [10790])
+                    c_unit = c_pick[0] if c_pick else 10790
+                    pull_res = {"type": "Unit", "unitId": c_unit, "count": 1, "isNew": True}
+                elif gacha_id in (5052, 6004):
+                    c_pick = st.get("customPickups", {}).get(str(gacha_id), [30041])
+                    c_tr = c_pick[0] if c_pick else 30041
+                    pull_res = {"type": "Treasure", "unitId": c_tr, "count": 1, "isNew": True}
+                elif "Treasure" in gtype or parent_id == "102":
+                    t_cache = _get_treasures(xml_dir)
+                    tid = random.choice(t_cache.get("Special", [30041]))
+                    pull_res = {"type": "Treasure", "unitId": tid, "count": 1, "isNew": True}
+                else:
+                    pull_res = {"type": "Unit", "unitId": 10790, "count": 1, "isNew": True}
 
-            hero_id = random.choice(all_heroes)
-            count = random.randint(chosen.get("min", 1), chosen.get("max", 1))
-            type_str = chosen["type"]
-            is_reward = chosen.get("is_reward", False)
-
-            pull_res = None
-            if type_str == "Unit":
-                uid = chosen.get("id") or hero_id
-                pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": True}
-            elif type_str == "Gold":
-                pull_res = {"type": "Gold", "unitId": 0, "count": count, "isNew": True}
-            elif type_str in ("Treasure", "TreasureGacha"):
-                rarity = chosen.get("rarity", "Common")
-                t_cache = _get_treasures(xml_dir)
-                if rarity == "Special" and pickup_treasures and random.random() < 0.8:
-                    tid = random.choice(pickup_treasures)
-                else:
-                    r_pool = t_cache.get(rarity) or t_cache["Common"]
-                    tid = random.choice(r_pool)
-                pull_res = {"type": "Treasure", "unitId": tid, "count": 1, "isNew": True}
-            elif type_str in ("Artifact", "ArtifactGacha"):
-                a_cache = _get_artifacts(xml_dir)
-                if chosen.get("art_id"):
-                    aid = int(chosen["art_id"])
-                else:
-                    ft = chosen.get("from_type")
-                    lv = chosen.get("level")
-                    k = f"{ft}_{lv}" if ft and lv else None
-                    a_pool = (a_cache.get(k) if k else None) or a_cache.get("all") or [501]
-                    aid = random.choice(a_pool)
-                pull_res = {"type": "Artifact", "unitId": aid, "count": 1, "isNew": True}
-            elif type_str in ("SkinToken",):
-                pull_res = {"type": "Item", "unitId": 2001, "count": count, "isNew": True}
-            elif type_str == "Skin_Grade":
-                grade = chosen.get("id", "0")
-                import xml.etree.ElementTree as ET
-                import pathlib
-                global _SKIN_GRADE_CACHE
-                cache = globals().get("_SKIN_GRADE_CACHE")
-                if cache is None:
-                    cache = {}
-                    try:
-                        tree = ET.parse(pathlib.Path(xml_dir) / "Skins.xml")
-                        for skin in tree.findall("Skin"):
-                            g = skin.findtext("Grade")
-                            if g is not None:
-                                cache.setdefault(g, []).append(int(skin.get("ID")))
-                        _SKIN_GRADE_CACHE = cache
-                    except:
-                        pass
-                pool = cache.get(str(grade))
-                if pool:
-                    sid = random.choice(pool)
-                    is_new = sid not in st.get("skins", [])
-                    pull_res = {"type": "Skin", "unitId": sid, "count": 1, "isNew": is_new}
-                else:
-                    pull_res = {"type": "SkinToken", "unitId": 0, "count": 5, "isNew": True}
-            elif type_str == "MapSkin_Grade":
-                grade = chosen.get("id", 0)
-                map_skins_cache = _get_map_skins(xml_dir)
-                map_skin_pool = map_skins_cache.get(grade) or map_skins_cache.get("all")
-                msid = random.choice(map_skin_pool)
-                is_new = msid not in st.get("mapSkins", [])
-                pull_res = {"type": "MapSkin", "unitId": msid, "count": 1, "isNew": is_new}
-            elif type_str == "LoginSkin_Grade":
-                pull_res = {"type": "Item", "unitId": 2001, "count": 15, "isNew": True}
-            elif type_str in ("UnitExp", "UnitSoul", "UnitSoulItem"):
-                pull_res = {"type": type_str, "unitId": hero_id, "count": count, "isNew": True}
+                for k in keys_to_update:
+                    stacks[k] = 0
             else:
-                uid = chosen.get("id") or 0
-                pull_res = {"type": type_str, "unitId": uid, "count": count, "isNew": True}
+                r = random.uniform(0, total_weight)
+                cum = 0
+                chosen = result_pool[-1]
+                for p in result_pool:
+                    cum += p["weight"]
+                    if r <= cum:
+                        chosen = p
+                        break
+
+                hero_id = random.choice(all_heroes)
+                count = random.randint(chosen.get("min", 1), chosen.get("max", 1))
+                type_str = chosen["type"]
+                is_reward = chosen.get("is_reward", False)
+
+                pull_res = None
+                if type_str == "Unit":
+                    uid = chosen.get("id") or hero_id
+                    pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": True}
+                elif type_str == "Gold":
+                    pull_res = {"type": "Gold", "unitId": 0, "count": count, "isNew": True}
+                elif type_str in ("Treasure", "TreasureGacha"):
+                    rarity = chosen.get("rarity", "Common")
+                    t_cache = _get_treasures(xml_dir)
+                    if rarity == "Special" and pickup_treasures and random.random() < 0.8:
+                        tid = random.choice(pickup_treasures)
+                    else:
+                        r_pool = t_cache.get(rarity) or t_cache["Common"]
+                        tid = random.choice(r_pool)
+                    pull_res = {"type": "Treasure", "unitId": tid, "count": 1, "isNew": True}
+                elif type_str in ("Artifact", "ArtifactGacha"):
+                    a_cache = _get_artifacts(xml_dir)
+                    if chosen.get("art_id"):
+                        aid = int(chosen["art_id"])
+                    else:
+                        ft = chosen.get("from_type")
+                        lv = chosen.get("level")
+                        k = f"{ft}_{lv}" if ft and lv else None
+                        a_pool = (a_cache.get(k) if k else None) or a_cache.get("all") or [501]
+                        aid = random.choice(a_pool)
+                    pull_res = {"type": "Artifact", "unitId": aid, "count": 1, "isNew": True}
+                elif type_str in ("SkinToken",):
+                    pull_res = {"type": "Item", "unitId": 2001, "count": count, "isNew": True}
+                elif type_str == "Skin_Grade":
+                    grade = chosen.get("id", "0")
+                    import xml.etree.ElementTree as ET
+                    import pathlib
+                    global _SKIN_GRADE_CACHE
+                    cache = globals().get("_SKIN_GRADE_CACHE")
+                    if cache is None:
+                        cache = {}
+                        try:
+                            tree = ET.parse(pathlib.Path(xml_dir) / "Skins.xml")
+                            for skin in tree.findall("Skin"):
+                                g = skin.findtext("Grade")
+                                if g is not None:
+                                    cache.setdefault(g, []).append(int(skin.get("ID")))
+                            _SKIN_GRADE_CACHE = cache
+                        except:
+                            pass
+                    pool = cache.get(str(grade))
+                    if pool:
+                        sid = random.choice(pool)
+                        is_new = sid not in st.get("skins", [])
+                        pull_res = {"type": "Skin", "unitId": sid, "count": 1, "isNew": is_new}
+                    else:
+                        pull_res = {"type": "SkinToken", "unitId": 0, "count": 5, "isNew": True}
+                elif type_str == "MapSkin_Grade":
+                    grade = chosen.get("id", 0)
+                    map_skins_cache = _get_map_skins(xml_dir)
+                    map_skin_pool = map_skins_cache.get(grade) or map_skins_cache.get("all")
+                    msid = random.choice(map_skin_pool)
+                    is_new = msid not in st.get("mapSkins", [])
+                    pull_res = {"type": "MapSkin", "unitId": msid, "count": 1, "isNew": is_new}
+                elif type_str == "LoginSkin_Grade":
+                    pull_res = {"type": "Item", "unitId": 2001, "count": 15, "isNew": True}
+                elif type_str in ("UnitExp", "UnitSoul", "UnitSoulItem"):
+                    pull_res = {"type": type_str, "unitId": hero_id, "count": count, "isNew": True}
+                else:
+                    uid = chosen.get("id") or 0
+                    pull_res = {"type": type_str, "unitId": uid, "count": count, "isNew": True}
+
+                is_pickup_hit = (gacha_id == 8001 and pull_res.get("type") == "Unit" and pull_res.get("unitId") == 10790) or \
+                                (gacha_id == 2007 and pull_res.get("type") == "Unit" and pull_res.get("unitId") == st.get("customPickups", {}).get("2007", [10790])[0]) or \
+                                (gacha_id in (5052, 6004) and pull_res.get("type") == "Treasure" and pull_res.get("unitId") in (pickup_treasures or [30041]))
+                if is_pickup_hit:
+                    for k in keys_to_update:
+                        stacks[k] = 0
 
             if pull_res:
                 if is_reward and gtype == "SkinGacha":
