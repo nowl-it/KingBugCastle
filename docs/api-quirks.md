@@ -19,3 +19,15 @@ This document tracks known API quirks, design mismatches, and specific implement
 ## 4. Artifact Rewards (`ArtifactOptionUI` crash)
 - **Issue**: The private server previously had a bug where direct Artifact granting crashed the client's `ArtifactOptionUI` due to `targets.Count` mismatches.
 - **Fix/Rule**: `make_artifact` in `server.py` now strictly ensures `targets.Count == opt_count` (e.g., 1 for Normal, 4 for KingGod). Artifacts can now safely be granted directly via `_grant_reward(..., "Artifact", ...)`.
+
+## 5. Gacha Banner Resolution & Duplication Rules (`GachaShopPanel`)
+- **Issue**: `GachaShopPanel.Reload` in the Unity client populates child banners for parent gachas (e.g., Hero Summon ID `100`, Legacy Summon ID `102`, Skin Summon ID `103`) via two separate passes:
+  1. `ShopResponseModel.availableTimeLimitGachas` returned by the `/shop` endpoint.
+  2. The `<Gacha ID="..." Children="...">` attribute defined in `Gachas.xml`.
+  If a child Gacha ID is listed in **both** `availableTimeLimitGachas` **and** `Children="..."`, `GachaShopPanel` adds it twice to `_childGachas` without deduplication. This causes duplicate banner cells, distorted page indicator counts (dots), and navigation glitches.
+- **Fix/Rule**:
+  - `availableTimeLimitGachas` in `shop_routes.py` must ONLY list active time-limited pickup gachas that are **not** already listed in a parent's `Children="..."` attribute.
+  - Permanent base gachas (e.g., Hero Normal ID `300`, Legacy Normal ID `3999`, Skin Gacha ID `7000`) belong in `Children="..."` of their parent in `Gachas.xml`.
+  - Active pickup gachas (e.g., Hero Pickup ID `1043`, Custom Unit Pickup ID `2007`, Legacy Pickup ID `5052`, Dimension Gacha ID `8001`) belong in `availableTimeLimitGachas`.
+  - Expired pickup gachas must be kept with `Parent=None` or excluded from `availableTimeLimitGachas` so the client does not mark them expired mid-load.
+
