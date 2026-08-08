@@ -405,12 +405,12 @@ def r_save_treasure_wish_list(body, st):
     return {"wishList": out}
 
 def r_custom_pickups(body, st):
-    """The heroes pinned to a custom-pickup banner, per banner id."""
-    banner = str(body.get("shopItemId", body.get("id", 0)) or 0)
+    """The heroes or treasures pinned to a custom-pickup banner, per banner/gacha id."""
+    banner = str(body.get("gachaId") or body.get("shopItemId") or body.get("id") or 0)
     return {"customPickups": list(st.get("customPickups", {}).get(banner, []))}
 
 def r_save_custom_pickups(body, st):
-    banner = str(body.get("shopItemId", body.get("id", 0)) or 0)
+    banner = str(body.get("gachaId") or body.get("shopItemId") or body.get("id") or 0)
     picks = [i for i in body_list(body.get("customPickups"), int) if i]
     st.setdefault("customPickups", {})[banner] = picks
     save_state(st)
