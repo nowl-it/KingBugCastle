@@ -141,6 +141,8 @@ def _shop_buy(body, st):
             gacha_keys = [{"id": int(key_item), "count": keys_held}] if key_item else []
 
         gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR, item_id)
+        new_unit_ids = []
+        card_exp_results = []
         for pull in gachas_result:
             # Grant main gacha pulls
             for rg in pull.get("gacha", []):
@@ -150,6 +152,16 @@ def _shop_buy(body, st):
                     rt = "UnitSoul"
                 if srv._grant_reward(st, rt, uid, rg.get("count", 1)):
                     pull["upgrade"] = True
+                if rt in ("Unit", "Card") and uid:
+                    if pull.get("isNew", False) and uid not in new_unit_ids:
+                        new_unit_ids.append(uid)
+                    c = st.get("cards", {}).get(str(uid))
+                    if c:
+                        card_exp_results.append({
+                            "unitId": uid,
+                            "exp": c.get("exp", 0),
+                            "soul": c.get("soul", 0),
+                        })
             
             # Grant rewardGacha pulls (which use originReward schema)
             for rg in pull.get("rewardGacha", []):
@@ -184,6 +196,8 @@ def _shop_buy(body, st):
             "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0),
             "playerHeart": st.get("heart", 0),
+            "newUnitIds": new_unit_ids,
+            "cardExpResults": card_exp_results,
         }
 
     buys = _shop_buys(st)
