@@ -2651,7 +2651,20 @@ def _grant_reward(st, rt, rid, amt):
             cards[s_rid] = {"unitId": rid, **SEED["cardTemplate"]}
         else:
             c = cards[s_rid]
-            c["soul"] = c.get("soul", 0) + 150 * (amt or 1)
+            is_dim = False
+            try:
+                import xml.etree.ElementTree as ET
+                tree = ET.parse(XML_DIR / "Units.xml")
+                for u in tree.findall("Unit"):
+                    if u.get("ID") == str(rid) and u.findtext("IsDimensionUnit") == "true":
+                        is_dim = True
+                        break
+            except Exception:
+                pass
+            if is_dim:
+                c["overcome"] = c.get("overcome", 0) + (amt or 1)
+            else:
+                c["soul"] = c.get("soul", 0) + 150 * (amt or 1)
     elif rt == "UnitSoul" and rid:
         c = st.setdefault("cards", {}).setdefault(str(rid), {"unitId": rid, **SEED["cardTemplate"]})
         c["soul"] = c.get("soul", 0) + amt
