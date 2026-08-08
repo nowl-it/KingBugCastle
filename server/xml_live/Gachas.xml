@@ -7,7 +7,7 @@
 <!--        <HideInGachaShopPanel>true</HideInGachaShopPanel>-->
 <!--    </Gacha>-->
     <!-- new 영웅 소환서 아이콘용 가챠 -->
-    <Gacha ID="100" Children="300">
+    <Gacha ID="100" Children="">
         <Name>RegularSummon</Name>
         <GachaIcon>Theme_Progress_Bar_Icon_09</GachaIcon>
         <Permanent>true</Permanent>
@@ -3687,8 +3687,8 @@
         <TagImage>Tier_Tag_03</TagImage>
         <GachaBoxIndex>3</GachaBoxIndex>
     
-        <StartDate>20251023</StartDate>
-        <EndDate>20251105</EndDate>
+        <StartDate>20260730</StartDate>
+        <EndDate>20261231</EndDate>
     
         <UnitCount Min="4" Max="5"/>
         <AllExpToUnitExpItemRate>20</AllExpToUnitExpItemRate>
