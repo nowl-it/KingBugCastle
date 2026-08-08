@@ -7912,9 +7912,8 @@
         <Type>TreasureGacha</Type>
         <LevelLimit>LevelLimit_Treasure</LevelLimit>
 
-        <Permanent>true</Permanent>
         <StartDate>20260730</StartDate>
-        <EndDate>20991231</EndDate>
+        <EndDate>20261231</EndDate>
 
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
 
@@ -8133,7 +8132,7 @@
         </Images>
     </Gacha>     
     
-    <Gacha ID="6004">
+    <Gacha ID="6004" Parent="102">
         <Name>GachaName_6000</Name>
         <Desc>GachaDesc_4010</Desc>
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
@@ -8146,7 +8145,7 @@
         <UseStack>false</UseStack>
     
         <StartDate>20260423</StartDate>
-        <EndDate>20260506</EndDate>
+        <EndDate>20261231</EndDate>
     
         <!--아이콘 정렬 순서-->
         <SortingOrder>1</SortingOrder>

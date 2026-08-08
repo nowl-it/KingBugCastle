@@ -86,7 +86,7 @@ def r_shop(body, st):
         
     base["gachaStacks"] = [{"gachaId": int(k), "stack": v}
                            for k, v in gss.items() if str(k).isdigit()]
-    base["availableTimeLimitGachas"] = [1092, 2007, 5052, 8001]
+    base["availableTimeLimitGachas"] = [1092, 2007, 5052, 6004]
     base["gachaKeys"] = [{"id": int(k), "count": v}
                          for k, v in st.get("gachaKeys", {}).items()]
     return base
