@@ -148,7 +148,8 @@ def _shop_buy(body, st):
                 uid = rg["unitId"]
                 if rt == "UnitExp":
                     rt = "UnitSoul"
-                srv._grant_reward(st, rt, uid, rg.get("count", 1))
+                if srv._grant_reward(st, rt, uid, rg.get("count", 1)):
+                    pull["upgrade"] = True
             
             # Grant rewardGacha pulls (which use originReward schema)
             for rg in pull.get("rewardGacha", []):

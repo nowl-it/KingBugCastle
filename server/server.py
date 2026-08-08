@@ -2628,7 +2628,9 @@ def _grant_reward(st, rt, rid, amt):
     (same shape make_treasure builds for the default inventory). Artifact/Accessory stay
     display-only - they trip client panel invariants (see AGENTS.md ArtifactOptionUI crash);
     gift those as an Item reward box (InventoryItems.xml Type=RewardBoxInventory/
-    InstantRewardBox) which the player opens."""
+    InstantRewardBox) which the player opens.
+
+    Returns True when a duplicate dimension hero was granted (caller should set upgrade=True)."""
     if rt == "Gold":
         st["gold"] = st.get("gold", 0) + amt
     elif rt == "Cash":
@@ -2663,6 +2665,7 @@ def _grant_reward(st, rt, rid, amt):
                 pass
             if is_dim:
                 c["overcome"] = c.get("overcome", 0) + (amt or 1)
+                return True
             else:
                 c["soul"] = c.get("soul", 0) + 150 * (amt or 1)
     elif rt == "UnitSoul" and rid:
@@ -2698,6 +2701,7 @@ def _grant_reward(st, rt, rid, amt):
         map_skins = st.setdefault("mapSkins", [])
         if rid not in map_skins:
             map_skins.append(rid)
+    return False
 
 # ── Admin, Inbox, Direct routes ──
 # Registered before ROUTE_MODELS so they take priority over the generic dispatcher.
