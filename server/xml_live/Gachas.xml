@@ -7913,9 +7913,9 @@
         <Type>TreasureGacha</Type>
         <LevelLimit>LevelLimit_Treasure</LevelLimit>
 
-        <Permanent>true</Permanent>
         <StartDate>20260730</StartDate>
-        <EndDate>20991231</EndDate>
+        <EndDate>20291231</EndDate>
+        <ShowTimeLeft>true</ShowTimeLeft>
 
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
 
