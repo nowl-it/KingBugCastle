@@ -8134,7 +8134,7 @@
         </Images>
     </Gacha>     
     
-    <Gacha ID="6004" Parent="102">
+    <Gacha ID="6004" Parent="None">
         <Name>GachaName_6000</Name>
         <Desc>GachaDesc_4010</Desc>
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
