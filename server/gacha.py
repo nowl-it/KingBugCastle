@@ -267,7 +267,8 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                 grade = chosen.get("id", "0")
                 import xml.etree.ElementTree as ET
                 import pathlib
-                cache = getattr(gacha, "_SKIN_GRADE_CACHE", None)
+                global _SKIN_GRADE_CACHE
+                cache = globals().get("_SKIN_GRADE_CACHE")
                 if cache is None:
                     cache = {}
                     try:
@@ -276,7 +277,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                             g = skin.findtext("Grade")
                             if g is not None:
                                 cache.setdefault(g, []).append(int(skin.get("ID")))
-                        gacha._SKIN_GRADE_CACHE = cache
+                        _SKIN_GRADE_CACHE = cache
                     except:
                         pass
                 pool = cache.get(str(grade))
