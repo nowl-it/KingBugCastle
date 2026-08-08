@@ -241,7 +241,8 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
 
             pull_res = None
             if type_str == "Unit":
-                pull_res = {"type": "Unit", "unitId": hero_id, "count": 1, "isNew": True}
+                uid = chosen.get("id") or hero_id
+                pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": True}
             elif type_str == "Gold":
                 pull_res = {"type": "Gold", "unitId": 0, "count": count, "isNew": True}
             elif type_str in ("Treasure", "TreasureGacha"):
@@ -298,15 +299,12 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                 is_new = msid not in st.get("mapSkins", [])
                 pull_res = {"type": "MapSkin", "unitId": msid, "count": 1, "isNew": is_new}
             elif type_str == "LoginSkin_Grade":
-                pull_res = {"type": "Item", "unitId": _SKIN_TOKEN_ID, "count": 15, "isNew": True}
-            elif type_str == "UnitExp":
-                pull_res = {"type": "UnitSoul", "unitId": hero_id, "count": count, "isNew": True}
-            elif type_str == "UnitSoul":
-                pull_res = {"type": "UnitSoul", "unitId": hero_id, "count": count, "isNew": True}
-            elif type_str == "UnitSoulItem":
-                pull_res = {"type": "UnitSoulItem", "unitId": hero_id, "count": count, "isNew": True}
-            else:
+                pull_res = {"type": "Item", "unitId": 2001, "count": 15, "isNew": True}
+            elif type_str in ("UnitExp", "UnitSoul", "UnitSoulItem"):
                 pull_res = {"type": type_str, "unitId": hero_id, "count": count, "isNew": True}
+            else:
+                uid = chosen.get("id") or 0
+                pull_res = {"type": type_str, "unitId": uid, "count": count, "isNew": True}
 
             if pull_res:
                 if is_reward and gtype == "SkinGacha":
