@@ -161,6 +161,7 @@ def _shop_buy(body, st):
                             "unitId": uid,
                             "exp": c.get("exp", 0),
                             "soul": c.get("soul", 0),
+                            "overcome": c.get("overcome", 0),
                         })
             
             # Grant rewardGacha pulls (which use originReward schema)
