@@ -12,6 +12,20 @@ _MAP_SKINS_CACHE = None
 _TREASURE_CACHE = None
 _ARTIFACT_CACHE = None
 _SKIN_TOKEN_ID = 2001
+_DIM_UNIT_IDS = None
+
+def _get_dim_unit_ids(xml_dir):
+    global _DIM_UNIT_IDS
+    if _DIM_UNIT_IDS is None:
+        _DIM_UNIT_IDS = set()
+        try:
+            tree = ET.parse(xml_dir / "Units.xml")
+            for u in tree.findall("Unit"):
+                if (u.findtext("IsDimensionUnit") or "").strip().lower() == "true":
+                    _DIM_UNIT_IDS.add(int(u.get("ID", 0)))
+        except Exception:
+            pass
+    return _DIM_UNIT_IDS
 
 def _int(el, tag, default=0):
     val = el.findtext(tag)
@@ -244,20 +258,23 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
         gacha_list = []
         reward_gacha_list = []
         collection_has_upgrade = False
+        dim_ids = _get_dim_unit_ids(xml_dir)
         for _ in range(num_rolls):
             if is_pity_hit:
                 is_reward = False
                 if gacha_id == 8001:
                     uid = 10790
                     is_new = str(uid) not in st.get("cards", {})
-                    pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": is_new}
+                    dim_id = uid if uid in dim_ids else 0
+                    pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": is_new, "dimensionUnitId": dim_id}
                     if not is_new:
                         collection_has_upgrade = True
                 elif gacha_id == 2007:
                     c_pick = st.get("customPickups", {}).get("2007", [10790])
                     c_unit = c_pick[0] if c_pick else 10790
                     is_new = str(c_unit) not in st.get("cards", {})
-                    pull_res = {"type": "Unit", "unitId": c_unit, "count": 1, "isNew": is_new}
+                    dim_id = c_unit if c_unit in dim_ids else 0
+                    pull_res = {"type": "Unit", "unitId": c_unit, "count": 1, "isNew": is_new, "dimensionUnitId": dim_id}
                     if not is_new:
                         collection_has_upgrade = True
                 elif gacha_id in (5052, 6004):
@@ -271,7 +288,8 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                 else:
                     uid = 10790
                     is_new = str(uid) not in st.get("cards", {})
-                    pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": is_new}
+                    dim_id = uid if uid in dim_ids else 0
+                    pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": is_new, "dimensionUnitId": dim_id}
                     if not is_new:
                         collection_has_upgrade = True
 
@@ -296,7 +314,8 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                 if type_str == "Unit":
                     uid = chosen.get("id") or hero_id
                     is_new = str(uid) not in st.get("cards", {})
-                    pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": is_new}
+                    dim_id = uid if uid in dim_ids else 0
+                    pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": is_new, "dimensionUnitId": dim_id}
                     if not is_new:
                         collection_has_upgrade = True
                 elif type_str == "Gold":
