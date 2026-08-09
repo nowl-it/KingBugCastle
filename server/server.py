@@ -2651,6 +2651,16 @@ def _grant_reward(st, rt, rid, amt):
         s_rid = str(rid)
         if s_rid not in cards:
             cards[s_rid] = {"unitId": rid, **SEED["cardTemplate"]}
+            # Dimension heroes start at overcome=1 (1 star) on first acquisition
+            try:
+                import xml.etree.ElementTree as ET
+                tree = ET.parse(XML_DIR / "Units.xml")
+                for u in tree.findall("Unit"):
+                    if u.get("ID") == str(rid) and u.findtext("IsDimensionUnit") == "true":
+                        cards[s_rid]["overcome"] = 1
+                        break
+            except Exception:
+                pass
         else:
             c = cards[s_rid]
             is_dim = False
