@@ -30,6 +30,15 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 
+import sys
+import pathlib
+
+_HERE = pathlib.Path(__file__).resolve().parent
+for _p in (_HERE, _HERE / "routes", _HERE / "builders", _HERE / "cli"):
+    _sp = str(_p)
+    if _sp not in sys.path:
+        sys.path.insert(0, _sp)
+
 import gamedata
 import dimension
 import playerdb
