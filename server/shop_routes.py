@@ -152,6 +152,12 @@ def _shop_buy(body, st):
                     rt = "UnitSoul"
                 if srv._grant_reward(st, rt, uid, rg.get("count", 1)):
                     pull["upgrade"] = True
+                    # Duplicate dimension hero: client reads type+count for stars
+                    if rt in ("Unit", "Card") and uid:
+                        c = st.get("cards", {}).get(str(uid))
+                        if c and c.get("overcome", 0) > 0:
+                            rg["type"] = "DimensionOvercome"
+                            rg["count"] = c["overcome"]
                 if rt in ("Unit", "Card") and uid:
                     if pull.get("isNew", False) and uid not in new_unit_ids:
                         new_unit_ids.append(uid)
