@@ -26,7 +26,7 @@ import random
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-from grant_accessories import rolls_for
+from cli.grant_accessories import rolls_for
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_XML = ROOT / "xml_live"

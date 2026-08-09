@@ -8,9 +8,13 @@ is why it is asserted here rather than left to be noticed in game.
 import json, sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+_SERVER = Path(__file__).resolve().parent.parent
+for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
+    _sp = str(_p)
+    if _sp not in sys.path:
+        sys.path.insert(0, _sp)
 
-import route_coverage
+from cli import route_coverage
 
 ROOT = Path(__file__).resolve().parent.parent
 

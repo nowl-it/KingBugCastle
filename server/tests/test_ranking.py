@@ -76,7 +76,10 @@ def check_deck_falls_back_to_a_filled_preset():
     st = server.load_state()
     presets = st.get("decks") or []
     filled = next(i for i, d in enumerate(presets) if d.get("deck"))
-    empty = next(i for i, d in enumerate(presets) if not d.get("deck"))
+    empty = next((i for i, d in enumerate(presets) if not d.get("deck")), None)
+    if empty is None:
+        presets.append({"presetIndex": len(presets), "deck": []})
+        empty = len(presets) - 1
     st["currentDeckPreset"] = empty
     server.save_state(st)
     deck = server.r_ranking({}, server.load_state())["ranking"][0]["deck"]

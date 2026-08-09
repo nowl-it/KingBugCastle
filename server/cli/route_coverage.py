@@ -19,7 +19,11 @@ import argparse, json, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-SCRIPT_JSON = ROOT.parent / "il2cpp" / "v171.0.00" / "script.json"
+SERVER = ROOT.parent
+REPO = ROOT.parent.parent
+if str(SERVER) not in sys.path:
+    sys.path.insert(0, str(SERVER))
+SCRIPT_JSON = REPO / "il2cpp" / "v171.0.00" / "script.json"
 
 # The il2cpp string table holds every literal starting with "/", not just routes:
 # mono/.NET runtime paths, format fragments, and asset paths all land in it. None of
@@ -71,7 +75,7 @@ def handled_paths():
         playerdb.DB_PATH = pathlib.Path(tempfile.mkdtemp()) / "coverage.db"
     import server
 
-    static = set(json.loads((ROOT / "data" / "static_overrides.json").read_text()))
+    static = set(json.loads((SERVER / "data" / "static_overrides.json").read_text()))
     # server.OVERRIDES, not DYNAMIC_OVERRIDES: OVERRIDES is what respond() dispatches
     # on. Reading the source dict reported ~30 decoration and mini-game routes as
     # handled while they answered an empty model, because they were merged into
@@ -98,8 +102,8 @@ def modelled_paths():
     a log history with no games in it. A route with neither gets `ResponseModel`,
     which is missing every field the client reads, and that is the real failure: the
     client sees a null list where it expected an array."""
-    rm = json.loads((ROOT / "generated" / "route_models.json").read_text())
-    extra = json.loads((ROOT / "data" / "route_models_extra.json").read_text())
+    rm = json.loads((SERVER / "generated" / "route_models.json").read_text())
+    extra = json.loads((SERVER / "data" / "route_models_extra.json").read_text())
     out = {p for p, v in rm.items() if v.get("response") not in (None, "ResponseModel")}
     out |= {p for p, v in extra.items()
             if not p.startswith("_") and v.get("response") != "ResponseModel"}

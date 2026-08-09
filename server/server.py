@@ -11,6 +11,12 @@ Run:  uvicorn server:app --host 0.0.0.0 --port 8080
 """
 import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, hashlib, os, sys, random
 import shutil, subprocess
+
+_HERE = pathlib.Path(__file__).resolve().parent
+for _p in (_HERE, _HERE / "routes", _HERE / "builders", _HERE / "cli"):
+    _sp = str(_p)
+    if _sp not in sys.path:
+        sys.path.insert(0, _sp)
 import playerdb
 import rewardbox
 import shop

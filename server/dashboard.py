@@ -426,7 +426,7 @@ async def api_player_macro(pid: str, body: dict):
             art["count"] = 99999 # 10*
             arts.append(art)
     elif macro == "accessory_admin":
-        import grant_accessories
+        from cli import grant_accessories
         st["accessories"] = grant_accessories.build(pid)
     else:
         raise HTTPException(400, f"unknown macro {macro}")
