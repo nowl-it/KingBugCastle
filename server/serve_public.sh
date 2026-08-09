@@ -56,12 +56,12 @@ export KGC_QUIET="${KGC_QUIET:-1}"
 [ -n "${KGC_ADMIN_TOKEN:-}" ] && export KGC_ADMIN_TOKEN
 [ -n "${KGC_TRUST_PROXY:-}" ] && export KGC_TRUST_PROXY
 
-# Every "is this safe to expose" rule lives in preflight.py, not here - one place to
+# Every "is this safe to expose" rule lives in cli/preflight.py, not here - one place to
 # read, one place to add to, and an operator can run it without starting anything.
 # It covers the admin credential, the dev login bypass, the abuse caps, the database,
 # master data and the CDN bundles.
 echo "[+] preflight"
-if ! "$PY_BIN" preflight.py; then
+if ! "$PY_BIN" cli/preflight.py; then
   echo ""
   echo "[!] refusing to serve publicly. Fix the FAIL lines above, then re-run."
   exit 1
