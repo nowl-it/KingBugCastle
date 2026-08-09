@@ -207,6 +207,34 @@ def check_direct_gacha_banner_rolls():
     print("ok direct gacha rolls: 300 (Hero), 303 (Legacy), 350 (Artifact), 3999 (Treasure), 7000 (Skin) rolled successfully")
 
 
+def check_dimensional_summon_pity_sync():
+    """Verify that dimensional summon (8001) pity stack is synced upon GET /shop
+    and correctly increments upon POST /shop rolls, maintaining stack continuity across all related IDs (8001, 70000, 100)."""
+    st = _fresh(cash=10000)
+    # Pre-seed player state with existing stack under DimGachaCeil_PickUp or 8001
+    st["gachaStacks"] = {"DimGachaCeil_PickUp": 10, "8001": 10}
+    server.save_state(st)
+
+    # 1. GET /shop must report stack = 10 for gachaId 8001, 70000, 100
+    out_get = server.r_shop({}, st)
+    stacks_get = {item["gachaId"]: item["stack"] for item in out_get.get("gachaStacks", [])}
+    assert stacks_get.get(8001) == 10, f"GET /shop did not report stack 10 for Gacha 8001: {stacks_get}"
+    assert stacks_get.get(70000) == 10, f"GET /shop did not report stack 10 for KeyItem 70000: {stacks_get}"
+    assert stacks_get.get(100) == 10, f"GET /shop did not report stack 10 for Parent 100: {stacks_get}"
+
+    # 2. Roll 10x on Gacha 8001 -> stack increases from 10 to 20
+    out_post = server.r_shop({"gachaId": 8001, "buyAmount": 10}, st)
+    stacks_post = {item["gachaId"]: item["stack"] for item in out_post.get("gachaStacks", [])}
+    assert stacks_post.get(8001) == 20, f"POST /shop 10x roll expected stack 20, got: {stacks_post}"
+    assert stacks_post.get(70000) == 20, f"POST /shop 10x roll expected stack 20 for KeyItem 70000, got: {stacks_post}"
+    
+    ceil_dict = out_post.get("gachaCeil", {})
+    assert ceil_dict.get("8001") == 20, f"gachaCeil['8001'] expected 20, got {ceil_dict.get('8001')}"
+    assert ceil_dict.get("70000") == 20, f"gachaCeil['70000'] expected 20, got {ceil_dict.get('70000')}"
+    assert ceil_dict.get("DimGachaCeil_PickUp") == 20, f"gachaCeil['DimGachaCeil_PickUp'] expected 20, got {ceil_dict.get('DimGachaCeil_PickUp')}"
+    print("ok dimensional summon pity sync: initial stack 10 -> GET /shop stack 10 (pity 70) -> 10x roll -> stack 20 (pity 60)")
+
+
 if __name__ == "__main__":
     check_listing_not_empty()
     check_gold_purchase_charges_and_grants()
@@ -217,4 +245,6 @@ if __name__ == "__main__":
     check_no_free_lunch_on_token_shops()
     check_gacha_scroll_buy_does_not_freeze()
     check_direct_gacha_banner_rolls()
+    check_dimensional_summon_pity_sync()
     print("\nall shop checks passed")
+

@@ -131,7 +131,9 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
     if gacha_el is None:
         return []
 
-    # Pity tracking: increment stack for gacha_id, parent_id, key_item, item_id, and category IDs
+    # Pity tracking: increment only this gacha's own stack key (gacha ID) and
+    # its GachaCeil key. Category siblings (300/303/305/etc) do NOT share a
+    # pity counter — each gacha rolls independently.
     stacks = st.setdefault("gachaStacks", {})
     keys_to_update = {str(gacha_id)}
     if item_id > 0:
@@ -142,22 +144,18 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
     key_item = gacha_el.findtext("KeyItem")
     if key_item:
         keys_to_update.add(str(key_item))
-        
+    gtype = gacha_el.findtext("Type") or ""
+
+    # GachaCeil keys and PoolIDs are the pity counters the client reads (e.g. DimGachaCeil_PickUp)
+    ceil_keys = set()
     for ce in gacha_el.findall("GachaCeil"):
         ck = ce.get("Key")
         if ck:
-            keys_to_update.add(ck)
-        cp = ce.get("PoolID")
-        if cp:
-            keys_to_update.add(str(cp))
-
-    gtype = gacha_el.findtext("Type") or ""
-    if "Treasure" in gtype or parent_id == "102":
-        keys_to_update.update({"3999", "370", "371", "102", "131000", "121000", "231052", "5052", "6004", "335000"})
-    elif "Unit" in gtype or parent_id == "100":
-        keys_to_update.update({"300", "303", "305", "100", "2007", "8001", "1000"})
-    elif "Skin" in gtype or parent_id == "103":
-        keys_to_update.update({"7000", "390", "103"})
+            ceil_keys.add(ck)
+        pid = ce.get("PoolID")
+        if pid:
+            ceil_keys.add(str(pid))
+    keys_to_update |= ceil_keys
 
     primary_ceil_key = None
     primary_limit = 80

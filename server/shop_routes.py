@@ -41,30 +41,78 @@ def _gacha_keys_models(st):
     return [{"id": int(k), "count": v} for k, v in sorted(_gacha_keys(st).items())]
 
 
+_GACHA_SYNC_CACHE = None
+
+def _get_gacha_sync_map(xml_dir=XML_DIR):
+    """Returns a dict of gacha_id (str) -> set of all related keys (gachaId, Ceil Key, PoolID)."""
+    global _GACHA_SYNC_CACHE
+    if _GACHA_SYNC_CACHE is None:
+        _GACHA_SYNC_CACHE = {}
+        try:
+            import xml.etree.ElementTree as ET
+            tree = ET.parse(xml_dir / "Gachas.xml")
+            for g in tree.findall("Gacha"):
+                gid = g.get("ID")
+                if not gid:
+                    continue
+                related = {str(gid)}
+                parent_id = g.get("Parent")
+                if parent_id:
+                    related.add(str(parent_id))
+                key_item = g.findtext("KeyItem")
+                if key_item:
+                    related.add(str(key_item))
+                for ce in g.findall("GachaCeil"):
+                    ck = ce.get("Key")
+                    if ck:
+                        related.add(str(ck))
+                    pid = ce.get("PoolID")
+                    if pid:
+                        related.add(str(pid))
+                _GACHA_SYNC_CACHE[str(gid)] = related
+        except Exception as e:
+            admin_log(f"[gacha-sync-map error] {e}")
+    return _GACHA_SYNC_CACHE or {}
+
+def _sync_gacha_stacks(st, xml_dir=XML_DIR):
+    """Sync pity stacks across Gacha ID, GachaCeil Key, and PoolID for all gachas."""
+    gss = st.setdefault("gachaStacks", {})
+    sync_map = _get_gacha_sync_map(xml_dir)
+    for gid, related in sync_map.items():
+        max_val = 0
+        for k in related:
+            val = gss.get(k)
+            if isinstance(val, int):
+                max_val = max(max_val, val)
+        if max_val > 0:
+            for k in related:
+                gss[k] = max_val
+
 def _build_gacha_ceil(gacha_el, st):
-    """Build BuyResponseModel.gachaCeil dict: {poolId_or_gachaId: current_stack}."""
+    """Build BuyResponseModel.gachaCeil dict mapping Gacha ID, Parent, KeyItem, GachaCeil Key, and PoolID to current stack."""
+    _sync_gacha_stacks(st, XML_DIR)
     gss = st.get("gachaStacks", {})
-    ceil_dict = {str(k): int(v) for k, v in gss.items() if str(k).isdigit()}
-    import xml.etree.ElementTree as ET
-    import pathlib
-    try:
-        tree = ET.parse(pathlib.Path(XML_DIR) / "Gachas.xml")
-        for g in tree.findall("Gacha"):
-            gid = g.get("ID")
-            for ce in g.findall("GachaCeil"):
-                key = ce.get("Key")
-                if key:
-                    pool_id = ce.get("PoolID") or gid
-                    if pool_id:
-                        val_text = ce.text
-                        target_attr = ce.get("Target")
-                        limit = int(val_text) if (val_text and val_text.isdigit()) else (int(target_attr) if (target_attr and target_attr.isdigit()) else 100)
-                        cur_stack = gss.get(key, gss.get(str(pool_id), gss.get(str(gid), 0)))
-                        if limit > 0 and cur_stack >= limit:
-                            cur_stack = cur_stack % limit
-                        ceil_dict[key] = cur_stack
-    except Exception as e:
-        pass
+    ceil_dict = {}
+    if gacha_el is not None:
+        gid = gacha_el.get("ID")
+        val = gss.get(str(gid), 0) if gid else 0
+        if gid:
+            ceil_dict[str(gid)] = val
+        parent_id = gacha_el.get("Parent")
+        if parent_id:
+            ceil_dict[str(parent_id)] = gss.get(str(parent_id), val)
+        key_item = gacha_el.findtext("KeyItem")
+        if key_item:
+            ceil_dict[str(key_item)] = gss.get(str(key_item), val)
+        for ce in gacha_el.findall("GachaCeil"):
+            ck = ce.get("Key")
+            c_val = gss.get(ck, val) if ck else val
+            if ck:
+                ceil_dict[ck] = c_val
+            pid = ce.get("PoolID")
+            p_val = gss.get(str(pid), c_val) if pid else c_val
+            if pid:
+                ceil_dict[str(pid)] = p_val
     return ceil_dict
 
 
@@ -90,12 +138,9 @@ def r_shop(body, st):
     base["playerGold"] = st.get("gold", 0)
     base["playerCash"] = st.get("cash", 0)
     base["playerHeart"] = st.get("heart", 0)
+    
+    _sync_gacha_stacks(st, XML_DIR)
     gss = st.get("gachaStacks", {})
-    # Sync legacy pity with Ceil pool ID for old users
-    if "5052" in gss and "231052" not in gss:
-        gss["231052"] = gss["5052"]
-    if "3999" in gss and "131000" not in gss:
-        gss["131000"] = gss["3999"]
         
     base["gachaStacks"] = [{"gachaId": int(k), "stack": v}
                            for k, v in gss.items() if str(k).isdigit()]
@@ -111,6 +156,8 @@ def _shop_buy(body, st):
     gacha_id_req = body_int(body.get("gachaId"), 0)
     gacha_id = gacha_id_req
     amount = body_int(body.get("buyAmount"), 1, lo=1)
+    new_unit_ids = []
+    card_exp_results = []
     
     el = shop.find(item_id, XML_DIR)
     gacha_el = gacha._get_gacha(gacha_id_req or item_id, XML_DIR) if (gacha_id_req or item_id) else None
@@ -181,8 +228,9 @@ def _shop_buy(body, st):
                         rt = "UnitSoul"
                     srv._grant_reward(st, rt, uid, origin.get("count", 1))
 
-        gacha_stacks = []
+        _sync_gacha_stacks(st, XML_DIR)
         gss = st.get("gachaStacks", {})
+        gacha_stacks = []
         if gss:
             for gid_str, cnt in gss.items():
                 if str(gid_str).isdigit():
@@ -415,6 +463,7 @@ def _shop_buy(body, st):
             admin_log(f"[gacha-key] ELSE branch fired: item_id={item_id} adding {amount} keys, total={total} (gacha_el was None)")
 
     # Build gachaStack (single object for BuyResponseModel) and gachaStacks (list for ShopResponseModel)
+    _sync_gacha_stacks(st, XML_DIR)
     gss = st.get("gachaStacks", {})
     gacha_stacks = [{"gachaId": int(gid_str), "stack": cnt} for gid_str, cnt in gss.items() if str(gid_str).isdigit()]
     actual_gacha_id = gacha_id
