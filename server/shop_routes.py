@@ -308,7 +308,7 @@ def _shop_buy(body, st):
         
         if gacha_el is not None:
             # It's a roll!
-            key_item = el.findtext("KeyItem") or gacha_el.findtext("KeyItem") or str(item_id)
+            key_item = gacha_el.findtext("KeyItem") or el.findtext("KeyItem") or str(item_id)
             # If the user has enough keys, and they didn't explicitly request to use cash/gold, we use keys.
             # But wait, the client already checks if they have keys. If they have keys, it sends a request.
             # If they don't, it asks to use gems. In either case, the request comes here.
@@ -317,6 +317,7 @@ def _shop_buy(body, st):
             keys_held = keys.get(str(key_item)) if key_item else keys.get(str(item_id))
             if keys_held is None:
                 keys_held = 0
+            admin_log(f"[gacha-key] key_item={key_item} keys_held={keys_held} amount={amount} all_keys={dict(keys)} use_gold={use_gold}")
                 
             used_keys = False
             if not use_gold and keys_held >= amount:
@@ -389,6 +390,7 @@ def _shop_buy(body, st):
             total = keys.get(str(item_id), 0) + amount
             keys[str(item_id)] = total
             gacha_keys = [{"id": item_id, "count": total}]
+            admin_log(f"[gacha-key] ELSE branch fired: item_id={item_id} adding {amount} keys, total={total} (gacha_el was None)")
 
     # Build gachaStack (single object for BuyResponseModel) and gachaStacks (list for ShopResponseModel)
     gss = st.get("gachaStacks", {})
