@@ -16,6 +16,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+SERVER = ROOT.parent
+if str(SERVER) not in sys.path:
+    sys.path.insert(0, str(SERVER))
 
 FAIL, WARN, OK = "FAIL", "WARN", "ok"
 _results = []
@@ -132,7 +135,7 @@ def check_master_data():
     else:
         check(OK, f"master data {xml.name} ({len(list(xml.iterdir()))} files)")
 
-    cdn = ROOT / "real_cdn"
+    cdn = SERVER / "real_cdn"
     hashes = cdn / "AssetHash.txt"
     if not hashes.exists():
         check(FAIL, "real_cdn/AssetHash.txt missing",
@@ -147,7 +150,7 @@ def check_master_data():
 
 
 def check_tls():
-    have = (ROOT / "cert.pem").exists() and (ROOT / "key.pem").exists()
+    have = (SERVER / "cert.pem").exists() and (SERVER / "key.pem").exists()
     if have:
         check(OK, "cert.pem/key.pem present (:8443)")
     else:
@@ -157,7 +160,7 @@ def check_tls():
 
 
 def check_route_coverage():
-    import route_coverage
+    from cli import route_coverage
     r = route_coverage.report()
     n = len(r["client_routes"])
     if r["bare"]:
