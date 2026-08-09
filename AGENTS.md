@@ -440,6 +440,47 @@ picker; see the "Web dashboard" note in `server/README.md`. `/api/catalog` also 
 `grantable` / `displayOnly` — the dashboard groups the reward-type dropdown from those, so moving a
 type between them is a one-line change in `dashboard.py`, not a UI edit.
 
+### Dimension hero gacha — overcome, cardExpResults, and the two buy paths (2026-08-09)
+
+**Dimension heroes** (e.g. D.Ophelia 10790) use `overcome` (0-5) for star upgrades instead of
+`soul`. `overcome` is incremented on duplicate pulls. Key fields in `st.cards[str(unitId)]`:
+`overcome` (int, default 0), `unitId` must be present in the dict.
+
+**`_grant_reward()` dimension logic** (`server.py:2649`):
+- First pull (hero NOT in cards): creates card with `SEED["cardTemplate"]`, then checks
+  `Units.xml` `IsDimensionUnit` — if true, sets `overcome=1` (hero starts at 1 star).
+- Duplicate (hero already in cards): increments `overcome += 1`, returns `True`.
+- **Never delete a dimension hero from cards to "reset" them** — just set `overcome=0` or `1`.
+  Deleting removes the hero entirely and shows "Not Owned" in barracks.
+
+**Two gacha buy paths** (`server/shop_routes.py`) — both must handle dimension heroes:
+
+1. **Direct gacha path** (line 140+, `/shop` with `gachaId` only): already has `newUnitIds`,
+   `cardExpResults`, and `upgrade=True` + `DimensionOvercome` type change for duplicates.
+
+2. **Shop buy path** (line 309+, `/shop` with `itemId` + `gachaId`, e.g. scroll purchase):
+   - Must also check `_grant_reward()` return value → set `pull["upgrade"] = True` for dupes
+   - Must change `rg["type"]` to `"DimensionOvercome"` and `rg["count"]` to overcome value
+   - Must build `new_unit_ids` and `card_exp_results` lists
+   - Must include `"newUnitIds": new_unit_ids, "cardExpResults": card_exp_results` in response
+
+**`cardExpResults` is required** — without it, the client's local card state stays stale after
+the gacha animation. The hero shows correct stars only after game restart (when `/card/all`
+is re-fetched). With `cardExpResults`, the client updates immediately.
+
+**`card_to_dict()` requires `unitId` in the card dict** — `server.py:340` reads `c["unitId"]`.
+A card missing this field crashes the entire `/card/all` response, making ALL heroes show
+"Not Owned". Always include `"unitId": rid` when constructing card dicts manually.
+
+**KeyItem mismatch** — ShopItem and Gacha `<KeyItem>` can differ:
+- ShopItem 70000: `<KeyItem>70005</KeyItem>` (scroll item)
+- Gacha 8001: `<KeyItem>70000</KeyItem>` (key id for gacha rolls)
+The buy path should prefer `gacha_el.findtext("KeyItem")` over `el.findtext("KeyItem")`.
+
+**Gacha pool for 8001** (DimensionUnitGacha): 0.5% D.Ophelia, 1.5% unit 10490, 48% cores,
+50% echoes — 98% of pulls are materials. Pity system: `GachaCeil` key `DimGachaCeil_PickUp`,
+target=80 stacks. Pre-roll reset: `stacks[key] = stacks[key] % primary_limit`.
+
 ### Dashboard game art — hero portraits + item icons (2026-08-01, commit 8e7377a)
 
 `webui-next/public/assets/{heroes,items}/*.webp` ship real game art, committed in-repo (2.2MB total,
