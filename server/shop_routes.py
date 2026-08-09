@@ -344,12 +344,12 @@ def _shop_buy(body, st):
                 gacha_keys = [{"id": int(key_item or item_id), "count": keys_held}]
                 
             # Now roll the gacha
-        gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR, item_id)
-        admin_log(f"[dim-fix] roll returned {len(gachas_result)} collections, first gacha={[{k:v for k,v in g.items() if k != 'originReward'} for g in gachas_result[0].get('gacha', [])] if gachas_result else []}")
-        for _ci, _coll in enumerate(gachas_result):
-            for _gi, _g in enumerate(_coll.get("gacha", [])):
-                admin_log(f"[dim-fix] coll={_ci} gacha={_gi} type={_g.get('type')} unitId={_g.get('unitId')} count={_g.get('count')} upgrade={_coll.get('upgrade')}")
-            
+            gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR, item_id)
+            admin_log(f"[dim-fix] roll returned {len(gachas_result)} collections, first gacha={[{k:v for k,v in g.items() if k != 'originReward'} for g in gachas_result[0].get('gacha', [])] if gachas_result else []}")
+            for _ci, _coll in enumerate(gachas_result):
+                for _gi, _g in enumerate(_coll.get("gacha", [])):
+                    admin_log(f"[dim-fix] coll={_ci} gacha={_gi} type={_g.get('type')} unitId={_g.get('unitId')} count={_g.get('count')} upgrade={_coll.get('upgrade')}")
+
             # Grant the rewards to the player's state & populate gachaRewardResponseData
             for pull in gachas_result:
                 # Add main gacha pulls
