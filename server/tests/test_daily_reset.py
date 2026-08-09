@@ -5,7 +5,11 @@ second; a stale stored value makes that true forever -> full login + lobby
 re-fetch at 1 Hz (~17 req/s).
 """
 import datetime, sys, pathlib
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+_SERVER = pathlib.Path(__file__).resolve().parent.parent
+for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
+    _sp = str(_p)
+    if _sp not in sys.path:
+        sys.path.insert(0, _sp)
 import server
 
 

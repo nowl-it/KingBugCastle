@@ -20,7 +20,7 @@ import datetime
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XML = ROOT / "xml_live"
 
 TOWN_HALL = 10000          # family base of the town hall, which caps stored labor

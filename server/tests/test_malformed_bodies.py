@@ -22,7 +22,11 @@ from getting in.
 import os, sys, tempfile
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+_SERVER = Path(__file__).resolve().parent.parent
+for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
+    _sp = str(_p)
+    if _sp not in sys.path:
+        sys.path.insert(0, _sp)
 
 # This fires several thousand requests from one address, which is exactly what the
 # per-IP limit exists to stop - every route past the first 600 came back 429 and the
@@ -124,6 +128,7 @@ def check_a_negative_index_does_not_write_to_the_end():
     """`preset < len(presets)` passes for -1 and Python indexes from the end, so a
     negative preset used to overwrite the last one instead of the first."""
     st = server.load_state()
+    st["currentDeckPreset"] = 0
     st["decks"] = [{"deck": [i] * server.DECK_SLOTS,
                     "potential": [0] * server.DECK_SLOTS, "firstComerIndex": 0}
                    for i in range(server.DECK_PRESETS)]

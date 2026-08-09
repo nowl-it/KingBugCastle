@@ -20,7 +20,7 @@ import datetime
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XML = ROOT / "xml_live"
 
 # Reward fields that name an inventory item by their own tag, as the shop and mission

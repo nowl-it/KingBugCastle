@@ -19,7 +19,7 @@ Two mission kinds drive the track:
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XML = ROOT / "xml_live"
 
 # Reward Type -> inventory item. ChallengeToken is 2014 (챌린지 토큰); a Key names a

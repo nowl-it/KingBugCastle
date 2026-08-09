@@ -22,7 +22,7 @@ from pathlib import Path
 
 import missions
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XML = ROOT / "xml_live"
 
 _cache = {}

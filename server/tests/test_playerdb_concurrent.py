@@ -6,7 +6,11 @@ atomic - so one side's save clobbered the other's, or left a truncated file.
 """
 import os, subprocess, sys, tempfile, pathlib
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+_SERVER = pathlib.Path(__file__).resolve().parent.parent
+for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
+    _sp = str(_p)
+    if _sp not in sys.path:
+        sys.path.insert(0, _sp)
 
 WORKER = r'''
 import sys, playerdb, pathlib

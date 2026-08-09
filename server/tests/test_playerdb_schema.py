@@ -6,7 +6,11 @@ shows stale numbers" rather than an error - hence these.
 """
 import json, sys, tempfile, pathlib, sqlite3
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+_SERVER = pathlib.Path(__file__).resolve().parent.parent
+for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
+    _sp = str(_p)
+    if _sp not in sys.path:
+        sys.path.insert(0, _sp)
 import playerdb
 
 

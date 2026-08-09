@@ -19,7 +19,7 @@ import datetime
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XML = ROOT / "xml_live"
 
 # dump.cs: DEFAULT_ADVISOR_ID / ADVISOR_CONTRACT_DAYS / ADVISOR_EXTEND_DAYS /

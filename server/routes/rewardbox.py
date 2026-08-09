@@ -28,7 +28,7 @@ from pathlib import Path
 
 from cli.grant_accessories import rolls_for
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XML = ROOT / "xml_live"
 
 # Type ids follow the order of AccessoryTypeInformation in AccessoryConstants.xml.

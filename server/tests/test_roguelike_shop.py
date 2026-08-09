@@ -11,7 +11,11 @@ the panel, so it has to be rejected on the way in rather than on the way out.
 import sys, tempfile
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+_SERVER = Path(__file__).resolve().parent.parent
+for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
+    _sp = str(_p)
+    if _sp not in sys.path:
+        sys.path.insert(0, _sp)
 
 import playerdb
 playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"

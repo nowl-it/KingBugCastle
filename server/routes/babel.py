@@ -19,7 +19,7 @@ from pathlib import Path
 
 import missions
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XML = ROOT / "xml_live"
 
 # C# DateTime.DayOfWeek, which is what the client compares OpenDays against:

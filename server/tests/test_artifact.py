@@ -2,7 +2,11 @@
 opt_count exactly (Normal=1..KingGod=4), or ArtifactOptionUI.Init crashes on
 the client (KeyNotFoundException on "None" / ArgumentOutOfRangeException)."""
 import sys, pathlib
-sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+_SERVER = pathlib.Path(__file__).resolve().parent.parent
+for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
+    _sp = str(_p)
+    if _sp not in sys.path:
+        sys.path.insert(0, _sp)
 import server
 
 OPT_COUNT = {"Normal": 1, "King": 2, "God": 3, "KingGod": 4}

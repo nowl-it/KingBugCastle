@@ -20,7 +20,7 @@ was not in any XML; it is in DimensionUnitConstants.xml now, so it is read, not 
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XML = ROOT / "xml_live"
 
 REMNANT = 10010   # 차원의 잔향 - pays for sync levels
