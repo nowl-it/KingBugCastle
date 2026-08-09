@@ -306,6 +306,9 @@ def _shop_buy(body, st):
                     gacha_id = type_map[stype]
                     gacha_el = gacha._get_gacha(gacha_id, XML_DIR)
         
+        new_unit_ids = []
+        card_exp_results = []
+
         if gacha_el is not None:
             # It's a roll!
             key_item = gacha_el.findtext("KeyItem") or el.findtext("KeyItem") or str(item_id)
@@ -351,6 +354,8 @@ def _shop_buy(body, st):
                     admin_log(f"[dim-fix] coll={_ci} gacha={_gi} type={_g.get('type')} unitId={_g.get('unitId')} count={_g.get('count')} upgrade={_coll.get('upgrade')}")
 
             # Grant the rewards to the player's state & populate gachaRewardResponseData
+            new_unit_ids = []
+            card_exp_results = []
             for pull in gachas_result:
                 # Add main gacha pulls
                 for rg in pull.get("gacha", []):
@@ -364,7 +369,24 @@ def _shop_buy(body, st):
                         rt = "Item"
                         if item_id == 301 or item_id == 302:
                             uid = 201
-                    srv._grant_reward(st, rt, uid, cnt)
+                    if srv._grant_reward(st, rt, uid, cnt):
+                        pull["upgrade"] = True
+                        if rt in ("Unit", "Card") and uid:
+                            c = st.get("cards", {}).get(str(uid))
+                            if c and c.get("overcome", 0) > 0:
+                                rg["type"] = "DimensionOvercome"
+                                rg["count"] = c["overcome"]
+                    if rt in ("Unit", "Card") and uid:
+                        if pull.get("isNew", False) and uid not in new_unit_ids:
+                            new_unit_ids.append(uid)
+                        c = st.get("cards", {}).get(str(uid))
+                        if c:
+                            card_exp_results.append({
+                                "unitId": uid,
+                                "exp": c.get("exp", 0),
+                                "soul": c.get("soul", 0),
+                                "overcome": c.get("overcome", 0),
+                            })
 
                 # Add rewardGacha pulls
                 for rg in pull.get("rewardGacha", []):
@@ -407,7 +429,9 @@ def _shop_buy(body, st):
             "gachaCeil": _build_gacha_ceil(gacha_el, st),
             "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0),
-            "playerHeart": st.get("heart", 0)}
+            "playerHeart": st.get("heart", 0),
+            "newUnitIds": new_unit_ids,
+            "cardExpResults": card_exp_results}
 
 def r_shop_refresh(body, st):
     """Refreshing the daily shop clears its per-item buy counts, which is what makes
