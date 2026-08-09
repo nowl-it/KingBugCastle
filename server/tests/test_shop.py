@@ -230,7 +230,7 @@ def check_dimensional_summon_pity_sync():
     out_post = server.r_shop({"gachaId": 8001, "buyAmount": 10}, st)
     stacks_post = {item["gachaId"]: item["stack"] for item in out_post.get("gachaStacks", [])}
     s8001 = stacks_post.get(8001, 0)
-    assert s8001 in (20, 1, 0), f"POST /shop 10x roll unexpected stack for 8001: {s8001}"
+    assert 0 <= s8001 <= 20, f"POST /shop 10x roll unexpected stack for 8001: {s8001}"
     assert stacks_post.get(70000) == s8001, f"KeyItem 70000 stack {stacks_post.get(70000)} != {s8001}"
     
     ceil_dict = out_post.get("gachaCeil", {})

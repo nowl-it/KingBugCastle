@@ -154,6 +154,8 @@ def check_oversized_bodies_are_refused():
 def check_one_address_cannot_hog_the_server():
     _reset()
     server._rate_hits.clear()
+    server._banned.clear()
+    server._ban_strikes.clear()
     c = LOCAL()
     codes = [c.get("/").status_code for _ in range(server.RATE_LIMIT + 5)]
     assert 429 in codes, "no rate limit at all"
