@@ -13007,117 +13007,299 @@
         <Prefab>Unit_10230_05</Prefab>
         <Sprite>LeagueRankRewardSkin_1023005</Sprite>
         <SpriteInSheet>false</SpriteInSheet>
-        <Height>50</Height>
+        <Height>70</Height>
         <NameFormat>SkinName_LeagueReward_Female_King</NameFormat>
         <!-- UI -->
-        <SpriteOffsetY>-25</SpriteOffsetY>
-        <!-- 태그 -->
-        <InfoTag>Skin_Season_02</InfoTag>
-        <Grade>0</Grade>
-        <EffectLevel>1</EffectLevel>
-        <SoundLevel>0</SoundLevel>
-        <!-- 사운드 -->
-        <ConnectSound>se_unit_1023004_connect</ConnectSound>
-        <ShotSound>se_unit_1023004_shot</ShotSound>
-        <AtkSound>se_unit_1023004_atk</AtkSound>
-        <SkillSound Target="10230, 1023000, 1023002">se_unit_1023004_skill</SkillSound>
-        <!-- 이펙트 -->
-        <!-- 투사체 -->
-        <ReplaceUnitArrowPrefab>Fx_10230a_04</ReplaceUnitArrowPrefab>
-        <!-- 유닛 -->
-        <ReplaceEffect Type="Unit">
-            <Effect Type="Self">
-                <Prefab>Fx_10230h_04</Prefab>
-                <ZLevel>UnitOver</ZLevel>
-                <RotationType>DirBlend</RotationType>
-            </Effect>
-            <Effect Type="Target">
-                <Prefab>Fx_10230b_04</Prefab>
-                <ZLevel>Over</ZLevel>
-                <ZLevel>UnitOver</ZLevel>
-                <RotationType>Angle</RotationType>
-                <CenterAlign>true</CenterAlign>
-            </Effect>
-        </ReplaceEffect>
-        <!-- 스킬 -->
-        <ReplaceEffect Type="Skill" Target="10230">
-            <Effect Type="Self">
-                <Prefab>Fx_10230e_04</Prefab>
-                <ZLevel>UnitOver</ZLevel>
-                <CenterAlign>true</CenterAlign>
-            </Effect>
-            <Effect Type="Shoot">
-                <Prefab>Fx_10230g_04</Prefab>
-                <ZLevel>Ground</ZLevel>
-                <Loop>true</Loop>
-            </Effect>
-            <Effect Type="Target">
-                <Prefab>Fx_10230f_04</Prefab>
-                <ZLevel>UnitOver</ZLevel>
-                <CenterAlign>true</CenterAlign>
-            </Effect>
-            <Effect Type="Target">
-                <Prefab>Fx_10230g_04</Prefab>
-                <ZLevel>Ground</ZLevel>
-                <Loop>true</Loop>
-            </Effect>
-            <Effect Type="WaitingSelf">
-                <Prefab>Fx_10230c_04</Prefab>
-                <Sound />
-                <OffsetY>0</OffsetY>
-                <ZLevel>Ground</ZLevel>
-                <Loop>true</Loop>
-            </Effect>
-            <Effect Type="WaitingTarget">
-                <Prefab>Fx_10230c_04</Prefab>
-                <Sound />
-                <OffsetY>0</OffsetY>
-                <ZLevel>Ground</ZLevel>
-                <Loop>true</Loop>
-            </Effect>
-            <Effect Type="WaitingLine">
-                <Prefab>Fx_10230d_04</Prefab>
-                <OffsetY>-6</OffsetY>
-                <ZLevel>Ground</ZLevel>
-                <Loop>true</Loop>
-            </Effect>
-            <Effect Type="WaitingTarget">
-                <Prefab>Fx_10230i_04</Prefab>
-                <ZLevel>UnitOver</ZLevel>
-                <Loop>true</Loop>
-            </Effect>
-            <Effect Type="Target">
-                <Prefab>Fx_10230j_04</Prefab>
-                <ZLevel>UnitOver</ZLevel>
-                <Loop>true</Loop>
-            </Effect>
-            <Effect Type="WaitingSelf">
-                <Prefab>Fx_10230i_04</Prefab>
-                <ZLevel>UnitOver</ZLevel>
-                <Loop>true</Loop>
-            </Effect>
-            <Effect Type="Self">
-                <Prefab>Fx_10230j_04</Prefab>
-                <ZLevel>UnitOver</ZLevel>
-                <Loop>true</Loop>
-            </Effect>
-        </ReplaceEffect>
+		<SpriteOffsetY>-34</SpriteOffsetY>
+		<PrefabOffsetY>-26</PrefabOffsetY>
+		<!-- 태그 -->
+		<InfoTag>SeasonPass, Skin_Limited</InfoTag>
+		<Grade>4</Grade>
+		<EffectLevel>1</EffectLevel>
+		<SoundLevel>1</SoundLevel>
+		<!-- 일러스트 -->
+		<IllustOffsetX>0</IllustOffsetX>
+		<IllustOffsetY>34</IllustOffsetY>
+		<GradationColor>1200B7</GradationColor>
+		<GachaGradationColor>3940B5</GachaGradationColor>
+		<RogueLikeNewHeroPanelOffsetX>0</RogueLikeNewHeroPanelOffsetX>
+		<RogueLikeNewHeroPanelOffsetY>-16</RogueLikeNewHeroPanelOffsetY>
+		<RogueLikeNewHeroPanelScale>0.85</RogueLikeNewHeroPanelScale>
+		<!-- 사운드 -->
+		<ConnectSound>se_unit_1023002_connect</ConnectSound>
+		<ShotSound>se_unit_1023002_shot</ShotSound>
+		<AtkSound>se_unit_1023002_atk</AtkSound>
+		<SkillSound Target="10230, 1023000">se_unit_1023002_skill</SkillSound>
+		<!-- 이펙트 -->
+		<!-- 투사체 -->
+		<ReplaceUnitArrowPrefab>Fx_10230a_05</ReplaceUnitArrowPrefab>
+		<!-- 유닛 -->
+		<ReplaceEffect Type="Unit">
+			<Effect Type="Self">
+				<Prefab>Fx_10230h_05</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<RotationType>DirBlend</RotationType>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230b_05</Prefab>
+				<ZLevel>Over</ZLevel>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+				<RotationType>Angle</RotationType>
+				<OffsetRotation Min="-2" Max="2" />
+			</Effect>
+		</ReplaceEffect>
+		<!-- 스킬 -->
+		<ReplaceEffect Type="Skill" Target="10230">
+			<Effect Type="Self">
+				<Prefab>Fx_10230e_05</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+			</Effect>
+			<Effect Type="Shoot">
+				<Prefab>Fx_10230g_05</Prefab>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230f_05</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230g_05</Prefab>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingSelf">
+				<Prefab>Fx_10230c_05</Prefab>
+				<Sound />
+				<OffsetY>0</OffsetY>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingTarget">
+				<Prefab>Fx_10230c_05</Prefab>
+				<Sound />
+				<OffsetY>0</OffsetY>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingLine">
+				<Prefab>Fx_10230d_05</Prefab>
+				<OffsetY>-6</OffsetY>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingTarget">
+				<Prefab>Fx_10230i_05</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230j_05</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingSelf">
+				<Prefab>Fx_10230i_05</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="Self">
+				<Prefab>Fx_10230j_05</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+		</ReplaceEffect>
 		<!-- 구매 -->
 		<CanBuy>false</CanBuy>
-        <MinVersion>999999</MinVersion>
-    </Skin>
+		<ShowAnimationOnBuy>true</ShowAnimationOnBuy>
+	</Skin>
+<!-- 정복자 루니아르 -->
     <Skin ID="102300500" Inherit="1023005">
         <NameFormat>SkinName_LeagueReward_Female_God</NameFormat>
         <Prefab>Unit_10230_05_00</Prefab>
         <Sprite>LeagueRankRewardSkin_102300500</Sprite>
         <ChromaColors>415aa1</ChromaColors>
-    </Skin>
+  <!-- 이펙트 -->
+		<!-- 투사체 -->
+		<ReplaceUnitArrowPrefab>Fx_10230a_05_00</ReplaceUnitArrowPrefab>
+		<!-- 유닛 -->
+		<ReplaceEffect Type="Unit">
+			<Effect Type="Self">
+				<Prefab>Fx_10230h_05_00</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<RotationType>DirBlend</RotationType>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230b_05_00</Prefab>
+				<ZLevel>Over</ZLevel>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+				<RotationType>Angle</RotationType>
+				<OffsetRotation Min="-2" Max="2" />
+			</Effect>
+		</ReplaceEffect>
+		<!-- 스킬 -->
+		<ReplaceEffect Type="Skill" Target="10230">
+			<Effect Type="Self">
+				<Prefab>Fx_10230e_05_00</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+			</Effect>
+			<Effect Type="Shoot">
+				<Prefab>Fx_10230g_05_00</Prefab>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230f_05_00</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230g_05_00</Prefab>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingSelf">
+				<Prefab>Fx_10230c_05_00</Prefab>
+				<Sound />
+				<OffsetY>0</OffsetY>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingTarget">
+				<Prefab>Fx_10230c_05_00</Prefab>
+				<Sound />
+				<OffsetY>0</OffsetY>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingLine">
+				<Prefab>Fx_10230d_05_00</Prefab>
+				<OffsetY>-6</OffsetY>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingTarget">
+				<Prefab>Fx_10230i_05_00</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230j_05_00</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingSelf">
+				<Prefab>Fx_10230i_05_00</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="Self">
+				<Prefab>Fx_10230j_05_00</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+		</ReplaceEffect>
+		<!-- 구매 -->
+		<CanBuy>false</CanBuy>
+		<ShowAnimationOnBuy>true</ShowAnimationOnBuy>
+	</Skin>
+<!-- 지배자 루니아르 -->
     <Skin ID="102300501" Inherit="1023005">
         <NameFormat>SkinName_LeagueReward_Female_KingGod</NameFormat>
         <Prefab>Unit_10230_05_01</Prefab>
         <Sprite>LeagueRankRewardSkin_102300501</Sprite>
         <ChromaColors>b74343</ChromaColors>
-    </Skin>
+  <!-- 이펙트 -->
+		<!-- 투사체 -->
+		<ReplaceUnitArrowPrefab>Fx_10230a_05_01</ReplaceUnitArrowPrefab>
+		<!-- 유닛 -->
+		<ReplaceEffect Type="Unit">
+			<Effect Type="Self">
+				<Prefab>Fx_10230h_05_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<RotationType>DirBlend</RotationType>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230b_05_01</Prefab>
+				<ZLevel>Over</ZLevel>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+				<RotationType>Angle</RotationType>
+				<OffsetRotation Min="-2" Max="2" />
+			</Effect>
+		</ReplaceEffect>
+		<!-- 스킬 -->
+		<ReplaceEffect Type="Skill" Target="10230">
+			<Effect Type="Self">
+				<Prefab>Fx_10230e_05_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+			</Effect>
+			<Effect Type="Shoot">
+				<Prefab>Fx_10230g_05_01</Prefab>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230f_05_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230g_05_01</Prefab>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingSelf">
+				<Prefab>Fx_10230c_05_01</Prefab>
+				<Sound />
+				<OffsetY>0</OffsetY>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingTarget">
+				<Prefab>Fx_10230c_05_01</Prefab>
+				<Sound />
+				<OffsetY>0</OffsetY>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingLine">
+				<Prefab>Fx_10230d_05_01</Prefab>
+				<OffsetY>-6</OffsetY>
+				<ZLevel>Ground</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingTarget">
+				<Prefab>Fx_10230i_05_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="Target">
+				<Prefab>Fx_10230j_05_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="WaitingSelf">
+				<Prefab>Fx_10230i_05_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+			<Effect Type="Self">
+				<Prefab>Fx_10230j_05_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+			</Effect>
+		</ReplaceEffect>
+		<!-- 구매 -->
+		<CanBuy>false</CanBuy>
+		<ShowAnimationOnBuy>true</ShowAnimationOnBuy>
+	</Skin>
     
 	<!-- 로제트 -->
 	<!-- 기본 로제트 -->
@@ -25371,6 +25553,27 @@
 		<!-- 적용 버전 -->
 		<MinVersion>503</MinVersion>
 	</Skin>
+	<Skin ID="1044005" Unit="10440">
+		<Prefab>Unit_10440_05</Prefab>
+        <NameFormat>SkinName_LeagueReward_Female_King</NameFormat>
+		<Sprite>LeagueRankRewardSkin_1044005</Sprite>
+		<SpriteInSheet>false</SpriteInSheet>
+		<MinVersion>999999</MinVersion>
+	</Skin>
+	<Skin ID="104400500" Inherit="1044005">
+		<Prefab>Unit_10440_05_00</Prefab>
+        <NameFormat>SkinName_LeagueReward_Female_God</NameFormat>
+        <Sprite>LeagueRankRewardSkin_104400500</Sprite>
+		<ChromaColors>415aa1</ChromaColors>
+		<MinVersion>999999</MinVersion>
+	</Skin>
+	<Skin ID="104400501" Inherit="1044005">
+		<Prefab>Unit_10440_05_01</Prefab>
+        <NameFormat>SkinName_LeagueReward_Female_KingGod</NameFormat>
+        <Sprite>LeagueRankRewardSkin_104400501</Sprite>
+		<ChromaColors>b74343</ChromaColors>
+		<MinVersion>999999</MinVersion>
+	</Skin>
 	<!-- 기본 발디르 크로마 -->
 	<Skin ID="1045099" Unit="10450">
 		<Name>UnitName_10450</Name>
@@ -30005,6 +30208,7 @@
 		<!-- 민버전 -->
 		<MinVersion>160000</MinVersion>
 	</Skin>
+
     <!-- 도전자 세령 -->
     <Skin ID="1056004" Unit="10560">
         <!-- 기본 -->
@@ -30014,7 +30218,7 @@
         <Height>50</Height>
         <NameFormat>SkinName_LeagueReward_Female_King</NameFormat>
         <!-- UI -->
-        <SpriteOffsetY>-35</SpriteOffsetY>
+        <SpriteOffsetY>20</SpriteOffsetY>
         <PrefabOffsetY>0</PrefabOffsetY>
         <!-- 태그 -->
         <InfoTag>Skin_Season_14</InfoTag>
@@ -30023,11 +30227,11 @@
         <SoundLevel>0</SoundLevel>
         <!-- 이펙트 -->
         <!-- 투사체 -->
-        <ReplaceUnitArrowPrefab>Fx_10560a_03</ReplaceUnitArrowPrefab>
+        <ReplaceUnitArrowPrefab>Fx_10560a_02</ReplaceUnitArrowPrefab>
         <!-- 유닛 -->
         <ReplaceEffect Type="Unit">
             <Effect Type="Target">
-                <Prefab>Fx_10560b_03</Prefab>
+                <Prefab>Fx_10560b_02</Prefab>
                 <RotationType>Angle</RotationType>
                 <CenterAlign>true</CenterAlign>
                 <ZLevel>UnitOver</ZLevel>
@@ -30038,41 +30242,41 @@
         <!-- 스킬 -->
         <ReplaceEffect Type="Skill" Target="10560">
             <Effect Type="Shoot">
-                <Prefab>Fx_10560g_03</Prefab>
+                <Prefab>Fx_10560g_02</Prefab>
                 <ZLevel>UnitOver</ZLevel>
                 <Loop>true</Loop>
             </Effect>
             <Effect Type="Shoot">
-                <Prefab>Fx_10560e_03</Prefab>
+                <Prefab>Fx_10560e_02</Prefab>
                 <ZLevel>UnitOver</ZLevel>
                 <CenterAlign>true</CenterAlign>
             </Effect>
             <Effect Type="Target">
-                <Prefab>Fx_10560f_03</Prefab>
+                <Prefab>Fx_10560f_02</Prefab>
                 <ZLevel>UnitOver</ZLevel>
                 <CenterAlign>true</CenterAlign>
             </Effect>
             <Effect Type="Target">
-                <Prefab>Fx_10560g_03</Prefab>
+                <Prefab>Fx_10560g_02</Prefab>
                 <ZLevel>UnitOver</ZLevel>
                 <Loop>true</Loop>
             </Effect>
             <Effect Type="WaitingSelf">
-                <Prefab>Fx_10560c_03</Prefab>
+                <Prefab>Fx_10560c_02</Prefab>
                 <Sound />
                 <OffsetY>0</OffsetY>
                 <ZLevel>Ground</ZLevel>
                 <Loop>true</Loop>
             </Effect>
             <Effect Type="WaitingTarget">
-                <Prefab>Fx_10560c_03</Prefab>
+                <Prefab>Fx_10560c_02</Prefab>
                 <Sound />
                 <OffsetY>0</OffsetY>
                 <ZLevel>Ground</ZLevel>
                 <Loop>true</Loop>
             </Effect>
             <Effect Type="WaitingLine">
-                <Prefab>Fx_10560d_03</Prefab>
+                <Prefab>Fx_10560d_02</Prefab>
                 <OffsetY>-6</OffsetY>
                 <ZLevel>Ground</ZLevel>
                 <Loop>true</Loop>
@@ -30081,19 +30285,143 @@
         </ReplaceEffect>
         <!-- 구매 -->
         <CanBuy>false</CanBuy>
-        <MinVersion>999999</MinVersion>
+        <MinVersion>488</MinVersion>
     </Skin>
+
     <Skin ID="105600400" Inherit="1056004">
         <NameFormat>SkinName_LeagueReward_Female_God</NameFormat>
-        <Prefab>Unit_10650_04_00</Prefab>
+        <Prefab>Unit_10560_04_00</Prefab>
         <Sprite>LeagueRankRewardSkin_105600400</Sprite>
         <ChromaColors>415aa1</ChromaColors>
+  <!-- 이펙트 -->
+        <!-- 투사체 -->
+        <ReplaceUnitArrowPrefab>Fx_10560a_04_00</ReplaceUnitArrowPrefab>
+        <!-- 유닛 -->
+        <ReplaceEffect Type="Unit">
+            <Effect Type="Target">
+                <Prefab>Fx_10560b_04_00</Prefab>
+                <RotationType>Angle</RotationType>
+                <CenterAlign>true</CenterAlign>
+                <ZLevel>UnitOver</ZLevel>
+                <OffsetHeight>10</OffsetHeight>
+                <OffsetRotation Min="-2" Max="2" />
+            </Effect>
+        </ReplaceEffect>
+        <!-- 스킬 -->
+        <ReplaceEffect Type="Skill" Target="10560">
+            <Effect Type="Shoot">
+                <Prefab>Fx_10560g_04_00</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <Loop>true</Loop>
+            </Effect>
+            <Effect Type="Shoot">
+                <Prefab>Fx_10560e_04_00</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <CenterAlign>true</CenterAlign>
+            </Effect>
+            <Effect Type="Target">
+                <Prefab>Fx_10560f_04_00</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <CenterAlign>true</CenterAlign>
+            </Effect>
+            <Effect Type="Target">
+                <Prefab>Fx_10560g_04_00</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <Loop>true</Loop>
+            </Effect>
+            <Effect Type="WaitingSelf">
+                <Prefab>Fx_10560c_04_00</Prefab>
+                <Sound />
+                <OffsetY>0</OffsetY>
+                <ZLevel>Ground</ZLevel>
+                <Loop>true</Loop>
+            </Effect>
+            <Effect Type="WaitingTarget">
+                <Prefab>Fx_10560c_04_00</Prefab>
+                <Sound />
+                <OffsetY>0</OffsetY>
+                <ZLevel>Ground</ZLevel>
+                <Loop>true</Loop>
+            </Effect>
+            <Effect Type="WaitingLine">
+                <Prefab>Fx_10560d_04_00</Prefab>
+                <OffsetY>-6</OffsetY>
+                <ZLevel>Ground</ZLevel>
+                <Loop>true</Loop>
+                <UseArrowLine>true</UseArrowLine>
+            </Effect>
+        </ReplaceEffect>
+        <!-- 구매 -->
+        <CanBuy>false</CanBuy>
+        <MinVersion>488</MinVersion>
     </Skin>
+
     <Skin ID="105600401" Inherit="1056004">
         <NameFormat>SkinName_LeagueReward_Female_KingGod</NameFormat>
-        <Prefab>Unit_10650_04_01</Prefab>
+        <Prefab>Unit_10560_04_01</Prefab>
         <Sprite>LeagueRankRewardSkin_105600401</Sprite>
         <ChromaColors>b74343</ChromaColors>
+  <!-- 이펙트 -->
+        <!-- 투사체 -->
+        <ReplaceUnitArrowPrefab>Fx_10560a_04_01</ReplaceUnitArrowPrefab>
+        <!-- 유닛 -->
+        <ReplaceEffect Type="Unit">
+            <Effect Type="Target">
+                <Prefab>Fx_10560b_04_01</Prefab>
+                <RotationType>Angle</RotationType>
+                <CenterAlign>true</CenterAlign>
+                <ZLevel>UnitOver</ZLevel>
+                <OffsetHeight>10</OffsetHeight>
+                <OffsetRotation Min="-2" Max="2" />
+            </Effect>
+        </ReplaceEffect>
+        <!-- 스킬 -->
+        <ReplaceEffect Type="Skill" Target="10560">
+            <Effect Type="Shoot">
+                <Prefab>Fx_10560g_04_01</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <Loop>true</Loop>
+            </Effect>
+            <Effect Type="Shoot">
+                <Prefab>Fx_10560e_04_01</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <CenterAlign>true</CenterAlign>
+            </Effect>
+            <Effect Type="Target">
+                <Prefab>Fx_10560f_04_01</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <CenterAlign>true</CenterAlign>
+            </Effect>
+            <Effect Type="Target">
+                <Prefab>Fx_10560g_04_01</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <Loop>true</Loop>
+            </Effect>
+            <Effect Type="WaitingSelf">
+                <Prefab>Fx_10560c_04_01</Prefab>
+                <Sound />
+                <OffsetY>0</OffsetY>
+                <ZLevel>Ground</ZLevel>
+                <Loop>true</Loop>
+            </Effect>
+            <Effect Type="WaitingTarget">
+                <Prefab>Fx_10560c_04_01</Prefab>
+                <Sound />
+                <OffsetY>0</OffsetY>
+                <ZLevel>Ground</ZLevel>
+                <Loop>true</Loop>
+            </Effect>
+            <Effect Type="WaitingLine">
+                <Prefab>Fx_10560d_04_01</Prefab>
+                <OffsetY>-6</OffsetY>
+                <ZLevel>Ground</ZLevel>
+                <Loop>true</Loop>
+                <UseArrowLine>true</UseArrowLine>
+            </Effect>
+        </ReplaceEffect>
+        <!-- 구매 -->
+        <CanBuy>false</CanBuy>
+        <MinVersion>488</MinVersion>
     </Skin>
     
 	<!-- 파라엘 기본 -->
@@ -30167,8 +30495,8 @@
 			<Effect Type="SplashRootIgnoreDelay">
 				<Prefab>Fx_10570e_00</Prefab>
 				<ZLevel>UnitOver</ZLevel>
-                <CenterAlign>true</CenterAlign>
-                <World>true</World>
+				<CenterAlign>true</CenterAlign>
+				<World>true</World>
 			</Effect>
 		</ReplaceEffect>
 		<MinVersion>482</MinVersion>
@@ -30218,8 +30546,8 @@
 			<Effect Type="SplashRootIgnoreDelay">
 				<Prefab>Fx_10570e_01</Prefab>
 				<ZLevel>UnitOver</ZLevel>
-                <CenterAlign>true</CenterAlign>
-                <World>true</World>
+				<CenterAlign>true</CenterAlign>
+				<World>true</World>
 			</Effect>
 		</ReplaceEffect>
 		<CashPrice>139</CashPrice>
@@ -30317,6 +30645,72 @@
 			</Effect>
 		</ReplaceEffect>
 	</Skin>
+
+<!-- 킹패 파라엘 -->
+	<Skin ID="1057002" Unit="10570">
+		<Prefab>Unit_10570_02</Prefab>
+		<Sprite>Unit_10570_02_18</Sprite>
+		<!-- UI -->
+		<SpriteOffsetY>0</SpriteOffsetY>
+		<PrefabOffsetY>0</PrefabOffsetY>
+		<!-- 태그 -->
+		<InfoTag>SeasonPass, Skin_Limited</InfoTag>
+		<Grade>4</Grade>
+		<EffectLevel>1</EffectLevel>
+		<SoundLevel>1</SoundLevel>
+		<!-- 일러스트 -->
+		<IllustOffsetX>10</IllustOffsetX>
+		<IllustOffsetY>10</IllustOffsetY>
+		<GradationColor>2beed4</GradationColor>
+		<GachaGradationColor>2beed4</GachaGradationColor>
+		<RogueLikeNewHeroPanelOffsetY>-35</RogueLikeNewHeroPanelOffsetY>
+		<RogueLikeNewHeroPanelOffsetX>0</RogueLikeNewHeroPanelOffsetX>
+		<RogueLikeNewHeroPanelScale>0.85</RogueLikeNewHeroPanelScale>	
+		<!-- 투사체 -->
+		<ReplaceUnitArrowPrefab>Fx_10570a_02</ReplaceUnitArrowPrefab>
+        <AtkSound>se_unit_1057002_atk</AtkSound>
+        <ShotSound>se_unit_1057002_shot</ShotSound>
+        <SkillSound Target="10570,105720">se_unit_1057002_skill</SkillSound>
+        <SkillHitSound Target="10570,105720"></SkillHitSound>
+		<!-- 이펙트 -->
+		<ReplaceEffect Type="Unit">
+			<Effect Type="Target">
+				<Prefab>Fx_10570b_02</Prefab>
+				<CenterAlign>true</CenterAlign>
+				<ZLevel>UnitOver</ZLevel>
+				<OffsetRotation Min="-180" Max="180" />
+			</Effect>
+		</ReplaceEffect>
+		<!-- 스킬 -->
+		<ReplaceEffect Type="Skill" Target="10570">
+			<Effect Type="SplashPos">
+				<Prefab>Fx_10570f_02</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<World>true</World>
+				<Sound>se_unit_1057002_skill_shot</Sound>
+			</Effect>
+		</ReplaceEffect>
+		<ReplaceEffect Type="Skill" Target="105700">
+			<ReplaceSkillArrowPrefab>Fx_10570d_02</ReplaceSkillArrowPrefab>
+			<Effect Type="Shoot">
+				<Prefab>Fx_10570b_02</Prefab>
+				<CenterAlign>true</CenterAlign>
+				<ZLevel>UnitOver</ZLevel>
+				<OffsetRotation Min="-180" Max="180" />
+				<OffsetHeight>40</OffsetHeight>
+			</Effect>
+			<Effect Type="SplashRootIgnoreDelay">
+				<Prefab>Fx_10570e_02</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+				<World>true</World>
+			</Effect>
+		</ReplaceEffect>
+        <ShowAnimationOnBuy>true</ShowAnimationOnBuy>
+        <CanBuy>false</CanBuy>
+		<MinVersion>172000</MinVersion>
+	</Skin>
+
 	<!-- 가람 기본 -->
 	<Skin ID="1058099" Unit="10580">
 		<Name>UnitName_10580</Name>
@@ -34428,6 +34822,27 @@
 		<ShowAnimationOnBuy>true</ShowAnimationOnBuy>
 		<MinVersion>166000</MinVersion>
 	</Skin>
+	<Skin ID="1071004" Unit="10710">
+		<Prefab>Unit_10710_04</Prefab>
+        <NameFormat>SkinName_LeagueReward_Female_King</NameFormat>
+        <Sprite>LeagueRankRewardSkin_1071004</Sprite>
+		<SpriteInSheet>false</SpriteInSheet>
+		<MinVersion>999999</MinVersion>
+	</Skin>
+	<Skin ID="107100400" Inherit="1071004">
+		<Prefab>Unit_10710_04_00</Prefab>
+        <NameFormat>SkinName_LeagueReward_Female_God</NameFormat>
+		<Sprite>LeagueRankRewardSkin_107100400</Sprite>
+		<ChromaColors>415aa1</ChromaColors>
+		<MinVersion>999999</MinVersion>
+	</Skin>
+	<Skin ID="107100401" Inherit="1071004">
+		<Prefab>Unit_10710_04_01</Prefab>
+        <NameFormat>SkinName_LeagueReward_Female_KingGod</NameFormat>
+        <Sprite>LeagueRankRewardSkin_107100401</Sprite>
+		<ChromaColors>b74343</ChromaColors>
+		<MinVersion>999999</MinVersion>
+	</Skin>
 
 	<!-- 에일린 초회한정 -->
 	<Skin ID="1072000" Unit="10720">
@@ -35555,4 +35970,112 @@
 		</ReplaceEffect>
   	</Skin>
 
+<!-- 이격 캐시 크로마 -->
+	<Skin ID="1080099" Unit="10800">
+		<Name>UnitName_10800</Name>
+		<Desc>SkinDesc_Default_10800</Desc>
+		<SpriteOffsetY>-5</SpriteOffsetY>
+		<PrefabOffsetY>10</PrefabOffsetY>
+		<MinVersion>420</MinVersion>
+	</Skin>
+	<Skin ID="108009900" Inherit="1080099">
+		<Prefab>Unit_10800_99_00</Prefab>
+		<Sprite>Unit_10800_99_00_0</Sprite>
+		<ChromaColors>4b4b4b,767676</ChromaColors>
+		<CanBuy>false</CanBuy>
+		<MinVersion>618</MinVersion>
+		<ReplaceSkillTransformPrefab>Unit_10810_99_00</ReplaceSkillTransformPrefab>
+		<TransformSprite>Unit_10810_99_00_0</TransformSprite>
+		<TransformHeight>50</TransformHeight>
+	</Skin>
+	<Skin ID="108009901" Inherit="1080099">
+		<Prefab>Unit_10800_99_01</Prefab>
+		<Sprite>Unit_10800_99_01_0</Sprite>
+		<ChromaColors>b1c3d8,7b5b61</ChromaColors>
+		<CanBuy>false</CanBuy>
+		<MinVersion>618</MinVersion>
+		<ReplaceSkillTransformPrefab>Unit_10810_99_01</ReplaceSkillTransformPrefab>
+		<TransformSprite>Unit_10810_99_01_0</TransformSprite>
+		<TransformHeight>50</TransformHeight>
+
+		<!-- 유닛 -->
+		<ReplaceEffect Type="Unit" Target="10800">
+			 <Effect Type='Shoot'>
+				<Prefab>Fx_10800a_99_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<RotationType>DirBlend</RotationType>
+			</Effect>
+		<Effect Type='Target'>
+			<Prefab>Fx_10800b_99_01</Prefab>
+			<CenterAlign>true</CenterAlign>
+			<ZLevel>UnitOver</ZLevel>
+			<RotationType>Angle</RotationType>
+		</Effect>
+		<Effect Type='ReviveTrigger'>
+			<Prefab>Fx_1049010_99_01</Prefab>
+			<ZLevel>UnitOver</ZLevel>
+			<Delay>0.3</Delay>
+			<Sound>se_unit_21145_skill</Sound>
+		</Effect>
+	</ReplaceEffect>
+		<ReplaceEffect Type="Unit" Target="10810">		
+		<Effect Type='Shoot'>
+			<Prefab>Fx_10810a_99_01</Prefab>
+			<ZLevel>UnitOver</ZLevel>
+			<RotationType>DirBlend</RotationType>
+		</Effect>
+		<Effect Type='Target'>
+			<Prefab>Fx_10810b_99_01</Prefab>
+			<CenterAlign>true</CenterAlign>
+			<ZLevel>UnitOver</ZLevel>
+			<RotationType>Angle</RotationType>
+		</Effect>
+        <Effect Type='Aura'>
+            <Prefab>Fx_10810f_99_01</Prefab>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+            <Loop>true</Loop>
+            <LoopStopAtRemove>true</LoopStopAtRemove>
+            <LevelScale>false</LevelScale>
+        </Effect>
+        <Effect Type="AuraTarget">
+            <Prefab>Fx_10810c_99_01</Prefab>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+        </Effect>
+		</ReplaceEffect>
+		<!-- 스킬 -->
+		<ReplaceEffect Type="Skill" Target="10810">
+        <Effect Type="Self">
+            <Prefab>Fx_10810d_99_01</Prefab>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+            <LevelScale>false</LevelScale>
+            <World>true</World>
+        </Effect>
+        <Effect Type="Target">
+            <Prefab>Fx_10810c_99_01</Prefab>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+        </Effect>
+		</ReplaceEffect>
+
+	<ReplaceEffect Type="Skill" Target="10815">
+        <Effect Type="Move">
+            <Prefab>Fx_10810e_99_01</Prefab>
+            <Line>true</Line>
+            <World>true</World>
+            <ZLevel>UnitOver</ZLevel>
+        </Effect>
+        <Effect Type="Self">
+            <Delay>0.1</Delay>
+            <ScaleX>1.4</ScaleX>
+            <ScaleY>1.4</ScaleY>
+            <LevelScale>false</LevelScale>
+            <Prefab>Fx_10810d_99_01</Prefab>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+        </Effect>
+		</ReplaceEffect>
+  	</Skin>
 </Skins>

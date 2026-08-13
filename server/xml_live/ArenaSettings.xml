@@ -171,5 +171,15 @@
             <BuffTargets>Unknown,Brave</BuffTargets>
             <WorldTriggers>10080,11070</WorldTriggers>
         </GrandArenaBuff>
+    
+    <GrandArenaBuff Season="72" SemiSeason="1">
+        <BuffTargets>Toughness,South</BuffTargets>
+        <WorldTriggers>10000,11050</WorldTriggers>
+    </GrandArenaBuff>
+
+    <GrandArenaBuff Season="72" SemiSeason="2">
+        <BuffTargets>North,Swift</BuffTargets>
+        <WorldTriggers>10050,11100</WorldTriggers>
+    </GrandArenaBuff>
     </GrandArenaBuffs>
 </ArenaSettings>

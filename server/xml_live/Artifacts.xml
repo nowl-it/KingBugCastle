@@ -982,7 +982,7 @@
 		<Type>Piece</Type>
 		<FromType>HardMode</FromType>
 		<FromTheme>52</FromTheme>
-		<MainOptionDesc>SaveSuperShieldProb_Piece</MainOptionDesc>
+		<MainOptionDesc>SuperShieldAdaptabilityPer_Piece</MainOptionDesc>
 		<Root>12021</Root>
 	</Artifact>
 
@@ -994,7 +994,7 @@
 		<Level>Normal</Level>
 		<Root>12021</Root>
 		<Building2_LvUp>2</Building2_LvUp>
-		<SaveSuperShieldProb>15</SaveSuperShieldProb>
+		<SuperShieldAdaptabilityPer>15</SuperShieldAdaptabilityPer>
 		<HideInRogueLike>true</HideInRogueLike>
 		<LevelLimit>20</LevelLimit>
 	</Artifact>
@@ -1007,7 +1007,7 @@
 		<Level>King</Level>
 		<Root>12021</Root>
 		<Building2_LvUp>3</Building2_LvUp>
-		<SaveSuperShieldProb>20</SaveSuperShieldProb>
+		<SuperShieldAdaptabilityPer>20</SuperShieldAdaptabilityPer>
 		<HideInRogueLike>true</HideInRogueLike>
 		<LevelLimit>20</LevelLimit>
 	</Artifact>
@@ -1020,7 +1020,7 @@
 		<Level>God</Level>
 		<Root>12021</Root>
 		<Building2_LvUp>4</Building2_LvUp>
-		<SaveSuperShieldProb>25</SaveSuperShieldProb>
+		<SuperShieldAdaptabilityPer>25</SuperShieldAdaptabilityPer>
 		<HideInRogueLike>true</HideInRogueLike>
 		<LevelLimit>20</LevelLimit>
 	</Artifact>
@@ -1033,7 +1033,7 @@
 		<Level>KingGod</Level>
 		<Root>12021</Root>
 		<Building2_LvUp>5</Building2_LvUp>
-		<SaveSuperShieldProb>30</SaveSuperShieldProb>
+		<SuperShieldAdaptabilityPer>30</SuperShieldAdaptabilityPer>
 		<HideInRogueLike>true</HideInRogueLike>
 		<LevelLimit>20</LevelLimit>
 	</Artifact>

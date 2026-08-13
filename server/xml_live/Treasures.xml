@@ -632,7 +632,7 @@
     </Treasure>
 
     <Treasure ID="30038">
-        <Comment>세령의 멋진 보구</Comment>
+        <Comment>화혼가</Comment>
         <Rarity>Special</Rarity>
         <Role>Mystic</Role>
         <BuffDataStartID>3300380</BuffDataStartID>
@@ -643,7 +643,7 @@
     </Treasure>
 
     <Treasure ID="30039">
-        <Comment>네리아 이격의 멋진 보구</Comment>
+        <Comment>핏빛 충동</Comment>
         <Rarity>Special</Rarity>
         <Role>Shadow</Role>
         <BuffDataStartID>3300390</BuffDataStartID>
@@ -665,7 +665,7 @@
     </Treasure>
     
 	<Treasure ID="30041">
-		<Comment>파라엘의 멋진 보구</Comment>
+		<Comment>아우다키아</Comment>
 		<Rarity>Special</Rarity>
 		<Role>Brave</Role>
 		<BuffDataStartID>3300410</BuffDataStartID>
@@ -673,6 +673,19 @@
 		<Color>8381EE</Color>
 		<SubNameColor>FEA06B</SubNameColor>
 		<MinVersion>171100</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30042">
+		<Comment>베히무스의 멋진 보구</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Toughness</Role>
+		<BuffDataStartID>3300420</BuffDataStartID>
+		<RecommendedUnitIds>10190</RecommendedUnitIds>
+		<Color>2E30C8</Color>
+		<SubNameColor>B7BFD4</SubNameColor>
+		<CardIllustOffsetX>0</CardIllustOffsetX>
+		<CardIllustOffsetY>0</CardIllustOffsetY>
+		<MinVersion>172100</MinVersion>
 	</Treasure>
     
     <Treasure ID="50000">

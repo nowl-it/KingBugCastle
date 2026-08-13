@@ -33,7 +33,7 @@ except ImportError:
     print("[ERROR] UnityPy not found: pip install UnityPy", file=sys.stderr)
     sys.exit(1)
 
-ROOT = pathlib.Path(__file__).parent
+ROOT = pathlib.Path(__file__).resolve().parents[1]
 XML_DIR = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "xml_live"
 BUNDLE  = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "real_cdn" / "xml"
 

@@ -12204,6 +12204,184 @@
         <MinVersion>171100</MinVersion>
     </ShopItem>
 
+    <ShopItem ID='1676'>
+        <Name>SpecialPackage_1676</Name>
+        <Holiday>TreasureDoublePickUp10014</Holiday>
+        <NameComment>보구 픽업 소환석 패키지 1</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="20"/>
+        <Cash>130</Cash>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>9900</MoneyPrice>
+        <DolarPrice>7.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20260813_000000</StartAt>
+        <EndAt>20260826_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_1</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>750</ValueAmount>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='1677'>
+        <Name>SpecialPackage_1677</Name>
+        <Holiday>TreasureDoublePickUp10014</Holiday>
+        <NameComment>보구 픽업 소환석 패키지 2</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="55"/>
+        <InventoryItem ID="3102" Count="3"/>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>25000</MoneyPrice>
+        <DolarPrice>19.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20260813_000000</StartAt>
+        <EndAt>20260826_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_2</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>2000</ValueAmount>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='1678'>
+        <Name>SpecialPackage_1678</Name>
+        <Holiday>TreasureDoublePickUp10014</Holiday>
+        <NameComment>카엘루스 픽업 소환석 패키지</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="200"/>
+        <TreasureIds>30028</TreasureIds>
+        <TreasureCounts>1</TreasureCounts>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>99000</MoneyPrice>
+        <DolarPrice>79.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20260813_000000</StartAt>
+        <EndAt>20260826_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_3</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>8000</ValueAmount>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='1679'>
+        <Name>SpecialPackage_1679</Name>
+        <Holiday>TreasureDoublePickUp10014</Holiday>
+        <NameComment>트릭스터 픽업 소환석 패키지</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="200"/>
+        <TreasureIds>30029</TreasureIds>
+        <TreasureCounts>1</TreasureCounts>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>99000</MoneyPrice>
+        <DolarPrice>79.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20260813_000000</StartAt>
+        <EndAt>20260826_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_3</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>8000</ValueAmount>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='1680'>
+        <Name>SpecialPackage_1680</Name>
+        <Holiday>TreasurePickUp30042</Holiday>
+        <NameComment>페라타우스 보구 1</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="20"/>
+        <Cash>130</Cash>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>9900</MoneyPrice>
+        <DolarPrice>7.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20260827_000000</StartAt>
+        <EndAt>20260909_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_1</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>750</ValueAmount>
+
+        <MinVersion>172100</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='1681'>
+        <Name>SpecialPackage_1681</Name>
+        <Holiday>TreasurePickUp30042</Holiday>
+        <NameComment>페라타우스 보구 2</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="55"/>
+        <InventoryItem ID="3102" Count="3"/>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>25000</MoneyPrice>
+        <DolarPrice>19.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20260827_000000</StartAt>
+        <EndAt>20260909_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_2</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>2000</ValueAmount>
+
+        <MinVersion>172100</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='1682'>
+        <Name>SpecialPackage_1682</Name>
+        <Holiday>TreasurePickUp30042</Holiday>
+        <NameComment>페라타우스 보구 3</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="200"/>
+        <TreasureIds>30042</TreasureIds>
+        <TreasureCounts>1</TreasureCounts>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>99000</MoneyPrice>
+        <DolarPrice>79.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20260827_000000</StartAt>
+        <EndAt>20260909_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_3</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>8000</ValueAmount>
+
+        <MinVersion>172100</MinVersion>
+    </ShopItem>
+
     <ShopItem ID='2000'>
         <Name>Gold_80</Name>
         <NameComment>80 골드</NameComment>
@@ -28368,7 +28546,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ClanShop</Type>
-        <EventType>CLAN_S71</EventType>
+        <EventType>CLAN</EventType>
 
         <ArtifactId>513</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -28386,7 +28564,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ClanShop</Type>
-        <EventType>CLAN_S71</EventType>
+        <EventType>CLAN</EventType>
 
         <ArtifactId>512</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -28404,7 +28582,7 @@
         <Sprite>InventoryItem_4101</Sprite>
 
         <Type>ClanShop</Type>
-        <EventType>CLAN_S71</EventType>
+        <EventType>CLAN</EventType>
 
         <InventoryItem ID="4101" Count="1"/>
 
@@ -28420,7 +28598,7 @@
         <Sprite>InventoryItem_152</Sprite>
 
         <Type>ClanShop</Type>
-        <EventType>CLAN_S71</EventType>
+        <EventType>CLAN</EventType>
 
         <Order>2</Order>
 
@@ -28437,7 +28615,7 @@
         <Sprite>InventoryItem_155</Sprite>
 
         <Type>ClanShop</Type>
-        <EventType>CLAN_S71</EventType>
+        <EventType>CLAN</EventType>
 
         <Order>3</Order>
 
@@ -28454,7 +28632,7 @@
         <Sprite>InventoryItem_156</Sprite>
 
         <Type>ClanShop</Type>
-        <EventType>CLAN_S71</EventType>
+        <EventType>CLAN</EventType>
 
         <Order>4</Order>
 
@@ -28471,7 +28649,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ClanShop</Type>
-        <EventType>CLAN_S71</EventType>
+        <EventType>CLAN</EventType>
 
         <ArtifactId>601</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -28489,7 +28667,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ClanShop</Type>
-        <EventType>CLAN_S71</EventType>
+        <EventType>CLAN</EventType>
 
         <ArtifactId>11000</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -28508,7 +28686,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ClanShop</Type>
-        <EventType>CLAN_S71</EventType>
+        <EventType>CLAN</EventType>
 
         <ArtifactId>11010</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -28527,7 +28705,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ClanShop</Type>
-        <EventType>CLAN_S71</EventType>
+        <EventType>CLAN</EventType>
 
         <ArtifactId>11020</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -51864,7 +52042,7 @@
         <Sprite>ShopItem_400</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <Gold>25</Gold>
 
@@ -51882,7 +52060,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <Gold>500</Gold>
 
@@ -51900,7 +52078,7 @@
         <Sprite>ShopItem_370_Key</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <KeyID>370</KeyID>
         <KeyCount>1</KeyCount>
@@ -51919,7 +52097,7 @@
         <Sprite>InventoryItem_151</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <InventoryItem ID="151" Count="1"/>
 
@@ -51935,7 +52113,7 @@
         <Sprite>InventoryItem_150</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <InventoryItem ID="150" Count="1"/>
 
@@ -51951,7 +52129,7 @@
         <Sprite>InventoryItem_157</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <InventoryItem ID="157" Count="1"/>
 
@@ -51967,7 +52145,7 @@
         <Sprite>InventoryItem_3101</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <InventoryItem ID="3101" Count="1"/>
 
@@ -51984,7 +52162,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13020</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52003,7 +52181,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13030</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52022,7 +52200,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13040</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52041,7 +52219,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13060</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52060,7 +52238,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13070</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52079,7 +52257,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13080</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52098,7 +52276,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13100</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52117,7 +52295,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13110</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52136,7 +52314,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13130</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52155,7 +52333,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13140</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52174,7 +52352,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13150</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52193,7 +52371,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13170</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52212,7 +52390,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13180</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52230,7 +52408,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13190</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52248,7 +52426,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13200</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -52266,7 +52444,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>ArenaShop</Type>
-        <EventType>ARENA_S71</EventType>
+        <EventType>ARENA</EventType>
 
         <ArtifactId>13210</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -83002,7 +83180,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <Gold>100</Gold>
         <Order>51</Order>
@@ -83020,7 +83198,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <Gold>1000</Gold>
         <Order>50</Order>
@@ -83037,7 +83215,7 @@
         <Sprite>ShopItem_370_Key</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <KeyID>370</KeyID>
         <KeyCount>1</KeyCount>
@@ -83053,7 +83231,7 @@
         <Sprite>ShopItem_501</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <Cash>10</Cash>
 
@@ -83071,7 +83249,7 @@
         <Sprite>InventoryItem_4101</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <InventoryItem ID="4101" Count="1"/>
 
@@ -83087,7 +83265,7 @@
         <Sprite>ShopItem_301_Key</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <KeyID>301</KeyID>
         <KeyCount>1</KeyCount>
@@ -83107,7 +83285,7 @@
         <Sprite>InventoryItem_3101</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <InventoryItem ID="3101" Count="1"/>
 
@@ -83123,7 +83301,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <ArtifactId>601</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -83143,7 +83321,7 @@
         <Sprite>ShopItem_130</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <!-- 왕의 증표 지급 -->
         <SoulItemCount>5</SoulItemCount>
@@ -83162,7 +83340,7 @@
         <Sprite>InventoryItem_3200</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <InventoryItem ID="3200" Count="1"/>
 
@@ -83179,7 +83357,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <ArtifactId>801</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -83423,20 +83601,222 @@
 		<MinVersion>171000</MinVersion>
     </ShopItem>
 
-    <ShopItem ID='32047'>
+    <ShopItem ID='32050'>
         <Name>Skin</Name>
-        <NameComment>이벤트 로그인 스킨 신규 : 2025 해변축제 </NameComment>
-        <Sprite>Title_Beach_Event_01</Sprite>
+        <NameComment>5사이클 복각 : 영원왕 욜 13시즌</NameComment>
+        <Sprite>Unit_10140_03a[Unit_10140_03a]</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S71</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
-        <LoginSkin>30050</LoginSkin>
+         <Skin>1014003</Skin>
 
-        <TokenPrice>400</TokenPrice>
+        <CashPrice>298</CashPrice>
         <BuyLimit>1</BuyLimit>
-        <MinVersion>171000</MinVersion>
-    </ShopItem>    
+        <Order>0</Order>
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32051'>
+        <Name>Skin</Name>
+        <NameComment>4사이클 복각 : 악몽의 여왕 렌 25시즌</NameComment>
+        <Sprite>Unit_10280_03[Unit_10280_03_0]</Sprite>
+
+      <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1028003</Skin>
+
+        <CashPrice>298</CashPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>0</Order>
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32052'>
+        <Name>Skin</Name>
+        <NameComment>3사이클 복각 : 무법의 여왕 캐시 39시즌</NameComment>
+        <Sprite>Unit_10430_04[Unit_10430_04_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1043004</Skin>
+
+        <CashPrice>298</CashPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>0</Order>
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32053'>
+        <Name>Skin</Name>
+        <NameComment>2사이클 복각 : 청사왕 키르단 50시즌</NameComment>
+        <Sprite>Unit_10500_04[Unit_10500_04_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1050004</Skin>
+
+        <CashPrice>298</CashPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>0</Order>
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32054'>
+        <Name>Skin</Name>
+        <NameComment>1사이클 복각 : 정복왕 파트로스 65시즌</NameComment>
+        <Sprite>Unit_10670_02[Unit_10670_02_18]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1067002</Skin>
+
+        <CashPrice>298</CashPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>0</Order>
+
+		<MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32055'>
+        <Name>Skin</Name>
+        <NameComment>신규 이벤트 스킨 : 용 강탈자 벨리나 </NameComment>
+        <Sprite>Unit_10630_02[Unit_10630_02_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1063002</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>4</Order>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32056'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 용 수호자 자운 </NameComment>
+        <Sprite>Unit_10070_05[Unit_10070_05_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1007005</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>5</Order>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32057'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 푸른 화염 드라코 </NameComment>
+        <Sprite>Unit_10080_01[Unit_10080_01_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1008001</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>6</Order>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32058'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 용 학살자 청아 </NameComment>
+        <Sprite>Unit_10260_04[Unit_10260_04_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1026004</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>7</Order>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32059'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 용의 위상 티아 </NameComment>
+        <Sprite>Unit_10320_05[Unit_10320_05_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1032005</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>8</Order>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32060'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 용의 위상 미르실 </NameComment>
+        <Sprite>Unit_10330_06[Unit_10330_06_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1033006</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>9</Order>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32061'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 용 수호자 아가트 </NameComment>
+        <Sprite>Unit_10290_05[Unit_10290_05_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1029005</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>10</Order>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32062'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 용 학살자 카인 </NameComment>
+        <Sprite>Unit_10250_05[Unit_10250_05_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S72</EventType>
+
+        <Skin>1025005</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>11</Order>
+
+        <MinVersion>172000</MinVersion>
+    </ShopItem>
 
     <ShopItem ID="40000">
         <Type>HardModeShop</Type>

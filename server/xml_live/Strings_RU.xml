@@ -141,9 +141,9 @@
 
 (Стоимость: {0} алмазов)</String>
   <String Key="King_1">Король</String>
-  <String Key="King_2"></String>
+  <String Key="King_2"> </String>
   <String Key="Castle_1">Замок</String>
-  <String Key="Castle_2"></String>
+  <String Key="Castle_2"> </String>
   <String Key="LoadingPopupText">Связь с сервером...</String>
   <String Key="LoginByGoogle">Вход с Google Play</String>
   <String Key="LoginByApple">Вход с Apple</String>
@@ -261,11 +261,11 @@
   <String Key="Post_Push_Contents18">Сегодня вечером вручение 1 000 золотых монет!</String>
   <String Key="Post_Push_Contents19">В почте вас ожидают золотые монеты!</String>
   <String Key="Post_Push_Contents20">Вы получили хороший запас свиных рулек!</String>
-  <String Key="Post_Push_Contents21">День завершения 70-го сезона King God Castle</String>
-  <String Key="Post_Push_Contents22">До завершения 70-го сезона King God Castle остался 1 день.</String>
-  <String Key="Post_Push_Contents23">До завершения 70-го сезона King God Castle осталось 2 дня.</String>
-  <String Key="Post_Push_Contents24">До завершения 70-го сезона King God Castle осталось 4 дня.</String>
-  <String Key="Post_Push_Contents25">Сегодня завершится 70-й сезон King God Castle!</String>
+  <String Key="Post_Push_Contents21">День завершения 72-го сезона King God Castle</String>
+  <String Key="Post_Push_Contents22">До завершения 72-го сезона King God Castle остался 1 день.</String>
+  <String Key="Post_Push_Contents23">До завершения 72-го сезона King God Castle осталось 2 дня.</String>
+  <String Key="Post_Push_Contents24">До завершения 72-го сезона King God Castle осталось 4 дня.</String>
+  <String Key="Post_Push_Contents25">Сегодня завершится 72-й сезон King God Castle!</String>
   <String Key="Post_Push_Contents26">Проверьте, не осталось ли у вас накопленных наград Пасса!</String>
   <String Key="Post_Push_Contents27">Получите все награды пасса без остатка!</String>
   <String Key="Post_Push_Contents28">Система Пасса и Поля боя будут завершены через 4 дней.</String>
@@ -1239,8 +1239,11 @@
   <String Key="ItemName_10020">Увеличение отряда</String>
   <String Key="ItemDesc_10020">Отряд был увеличен на 1.</String>
   <String Key="ItemName_10030">+5 серебряных монет</String>
+  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">+10 серебряных монет</String>
+  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">+20 серебряных монет</String>
+  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">Медаль за боевые заслуги</String>
   <String Key="ItemDesc_10040">Случайным образом увеличивает показатель звезд на 1 для героя, находящегося на поле.</String>
   <String Key="ItemName_10050">Могущественный свиток призыва героя (2 р.)</String>
@@ -1930,7 +1933,7 @@
   <String Key="Cant_RefreshDailyShopByAd">Вы посмотрели всю рекламу.</String>
   <String Key="WatchAd">Реклама</String>
   <String Key="UsedAllRemainRefreshCount">&lt;color=#FF4C4C&gt;Вы использовали все возможности обновления на сегодня.&lt;/color&gt;
-Обновление будет доступно через:</String>
+Обновление будет доступно через: </String>
   <String Key="RefreshDailyShop">Обновить магазин</String>
   <String Key="RefreshDailyShopDesc">Вы можете обновить перечень товаров в ежедневном магазине.
 Функция обновления доступна каждый день, ограниченное количество раз.</String>
@@ -2398,7 +2401,7 @@
   <String Key="Name_Potential_10150_2">Связь с природой</String>
   <String Key="Name_Potential_10170_2">Бесконечная передача</String>
   <String Key="Name_Potential_10180_2">Проклятое объединение</String>
-  <String Key="Name_Potential_10190_2">Имперская провокация</String>
+  <String Key="Name_Potential_10190_2">Тень Империи</String>
   <String Key="Name_Potential_10200_2">Наводнение</String>
   <String Key="Name_Potential_10210_2">Волна священного меча</String>
   <String Key="Name_Potential_10220_2">Гигантская бомба</String>
@@ -2425,7 +2428,7 @@
   <String Key="Potential_10090_2">Радиус действия навыка &lt;Жизнерадостная мелодия&gt; +1 кл.</String>
   <String Key="Potential_10100_2">Выявление слабых сторон целей &lt;Критической неожиданной атаки&gt;. Получ. ими урон +30% на 10 сек. (На боссов действует вполсилы)</String>
   <String Key="Potential_10150_2">При использовании &lt;Призыв голема&gt; полностью восстанавливает ОМ союзников вокруг в области 5x5/5x5/7x7/7x7</String>
-  <String Key="Potential_10190_2">Провокация врага, атакующего союзника-цель &lt;Жестокого покровителя&gt;, ЗЩТ +350 на 4 сек.</String>
+  <String Key="Potential_10190_2">Даёт союзной цели &lt;Жестокий покровитель&gt; Скрытность на 0.3 сек. и Верхаимусу +400 ЗЩТ на 4 сек.</String>
   <String Key="Potential_10210_2">При атаке во время действия &lt;Священного меча Гарна&gt; с шансом в 33% вызывает волну, наносящую урон, равный Маг. АТК</String>
   <String Key="Potential_10220_2">С каждой 10-й обычн. атакой бросает &lt;Гигантскую бомбу&gt;, наносящую тройной доп. урон в зоне 5х5 кл.</String>
   <String Key="Potential_10240_2">Выявляет слабые стороны целей &lt;Неимоверного удара&gt;, и на 10 сек. увеличивает получаемый ими урон на 30% (на боссов действует вполсилы)</String>
@@ -2563,8 +2566,7 @@
   <String Key="ShopItemName_951">Получение ежедн. алмазов</String>
   <String Key="Name_Potential_10190_3">Дрожь земли</String>
   <String Key="Name_Potential_10200_3">Обратное течение</String>
-  <String Key="Potential_10190_3">Радиус &lt;Жестокого покровителя&gt; равен 2 кл. вне зависимости от показателя звезд.
-Длина отбрасывания сменяется с 3 кл. на 2/3/4/5 кл.</String>
+  <String Key="Potential_10190_3">Меняет цель &lt;Жестокий покровитель&gt; на ближайшего врага в зоне 9X9, получение Барьера Верхаимуса +100%</String>
   <String Key="SkinName_1003002">Встреча Лунного нового года Эван</String>
   <String Key="SkinDesc_1003002">&lt;i&gt;Скин в честь Лунного нового года 2022&lt;/i&gt;</String>
   <String Key="Alert_Temp_NoIAP">Внутриигровые покупки временно недоступны. Пожалуйста, попробуйте позже.</String>
@@ -4994,7 +4996,6 @@
   <String Key="Hero_Awaken_Noti">Герой {0} достиг 16 уровня, и теперь его можно пробудить.
 При выполнении пробуждения станет доступно использование &lt;color=#FFD247&gt;пробужденных способностей&lt;/color&gt; героя.</String>
   <String Key="ItemDescSub_40463_07">Абсолютная защита {0} р.</String>
-  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">При появлении героя &lt;color=#FFD247&gt;выбранный герой&lt;/color&gt; &lt;color=#FFD247&gt;гарантирован!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Выбрать героев</String>
   <String Key="SelectPickupUnitAgain">Выбрать повторно</String>
@@ -5428,8 +5429,8 @@ nПри использовании дает бонус к пополнению �
   <String Key="TerritoryUpgradeCompletedFormat">Улучшение завершено: {0}.</String>
   <String Key="CantReplaceWhileUpgrade">Нельзя поменять размещение строящегося или улучшаемого сооружения.</String>
   <String Key="LevelSync_Desc_1">Уровень передачи определяется в зависимости от макс. уровня
-передачи святилища и мин. уровня размещенных героев.</String>
-  <String Key="LevelSync_Desc">Уровень, передаваемый герою, определяется в зависимости от уровня передачи святилища.</String>
+передачи святилища и мин. уровня размещенных героев. </String>
+  <String Key="LevelSync_Desc">Уровень, передаваемый герою, определяется в зависимости от уровня передачи святилища. </String>
   <String Key="UnitAssignment_AssignedUnit">Размещен</String>
   <String Key="UnitAssignment_LevelSyncUnit">Размещен
 в святилище</String>
@@ -5500,7 +5501,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="InventoryItemName_2107">Опыт замка</String>
   <String Key="InventoryItemDesc_2107">Повышает уровень замка. Необходим для улучшения территории, алтаря и т.д.</String>
   <String Key="InventoryItemName_2108">Опыт альянса</String>
-  <String Key="InventoryItemDesc_2108">Повышает уровень альянса. Уровень альянса позволяет улучшать навык альянса.</String>
+  <String Key="InventoryItemDesc_2108">Повышает уровень альянса. Уровень альянса позволяет улучшать навык альянса. </String>
   <String Key="TerritoryPass_Short">Благословение</String>
   <String Key="AlchemyRemainPointAlert">Материал, превысивший эт. {0}, исчезнет.
 Продолжить?</String>
@@ -6580,7 +6581,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="FlagsName_PreviousColosseum">Почетное знамя Поля боя Побоища {0}-го сезона</String>
   <String Key="FlagsDesc_PreviousColosseum">Достичь уровня «{1}» в рейтинге Поля боя Побоища {0}-го сезона</String>
   <String Key="NameTagName_Colosseum">Украшение владыки: {0}</String>
-  <String Key="NameTagDesc_Colosseum">Почетная награда за достижение ранга {0} на Поле боя Побоища</String>
+  <String Key="NameTagDesc_Colosseum">Почетная награда за достижение ранга {0} на Поле боя Побоища </String>
   <String Key="ArtufactPolishValue">Эффект</String>
   <String Key="ArtifactPolishAction_ReplaceOptionIdx">Смена положения</String>
   <String Key="PolishItemRewardPostTitle">Вручение шлифовального камня улучшения шлифования</String>
@@ -6877,7 +6878,7 @@ nПри использовании дает бонус к пополнению �
 С ним можно атаковать более удаленные цели с большей точностью, но из-за веса его трудно переносить.</String>
   <String Key="MoveStopTimeDesc_Piece">Отмечает 2 клетки на Поле боя как позиции снайпера. Размещённые Герои получают Абсолютная ЗЩТ, не могут &lt;color=#f33&gt;двигаться&lt;/color&gt; некоторое время, Длина атаки +3, а их Нанос. Обычн. урон увеличивается при 1-м и каждом 5-м попадании</String>
   <String Key="MoveStopTimeDesc">Отмечает 2 клетки на Поле боя как позиции снайпера. Размещённые Герои получают Абсолютная ЗЩТ +{2}, не могут &lt;color=#f33&gt;двигаться&lt;/color&gt; {0} сек., Длина атаки +3, а их Нанос. Обычн. урон увеличивается на +{1}% при 1-м и каждом 5-м попадании.</String>
-  <String Key="ColosseumBanned">Доступ к сезону Поля боя Побоища ограничен</String>
+  <String Key="ColosseumBanned">Доступ к сезону Поля боя Побоища ограничен </String>
   <String Key="GachaName_1036">Натянутая улыбка</String>
   <String Key="Name_Potential_10560_3">Духовный подъем</String>
   <String Key="TerritoryBuildingSpec_SyncLevel">Уровень передачи</String>
@@ -6928,7 +6929,6 @@ nПри использовании дает бонус к пополнению �
   <String Key="Clan_Menu_ChangeName">Изменить</String>
   <String Key="ColosseumSeasonRankingReward">Награда сезона</String>
   <String Key="ColosseumRanking">Рейтинг</String>
-  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Подробнее о шансах</String>
   <String Key="ArtifactOptionProbDetailDesc">Вы перейдете на веб-страницу с подробной информацией о шансах появления реликвий.</String>
   <String Key="ColosseumNetworkChanged">Произошли изменения в подключении к сети. Идет переподключение.</String>
@@ -7363,7 +7363,9 @@ nПри использовании дает бонус к пополнению �
   <String Key="OvercomeDesc">&lt;size=25&gt;Вознесение звездного уровня
 
 &lt;/size&gt;При помощи &lt;color=#ffbc00&gt;вознесения звездного уровня&lt;/color&gt; можно получить &lt;color=#ffbc00&gt;доп. эффекты&lt;/color&gt; способности божественного оружия.
- Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.</String>
+ Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.
+
+</String>
   <String Key="SkinName_1032006">Синяя волна Тия</String>
   <String Key="SkinName_1036004">Синяя волна Хэранг</String>
   <String Key="SkinName_1042003">Синяя волна Тэбэк</String>
@@ -7437,7 +7439,8 @@ nПри использовании дает бонус к пополнению �
 Нанос. урон в неуязвимом состоянии +{1}%</String>
   <String Key="TreasureSkillDesc_3300033">При достижении {0}% ОЗ или получении смертельного урона экипированным Мюром героем с самым высоким показателем звезд неуязвимость на {1} сек. 1 р.
 (В неуязвимом состоянии восстановление и наложение защиты невозможны)
-Нанос. урон в неуязвимом состоянии +{2}%</String>
+Нанос. урон в неуязвимом состоянии +{2}%
+</String>
   <String Key="TreasureSkillDesc_3300034">При достижении {0}% ОЗ или получении смертельного урона экипированным Мюром героем с самым высоким показателем звезд неуязвимость на {1} сек. 1 р.
 (В неуязвимом состоянии восстановление и наложение защиты невозможны)
 Нанос. урон в неуязвимом состоянии +{2}%
@@ -7667,11 +7670,15 @@ nПри использовании дает бонус к пополнению �
  &lt;size=25&gt;Вознесение звездного уровня
 
 &lt;/size&gt;При помощи &lt;color=#ffbc00&gt;вознесения звездного уровня&lt;/color&gt; можно получить &lt;color=#ffbc00&gt;доп. эффекты&lt;/color&gt; способности божественного оружия.
- Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.</String>
+ Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.
+
+</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Усиление божественного оружия
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;Усилив&lt;/color&gt; божественное оружие, можно увеличить его &lt;color=#ffbc00&gt;эффекты способности&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Материалы усиления&lt;/color&gt; можно получить, &lt;color=#ffbc00&gt;разобрав&lt;/color&gt; божественное оружие в инвентаре или&lt;color=#ffbc00&gt;купив его в магазине&lt;/color&gt;.</String>
+&lt;color=#ffbc00&gt;Материалы усиления&lt;/color&gt; можно получить, &lt;color=#ffbc00&gt;разобрав&lt;/color&gt; божественное оружие в инвентаре или&lt;color=#ffbc00&gt;купив его в магазине&lt;/color&gt;.
+
+</String>
   <String Key="TreasureOvercome">Вознести</String>
   <String Key="TreasureOvercome_Short">Вознести</String>
   <String Key="ViewNextOvercome">Посмотреть сл. вознесение</String>
@@ -8220,7 +8227,9 @@ nПри использовании дает бонус к пополнению �
  &lt;size=25&gt;Вознесение звездного уровня
 
 &lt;/size&gt;При помощи &lt;color=#ffbc00&gt;вознесения звездного уровня&lt;/color&gt; можно получить &lt;color=#ffbc00&gt;доп. эффекты&lt;/color&gt; способности божественного оружия.
- Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.</String>
+ Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.
+
+</String>
   <String Key="TreasureSkillDesc_3300010">Шанс крита +{0}%
 При получении урона деактивация на {1} сек.</String>
   <String Key="TreasureSkillDesc_3300011">Шанс крита +{0}%
@@ -9482,7 +9491,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="UnitSubName_10670">Знаменосец поля боя</String>
   <String Key="Potential_10670_0">Охрана +30</String>
   <String Key="Potential_10670_1">В начале битвы после первого получения урона получ. урон -70% на 2 сек.</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;Известная семья Ритер предоставила империи много выдающихся талантов, успешных во всевозможных сферах деятельности. Хоть Патрос и из семьи Ритер, особых талантов у него нет. Однако благодаря своим несравнимым стараниям он все же смог стать образцовым начальником воинов империи.&lt;/i&gt;</String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;Известная семья Ритер предоставила империи много выдающихся талантов, успешных во всевозможных сферах деятельности. Хоть Патрос и из семьи Ритер, особых талантов у него нет. Однако благодаря своим несравнимым стараниям он все же смог стать образцовым начальником воинов империи.&lt;/i&gt; </String>
   <String Key="SkillName_10670">За империю!</String>
   <String Key="SkillDesc_10670">В течение {TotalAttackTime} сек. поддерживает соперников. Исцеляет всех союзников в зоне {SplashRangeX}{x}{SplashRangeY} кл. вокруг себя на {Heal} кажд. {Time} сек. и увеличивает СКР АТК на {AttackSpeedPerUnit10670}%. Применяется увеличение СКР АТК от этого навыка с самым мощным эффектом.</String>
   <String Key="SkillDesc_10670_Short">В течение {TotalAttackTime} сек. исцеляет всех союзников в зоне {SplashRangeX}{x}{SplashRangeY} кл. вокруг себя на {Heal} кажд. {Time} сек. и увеличивает СКР АТК на {AttackSpeedPerUnit10670}%. Применяется увеличение СКР АТК от самого мощного &lt;За империю!&gt;</String>
@@ -9782,7 +9791,8 @@ nПри использовании дает бонус к пополнению �
   <String Key="BaseHybridDefOnInvade">Увелич. получаемых золотых монет в штурме на {0}
 ЗЩТ всех героев в штурме +{1}
 Переплавка недоступна, усиление через шлифование недоступно</String>
-  <String Key="ArtifactOptionDesc_Event_15000">Смена положение через шлифование бесплатна (до 3 декабрь 2024 года)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">
+Смена положение через шлифование бесплатна (до 3 декабрь 2024 года)</String>
   <String Key="SkinName_1032007">Богиня луны Тия</String>
   <String Key="SkinName_1032007_NewLine">Богиня луны Тия</String>
   <String Key="TerritoryBuildingName_40300">Статуя богини луны</String>
@@ -11380,7 +11390,8 @@ nПри использовании дает бонус к пополнению �
   <String Key="AddDifficultyUnlockDesc">При прохождении без урона сложность повышается на 2 этапа.</String>
   <String Key="AccessoryLevelUpTutorialLock">Доступно к просмотру после прохождения Нашествия II-1.</String>
   <String Key="NotAccessoryLevelUp">Нет аксессуаров для усиления.</String>
-  <String Key="ArtifactOptionDesc_Event_15020">Смена положения через шлифование бесплатна (&lt;color=#ffbd4a&gt;до {0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">
+Смена положения через шлифование бесплатна (&lt;color=#ffbd4a&gt;до {0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Пройти Главу {0}-{1} на ур. сложности [{Diff}] или выше</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">[Нашествие] Пройти Главу {0}-{1} на ур. сложности [{Diff}] или выше</String>
   <String Key="Polish_EventArtifact_Alert">Усиление данной реликвии через шлифование недоступно!</String>
@@ -11732,7 +11743,8 @@ nПри использовании дает бонус к пополнению �
   <String Key="SpecialPackage_1556">Набор Этерны 1</String>
   <String Key="SpecialPackage_1557">Набор Этерны 2</String>
   <String Key="SpecialPackage_1558">Набор Этерны 3</String>
-  <String Key="MakeAllLateComerExceptSlot">Применить эффект позднего появления ко всем героям, кроме героя, находящегося на {0} позиции в отряде</String>
+  <String Key="MakeAllLateComerExceptSlot">Применить эффект позднего появления ко всем героям, кроме героя, находящегося на {0} позиции в отряде
+</String>
   <String Key="Order_1">первой</String>
   <String Key="Order_2">второй</String>
   <String Key="Order_3">третьей</String>
@@ -13842,7 +13854,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="ArenaDebuffDesc_01">Все исцеление -80% во время битвы</String>
   <String Key="ArenaDebuffDesc_02">Вся защита -80% во время битвы</String>
   <String Key="ArenaDebuffDesc_03">Все отриц. эффекты -50% во время битвы</String>
-  <String Key="ArenaDebuffDesc_04">ЗЩТ +500</String>
+  <String Key="ArenaDebuffDesc_04">ЗЩТ +500, а Общ. ЗЩТ со временем снижается</String>
   <String Key="ArenaDebuffTitle">Эффект Арены</String>
   <String Key="Theme68BattleObserverDesc_0">Пройти раунд, не будучи убитым убийственным ниндзя и высш. убийственным ниндзя</String>
   <String Key="Theme68BattleObserverDesc_1">Убить всех заклинателей духов под эффектом увеличения получ. урона после снятия заморозки</String>
@@ -14415,7 +14427,8 @@ D = 1 - 4</String>
   <String Key="AltarHelpBuilding_5">Алтарь, увеличивающий кол-во получаемых серебряных монет. Упрощает призыв героев и пользование магазином.
 
 Реком. контент: штурм, Арена</String>
-  <String Key="ArtifactBuffDataDesc_15010">В начале битвы штурма или экспедиции СКР АТК героя авангарда +{0}% (Эффект не действует при отсутствии героя авангарда)</String>
+  <String Key="ArtifactBuffDataDesc_15010">В начале битвы штурма или экспедиции СКР АТК героя авангарда +{0}% (Эффект не действует при отсутствии героя авангарда)
+</String>
   <String Key="Post_Name_AltarGoldRefund">Возврат золота за расширение пламени алтаря</String>
   <String Key="Post_Desc_AltarGoldRefund">Возвращаем вам золото, потраченное на расширение племени алтаря.</String>
   <String Key="OutgameTutorial_140_00">И снова здравствуйте, король замка. &lt;color=#FFC13D&gt;Я командир отряда рыцарей Аслин.&lt;/color&gt;
@@ -15467,7 +15480,7 @@ D = 1 - 4</String>
   <String Key="SeasonInformation">Информация о сезоне</String>
   <String Key="SeasonInformationHelp_0">Здесь можно посмотреть информацию о Глава для Камня призыва штурма этого сезона и данные о Корректирование показателей героев.</String>
   <String Key="SeasonInformationHelp_1">Нажмите значок Главы, чтобы увидеть название Камня призыва штурма.</String>
-  <String Key="SeasonInformationHelp_2">В «Корректирование показателей героев» нажмите «Показать все», чтобы увидеть корректировки показателей всех героев.</String>
+  <String Key="SeasonInformationHelp_2">Нажмите «Показать все» в разделе «Корректирование показателей героев», чтобы увидеть текущий Нанос. урон и шанс получения Абсолютной защиты всех Героев.</String>
   <String Key="InvadeSpawnItem">Камень призыва штурма</String>
   <String Key="SkillDesc_60505">Когда вас атакуют и вы наполняетесь яростью, СКР АТК +{AttackSpeedPer}% и скорость передвижения +{MoveSpeedPer}%, а также вы становитесь невосприимчивы к эффектам статуса.</String>
   <String Key="SkillDesc_60665">Когда вас атакуют и вы наполняетесь яростью, СКР АТК +{AttackSpeedPer}% и скорость передвижения +{MoveSpeedPer}%, а также вы становитесь невосприимчивы к эффектам статуса.</String>
@@ -17002,9 +17015,9 @@ D = 1 - 4</String>
   <String Key="SubStoryChapterName_1_4">Кэти Носферату</String>
   <String Key="SubStoryChapterName_1_5">Библиотека Родерика</String>
   <String Key="SubStoryChapterName_1_6">Месть</String>
-  <String Key="SubStoryChapterName_1_7">???</String>
-  <String Key="SubStoryChapterName_1_8">???</String>
-  <String Key="SubStoryChapterName_1_9">???</String>
+  <String Key="SubStoryChapterName_1_7">Неистовство</String>
+  <String Key="SubStoryChapterName_1_8">Где место вину</String>
+  <String Key="SubStoryChapterName_1_9">Эпилог</String>
   <String Key="SubStoryChapterDesc_1">Офелия, дочь знатного рода из Центра, просто плыла по жизни: танцевала в банкетных залах и пила вино. Даже после брака по расчёту с Родериком, лордом Фроствальда, ничего не изменилось. Но однажды после чьего-то штурма Офелию похищают и увозят в неизвестное место.</String>
   <String Key="UnitName_10800">Кэти</String>
   <String Key="DimensionUnitSummon">Призыв измерений</String>
@@ -17925,9 +17938,9 @@ D = 1 - 4</String>
   <String Key="SkinDesc_Default_10800">&lt;i&gt;Кэти родилась полувампиром. Пока она росла, члены семьи Носферату притесняли и обижали её. Но Кэти не сдалась и старается создать мир, где разные народы смогут жить вместе.&lt;/i&gt;</String>
   <String Key="SkillName_10800">Подавленный инстинкт</String>
   <String Key="SkillDesc_10800_Short">Даёт себе Воскрешение. При воскрешении превращается в форму вампира, а её навыки и показатели усиливаются.</String>
-  <String Key="SkillDesc_10800_Long">Даёт себе 1 Воскрешение с {Unit@ReviveHpPer}% от макс. ОЗ. При воскрешении выходит из-под контроля на {10805@TransformTime} сек., превращается в форму вампира с ОЗ {Unit@TransformHpForDesc}, ЗЩТ +{108000@BaseDef} и Маг. вампиризмом +{108000@MagicDrain}%, появляется там, где может поразить больше всего врагов, и накладывает Страх на врагов в области {10815@SplashRangeX}{X}{10815@SplashRangeY} на {10815@FearTime} сек. Воскрешения от этого навыка не суммируются.</String>
+  <String Key="SkillDesc_10800_Long">Даёт себе 1 Воскрешение с {Unit@ReviveHpPer}% от макс. ОЗ. При Воскрешении на {10805@TransformTime} сек. впадает в неистовство, Преображается в форму Вампира с {Unit@TransformHpForDesc}% ОЗ, +{108000@BaseDef} ЗЩТ и +{108000@MagicDrain}% маг. вампиризма, затем спускается в точку, где может поразить больше всего врагов, и накладывает Страх на врагов в зоне {10815@SplashRangeX}{X}{10815@SplashRangeY} на {10815@FearTime} сек. Воскрешение от этого навыка не суммируется.</String>
   <String Key="SkillDesc_10800_Short_2">Даёт себе Воскрешение. При воскрешении превращается в форму вампира, а её навыки и показатели усиливаются.</String>
-  <String Key="SkillDesc_10800_Long_2">Даёт себе 1 Воскрешение с {Unit@ReviveHpPer}% от макс. ОЗ. При воскрешении выходит из-под контроля на {10805@TransformTime} сек., превращается в форму вампира с ОЗ {Unit@TransformHpForDesc}, ЗЩТ +{108000@BaseDef} и Маг. вампиризмом +{108000@MagicDrain}%, появляется там, где может поразить больше всего врагов, и накладывает Страх на врагов в области {10815@SplashRangeX}{X}{10815@SplashRangeY} на {10815@FearTime} сек. При каждом превращении Общ. макс. ОЗ формы вампира +{10800@Unit10800AI_TotalHpPer}%. Воскрешения от этого навыка не суммируются.</String>
+  <String Key="SkillDesc_10800_Long_2">Даёт себе 1 Воскрешение с {Unit@ReviveHpPer}% от макс. ОЗ. При Воскрешении на {10805@TransformTime} сек. впадает в неистовство, Преображается в форму Вампира с {Unit@TransformHpForDesc}% ОЗ, +{108000@BaseDef} ЗЩТ и +{108000@MagicDrain}% маг. вампиризма, затем спускается в точку, где может поразить больше всего врагов, и накладывает Страх на врагов в зоне {10815@SplashRangeX}{X}{10815@SplashRangeY} на {10815@FearTime} сек. При каждом Преображении Общ. макс. ОЗ формы Вампира повышается на +{10800@Unit10800AI_TotalHpPer}%. Воскрешение от этого навыка не суммируется.</String>
   <String Key="ActiveSkillName_10800">Пробуждение</String>
   <String Key="ActiveSkillDesc_10800">В начале следующей Битвы все полувампиры Кэти получают Иммунитет к отриц. эффектам.</String>
   <String Key="ActiveSkillDesc_10803">В начале следующей Битвы все полувампиры Кэти получают {0} Воскрешений и Иммунитет к отриц. эффектам.</String>
@@ -17967,51 +17980,325 @@ D = 1 - 4</String>
   <String Key="SkinDesc_107100401">&lt;i&gt;Награда за место в Рейтинге Лиги тепла в Битве&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Король утренней звезды Фараэль</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;Самый благородный звездный свет, рожденный ранним рассветом, станет самым ярким светом, что разгонит тьму.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Получить Абсолютную ЗЩТ</String>
+  <String Key="SuperShieldModulator">Шанс абсолютной защиты</String>
   <String Key="BuildingEffect_BaseDamageReflect">Отражает {Value}% урона
 (сокращение урона от магии вдвое)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">Часть полученного героем урона отражается на врагов.</String>
-  <String Key="TreasureName_30042">Ператаус</String>
-  <String Key="TreasureSubName_30042">Смольно-чёрный Щит</String>
-  <String Key="TreasureDesc_30042">Щит Верхаимуса нужен не только для защиты. Яростный прорыв Верхаимуса с его тяжёлым Щитом сминает даже самую прочную броню в одно мгновение.</String>
+  <String Key="TreasureName_30042">Ferataus</String>
+  <String Key="TreasureSubName_30042">Смоляной щит</String>
+  <String Key="TreasureDesc_30042">Щит Верхаимуса нужен не только для защиты. Яростный прорыв Верхаимуса с тяжёлым щитом мгновенно сминает даже самую прочную броню.</String>
   <String Key="TreasureSkillName_30042">Падение</String>
-  <String Key="BuffDataName_3300421">Сокрушение I</String>
-  <String Key="BuffDataName_3300422">Вмятина I</String>
-  <String Key="BuffDataName_3300423">Нейтрализация</String>
-  <String Key="BuffDataName_3300424">Вмятина II</String>
-  <String Key="BuffDataName_3300425">Сокрушение II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Особый магазин Пикапа Ператауса</String>
-  <String Key="SpecialPackage_1680">Пакет Ператауса 1</String>
-  <String Key="SpecialPackage_1681">Пакет Ператауса 2</String>
-  <String Key="SpecialPackage_1682">Пакет Ператауса 3</String>
+  <String Key="BuffDataName_3300421">Подавление I</String>
+  <String Key="BuffDataName_3300422">Ослабление I</String>
+  <String Key="BuffDataName_3300423">Сокрушение</String>
+  <String Key="BuffDataName_3300424">Ослабление II</String>
+  <String Key="BuffDataName_3300425">Подавление II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Особый магазин Ferataus Pickup</String>
+  <String Key="SpecialPackage_1680">Набор Ferataus 1</String>
+  <String Key="SpecialPackage_1681">Набор Ferataus 2</String>
+  <String Key="SpecialPackage_1682">Набор Ferataus 3</String>
   <String Key="BuffDataDesc_3300421">Передача урона +{1}x за каждые {0} Угрозы</String>
-  <String Key="BuffDataDesc_3300422">Физ. урон, получаемый врагами с Нестабильностью, +{0}%</String>
-  <String Key="BuffDataDesc_3300423">Каждый раз, когда Нестабильность снимается, все союзники получают +{0} Абсолютной ЗЩТ за каждого врага, с которого она снята</String>
-  <String Key="BuffDataDesc_3300424">Физ. урон, получаемый врагами с Нестабильностью, +{0}%</String>
+  <String Key="BuffDataDesc_3300422">При снятии Нестабильности цель получает Оглушение на {0} сек.</String>
+  <String Key="BuffDataDesc_3300423">Получ. Физ. урон врагов с Нестабильностью +{0}% (Увеличение Получ. Физ. урона не суммируется. Действует только наибольшее значение)</String>
+  <String Key="BuffDataDesc_3300424">При снятии Нестабильности цель получает Оглушение на {0} сек.</String>
   <String Key="BuffDataDesc_3300425">Передача урона +{1}x за каждые {0} Угрозы</String>
-  <String Key="TreasureSkillDesc_3300420">Когда вы наносите врагу Урон от навыка, цель получает Нестабильность
-Если союзник наносит врагу с Нестабильностью Физ. урон не меньше {0}% от макс. ОЗ цели, {1}% этого урона передаётся как Особ. урон другому врагу с Нестабильностью, после чего Нестабильность снимается со всех врагов
-&lt;color=#808080&gt;&lt;i&gt;Этот эффект общий, даже если Нестабильность накладывают разные Герои.&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300421">Когда вы наносите врагу Урон от навыка, цель получает Нестабильность
-Если союзник наносит врагу с Нестабильностью Физ. урон не меньше {0}% от макс. ОЗ цели, {1}% этого урона передаётся как Особ. урон другому врагу с Нестабильностью, после чего Нестабильность снимается со всех врагов
+  <String Key="TreasureSkillDesc_3300420">При нанесении врагу Урона от навыка накладывает на цель Нестабильность
+Если союзник одним ударом наносит врагу с Нестабильностью Физ. урон не меньше {0}% от макс. ОЗ цели без учёта Барьера, {1}% урона передаётся другим врагам с Нестабильностью как Особ. урон, после чего Нестабильность снимается со всех целей
+&lt;color=#808080&gt;&lt;i&gt;Эффект общий, даже если Нестабильность накладывают разные Герои.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">При нанесении врагу Урона от навыка накладывает на цель Нестабильность
+Если союзник одним ударом наносит врагу с Нестабильностью Физ. урон не меньше {0}% от макс. ОЗ цели без учёта Барьера, {1}% урона передаётся другим врагам с Нестабильностью как Особ. урон, после чего Нестабильность снимается со всех целей
 Передача урона +{3}x за каждые {2} Угрозы
-&lt;color=#808080&gt;&lt;i&gt;Этот эффект общий, даже если Нестабильность накладывают разные Герои.&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300422">Когда вы наносите врагу Урон от навыка, цель получает Нестабильность
-Если союзник наносит врагу с Нестабильностью Физ. урон не меньше {0}% от макс. ОЗ цели, {1}% этого урона передаётся как Особ. урон другому врагу с Нестабильностью, после чего Нестабильность снимается со всех врагов
+&lt;color=#808080&gt;&lt;i&gt;Эффект общий, даже если Нестабильность накладывают разные Герои.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">При нанесении врагу Урона от навыка накладывает на цель Нестабильность
+Если союзник одним ударом наносит врагу с Нестабильностью Физ. урон не меньше {0}% от макс. ОЗ цели без учёта Барьера, {1}% урона передаётся другим врагам с Нестабильностью как Особ. урон, после чего Нестабильность снимается со всех целей
 Передача урона +{3}x за каждые {2} Угрозы
-Физ. урон, получаемый врагами с Нестабильностью, +{4}%
-Это увеличение получаемого Физ. урона не суммируется. Действует только самое высокое значение
-&lt;color=#808080&gt;&lt;i&gt;Этот эффект общий, даже если Нестабильность накладывают разные Герои.&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300423">Когда вы наносите врагу Урон от навыка, цель получает Нестабильность
-Если союзник наносит врагу с Нестабильностью Физ. урон не меньше {0}% от макс. ОЗ цели, {1}% этого урона передаётся как Особ. урон другому врагу с Нестабильностью, после чего Нестабильность снимается со всех врагов
+При снятии Нестабильности цель получает Оглушение на {4} сек.
+&lt;color=#808080&gt;&lt;i&gt;Эффект общий, даже если Нестабильность накладывают разные Герои.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">При нанесении врагу Урона от навыка накладывает на цель Нестабильность
+Если союзник одним ударом наносит врагу с Нестабильностью Физ. урон не меньше {0}% от макс. ОЗ цели без учёта Барьера, {1}% урона передаётся другим врагам с Нестабильностью как Особ. урон, после чего Нестабильность снимается со всех целей
 Передача урона +{3}x за каждые {2} Угрозы
-Физ. урон, получаемый врагами с Нестабильностью, +{4}%
-Это увеличение получаемого Физ. урона не суммируется. Действует только самое высокое значение
-Каждый раз, когда Нестабильность снимается, все союзники получают +{5} Абсолютной ЗЩТ за каждого врага, с которого она снята
-&lt;color=#808080&gt;&lt;i&gt;Этот эффект общий, даже если Нестабильность накладывают разные Герои.&lt;/i&gt;&lt;/color&gt;</String>
+При снятии Нестабильности цель получает Оглушение на {4} сек.
+Получ. Физ. урон врагов с Нестабильностью +{5}%
+Увеличение Получ. Физ. урона не суммируется. Действует только наибольшее значение
+&lt;color=#808080&gt;&lt;i&gt;Эффект общий, даже если Нестабильность накладывают разные Герои.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="SpecialShop_TreasureDoublePickUp10014">Особый магазин Пикапа Божеств. оружия</String>
   <String Key="SpecialPackage_1676">Пакет 1 Камней призыва для Пикапа Божеств. оружия</String>
   <String Key="SpecialPackage_1677">Пакет 2 Камней призыва для Пикапа Божеств. оружия</String>
   <String Key="SpecialPackage_1678">Пакет Каэлуса</String>
   <String Key="SpecialPackage_1679">Пакет Трикстера</String>
+  <String Key="CannotSummonByWatchingAdsWhileInBattleAlert">Недоступно во время Битвы.</String>
+  <String Key="AdsReroll">Бесплатная переоценка</String>
+  <String Key="AdsDeckSet">Бесплатный сброс отряда</String>
+  <String Key="ResetPVPMatch">Сброс</String>
+  <String Key="CannotResetPVPMatchByWatchingAdsAlert">Все попытки сброса на сегодня исчерпаны.</String>
+  <String Key="PVPDeckSettingReTryAdsPopupTitle">Повторный вызов строя</String>
+  <String Key="PVPDeckSettingReTryAdsPopupDesc">Хотите посмотреть рекламу и повторить бесплатно?
+Покупка Пасса короля-бога убирает рекламу из игры.
+Если вы выберете Алмазы, сегодняшний бесплатный повтор за рекламу будет недоступен.</String>
+  <String Key="PVPDeckSettingReTryAdsCancelAlert">При закрытии бесплатный повтор за рекламу будет отменён. Отменить повтор?</String>
+  <String Key="SuperShieldAdaptabilityPer">Усиление Алтаря крови {0}
+Шанс абсолютной защиты +{1}%</String>
+  <String Key="SuperShieldAdaptabilityPer_Piece">Усиление Алтаря крови
+Шанс абсолютной защиты повышен</String>
+  <String Key="SkillDesc_1019000_Short">Обрушивается на ближайшего врага, нанося {Damage:BaseValue}+{Damage:MAtkPer} урона в зоне {SplashRangeX}{X}{SplashRangeY} и отбрасывая цели на {Knockback} клетки.</String>
+  <String Key="SkillDesc_1019001_Short">Обрушивается на ближайшего врага, нанося {Damage:BaseValue}+{Damage:MAtkPer} урона по {SplashRangeSum} соседним клеткам и отбрасывая цели на {Knockback} клетки.</String>
+  <String Key="SkillDesc_1019000_Long">Обрушивается перед ближайшим врагом в зоне {RangeX}{X}{RangeY} и силой тяжёлого щита наносит всем врагам в зоне {SplashRangeX}{X}{SplashRangeY} {Damage:BaseValue}+{Damage:MAtkPer} урона, отбрасывая их на {Knockback} клетки.</String>
+  <String Key="SkillDesc_1019001_Long">Обрушивается перед ближайшим врагом в зоне {RangeX}{X}{RangeY} и силой тяжёлого щита наносит всем врагам по {SplashRangeSum} соседним клеткам {Damage:BaseValue}+{Damage:MAtkPer} урона, отбрасывая их на {Knockback} клетки.</String>
+  <String Key="ChallengeBossDesc_72">Имеет &lt;color=#8DFFFF&gt;1x1&lt;/color&gt; клетку для цели и размер &lt;color=#8DFFFF&gt;3x3&lt;/color&gt; клетки.</String>
+  <String Key="SkillName_30000051">Упрочнение</String>
+  <String Key="SkillDesc_30000051">Используется сразу в начале Битвы. Угроза босса повышается на &lt;color=#ffd264&gt;Сложность испытанияX&lt;/color&gt;{DescDefPen}, а Получ. урон не от Отражения/Контратаки снижается на &lt;color=#ffd264&gt;Сложность испытанияX&lt;/color&gt;{DescReflectDef}%. При Сложности испытания 20 и выше ЗЩТ также повышается на {DescDef} за каждый уровень.</String>
+  <String Key="SkillName_30000052">Разряд</String>
+  <String Key="SkillDesc_30000052">Наносит Героям в зоне {SplashRangeX}{X}{SplashRangeY} всего {DescDamage} урона за {DescAttackTime} сек.</String>
+  <String Key="SkillName_30000053">Уничтожение</String>
+  <String Key="SkillDesc_30000053">Наносит всем врагам {Damage} Физ. урона от навыка. При Сложности испытания 10 и ниже вместо этого наносит урон, равный {MaxDamage:HpPer:BaseValue}% от макс. ОЗ босса. Игнорирует {DefBreak}% ЗЩТ.</String>
+  <String Key="StoryClearBenefit_430072000">Инвентарь - Щит мести получен
+
+&lt;i&gt;Щит мести: даёт Отражение урона&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072001">Инвентарь - Ожерелье Надежды получено
+
+&lt;i&gt;Ожерелье Надежды: даёт Воскрешение через некоторое время после начала Битвы&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072002">На стадии босса получен предмет - Посох исцеления
+
+&lt;i&gt;Посох исцеления: Общ. Нанос. урон снижен, Общ. Исцеление повышено&lt;/i&gt;</String>
+  <String Key="ItemName_60030">Посох исцеления</String>
+  <String Key="ItemDesc_60030">Общ. Нанос. урон {0}%, Общ. Исцеление +{1}%</String>
+  <String Key="StoryInventoryItemName_230100">Щит мести</String>
+  <String Key="StoryInventoryItemDesc_230100">Отражение урона +{0}% (Маг. урон снижен вдвое)</String>
+  <String Key="StoryInventoryItemName_230110">Ожерелье Надежды</String>
+  <String Key="StoryInventoryItemDesc_230110">Даёт всем союзникам Воскрешение {1} раз(а) через {0} сек. после начала Битвы</String>
+  <String Key="StoryModeDialogue_2010700_0_0_System">Войска Территории Офелии вместе с Красной Луной выступают к границе Носферату.</String>
+  <String Key="StoryModeDialogue_2010700_0_1_System">Влад, пошатываясь, издали смотрит на Офелию. Его глаза ярко светятся алым.</String>
+  <String Key="StoryModeDialogue_2010700_0_2_System">Его окутывает яростная чёрная аура.</String>
+  <String Key="StoryModeDialogue_2010700_0_3_Vlad">Госпожа Офелия, я искренне рад снова видеть вас такой.</String>
+  <String Key="StoryModeDialogue_2010700_0_4_Vlad">Или теперь мне звать вас правительницей? Ваша красота совсем не увяла.</String>
+  <String Key="StoryModeDialogue_2010700_0_5_Vlad">Ну как, жить человеком всё ещё стоит того? Вам не надоело умирать?</String>
+  <String Key="StoryModeDialogue_2010700_0_6_Vlad">Стать моей семьёй ещё не поздно...</String>
+  <String Key="StoryModeDialogue_2010700_1_0_System">Тем временем Кэти тоже готовится к выступлению. За окном кабинета она видит, как поднимается знамя Красной Луны.</String>
+  <String Key="StoryModeDialogue_2010700_1_1_Cathy">С тех пор как жена прежнего лорда стала новым правителем, я много раз посылала письма и просила о встрече, но ответа не было.</String>
+  <String Key="StoryModeDialogue_2010700_1_2_Cathy">Я больше даже не могу войти во Фроствальд. Значит, всё закончится так...</String>
+  <String Key="StoryModeDialogue_2010700_1_3_Cathy">Если Влад умрёт, это не закончится проблемой на границе.</String>
+  <String Key="StoryModeDialogue_2010700_1_4_Cathy">Основные силы Носферату начнут политическую месть под предлогом, что 'человек убил дворянина рода', и это станет полномасштабной битвой между государствами.</String>
+  <String Key="StoryModeDialogue_2010700_1_6_Cathy">Теперь я могу только.... пойти туда сама, всё уладить и встретиться с новым правителем. Это единственный путь.</String>
+  <String Key="StoryModeDialogue_2010700_2_0_System">Отряд Офелии.</String>
+  <String Key="StoryModeDialogue_2010700_2_1_System">Офелия командует войсками с тыла, а Нерия во главе стреляет из арбалета и прорывается через Поле боя к особняку Влада Морена.</String>
+  <String Key="StoryModeDialogue_2010700_2_2_Solar">Госпожа Офелия, сзади!</String>
+  <String Key="StoryModeDialogue_2010700_2_3_Solar">Ух... А, это немного больно.</String>
+  <String Key="StoryModeDialogue_2010700_2_4_Ophelia">Сола! Медик! Лечите её!</String>
+  <String Key="StoryModeDialogue_2010700_2_5_Solar">Я в порядке. Думаю, я прожила достаточно счастливую жизнь! Я буду и дальше вас поддерживать....</String>
+  <String Key="StoryModeDialogue_2010700_2_6_System">Офелия знала, что война всегда идёт вместе с кровью и смертью.</String>
+  <String Key="StoryModeDialogue_2010700_2_7_System">3 месяца она училась и снова училась. Но знать и столкнуться с этим самой — не одно и то же.</String>
+  <String Key="StoryModeDialogue_2010700_2_8_System">Она знала Солу всего несколько месяцев, но от мысли о том, что потеряет её, кровь закипала.</String>
+  <String Key="StoryModeDialogue_2010700_2_9_System">И потом, разве не она сама решила начать эту Битву?</String>
+  <String Key="StoryModeDialogue_2010700_2_10_System">Взгляд Офелии находит Нерию среди Битвы.</String>
+  <String Key="StoryModeDialogue_2010700_2_11_System">Не думая даже о безопасности товарищей, она одна ушла в самую глубь Поля боя.</String>
+  <String Key="StoryModeDialogue_2010700_2_12_System">С безумной улыбкой она будто танцевала и истребляла Вампиров. В этот миг она мало отличалась от Влада Морена, жаждавшего крови.</String>
+  <String Key="StoryModeDialogue_2010700_2_13_Solar">...Госпожа Офелия. Хе-хе, я.... не умерла.</String>
+  <String Key="StoryModeDialogue_2010700_2_14_Ophelia">Ах, Сола, слава богу. Правда, слава богу.</String>
+  <String Key="StoryModeDialogue_2010700_2_14b_Ophelia">Не двигайся. Тебе больше не нужно говорить.</String>
+  <String Key="StoryModeDialogue_2010700_2_15_System">Солу передают военным врачам. Офелия отпускает руку Солы и встаёт.</String>
+  <String Key="StoryModeDialogue_2010700_2_16_Ophelia">(Чтобы свести Жертвы к минимуму, я быстро и эффективно закончу эту Битву.)</String>
+  <String Key="StoryModeDialogue_2010700_2_17_Ophelia">Все войска, вперёд.</String>
+  <String Key="StoryModeDialogue_2010700_3_0_System">Тем временем Нерия одна мчится по Полю боя и начинает Битву, нет, бойню.</String>
+  <String Key="StoryModeDialogue_2010700_3_1_System">На лице Нерии медленно расплывается улыбка.</String>
+  <String Key="StoryModeDialogue_2010700_3_2_Neria">Аа... Нет ничего приятнее криков Вампиров.</String>
+  <String Key="StoryModeDialogue_2010700_3_3_Neria">Вот и вся ваша ценность. Аха-ха-ха-ха-ха!</String>
+  <String Key="StoryModeDialogue_2010700_3_4_RedMoon1">Госпожа Нерия! Госпожа Сола тяжело ранена и отступила!</String>
+  <String Key="StoryModeDialogue_2010700_3_5_Neria">Понятно.</String>
+  <String Key="StoryModeDialogue_2010700_3_6_System">Нерия продолжает битву и встречает Кэти, которая продвигается вперед, оглушая войска Фроствальда.</String>
+  <String Key="StoryModeDialogue_2010700_3_7a_Cathy">Нерия! Как ты собираешься это исправить?!</String>
+  <String Key="StoryModeDialogue_2010700_3_7b_Cathy">Это уже война! Я тоже ничего не могу сделать!</String>
+  <String Key="StoryModeDialogue_2010700_3_8_Ophelia">Это Алессия Носферату, Нерия?</String>
+  <String Key="StoryModeDialogue_2010700_3_9a_Neria">Исправить? Теперь это уже не важно.</String>
+  <String Key="StoryModeDialogue_2010700_3_9b_Neria">В тебе тоже наполовину течет кровь грязного вампира. Я убью эту половину.</String>
+  <String Key="StoryModeDialogue_2010700_3_10_Ophelia">Это важно! Моя цель — только Влад Морен. Я не хочу большего вреда.</String>
+  <String Key="StoryModeDialogue_2010700_3_11_Neria">Офелия. Та, что стоит там, — начальница Влада Морена. Она наш враг.</String>
+  <String Key="StoryModeDialogue_2010700_3_12_Cathy">Эй, вы! Вы ведь госпожа Офелия, верно? Давайте немного поговорим.</String>
+  <String Key="StoryModeDialogue_2010700_3_13_Neria">Вам не нужно слушать эту женщину.</String>
+  <String Key="StoryModeDialogue_2010700_3_14_Ophelia">Я сама выслушаю и решу!</String>
+  <String Key="StoryModeDialogue_2010700_3_15_Cathy">Верно! Сначала нужно остановить войну.</String>
+  <String Key="StoryModeDialogue_2010700_3_16_System">Однако, несмотря на старания Кэти, Влад появляется прямо перед Офелией.</String>
+  <String Key="StoryModeDialogue_2010700_3_17_System">Черная аура вокруг Влада вырывается наружу, становясь еще темнее и гуще.</String>
+  <String Key="StoryModeDialogue_2010800_0_0_Vlad">Ради мира с людьми я сдерживал себя много лет.</String>
+  <String Key="StoryModeDialogue_2010800_0_1_Vlad">Мне сказали, что я натворил большую беду, и потому я месяцами ничего не делал и сдерживал даже свою семью.</String>
+  <String Key="StoryModeDialogue_2010800_0_2_Vlad">Но всё же! Всё рушится, и я слышу крики своей семьи.</String>
+  <String Key="StoryModeDialogue_2010800_0_3_Vlad">Больше я терпеть не стану. Теперь меня уже ничто не остановит!</String>
+  <String Key="StoryModeDialogue_2010800_0_4_Ophelia">Это... правда Влад Морен?</String>
+  <String Key="StoryModeDialogue_2010800_0_5_Neria">Вот истинный облик вампира. Чудовище, пожранное кровью, которое разрушает и убивает всё!</String>
+  <String Key="StoryModeDialogue_2010800_0_6_Cathy">......Влад. Что с тобой случилось?</String>
+  <String Key="StoryModeDialogue_2010800_0_7_Vlad">Какой же уродливый мир. Я уничтожу всё!</String>
+  <String Key="StoryModeDialogue_2010800_0_8_System">Влад опускается на колени. Черная аура медленно рассеивается, и его прежний взгляд возвращается.</String>
+  <String Key="StoryModeDialogue_2010800_0_9_Vlad">Кэти... госпожа...</String>
+  <String Key="StoryModeDialogue_2010800_0_10_Cathy">Влад.</String>
+  <String Key="StoryModeDialogue_2010800_0_11_Cathy">…Прости.</String>
+  <String Key="StoryModeDialogue_2010800_0_12_System">Кэти кричит так громко, что ее слышит всё поле боя.</String>
+  <String Key="StoryModeDialogue_2010800_0_13_Cathy">Я — Алессия Носферату!</String>
+  <String Key="StoryModeDialogue_2010800_0_13b_Cathy">Как член дома Носферату, я сама сразила вышедшего из-под контроля Влада Морена.</String>
+  <String Key="StoryModeDialogue_2010800_0_14_Cathy">Причиной всего был лишь личный срыв Влада Морена, и раз Влад Морен мертв, дальнейшие битвы и жертвы не нужны!</String>
+  <String Key="StoryModeDialogue_2010800_0_15_Cathy">Вампиры под командованием Влада Морена, приказываю вам именем Носферату!</String>
+  <String Key="StoryModeDialogue_2010800_0_15b_Cathy">Прекратите битву и отступайте!</String>
+  <String Key="StoryModeDialogue_2010800_0_16_Cathy">Офелия, прошу вас, поспешите и остановите дальнейшие бессмысленные жертвы.</String>
+  <String Key="StoryModeDialogue_2010800_0_17_Ophelia">Все войска Фроствальда! Прекратить битву и отступить! Унесите раненых и павших!</String>
+  <String Key="StoryModeDialogue_2010800_0_18_Neria">Так это закончиться не может. Красная Луна...</String>
+  <String Key="StoryModeDialogue_2010800_0_19_Ophelia">Нерия. Вы и правда делаете это ради жителей Территории?</String>
+  <String Key="StoryModeDialogue_2010800_0_19b_Ophelia">Глядя на ваше лицо, кажется, что вы просто наслаждаетесь кровопролитием.</String>
+  <String Key="StoryModeDialogue_2010800_0_20_Neria">Я? И где здесь кровопролитие, если я караю вампиров? Это не отличается от того, чтобы давить насекомых...</String>
+  <String Key="StoryModeDialogue_2010800_0_21_Cathy">Слышать такое вампиру очень неприятно. Нерия, уходи уже. Пока я правда не потеряла терпение.</String>
+  <String Key="StoryModeDialogue_2010800_0_22_Neria">... Красная Луна. Отступаем!</String>
+  <String Key="StoryModeDialogue_2010800_1_0_Cathy">Офелия, меня зовут Алессия Носферату.</String>
+  <String Key="StoryModeDialogue_2010800_1_1a_Cathy">О смерти Родерика Фроствальда... у меня нет слов.</String>
+  <String Key="StoryModeDialogue_2010800_1_1b_Cathy">Простите. Большая часть вины на мне.</String>
+  <String Key="StoryModeDialogue_2010800_1_2_Cathy">Но, если честно, я хочу остановить войну между вампирами и людьми и с этого момента не допустить новых жертв с обеих сторон.</String>
+  <String Key="StoryModeDialogue_2010800_1_3_Ophelia">Алессия Носферату, я прочитала все письма, что вы присылали.</String>
+  <String Key="StoryModeDialogue_2010800_1_4_Ophelia">Просто обстоятельства не позволяли дать вам положительный ответ.</String>
+  <String Key="StoryModeDialogue_2010800_1_5_Ophelia">Я тоже хочу остановить дальнейшие жертвы.</String>
+  <String Key="StoryModeDialogue_2010800_1_5b_Ophelia">Позже я отправлю вам официальное письмо.</String>
+  <String Key="StoryModeDialogue_2010800_1_6_Cathy">Тогда я пойду первой.</String>
+  <String Key="StoryModeDialogue_2010800_1_7_System">Кэти уходит, бросив на Нерию короткий сердитый взгляд.</String>
+  <String Key="StoryModeDialogue_2010800_1_8_System">После того как все ушли, Офелии осталась лишь пустота.</String>
+  <String Key="StoryModeDialogue_2010800_2_0_Ophelia">Родерик. Моё сердце пусто.</String>
+  <String Key="StoryModeDialogue_2010800_2_1_Ophelia">Когда я была на Центральном континенте, я думала, что моя роль — просто быть прекрасной знатной дамой и хорошо исполнять эту роль, и никогда не сомневалась в этом.</String>
+  <String Key="StoryModeDialogue_2010800_2_2_Ophelia">Даже когда я приехала на Север ради политического брака, здесь было холодно и не было пиров, но я просто приняла это.</String>
+  <String Key="StoryModeDialogue_2010800_2_3_Ophelia">Даже когда меня похитили, я была совсем очарована вампиром.</String>
+  <String Key="StoryModeDialogue_2010800_2_4_Ophelia">На этот раз я впервые настояла на своем и отомстила за Родерика.</String>
+  <String Key="StoryModeDialogue_2010800_2_4b_Ophelia">Ну как? Я хорошо справилась?</String>
+  <String Key="StoryModeDialogue_2010800_2_5_Ophelia">…</String>
+  <String Key="StoryModeDialogue_2010800_2_6_Ophelia">Может, это звучит странно, но когда я увидела, как Влад падает, у меня сжалось сердце.</String>
+  <String Key="StoryModeDialogue_2010800_2_7_Ophelia">Ведь это он убил Родерика. Это он хотел сделать меня своей добычей.</String>
+  <String Key="StoryModeDialogue_2010800_2_8_Ophelia">Но тем, каким он был на пиру... это было по-настоящему. Не всё было ложью.</String>
+  <String Key="StoryModeDialogue_2010800_2_9_Ophelia">Он был плохим человеком, это правда. Но, может быть, он просто заболел одержимостью и порывами, и потому его взгляд сузился... совсем как у Нерии.</String>
+  <String Key="StoryModeDialogue_2010800_2_11_Ophelia">…Спасибо, Родерик. Я решила пойти по вашим стопам.</String>
+  <String Key="StoryModeDialogue_2010800_2_12_Ophelia">Отныне я хочу стать правительницей, которая защищает жителей Территории собственным выбором, не поддаваясь чужому влиянию.</String>
+  <String Key="StoryModeDialogue_2010800_2_13_Ophelia">Я буду стараться. Пожалуйста, и дальше присматривайте за мной и помогайте мне.</String>
+  <String Key="StoryModeDialogue_2010800_3_0_System">Офелия подходит к телу Влада, чтобы почтить его память. На месте, где пал Влад, находят тёмно-красный драгоценный камень.</String>
+  <String Key="StoryModeDialogue_2010800_3_1_Ophelia">Что это...?</String>
+  <String Key="StoryModeDialogue_2010800_3_2_Ophelia">(Меня мутит.)</String>
+  <String Key="StoryModeDialogue_2010800_3_3_Ophelia">Родерик. Значит, это и правда... то самое, да?</String>
+  <String Key="StoryModeDialogue_2010800_3_4_System">Влад Морен, долго правивший пограничьем Носферату, умер.</String>
+  <String Key="StoryModeDialogue_2010800_3_5_System">Сообщив в штаб Носферату, что Влад Морен вышел из-под контроля сам по себе и что она лично сразила его, Кэти предотвращает полномасштабную битву.</String>
+  <String Key="StoryModeDialogue_2010800_3_6_System">На первый план вышли сомнения в способностях Алессии Носферату как управительницы, и её политическое положение стало ещё слабее.</String>
+  <String Key="StoryModeDialogue_2010800_3_7_System">Пока люди и вампиры живут вместе, конфликт здесь не закончится.</String>
+  <String Key="StoryModeDialogue_2010900_0_0_System">Через несколько дней, в приемной Офелии.</String>
+  <String Key="StoryModeDialogue_2010900_0_1_System">На столе лежит тёмно-красный драгоценный камень.</String>
+  <String Key="StoryModeDialogue_2010900_0_2_Ophelia">Вы что-нибудь знаете об этом камне?</String>
+  <String Key="StoryModeDialogue_2010900_0_3_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_4_Ophelia">Как вам хорошо известно, этот камень называется «Звезда сумерек».</String>
+  <String Key="StoryModeDialogue_2010900_0_5_Ophelia">Этот камень родом с Юга, и ходят слухи, будто он портит характер того, кто его носит.</String>
+  <String Key="StoryModeDialogue_2010900_0_6_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_7_Ophelia">Дальше — только моя догадка.</String>
+  <String Key="StoryModeDialogue_2010900_0_8_Ophelia">Всем известно, что Влад Морен любил красивые вещи и особенно собирал дорогие камни.</String>
+  <String Key="StoryModeDialogue_2010900_0_9_Ophelia">Кто-то привёз его с Юга в надежде, что «Звезда сумерек» попадёт к нему в руки.</String>
+  <String Key="StoryModeDialogue_2010900_0_10_Ophelia">И поскольку этот человек тайно сотрудничал с Алессией Носферату, начальницей Влада Морена,</String>
+  <String Key="StoryModeDialogue_2010900_0_10b_Ophelia">ему, должно быть, было нетрудно узнать, каким черным рынком чаще всего пользовался Влад Морен.</String>
+  <String Key="StoryModeDialogue_2010900_0_11_Ophelia">Влад Морен всегда носил при себе «Звезду сумерек»,</String>
+  <String Key="StoryModeDialogue_2010900_0_11b_Ophelia">но её действие, должно быть, не ограничивалось простой порчей характера,</String>
+  <String Key="StoryModeDialogue_2010900_0_11c_Ophelia">и она даже могла вывести из-под контроля истинную природу вампира.</String>
+  <String Key="StoryModeDialogue_2010900_0_12_Ophelia">Зачем нужно было, чтобы Влад Морен вышел из-под контроля?</String>
+  <String Key="StoryModeDialogue_2010900_0_13_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_14_Ophelia">Вы сказали Родерику, что Алессия замешана в похищении жителей Территории.</String>
+  <String Key="StoryModeDialogue_2010900_0_15_Ophelia">И утверждали, что тела жителей Территории, найденные на юге Территории, — дело рук вампиров.</String>
+  <String Key="StoryModeDialogue_2010900_0_16_Ophelia">Из-за этого сосуществование с вампирами не могло сдвинуться с места.</String>
+  <String Key="StoryModeDialogue_2010900_0_17_Neria">Я лишь сказала правду.</String>
+  <String Key="StoryModeDialogue_2010900_0_18_Ophelia">Даже когда меня похитили, вы втянули Родерика и подтолкнули его к военному нападению. И когда Родерик умер, вы подтолкнули к мести и меня.</String>
+  <String Key="StoryModeDialogue_2010900_0_19_Ophelia">Похоже, вы хотите самой войны.</String>
+  <String Key="StoryModeDialogue_2010900_0_20_Neria">......То, что я сделала, было справедливостью. Вампиры не должны существовать.</String>
+  <String Key="StoryModeDialogue_2010900_0_21_Neria">Только ты и Алессия цепляетесь за иллюзию сосуществования.</String>
+  <String Key="StoryModeDialogue_2010900_0_21b_Neria">И в конце концов Родерик тоже умер из-за этой иллюзии.</String>
+  <String Key="StoryModeDialogue_2010900_0_22_Neria">Неважно, сеяла я раздор или нет, Влад похитил жителей этой Территории и пытался съесть вас, Офелия.</String>
+  <String Key="StoryModeDialogue_2010900_0_23_Neria">Такова сущность вампира.</String>
+  <String Key="StoryModeDialogue_2010900_0_24_Ophelia">Сола... Красная Луна — ваша семья? Или лишь средство?</String>
+  <String Key="StoryModeDialogue_2010900_0_25_Neria">Мы боевые товарищи.</String>
+  <String Key="StoryModeDialogue_2010900_0_26_Ophelia">…Алессия и я решили сохранить равновесие этого места.</String>
+  <String Key="StoryModeDialogue_2010900_0_27_Neria">Вы доверяете тому вампиру?</String>
+  <String Key="StoryModeDialogue_2010900_0_28_Ophelia">Больше, чем вам.</String>
+  <String Key="StoryModeDialogue_2010900_0_29_Neria">Одна вы ничего не сможете.</String>
+  <String Key="StoryModeDialogue_2010900_0_30_Neria">Влад мертв, но Носферату по-прежнему силен.</String>
+  <String Key="StoryModeDialogue_2010900_0_31_Neria">Что вы будете делать, если они нападут?</String>
+  <String Key="StoryModeDialogue_2010900_0_32_Ophelia">Это не то, о чем вам стоит беспокоиться.</String>
+  <String Key="StoryModeDialogue_2010900_0_33_Neria">Вы пожалеете об этом.</String>
+  <String Key="StoryModeDialogue_2010900_0_34_System">Нерия бросает последний взгляд и покидает приемную. Офелия смотрит ей вслед.</String>
+  <String Key="StoryModeDialogue_2010900_1_0_System">В приемной остается Сола, вся в бинтах. Офелия садится напротив нее.</String>
+  <String Key="StoryModeDialogue_2010900_1_1_Ophelia">Сола. С вами все будет хорошо? Даже если не пойдете с нами?</String>
+  <String Key="StoryModeDialogue_2010900_1_2_Solar">Старый босс и без меня справится. И теперь есть новый босс, так что все хорошо!</String>
+  <String Key="StoryModeDialogue_2010900_2_0_System">Через несколько дней Офелия, как всегда, сидит в кабинете в кресле Родерика.</String>
+  <String Key="StoryModeDialogue_2010900_2_1_Ophelia">Я начала переговоры с Алессией.</String>
+  <String Key="StoryModeDialogue_2010900_2_2_Ophelia">Я продолжу то, что хотел сделать Родерик.</String>
+  <String Key="StoryModeDialogue_2010900_2_3_Ophelia">А Нерию я прогнала.</String>
+  <String Key="StoryModeDialogue_2010900_2_4_Ophelia">Я также укрепляю армию Территории и расширяю наши союзы.</String>
+  <String Key="StoryModeDialogue_2010900_2_6_Ophelia">... Так было правильно?</String>
+  <String Key="StoryModeDialogue_2010900_2_7_System">После этого имя Офелии разнеслось далеко. Женщина, что расширяла свою Территорию, усиливала армию и не останавливалась. Люди называли ее «Железной леди».</String>
+  <String Key="StoryModeDialogue_2010900_2_8_System">Иногда вассалы видят, как Офелия в пустом кабинете ласково говорит в пустоту.</String>
+  <String Key="StoryModeDialogue_2010900_2_9_System">Железная леди еще долго будет сломленной и застывшей, и от этого станет лишь тверже.</String>
+  <String Key="StoryModeDialogue_2010700_2_2b_Ophelia">...!!!</String>
+  <String Key="WorldTriggerDesc_11100">За каждого целевого героя Особ. урон +{0}% (макс. 3 суммирования)</String>
+  <String Key="StoryFieldName_2010700">Граница Носферату</String>
+  <String Key="StoryFieldName_2010800">Граница Носферату</String>
+  <String Key="UnitName_20020750">Влад Носферату</String>
+  <String Key="UnitName_20020600">Солдат Фроствальда</String>
+  <String Key="StoryHint_420107000">Используйте Навык начала боя Офелии, чтобы защититься от атаки Гаргульи.</String>
+  <String Key="StoryHint_420108000">Атаки Влада постоянно накладывают на союзников Оглушение. Используйте Навык начала боя, который может противостоять Оглушению.</String>
+  <String Key="TreasureName_30043">Витакорде</String>
+  <String Key="TreasureSubName_30043">Книга святости</String>
+  <String Key="TreasureDesc_30043">Взгляните в лицо истинному сердцу внутри себя.
+Тогда святость поможет вам.</String>
+  <String Key="TreasureSkillName_30043">Сила жизни</String>
+  <String Key="BuffDataName_3300431">Священная сила I</String>
+  <String Key="BuffDataName_3300432">Цикл жизни I</String>
+  <String Key="BuffDataName_3300433">Священная охрана</String>
+  <String Key="BuffDataName_3300434">Цикл жизни II</String>
+  <String Key="BuffDataName_3300435">Священная сила II</String>
+  <String Key="SpecialShop_TreasurePickUp30043">Особый магазин Витакорде Pickup</String>
+  <String Key="SpecialPackage_1683">Пакет Витакорде 1</String>
+  <String Key="SpecialPackage_1684">Пакет Витакорде 2</String>
+  <String Key="SpecialPackage_1685">Пакет Витакорде 3</String>
+  <String Key="BuffDataDesc_3300431">За каждые {0} Охраны коэффициент Маг. АТК эффекта увеличения базового урона +{1}%</String>
+  <String Key="BuffDataDesc_3300432">Перезарядка {0}с</String>
+  <String Key="BuffDataDesc_3300433">Дарует Благоволение всем союзникам в области, кроме себя</String>
+  <String Key="BuffDataDesc_3300434">Перезарядка {0}с</String>
+  <String Key="BuffDataDesc_3300435">За каждые {0} Охраны коэффициент Маг. АТК эффекта увеличения базового урона +{1}%</String>
+  <String Key="TreasureSkillDesc_3300430">В начале Битвы применяется только эффект героя с самым высоким показателем звезд, экипированного Витакорде
+Фиксирует Маг. АТК носителя на значении в начале Битвы
+При исцелении союзника на {0}с создает область, которая повышает базовый урон союзников в радиусе {1} вокруг носителя на {2}% от Маг. АТК носителя (Перезарядка {3}с)</String>
+  <String Key="TreasureSkillDesc_3300431">В начале Битвы применяется только эффект героя с самым высоким показателем звезд, экипированного Витакорде
+Фиксирует Маг. АТК носителя на значении в начале Битвы
+При исцелении союзника на {0}с создает область, которая повышает базовый урон союзников в радиусе {1} вокруг носителя на {2}% от Маг. АТК носителя (Перезарядка {3}с)
+За каждые {4} Охраны коэффициент Маг. АТК эффекта увеличения базового урона +{5}%</String>
+  <String Key="TreasureSkillDesc_3300433">В начале Битвы применяется только эффект героя с самым высоким показателем звезд, экипированного Витакорде
+Фиксирует Маг. АТК носителя на значении в начале Битвы
+При исцелении союзника на {0}с создает область, которая повышает базовый урон союзников в радиусе {1} вокруг носителя на {2}% от Маг. АТК носителя (Перезарядка {3}с)
+За каждые {4} Охраны коэффициент Маг. АТК эффекта увеличения базового урона +{5}%
+Дарует Благоволение союзникам в области, кроме носителя</String>
+  <String Key="SeasonalEventName_Season72">Фестиваль летающих драконов</String>
+  <String Key="SeasonalEventMode_Season72">Фестиваль летающих драконов</String>
+  <String Key="TreasureName_50002">Кор Орбис</String>
+  <String Key="TreasureSubName_50002">Временный подзаголовок</String>
+  <String Key="TreasureDesc_50002">Временное описание — дополнить после утверждения концепта Божеств. оружия — идея: какой-то камень? артефакт? Он берет ОМ у ближайших растений и животных, накапливает их, а потом выпускает</String>
+  <String Key="TreasureSkillName_50002">Объединение ОМ</String>
+  <String Key="BuffDataName_3500021">Ассимиляция I</String>
+  <String Key="BuffDataName_3500022">Барьер ОМ I</String>
+  <String Key="BuffDataName_3500023">Резонанс ОМ</String>
+  <String Key="BuffDataName_3500024">Барьер ОМ II</String>
+  <String Key="BuffDataName_3500025">Ассимиляция II</String>
+  <String Key="SpecialShop_TreasurePickUp50002">Особый магазин Кор Орбис Pickup</String>
+  <String Key="SpecialPackage_1690">Пакет Кор Орбис 1</String>
+  <String Key="SpecialPackage_1691">Пакет Кор Орбис 2</String>
+  <String Key="SpecialPackage_1692">Пакет Кор Орбис 3</String>
+  <String Key="BuffDataDesc_3500021">За каждые {1}% Крит. маг. урона выше {0}% бонус к итоговому урону усиленного навыка x{2}</String>
+  <String Key="BuffDataDesc_3500022">Получ. урон {0}% до 3-го использования навыка</String>
+  <String Key="BuffDataDesc_3500023">При использовании усиленного навыка тот же навык дополнительно применяется к случайной цели {1} раз с уроном {0}%</String>
+  <String Key="BuffDataDesc_3500024">Получ. урон {0}% до 3-го использования навыка</String>
+  <String Key="BuffDataDesc_3500025">За каждые {1}% Крит. маг. урона выше {0}% бонус к итоговому урону усиленного навыка x{2}</String>
+  <String Key="TreasureSkillDesc_3500020">После начала Битвы только герой с самым высоким показателем звезд, экипированный Кор Орбис, получает Макс. ОМ +{0}% и итоговый наносимый урон -{1}% до 3-го использования навыка
+Последний навык усиливается, и его итоговый урон увеличивается на +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">После начала Битвы только герой с самым высоким показателем звезд, экипированный Кор Орбис, получает Макс. ОМ +{0}% и итоговый наносимый урон -{1}% до 3-го использования навыка
+Последний навык усиливается, и его итоговый урон увеличивается на +{2}%
+За каждые {4}% Крит. маг. урона выше {3}% бонус к итоговому урону усиленного навыка x{5}</String>
+  <String Key="TreasureSkillDesc_3500022">После начала Битвы только герой с самым высоким показателем звезд, экипированный Кор Орбис, получает Макс. ОМ +{0}% и итоговый наносимый урон -{1}% до 3-го использования навыка
+Последний навык усиливается, и его итоговый урон увеличивается на +{2}%
+За каждые {4}% Крит. маг. урона выше {3}% бонус к итоговому урону усиленного навыка x{5}
+Получ. урон {6}% до 3-го использования навыка</String>
+  <String Key="TreasureSkillDesc_3500023">После начала Битвы только герой с самым высоким показателем звезд, экипированный Кор Орбис, получает Макс. ОМ +{0}% и итоговый наносимый урон -{1}% до 3-го использования навыка
+Последний навык усиливается, и его итоговый урон увеличивается на +{2}%
+За каждые {4}% Крит. маг. урона выше {3}% бонус к итоговому урону усиленного навыка x{5}
+Получ. урон {6}% до 3-го использования навыка
+При использовании усиленного навыка тот же навык дополнительно применяется к случайной цели {8} раз с уроном {7}%</String>
 </Strings>

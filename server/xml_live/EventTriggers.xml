@@ -2883,5 +2883,15 @@
                 <Event Type="AddBuffToSelf" Value="70109"/>
             </EventTrigger>
         </EnemyUnitEvents>
-    </EventTrigger>           
+    </EventTrigger>
+
+    <EventTrigger ID="70110">
+        <Comment>5초 후 모든 아군에게 부활 2회 부여</Comment>
+        <PlayerUnitEvents>
+            <EventTrigger>
+                <Trigger Type="ClearUnitBuffs"/>
+                <Event Type="AddBuffToSelf" Value="70110"/>
+            </EventTrigger>
+        </PlayerUnitEvents>
+    </EventTrigger>
 </EventTriggers>

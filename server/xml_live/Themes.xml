@@ -1621,6 +1621,7 @@
         <RankedPvP>true</RankedPvP>
         <MasterValueRatio>0.2</MasterValueRatio>
         <MasterAddCCRatio>-0.5</MasterAddCCRatio>
+        <StageHealRatioToDef>true</StageHealRatioToDef>
         <DefaultDef>500</DefaultDef>
         <UseBarricade>false</UseBarricade>
         <Weight>false</Weight>
@@ -2318,7 +2319,8 @@
         <ClearGold>0</ClearGold>
         <ClearExp>0</ClearExp>
 
-        <Map>Seasonal_Event_Sea</Map>
+        <Map>Seasonal_Event_Dragon</Map>
+        <ModeBackgroundSprite>Themes_Background_1000_S72</ModeBackgroundSprite>
         <Barricade>Barricade_01a</Barricade>
 
         <StartGold>25</StartGold>
@@ -2377,8 +2379,8 @@
         <ClearExp>0</ClearExp>
 
         <QuizMode>true</QuizMode>
-        <Map>Seasonal_Event_Sea</Map>
-        <ModeBackgroundSprite>Themes_Background_1000_S71</ModeBackgroundSprite>
+        <Map>Seasonal_Event_Dragon</Map>
+        <ModeBackgroundSprite>Themes_Background_1000_S72</ModeBackgroundSprite>
         <Barricade>Barricade_01a</Barricade>
 
         <ShowDeckPreviewInPausePanel>false</ShowDeckPreviewInPausePanel>

@@ -235,7 +235,7 @@
             <Map>2010100</Map>
             <Deck>
                 <Cards>
-                    <Card ID="20010790" Level="20" Overcome="5" PotentialTier="1" StartParty="true" />
+                    <Card ID="20010790" Level="20" Overcome="0" PotentialTier="1" StartParty="true" />
                     <!-- <Card ID="20010780" Level="20" Overcome="5" PotentialTier="1" /> -->
                 </Cards>
             </Deck>
@@ -249,7 +249,7 @@
             <Map>2010200</Map>
             <Deck>
                 <Cards>
-                    <Card ID="20010790" Level="20" Overcome="5" PotentialTier="1" StartParty="true" />
+                    <Card ID="20010790" Level="20" Overcome="0" PotentialTier="1" StartParty="true" />
                     <!-- <Card ID="20010780" Level="20" Overcome="5" PotentialTier="1" /> -->
                 </Cards>
             </Deck>
@@ -289,7 +289,7 @@
             <Map>2010500</Map>
             <Deck>
                 <Cards>
-                    <Card ID="20010790" Level="20" Overcome="5" PotentialTier="1" StartParty="true" />
+                    <Card ID="20010790" Level="20" Overcome="0" PotentialTier="1" StartParty="true" />
                 </Cards>
             </Deck>
 
@@ -302,7 +302,7 @@
             <Map>2010600</Map>
             <Deck>
                 <Cards>
-                    <Card ID="20010790" Level="20" Overcome="5" PotentialTier="1" StartParty="true" />
+                    <Card ID="20010790" Level="20" Overcome="0" PotentialTier="1" StartParty="true" />
                 </Cards>
             </Deck>
 
@@ -311,19 +311,55 @@
             </Rewards>
             <MinVersion>171000</MinVersion>
         </StoryPage>
+        <!-- 파트 3 (노션 Ep3-1 / Ep3-2 / Ep3-3).
+             ※ Enabled=false / UnlockDate 는 기존 팀 설정을 그대로 유지 (출시 게이팅은 기획 판단). -->
         <StoryPage Page="7">
             <Enabled>false</Enabled>
             <UnlockDate>20260813</UnlockDate>
+            <Map>2010700</Map>
+            <Deck>
+                <Cards>
+                    <Card ID="20010790" Level="20" Overcome="0" PotentialTier="1" StartParty="true" />
+                </Cards>
+            </Deck>
+
+            <Rewards>
+                <Reward Type="Key" ID="70000" Count="2"/>
+            </Rewards>
             <MinVersion>172000</MinVersion>
         </StoryPage>
         <StoryPage Page="8">
             <Enabled>false</Enabled>
             <UnlockDate>20260813</UnlockDate>
+            <Map>2010800</Map>
+            <!-- Ep3-2 전투 2 는 오필리아 + 네리아 + 캐시 3인 합심 -->
+            <Deck>
+                <Cards>
+                    <Card ID="20010790" Level="20" Overcome="0" PotentialTier="1" StartParty="true" />
+                    <Card ID="20010780" Level="20" Overcome="5" PotentialTier="1" />
+                    <Card ID="20010800" Level="20" Overcome="0" PotentialTier="1" />
+                </Cards>
+            </Deck>
+
+            <Rewards>
+                <Reward Type="Key" ID="70000" Count="2"/>
+            </Rewards>
             <MinVersion>172000</MinVersion>
         </StoryPage>
         <StoryPage Page="9">
             <Enabled>false</Enabled>
             <UnlockDate>20260813</UnlockDate>
+            <Map>2010900</Map>
+            <!-- Ep3-3 은 전투 없음 (심문 / 엔딩) -->
+            <Deck>
+                <Cards>
+                    <Card ID="20010790" Level="20" Overcome="0" PotentialTier="1" StartParty="true" />
+                </Cards>
+            </Deck>
+
+            <Rewards>
+                <Reward Type="Key" ID="70000" Count="2"/>
+            </Rewards>
             <MinVersion>172000</MinVersion>
         </StoryPage>
     </Story>

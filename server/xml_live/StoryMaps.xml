@@ -43,6 +43,25 @@
         <StartInventoryItems></StartInventoryItems>
     </StoryMap>
 
+    <!-- 사이드 스토리 1 파트 3 (노션 Ep3-1 / Ep3-2 / Ep3-3) -->
+    <StoryMap ID="2010700">
+        <StartField>2010700</StartField>
+        <StartTilePos>3,3</StartTilePos>
+        <StartInventoryItems></StartInventoryItems>
+    </StoryMap>
+
+    <StoryMap ID="2010800">
+        <StartField>2010800</StartField>
+        <StartTilePos>3,3</StartTilePos>
+        <StartInventoryItems></StartInventoryItems>
+    </StoryMap>
+
+    <StoryMap ID="2010900">
+        <StartField>2010900</StartField>
+        <StartTilePos>3,3</StartTilePos>
+        <StartInventoryItems></StartInventoryItems>
+    </StoryMap>
+
     <StoryMap ID="3010100">
         <StartField>3010100</StartField>
         <StartTilePos>3,3</StartTilePos>

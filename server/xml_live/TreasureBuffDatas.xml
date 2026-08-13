@@ -14969,6 +14969,171 @@
         </BuffOptions>
     </BuffData>
 
+    <BuffData ID="3300420">
+        <Comment>적에게 스킬 피해를 입히면 대상이 [불안정 상태]가 됨.
+            [불안정 상태]인 대상에게 아군이 최대 체력의 10%를 초과하는 물리피해를 입히면, 피해량의 [4 + (보구 레벨) X 0.2]%만큼의 피해를 다른 [불안정 상태]인 적에게 특수 피해로 전달하고 모든 [불안정 상태]를 제거</Comment>
+
+        <DescParams>
+            <Attribute Name="DamageOverMaxHpPer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+
+        <TotalDescParams>
+            <Attribute Name="DamageOverMaxHpPer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <CalculatedValue>0</CalculatedValue>
+        </TotalDescParams>
+        
+        <BuffOptions>
+            <Conditions>
+                <DealDamage With="SkillPhysical,SkillMagic" />
+            </Conditions>
+            
+            <Targets>
+                <Default />
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <Treasure30042Action Effect="Fx_Treasure_30042" DamageOverMaxHpPer="10" />
+            </BuffContents>
+            
+            <Values>
+                <FixedValue>4</FixedValue>
+                <TreasureLevel>0.2</TreasureLevel>
+            </Values>
+            
+            <Effects>
+                <Effect Type="Hit">
+                    <Prefab>Item_003a</Prefab>
+                    <ZLevel>UnitOver</ZLevel>
+                    <World>true</World>
+                </Effect>
+                <Effect Type="Line">
+                    <Prefab>Item_003b</Prefab>
+                    <ZLevel>UnitOver</ZLevel>
+                    <World>true</World>
+                </Effect>
+            </Effects>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="3300421" Inherit="3300420">
+        <Comment>위협 1당 전달하는 특수 피해 0.02배</Comment>
+
+        <DescParams>
+            <Const>1</Const>
+            <Attribute Name="DefPenMul" Digit="-2">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+        </DescParams>
+
+        <TotalDescParams>
+            <Attribute Name="DamageOverMaxHpPer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <CalculatedValue>0</CalculatedValue>
+            <Const>1</Const>
+            <Attribute Name="DefPenMul" Digit="-2">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+        </TotalDescParams>
+
+        <BuffOptions>
+            <BuffContents>
+                <Treasure30042Action Effect="Fx_Treasure_30042" DamageOverMaxHpPer="10" DefPenMul="0.02" />
+            </BuffContents>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3300422" Inherit="3300421">
+        <Comment>[불안정 상태] 제거 시 대상 0.1초 기절</Comment>
+
+        <DescParams>
+            <Attribute Name="StunTime">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+        </DescParams>
+
+        <TotalDescParams>
+            <Attribute Name="DamageOverMaxHpPer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <CalculatedValue>0</CalculatedValue>
+            <Const>1</Const>
+            <Attribute Name="DefPenMul" Digit="-2">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <Attribute Name="StunTime">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+        </TotalDescParams>
+
+        <BuffOptions>
+            <BuffContents>
+                <Treasure30042Action Effect="Fx_Treasure_30042" DamageOverMaxHpPer="10" DefPenMul="0.02" StunTime="0.1" />
+            </BuffContents>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="3300423" Inherit="3300422">
+        <Comment>[불안정 상태]인 적의 받는 물리 피해 +30% (받는 물리 피해 증가는 동일한 효과와 중첩되지 않으며 가장 높은 수치로 적용)</Comment>
+
+        <DescParams>
+            <Attribute Name="TakeDamagePer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+        </DescParams>
+
+        <TotalDescParams>
+            <Attribute Name="DamageOverMaxHpPer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <CalculatedValue>0</CalculatedValue>
+            <Const>1</Const>
+            <Attribute Name="DefPenMul" Digit="-2">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <Attribute Name="StunTime">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <Attribute Name="TakeDamagePer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+        </TotalDescParams>
+
+        <BuffOptions>
+            <BuffContents>
+                <Treasure30042Action Effect="Fx_Treasure_30042" DamageOverMaxHpPer="10" DefPenMul="0.02" StunTime="0.1" TakeDamagePer="30" />
+            </BuffContents>
+        </BuffOptions>
+    </BuffData>
+    
+    <BuffData ID="3300424" Inherit="3300423">
+        <Comment>[불안정 상태] 제거 시 대상 0.1초 기절</Comment>
+
+        <DescParams>
+            <Const>0.1</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Attribute Name="DamageOverMaxHpPer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <CalculatedValue>0</CalculatedValue>
+            <Const>1</Const>
+            <Attribute Name="DefPenMul" Digit="-2">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <Attribute Name="StunTime">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <Attribute Name="TakeDamagePer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+        </TotalDescParams>
+
+        <BuffOptions>
+            <BuffContents>
+                <Treasure30042Action Effect="Fx_Treasure_30042" DamageOverMaxHpPer="10" DefPenMul="0.02" StunTime="0.2" TakeDamagePer="30" />
+            </BuffContents>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3300425" Inherit="3300424" >
+        <Comment>위협 1당 전달하는 특수 피해 0.02배</Comment>
+
+        <DescParams>
+            <Const>1</Const>
+            <Const>0.02</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Attribute Name="DamageOverMaxHpPer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <CalculatedValue>0</CalculatedValue>
+            <Const>1</Const>
+            <Attribute Name="DefPenMul" Digit="-2">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <Attribute Name="StunTime">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+            <Attribute Name="TakeDamagePer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
+        </TotalDescParams>
+
+        <BuffOptions>
+            <BuffContents>
+                <Treasure30042Action Effect="Fx_Treasure_30042" DamageOverMaxHpPer="10" DefPenMul="0.04" StunTime="0.2" TakeDamagePer="30" />
+            </BuffContents>
+        </BuffOptions>
+    </BuffData>
+
+
     <!-- 아펠피시아 - 렘 테마 -->
     <BuffData ID="3500000">
         <Comment>매 세 번째 일반 공격 시마다 현재 체력의 10%를 소모하고 전방 3x3 범위의 적에게 공격력의 (300 + 주문력의 (보구 레벨 * 0.1)%)%의 물리 일반 피해를 가하는 <포식/>을 적용합니다.</Comment>

@@ -186,4 +186,47 @@
         <IllustOffsetY>-50</IllustOffsetY>
         <IllustScale>1.3</IllustScale>
     </SurpriseAttendanceEvent>
+    <SurpriseAttendanceEvent ID='5'>
+        <Title>DimensionHeroAttendanceEventTitle</Title>
+        <ParticipateStartAt>20260813</ParticipateStartAt>
+        <ParticipateEndAt>20260826</ParticipateEndAt>
+        <Type>7</Type>
+        <MaxDay>10</MaxDay>
+        <AttendanceRewards>
+            <AttendanceReward Day='1'>
+                <Reward Type='Key' ID='70000' Count='2' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='2'>
+                <Reward Type='Key' ID='70000' Count='2' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='3'>
+                <Reward Type='Key' ID='70000' Count='3' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='4'>
+                <Reward Type='Key' ID='70000' Count='3' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='5'>
+                <Reward Type='Key' ID='70000' Count='3' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='6'>
+                <Reward Type="Key" ID='70000' Count="3"/>
+            </AttendanceReward>
+
+            <AttendanceReward Day='7'>
+                <Reward Type='Key' ID='70000' Count='4' />
+            </AttendanceReward>
+        </AttendanceRewards>
+        <ContinuousReward Type='Gold'  Count='100000' />
+        <Icon>ShopItem_70000_Up</Icon>
+        <IconScale>0.75</IconScale>
+        <Illust>Unit_Illust_10800</Illust>
+        <IllustOffsetX>-30</IllustOffsetX>
+        <IllustOffsetY>-50</IllustOffsetY>
+        <IllustScale>1.3</IllustScale>
+    </SurpriseAttendanceEvent>
 </SurpriseAttendanceEvents>

@@ -13230,5 +13230,205 @@
 				<Reward Type='Key' ID='370' Count='1' />
 			</BonusReward>
 		</BonusRewards>
+	</SeasonPass>
+
+	<SeasonPass ID='72'>
+		<NameComment>시즌72 킹갓패스 (비룡제)</NameComment>
+		<MaxLevel>30</MaxLevel>
+		<LvUpReqPoint>200</LvUpReqPoint>
+		<BenefitTextCount>7</BenefitTextCount>
+		<PassPlusBenefitTextCount>3</PassPlusBenefitTextCount>
+		<ShopItem>900</ShopItem>
+
+		<PassSkin>1057002</PassSkin>
+		<PassUnit>10570</PassUnit>
+		<SkinImage>Unit_10570_02[Unit_10570_02_0]</SkinImage>
+
+		<PassSkinOffsetY>10</PassSkinOffsetY>
+		<TransformPassSkinOffsetY>100</TransformPassSkinOffsetY>
+		<!-- <TransformPassSkinScale>1</TransformPassSkinScale> -->
+		<PassButtonSkinOffsetX>-10</PassButtonSkinOffsetX>
+		<PassButtonSkinOffsetY>5</PassButtonSkinOffsetY> 		<!-- -53 기준 -->
+		<!-- <PassButtonSkinFlip>true</PassButtonSkinFlip> -->
+		<PassSkinIllustOffsetX>20</PassSkinIllustOffsetX>
+		<PassSkinIllustOffsetY>450</PassSkinIllustOffsetY>
+		<PassSkinIllustScale>1</PassSkinIllustScale>
+
+		<PassSkinGradationOffsetX>0</PassSkinGradationOffsetX>
+		<PassSkinGradationOffsetY>0</PassSkinGradationOffsetY>
+
+		<UnitImageOffsetX>-3</UnitImageOffsetX>
+		<UnitImageOffsetY>0</UnitImageOffsetY>
+
+		<EventShopTokenSprite>SeasonalEventToken_Dragon</EventShopTokenSprite>
+		<EventShopTokenOffsetX>0</EventShopTokenOffsetX>
+		<EventShopTokenOffsetY>0</EventShopTokenOffsetY>
+		<SeasonalEventTitleColor>FFFFFFFF</SeasonalEventTitleColor>
+		<SeasonalEventTitleOutlineColor>FF3a4c</SeasonalEventTitleOutlineColor>
+
+		<PassGold>10000</PassGold>
+		<PassPremiumGold>10000</PassPremiumGold>
+		<!-- Reward Type : Heart, SelectUnitExp,SkinToken, Artifact (ID='100') -->
+		<Rewards>
+			<Reward Level="1">
+				<BaseReward Type="Gold" Count="200"/>
+				<PassOnlyReward Type="InventoryItem" ID="800" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="800" Count="1"/>
+			</Reward>
+			<Reward Level="2">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="4101" Count="1"/>
+			</Reward>
+			<Reward Level="3">
+				<BaseReward Type="Gold" Count="200"/>
+				<PassOnlyReward Type="SelectUnitExp" Count="150"/>
+				<PremiumOnlyReward Type="SelectUnitExp" Count="300"/>
+			</Reward>
+			<Reward Level="4">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="3101" Count="1"/>
+			</Reward>
+			<Reward Level="5">
+				<BaseReward Type="InventoryItem" Count="1" ID="4101"/>
+				<PassOnlyReward Type="Key" ID="371" Count="5"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="3200" Count="1"/>
+			</Reward>
+			<Reward Level="6">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="4101" Count="1"/>
+			</Reward>
+			<Reward Level="7">
+				<BaseReward Type="Gold" Count="200"/>
+				<PassOnlyReward Type="Key" ID="301" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="800" Count="1"/>
+			</Reward>
+			<Reward Level="8">
+				<BaseReward Type="Key" Count="1" ID="301"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="3101" Count="1"/>
+			</Reward>
+			<Reward Level="9">
+				<BaseReward Type="Gold" Count="200"/>
+				<PassOnlyReward Type="UnitSoulItem" Count="10"/>
+				<PremiumOnlyReward Type="UnitSoulItem" Count="20"/>
+			</Reward>
+			<Reward Level="10">
+				<BaseReward Type="Key" Count="3" ID="370"/>
+				<PassOnlyReward Type="Key" ID="370" Count="10"/>
+				<PremiumOnlyReward Type="Key" ID="370" Count="10"/>
+			</Reward>
+			<Reward Level="11">
+				<BaseReward Type="InventoryItem" Count="1" ID="3101"/>
+				<PassOnlyReward Type="InventoryItem" ID="3102" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="800" Count="1"/>
+			</Reward>
+			<Reward Level="12">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="4101" Count="1"/>
+			</Reward>
+			<Reward Level="13">
+				<BaseReward Type="Gold" Count="300"/>
+				<PassOnlyReward Type="SelectUnitExp" Count="150"/>
+				<PremiumOnlyReward Type="SelectUnitExp" Count="300"/>
+			</Reward>
+			<Reward Level="14">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="3101" Count="1"/>
+			</Reward>
+			<Reward Level="15">
+				<BaseReward Type="InventoryItem" Count="1" ID="4101"/>
+				<PassOnlyReward Type="Key" ID="371" Count="5"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="3200" Count="1"/>
+			</Reward>
+			<Reward Level="16">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="4101" Count="1"/>
+			</Reward>
+			<Reward Level="17">
+				<BaseReward Type="Gold" Count="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="800" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="800" Count="1"/>
+			</Reward>
+			<Reward Level="18">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="3101" Count="1"/>
+			</Reward>
+			<Reward Level="19">
+				<BaseReward Type="Gold" Count="300"/>
+				<PassOnlyReward Type="UnitSoulItem" Count="10"/>
+				<PremiumOnlyReward Type="UnitSoulItem" Count="20"/>
+			</Reward>
+			<Reward Level="20">
+				<BaseReward Type="Key" Count="3" ID="370"/>
+				<PassOnlyReward Type="Key" ID="370" Count="10"/>
+				<PremiumOnlyReward Type="Key" ID="370" Count="10"/>
+			</Reward>
+			<Reward Level="21">
+				<BaseReward Type="InventoryItem" Count="1" ID="3101"/>
+				<PassOnlyReward Type="InventoryItem" ID="3102" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="800" Count="1"/>
+			</Reward>
+			<Reward Level="22">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="4102" Count="1"/>
+			</Reward>
+			<Reward Level="23">
+				<BaseReward Type="InventoryItem" Count="10" ID="3000"/>
+				<PassOnlyReward Type="InventoryItem" ID="3000" Count="30"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="3000" Count="30"/>
+			</Reward>
+			<Reward Level="24">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="3102" Count="1"/>
+			</Reward>
+			<Reward Level="25">
+				<BaseReward Type="InventoryItem" Count="1" ID="4102"/>
+				<PassOnlyReward Type="Key" ID="371" Count="5"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="3200" Count="1"/>
+			</Reward>
+			<Reward Level="26">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="4102" Count="1"/>
+			</Reward>
+			<Reward Level="27">
+				<BaseReward Type="InventoryItem" Count="1" ID="3101"/>
+				<PassOnlyReward Type="InventoryItem" ID="3102" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="800" Count="1"/>
+			</Reward>
+			<Reward Level="28">
+				<BaseReward Type="Key" Count="1" ID="300"/>
+				<PassOnlyReward Type="InventoryItem" ID="601" Count="1"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="3102" Count="1"/>
+			</Reward>
+			<Reward Level="29">
+				<BaseReward Type="Gold" Count="400"/>
+				<PassOnlyReward Type="UnitSoulItem" Count="10"/>
+				<PremiumOnlyReward Type="InventoryItem" ID="163" Count="1"/>
+			</Reward>
+			<Reward Level="30">
+				<BaseReward Type="Key" Count="3" ID="370"/>
+				<PassOnlyReward Type="Key" ID="370" Count="10"/>
+				<PremiumOnlyReward Type="Key" ID="370" Count="10"/>
+			</Reward>
+		</Rewards>
+
+		<BonusRewards>
+			<BonusReward ID='1'>
+				<CanBuyCount>3</CanBuyCount>
+				<PassPlusCanBuyCount>6</PassPlusCanBuyCount>
+				<PointCost>1000</PointCost>
+				<Reward Type='Key' ID='370' Count='1' />
+			</BonusReward>
+		</BonusRewards>
 	</SeasonPass>	
 </SeasonPasses>

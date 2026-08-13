@@ -24,6 +24,13 @@
     </StoryField>
     <StoryField ID="2010600">
     </StoryField>
+    <!-- 사이드 스토리 1 파트 3 (노션 Ep3-1 / Ep3-2 / Ep3-3) -->
+    <StoryField ID="2010700">
+    </StoryField>
+    <StoryField ID="2010800">
+    </StoryField>
+    <StoryField ID="2010900">
+    </StoryField>
 
     <StoryField ID="3010100">
         <NameFormatType>ChallengeDifficulty</NameFormatType>

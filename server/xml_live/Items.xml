@@ -9098,4 +9098,33 @@
             <Values> <FixedValue>-90</FixedValue> </Values>
         </ItemBuffOptions>
     </Item>
+
+    <!-- 72시즌 도전의 신전 아이템 -->
+    <Item ID="60030">
+        <Sprite>Item_403</Sprite>
+        <Tier>4</Tier>
+
+        <DescParams>
+            <InnerText>./ItemBuffOptions[1]/Values/FixedValue</InnerText>
+            <InnerText>./ItemBuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <UseBuffOptionDesc>true</UseBuffOptionDesc>
+        <AvailableTheme>4100</AvailableTheme>
+
+        <ItemBuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> <Self/> </RangeInfo>
+            <BuffContents> <AddStat StatType="Damage" StatValueType="TotalPerValue" IgnoreCCRatio="true"/> </BuffContents>
+            <Values> <FixedValue>-75</FixedValue> </Values>
+        </ItemBuffOptions>
+        <ItemBuffOptions>
+            <Conditions> <Once/> </Conditions>
+            <Targets> <Self/> </Targets>
+            <RangeInfo> <Self/> </RangeInfo>
+            <BuffContents> <AddStat StatType="HealEfficiency" StatValueType="TotalPerValue" IgnoreCCRatio="true"/> </BuffContents>
+            <Values> <FixedValue>300</FixedValue> </Values>
+        </ItemBuffOptions>
+    </Item>
 </Items>

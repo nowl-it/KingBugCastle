@@ -261,11 +261,11 @@
   <String Key="Post_Push_Contents18">오늘 저녁 1,000 금화를 지원합니다!</String>
   <String Key="Post_Push_Contents19">우편함에 금화가 대기 중이에요~</String>
   <String Key="Post_Push_Contents20">든든한 식량 지원이 왔어요!</String>
-  <String Key="Post_Push_Contents21">킹갓캐슬 70시즌 종료 D-day</String>
-  <String Key="Post_Push_Contents22">킹갓캐슬 70시즌 종료 D-1</String>
-  <String Key="Post_Push_Contents23">킹갓캐슬 70시즌 종료 D-2</String>
-  <String Key="Post_Push_Contents24">킹갓캐슬 70시즌 종료 D-4</String>
-  <String Key="Post_Push_Contents25">오늘 킹갓캐슬 70시즌이 종료됩니다!</String>
+  <String Key="Post_Push_Contents21">킹갓캐슬 72시즌 종료 D-day</String>
+  <String Key="Post_Push_Contents22">킹갓캐슬 72시즌 종료 D-1</String>
+  <String Key="Post_Push_Contents23">킹갓캐슬 72시즌 종료 D-2</String>
+  <String Key="Post_Push_Contents24">킹갓캐슬 72시즌 종료 D-4</String>
+  <String Key="Post_Push_Contents25">오늘 킹갓캐슬 72시즌이 종료됩니다!</String>
   <String Key="Post_Push_Contents26">누락된 패스 보상이 없는지 확인해 주세요!</String>
   <String Key="Post_Push_Contents27">패스 보상을 빠짐없이 수령해 주세요!</String>
   <String Key="Post_Push_Contents28">4일 후 전장, 패스 시스템이 마감됩니다.</String>
@@ -2409,7 +2409,7 @@
   <String Key="Name_Potential_10150_2">자연 교감</String>
   <String Key="Name_Potential_10170_2">무한 전이</String>
   <String Key="Name_Potential_10180_2">저주의 결속</String>
-  <String Key="Name_Potential_10190_2">제국의 도발</String>
+  <String Key="Name_Potential_10190_2">제국의 그림자</String>
   <String Key="Name_Potential_10200_2">범람</String>
   <String Key="Name_Potential_10210_2">성검 파동</String>
   <String Key="Name_Potential_10220_2">초대형 폭탄</String>
@@ -2436,7 +2436,7 @@
   <String Key="Potential_10090_2">&lt;경쾌한 선율&gt;의 스킬 범위 +1칸</String>
   <String Key="Potential_10100_2">&lt;치명적인 급습&gt;의 대상의 '약점'을 노출시켜 10초간 받는 피해 30% 증가 (보스에게 반감)</String>
   <String Key="Potential_10150_2">&lt;골렘 소환&gt;시 주변 5x5/5x5/7x7/7x7 아군의 마나 100% 충전</String>
-  <String Key="Potential_10190_2">&lt;맹렬한 비호&gt; 대상 아군을 공격하고 있는 적을 도발하며 4초간 방어력 +350</String>
+  <String Key="Potential_10190_2">&lt;맹렬한 비호&gt; 대상 아군에게 0.3초간 은신 부여 및 4초간 베히무스의 방어력 +400</String>
   <String Key="Potential_10210_2">&lt;성검 가르나&gt; 사용 중 공격 시 33%의 확률로 주문력만큼의 피해를 주는 파동 발동</String>
   <String Key="Potential_10220_2">매 10번째 일반 공격마다 3배의 피해량으로 5*5 범위에 추가 피해를 입히는 &lt;초대형 폭탄&gt; 투척</String>
   <String Key="Potential_10240_2">&lt;거대한 일격&gt;의 대상이 '약점'을 노출시켜 받는 피해 10초간 30% 증가 (보스에게는 효과 반감)</String>
@@ -2575,8 +2575,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="ShopItemName_951">보석 보급 30일</String>
   <String Key="Name_Potential_10190_3">강진</String>
   <String Key="Name_Potential_10200_3">역류</String>
-  <String Key="Potential_10190_3">&lt;맹렬한 비호&gt; 범위를 모든 성급에서 주변 2칸 이내로 고정
-넉백 거리를 3칸 에서 2/3/4/5칸으로 변경</String>
+  <String Key="Potential_10190_3">&lt;맹렬한 비호&gt; 대상을 9X9 범위 내의 가장 가까운 적으로 변경, 베히무스의 쉴드 획득량 +100%</String>
   <String Key="SkinName_1003002">새해맞이 에반</String>
   <String Key="SkinDesc_1003002">&lt;i&gt;2022 새해맞이 스킨&lt;/i&gt;</String>
   <String Key="Alert_Temp_NoIAP">일시적으로 인앱 결제를 사용하실 수 없습니다. 잠시 후 다시 시도해주시기 바랍니다.</String>
@@ -5794,8 +5793,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ClanBattleModifier_13">고뇌하는</String>
   <String Key="ClanBattleModifier_14">압도적인</String>
   <String Key="UserLockedClanBattleAlert">해당 유저는 이번 시즌 연맹 토벌전을 진행할 수 없습니다.</String>
-  <String Key="UpdateNoticeVersion">171100</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-809f-bc66-d45024b836f0</String>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/eac1c2e0-6f0e-8340-a227-01806c0dfe2c</String>
   <String Key="Clan_Menu_DeleteConfirm">정말 연맹을 해체하시겠습니까?</String>
   <String Key="Clan_Menu_LeaveConfirm">정말 연맹을 탈퇴하시겠습니까?</String>
   <String Key="RogueLike_ReleaseAtLevel">레벨 {0} 해금</String>
@@ -13873,7 +13872,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArenaDebuffDesc_01">전투 중 모든 치유량 80% 감소</String>
   <String Key="ArenaDebuffDesc_02">전투 중 모든 쉴드량 80% 감소</String>
   <String Key="ArenaDebuffDesc_03">전투 중 모든 상태이상 50% 감소</String>
-  <String Key="ArenaDebuffDesc_04">방어력 +500</String>
+  <String Key="ArenaDebuffDesc_04">방어력 +500 및 오버타임에 따라 최종 방어력 감소</String>
   <String Key="ArenaDebuffTitle">아레나 효과</String>
   <String Key="Theme68BattleObserverDesc_0">암살 닌자, 상급 암살 닌자에게 처치되지 않고 라운드 클리어</String>
   <String Key="Theme68BattleObserverDesc_1">모든 혼령사를 빙결로 인한 받는 데미지 증가 상태에서 처치</String>
@@ -15499,7 +15498,7 @@ D = 1 ~ 4</String>
   <String Key="SeasonInformation">시즌 정보</String>
   <String Key="SeasonInformationHelp_0">이번 시즌에서 제공되는 침공 소환석의 챕터 정보와 보정된 영웅 능력치 정보를 확인하실 수 있습니다.</String>
   <String Key="SeasonInformationHelp_1">챕터 아이콘을 터치하면 침공 소환석의 이름을 확인할 수 있습니다.</String>
-  <String Key="SeasonInformationHelp_2">영웅 능력치 보정에서 전체 보기를 누르면 모든 영웅의 능력치 보정 현황을 보실 수 있습니다.</String>
+  <String Key="SeasonInformationHelp_2">영웅 능력치 보정에서 전체 보기를 누르면 모든 영웅의 주는 피해량 및 절대방어 획득률 현황을 보실 수 있습니다.</String>
   <String Key="InvadeSpawnItem">침공 소환석</String>
   <String Key="SkillDesc_60505">공격을 받아 분노로 가득차면 {AttackSpeedPer}%의 공격 속도 증가 효과와 {MoveSpeedPer}%의 이동속도 증가 효과를 얻고, 상태 이상에 면역됩니다.</String>
   <String Key="SkillDesc_60665">공격을 받아 분노로 가득차면 {AttackSpeedPer}%의 공격 속도 증가 효과와 {MoveSpeedPer}%의 이동속도 증가 효과를 얻고, 상태 이상에 면역됩니다.</String>
@@ -16746,7 +16745,7 @@ D = 1 ~ 4</String>
   <String Key="OvercomeTabHelp_0">차원 영웅 소환에서 이미 보유한 차원 영웅이 중복 소환되면 돌파가 가능합니다.</String>
   <String Key="OvercomeTabHelp_1">돌파는 최대 5단계까지 가능합니다.</String>
   <String Key="ActiveSkillTabHelp_0">개전 스킬은 전투 준비 단계에서 차원 영웅이 사용할 수 있는 스킬입니다.</String>
-  <String Key="ActiveSkillTabHelp_1">개전 스킬은 라운드 단위의 쿨타임이 존재하며 각 라운드마다 하나의 개전스킬만 사용이 가능합니다.</String>
+  <String Key="ActiveSkillTabHelp_1">개전 스킬은 라운드 단위의 쿨타임이 존재하며 각 라운드마다 하나의 개전 스킬만 사용이 가능합니다.</String>
   <String Key="ActiveSkillTabHelp_2">동일한 개전 스킬은 쿨타임을 공유합니다.</String>
   <String Key="ActiveSkillTabHelp_3">차원 영웅은 각성 능력 대신에 개전 스킬을 보유하며, 원본 영웅이 각성해야 사용할 수 있습니다.</String>
   <String Key="DimensionUnitOvercome">영웅 돌파</String>
@@ -17034,9 +17033,9 @@ D = 1 ~ 4</String>
   <String Key="SubStoryChapterName_1_4">알레시아 노스페라투</String>
   <String Key="SubStoryChapterName_1_5">로데릭의 서재</String>
   <String Key="SubStoryChapterName_1_6">복수</String>
-  <String Key="SubStoryChapterName_1_7">???</String>
-  <String Key="SubStoryChapterName_1_8">???</String>
-  <String Key="SubStoryChapterName_1_9">???</String>
+  <String Key="SubStoryChapterName_1_7">폭주</String>
+  <String Key="SubStoryChapterName_1_8">와인이 담길 곳은</String>
+  <String Key="SubStoryChapterName_1_9">에필로그</String>
   <String Key="SubStoryChapterDesc_1">중부 귀족 가문의 공녀로 태어난 오필리아는 그저 연회장에서 춤을 추고 와인을 마시며 흘러가는 대로 살 뿐이었다. 프로스트발드 영주 로데릭과 정략혼을 한 뒤에도 상황은 마찬가지였다. 그러던 어느날, 누군가의 습격을 받고 오필리아는 어딘가로 납치된다.</String>
   <String Key="UnitName_10800">캐시</String>
   <String Key="DimensionUnitSummon">차원 소환</String>
@@ -17961,12 +17960,12 @@ D = 1 ~ 4</String>
   <String Key="SkinDesc_Default_10800">&lt;i&gt;하프 뱀파이어로 태어난 캐시는 점차 성장하며 노스페라투 가문의 구성원들에게 차별과 핍박을 받았습니다. 하지만 캐시는 이러한 현실에 낙담하는 대신, 다양한 종족이 공존할 수 있는 세상을 만들기 위해 노력하고 있습니다.&lt;/i&gt;</String>
   <String Key="SkillName_10800">억제된 본능</String>
   <String Key="SkillDesc_10800_Short">자신에게 부활을 부여합니다. 부활 시 뱀파이어 형태로 변신하여 스킬과 능력치가 강화됩니다.</String>
-  <String Key="SkillDesc_10800_Long">자신에게 최대 체력 {Unit@ReviveHpPer}% 부활을 1회 부여합니다. 부활 시 {10805@TransformTime}초동안 폭주하여 체력 {Unit@TransformHpForDesc}, 방어력 +{108000@BaseDef}, 주문흡혈 +{108000@MagicDrain}%의 뱀파이어 형태로 변신하고 가장 많은 적들을 타격할 수 있는 위치로 강림하여 {10815@SplashRangeX}{X}{10815@SplashRangeY} 범위 내의 적에게 {10815@FearTime}초간 공포를 부여합니다. 이 스킬로 인한 부활은 중첩되지 않습니다.</String>
+  <String Key="SkillDesc_10800_Long">자신에게 최대 체력 {Unit@ReviveHpPer}% 부활을 1회 부여합니다. 부활 시 {10805@TransformTime}초동안 폭주하여 체력 {Unit@TransformHpForDesc}%, 방어력 +{108000@BaseDef}, 주문흡혈 +{108000@MagicDrain}%의 뱀파이어 형태로 변신하고 가장 많은 적들을 타격할 수 있는 위치로 강림하여 {10815@SplashRangeX}{X}{10815@SplashRangeY} 범위 내의 적에게 {10815@FearTime}초간 공포를 부여합니다. 이 스킬로 인한 부활은 중첩되지 않습니다.</String>
   <String Key="SkillDesc_10800_Short_2">자신에게 부활을 부여합니다. 부활 시 뱀파이어 형태로 변신하여 스킬과 능력치가 강화됩니다.</String>
-  <String Key="SkillDesc_10800_Long_2">자신에게 최대 체력 {Unit@ReviveHpPer}% 부활을 1회 부여합니다. 부활 시 {10805@TransformTime}초동안 폭주하여 체력 {Unit@TransformHpForDesc}, 방어력 +{108000@BaseDef}, 주문흡혈 +{108000@MagicDrain}%의 뱀파이어 형태로 변신하고 가장 많은 적들을 타격할 수 있는 위치로 강림하여 {10815@SplashRangeX}{X}{10815@SplashRangeY} 범위 내의 적에게 {10815@FearTime}초간 공포를 부여합니다. 변신 시마다 뱀파이어 형태의 최종 최대 체력이 +{10800@Unit10800AI_TotalHpPer}% 증가합니다. 이 스킬로 인한 부활은 중첩되지 않습니다.</String>
+  <String Key="SkillDesc_10800_Long_2">자신에게 최대 체력 {Unit@ReviveHpPer}% 부활을 1회 부여합니다. 부활 시 {10805@TransformTime}초동안 폭주하여 체력 {Unit@TransformHpForDesc}%, 방어력 +{108000@BaseDef}, 주문흡혈 +{108000@MagicDrain}%의 뱀파이어 형태로 변신하고 가장 많은 적들을 타격할 수 있는 위치로 강림하여 {10815@SplashRangeX}{X}{10815@SplashRangeY} 범위 내의 적에게 {10815@FearTime}초간 공포를 부여합니다. 변신 시마다 뱀파이어 형태의 최종 최대 체력이 +{10800@Unit10800AI_TotalHpPer}% 증가합니다. 이 스킬로 인한 부활은 중첩되지 않습니다.</String>
   <String Key="ActiveSkillName_10800">각성</String>
   <String Key="ActiveSkillDesc_10800">다음 전투 시작 시 모든 하프 뱀파이어 캐시에게 상태이상 면역이 부여됩니다.</String>
-  <String Key="ActiveSkillDesc_10803">다음 전투 시작 시 모든 하프 뱀파이어 캐시에게 부활이 {0}회와 상태이상 면역이 부여됩니다.</String>
+  <String Key="ActiveSkillDesc_10803">다음 전투 시작 시 모든 하프 뱀파이어 캐시에게 부활 {0}회와 상태이상 면역이 부여됩니다.</String>
   <String Key="UnitRealName_10800">알레시아 노스페라투</String>
   <String Key="UnitConstellation_10800">물고기 자리</String>
   <String Key="UnitHobby_10800">남부 휴양지에서 휴식하기</String>
@@ -18003,7 +18002,7 @@ D = 1 ~ 4</String>
   <String Key="SkinDesc_107100401">&lt;i&gt;격전 온기의 리그 랭킹 달성 보상&lt;/i&gt;</String>
   <String Key="SkinName_1057002">샛별왕 파라엘</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;이른 새벽에 태어나는 가장 고고한 별빛은, 어둠을 헤쳐나가는 가장 밝은 빛으로 매듭지어지리라.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">절대 방어 획득</String>
+  <String Key="SuperShieldModulator">절대 방어 획득률</String>
   <String Key="BuildingEffect_BaseDamageReflect">피해 반사 {Value}%
 (주문 피해 반감)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">영웅이 입은 피해의 일부를 적에게 반사시킵니다.</String>
@@ -18011,43 +18010,317 @@ D = 1 ~ 4</String>
   <String Key="TreasureSubName_30042">칠흑 방패</String>
   <String Key="TreasureDesc_30042">베히무스의 방패는 단순히 방어만을 하기 위한 것이 아닙니다. 육중한 방패를 앞새운 베히무스의 맹렬한 돌진은 아무리 강력한 외갑도 한순간에 찌그러뜨립니다.</String>
   <String Key="TreasureSkillName_30042">강하</String>
-  <String Key="BuffDataName_3300421">분쇄 I</String>
-  <String Key="BuffDataName_3300422">찌그러뜨리기 I</String>
-  <String Key="BuffDataName_3300423">무력화</String>
-  <String Key="BuffDataName_3300424">찌그러뜨리기 II</String>
-  <String Key="BuffDataName_3300425">분쇄 II</String>
+  <String Key="BuffDataName_3300421">강압 I</String>
+  <String Key="BuffDataName_3300422">무력화 I</String>
+  <String Key="BuffDataName_3300423">분쇄</String>
+  <String Key="BuffDataName_3300424">무력화 II</String>
+  <String Key="BuffDataName_3300425">강압 II</String>
   <String Key="SpecialShop_TreasurePickUp30042">페라타우스 픽업 특별 상점</String>
   <String Key="SpecialPackage_1680">페라타우스 패키지 1</String>
   <String Key="SpecialPackage_1681">페라타우스 패키지 2</String>
   <String Key="SpecialPackage_1682">페라타우스 패키지 3</String>
   <String Key="BuffDataDesc_3300421">위협 {0}당 피해 전달 +{1}배</String>
-  <String Key="BuffDataDesc_3300422">불안정 상태인 적의 받는 물리 피해 +{0}%</String>
-  <String Key="BuffDataDesc_3300423">불안정 상태가 제거될 때마다 제거된 적 하나 당 모든 아군 절대방어 +{0}</String>
-  <String Key="BuffDataDesc_3300424">불안정 상태인 적의 받는 물리 피해 +{0}%</String>
+  <String Key="BuffDataDesc_3300422">불안정 상태 제거 시 대상 {0}초 기절</String>
+  <String Key="BuffDataDesc_3300423">불안정 상태인 적의 받는 물리 피해 +{0}% (받는 물리 피해 증가는 중첩되지 않으며 가장 높은 수치로 적용)</String>
+  <String Key="BuffDataDesc_3300424">불안정 상태 제거 시 대상 {0}초 기절</String>
   <String Key="BuffDataDesc_3300425">위협 {0}당 피해 전달 +{1}배</String>
   <String Key="TreasureSkillDesc_3300420">적에게 스킬 피해를 입히면 대상에게 불안정 상태를 부여
-불안정 상태인 적에게 아군이 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
+불안정 상태인 적에게 아군이 한 번의 피해로 쉴드 제외 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
 &lt;color=#808080&gt;&lt;i&gt;서로 다른 영웅이 불안정 상태를 부여해도 효과가 공유됩니다.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="TreasureSkillDesc_3300421">적에게 스킬 피해를 입히면 대상에게 불안정 상태를 부여
-불안정 상태인 적에게 아군이 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
+불안정 상태인 적에게 아군이 한 번의 피해로 쉴드 제외 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
 위협 {2}당 피해 전달 +{3}배
 &lt;color=#808080&gt;&lt;i&gt;서로 다른 영웅이 불안정 상태를 부여해도 효과가 공유됩니다.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="TreasureSkillDesc_3300422">적에게 스킬 피해를 입히면 대상에게 불안정 상태를 부여
-불안정 상태인 적에게 아군이 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
+불안정 상태인 적에게 아군이 한 번의 피해로 쉴드 제외 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
 위협 {2}당 피해 전달 +{3}배
-불안정 상태인 적의 받는 물리 피해 +{4}%
-받는 물리 피해 증가는 중첩되지 않으며 가장 높은 수치로 적용
+불안정 상태 제거 시 대상 {4}초 기절
 &lt;color=#808080&gt;&lt;i&gt;서로 다른 영웅이 불안정 상태를 부여해도 효과가 공유됩니다.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="TreasureSkillDesc_3300423">적에게 스킬 피해를 입히면 대상에게 불안정 상태를 부여
-불안정 상태인 적에게 아군이 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
+불안정 상태인 적에게 아군이 한 번의 피해로 쉴드 제외 대상 최대 체력의 {0}% 이상의 물리 피해를 입히면, 피해량의 {1}%를 다른 불안정 상태인 적에게 특수 피해로 전달 후 모든 불안정 상태 제거
 위협 {2}당 피해 전달 +{3}배
-불안정 상태인 적의 받는 물리 피해 +{4}%
+불안정 상태 제거 시 대상 {4}초 기절
+불안정 상태인 적의 받는 물리 피해 +{5}%
 받는 물리 피해 증가는 중첩되지 않으며 가장 높은 수치로 적용
-불안정 상태가 제거될 때마다 제거된 적 하나 당 모든 아군 절대방어 +{5}
 &lt;color=#808080&gt;&lt;i&gt;서로 다른 영웅이 불안정 상태를 부여해도 효과가 공유됩니다.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="SpecialShop_TreasureDoublePickUp10014">보구 픽업 특별 상점</String>
   <String Key="SpecialPackage_1676">보구 픽업 소환석 패키지 1</String>
   <String Key="SpecialPackage_1677">보구 픽업 소환석 패키지 2</String>
   <String Key="SpecialPackage_1678">카엘루스 패키지</String>
   <String Key="SpecialPackage_1679">트릭스터 패키지</String>
+  <String Key="CannotSummonByWatchingAdsWhileInBattleAlert">전투 중에는 지원하지 않는 기능입니다.</String>
+  <String Key="AdsReroll">무료 재감정</String>
+  <String Key="AdsDeckSet">무료 재편성</String>
+  <String Key="ResetPVPMatch">다시 설정</String>
+  <String Key="CannotResetPVPMatchByWatchingAdsAlert">금일 다시 설정 횟수를 모두 소진했습니다.</String>
+  <String Key="PVPDeckSettingReTryAdsPopupTitle">편성 재도전</String>
+  <String Key="PVPDeckSettingReTryAdsPopupDesc">광고를 시청하고 무료로 재도전 하시겠습니까?
+킹갓패스 구매 시 게임 내 광고가 제거됩니다.
+보석 사용 선택 시 시 금일 광고 무료 재도전은 제공하지 않습니다.</String>
+  <String Key="PVPDeckSettingReTryAdsCancelAlert">닫기 시 광고 무료 재도전이 취소됩니다. 재도전을 취소하시겠습니까?</String>
+  <String Key="SuperShieldAdaptabilityPer">피의 제단 {0} 강화
+절대 방어 획득률 +{1}%</String>
+  <String Key="SuperShieldAdaptabilityPer_Piece">피의 제단 강화
+절대 방어 획득률 상승</String>
+  <String Key="SkillDesc_1019000_Short">가까운 적에게 강하하여, {SplashRangeX}{X}{SplashRangeY}에 {Damage:BaseValue}+{Damage:MAtkPer}의 피해를 주고 {Knockback}칸 밀쳐냅니다.</String>
+  <String Key="SkillDesc_1019001_Short">가까운 적에게 강하하여, 주변 {SplashRangeSum}칸에 {Damage:BaseValue}+{Damage:MAtkPer}의 피해를 주고 {Knockback}칸 밀쳐냅니다.</String>
+  <String Key="SkillDesc_1019000_Long">{RangeX}{X}{RangeY} 범위 내 가장 가까운 적 앞에 강하해 육중한 방패의 힘으로 {SplashRangeX}{X}{SplashRangeY}칸 범위의 모든 적들에게 {Damage:BaseValue}+{Damage:MAtkPer}의 피해를 주고 {Knockback}칸 밀쳐냅니다.</String>
+  <String Key="SkillDesc_1019001_Long">{RangeX}{X}{RangeY} 범위 내 가장 가까운 적 앞에 강하해 육중한 방패의 힘으로 주변 {SplashRangeSum}칸 범위의 모든 적들에게 {Damage:BaseValue}+{Damage:MAtkPer}의 피해를 주고 {Knockback}칸 밀쳐냅니다.</String>
+  <String Key="ChallengeBossDesc_72">&lt;color=#8DFFFF&gt;1x1&lt;/color&gt;칸의 피격 가능한 타일을 보유하고 &lt;color=#8DFFFF&gt;3x3&lt;/color&gt;칸의 크기를 보유합니다.</String>
+  <String Key="SkillName_30000051">경화</String>
+  <String Key="SkillDesc_30000051">전투 시작 시에 즉시 사용합니다. 보스의 위협이 &lt;color=#ffd264&gt;도전 난이도X&lt;/color&gt;{DescDefPen} 상승하고 반사/반격이 아닌 받는 피해로 받는 피해가 &lt;color=#ffd264&gt;도전 난이도X&lt;/color&gt;{DescReflectDef}% 감소합니다. 도전 난이도 20 이상이라면 추가로 방어력이 난이도 당 {DescDef}씩 증가합니다.</String>
+  <String Key="SkillName_30000052">방출</String>
+  <String Key="SkillDesc_30000052">{SplashRangeX}{X}{SplashRangeY} 범위 내의 영웅에게 {DescAttackTime}초에 걸쳐 총 {DescDamage}의 피해를 줍니다.</String>
+  <String Key="SkillName_30000053">말살</String>
+  <String Key="SkillDesc_30000053">모든 적에게 {Damage}만큼의 물리 스킬 피해를 입힙니다. 도전 난이도 10 이하에서는 대신 보스 최대 체력의 {MaxDamage:HpPer:BaseValue}%만큼의 피해를 입힙니다. 방어력을 {DefBreak}% 관통합니다.</String>
+  <String Key="StoryClearBenefit_430072000">인벤토리 - 복수의 방패 획득
+
+&lt;i&gt;복수의 방패: 피해 반사 획득&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072001">인벤토리 - 희망의 목걸이 획득
+
+&lt;i&gt;희망의 목걸이: 전투 시작 일정 시간 후 부활 획득&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072002">보스 스테이지에서 아이템 - 치유의 지팡이 획득
+
+&lt;i&gt;치유의 지팡이: 최종 주는 피해량 감소, 최종 치유량 증가&lt;/i&gt;</String>
+  <String Key="ItemName_60030">치유의 지팡이</String>
+  <String Key="ItemDesc_60030">최종 주는 피해량 {0}%, 최종 치유량 +{1}%</String>
+  <String Key="StoryInventoryItemName_230100">복수의 방패</String>
+  <String Key="StoryInventoryItemDesc_230100">피해 반사 +{0}% (주문 피해 반감)</String>
+  <String Key="StoryInventoryItemName_230110">희망의 목걸이</String>
+  <String Key="StoryInventoryItemDesc_230110">전투 시작 {0}초 후 모든 아군에게 부활 {1}회 부여</String>
+  <String Key="StoryModeDialogue_2010700_0_0_System">오필리아의 영지군은 붉은 달과 연합하여 노스페라투 접경으로 출진한다.</String>
+  <String Key="StoryModeDialogue_2010700_0_1_System">블라드는 비틀거리며 멀리서 오필리아의 모습을 바라본다. 그의 눈이 새빨갛게 빛난다.</String>
+  <String Key="StoryModeDialogue_2010700_0_2_System">형형한 검은색 기운이 그를 감싸고 있다.</String>
+  <String Key="StoryModeDialogue_2010700_0_3_Vlad">오필리아 공녀님, 이렇게 다시보니 참으로 반갑소.</String>
+  <String Key="StoryModeDialogue_2010700_0_4_Vlad">아니 이제 영주라 불러드려야 하오? 그 아름다움은 전혀 죽지 않았소이다.</String>
+  <String Key="StoryModeDialogue_2010700_0_5_Vlad">어째, 인간으로 남아 살아가는 건 할 만 하오? 죽음이 지겹지 않소?</String>
+  <String Key="StoryModeDialogue_2010700_0_6_Vlad">나와 가족이 되기엔 아직 늦지 않았소만…</String>
+  <String Key="StoryModeDialogue_2010700_1_0_System">한 편, 캐시 역시 출정을 준비한다. 서재의 창밖으로 붉은 달의 깃발이 오르는 것이 보인다.</String>
+  <String Key="StoryModeDialogue_2010700_1_1_Cathy">전 영주 부인이 새로 영주가 되고 나서 서신도 여러 번 보내고 대면을 요청했지만 돌아온 건 없어.</String>
+  <String Key="StoryModeDialogue_2010700_1_2_Cathy">프로스트발드를 들어갈 수도 없게 되었고. 결국 이렇게 되는구나...</String>
+  <String Key="StoryModeDialogue_2010700_1_3_Cathy">블라드가 죽으면 접경의 문제로 끝나지 않아.</String>
+  <String Key="StoryModeDialogue_2010700_1_4_Cathy">노스페라투 본진이 '인간이 가문의 귀족을 살해했다'는 명분으로 정치적 보복에 나설 거고, 그건 국가 간 전면전이야.</String>
+  <String Key="StoryModeDialogue_2010700_1_6_Cathy">이제 할 수 있는 건.... 내가 직접 가서 수습하고 새 영주와 대면한다. 남는 방법은 그것뿐이야.</String>
+  <String Key="StoryModeDialogue_2010700_2_0_System">오필리아의 진영.</String>
+  <String Key="StoryModeDialogue_2010700_2_1_System">오필리아는 후방에서 부대를 지휘, 네리아는 선봉에서 석궁을 쏘며 블라드 모렌의 저택을 향해 전장을 헤쳐나간다.</String>
+  <String Key="StoryModeDialogue_2010700_2_2_Solar">오필리아님, 뒤!</String>
+  <String Key="StoryModeDialogue_2010700_2_3_Solar">으... 아, 이건 좀 아프네요.</String>
+  <String Key="StoryModeDialogue_2010700_2_4_Ophelia">솔라! 군의관! 치료를!</String>
+  <String Key="StoryModeDialogue_2010700_2_5_Solar">괜찮아요. 저는 즐겁게 살만큼 산 것 같아요! 제가 계속 응원할게요....</String>
+  <String Key="StoryModeDialogue_2010700_2_6_System">오필리아는 전쟁이란 피와 죽음이 함께할 수밖에 없다는 것을 알고 있었다.</String>
+  <String Key="StoryModeDialogue_2010700_2_7_System">3개월 간 공부하고 또 공부했다. 하지만 아는 것과 직접 접하는 것은 달랐다.</String>
+  <String Key="StoryModeDialogue_2010700_2_8_System">솔라를 알게 된 지 몇 달 되지 않았지만, 솔라를 잃게 될 생각을 하니 피가 거꾸로 솟는 기분이었다.</String>
+  <String Key="StoryModeDialogue_2010700_2_9_System">더구나 이 전투는 자신이 결정한 것 아닌가.</String>
+  <String Key="StoryModeDialogue_2010700_2_10_System">오필리아의 눈에 전투 중인 네리아의 모습이 보인다.</String>
+  <String Key="StoryModeDialogue_2010700_2_11_System">동료들의 안위도 살피지 않고 홀로 전장 깊숙히 들어가있다.</String>
+  <String Key="StoryModeDialogue_2010700_2_12_System">광소를 띈 채 춤을 추며 뱀파이어를 도륙내는 그녀의 모습은 피를 탐하던 블라드 모렌과도 그리 다르지 않았다.</String>
+  <String Key="StoryModeDialogue_2010700_2_13_Solar">...오필리아 님. 헤헤, 저.... 안 죽었어요.</String>
+  <String Key="StoryModeDialogue_2010700_2_14_Ophelia">아, 솔라, 다행이에요. 정말 다행이에요.</String>
+  <String Key="StoryModeDialogue_2010700_2_14b_Ophelia">절대 움직이지 말아요. 더 이상 말하지 않아도 괜찮아요.</String>
+  <String Key="StoryModeDialogue_2010700_2_15_System">솔라는 군의관에게 맡겨진다. 오필리아는 솔라의 손을 놓고 일어선다.</String>
+  <String Key="StoryModeDialogue_2010700_2_16_Ophelia">(희생을 최소화하기 위해 이 전투는 빠르고 효율적으로 끝낸다.)</String>
+  <String Key="StoryModeDialogue_2010700_2_17_Ophelia">전군, 전진.</String>
+  <String Key="StoryModeDialogue_2010700_3_0_System">한 편, 네리아는 홀로 전장을 누비며 전투, 아니 학살을 시작한다.</String>
+  <String Key="StoryModeDialogue_2010700_3_1_System">네리아의 얼굴에 점점 웃음이 번진다.</String>
+  <String Key="StoryModeDialogue_2010700_3_2_Neria">아아... 뱀파이어의 비명만큼 듣기 좋은 것도 없지.</String>
+  <String Key="StoryModeDialogue_2010700_3_3_Neria">이것이 네놈들의 존재 가치다. 아하하하하하!</String>
+  <String Key="StoryModeDialogue_2010700_3_4_RedMoon1">네리아 님! 솔라 님이 중상을 입으시고 후퇴하셨습니다!</String>
+  <String Key="StoryModeDialogue_2010700_3_5_Neria">그런가.</String>
+  <String Key="StoryModeDialogue_2010700_3_6_System">전투를 이어가던 네리아는 프로스트발드 군을 기절시키며 전진하던 캐시와 마주친다.</String>
+  <String Key="StoryModeDialogue_2010700_3_7a_Cathy">네리아! 이 상황을 어떻게 수습할 생각이지!</String>
+  <String Key="StoryModeDialogue_2010700_3_7b_Cathy">이건 이제 전쟁이야! 나도 어쩔 수가 없어!</String>
+  <String Key="StoryModeDialogue_2010700_3_8_Ophelia">저 사람이 알레시아 노스페라투인가요 네리아?</String>
+  <String Key="StoryModeDialogue_2010700_3_9a_Neria">수습? 이젠 아무래도 상관 없다.</String>
+  <String Key="StoryModeDialogue_2010700_3_9b_Neria">네게도 더러운 뱀파이어의 피가 반쯤 흐르고 있지. 그 절반을 죽여주겠다.</String>
+  <String Key="StoryModeDialogue_2010700_3_10_Ophelia">상관 없지 않아요! 제 목표는 블라드 모렌뿐, 피해를 키우고 싶지 않습니다.</String>
+  <String Key="StoryModeDialogue_2010700_3_11_Neria">오필리아. 저기 있는 것은 블라드 모렌의 상관이다. 우리의 적이지.</String>
+  <String Key="StoryModeDialogue_2010700_3_12_Cathy">이봐 당신! 오필리아 영주 맞지? 나와 대화를 좀 하자.</String>
+  <String Key="StoryModeDialogue_2010700_3_13_Neria">저 여자의 말을 들을 필요는 없다.</String>
+  <String Key="StoryModeDialogue_2010700_3_14_Ophelia">판단은 제가 듣고 직접 합니다!</String>
+  <String Key="StoryModeDialogue_2010700_3_15_Cathy">그래! 전쟁을 막는 것이 먼저야.</String>
+  <String Key="StoryModeDialogue_2010700_3_16_System">그러나 캐시의 노력이 무색하게도 오필리아의 눈 앞에 블라드가 나타난다.</String>
+  <String Key="StoryModeDialogue_2010700_3_17_System">블라드를 감싸고 있던 검은색 기운이 더욱 더 탁하게 뿜어져 나온다.</String>
+  <String Key="StoryModeDialogue_2010800_0_0_Vlad">이제 와서 인간과 화친을 맺겠다고 하여, 몇 년 간 자제했소.</String>
+  <String Key="StoryModeDialogue_2010800_0_1_Vlad">내가 큰 사고를 쳤다고 하기에 몇 달 간 아무 것도 하지 않고 가족들도 억눌렀소.</String>
+  <String Key="StoryModeDialogue_2010800_0_2_Vlad">그런데! 모든 것이 무너지고 가족들의 비명이 들리고 있소.</String>
+  <String Key="StoryModeDialogue_2010800_0_3_Vlad">이제는 더 이상 참지 않겠소. 나를 막을 것은 아무것도 없소!</String>
+  <String Key="StoryModeDialogue_2010800_0_4_Ophelia">저게... 블라드 모렌 맞나요?</String>
+  <String Key="StoryModeDialogue_2010800_0_5_Neria">저게 뱀파이어의 본 모습이다. 모든 것을 파괴하고 살해하는 피에 잡아먹힌 괴물!</String>
+  <String Key="StoryModeDialogue_2010800_0_6_Cathy">......블라드. 대체 어떻게 된 거야?</String>
+  <String Key="StoryModeDialogue_2010800_0_7_Vlad">추하디 추한 세상. 내가 모든 것을 망가뜨려버리겠소이다!</String>
+  <String Key="StoryModeDialogue_2010800_0_8_System">블라드가 무릎을 꿇는다. 검은 기운이 서서히 걷히고, 원래의 눈빛이 돌아온다.</String>
+  <String Key="StoryModeDialogue_2010800_0_9_Vlad">캐시... 님…</String>
+  <String Key="StoryModeDialogue_2010800_0_10_Cathy">블라드.</String>
+  <String Key="StoryModeDialogue_2010800_0_11_Cathy">…미안해</String>
+  <String Key="StoryModeDialogue_2010800_0_12_System">캐시가 전장 전체가 들리도록 크게 외친다.</String>
+  <String Key="StoryModeDialogue_2010800_0_13_Cathy">나는 알레시아 노스페라투!</String>
+  <String Key="StoryModeDialogue_2010800_0_13b_Cathy">노스페라투 가문의 일원으로서 폭주한 블라드 모렌을 직접 처리하였다.</String>
+  <String Key="StoryModeDialogue_2010800_0_14_Cathy">이 모든 일의 원흉은 블라드 모렌의 개인적 폭주이며 블라드 모렌은 사망하였으니 더 이상의 전투와 희생은 불필요하다!</String>
+  <String Key="StoryModeDialogue_2010800_0_15_Cathy">블라드 모렌 휘하의 뱀파이어들이여, 노스페라투의 이름으로 명한다!</String>
+  <String Key="StoryModeDialogue_2010800_0_15b_Cathy">전투를 종료하고 후퇴하라!</String>
+  <String Key="StoryModeDialogue_2010800_0_16_Cathy">오필리아도 어서 더 이상의 무의미한 희생을 막도록 하세요.</String>
+  <String Key="StoryModeDialogue_2010800_0_17_Ophelia">프로스트발드 전군! 전투를 중지하고 퇴각! 부상자와 사망자를 수송하라!</String>
+  <String Key="StoryModeDialogue_2010800_0_18_Neria">이대로 끝낼 수는 없다. 붉은 달은!</String>
+  <String Key="StoryModeDialogue_2010800_0_19_Ophelia">네리아. 당신은 영지민을 위하는 것이 맞나요?</String>
+  <String Key="StoryModeDialogue_2010800_0_19b_Ophelia">당신의 얼굴을 보면 그저 살육을 즐기고 있는 것 같습니다.</String>
+  <String Key="StoryModeDialogue_2010800_0_20_Neria">내가? 뱀파이어를 처단하는 것이 무슨 살육이지? 벌레 잡기나 다름이 없..</String>
+  <String Key="StoryModeDialogue_2010800_0_21_Cathy">그것 참 듣는 뱀파이어 불편하네. 네리아, 이제 제발 좀 꺼져 줘. 정말 죽여버리기 전에.</String>
+  <String Key="StoryModeDialogue_2010800_0_22_Neria">... 붉은 달이여. 철수하라!</String>
+  <String Key="StoryModeDialogue_2010800_1_0_Cathy">오필리아, 저는 알레시아 노스페라투라고 해요.</String>
+  <String Key="StoryModeDialogue_2010800_1_1a_Cathy">로데릭 프로스트발드의 전사에 대해서는... 드릴 말씀이 없습니다.</String>
+  <String Key="StoryModeDialogue_2010800_1_1b_Cathy">죄송합니다. 제 책임이 커요.</String>
+  <String Key="StoryModeDialogue_2010800_1_2_Cathy">하지만 솔직히 말하자면 뱀파이어와 인간의 전쟁을 막고 싶고, 이제부터라도 양측 모두의 희생을 막고 싶어요.</String>
+  <String Key="StoryModeDialogue_2010800_1_3_Ophelia">알레시아 노스페라투, 그쪽이 보냈던 서신은 모두 읽었습니다.</String>
+  <String Key="StoryModeDialogue_2010800_1_4_Ophelia">다만 긍정적인 답변을 드리기에는 상황이 여의치 않았습니다.</String>
+  <String Key="StoryModeDialogue_2010800_1_5_Ophelia">더 이상의 희생을 막고 싶은 것은 저도 마찬가지입니다.</String>
+  <String Key="StoryModeDialogue_2010800_1_5b_Ophelia">추후 공식 서신을 보내도록 하겠습니다.</String>
+  <String Key="StoryModeDialogue_2010800_1_6_Cathy">그럼 먼저 가볼게요.</String>
+  <String Key="StoryModeDialogue_2010800_1_7_System">캐시는 네리아를 흘깃 째려보며 돌아간다.</String>
+  <String Key="StoryModeDialogue_2010800_1_8_System">모두가 돌아간 뒤, 오필리아에게 남은 것은 허무함이다.</String>
+  <String Key="StoryModeDialogue_2010800_2_0_Ophelia">로데릭. 마음이 공허해요.</String>
+  <String Key="StoryModeDialogue_2010800_2_1_Ophelia">중앙 대륙에 있을 적, 아름다운 공녀의 역할을 충실히 하는 게 제 역할이라고 생각했고 의문을 품지 않았어요.</String>
+  <String Key="StoryModeDialogue_2010800_2_2_Ophelia">정략혼을 위해 북부에 올라왔을 때도 춥고 연회도 없었지만 받아들였을 뿐이었어요.</String>
+  <String Key="StoryModeDialogue_2010800_2_3_Ophelia">납치당했을 때마저도 뱀파이어에게 홀딱 홀려버렸고.</String>
+  <String Key="StoryModeDialogue_2010800_2_4_Ophelia">이번에 처음으로 제가 고집부려서 로데릭의 복수를 이뤄냈어요.</String>
+  <String Key="StoryModeDialogue_2010800_2_4b_Ophelia">어떤가요? 저 잘했나요?</String>
+  <String Key="StoryModeDialogue_2010800_2_5_Ophelia">…</String>
+  <String Key="StoryModeDialogue_2010800_2_6_Ophelia">이상한 말일지도 모르겠지만, 블라드가 쓰러지는 걸 봤을 때 가슴이 시렸어요.</String>
+  <String Key="StoryModeDialogue_2010800_2_7_Ophelia">로데릭을 죽인 사람인데. 나를 먹으려 했던 사람인데.</String>
+  <String Key="StoryModeDialogue_2010800_2_8_Ophelia">그런데 연회에서의 모습은... 진짜였잖아요. 전부가 거짓은 아니었잖아요.</String>
+  <String Key="StoryModeDialogue_2010800_2_9_Ophelia">나쁜 사람은 맞지만, 그저 집착과 충동이라는 병에 걸려서 시야가 좁아졌던 것이 아닐까... 마치 네리아처럼요.</String>
+  <String Key="StoryModeDialogue_2010800_2_11_Ophelia">…고마워요. 로데릭. 저는 당신의 뒤를 잇기로 마음을 정했습니다.</String>
+  <String Key="StoryModeDialogue_2010800_2_12_Ophelia">이제 주위에 휘둘리지 않고 온전히 제 선택으로 영지민들을 지키는 영주가 되려고 해요.</String>
+  <String Key="StoryModeDialogue_2010800_2_13_Ophelia">열심히 해볼 거에요. 옆에서 줄곧 저를 지켜보면서 도와주세요.</String>
+  <String Key="StoryModeDialogue_2010800_3_0_System">오필리아는 블라드를 추모하기 위해 시신에 가까이 다가간다. 블라드가 쓰러진 자리에 검붉은 보석이 발견된다.</String>
+  <String Key="StoryModeDialogue_2010800_3_1_Ophelia">이건...?</String>
+  <String Key="StoryModeDialogue_2010800_3_2_Ophelia">(기분이 울렁거려.)</String>
+  <String Key="StoryModeDialogue_2010800_3_3_Ophelia">로데릭. 이건 역시.. 그런 거죠?</String>
+  <String Key="StoryModeDialogue_2010800_3_4_System">노스페라투 접경을 오랫동안 지배해오던 블라드 모렌이 사망했다.</String>
+  <String Key="StoryModeDialogue_2010800_3_5_System">캐시는 노스페라투 본진에 블라드 모렌이 단독으로 폭주하였으며 직접 처단했다고 보고함으로서 전면전을 막는다.</String>
+  <String Key="StoryModeDialogue_2010800_3_6_System">알레시아 노스페라투의 관리자로서의 능력 부족 문제가 대두되며 그녀의 정치적 입지가 더욱 좁아졌다.</String>
+  <String Key="StoryModeDialogue_2010800_3_7_System">인간과 뱀파이어가 함께하는 한, 이곳에는 갈등이 끊이지 않을 것이다.</String>
+  <String Key="StoryModeDialogue_2010900_0_0_System">며칠 후, 오필리아의 응접실.</String>
+  <String Key="StoryModeDialogue_2010900_0_1_System">탁자 위에 검붉은 보석이 놓여 있다.</String>
+  <String Key="StoryModeDialogue_2010900_0_2_Ophelia">이 보석에 대해 아시는 것이 있나요?</String>
+  <String Key="StoryModeDialogue_2010900_0_3_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_4_Ophelia">잘 아시겠지만, 이 보석은 '황혼의 별'이라고 합니다.</String>
+  <String Key="StoryModeDialogue_2010900_0_5_Ophelia">남부에서 유래하는 보석인데 소지한 사람의 성격을 나빠지게 한다나, 그런 소문이 돌고 있습니다.</String>
+  <String Key="StoryModeDialogue_2010900_0_6_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_7_Ophelia">여기부터는, 제 억측입니다.</String>
+  <String Key="StoryModeDialogue_2010900_0_8_Ophelia">블라드 모렌이 아름다운 것을 좋아하며 특히 값비싼 보석을 사 모은다는 것은 유명합니다.</String>
+  <String Key="StoryModeDialogue_2010900_0_9_Ophelia">누군가가 황혼의 별이 그의 손에 들어가길 기대하며 남부로부터 유통해왔습니다.</String>
+  <String Key="StoryModeDialogue_2010900_0_10_Ophelia">그 누군가는 블라드 모렌의 상관인 알레시아 노스페라투와 내통하고 있었기에,</String>
+  <String Key="StoryModeDialogue_2010900_0_10b_Ophelia">블라드 모렌이 어떤 암시장을 주로 이용하는지도 쉽게 알았을 것입니다.</String>
+  <String Key="StoryModeDialogue_2010900_0_11_Ophelia">블라드 모렌은 황혼의 별을 줄곧 지니고 다녔습니다만,</String>
+  <String Key="StoryModeDialogue_2010900_0_11b_Ophelia">황혼의 별에는 단순히 성격을 나빠지게 하는 수준이 아니라</String>
+  <String Key="StoryModeDialogue_2010900_0_11c_Ophelia">뱀파이어의 본성을 폭주시킬 수 있는 그런 효과가 있었던 것이겠죠.</String>
+  <String Key="StoryModeDialogue_2010900_0_12_Ophelia">왜 블라드 모렌의 폭주가 필요했을까요.</String>
+  <String Key="StoryModeDialogue_2010900_0_13_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_14_Ophelia">당신은 로데릭에게 알레시아가 영지민 납치에 관여하고 있다고 했습니다.</String>
+  <String Key="StoryModeDialogue_2010900_0_15_Ophelia">그리고 영지 남쪽에서 발견된 영지민 사체가 뱀파이어의 소행이라고 주장했죠.</String>
+  <String Key="StoryModeDialogue_2010900_0_16_Ophelia">이 때문에 뱀파이어와의 공존은 진전되지 못했습니다.</String>
+  <String Key="StoryModeDialogue_2010900_0_17_Neria">사실을 이야기한 것뿐이다.</String>
+  <String Key="StoryModeDialogue_2010900_0_18_Ophelia">제가 납치되었을 때도 로데릭을 끌어들여 군사 공격을 유도했고, 로데릭이 돌아가셨을 때도 내 복수를 유도했죠.</String>
+  <String Key="StoryModeDialogue_2010900_0_19_Ophelia">당신은 전쟁 그 자체를 바라는 것 같아요.</String>
+  <String Key="StoryModeDialogue_2010900_0_20_Neria">......내가 한 일은 정의다. 뱀파이어는 존재해서는 안 된다.</String>
+  <String Key="StoryModeDialogue_2010900_0_21_Neria">공존이라는 환상을 품고 있는 건 너와 알레시아뿐이야.</String>
+  <String Key="StoryModeDialogue_2010900_0_21b_Neria">로데릭도 결국 그 환상 때문에 죽었어.</String>
+  <String Key="StoryModeDialogue_2010900_0_22_Neria">내가 이간질을 했든 안 했든, 블라드는 영지민을 납치했고, 오필리아 당신을 먹으려고 했다.</String>
+  <String Key="StoryModeDialogue_2010900_0_23_Neria">그게 뱀파이어의 본질이야.</String>
+  <String Key="StoryModeDialogue_2010900_0_24_Ophelia">솔라... 붉은 달은, 당신의 가족인가요? 아니면 수단인가요?</String>
+  <String Key="StoryModeDialogue_2010900_0_25_Neria">우리는 전우다.</String>
+  <String Key="StoryModeDialogue_2010900_0_26_Ophelia">…이곳의 균형은 알레시아와 제가 맡기로 했습니다.</String>
+  <String Key="StoryModeDialogue_2010900_0_27_Neria">그 뱀파이어를 믿는가?</String>
+  <String Key="StoryModeDialogue_2010900_0_28_Ophelia">당신보다는요.</String>
+  <String Key="StoryModeDialogue_2010900_0_29_Neria">당신 혼자서는 아무것도 할 수 없어.</String>
+  <String Key="StoryModeDialogue_2010900_0_30_Neria">블라드는 죽었지만 노스페라투는 건재하다.</String>
+  <String Key="StoryModeDialogue_2010900_0_31_Neria">그들이 공격하면 어떻게 할 거지?</String>
+  <String Key="StoryModeDialogue_2010900_0_32_Ophelia">그건 당신이 걱정할 일이 아니네요.</String>
+  <String Key="StoryModeDialogue_2010900_0_33_Neria">후회할 거다.</String>
+  <String Key="StoryModeDialogue_2010900_0_34_System">네리아는 마지막 눈길을 한 번 던지고 응접실을 떠난다. 오필리아는 그 뒷모습을 지켜본다.</String>
+  <String Key="StoryModeDialogue_2010900_1_0_System">응접실에 남은 붕대투성이의 솔라. 오필리아가 그 앞에 앉는다.</String>
+  <String Key="StoryModeDialogue_2010900_1_1_Ophelia">솔라. 괜찮겠어요? 따라가지 않아도?</String>
+  <String Key="StoryModeDialogue_2010900_1_2_Solar">헌 두목님은 제가 없어도 잘하실 거에요. 이제 새 두목님이 생겼으니 괜찮아요!</String>
+  <String Key="StoryModeDialogue_2010900_2_0_System">며칠 후, 오필리아는 늘 그렇듯 서재에서 로데릭의 의자에 앉아있다.</String>
+  <String Key="StoryModeDialogue_2010900_2_1_Ophelia">알레시아와의 협의를 시작했어요.</String>
+  <String Key="StoryModeDialogue_2010900_2_2_Ophelia">로데릭이 하려고 했던 것, 제가 이어받을게요.</String>
+  <String Key="StoryModeDialogue_2010900_2_3_Ophelia">네리아는 쫓아냈고요.</String>
+  <String Key="StoryModeDialogue_2010900_2_4_Ophelia">영지군도 키우고 있고, 동맹도 넓혀가고 있어요.</String>
+  <String Key="StoryModeDialogue_2010900_2_6_Ophelia">... 이 정도면 괜찮았나요?</String>
+  <String Key="StoryModeDialogue_2010900_2_7_System">이후 오필리아의 이름은 퍼져나갔다. 영지를 확장하고, 군사를 키우고, 멈추지 않는 여자. 사람들은 그녀를 '철의 여인'이라 불렀다.</String>
+  <String Key="StoryModeDialogue_2010900_2_8_System">가끔 가신들은 오필리아가 텅 빈 서재에서 허공을 향해 다정하게 대화하는 모습을 목격한다.</String>
+  <String Key="StoryModeDialogue_2010900_2_9_System">철의 여인은 오래도록 부서진 채 얼어붙어 단단해질 것이다.</String>
+  <String Key="StoryModeDialogue_2010700_2_2b_Ophelia">...!!!</String>
+  <String Key="WorldTriggerDesc_11100">대상 영웅 한 기당 특수 피해량 +{0}% (최대 3회 중첩)</String>
+  <String Key="StoryFieldName_2010700">노스페라투 접경</String>
+  <String Key="StoryFieldName_2010800">노스페라투 접경</String>
+  <String Key="UnitName_20020750">블라드 노스페라투</String>
+  <String Key="UnitName_20020600">프로스트발드 병사</String>
+  <String Key="StoryHint_420107000">오필리아의 개전 스킬로 가고일의 공격을 방어해보세요.</String>
+  <String Key="StoryHint_420108000">블라드의 공격은 아군을 지속적으로 기절시킵니다. 기절에 대항할 수 있는 개전 스킬을 활용해보세요.</String>
+  <String Key="TreasureName_30043">비타코르데</String>
+  <String Key="TreasureSubName_30043">신성의 서</String>
+  <String Key="TreasureDesc_30043">그대, 자신 내면의 진실된 마음과 마주하세요.
+그리하면, 신성이 그대를 도울 것입니다.</String>
+  <String Key="TreasureSkillName_30043">생명의 힘</String>
+  <String Key="BuffDataName_3300431">신성력 I</String>
+  <String Key="BuffDataName_3300432">생명의 순환 I</String>
+  <String Key="BuffDataName_3300433">신성수호</String>
+  <String Key="BuffDataName_3300434">생명의 순환 II</String>
+  <String Key="BuffDataName_3300435">신성력 II</String>
+  <String Key="SpecialShop_TreasurePickUp30043">비타코르데 픽업 특별 상점</String>
+  <String Key="SpecialPackage_1683">비타코르데 패키지 1</String>
+  <String Key="SpecialPackage_1684">비타코르데 패키지 2</String>
+  <String Key="SpecialPackage_1685">비타코르데 패키지 3</String>
+  <String Key="BuffDataDesc_3300431">수호 {0}당 기본 피해량 증가 효과의 주문력 계수 +{1}%</String>
+  <String Key="BuffDataDesc_3300432">쿨타임 {0}초</String>
+  <String Key="BuffDataDesc_3300433">영역 내의 자신을 제외한 모든 아군에게 은총 부여</String>
+  <String Key="BuffDataDesc_3300434">쿨타임 {0}초</String>
+  <String Key="BuffDataDesc_3300435">수호 {0}당 기본 피해량 증가 효과의 주문력 계수 +{1}%</String>
+  <String Key="TreasureSkillDesc_3300430">전투 시작 시 비타코르데를 장착한 가장 성급이 높은 영웅의 효과만 적용
+전투 시작 시점의 주문력으로 장착자의 주문력을 고정
+아군 치유 시 {0}초간 장착자 주변 {1} 범위의 아군의 기본 피해량을 장착자 주문력의 {2}%만큼 증가시키는 영역을 생성 (쿨타임 {3}초)</String>
+  <String Key="TreasureSkillDesc_3300431">전투 시작 시 비타코르데를 장착한 가장 성급이 높은 영웅의 효과만 적용
+전투 시작 시점의 주문력으로 장착자의 주문력을 고정
+아군 치유 시 {0}초간 장착자 주변 {1} 범위의 아군의 기본 피해량을 장착자 주문력의 {2}%만큼 증가시키는 영역을 생성 (쿨타임 {3}초)
+수호 {4}당 기본 피해량 증가 효과의 주문력 계수 +{5}%</String>
+  <String Key="TreasureSkillDesc_3300433">전투 시작 시 비타코르데를 장착한 가장 성급이 높은 영웅의 효과만 적용
+전투 시작 시점의 주문력으로 장착자의 주문력을 고정
+아군 치유 시 {0}초간 장착자 주변 {1} 범위의 아군의 기본 피해량을 장착자 주문력의 {2}%만큼 증가시키는 영역을 생성 (쿨타임 {3}초)
+수호 {4}당 기본 피해량 증가 효과의 주문력 계수 +{5}%
+영역 내의 장착자를 제외한 아군에게 은총 부여</String>
+  <String Key="SeasonalEventName_Season72">비룡제</String>
+  <String Key="SeasonalEventMode_Season72">비룡제</String>
+  <String Key="TreasureName_50002">코르 오르비스</String>
+  <String Key="TreasureSubName_50002">임시 서브이름</String>
+  <String Key="TreasureDesc_50002">임시 설명 - 보구 컨셉 나오고 추가 - 생각해둔 컨셉 : 주변 동식물들에게 마나를 빌려와서 축적한 뒤 방출하는 뭔가의 돌? 아티팩트?</String>
+  <String Key="TreasureSkillName_50002">마나합성</String>
+  <String Key="BuffDataName_3500021">동화 I</String>
+  <String Key="BuffDataName_3500022">마나 결계 I</String>
+  <String Key="BuffDataName_3500023">마나 공명</String>
+  <String Key="BuffDataName_3500024">마나 결계 II</String>
+  <String Key="BuffDataName_3500025">동화 II</String>
+  <String Key="SpecialShop_TreasurePickUp50002">코르 오르비스 픽업 특별 상점</String>
+  <String Key="SpecialPackage_1690">코르 오르비스 패키지 1</String>
+  <String Key="SpecialPackage_1691">코르 오르비스 패키지 2</String>
+  <String Key="SpecialPackage_1692">코르 오르비스 패키지 3</String>
+  <String Key="BuffDataDesc_3500021">{0}%를 초과한 주문 치명타 피해량 {1}% 당 강화된 스킬의 최종 피해 증가량 {2}배</String>
+  <String Key="BuffDataDesc_3500022">세 번째 스킬을 사용할 때까지 받는 피해 {0}%</String>
+  <String Key="BuffDataDesc_3500023">강화된 스킬 사용 시 무작위 대상에게 피해량 {0}%의 동일한 스킬을 추가로 {1}회 사용</String>
+  <String Key="BuffDataDesc_3500024">세 번째 스킬을 사용할 때까지 받는 피해 {0}%</String>
+  <String Key="BuffDataDesc_3500025">{0}%를 초과한 주문 치명타 피해량 {1}% 당 강화된 스킬의 최종 피해 증가량 {2}배</String>
+  <String Key="TreasureSkillDesc_3500020">가장 성급이 높은 코르 오르비스를 장착한 영웅이 전투 시작 후 스킬을 세 번 사용할 때까지 최대 마나가 {0}% 증가 및 최종 주는 피해량 {1}% 감소
+마지막 스킬은 강화되어 최종 피해량이 +{2}% 증가</String>
+  <String Key="TreasureSkillDesc_3500021">가장 성급이 높은 코르 오르비스를 장착한 영웅이 전투 시작 후 스킬을 세 번 사용할 때까지 최대 마나가 {0}% 증가 및 최종 주는 피해량 {1}% 감소
+마지막 스킬은 강화되어 최종 피해량이 +{2}% 증가
+{3}%를 초과한 주문 치명타 피해량 {4}% 당 강화된 스킬으리 최종 피해 증가량 {5}배</String>
+  <String Key="TreasureSkillDesc_3500022">가장 성급이 높은 코르 오르비스를 장착한 영웅이 전투 시작 후 스킬을 세 번 사용할 때까지 최대 마나가 {0}% 증가 및 최종 주는 피해량 {1}% 감소
+마지막 스킬은 강화되어 최종 피해량이 +{2}% 증가
+{3}%를 초과한 주문 치명타 피해량 {4}% 당 강화된 스킬으리 최종 피해 증가량 {5}배
+스킬을 세 번 사용할 때까지 받는 피해 {6}%</String>
+  <String Key="TreasureSkillDesc_3500023">가장 성급이 높은 코르 오르비스를 장착한 영웅이 전투 시작 후 스킬을 세 번 사용할 때까지 최대 마나가 {0}% 증가 및 최종 주는 피해량 {1}% 감소
+마지막 스킬은 강화되어 최종 피해량이 +{2}% 증가
+{3}%를 초과한 주문 치명타 피해량 {4}% 당 강화된 스킬으리 최종 피해 증가량 {5}배
+스킬을 세 번 사용할 때까지 받는 피해 {6}%
+강화된 스킬 사용 시 무작위 대상에게 피해량 {7}%의 동일한 스킬을 추가로 {8}회 사용</String>
 </Strings>

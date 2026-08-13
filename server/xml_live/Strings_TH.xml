@@ -34,10 +34,10 @@
 การอัญเชิญ</String>
   <String Key="IngameLoading">กำลังโหลด...</String>
   <String Key="TimeLeft">เวลาที่เหลือ</String>
-  <String Key="Hour">ชม.</String>
-  <String Key="Minute">น.</String>
-  <String Key="Second">วิ.</String>
-  <String Key="Day">วัน</String>
+  <String Key="Hour"> ชม.</String>
+  <String Key="Minute"> น.</String>
+  <String Key="Second"> วิ.</String>
+  <String Key="Day"> วัน</String>
   <String Key="FreeGet">รับฟรี</String>
   <String Key="Community">คอมมิวนิตี้</String>
   <String Key="Text_KingGod">King God</String>
@@ -142,9 +142,9 @@
 
 (ค่าใช้จ่าย: {0} เพชร)</String>
   <String Key="King_1">ราชา</String>
-  <String Key="King_2"></String>
+  <String Key="King_2"> </String>
   <String Key="Castle_1">ปราสาท</String>
-  <String Key="Castle_2"></String>
+  <String Key="Castle_2"> </String>
   <String Key="LoadingPopupText">กำลังเชื่อมต่อกับเซิร์ฟเวอร์...</String>
   <String Key="LoginByGoogle">ล็อกอินด้วย Google Play</String>
   <String Key="LoginByApple">ล็อกอินด้วย Apple</String>
@@ -263,11 +263,11 @@
   <String Key="Post_Push_Contents18">คืนนี้จะมอบให้ 1,000 ทอง!</String>
   <String Key="Post_Push_Contents19">มีทองรออยู่ในกล่องจดหมาย~</String>
   <String Key="Post_Push_Contents20">มีเสบียงมาให้!</String>
-  <String Key="Post_Push_Contents21">D-day จบ King God Castle ซีซั่น 70</String>
-  <String Key="Post_Push_Contents22">D-1 จบ King God Castle ซีซั่น 70</String>
-  <String Key="Post_Push_Contents23">D-2 จบ King God Castle ซีซั่น 70</String>
-  <String Key="Post_Push_Contents24">D-4 จบ King God Castle ซีซั่น 70</String>
-  <String Key="Post_Push_Contents25">King God Castle ซีซั่น 70 จะจบลงในวันนี้!</String>
+  <String Key="Post_Push_Contents21">D-day จบ King God Castle ซีซั่น 72</String>
+  <String Key="Post_Push_Contents22">D-1 จบ King God Castle ซีซั่น 72</String>
+  <String Key="Post_Push_Contents23">D-2 จบ King God Castle ซีซั่น 72</String>
+  <String Key="Post_Push_Contents24">D-4 จบ King God Castle ซีซั่น 72</String>
+  <String Key="Post_Push_Contents25">King God Castle ซีซั่น 72 จะจบลงในวันนี้!</String>
   <String Key="Post_Push_Contents26">ตรวจสอบรางวัลพาสที่อาจจะยังไม่ได้รับ!</String>
   <String Key="Post_Push_Contents27">อย่าลืมรับรางวัลพาส!</String>
   <String Key="Post_Push_Contents28">อีก 4 วันระบบสนามรบและพาสจะจบลง</String>
@@ -1239,8 +1239,11 @@
   <String Key="ItemName_10020">ขยายกลุ่ม</String>
   <String Key="ItemDesc_10020">ขยายกลุ่ม 1</String>
   <String Key="ItemName_10030">เงิน +5</String>
+  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">เงิน +10</String>
+  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">เงิน +20</String>
+  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">เหรียญตราวีรกรรม</String>
   <String Key="ItemDesc_10040">เพิ่มดาวของฮีโร่บนสนามแบบสุ่ม 1 ดาว</String>
   <String Key="ItemName_10050">หนังสืออัญเชิญฮีโร่ขั้นสูง (2 ครั้ง)</String>
@@ -1885,7 +1888,7 @@
   <String Key="Event_Artifact_Merge">แพ็กเกจหินผสม</String>
   <String Key="Event_Artifact_Reroll">แพ็กเกจหินหลอม</String>
   <String Key="MinusDamagePerCount">ดาเมจที่มอบให้
-เพิ่ม {1} - (จำนวนฮีโร่ที่ถูกจัดไว้) *{0}</String>
+เพิ่ม {1} - (จำนวนฮีโร่ที่ถูกจัดไว้) *{0}                </String>
   <String Key="ArenaRewardPostTitle_Season6">รางวัลแรงค์อารีน่าซีซั่น 6</String>
   <String Key="ArenaRewardPostDesc_Season6">มอบรางวัลแรงค์อารีน่าซีซั่น 6!</String>
   <String Key="ShopItemName_1011_Post">แพ็กเกจเติบโตเลเวล 7</String>
@@ -2398,7 +2401,7 @@
   <String Key="Name_Potential_10150_2">เข้าถึงธรรมชาติ</String>
   <String Key="Name_Potential_10170_2">แปรเปลี่ยนไม่สิ้นสุด</String>
   <String Key="Name_Potential_10180_2">ผนึกคำสาป</String>
-  <String Key="Name_Potential_10190_2">การยั่วยุของจักรวรรดิ</String>
+  <String Key="Name_Potential_10190_2">เงาแห่งจักรวรรดิ</String>
   <String Key="Name_Potential_10200_2">ไหลทะลัก</String>
   <String Key="Name_Potential_10210_2">คลื่นดาบศักดิ์สิทธิ์</String>
   <String Key="Name_Potential_10220_2">ระเบิดยักษ์</String>
@@ -2426,7 +2429,7 @@
   <String Key="Potential_10090_2">เขตการใช้สกิลของ &lt;ทำนองคล่องแคล่ว&gt; +1 ช่อง</String>
   <String Key="Potential_10100_2">เปิดเผย 'จุดอ่อน' เป้าหมายของ &lt;ตะลุยร้ายแรง&gt; โดยเพิ่มดาเมจที่ได้รับ 30% เป็นเวลา 10 วินาที (ต่อบอส -50%)</String>
   <String Key="Potential_10150_2">เมื่อใช้ &lt;อัญเชิญโกเล็ม&gt; จะเติมมานา 100% ให้พันธมิตรในเขต 5x5/5x5/7x7/7x7 รอบตัว</String>
-  <String Key="Potential_10190_2">ยั่วยุศัตรูที่กำลังโจมตีพันธมิตรของ &lt;คุ้มครองที่รุนแรง&gt; พลังป้องกัน +350 เป็นเวลา 4 วินาที</String>
+  <String Key="Potential_10190_2">มอบหลบซ่อน 0.3 วินาทีแก่พันธมิตรเป้าหมายของ &lt;คุ้มครองที่รุนแรง&gt; และพลังป้องกัน +400 แก่เบเฮมอธ 4 วินาที</String>
   <String Key="Potential_10210_2">ระหว่างใช้ &lt;ดาบศักดิ์สิทธิ์ คาร์นา&gt; มีโอกาส 33% ที่คลื่นที่ให้ดาเมจเท่ากับเวทมนตร์จะทำงาน เมื่อโจมตี</String>
   <String Key="Potential_10220_2">ทุกการโจมตีธรรมดาครั้งที่ 10 จะขว้าง &lt;ระเบิดยักษ์&gt; ที่มอบดาเมจเพิ่มเติมแก่เขต 5x5 ด้วยดาเมจ 3 เท่า</String>
   <String Key="Potential_10240_2">เปิดเผย 'จุดอ่อน' ของเป้าหมาย &lt;โจมตียักษ์ใหญ่&gt; โดยเพิ่มดาเมจที่ได้รับ 30% เป็นเวลา 10 วินาที (เอฟเฟต์ที่มีต่อบอส -50%)</String>
@@ -2563,8 +2566,7 @@
   <String Key="ShopItemName_951">จัดส่งเพชรรายวัน</String>
   <String Key="Name_Potential_10190_3">แผ่นดินไหวรุนแรง</String>
   <String Key="Name_Potential_10200_3">ไหลย้อน</String>
-  <String Key="Potential_10190_3">ล็อกขอบเขตของ &lt;คุ้มครองที่รุนแรง&gt; ภายใน 2 ช่องสำหรับทุกระดับดาว
-เปลี่ยนช่องการผลัก จาก 3 ช่องเป็น 2/3/4/5 ช่อง</String>
+  <String Key="Potential_10190_3">เปลี่ยนเป้าหมายของ &lt;คุ้มครองที่รุนแรง&gt; เป็นศัตรูที่ใกล้ที่สุดในเขต 9X9, การได้รับบาเรียของเบเฮมอธ +100%</String>
   <String Key="SkinName_1003002">ต้อนรับปีใหม่ เอวาน</String>
   <String Key="SkinDesc_1003002">&lt;i&gt;สกินต้อนรับปีใหม่ 2022&lt;/i&gt;</String>
   <String Key="Alert_Temp_NoIAP">ไม่สามารถชำระเงินในแอพได้ชั่วคราว กรุณาลองใหม่อีกครั้งภายหลัง</String>
@@ -3674,7 +3676,7 @@
   <String Key="ItemName_30002">หินแห่งนักปราชญ์</String>
   <String Key="ItemDesc_30002">ใช้เงิน {0} เพื่อเปลี่ยนอุปกรณ์ให้เป็นอุปกรณ์สุ่มระดับเดียวกัน
 (รีเซ็ตเงินที่ใช้ทุกชั้น)</String>
-  <String Key="RogueLikeAddExpToHeroFormat">หนังสือที่ให้ {0} EXP แก่ฮีโร่</String>
+  <String Key="RogueLikeAddExpToHeroFormat">หนังสือที่ให้ {0} EXP แก่ฮีโร่ </String>
   <String Key="ItemName_30020">นํ้ายารักษา</String>
   <String Key="RogueLikeHealHeroPerFormat">นํ้ายาที่ช่วยรักษาเท่ากับพลังชีวิต {0}% แก่ฮีโร่</String>
   <String Key="ItemName_30021">นํ้ายารักษาขั้นสูง</String>
@@ -3699,7 +3701,7 @@
 หากไม่เลือกสมบัติ อาจมีโอกาสได้รับความไว้วางใจจากเหล่าเทพได้ในภายหลัง</String>
   <String Key="RogueLikeSelectBuildingArtifactDesc2">แท่นบูชาแห่งเทพแต่ละแห่งมีสมบัติถูกจัดวางไว้อยู่
 หากไม่เลือกสมบัติ อาจไม่มีโอกาสพบกับเทพใหม่ๆ ในอนาคตได้</String>
-  <String Key="BuildingEffect_AddExpPerNotMaxLevels">เพิ่ม EXP ต่อสู้ให้ฮีโร่ที่ไม่ได้มีเลเวลสูงสุด {Value}%</String>
+  <String Key="BuildingEffect_AddExpPerNotMaxLevels">เพิ่ม EXP ต่อสู้ให้ฮีโร่ที่ไม่ได้มีเลเวลสูงสุด {Value}% </String>
   <String Key="BuildingEffect_AddExpPerNotMaxLevels_Long">เมื่อฮีโร่ที่ไม่ได้มีเลเวลสูงสุดได้รับ EXP จะได้รับ EXP เพิ่มเติม</String>
   <String Key="BuildingEffect_NewHeroAddLevel">เมื่อฮีโร่ใหม่เข้าร่วมเลเวลจะ +{Value}</String>
   <String Key="BuildingEffect_NewHeroAddLevel_Long">ได้รับเลเวลเพิ่มเมื่อฮีโร่ใหม่เข้าร่วม</String>
@@ -3839,7 +3841,7 @@
 เพิ่มราคาขายเมื่อชนะการต่อสู้ขึ้น {0} เงิน (สูงสุด {1})</String>
   <String Key="ItemName_40443">ถุงแห่งความโลภ</String>
   <String Key="ItemName_40453">ขโมย</String>
-  <String Key="ItemDesc_40453">เมื่อมีชีวิตรอดในการต่อสู้ มีโอกาส {0}% ได้รับอุปกรณ์ ขั้น {1}</String>
+  <String Key="ItemDesc_40453">เมื่อมีชีวิตรอดในการต่อสู้ มีโอกาส {0}% ได้รับอุปกรณ์ ขั้น {1} </String>
   <String Key="ItemName_40463">ผู้กลืนกินโลก</String>
   <String Key="ItemDesc_40463">ดูดอุปกรณ์/รูน ได้รับค่าพลังเพิ่มเติมตามประเภทและระดับของไอเทมที่ดูด (สูงสุด {0} ครั้ง)</String>
   <String Key="ItemFullDesc_40463">เมื่อสวมใส่อุปกรณ์/รูนให้ฮีโร่นี้เกิน 3 ชิ้น รูนนี้จะดูดอุปกรณ์/รูน และได้รับค่าพลังเพิ่มเติมตามประเภทและระดับ สามารถรับเอาได้สูงสุด {0} ครั้ง</String>
@@ -4830,7 +4832,7 @@
   <String Key="InventoryItemDesc_600_1">หนังรับรองที่มีตราประทับของราชา
 สามารถแลกเปลี่ยนเป็น 1 ในไอเทมต่อไปนี้ เสบียง 20 ชิ้น / ธงการเดินทาง 3 ผืน / ธงแห่งบททดสอบ 1 ผืน</String>
   <String Key="InventoryItemDesc_600">หนังรับรองที่มีตราประทับของราชา
-สามารถแลกเปลี่ยนเป็น 1 ในไอเทมต่อไปนี้ เสบียง 20 ชิ้น / ธงการเดินทาง 3 ผืน</String>
+สามารถแลกเปลี่ยนเป็น 1 ในไอเทมต่อไปนี้ เสบียง 20 ชิ้น / ธงการเดินทาง 3 ผืน </String>
   <String Key="InventoryItemName_601">หนังสือรับรองแลกเปลี่ยนเสบียง</String>
   <String Key="InventoryItemDesc_601">หนังสือรับรองที่สามารถแลกเปลี่ยนกับเสบียง
 เมื่อใช้จะเติมเสบียง 20 ชิ้นทันที</String>
@@ -4985,7 +4987,6 @@ EXP ที่สามารถได้รับการสนับสนุ�
   <String Key="Hero_Awaken_Noti">ฮีโร่ {0} บรรลุเลเวล 16 จึงสามารถปลุกพลังได้
 เมื่อดำเนินการปลุกพลัง ฮีโร่จะสามารถใช้&lt;color=#FFD247&gt;พลังปลุกพลัง&lt;/color&gt;ของฮีโร่ได้</String>
   <String Key="ItemDescSub_40463_07">ป้องกันเด็ดขาด {0} ครั้ง</String>
-  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">เมื่อฮีโร่ปรากฏ &lt;color=#FFD247&gt;ฮีโร่ที่เลือก&lt;/color&gt; จะ&lt;color=#FFD247&gt;ปรากฏแน่นอน!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">เลือกฮีโร่</String>
   <String Key="SelectPickupUnitAgain">ตั้งใหม่</String>
@@ -6497,7 +6498,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SpecialPackage_TimeLimit">เวลาที่เหลือ: {0}</String>
   <String Key="StepUpPackage_MissionDesc">Step {0}. {1}</String>
   <String Key="StepFormat">Step {0}</String>
-  <String Key="GoToMoneyShop">ต้องการไปยังร้านค้าทรัพย์สินหรือไม่</String>
+  <String Key="GoToMoneyShop">ต้องการไปยังร้านค้าทรัพย์สินหรือไม่	</String>
   <String Key="RecommendShop">ร้านค้าแนะนำ</String>
   <String Key="SpecialShop">ร้านค้าพิเศษ</String>
   <String Key="SubscribeShop">ร้านค้าติดตาม</String>
@@ -6685,7 +6686,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ReturnBenefit">สิทธิพิเศษของผู้กลับมา</String>
   <String Key="ReturnEventBenefit_3">มอบใบเช็คชื่อฉลองการกลับมา</String>
   <String Key="EndDateFormat">ใช้ได้จนถึงวันที่ {1}/{0} {2}</String>
-  <String Key="DayFormat">{0} วัน</String>
+  <String Key="DayFormat">{0} วัน </String>
   <String Key="GameOverRePlay">เล่นอีกครั้ง</String>
   <String Key="PatchDownlaod_No_Alert">จำเป็นต้องดาวน์โหลดแพทช์จึงจะเล่นต่อได้
 ต้องการจบเกมหรือไม่</String>
@@ -6919,7 +6920,6 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="Clan_Menu_ChangeName">เปลี่ยนชื่อแคลน</String>
   <String Key="ColosseumSeasonRankingReward">รางวัลซีซั่น</String>
   <String Key="ColosseumRanking">แรงกิ้ง</String>
-  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">ดูรายละเอียดอัตราของสมบัติ</String>
   <String Key="ArtifactOptionProbDetailDesc">ย้ายไปยังเว็บไซต์อย่างเป็นทางการเกี่ยวกับอัตราปรากฏของออพชั่นย่อยของสมบัติ</String>
   <String Key="ColosseumNetworkChanged">กำลังเชื่อมต่อใหม่เนื่องจากมีการเปลี่ยนเน็ตเวิร์ก</String>
@@ -7354,7 +7354,9 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;ก้าวข้ามดาว
 
 &lt;/size&gt;การ&lt;color=#ffbc00&gt;ก้าวข้ามดาว&lt;/color&gt;ขุมทรัพย์ช่วย&lt;color=#ffbc00&gt;มอบเอฟเฟกต์เพิ่มเติม&lt;/color&gt;ให้กับพลังขุมทรัพย์
- ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;</String>
+ ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;
+
+</String>
   <String Key="SkinName_1032006">คลื่นสีฟ้า ทีอาร์</String>
   <String Key="SkinName_1036004">คลื่นสีฟ้า แฮรัง</String>
   <String Key="SkinName_1042003">คลื่นสีฟ้า ไท่ไป๋</String>
@@ -7428,7 +7430,8 @@ Lv. {0} ▶ Lv. {1}</String>
 ดาเมจที่มอบให้เมื่ออยู่ในสถานะคงกระพัน +{1}%</String>
   <String Key="TreasureSkillDesc_3300033">เมื่อฮีโร่ที่มีดาวสูงสุดที่สวมใส่มัวร์มีพลังชีวิตถึง {0}% หรือได้รับดาเมจถึงตายจะเปลี่ยนเป็นสถานะคงกระพันนาน {1} วินาทีอย่างละ 1 ครั้ง
 (เมื่ออยู่ในสถานะคงกระพันจะไม่สามารถได้รับการฟื้นฟูและบาเรีย)
-ดาเมจที่มอบในสถานะคงกระพัน + {2}%</String>
+ดาเมจที่มอบในสถานะคงกระพัน + {2}%
+</String>
   <String Key="TreasureSkillDesc_3300034">เมื่อฮีโร่ที่มีดาวสูงสุดที่สวมใส่มัวร์มีพลังชีวิตถึง {0}% หรือได้รับดาเมจถึงตายจะเปลี่ยนเป็นสถานะคงกระพันนาน {1} วินาทีอย่างละ 1 ครั้ง
 (เมื่ออยู่ในสถานะคงกระพันจะไม่สามารถได้รับการฟื้นฟูและบาเรีย)
 ดาเมจที่มอบในสถานะคงกระพัน + {2}%
@@ -7658,11 +7661,15 @@ Lv. {0} ▶ Lv. {1}</String>
  &lt;size=25&gt;ก้าวข้ามดาว
 
 &lt;/size&gt;การ&lt;color=#ffbc00&gt;ก้าวข้ามดาว&lt;/color&gt;ขุมทรัพย์ช่วย&lt;color=#ffbc00&gt;มอบเอฟเฟกต์เพิ่มเติม&lt;/color&gt;ให้กับพลังขุมทรัพย์
- ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;</String>
+ ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;
+
+</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;อัพเกรดขุมทรัพย์
 
 &lt;/size&gt;การ&lt;color=#ffbc00&gt;อัพเกรด&lt;/color&gt;ขุมทรัพย์จะเพิ่ม&lt;color=#ffbc00&gt;เอฟเฟกต์พลังขุมทรัพย์&lt;/color&gt;
-&lt;color=#ffbc00&gt;วัตถุดิบอัพเกรด&lt;/color&gt;ขุมทรัพย์สามารถรับได้จากการ&lt;color=#ffbc00&gt;แยกชิ้นส่วน&lt;/color&gt;ขุมทรัพย์ในคลังหรือ&lt;color=#ffbc00&gt;ซื้อที่ร้านค้า&lt;/color&gt;</String>
+&lt;color=#ffbc00&gt;วัตถุดิบอัพเกรด&lt;/color&gt;ขุมทรัพย์สามารถรับได้จากการ&lt;color=#ffbc00&gt;แยกชิ้นส่วน&lt;/color&gt;ขุมทรัพย์ในคลังหรือ&lt;color=#ffbc00&gt;ซื้อที่ร้านค้า&lt;/color&gt;
+
+</String>
   <String Key="TreasureOvercome">ก้าวข้ามดาว</String>
   <String Key="TreasureOvercome_Short">ก้าวข้ามดาว</String>
   <String Key="ViewNextOvercome">ดูการก้าวข้ามถัดไป</String>
@@ -8211,7 +8218,9 @@ Lv. {0} ▶ Lv. {1}</String>
  &lt;size=25&gt;ก้าวข้ามดาว
 
 &lt;/size&gt;การ&lt;color=#ffbc00&gt;ก้าวข้ามดาว&lt;/color&gt;ขุมทรัพย์ช่วย&lt;color=#ffbc00&gt;มอบเอฟเฟกต์เพิ่มเติม&lt;/color&gt;ให้กับพลังขุมทรัพย์
- ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;</String>
+ ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;
+
+</String>
   <String Key="TreasureSkillDesc_3300010">อัตราคริติคอล +{0}%
 ปิดใช้งานนาน {1} วินาทีเมื่อได้รับดาเมจ</String>
   <String Key="TreasureSkillDesc_3300011">อัตราคริติคอล +{0}%
@@ -9473,7 +9482,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="UnitSubName_10670">ผู้ถือธงแห่งสนามรบ</String>
   <String Key="Potential_10670_0">พิทักษ์ +30</String>
   <String Key="Potential_10670_1">หลังจากได้รับดาเมจครั้งแรกหลังจากเริ่มการต่อสู้ จะรับดาเมจ -70% นาน 2 วินาที</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;ตระกูลริตเตอร์ซึ่งเป็นตระกูลอันทรงเกียรติในจักรวรรดิได้ผลิตผู้มีพรสวรรค์ที่โดดเด่นในด้านต่างๆ แม้ว่าพาโทรสจะไม่มีความสามารถตามธรรมชาติอย่างคนจากตระกูลริตเตอร์ แต่เขาได้กลายเป็นผู้บัญชาการที่เป็นแบบอย่างของกองทัพจักรวรรดิด้วยความพยายามที่เหนือกว่าใครๆ&lt;/i&gt;</String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;ตระกูลริตเตอร์ซึ่งเป็นตระกูลอันทรงเกียรติในจักรวรรดิได้ผลิตผู้มีพรสวรรค์ที่โดดเด่นในด้านต่างๆ แม้ว่าพาโทรสจะไม่มีความสามารถตามธรรมชาติอย่างคนจากตระกูลริตเตอร์ แต่เขาได้กลายเป็นผู้บัญชาการที่เป็นแบบอย่างของกองทัพจักรวรรดิด้วยความพยายามที่เหนือกว่าใครๆ&lt;/i&gt; </String>
   <String Key="SkillName_10670">เพื่อจักรวรรดิ!</String>
   <String Key="SkillDesc_10670">สร้างขวัญกำลังใจให้พันธมิตรนาน {TotalAttackTime} วินาที รักษาพันธมิตรทั้งหมดรวมถึงตัวเองในเขต {SplashRangeX}{x}{SplashRangeY} รอบตัวเองเท่ากับ {Heal} หน่วยและเพิ่มความเร็วโจมตี {AttackSpeedPerUnit10670}% ทุกๆ {Time} วินาที การเพิ่มความเร็วโจมตีจะใช้เอฟเฟกต์สูงสุดของสกิลที่มีชื่อเดียวกัน</String>
   <String Key="SkillDesc_10670_Short">รักษาให้พันธมิตรในเขต {SplashRangeX}{x}{SplashRangeY} รอบตัว {Heal} หน่วยทุกๆ {Time} วินาทีเป็นเวลา {TotalAttackTime} วินาทีและเพิ่มความเร็วโจมตี {AttackSpeedPerUnit10670}% ใช้เฉพาะการเพิ่มความเร็วโจมตีของ &lt;เพื่อจักรวรรดิ!&gt; ที่สูงที่สุดเท่านั้น</String>
@@ -9773,7 +9782,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="BaseHybridDefOnInvade">เพิ่มปริมาณทองที่ได้รับในโหมดการโจมตี {0}
 พลังป้องกันของฮีโร่ทั้งหมดในโหมดการโจมตี +{1}
 หลอมไม่ได้, อัพเกรดผ่านการฝึกฝนไม่ได้</String>
-  <String Key="ArtifactOptionDesc_Event_15000">เคลื่อนที่ตำแหน่งฟรีผ่านการฝึกฝน (~24.12.3)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">
+เคลื่อนที่ตำแหน่งฟรีผ่านการฝึกฝน (~24.12.3)</String>
   <String Key="SkinName_1032007">เทพีแห่งจันทรา ทีอาร์</String>
   <String Key="SkinName_1032007_NewLine">เทพีแห่งจันทรา ทีอาร์</String>
   <String Key="TerritoryBuildingName_40300">รูปปั้นเทพีแห่งจันทรา</String>
@@ -11364,7 +11374,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AddDifficultyUnlockDesc">หากเคลียร์โดยไม่มีดาเมจ ความยากจะถูกปลดปล่อยทีละ 2 ขั้น</String>
   <String Key="AccessoryLevelUpTutorialLock">ท่านสามารถดูได้หลังจากเคลียร์เข้ายึด II-1 แล้ว</String>
   <String Key="NotAccessoryLevelUp">ไม่มีเครื่องประดับที่สามารถอัพเกรดได้</String>
-  <String Key="ArtifactOptionDesc_Event_15020">ย้ายตำแหน่งฟรีผ่านการฝึกฝน (&lt;color=#ffbd4a&gt;~{0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">
+ย้ายตำแหน่งฟรีผ่านการฝึกฝน (&lt;color=#ffbd4a&gt;~{0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">เคลียร์แชปเตอร์ {0}-{1} ความยาก{Diff}หรือสูงกว่า</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">เคลียร์ [เข้ายึด] แชปเตอร์ {0}-{1} ความยาก{Diff}หรือสูงกว่า</String>
   <String Key="Polish_EventArtifact_Alert">สมบัตินี้ไม่สามารถอัพเกรดผ่านการฝึกฝน!</String>
@@ -11716,7 +11727,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SpecialPackage_1556">แพ็กเกจเอเทอร์นา 1</String>
   <String Key="SpecialPackage_1557">แพ็กเกจเอเทอร์นา 2</String>
   <String Key="SpecialPackage_1558">แพ็กเกจเอเทอร์นา 3</String>
-  <String Key="MakeAllLateComerExceptSlot">มอบเอฟเฟกต์หน่วยหลังให้กับฮีโร่ทุกตัว ยกเว้นฮีโร่ที่อยู่ตำแหน่ง{0}ในทีม</String>
+  <String Key="MakeAllLateComerExceptSlot">มอบเอฟเฟกต์หน่วยหลังให้กับฮีโร่ทุกตัว ยกเว้นฮีโร่ที่อยู่ตำแหน่ง{0}ในทีม
+</String>
   <String Key="Order_1">แรก</String>
   <String Key="Order_2">ที่สอง</String>
   <String Key="Order_3">ที่สาม</String>
@@ -13826,7 +13838,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArenaDebuffDesc_01">ลดการรักษาทั้งหมด 80% ขณะต่อสู้</String>
   <String Key="ArenaDebuffDesc_02">ลดพลังบาเรียทั้งหมด 80% ขณะต่อสู้</String>
   <String Key="ArenaDebuffDesc_03">ลดสถานะผิดปกติทั้งหมด 50% ขณะต่อสู้</String>
-  <String Key="ArenaDebuffDesc_04">พลังป้องกัน +500</String>
+  <String Key="ArenaDebuffDesc_04">พลังป้องกัน +500 และพลังป้องกันสุดท้ายลดลงตามเวลา</String>
   <String Key="ArenaDebuffTitle">เอฟเฟกต์อารีน่า</String>
   <String Key="Theme68BattleObserverDesc_0">เคลียร์รอบโดยไม่ถูกนินจานักลอบสังหารหรือนินจานักลอบสังหารระดับสูงกำจัด</String>
   <String Key="Theme68BattleObserverDesc_1">กำจัดปรมาจารย์วิญญาณทั้งหมดขณะอยู่ในสถานะดาเมจที่ได้รับจะเพิ่มขึ้นหลังจากถอดแช่แข็ง</String>
@@ -14399,7 +14411,8 @@ D = 1 ~ 4</String>
   <String Key="AltarHelpBuilding_5">นี่คือแท่นบูชาที่เพิ่มปริมาณการรับเงินเพื่อให้อัญเชิญฮีโร่และใช้ร้านค้าได้ง่ายขึ้น
 
 แนะนำ: การโจมตี, อารีน่า</String>
-  <String Key="ArtifactBuffDataDesc_15010">เมื่อเริ่มการต่อสู้ในการโจมตีและการเดินทาง ความเร็วโจมตีของฮีโร่ออกก่อน +{0}% (ไม่มีเอฟเฟกต์หากไม่มีฮีโร่ออกก่อน)</String>
+  <String Key="ArtifactBuffDataDesc_15010">เมื่อเริ่มการต่อสู้ในการโจมตีและการเดินทาง ความเร็วโจมตีของฮีโร่ออกก่อน +{0}% (ไม่มีเอฟเฟกต์หากไม่มีฮีโร่ออกก่อน)
+</String>
   <String Key="Post_Name_AltarGoldRefund">คืนทองสำหรับการขยายเปลวไฟแท่นบูชา</String>
   <String Key="Post_Desc_AltarGoldRefund">มอบทองที่ใช้ไปสำหรับการขยายเปลวไฟแท่นบูชา</String>
   <String Key="OutgameTutorial_140_00">ท่านราชาแห่งปราสาท ไม่ได้พบกันนานเลย &lt;color=#FFC13D&gt;ข้าคือผู้บัญชาการหน่วยอัศวิน แอสลิน&lt;/color&gt;
@@ -15451,7 +15464,7 @@ D = 1 ~ 4</String>
   <String Key="SeasonInformation">ข้อมูลซีซัน</String>
   <String Key="SeasonInformationHelp_0">คุณดูข้อมูลแชปเตอร์ของหินอัญเชิญจู่โจมที่มีในซีซันนี้ และข้อมูลปรับค่าพลังฮีโร่ที่ถูกปรับแล้วได้</String>
   <String Key="SeasonInformationHelp_1">แตะไอคอนแชปเตอร์เพื่อดูชื่อหินอัญเชิญจู่โจม</String>
-  <String Key="SeasonInformationHelp_2">ในปรับค่าพลังฮีโร่ แตะ ดูทั้งหมด เพื่อดูการปรับค่าพลังของฮีโร่ทุกคน</String>
+  <String Key="SeasonInformationHelp_2">กด ดูทั้งหมด ใน ปรับค่าพลังฮีโร่ เพื่อดูดาเมจที่มอบและอัตราได้รับการป้องกันสัมบูรณ์ปัจจุบันของฮีโร่ทั้งหมด</String>
   <String Key="InvadeSpawnItem">หินอัญเชิญจู่โจม</String>
   <String Key="SkillDesc_60505">เมื่อถูกโจมตีจนโกรธเต็มที่ จะได้รับความเร็วโจมตี +{AttackSpeedPer}% และความเร็วเคลื่อนที่ +{MoveSpeedPer}% และไม่ติดสถานะผิดปกติ</String>
   <String Key="SkillDesc_60665">เมื่อถูกโจมตีจนโกรธเต็มที่ จะได้รับความเร็วโจมตี +{AttackSpeedPer}% และความเร็วเคลื่อนที่ +{MoveSpeedPer}% และไม่ติดสถานะผิดปกติ</String>
@@ -16986,9 +16999,9 @@ D = 1 ~ 4</String>
   <String Key="SubStoryChapterName_1_4">เคธี่ นอสเฟราตู</String>
   <String Key="SubStoryChapterName_1_5">ห้องสมุดของโรเดอริก</String>
   <String Key="SubStoryChapterName_1_6">การแก้แค้น</String>
-  <String Key="SubStoryChapterName_1_7">???</String>
-  <String Key="SubStoryChapterName_1_8">???</String>
-  <String Key="SubStoryChapterName_1_9">???</String>
+  <String Key="SubStoryChapterName_1_7">คลุ้มคลั่ง</String>
+  <String Key="SubStoryChapterName_1_8">ที่ที่ไวน์ควรอยู่</String>
+  <String Key="SubStoryChapterName_1_9">บทส่งท้าย</String>
   <String Key="SubStoryChapterDesc_1">โอฟีเลียที่เกิดมาเป็นบุตรีของตระกูลขุนนางแห่งภาคกลาง เพียงใช้ชีวิตไปตามกระแส เต้นรำในห้องจัดเลี้ยงและดื่มไวน์ แม้หลังจากแต่งงานตามข้อตกลงกับโรเดอริก เจ้าแห่งฟรอสต์วาลด์ ชีวิตก็ยังเหมือนเดิม แต่แล้ววันหนึ่ง หลังถูกการโจมตีจากใครบางคน โอฟีเลียก็ถูกลักพาตัวไปยังที่แห่งหนึ่ง</String>
   <String Key="UnitName_10800">เคธี่</String>
   <String Key="DimensionUnitSummon">อัญเชิญมิติ</String>
@@ -17909,9 +17922,9 @@ D = 1 ~ 4</String>
   <String Key="SkinDesc_Default_10800">&lt;i&gt;เคธี่เกิดมาเป็นครึ่งแวมไพร์ ระหว่างที่เติบโตขึ้น เธอต้องเผชิญกับการดูถูกและการกดขี่จากคนในตระกูลนอสเฟอราตู แต่แทนที่จะหมดหวัง เคธี่เลือกพยายามสร้างโลกที่เผ่าพันธุ์ต่างๆ อยู่ร่วมกันได้&lt;/i&gt;</String>
   <String Key="SkillName_10800">สัญชาตญาณที่ถูกกดไว้</String>
   <String Key="SkillDesc_10800_Short">มอบฟื้นคืนชีพให้ตนเอง เมื่อฟื้นคืนชีพ จะแปลงร่างเป็นร่างแวมไพร์และสกิลกับค่าพลังจะได้รับการเสริมพลัง</String>
-  <String Key="SkillDesc_10800_Long">มอบฟื้นคืนชีพ 1 ครั้งให้ตนเองด้วยพลังชีวิตสูงสุด {Unit@ReviveHpPer}% เมื่อฟื้นคืนชีพ จะคลุ้มคลั่งเป็นเวลา {10805@TransformTime} วินาที แปลงร่างเป็นร่างแวมไพร์ที่มีพลังชีวิต {Unit@TransformHpForDesc}, พลังป้องกัน +{108000@BaseDef}, ดูดเลือดเวทมนตร์ +{108000@MagicDrain}% และปรากฏยังตำแหน่งที่โจมตีศัตรูได้มากที่สุด พร้อมมอบความกลัวแก่ศัตรูในเขต {10815@SplashRangeX}{X}{10815@SplashRangeY} เป็นเวลา {10815@FearTime} วินาที การฟื้นคืนชีพจากสกิลนี้ไม่ซ้อนทับ</String>
+  <String Key="SkillDesc_10800_Long">มอบฟื้นคืนชีพ 1 ครั้งด้วยพลังชีวิตสูงสุด {Unit@ReviveHpPer}% ให้ตนเอง เมื่อฟื้นคืนชีพ จะคลุ้มคลั่งเป็นเวลา {10805@TransformTime} วินาที แปลงร่างเป็นร่างแวมไพร์ที่มีพลังชีวิต {Unit@TransformHpForDesc}%, พลังป้องกัน +{108000@BaseDef}, ดูดเลือดเวทมนตร์ +{108000@MagicDrain}% แล้วลงสู่ตำแหน่งที่โจมตีศัตรูได้มากที่สุด พร้อมมอบความกลัวแก่ศัตรูในเขต {10815@SplashRangeX}{X}{10815@SplashRangeY} เป็นเวลา {10815@FearTime} วินาที การฟื้นคืนชีพจากสกิลนี้ไม่ซ้อนทับ</String>
   <String Key="SkillDesc_10800_Short_2">มอบฟื้นคืนชีพให้ตนเอง เมื่อฟื้นคืนชีพ จะแปลงร่างเป็นร่างแวมไพร์และสกิลกับค่าพลังจะได้รับการเสริมพลัง</String>
-  <String Key="SkillDesc_10800_Long_2">มอบฟื้นคืนชีพ 1 ครั้งให้ตนเองด้วยพลังชีวิตสูงสุด {Unit@ReviveHpPer}% เมื่อฟื้นคืนชีพ จะคลุ้มคลั่งเป็นเวลา {10805@TransformTime} วินาที แปลงร่างเป็นร่างแวมไพร์ที่มีพลังชีวิต {Unit@TransformHpForDesc}, พลังป้องกัน +{108000@BaseDef}, ดูดเลือดเวทมนตร์ +{108000@MagicDrain}% และปรากฏยังตำแหน่งที่โจมตีศัตรูได้มากที่สุด พร้อมมอบความกลัวแก่ศัตรูในเขต {10815@SplashRangeX}{X}{10815@SplashRangeY} เป็นเวลา {10815@FearTime} วินาที ทุกครั้งที่แปลงร่าง พลังชีวิตสูงสุดสุดท้ายของร่างแวมไพร์จะเพิ่มขึ้น +{10800@Unit10800AI_TotalHpPer}% การฟื้นคืนชีพจากสกิลนี้ไม่ซ้อนทับ</String>
+  <String Key="SkillDesc_10800_Long_2">มอบฟื้นคืนชีพ 1 ครั้งด้วยพลังชีวิตสูงสุด {Unit@ReviveHpPer}% ให้ตนเอง เมื่อฟื้นคืนชีพ จะคลุ้มคลั่งเป็นเวลา {10805@TransformTime} วินาที แปลงร่างเป็นร่างแวมไพร์ที่มีพลังชีวิต {Unit@TransformHpForDesc}%, พลังป้องกัน +{108000@BaseDef}, ดูดเลือดเวทมนตร์ +{108000@MagicDrain}% แล้วลงสู่ตำแหน่งที่โจมตีศัตรูได้มากที่สุด พร้อมมอบความกลัวแก่ศัตรูในเขต {10815@SplashRangeX}{X}{10815@SplashRangeY} เป็นเวลา {10815@FearTime} วินาที ทุกครั้งที่แปลงร่าง พลังชีวิตสูงสุดสุดท้ายของร่างแวมไพร์จะเพิ่มขึ้น +{10800@Unit10800AI_TotalHpPer}% การฟื้นคืนชีพจากสกิลนี้ไม่ซ้อนทับ</String>
   <String Key="ActiveSkillName_10800">ปลุกพลัง</String>
   <String Key="ActiveSkillDesc_10800">เมื่อเริ่มการต่อสู้ครั้งถัดไป เคธี่ครึ่งแวมไพร์ทั้งหมดจะได้รับภูมิคุ้มกันสถานะผิดปกติ</String>
   <String Key="ActiveSkillDesc_10803">เมื่อเริ่มการต่อสู้ครั้งถัดไป เคธี่ครึ่งแวมไพร์ทั้งหมดจะได้รับฟื้นคืนชีพ {0} ครั้งและภูมิคุ้มกันสถานะผิดปกติ</String>
@@ -17951,51 +17964,325 @@ D = 1 ~ 4</String>
   <String Key="SkinDesc_107100401">&lt;i&gt;รางวัลเมื่อติดแรงกิ้งในลีกแห่งความอบอุ่นในศึกเดือด&lt;/i&gt;</String>
   <String Key="SkinName_1057002">ราชาดาวรุ่ง ฟาราเอล</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;แสงดาวอันสูงส่งที่สุดที่ถือกำเนิดในยามรุ่งสาง จะกลายเป็นแสงที่เจิดจ้าที่สุดเพื่อฝ่าความมืด&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">ได้รับป้องกันเด็ดขาด</String>
+  <String Key="SuperShieldModulator">โอกาสได้รับการป้องกันสัมบูรณ์</String>
   <String Key="BuildingEffect_BaseDamageReflect">โต้กลับดาเมจ {Value}%
 (ลดดาเมจเวทมนตร์ 50%)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">โต้กลับส่วนหนึ่งของดาเมจที่ฮีโร่ได้รับใส่ศัตรู</String>
-  <String Key="TreasureName_30042">เพราทาอุส</String>
+  <String Key="TreasureName_30042">Ferataus</String>
   <String Key="TreasureSubName_30042">โล่ดำสนิท</String>
-  <String Key="TreasureDesc_30042">โล่ของเบเฮมอธไม่ได้มีไว้แค่ป้องกันเท่านั้น การพุ่งใส่อย่างดุดันของเบเฮมอธพร้อมโล่หนัก สามารถทำให้เกราะที่แข็งแกร่งแค่ไหนก็ยุบได้ในพริบตา</String>
+  <String Key="TreasureDesc_30042">โล่ของเบเฮมอธไม่ได้มีไว้แค่ป้องกันเท่านั้น การพุ่งใส่อย่างดุดันของเบเฮมอธที่นำโล่หนักมหึมาเข้าโจมตี สามารถบดขยี้แม้แต่เกราะที่แข็งแกร่งที่สุดได้ในพริบตา</String>
   <String Key="TreasureSkillName_30042">พุ่งลง</String>
-  <String Key="BuffDataName_3300421">ทลาย I</String>
-  <String Key="BuffDataName_3300422">บุบ I</String>
-  <String Key="BuffDataName_3300423">ไร้พลัง</String>
-  <String Key="BuffDataName_3300424">บุบ II</String>
-  <String Key="BuffDataName_3300425">ทลาย II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">ร้านค้าพิเศษ Pickup เพราทาอุส</String>
-  <String Key="SpecialPackage_1680">แพ็กเกจเพราทาอุส 1</String>
-  <String Key="SpecialPackage_1681">แพ็กเกจเพราทาอุส 2</String>
-  <String Key="SpecialPackage_1682">แพ็กเกจเพราทาอุส 3</String>
-  <String Key="BuffDataDesc_3300421">ทุก {0} คุกคาม ถ่ายโอนดาเมจ +{1} เท่า</String>
-  <String Key="BuffDataDesc_3300422">ดาเมจกายภาพที่ศัตรูติดสถานะไม่เสถียรได้รับ +{0}%</String>
-  <String Key="BuffDataDesc_3300423">ทุกครั้งที่สถานะไม่เสถียรถูกลบ พันธมิตรทั้งหมดได้รับป้องกันเด็ดขาด +{0} ต่อศัตรูที่ถูกลบ 1 ตัว</String>
-  <String Key="BuffDataDesc_3300424">ดาเมจกายภาพที่ศัตรูติดสถานะไม่เสถียรได้รับ +{0}%</String>
-  <String Key="BuffDataDesc_3300425">ทุก {0} คุกคาม ถ่ายโอนดาเมจ +{1} เท่า</String>
-  <String Key="TreasureSkillDesc_3300420">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะทำให้เป้าหมายติดสถานะไม่เสถียร
-ถ้าพันธมิตรสร้างดาเมจกายภาพแก่ศัตรูที่ติดสถานะไม่เสถียร เป็นอย่างน้อย {0}% ของพลังชีวิตสูงสุดของเป้าหมาย จะถ่ายโอน {1}% ของดาเมจนั้นเป็นดาเมจพิเศษไปยังศัตรูอื่นที่ติดสถานะไม่เสถียร แล้วลบสถานะไม่เสถียรจากศัตรูทั้งหมด
-&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่ต่างกันจะทำให้ติดสถานะไม่เสถียร&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300421">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะทำให้เป้าหมายติดสถานะไม่เสถียร
-ถ้าพันธมิตรสร้างดาเมจกายภาพแก่ศัตรูที่ติดสถานะไม่เสถียร เป็นอย่างน้อย {0}% ของพลังชีวิตสูงสุดของเป้าหมาย จะถ่ายโอน {1}% ของดาเมจนั้นเป็นดาเมจพิเศษไปยังศัตรูอื่นที่ติดสถานะไม่เสถียร แล้วลบสถานะไม่เสถียรจากศัตรูทั้งหมด
-ทุก {2} คุกคาม ถ่ายโอนดาเมจ +{3} เท่า
-&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่ต่างกันจะทำให้ติดสถานะไม่เสถียร&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300422">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะทำให้เป้าหมายติดสถานะไม่เสถียร
-ถ้าพันธมิตรสร้างดาเมจกายภาพแก่ศัตรูที่ติดสถานะไม่เสถียร เป็นอย่างน้อย {0}% ของพลังชีวิตสูงสุดของเป้าหมาย จะถ่ายโอน {1}% ของดาเมจนั้นเป็นดาเมจพิเศษไปยังศัตรูอื่นที่ติดสถานะไม่เสถียร แล้วลบสถานะไม่เสถียรจากศัตรูทั้งหมด
-ทุก {2} คุกคาม ถ่ายโอนดาเมจ +{3} เท่า
-ดาเมจกายภาพที่ศัตรูติดสถานะไม่เสถียรได้รับ +{4}%
-การเพิ่มดาเมจกายภาพที่ได้รับนี้ไม่ซ้อนทับ และใช้เฉพาะค่าสูงที่สุด
-&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่ต่างกันจะทำให้ติดสถานะไม่เสถียร&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300423">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะทำให้เป้าหมายติดสถานะไม่เสถียร
-ถ้าพันธมิตรสร้างดาเมจกายภาพแก่ศัตรูที่ติดสถานะไม่เสถียร เป็นอย่างน้อย {0}% ของพลังชีวิตสูงสุดของเป้าหมาย จะถ่ายโอน {1}% ของดาเมจนั้นเป็นดาเมจพิเศษไปยังศัตรูอื่นที่ติดสถานะไม่เสถียร แล้วลบสถานะไม่เสถียรจากศัตรูทั้งหมด
-ทุก {2} คุกคาม ถ่ายโอนดาเมจ +{3} เท่า
-ดาเมจกายภาพที่ศัตรูติดสถานะไม่เสถียรได้รับ +{4}%
-การเพิ่มดาเมจกายภาพที่ได้รับนี้ไม่ซ้อนทับ และใช้เฉพาะค่าสูงที่สุด
-ทุกครั้งที่สถานะไม่เสถียรถูกลบ พันธมิตรทั้งหมดได้รับป้องกันเด็ดขาด +{5} ต่อศัตรูที่ถูกลบ 1 ตัว
-&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่ต่างกันจะทำให้ติดสถานะไม่เสถียร&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="BuffDataName_3300421">กดดัน I</String>
+  <String Key="BuffDataName_3300422">อ่อนแรง I</String>
+  <String Key="BuffDataName_3300423">แตกสลาย</String>
+  <String Key="BuffDataName_3300424">อ่อนแรง II</String>
+  <String Key="BuffDataName_3300425">กดดัน II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">ร้านค้าพิเศษ Ferataus Pickup</String>
+  <String Key="SpecialPackage_1680">แพ็กเกจ Ferataus 1</String>
+  <String Key="SpecialPackage_1681">แพ็กเกจ Ferataus 2</String>
+  <String Key="SpecialPackage_1682">แพ็กเกจ Ferataus 3</String>
+  <String Key="BuffDataDesc_3300421">ถ่ายโอนดาเมจ +{1}x ต่อคุกคาม {0}</String>
+  <String Key="BuffDataDesc_3300422">เมื่อลบสถานะไม่เสถียร เป้าหมายจะสตัน {0} วินาที</String>
+  <String Key="BuffDataDesc_3300423">ดาเมจกายภาพที่ได้รับของศัตรูที่มีสถานะไม่เสถียร +{0}% (การเพิ่มดาเมจกายภาพที่ได้รับไม่ซ้อนทับ และใช้เฉพาะค่าที่สูงที่สุด)</String>
+  <String Key="BuffDataDesc_3300424">เมื่อลบสถานะไม่เสถียร เป้าหมายจะสตัน {0} วินาที</String>
+  <String Key="BuffDataDesc_3300425">ถ่ายโอนดาเมจ +{1}x ต่อคุกคาม {0}</String>
+  <String Key="TreasureSkillDesc_3300420">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะมอบสถานะไม่เสถียรแก่เป้าหมาย
+หากพันธมิตรสร้างดาเมจกายภาพในครั้งเดียวใส่ศัตรูที่มีสถานะไม่เสถียร ตั้งแต่ {0}% ของพลังชีวิตสูงสุดของเป้าหมายโดยไม่รวมบาเรียขึ้นไป จะถ่ายโอน {1}% ของดาเมจเป็นดาเมจพิเศษไปยังศัตรูอื่นที่มีสถานะไม่เสถียร จากนั้นลบสถานะไม่เสถียรทั้งหมด
+&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่คนละตัวจะมอบสถานะไม่เสถียรก็ตาม&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะมอบสถานะไม่เสถียรแก่เป้าหมาย
+หากพันธมิตรสร้างดาเมจกายภาพในครั้งเดียวใส่ศัตรูที่มีสถานะไม่เสถียร ตั้งแต่ {0}% ของพลังชีวิตสูงสุดของเป้าหมายโดยไม่รวมบาเรียขึ้นไป จะถ่ายโอน {1}% ของดาเมจเป็นดาเมจพิเศษไปยังศัตรูอื่นที่มีสถานะไม่เสถียร จากนั้นลบสถานะไม่เสถียรทั้งหมด
+ถ่ายโอนดาเมจ +{3}x ต่อคุกคาม {2}
+&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่คนละตัวจะมอบสถานะไม่เสถียรก็ตาม&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะมอบสถานะไม่เสถียรแก่เป้าหมาย
+หากพันธมิตรสร้างดาเมจกายภาพในครั้งเดียวใส่ศัตรูที่มีสถานะไม่เสถียร ตั้งแต่ {0}% ของพลังชีวิตสูงสุดของเป้าหมายโดยไม่รวมบาเรียขึ้นไป จะถ่ายโอน {1}% ของดาเมจเป็นดาเมจพิเศษไปยังศัตรูอื่นที่มีสถานะไม่เสถียร จากนั้นลบสถานะไม่เสถียรทั้งหมด
+ถ่ายโอนดาเมจ +{3}x ต่อคุกคาม {2}
+เมื่อลบสถานะไม่เสถียร เป้าหมายจะสตัน {4} วินาที
+&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่คนละตัวจะมอบสถานะไม่เสถียรก็ตาม&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">เมื่อสร้างดาเมจสกิลแก่ศัตรู จะมอบสถานะไม่เสถียรแก่เป้าหมาย
+หากพันธมิตรสร้างดาเมจกายภาพในครั้งเดียวใส่ศัตรูที่มีสถานะไม่เสถียร ตั้งแต่ {0}% ของพลังชีวิตสูงสุดของเป้าหมายโดยไม่รวมบาเรียขึ้นไป จะถ่ายโอน {1}% ของดาเมจเป็นดาเมจพิเศษไปยังศัตรูอื่นที่มีสถานะไม่เสถียร จากนั้นลบสถานะไม่เสถียรทั้งหมด
+ถ่ายโอนดาเมจ +{3}x ต่อคุกคาม {2}
+เมื่อลบสถานะไม่เสถียร เป้าหมายจะสตัน {4} วินาที
+ดาเมจกายภาพที่ได้รับของศัตรูที่มีสถานะไม่เสถียร +{5}%
+การเพิ่มดาเมจกายภาพที่ได้รับไม่ซ้อนทับ และใช้เฉพาะค่าที่สูงที่สุด
+&lt;color=#808080&gt;&lt;i&gt;เอฟเฟกต์นี้ใช้ร่วมกัน แม้ฮีโร่คนละตัวจะมอบสถานะไม่เสถียรก็ตาม&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="SpecialShop_TreasureDoublePickUp10014">ร้านค้าพิเศษ Pickup ขุมทรัพย์</String>
   <String Key="SpecialPackage_1676">แพ็กเกจหินอัญเชิญ Pickup ขุมทรัพย์ 1</String>
   <String Key="SpecialPackage_1677">แพ็กเกจหินอัญเชิญ Pickup ขุมทรัพย์ 2</String>
   <String Key="SpecialPackage_1678">แพ็กเกจคาเอลุส</String>
   <String Key="SpecialPackage_1679">แพ็กเกจเจ้าซุกซน</String>
+  <String Key="CannotSummonByWatchingAdsWhileInBattleAlert">ใช้ไม่ได้ระหว่างการต่อสู้</String>
+  <String Key="AdsReroll">สุ่มใหม่ฟรี</String>
+  <String Key="AdsDeckSet">รีเซ็ตการจัดทีมฟรี</String>
+  <String Key="ResetPVPMatch">รีเซ็ต</String>
+  <String Key="CannotResetPVPMatchByWatchingAdsAlert">คุณใช้โอกาสรีเซ็ตของวันนี้หมดแล้ว</String>
+  <String Key="PVPDeckSettingReTryAdsPopupTitle">จัดทีมใหม่</String>
+  <String Key="PVPDeckSettingReTryAdsPopupDesc">ต้องการดูโฆษณาและจัดทีมใหม่ฟรีหรือไม่?
+เมื่อซื้อคิงก็อดพาส โฆษณาในเกมจะถูกลบออก
+หากเลือกใช้เพชร จะไม่สามารถใช้การจัดทีมใหม่ฟรีจากโฆษณาในวันนี้ได้</String>
+  <String Key="PVPDeckSettingReTryAdsCancelAlert">หากปิด หน้าต่างนี้ การจัดทีมใหม่ฟรีจากโฆษณาจะถูกยกเลิก ต้องการยกเลิกการจัดทีมใหม่หรือไม่?</String>
+  <String Key="SuperShieldAdaptabilityPer">อัพเกรดแท่นบูชาเลือด {0}
+โอกาสได้รับการป้องกันสัมบูรณ์ +{1}%</String>
+  <String Key="SuperShieldAdaptabilityPer_Piece">อัพเกรดแท่นบูชาเลือด
+โอกาสได้รับการป้องกันสัมบูรณ์เพิ่มขึ้น</String>
+  <String Key="SkillDesc_1019000_Short">พุ่งลงใส่ศัตรูที่ใกล้ที่สุด สร้างดาเมจ {Damage:BaseValue}+{Damage:MAtkPer} ใน {SplashRangeX}{X}{SplashRangeY} และผลักเป้าหมายถอย {Knockback} ช่อง</String>
+  <String Key="SkillDesc_1019001_Short">พุ่งลงใส่ศัตรูที่ใกล้ที่สุด สร้างดาเมจ {Damage:BaseValue}+{Damage:MAtkPer} ใน {SplashRangeSum} ช่องรอบตัว และผลักเป้าหมายถอย {Knockback} ช่อง</String>
+  <String Key="SkillDesc_1019000_Long">พุ่งลงหน้าศัตรูที่ใกล้ที่สุดภายใน {RangeX}{X}{RangeY} ใช้พลังของโล่หนักสร้างดาเมจ {Damage:BaseValue}+{Damage:MAtkPer} แก่ศัตรูทั้งหมดในเขต {SplashRangeX}{X}{SplashRangeY} และผลักถอย {Knockback} ช่อง</String>
+  <String Key="SkillDesc_1019001_Long">พุ่งลงหน้าศัตรูที่ใกล้ที่สุดภายใน {RangeX}{X}{RangeY} ใช้พลังของโล่หนักสร้างดาเมจ {Damage:BaseValue}+{Damage:MAtkPer} แก่ศัตรูทั้งหมดในเขตรอบ {SplashRangeSum} ช่อง และผลักถอย {Knockback} ช่อง</String>
+  <String Key="ChallengeBossDesc_72">มีช่องเป้าหมายที่โจมตีได้ &lt;color=#8DFFFF&gt;1x1&lt;/color&gt; และมีขนาด &lt;color=#8DFFFF&gt;3x3&lt;/color&gt; ช่อง</String>
+  <String Key="SkillName_30000051">แข็งตัว</String>
+  <String Key="SkillDesc_30000051">ใช้ทันทีเมื่อเริ่มการต่อสู้ คุกคามของบอสเพิ่มขึ้น &lt;color=#ffd264&gt;ระดับความยากท้าทายX&lt;/color&gt;{DescDefPen} และดาเมจที่ได้รับซึ่งไม่ได้เกิดจากโต้กลับ/ตอบโต้ลดลง &lt;color=#ffd264&gt;ระดับความยากท้าทายX&lt;/color&gt;{DescReflectDef}%. หากระดับความยากท้าทาย 20 ขึ้นไป พลังป้องกันจะเพิ่มขึ้นอีก {DescDef} ต่อระดับความยาก</String>
+  <String Key="SkillName_30000052">ปลดปล่อย</String>
+  <String Key="SkillDesc_30000052">สร้างดาเมจรวม {DescDamage} แก่ฮีโร่ในเขต {SplashRangeX}{X}{SplashRangeY} ตลอด {DescAttackTime} วินาที</String>
+  <String Key="SkillName_30000053">ทำลายล้าง</String>
+  <String Key="SkillDesc_30000053">สร้างดาเมจสกิลกายภาพ {Damage} แก่ศัตรูทั้งหมด หากระดับความยากท้าทาย 10 หรือต่ำกว่า จะสร้างดาเมจเท่ากับ {MaxDamage:HpPer:BaseValue}% ของพลังชีวิตสูงสุดของบอสแทน ทะลุพลังป้องกัน {DefBreak}%</String>
+  <String Key="StoryClearBenefit_430072000">คลัง - ได้รับโล่แห่งการล้างแค้น
+
+&lt;i&gt;โล่แห่งการล้างแค้น: ได้รับโต้กลับดาเมจ&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072001">คลัง - ได้รับสร้อยคอแห่งความหวัง
+
+&lt;i&gt;สร้อยคอแห่งความหวัง: ได้รับฟื้นคืนชีพหลังเริ่มการต่อสู้ไประยะหนึ่ง&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072002">ในด่านบอส ได้รับไอเทม - คทารักษา
+
+&lt;i&gt;คทารักษา: ดาเมจที่มอบสุดท้ายลดลง การรักษาสุดท้ายเพิ่มขึ้น&lt;/i&gt;</String>
+  <String Key="ItemName_60030">คทารักษา</String>
+  <String Key="ItemDesc_60030">ดาเมจที่มอบสุดท้าย {0}%, การรักษาสุดท้าย +{1}%</String>
+  <String Key="StoryInventoryItemName_230100">โล่แห่งการล้างแค้น</String>
+  <String Key="StoryInventoryItemDesc_230100">โต้กลับดาเมจ +{0}% (ดาเมจเวทมนตร์ลดลงครึ่งหนึ่ง)</String>
+  <String Key="StoryInventoryItemName_230110">สร้อยคอแห่งความหวัง</String>
+  <String Key="StoryInventoryItemDesc_230110">หลังเริ่มการต่อสู้ {0} วินาที มอบฟื้นคืนชีพ {1} ครั้งแก่พันธมิตรทั้งหมด</String>
+  <String Key="StoryModeDialogue_2010700_0_0_System">กองทัพเขตแดนของโอฟีเลียร่วมมือกับพระจันทร์สีแดง ออกเดินทัพสู่ชายแดนนอสเฟอราตู</String>
+  <String Key="StoryModeDialogue_2010700_0_1_System">วลาดเดินเซ พลางมองโอฟีเลียจากที่ไกล ดวงตาของเขาเปล่งแสงสีแดงฉาน</String>
+  <String Key="StoryModeDialogue_2010700_0_2_System">ไอสีดำเข้มแผ่คลุมเขาอยู่</String>
+  <String Key="StoryModeDialogue_2010700_0_3_Vlad">ท่านหญิงโอฟีเลีย ได้พบกันอีกครั้งเช่นนี้ ช่างน่ายินดียิ่ง</String>
+  <String Key="StoryModeDialogue_2010700_0_4_Vlad">หรือว่าตอนนี้ข้าควรเรียกท่านว่าผู้ครองแดนแล้ว? ความงามนั้นไม่จางหายเลย</String>
+  <String Key="StoryModeDialogue_2010700_0_5_Vlad">เป็นอย่างไรบ้าง การมีชีวิตอยู่ในฐานะมนุษย์นั้นพอทนได้หรือ? ท่านยังไม่เบื่อความตายหรือ?</String>
+  <String Key="StoryModeDialogue_2010700_0_6_Vlad">ยังไม่สายเกินไปที่จะมาเป็นครอบครัวเดียวกับข้า...</String>
+  <String Key="StoryModeDialogue_2010700_1_0_System">อีกด้านหนึ่ง เคธี่เองก็เตรียมออกศึกเช่นกัน นอกหน้าต่างห้องหนังสือ เธอมองเห็นธงของพระจันทร์สีแดงกำลังถูกชักขึ้น</String>
+  <String Key="StoryModeDialogue_2010700_1_1_Cathy">ตั้งแต่ภรรยาของผู้ครองแดนคนก่อนกลายเป็นผู้ครองแดนคนใหม่ ฉันก็ส่งจดหมายไปหลายครั้ง ขอเข้าพบด้วย แต่ก็ไม่มีอะไรตอบกลับมา</String>
+  <String Key="StoryModeDialogue_2010700_1_2_Cathy">ตอนนี้ฉันเข้าไปฟรอสต์วาลด์ไม่ได้แล้ว สุดท้ายก็ลงเอยแบบนี้สินะ...</String>
+  <String Key="StoryModeDialogue_2010700_1_3_Cathy">ถ้าวลาดตาย เรื่องนี้จะไม่จบแค่ปัญหาชายแดน</String>
+  <String Key="StoryModeDialogue_2010700_1_4_Cathy">กำลังหลักของนอสเฟอราตูจะออกมาตอบโต้ทางการเมือง โดยอ้างว่า 'มนุษย์สังหารขุนนางของตระกูล' แล้วมันจะกลายเป็นศึกเต็มกำลังระหว่างประเทศ</String>
+  <String Key="StoryModeDialogue_2010700_1_6_Cathy">ตอนนี้สิ่งที่ทำได้มีแค่.... ฉันต้องไปเอง จัดการเรื่องนี้ แล้วเผชิญหน้ากับผู้ครองแดนคนใหม่ นั่นคือทางเดียวที่เหลืออยู่</String>
+  <String Key="StoryModeDialogue_2010700_2_0_System">ฝ่ายของโอฟีเลีย</String>
+  <String Key="StoryModeDialogue_2010700_2_1_System">โอฟีเลียบัญชาการกองกำลังจากแนวหลัง ส่วนเนเรียยิงหน้าไม้จากแนวหน้า ฝ่าสนามรบไปยังคฤหาสน์ของวลาด โมเรน</String>
+  <String Key="StoryModeDialogue_2010700_2_2_Solar">ท่านโอฟีเลีย ด้านหลัง!</String>
+  <String Key="StoryModeDialogue_2010700_2_3_Solar">อึก... อา เจ็บนิดหน่อยนะคะ</String>
+  <String Key="StoryModeDialogue_2010700_2_4_Ophelia">โซลา! หมอทหาร! รักษาเธอที!</String>
+  <String Key="StoryModeDialogue_2010700_2_5_Solar">ไม่เป็นไรค่ะ ฉันคิดว่าฉันใช้ชีวิตอย่างมีความสุขมาพอแล้ว! ฉันจะคอยเอาใจช่วยทุกคนต่อไป....</String>
+  <String Key="StoryModeDialogue_2010700_2_6_System">โอฟีเลียรู้ดีว่าสงครามย่อมมาพร้อมเลือดและความตายเสมอ</String>
+  <String Key="StoryModeDialogue_2010700_2_7_System">ตลอด 3 เดือน เธอเรียนแล้วเรียนอีก แต่การรู้กับการเจอด้วยตนเองนั้นไม่เหมือนกัน</String>
+  <String Key="StoryModeDialogue_2010700_2_8_System">เธอเพิ่งรู้จักโซลามาได้ไม่กี่เดือน แต่แค่คิดว่าจะเสียโซลาไป เลือดในกายก็เดือดพล่าน</String>
+  <String Key="StoryModeDialogue_2010700_2_9_System">ยิ่งไปกว่านั้น การต่อสู้นี้ก็เป็นสิ่งที่เธอเลือกเองไม่ใช่หรือ</String>
+  <String Key="StoryModeDialogue_2010700_2_10_System">สายตาของโอฟีเลียมองเห็นเนเรียที่กำลังต่อสู้อยู่</String>
+  <String Key="StoryModeDialogue_2010700_2_11_System">โดยไม่แม้แต่จะดูความปลอดภัยของพวกพ้อง เธอพุ่งลึกเข้าไปในสนามรบเพียงลำพัง</String>
+  <String Key="StoryModeDialogue_2010700_2_12_System">ภาพของเธอที่หัวเราะอย่างบ้าคลั่ง พลางร่ายรำและสังหารแวมไพร์นั้น แทบไม่ต่างจากวลาด โมเรนผู้เคยกระหายเลือดเลย</String>
+  <String Key="StoryModeDialogue_2010700_2_13_Solar">...ท่านโอฟีเลีย ฮิฮิ ฉัน....ยังไม่ตายค่ะ</String>
+  <String Key="StoryModeDialogue_2010700_2_14_Ophelia">อา โซลา โชคดีจริงๆ โชคดีจริงๆ</String>
+  <String Key="StoryModeDialogue_2010700_2_14b_Ophelia">ห้ามขยับเด็ดขาดนะ ไม่ต้องพูดแล้วก็ได้</String>
+  <String Key="StoryModeDialogue_2010700_2_15_System">โซลาถูกส่งต่อให้หมอทหาร โอฟีเลียปล่อยมือของโซลาแล้วลุกขึ้น</String>
+  <String Key="StoryModeDialogue_2010700_2_16_Ophelia">(เพื่อให้ความสูญเสียน้อยที่สุด ฉันจะจบการต่อสู้นี้ให้เร็วและมีประสิทธิภาพ)</String>
+  <String Key="StoryModeDialogue_2010700_2_17_Ophelia">ทุกกองทัพ เดินหน้า</String>
+  <String Key="StoryModeDialogue_2010700_3_0_System">อีกด้านหนึ่ง เนเรียโลดแล่นไปทั่วสนามรบเพียงลำพัง และเริ่มการต่อสู้... ไม่สิ การสังหารหมู่</String>
+  <String Key="StoryModeDialogue_2010700_3_1_System">รอยยิ้มค่อยๆ ปรากฏบนใบหน้าของเนเรีย</String>
+  <String Key="StoryModeDialogue_2010700_3_2_Neria">อา... ไม่มีอะไรน่าฟังไปกว่าเสียงกรีดร้องของแวมไพร์อีกแล้ว</String>
+  <String Key="StoryModeDialogue_2010700_3_3_Neria">นั่นคือคุณค่าการมีอยู่ของพวกเจ้า อาฮ่าฮ่าฮ่าฮ่า!</String>
+  <String Key="StoryModeDialogue_2010700_3_4_RedMoon1">ท่านเนเรีย! ท่านโซลาได้รับบาดเจ็บสาหัสและล่าถอยแล้ว!</String>
+  <String Key="StoryModeDialogue_2010700_3_5_Neria">เข้าใจแล้ว</String>
+  <String Key="StoryModeDialogue_2010700_3_6_System">เนเรียที่ยังต่อสู้อยู่ พบกับเคธี่ที่กำลังรุกไปข้างหน้าพร้อมทำให้กองทัพฟรอสต์วาลด์ติดสตัน</String>
+  <String Key="StoryModeDialogue_2010700_3_7a_Cathy">เนเรีย! คิดจะจัดการสถานการณ์นี้ยังไง!</String>
+  <String Key="StoryModeDialogue_2010700_3_7b_Cathy">นี่กลายเป็นสงครามไปแล้ว! ต่อให้เป็นฉันก็หยุดไม่ได้!</String>
+  <String Key="StoryModeDialogue_2010700_3_8_Ophelia">คนนั้นคืออเลสเซีย นอสเฟอราตูหรือคะ เนเรีย?</String>
+  <String Key="StoryModeDialogue_2010700_3_9a_Neria">จัดการงั้นหรือ? ตอนนี้จะเป็นยังไงก็ไม่สำคัญแล้ว</String>
+  <String Key="StoryModeDialogue_2010700_3_9b_Neria">ในตัวเจ้าก็มีเลือดของแวมไพร์สกปรกไหลอยู่ครึ่งหนึ่งเหมือนกัน ข้าจะฆ่าครึ่งนั้นทิ้งเอง</String>
+  <String Key="StoryModeDialogue_2010700_3_10_Ophelia">สำคัญสิคะ! เป้าหมายของฉันมีแค่วลาด โมเรน ฉันไม่อยากให้ความเสียหายลุกลามไปกว่านี้</String>
+  <String Key="StoryModeDialogue_2010700_3_11_Neria">โอฟีเลีย คนที่อยู่ตรงนั้นคือผู้บังคับบัญชาของวลาด โมเรน นางคือศัตรูของพวกเรา</String>
+  <String Key="StoryModeDialogue_2010700_3_12_Cathy">นี่ คุณนั่นแหละ! คุณคือท่านโอฟีเลียใช่ไหม? มาคุยกับฉันหน่อย</String>
+  <String Key="StoryModeDialogue_2010700_3_13_Neria">ไม่จำเป็นต้องฟังคำพูดของผู้หญิงคนนั้น</String>
+  <String Key="StoryModeDialogue_2010700_3_14_Ophelia">ฉันจะฟังแล้วตัดสินใจด้วยตัวเอง!</String>
+  <String Key="StoryModeDialogue_2010700_3_15_Cathy">ใช่! ตอนนี้ต้องหยุดสงครามก่อน</String>
+  <String Key="StoryModeDialogue_2010700_3_16_System">แต่ความพยายามของเคธี่ก็สูญเปล่า วลาดปรากฏตัวขึ้นตรงหน้าโอฟีเลีย</String>
+  <String Key="StoryModeDialogue_2010700_3_17_System">พลังสีดำที่ห่อหุ้มวลาดพุ่งออกมาอย่างขุ่นมัวยิ่งกว่าเดิม</String>
+  <String Key="StoryModeDialogue_2010800_0_0_Vlad">เพื่อทำสันติกับมนุษย์ ข้าจึงอดกลั้นมาหลายปี</String>
+  <String Key="StoryModeDialogue_2010800_0_1_Vlad">เพราะพวกเขาบอกว่าข้าก่อเรื่องใหญ่ ข้าจึงไม่ทำอะไรเลยอยู่หลายเดือน และยังคอยห้ามครอบครัวของข้าไว้ด้วย</String>
+  <String Key="StoryModeDialogue_2010800_0_2_Vlad">แต่แล้ว! ทุกอย่างกลับพังทลาย และข้าได้ยินเสียงกรีดร้องของครอบครัว</String>
+  <String Key="StoryModeDialogue_2010800_0_3_Vlad">ข้าจะไม่อดทนอีกแล้ว ไม่มีอะไรหยุดข้าได้อีก!</String>
+  <String Key="StoryModeDialogue_2010800_0_4_Ophelia">นั่น... คือวลาด โมเรนจริงหรือคะ?</String>
+  <String Key="StoryModeDialogue_2010800_0_5_Neria">นั่นคือร่างที่แท้จริงของแวมไพร์ สัตว์ประหลาดที่ถูกเลือดกลืนกิน และทำลายพร้อมสังหารทุกสิ่ง!</String>
+  <String Key="StoryModeDialogue_2010800_0_6_Cathy">......วลาด เกิดอะไรขึ้นกับนายกันแน่?</String>
+  <String Key="StoryModeDialogue_2010800_0_7_Vlad">โลกที่น่าเกลียดสิ้นดี ข้าจะทำลายทุกสิ่ง!</String>
+  <String Key="StoryModeDialogue_2010800_0_8_System">วลาดคุกเข่าลง พลังสีดำค่อยๆ จางหายไป และแววตาเดิมของเขาก็กลับมา</String>
+  <String Key="StoryModeDialogue_2010800_0_9_Vlad">เคธี่... คุณหนู...</String>
+  <String Key="StoryModeDialogue_2010800_0_10_Cathy">วลาด</String>
+  <String Key="StoryModeDialogue_2010800_0_11_Cathy">…ขอโทษนะ</String>
+  <String Key="StoryModeDialogue_2010800_0_12_System">เคธี่ตะโกนเสียงดังจนทั้งสนามรบได้ยิน</String>
+  <String Key="StoryModeDialogue_2010800_0_13_Cathy">ฉันคืออเลสเซีย นอสเฟอราตู!</String>
+  <String Key="StoryModeDialogue_2010800_0_13b_Cathy">ในฐานะสมาชิกตระกูลนอสเฟอราตู ฉันได้จัดการวลาด โมเรนที่คลุ้มคลั่งด้วยตัวเอง</String>
+  <String Key="StoryModeDialogue_2010800_0_14_Cathy">ต้นเหตุของเรื่องทั้งหมดคือการคลุ้มคลั่งของวลาด โมเรนเพียงคนเดียว และตอนนี้วลาด โมเรนตายแล้ว จึงไม่จำเป็นต้องมีการต่อสู้และการพลีชีพอีก!</String>
+  <String Key="StoryModeDialogue_2010800_0_15_Cathy">เหล่าแวมไพร์ใต้บัญชาของวลาด โมเรนเอ๋ย ขอสั่งพวกเจ้าด้วยนามของนอสเฟอราตู!</String>
+  <String Key="StoryModeDialogue_2010800_0_15b_Cathy">ยุติการต่อสู้และล่าถอย!</String>
+  <String Key="StoryModeDialogue_2010800_0_16_Cathy">โอฟีเลีย โปรดรีบหยุดการพลีชีพที่ไร้ความหมายนี้ด้วย</String>
+  <String Key="StoryModeDialogue_2010800_0_17_Ophelia">กองทัพฟรอสต์วาลด์ทั้งหมด! หยุดการต่อสู้และถอยทัพ! เคลื่อนย้ายผู้บาดเจ็บและผู้เสียชีวิต!</String>
+  <String Key="StoryModeDialogue_2010800_0_18_Neria">จะจบแบบนี้ไม่ได้ พระจันทร์สีแดง...!</String>
+  <String Key="StoryModeDialogue_2010800_0_19_Ophelia">เนเรีย คุณทำสิ่งนี้เพื่อชาวเขตแดนจริงๆ หรือคะ?</String>
+  <String Key="StoryModeDialogue_2010800_0_19b_Ophelia">พอมองสีหน้าของคุณแล้ว เหมือนคุณแค่กำลังสนุกกับการนองเลือด</String>
+  <String Key="StoryModeDialogue_2010800_0_20_Neria">ข้ารึ? การลงทัณฑ์แวมไพร์จะเป็นการนองเลือดได้อย่างไร มันก็ไม่ต่างจากการกำจัดแมลง...</String>
+  <String Key="StoryModeDialogue_2010800_0_21_Cathy">คำพูดแบบนั้น สำหรับแวมไพร์แล้วมันน่าฟังจริงๆ นะ เนเรีย ไปได้แล้ว ก่อนที่ฉันจะหมดความอดทนจริงๆ</String>
+  <String Key="StoryModeDialogue_2010800_0_22_Neria">... พระจันทร์สีแดง ถอยทัพ!</String>
+  <String Key="StoryModeDialogue_2010800_1_0_Cathy">โอฟีเลีย ฉันชื่ออเลสเซีย นอสเฟอราตูค่ะ</String>
+  <String Key="StoryModeDialogue_2010800_1_1a_Cathy">เรื่องการเสียชีวิตของโรเดอริก ฟรอสต์วาลด์... ฉันไม่รู้จะพูดอะไรจริงๆ</String>
+  <String Key="StoryModeDialogue_2010800_1_1b_Cathy">ขอโทษค่ะ ฉันมีส่วนรับผิดชอบมาก</String>
+  <String Key="StoryModeDialogue_2010800_1_2_Cathy">แต่ถ้าพูดกันตามตรง ฉันอยากหยุดสงครามระหว่างแวมไพร์กับมนุษย์ และอยากหยุดการพลีชีพของทั้งสองฝ่ายตั้งแต่ตอนนี้</String>
+  <String Key="StoryModeDialogue_2010800_1_3_Ophelia">อเลสเซีย นอสเฟอราตู ฉันอ่านจดหมายที่คุณส่งมาทั้งหมดแล้ว</String>
+  <String Key="StoryModeDialogue_2010800_1_4_Ophelia">เพียงแต่สถานการณ์ตอนนั้นไม่เอื้อให้ฉันตอบรับในทางที่ดีได้</String>
+  <String Key="StoryModeDialogue_2010800_1_5_Ophelia">ฉันเองก็อยากหยุดการพลีชีพที่มากกว่านี้เช่นกัน</String>
+  <String Key="StoryModeDialogue_2010800_1_5b_Ophelia">ภายหลังฉันจะส่งหนังสืออย่างเป็นทางการไปให้</String>
+  <String Key="StoryModeDialogue_2010800_1_6_Cathy">ถ้างั้นฉันขอตัวก่อนนะคะ</String>
+  <String Key="StoryModeDialogue_2010800_1_7_System">เคธี่หันหลังกลับ พร้อมส่งสายตาแข็งกร้าวไปยังเนเรียแวบหนึ่ง</String>
+  <String Key="StoryModeDialogue_2010800_1_8_System">หลังจากทุกคนจากไป สิ่งที่เหลือให้โอฟีเลียมีเพียงความว่างเปล่า</String>
+  <String Key="StoryModeDialogue_2010800_2_0_Ophelia">โรเดอริก หัวใจของฉันว่างเปล่าเหลือเกิน</String>
+  <String Key="StoryModeDialogue_2010800_2_1_Ophelia">ตอนที่ฉันอยู่ทวีปกลาง ฉันคิดว่าแค่ทำหน้าที่เป็นคุณหนูผู้สูงศักดิ์ที่งดงามให้ดีก็พอ และไม่เคยตั้งคำถามเลย</String>
+  <String Key="StoryModeDialogue_2010800_2_2_Ophelia">แม้ตอนที่ฉันมายังภาคเหนือเพื่อการแต่งงานทางการเมือง ที่นี่หนาวและไม่มีงานเลี้ยง ฉันก็แค่ยอมรับมัน</String>
+  <String Key="StoryModeDialogue_2010800_2_3_Ophelia">แม้แต่ตอนที่ถูกลักพาตัว ฉันก็ยังหลงเสน่ห์แวมไพร์อย่างหมดใจ</String>
+  <String Key="StoryModeDialogue_2010800_2_4_Ophelia">ครั้งนี้เป็นครั้งแรกที่ฉันยืนหยัดตามใจตัวเอง และล้างแค้นให้โรเดอริกได้</String>
+  <String Key="StoryModeDialogue_2010800_2_4b_Ophelia">เป็นอย่างไรบ้างคะ? ฉันทำได้ดีไหม?</String>
+  <String Key="StoryModeDialogue_2010800_2_5_Ophelia">…</String>
+  <String Key="StoryModeDialogue_2010800_2_6_Ophelia">อาจฟังดูแปลกนะคะ แต่ตอนที่เห็นวลาดล้มลง หัวใจของฉันกลับเจ็บปวด</String>
+  <String Key="StoryModeDialogue_2010800_2_7_Ophelia">ทั้งที่เขาเป็นคนฆ่าโรเดอริก ทั้งที่เขาเป็นคนที่คิดจะทำให้ฉันเป็นเหยื่อ</String>
+  <String Key="StoryModeDialogue_2010800_2_8_Ophelia">แต่ตอนอยู่ในงานเลี้ยง... ตัวตนนั้นของเขาเป็นเรื่องจริงนี่คะ ไม่ใช่เรื่องโกหกทั้งหมด</String>
+  <String Key="StoryModeDialogue_2010800_2_9_Ophelia">เขาเป็นคนไม่ดีจริง แต่บางทีเขาอาจแค่ป่วยด้วยความหมกมุ่นและแรงกระตุ้น จนมองเห็นอะไรได้แคบลง... เหมือนเนเรียเลยค่ะ</String>
+  <String Key="StoryModeDialogue_2010800_2_11_Ophelia">…ขอบคุณนะคะ โรเดอริก ฉันตัดสินใจแล้วว่าจะสืบต่อสิ่งที่คุณทำ</String>
+  <String Key="StoryModeDialogue_2010800_2_12_Ophelia">จากนี้ไป ฉันอยากเป็นเจ้าเขตแดนที่ปกป้องชาวเขตแดนด้วยการตัดสินใจของตัวเอง โดยไม่ถูกคนอื่นชักนำ</String>
+  <String Key="StoryModeDialogue_2010800_2_13_Ophelia">ฉันจะพยายามให้เต็มที่ค่ะ โปรดเฝ้ามองฉันอยู่ข้างๆ และช่วยฉันต่อไปด้วย</String>
+  <String Key="StoryModeDialogue_2010800_3_0_System">โอฟีเลียเดินเข้าไปใกล้ร่างของวลาดเพื่อไว้อาลัย ที่จุดซึ่งวลาดล้มลง พบเพชรสีแดงเข้มเม็ดหนึ่ง</String>
+  <String Key="StoryModeDialogue_2010800_3_1_Ophelia">นี่มัน...?</String>
+  <String Key="StoryModeDialogue_2010800_3_2_Ophelia">(รู้สึกคลื่นไส้จัง)</String>
+  <String Key="StoryModeDialogue_2010800_3_3_Ophelia">โรเดอริก นี่มันคือ... สิ่งนั้นจริงๆ ใช่ไหมคะ?</String>
+  <String Key="StoryModeDialogue_2010800_3_4_System">วลาด โมเรน ผู้ปกครองเขตชายแดนของนอสเฟอราตูมาอย่างยาวนาน ได้เสียชีวิตลงแล้ว</String>
+  <String Key="StoryModeDialogue_2010800_3_5_System">เคธี่รายงานต่อกองบัญชาการนอสเฟอราตูว่าวลาด โมเรนคลุ้มคลั่งเพียงลำพัง และเธอเป็นผู้จัดการเขาด้วยตัวเอง จึงหยุดศึกเต็มกำลังเอาไว้ได้</String>
+  <String Key="StoryModeDialogue_2010800_3_6_System">ปัญหาเรื่องความสามารถของอเลสเซีย นอสเฟอราตูในฐานะผู้ดูแลถูกจับตามองมากขึ้น และสถานะทางการเมืองของเธอก็ยิ่งอ่อนแอลง</String>
+  <String Key="StoryModeDialogue_2010800_3_7_System">ตราบใดที่มนุษย์กับแวมไพร์ยังอยู่ร่วมกัน ความขัดแย้งในที่แห่งนี้ก็คงไม่สิ้นสุด</String>
+  <String Key="StoryModeDialogue_2010900_0_0_System">หลายวันต่อมา ในห้องรับรองของโอฟีเลีย</String>
+  <String Key="StoryModeDialogue_2010900_0_1_System">มีเพชรสีแดงเข้มวางอยู่บนโต๊ะ</String>
+  <String Key="StoryModeDialogue_2010900_0_2_Ophelia">คุณพอจะรู้อะไรเกี่ยวกับเพชรเม็ดนี้บ้างไหมคะ?</String>
+  <String Key="StoryModeDialogue_2010900_0_3_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_4_Ophelia">อย่างที่คุณทราบดี เพชรเม็ดนี้มีชื่อว่า 'ดาวแห่งสนธยา'</String>
+  <String Key="StoryModeDialogue_2010900_0_5_Ophelia">มันเป็นเพชรที่มีที่มาจากภาคใต้ และมีข่าวลือว่ามันจะทำให้นิสัยของผู้ครอบครองเลวร้ายลง</String>
+  <String Key="StoryModeDialogue_2010900_0_6_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_7_Ophelia">จากตรงนี้ไป เป็นเพียงข้อสันนิษฐานของฉันนะคะ</String>
+  <String Key="StoryModeDialogue_2010900_0_8_Ophelia">เป็นที่รู้กันดีว่าวลาด โมเรนชอบสิ่งสวยงาม และโดยเฉพาะอย่างยิ่ง เขาชอบสะสมเพชรราคาแพง</String>
+  <String Key="StoryModeDialogue_2010900_0_9_Ophelia">จึงมีคนนำดาวแห่งสนธยาเข้ามาจากภาคใต้ โดยหวังว่ามันจะตกไปอยู่ในมือของเขา</String>
+  <String Key="StoryModeDialogue_2010900_0_10_Ophelia">และเพราะคนคนนั้นแอบสมคบกับอเลสเซีย นอสเฟอราตู ผู้บังคับบัญชาของวลาด โมเรน</String>
+  <String Key="StoryModeDialogue_2010900_0_10b_Ophelia">เขาจึงคงรู้ได้ไม่ยากว่าวลาด โมเรนใช้ตลาดมืดแห่งไหนบ่อยที่สุด</String>
+  <String Key="StoryModeDialogue_2010900_0_11_Ophelia">วลาด โมเรนพกดาวแห่งสนธยาไว้กับตัวตลอด</String>
+  <String Key="StoryModeDialogue_2010900_0_11b_Ophelia">แต่ผลของมันคงไม่ได้มีแค่ทำให้นิสัยเลวลงเท่านั้น</String>
+  <String Key="StoryModeDialogue_2010900_0_11c_Ophelia">มันคงมีพลังมากพอจะทำให้สัญชาตญาณของแวมไพร์ควบคุมไม่อยู่ด้วย</String>
+  <String Key="StoryModeDialogue_2010900_0_12_Ophelia">ทำไมจึงต้องให้วลาด โมเรนคลุ้มคลั่งกันนะ?</String>
+  <String Key="StoryModeDialogue_2010900_0_13_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_14_Ophelia">คุณบอกโรเดอริกว่าอเลสเซียมีส่วนเกี่ยวข้องกับการลักพาตัวชาวเขตแดน</String>
+  <String Key="StoryModeDialogue_2010900_0_15_Ophelia">และคุณยังอ้างด้วยว่าศพของชาวเขตแดนที่พบทางใต้ของเขตแดน เป็นฝีมือของแวมไพร์</String>
+  <String Key="StoryModeDialogue_2010900_0_16_Ophelia">เพราะเรื่องนี้ การอยู่ร่วมกับแวมไพร์จึงไม่อาจก้าวหน้าต่อไปได้</String>
+  <String Key="StoryModeDialogue_2010900_0_17_Neria">ข้าเพียงพูดความจริงเท่านั้น</String>
+  <String Key="StoryModeDialogue_2010900_0_18_Ophelia">แม้แต่ตอนที่ฉันถูกลักพาตัว คุณก็ยังดึงโรเดอริกเข้ามาและชักนำให้เกิดการโจมตีทางทหาร แล้วตอนที่โรเดอริกเสียชีวิต คุณก็ชักนำให้ฉันล้างแค้นด้วย</String>
+  <String Key="StoryModeDialogue_2010900_0_19_Ophelia">ดูเหมือนว่าคุณต้องการสงครามเสียเอง</String>
+  <String Key="StoryModeDialogue_2010900_0_20_Neria">......สิ่งที่ข้าทำคือความยุติธรรม แวมไพร์ไม่ควรมีอยู่</String>
+  <String Key="StoryModeDialogue_2010900_0_21_Neria">คนที่ยึดติดกับภาพลวงของการอยู่ร่วมกัน มีแค่เธอกับอเลสเซียเท่านั้น</String>
+  <String Key="StoryModeDialogue_2010900_0_21b_Neria">สุดท้ายโรเดอริกก็ตายเพราะภาพลวงนั้นเหมือนกัน</String>
+  <String Key="StoryModeDialogue_2010900_0_22_Neria">ไม่ว่าข้าจะยุแยงหรือไม่ วลาดก็ลักพาชาวเขตแดนไป และพยายามจะกินคุณ โอฟีเลีย</String>
+  <String Key="StoryModeDialogue_2010900_0_23_Neria">นั่นแหละคือธรรมชาติของแวมไพร์</String>
+  <String Key="StoryModeDialogue_2010900_0_24_Ophelia">โซลา... พระจันทร์สีแดงคือครอบครัวของคุณหรือคะ? หรือเป็นแค่เครื่องมือ?</String>
+  <String Key="StoryModeDialogue_2010900_0_25_Neria">พวกเราเป็นสหายร่วมรบ</String>
+  <String Key="StoryModeDialogue_2010900_0_26_Ophelia">…อเลสเซียกับฉันตัดสินใจแล้วว่าจะรักษาสมดุลของที่แห่งนี้</String>
+  <String Key="StoryModeDialogue_2010900_0_27_Neria">เชื่อใจแวมไพร์ตนนั้นหรือ?</String>
+  <String Key="StoryModeDialogue_2010900_0_28_Ophelia">มากกว่าคุณค่ะ</String>
+  <String Key="StoryModeDialogue_2010900_0_29_Neria">ลำพังคนเดียว คุณทำอะไรไม่ได้หรอก</String>
+  <String Key="StoryModeDialogue_2010900_0_30_Neria">วลาดตายแล้ว แต่นอสเฟอราตูยังคงแข็งแกร่ง</String>
+  <String Key="StoryModeDialogue_2010900_0_31_Neria">ถ้าพวกมันบุกมา จะทำอย่างไร?</String>
+  <String Key="StoryModeDialogue_2010900_0_32_Ophelia">นั่นไม่ใช่เรื่องที่คุณต้องกังวลค่ะ</String>
+  <String Key="StoryModeDialogue_2010900_0_33_Neria">เจ้าจะต้องเสียใจ</String>
+  <String Key="StoryModeDialogue_2010900_0_34_System">เนเรียทอดสายตามองเป็นครั้งสุดท้าย แล้วออกจากห้องรับรอง โอฟีเลียมองตามเธอไป</String>
+  <String Key="StoryModeDialogue_2010900_1_0_System">โซลาที่พันแผลทั่วตัวยังคงอยู่ในห้องรับรอง โอฟีเลียนั่งลงตรงหน้าเธอ</String>
+  <String Key="StoryModeDialogue_2010900_1_1_Ophelia">โซลา คุณจะไม่เป็นไรใช่ไหมคะ? ถึงจะไม่ไปกับพวกเรา</String>
+  <String Key="StoryModeDialogue_2010900_1_2_Solar">หัวหน้าเก่าคงไม่เป็นไรแม้ไม่มีฉันค่ะ ตอนนี้ก็มีหัวหน้าใหม่แล้ว เลยไม่ต้องห่วง!</String>
+  <String Key="StoryModeDialogue_2010900_2_0_System">หลายวันต่อมา โอฟีเลียนั่งอยู่บนเก้าอี้ของโรเดอริกในห้องหนังสือตามเคย</String>
+  <String Key="StoryModeDialogue_2010900_2_1_Ophelia">ฉันเริ่มพูดคุยกับอเลสเซียแล้วค่ะ</String>
+  <String Key="StoryModeDialogue_2010900_2_2_Ophelia">สิ่งที่โรเดอริกตั้งใจจะทำ ฉันจะสานต่อเองค่ะ</String>
+  <String Key="StoryModeDialogue_2010900_2_3_Ophelia">แล้วก็ไล่เนเรียออกไปแล้วค่ะ</String>
+  <String Key="StoryModeDialogue_2010900_2_4_Ophelia">ฉันกำลังเสริมกองทัพเขตแดน และขยายพันธมิตรอยู่ค่ะ</String>
+  <String Key="StoryModeDialogue_2010900_2_6_Ophelia">... แบบนี้ดีแล้วใช่ไหมคะ?</String>
+  <String Key="StoryModeDialogue_2010900_2_7_System">หลังจากนั้น ชื่อของโอฟีเลียก็แพร่กระจายออกไป หญิงผู้ขยายเขตแดน เสริมกองทัพ และไม่เคยหยุดยั้ง ผู้คนเรียกเธอว่า 'สตรีเหล็ก'</String>
+  <String Key="StoryModeDialogue_2010900_2_8_System">บางครั้ง เหล่าข้ารับใช้ก็เห็นโอฟีเลียพูดกับความว่างเปล่าอย่างอ่อนโยนในห้องหนังสือที่ไร้ผู้คน</String>
+  <String Key="StoryModeDialogue_2010900_2_9_System">สตรีเหล็กจะยังคงแตกสลายและเยือกแข็งอยู่อีกนาน แล้วค่อยแข็งแกร่งขึ้น</String>
+  <String Key="StoryModeDialogue_2010700_2_2b_Ophelia">...!!!</String>
+  <String Key="WorldTriggerDesc_11100">ดาเมจพิเศษ +{0}% ต่อฮีโร่เป้าหมาย 1 ตัว (ซ้อนทับสูงสุด 3 ครั้ง)</String>
+  <String Key="StoryFieldName_2010700">ชายแดนนอสเฟอราตู</String>
+  <String Key="StoryFieldName_2010800">ชายแดนนอสเฟอราตู</String>
+  <String Key="UnitName_20020750">วลาด นอสเฟอราตู</String>
+  <String Key="UnitName_20020600">ทหารฟรอสต์วาลด์</String>
+  <String Key="StoryHint_420107000">ใช้สกิลเริ่มการต่อสู้ของโอฟีเลีย เพื่อป้องกันการโจมตีของกากอย</String>
+  <String Key="StoryHint_420108000">การโจมตีของวลาดทำให้พวกพ้องติดสตันต่อเนื่อง ลองใช้สกิลเริ่มการต่อสู้ที่รับมือสตันได้</String>
+  <String Key="TreasureName_30043">Vitacorde</String>
+  <String Key="TreasureSubName_30043">คัมภีร์ศักดิ์สิทธิ์</String>
+  <String Key="TreasureDesc_30043">จงเผชิญหน้ากับหัวใจที่แท้จริงภายในตัวท่าน
+แล้วความศักดิ์สิทธิ์จะช่วยท่าน</String>
+  <String Key="TreasureSkillName_30043">พลังแห่งชีวิต</String>
+  <String Key="BuffDataName_3300431">พลังศักดิ์สิทธิ์ I</String>
+  <String Key="BuffDataName_3300432">วัฏจักรแห่งชีวิต I</String>
+  <String Key="BuffDataName_3300433">พิทักษ์ศักดิ์สิทธิ์</String>
+  <String Key="BuffDataName_3300434">วัฏจักรแห่งชีวิต II</String>
+  <String Key="BuffDataName_3300435">พลังศักดิ์สิทธิ์ II</String>
+  <String Key="SpecialShop_TreasurePickUp30043">ร้านค้าพิเศษ Pickup Vitacorde</String>
+  <String Key="SpecialPackage_1683">Vitacorde แพ็กเกจ 1</String>
+  <String Key="SpecialPackage_1684">Vitacorde แพ็กเกจ 2</String>
+  <String Key="SpecialPackage_1685">Vitacorde แพ็กเกจ 3</String>
+  <String Key="BuffDataDesc_3300431">ทุก {0} พิทักษ์ ค่าสเกลเวทมนตร์ของเอฟเฟกต์เพิ่มดาเมจพื้นฐาน +{1}%</String>
+  <String Key="BuffDataDesc_3300432">คูลดาวน์ {0} วินาที</String>
+  <String Key="BuffDataDesc_3300433">มอบพรแก่พวกพ้องทั้งหมดในเขต ยกเว้นตัวเอง</String>
+  <String Key="BuffDataDesc_3300434">คูลดาวน์ {0} วินาที</String>
+  <String Key="BuffDataDesc_3300435">ทุก {0} พิทักษ์ ค่าสเกลเวทมนตร์ของเอฟเฟกต์เพิ่มดาเมจพื้นฐาน +{1}%</String>
+  <String Key="TreasureSkillDesc_3300430">เมื่อเริ่มการต่อสู้ จะใช้เฉพาะเอฟเฟกต์ของฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Vitacorde
+ล็อกเวทมนตร์ของผู้สวมใส่ไว้ที่ค่าตอนเริ่มการต่อสู้
+เมื่อรักษาพวกพ้อง จะสร้างเขตเป็นเวลา {0} วินาที เพิ่มดาเมจพื้นฐานของพวกพ้องในระยะ {1} รอบผู้สวมใส่ เท่ากับ {2}% ของเวทมนตร์ผู้สวมใส่ (คูลดาวน์ {3} วินาที)</String>
+  <String Key="TreasureSkillDesc_3300431">เมื่อเริ่มการต่อสู้ จะใช้เฉพาะเอฟเฟกต์ของฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Vitacorde
+ล็อกเวทมนตร์ของผู้สวมใส่ไว้ที่ค่าตอนเริ่มการต่อสู้
+เมื่อรักษาพวกพ้อง จะสร้างเขตเป็นเวลา {0} วินาที เพิ่มดาเมจพื้นฐานของพวกพ้องในระยะ {1} รอบผู้สวมใส่ เท่ากับ {2}% ของเวทมนตร์ผู้สวมใส่ (คูลดาวน์ {3} วินาที)
+ทุก {4} พิทักษ์ ค่าสเกลเวทมนตร์ของเอฟเฟกต์เพิ่มดาเมจพื้นฐาน +{5}%</String>
+  <String Key="TreasureSkillDesc_3300433">เมื่อเริ่มการต่อสู้ จะใช้เฉพาะเอฟเฟกต์ของฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Vitacorde
+ล็อกเวทมนตร์ของผู้สวมใส่ไว้ที่ค่าตอนเริ่มการต่อสู้
+เมื่อรักษาพวกพ้อง จะสร้างเขตเป็นเวลา {0} วินาที เพิ่มดาเมจพื้นฐานของพวกพ้องในระยะ {1} รอบผู้สวมใส่ เท่ากับ {2}% ของเวทมนตร์ผู้สวมใส่ (คูลดาวน์ {3} วินาที)
+ทุก {4} พิทักษ์ ค่าสเกลเวทมนตร์ของเอฟเฟกต์เพิ่มดาเมจพื้นฐาน +{5}%
+มอบพรแก่พวกพ้องในเขต ยกเว้นผู้สวมใส่</String>
+  <String Key="SeasonalEventName_Season72">เทศกาลเหินเวหา</String>
+  <String Key="SeasonalEventMode_Season72">เทศกาลเหินเวหา</String>
+  <String Key="TreasureName_50002">Cor Orbis</String>
+  <String Key="TreasureSubName_50002">ชื่อรองชั่วคราว</String>
+  <String Key="TreasureDesc_50002">คำอธิบายชั่วคราว - จะเพิ่มหลังจากได้คอนเซปต์ขุมทรัพย์ - คอนเซปต์ที่คิดไว้: หินอะไรสักอย่าง? อาร์ติแฟกต์? ที่ยืมมานาจากพืชและสัตว์รอบตัวมาเก็บสะสม แล้วค่อยปล่อยออกมา</String>
+  <String Key="TreasureSkillName_50002">ผสมมานา</String>
+  <String Key="BuffDataName_3500021">กลมกลืน I</String>
+  <String Key="BuffDataName_3500022">บาเรียมานา I</String>
+  <String Key="BuffDataName_3500023">มานาสะท้อนพ้อง</String>
+  <String Key="BuffDataName_3500024">บาเรียมานา II</String>
+  <String Key="BuffDataName_3500025">กลมกลืน II</String>
+  <String Key="SpecialShop_TreasurePickUp50002">ร้านค้าพิเศษ Pickup Cor Orbis</String>
+  <String Key="SpecialPackage_1690">Cor Orbis แพ็กเกจ 1</String>
+  <String Key="SpecialPackage_1691">Cor Orbis แพ็กเกจ 2</String>
+  <String Key="SpecialPackage_1692">Cor Orbis แพ็กเกจ 3</String>
+  <String Key="BuffDataDesc_3500021">ทุกดาเมจคริติคอลเวทมนตร์ {1}% ที่เกิน {0}% โบนัสดาเมจสุดท้ายของสกิลอัพเกรด x{2}</String>
+  <String Key="BuffDataDesc_3500022">ดาเมจที่ได้รับ {0}% จนกว่าจะใช้สกิลครั้งที่ 3</String>
+  <String Key="BuffDataDesc_3500023">เมื่อใช้สกิลอัพเกรด จะใช้สกิลเดิมเพิ่มอีก {1} ครั้ง กับเป้าหมายแรนด้อมด้วยดาเมจ {0}%</String>
+  <String Key="BuffDataDesc_3500024">ดาเมจที่ได้รับ {0}% จนกว่าจะใช้สกิลครั้งที่ 3</String>
+  <String Key="BuffDataDesc_3500025">ทุกดาเมจคริติคอลเวทมนตร์ {1}% ที่เกิน {0}% โบนัสดาเมจสุดท้ายของสกิลอัพเกรด x{2}</String>
+  <String Key="TreasureSkillDesc_3500020">หลังเริ่มการต่อสู้ มีเพียงฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Cor Orbis เท่านั้น ที่จะได้รับมานาสูงสุด +{0}% และดาเมจที่มอบสุดท้าย -{1}% จนกว่าจะใช้สกิลครบ 3 ครั้ง
+สกิลสุดท้ายจะถูกอัพเกรด และดาเมจสุดท้าย +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">หลังเริ่มการต่อสู้ มีเพียงฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Cor Orbis เท่านั้น ที่จะได้รับมานาสูงสุด +{0}% และดาเมจที่มอบสุดท้าย -{1}% จนกว่าจะใช้สกิลครบ 3 ครั้ง
+สกิลสุดท้ายจะถูกอัพเกรด และดาเมจสุดท้าย +{2}%
+ทุกดาเมจคริติคอลเวทมนตร์ {4}% ที่เกิน {3}% โบนัสดาเมจสุดท้ายของสกิลอัพเกรด x{5}</String>
+  <String Key="TreasureSkillDesc_3500022">หลังเริ่มการต่อสู้ มีเพียงฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Cor Orbis เท่านั้น ที่จะได้รับมานาสูงสุด +{0}% และดาเมจที่มอบสุดท้าย -{1}% จนกว่าจะใช้สกิลครบ 3 ครั้ง
+สกิลสุดท้ายจะถูกอัพเกรด และดาเมจสุดท้าย +{2}%
+ทุกดาเมจคริติคอลเวทมนตร์ {4}% ที่เกิน {3}% โบนัสดาเมจสุดท้ายของสกิลอัพเกรด x{5}
+ดาเมจที่ได้รับ {6}% จนกว่าจะใช้สกิลครบ 3 ครั้ง</String>
+  <String Key="TreasureSkillDesc_3500023">หลังเริ่มการต่อสู้ มีเพียงฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Cor Orbis เท่านั้น ที่จะได้รับมานาสูงสุด +{0}% และดาเมจที่มอบสุดท้าย -{1}% จนกว่าจะใช้สกิลครบ 3 ครั้ง
+สกิลสุดท้ายจะถูกอัพเกรด และดาเมจสุดท้าย +{2}%
+ทุกดาเมจคริติคอลเวทมนตร์ {4}% ที่เกิน {3}% โบนัสดาเมจสุดท้ายของสกิลอัพเกรด x{5}
+ดาเมจที่ได้รับ {6}% จนกว่าจะใช้สกิลครบ 3 ครั้ง
+เมื่อใช้สกิลอัพเกรด จะใช้สกิลเดิมเพิ่มอีก {8} ครั้ง กับเป้าหมายแรนด้อมด้วยดาเมจ {7}%</String>
 </Strings>

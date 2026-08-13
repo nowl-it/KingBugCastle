@@ -124,31 +124,34 @@ All patches apply to `config.arm64_v8a.apk` → `lib/arm64-v8a/libil2cpp.so`. Of
 
 **Patch pattern**: `RET_FALSE` = `e0031f2ac0035fd6` = `mov x0,#0; ret`. SSL uses `RET_TRUE` = `20008052c0035fd6` = `mov w0,#1; ret`.
 
-### ARM64 Patch Inventory — v171 private build (`server/build_v171_private.py`)
+### ARM64 Patch Inventory — private build (`server/builders/build_v171_private.py`)
 
-v171 ships **no on-disk `libil2cpp.so`** (XIGNCODE NEO packs + encrypts it inside the packer `.so`).
+v171+ ships **no on-disk `libil2cpp.so`** (XIGNCODE NEO packs + encrypts it inside the packer `.so`).
 The build recovers one and injects it, then NOPs the NEO unpack path — see
 [docs/mftl-extraction.md](docs/mftl-extraction.md) for the unpack recipe and
 [docs/v171-private-build.md](docs/v171-private-build.md) for the operator playbook.
 
-**Default input is v171.1.00** (`KGC_APK_SRC=xapk_extracted_v1711`), and it injects that build's
-**own** game code: `il2cpp/v171.1.00/libil2cpp_v17110_ssl.so`, unpacked out of its packer by
+**Default input is v172.0.00** (`KGC_APK_SRC=xapk_extracted_v1720`), and it injects that build's
+**own** game code: `il2cpp/v172.0.00/libil2cpp_v172_ssl.so`, unpacked out of its packer by
 `patchers/unpack_neo.py`. Lib and metadata come from the same build, so **no metadata swap runs**.
+The v172 packer (`libbeniolle.so`) is the **same loader binary** as v171.0.01/v171.1.00 — all 8
+`NEO_SIG_SITES` byte-identical and the `08008012 e89700b9` pattern hits the same 4 offsets; only
+the filename rotated.
 
-*Fallback* (`KGC_FORCE_V17100=1`, or any older APK source) injects `il2cpp/v171.0.00/
-libil2cpp_v171_ssl.so` and then **must** swap v171.0.00's `global-metadata.dat` into
-`base_assets.apk` (`patchers/patch_metadata_swap.py`, before `patch_hosts` /
-`patch_metadata_http`). That is mandatory, not cosmetic: v171.0.01 **inserted** the literal
-`/auth/xcdSeed?version=` at stringLiteral index 1545 of 25730, shifting 94% of all literal
+*Fallback* (`KGC_APK_SRC=xapk_extracted_v1711` → v171.1.00 native, or `KGC_FORCE_V17100=1` for any
+older source) injects that build's own lib; only the v171.0.00 fallback **must** swap v171.0.00's
+`global-metadata.dat` into `base_assets.apk` (`patchers/patch_metadata_swap.py`, before
+`patch_hosts` / `patch_metadata_http`). That is mandatory, not cosmetic: v171.0.01 **inserted** the
+literal `/auth/xcdSeed?version=` at stringLiteral index 1545 of 25730, shifting 94% of all literal
 indices, and libil2cpp compiles those indices in.
 
-**Every il2cpp offset is per-lib.** The two tables live side by side in `build_v171_private.py`
-(`_NRE_STUBS_V17100` / `_NRE_STUBS_V17110`) and are picked by which lib is injected. They were
-re-derived from each version's own `dump.cs` by exact class + signature match; all 10 stub
-prologues came back byte-identical across the two, which is the cross-check that the
-re-derivation landed on the same methods. `ShopItem.Init` does NOT match by bytes (immediates
-changed) — it is matched by instruction shape, with the replacement's `cbz` displacement
-recomputed against the new bail-out target.
+**Every il2cpp offset is per-lib.** The tables live side by side in `build_v171_private.py`
+(`_NRE_STUBS_V17100` / `_NRE_STUBS_V17110` / `_NRE_STUBS_V17200`) and are picked by `VER`
+(**RVA** convention: file offset = `RVA - 0x4000`). They were re-derived from each version's own
+`dump.cs` by exact class + signature match; all 10 stub prologues came back byte-identical across
+the three, which is the cross-check that the re-derivation landed on the same methods.
+`ShopItem.Init` does NOT match by bytes (immediates changed) — it is matched by instruction shape,
+with the replacement's `cbz` displacement recomputed against the new bail-out target.
 
 **NEO loader offsets do not shift by a constant between builds** (`libaledatic.so` maps `file == VMA`,
 `librolineng.so` maps `VMA == file - 0x4000`, and the loader function grew):
@@ -206,6 +209,32 @@ Patches the build applies on top (all idempotent, each guarded by an expected-pr
 The NRE stubs are a straight port of the v170 set (rows 5-14 of the v170 table above) — every prologue
 came back **byte-identical**, only the offsets moved, which is what confirms the `script.json` mapping.
 v170's `WorldPanel.IsKGMarbleAvailable` has **no v171 counterpart** and was dropped.
+
+**v172.0.00 offsets** (same patches, re-derived 2026-08-13 from v172.0.00 `dump.cs`; RVAs, file =
+RVA − 0x4000; `NRE_STUBS` table rows are RVAs — the build loop subtracts 0x4000):
+
+| RVA | Label | Original bytes (all verified byte-identical to v171.1.00) |
+|---|---|---|
+| 0x325E0CC | pvp-init | `ff8303d1fd7b08a9` |
+| 0x3258D48 | pvp-reward | `fe0f1bf8fa6701a9` |
+| 0x32C9A04 | shop-growth | `fe0f1af8fc6f01a9` |
+| 0x32CBAD4 | shop-season | `ff4301d1fe6701a9` |
+| 0x305BCB4 | year-event | `fe0f1ef8f44f01a9` |
+| 0x305DD94 | card-event | `fe0f1ef8f44f01a9` |
+| 0x305DC8C | season-event | `fe0f1ef8f44f01a9` |
+| 0x3043284 | babel-data | `fe0f1df8f65701a9` |
+| 0x34B0374 | content-alert | `fe0f1bf8fa6701a9` |
+| 0x3068B4C | accessory | `fe0f1ff8088c40f9` (RET_TRUE) |
+| 0x304641C | firebase (file 0x304241C) | `fe0f1bf8` → `c0035fd6` |
+| 0x34E38A8 | RegisterHackDetection (file 0x34DF8A8) | `fe57bea9` → `c0035fd6` |
+| 0x32DB348 | shop-init (**file offset**, see below) | `941300b428aa01d0086545f9f60300aae00314aae1031f2a020140f92bb03394` |
+
+`ShopItem.Init` v172: site **file 0x32DB348** (ORIG found by byte search, NOT RVA−0x4000 — the
+0x32DB748 figure from the first pass was wrong). NEW `b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d52bb03394`
+disassembles to `cbz x20,#0x32db59c; ldr w8,[x20,#0x18]; cbz w8,#0x32db59c; mov x22,x0; mov x0,x20;
+mov w1,wzr; nop; bl #0x3fc7410` — both null and empty-list cases jump to the method's own epilogue at
+file 0x32db59c (`ldp x20,x19,[sp,#0x60]...ret`), same shape as v171.1.00's fix (only the final `bl`
+target differs). The v171.1.00 `bl` word `66983394` vs v172 `2bb03394` is the per-version piece.
 
 ### The `ldr → mov` klass patches CAUSE the black lobby — keep them OFF (disproven 2026-07-28)
 
@@ -621,17 +650,17 @@ served, arena battles counted).
   minified file, no importmap) — `dashboard.py` serves `webui/dist` when present. Rebuild locally,
   commit `dist/`, then `git pull` on server.
 - **Client release workflow** (`.github/workflows/build-xapk.yml`, manual dispatch): builds
-  `KingBugCastle_v171.xapk` (`KGC_APK_SRC=xapk_extracted_v1711 SHARE_HOST=… --share`, job needs
+  `KingBugCastle_172.0.00.xapk` (`KGC_APK_SRC=xapk_extracted_v1720 SHARE_HOST=… --share`, job needs
   `permissions: contents: write` or `gh release create` 403s) and creates a GitHub Release whose
   **name = `King Bug Castle <version>`** and **asset = `KingBugCastle_<version>.xapk`** (version =
-  `tag` input, default **`v171.1.00`**; if that tag already exists a `-YYYYMMDD-HHMMSS` suffix is
+  `tag` input, default **`v172.0.00`**; if that tag already exists a `-YYYYMMDD-HHMMSS` suffix is
   appended). **Release notes are detailed but must never mention the server host / URLs / build
-  command** — keep them to generic feature + install + troubleshooting text. The `stock-v171.1.00`
-  release (base source xapk, `com.awesomepiece.castle@171.1.00.xapk`, 1.1GB) is **deleted
+  command** — keep them to generic feature + install + troubleshooting text. The `stock-v172.0.00`
+  release (base source xapk, `com.awesomepiece.castle@172.0.00.xapk`, 1.1GB) is **deleted
   (release + tag) after every build** — the workflow downloads it from GitHub CDN (free, never
   from the OCI box: paid egress) during the build, then removes it. To build again, re-create it
-  first from the local copy at `apk/com.awesomepiece.castle@171.1.00.xapk`:
-  `gh release create stock-v171.1.00 --title "Stock XAPK v171.1.00 (CI build source)" --notes "…" --latest=false 'apk/com.awesomepiece.castle@171.1.00.xapk'`.
+  first from the local copy at `apk/com.awesomepiece.castle@172.0.00.xapk`:
+  `gh release create stock-v172.0.00 --title "Stock XAPK v172.0.00 (CI build source)" --notes "…" --latest=false 'apk/com.awesomepiece.castle@172.0.00.xapk'`.
 - **Zero-cost rule (user-mandated, 2026-07-31)**: nothing may cost real money. GitHub Actions +
   public-repo release assets are free; the 1.1GB stock xapk and built client xapk are stored there,
   not on OCI. Keep any large binary off the OCI instance (egress is billed); OCI hosts only the

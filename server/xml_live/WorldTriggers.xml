@@ -1681,4 +1681,64 @@
 			</Values>
 		</WorldTriggers>
 	</WorldTrigger>
+
+	<WorldTrigger ID="11100">
+		<DescComment>대상 영웅 한 기당 특수 피해량 +30%</DescComment>
+
+		<Type>GrandArena</Type>
+
+		<DescParams>
+			<InnerText>./WorldTriggers/BuffInfo/BuffOptions/Values/GrandArenaBuffValue</InnerText>
+		</DescParams>
+
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+
+			<BuffInfo ToAll="true">
+				<Checker>All</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="SpecialDamageMul" StatValueType="BaseValue" ReleaseBindWhenBattleStart="true" Max="90" HaveToBind="true"/>
+					</BuffContents>
+
+					<Values>
+						<GrandArenaBuffValue>30</GrandArenaBuffValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
 </WorldTriggers>

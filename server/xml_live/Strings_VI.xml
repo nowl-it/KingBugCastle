@@ -33,10 +33,10 @@
   <String Key="Dismiss">Hủy Triệu Hồi</String>
   <String Key="IngameLoading">Đang tải...</String>
   <String Key="TimeLeft">Thời Gian Còn Lại</String>
-  <String Key="Hour">giờ</String>
-  <String Key="Minute">phút</String>
-  <String Key="Second">giây</String>
-  <String Key="Day">ngày</String>
+  <String Key="Hour"> giờ</String>
+  <String Key="Minute"> phút</String>
+  <String Key="Second"> giây</String>
+  <String Key="Day"> ngày</String>
   <String Key="FreeGet">Nhận Miễn Phí</String>
   <String Key="Community">Cafe</String>
   <String Key="Text_KingGod">King God Castle</String>
@@ -140,9 +140,9 @@ Di chuyển sang màn hình đăng nhập.</String>
 
 (Chi phí: {0} Đá Quý)</String>
   <String Key="King_1">Vua</String>
-  <String Key="King_2"></String>
+  <String Key="King_2"> </String>
   <String Key="Castle_1">Thành</String>
-  <String Key="Castle_2"></String>
+  <String Key="Castle_2"> </String>
   <String Key="LoadingPopupText">Đang kết nối với server...</String>
   <String Key="LoginByGoogle">Đăng nhập bằng Google Play</String>
   <String Key="LoginByApple">Đăng nhập bằng Apple</String>
@@ -260,11 +260,11 @@ Di chuyển sang màn hình đăng nhập.</String>
   <String Key="Post_Push_Contents18">Cấp 1.000 Vàng vào tối nay!</String>
   <String Key="Post_Push_Contents19">Có Vàng trong Hòm Thư!</String>
   <String Key="Post_Push_Contents20">Lương Thực chi viện đã tới!</String>
-  <String Key="Post_Push_Contents21">Kết thúc King God Castle Mùa 70 D-day</String>
-  <String Key="Post_Push_Contents22">Kết thúc King God Castle Mùa 70 D-1</String>
-  <String Key="Post_Push_Contents23">Kết thúc King God Castle Mùa 70 D-2</String>
-  <String Key="Post_Push_Contents24">Kết thúc King God Castle Mùa 70 D-4</String>
-  <String Key="Post_Push_Contents25">King God Castle Mùa 70 sẽ kết thúc vào hôm nay!</String>
+  <String Key="Post_Push_Contents21">Kết thúc King God Castle Mùa 72 D-day</String>
+  <String Key="Post_Push_Contents22">Kết thúc King God Castle Mùa 72 D-1</String>
+  <String Key="Post_Push_Contents23">Kết thúc King God Castle Mùa 72 D-2</String>
+  <String Key="Post_Push_Contents24">Kết thúc King God Castle Mùa 72 D-4</String>
+  <String Key="Post_Push_Contents25">King God Castle Mùa 72 sẽ kết thúc vào hôm nay!</String>
   <String Key="Post_Push_Contents26">Kiểm tra xem có bỏ sót phần thưởng Pass nào không!</String>
   <String Key="Post_Push_Contents27">Nhớ nhận đủ các phần thưởng Pass nhé!</String>
   <String Key="Post_Push_Contents28">Hệ thống Chiến Trường và Pass sẽ kết thúc sau 4 ngày.</String>
@@ -445,7 +445,7 @@ Cổ Vật nguyên vẹn</String>
   <String Key="BestChallenge">Thử Thách cao nhất</String>
   <String Key="EliteDisabled">Thử Thách vô hiệu</String>
   <String Key="GameQuitPopupText">Đóng game?</String>
-  <String Key="RestartOldGame">Tiếp tục game đang tiến hành?</String>
+  <String Key="RestartOldGame">Tiếp tục game đang tiến hành? </String>
   <String Key="RestartOldGameSuccess">Hoàn tất tải game đang lưu!</String>
   <String Key="EnergyMaxExpended">Tăng chỉ số tối đa của Lương Thực</String>
   <String Key="AttackMode">Tập Kích</String>
@@ -1240,8 +1240,11 @@ Giúp tấn công phủ đầu từ vị trí nằm ngoài tầm đánh của k�
   <String Key="ItemName_10020">Tăng Cường Binh Lực</String>
   <String Key="ItemDesc_10020">Binh lực tăng thêm 1.</String>
   <String Key="ItemName_10030">Bạc +5</String>
+  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">Bạc +10</String>
+  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">Bạc +20</String>
+  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">Huân Chương Chiến Công</String>
   <String Key="ItemDesc_10040">Tăng 1 cấp ★ cho anh hùng ngẫu nhiên ở chiến trường.</String>
   <String Key="ItemName_10050">Thư Triệu Hồi Anh Hùng Cao Cấp (2 lần)</String>
@@ -2399,7 +2402,7 @@ Dấu Vua có thể đổi thành Dấu Anh Hùng mong muốn.</String>
   <String Key="Name_Potential_10150_2">Giao Cảm Tự Nhiên</String>
   <String Key="Name_Potential_10170_2">Dẫn Truyền Vô Hạn</String>
   <String Key="Name_Potential_10180_2">Liên Kết Nguyền Rủa</String>
-  <String Key="Name_Potential_10190_2">Đế Quốc Kích Động</String>
+  <String Key="Name_Potential_10190_2">Bóng của Đế Quốc</String>
   <String Key="Name_Potential_10200_2">Hồng Thủy</String>
   <String Key="Name_Potential_10210_2">Cơn Sóng Kiếm Thánh</String>
   <String Key="Name_Potential_10220_2">Bom Khổng Lồ</String>
@@ -2427,7 +2430,7 @@ Tổng sát thương gây ra cho mục tiêu này +40%</String>
   <String Key="Potential_10090_2">Phạm vi kỹ năng của &lt;Giai Điệu Du Dương&gt; +1 ô</String>
   <String Key="Potential_10100_2">Làm lộ "điểm yếu" của mục tiêu &lt;Đánh Úp Chí Mạng&gt; khiến sát thương phải nhận trong 10 giây +30% (Boss: giảm một nửa)</String>
   <String Key="Potential_10150_2">Khi dùng &lt;Triệu Hồi Golem&gt;, nạp 100% mana cho đồng minh xung quanh trong phạm vi 5x5/5x5/7x7/7x7</String>
-  <String Key="Potential_10190_2">Kích động kẻ địch đang tấn công mục tiêu đồng đội của &lt;Hậu Thuẫn Dữ Dội&gt; đồng thời lực phòng thủ trong 4 giây +350</String>
+  <String Key="Potential_10190_2">Ban cho đồng minh là mục tiêu của &lt;Hậu Thuẫn Dữ Dội&gt; ẩn thân trong 0.3 giây và Behemus +400 Lực phòng thủ trong 4 giây</String>
   <String Key="Potential_10210_2">Khi tấn công trong lúc dùng &lt;Kiếm Thánh Garna&gt;, khuấy động cơn sóng gây sát thương bằng với lực phép với xác suất 33%</String>
   <String Key="Potential_10220_2">Mỗi khi tấn công thường lần thứ 10, ném &lt;Bom Khổng Lồ&gt; gây thêm sát thương gấp 3 lần vào phạm vi 5x5</String>
   <String Key="Potential_10240_2">Làm lộ "điểm yếu" của mục tiêu &lt;Đòn Đánh Khốc Liệt&gt; rồi tăng 30% sát thương mục tiêu phải nhận trong 10 giây (Boss: giảm một nửa hiệu ứng)</String>
@@ -2564,8 +2567,7 @@ Tiến hành mua?</String>
   <String Key="ShopItemName_951">Cấp phát Đá Quý hằng ngày</String>
   <String Key="Name_Potential_10190_3">Chấn Động</String>
   <String Key="Name_Potential_10200_3">Nghịch Lưu</String>
-  <String Key="Potential_10190_3">Cố định phạm vi của &lt;Hậu Thuẫn Dữ Dội&gt; trong vòng 2 ô xung quanh đối với mọi cấp ★
-Đổi cự ly đẩy từ 3 ô thành 2/3/4/5 ô</String>
+  <String Key="Potential_10190_3">Đổi mục tiêu của &lt;Hậu Thuẫn Dữ Dội&gt; thành kẻ địch gần nhất trong phạm vi 9X9, lượng nhận khiên của Behemus +100%</String>
   <String Key="SkinName_1003002">Năm Mới Evan</String>
   <String Key="SkinDesc_1003002">&lt;i&gt;Skin Năm Mới 2022&lt;/i&gt;</String>
   <String Key="Alert_Temp_NoIAP">Tạm thời không thể thanh toán in-app. Vui lòng thử lại sau.</String>
@@ -3560,7 +3562,7 @@ Trên đống tro tàn mà thét lớn "Nơi đây trước kia từng là chi�
   <String Key="CardInfo_LevelUpInventoryItem">Miễn phí EXP/Vàng khi lên cấp anh hùng</String>
   <String Key="CardInfo_PotentialInventoryItem">Miễn phí EXP/ Dấu/ Vàng khi thức tỉnh anh hùng</String>
   <String Key="InventoryItemDesc_110">Cuốn sách lưu trữ nhiều kinh nghiệm trên thế gian.
-Có thể đổi thành EXP anh hùng mong muốn.</String>
+Có thể đổi thành EXP anh hùng mong muốn. </String>
   <String Key="InventoryItemDesc_120">Dấu được trao cho anh hùng.
 Dùng để thức tỉnh và lên cấp anh hùng từ cấp 16.</String>
   <String Key="InventoryItemDesc_130">Dấu Vua được trao cho anh hùng tuyệt thế.
@@ -4995,7 +4997,6 @@ Hãy nhìn đây! Thứ sức mạnh áp đảo.&lt;/i&gt;</String>
   <String Key="Hero_Awaken_Noti">{0} đã đạt cấp 16 và đủ khả năng thức tỉnh.
 Tiến hành thức tỉnh để có thể dùng &lt;color=#FFD247&gt;năng lực thức tỉnh&lt;/color&gt; của anh hùng.</String>
   <String Key="ItemDescSub_40463_07">Phòng thủ tuyệt đối {0} lần</String>
-  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">Khi Anh Hùng xuất hiện, &lt;color=#FFD247&gt;Anh Hùng đã chọn&lt;/color&gt; sẽ &lt;color=#FFD247&gt;xuất hiện chắc chắn!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Chọn anh hùng</String>
   <String Key="SelectPickupUnitAgain">Thiết lập lại</String>
@@ -6926,10 +6927,9 @@ Thông tin chi tiết vui lòng liên hệ thông qua Hỗ Trợ Khách Hàng.</
   <String Key="Clan_SystemChat_NameChanged">Tên Liên Minh đã thay đổi.</String>
   <String Key="Clan_Alert_NameBanned">Tên Liên Minh đã bị hạn chế do không phù hợp. Vui lòng thay đổi tại Thiết lập.</String>
   <String Key="Clan_ChangeName">Đổi tên Liên Minh</String>
-  <String Key="Clan_Menu_ChangeName">Đổi tên</String>
+  <String Key="Clan_Menu_ChangeName">Đổi tên </String>
   <String Key="ColosseumSeasonRankingReward">Thưởng mùa</String>
   <String Key="ColosseumRanking">Xếp hạng</String>
-  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Xem chi tiết xác suất Cổ Vật</String>
   <String Key="ArtifactOptionProbDetailDesc">Di chuyển đến trang thông tin chi tiết về xác suất xuất hiện tùy chọn Cổ Vật.</String>
   <String Key="ColosseumNetworkChanged">Đang kết nối lại do thay đổi mạng.</String>
@@ -7364,7 +7364,9 @@ Thành thật xin lỗi vì sự bất tiện này.</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;Siêu việt cấp ★
 
 &lt;/size&gt;Thông qua &lt;color=#ffbc00&gt;siêu việt cấp ★&lt;/color&gt; cho Bảo Cụ, có thể &lt;color=#ffbc00&gt;trao hiệu ứng bổ sung&lt;/color&gt; vào năng lực Bảo Cụ.
-Cần có &lt;color=#ffbc00&gt;Bảo Cụ cùng loại&lt;/color&gt; để thực hiện siêu việt cấp ★.</String>
+Cần có &lt;color=#ffbc00&gt;Bảo Cụ cùng loại&lt;/color&gt; để thực hiện siêu việt cấp ★.
+
+</String>
   <String Key="SkinName_1032006">Sóng Xanh Tya</String>
   <String Key="SkinName_1036004">Sóng Xanh Hải Lang</String>
   <String Key="SkinName_1042003">Sóng Xanh Thái Bạch</String>
@@ -7438,7 +7440,8 @@ EXP anh hùng nhận khi hoàn thành Tập Kích tăng {2}</String>
 Sát thương gây ra khi vô địch +{1}%</String>
   <String Key="TreasureSkillDesc_3300033">Anh hùng có cấp ★ cao nhất trong số các anh hùng đã gắn Mur vô địch trong {1} giây khi chịu sát thương dẫn đến tử trận hoặc ở mỗi lần máu đạt mức {0}% (Giới hạn mỗi điều kiện 1 lần)
 (Không thể hồi máu hay nhận khiên ở trạng thái vô địch)
-Sát thương gây ra khi vô địch +{2}%</String>
+Sát thương gây ra khi vô địch +{2}%
+</String>
   <String Key="TreasureSkillDesc_3300034">Anh hùng có cấp ★ cao nhất trong số các anh hùng đã gắn Mur vô địch trong {1} giây khi chịu sát thương dẫn đến tử trận hoặc ở mỗi lần máu đạt mức {0}% (Giới hạn mỗi điều kiện 1 lần)
 (Không thể hồi máu hay nhận khiên ở trạng thái vô địch)
 Sát thương gây ra khi vô địch +{2}%
@@ -7668,11 +7671,15 @@ Có thể nhận được &lt;color=#ffbc00&gt;nguyên liệu cường hóa&lt;/
  &lt;size=25&gt;Siêu việt cấp ★
 
 &lt;/size&gt;Thông qua &lt;color=#ffbc00&gt;siêu việt cấp ★&lt;/color&gt; cho Bảo Cụ, có thể &lt;color=#ffbc00&gt;trao hiệu ứng bổ sung&lt;/color&gt; vào năng lực Bảo Cụ.
-Cần có &lt;color=#ffbc00&gt;Bảo Cụ cùng loại&lt;/color&gt; để thực hiện siêu việt cấp ★.</String>
+Cần có &lt;color=#ffbc00&gt;Bảo Cụ cùng loại&lt;/color&gt; để thực hiện siêu việt cấp ★.
+
+</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Cường hóa Bảo Cụ
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;Cường hóa&lt;/color&gt; Bảo Cụ để gia tăng &lt;color=#ffbc00&gt;hiệu ứng năng lực Bảo Cụ&lt;/color&gt;.
-Có thể nhận được &lt;color=#ffbc00&gt;nguyên liệu cường hóa&lt;/color&gt; Bảo Cụ bằng cách &lt;color=#ffbc00&gt;phân hủy&lt;/color&gt; Bảo Cụ trong Kho hoặc &lt;color=#ffbc00&gt;mua tại Cửa Hàng&lt;/color&gt;.</String>
+Có thể nhận được &lt;color=#ffbc00&gt;nguyên liệu cường hóa&lt;/color&gt; Bảo Cụ bằng cách &lt;color=#ffbc00&gt;phân hủy&lt;/color&gt; Bảo Cụ trong Kho hoặc &lt;color=#ffbc00&gt;mua tại Cửa Hàng&lt;/color&gt;.
+
+</String>
   <String Key="TreasureOvercome">Siêu việt cấp ★</String>
   <String Key="TreasureOvercome_Short">Siêu việt cấp ★</String>
   <String Key="ViewNextOvercome">Xem siêu việt kế tiếp</String>
@@ -9485,7 +9492,7 @@ Không giảm xuống thấp hơn 2.000 điểm.</String>
   <String Key="UnitSubName_10670">Người Cầm Cờ Chiến Trường</String>
   <String Key="Potential_10670_0">Hộ vệ +30</String>
   <String Key="Potential_10670_1">Khi khai trận, sau khi chịu sát thương lần đầu tiên, sát thương phải nhận trong 2 giây -70%</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;Gia tộc danh tiếng Litere của Đế Quốc đã sản sinh ra nhiều nhân tài xuất chúng trong nhiều lĩnh vực. Patros, mặc dù không có tài năng bẩm sinh như những người xuất thân từ Litere khác, nhờ vào nỗ lực vượt trội hơn bất kỳ ai, anh đã trở thành một chỉ huy mẫu mực của Đế Quốc Quân.&lt;/i&gt;</String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;Gia tộc danh tiếng Litere của Đế Quốc đã sản sinh ra nhiều nhân tài xuất chúng trong nhiều lĩnh vực. Patros, mặc dù không có tài năng bẩm sinh như những người xuất thân từ Litere khác, nhờ vào nỗ lực vượt trội hơn bất kỳ ai, anh đã trở thành một chỉ huy mẫu mực của Đế Quốc Quân.&lt;/i&gt; </String>
   <String Key="SkillName_10670">Vì Đế Quốc!</String>
   <String Key="SkillDesc_10670">Khích lệ đồng đội trong {TotalAttackTime} giây, chữa trị {Heal} và tăng {AttackSpeedPerUnit10670}% tốc độ tấn công cho toàn bộ đồng đội trong phạm vi {SplashRangeX}{x}{SplashRangeY} quanh bản thân theo chu kỳ {Time} giây. Áp dụng lượng tăng tốc độ tấn công có hiệu ứng cao nhất trong số các kỹ năng cùng tên.</String>
   <String Key="SkillDesc_10670_Short">Trong {TotalAttackTime} giây, chữa trị {Heal} và tăng {AttackSpeedPerUnit10670}% tốc độ tấn công cho đồng đội trong phạm vi {SplashRangeX}{x}{SplashRangeY} xung quanh theo chu kỳ {Time} giây. Chỉ áp dụng lượng tăng tốc độ tấn công cao nhất của &lt;Vì Đế Quốc!&gt;.</String>
@@ -9785,7 +9792,8 @@ Chắc chắn bỏ qua?</String>
   <String Key="BaseHybridDefOnInvade">Thưởng Vàng Tập Kích +{0}
 Lực phòng thủ của mọi anh hùng ở Tập Kích +{1}
 Không thể tôi luyện, và không thể mài để cường hóa</String>
-  <String Key="ArtifactOptionDesc_Event_15000">Miễn phí chuyển vị trí thông qua mài (Đến 3/12/2024)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">
+Miễn phí chuyển vị trí thông qua mài (Đến 3/12/2024)</String>
   <String Key="SkinName_1032007">Nữ Thần Mặt Trăng Tya</String>
   <String Key="SkinName_1032007_NewLine">Nữ Thần Mặt Trăng Tya</String>
   <String Key="TerritoryBuildingName_40300">Tượng Nữ Thần Mặt Trăng</String>
@@ -11374,7 +11382,8 @@ Thử thách &amp; Thành tựu</String>
   <String Key="AddDifficultyUnlockDesc">Mở 2 mức độ khó khi hoàn thành mà không chịu sát thương.</String>
   <String Key="AccessoryLevelUpTutorialLock">Có thể xem sau khi hoàn thành Xâm Thực II-1.</String>
   <String Key="NotAccessoryLevelUp">Không có Trang Sức nào có thể cường hóa.</String>
-  <String Key="ArtifactOptionDesc_Event_15020">Miễn phí chuyển vị trí thông qua Mài (&lt;color=#ffbd4a&gt;Đến {0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">
+Miễn phí chuyển vị trí thông qua Mài (&lt;color=#ffbd4a&gt;Đến {0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Hoàn thành chương {0}-{1} độ khó [{Diff}] trở lên</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">Hoàn thành [Xâm Thực] chương {0}-{1} độ khó [{Diff}] trở lên</String>
   <String Key="Polish_EventArtifact_Alert">Cổ Vật này không thể cường hóa thông qua Mài!</String>
@@ -11726,7 +11735,8 @@ Khi mục tiêu tấn công có máu tối đa cao hơn bản thân, phát sinh 
   <String Key="SpecialPackage_1556">Gói Eterna 1</String>
   <String Key="SpecialPackage_1557">Gói Eterna 2</String>
   <String Key="SpecialPackage_1558">Gói Eterna 3</String>
-  <String Key="MakeAllLateComerExceptSlot">Trao hiệu ứng Đội đi sau cho toàn bộ anh hùng ngoại trừ anh hùng ở ô {0} của binh lực.</String>
+  <String Key="MakeAllLateComerExceptSlot">Trao hiệu ứng Đội đi sau cho toàn bộ anh hùng ngoại trừ anh hùng ở ô {0} của binh lực.
+</String>
   <String Key="Order_1">thứ nhất</String>
   <String Key="Order_2">thứ hai</String>
   <String Key="Order_3">thứ ba</String>
@@ -13836,7 +13846,7 @@ Khi nhận sát thương dẫn đến tử vong, dịch chuyển tức thời đ
   <String Key="ArenaDebuffDesc_01">Tổng lượng chữa trị giảm 80% khi chiến đấu</String>
   <String Key="ArenaDebuffDesc_02">Tất cả khiên giảm 80% khi chiến đấu</String>
   <String Key="ArenaDebuffDesc_03">Mọi hiệu ứng cản trở giảm 50% khi chiến đấu</String>
-  <String Key="ArenaDebuffDesc_04">Lực phòng thủ +500</String>
+  <String Key="ArenaDebuffDesc_04">Lực phòng thủ +500 và Lực phòng thủ tổng giảm dần theo thời gian</String>
   <String Key="ArenaDebuffTitle">Hiệu ứng Đấu Trường</String>
   <String Key="Theme68BattleObserverDesc_0">Hoàn thành vòng mà không bị Ninja Sát Thủ hoặc Ninja Sát Thủ Bậc Thầy tiêu diệt</String>
   <String Key="Theme68BattleObserverDesc_1">Tiêu diệt tất cả Hồn Linh Sư khi đang trong trạng thái tăng sát thương phải nhận do đóng băng</String>
@@ -14409,7 +14419,8 @@ Trận Chinh Phạt Liên Minh</String>
   <String Key="AltarHelpBuilding_5">Tế Đàn giúp tăng lượng Bạc được nhận để dễ dàng triệu hồi anh hùng và sử dụng Cửa Hàng.
 
 Đề xuất: Tập Kích, Đấu Trường</String>
-  <String Key="ArtifactBuffDataDesc_15010">Khi khai trận trong Tập Kích và Viễn Chinh, tốc độ tấn công của Anh Hùng Tiên Phong +{0}% (Không có hiệu ứng nếu không có Anh Hùng Tiên Phong)</String>
+  <String Key="ArtifactBuffDataDesc_15010">Khi khai trận trong Tập Kích và Viễn Chinh, tốc độ tấn công của Anh Hùng Tiên Phong +{0}% (Không có hiệu ứng nếu không có Anh Hùng Tiên Phong)
+</String>
   <String Key="Post_Name_AltarGoldRefund">Hoàn trả vàng Gia Tăng Lửa Tế Đàn</String>
   <String Key="Post_Desc_AltarGoldRefund">Hoàn trả lại số vàng đã dùng cho Gia Tăng Lửa Tế Đàn.</String>
   <String Key="OutgameTutorial_140_00">Hân hạnh được diện kiến Quốc vương của tòa thành. &lt;color=#FFC13D&gt;Thần là Thống Soái Đội Hiệp Sĩ Aslyn.&lt;/color&gt;
@@ -15461,7 +15472,7 @@ Mỗi khi dùng kỹ năng, xác suất chí mạng vật lý +{4}% và sát th�
   <String Key="SeasonInformation">Thông tin Mùa</String>
   <String Key="SeasonInformationHelp_0">Bạn có thể xem thông tin Chương của Đá Triệu Hồi Đột Kích được cung cấp trong mùa này và Điều chỉnh chỉ số anh hùng đã được áp dụng.</String>
   <String Key="SeasonInformationHelp_1">Chạm biểu tượng Chương để xem tên của Đá Triệu Hồi Đột Kích.</String>
-  <String Key="SeasonInformationHelp_2">Trong Điều chỉnh chỉ số anh hùng, nhấn Xem tất cả để xem điều chỉnh chỉ số của mọi Anh Hùng.</String>
+  <String Key="SeasonInformationHelp_2">Trong Điều chỉnh chỉ số anh hùng, nhấn Xem tất cả để xem ST gây ra và tỷ lệ Nhận được Phòng thủ Tuyệt đối của tất cả Anh Hùng.</String>
   <String Key="InvadeSpawnItem">Đá Triệu Hồi Đột Kích</String>
   <String Key="SkillDesc_60505">Khi trúng đòn và đầy cơn giận, tăng Tốc độ tấn công +{AttackSpeedPer}% và Tốc độ di chuyển +{MoveSpeedPer}%, đồng thời miễn nhiễm hiệu ứng xấu.</String>
   <String Key="SkillDesc_60665">Khi trúng đòn và đầy cơn giận, tăng Tốc độ tấn công +{AttackSpeedPer}% và Tốc độ di chuyển +{MoveSpeedPer}%, đồng thời miễn nhiễm hiệu ứng xấu.</String>
@@ -16996,9 +17007,9 @@ Sát thương chí mạng vật lý tăng tối đa +{5}% theo thời gian còn 
   <String Key="SubStoryChapterName_1_4">Cathy Nosferatu</String>
   <String Key="SubStoryChapterName_1_5">Thư Phòng của Roderick</String>
   <String Key="SubStoryChapterName_1_6">Báo Thù</String>
-  <String Key="SubStoryChapterName_1_7">???</String>
-  <String Key="SubStoryChapterName_1_8">???</String>
-  <String Key="SubStoryChapterName_1_9">???</String>
+  <String Key="SubStoryChapterName_1_7">Cuồng Bạo</String>
+  <String Key="SubStoryChapterName_1_8">Nơi Rượu Vang Thuộc Về</String>
+  <String Key="SubStoryChapterName_1_9">Hồi Kết</String>
   <String Key="SubStoryChapterDesc_1">Sinh ra là con gái của một gia đình quý tộc ở Miền Trung, Ophelia chỉ sống thuận theo dòng đời, nhảy múa trong sảnh tiệc và uống rượu vang. Ngay cả sau cuộc hôn nhân sắp đặt với Roderick, lãnh chúa Frostwald, mọi thứ vẫn không đổi. Nhưng rồi một ngày nọ, sau một cuộc Tập Kích, Ophelia bị bắt cóc tới một nơi xa lạ.</String>
   <String Key="UnitName_10800">Cathy</String>
   <String Key="DimensionUnitSummon">Triệu Hồi Thứ Nguyên</String>
@@ -17919,9 +17930,9 @@ Sau khi bắt đầu Chiến Đấu, mỗi giây Nhận được +{11}% kháng h
   <String Key="SkinDesc_Default_10800">&lt;i&gt;Sinh ra là một nửa Vampire, Cathy lớn lên trong sự phân biệt đối xử và bị các thành viên gia tộc Nosferatu ngược đãi. Nhưng thay vì gục ngã, Cathy đang nỗ lực tạo ra một thế giới nơi nhiều chủng tộc có thể cùng chung sống.&lt;/i&gt;</String>
   <String Key="SkillName_10800">Bản Năng Bị Kìm Nén</String>
   <String Key="SkillDesc_10800_Short">Tự nhận 1 lần hồi sinh. Khi hồi sinh, biến thân thành dạng Vampire và được tăng cường kỹ năng cùng chỉ số.</String>
-  <String Key="SkillDesc_10800_Long">Tự nhận 1 lần hồi sinh với {Unit@ReviveHpPer}% Máu tối đa. Khi hồi sinh, mất kiểm soát trong {10805@TransformTime} giây, biến thân thành dạng Vampire với Máu {Unit@TransformHpForDesc}, Lực phòng thủ +{108000@BaseDef} và Hút máu phép +{108000@MagicDrain}%, xuất hiện ở vị trí có thể đánh trúng nhiều kẻ địch nhất, đồng thời gây nỗi sợ lên kẻ địch trong phạm vi {10815@SplashRangeX}{X}{10815@SplashRangeY} trong {10815@FearTime} giây. Hiệu ứng hồi sinh từ kỹ năng này không cộng dồn.</String>
+  <String Key="SkillDesc_10800_Long">Nhận 1 lần hồi sinh với {Unit@ReviveHpPer}% Máu tối đa. Khi hồi sinh, bản thân rơi vào cuồng bạo trong {10805@TransformTime} giây, biến thân thành dạng Vampire với {Unit@TransformHpForDesc}% Máu, +{108000@BaseDef} Lực phòng thủ và +{108000@MagicDrain}% Hút máu phép, sau đó đáp xuống vị trí có thể đánh trúng nhiều kẻ địch nhất và gây nỗi sợ lên kẻ địch trong phạm vi {10815@SplashRangeX}{X}{10815@SplashRangeY} trong {10815@FearTime} giây. Hồi sinh từ kỹ năng này không cộng dồn.</String>
   <String Key="SkillDesc_10800_Short_2">Tự nhận 1 lần hồi sinh. Khi hồi sinh, biến thân thành dạng Vampire và được tăng cường kỹ năng cùng chỉ số.</String>
-  <String Key="SkillDesc_10800_Long_2">Tự nhận 1 lần hồi sinh với {Unit@ReviveHpPer}% Máu tối đa. Khi hồi sinh, mất kiểm soát trong {10805@TransformTime} giây, biến thân thành dạng Vampire với Máu {Unit@TransformHpForDesc}, Lực phòng thủ +{108000@BaseDef} và Hút máu phép +{108000@MagicDrain}%, xuất hiện ở vị trí có thể đánh trúng nhiều kẻ địch nhất, đồng thời gây nỗi sợ lên kẻ địch trong phạm vi {10815@SplashRangeX}{X}{10815@SplashRangeY} trong {10815@FearTime} giây. Mỗi lần biến thân, Máu tối đa tổng của dạng Vampire tăng +{10800@Unit10800AI_TotalHpPer}%. Hiệu ứng hồi sinh từ kỹ năng này không cộng dồn.</String>
+  <String Key="SkillDesc_10800_Long_2">Nhận 1 lần hồi sinh với {Unit@ReviveHpPer}% Máu tối đa. Khi hồi sinh, bản thân rơi vào cuồng bạo trong {10805@TransformTime} giây, biến thân thành dạng Vampire với {Unit@TransformHpForDesc}% Máu, +{108000@BaseDef} Lực phòng thủ và +{108000@MagicDrain}% Hút máu phép, sau đó đáp xuống vị trí có thể đánh trúng nhiều kẻ địch nhất và gây nỗi sợ lên kẻ địch trong phạm vi {10815@SplashRangeX}{X}{10815@SplashRangeY} trong {10815@FearTime} giây. Mỗi lần biến thân, Máu tối đa tổng của dạng Vampire tăng +{10800@Unit10800AI_TotalHpPer}%. Hồi sinh từ kỹ năng này không cộng dồn.</String>
   <String Key="ActiveSkillName_10800">Thức Tỉnh</String>
   <String Key="ActiveSkillDesc_10800">Khi bắt đầu trận sau, mọi Cathy Nửa Vampire nhận miễn nhiễm hiệu ứng cản trở.</String>
   <String Key="ActiveSkillDesc_10803">Khi bắt đầu trận sau, mọi Cathy Nửa Vampire nhận {0} lần hồi sinh và miễn nhiễm hiệu ứng cản trở.</String>
@@ -17961,51 +17972,325 @@ Sau khi bắt đầu Chiến Đấu, mỗi giây Nhận được +{11}% kháng h
   <String Key="SkinDesc_107100401">&lt;i&gt;Phần thưởng đạt Xếp Hạng của Liên Minh Ấm Áp trong Chiến Đấu&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Vương Sao Mai Farael</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;Ánh sao cao quý nhất sinh ra trong buổi rạng đông sớm sẽ hóa thành ánh sáng rực rỡ nhất, xuyên qua bóng tối.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Nhận được Phòng thủ tuyệt đối</String>
+  <String Key="SuperShieldModulator">Tỷ lệ nhận Phòng thủ Tuyệt đối</String>
   <String Key="BuildingEffect_BaseDamageReflect">Phản {Value}% sát thương
 (Sát thương phép: giảm một nửa)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">Phản lại một phần sát thương anh hùng đã chịu cho địch.</String>
-  <String Key="TreasureName_30042">Perataus</String>
+  <String Key="TreasureName_30042">Ferataus</String>
   <String Key="TreasureSubName_30042">Khiên Đen Kịt</String>
-  <String Key="TreasureDesc_30042">Khiên của Behemus không chỉ để phòng thủ. Cú Xông Tới Dữ Dội của Behemus với tấm Khiên nặng có thể làm móp cả lớp giáp mạnh nhất chỉ trong chớp mắt.</String>
+  <String Key="TreasureDesc_30042">Khiên của Behemus không chỉ để phòng thủ. Cú xông tới dữ dội của Behemus với chiếc khiên nặng có thể nghiền méo cả lớp giáp cứng nhất chỉ trong chớp mắt.</String>
   <String Key="TreasureSkillName_30042">Lao Xuống</String>
-  <String Key="BuffDataName_3300421">Nghiền Nát I</String>
-  <String Key="BuffDataName_3300422">Làm Móp I</String>
-  <String Key="BuffDataName_3300423">Vô Hiệu Hóa</String>
-  <String Key="BuffDataName_3300424">Làm Móp II</String>
-  <String Key="BuffDataName_3300425">Nghiền Nát II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Cửa Hàng Đặc Biệt Pickup Perataus</String>
-  <String Key="SpecialPackage_1680">Gói Perataus 1</String>
-  <String Key="SpecialPackage_1681">Gói Perataus 2</String>
-  <String Key="SpecialPackage_1682">Gói Perataus 3</String>
-  <String Key="BuffDataDesc_3300421">Chuyển sát thương +{1}x cho mỗi {0} Uy hiếp</String>
-  <String Key="BuffDataDesc_3300422">Kẻ địch có Bất Ổn phải nhận sát thương vật lý +{0}%</String>
-  <String Key="BuffDataDesc_3300423">Mỗi khi Bất Ổn bị gỡ, tất cả đồng minh nhận +{0} Phòng thủ tuyệt đối cho mỗi kẻ địch bị gỡ</String>
-  <String Key="BuffDataDesc_3300424">Kẻ địch có Bất Ổn phải nhận sát thương vật lý +{0}%</String>
-  <String Key="BuffDataDesc_3300425">Chuyển sát thương +{1}x cho mỗi {0} Uy hiếp</String>
+  <String Key="BuffDataName_3300421">Áp Chế I</String>
+  <String Key="BuffDataName_3300422">Suy Yếu I</String>
+  <String Key="BuffDataName_3300423">Phá Vỡ</String>
+  <String Key="BuffDataName_3300424">Suy Yếu II</String>
+  <String Key="BuffDataName_3300425">Áp Chế II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Cửa Hàng Đặc Biệt Ferataus Pickup</String>
+  <String Key="SpecialPackage_1680">Gói Ferataus 1</String>
+  <String Key="SpecialPackage_1681">Gói Ferataus 2</String>
+  <String Key="SpecialPackage_1682">Gói Ferataus 3</String>
+  <String Key="BuffDataDesc_3300421">Truyền sát thương +{1}x mỗi {0} Uy hiếp</String>
+  <String Key="BuffDataDesc_3300422">Khi Bất Ổn bị xóa, mục tiêu bị choáng trong {0} giây</String>
+  <String Key="BuffDataDesc_3300423">Sát thương vật lý phải nhận của kẻ địch Bất Ổn +{0}% (Tăng sát thương vật lý phải nhận không cộng dồn. Chỉ áp dụng giá trị cao nhất)</String>
+  <String Key="BuffDataDesc_3300424">Khi Bất Ổn bị xóa, mục tiêu bị choáng trong {0} giây</String>
+  <String Key="BuffDataDesc_3300425">Truyền sát thương +{1}x mỗi {0} Uy hiếp</String>
   <String Key="TreasureSkillDesc_3300420">Khi gây sát thương kỹ năng lên kẻ địch, áp dụng Bất Ổn lên mục tiêu
-Nếu đồng minh gây sát thương vật lý bằng ít nhất {0}% Máu tối đa của mục tiêu lên kẻ địch có Bất Ổn, {1}% sát thương đó được chuyển thành sát thương đặc biệt sang một kẻ địch khác có Bất Ổn, sau đó gỡ Bất Ổn khỏi tất cả kẻ địch
-&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được dùng chung ngay cả khi các Anh Hùng khác nhau áp dụng Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
+Nếu một đồng minh gây sát thương vật lý trong một đòn lên kẻ địch Bất Ổn bằng hoặc lớn hơn {0}% Máu tối đa của mục tiêu, không tính khiên, thì {1}% sát thương sẽ được truyền tới kẻ địch Bất Ổn khác dưới dạng sát thương đặc biệt, sau đó xóa toàn bộ Bất Ổn
+&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được chia sẻ ngay cả khi các Anh Hùng khác nhau gây Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="TreasureSkillDesc_3300421">Khi gây sát thương kỹ năng lên kẻ địch, áp dụng Bất Ổn lên mục tiêu
-Nếu đồng minh gây sát thương vật lý bằng ít nhất {0}% Máu tối đa của mục tiêu lên kẻ địch có Bất Ổn, {1}% sát thương đó được chuyển thành sát thương đặc biệt sang một kẻ địch khác có Bất Ổn, sau đó gỡ Bất Ổn khỏi tất cả kẻ địch
-Chuyển sát thương +{3}x cho mỗi {2} Uy hiếp
-&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được dùng chung ngay cả khi các Anh Hùng khác nhau áp dụng Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
+Nếu một đồng minh gây sát thương vật lý trong một đòn lên kẻ địch Bất Ổn bằng hoặc lớn hơn {0}% Máu tối đa của mục tiêu, không tính khiên, thì {1}% sát thương sẽ được truyền tới kẻ địch Bất Ổn khác dưới dạng sát thương đặc biệt, sau đó xóa toàn bộ Bất Ổn
+Truyền sát thương +{3}x mỗi {2} Uy hiếp
+&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được chia sẻ ngay cả khi các Anh Hùng khác nhau gây Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="TreasureSkillDesc_3300422">Khi gây sát thương kỹ năng lên kẻ địch, áp dụng Bất Ổn lên mục tiêu
-Nếu đồng minh gây sát thương vật lý bằng ít nhất {0}% Máu tối đa của mục tiêu lên kẻ địch có Bất Ổn, {1}% sát thương đó được chuyển thành sát thương đặc biệt sang một kẻ địch khác có Bất Ổn, sau đó gỡ Bất Ổn khỏi tất cả kẻ địch
-Chuyển sát thương +{3}x cho mỗi {2} Uy hiếp
-Kẻ địch có Bất Ổn phải nhận sát thương vật lý +{4}%
-Hiệu ứng tăng sát thương vật lý phải nhận này không cộng dồn, chỉ áp dụng giá trị cao nhất
-&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được dùng chung ngay cả khi các Anh Hùng khác nhau áp dụng Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
+Nếu một đồng minh gây sát thương vật lý trong một đòn lên kẻ địch Bất Ổn bằng hoặc lớn hơn {0}% Máu tối đa của mục tiêu, không tính khiên, thì {1}% sát thương sẽ được truyền tới kẻ địch Bất Ổn khác dưới dạng sát thương đặc biệt, sau đó xóa toàn bộ Bất Ổn
+Truyền sát thương +{3}x mỗi {2} Uy hiếp
+Khi Bất Ổn bị xóa, mục tiêu bị choáng trong {4} giây
+&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được chia sẻ ngay cả khi các Anh Hùng khác nhau gây Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="TreasureSkillDesc_3300423">Khi gây sát thương kỹ năng lên kẻ địch, áp dụng Bất Ổn lên mục tiêu
-Nếu đồng minh gây sát thương vật lý bằng ít nhất {0}% Máu tối đa của mục tiêu lên kẻ địch có Bất Ổn, {1}% sát thương đó được chuyển thành sát thương đặc biệt sang một kẻ địch khác có Bất Ổn, sau đó gỡ Bất Ổn khỏi tất cả kẻ địch
-Chuyển sát thương +{3}x cho mỗi {2} Uy hiếp
-Kẻ địch có Bất Ổn phải nhận sát thương vật lý +{4}%
-Hiệu ứng tăng sát thương vật lý phải nhận này không cộng dồn, chỉ áp dụng giá trị cao nhất
-Mỗi khi Bất Ổn bị gỡ, tất cả đồng minh nhận +{5} Phòng thủ tuyệt đối cho mỗi kẻ địch bị gỡ
-&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được dùng chung ngay cả khi các Anh Hùng khác nhau áp dụng Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
+Nếu một đồng minh gây sát thương vật lý trong một đòn lên kẻ địch Bất Ổn bằng hoặc lớn hơn {0}% Máu tối đa của mục tiêu, không tính khiên, thì {1}% sát thương sẽ được truyền tới kẻ địch Bất Ổn khác dưới dạng sát thương đặc biệt, sau đó xóa toàn bộ Bất Ổn
+Truyền sát thương +{3}x mỗi {2} Uy hiếp
+Khi Bất Ổn bị xóa, mục tiêu bị choáng trong {4} giây
+Sát thương vật lý phải nhận của kẻ địch Bất Ổn +{5}%
+Tăng sát thương vật lý phải nhận không cộng dồn. Chỉ áp dụng giá trị cao nhất
+&lt;color=#808080&gt;&lt;i&gt;Hiệu ứng này được chia sẻ ngay cả khi các Anh Hùng khác nhau gây Bất Ổn.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="SpecialShop_TreasureDoublePickUp10014">Cửa Hàng Đặc Biệt Pickup Bảo Cụ</String>
   <String Key="SpecialPackage_1676">Gói Đá Triệu Hồi Pickup Bảo Cụ 1</String>
   <String Key="SpecialPackage_1677">Gói Đá Triệu Hồi Pickup Bảo Cụ 2</String>
   <String Key="SpecialPackage_1678">Gói Caelus</String>
   <String Key="SpecialPackage_1679">Gói Nhóc Tinh Nghịch</String>
+  <String Key="CannotSummonByWatchingAdsWhileInBattleAlert">Không khả dụng trong Chiến Đấu.</String>
+  <String Key="AdsReroll">Reroll Miễn Phí</String>
+  <String Key="AdsDeckSet">Đặt Lại Đội Hình Miễn Phí</String>
+  <String Key="ResetPVPMatch">Đặt Lại</String>
+  <String Key="CannotResetPVPMatchByWatchingAdsAlert">Bạn đã dùng hết lượt đặt lại hôm nay.</String>
+  <String Key="PVPDeckSettingReTryAdsPopupTitle">Thử Lại Đội Hình</String>
+  <String Key="PVPDeckSettingReTryAdsPopupDesc">Bạn có muốn xem quảng cáo và thử lại miễn phí không?
+Mua King God Pass sẽ xóa quảng cáo trong game.
+Nếu chọn dùng Đá Quý, lượt thử lại miễn phí bằng quảng cáo hôm nay sẽ không khả dụng.</String>
+  <String Key="PVPDeckSettingReTryAdsCancelAlert">Đóng cửa sổ này sẽ hủy lượt thử lại miễn phí bằng quảng cáo. Hủy thử lại?</String>
+  <String Key="SuperShieldAdaptabilityPer">Cường hóa Tế Đàn Máu {0}
+Tỷ lệ nhận Phòng thủ Tuyệt đối +{1}%</String>
+  <String Key="SuperShieldAdaptabilityPer_Piece">Cường hóa Tế Đàn Máu
+Tỷ lệ nhận Phòng thủ Tuyệt đối tăng</String>
+  <String Key="SkillDesc_1019000_Short">Lao xuống kẻ địch gần nhất, gây {Damage:BaseValue}+{Damage:MAtkPer} sát thương trong {SplashRangeX}{X}{SplashRangeY} và đẩy lùi mục tiêu {Knockback} ô.</String>
+  <String Key="SkillDesc_1019001_Short">Lao xuống kẻ địch gần nhất, gây {Damage:BaseValue}+{Damage:MAtkPer} sát thương trong {SplashRangeSum} ô xung quanh và đẩy lùi mục tiêu {Knockback} ô.</String>
+  <String Key="SkillDesc_1019000_Long">Lao xuống trước kẻ địch gần nhất trong phạm vi {RangeX}{X}{RangeY}, dùng sức mạnh của chiếc khiên nặng để gây {Damage:BaseValue}+{Damage:MAtkPer} sát thương lên tất cả kẻ địch trong phạm vi {SplashRangeX}{X}{SplashRangeY} và đẩy lùi chúng {Knockback} ô.</String>
+  <String Key="SkillDesc_1019001_Long">Lao xuống trước kẻ địch gần nhất trong phạm vi {RangeX}{X}{RangeY}, dùng sức mạnh của chiếc khiên nặng để gây {Damage:BaseValue}+{Damage:MAtkPer} sát thương lên tất cả kẻ địch trong {SplashRangeSum} ô xung quanh và đẩy lùi chúng {Knockback} ô.</String>
+  <String Key="ChallengeBossDesc_72">Có ô có thể bị tấn công là &lt;color=#8DFFFF&gt;1x1&lt;/color&gt; và kích thước là &lt;color=#8DFFFF&gt;3x3&lt;/color&gt; ô.</String>
+  <String Key="SkillName_30000051">Cứng Hóa</String>
+  <String Key="SkillDesc_30000051">Dùng ngay khi bắt đầu Chiến Đấu. Uy hiếp của boss tăng &lt;color=#ffd264&gt;Độ Khó Thử TháchX&lt;/color&gt;{DescDefPen}, và sát thương boss phải nhận không đến từ phản đòn/phản công giảm &lt;color=#ffd264&gt;Độ Khó Thử TháchX&lt;/color&gt;{DescReflectDef}%. Khi Độ Khó Thử Thách từ 20 trở lên, Lực phòng thủ còn tăng thêm {DescDef} cho mỗi cấp độ khó.</String>
+  <String Key="SkillName_30000052">Phóng Thích</String>
+  <String Key="SkillDesc_30000052">Gây tổng {DescDamage} sát thương lên các Anh Hùng trong phạm vi {SplashRangeX}{X}{SplashRangeY} trong {DescAttackTime} giây.</String>
+  <String Key="SkillName_30000053">Hủy Diệt</String>
+  <String Key="SkillDesc_30000053">Gây {Damage} sát thương kỹ năng vật lý lên tất cả kẻ địch. Ở Độ Khó Thử Thách 10 trở xuống, thay vào đó gây sát thương bằng {MaxDamage:HpPer:BaseValue}% Máu tối đa của boss. Bỏ qua {DefBreak}% Lực phòng thủ.</String>
+  <String Key="StoryClearBenefit_430072000">Kho Đồ - Nhận được Khiên Báo Thù
+
+&lt;i&gt;Khiên Báo Thù: Nhận được Phản sát thương&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072001">Kho Đồ - Nhận được Dây Chuyền Hi Vọng
+
+&lt;i&gt;Dây Chuyền Hi Vọng: Nhận hồi sinh sau một thời gian từ khi Chiến Đấu bắt đầu&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072002">Trong màn boss, nhận được vật phẩm - Trượng Chữa Trị
+
+&lt;i&gt;Trượng Chữa Trị: Sát thương gây ra tổng giảm, Lượng chữa trị tổng tăng&lt;/i&gt;</String>
+  <String Key="ItemName_60030">Trượng Chữa Trị</String>
+  <String Key="ItemDesc_60030">Sát thương gây ra tổng {0}%, Lượng chữa trị tổng +{1}%</String>
+  <String Key="StoryInventoryItemName_230100">Khiên Báo Thù</String>
+  <String Key="StoryInventoryItemDesc_230100">Phản sát thương +{0}% (sát thương phép giảm một nửa)</String>
+  <String Key="StoryInventoryItemName_230110">Dây Chuyền Hi Vọng</String>
+  <String Key="StoryInventoryItemDesc_230110">Sau {0} giây từ khi Chiến Đấu bắt đầu, ban cho tất cả đồng minh hồi sinh {1} lần</String>
+  <String Key="StoryModeDialogue_2010700_0_0_System">Quân Lãnh Địa của Ophelia liên minh với Trăng Đỏ và xuất quân tới biên giới Nosferatu.</String>
+  <String Key="StoryModeDialogue_2010700_0_1_System">Vlad loạng choạng nhìn Ophelia từ xa. Đôi mắt hắn đỏ rực.</String>
+  <String Key="StoryModeDialogue_2010700_0_2_System">Một luồng hắc khí dữ dội đang bao quanh hắn.</String>
+  <String Key="StoryModeDialogue_2010700_0_3_Vlad">Công nương Ophelia, được gặp lại người như thế này, thật khiến ta vui mừng.</String>
+  <String Key="StoryModeDialogue_2010700_0_4_Vlad">Hay giờ ta nên gọi người là Lãnh chúa? Vẻ đẹp ấy vẫn chưa hề phai đi.</String>
+  <String Key="StoryModeDialogue_2010700_0_5_Vlad">Sao nào, sống tiếp như một con người có đáng không? Người vẫn chưa chán cái chết sao?</String>
+  <String Key="StoryModeDialogue_2010700_0_6_Vlad">Vẫn chưa quá muộn để trở thành gia đình của ta...</String>
+  <String Key="StoryModeDialogue_2010700_1_0_System">Trong khi đó, Cathy cũng chuẩn bị xuất quân. Ngoài cửa sổ phòng làm việc, lá cờ của Trăng Đỏ đang được kéo lên.</String>
+  <String Key="StoryModeDialogue_2010700_1_1_Cathy">Từ khi phu nhân của vị lãnh chúa cũ trở thành lãnh chúa mới, tôi đã gửi thư nhiều lần và xin gặp mặt, nhưng chẳng có hồi âm.</String>
+  <String Key="StoryModeDialogue_2010700_1_2_Cathy">Giờ tôi còn không thể vào Frostwald nữa. Cuối cùng cũng thành ra thế này...</String>
+  <String Key="StoryModeDialogue_2010700_1_3_Cathy">Nếu Vlad chết, chuyện này sẽ không dừng lại ở vấn đề biên giới.</String>
+  <String Key="StoryModeDialogue_2010700_1_4_Cathy">Chủ lực của Nosferatu sẽ lấy cớ rằng 'một con người đã giết quý tộc của gia tộc' để tiến hành trả đũa chính trị, và rồi nó sẽ thành chiến tranh toàn diện giữa các quốc gia.</String>
+  <String Key="StoryModeDialogue_2010700_1_6_Cathy">Giờ chỉ còn cách.... chính tôi phải tới đó, dọn dẹp mọi chuyện và gặp mặt lãnh chúa mới. Đó là cách duy nhất còn lại.</String>
+  <String Key="StoryModeDialogue_2010700_2_0_System">Binh lực của Ophelia.</String>
+  <String Key="StoryModeDialogue_2010700_2_1_System">Ophelia chỉ huy binh lính từ phía sau, còn Neria dẫn đầu, vừa bắn nỏ vừa xông qua Chiến Trường hướng tới dinh thự của Vlad Moren.</String>
+  <String Key="StoryModeDialogue_2010700_2_2_Solar">Ophelia, phía sau!</String>
+  <String Key="StoryModeDialogue_2010700_2_3_Solar">Ư... a, cái này hơi đau đấy.</String>
+  <String Key="StoryModeDialogue_2010700_2_4_Ophelia">Sola! Quân y! Chữa trị cho cô ấy!</String>
+  <String Key="StoryModeDialogue_2010700_2_5_Solar">Em không sao. Em nghĩ mình đã sống đủ vui rồi! Em sẽ tiếp tục cổ vũ cho mọi người....</String>
+  <String Key="StoryModeDialogue_2010700_2_6_System">Ophelia biết rằng chiến tranh luôn đi cùng máu và cái chết.</String>
+  <String Key="StoryModeDialogue_2010700_2_7_System">Suốt 3 tháng, cô học rồi lại học. Nhưng biết và tự mình đối mặt là hai chuyện khác nhau.</String>
+  <String Key="StoryModeDialogue_2010700_2_8_System">Cô mới quen Sola chưa được bao lâu, nhưng chỉ nghĩ đến việc mất cô ấy thôi cũng khiến máu trong người sôi lên.</String>
+  <String Key="StoryModeDialogue_2010700_2_9_System">Hơn nữa, chẳng phải chính cô là người đã quyết định trận chiến này sao?</String>
+  <String Key="StoryModeDialogue_2010700_2_10_System">Trong mắt Ophelia hiện lên hình bóng Neria đang chiến đấu.</String>
+  <String Key="StoryModeDialogue_2010700_2_11_System">Không màng đến sự an nguy của đồng đội, cô ấy một mình lao sâu vào Chiến Trường.</String>
+  <String Key="StoryModeDialogue_2010700_2_12_System">Dáng vẻ của cô ấy vừa cười điên dại vừa nhảy múa, quét sạch Vampire, thật sự không khác mấy với Vlad Moren từng khát máu.</String>
+  <String Key="StoryModeDialogue_2010700_2_13_Solar">...Ophelia. Hehe, em.... chưa chết đâu.</String>
+  <String Key="StoryModeDialogue_2010700_2_14_Ophelia">A, Sola, may quá. Thật sự may quá.</String>
+  <String Key="StoryModeDialogue_2010700_2_14b_Ophelia">Tuyệt đối đừng cử động. Em không cần nói nữa đâu.</String>
+  <String Key="StoryModeDialogue_2010700_2_15_System">Sola được giao cho quân y. Ophelia buông tay Sola ra rồi đứng dậy.</String>
+  <String Key="StoryModeDialogue_2010700_2_16_Ophelia">(Để giảm hi sinh đến mức thấp nhất, mình sẽ kết thúc trận chiến này thật nhanh và hiệu quả.)</String>
+  <String Key="StoryModeDialogue_2010700_2_17_Ophelia">Toàn quân, tiến lên.</String>
+  <String Key="StoryModeDialogue_2010700_3_0_System">Trong khi đó, Neria một mình lướt khắp Chiến Trường và bắt đầu một trận chiến, không, một cuộc thảm sát.</String>
+  <String Key="StoryModeDialogue_2010700_3_1_System">Nụ cười dần lan trên gương mặt Neria.</String>
+  <String Key="StoryModeDialogue_2010700_3_2_Neria">A a... Không gì dễ nghe bằng tiếng hét của Vampire.</String>
+  <String Key="StoryModeDialogue_2010700_3_3_Neria">Đó chính là giá trị tồn tại của lũ các ngươi. Ahahahahaha!</String>
+  <String Key="StoryModeDialogue_2010700_3_4_RedMoon1">Neria đại nhân! Sola đại nhân đã bị thương nặng và rút lui rồi!</String>
+  <String Key="StoryModeDialogue_2010700_3_5_Neria">Ra vậy.</String>
+  <String Key="StoryModeDialogue_2010700_3_6_System">Neria tiếp tục Chiến Đấu và chạm mặt Cathy, người đang tiến lên while khiến quân Frostwald choáng.</String>
+  <String Key="StoryModeDialogue_2010700_3_7a_Cathy">Neria! Cô định giải quyết tình hình này thế nào?!</String>
+  <String Key="StoryModeDialogue_2010700_3_7b_Cathy">Giờ chuyện này đã thành chiến tranh rồi! Tôi cũng không thể ngăn lại!</String>
+  <String Key="StoryModeDialogue_2010700_3_8_Ophelia">Người kia là Alessia Nosferatu sao, Neria?</String>
+  <String Key="StoryModeDialogue_2010700_3_9a_Neria">Giải quyết ư? Giờ chuyện đó không còn quan trọng nữa.</String>
+  <String Key="StoryModeDialogue_2010700_3_9b_Neria">Trong ngươi cũng chảy nửa dòng máu của Vampire bẩn thỉu. Ta sẽ giết nửa đó.</String>
+  <String Key="StoryModeDialogue_2010700_3_10_Ophelia">Không phải vậy! Mục tiêu của tôi chỉ là Vlad Moren. Tôi không muốn thiệt hại lớn hơn.</String>
+  <String Key="StoryModeDialogue_2010700_3_11_Neria">Ophelia. Kẻ đứng đằng kia là cấp trên của Vlad Moren. Cô ta là kẻ thù của chúng ta.</String>
+  <String Key="StoryModeDialogue_2010700_3_12_Cathy">Này, cô kia! Cô là Lãnh Chúa Ophelia, đúng chứ? Hãy nói chuyện với tôi một chút.</String>
+  <String Key="StoryModeDialogue_2010700_3_13_Neria">Không cần nghe lời người phụ nữ đó.</String>
+  <String Key="StoryModeDialogue_2010700_3_14_Ophelia">Tôi sẽ nghe rồi tự mình quyết định!</String>
+  <String Key="StoryModeDialogue_2010700_3_15_Cathy">Đúng vậy! Trước hết phải ngăn chiến tranh lại.</String>
+  <String Key="StoryModeDialogue_2010700_3_16_System">Tuy nhiên, mặc cho nỗ lực của Cathy, Vlad xuất hiện ngay trước mắt Ophelia.</String>
+  <String Key="StoryModeDialogue_2010700_3_17_System">Luồng khí đen bao quanh Vlad trào ra còn đục hơn và mạnh hơn nữa.</String>
+  <String Key="StoryModeDialogue_2010800_0_0_Vlad">Vì muốn giảng hòa với loài người, ta đã kiềm chế suốt mấy năm.</String>
+  <String Key="StoryModeDialogue_2010800_0_1_Vlad">Người ta nói ta đã gây ra đại họa, nên suốt mấy tháng ta không làm gì cả, còn kìm cả gia tộc mình lại.</String>
+  <String Key="StoryModeDialogue_2010800_0_2_Vlad">Thế mà! Mọi thứ đang sụp đổ, và ta nghe thấy tiếng gào thét của gia đình mình.</String>
+  <String Key="StoryModeDialogue_2010800_0_3_Vlad">Ta sẽ không nhẫn nhịn nữa. Giờ không gì cản được ta!</String>
+  <String Key="StoryModeDialogue_2010800_0_4_Ophelia">Đó... thật sự là Vlad Moren sao?</String>
+  <String Key="StoryModeDialogue_2010800_0_5_Neria">Đó là hình dạng thật của Vampire. Quái vật bị máu nuốt chửng, phá hủy và giết mọi thứ!</String>
+  <String Key="StoryModeDialogue_2010800_0_6_Cathy">......Vlad. Rốt cuộc đã xảy ra chuyện gì với anh?</String>
+  <String Key="StoryModeDialogue_2010800_0_7_Vlad">Thế giới xấu xí, xấu xí này. Ta sẽ phá hủy tất cả!</String>
+  <String Key="StoryModeDialogue_2010800_0_8_System">Vlad quỳ sụp xuống. Luồng khí đen dần tan đi, và ánh mắt cũ trở lại.</String>
+  <String Key="StoryModeDialogue_2010800_0_9_Vlad">Cathy... tiểu thư...</String>
+  <String Key="StoryModeDialogue_2010800_0_10_Cathy">Vlad.</String>
+  <String Key="StoryModeDialogue_2010800_0_11_Cathy">…Xin lỗi.</String>
+  <String Key="StoryModeDialogue_2010800_0_12_System">Cathy hét lớn đến mức cả Chiến Trường đều nghe thấy.</String>
+  <String Key="StoryModeDialogue_2010800_0_13_Cathy">Tôi là Alessia Nosferatu!</String>
+  <String Key="StoryModeDialogue_2010800_0_13b_Cathy">Với tư cách là người của gia tộc Nosferatu, chính tôi đã hạ gục Vlad Moren mất kiểm soát.</String>
+  <String Key="StoryModeDialogue_2010800_0_14_Cathy">Nguyên nhân của mọi chuyện chỉ là Vlad Moren nổi loạn một mình, và giờ Vlad Moren đã chết, không cần thêm Chiến Đấu hay Hi Sinh nào nữa!</String>
+  <String Key="StoryModeDialogue_2010800_0_15_Cathy">Hỡi những Vampire dưới quyền Vlad Moren, ta ra lệnh nhân danh Nosferatu!</String>
+  <String Key="StoryModeDialogue_2010800_0_15b_Cathy">Hãy kết thúc Chiến Đấu và rút lui!</String>
+  <String Key="StoryModeDialogue_2010800_0_16_Cathy">Ophelia, xin cô cũng mau ngăn những Hi Sinh vô nghĩa này.</String>
+  <String Key="StoryModeDialogue_2010800_0_17_Ophelia">Toàn quân Frostwald! Dừng Chiến Đấu và rút lui! Đưa người bị thương và thi hài đi!</String>
+  <String Key="StoryModeDialogue_2010800_0_18_Neria">Không thể kết thúc thế này. Trăng Đỏ...!</String>
+  <String Key="StoryModeDialogue_2010800_0_19_Ophelia">Neria. Cô thật sự làm vậy vì người dân Lãnh Địa sao?</String>
+  <String Key="StoryModeDialogue_2010800_0_19b_Ophelia">Nhìn gương mặt cô, tôi có cảm giác cô chỉ đang tận hưởng cảnh đổ máu.</String>
+  <String Key="StoryModeDialogue_2010800_0_20_Neria">Ta ư? Trừng phạt Vampire thì có gì là giết chóc? Chẳng khác gì giết sâu bọ...</String>
+  <String Key="StoryModeDialogue_2010800_0_21_Cathy">Nghe những lời đó, Vampire như tôi thật khó chịu. Neria, làm ơn rời đi ngay đi. Trước khi tôi thật sự nổi giận.</String>
+  <String Key="StoryModeDialogue_2010800_0_22_Neria">... Trăng Đỏ. Rút lui!</String>
+  <String Key="StoryModeDialogue_2010800_1_0_Cathy">Ophelia, tên tôi là Alessia Nosferatu.</String>
+  <String Key="StoryModeDialogue_2010800_1_1a_Cathy">Về cái chết của Roderick Frostwald... tôi không biết phải nói gì.</String>
+  <String Key="StoryModeDialogue_2010800_1_1b_Cathy">Tôi xin lỗi. Phần lớn lỗi là ở tôi.</String>
+  <String Key="StoryModeDialogue_2010800_1_2_Cathy">Nhưng nói thật, tôi muốn ngăn cuộc chiến giữa Vampire và con người, và từ bây giờ tôi muốn ngăn thêm Hi Sinh ở cả hai bên.</String>
+  <String Key="StoryModeDialogue_2010800_1_3_Ophelia">Alessia Nosferatu, tôi đã đọc tất cả thư cô gửi.</String>
+  <String Key="StoryModeDialogue_2010800_1_4_Ophelia">Chỉ là tình hình không cho phép tôi đưa ra câu trả lời tích cực.</String>
+  <String Key="StoryModeDialogue_2010800_1_5_Ophelia">Tôi cũng muốn ngăn thêm Hi Sinh.</String>
+  <String Key="StoryModeDialogue_2010800_1_5b_Ophelia">Sau này tôi sẽ gửi một thư chính thức.</String>
+  <String Key="StoryModeDialogue_2010800_1_6_Cathy">Vậy tôi xin phép đi trước.</String>
+  <String Key="StoryModeDialogue_2010800_1_7_System">Cathy quay lưng rời đi, liếc Neria bằng ánh mắt lạnh lùng.</String>
+  <String Key="StoryModeDialogue_2010800_1_8_System">Khi mọi người đã rời đi, thứ còn lại với Ophelia chỉ là sự trống rỗng.</String>
+  <String Key="StoryModeDialogue_2010800_2_0_Ophelia">Roderick. Tim tôi trống rỗng.</String>
+  <String Key="StoryModeDialogue_2010800_2_1_Ophelia">Khi còn ở Lục Địa Trung Tâm, tôi nghĩ vai trò của mình chỉ là làm một tiểu thư quý tộc xinh đẹp cho thật tốt, và chưa từng nghi ngờ điều đó.</String>
+  <String Key="StoryModeDialogue_2010800_2_2_Ophelia">Ngay cả khi đến Miền Bắc vì một cuộc hôn nhân chính trị, nơi đó rất lạnh và không có yến tiệc, tôi cũng chỉ lặng lẽ chấp nhận.</String>
+  <String Key="StoryModeDialogue_2010800_2_3_Ophelia">Ngay cả khi bị bắt cóc, tôi cũng hoàn toàn bị một Vampire mê hoặc.</String>
+  <String Key="StoryModeDialogue_2010800_2_4_Ophelia">Lần này, lần đầu tiên tôi làm theo ý mình và báo thù cho Roderick.</String>
+  <String Key="StoryModeDialogue_2010800_2_4b_Ophelia">Thế nào? Tôi làm tốt chứ?</String>
+  <String Key="StoryModeDialogue_2010800_2_5_Ophelia">…</String>
+  <String Key="StoryModeDialogue_2010800_2_6_Ophelia">Có thể nghe kỳ lạ, nhưng khi thấy Vlad ngã xuống, tim tôi nhói đau.</String>
+  <String Key="StoryModeDialogue_2010800_2_7_Ophelia">Đó là người đã giết Roderick. Cũng là người đã định biến tôi thành con mồi.</String>
+  <String Key="StoryModeDialogue_2010800_2_8_Ophelia">Nhưng dáng vẻ của anh ấy trong buổi tiệc... là thật mà. Không phải tất cả đều là dối trá mà.</String>
+  <String Key="StoryModeDialogue_2010800_2_9_Ophelia">Anh ấy đúng là người xấu, nhưng có lẽ chỉ vì bị ám ảnh và xung động che mờ nên tầm nhìn trở nên hẹp lại... giống hệt Neria.</String>
+  <String Key="StoryModeDialogue_2010800_2_11_Ophelia">…Cảm ơn anh, Roderick. Tôi đã quyết định sẽ tiếp bước anh.</String>
+  <String Key="StoryModeDialogue_2010800_2_12_Ophelia">Từ nay, tôi muốn trở thành một lãnh chúa bảo vệ người dân Lãnh Địa bằng chính lựa chọn của mình, không bị người khác chi phối.</String>
+  <String Key="StoryModeDialogue_2010800_2_13_Ophelia">Tôi sẽ cố hết sức. Xin hãy tiếp tục dõi theo và giúp tôi.</String>
+  <String Key="StoryModeDialogue_2010800_3_0_System">Ophelia bước đến gần thi thể Vlad để thương tiếc anh. Một viên Đá Quý đỏ sẫm được tìm thấy ở nơi Vlad ngã xuống.</String>
+  <String Key="StoryModeDialogue_2010800_3_1_Ophelia">Đây là...?</String>
+  <String Key="StoryModeDialogue_2010800_3_2_Ophelia">(Mình thấy buồn nôn.)</String>
+  <String Key="StoryModeDialogue_2010800_3_3_Ophelia">Roderick. Quả nhiên đây là... thứ đó, đúng không?</String>
+  <String Key="StoryModeDialogue_2010800_3_4_System">Vlad Moren, kẻ đã cai trị vùng biên giới của Nosferatu suốt một thời gian dài, đã chết.</String>
+  <String Key="StoryModeDialogue_2010800_3_5_System">Bằng cách báo với đại bản doanh Nosferatu rằng Vlad Moren đã tự mình mất kiểm soát và cô đã đích thân hạ gục hắn, Cathy đã ngăn một cuộc Tổng lực chiến.</String>
+  <String Key="StoryModeDialogue_2010800_3_6_System">Vấn đề Alessia Nosferatu thiếu năng lực với tư cách quản lý dần lộ rõ, khiến vị thế chính trị của cô càng suy yếu.</String>
+  <String Key="StoryModeDialogue_2010800_3_7_System">Chừng nào con người và Vampire còn sống cùng nhau, xung đột ở nơi đây sẽ không chấm dứt.</String>
+  <String Key="StoryModeDialogue_2010900_0_0_System">Vài ngày sau, trong phòng tiếp khách của Ophelia.</String>
+  <String Key="StoryModeDialogue_2010900_0_1_System">Trên bàn đặt một viên Đá Quý đỏ sẫm.</String>
+  <String Key="StoryModeDialogue_2010900_0_2_Ophelia">Cô có biết gì về viên Đá Quý này không?</String>
+  <String Key="StoryModeDialogue_2010900_0_3_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_4_Ophelia">Như cô cũng biết, viên Đá Quý này được gọi là 'Ngôi Sao Hoàng Hôn'.</String>
+  <String Key="StoryModeDialogue_2010900_0_5_Ophelia">Nó có nguồn gốc từ Miền Nam, và có tin đồn rằng nó làm lòng dạ của người giữ nó trở nên xấu đi.</String>
+  <String Key="StoryModeDialogue_2010900_0_6_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_7_Ophelia">Từ đây trở đi chỉ là suy đoán của tôi.</String>
+  <String Key="StoryModeDialogue_2010900_0_8_Ophelia">Mọi người đều biết Vlad Moren thích những thứ đẹp đẽ, nhất là sưu tầm Đá Quý đắt tiền.</String>
+  <String Key="StoryModeDialogue_2010900_0_9_Ophelia">Có kẻ đã đưa nó từ Miền Nam đến, mong rằng Ngôi Sao Hoàng Hôn sẽ rơi vào tay hắn.</String>
+  <String Key="StoryModeDialogue_2010900_0_10_Ophelia">Và vì kẻ đó bí mật cấu kết với Alessia Nosferatu, cấp trên của Vlad Moren,</String>
+  <String Key="StoryModeDialogue_2010900_0_10b_Ophelia">nên hẳn cũng dễ dàng biết được Vlad Moren thường dùng chợ đen nào nhất.</String>
+  <String Key="StoryModeDialogue_2010900_0_11_Ophelia">Vlad Moren luôn mang theo Ngôi Sao Hoàng Hôn bên mình,</String>
+  <String Key="StoryModeDialogue_2010900_0_11b_Ophelia">nhưng tác dụng của nó chắc không chỉ dừng ở việc làm lòng dạ xấu đi,</String>
+  <String Key="StoryModeDialogue_2010900_0_11c_Ophelia">mà còn có thể khiến bản tính của Vampire mất kiểm soát.</String>
+  <String Key="StoryModeDialogue_2010900_0_12_Ophelia">Vì sao Vlad Moren lại phải mất kiểm soát?</String>
+  <String Key="StoryModeDialogue_2010900_0_13_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_14_Ophelia">Cô đã nói với Roderick rằng Alessia có liên quan đến vụ bắt cóc người dân Lãnh Địa.</String>
+  <String Key="StoryModeDialogue_2010900_0_15_Ophelia">Và cô còn khẳng định những thi thể của người dân Lãnh Địa được tìm thấy ở phía nam là do Vampire gây ra.</String>
+  <String Key="StoryModeDialogue_2010900_0_16_Ophelia">Vì thế, việc cùng tồn tại với Vampire đã không thể tiến triển.</String>
+  <String Key="StoryModeDialogue_2010900_0_17_Neria">Ta chỉ nói ra sự thật.</String>
+  <String Key="StoryModeDialogue_2010900_0_18_Ophelia">Ngay cả khi tôi bị bắt cóc, cô cũng lôi Roderick vào và dẫn anh ấy đến một cuộc tấn công quân sự. Và khi Roderick qua đời, cô cũng đẩy tôi đến trả thù.</String>
+  <String Key="StoryModeDialogue_2010900_0_19_Ophelia">Có vẻ như điều cô muốn chính là chiến tranh.</String>
+  <String Key="StoryModeDialogue_2010900_0_20_Neria">......Điều ta làm là công lý. Vampire không được phép tồn tại.</String>
+  <String Key="StoryModeDialogue_2010900_0_21_Neria">Chỉ có ngươi và Alessia còn bám víu vào ảo tưởng cùng tồn tại.</String>
+  <String Key="StoryModeDialogue_2010900_0_21b_Neria">Cuối cùng Roderick cũng chết vì ảo tưởng đó.</String>
+  <String Key="StoryModeDialogue_2010900_0_22_Neria">Dù tôi có gieo rắc bất hòa hay không, Vlad đã bắt cóc người dân của Lãnh Địa và còn định ăn thịt cô, Ophelia.</String>
+  <String Key="StoryModeDialogue_2010900_0_23_Neria">Đó là bản chất của Vampire.</String>
+  <String Key="StoryModeDialogue_2010900_0_24_Ophelia">Sola... Trăng Đỏ là gia đình của cô sao? Hay chỉ là một phương tiện?</String>
+  <String Key="StoryModeDialogue_2010900_0_25_Neria">Chúng ta là chiến hữu.</String>
+  <String Key="StoryModeDialogue_2010900_0_26_Ophelia">…Alessia và tôi đã quyết định giữ gìn sự cân bằng của nơi này.</String>
+  <String Key="StoryModeDialogue_2010900_0_27_Neria">Cô tin Vampire đó sao?</String>
+  <String Key="StoryModeDialogue_2010900_0_28_Ophelia">Hơn cô.</String>
+  <String Key="StoryModeDialogue_2010900_0_29_Neria">Một mình cô chẳng làm được gì đâu.</String>
+  <String Key="StoryModeDialogue_2010900_0_30_Neria">Vlad đã chết, nhưng Nosferatu vẫn còn rất mạnh.</String>
+  <String Key="StoryModeDialogue_2010900_0_31_Neria">Nếu chúng tấn công, cô sẽ làm gì?</String>
+  <String Key="StoryModeDialogue_2010900_0_32_Ophelia">Đó không phải việc cô cần lo.</String>
+  <String Key="StoryModeDialogue_2010900_0_33_Neria">Cô sẽ hối hận.</String>
+  <String Key="StoryModeDialogue_2010900_0_34_System">Neria ném lại một ánh nhìn cuối cùng rồi rời khỏi phòng tiếp khách. Ophelia lặng lẽ nhìn theo bóng lưng cô ấy.</String>
+  <String Key="StoryModeDialogue_2010900_1_0_System">Sola quấn đầy băng vẫn ở lại trong phòng tiếp khách. Ophelia ngồi xuống trước mặt cô.</String>
+  <String Key="StoryModeDialogue_2010900_1_1_Ophelia">Sola. Cô sẽ ổn chứ? Dù không đi cùng chúng tôi?</String>
+  <String Key="StoryModeDialogue_2010900_1_2_Solar">Thủ lĩnh cũ sẽ ổn cả thôi dù không có tôi. Giờ đã có thủ lĩnh mới rồi, nên không sao đâu!</String>
+  <String Key="StoryModeDialogue_2010900_2_0_System">Vài ngày sau, như mọi khi, Ophelia ngồi trên chiếc ghế của Roderick trong thư phòng.</String>
+  <String Key="StoryModeDialogue_2010900_2_1_Ophelia">Tôi đã bắt đầu bàn bạc với Alessia.</String>
+  <String Key="StoryModeDialogue_2010900_2_2_Ophelia">Điều Roderick định làm, tôi sẽ tiếp tục.</String>
+  <String Key="StoryModeDialogue_2010900_2_3_Ophelia">Còn Neria, tôi đã đuổi đi rồi.</String>
+  <String Key="StoryModeDialogue_2010900_2_4_Ophelia">Tôi cũng đang xây dựng quân đội Lãnh Địa và mở rộng các liên minh.</String>
+  <String Key="StoryModeDialogue_2010900_2_6_Ophelia">... Như vậy đã ổn chưa?</String>
+  <String Key="StoryModeDialogue_2010900_2_7_System">Sau đó, tên tuổi của Ophelia lan rộng. Người phụ nữ mở rộng Lãnh Địa, gây dựng quân đội và không bao giờ dừng lại. Mọi người gọi cô là 'Quý bà thép'.</String>
+  <String Key="StoryModeDialogue_2010900_2_8_System">Đôi khi, các cận thần thấy Ophelia dịu dàng trò chuyện với khoảng không trong thư phòng trống vắng.</String>
+  <String Key="StoryModeDialogue_2010900_2_9_System">Quý bà thép sẽ còn tan vỡ và đông cứng rất lâu, rồi từ đó trở nên cứng rắn.</String>
+  <String Key="StoryModeDialogue_2010700_2_2b_Ophelia">...!!!</String>
+  <String Key="WorldTriggerDesc_11100">Sát thương đặc biệt +{0}% cho mỗi Anh Hùng mục tiêu (tối đa cộng dồn 3 lần)</String>
+  <String Key="StoryFieldName_2010700">Biên giới Nosferatu</String>
+  <String Key="StoryFieldName_2010800">Biên giới Nosferatu</String>
+  <String Key="UnitName_20020750">Vlad Nosferatu</String>
+  <String Key="UnitName_20020600">Binh sĩ Frostwald</String>
+  <String Key="StoryHint_420107000">Hãy dùng Kỹ năng Bắt đầu Trận đấu của Ophelia để phòng thủ trước đòn tấn công của Gargoyle.</String>
+  <String Key="StoryHint_420108000">Đòn tấn công của Vlad liên tục gây choáng cho đồng minh. Hãy dùng Kỹ năng Bắt đầu Trận đấu có thể chống choáng.</String>
+  <String Key="TreasureName_30043">Vitacorde</String>
+  <String Key="TreasureSubName_30043">Sách Thánh Khiết</String>
+  <String Key="TreasureDesc_30043">Hãy đối diện với tấm lòng chân thật trong chính mình.
+Khi ấy, sự thánh khiết sẽ giúp bạn.</String>
+  <String Key="TreasureSkillName_30043">Sức Mạnh Sinh Mệnh</String>
+  <String Key="BuffDataName_3300431">Thánh lực I</String>
+  <String Key="BuffDataName_3300432">Tuần Hoàn Sinh Mệnh I</String>
+  <String Key="BuffDataName_3300433">Hộ Vệ Thánh</String>
+  <String Key="BuffDataName_3300434">Tuần Hoàn Sinh Mệnh II</String>
+  <String Key="BuffDataName_3300435">Thánh lực II</String>
+  <String Key="SpecialShop_TreasurePickUp30043">Cửa Hàng Đặc Biệt Pickup Vitacorde</String>
+  <String Key="SpecialPackage_1683">Gói Vitacorde 1</String>
+  <String Key="SpecialPackage_1684">Gói Vitacorde 2</String>
+  <String Key="SpecialPackage_1685">Gói Vitacorde 3</String>
+  <String Key="BuffDataDesc_3300431">Cứ mỗi {0} Hộ vệ, hệ số Lực phép của hiệu ứng tăng Sát thương cơ bản +{1}%</String>
+  <String Key="BuffDataDesc_3300432">Hồi chiêu {0} giây</String>
+  <String Key="BuffDataDesc_3300433">Ban Ân sủng cho tất cả đồng minh trong phạm vi, trừ bản thân</String>
+  <String Key="BuffDataDesc_3300434">Hồi chiêu {0} giây</String>
+  <String Key="BuffDataDesc_3300435">Cứ mỗi {0} Hộ vệ, hệ số Lực phép của hiệu ứng tăng Sát thương cơ bản +{1}%</String>
+  <String Key="TreasureSkillDesc_3300430">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu ứng của Anh Hùng có cấp ★ cao nhất đang Gắn Vitacorde
+Cố định Lực phép của người mang theo giá trị lúc bắt đầu Chiến Đấu
+Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng Sát thương cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu {3} giây)</String>
+  <String Key="TreasureSkillDesc_3300431">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu ứng của Anh Hùng có cấp ★ cao nhất đang Gắn Vitacorde
+Cố định Lực phép của người mang theo giá trị lúc bắt đầu Chiến Đấu
+Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng Sát thương cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu {3} giây)
+Cứ mỗi {4} Hộ vệ, hệ số Lực phép của hiệu ứng tăng Sát thương cơ bản +{5}%</String>
+  <String Key="TreasureSkillDesc_3300433">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu ứng của Anh Hùng có cấp ★ cao nhất đang Gắn Vitacorde
+Cố định Lực phép của người mang theo giá trị lúc bắt đầu Chiến Đấu
+Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng Sát thương cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu {3} giây)
+Cứ mỗi {4} Hộ vệ, hệ số Lực phép của hiệu ứng tăng Sát thương cơ bản +{5}%
+Ban Ân sủng cho đồng minh trong phạm vi, trừ người mang</String>
+  <String Key="SeasonalEventName_Season72">Lễ Hội Rồng Bay</String>
+  <String Key="SeasonalEventMode_Season72">Lễ Hội Rồng Bay</String>
+  <String Key="TreasureName_50002">Cor Orbis</String>
+  <String Key="TreasureSubName_50002">Tên phụ tạm thời</String>
+  <String Key="TreasureDesc_50002">Mô tả tạm thời - sẽ bổ sung sau khi chốt ý tưởng Bảo Cụ - ý tưởng dự kiến: một loại đá nào đó? Một cổ vật? mượn Mana từ động thực vật xung quanh, tích trữ rồi giải phóng ra</String>
+  <String Key="TreasureSkillName_50002">Hợp Nhất Mana</String>
+  <String Key="BuffDataName_3500021">Đồng Hóa I</String>
+  <String Key="BuffDataName_3500022">Kết Giới Mana I</String>
+  <String Key="BuffDataName_3500023">Cộng Hưởng Mana</String>
+  <String Key="BuffDataName_3500024">Kết Giới Mana II</String>
+  <String Key="BuffDataName_3500025">Đồng Hóa II</String>
+  <String Key="SpecialShop_TreasurePickUp50002">Cửa Hàng Đặc Biệt Pickup Cor Orbis</String>
+  <String Key="SpecialPackage_1690">Gói Cor Orbis 1</String>
+  <String Key="SpecialPackage_1691">Gói Cor Orbis 2</String>
+  <String Key="SpecialPackage_1692">Gói Cor Orbis 3</String>
+  <String Key="BuffDataDesc_3500021">Cứ mỗi {1}% Sát thương chí mạng phép vượt {0}%, bonus Sát thương tổng của kỹ năng Cường hóa x{2}</String>
+  <String Key="BuffDataDesc_3500022">Sát thương phải nhận {0}% cho đến lần dùng kỹ năng thứ 3</String>
+  <String Key="BuffDataDesc_3500023">Khi dùng kỹ năng Cường hóa, dùng thêm {1} lần cùng kỹ năng lên 1 mục tiêu Ngẫu nhiên với {0}% Sát thương</String>
+  <String Key="BuffDataDesc_3500024">Sát thương phải nhận {0}% cho đến lần dùng kỹ năng thứ 3</String>
+  <String Key="BuffDataDesc_3500025">Cứ mỗi {1}% Sát thương chí mạng phép vượt {0}%, bonus Sát thương tổng của kỹ năng Cường hóa x{2}</String>
+  <String Key="TreasureSkillDesc_3500020">Sau khi bắt đầu Chiến Đấu, chỉ Anh Hùng đang Gắn Cor Orbis có cấp ★ cao nhất nhận +{0}% Mana tối đa và -{1}% Sát thương tổng gây ra cho đến lần dùng kỹ năng thứ 3
+Kỹ năng cuối được Cường hóa, Sát thương tổng +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">Sau khi bắt đầu Chiến Đấu, chỉ Anh Hùng đang Gắn Cor Orbis có cấp ★ cao nhất nhận +{0}% Mana tối đa và -{1}% Sát thương tổng gây ra cho đến lần dùng kỹ năng thứ 3
+Kỹ năng cuối được Cường hóa, Sát thương tổng +{2}%
+Cứ mỗi {4}% Sát thương chí mạng phép vượt {3}%, bonus Sát thương tổng của kỹ năng Cường hóa x{5}</String>
+  <String Key="TreasureSkillDesc_3500022">Sau khi bắt đầu Chiến Đấu, chỉ Anh Hùng đang Gắn Cor Orbis có cấp ★ cao nhất nhận +{0}% Mana tối đa và -{1}% Sát thương tổng gây ra cho đến lần dùng kỹ năng thứ 3
+Kỹ năng cuối được Cường hóa, Sát thương tổng +{2}%
+Cứ mỗi {4}% Sát thương chí mạng phép vượt {3}%, bonus Sát thương tổng của kỹ năng Cường hóa x{5}
+Sát thương phải nhận {6}% cho đến lần dùng kỹ năng thứ 3</String>
+  <String Key="TreasureSkillDesc_3500023">Sau khi bắt đầu Chiến Đấu, chỉ Anh Hùng đang Gắn Cor Orbis có cấp ★ cao nhất nhận +{0}% Mana tối đa và -{1}% Sát thương tổng gây ra cho đến lần dùng kỹ năng thứ 3
+Kỹ năng cuối được Cường hóa, Sát thương tổng +{2}%
+Cứ mỗi {4}% Sát thương chí mạng phép vượt {3}%, bonus Sát thương tổng của kỹ năng Cường hóa x{5}
+Sát thương phải nhận {6}% cho đến lần dùng kỹ năng thứ 3
+Khi dùng kỹ năng Cường hóa, dùng thêm {8} lần cùng kỹ năng lên 1 mục tiêu Ngẫu nhiên với {7}% Sát thương</String>
 </Strings>

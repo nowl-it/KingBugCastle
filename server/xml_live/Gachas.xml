@@ -7,7 +7,7 @@
 <!--        <HideInGachaShopPanel>true</HideInGachaShopPanel>-->
 <!--    </Gacha>-->
     <!-- new 영웅 소환서 아이콘용 가챠 -->
-    <Gacha ID="100" Children="">
+    <Gacha ID="100" Children="2007">
         <Name>RegularSummon</Name>
         <GachaIcon>Theme_Progress_Bar_Icon_09</GachaIcon>
         <Permanent>true</Permanent>
@@ -42,7 +42,7 @@
     </Gacha>
     
     
-    <Gacha ID="300" Parent="None">
+    <Gacha ID="300" Parent="100">
         <Name>ShopItemName_300</Name>
         <Desc>HeroSummonDesc</Desc>
         <ResultTableDesc>GachaListDesc_Normal</ResultTableDesc>
@@ -3687,9 +3687,8 @@
         <TagImage>Tier_Tag_03</TagImage>
         <GachaBoxIndex>3</GachaBoxIndex>
     
-        <Permanent>true</Permanent>
-        <StartDate>20260730</StartDate>
-        <EndDate>20991231</EndDate>
+        <StartDate>20251023</StartDate>
+        <EndDate>20251105</EndDate>
     
         <UnitCount Min="4" Max="5"/>
         <AllExpToUnitExpItemRate>20</AllExpToUnitExpItemRate>
@@ -4240,9 +4239,8 @@
         <GachaBoxIndex>3</GachaBoxIndex>
         <LevelLimit>LevelLimit_Hero_PickUp</LevelLimit>
     
-        <Permanent>true</Permanent>
         <StartDate>20260506</StartDate>
-        <EndDate>20991231</EndDate>
+        <EndDate>20260519</EndDate>
     
         <UnitCount Min="4" Max="5"/>
         <AllExpToUnitExpItemRate>20</AllExpToUnitExpItemRate>
@@ -4599,6 +4597,55 @@
         </Images>
     </Gacha>
 
+    <Gacha ID="2006">
+        <Name>GachaName_2000</Name>
+        <Desc>GachaDesc_PickUpDefault</Desc>
+        <ResultTableDesc>GachaListDesc_CustomPickUp</ResultTableDesc>
+        <GachaIcon>Theme_Progress_Bar_Icon_09</GachaIcon>
+        <Type>CustomUnitGacha</Type>
+        <KeyItem>305</KeyItem>
+        <StackIcon>Shop_Product_Point_03</StackIcon>
+        <TagImage>Tier_Tag_03</TagImage>
+        <GachaBoxIndex>3</GachaBoxIndex>
+    
+        <StartDate>20260424</StartDate>
+        <EndDate>20260506</EndDate>
+    
+        <!--아이콘 정렬 순서-->
+        <SortingOrder>1</SortingOrder>
+    
+        <!--<ExceptPickupOwnUnit>true</ExceptPickupOwnUnit>-->
+        <!--<ExceptPickupDefaultUnit>true</ExceptPickupDefaultUnit>-->
+    
+        <UnitCount Min="4" Max="5"/>
+        <AllExpToUnitExpItemRate>20</AllExpToUnitExpItemRate>
+        <AdditionalUnitSoulMaxLimit>750</AdditionalUnitSoulMaxLimit>
+    
+        <Results>
+            <Result Type="Unit" Rate="10" Min="1" Max="1"/>
+            <Result Type="UnitSoulItem" Rate="100" Min="2"/>
+            <Result Type="UnitExp" Rate="100" Min="15" Max="40" Total="80"/>
+            <Result Type="Gold" Rate="100" Min="700" Max="900"/>
+        </Results>
+    
+        <Pickups>
+            <Pickup Type="Unit" Rate="2"/>
+            <Pickup Type="Unit" Rate="2"/>
+        </Pickups>
+    
+        <BackgroundPrefab>GachaShopPanelBG_CustomPickupBG</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
+        <!-- <BackgroundPrefabGachaNameTextOutlineColor>000000</BackgroundPrefabGachaNameTextOutlineColor> -->
+    
+        <Images>
+            <Image Name="Gacha_Background_01" Scale="4.0" Y="-50" Color="f9dda7"/>
+            <Image Name="Gacha_Background_02" Scale="4.0" Y="-50" Color="ffc64d"/>
+            <Image Name="Gacha_Background_03" Scale="4.0" Y="-50" Color="f9dda7"/>
+        </Images>
+        
+        <MinVersion>168000</MinVersion>
+    </Gacha>
+
     <Gacha ID="2007" Parent="100">
         <Name>GachaName_2000</Name>
         <Desc>GachaDesc_PickUpDefault</Desc>
@@ -4647,6 +4694,53 @@
     </Gacha>
 
     <!-- 초보자 커스텀 픽업 -->
+    <Gacha ID="3000">
+        <Name>GachaName_3000</Name>
+        <Desc>GachaDesc_PickUpDefault</Desc>
+        <ResultTableDesc>GachaListDesc_CustomPickUp</ResultTableDesc>
+        <GachaIcon>Theme_Progress_Bar_Icon_10</GachaIcon>
+        <Type>CustomUnitGacha</Type>
+        <KeyItem>305</KeyItem>
+        <StackIcon>Shop_Product_Point_03</StackIcon>
+        <TagImage>Tier_Tag_03</TagImage>
+        <GachaBoxIndex>3</GachaBoxIndex>
+    
+        <NewUserOpenDuringDay>14</NewUserOpenDuringDay>
+        <HideInGachaShopPanel>true</HideInGachaShopPanel>
+    
+        <!--아이콘 정렬 순서-->
+        <SortingOrder>1</SortingOrder>
+    
+        <!--<ExceptPickupOwnUnit>true</ExceptPickupOwnUnit>-->
+        <ExceptPickupDefaultUnit>true</ExceptPickupDefaultUnit>
+        <ExceptPickupWelcomeUnit>true</ExceptPickupWelcomeUnit>
+    
+        <UnitCount Min="4" Max="5"/>
+        <AllExpToUnitExpItemRate>20</AllExpToUnitExpItemRate>
+        <AdditionalUnitSoulMaxLimit>750</AdditionalUnitSoulMaxLimit>
+    
+        <Results>
+            <Result Type="Unit" Rate="10" Min="1" Max="1"/>
+            <Result Type="UnitSoulItem" Rate="100" Min="2"/>
+            <Result Type="UnitExp" Rate="100" Min="15" Max="40" Total="80"/>
+            <Result Type="Gold" Rate="100" Min="700" Max="900"/>
+        </Results>
+    
+        <Pickups>
+            <Pickup Type="Unit" Rate="2"/>
+            <Pickup Type="Unit" Rate="2"/>
+        </Pickups>
+    
+        <BackgroundPrefab>GachaShopPanelBG_NewUserCustomPickupBG</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
+        <!-- <BackgroundPrefabGachaNameTextOutlineColor>000000</BackgroundPrefabGachaNameTextOutlineColor> -->
+    
+        <Images>
+            <Image Name="Gacha_Background_01" Scale="4.0" Y="-50" Color="f9dda7"/>
+            <Image Name="Gacha_Background_02" Scale="4.0" Y="-50" Color="ffc64d"/>
+            <Image Name="Gacha_Background_03" Scale="4.0" Y="-50" Color="f9dda7"/>
+        </Images>
+    </Gacha>
     
     <!-- 상시소환 가챠 -->
     <Gacha ID="3999" Parent="102">
@@ -7913,9 +8007,8 @@
         <Type>TreasureGacha</Type>
         <LevelLimit>LevelLimit_Treasure</LevelLimit>
 
-        <StartDate>20260808</StartDate>
-        <EndDate>20260822</EndDate>
-        <ShowTimeLeft>true</ShowTimeLeft>
+        <StartDate>20260730</StartDate>
+        <EndDate>20260812</EndDate>
 
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
 
@@ -7954,6 +8047,101 @@
         </Pickups>
     </Gacha>
 
+    <!--이중픽업 카엘루스/트릭스터 보구 픽업-->
+    <Gacha ID="5053" Parent="102">
+        <Name>GachaName_4010</Name>
+        <Desc>GachaDesc_4010</Desc>
+
+        <MinVersion>172000</MinVersion>
+
+        <Type>TreasureGacha</Type>
+        <LevelLimit>LevelLimit_Treasure</LevelLimit>
+
+        <StartDate>20260813</StartDate>
+        <EndDate>20260826</EndDate>
+
+        <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
+
+        <BackgroundPrefab>GachaShopPanelBG_TreasureDoublePickup</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
+
+        <KeyItem>371</KeyItem>
+
+        <UseStack>false</UseStack>
+
+        <GachaCeil Key="TreasurePickupGachaCeil_Rare" Target="Rare" PoolID="221000">10</GachaCeil>
+        <GachaCeil Key="TreasurePickupGachaCeil_Special" Target="Special" PoolID="231053">100</GachaCeil>
+
+        <EnableCeilSelect>true</EnableCeilSelect>
+
+        <Results>
+            <Result Type="TreasureGacha" Rate="100"/>
+        </Results>
+
+        <FixedTreasures Count="1">
+            <Treasure Rate="87.5" Rarity="Common" PoolID="210000"/>
+            <Treasure Rate="10" Rarity="Rare" PoolID="220000"/>
+            <Treasure Rate="2.5" Rarity="Special" PoolID="230053"/>
+        </FixedTreasures>
+
+        <Images>
+        </Images>
+
+        <Pickups>
+            <Pickup Type="Treasure" Rarity="Special" PoolID="231053" Rate="1.5"/>
+        </Pickups>
+    </Gacha>
+
+    <!--페라타우스 보구 픽업-->
+    <Gacha ID="5054" Parent="102">
+        <Name>GachaName_4010</Name>
+        <Desc>GachaDesc_4010</Desc>
+
+        <MinVersion>172100</MinVersion>
+
+        <Type>TreasureGacha</Type>
+        <LevelLimit>LevelLimit_Treasure</LevelLimit>
+
+        <StartDate>20260827</StartDate>
+        <EndDate>20260909</EndDate>
+
+        <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
+
+        <BackgroundPrefab>GachaShopPanelBG_Treasure</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
+
+        <KeyItem>371</KeyItem>
+
+        <UseStack>false</UseStack>
+
+        <GachaCeil Key="TreasurePickupGachaCeil_Rare" Target="Rare" PoolID="221000">10</GachaCeil>
+        <GachaCeil Key="TreasurePickupGachaCeil_Special" Target="Special" PoolID="231054">100</GachaCeil>
+
+        <Results>
+            <Result Type="TreasureGacha" Rate="100"/>
+        </Results>
+
+        <FixedTreasures Count="1">
+            <Treasure Rate="87.5" Rarity="Common" PoolID="210000"/>
+            <Treasure Rate="10" Rarity="Rare" PoolID="220000"/>
+            <Treasure Rate="2.5" Rarity="Special" PoolID="230054"/>
+        </FixedTreasures>
+
+        <Images>
+            <Image Name="Gacha_Background_01" Scale="4" Color="5553b3"/>
+            <Image Name="Gacha_Background_02" Scale="4" Color="5553b3"/>
+            <Image Name="Gacha_Background_03" Scale="4" Color="5553b3"/>
+            <Image Name="Treasure_BgMask_00" X="0" Y="148.5" Scale="1.5" Mask="true"/>
+            <Image Name="TreasureIllust_30042_BG" X="0" Y="150" Scale="1.5"/>
+            <Image Name="Treasure_Frame_3_Toughness" X="0" Y="148.5" Scale="1.5"/>
+            <Image Name="TreasureIllust_30042" X="0" Y="210" Scale="1.3"/>
+        </Images>
+
+        <Pickups>
+            <Pickup Type="Treasure" Rarity="Special" PoolID="231054" Rate="1"/>
+        </Pickups>
+    </Gacha>
+
     <!-- 왕의 보구 -->
     <Gacha ID="6000">
         <Name>GachaName_6000</Name>
@@ -7967,7 +8155,8 @@
         <KeyItem>371</KeyItem>
         <UseStack>false</UseStack>
     
-        <Permanent>true</Permanent>
+        <StartDate>20241023</StartDate>
+        <EndDate>20241105</EndDate>
     
         <!--아이콘 정렬 순서-->
         <SortingOrder>1</SortingOrder>
@@ -8134,7 +8323,7 @@
         </Images>
     </Gacha>     
     
-    <Gacha ID="6004" Parent="None">
+    <Gacha ID="6004">
         <Name>GachaName_6000</Name>
         <Desc>GachaDesc_4010</Desc>
         <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
@@ -8146,9 +8335,8 @@
         <KeyItem>371</KeyItem>
         <UseStack>false</UseStack>
     
-        <Permanent>true</Permanent>
         <StartDate>20260423</StartDate>
-        <EndDate>20991231</EndDate>
+        <EndDate>20260506</EndDate>
     
         <!--아이콘 정렬 순서-->
         <SortingOrder>1</SortingOrder>
@@ -8212,6 +8400,47 @@
         </Images>
     </Gacha>
 
+    <Gacha ID="8000" Parent="100">
+        <Name>GachaName_8000</Name>
+        <Type>DimensionUnitGacha</Type>
+        <KeyItem>70000</KeyItem>
+
+        <ResultTableDesc>DimensionUnitGachaDesc_Normal</ResultTableDesc>
+
+        <Visible>true</Visible>
+        <Permanent>false</Permanent>
+        <StartDate>20260601</StartDate>
+        <EndDate>20260715</EndDate>
+
+        <UseStack>false</UseStack>
+
+        <GachaCeil Key="DimGachaCeil_PickUp" Target="0" ResetOnTargetHit="true">80</GachaCeil>
+        <TargetRateIncrement IncreaseAfter="60" Target="0" DecreasePool="NonFixedRate" DecreaseMode="Weighted">4</TargetRateIncrement>
+        <Results>
+            <Result IsReward="true" Type="Unit" ID="10780" Rate="0.5" FixedRate="true"/>
+            <Result IsReward="true" Type="Unit" ID="10350" Rate="1.5" FixedRate="true"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="1" Rate="24"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="2" Rate="16"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="3" Rate="8"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="100" Rate="24"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="300" Rate="16"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="500" Rate="8"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="1500" Rate="2"/>
+        </Results>
+
+        <BackgroundPrefab>GachaShopPanelBG_Pickup_Dimension</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
+
+        <Images>
+            <Image Name="Gacha_Background_03" ScaleX="5" ScaleY="5" Y="-45" X="60" Color="49455D"/>
+            <Image Name="fx_glow" ScaleX="15" ScaleY="15" Y="0" X="0" Color="49455D"/>
+            <Image Name="Gacha_Glow" ScaleX="3.5" ScaleY="2.5" Y="-27" X="12" Color="655E89"/>
+            <Image Name="Gacha_Glow" ScaleX="2" ScaleY="2" Y="252" X="0" Color="72699C"/>
+            <Image Name="Unit_Illust_10780" ScaleX="1" ScaleY="1" Y="126" X="0" Color="FFFFFF"/>
+        </Images>
+        <ImageMaskEnabled>false</ImageMaskEnabled>
+    </Gacha>
+
     <Gacha ID="8001" Parent="100">
         <Name>GachaName_8000</Name>
         <Desc>GachaDesc_8000</Desc>
@@ -8221,13 +8450,14 @@
         <ResultTableDesc>DimensionUnitGachaDesc_Normal</ResultTableDesc>
 
         <Visible>true</Visible>
-        <Permanent>true</Permanent>
+        <Permanent>false</Permanent>
+        <MinVersion>171000</MinVersion>
         <StartDate>20260716</StartDate>
-        <EndDate>20991231</EndDate>
+        <EndDate>20260812</EndDate>
 
         <UseStack>false</UseStack>
 
-        <GachaCeil Key="DimGachaCeil_PickUp" Target="80" ResetOnTargetHit="true">80</GachaCeil>
+        <GachaCeil Key="DimGachaCeil_PickUp" Target="0" ResetOnTargetHit="true">80</GachaCeil>
         <TargetRateIncrement IncreaseAfter="60" Target="0" DecreasePool="NonFixedRate" DecreaseMode="Weighted">4</TargetRateIncrement>
         <Results>
             <Result IsReward="true" Type="Unit" ID="10790" Rate="0.5" FixedRate="true"/>
@@ -8250,6 +8480,49 @@
             <Image Name="Gacha_Glow" ScaleX="3.5" ScaleY="2.5" Y="-27" X="12" Color="896E5E"/>
             <Image Name="Gacha_Glow" ScaleX="2" ScaleY="2" Y="252" X="0" Color="9C8D69"/>
             <Image Name="Unit_Illust_10790" ScaleX="0.8" ScaleY="0.8" Y="126" X="0" Color="FFFFFF"/>
+        </Images>
+        <ImageMaskEnabled>false</ImageMaskEnabled>
+    </Gacha>
+
+    <Gacha ID="8002" Parent="100">
+        <Name>GachaName_8000</Name>
+        <Desc>GachaDesc_8000</Desc>
+        <Type>DimensionUnitGacha</Type>
+        <KeyItem>70000</KeyItem>
+
+        <ResultTableDesc>DimensionUnitGachaDesc_Normal</ResultTableDesc>
+
+        <Visible>true</Visible>
+        <Permanent>false</Permanent>
+        <MinVersion>172000</MinVersion>
+        <StartDate>20260813</StartDate>
+        <EndDate>20260909</EndDate>
+
+        <UseStack>false</UseStack>
+
+        <GachaCeil Key="DimGachaCeil_PickUp" Target="0" ResetOnTargetHit="true">80</GachaCeil>
+        <TargetRateIncrement IncreaseAfter="60" Target="0" DecreasePool="NonFixedRate" DecreaseMode="Weighted">4</TargetRateIncrement>
+        <Results>
+            <Result IsReward="true" Type="Unit" ID="10800" Rate="0.5" FixedRate="true"/>
+            <Result IsReward="true" Type="Unit" ID="10430" Rate="1.5" FixedRate="true"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="1" Rate="24"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="2" Rate="16"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="3" Rate="8"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="100" Rate="24"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="300" Rate="16"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="500" Rate="8"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="1500" Rate="2"/>
+        </Results>
+
+        <BackgroundPrefab>GachaShopPanelBG_Pickup_Dimension</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>F5B0A0</BackgroundPrefabGachaNameTextColor>
+
+        <Images>
+            <Image Name="Gacha_Background_03" ScaleX="5" ScaleY="5" Y="-45" X="60" Color="5D3235"/>
+            <Image Name="fx_glow" ScaleX="15" ScaleY="15" Y="0" X="0" Color="5D3235"/>
+            <Image Name="Gacha_Glow" ScaleX="3.5" ScaleY="2.5" Y="-27" X="12" Color="8B4444"/>
+            <Image Name="Gacha_Glow" ScaleX="2" ScaleY="2" Y="252" X="0" Color="A85555"/>
+            <Image Name="Unit_Illust_10800" ScaleX="1" ScaleY="1" Y="126" X="0" Color="FFFFFF"/>
         </Images>
         <ImageMaskEnabled>false</ImageMaskEnabled>
     </Gacha>

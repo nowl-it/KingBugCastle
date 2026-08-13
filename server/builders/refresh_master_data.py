@@ -22,7 +22,7 @@ After a successful run: restart uvicorn + clear the device UnityCache before lau
 """
 import sys, re, json, subprocess, pathlib, glob, tempfile
 
-ROOT = pathlib.Path(__file__).resolve().parent           # server/
+ROOT = pathlib.Path(__file__).resolve().parents[1]        # server/
 REPO = ROOT.parent
 XML_LIVE = ROOT / "xml_live"
 KGC_CLI = REPO / "kgc-cli"
@@ -85,7 +85,7 @@ def main():
         print("  ^ review the WARN lines above before shipping (dev collision / moved anchor).")
 
     print("[4/5] rebuild xml bundle")
-    sh([sys.executable, str(ROOT / "rebuild_xml_bundle.py")])
+    sh([sys.executable, str(ROOT / "builders" / "rebuild_xml_bundle.py")])
 
     if NO_BUMP or not patch_date:
         print("[5/5] patchFolder bump skipped")

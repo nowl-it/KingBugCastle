@@ -274,4 +274,120 @@
             </Values>
         </BuffOptions>
     </ActiveSkill>
+    <!-- ===== 사이드 스토리 1-3 캐시 개전 스킬 (원본 10800 계열) ===== -->
+    <ActiveSkill ID="20010800">
+        <CooldownStage>3</CooldownStage>
+        <TargetCount>-1</TargetCount>
+        <TargetType>SameUnit</TargetType>
+        <ReqOvercome>0</ReqOvercome>
+    	<Name>ActiveSkillName_10800</Name>
+    	<Desc>ActiveSkillDesc_10800</Desc>
+    	<Icon>ActiveSkillIcon_10800</Icon>
+
+        <DescParams>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <BattleStart/>
+            </Conditions>
+            <Targets>
+                <Self/>
+            </Targets>
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+            <BuffContents>
+                <AddCustomBuff Key="TotalCCRatioPer" />
+            </BuffContents>
+            <Values>
+                <FixedValue>-100</FixedValue>
+            </Values>
+        </BuffOptions>
+    </ActiveSkill>
+
+    <ActiveSkill ID="20010803" Inherit="20010800">
+        <ReqOvercome>3</ReqOvercome>
+    	<Name>ActiveSkillName_10800</Name>
+    	<Desc>ActiveSkillDesc_10803</Desc>
+    	<Icon>ActiveSkillIcon_10800</Icon>
+
+        <DescParams>
+            <InnerText>./BuffOptions[2]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+            <Conditions>
+                <BattleStart/>
+            </Conditions>
+            <Targets>
+                <Self/>
+            </Targets>
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+            <BuffContents>
+                <AddReviveCount MaxHpPer="100" MaxManaPer="100" Category="Treasure" />
+            </BuffContents>
+            <Values>
+                <FixedValue>1</FixedValue>
+            </Values>
+        </BuffOptions>
+    </ActiveSkill>
+    <!-- ===== 오필리아 개전 스킬 (원본 10790 계열) ===== -->
+    <ActiveSkill ID="20010790">
+        <CooldownStage>6</CooldownStage>
+        <TargetCount>-1</TargetCount>
+        <TargetType>Any</TargetType>
+        <ReqOvercome>0</ReqOvercome>
+    	<Name>ActiveSkillName_10790</Name>
+    	<Desc>ActiveSkillDesc_10790</Desc>
+    	<Icon>ActiveSkillIcon_10790</Icon>
+
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+        </DescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <BattleStart/>
+            </Conditions>
+            <Targets>
+                <Self/>
+            </Targets>
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+            <BuffContents>
+                <SetInvincible/>
+            </BuffContents>
+            <Values>
+                <FixedValue>2</FixedValue>
+            </Values>
+        </BuffOptions>
+    </ActiveSkill>
+
+    <ActiveSkill ID="20010793" Inherit="20010790">
+        <!-- Name 은 반드시 명시 — ResourceActiveSkill 의 nameKey 는 inherit fallback 이 없어
+             (ResourceActiveSkill.cs: GetChildText("Name", $"ActiveSkillName_{baseId}") — inherit 인자 없음)
+             미선언 시 ActiveSkillName_20010790 (미존재 키) 로 떨어져 키가 그대로 노출된다.
+             Desc/Icon 은 inherit 인자가 있어 base(20010790) 로부터 정상 상속되므로 미선언 유지.
+             (ActiveSkillDesc_10793 키는 존재하지 않으며 원본 10793 도 미선언이다.) -->
+        <ReqOvercome>3</ReqOvercome>
+        <Name>ActiveSkillName_10790</Name>
+
+        <DescParams>
+            <CalculatedValue>0</CalculatedValue>
+            <InnerText>./BuffOptions/Values/FixedValue[2]</InnerText>
+        </DescParams>
+        
+        <BuffOptions>
+            <Values>
+                <FixedValue>1</FixedValue>
+                <FixedValue>0.5</FixedValue>
+            </Values>
+        </BuffOptions>
+    </ActiveSkill>
 </ActiveSkills>

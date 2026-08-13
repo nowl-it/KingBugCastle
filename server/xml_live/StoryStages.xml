@@ -500,6 +500,92 @@
         <WaitingMusic>StoryMode_2010100_Danger</WaitingMusic>
     </Stage>
 
+    <!-- ==================================================================== -->
+    <!-- 사이드 스토리 1 파트 3 (노션 Ep3-1 / Ep3-2)                          -->
+    <!-- ID 규칙: 4 + [type 2=sub][part 01][chapter] + [전투 index 3자리]      -->
+    <!--   Ep3-1 = FieldID 2010700 → 420107xxx / Ep3-2 = FieldID 2010800 → 420108xxx -->
+    <!-- ⚠ 아래 두 스테이지의 상세 배치(적 구성/위치/성급/장애물)는 전부      -->
+    <!--   PLACEHOLDER 다. 기획 확정 후 교체 필요.                            -->
+    <!--   현재는 Ep1-3(420103000/001) 배치를 뼈대로 복제해 동작만 보장한다.  -->
+    <!-- ==================================================================== -->
+
+    <!-- 사이드 스토리 1 ep3 전투 1 : 전장 진입 (오필리아 + 병사 vs 뱀파이어) -->
+    <Stage ID="420107000" Theme="4000">
+        <SpawnData Y="3">
+            <Spawn ID="20020720" Pos="1" Level="3"/>
+            <Spawn ID="20020720" Pos="3" Level="3"/>
+            <Spawn ID="20020720" Pos="5" Level="3"/>
+        </SpawnData>
+        <SpawnData Y="5">
+            <Spawn ID="20020711" Pos="1" Level="3"/>
+            <Spawn ID="20020711" Pos="3" Level="3"/>
+            <Spawn ID="20020711" Pos="5" Level="3"/>
+        </SpawnData>
+
+        <SpawnData Team="1" Y="0">
+            <Spawn ID="20010790" Pos="3" Level="3" Draggable="true"/>
+        </SpawnData>
+
+        <SpawnData Team="1" Y="3">
+            <Spawn ID="20020600" Pos="0" Level="3" Draggable="true"/>
+            <Spawn ID="20020600" Pos="2" Level="3" Draggable="true"/>
+            <Spawn ID="20020600" Pos="4" Level="3" Draggable="true"/>
+            <Spawn ID="20020600" Pos="6" Level="3" Draggable="true"/>
+        </SpawnData>
+
+        <StageClearCondition Type="AllKill"/>
+        <StoryModeInfo>
+            <CanSurrender>false</CanSurrender>
+        </StoryModeInfo>
+
+        <CanUseWaitingGrid>false</CanUseWaitingGrid>
+        <CanUseActiveSkill>true</CanUseActiveSkill>
+
+        <StageMusic>StoryMode_2010100_Danger</StageMusic>
+        <WaitingMusic>StoryMode_2010100_Danger</WaitingMusic>
+    </Stage>
+
+    <!-- 사이드 스토리 1 ep3 전투 2 : 폭주 블라드 보스전 (오필리아 + 네리아 + 캐시) -->
+    <Stage ID="420108000" Theme="4000">
+        <!-- PLACEHOLDER 배치 — 기획 확정 시 교체 -->
+        <!-- 아군 3인 합심: 오필리아(20010790) + 네리아(20010780) + 캐시(20010800, 신규 클론) -->
+        <!-- 적: 폭주 블라드 모렌(20020750, Boss) + 호위 뱀파이어 -->
+        <SpawnData Y="6">
+            <Spawn ID="20020750" Pos="3" Level="5" Boss="1"/>
+        </SpawnData>
+        <SpawnData Y="4">
+            <Spawn ID="20020730" Pos="1" Level="3"/>
+            <Spawn ID="20020730" Pos="5" Level="3"/>
+        </SpawnData>
+        <SpawnData Y="3">
+            <Spawn ID="20020720" Pos="2" Level="2"/>
+            <Spawn ID="20020720" Pos="4" Level="2"/>
+        </SpawnData>
+
+        <SpawnData Team="1" Y="0">
+            <Spawn ID="20010790" Pos="1" Level="5" Draggable="true"/>
+            <Spawn ID="20010780" Pos="3" Level="5" Draggable="true"/>
+            <Spawn ID="20010800" Pos="5" Level="5" Draggable="true"/>
+        </SpawnData>
+
+        <ObstacleData>
+            <!-- PLACEHOLDER — 기획 확정 시 교체 -->
+            <Obstacle X="0" Y="5" Prefab="Barricade_08a"/>
+            <Obstacle X="6" Y="5" Prefab="Barricade_08a"/>
+        </ObstacleData>
+
+        <StageClearCondition Type="AllKill"/>
+        <StoryModeInfo>
+            <CanSurrender>false</CanSurrender>
+        </StoryModeInfo>
+
+        <CanUseWaitingGrid>false</CanUseWaitingGrid>
+        <CanUseActiveSkill>true</CanUseActiveSkill>
+
+        <StageMusic>StoryMode_2010100_Danger</StageMusic>
+        <WaitingMusic>StoryMode_2010100_Danger</WaitingMusic>
+    </Stage>
+
 
     <!-- 챌린지 -->
     <Stage ID="430101000" Theme="4100">
@@ -1092,6 +1178,114 @@
             <Spawn ID='99991' Pos='2' Level='3' Draggable='true' StatueIndex='5'/>
             <Spawn ID='99991' Pos='4' Level='3' Draggable='true' StatueIndex='6'/>
             <Spawn ID='99991' Pos='6' Level='5' Draggable='true' StatueIndex='7'/>
+        </SpawnData>
+
+        <StageClearCondition Type="AllKill"/>
+
+        <WaitingMusic>Tower_Wait_Boss</WaitingMusic>
+        <StageMusic>Tower_Boss</StageMusic>
+    </Stage>
+
+    <Stage ID="430072000" Theme="4100">
+        <SpawnData Y='5'>
+            <Spawn ID='40020720' Pos='1' Level='1'/>
+            <Spawn ID='40020720' Pos='5' Level='1'/>
+            <Spawn ID='40020720' Pos='3' Level='1'/>
+        </SpawnData>
+
+        <!-- 영웅 -->
+        <SpawnData Y='3' Team='1'>
+            <Spawn ID='99991' Pos='3' Level='1' Draggable='true' StatueIndex='0'/>
+        </SpawnData>
+        <SpawnData Y='2' Team='1'>
+            <Spawn ID='99991' Pos='3' Level='1' Draggable='true' StatueIndex='1'/>
+        </SpawnData>
+        <SpawnData Y='0' Team='1'>
+            <Spawn ID='99991' Pos='3' Level='1' Draggable='true' StatueIndex='2'/>
+        </SpawnData>
+        <SpawnData Y='1' Team='1'>
+            <Spawn ID='99991' Pos='1' Level='1' Draggable='true' StatueIndex='2'/>
+            <Spawn ID='99991' Pos='5' Level='1' Draggable='true' StatueIndex='2'/>
+        </SpawnData>
+
+        <StageClearCondition Type="AllKill">
+        </StageClearCondition>
+
+        <WaitingMusic>Tower_Wait_Boss</WaitingMusic>
+        <StageMusic>Tower_Battle</StageMusic>
+    </Stage>
+
+    <Stage ID="430072001" Theme="4100">
+        <!-- 적 -->
+        <SpawnData Y='3'>
+            <Spawn ID='40020730' Pos='1' Level='1'/>
+            <Spawn ID='40020730' Pos='3' Level='1'/>
+            <Spawn ID='40020730' Pos='5' Level='1'/>
+        </SpawnData>
+
+        <!-- 영웅 -->
+        <SpawnData Y='3' Team='1'>
+            <Spawn ID='99991' Pos='3' Level='4' Draggable='true' StatueIndex='1'/>
+            <Spawn ID='99991' Pos='1' Level='4' Draggable='true' StatueIndex='1'/>
+            <Spawn ID='99991' Pos='5' Level='4' Draggable='true' StatueIndex='1'/>
+        </SpawnData>
+        <SpawnData Y='0' Team='1'>
+            <Spawn ID='99991' Pos='3' Level='5' Draggable='true' StatueIndex='0'/>
+        </SpawnData>
+
+        <StageClearCondition Type="AllKill">
+        </StageClearCondition>
+
+        <WaitingMusic>Tower_Wait_Boss</WaitingMusic>
+        <StageMusic>Tower_Battle</StageMusic>
+    </Stage>
+    <Stage ID="430072002" Theme="4100">
+        <!-- 적 -->
+        <SpawnData Y='3'>
+            <Spawn ID='40020740' Pos='3' Level='1'/>
+        </SpawnData>
+
+        <!-- 영웅 -->
+        <SpawnData Y='3' Team='1'>
+            <Spawn ID='99991' Pos='1' Level='3' Draggable='true' StatueIndex='0'/>
+            <Spawn ID='99991' Pos='5' Level='3' Draggable='true' StatueIndex='1'/>
+            <Spawn ID='99991' Pos='3' Level='5' Draggable='true' StatueIndex='0'/>
+        </SpawnData>
+        <SpawnData Y='1' Team='1'>
+            <Spawn ID='99991' Pos='3' Level='3' Draggable='true' StatueIndex='1'/>
+        </SpawnData>
+        <SpawnData Y='0' Team='1'>
+            <Spawn ID='99991' Pos='1' Level='5' Draggable='true' StatueIndex='2'/>
+            <Spawn ID='99991' Pos='5' Level='5' Draggable='true' StatueIndex='2'/>
+        </SpawnData>
+
+        <StageClearCondition Type="AllKill">
+        </StageClearCondition>
+
+        <WaitingMusic>Tower_Wait_Boss</WaitingMusic>
+        <StageMusic>Tower_Battle</StageMusic>
+    </Stage>
+    <Stage ID="430072003" Theme="4100">
+        <!-- 아이템 : Lv11+ 균열장비 6종 -->
+        <Item ID="2000"/>
+        <Item ID="2100"/>
+        <Item ID="2200"/>
+        <Item ID="2300"/>
+        <Item ID="2400"/>
+        <Item ID="2500"/>
+
+        <SpawnData Y="4">
+            <Spawn ID="30000050" Pos="3" Level="7" Boss="2"/>
+        </SpawnData>
+
+        <!-- 영웅 -->
+        <SpawnData Y='3' Team='1'>
+            <Spawn ID='99991' Pos='1' Level='7' Draggable='true' StatueIndex='0'/>
+            <Spawn ID='99991' Pos='5' Level='7' Draggable='true' StatueIndex='0'/>
+            <Spawn ID='99991' Pos='3' Level='7' Draggable='true' StatueIndex='0'/>
+        </SpawnData>
+        <SpawnData Y='0' Team='1'>
+            <Spawn ID='99991' Pos='3' Level='7' Draggable='true' StatueIndex='1'/>
         </SpawnData>
 
         <StageClearCondition Type="AllKill"/>

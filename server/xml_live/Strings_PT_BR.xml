@@ -138,9 +138,9 @@ Voltando à tela de login.</String>
 
 (Custo: {0} diamantes)</String>
   <String Key="King_1">Rei</String>
-  <String Key="King_2"></String>
+  <String Key="King_2"> </String>
   <String Key="Castle_1">Castelo</String>
-  <String Key="Castle_2"></String>
+  <String Key="Castle_2"> </String>
   <String Key="LoadingPopupText">Comunicando com o servidor...</String>
   <String Key="LoginByGoogle">Entrar com Google Play</String>
   <String Key="LoginByApple">Entrar com Apple</String>
@@ -258,11 +258,11 @@ Voltando à tela de login.</String>
   <String Key="Post_Push_Contents18">Receba 1.000 de Ouro hoje à noite!</String>
   <String Key="Post_Push_Contents19">Tem Ouro esperando por você na Caixa de correio!</String>
   <String Key="Post_Push_Contents20">Chegou Ração de apoio para você!</String>
-  <String Key="Post_Push_Contents21">Último dia da Temporada 70 de King God Castle</String>
-  <String Key="Post_Push_Contents22">1 dia para o fim da Temporada 70 de King God Castle</String>
-  <String Key="Post_Push_Contents23">2 dias para o fim da Temporada 70 de King God Castle</String>
-  <String Key="Post_Push_Contents24">4 dias para o fim da Temporada 70 de King God Castle</String>
-  <String Key="Post_Push_Contents25">A Temporada 70 de King God Castle termina hoje!</String>
+  <String Key="Post_Push_Contents21">Último dia da Temporada 72 de King God Castle</String>
+  <String Key="Post_Push_Contents22">1 dia para o fim da Temporada 72 de King God Castle</String>
+  <String Key="Post_Push_Contents23">2 dias para o fim da Temporada 72 de King God Castle</String>
+  <String Key="Post_Push_Contents24">4 dias para o fim da Temporada 72 de King God Castle</String>
+  <String Key="Post_Push_Contents25">A Temporada 72 de King God Castle termina hoje!</String>
   <String Key="Post_Push_Contents26">Verifique se não há recompensas não resgatadas do Passe!</String>
   <String Key="Post_Push_Contents27">Resgate todas as recompensas do Passe!</String>
   <String Key="Post_Push_Contents28">O campo de batalha e o sistema de Passe encerrarão após 4 dias.</String>
@@ -1224,8 +1224,11 @@ Deseja ver?</String>
   <String Key="ItemName_10020">Expansão de Capacidade</String>
   <String Key="ItemDesc_10020">Expande a capacidade em 1.</String>
   <String Key="ItemName_10030">+5 de Prata</String>
+  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">+10 de Prata</String>
+  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">+20 de Prata</String>
+  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">Medalha de Honra</String>
   <String Key="ItemDesc_10040">Aumenta 1 ★ de um Herói aleatório no campo de batalha.</String>
   <String Key="ItemName_10050">Pergaminho de Herói Superior (2x)</String>
@@ -1840,7 +1843,7 @@ Absorção física/de feitiço</String>
   <String Key="Event_Artifact_Merge">Pacote de Pedra de Fusão</String>
   <String Key="Event_Artifact_Reroll">Pacote de Pedra de Reforja</String>
   <String Key="MinusDamagePerCount">+ dano causado em
-{1} - (número de Heróis alocados) *{0}</String>
+{1} - (número de Heróis alocados) *{0}                </String>
   <String Key="ArenaRewardPostTitle_Season6">Recompensa de Ranque da Temporada 6 da Arena</String>
   <String Key="ArenaRewardPostDesc_Season6">Receba a Recompensa de Ranque da Temporada 6 da Arena!</String>
   <String Key="ShopItemName_1011_Post">Pacote de Progresso ao Nv.7</String>
@@ -2351,7 +2354,7 @@ Você pode converter Símbolo de Rei em Símbolo de Herói da sua preferência.<
   <String Key="Name_Potential_10150_2">Comunhão com Natureza</String>
   <String Key="Name_Potential_10170_2">Transferência Perpétua</String>
   <String Key="Name_Potential_10180_2">Vínculo de Maldição</String>
-  <String Key="Name_Potential_10190_2">Provocação do Império</String>
+  <String Key="Name_Potential_10190_2">Sombra do Império</String>
   <String Key="Name_Potential_10200_2">Inundação</String>
   <String Key="Name_Potential_10210_2">Onda da Espada Sagrada</String>
   <String Key="Name_Potential_10220_2">Bomba Massiva</String>
@@ -2379,7 +2382,7 @@ Você pode converter Símbolo de Rei em Símbolo de Herói da sua preferência.<
   <String Key="Potential_10090_2">+1 casa do alcance da habilidade Melodia Alegre</String>
   <String Key="Potential_10100_2">+30% de dano recebido pelo alvo de Assalto Fatal por expor sua 'fraqueza’ por 10s (reduzido pela metade contra chefes)</String>
   <String Key="Potential_10150_2">Ao usar &lt;Evocação de Golem&gt;, recarrega 100% da Mana dos aliados ao redor na área 5x5/5x5/7x7/7x7</String>
-  <String Key="Potential_10190_2">+350 de defesa por 4s e provoca os inimigos que atacam o aliado que recebeu Proteção Feroz</String>
+  <String Key="Potential_10190_2">Concede Modo furtivo por 0.3 s ao aliado alvo de &lt;Proteção Feroz&gt; e +400 Defesa a Behemus por 4 s.</String>
   <String Key="Potential_10210_2">Tem 33% de chance de ativar uma onda que causa dano equivalente ao poder de habilidade ao atacar enquanto durar Espada Sagrada Garna.</String>
   <String Key="Potential_10220_2">Atira uma Bomba Massiva que causa o triplo de dano adicional a cada dez ataques normais em uma área de 5X5.</String>
   <String Key="Potential_10240_2">Expõe a 'fraqueza' do alvo de Grande Golpe, aumentando o dano recebido em 30% durante 10s (efeito reduzido pela metade contra chefes)</String>
@@ -2516,8 +2519,7 @@ Quer comprar?</String>
   <String Key="ShopItemName_951">Suprimento Diário de Diamantes</String>
   <String Key="Name_Potential_10190_3">Grande Sismo</String>
   <String Key="Name_Potential_10200_3">Contrafluxo</String>
-  <String Key="Potential_10190_3">Fixa o alcance de Proteção Feroz para 2 casas ao seu redor em qualquer ★.
-Altera o número de casas empurradas de 3 para 2/3/4/5 casas</String>
+  <String Key="Potential_10190_3">Altera o alvo de &lt;Proteção Feroz&gt; para o inimigo mais próximo em 9X9, obtenção de Barreira de Behemus +100%</String>
   <String Key="SkinName_1003002">Evan Ano Novo Lunar</String>
   <String Key="SkinDesc_1003002">&lt;i&gt;Visual de Ano Novo Lunar 2022&lt;/i&gt;</String>
   <String Key="Alert_Temp_NoIAP">Compras dentro do app estão temporariamente indisponíveis. Tente novamente mais tarde.</String>
@@ -4355,7 +4357,8 @@ Neste lugar onde o tempo flui de maneira diferente, é possível encontrar tecno
 
 O herói deve vasculhar os caminhos labirínticos da Grande Ruptura para resgatar companheiros, equipar armas e obter poderes divinos através de Relíquias.
 
-E quem sabe no final não exista uma maneira de fechar a ruptura para sempre.</String>
+E quem sabe no final não exista uma maneira de fechar a ruptura para sempre.
+</String>
   <String Key="RogueLikeReviveBonus">(Retorna à primeira sala do andar atual mantendo o seu progresso.)</String>
   <String Key="CannotUseItemInThisPhase">Você pode usar itens ​​após o fim da batalha.</String>
   <String Key="CannotUseItemInThisPhase2">Você não pode usar itens ​​durante a preparação para a batalha.</String>
@@ -4929,7 +4932,6 @@ Contemplem o meu poder estremecedor!&lt;/i&gt;</String>
   <String Key="Hero_Awaken_Noti">O despertar está disponível pois o Herói {0} atingiu o Nv.16.
 É possível utilizar &lt;color=#FFD247&gt;Habilidades de Despertar&lt;/color&gt; ao despertar o Herói.</String>
   <String Key="ItemDescSub_40463_07">{0} defesa(s) absoluta(s)</String>
-  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">Quando um Herói aparecer, o &lt;color=#FFD247&gt;Herói selecionado&lt;/color&gt; é &lt;color=#FFD247&gt;garantido!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Selecionar Heróis</String>
   <String Key="SelectPickupUnitAgain">Reconfigurar</String>
@@ -5566,7 +5568,8 @@ Protegem uns aos outros formando uma tropa impenetrável.</String>
   <String Key="GrandArena">Grande Arena</String>
   <String Key="PvpDormant">Ausência na Arena</String>
   <String Key="StartGrandArena">Entrada na Grande Arena!</String>
-  <String Key="StartGrandArenaDesc">Os seguintes efeitos são aplicados ao entrar na Grande Arena.</String>
+  <String Key="StartGrandArenaDesc">Os seguintes efeitos são aplicados ao entrar na Grande Arena.
+</String>
   <String Key="GrandArenaEffectName_0">Remoção de rebaixamento a Rei ou menos</String>
   <String Key="GrandArenaEffectDesc_0">Os pontos não reduzem para abaixo de 2.000.</String>
   <String Key="GrandArenaEffectName_1">Redução de pontos por ausência</String>
@@ -6423,7 +6426,7 @@ Sempre que se move montada no cavalo, causa dano de habilidade física equivalen
   <String Key="UnitName_10540">Elizabeth</String>
   <String Key="UnitSubName_10540">Espírito Guardião da Floresta</String>
   <String Key="Potential_10540_0">Elizabeth provoca o alvo de ataque normal do Espírito de Pedra</String>
-  <String Key="Potential_10540_1">Elizabeth cura 5% da vida máxima se o Espírito de Pedra morrer.</String>
+  <String Key="Potential_10540_1">Elizabeth cura 5% da vida máxima se o Espírito de Pedra morrer. </String>
   <String Key="SkinDesc_Default_10540">A Pedra Guardiã, que protege a parte mais profunda da Floresta Eterna há muito tempo, sempre teve abundante mana ao seu redor. Um dia, um espírito que amava a floresta integrou-se à Pedra Guardiã e à terra em seu torno por causa do amor pela floresta e vontade de protegê-la. Esse espírito protege a floresta junto com muitos outros amigos espirituais.</String>
   <String Key="SkillName_10540">Legião do Espírito Guardião</String>
   <String Key="SkillDesc_10540">Revoca todos os Espíritos de Pedra que Elizabeth havia invocado e causa {10550@Damage:BaseValue}+{10550@Damage:MAtkPer} de dano a todos os inimigos em uma área de {10550@SplashRangeX}{X}{10550@SplashRangeY} ao redor dos Espíritos de Pedra, atordoando-os por {10550@StunTime}s. Invoca novamente {SummonCountForDesc} Espíritos de Pedra. (Máx. de {Unit@GlobalMaxSummonCount} Espíritos de Pedra simultâneos)</String>
@@ -6559,7 +6562,7 @@ Quando a carga atinge 100% ou acima, é possível obter um &lt;color=#FFD247&gt;
 Ao trocar, os refinadores inseridos são redefinidos e movidos para o espaço selecionado.</String>
   <String Key="DailyGoldPackage_GoldBonusInfo">- Efeito de Suprimento Diário de Ouro -
 +{0}% &lt;color=#FFD247&gt;de recompensa em Ouro na Invasão&lt;/color&gt;</String>
-  <String Key="DailyGoldPackage_ClearGoldReward_GameEnd">+{0}% de efeito de suprimento diário de Ouro</String>
+  <String Key="DailyGoldPackage_ClearGoldReward_GameEnd">+{0}% de efeito de suprimento diário de Ouro </String>
   <String Key="DailyGoldPackage_BonusReward">Ouro em invasão
 Bônus &lt;color=#FFD247&gt;+{0}%&lt;/color&gt;</String>
   <String Key="AddedOverPolishItemAlert">O excesso do medidor de refino foi entregue como refinador!</String>
@@ -6865,7 +6868,6 @@ Para mais detalhes, entre em contato com o suporte.</String>
   <String Key="Clan_Menu_ChangeName">Alterar Nome</String>
   <String Key="ColosseumSeasonRankingReward">Recompensa da Temporada</String>
   <String Key="ColosseumRanking">Classificação</String>
-  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Detalhes de chances de Relíquias</String>
   <String Key="ArtifactOptionProbDetailDesc">Você será direcionado para página do site com detalhes das chances de aparecimento de opções de relíquias.</String>
   <String Key="ColosseumNetworkChanged">Reconectando devido à alteração de rede.</String>
@@ -7300,7 +7302,9 @@ Pedimos sinceras desculpas por qualquer inconveniente causado.</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;Transcendência de ★
 
 &lt;/size&gt;É possível &lt;color=#ffbc00&gt;conceder efeitos adicionais&lt;/color&gt; à habilidade do Tesouro através da &lt;color=#ffbc00&gt;transcendência de ★&lt;/color&gt; do Tesouro.
-Na transcendência de ★ são necessários &lt;color=#ffbc00&gt;Tesouros semelhantes&lt;/color&gt;.</String>
+Na transcendência de ★ são necessários &lt;color=#ffbc00&gt;Tesouros semelhantes&lt;/color&gt;.
+
+</String>
   <String Key="SkinName_1032006">Tiya Onda Azul</String>
   <String Key="SkinName_1036004">Haerang Onda Azul</String>
   <String Key="SkinName_1042003">Taebaek Onda Azul</String>
@@ -7374,7 +7378,8 @@ Então, siga as minhas ordens.&lt;/i&gt;</String>
 +{1}% de dano causado no modo invencível</String>
   <String Key="TreasureSkillDesc_3300033">Fica invencível por {1}s quando o Herói de maior ★ equipado com Mur recebe dano letal ou atinge a capacidade de {0}% da vida limitada a cada 1 vez.
 (Recuperação e barreira ficam indisponíveis enquanto estiver invencível)
-+{2}% de dano causado no modo invencível</String>
++{2}% de dano causado no modo invencível
+</String>
   <String Key="TreasureSkillDesc_3300034">Fica invencível por {1}s quando o Herói de maior ★ equipado com Mur recebe dano letal ou atinge a capacidade de {0}% da vida limitada a cada 1 vez.
 (Recuperação e barreira ficam indisponíveis enquanto estiver invencível)
 +{2}% de dano causado no modo invencível
@@ -7604,11 +7609,15 @@ Obtenha os &lt;color=#ffbc00&gt;materiais de melhoria&lt;/color&gt; &lt;color=#f
  &lt;size=25&gt;Transcendência de ★
 
 &lt;/size&gt;É possível &lt;color=#ffbc00&gt;conceder efeitos adicionais&lt;/color&gt; à habilidade do Tesouro através da &lt;color=#ffbc00&gt;transcendência de ★&lt;/color&gt; do Tesouro.
-Na transcendência de ★ são necessários &lt;color=#ffbc00&gt;Tesouros semelhantes&lt;/color&gt;.</String>
+Na transcendência de ★ são necessários &lt;color=#ffbc00&gt;Tesouros semelhantes&lt;/color&gt;.
+
+</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Melhoria do Tesouro
 
 &lt;/size&gt;Você pode aumentar os &lt;color=#ffbc00&gt;efeitos das habilidades do Tesouro&lt;/color&gt; ao &lt;color=#ffbc00&gt;melhorá-lo&lt;/color&gt;.
-Obtenha os &lt;color=#ffbc00&gt;materiais de melhoria&lt;/color&gt; &lt;color=#ffbc00&gt;comprando na loja&lt;/color&gt; ou &lt;color=#ffbc00&gt;triturando&lt;/color&gt; os Tesouros no inventário.</String>
+Obtenha os &lt;color=#ffbc00&gt;materiais de melhoria&lt;/color&gt; &lt;color=#ffbc00&gt;comprando na loja&lt;/color&gt; ou &lt;color=#ffbc00&gt;triturando&lt;/color&gt; os Tesouros no inventário.
+
+</String>
   <String Key="TreasureOvercome">Transcendência de ★</String>
   <String Key="TreasureOvercome_Short">Transcender ★</String>
   <String Key="ViewNextOvercome">Ver próxima transcendência</String>
@@ -9420,7 +9429,7 @@ Os pontos não reduzem para abaixo de 2.000.</String>
   <String Key="UnitSubName_10670">Porta-bandeira do Campo de Batalha</String>
   <String Key="Potential_10670_0">+30 de proteção</String>
   <String Key="Potential_10670_1">-70% de dano recebido por 2s após receber dano pela primeira vez após o início da batalha</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;Liter, a família prestigiada do império, tem criado seres com talentos excepcionais em várias áreas. Embora Patros não possua habilidades inatas como outros membros da família, tornou-se um comandante exemplar do exército imperial ao se esforçar mais do que qualquer um.&lt;/i&gt;</String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;Liter, a família prestigiada do império, tem criado seres com talentos excepcionais em várias áreas. Embora Patros não possua habilidades inatas como outros membros da família, tornou-se um comandante exemplar do exército imperial ao se esforçar mais do que qualquer um.&lt;/i&gt; </String>
   <String Key="SkillName_10670">Pelo Império!</String>
   <String Key="SkillDesc_10670">Encoraja os aliados por {TotalAttackTime}s, curando {Heal} de vida de todos os aliados em uma área de {SplashRangeX}{x}{SplashRangeY} ao seu redor a cada {Time}s e aumentando a velocidade de ataque em {AttackSpeedPerUnit10670}%. É aplicado o maior efeito de aumento de velocidade de ataque entre as habilidades com o mesmo nome.</String>
   <String Key="SkillDesc_10670_Short">Cura {Heal} de vida dos aliados em uma área de {SplashRangeX}{x}{SplashRangeY} ao seu redor a cada {Time}s durante {TotalAttackTime}s e aumenta a velocidade de ataque em {AttackSpeedPerUnit10670}%. É aplicado apenas a maior velocidade de ataque de &lt;Pelo Império!&gt;.</String>
@@ -9720,7 +9729,8 @@ Quer mesmo pular?</String>
   <String Key="BaseHybridDefOnInvade">+{0} de recompensa em Ouro na Invasão
 +{1} de defesa de todos os Heróis na Invasão
 Não é possível reforjar e melhorar através do refino</String>
-  <String Key="ArtifactOptionDesc_Event_15000">Alocação grátis através do refino (até 3/12/24)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">
+Alocação grátis através do refino (até 3/12/24)</String>
   <String Key="SkinName_1032007">Tiya Deusa da Lua</String>
   <String Key="SkinName_1032007_NewLine">Tiya Deusa da Lua</String>
   <String Key="TerritoryBuildingName_40300">Estátua da Deusa da Lua</String>
@@ -11314,7 +11324,8 @@ Desafio e Proeza</String>
   <String Key="AddDifficultyUnlockDesc">Desbloqueia 2 dificuldades cada vez que concluir sem sofrer dano.</String>
   <String Key="AccessoryLevelUpTutorialLock">Acesso disponível ao concluir o Corrompido II - 1.</String>
   <String Key="NotAccessoryLevelUp">Não há acessório para melhorar.</String>
-  <String Key="ArtifactOptionDesc_Event_15020">Alocação grátis através do refino (até &lt;color=#ffbd4a&gt;{0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">
+Alocação grátis através do refino (até &lt;color=#ffbd4a&gt;{0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Concluir a Dificuldade {Diff} ou acima do Capítulo {0}-{1}</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">Concluir a Dificuldade {Diff} ou acima do Capítulo {0}-{1} [Corrompido]</String>
   <String Key="Polish_EventArtifact_Alert">Não é possível melhorar esta Relíquia através do refino!</String>
@@ -11666,7 +11677,8 @@ Aplica Golpe de Espada adicional a cada {2}% de diferença da vida máxima se a 
   <String Key="SpecialPackage_1556">Pacote de Eterna 1</String>
   <String Key="SpecialPackage_1557">Pacote de Eterna 2</String>
   <String Key="SpecialPackage_1558">Pacote de Eterna 3</String>
-  <String Key="MakeAllLateComerExceptSlot">Concede o efeito de entrada tardia a todos os Heróis, exceto ao Herói na {0} posição da tropa.</String>
+  <String Key="MakeAllLateComerExceptSlot">Concede o efeito de entrada tardia a todos os Heróis, exceto ao Herói na {0} posição da tropa.
+</String>
   <String Key="Order_1">primeira</String>
   <String Key="Order_2">segunda</String>
   <String Key="Order_3">terceira</String>
@@ -13776,7 +13788,7 @@ Ao receber dano letal, se teletransporta para o inimigo de menor ★, consome vi
   <String Key="ArenaDebuffDesc_01">Reduz em 80% toda cura durante a batalha</String>
   <String Key="ArenaDebuffDesc_02">Reduz em 80% todas as barreiras durante a batalha</String>
   <String Key="ArenaDebuffDesc_03">Reduz em 50% todas as penalidades durante a batalha</String>
-  <String Key="ArenaDebuffDesc_04">+500 de defesa</String>
+  <String Key="ArenaDebuffDesc_04">Defesa +500 e a Defesa Final diminui com o tempo</String>
   <String Key="ArenaDebuffTitle">Efeito da Arena</String>
   <String Key="Theme68BattleObserverDesc_0">Concluir a rodada sem ser derrotado por Ninja Assassino ou Ninja Assassino Superior</String>
   <String Key="Theme68BattleObserverDesc_1">Derrotar todos os Mestres dos Espíritos em estado de dano recebido aumentado causado por congelamento</String>
@@ -14349,7 +14361,8 @@ Recomendado: Campo de Batalha Árdua</String>
   <String Key="AltarHelpBuilding_5">Altar que facilita a evocação de Heróis e o uso da loja, aumentando o abastecimento de Prata.
 
 Recomendado: Invasão e Arena</String>
-  <String Key="ArtifactBuffDataDesc_15010">+{0}% de velocidade de ataque do Herói de Vanguarda no começo da batalha da Invasão e Expedição (Nenhum efeito se não houver Herói de Vanguarda)</String>
+  <String Key="ArtifactBuffDataDesc_15010">+{0}% de velocidade de ataque do Herói de Vanguarda no começo da batalha da Invasão e Expedição (Nenhum efeito se não houver Herói de Vanguarda)
+</String>
   <String Key="Post_Name_AltarGoldRefund">Restituição de Ouro da Expansão das Chamas do Altar</String>
   <String Key="Post_Desc_AltarGoldRefund">Receba o Ouro consumido na expansão das Chamas do Altar.</String>
   <String Key="OutgameTutorial_140_00">Há quanto tempo, Rei do Castelo! Sou a &lt;color=#FFC13D&gt;Comandante da Cavalaria Aslyn&lt;/color&gt;.
@@ -15401,7 +15414,7 @@ Atualizações feitas nesta rodada: {3}</String>
   <String Key="SeasonInformation">Info da Temporada</String>
   <String Key="SeasonInformationHelp_0">Você pode conferir as informações do Capítulo da Pedra de Invocação de Assalto desta temporada e o Ajuste dos atributos de Heróis.</String>
   <String Key="SeasonInformationHelp_1">Toque no ícone do Capítulo para ver o nome da Pedra de Invocação de Assalto.</String>
-  <String Key="SeasonInformationHelp_2">Em Ajuste dos atributos de Heróis, toque em Ver tudo para ver os ajustes de todos os Heróis.</String>
+  <String Key="SeasonInformationHelp_2">Toque em Ver tudo em Ajuste dos atributos de Heróis para ver o Dano caus. e a taxa de obtenção de Defesa Absoluta de todos os Heróis.</String>
   <String Key="InvadeSpawnItem">Pedra de Invocação de Assalto</String>
   <String Key="SkillDesc_60505">Quando você é atingido e fica cheio de fúria, ganha +{AttackSpeedPer}% de Velocidade de ataque e +{MoveSpeedPer}% de Velocidade de movimento, e fica imune a efeitos de estado.</String>
   <String Key="SkillDesc_60665">Quando você é atingido e fica cheio de fúria, ganha +{AttackSpeedPer}% de Velocidade de ataque e +{MoveSpeedPer}% de Velocidade de movimento, e fica imune a efeitos de estado.</String>
@@ -16936,9 +16949,9 @@ Dano Crítico Físico de até +{5}% conforme a duração restante
   <String Key="SubStoryChapterName_1_4">Cathy Nosferatu</String>
   <String Key="SubStoryChapterName_1_5">Biblioteca de Roderick</String>
   <String Key="SubStoryChapterName_1_6">Vingança</String>
-  <String Key="SubStoryChapterName_1_7">???</String>
-  <String Key="SubStoryChapterName_1_8">???</String>
-  <String Key="SubStoryChapterName_1_9">???</String>
+  <String Key="SubStoryChapterName_1_7">Frenesi</String>
+  <String Key="SubStoryChapterName_1_8">Onde o Vinho Deve Estar</String>
+  <String Key="SubStoryChapterName_1_9">Epílogo</String>
   <String Key="SubStoryChapterDesc_1">Nascida como filha de uma família nobre do Centro, Ofélia apenas vivia conforme o fluxo, dançando em salões de banquetes e bebendo vinho. Mesmo depois de seu casamento arranjado com Roderick, Senhor de Frostwald, nada mudou. Então, um dia, após uma Invasão, Ofélia é sequestrada para um lugar desconhecido.</String>
   <String Key="UnitName_10800">Cathy</String>
   <String Key="DimensionUnitSummon">Evocação Dimensional</String>
@@ -17859,9 +17872,9 @@ Após o início da Batalha, obtém +{11}% de Resistência a penalidades e +{12}%
   <String Key="SkinDesc_Default_10800">&lt;i&gt;Nascida como uma semivampira, Cathy cresceu sofrendo discriminação e maus-tratos dos membros da família Nosferatu. Mas, em vez de desanimar, Cathy trabalha para criar um mundo onde muitos povos possam viver juntos.&lt;/i&gt;</String>
   <String Key="SkillName_10800">Instinto Reprimido</String>
   <String Key="SkillDesc_10800_Short">Concede Ressurreição a si mesma. Ao reviver, transforma-se em forma vampírica e ganha habilidades e atributos mais fortes.</String>
-  <String Key="SkillDesc_10800_Long">Concede a si mesma 1 Ressurreição com {Unit@ReviveHpPer}% da Vida Máx. Ao reviver, perde o controle por {10805@TransformTime} seg., transforma-se em uma forma vampírica com Vida {Unit@TransformHpForDesc}, Defesa +{108000@BaseDef} e Absorção de Feitiço +{108000@MagicDrain}%, surge onde pode atingir o maior número de inimigos e causa Terror aos inimigos em uma área {10815@SplashRangeX}{X}{10815@SplashRangeY} por {10815@FearTime} seg. As Ressurreições concedidas por esta habilidade não acumulam.</String>
+  <String Key="SkillDesc_10800_Long">Concede a si 1 Ressurreição com {Unit@ReviveHpPer}% da Vida máxima. Ao Ressuscitar, entra em Frenesi por {10805@TransformTime} s, se transforma em uma forma de Vampiro com {Unit@TransformHpForDesc}% de Vida, +{108000@BaseDef} Defesa e +{108000@MagicDrain}% de Absorção de Feitiço, então desce à posição onde pode atingir mais inimigos e aplica Terror por {10815@FearTime} s aos inimigos em {10815@SplashRangeX}{X}{10815@SplashRangeY}. A Ressurreição desta Habilidade não acumula.</String>
   <String Key="SkillDesc_10800_Short_2">Concede Ressurreição a si mesma. Ao reviver, transforma-se em forma vampírica e ganha habilidades e atributos mais fortes.</String>
-  <String Key="SkillDesc_10800_Long_2">Concede a si mesma 1 Ressurreição com {Unit@ReviveHpPer}% da Vida Máx. Ao reviver, perde o controle por {10805@TransformTime} seg., transforma-se em uma forma vampírica com Vida {Unit@TransformHpForDesc}, Defesa +{108000@BaseDef} e Absorção de Feitiço +{108000@MagicDrain}%, surge onde pode atingir o maior número de inimigos e causa Terror aos inimigos em uma área {10815@SplashRangeX}{X}{10815@SplashRangeY} por {10815@FearTime} seg. Cada vez que se transforma, a Vida Máx. Final da forma vampírica aumenta em +{10800@Unit10800AI_TotalHpPer}%. As Ressurreições concedidas por esta habilidade não acumulam.</String>
+  <String Key="SkillDesc_10800_Long_2">Concede a si 1 Ressurreição com {Unit@ReviveHpPer}% da Vida máxima. Ao Ressuscitar, entra em Frenesi por {10805@TransformTime} s, se transforma em uma forma de Vampiro com {Unit@TransformHpForDesc}% de Vida, +{108000@BaseDef} Defesa e +{108000@MagicDrain}% de Absorção de Feitiço, então desce à posição onde pode atingir mais inimigos e aplica Terror por {10815@FearTime} s aos inimigos em {10815@SplashRangeX}{X}{10815@SplashRangeY}. Cada vez que se transforma, a Vida máxima Final da forma de Vampiro aumenta +{10800@Unit10800AI_TotalHpPer}%. A Ressurreição desta Habilidade não acumula.</String>
   <String Key="ActiveSkillName_10800">Despertar</String>
   <String Key="ActiveSkillDesc_10800">No início da próxima Batalha, todas as Cathys semivampiras ganham Imunidade a penalidades.</String>
   <String Key="ActiveSkillDesc_10803">No início da próxima Batalha, todas as Cathys semivampiras ganham {0} Ressurreições e Imunidade a penalidades.</String>
@@ -17901,51 +17914,325 @@ Após o início da Batalha, obtém +{11}% de Resistência a penalidades e +{12}%
   <String Key="SkinDesc_107100401">&lt;i&gt;Recompensa por entrar na Classificação da Liga do Calor na Batalha&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Rei da Estrela da Manhã Farael</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;A mais nobre luz das estrelas, nascida no início do amanhecer, se tornará a luz mais brilhante para atravessar a escuridão.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Obter Defesa Absoluta</String>
+  <String Key="SuperShieldModulator">Chance de Defesa Absoluta</String>
   <String Key="BuildingEffect_BaseDamageReflect">{Value}% de dano refletido
 (metade do dano em caso de feitiços)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">Reflete parte do dano sofrido pelo Herói ao inimigo.</String>
-  <String Key="TreasureName_30042">Perataus</String>
-  <String Key="TreasureSubName_30042">Escudo Negro como Breu</String>
-  <String Key="TreasureDesc_30042">O escudo de Behemus não é só para defesa. O Avanço Feroz de Behemus com seu escudo pesado amassa até a armadura mais resistente num instante.</String>
+  <String Key="TreasureName_30042">Ferataus</String>
+  <String Key="TreasureSubName_30042">Escudo Negro de Breu</String>
+  <String Key="TreasureDesc_30042">O escudo de Behemus não serve apenas para defender. O Avanço Feroz de Behemus com seu escudo pesado amassa até a armadura mais resistente em um instante.</String>
   <String Key="TreasureSkillName_30042">Queda</String>
-  <String Key="BuffDataName_3300421">Fratura I</String>
-  <String Key="BuffDataName_3300422">Amassadura I</String>
-  <String Key="BuffDataName_3300423">Neutralização</String>
-  <String Key="BuffDataName_3300424">Amassadura II</String>
-  <String Key="BuffDataName_3300425">Fratura II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Loja Especial do Pickup de Perataus</String>
-  <String Key="SpecialPackage_1680">Pacote de Perataus 1</String>
-  <String Key="SpecialPackage_1681">Pacote de Perataus 2</String>
-  <String Key="SpecialPackage_1682">Pacote de Perataus 3</String>
+  <String Key="BuffDataName_3300421">Supressão I</String>
+  <String Key="BuffDataName_3300422">Debilitação I</String>
+  <String Key="BuffDataName_3300423">Ruptura</String>
+  <String Key="BuffDataName_3300424">Debilitação II</String>
+  <String Key="BuffDataName_3300425">Supressão II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Loja Especial de Pickup de Ferataus</String>
+  <String Key="SpecialPackage_1680">Pacote Ferataus 1</String>
+  <String Key="SpecialPackage_1681">Pacote Ferataus 2</String>
+  <String Key="SpecialPackage_1682">Pacote Ferataus 3</String>
   <String Key="BuffDataDesc_3300421">Transferência de dano +{1}x a cada {0} de Ameaça</String>
-  <String Key="BuffDataDesc_3300422">Dano Físico Recebido por inimigos com Instável +{0}%</String>
-  <String Key="BuffDataDesc_3300423">Sempre que Instável for removido, todos os aliados obtêm +{0} de Defesa Absoluta por cada inimigo do qual for removido</String>
-  <String Key="BuffDataDesc_3300424">Dano Físico Recebido por inimigos com Instável +{0}%</String>
+  <String Key="BuffDataDesc_3300422">Quando Instável é removido, o alvo fica Atordoado por {0} s</String>
+  <String Key="BuffDataDesc_3300423">Dano Físico Recebido por inimigos Instáveis +{0}% (Aumentos de Dano Físico Recebido não acumulam. Só o maior valor é aplicado)</String>
+  <String Key="BuffDataDesc_3300424">Quando Instável é removido, o alvo fica Atordoado por {0} s</String>
   <String Key="BuffDataDesc_3300425">Transferência de dano +{1}x a cada {0} de Ameaça</String>
-  <String Key="TreasureSkillDesc_3300420">Quando você causa Dano de Habilidade a um inimigo, aplica Instável ao alvo
-Se um aliado causar a um inimigo com Instável Dano Físico igual ou maior que {0}% da Vida máxima do alvo, {1}% desse dano é transferido como Dano Especial a outro inimigo com Instável e, depois, Instável é removido de todos os inimigos
-&lt;color=#808080&gt;&lt;i&gt;Este efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300421">Quando você causa Dano de Habilidade a um inimigo, aplica Instável ao alvo
-Se um aliado causar a um inimigo com Instável Dano Físico igual ou maior que {0}% da Vida máxima do alvo, {1}% desse dano é transferido como Dano Especial a outro inimigo com Instável e, depois, Instável é removido de todos os inimigos
+  <String Key="TreasureSkillDesc_3300420">Ao causar Dano de Habilidade a um inimigo, aplica Instável ao alvo
+Se um aliado causar a um inimigo Instável, em um único acerto, Dano Físico igual ou maior que {0}% da Vida máxima do alvo, excluindo a Barreira, {1}% do dano é transferido para outros inimigos Instáveis como Dano Especial, depois Instável é removido de todos os alvos
+&lt;color=#808080&gt;&lt;i&gt;O efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">Ao causar Dano de Habilidade a um inimigo, aplica Instável ao alvo
+Se um aliado causar a um inimigo Instável, em um único acerto, Dano Físico igual ou maior que {0}% da Vida máxima do alvo, excluindo a Barreira, {1}% do dano é transferido para outros inimigos Instáveis como Dano Especial, depois Instável é removido de todos os alvos
 Transferência de dano +{3}x a cada {2} de Ameaça
-&lt;color=#808080&gt;&lt;i&gt;Este efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300422">Quando você causa Dano de Habilidade a um inimigo, aplica Instável ao alvo
-Se um aliado causar a um inimigo com Instável Dano Físico igual ou maior que {0}% da Vida máxima do alvo, {1}% desse dano é transferido como Dano Especial a outro inimigo com Instável e, depois, Instável é removido de todos os inimigos
+&lt;color=#808080&gt;&lt;i&gt;O efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">Ao causar Dano de Habilidade a um inimigo, aplica Instável ao alvo
+Se um aliado causar a um inimigo Instável, em um único acerto, Dano Físico igual ou maior que {0}% da Vida máxima do alvo, excluindo a Barreira, {1}% do dano é transferido para outros inimigos Instáveis como Dano Especial, depois Instável é removido de todos os alvos
 Transferência de dano +{3}x a cada {2} de Ameaça
-Dano Físico Recebido por inimigos com Instável +{4}%
-Este aumento de Dano Físico Recebido não se acumula. Só o maior valor é aplicado
-&lt;color=#808080&gt;&lt;i&gt;Este efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300423">Quando você causa Dano de Habilidade a um inimigo, aplica Instável ao alvo
-Se um aliado causar a um inimigo com Instável Dano Físico igual ou maior que {0}% da Vida máxima do alvo, {1}% desse dano é transferido como Dano Especial a outro inimigo com Instável e, depois, Instável é removido de todos os inimigos
+Quando Instável é removido, o alvo fica Atordoado por {4} s
+&lt;color=#808080&gt;&lt;i&gt;O efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">Ao causar Dano de Habilidade a um inimigo, aplica Instável ao alvo
+Se um aliado causar a um inimigo Instável, em um único acerto, Dano Físico igual ou maior que {0}% da Vida máxima do alvo, excluindo a Barreira, {1}% do dano é transferido para outros inimigos Instáveis como Dano Especial, depois Instável é removido de todos os alvos
 Transferência de dano +{3}x a cada {2} de Ameaça
-Dano Físico Recebido por inimigos com Instável +{4}%
-Este aumento de Dano Físico Recebido não se acumula. Só o maior valor é aplicado
-Sempre que Instável for removido, todos os aliados obtêm +{5} de Defesa Absoluta por cada inimigo do qual for removido
-&lt;color=#808080&gt;&lt;i&gt;Este efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
+Quando Instável é removido, o alvo fica Atordoado por {4} s
+Dano Físico Recebido por inimigos Instáveis +{5}%
+Aumentos de Dano Físico Recebido não acumulam. Só o maior valor é aplicado
+&lt;color=#808080&gt;&lt;i&gt;O efeito é compartilhado mesmo se Heróis diferentes aplicarem Instável.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="SpecialShop_TreasureDoublePickUp10014">Loja Especial do Pickup de Tesouros</String>
   <String Key="SpecialPackage_1676">Pacote 1 de Pedra de Evocação do Pickup de Tesouros</String>
   <String Key="SpecialPackage_1677">Pacote 2 de Pedra de Evocação do Pickup de Tesouros</String>
   <String Key="SpecialPackage_1678">Pacote de Caelus</String>
   <String Key="SpecialPackage_1679">Pacote de Traquinada</String>
+  <String Key="CannotSummonByWatchingAdsWhileInBattleAlert">Não disponível durante a Batalha.</String>
+  <String Key="AdsReroll">Nova rolagem grátis</String>
+  <String Key="AdsDeckSet">Reinício de formação grátis</String>
+  <String Key="ResetPVPMatch">Redefinir</String>
+  <String Key="CannotResetPVPMatchByWatchingAdsAlert">Você usou todas as redefinições de hoje.</String>
+  <String Key="PVPDeckSettingReTryAdsPopupTitle">Nova tentativa de formação</String>
+  <String Key="PVPDeckSettingReTryAdsPopupDesc">Deseja assistir a um anúncio e tentar novamente de graça?
+Ao comprar o Passe KingGod, os anúncios do jogo são removidos.
+Se escolher usar Diamantes, a tentativa grátis com anúncio de hoje não ficará disponível.</String>
+  <String Key="PVPDeckSettingReTryAdsCancelAlert">Fechar isto cancelará a tentativa grátis com anúncio. Cancelar a tentativa?</String>
+  <String Key="SuperShieldAdaptabilityPer">Melhorar Altar do Sangue {0}
+Chance de Defesa Absoluta +{1}%</String>
+  <String Key="SuperShieldAdaptabilityPer_Piece">Melhorar Altar do Sangue
+Chance de Defesa Absoluta aumentada</String>
+  <String Key="SkillDesc_1019000_Short">Cai sobre o inimigo mais próximo, causa {Damage:BaseValue}+{Damage:MAtkPer} de dano em {SplashRangeX}{X}{SplashRangeY} e empurra os alvos {Knockback} casas.</String>
+  <String Key="SkillDesc_1019001_Short">Cai sobre o inimigo mais próximo, causa {Damage:BaseValue}+{Damage:MAtkPer} de dano em {SplashRangeSum} casas próximas e empurra os alvos {Knockback} casas.</String>
+  <String Key="SkillDesc_1019000_Long">Cai diante do inimigo mais próximo em {RangeX}{X}{RangeY} e, com o poder do escudo pesado, causa {Damage:BaseValue}+{Damage:MAtkPer} de dano a todos os inimigos em {SplashRangeX}{X}{SplashRangeY} e os empurra {Knockback} casas.</String>
+  <String Key="SkillDesc_1019001_Long">Cai diante do inimigo mais próximo em {RangeX}{X}{RangeY} e, com o poder do escudo pesado, causa {Damage:BaseValue}+{Damage:MAtkPer} de dano a todos os inimigos em {SplashRangeSum} casas próximas e os empurra {Knockback} casas.</String>
+  <String Key="ChallengeBossDesc_72">Possui uma casa alvejável de &lt;color=#8DFFFF&gt;1x1&lt;/color&gt; e tamanho de &lt;color=#8DFFFF&gt;3x3&lt;/color&gt; casas.</String>
+  <String Key="SkillName_30000051">Endurecimento</String>
+  <String Key="SkillDesc_30000051">Usado imediatamente no início da Batalha. A Ameaça do chefe aumenta em &lt;color=#ffd264&gt;Dificuldade de DesafioX&lt;/color&gt;{DescDefPen}, e o Dano Recebido que não for causado por Reflete dano/Contra-ataque diminui em &lt;color=#ffd264&gt;Dificuldade de DesafioX&lt;/color&gt;{DescReflectDef}%. Em Dificuldade de Desafio 20 ou mais, a Defesa também aumenta em {DescDef} por dificuldade.</String>
+  <String Key="SkillName_30000052">Descarga</String>
+  <String Key="SkillDesc_30000052">Causa um total de {DescDamage} de dano aos Heróis em {SplashRangeX}{X}{SplashRangeY} ao longo de {DescAttackTime} s.</String>
+  <String Key="SkillName_30000053">Aniquilação</String>
+  <String Key="SkillDesc_30000053">Causa {Damage} de Dano de Habilidade Físico a todos os inimigos. Em Dificuldade de Desafio 10 ou menos, em vez disso causa dano igual a {MaxDamage:HpPer:BaseValue}% da Vida máxima do chefe. Ignora {DefBreak}% de Defesa.</String>
+  <String Key="StoryClearBenefit_430072000">Inventário - Escudo da Vingança obtido
+
+&lt;i&gt;Escudo da Vingança: Concede Reflete dano&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072001">Inventário - Colar da Esperança obtido
+
+&lt;i&gt;Colar da Esperança: Concede Ressurreição algum tempo após o início da Batalha&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072002">Na fase do chefe, item - Cajado de Cura obtido
+
+&lt;i&gt;Cajado de Cura: Dano caus. Final reduzido, cura Final aumentada&lt;/i&gt;</String>
+  <String Key="ItemName_60030">Cajado de Cura</String>
+  <String Key="ItemDesc_60030">Dano caus. Final {0}%, cura Final +{1}%</String>
+  <String Key="StoryInventoryItemName_230100">Escudo da Vingança</String>
+  <String Key="StoryInventoryItemDesc_230100">Reflete dano +{0}% (Dano de Feitiço reduzido à metade)</String>
+  <String Key="StoryInventoryItemName_230110">Colar da Esperança</String>
+  <String Key="StoryInventoryItemDesc_230110">Concede a todos os aliados Ressurreição {1} vez(es) {0} s após o início da Batalha</String>
+  <String Key="StoryModeDialogue_2010700_0_0_System">As tropas do Território de Ofélia, aliadas à Lua Vermelha, marcham para a fronteira de Nosferatu.</String>
+  <String Key="StoryModeDialogue_2010700_0_1_System">Vlad cambaleia e olha para Ofélia de longe. Seus olhos brilham em vermelho vivo.</String>
+  <String Key="StoryModeDialogue_2010700_0_2_System">Uma aura negra intensa o envolve.</String>
+  <String Key="StoryModeDialogue_2010700_0_3_Vlad">Lady Ofélia, é uma grande alegria vê-la assim de novo.</String>
+  <String Key="StoryModeDialogue_2010700_0_4_Vlad">Ou agora devo chamá-la de governante? Sua beleza não se apagou nem um pouco.</String>
+  <String Key="StoryModeDialogue_2010700_0_5_Vlad">Diga-me, vale a pena continuar vivendo como humana? Você não se cansou da morte?</String>
+  <String Key="StoryModeDialogue_2010700_0_6_Vlad">Ainda não é tarde para se tornar minha família...</String>
+  <String Key="StoryModeDialogue_2010700_1_0_System">Enquanto isso, Cathy também se prepara para partir. Pela janela do escritório, ela vê a bandeira da Lua Vermelha se erguer.</String>
+  <String Key="StoryModeDialogue_2010700_1_1_Cathy">Desde que a esposa do antigo senhor se tornou a nova governante, enviei várias cartas e pedi um encontro, mas nada voltou.</String>
+  <String Key="StoryModeDialogue_2010700_1_2_Cathy">Nem posso mais entrar em Frostwald. Então é assim que termina...</String>
+  <String Key="StoryModeDialogue_2010700_1_3_Cathy">Se Vlad morrer, isso não vai terminar como um problema de fronteira.</String>
+  <String Key="StoryModeDialogue_2010700_1_4_Cathy">A força principal de Nosferatu vai usar a desculpa de que 'um humano matou um nobre da família' para iniciar represálias políticas, e isso virará uma guerra total entre nações.</String>
+  <String Key="StoryModeDialogue_2010700_1_6_Cathy">Agora só posso.... ir eu mesma, resolver isso e encontrar a nova governante. Esse é o único caminho.</String>
+  <String Key="StoryModeDialogue_2010700_2_0_System">A tropa de Ofélia.</String>
+  <String Key="StoryModeDialogue_2010700_2_1_System">Ofélia comanda as tropas da retaguarda, enquanto Neria avança na frente disparando sua besta e abrindo caminho pelo campo de batalha até a mansão de Vlad Moren.</String>
+  <String Key="StoryModeDialogue_2010700_2_2_Solar">Lady Ofélia, atrás!</String>
+  <String Key="StoryModeDialogue_2010700_2_3_Solar">Ugh... Ah, isso dói um pouco.</String>
+  <String Key="StoryModeDialogue_2010700_2_4_Ophelia">Sola! Médico! Cuide dela!</String>
+  <String Key="StoryModeDialogue_2010700_2_5_Solar">Estou bem. Acho que já vivi feliz o bastante! Vou continuar torcendo por vocês....</String>
+  <String Key="StoryModeDialogue_2010700_2_6_System">Ofélia sabia que a guerra sempre vinha com sangue e morte.</String>
+  <String Key="StoryModeDialogue_2010700_2_7_System">Por 3 meses, ela estudou e estudou de novo. Mas saber e enfrentar isso pessoalmente eram coisas diferentes.</String>
+  <String Key="StoryModeDialogue_2010700_2_8_System">Ela conhecia Sola havia só alguns meses, mas pensar em perdê-la fazia seu sangue ferver.</String>
+  <String Key="StoryModeDialogue_2010700_2_9_System">Além disso, não foi ela mesma quem decidiu esta batalha?</String>
+  <String Key="StoryModeDialogue_2010700_2_10_System">Os olhos de Ofélia encontram Neria no meio da batalha.</String>
+  <String Key="StoryModeDialogue_2010700_2_11_System">Sem nem olhar pela segurança dos companheiros, ela havia avançado sozinha para o fundo do campo de batalha.</String>
+  <String Key="StoryModeDialogue_2010700_2_12_System">Com uma risada selvagem e dançando enquanto massacrava Vampiros, ela não parecia tão diferente de Vlad Moren, que desejava sangue.</String>
+  <String Key="StoryModeDialogue_2010700_2_13_Solar">...Lady Ofélia. Hehe, eu.... não morri.</String>
+  <String Key="StoryModeDialogue_2010700_2_14_Ophelia">Ah, Sola, ainda bem. Ainda bem mesmo.</String>
+  <String Key="StoryModeDialogue_2010700_2_14b_Ophelia">Não se mexa de jeito nenhum. Você não precisa mais falar.</String>
+  <String Key="StoryModeDialogue_2010700_2_15_System">Sola é entregue aos médicos. Ofélia solta a mão de Sola e se levanta.</String>
+  <String Key="StoryModeDialogue_2010700_2_16_Ophelia">(Para manter as perdas no mínimo, vou acabar com esta batalha de forma rápida e eficiente.)</String>
+  <String Key="StoryModeDialogue_2010700_2_17_Ophelia">Todas as tropas, avancem.</String>
+  <String Key="StoryModeDialogue_2010700_3_0_System">Enquanto isso, Neria corre sozinha pelo campo de batalha e começa uma batalha, não, um Massacre.</String>
+  <String Key="StoryModeDialogue_2010700_3_1_System">Um sorriso se espalha aos poucos pelo rosto de Neria.</String>
+  <String Key="StoryModeDialogue_2010700_3_2_Neria">Ah... Nada soa melhor que os gritos dos Vampiros.</String>
+  <String Key="StoryModeDialogue_2010700_3_3_Neria">Esse é o valor da existência de vocês. Ahahahahaha!</String>
+  <String Key="StoryModeDialogue_2010700_3_4_RedMoon1">Lady Neria! Lady Sola foi gravemente ferida e recuou!</String>
+  <String Key="StoryModeDialogue_2010700_3_5_Neria">Entendo.</String>
+  <String Key="StoryModeDialogue_2010700_3_6_System">Neria, que continuava a batalha, encontra Cathy, que avançava atordoando as tropas de Frostwald.</String>
+  <String Key="StoryModeDialogue_2010700_3_7a_Cathy">Neria! Como pretende resolver esta situação?!</String>
+  <String Key="StoryModeDialogue_2010700_3_7b_Cathy">Agora isto é guerra! Nem eu posso impedi-la!</String>
+  <String Key="StoryModeDialogue_2010700_3_8_Ophelia">Aquela pessoa é Alessia Nosferatu, Neria?</String>
+  <String Key="StoryModeDialogue_2010700_3_9a_Neria">Resolver? Isso já não importa.</String>
+  <String Key="StoryModeDialogue_2010700_3_9b_Neria">Em você também corre metade do sangue de um vampiro impuro. Eu vou matar essa metade.</String>
+  <String Key="StoryModeDialogue_2010700_3_10_Ophelia">Importa, sim! Meu único alvo é Vlad Moren. Não quero causar mais danos.</String>
+  <String Key="StoryModeDialogue_2010700_3_11_Neria">Ofélia. Aquela ali é a superior de Vlad Moren. Ela é nossa inimiga.</String>
+  <String Key="StoryModeDialogue_2010700_3_12_Cathy">Ei, você! Você é a Lady Ofélia, não é? Vamos conversar um pouco.</String>
+  <String Key="StoryModeDialogue_2010700_3_13_Neria">Não precisa ouvir o que essa mulher diz.</String>
+  <String Key="StoryModeDialogue_2010700_3_14_Ophelia">Eu vou ouvir e decidir por mim mesma!</String>
+  <String Key="StoryModeDialogue_2010700_3_15_Cathy">Isso! Primeiro, temos que parar a guerra.</String>
+  <String Key="StoryModeDialogue_2010700_3_16_System">Mas, apesar dos esforços de Cathy, Vlad aparece bem diante de Ofélia.</String>
+  <String Key="StoryModeDialogue_2010700_3_17_System">A aura negra que envolvia Vlad jorra, ainda mais escura e turva.</String>
+  <String Key="StoryModeDialogue_2010800_0_0_Vlad">Por querer fazer as pazes com os humanos, contive-me por anos.</String>
+  <String Key="StoryModeDialogue_2010800_0_1_Vlad">Disseram que eu tinha causado um grande desastre, então passei meses sem fazer nada e também contive minha família.</String>
+  <String Key="StoryModeDialogue_2010800_0_2_Vlad">E, no entanto! Tudo está desmoronando, e eu ouço os gritos da minha família.</String>
+  <String Key="StoryModeDialogue_2010800_0_3_Vlad">Não vou suportar mais. Nada pode me deter agora!</String>
+  <String Key="StoryModeDialogue_2010800_0_4_Ophelia">Aquilo... é mesmo Vlad Moren?</String>
+  <String Key="StoryModeDialogue_2010800_0_5_Neria">Aquela é a verdadeira forma de um vampiro. Um monstro devorado pelo sangue, que destrói e mata tudo!</String>
+  <String Key="StoryModeDialogue_2010800_0_6_Cathy">......Vlad. O que aconteceu com você?</String>
+  <String Key="StoryModeDialogue_2010800_0_7_Vlad">Que mundo horrível. Vou destruir tudo!</String>
+  <String Key="StoryModeDialogue_2010800_0_8_System">Vlad cai de joelhos. A aura negra se dissipa aos poucos, e seu antigo olhar retorna.</String>
+  <String Key="StoryModeDialogue_2010800_0_9_Vlad">Cathy... minha senhora...</String>
+  <String Key="StoryModeDialogue_2010800_0_10_Cathy">Vlad.</String>
+  <String Key="StoryModeDialogue_2010800_0_11_Cathy">…Desculpe.</String>
+  <String Key="StoryModeDialogue_2010800_0_12_System">Cathy grita tão alto que todo o campo de batalha pode ouvir.</String>
+  <String Key="StoryModeDialogue_2010800_0_13_Cathy">Eu sou Alessia Nosferatu!</String>
+  <String Key="StoryModeDialogue_2010800_0_13b_Cathy">Como membro da Casa Nosferatu, eu mesma derrotei o descontrolado Vlad Moren.</String>
+  <String Key="StoryModeDialogue_2010800_0_14_Cathy">A causa de tudo isso foi apenas o descontrole pessoal de Vlad Moren, e, agora que Vlad Moren está morto, não há necessidade de mais batalhas nem sacrifícios!</String>
+  <String Key="StoryModeDialogue_2010800_0_15_Cathy">Vampiros sob o comando de Vlad Moren, eu ordeno em nome de Nosferatu!</String>
+  <String Key="StoryModeDialogue_2010800_0_15b_Cathy">Encerrem a batalha e recuem!</String>
+  <String Key="StoryModeDialogue_2010800_0_16_Cathy">Ofélia, por favor, apresse-se também e impeça mais sacrifícios sem sentido.</String>
+  <String Key="StoryModeDialogue_2010800_0_17_Ophelia">Todas as forças de Frostwald! Parem a batalha e recuem! Levem os feridos e os mortos!</String>
+  <String Key="StoryModeDialogue_2010800_0_18_Neria">Não pode acabar assim. Lua Vermelha...</String>
+  <String Key="StoryModeDialogue_2010800_0_19_Ophelia">Neria. É mesmo pelos habitantes do Território que você faz isso?</String>
+  <String Key="StoryModeDialogue_2010800_0_19b_Ophelia">Olhando para o seu rosto, parece que você só está gostando do derramamento de sangue.</String>
+  <String Key="StoryModeDialogue_2010800_0_20_Neria">Eu? Desde quando punir vampiros é derramamento de sangue? Não é diferente de matar insetos...</String>
+  <String Key="StoryModeDialogue_2010800_0_21_Cathy">Isso é muito desagradável para um vampiro ouvir. Neria, vá embora agora. Antes que eu perca a calma de verdade.</String>
+  <String Key="StoryModeDialogue_2010800_0_22_Neria">... Lua Vermelha. Recuem!</String>
+  <String Key="StoryModeDialogue_2010800_1_0_Cathy">Ofélia, meu nome é Alessia Nosferatu.</String>
+  <String Key="StoryModeDialogue_2010800_1_1a_Cathy">Sobre a morte de Roderick Frostwald... não tenho palavras.</String>
+  <String Key="StoryModeDialogue_2010800_1_1b_Cathy">Sinto muito. Grande parte da culpa é minha.</String>
+  <String Key="StoryModeDialogue_2010800_1_2_Cathy">Mas, para ser sincera, quero parar a guerra entre vampiros e humanos e, a partir de agora, impedir mais sacrifícios dos dois lados.</String>
+  <String Key="StoryModeDialogue_2010800_1_3_Ophelia">Alessia Nosferatu, li todas as cartas que enviou.</String>
+  <String Key="StoryModeDialogue_2010800_1_4_Ophelia">Só que a situação não me permitia lhe dar uma resposta favorável.</String>
+  <String Key="StoryModeDialogue_2010800_1_5_Ophelia">Eu também quero impedir mais sacrifícios.</String>
+  <String Key="StoryModeDialogue_2010800_1_5b_Ophelia">Mais tarde, enviarei uma carta oficial.</String>
+  <String Key="StoryModeDialogue_2010800_1_6_Cathy">Então, eu vou primeiro.</String>
+  <String Key="StoryModeDialogue_2010800_1_7_System">Cathy vai embora, lançando a Neria um breve olhar duro.</String>
+  <String Key="StoryModeDialogue_2010800_1_8_System">Depois que todos vão embora, só resta um grande vazio para Ofélia.</String>
+  <String Key="StoryModeDialogue_2010800_2_0_Ophelia">Roderick. Meu coração está vazio.</String>
+  <String Key="StoryModeDialogue_2010800_2_1_Ophelia">Quando eu estava no Continente Central, pensava que meu papel era apenas cumprir bem o papel de uma bela dama nobre, e nunca questionei isso.</String>
+  <String Key="StoryModeDialogue_2010800_2_2_Ophelia">Mesmo quando vim para o Norte por um casamento político, fazia frio e não havia banquetes, mas eu apenas aceitei.</String>
+  <String Key="StoryModeDialogue_2010800_2_3_Ophelia">Até quando fui sequestrada, fiquei completamente encantada por um vampiro.</String>
+  <String Key="StoryModeDialogue_2010800_2_4_Ophelia">Desta vez, pela primeira vez, insisti na minha vontade e vinguei Roderick.</String>
+  <String Key="StoryModeDialogue_2010800_2_4b_Ophelia">O que acha? Eu fui bem?</String>
+  <String Key="StoryModeDialogue_2010800_2_5_Ophelia">…</String>
+  <String Key="StoryModeDialogue_2010800_2_6_Ophelia">Pode soar estranho, mas, quando vi Vlad cair, meu coração doeu.</String>
+  <String Key="StoryModeDialogue_2010800_2_7_Ophelia">Foi ele quem matou Roderick. Foi ele quem tentou me fazer sua presa.</String>
+  <String Key="StoryModeDialogue_2010800_2_8_Ophelia">Mas o jeito que ele era no banquete... aquilo era real. Nem tudo era mentira.</String>
+  <String Key="StoryModeDialogue_2010800_2_9_Ophelia">Ele era uma pessoa ruim, sim, mas talvez só estivesse doente de obsessão e impulso, e isso estreitou sua visão... como Neria.</String>
+  <String Key="StoryModeDialogue_2010800_2_11_Ophelia">…Obrigada, Roderick. Decidi seguir seus passos.</String>
+  <String Key="StoryModeDialogue_2010800_2_12_Ophelia">De agora em diante, quero ser uma governante que proteja os habitantes do Território por escolha própria, sem ser levada pelos outros.</String>
+  <String Key="StoryModeDialogue_2010800_2_13_Ophelia">Vou me esforçar ao máximo. Por favor, continue ao meu lado, olhando por mim e me ajudando.</String>
+  <String Key="StoryModeDialogue_2010800_3_0_System">Ofélia se aproxima do corpo de Vlad para lamentar sua morte. No lugar onde Vlad caiu, encontra-se um Diamante vermelho-escuro.</String>
+  <String Key="StoryModeDialogue_2010800_3_1_Ophelia">O que é isto...?</String>
+  <String Key="StoryModeDialogue_2010800_3_2_Ophelia">(Estou me sentindo mal.)</String>
+  <String Key="StoryModeDialogue_2010800_3_3_Ophelia">Roderick. Então isto realmente é... aquilo, não é?</String>
+  <String Key="StoryModeDialogue_2010800_3_4_System">Vlad Moren, que por muito tempo dominou a fronteira de Nosferatu, morreu.</String>
+  <String Key="StoryModeDialogue_2010800_3_5_System">Ao informar ao quartel-general de Nosferatu que Vlad Moren havia perdido o controle sozinho e que ela mesma o havia derrotado, Cathy impede uma Batalha Total.</String>
+  <String Key="StoryModeDialogue_2010800_3_6_System">A falta de capacidade de Alessia Nosferatu como administradora veio à tona, e sua posição política ficou ainda mais fraca.</String>
+  <String Key="StoryModeDialogue_2010800_3_7_System">Enquanto humanos e vampiros viverem juntos, o conflito não terá fim neste lugar.</String>
+  <String Key="StoryModeDialogue_2010900_0_0_System">Alguns dias depois, na sala de recepção de Ofélia.</String>
+  <String Key="StoryModeDialogue_2010900_0_1_System">Há um Diamante vermelho-escuro sobre a mesa.</String>
+  <String Key="StoryModeDialogue_2010900_0_2_Ophelia">Sabe alguma coisa sobre este Diamante?</String>
+  <String Key="StoryModeDialogue_2010900_0_3_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_4_Ophelia">Como você bem sabe, este Diamante é chamado de 'Estrela do Crepúsculo'.</String>
+  <String Key="StoryModeDialogue_2010900_0_5_Ophelia">Ele vem do Sul, e corre o rumor de que piora o caráter de quem o carrega.</String>
+  <String Key="StoryModeDialogue_2010900_0_6_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_7_Ophelia">Daqui em diante, é só uma suposição minha.</String>
+  <String Key="StoryModeDialogue_2010900_0_8_Ophelia">É bem conhecido que Vlad Moren gostava de coisas belas e, em especial, colecionava Diamantes caros.</String>
+  <String Key="StoryModeDialogue_2010900_0_9_Ophelia">Alguém o trouxe do Sul, esperando que a Estrela do Crepúsculo fosse parar nas mãos dele.</String>
+  <String Key="StoryModeDialogue_2010900_0_10_Ophelia">E, como essa pessoa estava em contato secreto com Alessia Nosferatu, a superior de Vlad Moren,</String>
+  <String Key="StoryModeDialogue_2010900_0_10b_Ophelia">podia descobrir com facilidade qual mercado negro Vlad Moren mais usava.</String>
+  <String Key="StoryModeDialogue_2010900_0_11_Ophelia">Vlad Moren carregava a Estrela do Crepúsculo o tempo todo,</String>
+  <String Key="StoryModeDialogue_2010900_0_11b_Ophelia">mas seu efeito devia ir muito além de apenas piorar o caráter,</String>
+  <String Key="StoryModeDialogue_2010900_0_11c_Ophelia">e podia até fazer a verdadeira natureza de um vampiro perder o controle.</String>
+  <String Key="StoryModeDialogue_2010900_0_12_Ophelia">Por que Vlad Moren precisava perder o controle?</String>
+  <String Key="StoryModeDialogue_2010900_0_13_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_14_Ophelia">Você disse a Roderick que Alessia estava envolvida no sequestro dos habitantes do Território.</String>
+  <String Key="StoryModeDialogue_2010900_0_15_Ophelia">E afirmou que os corpos dos habitantes do Território encontrados ao sul do Território eram obra de vampiros.</String>
+  <String Key="StoryModeDialogue_2010900_0_16_Ophelia">Por causa disso, a convivência com os vampiros não pôde avançar.</String>
+  <String Key="StoryModeDialogue_2010900_0_17_Neria">Eu apenas disse a verdade.</String>
+  <String Key="StoryModeDialogue_2010900_0_18_Ophelia">Mesmo quando fui sequestrada, você envolveu Roderick e o levou a lançar um ataque militar. E, quando Roderick morreu, também me empurrou para a vingança.</String>
+  <String Key="StoryModeDialogue_2010900_0_19_Ophelia">Parece que você quer a própria guerra.</String>
+  <String Key="StoryModeDialogue_2010900_0_20_Neria">......O que eu fiz foi justiça. Vampiros não devem existir.</String>
+  <String Key="StoryModeDialogue_2010900_0_21_Neria">Só você e Alessia se agarram à ilusão da convivência.</String>
+  <String Key="StoryModeDialogue_2010900_0_21b_Neria">No fim, Roderick também morreu por causa dessa ilusão.</String>
+  <String Key="StoryModeDialogue_2010900_0_22_Neria">Quer eu tenha causado discórdia ou não, Vlad sequestrou o povo deste Território e tentou devorá-la, Ofélia.</String>
+  <String Key="StoryModeDialogue_2010900_0_23_Neria">Essa é a natureza de um vampiro.</String>
+  <String Key="StoryModeDialogue_2010900_0_24_Ophelia">Sola... A Lua Vermelha é sua família? Ou só um meio?</String>
+  <String Key="StoryModeDialogue_2010900_0_25_Neria">Somos companheiras de armas.</String>
+  <String Key="StoryModeDialogue_2010900_0_26_Ophelia">…Alessia e eu decidimos manter o equilíbrio deste lugar.</String>
+  <String Key="StoryModeDialogue_2010900_0_27_Neria">Você confia naquele vampiro?</String>
+  <String Key="StoryModeDialogue_2010900_0_28_Ophelia">Mais do que em você.</String>
+  <String Key="StoryModeDialogue_2010900_0_29_Neria">Sozinha, você não pode fazer nada.</String>
+  <String Key="StoryModeDialogue_2010900_0_30_Neria">Vlad está morto, mas Nosferatu continua firme.</String>
+  <String Key="StoryModeDialogue_2010900_0_31_Neria">O que vai fazer se eles atacarem?</String>
+  <String Key="StoryModeDialogue_2010900_0_32_Ophelia">Isso não é algo com que você precise se preocupar.</String>
+  <String Key="StoryModeDialogue_2010900_0_33_Neria">Você vai se arrepender.</String>
+  <String Key="StoryModeDialogue_2010900_0_34_System">Neria lança um último olhar e deixa a sala de recepção. Ofélia a observa partir.</String>
+  <String Key="StoryModeDialogue_2010900_1_0_System">Sola, coberta de bandagens, fica na sala de recepção. Ofélia se senta à sua frente.</String>
+  <String Key="StoryModeDialogue_2010900_1_1_Ophelia">Sola. Você vai ficar bem? Mesmo sem vir conosco?</String>
+  <String Key="StoryModeDialogue_2010900_1_2_Solar">O antigo chefe vai ficar bem sem mim. E agora há uma nova chefe, então está tudo bem!</String>
+  <String Key="StoryModeDialogue_2010900_2_0_System">Alguns dias depois, como sempre, Ofélia está sentada na cadeira de Roderick no escritório.</String>
+  <String Key="StoryModeDialogue_2010900_2_1_Ophelia">Comecei as conversas com Alessia.</String>
+  <String Key="StoryModeDialogue_2010900_2_2_Ophelia">O que Roderick queria fazer, eu vou continuar.</String>
+  <String Key="StoryModeDialogue_2010900_2_3_Ophelia">E mandei Neria embora.</String>
+  <String Key="StoryModeDialogue_2010900_2_4_Ophelia">Também estou fortalecendo o exército do Território e ampliando nossas alianças.</String>
+  <String Key="StoryModeDialogue_2010900_2_6_Ophelia">... Assim ficou bom?</String>
+  <String Key="StoryModeDialogue_2010900_2_7_System">Depois disso, o nome de Ofélia se espalhou. A mulher que expandia seu Território, fortalecia seu exército e nunca parava. As pessoas a chamavam de 'A Dama de Ferro'.</String>
+  <String Key="StoryModeDialogue_2010900_2_8_System">Às vezes, seus vassalos veem Ofélia falar com gentileza para o vazio no escritório deserto.</String>
+  <String Key="StoryModeDialogue_2010900_2_9_System">A Dama de Ferro vai ficar por muito tempo quebrada e congelada, e assim vai endurecer.</String>
+  <String Key="StoryModeDialogue_2010700_2_2b_Ophelia">...!!!</String>
+  <String Key="WorldTriggerDesc_11100">Dano Especial +{0}% por cada Herói alvo (máx. 3 acúmulos)</String>
+  <String Key="StoryFieldName_2010700">Fronteira de Nosferatu</String>
+  <String Key="StoryFieldName_2010800">Fronteira de Nosferatu</String>
+  <String Key="UnitName_20020750">Vlad Nosferatu</String>
+  <String Key="UnitName_20020600">Soldado de Frostwald</String>
+  <String Key="StoryHint_420107000">Use a Habilidade de Início de Batalha de Ofélia para se defender do ataque da Gárgula.</String>
+  <String Key="StoryHint_420108000">Os ataques de Vlad atordoam os aliados sem parar. Use uma Habilidade de Início de Batalha que possa combater o Atordoamento.</String>
+  <String Key="TreasureName_30043">Vitacorde</String>
+  <String Key="TreasureSubName_30043">Livro da Santidade</String>
+  <String Key="TreasureDesc_30043">Encare a verdade no fundo do seu coração.
+Então, a santidade vai ajudar você.</String>
+  <String Key="TreasureSkillName_30043">Poder da Vida</String>
+  <String Key="BuffDataName_3300431">Poder Divino I</String>
+  <String Key="BuffDataName_3300432">Ciclo Vital I</String>
+  <String Key="BuffDataName_3300433">Proteção Sagrada</String>
+  <String Key="BuffDataName_3300434">Ciclo Vital II</String>
+  <String Key="BuffDataName_3300435">Poder Divino II</String>
+  <String Key="SpecialShop_TreasurePickUp30043">Loja Especial Pickup de Vitacorde</String>
+  <String Key="SpecialPackage_1683">Pacote de Vitacorde 1</String>
+  <String Key="SpecialPackage_1684">Pacote de Vitacorde 2</String>
+  <String Key="SpecialPackage_1685">Pacote de Vitacorde 3</String>
+  <String Key="BuffDataDesc_3300431">A cada {0} de Proteção, coeficiente de Poder de habilidade do efeito de aumento de Dano base +{1}%</String>
+  <String Key="BuffDataDesc_3300432">Recarga {0}s</String>
+  <String Key="BuffDataDesc_3300433">Concede Graça a todos os aliados na área, exceto a si mesmo</String>
+  <String Key="BuffDataDesc_3300434">Recarga {0}s</String>
+  <String Key="BuffDataDesc_3300435">A cada {0} de Proteção, coeficiente de Poder de habilidade do efeito de aumento de Dano base +{1}%</String>
+  <String Key="TreasureSkillDesc_3300430">No início da Batalha, só é aplicado o efeito do Herói com maior ★ equipado com Vitacorde
+Fixa o Poder de habilidade do portador no valor do início da Batalha
+Ao curar um aliado, cria por {0}s uma área que aumenta o Dano base dos aliados dentro da Área {1} ao redor do portador em {2}% do Poder de habilidade do portador (Recarga: {3}s)</String>
+  <String Key="TreasureSkillDesc_3300431">No início da Batalha, só é aplicado o efeito do Herói com maior ★ equipado com Vitacorde
+Fixa o Poder de habilidade do portador no valor do início da Batalha
+Ao curar um aliado, cria por {0}s uma área que aumenta o Dano base dos aliados dentro da Área {1} ao redor do portador em {2}% do Poder de habilidade do portador (Recarga: {3}s)
+A cada {4} de Proteção, coeficiente de Poder de habilidade do efeito de aumento de Dano base +{5}%</String>
+  <String Key="TreasureSkillDesc_3300433">No início da Batalha, só é aplicado o efeito do Herói com maior ★ equipado com Vitacorde
+Fixa o Poder de habilidade do portador no valor do início da Batalha
+Ao curar um aliado, cria por {0}s uma área que aumenta o Dano base dos aliados dentro da Área {1} ao redor do portador em {2}% do Poder de habilidade do portador (Recarga: {3}s)
+A cada {4} de Proteção, coeficiente de Poder de habilidade do efeito de aumento de Dano base +{5}%
+Concede Graça aos aliados na área, exceto ao portador</String>
+  <String Key="SeasonalEventName_Season72">Festival de Voo dos Dragões</String>
+  <String Key="SeasonalEventMode_Season72">Festival de Voo dos Dragões</String>
+  <String Key="TreasureName_50002">Cor Orbis</String>
+  <String Key="TreasureSubName_50002">Subtítulo Temporário</String>
+  <String Key="TreasureDesc_50002">Descrição temporária - adicionar mais quando o conceito do Tesouro estiver definido - conceito pensado: algum tipo de pedra? Um artefato? que pega Mana emprestada de plantas e animais próximos, armazena e depois libera</String>
+  <String Key="TreasureSkillName_50002">Combinação de Mana</String>
+  <String Key="BuffDataName_3500021">Assimilação I</String>
+  <String Key="BuffDataName_3500022">Barreira de Mana I</String>
+  <String Key="BuffDataName_3500023">Ressonância de Mana</String>
+  <String Key="BuffDataName_3500024">Barreira de Mana II</String>
+  <String Key="BuffDataName_3500025">Assimilação II</String>
+  <String Key="SpecialShop_TreasurePickUp50002">Loja Especial Pickup de Cor Orbis</String>
+  <String Key="SpecialPackage_1690">Pacote de Cor Orbis 1</String>
+  <String Key="SpecialPackage_1691">Pacote de Cor Orbis 2</String>
+  <String Key="SpecialPackage_1692">Pacote de Cor Orbis 3</String>
+  <String Key="BuffDataDesc_3500021">Para cada {1}% de Dano Crítico de Feitiço acima de {0}%, bônus de Dano Final da habilidade melhorada x{2}</String>
+  <String Key="BuffDataDesc_3500022">Dano Recebido {0}% até o 3º uso de habilidade</String>
+  <String Key="BuffDataDesc_3500023">Ao usar uma habilidade melhorada, usa a mesma habilidade mais {1} vez(es) em um alvo aleatório com {0}% de Dano</String>
+  <String Key="BuffDataDesc_3500024">Dano Recebido {0}% até o 3º uso de habilidade</String>
+  <String Key="BuffDataDesc_3500025">Para cada {1}% de Dano Crítico de Feitiço acima de {0}%, bônus de Dano Final da habilidade melhorada x{2}</String>
+  <String Key="TreasureSkillDesc_3500020">Após o início da Batalha, apenas o Herói com maior ★ equipado com Cor Orbis recebe +{0}% de Mana Máx. e -{1}% de Dano Final Causado até o 3º uso de habilidade
+A última habilidade é melhorada e seu Dano Final aumenta em +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">Após o início da Batalha, apenas o Herói com maior ★ equipado com Cor Orbis recebe +{0}% de Mana Máx. e -{1}% de Dano Final Causado até o 3º uso de habilidade
+A última habilidade é melhorada e seu Dano Final aumenta em +{2}%
+Para cada {4}% de Dano Crítico de Feitiço acima de {3}%, bônus de Dano Final da habilidade melhorada x{5}</String>
+  <String Key="TreasureSkillDesc_3500022">Após o início da Batalha, apenas o Herói com maior ★ equipado com Cor Orbis recebe +{0}% de Mana Máx. e -{1}% de Dano Final Causado até o 3º uso de habilidade
+A última habilidade é melhorada e seu Dano Final aumenta em +{2}%
+Para cada {4}% de Dano Crítico de Feitiço acima de {3}%, bônus de Dano Final da habilidade melhorada x{5}
+Dano Recebido {6}% até o 3º uso de habilidade</String>
+  <String Key="TreasureSkillDesc_3500023">Após o início da Batalha, apenas o Herói com maior ★ equipado com Cor Orbis recebe +{0}% de Mana Máx. e -{1}% de Dano Final Causado até o 3º uso de habilidade
+A última habilidade é melhorada e seu Dano Final aumenta em +{2}%
+Para cada {4}% de Dano Crítico de Feitiço acima de {3}%, bônus de Dano Final da habilidade melhorada x{5}
+Dano Recebido {6}% até o 3º uso de habilidade
+Ao usar uma habilidade melhorada, usa a mesma habilidade mais {8} vez(es) em um alvo aleatório com {7}% de Dano</String>
 </Strings>

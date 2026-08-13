@@ -151,6 +151,7 @@
 		<MAtkPer Target="Damage">50</MAtkPer>
 		<DamageDelay>0.001</DamageDelay>
 		<!-- 기타 옵션 -->
+        <ForceDamageType>SkillMagic</ForceDamageType>
 		<ForceUseDefaultTarget>true</ForceUseDefaultTarget>
 		<CanUseSkillDuringMoving>true</CanUseSkillDuringMoving>
 		<Movable>true</Movable>
@@ -2971,7 +2972,7 @@
 		<AtkType>Melee</AtkType>
 		<RangeType>Infinity</RangeType>
 
-		<SplashRangeFrom>Target</SplashRangeFrom>
+		<SplashRangeFrom>Self</SplashRangeFrom>
 		<SplashRangeType>Rect</SplashRangeType>
 		<SplashRangeX>1</SplashRangeX>
 		<SplashRangeY>1</SplashRangeY>
@@ -2993,7 +2994,7 @@
 			<CenterAlign>true</CenterAlign>
 		</Effect>
 
-		<MoveTo>FrontestTeamUp</MoveTo>
+		<MoveTo>AICustom</MoveTo>
 		<MoveType>HideAppear</MoveType>
 		<SkillTriggerAfterMove>true</SkillTriggerAfterMove>
 		<MoveDelay>0.15</MoveDelay>
@@ -3040,52 +3041,9 @@
 	</Skill>
 
 	<!-- 1각 -->
-	<Skill ID="10195" Inherit="10190">
-		<DescComment>적을 도발합니다.</DescComment>
-		<Tier>1</Tier>
-		<BuffAtSkillEnd>10199</BuffAtSkillEnd>
-	</Skill>
-
-	<Skill ID="10196" Inherit="10190">
-		<Tier>2</Tier>
-		<Desc>SkillDesc_10191</Desc>
-		<LongDesc>SkillDesc_10191_Long</LongDesc>
-		<ShortDesc>SkillDesc_10191_Short</ShortDesc>
-
-		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>2</SplashRangeSum>
-		<Damage>50</Damage>
-		<MAtkPer Target="Damage">100</MAtkPer>
-		<BuffAtSkillEnd>10199</BuffAtSkillEnd>
-	</Skill>
-
-	<Skill ID="10197" Inherit="10190">
-		<Tier>3</Tier>
-		<SplashRangeType>Rect</SplashRangeType>
-		<SplashRangeX>2</SplashRangeX>
-		<SplashRangeY>2</SplashRangeY>
-		<Damage>60</Damage>
-		<MAtkPer Target="Damage">100</MAtkPer>
-		<BuffAtSkillEnd>10199</BuffAtSkillEnd>
-	</Skill>
-
-	<Skill ID="10198" Inherit="10190">
-		<Tier>4</Tier>
-		<Desc>SkillDesc_10191</Desc>
-		<LongDesc>SkillDesc_10191_Long</LongDesc>
-		<ShortDesc>SkillDesc_10191_Short</ShortDesc>
-
-		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>4</SplashRangeSum>
-		<Damage>70</Damage>
-		<MAtkPer Target="Damage">100</MAtkPer>
-		<BuffAtSkillEnd>10199</BuffAtSkillEnd>
-	</Skill>
-	
-	<Skill ID="10199">
+	<Skill ID="10195">
 		<Desc>12레벨 1 특성, 방어력 증가</Desc>
 		<AtkType>Melee</AtkType>
-		<BuffToSkillTarget>10199</BuffToSkillTarget>
 		<RangeType>Self</RangeType>
 		<Time>4</Time>
 
@@ -3094,40 +3052,72 @@
 		<BaseDef>350</BaseDef>
 		<BaseMDef>350</BaseMDef>
 	</Skill>
+
+    <Skill ID="101900">
+        <Desc>스킬 대상에게 부여되는 은신</Desc>
+        <Cloaking>true</Cloaking>
+        <Time>0.3</Time>
+    </Skill>
 	
 	<!-- 2각 -->
 	<Skill ID="1019000" Inherit="10190">
-		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>2</SplashRangeSum>
-		<Knockback>2</Knockback>
-		<CannotKnockbackTime>0.5</CannotKnockbackTime>
+        <LongDesc>SkillDesc_1019000_Long</LongDesc>
+        <ShortDesc>SkillDesc_1019000_Short</ShortDesc>
+        <TargetType>Enemy</TargetType>
+        <RangeType>Rect</RangeType>
+        <RangeX>4</RangeX>
+        <RangeY>4</RangeY>
+        <RangeStrategy>Near</RangeStrategy>
+        <MoveTo>Target</MoveTo>
 	</Skill>
 
 	<Skill ID="1019001" Inherit="10190">
+        <LongDesc>SkillDesc_1019001_Long</LongDesc>
+        <ShortDesc>SkillDesc_1019001_Short</ShortDesc>
 		<SplashRangeType>Sum</SplashRangeType>
 		<SplashRangeSum>2</SplashRangeSum>
 		<Damage>50</Damage>
 		<MAtkPer Target="Damage">100</MAtkPer>
-		<Knockback>3</Knockback>
-		<CannotKnockbackTime>0.5</CannotKnockbackTime>
+
+        <TargetType>Enemy</TargetType>
+        <RangeType>Rect</RangeType>
+        <RangeX>4</RangeX>
+        <RangeY>4</RangeY>
+        <RangeStrategy>Near</RangeStrategy>
+        <MoveTo>Target</MoveTo>
 	</Skill>
 
 	<Skill ID="1019002" Inherit="10190">
-		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>2</SplashRangeSum>
+        <LongDesc>SkillDesc_1019000_Long</LongDesc>
+        <ShortDesc>SkillDesc_1019000_Short</ShortDesc>
+        <SplashRangeType>Rect</SplashRangeType>
+        <SplashRangeX>2</SplashRangeX>
+        <SplashRangeY>2</SplashRangeY>
 		<Damage>60</Damage>
         <MAtkPer Target="Damage">100</MAtkPer>
-		<Knockback>4</Knockback>
-		<CannotKnockbackTime>0.5</CannotKnockbackTime>
+
+        <TargetType>Enemy</TargetType>
+        <RangeType>Rect</RangeType>
+        <RangeX>4</RangeX>
+        <RangeY>4</RangeY>
+        <RangeStrategy>Near</RangeStrategy>
+        <MoveTo>Target</MoveTo>
 	</Skill>
 
 	<Skill ID="1019003" Inherit="10190">
+        <LongDesc>SkillDesc_1019001_Long</LongDesc>
+        <ShortDesc>SkillDesc_1019001_Short</ShortDesc>
 		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>2</SplashRangeSum>
+        <SplashRangeSum>4</SplashRangeSum>
 		<Damage>70</Damage>
 		<MAtkPer Target="Damage">100</MAtkPer>
-		<Knockback>5</Knockback>
-		<CannotKnockbackTime>0.5</CannotKnockbackTime>
+
+        <TargetType>Enemy</TargetType>
+        <RangeType>Rect</RangeType>
+        <RangeX>4</RangeX>
+        <RangeY>4</RangeY>
+        <RangeStrategy>Near</RangeStrategy>
+        <MoveTo>Target</MoveTo>
 	</Skill>
 
 	<!-- 연 -->
@@ -10926,7 +10916,7 @@
 		<ParentSkill>105720</ParentSkill>
         <RemoveShieldPer>100</RemoveShieldPer>
         <ExtraRangeEffectScale>150</ExtraRangeEffectScale>
-        <ExtraSplashRangeType>Rect</ExtraSplashRangeType>
+        <ExtraSplashRangeType>DiagonalRect</ExtraSplashRangeType>
         <ExtraSplashRangeX>20</ExtraSplashRangeX>
         <ExtraSplashRangeY>0</ExtraSplashRangeY>
     </Skill>
@@ -10938,7 +10928,7 @@
 		<ParentSkill>105720</ParentSkill>
         <RemoveShieldPer>100</RemoveShieldPer>
         <ExtraRangeEffectScale>150</ExtraRangeEffectScale>
-        <ExtraSplashRangeType>Rect</ExtraSplashRangeType>
+        <ExtraSplashRangeType>DiagonalRect</ExtraSplashRangeType>
         <ExtraSplashRangeX>0</ExtraSplashRangeX>
         <ExtraSplashRangeY>20</ExtraSplashRangeY>
     </Skill>
@@ -14219,25 +14209,6 @@
         <UseSkillSound>se_unit_10760_skill</UseSkillSound>
         <HitSound/>
         
-        <Effect Type='BuffStart'>
-            <Prefab>Fx_10760c</Prefab>
-            <ZLevel>UnitOver</ZLevel>
-            <CenterAlign>true</CenterAlign>
-        </Effect>
-
-		<Effect Type='BuffStart'>
-			<Prefab>Fx_10760d</Prefab>
-			<ZLevel>UnitOver</ZLevel>
-            <Delay>0.3</Delay>
-		</Effect>
-
-        <Effect Type='BuffStart'>
-            <Prefab>Fx_10760f</Prefab>
-            <ZLevel>UnitOver</ZLevel>
-            <Loop>true</Loop>
-            <Delay>0.5</Delay>
-        </Effect>
-        
         <Effect Type='WaitingSelf'>
             <Prefab>Fx_10760h</Prefab>
             <OffsetY>0</OffsetY>
@@ -14273,6 +14244,29 @@
             <OffsetY>0</OffsetY>
             <ZLevel>Ground</ZLevel>
             <Loop>true</Loop>
+        </Effect>
+    </Skill>
+    <!-- 본인 이펙트 출력용 스킬 -->
+    <Skill ID="107600">
+        <Time>6</Time>
+        
+        <Effect Type='BuffStart'>
+            <Prefab>Fx_10760c</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <CenterAlign>true</CenterAlign>
+        </Effect>
+
+        <Effect Type='BuffStart'>
+            <Prefab>Fx_10760d</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <Delay>0.3</Delay>
+        </Effect>
+
+        <Effect Type='BuffStart'>
+            <Prefab>Fx_10760f</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <Loop>true</Loop>
+            <Delay>0.5</Delay>
         </Effect>
     </Skill>
 
@@ -15008,6 +15002,8 @@
         <AttackSplashOnly>true</AttackSplashOnly>
         <ReleaseTargetAfterSkill>true</ReleaseTargetAfterSkill>
         <FixUsingPos>true</FixUsingPos>
+        
+        <Sound>se_unit_10810_transform</Sound>
 
         <Damage>0</Damage>
         <FearTime>2</FearTime>
@@ -44788,7 +44784,7 @@
 	<!-- 스토리 이격 네리아 -->
 	<Skill ID="20010780">
 		<NameComment>스토리 이격 네리아 랩핑 스킬</NameComment>		
-		<Name>SkillName_20010780</Name>
+		<Name>SkillName_10780</Name>
 		<Icon>Skill_10780</Icon>
 		<ShortDesc>SkillDesc_10780_Short</ShortDesc>
 		<LongDesc>SkillDesc_10780_Long</LongDesc>
@@ -44824,6 +44820,7 @@
 	</Skill>
 
 	<Skill ID="200107800">
+		<Name>SkillName_107800</Name>
 		<NameComment>스토리 이격 네리아 스킬</NameComment>
 		<DescComment>무작위 대상을 관통하여 3x3 경로 상의 모든 적에게 공격력의 ({1} + {2})% 의 일반피해를 입힙니다.</DescComment>
 		<AtkType>Melee</AtkType>
@@ -44950,6 +44947,7 @@
 	</Skill>
 
 	<Skill ID="200107820">
+		<Name>SkillName_107820</Name>
 		<NameComment>적 처치 시마다 주는 최종 피해량 증가</NameComment>
 		<AtkType>Melee</AtkType>
 		<TargetType>Self</TargetType>
@@ -44969,6 +44967,581 @@
 		<BuffToSkillTarget>200107840</BuffToSkillTarget>
 		<TotalDamagePer>10</TotalDamagePer>
 	</Skill>
+
+	<!-- ===== 사이드 스토리 1-3 캐시 스킬 (원본 10800 계열 전체 복사) ===== -->
+    <Skill ID="20010800">
+		<Name>SkillName_10800</Name>
+		<NameComment>흡혈귀의 분노</NameComment>
+		<DescComment>스킬 사용 시 자신에게 최대 체력 100% 부활을 1회 부여합니다.(최대 1회) 부활 시 5초동안 폭주하여 뱀파이어 형태로 변신하고 주문흡혈을 100%를 획득합니다. 폭주 상태 돌입 시 5x5 범위 내의 적이 가장 많은 위치로 돌진하고 2초간 공포를 부여합니다.</DescComment>
+		<Icon>Skill_10800</Icon>
+    	<ShortDesc>SkillDesc_10800_Short</ShortDesc>
+    	<LongDesc>SkillDesc_10800_Long</LongDesc>
+
+		<AtkType>Melee</AtkType>
+		<RangeType>Self</RangeType>
+		<TargetType>Self</TargetType>
+        <Unit10800AI_AuraDamagePer>0</Unit10800AI_AuraDamagePer>
+
+		<Unit10800AI_TransformSkill>20010805</Unit10800AI_TransformSkill>
+
+		<Tier>1</Tier>
+	</Skill>
+
+	<Skill ID="20010801" Inherit="20010800">
+		<Unit10800AI_TransformSkill>20010806</Unit10800AI_TransformSkill>
+		<Tier>2</Tier>
+	</Skill>
+
+	<Skill ID="20010802" Inherit="20010800">
+		<Unit10800AI_TransformSkill>20010807</Unit10800AI_TransformSkill>
+		<Tier>3</Tier>
+	</Skill>
+
+	<Skill ID="20010803" Inherit="20010800">
+		<Unit10800AI_TransformSkill>20010808</Unit10800AI_TransformSkill>
+		<Tier>4</Tier>
+	</Skill>
+
+    <Skill ID="20010805">
+        <Name>SkillName_10805</Name>
+        <AtkType>Transform</AtkType>
+        <RangeType>Self</RangeType>
+        <TargetType>Self</TargetType>
+
+        <Transform>20010810</Transform>
+        <TransformTime>7</TransformTime>
+
+        <BuffAtCastSkill>200108000</BuffAtCastSkill>
+    </Skill>
+
+    <Skill ID="20010806" Inherit="20010805">
+        <BuffAtCastSkill>200108001</BuffAtCastSkill>
+    </Skill>
+
+    <Skill ID="20010807" Inherit="20010805">
+        <BuffAtCastSkill>200108002</BuffAtCastSkill>
+    </Skill>
+
+    <Skill ID="20010808" Inherit="20010805">
+        <BuffAtCastSkill>200108003</BuffAtCastSkill>
+    </Skill>
+
+    <Skill ID="200108000">
+        <Name>SkillName_108000</Name>
+        <AtkType>Melee</AtkType>
+        <RangeType>Self</RangeType>
+        <TargetType>Self</TargetType>
+        <BuffToSkillTarget>200108000</BuffToSkillTarget>
+
+        <Time>7</Time>
+        <MaxBuffOverlap>1</MaxBuffOverlap>
+        <BaseDef>200</BaseDef>
+        <BaseMDef>200</BaseMDef>
+        <MagicDrain>100</MagicDrain>
+    </Skill>
+
+    <Skill ID="200108001" Inherit="200108000">
+        <BuffToSkillTarget>200108001</BuffToSkillTarget>
+        <BaseDef>300</BaseDef>
+        <BaseMDef>300</BaseMDef>
+    </Skill>
+
+    <Skill ID="200108002" Inherit="200108000">
+        <BuffToSkillTarget>200108002</BuffToSkillTarget>
+        <BaseDef>400</BaseDef>
+        <BaseMDef>400</BaseMDef>
+    </Skill>
+
+    <Skill ID="200108003" Inherit="200108000">
+        <BuffToSkillTarget>200108003</BuffToSkillTarget>
+        <BaseDef>500</BaseDef>
+        <BaseMDef>500</BaseMDef>
+    </Skill>
+
+	<Skill ID="20010810">
+        <Name>SkillName_10810</Name>
+        <ShortDesc>SkillDesc_10810_Short</ShortDesc>
+        <LongDesc>SkillDesc_10810_Long</LongDesc>
+        <NameComment>폭주 폭발</NameComment>
+        <Icon>Skill_10810</Icon>
+
+        <PreTargetCategory>Fear</PreTargetCategory>
+
+        <AtkType>Melee</AtkType>
+        <TargetType>Enemy</TargetType>
+        <RangeType>Self</RangeType>
+
+        <SplashRangeFrom>Self</SplashRangeFrom>
+        <SplashRangeType>Rect</SplashRangeType>
+        <SplashRangeX>2</SplashRangeX>
+        <SplashRangeY>2</SplashRangeY>
+
+        <FearTime>2</FearTime>
+
+        <Damage>0</Damage>
+        <HpPer Target="Damage">25</HpPer>
+        <ForceDamageType>SkillMagic</ForceDamageType>
+        
+        <DescDamage>0</DescDamage>
+        <MAtkPer Target="DescDamage">100</MAtkPer>
+
+        <Effect Type="Self">
+            <Prefab>Fx_10810d</Prefab>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+            <LevelScale>false</LevelScale>
+            <World>true</World>
+        </Effect>
+        <Effect Type="Target">
+            <Prefab>Fx_10810c</Prefab>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+        </Effect>
+	</Skill>
+
+    <Skill ID="200108100">
+        <Name>SkillName_108100</Name>
+    </Skill>
+
+    <Skill ID="20010815">
+        <Name>SkillName_10815</Name>
+        <NameComment>폭주 돌진</NameComment>
+        <Icon>Skill_10810</Icon>
+
+        <AtkType>Melee</AtkType>
+        <TargetType>Enemy</TargetType>
+        <RangeType>Infinity</RangeType>
+        <AnimTrigger>TRANSFORM</AnimTrigger>
+
+        <SplashRangeFrom>Self</SplashRangeFrom>
+        <SplashRangeType>Rect</SplashRangeType>
+        <SplashRangeX>3</SplashRangeX>
+        <SplashRangeY>3</SplashRangeY>
+        <AttackSplashOnly>true</AttackSplashOnly>
+        <ReleaseTargetAfterSkill>true</ReleaseTargetAfterSkill>
+        <FixUsingPos>true</FixUsingPos>
+        
+        <Sound>se_unit_10810_transform</Sound>
+
+        <Damage>0</Damage>
+        <FearTime>2</FearTime>
+
+        <MoveTo>CanAttackMostTargetsAroundSelf</MoveTo>
+        <MoveType>Rush</MoveType>
+        <RushTime>0.1</RushTime>
+        <CanMoveToSamePosition>false</CanMoveToSamePosition>
+        <SkillTriggerByRushStart>true</SkillTriggerByRushStart>
+        <CanMoveToSamePosition>true</CanMoveToSamePosition>
+        <TriggerAfterMove>false</TriggerAfterMove>
+        <CanUseSkillDuringMoving>true</CanUseSkillDuringMoving>
+        <CustomTriggerSkill>true</CustomTriggerSkill>
+        <ShowTileEffect>false</ShowTileEffect>
+
+        <Effect Type="Move">
+            <Prefab>Fx_10810e</Prefab>
+            <Line>true</Line>
+            <World>true</World>
+            <ZLevel>UnitOver</ZLevel>
+        </Effect>
+
+        <Effect Type="Self">
+            <Delay>0.1</Delay>
+            <ScaleX>1.4</ScaleX>
+            <ScaleY>1.4</ScaleY>
+            <LevelScale>false</LevelScale>
+            <Prefab>Fx_10810d</Prefab>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+        </Effect>
+    </Skill>
+
+	<!-- ===== 사이드 스토리 1-3 보스(폭주 블라드) 스킬 (원본 20750 계열) ===== -->
+	<Skill ID="20020750">
+		<Name>SkillName_20750</Name>
+		<NameComment>보스 평타</NameComment>
+		<DescComment>{Bolt}회 전이되는 전기를 방출하여 적에게 {MAtk}의 피해를 입힙니다.</DescComment>
+		<Icon>Skill_10170</Icon>
+
+		<AtkType>Melee</AtkType>
+
+		<HitSound></HitSound>
+
+		<Damage>0</Damage>
+		<AtkPer Target="Damage">100</AtkPer>
+
+		<Bolt>2</Bolt>
+        <StunTime>0.5</StunTime>
+
+		<BoltEffectFromSelf>true</BoltEffectFromSelf>
+		<BoltSoloActive>true</BoltSoloActive>
+		<BoltType>SequentialLine</BoltType>
+
+		<TargetType>Enemy</TargetType>
+
+		<Effect Type='BoltTarget'>
+			<Prefab>Fx_20750b</Prefab>
+			<Sound></Sound>
+			<OffsetY>20</OffsetY>
+			<ZLevel>UnitOver</ZLevel>
+		</Effect>
+		<Effect Type='BoltLine'>
+			<Prefab>Fx_20750a</Prefab>
+			<OffsetY>20</OffsetY>
+			<ZLevel>UnitOver</ZLevel>
+			<World>true</World>
+		</Effect>
+
+		<UseAttackTrigger>true</UseAttackTrigger>
+	</Skill>
+
+	<Skill ID="20020751">
+		<Name>SkillName_20751</Name>
+		<Desc>SkillDesc_20751</Desc>
+		<NameComment>보스 스킬</NameComment>
+		<DescComment></DescComment>
+		<Icon>Skill_20750</Icon>
+
+		<AtkType>Melee</AtkType>
+		<RangeType>Rect</RangeType>
+		<RangeX>3</RangeX>
+		<RangeY>3</RangeY>
+		<SplashRangeType>Rect</SplashRangeType>
+		<SplashRangeX>3</SplashRangeX>
+		<SplashRangeY>3</SplashRangeY>
+		<SplashRangeSum>1</SplashRangeSum>
+		<SplashRangeFrom>Self</SplashRangeFrom>
+		<Tier>1</Tier>
+
+		<Sound>se_unit_20751_skill</Sound>
+
+		<Damage>150</Damage>
+		<MAtkPer Target="Damage">100</MAtkPer>
+
+		<TargetType>Enemy</TargetType>
+
+		<Effect Type='Shoot'>
+			<Prefab>Fx_20750c</Prefab>
+			<ZLevel>OverUI</ZLevel>
+			<OffsetHeight>100</OffsetHeight>
+		</Effect>
+		<Effect Type='Target'>
+			<Prefab>Fx_20750d</Prefab>
+			<ZLevel>UnitOver</ZLevel>
+			<CenterAlign>true</CenterAlign>
+			<OffsetRotation Min='-180' Max='180' />
+		</Effect>
+	</Skill>
+
+    <Skill ID="20020755">
+        <!-- 기본 정보 -->
+        <NameComment>자살</NameComment>
+        <DescComment>전투 시작 즉시 자신을 부활시킵니다.</DescComment>
+        <!-- 스킬 종류 -->
+        <AtkType>Melee</AtkType>
+        <TargetType>Self</TargetType>
+        <AttackTeam>true</AttackTeam>
+        <RangeType>Self</RangeType>
+        <SelfTrigger>true</SelfTrigger>
+        <DrainOnHit>-100</DrainOnHit>
+        
+        <!-- 스킬 수치 -->
+        <Damage>99999999</Damage>
+        <Sound></Sound>
+        <HitSound>se_unit_20863_skill</HitSound>
+
+        <ShakeCamera>true</ShakeCamera>
+        <ShakeCameraTime>0.5</ShakeCameraTime>
+        <ShakeCameraX>8.0</ShakeCameraX>
+        <ShakeCameraY>0</ShakeCameraY>
+        <ShakeCameraInterval>0.04</ShakeCameraInterval>
+        
+        <ComboSkill>20020751</ComboSkill>
+        <NeedComboCount>1</NeedComboCount>
+    </Skill>
+
+	<!-- ===== 오필리아 스킬 (원본 10790 계열 전체 복사) ===== -->
+    <Skill ID="20010790">
+        <Name>SkillName_10790</Name>
+        <Tier>1</Tier>
+        <Icon>Skill_10790</Icon>
+    	<ShortDesc>SkillDesc_10790_Short</ShortDesc>
+    	<LongDesc>SkillDesc_10790_Long</LongDesc>
+
+        <AtkType>Melee</AtkType>
+        <TargetType>Enemy</TargetType>
+
+        <RangeType>Infinity</RangeType>
+        <FixUsingPos>true</FixUsingPos>
+
+        <UsingPosOffsetY>-1</UsingPosOffsetY>
+
+        <SplashRangeType>Rect</SplashRangeType>
+        <SplashRangeX>2</SplashRangeX>
+        <SplashRangeY>2</SplashRangeY>
+
+        <DontRotate>true</DontRotate>
+        <DontUseAtkRange>true</DontUseAtkRange>
+        <SetFixedTarget>false</SetFixedTarget>
+        <RefreshTileEffect>true</RefreshTileEffect>
+        <ShowTileEffect>false</ShowTileEffect>
+        <Sound>se_unit_10790_skill_01</Sound>
+
+        <DontChainDamage>true</DontChainDamage>
+
+        <CombinationSkill>20010795</CombinationSkill>
+    </Skill>
+
+    <Skill ID="20010791" Inherit="20010790">
+        <Tier>2</Tier>
+        <SplashRangeX>3</SplashRangeX>
+        <SplashRangeY>3</SplashRangeY>
+        <CombinationSkill>20010796</CombinationSkill>
+    </Skill>
+
+    <Skill ID="20010792" Inherit="20010790">
+        <Tier>3</Tier>
+        <SplashRangeX>4</SplashRangeX>
+        <SplashRangeY>4</SplashRangeY>
+        <CombinationSkill>20010797</CombinationSkill>
+    </Skill>
+
+    <Skill ID="20010793" Inherit="20010790">
+        <Tier>4</Tier>
+        <SplashRangeX>5</SplashRangeX>
+        <SplashRangeY>5</SplashRangeY>
+        <CombinationSkill>20010798</CombinationSkill>
+    </Skill>
+
+    <Skill ID="20010795">
+        <Name>SkillName_10795</Name>
+        <AtkType>TileTick</AtkType>
+        <TargetType>AllIncludeMe</TargetType>
+
+        <TickAttackTime>0.01</TickAttackTime>
+        <TickAttackInterval>0.01</TickAttackInterval>
+
+        <SplashRangeType>Rect</SplashRangeType>
+        <SplashRangeX>2</SplashRangeX>
+        <SplashRangeY>2</SplashRangeY>
+
+        <DontRotate>true</DontRotate>
+        <DontUseAtkRange>true</DontUseAtkRange>
+        <SetFixedTarget>false</SetFixedTarget>
+        <RefreshTileEffect>true</RefreshTileEffect>
+        <ShowTileEffect>false</ShowTileEffect>
+
+        <FixUsingPos>true</FixUsingPos>
+        <HitSound></HitSound>
+
+        <DontChainDamage>true</DontChainDamage>
+
+        <!-- 주문력 100% / 틱 -->
+        <Damage>0</Damage>
+        <MAtkPer Target="Damage">100</MAtkPer>
+
+        <Effect Type="SplashRootIgnoreDelay" Index="0">
+            <Prefab>Fx_10790g</Prefab>
+            <ZLevel>Unit</ZLevel>
+            <World>true</World>
+            <LevelScale>false</LevelScale>
+        </Effect>
+        <Effect Type="SplashRootIgnoreDelay" Index="1">
+            <Prefab>Fx_10790f</Prefab>
+            <ZLevel>Ground</ZLevel>
+            <World>true</World>
+            <LevelScale>false</LevelScale>
+            <Sound>se_unit_10790_skill_02</Sound>
+        </Effect>
+
+        <EffectToOnlyEnemy>true</EffectToOnlyEnemy>
+        <Effect Type="Target">
+            <Prefab>Fx_10790d</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <CenterAlign>true</CenterAlign>
+            <OffsetRotation Min="-25" Max="25" />
+        </Effect>
+
+        <EffectToOnlyEnemy>true</EffectToOnlyEnemy>
+        <Effect Type="Target">
+            <Prefab>Fx_10790e</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <CenterAlign>true</CenterAlign>
+            <OffsetRotation Min="-90" Max="90" />
+        </Effect>
+
+        <BuffAtCastSkill>200107900</BuffAtCastSkill>
+        <CombinationSkill>2001079000</CombinationSkill>
+        <BuffToTeamSkillTarget>200107905</BuffToTeamSkillTarget>
+        <BuffToAttackTarget>2001079005</BuffToAttackTarget>
+    </Skill>
+
+    <Skill ID="20010796" Inherit="20010795">
+        <Tier>2</Tier>
+
+        <SplashRangeX>3</SplashRangeX>
+        <SplashRangeY>3</SplashRangeY>
+
+        <Effect Type="SplashRootIgnoreDelay" Index="1">
+            <ScaleX>1.4</ScaleX>
+            <ScaleY>1.4</ScaleY>
+        </Effect>
+
+        <CombinationSkill>2001079001</CombinationSkill>
+    </Skill>
+
+    <Skill ID="20010797" Inherit="20010795">
+        <Tier>3</Tier>
+
+        <SplashRangeX>4</SplashRangeX>
+        <SplashRangeY>4</SplashRangeY>
+
+        <Effect Type="SplashRootIgnoreDelay" Index="1">
+            <ScaleX>1.8</ScaleX>
+            <ScaleY>1.8</ScaleY>
+        </Effect>
+
+        <CombinationSkill>2001079002</CombinationSkill>
+    </Skill>
+
+    <Skill ID="20010798" Inherit="20010795">
+        <Tier>4</Tier>
+
+        <SplashRangeX>5</SplashRangeX>
+        <SplashRangeY>5</SplashRangeY>
+
+        <Effect Type="SplashRootIgnoreDelay" Index="1">
+            <ScaleX>2.2</ScaleX>
+            <ScaleY>2.2</ScaleY>
+        </Effect>
+
+        <CombinationSkill>2001079003</CombinationSkill>
+    </Skill>
+
+    <Skill ID="200107900">
+        <Name>SkillName_107900</Name>
+        <AtkType>Melee</AtkType>
+        <TargetType>Self</TargetType>
+
+        <Time>5</Time>
+        <RangeType>Self</RangeType>
+
+        <MainBuffSkill>true</MainBuffSkill>
+        <RemoveBuffAtSkillCanceled>true</RemoveBuffAtSkillCanceled>
+    </Skill>
+
+    <Skill ID="200107905">
+        <Name>SkillName_107905</Name>
+        <AttackSpeedPerUnit10790>50</AttackSpeedPerUnit10790>
+        <MoveSpeedPerUnit10790>50</MoveSpeedPerUnit10790>
+        <Time>2</Time>
+        <UniquePerUnit>true</UniquePerUnit>
+        <MaxBuffOverlap>1</MaxBuffOverlap>
+
+        <Effect Type="BuffStart">
+            <Prefab>Fx_10790c</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <OffsetY>-20</OffsetY>
+            <LevelScale>false</LevelScale>
+        </Effect>
+    </Skill>
+
+    <Skill ID="2001079000">
+        <Name>SkillName_1079000</Name>
+        <AtkType>TileTick</AtkType>
+        <TargetType>AllIncludeMe</TargetType>
+
+        <SplashRangeType>Rect</SplashRangeType>
+        <SplashRangeX>2</SplashRangeX>
+        <SplashRangeY>2</SplashRangeY>
+
+        <DontRotate>true</DontRotate>
+        <DontUseAtkRange>true</DontUseAtkRange>
+        <SetFixedTarget>false</SetFixedTarget>
+        <RefreshTileEffect>true</RefreshTileEffect>
+        <ShowTileEffect>false</ShowTileEffect>
+
+        <BuffChannelingTime>5</BuffChannelingTime>
+
+        <!-- 5초 동안 1초마다 = 5틱 -->
+        <TickAttackTime>4</TickAttackTime>
+        <TickAttackInterval>1.03</TickAttackInterval>
+        <FixUsingPos>true</FixUsingPos>
+        <ShowTileTickEffectArea>false</ShowTileTickEffectArea>
+
+        <CancelWhenNoTileTickSplashAttackEnemyTarget>true</CancelWhenNoTileTickSplashAttackEnemyTarget>
+
+        <DontChainDamage>true</DontChainDamage>
+
+        <!-- 주문력 100% / 틱 -->
+        <Damage>0</Damage>
+        <MAtkPer Target="Damage">100</MAtkPer>
+        <HitSound></HitSound>
+
+        <Effect Type="SplashRootIgnoreDelay">
+            <Prefab>Fx_10790f</Prefab>
+            <ZLevel>Ground</ZLevel>
+            <World>true</World>
+            <LevelScale>false</LevelScale>
+            <Sound>se_unit_10790_skill_02</Sound>
+        </Effect>
+
+        <EffectToOnlyEnemy>true</EffectToOnlyEnemy>
+        <Effect Type="Target">
+            <Prefab>Fx_10790d</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <CenterAlign>true</CenterAlign>
+            <OffsetRotation Min="-25" Max="25" />
+        </Effect>
+
+        <EffectToOnlyEnemy>true</EffectToOnlyEnemy>
+        <Effect Type="Target">
+            <Prefab>Fx_10790e</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <CenterAlign>true</CenterAlign>
+            <OffsetRotation Min="-90" Max="90" />
+        </Effect>
+
+        <BuffToTeamSkillTarget>200107905</BuffToTeamSkillTarget>
+        <BuffToAttackTarget>2001079005</BuffToAttackTarget>
+    </Skill>
+
+    <Skill ID="2001079001" Inherit="2001079000">
+        <SplashRangeX>3</SplashRangeX>
+        <SplashRangeY>3</SplashRangeY>
+
+        <Effect Type="SplashRootIgnoreDelay">
+            <ScaleX>1.4</ScaleX>
+            <ScaleY>1.4</ScaleY>
+        </Effect>
+    </Skill>
+
+    <Skill ID="2001079002" Inherit="2001079000">
+        <SplashRangeX>4</SplashRangeX>
+        <SplashRangeY>4</SplashRangeY>
+
+        <Effect Type="SplashRootIgnoreDelay">
+            <ScaleX>1.8</ScaleX>
+            <ScaleY>1.8</ScaleY>
+        </Effect>
+    </Skill>
+
+    <Skill ID="2001079003" Inherit="2001079000">
+        <SplashRangeX>5</SplashRangeX>
+        <SplashRangeY>5</SplashRangeY>
+
+        <Effect Type="SplashRootIgnoreDelay">
+            <ScaleX>2.2</ScaleX>
+            <ScaleY>2.2</ScaleY>
+        </Effect>
+    </Skill>
+
+    <Skill ID="2001079005">
+        <Name>SkillName_1079005</Name>
+        <Slow>50</Slow>
+        <Time>2</Time>
+        <ApplyCCRatio>true</ApplyCCRatio>
+        <MaxBuffOverlap>1</MaxBuffOverlap>
+    </Skill>
 
 	<!-- 스토리 몬스터 스킬 -->
 
@@ -45586,7 +46159,7 @@
         <!-- (틱대미지) -->
         <TickDamage>0</TickDamage>
         <MAtkPer Target="TickDamage">0</MAtkPer>
-        <ChallengeDifficulty Target="MAtkPer">5000</ChallengeDifficulty>
+        <ChallengeDifficulty Target="MAtkPer">2500</ChallengeDifficulty>
         <TickTime>1</TickTime>
         <Time>4</Time>
         <MaxBuffOverlap>1</MaxBuffOverlap>
@@ -45597,6 +46170,143 @@
         <!-- 받피증용 더미버프 -->
         <Time>5</Time>
         <MaxBuffOverlap>1</MaxBuffOverlap>
+    </Skill>
+
+    <Skill ID="30000050">
+        <NameComment>핏빛 방출</NameComment>
+        <Icon>Skill_30000002</Icon>
+
+        <AtkType>Melee</AtkType>
+
+        <Sound>se_unit_20750_skill</Sound>
+        <HitSound></HitSound>
+
+        <Damage>0</Damage>
+        <MAtkPer Target="Damage">50</MAtkPer>
+        <ForceDamageType>NormalMagic</ForceDamageType>
+        <Bolt>1</Bolt>
+
+        <TargetType>Enemy</TargetType>
+        <UseAttackTrigger>true</UseAttackTrigger>
+
+        <BoltEffectFromSelf>true</BoltEffectFromSelf>
+        <BoltSoloActive>true</BoltSoloActive>
+        <BoltType>SequentialLine</BoltType>
+
+        <Effect Type='BoltTarget'>
+            <Prefab>Fx_20750b</Prefab>
+            <Sound></Sound>
+            <OffsetY>20</OffsetY>
+            <ZLevel>UnitOver</ZLevel>
+        </Effect>
+        <Effect Type='BoltLine'>
+            <Prefab>Fx_20750a</Prefab>
+            <OffsetY>20</OffsetY>
+            <ZLevel>UnitOver</ZLevel>
+            <World>true</World>
+        </Effect>
+    </Skill>
+
+    <!-- - 보스의 위협이 [챌린지 레벨 * 50]만큼 상승합니다. 보스가 반사/반격이 아닌 피해로 받는 피해가 {챌린지 레벨 * 5}% 감소합니다. -->
+    <Skill ID="30000051">
+        <Icon>Skill_30000006</Icon>
+
+        <Sound>se_unit_20751_skill</Sound>
+        <AtkType>Melee</AtkType>
+        <TargetType>Self</TargetType>
+        <RangeType>Self</RangeType>
+        
+        <BuffToSkillTarget>30000051</BuffToSkillTarget>
+        
+        <DescReflectDef>5</DescReflectDef>
+        <DescDefPen>50</DescDefPen>
+        <DescDef>375</DescDef>
+        <BaseDefPen>0</BaseDefPen>
+        <ChallengeDifficulty Target="BaseDefPen">5000</ChallengeDifficulty>
+        <BaseDef>-7500</BaseDef>
+        <ChallengeDifficulty Min="7500" Target="BaseDef">37500</ChallengeDifficulty>
+        <BaseMDef>-7500</BaseMDef>
+        <ChallengeDifficulty Min="7500" Target="BaseMDef">37500</ChallengeDifficulty>
+        <MaxBuffOverlap>1</MaxBuffOverlap>
+        <Time>-1</Time>
+    </Skill>
+
+    <!-- 스킬 1: 모든 적에게 주문력 100%의 피해를 3초에 걸쳐 입힙니다. -->
+    <Skill ID="30000052">
+        <NameComment>공허의 포효</NameComment>
+        <Icon>Skill_30000002</Icon>
+        <Tier>1</Tier>
+
+        <Sound>se_unit_20751_skill</Sound>
+        <AtkType>Melee</AtkType>
+        <SplashRangeFrom>Self</SplashRangeFrom>
+        <SplashRangeType>Rect</SplashRangeType>
+        <SplashRangeX>4</SplashRangeX>
+        <SplashRangeY>4</SplashRangeY>
+
+        <Damage>0</Damage>
+        <MAtkPer Target="Damage">16.67</MAtkPer>
+        <DescDamage>0</DescDamage>
+        <MAtkPer Target="DescDamage">100</MAtkPer>
+        <AttackCount>6</AttackCount>
+        <AttackDelay>0.5</AttackDelay>
+        <DescAttackTime>3</DescAttackTime>
+        <ShowLineEffect>true</ShowLineEffect>
+        <CancelWhenNoTarget>true</CancelWhenNoTarget>
+        <HitSound></HitSound>
+
+        <TargetType>Enemy</TargetType>
+
+        <Effect Type='Shoot'>
+            <Prefab>Fx_20750c</Prefab>
+            <ZLevel>OverUI</ZLevel>
+            <OffsetHeight>100</OffsetHeight>
+        </Effect>
+        <Effect Type='Target'>
+            <Prefab>Fx_20720d</Prefab>
+            <OffsetY>20</OffsetY>
+            <ZLevel>UnitOver</ZLevel>
+            <OffsetRotation Min='-180' Max='180' />
+        </Effect>
+        <Effect Type='Line'>
+            <Prefab>Fx_20720c</Prefab>
+            <OffsetY>20</OffsetY>
+            <ZLevel>UnitOver</ZLevel>
+        </Effect>
+    </Skill>
+
+    <!-- 스킬 1: 모든 적에게 최대 체력 비례 피해를 입힙니다. -->
+    <Skill ID="30000053">
+        <NameComment>공허의 포효</NameComment>
+        <Icon>Skill_30000001</Icon>
+        <Tier>1</Tier>
+
+        <Sound>se_unit_20751_skill</Sound>
+        <AtkType>Melee</AtkType>
+        <SplashRangeFrom>Self</SplashRangeFrom>
+        <SplashRangeType>Infinity</SplashRangeType>
+
+        <Damage Min="150000000">-1500000000</Damage>
+        <ChallengeDifficulty Target="Damage" Bound="2550000000">15000000000</ChallengeDifficulty>
+        
+        <MaxDamage>0</MaxDamage>
+        <HpPer Target="MaxDamage">20</HpPer>
+        <ForceDamageType>SkillPhysical</ForceDamageType>
+        <DefBreak>100</DefBreak>
+
+        <TargetType>Enemy</TargetType>
+
+        <Effect Type='Shoot'>
+            <Prefab>Fx_20750c</Prefab>
+            <ZLevel>OverUI</ZLevel>
+            <OffsetHeight>100</OffsetHeight>
+        </Effect>
+        <Effect Type='Target'>
+            <Prefab>Fx_20750d</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <CenterAlign>true</CenterAlign>
+            <OffsetRotation Min='-180' Max='180' />
+        </Effect>
     </Skill>
 
     <Skill ID="40025040">
@@ -45713,6 +46423,33 @@
 		<Tier>1</Tier>
 	</Skill>
 
+    <Skill ID="40020731">
+        <NameComment>매혹</NameComment>
+        <DescComment></DescComment>
+        <Icon>Skill_20730</Icon>
+        <Desc>SkillDesc_20730</Desc>
+        <Tier>1</Tier>
+
+        <AtkType>Melee</AtkType>
+        <PreTargetCategory>Charm</PreTargetCategory>
+        <CannotTargetSummoned>true</CannotTargetSummoned>
+        <RangeType>Infinity</RangeType>
+
+        <CharmTime>99</CharmTime>
+        <CharmEffect>Fx_20730e</CharmEffect>
+        <Damage>0</Damage>
+        <TargetType>Enemy</TargetType>
+
+        <Sound></Sound>
+        <HitSound>se_unit_20731_skill</HitSound>
+
+        <Effect Type='Self'>
+            <Prefab>Fx_20730c</Prefab>
+            <ZLevel>OverUI</ZLevel>
+            <OffsetY>90</OffsetY>
+        </Effect>
+    </Skill>
+
 
 	<Skill ID="40020741">
 		<NameComment>박쥐 평타</NameComment>
@@ -45754,7 +46491,7 @@
 		<Sound>se_unit_20742_skill</Sound>
 
 		<Transform>40020741</Transform>
-		<TransformTime>3</TransformTime>
+		<TransformTime>99</TransformTime>
 		<Tier>1</Tier>
 
 		<Effect Type='Self'>
@@ -45764,5 +46501,5 @@
 		</Effect>
 
 		<TargetType>Team</TargetType>
-	</Skill>	
+	</Skill>
 </Skills>

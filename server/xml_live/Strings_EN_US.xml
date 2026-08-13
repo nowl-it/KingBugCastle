@@ -142,9 +142,9 @@ Returning to Login menu.</String>
 
 (Cost:{0} Gems)</String>
   <String Key="King_1">King</String>
-  <String Key="King_2"></String>
+  <String Key="King_2"> </String>
   <String Key="Castle_1">Castle</String>
-  <String Key="Castle_2"></String>
+  <String Key="Castle_2"> </String>
   <String Key="LoadingPopupText">Communicating with Server...</String>
   <String Key="LoginByGoogle">Sign in with Google Play</String>
   <String Key="LoginByApple">Sign in with Apple</String>
@@ -264,11 +264,11 @@ Ember</String>
   <String Key="Post_Push_Contents18">1,000 Gold is waiting for you tonight!</String>
   <String Key="Post_Push_Contents19">There is Gold in your inbox~</String>
   <String Key="Post_Push_Contents20">We have supplies ready!</String>
-  <String Key="Post_Push_Contents21">End of King God Castle Season 70 D-Day</String>
-  <String Key="Post_Push_Contents22">End of King God Castle Season 70 D-1</String>
-  <String Key="Post_Push_Contents23">End of King God Castle Season 70 D-2</String>
-  <String Key="Post_Push_Contents24">End of King God Castle Season 70 D-4</String>
-  <String Key="Post_Push_Contents25">King God Castle Season 70 ending today!</String>
+  <String Key="Post_Push_Contents21">End of King God Castle Season 72 D-Day</String>
+  <String Key="Post_Push_Contents22">End of King God Castle Season 72 D-1</String>
+  <String Key="Post_Push_Contents23">End of King God Castle Season 72 D-2</String>
+  <String Key="Post_Push_Contents24">End of King God Castle Season 72 D-4</String>
+  <String Key="Post_Push_Contents25">King God Castle Season 72 ending today!</String>
   <String Key="Post_Push_Contents26">Please check out if there are any Pass Rewards you forgot to claim!</String>
   <String Key="Post_Push_Contents27">Claim all the Pass Rewards!</String>
   <String Key="Post_Push_Contents28">Battlefield and King God Pass will end in 4 days.</String>
@@ -853,7 +853,7 @@ She showed her overwhelming talent among the elves and human cadets. Zupitere is
   <String Key="FetchArtifactInfoFailed">Failed loading Relic info!</String>
   <String Key="Artifact_ClearGoldReward_GameEnd">+{0}% Relic Gold reward</String>
   <String Key="Artifact_ClearExpReward_GameEnd">+{0}% Relic EXP reward</String>
-  <String Key="Artifact_ClearEventModeReward_GameEnd">{0}% Relic Expedition reward</String>
+  <String Key="Artifact_ClearEventModeReward_GameEnd">{0}% Relic Expedition reward </String>
   <String Key="ArtifactCraft_Action_0">Craft</String>
   <String Key="ArtifactCraft_Action_1">Combine</String>
   <String Key="ArtifactCraft_Action_2">Forge</String>
@@ -1251,8 +1251,11 @@ Do you want to check?</String>
   <String Key="ItemName_10020">Expand Troop</String>
   <String Key="ItemDesc_10020">Expand the Troop by 1</String>
   <String Key="ItemName_10030">+5 Silver</String>
+  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">+10 Silver</String>
+  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">+20 Silver</String>
+  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">Medal of Honor</String>
   <String Key="ItemDesc_10040">Upgrade a random Hero’s Tier on the field by 1</String>
   <String Key="ItemName_10050">Premium Hero Scroll
@@ -1586,7 +1589,7 @@ For each hero, the effect is multiplied by 2 for each Tier lower than the hero i
   <String Key="FreeChanceFormat">Free retry: {0} times left</String>
   <String Key="RankTierFormat">{0}</String>
   <String Key="TierFormat">Tier {0}</String>
-  <String Key="ArenaSeasonFormat">Season {0} Arena</String>
+  <String Key="ArenaSeasonFormat">Season {0} Arena </String>
   <String Key="PassSeasonFormat">Season {0} King God Pass</String>
   <String Key="StageNumFormat3">{0} Round {1}</String>
   <String Key="StageNumFormat4">{0} Round {1}</String>
@@ -1859,7 +1862,7 @@ Physical/Spell HP Drain</String>
   <String Key="SkinName_1015001">Water Spirit Lily</String>
   <String Key="SkinDesc_1015001">When black mana stains the atmosphere, there comes a time when it won't rain for several months even in the verdant Eternal Forest. Sha-sha stores water from the Spring of Vitality and goes on a journey with Lily to help the withered beings in the forest.</String>
   <String Key="SkinName_1008001">Blue Flame Draco</String>
-  <String Key="SkinDesc_1008001">Draco, a half-dragon and half-human, could use the power of an adult dragon at a much younger age than a pure dragon. As he pursued destructive power, his flame was concentrated and enveloped in blue mana, becoming even hotter than before.</String>
+  <String Key="SkinDesc_1008001">Draco, a half-dragon and half-human, could use the power of an adult dragon at a much younger age than a pure dragon. As he pursued destructive power, his flame was concentrated and enveloped in blue mana, becoming even hotter than before. </String>
   <String Key="ThemeName_9">Frost Tribe Invasion!</String>
   <String Key="ThemeName_59">[Corruption] Frost Tribe Invasion!</String>
   <String Key="UnitName_20800">Frost Golem Fragment</String>
@@ -2400,7 +2403,7 @@ King's Tokens can be converted into Hero's Tokens of your choice.</String>
   <String Key="Name_Potential_10150_2">Communing with Nature</String>
   <String Key="Name_Potential_10170_2">Infinite Diffusion</String>
   <String Key="Name_Potential_10180_2">Cursed Link</String>
-  <String Key="Name_Potential_10190_2">Empire's Provocation</String>
+  <String Key="Name_Potential_10190_2">Shadow of the Empire</String>
   <String Key="Name_Potential_10200_2">Overflow</String>
   <String Key="Name_Potential_10210_2">Wave of the Holy Blade</String>
   <String Key="Name_Potential_10220_2">Mega Bomb</String>
@@ -2428,7 +2431,7 @@ King's Tokens can be converted into Hero's Tokens of your choice.</String>
   <String Key="Potential_10090_2">+1 skill range for &lt;Lilting Melody&gt;</String>
   <String Key="Potential_10100_2">Exposes the 'weakness' of the &lt;Backstab&gt; target, increasing the damage they take by 30% for 10 sec (halved for bosses)</String>
   <String Key="Potential_10150_2">Upon using &lt;Summon Golem&gt;, fully recovers MP of nearby allies in a 5x5/5x5/7x7/7x7 area</String>
-  <String Key="Potential_10190_2">Provokes the enemy attacking the target ally of &lt;Reckless Protection&gt; and increases DEF by 350 for 4 sec</String>
+  <String Key="Potential_10190_2">Grants the allied target of &lt;Reckless Protection&gt; Hide for 0.3 sec. and Behemus +400 DEF for 4 sec.</String>
   <String Key="Potential_10210_2">Activates shockwave on attacks, which deals damage equal to the Spell Power with a 33% chance during &lt;Holy Blade Garna&gt;</String>
   <String Key="Potential_10220_2">Upon every 10th normal attack, throws &lt;Mega Bomb&gt; that deals triple damage in 5x5 range</String>
   <String Key="Potential_10240_2">Exposes the 'weakness' of the target of &lt;Giant Smite&gt;, increasing damage taken by 30% for 10 sec (effect halved for bosses)</String>
@@ -2562,8 +2565,7 @@ Repeated periodically</String>
   <String Key="ShopItemName_951">Daily Gem Package: 30 days</String>
   <String Key="Name_Potential_10190_3">Powerful Tremor</String>
   <String Key="Name_Potential_10200_3">Backflow</String>
-  <String Key="Potential_10190_3">The damage range of &lt;Reckless Protection&gt; is fixed to be within 2 range for all tiers.
-Push-back range changes from 3 blocks to 2/3/4/5 blocks.</String>
+  <String Key="Potential_10190_3">Changes the target of &lt;Reckless Protection&gt; to the nearest enemy within 9X9 Range, Behemus' Protection gain +100%</String>
   <String Key="SkinName_1003002">Lunar New Year Greetings Evan</String>
   <String Key="SkinDesc_1003002">&lt;i&gt;2022 Lunar New Year Greetings Skin&lt;/i&gt;</String>
   <String Key="Alert_Temp_NoIAP">In-app purchases are temporarily unavailable. Please try again later.</String>
@@ -3425,7 +3427,7 @@ The previous mission will be switched to a new random mission.</String>
   <String Key="BoxStackInfoTitle">Enhanced Scroll</String>
   <String Key="BoxStackInfoDesc">On every &lt;color=#FFD247&gt;fourth Scroll purchase&lt;/color&gt;, you can purchase an &lt;color=#FFD247&gt;enhanced Scroll&lt;/color&gt; that has &lt;color=#FFD247&gt;double&lt;/color&gt; the value.</String>
   <String Key="HeroSummonPercentageTable">Hero Summon Probability Chart</String>
-  <String Key="GachaListDesc_NewHero">Heroes you own will be converted to random Hero's Tokens.</String>
+  <String Key="GachaListDesc_NewHero"> Heroes you own will be converted to random Hero's Tokens.</String>
   <String Key="GachaAllExpToUnitExpItem">Obtained as Books of EXP</String>
   <String Key="RandomUnitExp">Random Hero EXP</String>
   <String Key="ArtifactSummonDesc">You can obtain random Relic Pieces and Relics.</String>
@@ -3558,7 +3560,7 @@ And all that remained was ashes, a glimpse of what once was a battlefield.&lt;/i
   <String Key="InventoryItemDesc_110">A book filled with various experiences from around the world.
 Can be converted into hero EXP of your choice.</String>
   <String Key="InventoryItemDesc_120">A token bestowed to a hero.
-Used for hero Awakening and level up after level 16.</String>
+Used for hero Awakening and level up after level 16. </String>
   <String Key="InventoryItemDesc_130">A King’s Token bestowed to the best hero.
 Can be converted into a Hero’s Token of your choice.</String>
   <String Key="InventoryItemName_150">Shard of Growth</String>
@@ -3599,7 +3601,7 @@ Are you sure you want to use it?</String>
   <String Key="GachaName_1002">Shadow’s Manipulation</String>
   <String Key="CardInfo_TransformSummons">View Summoned Creature</String>
   <String Key="UnitSubName_10400">Doll of Darkness</String>
-  <String Key="SkillAltDesc_10400_0">Machina deals damage equal to {Unit@AtkByParentMatkPer}% of Rie's Spell Power on normal attack, and has {Unit@HpByParentHpPer}% of Rie's HP and &lt;color=#ffcc00&gt;100&lt;/color&gt;% of Rie's Spell Power, Attack Speed, and Movement Speed.</String>
+  <String Key="SkillAltDesc_10400_0">Machina deals damage equal to {Unit@AtkByParentMatkPer}% of Rie's Spell Power on normal attack, and has {Unit@HpByParentHpPer}% of Rie's HP and &lt;color=#ffcc00&gt;100&lt;/color&gt;% of Rie's Spell Power, Attack Speed, and Movement Speed. </String>
   <String Key="SkillAltDesc_10400">Machina deals damage equal to {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% of Rie's Spell Power upon normal attack, and has {Unit@OverwriteHpByParent:HpPer:BaseValue}% of Rie's HP and {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% of Rie's Spell Power, Attack Speed, and Movement Speed. Machina's damage is counted as spell normal damage dealt by Rie.</String>
   <String Key="ReceivedPostFlag">Claimed Banner of Honor reward.</String>
   <String Key="Post_Push_Contents102">Rewards for Reaching 2,000 Likes on the Official Facebook Page</String>
@@ -3852,7 +3854,7 @@ Sales price increases by {0} Silver when a battle is won (max {1}).</String>
   <String Key="ItemDescSub_40463_00">+{0}% ATK</String>
   <String Key="ItemDescSub_40463_01">+{0}% Attack Speed</String>
   <String Key="ItemDescSub_40463_02">+{0} Protection</String>
-  <String Key="ItemDescSub_40463_03">+{0}% Spell Power</String>
+  <String Key="ItemDescSub_40463_03">+{0}% Spell Power </String>
   <String Key="ItemDescSub_40463_04">+{0}% Physical/Spell HP Drain</String>
   <String Key="ItemDescSub_40463_05">Recovers base MP by {0}%</String>
   <String Key="ItemDescSub_40463_06">+{0}% Max HP</String>
@@ -4992,7 +4994,6 @@ Witness my overwhelming power!&lt;/i&gt;</String>
   <String Key="Hero_Awaken_Noti">{0} has reached level 16 and can now be Awakened.
 Upon Awakening, the hero's &lt;color=#FFD247&gt;Awakened Abilities&lt;/color&gt; can be used.</String>
   <String Key="ItemDescSub_40463_07">Mighty Block {0} times</String>
-  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">When a Hero appears, the &lt;color=#FFD247&gt;selected Hero&lt;/color&gt; is &lt;color=#FFD247&gt;guaranteed!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Select Heroes</String>
   <String Key="SelectPickupUnitAgain">Reset</String>
@@ -5498,10 +5499,10 @@ We apologize for the inconvenience.</String>
   <String Key="InventoryItemName_2107">Castle EXP</String>
   <String Key="InventoryItemDesc_2107">The EXP that increases the level of the castle. It is needed for the growth of the Dominion, Altars, and other components.</String>
   <String Key="InventoryItemName_2108">Alliance EXP</String>
-  <String Key="InventoryItemDesc_2108">The EXP that increases the level of the Alliance. Alliance skills can be developed according to the Alliance level.</String>
+  <String Key="InventoryItemDesc_2108">The EXP that increases the level of the Alliance. Alliance skills can be developed according to the Alliance level. </String>
   <String Key="TerritoryPass_Short">Blessing</String>
   <String Key="AlchemyRemainPointAlert">Materials over stage {0} will disappear.
-Would you like to proceed with the Alchemy?</String>
+Would you like to proceed with the Alchemy? </String>
   <String Key="TerritoryPass_FreeHuntingReroll">Free chance to refresh Dominion Blessing
 {0}/{1} remaining</String>
   <String Key="TerritoryCantUpgradeImmediatelyNow">Immediate completion is unavailable when the remaining time is 5 seconds or below.
@@ -5517,7 +5518,7 @@ You can obtain related class bonus from the Dominion or other content.</String>
   <String Key="UnitRegion_Tooltip">Hero's active region
 You can obtain related regional bonus from the Dominion and other content.</String>
   <String Key="TerritoryPass_CannotRefund">※ Dominion's Blessing is a product that cannot be refunded.
-※ The amount of immediately provided Vitality varies depending on the Chamber level.</String>
+※ The amount of immediately provided Vitality varies depending on the Chamber level. </String>
   <String Key="LocalPushItemTitle_101">King God Castle</String>
   <String Key="LocalPushItemTitle_102">King God Castle</String>
   <String Key="LocalPushItemSubTitle_101">Max Vitality</String>
@@ -6582,7 +6583,7 @@ That was the title for which he trained his fist.&lt;/i&gt;</String>
   <String Key="FlagsName_PreviousColosseum">Strife Battlefield Season {0} Banner of Honor</String>
   <String Key="FlagsDesc_PreviousColosseum">Reached {1} in Strife Battlefield Season {0}</String>
   <String Key="NameTagName_Colosseum">{0} Ruler's Decoration</String>
-  <String Key="NameTagDesc_Colosseum">An honorable reward for reaching {0} in the Strife Battlefield</String>
+  <String Key="NameTagDesc_Colosseum">An honorable reward for reaching {0} in the Strife Battlefield </String>
   <String Key="ArtufactPolishValue">Effect</String>
   <String Key="ArtifactPolishAction_ReplaceOptionIdx">Move Position</String>
   <String Key="PolishItemRewardPostTitle">Polishing Stone for Revamp of Polishing System</String>
@@ -6605,12 +6606,12 @@ Additionally charges &lt;color=#FFD247&gt;50%&lt;/color&gt; of Forging Energy up
   <String Key="ArtifactName_902">King Magical Polishing Stone</String>
   <String Key="ArtifactName_903">God Magical Polishing Stone</String>
   <String Key="ArtifactOption_901">Can be used as a material to polish a King God Relic
-Charges Polishing Gauge by &lt;color=#FFD247&gt;10&lt;/color&gt;</String>
+Charges Polishing Gauge by &lt;color=#FFD247&gt;10&lt;/color&gt; </String>
   <String Key="ArtifactOption_902">Can be used as a material to polish a King God Relic
-Charges Polishing Gauge by &lt;color=#FFD247&gt;50&lt;/color&gt;</String>
+Charges Polishing Gauge by &lt;color=#FFD247&gt;50&lt;/color&gt; </String>
   <String Key="ArtifactOption_903">Can be used as a material to polish a King God Relic
-Charges Polishing Gauge by &lt;color=#FFD247&gt;100&lt;/color&gt;</String>
-  <String Key="ArtifactDesc_901">A polishing stone that emits magical energy. As a very rare material, it can transform a Relic into its strongest form.</String>
+Charges Polishing Gauge by &lt;color=#FFD247&gt;100&lt;/color&gt; </String>
+  <String Key="ArtifactDesc_901">A polishing stone that emits magical energy. As a very rare material, it can transform a Relic into its strongest form. </String>
   <String Key="Polish_Gauge_Info">Whenever a Relic is forged, its Forging Energy is charged. When it is charged up to 100% or more,
 Forging Energy is consumed and you obtain 1 &lt;color=#FFD247&gt;Magical Polishing Stone&lt;/color&gt;.
 You can obtain additional Forging Energy by using Forge Stones and Catalysts.
@@ -6638,7 +6639,7 @@ Invasion mode Gold</String>
   <String Key="ArtifactDesc_14000">A sword that emits mysterious darkness.
 When it detects someone's fear of the unknown, it consumes their fear and emits even more darkness.</String>
   <String Key="DamagePerByStageTime_Piece">Increases damage according to the time passed after the beginning of the battle</String>
-  <String Key="DamagePerByStageTime">Increases damage by {0} per sec after the beginning of the battle (Max {1})</String>
+  <String Key="DamagePerByStageTime">Increases damage by {0} per sec after the beginning of the battle (Max {1}) </String>
   <String Key="ArtifactName_14010">Staff of Ancient Magic</String>
   <String Key="ArtifactDesc_14010">A needlessly heavy staff.
 Though it can cast archaic magic, it is just as heavy and big.</String>
@@ -6930,7 +6931,6 @@ For more details, please contact customer support.</String>
   <String Key="Clan_Menu_ChangeName">Change</String>
   <String Key="ColosseumSeasonRankingReward">Season Reward</String>
   <String Key="ColosseumRanking">Ranking</String>
-  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Relic Probability Details</String>
   <String Key="ArtifactOptionProbDetailDesc">You will be redirected to the announcement that details the probabilities for paid probability-based items.</String>
   <String Key="ColosseumNetworkChanged">Reconnecting due to network change.</String>
@@ -6938,8 +6938,8 @@ For more details, please contact customer support.</String>
   <String Key="ColosseumLeagueRankingRewardNotice">League Point Rewards</String>
   <String Key="ColosseumLeagueRankingRewardCondition_Rank">League &lt;color=#ffcf68&gt;rank {0} and above&lt;/color&gt;</String>
   <String Key="ColosseumLeagueRankingRewardCondition_Point">League &lt;color=#ffcf68&gt;points {0} and above&lt;/color&gt;</String>
-  <String Key="ColosseumLeaguePointFormula_1">King Tier League points = When the Tier ends, 1 point added per 100 points after 1 League point</String>
-  <String Key="ColosseumLeaguePointFormula_2">God Tier League points = When the Tier ends, 1 point added for every 3rd place after 20 League points</String>
+  <String Key="ColosseumLeaguePointFormula_1">King Tier League points = When the Tier ends, 1 point added per 100 points after 1 League point </String>
+  <String Key="ColosseumLeaguePointFormula_2">God Tier League points = When the Tier ends, 1 point added for every 3rd place after 20 League points </String>
   <String Key="ColosseumLeagueRankingRewardTitle">{0} Point Rewards</String>
   <String Key="ColosseumHallOfFame">Hall of Fame</String>
   <String Key="ColosseumSeasonRanking">Season Ranking</String>
@@ -7365,7 +7365,9 @@ We apologize for the inconvenience.</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;Tier Transcendence
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;You can grant additional effects&lt;/color&gt; to Paragons through &lt;color=#ffbc00&gt;tier transcendence&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Identical Paragons&lt;/color&gt; are required to perform tier transcendence.</String>
+&lt;color=#ffbc00&gt;Identical Paragons&lt;/color&gt; are required to perform tier transcendence.
+
+</String>
   <String Key="SkinName_1032006">Blue Wave Tia</String>
   <String Key="SkinName_1036004">Blue Wave Haerang</String>
   <String Key="SkinName_1042003">Blue Wave Taebaek</String>
@@ -7439,7 +7441,8 @@ Now, come forth and dance to my will.&lt;/i&gt;</String>
 +{1}% damage dealt during invincibility</String>
   <String Key="TreasureSkillDesc_3300033">When hero with the highest tier equipped with Mur reaches {0}% HP or takes lethal damage, the hero becomes invincible 1 time each for {1} sec
 (HP Recovery and Protection unavailable during invincibility)
-+{2}% damage dealt during invincibility</String>
++{2}% damage dealt during invincibility
+</String>
   <String Key="TreasureSkillDesc_3300034">When hero with the highest tier equipped with Mur reaches {0}% HP or takes lethal damage, the hero becomes invincible 1 time each for {1} sec
 (HP Recovery and Protection unavailable during invincibility)
 +{2}% damage dealt during invincibility
@@ -7669,11 +7672,15 @@ The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be
  &lt;size=25&gt;Tier Transcendence
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;You can grant additional effects&lt;/color&gt; to Legacies through &lt;color=#ffbc00&gt;tier transcendence&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform tier transcendence.</String>
+&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform tier transcendence.
+
+</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Legacy Enhancement
 
 &lt;/size&gt;Legacies can be &lt;color=#ffbc00&gt;enhanced&lt;/color&gt; to increase the effectiveness of &lt;color=#ffbc00&gt;Legacy Effects&lt;/color&gt;.
-The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be obtained by &lt;color=#ffbc00&gt;dismantling&lt;/color&gt; Legacies from the inventory or &lt;color=#ffbc00&gt;purchasing them from the Shop&lt;/color&gt;.</String>
+The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be obtained by &lt;color=#ffbc00&gt;dismantling&lt;/color&gt; Legacies from the inventory or &lt;color=#ffbc00&gt;purchasing them from the Shop&lt;/color&gt;.
+
+</String>
   <String Key="TreasureOvercome">Tier Transcendence</String>
   <String Key="TreasureOvercome_Short">Tier Transcendence</String>
   <String Key="ViewNextOvercome">View Next Transcendence</String>
@@ -8222,7 +8229,9 @@ The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be
  &lt;size=25&gt;Tier Transcendence
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;You can grant additional effects&lt;/color&gt; to Legacies through &lt;color=#ffbc00&gt;Tier Transcendence&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform Tier Transcendence."</String>
+&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform Tier Transcendence."
+
+</String>
   <String Key="TreasureSkillDesc_3300010">+{0}% CRIT Chance
 Deactivated for {1} sec upon taking damage</String>
   <String Key="TreasureSkillDesc_3300011">+{0}% CRIT Chance
@@ -9485,7 +9494,7 @@ Your score will not drop below 2,000 points.</String>
   <String Key="UnitSubName_10670">War Banner Bearer</String>
   <String Key="Potential_10670_0">+30 Guard</String>
   <String Key="Potential_10670_1">-70% damage taken for 2 sec after taking damage for the first time in battle</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;The Litere family, a prestigious lineage of the Empire, has produced outstanding talents in various fields. Although Patros, a member of the Litere family, was not born with innate abilities, he became an exemplary commanding officer of the Imperial Army through exceptional effort.&lt;/i&gt;</String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;The Litere family, a prestigious lineage of the Empire, has produced outstanding talents in various fields. Although Patros, a member of the Litere family, was not born with innate abilities, he became an exemplary commanding officer of the Imperial Army through exceptional effort.&lt;/i&gt; </String>
   <String Key="SkillName_10670">For the Empire!</String>
   <String Key="SkillDesc_10670">Encourages allies for {TotalAttackTime} sec, healing all allies within {SplashRangeX}{x}{SplashRangeY} range nearby by {Heal} every {Time} sec while also increasing their Attack Speed by {AttackSpeedPerUnit10670}% every time. The highest Attack Speed increase is applied among the increases from skills with the same name.</String>
   <String Key="SkillDesc_10670_Short">For {TotalAttackTime} sec, heals allies within {SplashRangeX}{x}{SplashRangeY} range nearby by {Heal} every {Time} sec while also increasing their Attack Speed by {AttackSpeedPerUnit10670}% every time. Only the highest Attack Speed increase from &lt;For the Empire!&gt; is applied.</String>
@@ -9785,7 +9794,8 @@ You &lt;color=#FF0000&gt;cannot change&lt;/color&gt; the selected Legacies after
   <String Key="BaseHybridDefOnInvade">+{0} Gold reward from Invasion
 +{1} DEF to all heroes in Invasion
 Cannot be enhanced through forging or polishing</String>
-  <String Key="ArtifactOptionDesc_Event_15000">Free position movement through polishing
+  <String Key="ArtifactOptionDesc_Event_15000">
+Free position movement through polishing
 (until Dec 3, 2024)</String>
   <String Key="SkinName_1032007">Tia the Moon Goddess</String>
   <String Key="SkinName_1032007_NewLine">Tia the Moon Goddess</String>
@@ -11374,7 +11384,8 @@ Challenge &amp; Achievement</String>
   <String Key="AddDifficultyUnlockDesc">If cleared without damage, the difficulty will be unlocked by 2 levels.</String>
   <String Key="AccessoryLevelUpTutorialLock">Unlocked after clearing Corruption II-1.</String>
   <String Key="NotAccessoryLevelUp">No Accessories available for enhancement</String>
-  <String Key="ArtifactOptionDesc_Event_15020">Free position movement through polishing (&lt;color=#ffbd4a&gt;until {0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">
+Free position movement through polishing (&lt;color=#ffbd4a&gt;until {0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Clear Chapter {0}-{1} {Diff} level or higher.</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">Clear [Corruption] Chapter {0}-{1} {Diff} level or higher.</String>
   <String Key="Polish_EventArtifact_Alert">This Relic cannot be enhanced through polishing!</String>
@@ -11726,7 +11737,8 @@ If the attack target's Max HP is higher than the user's Max HP, an additional sw
   <String Key="SpecialPackage_1556">Eterna Package 1</String>
   <String Key="SpecialPackage_1557">Eterna Package 2</String>
   <String Key="SpecialPackage_1558">Eterna Package 3</String>
-  <String Key="MakeAllLateComerExceptSlot">Grants the Backup effect to all heroes except for the hero positioned {0} in the Troop.</String>
+  <String Key="MakeAllLateComerExceptSlot">Grants the Backup effect to all heroes except for the hero positioned {0} in the Troop.
+</String>
   <String Key="Order_1">first</String>
   <String Key="Order_2">second</String>
   <String Key="Order_3">third</String>
@@ -13836,7 +13848,7 @@ When taking lethal damage, teleports to the lowest-tier enemy, consuming their H
   <String Key="ArenaDebuffDesc_01">-80% healing during battle</String>
   <String Key="ArenaDebuffDesc_02">-80% Protection during battle</String>
   <String Key="ArenaDebuffDesc_03">-50% crowd control effects during battle</String>
-  <String Key="ArenaDebuffDesc_04">+500 DEF</String>
+  <String Key="ArenaDebuffDesc_04">DEF +500 and Final DEF decreases over time</String>
   <String Key="ArenaDebuffTitle">Arena Effects</String>
   <String Key="Theme68BattleObserverDesc_0">Clear the round without being defeated by Assassin Ninjas or Master Assassin Ninjas</String>
   <String Key="Theme68BattleObserverDesc_1">Defeat all Spirit Mages while they take increased damage after becoming unfrozen</String>
@@ -14409,7 +14421,8 @@ Recommended: Strife Battlefield</String>
   <String Key="AltarHelpBuilding_5">An Altar that increases the supply of Silver to facilitate hero summoning and shop usage.
 
 Recommended: Invasion, Arena</String>
-  <String Key="ArtifactBuffDataDesc_15010">+{0}% Attack Speed for the Vanguard hero at the beginning of the battle in Invasion and Expedition (no effect if there is no Vanguard hero)</String>
+  <String Key="ArtifactBuffDataDesc_15010">+{0}% Attack Speed for the Vanguard hero at the beginning of the battle in Invasion and Expedition (no effect if there is no Vanguard hero)
+</String>
   <String Key="Post_Name_AltarGoldRefund">Refund of Altar Ember Expansion Cost</String>
   <String Key="Post_Desc_AltarGoldRefund">This is a refund of the Gold spent on expanding Ember at the Altars.</String>
   <String Key="OutgameTutorial_140_00">Greetings, King of the Castle. It's been a while. &lt;color=#FFC13D&gt;I am Knight Commander Aslyn.&lt;/color&gt;
@@ -15461,7 +15474,7 @@ Current refreshes: {3}</String>
   <String Key="SeasonInformation">Season Info</String>
   <String Key="SeasonInformationHelp_0">You can check the Chapter info for the Assault Summon Stone offered this season and the adjusted Hero stats.</String>
   <String Key="SeasonInformationHelp_1">Tap a Chapter icon to see the name of the Assault Summon Stone.</String>
-  <String Key="SeasonInformationHelp_2">In Hero Stats Adjustment, tap View All to see the stat adjustments for all Heroes.</String>
+  <String Key="SeasonInformationHelp_2">Tap View All in Hero Stats Adjustment to see all Heroes' current Damage Dealt and Absolute Defense Obtain Rate.</String>
   <String Key="InvadeSpawnItem">Assault Summon Stone</String>
   <String Key="SkillDesc_60505">When you get hit and become filled with rage, gain +{AttackSpeedPer}% Attack Speed and +{MoveSpeedPer}% Move Speed, and become immune to status effects.</String>
   <String Key="SkillDesc_60665">When you get hit and become filled with rage, gain +{AttackSpeedPer}% Attack Speed and +{MoveSpeedPer}% Move Speed, and become immune to status effects.</String>
@@ -16996,9 +17009,9 @@ Physical CRIT Damage up to +{5}% based on remaining duration
   <String Key="SubStoryChapterName_1_4">Cathy Nosferatu</String>
   <String Key="SubStoryChapterName_1_5">Roderick's Library</String>
   <String Key="SubStoryChapterName_1_6">Revenge</String>
-  <String Key="SubStoryChapterName_1_7">???</String>
-  <String Key="SubStoryChapterName_1_8">???</String>
-  <String Key="SubStoryChapterName_1_9">???</String>
+  <String Key="SubStoryChapterName_1_7">Frenzy</String>
+  <String Key="SubStoryChapterName_1_8">Where the Wine Belongs</String>
+  <String Key="SubStoryChapterName_1_9">Epilogue</String>
   <String Key="SubStoryChapterDesc_1">Born as the daughter of a Central noble house, Ophelia simply drifted through life, dancing in banquet halls and drinking wine. Even after her arranged marriage to Roderick, Lord of Frostwald, nothing changed. Then one day, after an Invasion, Ophelia is kidnapped to an unknown place.</String>
   <String Key="UnitName_10800">Cathy</String>
   <String Key="DimensionUnitSummon">Dimensional Summon</String>
@@ -17919,9 +17932,9 @@ After Battle starts, Obtain +{11}% Crowd control resistance and +{12}% Spell DEF
   <String Key="SkinDesc_Default_10800">&lt;i&gt;Born a Half-Vampire, Cathy grew up facing discrimination and abuse from members of the Nosferatu family. But instead of giving in to despair, Cathy works to build a world where many races can live together.&lt;/i&gt;</String>
   <String Key="SkillName_10800">Suppressed Instinct</String>
   <String Key="SkillDesc_10800_Short">Grants self Revive. When revived, transforms into a vampire form and gains stronger skills and stats.</String>
-  <String Key="SkillDesc_10800_Long">Grants self 1 Revive with {Unit@ReviveHpPer}% Max HP. When revived, goes out of control for {10805@TransformTime} sec., transforms into a vampire form with HP {Unit@TransformHpForDesc}, DEF +{108000@BaseDef}, and Spell HP Drain +{108000@MagicDrain}%, appears where she can hit the most enemies, and Terrorizes enemies in a {10815@SplashRangeX}{X}{10815@SplashRangeY} area for {10815@FearTime} sec. Revives granted by this skill do not Stack.</String>
+  <String Key="SkillDesc_10800_Long">Grants self 1 Revive with {Unit@ReviveHpPer}% max HP. Upon Revive, enters a Frenzy for {10805@TransformTime} sec., Transforms into a Vampire form with {Unit@TransformHpForDesc}% HP, +{108000@BaseDef} DEF, and +{108000@MagicDrain}% Spell HP Drain, then descends to the position where it can hit the most enemies and Terrorizes enemies in {10815@SplashRangeX}{X}{10815@SplashRangeY} for {10815@FearTime} sec. Revive from this Skill does not Stack.</String>
   <String Key="SkillDesc_10800_Short_2">Grants self Revive. When revived, transforms into a vampire form and gains stronger skills and stats.</String>
-  <String Key="SkillDesc_10800_Long_2">Grants self 1 Revive with {Unit@ReviveHpPer}% Max HP. When revived, goes out of control for {10805@TransformTime} sec., transforms into a vampire form with HP {Unit@TransformHpForDesc}, DEF +{108000@BaseDef}, and Spell HP Drain +{108000@MagicDrain}%, appears where she can hit the most enemies, and Terrorizes enemies in a {10815@SplashRangeX}{X}{10815@SplashRangeY} area for {10815@FearTime} sec. Each time she transforms, the vampire form's Final Max HP increases by +{10800@Unit10800AI_TotalHpPer}%. Revives granted by this skill do not Stack.</String>
+  <String Key="SkillDesc_10800_Long_2">Grants self 1 Revive with {Unit@ReviveHpPer}% max HP. Upon Revive, enters a Frenzy for {10805@TransformTime} sec., Transforms into a Vampire form with {Unit@TransformHpForDesc}% HP, +{108000@BaseDef} DEF, and +{108000@MagicDrain}% Spell HP Drain, then descends to the position where it can hit the most enemies and Terrorizes enemies in {10815@SplashRangeX}{X}{10815@SplashRangeY} for {10815@FearTime} sec. Each time it Transforms, the Vampire form's Final max HP increases by +{10800@Unit10800AI_TotalHpPer}%. Revive from this Skill does not Stack.</String>
   <String Key="ActiveSkillName_10800">Awakening</String>
   <String Key="ActiveSkillDesc_10800">At the start of the next Battle, all Half-Vampire Cathys gain Crowd control immunity.</String>
   <String Key="ActiveSkillDesc_10803">At the start of the next Battle, all Half-Vampire Cathys gain {0} Revives and Crowd control immunity.</String>
@@ -17961,51 +17974,325 @@ After Battle starts, Obtain +{11}% Crowd control resistance and +{12}% Spell DEF
   <String Key="SkinDesc_107100401">&lt;i&gt;Reward for placing in the Ranking of the League of Warmth in Battle&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Morning Star King Farael</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;The noblest starlight born in the early dawn will become the brightest light to break through the darkness.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Obtain Mighty Block</String>
+  <String Key="SuperShieldModulator">Absolute Defense Chance</String>
   <String Key="BuildingEffect_BaseDamageReflect">+{Value}% Reflect damage
 (halved for spell damage)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">Hero reflects damage based on a percentage of incoming damage.</String>
-  <String Key="TreasureName_30042">Perataus</String>
+  <String Key="TreasureName_30042">Ferataus</String>
   <String Key="TreasureSubName_30042">Pitch-Black Shield</String>
-  <String Key="TreasureDesc_30042">Behemus's Shield is not just for defense. Behemus's Fierce Charge with his massive Shield can crumple even the strongest armor in an instant.</String>
+  <String Key="TreasureDesc_30042">Behemus' shield is not just for defense. Behemus' Fierce Charge with his massive shield can crush even the toughest armor in an instant.</String>
   <String Key="TreasureSkillName_30042">Plunge</String>
-  <String Key="BuffDataName_3300421">Shatter I</String>
-  <String Key="BuffDataName_3300422">Dent I</String>
-  <String Key="BuffDataName_3300423">Neutralization</String>
-  <String Key="BuffDataName_3300424">Dent II</String>
-  <String Key="BuffDataName_3300425">Shatter II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Perataus Pickup Special Shop</String>
-  <String Key="SpecialPackage_1680">Perataus Package 1</String>
-  <String Key="SpecialPackage_1681">Perataus Package 2</String>
-  <String Key="SpecialPackage_1682">Perataus Package 3</String>
-  <String Key="BuffDataDesc_3300421">Damage transfer +{1}x for every {0} Menace</String>
-  <String Key="BuffDataDesc_3300422">Physical damage taken by enemies with Unstable +{0}%</String>
-  <String Key="BuffDataDesc_3300423">Whenever Unstable is removed, all allies Obtain +{0} Mighty Block for each enemy it is removed from</String>
-  <String Key="BuffDataDesc_3300424">Physical damage taken by enemies with Unstable +{0}%</String>
-  <String Key="BuffDataDesc_3300425">Damage transfer +{1}x for every {0} Menace</String>
-  <String Key="TreasureSkillDesc_3300420">When you deal Skill damage to an enemy, apply Unstable to the target
-If an ally deals Physical damage equal to at least {0}% of the target's max HP to an enemy with Unstable, {1}% of that damage is transferred as Special damage to another enemy with Unstable, then Unstable is removed from all enemies
-&lt;color=#808080&gt;&lt;i&gt;This effect is shared even if different Heroes apply Unstable.&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300421">When you deal Skill damage to an enemy, apply Unstable to the target
-If an ally deals Physical damage equal to at least {0}% of the target's max HP to an enemy with Unstable, {1}% of that damage is transferred as Special damage to another enemy with Unstable, then Unstable is removed from all enemies
-Damage transfer +{3}x for every {2} Menace
-&lt;color=#808080&gt;&lt;i&gt;This effect is shared even if different Heroes apply Unstable.&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300422">When you deal Skill damage to an enemy, apply Unstable to the target
-If an ally deals Physical damage equal to at least {0}% of the target's max HP to an enemy with Unstable, {1}% of that damage is transferred as Special damage to another enemy with Unstable, then Unstable is removed from all enemies
-Damage transfer +{3}x for every {2} Menace
-Physical damage taken by enemies with Unstable +{4}%
-This increase to Physical damage taken does not Stack. Only the highest value applies
-&lt;color=#808080&gt;&lt;i&gt;This effect is shared even if different Heroes apply Unstable.&lt;/i&gt;&lt;/color&gt;</String>
-  <String Key="TreasureSkillDesc_3300423">When you deal Skill damage to an enemy, apply Unstable to the target
-If an ally deals Physical damage equal to at least {0}% of the target's max HP to an enemy with Unstable, {1}% of that damage is transferred as Special damage to another enemy with Unstable, then Unstable is removed from all enemies
-Damage transfer +{3}x for every {2} Menace
-Physical damage taken by enemies with Unstable +{4}%
-This increase to Physical damage taken does not Stack. Only the highest value applies
-Whenever Unstable is removed, all allies Obtain +{5} Mighty Block for each enemy it is removed from
-&lt;color=#808080&gt;&lt;i&gt;This effect is shared even if different Heroes apply Unstable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="BuffDataName_3300421">Suppression I</String>
+  <String Key="BuffDataName_3300422">Enfeeblement I</String>
+  <String Key="BuffDataName_3300423">Shatter</String>
+  <String Key="BuffDataName_3300424">Enfeeblement II</String>
+  <String Key="BuffDataName_3300425">Suppression II</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Ferataus Pickup Special Shop</String>
+  <String Key="SpecialPackage_1680">Ferataus Package 1</String>
+  <String Key="SpecialPackage_1681">Ferataus Package 2</String>
+  <String Key="SpecialPackage_1682">Ferataus Package 3</String>
+  <String Key="BuffDataDesc_3300421">Damage transfer +{1}x per {0} Menace</String>
+  <String Key="BuffDataDesc_3300422">When Unstable is removed, the target is Stunned for {0} sec.</String>
+  <String Key="BuffDataDesc_3300423">Physical damage Taken by Unstable enemies +{0}% (Increases to Physical damage Taken do not Stack. Only the highest value applies)</String>
+  <String Key="BuffDataDesc_3300424">When Unstable is removed, the target is Stunned for {0} sec.</String>
+  <String Key="BuffDataDesc_3300425">Damage transfer +{1}x per {0} Menace</String>
+  <String Key="TreasureSkillDesc_3300420">When dealing Skill damage to an enemy, inflicts Unstable on the target
+If an ally deals Physical damage equal to at least {0}% of the target's max HP, excluding Protection, to an Unstable enemy in a single hit, {1}% of the damage is transferred to other Unstable enemies as Special damage, then Unstable is removed from all targets
+&lt;color=#808080&gt;&lt;i&gt;The effect is shared even if different Heroes inflict Unstable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300421">When dealing Skill damage to an enemy, inflicts Unstable on the target
+If an ally deals Physical damage equal to at least {0}% of the target's max HP, excluding Protection, to an Unstable enemy in a single hit, {1}% of the damage is transferred to other Unstable enemies as Special damage, then Unstable is removed from all targets
+Damage transfer +{3}x per {2} Menace
+&lt;color=#808080&gt;&lt;i&gt;The effect is shared even if different Heroes inflict Unstable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300422">When dealing Skill damage to an enemy, inflicts Unstable on the target
+If an ally deals Physical damage equal to at least {0}% of the target's max HP, excluding Protection, to an Unstable enemy in a single hit, {1}% of the damage is transferred to other Unstable enemies as Special damage, then Unstable is removed from all targets
+Damage transfer +{3}x per {2} Menace
+When Unstable is removed, the target is Stunned for {4} sec.
+&lt;color=#808080&gt;&lt;i&gt;The effect is shared even if different Heroes inflict Unstable.&lt;/i&gt;&lt;/color&gt;</String>
+  <String Key="TreasureSkillDesc_3300423">When dealing Skill damage to an enemy, inflicts Unstable on the target
+If an ally deals Physical damage equal to at least {0}% of the target's max HP, excluding Protection, to an Unstable enemy in a single hit, {1}% of the damage is transferred to other Unstable enemies as Special damage, then Unstable is removed from all targets
+Damage transfer +{3}x per {2} Menace
+When Unstable is removed, the target is Stunned for {4} sec.
+Physical damage Taken by Unstable enemies +{5}%
+Increases to Physical damage Taken do not Stack. Only the highest value applies
+&lt;color=#808080&gt;&lt;i&gt;The effect is shared even if different Heroes inflict Unstable.&lt;/i&gt;&lt;/color&gt;</String>
   <String Key="SpecialShop_TreasureDoublePickUp10014">Legacy Pickup Special Shop</String>
   <String Key="SpecialPackage_1676">Legacy Pickup Summoning Stone Package 1</String>
   <String Key="SpecialPackage_1677">Legacy Pickup Summoning Stone Package 2</String>
   <String Key="SpecialPackage_1678">Caelus Package</String>
   <String Key="SpecialPackage_1679">Trickster Package</String>
+  <String Key="CannotSummonByWatchingAdsWhileInBattleAlert">Not available during Battle.</String>
+  <String Key="AdsReroll">Free Reroll</String>
+  <String Key="AdsDeckSet">Free Formation Reset</String>
+  <String Key="ResetPVPMatch">Reset</String>
+  <String Key="CannotResetPVPMatchByWatchingAdsAlert">You have used all reset chances for today.</String>
+  <String Key="PVPDeckSettingReTryAdsPopupTitle">Formation Retry</String>
+  <String Key="PVPDeckSettingReTryAdsPopupDesc">Would you like to watch an ad and Retry for free?
+Purchasing the King God Pass removes in-game ads.
+If you choose to use Gems, today's free ad Retry will not be available.</String>
+  <String Key="PVPDeckSettingReTryAdsCancelAlert">Closing this will cancel the free ad Retry. Cancel Retry?</String>
+  <String Key="SuperShieldAdaptabilityPer">Altar of Blood {0} Enhance
+Absolute Defense Chance +{1}%</String>
+  <String Key="SuperShieldAdaptabilityPer_Piece">Altar of Blood Enhance
+Absolute Defense Chance Increased</String>
+  <String Key="SkillDesc_1019000_Short">Plunges at the nearest enemy, dealing {Damage:BaseValue}+{Damage:MAtkPer} damage in {SplashRangeX}{X}{SplashRangeY} and knocking targets back {Knockback} tiles.</String>
+  <String Key="SkillDesc_1019001_Short">Plunges at the nearest enemy, dealing {Damage:BaseValue}+{Damage:MAtkPer} damage in nearby {SplashRangeSum} tiles and knocking targets back {Knockback} tiles.</String>
+  <String Key="SkillDesc_1019000_Long">Plunges in front of the nearest enemy within {RangeX}{X}{RangeY}, using the power of a massive shield to deal {Damage:BaseValue}+{Damage:MAtkPer} damage to all enemies in {SplashRangeX}{X}{SplashRangeY} and knock them back {Knockback} tiles.</String>
+  <String Key="SkillDesc_1019001_Long">Plunges in front of the nearest enemy within {RangeX}{X}{RangeY}, using the power of a massive shield to deal {Damage:BaseValue}+{Damage:MAtkPer} damage to all enemies in nearby {SplashRangeSum} tiles and knock them back {Knockback} tiles.</String>
+  <String Key="ChallengeBossDesc_72">Has a &lt;color=#8DFFFF&gt;1x1&lt;/color&gt; targetable tile and a size of &lt;color=#8DFFFF&gt;3x3&lt;/color&gt; tiles.</String>
+  <String Key="SkillName_30000051">Hardening</String>
+  <String Key="SkillDesc_30000051">Used immediately at the start of Battle. The boss's Menace increases by &lt;color=#ffd264&gt;Challenge DifficultyX&lt;/color&gt;{DescDefPen}, and damage Taken not caused by Reflect/Counter decreases by &lt;color=#ffd264&gt;Challenge DifficultyX&lt;/color&gt;{DescReflectDef}%. At Challenge Difficulty 20 or higher, DEF also increases by {DescDef} per difficulty.</String>
+  <String Key="SkillName_30000052">Discharge</String>
+  <String Key="SkillDesc_30000052">Deals a total of {DescDamage} damage to Heroes in {SplashRangeX}{X}{SplashRangeY} over {DescAttackTime} sec.</String>
+  <String Key="SkillName_30000053">Annihilation</String>
+  <String Key="SkillDesc_30000053">Deals {Damage} Physical Skill damage to all enemies. At Challenge Difficulty 10 or lower, deals damage equal to {MaxDamage:HpPer:BaseValue}% of the boss's max HP instead. Ignores {DefBreak}% DEF.</String>
+  <String Key="StoryClearBenefit_430072000">Inventory - Shield of Vengeance Obtained
+
+&lt;i&gt;Shield of Vengeance: Obtain Reflect damage&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072001">Inventory - Necklace of Elpis Obtained
+
+&lt;i&gt;Necklace of Elpis: Obtain Revive some time after Battle starts&lt;/i&gt;</String>
+  <String Key="StoryClearBenefit_430072002">In Boss Stage, Item - Staff of Healing Obtained
+
+&lt;i&gt;Staff of Healing: Final Damage Dealt reduced, Final healing increased&lt;/i&gt;</String>
+  <String Key="ItemName_60030">Staff of Healing</String>
+  <String Key="ItemDesc_60030">Final Damage Dealt {0}%, Final healing +{1}%</String>
+  <String Key="StoryInventoryItemName_230100">Shield of Vengeance</String>
+  <String Key="StoryInventoryItemDesc_230100">Reflect damage +{0}% (Spell damage halved)</String>
+  <String Key="StoryInventoryItemName_230110">Necklace of Elpis</String>
+  <String Key="StoryInventoryItemDesc_230110">Grants all allies Revive {1} time(s) {0} sec. after Battle starts</String>
+  <String Key="StoryModeDialogue_2010700_0_0_System">Ophelia's dominion troops, allied with the Red Moon, march to the border with Nosferatu.</String>
+  <String Key="StoryModeDialogue_2010700_0_1_System">Vlad staggers and looks at Ophelia from afar. His eyes glow bright red.</String>
+  <String Key="StoryModeDialogue_2010700_0_2_System">A fierce black aura surrounds him.</String>
+  <String Key="StoryModeDialogue_2010700_0_3_Vlad">Lady Ophelia, it brings me great joy to see you again like this.</String>
+  <String Key="StoryModeDialogue_2010700_0_4_Vlad">Or should I call you ruler now? That beauty has not faded at all.</String>
+  <String Key="StoryModeDialogue_2010700_0_5_Vlad">Tell me, is it worth living on as a human? Have you not grown tired of dying?</String>
+  <String Key="StoryModeDialogue_2010700_0_6_Vlad">It is not too late to become my family...</String>
+  <String Key="StoryModeDialogue_2010700_1_0_System">Meanwhile, Cathy also prepares to depart. Outside the study window, the flag of the Red Moon rises into view.</String>
+  <String Key="StoryModeDialogue_2010700_1_1_Cathy">Since the former lord's wife became the new ruler, I sent several letters and asked to meet, but nothing came back.</String>
+  <String Key="StoryModeDialogue_2010700_1_2_Cathy">I cannot even enter Frostwald anymore. So this is how it ends...</String>
+  <String Key="StoryModeDialogue_2010700_1_3_Cathy">If Vlad dies, this will not end as a border issue.</String>
+  <String Key="StoryModeDialogue_2010700_1_4_Cathy">The main force of Nosferatu will use the excuse that 'a human murdered a noble of the house' to carry out political retaliation, and that will become a full-scale war between nations.</String>
+  <String Key="StoryModeDialogue_2010700_1_6_Cathy">Now there is only one thing I can do.... I go there myself, clean this up, and meet the new ruler. That is the only way left.</String>
+  <String Key="StoryModeDialogue_2010700_2_0_System">Ophelia's troop.</String>
+  <String Key="StoryModeDialogue_2010700_2_1_System">From the rear, Ophelia commands the troops, while Neria leads the charge with her crossbow, cutting through the battlefield toward Vlad Moren's manor.</String>
+  <String Key="StoryModeDialogue_2010700_2_2_Solar">Lady Ophelia, behind you!</String>
+  <String Key="StoryModeDialogue_2010700_2_3_Solar">Ugh... Ah, that really hurts.</String>
+  <String Key="StoryModeDialogue_2010700_2_4_Ophelia">Sola! Medic! Treat her!</String>
+  <String Key="StoryModeDialogue_2010700_2_5_Solar">I am okay. I think I have lived a happy enough life! I will keep cheering you on....</String>
+  <String Key="StoryModeDialogue_2010700_2_6_System">Ophelia knew that war always came with blood and death.</String>
+  <String Key="StoryModeDialogue_2010700_2_7_System">For 3 months, she studied and studied again. But knowing and facing it herself were different.</String>
+  <String Key="StoryModeDialogue_2010700_2_8_System">She had only known Sola for a few months, but the thought of losing her made her blood boil.</String>
+  <String Key="StoryModeDialogue_2010700_2_9_System">And besides, was this battle not her own decision?</String>
+  <String Key="StoryModeDialogue_2010700_2_10_System">Ophelia's eyes find Neria in the middle of battle.</String>
+  <String Key="StoryModeDialogue_2010700_2_11_System">Without even checking on her comrades' safety, she had gone deep into the battlefield alone.</String>
+  <String Key="StoryModeDialogue_2010700_2_12_System">Dancing with wild laughter as she slaughtered Vampires, she looked little different from Vlad Moren, who once craved blood.</String>
+  <String Key="StoryModeDialogue_2010700_2_13_Solar">...Lady Ophelia. Hehe, I... am not dead.</String>
+  <String Key="StoryModeDialogue_2010700_2_14_Ophelia">Ah, Sola, thank goodness. Truly, thank goodness.</String>
+  <String Key="StoryModeDialogue_2010700_2_14b_Ophelia">Do not move at all. You do not have to speak anymore.</String>
+  <String Key="StoryModeDialogue_2010700_2_15_System">Sola is handed over to the medics. Ophelia lets go of Sola's hand and stands up.</String>
+  <String Key="StoryModeDialogue_2010700_2_16_Ophelia">(To keep losses to a minimum, I will end this battle quickly and efficiently.)</String>
+  <String Key="StoryModeDialogue_2010700_2_17_Ophelia">All troops, advance.</String>
+  <String Key="StoryModeDialogue_2010700_3_0_System">Meanwhile, Neria races across the battlefield alone and begins a battle, no, a massacre.</String>
+  <String Key="StoryModeDialogue_2010700_3_1_System">A smile slowly spreads across Neria's face.</String>
+  <String Key="StoryModeDialogue_2010700_3_2_Neria">Ah... Nothing sounds better than the screams of Vampires.</String>
+  <String Key="StoryModeDialogue_2010700_3_3_Neria">That is your only worth. Ahahahahaha!</String>
+  <String Key="StoryModeDialogue_2010700_3_4_RedMoon1">Lady Neria! Lady Sola was badly wounded and has retreated!</String>
+  <String Key="StoryModeDialogue_2010700_3_5_Neria">I see.</String>
+  <String Key="StoryModeDialogue_2010700_3_6_System">Neria continues the battle and meets Cathy, who is pushing forward while stunning Frostwald's troops.</String>
+  <String Key="StoryModeDialogue_2010700_3_7a_Cathy">Neria! How are you going to fix this?!</String>
+  <String Key="StoryModeDialogue_2010700_3_7b_Cathy">This is war now! I cannot stop it either!</String>
+  <String Key="StoryModeDialogue_2010700_3_8_Ophelia">Is that Alessia Nosferatu, Neria?</String>
+  <String Key="StoryModeDialogue_2010700_3_9a_Neria">Fix it? That no longer matters.</String>
+  <String Key="StoryModeDialogue_2010700_3_9b_Neria">Half of a filthy vampire's blood flows in you too. I will kill that half.</String>
+  <String Key="StoryModeDialogue_2010700_3_10_Ophelia">It does matter! Vlad Moren is my only target. I do not want more harm.</String>
+  <String Key="StoryModeDialogue_2010700_3_11_Neria">Ophelia. The one over there is Vlad Moren's superior. She is our enemy.</String>
+  <String Key="StoryModeDialogue_2010700_3_12_Cathy">Hey, you! You are Lady Ophelia, right? Talk with me for a moment.</String>
+  <String Key="StoryModeDialogue_2010700_3_13_Neria">You do not need to listen to that woman.</String>
+  <String Key="StoryModeDialogue_2010700_3_14_Ophelia">I will listen and decide for myself!</String>
+  <String Key="StoryModeDialogue_2010700_3_15_Cathy">Right! Stopping the war comes first.</String>
+  <String Key="StoryModeDialogue_2010700_3_16_System">However, despite Cathy's efforts, Vlad appears right before Ophelia's eyes.</String>
+  <String Key="StoryModeDialogue_2010700_3_17_System">The black aura around Vlad pours out, darker and denser than before.</String>
+  <String Key="StoryModeDialogue_2010800_0_0_Vlad">I held myself back for years to make peace with humans.</String>
+  <String Key="StoryModeDialogue_2010800_0_1_Vlad">They said I had caused great trouble, so I did nothing for months and kept my family in check as well.</String>
+  <String Key="StoryModeDialogue_2010800_0_2_Vlad">And yet! Everything is falling apart, and I can hear my family's screams.</String>
+  <String Key="StoryModeDialogue_2010800_0_3_Vlad">I will endure no more. Nothing can stop me now!</String>
+  <String Key="StoryModeDialogue_2010800_0_4_Ophelia">Is that... really Vlad Moren?</String>
+  <String Key="StoryModeDialogue_2010800_0_5_Neria">That is a vampire's true form. A monster devoured by blood that destroys and kills everything!</String>
+  <String Key="StoryModeDialogue_2010800_0_6_Cathy">......Vlad. What happened to you?</String>
+  <String Key="StoryModeDialogue_2010800_0_7_Vlad">This ugly, ugly world. I will destroy everything!</String>
+  <String Key="StoryModeDialogue_2010800_0_8_System">Vlad drops to his knees. The black aura slowly fades, and his old gaze returns.</String>
+  <String Key="StoryModeDialogue_2010800_0_9_Vlad">Cathy... my lady...</String>
+  <String Key="StoryModeDialogue_2010800_0_10_Cathy">Vlad.</String>
+  <String Key="StoryModeDialogue_2010800_0_11_Cathy">...I'm sorry.</String>
+  <String Key="StoryModeDialogue_2010800_0_12_System">Cathy shouts so loudly that the whole battlefield can hear.</String>
+  <String Key="StoryModeDialogue_2010800_0_13_Cathy">I am Alessia Nosferatu!</String>
+  <String Key="StoryModeDialogue_2010800_0_13b_Cathy">As a member of House Nosferatu, I personally struck down the rampaging Vlad Moren.</String>
+  <String Key="StoryModeDialogue_2010800_0_14_Cathy">The cause of all this was Vlad Moren's personal rampage alone, and now that Vlad Moren is dead, there is no need for more battle or Sacrifice!</String>
+  <String Key="StoryModeDialogue_2010800_0_15_Cathy">Vampires under Vlad Moren's command, I order you in the name of Nosferatu!</String>
+  <String Key="StoryModeDialogue_2010800_0_15b_Cathy">End the battle and withdraw!</String>
+  <String Key="StoryModeDialogue_2010800_0_16_Cathy">Ophelia, please hurry and stop any more meaningless Sacrifice as well.</String>
+  <String Key="StoryModeDialogue_2010800_0_17_Ophelia">All Frostwald forces! Cease battle and retreat! Carry the wounded and the dead!</String>
+  <String Key="StoryModeDialogue_2010800_0_18_Neria">It cannot end like this. Red Moon...</String>
+  <String Key="StoryModeDialogue_2010800_0_19_Ophelia">Neria. Are you truly doing this for the people of the Dominion?</String>
+  <String Key="StoryModeDialogue_2010800_0_19b_Ophelia">Looking at your face, it seems you are simply enjoying the bloodshed.</String>
+  <String Key="StoryModeDialogue_2010800_0_20_Neria">Me? How is punishing vampires bloodshed? It is no different from killing bugs...</String>
+  <String Key="StoryModeDialogue_2010800_0_21_Cathy">That is very unpleasant for a vampire to hear. Neria, please leave now. Before I lose my temper.</String>
+  <String Key="StoryModeDialogue_2010800_0_22_Neria">... Red Moon. Withdraw!</String>
+  <String Key="StoryModeDialogue_2010800_1_0_Cathy">Ophelia, my name is Alessia Nosferatu.</String>
+  <String Key="StoryModeDialogue_2010800_1_1a_Cathy">As for Roderick Frostwald's death... I have no words.</String>
+  <String Key="StoryModeDialogue_2010800_1_1b_Cathy">I am sorry. Much of the blame is mine.</String>
+  <String Key="StoryModeDialogue_2010800_1_2_Cathy">But to be honest, I want to stop the war between vampires and humans, and from now on I want to stop further Sacrifice on both sides.</String>
+  <String Key="StoryModeDialogue_2010800_1_3_Ophelia">Alessia Nosferatu, I read every letter you sent.</String>
+  <String Key="StoryModeDialogue_2010800_1_4_Ophelia">The situation simply did not allow me to give a positive reply.</String>
+  <String Key="StoryModeDialogue_2010800_1_5_Ophelia">I also wish to stop further Sacrifice.</String>
+  <String Key="StoryModeDialogue_2010800_1_5b_Ophelia">I will send an official letter later.</String>
+  <String Key="StoryModeDialogue_2010800_1_6_Cathy">Then I will go first.</String>
+  <String Key="StoryModeDialogue_2010800_1_7_System">Cathy turns away, giving Neria a brief glare.</String>
+  <String Key="StoryModeDialogue_2010800_1_8_System">After everyone leaves, all that remains for Ophelia is emptiness.</String>
+  <String Key="StoryModeDialogue_2010800_2_0_Ophelia">Roderick. My heart feels empty.</String>
+  <String Key="StoryModeDialogue_2010800_2_1_Ophelia">When I was on the Central Continent, I thought my role was simply to be a beautiful noble lady, and I never questioned it.</String>
+  <String Key="StoryModeDialogue_2010800_2_2_Ophelia">Even when I came to the North for a political marriage, it was cold and there were no banquets, but I simply accepted it.</String>
+  <String Key="StoryModeDialogue_2010800_2_3_Ophelia">Even when I was kidnapped, I was completely charmed by a vampire.</String>
+  <String Key="StoryModeDialogue_2010800_2_4_Ophelia">This time, for the first time, I insisted on my own will and got revenge for Roderick.</String>
+  <String Key="StoryModeDialogue_2010800_2_4b_Ophelia">How was it? Did I do well?</String>
+  <String Key="StoryModeDialogue_2010800_2_5_Ophelia">...</String>
+  <String Key="StoryModeDialogue_2010800_2_6_Ophelia">This may sound strange, but when I saw Vlad fall, my heart ached.</String>
+  <String Key="StoryModeDialogue_2010800_2_7_Ophelia">He was the one who killed Roderick. He was the one who tried to make me his prey.</String>
+  <String Key="StoryModeDialogue_2010800_2_8_Ophelia">But the way he was at the banquet... that was real. It was not all a lie.</String>
+  <String Key="StoryModeDialogue_2010800_2_9_Ophelia">He was a bad man, but perhaps he was only sick with obsession and impulse, and that narrowed his sight... just like Neria.</String>
+  <String Key="StoryModeDialogue_2010800_2_11_Ophelia">...Thank you, Roderick. I have decided to follow in your footsteps.</String>
+  <String Key="StoryModeDialogue_2010800_2_12_Ophelia">From now on, I want to become a ruler who protects the people of the Dominion by my own choices, without being swayed by others.</String>
+  <String Key="StoryModeDialogue_2010800_2_13_Ophelia">I will do my best. Please keep watching over me and help me.</String>
+  <String Key="StoryModeDialogue_2010800_3_0_System">Ophelia steps closer to Vlad's body to mourn him. A dark red gem is found where Vlad fell.</String>
+  <String Key="StoryModeDialogue_2010800_3_1_Ophelia">What is this...?</String>
+  <String Key="StoryModeDialogue_2010800_3_2_Ophelia">(I feel sick.)</String>
+  <String Key="StoryModeDialogue_2010800_3_3_Ophelia">Roderick. This really is... that, isn't it?</String>
+  <String Key="StoryModeDialogue_2010800_3_4_System">Vlad Moren, who had long ruled the Nosferatu border, has died.</String>
+  <String Key="StoryModeDialogue_2010800_3_5_System">By reporting to the Nosferatu headquarters that Vlad Moren had rampaged on his own and that she had personally struck him down, Cathy prevents a Full-Scale Battle.</String>
+  <String Key="StoryModeDialogue_2010800_3_6_System">Questions about Alessia Nosferatu's lack of ability as an administrator came to the fore, and her political standing grew even weaker.</String>
+  <String Key="StoryModeDialogue_2010800_3_7_System">As long as humans and vampires live together, conflict will not end here.</String>
+  <String Key="StoryModeDialogue_2010900_0_0_System">A few days later, in Ophelia's reception room.</String>
+  <String Key="StoryModeDialogue_2010900_0_1_System">A dark red gem rests on the table.</String>
+  <String Key="StoryModeDialogue_2010900_0_2_Ophelia">Do you know anything about this gem?</String>
+  <String Key="StoryModeDialogue_2010900_0_3_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_4_Ophelia">As you surely know, this gem is called the 'Star of Twilight'.</String>
+  <String Key="StoryModeDialogue_2010900_0_5_Ophelia">It comes from the South, and there are rumors that it corrupts the heart of its holder.</String>
+  <String Key="StoryModeDialogue_2010900_0_6_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_7_Ophelia">From here on, this is only my guess.</String>
+  <String Key="StoryModeDialogue_2010900_0_8_Ophelia">It is well known that Vlad Moren loved beautiful things, and especially collected costly gems.</String>
+  <String Key="StoryModeDialogue_2010900_0_9_Ophelia">Someone had it brought from the South, hoping the Star of Twilight would end up in his hands.</String>
+  <String Key="StoryModeDialogue_2010900_0_10_Ophelia">And because that person was secretly working with Alessia Nosferatu, Vlad Moren's superior,</String>
+  <String Key="StoryModeDialogue_2010900_0_10b_Ophelia">they could easily learn which black market Vlad Moren used most often.</String>
+  <String Key="StoryModeDialogue_2010900_0_11_Ophelia">Vlad Moren kept the Star of Twilight with him at all times,</String>
+  <String Key="StoryModeDialogue_2010900_0_11b_Ophelia">but its effect must have been more than simply corrupting the heart,</String>
+  <String Key="StoryModeDialogue_2010900_0_11c_Ophelia">it must have been able to drive a vampire's true nature out of control.</String>
+  <String Key="StoryModeDialogue_2010900_0_12_Ophelia">Why did Vlad Moren need to lose control?</String>
+  <String Key="StoryModeDialogue_2010900_0_13_Neria">...</String>
+  <String Key="StoryModeDialogue_2010900_0_14_Ophelia">You told Roderick that Alessia was involved in the kidnapping of the people of the Dominion.</String>
+  <String Key="StoryModeDialogue_2010900_0_15_Ophelia">And you claimed that the bodies of the people of the Dominion found in the south were the work of vampires.</String>
+  <String Key="StoryModeDialogue_2010900_0_16_Ophelia">Because of this, coexistence with vampires could not move forward.</String>
+  <String Key="StoryModeDialogue_2010900_0_17_Neria">I only spoke the truth.</String>
+  <String Key="StoryModeDialogue_2010900_0_18_Ophelia">Even when I was kidnapped, you pulled Roderick in and led him into a military attack. And when Roderick died, you pushed me toward revenge as well.</String>
+  <String Key="StoryModeDialogue_2010900_0_19_Ophelia">It seems like you want war itself.</String>
+  <String Key="StoryModeDialogue_2010900_0_20_Neria">......What I did was justice. Vampires must not exist.</String>
+  <String Key="StoryModeDialogue_2010900_0_21_Neria">Only you and Alessia cling to the illusion of coexistence.</String>
+  <String Key="StoryModeDialogue_2010900_0_21b_Neria">In the end, Roderick died because of that illusion too.</String>
+  <String Key="StoryModeDialogue_2010900_0_22_Neria">Whether I stirred discord or not, Vlad kidnapped the people of this Dominion and tried to eat you, Ophelia.</String>
+  <String Key="StoryModeDialogue_2010900_0_23_Neria">That is the nature of a vampire.</String>
+  <String Key="StoryModeDialogue_2010900_0_24_Ophelia">Sola... Is the Red Moon your family? Or just a means to an end?</String>
+  <String Key="StoryModeDialogue_2010900_0_25_Neria">We are comrades-in-arms.</String>
+  <String Key="StoryModeDialogue_2010900_0_26_Ophelia">…Alessia and I have decided to keep the balance of this place.</String>
+  <String Key="StoryModeDialogue_2010900_0_27_Neria">Do you trust that vampire?</String>
+  <String Key="StoryModeDialogue_2010900_0_28_Ophelia">More than you.</String>
+  <String Key="StoryModeDialogue_2010900_0_29_Neria">You can do nothing alone.</String>
+  <String Key="StoryModeDialogue_2010900_0_30_Neria">Vlad is dead, but Nosferatu still stands strong.</String>
+  <String Key="StoryModeDialogue_2010900_0_31_Neria">What will you do if they attack?</String>
+  <String Key="StoryModeDialogue_2010900_0_32_Ophelia">That is not for you to worry about.</String>
+  <String Key="StoryModeDialogue_2010900_0_33_Neria">You will regret this.</String>
+  <String Key="StoryModeDialogue_2010900_0_34_System">Neria gives one last glance and leaves the reception room. Ophelia watches her go.</String>
+  <String Key="StoryModeDialogue_2010900_1_0_System">Sola, wrapped in bandages, remains in the reception room. Ophelia sits in front of her.</String>
+  <String Key="StoryModeDialogue_2010900_1_1_Ophelia">Sola. Will you be all right, even if you do not come with us?</String>
+  <String Key="StoryModeDialogue_2010900_1_2_Solar">The old boss will be fine without me. And now there is a new boss, so it is all okay!</String>
+  <String Key="StoryModeDialogue_2010900_2_0_System">A few days later, as always, Ophelia sits in Roderick's chair in the study.</String>
+  <String Key="StoryModeDialogue_2010900_2_1_Ophelia">I have started talks with Alessia.</String>
+  <String Key="StoryModeDialogue_2010900_2_2_Ophelia">What Roderick meant to do, I will carry it on.</String>
+  <String Key="StoryModeDialogue_2010900_2_3_Ophelia">I drove Neria away.</String>
+  <String Key="StoryModeDialogue_2010900_2_4_Ophelia">I am also building up our Dominion army and expanding our alliances.</String>
+  <String Key="StoryModeDialogue_2010900_2_6_Ophelia">... Was this all right?</String>
+  <String Key="StoryModeDialogue_2010900_2_7_System">After that, Ophelia's name spread far and wide. The woman who expanded her Dominion, raised her army, and never stopped. People called her 'The Iron Lady'.</String>
+  <String Key="StoryModeDialogue_2010900_2_8_System">Sometimes, her retainers see Ophelia speaking kindly to the empty air in the vacant study.</String>
+  <String Key="StoryModeDialogue_2010900_2_9_System">The Iron Lady will remain broken and frozen for a long time, and harden from it.</String>
+  <String Key="StoryModeDialogue_2010700_2_2b_Ophelia">...!!!</String>
+  <String Key="WorldTriggerDesc_11100">Special Damage +{0}% per target Hero (max. 3 Stacks)</String>
+  <String Key="StoryFieldName_2010700">Nosferatu Border</String>
+  <String Key="StoryFieldName_2010800">Nosferatu Border</String>
+  <String Key="UnitName_20020750">Vlad Nosferatu</String>
+  <String Key="UnitName_20020600">Frostwald Soldier</String>
+  <String Key="StoryHint_420107000">Use Ophelia's Battle Start Skill to defend against the Gargoyle's attack.</String>
+  <String Key="StoryHint_420108000">Vlad's attacks keep Stunning allies. Use a Battle Start Skill that can counter Stun.</String>
+  <String Key="TreasureName_30043">Vitacorde</String>
+  <String Key="TreasureSubName_30043">Book of Sanctity</String>
+  <String Key="TreasureDesc_30043">Face the true heart within you.
+Then sanctity will help you.</String>
+  <String Key="TreasureSkillName_30043">Power of Life</String>
+  <String Key="BuffDataName_3300431">Divine Power I</String>
+  <String Key="BuffDataName_3300432">Cycle of Life I</String>
+  <String Key="BuffDataName_3300433">Holy Guard</String>
+  <String Key="BuffDataName_3300434">Cycle of Life II</String>
+  <String Key="BuffDataName_3300435">Divine Power II</String>
+  <String Key="SpecialShop_TreasurePickUp30043">Vitacorde Pickup Special Shop</String>
+  <String Key="SpecialPackage_1683">Vitacorde Package 1</String>
+  <String Key="SpecialPackage_1684">Vitacorde Package 2</String>
+  <String Key="SpecialPackage_1685">Vitacorde Package 3</String>
+  <String Key="BuffDataDesc_3300431">For every {0} Guard, Spell Power scaling of the base Damage increase effect +{1}%</String>
+  <String Key="BuffDataDesc_3300432">Cooldown {0}s</String>
+  <String Key="BuffDataDesc_3300433">Grants Benediction to all allies in the area except self</String>
+  <String Key="BuffDataDesc_3300434">Cooldown {0}s</String>
+  <String Key="BuffDataDesc_3300435">For every {0} Guard, Spell Power scaling of the base Damage increase effect +{1}%</String>
+  <String Key="TreasureSkillDesc_3300430">At Battle Start, only the effect of the highest-Tier Hero equipped with Vitacorde is applied
+Fix the wielder's Spell Power at its Battle Start value
+When healing an ally, creates an area for {0}s that increases the base Damage of allies within {1} Range of the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)</String>
+  <String Key="TreasureSkillDesc_3300431">At Battle Start, only the effect of the highest-Tier Hero equipped with Vitacorde is applied
+Fix the wielder's Spell Power at its Battle Start value
+When healing an ally, creates an area for {0}s that increases the base Damage of allies within {1} Range of the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
+For every {4} Guard, Spell Power scaling of the base Damage increase effect +{5}%</String>
+  <String Key="TreasureSkillDesc_3300433">At Battle Start, only the effect of the highest-Tier Hero equipped with Vitacorde is applied
+Fix the wielder's Spell Power at its Battle Start value
+When healing an ally, creates an area for {0}s that increases the base Damage of allies within {1} Range of the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
+For every {4} Guard, Spell Power scaling of the base Damage increase effect +{5}%
+Grants Benediction to allies in the area except the wielder</String>
+  <String Key="SeasonalEventName_Season72">Flying Dragon Festival</String>
+  <String Key="SeasonalEventMode_Season72">Flying Dragon Festival</String>
+  <String Key="TreasureName_50002">Cor Orbis</String>
+  <String Key="TreasureSubName_50002">Temporary Subtitle</String>
+  <String Key="TreasureDesc_50002">Temporary description - add more once the Legacy concept is set - planned concept: maybe some kind of stone? An artifact? that borrows MP from nearby plants and animals, stores it, then releases it</String>
+  <String Key="TreasureSkillName_50002">MP Combination</String>
+  <String Key="BuffDataName_3500021">Assimilation I</String>
+  <String Key="BuffDataName_3500022">MP Barrier I</String>
+  <String Key="BuffDataName_3500023">MP Resonance</String>
+  <String Key="BuffDataName_3500024">MP Barrier II</String>
+  <String Key="BuffDataName_3500025">Assimilation II</String>
+  <String Key="SpecialShop_TreasurePickUp50002">Cor Orbis Pickup Special Shop</String>
+  <String Key="SpecialPackage_1690">Cor Orbis Package 1</String>
+  <String Key="SpecialPackage_1691">Cor Orbis Package 2</String>
+  <String Key="SpecialPackage_1692">Cor Orbis Package 3</String>
+  <String Key="BuffDataDesc_3500021">For every {1}% Spell CRIT Damage above {0}%, Enhanced Skill Final Damage bonus x{2}</String>
+  <String Key="BuffDataDesc_3500022">Damage Taken {0}% until the 3rd skill use</String>
+  <String Key="BuffDataDesc_3500023">Upon using an Enhanced Skill, use the same skill {1} extra time(s) on a random target for {0}% Damage</String>
+  <String Key="BuffDataDesc_3500024">Damage Taken {0}% until the 3rd skill use</String>
+  <String Key="BuffDataDesc_3500025">For every {1}% Spell CRIT Damage above {0}%, Enhanced Skill Final Damage bonus x{2}</String>
+  <String Key="TreasureSkillDesc_3500020">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
+The last skill is Enhanced and its Final Damage is increased by +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
+The last skill is Enhanced and its Final Damage is increased by +{2}%
+For every {4}% Spell CRIT Damage above {3}%, Enhanced Skill Final Damage bonus x{5}</String>
+  <String Key="TreasureSkillDesc_3500022">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
+The last skill is Enhanced and its Final Damage is increased by +{2}%
+For every {4}% Spell CRIT Damage above {3}%, Enhanced Skill Final Damage bonus x{5}
+Damage Taken {6}% until the 3rd skill use</String>
+  <String Key="TreasureSkillDesc_3500023">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
+The last skill is Enhanced and its Final Damage is increased by +{2}%
+For every {4}% Spell CRIT Damage above {3}%, Enhanced Skill Final Damage bonus x{5}
+Damage Taken {6}% until the 3rd skill use
+Upon using an Enhanced Skill, use the same skill {8} extra time(s) on a random target for {7}% Damage</String>
 </Strings>

@@ -47,6 +47,16 @@ VERSIONS = {
              (0x596E9B4, "MobileTlsContext.ValidateCertificate")],
         anchors=[(0x2CB6E24, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
     ),
+    # Recovered by server/patchers/unpack_neo.py from the v172.0.00 packer
+    # (libbeniolle.so). All 3 prologues byte-identical to v171.1.00, so the
+    # method mapping is confirmed - only the offsets moved.
+    "172.0.00": dict(
+        src="libil2cpp_v172.so", dst="libil2cpp_v172_ssl.so",
+        ssl=[(0x2CB9FB4, "PinnedCertHandler.ValidateCertificate"),
+             (0x597A494, "UnityTlsProvider.ValidateCertificate"),
+             (0x5978BA4, "MobileTlsContext.ValidateCertificate")],
+        anchors=[(0x2CB9FB4, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
+    ),
 }
 
 VERSION = next((a for a in sys.argv[1:] if not a.startswith("-")), "171.1.00")

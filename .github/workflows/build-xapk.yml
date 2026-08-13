@@ -6,15 +6,15 @@ on:
       share_host:
         description: "Server host baked into the APK (IP or domain)"
         required: false
-        default: "kingbugcastle.id.vn"
+        default: "213.35.110.245"
       glogin_poll_host:
         description: "Host for native glogin poller (IP, bypasses Cloudflare). Defaults to share_host"
         required: false
-        default: ""
+        default: "213.35.110.245"
       tag:
-        description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v171.1.00); if it already exists a timestamp suffix is appended"
+        description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v172.0.00); if it already exists a timestamp suffix is appended"
         required: false
-        default: "v171.1.00"
+        default: "v172.0.00"
 
 jobs:
   build:
@@ -44,21 +44,21 @@ jobs:
         run: |
           pip install -r server/requirements.txt
 
-      - name: Ensure Base XAPK source (v171.1.00)
+      - name: Ensure Base XAPK source (v172.0.00)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ ! -f apk/xapk_extracted_v1711/com.awesomepiece.castle.apk ]; then
-            echo "Base XAPK source missing, downloading from release v171.1.00..."
-            mkdir -p apk/xapk_extracted_v1711
-            gh release download v171.1.00 --pattern "*.xapk" --dir /tmp/base_xapk --repo "$GITHUB_REPOSITORY"
-            unzip -o -q /tmp/base_xapk/*.xapk -d apk/xapk_extracted_v1711/
+          if [ ! -f apk/xapk_extracted_v1720/com.awesomepiece.castle.apk ]; then
+            echo "Base XAPK source missing, downloading from release stock-v172.0.00..."
+            mkdir -p apk/xapk_extracted_v1720
+            gh release download stock-v172.0.00 --pattern "*.xapk" --dir /tmp/base_xapk --repo "$GITHUB_REPOSITORY"
+            unzip -o -q /tmp/base_xapk/*.xapk -d apk/xapk_extracted_v1720/
             rm -rf /tmp/base_xapk
           fi
-          test -f apk/xapk_extracted_v1711/com.awesomepiece.castle.apk
-          test -f apk/xapk_extracted_v1711/config.arm64_v8a.apk
-          test -f apk/xapk_extracted_v1711/base_assets.apk
-          test -f apk/xapk_extracted_v1711/manifest.json
+          test -f apk/xapk_extracted_v1720/com.awesomepiece.castle.apk
+          test -f apk/xapk_extracted_v1720/config.arm64_v8a.apk
+          test -f apk/xapk_extracted_v1720/base_assets.apk
+          test -f apk/xapk_extracted_v1720/manifest.json
 
       - name: Setup Keystore
         run: |
@@ -71,19 +71,19 @@ jobs:
         env:
           SHARE_HOST: ${{ github.event.inputs.share_host }}
           GLOGIN_POLL_HOST: ${{ github.event.inputs.glogin_poll_host }}
-          KGC_APK_SRC: xapk_extracted_v1711
+          KGC_APK_SRC: xapk_extracted_v1720
         run: |
-          python3 server/build_v171_private.py --share
+          python3 server/builders/build_v171_private.py --share
 
       - name: Resolve Version
         run: |
           TAG="${{ github.event.inputs.tag }}"
-          [ -z "$TAG" ] && TAG="v171.1.00"
+          [ -z "$TAG" ] && TAG="v172.0.00"
           echo "TAG=$TAG" >> "$GITHUB_ENV"
 
       - name: Prepare Release Asset
         run: |
-          cp KingBugCastle_v171.xapk "KingBugCastle_${TAG}.xapk"
+          cp KingBugCastle_172.0.00.xapk "KingBugCastle_${TAG}.xapk"
           ls -lh "KingBugCastle_${TAG}.xapk"
 
       - name: Upload Artifact
@@ -100,12 +100,12 @@ jobs:
           cat > notes.md <<EOF
           ## King Bug Castle — Private-Server Client
 
-          Custom client (v171.1.00, arm64) for the King Bug Castle private-server project: the
-          original King God Castle v171.1.00 game with compatibility patches so it connects to a
+          Custom client (v172.0.00, arm64) for the King Bug Castle private-server project: the
+          original King God Castle v172.0.00 game with compatibility patches so it connects to a
           self-hosted private server instead of the official backend.
 
           ### What is inside
-          - Game version: v171.1.00 (arm64)
+          - Game version: v172.0.00 (arm64)
           - SSL verification bypass — works with self-signed server certificates
           - Anti-cheat (XIGNCODE NEO) stub — the game boots normally without the official packer
           - Stability fixes — patched crash/NRE sources (lobby, shop, PvP panels, event popups)
@@ -149,6 +149,6 @@ jobs:
         if: always()
         run: |
           echo "Cleaning up stock files and build artifacts..."
-          rm -rf apk/xapk_extracted_v1711 KingBugCastle_v171.xapk "KingBugCastle_${TAG}.xapk"
+          rm -rf apk/xapk_extracted_v1720 KingBugCastle_172.0.00.xapk "KingBugCastle_${TAG}.xapk"
 
 

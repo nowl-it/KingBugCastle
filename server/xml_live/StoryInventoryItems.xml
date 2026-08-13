@@ -789,4 +789,89 @@
             </Values>
         </WorldTriggers>
     </StoryInventoryItem>
+
+    <StoryInventoryItem ID="230100">
+        <Comment>가시 갑옷</Comment>
+        <Type>Battle</Type>
+
+        <DescParams>
+            <InnerText>./WorldTriggers/BuffInfo/BuffOptions[1]/Values/FixedValue</InnerText>
+        </DescParams>
+
+        <WorldTriggers>
+            <Conditions>
+                <ImmediatelyOnce/>
+            </Conditions>
+
+            <Actions>
+                <AddGlobalBuff />
+            </Actions>
+
+            <Values>
+            </Values>
+
+            <BuffInfo>
+                <Checker>All</Checker>
+
+                <BuffOptions>
+                    <Conditions>
+                        <Once />
+                    </Conditions>
+
+                    <Targets>
+                        <Self />
+                    </Targets>
+
+                    <RangeInfo>
+                    </RangeInfo>
+
+                    <BuffContents>
+                        <AddCustomBuff Key="BaseDamageReflect" Time="-1" OverlapCount="1"/>
+                    </BuffContents>
+
+                    <Values>
+                        <FixedValue>100</FixedValue>
+                    </Values>
+                </BuffOptions>
+            </BuffInfo>
+        </WorldTriggers>
+        <WorldTriggers>
+            <Conditions>
+                <Dispose/>
+            </Conditions>
+
+            <Actions>
+                <RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+            </Actions>
+
+            <Values>
+            </Values>
+        </WorldTriggers>
+    </StoryInventoryItem>
+
+    <StoryInventoryItem ID="230110">
+        <Comment>부활</Comment>
+        <Sprite>StoryInventoryItem_230040</Sprite>
+        <Type>Battle</Type>
+
+        <DescParams>
+            <Attribute Name="Time">./WorldTriggers/Conditions/AfterBattleTime</Attribute>
+            <InnerText>./WorldTriggers/Values/FixedValue[1]</InnerText>
+        </DescParams>
+
+        <WorldTriggers>
+            <Conditions>
+                <AfterBattleTime Time="5" />
+                <TriggerCount Value="1" />
+            </Conditions>
+
+            <Actions>
+                <ApplyEventTrigger ID="70110" Once="true" />
+            </Actions>
+
+            <Values>
+                <FixedValue>2</FixedValue>
+            </Values>
+        </WorldTriggers>
+    </StoryInventoryItem>
 </StoryInventoryItems>

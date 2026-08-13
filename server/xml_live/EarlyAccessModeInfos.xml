@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <EarlyAccessModeInfos>
     <EarlyAccessModeInfo ID="1520">
         <StartAt>20250205_000000</StartAt>
@@ -2703,6 +2703,7 @@
         <TestTreasures>
             <TestTreasure>
                 <TreasureID>30041</TreasureID>
+                
                 <Level>30</Level>
                 <Overcome>10</Overcome>
             </TestTreasure>
@@ -2722,4 +2723,17 @@
         <TestTreasures>
         </TestTreasures>
     </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1720" Inherit="1520">
+        <StartAt>20260820_000000</StartAt>
+        <EndAt>20260824_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30042</TreasureID>
+
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo> 
 </EarlyAccessModeInfos>

@@ -80,7 +80,6 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 1.2배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -157,9 +156,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 0.7배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.3</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
         <!-- 시너지-->
 		<RogueLikeSynergies>Fighter</RogueLikeSynergies>
@@ -239,9 +237,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 	
-		<!-- 받는 피해 0.75배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.25</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 
         <!-- 시너지-->
@@ -319,9 +316,8 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
         <!-- 시너지-->
 		<RogueLikeSynergies>SpellSword</RogueLikeSynergies>		
@@ -406,10 +402,12 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.15</Modulator>
+		</ThemeSuperShieldModulator>
 	    <!-- 시너지-->	
 		<RogueLikeSynergies>Caster</RogueLikeSynergies>		
 	</Unit>
@@ -493,12 +491,11 @@
 			<DescComment>헤드샷 스킬을 빠른 속도로 일반 공격 3회를 가하는 트리플 샷으로 변경</DescComment>
 			<PotentialChangeSkillID>1005000</PotentialChangeSkillID>
 		</Potential>
-		<!-- 가하는 피해 1.25배 -->
+		<!-- 가하는 피해 1배 -->
 		<ThemeDamageModulator>
-			<Modulator Theme='3000'>-0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 0.8배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -530,7 +527,7 @@
 		<Hp>120</Hp>
 		<Mana>70</Mana>
 		<Atk>10</Atk>
-		<MAtk>40</MAtk>
+		<MAtk>50</MAtk>
 		<AttackInterval>1</AttackInterval>
 		<!-- 기본공격 -->
 		<AtkType>Arrow</AtkType>
@@ -574,9 +571,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 0.75배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.25</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 	    <!-- 시너지-->	
 		<RogueLikeSynergies>Supporter</RogueLikeSynergies>				
@@ -663,13 +659,15 @@
         
 		<!-- 가하는 피해 0.9배 -->
 		<ThemeDamageModulator>
-			<Modulator Theme='3000'>-0.2</Modulator>
+			<Modulator Theme='3000'>-0.1</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.1</Modulator>
+		</ThemeSuperShieldModulator>
 	    <!-- 시너지-->	
 		<RogueLikeSynergies>SpellSword</RogueLikeSynergies>			
 	</Unit>
@@ -745,9 +743,8 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 0.8배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 	    <!-- 시너지-->	
 		<RogueLikeSynergies>RaidTrooper</RogueLikeSynergies>					
@@ -825,9 +822,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 1.25배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.25</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<RogueLikeSynergies>Supporter</RogueLikeSynergies>				
 	</Unit>
@@ -911,9 +907,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 1.25배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.25</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->
 		<RogueLikeSynergies>Summoner</RogueLikeSynergies>			
@@ -1016,9 +1011,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 1.25배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.25</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 	</Unit>
 
@@ -1117,10 +1111,12 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.8배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.1</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Shooter</RogueLikeSynergies>			
 	</Unit>
@@ -1205,9 +1201,8 @@
 			<Modulator Theme='3000'>0.1</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 0.8배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Transformer</RogueLikeSynergies>				
@@ -1307,9 +1302,8 @@
 			<Modulator Theme='3000'>0.1</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 0.8배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Transformer</RogueLikeSynergies>			
@@ -1401,9 +1395,8 @@
 			<Modulator Theme='3000'>0.25</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 0.8배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>SpellSword</RogueLikeSynergies>			
@@ -1503,7 +1496,6 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -1581,7 +1573,6 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -1666,10 +1657,12 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 								
-		<!-- 받는 피해 1.2배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.2</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>ChainWizard</RogueLikeSynergies>			
 	</Unit>
@@ -1748,7 +1741,6 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -1794,15 +1786,13 @@
 		</Effect>
 		<!-- 스킬 -->
 		<Skill>10190</Skill>
+		<!-- AI -->
+		<AIType>Unit10190AI</AIType>
 		<!-- 특성 -->
 		<Potential ReqLevel='4' TargetSkill="10190">
 			<DescComment>상대가 넉백되는 거리 2칸 → 3칸</DescComment>
 			<Knockback>1</Knockback>
 			<PotentialIcon>PotentialIcon_27</PotentialIcon>
-		</Potential>
-		<Potential ReqLevel='4' TargetSkill="10195">
-			<DescComment>상대가 넉백되는 거리 2칸 → 3칸</DescComment>
-			<Knockback>1</Knockback>
 		</Potential>
 		<Potential ReqLevel='4' TargetSkill="1019000">
 			<DescComment>상대가 넉백되는 거리 2칸 → 3칸</DescComment>
@@ -1811,45 +1801,34 @@
 		
 		<Potential ReqLevel='8' TargetSkill="10190">
 			<DescComment>스킬 시전시, 자신 및 대상자에게 쉴드</DescComment>
-			<AddShieldToMoveTarget>0</AddShieldToMoveTarget>
-			<MAtkPer Target="AddShieldToMoveTarget">100</MAtkPer>
+			<Unit10190AI_AddShieldToMoveTarget>0</Unit10190AI_AddShieldToMoveTarget>
+			<MAtkPer Target="Unit10190AI_AddShieldToMoveTarget">100</MAtkPer>
 			<SelfShield>0</SelfShield>
 			<MAtkPer Target="SelfShield">100</MAtkPer>
 			<PotentialIcon>PotentialIcon_16</PotentialIcon>
 		</Potential>
-		<Potential ReqLevel='8' TargetSkill="10195">
-			<DescComment>스킬 시전시, 자신 및 대상자에게 쉴드</DescComment>
-			<AddShieldToMoveTarget>0</AddShieldToMoveTarget>
-			<MAtkPer Target="AddShieldToMoveTarget">100</MAtkPer>
-			<SelfShield>0</SelfShield>
-			<MAtkPer Target="SelfShield">100</MAtkPer>
-		</Potential>
 		<Potential ReqLevel='8' TargetSkill="1019000">
-			<DescComment>스킬 시전시, 자신 및 대상자에게 쉴드</DescComment>
-			<AddShieldToMoveTarget>0</AddShieldToMoveTarget>
-			<MAtkPer Target="AddShieldToMoveTarget">100</MAtkPer>
+			<DescComment>스킬 시전시, 자신에게 쉴드</DescComment>
 			<SelfShield>0</SelfShield>
 			<MAtkPer Target="SelfShield">100</MAtkPer>
 		</Potential>
 
-		<!-- BuffManager에 종속되는 효과이나, 예외처리로 베히무스 스킬에만 잘 작동하게 되어있음. -->
-		<Potential ReqLevel='16' Tier='1'>
-			<DescComment>스킬 대상 공격중인 적을 도발, 4초간 방어력 증가</DescComment>
-			<TauntOnSkill>true</TauntOnSkill>
-			<TauntTime>1</TauntTime>
-			<PotentialChangeSkillID>10195</PotentialChangeSkillID>
+		<Potential ReqLevel='16' Tier='1' TargetSkill="10190">
+			<DescComment>스킬 대상 아군에게 0.3초간 은신 부여, 4초간 방어력 증가</DescComment>
+			<BuffAtSkillEnd>10195</BuffAtSkillEnd>
+			<Unit10190AI_BuffToMoveTarget>101900</Unit10190AI_BuffToMoveTarget>
 		</Potential>
 
 		<Potential ReqLevel='16' Tier='1' Slot="2">
-			<DescComment>스킬 범위를 주변 두칸으로 고정. 넉백 거리 2/3/4/5칸으로 증가.</DescComment>
+			<DescComment>스킬의 시전 대상을 아군에서 9X9 범위 내의 가장 가까운 적으로 변경, 베히무스가 받는 쉴드량 +100%</DescComment>
 			<PotentialChangeSkillID>1019000</PotentialChangeSkillID>
+			<TotalShieldAdaptabilityPer>100</TotalShieldAdaptabilityPer>
 		</Potential>
 		<!-- 가하는 피해 1.0배 -->
 		<ThemeDamageModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 								
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -1952,9 +1931,8 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 								
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Tactician</RogueLikeSynergies>		
@@ -2032,13 +2010,15 @@
 		</Potential>
 		<!-- 가하는 피해 1.0배 -->
 		<ThemeDamageModulator>
-			<Modulator Theme='3000'>-0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.15</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Rival</RogueLikeSynergies>		
 	</Unit>
@@ -2126,10 +2106,12 @@
 			<Modulator Theme='3000'>0.25</Modulator>
 		</ThemeDamageModulator>
 								
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.2</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Sniper,Shooter</RogueLikeSynergies>		
 		</Unit>
@@ -2218,9 +2200,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 							
-		<!-- 받는 피해 1.2배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Linker</RogueLikeSynergies>		
@@ -2300,9 +2281,8 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>RaidTrooper</RogueLikeSynergies>		
@@ -2398,9 +2378,8 @@
             <Modulator Theme='3000'>0.1</Modulator>
         </ThemeDamageModulator>
 
-        <!-- 받는 피해 0.8배 (-0.5배 감소 = 0.5배 증가) -->
         <ThemeDefenseModulator>
-            <Modulator Theme='3000'>0.2</Modulator>
+            <Modulator Theme='3000'>0.0</Modulator>
         </ThemeDefenseModulator>
         <!-- 시너지  -->
         <RogueLikeSynergies>Assassin</RogueLikeSynergies>
@@ -2489,13 +2468,15 @@
 		</Potential>
 		<!-- 가하는 피해 1.2배 -->
 		<ThemeDamageModulator>
-			<Modulator Theme='3000'>0</Modulator>
+			<Modulator Theme='3000'>-0.05</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>-0.1</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>ChainWizard</RogueLikeSynergies>	
 	</Unit>
@@ -2569,7 +2550,6 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -2663,10 +2643,12 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.05</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>SpellSword</RogueLikeSynergies>			
 	</Unit>
@@ -2744,9 +2726,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Shielder</RogueLikeSynergies>				
@@ -2823,10 +2804,12 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.2</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Caster</RogueLikeSynergies>				
 	</Unit>
@@ -2911,10 +2894,12 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.85배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.2</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>SpellSword</RogueLikeSynergies>					
 	</Unit>
@@ -3021,10 +3006,12 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.8배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.2</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Shooter</RogueLikeSynergies>				
 	</Unit>
@@ -3131,7 +3118,6 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -3239,9 +3225,8 @@
 			<Modulator Theme='3000'>-0.05</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 1.1배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<!-- 시너지  -->		
@@ -3326,10 +3311,12 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.15</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Sniper</RogueLikeSynergies>		
 		<!-- 버전 -->
@@ -3423,9 +3410,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 1.25배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.25</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Tactician</RogueLikeSynergies>				
@@ -3510,9 +3496,8 @@
 		<Modulator Theme='3000'>0.0</Modulator>
 	</ThemeDamageModulator>
 							
-	<!-- 받는 피해 1.3배 (-0.5배 감소 = 0.5배 증가) -->
 	<ThemeDefenseModulator>
-		<Modulator Theme='3000'>-0.3</Modulator>
+		<Modulator Theme='3000'>0.0</Modulator>
 	</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Supporter</RogueLikeSynergies>			
@@ -3612,9 +3597,8 @@
 			<Modulator Theme='3000'>0.1</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>ChainWizard</RogueLikeSynergies>		
@@ -3708,10 +3692,13 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.05</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Summoner</RogueLikeSynergies>		
 	</Unit>
@@ -3799,10 +3786,12 @@
 		<Visible>false</Visible>
 		<ShopAvailable>false</ShopAvailable>
 		<GachaAvailable>false</GachaAvailable>
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.05</Modulator>
+		</ThemeSuperShieldModulator>
 	</Unit>
 
 	<!-- 12렙 1특 자폭 인형  -->
@@ -3817,10 +3806,12 @@
 		<Visible>false</Visible>
 		<ShopAvailable>false</ShopAvailable>
 		<GachaAvailable>false</GachaAvailable>
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.05</Modulator>
+		</ThemeSuperShieldModulator>
 	</Unit>
 
 	<!-- 12렙 2특 강화 인형 -->
@@ -3840,10 +3831,12 @@
 			<MAtkPer Target="Damage">-150</MAtkPer>
 		</Potential>
 
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.05</Modulator>
+		</ThemeSuperShieldModulator>
 	</Unit>
 
 	<!-- 니벨라 -->
@@ -3931,9 +3924,8 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.85배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>ShockTrooper</RogueLikeSynergies>	
@@ -4040,9 +4032,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 1.15배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Fighter</RogueLikeSynergies>			
@@ -4177,9 +4168,8 @@
 			<Modulator Theme='3000'>0.25</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.8배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
 		<RogueLikeSynergies>Shooter</RogueLikeSynergies>				
@@ -4271,9 +4261,8 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>334</MinVersion>
@@ -4380,9 +4369,8 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.85배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>351</MinVersion>
@@ -4475,9 +4463,8 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.85배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>351</MinVersion>
@@ -4569,9 +4556,8 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.85배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>351</MinVersion>
@@ -4657,10 +4643,12 @@
 			<Modulator Theme='3000'>0.1</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.15</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 버전 -->
 		<MinVersion>377</MinVersion>
 		<!-- 시너지  -->		
@@ -4788,9 +4776,8 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.8배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>387</MinVersion>
@@ -4871,9 +4858,8 @@
 			<Modulator Theme='3000'>0.1</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>399</MinVersion>
@@ -4978,9 +4964,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 1.3배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.3</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>405</MinVersion>
@@ -5078,9 +5063,8 @@
 			<Modulator Theme='3000'>0.25</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>416</MinVersion>
@@ -5172,7 +5156,6 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -5284,9 +5267,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.7배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.3</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>457</MinVersion>
@@ -5377,9 +5359,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.7배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.3</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 	</Unit>
 
@@ -5397,9 +5378,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 						
-		<!-- 받는 피해 0.7배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.3</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 	</Unit>
 
@@ -5420,9 +5400,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.7배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.3</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 	</Unit>
 
@@ -5509,7 +5488,6 @@
 		<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 		<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -5617,7 +5595,6 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -5723,9 +5700,8 @@
 			<Modulator Theme='3000'>0.1</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.9배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 
 		<!-- 버전 -->
@@ -5835,9 +5811,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 0.85배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 
 		<!-- 버전 -->
@@ -5934,7 +5909,6 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -6019,7 +5993,6 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -6099,7 +6072,6 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -6213,9 +6185,8 @@
 			<Modulator Theme='3000'>0.15</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 0.85배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>552</MinVersion>
@@ -6328,10 +6299,12 @@
 			<Modulator Theme='3000'>0.1</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.15</Modulator>
+		</ThemeSuperShieldModulator>
 		<!-- 버전 -->
 		<MinVersion>571</MinVersion>
 		<!-- 시너지  -->		
@@ -6456,12 +6429,11 @@
 		</Effect>
 		<!-- 가하는 피해 1.0배 -->
 		<ThemeDamageModulator>
-			<Modulator Theme='3000'>-0.2</Modulator>
+			<Modulator Theme='3000'>-0.1</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>589</MinVersion>
@@ -6533,12 +6505,11 @@
 		<GachaAvailable>false</GachaAvailable>
 		<!-- 가하는 피해 1.0배 -->
 		<ThemeDamageModulator>
-			<Modulator Theme='3000'>-0.2</Modulator>
+			<Modulator Theme='3000'>-0.1</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 버전 -->
 		<MinVersion>589</MinVersion>
@@ -6646,7 +6617,7 @@
 		</ThemeDamageModulator>
 		
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 
 		<MinVersion>608</MinVersion>
@@ -6737,9 +6708,8 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDamageModulator>
 				
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.3</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 
 		<MinVersion>623</MinVersion>
@@ -6844,10 +6814,12 @@
 			<Modulator Theme='3000'>0.2</Modulator>
 		</ThemeDamageModulator>
 		
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.15</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.2</Modulator>
+		</ThemeSuperShieldModulator>
 
 		<MinVersion>635</MinVersion>
 		<!-- 시너지  -->		
@@ -6939,8 +6911,11 @@
 		</ThemeDamageModulator>
 
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.1</Modulator>
+		</ThemeSuperShieldModulator>
 
 		<MinVersion>645</MinVersion>
 		<!-- 시너지  -->		
@@ -7024,7 +6999,7 @@
 		</ThemeDamageModulator>
 
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 
 		<MinVersion>654</MinVersion>
@@ -7205,8 +7180,11 @@
 		</ThemeDamageModulator>
 
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.1</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>0.10</Modulator>
+		</ThemeSuperShieldModulator>
 		
 		<MinVersion>154100</MinVersion>
 		<!-- 시너지  -->		
@@ -7319,8 +7297,11 @@
 		</ThemeDamageModulator>
 
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>-0.2</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>-0.2</Modulator>
+		</ThemeSuperShieldModulator>
 
 	</Unit>
 
@@ -7514,7 +7495,7 @@
 		<Mana>120</Mana>
 		<BattleStartMana>120</BattleStartMana>
 		<Atk>13</Atk>
-		<MAtk>45</MAtk>
+		<MAtk>55</MAtk>
 		<AttackInterval>1.3</AttackInterval>
 		<AIType>Unit10760AI</AIType>
 
@@ -7651,8 +7632,11 @@
 			<Modulator Theme='3000'>-0.1</Modulator>
 		</ThemeDamageModulator>
 		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0</Modulator>
+			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
+		<ThemeSuperShieldModulator>
+			<Modulator Theme='3000'>-0.05</Modulator>
+		</ThemeSuperShieldModulator>
     </Unit>
 
 	<!-- 이격 네리아 -->
@@ -7741,9 +7725,8 @@
 
 		<!-- 가하는 피해 1.0배 -->
 		<ThemeDamageModulator>
-			<Modulator Theme='3000'>0.0</Modulator>
+			<Modulator Theme='3000'>0.1</Modulator>
 		</ThemeDamageModulator>
-		<!-- 받는 피해 1.0배 -->
 		<ThemeDefenseModulator>
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
@@ -7864,7 +7847,6 @@
         <ThemeDamageModulator>
             <Modulator Theme='3000'>0.0</Modulator>
         </ThemeDamageModulator>
-        <!-- 받는 피해 1.0배 -->
         <ThemeDefenseModulator>
             <Modulator Theme='3000'>0.0</Modulator>
         </ThemeDefenseModulator>
@@ -7985,12 +7967,12 @@
         </Overcome>
 
 		<TransformHpForDesc>150</TransformHpForDesc>
+		<AuraLoopSound>se_unit_10810_aura</AuraLoopSound>
 
         <!-- 가하는 피해 1배 -->
         <ThemeDamageModulator>
             <Modulator Theme='3000'>0.0</Modulator>
         </ThemeDamageModulator>
-        <!-- 받는 피해 1배 -->
         <ThemeDefenseModulator>
             <Modulator Theme='3000'>0.0</Modulator>
         </ThemeDefenseModulator>
@@ -8110,7 +8092,6 @@
         <ThemeDamageModulator>
             <Modulator Theme='3000'>0.0</Modulator>
         </ThemeDamageModulator>
-        <!-- 받는 피해 1배 -->
         <ThemeDefenseModulator>
             <Modulator Theme='3000'>0.0</Modulator>
         </ThemeDefenseModulator>
@@ -35025,26 +35006,315 @@
 		<OriginalUnit>10350</OriginalUnit>
 	</Unit>
 
-	<Unit ID="20010790" Inherit="10790">
-		<!-- 기본정보 -->
-		<Comment>스토리 이격 오필리아</Comment>
-		<!-- 원본 MinVersion(999999) 상속 차단 — 스토리 전용 클론은 버전 게이트 불요 -->
-		<MinVersion>0</MinVersion>
+	<!-- ===== 아군 히어로 오필리아 (전체 복사 클론, 밸런스 고정) ===== -->
+	<!-- 원본 이격 오필리아 10790. prefix 200.
+	     기존에는 Inherit 경량 클론이었으나 사이드 스토리 1-3 전투에서 아군으로 사용되므로
+	     네리아(20010780) 방식의 전체 복사로 승격했다 (Skills/ActiveSkills 동반 복제).
+	     ※ 파트 2(Ep2-1~2-3)에는 전투가 없어 이 승격이 기존 콘텐츠 밸런스에 영향을 주지 않는다. -->
+    <Unit ID="20010790">
+        <!-- 기본정보 -->
+        <Comment>스토리 이격 오필리아</Comment>
+        <Name>UnitName_10790</Name>
+        <Type>Player</Type>
+        <Prefab>Unit_10790</Prefab>
+        <StoryModePrefab>Unit_10790</StoryModePrefab>
+        <Visible>false</Visible>
+        <ShopAvailable>false</ShopAvailable>
+        <GachaAvailable>false</GachaAvailable>
+        <Sprite>Unit_10790_0</Sprite>
+        <Height>50</Height>
+        <Role>Brave</Role>
+        <Region>Central</Region>
+        <NameColor>AFDDFF</NameColor>
+        <!-- UI -->
+        <SpriteOffsetY>20</SpriteOffsetY>
+        <PrefabOffsetY>10</PrefabOffsetY>
+        <IllustOffsetX>10</IllustOffsetX>
+        <IllustOffsetY>10</IllustOffsetY>
+        <!-- 능력치 -->
+        <Hp>180</Hp>
+        <Mana>120</Mana>
+        <BattleStartMana>120</BattleStartMana>
+        <Atk>15</Atk>
+        <MAtk>30</MAtk>
+        <AttackInterval>1</AttackInterval>
+        <!-- 기본공격 -->
+        <AtkType>Arrow</AtkType>
+        <ArrowPrefab>Fx_10790a</ArrowPrefab>
+        <ArrowSpeed>700</ArrowSpeed>
+        <!-- 사거리 -->
+        <RangeType>Rect</RangeType>
+        <RangeX>2</RangeX>
+        <RangeY>2</RangeY>
 
-		<!--서버용으로 아래 데이터는 inherit 했어도 필요-->
-		<Visible>false</Visible>
-		<ShopAvailable>false</ShopAvailable>
-		<GachaAvailable>false</GachaAvailable>
-		<!-- 가하는 피해 1.0배 -->
-		<ThemeDamageModulator>
-			<Modulator Theme='3000'>0.0</Modulator>
-		</ThemeDamageModulator>
-		<!-- 받는 피해 1.0배 (-0.5배 감소 = 0.5배 증가) -->
-		<ThemeDefenseModulator>
-			<Modulator Theme='3000'>0.0</Modulator>
-		</ThemeDefenseModulator>
-	</Unit>
+        <AIType>Unit10790AI</AIType>
+        
+        <!-- 스킬 -->
+        <Skill>20010790</Skill>
 
+        <!-- 개전 스킬 :  -->
+        <ActiveSkill>20010790</ActiveSkill>
+
+        <!-- 1돌 : 수호의 50%만큼 포격 범위 내 아군의 공격속도 추가 상승 -->
+        <Overcome ReqOvercome="1" TargetSkill="200107905">
+			<AttackSpeedPerUnit10790>0</AttackSpeedPerUnit10790>
+			<DefDen Target="AttackSpeedPerUnit10790">50</DefDen>
+        	<Name>Overcome_10790_0</Name>
+        </Overcome>
+
+        <!-- 2돌 : 체력 제한 75 -->
+        <Overcome ReqOvercome="2" TargetSkill="200107905">
+			<Guard>75</Guard>
+        	<Name>Overcome_10790_1</Name>
+        </Overcome>
+
+        <!-- 3돌 : 다음 전투 시작 시 2 → 1초마다 모든 아군 절대방어 +1 -->
+        <Overcome ReqOvercome="3">
+        	<Name>Overcome_10790_2</Name>
+        </Overcome>
+
+        <!-- 4돌 : 체력 제한 75 -> 50 -->
+		<Overcome ReqOvercome="4" TargetSkill="200107905">
+			<Guard>-25</Guard>
+			<DescGuard>50</DescGuard>
+			<Name>Overcome_10790_3</Name>
+		</Overcome>
+
+        <!-- 5돌 : 수호의 50%만큼 포격 범위 내 아군의 공격속도 추가 상승 -->
+		<Overcome ReqOvercome="5" TargetSkill="200107905">
+			<AttackSpeedPerUnit10790>0</AttackSpeedPerUnit10790>
+			<DefDen Target="AttackSpeedPerUnit10790">50</DefDen>
+			<Name>Overcome_10790_4</Name>
+		</Overcome>
+
+        <!-- 이펙트 -->
+        <Effect Type="Target">
+            <Prefab>Fx_10790b</Prefab>
+            <RotationType>AngleCasterToTarget</RotationType>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+            <OffsetHeight>10</OffsetHeight>
+            <OffsetRotation Min="-2" Max="2" />
+        </Effect>
+        <Effect Type="Shoot">
+            <Prefab>Fx_10790h</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <RotationType>DirBlend</RotationType>
+            <UseAttackSpeed>true</UseAttackSpeed>
+        </Effect>
+
+
+        <!-- 차원 영웅 -->
+        <IsDimensionUnit>true</IsDimensionUnit>
+        <OriginalUnit>10490</OriginalUnit>
+    </Unit>
+
+
+	<!-- ===== 사이드 스토리 1-3 : 아군 히어로 캐시 (전체 복사 클론, 밸런스 고정) ===== -->
+	<!-- 원본 이격 캐시 10800 / 폭주형 10810. prefix 200.
+	     캐시는 변신 유닛이므로 폭주형(10810)까지 함께 복제하고 상호 참조를 새 ID로 치환했다.
+	     Skills/ActiveSkills 도 전부 복제 → 라이브 밸런싱과 완전히 분리된다. -->
+    <Unit ID="20010800">
+        <!-- 기본정보 -->
+        <Comment>스토리 이격 캐시</Comment>
+        <Name>UnitName_10800</Name>
+        <Type>Player</Type>
+        <Prefab>Unit_10800</Prefab>
+        <StoryModePrefab>Unit_10800</StoryModePrefab>
+        <Visible>false</Visible>
+        <ShopAvailable>false</ShopAvailable>
+        <GachaAvailable>false</GachaAvailable>
+        <Sprite>Unit_10800_0</Sprite>
+        <Height>50</Height>
+        <Role>Shadow</Role>
+        <Region>North</Region>
+        <NameColor>AFDDFF</NameColor>
+        <!-- UI -->
+        <SpriteOffsetY>-5</SpriteOffsetY>
+        <PrefabOffsetY>10</PrefabOffsetY>
+        <IllustOffsetX>10</IllustOffsetX>
+        <IllustOffsetY>20</IllustOffsetY>
+        <!-- 능력치 -->
+        <Hp>220</Hp>
+        <Mana>0</Mana>
+        <Atk>20</Atk>
+        <MAtk>18</MAtk>
+        <AttackInterval>1.4</AttackInterval>
+        <!-- 기교 -->
+        <SkillEnergyType>Technique</SkillEnergyType>
+		<ReleaseBaseSkillEnergy>0</ReleaseBaseSkillEnergy>
+        <Technique>120</Technique>
+        <BattleStartTechnique>120</BattleStartTechnique>
+		<ReleaseTransformReserverHp>true</ReleaseTransformReserverHp>
+        <!-- 기본공격 -->
+        <AtkType>Melee</AtkType>
+        <!-- 사거리 -->
+        <RangeType>Sum</RangeType>
+        <RangeSum>1</RangeSum>
+
+        <!-- Unit10800AI에서 사용하는 태그 -->
+        <ReviveHpPer>100</ReviveHpPer>
+        <ReviveTime>1</ReviveTime>
+        
+		<Effect Type='Shoot'>
+			<Prefab>Fx_10800a</Prefab>
+			<ZLevel>UnitOver</ZLevel>
+			<RotationType>DirBlend</RotationType>
+		</Effect>
+		<Effect Type='Target'>
+			<Prefab>Fx_10800b</Prefab>
+			<CenterAlign>true</CenterAlign>
+			<ZLevel>UnitOver</ZLevel>
+			<RotationType>Angle</RotationType>
+		</Effect>
+		<Effect Type='ReviveTrigger'>
+			<Prefab>Fx_1049010</Prefab>
+			<ZLevel>UnitOver</ZLevel>
+			<Sound>se_unit_21145_skill</Sound>
+		</Effect>
+
+        <TransformUnit>20010810</TransformUnit>
+        
+        <AIType>Unit10800AI</AIType>
+        
+        <!-- 스킬 -->
+        <Skill>20010800</Skill>
+
+        <!-- 개전 스킬 :  -->
+        <ActiveSkill>20010800</ActiveSkill>
+
+        <!-- 1돌 : 폭주 상태 장판 적중 효과에 피증 추가 -->
+        <Overcome ReqOvercome="1" TargetSkill="20010800">
+            <Unit10800AI_AuraDamagePer>2</Unit10800AI_AuraDamagePer>
+        	<Name>Overcome_10800_0</Name>
+        </Overcome>
+
+        <!-- 2돌 : 폭주할 때마다 뱀파이어 형태의 최종 최대 체력 15% 증가 -->
+        <Overcome ReqOvercome="2" TargetSkill="20010800">
+            <Unit10800AI_TotalHpPer>25</Unit10800AI_TotalHpPer>
+        	<Name>Overcome_10800_1</Name>
+        </Overcome>
+
+        <!-- 3돌 : 치유 감소 효과 면역이 상태이상 면역으로 변경 -->
+        <Overcome ReqOvercome="3">
+        	<Name>Overcome_10800_2</Name>
+        </Overcome>
+
+        <!-- 4돌 : 폭주할 때마다 뱀파이어 형태의 최종 최대 체력 15% 증가 -->
+        <Overcome ReqOvercome="4" TargetSkill="20010800">
+            <Unit10800AI_TotalHpPer>25</Unit10800AI_TotalHpPer>
+        	<Name>Overcome_10800_3</Name>
+        </Overcome>
+
+		<!-- 5돌 : 폭주 상태 장판 적중 효과에 피증 추가 -->
+        <Overcome ReqOvercome="5" TargetSkill="20010800">
+            <Unit10800AI_AuraDamagePer>2</Unit10800AI_AuraDamagePer>
+        	<Name>Overcome_10800_4</Name>
+        </Overcome>
+
+		<TransformHpForDesc>150</TransformHpForDesc>
+		<AuraLoopSound>se_unit_10810_aura</AuraLoopSound>
+
+
+        <!-- 차원 영웅 -->
+        <IsDimensionUnit>true</IsDimensionUnit>
+        <OriginalUnit>10430</OriginalUnit>
+    </Unit>
+
+    <!-- 스토리 이격 캐시의 폭주 변신형 (원본 10810). Overcome 은 원본과 동일하게 Name 없음 (Overcome_10810_* 로컬라이징 키 미존재 — desc 보조용) -->
+    <Unit ID="20010810">
+        <!-- 기본정보 -->
+        <Comment>스토리 이격 캐시 폭주</Comment>
+        <Name>UnitName_10810</Name>
+        <Type>Player</Type>
+        <Prefab>Unit_10810</Prefab>
+        <StoryModePrefab>Unit_10810</StoryModePrefab>
+        <Sprite>Unit_10810_0</Sprite>
+        <Height>50</Height>
+        <Role>Shadow</Role>
+        <Region>North</Region>
+        <NameColor>AFDDFF</NameColor>
+        <!-- 특수정보 -->
+        <RestoreUnit>20010800</RestoreUnit>
+        <TransformUnit>20010800</TransformUnit>
+        <IsTransformUnit>true</IsTransformUnit>
+        <Visible>false</Visible>
+        <ShopAvailable>false</ShopAvailable>
+        <GachaAvailable>false</GachaAvailable>
+        <!-- UI -->
+        <SpriteOffsetY>-5</SpriteOffsetY>
+        <PrefabOffsetY>10</PrefabOffsetY>
+        <IllustOffsetX>10</IllustOffsetX>
+        <IllustOffsetY>20</IllustOffsetY>
+        <!-- 능력치 -->
+        <Hp>330</Hp>
+        <Mana>0</Mana>
+		<Atk>20</Atk>
+		<MAtk>18</MAtk>
+        <AttackInterval>1.4</AttackInterval>
+        <SkillEnergyType>Technique</SkillEnergyType>
+        <Technique>120</Technique>
+        <AttackTechnique>15</AttackTechnique>
+		<ReleaseTransformReserverHp>true</ReleaseTransformReserverHp>
+
+        <!-- 스킬 -->
+        <Skill>20010810</Skill>
+        
+        <!-- 기본공격 -->
+        <AtkType>Melee</AtkType>
+        <!-- 사거리 -->
+        <RangeType>Sum</RangeType>
+        <RangeSum>1</RangeSum>
+
+		<Effect Type='Shoot'>
+			<Prefab>Fx_10810a</Prefab>
+			<ZLevel>UnitOver</ZLevel>
+			<RotationType>DirBlend</RotationType>
+		</Effect>
+		<Effect Type='Target'>
+			<Prefab>Fx_10810b</Prefab>
+			<CenterAlign>true</CenterAlign>
+			<ZLevel>UnitOver</ZLevel>
+			<RotationType>Angle</RotationType>
+		</Effect>
+        
+        <AIType>Unit10800AI</AIType>
+
+        <!-- 오라 설정 (Unit10800AI에서 me.transformed=true일 때만 사용) -->
+        <AuraTick>0.25</AuraTick>
+        <AuraMAtkPer>100</AuraMAtkPer>
+        <AuraSkill>200108100</AuraSkill>
+        <Unit10800AI_AuraHalfRange>2</Unit10800AI_AuraHalfRange>
+        <Unit10800AI_RushSkill>20010815</Unit10800AI_RushSkill>
+        <!-- 오라 틱으로 피해를 입힐 때마다(틱당 1회) 기교 5 획득 -->
+        <Unit10800AI_AuraTechnique>3</Unit10800AI_AuraTechnique>
+        
+        <Effect Type='Aura'>
+            <Prefab>Fx_10810f</Prefab>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+            <Loop>true</Loop>
+            <LoopStopAtRemove>true</LoopStopAtRemove>
+            <LevelScale>false</LevelScale>
+        </Effect>
+        <Effect Type="AuraTarget">
+            <Prefab>Fx_10810c</Prefab>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+        </Effect>
+
+		<Overcome ReqOvercome="1" TargetSkill="20010800">
+			<DescAuraDamagePer>2</DescAuraDamagePer>
+		</Overcome>
+		<Overcome ReqOvercome="5" TargetSkill="20010800">
+			<DescAuraDamagePer>2</DescAuraDamagePer>
+		</Overcome>
+
+
+        <!-- 차원 영웅 -->
+        <IsDimensionUnit>true</IsDimensionUnit>
+        <OriginalUnit>10430</OriginalUnit>
+    </Unit>
 
 <!-- 스토리모드 용 몬스터 -->
 
@@ -35212,6 +35482,13 @@
 
 
 <!-- 서브스토리 용 몬스터 (prefix 200) -->
+	<Unit ID="20020600" Inherit="20600">
+		<Name>UnitName_20020600</Name>
+		<Comment>스토리 아군 병사</Comment>
+		<Hp>700</Hp>
+		<Atk>100</Atk>
+		<AttackInterval>0.8</AttackInterval>
+	</Unit>
 
 	<Unit ID="20020700" Inherit="20700">
 		<Comment>스토리 흡혈 박쥐</Comment>
@@ -35221,12 +35498,101 @@
 		<Comment>스토리 가고일</Comment>
 	</Unit>
 
+	<Unit ID="20020711" Inherit="20710">
+		<Comment>스토리 가고일2</Comment>
+		<MAtk>500</MAtk>
+		<BattleStartMana>150</BattleStartMana>
+		<Mana>150</Mana>
+		<ReviveOnceWithMaxHpPer>100</ReviveOnceWithMaxHpPer>
+		<ReviveOnceWithMaxManaPer>0</ReviveOnceWithMaxManaPer>
+	</Unit>
+
 	<Unit ID="20020720" Inherit="20720">
 		<Comment>스토리 뱀파이어 프린스</Comment>
 	</Unit>
 
 	<Unit ID="20020730" Inherit="20730">
 		<Comment>스토리 뱀파이어 프린세스</Comment>
+	</Unit>
+
+	<!-- ===== 사이드 스토리 1-3 : 보스 폭주 블라드 모렌 (전체 복사 클론, 밸런스 고정) ===== -->
+	<!-- 블라드 전용 유닛이 없어 뱀파이어로드 노스페라투(20750)를 원본으로 복제.
+	     기획서가 블라드 도트를 "뱀파이어로드 노스페라투 재활용"으로 지정한 것과 정합. -->
+	<Unit ID="20020750" Inherit="20750">
+		<!-- 기본정보 -->
+		<Comment>스토리 뱀파이어로드 노스페라투</Comment>
+		<!-- 이름 예외 : 원본(20750 뱀파이어로드 노스페라투) 이름을 상속하지 않는다.
+		     스토리상 이 유닛은 "블라드 노스페라투" 로 표기되어야 하므로 전용 키를 쓴다. -->
+		<Name>UnitName_20020750</Name>
+		<Type>Enemy</Type>
+		<Prefab>Unit_20750</Prefab>
+		<StoryModePrefab>Unit_20750</StoryModePrefab>
+		<Visible>false</Visible>
+		<ShopAvailable>false</ShopAvailable>
+		<GachaAvailable>false</GachaAvailable>
+		<Sprite>Unit_20750_0</Sprite>
+
+		<Height>60</Height>
+		<MidBossSize>0.15</MidBossSize>
+		<Boss>true</Boss>
+		<!-- 특수정보 -->
+		<Theme>8</Theme>
+		<Value>0</Value>
+		<!-- UI -->
+		<SpriteOffsetY>-60</SpriteOffsetY>
+		<!-- 능력치 -->
+		<Hp>1500</Hp>
+		<Atk>100</Atk>
+		<MAtk>200</MAtk>
+		<Mana>80</Mana>
+		<BattleStartMana>80</BattleStartMana>
+		<Speed>200</Speed>
+		<AttackInterval>0.9</AttackInterval>
+		<CCRatio>0</CCRatio>
+		<!-- 기본공격 -->
+		<AttackSkill>20020750</AttackSkill>
+		<!-- 사거리 -->
+		<RangeType>Rect</RangeType>
+		<RangeX>2</RangeX>
+		<RangeY>2</RangeY>
+		<!-- 스킬 -->
+		<Skill>20020755</Skill>
+		<InfoSkill>20020751</InfoSkill>
+		<AttackMana>0</AttackMana>
+		<DamagedManaOffset>0</DamagedManaOffset>
+		<DamagedManaRatio>0</DamagedManaRatio>
+		<!-- 특성 -->
+		<Drain>50</Drain>
+		<MagicDrain>100</MagicDrain>
+		<!-- 보스 UI -->
+		<ManaColor>D93333</ManaColor>
+		<MaxManaColor>FF2222</MaxManaColor>
+		<ManaColorText>FF5959</ManaColorText>
+		<BossManaBar>Boss_Mana_Bar_2</BossManaBar>
+		<BossManaMaxBar>Boss_Mana_Max_2</BossManaMaxBar>
+		<!-- 부활 -->
+		<ReviveOnceWithMaxHpPer>100</ReviveOnceWithMaxHpPer>
+		<ReviveTrigger>true</ReviveTrigger>
+		<ReviveTime>1</ReviveTime>
+		<!-- 부활 후 패시브 -->
+		<AIType>VampireBossAI</AIType>
+		<VampireTick>0.25</VampireTick>
+		<VampireHPPer>2.50</VampireHPPer>
+		<VampireDrain>100</VampireDrain>
+		<VampireMana>5</VampireMana>
+		<VampireRangeType>Rect</VampireRangeType>
+		<VampireRangeX>2</VampireRangeX>
+		<VampireRangeY>2</VampireRangeY>
+		<!-- 이펙트 -->
+		<Effect Type='VampireTarget'>
+			<Prefab>Fx_20720d</Prefab>
+			<CenterAlign>true</CenterAlign>
+			<ZLevel>UnitOver</ZLevel>
+		</Effect>
+		<!-- 밸런스 -->
+		<LevelRatio Level='5'>0.7</LevelRatio>
+		<LevelRatio Level='6'>0.7</LevelRatio>
+		<LevelRatio Level='7'>0.7</LevelRatio>
 	</Unit>
 
 	<!-- 챌린지 모드 보스 기본사항 -->
@@ -35461,6 +35827,45 @@
 			<CheckUnitRange CoolTime="7" Repeat="999" RangeType="Rect" RangeX="4" RangeY="4">30000045</CheckUnitRange>
 		</ConditionalSkill>
 
+		<LevelRatio Level='1'>1.0</LevelRatio>
+		<LevelRatio Level='2'>0.0</LevelRatio>
+		<LevelRatio Level='3'>0.0</LevelRatio>
+		<LevelRatio Level='4'>0.0</LevelRatio>
+		<LevelRatio Level='5'>0.0</LevelRatio>
+		<LevelRatio Level='6'>0.0</LevelRatio>
+		<LevelRatio Level='7'>0.0</LevelRatio>
+
+		<TileSize Type='Rect'>
+			<Width>3</Width>
+			<Height>3</Height>
+		</TileSize>
+	</Unit>
+
+	<Unit ID="30000050" Inherit="30000000">
+		<Type>Enemy</Type>
+		<Prefab>Unit_30000030</Prefab>
+		<Sprite>Unit_30000030_0</Sprite>
+		<Name>UnitName_30000030</Name>
+		<Height>90</Height>
+		<HeightOffset>-20</HeightOffset>
+		<FixedSize>1.5</FixedSize>
+
+		<AIType>Unit30000050AI</AIType>
+
+		<!-- 능력치 (밸런싱 중) -->
+		<Hp>47000</Hp>
+		<Atk>100</Atk>
+		<MAtk>100</MAtk>
+		<Mana>1</Mana>
+		<BattleStartMana>1</BattleStartMana>
+		<AttackInterval>1</AttackInterval>
+		<Speed>0</Speed>
+
+		<AttackSkill>30000050</AttackSkill>
+		<SkillQueue>30000051,30000052,30000052,30000053,30000052,30000052,30000053,30000000</SkillQueue>
+		<ConditionalSkill>
+		</ConditionalSkill>
+		
 		<LevelRatio Level='1'>1.0</LevelRatio>
 		<LevelRatio Level='2'>0.0</LevelRatio>
 		<LevelRatio Level='3'>0.0</LevelRatio>
@@ -35722,9 +36127,9 @@
 		<!-- UI -->
 		<SpriteOffsetY>-35</SpriteOffsetY>
 		<!-- 능력치 -->
-		<Hp>1000</Hp>
-		<Atk>40</Atk>
-		<MAtk>70</MAtk>
+		<Hp>800</Hp>
+		<Atk>35</Atk>
+		<MAtk>55</MAtk>
 		<BaseMana>80</BaseMana>
 		<Mana>80</Mana>
 		<BattleStartMana>25</BattleStartMana>
@@ -35776,7 +36181,7 @@
 		<RangeX>3</RangeX>
 		<RangeY>3</RangeY>
 		<!-- 스킬 -->
-		<Skill>20731</Skill>
+		<Skill>40020731</Skill>
 		<!-- 특성 -->
 		<Drain>50</Drain>
 		<!-- 밸런스 -->
@@ -35801,10 +36206,12 @@
 		<!-- UI -->
 		<SpriteOffsetY>-15</SpriteOffsetY>
 		<!-- 능력치 -->
-		<Hp>12000</Hp>
-		<Atk>80</Atk>
-		<BattleStartMana>30</BattleStartMana>
-		<Mana>150</Mana>
+		<Hp>40000</Hp>
+		<Atk>200</Atk>
+		<BattleStartMana>0</BattleStartMana>
+		<Mana>450</Mana>
+		<DamagedManaRatio>0</DamagedManaRatio>
+		<DamagedManaOffset>0</DamagedManaOffset>
 		<Speed>200</Speed>
 		<AttackInterval>1.0</AttackInterval>
 		<CCRatio>0.1</CCRatio>
@@ -35844,7 +36251,7 @@
 		<SpriteOffsetY>-15</SpriteOffsetY>
 		<!-- 능력치 -->
 		<Hp>12000</Hp>
-		<Atk>80</Atk>
+		<Atk>800</Atk>
 		<Speed>300</Speed>
 		<AttackInterval>0.3</AttackInterval>
 		<!-- 기본공격 -->

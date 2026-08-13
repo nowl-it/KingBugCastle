@@ -4861,5 +4861,36 @@
                 <FieldUnitCount Role="Brave">2500</FieldUnitCount>
             </Values>
         </BuffOptions>
-    </BuffData>              
+    </BuffData>
+
+    <BuffData ID="70110">
+        <Type>FromBuffOption</Type>
+        <Comment>부활 2회</Comment>
+        <KeyType>Id</KeyType>
+        <StackType>Reset</StackType>
+        <Duration>-1</Duration>
+
+        <BuffOptions>
+            <Conditions>
+                <Once />
+            </Conditions>
+
+            <CoolTime>0</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddReviveCount MaxHpPer="100" MaxManaPer="100" Category="Treasure"/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>2</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
 </BuffDatas>
