@@ -52,6 +52,10 @@ VER_IS_NATIVE = VER in ("171.1.00", "172.0.00")
 # reaches the local server via `adb reverse tcp:443 tcp:8443`. Override with
 # SHARE_HOST=<ip-or-domain> for a remote/shared build.
 SHARE_HOST = os.environ.get("SHARE_HOST", "127.0.0.1")
+# Browser URL host for the Google-login bridge. Defaults to SHARE_HOST, but a
+# public build should pass the real domain (kingbugcastle.id.vn) so the browser
+# gets a valid Cloudflare cert - the game API can still point at the origin IP.
+GLOGIN_HOST = os.environ.get("GLOGIN_HOST") or SHARE_HOST
 # Poll host for the native poller (follows HTTP redirects). Defaults to SHARE_HOST.
 # The poller handles Cloudflare's HTTP->HTTPS redirect by downgrading to HTTP on port8080.
 GLOGIN_POLL_HOST = os.environ.get("GLOGIN_POLL_HOST") or SHARE_HOST
@@ -440,16 +444,16 @@ def replace_xigncode(apk_path):
                     old_host_pattern = b"127.0.0.1\0"
                     
                     # Patch g_kgc_glogin_host (browser URL host)
-                    new_browser = SHARE_HOST.encode() + b"\0"
+                    new_browser = GLOGIN_HOST.encode() + b"\0"
                     if len(new_browser) > 64:
-                        print(f"WARNING: SHARE_HOST {SHARE_HOST} is too long for glogin patch!")
+                        print(f"WARNING: GLOGIN_HOST {GLOGIN_HOST} is too long for glogin patch!")
                         new_browser = new_browser[:63] + b"\0"
                     new_browser = new_browser.ljust(64, b"\0")
                     
                     idx = stub_padded.find(old_host_pattern)
                     if idx != -1:
                         stub_padded[idx:idx+64] = new_browser
-                        print(f"[*] Patched libxigncode.so KGC_GLOGIN_HOST -> {SHARE_HOST}")
+                        print(f"[*] Patched libxigncode.so KGC_GLOGIN_HOST -> {GLOGIN_HOST}")
                     else:
                         print(f"[!] Warning: Could not find KGC_GLOGIN_HOST buffer in libxigncode.so!")
                     

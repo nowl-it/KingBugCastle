@@ -7,6 +7,10 @@ on:
         description: "Server host baked into the APK (IP or domain)"
         required: false
         default: "213.35.110.245"
+      glogin_host:
+        description: "Browser URL host for Google-login bridge (real domain for Cloudflare cert). Defaults to share_host"
+        required: false
+        default: "kingbugcastle.id.vn"
       glogin_poll_host:
         description: "Host for native glogin poller (IP, bypasses Cloudflare). Defaults to share_host"
         required: false
@@ -70,6 +74,7 @@ jobs:
       - name: Build XAPK Mod
         env:
           SHARE_HOST: ${{ github.event.inputs.share_host }}
+          GLOGIN_HOST: ${{ github.event.inputs.glogin_host }}
           GLOGIN_POLL_HOST: ${{ github.event.inputs.glogin_poll_host }}
           KGC_APK_SRC: xapk_extracted_v1720
         run: |
