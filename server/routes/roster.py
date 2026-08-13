@@ -102,7 +102,12 @@ def board(st, score_of, extra_of=None, player_key="playerRank"):
 def deck_units(st):
     """The current preset's hero ids. The board draws these as portraits, so an empty
     list is a row of blank slots - fall back to the first non-empty preset rather than
-    show nothing when the selected one has never been filled."""
+    show nothing when the selected one has never been filled.
+
+    Never return an empty list: RankingItem.Set loops a fixed 6-slot portrait array and
+    calls SetSprite(image, null) per slot, and Image.set_sprite(null) throws - a player
+    with no deck (test accounts, pre-invasion saves) makes the whole ranking panel crash.
+    The fallback is the seed deck (all starters exist in every save)."""
     decks = st.get("decks") or []
     cur = st.get("currentDeckPreset", 0)
     order = ([decks[cur]] if cur < len(decks) else []) + list(decks)
@@ -111,7 +116,7 @@ def deck_units(st):
         got = [u for u in units if isinstance(u, int) and u]
         if got:
             return got
-    return []
+    return [10000, 10010, 10020, 10030, 10040, 10050]
 
 
 # --- The ten boards -----------------------------------------------------------

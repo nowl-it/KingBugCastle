@@ -214,6 +214,13 @@ def build(gate, buy_counts=None, now="", xml_dir=DEFAULT_XML):
         bucket = BUCKET.get(el.findtext("Type"))
         if not bucket or not is_current(el, gate, seasons):
             continue
+        # Skip items that pay out nothing (CashMine 9100-9108, bare Heart 700, stale
+        # EventShop rows...). Client ShopItem.Init crashes on their empty reward list
+        # (get_Item(0) with Count==0 -> ArgumentOutOfRangeException, v172.0.01
+        # lobby-black-screen bug). gachaItems is exempt: a summon's payout comes from
+        # Gachas.xml Results, so an empty row there is correct.
+        if bucket != "gachaItems" and not rewards_of(el):
+            continue
         out[bucket].append(to_model(el, buy_counts.get(str(sid), 0), now))
     for rows in out.values():
         rows.sort(key=lambda r: r["itemId"])
@@ -249,12 +256,14 @@ def _self_check():
                 assert x["count"] >= 1, f"{r['itemId']}: reward {x} has count < 1"
                 assert x["id"] >= 0
     # Nothing should be listed that pays out nothing at all - that is a buy button
-    # with no effect, which is worse than the tab being empty. gachaItems is exempt:
-    # a summon's payout is rolled from Gachas.xml Results, not fixed on the shop row,
-    # so an empty reward list there is correct rather than a hole. (gacha.py rolls it.)
-    empty = [r["itemId"] for n in ("dailyItems", "goldItems",
-                                   "arenaShopItems", "clanShopItems", "challengeShopItems")
-             for r in buckets[n] if not rewards_of(items[r["itemId"]])]
+    # with no effect, which is worse than the tab being empty. It is also a client
+    # crash: ShopItem.Init indexes List.get_Item(0) on the reward list, so an empty
+    # one throws ArgumentOutOfRangeException (v172.0.01 lobby-black-screen bug).
+    # build() skips them; this asserts the invariant across every non-gacha bucket.
+    # gachaItems is exempt: a summon's payout is rolled from Gachas.xml Results, not
+    # fixed on the shop row, so an empty reward list there is correct. (gacha.py rolls it.)
+    empty = [r["itemId"] for n, rows in buckets.items()
+             for r in rows if n != "gachaItems" and not rewards_of(items[r["itemId"]])]
     assert not empty, f"listed items with no reward: {empty}"
     # A version-gated item must actually be excluded.
     gated = [i for i, el in items.items()

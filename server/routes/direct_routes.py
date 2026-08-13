@@ -47,11 +47,16 @@ def invasion_records():
 
     Accessory/treasure/rift-weapon unlocks gate on invasion cleared difficulty, not on
     hard mode, so every difficulty up to `invasionUnlockedDifficulty` must be present
-    and carry that same number as its unlockedDifficulty."""
+    and carry that same number as its unlockedDifficulty.
+
+    `difficulty` is the highest CLEARED tier and MUST be `unlocked`, not the loop var:
+    GetInvasionClearedDifficulty reads records.First(theme).difficulty, so a `d` there
+    reports cleared=1 and every Invasion II theme (diff >= 6) stays locked in Battle.
+    The d-loop only pads the list length for per-tier indexing (same fix as r_player)."""
     unlocked = RCFG["player"]["invasionUnlockedDifficulty"]
     themes = ([t for a, b in RCFG["player"]["invasionThemeRanges"] for t in range(a, b)]
               + srv._PREREQ_THEMES)
-    return [{"theme": t, "difficulty": d, "unlockedDifficulty": unlocked}
+    return [{"theme": t, "difficulty": unlocked, "unlockedDifficulty": unlocked}
             for t in themes for d in range(1, unlocked + 1)]
 
 
