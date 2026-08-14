@@ -10,6 +10,7 @@ All formulas, costs, and probabilities are parsed directly from:
 - `server/xml_live/RiftWeapons.xml`
 """
 import copy
+import itertools
 import random
 import re
 import xml.etree.ElementTree as ET
@@ -228,6 +229,33 @@ def make_rift_crystal(i, rw_id, main_idx=None, rarity=1, building_levels=None, s
     }
 
 
+def make_all_legendary_crystals():
+    """Generate the full set of 216 Legendary 2-altar crystals (for admin tools)."""
+    crystals = []
+    c_id = 100
+    altar_pairs = list(itertools.combinations(range(RIFT_BUILDING_COUNT), 2))
+    now = now_iso(0)
+    for w_id in ALL_RIFT_WEAPON_IDS:
+        for a1, a2 in altar_pairs:
+            b_levels = [0] * RIFT_BUILDING_COUNT
+            b_levels[a1] = 15
+            b_levels[a2] = 15
+            crystal = {
+                "id": c_id,
+                "weaponId": w_id,
+                "mainBuildingIdx": a1,
+                "buildingLevels": b_levels,
+                "rarity": 5,  # Legendary (King God Rift Crystal)
+                "ceilCount": 0,
+                "state": 0,
+                "createdAt": now,
+                "updatedAt": now,
+            }
+            crystals.append(crystal)
+            c_id += 1
+    return crystals
+
+
 DEFAULT_RIFT_WEAPONS = [make_rift_weapon(i + 1, rwid) for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
 DEFAULT_RIFT_CRYSTALS = [make_rift_crystal(i + 1, rwid, main_idx=i, rarity=(i % 5) + 1) for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
 
@@ -276,7 +304,7 @@ def ensure_rift_state(st):
     changed = False
 
     # 1. Rift Weapons
-    if "riftWeapons" not in st or not st["riftWeapons"]:
+    if "riftWeapons" not in st:
         st["riftWeapons"] = copy.deepcopy(DEFAULT_RIFT_WEAPONS)
         changed = True
     else:

@@ -28,6 +28,7 @@ import rift
 def _fresh_state():
     st = server.load_state()
     rift.ensure_rift_state(st)
+    st["riftWeapons"] = [rift.make_rift_weapon(i + 1, rwid) for i, rwid in enumerate(rift.ALL_RIFT_WEAPON_IDS)]
     st["gold"] = 1_000_000
     st["cash"] = 10_000
     st["heart"] = 500

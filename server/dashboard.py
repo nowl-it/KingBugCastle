@@ -437,6 +437,8 @@ async def api_player_macro(pid: str, body: dict):
     elif macro == "accessory_admin":
         from cli import grant_accessories
         st["accessories"] = grant_accessories.build(pid)
+    elif macro == "rift_legendary_all":
+        _grant_rift_collection_to_player(st, wipe_test_equip=True)
     else:
         raise HTTPException(400, f"unknown macro {macro}")
         
@@ -541,6 +543,42 @@ async def api_heroes_grant_all(pid: str, body: dict = None):
             added += 1
     _write_state(pid, st)
     return {"ok": True, "added": added, "total": len(cards)}
+
+
+def _grant_rift_collection_to_player(st, wipe_test_equip=True):
+    import rift
+    if wipe_test_equip:
+        st["riftWeapons"] = []
+        st["equippedRiftWeapons"] = {}
+    st["riftCrystals"] = rift.make_all_legendary_crystals()
+    st["riftGauge"] = 1000
+    for kv in st.setdefault("keyValues", []):
+        if kv.get("key") == "RiftGauge":
+            kv["value"] = "1000"
+
+
+@app.post("/api/player/{pid}/grant-legendary-rift-crystals")
+async def api_grant_legendary_rift_crystals(pid: str, body: dict = None):
+    st = _read_state(pid)
+    b = body or {}
+    wipe = bool(b.get("wipeTestEquip", True))
+    _grant_rift_collection_to_player(st, wipe_test_equip=wipe)
+    _write_state(pid, st)
+    return {"ok": True, "crystalCount": len(st.get("riftCrystals", [])), "riftGauge": st.get("riftGauge", 1000)}
+
+
+@app.post("/api/players/grant-all-legendary-rift-crystals")
+async def api_grant_all_players_legendary_rift_crystals(body: dict = None):
+    b = body or {}
+    wipe = bool(b.get("wipeTestEquip", True))
+    count = 0
+    for uid, st, _ in playerdb.all_players():
+        if not st:
+            continue
+        _grant_rift_collection_to_player(st, wipe_test_equip=wipe)
+        playerdb.save(uid, st)
+        count += 1
+    return {"ok": True, "migratedPlayers": count, "crystalsPerPlayer": 216}
 
 
 # --- inventory --------------------------------------------------------------

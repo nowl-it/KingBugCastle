@@ -275,6 +275,17 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
                 <Button variant="secondary" onClick={() => handleMacro("accessory_admin")}>Admin Accessories</Button>
               </div>
             </div>
+            <div>
+              <h4 className="text-sm font-medium mb-2">Rift Weapons & Crystals</h4>
+              <div className="flex flex-wrap gap-2">
+                <Button variant="secondary" onClick={() => handleMacro("rift_legendary_all")}>✨ Grant 216 Legendary Crystals (Selected Player)</Button>
+                <Button variant="outline" onClick={async () => {
+                  if (!window.confirm("Grant 216 Legendary Rift Crystals and clean test equipment for ALL players on the server?")) return
+                  await runMutation("/api/players/grant-all-legendary-rift-crystals", { method: "POST" }, "Granted 216 crystals to all players")
+                  onMutate()
+                }}>⚡ Grant 216 Crystals to ALL Players</Button>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>

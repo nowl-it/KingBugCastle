@@ -246,22 +246,19 @@ def register(app, srv):
     async def admin_give_all_treasures():
         return {"ok": True, "count": len(srv.DEFAULT_TREASURES)}
 
-    @app.post("/admin/api/rift-crystals/grant")
-    async def admin_grant_rift_crystals(request: Request):
-        body = await request.json()
-        weapon_id = body.get("weaponId", 0)
-        match = [t for t in srv.DEFAULT_RIFT_CRYSTALS if t["weaponId"] == weapon_id]
-        if not match:
-            return {"ok": False, "error": f"no template for weaponId {weapon_id}"}
+    @app.post("/admin/api/rift-crystals/grant-all-legendary")
+    async def admin_grant_all_legendary_rift_crystals():
+        import rift
         st = active_state()
-        crystals = st.setdefault("riftCrystals", [])
-        new = dict(match[0])
-        new["id"] = max((c["id"] for c in crystals), default=0) + 1
-        new["createdAt"] = srv.now_iso()
-        new["updatedAt"] = srv.now_iso()
-        crystals.append(new)
+        st["riftWeapons"] = []
+        st["equippedRiftWeapons"] = {}
+        st["riftCrystals"] = rift.make_all_legendary_crystals()
+        st["riftGauge"] = 1000
+        for kv in st.setdefault("keyValues", []):
+            if kv.get("key") == "RiftGauge":
+                kv["value"] = "1000"
         srv.save_state(st)
-        return {"ok": True, "crystal": new}
+        return {"ok": True, "count": len(st["riftCrystals"])}
 
     @app.post("/admin/api/state/reload")
     async def admin_reload_state():
