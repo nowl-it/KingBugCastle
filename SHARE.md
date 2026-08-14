@@ -38,11 +38,8 @@ Output: `KingBugCastle.xapk` at the repo root. Same 14 patches + XIGNCODE stub a
 normal build, renamed to `com.nowl.castle` (installs beside the real game). Hand this file to
 players with `README_PLAYER.md`.
 
-> **This packages the v170.1.00 client.** The v171 builder (`build_v171_private.py`) honours
-> the same `SHARE_HOST`, so the host is baked in correctly, but it **installs over adb and
-> does not package an `.xapk`** — there is no `--share` there yet. To hand out a v171 build
-> you have to zip the three signed APKs from its work directory yourself. v170.1.00 remains
-> the supported hand-out path.
+> **Build modern clients:** Run `SHARE_HOST=your-ip python3 server/builders/build_private.py --share`
+> which automatically builds and packages `KingBugCastle_<ver>.xapk` for distribution.
 
 ## 3. Run the server
 

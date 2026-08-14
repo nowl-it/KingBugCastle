@@ -13,7 +13,7 @@ no device / root / RAM-dump:
   → the real `libil2cpp.so`
 
 The recovered lib lives at `il2cpp/v171.0.00/libil2cpp_v171.so` (unpatched) and
-`libil2cpp_v171_ssl.so` (the +14-patch build input for `server/build_v171_private.py`).
+`libil2cpp_v171_ssl.so` (the build input for `server/builders/build_private.py`).
 The one-off unpack scripts were removed after they did their job; the full recipe
 below reproduces them, and [[project_v171_neo_layer2_algo]] in memory carries it too.
 
@@ -187,7 +187,7 @@ was proven. What's kept:
 ```
 il2cpp/v171.0.00/
 ├── libil2cpp_v171.so         recovered ELF, unpatched (113 MB)
-├── libil2cpp_v171_ssl.so     + 14 patches; build input for build_v171_private.py
+├── libil2cpp_v171_ssl.so     SSL patched; build input for build_private.py
 ├── dump.cs                   Il2CppDumper type dump (offset reference)
 ├── script.json               full script map
 └── global-metadata.dat       v171 metadata (Il2CppDumper input)
@@ -257,7 +257,7 @@ start by carving that segment - do not assume the five-layer chain still applies
 *Superseded by the v171.1.00 section below - kept because the metadata analysis is
 what explains why a mismatched lib/metadata pair fails silently.*
 
-At the time, `server/build_v171_private.py` took the **v171.0.01** APKs. Two things
+At the time, `server/builders/build_private.py` took the **v171.0.01** APKs. Two things
 had to change; both were silent failures, not crashes, which is why "it just doesn't
 run". (Both `apk/xapk_extracted_v17100/` and `apk/xapk_extracted_v1711/` are on disk
 now - `./kgc-cli download -v <version> --arch arm64 -o apk/` re-fetches any of them.)
@@ -411,7 +411,7 @@ The cipher is identified by its own constant: `0x1e2ff4` loads `expand 32-byte k
 
 ### What this changes for the build
 
-`build_v171_private.py` now injects `il2cpp/v171.1.00/libil2cpp_v17110_ssl.so` when
+`build_private.py` now injects `il2cpp/v171.1.00/libil2cpp_v17110_ssl.so` when
 building from `xapk_extracted_v1711` - the lib unpacked from that build's own packer.
 It pairs with the metadata the APK already ships, so **`patch_metadata_swap.py` no
 longer runs**. Set `KGC_FORCE_V17100=1` to fall back to the v171.0.00 lib + swap.
@@ -419,7 +419,7 @@ longer runs**. Set `KGC_FORCE_V17100=1` to fall back to the v171.0.00 lib + swap
 Every il2cpp offset is per-lib and was re-derived from `il2cpp/v171.1.00/dump.cs` by
 exact class + signature match. All 10 NRE-stub prologues came back byte-identical to
 the v171.0.00 set, which is the cross-check that the re-derivation landed on the same
-methods; the SSL trio is in `make_v171_ssl_so.py` under version `171.1.00`.
+methods; the SSL trio is in `make_ssl_so.py` under version `171.1.00`.
 
 `ShopItem.Init`'s patch site does NOT match by bytes across the two builds (the
 immediates changed). It was matched by instruction shape instead - `adrp; ldr x8,[x8,#imm];

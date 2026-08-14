@@ -16,9 +16,9 @@ REPO = pathlib.Path(os.environ.get("KGC_ROOT") or pathlib.Path(__file__).resolve
 # 8 NEO_SIG_SITES too, and its bail-out pattern hits the same relative spacing
 # (+0/+0xa8/+0xc0/+0x148). The per-version il2cpp tables below pick the right
 # offsets for each build.
-#   KGC_APK_SRC=xapk_extracted_v1711 python3 build_v171_private.py
-#   KGC_APK_SRC=xapk_extracted_v1720 python3 build_v171_private.py
-#   KGC_APK_SRC=xapk_extracted_v17201 python3 build_v171_private.py
+#   python3 server/builders/build_private.py
+#   KGC_APK_SRC=xapk_extracted_v1720 python3 server/builders/build_private.py
+#   KGC_APK_SRC=xapk_extracted_v1711 python3 server/builders/build_private.py
 SRC = os.environ.get("KGC_APK_SRC", "xapk_extracted_v17201")
 XAPK = REPO / "apk" / SRC
 if not XAPK.is_dir():

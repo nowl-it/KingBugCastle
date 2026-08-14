@@ -14,10 +14,9 @@ crypto API), see **[`../docs/`](../docs/README.md)**.
 | A template field for artifact/accessory/treasure/rift-weapon/rift-crystal | `data/item_templates.json` |
 | Player identity/currency/card-template/deck seed defaults | `data/default_player.json` |
 | New route logic (state mutation, computed values) | The module that owns that subsystem — `clan.py`, `pvp.py`, `shop_routes.py`, `territory_routes.py`, `decoration_routes.py`, `seasonal.py`, `mini_games.py`, `roster.py`, `inbox.py`, `direct_routes.py`, `admin_api.py`. Only wiring and the leftover handlers live in `server.py` now. |
-| A route in a subsystem that has no module yet | `server.py` — add to `DYNAMIC_OVERRIDES`, or start a module with the same `handlers()` / `register(app, srv)` shape |
-| A binary patch to the client `.so` | `rebuild_arm64.py` (v170) or `build_v171_private.py` (v171). Offsets are per-version — re-derive from that version's own `dump.cs`, never shift the other set. |
-| A client-side UI behavior / il2cpp method hook (custom mail text, in-battle stat poller) | `jni/stub.cpp` — cmake in `/tmp/stub_build` (see SETUP.md), then `cp libxigncode.so xigncode_stub/arm64/` and rerun `build_v171_private.py`. Pick the right hook technique (methodPointer swap vs inline detour) — see `AGENTS.md` "il2cpp hook techniques" |
-| The build/patch/sign/install pipeline itself | `rebuild_arm64.py` (replaces the real app) or `rebuild_arm64_mod.py` (side-by-side King Bug Castle) |
+| A binary patch to the client `.so` | `rebuild_arm64.py` (v170) or `builders/build_private.py` (v171/v172). Offsets are per-version — re-derive from that version's own `dump.cs`, never shift the other set. |
+| A client-side UI behavior / il2cpp method hook (custom mail text, in-battle stat poller) | `jni/stub.cpp` — cmake in `/tmp/stub_build` (see SETUP.md), then `cp libxigncode.so xigncode_stub/arm64/` and rerun `builders/build_private.py`. Pick the right hook technique (methodPointer swap vs inline detour) — see `AGENTS.md` "il2cpp hook techniques" |
+| The build/patch/sign/install pipeline itself | `rebuild_arm64.py` (v170), `builders/build_private.py` (v171/v172 side-by-side King Bug Castle) |
 
 Rule of thumb: if the value doesn't change based on `st`/`body`, it's data — put it in
 `data/`, not in a Python literal. See `git log` for the 2026-07-02 refactor that moved

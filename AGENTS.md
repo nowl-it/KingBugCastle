@@ -124,12 +124,12 @@ All patches apply to `config.arm64_v8a.apk` → `lib/arm64-v8a/libil2cpp.so`. Of
 
 **Patch pattern**: `RET_FALSE` = `e0031f2ac0035fd6` = `mov x0,#0; ret`. SSL uses `RET_TRUE` = `20008052c0035fd6` = `mov w0,#1; ret`.
 
-### ARM64 Patch Inventory — private build (`server/builders/build_v171_private.py`)
+### ARM64 Patch Inventory — private build (`server/builders/build_private.py`)
 
 v171+ ships **no on-disk `libil2cpp.so`** (XIGNCODE NEO packs + encrypts it inside the packer `.so`).
 The build recovers one and injects it, then NOPs the NEO unpack path — see
 [docs/mftl-extraction.md](docs/mftl-extraction.md) for the unpack recipe and
-[docs/v171-private-build.md](docs/v171-private-build.md) for the operator playbook.
+[docs/private-build.md](docs/private-build.md) for the operator playbook.
 
 **Default input is v172.0.00** (`KGC_APK_SRC=xapk_extracted_v1720`), and it injects that build's
 **own** game code: `il2cpp/v172.0.00/libil2cpp_v172_ssl.so`, unpacked out of its packer by
@@ -145,8 +145,8 @@ older source) injects that build's own lib; only the v171.0.00 fallback **must**
 literal `/auth/xcdSeed?version=` at stringLiteral index 1545 of 25730, shifting 94% of all literal
 indices, and libil2cpp compiles those indices in.
 
-**Every il2cpp offset is per-lib.** The tables live side by side in `build_v171_private.py`
-(`_NRE_STUBS_V17100` / `_NRE_STUBS_V17110` / `_NRE_STUBS_V17200`) and are picked by `VER`
+**Every il2cpp offset is per-lib.** The tables live side by side in `build_private.py`
+(`_NRE_STUBS_V17100` / `_NRE_STUBS_V17110` / `_NRE_STUBS_V17200` / `_NRE_STUBS_V17201`) and are picked by `VER`
 (**RVA** convention: file offset = `RVA - 0x4000`). They were re-derived from each version's own
 `dump.cs` by exact class + signature match; all 10 stub prologues came back byte-identical across
 the three, which is the cross-check that the re-derivation landed on the same methods.
@@ -285,7 +285,7 @@ target differs). The v171.1.00 `bl` word `66983394` vs v172 `2bb03394` is the pe
 
 ### The `ldr → mov` klass patches CAUSE the black lobby — keep them OFF (disproven 2026-07-28)
 
-`LDR_PATCHES` in `build_v171_private.py` (65 sites, grown from an original 18) rewrites every
+`LDR_PATCHES` in `build_private.py` (65 sites, grown from an original 18) rewrites every
 `ldr x0, [xR]` in `Scene_Lobby.Init` to `mov x0, xR`. **It is off by default and must stay off.**
 `KGC_APPLY_LDR=1` re-enables it for an A/B.
 

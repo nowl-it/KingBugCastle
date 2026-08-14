@@ -32,11 +32,11 @@
 
 ## 2026-07-19: v171 private build reaches a fully rendered lobby
 
-Playbook: [docs/v171-private-build.md](docs/v171-private-build.md). Offsets:
-[AGENTS.md](AGENTS.md) → *ARM64 Patch Inventory — v171.0.00 private build*.
+Playbook: [docs/private-build.md](docs/private-build.md). Offsets:
+[AGENTS.md](AGENTS.md) → *ARM64 Patch Inventory — private build*.
 
 ### What we did
-- `build_v171_private.py` now boots v171 end-to-end against the private server: CDN handshake →
+- `builders/build_private.py` now boots private clients end-to-end against the private server: CDN handshake →
   `register` → `xcdSeed` → `auth` → `login` → ~51 lobby requests → lobby renders with correct
   Strings, fonts and player data.
 - Ported the v170 lobby-NRE stub set (10 patches) to v171. RVAs from `script.json`

@@ -82,17 +82,17 @@ ADB_SERIAL=<serial> python3 server/rebuild_arm64_mod.py --host 127.0.0.1
 adb -s <serial> reverse tcp:443 tcp:8443
 adb -s <serial> reverse tcp:80  tcp:8080     # optional (CDN is https, usually not needed)
 
-# 3. Launch. The v170.1.00 mod build uses MainActivity; the v171 build launches via
-#    AirbridgeActivity instead (see docs/v171-private-build.md).
-adb -s <serial> shell am start -n com.nowl.castle/com.awesomepiece.castle.MainActivity
+# 3. Launch. The v170.1.00 mod build uses MainActivity; modern builds launch via
+#    AirbridgeActivity instead (see docs/private-build.md).
+adb -s <serial> shell am start -n com.nowl.castle/co.ab180.airbridge.unity.AirbridgeActivity
 ```
 
 Healthy boot in logcat: `LibMainWrap → libxigncode.so → libmain_real.so → Unity il2cpp`, then
 `Hooked BattleManager.Update` / `Hooked PostListItem.Set`. Then the TLS log fills with `200 OK`.
 
-> The steps above are the **v170.1.00** client. The **v171** build needs a different builder
-> (`build_v171_private.py`), a different launcher activity, and plain HTTP instead of TLS — see
-> [v171-private-build.md](v171-private-build.md).
+> Modern builds (v171/v172) use the unified builder
+> (`server/builders/build_private.py`), `AirbridgeActivity`, and plain HTTP — see
+> [private-build.md](private-build.md).
 
 For **remote players** (no adb) you bake a public host instead — see [../SHARE.md](../SHARE.md).
 

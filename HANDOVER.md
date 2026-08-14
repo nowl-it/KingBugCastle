@@ -20,7 +20,7 @@ needed to point a real APK at it.
 Three deliverables, in dependency order:
 
 1. **The server** (`server/`, FastAPI) - answers all 351 routes the client can call.
-2. **The client build** (`server/build_v171_private.py`) - takes the store APK, unpacks the
+2. **The client build** (`server/builders/build_private.py`) - takes the store APK, unpacks the
    anti-cheat container, injects the game code, rebinds hostnames, re-signs, installs.
 3. **The master data** (`server/xml_live/` → `server/real_cdn/xml`) - a cloned copy of the
    game's CDN content bundle, which we re-serve and occasionally edit.
@@ -92,8 +92,8 @@ Verified baseline (2026-07-31), so you can tell a real regression from noise:
 Then build and run a client:
 
 ```bash
-KGC_APK_SRC=xapk_extracted_v1711 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 \
-  python3 server/build_v171_private.py
+SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 \
+  python3 server/builders/build_private.py
 adb shell am start -n com.nowl.castle/co.ab180.airbridge.unity.AirbridgeActivity
 ```
 

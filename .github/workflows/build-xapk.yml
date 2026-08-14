@@ -78,7 +78,7 @@ jobs:
           GLOGIN_POLL_HOST: ${{ github.event.inputs.glogin_poll_host }}
           KGC_APK_SRC: xapk_extracted_v17201
         run: |
-          python3 server/builders/build_v171_private.py --share
+          python3 server/builders/build_private.py --share
 
       - name: Resolve Version
         run: |

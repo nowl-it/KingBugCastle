@@ -23,9 +23,9 @@ It complements the other docs — read those for the *why* and the *internals*:
 | **[deploy-and-run.md](deploy-and-run.md)** | Start the two servers, connect a device, push a change to the client |
 | **[public-hosting.md](public-hosting.md)** | Run it where strangers can reach it: preflight, admin accounts, abuse limits, backups |
 | **[dashboard-macros.md](dashboard-macros.md)** | Using the Next.js Admin Dashboard to quickly grant Macro Profiles to players |
-| **[v171-private-build.md](v171-private-build.md)** | Build/run the **v171** client (XIGNCODE NEO unpack, injected il2cpp, HTTP-not-TLS) |
+| **[private-build.md](private-build.md)** | Build/run the private client (v171/v172, XIGNCODE NEO unpack, injected il2cpp, HTTP-not-TLS) |
 | **[mftl-extraction.md](mftl-extraction.md)** | Recover `libil2cpp.so` from the XIGNCODE NEO container (`server/patchers/unpack_neo.py`) |
-| **[v171-emulator-note.md](v171-emulator-note.md)** | Player-facing note (VI): why stock v171 won't run on an emulator |
+| **[emulator-note.md](emulator-note.md)** | Player-facing note (VI): why stock v171+ won't run on an emulator |
 | **[multi-account-login.md](multi-account-login.md)** | Multiple accounts/devices, the web-Google login bridge (`GLOGIN_DEV=1`), transfer codes |
 | **[save-editing.md](save-editing.md)** | Grant currency / items / units / skins / treasures by editing player state or sending mail |
 | **[content-unlock.md](content-unlock.md)** | Unlock version-gated content (`MinVersion`) — treasures, skins, units, stages |

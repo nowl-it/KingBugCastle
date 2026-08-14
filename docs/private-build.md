@@ -83,7 +83,7 @@ So the v171 build has to do three extra things before the familiar patches even 
    that metadata - see below.
 
 Everything downstream (host rebinding, package rename, XIGNCODE stub, signing) is the same shape as
-`rebuild_arm64_mod.py`, just driven by `server/build_v171_private.py`.
+`rebuild_arm64_mod.py`, just driven by `server/builders/build_private.py`.
 
 ## Building on v171.0.01 APKs (current input)
 
@@ -114,7 +114,7 @@ GLOGIN_DEV=1 uvicorn server:app --host 0.0.0.0 --port 8080 &
 GLOGIN_DEV=1 uvicorn server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem --ssl-certfile cert.pem &
 
 # 2. Build + sign + install "King Bug Castle" (com.nowl.castle, side-by-side with the real app)
-SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 python3 server/build_v171_private.py
+SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 python3 server/builders/build_private.py
 
 # 3. Route the device back to your server (per-connection — re-run after any reconnect)
 adb reverse tcp:80 tcp:8080
@@ -238,7 +238,7 @@ them, so use `dl_iterate_phdr` for the load bias.
 
 **Two backend URLs hide from `patch_hosts.py`.** It only walks the stringLiteral table;
 `patch_leftover_hosts.py` catches the two field-default copies - but that call is currently
-**commented out** in `build_v171_private.py`'s `main()`. Harmless while `SHARE_HOST=127.0.0.1` and
+active in `build_private.py`'s `main()`. Harmless while `SHARE_HOST=127.0.0.1` and
 the device has no route to the real backend; if the client ever reaches a real backend IP, re-enable
 it first.
 

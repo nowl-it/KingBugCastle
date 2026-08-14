@@ -143,7 +143,7 @@ Three client-side pieces, all working on the v171 private build:
 
 - **Deep-link scheme (static):** `patchers/patch_deeplink.py` adds a
   `kingbugcastle://` VIEW intent-filter to the launcher activity, wired into
-  `build_v171_private.py`'s manifest step. Installed but not on the live path (see
+  `build_private.py`'s manifest step. Installed but not on the live path (see
   above) - kept because it costs nothing and the return page still fires it.
 - **Google button -> OpenURL:** `jni/stub.cpp` inline-detours
   `Scene_Login.OnClickGoogleLogin` (v171 recovered-lib RVA `0x34FBC00`) and calls

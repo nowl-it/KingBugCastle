@@ -252,4 +252,4 @@ see `AGENTS.md` "il2cpp hook techniques":
   via `set_text`, bypassing the Localizer — no CDN Strings rebuild needed).
 
 Build: cmake in `/tmp/stub_build` (see SETUP.md), then `cp libxigncode.so xigncode_stub/arm64/` and
-run `build_v171_private.py`.
+run `builders/build_private.py`.

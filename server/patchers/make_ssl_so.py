@@ -1,20 +1,15 @@
 #!/usr/bin/env python3
 """
-Regenerate il2cpp/v171.0.00/libil2cpp_v171_ssl.so from the pristine recovered
-libil2cpp_v171.so + exactly the 3 SSL-bypass patches. Nothing else.
+Regenerate libil2cpp_v*_ssl.so from the pristine recovered
+libil2cpp_v*.so + exactly the 3 SSL-bypass patches. Nothing else.
 
-This file is the input build_v171_private.py injects into the APK, and it MUST
-stay pristine. It rotted once (2026-07-19) after being hand-patched across
-several sessions: 21 stray bytes, one of which overwrote `mov w8,#-2` with a
-`b 0x3503ba8` inside Scene_Login.<CheckUseAssetBundle>d__79.MoveNext, producing
-an infinite UniTask recursion and a stack-overflow SIGSEGV that looked exactly
-like an engine bug. Two sessions were lost to it. Regenerate here instead of
-patching in place, and the class of bug cannot come back.
+This file is the input build_private.py injects into the APK, and it MUST
+stay pristine. Regenerate here instead of patching in place.
 
-    python3 server/patchers/make_v171_ssl_so.py [VERSION] [--check]
+    python3 server/patchers/make_ssl_so.py [VERSION] [--check]
 
-VERSION is a directory under il2cpp/ (default 171.1.00). --check verifies the
-existing file instead of writing (exit 1 on mismatch).
+VERSION is a directory under il2cpp/ (e.g. 172.0.01, 172.0.00, 171.1.00).
+--check verifies the existing file instead of writing (exit 1 on mismatch).
 
 NOTE: the offsets below are RAW FILE OFFSETS, not RVAs. Every other v171 patch
 in this repo uses `RVA - 0x4000` (see AGENTS.md). Do not mix the two.

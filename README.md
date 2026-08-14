@@ -23,8 +23,8 @@ By dumping the IL2CPP metadata and intercepting network traffic, we have success
 ## ✨ Core Features
 
 * 🚀 **Full API Emulation**: A robust Python/FastAPI server replicating the exact behavior of `axis-game.awesomepiece.com` and `kgc-k8s-1.awesomepiece.com`.
-* 🛡️ **Client Binary Patching (ARM64)**: Automated Python pipeline (`rebuild_arm64.py` for v170, `build_v171_private.py` for v171) that patches `libil2cpp.so` to defeat SSL/TLS pinning and `CertificateHandler` checks.
-* 📦 **XIGNCODE NEO Unpacker**: v171 ships no `libil2cpp.so` - the game code is packed inside the anti-cheat library. `server/patchers/unpack_neo.py` recovers a linkable ELF from it offline (RSA-1024 → ChaCha20 → LZ4), so the build injects that build's *own* game code.
+* 🛡️ **Client Binary Patching (ARM64)**: Automated Python pipeline (`rebuild_arm64.py` for v170, `build_private.py` for v171/v172) that patches `libil2cpp.so` to defeat SSL/TLS pinning and `CertificateHandler` checks.
+* 📦 **XIGNCODE NEO Unpacker**: Modern versions ship no `libil2cpp.so` - the game code is packed inside the anti-cheat library. `server/patchers/unpack_neo.py` recovers a linkable ELF from it offline (RSA-1024 → ChaCha20 → LZ4), so the build injects that build's *own* game code.
 * 👻 **XIGNCODE3 Bypass**: Emulates the Wellbia anti-cheat seed exchange (`/auth/xcdSeed`) to allow the client to boot without verification crashes.
 * 🛠️ **`kgc-cli` Toolkit**: A proprietary command-line utility used for lightning-fast asset extraction, S3 CDN mirroring, and XML data diffing.
 * 🗃️ **Hot-Reloading State**: Complete control over your account. Player state lives in SQLite (`server/state/players.db`, via `playerdb.py`); edit it from the web dashboard or by hand, and `data/*.json` for response shapes - both take effect per-request, no restart.
@@ -50,7 +50,7 @@ The private server emulator is designed to intercept and process all traffic fro
 ### System Components
 
 1. **FastAPI Backend Emulator (`server.py` + the route modules beside it)**: Acts as the central game server (`axis-game.awesomepiece.com`), answering all 351 endpoints the client can call. Response *rules* are data, not code - flat JSON in `server/data/` - while live player progression is SQLite (`server/state/players.db`, WAL, one row per account, always through `playerdb.py`).
-2. **Binary Patcher (`rebuild_arm64.py` for v170, `build_v171_private.py` for v171)**: Before the game can connect to the emulator, the client's `libil2cpp.so` must be modified. This automated pipeline injects assembly to bypass SSL pinning (forcing `CertificateHandler.ValidateCertificate` to always return true) and skips NRE (NullReferenceException) triggers in the UI. On v171 there is no `libil2cpp.so` to patch until `patchers/unpack_neo.py` recovers one from the anti-cheat packer.
+2. **Binary Patcher (`rebuild_arm64.py` for v170, `build_private.py` for v171/v172)**: Before the game can connect to the emulator, the client's `libil2cpp.so` must be modified. This automated pipeline injects assembly to bypass SSL pinning (forcing `CertificateHandler.ValidateCertificate` to always return true) and skips NRE (NullReferenceException) triggers in the UI. Modern versions pack `libil2cpp.so` inside XIGNCODE NEO until `patchers/unpack_neo.py` recovers one from the anti-cheat packer.
 3. **Local XML CDN**: The game downloads "Patch Assets" (XML tables) at boot. We mirror the official S3 CDN locally. The backend directs the game to our local CDN (`kgc-cdn-1.awesomepiece.com`), allowing us to inject custom items, text modifications, and rule changes via `rebuild_xml_bundle.py`.
 4. **XIGNCODE3 Stub + native hook host (`jni/stub.cpp`)**: The proprietary anti-cheat module prevents the game from booting if it can't reach the Wellbia servers. We replace the heavy `libxigncode.so` with our own native library that registers no-op `ZCWAVE_*` JNI methods (faking the `/auth/xcdSeed` handshake and bypassing local integrity checks), then goes further — a worker thread dlopen's `libil2cpp.so` and installs il2cpp method hooks for in-game features (an in-battle GameUnit stat poller, and a custom Inbox-mail text hook). Two hook techniques are used depending on how the target method is invoked (methodPointer swap for Unity engine messages, inline detour for direct C# calls).
 
@@ -110,9 +110,9 @@ Want to understand how we dumped IL2CPP, mapped the 351 routes, defeated SSL pin
 | Directory | Purpose |
 | --- | --- |
 | 📁 `docs/` | Operator knowledge base - playbooks for granting items, unlocking content, editing stages/master data ([`docs/README.md`](docs/README.md)). |
-| 📁 `server/` | The core FastAPI backend, its route modules, and the client build scripts (`rebuild_arm64.py`, `build_v171_private.py`). |
+| 📁 `server/` | The core FastAPI backend, its route modules, and the client build scripts (`rebuild_arm64.py`, `build_private.py`). |
 | 📁 `server/data/` | Static JSON models and response templates (Docs: [`server/data/README.md`](server/data/README.md)). |
-| 📁 `server/patchers/` | The APK/binary patchers the build scripts call - host rebind, package rename, metadata edits, and `unpack_neo.py` (recovers `libil2cpp.so` from the v171 anti-cheat packer). |
+| 📁 `server/patchers/` | The APK/binary patchers the build scripts call - host rebind, package rename, metadata edits, and `unpack_neo.py` (recovers `libil2cpp.so` from the anti-cheat packer). |
 | 📁 `server/xml_live/` | Live-edited master data. Edit here, then `rebuild_xml_bundle.py` to push it to the client. |
 | 📁 `server/webui/` | The admin dashboard (Vue 3, vendored - no build step). |
 | 📁 `api/` | Auxiliary integrations and external tool endpoints. |
