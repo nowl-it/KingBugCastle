@@ -57,6 +57,15 @@ VERSIONS = {
              (0x5978BA4, "MobileTlsContext.ValidateCertificate")],
         anchors=[(0x2CB9FB4, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
     ),
+    # Recovered from the v172.0.01 packer (libpouricol.so). All 3 prologues
+    # byte-identical again (fe5fbda9 / ff0302d1 / fe0f1ff8), only offsets moved.
+    "172.0.01": dict(
+        src="libil2cpp_v17201.so", dst="libil2cpp_v17201_ssl.so",
+        ssl=[(0x2CBAEB0, "PinnedCertHandler.ValidateCertificate"),
+             (0x597BDE8, "UnityTlsProvider.ValidateCertificate"),
+             (0x597A4F8, "MobileTlsContext.ValidateCertificate")],
+        anchors=[(0x2CBAEB0, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
+    ),
 }
 
 VERSION = next((a for a in sys.argv[1:] if not a.startswith("-")), "171.1.00")

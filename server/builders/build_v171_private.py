@@ -12,42 +12,52 @@ REPO = pathlib.Path(os.environ.get("KGC_ROOT") or pathlib.Path(__file__).resolve
 # 3.3 MB of code, all 12 patch sites at the same offsets), so one script covers both.
 # v172.0.00's packer (libbeniolle.so) is the same binary again: all 8 NEO_SIG_SITES
 # byte-identical and the bail-out pattern hits the same 4 offsets, only the filename
-# rotated. The per-version il2cpp tables below pick the right offsets for each build.
+# rotated. v172.0.01's packer (libpouricol.so) is byte-identical to v172.0.00's at all
+# 8 NEO_SIG_SITES too, and its bail-out pattern hits the same relative spacing
+# (+0/+0xa8/+0xc0/+0x148). The per-version il2cpp tables below pick the right
+# offsets for each build.
 #   KGC_APK_SRC=xapk_extracted_v1711 python3 build_v171_private.py
 #   KGC_APK_SRC=xapk_extracted_v1720 python3 build_v171_private.py
-SRC = os.environ.get("KGC_APK_SRC", "xapk_extracted_v1720")
+#   KGC_APK_SRC=xapk_extracted_v17201 python3 build_v171_private.py
+SRC = os.environ.get("KGC_APK_SRC", "xapk_extracted_v17201")
 XAPK = REPO / "apk" / SRC
 if not XAPK.is_dir():
     raise SystemExit(f"no such APK source: {XAPK}")
 WORK = REPO / (".rebuild_" + SRC.replace("xapk_extracted_", ""))
 # Which recovered libil2cpp to inject, selected by the APK source directory.
 #
-# NATIVE (default for v171.1.00 / v172.0.00 sources): the lib unpacked from THIS
-# build's own packer by server/patchers/unpack_neo.py, so it pairs with the metadata
-# the APK already ships and no metadata swap is needed.
+# NATIVE (default for v171.1.00 / v172.0.00 / v172.0.01 sources): the lib unpacked
+# from THIS build's own packer by server/patchers/unpack_neo.py, so it pairs with the
+# metadata the APK already ships and no metadata swap is needed.
 #
 # The v171.0.00 lib is the fallback for older sources. It needs the swap: v171.0.01
 # inserted "/auth/xcdSeed?version=" at stringLiteral index 1545 of 25730, shifting the
 # index of every literal above it, and libil2cpp has those indices baked into its code
 # - so the v171.0.00 lib resolves 94% of its literals to the wrong entry against any
 # newer metadata. Every other section of the two files is identical.
-_NATIVE = REPO / "il2cpp" / "v172.0.00" / "libil2cpp_v172_ssl.so"
-if SRC == "xapk_extracted_v1720" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-    VER = "172.0.00"
+_NATIVE = REPO / "il2cpp" / "v172.0.01" / "libil2cpp_v17201_ssl.so"
+if SRC == "xapk_extracted_v17201" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+    VER = "172.0.01"
     IL2CPP_DEC = _NATIVE
     METADATA_DEC = None                 # the shipped metadata already matches
 else:
-    _NATIVE = REPO / "il2cpp" / "v171.1.00" / "libil2cpp_v17110_ssl.so"
-    if SRC == "xapk_extracted_v1711" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-        VER = "171.1.00"
+    _NATIVE = REPO / "il2cpp" / "v172.0.00" / "libil2cpp_v172_ssl.so"
+    if SRC == "xapk_extracted_v1720" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+        VER = "172.0.00"
         IL2CPP_DEC = _NATIVE
         METADATA_DEC = None                 # the shipped metadata already matches
     else:
-        VER = "171.0.00"
-        IL2CPP_DEC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
-        METADATA_DEC = REPO / "il2cpp" / "v171.0.00" / "global-metadata.dat"
+        _NATIVE = REPO / "il2cpp" / "v171.1.00" / "libil2cpp_v17110_ssl.so"
+        if SRC == "xapk_extracted_v1711" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+            VER = "171.1.00"
+            IL2CPP_DEC = _NATIVE
+            METADATA_DEC = None                 # the shipped metadata already matches
+        else:
+            VER = "171.0.00"
+            IL2CPP_DEC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
+            METADATA_DEC = REPO / "il2cpp" / "v171.0.00" / "global-metadata.dat"
 # Every il2cpp offset below is per-lib, so this picks which table to use.
-VER_IS_NATIVE = VER in ("171.1.00", "172.0.00")
+VER_IS_NATIVE = VER in ("171.1.00", "172.0.00", "172.0.01")
 # Host to rebind the 5 backend hostnames to (private server). Default 127.0.0.1
 # reaches the local server via `adb reverse tcp:443 tcp:8443`. Override with
 # SHARE_HOST=<ip-or-domain> for a remote/shared build.
@@ -85,7 +95,8 @@ ORIG_APKS = {
 # file offset = RVA - 0x4000; per-version, re-derived from that version's dump.cs.
 CHECKFIREBASE_OFF = {"171.0.00": 0x303C6C0,
                       "171.1.00": 0x3041594 - 0x4000,
-                      "172.0.00": 0x304241C}[VER]
+                      "172.0.00": 0x304241C,
+                      "172.0.01": 0x30439B8}[VER]
 RET = bytes.fromhex('c0035fd6')  # arm64 `ret`
 
 # OBSOLETE, opt-in only (KGC_ASSETBYPASS=1). The "infinite UniTask recursion" this was
@@ -96,11 +107,14 @@ RET = bytes.fromhex('c0035fd6')  # arm64 `ret`
 # skips usePatch/getPatchFolder, so the CDN `xml` bundle (Strings + fonts) never downloads
 # and the whole UI renders garbled.
 CHECKUSEASSET_OFF = {"171.1.00": 0x34f9588 - 0x4000,
-                      "172.0.00": 0x3501DD0 - 0x4000}[VER]
+                      "172.0.00": 0x3501DD0 - 0x4000,
+                      "172.0.01": 0x3503404 - 0x4000}[VER]
 # mov w1,#1 (0x52000021) ; b LoadAfterAssetBundle. Displacement per version:
 # v171.1.00 target RVA 0x34f9618 = site +0x8C (0x14000023),
-# v172.0.00 target RVA 0x3501E60 = site +0x90 (0x14000024).
+# v172.0.00 target RVA 0x3501E60 = site +0x90 (0x14000024),
+# v172.0.01 target RVA 0x3503494 = site +0x90 (0x14000024).
 CHECKUSEASSET_PATCH = bytes.fromhex('2100005223000014' if VER == "171.1.00" else '2100005224000014')
+    
 
 # PvPPanel.<Init>d__77.MoveNext -> early return false. Same NRE stub v170 applies
 # (rebuild_arm64.py "pvp-init"): the lobby PvP panel NREs on the semiSeason path even
@@ -156,9 +170,22 @@ _NRE_STUBS_V17200 = [
     (0x34B0374, "content-alert", 'fe0f1bf8fa6701a9', RET_FALSE),  # WorldPanel.ReloadNewContentAlert
     (0x3068B4C, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
 ]
+_NRE_STUBS_V17201 = [
+    (0x325F700, "pvp-init",      'ff8303d1fd7b08a9', RET_FALSE),  # PvPPanel.<Init>d__77.MoveNext
+    (0x325A37C, "pvp-reward",    'fe0f1bf8fa6701a9', RET_FALSE),  # PvPPanel.GetReceivableWinRewardCount
+    (0x32CB038, "shop-growth",   'fe0f1af8fc6f01a9', RET_FALSE),  # PackageItem.InitCustomGrowthPackage
+    (0x32CD108, "shop-season",   'ff4301d1fe6701a9', RET_FALSE),  # PackageItem.InitSeasonPassPackage
+    (0x305D2E8, "year-event",    'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsYearEventAvailable
+    (0x305F3C8, "card-event",    'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsEventCardCollectingAvailable
+    (0x305F2C0, "season-event",  'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsSpecialSeasonalEventOpened
+    (0x3044820, "babel-data",    'fe0f1df8f65701a9', RET_FALSE),  # GameManager.GetBabelData -> null
+    (0x34B19A8, "content-alert", 'fe0f1bf8fa6701a9', RET_FALSE),  # WorldPanel.ReloadNewContentAlert
+    (0x306A180, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
+]
 NRE_STUBS = {"171.0.00": _NRE_STUBS_V17100,
              "171.1.00": _NRE_STUBS_V17110,
-             "172.0.00": _NRE_STUBS_V17200}[VER]
+             "172.0.00": _NRE_STUBS_V17200,
+             "172.0.01": _NRE_STUBS_V17201}[VER]
 
 # Scene_Base.RegisterHackDetectionCallback @ RVA 0x34DB060 (file 0x34D7060).
 # Stub it to ret (no-op) so the managed callback that shows "File integrity check
@@ -172,7 +199,8 @@ NRE_STUBS = {"171.0.00": _NRE_STUBS_V17100,
 # Patching this at the very start prevents the listener from ever being set up.
 REGISTER_HACK_DETECT_OFF = {"171.0.00": 0x34D7060,
                              "171.1.00": 0x34DC038 - 0x4000,
-                             "172.0.00": 0x34E38A8 - 0x4000}[VER]
+                             "172.0.00": 0x34E38A8 - 0x4000,
+                             "172.0.01": 0x34E4EDC - 0x4000}[VER]
 REGISTER_HACK_DETECT_ORIG = 'fe57bea9'  # stp x30, x21, [sp, #-0x20]!
 REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
 
@@ -371,7 +399,19 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
     # bail-out. Both the site and the branch displacement are per-version - the v17110
     # site was matched by instruction shape (adrp;ldr;mov x22,x0;mov x0,x20;mov w1,wzr;
     # ldr x2,[x8];bl;cbz x0), which is identical in both builds.
-    if VER == "172.0.00":
+    # v172.0.00/01: the method was rewritten (Init(int id) -> GetInventoryItems() ->
+    # List.get_Item). Upstream added a NULL check (cbz x20) before get_Item but still
+    # no Count==0 check, so an empty-but-non-null list still throws
+    # ArgumentOutOfRangeException - same crash, verified live on v172.0.01
+    # (ShopPanel.ReloadMoney -> ShopItem.Init -> List.get_Item(0)).
+    # NOTE: upstream's cbz bail target (0x32E0BEC) is a THROW helper, not the method
+    # epilogue - jumping there raises NullReferenceException. Our patch redirects both
+    # bails to the real epilogue 0x32E0BD0 (ldp x20,x19,[sp,#0x60];...ret).
+    if VER == "172.0.01":
+        SHOP_INIT_OFF = 0x32E097C - 0x4000
+        SHOP_INIT_ORIG = bytes.fromhex('941300b428aa01f0088d41f9f60300aae00314aae1031f2a020140f919a03394')
+        SHOP_INIT_NEW = bytes.fromhex('b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d519a03394')
+    elif VER == "172.0.00":
         SHOP_INIT_OFF = 0x32db348
         SHOP_INIT_ORIG = bytes.fromhex('941300b428aa01d0086545f9f60300aae00314aae1031f2a020140f92bb03394')
         SHOP_INIT_NEW = bytes.fromhex('b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d52bb03394')
@@ -594,8 +634,8 @@ def main():
                     str(outputs["base_assets"])], check=True)
 
     print(f"[+] Rebinding leftover field-default host URLs -> {SHARE_HOST} (castle-infra/cdn copies patch_hosts misses)...")
-    # subprocess.run([sys.executable, str(REPO / "server" / "patchers" / "patch_leftover_hosts.py"),
-    #                 str(outputs["base_assets"]), SHARE_HOST], check=True)
+    subprocess.run([sys.executable, str(REPO / "server" / "patchers" / "patch_leftover_hosts.py"),
+                    str(outputs["base_assets"]), SHARE_HOST], check=True)
 
     print("\n=== Signing ===")
     for name, apk in outputs.items():
