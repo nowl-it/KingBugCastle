@@ -568,7 +568,7 @@ _INVASION_THEMES = [t for a, b in _PC["invasionThemeRanges"] for t in range(a, b
 # same invasionDifficultyRecords dictionary (no separate "story difficulty" field exists
 # on PlayerDataResponseModel). Without a record for 15, the lookup returns 0 < 3 -> locked,
 # and OnSelectTheme silently falls back to theme=1 instead of refusing selection.
-_PREREQ_THEMES = [15, 60]
+_PREREQ_THEMES = [15, 60, 61, 62, 63, 64, 65]
 
 def r_player(body, st):
     # Field set matches PlayerDataResponseModel exactly (dump.cs @0x18-0xC4) - any
