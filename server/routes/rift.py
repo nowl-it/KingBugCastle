@@ -272,19 +272,18 @@ def _repair_rift_crystals(crystals):
         if len(levels) != RIFT_BUILDING_COUNT:
             main = int(c.get("mainBuildingIdx", 0)) % max(RIFT_BUILDING_COUNT, 1)
             other = 5
-            main_level = 12
+            main_level = 15
             fixed = [min(int(v), RIFT_BUILDING_MAX_LEVEL) for v in levels[:RIFT_BUILDING_COUNT]]
             fixed += [other] * (RIFT_BUILDING_COUNT - len(fixed))
-            fixed[main] = max(main_level, other + 1)
+            fixed[main] = min(RIFT_BUILDING_MAX_LEVEL, max(main_level, fixed[main]))
             c["buildingLevels"] = fixed
             c["mainBuildingIdx"] = main
             changed = True
         else:
-            main = int(c.get("mainBuildingIdx", 0)) % max(RIFT_BUILDING_COUNT, 1)
-            max_other = max((levels[i] for i in range(len(levels)) if i != main), default=0)
-            if levels[main] <= max_other:
-                levels[main] = max(levels[main], max_other + 1)
-                changed = True
+            for i in range(len(levels)):
+                if levels[i] > RIFT_BUILDING_MAX_LEVEL:
+                    levels[i] = RIFT_BUILDING_MAX_LEVEL
+                    changed = True
     return changed
 
 
@@ -799,9 +798,12 @@ def r_rift_crystal_charge(body, st):
         b_levels = crystal.get("buildingLevels", [])
         # Pick secondary altar from other altars configured on this crystal (level > 0)
         candidate_altars = [b for b in range(len(b_levels)) if b != main_bld and b_levels[b] > 0]
-        if not candidate_altars:
+        if candidate_altars:
+            weights = [b_levels[b] for b in candidate_altars]
+            sub_bld = random.choices(candidate_altars, weights=weights, k=1)[0]
+        else:
             candidate_altars = [b for b in range(RIFT_BUILDING_COUNT) if b != main_bld]
-        sub_bld = random.choice(candidate_altars)
+            sub_bld = random.choice(candidate_altars)
         selected_altars = [main_bld, sub_bld, -1]  # Altar0, Altar1, -1 (for slot 3 wildcard)
 
         new_w_id = _next_weapon_id(st)
