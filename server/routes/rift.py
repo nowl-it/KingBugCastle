@@ -230,11 +230,28 @@ def make_rift_crystal(i, rw_id, main_idx=None, rarity=1, building_levels=None, s
 
 
 def make_all_legendary_crystals():
-    """Generate the full set of 216 Legendary 2-altar crystals (for admin tools)."""
+    """Generate the full set of 216 Legendary 2-altar crystals + 6 Universal All-Altar crystals."""
     crystals = []
+    now = now_iso(0)
+
+    # 1. 6 Universal All-Altar Crystals (all 9 altars at Max Lv. 15)
+    for idx, w_id in enumerate(ALL_RIFT_WEAPON_IDS):
+        crystal = {
+            "id": idx + 1,
+            "weaponId": w_id,
+            "mainBuildingIdx": 0,
+            "buildingLevels": [15] * RIFT_BUILDING_COUNT,
+            "rarity": 5,  # Legendary (King God Rift Crystal)
+            "ceilCount": 0,
+            "state": 0,
+            "createdAt": now,
+            "updatedAt": now,
+        }
+        crystals.append(crystal)
+
+    # 2. 216 Dedicated 2-Altar Crystals (36 combos per weapon)
     c_id = 100
     altar_pairs = list(itertools.combinations(range(RIFT_BUILDING_COUNT), 2))
-    now = now_iso(0)
     for w_id in ALL_RIFT_WEAPON_IDS:
         for a1, a2 in altar_pairs:
             b_levels = [0] * RIFT_BUILDING_COUNT

@@ -283,13 +283,13 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
             <div>
               <h4 className="text-sm font-medium mb-2">Rift Weapons & Crystals</h4>
               <div className="flex flex-wrap gap-2">
-                <Button variant="secondary" onClick={() => handleMacro("rift_legendary_all")}>✨ Grant 216 Legendary Crystals (Selected)</Button>
+                <Button variant="secondary" onClick={() => handleMacro("rift_legendary_all")}>✨ Grant Full Crystals (222 Crystals, Selected)</Button>
                 <Button variant="secondary" onClick={() => handleMacro("toggle_infinity_rift")}>♾️ Toggle Infinity Rift Energy (Selected)</Button>
                 <Button variant="outline" onClick={async () => {
-                  if (!window.confirm("Grant 216 Legendary Rift Crystals and clean test equipment for ALL players on the server?")) return
-                  await runMutation("/api/players/grant-all-legendary-rift-crystals", { method: "POST" }, "Granted 216 crystals to all players")
+                  if (!window.confirm("Grant Full Set of 222 Legendary Rift Crystals (including 6 Universal All-Altar) to ALL players?")) return
+                  await runMutation("/api/players/grant-all-legendary-rift-crystals", { method: "POST" }, "Granted 222 crystals to all players")
                   onMutate()
-                }}>⚡ Grant 216 Crystals to ALL Players</Button>
+                }}>⚡ Grant Full Crystals to ALL Players</Button>
                 <Button variant="outline" onClick={async () => {
                   if (!window.confirm("Enable Infinity Rift Energy for ALL players on the server?")) return
                   await runMutation("/api/players/toggle-infinity-rift", { method: "POST", body: JSON.stringify({ enable: true }) }, "Enabled Infinity Rift for all players")
