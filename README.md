@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🏰 King Bug Castle (KGC)</h1>
+  <h1>🏰 King Bug Castle (KBC)</h1>
   <p><strong>A fully-featured Private Server & Reverse Engineering Toolkit for "King God Castle" (v170.1.00 – v172.0.01)</strong></p>
 
   [![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/6tDBPs9chp)

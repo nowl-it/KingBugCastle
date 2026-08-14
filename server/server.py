@@ -690,8 +690,8 @@ def _repair_player_state(st):
         st["bestClearedStage"] = 10
         changed = True
     hth = st.get("bestClearedHardTheme")
-    if hth is None or not isinstance(hth, int) or hth > 12 or hth < 0:
-        st["bestClearedHardTheme"] = 10
+    if hth is None or not isinstance(hth, int) or hth < 61 or hth > 75:
+        st["bestClearedHardTheme"] = 65
         changed = True
     hstg = st.get("bestClearedHardStage")
     if hstg is None or not isinstance(hstg, int) or hstg > 10 or hstg < 0:
