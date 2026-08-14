@@ -568,7 +568,7 @@ _INVASION_THEMES = [t for a, b in _PC["invasionThemeRanges"] for t in range(a, b
 # same invasionDifficultyRecords dictionary (no separate "story difficulty" field exists
 # on PlayerDataResponseModel). Without a record for 15, the lookup returns 0 < 3 -> locked,
 # and OnSelectTheme silently falls back to theme=1 instead of refusing selection.
-_PREREQ_THEMES = [15]
+_PREREQ_THEMES = [15, 60]
 
 def r_player(body, st):
     # Field set matches PlayerDataResponseModel exactly (dump.cs @0x18-0xC4) - any
@@ -689,11 +689,21 @@ def r_game_complete(body, st):
     st["exp"] += add_exp
     if win:
         st["winCount"] = st.get("winCount", 0) + 1
-        if theme > st.get("bestClearedTheme", 0):
-            st["bestClearedTheme"] = theme
-            st["bestClearedStage"] = stage
-        elif theme == st.get("bestClearedTheme", 0) and stage > st.get("bestClearedStage", 0):
-            st["bestClearedStage"] = stage
+        # Hard invasion themes (51-70) advance bestClearedHardTheme instead of
+        # bestClearedTheme.  The Invasion II section panel gates on the former, so
+        # without this update the section stays locked even after clearing I-10 Hard.
+        if theme >= 51:
+            if theme > st.get("bestClearedHardTheme", 0):
+                st["bestClearedHardTheme"] = theme
+                st["bestClearedHardStage"] = stage
+            elif theme == st.get("bestClearedHardTheme", 0) and stage > st.get("bestClearedHardStage", 0):
+                st["bestClearedHardStage"] = stage
+        else:
+            if theme > st.get("bestClearedTheme", 0):
+                st["bestClearedTheme"] = theme
+                st["bestClearedStage"] = stage
+            elif theme == st.get("bestClearedTheme", 0) and stage > st.get("bestClearedStage", 0):
+                st["bestClearedStage"] = stage
     st["playedCount"] = st.get("playedCount", 0) + 1
     bump(st, "playGame")
     bump(st, "playTheme", sub=theme)

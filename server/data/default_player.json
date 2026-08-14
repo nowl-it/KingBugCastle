@@ -4,7 +4,7 @@
     "accountType": 1, "level": 100, "exp": 9999999,
     "gold": 290909, "cash": 290909, "paidCash": 0, "heart": 290909,
     "bestClearedStage": 999, "bestClearedTheme": 99,
-    "bestClearedHardStage": 1, "bestClearedHardTheme": 1,
+    "bestClearedHardStage": 999, "bestClearedHardTheme": 99,
     "currentDeckPreset": 0, "playedCount": 0, "winCount": 0,
     "hasFreeRename": true
   },
