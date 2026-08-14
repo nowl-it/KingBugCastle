@@ -514,11 +514,11 @@ def r_rift_weapon_release_equip(body, st):
 def r_rift_weapon_upgrade(body, st):
     """POST /rift-weapon/upgrade -> RiftWeaponResultResponseModel.
 
-    UpgradeState return codes:
-    0 = Fail (level unchanged)
-    1 = Success (level +1)
-    2 = Down (level -1)
-    3 = Broken (weapon broken)
+    UpgradeState return codes (ResourceRiftWeaponConstant.UpgradeState):
+    0 = SUCCESS (level +1)
+    1 = FAIL (level unchanged)
+    2 = DOWN (level -1)
+    3 = BROKEN (weapon broken)
     """
     ensure_rift_state(st)
     data = _parse_xml()
@@ -535,7 +535,7 @@ def r_rift_weapon_upgrade(body, st):
             "rewardListResponseData": None,
             "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0),
-            "upgradeState": 0,
+            "upgradeState": 1,
             "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
         }
 
@@ -550,7 +550,7 @@ def r_rift_weapon_upgrade(body, st):
             "rewardListResponseData": None,
             "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0),
-            "upgradeState": 0,
+            "upgradeState": 1,
             "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
         }
 
@@ -579,20 +579,20 @@ def r_rift_weapon_upgrade(body, st):
         broken_rate = 0
         fail_rate = 100 - success_rate
 
-    upgrade_state = 0
+    upgrade_state = 1  # FAIL (level unchanged)
     if roll < success_rate:
-        # Success
-        upgrade_state = 1
+        # SUCCESS (0) -> Level increases
+        upgrade_state = 0
         weapon["level"] = min(max_level, cur_level + 1)
     elif roll < success_rate + fail_rate:
-        # Fail
-        upgrade_state = 0
+        # FAIL (1) -> Level unchanged
+        upgrade_state = 1
     elif roll < success_rate + fail_rate + down_rate:
-        # Down
+        # DOWN (2) -> Level decreases
         upgrade_state = 2
         weapon["level"] = max(1, cur_level - 1)
     else:
-        # Broken
+        # BROKEN (3) -> Weapon broken
         upgrade_state = 3
         weapon["broken"] = True
 

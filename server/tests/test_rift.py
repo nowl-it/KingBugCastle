@@ -111,7 +111,7 @@ def test_weapon_upgrade_levels_and_costs():
 
     # Upgrade Level 1 -> 2 (100% success rate in constants)
     res = rift.r_rift_weapon_upgrade({"riftWeaponId": weapon["id"], "useCash": False}, st)
-    assert res["upgradeState"] == 1  # 1 = Success
+    assert res["upgradeState"] == 0  # 0 = Success (ResourceRiftWeaponConstant.UpgradeState.SUCCESS)
     assert weapon["level"] == 2
     assert st["gold"] < init_gold
     assert server._item_count(st, rift.DUST_ITEM_ID) < init_dust
