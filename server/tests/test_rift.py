@@ -123,7 +123,7 @@ def test_cash_protection_upgrade():
     st = _fresh_state()
     weapon = st["riftWeapons"][0]
     weapon["level"] = 21  # Level 21 has broken chance
-    weapon["rarity"] = 2
+    weapon["rarity"] = 3  # Special (max level 40)
     weapon["broken"] = False
     server.save_state(st)
 

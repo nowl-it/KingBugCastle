@@ -541,7 +541,8 @@ def r_rift_weapon_upgrade(body, st):
 
     cur_level = weapon.get("level", 1)
     rarity = weapon.get("rarity", 1)
-    max_level = 15 if rarity == 1 else (30 if rarity == 2 else 40)
+    min_level = 15 if rarity == 3 else (5 if rarity == 2 else 1)
+    max_level = 40 if rarity == 3 else (15 if rarity == 2 else 10)
 
     if cur_level >= max_level:
         return {
@@ -590,7 +591,7 @@ def r_rift_weapon_upgrade(body, st):
     elif roll < success_rate + fail_rate + down_rate:
         # DOWN (2) -> Level decreases
         upgrade_state = 2
-        weapon["level"] = max(1, cur_level - 1)
+        weapon["level"] = max(min_level, cur_level - 1)
     else:
         # BROKEN (3) -> Weapon broken
         upgrade_state = 3
