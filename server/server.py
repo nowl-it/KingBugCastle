@@ -467,10 +467,13 @@ def r_login(body, st):
         return {"success": False, "msg": "cannot create an account right now"}
     # Remember which social login this account used, so PlayerDataResponseModel
     # reports the right accountType (Google vs Guest) and the client shows it.
-    if acct_type is not None:
-        acct = playerdb.load(uid)
-        if acct is not None and acct.get("accountType") != acct_type:
+    acct = playerdb.load(uid)
+    if acct is not None:
+        rep_changed = _repair_player_state(acct)
+        if acct_type is not None and acct.get("accountType") != acct_type:
             acct["accountType"] = acct_type
+            rep_changed = True
+        if rep_changed:
             playerdb.save(uid, acct)
     token = "DEV." + secrets.token_hex(16)
     playerdb.bind_session(token, uid)   # every later request identifies via this
@@ -579,6 +582,92 @@ _INVASION_THEMES = [t for a, b in _PC["invasionThemeRanges"] for t in range(a, b
 # and the section stays locked). 60-65 = invasion-I hard prerequisite themes.
 _PREREQ_THEMES = [10, 15, 60, 61, 62, 63, 64, 65]
 
+def _repair_player_state(st):
+    """Sanitize and repair any corrupted or missing fields in player state to prevent Scene_Lobby blackscreen."""
+    if not isinstance(st, dict):
+        return False
+    changed = False
+    d = _PC["defaults"]
+
+    # 1. Basic profile & identifiers
+    if not st.get("name"):
+        st["name"] = d["name"]
+        changed = True
+    if not st.get("castleName"):
+        st["castleName"] = d["castleName"]
+        changed = True
+    if "level" not in st or not isinstance(st.get("level"), int) or st["level"] < 1:
+        st["level"] = 1
+        changed = True
+
+    # 2. KeyValues (profileIconId must be a valid starter unit)
+    valid_starters = [10000, 10010, 10020, 10030, 10040, 10050]
+    kvs = st.setdefault("keyValues", [])
+    icon_kv = next((k for k in kvs if k.get("key") == "profileIconId"), None)
+    if not icon_kv or not icon_kv.get("value") or not str(icon_kv["value"]).isdigit():
+        if icon_kv:
+            icon_kv["value"] = str(d["profileIconId"])
+        else:
+            kvs.append({"key": "profileIconId", "value": str(d["profileIconId"])})
+        changed = True
+
+    # 3. Cards (ensure cards dict exists and has at least starter units)
+    cards = st.setdefault("cards", {})
+    if not isinstance(cards, dict):
+        cards = {}
+        st["cards"] = cards
+        changed = True
+    for s_id in valid_starters:
+        s_key = str(s_id)
+        if s_key not in cards:
+            cards[s_key] = {
+                "unitId": s_id,
+                "level": 1,
+                "exp": 0,
+                "count": 1,
+                "currentSkin": 0,
+                "potentialTier": 0,
+                "overcome": 0,
+                "dimensionLevel": 0,
+                "dimensionGauge": 0,
+            }
+            changed = True
+
+    # 4. Decks (ensure at least 5 presets each with 6 valid unit IDs)
+    decks = st.setdefault("decks", [])
+    if not isinstance(decks, list) or len(decks) == 0:
+        st["decks"] = [
+            {"deck": list(valid_starters), "name": f"Preset {i+1}", "altar": 0, "god": 0}
+            for i in range(5)
+        ]
+        changed = True
+    else:
+        for idx, dk in enumerate(decks):
+            if not isinstance(dk, dict):
+                decks[idx] = {"deck": list(valid_starters), "name": f"Preset {idx+1}", "altar": 0, "god": 0}
+                changed = True
+                continue
+            u_list = dk.setdefault("deck", [])
+            if not isinstance(u_list, list) or len(u_list) < 6:
+                cleaned = [u for u in u_list if isinstance(u, int) and u] if isinstance(u_list, list) else []
+                while len(cleaned) < 6:
+                    cleaned.append(valid_starters[len(cleaned) % len(valid_starters)])
+                dk["deck"] = cleaned[:6]
+                changed = True
+
+    # 5. Rift subsystem (riftWeapons, equippedRiftWeapons, riftCrystals)
+    if rift.ensure_rift_state(st):
+        changed = True
+
+    # 6. Building Presets
+    b_presets = st.setdefault("buildingPresets", [])
+    if not isinstance(b_presets, list) or len(b_presets) < 5:
+        st["buildingPresets"] = [{"buildingLevels": [0] * 6} for _ in range(10)]
+        changed = True
+
+    return changed
+
+
 def r_player(body, st):
     # Field set matches PlayerDataResponseModel exactly (dump.cs @0x18-0xC4) - any
     # extra key here is dead weight the client silently ignores (Newtonsoft default),
@@ -588,6 +677,8 @@ def r_player(body, st):
     # bestTier/loseCount/theme/deckRecordDifficulty do NOT exist on this model - they
     # were dead fields from an earlier draft. Altar/building data belongs on
     # BuildingResponseModel (/player/building*), not here.
+    if _repair_player_state(st):
+        save_state(st)
     d = _PC["defaults"]
     ld = _PC["listDefaults"]
     unlocked = _PC["invasionUnlockedDifficulty"]

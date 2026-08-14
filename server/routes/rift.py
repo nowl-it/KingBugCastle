@@ -320,29 +320,37 @@ def ensure_rift_state(st):
     changed = False
 
     # 1. Rift Weapons
-    if "riftWeapons" not in st:
+    valid_weapon_ids = set()
+    if "riftWeapons" not in st or not isinstance(st["riftWeapons"], list):
         st["riftWeapons"] = copy.deepcopy(DEFAULT_RIFT_WEAPONS)
         changed = True
-    else:
-        # Migrate rarity 0 (old off-by-one) to valid range 1-3
-        for w in st["riftWeapons"]:
-            r = w.get("rarity", 1)
-            if r == 0:
-                w["rarity"] = 1
-                changed = True
-            elif r > 3:
-                w["rarity"] = 3
-                changed = True
-            # Migrate buildingIndexes to [altar0, altar1, -1] (length 3, 3rd is -1)
-            bi = w.get("buildingIndexes", [])
-            if len(bi) != 3 or bi[2] != -1:
-                a0 = bi[0] if len(bi) > 0 and bi[0] >= 0 else 0
-                a1 = bi[1] if len(bi) > 1 and bi[1] >= 0 and bi[1] != a0 else (1 if a0 != 1 else 0)
-                w["buildingIndexes"] = [a0, a1, -1]
-                changed = True
+
+    for w in st["riftWeapons"]:
+        w_id = w.get("id")
+        if w_id:
+            valid_weapon_ids.add(w_id)
+        r = w.get("rarity", 1)
+        if r <= 0:
+            w["rarity"] = 1
+            changed = True
+        elif r > 3:
+            w["rarity"] = 3
+            changed = True
+        # Migrate buildingIndexes to [altar0, altar1, -1] (length 3, 3rd is -1)
+        bi = w.get("buildingIndexes", [])
+        if not isinstance(bi, list) or len(bi) != 3 or bi[2] != -1:
+            a0 = bi[0] if isinstance(bi, list) and len(bi) > 0 and bi[0] >= 0 else 0
+            a1 = bi[1] if isinstance(bi, list) and len(bi) > 1 and bi[1] >= 0 and bi[1] != a0 else (1 if a0 != 1 else 0)
+            w["buildingIndexes"] = [a0, a1, -1]
+            changed = True
+        # Ensure subStat is a list of exactly 3 integers
+        sub_stat = w.get("subStat")
+        if not isinstance(sub_stat, list) or len(sub_stat) != 3:
+            w["subStat"] = [0, 0, 0]
+            changed = True
 
     # 2. Rift Crystals
-    if "riftCrystals" not in st or not st["riftCrystals"]:
+    if "riftCrystals" not in st or not isinstance(st["riftCrystals"], list) or not st["riftCrystals"]:
         st["riftCrystals"] = copy.deepcopy(DEFAULT_RIFT_CRYSTALS)
         changed = True
     else:
@@ -357,16 +365,30 @@ def ensure_rift_state(st):
             changed = True
 
     # 3. Equipped Weapons: Dict[int, List[EquippedRiftWeaponData]]
-    if "equippedRiftWeapons" not in st:
+    if "equippedRiftWeapons" not in st or not isinstance(st["equippedRiftWeapons"], dict):
         st["equippedRiftWeapons"] = {}
         changed = True
     else:
-        # Migrate old string keys to int keys
+        # Migrate old string keys to int keys and remove orphan equipped weapons
         eq = st["equippedRiftWeapons"]
         str_keys = [k for k in eq if isinstance(k, str)]
         for sk in str_keys:
-            eq[int(sk)] = eq.pop(sk)
+            try:
+                eq[int(sk)] = eq.pop(sk)
+            except Exception:
+                eq.pop(sk, None)
             changed = True
+
+        for p_key, p_list in list(eq.items()):
+            if not isinstance(p_list, list):
+                eq[p_key] = []
+                changed = True
+                continue
+            # Remove any equipped weapon that does not exist in st['riftWeapons']
+            cleaned = [e for e in p_list if isinstance(e, dict) and e.get("riftWeaponId") in valid_weapon_ids]
+            if len(cleaned) != len(p_list):
+                eq[p_key] = cleaned
+                changed = True
 
     # 4. Rift Gauge
     if "riftGauge" not in st:
