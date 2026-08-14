@@ -600,6 +600,20 @@ def _repair_player_state(st):
         st["level"] = 1
         changed = True
 
+    # Currencies: clamp to safe range to prevent C# int32 overflow (-1 display)
+    gold = st.get("gold", 0)
+    if not isinstance(gold, int) or gold < 0 or gold > 1_000_000_000:
+        st["gold"] = 999_999_999 if (gold < 0 or gold > 1_000_000_000) else max(0, int(gold))
+        changed = True
+    cash = st.get("cash", 0)
+    if not isinstance(cash, int) or cash < 0 or cash > 1_000_000_000:
+        st["cash"] = 999_999 if (cash < 0 or cash > 1_000_000_000) else max(0, int(cash))
+        changed = True
+    heart = st.get("heart", 0)
+    if not isinstance(heart, int) or heart < 0 or heart > 100_000:
+        st["heart"] = 999 if (heart < 0 or heart > 100_000) else max(0, int(heart))
+        changed = True
+
     # 2. KeyValues (profileIconId must be a valid starter unit)
     valid_starters = [10000, 10010, 10020, 10030, 10040, 10050]
     kvs = st.setdefault("keyValues", [])
@@ -2781,11 +2795,11 @@ def _grant_reward(st, rt, rid, amt):
 
     Returns True when a duplicate dimension hero was granted (caller should set upgrade=True)."""
     if rt == "Gold":
-        st["gold"] = st.get("gold", 0) + amt
+        st["gold"] = max(0, min(1_000_000_000, st.get("gold", 0) + amt))
     elif rt == "Cash":
-        st["cash"] = st.get("cash", 0) + amt
+        st["cash"] = max(0, min(1_000_000_000, st.get("cash", 0) + amt))
     elif rt == "Heart":
-        st["heart"] = st.get("heart", 0) + amt
+        st["heart"] = max(0, min(100_000, st.get("heart", 0) + amt))
     elif rt == "Item" and rid:
         inv = st.setdefault("inventory", {"itemIds": [], "counts": []})
         ids = inv.setdefault("itemIds", [])
