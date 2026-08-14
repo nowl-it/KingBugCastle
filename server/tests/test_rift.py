@@ -61,31 +61,38 @@ def test_inventory_fetch():
 def test_equip_and_release():
     st = _fresh_state()
     weapons = st["riftWeapons"]
-    w1_id = weapons[0]["id"]
-    w2_id = weapons[1]["id"]
+    w1_id = weapons[0]["id"]  # weaponId 10000 -> Slot 0
+    w2_id = weapons[1]["id"]  # weaponId 11000 -> Slot 1
 
-    # Equip weapon 1 at preset 0, slot 0
-    res = rift.r_rift_weapon_equip({"riftWeaponId": w1_id, "targetIdx": 0, "equipPreset": 0}, st)
+    # Add a second Lance (weaponId 10000) with new ID to test slot 0 replacement
+    w3 = copy.deepcopy(weapons[0])
+    w3["id"] = 999
+    st["riftWeapons"].append(w3)
+    w3_id = 999
+
+    # Equip weapon 1 (Lance) at preset 0 -> goes to slot 0
+    res = rift.r_rift_weapon_equip({"riftWeaponId": w1_id, "equipPreset": 0}, st)
     assert w1_id in res["equippedWeaponIds"]
     assert st["equippedRiftWeapons"][0][0]["riftWeaponId"] == w1_id
     assert st["equippedRiftWeapons"][0][0]["index"] == 0
 
-    # Equip weapon 2 at preset 0, slot 0 (should replace weapon 1)
-    res2 = rift.r_rift_weapon_equip({"riftWeaponId": w2_id, "targetIdx": 0, "equipPreset": 0}, st)
+    # Equip weapon 2 (Mask) at preset 0 -> goes to slot 1 (both equipped!)
+    res2 = rift.r_rift_weapon_equip({"riftWeaponId": w2_id, "equipPreset": 0}, st)
+    assert w1_id in res2["equippedWeaponIds"]
     assert w2_id in res2["equippedWeaponIds"]
-    assert w1_id not in res2["equippedWeaponIds"]
-    assert len(st["equippedRiftWeapons"][0]) == 1
-
-    # Equip weapon 1 at slot 1
-    res3 = rift.r_rift_weapon_equip({"riftWeaponId": w1_id, "targetIdx": 1, "equipPreset": 0}, st)
-    assert w1_id in res3["equippedWeaponIds"]
-    assert w2_id in res3["equippedWeaponIds"]
     assert len(st["equippedRiftWeapons"][0]) == 2
 
-    # Release weapon 1
-    res4 = rift.r_rift_weapon_release_equip({"riftWeaponId": w1_id, "equipPreset": 0}, st)
-    assert w1_id not in res4["equippedWeaponIds"]
-    assert w2_id in res4["equippedWeaponIds"]
+    # Equip weapon 3 (another Lance) at preset 0 -> replaces weapon 1 in slot 0
+    res3 = rift.r_rift_weapon_equip({"riftWeaponId": w3_id, "equipPreset": 0}, st)
+    assert w3_id in res3["equippedWeaponIds"]
+    assert w2_id in res3["equippedWeaponIds"]
+    assert w1_id not in res3["equippedWeaponIds"]
+    assert len(st["equippedRiftWeapons"][0]) == 2
+
+    # Release weapon 2
+    res4 = rift.r_rift_weapon_release_equip({"riftWeaponId": w2_id, "equipPreset": 0}, st)
+    assert w2_id not in res4["equippedWeaponIds"]
+    assert w3_id in res4["equippedWeaponIds"]
     assert len(st["equippedRiftWeapons"][0]) == 1
 
     print("ok test_equip_and_release")

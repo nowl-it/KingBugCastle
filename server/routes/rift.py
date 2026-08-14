@@ -434,22 +434,33 @@ def r_rift_weapon_equip(body, st):
     """POST /rift-weapon/equip -> RiftWeaponResultResponseModel."""
     ensure_rift_state(st)
     weapon_id = body_int(body.get("riftWeaponId"), 0)
-    slot_idx = body_int(body.get("targetIdx"), 0)
     preset_idx = body_int(body.get("equipPreset"), 0)
 
     p_key = preset_idx
     equipped_dict = st.setdefault("equippedRiftWeapons", {})
-    preset_list = equipped_dict.setdefault(p_key, [])
+    raw_list = equipped_dict.get(p_key) if p_key in equipped_dict else equipped_dict.get(str(p_key), [])
+    preset_list = list(raw_list or [])
 
-    # Remove any weapon occupying the same slot, or this weapon if in another slot
+    # Find the weapon to equip
+    weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
+    if weapon is not None:
+        w_type_id = weapon.get("weaponId", 10000)
+        slot_idx = (w_type_id - 10000) // 1000 if w_type_id in ALL_RIFT_WEAPON_IDS else body_int(body.get("targetIdx"), 0)
+    else:
+        slot_idx = body_int(body.get("targetIdx"), 0)
+
+    # Remove any weapon occupying the same slot, or this weapon if already in another slot
     filtered = [e for e in preset_list if e.get("index") != slot_idx and e.get("riftWeaponId") != weapon_id]
 
-    # Verify weapon exists
-    weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
     if weapon is not None:
         filtered.append({"deckPreset": preset_idx, "index": slot_idx, "riftWeaponId": weapon_id})
 
+    # Keep list sorted by slot index (0..5)
+    filtered.sort(key=lambda x: x.get("index", 0))
+
     equipped_dict[p_key] = filtered
+    if str(p_key) in equipped_dict and str(p_key) != p_key:
+        equipped_dict[str(p_key)] = filtered
     save_state(st)
 
     return {
@@ -472,7 +483,8 @@ def r_rift_weapon_release_equip(body, st):
 
     p_key = preset_idx
     equipped_dict = st.setdefault("equippedRiftWeapons", {})
-    preset_list = equipped_dict.setdefault(p_key, [])
+    raw_list = equipped_dict.get(p_key) if p_key in equipped_dict else equipped_dict.get(str(p_key), [])
+    preset_list = list(raw_list or [])
 
     filtered = [
         e
@@ -482,7 +494,10 @@ def r_rift_weapon_release_equip(body, st):
             or (slot_idx >= 0 and e.get("index") == slot_idx)
         )
     ]
+    filtered.sort(key=lambda x: x.get("index", 0))
     equipped_dict[p_key] = filtered
+    if str(p_key) in equipped_dict and str(p_key) != p_key:
+        equipped_dict[str(p_key)] = filtered
     save_state(st)
 
     return {
