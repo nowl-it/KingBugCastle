@@ -17933,11 +17933,11 @@ Nach Schlachtbeginn: Erhält jede Sekunde +{11}% Massenkontroll-Widerstand und +
   <String Key="UnitLikes_10810">Pudding mit Blut...geschmack</String>
   <String Key="UnitHates_10810">Neria</String>
   <String Key="UnitNote_10810">Tochter des Vampirlords Nosferatu und Außenseiterin der Familie. Cathy ist der Spitzname, mit dem die Familienmitglieder sie in ihrer Kindheit nannten.</String>
-  <String Key="Overcome_10800_0">Jedes Mal, wenn der Flächenschaden der Vampirgestalt Schaden verursacht, Verursachter Schaden in Vampirgestalt +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
+  <String Key="Overcome_10800_0">Jedes Mal, wenn der Flächenschaden der Vampirgestalt Schaden verursacht, Verursachter Schaden in Vampirgestalt +{Overcome:Unit10800AI_AuraDamagePer}%</String>
   <String Key="Overcome_10800_1">Bei jeder Raserei max. Gesamt-TP in Vampirgestalt +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_2">Zusätzlich erhalten alle Halb-Vampir-Cathy {ActiveSkill:10803:0} Wiederbelebungen</String>
   <String Key="Overcome_10800_3">Bei jeder Raserei max. Gesamt-TP in Vampirgestalt +{Overcome:Unit10800AI_TotalHpPer}%</String>
-  <String Key="Overcome_10800_4">Jedes Mal, wenn der Umgebungsschaden der Vampirgestalt Schaden verursacht, verursachter Schaden in Vampirgestalt +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
+  <String Key="Overcome_10800_4">Jedes Mal, wenn der Umgebungsschaden der Vampirgestalt Schaden verursacht, verursachter Schaden in Vampirgestalt +{Overcome:Unit10800AI_AuraDamagePer}%</String>
   <String Key="UnitName_10810">Alessia</String>
   <String Key="LeagueName_12">Liga der Wärme</String>
   <String Key="SkinDesc_1044005">&lt;i&gt;Belohnung für die Teilnahme an der Liga der Wärme in der Arena&lt;/i&gt;</String>

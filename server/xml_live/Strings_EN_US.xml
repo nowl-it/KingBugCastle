@@ -17945,11 +17945,11 @@ After Battle starts, Obtain +{11}% Crowd control resistance and +{12}% Spell DEF
   <String Key="UnitLikes_10810">Blood... flavored pudding</String>
   <String Key="UnitHates_10810">Neria</String>
   <String Key="UnitNote_10810">The daughter of Vampire Lord Nosferatu and the family's outcast. Cathy is the nickname her family called her when she was young.</String>
-  <String Key="Overcome_10800_0">Whenever the vampire form's nearby damage effect deals damage, Damage Dealt in vampire form +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
+  <String Key="Overcome_10800_0">Whenever the vampire form's nearby damage effect deals damage, Damage Dealt in vampire form +{Overcome:Unit10800AI_AuraDamagePer}%</String>
   <String Key="Overcome_10800_1">Each time Frenzy activates, Vampire Form Final Max HP +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_2">Additionally, all Half-Vampire Cathys gain {ActiveSkill:10803:0} Revives</String>
   <String Key="Overcome_10800_3">Each time Frenzy activates, Vampire Form Final Max HP +{Overcome:Unit10800AI_TotalHpPer}%</String>
-  <String Key="Overcome_10800_4">Whenever Vampire Form's Nearby Damage effect deals damage, Damage Dealt in Vampire Form +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
+  <String Key="Overcome_10800_4">Whenever Vampire Form's Nearby Damage effect deals damage, Damage Dealt in Vampire Form +{Overcome:Unit10800AI_AuraDamagePer}%</String>
   <String Key="UnitName_10810">Alessia</String>
   <String Key="LeagueName_12">League of Warmth</String>
   <String Key="SkinDesc_1044005">&lt;i&gt;Reward for participating in the League of Warmth in Arena&lt;/i&gt;</String>

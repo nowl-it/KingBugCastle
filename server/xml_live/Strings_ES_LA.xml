@@ -17932,11 +17932,11 @@ Tras iniciar la Batalla, obtiene +{11}% de Resistencia de despotenciadores y +{1
   <String Key="UnitLikes_10810">Pudín con sabor a sangre...</String>
   <String Key="UnitHates_10810">Neria</String>
   <String Key="UnitNote_10810">La hija del Señor de los vampiros Nosferatu y la marginada de la familia. Cathy es el apodo con el que su familia la llamaba de niña.</String>
-  <String Key="Overcome_10800_0">Cada vez que el efecto de daño Cercano de la forma vampírica inflige daño, el Daño causado en forma vampírica +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
+  <String Key="Overcome_10800_0">Cada vez que el efecto de daño Cercano de la forma vampírica inflige daño, el Daño causado en forma vampírica +{Overcome:Unit10800AI_AuraDamagePer}%</String>
   <String Key="Overcome_10800_1">Cada vez que se activa Frenesí, Salud máxima final de la Forma Vampiro +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_2">Además, todas las Cathy semivampiro obtienen {ActiveSkill:10803:0} resurrecciones</String>
   <String Key="Overcome_10800_3">Cada vez que se activa Frenesí, Salud máxima final de la Forma Vampiro +{Overcome:Unit10800AI_TotalHpPer}%</String>
-  <String Key="Overcome_10800_4">Cada vez que el efecto de Daño cercano de la Forma Vampiro inflige daño, Daño causado en Forma Vampiro +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
+  <String Key="Overcome_10800_4">Cada vez que el efecto de Daño cercano de la Forma Vampiro inflige daño, Daño causado en Forma Vampiro +{Overcome:Unit10800AI_AuraDamagePer}%</String>
   <String Key="UnitName_10810">Alessia</String>
   <String Key="LeagueName_12">Liga de la Calidez</String>
   <String Key="SkinDesc_1044005">&lt;i&gt;Recompensa por participar en la Liga de la Calidez en Arena&lt;/i&gt;</String>

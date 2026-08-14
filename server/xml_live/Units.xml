@@ -35606,7 +35606,7 @@
 
 		<Boss>true</Boss>
 		<CanIce>false</CanIce>
-		<CCRatio>0</CCRatio>
+		<CCRatio>-100</CCRatio>
 		<Theme>4100</Theme>
 		<Value>0</Value>
 		<Executable>false</Executable>
