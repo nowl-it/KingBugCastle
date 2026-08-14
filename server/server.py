@@ -33,6 +33,7 @@ import player_events
 # import mini_games
 import roster
 import rift
+import accessory
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
@@ -695,6 +696,10 @@ def _repair_player_state(st):
     hstg = st.get("bestClearedHardStage")
     if hstg is None or not isinstance(hstg, int) or hstg > 10 or hstg < 0:
         st["bestClearedHardStage"] = 10
+        changed = True
+
+    # 8. Accessory subsystem (accessories, accessoryPresets)
+    if accessory.ensure_accessory_state(st):
         changed = True
 
     return changed
@@ -1614,35 +1619,17 @@ def load_corruption_accessories():
     return out
 
 def get_st_accessories(st):
-    if "accessories" not in st:
-        st["accessories"] = copy.deepcopy(DEFAULT_ACCESSORIES)
-    return st["accessories"]
+    accessory.ensure_accessory_state(st)
+    return st.get("accessories", [])
 
 def r_accessory(body, st):
-    accs = get_st_accessories(st)
-    target_id = body.get("targetId", 0)
-    unit_id = body.get("unitId", 0)
-    if target_id and unit_id:
-        for a in accs:
-            if a["unitId"] == unit_id:
-                a["unitId"] = 0
-            if a["id"] == target_id:
-                a["unitId"] = unit_id
-        save_state(st)
-    return {"accessories": accs, "presets": []}
+    return accessory.r_accessory_equip(body, st)
 
 def r_accessory_release(body, st):
-    accs = get_st_accessories(st)
-    target_id = body.get("targetId", 0)
-    if target_id:
-        for a in accs:
-            if a["id"] == target_id:
-                a["unitId"] = 0
-        save_state(st)
-    return {"accessories": accs, "presets": []}
+    return accessory.r_accessory_release(body, st)
 
 def r_accessory_result(body, st):
-    return {"accessories": get_st_accessories(st), "deletedAccessories": [], "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": [], "addedExpItems": 0}
+    return accessory._make_result_response(st)
 
 def make_treasure(i, tr_id):
     t = ITEM_TEMPLATES["treasure"]
@@ -2388,18 +2375,18 @@ DYNAMIC_OVERRIDES = {
     "/pass/all-rewards": r_pass,
     "/pass/bonusReward": r_pass,
     "/pass/buyLevel": r_pass,
-    "/pass/passEventBooster": r_pass,
-    "/accessory": r_accessory,
-    "/accessory/equip-tutorial": lambda b, st: {"accessories": get_st_accessories(st)},
-    "/accessory/add-exp": r_accessory_result,
-    "/accessory/dismantle": lambda b, st: {"accessories": get_st_accessories(st), "deletedAccessories": b.get("accessoryIds", []), "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": [], "addedExpItems": 0},
-    "/accessory/release-equip": r_accessory_release,
-    "/accessory/set-state-all": r_accessory_result,
-    "/accessory/change-sub-stat": r_accessory_result,
-    "/accessory/preset": lambda b, st: {"presets": []},
-    "/accessory/set-preset": lambda b, st: {"presets": []},
-    "/accessory/set-preset-name": lambda b, st: {"presets": []},
-    "/accessory/equip": r_accessory,
+    "/accessory": accessory.r_accessory_equip,
+    "/accessory/equip": accessory.r_accessory_equip,
+    "/accessory/equip-tutorial": accessory.r_accessory_equip_tutorial,
+    "/accessory/release-equip": accessory.r_accessory_release,
+    "/accessory/add-exp": accessory.r_accessory_add_exp,
+    "/accessory/dismantle": accessory.r_accessory_dismantle,
+    "/accessory/set-state": accessory.r_accessory_set_state,
+    "/accessory/set-state-all": accessory.r_accessory_set_state,
+    "/accessory/change-sub-stat": accessory.r_accessory_change_sub_stat,
+    "/accessory/preset": accessory.r_accessory_preset_list,
+    "/accessory/set-preset": accessory.r_accessory_set_preset,
+    "/accessory/set-preset-name": accessory.r_accessory_set_preset_name,
     "/card": r_card,
     "/dimension-unit/upgrade": r_dimension_upgrade,
     "/dimension-unit/overcome": r_dimension_overcome,

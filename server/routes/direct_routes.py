@@ -87,8 +87,9 @@ def register(app, server_module):
         st = load_state()
         host = request.headers.get("host", "?")
         admin_log(f"[{host}] DIRECT GET /accessory -> AccessoryInventoryResponseModel")
-        return _enc({"code": 200, "msg": None, "success": True,
-                     "accessories": srv.get_st_accessories(st)})
+        import accessory
+        res = accessory.r_accessory_inventory({}, st)
+        return _enc({"code": 200, "msg": None, "success": True, **res})
 
     @app.post("/accessory")
     async def accessory_equip_direct(request: Request):
@@ -96,11 +97,9 @@ def register(app, server_module):
         host = request.headers.get("host", "?")
         body = await _body(request, srv)
         admin_log(f"[{host}] DIRECT POST /accessory -> AccessoryResultResponseModel")
-        accs = equip_accessories(st, body.get("targetIds", []), body.get("unitId", 0))
-        return _enc({"code": 200, "msg": None, "success": True,
-                     "accessories": accs, "deletedAccessories": [],
-                     "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
-                     "inventories": [], "addedExpItems": 0})
+        import accessory
+        res = accessory.r_accessory_equip(body, st)
+        return _enc({"code": 200, "msg": None, "success": True, **res})
 
 
     @app.get("/invasion/record")
