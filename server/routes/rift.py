@@ -577,7 +577,8 @@ def r_rift_weapon_upgrade(body, st):
             "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
         }
 
-    cost_info = data["level_costs"].get(cur_level, {"success": 100, "fail": 0, "down": 0, "broken": 0, "dust": 10, "cash": -1})
+    target_level = cur_level + 1
+    cost_info = data["level_costs"].get(target_level, {"success": 100, "fail": 0, "down": 0, "broken": 0, "dust": 10, "cash": -1})
     dust_needed = cost_info["dust"]
     gold_needed = dust_needed * data["gold_cost_ratio"]
     cash_needed = cost_info["cash"] if (use_cash and cost_info["cash"] > 0) else 0

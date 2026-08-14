@@ -287,7 +287,7 @@ def _shop_buy(body, st):
         srv.bump(st, shop_counter, amount)
 
     rewards = []
-    for r in shop.rewards_of(el):
+    for r in shop.rewards_of(el, st):
         r = {**r, "count": r["count"] * amount}
         # Artifact/Treasure/Skin are reported for the reward popup but not written
         # into state - the same policy the mail rewards follow.

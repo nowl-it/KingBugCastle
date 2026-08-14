@@ -136,7 +136,7 @@ def price_of(el):
     return "free", 0, 0
 
 
-def rewards_of(el):
+def rewards_of(el, st=None):
     """What buying this pays out, as {type, id, count} in _grant_reward's vocabulary.
 
     Artifacts, treasures and skins are reported so the client's reward popup is
@@ -158,6 +158,12 @@ def rewards_of(el):
     for field, rtype in (("Gold", "Gold"), ("Cash", "Cash"), ("Heart", "Heart")):
         n = _int(el, field)
         if n:
+            if rtype == "Gold" and st is not None:
+                inc_per = _int(el, "IncreaseGoldByClearedChapterPer", 0)
+                if inc_per > 0:
+                    cleared = int(st.get("bestClearedTheme", 0) or 0)
+                    if cleared > 0:
+                        n = int(n * ((1.0 + inc_per / 100.0) ** cleared))
             out.append({"type": rtype, "id": 0, "count": n})
     # UnitID = -1 marks a package whose hero the player picks later, through
     # /shop/choice-package-unit. It is a placeholder, not an id, so it grants nothing
