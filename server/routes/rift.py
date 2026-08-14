@@ -576,6 +576,7 @@ def r_rift_weapon_reroll(body, st):
 
     weapon_id = body_int(body.get("riftWeaponId"), 0)
     target_idx = body_int(body.get("targetIdx"), 0)
+    target_option_id = body_int(body.get("targetOptionId"), 0)
     preset_idx = body_int(body.get("equipPreset"), 0)
 
     weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
@@ -594,17 +595,22 @@ def r_rift_weapon_reroll(body, st):
     cost_gold = data["reroll_costs"].get(rarity_str, 1000)
     st["gold"] = max(0, st.get("gold", 0) - cost_gold)
 
-    # Reroll substat option
-    bi = weapon.get("buildingIndexes", [0, 1, -1])
-    altar_idx = bi[target_idx] if target_idx < len(bi) else -1
-    pool = _get_buff_options_for_altar(altar_idx)
-    current_opt = weapon["subStat"][target_idx] if "subStat" in weapon else 0
-
-    valid_new = [opt for opt in pool if opt != current_opt]
-    new_opt = random.choice(valid_new) if valid_new else current_opt
+    # Set chosen substat option (Forge target option)
+    if target_option_id > 0:
+        new_opt = target_option_id
+    else:
+        bi = weapon.get("buildingIndexes", [0, 1, -1])
+        altar_idx = bi[target_idx] if target_idx < len(bi) else -1
+        pool = _get_buff_options_for_altar(altar_idx)
+        current_opt = weapon["subStat"][target_idx] if "subStat" in weapon else 0
+        valid_new = [opt for opt in pool if opt != current_opt]
+        new_opt = random.choice(valid_new) if valid_new else current_opt
 
     if "subStat" not in weapon:
         weapon["subStat"] = [0, 0, 0]
+    while len(weapon["subStat"]) < 3:
+        weapon["subStat"].append(0)
+
     weapon["subStat"][target_idx] = new_opt
     weapon["updatedAt"] = now_iso(0)
     save_state(st)
