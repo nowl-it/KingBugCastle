@@ -131,50 +131,34 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
     if gacha_el is None:
         return []
 
-    # Pity tracking: increment only this gacha's own stack key (gacha ID) and
-    # its GachaCeil key. Category siblings (300/303/305/etc) do NOT share a
-    # pity counter — each gacha rolls independently.
     stacks = st.setdefault("gachaStacks", {})
-    keys_to_update = {str(gacha_id)}
+    base_keys = {str(gacha_id)}
     if item_id > 0:
-        keys_to_update.add(str(item_id))
+        base_keys.add(str(item_id))
     parent_id = gacha_el.get("Parent")
     if parent_id:
-        keys_to_update.add(str(parent_id))
+        base_keys.add(str(parent_id))
     key_item = gacha_el.findtext("KeyItem")
     if key_item:
-        keys_to_update.add(str(key_item))
+        base_keys.add(str(key_item))
     gtype = gacha_el.findtext("Type") or ""
 
-    # GachaCeil keys and PoolIDs are the pity counters the client reads (e.g. DimGachaCeil_PickUp)
-    ceil_keys = set()
+    # Parse GachaCeil entries
+    ceil_entries = []
     for ce in gacha_el.findall("GachaCeil"):
         ck = ce.get("Key")
-        if ck:
-            ceil_keys.add(ck)
         pid = ce.get("PoolID")
-        if pid:
-            ceil_keys.add(str(pid))
-    keys_to_update |= ceil_keys
-
-    primary_ceil_key = None
-    primary_limit = 80
-    for ce in gacha_el.findall("GachaCeil"):
-        ck = ce.get("Key")
-        if ck:
-            val_text = ce.text
-            target_attr = ce.get("Target")
-            lim = int(val_text) if (val_text and val_text.isdigit()) else (int(target_attr) if (target_attr and target_attr.isdigit()) else 80)
-            primary_ceil_key = ck
-            primary_limit = lim
-            break
-
-    if primary_ceil_key and primary_limit > 0:
-        if stacks.get(primary_ceil_key, 0) >= primary_limit:
-            stacks[primary_ceil_key] = stacks[primary_ceil_key] % primary_limit
+        val_text = ce.text
+        target_attr = ce.get("Target")
+        lim = int(val_text) if (val_text and val_text.isdigit()) else (int(target_attr) if (target_attr and target_attr.isdigit()) else 100)
+        ceil_entries.append({
+            "key": ck,
+            "pool_id": pid,
+            "target": target_attr,
+            "limit": lim,
+        })
 
     result_pool = []
-    
     fixed_treasures = gacha_el.find("FixedTreasures")
     fixed_artifacts = gacha_el.find("FixedArtifacts")
     
@@ -227,6 +211,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
         
     total_weight = sum(r["weight"] for r in result_pool)
     all_heroes = _get_units(xml_dir)
+    dim_ids = _get_dim_unit_ids(xml_dir)
     
     # Check for featured pickup items on the Gacha banner
     pickup_treasures = []
@@ -237,15 +222,45 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
             if pid:
                 pickup_treasures.append(30041)
 
+    t_cache = _get_treasures(xml_dir)
+    special_treasures = set(t_cache.get("Special", []))
+    rare_treasures = set(t_cache.get("Rare", []))
+
     gacha_collections = []
     
     for _ in range(amount):
-        for k in keys_to_update:
+        # 1. Increment base gacha counters
+        for k in base_keys:
             stacks[k] = stacks.get(k, 0) + 1
 
-        is_pity_hit = False
-        if primary_ceil_key and primary_limit > 0 and stacks.get(primary_ceil_key, 0) >= primary_limit:
-            is_pity_hit = True
+        # 2. Increment individual ceil counters
+        for ce in ceil_entries:
+            ck = ce["key"]
+            pid = ce["pool_id"]
+            if ck:
+                stacks[ck] = stacks.get(ck, 0) + 1
+            if pid:
+                stacks[str(pid)] = stacks.get(str(pid), 0) + 1
+
+        # 3. Check pity hit for each ceil entry in priority order
+        special_pity = False
+        rare_pity = False
+        dim_pity = False
+        skin_pity = False
+
+        for ce in ceil_entries:
+            ck = ce["key"] or ""
+            lim = ce["limit"]
+            cur = stacks.get(ck, 0)
+            if lim > 0 and cur >= lim:
+                if "Special" in ck:
+                    special_pity = True
+                elif "Rare" in ck:
+                    rare_pity = True
+                elif "DimGachaCeil" in ck:
+                    dim_pity = True
+                elif "SkinGachaCeil" in ck:
+                    skin_pity = True
 
         if gacha_el.find("UnitCount") is None:
             num_rolls = 1
@@ -256,43 +271,59 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
         gacha_list = []
         reward_gacha_list = []
         collection_has_upgrade = False
-        dim_ids = _get_dim_unit_ids(xml_dir)
+        
         for _ in range(num_rolls):
-            if is_pity_hit:
-                is_reward = False
-                if gacha_id == 8001:
-                    uid = 10790
-                    is_new = str(uid) not in st.get("cards", {})
-                    dim_id = uid if uid in dim_ids else 0
-                    pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": is_new, "dimensionUnitId": dim_id}
-                    if not is_new:
-                        collection_has_upgrade = True
-                elif gacha_id == 2007:
-                    c_pick = st.get("customPickups", {}).get("2007", [10790])
-                    c_unit = c_pick[0] if c_pick else 10790
-                    is_new = str(c_unit) not in st.get("cards", {})
-                    dim_id = c_unit if c_unit in dim_ids else 0
-                    pull_res = {"type": "Unit", "unitId": c_unit, "count": 1, "isNew": is_new, "dimensionUnitId": dim_id}
-                    if not is_new:
-                        collection_has_upgrade = True
-                elif gacha_id in (5052, 6004):
+            pull_res = None
+            is_reward = (gtype == "SkinGacha")
+
+            if special_pity:
+                if gacha_id in (5052, 6004):
                     c_pick = st.get("customPickups", {}).get(str(gacha_id), [30041])
                     c_tr = c_pick[0] if c_pick else 30041
                     pull_res = {"type": "Treasure", "unitId": c_tr, "count": 1, "isNew": True}
-                elif "Treasure" in gtype or parent_id == "102":
-                    t_cache = _get_treasures(xml_dir)
+                else:
                     tid = random.choice(t_cache.get("Special", [30041]))
                     pull_res = {"type": "Treasure", "unitId": tid, "count": 1, "isNew": True}
-                else:
-                    uid = 10790
-                    is_new = str(uid) not in st.get("cards", {})
-                    dim_id = uid if uid in dim_ids else 0
-                    pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": is_new, "dimensionUnitId": dim_id}
-                    if not is_new:
-                        collection_has_upgrade = True
-
-                for k in keys_to_update:
-                    stacks[k] = 0
+                for ce in ceil_entries:
+                    if "Special" in (ce["key"] or ""):
+                        if ce["key"]:
+                            stacks[ce["key"]] = 0
+                        if ce["pool_id"]:
+                            stacks[str(ce["pool_id"])] = 0
+                special_pity = False
+            elif dim_pity:
+                uid = 10790
+                is_new = str(uid) not in st.get("cards", {})
+                dim_id = uid if uid in dim_ids else 0
+                pull_res = {"type": "Unit", "unitId": uid, "count": 1, "isNew": is_new, "dimensionUnitId": dim_id}
+                if not is_new:
+                    collection_has_upgrade = True
+                for ce in ceil_entries:
+                    if "DimGachaCeil" in (ce["key"] or ""):
+                        if ce["key"]:
+                            stacks[ce["key"]] = 0
+                dim_pity = False
+            elif skin_pity:
+                map_skins_cache = _get_map_skins(xml_dir)
+                map_skin_pool = map_skins_cache.get(2) or map_skins_cache.get(3) or map_skins_cache.get("all") or [10000]
+                msid = random.choice(map_skin_pool)
+                is_new = msid not in st.get("mapSkins", [])
+                pull_res = {"type": "MapSkin", "unitId": msid, "count": 1, "isNew": is_new}
+                for ce in ceil_entries:
+                    if "SkinGachaCeil" in (ce["key"] or ""):
+                        if ce["key"]:
+                            stacks[ce["key"]] = 0
+                skin_pity = False
+            elif rare_pity:
+                tid = random.choice(t_cache.get("Rare", [20000]))
+                pull_res = {"type": "Treasure", "unitId": tid, "count": 1, "isNew": True}
+                for ce in ceil_entries:
+                    if "Rare" in (ce["key"] or ""):
+                        if ce["key"]:
+                            stacks[ce["key"]] = 0
+                        if ce["pool_id"]:
+                            stacks[str(ce["pool_id"])] = 0
+                rare_pity = False
             else:
                 r = random.uniform(0, total_weight)
                 cum = 0
@@ -306,9 +337,8 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                 hero_id = random.choice(all_heroes)
                 count = random.randint(chosen.get("min", 1), chosen.get("max", 1))
                 type_str = chosen["type"]
-                is_reward = chosen.get("is_reward", False)
+                is_reward = chosen.get("is_reward", is_reward)
 
-                pull_res = None
                 if type_str == "Unit":
                     uid = chosen.get("id") or hero_id
                     is_new = str(uid) not in st.get("cards", {})
@@ -320,7 +350,6 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                     pull_res = {"type": "Gold", "unitId": 0, "count": count, "isNew": True}
                 elif type_str in ("Treasure", "TreasureGacha"):
                     rarity = chosen.get("rarity", "Common")
-                    t_cache = _get_treasures(xml_dir)
                     if rarity == "Special" and pickup_treasures and random.random() < 0.8:
                         tid = random.choice(pickup_treasures)
                     else:
@@ -341,33 +370,16 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                 elif type_str in ("SkinToken",):
                     pull_res = {"type": "Item", "unitId": 2001, "count": count, "isNew": True}
                 elif type_str == "Skin_Grade":
-                    grade = chosen.get("id", "0")
-                    import xml.etree.ElementTree as ET
-                    import pathlib
-                    global _SKIN_GRADE_CACHE
-                    cache = globals().get("_SKIN_GRADE_CACHE")
-                    if cache is None:
-                        cache = {}
-                        try:
-                            tree = ET.parse(pathlib.Path(xml_dir) / "Skins.xml")
-                            for skin in tree.findall("Skin"):
-                                g = skin.findtext("Grade")
-                                if g is not None:
-                                    cache.setdefault(g, []).append(int(skin.get("ID")))
-                            _SKIN_GRADE_CACHE = cache
-                        except:
-                            pass
-                    pool = cache.get(str(grade))
-                    if pool:
-                        sid = random.choice(pool)
-                        is_new = sid not in st.get("skins", [])
-                        pull_res = {"type": "Skin", "unitId": sid, "count": 1, "isNew": is_new}
-                    else:
-                        pull_res = {"type": "SkinToken", "unitId": 0, "count": 5, "isNew": True}
+                    grade = int(chosen.get("id", 0))
+                    skins_cache = _get_skins(xml_dir)
+                    skin_pool = skins_cache.get(grade) or skins_cache.get("all") or [1000001]
+                    sid = random.choice(skin_pool)
+                    is_new = sid not in st.get("skins", [])
+                    pull_res = {"type": "Skin", "unitId": sid, "count": 1, "isNew": is_new}
                 elif type_str == "MapSkin_Grade":
-                    grade = chosen.get("id", 0)
+                    grade = int(chosen.get("id", 0))
                     map_skins_cache = _get_map_skins(xml_dir)
-                    map_skin_pool = map_skins_cache.get(grade) or map_skins_cache.get("all")
+                    map_skin_pool = map_skins_cache.get(grade) or map_skins_cache.get("all") or [10000]
                     msid = random.choice(map_skin_pool)
                     is_new = msid not in st.get("mapSkins", [])
                     pull_res = {"type": "MapSkin", "unitId": msid, "count": 1, "isNew": is_new}
@@ -379,17 +391,37 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                     uid = chosen.get("id") or 0
                     pull_res = {"type": type_str, "unitId": uid, "count": count, "isNew": True}
 
-                is_pickup_hit = (gacha_id == 8001 and pull_res.get("type") == "Unit" and pull_res.get("unitId") == 10790) or \
-                                (gacha_id == 2007 and pull_res.get("type") == "Unit" and pull_res.get("unitId") == st.get("customPickups", {}).get("2007", [10790])[0]) or \
-                                (gacha_id in (5052, 6004) and pull_res.get("type") == "Treasure" and pull_res.get("unitId") in (pickup_treasures or [30041]))
-                if is_pickup_hit:
-                    for k in keys_to_update:
-                        stacks[k] = 0
+                # Check natural resets
+                if pull_res.get("type") == "Treasure":
+                    tid = pull_res.get("unitId", 0)
+                    if tid in special_treasures:
+                        for ce in ceil_entries:
+                            if "Special" in (ce["key"] or ""):
+                                if ce["key"]:
+                                    stacks[ce["key"]] = 0
+                                if ce["pool_id"]:
+                                    stacks[str(ce["pool_id"])] = 0
+                    elif tid in rare_treasures:
+                        for ce in ceil_entries:
+                            if "Rare" in (ce["key"] or ""):
+                                if ce["key"]:
+                                    stacks[ce["key"]] = 0
+                                if ce["pool_id"]:
+                                    stacks[str(ce["pool_id"])] = 0
+                elif pull_res.get("type") == "MapSkin" and chosen.get("id") in (2, 3, "2", "3"):
+                    for ce in ceil_entries:
+                        if "SkinGachaCeil" in (ce["key"] or ""):
+                            if ce["key"]:
+                                stacks[ce["key"]] = 0
+                elif pull_res.get("type") == "Unit" and pull_res.get("unitId") == 10790 and gacha_id == 8001:
+                    for ce in ceil_entries:
+                        if "DimGachaCeil" in (ce["key"] or ""):
+                            if ce["key"]:
+                                stacks[ce["key"]] = 0
 
             if pull_res:
                 if is_reward and gtype == "SkinGacha":
                     _WIRE_TYPE = {"Item": "InventoryItem", "Unit": "Card", "UnitSoul": "CardSoul"}
-                    # Convert pull_res to RewardGachaResult format which contains originReward of type RewardResponseData
                     reward = {
                         "originReward": {
                             "type": _WIRE_TYPE.get(pull_res["type"], pull_res["type"]),

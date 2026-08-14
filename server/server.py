@@ -2864,12 +2864,10 @@ def _grant_reward(st, rt, rid, amt):
         c = st.setdefault("cards", {}).setdefault(str(rid), {"unitId": rid, **SEED["cardTemplate"]})
         c["soul"] = c.get("soul", 0) + amt
     elif rt == "Treasure" and rid:
-        # A default save already owns every treasure, so this only fires for a save
-        # whose treasure list was trimmed. Duplicates are skipped - the client keys the
-        # treasure panel on treasureId and shows a second copy as an empty slot.
         tr = get_st_treasures(st)
-        if not any(t.get("treasureId") == rid for t in tr):
-            tr.append(make_treasure(max((t.get("id", 0) for t in tr), default=0) + 1, rid))
+        for _ in range(amt or 1):
+            new_id = max((t.get("id", 0) for t in tr), default=0) + 1
+            tr.append(make_treasure(new_id, rid))
     elif rt == "Artifact" and rid:
         # Grant an artifact instance directly to the player's inventory
         arts = st.setdefault("artifacts", [])

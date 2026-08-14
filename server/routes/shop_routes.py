@@ -41,78 +41,27 @@ def _gacha_keys_models(st):
     return [{"id": int(k), "count": v} for k, v in sorted(_gacha_keys(st).items())]
 
 
-_GACHA_SYNC_CACHE = None
-
-def _get_gacha_sync_map(xml_dir=XML_DIR):
-    """Returns a dict of gacha_id (str) -> set of all related keys (gachaId, Ceil Key, PoolID)."""
-    global _GACHA_SYNC_CACHE
-    if _GACHA_SYNC_CACHE is None:
-        _GACHA_SYNC_CACHE = {}
-        try:
-            import xml.etree.ElementTree as ET
-            tree = ET.parse(xml_dir / "Gachas.xml")
-            for g in tree.findall("Gacha"):
-                gid = g.get("ID")
-                if not gid:
-                    continue
-                related = {str(gid)}
-                parent_id = g.get("Parent")
-                if parent_id:
-                    related.add(str(parent_id))
-                key_item = g.findtext("KeyItem")
-                if key_item:
-                    related.add(str(key_item))
-                for ce in g.findall("GachaCeil"):
-                    ck = ce.get("Key")
-                    if ck:
-                        related.add(str(ck))
-                    pid = ce.get("PoolID")
-                    if pid:
-                        related.add(str(pid))
-                _GACHA_SYNC_CACHE[str(gid)] = related
-        except Exception as e:
-            admin_log(f"[gacha-sync-map error] {e}")
-    return _GACHA_SYNC_CACHE or {}
-
-def _sync_gacha_stacks(st, xml_dir=XML_DIR):
-    """Sync pity stacks across Gacha ID, GachaCeil Key, and PoolID for all gachas."""
-    gss = st.setdefault("gachaStacks", {})
-    sync_map = _get_gacha_sync_map(xml_dir)
-    for gid, related in sync_map.items():
-        max_val = 0
-        for k in related:
-            val = gss.get(k)
-            if isinstance(val, int):
-                max_val = max(max_val, val)
-        if max_val > 0:
-            for k in related:
-                gss[k] = max_val
-
 def _build_gacha_ceil(gacha_el, st):
     """Build BuyResponseModel.gachaCeil dict mapping Gacha ID, Parent, KeyItem, GachaCeil Key, and PoolID to current stack."""
-    _sync_gacha_stacks(st, XML_DIR)
-    gss = st.get("gachaStacks", {})
+    gss = st.setdefault("gachaStacks", {})
     ceil_dict = {}
     if gacha_el is not None:
         gid = gacha_el.get("ID")
-        val = gss.get(str(gid), 0) if gid else 0
         if gid:
-            ceil_dict[str(gid)] = val
+            ceil_dict[str(gid)] = gss.get(str(gid), 0)
         parent_id = gacha_el.get("Parent")
         if parent_id:
-            ceil_dict[str(parent_id)] = gss.get(str(parent_id), val)
+            ceil_dict[str(parent_id)] = gss.get(str(parent_id), 0)
         key_item = gacha_el.findtext("KeyItem")
         if key_item:
-            ceil_dict[str(key_item)] = gss.get(str(key_item), val)
+            ceil_dict[str(key_item)] = gss.get(str(key_item), 0)
         for ce in gacha_el.findall("GachaCeil"):
             ck = ce.get("Key")
-            c_val = gss.get(ck, val) if ck else val
             if ck:
-                ceil_dict[ck] = c_val
+                ceil_dict[ck] = gss.get(ck, 0)
             pid = ce.get("PoolID")
-            p_val = gss.get(str(pid), c_val) if pid else c_val
             if pid:
-                ceil_dict[str(pid)] = p_val
+                ceil_dict[str(pid)] = gss.get(str(pid), 0)
     return ceil_dict
 
 
@@ -139,12 +88,11 @@ def r_shop(body, st):
     base["playerCash"] = st.get("cash", 0)
     base["playerHeart"] = st.get("heart", 0)
     
-    _sync_gacha_stacks(st, XML_DIR)
     gss = st.get("gachaStacks", {})
         
     base["gachaStacks"] = [{"gachaId": int(k), "stack": v}
                            for k, v in gss.items() if str(k).isdigit()]
-    base["availableTimeLimitGachas"] = [8001, 2007, 5052]
+    base["availableTimeLimitGachas"] = []
     base["gachaKeys"] = [{"id": int(k), "count": v}
                          for k, v in st.get("gachaKeys", {}).items()]
     return base
@@ -190,14 +138,17 @@ def _shop_buy(body, st):
         gachas_result = gacha.roll(gacha_id, amount, st, XML_DIR, item_id)
         new_unit_ids = []
         card_exp_results = []
+        rewards = []
         for pull in gachas_result:
             # Grant main gacha pulls
             for rg in pull.get("gacha", []):
                 rt = rg["type"]
                 uid = rg["unitId"]
+                cnt = rg.get("count", 1)
+                rewards.append({"type": rt, "id": uid, "count": cnt})
                 if rt == "UnitExp":
                     rt = "UnitSoul"
-                if srv._grant_reward(st, rt, uid, rg.get("count", 1)):
+                if srv._grant_reward(st, rt, uid, cnt):
                     pull["upgrade"] = True
                     # Duplicate dimension hero: client reads type+count for stars
                     if rt in ("Unit", "Card") and uid:
@@ -224,11 +175,15 @@ def _shop_buy(body, st):
                 if origin:
                     rt = origin.get("type")
                     uid = origin.get("id")
+                    cnt = origin.get("count", 1)
                     if rt == "UnitExp":
                         rt = "UnitSoul"
-                    srv._grant_reward(st, rt, uid, origin.get("count", 1))
+                    elif rt == "UnitSoulItem":
+                        rt = "Item"
+                        uid = 200
+                    rewards.append({"type": rt, "id": uid, "count": cnt})
+                    srv._grant_reward(st, rt, uid, cnt)
 
-        _sync_gacha_stacks(st, XML_DIR)
         gss = st.get("gachaStacks", {})
         gacha_stacks = []
         if gss:
@@ -239,16 +194,26 @@ def _shop_buy(body, st):
         if gacha_id == 103:
             actual_gacha_id = 7000
         gacha_stack_single = {"gachaId": actual_gacha_id, "stack": gss.get(str(actual_gacha_id), 0)} if actual_gacha_id > 0 else None
+        ceil_dict = _build_gacha_ceil(gacha_el, st)
 
         return {
-            "gachaRewardResponseData": srv._reward_list_data([]),
+            "gachaRewardResponseData": srv._reward_list_data(rewards),
+            "treasureResult": {
+                "treasures": srv.get_st_treasures(st),
+                "deletedTreasures": [],
+                "playerGold": st.get("gold", 0),
+                "playerCash": st.get("cash", 0),
+                "inventories": srv._inventory_models(st),
+                "addedExpItems": 0,
+            },
             "inventoryItems": srv._inventory_models(st),
             "soldOut": False,
             "gachas": gachas_result,
             "gachaKeys": gacha_keys,
             "gachaStack": gacha_stack_single,
             "gachaStacks": gacha_stacks,
-            "gachaCeil": _build_gacha_ceil(gacha_el, st),
+            "gachaCeil": ceil_dict,
+            "updatedKeyValues": [{"key": str(k), "value": str(v)} for k, v in ceil_dict.items()],
             "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0),
             "playerHeart": st.get("heart", 0),
@@ -443,18 +408,18 @@ def _shop_buy(body, st):
                         rt = origin.get("type")
                         uid = origin.get("id")
                         cnt = origin.get("count", 1)
-                        rewards.append({"type": rt, "id": uid, "count": cnt})
                         if rt == "UnitExp":
                             rt = "UnitSoul"
                         elif rt == "UnitSoulItem":
                             rt = "Item"
-                            if item_id == 301 or item_id == 302:
+                            if item_id in (301, 302):
                                 uid = 201
-                        elif item_id == 303:
-                            uid = 202
-                        else:
-                            uid = 200
-                    srv._grant_reward(st, rt, uid, cnt)
+                            elif item_id == 303:
+                                uid = 202
+                            else:
+                                uid = 200
+                        rewards.append({"type": rt, "id": uid, "count": cnt})
+                        srv._grant_reward(st, rt, uid, cnt)
         else:
             # Not a banner roll, just buying a scroll (e.g. from event shop)
             total = keys.get(str(item_id), 0) + amount
@@ -463,24 +428,38 @@ def _shop_buy(body, st):
             admin_log(f"[gacha-key] ELSE branch fired: item_id={item_id} adding {amount} keys, total={total} (gacha_el was None)")
 
     # Build gachaStack (single object for BuyResponseModel) and gachaStacks (list for ShopResponseModel)
-    _sync_gacha_stacks(st, XML_DIR)
     gss = st.get("gachaStacks", {})
     gacha_stacks = [{"gachaId": int(gid_str), "stack": cnt} for gid_str, cnt in gss.items() if str(gid_str).isdigit()]
     actual_gacha_id = gacha_id
     if gacha_id == 103:
         actual_gacha_id = 7000
     gacha_stack_single = {"gachaId": actual_gacha_id, "stack": gss.get(str(actual_gacha_id), 0)} if actual_gacha_id > 0 else None
+    ceil_dict = _build_gacha_ceil(gacha_el, st)
 
-    return {"gachaRewardResponseData": srv._reward_list_data(rewards),
-            "inventoryItems": srv._inventory_models(st), "soldOut": False,
-            "gachas": gachas_result, "gachaKeys": gacha_keys,
-            "gachaStack": gacha_stack_single, "gachaStacks": gacha_stacks,
-            "gachaCeil": _build_gacha_ceil(gacha_el, st),
+    return {
+        "gachaRewardResponseData": srv._reward_list_data(rewards),
+        "treasureResult": {
+            "treasures": srv.get_st_treasures(st),
+            "deletedTreasures": [],
             "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0),
-            "playerHeart": st.get("heart", 0),
-            "newUnitIds": new_unit_ids,
-            "cardExpResults": card_exp_results}
+            "inventories": srv._inventory_models(st),
+            "addedExpItems": 0,
+        },
+        "inventoryItems": srv._inventory_models(st),
+        "soldOut": False,
+        "gachas": gachas_result,
+        "gachaKeys": gacha_keys,
+        "gachaStack": gacha_stack_single,
+        "gachaStacks": gacha_stacks,
+        "gachaCeil": ceil_dict,
+        "updatedKeyValues": [{"key": str(k), "value": str(v)} for k, v in ceil_dict.items()],
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "playerHeart": st.get("heart", 0),
+        "newUnitIds": new_unit_ids,
+        "cardExpResults": card_exp_results,
+    }
 
 def r_shop_refresh(body, st):
     """Refreshing the daily shop clears its per-item buy counts, which is what makes
