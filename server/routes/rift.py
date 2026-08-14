@@ -752,11 +752,14 @@ def r_rift_crystal_charge(body, st):
     rarity_name = RIFT_CRYSTAL_RARITIES.get(rarity_int, "Common")
     c_info = data["crystal_data"].get(rarity_name, {"common": 100, "rare": 0, "special": 0, "dust_min": 25, "dust_max": 75, "gauge": 20, "ceil": 0})
 
-    # Deduct gauge for all charges at once
+    # Deduct gauge for all charges at once (unless Infinity Rift Energy is enabled)
     gauge_cost = c_info.get("gauge", 20)
     current_gauge = st.get("riftGauge", 0)
     total_gauge_cost = gauge_cost * charge_count
-    st["riftGauge"] = max(0, current_gauge - total_gauge_cost)
+    if st.get("infinityRiftEnergy", False):
+        st["riftGauge"] = max(current_gauge, 1000)
+    else:
+        st["riftGauge"] = max(0, current_gauge - total_gauge_cost)
 
     total_dust = 0
     created_weapons = []

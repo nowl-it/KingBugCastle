@@ -439,6 +439,15 @@ async def api_player_macro(pid: str, body: dict):
         st["accessories"] = grant_accessories.build(pid)
     elif macro == "rift_legendary_all":
         _grant_rift_collection_to_player(st, wipe_test_equip=True)
+    elif macro == "grant_all_skins":
+        _grant_all_skins_to_player(st)
+    elif macro == "toggle_infinity_rift":
+        st["infinityRiftEnergy"] = not st.get("infinityRiftEnergy", False)
+        if st["infinityRiftEnergy"]:
+            st["riftGauge"] = 1000
+            for kv in st.setdefault("keyValues", []):
+                if kv.get("key") == "RiftGauge":
+                    kv["value"] = "1000"
     else:
         raise HTTPException(400, f"unknown macro {macro}")
         
@@ -545,6 +554,48 @@ async def api_heroes_grant_all(pid: str, body: dict = None):
     return {"ok": True, "added": added, "total": len(cards)}
 
 
+def _load_all_hero_skins():
+    import xml.etree.ElementTree as ET
+    from pathlib import Path
+    tree = ET.parse(Path(gamedata.XML_DIR) / "Skins.xml")
+    skins_by_unit = {}
+    inherit_map = {}
+    for s in tree.findall("Skin"):
+        sid_str = s.get("ID")
+        if not sid_str:
+            continue
+        sid = int(sid_str)
+        unit_str = s.get("Unit")
+        inherit_str = s.get("Inherit")
+        if unit_str:
+            uid = int(unit_str)
+            inherit_map[sid] = uid
+            skins_by_unit.setdefault(uid, []).append(sid)
+        elif inherit_str:
+            parent_id = int(inherit_str)
+            if parent_id in inherit_map:
+                uid = inherit_map[parent_id]
+                inherit_map[sid] = uid
+                skins_by_unit.setdefault(uid, []).append(sid)
+    return skins_by_unit
+
+
+def _grant_all_skins_to_player(st):
+    skins_map = _load_all_hero_skins()
+    cards = st.setdefault("cards", {})
+    total_skins = 0
+    for uid in gamedata.HEROES:
+        if str(uid) not in cards:
+            cards[str(uid)] = _new_card(uid)
+        c = cards[str(uid)]
+        unit_skins = skins_map.get(uid, [])
+        all_skins = set(c.get("skins") or [])
+        all_skins.update(unit_skins)
+        c["skins"] = sorted(list(all_skins))
+        total_skins += len(c["skins"])
+    return total_skins
+
+
 def _grant_rift_collection_to_player(st, wipe_test_equip=True):
     import rift
     if wipe_test_equip:
@@ -555,6 +606,58 @@ def _grant_rift_collection_to_player(st, wipe_test_equip=True):
     for kv in st.setdefault("keyValues", []):
         if kv.get("key") == "RiftGauge":
             kv["value"] = "1000"
+
+
+@app.post("/api/player/{pid}/grant-all-skins")
+async def api_player_grant_all_skins(pid: str):
+    st = _read_state(pid)
+    total = _grant_all_skins_to_player(st)
+    _write_state(pid, st)
+    return {"ok": True, "totalSkins": total}
+
+
+@app.post("/api/players/grant-all-skins")
+async def api_players_grant_all_skins():
+    count = 0
+    for uid, st, _ in playerdb.all_players():
+        if not st:
+            continue
+        _grant_all_skins_to_player(st)
+        playerdb.save(uid, st)
+        count += 1
+    return {"ok": True, "playersUpdated": count}
+
+
+@app.post("/api/player/{pid}/toggle-infinity-rift")
+async def api_player_toggle_infinity_rift(pid: str):
+    st = _read_state(pid)
+    st["infinityRiftEnergy"] = not st.get("infinityRiftEnergy", False)
+    if st["infinityRiftEnergy"]:
+        st["riftGauge"] = 1000
+        for kv in st.setdefault("keyValues", []):
+            if kv.get("key") == "RiftGauge":
+                kv["value"] = "1000"
+    _write_state(pid, st)
+    return {"ok": True, "infinityRiftEnergy": st["infinityRiftEnergy"]}
+
+
+@app.post("/api/players/toggle-infinity-rift")
+async def api_players_toggle_infinity_rift(body: dict = None):
+    b = body or {}
+    enable = b.get("enable", True)
+    count = 0
+    for uid, st, _ in playerdb.all_players():
+        if not st:
+            continue
+        st["infinityRiftEnergy"] = enable
+        if enable:
+            st["riftGauge"] = 1000
+            for kv in st.setdefault("keyValues", []):
+                if kv.get("key") == "RiftGauge":
+                    kv["value"] = "1000"
+        playerdb.save(uid, st)
+        count += 1
+    return {"ok": True, "playersUpdated": count, "infinityRiftEnergy": enable}
 
 
 @app.post("/api/player/{pid}/grant-legendary-rift-crystals")
