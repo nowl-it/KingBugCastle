@@ -46,6 +46,16 @@ def load_route_models():
                                ("/release-equip", "ReleaseEquip"),
                                ("/set-state", "SetState"), ("/overcome", "Overcome")]
     })
+    # Rift weapon routes: generated route_models.json mismatches response models
+    # (name-similarity heuristic picks the wrong RestAPI method). Pin correct models.
+    models.update({
+        "/rift-weapon":                     {"method": "FetchRiftWeaponInventory",
+                                             "response": "RiftWeaponInventoryResponseModel"},
+        "/rift-weapon/crystal-inventory":   {"method": "RiftCrystalInventory",
+                                             "response": "RiftCrystalInventoryResponseModel"},
+        "/rift-weapon/set-crystal-state":   {"method": "RiftWeaponSetState",
+                                             "response": "RiftCrystalResultResponseModel"},
+    })
     # map_routes.py pairs a route with a RestAPI method by name similarity and drops
     # what it cannot score, so 70 real v171 routes had no model and were answered with
     # a bare ResponseModel - the right envelope, none of the fields the client reads.

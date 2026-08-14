@@ -102,15 +102,6 @@ def register(app, server_module):
                      "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
                      "inventories": [], "addedExpItems": 0})
 
-    @app.get("/rift-weapon")
-    @app.post("/rift-weapon")
-    async def rift_weapon_inventory_direct(request: Request):
-        st = load_state()
-        host = request.headers.get("host", "?")
-        admin_log(f"[{host}] DIRECT /rift-weapon -> RiftWeaponInventoryResponseModel")
-        payload = srv.r_rift_weapon({}, st)
-        payload.update(code=200, success=True)
-        return _enc(payload)
 
     @app.get("/invasion/record")
     @app.post("/invasion/record")

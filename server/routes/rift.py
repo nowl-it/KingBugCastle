@@ -1,0 +1,951 @@
+"""Rift Weapons (균열 장비) and Rift Crystals (균열 수정) Subsystem.
+
+Implements all 15+ game client operations, crafting, enhancement, reroll, dismantling,
+crystal charging with pity mechanics, gauge purchasing, deck equipping, archive/wiki,
+and state persistence.
+
+All formulas, costs, and probabilities are parsed directly from:
+- `server/xml_live/RiftWeaponConstants.xml`
+- `server/xml_live/RiftWeaponBuffs.xml`
+- `server/xml_live/RiftWeapons.xml`
+"""
+import copy
+import random
+import re
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+from common import admin_log, body_int, body_list, now_iso
+from config import XML_DIR
+from state import save_state
+
+srv = None  # Live server module, injected via register()
+
+DUST_ITEM_ID = 8000
+ALL_RIFT_WEAPON_IDS = [10000, 11000, 12000, 13000, 14000, 15000]
+RIFT_BUILDING_COUNT = 9  # 9 altars in Buildings.xml (indices 0..8)
+RIFT_BUILDING_MAX_LEVEL = 15
+RIFT_CRYSTAL_RARITIES = {1: "Common", 2: "UnCommon", 3: "Rare", 4: "Epic", 5: "Legendary"}
+
+_cache = {}
+
+
+def _parse_xml(xml_dir=XML_DIR):
+    key = str(xml_dir)
+    if key in _cache:
+        return _cache[key]
+
+    constants_path = Path(xml_dir) / "RiftWeaponConstants.xml"
+    buffs_path = Path(xml_dir) / "RiftWeaponBuffs.xml"
+    weapons_path = Path(xml_dir) / "RiftWeapons.xml"
+
+    # 1. Level Cost Table
+    level_costs = {}
+    reroll_costs = {"Common": 1000, "Rare": 3000, "Special": 10000}
+    dismantle_rewards = {"Common": 40, "Rare": 200, "Special": 500}
+    crystal_data = {}
+    gold_cost_ratio = 5
+    gauge_buy_costs = [10, 20, 30, 30, 30, 30, 30, 30, 30, 30]
+    gauge_buy_amount = 100
+    gauge_max = 1000
+    reset_cash_cost = 250
+    reset_level = 15
+
+    if constants_path.exists():
+        root = ET.parse(constants_path).getroot()
+        for cost in root.findall(".//LevelCost/Cost"):
+            lvl = int(cost.attrib["Level"])
+            level_costs[lvl] = {
+                "success": float(cost.attrib.get("Success", 0)),
+                "fail": float(cost.attrib.get("Fail", 0)),
+                "down": float(cost.attrib.get("Down", 0)),
+                "broken": float(cost.attrib.get("Broken", 0)),
+                "dust": int(cost.attrib.get("Cost", 0)),
+                "cash": int(cost.attrib.get("CashCost", -1)),
+            }
+        gcr = root.find(".//LevelCost/GoldCostRatio")
+        if gcr is not None and gcr.text:
+            gold_cost_ratio = int(gcr.text.strip())
+
+        for rc in root.findall(".//RerollCost/Cost"):
+            reroll_costs[rc.attrib["Rarity"]] = int(rc.attrib["GoldCost"])
+
+        for dr in root.findall(".//DismantleRewards/DismantleReward"):
+            rw = dr.find("Reward")
+            if rw is not None:
+                dismantle_rewards[dr.attrib["Rarity"]] = int(rw.attrib["Count"])
+
+        for cd in root.findall(".//RiftCrystalData/CrystalData"):
+            rarity = cd.attrib["Rarity"]
+            dust_str = cd.attrib.get("Dust", "50~100")
+            dust_parts = [int(x) for x in dust_str.split("~")]
+            crystal_data[rarity] = {
+                "common": float(cd.attrib.get("Common", 0)),
+                "rare": float(cd.attrib.get("Rare", 0)),
+                "special": float(cd.attrib.get("Special", 0)),
+                "dust_min": dust_parts[0],
+                "dust_max": dust_parts[1] if len(dust_parts) > 1 else dust_parts[0],
+                "gauge": int(cd.attrib.get("Gauge", 20)),
+                "ceil": int(cd.attrib.get("Ceil", "0")),
+            }
+
+        gbi = root.find(".//RiftGaugeBuyInformation")
+        if gbi is not None and "Cost" in gbi.attrib:
+            gauge_buy_costs = [int(x.strip()) for x in gbi.attrib["Cost"].split(",") if x.strip()]
+            if gbi.text and gbi.text.strip():
+                gauge_buy_amount = int(gbi.text.strip())
+
+        gm = root.find(".//RiftGaugeMaxValue")
+        if gm is not None and gm.text:
+            gauge_max = int(gm.text.strip())
+
+        rcc = root.find(".//RiftWeaponResetCashCost")
+        if rcc is not None and rcc.text:
+            reset_cash_cost = int(rcc.text.strip())
+
+        rl = root.find(".//RiftWeaponResetLevel")
+        if rl is not None and rl.text:
+            reset_level = int(rl.text.strip())
+
+    # 2. Altar Buff Pools
+    altar_buffs = {}
+    all_buff_ids = []
+    if buffs_path.exists():
+        root_b = ET.parse(buffs_path).getroot()
+        for b in root_b.findall("BuffData"):
+            b_id = int(b.attrib["ID"])
+            all_buff_ids.append(b_id)
+            bld_str = b.attrib.get("Building", "")
+            if bld_str:
+                blds = [int(x.strip()) for x in bld_str.split(",") if x.strip()]
+                for bld in blds:
+                    altar_buffs.setdefault(bld, []).append(b_id)
+
+    # 3. Weapons
+    weapons = ALL_RIFT_WEAPON_IDS
+    if weapons_path.exists():
+        root_w = ET.parse(weapons_path).getroot()
+        w_ids = [int(rw.attrib["ID"]) for rw in root_w.findall("RiftWeapon") if "ID" in rw.attrib]
+        if w_ids:
+            weapons = w_ids
+
+    data = {
+        "level_costs": level_costs,
+        "gold_cost_ratio": gold_cost_ratio,
+        "reroll_costs": reroll_costs,
+        "dismantle_rewards": dismantle_rewards,
+        "crystal_data": crystal_data,
+        "gauge_buy_costs": gauge_buy_costs,
+        "gauge_buy_amount": gauge_buy_amount,
+        "gauge_max": gauge_max,
+        "reset_cash_cost": reset_cash_cost,
+        "reset_level": reset_level,
+        "altar_buffs": altar_buffs,
+        "all_buff_ids": sorted(list(set(all_buff_ids))),
+        "weapons": weapons,
+    }
+    _cache[key] = data
+    return data
+
+
+def _get_buff_options_for_altar(altar_idx, xml_dir=XML_DIR):
+    data = _parse_xml(xml_dir)
+    specific = data["altar_buffs"].get(altar_idx, [])
+    wildcards = data["altar_buffs"].get(-1, [])
+    pool = list(set(specific + wildcards))
+    return pool if pool else data["all_buff_ids"]
+
+
+def make_rift_weapon(i, rw_id, rarity=1, level=1, building_indexes=None, sub_stat=None, state=0):
+    """Create a fully valid RiftWeaponModel.
+
+    rarity uses the client enum: None=0, Common=1, Rare=2, Special=3.
+    """
+    if building_indexes is None or len(building_indexes) != 3:
+        # Pick 3 distinct altars (0..8)
+        altars = list(range(RIFT_BUILDING_COUNT))
+        random.shuffle(altars)
+        building_indexes = altars[:3]
+
+    if sub_stat is None or len(sub_stat) != 3:
+        sub_stat = []
+        for b_idx in building_indexes:
+            pool = _get_buff_options_for_altar(b_idx)
+            sub_stat.append(random.choice(pool) if pool else 0)
+
+    now = now_iso(0)
+    return {
+        "id": i,
+        "weaponId": rw_id,
+        "buildingIndexes": building_indexes,
+        "level": max(1, min(40, level)),
+        "rarity": max(1, min(3, rarity)),
+        "broken": False,
+        "subStat": sub_stat,
+        "state": state,
+        "createdAt": now,
+        "updatedAt": now,
+    }
+
+
+def make_rift_crystal(i, rw_id, main_idx=None, rarity=1, building_levels=None, state=0):
+    """Create a fully valid RiftCrystalModel."""
+    data = _parse_xml()
+    main_idx = (i % RIFT_BUILDING_COUNT) if main_idx is None else (main_idx % RIFT_BUILDING_COUNT)
+
+    if building_levels is None or len(building_levels) != RIFT_BUILDING_COUNT:
+        other_level = 10 if rarity >= 3 else 5
+        main_level = 15 if rarity >= 4 else 12
+        building_levels = [other_level] * RIFT_BUILDING_COUNT
+        building_levels[main_idx] = main_level
+
+    rarity = max(1, min(5, rarity))
+    rarity_name = RIFT_CRYSTAL_RARITIES.get(rarity, "Common")
+    c_info = data["crystal_data"].get(rarity_name, {})
+    ceil_count = c_info.get("ceil", 0)
+
+    now = now_iso(0)
+    return {
+        "id": i,
+        "weaponId": rw_id,
+        "mainBuildingIdx": main_idx,
+        "buildingLevels": building_levels,
+        "rarity": rarity,
+        "ceilCount": ceil_count,
+        "state": state,
+        "createdAt": now,
+        "updatedAt": now,
+    }
+
+
+DEFAULT_RIFT_WEAPONS = [make_rift_weapon(i + 1, rwid) for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
+DEFAULT_RIFT_CRYSTALS = [make_rift_crystal(i + 1, rwid, main_idx=i, rarity=(i % 5) + 1) for i, rwid in enumerate(ALL_RIFT_WEAPON_IDS)]
+
+
+def _repair_rift_crystals(crystals):
+    """Upgrade crystals saved before the shape was understood. Returns True if anything
+    changed, so the caller can persist."""
+    changed = False
+    for c in crystals:
+        if c.get("rarity") not in RIFT_CRYSTAL_RARITIES:
+            c["rarity"] = 1
+            changed = True
+        levels = c.get("buildingLevels") or []
+        if len(levels) != RIFT_BUILDING_COUNT:
+            main = int(c.get("mainBuildingIdx", 0)) % max(RIFT_BUILDING_COUNT, 1)
+            other = 5
+            main_level = 12
+            fixed = [min(int(v), RIFT_BUILDING_MAX_LEVEL) for v in levels[:RIFT_BUILDING_COUNT]]
+            fixed += [other] * (RIFT_BUILDING_COUNT - len(fixed))
+            fixed[main] = max(main_level, other + 1)
+            c["buildingLevels"] = fixed
+            c["mainBuildingIdx"] = main
+            changed = True
+        else:
+            main = int(c.get("mainBuildingIdx", 0)) % max(RIFT_BUILDING_COUNT, 1)
+            max_other = max((levels[i] for i in range(len(levels)) if i != main), default=0)
+            if levels[main] <= max_other:
+                levels[main] = max(levels[main], max_other + 1)
+                changed = True
+    return changed
+
+
+def _next_weapon_id(st):
+    weapons = st.setdefault("riftWeapons", [])
+    return max((w.get("id", 0) for w in weapons), default=0) + 1
+
+
+def _next_crystal_id(st):
+    crystals = st.setdefault("riftCrystals", [])
+    return max((c.get("id", 0) for c in crystals), default=0) + 1
+
+
+def ensure_rift_state(st):
+    """Ensure all Rift state keys exist and are valid."""
+    data = _parse_xml()
+    changed = False
+
+    # 1. Rift Weapons
+    if "riftWeapons" not in st or not st["riftWeapons"]:
+        st["riftWeapons"] = copy.deepcopy(DEFAULT_RIFT_WEAPONS)
+        changed = True
+    else:
+        # Migrate rarity 0 (old off-by-one) to valid range 1-3
+        for w in st["riftWeapons"]:
+            r = w.get("rarity", 1)
+            if r == 0:
+                w["rarity"] = 1
+                changed = True
+            elif r > 3:
+                w["rarity"] = 3
+                changed = True
+
+    # 2. Rift Crystals
+    if "riftCrystals" not in st:
+        st["riftCrystals"] = copy.deepcopy(DEFAULT_RIFT_CRYSTALS)
+        changed = True
+    else:
+        if _repair_rift_crystals(st["riftCrystals"]):
+            changed = True
+
+    # 3. Equipped Weapons: Dict[int, List[EquippedRiftWeaponData]]
+    if "equippedRiftWeapons" not in st:
+        st["equippedRiftWeapons"] = {}
+        changed = True
+    else:
+        # Migrate old string keys to int keys
+        eq = st["equippedRiftWeapons"]
+        str_keys = [k for k in eq if isinstance(k, str)]
+        for sk in str_keys:
+            eq[int(sk)] = eq.pop(sk)
+            changed = True
+
+    # 4. Rift Gauge
+    if "riftGauge" not in st:
+        st["riftGauge"] = 0
+        changed = True
+
+    # 5. Rift Weapon Archives
+    if "riftWeaponArchives" not in st:
+        st["riftWeaponArchives"] = []
+        changed = True
+
+    return changed
+
+
+def _equipped_list_for_preset(st, preset_idx):
+    equipped_dict = st.setdefault("equippedRiftWeapons", {})
+    return equipped_dict.get(preset_idx, [])
+
+
+def _equipped_weapon_ids_for_preset(st, preset_idx):
+    eq_list = _equipped_list_for_preset(st, preset_idx)
+    return [e["riftWeaponId"] for e in eq_list if "riftWeaponId" in e]
+
+
+# ==============================================================================
+# ROUTE HANDLERS
+# ==============================================================================
+
+
+def r_rift_weapon_inventory(body, st):
+    """GET/POST /rift-weapon -> RiftWeaponInventoryResponseModel."""
+    if ensure_rift_state(st):
+        save_state(st)
+    equipped_dict = st.setdefault("equippedRiftWeapons", {})
+    resp = {
+        "riftWeapons": st.get("riftWeapons", []),
+        "equippedWeapons": equipped_dict,
+    }
+    admin_log(f"[RIFT DEBUG] weapon-inventory -> {len(resp['riftWeapons'])} weapons, equipped={len(equipped_dict)} presets")
+    return resp
+
+
+def r_rift_crystal_inventory(body, st):
+    """GET/POST /rift-weapon/crystal-inventory -> RiftCrystalInventoryResponseModel."""
+    if ensure_rift_state(st):
+        save_state(st)
+    resp = {
+        "riftCrystals": st.get("riftCrystals", []),
+    }
+    admin_log(f"[RIFT DEBUG] crystal-inventory -> {len(resp['riftCrystals'])} crystals")
+    return resp
+
+
+def r_rift_weapon_equip(body, st):
+    """POST /rift-weapon/equip -> RiftWeaponResultResponseModel."""
+    ensure_rift_state(st)
+    weapon_id = body_int(body.get("riftWeaponId"), 0)
+    slot_idx = body_int(body.get("targetIdx"), 0)
+    preset_idx = body_int(body.get("equipPreset"), 0)
+
+    p_key = preset_idx
+    equipped_dict = st.setdefault("equippedRiftWeapons", {})
+    preset_list = equipped_dict.setdefault(p_key, [])
+
+    # Remove any weapon occupying the same slot, or this weapon if in another slot
+    filtered = [e for e in preset_list if e.get("index") != slot_idx and e.get("riftWeaponId") != weapon_id]
+
+    # Verify weapon exists
+    weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
+    if weapon is not None:
+        filtered.append({"deckPreset": preset_idx, "index": slot_idx, "riftWeaponId": weapon_id})
+
+    equipped_dict[p_key] = filtered
+    save_state(st)
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "deletedRiftWeapons": [],
+        "rewardListResponseData": None,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "upgradeState": 0,
+        "equippedWeaponIds": [e["riftWeaponId"] for e in filtered],
+    }
+
+
+def r_rift_weapon_release_equip(body, st):
+    """POST /rift-weapon/release-equip -> RiftWeaponResultResponseModel."""
+    ensure_rift_state(st)
+    weapon_id = body_int(body.get("riftWeaponId"), 0)
+    slot_idx = body_int(body.get("targetIdx"), -1)
+    preset_idx = body_int(body.get("equipPreset"), 0)
+
+    p_key = preset_idx
+    equipped_dict = st.setdefault("equippedRiftWeapons", {})
+    preset_list = equipped_dict.setdefault(p_key, [])
+
+    filtered = [
+        e
+        for e in preset_list
+        if not (
+            (weapon_id and e.get("riftWeaponId") == weapon_id)
+            or (slot_idx >= 0 and e.get("index") == slot_idx)
+        )
+    ]
+    equipped_dict[p_key] = filtered
+    save_state(st)
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "deletedRiftWeapons": [],
+        "rewardListResponseData": None,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "upgradeState": 0,
+        "equippedWeaponIds": [e["riftWeaponId"] for e in filtered],
+    }
+
+
+def r_rift_weapon_upgrade(body, st):
+    """POST /rift-weapon/upgrade -> RiftWeaponResultResponseModel.
+
+    UpgradeState return codes:
+    0 = Fail (level unchanged)
+    1 = Success (level +1)
+    2 = Down (level -1)
+    3 = Broken (weapon broken)
+    """
+    ensure_rift_state(st)
+    data = _parse_xml()
+
+    weapon_id = body_int(body.get("riftWeaponId"), 0)
+    use_cash = bool(body.get("useCash", False))
+    preset_idx = body_int(body.get("equipPreset"), 0)
+
+    weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
+    if weapon is None or weapon.get("broken", False):
+        return {
+            "riftWeapons": st.get("riftWeapons", []),
+            "deletedRiftWeapons": [],
+            "rewardListResponseData": None,
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "upgradeState": 0,
+            "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+        }
+
+    cur_level = weapon.get("level", 1)
+    rarity = weapon.get("rarity", 1)
+    max_level = 15 if rarity == 1 else (30 if rarity == 2 else 40)
+
+    if cur_level >= max_level:
+        return {
+            "riftWeapons": st.get("riftWeapons", []),
+            "deletedRiftWeapons": [],
+            "rewardListResponseData": None,
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "upgradeState": 0,
+            "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+        }
+
+    cost_info = data["level_costs"].get(cur_level, {"success": 100, "fail": 0, "down": 0, "broken": 0, "dust": 10, "cash": -1})
+    dust_needed = cost_info["dust"]
+    gold_needed = dust_needed * data["gold_cost_ratio"]
+    cash_needed = cost_info["cash"] if (use_cash and cost_info["cash"] > 0) else 0
+
+    # Deduct resources
+    if srv:
+        srv._take_item(st, DUST_ITEM_ID, dust_needed)
+    st["gold"] = max(0, st.get("gold", 0) - gold_needed)
+    if cash_needed > 0:
+        st["cash"] = max(0, st.get("cash", 0) - cash_needed)
+
+    # Calculate outcome
+    roll = random.uniform(0, 100)
+    success_rate = cost_info["success"]
+    fail_rate = cost_info["fail"]
+    down_rate = cost_info["down"]
+    broken_rate = cost_info["broken"]
+
+    if use_cash and cash_needed > 0:
+        # Cash protection turns Down and Broken into standard Fail
+        down_rate = 0
+        broken_rate = 0
+        fail_rate = 100 - success_rate
+
+    upgrade_state = 0
+    if roll < success_rate:
+        # Success
+        upgrade_state = 1
+        weapon["level"] = min(max_level, cur_level + 1)
+    elif roll < success_rate + fail_rate:
+        # Fail
+        upgrade_state = 0
+    elif roll < success_rate + fail_rate + down_rate:
+        # Down
+        upgrade_state = 2
+        weapon["level"] = max(1, cur_level - 1)
+    else:
+        # Broken
+        upgrade_state = 3
+        weapon["broken"] = True
+
+    weapon["updatedAt"] = now_iso(0)
+    save_state(st)
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "deletedRiftWeapons": [],
+        "rewardListResponseData": None,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "upgradeState": upgrade_state,
+        "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+    }
+
+
+def r_rift_weapon_reroll(body, st):
+    """POST /rift-weapon/re-roll -> RiftWeaponResultResponseModel."""
+    ensure_rift_state(st)
+    data = _parse_xml()
+
+    weapon_id = body_int(body.get("riftWeaponId"), 0)
+    target_idx = body_int(body.get("targetIdx"), 0)
+    preset_idx = body_int(body.get("equipPreset"), 0)
+
+    weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
+    if weapon is None or target_idx < 0 or target_idx >= 3:
+        return {
+            "riftWeapons": st.get("riftWeapons", []),
+            "deletedRiftWeapons": [],
+            "rewardListResponseData": None,
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "upgradeState": 0,
+            "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+        }
+
+    rarity_str = "Common" if weapon.get("rarity", 1) == 1 else ("Rare" if weapon.get("rarity", 1) == 2 else "Special")
+    cost_gold = data["reroll_costs"].get(rarity_str, 1000)
+    st["gold"] = max(0, st.get("gold", 0) - cost_gold)
+
+    # Reroll substat option
+    altar_idx = weapon["buildingIndexes"][target_idx] if "buildingIndexes" in weapon else 0
+    pool = _get_buff_options_for_altar(altar_idx)
+    current_opt = weapon["subStat"][target_idx] if "subStat" in weapon else 0
+
+    valid_new = [opt for opt in pool if opt != current_opt]
+    new_opt = random.choice(valid_new) if valid_new else current_opt
+
+    if "subStat" not in weapon:
+        weapon["subStat"] = [0, 0, 0]
+    weapon["subStat"][target_idx] = new_opt
+    weapon["updatedAt"] = now_iso(0)
+    save_state(st)
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "deletedRiftWeapons": [],
+        "rewardListResponseData": None,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "upgradeState": 0,
+        "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+    }
+
+
+def r_rift_weapon_dismantle(body, st):
+    """POST /rift-weapon/dismantle -> RiftWeaponResultResponseModel."""
+    admin_log(f"[RIFT DEBUG] weapon-dismantle body: {body}")
+    ensure_rift_state(st)
+    data = _parse_xml()
+
+    dismantle_ids = body_list(body.get("dismantleRiftWeaponIds"))
+    dismantle_set = set(dismantle_ids)
+
+    weapons = st.get("riftWeapons", [])
+    kept_weapons = []
+    deleted_ids = []
+    total_dust = 0
+
+    for w in weapons:
+        w_id = w.get("id")
+        if w_id in dismantle_set and not (w.get("state", 0) & 1):  # Not locked
+            deleted_ids.append(w_id)
+            rarity_str = "Common" if w.get("rarity", 1) == 1 else ("Rare" if w.get("rarity", 1) == 2 else "Special")
+            total_dust += data["dismantle_rewards"].get(rarity_str, 40)
+        else:
+            kept_weapons.append(w)
+
+    st["riftWeapons"] = kept_weapons
+
+    # Remove deleted weapons from equipped lists
+    equipped_dict = st.setdefault("equippedRiftWeapons", {})
+    for p_key, p_list in equipped_dict.items():
+        equipped_dict[p_key] = [e for e in p_list if e.get("riftWeaponId") not in dismantle_set]
+
+    # Grant dust
+    if srv and total_dust > 0:
+        srv._grant_reward(st, "Item", DUST_ITEM_ID, total_dust)
+
+    save_state(st)
+
+    admin_log(f"[RIFT DEBUG] weapon-dismantle done: ids={deleted_ids}, dust={total_dust}, kept={len(kept_weapons)}")
+
+    reward_data = None
+    if srv:
+        reward_data = srv._reward_list_data([{"type": "Item", "id": DUST_ITEM_ID, "count": total_dust}])
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "deletedRiftWeapons": deleted_ids,
+        "rewardListResponseData": reward_data,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "upgradeState": 0,
+        "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, 0),
+    }
+
+
+def r_rift_weapon_reset_weapon(body, st):
+    """POST /rift-weapon/reset-weapon -> RiftWeaponResultResponseModel."""
+    ensure_rift_state(st)
+    data = _parse_xml()
+
+    weapon_id = body_int(body.get("riftWeaponId"), 0)
+    preset_idx = body_int(body.get("equipPreset"), 0)
+
+    weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
+    if weapon is not None:
+        cost_cash = data["reset_cash_cost"]
+        st["cash"] = max(0, st.get("cash", 0) - cost_cash)
+        weapon["level"] = data["reset_level"]
+        weapon["broken"] = False
+        weapon["updatedAt"] = now_iso(0)
+        save_state(st)
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "deletedRiftWeapons": [],
+        "rewardListResponseData": None,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "upgradeState": 0,
+        "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+    }
+
+
+def r_rift_weapon_set_state(body, st):
+    """POST /rift-weapon/set-state -> RiftWeaponResultResponseModel."""
+    ensure_rift_state(st)
+    weapon_id = body_int(body.get("riftWeaponId"), 0)
+    state = body_int(body.get("state"), 0)
+    preset_idx = body_int(body.get("equipPreset"), 0)
+
+    weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
+    if weapon is not None:
+        weapon["state"] = state
+        weapon["updatedAt"] = now_iso(0)
+        save_state(st)
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "deletedRiftWeapons": [],
+        "rewardListResponseData": None,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "upgradeState": 0,
+        "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+    }
+
+
+def r_rift_crystal_charge(body, st):
+    """POST /rift-weapon/crystal-charge -> RiftCrystalResultResponseModel."""
+    admin_log(f"[RIFT DEBUG] crystal-charge body: {body}")
+    ensure_rift_state(st)
+    data = _parse_xml()
+
+    crystal_id = body_int(body.get("crystalId"), 0)
+    charge_count = max(1, body_int(body.get("count"), 1))
+    crystals = st.setdefault("riftCrystals", [])
+    crystal = next((c for c in crystals if c.get("id") == crystal_id), None)
+
+    if crystal is None:
+        return {
+            "riftWeapons": st.get("riftWeapons", []),
+            "riftCrystals": crystals,
+            "deletedCrystals": [],
+            "riftGauge": st.get("riftGauge", 0),
+            "rewardListResponseData": None,
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "playerHeart": st.get("heart", 0),
+        }
+
+    rarity_int = crystal.get("rarity", 1)
+    rarity_name = RIFT_CRYSTAL_RARITIES.get(rarity_int, "Common")
+    c_info = data["crystal_data"].get(rarity_name, {"common": 100, "rare": 0, "special": 0, "dust_min": 25, "dust_max": 75, "gauge": 20, "ceil": 0})
+
+    # Deduct gauge for all charges at once
+    gauge_cost = c_info.get("gauge", 20)
+    current_gauge = st.get("riftGauge", 0)
+    total_gauge_cost = gauge_cost * charge_count
+    st["riftGauge"] = max(0, current_gauge - total_gauge_cost)
+
+    total_dust = 0
+    ceil_count = crystal.get("ceilCount", 0)
+
+    for _ in range(charge_count):
+        rolled_rarity = 1
+        if ceil_count == 1:
+            rolled_rarity = 3
+        else:
+            roll = random.uniform(0, 100)
+            c_rate = c_info["common"]
+            r_rate = c_info["rare"]
+            if roll < c_rate:
+                rolled_rarity = 1
+            elif roll < c_rate + r_rate:
+                rolled_rarity = 2
+            else:
+                rolled_rarity = 3
+
+        if rolled_rarity == 2:
+            ceil_count = c_info.get("ceil", 0)
+        elif ceil_count > 0:
+            ceil_count = max(0, ceil_count - 1)
+
+        main_bld = crystal.get("mainBuildingIdx", 0)
+        other_blds = [b for b in range(RIFT_BUILDING_COUNT) if b != main_bld]
+        random.shuffle(other_blds)
+        selected_altars = [main_bld, other_blds[0], other_blds[1]]
+
+        new_w_id = _next_weapon_id(st)
+        new_weapon = make_rift_weapon(
+            i=new_w_id,
+            rw_id=crystal.get("weaponId", 10000),
+            rarity=rolled_rarity,
+            level=1,
+            building_indexes=selected_altars,
+        )
+        st.setdefault("riftWeapons", []).append(new_weapon)
+
+        total_dust += random.randint(c_info["dust_min"], c_info["dust_max"])
+
+    crystal["ceilCount"] = ceil_count
+
+    if srv and total_dust > 0:
+        srv._grant_reward(st, "Item", DUST_ITEM_ID, total_dust)
+
+    crystals.remove(crystal)
+    deleted_crystals = [crystal_id]
+
+    save_state(st)
+
+    reward_data = None
+    if srv:
+        reward_data = srv._reward_list_data([
+            {"type": "Item", "id": DUST_ITEM_ID, "count": total_dust},
+        ])
+
+    admin_log(f"[RIFT DEBUG] crystal-charge done: {charge_count}x, gauge={st.get('riftGauge', 0)}, weapons={len(st.get('riftWeapons', []))}")
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "riftCrystals": st.get("riftCrystals", []),
+        "deletedCrystals": deleted_crystals,
+        "riftGauge": st.get("riftGauge", 0),
+        "rewardListResponseData": reward_data,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "playerHeart": st.get("heart", 0),
+    }
+
+
+def r_rift_crystal_destroy(body, st):
+    """POST /rift-weapon/crystal-destroy -> RiftCrystalResultResponseModel."""
+    admin_log(f"[RIFT DEBUG] crystal-destroy body: {body}")
+    ensure_rift_state(st)
+    crystal_id = body_int(body.get("crystalId"), 0)
+    use_heart = bool(body.get("useHeart", False))
+
+    crystals = st.setdefault("riftCrystals", [])
+    crystal = next((c for c in crystals if c.get("id") == crystal_id), None)
+
+    if crystal is None:
+        return {
+            "riftWeapons": st.get("riftWeapons", []),
+            "riftCrystals": crystals,
+            "deletedCrystals": [],
+            "riftGauge": st.get("riftGauge", 0),
+            "rewardListResponseData": None,
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "playerHeart": st.get("heart", 0),
+        }
+
+    rarity = crystal.get("rarity", 1)
+    base_dust = {1: 30, 2: 60, 3: 120, 4: 200, 5: 350}.get(rarity, 30)
+
+    if use_heart:
+        st["heart"] = max(0, st.get("heart", 0) - 15)
+        base_dust = int(base_dust * 2.0)
+
+    if srv and base_dust > 0:
+        srv._grant_reward(st, "Item", DUST_ITEM_ID, base_dust)
+
+    crystals.remove(crystal)
+    save_state(st)
+
+    admin_log(f"[RIFT DEBUG] crystal-destroy done: crystal_id={crystal_id}, rarity={rarity}, dust={base_dust}")
+
+    reward_data = None
+    if srv:
+        reward_data = srv._reward_list_data([{"type": "Item", "id": DUST_ITEM_ID, "count": base_dust}])
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "riftCrystals": crystals,
+        "deletedCrystals": [crystal_id],
+        "riftGauge": st.get("riftGauge", 0),
+        "rewardListResponseData": reward_data,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "playerHeart": st.get("heart", 0),
+    }
+
+
+def r_rift_crystal_set_state(body, st):
+    """POST /rift-weapon/set-crystal-state -> RiftCrystalResultResponseModel."""
+    ensure_rift_state(st)
+    crystal_id = body_int(body.get("crystalId"), 0)
+    state = body_int(body.get("state"), 0)
+
+    crystals = st.setdefault("riftCrystals", [])
+    crystal = next((c for c in crystals if c.get("id") == crystal_id), None)
+    if crystal is not None:
+        crystal["state"] = state
+        crystal["updatedAt"] = now_iso(0)
+        save_state(st)
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "riftCrystals": crystals,
+        "deletedCrystals": [],
+        "riftGauge": st.get("riftGauge", 0),
+        "rewardListResponseData": None,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "playerHeart": st.get("heart", 0),
+    }
+
+
+def r_rift_buy_gauge(body, st):
+    """POST /rift-weapon/buy-rift-gauge -> RiftCrystalResultResponseModel."""
+    admin_log(f"[RIFT DEBUG] buy-gauge body: {body}")
+    ensure_rift_state(st)
+    data = _parse_xml()
+
+    costs = data["gauge_buy_costs"]
+    buy_idx = st.get("gaugeBuyCount", 0)
+    cost = costs[min(buy_idx, len(costs) - 1)] if costs else 30
+    gauge_gain = data.get("gauge_buy_amount", 100)
+
+    st["cash"] = max(0, st.get("cash", 0) - cost)
+    st["riftGauge"] = min(data["gauge_max"], st.get("riftGauge", 0) + gauge_gain)
+    st["gaugeBuyCount"] = buy_idx + 1
+    save_state(st)
+
+    admin_log(f"[RIFT DEBUG] buy-gauge done: cost={cost}, gauge={st['riftGauge']}, buyCount={st['gaugeBuyCount']}")
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "riftCrystals": st.get("riftCrystals", []),
+        "deletedCrystals": [],
+        "riftGauge": st["riftGauge"],
+        "rewardListResponseData": None,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "playerHeart": st.get("heart", 0),
+    }
+
+
+def r_rift_archive(body, st):
+    """POST /kg-wiki/rift-weapon/archive -> RiftWeaponResultResponseModel."""
+    ensure_rift_state(st)
+    archive_id = body_int(body.get("archiveId") or body.get("id"), 0)
+    archives = st.setdefault("riftWeaponArchives", [])
+    if archive_id and archive_id not in archives:
+        archives.append(archive_id)
+        save_state(st)
+
+    return {
+        "riftWeapons": st.get("riftWeapons", []),
+        "deletedRiftWeapons": [],
+        "rewardListResponseData": None,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "upgradeState": 0,
+        "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, 0),
+    }
+
+
+def r_rift_archive_delete(body, st):
+    """POST /kg-wiki/rift-weapon/archive-delete -> KGWikiResponseModel."""
+    ensure_rift_state(st)
+    archive_id = body_int(body.get("archiveId") or body.get("id"), 0)
+    archives = st.setdefault("riftWeaponArchives", [])
+    if archive_id in archives:
+        archives.remove(archive_id)
+        save_state(st)
+
+    return {
+        "riftWeaponArchives": archives,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+    }
+
+
+def handlers():
+    """Mapping of all Rift route paths to handlers for OVERRIDES."""
+    return {
+        "/rift-weapon": r_rift_weapon_inventory,
+        "/rift-weapon/crystal-inventory": r_rift_crystal_inventory,
+        "/rift-weapon/equip": r_rift_weapon_equip,
+        "/rift-weapon/release-equip": r_rift_weapon_release_equip,
+        "/rift-weapon/upgrade": r_rift_weapon_upgrade,
+        "/rift-weapon/re-roll": r_rift_weapon_reroll,
+        "/rift-weapon/dismantle": r_rift_weapon_dismantle,
+        "/rift-weapon/reset-weapon": r_rift_weapon_reset_weapon,
+        "/rift-weapon/set-state": r_rift_weapon_set_state,
+        "/rift-weapon/crystal-charge": r_rift_crystal_charge,
+        "/rift-weapon/crystal-destroy": r_rift_crystal_destroy,
+        "/rift-weapon/set-crystal-state": r_rift_crystal_set_state,
+        "/rift-weapon/buy-rift-gauge": r_rift_buy_gauge,
+        "/kg-wiki/rift-weapon/archive": r_rift_archive,
+        "/kg-wiki/rift-weapon/archive-delete": r_rift_archive_delete,
+    }
+
+
+# ==============================================================================
+# FASTAPI REGISTRATION
+# ==============================================================================
+
+
+def register(app, srv_module):
+    """Wire Rift routes into live server module."""
+    global srv
+    srv = srv_module

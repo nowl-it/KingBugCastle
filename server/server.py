@@ -32,6 +32,7 @@ import colosseum
 import player_events
 # import mini_games
 import roster
+import rift
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
@@ -1678,10 +1679,7 @@ def r_treasure_add_exp(body, st):
     return {"treasures": get_st_treasures(st), "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999, "maxTreasureCount": 9999, "addExpItems": [], "deletedTreasures": [], "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": [], "addedExpItems": 0}
 
 def r_rift_weapon(body, st):
-    rift_crystals = st.setdefault("riftCrystals", [])
-    if _repair_rift_crystals(rift_crystals):
-        save_state(st)
-    return {"riftWeapons": DEFAULT_RIFT_WEAPONS, "equippedWeapons": {}, "riftCrystals": rift_crystals, "deletedRiftWeapons": [], "deletedCrystals": [], "riftGauge": 0, "rewardListResponseData": None, "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "playerHeart": st.get("heart", 0), "upgradeState": 0, "equippedWeaponIds": []}
+    return rift.r_rift_weapon_inventory(body, st)
 
 def r_pass(body, st):
     c = RCFG["pass"]
@@ -2243,19 +2241,7 @@ DYNAMIC_OVERRIDES = {
     "/treasure/overcome": r_treasure,
     "/treasure/release-equip": r_treasure_release,
     "/treasure/set-state": r_treasure,
-    "/rift-weapon": r_rift_weapon,
-    "/rift-weapon/upgrade": r_rift_weapon,
-    "/rift-weapon/equip": r_rift_weapon,
-    "/rift-weapon/release-equip": r_rift_weapon,
-    "/rift-weapon/dismantle": r_rift_weapon,
-    "/rift-weapon/re-roll": r_rift_weapon,
-    "/rift-weapon/reset-weapon": r_rift_weapon,
-    "/rift-weapon/set-state": r_rift_weapon,
-    "/rift-weapon/set-crystal-state": r_rift_weapon,
-    "/rift-weapon/crystal-charge": r_rift_weapon,
-    "/rift-weapon/crystal-destroy": r_rift_weapon,
-    "/rift-weapon/crystal-inventory": r_rift_weapon,
-    "/rift-weapon/buy-rift-gauge": r_rift_weapon,
+    **rift.handlers(),
     **clan.handlers(),
     "/pass": r_pass,
     "/pass/reward": r_pass,
@@ -2766,6 +2752,7 @@ import territory_routes
 import shop_routes
 import seasonal
 import mini_games
+import rift
 admin_api.register(app, sys.modules[__name__])
 inbox.register(app, sys.modules[__name__])
 _admin_changed = playerdb.backfill_account_ids()
@@ -2778,6 +2765,7 @@ shop_routes.register(app, sys.modules[__name__])
 seasonal.register(app, sys.modules[__name__])
 roster.register(app, sys.modules[__name__])
 mini_games.register(app, sys.modules[__name__])
+rift.register(app, sys.modules[__name__])
 # Last: its /pvp/info reads srv.PVP_OVERRIDES, which pvp.register above installs.
 direct_routes.register(app, sys.modules[__name__])
 DYNAMIC_OVERRIDES.update(DECORATION_OVERRIDES)
@@ -2787,6 +2775,7 @@ DYNAMIC_OVERRIDES.update(TERRITORY_OVERRIDES)
 DYNAMIC_OVERRIDES.update(SHOP_OVERRIDES)
 DYNAMIC_OVERRIDES.update(SEASONAL_OVERRIDES)
 DYNAMIC_OVERRIDES.update(RANKING_OVERRIDES)
+DYNAMIC_OVERRIDES.update(rift.handlers())
 
 # Every extracted handler is re-exported here under the name it had while it lived in
 # this file. The tests and the dashboard reach for `server.r_shop`, `server.r_clan`,
