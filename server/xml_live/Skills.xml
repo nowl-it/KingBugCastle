@@ -46378,6 +46378,8 @@
 		<NameComment>피들스틱 피빨기</NameComment>
 		<DescComment></DescComment>
 		<Icon>Skill_20720</Icon>
+        <Name>SkillName_20721</Name>
+        <Desc>SkillDesc_20721</Desc>
 
 		<AtkType>Melee</AtkType>
 
@@ -46427,7 +46429,8 @@
         <NameComment>매혹</NameComment>
         <DescComment></DescComment>
         <Icon>Skill_20730</Icon>
-        <Desc>SkillDesc_20730</Desc>
+        <Name>SkillName_20731</Name>
+        <Desc>SkillDesc_20731</Desc>
         <Tier>1</Tier>
 
         <AtkType>Melee</AtkType>

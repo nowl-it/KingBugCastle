@@ -1,4 +1,6 @@
 <Strings>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
   <String Key="Tags">Awesomepiece, Zombie High School, Auto Chess, Teamfight Tactics, King God Castle, Auto Battler, กลยุทธ์, ต่อสู้แบบทีมด้วยกลยุทธ์, TFT, Ens, HelpmeEns, ป้องกัน</String>
   <String Key="Store_ShortDesc">ปกป้องปราสาทจากศัตรูต่างๆ ที่กำลังบุกรุกโดยพลังแห่งพระเจ้าและฮีโร่ต่างๆ King God Castle!</String>
@@ -34,10 +36,10 @@
 การอัญเชิญ</String>
   <String Key="IngameLoading">กำลังโหลด...</String>
   <String Key="TimeLeft">เวลาที่เหลือ</String>
-  <String Key="Hour"> ชม.</String>
-  <String Key="Minute"> น.</String>
-  <String Key="Second"> วิ.</String>
-  <String Key="Day"> วัน</String>
+  <String Key="Hour">ชม.</String>
+  <String Key="Minute">น.</String>
+  <String Key="Second">วิ.</String>
+  <String Key="Day">วัน</String>
   <String Key="FreeGet">รับฟรี</String>
   <String Key="Community">คอมมิวนิตี้</String>
   <String Key="Text_KingGod">King God</String>
@@ -142,9 +144,9 @@
 
 (ค่าใช้จ่าย: {0} เพชร)</String>
   <String Key="King_1">ราชา</String>
-  <String Key="King_2"> </String>
+  <String Key="King_2"></String>
   <String Key="Castle_1">ปราสาท</String>
-  <String Key="Castle_2"> </String>
+  <String Key="Castle_2"></String>
   <String Key="LoadingPopupText">กำลังเชื่อมต่อกับเซิร์ฟเวอร์...</String>
   <String Key="LoginByGoogle">ล็อกอินด้วย Google Play</String>
   <String Key="LoginByApple">ล็อกอินด้วย Apple</String>
@@ -263,11 +265,11 @@
   <String Key="Post_Push_Contents18">คืนนี้จะมอบให้ 1,000 ทอง!</String>
   <String Key="Post_Push_Contents19">มีทองรออยู่ในกล่องจดหมาย~</String>
   <String Key="Post_Push_Contents20">มีเสบียงมาให้!</String>
-  <String Key="Post_Push_Contents21">D-day จบ King God Castle ซีซั่น 72</String>
-  <String Key="Post_Push_Contents22">D-1 จบ King God Castle ซีซั่น 72</String>
-  <String Key="Post_Push_Contents23">D-2 จบ King God Castle ซีซั่น 72</String>
-  <String Key="Post_Push_Contents24">D-4 จบ King God Castle ซีซั่น 72</String>
-  <String Key="Post_Push_Contents25">King God Castle ซีซั่น 72 จะจบลงในวันนี้!</String>
+  <String Key="Post_Push_Contents21">D-day จบ King God Castle ซีซั่น {0}</String>
+  <String Key="Post_Push_Contents22">D-1 จบ King God Castle ซีซั่น {0}</String>
+  <String Key="Post_Push_Contents23">D-2 จบ King God Castle ซีซั่น {0}</String>
+  <String Key="Post_Push_Contents24">D-4 จบ King God Castle ซีซั่น {0}</String>
+  <String Key="Post_Push_Contents25">King God Castle ซีซั่น {0} จะจบลงในวันนี้!</String>
   <String Key="Post_Push_Contents26">ตรวจสอบรางวัลพาสที่อาจจะยังไม่ได้รับ!</String>
   <String Key="Post_Push_Contents27">อย่าลืมรับรางวัลพาส!</String>
   <String Key="Post_Push_Contents28">อีก 4 วันระบบสนามรบและพาสจะจบลง</String>
@@ -1239,11 +1241,8 @@
   <String Key="ItemName_10020">ขยายกลุ่ม</String>
   <String Key="ItemDesc_10020">ขยายกลุ่ม 1</String>
   <String Key="ItemName_10030">เงิน +5</String>
-  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">เงิน +10</String>
-  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">เงิน +20</String>
-  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">เหรียญตราวีรกรรม</String>
   <String Key="ItemDesc_10040">เพิ่มดาวของฮีโร่บนสนามแบบสุ่ม 1 ดาว</String>
   <String Key="ItemName_10050">หนังสืออัญเชิญฮีโร่ขั้นสูง (2 ครั้ง)</String>
@@ -1888,7 +1887,7 @@
   <String Key="Event_Artifact_Merge">แพ็กเกจหินผสม</String>
   <String Key="Event_Artifact_Reroll">แพ็กเกจหินหลอม</String>
   <String Key="MinusDamagePerCount">ดาเมจที่มอบให้
-เพิ่ม {1} - (จำนวนฮีโร่ที่ถูกจัดไว้) *{0}                </String>
+เพิ่ม {1} - (จำนวนฮีโร่ที่ถูกจัดไว้) *{0}</String>
   <String Key="ArenaRewardPostTitle_Season6">รางวัลแรงค์อารีน่าซีซั่น 6</String>
   <String Key="ArenaRewardPostDesc_Season6">มอบรางวัลแรงค์อารีน่าซีซั่น 6!</String>
   <String Key="ShopItemName_1011_Post">แพ็กเกจเติบโตเลเวล 7</String>
@@ -3676,7 +3675,7 @@
   <String Key="ItemName_30002">หินแห่งนักปราชญ์</String>
   <String Key="ItemDesc_30002">ใช้เงิน {0} เพื่อเปลี่ยนอุปกรณ์ให้เป็นอุปกรณ์สุ่มระดับเดียวกัน
 (รีเซ็ตเงินที่ใช้ทุกชั้น)</String>
-  <String Key="RogueLikeAddExpToHeroFormat">หนังสือที่ให้ {0} EXP แก่ฮีโร่ </String>
+  <String Key="RogueLikeAddExpToHeroFormat">หนังสือที่ให้ {0} EXP แก่ฮีโร่</String>
   <String Key="ItemName_30020">นํ้ายารักษา</String>
   <String Key="RogueLikeHealHeroPerFormat">นํ้ายาที่ช่วยรักษาเท่ากับพลังชีวิต {0}% แก่ฮีโร่</String>
   <String Key="ItemName_30021">นํ้ายารักษาขั้นสูง</String>
@@ -3701,7 +3700,7 @@
 หากไม่เลือกสมบัติ อาจมีโอกาสได้รับความไว้วางใจจากเหล่าเทพได้ในภายหลัง</String>
   <String Key="RogueLikeSelectBuildingArtifactDesc2">แท่นบูชาแห่งเทพแต่ละแห่งมีสมบัติถูกจัดวางไว้อยู่
 หากไม่เลือกสมบัติ อาจไม่มีโอกาสพบกับเทพใหม่ๆ ในอนาคตได้</String>
-  <String Key="BuildingEffect_AddExpPerNotMaxLevels">เพิ่ม EXP ต่อสู้ให้ฮีโร่ที่ไม่ได้มีเลเวลสูงสุด {Value}% </String>
+  <String Key="BuildingEffect_AddExpPerNotMaxLevels">เพิ่ม EXP ต่อสู้ให้ฮีโร่ที่ไม่ได้มีเลเวลสูงสุด {Value}%</String>
   <String Key="BuildingEffect_AddExpPerNotMaxLevels_Long">เมื่อฮีโร่ที่ไม่ได้มีเลเวลสูงสุดได้รับ EXP จะได้รับ EXP เพิ่มเติม</String>
   <String Key="BuildingEffect_NewHeroAddLevel">เมื่อฮีโร่ใหม่เข้าร่วมเลเวลจะ +{Value}</String>
   <String Key="BuildingEffect_NewHeroAddLevel_Long">ได้รับเลเวลเพิ่มเมื่อฮีโร่ใหม่เข้าร่วม</String>
@@ -3841,7 +3840,7 @@
 เพิ่มราคาขายเมื่อชนะการต่อสู้ขึ้น {0} เงิน (สูงสุด {1})</String>
   <String Key="ItemName_40443">ถุงแห่งความโลภ</String>
   <String Key="ItemName_40453">ขโมย</String>
-  <String Key="ItemDesc_40453">เมื่อมีชีวิตรอดในการต่อสู้ มีโอกาส {0}% ได้รับอุปกรณ์ ขั้น {1} </String>
+  <String Key="ItemDesc_40453">เมื่อมีชีวิตรอดในการต่อสู้ มีโอกาส {0}% ได้รับอุปกรณ์ ขั้น {1}</String>
   <String Key="ItemName_40463">ผู้กลืนกินโลก</String>
   <String Key="ItemDesc_40463">ดูดอุปกรณ์/รูน ได้รับค่าพลังเพิ่มเติมตามประเภทและระดับของไอเทมที่ดูด (สูงสุด {0} ครั้ง)</String>
   <String Key="ItemFullDesc_40463">เมื่อสวมใส่อุปกรณ์/รูนให้ฮีโร่นี้เกิน 3 ชิ้น รูนนี้จะดูดอุปกรณ์/รูน และได้รับค่าพลังเพิ่มเติมตามประเภทและระดับ สามารถรับเอาได้สูงสุด {0} ครั้ง</String>
@@ -4832,7 +4831,7 @@
   <String Key="InventoryItemDesc_600_1">หนังรับรองที่มีตราประทับของราชา
 สามารถแลกเปลี่ยนเป็น 1 ในไอเทมต่อไปนี้ เสบียง 20 ชิ้น / ธงการเดินทาง 3 ผืน / ธงแห่งบททดสอบ 1 ผืน</String>
   <String Key="InventoryItemDesc_600">หนังรับรองที่มีตราประทับของราชา
-สามารถแลกเปลี่ยนเป็น 1 ในไอเทมต่อไปนี้ เสบียง 20 ชิ้น / ธงการเดินทาง 3 ผืน </String>
+สามารถแลกเปลี่ยนเป็น 1 ในไอเทมต่อไปนี้ เสบียง 20 ชิ้น / ธงการเดินทาง 3 ผืน</String>
   <String Key="InventoryItemName_601">หนังสือรับรองแลกเปลี่ยนเสบียง</String>
   <String Key="InventoryItemDesc_601">หนังสือรับรองที่สามารถแลกเปลี่ยนกับเสบียง
 เมื่อใช้จะเติมเสบียง 20 ชิ้นทันที</String>
@@ -4987,6 +4986,7 @@ EXP ที่สามารถได้รับการสนับสนุ�
   <String Key="Hero_Awaken_Noti">ฮีโร่ {0} บรรลุเลเวล 16 จึงสามารถปลุกพลังได้
 เมื่อดำเนินการปลุกพลัง ฮีโร่จะสามารถใช้&lt;color=#FFD247&gt;พลังปลุกพลัง&lt;/color&gt;ของฮีโร่ได้</String>
   <String Key="ItemDescSub_40463_07">ป้องกันเด็ดขาด {0} ครั้ง</String>
+  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">เมื่อฮีโร่ปรากฏ &lt;color=#FFD247&gt;ฮีโร่ที่เลือก&lt;/color&gt; จะ&lt;color=#FFD247&gt;ปรากฏแน่นอน!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">เลือกฮีโร่</String>
   <String Key="SelectPickupUnitAgain">ตั้งใหม่</String>
@@ -5769,8 +5769,6 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ClanBattleModifier_13">ผู้กลัดกลุ้ม</String>
   <String Key="ClanBattleModifier_14">ผู้เหนือกว่า</String>
   <String Key="UserLockedClanBattleAlert">ผู้เล่นนี้ไม่สามารถเข้าร่วมสงครามพิชิตแคลนซีซั่นนี้ได้</String>
-  <String Key="UpdateNoticeVersion">171100</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">ต้องการลบแคลนจริงๆ หรือไม่</String>
   <String Key="Clan_Menu_LeaveConfirm">ต้องการออกจากแคลนจริงๆ หรือไม่</String>
   <String Key="RogueLike_ReleaseAtLevel">ปลดล็อกเมื่อถึงเลเวล {0}</String>
@@ -6498,7 +6496,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SpecialPackage_TimeLimit">เวลาที่เหลือ: {0}</String>
   <String Key="StepUpPackage_MissionDesc">Step {0}. {1}</String>
   <String Key="StepFormat">Step {0}</String>
-  <String Key="GoToMoneyShop">ต้องการไปยังร้านค้าทรัพย์สินหรือไม่	</String>
+  <String Key="GoToMoneyShop">ต้องการไปยังร้านค้าทรัพย์สินหรือไม่</String>
   <String Key="RecommendShop">ร้านค้าแนะนำ</String>
   <String Key="SpecialShop">ร้านค้าพิเศษ</String>
   <String Key="SubscribeShop">ร้านค้าติดตาม</String>
@@ -6686,7 +6684,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ReturnBenefit">สิทธิพิเศษของผู้กลับมา</String>
   <String Key="ReturnEventBenefit_3">มอบใบเช็คชื่อฉลองการกลับมา</String>
   <String Key="EndDateFormat">ใช้ได้จนถึงวันที่ {1}/{0} {2}</String>
-  <String Key="DayFormat">{0} วัน </String>
+  <String Key="DayFormat">{0} วัน</String>
   <String Key="GameOverRePlay">เล่นอีกครั้ง</String>
   <String Key="PatchDownlaod_No_Alert">จำเป็นต้องดาวน์โหลดแพทช์จึงจะเล่นต่อได้
 ต้องการจบเกมหรือไม่</String>
@@ -6920,6 +6918,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="Clan_Menu_ChangeName">เปลี่ยนชื่อแคลน</String>
   <String Key="ColosseumSeasonRankingReward">รางวัลซีซั่น</String>
   <String Key="ColosseumRanking">แรงกิ้ง</String>
+  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">ดูรายละเอียดอัตราของสมบัติ</String>
   <String Key="ArtifactOptionProbDetailDesc">ย้ายไปยังเว็บไซต์อย่างเป็นทางการเกี่ยวกับอัตราปรากฏของออพชั่นย่อยของสมบัติ</String>
   <String Key="ColosseumNetworkChanged">กำลังเชื่อมต่อใหม่เนื่องจากมีการเปลี่ยนเน็ตเวิร์ก</String>
@@ -7354,9 +7353,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;ก้าวข้ามดาว
 
 &lt;/size&gt;การ&lt;color=#ffbc00&gt;ก้าวข้ามดาว&lt;/color&gt;ขุมทรัพย์ช่วย&lt;color=#ffbc00&gt;มอบเอฟเฟกต์เพิ่มเติม&lt;/color&gt;ให้กับพลังขุมทรัพย์
- ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;
-
-</String>
+ ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;</String>
   <String Key="SkinName_1032006">คลื่นสีฟ้า ทีอาร์</String>
   <String Key="SkinName_1036004">คลื่นสีฟ้า แฮรัง</String>
   <String Key="SkinName_1042003">คลื่นสีฟ้า ไท่ไป๋</String>
@@ -7430,8 +7427,7 @@ Lv. {0} ▶ Lv. {1}</String>
 ดาเมจที่มอบให้เมื่ออยู่ในสถานะคงกระพัน +{1}%</String>
   <String Key="TreasureSkillDesc_3300033">เมื่อฮีโร่ที่มีดาวสูงสุดที่สวมใส่มัวร์มีพลังชีวิตถึง {0}% หรือได้รับดาเมจถึงตายจะเปลี่ยนเป็นสถานะคงกระพันนาน {1} วินาทีอย่างละ 1 ครั้ง
 (เมื่ออยู่ในสถานะคงกระพันจะไม่สามารถได้รับการฟื้นฟูและบาเรีย)
-ดาเมจที่มอบในสถานะคงกระพัน + {2}%
-</String>
+ดาเมจที่มอบในสถานะคงกระพัน + {2}%</String>
   <String Key="TreasureSkillDesc_3300034">เมื่อฮีโร่ที่มีดาวสูงสุดที่สวมใส่มัวร์มีพลังชีวิตถึง {0}% หรือได้รับดาเมจถึงตายจะเปลี่ยนเป็นสถานะคงกระพันนาน {1} วินาทีอย่างละ 1 ครั้ง
 (เมื่ออยู่ในสถานะคงกระพันจะไม่สามารถได้รับการฟื้นฟูและบาเรีย)
 ดาเมจที่มอบในสถานะคงกระพัน + {2}%
@@ -7661,15 +7657,11 @@ Lv. {0} ▶ Lv. {1}</String>
  &lt;size=25&gt;ก้าวข้ามดาว
 
 &lt;/size&gt;การ&lt;color=#ffbc00&gt;ก้าวข้ามดาว&lt;/color&gt;ขุมทรัพย์ช่วย&lt;color=#ffbc00&gt;มอบเอฟเฟกต์เพิ่มเติม&lt;/color&gt;ให้กับพลังขุมทรัพย์
- ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;
-
-</String>
+ ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;อัพเกรดขุมทรัพย์
 
 &lt;/size&gt;การ&lt;color=#ffbc00&gt;อัพเกรด&lt;/color&gt;ขุมทรัพย์จะเพิ่ม&lt;color=#ffbc00&gt;เอฟเฟกต์พลังขุมทรัพย์&lt;/color&gt;
-&lt;color=#ffbc00&gt;วัตถุดิบอัพเกรด&lt;/color&gt;ขุมทรัพย์สามารถรับได้จากการ&lt;color=#ffbc00&gt;แยกชิ้นส่วน&lt;/color&gt;ขุมทรัพย์ในคลังหรือ&lt;color=#ffbc00&gt;ซื้อที่ร้านค้า&lt;/color&gt;
-
-</String>
+&lt;color=#ffbc00&gt;วัตถุดิบอัพเกรด&lt;/color&gt;ขุมทรัพย์สามารถรับได้จากการ&lt;color=#ffbc00&gt;แยกชิ้นส่วน&lt;/color&gt;ขุมทรัพย์ในคลังหรือ&lt;color=#ffbc00&gt;ซื้อที่ร้านค้า&lt;/color&gt;</String>
   <String Key="TreasureOvercome">ก้าวข้ามดาว</String>
   <String Key="TreasureOvercome_Short">ก้าวข้ามดาว</String>
   <String Key="ViewNextOvercome">ดูการก้าวข้ามถัดไป</String>
@@ -8218,9 +8210,7 @@ Lv. {0} ▶ Lv. {1}</String>
  &lt;size=25&gt;ก้าวข้ามดาว
 
 &lt;/size&gt;การ&lt;color=#ffbc00&gt;ก้าวข้ามดาว&lt;/color&gt;ขุมทรัพย์ช่วย&lt;color=#ffbc00&gt;มอบเอฟเฟกต์เพิ่มเติม&lt;/color&gt;ให้กับพลังขุมทรัพย์
- ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;
-
-</String>
+ ในการก้าวข้ามดาว จะต้องใช้ &lt;color=#ffbc00&gt;ขุมทรัพย์แบบเดียวกัน&lt;/color&gt;</String>
   <String Key="TreasureSkillDesc_3300010">อัตราคริติคอล +{0}%
 ปิดใช้งานนาน {1} วินาทีเมื่อได้รับดาเมจ</String>
   <String Key="TreasureSkillDesc_3300011">อัตราคริติคอล +{0}%
@@ -9482,7 +9472,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="UnitSubName_10670">ผู้ถือธงแห่งสนามรบ</String>
   <String Key="Potential_10670_0">พิทักษ์ +30</String>
   <String Key="Potential_10670_1">หลังจากได้รับดาเมจครั้งแรกหลังจากเริ่มการต่อสู้ จะรับดาเมจ -70% นาน 2 วินาที</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;ตระกูลริตเตอร์ซึ่งเป็นตระกูลอันทรงเกียรติในจักรวรรดิได้ผลิตผู้มีพรสวรรค์ที่โดดเด่นในด้านต่างๆ แม้ว่าพาโทรสจะไม่มีความสามารถตามธรรมชาติอย่างคนจากตระกูลริตเตอร์ แต่เขาได้กลายเป็นผู้บัญชาการที่เป็นแบบอย่างของกองทัพจักรวรรดิด้วยความพยายามที่เหนือกว่าใครๆ&lt;/i&gt; </String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;ตระกูลริตเตอร์ซึ่งเป็นตระกูลอันทรงเกียรติในจักรวรรดิได้ผลิตผู้มีพรสวรรค์ที่โดดเด่นในด้านต่างๆ แม้ว่าพาโทรสจะไม่มีความสามารถตามธรรมชาติอย่างคนจากตระกูลริตเตอร์ แต่เขาได้กลายเป็นผู้บัญชาการที่เป็นแบบอย่างของกองทัพจักรวรรดิด้วยความพยายามที่เหนือกว่าใครๆ&lt;/i&gt;</String>
   <String Key="SkillName_10670">เพื่อจักรวรรดิ!</String>
   <String Key="SkillDesc_10670">สร้างขวัญกำลังใจให้พันธมิตรนาน {TotalAttackTime} วินาที รักษาพันธมิตรทั้งหมดรวมถึงตัวเองในเขต {SplashRangeX}{x}{SplashRangeY} รอบตัวเองเท่ากับ {Heal} หน่วยและเพิ่มความเร็วโจมตี {AttackSpeedPerUnit10670}% ทุกๆ {Time} วินาที การเพิ่มความเร็วโจมตีจะใช้เอฟเฟกต์สูงสุดของสกิลที่มีชื่อเดียวกัน</String>
   <String Key="SkillDesc_10670_Short">รักษาให้พันธมิตรในเขต {SplashRangeX}{x}{SplashRangeY} รอบตัว {Heal} หน่วยทุกๆ {Time} วินาทีเป็นเวลา {TotalAttackTime} วินาทีและเพิ่มความเร็วโจมตี {AttackSpeedPerUnit10670}% ใช้เฉพาะการเพิ่มความเร็วโจมตีของ &lt;เพื่อจักรวรรดิ!&gt; ที่สูงที่สุดเท่านั้น</String>
@@ -9782,8 +9772,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="BaseHybridDefOnInvade">เพิ่มปริมาณทองที่ได้รับในโหมดการโจมตี {0}
 พลังป้องกันของฮีโร่ทั้งหมดในโหมดการโจมตี +{1}
 หลอมไม่ได้, อัพเกรดผ่านการฝึกฝนไม่ได้</String>
-  <String Key="ArtifactOptionDesc_Event_15000">
-เคลื่อนที่ตำแหน่งฟรีผ่านการฝึกฝน (~24.12.3)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">เคลื่อนที่ตำแหน่งฟรีผ่านการฝึกฝน (~24.12.3)</String>
   <String Key="SkinName_1032007">เทพีแห่งจันทรา ทีอาร์</String>
   <String Key="SkinName_1032007_NewLine">เทพีแห่งจันทรา ทีอาร์</String>
   <String Key="TerritoryBuildingName_40300">รูปปั้นเทพีแห่งจันทรา</String>
@@ -11374,8 +11363,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AddDifficultyUnlockDesc">หากเคลียร์โดยไม่มีดาเมจ ความยากจะถูกปลดปล่อยทีละ 2 ขั้น</String>
   <String Key="AccessoryLevelUpTutorialLock">ท่านสามารถดูได้หลังจากเคลียร์เข้ายึด II-1 แล้ว</String>
   <String Key="NotAccessoryLevelUp">ไม่มีเครื่องประดับที่สามารถอัพเกรดได้</String>
-  <String Key="ArtifactOptionDesc_Event_15020">
-ย้ายตำแหน่งฟรีผ่านการฝึกฝน (&lt;color=#ffbd4a&gt;~{0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">ย้ายตำแหน่งฟรีผ่านการฝึกฝน (&lt;color=#ffbd4a&gt;~{0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">เคลียร์แชปเตอร์ {0}-{1} ความยาก{Diff}หรือสูงกว่า</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">เคลียร์ [เข้ายึด] แชปเตอร์ {0}-{1} ความยาก{Diff}หรือสูงกว่า</String>
   <String Key="Polish_EventArtifact_Alert">สมบัตินี้ไม่สามารถอัพเกรดผ่านการฝึกฝน!</String>
@@ -11727,8 +11715,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SpecialPackage_1556">แพ็กเกจเอเทอร์นา 1</String>
   <String Key="SpecialPackage_1557">แพ็กเกจเอเทอร์นา 2</String>
   <String Key="SpecialPackage_1558">แพ็กเกจเอเทอร์นา 3</String>
-  <String Key="MakeAllLateComerExceptSlot">มอบเอฟเฟกต์หน่วยหลังให้กับฮีโร่ทุกตัว ยกเว้นฮีโร่ที่อยู่ตำแหน่ง{0}ในทีม
-</String>
+  <String Key="MakeAllLateComerExceptSlot">มอบเอฟเฟกต์หน่วยหลังให้กับฮีโร่ทุกตัว ยกเว้นฮีโร่ที่อยู่ตำแหน่ง{0}ในทีม</String>
   <String Key="Order_1">แรก</String>
   <String Key="Order_2">ที่สอง</String>
   <String Key="Order_3">ที่สาม</String>
@@ -14411,8 +14398,7 @@ D = 1 ~ 4</String>
   <String Key="AltarHelpBuilding_5">นี่คือแท่นบูชาที่เพิ่มปริมาณการรับเงินเพื่อให้อัญเชิญฮีโร่และใช้ร้านค้าได้ง่ายขึ้น
 
 แนะนำ: การโจมตี, อารีน่า</String>
-  <String Key="ArtifactBuffDataDesc_15010">เมื่อเริ่มการต่อสู้ในการโจมตีและการเดินทาง ความเร็วโจมตีของฮีโร่ออกก่อน +{0}% (ไม่มีเอฟเฟกต์หากไม่มีฮีโร่ออกก่อน)
-</String>
+  <String Key="ArtifactBuffDataDesc_15010">เมื่อเริ่มการต่อสู้ในการโจมตีและการเดินทาง ความเร็วโจมตีของฮีโร่ออกก่อน +{0}% (ไม่มีเอฟเฟกต์หากไม่มีฮีโร่ออกก่อน)</String>
   <String Key="Post_Name_AltarGoldRefund">คืนทองสำหรับการขยายเปลวไฟแท่นบูชา</String>
   <String Key="Post_Desc_AltarGoldRefund">มอบทองที่ใช้ไปสำหรับการขยายเปลวไฟแท่นบูชา</String>
   <String Key="OutgameTutorial_140_00">ท่านราชาแห่งปราสาท ไม่ได้พบกันนานเลย &lt;color=#FFC13D&gt;ข้าคือผู้บัญชาการหน่วยอัศวิน แอสลิน&lt;/color&gt;
@@ -15464,7 +15450,7 @@ D = 1 ~ 4</String>
   <String Key="SeasonInformation">ข้อมูลซีซัน</String>
   <String Key="SeasonInformationHelp_0">คุณดูข้อมูลแชปเตอร์ของหินอัญเชิญจู่โจมที่มีในซีซันนี้ และข้อมูลปรับค่าพลังฮีโร่ที่ถูกปรับแล้วได้</String>
   <String Key="SeasonInformationHelp_1">แตะไอคอนแชปเตอร์เพื่อดูชื่อหินอัญเชิญจู่โจม</String>
-  <String Key="SeasonInformationHelp_2">กด ดูทั้งหมด ใน ปรับค่าพลังฮีโร่ เพื่อดูดาเมจที่มอบและอัตราได้รับการป้องกันสัมบูรณ์ปัจจุบันของฮีโร่ทั้งหมด</String>
+  <String Key="SeasonInformationHelp_2">ใน ปรับค่าพลังฮีโร่ กด ดูทั้งหมด เพื่อดูดาเมจที่มอบและโอกาสได้ป้องกันเด็ดขาดของฮีโร่ทั้งหมด</String>
   <String Key="InvadeSpawnItem">หินอัญเชิญจู่โจม</String>
   <String Key="SkillDesc_60505">เมื่อถูกโจมตีจนโกรธเต็มที่ จะได้รับความเร็วโจมตี +{AttackSpeedPer}% และความเร็วเคลื่อนที่ +{MoveSpeedPer}% และไม่ติดสถานะผิดปกติ</String>
   <String Key="SkillDesc_60665">เมื่อถูกโจมตีจนโกรธเต็มที่ จะได้รับความเร็วโจมตี +{AttackSpeedPer}% และความเร็วเคลื่อนที่ +{MoveSpeedPer}% และไม่ติดสถานะผิดปกติ</String>
@@ -16470,7 +16456,7 @@ D = 1 ~ 4</String>
   <String Key="NormalMissionSubTap_3">อื่นๆ</String>
   <String Key="UnintendedExitScoreProtected_0">ไม่มีการหักคะแนน เพราะระบบป้องกันคะแนนลดจากการออกจากเกมโดยไม่ตั้งใจทำงาน</String>
   <String Key="UnintendedExitScoreProtected_1">คะแนนลดลง เพราะจำนวนครั้งที่ออกจากเกมเกินจำนวนครั้งที่ป้องกันได้</String>
-  <String Key="ColosseumRemainLeftIgnoreCount">จำนวนครั้งที่ป้องกันได้({0}/3)</String>
+  <String Key="ColosseumRemainLeftIgnoreCount">จำนวนครั้งที่ป้องกันได้({0}/5)</String>
   <String Key="UnintendedExitScoreProtectedInfo_0">ระบบป้องกันคะแนนลดใช้ได้ในครึ่งแรกและครึ่งหลัง ช่วงละ 3 ครั้ง</String>
   <String Key="UnintendedExitScoreProtectedInfo_1">ระบบป้องกันคะแนนลดจะทำงานอัตโนมัติ หากตรงตามเงื่อนไขต่อไปนี้</String>
   <String Key="UnintendedExitScoreProtectedInfo_2">หากถูกนับว่าออกจากสนามรบต่อสู้ดุเดือด</String>
@@ -17964,11 +17950,11 @@ D = 1 ~ 4</String>
   <String Key="SkinDesc_107100401">&lt;i&gt;รางวัลเมื่อติดแรงกิ้งในลีกแห่งความอบอุ่นในศึกเดือด&lt;/i&gt;</String>
   <String Key="SkinName_1057002">ราชาดาวรุ่ง ฟาราเอล</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;แสงดาวอันสูงส่งที่สุดที่ถือกำเนิดในยามรุ่งสาง จะกลายเป็นแสงที่เจิดจ้าที่สุดเพื่อฝ่าความมืด&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">โอกาสได้รับการป้องกันสัมบูรณ์</String>
+  <String Key="SuperShieldModulator">โอกาสได้ป้องกันเด็ดขาด</String>
   <String Key="BuildingEffect_BaseDamageReflect">โต้กลับดาเมจ {Value}%
 (ลดดาเมจเวทมนตร์ 50%)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">โต้กลับส่วนหนึ่งของดาเมจที่ฮีโร่ได้รับใส่ศัตรู</String>
-  <String Key="TreasureName_30042">Ferataus</String>
+  <String Key="TreasureName_30042">เฟอร์ราทาอุส</String>
   <String Key="TreasureSubName_30042">โล่ดำสนิท</String>
   <String Key="TreasureDesc_30042">โล่ของเบเฮมอธไม่ได้มีไว้แค่ป้องกันเท่านั้น การพุ่งใส่อย่างดุดันของเบเฮมอธที่นำโล่หนักมหึมาเข้าโจมตี สามารถบดขยี้แม้แต่เกราะที่แข็งแกร่งที่สุดได้ในพริบตา</String>
   <String Key="TreasureSkillName_30042">พุ่งลง</String>
@@ -17977,10 +17963,10 @@ D = 1 ~ 4</String>
   <String Key="BuffDataName_3300423">แตกสลาย</String>
   <String Key="BuffDataName_3300424">อ่อนแรง II</String>
   <String Key="BuffDataName_3300425">กดดัน II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">ร้านค้าพิเศษ Ferataus Pickup</String>
-  <String Key="SpecialPackage_1680">แพ็กเกจ Ferataus 1</String>
-  <String Key="SpecialPackage_1681">แพ็กเกจ Ferataus 2</String>
-  <String Key="SpecialPackage_1682">แพ็กเกจ Ferataus 3</String>
+  <String Key="SpecialShop_TreasurePickUp30042">ร้านค้าพิเศษ Pickup เฟอร์ราทาอุส</String>
+  <String Key="SpecialPackage_1680">เฟอร์ราทาอุส แพ็กเกจ 1</String>
+  <String Key="SpecialPackage_1681">เฟอร์ราทาอุส แพ็กเกจ 2</String>
+  <String Key="SpecialPackage_1682">เฟอร์ราทาอุส แพ็กเกจ 3</String>
   <String Key="BuffDataDesc_3300421">ถ่ายโอนดาเมจ +{1}x ต่อคุกคาม {0}</String>
   <String Key="BuffDataDesc_3300422">เมื่อลบสถานะไม่เสถียร เป้าหมายจะสตัน {0} วินาที</String>
   <String Key="BuffDataDesc_3300423">ดาเมจกายภาพที่ได้รับของศัตรูที่มีสถานะไม่เสถียร +{0}% (การเพิ่มดาเมจกายภาพที่ได้รับไม่ซ้อนทับ และใช้เฉพาะค่าที่สูงที่สุด)</String>
@@ -18220,8 +18206,8 @@ D = 1 ~ 4</String>
   <String Key="UnitName_20020600">ทหารฟรอสต์วาลด์</String>
   <String Key="StoryHint_420107000">ใช้สกิลเริ่มการต่อสู้ของโอฟีเลีย เพื่อป้องกันการโจมตีของกากอย</String>
   <String Key="StoryHint_420108000">การโจมตีของวลาดทำให้พวกพ้องติดสตันต่อเนื่อง ลองใช้สกิลเริ่มการต่อสู้ที่รับมือสตันได้</String>
-  <String Key="TreasureName_30043">Vitacorde</String>
-  <String Key="TreasureSubName_30043">คัมภีร์ศักดิ์สิทธิ์</String>
+  <String Key="TreasureName_30043">วิตาคอร์เด</String>
+  <String Key="TreasureSubName_30043">คัมภีร์แห่งความศักดิ์สิทธิ์</String>
   <String Key="TreasureDesc_30043">จงเผชิญหน้ากับหัวใจที่แท้จริงภายในตัวท่าน
 แล้วความศักดิ์สิทธิ์จะช่วยท่าน</String>
   <String Key="TreasureSkillName_30043">พลังแห่งชีวิต</String>
@@ -18230,59 +18216,60 @@ D = 1 ~ 4</String>
   <String Key="BuffDataName_3300433">พิทักษ์ศักดิ์สิทธิ์</String>
   <String Key="BuffDataName_3300434">วัฏจักรแห่งชีวิต II</String>
   <String Key="BuffDataName_3300435">พลังศักดิ์สิทธิ์ II</String>
-  <String Key="SpecialShop_TreasurePickUp30043">ร้านค้าพิเศษ Pickup Vitacorde</String>
-  <String Key="SpecialPackage_1683">Vitacorde แพ็กเกจ 1</String>
-  <String Key="SpecialPackage_1684">Vitacorde แพ็กเกจ 2</String>
-  <String Key="SpecialPackage_1685">Vitacorde แพ็กเกจ 3</String>
+  <String Key="SpecialShop_TreasurePickUp30043">ร้านค้าพิเศษ Pickup วิตาคอร์เด</String>
+  <String Key="SpecialPackage_1683">วิตาคอร์เด แพ็กเกจ 1</String>
+  <String Key="SpecialPackage_1684">วิตาคอร์เด แพ็กเกจ 2</String>
+  <String Key="SpecialPackage_1685">วิตาคอร์เด แพ็กเกจ 3</String>
   <String Key="BuffDataDesc_3300431">ทุก {0} พิทักษ์ ค่าสเกลเวทมนตร์ของเอฟเฟกต์เพิ่มดาเมจพื้นฐาน +{1}%</String>
   <String Key="BuffDataDesc_3300432">คูลดาวน์ {0} วินาที</String>
   <String Key="BuffDataDesc_3300433">มอบพรแก่พวกพ้องทั้งหมดในเขต ยกเว้นตัวเอง</String>
   <String Key="BuffDataDesc_3300434">คูลดาวน์ {0} วินาที</String>
   <String Key="BuffDataDesc_3300435">ทุก {0} พิทักษ์ ค่าสเกลเวทมนตร์ของเอฟเฟกต์เพิ่มดาเมจพื้นฐาน +{1}%</String>
-  <String Key="TreasureSkillDesc_3300430">เมื่อเริ่มการต่อสู้ จะใช้เฉพาะเอฟเฟกต์ของฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Vitacorde
-ล็อกเวทมนตร์ของผู้สวมใส่ไว้ที่ค่าตอนเริ่มการต่อสู้
-เมื่อรักษาพวกพ้อง จะสร้างเขตเป็นเวลา {0} วินาที เพิ่มดาเมจพื้นฐานของพวกพ้องในระยะ {1} รอบผู้สวมใส่ เท่ากับ {2}% ของเวทมนตร์ผู้สวมใส่ (คูลดาวน์ {3} วินาที)</String>
-  <String Key="TreasureSkillDesc_3300431">เมื่อเริ่มการต่อสู้ จะใช้เฉพาะเอฟเฟกต์ของฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Vitacorde
-ล็อกเวทมนตร์ของผู้สวมใส่ไว้ที่ค่าตอนเริ่มการต่อสู้
-เมื่อรักษาพวกพ้อง จะสร้างเขตเป็นเวลา {0} วินาที เพิ่มดาเมจพื้นฐานของพวกพ้องในระยะ {1} รอบผู้สวมใส่ เท่ากับ {2}% ของเวทมนตร์ผู้สวมใส่ (คูลดาวน์ {3} วินาที)
+  <String Key="TreasureSkillDesc_3300430">เมื่อเริ่มต่อสู้ จะมีผลเฉพาะฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่วิตาคอร์เดเท่านั้น
+ล็อกเวทมนตร์ของผู้สวมใส่ไว้ตามค่าตอนเริ่มต่อสู้
+เมื่อรักษาพันธมิตร จะสร้างเขตเป็นเวลา {0} วินาที เพิ่มดาเมจพื้นฐานของพันธมิตรในเขต {1} รอบผู้สวมใส่เท่ากับ {2}% ของเวทมนตร์ของผู้สวมใส่ (คูลดาวน์ {3} วินาที)</String>
+  <String Key="TreasureSkillDesc_3300431">เมื่อเริ่มต่อสู้ จะมีผลเฉพาะฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่วิตาคอร์เดเท่านั้น
+ล็อกเวทมนตร์ของผู้สวมใส่ไว้ตามค่าตอนเริ่มต่อสู้
+เมื่อรักษาพันธมิตร จะสร้างเขตเป็นเวลา {0} วินาที เพิ่มดาเมจพื้นฐานของพันธมิตรในเขต {1} รอบผู้สวมใส่เท่ากับ {2}% ของเวทมนตร์ของผู้สวมใส่ (คูลดาวน์ {3} วินาที)
 ทุก {4} พิทักษ์ ค่าสเกลเวทมนตร์ของเอฟเฟกต์เพิ่มดาเมจพื้นฐาน +{5}%</String>
-  <String Key="TreasureSkillDesc_3300433">เมื่อเริ่มการต่อสู้ จะใช้เฉพาะเอฟเฟกต์ของฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Vitacorde
-ล็อกเวทมนตร์ของผู้สวมใส่ไว้ที่ค่าตอนเริ่มการต่อสู้
-เมื่อรักษาพวกพ้อง จะสร้างเขตเป็นเวลา {0} วินาที เพิ่มดาเมจพื้นฐานของพวกพ้องในระยะ {1} รอบผู้สวมใส่ เท่ากับ {2}% ของเวทมนตร์ผู้สวมใส่ (คูลดาวน์ {3} วินาที)
+  <String Key="TreasureSkillDesc_3300433">เมื่อเริ่มต่อสู้ จะมีผลเฉพาะฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่วิตาคอร์เดเท่านั้น
+ล็อกเวทมนตร์ของผู้สวมใส่ไว้ตามค่าตอนเริ่มต่อสู้
+เมื่อรักษาพันธมิตร จะสร้างเขตเป็นเวลา {0} วินาที เพิ่มดาเมจพื้นฐานของพันธมิตรในเขต {1} รอบผู้สวมใส่เท่ากับ {2}% ของเวทมนตร์ของผู้สวมใส่ (คูลดาวน์ {3} วินาที)
 ทุก {4} พิทักษ์ ค่าสเกลเวทมนตร์ของเอฟเฟกต์เพิ่มดาเมจพื้นฐาน +{5}%
-มอบพรแก่พวกพ้องในเขต ยกเว้นผู้สวมใส่</String>
+มอบพรให้พันธมิตรในเขต ยกเว้นผู้สวมใส่</String>
   <String Key="SeasonalEventName_Season72">เทศกาลเหินเวหา</String>
   <String Key="SeasonalEventMode_Season72">เทศกาลเหินเวหา</String>
-  <String Key="TreasureName_50002">Cor Orbis</String>
+  <String Key="TreasureName_50002">คอร์ ออร์บิส</String>
   <String Key="TreasureSubName_50002">ชื่อรองชั่วคราว</String>
-  <String Key="TreasureDesc_50002">คำอธิบายชั่วคราว - จะเพิ่มหลังจากได้คอนเซปต์ขุมทรัพย์ - คอนเซปต์ที่คิดไว้: หินอะไรสักอย่าง? อาร์ติแฟกต์? ที่ยืมมานาจากพืชและสัตว์รอบตัวมาเก็บสะสม แล้วค่อยปล่อยออกมา</String>
-  <String Key="TreasureSkillName_50002">ผสมมานา</String>
-  <String Key="BuffDataName_3500021">กลมกลืน I</String>
+  <String Key="TreasureDesc_50002">คำอธิบายชั่วคราว - จะเพิ่มเมื่อคอนเซปต์ขุมทรัพย์พร้อม - คอนเซปต์ที่คิดไว้: หินบางอย่าง? อาร์ติแฟกต์? ที่ยืมมานาจากพืชและสัตว์รอบตัวมาสะสมแล้วปล่อยออก</String>
+  <String Key="TreasureSkillName_50002">ผสานมานา</String>
+  <String Key="BuffDataName_3500021">หลอมรวม I</String>
   <String Key="BuffDataName_3500022">บาเรียมานา I</String>
-  <String Key="BuffDataName_3500023">มานาสะท้อนพ้อง</String>
+  <String Key="BuffDataName_3500023">มานาสั่นพ้อง</String>
   <String Key="BuffDataName_3500024">บาเรียมานา II</String>
-  <String Key="BuffDataName_3500025">กลมกลืน II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">ร้านค้าพิเศษ Pickup Cor Orbis</String>
-  <String Key="SpecialPackage_1690">Cor Orbis แพ็กเกจ 1</String>
-  <String Key="SpecialPackage_1691">Cor Orbis แพ็กเกจ 2</String>
-  <String Key="SpecialPackage_1692">Cor Orbis แพ็กเกจ 3</String>
-  <String Key="BuffDataDesc_3500021">ทุกดาเมจคริติคอลเวทมนตร์ {1}% ที่เกิน {0}% โบนัสดาเมจสุดท้ายของสกิลอัพเกรด x{2}</String>
+  <String Key="BuffDataName_3500025">หลอมรวม II</String>
+  <String Key="SpecialShop_TreasurePickUp50002">ร้านค้าพิเศษ Pickup คอร์ ออร์บิส</String>
+  <String Key="SpecialPackage_1690">คอร์ ออร์บิส แพ็กเกจ 1</String>
+  <String Key="SpecialPackage_1691">คอร์ ออร์บิส แพ็กเกจ 2</String>
+  <String Key="SpecialPackage_1692">คอร์ ออร์บิส แพ็กเกจ 3</String>
+  <String Key="BuffDataDesc_3500021">ทุก {1}% ของดาเมจคริติคอลเวทมนตร์ที่เกิน {0}% จะคูณการเพิ่มดาเมจสุดท้ายของสกิลเสริมพลัง {2} เท่า</String>
   <String Key="BuffDataDesc_3500022">ดาเมจที่ได้รับ {0}% จนกว่าจะใช้สกิลครั้งที่ 3</String>
-  <String Key="BuffDataDesc_3500023">เมื่อใช้สกิลอัพเกรด จะใช้สกิลเดิมเพิ่มอีก {1} ครั้ง กับเป้าหมายแรนด้อมด้วยดาเมจ {0}%</String>
+  <String Key="BuffDataDesc_3500023">เมื่อใช้สกิลเสริมพลัง จะใช้สกิลเดียวกันเพิ่มใส่เป้าหมายแรนด้อม 2 เป้าหมายด้วยดาเมจ {0}%</String>
   <String Key="BuffDataDesc_3500024">ดาเมจที่ได้รับ {0}% จนกว่าจะใช้สกิลครั้งที่ 3</String>
-  <String Key="BuffDataDesc_3500025">ทุกดาเมจคริติคอลเวทมนตร์ {1}% ที่เกิน {0}% โบนัสดาเมจสุดท้ายของสกิลอัพเกรด x{2}</String>
-  <String Key="TreasureSkillDesc_3500020">หลังเริ่มการต่อสู้ มีเพียงฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Cor Orbis เท่านั้น ที่จะได้รับมานาสูงสุด +{0}% และดาเมจที่มอบสุดท้าย -{1}% จนกว่าจะใช้สกิลครบ 3 ครั้ง
-สกิลสุดท้ายจะถูกอัพเกรด และดาเมจสุดท้าย +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">หลังเริ่มการต่อสู้ มีเพียงฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Cor Orbis เท่านั้น ที่จะได้รับมานาสูงสุด +{0}% และดาเมจที่มอบสุดท้าย -{1}% จนกว่าจะใช้สกิลครบ 3 ครั้ง
-สกิลสุดท้ายจะถูกอัพเกรด และดาเมจสุดท้าย +{2}%
-ทุกดาเมจคริติคอลเวทมนตร์ {4}% ที่เกิน {3}% โบนัสดาเมจสุดท้ายของสกิลอัพเกรด x{5}</String>
-  <String Key="TreasureSkillDesc_3500022">หลังเริ่มการต่อสู้ มีเพียงฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Cor Orbis เท่านั้น ที่จะได้รับมานาสูงสุด +{0}% และดาเมจที่มอบสุดท้าย -{1}% จนกว่าจะใช้สกิลครบ 3 ครั้ง
-สกิลสุดท้ายจะถูกอัพเกรด และดาเมจสุดท้าย +{2}%
-ทุกดาเมจคริติคอลเวทมนตร์ {4}% ที่เกิน {3}% โบนัสดาเมจสุดท้ายของสกิลอัพเกรด x{5}
-ดาเมจที่ได้รับ {6}% จนกว่าจะใช้สกิลครบ 3 ครั้ง</String>
-  <String Key="TreasureSkillDesc_3500023">หลังเริ่มการต่อสู้ มีเพียงฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่ Cor Orbis เท่านั้น ที่จะได้รับมานาสูงสุด +{0}% และดาเมจที่มอบสุดท้าย -{1}% จนกว่าจะใช้สกิลครบ 3 ครั้ง
-สกิลสุดท้ายจะถูกอัพเกรด และดาเมจสุดท้าย +{2}%
-ทุกดาเมจคริติคอลเวทมนตร์ {4}% ที่เกิน {3}% โบนัสดาเมจสุดท้ายของสกิลอัพเกรด x{5}
-ดาเมจที่ได้รับ {6}% จนกว่าจะใช้สกิลครบ 3 ครั้ง
-เมื่อใช้สกิลอัพเกรด จะใช้สกิลเดิมเพิ่มอีก {8} ครั้ง กับเป้าหมายแรนด้อมด้วยดาเมจ {7}%</String>
+  <String Key="BuffDataDesc_3500025">ทุก {1}% ของดาเมจคริติคอลเวทมนตร์ที่เกิน {0}% จะคูณการเพิ่มดาเมจสุดท้ายของสกิลเสริมพลัง {2} เท่า</String>
+  <String Key="TreasureSkillDesc_3500020">หลังเริ่มต่อสู้ ฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่คอร์ ออร์บิส จะได้รับมานาสูงสุด +{0}% และดาเมจสุดท้ายที่มอบ -{1}% จนกว่าจะใช้สกิล 3 ครั้ง
+สกิลสุดท้ายจะเสริมพลัง ทำให้ดาเมจสุดท้าย +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">หลังเริ่มต่อสู้ ฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่คอร์ ออร์บิส จะได้รับมานาสูงสุด +{0}% และดาเมจสุดท้ายที่มอบ -{1}% จนกว่าจะใช้สกิล 3 ครั้ง
+สกิลสุดท้ายจะเสริมพลัง ทำให้ดาเมจสุดท้าย +{2}%
+ทุก {4}% ของดาเมจคริติคอลเวทมนตร์ที่เกิน {3}% จะคูณการเพิ่มดาเมจสุดท้ายของสกิลเสริมพลัง {5} เท่า</String>
+  <String Key="TreasureSkillDesc_3500022">หลังเริ่มต่อสู้ ฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่คอร์ ออร์บิส จะได้รับมานาสูงสุด +{0}% และดาเมจสุดท้ายที่มอบ -{1}% จนกว่าจะใช้สกิล 3 ครั้ง
+สกิลสุดท้ายจะเสริมพลัง ทำให้ดาเมจสุดท้าย +{2}%
+ทุก {4}% ของดาเมจคริติคอลเวทมนตร์ที่เกิน {3}% จะคูณการเพิ่มดาเมจสุดท้ายของสกิลเสริมพลัง {5} เท่า
+ดาเมจที่ได้รับ {6}% จนกว่าจะใช้สกิล 3 ครั้ง</String>
+  <String Key="TreasureSkillDesc_3500023">หลังเริ่มต่อสู้ ฮีโร่ที่มีดาวสูงสุดซึ่งสวมใส่คอร์ ออร์บิส จะได้รับมานาสูงสุด +{0}% และดาเมจสุดท้ายที่มอบ -{1}% จนกว่าจะใช้สกิล 3 ครั้ง
+สกิลสุดท้ายจะเสริมพลัง ทำให้ดาเมจสุดท้าย +{2}%
+ทุก {4}% ของดาเมจคริติคอลเวทมนตร์ที่เกิน {3}% จะคูณการเพิ่มดาเมจสุดท้ายของสกิลเสริมพลัง {5} เท่า
+ดาเมจที่ได้รับ {6}% จนกว่าจะใช้สกิล 3 ครั้ง
+เมื่อใช้สกิลเสริมพลัง จะใช้สกิลเดียวกันเพิ่มใส่เป้าหมายแรนด้อม 2 เป้าหมายด้วยดาเมจ {7}%</String>
+  <String Key="AdsSummonRestrictionAlert">ทำได้สูงสุด {0} ครั้งต่อรอบ</String>
 </Strings>

@@ -1,4 +1,6 @@
 <Strings>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
   <String Key="Tags">Awesomepiece, ZombieHighschool, AutoChess, lolChess, KingGodCastle, Autobatallador, Estrategia, Batallasdeequipoestratégico, TFT, Ends, HelpmeEnds, Merge, Defensa</String>
   <String Key="Store_ShortDesc">¡Usa la fuerza de los héroes y dioses para proteger el castillo de los invasores! ¡KingGodCastle!</String>
@@ -141,9 +143,9 @@ Regresarás a la pantalla de inicio de sesión.</String>
 
 (Costo: {0} gemas)</String>
   <String Key="King_1">Rey</String>
-  <String Key="King_2"> </String>
+  <String Key="King_2"></String>
   <String Key="Castle_1">Castillo</String>
-  <String Key="Castle_2"> </String>
+  <String Key="Castle_2"></String>
   <String Key="LoadingPopupText">Comunicándose con el servidor...</String>
   <String Key="LoginByGoogle">Iniciar sesión con Google Play</String>
   <String Key="LoginByApple">Iniciar sesión con Apple</String>
@@ -261,11 +263,11 @@ Regresarás a la pantalla de inicio de sesión.</String>
   <String Key="Post_Push_Contents18">¡1,000 de oro te espera en la noche!</String>
   <String Key="Post_Push_Contents19">Hay oro en tu correo.</String>
   <String Key="Post_Push_Contents20">¡Ya llegaron los suministros!</String>
-  <String Key="Post_Push_Contents21">Hoy es el final de la temporada 72 de King God Castle.</String>
-  <String Key="Post_Push_Contents22">Queda 1 día para el final de la temporada 72 de King God Castle.</String>
-  <String Key="Post_Push_Contents23">Quedan 2 días para el final de la temporada 72 de King God Castle.</String>
-  <String Key="Post_Push_Contents24">Quedan 4 días para el final de la temporada 72 de King God Castle.</String>
-  <String Key="Post_Push_Contents25">¡La temporada 72 de King God Castle finaliza hoy!</String>
+  <String Key="Post_Push_Contents21">Hoy es el final de la temporada {0} de King God Castle.</String>
+  <String Key="Post_Push_Contents22">Queda 1 día para el final de la temporada {0} de King God Castle.</String>
+  <String Key="Post_Push_Contents23">Quedan 2 días para el final de la temporada {0} de King God Castle.</String>
+  <String Key="Post_Push_Contents24">Quedan 4 días para el final de la temporada {0} de King God Castle.</String>
+  <String Key="Post_Push_Contents25">¡La temporada {0} de King God Castle finaliza hoy!</String>
   <String Key="Post_Push_Contents26">¡Verifica no tener recompensas del pase acumuladas!</String>
   <String Key="Post_Push_Contents27">¡Recibe todas tus recompensas del pase!</String>
   <String Key="Post_Push_Contents28">El campo de batalla y el sistema de pase terminarán en 4 días.</String>
@@ -1237,11 +1239,8 @@ Esta lanza hace posible un ataque preventivo contra el enemigo.</String>
   <String Key="ItemName_10020">Expansión de tropas</String>
   <String Key="ItemDesc_10020">Expande tus tropas en 1.</String>
   <String Key="ItemName_10030">+5 de plata</String>
-  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">+10 de plata</String>
-  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">+20 de plata</String>
-  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">Medalla de honor</String>
   <String Key="ItemDesc_10040">Incrementa las ★ de un héroe aleatorio del campo en 1.</String>
   <String Key="ItemName_10050">Pergamino de invocación de héroe avanzado (2 veces)</String>
@@ -1847,7 +1846,7 @@ Absorción de físico y hechizo</String>
   <String Key="Potential_10260_0">-1 uso de &lt;Filo horizontal de dragón&gt; al usar &lt;Corte de dragón azul&gt;</String>
   <String Key="Potential_10260_1">+60% de absorción de hechizo en &lt;Corte de dragón azul&gt;</String>
   <String Key="SkinDesc_Default_10260">Chung-Ah, heredera de la familia que adora al dragón azul, uno de los guardianes del reino este, Obtuvo el poder del dragón y creció como una guerrera genio. Arrasa el campo de batalla con la espada de la luna creciente, la cual heredó junto al poder del dragón azul.</String>
-  <String Key="SkillName_10260">Filo horizontal de dragón </String>
+  <String Key="SkillName_10260">Filo horizontal de dragón</String>
   <String Key="SkillDesc_10260">Causa {Damage:BaseValue}+{Damage:MAtkPer} de daño a todos los enemigos en un rango horizontal al frente de &lt;color=#8DFFFF&gt;3&lt;/color&gt; espacios. Después de usar &lt;Filo horizontal de dragón&gt; {NeedComboCount:BaseValue} veces, usa &lt;Corte de dragón azul&gt;, que causa {ComboSkillDamageMultiplierDesc} veces más daño en un rango amplio.</String>
   <String Key="SkillName_10265">Corte de dragón azul</String>
   <String Key="SkillDesc_10265">Ataca con la espada de la luna creciente y causa {Damage:BaseValue}+{Damage:MAtkPer} de daño a todos los enemigos dentro de un rango cercano de {SplashRangeX}{X}{SplashRangeY}.</String>
@@ -3398,7 +3397,7 @@ Se cambiará a otra misión aleatoria.</String>
   <String Key="TowerTotalPoint">Total</String>
   <String Key="TowerWinPointBase">Puntos de victoria básicos</String>
   <String Key="TowerWinPointBonusRatio">Tasa de puntos de victoria</String>
-  <String Key="TowerSeasonEndInfo">※ Las recompensas serán enviadas por correo dentro de tres días después de la conclusión de la temporada. </String>
+  <String Key="TowerSeasonEndInfo">※ Las recompensas serán enviadas por correo dentro de tres días después de la conclusión de la temporada.</String>
   <String Key="SeasonPassPlusActivated">¡El pase KingGod Plus ha sido activado!</String>
   <String Key="UpgradeToPassPlus">Mejorar a Pase de KingGod+</String>
   <String Key="UpgradeToPassPlusConfirm">El pase de KingGod ha sido mejorado a KingGod+.</String>
@@ -3746,7 +3745,7 @@ Si no seleccionas una reliquia, no podrás ver a los nuevos dioses.</String>
 -{1}% de efectos si los aliados son derrotados</String>
   <String Key="ItemFullDesc_40033">-{0}% de daño recibido
 -{1}% de efectos por cada aliado derrotado
-(0% si {2} aliados son derrotados) </String>
+(0% si {2} aliados son derrotados)</String>
   <String Key="ItemName_40043">Escuadrón suicida</String>
   <String Key="ItemDesc_40043">+{0}% de poder de hechizo si un aliado es derrotado
 (máx. de x{1})</String>
@@ -3835,7 +3834,7 @@ Báculo: causa daño continuo según el daño causado.</String>
   <String Key="ItemName_40393">Sobrecarga</String>
   <String Key="ItemName_40403">Furia del demodios</String>
   <String Key="ItemName_40413">Escudo plateado</String>
-  <String Key="ItemDesc_40413">-{0}% de daño recibido por cada 100 de plata (un máx. de {1}%) </String>
+  <String Key="ItemDesc_40413">-{0}% de daño recibido por cada 100 de plata (un máx. de {1}%)</String>
   <String Key="ItemName_40423">A toda prueba</String>
   <String Key="ItemDesc_40423">+{0}% de velocidad de ataque por cada ítem no equipado/utilizado (un máx. de {1}%)</String>
   <String Key="ItemName_40433">Ahorro</String>
@@ -4984,6 +4983,7 @@ Apoyos disponibles al día: {2}</String>
   <String Key="Hero_Awaken_Noti">El héroe {0} alcanzó el nv. 16. El despertar está ahora disponible.
 Si despiertas al héroe, el héroe podrá usar sus &lt;color=#FFD247&gt;habilidades despertadas.&lt;/color&gt;</String>
   <String Key="ItemDescSub_40463_07">{0} defensa(s) absoluta(s)</String>
+  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">Cuando aparece un Héroe, el &lt;color=#FFD247&gt;Héroe seleccionado&lt;/color&gt; está &lt;color=#FFD247&gt;garantizado!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Elegir héroes</String>
   <String Key="SelectPickupUnitAgain">Restablecer</String>
@@ -5766,8 +5766,6 @@ Después de desintegrar la alianza, no podrás participar como miembro en conqui
   <String Key="ClanBattleModifier_13">agonizante</String>
   <String Key="ClanBattleModifier_14">abrumador</String>
   <String Key="UserLockedClanBattleAlert">Este usuario no puede participar en conquistas de alianza de esta temporada.</String>
-  <String Key="UpdateNoticeVersion">171100</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">¿Deseas desintegrar la alianza?</String>
   <String Key="Clan_Menu_LeaveConfirm">¿Deseas abandonar la alianza?</String>
   <String Key="RogueLike_ReleaseAtLevel">Desbloqueado en nv. {0}</String>
@@ -6918,6 +6916,7 @@ Para más detalles, contacta el centro de atención al cliente.</String>
   <String Key="Clan_Menu_ChangeName">Cambiar</String>
   <String Key="ColosseumSeasonRankingReward">Recompensa de temporada</String>
   <String Key="ColosseumRanking">Clasificación</String>
+  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Detalles de prob. de aparición de reliquia</String>
   <String Key="ArtifactOptionProbDetailDesc">Te dirigirás a la página web del anuncio de Prob. de aparición de opciones de reliquia.</String>
   <String Key="ColosseumNetworkChanged">Hubo un cambio de red. Reconectando.</String>
@@ -7352,9 +7351,7 @@ Lamentamos mucho las molestias.</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;Trascender ★
 
 &lt;/size&gt;A través de la &lt;color=#ffbc00&gt;trascendencia de ★&lt;/color&gt; de los tesoros puedes &lt;color=#ffbc00&gt;otorgar efectos adicionales&lt;/color&gt; a las habilidades de tesoro.
-Necesitarás un &lt;color=#ffbc00&gt;tesoro igual&lt;/color&gt; para trascender ★.
-
-</String>
+Necesitarás un &lt;color=#ffbc00&gt;tesoro igual&lt;/color&gt; para trascender ★.</String>
   <String Key="SkinName_1032006">Ola azul Tya</String>
   <String Key="SkinName_1036004">Ola azul Haerang</String>
   <String Key="SkinName_1042003">Ola azul Taebaek</String>
@@ -7428,8 +7425,7 @@ Ven, sigue mi voluntad.&lt;/i&gt;</String>
 +{1}% de daño causado en estado de invencibilidad</String>
   <String Key="TreasureSkillDesc_3300033">Cuando el héroe equipado con mur con más ★ recibe daño mortal o su salud llega a un {0}%, otorga invencibilidad durante {1} segundos (1 vez por condición)
 (No puede otorgar barrera ni recuperación a objetivo en estado de invencibilidad)
-+{2}% de daño causado en estado de invencibilidad
-</String>
++{2}% de daño causado en estado de invencibilidad</String>
   <String Key="TreasureSkillDesc_3300034">Cuando el héroe equipado con mur con más ★ recibe daño mortal o su salud llega a un {0}%, otorga invencibilidad durante {1} segundos (1 vez por condición)
 (No puede otorgar barrera ni recuperación a objetivo en estado de invencibilidad)
 +{2}% de daño causado en estado de invencibilidad
@@ -7659,15 +7655,11 @@ Puedes obtener &lt;color=#ffbc00&gt;materiales de mejora&lt;/color&gt; de tesoro
  &lt;size=25&gt;Trascender ★
 
 &lt;/size&gt;A través de la &lt;color=#ffbc00&gt;trascendencia de ★&lt;/color&gt; de los tesoros puedes &lt;color=#ffbc00&gt;otorgar efectos adicionales&lt;/color&gt; a las habilidades de tesoro.
-Necesitarás un &lt;color=#ffbc00&gt;tesoro igual&lt;/color&gt; para trascender ★.
-
-</String>
+Necesitarás un &lt;color=#ffbc00&gt;tesoro igual&lt;/color&gt; para trascender ★.</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Mejorar tesoro
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;Mejora&lt;/color&gt; los tesoros para aumentar los &lt;color=#ffbc00&gt;efectos de habilidad de tesoro&lt;/color&gt;.
-Puedes obtener &lt;color=#ffbc00&gt;materiales de mejora&lt;/color&gt; de tesoros &lt;color=#ffbc00&gt;desmantelando&lt;/color&gt; tesoros en el inventario o &lt;color=#ffbc00&gt;comprándolos en la tienda&lt;/color&gt;.
-
-</String>
+Puedes obtener &lt;color=#ffbc00&gt;materiales de mejora&lt;/color&gt; de tesoros &lt;color=#ffbc00&gt;desmantelando&lt;/color&gt; tesoros en el inventario o &lt;color=#ffbc00&gt;comprándolos en la tienda&lt;/color&gt;.</String>
   <String Key="TreasureOvercome">Trascender ★</String>
   <String Key="TreasureOvercome_Short">Trascender ★</String>
   <String Key="ViewNextOvercome">Ver siguiente</String>
@@ -8216,9 +8208,7 @@ Puedes obtener &lt;color=#ffbc00&gt;materiales de mejora&lt;/color&gt; de tesoro
  &lt;size=25&gt;Trascender ★
 
 &lt;/size&gt;A través de la &lt;color=#ffbc00&gt;trascendencia de ★&lt;/color&gt; de los tesoros puedes &lt;color=#ffbc00&gt;otorgar efectos adicionales&lt;/color&gt; a las habilidades de tesoro.
-Necesitarás un &lt;color=#ffbc00&gt;tesoro igual&lt;/color&gt; para trascender ★.
-
-</String>
+Necesitarás un &lt;color=#ffbc00&gt;tesoro igual&lt;/color&gt; para trascender ★.</String>
   <String Key="TreasureSkillDesc_3300010">+{0}% de prob. de crítico
 Se desactiva durante {1} segundo(s) al recibir daño</String>
   <String Key="TreasureSkillDesc_3300011">+{0}% de prob. de crítico
@@ -9480,7 +9470,7 @@ El puntaje no baja a menos de 2,000 puntos.</String>
   <String Key="UnitSubName_10670">Abanderado del campo de batalla</String>
   <String Key="Potential_10670_0">+30 de protección</String>
   <String Key="Potential_10670_1">-70% de daño recibido durante 2 segundos luego de recibir daño por primera vez después del inicio de la batalla.</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;La familia Liter es una familia noble del imperio a la que han pertenecido excelentes individuos reconocidos en diversas áreas. Patros no nació con ninguna habilidad especial a pesar de pertenecer a la familia Liter, pero se convirtió en un comandante ejemplar de los soldados imperiales al esforzarse más que ningún otro.&lt;/i&gt; </String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;La familia Liter es una familia noble del imperio a la que han pertenecido excelentes individuos reconocidos en diversas áreas. Patros no nació con ninguna habilidad especial a pesar de pertenecer a la familia Liter, pero se convirtió en un comandante ejemplar de los soldados imperiales al esforzarse más que ningún otro.&lt;/i&gt;</String>
   <String Key="SkillName_10670">¡Por el imperio!</String>
   <String Key="SkillDesc_10670">Anima a los aliados durante {TotalAttackTime} segundos, cura un {Heal} y aumenta un {AttackSpeedPerUnit10670}% de la velocidad de ataque de todos los aliados en un rango cercano de {SplashRangeX}{x}{SplashRangeY} cada {Time} segundos. Aplica el efecto mayor de aumento de velocidad de ataque entre las habilidades con el mismo nombre.</String>
   <String Key="SkillDesc_10670_Short">Cura en {Heal} y aumenta un {AttackSpeedPerUnit10670}% de la velocidad de ataque a los aliados en un rango cercano de {SplashRangeX}{x}{SplashRangeY} cada {Time} segundos durante {TotalAttackTime} segundos. Aplica solo el aumento de velocidad de ataque mayor de &lt;¡Por el imperio!&gt;.</String>
@@ -9780,8 +9770,7 @@ Una vez realizada la invocación, &lt;color=#FF0000&gt;no podrás cambiar&lt;/co
   <String Key="BaseHybridDefOnInvade">+{0} de recompensa de oro de ataque
 +{1} de defensa de todos los héroes en ataque
 Reforja y mejora a través del refinamiento no disponible</String>
-  <String Key="ArtifactOptionDesc_Event_15000">
-Mover gratis a través del refinamiento (hasta 3/12/24)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">Mover gratis a través del refinamiento (hasta 3/12/24)</String>
   <String Key="SkinName_1032007">Diosa de la luna Tya</String>
   <String Key="SkinName_1032007_NewLine">Diosa de la luna Tya</String>
   <String Key="TerritoryBuildingName_40300">Estatua de la diosa de la luna</String>
@@ -10801,7 +10790,7 @@ Por cada héroe del este diferente, -{3} segundos de tiempo de activación</Stri
   <String Key="ShopItemName_6544">Pase de torre de la prueba del Oeste	 V</String>
   <String Key="ShopItemName_6547">Pase de torre de la prueba del Oeste	 VI</String>
   <String Key="ShopItemName_6550">Pase de torre de la prueba del Oeste	 VII</String>
-  <String Key="BabelPass_405">Pase de torre de la prueba del Oeste	</String>
+  <String Key="BabelPass_405">Pase de torre de la prueba del Oeste</String>
   <String Key="BabelPass_CannotRefund_405">※ El pase de la torre de la prueba del Oeste	 es un producto no reembolsable.</String>
   <String Key="SkinName_1051003">Comisario Mano</String>
   <String Key="SkinName_1011007">Arquera infalible Hansi</String>
@@ -11371,8 +11360,7 @@ Los accesorios</String>
   <String Key="AddDifficultyUnlockDesc">En caso de completar sin ningún tipo de daño, se desbloquearán dos 2 etapas de dificultad.</String>
   <String Key="AccessoryLevelUpTutorialLock">Puedes revisar los tutoriales después de completar Corrupción II-1.</String>
   <String Key="NotAccessoryLevelUp">No tienes accesorios a mejorar.</String>
-  <String Key="ArtifactOptionDesc_Event_15020">
-Mover gratis a través del refinamiento (&lt;color=#ffbd4a&gt;hasta {0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">Mover gratis a través del refinamiento (&lt;color=#ffbd4a&gt;hasta {0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Completar dificultad [{Diff}] o superior del capítulo {0}-{1}</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">Completar dificultad [{Diff}] o superior del capítulo {0}-{1} de corrupción</String>
   <String Key="Polish_EventArtifact_Alert">¡Esta reliquia no se puede mejorar a través del refinamiento!</String>
@@ -11724,8 +11712,7 @@ Si la salud máxima del objetivo del ataque es mayor que su salud máxima, se pr
   <String Key="SpecialPackage_1556">Paquete de eterna 1</String>
   <String Key="SpecialPackage_1557">Paquete de eterna 2</String>
   <String Key="SpecialPackage_1558">Paquete de eterna 3</String>
-  <String Key="MakeAllLateComerExceptSlot">A excepción del {0} héroe posicionado en la tropa, se otorgará un efecto de aparición tardía a todos los héroes
-</String>
+  <String Key="MakeAllLateComerExceptSlot">A excepción del {0} héroe posicionado en la tropa, se otorgará un efecto de aparición tardía a todos los héroes</String>
   <String Key="Order_1">1.°</String>
   <String Key="Order_2">2.°</String>
   <String Key="Order_3">3.°</String>
@@ -14408,8 +14395,7 @@ Recomendado para el campo de batalla brutal</String>
   <String Key="AltarHelpBuilding_5">Este es un altar que aumenta la cantidad de plata recibida y facilita el uso de la tienda y las invocaciones de héroes.
 
 Recomendado para ataques y la arena</String>
-  <String Key="ArtifactBuffDataDesc_15010">+{0}% de velocidad de ataque del héroe de vanguardia al inicio de la batalla en ataques o expedición (no aplica el efecto si no hay un héroe de vanguardia)
-</String>
+  <String Key="ArtifactBuffDataDesc_15010">+{0}% de velocidad de ataque del héroe de vanguardia al inicio de la batalla en ataques o expedición (no aplica el efecto si no hay un héroe de vanguardia)</String>
   <String Key="Post_Name_AltarGoldRefund">Reembolso de oro por expansión de llama de altares</String>
   <String Key="Post_Desc_AltarGoldRefund">Te hemos enviado el oro consumido en la expansión de llama de altares.</String>
   <String Key="OutgameTutorial_140_00">Saludos, rey del castillo. Tiempo sin verte. Soy &lt;color=#FFC13D&gt;Aslyn, comandante de la orden&lt;/color&gt;.
@@ -15461,7 +15447,7 @@ Refrescos actuales: {3}</String>
   <String Key="SeasonInformation">Información de la temporada</String>
   <String Key="SeasonInformationHelp_0">Puedes consultar la información del Capítulo de la Piedra de invocación de asalto de esta temporada y los Ajustes de estadísticas de héroe.</String>
   <String Key="SeasonInformationHelp_1">Toca el icono del Capítulo para ver el nombre de la Piedra de invocación de asalto.</String>
-  <String Key="SeasonInformationHelp_2">Toca Ver todo en Ajustes de estadísticas de héroe para ver el Daño causado y la tasa de obtención de Defensa absoluta de todos los Héroes.</String>
+  <String Key="SeasonInformationHelp_2">En Ajustes de estadísticas de héroe, toca Ver todo para ver el Daño causado y la Prob. de Defensa absoluta de todos los Héroes.</String>
   <String Key="InvadeSpawnItem">Piedra de invocación de asalto</String>
   <String Key="SkillDesc_60505">Cuando recibes un ataque y te llenas de furia, obtienes +{AttackSpeedPer}% de Velocidad de ataque y +{MoveSpeedPer}% de Velocidad de movimiento, y eres inmune a los efectos de estado.</String>
   <String Key="SkillDesc_60665">Cuando recibes un ataque y te llenas de furia, obtienes +{AttackSpeedPer}% de Velocidad de ataque y +{MoveSpeedPer}% de Velocidad de movimiento, y eres inmune a los efectos de estado.</String>
@@ -16467,7 +16453,7 @@ Al mirarla de nuevo, parece una sonrisa realmente hermosa.</String>
   <String Key="NormalMissionSubTap_3">Otros</String>
   <String Key="UnintendedExitScoreProtected_0">No se aplicó la pérdida de puntos gracias al sistema de protección por abandono involuntario</String>
   <String Key="UnintendedExitScoreProtected_1">Tus puntos se redujeron porque el número de abandonos superó el límite de protección.</String>
-  <String Key="ColosseumRemainLeftIgnoreCount">Usos de protección restantes ({0}/3)</String>
+  <String Key="ColosseumRemainLeftIgnoreCount">Usos de protección restantes ({0}/5)</String>
   <String Key="UnintendedExitScoreProtectedInfo_0">El sistema de protección contra la pérdida de puntos puede usarse hasta 3 veces en la primera mitad y 3 veces en la segunda.</String>
   <String Key="UnintendedExitScoreProtectedInfo_1">El sistema de protección contra la pérdida de puntos se aplica automáticamente si se cumplen las siguientes condiciones.</String>
   <String Key="UnintendedExitScoreProtectedInfo_2">Si recibes una marca de abandono en el Campo de batalla brutal</String>
@@ -17961,12 +17947,12 @@ Tras iniciar la Batalla, obtiene +{11}% de Resistencia de despotenciadores y +{1
   <String Key="SkinDesc_107100401">&lt;i&gt;Recompensa por quedar en la Clasificación de la Liga de la Calidez en Batalla&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Rey Lucero del Alba Farael</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;La luz estelar más noble, nacida en el primer alba, se convertirá en la luz más brillante para atravesar la oscuridad.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Probabilidad de Defensa Absoluta</String>
+  <String Key="SuperShieldModulator">Prob. de Defensa absoluta</String>
   <String Key="BuildingEffect_BaseDamageReflect">Refleja {Value}% de daño
 (mitad del daño de hechizos)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">Refleja al enemigo parte del daño recibido por el héroe.</String>
-  <String Key="TreasureName_30042">Ferataus</String>
-  <String Key="TreasureSubName_30042">Escudo negro azabache</String>
+  <String Key="TreasureName_30042">Ferrataus</String>
+  <String Key="TreasureSubName_30042">Escudo Azabache</String>
   <String Key="TreasureDesc_30042">El escudo de Behemus no es solo para defender. La Embestida feroz de Behemus con su enorme escudo puede aplastar hasta la armadura más resistente en un instante.</String>
   <String Key="TreasureSkillName_30042">Caída</String>
   <String Key="BuffDataName_3300421">Supresión I</String>
@@ -17974,10 +17960,10 @@ Tras iniciar la Batalla, obtiene +{11}% de Resistencia de despotenciadores y +{1
   <String Key="BuffDataName_3300423">Ruptura</String>
   <String Key="BuffDataName_3300424">Debilitación II</String>
   <String Key="BuffDataName_3300425">Supresión II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Tienda especial de pickup de Ferataus</String>
-  <String Key="SpecialPackage_1680">Paquete de Ferataus 1</String>
-  <String Key="SpecialPackage_1681">Paquete de Ferataus 2</String>
-  <String Key="SpecialPackage_1682">Paquete de Ferataus 3</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Tienda especial de pickup de Ferrataus</String>
+  <String Key="SpecialPackage_1680">Paquete Ferrataus 1</String>
+  <String Key="SpecialPackage_1681">Paquete Ferrataus 2</String>
+  <String Key="SpecialPackage_1682">Paquete Ferrataus 3</String>
   <String Key="BuffDataDesc_3300421">Transferencia de daño +{1}x por cada {0} Amenaza</String>
   <String Key="BuffDataDesc_3300422">Al eliminar Inestable, el objetivo queda Aturdido durante {0} s</String>
   <String Key="BuffDataDesc_3300423">Daño Físico Recibido por enemigos Inestables +{0}% (Los aumentos al daño Físico Recibido no se acumulan. Solo se aplica el valor más alto)</String>
@@ -18218,7 +18204,7 @@ Probabilidad de Defensa Absoluta aumentada</String>
   <String Key="StoryHint_420107000">Usa la Habilidad de inicio de batalla de Ofelia para defenderte del ataque de la Gárgola.</String>
   <String Key="StoryHint_420108000">Los ataques de Vlad aturden constantemente a los aliados. Usa una Habilidad de inicio de batalla que pueda contrarrestar el aturdimiento.</String>
   <String Key="TreasureName_30043">Vitacorde</String>
-  <String Key="TreasureSubName_30043">Libro de la Santidad</String>
+  <String Key="TreasureSubName_30043">Tomo de la Divinidad</String>
   <String Key="TreasureDesc_30043">Enfrenta el verdadero corazón que llevas dentro.
 Entonces, la santidad te ayudará.</String>
   <String Key="TreasureSkillName_30043">Poder de la vida</String>
@@ -18227,59 +18213,60 @@ Entonces, la santidad te ayudará.</String>
   <String Key="BuffDataName_3300433">Protección sagrada</String>
   <String Key="BuffDataName_3300434">Ciclo de la vida II</String>
   <String Key="BuffDataName_3300435">Poder divino II</String>
-  <String Key="SpecialShop_TreasurePickUp30043">Tienda especial destacada de Vitacorde</String>
-  <String Key="SpecialPackage_1683">Paquete de Vitacorde 1</String>
-  <String Key="SpecialPackage_1684">Paquete de Vitacorde 2</String>
-  <String Key="SpecialPackage_1685">Paquete de Vitacorde 3</String>
+  <String Key="SpecialShop_TreasurePickUp30043">Tienda especial de pickup de Vitacorde</String>
+  <String Key="SpecialPackage_1683">Paquete Vitacorde 1</String>
+  <String Key="SpecialPackage_1684">Paquete Vitacorde 2</String>
+  <String Key="SpecialPackage_1685">Paquete Vitacorde 3</String>
   <String Key="BuffDataDesc_3300431">Por cada {0} de Protección, +{1}% al escalado de Poder de habilidad del efecto de aumento de Daño base</String>
   <String Key="BuffDataDesc_3300432">Recarga {0}s</String>
   <String Key="BuffDataDesc_3300433">Otorga Bendición a todos los aliados del área excepto a sí mismo</String>
   <String Key="BuffDataDesc_3300434">Recarga {0}s</String>
   <String Key="BuffDataDesc_3300435">Por cada {0} de Protección, +{1}% al escalado de Poder de habilidad del efecto de aumento de Daño base</String>
-  <String Key="TreasureSkillDesc_3300430">Al inicio de la batalla, solo se aplica el efecto del Héroe equipado con Vitacorde de mayor ★
-Fija el Poder de habilidad del portador al valor del inicio de la batalla
-Al curar a un aliado, crea un área durante {0}s que aumenta el Daño base de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Recarga: {3}s)</String>
-  <String Key="TreasureSkillDesc_3300431">Al inicio de la batalla, solo se aplica el efecto del Héroe equipado con Vitacorde de mayor ★
-Fija el Poder de habilidad del portador al valor del inicio de la batalla
-Al curar a un aliado, crea un área durante {0}s que aumenta el Daño base de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Recarga: {3}s)
-Por cada {4} de Protección, +{5}% al escalado de Poder de habilidad del efecto de aumento de Daño base</String>
-  <String Key="TreasureSkillDesc_3300433">Al inicio de la batalla, solo se aplica el efecto del Héroe equipado con Vitacorde de mayor ★
-Fija el Poder de habilidad del portador al valor del inicio de la batalla
-Al curar a un aliado, crea un área durante {0}s que aumenta el Daño base de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Recarga: {3}s)
-Por cada {4} de Protección, +{5}% al escalado de Poder de habilidad del efecto de aumento de Daño base
-Otorga Bendición a los aliados del área excepto al portador</String>
+  <String Key="TreasureSkillDesc_3300430">Al inicio de la batalla, solo se aplica el efecto del Héroe con más ★ que tenga equipado Vitacorde.
+El Poder de habilidad del portador se fija al valor del inicio de la batalla.
+Al curar a aliados, crea una zona durante {0}s que aumenta el daño básico de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Enfriamiento: {3}s)</String>
+  <String Key="TreasureSkillDesc_3300431">Al inicio de la batalla, solo se aplica el efecto del Héroe con más ★ que tenga equipado Vitacorde.
+El Poder de habilidad del portador se fija al valor del inicio de la batalla.
+Al curar a aliados, crea una zona durante {0}s que aumenta el daño básico de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Enfriamiento: {3}s)
+Por cada {4} de Protección, +{5}% al escalado de Poder de habilidad del aumento de daño básico</String>
+  <String Key="TreasureSkillDesc_3300433">Al inicio de la batalla, solo se aplica el efecto del Héroe con más ★ que tenga equipado Vitacorde.
+El Poder de habilidad del portador se fija al valor del inicio de la batalla.
+Al curar a aliados, crea una zona durante {0}s que aumenta el daño básico de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Enfriamiento: {3}s)
+Por cada {4} de Protección, +{5}% al escalado de Poder de habilidad del aumento de daño básico
+Otorga Bendición a los aliados en la zona, excepto al portador</String>
   <String Key="SeasonalEventName_Season72">Festival de vuelo de dragones</String>
   <String Key="SeasonalEventMode_Season72">Festival de vuelo de dragones</String>
   <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Subtítulo temporal</String>
-  <String Key="TreasureDesc_50002">Descripción temporal - añadir más cuando se defina el concepto del Tesoro - concepto pensado: ¿algún tipo de piedra? ¿Un artefacto? que toma prestado Mana de las plantas y animales cercanos, lo acumula y luego lo libera</String>
+  <String Key="TreasureSubName_50002">Subnombre temporal</String>
+  <String Key="TreasureDesc_50002">Descripción temporal - añadir más cuando esté listo el concepto del Tesoro - Concepto pensado: ¿una piedra? ¿un artefacto? que toma prestado Mana de plantas y animales cercanos, lo almacena y luego lo libera</String>
   <String Key="TreasureSkillName_50002">Combinación de Mana</String>
   <String Key="BuffDataName_3500021">Asimilación I</String>
   <String Key="BuffDataName_3500022">Barrera de Mana I</String>
   <String Key="BuffDataName_3500023">Resonancia de Mana</String>
   <String Key="BuffDataName_3500024">Barrera de Mana II</String>
   <String Key="BuffDataName_3500025">Asimilación II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">Tienda especial destacada de Cor Orbis</String>
-  <String Key="SpecialPackage_1690">Paquete de Cor Orbis 1</String>
-  <String Key="SpecialPackage_1691">Paquete de Cor Orbis 2</String>
-  <String Key="SpecialPackage_1692">Paquete de Cor Orbis 3</String>
-  <String Key="BuffDataDesc_3500021">Por cada {1}% de Daño crítico de hechizo por encima de {0}%, bonificación de Daño Final de la habilidad mejorada x{2}</String>
-  <String Key="BuffDataDesc_3500022">Daño Recibido {0}% hasta el 3er uso de habilidad</String>
-  <String Key="BuffDataDesc_3500023">Al usar una habilidad mejorada, usa la misma habilidad {1} veces extra sobre un objetivo aleatorio con {0}% de Daño</String>
-  <String Key="BuffDataDesc_3500024">Daño Recibido {0}% hasta el 3er uso de habilidad</String>
-  <String Key="BuffDataDesc_3500025">Por cada {1}% de Daño crítico de hechizo por encima de {0}%, bonificación de Daño Final de la habilidad mejorada x{2}</String>
-  <String Key="TreasureSkillDesc_3500020">Al inicio de la batalla, solo el Héroe equipado con Cor Orbis de mayor ★ obtiene +{0}% de Mana máx. y -{1}% de Daño Final Causado hasta el 3er uso de habilidad
-La última habilidad se mejora y su Daño Final aumenta +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">Al inicio de la batalla, solo el Héroe equipado con Cor Orbis de mayor ★ obtiene +{0}% de Mana máx. y -{1}% de Daño Final Causado hasta el 3er uso de habilidad
-La última habilidad se mejora y su Daño Final aumenta +{2}%
-Por cada {4}% de Daño crítico de hechizo por encima de {3}%, bonificación de Daño Final de la habilidad mejorada x{5}</String>
-  <String Key="TreasureSkillDesc_3500022">Al inicio de la batalla, solo el Héroe equipado con Cor Orbis de mayor ★ obtiene +{0}% de Mana máx. y -{1}% de Daño Final Causado hasta el 3er uso de habilidad
-La última habilidad se mejora y su Daño Final aumenta +{2}%
-Por cada {4}% de Daño crítico de hechizo por encima de {3}%, bonificación de Daño Final de la habilidad mejorada x{5}
-Daño Recibido {6}% hasta el 3er uso de habilidad</String>
-  <String Key="TreasureSkillDesc_3500023">Al inicio de la batalla, solo el Héroe equipado con Cor Orbis de mayor ★ obtiene +{0}% de Mana máx. y -{1}% de Daño Final Causado hasta el 3er uso de habilidad
-La última habilidad se mejora y su Daño Final aumenta +{2}%
-Por cada {4}% de Daño crítico de hechizo por encima de {3}%, bonificación de Daño Final de la habilidad mejorada x{5}
-Daño Recibido {6}% hasta el 3er uso de habilidad
-Al usar una habilidad mejorada, usa la misma habilidad {8} veces extra sobre un objetivo aleatorio con {7}% de Daño</String>
+  <String Key="SpecialShop_TreasurePickUp50002">Tienda especial de pickup de Cor Orbis</String>
+  <String Key="SpecialPackage_1690">Paquete Cor Orbis 1</String>
+  <String Key="SpecialPackage_1691">Paquete Cor Orbis 2</String>
+  <String Key="SpecialPackage_1692">Paquete Cor Orbis 3</String>
+  <String Key="BuffDataDesc_3500021">Por cada {1}% de Daño crítico de hechizo por encima de {0}%, el aumento de Daño final de la habilidad mejorada se multiplica por {2}</String>
+  <String Key="BuffDataDesc_3500022">Daño recibido {0}% hasta usar la 3.ª habilidad</String>
+  <String Key="BuffDataDesc_3500023">Al usar una habilidad mejorada, lanza además la misma habilidad sobre 2 objetivos aleatorios con un {0}% de daño</String>
+  <String Key="BuffDataDesc_3500024">Daño recibido {0}% hasta usar la 3.ª habilidad</String>
+  <String Key="BuffDataDesc_3500025">Por cada {1}% de Daño crítico de hechizo por encima de {0}%, el aumento de Daño final de la habilidad mejorada se multiplica por {2}</String>
+  <String Key="TreasureSkillDesc_3500020">Tras iniciar la batalla, el Héroe con más ★ que tenga equipado Cor Orbis obtiene +{0}% de Mana máx. y -{1}% de daño final causado hasta usar una habilidad 3 veces.
+La última habilidad se mejora y su Daño final aumenta en +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">Tras iniciar la batalla, el Héroe con más ★ que tenga equipado Cor Orbis obtiene +{0}% de Mana máx. y -{1}% de daño final causado hasta usar una habilidad 3 veces.
+La última habilidad se mejora y su Daño final aumenta en +{2}%.
+Por cada {4}% de Daño crítico de hechizo por encima de {3}%, el aumento de Daño final de la habilidad mejorada se multiplica por {5}</String>
+  <String Key="TreasureSkillDesc_3500022">Tras iniciar la batalla, el Héroe con más ★ que tenga equipado Cor Orbis obtiene +{0}% de Mana máx. y -{1}% de daño final causado hasta usar una habilidad 3 veces.
+La última habilidad se mejora y su Daño final aumenta en +{2}%.
+Por cada {4}% de Daño crítico de hechizo por encima de {3}%, el aumento de Daño final de la habilidad mejorada se multiplica por {5}
+Daño recibido {6}% hasta usar una habilidad 3 veces</String>
+  <String Key="TreasureSkillDesc_3500023">Tras iniciar la batalla, el Héroe con más ★ que tenga equipado Cor Orbis obtiene +{0}% de Mana máx. y -{1}% de daño final causado hasta usar una habilidad 3 veces.
+La última habilidad se mejora y su Daño final aumenta en +{2}%.
+Por cada {4}% de Daño crítico de hechizo por encima de {3}%, el aumento de Daño final de la habilidad mejorada se multiplica por {5}
+Daño recibido {6}% hasta usar una habilidad 3 veces
+Al usar una habilidad mejorada, lanza además la misma habilidad sobre 2 objetivos aleatorios con un {7}% de daño</String>
+  <String Key="AdsSummonRestrictionAlert">Hasta {0} veces por ronda.</String>
 </Strings>

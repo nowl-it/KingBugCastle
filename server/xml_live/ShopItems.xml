@@ -12206,7 +12206,7 @@
 
     <ShopItem ID='1676'>
         <Name>SpecialPackage_1676</Name>
-        <Holiday>TreasureDoublePickUp10014</Holiday>
+        <Holiday>TreasureDoublePickUp10013</Holiday>
         <NameComment>보구 픽업 소환석 패키지 1</NameComment>
         <Type>EventPackage</Type>
 
@@ -12231,7 +12231,7 @@
 
     <ShopItem ID='1677'>
         <Name>SpecialPackage_1677</Name>
-        <Holiday>TreasureDoublePickUp10014</Holiday>
+        <Holiday>TreasureDoublePickUp10013</Holiday>
         <NameComment>보구 픽업 소환석 패키지 2</NameComment>
         <Type>EventPackage</Type>
 
@@ -12256,7 +12256,7 @@
 
     <ShopItem ID='1678'>
         <Name>SpecialPackage_1678</Name>
-        <Holiday>TreasureDoublePickUp10014</Holiday>
+        <Holiday>TreasureDoublePickUp10013</Holiday>
         <NameComment>카엘루스 픽업 소환석 패키지</NameComment>
         <Type>EventPackage</Type>
 
@@ -12282,7 +12282,7 @@
 
     <ShopItem ID='1679'>
         <Name>SpecialPackage_1679</Name>
-        <Holiday>TreasureDoublePickUp10014</Holiday>
+        <Holiday>TreasureDoublePickUp10013</Holiday>
         <NameComment>트릭스터 픽업 소환석 패키지</NameComment>
         <Type>EventPackage</Type>
 

@@ -1,4 +1,6 @@
 <Strings>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
   <String Key="Tags">Awesomepiece, ZombieHighschool, TFT, Auto-Battler, Auto-Chess, LoL-Chess, King God Castle, Auto-Battle, Taktikspiel, TeamfightTactics, TFT, Ends, HelpmeEnds, Kombination, Verteidigung</String>
   <String Key="Store_ShortDesc">Nutzt die Helden und die Macht der Götter, um das Schloss gegen die verschiedenen Feinde zu verteidigen! King God Castle!</String>
@@ -33,10 +35,10 @@
   <String Key="Dismiss">Beschwörung abbrechen</String>
   <String Key="IngameLoading">Lädt ...</String>
   <String Key="TimeLeft">Verbleibende Zeit</String>
-  <String Key="Hour"> Std.</String>
-  <String Key="Minute"> Min.</String>
-  <String Key="Second"> Sek.</String>
-  <String Key="Day"> T.</String>
+  <String Key="Hour">Std.</String>
+  <String Key="Minute">Min.</String>
+  <String Key="Second">Sek.</String>
+  <String Key="Day">T.</String>
   <String Key="FreeGet">Gratis erhalten</String>
   <String Key="Community">Discord</String>
   <String Key="Text_KingGod">King God Castle</String>
@@ -141,9 +143,9 @@ Ihr werdet zum Login weitergeleitet.</String>
 
 (Kosten: {0} Juwelen)</String>
   <String Key="King_1">König</String>
-  <String Key="King_2"> </String>
+  <String Key="King_2"></String>
   <String Key="Castle_1">Schloss</String>
-  <String Key="Castle_2"> </String>
+  <String Key="Castle_2"></String>
   <String Key="LoadingPopupText">Verbindung zum Server wird aufgebaut ...</String>
   <String Key="LoginByGoogle">Mit Google Play einloggen.</String>
   <String Key="LoginByApple">Mit Apple einloggen.</String>
@@ -261,11 +263,11 @@ Ihr werdet zum Login weitergeleitet.</String>
   <String Key="Post_Push_Contents18">Heute Abend werdet Ihr 1.000 Gold erhalten!</String>
   <String Key="Post_Push_Contents19">Das Gold ist in Eurem Postfach angekommen.</String>
   <String Key="Post_Push_Contents20">Die Vorräte stehen für Euch bereit!</String>
-  <String Key="Post_Push_Contents21">Ende der King God Castle Saison 72: Heute</String>
-  <String Key="Post_Push_Contents22">Ende der King God Castle Saison 72: 1 T. verbl.</String>
-  <String Key="Post_Push_Contents23">Ende der King God Castle Saison 72: 2 T. verbl.</String>
-  <String Key="Post_Push_Contents24">Ende der King God Castle Saison 72: 4 T. verbl.</String>
-  <String Key="Post_Push_Contents25">King God Castle Saison 72 endet heute!</String>
+  <String Key="Post_Push_Contents21">Ende der King God Castle Saison {0}: Heute</String>
+  <String Key="Post_Push_Contents22">Ende der King God Castle Saison {0}: 1 T. verbl.</String>
+  <String Key="Post_Push_Contents23">Ende der King God Castle Saison {0}: 2 T. verbl.</String>
+  <String Key="Post_Push_Contents24">Ende der King God Castle Saison {0}: 4 T. verbl.</String>
+  <String Key="Post_Push_Contents25">King God Castle Saison {0} endet heute!</String>
   <String Key="Post_Push_Contents26">Schaut nach, ob Ihr alle Pass Belohnungen erhalten habt!</String>
   <String Key="Post_Push_Contents27">Sammelt alle Pass Belohnungen ein!</String>
   <String Key="Post_Push_Contents28">Das Schlachtfeld and der Pass enden in 4 Tagen.</String>
@@ -1241,11 +1243,8 @@ Möchtet Ihr sie Euch ansehen?</String>
   <String Key="ItemName_10020">Truppenerweiterung</String>
   <String Key="ItemDesc_10020">Erweitert die Truppen um 1.</String>
   <String Key="ItemName_10030">+5 Silber</String>
-  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">+10 Silber</String>
-  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">+20 Silber</String>
-  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">Ehrenmedaille</String>
   <String Key="ItemDesc_10040">Befördert einen zufälligen Helden auf dem Schlachtfeld um 1.</String>
   <String Key="ItemName_10050">Premium Helden Beschwörungsrolle
@@ -3338,7 +3337,7 @@ Schau nach vorn! Ich werde an deiner Seite sein!&lt;/i&gt;</String>
   <String Key="EventTriggerName_51010">Langsame Hand</String>
   <String Key="Name_Potential_10360_3">Eismeer</String>
   <String Key="Potential_10360_3">Die ersten zwei konzentrierten Wellen von &lt;Wellenfänger&gt; frieren die Gegner für 2 Sek. ein
-(Das Einfrieren durch Wellenfänger tritt max. 2-mal von Verbündeten auf) </String>
+(Das Einfrieren durch Wellenfänger tritt max. 2-mal von Verbündeten auf)</String>
   <String Key="Name_Potential_10370_3">Göttliche Expansion</String>
   <String Key="Potential_10370_3">Bei der Verwendung von &lt;Heiliger Schutz&gt; wird die Anzahl erhaltener Zauber-VERT von Gidnyl halbiert
 Die verbliebene Zauber-VERT wird auf alle Verbündeten in 7x7 Feldern Reichweite übertragen</String>
@@ -3560,11 +3559,10 @@ Verwendbar bei der Erweckung der Helden und beim Aufleveln ab Level 16.</String>
 Umwandelbar in Abzeichen eines beliebigen Heldens.</String>
   <String Key="InventoryItemName_150">Wachstumsfragment</String>
   <String Key="InventoryItemDesc_150">Ein Fragment, das eine mächtige Kraft enthält.
-Kann Goldkosten zum Levelaufstieg für Helden bis Level 9 ersetzen.
- </String>
+Kann Goldkosten zum Levelaufstieg für Helden bis Level 9 ersetzen.</String>
   <String Key="InventoryItemName_151">EP-Würfel</String>
   <String Key="InventoryItemDesc_151">Ein Würfel der Lebensweisheit enthält
-EP sind zum Levelaufstieg für Helden bis Level 9 erhältlich. </String>
+EP sind zum Levelaufstieg für Helden bis Level 9 erhältlich.</String>
   <String Key="InventoryItemName_152">Macht-Würfel</String>
   <String Key="InventoryItemDesc_152">Ein Würfel, der beim Kombinieren von Wachstumsfragmenten mit EP-Würfeln entsteht
 Erhöht das Level des Helden bis Level 9 um 1.</String>
@@ -3585,8 +3583,8 @@ Erweckt Helden ab Level 16.</String>
   <String Key="UseItem">Benutzen</String>
   <String Key="CantUpgradePotentialTier">Ihr könnt den Helden nicht erwecken.</String>
   <String Key="NeedToUpgradePotentialTier">Ihr müsst den Helden erwecken.</String>
-  <String Key="AlreadyMaxSoul">Das Heldenabzeichen hat Max. erreicht. </String>
-  <String Key="UnitPotentialPackageDesc">Ihr könnt den Helden sofort erwecken. </String>
+  <String Key="AlreadyMaxSoul">Das Heldenabzeichen hat Max. erreicht.</String>
+  <String Key="UnitPotentialPackageDesc">Ihr könnt den Helden sofort erwecken.</String>
   <String Key="NextPotentialDesc_1">Zusätzliches Potenzial ab Level {0} erhältlich</String>
   <String Key="NextPotentialDesc_2">Erweckung von Helden ab Level {0} verfügbar</String>
   <String Key="CardInfo_UpgradeItem">Wachstumsartikel</String>
@@ -3746,7 +3744,7 @@ Wählt Ihr kein Relikt aus, könnt Ihr später keine anderen Götter treffen.</S
 -{1} % Effekt beim Tod eines Verbündeten</String>
   <String Key="ItemFullDesc_40033">-{0} % erlittener Schaden
 -{1}% Effekt bei Tod jedes Verbündeten
-(0 %, beim Tod von {2} Verbündeten) </String>
+(0 %, beim Tod von {2} Verbündeten)</String>
   <String Key="ItemName_40043">Todesschwadron</String>
   <String Key="ItemDesc_40043">+{0} % Skill-Schaden bei jedem Tod eines Verbündeten
 (max. {1}x)</String>
@@ -4412,8 +4410,7 @@ Die Zeit fließt dort anders und man stößt immer wieder auf vergessene Technik
 
 Bei dem Weg durch den labyrinthartigen Großen Riss muss der Held seine Gefährten retten, Ausrüstungen finden und die Macht der Götter von Relikten erlangen.
 
-Und wer weiß? Am Ende all dessen findet er vielleicht einen Weg, den Großen Riss für immer zu schließen.
-</String>
+Und wer weiß? Am Ende all dessen findet er vielleicht einen Weg, den Großen Riss für immer zu schließen.</String>
   <String Key="RogueLikeReviveBonus">(Kehre zurück zum ersten Raum der derzeitigen Ebene mit deinem aktuellen Fortschritt.)</String>
   <String Key="CannotUseItemInThisPhase">Die Gegenstände können nach dem Kampf verwendet werden.</String>
   <String Key="CannotUseItemInThisPhase2">Die Gegenstände können nicht während der Kampfvorbereitung verwendet werden.</String>
@@ -4530,7 +4527,7 @@ Möchtet Ihr den Titel des Allianzanführers annehmen?
   <String Key="UnitName_10420">Taebaek</String>
   <String Key="UnitSubName_10420">Herausforderer vom Weißen Tigerclan</String>
   <String Key="Potential_10420_0">Limitiert die Reichweite provozierter Gegner für 4 Sek. auf 5x5 Felder</String>
-  <String Key="SkinDesc_Default_10420">Taebaek ist der zweite Sohn des Weißen Tigerclans und somit der zweitälteste Bruder von Taesan. Er reist von Kontinent zu Kontinent auf der Suche nach Dojos mit renommierten Kämpfern, um zu beweisen, dass seine Kampfkünste die Besten sind. </String>
+  <String Key="SkinDesc_Default_10420">Taebaek ist der zweite Sohn des Weißen Tigerclans und somit der zweitälteste Bruder von Taesan. Er reist von Kontinent zu Kontinent auf der Suche nach Dojos mit renommierten Kämpfern, um zu beweisen, dass seine Kampfkünste die Besten sind.</String>
   <String Key="SkillName_10420">Weißer Tigerkick</String>
   <String Key="SkillDesc_10420">Provoziert für &lt;color=#ffcc00&gt;4&lt;/color&gt; Sek. {MaxTargetCount} Gegner, die am nächsten sind, und verursacht beim Angriff insgesamt {10426@Damage:MAtkPer} Schaden in {10425@SplashRangeX}{X}{10425@SplashRangeY} Feldern Reichweite. Nach &lt;color=#ffcc00&gt;4&lt;/color&gt; Sek. verursacht er Schaden in Höhe von ({10426@Damage:MAtkPer}+erlittener Schaden {10426@DamagePerByDamagedSumDuringChanneling}%) innerhalb derselben Reichweite.</String>
   <String Key="MissionDesc_10342">Beschwört Taebaek in der Schlacht</String>
@@ -4539,7 +4536,7 @@ Möchtet Ihr den Titel des Allianzanführers annehmen?
 Verursacht Schaden am Gegner entsprechend Taebeaks Skill-Schaden und verringert für 3 Sek. die ANG-GESCHW und BEW-GESCHW von getroffenen Gegnern um 20%.</String>
   <String Key="SkinName_1042000">Yin &amp; Yang Taebaek</String>
   <String Key="SkinDesc_1042000">Taebaek ist sehr aggressiv und liebt es zu kämpfen, aber seine Expertise ist die Kunst des Gegenangriffs. Obwohl er sorglos erscheinen mag, hat er jahrelang seinen Körper trainiert, um den Angriffen seiner Feinde standzuhalten, bis er seinen „finalen Gegenschlag“ ausführen kann.</String>
-  <String Key="HotTimeTitle">Event nur für kurze Zeit </String>
+  <String Key="HotTimeTitle">Event nur für kurze Zeit</String>
   <String Key="HotTimeDesc">+{0} Gold und Schloss-EP</String>
   <String Key="HotTimeTitleShort">Nur für kurze Zeit!</String>
   <String Key="Post_Push_Contents104">Grüße zum Mond-Neujahr Event Belohnung</String>
@@ -4987,6 +4984,7 @@ Seht! Kraft überwältigend!&lt;/i&gt;</String>
   <String Key="Hero_Awaken_Noti">{0} hat Level 16 erreicht und kann erweckt werden.
 Beim Erwecken wird die &lt;color=#FFD247&gt;Erweckungsfähigkeit&lt;/color&gt; des Helden verwendbar.</String>
   <String Key="ItemDescSub_40463_07">{0}x Absolute VERT</String>
+  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">Der &lt;color=#FFD247&gt;ausgewählte Held&lt;/color&gt; erscheint bei einer Heldenbegegnung &lt;color=#FFD247&gt;garantiert!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Helden auswählen</String>
   <String Key="SelectPickupUnitAgain">Neukonfiguration</String>
@@ -5317,8 +5315,7 @@ Möchtet Ihr fortfahren?</String>
 Möchtet Ihr die Liste aktualisieren?</String>
   <String Key="CantRerollHuntingCusNoHuntingsAreAvailable">Keine Aufträge zum Aktualisieren vorhanden.</String>
   <String Key="TerritoryHuntingOnGoing">Ermittlung läuft ...</String>
-  <String Key="HuntingOutDated">Der Auftrag ist abgelaufen. Besteht der Fehler weiterhin, stellt bitte die Verbindung wieder her, bevor Ihr es erneut versucht.
-</String>
+  <String Key="HuntingOutDated">Der Auftrag ist abgelaufen. Besteht der Fehler weiterhin, stellt bitte die Verbindung wieder her, bevor Ihr es erneut versucht.</String>
   <String Key="NotEnoughHuntingTicket">Nicht genug Ermittlungstruppe-Flaggen!</String>
   <String Key="HuntingFoodBoosterLevelPostfix_0">Ermittlung: {0}</String>
   <String Key="HuntingFoodBoosterLevelPostfix_1">Infiltration: {0}</String>
@@ -5426,15 +5423,12 @@ und den Helden mit mind. Level der eingesetzten Helden bestimmt.</String>
   <String Key="UnitAssignment_AssignedUnit">Platzierung läuft ...</String>
   <String Key="UnitAssignment_LevelSyncUnit">Platzierung im
 Heiligtum läuft ...</String>
-  <String Key="LevelSync_SupportHero">Wählt einen Helden zum Platzieren aus.
-</String>
+  <String Key="LevelSync_SupportHero">Wählt einen Helden zum Platzieren aus.</String>
   <String Key="LevelSync_SupportHeroSelect">Helden zum Platzieren auswählen</String>
-  <String Key="LevelSync_SyncHeroSelect">Erb-Helden wählen
-</String>
+  <String Key="LevelSync_SyncHeroSelect">Erb-Helden wählen</String>
   <String Key="TerritoryEmptyBuildingList">Kein Gebäude zum Bau vorhanden.</String>
   <String Key="TerritoryBuildingListButton">Gebäude verwalten</String>
-  <String Key="TerritoryAssignToolTip">Der Platzierungseffekt des Helden mit höchstem Level steigt.
-</String>
+  <String Key="TerritoryAssignToolTip">Der Platzierungseffekt des Helden mit höchstem Level steigt.</String>
   <String Key="TerritoryClassBonusToolTip">Beim Platzieren eines Helden dieser Klasse wird ein Klassenbonus hinzugefügt.</String>
   <String Key="TerritoryShortcut_LevelSync">Level erben</String>
   <String Key="TerritoryShortcut_Hunting">Ermittlungsauftrag</String>
@@ -5443,7 +5437,7 @@ Heiligtum läuft ...</String>
   <String Key="TerritoryBuildingInfo_Desc">Gebäudeinfo</String>
   <String Key="TerritoryBuildingInfo_Assign">Einsatzeffekt</String>
   <String Key="TerritoryBuildingInfo_ConstructionResources">Verbrauchsvorräte</String>
-  <String Key="TerritoryBuildingInfo_ConstructionTime">Benötigte Zeit </String>
+  <String Key="TerritoryBuildingInfo_ConstructionTime">Benötigte Zeit</String>
   <String Key="TerritoryAssignSlotLevel">&lt;color=#ff0030&gt;Lv.{0}&lt;/color&gt;</String>
   <String Key="TerritoryPass_ActiveTime">Beim Kauf wird der Gebietssegen für&lt;color=#ffd264&gt;{0}&lt;/color&gt; Tage angewendet</String>
   <String Key="TerritoryPass_ActiveTimeAgain">Beim Kauf wird der Gebietssegen für&lt;color=#ffd264&gt;{0}&lt;/color&gt; Tage zusätzlich angewendet</String>
@@ -5773,8 +5767,6 @@ Nach dem Verlassen könnt Ihr in dieser Saison nicht am Raid als Allianzmitglied
   <String Key="ClanBattleModifier_13">Leidend</String>
   <String Key="ClanBattleModifier_14">Überwältigend</String>
   <String Key="UserLockedClanBattleAlert">Dieser Nutzer kann in der jetzigen Saison nicht am Raid teilnehmen.</String>
-  <String Key="UpdateNoticeVersion">171100</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Möchtet Ihr wirklich die Allianz auflösen?</String>
   <String Key="Clan_Menu_LeaveConfirm">Möchtet Ihr wirklich die Allianz verlassen?</String>
   <String Key="RogueLike_ReleaseAtLevel">Wird ab Lv. {0} freigeschaltet</String>
@@ -6368,7 +6360,7 @@ Es folgt keine Strafe für das Verlassen des Spiels.</String>
   <String Key="Name_Potential_10530_2">Schattenschwert</String>
   <String Key="Potential_10530_2">Einmal pro Schlacht jeweils bei Schaden, der die TP unter 100% bzw. 50% der Max. TP senken würde, wird dieser Schaden ignoriert und 2 Sek. lang verborgen</String>
   <String Key="SkinName_1053000">Kommandant der Wache Aenras</String>
-  <String Key="SkinDesc_1053000">Aenras war für viele Jahrhunderte, lange bevor Tia den Posten übernahm, Kommandant der Wache und Beschützer des Ewigwaldes. Viele nannten ihn den Apostel der Stille. Jeder, der auch nur Fuß in den Wald setzte, verschwand spurlos und die Elfen und der Ewigwald blieben in den Schatten verborgen. </String>
+  <String Key="SkinDesc_1053000">Aenras war für viele Jahrhunderte, lange bevor Tia den Posten übernahm, Kommandant der Wache und Beschützer des Ewigwaldes. Viele nannten ihn den Apostel der Stille. Jeder, der auch nur Fuß in den Wald setzte, verschwand spurlos und die Elfen und der Ewigwald blieben in den Schatten verborgen.</String>
   <String Key="Colosseum_Left_Popup_Rank1">Ihr habt das Schlachtfeld des erbitterten Kampfs während einer laufenden Runde verlassen. Während der Schlacht habt Ihr den 1. Platz erreicht.</String>
   <String Key="Colosseum_Left_Popup_Rank2">Ihr habt das Schlachtfeld des erbitterten Kampfs während einer laufenden Runde verlassen. Während der Schlacht habt Ihr den 2. Platz erreicht.</String>
   <String Key="Colosseum_Left_Popup_Rank3">Ihr habt das Schlachtfeld des erbitterten Kampfs während einer laufenden Runde verlassen. Während der Schlacht habt Ihr den 3. Platz erreicht.</String>
@@ -6421,7 +6413,7 @@ Bis das ewige Licht auf mich scheint.&lt;/i&gt;</String>
   <String Key="ColosseumCustomMatchHostExited">Dieser Raum ist zur Zeit geschlossen.</String>
   <String Key="ColosseumCustomMatchNeedPlayer">Die Schlacht kann noch nicht beginnen.</String>
   <String Key="ColosseumCustomMatchHostExitConfirm">Wenn Ihr Euch zurückzieht, wird diese Gruppe aufgelöst.
-Wollt Ihr Euch wirklich zurückziehen? </String>
+Wollt Ihr Euch wirklich zurückziehen?</String>
   <String Key="ColosseumCustomMatchExitConfirm">Wollt Ihr Euch wirklich zurückziehen?</String>
   <String Key="ColosseumCustomMatchDesc">Freundschaftskämpfe haben keinen Einfluss auf Rang, Punkte oder Missionen
 und es sind keine Belohnungen erhältlich.</String>
@@ -6605,7 +6597,7 @@ Poliergradermittler &lt;color=#FFD247&gt;10&lt;/color&gt; aufladen</String>
 Poliergradermittler &lt;color=#FFD247&gt;50&lt;/color&gt; aufladen</String>
   <String Key="ArtifactOption_903">Kann als Gottkönig Relikt-Polierer Material verwendet werden
 Poliergradermittler &lt;color=#FFD247&gt;100&lt;/color&gt; aufladen</String>
-  <String Key="ArtifactDesc_901">Ein Polierer, der eine mysteriöse Energie ausstrahlt. Er ist ein seltenes Material und kann ein Relikt auf die höchste Stufe verstärken. </String>
+  <String Key="ArtifactDesc_901">Ein Polierer, der eine mysteriöse Energie ausstrahlt. Er ist ein seltenes Material und kann ein Relikt auf die höchste Stufe verstärken.</String>
   <String Key="Polish_Gauge_Info">Die Energie des Wiederschmiedens wird mit dem Relikt jedes Mal aufgeladen.
 Ist die Ladung bei mind. 100 %, wird die Energie des Wiederschmiedens verbraucht und Ihr erhaltet einen &lt;color=#FFD247&gt;Magischen Polierer&lt;/color&gt;.
 Wenn Ihr einen Wiederschmiedestein und einen Katalysator verwendet, könnt Ihr zusätzliche Energie des Wiederschmiedens erhalten.
@@ -6618,7 +6610,7 @@ Wenn Ihr einen Wiederschmiedestein und einen Katalysator verwendet, könnt Ihr z
   <String Key="ChangeArtifactOptionAlert">Möchtet Ihr den Slot zum Polieren ändern?
 Beim Ändern des Slots wird der zugewiesene Polierer zurückgesetzt und der ausgewählte Slot wiederhergestellt.</String>
   <String Key="DailyGoldPackage_GoldBonusInfo">- Täglicher Goldnachschub-Effekt -
-+{0} % &lt;color=#FFD247&gt;Überfall Gold Belohnung&lt;/color&gt; </String>
++{0} % &lt;color=#FFD247&gt;Überfall Gold Belohnung&lt;/color&gt;</String>
   <String Key="DailyGoldPackage_ClearGoldReward_GameEnd">+{0} % Täglicher Goldnachschub-Effekt</String>
   <String Key="DailyGoldPackage_BonusReward">Überfall Gold
  Bonus &lt;color=#FFD247&gt;+{0} %&lt;/color&gt;</String>
@@ -6921,10 +6913,11 @@ Bitte kontaktiere den Kundenservice für weitere Informationen.</String>
 Bitte kontaktiere den Kundenservice für weitere Informationen.</String>
   <String Key="Clan_SystemChat_NameChanged">Der Allianzname wurde geändert.</String>
   <String Key="Clan_Alert_NameBanned">Der Name der Allianz ist unangemessen und wurde gesperrt. Bitte ändere den Namen unter Einstellungen.</String>
-  <String Key="Clan_ChangeName">Allianzname ändern </String>
-  <String Key="Clan_Menu_ChangeName">Ändern </String>
+  <String Key="Clan_ChangeName">Allianzname ändern</String>
+  <String Key="Clan_Menu_ChangeName">Ändern</String>
   <String Key="ColosseumSeasonRankingReward">Saison Belohnung</String>
   <String Key="ColosseumRanking">Rangliste</String>
+  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Relikt Dropchance Info ansehen</String>
   <String Key="ArtifactOptionProbDetailDesc">Du wirst zur Relikt Dropchance Notiz auf der Webseite weitergeleitet.</String>
   <String Key="ColosseumNetworkChanged">Verbindung wird aufgrund der Netzwerkänderung wiederhergestellt.</String>
@@ -7359,9 +7352,7 @@ Wir entschuldigen uns für die Unannehmlichkeiten.</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;★ Transzendenz
 
 &lt;/size&gt; Durch die &lt;color=#ffbc00&gt;★ Transzendenz&lt;/color&gt; können Schmuckstück-Fähigkeiten &lt;color=#ffbc00&gt;zusätzlich Effekte erhalten&lt;/color&gt;.
-Für eine ★ Transzendenz wird das &lt;color=#ffbc00&gt;gleiche Schmuckstück&lt;/color&gt; benötigt.
-
-</String>
+Für eine ★ Transzendenz wird das &lt;color=#ffbc00&gt;gleiche Schmuckstück&lt;/color&gt; benötigt.</String>
   <String Key="SkinName_1032006">Blaue Wellen Tia</String>
   <String Key="SkinName_1036004">Blaue Wellen Haerang</String>
   <String Key="SkinName_1042003">Blaue Wellen Taebaek</String>
@@ -7435,8 +7426,7 @@ Und jetzt tanze nach meinem Willen.&lt;/i&gt;</String>
 + {1} % verursachter Schaden während Unbesiegbar</String>
   <String Key="TreasureSkillDesc_3300033">Der Held mit den meisten ★, der Mur ausgerüstet hat, wird, wenn die TP erstmals unter {0} % fallen, und bei erlittenem tödlichen Schaden jeweils einmalig für {1} Sek. unbesiegbar
 (Kann währenddessen keine Heilung und keinen Schild erhalten)
-+ {2} % verursachter Schaden während Unbesiegbar
-</String>
++ {2} % verursachter Schaden während Unbesiegbar</String>
   <String Key="TreasureSkillDesc_3300034">Der Held mit den meisten ★, der Mur ausgerüstet hat, wird, wenn die TP erstmals unter {0} % fallen, und bei erlittenem tödlichen Schaden jeweils einmalig für {1} Sek. unbesiegbar
 (Kann währenddessen keine Heilung und keinen Schild erhalten)
 + {2} % verursachter Schaden während Unbesiegbar
@@ -7666,15 +7656,11 @@ Schmuckstück &lt;color=#ffbc00&gt;Verbesserungsmaterialien&lt;/color&gt; könne
  &lt;size=25&gt;★ Transzendenz
 
 &lt;/size&gt; Durch die &lt;color=#ffbc00&gt;★ Transzendenz&lt;/color&gt; können Schmuckstück-Fähigkeiten &lt;color=#ffbc00&gt;zusätzlich Effekte erhalten&lt;/color&gt;.
-Für eine ★ Transzendenz wird das &lt;color=#ffbc00&gt;gleiche Schmuckstück&lt;/color&gt; benötigt.
-
-</String>
+Für eine ★ Transzendenz wird das &lt;color=#ffbc00&gt;gleiche Schmuckstück&lt;/color&gt; benötigt.</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Schmuckstück verbessern
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;Verbessert&lt;/color&gt; Eure Schmuckstücke und erhöht die &lt;color=#ffbc00&gt;Schmuckstück-Fähigkeit Effekte&lt;/color&gt;.
-Schmuckstück &lt;color=#ffbc00&gt;Verbesserungsmaterialien&lt;/color&gt; können erhalten werden, indem Ihr Schmuckstücke im Inventar &lt;color=#ffbc00&gt;einschmelzt&lt;/color&gt; oder sie im &lt;color=#ffbc00&gt;Shop kauft&lt;/color&gt;.
-
-</String>
+Schmuckstück &lt;color=#ffbc00&gt;Verbesserungsmaterialien&lt;/color&gt; können erhalten werden, indem Ihr Schmuckstücke im Inventar &lt;color=#ffbc00&gt;einschmelzt&lt;/color&gt; oder sie im &lt;color=#ffbc00&gt;Shop kauft&lt;/color&gt;.</String>
   <String Key="TreasureOvercome">★ Transzendenz</String>
   <String Key="TreasureOvercome_Short">★ Transzendenz</String>
   <String Key="ViewNextOvercome">Nächste Transzendenz ansehen</String>
@@ -9487,7 +9473,7 @@ Die Punktzahl sinkt nicht unter 2.000.</String>
   <String Key="UnitSubName_10670">Bannerträger des Schlachtfelds</String>
   <String Key="Potential_10670_0">+30 Schutz</String>
   <String Key="Potential_10670_1">Nach dem ersten erlittenen Schaden in der Runde wird der erlittene Schaden für 2 Sek. um 70 % verringert.</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;Die im Kaiserreich gut angesehene Familie Riter hat in verschiedenen Bereichen herausragende Talente hervorgebracht. Patros, verfügt, obwohl er von Riter stammt, über keine angeborenen Fähigkeiten, hat sich jedoch durch außergewöhnlichen Einsatz zu einem vorbildlichen Kommandant der kaiserlichen Armee entwickelt.&lt;/i&gt; </String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;Die im Kaiserreich gut angesehene Familie Riter hat in verschiedenen Bereichen herausragende Talente hervorgebracht. Patros, verfügt, obwohl er von Riter stammt, über keine angeborenen Fähigkeiten, hat sich jedoch durch außergewöhnlichen Einsatz zu einem vorbildlichen Kommandant der kaiserlichen Armee entwickelt.&lt;/i&gt;</String>
   <String Key="SkillName_10670">Für das Kaiserreich!</String>
   <String Key="SkillDesc_10670">Ermutigt Verbündete für {TotalAttackTime} Sek., indem alle {Time} Sek. alle Verbündeten außer sich selbst im Umkreis von {SplashRangeX}{x}{SplashRangeY} Feldern Reichweite um {Heal} geheilt werden und die ANG-GESCHW um {AttackSpeedPerUnit10670} % erhöht wird. Bei mehreren gleichnamigen Fähigkeiten wird der ANG-GESCHW-Bonus mit dem höchsten Effekt angewendet.</String>
   <String Key="SkillDesc_10670_Short">Heilt alle {Time} Sek. Verbündete im Umkreis von {SplashRangeX}{x}{SplashRangeY} Feldern Reichweite um {Heal} und erhöht die ANG-GESCHW für {TotalAttackTime} Sek. um {AttackSpeedPerUnit10670} %. Nur der höchste ANG-GESCHW-Bonus von &lt;Für das Kaiserreich!&gt; wird angewendet.</String>
@@ -9787,8 +9773,7 @@ Sobald die Beschwörung abgeschlossen ist, könnt Ihr Schmuckstücke als Ziel de
   <String Key="BaseHybridDefOnInvade">Erhöht die Überfall Gold Belohnung um {0}
 +{1} Widerstand für alle Helden beim Überfall
 Kann nicht durch Wiederschmieden oder Polieren verbessert werden</String>
-  <String Key="ArtifactOptionDesc_Event_15000">
-Gratis Position verändern beim Polieren (bis 3.12.2024)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">Gratis Position verändern beim Polieren (bis 3.12.2024)</String>
   <String Key="SkinName_1032007">Mondgöttin Tia</String>
   <String Key="SkinName_1032007_NewLine">Mondgöttin Tia</String>
   <String Key="TerritoryBuildingName_40300">Mondgöttinnenstatue</String>
@@ -11381,8 +11366,7 @@ Herausforderung und Erfolge</String>
   <String Key="AddDifficultyUnlockDesc">Wenn Ihr keinen Schaden erleidet, werden die nächsten 2 Schwierigkeitsgrade freigeschaltet.</String>
   <String Key="AccessoryLevelUpTutorialLock">Nach dem Abschluss von Verderbnis II-1 verfügbar.</String>
   <String Key="NotAccessoryLevelUp">Kein Accessoires zum Verbessern vorhanden.</String>
-  <String Key="ArtifactOptionDesc_Event_15020">
-Gratis Position verändern beim Polieren (&lt;color=#ffbd4a&gt;bis {0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">Gratis Position verändern beim Polieren (&lt;color=#ffbd4a&gt;bis {0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Schließt Kapitel {0}-{1} auf dem Schwierigkeitsgrad {Diff} oder höher ab.</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">Schließt [Verderbnis] Kapitel {0}-{1} auf dem Schwierigkeitsgrad {Diff} oder höher ab.</String>
   <String Key="Polish_EventArtifact_Alert">Dieses Relikt kann nicht durch Polieren verbessert werden!</String>
@@ -11734,8 +11718,7 @@ Wenn die Max. TP des Angriffsziels höher sind als meine Max. TP, erfolgt für j
   <String Key="SpecialPackage_1556">Eterna-Paket 1</String>
   <String Key="SpecialPackage_1557">Eterna-Paket 2</String>
   <String Key="SpecialPackage_1558">Eterna-Paket 3</String>
-  <String Key="MakeAllLateComerExceptSlot">Mit Ausnahme des Helden an der {0} Position der Truppe wird jedem Helden der Buff der Verstärkung gewährt
-</String>
+  <String Key="MakeAllLateComerExceptSlot">Mit Ausnahme des Helden an der {0} Position der Truppe wird jedem Helden der Buff der Verstärkung gewährt</String>
   <String Key="Order_1">ersten</String>
   <String Key="Order_2">zweiten</String>
   <String Key="Order_3">dritten</String>
@@ -14413,8 +14396,7 @@ Empfohlen: Schlachtfeld des erbitterten Kampfs</String>
   <String Key="AltarHelpBuilding_5">Dies ist ein Altar, der die Silberversorgung erhöht, um Heldenbeschwörungen und die Nutzung des Shops zu erleichtern.
 
 Empfohlen: Überfall, Arena</String>
-  <String Key="ArtifactBuffDataDesc_15010">In Überfall und Expedition wird zu Beginn der Runde die ANG-GESCHW des Starthelden um +{0} % erhöht (kein Effekt, wenn kein Startheld vorhanden ist)
-</String>
+  <String Key="ArtifactBuffDataDesc_15010">In Überfall und Expedition wird zu Beginn der Runde die ANG-GESCHW des Starthelden um +{0} % erhöht (kein Effekt, wenn kein Startheld vorhanden ist)</String>
   <String Key="Post_Name_AltarGoldRefund">Rückerstattung des für die Verstärkung der Altarflamme verwendeten Goldes</String>
   <String Key="Post_Desc_AltarGoldRefund">Das zum Verstärken der Altarflamme verbrauchte Gold wird erstattet.</String>
   <String Key="OutgameTutorial_140_00">Seid gegrüßt, Majestät. Ich habe Euch lange nicht mehr gesehen. &lt;color=#FFC13D&gt;Ich bin Aslyn, die Kommandantin der Ritter.&lt;/color&gt;
@@ -15466,7 +15448,7 @@ Bei Verwendung der Fähigkeit +{4} % Phys.-Kritische Trefferchance und +{5} % Ph
   <String Key="SeasonInformation">Saisoninfo</String>
   <String Key="SeasonInformationHelp_0">Hier kannst du die Kapitelinfos zum Angriffs-Beschwörungsstein dieser Saison und die angepassten Heldenwerte ansehen.</String>
   <String Key="SeasonInformationHelp_1">Tippe auf ein Kapitel-Symbol, um den Namen des Angriffs-Beschwörungssteins zu sehen.</String>
-  <String Key="SeasonInformationHelp_2">Wenn du in Werte der Helden anpassen auf Alle anzeigen tippst, siehst du den aktuellen Verursachten Schaden und die Erhaltsrate der Absolutabwehr aller Helden.</String>
+  <String Key="SeasonInformationHelp_2">Wenn Sie bei Werte der Helden anpassen auf Alle anzeigen tippen, sehen Sie Ver. Schaden und Chance auf Absolutblock aller Helden.</String>
   <String Key="InvadeSpawnItem">Angriffs-Beschwörungsstein</String>
   <String Key="SkillDesc_60505">Wenn du getroffen wirst und vor Wut kochst, erhältst du +{AttackSpeedPer}% ANG-GESCHW und +{MoveSpeedPer}% Bewegungsgeschwindigkeit und wirst immun gegen Status-Effekte.</String>
   <String Key="SkillDesc_60665">Wenn du getroffen wirst und vor Wut kochst, erhältst du +{AttackSpeedPer}% ANG-GESCHW und +{MoveSpeedPer}% Bewegungsgeschwindigkeit und wirst immun gegen Status-Effekte.</String>
@@ -16472,7 +16454,7 @@ Beim zweiten Hinsehen ist es ein wirklich schönes Lächeln.</String>
   <String Key="NormalMissionSubTap_3">Sonstiges</String>
   <String Key="UnintendedExitScoreProtected_0">Durch das Schutzsystem gegen Punkteverlust bei unbeabsichtigtem Verlassen wurden keine Punkte abgezogen</String>
   <String Key="UnintendedExitScoreProtected_1">Da die Anzahl der Abbrüche die Schutzanzahl überschritten hat, wurden Punkte abgezogen.</String>
-  <String Key="ColosseumRemainLeftIgnoreCount">Verfügbare Schutzanzahl ({0}/3)</String>
+  <String Key="ColosseumRemainLeftIgnoreCount">Verfügbare Schutzanzahl ({0}/5)</String>
   <String Key="UnintendedExitScoreProtectedInfo_0">Das System zum Schutz vor Punkteverlust kann in der ersten und zweiten Hälfte jeweils 3-mal angewendet werden.</String>
   <String Key="UnintendedExitScoreProtectedInfo_1">Das System zum Schutz vor Punkteverlust wird automatisch angewendet, wenn die folgenden Bedingungen erfüllt sind.</String>
   <String Key="UnintendedExitScoreProtectedInfo_2">wenn auf dem Schlachtfeld des erbitterten Kampfs ein Verlassen festgestellt wurde</String>
@@ -17966,12 +17948,12 @@ Nach Schlachtbeginn: Erhält jede Sekunde +{11}% Massenkontroll-Widerstand und +
   <String Key="SkinDesc_107100401">&lt;i&gt;Belohnung für die Platzierung in der Rangliste der Liga der Wärme im Gefecht&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Morgensternkönig Farael</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;Das edelste Sternenlicht, geboren im frühen Morgengrauen, wird zum hellsten Licht, das die Dunkelheit durchdringt.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Chance auf absolute Verteidigung</String>
+  <String Key="SuperShieldModulator">Chance auf Absolutblock</String>
   <String Key="BuildingEffect_BaseDamageReflect">Reflektiert {Value} % Schaden
 (Skill-Schaden halbiert)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">Reflektiert einen Teil des erlittenen Schadens des Helden auf dem Gegner.</String>
-  <String Key="TreasureName_30042">Ferataus</String>
-  <String Key="TreasureSubName_30042">Rabenschwarzer Schild</String>
+  <String Key="TreasureName_30042">Ferrataus</String>
+  <String Key="TreasureSubName_30042">Tiefschwarzer Schild</String>
   <String Key="TreasureDesc_30042">Behemus' Schild ist nicht nur zum Verteidigen da. Sein Heftiger Sturmangriff mit dem schweren Schild verformt selbst die stärkste Panzerung in einem Augenblick.</String>
   <String Key="TreasureSkillName_30042">Sturz</String>
   <String Key="BuffDataName_3300421">Unterdrückung I</String>
@@ -17979,10 +17961,10 @@ Nach Schlachtbeginn: Erhält jede Sekunde +{11}% Massenkontroll-Widerstand und +
   <String Key="BuffDataName_3300423">Zerschmetterung</String>
   <String Key="BuffDataName_3300424">Entkräftung II</String>
   <String Key="BuffDataName_3300425">Unterdrückung II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Ferataus Pickup Spezial Shop</String>
-  <String Key="SpecialPackage_1680">Ferataus Paket 1</String>
-  <String Key="SpecialPackage_1681">Ferataus Paket 2</String>
-  <String Key="SpecialPackage_1682">Ferataus Paket 3</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Ferrataus Pickup Spezial Shop</String>
+  <String Key="SpecialPackage_1680">Ferrataus-Paket 1</String>
+  <String Key="SpecialPackage_1681">Ferrataus-Paket 2</String>
+  <String Key="SpecialPackage_1682">Ferrataus-Paket 3</String>
   <String Key="BuffDataDesc_3300421">Je {0} Einschüchtern: Schadensübertragung +{1}-fach</String>
   <String Key="BuffDataDesc_3300422">Wenn Instabil entfernt wird, wird das Ziel {0} Sek. betäubt</String>
   <String Key="BuffDataDesc_3300423">Erlittener physischer Schaden instabiler Gegner +{0}% (Die Erhöhung erlittener physischer Schäden stapelt sich nicht. Es gilt der höchste Wert.)</String>
@@ -18223,7 +18205,7 @@ Chance auf absolute Verteidigung erhöht</String>
   <String Key="StoryHint_420107000">Verteidigen Sie sich mit Ophelias Kampfbeginn-Skill gegen den Angriff des Gargoyles.</String>
   <String Key="StoryHint_420108000">Vlads Angriffe betäuben Verbündete ständig. Nutzen Sie einen Kampfbeginn-Skill, der gegen Betäubung hilft.</String>
   <String Key="TreasureName_30043">Vitacorde</String>
-  <String Key="TreasureSubName_30043">Buch der Heiligkeit</String>
+  <String Key="TreasureSubName_30043">Buch der Göttlichkeit</String>
   <String Key="TreasureDesc_30043">Stell dich deinem wahren Herzen im Inneren.
 Dann wird die Heiligkeit dir helfen.</String>
   <String Key="TreasureSkillName_30043">Kraft des Lebens</String>
@@ -18233,31 +18215,31 @@ Dann wird die Heiligkeit dir helfen.</String>
   <String Key="BuffDataName_3300434">Kreislauf des Lebens II</String>
   <String Key="BuffDataName_3300435">Heilige Macht II</String>
   <String Key="SpecialShop_TreasurePickUp30043">Vitacorde Pickup Spezial Shop</String>
-  <String Key="SpecialPackage_1683">Vitacorde Paket 1</String>
-  <String Key="SpecialPackage_1684">Vitacorde Paket 2</String>
-  <String Key="SpecialPackage_1685">Vitacorde Paket 3</String>
+  <String Key="SpecialPackage_1683">Vitacorde-Paket 1</String>
+  <String Key="SpecialPackage_1684">Vitacorde-Paket 2</String>
+  <String Key="SpecialPackage_1685">Vitacorde-Paket 3</String>
   <String Key="BuffDataDesc_3300431">Pro Schutz {0} erhöht sich der Skill-Schaden-Faktor des Effekts zur Erhöhung des Grundschadens um +{1}%</String>
   <String Key="BuffDataDesc_3300432">Abklingzeit {0} Sek.</String>
   <String Key="BuffDataDesc_3300433">Gewährt allen Verbündeten im Bereich außer sich selbst Gunst</String>
   <String Key="BuffDataDesc_3300434">Abklingzeit {0} Sek.</String>
   <String Key="BuffDataDesc_3300435">Pro Schutz {0} erhöht sich der Skill-Schaden-Faktor des Effekts zur Erhöhung des Grundschadens um +{1}%</String>
-  <String Key="TreasureSkillDesc_3300430">Zu Schlachtbeginn gilt nur der Effekt des Helden mit der höchsten ★, der Vitacorde ausgerüstet hat
-Fixiert den Skill-Schaden des Trägers auf den Wert zu Schlachtbeginn
-Bei Heilung eines Verbündeten erzeugt der Träger für {0} Sek. ein Feld, das den Grundschaden von Verbündeten im Umkreis von {1} um den Träger um {2}% seines Skill-Schadens erhöht (Abklingzeit {3} Sek.)</String>
-  <String Key="TreasureSkillDesc_3300431">Zu Schlachtbeginn gilt nur der Effekt des Helden mit der höchsten ★, der Vitacorde ausgerüstet hat
-Fixiert den Skill-Schaden des Trägers auf den Wert zu Schlachtbeginn
-Bei Heilung eines Verbündeten erzeugt der Träger für {0} Sek. ein Feld, das den Grundschaden von Verbündeten im Umkreis von {1} um den Träger um {2}% seines Skill-Schadens erhöht (Abklingzeit {3} Sek.)
-Pro Schutz {4} erhöht sich der Skill-Schaden-Faktor des Effekts zur Erhöhung des Grundschadens um +{5}%</String>
-  <String Key="TreasureSkillDesc_3300433">Zu Schlachtbeginn gilt nur der Effekt des Helden mit der höchsten ★, der Vitacorde ausgerüstet hat
-Fixiert den Skill-Schaden des Trägers auf den Wert zu Schlachtbeginn
-Bei Heilung eines Verbündeten erzeugt der Träger für {0} Sek. ein Feld, das den Grundschaden von Verbündeten im Umkreis von {1} um den Träger um {2}% seines Skill-Schadens erhöht (Abklingzeit {3} Sek.)
-Pro Schutz {4} erhöht sich der Skill-Schaden-Faktor des Effekts zur Erhöhung des Grundschadens um +{5}%
-Gewährt Verbündeten im Bereich außer dem Träger Gunst</String>
+  <String Key="TreasureSkillDesc_3300430">Zu Beginn der Schlacht gilt nur der Effekt des Helden mit den meisten ★, der Vitacorde ausgerüstet hat.
+Der Skill-Schaden des Trägers wird auf den Wert zu Beginn der Schlacht fixiert.
+Bei Heilung von Verbündeten wird für {0} Sek. ein Feld erzeugt, das den Standard-Schaden von Verbündeten in Reichweite {1} um den Träger um {2}% des Skill-Schadens des Trägers erhöht (Abklingzeit {3} Sek.)</String>
+  <String Key="TreasureSkillDesc_3300431">Zu Beginn der Schlacht gilt nur der Effekt des Helden mit den meisten ★, der Vitacorde ausgerüstet hat.
+Der Skill-Schaden des Trägers wird auf den Wert zu Beginn der Schlacht fixiert.
+Bei Heilung von Verbündeten wird für {0} Sek. ein Feld erzeugt, das den Standard-Schaden von Verbündeten in Reichweite {1} um den Träger um {2}% des Skill-Schadens des Trägers erhöht (Abklingzeit {3} Sek.)
+Pro {4} Schutz +{5}% Skill-Schaden-Skalierung für die Standard-Schaden-Erhöhung</String>
+  <String Key="TreasureSkillDesc_3300433">Zu Beginn der Schlacht gilt nur der Effekt des Helden mit den meisten ★, der Vitacorde ausgerüstet hat.
+Der Skill-Schaden des Trägers wird auf den Wert zu Beginn der Schlacht fixiert.
+Bei Heilung von Verbündeten wird für {0} Sek. ein Feld erzeugt, das den Standard-Schaden von Verbündeten in Reichweite {1} um den Träger um {2}% des Skill-Schadens des Trägers erhöht (Abklingzeit {3} Sek.)
+Pro {4} Schutz +{5}% Skill-Schaden-Skalierung für die Standard-Schaden-Erhöhung
+Gewährt Verbündeten im Feld außer dem Träger Gunst</String>
   <String Key="SeasonalEventName_Season72">Flug der Drachen-Fest</String>
   <String Key="SeasonalEventMode_Season72">Flug der Drachen-Fest</String>
   <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Vorläufiger Untername</String>
-  <String Key="TreasureDesc_50002">Vorläufige Beschreibung - wird ergänzt, wenn das Schmuckstück-Konzept steht - geplantes Konzept: so etwas wie ein Stein? Ein Artefakt?, das sich MP von Pflanzen und Tieren in der Umgebung leiht, speichert und dann freisetzt</String>
+  <String Key="TreasureSubName_50002">Temporärer Untername</String>
+  <String Key="TreasureDesc_50002">Vorläufige Beschreibung - Konzept für das Schmuckstück später ergänzen - Geplantes Konzept: Ein Stein? Ein Artefakt?, das sich MP von Pflanzen und Tieren in der Umgebung leiht, speichert und dann freisetzt</String>
   <String Key="TreasureSkillName_50002">MP-Kombination</String>
   <String Key="BuffDataName_3500021">Assimilation I</String>
   <String Key="BuffDataName_3500022">MP-Barriere I</String>
@@ -18265,26 +18247,27 @@ Gewährt Verbündeten im Bereich außer dem Träger Gunst</String>
   <String Key="BuffDataName_3500024">MP-Barriere II</String>
   <String Key="BuffDataName_3500025">Assimilation II</String>
   <String Key="SpecialShop_TreasurePickUp50002">Cor Orbis Pickup Spezial Shop</String>
-  <String Key="SpecialPackage_1690">Cor Orbis Paket 1</String>
-  <String Key="SpecialPackage_1691">Cor Orbis Paket 2</String>
-  <String Key="SpecialPackage_1692">Cor Orbis Paket 3</String>
-  <String Key="BuffDataDesc_3500021">Pro {1}% Zauber-Kritischer Schaden über {0}% erhöht sich der Bonus auf den Gesamtschaden verstärkter Skills um das {2}-Fache</String>
-  <String Key="BuffDataDesc_3500022">Bis zur dritten Skill-Nutzung erlittener Schaden {0}%</String>
-  <String Key="BuffDataDesc_3500023">Bei Verwendung eines verstärkten Skills wird derselbe Skill zusätzlich {1} Mal gegen ein zufälliges Ziel mit {0}% Schaden eingesetzt</String>
-  <String Key="BuffDataDesc_3500024">Bis zur dritten Skill-Nutzung erlittener Schaden {0}%</String>
-  <String Key="BuffDataDesc_3500025">Pro {1}% Zauber-Kritischer Schaden über {0}% erhöht sich der Bonus auf den Gesamtschaden verstärkter Skills um das {2}-Fache</String>
-  <String Key="TreasureSkillDesc_3500020">Nach Schlachtbeginn erhält nur der Held mit der höchsten ★, der Cor Orbis ausgerüstet hat, bis zur dritten Skill-Nutzung +{0}% Max. MP und -{1}% Gesamt verursachter Schaden
-Der letzte Skill wird verstärkt und sein Gesamtschaden erhöht sich um +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">Nach Schlachtbeginn erhält nur der Held mit der höchsten ★, der Cor Orbis ausgerüstet hat, bis zur dritten Skill-Nutzung +{0}% Max. MP und -{1}% Gesamt verursachter Schaden
-Der letzte Skill wird verstärkt und sein Gesamtschaden erhöht sich um +{2}%
-Pro {4}% Zauber-Kritischer Schaden über {3}% erhöht sich der Bonus auf den Gesamtschaden verstärkter Skills um das {5}-Fache</String>
-  <String Key="TreasureSkillDesc_3500022">Nach Schlachtbeginn erhält nur der Held mit der höchsten ★, der Cor Orbis ausgerüstet hat, bis zur dritten Skill-Nutzung +{0}% Max. MP und -{1}% Gesamt verursachter Schaden
-Der letzte Skill wird verstärkt und sein Gesamtschaden erhöht sich um +{2}%
-Pro {4}% Zauber-Kritischer Schaden über {3}% erhöht sich der Bonus auf den Gesamtschaden verstärkter Skills um das {5}-Fache
-Bis zur dritten Skill-Nutzung erlittener Schaden {6}%</String>
-  <String Key="TreasureSkillDesc_3500023">Nach Schlachtbeginn erhält nur der Held mit der höchsten ★, der Cor Orbis ausgerüstet hat, bis zur dritten Skill-Nutzung +{0}% Max. MP und -{1}% Gesamt verursachter Schaden
-Der letzte Skill wird verstärkt und sein Gesamtschaden erhöht sich um +{2}%
-Pro {4}% Zauber-Kritischer Schaden über {3}% erhöht sich der Bonus auf den Gesamtschaden verstärkter Skills um das {5}-Fache
-Bis zur dritten Skill-Nutzung erlittener Schaden {6}%
-Bei Verwendung eines verstärkten Skills wird derselbe Skill zusätzlich {8} Mal gegen ein zufälliges Ziel mit {7}% Schaden eingesetzt</String>
+  <String Key="SpecialPackage_1690">Cor Orbis-Paket 1</String>
+  <String Key="SpecialPackage_1691">Cor Orbis-Paket 2</String>
+  <String Key="SpecialPackage_1692">Cor Orbis-Paket 3</String>
+  <String Key="BuffDataDesc_3500021">Für je {1}% Zauber-Kritischer Schaden über {0}% wird die Gesamtschaden-Erhöhung der verstärkten Fähigkeit mit {2} multipliziert</String>
+  <String Key="BuffDataDesc_3500022">Erlittener Schaden bis zur 3. Fähigkeitsnutzung {0}%</String>
+  <String Key="BuffDataDesc_3500023">Bei Verwendung einer verstärkten Fähigkeit wird dieselbe Fähigkeit zusätzlich mit {0}% Schaden auf 2 zufällige Ziele eingesetzt</String>
+  <String Key="BuffDataDesc_3500024">Erlittener Schaden bis zur 3. Fähigkeitsnutzung {0}%</String>
+  <String Key="BuffDataDesc_3500025">Für je {1}% Zauber-Kritischer Schaden über {0}% wird die Gesamtschaden-Erhöhung der verstärkten Fähigkeit mit {2} multipliziert</String>
+  <String Key="TreasureSkillDesc_3500020">Ab Beginn der Schlacht erhält der Held mit den meisten ★, der Cor Orbis ausgerüstet hat, bis zur 3. Fähigkeitsnutzung +{0}% Max. MP und {1}% weniger verursachten Gesamtschaden
+Die letzte Fähigkeit wird verstärkt und ihr Gesamtschaden steigt um +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">Ab Beginn der Schlacht erhält der Held mit den meisten ★, der Cor Orbis ausgerüstet hat, bis zur 3. Fähigkeitsnutzung +{0}% Max. MP und {1}% weniger verursachten Gesamtschaden
+Die letzte Fähigkeit wird verstärkt und ihr Gesamtschaden steigt um +{2}%
+Für je {4}% Zauber-Kritischer Schaden über {3}% wird die Gesamtschaden-Erhöhung der verstärkten Fähigkeit mit {5} multipliziert</String>
+  <String Key="TreasureSkillDesc_3500022">Ab Beginn der Schlacht erhält der Held mit den meisten ★, der Cor Orbis ausgerüstet hat, bis zur 3. Fähigkeitsnutzung +{0}% Max. MP und {1}% weniger verursachten Gesamtschaden
+Die letzte Fähigkeit wird verstärkt und ihr Gesamtschaden steigt um +{2}%
+Für je {4}% Zauber-Kritischer Schaden über {3}% wird die Gesamtschaden-Erhöhung der verstärkten Fähigkeit mit {5} multipliziert
+Erlittener Schaden bis zur 3. Fähigkeitsnutzung {6}%</String>
+  <String Key="TreasureSkillDesc_3500023">Ab Beginn der Schlacht erhält der Held mit den meisten ★, der Cor Orbis ausgerüstet hat, bis zur 3. Fähigkeitsnutzung +{0}% Max. MP und {1}% weniger verursachten Gesamtschaden
+Die letzte Fähigkeit wird verstärkt und ihr Gesamtschaden steigt um +{2}%
+Für je {4}% Zauber-Kritischer Schaden über {3}% wird die Gesamtschaden-Erhöhung der verstärkten Fähigkeit mit {5} multipliziert
+Erlittener Schaden bis zur 3. Fähigkeitsnutzung {6}%
+Bei Verwendung einer verstärkten Fähigkeit wird dieselbe Fähigkeit zusätzlich mit {7}% Schaden auf 2 zufällige Ziele eingesetzt</String>
+  <String Key="AdsSummonRestrictionAlert">Pro Runde maximal {0} Mal möglich.</String>
 </Strings>

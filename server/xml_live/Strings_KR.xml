@@ -1,4 +1,6 @@
 <Strings>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/eac1c2e0-6f0e-8340-a227-01806c0dfe2c</String>
   <String Key="Title">킹갓캐슬</String>
   <String Key="Tags">어썸피스, 좀비고, 오토체스,롤토체스, 킹갓캐슬, 오토배틀러, 전략, 전략적팀전투,TFT,엔즈,도와줘엔즈,머지,디펜스</String>
   <String Key="Store_ShortDesc">영웅들과 신의 힘을 이용해 침략하는 다양한 적들로부터 성을 지켜라! 킹갓캐슬!</String>
@@ -261,11 +263,11 @@
   <String Key="Post_Push_Contents18">오늘 저녁 1,000 금화를 지원합니다!</String>
   <String Key="Post_Push_Contents19">우편함에 금화가 대기 중이에요~</String>
   <String Key="Post_Push_Contents20">든든한 식량 지원이 왔어요!</String>
-  <String Key="Post_Push_Contents21">킹갓캐슬 72시즌 종료 D-day</String>
-  <String Key="Post_Push_Contents22">킹갓캐슬 72시즌 종료 D-1</String>
-  <String Key="Post_Push_Contents23">킹갓캐슬 72시즌 종료 D-2</String>
-  <String Key="Post_Push_Contents24">킹갓캐슬 72시즌 종료 D-4</String>
-  <String Key="Post_Push_Contents25">오늘 킹갓캐슬 72시즌이 종료됩니다!</String>
+  <String Key="Post_Push_Contents21">킹갓캐슬 {0}시즌 종료 D-day</String>
+  <String Key="Post_Push_Contents22">킹갓캐슬 {0}시즌 종료 D-1</String>
+  <String Key="Post_Push_Contents23">킹갓캐슬 {0}시즌 종료 D-2</String>
+  <String Key="Post_Push_Contents24">킹갓캐슬 {0}시즌 종료 D-4</String>
+  <String Key="Post_Push_Contents25">오늘 킹갓캐슬 {0}시즌이 종료됩니다!</String>
   <String Key="Post_Push_Contents26">누락된 패스 보상이 없는지 확인해 주세요!</String>
   <String Key="Post_Push_Contents27">패스 보상을 빠짐없이 수령해 주세요!</String>
   <String Key="Post_Push_Contents28">4일 후 전장, 패스 시스템이 마감됩니다.</String>
@@ -5793,8 +5795,6 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ClanBattleModifier_13">고뇌하는</String>
   <String Key="ClanBattleModifier_14">압도적인</String>
   <String Key="UserLockedClanBattleAlert">해당 유저는 이번 시즌 연맹 토벌전을 진행할 수 없습니다.</String>
-  <String Key="UpdateNoticeVersion">172000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/eac1c2e0-6f0e-8340-a227-01806c0dfe2c</String>
   <String Key="Clan_Menu_DeleteConfirm">정말 연맹을 해체하시겠습니까?</String>
   <String Key="Clan_Menu_LeaveConfirm">정말 연맹을 탈퇴하시겠습니까?</String>
   <String Key="RogueLike_ReleaseAtLevel">레벨 {0} 해금</String>
@@ -15498,7 +15498,7 @@ D = 1 ~ 4</String>
   <String Key="SeasonInformation">시즌 정보</String>
   <String Key="SeasonInformationHelp_0">이번 시즌에서 제공되는 침공 소환석의 챕터 정보와 보정된 영웅 능력치 정보를 확인하실 수 있습니다.</String>
   <String Key="SeasonInformationHelp_1">챕터 아이콘을 터치하면 침공 소환석의 이름을 확인할 수 있습니다.</String>
-  <String Key="SeasonInformationHelp_2">영웅 능력치 보정에서 전체 보기를 누르면 모든 영웅의 주는 피해량 및 절대방어 획득률 현황을 보실 수 있습니다.</String>
+  <String Key="SeasonInformationHelp_2">영웅 능력치 보정에서 전체 보기를 누르면 모든 영웅의 주는 피해량 및 절대 방어 획득률 현황을 보실 수 있습니다.</String>
   <String Key="InvadeSpawnItem">침공 소환석</String>
   <String Key="SkillDesc_60505">공격을 받아 분노로 가득차면 {AttackSpeedPer}%의 공격 속도 증가 효과와 {MoveSpeedPer}%의 이동속도 증가 효과를 얻고, 상태 이상에 면역됩니다.</String>
   <String Key="SkillDesc_60665">공격을 받아 분노로 가득차면 {AttackSpeedPer}%의 공격 속도 증가 효과와 {MoveSpeedPer}%의 이동속도 증가 효과를 얻고, 상태 이상에 면역됩니다.</String>
@@ -16504,7 +16504,7 @@ D = 1 ~ 4</String>
   <String Key="NormalMissionSubTap_3">기타</String>
   <String Key="UnintendedExitScoreProtected_0">의도치 않은 탈주로 인한 점수 하락 방지 시스템에 의해 점수 하락이 적용되지 않았습니다</String>
   <String Key="UnintendedExitScoreProtected_1">탈주 횟수가 점수 하락 방지 횟수를 초과해 점수가 하락 되었습니다.</String>
-  <String Key="ColosseumRemainLeftIgnoreCount">방지 가능 횟수({0}/3)</String>
+  <String Key="ColosseumRemainLeftIgnoreCount">방지 가능 횟수({0}/5)</String>
   <String Key="UnintendedExitScoreProtectedInfo_0">점수 하락 방지 시스템은 전반기, 후반기에 각 3회씩 방지 가능합니다.</String>
   <String Key="UnintendedExitScoreProtectedInfo_1">점수 하락 방지 시스템은 다음 조건을 만족한다면 자동으로 적용됩니다.</String>
   <String Key="UnintendedExitScoreProtectedInfo_2">격전의 전장에서 탈주 판정을 받은 경우</String>
@@ -18051,7 +18051,8 @@ D = 1 ~ 4</String>
   <String Key="CannotSummonByWatchingAdsWhileInBattleAlert">전투 중에는 지원하지 않는 기능입니다.</String>
   <String Key="AdsReroll">무료 재감정</String>
   <String Key="AdsDeckSet">무료 재편성</String>
-  <String Key="ResetPVPMatch">다시 설정</String>
+  <String Key="ResetPVPMatch">재설정
+{0}회 가능</String>
   <String Key="CannotResetPVPMatchByWatchingAdsAlert">금일 다시 설정 횟수를 모두 소진했습니다.</String>
   <String Key="PVPDeckSettingReTryAdsPopupTitle">편성 재도전</String>
   <String Key="PVPDeckSettingReTryAdsPopupDesc">광고를 시청하고 무료로 재도전 하시겠습니까?
@@ -18306,7 +18307,7 @@ D = 1 ~ 4</String>
   <String Key="SpecialPackage_1692">코르 오르비스 패키지 3</String>
   <String Key="BuffDataDesc_3500021">{0}%를 초과한 주문 치명타 피해량 {1}% 당 강화된 스킬의 최종 피해 증가량 {2}배</String>
   <String Key="BuffDataDesc_3500022">세 번째 스킬을 사용할 때까지 받는 피해 {0}%</String>
-  <String Key="BuffDataDesc_3500023">강화된 스킬 사용 시 무작위 대상에게 피해량 {0}%의 동일한 스킬을 추가로 {1}회 사용</String>
+  <String Key="BuffDataDesc_3500023">강화된 스킬 사용 시 무작위 두 대상에게 피해량 {0}%의 동일한 스킬을 추가 사용</String>
   <String Key="BuffDataDesc_3500024">세 번째 스킬을 사용할 때까지 받는 피해 {0}%</String>
   <String Key="BuffDataDesc_3500025">{0}%를 초과한 주문 치명타 피해량 {1}% 당 강화된 스킬의 최종 피해 증가량 {2}배</String>
   <String Key="TreasureSkillDesc_3500020">가장 성급이 높은 코르 오르비스를 장착한 영웅이 전투 시작 후 스킬을 세 번 사용할 때까지 최대 마나가 {0}% 증가 및 최종 주는 피해량 {1}% 감소
@@ -18322,5 +18323,6 @@ D = 1 ~ 4</String>
 마지막 스킬은 강화되어 최종 피해량이 +{2}% 증가
 {3}%를 초과한 주문 치명타 피해량 {4}% 당 강화된 스킬으리 최종 피해 증가량 {5}배
 스킬을 세 번 사용할 때까지 받는 피해 {6}%
-강화된 스킬 사용 시 무작위 대상에게 피해량 {7}%의 동일한 스킬을 추가로 {8}회 사용</String>
+강화된 스킬 사용 시 무작위 두 대상에게 피해량 {7}%의 동일한 스킬을 추가 사용</String>
+  <String Key="AdsSummonRestrictionAlert">한 라운드에 최대 {0}회까지 가능합니다.</String>
 </Strings>

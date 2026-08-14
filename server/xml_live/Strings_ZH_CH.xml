@@ -1,4 +1,6 @@
 <Strings>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡</String>
   <String Key="Tags">AWESOMEPIECE&lt;size=2&gt; &lt;/size&gt;, &lt;size=2&gt; &lt;/size&gt;僵尸&lt;size=2&gt; &lt;/size&gt;学院, &lt;size=2&gt; &lt;/size&gt;自&lt;size=2&gt; &lt;/size&gt;走棋, &lt;size=2&gt; &lt;/size&gt;云顶&lt;size=2&gt; &lt;/size&gt;之&lt;size=2&gt; &lt;/size&gt;弈, &lt;size=2&gt; &lt;/size&gt;神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡, &lt;size=2&gt; &lt;/size&gt;自动&lt;size=2&gt; &lt;/size&gt;战斗, &lt;size=2&gt; &lt;/size&gt;战略, &lt;size=2&gt; &lt;/size&gt;战略&lt;size=2&gt; &lt;/size&gt;团队&lt;size=2&gt; &lt;/size&gt;战役, TFT,  &lt;size=2&gt; &lt;/size&gt;合成,&lt;size=2&gt; &lt;/size&gt;防御</String>
   <String Key="Store_ShortDesc">利用&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;和&lt;size=2&gt; &lt;/size&gt;神&lt;size=2&gt; &lt;/size&gt;之&lt;size=2&gt; &lt;/size&gt;力，&lt;size=2&gt; &lt;/size&gt;阻止&lt;size=2&gt; &lt;/size&gt;各种&lt;size=2&gt; &lt;/size&gt;敌人&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;侵略，&lt;size=2&gt; &lt;/size&gt;守住&lt;size=2&gt; &lt;/size&gt;城堡&lt;size=2&gt; &lt;/size&gt;吧！&lt;size=2&gt; &lt;/size&gt;神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡！</String>
@@ -157,9 +159,9 @@
 
 （费用：{0}宝石）</String>
   <String Key="King_1">国王</String>
-  <String Key="King_2"> </String>
+  <String Key="King_2"></String>
   <String Key="Castle_1">城堡</String>
-  <String Key="Castle_2"> </String>
+  <String Key="Castle_2"></String>
   <String Key="LoadingPopupText">正在连接&lt;size=2&gt; &lt;/size&gt;服务器…</String>
   <String Key="LoginByGoogle">Google&lt;size=2&gt; &lt;/size&gt; Play&lt;size=2&gt; &lt;/size&gt;登录</String>
   <String Key="LoginByApple">通过&lt;size=2&gt; &lt;/size&gt;Apple&lt;size=2&gt; &lt;/size&gt;登录</String>
@@ -278,11 +280,11 @@
   <String Key="Post_Push_Contents18">今晚&lt;size=2&gt; &lt;/size&gt;会&lt;size=2&gt; &lt;/size&gt;支援1,000&lt;size=2&gt; &lt;/size&gt;金币！</String>
   <String Key="Post_Push_Contents19">邮箱&lt;size=2&gt; &lt;/size&gt;里&lt;size=2&gt; &lt;/size&gt;有&lt;size=2&gt; &lt;/size&gt;金币&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;等&lt;size=2&gt; &lt;/size&gt;着&lt;size=2&gt; &lt;/size&gt;陛下~</String>
   <String Key="Post_Push_Contents20">可靠&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;粮食&lt;size=2&gt; &lt;/size&gt;支援&lt;size=2&gt; &lt;/size&gt;呈&lt;size=2&gt; &lt;/size&gt;送给&lt;size=2&gt; &lt;/size&gt;陛下！</String>
-  <String Key="Post_Push_Contents21">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡第72&lt;size=2&gt; &lt;/size&gt;赛季&lt;size=2&gt; &lt;/size&gt;结束D-day</String>
-  <String Key="Post_Push_Contents22">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡第72&lt;size=2&gt; &lt;/size&gt;赛季&lt;size=2&gt; &lt;/size&gt;结束D-1</String>
-  <String Key="Post_Push_Contents23">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡第72&lt;size=2&gt; &lt;/size&gt;赛季&lt;size=2&gt; &lt;/size&gt;结束D-2</String>
-  <String Key="Post_Push_Contents24">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡第72&lt;size=2&gt; &lt;/size&gt;赛季&lt;size=2&gt; &lt;/size&gt;结束D-4</String>
-  <String Key="Post_Push_Contents25">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡第72&lt;size=2&gt; &lt;/size&gt;赛季&lt;size=2&gt; &lt;/size&gt;将&lt;size=2&gt; &lt;/size&gt;于&lt;size=2&gt; &lt;/size&gt;今日&lt;size=2&gt; &lt;/size&gt;结束！</String>
+  <String Key="Post_Push_Contents21">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡第{0}&lt;size=2&gt; &lt;/size&gt;赛季&lt;size=2&gt; &lt;/size&gt;结束D-day</String>
+  <String Key="Post_Push_Contents22">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡第{0}&lt;size=2&gt; &lt;/size&gt;赛季&lt;size=2&gt; &lt;/size&gt;结束D-1</String>
+  <String Key="Post_Push_Contents23">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡第{0}&lt;size=2&gt; &lt;/size&gt;赛季&lt;size=2&gt; &lt;/size&gt;结束D-2</String>
+  <String Key="Post_Push_Contents24">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡第{0}&lt;size=2&gt; &lt;/size&gt;赛季&lt;size=2&gt; &lt;/size&gt;结束D-4</String>
+  <String Key="Post_Push_Contents25">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡第{0}&lt;size=2&gt; &lt;/size&gt;赛季&lt;size=2&gt; &lt;/size&gt;将&lt;size=2&gt; &lt;/size&gt;于&lt;size=2&gt; &lt;/size&gt;今日&lt;size=2&gt; &lt;/size&gt;结束！</String>
   <String Key="Post_Push_Contents26">请&lt;size=2&gt; &lt;/size&gt;确认&lt;size=2&gt; &lt;/size&gt;是否&lt;size=2&gt; &lt;/size&gt;领取&lt;size=2&gt; &lt;/size&gt;所有&lt;size=2&gt; &lt;/size&gt;奖励！</String>
   <String Key="Post_Push_Contents27">请&lt;size=2&gt; &lt;/size&gt;领取&lt;size=2&gt; &lt;/size&gt;所有&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;通行证&lt;size=2&gt; &lt;/size&gt;奖励！</String>
   <String Key="Post_Push_Contents28">4&lt;size=2&gt; &lt;/size&gt;天&lt;size=2&gt; &lt;/size&gt;后，&lt;size=2&gt; &lt;/size&gt;战场&lt;size=2&gt; &lt;/size&gt;和&lt;size=2&gt; &lt;/size&gt;通行证&lt;size=2&gt; &lt;/size&gt;系统&lt;size=2&gt; &lt;/size&gt;将&lt;size=2&gt; &lt;/size&gt;会&lt;size=2&gt; &lt;/size&gt;结束。</String>
@@ -1321,11 +1323,8 @@
   <String Key="ItemName_10020">阵营&lt;size=2&gt; &lt;/size&gt;扩张</String>
   <String Key="ItemDesc_10020">扩张&lt;size=2&gt; &lt;/size&gt;1&lt;size=2&gt; &lt;/size&gt;阵营。</String>
   <String Key="ItemName_10030">银币&lt;size=2&gt; &lt;/size&gt;+5</String>
-  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">银币&lt;size=2&gt; &lt;/size&gt;+10</String>
-  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">银币&lt;size=2&gt; &lt;/size&gt;+20</String>
-  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">武功&lt;size=2&gt; &lt;/size&gt;勋章</String>
   <String Key="ItemDesc_10040">对&lt;size=2&gt; &lt;/size&gt;战场&lt;size=2&gt; &lt;/size&gt;内&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;随机&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;提升1&lt;size=2&gt; &lt;/size&gt;星级。</String>
   <String Key="ItemName_10050">高级&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;召唤&lt;size=2&gt; &lt;/size&gt;书（2次）</String>
@@ -5542,6 +5541,7 @@ BOSS&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;攻击力/&lt;siz
 
 &lt;size=2&gt; &lt;/size&gt;觉醒&lt;size=2&gt; &lt;/size&gt;后，&lt;size=2&gt; &lt;/size&gt;可&lt;size=2&gt; &lt;/size&gt;使用&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;的&lt;color=#FFD247&gt;&lt;size=2&gt; &lt;/size&gt;觉醒&lt;size=2&gt; &lt;/size&gt;能力&lt;/color&gt;。</String>
   <String Key="ItemDescSub_40463_07">绝对&lt;size=2&gt; &lt;/size&gt;防御{0}&lt;size=2&gt; &lt;/size&gt;次</String>
+  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">&lt;color=#FFD247&gt;&lt;size=2&gt; &lt;/size&gt;选择&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;英雄&lt;/color&gt;&lt;size=2&gt; &lt;/size&gt;会&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;出现&lt;size=2&gt; &lt;/size&gt;时&lt;color=#FFD247&gt;&lt;size=2&gt; &lt;/size&gt;必定&lt;size=2&gt; &lt;/size&gt;出现！&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">选择&lt;size=2&gt; &lt;/size&gt;英雄</String>
   <String Key="SelectPickupUnitAgain">重新&lt;size=2&gt; &lt;/size&gt;设置</String>
@@ -6385,8 +6385,6 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ClanBattleModifier_13">苦恼&lt;size=2&gt; &lt;/size&gt;的</String>
   <String Key="ClanBattleModifier_14">压倒性&lt;size=2&gt; &lt;/size&gt;的</String>
   <String Key="UserLockedClanBattleAlert">该&lt;size=2&gt; &lt;/size&gt;玩家&lt;size=2&gt; &lt;/size&gt;无法&lt;size=2&gt; &lt;/size&gt;进行&lt;size=2&gt; &lt;/size&gt;本赛季&lt;size=2&gt; &lt;/size&gt;联盟&lt;size=2&gt; &lt;/size&gt;讨伐&lt;size=2&gt; &lt;/size&gt;战。</String>
-  <String Key="UpdateNoticeVersion">171100</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">确定&lt;size=2&gt; &lt;/size&gt;要&lt;size=2&gt; &lt;/size&gt;解散&lt;size=2&gt; &lt;/size&gt;联盟&lt;size=2&gt; &lt;/size&gt;吗？</String>
   <String Key="Clan_Menu_LeaveConfirm">确定&lt;size=2&gt; &lt;/size&gt;要&lt;size=2&gt; &lt;/size&gt;退出&lt;size=2&gt; &lt;/size&gt;联盟&lt;size=2&gt; &lt;/size&gt;吗？</String>
   <String Key="RogueLike_ReleaseAtLevel">等级&lt;size=2&gt; &lt;/size&gt;{0}&lt;size=2&gt; &lt;/size&gt;时&lt;size=2&gt; &lt;/size&gt;解锁</String>
@@ -7612,6 +7610,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="Clan_Menu_ChangeName">更改&lt;size=2&gt; &lt;/size&gt;联盟&lt;size=2&gt; &lt;/size&gt;名称</String>
   <String Key="ColosseumSeasonRankingReward">赛季&lt;size=2&gt; &lt;/size&gt;奖励</String>
   <String Key="ColosseumRanking">排名</String>
+  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">查看&lt;size=2&gt; &lt;/size&gt;神器&lt;size=2&gt; &lt;/size&gt;几率&lt;size=2&gt; &lt;/size&gt;详情</String>
   <String Key="ArtifactOptionProbDetailDesc">将&lt;size=2&gt; &lt;/size&gt;移动&lt;size=2&gt; &lt;/size&gt;至&lt;size=2&gt; &lt;/size&gt;付费&lt;size=2&gt; &lt;/size&gt;几率&lt;size=2&gt; &lt;/size&gt;道具&lt;size=2&gt; &lt;/size&gt;几率&lt;size=2&gt; &lt;/size&gt;说明&lt;size=2&gt; &lt;/size&gt;网站。</String>
   <String Key="ColosseumNetworkChanged">检测&lt;size=2&gt; &lt;/size&gt;到&lt;size=2&gt; &lt;/size&gt;网络&lt;size=2&gt; &lt;/size&gt;变化，&lt;size=2&gt; &lt;/size&gt;正在&lt;size=2&gt; &lt;/size&gt;重新&lt;size=2&gt; &lt;/size&gt;连接&lt;size=2&gt; &lt;/size&gt;中。</String>
@@ -8081,9 +8080,7 @@ Lv. {0} ▶ Lv. {1}</String>
 
 
 &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;通过&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;的&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越&lt;/color&gt;，&lt;size=2&gt; &lt;/size&gt;可以&lt;size=2&gt; &lt;/size&gt;向&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;能力&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;赋予&lt;size=2&gt; &lt;/size&gt;额外&lt;size=2&gt; &lt;/size&gt;效果&lt;/color&gt;。
-&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;需要&lt;size=2&gt; &lt;/size&gt;有&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;相同&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;/color&gt;。
-
-</String>
+&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;需要&lt;size=2&gt; &lt;/size&gt;有&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;相同&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;/color&gt;。</String>
   <String Key="SkinName_1032006">湛蓝&lt;size=2&gt; &lt;/size&gt;海浪&lt;size=2&gt; &lt;/size&gt;蒂&lt;size=2&gt; &lt;/size&gt;亚</String>
   <String Key="SkinName_1036004">湛蓝&lt;size=2&gt; &lt;/size&gt;海浪&lt;size=2&gt; &lt;/size&gt;海&lt;size=2&gt; &lt;/size&gt;琅</String>
   <String Key="SkinName_1042003">湛蓝&lt;size=2&gt; &lt;/size&gt;海浪&lt;size=2&gt; &lt;/size&gt;泰&lt;size=2&gt; &lt;/size&gt;白</String>
@@ -8175,8 +8172,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="TreasureSkillDesc_3300033">穿戴&lt;size=2&gt; &lt;/size&gt;缪&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;体力&lt;size=2&gt; &lt;/size&gt;达到{0}%&lt;size=2&gt; &lt;/size&gt;或&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;致命&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;进入&lt;size=2&gt; &lt;/size&gt;无敌&lt;size=2&gt; &lt;/size&gt;状态{1}秒&lt;size=2&gt; &lt;/size&gt;分别&lt;size=2&gt; &lt;/size&gt;限定1&lt;size=2&gt; &lt;/size&gt;次
 
 （无敌状态时，无法恢复或赋予防护罩）
-&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;无敌&lt;size=2&gt; &lt;/size&gt;状态&lt;size=2&gt; &lt;/size&gt;下&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量+{2}%
-</String>
+&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;无敌&lt;size=2&gt; &lt;/size&gt;状态&lt;size=2&gt; &lt;/size&gt;下&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量+{2}%</String>
   <String Key="TreasureSkillDesc_3300034">穿戴&lt;size=2&gt; &lt;/size&gt;缪&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;体力&lt;size=2&gt; &lt;/size&gt;达到{0}%&lt;size=2&gt; &lt;/size&gt;或&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;致命&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;将&lt;size=2&gt; &lt;/size&gt;进入&lt;size=2&gt; &lt;/size&gt;无敌&lt;size=2&gt; &lt;/size&gt;状态{1}秒&lt;size=2&gt; &lt;/size&gt;分别&lt;size=2&gt; &lt;/size&gt;限定1&lt;size=2&gt; &lt;/size&gt;次
 
 （无敌状态时，无法恢复或赋予防护罩）
@@ -8419,17 +8415,13 @@ Lv. {0} ▶ Lv. {1}</String>
   &lt;size=25&gt;&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越
 
 &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;通过&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;的&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越&lt;/color&gt;，&lt;size=2&gt; &lt;/size&gt;可以&lt;size=2&gt; &lt;/size&gt;向&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;能力&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;赋予&lt;size=2&gt; &lt;/size&gt;额外&lt;size=2&gt; &lt;/size&gt;效果&lt;/color&gt;。
-&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;需要&lt;size=2&gt; &lt;/size&gt;有&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;相同&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;/color&gt;。
-
-</String>
+&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;需要&lt;size=2&gt; &lt;/size&gt;有&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;相同&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;/color&gt;。</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具
 
 
 
 &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;可&lt;size=2&gt; &lt;/size&gt;通过&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;强化&lt;/color&gt;&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;增加&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;能力&lt;size=2&gt; &lt;/size&gt;效果&lt;/color&gt;。
-&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;材料&lt;/color&gt;&lt;size=2&gt; &lt;/size&gt;可&lt;size=2&gt; &lt;/size&gt;通过&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;分解&lt;/color&gt;&lt;size=2&gt; &lt;/size&gt;背包&lt;size=2&gt; &lt;/size&gt;里&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;获得，&lt;size=2&gt; &lt;/size&gt;也&lt;size=2&gt; &lt;/size&gt;可以&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;商店&lt;size=2&gt; &lt;/size&gt;购买&lt;/color&gt;。
-
-</String>
+&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;材料&lt;/color&gt;&lt;size=2&gt; &lt;/size&gt;可&lt;size=2&gt; &lt;/size&gt;通过&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;分解&lt;/color&gt;&lt;size=2&gt; &lt;/size&gt;背包&lt;size=2&gt; &lt;/size&gt;里&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;获得，&lt;size=2&gt; &lt;/size&gt;也&lt;size=2&gt; &lt;/size&gt;可以&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;商店&lt;size=2&gt; &lt;/size&gt;购买&lt;/color&gt;。</String>
   <String Key="TreasureOvercome">星级&lt;size=2&gt; &lt;/size&gt;超越</String>
   <String Key="TreasureOvercome_Short">星级&lt;size=2&gt; &lt;/size&gt;超越</String>
   <String Key="ViewNextOvercome">查看&lt;size=2&gt; &lt;/size&gt;下一&lt;size=2&gt; &lt;/size&gt;超越</String>
@@ -9039,9 +9031,7 @@ Lv. {0} ▶ Lv. {1}</String>
   &lt;size=25&gt;&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越
 
 &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;通过&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;的&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越&lt;/color&gt;，&lt;size=2&gt; &lt;/size&gt;可以&lt;size=2&gt; &lt;/size&gt;向&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;能力&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;赋予&lt;size=2&gt; &lt;/size&gt;额外&lt;size=2&gt; &lt;/size&gt;效果&lt;/color&gt;。
-&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;需要&lt;size=2&gt; &lt;/size&gt;有&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;相同&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;/color&gt;。
-
-</String>
+&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;超越&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;需要&lt;size=2&gt; &lt;/size&gt;有&lt;color=#ffbc00&gt;&lt;size=2&gt; &lt;/size&gt;相同&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;/color&gt;。</String>
   <String Key="TreasureSkillDesc_3300010">暴&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;击&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; 
 
 &lt;/size&gt;&lt;size=2&gt; 
@@ -10755,8 +10745,7 @@ Lv. {0} ▶ Lv. {1}</String>
 
 &lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;袭击&lt;size=2&gt; &lt;/size&gt;中&lt;size=2&gt; &lt;/size&gt;所有&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;防御力+{1}
 &lt;size=2&gt; &lt;/size&gt;无法&lt;size=2&gt; &lt;/size&gt;重&lt;size=2&gt; &lt;/size&gt;铸、&lt;size=2&gt; &lt;/size&gt;无法&lt;size=2&gt; &lt;/size&gt;通过&lt;size=2&gt; &lt;/size&gt;磨练&lt;size=2&gt; &lt;/size&gt;强化</String>
-  <String Key="ArtifactOptionDesc_Event_15000">
-&lt;size=2&gt; &lt;/size&gt;免费&lt;size=2&gt; &lt;/size&gt;通过&lt;size=2&gt; &lt;/size&gt;磨练&lt;size=2&gt; &lt;/size&gt;移动&lt;size=2&gt; &lt;/size&gt;位置（~24.12.3）</String>
+  <String Key="ArtifactOptionDesc_Event_15000">&lt;size=2&gt; &lt;/size&gt;免费&lt;size=2&gt; &lt;/size&gt;通过&lt;size=2&gt; &lt;/size&gt;磨练&lt;size=2&gt; &lt;/size&gt;移动&lt;size=2&gt; &lt;/size&gt;位置（~24.12.3）</String>
   <String Key="SkinName_1032007">月之女神&lt;size=2&gt; &lt;/size&gt;蒂&lt;size=2&gt; &lt;/size&gt;亚</String>
   <String Key="SkinName_1032007_NewLine">月之女神&lt;size=2&gt; &lt;/size&gt;蒂&lt;size=2&gt; &lt;/size&gt;亚</String>
   <String Key="TerritoryBuildingName_40300">月之女神&lt;size=2&gt; &lt;/size&gt;像</String>
@@ -12611,8 +12600,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AddDifficultyUnlockDesc">每当&lt;size=2&gt; &lt;/size&gt;无&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;通关&lt;size=2&gt; &lt;/size&gt;时， &lt;size=2&gt; &lt;/size&gt;难度&lt;size=2&gt; &lt;/size&gt;解锁2&lt;size=2&gt; &lt;/size&gt;阶段。</String>
   <String Key="AccessoryLevelUpTutorialLock">通关&lt;size=2&gt; &lt;/size&gt;蚕食II-1&lt;size=2&gt; &lt;/size&gt;后， &lt;size=2&gt; &lt;/size&gt;可以&lt;size=2&gt; &lt;/size&gt;查看。</String>
   <String Key="NotAccessoryLevelUp">没有&lt;size=2&gt; &lt;/size&gt;可&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;饰品</String>
-  <String Key="ArtifactOptionDesc_Event_15020">
-&lt;size=2&gt; &lt;/size&gt;通过&lt;size=2&gt; &lt;/size&gt;磨练&lt;size=2&gt; &lt;/size&gt;移动&lt;size=2&gt; &lt;/size&gt;位置&lt;size=2&gt; &lt;/size&gt;免费 （&lt;color=#ffbd4a&gt;~{0}&lt;/color&gt;）</String>
+  <String Key="ArtifactOptionDesc_Event_15020">&lt;size=2&gt; &lt;/size&gt;通过&lt;size=2&gt; &lt;/size&gt;磨练&lt;size=2&gt; &lt;/size&gt;移动&lt;size=2&gt; &lt;/size&gt;位置&lt;size=2&gt; &lt;/size&gt;免费 （&lt;color=#ffbd4a&gt;~{0}&lt;/color&gt;）</String>
   <String Key="MissionDesc_ThemeDifficultyClear">通关&lt;size=2&gt; &lt;/size&gt;第{0}-{1}&lt;size=2&gt; &lt;/size&gt;章 {Diff}&lt;size=2&gt; &lt;/size&gt;难度&lt;size=2&gt; &lt;/size&gt;以上</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">通关&lt;size=2&gt; &lt;/size&gt;[&lt;size=2&gt; &lt;/size&gt;蚕食]第{0}-{1}&lt;size=2&gt; &lt;/size&gt;章 {Diff}&lt;size=2&gt; &lt;/size&gt;难度&lt;size=2&gt; &lt;/size&gt;以上</String>
   <String Key="Polish_EventArtifact_Alert">该&lt;size=2&gt; &lt;/size&gt;神器&lt;size=2&gt; &lt;/size&gt;无法&lt;size=2&gt; &lt;/size&gt;通过&lt;size=2&gt; &lt;/size&gt;磨练&lt;size=2&gt; &lt;/size&gt;进行&lt;size=2&gt; &lt;/size&gt;强化！</String>
@@ -12981,9 +12969,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SpecialPackage_1556">埃&lt;size=2&gt; &lt;/size&gt;特尔纳&lt;size=2&gt; &lt;/size&gt;礼包1</String>
   <String Key="SpecialPackage_1557">埃&lt;size=2&gt; &lt;/size&gt;特尔纳&lt;size=2&gt; &lt;/size&gt;礼包2</String>
   <String Key="SpecialPackage_1558">埃&lt;size=2&gt; &lt;/size&gt;特尔纳&lt;size=2&gt; &lt;/size&gt;礼包3</String>
-  <String Key="MakeAllLateComerExceptSlot">对&lt;size=2&gt; &lt;/size&gt;除了&lt;size=2&gt; &lt;/size&gt;阵营&lt;size=2&gt; &lt;/size&gt;中{0}&lt;size=2&gt; &lt;/size&gt;位置&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;之外&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;所有&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;赋予&lt;size=2&gt; &lt;/size&gt;后发&lt;size=2&gt; &lt;/size&gt;队&lt;size=2&gt; &lt;/size&gt;效果。
-
-</String>
+  <String Key="MakeAllLateComerExceptSlot">对&lt;size=2&gt; &lt;/size&gt;除了&lt;size=2&gt; &lt;/size&gt;阵营&lt;size=2&gt; &lt;/size&gt;中{0}&lt;size=2&gt; &lt;/size&gt;位置&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;之外&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;所有&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;赋予&lt;size=2&gt; &lt;/size&gt;后发&lt;size=2&gt; &lt;/size&gt;队&lt;size=2&gt; &lt;/size&gt;效果。</String>
   <String Key="Order_1">第一个</String>
   <String Key="Order_2">第二个</String>
   <String Key="Order_3">第三个</String>
@@ -15597,7 +15583,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SpecialPackage_1600">坦&lt;size=2&gt; &lt;/size&gt;佩斯&lt;size=2&gt; &lt;/size&gt;特&lt;size=2&gt; &lt;/size&gt;礼包2</String>
   <String Key="SpecialPackage_1601">坦&lt;size=2&gt; &lt;/size&gt;佩斯&lt;size=2&gt; &lt;/size&gt;特&lt;size=2&gt; &lt;/size&gt;礼包3</String>
   <String Key="FifthYearAttendanceEventTitle">&lt;color=#ffd264&gt;5&lt;size=2&gt; &lt;/size&gt;周年&lt;size=2&gt; &lt;/size&gt;前夜&lt;size=2&gt; &lt;/size&gt;节&lt;/color&gt;&lt;size=2&gt; &lt;/size&gt;签到</String>
-  <String Key="SkinShop">时装&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;商店</String>
+  <String Key="SkinShop">时装&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;商店</String>
   <String Key="FifthYearPassSkinReturn">5&lt;size=2&gt; &lt;/size&gt;周年&lt;size=2&gt; &lt;/size&gt;前夜&lt;size=2&gt; &lt;/size&gt;节&lt;size=2&gt; &lt;/size&gt;通行证&lt;size=2&gt; &lt;/size&gt;时装&lt;size=2&gt; &lt;/size&gt;商店</String>
   <String Key="FifthYearEvent">5&lt;size=2&gt; &lt;/size&gt;周年&lt;size=2&gt; &lt;/size&gt;前夜&lt;size=2&gt; &lt;/size&gt;节&lt;size=2&gt; &lt;/size&gt;活动</String>
   <String Key="UnitLevelClearPostTitle">英雄&lt;size=2&gt; &lt;/size&gt;等级&lt;size=2&gt; &lt;/size&gt;重置&lt;size=2&gt; &lt;/size&gt;奖励</String>
@@ -16106,9 +16092,7 @@ D = 1 ~ 4</String>
 
 
 &lt;size=2&gt; &lt;/size&gt;推荐：&lt;size=2&gt; &lt;/size&gt;袭击、&lt;size=2&gt; &lt;/size&gt;竞技场</String>
-  <String Key="ArtifactBuffDataDesc_15010">在&lt;size=2&gt; &lt;/size&gt;袭击&lt;size=2&gt; &lt;/size&gt;和&lt;size=2&gt; &lt;/size&gt;远征&lt;size=2&gt; &lt;/size&gt;中，&lt;size=2&gt; &lt;/size&gt;战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;时&lt;size=2&gt; &lt;/size&gt;先遣&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;攻击速度+{0}%（没有先遣英雄时无效果）
-
-</String>
+  <String Key="ArtifactBuffDataDesc_15010">在&lt;size=2&gt; &lt;/size&gt;袭击&lt;size=2&gt; &lt;/size&gt;和&lt;size=2&gt; &lt;/size&gt;远征&lt;size=2&gt; &lt;/size&gt;中，&lt;size=2&gt; &lt;/size&gt;战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;时&lt;size=2&gt; &lt;/size&gt;先遣&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;攻击速度+{0}%（没有先遣英雄时无效果）</String>
   <String Key="Post_Name_AltarGoldRefund">退还&lt;size=2&gt; &lt;/size&gt;扩张&lt;size=2&gt; &lt;/size&gt;祭坛&lt;size=2&gt; &lt;/size&gt;火花&lt;size=2&gt; &lt;/size&gt;黄金</String>
   <String Key="Post_Desc_AltarGoldRefund">将&lt;size=2&gt; &lt;/size&gt;返还&lt;size=2&gt; &lt;/size&gt;用于&lt;size=2&gt; &lt;/size&gt;扩张&lt;size=2&gt; &lt;/size&gt;祭坛&lt;size=2&gt; &lt;/size&gt;火花&lt;size=2&gt; &lt;/size&gt;所&lt;size=2&gt; &lt;/size&gt;消耗&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;黄金。</String>
   <String Key="OutgameTutorial_140_00">陛下&lt;size=2&gt; &lt;/size&gt;，&lt;size=2&gt; &lt;/size&gt;好久不见。&lt;size=2&gt; &lt;/size&gt;我&lt;size=2&gt; &lt;/size&gt;是&lt;color=#FFC13D&gt;&lt;size=2&gt; &lt;/size&gt;骑士团&lt;size=2&gt; &lt;/size&gt;司令官&lt;size=2&gt; &lt;/size&gt;阿斯&lt;size=2&gt; &lt;/size&gt;琳。&lt;/color&gt;
@@ -17350,7 +17334,7 @@ D = 1 ~ 4</String>
   <String Key="SeasonInformation">赛季&lt;size=2&gt; &lt;/size&gt;信息</String>
   <String Key="SeasonInformationHelp_0">可&lt;size=2&gt; &lt;/size&gt;查看&lt;size=2&gt; &lt;/size&gt;本赛季&lt;size=2&gt; &lt;/size&gt;提供&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;强袭&lt;size=2&gt; &lt;/size&gt;召唤&lt;size=2&gt; &lt;/size&gt;石&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;章节&lt;size=2&gt; &lt;/size&gt;信息，&lt;size=2&gt; &lt;/size&gt;以及&lt;size=2&gt; &lt;/size&gt;调整&lt;size=2&gt; &lt;/size&gt;后&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;能力&lt;size=2&gt; &lt;/size&gt;值&lt;size=2&gt; &lt;/size&gt;补正&lt;size=2&gt; &lt;/size&gt;信息。</String>
   <String Key="SeasonInformationHelp_1">点击&lt;size=2&gt; &lt;/size&gt;章节&lt;size=2&gt; &lt;/size&gt;图标&lt;size=2&gt; &lt;/size&gt;即可&lt;size=2&gt; &lt;/size&gt;查看&lt;size=2&gt; &lt;/size&gt;强袭&lt;size=2&gt; &lt;/size&gt;召唤&lt;size=2&gt; &lt;/size&gt;石&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;名称。</String>
-  <String Key="SeasonInformationHelp_2">在&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;能力&lt;size=2&gt; &lt;/size&gt;值&lt;size=2&gt; &lt;/size&gt;补&lt;size=2&gt; &lt;/size&gt;正中&lt;size=2&gt; &lt;/size&gt;点击&lt;size=2&gt; &lt;/size&gt;全部&lt;size=2&gt; &lt;/size&gt;查看，&lt;size=2&gt; &lt;/size&gt;即可&lt;size=2&gt; &lt;/size&gt;查看&lt;size=2&gt; &lt;/size&gt;所有&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;当前&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;及&lt;size=2&gt; &lt;/size&gt;绝对&lt;size=2&gt; &lt;/size&gt;防御&lt;size=2&gt; &lt;/size&gt;获得&lt;size=2&gt; &lt;/size&gt;率。</String>
+  <String Key="SeasonInformationHelp_2">在英雄能力值补正中，点击查看全部，即可查看所有英雄的造成的伤害量及绝对防御获得率。</String>
   <String Key="InvadeSpawnItem">强袭&lt;size=2&gt; &lt;/size&gt;召唤&lt;size=2&gt; &lt;/size&gt;石</String>
   <String Key="SkillDesc_60505">受到&lt;size=2&gt; &lt;/size&gt;攻击&lt;size=2&gt; &lt;/size&gt;并&lt;size=2&gt; &lt;/size&gt;充满&lt;size=2&gt; &lt;/size&gt;怒气&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;攻击速度+{AttackSpeedPer}%，&lt;size=2&gt; &lt;/size&gt;移动&lt;size=2&gt; &lt;/size&gt;速度+{MoveSpeedPer}%，&lt;size=2&gt; &lt;/size&gt;并&lt;size=2&gt; &lt;/size&gt;免疫&lt;size=2&gt; &lt;/size&gt;异常&lt;size=2&gt; &lt;/size&gt;状态。</String>
   <String Key="SkillDesc_60665">受到&lt;size=2&gt; &lt;/size&gt;攻击&lt;size=2&gt; &lt;/size&gt;并&lt;size=2&gt; &lt;/size&gt;充满&lt;size=2&gt; &lt;/size&gt;怒气&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;攻击速度+{AttackSpeedPer}%，&lt;size=2&gt; &lt;/size&gt;移动&lt;size=2&gt; &lt;/size&gt;速度+{MoveSpeedPer}%，&lt;size=2&gt; &lt;/size&gt;并&lt;size=2&gt; &lt;/size&gt;免疫&lt;size=2&gt; &lt;/size&gt;异常&lt;size=2&gt; &lt;/size&gt;状态。</String>
@@ -18427,7 +18411,7 @@ D = 1 ~ 4</String>
   <String Key="NormalMissionSubTap_3">其他</String>
   <String Key="UnintendedExitScoreProtected_0">因&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;非故意&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;中途&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;退出&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;触发&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;了&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;分数&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;下降&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;保护&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;系统，&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;分数&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;未&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;被&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;扣除</String>
   <String Key="UnintendedExitScoreProtected_1">由于&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;中途&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;退出&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;次数&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;超过&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;分数&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;下降&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;保护&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;次数，&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;分数&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;已&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;被&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;扣除。</String>
-  <String Key="ColosseumRemainLeftIgnoreCount">可&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;保护&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;次数({0}/3)</String>
+  <String Key="ColosseumRemainLeftIgnoreCount">可&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;保护&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;次数({0}/5)</String>
   <String Key="UnintendedExitScoreProtectedInfo_0">分数&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;下降&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;保护&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;系统&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;前半期、&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;后半期&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;各&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;可&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;保护 3 &lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;次。</String>
   <String Key="UnintendedExitScoreProtectedInfo_1">满足&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;以下&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;条件&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;分数&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;下降&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;保护&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;系统&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;会&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;自动&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;生效。</String>
   <String Key="UnintendedExitScoreProtectedInfo_2">在&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;决胜&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;战场&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;中&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;被&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;判定&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;为&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;中途&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;退出&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;&lt;size=2&gt; &lt;/size&gt;时</String>
@@ -20061,13 +20045,13 @@ D = 1 ~ 4</String>
   <String Key="SkinDesc_107100401">&lt;i&gt;&lt;size=2&gt; &lt;/size&gt;激战&lt;size=2&gt; &lt;/size&gt;温暖&lt;size=2&gt; &lt;/size&gt;联赛&lt;size=2&gt; &lt;/size&gt;排名&lt;size=2&gt; &lt;/size&gt;达成&lt;size=2&gt; &lt;/size&gt;奖励&lt;/i&gt;</String>
   <String Key="SkinName_1057002">晨星&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;帕拉&lt;size=2&gt; &lt;/size&gt;尔</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;&lt;size=2&gt; &lt;/size&gt;诞生&lt;size=2&gt; &lt;/size&gt;于&lt;size=2&gt; &lt;/size&gt;拂晓&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;洁&lt;size=2&gt; &lt;/size&gt;星光，&lt;size=2&gt; &lt;/size&gt;终将&lt;size=2&gt; &lt;/size&gt;化为&lt;size=2&gt; &lt;/size&gt;驱散&lt;size=2&gt; &lt;/size&gt;黑暗&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最&lt;size=2&gt; &lt;/size&gt;耀眼&lt;size=2&gt; &lt;/size&gt;之&lt;size=2&gt; &lt;/size&gt;光。&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">绝对&lt;size=2&gt; &lt;/size&gt;防御&lt;size=2&gt; &lt;/size&gt;获得&lt;size=2&gt; &lt;/size&gt;率</String>
+  <String Key="SuperShieldModulator">绝对防御获得率</String>
   <String Key="BuildingEffect_BaseDamageReflect">反射&lt;size=2&gt; &lt;/size&gt;{Value}%&lt;size=2&gt; &lt;/size&gt;伤害
 
 （法术伤害减半）</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">将&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;部分&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;反射&lt;size=2&gt; &lt;/size&gt;给&lt;size=2&gt; &lt;/size&gt;敌人。</String>
-  <String Key="TreasureName_30042">费拉&lt;size=2&gt; &lt;/size&gt;陶&lt;size=2&gt; &lt;/size&gt;斯</String>
-  <String Key="TreasureSubName_30042">漆黑&lt;size=2&gt; &lt;/size&gt;之&lt;size=2&gt; &lt;/size&gt;盾</String>
+  <String Key="TreasureName_30042">费拉塔乌斯</String>
+  <String Key="TreasureSubName_30042">漆黑之盾</String>
   <String Key="TreasureDesc_30042">贝&lt;size=2&gt; &lt;/size&gt;希&lt;size=2&gt; &lt;/size&gt;木&lt;size=2&gt; &lt;/size&gt;思&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;盾牌&lt;size=2&gt; &lt;/size&gt;不&lt;size=2&gt; &lt;/size&gt;只是&lt;size=2&gt; &lt;/size&gt;用来&lt;size=2&gt; &lt;/size&gt;防御。&lt;size=2&gt; &lt;/size&gt;贝&lt;size=2&gt; &lt;/size&gt;希&lt;size=2&gt; &lt;/size&gt;木&lt;size=2&gt; &lt;/size&gt;思&lt;size=2&gt; &lt;/size&gt;举&lt;size=2&gt; &lt;/size&gt;着&lt;size=2&gt; &lt;/size&gt;沉重&lt;size=2&gt; &lt;/size&gt;盾牌&lt;size=2&gt; &lt;/size&gt;发动&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;猛烈&lt;size=2&gt; &lt;/size&gt;冲锋，&lt;size=2&gt; &lt;/size&gt;能&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;瞬间&lt;size=2&gt; &lt;/size&gt;压扁&lt;size=2&gt; &lt;/size&gt;再&lt;size=2&gt; &lt;/size&gt;坚固&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;装甲。</String>
   <String Key="TreasureSkillName_30042">降下</String>
   <String Key="BuffDataName_3300421">压制&lt;size=2&gt; &lt;/size&gt; I</String>
@@ -20075,10 +20059,10 @@ D = 1 ~ 4</String>
   <String Key="BuffDataName_3300423">粉碎</String>
   <String Key="BuffDataName_3300424">无力&lt;size=2&gt; &lt;/size&gt;化 II</String>
   <String Key="BuffDataName_3300425">压制&lt;size=2&gt; &lt;/size&gt; II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">费拉&lt;size=2&gt; &lt;/size&gt;陶&lt;size=2&gt; &lt;/size&gt;斯&lt;size=2&gt; &lt;/size&gt;精选&lt;size=2&gt; &lt;/size&gt;特别&lt;size=2&gt; &lt;/size&gt;商店</String>
-  <String Key="SpecialPackage_1680">费拉&lt;size=2&gt; &lt;/size&gt;陶&lt;size=2&gt; &lt;/size&gt;斯&lt;size=2&gt; &lt;/size&gt;礼包 1</String>
-  <String Key="SpecialPackage_1681">费拉&lt;size=2&gt; &lt;/size&gt;陶&lt;size=2&gt; &lt;/size&gt;斯&lt;size=2&gt; &lt;/size&gt;礼包 2</String>
-  <String Key="SpecialPackage_1682">费拉&lt;size=2&gt; &lt;/size&gt;陶&lt;size=2&gt; &lt;/size&gt;斯&lt;size=2&gt; &lt;/size&gt;礼包 3</String>
+  <String Key="SpecialShop_TreasurePickUp30042">费拉塔乌斯精选特别商店</String>
+  <String Key="SpecialPackage_1680">费拉塔乌斯礼包 1</String>
+  <String Key="SpecialPackage_1681">费拉塔乌斯礼包 2</String>
+  <String Key="SpecialPackage_1682">费拉塔乌斯礼包 3</String>
   <String Key="BuffDataDesc_3300421">每&lt;size=2&gt; &lt;/size&gt; {0} &lt;size=2&gt; &lt;/size&gt;威胁，&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;传递 +{1}倍</String>
   <String Key="BuffDataDesc_3300422">不&lt;size=2&gt; &lt;/size&gt;稳定&lt;size=2&gt; &lt;/size&gt;状态&lt;size=2&gt; &lt;/size&gt;被&lt;size=2&gt; &lt;/size&gt;移除&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;目标&lt;size=2&gt; &lt;/size&gt;晕眩 {0}秒</String>
   <String Key="BuffDataDesc_3300423">不&lt;size=2&gt; &lt;/size&gt;稳定&lt;size=2&gt; &lt;/size&gt;状态&lt;size=2&gt; &lt;/size&gt;敌人&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;物理&lt;size=2&gt; &lt;/size&gt;伤害 +{0}% (&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;物理&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;增加&lt;size=2&gt; &lt;/size&gt;不&lt;size=2&gt; &lt;/size&gt;叠加，&lt;size=2&gt; &lt;/size&gt;仅&lt;size=2&gt; &lt;/size&gt;适用&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;数值)</String>
@@ -20341,8 +20325,8 @@ D = 1 ~ 4</String>
   <String Key="UnitName_20020600">弗罗斯特&lt;size=2&gt; &lt;/size&gt;瓦尔德&lt;size=2&gt; &lt;/size&gt;士兵</String>
   <String Key="StoryHint_420107000">用&lt;size=2&gt; &lt;/size&gt;奥菲莉&lt;size=2&gt; &lt;/size&gt;亚&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;开战&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;抵挡&lt;size=2&gt; &lt;/size&gt;石像鬼&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;攻击&lt;size=2&gt; &lt;/size&gt;吧。</String>
   <String Key="StoryHint_420108000">弗拉德&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;攻击&lt;size=2&gt; &lt;/size&gt;会&lt;size=2&gt; &lt;/size&gt;持续&lt;size=2&gt; &lt;/size&gt;使&lt;size=2&gt; &lt;/size&gt;友军&lt;size=2&gt; &lt;/size&gt;晕眩。&lt;size=2&gt; &lt;/size&gt;请&lt;size=2&gt; &lt;/size&gt;活&lt;size=2&gt; &lt;/size&gt;用&lt;size=2&gt; &lt;/size&gt;能&lt;size=2&gt; &lt;/size&gt;对抗&lt;size=2&gt; &lt;/size&gt;晕眩&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;开战&lt;size=2&gt; &lt;/size&gt;技能。</String>
-  <String Key="TreasureName_30043">维塔&lt;size=2&gt; &lt;/size&gt;科尔德</String>
-  <String Key="TreasureSubName_30043">神圣&lt;size=2&gt; &lt;/size&gt;之&lt;size=2&gt; &lt;/size&gt;书</String>
+  <String Key="TreasureName_30043">维塔科尔德</String>
+  <String Key="TreasureSubName_30043">神圣之书</String>
   <String Key="TreasureDesc_30043">请&lt;size=2&gt; &lt;/size&gt;直面&lt;size=2&gt; &lt;/size&gt;自己&lt;size=2&gt; &lt;/size&gt;内心&lt;size=2&gt; &lt;/size&gt;真正&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;心意。
 
 &lt;size=2&gt; &lt;/size&gt;这样，&lt;size=2&gt; &lt;/size&gt;神圣&lt;size=2&gt; &lt;/size&gt;就&lt;size=2&gt; &lt;/size&gt;会&lt;size=2&gt; &lt;/size&gt;帮助&lt;size=2&gt; &lt;/size&gt;你。</String>
@@ -20352,66 +20336,60 @@ D = 1 ~ 4</String>
   <String Key="BuffDataName_3300433">神圣&lt;size=2&gt; &lt;/size&gt;守护</String>
   <String Key="BuffDataName_3300434">生命&lt;size=2&gt; &lt;/size&gt;循环 II</String>
   <String Key="BuffDataName_3300435">神圣&lt;size=2&gt; &lt;/size&gt;力 II</String>
-  <String Key="SpecialShop_TreasurePickUp30043">维塔&lt;size=2&gt; &lt;/size&gt;科尔德 Pickup &lt;size=2&gt; &lt;/size&gt;特别&lt;size=2&gt; &lt;/size&gt;商店</String>
-  <String Key="SpecialPackage_1683">维塔&lt;size=2&gt; &lt;/size&gt;科尔德&lt;size=2&gt; &lt;/size&gt;礼包 1</String>
-  <String Key="SpecialPackage_1684">维塔&lt;size=2&gt; &lt;/size&gt;科尔德&lt;size=2&gt; &lt;/size&gt;礼包 2</String>
-  <String Key="SpecialPackage_1685">维塔&lt;size=2&gt; &lt;/size&gt;科尔德&lt;size=2&gt; &lt;/size&gt;礼包 3</String>
+  <String Key="SpecialShop_TreasurePickUp30043">维塔科尔德精选特别商店</String>
+  <String Key="SpecialPackage_1683">维塔科尔德礼包 1</String>
+  <String Key="SpecialPackage_1684">维塔科尔德礼包 2</String>
+  <String Key="SpecialPackage_1685">维塔科尔德礼包 3</String>
   <String Key="BuffDataDesc_3300431">每&lt;size=2&gt; &lt;/size&gt;有 {0} 点&lt;size=2&gt; &lt;/size&gt;守护，&lt;size=2&gt; &lt;/size&gt;基本&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提高&lt;size=2&gt; &lt;/size&gt;效果&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度&lt;size=2&gt; &lt;/size&gt;系数 +{1}%</String>
   <String Key="BuffDataDesc_3300432">冷却&lt;size=2&gt; &lt;/size&gt;时间 {0}秒</String>
   <String Key="BuffDataDesc_3300433">向&lt;size=2&gt; &lt;/size&gt;区域&lt;size=2&gt; &lt;/size&gt;内&lt;size=2&gt; &lt;/size&gt;除&lt;size=2&gt; &lt;/size&gt;自身&lt;size=2&gt; &lt;/size&gt;外&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;所有&lt;size=2&gt; &lt;/size&gt;友军&lt;size=2&gt; &lt;/size&gt;赋予&lt;size=2&gt; &lt;/size&gt;恩宠</String>
   <String Key="BuffDataDesc_3300434">冷却&lt;size=2&gt; &lt;/size&gt;时间 {0}秒</String>
   <String Key="BuffDataDesc_3300435">每&lt;size=2&gt; &lt;/size&gt;有 {0} 点&lt;size=2&gt; &lt;/size&gt;守护，&lt;size=2&gt; &lt;/size&gt;基本&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提高&lt;size=2&gt; &lt;/size&gt;效果&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度&lt;size=2&gt; &lt;/size&gt;系数 +{1}%</String>
-  <String Key="TreasureSkillDesc_3300430">战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;仅&lt;size=2&gt; &lt;/size&gt;生效&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;维塔&lt;size=2&gt; &lt;/size&gt;科尔德&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;效果
-
-&lt;size=2&gt; &lt;/size&gt;将&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;者&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度&lt;size=2&gt; &lt;/size&gt;固定&lt;size=2&gt; &lt;/size&gt;为&lt;size=2&gt; &lt;/size&gt;战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;时&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;数值
-&lt;size=2&gt; &lt;/size&gt;治疗&lt;size=2&gt; &lt;/size&gt;友军&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;生成&lt;size=2&gt; &lt;/size&gt;持续{0}秒&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;区域，&lt;size=2&gt; &lt;/size&gt;使&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;者&lt;size=2&gt; &lt;/size&gt;周边 {1} &lt;size=2&gt; &lt;/size&gt;范围&lt;size=2&gt; &lt;/size&gt;内&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;友军&lt;size=2&gt; &lt;/size&gt;基本&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提高，&lt;size=2&gt; &lt;/size&gt;相当于&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;者&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度&lt;size=2&gt; &lt;/size&gt;的 {2}% (&lt;size=2&gt; &lt;/size&gt;冷却&lt;size=2&gt; &lt;/size&gt;时间 {3}秒)</String>
-  <String Key="TreasureSkillDesc_3300431">战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;仅&lt;size=2&gt; &lt;/size&gt;生效&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;维塔&lt;size=2&gt; &lt;/size&gt;科尔德&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;效果
-
-&lt;size=2&gt; &lt;/size&gt;将&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;者&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度&lt;size=2&gt; &lt;/size&gt;固定&lt;size=2&gt; &lt;/size&gt;为&lt;size=2&gt; &lt;/size&gt;战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;时&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;数值
-&lt;size=2&gt; &lt;/size&gt;治疗&lt;size=2&gt; &lt;/size&gt;友军&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;生成&lt;size=2&gt; &lt;/size&gt;持续{0}秒&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;区域，&lt;size=2&gt; &lt;/size&gt;使&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;者&lt;size=2&gt; &lt;/size&gt;周边 {1} &lt;size=2&gt; &lt;/size&gt;范围&lt;size=2&gt; &lt;/size&gt;内&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;友军&lt;size=2&gt; &lt;/size&gt;基本&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提高，&lt;size=2&gt; &lt;/size&gt;相当于&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;者&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度&lt;size=2&gt; &lt;/size&gt;的 {2}% (&lt;size=2&gt; &lt;/size&gt;冷却&lt;size=2&gt; &lt;/size&gt;时间 {3}秒)
-&lt;size=2&gt; &lt;/size&gt;每&lt;size=2&gt; &lt;/size&gt;有 {4} 点&lt;size=2&gt; &lt;/size&gt;守护，&lt;size=2&gt; &lt;/size&gt;基本&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提高&lt;size=2&gt; &lt;/size&gt;效果&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度&lt;size=2&gt; &lt;/size&gt;系数 +{5}%</String>
-  <String Key="TreasureSkillDesc_3300433">战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;仅&lt;size=2&gt; &lt;/size&gt;生效&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;维塔&lt;size=2&gt; &lt;/size&gt;科尔德&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;效果
-
-&lt;size=2&gt; &lt;/size&gt;将&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;者&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度&lt;size=2&gt; &lt;/size&gt;固定&lt;size=2&gt; &lt;/size&gt;为&lt;size=2&gt; &lt;/size&gt;战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;时&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;数值
-&lt;size=2&gt; &lt;/size&gt;治疗&lt;size=2&gt; &lt;/size&gt;友军&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;生成&lt;size=2&gt; &lt;/size&gt;持续{0}秒&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;区域，&lt;size=2&gt; &lt;/size&gt;使&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;者&lt;size=2&gt; &lt;/size&gt;周边 {1} &lt;size=2&gt; &lt;/size&gt;范围&lt;size=2&gt; &lt;/size&gt;内&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;友军&lt;size=2&gt; &lt;/size&gt;基本&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提高，&lt;size=2&gt; &lt;/size&gt;相当于&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;者&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度&lt;size=2&gt; &lt;/size&gt;的 {2}% (&lt;size=2&gt; &lt;/size&gt;冷却&lt;size=2&gt; &lt;/size&gt;时间 {3}秒)
-&lt;size=2&gt; &lt;/size&gt;每&lt;size=2&gt; &lt;/size&gt;有 {4} 点&lt;size=2&gt; &lt;/size&gt;守护，&lt;size=2&gt; &lt;/size&gt;基本&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提高&lt;size=2&gt; &lt;/size&gt;效果&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度&lt;size=2&gt; &lt;/size&gt;系数 +{5}%
-&lt;size=2&gt; &lt;/size&gt;向&lt;size=2&gt; &lt;/size&gt;区域&lt;size=2&gt; &lt;/size&gt;内&lt;size=2&gt; &lt;/size&gt;除&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;者&lt;size=2&gt; &lt;/size&gt;外&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;友军&lt;size=2&gt; &lt;/size&gt;赋予&lt;size=2&gt; &lt;/size&gt;恩宠</String>
+  <String Key="TreasureSkillDesc_3300430">战斗开始时，仅应用穿戴维塔科尔德的最高星级英雄的效果
+将穿戴者的法术强度固定为战斗开始时的数值
+治愈友军时，生成持续 {0}秒的区域，使穿戴者周边 {1}范围内友军的基础伤害提高相当于穿戴者法术强度 {2}%的数值 (冷却时间 {3}秒)</String>
+  <String Key="TreasureSkillDesc_3300431">战斗开始时，仅应用穿戴维塔科尔德的最高星级英雄的效果
+将穿戴者的法术强度固定为战斗开始时的数值
+治愈友军时，生成持续 {0}秒的区域，使穿戴者周边 {1}范围内友军的基础伤害提高相当于穿戴者法术强度 {2}%的数值 (冷却时间 {3}秒)
+每有 {4}守护，基础伤害提升效果的法术强度系数 +{5}%</String>
+  <String Key="TreasureSkillDesc_3300433">战斗开始时，仅应用穿戴维塔科尔德的最高星级英雄的效果
+将穿戴者的法术强度固定为战斗开始时的数值
+治愈友军时，生成持续 {0}秒的区域，使穿戴者周边 {1}范围内友军的基础伤害提高相当于穿戴者法术强度 {2}%的数值 (冷却时间 {3}秒)
+每有 {4}守护，基础伤害提升效果的法术强度系数 +{5}%
+对区域内除穿戴者外的友军赋予恩宠</String>
   <String Key="SeasonalEventName_Season72">飞龙&lt;size=2&gt; &lt;/size&gt;祭</String>
   <String Key="SeasonalEventMode_Season72">飞龙&lt;size=2&gt; &lt;/size&gt;祭</String>
-  <String Key="TreasureName_50002">科尔&lt;size=2&gt; &lt;/size&gt;·&lt;size=2&gt; &lt;/size&gt;奥&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;比斯</String>
-  <String Key="TreasureSubName_50002">临时&lt;size=2&gt; &lt;/size&gt;副标题</String>
-  <String Key="TreasureDesc_50002">临时&lt;size=2&gt; &lt;/size&gt;说明 - &lt;size=2&gt; &lt;/size&gt;等&lt;size=2&gt; &lt;/size&gt;宝&lt;size=2&gt; &lt;/size&gt;具&lt;size=2&gt; &lt;/size&gt;概念&lt;size=2&gt; &lt;/size&gt;确定&lt;size=2&gt; &lt;/size&gt;后&lt;size=2&gt; &lt;/size&gt;再&lt;size=2&gt; &lt;/size&gt;补充 - &lt;size=2&gt; &lt;/size&gt;预想&lt;size=2&gt; &lt;/size&gt;概念：&lt;size=2&gt; &lt;/size&gt;像是&lt;size=2&gt; &lt;/size&gt;某种&lt;size=2&gt; &lt;/size&gt;石头？&lt;size=2&gt; &lt;/size&gt;或者&lt;size=2&gt; &lt;/size&gt;神器？&lt;size=2&gt; &lt;/size&gt;向&lt;size=2&gt; &lt;/size&gt;周边&lt;size=2&gt; &lt;/size&gt;动植物&lt;size=2&gt; &lt;/size&gt;借来&lt;size=2&gt; &lt;/size&gt;魔力&lt;size=2&gt; &lt;/size&gt;并&lt;size=2&gt; &lt;/size&gt;储存，&lt;size=2&gt; &lt;/size&gt;之后&lt;size=2&gt; &lt;/size&gt;再&lt;size=2&gt; &lt;/size&gt;释放&lt;size=2&gt; &lt;/size&gt;出去</String>
-  <String Key="TreasureSkillName_50002">魔力&lt;size=2&gt; &lt;/size&gt;合成</String>
-  <String Key="BuffDataName_3500021">同化&lt;size=2&gt; &lt;/size&gt; I</String>
-  <String Key="BuffDataName_3500022">魔力&lt;size=2&gt; &lt;/size&gt;结界 I</String>
-  <String Key="BuffDataName_3500023">魔力&lt;size=2&gt; &lt;/size&gt;共鸣</String>
-  <String Key="BuffDataName_3500024">魔力&lt;size=2&gt; &lt;/size&gt;结界 II</String>
-  <String Key="BuffDataName_3500025">同化&lt;size=2&gt; &lt;/size&gt; II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">科尔&lt;size=2&gt; &lt;/size&gt;·&lt;size=2&gt; &lt;/size&gt;奥&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;比斯 Pickup &lt;size=2&gt; &lt;/size&gt;特别&lt;size=2&gt; &lt;/size&gt;商店</String>
-  <String Key="SpecialPackage_1690">科尔&lt;size=2&gt; &lt;/size&gt;·&lt;size=2&gt; &lt;/size&gt;奥&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;比斯&lt;size=2&gt; &lt;/size&gt;礼包 1</String>
-  <String Key="SpecialPackage_1691">科尔&lt;size=2&gt; &lt;/size&gt;·&lt;size=2&gt; &lt;/size&gt;奥&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;比斯&lt;size=2&gt; &lt;/size&gt;礼包 2</String>
-  <String Key="SpecialPackage_1692">科尔&lt;size=2&gt; &lt;/size&gt;·&lt;size=2&gt; &lt;/size&gt;奥&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;比斯&lt;size=2&gt; &lt;/size&gt;礼包 3</String>
-  <String Key="BuffDataDesc_3500021">法术&lt;size=2&gt; &lt;/size&gt;暴&lt;size=2&gt; &lt;/size&gt;击&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;每&lt;size=2&gt; &lt;/size&gt;高于 {0}% &lt;size=2&gt; &lt;/size&gt;的 {1}%，&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提升&lt;size=2&gt; &lt;/size&gt;量 x{2}</String>
-  <String Key="BuffDataDesc_3500022">在&lt;size=2&gt; &lt;/size&gt;使用第3&lt;size=2&gt; &lt;/size&gt;次&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;前，&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害 {0}%</String>
-  <String Key="BuffDataDesc_3500023">使用&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;对&lt;size=2&gt; &lt;/size&gt;随机&lt;size=2&gt; &lt;/size&gt;目标&lt;size=2&gt; &lt;/size&gt;额外&lt;size=2&gt; &lt;/size&gt;施放 {1}&lt;size=2&gt; &lt;/size&gt;次&lt;size=2&gt; &lt;/size&gt;相同&lt;size=2&gt; &lt;/size&gt;技能，&lt;size=2&gt; &lt;/size&gt;造成 {0}% &lt;size=2&gt; &lt;/size&gt;伤害</String>
-  <String Key="BuffDataDesc_3500024">在&lt;size=2&gt; &lt;/size&gt;使用第3&lt;size=2&gt; &lt;/size&gt;次&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;前，&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害 {0}%</String>
-  <String Key="BuffDataDesc_3500025">法术&lt;size=2&gt; &lt;/size&gt;暴&lt;size=2&gt; &lt;/size&gt;击&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;每&lt;size=2&gt; &lt;/size&gt;高于 {0}% &lt;size=2&gt; &lt;/size&gt;的 {1}%，&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提升&lt;size=2&gt; &lt;/size&gt;量 x{2}</String>
-  <String Key="TreasureSkillDesc_3500020">战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;后，&lt;size=2&gt; &lt;/size&gt;仅&lt;size=2&gt; &lt;/size&gt;对&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;科尔·&lt;size=2&gt; &lt;/size&gt;奥&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;比斯&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;生效：&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;使用3&lt;size=2&gt; &lt;/size&gt;次&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;前，&lt;size=2&gt; &lt;/size&gt;魔力&lt;size=2&gt; &lt;/size&gt;上限 +{0}%，&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量 -{1}%
-&lt;size=2&gt; &lt;/size&gt;最后一个&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;获得&lt;size=2&gt; &lt;/size&gt;强化，&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量 +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;后，&lt;size=2&gt; &lt;/size&gt;仅&lt;size=2&gt; &lt;/size&gt;对&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;科尔·&lt;size=2&gt; &lt;/size&gt;奥&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;比斯&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;生效：&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;使用3&lt;size=2&gt; &lt;/size&gt;次&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;前，&lt;size=2&gt; &lt;/size&gt;魔力&lt;size=2&gt; &lt;/size&gt;上限 +{0}%，&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量 -{1}%
-&lt;size=2&gt; &lt;/size&gt;最后一个&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;获得&lt;size=2&gt; &lt;/size&gt;强化，&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量 +
-{2}%
-&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;暴&lt;size=2&gt; &lt;/size&gt;击&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;每&lt;size=2&gt; &lt;/size&gt;高于 {3}% &lt;size=2&gt; &lt;/size&gt;的 {4}%，&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提升&lt;size=2&gt; &lt;/size&gt;量 x{5}</String>
-  <String Key="TreasureSkillDesc_3500022">战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;后，&lt;size=2&gt; &lt;/size&gt;仅&lt;size=2&gt; &lt;/size&gt;对&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;科尔·&lt;size=2&gt; &lt;/size&gt;奥&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;比斯&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;生效：&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;使用3&lt;size=2&gt; &lt;/size&gt;次&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;前，&lt;size=2&gt; &lt;/size&gt;魔力&lt;size=2&gt; &lt;/size&gt;上限 +{0}%，&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量 -{1}%
-&lt;size=2&gt; &lt;/size&gt;最后一个&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;获得&lt;size=2&gt; &lt;/size&gt;强化，&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量 +
-{2}%
-&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;暴&lt;size=2&gt; &lt;/size&gt;击&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;每&lt;size=2&gt; &lt;/size&gt;高于 {3}% &lt;size=2&gt; &lt;/size&gt;的 {4}%，&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提升&lt;size=2&gt; &lt;/size&gt;量 x{5}
-&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;使用3&lt;size=2&gt; &lt;/size&gt;次&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;前，&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害 {6}%</String>
-  <String Key="TreasureSkillDesc_3500023">战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;后，&lt;size=2&gt; &lt;/size&gt;仅&lt;size=2&gt; &lt;/size&gt;对&lt;size=2&gt; &lt;/size&gt;穿戴&lt;size=2&gt; &lt;/size&gt;科尔·&lt;size=2&gt; &lt;/size&gt;奥&lt;size=2&gt; &lt;/size&gt;尔&lt;size=2&gt; &lt;/size&gt;比斯&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最高&lt;size=2&gt; &lt;/size&gt;星级&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;生效：&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;使用3&lt;size=2&gt; &lt;/size&gt;次&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;前，&lt;size=2&gt; &lt;/size&gt;魔力&lt;size=2&gt; &lt;/size&gt;上限 +{0}%，&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量 -{1}%
-&lt;size=2&gt; &lt;/size&gt;最后一个&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;获得&lt;size=2&gt; &lt;/size&gt;强化，&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量 +
-{2}%
-&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;暴&lt;size=2&gt; &lt;/size&gt;击&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;每&lt;size=2&gt; &lt;/size&gt;高于 {3}% &lt;size=2&gt; &lt;/size&gt;的 {4}%，&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;提升&lt;size=2&gt; &lt;/size&gt;量 x{5}
-&lt;size=2&gt; &lt;/size&gt;在&lt;size=2&gt; &lt;/size&gt;使用3&lt;size=2&gt; &lt;/size&gt;次&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;前
-，&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害 {6}%
-&lt;size=2&gt; &lt;/size&gt;使用&lt;size=2&gt; &lt;/size&gt;强化&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;对&lt;size=2&gt; &lt;/size&gt;随机&lt;size=2&gt; &lt;/size&gt;目标&lt;size=2&gt; &lt;/size&gt;额外&lt;size=2&gt; &lt;/size&gt;施放 {8}&lt;size=2&gt; &lt;/size&gt;次&lt;size=2&gt; &lt;/size&gt;相同&lt;size=2&gt; &lt;/size&gt;技能，&lt;size=2&gt; &lt;/size&gt;造成 {7}% &lt;size=2&gt; &lt;/size&gt;伤害</String>
+  <String Key="TreasureName_50002">科尔·奥比斯</String>
+  <String Key="TreasureSubName_50002">临时副名</String>
+  <String Key="TreasureDesc_50002">临时说明 - 宝具概念确定后补充 - 预想概念：某种向周边动植物借来魔力并储存后再释放的石头？神器？</String>
+  <String Key="TreasureSkillName_50002">魔力合成</String>
+  <String Key="BuffDataName_3500021">同化 I</String>
+  <String Key="BuffDataName_3500022">魔力结界 I</String>
+  <String Key="BuffDataName_3500023">魔力共鸣</String>
+  <String Key="BuffDataName_3500024">魔力结界 II</String>
+  <String Key="BuffDataName_3500025">同化 II</String>
+  <String Key="SpecialShop_TreasurePickUp50002">科尔·奥比斯精选特别商店</String>
+  <String Key="SpecialPackage_1690">科尔·奥比斯礼包 1</String>
+  <String Key="SpecialPackage_1691">科尔·奥比斯礼包 2</String>
+  <String Key="SpecialPackage_1692">科尔·奥比斯礼包 3</String>
+  <String Key="BuffDataDesc_3500021">法术暴击伤害每超过 {0}% 的 {1}%，强化技能的最终伤害增加量变为 {2}倍</String>
+  <String Key="BuffDataDesc_3500022">在使用第3次技能前，受到的伤害 {0}%</String>
+  <String Key="BuffDataDesc_3500023">使用强化技能时，对2个随机目标额外使用相同技能，造成 {0}%伤害</String>
+  <String Key="BuffDataDesc_3500024">在使用第3次技能前，受到的伤害 {0}%</String>
+  <String Key="BuffDataDesc_3500025">法术暴击伤害每超过 {0}% 的 {1}%，强化技能的最终伤害增加量变为 {2}倍</String>
+  <String Key="TreasureSkillDesc_3500020">战斗开始后，穿戴科尔·奥比斯的最高星级英雄在使用第3次技能前，魔力上限提高 {0}%，最终造成的伤害量降低 {1}%
+最后一个技能获得强化，最终伤害 +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">战斗开始后，穿戴科尔·奥比斯的最高星级英雄在使用第3次技能前，魔力上限提高 {0}%，最终造成的伤害量降低 {1}%
+最后一个技能获得强化，最终伤害 +{2}%
+法术暴击伤害每超过 {3}% 的 {4}%，强化技能的最终伤害增加量变为 {5}倍</String>
+  <String Key="TreasureSkillDesc_3500022">战斗开始后，穿戴科尔·奥比斯的最高星级英雄在使用第3次技能前，魔力上限提高 {0}%，最终造成的伤害量降低 {1}%
+最后一个技能获得强化，最终伤害 +{2}%
+法术暴击伤害每超过 {3}% 的 {4}%，强化技能的最终伤害增加量变为 {5}倍
+在使用技能3次前，受到的伤害 {6}%</String>
+  <String Key="TreasureSkillDesc_3500023">战斗开始后，穿戴科尔·奥比斯的最高星级英雄在使用第3次技能前，魔力上限提高 {0}%，最终造成的伤害量降低 {1}%
+最后一个技能获得强化，最终伤害 +{2}%
+法术暴击伤害每超过 {3}% 的 {4}%，强化技能的最终伤害增加量变为 {5}倍
+在使用技能3次前，受到的伤害 {6}%
+使用强化技能时，对2个随机目标额外使用相同技能，造成 {7}%伤害</String>
+  <String Key="AdsSummonRestrictionAlert">每&lt;size=2&gt; &lt;/size&gt;回合&lt;size=2&gt; &lt;/size&gt;最多&lt;size=2&gt; &lt;/size&gt;可&lt;size=2&gt; &lt;/size&gt;进行{0}&lt;size=2&gt; &lt;/size&gt;次。</String>
 </Strings>

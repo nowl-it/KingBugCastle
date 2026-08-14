@@ -1,4 +1,6 @@
 <Strings>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
   <String Key="Tags">TFT, AutoBattler, AutoChess, lolChess,  AutoBattle, Tactics, TeamfightTactics, TFT, Merge, Defense</String>
   <String Key="Store_ShortDesc">With the power of Heroes and the Most High, defend the Castle against invading enemies!</String>
@@ -142,9 +144,9 @@ Returning to Login menu.</String>
 
 (Cost:{0} Gems)</String>
   <String Key="King_1">King</String>
-  <String Key="King_2"> </String>
+  <String Key="King_2"></String>
   <String Key="Castle_1">Castle</String>
-  <String Key="Castle_2"> </String>
+  <String Key="Castle_2"></String>
   <String Key="LoadingPopupText">Communicating with Server...</String>
   <String Key="LoginByGoogle">Sign in with Google Play</String>
   <String Key="LoginByApple">Sign in with Apple</String>
@@ -264,11 +266,11 @@ Ember</String>
   <String Key="Post_Push_Contents18">1,000 Gold is waiting for you tonight!</String>
   <String Key="Post_Push_Contents19">There is Gold in your inbox~</String>
   <String Key="Post_Push_Contents20">We have supplies ready!</String>
-  <String Key="Post_Push_Contents21">End of King God Castle Season 72 D-Day</String>
-  <String Key="Post_Push_Contents22">End of King God Castle Season 72 D-1</String>
-  <String Key="Post_Push_Contents23">End of King God Castle Season 72 D-2</String>
-  <String Key="Post_Push_Contents24">End of King God Castle Season 72 D-4</String>
-  <String Key="Post_Push_Contents25">King God Castle Season 72 ending today!</String>
+  <String Key="Post_Push_Contents21">End of King God Castle Season {0} D-Day</String>
+  <String Key="Post_Push_Contents22">End of King God Castle Season {0} D-1</String>
+  <String Key="Post_Push_Contents23">End of King God Castle Season {0} D-2</String>
+  <String Key="Post_Push_Contents24">End of King God Castle Season {0} D-4</String>
+  <String Key="Post_Push_Contents25">King God Castle Season {0} ending today!</String>
   <String Key="Post_Push_Contents26">Please check out if there are any Pass Rewards you forgot to claim!</String>
   <String Key="Post_Push_Contents27">Claim all the Pass Rewards!</String>
   <String Key="Post_Push_Contents28">Battlefield and King God Pass will end in 4 days.</String>
@@ -853,7 +855,7 @@ She showed her overwhelming talent among the elves and human cadets. Zupitere is
   <String Key="FetchArtifactInfoFailed">Failed loading Relic info!</String>
   <String Key="Artifact_ClearGoldReward_GameEnd">+{0}% Relic Gold reward</String>
   <String Key="Artifact_ClearExpReward_GameEnd">+{0}% Relic EXP reward</String>
-  <String Key="Artifact_ClearEventModeReward_GameEnd">{0}% Relic Expedition reward </String>
+  <String Key="Artifact_ClearEventModeReward_GameEnd">{0}% Relic Expedition reward</String>
   <String Key="ArtifactCraft_Action_0">Craft</String>
   <String Key="ArtifactCraft_Action_1">Combine</String>
   <String Key="ArtifactCraft_Action_2">Forge</String>
@@ -1251,11 +1253,8 @@ Do you want to check?</String>
   <String Key="ItemName_10020">Expand Troop</String>
   <String Key="ItemDesc_10020">Expand the Troop by 1</String>
   <String Key="ItemName_10030">+5 Silver</String>
-  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">+10 Silver</String>
-  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">+20 Silver</String>
-  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">Medal of Honor</String>
   <String Key="ItemDesc_10040">Upgrade a random Hero’s Tier on the field by 1</String>
   <String Key="ItemName_10050">Premium Hero Scroll
@@ -1589,7 +1588,7 @@ For each hero, the effect is multiplied by 2 for each Tier lower than the hero i
   <String Key="FreeChanceFormat">Free retry: {0} times left</String>
   <String Key="RankTierFormat">{0}</String>
   <String Key="TierFormat">Tier {0}</String>
-  <String Key="ArenaSeasonFormat">Season {0} Arena </String>
+  <String Key="ArenaSeasonFormat">Season {0} Arena</String>
   <String Key="PassSeasonFormat">Season {0} King God Pass</String>
   <String Key="StageNumFormat3">{0} Round {1}</String>
   <String Key="StageNumFormat4">{0} Round {1}</String>
@@ -1862,7 +1861,7 @@ Physical/Spell HP Drain</String>
   <String Key="SkinName_1015001">Water Spirit Lily</String>
   <String Key="SkinDesc_1015001">When black mana stains the atmosphere, there comes a time when it won't rain for several months even in the verdant Eternal Forest. Sha-sha stores water from the Spring of Vitality and goes on a journey with Lily to help the withered beings in the forest.</String>
   <String Key="SkinName_1008001">Blue Flame Draco</String>
-  <String Key="SkinDesc_1008001">Draco, a half-dragon and half-human, could use the power of an adult dragon at a much younger age than a pure dragon. As he pursued destructive power, his flame was concentrated and enveloped in blue mana, becoming even hotter than before. </String>
+  <String Key="SkinDesc_1008001">Draco, a half-dragon and half-human, could use the power of an adult dragon at a much younger age than a pure dragon. As he pursued destructive power, his flame was concentrated and enveloped in blue mana, becoming even hotter than before.</String>
   <String Key="ThemeName_9">Frost Tribe Invasion!</String>
   <String Key="ThemeName_59">[Corruption] Frost Tribe Invasion!</String>
   <String Key="UnitName_20800">Frost Golem Fragment</String>
@@ -3427,7 +3426,7 @@ The previous mission will be switched to a new random mission.</String>
   <String Key="BoxStackInfoTitle">Enhanced Scroll</String>
   <String Key="BoxStackInfoDesc">On every &lt;color=#FFD247&gt;fourth Scroll purchase&lt;/color&gt;, you can purchase an &lt;color=#FFD247&gt;enhanced Scroll&lt;/color&gt; that has &lt;color=#FFD247&gt;double&lt;/color&gt; the value.</String>
   <String Key="HeroSummonPercentageTable">Hero Summon Probability Chart</String>
-  <String Key="GachaListDesc_NewHero"> Heroes you own will be converted to random Hero's Tokens.</String>
+  <String Key="GachaListDesc_NewHero">Heroes you own will be converted to random Hero's Tokens.</String>
   <String Key="GachaAllExpToUnitExpItem">Obtained as Books of EXP</String>
   <String Key="RandomUnitExp">Random Hero EXP</String>
   <String Key="ArtifactSummonDesc">You can obtain random Relic Pieces and Relics.</String>
@@ -3560,7 +3559,7 @@ And all that remained was ashes, a glimpse of what once was a battlefield.&lt;/i
   <String Key="InventoryItemDesc_110">A book filled with various experiences from around the world.
 Can be converted into hero EXP of your choice.</String>
   <String Key="InventoryItemDesc_120">A token bestowed to a hero.
-Used for hero Awakening and level up after level 16. </String>
+Used for hero Awakening and level up after level 16.</String>
   <String Key="InventoryItemDesc_130">A King’s Token bestowed to the best hero.
 Can be converted into a Hero’s Token of your choice.</String>
   <String Key="InventoryItemName_150">Shard of Growth</String>
@@ -3601,7 +3600,7 @@ Are you sure you want to use it?</String>
   <String Key="GachaName_1002">Shadow’s Manipulation</String>
   <String Key="CardInfo_TransformSummons">View Summoned Creature</String>
   <String Key="UnitSubName_10400">Doll of Darkness</String>
-  <String Key="SkillAltDesc_10400_0">Machina deals damage equal to {Unit@AtkByParentMatkPer}% of Rie's Spell Power on normal attack, and has {Unit@HpByParentHpPer}% of Rie's HP and &lt;color=#ffcc00&gt;100&lt;/color&gt;% of Rie's Spell Power, Attack Speed, and Movement Speed. </String>
+  <String Key="SkillAltDesc_10400_0">Machina deals damage equal to {Unit@AtkByParentMatkPer}% of Rie's Spell Power on normal attack, and has {Unit@HpByParentHpPer}% of Rie's HP and &lt;color=#ffcc00&gt;100&lt;/color&gt;% of Rie's Spell Power, Attack Speed, and Movement Speed.</String>
   <String Key="SkillAltDesc_10400">Machina deals damage equal to {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% of Rie's Spell Power upon normal attack, and has {Unit@OverwriteHpByParent:HpPer:BaseValue}% of Rie's HP and {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% of Rie's Spell Power, Attack Speed, and Movement Speed. Machina's damage is counted as spell normal damage dealt by Rie.</String>
   <String Key="ReceivedPostFlag">Claimed Banner of Honor reward.</String>
   <String Key="Post_Push_Contents102">Rewards for Reaching 2,000 Likes on the Official Facebook Page</String>
@@ -3854,7 +3853,7 @@ Sales price increases by {0} Silver when a battle is won (max {1}).</String>
   <String Key="ItemDescSub_40463_00">+{0}% ATK</String>
   <String Key="ItemDescSub_40463_01">+{0}% Attack Speed</String>
   <String Key="ItemDescSub_40463_02">+{0} Protection</String>
-  <String Key="ItemDescSub_40463_03">+{0}% Spell Power </String>
+  <String Key="ItemDescSub_40463_03">+{0}% Spell Power</String>
   <String Key="ItemDescSub_40463_04">+{0}% Physical/Spell HP Drain</String>
   <String Key="ItemDescSub_40463_05">Recovers base MP by {0}%</String>
   <String Key="ItemDescSub_40463_06">+{0}% Max HP</String>
@@ -4994,6 +4993,7 @@ Witness my overwhelming power!&lt;/i&gt;</String>
   <String Key="Hero_Awaken_Noti">{0} has reached level 16 and can now be Awakened.
 Upon Awakening, the hero's &lt;color=#FFD247&gt;Awakened Abilities&lt;/color&gt; can be used.</String>
   <String Key="ItemDescSub_40463_07">Mighty Block {0} times</String>
+  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">When a Hero appears, the &lt;color=#FFD247&gt;selected Hero&lt;/color&gt; is &lt;color=#FFD247&gt;guaranteed!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Select Heroes</String>
   <String Key="SelectPickupUnitAgain">Reset</String>
@@ -5499,10 +5499,10 @@ We apologize for the inconvenience.</String>
   <String Key="InventoryItemName_2107">Castle EXP</String>
   <String Key="InventoryItemDesc_2107">The EXP that increases the level of the castle. It is needed for the growth of the Dominion, Altars, and other components.</String>
   <String Key="InventoryItemName_2108">Alliance EXP</String>
-  <String Key="InventoryItemDesc_2108">The EXP that increases the level of the Alliance. Alliance skills can be developed according to the Alliance level. </String>
+  <String Key="InventoryItemDesc_2108">The EXP that increases the level of the Alliance. Alliance skills can be developed according to the Alliance level.</String>
   <String Key="TerritoryPass_Short">Blessing</String>
   <String Key="AlchemyRemainPointAlert">Materials over stage {0} will disappear.
-Would you like to proceed with the Alchemy? </String>
+Would you like to proceed with the Alchemy?</String>
   <String Key="TerritoryPass_FreeHuntingReroll">Free chance to refresh Dominion Blessing
 {0}/{1} remaining</String>
   <String Key="TerritoryCantUpgradeImmediatelyNow">Immediate completion is unavailable when the remaining time is 5 seconds or below.
@@ -5518,7 +5518,7 @@ You can obtain related class bonus from the Dominion or other content.</String>
   <String Key="UnitRegion_Tooltip">Hero's active region
 You can obtain related regional bonus from the Dominion and other content.</String>
   <String Key="TerritoryPass_CannotRefund">※ Dominion's Blessing is a product that cannot be refunded.
-※ The amount of immediately provided Vitality varies depending on the Chamber level. </String>
+※ The amount of immediately provided Vitality varies depending on the Chamber level.</String>
   <String Key="LocalPushItemTitle_101">King God Castle</String>
   <String Key="LocalPushItemTitle_102">King God Castle</String>
   <String Key="LocalPushItemSubTitle_101">Max Vitality</String>
@@ -5777,8 +5777,6 @@ You cannot join the Raid for this season after leaving.</String>
   <String Key="ClanBattleModifier_13">Anguished</String>
   <String Key="ClanBattleModifier_14">Overwhelming</String>
   <String Key="UserLockedClanBattleAlert">This user cannot participate in this season's Alliance Raid.</String>
-  <String Key="UpdateNoticeVersion">171100</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Are you sure you want to disband the Alliance?</String>
   <String Key="Clan_Menu_LeaveConfirm">Are you sure you want to leave the Alliance?</String>
   <String Key="RogueLike_ReleaseAtLevel">Unlocked at level {0}</String>
@@ -6583,7 +6581,7 @@ That was the title for which he trained his fist.&lt;/i&gt;</String>
   <String Key="FlagsName_PreviousColosseum">Strife Battlefield Season {0} Banner of Honor</String>
   <String Key="FlagsDesc_PreviousColosseum">Reached {1} in Strife Battlefield Season {0}</String>
   <String Key="NameTagName_Colosseum">{0} Ruler's Decoration</String>
-  <String Key="NameTagDesc_Colosseum">An honorable reward for reaching {0} in the Strife Battlefield </String>
+  <String Key="NameTagDesc_Colosseum">An honorable reward for reaching {0} in the Strife Battlefield</String>
   <String Key="ArtufactPolishValue">Effect</String>
   <String Key="ArtifactPolishAction_ReplaceOptionIdx">Move Position</String>
   <String Key="PolishItemRewardPostTitle">Polishing Stone for Revamp of Polishing System</String>
@@ -6606,12 +6604,12 @@ Additionally charges &lt;color=#FFD247&gt;50%&lt;/color&gt; of Forging Energy up
   <String Key="ArtifactName_902">King Magical Polishing Stone</String>
   <String Key="ArtifactName_903">God Magical Polishing Stone</String>
   <String Key="ArtifactOption_901">Can be used as a material to polish a King God Relic
-Charges Polishing Gauge by &lt;color=#FFD247&gt;10&lt;/color&gt; </String>
+Charges Polishing Gauge by &lt;color=#FFD247&gt;10&lt;/color&gt;</String>
   <String Key="ArtifactOption_902">Can be used as a material to polish a King God Relic
-Charges Polishing Gauge by &lt;color=#FFD247&gt;50&lt;/color&gt; </String>
+Charges Polishing Gauge by &lt;color=#FFD247&gt;50&lt;/color&gt;</String>
   <String Key="ArtifactOption_903">Can be used as a material to polish a King God Relic
-Charges Polishing Gauge by &lt;color=#FFD247&gt;100&lt;/color&gt; </String>
-  <String Key="ArtifactDesc_901">A polishing stone that emits magical energy. As a very rare material, it can transform a Relic into its strongest form. </String>
+Charges Polishing Gauge by &lt;color=#FFD247&gt;100&lt;/color&gt;</String>
+  <String Key="ArtifactDesc_901">A polishing stone that emits magical energy. As a very rare material, it can transform a Relic into its strongest form.</String>
   <String Key="Polish_Gauge_Info">Whenever a Relic is forged, its Forging Energy is charged. When it is charged up to 100% or more,
 Forging Energy is consumed and you obtain 1 &lt;color=#FFD247&gt;Magical Polishing Stone&lt;/color&gt;.
 You can obtain additional Forging Energy by using Forge Stones and Catalysts.
@@ -6639,7 +6637,7 @@ Invasion mode Gold</String>
   <String Key="ArtifactDesc_14000">A sword that emits mysterious darkness.
 When it detects someone's fear of the unknown, it consumes their fear and emits even more darkness.</String>
   <String Key="DamagePerByStageTime_Piece">Increases damage according to the time passed after the beginning of the battle</String>
-  <String Key="DamagePerByStageTime">Increases damage by {0} per sec after the beginning of the battle (Max {1}) </String>
+  <String Key="DamagePerByStageTime">Increases damage by {0} per sec after the beginning of the battle (Max {1})</String>
   <String Key="ArtifactName_14010">Staff of Ancient Magic</String>
   <String Key="ArtifactDesc_14010">A needlessly heavy staff.
 Though it can cast archaic magic, it is just as heavy and big.</String>
@@ -6931,6 +6929,7 @@ For more details, please contact customer support.</String>
   <String Key="Clan_Menu_ChangeName">Change</String>
   <String Key="ColosseumSeasonRankingReward">Season Reward</String>
   <String Key="ColosseumRanking">Ranking</String>
+  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Relic Probability Details</String>
   <String Key="ArtifactOptionProbDetailDesc">You will be redirected to the announcement that details the probabilities for paid probability-based items.</String>
   <String Key="ColosseumNetworkChanged">Reconnecting due to network change.</String>
@@ -6938,8 +6937,8 @@ For more details, please contact customer support.</String>
   <String Key="ColosseumLeagueRankingRewardNotice">League Point Rewards</String>
   <String Key="ColosseumLeagueRankingRewardCondition_Rank">League &lt;color=#ffcf68&gt;rank {0} and above&lt;/color&gt;</String>
   <String Key="ColosseumLeagueRankingRewardCondition_Point">League &lt;color=#ffcf68&gt;points {0} and above&lt;/color&gt;</String>
-  <String Key="ColosseumLeaguePointFormula_1">King Tier League points = When the Tier ends, 1 point added per 100 points after 1 League point </String>
-  <String Key="ColosseumLeaguePointFormula_2">God Tier League points = When the Tier ends, 1 point added for every 3rd place after 20 League points </String>
+  <String Key="ColosseumLeaguePointFormula_1">King Tier League points = When the Tier ends, 1 point added per 100 points after 1 League point</String>
+  <String Key="ColosseumLeaguePointFormula_2">God Tier League points = When the Tier ends, 1 point added for every 3rd place after 20 League points</String>
   <String Key="ColosseumLeagueRankingRewardTitle">{0} Point Rewards</String>
   <String Key="ColosseumHallOfFame">Hall of Fame</String>
   <String Key="ColosseumSeasonRanking">Season Ranking</String>
@@ -7365,9 +7364,7 @@ We apologize for the inconvenience.</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;Tier Transcendence
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;You can grant additional effects&lt;/color&gt; to Paragons through &lt;color=#ffbc00&gt;tier transcendence&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Identical Paragons&lt;/color&gt; are required to perform tier transcendence.
-
-</String>
+&lt;color=#ffbc00&gt;Identical Paragons&lt;/color&gt; are required to perform tier transcendence.</String>
   <String Key="SkinName_1032006">Blue Wave Tia</String>
   <String Key="SkinName_1036004">Blue Wave Haerang</String>
   <String Key="SkinName_1042003">Blue Wave Taebaek</String>
@@ -7441,8 +7438,7 @@ Now, come forth and dance to my will.&lt;/i&gt;</String>
 +{1}% damage dealt during invincibility</String>
   <String Key="TreasureSkillDesc_3300033">When hero with the highest tier equipped with Mur reaches {0}% HP or takes lethal damage, the hero becomes invincible 1 time each for {1} sec
 (HP Recovery and Protection unavailable during invincibility)
-+{2}% damage dealt during invincibility
-</String>
++{2}% damage dealt during invincibility</String>
   <String Key="TreasureSkillDesc_3300034">When hero with the highest tier equipped with Mur reaches {0}% HP or takes lethal damage, the hero becomes invincible 1 time each for {1} sec
 (HP Recovery and Protection unavailable during invincibility)
 +{2}% damage dealt during invincibility
@@ -7672,15 +7668,11 @@ The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be
  &lt;size=25&gt;Tier Transcendence
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;You can grant additional effects&lt;/color&gt; to Legacies through &lt;color=#ffbc00&gt;tier transcendence&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform tier transcendence.
-
-</String>
+&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform tier transcendence.</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Legacy Enhancement
 
 &lt;/size&gt;Legacies can be &lt;color=#ffbc00&gt;enhanced&lt;/color&gt; to increase the effectiveness of &lt;color=#ffbc00&gt;Legacy Effects&lt;/color&gt;.
-The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be obtained by &lt;color=#ffbc00&gt;dismantling&lt;/color&gt; Legacies from the inventory or &lt;color=#ffbc00&gt;purchasing them from the Shop&lt;/color&gt;.
-
-</String>
+The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be obtained by &lt;color=#ffbc00&gt;dismantling&lt;/color&gt; Legacies from the inventory or &lt;color=#ffbc00&gt;purchasing them from the Shop&lt;/color&gt;.</String>
   <String Key="TreasureOvercome">Tier Transcendence</String>
   <String Key="TreasureOvercome_Short">Tier Transcendence</String>
   <String Key="ViewNextOvercome">View Next Transcendence</String>
@@ -8229,9 +8221,7 @@ The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be
  &lt;size=25&gt;Tier Transcendence
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;You can grant additional effects&lt;/color&gt; to Legacies through &lt;color=#ffbc00&gt;Tier Transcendence&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform Tier Transcendence."
-
-</String>
+&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform Tier Transcendence."</String>
   <String Key="TreasureSkillDesc_3300010">+{0}% CRIT Chance
 Deactivated for {1} sec upon taking damage</String>
   <String Key="TreasureSkillDesc_3300011">+{0}% CRIT Chance
@@ -9494,7 +9484,7 @@ Your score will not drop below 2,000 points.</String>
   <String Key="UnitSubName_10670">War Banner Bearer</String>
   <String Key="Potential_10670_0">+30 Guard</String>
   <String Key="Potential_10670_1">-70% damage taken for 2 sec after taking damage for the first time in battle</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;The Litere family, a prestigious lineage of the Empire, has produced outstanding talents in various fields. Although Patros, a member of the Litere family, was not born with innate abilities, he became an exemplary commanding officer of the Imperial Army through exceptional effort.&lt;/i&gt; </String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;The Litere family, a prestigious lineage of the Empire, has produced outstanding talents in various fields. Although Patros, a member of the Litere family, was not born with innate abilities, he became an exemplary commanding officer of the Imperial Army through exceptional effort.&lt;/i&gt;</String>
   <String Key="SkillName_10670">For the Empire!</String>
   <String Key="SkillDesc_10670">Encourages allies for {TotalAttackTime} sec, healing all allies within {SplashRangeX}{x}{SplashRangeY} range nearby by {Heal} every {Time} sec while also increasing their Attack Speed by {AttackSpeedPerUnit10670}% every time. The highest Attack Speed increase is applied among the increases from skills with the same name.</String>
   <String Key="SkillDesc_10670_Short">For {TotalAttackTime} sec, heals allies within {SplashRangeX}{x}{SplashRangeY} range nearby by {Heal} every {Time} sec while also increasing their Attack Speed by {AttackSpeedPerUnit10670}% every time. Only the highest Attack Speed increase from &lt;For the Empire!&gt; is applied.</String>
@@ -9794,8 +9784,7 @@ You &lt;color=#FF0000&gt;cannot change&lt;/color&gt; the selected Legacies after
   <String Key="BaseHybridDefOnInvade">+{0} Gold reward from Invasion
 +{1} DEF to all heroes in Invasion
 Cannot be enhanced through forging or polishing</String>
-  <String Key="ArtifactOptionDesc_Event_15000">
-Free position movement through polishing
+  <String Key="ArtifactOptionDesc_Event_15000">Free position movement through polishing
 (until Dec 3, 2024)</String>
   <String Key="SkinName_1032007">Tia the Moon Goddess</String>
   <String Key="SkinName_1032007_NewLine">Tia the Moon Goddess</String>
@@ -11384,8 +11373,7 @@ Challenge &amp; Achievement</String>
   <String Key="AddDifficultyUnlockDesc">If cleared without damage, the difficulty will be unlocked by 2 levels.</String>
   <String Key="AccessoryLevelUpTutorialLock">Unlocked after clearing Corruption II-1.</String>
   <String Key="NotAccessoryLevelUp">No Accessories available for enhancement</String>
-  <String Key="ArtifactOptionDesc_Event_15020">
-Free position movement through polishing (&lt;color=#ffbd4a&gt;until {0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">Free position movement through polishing (&lt;color=#ffbd4a&gt;until {0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Clear Chapter {0}-{1} {Diff} level or higher.</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">Clear [Corruption] Chapter {0}-{1} {Diff} level or higher.</String>
   <String Key="Polish_EventArtifact_Alert">This Relic cannot be enhanced through polishing!</String>
@@ -11737,8 +11725,7 @@ If the attack target's Max HP is higher than the user's Max HP, an additional sw
   <String Key="SpecialPackage_1556">Eterna Package 1</String>
   <String Key="SpecialPackage_1557">Eterna Package 2</String>
   <String Key="SpecialPackage_1558">Eterna Package 3</String>
-  <String Key="MakeAllLateComerExceptSlot">Grants the Backup effect to all heroes except for the hero positioned {0} in the Troop.
-</String>
+  <String Key="MakeAllLateComerExceptSlot">Grants the Backup effect to all heroes except for the hero positioned {0} in the Troop.</String>
   <String Key="Order_1">first</String>
   <String Key="Order_2">second</String>
   <String Key="Order_3">third</String>
@@ -14421,8 +14408,7 @@ Recommended: Strife Battlefield</String>
   <String Key="AltarHelpBuilding_5">An Altar that increases the supply of Silver to facilitate hero summoning and shop usage.
 
 Recommended: Invasion, Arena</String>
-  <String Key="ArtifactBuffDataDesc_15010">+{0}% Attack Speed for the Vanguard hero at the beginning of the battle in Invasion and Expedition (no effect if there is no Vanguard hero)
-</String>
+  <String Key="ArtifactBuffDataDesc_15010">+{0}% Attack Speed for the Vanguard hero at the beginning of the battle in Invasion and Expedition (no effect if there is no Vanguard hero)</String>
   <String Key="Post_Name_AltarGoldRefund">Refund of Altar Ember Expansion Cost</String>
   <String Key="Post_Desc_AltarGoldRefund">This is a refund of the Gold spent on expanding Ember at the Altars.</String>
   <String Key="OutgameTutorial_140_00">Greetings, King of the Castle. It's been a while. &lt;color=#FFC13D&gt;I am Knight Commander Aslyn.&lt;/color&gt;
@@ -15474,7 +15460,7 @@ Current refreshes: {3}</String>
   <String Key="SeasonInformation">Season Info</String>
   <String Key="SeasonInformationHelp_0">You can check the Chapter info for the Assault Summon Stone offered this season and the adjusted Hero stats.</String>
   <String Key="SeasonInformationHelp_1">Tap a Chapter icon to see the name of the Assault Summon Stone.</String>
-  <String Key="SeasonInformationHelp_2">Tap View All in Hero Stats Adjustment to see all Heroes' current Damage Dealt and Absolute Defense Obtain Rate.</String>
+  <String Key="SeasonInformationHelp_2">In Hero Stats Adjustment, tap View All to see all Heroes' Damage Dealt and Mighty Block Chance.</String>
   <String Key="InvadeSpawnItem">Assault Summon Stone</String>
   <String Key="SkillDesc_60505">When you get hit and become filled with rage, gain +{AttackSpeedPer}% Attack Speed and +{MoveSpeedPer}% Move Speed, and become immune to status effects.</String>
   <String Key="SkillDesc_60665">When you get hit and become filled with rage, gain +{AttackSpeedPer}% Attack Speed and +{MoveSpeedPer}% Move Speed, and become immune to status effects.</String>
@@ -16480,7 +16466,7 @@ Looking again, it seems like a truly beautiful smile.</String>
   <String Key="NormalMissionSubTap_3">Other</String>
   <String Key="UnintendedExitScoreProtected_0">No score loss was applied by the score loss protection system for unintended exits</String>
   <String Key="UnintendedExitScoreProtected_1">Your score was reduced because the number of leaves exceeded the protection limit.</String>
-  <String Key="ColosseumRemainLeftIgnoreCount">Protection uses left ({0}/3)</String>
+  <String Key="ColosseumRemainLeftIgnoreCount">Protection uses left ({0}/5)</String>
   <String Key="UnintendedExitScoreProtectedInfo_0">The score loss protection system can be used up to 3 times in each half.</String>
   <String Key="UnintendedExitScoreProtectedInfo_1">The score loss protection system is applied automatically if the following conditions are met.</String>
   <String Key="UnintendedExitScoreProtectedInfo_2">If you are marked as leaving in the Strife Battlefield</String>
@@ -17974,11 +17960,11 @@ After Battle starts, Obtain +{11}% Crowd control resistance and +{12}% Spell DEF
   <String Key="SkinDesc_107100401">&lt;i&gt;Reward for placing in the Ranking of the League of Warmth in Battle&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Morning Star King Farael</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;The noblest starlight born in the early dawn will become the brightest light to break through the darkness.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Absolute Defense Chance</String>
+  <String Key="SuperShieldModulator">Mighty Block Chance</String>
   <String Key="BuildingEffect_BaseDamageReflect">+{Value}% Reflect damage
 (halved for spell damage)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">Hero reflects damage based on a percentage of incoming damage.</String>
-  <String Key="TreasureName_30042">Ferataus</String>
+  <String Key="TreasureName_30042">Ferrataus</String>
   <String Key="TreasureSubName_30042">Pitch-Black Shield</String>
   <String Key="TreasureDesc_30042">Behemus' shield is not just for defense. Behemus' Fierce Charge with his massive shield can crush even the toughest armor in an instant.</String>
   <String Key="TreasureSkillName_30042">Plunge</String>
@@ -17987,10 +17973,10 @@ After Battle starts, Obtain +{11}% Crowd control resistance and +{12}% Spell DEF
   <String Key="BuffDataName_3300423">Shatter</String>
   <String Key="BuffDataName_3300424">Enfeeblement II</String>
   <String Key="BuffDataName_3300425">Suppression II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Ferataus Pickup Special Shop</String>
-  <String Key="SpecialPackage_1680">Ferataus Package 1</String>
-  <String Key="SpecialPackage_1681">Ferataus Package 2</String>
-  <String Key="SpecialPackage_1682">Ferataus Package 3</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Ferrataus Pickup Special Shop</String>
+  <String Key="SpecialPackage_1680">Ferrataus Package 1</String>
+  <String Key="SpecialPackage_1681">Ferrataus Package 2</String>
+  <String Key="SpecialPackage_1682">Ferrataus Package 3</String>
   <String Key="BuffDataDesc_3300421">Damage transfer +{1}x per {0} Menace</String>
   <String Key="BuffDataDesc_3300422">When Unstable is removed, the target is Stunned for {0} sec.</String>
   <String Key="BuffDataDesc_3300423">Physical damage Taken by Unstable enemies +{0}% (Increases to Physical damage Taken do not Stack. Only the highest value applies)</String>
@@ -18231,7 +18217,7 @@ Absolute Defense Chance Increased</String>
   <String Key="StoryHint_420107000">Use Ophelia's Battle Start Skill to defend against the Gargoyle's attack.</String>
   <String Key="StoryHint_420108000">Vlad's attacks keep Stunning allies. Use a Battle Start Skill that can counter Stun.</String>
   <String Key="TreasureName_30043">Vitacorde</String>
-  <String Key="TreasureSubName_30043">Book of Sanctity</String>
+  <String Key="TreasureSubName_30043">Tome of Divinity</String>
   <String Key="TreasureDesc_30043">Face the true heart within you.
 Then sanctity will help you.</String>
   <String Key="TreasureSkillName_30043">Power of Life</String>
@@ -18249,23 +18235,23 @@ Then sanctity will help you.</String>
   <String Key="BuffDataDesc_3300433">Grants Benediction to all allies in the area except self</String>
   <String Key="BuffDataDesc_3300434">Cooldown {0}s</String>
   <String Key="BuffDataDesc_3300435">For every {0} Guard, Spell Power scaling of the base Damage increase effect +{1}%</String>
-  <String Key="TreasureSkillDesc_3300430">At Battle Start, only the effect of the highest-Tier Hero equipped with Vitacorde is applied
-Fix the wielder's Spell Power at its Battle Start value
-When healing an ally, creates an area for {0}s that increases the base Damage of allies within {1} Range of the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)</String>
-  <String Key="TreasureSkillDesc_3300431">At Battle Start, only the effect of the highest-Tier Hero equipped with Vitacorde is applied
-Fix the wielder's Spell Power at its Battle Start value
-When healing an ally, creates an area for {0}s that increases the base Damage of allies within {1} Range of the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
-For every {4} Guard, Spell Power scaling of the base Damage increase effect +{5}%</String>
-  <String Key="TreasureSkillDesc_3300433">At Battle Start, only the effect of the highest-Tier Hero equipped with Vitacorde is applied
-Fix the wielder's Spell Power at its Battle Start value
-When healing an ally, creates an area for {0}s that increases the base Damage of allies within {1} Range of the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
-For every {4} Guard, Spell Power scaling of the base Damage increase effect +{5}%
-Grants Benediction to allies in the area except the wielder</String>
+  <String Key="TreasureSkillDesc_3300430">At the start of Battle, only the effect of the highest-Tier Hero equipped with Vitacorde applies.
+The wielder's Spell Power is fixed to its value at the start of Battle.
+When healing allies, creates a zone for {0}s that increases the Basic Damage of allies within {1} Range around the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)</String>
+  <String Key="TreasureSkillDesc_3300431">At the start of Battle, only the effect of the highest-Tier Hero equipped with Vitacorde applies.
+The wielder's Spell Power is fixed to its value at the start of Battle.
+When healing allies, creates a zone for {0}s that increases the Basic Damage of allies within {1} Range around the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
+For every {4} Guard, +{5}% Spell Power scaling to the Basic Damage increase effect</String>
+  <String Key="TreasureSkillDesc_3300433">At the start of Battle, only the effect of the highest-Tier Hero equipped with Vitacorde applies.
+The wielder's Spell Power is fixed to its value at the start of Battle.
+When healing allies, creates a zone for {0}s that increases the Basic Damage of allies within {1} Range around the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
+For every {4} Guard, +{5}% Spell Power scaling to the Basic Damage increase effect
+Grants Benediction to allies in the zone except the wielder</String>
   <String Key="SeasonalEventName_Season72">Flying Dragon Festival</String>
   <String Key="SeasonalEventMode_Season72">Flying Dragon Festival</String>
   <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Temporary Subtitle</String>
-  <String Key="TreasureDesc_50002">Temporary description - add more once the Legacy concept is set - planned concept: maybe some kind of stone? An artifact? that borrows MP from nearby plants and animals, stores it, then releases it</String>
+  <String Key="TreasureSubName_50002">Temporary Subname</String>
+  <String Key="TreasureDesc_50002">Temporary description - add more once the Legacy concept is ready - Planned concept: a stone? artifact? that borrows MP from nearby plants and animals, stores it, then releases it</String>
   <String Key="TreasureSkillName_50002">MP Combination</String>
   <String Key="BuffDataName_3500021">Assimilation I</String>
   <String Key="BuffDataName_3500022">MP Barrier I</String>
@@ -18276,23 +18262,24 @@ Grants Benediction to allies in the area except the wielder</String>
   <String Key="SpecialPackage_1690">Cor Orbis Package 1</String>
   <String Key="SpecialPackage_1691">Cor Orbis Package 2</String>
   <String Key="SpecialPackage_1692">Cor Orbis Package 3</String>
-  <String Key="BuffDataDesc_3500021">For every {1}% Spell CRIT Damage above {0}%, Enhanced Skill Final Damage bonus x{2}</String>
+  <String Key="BuffDataDesc_3500021">For every {1}% Spell CRIT Damage above {0}%, the enhanced skill's Final Damage increase is multiplied by {2}</String>
   <String Key="BuffDataDesc_3500022">Damage Taken {0}% until the 3rd skill use</String>
-  <String Key="BuffDataDesc_3500023">Upon using an Enhanced Skill, use the same skill {1} extra time(s) on a random target for {0}% Damage</String>
+  <String Key="BuffDataDesc_3500023">Upon using an enhanced skill, additionally uses the same skill on 2 random targets for {0}% Damage</String>
   <String Key="BuffDataDesc_3500024">Damage Taken {0}% until the 3rd skill use</String>
-  <String Key="BuffDataDesc_3500025">For every {1}% Spell CRIT Damage above {0}%, Enhanced Skill Final Damage bonus x{2}</String>
-  <String Key="TreasureSkillDesc_3500020">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
-The last skill is Enhanced and its Final Damage is increased by +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
-The last skill is Enhanced and its Final Damage is increased by +{2}%
-For every {4}% Spell CRIT Damage above {3}%, Enhanced Skill Final Damage bonus x{5}</String>
-  <String Key="TreasureSkillDesc_3500022">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
-The last skill is Enhanced and its Final Damage is increased by +{2}%
-For every {4}% Spell CRIT Damage above {3}%, Enhanced Skill Final Damage bonus x{5}
-Damage Taken {6}% until the 3rd skill use</String>
-  <String Key="TreasureSkillDesc_3500023">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
-The last skill is Enhanced and its Final Damage is increased by +{2}%
-For every {4}% Spell CRIT Damage above {3}%, Enhanced Skill Final Damage bonus x{5}
-Damage Taken {6}% until the 3rd skill use
-Upon using an Enhanced Skill, use the same skill {8} extra time(s) on a random target for {7}% Damage</String>
+  <String Key="BuffDataDesc_3500025">For every {1}% Spell CRIT Damage above {0}%, the enhanced skill's Final Damage increase is multiplied by {2}</String>
+  <String Key="TreasureSkillDesc_3500020">After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.
+The last skill is enhanced, increasing Final Damage by +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.
+The last skill is enhanced, increasing Final Damage by +{2}%.
+For every {4}% Spell CRIT Damage above {3}%, the enhanced skill's Final Damage increase is multiplied by {5}</String>
+  <String Key="TreasureSkillDesc_3500022">After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.
+The last skill is enhanced, increasing Final Damage by +{2}%.
+For every {4}% Spell CRIT Damage above {3}%, the enhanced skill's Final Damage increase is multiplied by {5}
+Damage Taken {6}% until using a skill 3 times</String>
+  <String Key="TreasureSkillDesc_3500023">After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.
+The last skill is enhanced, increasing Final Damage by +{2}%.
+For every {4}% Spell CRIT Damage above {3}%, the enhanced skill's Final Damage increase is multiplied by {5}
+Damage Taken {6}% until using a skill 3 times
+Upon using an enhanced skill, additionally uses the same skill on 2 random targets for {7}% Damage</String>
+  <String Key="AdsSummonRestrictionAlert">Up to {0} times per round.</String>
 </Strings>

@@ -1,4 +1,6 @@
 <Strings>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81fb-a733-cc6e02547a98</String>
   <String Key="Title">King God Castle</String>
   <String Key="Tags">Awesomepiece, ZombieHighSchool, AutoChess, LolChess, KingGodCastle, AutoBattler, Chiếnlược, ĐấuTrườngChânLý, TFT, Ends, HelpmeEnds, Merge, Phòngthủ</String>
   <String Key="Store_ShortDesc">Vận dụng sức mạnh của thần linh và các anh hùng để giữ vững thành trì khỏi sự xâm lược của những kẻ địch tàn bạo! King God Castle!</String>
@@ -33,10 +35,10 @@
   <String Key="Dismiss">Hủy Triệu Hồi</String>
   <String Key="IngameLoading">Đang tải...</String>
   <String Key="TimeLeft">Thời Gian Còn Lại</String>
-  <String Key="Hour"> giờ</String>
-  <String Key="Minute"> phút</String>
-  <String Key="Second"> giây</String>
-  <String Key="Day"> ngày</String>
+  <String Key="Hour">giờ</String>
+  <String Key="Minute">phút</String>
+  <String Key="Second">giây</String>
+  <String Key="Day">ngày</String>
   <String Key="FreeGet">Nhận Miễn Phí</String>
   <String Key="Community">Cafe</String>
   <String Key="Text_KingGod">King God Castle</String>
@@ -140,9 +142,9 @@ Di chuyển sang màn hình đăng nhập.</String>
 
 (Chi phí: {0} Đá Quý)</String>
   <String Key="King_1">Vua</String>
-  <String Key="King_2"> </String>
+  <String Key="King_2"></String>
   <String Key="Castle_1">Thành</String>
-  <String Key="Castle_2"> </String>
+  <String Key="Castle_2"></String>
   <String Key="LoadingPopupText">Đang kết nối với server...</String>
   <String Key="LoginByGoogle">Đăng nhập bằng Google Play</String>
   <String Key="LoginByApple">Đăng nhập bằng Apple</String>
@@ -260,11 +262,11 @@ Di chuyển sang màn hình đăng nhập.</String>
   <String Key="Post_Push_Contents18">Cấp 1.000 Vàng vào tối nay!</String>
   <String Key="Post_Push_Contents19">Có Vàng trong Hòm Thư!</String>
   <String Key="Post_Push_Contents20">Lương Thực chi viện đã tới!</String>
-  <String Key="Post_Push_Contents21">Kết thúc King God Castle Mùa 72 D-day</String>
-  <String Key="Post_Push_Contents22">Kết thúc King God Castle Mùa 72 D-1</String>
-  <String Key="Post_Push_Contents23">Kết thúc King God Castle Mùa 72 D-2</String>
-  <String Key="Post_Push_Contents24">Kết thúc King God Castle Mùa 72 D-4</String>
-  <String Key="Post_Push_Contents25">King God Castle Mùa 72 sẽ kết thúc vào hôm nay!</String>
+  <String Key="Post_Push_Contents21">Kết thúc King God Castle Mùa {0} D-day</String>
+  <String Key="Post_Push_Contents22">Kết thúc King God Castle Mùa {0} D-1</String>
+  <String Key="Post_Push_Contents23">Kết thúc King God Castle Mùa {0} D-2</String>
+  <String Key="Post_Push_Contents24">Kết thúc King God Castle Mùa {0} D-4</String>
+  <String Key="Post_Push_Contents25">King God Castle Mùa {0} sẽ kết thúc vào hôm nay!</String>
   <String Key="Post_Push_Contents26">Kiểm tra xem có bỏ sót phần thưởng Pass nào không!</String>
   <String Key="Post_Push_Contents27">Nhớ nhận đủ các phần thưởng Pass nhé!</String>
   <String Key="Post_Push_Contents28">Hệ thống Chiến Trường và Pass sẽ kết thúc sau 4 ngày.</String>
@@ -445,7 +447,7 @@ Cổ Vật nguyên vẹn</String>
   <String Key="BestChallenge">Thử Thách cao nhất</String>
   <String Key="EliteDisabled">Thử Thách vô hiệu</String>
   <String Key="GameQuitPopupText">Đóng game?</String>
-  <String Key="RestartOldGame">Tiếp tục game đang tiến hành? </String>
+  <String Key="RestartOldGame">Tiếp tục game đang tiến hành?</String>
   <String Key="RestartOldGameSuccess">Hoàn tất tải game đang lưu!</String>
   <String Key="EnergyMaxExpended">Tăng chỉ số tối đa của Lương Thực</String>
   <String Key="AttackMode">Tập Kích</String>
@@ -1240,11 +1242,8 @@ Giúp tấn công phủ đầu từ vị trí nằm ngoài tầm đánh của k�
   <String Key="ItemName_10020">Tăng Cường Binh Lực</String>
   <String Key="ItemDesc_10020">Binh lực tăng thêm 1.</String>
   <String Key="ItemName_10030">Bạc +5</String>
-  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">Bạc +10</String>
-  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">Bạc +20</String>
-  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">Huân Chương Chiến Công</String>
   <String Key="ItemDesc_10040">Tăng 1 cấp ★ cho anh hùng ngẫu nhiên ở chiến trường.</String>
   <String Key="ItemName_10050">Thư Triệu Hồi Anh Hùng Cao Cấp (2 lần)</String>
@@ -3562,7 +3561,7 @@ Trên đống tro tàn mà thét lớn "Nơi đây trước kia từng là chi�
   <String Key="CardInfo_LevelUpInventoryItem">Miễn phí EXP/Vàng khi lên cấp anh hùng</String>
   <String Key="CardInfo_PotentialInventoryItem">Miễn phí EXP/ Dấu/ Vàng khi thức tỉnh anh hùng</String>
   <String Key="InventoryItemDesc_110">Cuốn sách lưu trữ nhiều kinh nghiệm trên thế gian.
-Có thể đổi thành EXP anh hùng mong muốn. </String>
+Có thể đổi thành EXP anh hùng mong muốn.</String>
   <String Key="InventoryItemDesc_120">Dấu được trao cho anh hùng.
 Dùng để thức tỉnh và lên cấp anh hùng từ cấp 16.</String>
   <String Key="InventoryItemDesc_130">Dấu Vua được trao cho anh hùng tuyệt thế.
@@ -4997,6 +4996,7 @@ Hãy nhìn đây! Thứ sức mạnh áp đảo.&lt;/i&gt;</String>
   <String Key="Hero_Awaken_Noti">{0} đã đạt cấp 16 và đủ khả năng thức tỉnh.
 Tiến hành thức tỉnh để có thể dùng &lt;color=#FFD247&gt;năng lực thức tỉnh&lt;/color&gt; của anh hùng.</String>
   <String Key="ItemDescSub_40463_07">Phòng thủ tuyệt đối {0} lần</String>
+  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">Khi Anh Hùng xuất hiện, &lt;color=#FFD247&gt;Anh Hùng đã chọn&lt;/color&gt; sẽ &lt;color=#FFD247&gt;xuất hiện chắc chắn!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Chọn anh hùng</String>
   <String Key="SelectPickupUnitAgain">Thiết lập lại</String>
@@ -5779,8 +5779,6 @@ Sau khi rút khỏi sẽ không thể tham gia Trận Chinh Phạt mùa này v�
   <String Key="ClanBattleModifier_13">Khổ Não</String>
   <String Key="ClanBattleModifier_14">Áp Đảo</String>
   <String Key="UserLockedClanBattleAlert">Người dùng này không thể tham gia Trận Chinh Phạt Liên Minh mùa này.</String>
-  <String Key="UpdateNoticeVersion">171100</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Giải thể Liên Minh?</String>
   <String Key="Clan_Menu_LeaveConfirm">Rút khỏi Liên Minh?</String>
   <String Key="RogueLike_ReleaseAtLevel">Mở ở cấp {0}</String>
@@ -6927,9 +6925,10 @@ Thông tin chi tiết vui lòng liên hệ thông qua Hỗ Trợ Khách Hàng.</
   <String Key="Clan_SystemChat_NameChanged">Tên Liên Minh đã thay đổi.</String>
   <String Key="Clan_Alert_NameBanned">Tên Liên Minh đã bị hạn chế do không phù hợp. Vui lòng thay đổi tại Thiết lập.</String>
   <String Key="Clan_ChangeName">Đổi tên Liên Minh</String>
-  <String Key="Clan_Menu_ChangeName">Đổi tên </String>
+  <String Key="Clan_Menu_ChangeName">Đổi tên</String>
   <String Key="ColosseumSeasonRankingReward">Thưởng mùa</String>
   <String Key="ColosseumRanking">Xếp hạng</String>
+  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Xem chi tiết xác suất Cổ Vật</String>
   <String Key="ArtifactOptionProbDetailDesc">Di chuyển đến trang thông tin chi tiết về xác suất xuất hiện tùy chọn Cổ Vật.</String>
   <String Key="ColosseumNetworkChanged">Đang kết nối lại do thay đổi mạng.</String>
@@ -7364,9 +7363,7 @@ Thành thật xin lỗi vì sự bất tiện này.</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;Siêu việt cấp ★
 
 &lt;/size&gt;Thông qua &lt;color=#ffbc00&gt;siêu việt cấp ★&lt;/color&gt; cho Bảo Cụ, có thể &lt;color=#ffbc00&gt;trao hiệu ứng bổ sung&lt;/color&gt; vào năng lực Bảo Cụ.
-Cần có &lt;color=#ffbc00&gt;Bảo Cụ cùng loại&lt;/color&gt; để thực hiện siêu việt cấp ★.
-
-</String>
+Cần có &lt;color=#ffbc00&gt;Bảo Cụ cùng loại&lt;/color&gt; để thực hiện siêu việt cấp ★.</String>
   <String Key="SkinName_1032006">Sóng Xanh Tya</String>
   <String Key="SkinName_1036004">Sóng Xanh Hải Lang</String>
   <String Key="SkinName_1042003">Sóng Xanh Thái Bạch</String>
@@ -7440,8 +7437,7 @@ EXP anh hùng nhận khi hoàn thành Tập Kích tăng {2}</String>
 Sát thương gây ra khi vô địch +{1}%</String>
   <String Key="TreasureSkillDesc_3300033">Anh hùng có cấp ★ cao nhất trong số các anh hùng đã gắn Mur vô địch trong {1} giây khi chịu sát thương dẫn đến tử trận hoặc ở mỗi lần máu đạt mức {0}% (Giới hạn mỗi điều kiện 1 lần)
 (Không thể hồi máu hay nhận khiên ở trạng thái vô địch)
-Sát thương gây ra khi vô địch +{2}%
-</String>
+Sát thương gây ra khi vô địch +{2}%</String>
   <String Key="TreasureSkillDesc_3300034">Anh hùng có cấp ★ cao nhất trong số các anh hùng đã gắn Mur vô địch trong {1} giây khi chịu sát thương dẫn đến tử trận hoặc ở mỗi lần máu đạt mức {0}% (Giới hạn mỗi điều kiện 1 lần)
 (Không thể hồi máu hay nhận khiên ở trạng thái vô địch)
 Sát thương gây ra khi vô địch +{2}%
@@ -7671,15 +7667,11 @@ Có thể nhận được &lt;color=#ffbc00&gt;nguyên liệu cường hóa&lt;/
  &lt;size=25&gt;Siêu việt cấp ★
 
 &lt;/size&gt;Thông qua &lt;color=#ffbc00&gt;siêu việt cấp ★&lt;/color&gt; cho Bảo Cụ, có thể &lt;color=#ffbc00&gt;trao hiệu ứng bổ sung&lt;/color&gt; vào năng lực Bảo Cụ.
-Cần có &lt;color=#ffbc00&gt;Bảo Cụ cùng loại&lt;/color&gt; để thực hiện siêu việt cấp ★.
-
-</String>
+Cần có &lt;color=#ffbc00&gt;Bảo Cụ cùng loại&lt;/color&gt; để thực hiện siêu việt cấp ★.</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Cường hóa Bảo Cụ
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;Cường hóa&lt;/color&gt; Bảo Cụ để gia tăng &lt;color=#ffbc00&gt;hiệu ứng năng lực Bảo Cụ&lt;/color&gt;.
-Có thể nhận được &lt;color=#ffbc00&gt;nguyên liệu cường hóa&lt;/color&gt; Bảo Cụ bằng cách &lt;color=#ffbc00&gt;phân hủy&lt;/color&gt; Bảo Cụ trong Kho hoặc &lt;color=#ffbc00&gt;mua tại Cửa Hàng&lt;/color&gt;.
-
-</String>
+Có thể nhận được &lt;color=#ffbc00&gt;nguyên liệu cường hóa&lt;/color&gt; Bảo Cụ bằng cách &lt;color=#ffbc00&gt;phân hủy&lt;/color&gt; Bảo Cụ trong Kho hoặc &lt;color=#ffbc00&gt;mua tại Cửa Hàng&lt;/color&gt;.</String>
   <String Key="TreasureOvercome">Siêu việt cấp ★</String>
   <String Key="TreasureOvercome_Short">Siêu việt cấp ★</String>
   <String Key="ViewNextOvercome">Xem siêu việt kế tiếp</String>
@@ -9492,7 +9484,7 @@ Không giảm xuống thấp hơn 2.000 điểm.</String>
   <String Key="UnitSubName_10670">Người Cầm Cờ Chiến Trường</String>
   <String Key="Potential_10670_0">Hộ vệ +30</String>
   <String Key="Potential_10670_1">Khi khai trận, sau khi chịu sát thương lần đầu tiên, sát thương phải nhận trong 2 giây -70%</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;Gia tộc danh tiếng Litere của Đế Quốc đã sản sinh ra nhiều nhân tài xuất chúng trong nhiều lĩnh vực. Patros, mặc dù không có tài năng bẩm sinh như những người xuất thân từ Litere khác, nhờ vào nỗ lực vượt trội hơn bất kỳ ai, anh đã trở thành một chỉ huy mẫu mực của Đế Quốc Quân.&lt;/i&gt; </String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;Gia tộc danh tiếng Litere của Đế Quốc đã sản sinh ra nhiều nhân tài xuất chúng trong nhiều lĩnh vực. Patros, mặc dù không có tài năng bẩm sinh như những người xuất thân từ Litere khác, nhờ vào nỗ lực vượt trội hơn bất kỳ ai, anh đã trở thành một chỉ huy mẫu mực của Đế Quốc Quân.&lt;/i&gt;</String>
   <String Key="SkillName_10670">Vì Đế Quốc!</String>
   <String Key="SkillDesc_10670">Khích lệ đồng đội trong {TotalAttackTime} giây, chữa trị {Heal} và tăng {AttackSpeedPerUnit10670}% tốc độ tấn công cho toàn bộ đồng đội trong phạm vi {SplashRangeX}{x}{SplashRangeY} quanh bản thân theo chu kỳ {Time} giây. Áp dụng lượng tăng tốc độ tấn công có hiệu ứng cao nhất trong số các kỹ năng cùng tên.</String>
   <String Key="SkillDesc_10670_Short">Trong {TotalAttackTime} giây, chữa trị {Heal} và tăng {AttackSpeedPerUnit10670}% tốc độ tấn công cho đồng đội trong phạm vi {SplashRangeX}{x}{SplashRangeY} xung quanh theo chu kỳ {Time} giây. Chỉ áp dụng lượng tăng tốc độ tấn công cao nhất của &lt;Vì Đế Quốc!&gt;.</String>
@@ -9792,8 +9784,7 @@ Chắc chắn bỏ qua?</String>
   <String Key="BaseHybridDefOnInvade">Thưởng Vàng Tập Kích +{0}
 Lực phòng thủ của mọi anh hùng ở Tập Kích +{1}
 Không thể tôi luyện, và không thể mài để cường hóa</String>
-  <String Key="ArtifactOptionDesc_Event_15000">
-Miễn phí chuyển vị trí thông qua mài (Đến 3/12/2024)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">Miễn phí chuyển vị trí thông qua mài (Đến 3/12/2024)</String>
   <String Key="SkinName_1032007">Nữ Thần Mặt Trăng Tya</String>
   <String Key="SkinName_1032007_NewLine">Nữ Thần Mặt Trăng Tya</String>
   <String Key="TerritoryBuildingName_40300">Tượng Nữ Thần Mặt Trăng</String>
@@ -11382,8 +11373,7 @@ Thử thách &amp; Thành tựu</String>
   <String Key="AddDifficultyUnlockDesc">Mở 2 mức độ khó khi hoàn thành mà không chịu sát thương.</String>
   <String Key="AccessoryLevelUpTutorialLock">Có thể xem sau khi hoàn thành Xâm Thực II-1.</String>
   <String Key="NotAccessoryLevelUp">Không có Trang Sức nào có thể cường hóa.</String>
-  <String Key="ArtifactOptionDesc_Event_15020">
-Miễn phí chuyển vị trí thông qua Mài (&lt;color=#ffbd4a&gt;Đến {0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">Miễn phí chuyển vị trí thông qua Mài (&lt;color=#ffbd4a&gt;Đến {0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Hoàn thành chương {0}-{1} độ khó [{Diff}] trở lên</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">Hoàn thành [Xâm Thực] chương {0}-{1} độ khó [{Diff}] trở lên</String>
   <String Key="Polish_EventArtifact_Alert">Cổ Vật này không thể cường hóa thông qua Mài!</String>
@@ -11735,8 +11725,7 @@ Khi mục tiêu tấn công có máu tối đa cao hơn bản thân, phát sinh 
   <String Key="SpecialPackage_1556">Gói Eterna 1</String>
   <String Key="SpecialPackage_1557">Gói Eterna 2</String>
   <String Key="SpecialPackage_1558">Gói Eterna 3</String>
-  <String Key="MakeAllLateComerExceptSlot">Trao hiệu ứng Đội đi sau cho toàn bộ anh hùng ngoại trừ anh hùng ở ô {0} của binh lực.
-</String>
+  <String Key="MakeAllLateComerExceptSlot">Trao hiệu ứng Đội đi sau cho toàn bộ anh hùng ngoại trừ anh hùng ở ô {0} của binh lực.</String>
   <String Key="Order_1">thứ nhất</String>
   <String Key="Order_2">thứ hai</String>
   <String Key="Order_3">thứ ba</String>
@@ -14419,8 +14408,7 @@ Trận Chinh Phạt Liên Minh</String>
   <String Key="AltarHelpBuilding_5">Tế Đàn giúp tăng lượng Bạc được nhận để dễ dàng triệu hồi anh hùng và sử dụng Cửa Hàng.
 
 Đề xuất: Tập Kích, Đấu Trường</String>
-  <String Key="ArtifactBuffDataDesc_15010">Khi khai trận trong Tập Kích và Viễn Chinh, tốc độ tấn công của Anh Hùng Tiên Phong +{0}% (Không có hiệu ứng nếu không có Anh Hùng Tiên Phong)
-</String>
+  <String Key="ArtifactBuffDataDesc_15010">Khi khai trận trong Tập Kích và Viễn Chinh, tốc độ tấn công của Anh Hùng Tiên Phong +{0}% (Không có hiệu ứng nếu không có Anh Hùng Tiên Phong)</String>
   <String Key="Post_Name_AltarGoldRefund">Hoàn trả vàng Gia Tăng Lửa Tế Đàn</String>
   <String Key="Post_Desc_AltarGoldRefund">Hoàn trả lại số vàng đã dùng cho Gia Tăng Lửa Tế Đàn.</String>
   <String Key="OutgameTutorial_140_00">Hân hạnh được diện kiến Quốc vương của tòa thành. &lt;color=#FFC13D&gt;Thần là Thống Soái Đội Hiệp Sĩ Aslyn.&lt;/color&gt;
@@ -15472,7 +15460,7 @@ Mỗi khi dùng kỹ năng, xác suất chí mạng vật lý +{4}% và sát th�
   <String Key="SeasonInformation">Thông tin Mùa</String>
   <String Key="SeasonInformationHelp_0">Bạn có thể xem thông tin Chương của Đá Triệu Hồi Đột Kích được cung cấp trong mùa này và Điều chỉnh chỉ số anh hùng đã được áp dụng.</String>
   <String Key="SeasonInformationHelp_1">Chạm biểu tượng Chương để xem tên của Đá Triệu Hồi Đột Kích.</String>
-  <String Key="SeasonInformationHelp_2">Trong Điều chỉnh chỉ số anh hùng, nhấn Xem tất cả để xem ST gây ra và tỷ lệ Nhận được Phòng thủ Tuyệt đối của tất cả Anh Hùng.</String>
+  <String Key="SeasonInformationHelp_2">Trong Điều chỉnh chỉ số anh hùng, chạm Xem tất cả để xem ST gây ra và Tỉ lệ nhận Phòng thủ tuyệt đối của tất cả Anh Hùng.</String>
   <String Key="InvadeSpawnItem">Đá Triệu Hồi Đột Kích</String>
   <String Key="SkillDesc_60505">Khi trúng đòn và đầy cơn giận, tăng Tốc độ tấn công +{AttackSpeedPer}% và Tốc độ di chuyển +{MoveSpeedPer}%, đồng thời miễn nhiễm hiệu ứng xấu.</String>
   <String Key="SkillDesc_60665">Khi trúng đòn và đầy cơn giận, tăng Tốc độ tấn công +{AttackSpeedPer}% và Tốc độ di chuyển +{MoveSpeedPer}%, đồng thời miễn nhiễm hiệu ứng xấu.</String>
@@ -16478,7 +16466,7 @@ Nhìn lại, đó dường như là một nụ cười thật sự rất đẹp.
   <String Key="NormalMissionSubTap_3">Khác</String>
   <String Key="UnintendedExitScoreProtected_0">Điểm không bị giảm nhờ hệ thống bảo vệ giảm điểm khi rời trận ngoài ý muốn</String>
   <String Key="UnintendedExitScoreProtected_1">Điểm đã bị giảm vì số lần rời trận vượt quá số lần được bảo vệ.</String>
-  <String Key="ColosseumRemainLeftIgnoreCount">Số lần bảo vệ còn lại ({0}/3)</String>
+  <String Key="ColosseumRemainLeftIgnoreCount">Số lần bảo vệ còn lại ({0}/5)</String>
   <String Key="UnintendedExitScoreProtectedInfo_0">Hệ thống bảo vệ giảm điểm có thể áp dụng tối đa 3 lần ở nửa đầu và 3 lần ở nửa sau.</String>
   <String Key="UnintendedExitScoreProtectedInfo_1">Hệ thống bảo vệ giảm điểm sẽ tự động áp dụng nếu thỏa các điều kiện sau.</String>
   <String Key="UnintendedExitScoreProtectedInfo_2">Khi bị tính là rời trận trong Chiến Trường Ác Chiến</String>
@@ -17972,12 +17960,12 @@ Sau khi bắt đầu Chiến Đấu, mỗi giây Nhận được +{11}% kháng h
   <String Key="SkinDesc_107100401">&lt;i&gt;Phần thưởng đạt Xếp Hạng của Liên Minh Ấm Áp trong Chiến Đấu&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Vương Sao Mai Farael</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;Ánh sao cao quý nhất sinh ra trong buổi rạng đông sớm sẽ hóa thành ánh sáng rực rỡ nhất, xuyên qua bóng tối.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Tỷ lệ nhận Phòng thủ Tuyệt đối</String>
+  <String Key="SuperShieldModulator">Tỉ lệ nhận Phòng thủ tuyệt đối</String>
   <String Key="BuildingEffect_BaseDamageReflect">Phản {Value}% sát thương
 (Sát thương phép: giảm một nửa)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">Phản lại một phần sát thương anh hùng đã chịu cho địch.</String>
-  <String Key="TreasureName_30042">Ferataus</String>
-  <String Key="TreasureSubName_30042">Khiên Đen Kịt</String>
+  <String Key="TreasureName_30042">Ferrataus</String>
+  <String Key="TreasureSubName_30042">Khiên Đen Tuyền</String>
   <String Key="TreasureDesc_30042">Khiên của Behemus không chỉ để phòng thủ. Cú xông tới dữ dội của Behemus với chiếc khiên nặng có thể nghiền méo cả lớp giáp cứng nhất chỉ trong chớp mắt.</String>
   <String Key="TreasureSkillName_30042">Lao Xuống</String>
   <String Key="BuffDataName_3300421">Áp Chế I</String>
@@ -17985,10 +17973,10 @@ Sau khi bắt đầu Chiến Đấu, mỗi giây Nhận được +{11}% kháng h
   <String Key="BuffDataName_3300423">Phá Vỡ</String>
   <String Key="BuffDataName_3300424">Suy Yếu II</String>
   <String Key="BuffDataName_3300425">Áp Chế II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Cửa Hàng Đặc Biệt Ferataus Pickup</String>
-  <String Key="SpecialPackage_1680">Gói Ferataus 1</String>
-  <String Key="SpecialPackage_1681">Gói Ferataus 2</String>
-  <String Key="SpecialPackage_1682">Gói Ferataus 3</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Cửa Hàng Đặc Biệt Pickup Ferrataus</String>
+  <String Key="SpecialPackage_1680">Gói Ferrataus 1</String>
+  <String Key="SpecialPackage_1681">Gói Ferrataus 2</String>
+  <String Key="SpecialPackage_1682">Gói Ferrataus 3</String>
   <String Key="BuffDataDesc_3300421">Truyền sát thương +{1}x mỗi {0} Uy hiếp</String>
   <String Key="BuffDataDesc_3300422">Khi Bất Ổn bị xóa, mục tiêu bị choáng trong {0} giây</String>
   <String Key="BuffDataDesc_3300423">Sát thương vật lý phải nhận của kẻ địch Bất Ổn +{0}% (Tăng sát thương vật lý phải nhận không cộng dồn. Chỉ áp dụng giá trị cao nhất)</String>
@@ -18229,7 +18217,7 @@ Tỷ lệ nhận Phòng thủ Tuyệt đối tăng</String>
   <String Key="StoryHint_420107000">Hãy dùng Kỹ năng Bắt đầu Trận đấu của Ophelia để phòng thủ trước đòn tấn công của Gargoyle.</String>
   <String Key="StoryHint_420108000">Đòn tấn công của Vlad liên tục gây choáng cho đồng minh. Hãy dùng Kỹ năng Bắt đầu Trận đấu có thể chống choáng.</String>
   <String Key="TreasureName_30043">Vitacorde</String>
-  <String Key="TreasureSubName_30043">Sách Thánh Khiết</String>
+  <String Key="TreasureSubName_30043">Thánh thư</String>
   <String Key="TreasureDesc_30043">Hãy đối diện với tấm lòng chân thật trong chính mình.
 Khi ấy, sự thánh khiết sẽ giúp bạn.</String>
   <String Key="TreasureSkillName_30043">Sức Mạnh Sinh Mệnh</String>
@@ -18247,23 +18235,23 @@ Khi ấy, sự thánh khiết sẽ giúp bạn.</String>
   <String Key="BuffDataDesc_3300433">Ban Ân sủng cho tất cả đồng minh trong phạm vi, trừ bản thân</String>
   <String Key="BuffDataDesc_3300434">Hồi chiêu {0} giây</String>
   <String Key="BuffDataDesc_3300435">Cứ mỗi {0} Hộ vệ, hệ số Lực phép của hiệu ứng tăng Sát thương cơ bản +{1}%</String>
-  <String Key="TreasureSkillDesc_3300430">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu ứng của Anh Hùng có cấp ★ cao nhất đang Gắn Vitacorde
-Cố định Lực phép của người mang theo giá trị lúc bắt đầu Chiến Đấu
-Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng Sát thương cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu {3} giây)</String>
-  <String Key="TreasureSkillDesc_3300431">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu ứng của Anh Hùng có cấp ★ cao nhất đang Gắn Vitacorde
-Cố định Lực phép của người mang theo giá trị lúc bắt đầu Chiến Đấu
-Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng Sát thương cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu {3} giây)
-Cứ mỗi {4} Hộ vệ, hệ số Lực phép của hiệu ứng tăng Sát thương cơ bản +{5}%</String>
-  <String Key="TreasureSkillDesc_3300433">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu ứng của Anh Hùng có cấp ★ cao nhất đang Gắn Vitacorde
-Cố định Lực phép của người mang theo giá trị lúc bắt đầu Chiến Đấu
-Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng Sát thương cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu {3} giây)
-Cứ mỗi {4} Hộ vệ, hệ số Lực phép của hiệu ứng tăng Sát thương cơ bản +{5}%
-Ban Ân sủng cho đồng minh trong phạm vi, trừ người mang</String>
+  <String Key="TreasureSkillDesc_3300430">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu lực của Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Vitacorde
+Lực phép của người mang được cố định theo giá trị lúc bắt đầu Chiến Đấu
+Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng ST cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu: {3} giây)</String>
+  <String Key="TreasureSkillDesc_3300431">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu lực của Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Vitacorde
+Lực phép của người mang được cố định theo giá trị lúc bắt đầu Chiến Đấu
+Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng ST cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu: {3} giây)
+Mỗi {4} Hộ vệ, hệ số Lực phép của hiệu ứng tăng ST cơ bản +{5}%</String>
+  <String Key="TreasureSkillDesc_3300433">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu lực của Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Vitacorde
+Lực phép của người mang được cố định theo giá trị lúc bắt đầu Chiến Đấu
+Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng ST cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu: {3} giây)
+Mỗi {4} Hộ vệ, hệ số Lực phép của hiệu ứng tăng ST cơ bản +{5}%
+Ban Ân sủng cho đồng minh trong vùng, trừ người mang</String>
   <String Key="SeasonalEventName_Season72">Lễ Hội Rồng Bay</String>
   <String Key="SeasonalEventMode_Season72">Lễ Hội Rồng Bay</String>
   <String Key="TreasureName_50002">Cor Orbis</String>
   <String Key="TreasureSubName_50002">Tên phụ tạm thời</String>
-  <String Key="TreasureDesc_50002">Mô tả tạm thời - sẽ bổ sung sau khi chốt ý tưởng Bảo Cụ - ý tưởng dự kiến: một loại đá nào đó? Một cổ vật? mượn Mana từ động thực vật xung quanh, tích trữ rồi giải phóng ra</String>
+  <String Key="TreasureDesc_50002">Mô tả tạm thời - sẽ bổ sung khi có ý tưởng Bảo Cụ - Ý tưởng dự kiến: một viên đá? hiện vật? mượn Mana từ động thực vật xung quanh, tích trữ rồi giải phóng</String>
   <String Key="TreasureSkillName_50002">Hợp Nhất Mana</String>
   <String Key="BuffDataName_3500021">Đồng Hóa I</String>
   <String Key="BuffDataName_3500022">Kết Giới Mana I</String>
@@ -18274,23 +18262,24 @@ Ban Ân sủng cho đồng minh trong phạm vi, trừ người mang</String>
   <String Key="SpecialPackage_1690">Gói Cor Orbis 1</String>
   <String Key="SpecialPackage_1691">Gói Cor Orbis 2</String>
   <String Key="SpecialPackage_1692">Gói Cor Orbis 3</String>
-  <String Key="BuffDataDesc_3500021">Cứ mỗi {1}% Sát thương chí mạng phép vượt {0}%, bonus Sát thương tổng của kỹ năng Cường hóa x{2}</String>
-  <String Key="BuffDataDesc_3500022">Sát thương phải nhận {0}% cho đến lần dùng kỹ năng thứ 3</String>
-  <String Key="BuffDataDesc_3500023">Khi dùng kỹ năng Cường hóa, dùng thêm {1} lần cùng kỹ năng lên 1 mục tiêu Ngẫu nhiên với {0}% Sát thương</String>
-  <String Key="BuffDataDesc_3500024">Sát thương phải nhận {0}% cho đến lần dùng kỹ năng thứ 3</String>
-  <String Key="BuffDataDesc_3500025">Cứ mỗi {1}% Sát thương chí mạng phép vượt {0}%, bonus Sát thương tổng của kỹ năng Cường hóa x{2}</String>
-  <String Key="TreasureSkillDesc_3500020">Sau khi bắt đầu Chiến Đấu, chỉ Anh Hùng đang Gắn Cor Orbis có cấp ★ cao nhất nhận +{0}% Mana tối đa và -{1}% Sát thương tổng gây ra cho đến lần dùng kỹ năng thứ 3
-Kỹ năng cuối được Cường hóa, Sát thương tổng +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">Sau khi bắt đầu Chiến Đấu, chỉ Anh Hùng đang Gắn Cor Orbis có cấp ★ cao nhất nhận +{0}% Mana tối đa và -{1}% Sát thương tổng gây ra cho đến lần dùng kỹ năng thứ 3
-Kỹ năng cuối được Cường hóa, Sát thương tổng +{2}%
-Cứ mỗi {4}% Sát thương chí mạng phép vượt {3}%, bonus Sát thương tổng của kỹ năng Cường hóa x{5}</String>
-  <String Key="TreasureSkillDesc_3500022">Sau khi bắt đầu Chiến Đấu, chỉ Anh Hùng đang Gắn Cor Orbis có cấp ★ cao nhất nhận +{0}% Mana tối đa và -{1}% Sát thương tổng gây ra cho đến lần dùng kỹ năng thứ 3
-Kỹ năng cuối được Cường hóa, Sát thương tổng +{2}%
-Cứ mỗi {4}% Sát thương chí mạng phép vượt {3}%, bonus Sát thương tổng của kỹ năng Cường hóa x{5}
-Sát thương phải nhận {6}% cho đến lần dùng kỹ năng thứ 3</String>
-  <String Key="TreasureSkillDesc_3500023">Sau khi bắt đầu Chiến Đấu, chỉ Anh Hùng đang Gắn Cor Orbis có cấp ★ cao nhất nhận +{0}% Mana tối đa và -{1}% Sát thương tổng gây ra cho đến lần dùng kỹ năng thứ 3
-Kỹ năng cuối được Cường hóa, Sát thương tổng +{2}%
-Cứ mỗi {4}% Sát thương chí mạng phép vượt {3}%, bonus Sát thương tổng của kỹ năng Cường hóa x{5}
-Sát thương phải nhận {6}% cho đến lần dùng kỹ năng thứ 3
-Khi dùng kỹ năng Cường hóa, dùng thêm {8} lần cùng kỹ năng lên 1 mục tiêu Ngẫu nhiên với {7}% Sát thương</String>
+  <String Key="BuffDataDesc_3500021">Cứ mỗi {1}% Sát thương chí mạng phép vượt quá {0}%, mức tăng ST tổng của kỹ năng cường hóa được nhân {2} lần</String>
+  <String Key="BuffDataDesc_3500022">ST phải nhận {0}% đến lần dùng kỹ năng thứ 3</String>
+  <String Key="BuffDataDesc_3500023">Khi dùng kỹ năng cường hóa, dùng thêm cùng kỹ năng lên 2 mục tiêu ngẫu nhiên với ST {0}%</String>
+  <String Key="BuffDataDesc_3500024">ST phải nhận {0}% đến lần dùng kỹ năng thứ 3</String>
+  <String Key="BuffDataDesc_3500025">Cứ mỗi {1}% Sát thương chí mạng phép vượt quá {0}%, mức tăng ST tổng của kỹ năng cường hóa được nhân {2} lần</String>
+  <String Key="TreasureSkillDesc_3500020">Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3
+Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3
+Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%
+Cứ mỗi {4}% Sát thương chí mạng phép vượt quá {3}%, mức tăng ST tổng của kỹ năng cường hóa được nhân {5} lần</String>
+  <String Key="TreasureSkillDesc_3500022">Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3
+Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%
+Cứ mỗi {4}% Sát thương chí mạng phép vượt quá {3}%, mức tăng ST tổng của kỹ năng cường hóa được nhân {5} lần
+ST phải nhận {6}% đến lần dùng kỹ năng thứ 3</String>
+  <String Key="TreasureSkillDesc_3500023">Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3
+Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%
+Cứ mỗi {4}% Sát thương chí mạng phép vượt quá {3}%, mức tăng ST tổng của kỹ năng cường hóa được nhân {5} lần
+ST phải nhận {6}% đến lần dùng kỹ năng thứ 3
+Khi dùng kỹ năng cường hóa, dùng thêm cùng kỹ năng lên 2 mục tiêu ngẫu nhiên với ST {7}%</String>
+  <String Key="AdsSummonRestrictionAlert">Tối đa {0} lần mỗi vòng.</String>
 </Strings>

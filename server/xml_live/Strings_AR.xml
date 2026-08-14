@@ -1,4 +1,6 @@
 <Strings>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">كينج غاد كاسل(KingGod Castle)</String>
   <String Key="Tags">أوسوم بيس، Lolchess، Autochess، Zombiehighschool، كينج غاد كاسل(KingGod Castle)، إستراتيجية، تيم فايت تاكتيكس، تي اف تي، أنس، مج، دفاع</String>
   <String Key="Store_ShortDesc">كينج غاد كاسل! إستخدم الأبطال والقوة العظمى للدفاع غلى القصر ضد الأعداء المختلفة!</String>
@@ -261,11 +263,11 @@
   <String Key="Post_Push_Contents18">نقدم لكم 1000 ذهب الليلة.</String>
   <String Key="Post_Push_Contents19">الذهب في إنتظارك بالبريد.</String>
   <String Key="Post_Push_Contents20">وصلتك إمدادات! تزود بها الأن!</String>
-  <String Key="Post_Push_Contents21">آخر يوم من الموس72 من الأرينا</String>
-  <String Key="Post_Push_Contents22">باقي يوم على إنتهاء الموسم 72 من الأرينا</String>
-  <String Key="Post_Push_Contents23">باقي 3 أيام على إنتهاء الموسم 72 من الأرينا</String>
-  <String Key="Post_Push_Contents24">باقي 5 أيام على إنتهاء الموسم 72 من الأرينا</String>
-  <String Key="Post_Push_Contents25">الموسم 72 من الأرينا سينتهي اليوم</String>
+  <String Key="Post_Push_Contents21">آخر يوم من الموس{0} من الأرينا</String>
+  <String Key="Post_Push_Contents22">باقي يوم على إنتهاء الموسم {0} من الأرينا</String>
+  <String Key="Post_Push_Contents23">باقي 3 أيام على إنتهاء الموسم {0} من الأرينا</String>
+  <String Key="Post_Push_Contents24">باقي 5 أيام على إنتهاء الموسم {0} من الأرينا</String>
+  <String Key="Post_Push_Contents25">الموسم {0} من الأرينا سينتهي اليوم</String>
   <String Key="Post_Push_Contents26">الرجاء التأكد من عدم نسيان مكافآت الباس!</String>
   <String Key="Post_Push_Contents27">الرجاء إستلام جميع مكافآت الباس!</String>
   <String Key="Post_Push_Contents28">سينتهي موسم الأرينا و موسم الباس بعد 4 أيام.</String>
@@ -5753,8 +5755,6 @@ You cannot join the Raid for this season after leaving.</String>
   <String Key="ClanBattleModifier_13">Anguished</String>
   <String Key="ClanBattleModifier_14">Overwhelming</String>
   <String Key="UserLockedClanBattleAlert">This user cannot participate in this season's Alliance Raid.</String>
-  <String Key="UpdateNoticeVersion">171100</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Are you sure you want to disband the Alliance?</String>
   <String Key="Clan_Menu_LeaveConfirm">Are you sure you want to leave the Alliance?</String>
   <String Key="RogueLike_ReleaseAtLevel">Unlocked at level {0}</String>
@@ -15425,7 +15425,6 @@ Current refreshes: {3}</String>
   <String Key="SeasonInformation">SeasonInformation</String>
   <String Key="SeasonInformationHelp_0">SeasonInformationHelp_0</String>
   <String Key="SeasonInformationHelp_1">SeasonInformationHelp_1</String>
-  <String Key="SeasonInformationHelp_2">Tap View All in Hero Stats Adjustment to see all Heroes' current Damage Dealt and Absolute Defense Obtain Rate.</String>
   <String Key="InvadeSpawnItem">InvadeSpawnItem</String>
   <String Key="SkillDesc_60505">SkillDesc_60505</String>
   <String Key="SkillDesc_60665">SkillDesc_60665</String>
@@ -16407,7 +16406,7 @@ Looking at it again, it seems like a truly beautiful smile.</String>
   <String Key="NormalMissionSubTap_3">Other</String>
   <String Key="UnintendedExitScoreProtected_0">No score loss was applied by the score loss protection system for unintended exits</String>
   <String Key="UnintendedExitScoreProtected_1">Your score was reduced because the number of leaves exceeded the protection limit.</String>
-  <String Key="ColosseumRemainLeftIgnoreCount">Protection uses left ({0}/3)</String>
+  <String Key="ColosseumRemainLeftIgnoreCount">Protection uses left ({0}/5)</String>
   <String Key="UnintendedExitScoreProtectedInfo_0">The score loss protection system can be used up to 3 times in each half.</String>
   <String Key="UnintendedExitScoreProtectedInfo_1">The score loss protection system is applied automatically if the following conditions are met.</String>
   <String Key="UnintendedExitScoreProtectedInfo_2">If you are marked as leaving in the Strife Battlefield</String>
@@ -17901,12 +17900,9 @@ After Battle starts, Obtain +{11}% Crowd control resistance and +{12}% Spell DEF
   <String Key="SkinDesc_107100401">&lt;i&gt;Reward for placing in the Ranking of the League of Warmth in Battle&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Morning Star King Farael</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;The noblest starlight born in the early dawn will become the brightest light to break through the darkness.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Absolute Defense Chance</String>
   <String Key="BuildingEffect_BaseDamageReflect">+{Value}% Reflect damage
 (halved for spell damage)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">يعكس جزء من الضرر الملحق بالبطل على العدو.</String>
-  <String Key="TreasureName_30042">Ferataus</String>
-  <String Key="TreasureSubName_30042">Pitch-Black Shield</String>
   <String Key="TreasureDesc_30042">Behemus' shield is not just for defense. Behemus' Fierce Charge with his massive shield can crush even the toughest armor in an instant.</String>
   <String Key="TreasureSkillName_30042">Plunge</String>
   <String Key="BuffDataName_3300421">Suppression I</String>
@@ -17914,10 +17910,6 @@ After Battle starts, Obtain +{11}% Crowd control resistance and +{12}% Spell DEF
   <String Key="BuffDataName_3300423">Shatter</String>
   <String Key="BuffDataName_3300424">Enfeeblement II</String>
   <String Key="BuffDataName_3300425">Suppression II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Ferataus Pickup Special Shop</String>
-  <String Key="SpecialPackage_1680">Ferataus Package 1</String>
-  <String Key="SpecialPackage_1681">Ferataus Package 2</String>
-  <String Key="SpecialPackage_1682">Ferataus Package 3</String>
   <String Key="BuffDataDesc_3300421">Damage transfer +{1}x per {0} Menace</String>
   <String Key="BuffDataDesc_3300422">When Unstable is removed, the target is Stunned for {0} sec.</String>
   <String Key="BuffDataDesc_3300423">Physical damage Taken by Unstable enemies +{0}% (Increases to Physical damage Taken do not Stack. Only the highest value applies)</String>
@@ -18157,8 +18149,6 @@ Absolute Defense Chance Increased</String>
   <String Key="UnitName_20020600">Frostwald Soldier</String>
   <String Key="StoryHint_420107000">Use Ophelia's Battle Start Skill to defend against the Gargoyle's attack.</String>
   <String Key="StoryHint_420108000">Vlad's attacks keep Stunning allies. Use a Battle Start Skill that can counter Stun.</String>
-  <String Key="TreasureName_30043">Vitacorde</String>
-  <String Key="TreasureSubName_30043">Book of Sanctity</String>
   <String Key="TreasureDesc_30043">Face the true heart within you.
 Then sanctity will help you.</String>
   <String Key="TreasureSkillName_30043">Power of Life</String>
@@ -18167,59 +18157,12 @@ Then sanctity will help you.</String>
   <String Key="BuffDataName_3300433">Holy Guard</String>
   <String Key="BuffDataName_3300434">Cycle of Life II</String>
   <String Key="BuffDataName_3300435">Divine Power II</String>
-  <String Key="SpecialShop_TreasurePickUp30043">Vitacorde Pickup Special Shop</String>
-  <String Key="SpecialPackage_1683">Vitacorde Package 1</String>
-  <String Key="SpecialPackage_1684">Vitacorde Package 2</String>
-  <String Key="SpecialPackage_1685">Vitacorde Package 3</String>
   <String Key="BuffDataDesc_3300431">For every {0} Guard, Spell Power scaling of the base Damage increase effect +{1}%</String>
   <String Key="BuffDataDesc_3300432">Cooldown {0}s</String>
   <String Key="BuffDataDesc_3300433">Grants Benediction to all allies in the area except self</String>
   <String Key="BuffDataDesc_3300434">Cooldown {0}s</String>
   <String Key="BuffDataDesc_3300435">For every {0} Guard, Spell Power scaling of the base Damage increase effect +{1}%</String>
-  <String Key="TreasureSkillDesc_3300430">At Battle Start, only the effect of the highest-Tier Hero equipped with Vitacorde is applied
-Fix the wielder's Spell Power at its Battle Start value
-When healing an ally, creates an area for {0}s that increases the base Damage of allies within {1} Range of the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)</String>
-  <String Key="TreasureSkillDesc_3300431">At Battle Start, only the effect of the highest-Tier Hero equipped with Vitacorde is applied
-Fix the wielder's Spell Power at its Battle Start value
-When healing an ally, creates an area for {0}s that increases the base Damage of allies within {1} Range of the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
-For every {4} Guard, Spell Power scaling of the base Damage increase effect +{5}%</String>
-  <String Key="TreasureSkillDesc_3300433">At Battle Start, only the effect of the highest-Tier Hero equipped with Vitacorde is applied
-Fix the wielder's Spell Power at its Battle Start value
-When healing an ally, creates an area for {0}s that increases the base Damage of allies within {1} Range of the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
-For every {4} Guard, Spell Power scaling of the base Damage increase effect +{5}%
-Grants Benediction to allies in the area except the wielder</String>
   <String Key="SeasonalEventName_Season72">Flying Dragon Festival</String>
   <String Key="SeasonalEventMode_Season72">Flying Dragon Festival</String>
-  <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Temporary Subtitle</String>
-  <String Key="TreasureDesc_50002">Temporary description - add more once the Legacy concept is set - planned concept: maybe some kind of stone? An artifact? that borrows MP from nearby plants and animals, stores it, then releases it</String>
-  <String Key="TreasureSkillName_50002">MP Combination</String>
-  <String Key="BuffDataName_3500021">Assimilation I</String>
-  <String Key="BuffDataName_3500022">MP Barrier I</String>
-  <String Key="BuffDataName_3500023">MP Resonance</String>
-  <String Key="BuffDataName_3500024">MP Barrier II</String>
-  <String Key="BuffDataName_3500025">Assimilation II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">Cor Orbis Pickup Special Shop</String>
-  <String Key="SpecialPackage_1690">Cor Orbis Package 1</String>
-  <String Key="SpecialPackage_1691">Cor Orbis Package 2</String>
-  <String Key="SpecialPackage_1692">Cor Orbis Package 3</String>
-  <String Key="BuffDataDesc_3500021">For every {1}% Spell CRIT Damage above {0}%, Enhanced Skill Final Damage bonus x{2}</String>
-  <String Key="BuffDataDesc_3500022">Damage Taken {0}% until the 3rd skill use</String>
-  <String Key="BuffDataDesc_3500023">Upon using an Enhanced Skill, use the same skill {1} extra time(s) on a random target for {0}% Damage</String>
-  <String Key="BuffDataDesc_3500024">Damage Taken {0}% until the 3rd skill use</String>
-  <String Key="BuffDataDesc_3500025">For every {1}% Spell CRIT Damage above {0}%, Enhanced Skill Final Damage bonus x{2}</String>
-  <String Key="TreasureSkillDesc_3500020">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
-The last skill is Enhanced and its Final Damage is increased by +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
-The last skill is Enhanced and its Final Damage is increased by +{2}%
-For every {4}% Spell CRIT Damage above {3}%, Enhanced Skill Final Damage bonus x{5}</String>
-  <String Key="TreasureSkillDesc_3500022">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
-The last skill is Enhanced and its Final Damage is increased by +{2}%
-For every {4}% Spell CRIT Damage above {3}%, Enhanced Skill Final Damage bonus x{5}
-Damage Taken {6}% until the 3rd skill use</String>
-  <String Key="TreasureSkillDesc_3500023">After Battle Start, only the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until the 3rd skill use
-The last skill is Enhanced and its Final Damage is increased by +{2}%
-For every {4}% Spell CRIT Damage above {3}%, Enhanced Skill Final Damage bonus x{5}
-Damage Taken {6}% until the 3rd skill use
-Upon using an Enhanced Skill, use the same skill {8} extra time(s) on a random target for {7}% Damage</String>
+  <String Key="AdsSummonRestrictionAlert">Up to {0} times per round.</String>
 </Strings>

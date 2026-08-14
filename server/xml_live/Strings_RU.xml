@@ -1,4 +1,6 @@
 <Strings>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
   <String Key="Tags">AwesomePiece, ZombieHighSchool, AutoChess, LolChess, KingGodCasctle, Автобой, Стратегия, СтратегическаяБитва, TFT, Ends, HelpMeEnds, Объединение, Защита</String>
   <String Key="Store_ShortDesc">Защищайте замок от вражеских вторжений вместе с героями и силами богов в King God Castle!</String>
@@ -141,9 +143,9 @@
 
 (Стоимость: {0} алмазов)</String>
   <String Key="King_1">Король</String>
-  <String Key="King_2"> </String>
+  <String Key="King_2"></String>
   <String Key="Castle_1">Замок</String>
-  <String Key="Castle_2"> </String>
+  <String Key="Castle_2"></String>
   <String Key="LoadingPopupText">Связь с сервером...</String>
   <String Key="LoginByGoogle">Вход с Google Play</String>
   <String Key="LoginByApple">Вход с Apple</String>
@@ -261,11 +263,11 @@
   <String Key="Post_Push_Contents18">Сегодня вечером вручение 1 000 золотых монет!</String>
   <String Key="Post_Push_Contents19">В почте вас ожидают золотые монеты!</String>
   <String Key="Post_Push_Contents20">Вы получили хороший запас свиных рулек!</String>
-  <String Key="Post_Push_Contents21">День завершения 72-го сезона King God Castle</String>
-  <String Key="Post_Push_Contents22">До завершения 72-го сезона King God Castle остался 1 день.</String>
-  <String Key="Post_Push_Contents23">До завершения 72-го сезона King God Castle осталось 2 дня.</String>
-  <String Key="Post_Push_Contents24">До завершения 72-го сезона King God Castle осталось 4 дня.</String>
-  <String Key="Post_Push_Contents25">Сегодня завершится 72-й сезон King God Castle!</String>
+  <String Key="Post_Push_Contents21">День завершения {0}-го сезона King God Castle</String>
+  <String Key="Post_Push_Contents22">До завершения {0}-го сезона King God Castle остался 1 день.</String>
+  <String Key="Post_Push_Contents23">До завершения {0}-го сезона King God Castle осталось 2 дня.</String>
+  <String Key="Post_Push_Contents24">До завершения {0}-го сезона King God Castle осталось 4 дня.</String>
+  <String Key="Post_Push_Contents25">Сегодня завершится {0}-й сезон King God Castle!</String>
   <String Key="Post_Push_Contents26">Проверьте, не осталось ли у вас накопленных наград Пасса!</String>
   <String Key="Post_Push_Contents27">Получите все награды пасса без остатка!</String>
   <String Key="Post_Push_Contents28">Система Пасса и Поля боя будут завершены через 4 дней.</String>
@@ -1239,11 +1241,8 @@
   <String Key="ItemName_10020">Увеличение отряда</String>
   <String Key="ItemDesc_10020">Отряд был увеличен на 1.</String>
   <String Key="ItemName_10030">+5 серебряных монет</String>
-  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">+10 серебряных монет</String>
-  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">+20 серебряных монет</String>
-  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">Медаль за боевые заслуги</String>
   <String Key="ItemDesc_10040">Случайным образом увеличивает показатель звезд на 1 для героя, находящегося на поле.</String>
   <String Key="ItemName_10050">Могущественный свиток призыва героя (2 р.)</String>
@@ -1933,7 +1932,7 @@
   <String Key="Cant_RefreshDailyShopByAd">Вы посмотрели всю рекламу.</String>
   <String Key="WatchAd">Реклама</String>
   <String Key="UsedAllRemainRefreshCount">&lt;color=#FF4C4C&gt;Вы использовали все возможности обновления на сегодня.&lt;/color&gt;
-Обновление будет доступно через: </String>
+Обновление будет доступно через:</String>
   <String Key="RefreshDailyShop">Обновить магазин</String>
   <String Key="RefreshDailyShopDesc">Вы можете обновить перечень товаров в ежедневном магазине.
 Функция обновления доступна каждый день, ограниченное количество раз.</String>
@@ -4996,6 +4995,7 @@
   <String Key="Hero_Awaken_Noti">Герой {0} достиг 16 уровня, и теперь его можно пробудить.
 При выполнении пробуждения станет доступно использование &lt;color=#FFD247&gt;пробужденных способностей&lt;/color&gt; героя.</String>
   <String Key="ItemDescSub_40463_07">Абсолютная защита {0} р.</String>
+  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">При появлении героя &lt;color=#FFD247&gt;выбранный герой&lt;/color&gt; &lt;color=#FFD247&gt;гарантирован!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Выбрать героев</String>
   <String Key="SelectPickupUnitAgain">Выбрать повторно</String>
@@ -5429,8 +5429,8 @@ nПри использовании дает бонус к пополнению �
   <String Key="TerritoryUpgradeCompletedFormat">Улучшение завершено: {0}.</String>
   <String Key="CantReplaceWhileUpgrade">Нельзя поменять размещение строящегося или улучшаемого сооружения.</String>
   <String Key="LevelSync_Desc_1">Уровень передачи определяется в зависимости от макс. уровня
-передачи святилища и мин. уровня размещенных героев. </String>
-  <String Key="LevelSync_Desc">Уровень, передаваемый герою, определяется в зависимости от уровня передачи святилища. </String>
+передачи святилища и мин. уровня размещенных героев.</String>
+  <String Key="LevelSync_Desc">Уровень, передаваемый герою, определяется в зависимости от уровня передачи святилища.</String>
   <String Key="UnitAssignment_AssignedUnit">Размещен</String>
   <String Key="UnitAssignment_LevelSyncUnit">Размещен
 в святилище</String>
@@ -5501,7 +5501,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="InventoryItemName_2107">Опыт замка</String>
   <String Key="InventoryItemDesc_2107">Повышает уровень замка. Необходим для улучшения территории, алтаря и т.д.</String>
   <String Key="InventoryItemName_2108">Опыт альянса</String>
-  <String Key="InventoryItemDesc_2108">Повышает уровень альянса. Уровень альянса позволяет улучшать навык альянса. </String>
+  <String Key="InventoryItemDesc_2108">Повышает уровень альянса. Уровень альянса позволяет улучшать навык альянса.</String>
   <String Key="TerritoryPass_Short">Благословение</String>
   <String Key="AlchemyRemainPointAlert">Материал, превысивший эт. {0}, исчезнет.
 Продолжить?</String>
@@ -5778,8 +5778,6 @@ nПри использовании дает бонус к пополнению �
   <String Key="ClanBattleModifier_13">Мучающий</String>
   <String Key="ClanBattleModifier_14">Подавляющий</String>
   <String Key="UserLockedClanBattleAlert">Данный пользователь не может участвовать в карательном походе альянса этого сезона.</String>
-  <String Key="UpdateNoticeVersion">171100</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Вы уверены, что хотите распустить альянс?</String>
   <String Key="Clan_Menu_LeaveConfirm">Вы уверены, что хотите покинуть альянс?</String>
   <String Key="RogueLike_ReleaseAtLevel">Доступно на уровне {0}</String>
@@ -6581,7 +6579,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="FlagsName_PreviousColosseum">Почетное знамя Поля боя Побоища {0}-го сезона</String>
   <String Key="FlagsDesc_PreviousColosseum">Достичь уровня «{1}» в рейтинге Поля боя Побоища {0}-го сезона</String>
   <String Key="NameTagName_Colosseum">Украшение владыки: {0}</String>
-  <String Key="NameTagDesc_Colosseum">Почетная награда за достижение ранга {0} на Поле боя Побоища </String>
+  <String Key="NameTagDesc_Colosseum">Почетная награда за достижение ранга {0} на Поле боя Побоища</String>
   <String Key="ArtufactPolishValue">Эффект</String>
   <String Key="ArtifactPolishAction_ReplaceOptionIdx">Смена положения</String>
   <String Key="PolishItemRewardPostTitle">Вручение шлифовального камня улучшения шлифования</String>
@@ -6878,7 +6876,7 @@ nПри использовании дает бонус к пополнению �
 С ним можно атаковать более удаленные цели с большей точностью, но из-за веса его трудно переносить.</String>
   <String Key="MoveStopTimeDesc_Piece">Отмечает 2 клетки на Поле боя как позиции снайпера. Размещённые Герои получают Абсолютная ЗЩТ, не могут &lt;color=#f33&gt;двигаться&lt;/color&gt; некоторое время, Длина атаки +3, а их Нанос. Обычн. урон увеличивается при 1-м и каждом 5-м попадании</String>
   <String Key="MoveStopTimeDesc">Отмечает 2 клетки на Поле боя как позиции снайпера. Размещённые Герои получают Абсолютная ЗЩТ +{2}, не могут &lt;color=#f33&gt;двигаться&lt;/color&gt; {0} сек., Длина атаки +3, а их Нанос. Обычн. урон увеличивается на +{1}% при 1-м и каждом 5-м попадании.</String>
-  <String Key="ColosseumBanned">Доступ к сезону Поля боя Побоища ограничен </String>
+  <String Key="ColosseumBanned">Доступ к сезону Поля боя Побоища ограничен</String>
   <String Key="GachaName_1036">Натянутая улыбка</String>
   <String Key="Name_Potential_10560_3">Духовный подъем</String>
   <String Key="TerritoryBuildingSpec_SyncLevel">Уровень передачи</String>
@@ -6929,6 +6927,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="Clan_Menu_ChangeName">Изменить</String>
   <String Key="ColosseumSeasonRankingReward">Награда сезона</String>
   <String Key="ColosseumRanking">Рейтинг</String>
+  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Подробнее о шансах</String>
   <String Key="ArtifactOptionProbDetailDesc">Вы перейдете на веб-страницу с подробной информацией о шансах появления реликвий.</String>
   <String Key="ColosseumNetworkChanged">Произошли изменения в подключении к сети. Идет переподключение.</String>
@@ -7363,9 +7362,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="OvercomeDesc">&lt;size=25&gt;Вознесение звездного уровня
 
 &lt;/size&gt;При помощи &lt;color=#ffbc00&gt;вознесения звездного уровня&lt;/color&gt; можно получить &lt;color=#ffbc00&gt;доп. эффекты&lt;/color&gt; способности божественного оружия.
- Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.
-
-</String>
+ Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.</String>
   <String Key="SkinName_1032006">Синяя волна Тия</String>
   <String Key="SkinName_1036004">Синяя волна Хэранг</String>
   <String Key="SkinName_1042003">Синяя волна Тэбэк</String>
@@ -7439,8 +7436,7 @@ nПри использовании дает бонус к пополнению �
 Нанос. урон в неуязвимом состоянии +{1}%</String>
   <String Key="TreasureSkillDesc_3300033">При достижении {0}% ОЗ или получении смертельного урона экипированным Мюром героем с самым высоким показателем звезд неуязвимость на {1} сек. 1 р.
 (В неуязвимом состоянии восстановление и наложение защиты невозможны)
-Нанос. урон в неуязвимом состоянии +{2}%
-</String>
+Нанос. урон в неуязвимом состоянии +{2}%</String>
   <String Key="TreasureSkillDesc_3300034">При достижении {0}% ОЗ или получении смертельного урона экипированным Мюром героем с самым высоким показателем звезд неуязвимость на {1} сек. 1 р.
 (В неуязвимом состоянии восстановление и наложение защиты невозможны)
 Нанос. урон в неуязвимом состоянии +{2}%
@@ -7670,15 +7666,11 @@ nПри использовании дает бонус к пополнению �
  &lt;size=25&gt;Вознесение звездного уровня
 
 &lt;/size&gt;При помощи &lt;color=#ffbc00&gt;вознесения звездного уровня&lt;/color&gt; можно получить &lt;color=#ffbc00&gt;доп. эффекты&lt;/color&gt; способности божественного оружия.
- Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.
-
-</String>
+ Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Усиление божественного оружия
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;Усилив&lt;/color&gt; божественное оружие, можно увеличить его &lt;color=#ffbc00&gt;эффекты способности&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Материалы усиления&lt;/color&gt; можно получить, &lt;color=#ffbc00&gt;разобрав&lt;/color&gt; божественное оружие в инвентаре или&lt;color=#ffbc00&gt;купив его в магазине&lt;/color&gt;.
-
-</String>
+&lt;color=#ffbc00&gt;Материалы усиления&lt;/color&gt; можно получить, &lt;color=#ffbc00&gt;разобрав&lt;/color&gt; божественное оружие в инвентаре или&lt;color=#ffbc00&gt;купив его в магазине&lt;/color&gt;.</String>
   <String Key="TreasureOvercome">Вознести</String>
   <String Key="TreasureOvercome_Short">Вознести</String>
   <String Key="ViewNextOvercome">Посмотреть сл. вознесение</String>
@@ -8227,9 +8219,7 @@ nПри использовании дает бонус к пополнению �
  &lt;size=25&gt;Вознесение звездного уровня
 
 &lt;/size&gt;При помощи &lt;color=#ffbc00&gt;вознесения звездного уровня&lt;/color&gt; можно получить &lt;color=#ffbc00&gt;доп. эффекты&lt;/color&gt; способности божественного оружия.
- Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.
-
-</String>
+ Для вознесения нужно использовать &lt;color=#ffbc00&gt;такое же божественное оружие&lt;/color&gt;.</String>
   <String Key="TreasureSkillDesc_3300010">Шанс крита +{0}%
 При получении урона деактивация на {1} сек.</String>
   <String Key="TreasureSkillDesc_3300011">Шанс крита +{0}%
@@ -9491,7 +9481,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="UnitSubName_10670">Знаменосец поля боя</String>
   <String Key="Potential_10670_0">Охрана +30</String>
   <String Key="Potential_10670_1">В начале битвы после первого получения урона получ. урон -70% на 2 сек.</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;Известная семья Ритер предоставила империи много выдающихся талантов, успешных во всевозможных сферах деятельности. Хоть Патрос и из семьи Ритер, особых талантов у него нет. Однако благодаря своим несравнимым стараниям он все же смог стать образцовым начальником воинов империи.&lt;/i&gt; </String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;Известная семья Ритер предоставила империи много выдающихся талантов, успешных во всевозможных сферах деятельности. Хоть Патрос и из семьи Ритер, особых талантов у него нет. Однако благодаря своим несравнимым стараниям он все же смог стать образцовым начальником воинов империи.&lt;/i&gt;</String>
   <String Key="SkillName_10670">За империю!</String>
   <String Key="SkillDesc_10670">В течение {TotalAttackTime} сек. поддерживает соперников. Исцеляет всех союзников в зоне {SplashRangeX}{x}{SplashRangeY} кл. вокруг себя на {Heal} кажд. {Time} сек. и увеличивает СКР АТК на {AttackSpeedPerUnit10670}%. Применяется увеличение СКР АТК от этого навыка с самым мощным эффектом.</String>
   <String Key="SkillDesc_10670_Short">В течение {TotalAttackTime} сек. исцеляет всех союзников в зоне {SplashRangeX}{x}{SplashRangeY} кл. вокруг себя на {Heal} кажд. {Time} сек. и увеличивает СКР АТК на {AttackSpeedPerUnit10670}%. Применяется увеличение СКР АТК от самого мощного &lt;За империю!&gt;</String>
@@ -9791,8 +9781,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="BaseHybridDefOnInvade">Увелич. получаемых золотых монет в штурме на {0}
 ЗЩТ всех героев в штурме +{1}
 Переплавка недоступна, усиление через шлифование недоступно</String>
-  <String Key="ArtifactOptionDesc_Event_15000">
-Смена положение через шлифование бесплатна (до 3 декабрь 2024 года)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">Смена положение через шлифование бесплатна (до 3 декабрь 2024 года)</String>
   <String Key="SkinName_1032007">Богиня луны Тия</String>
   <String Key="SkinName_1032007_NewLine">Богиня луны Тия</String>
   <String Key="TerritoryBuildingName_40300">Статуя богини луны</String>
@@ -11390,8 +11379,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="AddDifficultyUnlockDesc">При прохождении без урона сложность повышается на 2 этапа.</String>
   <String Key="AccessoryLevelUpTutorialLock">Доступно к просмотру после прохождения Нашествия II-1.</String>
   <String Key="NotAccessoryLevelUp">Нет аксессуаров для усиления.</String>
-  <String Key="ArtifactOptionDesc_Event_15020">
-Смена положения через шлифование бесплатна (&lt;color=#ffbd4a&gt;до {0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">Смена положения через шлифование бесплатна (&lt;color=#ffbd4a&gt;до {0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Пройти Главу {0}-{1} на ур. сложности [{Diff}] или выше</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">[Нашествие] Пройти Главу {0}-{1} на ур. сложности [{Diff}] или выше</String>
   <String Key="Polish_EventArtifact_Alert">Усиление данной реликвии через шлифование недоступно!</String>
@@ -11743,8 +11731,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="SpecialPackage_1556">Набор Этерны 1</String>
   <String Key="SpecialPackage_1557">Набор Этерны 2</String>
   <String Key="SpecialPackage_1558">Набор Этерны 3</String>
-  <String Key="MakeAllLateComerExceptSlot">Применить эффект позднего появления ко всем героям, кроме героя, находящегося на {0} позиции в отряде
-</String>
+  <String Key="MakeAllLateComerExceptSlot">Применить эффект позднего появления ко всем героям, кроме героя, находящегося на {0} позиции в отряде</String>
   <String Key="Order_1">первой</String>
   <String Key="Order_2">второй</String>
   <String Key="Order_3">третьей</String>
@@ -14427,8 +14414,7 @@ D = 1 - 4</String>
   <String Key="AltarHelpBuilding_5">Алтарь, увеличивающий кол-во получаемых серебряных монет. Упрощает призыв героев и пользование магазином.
 
 Реком. контент: штурм, Арена</String>
-  <String Key="ArtifactBuffDataDesc_15010">В начале битвы штурма или экспедиции СКР АТК героя авангарда +{0}% (Эффект не действует при отсутствии героя авангарда)
-</String>
+  <String Key="ArtifactBuffDataDesc_15010">В начале битвы штурма или экспедиции СКР АТК героя авангарда +{0}% (Эффект не действует при отсутствии героя авангарда)</String>
   <String Key="Post_Name_AltarGoldRefund">Возврат золота за расширение пламени алтаря</String>
   <String Key="Post_Desc_AltarGoldRefund">Возвращаем вам золото, потраченное на расширение племени алтаря.</String>
   <String Key="OutgameTutorial_140_00">И снова здравствуйте, король замка. &lt;color=#FFC13D&gt;Я командир отряда рыцарей Аслин.&lt;/color&gt;
@@ -15480,7 +15466,7 @@ D = 1 - 4</String>
   <String Key="SeasonInformation">Информация о сезоне</String>
   <String Key="SeasonInformationHelp_0">Здесь можно посмотреть информацию о Глава для Камня призыва штурма этого сезона и данные о Корректирование показателей героев.</String>
   <String Key="SeasonInformationHelp_1">Нажмите значок Главы, чтобы увидеть название Камня призыва штурма.</String>
-  <String Key="SeasonInformationHelp_2">Нажмите «Показать все» в разделе «Корректирование показателей героев», чтобы увидеть текущий Нанос. урон и шанс получения Абсолютной защиты всех Героев.</String>
+  <String Key="SeasonInformationHelp_2">В меню Корректирование показателей героев нажмите Показать все, чтобы увидеть Нанос. урон и Шанс Абсолютной ЗЩТ всех Героев.</String>
   <String Key="InvadeSpawnItem">Камень призыва штурма</String>
   <String Key="SkillDesc_60505">Когда вас атакуют и вы наполняетесь яростью, СКР АТК +{AttackSpeedPer}% и скорость передвижения +{MoveSpeedPer}%, а также вы становитесь невосприимчивы к эффектам статуса.</String>
   <String Key="SkillDesc_60665">Когда вас атакуют и вы наполняетесь яростью, СКР АТК +{AttackSpeedPer}% и скорость передвижения +{MoveSpeedPer}%, а также вы становитесь невосприимчивы к эффектам статуса.</String>
@@ -16486,7 +16472,7 @@ D = 1 - 4</String>
   <String Key="NormalMissionSubTap_3">Другое</String>
   <String Key="UnintendedExitScoreProtected_0">Потеря очков не была применена благодаря системе защиты от потери очков при непреднамеренном выходе</String>
   <String Key="UnintendedExitScoreProtected_1">Ваши очки снизились, так как число выходов превысило лимит защиты.</String>
-  <String Key="ColosseumRemainLeftIgnoreCount">Осталось защит ({0}/3)</String>
+  <String Key="ColosseumRemainLeftIgnoreCount">Осталось защит ({0}/5)</String>
   <String Key="UnintendedExitScoreProtectedInfo_0">Система защиты от потери очков может сработать до 3 раз в каждой половине.</String>
   <String Key="UnintendedExitScoreProtectedInfo_1">Система защиты от потери очков применяется автоматически, если выполнены следующие условия.</String>
   <String Key="UnintendedExitScoreProtectedInfo_2">Если в режиме «Поле боя Побоища» вам засчитан выход</String>
@@ -17980,11 +17966,11 @@ D = 1 - 4</String>
   <String Key="SkinDesc_107100401">&lt;i&gt;Награда за место в Рейтинге Лиги тепла в Битве&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Король утренней звезды Фараэль</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;Самый благородный звездный свет, рожденный ранним рассветом, станет самым ярким светом, что разгонит тьму.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Шанс абсолютной защиты</String>
+  <String Key="SuperShieldModulator">Шанс Абсолютной ЗЩТ</String>
   <String Key="BuildingEffect_BaseDamageReflect">Отражает {Value}% урона
 (сокращение урона от магии вдвое)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">Часть полученного героем урона отражается на врагов.</String>
-  <String Key="TreasureName_30042">Ferataus</String>
+  <String Key="TreasureName_30042">Ферратаус</String>
   <String Key="TreasureSubName_30042">Смоляной щит</String>
   <String Key="TreasureDesc_30042">Щит Верхаимуса нужен не только для защиты. Яростный прорыв Верхаимуса с тяжёлым щитом мгновенно сминает даже самую прочную броню.</String>
   <String Key="TreasureSkillName_30042">Падение</String>
@@ -17993,10 +17979,10 @@ D = 1 - 4</String>
   <String Key="BuffDataName_3300423">Сокрушение</String>
   <String Key="BuffDataName_3300424">Ослабление II</String>
   <String Key="BuffDataName_3300425">Подавление II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Особый магазин Ferataus Pickup</String>
-  <String Key="SpecialPackage_1680">Набор Ferataus 1</String>
-  <String Key="SpecialPackage_1681">Набор Ferataus 2</String>
-  <String Key="SpecialPackage_1682">Набор Ferataus 3</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Особый магазин Пикап Ферратаус</String>
+  <String Key="SpecialPackage_1680">Набор Ферратаус 1</String>
+  <String Key="SpecialPackage_1681">Набор Ферратаус 2</String>
+  <String Key="SpecialPackage_1682">Набор Ферратаус 3</String>
   <String Key="BuffDataDesc_3300421">Передача урона +{1}x за каждые {0} Угрозы</String>
   <String Key="BuffDataDesc_3300422">При снятии Нестабильности цель получает Оглушение на {0} сек.</String>
   <String Key="BuffDataDesc_3300423">Получ. Физ. урон врагов с Нестабильностью +{0}% (Увеличение Получ. Физ. урона не суммируется. Действует только наибольшее значение)</String>
@@ -18237,7 +18223,7 @@ D = 1 - 4</String>
   <String Key="StoryHint_420107000">Используйте Навык начала боя Офелии, чтобы защититься от атаки Гаргульи.</String>
   <String Key="StoryHint_420108000">Атаки Влада постоянно накладывают на союзников Оглушение. Используйте Навык начала боя, который может противостоять Оглушению.</String>
   <String Key="TreasureName_30043">Витакорде</String>
-  <String Key="TreasureSubName_30043">Книга святости</String>
+  <String Key="TreasureSubName_30043">Том Божественности</String>
   <String Key="TreasureDesc_30043">Взгляните в лицо истинному сердцу внутри себя.
 Тогда святость поможет вам.</String>
   <String Key="TreasureSkillName_30043">Сила жизни</String>
@@ -18246,59 +18232,60 @@ D = 1 - 4</String>
   <String Key="BuffDataName_3300433">Священная охрана</String>
   <String Key="BuffDataName_3300434">Цикл жизни II</String>
   <String Key="BuffDataName_3300435">Священная сила II</String>
-  <String Key="SpecialShop_TreasurePickUp30043">Особый магазин Витакорде Pickup</String>
-  <String Key="SpecialPackage_1683">Пакет Витакорде 1</String>
-  <String Key="SpecialPackage_1684">Пакет Витакорде 2</String>
-  <String Key="SpecialPackage_1685">Пакет Витакорде 3</String>
+  <String Key="SpecialShop_TreasurePickUp30043">Особый магазин Пикап Витакорде</String>
+  <String Key="SpecialPackage_1683">Набор Витакорде 1</String>
+  <String Key="SpecialPackage_1684">Набор Витакорде 2</String>
+  <String Key="SpecialPackage_1685">Набор Витакорде 3</String>
   <String Key="BuffDataDesc_3300431">За каждые {0} Охраны коэффициент Маг. АТК эффекта увеличения базового урона +{1}%</String>
   <String Key="BuffDataDesc_3300432">Перезарядка {0}с</String>
   <String Key="BuffDataDesc_3300433">Дарует Благоволение всем союзникам в области, кроме себя</String>
   <String Key="BuffDataDesc_3300434">Перезарядка {0}с</String>
   <String Key="BuffDataDesc_3300435">За каждые {0} Охраны коэффициент Маг. АТК эффекта увеличения базового урона +{1}%</String>
-  <String Key="TreasureSkillDesc_3300430">В начале Битвы применяется только эффект героя с самым высоким показателем звезд, экипированного Витакорде
-Фиксирует Маг. АТК носителя на значении в начале Битвы
-При исцелении союзника на {0}с создает область, которая повышает базовый урон союзников в радиусе {1} вокруг носителя на {2}% от Маг. АТК носителя (Перезарядка {3}с)</String>
-  <String Key="TreasureSkillDesc_3300431">В начале Битвы применяется только эффект героя с самым высоким показателем звезд, экипированного Витакорде
-Фиксирует Маг. АТК носителя на значении в начале Битвы
-При исцелении союзника на {0}с создает область, которая повышает базовый урон союзников в радиусе {1} вокруг носителя на {2}% от Маг. АТК носителя (Перезарядка {3}с)
-За каждые {4} Охраны коэффициент Маг. АТК эффекта увеличения базового урона +{5}%</String>
-  <String Key="TreasureSkillDesc_3300433">В начале Битвы применяется только эффект героя с самым высоким показателем звезд, экипированного Витакорде
-Фиксирует Маг. АТК носителя на значении в начале Битвы
-При исцелении союзника на {0}с создает область, которая повышает базовый урон союзников в радиусе {1} вокруг носителя на {2}% от Маг. АТК носителя (Перезарядка {3}с)
-За каждые {4} Охраны коэффициент Маг. АТК эффекта увеличения базового урона +{5}%
-Дарует Благоволение союзникам в области, кроме носителя</String>
+  <String Key="TreasureSkillDesc_3300430">В начале Битвы действует только эффект Героя с самым высоким показателем звезд и установленным Витакорде
+Маг. АТК носителя фиксируется на значении в начале Битвы
+При исцелении союзников создает зону на {0} сек., которая повышает базовый урон союзников в зоне {1} вокруг носителя на {2}% от Маг. АТК носителя (Перезарядка {3} сек.)</String>
+  <String Key="TreasureSkillDesc_3300431">В начале Битвы действует только эффект Героя с самым высоким показателем звезд и установленным Витакорде
+Маг. АТК носителя фиксируется на значении в начале Битвы
+При исцелении союзников создает зону на {0} сек., которая повышает базовый урон союзников в зоне {1} вокруг носителя на {2}% от Маг. АТК носителя (Перезарядка {3} сек.)
+За каждые {4} Охраны +{5}% к коэффициенту Маг. АТК эффекта повышения базового урона</String>
+  <String Key="TreasureSkillDesc_3300433">В начале Битвы действует только эффект Героя с самым высоким показателем звезд и установленным Витакорде
+Маг. АТК носителя фиксируется на значении в начале Битвы
+При исцелении союзников создает зону на {0} сек., которая повышает базовый урон союзников в зоне {1} вокруг носителя на {2}% от Маг. АТК носителя (Перезарядка {3} сек.)
+За каждые {4} Охраны +{5}% к коэффициенту Маг. АТК эффекта повышения базового урона
+Дает Благоволение союзникам в зоне, кроме носителя</String>
   <String Key="SeasonalEventName_Season72">Фестиваль летающих драконов</String>
   <String Key="SeasonalEventMode_Season72">Фестиваль летающих драконов</String>
   <String Key="TreasureName_50002">Кор Орбис</String>
   <String Key="TreasureSubName_50002">Временный подзаголовок</String>
-  <String Key="TreasureDesc_50002">Временное описание — дополнить после утверждения концепта Божеств. оружия — идея: какой-то камень? артефакт? Он берет ОМ у ближайших растений и животных, накапливает их, а потом выпускает</String>
-  <String Key="TreasureSkillName_50002">Объединение ОМ</String>
+  <String Key="TreasureDesc_50002">Временное описание - добавить позже, когда будет готова концепция Божеств. оружия - Идея: какой-то камень? артефакт? который берет ОМ у растений и животных поблизости, копит их, а потом высвобождает</String>
+  <String Key="TreasureSkillName_50002">Комбинация ОМ</String>
   <String Key="BuffDataName_3500021">Ассимиляция I</String>
   <String Key="BuffDataName_3500022">Барьер ОМ I</String>
   <String Key="BuffDataName_3500023">Резонанс ОМ</String>
   <String Key="BuffDataName_3500024">Барьер ОМ II</String>
   <String Key="BuffDataName_3500025">Ассимиляция II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">Особый магазин Кор Орбис Pickup</String>
-  <String Key="SpecialPackage_1690">Пакет Кор Орбис 1</String>
-  <String Key="SpecialPackage_1691">Пакет Кор Орбис 2</String>
-  <String Key="SpecialPackage_1692">Пакет Кор Орбис 3</String>
-  <String Key="BuffDataDesc_3500021">За каждые {1}% Крит. маг. урона выше {0}% бонус к итоговому урону усиленного навыка x{2}</String>
+  <String Key="SpecialShop_TreasurePickUp50002">Особый магазин Пикап Кор Орбис</String>
+  <String Key="SpecialPackage_1690">Набор Кор Орбис 1</String>
+  <String Key="SpecialPackage_1691">Набор Кор Орбис 2</String>
+  <String Key="SpecialPackage_1692">Набор Кор Орбис 3</String>
+  <String Key="BuffDataDesc_3500021">За каждые {1}% Крит. маг. урона выше {0}% прирост Общ. урона усиленного навыка умножается на {2}</String>
   <String Key="BuffDataDesc_3500022">Получ. урон {0}% до 3-го использования навыка</String>
-  <String Key="BuffDataDesc_3500023">При использовании усиленного навыка тот же навык дополнительно применяется к случайной цели {1} раз с уроном {0}%</String>
+  <String Key="BuffDataDesc_3500023">При использовании усиленного навыка тот же навык дополнительно применяется к 2 случайным целям с уроном {0}%</String>
   <String Key="BuffDataDesc_3500024">Получ. урон {0}% до 3-го использования навыка</String>
-  <String Key="BuffDataDesc_3500025">За каждые {1}% Крит. маг. урона выше {0}% бонус к итоговому урону усиленного навыка x{2}</String>
-  <String Key="TreasureSkillDesc_3500020">После начала Битвы только герой с самым высоким показателем звезд, экипированный Кор Орбис, получает Макс. ОМ +{0}% и итоговый наносимый урон -{1}% до 3-го использования навыка
-Последний навык усиливается, и его итоговый урон увеличивается на +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">После начала Битвы только герой с самым высоким показателем звезд, экипированный Кор Орбис, получает Макс. ОМ +{0}% и итоговый наносимый урон -{1}% до 3-го использования навыка
-Последний навык усиливается, и его итоговый урон увеличивается на +{2}%
-За каждые {4}% Крит. маг. урона выше {3}% бонус к итоговому урону усиленного навыка x{5}</String>
-  <String Key="TreasureSkillDesc_3500022">После начала Битвы только герой с самым высоким показателем звезд, экипированный Кор Орбис, получает Макс. ОМ +{0}% и итоговый наносимый урон -{1}% до 3-го использования навыка
-Последний навык усиливается, и его итоговый урон увеличивается на +{2}%
-За каждые {4}% Крит. маг. урона выше {3}% бонус к итоговому урону усиленного навыка x{5}
+  <String Key="BuffDataDesc_3500025">За каждые {1}% Крит. маг. урона выше {0}% прирост Общ. урона усиленного навыка умножается на {2}</String>
+  <String Key="TreasureSkillDesc_3500020">После начала Битвы Герой с самым высоким показателем звезд и установленным Кор Орбис получает +{0}% Макс. ОМ и -{1}% к Общ. нанос. урону до 3-го использования навыка
+Последний навык усиливается, а его Общ. урон повышается на +{2}%</String>
+  <String Key="TreasureSkillDesc_3500021">После начала Битвы Герой с самым высоким показателем звезд и установленным Кор Орбис получает +{0}% Макс. ОМ и -{1}% к Общ. нанос. урону до 3-го использования навыка
+Последний навык усиливается, а его Общ. урон повышается на +{2}%
+За каждые {4}% Крит. маг. урона выше {3}% прирост Общ. урона усиленного навыка умножается на {5}</String>
+  <String Key="TreasureSkillDesc_3500022">После начала Битвы Герой с самым высоким показателем звезд и установленным Кор Орбис получает +{0}% Макс. ОМ и -{1}% к Общ. нанос. урону до 3-го использования навыка
+Последний навык усиливается, а его Общ. урон повышается на +{2}%
+За каждые {4}% Крит. маг. урона выше {3}% прирост Общ. урона усиленного навыка умножается на {5}
 Получ. урон {6}% до 3-го использования навыка</String>
-  <String Key="TreasureSkillDesc_3500023">После начала Битвы только герой с самым высоким показателем звезд, экипированный Кор Орбис, получает Макс. ОМ +{0}% и итоговый наносимый урон -{1}% до 3-го использования навыка
-Последний навык усиливается, и его итоговый урон увеличивается на +{2}%
-За каждые {4}% Крит. маг. урона выше {3}% бонус к итоговому урону усиленного навыка x{5}
+  <String Key="TreasureSkillDesc_3500023">После начала Битвы Герой с самым высоким показателем звезд и установленным Кор Орбис получает +{0}% Макс. ОМ и -{1}% к Общ. нанос. урону до 3-го использования навыка
+Последний навык усиливается, а его Общ. урон повышается на +{2}%
+За каждые {4}% Крит. маг. урона выше {3}% прирост Общ. урона усиленного навыка умножается на {5}
 Получ. урон {6}% до 3-го использования навыка
-При использовании усиленного навыка тот же навык дополнительно применяется к случайной цели {8} раз с уроном {7}%</String>
+При использовании усиленного навыка тот же навык дополнительно применяется к 2 случайным целям с уроном {7}%</String>
+  <String Key="AdsSummonRestrictionAlert">До {0} раз за раунд.</String>
 </Strings>

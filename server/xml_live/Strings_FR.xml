@@ -1,4 +1,6 @@
 <Strings>
+  <String Key="UpdateNoticeVersion">172000</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">Fort KingGod</String>
   <String Key="Tags">Awesomepiece, Zombie High School, Auto Chess, TFT, Fort KingGod, Auto battler, Stratégie, Teamfight Tactics, Ends, HelpmeEnds, Merge, Défense</String>
   <String Key="Store_ShortDesc">Invoquez le pouvoir des dieux et défendez votre fort contre les ennemis dans le Fort KingGod !</String>
@@ -141,9 +143,9 @@ Retour à l'écran de connexion.</String>
 
 (Coût : Gem x{0})</String>
   <String Key="King_1">Roi</String>
-  <String Key="King_2"> </String>
+  <String Key="King_2"></String>
   <String Key="Castle_1">Fort</String>
-  <String Key="Castle_2"> </String>
+  <String Key="Castle_2"></String>
   <String Key="LoadingPopupText">Connexion au serveur...</String>
   <String Key="LoginByGoogle">Connexion avec Google Play</String>
   <String Key="LoginByApple">Connexion avec Apple</String>
@@ -261,11 +263,11 @@ Retour à l'écran de connexion.</String>
   <String Key="Post_Push_Contents18">Ce soir, nous vous offrons Or x1 000.</String>
   <String Key="Post_Push_Contents19">De l'Or vous attend dans la boîte aux lettres.</String>
   <String Key="Post_Push_Contents20">Du Rôti en profusion ! Approvisionnez-vous !</String>
-  <String Key="Post_Push_Contents21">Dernier jour de la saison 72 de Fort KingGod</String>
-  <String Key="Post_Push_Contents22">Fin de la saison 72 de Fort KingGod -1j</String>
-  <String Key="Post_Push_Contents23">Fin de la saison 72 de Fort KingGod -2j</String>
-  <String Key="Post_Push_Contents24">Fin de la saison 72 de Fort KingGod -4j</String>
-  <String Key="Post_Push_Contents25">La saison 72 de Fort KingGod se termine aujourd'hui !</String>
+  <String Key="Post_Push_Contents21">Dernier jour de la saison {0} de Fort KingGod</String>
+  <String Key="Post_Push_Contents22">Fin de la saison {0} de Fort KingGod -1j</String>
+  <String Key="Post_Push_Contents23">Fin de la saison {0} de Fort KingGod -2j</String>
+  <String Key="Post_Push_Contents24">Fin de la saison {0} de Fort KingGod -4j</String>
+  <String Key="Post_Push_Contents25">La saison {0} de Fort KingGod se termine aujourd'hui !</String>
   <String Key="Post_Push_Contents26">Vérifiez si vous n'avez pas oublié une récompense du Pass !</String>
   <String Key="Post_Push_Contents27">Ne manquez pas de récupérer toutes les récompenses du Pass !</String>
   <String Key="Post_Push_Contents28">La saison du champ de bataille et celle du Pass se terminent dans 4 jours.</String>
@@ -1252,11 +1254,8 @@ Voulez-vous les vérifier ?</String>
   <String Key="ItemName_10020">Camp +</String>
   <String Key="ItemDesc_10020">+ 1 case au camp</String>
   <String Key="ItemName_10030">Argent +5</String>
-  <String Key="ItemDesc_10030"> </String>
   <String Key="ItemName_10031">Argent +10</String>
-  <String Key="ItemDesc_10031"> </String>
   <String Key="ItemName_10032">Argent +20</String>
-  <String Key="ItemDesc_10032"> </String>
   <String Key="ItemName_10040">Médaille de mérite</String>
   <String Key="ItemDesc_10040">Augmente de 1 le nv.★ d'un héros sur le terrain.</String>
   <String Key="ItemName_10050">Appel majeur (x 2)</String>
@@ -1876,7 +1875,7 @@ Portée : {SplashRangeX}{X}{SplashRangeY} case(s)</String>
 Portée : {SplashRangeSum} case(s)</String>
   <String Key="MissionDesc_10326">Combattre avec Chung-ah dans le deck</String>
   <String Key="SkinName_1015001">Lilly en esprit de l'eau</String>
-  <String Key="SkinDesc_1015001">Lorsque le mana noir se répand dans l'air, il arrive qu'il ne pleuve pas pendant des mois, même dans la forêt éternelle qui est d'une splendeur hors pair. Alors, Sacha aspire l'eau de la source de vitalité et part en voyage en compagnie de Lilly, afin de redonner de l'énergie à tous les êtres mourrant de la forêt. </String>
+  <String Key="SkinDesc_1015001">Lorsque le mana noir se répand dans l'air, il arrive qu'il ne pleuve pas pendant des mois, même dans la forêt éternelle qui est d'une splendeur hors pair. Alors, Sacha aspire l'eau de la source de vitalité et part en voyage en compagnie de Lilly, afin de redonner de l'énergie à tous les êtres mourrant de la forêt.</String>
   <String Key="SkinName_1008001">Draco aux flammes bleues</String>
   <String Key="SkinDesc_1008001">Étant un mi-humain mi-dragon, Draco devint capable de déployer toute la puissance d'un dragon adulte à un âge plus jeune que celui d'un sang pur. Les flammes de Draco, qui n'exerçaient qu'une force destructrice, furent purifiées avec du mana bleu. Toutefois, cela les rendit encore plus ardentes.</String>
   <String Key="ThemeName_9">Invasion des hommes de givre !</String>
@@ -1951,7 +1950,7 @@ Veuillez vérifier la connexion internet et réessayer.</String>
   <String Key="Cant_RefreshDailyShopByAd">Vous avez utilisé tout le nombre de vues de publicité.</String>
   <String Key="WatchAd">Publicité</String>
   <String Key="UsedAllRemainRefreshCount">&lt;color=#FF4C4C&gt;Vous ne pouvez plus rafraîchir aujourd'hui.&lt;/color&gt;
-Temps jusqu'à la réinitialisation </String>
+Temps jusqu'à la réinitialisation</String>
   <String Key="RefreshDailyShop">Rafraîchir boutique</String>
   <String Key="RefreshDailyShopDesc">Vous pouvez rafraîchir la liste d'articles de la boutique.
 Le nombre de rafraîchissements est réinitialisé tous les jours.</String>
@@ -5033,6 +5032,7 @@ Contemplez ma puissance innée absolue !&lt;/i&gt;</String>
   <String Key="Hero_Awaken_Noti">{0} a atteint le nv. 16 et il est désormais possible de l'éveiller.
 En effectuant l'éveil, l'utilisation &lt;color=#FFD247&gt;d'aptitude d'éveil&lt;/color&gt; devient disponible.</String>
   <String Key="ItemDescSub_40463_07">Parade {0} fois</String>
+  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">Quand un Héros apparaît, le &lt;color=#FFD247&gt;Héros sélectionné&lt;/color&gt; est &lt;color=#FFD247&gt;garanti !&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Choisir héros</String>
   <String Key="SelectPickupUnitAgain">Réinitialiser</String>
@@ -5817,8 +5817,6 @@ Vous ne pourrez pas participer aux raids de la saison actuelle en tant que membr
   <String Key="ClanBattleModifier_13">qui râle</String>
   <String Key="ClanBattleModifier_14">suprême</String>
   <String Key="UserLockedClanBattleAlert">Ce joueur ne peut participer au raid de cette saison en tant que membre de clan.</String>
-  <String Key="UpdateNoticeVersion">171100</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ad1c2e0-6f0e-80e7-b537-c9d1a6a1b94b</String>
   <String Key="Clan_Menu_DeleteConfirm">Voulez-vous vraiment dissoudre le clan ?</String>
   <String Key="Clan_Menu_LeaveConfirm">Voulez-vous vraiment quitter le clan ?</String>
   <String Key="RogueLike_ReleaseAtLevel">Déverrouillé au nv. {0}</String>
@@ -6568,7 +6566,7 @@ Bataille amicale en cours.</String>
   <String Key="TerritoryPassPackageBenefit_2">Production de vitalité +</String>
   <String Key="TerritoryPassPackageBenefit_3">Temps de construction de bâtiment -</String>
   <String Key="ShopItemName_570">Pack Livre XP</String>
-  <String Key="ShopItemName_571">Pack King Livre XP </String>
+  <String Key="ShopItemName_571">Pack King Livre XP</String>
   <String Key="ShopItemName_572">Pack God Livre XP</String>
   <String Key="ShopItemName_580">Pack Gage du roi</String>
   <String Key="ShopItemName_581">Pack King Gage du roi</String>
@@ -6971,6 +6969,7 @@ Veuillez consulter le service client pour plus de détails.</String>
   <String Key="Clan_Menu_ChangeName">Modifier nom</String>
   <String Key="ColosseumSeasonRankingReward">Récompenses de saison</String>
   <String Key="ColosseumRanking">Classement</String>
+  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Détails des chances des reliques</String>
   <String Key="ArtifactOptionProbDetailDesc">Vous serez redirigé vers le site informant sur les chances d'apparition des options des reliques.</String>
   <String Key="ColosseumNetworkChanged">Rétablissement de connexion en cours dû au changement de réseaux.</String>
@@ -7407,9 +7406,7 @@ Portée : 3 cases horizontales</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;Transcendance de nv. d'étoiles
 
 &lt;/size&gt;La &lt;color=#ffbc00&gt;transcendance de nv. d'étoiles&lt;/color&gt; permet &lt;color=#ffbc00&gt;d'ajouter des effets&lt;/color&gt; au Trésor.
-Un &lt;color=#ffbc00&gt;Trésor identique&lt;/color&gt; est nécessaire pour la transcendance de nv. d'étoiles.
-
-</String>
+Un &lt;color=#ffbc00&gt;Trésor identique&lt;/color&gt; est nécessaire pour la transcendance de nv. d'étoiles.</String>
   <String Key="SkinName_1032006">Tia aux vagues bleues</String>
   <String Key="SkinName_1036004">Hae-rang aux vagues bleues</String>
   <String Key="SkinName_1042003">Taebaek aux vagues bleues</String>
@@ -7483,8 +7480,7 @@ XP de héros obtenus par l'accomplissement d'Invasion +{2}</String>
 DEG infligés à l'état invincible +{1}%</String>
   <String Key="TreasureSkillDesc_3300033">Si les PV du héros au nv. d'étoiles le plus élevé parmi ceux équipés de Muir tombent à {0}% ou s'il subit des DEG mortels, devient invincible pendant {1} s (1 fois par cas).
 (Ne peut bénéficier de soins ni de barrière à l'état invincible.)
-DEG infligés à l'état invincible +{2}%
-</String>
+DEG infligés à l'état invincible +{2}%</String>
   <String Key="TreasureSkillDesc_3300034">Si les PV du héros au nv. d'étoiles le plus élevé parmi ceux équipés de Muir tombent à {0}% ou s'il subit des DEG mortels, devient invincible pendant {1} s (1 fois par cas).
 (Ne peut conférer de soins ni de barrière à l'état invincible.)
 DEG infligés à l'état invincible +{2}%
@@ -7714,15 +7710,11 @@ Les &lt;color=#ffbc00&gt;ingrédients d'amélioration&lt;/color&gt; peuvent êtr
  &lt;size=25&gt;Transcendance de nv. d'étoiles
 
 &lt;/size&gt;La &lt;color=#ffbc00&gt;transcendance de nv. d'étoiles&lt;/color&gt; permet &lt;color=#ffbc00&gt;d'ajouter des effets&lt;/color&gt; au Trésor.
-Un &lt;color=#ffbc00&gt;Trésor identique&lt;/color&gt; est nécessaire pour la transcendance de nv. d'étoiles.
-
-</String>
+Un &lt;color=#ffbc00&gt;Trésor identique&lt;/color&gt; est nécessaire pour la transcendance de nv. d'étoiles.</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Amélioration de Trésor
 
 &lt;/size&gt;Vous pouvez &lt;color=#ffbc00&gt;améliorer&lt;/color&gt; les Trésors pour renforcer leurs &lt;color=#ffbc00&gt;effets&lt;/color&gt;.
-Les &lt;color=#ffbc00&gt;ingrédients d'amélioration&lt;/color&gt; peuvent être obtenus en &lt;color=#ffbc00&gt;broyant&lt;/color&gt; les Trésors dans l'inventaire ou par &lt;color=#ffbc00&gt;l'achat à la boutique&lt;/color&gt;.
-
-</String>
+Les &lt;color=#ffbc00&gt;ingrédients d'amélioration&lt;/color&gt; peuvent être obtenus en &lt;color=#ffbc00&gt;broyant&lt;/color&gt; les Trésors dans l'inventaire ou par &lt;color=#ffbc00&gt;l'achat à la boutique&lt;/color&gt;.</String>
   <String Key="TreasureOvercome">Transcender nv. d'étoiles</String>
   <String Key="TreasureOvercome_Short">Transcender nv. d'étoiles</String>
   <String Key="ViewNextOvercome">Voir transcendance suivante</String>
@@ -8271,9 +8263,7 @@ Les &lt;color=#ffbc00&gt;ingrédients d'amélioration&lt;/color&gt; peuvent êtr
  &lt;size=25&gt;Transcendance de nv. d'étoiles
 
 &lt;/size&gt;La &lt;color=#ffbc00&gt;transcendance de nv. d'étoiles&lt;/color&gt; permet &lt;color=#ffbc00&gt;d'ajouter des effets&lt;/color&gt; au Trésor.
-Un &lt;color=#ffbc00&gt;Trésor identique&lt;/color&gt; est nécessaire pour la transcendance de nv. d'étoiles.
-
-</String>
+Un &lt;color=#ffbc00&gt;Trésor identique&lt;/color&gt; est nécessaire pour la transcendance de nv. d'étoiles.</String>
   <String Key="TreasureSkillDesc_3300010">CHANCES CRIT +{0}%
 Effet désactivé pendant {1} s en cas de DEG subis</String>
   <String Key="TreasureSkillDesc_3300011">CHANCES CRIT +{0}%
@@ -9536,7 +9526,7 @@ Les points ne baissent pas en dessous de 2 000.</String>
   <String Key="UnitSubName_10670">Porte-drapeau du champ de bataille</String>
   <String Key="Potential_10670_0">PROTECT +30</String>
   <String Key="Potential_10670_1">Après avoir subi des DEG pour la 1re fois en combat, DEG subis -70% pendant 2 s</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;La famille prestigieuse de l'empire, les Lither, a engendré des personnes talentueuses dans divers domaines. Bien que Patros ne soit pas doté de capacités innées comme les autres membres de Lither, il est devenu un commandant exemplaire de l'armée impériale grâce à ses efforts remarquables.&lt;/i&gt; </String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;La famille prestigieuse de l'empire, les Lither, a engendré des personnes talentueuses dans divers domaines. Bien que Patros ne soit pas doté de capacités innées comme les autres membres de Lither, il est devenu un commandant exemplaire de l'armée impériale grâce à ses efforts remarquables.&lt;/i&gt;</String>
   <String Key="SkillName_10670">Pour l'empire !</String>
   <String Key="SkillDesc_10670">Encourage les alliés, soignant {Heal} PV et augmentant l'AGI de {AttackSpeedPerUnit10670}% pour le lanceur et tous les alliés dans {SplashRangeX}{x}{SplashRangeY} cases autour du lanceur toutes les {Time} s pendant {TotalAttackTime} s. Seule l'augmentation d'AGI la plus élevée est appliquée parmi celles conférées par les compétences du même nom.</String>
   <String Key="SkillDesc_10670_Short">Soigne {Heal} PV et augmente l'AGI de {AttackSpeedPerUnit10670}% pour le lanceur et les alliés dans {SplashRangeX}{x}{SplashRangeY} cases autour du lanceur toutes les {Time} s pendant {TotalAttackTime} s. Seule l'augmentation d'AGI la plus élevée de &lt;Pour l'empire !&gt; est appliquée.</String>
@@ -9836,8 +9826,7 @@ En commençant l'invocation, &lt;color=#FF0000&gt;vous ne pouvez plus changer&lt
   <String Key="BaseHybridDefOnInvade">Récompense d'Or de l'invasion +{0}
 DEF +{1} pour tous les héros dans l'invasion
 Reforge impossible, amélioration par le polissage impossible</String>
-  <String Key="ArtifactOptionDesc_Event_15000">
-Déplacement d'option par le polissage gratuit (jusqu'au 3/12/24)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">Déplacement d'option par le polissage gratuit (jusqu'au 3/12/24)</String>
   <String Key="SkinName_1032007">Tia Déesse de la lune</String>
   <String Key="SkinName_1032007_NewLine">Tia Déesse de la lune</String>
   <String Key="TerritoryBuildingName_40300">Statue de la déesse de la lune</String>
@@ -11429,8 +11418,7 @@ Défi et accomplissement</String>
   <String Key="AddDifficultyUnlockDesc">En terminant sans subir de DEG, la difficulté se déverrouille de 2 niveaux.</String>
   <String Key="AccessoryLevelUpTutorialLock">Accessible après avoir terminé Corrup. II-1.</String>
   <String Key="NotAccessoryLevelUp">Il n'y a pas d'Accessoire qui peut être amélioré.</String>
-  <String Key="ArtifactOptionDesc_Event_15020">
-Déplacement d'option par le polissage gratuit (&lt;color=#ffbd4a&gt;jusqu'au {0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">Déplacement d'option par le polissage gratuit (&lt;color=#ffbd4a&gt;jusqu'au {0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Terminer le Ch. {0}-{1} en difficulté {Diff} ou plus</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">Terminer le Ch. {0}-{1} [Corrup.] en difficulté {Diff} ou plus</String>
   <String Key="Polish_EventArtifact_Alert">Il est impossible d'améliorer cette relique par le polissage !</String>
@@ -11782,8 +11770,7 @@ Si les PV max de la cible ennemie sont supérieurs à ceux du lanceur, déclench
   <String Key="SpecialPackage_1556">Pack Eterna 1</String>
   <String Key="SpecialPackage_1557">Pack Eterna 2</String>
   <String Key="SpecialPackage_1558">Pack Eterna 3</String>
-  <String Key="MakeAllLateComerExceptSlot">Confère la caractéristique d'apparition tardive à tous les héros, sauf celui situé au {0} emplacement de formation à la caserne.
-</String>
+  <String Key="MakeAllLateComerExceptSlot">Confère la caractéristique d'apparition tardive à tous les héros, sauf celui situé au {0} emplacement de formation à la caserne.</String>
   <String Key="Order_1">1er</String>
   <String Key="Order_2">2e</String>
   <String Key="Order_3">3e</String>
@@ -14466,8 +14453,7 @@ Recommandé : Champ de bataille d'acharnement</String>
   <String Key="AltarHelpBuilding_5">Un autel qui augmente les gains d'Argent, ce qui facilite l'appel des héros et l'utilisation de la boutique.
 
 Recommandé : Invasion, arène</String>
-  <String Key="ArtifactBuffDataDesc_15010">Aux invasions et aux expéditions, AGI du héros d'avant-garde +{0}% au début du combat (sans effet s'il n'y a pas de héros d'avant-garde).
-</String>
+  <String Key="ArtifactBuffDataDesc_15010">Aux invasions et aux expéditions, AGI du héros d'avant-garde +{0}% au début du combat (sans effet s'il n'y a pas de héros d'avant-garde).</String>
   <String Key="Post_Name_AltarGoldRefund">Remboursement de l'Or (renforcement des flammes des autels)</String>
   <String Key="Post_Desc_AltarGoldRefund">Nous vous remboursons l'Or dépensé pour le renforcement des flammes des autels.</String>
   <String Key="OutgameTutorial_140_00">Majesté, cela fait longtemps. &lt;color=#FFC13D&gt;C'est la commandante Aslyn.&lt;/color&gt;
@@ -15521,7 +15507,7 @@ Portée : 3X3 cases</String>
   <String Key="SeasonInformation">Infos de saison</String>
   <String Key="SeasonInformationHelp_0">Vous pouvez consulter les infos de Chap. de la Pierre d'invocation d'assaut de cette saison et l’Équilibrage de héros.</String>
   <String Key="SeasonInformationHelp_1">Touchez l’icône de Chap. pour voir le nom de la Pierre d'invocation d'assaut.</String>
-  <String Key="SeasonInformationHelp_2">Touchez Voir tout dans Équilibrage de héros pour voir les DEG infligés et le taux d'obtention de Défense absolue de tous les Héros.</String>
+  <String Key="SeasonInformationHelp_2">Dans Équilibrage de héros, appuyez sur Voir tout pour consulter les DEG infligés et les Chances de Parade de tous les Héros.</String>
   <String Key="InvadeSpawnItem">Pierre d'invocation d'assaut</String>
   <String Key="SkillDesc_60505">Quand vous êtes touché et rempli de rage, AGI +{AttackSpeedPer}% et Vitesse de déplacement +{MoveSpeedPer}%, et vous devenez immunisé aux effets d’état.</String>
   <String Key="SkillDesc_60665">Quand vous êtes touché et rempli de rage, AGI +{AttackSpeedPer}% et Vitesse de déplacement +{MoveSpeedPer}%, et vous devenez immunisé aux effets d’état.</String>
@@ -16527,7 +16513,7 @@ En la regardant encore, on dirait un très beau sourire.</String>
   <String Key="NormalMissionSubTap_3">Autres</String>
   <String Key="UnintendedExitScoreProtected_0">Aucune perte de score n'a été appliquée grâce au système de protection contre la perte de score en cas d'abandon involontaire</String>
   <String Key="UnintendedExitScoreProtected_1">Votre score a baissé car le nombre d'abandons a dépassé la limite de protection.</String>
-  <String Key="ColosseumRemainLeftIgnoreCount">Utilisations de protection restantes ({0}/3)</String>
+  <String Key="ColosseumRemainLeftIgnoreCount">Utilisations de protection restantes ({0}/5)</String>
   <String Key="UnintendedExitScoreProtectedInfo_0">Le système de protection contre la perte de score peut être utilisé jusqu'à 3 fois dans chaque moitié.</String>
   <String Key="UnintendedExitScoreProtectedInfo_1">Le système de protection contre la perte de score s'applique automatiquement si les conditions suivantes sont remplies.</String>
   <String Key="UnintendedExitScoreProtectedInfo_2">Si un abandon est enregistré dans le Champ de bataille d'acharnement</String>
@@ -18021,11 +18007,11 @@ Après le début du Combat, obtient +{11}% de Résistance aux maléfices et +{12
   <String Key="SkinDesc_107100401">&lt;i&gt;Récompense de Classement de la Ligue de la Chaleur en Bataille&lt;/i&gt;</String>
   <String Key="SkinName_1057002">Roi de l'Étoile du matin Farael</String>
   <String Key="SkinDesc_1057002">&lt;i&gt;La plus noble lumière des étoiles, née à l'aube, deviendra la lumière la plus éclatante pour percer les ténèbres.&lt;/i&gt;</String>
-  <String Key="SuperShieldModulator">Chance de défense absolue</String>
+  <String Key="SuperShieldModulator">Chances de Parade</String>
   <String Key="BuildingEffect_BaseDamageReflect">Réfléchit {Value}% des DEG
 (-50% de DEG d'INT subis)</String>
   <String Key="BuildingEffect_BaseDamageReflect_Long">Réflexion d'une partie des DEG subis du héros à l'ennemi</String>
-  <String Key="TreasureName_30042">Ferataus</String>
+  <String Key="TreasureName_30042">Ferrataus</String>
   <String Key="TreasureSubName_30042">Bouclier noir de jais</String>
   <String Key="TreasureDesc_30042">Le bouclier de Behimouth ne sert pas seulement à défendre. La Charge féroce de Behimouth avec son lourd bouclier peut écraser même l'armure la plus solide en un instant.</String>
   <String Key="TreasureSkillName_30042">Chute</String>
@@ -18034,10 +18020,10 @@ Après le début du Combat, obtient +{11}% de Résistance aux maléfices et +{12
   <String Key="BuffDataName_3300423">Brisure</String>
   <String Key="BuffDataName_3300424">Affaiblissement II</String>
   <String Key="BuffDataName_3300425">Suppression II</String>
-  <String Key="SpecialShop_TreasurePickUp30042">Boutique spéciale de pickup de Ferataus</String>
-  <String Key="SpecialPackage_1680">Pack Ferataus 1</String>
-  <String Key="SpecialPackage_1681">Pack Ferataus 2</String>
-  <String Key="SpecialPackage_1682">Pack Ferataus 3</String>
+  <String Key="SpecialShop_TreasurePickUp30042">Boutique spéciale Pickup de Ferrataus</String>
+  <String Key="SpecialPackage_1680">Pack Ferrataus 1</String>
+  <String Key="SpecialPackage_1681">Pack Ferrataus 2</String>
+  <String Key="SpecialPackage_1682">Pack Ferrataus 3</String>
   <String Key="BuffDataDesc_3300421">Transfert de dégâts +{1}x par {0} MENACE</String>
   <String Key="BuffDataDesc_3300422">Quand Instable est retiré, la cible subit un Étourdissement de {0} sec.</String>
   <String Key="BuffDataDesc_3300423">DEG Phys. subis par les ennemis Instables +{0}% (Les augmentations de DEG Phys. subis ne se cumulent pas. Seule la valeur la plus élevée s'applique)</String>
@@ -18278,7 +18264,7 @@ Chance de défense absolue augmentée</String>
   <String Key="StoryHint_420107000">Utilisez la Compétence de début de combat d'Ophélie pour vous défendre contre l'attaque de la Gargouille.</String>
   <String Key="StoryHint_420108000">Les attaques de Vlad étourdissent sans cesse les alliés. Utilisez une Compétence de début de combat capable de contrer l'étourdissement.</String>
   <String Key="TreasureName_30043">Vitacorde</String>
-  <String Key="TreasureSubName_30043">Livre de la Sainteté</String>
+  <String Key="TreasureSubName_30043">Tome de la Divinité</String>
   <String Key="TreasureDesc_30043">Affrontez la vérité au fond de votre cœur.
 Alors, la sainteté vous aidera.</String>
   <String Key="TreasureSkillName_30043">Pouvoir de la vie</String>
@@ -18287,7 +18273,7 @@ Alors, la sainteté vous aidera.</String>
   <String Key="BuffDataName_3300433">Protection sacrée</String>
   <String Key="BuffDataName_3300434">Cycle de la vie II</String>
   <String Key="BuffDataName_3300435">Pouvoir sacré II</String>
-  <String Key="SpecialShop_TreasurePickUp30043">Boutique spéciale Vitacorde</String>
+  <String Key="SpecialShop_TreasurePickUp30043">Boutique spéciale Pickup de Vitacorde</String>
   <String Key="SpecialPackage_1683">Pack Vitacorde 1</String>
   <String Key="SpecialPackage_1684">Pack Vitacorde 2</String>
   <String Key="SpecialPackage_1685">Pack Vitacorde 3</String>
@@ -18296,50 +18282,51 @@ Alors, la sainteté vous aidera.</String>
   <String Key="BuffDataDesc_3300433">Accorde GRÂCE à tous les alliés de la zone sauf à soi-même</String>
   <String Key="BuffDataDesc_3300434">Recharge {0}s</String>
   <String Key="BuffDataDesc_3300435">Pour chaque PROTECT {0}, coefficient d'INT de l'effet d'augmentation des Dégâts de base +{1}%</String>
-  <String Key="TreasureSkillDesc_3300430">Au début du combat, seul l'effet du Héros équipé de Vitacorde avec le plus haut ★ s'applique
-Fixe l'INT du porteur à sa valeur du début du combat
-Quand le porteur soigne un allié, crée pendant {0}s une zone qui augmente les Dégâts de base des alliés dans un rayon de {1} autour du porteur de {2}% de l'INT du porteur (Recharge : {3}s)</String>
-  <String Key="TreasureSkillDesc_3300431">Au début du combat, seul l'effet du Héros équipé de Vitacorde avec le plus haut ★ s'applique
-Fixe l'INT du porteur à sa valeur du début du combat
-Quand le porteur soigne un allié, crée pendant {0}s une zone qui augmente les Dégâts de base des alliés dans un rayon de {1} autour du porteur de {2}% de l'INT du porteur (Recharge : {3}s)
-Pour chaque PROTECT {4}, coefficient d'INT de l'effet d'augmentation des Dégâts de base +{5}%</String>
-  <String Key="TreasureSkillDesc_3300433">Au début du combat, seul l'effet du Héros équipé de Vitacorde avec le plus haut ★ s'applique
-Fixe l'INT du porteur à sa valeur du début du combat
-Quand le porteur soigne un allié, crée pendant {0}s une zone qui augmente les Dégâts de base des alliés dans un rayon de {1} autour du porteur de {2}% de l'INT du porteur (Recharge : {3}s)
-Pour chaque PROTECT {4}, coefficient d'INT de l'effet d'augmentation des Dégâts de base +{5}%
-Accorde GRÂCE aux alliés dans la zone sauf au porteur</String>
+  <String Key="TreasureSkillDesc_3300430">Au début du Combat, seul l'effet du Héros avec le plus de ★ équipé de Vitacorde s'applique
+L'INT du porteur est fixée à sa valeur au début du Combat
+Lorsqu'il soigne des alliés, crée une zone pendant {0}s qui augmente les DEG de base des alliés dans la Zone {1} autour du porteur de {2}% de l'INT du porteur (Recharge : {3}s)</String>
+  <String Key="TreasureSkillDesc_3300431">Au début du Combat, seul l'effet du Héros avec le plus de ★ équipé de Vitacorde s'applique
+L'INT du porteur est fixée à sa valeur au début du Combat
+Lorsqu'il soigne des alliés, crée une zone pendant {0}s qui augmente les DEG de base des alliés dans la Zone {1} autour du porteur de {2}% de l'INT du porteur (Recharge : {3}s)
+Pour chaque {4} PROTECT, +{5}% au coefficient d'INT de l'effet d'augmentation des DEG de base</String>
+  <String Key="TreasureSkillDesc_3300433">Au début du Combat, seul l'effet du Héros avec le plus de ★ équipé de Vitacorde s'applique
+L'INT du porteur est fixée à sa valeur au début du Combat
+Lorsqu'il soigne des alliés, crée une zone pendant {0}s qui augmente les DEG de base des alliés dans la Zone {1} autour du porteur de {2}% de l'INT du porteur (Recharge : {3}s)
+Pour chaque {4} PROTECT, +{5}% au coefficient d'INT de l'effet d'augmentation des DEG de base
+Accorde GRÂCE aux alliés dans la zone, sauf au porteur</String>
   <String Key="SeasonalEventName_Season72">Fête d'envol des dragons</String>
   <String Key="SeasonalEventMode_Season72">Fête d'envol des dragons</String>
   <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Sous-titre temporaire</String>
-  <String Key="TreasureDesc_50002">Description temporaire - à compléter une fois le concept du Trésor défini - idée prévue : une sorte de pierre ? Un artefact ? qui emprunte les PM des plantes et animaux à proximité, les stocke, puis les libère</String>
+  <String Key="TreasureSubName_50002">Sous-nom temporaire</String>
+  <String Key="TreasureDesc_50002">Description temporaire - à compléter quand le concept du Trésor sera prêt - concept prévu : une sorte de pierre ? d'artefact ? qui emprunte des PM aux plantes et animaux à proximité, les accumule puis les libère</String>
   <String Key="TreasureSkillName_50002">Combinaison de PM</String>
   <String Key="BuffDataName_3500021">Assimilation I</String>
   <String Key="BuffDataName_3500022">Barrière de PM I</String>
   <String Key="BuffDataName_3500023">Résonance de PM</String>
   <String Key="BuffDataName_3500024">Barrière de PM II</String>
   <String Key="BuffDataName_3500025">Assimilation II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">Boutique spéciale Cor Orbis</String>
+  <String Key="SpecialShop_TreasurePickUp50002">Boutique spéciale Pickup de Cor Orbis</String>
   <String Key="SpecialPackage_1690">Pack Cor Orbis 1</String>
   <String Key="SpecialPackage_1691">Pack Cor Orbis 2</String>
   <String Key="SpecialPackage_1692">Pack Cor Orbis 3</String>
-  <String Key="BuffDataDesc_3500021">Pour chaque {1}% de DEG CRIT d'INT au-dessus de {0}%, bonus de DEG totaux de la compétence améliorée x{2}</String>
-  <String Key="BuffDataDesc_3500022">Dégâts subis {0}% jusqu'à la 3e utilisation de compétence</String>
-  <String Key="BuffDataDesc_3500023">Lors de l'utilisation d'une compétence améliorée, utilise la même compétence {1} fois de plus sur une cible au hasard avec {0}% de Dégâts</String>
-  <String Key="BuffDataDesc_3500024">Dégâts subis {0}% jusqu'à la 3e utilisation de compétence</String>
-  <String Key="BuffDataDesc_3500025">Pour chaque {1}% de DEG CRIT d'INT au-dessus de {0}%, bonus de DEG totaux de la compétence améliorée x{2}</String>
-  <String Key="TreasureSkillDesc_3500020">Après le début du combat, seul le Héros équipé de Cor Orbis avec le plus haut ★ gagne +{0}% de PM max et -{1}% de DEG totaux infligés jusqu'à sa 3e utilisation de compétence
+  <String Key="BuffDataDesc_3500021">Pour chaque {1}% de DEG CRIT d'INT au-dessus de {0}%, l'augmentation des DEG totaux de la compétence améliorée est multipliée par {2}</String>
+  <String Key="BuffDataDesc_3500022">DEG subis {0}% jusqu'à la 3e utilisation de compétence</String>
+  <String Key="BuffDataDesc_3500023">Lors de l'utilisation d'une compétence améliorée, utilise en plus la même compétence sur 2 cibles au hasard avec {0}% de DEG</String>
+  <String Key="BuffDataDesc_3500024">DEG subis {0}% jusqu'à la 3e utilisation de compétence</String>
+  <String Key="BuffDataDesc_3500025">Pour chaque {1}% de DEG CRIT d'INT au-dessus de {0}%, l'augmentation des DEG totaux de la compétence améliorée est multipliée par {2}</String>
+  <String Key="TreasureSkillDesc_3500020">Après le début du Combat, le Héros avec le plus de ★ équipé de Cor Orbis gagne +{0}% de PM max et -{1}% de DEG infligés totaux jusqu'à la 3e utilisation de compétence
 La dernière compétence est améliorée et ses DEG totaux augmentent de +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">Après le début du combat, seul le Héros équipé de Cor Orbis avec le plus haut ★ gagne +{0}% de PM max et -{1}% de DEG totaux infligés jusqu'à sa 3e utilisation de compétence
+  <String Key="TreasureSkillDesc_3500021">Après le début du Combat, le Héros avec le plus de ★ équipé de Cor Orbis gagne +{0}% de PM max et -{1}% de DEG infligés totaux jusqu'à la 3e utilisation de compétence
 La dernière compétence est améliorée et ses DEG totaux augmentent de +{2}%
-Pour chaque {4}% de DEG CRIT d'INT au-dessus de {3}%, bonus de DEG totaux de la compétence améliorée x{5}</String>
-  <String Key="TreasureSkillDesc_3500022">Après le début du combat, seul le Héros équipé de Cor Orbis avec le plus haut ★ gagne +{0}% de PM max et -{1}% de DEG totaux infligés jusqu'à sa 3e utilisation de compétence
+Pour chaque {4}% de DEG CRIT d'INT au-dessus de {3}%, l'augmentation des DEG totaux de la compétence améliorée est multipliée par {5}</String>
+  <String Key="TreasureSkillDesc_3500022">Après le début du Combat, le Héros avec le plus de ★ équipé de Cor Orbis gagne +{0}% de PM max et -{1}% de DEG infligés totaux jusqu'à la 3e utilisation de compétence
 La dernière compétence est améliorée et ses DEG totaux augmentent de +{2}%
-Pour chaque {4}% de DEG CRIT d'INT au-dessus de {3}%, bonus de DEG totaux de la compétence améliorée x{5}
-Dégâts subis {6}% jusqu'à la 3e utilisation de compétence</String>
-  <String Key="TreasureSkillDesc_3500023">Après le début du combat, seul le Héros équipé de Cor Orbis avec le plus haut ★ gagne +{0}% de PM max et -{1}% de DEG totaux infligés jusqu'à sa 3e utilisation de compétence
+Pour chaque {4}% de DEG CRIT d'INT au-dessus de {3}%, l'augmentation des DEG totaux de la compétence améliorée est multipliée par {5}
+DEG subis {6}% jusqu'à la 3e utilisation de compétence</String>
+  <String Key="TreasureSkillDesc_3500023">Après le début du Combat, le Héros avec le plus de ★ équipé de Cor Orbis gagne +{0}% de PM max et -{1}% de DEG infligés totaux jusqu'à la 3e utilisation de compétence
 La dernière compétence est améliorée et ses DEG totaux augmentent de +{2}%
-Pour chaque {4}% de DEG CRIT d'INT au-dessus de {3}%, bonus de DEG totaux de la compétence améliorée x{5}
-Dégâts subis {6}% jusqu'à la 3e utilisation de compétence
-Lors de l'utilisation d'une compétence améliorée, utilise la même compétence {8} fois de plus sur une cible au hasard avec {7}% de Dégâts</String>
+Pour chaque {4}% de DEG CRIT d'INT au-dessus de {3}%, l'augmentation des DEG totaux de la compétence améliorée est multipliée par {5}
+DEG subis {6}% jusqu'à la 3e utilisation de compétence
+Lors de l'utilisation d'une compétence améliorée, utilise en plus la même compétence sur 2 cibles au hasard avec {7}% de DEG</String>
+  <String Key="AdsSummonRestrictionAlert">Jusqu'à {0} fois par manche.</String>
 </Strings>
