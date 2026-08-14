@@ -7,6 +7,10 @@
 unity/
 tools/
 ghidra/
+ghidra_work/
+.ghidra-work/
+*.gpr
+*.rep
 # `il2cpp/*` alone excludes the DIRECTORIES, so git never descends into them and
 # the negation below can never match - v171.0.00's lib only ships because it was
 # tracked before this rule existed. Re-include the dirs, exclude their contents,

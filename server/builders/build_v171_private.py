@@ -181,6 +181,7 @@ _NRE_STUBS_V17201 = [
     (0x3044820, "babel-data",    'fe0f1df8f65701a9', RET_FALSE),  # GameManager.GetBabelData -> null
     (0x34B19A8, "content-alert", 'fe0f1bf8fa6701a9', RET_FALSE),  # WorldPanel.ReloadNewContentAlert
     (0x306A180, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
+    (0x2CBF2C4, "ranking-endpt", 'fe0f1ef8f44f01a9', bytes.fromhex('48da01f0086545f9080140f9085d40f9000540f9c0035fd6')), # Web.GetRankingServerEndPoint -> Web._endPoint
 ]
 NRE_STUBS = {"171.0.00": _NRE_STUBS_V17100,
              "171.1.00": _NRE_STUBS_V17110,
@@ -203,6 +204,29 @@ REGISTER_HACK_DETECT_OFF = {"171.0.00": 0x34D7060,
                              "172.0.01": 0x34E4EDC - 0x4000}[VER]
 REGISTER_HACK_DETECT_ORIG = 'fe57bea9'  # stp x30, x21, [sp, #-0x20]!
 REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
+
+# NOP the canUseFirebase gate in FUN_03810e4c.  When CheckFirebase() is stubbed
+# to ret (line 275), canUseFirebase stays false forever.  This cbz silently
+# drops every ranking HTTP dispatch.  NOP it so the dispatch always fires.
+# Ghidra VMA 0x3810ee8 → RVA 0x3710ee8 → file off = RVA − 0x4000 = 0x370cee8.
+CANUSEFIREBASE_OFF = {"172.0.01": 0x370cee8}[VER]
+CANUSEFIREBASE_ORIG = 'c8010034'  # cbz w8, +0x38
+CANUSEFIREBASE_NEW  = '1f2003d5'  # nop
+
+# Stub FirebaseAnalytics.LogEvent → ret.  v172.0.01 embeds LogEvent() inside
+# Awesomepiece.Web.Get[T] — every single HTTP request triggers it.  On redroid
+# (no Play Services) the FirebaseAnalyticsInternal static cctor throws
+# TypeInitializationException, which kills the HTTP callback mid-flight.
+# Symptom: game fetches usePatch, the response handler crashes, getPatchFolder
+# never fires → stuck on "Loading resources…" forever.  Both overloads are
+# static void, so `ret` is safe.
+# Offsets: dump.cs Offset field (= file offset directly).
+FIREBASE_LOGEVENT_STUBS = {"172.0.01": [
+    # FirebaseAnalytics.LogEvent(string, Parameter[])
+    (0x3776158, 'fe0f1df8f65701a9'),
+    # FirebaseAnalytics.LogEvent(string, IEnumerable<Parameter>)
+    (0x37761BC, 'fe67bca9f85f01a9'),
+]}.get(VER, [])
 
 # --- XIGNCODE NEO loader (the packer .so in the config split) ---------------
 # Its on-disk filename rotates every build (v171.0.00 libaledatic.so, v171.0.01
@@ -280,12 +304,12 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
         print(f"  [!] CheckUseAssetBundle bypass ENABLED @ 0x{CHECKUSEASSET_OFF:x} - breaks Strings/UI, debug only")
     for rva, label, orig_hex, new in NRE_STUBS:
         off = rva - 0x4000
-        cur = bytes(il2_data[off:off+8])
+        cur = bytes(il2_data[off:off+len(new)])
         if cur == new:
             continue
-        if cur != bytes.fromhex(orig_hex):
-            raise SystemExit(f"{label}: unexpected bytes at 0x{off:x}: {cur.hex()}")
-        il2_data[off:off+8] = new
+        if bytes(il2_data[off:off+len(orig_hex)//2]) != bytes.fromhex(orig_hex):
+            raise SystemExit(f"{label}: unexpected bytes at 0x{off:x}: {bytes(il2_data[off:off+8]).hex()}")
+        il2_data[off:off+len(new)] = new
         print(f"  [+] stubbed {label} @ 0x{off:x} -> {new.hex()}")
     # DIAGNOSTIC: KGC_LOBBY_DIAG=1 NOPs every explicit null-check in
     # Scene_Lobby.Init that branches to the throw block (0x34e63f8), so the
@@ -392,7 +416,24 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
             raise SystemExit(f"RegisterHackDetectionCallback @ 0x{REGISTER_HACK_DETECT_OFF:x}: unexpected bytes {cur.hex()}")
         il2_data[REGISTER_HACK_DETECT_OFF:REGISTER_HACK_DETECT_OFF+4] = bytes.fromhex(REGISTER_HACK_DETECT_NEW)
         print(f"  [+] stubbed RegisterHackDetectionCallback @ 0x{REGISTER_HACK_DETECT_OFF:x} (ret)")
-    
+    # NOP canUseFirebase gate in FUN_03810e4c (ranking dispatch)
+    cur = bytes(il2_data[CANUSEFIREBASE_OFF:CANUSEFIREBASE_OFF+4])
+    if cur != bytes.fromhex(CANUSEFIREBASE_NEW):
+        if cur != bytes.fromhex(CANUSEFIREBASE_ORIG):
+            raise SystemExit(f"canUseFirebase gate @ 0x{CANUSEFIREBASE_OFF:x}: unexpected bytes {cur.hex()}")
+        il2_data[CANUSEFIREBASE_OFF:CANUSEFIREBASE_OFF+4] = bytes.fromhex(CANUSEFIREBASE_NEW)
+        print(f"  [+] NOPed canUseFirebase gate @ 0x{CANUSEFIREBASE_OFF:x} (ranking dispatch)")
+    # Stub FirebaseAnalytics.LogEvent overloads → ret (prevents
+    # TypeInitializationException from killing Web.Get HTTP callbacks)
+    for off, orig_hex in FIREBASE_LOGEVENT_STUBS:
+        cur = bytes(il2_data[off:off+4])
+        if cur == RET:
+            continue
+        if cur != bytes.fromhex(orig_hex[:8]):
+            raise SystemExit(f"FirebaseAnalytics.LogEvent @ 0x{off:x}: unexpected bytes {cur.hex()}")
+        il2_data[off:off+4] = RET
+        print(f"  [+] stubbed FirebaseAnalytics.LogEvent @ 0x{off:x} (ret)")
+
     # ShopItem.Init empty list crash bypass
     # ShopItem.Init(int id) reads the shop list without a count check and NREs on an
     # empty one. The fix reads Count off [x20,#0x18] and branches to the method's own

@@ -31,17 +31,17 @@ esac
 RELOAD=(--reload
         --reload-dir . --reload-dir xml_live
         --reload-include '*.py' --reload-include '*.json' --reload-include '*.xml'
-        --reload-exclude 'state/*' --reload-exclude 'webui-next/*')   # state/ is written by the server itself - watching it = restart loop
+        --reload-exclude "$PWD/state" --reload-exclude "$PWD/webui-next")   # state/ is written by the server itself - watching it = restart loop
 
 stop   # kill any running copy before relaunching
 sleep 1
 
-"$UVICORN" server:app --host 0.0.0.0 --port 8080 "${RELOAD[@]}" >/tmp/kgc_server.log 2>&1 &
-"$UVICORN" server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem --ssl-certfile cert.pem \
+nohup "$UVICORN" server:app --host 0.0.0.0 --port 8080 "${RELOAD[@]}" >/tmp/kgc_server.log 2>&1 &
+nohup "$UVICORN" server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem --ssl-certfile cert.pem \
         "${RELOAD[@]}" >/tmp/kgc_server_tls.log 2>&1 &
-"$UVICORN" dashboard:app --host 0.0.0.0 --port 8081 "${RELOAD[@]}" >/tmp/kgc_dashboard.log 2>&1 &
+nohup "$UVICORN" dashboard:app --host 0.0.0.0 --port 8081 "${RELOAD[@]}" >/tmp/kgc_dashboard.log 2>&1 &
 if [ -d "webui-next" ]; then
-    (cd webui-next && npm run dev > /tmp/kgc_nextjs.log 2>&1 &)
+    (cd webui-next && nohup npm run dev > /tmp/kgc_nextjs.log 2>&1 &)
 fi
 
 sleep 4
@@ -53,3 +53,4 @@ if [ -d "webui-next" ]; then
 fi
 echo "python:   $UVICORN"
 echo "logs: /tmp/kgc_server.log /tmp/kgc_server_tls.log /tmp/kgc_dashboard.log /tmp/kgc_nextjs.log"
+wait

@@ -54,7 +54,12 @@ def leaderboard(st, row_fn, score_key="score", player_key="playerRank",
         ranking.append(r)
         if uid == me:
             mine = dict(r)
-    return {ranking_key: ranking, player_key: mine or (ranking[0] if ranking else row_fn(st))}
+    if not mine and ranking:
+        mine = dict(ranking[0])
+    if not mine:
+        mine = row_fn(st)
+        mine["rank"] = 1
+    return {ranking_key: ranking, player_key: mine}
 
 
 def opponents(st, n, build, fallback=True):
@@ -80,11 +85,17 @@ def player_by_id(target_id, st):
 def rank_row(st, score=0, extra=None):
     d = _PC["defaults"]
     deco = _deco(st)
+    name = st.get("name") or d["name"]
+    castle = st.get("castleName") or d["castleName"]
+    acct_id = st.get("accountId")
+    if acct_id is None:
+        acct_id = d["accountId"]
     row = {"rank": 1, "score": int(score),
-           "accountId": st.get("accountId", d["accountId"]),
-           "userName": st.get("name", d["name"]),
-           "castleName": st.get("castleName", d["castleName"]),
-           "kingPostfix": 0, "castlePostfix": 0,
+           "accountId": int(acct_id),
+           "userName": str(name),
+           "castleName": str(castle),
+           "kingPostfix": int(st.get("kingPostfix", 0) or 0),
+           "castlePostfix": int(st.get("castlePostfix", 0) or 0),
            "flagId": deco["flag"]["flagId"], "nameTagId": deco["nameTag"],
            "profileIcon": d["profileIconId"], "tier": 0}
     row.update(extra or {})
@@ -104,19 +115,24 @@ def deck_units(st):
     list is a row of blank slots - fall back to the first non-empty preset rather than
     show nothing when the selected one has never been filled.
 
-    Never return an empty list: RankingItem.Set loops a fixed 6-slot portrait array and
-    calls SetSprite(image, null) per slot, and Image.set_sprite(null) throws - a player
-    with no deck (test accounts, pre-invasion saves) makes the whole ranking panel crash.
+    Never return an empty list or fewer than 6 elements: RankingItem.Set loops a fixed
+    6-slot portrait array and calls SetSprite(image, null) per slot, and Image.set_sprite(null) throws -
+    a player with no deck (test accounts, pre-invasion saves) makes the whole ranking panel crash.
     The fallback is the seed deck (all starters exist in every save)."""
     decks = st.get("decks") or []
     cur = st.get("currentDeckPreset", 0)
     order = ([decks[cur]] if cur < len(decks) else []) + list(decks)
+    starters = [10000, 10010, 10020, 10030, 10040, 10050]
     for deck in order:
         units = deck.get("deck", []) if isinstance(deck, dict) else deck
         got = [u for u in units if isinstance(u, int) and u]
         if got:
-            return got
-    return [10000, 10010, 10020, 10030, 10040, 10050]
+            pad_idx = 0
+            while len(got) < 6:
+                got.append(starters[pad_idx % len(starters)])
+                pad_idx += 1
+            return got[:6]
+    return list(starters)
 
 
 # --- The ten boards -----------------------------------------------------------
@@ -125,12 +141,18 @@ def r_ranking(body, st):
     """The generic board. `score` is a long here and `deck` replaces the cosmetics."""
     d = _PC["defaults"]
     def row_fn(s):
+        name = s.get("name") or d["name"]
+        castle = s.get("castleName") or d["castleName"]
+        acct_id = s.get("accountId")
+        if acct_id is None:
+            acct_id = d["accountId"]
         return {"score": int(s.get("bestClearedTheme", 0)) * 100
                                  + int(s.get("bestClearedStage", 0)),
-                "accountId": s.get("accountId", d["accountId"]),
-                "userName": s.get("name", d["name"]),
-                "castleName": s.get("castleName", d["castleName"]),
-                "kingPostfix": 0, "castlePostfix": 0,
+                "accountId": int(acct_id),
+                "userName": str(name),
+                "castleName": str(castle),
+                "kingPostfix": int(s.get("kingPostfix", 0) or 0),
+                "castlePostfix": int(s.get("castlePostfix", 0) or 0),
                 "deck": deck_units(s)}
     out = leaderboard(st, row_fn)
     out["rankingType"] = str(body.get("rankingType", ""))

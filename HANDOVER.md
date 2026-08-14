@@ -25,7 +25,7 @@ Three deliverables, in dependency order:
 3. **The master data** (`server/xml_live/` → `server/real_cdn/xml`) - a cloned copy of the
    game's CDN content bundle, which we re-serve and occasionally edit.
 
-It currently works end to end: v171.1.00 client boots to a full lobby on redroid, Guest login
+It currently works end to end: v172.0.01 client boots to a full lobby on redroid, Guest login
 succeeds, zero HTTP 500s across a play session.
 
 **What this project is not:** it is not a cheat client, not a bot, and not something that

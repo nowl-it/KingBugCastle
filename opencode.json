@@ -1,4 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@dietrichgebert/ponytail"]
+  "plugin": ["@dietrichgebert/ponytail"],
+  "mcp": {
+    "ghidra": {
+      "type": "remote",
+      "url": "http://127.0.0.1:8081/mcp"
+    }
+  }
 }

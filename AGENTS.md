@@ -229,6 +229,53 @@ RVA − 0x4000; `NRE_STUBS` table rows are RVAs — the build loop subtracts 0x4
 | 0x34E38A8 | RegisterHackDetection (file 0x34DF8A8) | `fe57bea9` → `c0035fd6` |
 | 0x32DB348 | shop-init (**file offset**, see below) | `941300b428aa01d0086545f9f60300aae00314aae1031f2a020140f92bb03394` |
 
+**v172.0.01-only patches** (added 2026-08-14):
+
+| File offset | Label | Original bytes | Patch | Purpose |
+|---|---|---|---|---|
+| 0x3776158 | firebase-logevent-1 | `fe0f1df8f65701a9` | `c0035fd6` (ret) | `FirebaseAnalytics.LogEvent(string, Parameter[])` → ret |
+| 0x37761BC | firebase-logevent-2 | `fe67bca9f85f01a9` | `c0035fd6` (ret) | `FirebaseAnalytics.LogEvent(string, IEnumerable<Parameter>)` → ret |
+| 0x370cee8 | canUseFirebase-gate | `c8010034` (cbz) | `1f2003d5` (nop) | NOP the canUseFirebase gate so ranking dispatches fire |
+| 0x2CBB2C4 | ranking-endpt | `fe0f1ef8f44f01a9` (RVA 0x2CBF2C4) | `48da01f0086545f9080140f9085d40f9000540f9c0035fd6` | `Web.GetRankingServerEndPoint()` → return `Web._endPoint` directly (`http://127.0.0.1`), preventing external cloud-run calls |
+| 0x34E0EDC | RegisterHackDetection | `fe57bea9` (RVA 0x34E4EDC) | `c0035fd6` (ret) | `Scene_Base.RegisterHackDetectionCallback` → ret |
+
+### v172.0.01 Weekly Combat Power Ranking & Leaderboard Architecture (2026-08-14)
+
+1. **Endpoint Resolution**:
+   `Awesomepiece.Web.GetRankingServerEndPoint()` originally attempted to resolve Firebase-based endpoints or loaded `Web.rankingServerEndPoint` pointing to `https://castle-infra-server-...` (which failed/bypassed on local private server). Patched at RVA `0x2CBF2C4` to load `Web._endPoint` directly (`adrp x8, #0x680a000; ldr x8, [x8, #0xac8]; ldr x8, [x8]; ldr x8, [x8, #0xb8]; ldr x0, [x8, #8]; ret`).
+
+2. **Server Routing Gap (`server.py` OVERRIDES)**:
+   Added `/ranking/ranking`, `/ranking/pvp-ranking`, `/ranking/colosseum-ranking`, `/ranking/challenge-mode-ranking`, `/clan/ranking`, etc. into `OVERRIDES` pointing to `roster.r_ranking`. Returning empty fallback model causes `RankingPanel.<ShowRanking>d__14.MoveNext` to throw `NullReferenceException` on `myRankingItem.Set(model.playerRank, true)`.
+
+3. **Leaderboard Roster Safety (`roster.py`)**:
+   - `deck_units`: Guarantees `deck` array is strictly 6 elements (padded with starter unit IDs `[10000, 10010, 10020, 10030, 10040, 10050]`) so `RankingItem.Set` does not pass null sprites to Unity UI.
+   - `rank_row`: Fallbacks for empty/null player and castle names to ensure strings are never null.
+   - `playerRank`: Always returns a populated `RankingData` dict for the calling player.
+
+### v172.0.01 "Loading resources…" hang — FirebaseAnalytics.LogEvent in Web.Get (2026-08-14)
+
+v172.0.01 **embeds** `FirebaseAnalytics.LogEvent()` inside `Awesomepiece.Web.Get[T]` — the game's
+HTTP client class. Stack trace:
+```
+Awesomepiece.Web.Get[T]
+  → FirebaseAnalytics.LogEvent(string, IEnumerable<Parameter>)
+    → FirebaseAnalyticsInternal..cctor
+      → FirebaseApp.CreateAndTrack
+        → InitializationException: messaging (missing dependency)
+          → TypeInitializationException (rethrown)
+```
+On redroid (no Google Play Services), the Firebase static cctor throws
+`TypeInitializationException`, which **kills the HTTP callback mid-flight**. The game fetches
+`usePatch` and the response arrives, but the completion handler crashes before it can proceed to
+`getPatchFolder`. Symptom: game sits on "Loading resources…" forever, server log shows only
+`usePatch` and nothing else.
+
+`CheckFirebase()` (already stubbed to `ret`) only prevents `GameManager` from calling Firebase
+init — it does NOT prevent `Web.Get` from calling `LogEvent` directly. The fix is stubbing both
+`FirebaseAnalytics.LogEvent` overloads to `ret` (void methods). With the patch, the full flow
+resumes: `usePatch` → `getPatchFolder` → CDN assets → login screen.
+
+
 `ShopItem.Init` v172: site **file 0x32DB348** (ORIG found by byte search, NOT RVA−0x4000 — the
 0x32DB748 figure from the first pass was wrong). NEW `b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d52bb03394`
 disassembles to `cbz x20,#0x32db59c; ldr w8,[x20,#0x18]; cbz w8,#0x32db59c; mov x22,x0; mov x0,x20;

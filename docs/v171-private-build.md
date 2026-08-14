@@ -1,15 +1,20 @@
-# v171 Private Build
+# Private Build (v171 / v172)
 
-How to build, install and run the private v171 client against your own server.
-Status as of 2026-07-30: builds from either the **v171.0.01** or the **v171.1.00** APKs and
+How to build, install and run the private client against your own server.
+Status as of 2026-08-14: builds from **v172.0.01** (default), **v172.0.00**, or **v171.x** APKs and
 **boots to a fully rendered lobby on redroid**; Guest and web-Google login both work.
 
 ```bash
-# v171.0.01 (default)
-SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 python3 server/build_v171_private.py
-# v171.1.00 - same script, same patch table
+# v172.0.01 (default)
+SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 python3 server/builders/build_v171_private.py
+
+# v172.0.00
+KGC_APK_SRC=xapk_extracted_v1720 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 \
+  python3 server/builders/build_v171_private.py
+
+# v171.1.00
 KGC_APK_SRC=xapk_extracted_v1711 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 \
-  python3 server/build_v171_private.py
+  python3 server/builders/build_v171_private.py
 ```
 
 One script covers both because the v171.1.00 packer is the **same binary** as v171.0.01's:

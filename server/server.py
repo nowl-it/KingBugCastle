@@ -1948,9 +1948,13 @@ def r_cumulative_purchase_claim(body, st):
 
 def r_cloud_run_services(body, st):
     """Infrastructure discovery. The real backend answers with the regional service
-    endpoints it wants the client to use; here everything is this server, so the
-    honest answer is an empty list and the client keeps its configured host."""
-    return {"services": [], "ranking": []}
+    endpoints it wants the client to use; return local endpoints so client configures correctly."""
+    endpoint_data = {
+        "name": "default-ranking",
+        "url": "http://127.0.0.1",
+        "cachedInfo": {"useSideCar": False, "useReplicaDB": False}
+    }
+    return {"services": [endpoint_data], "ranking": [], "serverList": [endpoint_data]}
 
 # --- Babel: the six towers ----------------------------------------------------
 
@@ -2183,6 +2187,20 @@ DYNAMIC_OVERRIDES = {
     "/api/cloud-run/default-ranking": r_cloud_run_services,
     "/kgc-main": r_ack,
     "/kgc-ranking": roster.r_ranking,
+    "/ranking/ranking": roster.r_ranking,
+    "/ranking/pvp-ranking": roster.r_ranking,
+    "/ranking/pvp-league-ranking": roster.r_ranking,
+    "/ranking/pvp-hall-of-fame": roster.r_ranking,
+    "/ranking/colosseum-ranking": roster.r_ranking,
+    "/ranking/colosseum-league-ranking": roster.r_ranking,
+    "/ranking/colosseum-hall-of-fame": roster.r_ranking,
+    "/ranking/dimension-rift-ranking": roster.r_ranking,
+    "/ranking/challenge-mode-ranking": roster.r_ranking,
+    "/ranking/clan-point-ranking": roster.r_ranking,
+    "/ranking/roguelike-ranking": roster.r_ranking,
+    "/ranking/roguelike-building-ranking": roster.r_ranking,
+    "/clan/ranking": roster.r_ranking,
+    "/stock-event/ranking": roster.r_ranking,
     "/seasonal-event/april-fools/reward": lambda b, st: {
         "rewardListResponseData": _reward_list_data([])},
     "/artifact/reroll": r_artifact_result,
