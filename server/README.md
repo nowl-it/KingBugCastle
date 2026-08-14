@@ -1,19 +1,22 @@
 # KGC private server (emulator)
 
 Reverse-engineered private server for **King God Castle** (`com.awesomepiece.castle`),
-reconstructed from the il2cpp dump of client `v170.0.03` (active client `v170.1.00`, arm64).
-Goal: boot the real client against a server you control for offline testing /
-mechanic experimentation.
+supporting client versions **v170.1.00 – v172.0.01** (arm64).
+Goal: boot the real client against a server you control for offline testing,
+mechanic experimentation, and private multiplayer.
+
+[![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/6tDBPs9chp)
 
 > Research / interoperability use only. Server-authoritative game — this emulates
 > the backend; it does not modify or distribute the client.
 
 **Start here:**
+- **[Discord Server](https://discord.gg/6tDBPs9chp)** — community, help, announcements, bug reports.
 - **[../SETUP.md](../SETUP.md)** — first-run: clone → `setup.py` → run your own server,
   on any OS, against redroid / BlueStacks / LDPlayer / a real phone.
 - **[WORKFLOW.md](WORKFLOW.md)** — day-to-day edit/test/deploy loop, "which file do I
   edit" table, rules that have caused real crashes when violated.
-- **[data/README.md](data/README.md)** — schema of the 4 JSON files under `data/`.
+- **[data/README.md](data/README.md)** — schema of the JSON files under `data/`.
 - **[../AGENTS.md](../AGENTS.md)** (repo root) — arm64 patch inventory + RVA map, kept
   current with every Ghidra-verified finding.
 - **[../KNOWLEDGE.md](../KNOWLEDGE.md)** — dated session log: what was found, what broke,
