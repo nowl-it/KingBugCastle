@@ -665,6 +665,24 @@ def _repair_player_state(st):
         st["buildingPresets"] = [{"buildingLevels": [0] * 6} for _ in range(10)]
         changed = True
 
+    # 7. Normalize bestClearedTheme & bestClearedStage to avoid 2^31-1 gold overflow in Shop
+    th = st.get("bestClearedTheme")
+    if th is None or not isinstance(th, int) or th > 12 or th < 0:
+        st["bestClearedTheme"] = 10
+        changed = True
+    stg = st.get("bestClearedStage")
+    if stg is None or not isinstance(stg, int) or stg > 10 or stg < 0:
+        st["bestClearedStage"] = 10
+        changed = True
+    hth = st.get("bestClearedHardTheme")
+    if hth is None or not isinstance(hth, int) or hth > 12 or hth < 0:
+        st["bestClearedHardTheme"] = 10
+        changed = True
+    hstg = st.get("bestClearedHardStage")
+    if hstg is None or not isinstance(hstg, int) or hstg > 10 or hstg < 0:
+        st["bestClearedHardStage"] = 10
+        changed = True
+
     return changed
 
 

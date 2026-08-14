@@ -3,8 +3,8 @@
     "accountId": 0, "uid": "guest-0001", "name": "KingBug", "castleName": "BugCastle",
     "accountType": 1, "level": 100, "exp": 9999999,
     "gold": 290909, "cash": 290909, "paidCash": 0, "heart": 290909,
-    "bestClearedStage": 999, "bestClearedTheme": 99,
-    "bestClearedHardStage": 999, "bestClearedHardTheme": 99,
+    "bestClearedStage": 10, "bestClearedTheme": 10,
+    "bestClearedHardStage": 10, "bestClearedHardTheme": 10,
     "currentDeckPreset": 0, "playedCount": 0, "winCount": 0,
     "hasFreeRename": true
   },
