@@ -156,20 +156,31 @@ def _get_buff_options_for_altar(altar_idx, xml_dir=XML_DIR):
     return pool if pool else data["all_buff_ids"]
 
 
-def make_rift_weapon(i, rw_id, rarity=1, level=1, building_indexes=None, sub_stat=None, state=0):
+def make_rift_weapon(i, rw_id, rarity=1, level=None, building_indexes=None, sub_stat=None, state=0):
     """Create a fully valid RiftWeaponModel.
 
     rarity uses the client enum: None=0, Common=1, Rare=2, Special=3.
+    Starting levels from RiftWeaponConstants.xml:
+      Common (1) -> Lv 1  (1 altar active)
+      Rare (2)   -> Lv 5  (2 altars active)
+      Special (3)-> Lv 15 (2 altars + 1 wildcard active)
     """
-    if building_indexes is None or len(building_indexes) != 3:
-        # Pick 3 distinct altars (0..8)
+    rarity = max(1, min(3, rarity))
+    if level is None:
+        level = 15 if rarity == 3 else (5 if rarity == 2 else 1)
+
+    if building_indexes is None or len(building_indexes) != 3 or building_indexes[2] != -1:
+        # Pick 2 distinct altars (0..8) and -1 for slot 3
+        # GetNameStr() checks buildingIndexes and skips < 0 (i.e. -1), matching exactly 2 altars!
+        # Slot 3 accesses buildingIndexes[2] without throwing IndexOutOfRangeException.
         altars = list(range(RIFT_BUILDING_COUNT))
         random.shuffle(altars)
-        building_indexes = altars[:3]
+        building_indexes = [altars[0], altars[1], -1]
 
     if sub_stat is None or len(sub_stat) != 3:
         sub_stat = []
-        for b_idx in building_indexes:
+        for si in range(3):
+            b_idx = building_indexes[si] if si < len(building_indexes) else -1
             pool = _get_buff_options_for_altar(b_idx)
             sub_stat.append(random.choice(pool) if pool else 0)
 
@@ -179,7 +190,7 @@ def make_rift_weapon(i, rw_id, rarity=1, level=1, building_indexes=None, sub_sta
         "weaponId": rw_id,
         "buildingIndexes": building_indexes,
         "level": max(1, min(40, level)),
-        "rarity": max(1, min(3, rarity)),
+        "rarity": rarity,
         "broken": False,
         "subStat": sub_stat,
         "state": state,
@@ -200,9 +211,8 @@ def make_rift_crystal(i, rw_id, main_idx=None, rarity=1, building_levels=None, s
         building_levels[main_idx] = main_level
 
     rarity = max(1, min(5, rarity))
-    rarity_name = RIFT_CRYSTAL_RARITIES.get(rarity, "Common")
-    c_info = data["crystal_data"].get(rarity_name, {})
-    ceil_count = c_info.get("ceil", 0)
+    # ceilCount is the number of charges already performed towards pity (starts at 0)
+    ceil_count = 0
 
     now = now_iso(0)
     return {
@@ -279,12 +289,26 @@ def ensure_rift_state(st):
             elif r > 3:
                 w["rarity"] = 3
                 changed = True
+            # Migrate buildingIndexes to [altar0, altar1, -1] (length 3, 3rd is -1)
+            bi = w.get("buildingIndexes", [])
+            if len(bi) != 3 or bi[2] != -1:
+                a0 = bi[0] if len(bi) > 0 and bi[0] >= 0 else 0
+                a1 = bi[1] if len(bi) > 1 and bi[1] >= 0 and bi[1] != a0 else (1 if a0 != 1 else 0)
+                w["buildingIndexes"] = [a0, a1, -1]
+                changed = True
 
     # 2. Rift Crystals
-    if "riftCrystals" not in st:
+    if "riftCrystals" not in st or not st["riftCrystals"]:
         st["riftCrystals"] = copy.deepcopy(DEFAULT_RIFT_CRYSTALS)
         changed = True
     else:
+        for c in st["riftCrystals"]:
+            # If ceilCount was erroneously set to max ceil (e.g. 70), reset to 0
+            rarity_name = RIFT_CRYSTAL_RARITIES.get(c.get("rarity", 1), "Common")
+            max_ceil = data["crystal_data"].get(rarity_name, {}).get("ceil", 0)
+            if max_ceil > 0 and c.get("ceilCount", 0) >= max_ceil:
+                c["ceilCount"] = 0
+                changed = True
         if _repair_rift_crystals(st["riftCrystals"]):
             changed = True
 
@@ -302,7 +326,7 @@ def ensure_rift_state(st):
 
     # 4. Rift Gauge
     if "riftGauge" not in st:
-        st["riftGauge"] = 0
+        st["riftGauge"] = data["gauge_max"]  # Start with full gauge (1000)
         changed = True
 
     # 5. Rift Weapon Archives
@@ -543,7 +567,8 @@ def r_rift_weapon_reroll(body, st):
     st["gold"] = max(0, st.get("gold", 0) - cost_gold)
 
     # Reroll substat option
-    altar_idx = weapon["buildingIndexes"][target_idx] if "buildingIndexes" in weapon else 0
+    bi = weapon.get("buildingIndexes", [0, 1, -1])
+    altar_idx = bi[target_idx] if target_idx < len(bi) else -1
     pool = _get_buff_options_for_altar(altar_idx)
     current_opt = weapon["subStat"][target_idx] if "subStat" in weapon else 0
 
@@ -706,12 +731,17 @@ def r_rift_crystal_charge(body, st):
     st["riftGauge"] = max(0, current_gauge - total_gauge_cost)
 
     total_dust = 0
+    created_weapons = []
+    reward_items = []
     ceil_count = crystal.get("ceilCount", 0)
+    max_ceil = c_info.get("ceil", 0)
 
     for _ in range(charge_count):
         rolled_rarity = 1
-        if ceil_count == 1:
+        # Pity check: if max_ceil > 0 and ceil_count + 1 >= max_ceil -> Guaranteed Special (3)
+        if max_ceil > 0 and (ceil_count + 1) >= max_ceil:
             rolled_rarity = 3
+            ceil_count = 0
         else:
             roll = random.uniform(0, 100)
             c_rate = c_info["common"]
@@ -723,48 +753,53 @@ def r_rift_crystal_charge(body, st):
             else:
                 rolled_rarity = 3
 
-        if rolled_rarity == 2:
-            ceil_count = c_info.get("ceil", 0)
-        elif ceil_count > 0:
-            ceil_count = max(0, ceil_count - 1)
+            if rolled_rarity == 3:
+                ceil_count = 0  # Early pity reset
+            elif max_ceil > 0:
+                ceil_count += 1
 
         main_bld = crystal.get("mainBuildingIdx", 0)
-        other_blds = [b for b in range(RIFT_BUILDING_COUNT) if b != main_bld]
-        random.shuffle(other_blds)
-        selected_altars = [main_bld, other_blds[0], other_blds[1]]
+        b_levels = crystal.get("buildingLevels", [])
+        # Pick secondary altar from other altars configured on this crystal (level > 0)
+        candidate_altars = [b for b in range(len(b_levels)) if b != main_bld and b_levels[b] > 0]
+        if not candidate_altars:
+            candidate_altars = [b for b in range(RIFT_BUILDING_COUNT) if b != main_bld]
+        sub_bld = random.choice(candidate_altars)
+        selected_altars = [main_bld, sub_bld, -1]  # Altar0, Altar1, -1 (for slot 3 wildcard)
 
         new_w_id = _next_weapon_id(st)
         new_weapon = make_rift_weapon(
             i=new_w_id,
             rw_id=crystal.get("weaponId", 10000),
             rarity=rolled_rarity,
-            level=1,
+            level=None,  # Auto set starting level by rarity (Rare=5, Special=15)
             building_indexes=selected_altars,
         )
         st.setdefault("riftWeapons", []).append(new_weapon)
+        created_weapons.append(new_weapon)
 
-        total_dust += random.randint(c_info["dust_min"], c_info["dust_max"])
+        dust_for_this = random.randint(c_info["dust_min"], c_info["dust_max"])
+        total_dust += dust_for_this
+        reward_items.append({"type": "Item", "id": DUST_ITEM_ID, "count": dust_for_this})
 
     crystal["ceilCount"] = ceil_count
 
     if srv and total_dust > 0:
         srv._grant_reward(st, "Item", DUST_ITEM_ID, total_dust)
 
-    crystals.remove(crystal)
-    deleted_crystals = [crystal_id]
+    # Note: A Rift Crystal is NOT deleted on normal charge (it has 70 charges)
+    deleted_crystals = []
 
     save_state(st)
 
     reward_data = None
-    if srv:
-        reward_data = srv._reward_list_data([
-            {"type": "Item", "id": DUST_ITEM_ID, "count": total_dust},
-        ])
+    if srv and reward_items:
+        reward_data = srv._reward_list_data(reward_items)
 
-    admin_log(f"[RIFT DEBUG] crystal-charge done: {charge_count}x, gauge={st.get('riftGauge', 0)}, weapons={len(st.get('riftWeapons', []))}")
+    admin_log(f"[RIFT DEBUG] crystal-charge done: {charge_count}x, gauge={st.get('riftGauge', 0)}, ceilCount={ceil_count}/{max_ceil}, weapons={len(st.get('riftWeapons', []))}")
 
     return {
-        "riftWeapons": st.get("riftWeapons", []),
+        "riftWeapons": created_weapons,  # Newly crafted weapons for popup
         "riftCrystals": st.get("riftCrystals", []),
         "deletedCrystals": deleted_crystals,
         "riftGauge": st.get("riftGauge", 0),

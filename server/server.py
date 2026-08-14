@@ -646,6 +646,8 @@ def r_player(body, st):
             {"key": "InventoryCount_RiftWeapon", "value": "999"},
             {"key": "InventoryCount_RiftCrystal", "value": "999"},
             {"key": "InventoryCount_AccessoryPreset", "value": "999"},
+            {"key": "RiftGauge", "value": str(st.get("riftGauge", 1000))},
+            {"key": "RiftGaugeBuyCount", "value": str(st.get("riftGaugeBuyCount", 0))},
         ],
         "attendedCustomEvents": st.get("attendedCustomEvents", []),
         "customEventDatas": st.get("customEventDatas", []),
@@ -1770,8 +1772,18 @@ def r_ack(body, st):
 
 def _key_values(st):
     """The player's own key-values, as a list of {key, value} the client reads."""
-    return st.setdefault("keyValues", [{"key": "profileIconId",
+    kvs = st.setdefault("keyValues", [{"key": "profileIconId",
                                         "value": _PC["defaults"]["profileIconId"]}])
+    # Ensure RiftGauge is in keyValues
+    has_gauge = False
+    for kv in kvs:
+        if kv.get("key") == "RiftGauge":
+            kv["value"] = str(st.get("riftGauge", 1000))
+            has_gauge = True
+            break
+    if not has_gauge:
+        kvs.append({"key": "RiftGauge", "value": str(st.get("riftGauge", 1000))})
+    return kvs
 
 def _set_key_value(st, key, value):
     for kv in _key_values(st):

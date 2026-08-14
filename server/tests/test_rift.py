@@ -133,7 +133,7 @@ def test_substat_reroll():
     st = _fresh_state()
     weapon = st["riftWeapons"][0]
     weapon["subStat"] = [0, 10, 20]
-    weapon["buildingIndexes"] = [0, 1, 2]
+    weapon["buildingIndexes"] = [0, 1, -1]
     server.save_state(st)
 
     init_gold = st["gold"]
@@ -190,14 +190,16 @@ def test_crystal_charge_and_pity():
 
     init_weapons_count = len(st["riftWeapons"])
     res = rift.r_rift_crystal_charge({"crystalId": 888}, st)
-    assert 888 in res["deletedCrystals"]
-    # Response now returns the full weapon list (client replaces its local list)
-    assert len(res["riftWeapons"]) == init_weapons_count + 1
-    # Find the newly crafted weapon (highest id)
-    crafted = max(res["riftWeapons"], key=lambda w: w["id"])
+    # Crystal is NOT deleted on normal charge
+    assert len(res["deletedCrystals"]) == 0
+    assert any(c["id"] == 888 for c in st["riftCrystals"])
+    # Response returns ONLY newly crafted weapons (for popup animation)
+    assert len(res["riftWeapons"]) == 1
+    crafted = res["riftWeapons"][0]
     assert crafted["weaponId"] == 12000
-    assert crafted["rarity"] == 3  # Guaranteed Special by pity! (1=Common, 2=Rare, 3=Special)
     assert crafted["buildingIndexes"][0] == 3  # Main altar matches crystal mainBuildingIdx
+    assert len(crafted["buildingIndexes"]) == 3
+    assert crafted["buildingIndexes"][2] == -1  # 3rd is -1 for GetNameStr() and slot 3
     assert len(st["riftWeapons"]) == init_weapons_count + 1
 
     print("ok test_crystal_charge_and_pity")
