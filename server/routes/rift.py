@@ -373,7 +373,17 @@ def ensure_rift_state(st):
         st["riftGauge"] = data["gauge_max"]  # Start with full gauge (1000)
         changed = True
 
-    # 5. Rift Weapon Archives
+    # 5. RogueLike DLCs (Unlocks Altars 6=Death, 7=Immortality, 8=Domination)
+    all_dlcs = [
+        {"dlc": 2400, "tier": 2},
+        {"dlc": 2410, "tier": 2},
+        {"dlc": 2420, "tier": 2},
+    ]
+    if not st.get("rogueLikeBoughtDlcs") or len(st.get("rogueLikeBoughtDlcs", [])) < 3:
+        st["rogueLikeBoughtDlcs"] = all_dlcs
+        changed = True
+
+    # 6. Rift Weapon Archives
     if "riftWeaponArchives" not in st:
         st["riftWeaponArchives"] = []
         changed = True

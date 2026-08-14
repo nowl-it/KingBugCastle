@@ -38,6 +38,11 @@ from fastapi.responses import JSONResponse, Response, HTMLResponse
 from Crypto.Cipher import AES
 
 AES_KEY = b"b53019bb76da6b34"
+ALL_ROGUE_LIKE_DLCS = [
+    {"dlc": 2400, "tier": 2},  # Altar of Death (6)
+    {"dlc": 2410, "tier": 2},  # Altar of Immortality (7)
+    {"dlc": 2420, "tier": 2},  # Altar of Domination (8)
+]
 
 # Shared primitives now live in common.py so domain modules can use them without
 # importing server.py back. Re-exported under their old names: every handler below,
@@ -653,7 +658,7 @@ def r_player(body, st):
         "customEventDatas": st.get("customEventDatas", []),
         "eventMissionData": st.get("eventMissionData", []),
         "eventData": st.get("eventData", []),
-        "rogueLikeBoughtDlcs": st.get("rogueLikeBoughtDlcs", []),
+        "rogueLikeBoughtDlcs": st.get("rogueLikeBoughtDlcs") or ALL_ROGUE_LIKE_DLCS,
         "accountCreatedAt": st.get("accountCreatedAt", now_iso(0)),
     }
 
