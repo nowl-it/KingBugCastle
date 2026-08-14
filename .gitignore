@@ -24,8 +24,6 @@ xml_history/
 # Admin panel build artifacts (reinstall with pnpm install)
 server/admin/node_modules/
 server/admin/.next/
-# WebUI-next static export (rebuild with pnpm build)
-server/webui-next/out/
 
 # APK and archive files
 apk/
