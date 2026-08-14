@@ -6,7 +6,7 @@
     "bestClearedStage": 10, "bestClearedTheme": 10,
     "bestClearedHardStage": 10, "bestClearedHardTheme": 65,
     "currentDeckPreset": 0, "playedCount": 0, "winCount": 0,
-    "hasFreeRename": true
+    "hasFreeRename": true, "buildingPoints": 25
   },
   "cardTemplate": {
     "level": 20, "exp": 0, "potentialTier": 0,

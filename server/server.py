@@ -518,6 +518,23 @@ def _get_building_data(st):
         presets = list(presets) + [{"buildingLevels": [0]*6} for _ in range(10 - len(presets))]
     return presets
 
+def r_building_get(body, st):
+    bp = st.get("buildingPoints", 25)
+    if not isinstance(bp, int) or bp < 25:
+        bp = 25
+        st["buildingPoints"] = 25
+        save_state(st)
+    return {"buildingPoint": bp, "buildingData": _get_building_data(st)}
+
+def r_building_buy_point(body, st):
+    bp = st.get("buildingPoints", 25)
+    if not isinstance(bp, int) or bp < 25:
+        bp = 25
+    st["buildingPoints"] = bp
+    presets = _get_building_data(st)
+    save_state(st)
+    return {"buildingPoint": bp, "buildingData": presets}
+
 def r_building_save(body, st):
     preset = body_int(body.get("preset"), 0, lo=0, hi=BUILDING_PRESETS - 1)
     levels = body.get("levels", [0] * 6)
@@ -526,8 +543,13 @@ def r_building_save(body, st):
         presets.append({"buildingLevels": [0]*6})
     presets[preset]["buildingLevels"] = levels
     st["buildingPresets"] = presets
+    st["buildingData"] = presets
+    bp = st.get("buildingPoints", 25)
+    if not isinstance(bp, int) or bp < 25:
+        bp = 25
+        st["buildingPoints"] = 25
     save_state(st)
-    return {"buildingPoint": st.get("buildingPoints", 25), "buildingData": presets}
+    return {"buildingPoint": bp, "buildingData": presets}
 
 def r_building_reset_point(body, st):
     preset = body_int(body.get("preset"), 0, lo=0, hi=BUILDING_PRESETS - 1)
@@ -536,8 +558,13 @@ def r_building_reset_point(body, st):
         presets.append({"buildingLevels": [0]*6})
     presets[preset]["buildingLevels"] = [0] * 6
     st["buildingPresets"] = presets
+    st["buildingData"] = presets
+    bp = st.get("buildingPoints", 25)
+    if not isinstance(bp, int) or bp < 25:
+        bp = 25
+        st["buildingPoints"] = 25
     save_state(st)
-    return {"buildingPoint": st.get("buildingPoints", 25), "buildingData": presets}
+    return {"buildingPoint": bp, "buildingData": presets}
 
 
 def r_player_rename(body, st):
@@ -674,7 +701,12 @@ def _repair_player_state(st):
     if rift.ensure_rift_state(st):
         changed = True
 
-    # 6. Building Presets
+    # 6. Building / Altar Points & Presets
+    bp = st.get("buildingPoints")
+    if bp is None or not isinstance(bp, int) or bp < 25:
+        st["buildingPoints"] = 25
+        changed = True
+
     b_presets = st.setdefault("buildingPresets", [])
     if not isinstance(b_presets, list) or len(b_presets) < 5:
         st["buildingPresets"] = [{"buildingLevels": [0] * 6} for _ in range(10)]
@@ -2257,8 +2289,8 @@ DYNAMIC_OVERRIDES = {
         "inventoryCount": 999
     },
     "/player/rename": r_player_rename,
-    "/player/building": lambda b, st: {"buildingPoint": st.get("buildingPoints", 25), "buildingData": _get_building_data(st)},
-    "/player/building/point": lambda b, st: {"buildingPoint": st.get("buildingPoints", 25), "buildingData": _get_building_data(st)},
+    "/player/building": r_building_get,
+    "/player/building/point": r_building_buy_point,
     "/player/building/save": r_building_save,
     "/player/building/resetPoint": r_building_reset_point,
     "/player/heart/recover": lambda b, st: {"heart": st.get("heart", 999), "lastHeartTime": now_iso(0)},
