@@ -1974,7 +1974,9 @@ def r_treasure_dismantle(body, st):
 
         is_match = (
             t_id in target_ids or
-            str(t_id) in target_ids
+            str(t_id) in target_ids or
+            tr_id in target_ids or
+            str(tr_id) in target_ids
         )
 
         if is_match:
