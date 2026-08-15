@@ -35,6 +35,11 @@ def _build_gacha_reward_data(srv, st, rewards):
             "changeEquipped": False,
             "equippedArtifacts": srv._resolve_equipped_artifacts(st)
         }
+        
+    for r in resp["rewardList"]:
+        if r.get("type") == "Artifact":
+            r["type"] = "ArtifactGacha"
+            
     return resp
 
 srv = None      # the live server module, set by register()
@@ -252,6 +257,11 @@ def _shop_buy(body, st):
             actual_gacha_id = 7000
         gacha_stack_single = {"gachaId": actual_gacha_id, "stack": gss.get(str(actual_gacha_id), 0)} if actual_gacha_id > 0 else None
         ceil_dict = _build_gacha_ceil(gacha_el, st)
+
+        for pull in gachas_result:
+            for rg in pull.get("gacha", []):
+                if rg.get("type") == "Artifact":
+                    rg["type"] = "ArtifactGacha"
 
         return {
             "gachaRewardResponseData": _build_gacha_reward_data(srv, st, rewards),
@@ -497,6 +507,11 @@ def _shop_buy(body, st):
         actual_gacha_id = 7000
     gacha_stack_single = {"gachaId": actual_gacha_id, "stack": gss.get(str(actual_gacha_id), 0)} if actual_gacha_id > 0 else None
     ceil_dict = _build_gacha_ceil(gacha_el, st)
+
+    for pull in gachas_result:
+        for rg in pull.get("gacha", []):
+            if rg.get("type") == "Artifact":
+                rg["type"] = "ArtifactGacha"
 
     return {
         "gachaRewardResponseData": _build_gacha_reward_data(srv, st, rewards),
