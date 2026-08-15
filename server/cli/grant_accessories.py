@@ -32,7 +32,7 @@ from pathlib import Path
 
 import playerdb
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 XML = ROOT / "xml_live" / "AccessoryConstants.xml"
 
 SCORES = (26.0, 4.0)         # per sub-stat: 26 = SS (max under the 26.5 cutoff), 4 = D
