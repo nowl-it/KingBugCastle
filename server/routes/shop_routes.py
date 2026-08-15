@@ -259,11 +259,10 @@ def _shop_buy(body, st):
         ceil_dict = _build_gacha_ceil(gacha_el, st)
 
         for pull in gachas_result:
-            for rg in pull.get("gacha", []):
-                if rg.get("type") == "Artifact":
-                    rg["type"] = "ArtifactGacha"
+            if "gacha" in pull:
+                pull["gacha"] = [rg for rg in pull["gacha"] if rg.get("type") != "Artifact"]
 
-        return {
+        res_dict = {
             "gachaRewardResponseData": _build_gacha_reward_data(srv, st, rewards),
             "treasureResult": {
                 "treasures": srv.get_st_treasures(st),
@@ -275,7 +274,6 @@ def _shop_buy(body, st):
             },
             "inventoryItems": srv._inventory_models(st),
             "soldOut": False,
-            "gachas": gachas_result,
             "gachaKeys": gacha_keys,
             "gachaStack": gacha_stack_single,
             "gachaStacks": gacha_stacks,
@@ -287,6 +285,9 @@ def _shop_buy(body, st):
             "newUnitIds": new_unit_ids,
             "cardExpResults": card_exp_results,
         }
+        if gacha_el is None or gacha_el.findtext("Type") != "ArtifactGacha":
+            res_dict["gachas"] = gachas_result
+        return res_dict
 
     buys = _shop_buys(st)
     bought = buys.get(str(item_id), 0)
@@ -509,11 +510,10 @@ def _shop_buy(body, st):
     ceil_dict = _build_gacha_ceil(gacha_el, st)
 
     for pull in gachas_result:
-        for rg in pull.get("gacha", []):
-            if rg.get("type") == "Artifact":
-                rg["type"] = "ArtifactGacha"
+        if "gacha" in pull:
+            pull["gacha"] = [rg for rg in pull["gacha"] if rg.get("type") != "Artifact"]
 
-    return {
+    res_dict = {
         "gachaRewardResponseData": _build_gacha_reward_data(srv, st, rewards),
         "treasureResult": {
             "treasures": srv.get_st_treasures(st),
@@ -525,7 +525,6 @@ def _shop_buy(body, st):
         },
         "inventoryItems": srv._inventory_models(st),
         "soldOut": False,
-        "gachas": gachas_result,
         "gachaKeys": gacha_keys,
         "gachaStack": gacha_stack_single,
         "gachaStacks": gacha_stacks,
@@ -537,6 +536,9 @@ def _shop_buy(body, st):
         "newUnitIds": new_unit_ids,
         "cardExpResults": card_exp_results,
     }
+    if el is None or el.findtext("Type") != "ArtifactGacha":
+        res_dict["gachas"] = gachas_result
+    return res_dict
 
 def r_shop_refresh(body, st):
     """Refreshing the daily shop clears its per-item buy counts, which is what makes
