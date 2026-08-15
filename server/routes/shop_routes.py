@@ -35,10 +35,6 @@ def _build_gacha_reward_data(srv, st, rewards):
             "changeEquipped": False,
             "equippedArtifacts": srv._resolve_equipped_artifacts(st)
         }
-        
-    for r in resp["rewardList"]:
-        if r.get("type") == "Artifact":
-            r["type"] = "ArtifactGacha"
             
     return resp
 
@@ -258,10 +254,10 @@ def _shop_buy(body, st):
         gacha_stack_single = {"gachaId": actual_gacha_id, "stack": gss.get(str(actual_gacha_id), 0)} if actual_gacha_id > 0 else None
         ceil_dict = _build_gacha_ceil(gacha_el, st)
 
+        # Remove Artifacts from gachas_result so the client doesn't crash in GachaResultItem.Set
         for pull in gachas_result:
-            for rg in pull.get("gacha", []):
-                if rg.get("type") == "Artifact":
-                    rg["type"] = "ArtifactGacha"
+            if "gacha" in pull:
+                pull["gacha"] = [rg for rg in pull["gacha"] if rg.get("type") != "Artifact"]
 
         return {
             "gachaRewardResponseData": _build_gacha_reward_data(srv, st, rewards),
@@ -508,10 +504,10 @@ def _shop_buy(body, st):
     gacha_stack_single = {"gachaId": actual_gacha_id, "stack": gss.get(str(actual_gacha_id), 0)} if actual_gacha_id > 0 else None
     ceil_dict = _build_gacha_ceil(gacha_el, st)
 
+    # Remove Artifacts from gachas_result so the client doesn't crash in GachaResultItem.Set
     for pull in gachas_result:
-        for rg in pull.get("gacha", []):
-            if rg.get("type") == "Artifact":
-                rg["type"] = "ArtifactGacha"
+        if "gacha" in pull:
+            pull["gacha"] = [rg for rg in pull["gacha"] if rg.get("type") != "Artifact"]
 
     return {
         "gachaRewardResponseData": _build_gacha_reward_data(srv, st, rewards),
