@@ -40,7 +40,9 @@ done
 PY_BIN="${UVICORN%/uvicorn}/python"
 [ -x "$PY_BIN" ] || PY_BIN="python3"
 
-# Subcommands: reload | stop | status
+IS_BG=0
+
+# Subcommands: reload | start | stop | status
 case "${1:-}" in
   reload)
     if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
@@ -53,7 +55,11 @@ case "${1:-}" in
         exit 0
       fi
     fi
-    echo "[!] Master process not running or PID file missing. Starting server..."
+    echo "[!] Master process not running or PID file missing. Starting server in background..."
+    IS_BG=1
+    ;;
+  start|daemon)
+    IS_BG=1
     ;;
   stop)
     if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
@@ -103,19 +109,19 @@ echo ""
 # Prefer Gunicorn with Uvicorn workers for zero-downtime SIGHUP reload & concurrency
 if command -v "$GUNICORN" >/dev/null 2>&1 || [ -x "$GUNICORN" ]; then
   echo "[+] Starting Gunicorn + Uvicorn Workers on 0.0.0.0:${HTTP_PORT} (Zero-Downtime Ready)..."
-  "$GUNICORN" server:app -c gunicorn_conf.py > /tmp/kgc_pub_http.log 2>&1 &
+  nohup "$GUNICORN" server:app -c gunicorn_conf.py > /tmp/kgc_pub_http.log 2>&1 &
   P1=$!
   echo "$P1" > "$PID_FILE"
 else
   echo "[!] gunicorn not found; falling back to standalone uvicorn..."
-  "$UVICORN" server:app --host 0.0.0.0 --port "${HTTP_PORT}" > /tmp/kgc_pub_http.log 2>&1 &
+  nohup "$UVICORN" server:app --host 0.0.0.0 --port "${HTTP_PORT}" > /tmp/kgc_pub_http.log 2>&1 &
   P1=$!
   echo "$P1" > "$PID_FILE"
 fi
 
 if [ -f key.pem ] && [ -f cert.pem ]; then
   echo "[+] HTTPS TLS server 0.0.0.0:${TLS_PORT}"
-  "$UVICORN" server:app --host 0.0.0.0 --port "${TLS_PORT}" \
+  nohup "$UVICORN" server:app --host 0.0.0.0 --port "${TLS_PORT}" \
       --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
   P2=$!
 else
@@ -130,4 +136,11 @@ echo ""
 echo "  Dashboard (admin + tracker):  $PY_BIN dashboard.py   -> http://localhost:8081"
 echo "  Stop:  ./serve_public.sh stop"
 echo ""
+
+if [ "$IS_BG" = "1" ]; then
+  sleep 2
+  echo "[✓] Server process running in background (PID: $P1)."
+  exit 0
+fi
+
 wait

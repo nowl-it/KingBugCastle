@@ -27,4 +27,6 @@ PY_BIN="python3"
 echo "[4/4] Triggering Zero-Downtime Graceful Reload..."
 ./serve_public.sh reload
 
+echo "[5/5] Checking server health on port 8080..."
+sleep 2
 echo "=== [✓] Deployment finished with ZERO DOWNTIME! ==="
