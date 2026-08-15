@@ -2871,10 +2871,16 @@ def _grant_reward(st, rt, rid, amt):
             new_id = max((t.get("id", 0) for t in tr), default=0) + 1
             tr.append(make_treasure(new_id, rid))
     elif rt == "Artifact" and rid:
-        # Grant an artifact instance directly to the player's inventory
+        # Grant an artifact instance directly to the player's inventory with full stars (count=99999)
         arts = st.setdefault("artifacts", [])
-        new_id = max((t.get("id", 0) for t in arts), default=0) + 1
-        arts.append(make_artifact(new_id, rid))
+        existing = next((a for a in arts if a.get("artifactId") == rid), None)
+        if existing:
+            existing["count"] = 99999
+        else:
+            new_id = max((t.get("id", 0) for t in arts), default=0) + 1
+            art = make_artifact(new_id, rid)
+            art["count"] = 99999
+            arts.append(art)
     elif rt == "SkinToken" and rid:
         # Skin tokens are inventory item 2001
         inv = st.setdefault("inventory", {"itemIds": [], "counts": []})
