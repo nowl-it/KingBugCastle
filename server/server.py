@@ -1757,19 +1757,25 @@ ARTIFACT_BY_ID = {a["id"]: a for a in DEFAULT_ARTIFACTS}
 # ArtifactRequestModel @0x8 targetId, @0x1C index, @0x20 deckPreset).
 # ArtifactResultResponseModel.equippedArtifacts = List<EquippedArtifactData>
 # {deckPreset, index, artifact} (dump.cs @0x2C). Persisted server-side as
-# {deckPreset, index, artifactId} in state and resolved to a full ArtifactModel
-# at response time - storing the id (not the full model) means an equipped slot
-# always reflects the artifact's current data if it's ever regenerated.
+def get_st_artifacts(st):
+    if "artifacts" not in st:
+        st["artifacts"] = copy.deepcopy(DEFAULT_ARTIFACTS)
+    return st["artifacts"]
+
 def _resolve_equipped_artifacts(st):
     out = []
+    arts = get_st_artifacts(st)
+    art_map = {a.get("id"): a for a in arts}
+    art_by_aid = {a.get("artifactId"): a for a in arts}
     for e in st.get("equippedArtifacts", []):
-        art = ARTIFACT_BY_ID.get(e.get("artifactId"))
+        art_id = e.get("artifactId")
+        art = art_map.get(art_id) or art_by_aid.get(art_id)
         if art:
             out.append({"deckPreset": e.get("deckPreset", 0), "index": e.get("index", 0), "artifact": art})
     return out
 
 def r_artifact_inventory(body, st):
-    return {"artifacts": DEFAULT_ARTIFACTS, "dustCount": 99999,
+    return {"artifacts": get_st_artifacts(st), "dustCount": st.get("dustCount", 99999),
             "equippedArtifacts": _resolve_equipped_artifacts(st), "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0)}
 
@@ -1779,22 +1785,93 @@ def r_artifact_equip(body, st):
     deck_preset = body_int(body.get("deckPreset"), 0)
     equipped = [e for e in st.get("equippedArtifacts", [])
                 if not (e.get("deckPreset", 0) == deck_preset and e.get("index", 0) == index)]
-    if target_id and target_id in ARTIFACT_BY_ID:
-        equipped.append({"deckPreset": deck_preset, "index": index, "artifactId": target_id})
+    arts = get_st_artifacts(st)
+    art = next((a for a in arts if a.get("id") == target_id or a.get("artifactId") == target_id), None)
+    if art:
+        equipped.append({"deckPreset": deck_preset, "index": index, "artifactId": art.get("id")})
     st["equippedArtifacts"] = equipped
     save_state(st)
-    return {"artifacts": DEFAULT_ARTIFACTS, "dustCount": 99999,
+    return {"artifacts": arts, "dustCount": st.get("dustCount", 99999),
             "equippedArtifacts": _resolve_equipped_artifacts(st), "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0),
             "changeEquipped": True, "polishItemAdded": False,
             "results": []}
 
+def r_artifact_dismantle(body, st):
+    admin_log(f"[artifact-dismantle] body={body}")
+    arts = get_st_artifacts(st)
+    targets = body.get("targets") or []
+    target_ids = set()
+    target_counts = {}
+    
+    for t in targets:
+        if isinstance(t, dict):
+            t_id = t.get("id") or t.get("artifactId")
+            if t_id is not None:
+                target_ids.add(t_id)
+                target_counts[t_id] = t.get("count", 1)
+        elif isinstance(t, (int, str)) and str(t).isdigit():
+            target_ids.add(int(t))
+            target_counts[int(t)] = 1
+            
+    if body.get("targetId"):
+        tid = body_int(body.get("targetId"))
+        target_ids.add(tid)
+        target_counts[tid] = body.get("count", 1)
+        
+    dust_gain = 0
+    dust_table = {"Normal": 70, "King": 230, "God": 650, "KingGod": 2000}
+    remaining_arts = []
+    dismantled_instance_ids = set()
+    
+    for a in arts:
+        aid = a.get("id")
+        art_id = a.get("artifactId")
+        match_id = aid if aid in target_ids else (art_id if art_id in target_ids else None)
+        if match_id is not None:
+            cnt_to_remove = target_counts.get(match_id, a.get("count", 1))
+            current_cnt = a.get("count", 1)
+            lvl = ARTIFACT_LEVELS.get(art_id, "Normal")
+            dust_per = dust_table.get(lvl, 70)
+            
+            if cnt_to_remove >= current_cnt:
+                dust_gain += dust_per * current_cnt
+                dismantled_instance_ids.add(aid)
+                dismantled_instance_ids.add(art_id)
+            else:
+                a["count"] = current_cnt - cnt_to_remove
+                dust_gain += dust_per * cnt_to_remove
+                remaining_arts.append(a)
+        else:
+            remaining_arts.append(a)
+            
+    st["artifacts"] = remaining_arts
+    st["dustCount"] = st.get("dustCount", 0) + dust_gain
+    
+    if dismantled_instance_ids:
+        st["equippedArtifacts"] = [e for e in st.get("equippedArtifacts", []) if e.get("artifactId") not in dismantled_instance_ids]
+        
+    save_state(st)
+    bump(st, "artifactDismantle", len(target_ids) or 1)
+    
+    return {
+        "artifacts": remaining_arts,
+        "dustCount": st.get("dustCount", 99999),
+        "equippedArtifacts": _resolve_equipped_artifacts(st),
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "changeEquipped": True,
+        "polishItemAdded": False,
+        "results": []
+    }
+
 def r_artifact_result(body, st):
-    return {"artifacts": DEFAULT_ARTIFACTS, "dustCount": 99999,
+    arts = get_st_artifacts(st)
+    return {"artifacts": arts, "dustCount": st.get("dustCount", 99999),
             "equippedArtifacts": _resolve_equipped_artifacts(st), "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0),
             "changeEquipped": False, "polishItemAdded": False,
-            "results": DEFAULT_ARTIFACTS}
+            "results": []}
 
 def get_st_treasures(st):
     if "treasures" not in st:
@@ -2385,7 +2462,7 @@ DYNAMIC_OVERRIDES = {
     "/artifact/inventory": r_artifact_inventory,
     "/artifact/equip": r_artifact_equip,
     "/artifact/crafting": r_artifact_result,
-    "/artifact/dismantle": r_artifact_result,
+    "/artifact/dismantle": r_artifact_dismantle,
     "/artifact/merge": r_artifact_result,
     "/artifact/polish": r_artifact_result,
     "/artifact/gacha": r_artifact_result,
