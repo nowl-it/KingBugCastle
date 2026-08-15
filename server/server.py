@@ -1232,9 +1232,16 @@ def r_use_reward_box(body, st):
     rewards = _open_reward_box(st, item_id, body.get("selectIdx"),
                                body_int(body.get("count"), 1, lo=1))
     save_state(st)
-    return {"rewardList": _reward_list_data(rewards),
+    
+    resp = {"rewardList": _reward_list_data(rewards),
             "addedRewardList": _reward_list_data([]),
             "boxRewardInventory": {"id": item_id, "count": _item_count(st, item_id)}}
+            
+    if any(r.get("type") == "Accessory" for r in rewards):
+        from routes.accessory import _make_result_response
+        resp["rewardList"]["accessoryResult"] = _make_result_response(st)
+        
+    return resp
 
 def r_use_skin_box(body, st):
     """Skin boxes name their own prize: the client sends the skin the player picked."""

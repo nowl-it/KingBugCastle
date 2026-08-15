@@ -313,16 +313,24 @@ def r_accessory_equip(body: Dict[str, Any], st: Dict[str, Any]) -> Dict[str, Any
         target_accs = [a for a in accs if a.get("id") in target_ids]
         target_types = {a.get("type") for a in target_accs}
 
-        # 1. Un-equip any accessory of the same types currently on this hero
-        for a in accs:
-            if a.get("unitId") == unit_id and a.get("type") in target_types and a.get("id") not in target_ids:
-                a["unitId"] = 0
-                a["updatedAt"] = now_iso(0)
+        is_padded = len(target_ids) >= 5 or 0 in target_ids
 
-        # 2. Equip target accessories onto unit_id (and set slot = type - 1)
+        # 1. Un-equip any accessory currently on this hero that should be removed
+        for a in accs:
+            if a.get("unitId") == unit_id and a.get("id") not in target_ids:
+                # If padded (full state), unequip everything not in target_ids
+                # If not padded (partial state), only unequip items of the same type being equipped
+                if is_padded or a.get("type") in target_types:
+                    a["unitId"] = 0
+                    a["updatedAt"] = now_iso(0)
+
+        # 2. Equip target accessories onto unit_id
         for a in target_accs:
             a["unitId"] = unit_id
-            a["slot"] = max(0, int(a.get("type", 1)) - 1)
+            if is_padded and a.get("id") in target_ids:
+                a["slot"] = target_ids.index(a.get("id"))
+            else:
+                a["slot"] = int(a.get("type", 1))
             a["updatedAt"] = now_iso(0)
 
         save_state(st)
@@ -546,6 +554,10 @@ def r_accessory_change_sub_stat(body: Dict[str, Any], st: Dict[str, Any]) -> Dic
     Rerolls a target sub-stat using conversion stone (item 4200),
     preserving the current sub-stat score and calculating new value.
     """
+    with open("/tmp/change_stat_body.json", "w") as f:
+        import json
+        json.dump(body, f)
+
     ensure_accessory_state(st)
     consts = _load_constants()
     accs = st.get("accessories", [])
@@ -572,7 +584,20 @@ def r_accessory_change_sub_stat(body: Dict[str, Any], st: Dict[str, Any]) -> Dic
     if not available_new:
         available_new = ["BaseSpecialDamageMul", "BaseDefPen", "BaseDefDen"]
 
-    new_stat = random.choice(available_new)
+    new_stat = None
+    if item_id != REROLL_STONE_ITEM_ID:
+        xml_path = XML_DIR / "InventoryItems.xml"
+        if xml_path.exists():
+            tree = ET.parse(xml_path)
+            for item in tree.findall("InventoryItem"):
+                if item.get("ID") == str(item_id):
+                    substat_elem = item.find("SetAccessorySubStat")
+                    if substat_elem is not None:
+                        new_stat = substat_elem.text
+                    break
+
+    if not new_stat:
+        new_stat = random.choice(available_new)
 
     # Find total score allocated to target_stat
     data = acc.setdefault("data", {})

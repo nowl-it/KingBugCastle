@@ -244,6 +244,9 @@ def register(app, srv):
 
     @app.post("/admin/api/treasures/give-all")
     async def admin_give_all_treasures():
+        st = active_state()
+        st["treasures"] = copy.deepcopy(srv.DEFAULT_TREASURES)
+        srv.save_state(st)
         return {"ok": True, "count": len(srv.DEFAULT_TREASURES)}
 
     @app.post("/admin/api/rift-crystals/grant-all-legendary")
