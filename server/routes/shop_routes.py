@@ -33,7 +33,11 @@ def _gacha_keys(st):
     itself (Gacha 2007's KeyItem is shop item 305; 300/301/302 key themselves),
     so the client's GachaKey.id is the shop item id, and every banner sharing the
     scroll (all pickup gachas share 305) counts the same entry."""
-    return st.setdefault("gachaKeys", {})
+    keys = st.setdefault("gachaKeys", {})
+    from server import ALL_ITEM_IDS, INV_COUNT
+    for k in ALL_ITEM_IDS:
+        keys.setdefault(str(k), INV_COUNT)
+    return keys
 
 
 def _gacha_keys_models(st):

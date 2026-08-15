@@ -611,13 +611,13 @@ def r_accessory_change_sub_stat(body: Dict[str, Any], st: Dict[str, Any]) -> Dic
     if old_score <= 0.0:
         old_score = 4.0
 
-    # Replace entries of target_stat with new_stat
-    new_sub_list = [e for e in sub_list if e.get("key") != target_stat]
-    new_sub_list.append({
-        "key": new_stat,
-        "value": round(old_score * VALUE_PER_SCORE.get(new_stat, 1.0), 3),
-    })
-    data["subStats"] = new_sub_list
+    # Replace entry of target_stat with new_stat in place
+    for entry in sub_list:
+        if entry.get("key") == target_stat:
+            entry["key"] = new_stat
+            entry["value"] = round(old_score * VALUE_PER_SCORE.get(new_stat, 1.0), 3)
+            break
+
 
     recompute_accessory_substats(acc)
     acc["updatedAt"] = now_iso(0)
