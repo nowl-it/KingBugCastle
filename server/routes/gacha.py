@@ -366,7 +366,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                         k = f"{ft}_{lv}" if ft and lv else None
                         a_pool = (a_cache.get(k) if k else None) or a_cache.get("all") or [501]
                         aid = random.choice(a_pool)
-                    pull_res = {"type": "Artifact", "unitId": aid, "count": 99999, "isNew": True}
+                    pull_res = {"type": "Artifact", "unitId": aid, "count": 1, "isNew": True}
                 elif type_str in ("SkinToken",):
                     pull_res = {"type": "SkinToken", "unitId": 2001, "count": count, "isNew": True}
                 elif type_str == "Skin_Grade":

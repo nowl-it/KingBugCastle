@@ -1572,7 +1572,7 @@ def make_artifact(i, art_id):
 
     for idx in range(opt_count):
         ty = types_pool[idx % len(types_pool)]
-        opt_data.append({"targets": safe_positions, "type": ty, "value": 24, "level": max_roll_lvs})
+        opt_data.append({"targets": safe_positions, "type": ty, "value": 4 * max_roll_lvs, "level": max_roll_lvs})
         types_list.append(ty)
         targets_list.append({"idx": safe_positions})
         lvs_list.append(max_roll_lvs)
@@ -2871,15 +2871,15 @@ def _grant_reward(st, rt, rid, amt):
             new_id = max((t.get("id", 0) for t in tr), default=0) + 1
             tr.append(make_treasure(new_id, rid))
     elif rt == "Artifact" and rid:
-        # Grant an artifact instance directly to the player's inventory with full stars (count=99999)
+        # Grant an artifact instance directly to the player's inventory starting at 0 stars (count=1)
         arts = st.setdefault("artifacts", [])
         existing = next((a for a in arts if a.get("artifactId") == rid), None)
         if existing:
-            existing["count"] = 99999
+            existing["count"] = existing.get("count", 1) + (amt or 1)
         else:
             new_id = max((t.get("id", 0) for t in arts), default=0) + 1
             art = make_artifact(new_id, rid)
-            art["count"] = 99999
+            art["count"] = amt or 1
             arts.append(art)
     elif rt == "SkinToken" and rid:
         # Skin tokens are inventory item 2001

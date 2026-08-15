@@ -7,10 +7,10 @@
 			"KingGod": 4
 		},
 		"typesPool": ["AtkSpeedPer"],
-		"maxRollLvs": 6,
+		"maxRollLvs": 1,
 		"safePositions": [1],
 		"optionSlots": 4,
-		"count": 99999,
+		"count": 1,
 		"polishPoint": 0,
 		"customType": 0
 	},
