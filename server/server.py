@@ -1247,6 +1247,20 @@ def r_use_reward_box(body, st):
     if any(r.get("type") == "Accessory" for r in rewards):
         from routes.accessory import _make_result_response
         resp["rewardList"]["accessoryResult"] = _make_result_response(st)
+
+    if any(r.get("type") == "Artifact" for r in rewards):
+        art_ids = [r["id"] for r in rewards if r.get("type") == "Artifact"]
+        arts = get_st_artifacts(st)
+        new_arts = [a for a in arts if a.get("artifactId") in art_ids]
+        
+        resp["rewardList"]["artifactResult"] = {
+            "results": new_arts,
+            "polishItemAdded": False,
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "changeEquipped": False,
+            "equippedArtifacts": _resolve_equipped_artifacts(st)
+        }
         
     return resp
 
