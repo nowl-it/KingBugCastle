@@ -368,7 +368,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                         aid = random.choice(a_pool)
                     pull_res = {"type": "Artifact", "unitId": aid, "count": 1, "isNew": True}
                 elif type_str in ("SkinToken",):
-                    pull_res = {"type": "Item", "unitId": 2001, "count": count, "isNew": True}
+                    pull_res = {"type": "SkinToken", "unitId": 2001, "count": count, "isNew": True}
                 elif type_str == "Skin_Grade":
                     grade = int(chosen.get("id", 0))
                     skins_cache = _get_skins(xml_dir)
@@ -384,7 +384,7 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                     is_new = msid not in st.get("mapSkins", [])
                     pull_res = {"type": "MapSkin", "unitId": msid, "count": 1, "isNew": is_new}
                 elif type_str == "LoginSkin_Grade":
-                    pull_res = {"type": "Item", "unitId": 2001, "count": 15, "isNew": True}
+                    pull_res = {"type": "SkinToken", "unitId": 2001, "count": 15, "isNew": True}
                 elif type_str in ("UnitExp", "UnitSoul", "UnitSoulItem"):
                     pull_res = {"type": type_str, "unitId": hero_id, "count": count, "isNew": True}
                 else:
@@ -421,10 +421,9 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
 
             if pull_res:
                 if is_reward and gtype == "SkinGacha":
-                    _WIRE_TYPE = {"Item": "InventoryItem", "Unit": "Card", "UnitSoul": "CardSoul"}
                     reward = {
                         "originReward": {
-                            "type": _WIRE_TYPE.get(pull_res["type"], pull_res["type"]),
+                            "type": pull_res["type"],
                             "id": pull_res["unitId"],
                             "count": pull_res.get("count", 1)
                         },

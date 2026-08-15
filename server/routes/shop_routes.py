@@ -172,7 +172,16 @@ def _shop_buy(body, st):
             # Grant rewardGacha pulls (which use originReward schema)
             for rg in pull.get("rewardGacha", []):
                 origin = rg.get("originReward", {})
-                if origin:
+                replace = rg.get("replaceTo")
+                if replace:
+                    rt = replace.get("type")
+                    uid = replace.get("id")
+                    cnt = replace.get("count", 1)
+                    if rt == "InventoryItem":
+                        rt = "Item"
+                    rewards.append({"type": rt, "id": uid, "count": cnt})
+                    srv._grant_reward(st, rt, uid, cnt)
+                elif origin:
                     rt = origin.get("type")
                     uid = origin.get("id")
                     cnt = origin.get("count", 1)
