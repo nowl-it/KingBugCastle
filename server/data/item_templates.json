@@ -36,11 +36,11 @@
 		"isEarlyAccessModeTestAccessory": false
 	},
 	"treasure": {
-		"_comment": "TreasureConstants.xml Overcome=10 -> MaxLevel=30 (highest tier).",
+		"_comment": "TreasureConstants.xml Overcome=0 (0-star initial tier), MaxLevel=1.",
 		"accountId": 1,
-		"level": 30,
+		"level": 1,
 		"exp": 0,
-		"overcome": 10,
+		"overcome": 0,
 		"unitId": 0,
 		"state": 0,
 		"coolTimeEndAt": "2000-01-01T00:00:00.000Z",

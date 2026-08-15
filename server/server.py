@@ -1889,7 +1889,7 @@ def r_treasure(body, st):
             if t["id"] == target_id:
                 t["unitId"] = unit_id
         save_state(st)
-    return {"treasures": tr, "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999, "maxTreasureCount": 9999, "deletedTreasures": [], "inventories": []}
+    return {"treasures": tr, "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999, "maxTreasureCount": 9999, "deletedTreasures": [], "inventories": _inventory_models(st)}
 
 def r_treasure_equip(body, st):
     return r_treasure(body, st)
@@ -1903,8 +1903,63 @@ def r_treasure_release(body, st):
     save_state(st)
     return r_treasure(body, st)
 
+def r_treasure_dismantle(body, st):
+    admin_log(f"[treasure-dismantle] body={body}")
+    tr = get_st_treasures(st)
+    targets = body.get("treasureIds") or body.get("targets") or []
+    target_ids = set()
+    for t in targets:
+        if isinstance(t, dict):
+            if "id" in t:
+                target_ids.add(t["id"])
+            elif "targetId" in t:
+                target_ids.add(t["targetId"])
+            elif "treasureId" in t:
+                target_ids.add(t["treasureId"])
+        elif isinstance(t, (int, str)) and str(t).isdigit():
+            target_ids.add(int(t))
+    if body.get("targetId"):
+        target_ids.add(body_int(body.get("targetId")))
+
+    remaining_treasures = []
+    deleted_ids = []
+    for t in tr:
+        t_id = t.get("id")
+        if t_id in target_ids or (t_id is None and t.get("treasureId") in target_ids):
+            deleted_ids.append(t_id if t_id is not None else t.get("treasureId"))
+            _grant_reward(st, "Item", 3000, 10 * (t.get("overcome", 0) + 1))
+        else:
+            remaining_treasures.append(t)
+
+    st["treasures"] = remaining_treasures
+    save_state(st)
+    bump(st, "treasureDismantle", len(deleted_ids) or 1)
+
+    return {
+        "treasures": remaining_treasures,
+        "deletedTreasures": deleted_ids,
+        "treasureCapacity": 9999,
+        "capacity": 9999,
+        "maxCapacity": 9999,
+        "maxTreasureCount": 9999,
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "inventories": _inventory_models(st),
+        "addedExpItems": 0
+    }
+
+def r_treasure_set_state(body, st):
+    tr = get_st_treasures(st)
+    target_id = body_int(body.get("targetId"), 0)
+    state = body_int(body.get("state"), 0)
+    for t in tr:
+        if t.get("id") == target_id:
+            t["state"] = state
+    save_state(st)
+    return r_treasure(body, st)
+
 def r_treasure_add_exp(body, st):
-    return {"treasures": get_st_treasures(st), "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999, "maxTreasureCount": 9999, "addExpItems": [], "deletedTreasures": [], "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": [], "addedExpItems": 0}
+    return {"treasures": get_st_treasures(st), "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999, "maxTreasureCount": 9999, "addExpItems": [], "deletedTreasures": [], "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": _inventory_models(st), "addedExpItems": 0}
 
 def r_rift_weapon(body, st):
     return rift.r_rift_weapon_inventory(body, st)
@@ -2474,11 +2529,11 @@ DYNAMIC_OVERRIDES = {
     "/treasure": r_treasure,
     "/treasure/equip": r_treasure_equip,
     "/treasure/add-exp": r_treasure_add_exp,
-    "/treasure/dismantle": r_treasure,
+    "/treasure/dismantle": r_treasure_dismantle,
     "/treasure/equip-tutorial": r_treasure_equip,
     "/treasure/overcome": r_treasure,
     "/treasure/release-equip": r_treasure_release,
-    "/treasure/set-state": r_treasure,
+    "/treasure/set-state": r_treasure_set_state,
     **rift.handlers(),
     **clan.handlers(),
     "/pass": r_pass,
