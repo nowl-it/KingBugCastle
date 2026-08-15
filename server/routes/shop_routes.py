@@ -40,9 +40,8 @@ def _gacha_keys(st):
     from server import ALL_ITEM_IDS
     for k in ALL_ITEM_IDS:
         ks = str(k)
-        if ks not in keys:
-            idx = inv_ids.index(k) if k in inv_ids else -1
-            keys[ks] = inv_counts[idx] if idx >= 0 else 0
+        idx = inv_ids.index(k) if k in inv_ids else -1
+        keys[ks] = inv_counts[idx] if idx >= 0 else 0
     return keys
 
 
@@ -104,7 +103,7 @@ def r_shop(body, st):
                            for k, v in gss.items() if str(k).isdigit()]
     base["availableTimeLimitGachas"] = []
     base["gachaKeys"] = [{"id": int(k), "count": v}
-                         for k, v in st.get("gachaKeys", {}).items()]
+                         for k, v in _gacha_keys(st).items()]
     return base
 
 def _shop_buy(body, st):

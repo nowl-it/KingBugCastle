@@ -747,6 +747,13 @@ def _repair_player_state(st):
     if accessory.ensure_accessory_state(st):
         changed = True
 
+    # 9. Sync gachaKeys from inventory (Key-type items like scrolls)
+    from routes.shop_routes import _gacha_keys
+    old_keys = dict(st.get("gachaKeys", {}))
+    _gacha_keys(st)
+    if st.get("gachaKeys", {}) != old_keys:
+        changed = True
+
     return changed
 
 
