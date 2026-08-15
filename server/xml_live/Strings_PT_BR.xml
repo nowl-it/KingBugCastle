@@ -72,7 +72,7 @@ Confira as novidades!</String>
   <String Key="FetchEventModeInfoFailed">Não foi possível buscar informações de expedição!</String>
   <String Key="FetchSeasonPassInfo">Carregando informações do passe...</String>
   <String Key="FetchSeasonPassInfoFailed">Não foi possível carregar informações do passe!</String>
-  <String Key="FetchComplete">Preparativos finalizados! O jogo vai começar!</String>
+  <String Key="FetchComplete">Pronto pro bug! Iniciando a correção agora!</String>
   <String Key="RootDetected">Procedimento de root detectado.
 Remova-o e tente novamente.</String>
   <String Key="HackDetectedFormat">Foi detectado um programa abusivo.

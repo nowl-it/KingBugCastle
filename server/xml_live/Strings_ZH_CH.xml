@@ -73,7 +73,7 @@
   <String Key="FetchEventModeInfoFailed">无法&lt;size=2&gt; &lt;/size&gt;获取&lt;size=2&gt; &lt;/size&gt;远征&lt;size=2&gt; &lt;/size&gt;信息！</String>
   <String Key="FetchSeasonPassInfo">正在&lt;size=2&gt; &lt;/size&gt;加载&lt;size=2&gt; &lt;/size&gt;通行证&lt;size=2&gt; &lt;/size&gt;信息…</String>
   <String Key="FetchSeasonPassInfoFailed">无法&lt;size=2&gt; &lt;/size&gt;获取&lt;size=2&gt; &lt;/size&gt;通行证&lt;size=2&gt; &lt;/size&gt;信息！</String>
-  <String Key="FetchComplete">准备&lt;size=2&gt; &lt;/size&gt;完成！&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;游戏！</String>
+  <String Key="FetchComplete">准备&lt;size=2&gt; &lt;/size&gt;抓bug！&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;修复！</String>
   <String Key="RootDetected">已&lt;size=2&gt; &lt;/size&gt;检测&lt;size=2&gt; &lt;/size&gt;到&lt;size=2&gt; &lt;/size&gt;越狱&lt;size=2&gt; &lt;/size&gt;状态。
 
 &lt;size=2&gt; &lt;/size&gt;请&lt;size=2&gt; &lt;/size&gt;解除&lt;size=2&gt; &lt;/size&gt;越狱&lt;size=2&gt; &lt;/size&gt;状态&lt;size=2&gt; &lt;/size&gt;后&lt;size=2&gt; &lt;/size&gt;重试。</String>

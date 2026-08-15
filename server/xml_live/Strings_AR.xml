@@ -72,7 +72,7 @@
   <String Key="FetchEventModeInfoFailed">فشل الحصول على معلومات البعثات!</String>
   <String Key="FetchSeasonPassInfo">تحميل معلومات الباس..</String>
   <String Key="FetchSeasonPassInfoFailed">فشل الحصول على معلومات الباس!</String>
-  <String Key="FetchComplete">تم الإستعداد! إبتداء اللعبة!</String>
+  <String Key="FetchComplete">جاهز للحشرة! نبدأ بالإصلاح الآن!</String>
   <String Key="RootDetected">تم الكشف عن الروت. 
 الرجاء إعادة المحاولة بعد إلغاء الروت.</String>
   <String Key="HackDetectedFormat">تم الكشف عن برنامج غير قانوني

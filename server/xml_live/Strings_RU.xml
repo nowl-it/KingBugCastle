@@ -72,7 +72,7 @@
   <String Key="FetchEventModeInfoFailed">Невозможно загрузить информацию об экспедиции!</String>
   <String Key="FetchSeasonPassInfo">Загружаем информацию о Пассе...</String>
   <String Key="FetchSeasonPassInfoFailed">Невозможно загрузить информацию о Пассе.</String>
-  <String Key="FetchComplete">Подготовка завершена! Начнем игру!</String>
+  <String Key="FetchComplete">Готов к багу! Начинаем исправление!</String>
   <String Key="RootDetected">На вашем устройстве обнаружен рутинг.
 Отключите рутинг и повторите попытку.</String>
   <String Key="HackDetectedFormat">Обнаружены незаконные программы.

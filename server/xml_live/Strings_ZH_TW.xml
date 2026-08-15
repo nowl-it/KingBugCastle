@@ -73,7 +73,7 @@
   <String Key="FetchEventModeInfoFailed">無&lt;size=2&gt; &lt;/size&gt;法獲&lt;size=2&gt; &lt;/size&gt;取&lt;size=2&gt; &lt;/size&gt;遠&lt;size=2&gt; &lt;/size&gt;征&lt;size=2&gt; &lt;/size&gt;資訊！</String>
   <String Key="FetchSeasonPassInfo">正在&lt;size=2&gt; &lt;/size&gt;讀&lt;size=2&gt; &lt;/size&gt;取&lt;size=2&gt; &lt;/size&gt;通行&lt;size=2&gt; &lt;/size&gt;證&lt;size=2&gt; &lt;/size&gt;資訊…</String>
   <String Key="FetchSeasonPassInfoFailed">無&lt;size=2&gt; &lt;/size&gt;法獲&lt;size=2&gt; &lt;/size&gt;取&lt;size=2&gt; &lt;/size&gt;通行&lt;size=2&gt; &lt;/size&gt;證&lt;size=2&gt; &lt;/size&gt;資訊！</String>
-  <String Key="FetchComplete">準&lt;size=2&gt; &lt;/size&gt;備&lt;size=2&gt; &lt;/size&gt;結&lt;size=2&gt; &lt;/size&gt;束！&lt;size=2&gt; &lt;/size&gt;開&lt;size=2&gt; &lt;/size&gt;始&lt;size=2&gt; &lt;/size&gt;遊戲！</String>
+  <String Key="FetchComplete">準備&lt;size=2&gt; &lt;/size&gt;抓bug！&lt;size=2&gt; &lt;/size&gt;開始&lt;size=2&gt; &lt;/size&gt;修復！</String>
   <String Key="RootDetected">偵&lt;size=2&gt; &lt;/size&gt;測&lt;size=2&gt; &lt;/size&gt;到Rooting。
 
 &lt;size=2&gt; &lt;/size&gt;請&lt;size=2&gt; &lt;/size&gt;解除Rooting&lt;size=2&gt; &lt;/size&gt;後&lt;size=2&gt; &lt;/size&gt;重新&lt;size=2&gt; &lt;/size&gt;執&lt;size=2&gt; &lt;/size&gt;行。</String>

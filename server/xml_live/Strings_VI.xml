@@ -72,7 +72,7 @@
   <String Key="FetchEventModeInfoFailed">Không thể tải thông tin viễn chinh!</String>
   <String Key="FetchSeasonPassInfo">Đang tải thông tin Pass...</String>
   <String Key="FetchSeasonPassInfoFailed">Không thể tải thông tin Pass!</String>
-  <String Key="FetchComplete">Đã sẵn sàng! Bắt đầu game!</String>
+  <String Key="FetchComplete">Sẵn sàng bắt bug! Bắt đầu fix ngay!</String>
   <String Key="RootDetected">Đã phát hiện Root.
 Vui lòng gỡ Root rồi thử lại.</String>
   <String Key="HackDetectedFormat">Đã phát hiện chương trình trái phép.

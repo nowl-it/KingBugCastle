@@ -72,7 +72,7 @@ Viel Spaß mit den neuen Inhalten.</String>
   <String Key="FetchEventModeInfoFailed">Expeditionsdaten konnten nicht übertragen werden.</String>
   <String Key="FetchSeasonPassInfo">Pass Info lädt ...</String>
   <String Key="FetchSeasonPassInfoFailed">Pass Info kann nicht geladen werden!</String>
-  <String Key="FetchComplete">Vorbereitungen abgeschlossen! Das Spiel wird gestartet!</String>
+  <String Key="FetchComplete">Bereit zum Bug! Fix wird jetzt gestartet!</String>
   <String Key="RootDetected">Rooting erkannt.
 Entfernt das Rooting und versucht es erneut.</String>
   <String Key="HackDetectedFormat">Illegales Programm erkannt.

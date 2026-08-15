@@ -72,7 +72,7 @@ Allez faire la mise à jour !</String>
   <String Key="FetchEventModeInfoFailed">Impossible de charger les données de l'expédition !</String>
   <String Key="FetchSeasonPassInfo">Chargement des données du pass...</String>
   <String Key="FetchSeasonPassInfoFailed">Impossible de charger les données du pass !</String>
-  <String Key="FetchComplete">Tout est prêt ! Le jeu commence !</String>
+  <String Key="FetchComplete">Prêt pour le bug ! On commence la correction !</String>
   <String Key="RootDetected">Le root a été détecté.
 Veuillez désactiver le root et réessayez.</String>
   <String Key="HackDetectedFormat">Un logiciel illicite a été détecté.

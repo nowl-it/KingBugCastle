@@ -73,7 +73,7 @@
   <String Key="FetchEventModeInfoFailed">ไม่สามารถเรียกข้อมูลการเดินทางได้!</String>
   <String Key="FetchSeasonPassInfo">กำลังโหลดข้อมูลพาส...</String>
   <String Key="FetchSeasonPassInfoFailed">ไม่สามารถเรียกข้อมูลพาสได้!</String>
-  <String Key="FetchComplete">พร้อมแล้ว! กำลังเริ่มเกม!</String>
+  <String Key="FetchComplete">พร้อมจับบั๊ก! เริ่มแก้ไขเดี๋ยวนี้!</String>
   <String Key="RootDetected">ตรวจพบการรูท
 ยกเลิกการรูทและเริ่มเกมใหม่อีกครั้ง</String>
   <String Key="HackDetectedFormat">ตรวจพบโปรแกรมผิดกฎหมาย

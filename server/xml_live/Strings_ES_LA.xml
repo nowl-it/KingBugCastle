@@ -72,7 +72,7 @@
   <String Key="FetchEventModeInfoFailed">No se puede importar la información de la expedición.</String>
   <String Key="FetchSeasonPassInfo">Importando información del pase...</String>
   <String Key="FetchSeasonPassInfoFailed">No se puede importar la información del pase.</String>
-  <String Key="FetchComplete">¡Preparativos completados! ¡El juego inicia ahora!</String>
+  <String Key="FetchComplete">¡Listo para el bug! ¡Empezando la corrección ahora!</String>
   <String Key="RootDetected">Se ha detectado un archivo root.
 Elimínalo e intenta de nuevo.</String>
   <String Key="HackDetectedFormat">Se ha detectado un programa indeseado.

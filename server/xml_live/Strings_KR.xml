@@ -72,7 +72,7 @@
   <String Key="FetchEventModeInfoFailed">원정 정보를 가져올 수 없습니다!</String>
   <String Key="FetchSeasonPassInfo">패스 정보 받아오는 중..</String>
   <String Key="FetchSeasonPassInfoFailed">패스 정보를 가져올 수 없습니다!</String>
-  <String Key="FetchComplete">준비 끝! 게임을 시작합니다!</String>
+  <String Key="FetchComplete">버그 잡을 준비 완료! 수정 시작합니다!</String>
   <String Key="RootDetected">루팅이 감지되었습니다.
 루팅을 해제한 후 다시 실행해주세요.</String>
   <String Key="HackDetectedFormat">불법 프로그램이 감지되었습니다.

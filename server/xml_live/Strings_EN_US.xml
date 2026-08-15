@@ -73,7 +73,7 @@ Let's enjoy new content!</String>
   <String Key="FetchEventModeInfoFailed">Unable to fetch expedition data!</String>
   <String Key="FetchSeasonPassInfo">Retrieving Pass Data..</String>
   <String Key="FetchSeasonPassInfoFailed">Can't Retreive Pass Data!</String>
-  <String Key="FetchComplete">Ready to go! Starting the game now!</String>
+  <String Key="FetchComplete">Ready to bug! Starting the fix now!</String>
   <String Key="RootDetected">Rooting detected.
 Please try again after removing it.</String>
   <String Key="HackDetectedFormat">Illegal program detected.
