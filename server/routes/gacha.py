@@ -46,6 +46,8 @@ def _get_units(xml_dir):
                         continue
                     if str(u.findtext("GachaAvailable")).lower() == "false":
                         continue
+                    if str(u.findtext("IsDimensionUnit")).lower() == "true":
+                        continue
                     _UNITS_CACHE.append(uid)
         except Exception:
             pass
