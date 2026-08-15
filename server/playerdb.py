@@ -389,7 +389,10 @@ def next_account_id():
     best = 0
     for _uid, s, _ in all_players():
         if s is not None:
-            v = int(s.get("accountId", 0) or 0)
+            try:
+                v = int(s.get("accountId", 0) or 0)
+            except (ValueError, TypeError):
+                v = 0
             if v > best:
                 best = v
     return best + 1

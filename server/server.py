@@ -296,7 +296,8 @@ def _pad_deck(deck, potential):
     # the stored deck can never violate that invariant, regardless of what
     # broken state the client sends.
     deck = (list(deck) + [0] * DECK_SLOTS)[:DECK_SLOTS]
-    potential = (list(potential) + [0] * DECK_SLOTS)[:DECK_SLOTS]
+    potential = [max(0, p) if isinstance(p, int) else 0 for p in potential]
+    potential = (potential + [0] * DECK_SLOTS)[:DECK_SLOTS]
     return deck, potential
 
 DEFAULT_PLAYER = {
@@ -696,6 +697,18 @@ def _repair_player_state(st):
                     cleaned.append(valid_starters[len(cleaned) % len(valid_starters)])
                 dk["deck"] = cleaned[:6]
                 changed = True
+            # Clamp potential values to >= 0; -1 means "no potential selected" on the
+            # client but DraggableUnitCard.UpdatePotentialIcon uses it as an array
+            # index into a potentials lookup table, causing NRE → black lobby when ALL
+            # deck slots are -1.
+            p_list = dk.setdefault("potential", [0] * DECK_SLOTS)
+            if isinstance(p_list, list):
+                clamped = [max(0, p) if isinstance(p, int) else 0 for p in p_list]
+                while len(clamped) < DECK_SLOTS:
+                    clamped.append(0)
+                if clamped != p_list:
+                    dk["potential"] = clamped[:DECK_SLOTS]
+                    changed = True
 
     # 5. Rift subsystem (riftWeapons, equippedRiftWeapons, riftCrystals)
     if rift.ensure_rift_state(st):
