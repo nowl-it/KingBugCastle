@@ -1212,10 +1212,10 @@ def _open_reward_box(st, item_id, select_idx=None, times=1):
 # and a nonsense count in the results popup (what "Temple of Challenge Reward Chest
 # gives x999 of the wrong thing" was). The server's own vocabulary is shorter and used
 # by _grant_reward; translate at the wire boundary only, so state keys never move.
-_WIRE_TYPE = {"Item": "InventoryItem", "Unit": "Card", "UnitSoul": "CardSoul"}
+_WIRE_TYPE = {"Item": "InventoryItem", "Unit": "Card", "UnitSoul": "CardSoul", "Accessory": "Equip", "FixedAccessory": "Equip"}
 
 def _wire_rewards(rewards):
-    return [{**r, "type": _WIRE_TYPE.get(r.get("type"), r.get("type"))} for r in rewards if r.get("type") not in ("Accessory", "FixedAccessory")]
+    return [{**r, "type": _WIRE_TYPE.get(r.get("type"), r.get("type"))} for r in rewards]
 
 def _reward_list_data(rewards):
     return {"rewardList": _wire_rewards(rewards), "artifactResult": None,
