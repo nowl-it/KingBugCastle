@@ -123,7 +123,7 @@ def _get_artifacts(xml_dir):
                     _ARTIFACT_CACHE.setdefault(key, []).append(aid)
                 _ARTIFACT_CACHE.setdefault("all", []).append(aid)
         if not _ARTIFACT_CACHE:
-            _ARTIFACT_CACHE["all"] = [501]
+            _ARTIFACT_CACHE["all"] = [10001]
     return _ARTIFACT_CACHE
 
 def _get_gacha(gacha_id, xml_dir):
@@ -375,9 +375,9 @@ def roll(gacha_id, amount, st, xml_dir=DEFAULT_XML, item_id=0):
                         ft = chosen.get("from_type")
                         lv = chosen.get("level")
                         k = f"{ft}_{lv}" if ft and lv else None
-                        a_pool = (a_cache.get(k) if k else None) or a_cache.get("all") or [501]
+                        a_pool = (a_cache.get(k) if k else None) or a_cache.get("all") or [10001]
                         aid = random.choice(a_pool)
-                    pull_res = {"type": "Artifact", "unitId": aid, "count": 1, "isNew": True}
+                    pull_res = {"type": "ArtifactGacha", "unitId": aid, "count": 1, "isNew": True}
                 elif type_str in ("SkinToken",):
                     pull_res = {"type": "SkinToken", "unitId": 2001, "count": count, "isNew": True}
                 elif type_str == "Skin_Grade":
