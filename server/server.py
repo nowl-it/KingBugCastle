@@ -1800,60 +1800,88 @@ def r_artifact_equip(body, st):
 def r_artifact_dismantle(body, st):
     admin_log(f"[artifact-dismantle] body={body}")
     arts = get_st_artifacts(st)
-    targets = body.get("targets") or []
+    raw_targets = (
+        body.get("targets") or
+        body.get("targetIds") or
+        body.get("artifactIds") or
+        body.get("artifacts") or
+        []
+    )
+    if not isinstance(raw_targets, list):
+        raw_targets = [raw_targets]
+    if body.get("targetId"):
+        raw_targets.append(body.get("targetId"))
+    if body.get("id"):
+        raw_targets.append(body.get("id"))
+    if body.get("artifactId"):
+        raw_targets.append(body.get("artifactId"))
+
     target_ids = set()
     target_counts = {}
-    
-    for t in targets:
-        if isinstance(t, dict):
-            t_id = t.get("id") or t.get("artifactId")
+    for item in raw_targets:
+        if isinstance(item, dict):
+            t_id = item.get("id") or item.get("targetId") or item.get("artifactId")
             if t_id is not None:
                 target_ids.add(t_id)
-                target_counts[t_id] = t.get("count", 1)
-        elif isinstance(t, (int, str)) and str(t).isdigit():
-            target_ids.add(int(t))
-            target_counts[int(t)] = 1
-            
-    if body.get("targetId"):
-        tid = body_int(body.get("targetId"))
-        target_ids.add(tid)
-        target_counts[tid] = body.get("count", 1)
-        
+                target_ids.add(str(t_id))
+                if str(t_id).isdigit():
+                    target_ids.add(int(t_id))
+                target_counts[t_id] = item.get("count", 1)
+                target_counts[str(t_id)] = item.get("count", 1)
+                if str(t_id).isdigit():
+                    target_counts[int(t_id)] = item.get("count", 1)
+        elif item is not None:
+            target_ids.add(item)
+            target_ids.add(str(item))
+            if str(item).isdigit():
+                target_ids.add(int(item))
+            target_counts[item] = 1
+            target_counts[str(item)] = 1
+            if str(item).isdigit():
+                target_counts[int(item)] = 1
+
     dust_gain = 0
     dust_table = {"Normal": 70, "King": 230, "God": 650, "KingGod": 2000}
     remaining_arts = []
     dismantled_instance_ids = set()
-    
+
     for a in arts:
         aid = a.get("id")
         art_id = a.get("artifactId")
-        match_id = aid if aid in target_ids else (art_id if art_id in target_ids else None)
+        match_id = None
+        for cand in (aid, str(aid), art_id, str(art_id)):
+            if cand in target_ids:
+                match_id = cand
+                break
+
         if match_id is not None:
             cnt_to_remove = target_counts.get(match_id, a.get("count", 1))
             current_cnt = a.get("count", 1)
             lvl = ARTIFACT_LEVELS.get(art_id, "Normal")
             dust_per = dust_table.get(lvl, 70)
-            
+
             if cnt_to_remove >= current_cnt:
                 dust_gain += dust_per * current_cnt
-                dismantled_instance_ids.add(aid)
-                dismantled_instance_ids.add(art_id)
+                if aid is not None:
+                    dismantled_instance_ids.add(aid)
+                if art_id is not None:
+                    dismantled_instance_ids.add(art_id)
             else:
                 a["count"] = current_cnt - cnt_to_remove
                 dust_gain += dust_per * cnt_to_remove
                 remaining_arts.append(a)
         else:
             remaining_arts.append(a)
-            
+
     st["artifacts"] = remaining_arts
     st["dustCount"] = st.get("dustCount", 0) + dust_gain
-    
+
     if dismantled_instance_ids:
         st["equippedArtifacts"] = [e for e in st.get("equippedArtifacts", []) if e.get("artifactId") not in dismantled_instance_ids]
-        
+
     save_state(st)
     bump(st, "artifactDismantle", len(target_ids) or 1)
-    
+
     return {
         "artifacts": remaining_arts,
         "dustCount": st.get("dustCount", 99999),
@@ -1906,28 +1934,60 @@ def r_treasure_release(body, st):
 def r_treasure_dismantle(body, st):
     admin_log(f"[treasure-dismantle] body={body}")
     tr = get_st_treasures(st)
-    targets = body.get("treasureIds") or body.get("targets") or []
-    target_ids = set()
-    for t in targets:
-        if isinstance(t, dict):
-            if "id" in t:
-                target_ids.add(t["id"])
-            elif "targetId" in t:
-                target_ids.add(t["targetId"])
-            elif "treasureId" in t:
-                target_ids.add(t["treasureId"])
-        elif isinstance(t, (int, str)) and str(t).isdigit():
-            target_ids.add(int(t))
+    raw_targets = (
+        body.get("treasureIds") or
+        body.get("targets") or
+        body.get("targetIds") or
+        body.get("dismantleTreasureIds") or
+        []
+    )
+    if not isinstance(raw_targets, list):
+        raw_targets = [raw_targets]
     if body.get("targetId"):
-        target_ids.add(body_int(body.get("targetId")))
+        raw_targets.append(body.get("targetId"))
+    if body.get("id"):
+        raw_targets.append(body.get("id"))
+    if body.get("treasureId"):
+        raw_targets.append(body.get("treasureId"))
+
+    target_ids = set()
+    for item in raw_targets:
+        if isinstance(item, dict):
+            for k in ("id", "targetId", "treasureId", "itemId"):
+                if item.get(k) is not None:
+                    target_ids.add(item[k])
+                    target_ids.add(str(item[k]))
+                    if str(item[k]).isdigit():
+                        target_ids.add(int(item[k]))
+        elif item is not None:
+            target_ids.add(item)
+            target_ids.add(str(item))
+            if str(item).isdigit():
+                target_ids.add(int(item))
 
     remaining_treasures = []
     deleted_ids = []
+
     for t in tr:
         t_id = t.get("id")
-        if t_id in target_ids or (t_id is None and t.get("treasureId") in target_ids):
-            deleted_ids.append(t_id if t_id is not None else t.get("treasureId"))
-            _grant_reward(st, "Item", 3000, 10 * (t.get("overcome", 0) + 1))
+        tr_id = t.get("treasureId")
+
+        is_match = (
+            t_id in target_ids or
+            str(t_id) in target_ids or
+            tr_id in target_ids or
+            str(tr_id) in target_ids
+        )
+
+        if is_match:
+            if t_id is not None:
+                deleted_ids.append(t_id)
+            if tr_id is not None and tr_id != t_id:
+                deleted_ids.append(tr_id)
+
+            overcome = t.get("overcome", 0)
+            _grant_reward(st, "Item", 3000, 10 * (overcome + 1))
+            _grant_reward(st, "Item", 3100, 5 * (overcome + 1))
         else:
             remaining_treasures.append(t)
 
@@ -1937,7 +1997,7 @@ def r_treasure_dismantle(body, st):
 
     return {
         "treasures": remaining_treasures,
-        "deletedTreasures": deleted_ids,
+        "deletedTreasures": list(set(deleted_ids)),
         "treasureCapacity": 9999,
         "capacity": 9999,
         "maxCapacity": 9999,
