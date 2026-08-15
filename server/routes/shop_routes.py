@@ -35,7 +35,10 @@ def _build_gacha_reward_data(srv, st, rewards):
             "changeEquipped": False,
             "equippedArtifacts": srv._resolve_equipped_artifacts(st)
         }
-            
+    
+    # Filter Artifacts from rewardList so client doesn't crash when parsing the Type enum
+    resp["rewardList"] = [r for r in resp["rewardList"] if r.get("type") != "Artifact"]
+
     return resp
 
 srv = None      # the live server module, set by register()
@@ -258,6 +261,10 @@ def _shop_buy(body, st):
         for pull in gachas_result:
             if "gacha" in pull:
                 pull["gacha"] = [rg for rg in pull["gacha"] if rg.get("type") != "Artifact"]
+                
+        # If this is an ArtifactGacha, completely clear gachas_result to skip GachaPanel
+        if item_type == "ArtifactGacha":
+            gachas_result = []
 
         return {
             "gachaRewardResponseData": _build_gacha_reward_data(srv, st, rewards),
@@ -508,6 +515,10 @@ def _shop_buy(body, st):
     for pull in gachas_result:
         if "gacha" in pull:
             pull["gacha"] = [rg for rg in pull["gacha"] if rg.get("type") != "Artifact"]
+
+    # If this is an ArtifactGacha, completely clear gachas_result to skip GachaPanel
+    if item_type == "ArtifactGacha":
+        gachas_result = []
 
     return {
         "gachaRewardResponseData": _build_gacha_reward_data(srv, st, rewards),
