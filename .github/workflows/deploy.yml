@@ -22,4 +22,4 @@ jobs:
           chmod 600 ~/.ssh/kgc_deploy
           echo "$SERVER_HOST_KEY" >> ~/.ssh/known_hosts
           ssh -i ~/.ssh/kgc_deploy -o IdentitiesOnly=yes \
-            ubuntu@213.35.110.245 "mkdir -p ~/kgc/server/secrets && echo \"\$GOOGLE_OAUTH_JSON_B64\" | base64 -d > ~/kgc/server/secrets/google_oauth.json && deploy"
+            ubuntu@213.35.110.245 "mkdir -p ~/kgc/server/secrets && echo \"\$GOOGLE_OAUTH_JSON_B64\" | base64 -d > ~/kgc/server/secrets/google_oauth.json && (cd ~/kgc/server && ./deploy_hook.sh || deploy)"

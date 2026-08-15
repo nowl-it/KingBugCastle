@@ -10,6 +10,7 @@
 # tested against, and anything newer in the same line has been fine.
 fastapi>=0.140.13
 uvicorn[standard]>=0.51.0     # [standard] brings uvloop + httptools + websockets
+gunicorn>=21.2.0              # Process manager for multi-worker zero-downtime serving
 watchfiles>=1.2.0             # run.sh --reload; without it uvicorn silently falls back to
                               # StatReload, watches only .py, and ignores --reload-include
 pycryptodome>=3.23.0          # AES-128-ECB for the game API
