@@ -19,6 +19,24 @@ from common import admin_log, body_int, body_list, next_reset_iso, now_iso
 from config import CONTENT_GATE, STATIC_OVERRIDES, XML_DIR
 from state import save_state
 
+def _build_gacha_reward_data(srv, st, rewards):
+    resp = srv._reward_list_data(rewards)
+    
+    if any(r.get("type") == "Artifact" for r in rewards):
+        art_ids = [r["id"] for r in rewards if r.get("type") == "Artifact"]
+        arts = srv.get_st_artifacts(st)
+        new_arts = [a for a in arts if a.get("artifactId") in art_ids]
+        
+        resp["artifactResult"] = {
+            "results": new_arts,
+            "polishItemAdded": False,
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "changeEquipped": False,
+            "equippedArtifacts": srv._resolve_equipped_artifacts(st)
+        }
+    return resp
+
 srv = None      # the live server module, set by register()
 
 def _get_srv():
@@ -236,7 +254,7 @@ def _shop_buy(body, st):
         ceil_dict = _build_gacha_ceil(gacha_el, st)
 
         return {
-            "gachaRewardResponseData": srv._reward_list_data(rewards),
+            "gachaRewardResponseData": _build_gacha_reward_data(srv, st, rewards),
             "treasureResult": {
                 "treasures": srv.get_st_treasures(st),
                 "deletedTreasures": [],
@@ -481,7 +499,7 @@ def _shop_buy(body, st):
     ceil_dict = _build_gacha_ceil(gacha_el, st)
 
     return {
-        "gachaRewardResponseData": srv._reward_list_data(rewards),
+        "gachaRewardResponseData": _build_gacha_reward_data(srv, st, rewards),
         "treasureResult": {
             "treasures": srv.get_st_treasures(st),
             "deletedTreasures": [],

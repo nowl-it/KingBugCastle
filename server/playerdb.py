@@ -406,7 +406,10 @@ def backfill_account_ids():
     for uid, s, _ in all_players():
         if s is None:
             continue
-        v = int(s.get("accountId", 0) or 0)
+        try:
+            v = int(s.get("accountId", 0) or 0)
+        except (ValueError, TypeError):
+            continue
         if v > 0 and v not in taken:
             taken.add(v)
             continue
