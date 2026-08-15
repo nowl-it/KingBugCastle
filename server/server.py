@@ -1974,16 +1974,12 @@ def r_treasure_dismantle(body, st):
 
         is_match = (
             t_id in target_ids or
-            str(t_id) in target_ids or
-            tr_id in target_ids or
-            str(tr_id) in target_ids
+            str(t_id) in target_ids
         )
 
         if is_match:
             if t_id is not None:
                 deleted_ids.append(t_id)
-            if tr_id is not None and tr_id != t_id:
-                deleted_ids.append(tr_id)
 
             overcome = t.get("overcome", 0)
             _grant_reward(st, "Item", 3000, 10 * (overcome + 1))
