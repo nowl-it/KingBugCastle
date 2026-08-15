@@ -43,8 +43,6 @@ ALL_ROGUE_LIKE_DLCS = [
     {"dlc": 2400, "tier": 2},  # Altar of Death (6)
     {"dlc": 2410, "tier": 2},  # Altar of Immortality (7)
     {"dlc": 2420, "tier": 2},  # Altar of Domination (8)
-    {"dlc": 2430, "tier": 2},  # Hero/Blacksmith/Blood Altars Premium
-    {"dlc": 2440, "tier": 2},  # Giant/Mage/Greed Altars Premium
 ]
 
 # Shared primitives now live in common.py so domain modules can use them without

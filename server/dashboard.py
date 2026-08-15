@@ -691,8 +691,6 @@ def _grant_premium_altars_to_player(st):
         {"dlc": 2400, "tier": 2},  # Altar of Death (6)
         {"dlc": 2410, "tier": 2},  # Altar of Immortality / Undead (7)
         {"dlc": 2420, "tier": 2},  # Altar of Domination (8)
-        {"dlc": 2430, "tier": 2},  # Hero/Blacksmith/Blood Altars Premium
-        {"dlc": 2440, "tier": 2},  # Giant/Mage/Greed Altars Premium
     ]
     st["rogueLikeBoughtDlcs"] = dlcs
     inv = st.setdefault("inventory", {"itemIds": [], "counts": []})
