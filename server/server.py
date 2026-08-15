@@ -1215,7 +1215,7 @@ def _open_reward_box(st, item_id, select_idx=None, times=1):
 _WIRE_TYPE = {"Item": "InventoryItem", "Unit": "Card", "UnitSoul": "CardSoul"}
 
 def _wire_rewards(rewards):
-    return [{**r, "type": _WIRE_TYPE.get(r.get("type"), r.get("type"))} for r in rewards]
+    return [{**r, "type": _WIRE_TYPE.get(r.get("type"), r.get("type"))} for r in rewards if r.get("type") not in ("Accessory", "FixedAccessory")]
 
 def _reward_list_data(rewards):
     return {"rewardList": _wire_rewards(rewards), "artifactResult": None,
