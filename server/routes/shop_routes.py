@@ -28,6 +28,16 @@ def _get_srv():
         srv = sys.modules.get("server")
     return srv
 
+_GACHA_KEY_IDS = None
+def _get_gacha_key_ids():
+    global _GACHA_KEY_IDS
+    if _GACHA_KEY_IDS is None:
+        import re
+        from config import XML_DIR
+        with open(XML_DIR / "Gachas.xml", encoding="utf-8") as f:
+            _GACHA_KEY_IDS = list(set(int(m) for m in re.findall(r'<KeyItem>(\d+)</KeyItem>', f.read())))
+    return _GACHA_KEY_IDS
+
 def _gacha_keys(st):
     """key item id -> total keys held. A gacha scroll's key item is the scroll
     itself (Gacha 2007's KeyItem is shop item 305; 300/301/302 key themselves),
@@ -37,8 +47,13 @@ def _gacha_keys(st):
     inv = st.get("inventory", {})
     inv_ids = inv.get("itemIds", [])
     inv_counts = inv.get("counts", [])
-    from server import ALL_ITEM_IDS
-    for k in ALL_ITEM_IDS:
+    
+    valid_keys = set(str(k) for k in _get_gacha_key_ids())
+    for k in list(keys.keys()):
+        if k not in valid_keys:
+            del keys[k]
+            
+    for k in _get_gacha_key_ids():
         ks = str(k)
         idx = inv_ids.index(k) if k in inv_ids else -1
         keys[ks] = inv_counts[idx] if idx >= 0 else 0
