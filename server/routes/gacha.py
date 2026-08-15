@@ -35,11 +35,20 @@ def _get_units(xml_dir):
     global _UNITS_CACHE
     if not _UNITS_CACHE:
         _UNITS_CACHE = []
-        tree = ET.parse(xml_dir / "Units.xml")
-        for unit in tree.findall("Unit"):
-            uid = int(unit.get("ID", 0))
-            if 10000 <= uid <= 10999 and unit.findtext("Type") == "Player" and unit.findtext("IsObtainable") != "false":
-                _UNITS_CACHE.append(uid)
+        try:
+            tree = ET.parse(xml_dir / "Units.xml")
+            for u in tree.findall("Unit"):
+                uid = int(u.get("ID", 0))
+                if uid > 0:
+                    if u.findtext("Type") != "Player":
+                        continue
+                    if u.find("Role") is None:
+                        continue
+                    if str(u.findtext("GachaAvailable")).lower() == "false":
+                        continue
+                    _UNITS_CACHE.append(uid)
+        except Exception:
+            pass
         if not _UNITS_CACHE:
             _UNITS_CACHE = [10000, 10010, 10020, 10040, 10070, 10210, 10260]
     return _UNITS_CACHE
