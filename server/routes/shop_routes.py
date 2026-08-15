@@ -157,6 +157,7 @@ def _shop_buy(body, st):
                 rewards.append({"type": rt, "id": uid, "count": cnt})
                 if rt == "UnitExp":
                     rt = "UnitSoul"
+                is_already_owned = str(uid) in st.get("cards", {}) if uid and rt in ("Unit", "Card") else False
                 if srv._grant_reward(st, rt, uid, cnt):
                     pull["upgrade"] = True
                     # Duplicate dimension hero: client reads type+count for stars
@@ -166,8 +167,13 @@ def _shop_buy(body, st):
                             rg["type"] = "DimensionOvercome"
                             rg["count"] = c["overcome"]
                             admin_log(f"[dim-fix] unit={uid} overcome={c['overcome']} rg={{type={rg['type']}, count={rg['count']}, unitId={uid}}}")
+                elif is_already_owned:
+                    # Non-dimension duplicate: convert to UnitSoul (medals)
+                    rg["type"] = "UnitSoul"
+                    rg["count"] = 150
+                    rg["isNew"] = False
                 if rt in ("Unit", "Card") and uid:
-                    if pull.get("isNew", False) and uid not in new_unit_ids:
+                    if rg.get("isNew", True) and uid not in new_unit_ids:
                         new_unit_ids.append(uid)
                     c = st.get("cards", {}).get(str(uid))
                     if c:
@@ -400,6 +406,7 @@ def _shop_buy(body, st):
                         rt = "Item"
                         if item_id == 301 or item_id == 302:
                             uid = 201
+                    is_already_owned = str(uid) in st.get("cards", {}) if uid and rt in ("Unit", "Card") else False
                     if srv._grant_reward(st, rt, uid, cnt):
                         pull["upgrade"] = True
                         if rt in ("Unit", "Card") and uid:
@@ -407,8 +414,12 @@ def _shop_buy(body, st):
                             if c and c.get("overcome", 0) > 0:
                                 rg["type"] = "DimensionOvercome"
                                 rg["count"] = c["overcome"]
+                    elif is_already_owned:
+                        rg["type"] = "UnitSoul"
+                        rg["count"] = 150
+                        rg["isNew"] = False
                     if rt in ("Unit", "Card") and uid:
-                        if pull.get("isNew", False) and uid not in new_unit_ids:
+                        if rg.get("isNew", True) and uid not in new_unit_ids:
                             new_unit_ids.append(uid)
                         c = st.get("cards", {}).get(str(uid))
                         if c:
