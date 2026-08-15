@@ -281,10 +281,16 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
               </div>
             </div>
             <div>
-              <h4 className="text-sm font-medium mb-2">Rift Weapons & Crystals</h4>
+              <h4 className="text-sm font-medium mb-2">Altars & Great Rift (Crystals / DLC)</h4>
               <div className="flex flex-wrap gap-2">
+                <Button variant="secondary" onClick={() => handleMacro("grant_premium_altars")}>⛩️ Grant Premium Altars (Selected)</Button>
                 <Button variant="secondary" onClick={() => handleMacro("rift_legendary_all")}>✨ Grant Full Crystals (222 Crystals, Selected)</Button>
                 <Button variant="secondary" onClick={() => handleMacro("toggle_infinity_rift")}>♾️ Toggle Infinity Rift Energy (Selected)</Button>
+                <Button variant="outline" onClick={async () => {
+                  if (!window.confirm("Grant All Premium Altars (Altar of Death, Immortality, Domination + Normal Premium) to ALL players?")) return
+                  await runMutation("/api/players/grant-all-premium-altars", { method: "POST" }, "Granted premium altars to all players")
+                  onMutate()
+                }}>⚡ Grant Premium Altars to ALL Players</Button>
                 <Button variant="outline" onClick={async () => {
                   if (!window.confirm("Grant Full Set of 222 Legendary Rift Crystals (including 6 Universal All-Altar) to ALL players?")) return
                   await runMutation("/api/players/grant-all-legendary-rift-crystals", { method: "POST" }, "Granted 222 crystals to all players")

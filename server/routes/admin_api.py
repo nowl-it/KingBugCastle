@@ -260,6 +260,25 @@ def register(app, srv):
         srv.save_state(st)
         return {"ok": True, "count": len(st["riftCrystals"])}
 
+    @app.post("/admin/api/altars/grant-premium")
+    async def admin_grant_premium_altars():
+        st = active_state()
+        st["rogueLikeBoughtDlcs"] = list(srv.ALL_ROGUE_LIKE_DLCS)
+        inv = st.setdefault("inventory", {"itemIds": [], "counts": []})
+        item_ids = inv.setdefault("itemIds", [])
+        counts = inv.setdefault("counts", [])
+        for dlc_item_id in [2400, 2401, 2410, 2411, 2420, 2421, 2430, 2440]:
+            if dlc_item_id not in item_ids:
+                item_ids.append(dlc_item_id)
+                counts.append(1)
+            else:
+                idx = item_ids.index(dlc_item_id)
+                counts[idx] = max(counts[idx], 1)
+        st["rogueLikeBuildings"] = [100, 101, 102, 103, 104, 105, 106, 107, 108]
+        st["buildingPoints"] = max(st.get("buildingPoints", 25), 25)
+        srv.save_state(st)
+        return {"ok": True, "count": len(srv.ALL_ROGUE_LIKE_DLCS)}
+
     @app.post("/admin/api/state/reload")
     async def admin_reload_state():
         active_state()

@@ -441,6 +441,8 @@ async def api_player_macro(pid: str, body: dict):
         _grant_rift_collection_to_player(st, wipe_test_equip=True)
     elif macro == "grant_all_skins":
         _grant_all_skins_to_player(st)
+    elif macro == "grant_premium_altars":
+        _grant_premium_altars_to_player(st)
     elif macro == "toggle_infinity_rift":
         st["infinityRiftEnergy"] = not st.get("infinityRiftEnergy", False)
         if st["infinityRiftEnergy"]:
@@ -682,6 +684,49 @@ async def api_grant_all_players_legendary_rift_crystals(body: dict = None):
         playerdb.save(uid, st)
         count += 1
     return {"ok": True, "migratedPlayers": count, "crystalsPerPlayer": 216}
+
+
+def _grant_premium_altars_to_player(st):
+    dlcs = [
+        {"dlc": 2400, "tier": 2},  # Altar of Death (6)
+        {"dlc": 2410, "tier": 2},  # Altar of Immortality / Undead (7)
+        {"dlc": 2420, "tier": 2},  # Altar of Domination (8)
+        {"dlc": 2430, "tier": 2},  # Hero/Blacksmith/Blood Altars Premium
+        {"dlc": 2440, "tier": 2},  # Giant/Mage/Greed Altars Premium
+    ]
+    st["rogueLikeBoughtDlcs"] = dlcs
+    inv = st.setdefault("inventory", {"itemIds": [], "counts": []})
+    item_ids = inv.setdefault("itemIds", [])
+    counts = inv.setdefault("counts", [])
+    for dlc_item_id in [2400, 2401, 2410, 2411, 2420, 2421, 2430, 2440]:
+        if dlc_item_id not in item_ids:
+            item_ids.append(dlc_item_id)
+            counts.append(1)
+        else:
+            idx = item_ids.index(dlc_item_id)
+            counts[idx] = max(counts[idx], 1)
+    st["rogueLikeBuildings"] = [100, 101, 102, 103, 104, 105, 106, 107, 108]
+    st["buildingPoints"] = max(st.get("buildingPoints", 25), 25)
+
+
+@app.post("/api/player/{pid}/grant-premium-altars")
+async def api_grant_premium_altars(pid: str):
+    st = _read_state(pid)
+    _grant_premium_altars_to_player(st)
+    _write_state(pid, st)
+    return {"ok": True, "rogueLikeBoughtDlcs": st.get("rogueLikeBoughtDlcs", [])}
+
+
+@app.post("/api/players/grant-all-premium-altars")
+async def api_grant_all_players_premium_altars():
+    count = 0
+    for uid, st, _ in playerdb.all_players():
+        if not st:
+            continue
+        _grant_premium_altars_to_player(st)
+        playerdb.save(uid, st)
+        count += 1
+    return {"ok": True, "playersUpdated": count}
 
 
 # --- inventory --------------------------------------------------------------
