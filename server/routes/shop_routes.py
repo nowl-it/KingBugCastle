@@ -34,9 +34,15 @@ def _gacha_keys(st):
     so the client's GachaKey.id is the shop item id, and every banner sharing the
     scroll (all pickup gachas share 305) counts the same entry."""
     keys = st.setdefault("gachaKeys", {})
-    from server import ALL_ITEM_IDS, INV_COUNT
+    inv = st.get("inventory", {})
+    inv_ids = inv.get("itemIds", [])
+    inv_counts = inv.get("counts", [])
+    from server import ALL_ITEM_IDS
     for k in ALL_ITEM_IDS:
-        keys.setdefault(str(k), INV_COUNT)
+        ks = str(k)
+        if ks not in keys:
+            idx = inv_ids.index(k) if k in inv_ids else -1
+            keys[ks] = inv_counts[idx] if idx >= 0 else 0
     return keys
 
 

@@ -379,6 +379,7 @@ async def api_player_macro(pid: str, body: dict):
             "itemIds": list(server.ALL_ITEM_IDS),
             "counts": [99999] * len(server.ALL_ITEM_IDS)
         }
+        st["gachaKeys"] = {str(k): 99999 for k in server.ALL_ITEM_IDS}
     elif macro == "max_resources":
         st["gold"] = 290909
         st["cash"] = 290909
