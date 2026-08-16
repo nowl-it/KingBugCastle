@@ -22,6 +22,20 @@ from state import save_state
 
 srv = None  # Live server module, injected via register()
 
+
+def _empty_reward_list_response():
+    """Non-null RewardListResponseData.
+
+    The client's coupon-upgrade coroutine calls
+    GameManager.HandleRewardListResponseData(response.rewardListResponseData)
+    unconditionally (field 0x40 of RiftWeaponResultResponseModel); a null object
+    throws NullReferenceException and kills the coroutine before SetResult, so
+    the upgrade result panel never animates. An empty rewardList is benign.
+    """
+    return {"rewardList": [], "artifactResult": None, "treasureResult": None,
+            "accessoryResult": None}
+
+
 DUST_ITEM_ID = 8000
 ALL_RIFT_WEAPON_IDS = [10000, 11000, 12000, 13000, 14000, 15000]
 RIFT_BUILDING_COUNT = 9  # 9 altars in Buildings.xml (indices 0..8)
@@ -559,7 +573,7 @@ def r_rift_weapon_upgrade(body, st):
         return {
             "riftWeapons": st.get("riftWeapons", []),
             "deletedRiftWeapons": [],
-            "rewardListResponseData": None,
+            "rewardListResponseData": _empty_reward_list_response(),
             "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0),
             "upgradeState": 1,
@@ -591,7 +605,7 @@ def r_rift_weapon_upgrade(body, st):
                 return {
                     "riftWeapons": st.get("riftWeapons", []),
                     "deletedRiftWeapons": [],
-                    "rewardListResponseData": None,
+                    "rewardListResponseData": _empty_reward_list_response(),
                     "playerGold": st.get("gold", 0),
                     "playerCash": st.get("cash", 0),
                     "upgradeState": 1,
@@ -604,7 +618,7 @@ def r_rift_weapon_upgrade(body, st):
                 return {
                     "riftWeapons": st.get("riftWeapons", []),
                     "deletedRiftWeapons": [],
-                    "rewardListResponseData": None,
+                    "rewardListResponseData": _empty_reward_list_response(),
                     "playerGold": st.get("gold", 0),
                     "playerCash": st.get("cash", 0),
                     "upgradeState": 1,
@@ -616,7 +630,7 @@ def r_rift_weapon_upgrade(body, st):
             return {
                 "riftWeapons": st.get("riftWeapons", []),
                 "deletedRiftWeapons": [],
-                "rewardListResponseData": None,
+                "rewardListResponseData": _empty_reward_list_response(),
                 "playerGold": st.get("gold", 0),
                 "playerCash": st.get("cash", 0),
                 "upgradeState": 0,
@@ -632,7 +646,7 @@ def r_rift_weapon_upgrade(body, st):
                 return {
                     "riftWeapons": st.get("riftWeapons", []),
                     "deletedRiftWeapons": [],
-                    "rewardListResponseData": None,
+                    "rewardListResponseData": _empty_reward_list_response(),
                     "playerGold": st.get("gold", 0),
                     "playerCash": st.get("cash", 0),
                     "upgradeState": 1,
@@ -644,7 +658,7 @@ def r_rift_weapon_upgrade(body, st):
             return {
                 "riftWeapons": st.get("riftWeapons", []),
                 "deletedRiftWeapons": [],
-                "rewardListResponseData": None,
+                "rewardListResponseData": _empty_reward_list_response(),
                 "playerGold": st.get("gold", 0),
                 "playerCash": st.get("cash", 0),
                 "upgradeState": 0,
@@ -655,7 +669,7 @@ def r_rift_weapon_upgrade(body, st):
         return {
             "riftWeapons": st.get("riftWeapons", []),
             "deletedRiftWeapons": [],
-            "rewardListResponseData": None,
+            "rewardListResponseData": _empty_reward_list_response(),
             "playerGold": st.get("gold", 0),
             "playerCash": st.get("cash", 0),
             "upgradeState": 1,

@@ -137,6 +137,45 @@ def test_cash_protection_upgrade():
     print("ok test_cash_protection_upgrade")
 
 
+def test_coupon_upgrade_reward_list_not_null():
+    """Coupon (useItemId) responses must carry a non-null rewardListResponseData.
+
+    The client's coupon coroutine calls GameManager.HandleRewardListResponseData(
+    response.rewardListResponseData) unconditionally; null throws
+    NullReferenceException, killing the coroutine before SetResult — so the
+    upgrade result panel never animates and the new level only shows after
+    re-entering the forge.
+    """
+    st = _fresh_state()
+    weapon = st["riftWeapons"][0]
+    weapon["level"] = 1
+    weapon["broken"] = False
+    inv = st.setdefault("inventory", {"itemIds": [], "counts": []})
+    if 8133 in inv["itemIds"]:
+        inv["counts"][inv["itemIds"].index(8133)] = 1
+    else:
+        inv["itemIds"].append(8133)
+        inv["counts"].append(1)
+    server.save_state(st)
+
+    old_srv, rift.srv = rift.srv, server
+    try:
+        res = rift.r_rift_weapon_upgrade({"riftWeaponId": weapon["id"], "useItemId": 8133}, st)
+        assert res["upgradeState"] == 0
+        assert weapon["level"] > 1
+        assert res["rewardListResponseData"] is not None
+        assert res["rewardListResponseData"]["rewardList"] == []
+
+        # Fail path (coupon already consumed) must also be non-null
+        res2 = rift.r_rift_weapon_upgrade({"riftWeaponId": weapon["id"], "useItemId": 8133}, st)
+        assert res2["upgradeState"] == 1
+        assert res2["rewardListResponseData"] is not None
+    finally:
+        rift.srv = old_srv
+
+    print("ok test_coupon_upgrade_reward_list_not_null")
+
+
 def test_substat_reroll():
     st = _fresh_state()
     weapon = st["riftWeapons"][0]
