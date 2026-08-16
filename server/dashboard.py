@@ -231,6 +231,13 @@ def api_catalog():
     return {"catalog": CATALOG, "grantable": GRANTABLE_TYPES, "displayOnly": DISPLAY_ONLY_TYPES}
 
 
+@app.get("/api/game-data")
+def api_game_data():
+    """Full master-data browser for the Game Data tab: every hero, item, relic,
+    treasure, accessory and skin with id, type, name and (where extracted) art."""
+    return gamedata.game_data()
+
+
 @app.get("/api/stats/realtime")
 def api_stats_realtime():
     import time

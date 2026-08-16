@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useStatus, useWhoAmI, runMutation } from "@/lib/api"
-import { LayoutDashboard, Users, UserRound, Package, Diamond, Mail, Server, Settings, LogOut, Menu, X } from "lucide-react"
+import { LayoutDashboard, Users, UserRound, Package, Diamond, Mail, Server, Settings, LogOut, Menu, X, Database } from "lucide-react"
 
 const NAV_ITEMS = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { href: "/heroes", label: "Heroes", icon: UserRound },
   { href: "/items", label: "Items", icon: Package },
   { href: "/accessories", label: "Accessories", icon: Diamond },
+  { href: "/gamedata", label: "Game Data", icon: Database },
   { href: "/mail", label: "Mail", icon: Mail },
   { href: "/server", label: "Server Diagnostics", icon: Server },
   { href: "/account", label: "Account Settings", icon: Settings },

@@ -300,6 +300,63 @@ def summary():
             "buffs": len(BUFF_NAMES), "skills": len(SKILL_NAMES)}
 
 
+# --- game-data browser (admin "Game Data" tab) -----------------------------
+def game_data():
+    """Everything in master data, grouped, for the admin Game Data tab.
+
+    Each entry: {id, type, name, ...}. `image` is only set for heroes/items, the
+    only categories with extracted webp art (webui-next/public/assets)."""
+    skins = []
+    for s in _parse("Skins.xml"):
+        sid = s.get("ID")
+        if not sid:
+            continue
+        if not s.findtext("Prefab") and not s.findtext("Sprite"):
+            continue          # inherit-only stub (e.g. 1000099) — no visual content
+        skins.append({
+            "id": int(sid),
+            "type": "Skin",
+            "name": STRINGS.get(f"SkinName_{sid}") or s.findtext("Name") or f"Skin {sid}",
+            "unit": int(s.get("Unit") or 0),
+            "unitName": hero_name(s.get("Unit") or 0),
+            "grade": s.findtext("Grade"),
+            "cashPrice": s.findtext("CashPrice"),
+            "canBuy": (s.findtext("CanBuy") or "").lower() == "true",
+            "image": None,
+        })
+    return {
+        "Hero": sorted((dict(h, image=f"/assets/heroes/{h['id']}.webp")
+                        for h in HEROES.values()), key=lambda x: x["id"]),
+        "Item": sorted((dict(i, image=f"/assets/items/{i['id']}.webp")
+                        for i in ITEMS.values()), key=lambda x: x["id"]),
+        "Relic": sorted(({
+            "id": int(r.get("ID")),
+            "type": "Relic",
+            "name": STRINGS.get(f"ArtifactName_{r.get('ID')}", f"Relic {r.get('ID')}"),
+            "fromType": r.findtext("FromType") or "?",
+            "level": r.findtext("Level") or "?",
+            "image": None,
+        } for r in _parse("Artifacts.xml") if r.get("ID")), key=lambda x: x["id"]),
+        "Treasure": sorted(({
+            "id": int(t.get("ID")),
+            "type": "Treasure",
+            "name": STRINGS.get(f"TreasureName_{t.get('ID')}", f"Treasure {t.get('ID')}"),
+            "rarity": t.findtext("Rarity") or "?",
+            "image": None,
+        } for t in _parse("Treasures.xml") if t.get("ID")), key=lambda x: x["id"]),
+        "Accessory": sorted(({
+            "id": int(a.get("ID")),
+            "type": "Accessory",
+            "name": STRINGS.get(f"AccessoryName_{a.get('ID')}", f"Accessory {a.get('ID')}"),
+            "synergy": synergy_name(int(a.findtext("Synergy") or 0)),
+            "rarity": RARITY_NAMES.get(int(a.findtext("Rarity") or -1), "?"),
+            "image": None,
+        } for a in _parse("FixedAccessoryPresets.xml") if a.get("ID")),
+                          key=lambda x: x["id"]),
+        "Skin": sorted(skins, key=lambda x: x["id"]),
+    }
+
+
 if __name__ == "__main__":
     # Self-check: the stat-key resolution is the part that silently produces wrong
     # labels, so pin the two that were historically misread plus one of each shape.
