@@ -552,6 +552,8 @@ def r_rift_weapon_upgrade(body, st):
     use_item_id = body_int(body.get("useItemId"), 0)
     preset_idx = body_int(body.get("equipPreset"), 0)
 
+    admin_log(f"[RIFT UPGRADE] weaponId={weapon_id} useItemId={use_item_id} useCash={use_cash}")
+
     weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
     if weapon is None:
         return {
