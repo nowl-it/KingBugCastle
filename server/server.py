@@ -981,7 +981,69 @@ def r_card_fast_upgrade(body, st):
         "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
     }
 
+
+def r_card_use_exp_item(body, st):
+    unit_id = body.get("unitId", 0)
+    count = body_int(body.get("count"), 1, lo=1)
+    
+    # Deduct item 151 (Exp Box) or 156 (King Exp Box). We assume 151 for now.
+    _take_item(st, 151, count)
+    
+    cards = st.setdefault("cards", {})
+    key = str(unit_id)
+    if key in cards:
+        cards[key]["level"] += 1
+        if cards[key]["level"] >= 16 and cards[key].get("potentialTier", 0) == 0:
+            cards[key]["potentialTier"] = 1
+        save_state(st)
+    c = cards.get(key, {"unitId": unit_id, "level": 1})
+    tier = c.get("potentialTier", 0)
+    if c["level"] >= 16 and tier == 0:
+        tier = 1
+    return {
+        "unitId": c["unitId"], "level": c["level"], "exp": c.get("exp", 0),
+        "potentialTier": tier,
+        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
+        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
+        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
+        "soul": c.get("soul", 0),
+        "originLevel": c["level"], "originPotentialTier": tier,
+        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
+    }
+
+def r_card_use_soul_item(body, st):
+    unit_id = body.get("unitId", 0)
+    count = body_int(body.get("count"), 1, lo=1)
+    cards = st.setdefault("cards", {})
+    key = str(unit_id)
+    
+    if key in cards:
+        # Deduct soul
+        current_soul = cards[key].get("soul", 0)
+        cards[key]["soul"] = max(0, current_soul - count)
+        
+        cards[key]["level"] += 1
+        if cards[key]["level"] >= 16 and cards[key].get("potentialTier", 0) == 0:
+            cards[key]["potentialTier"] = 1
+        save_state(st)
+    c = cards.get(key, {"unitId": unit_id, "level": 1})
+    tier = c.get("potentialTier", 0)
+    if c["level"] >= 16 and tier == 0:
+        tier = 1
+    return {
+        "unitId": c["unitId"], "level": c["level"], "exp": c.get("exp", 0),
+        "potentialTier": tier,
+        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
+        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
+        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
+        "soul": c.get("soul", 0),
+        "originLevel": c["level"], "originPotentialTier": tier,
+        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
+    }
+
 def r_card_use_candy(body, st):
+    with open("scroll_debug.txt", "a") as f:
+        f.write(f"r_card_use_candy: {body}\n")
     unit_id = body.get("unitId", 0)
     cards = st.setdefault("cards", {})
     key = str(unit_id)
@@ -1139,8 +1201,15 @@ def r_deck_set_all_potential(body, st):
     return r_deck({}, st)
 
 def r_player_inventory(body, st):
+    from routes.shop_routes import _get_gacha_key_ids
     inv = st.get("inventory", {"itemIds": [], "counts": []})
-    return {"itemIds": inv.get("itemIds", []), "counts": inv.get("counts", [])}
+    gacha_keys = _get_gacha_key_ids()
+    out_ids, out_counts = [], []
+    for i, c in zip(inv.get("itemIds", []), inv.get("counts", [])):
+        if i not in gacha_keys:
+            out_ids.append(i)
+            out_counts.append(c)
+    return {"itemIds": out_ids, "counts": out_counts}
 
 def _inventory(st):
     return st.setdefault("inventory", {"itemIds": [], "counts": []})
@@ -1148,9 +1217,11 @@ def _inventory(st):
 def _inventory_models(st):
     """The inventory as List<InventoryItem> ({id, count}) - the shape the use-item
     responses return, as opposed to the parallel-array shape /player/getInventory uses."""
+    from routes.shop_routes import _get_gacha_key_ids
     inv = _inventory(st)
+    gacha_keys = _get_gacha_key_ids()
     return [{"id": i, "count": c}
-            for i, c in zip(inv.get("itemIds", []), inv.get("counts", []))]
+            for i, c in zip(inv.get("itemIds", []), inv.get("counts", [])) if i not in gacha_keys]
 
 def _item_count(st, item_id):
     inv = _inventory(st)
@@ -1246,7 +1317,16 @@ def r_use_reward_box(body, st):
             
     if any(r.get("type") == "Accessory" for r in rewards):
         from routes.accessory import _make_result_response
-        resp["rewardList"]["accessoryResult"] = _make_result_response(st)
+        new_ids = {r["id"] for r in rewards if r.get("type") == "Accessory"}
+        all_accs = st.get("accessories", [])
+        resp["rewardList"]["accessoryResult"] = {
+            "accessories": [a for a in all_accs if a.get("id") in new_ids],
+            "deletedAccessories": [],
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "inventories": _inventory_models(st),
+            "addedExpItems": 0,
+        }
 
     if any(r.get("type") == "Artifact" for r in rewards):
         art_ids = [r["id"] for r in rewards if r.get("type") == "Artifact"]
@@ -2531,8 +2611,8 @@ DYNAMIC_OVERRIDES = {
     "/card/fast-upgrade": r_card_fast_upgrade,
     "/card/upgradePotentialTier": r_card_upgrade_potential,
     "/card/useCandy": r_card_use_candy,
-    "/card/useUnitExpItem": r_card_use_candy,
-    "/card/useUnitSoulItem": r_card_use_candy,
+    "/card/useUnitExpItem": r_card_use_exp_item,
+    "/card/useUnitSoulItem": r_card_use_soul_item,
     "/card/useUnitSoulItemToExp": r_card_use_candy,
     "/card/useUnitSoulToExp": r_card_use_candy,
     "/card/buySkin": r_card_buy_skin,
