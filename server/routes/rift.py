@@ -638,10 +638,12 @@ def r_rift_weapon_reroll(body, st):
     """POST /rift-weapon/re-roll -> RiftWeaponResultResponseModel."""
     ensure_rift_state(st)
     data = _parse_xml()
+    admin_log(f"[RIFT REROLL] body keys={sorted(body.keys()) if isinstance(body, dict) else body}")
 
     weapon_id = body_int(body.get("riftWeaponId"), 0)
     target_idx = body_int(body.get("targetIdx"), 0)
     target_option_id = body_int(body.get("targetOptionId"), 0)
+    admin_log(f"[RIFT REROLL] weapon_id={weapon_id} target_idx={target_idx} target_option_id={target_option_id}")
     preset_idx = body_int(body.get("equipPreset"), 0)
 
     weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
