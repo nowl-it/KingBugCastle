@@ -29,6 +29,9 @@ PY_BIN="python3"
 echo "[4/4] Triggering Zero-Downtime Graceful Reload..."
 ./serve_public.sh reload
 
+echo "[4b/4] Restarting dashboard (it has no reload path)..."
+sudo -n systemctl restart kgc-dashboard.service 2>/dev/null || echo "    (dashboard restart skipped - not a systemd service here)"
+
 echo "[5/5] Checking server health on port 8080..."
 sleep 2
 COMMIT_MSG=$(git log -1 --format='%s' HEAD)
