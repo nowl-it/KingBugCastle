@@ -7,7 +7,9 @@ cd "$(dirname "$0")"
 
 echo "=== [KGC Zero-Downtime Deploy Hook] ==="
 echo "[1/4] Pulling latest code from main..."
+git stash --include-untracked 2>/dev/null || true
 git pull --rebase origin main || git pull origin main
+git stash pop 2>/dev/null || true
 
 echo "[2/4] Verifying Python virtual environment..."
 VENV_DIR=""

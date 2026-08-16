@@ -52,6 +52,8 @@ case "${1:-}" in
       sleep 2
       if kill -0 "$PID" 2>/dev/null; then
         echo "[✓] Zero-downtime reload complete! New workers spawned, active requests preserved."
+        DISCORD_DIR="$(dirname "$0")"
+        [ -x "$DISCORD_DIR/discord_notify.sh" ] && "$DISCORD_DIR/discord_notify.sh" "🔄 **Server reloaded!** Zero-downtime, no player disconnects." &
         exit 0
       fi
     fi
@@ -140,6 +142,8 @@ echo ""
 if [ "$IS_BG" = "1" ]; then
   sleep 2
   echo "[✓] Server process running in background (PID: $P1)."
+  DISCORD_DIR="$(dirname "$0")"
+  [ -x "$DISCORD_DIR/discord_notify.sh" ] && "$DISCORD_DIR/discord_notify.sh" "🔄 **Server started/restarted!** PID: $P1" &
   exit 0
 fi
 
