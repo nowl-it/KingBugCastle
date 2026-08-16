@@ -1283,7 +1283,7 @@ def _open_reward_box(st, item_id, select_idx=None, times=1):
 # and a nonsense count in the results popup (what "Temple of Challenge Reward Chest
 # gives x999 of the wrong thing" was). The server's own vocabulary is shorter and used
 # by _grant_reward; translate at the wire boundary only, so state keys never move.
-_WIRE_TYPE = {"Item": "InventoryItem", "Unit": "Card", "UnitSoul": "CardSoul", "Accessory": "Equip", "FixedAccessory": "Equip"}
+_WIRE_TYPE = {"Item": "InventoryItem", "Unit": "Card", "UnitSoul": "CardSoul"}
 
 def _wire_rewards(rewards):
     return [{**r, "type": _WIRE_TYPE.get(r.get("type"), r.get("type"))} for r in rewards]
@@ -1311,15 +1311,19 @@ def r_use_reward_box(body, st):
                                body_int(body.get("count"), 1, lo=1))
     save_state(st)
     
-    resp = {"rewardList": _reward_list_data(rewards),
-            "addedRewardList": _reward_list_data([]),
+    non_acc_rewards = [r for r in rewards if r.get("type") != "Accessory"]
+    acc_rewards = [r for r in rewards if r.get("type") == "Accessory"]
+    # The client reads the result panel from UseRewardBoxInventoryItemResponseModel.addedRewardList
+    # (field at offset 0x38), NOT rewardList (offset 0x30).  The game's MoveNext state machine
+    # passes [x21, #0x38] to ShowResultPanel and all Handle*Result calls.
+    resp = {"rewardList": _reward_list_data([]),
+            "addedRewardList": _reward_list_data(non_acc_rewards),
             "boxRewardInventory": {"id": item_id, "count": _item_count(st, item_id)}}
             
-    if any(r.get("type") == "Accessory" for r in rewards):
-        from routes.accessory import _make_result_response
-        new_ids = {r["id"] for r in rewards if r.get("type") == "Accessory"}
+    if acc_rewards:
+        new_ids = {r["id"] for r in acc_rewards}
         all_accs = st.get("accessories", [])
-        resp["rewardList"]["accessoryResult"] = {
+        resp["addedRewardList"]["accessoryResult"] = {
             "accessories": [a for a in all_accs if a.get("id") in new_ids],
             "deletedAccessories": [],
             "playerGold": st.get("gold", 0),
@@ -1333,7 +1337,7 @@ def r_use_reward_box(body, st):
         arts = get_st_artifacts(st)
         new_arts = [a for a in arts if a.get("artifactId") in art_ids]
         
-        resp["rewardList"]["artifactResult"] = {
+        resp["addedRewardList"]["artifactResult"] = {
             "results": new_arts,
             "polishItemAdded": False,
             "playerGold": st.get("gold", 0),
