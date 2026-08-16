@@ -49,6 +49,20 @@ case "${1:-}" in
       PID=$(cat "$PID_FILE")
       echo "[+] Sending SIGHUP to master process (PID: $PID) for Zero-Downtime reload..."
       kill -HUP "$PID"
+
+      # Also restart TLS uvicorn (separate process, not managed by gunicorn SIGHUP)
+      TLS_PID=$(pgrep -f "uvicorn.*server:app.*--port.*${TLS_PORT}" 2>/dev/null | head -1 || true)
+      if [ -n "$TLS_PID" ]; then
+        echo "[+] Restarting TLS uvicorn (PID: $TLS_PID)..."
+        kill "$TLS_PID" 2>/dev/null || true
+        sleep 1
+        if [ -f key.pem ] && [ -f cert.pem ]; then
+          nohup "$UVICORN" server:app --host 0.0.0.0 --port "${TLS_PORT}" \
+              --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
+          echo "[✓] TLS uvicorn restarted (PID: $!)"
+        fi
+      fi
+
       sleep 2
       if kill -0 "$PID" 2>/dev/null; then
         echo "[✓] Zero-downtime reload complete! New workers spawned, active requests preserved."
