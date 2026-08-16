@@ -52,8 +52,20 @@ if not os.path.isdir(UI_DIR):
 CONFIG_FILE = os.path.join(BASE, "data", "response_config.json")
 SERVER_URL = os.environ.get("KGC_SERVER_URL", "http://127.0.0.1:8080")
 ADMIN_TOKEN = os.environ.get("KGC_ADMIN_TOKEN")
+TRUST_PROXY = os.environ.get("KGC_TRUST_PROXY") == "1"
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 _STATE_GATE = asyncio.Lock()
+
+
+def _client_ip(request):
+    """Real client address. Behind Cloudflare every request's client.host is the
+    same edge IP, so per-address limits (the login rate limiter) must key on the
+    forwarded header - but only when a proxy is the sole way in."""
+    peer = request.client.host if request.client else "-"
+    if not TRUST_PROXY:
+        return peer
+    fwd = request.headers.get("cf-connecting-ip") or request.headers.get("x-forwarded-for", "")
+    return fwd.split(",")[0].strip() or peer
 
 
 # --- guards -----------------------------------------------------------------
@@ -892,7 +904,7 @@ def api_login(request: Request, body: dict):
     """Password login. Rate-limited per source address: this endpoint is reachable
     from wherever the dashboard is, and a password is guessable in a way a 32-byte
     token is not."""
-    ip = request.client.host if request.client else "-"
+    ip = _client_ip(request)
     now = datetime.now().timestamp()
     hits = [t for t in _login_hits.get(ip, []) if now - t < 300]
     if len(hits) >= 10:
