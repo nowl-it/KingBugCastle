@@ -301,11 +301,22 @@ def summary():
 
 
 # --- game-data browser (admin "Game Data" tab) -----------------------------
+ASSET_DIR = os.path.join(os.path.dirname(BASE), "server", "webui-next", "public", "assets")
+
+
+def _has_art(cat, fname):
+    return os.path.exists(os.path.join(ASSET_DIR, cat, fname))
+
+
+def _art(cat, fname):
+    return f"/assets/{cat}/{fname}" if _has_art(cat, fname) else None
+
+
 def game_data():
     """Everything in master data, grouped, for the admin Game Data tab.
 
-    Each entry: {id, type, name, ...}. `image` is only set for heroes/items, the
-    only categories with extracted webp art (webui-next/public/assets)."""
+    Each entry: {id, type, name, ...}. `image` points to extracted webp art
+    (webui-next/public/assets) where available; None otherwise."""
     skins = []
     for s in _parse("Skins.xml"):
         sid = s.get("ID")
@@ -322,10 +333,10 @@ def game_data():
             "grade": s.findtext("Grade"),
             "cashPrice": s.findtext("CashPrice"),
             "canBuy": (s.findtext("CanBuy") or "").lower() == "true",
-            "image": None,
+            "image": _art("skins", f"{sid}.webp"),
         })
     return {
-        "Hero": sorted((dict(h, image=f"/assets/heroes/{h['id']}.webp")
+        "Hero": sorted((dict(h, type="Hero", image=f"/assets/heroes/{h['id']}.webp")
                         for h in HEROES.values()), key=lambda x: x["id"]),
         "Item": sorted((dict(i, image=f"/assets/items/{i['id']}.webp")
                         for i in ITEMS.values()), key=lambda x: x["id"]),
@@ -335,14 +346,14 @@ def game_data():
             "name": STRINGS.get(f"ArtifactName_{r.get('ID')}", f"Relic {r.get('ID')}"),
             "fromType": r.findtext("FromType") or "?",
             "level": r.findtext("Level") or "?",
-            "image": None,
+            "image": _art("relics", f"{r.get('ID')}.webp"),
         } for r in _parse("Artifacts.xml") if r.get("ID")), key=lambda x: x["id"]),
         "Treasure": sorted(({
             "id": int(t.get("ID")),
             "type": "Treasure",
             "name": STRINGS.get(f"TreasureName_{t.get('ID')}", f"Treasure {t.get('ID')}"),
             "rarity": t.findtext("Rarity") or "?",
-            "image": None,
+            "image": _art("treasures", f"{t.get('ID')}.webp"),
         } for t in _parse("Treasures.xml") if t.get("ID")), key=lambda x: x["id"]),
         "Accessory": sorted(({
             "id": int(a.get("ID")),
@@ -350,7 +361,7 @@ def game_data():
             "name": STRINGS.get(f"AccessoryName_{a.get('ID')}", f"Accessory {a.get('ID')}"),
             "synergy": synergy_name(int(a.findtext("Synergy") or 0)),
             "rarity": RARITY_NAMES.get(int(a.findtext("Rarity") or -1), "?"),
-            "image": None,
+            "image": _art("accessories", f"{a.get('ID')}.webp"),
         } for a in _parse("FixedAccessoryPresets.xml") if a.get("ID")),
                           key=lambda x: x["id"]),
         "Skin": sorted(skins, key=lambda x: x["id"]),

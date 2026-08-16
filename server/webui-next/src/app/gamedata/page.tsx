@@ -20,17 +20,22 @@ const TABS = [
 
 function Thumb({ entry }: { entry: any }) {
   const [broken, setBroken] = useState(false)
+  const cls = "h-14 w-14 shrink-0 rounded-lg border border-border bg-muted object-cover"
   if (entry.image && !broken) {
     return (
       <img
         src={entry.image}
         alt={entry.name}
         onError={() => setBroken(true)}
-        className="h-9 w-9 shrink-0 rounded-lg border border-border bg-muted object-cover"
+        className={cls}
       />
     )
   }
-  return <div className="h-9 w-9 shrink-0 rounded-lg border border-border bg-muted" />
+  return (
+    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border border-border bg-muted text-sm font-semibold text-muted-foreground">
+      {(entry.name || "?").slice(0, 2)}
+    </div>
+  )
 }
 
 export default function GameDataPage() {
@@ -108,7 +113,7 @@ export default function GameDataPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-12" />
+                  <TableHead className="w-16" />
                   <TableHead>ID</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Type</TableHead>
