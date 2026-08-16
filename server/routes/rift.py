@@ -640,6 +640,11 @@ def r_rift_weapon_reroll(body, st):
     data = _parse_xml()
     admin_log(f"[RIFT REROLL] body={body}")
 
+    # Unity may wrap request bodies in a "model" key — unwrap if present
+    if "model" in body and isinstance(body["model"], dict):
+        admin_log(f"[RIFT REROLL] unwrapping 'model' key: {body['model']}")
+        body = body["model"]
+
     weapon_id = body_int(body.get("riftWeaponId"), 0)
     target_idx = body_int(body.get("targetIdx"), 0)
     target_option_id = body_int(body.get("targetOptionId"), 0)
