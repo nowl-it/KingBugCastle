@@ -599,10 +599,12 @@ def admin_login(username, password):
     user still runs a hash, so response time does not leak which usernames exist."""
     import secrets
     with _conn() as c:
-        row = c.execute("SELECT pw_hash FROM admins WHERE username=?", (username or "",)).fetchone()
-    stored = row[0] if row else hash_password("\0decoy")
+        row = c.execute("SELECT username, pw_hash FROM admins WHERE username=? COLLATE NOCASE",
+                        (username or "",)).fetchone()
+    stored = row[1] if row else hash_password("\0decoy")
     if not verify_password(password or "", stored) or not row:
         return None
+    username = row[0]
     token = secrets.token_urlsafe(32)
     with _conn() as c:
         c.execute("INSERT INTO admin_sessions (token, username, created) VALUES (?,?,?)",

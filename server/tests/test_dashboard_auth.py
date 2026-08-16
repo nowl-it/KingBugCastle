@@ -112,6 +112,18 @@ def test_short_passwords_are_refused():
     assert playerdb.admin_count() == 0, "a rejected password still created the account"
 
 
+def test_username_case_is_ignored():
+    _reset()
+    playerdb.admin_create("NOwL", "correct horse")
+    c = REMOTE()
+    assert c.post("/api/auth/login",
+                  json={"username": "nowl", "password": "correct horse"}).status_code == 200, \
+        "username match is case-sensitive"
+    assert c.post("/api/auth/login",
+                  json={"username": "noWL", "password": "wrong"}).status_code == 401
+    _reset()
+
+
 def test_login_is_rate_limited():
     _reset()
     playerdb.admin_create("root", "correct horse")
