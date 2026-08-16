@@ -29,4 +29,7 @@ echo "[4/4] Triggering Zero-Downtime Graceful Reload..."
 
 echo "[5/5] Checking server health on port 8080..."
 sleep 2
+COMMIT_MSG=$(git log -1 --format='%s' HEAD)
+./discord_notify.sh "✅ **Deploy completed!** Branch: main
+\`$COMMIT_MSG\`"
 echo "=== [✓] Deployment finished with ZERO DOWNTIME! ==="

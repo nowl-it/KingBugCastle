@@ -553,7 +553,115 @@ def r_rift_weapon_upgrade(body, st):
     preset_idx = body_int(body.get("equipPreset"), 0)
 
     weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
-    if weapon is None or weapon.get("broken", False):
+    if weapon is None:
+        return {
+            "riftWeapons": st.get("riftWeapons", []),
+            "deletedRiftWeapons": [],
+            "rewardListResponseData": None,
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "upgradeState": 1,
+            "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+        }
+
+    # ── Coupon upgrade (Guaranteed Upgrade) — runs before broken guard ──
+    if use_item_id > 0:
+        # Look up the coupon item's SetRiftWeaponLevel / ResetRiftWeaponBroken
+        target_level = 0
+        reset_broken = False
+        try:
+            inv_xml = ET.parse(Path(XML_DIR) / "InventoryItems.xml")
+            for el in inv_xml.getroot().iter("InventoryItem"):
+                if el.attrib.get("ID") == str(use_item_id):
+                    sl = el.find("SetRiftWeaponLevel")
+                    if sl is not None and sl.text:
+                        target_level = int(sl.text)
+                    rb = el.find("ResetRiftWeaponBroken")
+                    if rb is not None and rb.text and rb.text.lower() == "true":
+                        reset_broken = True
+                    break
+        except Exception:
+            pass
+
+        # ResetRiftWeaponBroken (item 8200) — unbreak the weapon
+        if reset_broken:
+            if not weapon.get("broken", False):
+                return {
+                    "riftWeapons": st.get("riftWeapons", []),
+                    "deletedRiftWeapons": [],
+                    "rewardListResponseData": None,
+                    "playerGold": st.get("gold", 0),
+                    "playerCash": st.get("cash", 0),
+                    "upgradeState": 1,
+                    "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+                }
+            spent = 0
+            if srv:
+                spent = srv._take_item(st, use_item_id, 1)
+            if spent <= 0:
+                return {
+                    "riftWeapons": st.get("riftWeapons", []),
+                    "deletedRiftWeapons": [],
+                    "rewardListResponseData": None,
+                    "playerGold": st.get("gold", 0),
+                    "playerCash": st.get("cash", 0),
+                    "upgradeState": 1,
+                    "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+                }
+            weapon["broken"] = False
+            weapon["updatedAt"] = now_iso(0)
+            save_state(st)
+            return {
+                "riftWeapons": st.get("riftWeapons", []),
+                "deletedRiftWeapons": [],
+                "rewardListResponseData": None,
+                "playerGold": st.get("gold", 0),
+                "playerCash": st.get("cash", 0),
+                "upgradeState": 0,
+                "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+            }
+
+        # SetRiftWeaponLevel (items 8120-8133) — set weapon to specific level
+        if target_level > 0:
+            spent = 0
+            if srv:
+                spent = srv._take_item(st, use_item_id, 1)
+            if spent <= 0:
+                return {
+                    "riftWeapons": st.get("riftWeapons", []),
+                    "deletedRiftWeapons": [],
+                    "rewardListResponseData": None,
+                    "playerGold": st.get("gold", 0),
+                    "playerCash": st.get("cash", 0),
+                    "upgradeState": 1,
+                    "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+                }
+            weapon["level"] = target_level
+            weapon["updatedAt"] = now_iso(0)
+            save_state(st)
+            return {
+                "riftWeapons": st.get("riftWeapons", []),
+                "deletedRiftWeapons": [],
+                "rewardListResponseData": None,
+                "playerGold": st.get("gold", 0),
+                "playerCash": st.get("cash", 0),
+                "upgradeState": 0,
+                "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+            }
+
+        # Unknown coupon item — fail
+        return {
+            "riftWeapons": st.get("riftWeapons", []),
+            "deletedRiftWeapons": [],
+            "rewardListResponseData": None,
+            "playerGold": st.get("gold", 0),
+            "playerCash": st.get("cash", 0),
+            "upgradeState": 1,
+            "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
+        }
+
+    # ── Normal upgrade (requires weapon not broken) ──────────────────────
+    if weapon.get("broken", False):
         return {
             "riftWeapons": st.get("riftWeapons", []),
             "deletedRiftWeapons": [],
@@ -569,48 +677,6 @@ def r_rift_weapon_upgrade(body, st):
     min_level = 15 if rarity == 3 else (5 if rarity == 2 else 1)
     max_level = 40 if rarity == 3 else (15 if rarity == 2 else 10)
 
-    # ── Coupon upgrade (Guaranteed Upgrade) ──────────────────────────────
-    if use_item_id > 0:
-        MAX_COUPON_LEVEL = 30
-        if cur_level >= MAX_COUPON_LEVEL:
-            return {
-                "riftWeapons": st.get("riftWeapons", []),
-                "deletedRiftWeapons": [],
-                "rewardListResponseData": None,
-                "playerGold": st.get("gold", 0),
-                "playerCash": st.get("cash", 0),
-                "upgradeState": 1,
-                "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
-            }
-        # Consume the coupon item
-        spent = 0
-        if srv:
-            spent = srv._take_item(st, use_item_id, 1)
-        if spent <= 0:
-            return {
-                "riftWeapons": st.get("riftWeapons", []),
-                "deletedRiftWeapons": [],
-                "rewardListResponseData": None,
-                "playerGold": st.get("gold", 0),
-                "playerCash": st.get("cash", 0),
-                "upgradeState": 1,
-                "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
-            }
-        # Always SUCCESS — no RNG, no gold/dust cost
-        weapon["level"] = min(MAX_COUPON_LEVEL, cur_level + 1)
-        weapon["updatedAt"] = now_iso(0)
-        save_state(st)
-        return {
-            "riftWeapons": st.get("riftWeapons", []),
-            "deletedRiftWeapons": [],
-            "rewardListResponseData": None,
-            "playerGold": st.get("gold", 0),
-            "playerCash": st.get("cash", 0),
-            "upgradeState": 0,
-            "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
-        }
-
-    # ── Normal upgrade ──────────────────────────────────────────────────
     if cur_level >= max_level:
         return {
             "riftWeapons": st.get("riftWeapons", []),
