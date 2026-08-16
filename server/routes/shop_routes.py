@@ -173,6 +173,7 @@ def _shop_buy(body, st):
             keys_held -= amount
             if key_item:
                 keys[str(key_item)] = keys_held
+                srv._take_item(st, int(key_item), amount)
             gacha_keys = [{"id": int(key_item), "count": keys_held}] if key_item else []
         else:
             cost_per_pull = 150 if gacha_id in (7000, 103, 201) else 100
@@ -413,7 +414,12 @@ def _shop_buy(body, st):
                 else:
                     keys[str(item_id)] = keys_held
                 gacha_keys = [{"id": int(key_item or item_id), "count": keys_held}]
-                
+
+                # Spend the scrolls from the inventory too - gachaKeys is re-derived
+                # from the inventory on every sync, so a keys-only decrement here is
+                # silently undone (the reported "Common Scroll count never drops").
+                srv._take_item(st, int(key_item or item_id), amount)
+
                 # Refund the cost we took earlier!
                 if kind == "gold":
                     st["gold"] = st.get("gold", 0) + cost

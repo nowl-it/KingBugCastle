@@ -19,6 +19,7 @@ for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
 import playerdb
 playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
 
+import gacha
 import shop
 from tests.seed import one_account
 one_account()          # multiplayer needs a session; load_state() has no fallback
@@ -204,8 +205,14 @@ def check_direct_gacha_banner_rolls():
     for gid in (300, 303, 350, 3999, 7000):
         out = server.r_shop({"gachaId": gid, "buyAmount": 1}, st)
         st = server.load_state()
-        assert "gachas" in out and len(out["gachas"]) == 1, f"gacha {gid} failed to roll: {out}"
         assert "gachaRewardResponseData" in out
+        g_el = gacha._get_gacha(gid, server.XML_DIR)
+        if g_el is not None and g_el.findtext("Type") == "ArtifactGacha":
+            # Artifact gachas answer through gachaRewardResponseData only -
+            # shop_routes deliberately omits `gachas` for them.
+            assert out["gachaRewardResponseData"].get("artifactResult"), f"gacha {gid} artifactResult missing"
+            continue
+        assert "gachas" in out and len(out["gachas"]) == 1, f"gacha {gid} failed to roll: {out}"
         g_res = out.get("gachas")[0]
         assert g_res.get("gacha") or g_res.get("rewardGacha"), f"gacha {gid} returned empty pull"
     print("ok direct gacha rolls: 300 (Hero), 303 (Legacy), 350 (Artifact), 3999 (Treasure), 7000 (Skin) rolled successfully")
@@ -240,6 +247,27 @@ def check_dimensional_summon_pity_sync():
     print(f"ok dimensional summon pity sync: initial stack 10 -> GET /shop stack 10 -> 10x roll -> stack {s8001}")
 
 
+def check_scroll_use_consumes_inventory():
+    """Rolling with a Common Scroll (itemId+gachaId, e.g. 300) must spend the scroll
+    from the inventory. gachaKeys is re-derived from the inventory on every sync, so
+    a keys-only decrement is silently undone - the "scroll count never drops" bug."""
+    st = _fresh(gold=10 ** 6)
+    st["inventory"] = {"itemIds": [300], "counts": [5]}
+    server.save_state(st)
+
+    out = server.r_shop({"itemId": 300, "gachaId": 300, "buyAmount": 2}, st)
+    st = server.load_state()
+    inv = dict(zip(st["inventory"]["itemIds"], st["inventory"]["counts"]))
+    assert inv.get(300) == 3, f"inventory scroll count did not drop: {inv}"
+    keys = {k["id"]: k["count"] for k in out.get("gachaKeys", [])}
+    assert keys.get(300) == 3, f"gachaKeys did not drop either: {keys}"
+
+    again = server.r_shop({}, st)
+    keys = {k["id"]: k["count"] for k in again.get("gachaKeys", [])}
+    assert keys.get(300) == 3, f"count bounced back after resync: {keys}"
+    print("ok scroll use: inventory 5 -> 3, survives the gachaKeys resync")
+
+
 if __name__ == "__main__":
     check_listing_not_empty()
     check_gold_purchase_charges_and_grants()
@@ -251,5 +279,6 @@ if __name__ == "__main__":
     check_gacha_scroll_buy_does_not_freeze()
     check_direct_gacha_banner_rolls()
     check_dimensional_summon_pity_sync()
+    check_scroll_use_consumes_inventory()
     print("\nall shop checks passed")
 
