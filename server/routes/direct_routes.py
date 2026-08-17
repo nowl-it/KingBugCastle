@@ -99,7 +99,12 @@ def register(app, server_module):
         admin_log(f"[{host}] GET /auth id={login_id[:24]} cookie={str(request.query_params.get('cookie') or '')[:12]}")
         import secrets
         from common import now_iso
-        from player_routes import mint_session_token
+        # routes.player_routes, NOT top-level player_routes: server/routes/ is on
+        # sys.path too, so a bare `import player_routes` here loads a SECOND module
+        # instance whose injected `srv` is None - and the first-time-register path
+        # (srv._registration_allowed) crashed with AttributeError, a 500, and the
+        # client's "Failed to log in. Please try again." on brand-new accounts.
+        from routes.player_routes import mint_session_token
         token = mint_session_token(login_id)
         if token is None:
             return _enc({"code": 200, "msg": "cannot create an account right now",

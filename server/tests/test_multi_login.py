@@ -127,6 +127,27 @@ def check_native_google_auth_mints_a_session():
     print("ok native auth: GET /auth mints a session instead of serving the template")
 
 
+def check_auth_route_registers_a_new_account_via_http():
+    """End-to-end through the FastAPI app: GET /auth?id=<unknown google id> must
+    mint a session (register path). Regression for the dual-module srv=None crash -
+    direct_routes imported the top-level `player_routes` copy, whose injected `srv`
+    is None, so _uid_for_login died on srv._registration_allowed and the client got
+    a 500 / "Failed to log in. Please try again." for brand-new accounts."""
+    from fastapi.testclient import TestClient
+    with TestClient(server.app, client=("10.9.9.9", 55000)) as tc:
+        r = tc.get("/auth?id=google_brandnew&cookie=x&platform=Android")
+        assert r.status_code == 200, r.text[:200]
+        out = server.aes_decrypt(r.content)
+        assert out.get("success") is True, out
+        token = out.get("accessToken")
+        assert token, "new google id must get a session token"
+        uid = playerdb.uid_for_token(token)
+        assert uid and uid.startswith("p-"), uid
+        st = playerdb.load(uid)
+        assert st is not None and st.get("accountType") == 1, "registered as Google"
+    print("ok http: GET /auth registers a brand-new google account end to end")
+
+
 def check_single_player_override_still_works():
     """KGC_MULTIPLAYER=0 must pin everyone to the active save, the old behaviour."""
     saved = pr.MULTIPLAYER
@@ -148,5 +169,6 @@ if __name__ == "__main__":
     check_same_id_restores_same_save_on_another_device()
     check_empty_id_login_is_refused_in_multiplayer()
     check_native_google_auth_mints_a_session()
+    check_auth_route_registers_a_new_account_via_http()
     check_single_player_override_still_works()
     print("\nall multi-account login checks passed")
