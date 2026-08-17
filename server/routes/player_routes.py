@@ -257,13 +257,13 @@ def r_building_save(body, st):
 
 
 def r_building_reset_point(body, st):
-    """"Retrieve Ember": clear the preset's altar allocation and refund its embers
-    into the pool. The old implementation zeroed ONLY the pool - the client renders
-    remaining points as pool minus the preset's Σlevels, so the panel showed
-    NEGATIVE and the selected altars stayed lit after Retrieve."""
+    """"Retrieve Ember": clear the preset's altar allocation. The pool is the
+    player's LIFETIME ember total - the panel renders remaining = pool minus the
+    preset's Σlevels - so retrieving must NOT refund into it (a refund stacked on
+    the existing pool double-counted: 25 + 25 = 50). Zero only the levels; the
+    remaining display rises back to the pool on its own."""
     levels = [body_int(x, 0) for x in (body.get("levels") or [])]
     preset = body_int(body.get("preset"), 0)
-    print(f"[building] resetPoint preset={preset} levels={levels}", flush=True)
     presets = st.get("buildingData") or []
     if not isinstance(presets, list):
         presets = []
@@ -271,14 +271,12 @@ def r_building_reset_point(body, st):
         presets.append({"buildingLevels": [0] * 6})
     stored = presets[preset].get("buildingLevels") or [0] * 6
     if levels and any(levels):
-        refund = sum(min(int(levels[i] or 0), int(stored[i] or 0)) for i in range(min(6, len(levels))))
         presets[preset]["buildingLevels"] = [
             max(int(stored[i] or 0) - int(levels[i] or 0), 0) for i in range(6)]
     else:
-        refund = sum(int(x or 0) for x in stored)
         presets[preset]["buildingLevels"] = [0] * 6
     st["buildingData"] = presets
-    st["buildingPoint"] = max(st.get("buildingPoint", 0) + refund, _building_point_floor(st))
+    st["buildingPoint"] = max(st.get("buildingPoint", 0), _building_point_floor(st))
     save_state(st)
     return {"buildingData": _get_building_data(st), "buildingPoint": st["buildingPoint"]}
 

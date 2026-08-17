@@ -78,26 +78,26 @@ def check_legacy_plural_key_migrates():
 
 
 def check_retrieve_ember_clears_altars_and_refunds():
-    """'Retrieve Ember' = /player/building/resetPoint. It must clear the preset's
-    levels AND refund their embers into the pool - the old handler zeroed only the
-    pool, so the panel showed pool minus Σlevels (negative) with the altars still
-    lit. The client sends BuildingRequestModel {levels, preset} (RestAPI.
-    ResetBuildingPoint)."""
+    """"Retrieve Ember" = /player/building/resetPoint. It clears the preset's
+    levels; the pool is the LIFETIME ember total and must NOT change (the panel
+    renders remaining = pool - Σlevels, so refunding into the pool double-counts:
+    25 + 25 = 50). The client sends BuildingRequestModel {levels, preset}
+    (RestAPI.ResetBuildingPoint) - all-zero levels means 'clear this preset'."""
     st = server.load_state()
     st["buildingData"] = [{"buildingLevels": [0, 15, 10, 0, 0, 0]}]
     st["buildingPoint"] = 25
     reset = server.PLAYER_OVERRIDES["/player/building/resetPoint"]
-    out = reset({"preset": 0}, st)                      # empty body: clear whole preset
+    out = reset({"levels": [0, 0, 0, 0, 0, 0], "preset": 0}, st)   # full clear
     assert out["buildingData"][0]["buildingLevels"] == [0] * 6, "preset not cleared"
-    assert out["buildingPoint"] == 50, f"embers not refunded: {out['buildingPoint']}"
+    assert out["buildingPoint"] == 25, f"pool must stay 25 (lifetime total): {out['buildingPoint']}"
     st2 = server.load_state()                           # fresh state for the partial case
     st2["buildingData"] = [{"buildingLevels": [0, 15, 10, 0, 0, 0]}]
     st2["buildingPoint"] = 25
     out = reset({"levels": [0, 10, 0, 0, 0, 0], "preset": 0}, st2)   # partial retrieve
     assert out["buildingData"][0]["buildingLevels"] == [0, 5, 10, 0, 0, 0], \
         f"partial retrieve wrong: {out['buildingData'][0]['buildingLevels']}"
-    assert out["buildingPoint"] == 35, f"partial refund wrong: {out['buildingPoint']}"
-    print("ok: Retrieve Ember clears the altars and refunds the pool")
+    assert out["buildingPoint"] == 25, f"pool must stay 25 on partial retrieve: {out['buildingPoint']}"
+    print("ok: Retrieve Ember clears the altars, pool (lifetime total) unchanged")
 
 
 if __name__ == "__main__":
