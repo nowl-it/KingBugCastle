@@ -1,9 +1,9 @@
 """/admin can rewrite or delete any save, and the server binds 0.0.0.0 for remote
 players - so it must not be reachable by them.
 
-Rules: KGC_ADMIN_TOKEN set -> the token is required from everyone; unset ->
-loopback only. serve_public.sh refuses to start without a token, because behind a
-tunnel every request looks like loopback.
+Rules: an admin account exists -> its session cookie is required from everyone;
+no account -> loopback only. serve_public.sh refuses to start without an admin
+account, because behind a tunnel every request looks like loopback.
 """
 import sys, pathlib, tempfile
 
@@ -29,31 +29,33 @@ def main():
     playerdb.save("dev-0001", {"uid": "dev-0001"})
     import server
 
-    # No token configured: loopback allowed, remote refused.
-    server.ADMIN_TOKEN = None
+    # No admin account configured: loopback allowed, remote refused.
     assert client().get("/admin/api/info").status_code == 200, "loopback admin must work"
     r = client("203.0.113.7").get("/admin/api/info")
-    assert r.status_code == 403, f"remote admin allowed without a token: {r.status_code}"
+    assert r.status_code == 403, f"remote admin allowed without an account: {r.status_code}"
 
-    # Token configured: required from everyone, including loopback.
-    server.ADMIN_TOKEN = "s3cret"
-    assert client().get("/admin/api/info").status_code == 403, "token not enforced on loopback"
-    assert client("203.0.113.7").get("/admin/api/info").status_code == 403
+    # An admin account exists: its session is required from everyone, loopback too.
+    playerdb.admin_create("boss", "correct horse battery staple")
+    assert client().get("/admin/api/info").status_code == 403, "session not enforced on loopback"
+    assert client("203.0.113.7").get("/admin/api/info").status_code == 403, \
+        "no-session remote request allowed once an account exists"
     assert client("203.0.113.7").get(
-        "/admin/api/info", headers={"x-admin-token": "s3cret"}).status_code == 200, "valid token rejected"
+        "/admin/api/info", headers={"x-admin-token": "bogus"}).status_code == 403, \
+        "bogus session accepted"
+    tok = playerdb.admin_login("boss", "correct horse battery staple")
+    assert tok, "admin_login refused the fresh account"
     assert client("203.0.113.7").get(
-        "/admin/api/info", headers={"x-admin-token": "wrong"}).status_code == 403, "wrong token accepted"
+        "/admin/api/info", cookies={"kgc_admin": tok}).status_code == 200, "valid session rejected"
 
     # A destructive route is behind the same guard, not just the read-only one.
     r = client("203.0.113.7").post("/admin/api/players/delete", json={"uid": "dev-0001"})
-    assert r.status_code == 403, "player deletion reachable without the token"
+    assert r.status_code == 403, "player deletion reachable without a session"
     assert playerdb.load("dev-0001") is not None, "player was deleted despite 403"
 
     # The game API stays open - remote players must still be able to play.
     assert client("203.0.113.7").get("/player").status_code == 200, "game API wrongly gated"
 
-    server.ADMIN_TOKEN = None
-    print("ok: admin guarded (loopback-only, or token when set); game API still open")
+    print("ok: admin guarded (loopback-only, or session when an account exists); game API still open")
 
 
 if __name__ == "__main__":

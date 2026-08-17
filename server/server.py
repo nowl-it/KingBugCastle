@@ -465,7 +465,7 @@ from security import (TRUST_PROXY, client_ip, _admin_ok, guard_admin,
                       IPTABLES_BAN, _rate_hits, _banned, _ban_strikes,
                       _iptables_rule, _unban_later, _ban, _rate_ok, rate_limit,
                       MAX_BODY, limit_body_size, serialize_state_writes,
-                      ADMIN_TOKEN, ADMIN_COOKIE)
+                      ADMIN_COOKIE)
 
 # A public server holds other people's progress. Cron is the textbook answer and
 # nobody sets it up, so this runs in-process; playerdb.backup_if_due does the

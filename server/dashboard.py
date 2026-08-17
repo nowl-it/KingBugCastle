@@ -51,7 +51,6 @@ if not os.path.isdir(UI_DIR):
     os.makedirs(UI_DIR, exist_ok=True)
 CONFIG_FILE = os.path.join(BASE, "data", "response_config.json")
 SERVER_URL = os.environ.get("KGC_SERVER_URL", "http://127.0.0.1:8080")
-ADMIN_TOKEN = os.environ.get("KGC_ADMIN_TOKEN")
 TRUST_PROXY = os.environ.get("KGC_TRUST_PROXY") == "1"
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 _STATE_GATE = asyncio.Lock()
@@ -69,12 +68,11 @@ def _client_ip(request):
 
 
 # --- guards -----------------------------------------------------------------
-# Three ways in, checked in this order:
+# Two ways in, checked in this order:
 #   1. an admin account (username + password -> session cookie). Once ANY admin
 #      exists this is the only way in from a non-loopback address, because a
 #      tunnel/reverse proxy makes every request look like loopback.
-#   2. KGC_ADMIN_TOKEN, for scripts and the old bookmarked ?admin_token= links.
-#   3. nothing configured at all -> loopback only, same as before.
+#   2. nothing configured at all -> loopback only, same as before.
 SESSION_COOKIE = "kgc_admin"
 _OPEN_PATHS = {"/api/auth/login", "/api/auth/whoami"}
 
@@ -83,28 +81,19 @@ def _session_user(request):
     return playerdb.admin_for_token(request.cookies.get(SESSION_COOKIE))
 
 
-def _token_ok(request):
-    if not ADMIN_TOKEN:
-        return False
-    sent = request.headers.get("x-admin-token") or request.query_params.get("admin_token") or ""
-    return secrets.compare_digest(sent, ADMIN_TOKEN)
-
-
 def _authorized(request):
     """(ok, why_not). Static assets are open so the login page itself can load."""
     path = request.url.path
     if path in _OPEN_PATHS or not path.startswith(("/api", "/ws")):
         return True, None
-    if _session_user(request) or _token_ok(request):
+    if _session_user(request):
         return True, None
     if playerdb.admin_count():
         return False, "sign in to the dashboard"
-    if ADMIN_TOKEN:
-        return False, "admin token required"
     if (request.client.host if request.client else None) in _LOOPBACK:
         return True, None
     return False, ("dashboard is loopback-only; create an admin account "
-                   "(python3 dashboard.py --create-admin <user>) or set KGC_ADMIN_TOKEN")
+                   "(python3 dashboard.py --create-admin <user>)")
 
 
 @app.middleware("http")
@@ -125,13 +114,11 @@ _DELEGATED = {("POST", "/api/players")}
 def _upstream_headers(request):
     """Credential for the /admin/api/* calls we make against the game server.
 
-    The game port runs the same three-ladder guard we do. A shared token covers it
-    when one is configured; otherwise forward the signed-in operator's own session
-    token, which playerdb resolves on the other side. Sending nothing works only on
-    a loopback-only box, and that is exactly the case a tunnel breaks.
+    The game port runs the same two-ladder guard we do. We forward the signed-in
+    operator's own session cookie, which playerdb resolves on the other side.
+    Sending nothing works only on a loopback-only box, and that is exactly the
+    case a tunnel breaks.
     """
-    if ADMIN_TOKEN:
-        return {"x-admin-token": ADMIN_TOKEN}
     tok = request.cookies.get(SESSION_COOKIE)
     return {"x-admin-token": tok} if tok else {}
 
@@ -217,7 +204,7 @@ def api_status():
         "activePlayer": playerdb.active(),
         "serverUrl": SERVER_URL,
         "multiplayer": os.environ.get("KGC_MULTIPLAYER", "1") != "0",   # default on, matches server.py
-        "authMode": "token" if ADMIN_TOKEN else "loopback-only",
+        "authMode": "password" if playerdb.admin_count() else "loopback-only",
         "gamedata": gamedata.summary(),
     }
 
@@ -892,7 +879,7 @@ def api_whoami(request: Request):
     ok, why = _authorized(_Probe(request))
     return {"user": _session_user(request),
             "hasAdmins": bool(playerdb.admin_count()),
-            "tokenMode": bool(ADMIN_TOKEN),
+            "tokenMode": False,
             "authenticated": ok, "reason": why}
 
 

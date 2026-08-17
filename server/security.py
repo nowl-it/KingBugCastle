@@ -7,7 +7,7 @@ test_dashboard_api execs server.py a second time as a separate module instance,
 and a shared global made every registered app read config from the last
 instance that registered.
 """
-import asyncio, os, secrets, shutil, subprocess, time
+import asyncio, os, shutil, subprocess, time
 
 from fastapi import Request
 from fastapi.responses import JSONResponse
@@ -48,27 +48,21 @@ def client_ip(request):
     return fwd.split(",")[0].strip() or peer
 
 
-ADMIN_TOKEN = os.environ.get("KGC_ADMIN_TOKEN")
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 ADMIN_COOKIE = "kgc_admin"          # same session cookie the dashboard issues
 
 
 def _admin_ok(request):
-    """Whether this request may touch /admin. Three ladders, most specific first.
+    """Whether this request may touch /admin. Two ladders, most specific first.
 
-    The loopback fallback is last and weakest: behind a tunnel or any reverse proxy
-    EVERY request arrives from loopback, so it is only safe on a box nobody else can
-    reach. It is therefore refused outright once a real credential exists - the hole
-    it plugged was serve_public.sh accepting a dashboard account instead of a token,
-    which left this middleware with nothing to check and everything to allow.
+    With an admin account configured, the signed-in dashboard session (its
+    cookie, or that cookie forwarded as x-admin-token by the dashboard's
+    upstream proxy) is required from everyone. The loopback fallback is last
+    and weakest: behind a tunnel or any reverse proxy EVERY request arrives
+    from loopback, so it is only safe on a box nobody else can reach. It is
+    therefore refused outright once a real account exists.
     """
     import playerdb
-    mod = _srv(request)
-    token = (getattr(mod, "ADMIN_TOKEN", None) if mod else ADMIN_TOKEN)
-    if token:
-        sent = (request.headers.get("x-admin-token")
-                or request.query_params.get("admin_token") or "")
-        return secrets.compare_digest(sent, token)
     if playerdb.admin_count():
         token = (request.cookies.get(ADMIN_COOKIE)
                  or request.headers.get("x-admin-token") or "")

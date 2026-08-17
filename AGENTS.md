@@ -662,8 +662,7 @@ served, arena battles counted).
 - **SSH**: `ssh -i /home/nowl/Code/kgc/oracle/ssh-key-2026-07-31.key -o IdentitiesOnly=yes
   ubuntu@213.35.110.245` (Ubuntu 20.04 x86_64, hostname `instance-20260727-1513`; the key was
   injected via a **boot-volume swap** through a temp instance `instance-20260801-0037`/
-  `161.118.225.174` — instance OCID
-  `ocid1.instance.oc1.ap-singapore-1.anzwsljrshqxahicq4w3rpscbeu7wabuispdqbmcci2qta2qx4wpgtk2j3uq`).
+  `161.118.225.174`).
   Console connections need `-i` on both hops + `HostKeyAlgorithms=+ssh-rsa
   PubkeyAcceptedAlgorithms=+ssh-rsa` (serial console only; `exec request failed` is normal).
 - **Services**: `kgc.service` (runs `serve_public.sh`: preflight → HTTP 8080 + TLS 8443 with
@@ -680,9 +679,9 @@ served, arena battles counted).
   what the server needs. `git-lfs` required for `libil2cpp_v171_ssl.so`; `script.json` is gitignored
   and must be rsynced separately from `il2cpp/v171.0.00/`.
 - **Deploy flow**: push to GitHub `nowl-it/kgc-private-server` → on server `git pull` → restart the
-  touched service(s). Dashboard admin: `9OwL` (via `playerdb.admin_create`); UI shows a login form
-  once any admin exists, otherwise token input (`KGC_ADMIN_TOKEN=7318bda57802ba3f46c97d60e969bf67
-  0727ffb994192350` in kgc.service env). Admin API `GET /api/players?admin_token=…` lists players.
+  touched service(s). Dashboard auth is username/password only — create the first account with
+  `python3 dashboard.py --create-admin <user>` (playerdb.admin_create); there is no token mode.
+  Admin API `GET /api/players?admin_token=…` lists players.
 - **CI/CD (GitHub Actions, since 2026-08-01)**: `.github/workflows/ci.yml` runs the full pytest suite
   (22 tests, `server/tests/`) on push/PR touching `server/**` — needs `pytest httpx httpx2` installed
   on top of requirements.txt (fastapi 0.141's TestClient wants `httpx2`; dashboard tests import

@@ -1,6 +1,6 @@
 """Dashboard sign-in: accounts, cookies, and who is refused.
 
-Before this the only gate was KGC_ADMIN_TOKEN or "the request came from loopback".
+Before this the only gate was "the request came from loopback".
 Behind a tunnel or a reverse proxy every request looks like loopback, so that
 fallback let any remote player rewrite or delete saves.
 """
@@ -77,7 +77,7 @@ def test_whoami_tells_the_ui_there_is_nothing_to_sign_in_with():
     is a contract, not an implementation detail.
     """
     _reset()
-    assert not dashboard.ADMIN_TOKEN, "this test assumes no KGC_ADMIN_TOKEN"
+    assert not hasattr(dashboard, "ADMIN_TOKEN"), "token mode is gone"
     body = REMOTE().get("/api/auth/whoami").json()
     assert body["authenticated"] is False
     assert body["hasAdmins"] is False

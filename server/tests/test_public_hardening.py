@@ -32,7 +32,6 @@ ADMIN_PATH = "/admin/api/players"
 
 
 def _reset():
-    server.ADMIN_TOKEN = None
     for a in playerdb.admin_list():
         playerdb.admin_delete(a["username"])
 
@@ -44,14 +43,34 @@ def check_admin_open_to_loopback_only_when_nothing_is_configured():
     print("ok: bare server - loopback only")
 
 
-def check_a_token_replaces_the_loopback_fallback():
+def check_an_admin_account_requires_a_session_from_everyone():
+    """The regression this file exists for.
+
+    serve_public.sh accepts a dashboard ACCOUNT. The game port's guard resolves
+    that account's session cookie (forwarded as x-admin-token by the dashboard
+    proxy) - and the loopback fallback must close the moment an account exists,
+    or behind a tunnel every remote player could rewrite or delete any save
+    through :8080.
+    """
     _reset()
-    server.ADMIN_TOKEN = "s3cret-token"
+    playerdb.admin_create("root", "correct horse battery")
     assert LOCAL().get(ADMIN_PATH).status_code == 403, \
-        "loopback bypassed a configured token"
-    assert REMOTE().get(ADMIN_PATH, headers={"x-admin-token": "wrong"}).status_code == 403
-    assert REMOTE().get(ADMIN_PATH, headers={"x-admin-token": "s3cret-token"}).status_code == 200
-    print("ok: token required from everyone, including loopback")
+        "loopback still open while an admin account exists"
+    assert REMOTE().get(ADMIN_PATH).status_code == 403
+
+    token = playerdb.admin_login("root", "correct horse battery")
+    assert token, "admin_login refused the correct password"
+    c = REMOTE()
+    c.cookies.set(server.ADMIN_COOKIE, token)
+    assert c.get(ADMIN_PATH).status_code == 200, "a signed-in operator was locked out"
+    # The dashboard proxies with the header rather than a cookie.
+    assert REMOTE().get(ADMIN_PATH, headers={"x-admin-token": token}).status_code == 200
+    assert REMOTE().get(ADMIN_PATH, headers={"x-admin-token": "nope"}).status_code == 403
+
+    playerdb.admin_logout(token)
+    assert REMOTE().get(ADMIN_PATH, headers={"x-admin-token": token}).status_code == 403, \
+        "a logged-out session still worked"
+    print("ok: admin account required, session honoured, logout revokes")
 
 
 def check_an_admin_account_closes_the_loopback_hole():
@@ -194,8 +213,7 @@ class _req:
 
 if __name__ == "__main__":
     check_admin_open_to_loopback_only_when_nothing_is_configured()
-    check_a_token_replaces_the_loopback_fallback()
-    check_an_admin_account_closes_the_loopback_hole()
+    check_an_admin_account_requires_a_session_from_everyone()
     check_no_session_cannot_reach_another_players_save()
     check_the_game_api_stays_open()
     check_oversized_bodies_are_refused()

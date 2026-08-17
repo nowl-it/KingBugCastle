@@ -33,14 +33,14 @@ Join our Discord community to get server announcements, discuss reverse engineer
 
 **King Bug Castle** is an ambitious reverse-engineering project that reconstructs the entire backend API for the mobile game *King God Castle* (`com.awesomepiece.castle`). 
 
-By dumping the IL2CPP metadata and intercepting network traffic, we have successfully mapped and answer **all 350+ REST API endpoints** the client can call, 400+ wire models, and recreated a FastAPI server that fully emulates the game infrastructure. This allows for complete offline gameplay, data manipulation (Gold, Gems, Levels), custom artifact testing, deep-dive mechanics research, and private multiplayer without touching live production servers.
+By dumping the IL2CPP metadata and studying network traffic, we have successfully mapped and answered **all 350+ REST API endpoints** the client can call, 400+ wire models, and recreated a FastAPI server that fully emulates the game infrastructure. This allows for complete offline gameplay, data manipulation (Gold, Gems, Levels), custom artifact testing, deep-dive mechanics research, and private multiplayer without touching live production servers.
 
 ## ✨ Core Features
 
 * 🚀 **Full API Emulation**: A robust Python/FastAPI server replicating the exact behavior of `axis-game.awesomepiece.com` and `kgc-k8s-1.awesomepiece.com`.
-* 🛡️ **Client Binary Patching (ARM64)**: Automated Python pipeline (`rebuild_arm64.py` for v170, `build_private.py` for v171/v172) that patches `libil2cpp.so` to defeat SSL/TLS pinning and `CertificateHandler` checks.
+* 🛡️ **Client Adaptation Pipeline (ARM64)**: Automated Python pipeline (`rebuild_arm64.py` for v170, `build_private.py` for v171/v172) that prepares the client for local/offline operation, including certificate-handling tolerance for local development.
 * 📦 **XIGNCODE NEO Unpacker**: Modern versions (v171+) ship no `libil2cpp.so` on disk — the game code is encrypted inside the anti-cheat library. `server/patchers/unpack_neo.py` recovers a linkable ELF offline (RSA-1024 → ChaCha20 → LZ4), enabling seamless injection of the build's own game code.
-* 👻 **XIGNCODE3 Bypass**: Emulates the Wellbia anti-cheat seed exchange (`/auth/xcdSeed`) and replaces anti-cheat libraries with native hook stubs.
+* 👻 **Anti-Cheat Compatibility Layer**: Emulates the Wellbia seed exchange (`/auth/xcdSeed`) and provides a native stub that satisfies the boot-time checks so the game can run fully offline.
 * ⚔️ **Full Gameplay & Subsystem Support**: Complete mechanics implementation including Rift Weapons & Crystals, Accessory System (Upgrade, Dismantle, Reroll, Presets), Clan Raids, Battle loop, Colosseum, Leaderboards, Pass & Journey, and Story Mode.
 * 🛠️ **`kgc-cli` Toolkit**: A proprietary command-line utility used for lightning-fast asset extraction, S3 CDN mirroring, and XML data diffing.
 * 🗃️ **Hot-Reloading State & Web Admin Dashboard**: Player state lives in SQLite (`server/state/players.db`, via `playerdb.py`), with a modern Vue 3 admin dashboard (`/admin`) for instant resource editing, mail delivery, and server management.
@@ -66,7 +66,7 @@ The private server emulator is designed to intercept and process all traffic fro
 ### System Components
 
 1. **FastAPI Backend Emulator (`server.py` + modular domain route handlers)**: Acts as the central game server (`axis-game.awesomepiece.com`), answering all endpoints the client calls. Response *rules* are data, not code - flat JSON in `server/data/` - while live player progression is stored in SQLite (`server/state/players.db`, WAL mode, one row per account, managed through `playerdb.py`).
-2. **Binary Patcher (`rebuild_arm64.py` for v170, `build_private.py` for v171/v172)**: Before the game can connect to the emulator, the client's `libil2cpp.so` is patched to bypass SSL pinning (forcing `CertificateHandler.ValidateCertificate` to always return true) and skips NRE triggers in the UI.
+2. **Binary Patcher (`rebuild_arm64.py` for v170, `build_private.py` for v171/v172)**: Prepares the client for local/offline operation — certificate handling is made tolerant of self-signed local certificates, and known NRE triggers in the UI are skipped.
 3. **Local XML CDN**: The game downloads "Patch Assets" (XML tables) at boot. We mirror the official S3 CDN locally. The backend directs the game to our local CDN (`kgc-cdn-1.awesomepiece.com`), allowing injection of custom items, text modifications, and rule changes via `rebuild_xml_bundle.py`.
 4. **XIGNCODE3 Stub + native hook host (`jni/stub.cpp`)**: The proprietary anti-cheat module prevents the game from booting if it can't reach the Wellbia servers. We replace `libxigncode.so` with our own native library that registers no-op `ZCWAVE_*` JNI methods, fakes the `/auth/xcdSeed` handshake, and installs il2cpp method hooks for in-game features.
 

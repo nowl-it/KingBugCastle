@@ -36,20 +36,13 @@ def _env(name):
 def check_admin_credentials():
     import playerdb
     playerdb.init()
-    token, admins = _env("KGC_ADMIN_TOKEN"), playerdb.admin_count()
-    if not token and not admins:
+    admins = playerdb.admin_count()
+    if not admins:
         check(FAIL, "admin surface is unprotected",
               "/admin can rewrite or delete any save, and the loopback fallback is "
               "not protection behind a proxy. Fix: python3 dashboard.py --create-admin <user>")
         return
-    if admins:
-        check(OK, f"{admins} dashboard admin account(s)")
-    if token:
-        if len(token) < 24:
-            check(WARN, f"KGC_ADMIN_TOKEN is only {len(token)} chars",
-                  "it is a bearer secret in URLs and logs; 24+ hex from `openssl rand -hex 24`")
-        else:
-            check(OK, "KGC_ADMIN_TOKEN set")
+    check(OK, f"{admins} dashboard admin account(s)")
 
 
 def check_dev_backdoors():

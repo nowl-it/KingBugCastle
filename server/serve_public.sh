@@ -110,7 +110,6 @@ export KGC_RATE_BAN_SECONDS="${KGC_RATE_BAN_SECONDS:-900}"
 export KGC_IPTABLES_BAN="${KGC_IPTABLES_BAN:-0}"
 export KGC_MAX_BODY="${KGC_MAX_BODY:-1000000}"
 export KGC_QUIET="${KGC_QUIET:-1}"
-[ -n "${KGC_ADMIN_TOKEN:-}" ] && export KGC_ADMIN_TOKEN
 [ -n "${KGC_TRUST_PROXY:-}" ] && export KGC_TRUST_PROXY
 
 # Run preflight checks before serving

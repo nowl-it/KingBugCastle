@@ -57,8 +57,8 @@ def seed(uid="t-1", **over):
 
 
 def test_guard():
-    """Non-loopback peers must be refused while no token is configured."""
-    assert dashboard.ADMIN_TOKEN is None, "test assumes no token in env"
+    """Non-loopback peers must be refused while no admin is configured."""
+    assert not hasattr(dashboard, "ADMIN_TOKEN"), "token mode is gone"
     outsider = TestClient(dashboard.app, client=("10.0.0.9", 55002))
     for path in ("/api/status", "/api/players", "/api/player/t-1"):
         r = outsider.get(path)
@@ -214,7 +214,6 @@ def test_account_id_uniqueness():
     game_module = importlib.util.module_from_spec(_spec)
     sys.modules["kgc_game_server"] = game_module     # server.py reads sys.modules[__name__]
     _spec.loader.exec_module(game_module)
-    game_module.ADMIN_TOKEN = None
     game = TestClient(game_module.app, client=("127.0.0.1", 55002))
     created = []
     for name in ("IdOne", "IdTwo", "IdThree"):

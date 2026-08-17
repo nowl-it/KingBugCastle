@@ -5,16 +5,13 @@ on:
     inputs:
       share_host:
         description: "Server host baked into the APK (IP or domain)"
-        required: false
-        default: "213.35.110.245"
+        required: true
       glogin_host:
         description: "Browser URL host for Google-login bridge (real domain for Cloudflare cert). Defaults to share_host"
         required: false
-        default: "kingbugcastle.id.vn"
       glogin_poll_host:
         description: "Host for native glogin poller (IP, bypasses Cloudflare). Defaults to share_host"
         required: false
-        default: "213.35.110.245"
       tag:
         description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v172.0.01); if it already exists a timestamp suffix is appended"
         required: false
