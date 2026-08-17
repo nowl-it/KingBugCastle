@@ -198,6 +198,15 @@ def mint_session_token(login_id, acct_type=1):
     return token
 
 
+def _building_point_floor(st):
+    """The altar pool must cover what is already allocated: the client renders the
+    panel's remaining points as pool minus the current preset's Σlevels, so a pool
+    clamped to 0 while levels are high (admin-granted or the old negative-save bug)
+    displays NEGATIVE. Raise the pool to the max Σlevels across presets instead."""
+    return max((sum(d.get("buildingLevels") or []) for d in (st.get("buildingData") or [])
+                if isinstance(d, dict)), default=0)
+
+
 def _get_building_data(st):
     presets = st.get("buildingData", st.get("buildingPresets", [{"buildingLevels": [0]*6} for _ in range(5)]))
     # WorldPanel.<GameStart>d__349.MoveNext (Ghidra RVA 0x220BC48) indexes
@@ -242,6 +251,7 @@ def r_building_save(body, st):
                                   for d in data]
     if body.get("buildingPoint") is not None:
         st["buildingPoint"] = body_int(body.get("buildingPoint"), st.get("buildingPoint", 0), lo=0)
+    st["buildingPoint"] = max(st.get("buildingPoint", 0), _building_point_floor(st))
     save_state(st)
     return {"buildingData": _get_building_data(st), "buildingPoint": st["buildingPoint"]}
 
@@ -308,6 +318,9 @@ def _repair_player_state(st):
             merged = max(merged, bps)
         st["buildingPoint"] = max(merged, 0)
         st.pop("buildingPoints", None)
+        changed = True
+    if st["buildingPoint"] < _building_point_floor(st):
+        st["buildingPoint"] = _building_point_floor(st)
         changed = True
     return changed
 

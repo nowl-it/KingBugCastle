@@ -40,10 +40,30 @@ def check_negative_pool_clamped():
     st["buildingPoints"] = 25
     out = server.PLAYER_OVERRIDES["/player/building/save"](
         {"levels": [15, 10, 0, 0, 0, 0], "preset": 0, "buildingPoint": -20}, st)
-    assert out["buildingPoint"] == 0, f"client negative pool persisted: {out['buildingPoint']}"
+    assert out["buildingPoint"] == 25, \
+        f"negative pool must be raised to cover the allocation: {out['buildingPoint']}"
     live = server.load_state()
-    assert live["buildingPoint"] == 0, f"negative pool reached the save: {live['buildingPoint']}"
-    print("ok: negative buildingPoint is clamped at 0")
+    assert live["buildingPoint"] == 25, \
+        f"negative pool reached the save un-fixed: {live['buildingPoint']}"
+    print("ok: negative buildingPoint is raised to the allocated total (never displays negative)")
+
+
+def check_pool_never_below_allocated():
+    """The client renders remaining points as pool minus the current preset's
+    Σlevels - a pool smaller than the allocation (admin-granted levels, or a pool
+    clamped after the old negative-save bug) shows NEGATIVE in the altar panel."""
+    st = server.load_state()
+    st["buildingData"] = [{"buildingLevels": [15, 0, 0, 0, 0, 10]},
+                          {"buildingLevels": [10, 15, 0, 0, 0, 0]}]
+    st["buildingPoint"] = 0
+    server.PLAYER_OVERRIDES["/player"]({}, st)      # login repair path
+    live = server.load_state()
+    assert live["buildingPoint"] == 25, \
+        f"repair must raise the pool to max Σlevels: {live['buildingPoint']}"
+    out = server.PLAYER_OVERRIDES["/player/building/save"](
+        {"levels": [15, 0, 0, 0, 0, 10], "preset": 0, "buildingPoint": -25}, st)
+    assert out["buildingPoint"] == 25, f"save must keep pool >= allocation: {out['buildingPoint']}"
+    print("ok: the altar pool can never render negative")
 
 
 def check_legacy_plural_key_migrates():
@@ -60,5 +80,6 @@ def check_legacy_plural_key_migrates():
 if __name__ == "__main__":
     check_client_shaped_save_persists()
     check_negative_pool_clamped()
+    check_pool_never_below_allocated()
     check_legacy_plural_key_migrates()
     print("\nall building checks passed")
