@@ -216,10 +216,27 @@ def r_building_buy_point(body, st):
 
 
 def r_building_save(body, st):
-    data = body.get("buildingData") or []
-    st["buildingData"] = [{"buildingLevels": [body_int(x, 0) for x in d.get("buildingLevels", [])]}
-                          for d in data] or st.get("buildingData", [])
-    st["buildingPoint"] = body_int(body.get("buildingPoint"), st.get("buildingPoint", 0))
+    # The client sends BuildingRequestModel {levels: int[], preset: int} - the
+    # altar allocation for one preset at a time. Reading a `buildingData` key
+    # (an earlier draft's shape) silently dropped every allocation, so battles
+    # ran with zero altar levels.
+    levels = [body_int(x, 0) for x in (body.get("levels") or [])]
+    if levels:
+        preset = body_int(body.get("preset"), 0)
+        presets = st.get("buildingData") or []
+        if not isinstance(presets, list):
+            presets = []
+        while len(presets) <= preset:
+            presets.append({"buildingLevels": [0] * 6})
+        presets[preset] = {"buildingLevels": levels}
+        st["buildingData"] = presets
+    else:
+        data = body.get("buildingData") or []
+        if data:
+            st["buildingData"] = [{"buildingLevels": [body_int(x, 0) for x in d.get("buildingLevels", [])]}
+                                  for d in data]
+    if body.get("buildingPoint") is not None:
+        st["buildingPoint"] = body_int(body.get("buildingPoint"), st.get("buildingPoint", 0))
     save_state(st)
     return {"buildingData": _get_building_data(st), "buildingPoint": st["buildingPoint"]}
 
