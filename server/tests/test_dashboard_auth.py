@@ -151,3 +151,22 @@ if __name__ == "__main__":
             fn()
             print("ok", name)
     print("\nall dashboard auth checks passed")
+
+
+def test_admin_can_change_own_password():
+    _reset()
+    playerdb.admin_create("root", "correct horse battery")
+    c = LOCAL()
+    c.post("/api/auth/login", json={"username": "root", "password": "correct horse battery"})
+
+    r = c.post("/api/auth/password", json={"oldPassword": "wrong", "newPassword": "brand new pass"})
+    assert r.status_code == 400, "wrong current password accepted"
+    r = c.post("/api/auth/password", json={"oldPassword": "correct horse battery", "newPassword": "short"})
+    assert r.status_code == 400, "short new password accepted"
+    assert c.post("/api/auth/password", json={"oldPassword": "correct horse battery",
+                                              "newPassword": "brand new pass"}).status_code == 200
+    assert playerdb.admin_login("root", "correct horse battery") is None, "old password still works"
+    assert playerdb.admin_login("root", "brand new pass"), "new password rejected"
+    # The signed-in session survived the change (keep_token).
+    assert c.get("/api/status").status_code == 200, "change logged the operator out"
+    print("ok", "test_admin_can_change_own_password")

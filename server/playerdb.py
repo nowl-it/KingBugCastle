@@ -594,6 +594,28 @@ def admin_list():
 
 ADMIN_SESSION_TTL = 12 * 3600     # a dashboard session, not a game session
 
+def admin_change_password(username, old_password, new_password, keep_token=None):
+    """Verify old_password, then replace the hash. Returns True on success, False
+    when the old password is wrong. Revokes every session for the account except
+    keep_token (the caller's own, so the change does not log them out)."""
+    if not username or not new_password:
+        return False
+    with _conn() as c:
+        row = c.execute("SELECT pw_hash FROM admins WHERE username=? COLLATE NOCASE",
+                        (username,)).fetchone()
+    if not row or not verify_password(old_password or "", row[0]):
+        return False
+    with _conn() as c:
+        c.execute("UPDATE admins SET pw_hash=? WHERE username=? COLLATE NOCASE",
+                  (hash_password(new_password), username))
+        if keep_token:
+            c.execute("DELETE FROM admin_sessions WHERE username=? AND token<>?",
+                      (username, keep_token))
+        else:
+            c.execute("DELETE FROM admin_sessions WHERE username=?", (username,))
+    return True
+
+
 def admin_login(username, password):
     """Return a fresh session token, or None. Constant-ish work either way: an unknown
     user still runs a hash, so response time does not leak which usernames exist."""

@@ -928,6 +928,24 @@ def api_logout(request: Request):
     return res
 
 
+@app.post("/api/auth/password")
+def api_admin_change_password(request: Request, body: dict):
+    """Signed-in admin changes their own password. The middleware already proved
+    the session; the old password is still checked against the stored hash so a
+    stolen cookie alone cannot re-key the account."""
+    user = _session_user(request)
+    if not user:
+        raise HTTPException(401, "sign in first")
+    old = (body or {}).get("oldPassword", "")
+    new = (body or {}).get("newPassword", "")
+    if len(new) < 8:
+        raise HTTPException(400, "new password must be at least 8 characters")
+    if not playerdb.admin_change_password(user, old, new,
+                                          keep_token=request.cookies.get(SESSION_COOKIE)):
+        raise HTTPException(400, "current password is wrong")
+    return {"ok": True}
+
+
 @app.get("/api/auth/admins")
 def api_admins():
     return {"admins": playerdb.admin_list()}
