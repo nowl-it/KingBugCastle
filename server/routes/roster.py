@@ -146,8 +146,11 @@ def r_ranking(body, st):
         acct_id = s.get("accountId")
         if acct_id is None:
             acct_id = d["accountId"]
-        return {"score": int(s.get("bestClearedTheme", 0)) * 100
-                                 + int(s.get("bestClearedStage", 0)),
+        score = int(s.get("eliteRankingScore", 0) or 0)
+        if not score:
+            score = int(s.get("bestClearedTheme", 0)) * 100 \
+                + int(s.get("bestClearedStage", 0))
+        return {"score": score,
                 "accountId": int(acct_id),
                 "userName": str(name),
                 "castleName": str(castle),

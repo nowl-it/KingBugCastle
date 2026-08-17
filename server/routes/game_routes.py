@@ -81,6 +81,12 @@ def r_game_complete(body, st):
                 st["bestClearedStage"] = stage
             elif theme == st.get("bestClearedTheme", 0) and stage > st.get("bestClearedStage", 0):
                 st["bestClearedStage"] = stage
+    # The ranking-stage ("Measure Combat Power") battle reports its score here:
+    # GameCompleteRequestModel.eliteRankingScore. The weekly board reads it back,
+    # so dropping it is how scores silently stopped updating.
+    elite = body.get("eliteRankingScore")
+    if isinstance(elite, (int, float)) and elite > 0:
+        st["eliteRankingScore"] = max(int(elite), int(st.get("eliteRankingScore", 0)))
     st["playedCount"] = st.get("playedCount", 0) + 1
     srv.bump(st, "playGame")
     srv.bump(st, "playTheme", sub=theme)

@@ -55,6 +55,22 @@ def check_player_appears_in_their_own_board():
     print(f"ok rows: {len(BOARDS)} boards each list the player at rank 1")
 
 
+def check_elite_score_flows_through_game_complete():
+    """The ranking-stage battle submits its score inside /game/complete
+    (GameCompleteRequestModel.eliteRankingScore); the board must report it."""
+    st = server.load_state()
+    server.r_game_complete({"gameId": "g-1", "win": True, "theme": 10, "stage": 1,
+                            "eliteRankingScore": 12345}, st)
+    out = server.r_ranking({}, st)
+    assert out["ranking"][0]["score"] == 12345, out["ranking"][0]["score"]
+    assert out["playerRank"]["score"] == 12345
+    server.r_game_complete({"gameId": "g-2", "win": True, "theme": 10, "stage": 1,
+                            "eliteRankingScore": 999}, st)
+    assert server.r_ranking({}, st)["ranking"][0]["score"] == 12345, \
+        "a worse later run must not lower the score"
+    print("ok elite: /game/complete eliteRankingScore reaches the board")
+
+
 def check_player_row_is_a_copy():
     """playerRank and ranking[0] must not be the same object, or a client-side edit to
     one silently rewrites the other after serialisation round-trips in tests."""
@@ -128,6 +144,7 @@ if __name__ == "__main__":
     check_player_row_is_a_copy()
     check_generic_board_carries_a_deck()
     check_deck_falls_back_to_a_filled_preset()
+    check_elite_score_flows_through_game_complete()
     check_scores_track_state()
     check_clan_board_is_empty_without_a_clan()
     check_unit_statistics_invents_nothing()
