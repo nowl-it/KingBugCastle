@@ -1,9 +1,9 @@
-"""The ranking measure battle must spawn training dummies, not a real hero.
+"""/game/start must not fabricate ranking-stage enemy units.
 
-/game/start answers `rankingStageUnits`, which the client uses as the enemy
-deployment for the weekly "Measure Combat Power" battle. It was hardcoded to
-10260 (Chung Ah), so the measure screen showed a hero instead of the dummy -
-exactly the artifact users reported as "custom content still on the server".
+The response used to hardcode `rankingStageUnits` (6x a chosen unit id), which
+the client deployed as the enemy of the "Measure Combat Power" battle - so a
+real hero appeared there instead of the stage's own spawns. The field is gone
+entirely: the client falls back to the stage data.
 """
 import sys, tempfile
 from pathlib import Path
@@ -22,15 +22,14 @@ one_account()
 import server
 
 
-def check_ranking_stage_spawns_dummies():
+def check_no_fabricated_ranking_units():
     st = server.load_state()
     out = server.GAME_OVERRIDES["/game/start"]({"theme": 1, "stage": 1}, st)
-    units = out["rankingStageUnits"]
-    assert len(units) == 6, f"expected 6 ranking stage units, got {len(units)}"
-    assert all(u["unitId"] == 99999 for u in units), units
-    print("ok: ranking stage spawns 6 training dummies (99999)")
+    assert "rankingStageUnits" not in out, "ranking stage units must not be hardcoded"
+    assert out["gameId"], "the rest of the start response is intact"
+    print("ok: /game/start sends no fabricated ranking stage units")
 
 
 if __name__ == "__main__":
-    check_ranking_stage_spawns_dummies()
-    print("\nall ranking stage checks passed")
+    check_no_fabricated_ranking_units()
+    print("\nall game start checks passed")
