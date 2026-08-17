@@ -236,7 +236,7 @@ def r_building_save(body, st):
             st["buildingData"] = [{"buildingLevels": [body_int(x, 0) for x in d.get("buildingLevels", [])]}
                                   for d in data]
     if body.get("buildingPoint") is not None:
-        st["buildingPoint"] = body_int(body.get("buildingPoint"), st.get("buildingPoint", 0))
+        st["buildingPoint"] = body_int(body.get("buildingPoint"), st.get("buildingPoint", 0), lo=0)
     save_state(st)
     return {"buildingData": _get_building_data(st), "buildingPoint": st["buildingPoint"]}
 
@@ -294,6 +294,15 @@ def _repair_player_state(st):
                 changed = True
     if not isinstance(st.get("cards"), dict):
         st["cards"] = {}
+        changed = True
+    bp = st.get("buildingPoint")
+    if not isinstance(bp, int) or bp < 0 or "buildingPoints" in st:
+        merged = bp if isinstance(bp, int) else 0
+        bps = st.get("buildingPoints")
+        if isinstance(bps, int):
+            merged = max(merged, bps)
+        st["buildingPoint"] = max(merged, 0)
+        st.pop("buildingPoints", None)
         changed = True
     return changed
 

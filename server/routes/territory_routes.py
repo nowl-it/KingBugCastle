@@ -70,8 +70,8 @@ def r_territory_fetch(body, st):
             "playerLevelSyncData": t["levelSync"],
             "tickets": [], "playerTradeShopItemData": t["tradeShop"],
             "passEndedAt": "", "skins": sk, "equippedSkin": t["equippedSkin"],
-            # The lobby's own territory summary still reads these two.
-            "buildingPoints": st.get("buildingPoints", 25),
+            # The lobby's own territory summary still reads this.
+            "buildingPoints": st.get("buildingPoint", 25),
             "maxLabor": territory.max_stored_labor(t["buildings"], XML_DIR)}
 
 

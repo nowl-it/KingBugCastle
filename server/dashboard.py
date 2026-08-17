@@ -149,7 +149,7 @@ EDITABLE_FIELDS = {
     "gold": int, "cash": int, "paidCash": int, "heart": int, "level": int, "exp": int,
     "bestClearedStage": int, "bestClearedTheme": int,
     "bestClearedHardStage": int, "bestClearedHardTheme": int,
-    "buildingPoints": int, "playedCount": int, "winCount": int, "eventFlag": int,
+    "buildingPoint": int, "playedCount": int, "winCount": int, "eventFlag": int,
 }
 
 
@@ -711,7 +711,7 @@ def _grant_premium_altars_to_player(st):
             idx = item_ids.index(dlc_item_id)
             counts[idx] = max(counts[idx], 1)
     st["rogueLikeBuildings"] = [100, 101, 102, 103, 104, 105, 106, 107, 108]
-    st["buildingPoints"] = max(st.get("buildingPoints", 25), 25)
+    st["buildingPoint"] = max(st.get("buildingPoint", 25), 25)
 
 
 @app.post("/api/player/{pid}/grant-premium-altars")

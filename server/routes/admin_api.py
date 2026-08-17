@@ -278,7 +278,7 @@ def register(app, srv):
                 idx = item_ids.index(dlc_item_id)
                 counts[idx] = max(counts[idx], 1)
         st["rogueLikeBuildings"] = [100, 101, 102, 103, 104, 105, 106, 107, 108]
-        st["buildingPoints"] = max(st.get("buildingPoints", 25), 25)
+        st["buildingPoint"] = max(st.get("buildingPoint", 25), 25)
         srv.save_state(st)
         return {"ok": True, "count": len(srv.ALL_ROGUE_LIKE_DLCS)}
 
