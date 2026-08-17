@@ -1621,7 +1621,6 @@
         <RankedPvP>true</RankedPvP>
         <MasterValueRatio>0.2</MasterValueRatio>
         <MasterAddCCRatio>-0.5</MasterAddCCRatio>
-        <StageHealRatioToDef>true</StageHealRatioToDef>
         <DefaultDef>500</DefaultDef>
         <UseBarricade>false</UseBarricade>
         <Weight>false</Weight>
@@ -2319,8 +2318,7 @@
         <ClearGold>0</ClearGold>
         <ClearExp>0</ClearExp>
 
-        <Map>Seasonal_Event_Dragon</Map>
-        <ModeBackgroundSprite>Themes_Background_1000_S72</ModeBackgroundSprite>
+        <Map>Seasonal_Event_Sea</Map>
         <Barricade>Barricade_01a</Barricade>
 
         <StartGold>25</StartGold>
@@ -2379,8 +2377,8 @@
         <ClearExp>0</ClearExp>
 
         <QuizMode>true</QuizMode>
-        <Map>Seasonal_Event_Dragon</Map>
-        <ModeBackgroundSprite>Themes_Background_1000_S72</ModeBackgroundSprite>
+        <Map>Seasonal_Event_Holy</Map>
+        <ModeBackgroundSprite>Themes_Background_1000_S69</ModeBackgroundSprite>
         <Barricade>Barricade_01a</Barricade>
 
         <ShowDeckPreviewInPausePanel>false</ShowDeckPreviewInPausePanel>
@@ -2429,7 +2427,7 @@
         <!-- 테스트 시에만 주석을 해제하여 사용 -->
 <!--        <RepeatLastStageAtLackOfStage>true</RepeatLastStageAtLackOfStage>-->
         
-        <LobbyRewardIcon>SeasonalEventToken_Beach</LobbyRewardIcon>
+        <LobbyRewardIcon>SeasonalEventToken_Cross</LobbyRewardIcon>
     </Theme>
 
     <Theme ID='1002'>
