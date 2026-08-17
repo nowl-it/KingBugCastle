@@ -706,7 +706,7 @@ def migrate_from_json(state_dir):
     if legacy.exists():
         try:
             st = json.loads(legacy.read_text())
-            uid = st.get("uid", "dev-0001")
+            uid = st.get("uid") or "dev-0001"
             if load(uid) is None:
                 save(uid, st)
                 n += 1

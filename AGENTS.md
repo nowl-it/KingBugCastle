@@ -393,6 +393,10 @@ Two fixes from the "player p-0c10a24bc780 lost all data" report (it did not — 
    multiplayer returns `None` → login refused (`success: False`, no session, no save).
    `mint_session_token` guards `None` the same way. Live-verified: after deploy, an
    empty-id probe creates no session and dev-0001 spam stopped.
+   Two further `st.get("uid", "dev-0001")` sites were converted to `st.get("uid") or
+   "dev-0001"` the same day (commit f53f38b's follow-up, 2026-08-18): `r_player`'s `uid`
+   echo (an empty template uid would have been emitted to the client) and the legacy
+   `player.json` migration in `playerdb.py` (could have persisted a `""`-keyed row).
 2. **`default_player.json` carried `"uid": "guest-0001"`** and some paths used it as the
    save key (`save_state`/`load_state` single-player boot, `admin /player/reset`), which
    minted a phantom `guest-0001` row (the "NewPlayer" save created 2026-08-07 — harmless:

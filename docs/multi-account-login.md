@@ -57,7 +57,10 @@ persisted a phantom row named `guest-0001` (one such save, "NewPlayer", created
 2026-08-07, still sits in `players.db`). All key fallbacks use
 `st.get("uid") or "dev-0001"` so an empty template uid can never become a save key
 (fixed 2026-08-18, de175b6). The phantom row is harmless (no accounts row, no
-sessions ever) - don't delete it without asking whoever runs the server.
+sessions ever) - don't delete it without asking whoever runs the server. Two later
+holdouts got the same conversion the same day: `r_player`'s `uid` echo (would have
+emitted `""` to the client) and the legacy `player.json` migration in `playerdb.py`
+(could have persisted a `""`-keyed row).
 
 ### If a player's client lost its guest id
 

@@ -330,7 +330,7 @@ def r_player(body, st):
         "accountId": st.get("accountId", d["accountId"]),
         "name": st.get("name", d["name"]), "castleName": st.get("castleName", d["castleName"]),
         "kingPostfix": st.get("kingPostfix", 0), "castlePostfix": st.get("castlePostfix", 0),
-        "uid": st.get("uid", "dev-0001"), "accountType": st.get("accountType", d["accountType"]),
+        "uid": st.get("uid") or "dev-0001", "accountType": st.get("accountType", d["accountType"]),
         "cash": st.get("cash", d["cash"]), "paidCash": st.get("paidCash", d["paidCash"]),
         "gold": st.get("gold", d["gold"]), "level": st.get("level", d["level"]),
         "exp": st.get("exp", d["exp"]), "heart": st.get("heart", d["heart"]),
