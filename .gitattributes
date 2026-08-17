@@ -1,7 +1,6 @@
 # Auto-detect text files and normalize to LF
 * text=auto
 # CDN binary asset bundles — change every data refresh
-server/real_cdn/xml         filter=lfs diff=lfs merge=lfs -text
 server/real_cdn/xml.bak     filter=lfs diff=lfs merge=lfs -text
 server/real_cdn/*assetbundle filter=lfs diff=lfs merge=lfs -text
 # CLI binary
