@@ -263,13 +263,14 @@ def r_building_reset_point(body, st):
     NEGATIVE and the selected altars stayed lit after Retrieve."""
     levels = [body_int(x, 0) for x in (body.get("levels") or [])]
     preset = body_int(body.get("preset"), 0)
+    print(f"[building] resetPoint preset={preset} levels={levels}", flush=True)
     presets = st.get("buildingData") or []
     if not isinstance(presets, list):
         presets = []
     while len(presets) <= preset:
         presets.append({"buildingLevels": [0] * 6})
     stored = presets[preset].get("buildingLevels") or [0] * 6
-    if levels:
+    if levels and any(levels):
         refund = sum(min(int(levels[i] or 0), int(stored[i] or 0)) for i in range(min(6, len(levels))))
         presets[preset]["buildingLevels"] = [
             max(int(stored[i] or 0) - int(levels[i] or 0), 0) for i in range(6)]
