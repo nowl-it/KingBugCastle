@@ -411,6 +411,11 @@ intact; no session since Aug 16. "Became guest-0001" was a dashboard artifact + 
 empty-id bug above. If a client presents a *new* guest id, a fresh `p-<hash>` save is minted
 and the old one can be re-attached (`playerdb.bind_login(old_id, new_uid)` or copy the JSON).
 Full write-up: `docs/multi-account-login.md` ("If a player's client lost its guest id").
+**`dev-0001` IS NightOwL since 2026-08-18**: the user's account (uid `p-410890b421a5`,
+Google `google_102274623045401309225`) was merged onto `dev-0001` and the old KingBug
+`dev-0001` save deleted (`server/state/backups/players.db.bak-uidmerge-*` holds the pre-merge
+DB). NightOwL's 14 sessions + 174 items + 74 cards carried over; its 600+ KingBug-era
+sessions were dropped with the old save.
 
 ### Altar/building points — one key, never negative (2026-08-17, e118699)
 
