@@ -76,7 +76,10 @@ still points at the old id. To hand it back:
 
 Verified intact 2026-08-18: `p-0c10a24bc780` (login `guest-501689756-756593919`,
 name "Player5893", level 100, 73 cards) - full save diffed against the pre-fix
-backup, nothing lost.
+backup, nothing lost. The same save was **migrated to `p-2787e1889bcd`** the same
+day (that player registered a new Google account, `google_116626847976667271433`):
+`playerdb.save(new_uid, old_state)` + `bind_login(old_login, new_uid)` +
+`delete(old_uid)`, pre-state in `server/state/backups/players.db.bak-migrate-2787-*`.
 
 `Constants.AccountType` (from the client): `0` Test, `1` Google, `2` GameCenter,
 `3` AppleID, `4` Guest. The register `type` is stored on the save so
