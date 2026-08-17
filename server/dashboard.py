@@ -432,7 +432,7 @@ async def api_player_macro(pid: str, body: dict):
             art["count"] = 99999 # 10*
             arts.append(art)
     elif macro == "legacy_max":
-        import server, xml.etree.ElementTree as ET
+        import server, routes.artifact_routes as ar
         arts = st.setdefault("artifacts", [])
         arts.clear()
         tree = ET.parse(server.XML_DIR / "Artifacts.xml")
@@ -441,6 +441,17 @@ async def api_player_macro(pid: str, body: dict):
             art = server.make_artifact(i + 1, aid)
             art["count"] = 99999 # 10*
             arts.append(art)
+        # Treasure "Legacy" system too: every released treasure at max
+        # (overcome 10 -> TreasureOvercomeUp MaxLevel 30, exp 0), keeping
+        # the equipped unitId for treasures the account already owns.
+        owned = {t.get("treasureId"): t for t in st.setdefault("treasures", [])}
+        st["treasures"] = []
+        for i, tid in enumerate(server.ALL_TREASURE_IDS):
+            t = owned.get(tid) or ar.make_treasure(i + 1, tid)
+            t["overcome"] = 10
+            t["level"] = 30
+            t["exp"] = 0
+            st["treasures"].append(t)
     elif macro == "accessory_admin":
         from cli import grant_accessories
         st["accessories"] = grant_accessories.build(pid)
