@@ -91,6 +91,25 @@ A Google id is the same account forever, so the same Google login on a new devic
 restores the same save. The server treats it exactly like any other id - once the
 client hands over a Google account id, cross-device restore just works.
 
+### Native Google sign-in (`GET /auth`) - fixed 2026-08-18 (22fe85f)
+
+The client's Google button hits `GET /auth?id=<google id>&cookie=...&platform=Android`
+and expects an `accessToken` back (the real backend's `RestAPI.Auth`). The
+route_models fallback answered an **empty model**, so a client with no stored
+token - fresh install or after Android "Clear data" - never received one. Its
+`/auth/login` then went out id-less, was refused (multiplayer, de175b6), and every
+later request hit `load_state()`'s throwaway template save: the game ran as
+"KingBug"/"BugCastle" with 290909 gold, and `accounts`/`sessions` showed nothing
+new near the login time. The account itself was fine (binding and save intact) -
+the client was simply running token-less. `GET /auth` now mints a real session via
+`mint_session_token()` (same path `/auth/register` takes; rate-limited, never falls
+back to the active save; `/auth/auth` is aliased to it).
+
+**Tell-tale**: the game shows template data after a "successful" login. Check
+`sessions` (`SELECT * FROM sessions ORDER BY created DESC`) - zero rows around the
+login time means the login body carried no id, i.e. the sign-in endpoint the client
+used answered without a token.
+
 ### The client-side catch (be honest about this)
 
 Real Google Play Games sign-in only authenticates an app whose **package name and

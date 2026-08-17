@@ -417,6 +417,24 @@ Google `google_102274623045401309225`) was merged onto `dev-0001` and the old Ki
 DB). NightOwL's 14 sessions + 174 items + 74 cards carried over; its 600+ KingBug-era
 sessions were dropped with the old save.
 
+### Google sign-in: `GET /auth` must mint a token (2026-08-18, 22fe85f)
+
+The client's native Google sign-in is `GET /auth?id=<account>&cookie=...&platform=Android`
+(the real backend's `RestAPI.Auth`), and it expects a full AuthResponseModel carrying
+`accessToken` back. route_models answered an **empty model** (no OVERRIDE), so a client
+with no stored token — fresh install, or after Android "Clear data" — never received one:
+its `/auth/login` went out id-less, `r_login` refused it (multiplayer, de175b6), and every
+following request hit `load_state()`'s throwaway **template save** ("KingBug"/"BugCastle",
+290909 gold, uid echoing dev-0001) — the "my account became KingBug after clearing
+storage" report. It worked before only because the device held a token stored by an
+earlier web-bridge login. Fix: `direct_routes.py` handles `GET /auth` (+`/auth/auth`
+alias) by calling `mint_session_token(id)` — the same resolve/register path
+`/auth/register` takes (rate-limited, never falls back to the active save).
+Regression: `check_native_google_auth_mints_a_session` in `server/tests/test_multi_login.py`.
+**Diagnosis recipe**: game shows template data after a "successful" login → check
+`sessions` for the login time; zero new rows means the login body carried no id, which
+means the sign-in endpoint the client used answered without a token.
+
 ### Altar/building points — one key, never negative (2026-08-17, e118699)
 
 The altar pool ("building points") used **two keys**: `buildingPoint` (singular, the
