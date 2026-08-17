@@ -82,6 +82,35 @@ def register(app, server_module):
     srv = server_module
     from fastapi import Request
 
+    @app.get("/auth")
+    @app.get("/auth/auth")
+    async def auth_native_google(request: Request):
+        """The client's Google sign-in endpoint (`GET /auth?id=<account>&cookie=...`).
+
+        The REAL backend answers it with a full AuthResponseModel carrying an
+        accessToken; the route_models fallback used to return an empty model, so a
+        client with no stored token (fresh install / cleared data) never got one:
+        its /auth/login went out id-less, r_login refused it (multiplayer), and
+        every following request hit load_state()'s throwaway template save - the
+        "KingBug/BugCastle" ghost account. Mint a real session here, same path
+        /auth/register takes."""
+        host = request.headers.get("host", "?")
+        login_id = str(request.query_params.get("id") or "")
+        admin_log(f"[{host}] GET /auth id={login_id[:24]} cookie={str(request.query_params.get('cookie') or '')[:12]}")
+        import secrets
+        from common import now_iso
+        from player_routes import mint_session_token
+        token = mint_session_token(login_id)
+        if token is None:
+            return _enc({"code": 200, "msg": "cannot create an account right now",
+                         "success": False})
+        return _enc({
+            "code": 200, "msg": None, "success": True,
+            "accessToken": token, "expiredAt": now_iso(7),
+            "seed": secrets.token_hex(8), "serverTime": now_iso(0),
+            "blockedUntilAt": now_iso(0), "blockedComment": "", "loginId": login_id,
+        })
+
     @app.get("/accessory")
     async def accessory_inventory_direct(request: Request):
         st = load_state()

@@ -113,6 +113,20 @@ def check_empty_id_login_is_refused_in_multiplayer():
     print("ok refuse: an id-less login is refused instead of stealing the active save")
 
 
+def check_native_google_auth_mints_a_session():
+    """GET /auth?id=<account>&cookie=... (the client's Google sign-in) must answer
+    with a full AuthResponseModel + accessToken - the route_models fallback used to
+    return an empty model, so a fresh-install client ran token-less against the
+    throwaway template save ("KingBug/BugCastle" ghost account)."""
+    _, first = _login("google_me", GOOGLE)
+    token = pr.mint_session_token("google_me")   # what the /auth handler calls
+    assert token, "GET /auth must mint a session for a bound account"
+    assert playerdb.uid_for_token(token) == first, "minted token must land on the save"
+    # ...and an unknown id still goes through the (rate-limited) register path.
+    assert pr.mint_session_token("google_fresh"), "first-time google login must register"
+    print("ok native auth: GET /auth mints a session instead of serving the template")
+
+
 def check_single_player_override_still_works():
     """KGC_MULTIPLAYER=0 must pin everyone to the active save, the old behaviour."""
     saved = pr.MULTIPLAYER
@@ -133,5 +147,6 @@ if __name__ == "__main__":
     check_a_different_account_gets_its_own_save()
     check_same_id_restores_same_save_on_another_device()
     check_empty_id_login_is_refused_in_multiplayer()
+    check_native_google_auth_mints_a_session()
     check_single_player_override_still_works()
     print("\nall multi-account login checks passed")
