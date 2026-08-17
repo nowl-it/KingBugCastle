@@ -252,6 +252,24 @@ RVA − 0x4000; `NRE_STUBS` table rows are RVAs — the build loop subtracts 0x4
    - `rank_row`: Fallbacks for empty/null player and castle names to ensure strings are never null.
    - `playerRank`: Always returns a populated `RankingData` dict for the calling player.
 
+4. **Score submission = `eliteRankingScore` inside `/game/complete` (fixed 2026-08-18, commit a3725ca)**:
+   The ranking-stage battle ("Measure Combat Power") reports its score as
+   `GameCompleteRequestModel.eliteRankingScore` (field offset 0xC8, a `long`) embedded in the
+   normal complete request — there is **no separate score POST**. `RestAPI.AddRanking`
+   (v171 coroutine `<AddRanking>d__382.MoveNext` @ 0x2c5d070, wrapper 0x2c56f5c) is called ONLY
+   from `SettingsPanel.<OnClickTestRanking>d__86.MoveNext` (0x326f330) — a debug button — and
+   `GameOverPanel.Show` (0x35d6f58) only *displays* `get_finalRankingScore`; neither submits the
+   weekly score. The submit path is: `Scene_Game.UpdateImpl` computes `GetRankingScore`
+   (0x2d70230) → stored → complete request carries it. The handler used to drop it, and
+   `r_ranking` scored `bestClearedTheme*100+bestClearedStage` instead, so the combat-power
+   board never moved after a battle. Now: `r_game_complete` stores the best value in
+   `st["eliteRankingScore"]`; `r_ranking` prefers it, falling back to the old formula for
+   accounts that never played a ranking stage. Test: `check_elite_score_flows_through_game_complete`
+   in `server/tests/test_ranking.py`. Note: no `ranking*` string literals exist in either v171/v172
+   `.so` — API paths are static string fields populated from server data, so path hunting via
+   string search is a dead end; the TLS log (`/tmp/kgc_pub_tls.log`) is the source of truth for
+   what the client actually calls.
+
 ### v172.0.01 "Loading resources…" hang — FirebaseAnalytics.LogEvent in Web.Get (2026-08-14)
 
 v172.0.01 **embeds** `FirebaseAnalytics.LogEvent()` inside `Awesomepiece.Web.Get[T]` — the game's
