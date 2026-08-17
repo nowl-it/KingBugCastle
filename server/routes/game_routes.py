@@ -43,8 +43,9 @@ def r_game_start(body, st):
     srv._game_store[gid] = {"theme": theme, "stage": stage, "heartCost": heart_cost}
     save_state(st)
     # The client loops over rankingStageUnits up to 6 times (Deck size).
-    # Provide 6 valid units (10260) spread out to avoid physics explosions.
-    ranking_stage_units = [{"x": i, "y": i, "unitId": 10260, "level": 1} for i in range(6)]
+    # The ranking measure battle is against training dummies (99999), spread out
+    # to avoid physics explosions.
+    ranking_stage_units = [{"x": i, "y": i, "unitId": 99999, "level": 1} for i in range(6)]
     return {
         "heart": heart,
         "lastHeartTime": st.get("lastHeartTime", now_iso(0)),
