@@ -77,9 +77,33 @@ def check_legacy_plural_key_migrates():
     print("ok: legacy buildingPoints merges into buildingPoint on /player")
 
 
+def check_retrieve_ember_clears_altars_and_refunds():
+    """'Retrieve Ember' = /player/building/resetPoint. It must clear the preset's
+    levels AND refund their embers into the pool - the old handler zeroed only the
+    pool, so the panel showed pool minus Σlevels (negative) with the altars still
+    lit. The client sends BuildingRequestModel {levels, preset} (RestAPI.
+    ResetBuildingPoint)."""
+    st = server.load_state()
+    st["buildingData"] = [{"buildingLevels": [0, 15, 10, 0, 0, 0]}]
+    st["buildingPoint"] = 25
+    reset = server.PLAYER_OVERRIDES["/player/building/resetPoint"]
+    out = reset({"preset": 0}, st)                      # empty body: clear whole preset
+    assert out["buildingData"][0]["buildingLevels"] == [0] * 6, "preset not cleared"
+    assert out["buildingPoint"] == 50, f"embers not refunded: {out['buildingPoint']}"
+    st2 = server.load_state()                           # fresh state for the partial case
+    st2["buildingData"] = [{"buildingLevels": [0, 15, 10, 0, 0, 0]}]
+    st2["buildingPoint"] = 25
+    out = reset({"levels": [0, 10, 0, 0, 0, 0], "preset": 0}, st2)   # partial retrieve
+    assert out["buildingData"][0]["buildingLevels"] == [0, 5, 10, 0, 0, 0], \
+        f"partial retrieve wrong: {out['buildingData'][0]['buildingLevels']}"
+    assert out["buildingPoint"] == 35, f"partial refund wrong: {out['buildingPoint']}"
+    print("ok: Retrieve Ember clears the altars and refunds the pool")
+
+
 if __name__ == "__main__":
     check_client_shaped_save_persists()
     check_negative_pool_clamped()
     check_pool_never_below_allocated()
     check_legacy_plural_key_migrates()
+    check_retrieve_ember_clears_altars_and_refunds()
     print("\nall building checks passed")
