@@ -35,6 +35,6 @@ sudo -n systemctl restart kgc-dashboard.service 2>/dev/null || echo "    (dashbo
 echo "[5/5] Checking server health on port 8080..."
 sleep 2
 COMMIT_MSG=$(git log -1 --format='%s' HEAD)
-./discord_notify.sh "✅ **Deploy completed!** Branch: main
-\`$COMMIT_MSG\`"
+[ -x ./discord_notify.sh ] && ./discord_notify.sh "✅ **Deploy completed!** Branch: main
+\`$COMMIT_MSG\`" || echo "    (discord notify skipped - script not present)"
 echo "=== [✓] Deployment finished with ZERO DOWNTIME! ==="
