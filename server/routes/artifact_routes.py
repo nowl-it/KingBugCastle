@@ -69,7 +69,7 @@ def handlers():
         "/treasure/add-exp": r_treasure_add_exp,
         "/treasure/dismantle": r_treasure_dismantle,
         "/treasure/equip-tutorial": r_treasure_equip,
-        "/treasure/overcome": r_treasure,
+        "/treasure/overcome": r_treasure_overcome,
         "/treasure/release-equip": r_treasure_release,
         "/treasure/set-state": r_treasure_set_state,
     }
@@ -570,8 +570,117 @@ def r_treasure_set_state(body, st):
     return r_treasure(body, st)
 
 
+# Legacy (treasure) enhancement: the client labels it "Enhance Legacy"
+# (TreasureUpgrade) / "Tier Transcendence" (TreasureAlreadyMaxOvercome).
+# Costs come from TreasureConstants.xml: TreasureLevelCost (exp+gold per level,
+# per rarity), TreasureOvercomeCost (item 3200 초월의 주괴 per overcome step:
+# Common 0 / Rare 1 / Special 6, MaxOvercome 10), TreasureOvercomeUp
+# (overcome tier -> max level 10+2*overcome). Exp items: 3000 Legacy Piece = 30
+# exp, 3100 = 150 (InventoryItems.xml AddTreasureExp).
+TREASURE_EXP_ITEM_VALUES = {3000: 30, 3100: 150}
+TREASURE_OVERCOME_ITEM = 3200
+_TREASURE_META = None
+
+
+def _treasure_meta():
+    global _TREASURE_META
+    if _TREASURE_META is None:
+        from xml.etree import ElementTree as ET
+        root = ET.parse(XML_DIR / "TreasureConstants.xml").getroot()
+        costs = {}
+        for rarity in root.find("TreasureLevelCost"):
+            costs[rarity.tag] = {
+                int(c.get("Level")): (int(c.get("NeedExp")), int(c.get("NeedGold")))
+                for c in rarity.findall("Cost")}
+        oc = {c.tag: (int(c.get("MaxOvercome")), int(c.get("NeedMaterial")))
+              for c in root.find("TreasureOvercomeCost").findall("*")}
+        up = {int(c.get("Overcome")): int(c.get("MaxLevel"))
+              for c in root.find("TreasureOvercomeUp").findall("*")
+              if c.get("EventType") == "Treasure"}
+        rarities = {}
+        troot = ET.parse(XML_DIR / "Treasures.xml").getroot()
+        for t in troot.findall("Treasure"):
+            rarities[int(t.get("ID"))] = t.findtext("Rarity", "Common")
+        _TREASURE_META = {"costs": costs, "overcome": oc, "up": up, "rarities": rarities}
+    return _TREASURE_META
+
+
+def _treasure_rarity(t):
+    return _treasure_meta()["rarities"].get(int(t.get("treasureId")), "Common")
+
+
+def _treasure_max_level(overcome):
+    return _treasure_meta()["up"].get(int(overcome), 10 + 2 * int(overcome))
+
+
+def _treasure_result(st, added_exp=0):
+    return {
+        "treasures": get_st_treasures(st),
+        "deletedTreasures": [],
+        "playerGold": st.get("gold", 0),
+        "playerCash": st.get("cash", 0),
+        "inventories": srv._inventory_models(st),
+        "addedExpItems": added_exp,
+    }
+
+
 def r_treasure_add_exp(body, st):
-    return {"treasures": get_st_treasures(st), "treasureCapacity": 9999, "capacity": 9999, "maxCapacity": 9999, "maxTreasureCount": 9999, "addExpItems": [], "deletedTreasures": [], "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0), "inventories": srv._inventory_models(st), "addedExpItems": 0}
+    """"Enhance Legacy": feed exp items (Legacy Pieces) + gold, level the treasure.
+    Mirrors the accessory add-exp flow; response is TreasureResultResponseModel."""
+    admin_log(f"[treasure-add-exp] body={body}")
+    tr = get_st_treasures(st)
+    t = next((x for x in tr if x.get("id") == body_int(body.get("targetId"), 0)), None)
+    if t is None:
+        return _treasure_result(st)
+    total_exp = 0
+    for it in (body.get("expItems") or []):
+        iid = int(it.get("id", 0) or 0)
+        cnt = int(it.get("count", 0) or 0)
+        unit = TREASURE_EXP_ITEM_VALUES.get(iid, 0)
+        if unit and cnt > 0 and accessory._deduct_inventory_item(st, iid, cnt):
+            total_exp += unit * cnt
+    rarity = _treasure_rarity(t)
+    costs = _treasure_meta()["costs"].get(rarity, {})
+    level = int(t.get("level", 1))
+    exp = int(t.get("exp", 0)) + total_exp
+    while level < _treasure_max_level(t.get("overcome", 0)):
+        need_exp, need_gold = costs.get(level + 1, (10 ** 9, 0))
+        if exp < need_exp or st.get("gold", 0) < need_gold:
+            break
+        st["gold"] -= need_gold
+        exp -= need_exp
+        level += 1
+    t["level"] = level
+    t["exp"] = exp
+    t["updatedAt"] = now_iso()
+    save_state(st)
+    return _treasure_result(st, added_exp=total_exp)
+
+
+def r_treasure_overcome(body, st):
+    """"Tier Transcendence": consume item 3200 (초월의 주괴) per TreasureOvercomeCost
+    and raise the treasure's overcome tier (max level +2 per tier, cap 10)."""
+    admin_log(f"[treasure-overcome] body={body}")
+    tr = get_st_treasures(st)
+    t = next((x for x in tr if x.get("id") == body_int(body.get("targetId"), 0)), None)
+    if t is None:
+        return _treasure_result(st)
+    rarity = _treasure_rarity(t)
+    max_overcome, need_material = _treasure_meta()["overcome"].get(rarity, (10, 0))
+    overcome = int(t.get("overcome", 0))
+    if overcome >= max_overcome:
+        return _treasure_result(st)
+    mats = body.get("materialTreasureIds") or []
+    if mats:
+        ids = [int(m.get("id", m) if isinstance(m, dict) else m) for m in mats]
+        tr[:] = [x for x in tr if x.get("id") not in ids]
+        st["treasures"] = tr
+    if need_material and not accessory._deduct_inventory_item(st, TREASURE_OVERCOME_ITEM, need_material):
+        return _treasure_result(st)
+    t["overcome"] = overcome + 1
+    t["updatedAt"] = now_iso()
+    save_state(st)
+    return _treasure_result(st)
 
 
 def r_rift_weapon(body, st):
