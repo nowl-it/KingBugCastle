@@ -16,7 +16,12 @@ Do not edit the DB with a plain read-modify-write from another script while the 
 take `playerdb.write_lock()` around it, the same lock the request middleware holds.
 
 Top-level keys: `gold cash paidCash heart level exp name cards decks inventoryItems treasures
-equippedArtifacts missions tokens buildingPoints ...`.
+equippedArtifacts missions tokens buildingPoint ...`.
+
+> `buildingPoint` (singular) is the live altar-pool key; `buildingPoints` (plural) is a
+> legacy alias only - `_repair_player_state` migrates it on load (max-merge, clamped ≥ 0)
+> since 2026-08-17 (e118699). The save handler clamps client echoes to ≥ 0, so a negative
+> pool is never persisted again.
 
 ## Easiest path — the Admin dashboard
 

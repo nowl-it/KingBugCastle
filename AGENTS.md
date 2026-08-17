@@ -381,6 +381,44 @@ instructions targeting its RVA to get callers (`(w>>26)==0x25`, sign-extend `imm
 site + imm*4`; file offset = `RVA - 0x4000`). That is how `Scene_Lobby.Update` was found from
 `POST /auth/login` in two hops.
 
+### Auth: id-less logins are refused; the template uid is never a save key (2026-08-18, de175b6)
+
+Two fixes from the "player p-0c10a24bc780 lost all data" report (it did not — see below):
+
+1. **`_uid_for_login` fell back to `playerdb.active()` when `login_id` was empty**, so any
+   `/auth/login` with no id and no token was handed the active save (dev-0001) *with a
+   session bound to it*. The constant `dev-0001` sessions in the DB (every ~5-20 min) were
+   that path firing — almost certainly a client that lost its guest id (cache clear /
+   reinstall) logging in over and over. Now the fallback is single-player-only;
+   multiplayer returns `None` → login refused (`success: False`, no session, no save).
+   `mint_session_token` guards `None` the same way. Live-verified: after deploy, an
+   empty-id probe creates no session and dev-0001 spam stopped.
+2. **`default_player.json` carried `"uid": "guest-0001"`** and some paths used it as the
+   save key (`save_state`/`load_state` single-player boot, `admin /player/reset`), which
+   minted a phantom `guest-0001` row (the "NewPlayer" save created 2026-08-07 — harmless:
+   no accounts row, never a session, don't delete without asking). Template uid is now
+   `""` and every key fallback is `st.get("uid") or "dev-0001"` so it can never persist.
+
+**Incident facts (verified, DB + backup diff, 2026-08-18)**: the player's save
+`p-0c10a24bc780` (login `guest-501689756-756593919`, name "Player5893", level 100, 73 cards,
+6.19M gold) was **never touched by the altar fix** — only normal gameplay + the
+`buildingPoints`→`buildingPoint` key migration. Same 37 uids before/after the scan; binding
+intact; no session since Aug 16. "Became guest-0001" was a dashboard artifact + the
+empty-id bug above. If a client presents a *new* guest id, a fresh `p-<hash>` save is minted
+and the old one can be re-attached (`playerdb.bind_login(old_id, new_uid)` or copy the JSON).
+Full write-up: `docs/multi-account-login.md` ("If a player's client lost its guest id").
+
+### Altar/building points — one key, never negative (2026-08-17, e118699)
+
+The altar pool ("building points") used **two keys**: `buildingPoint` (singular, the
+protocol key, saved verbatim from the client echo) and `buildingPoints` (plural, what the
+admin grant and territory fetch read). A negative client value persisted because the save
+handler had no lower bound. Fix: `r_building_save` clamps `lo=0`; `_repair_player_state`
+migrates the plural key (max-merge, clamp ≥ 0, pop); every writer/reader (admin grant ×2,
+dashboard `EDITABLE_FIELDS`) now uses `buildingPoint`. Regression tests:
+`check_negative_pool_clamped`, `check_legacy_plural_key_migrates` in
+`server/tests/test_building.py`.
+
 ### Known One-Time Lobby NRE (not blocking)
 - `WorldPanel.Reload()` at IL offset 0x00000 — fires once during init, does not repeat. The stack trace doesn't show sub-calls, suggesting a direct field access on a null component. Hard to pinpoint without RVA; non-blocking since the lobby still renders.
 

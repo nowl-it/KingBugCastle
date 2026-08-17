@@ -38,6 +38,43 @@ resolves, in order:
    mode (`KGC_MULTIPLAYER=0`) keeps the fallback - there is one save and nobody to
    impersonate.
 
+   The `/auth/login` handler itself has the same rule since 2026-08-18 (de175b6):
+   an **empty id + no token is refused** (`success: False`, no session, no save) in
+   multiplayer. Before the fix `_uid_for_login` fell through to `playerdb.active()`
+   for the *login* path too, so a client that had lost its guest id (cleared cache /
+   reinstall) logged straight into whichever save the server was active on - that is
+   how a player's re-login looked like "my account became KingBug / lost all data".
+   The constant `dev-0001` sessions in the DB (one every ~5-20 min) were that path
+   firing. Regression: `check_empty_id_login_is_refused_in_multiplayer` in
+   `tests/test_multi_login.py` (standalone runner: `python3 server/tests/test_multi_login.py`).
+
+### The template uid is never a save key
+
+`default_player.json`'s `uid` is **empty on purpose**. Older copies carried
+`"uid": "guest-0001"`, and any code path that saved a save before a login had
+overwritten the uid (`save_state`, the single-player boot, `admin /player/reset`)
+persisted a phantom row named `guest-0001` (one such save, "NewPlayer", created
+2026-08-07, still sits in `players.db`). All key fallbacks use
+`st.get("uid") or "dev-0001"` so an empty template uid can never become a save key
+(fixed 2026-08-18, de175b6). The phantom row is harmless (no accounts row, no
+sessions ever) - don't delete it without asking whoever runs the server.
+
+### If a player's client lost its guest id
+
+The save is keyed on the login id, not the device. A player whose app was
+reinstalled / cache-cleared presents a **new** guest id on next login, which mints a
+fresh `p-<hash>` save - the old save is untouched in the DB and its `accounts` row
+still points at the old id. To hand it back:
+
+1. Find the player's new uid in the dashboard (created the moment they log in).
+2. Point the old login at the new uid (`playerdb.bind_login(old_id, new_uid)`) or
+   copy the old save's JSON over the new row (`playerdb.save(new_uid, old_state)`).
+3. The client picks the save up on the next `/player` fetch.
+
+Verified intact 2026-08-18: `p-0c10a24bc780` (login `guest-501689756-756593919`,
+name "Player5893", level 100, 73 cards) - full save diffed against the pre-fix
+backup, nothing lost.
+
 `Constants.AccountType` (from the client): `0` Test, `1` Google, `2` GameCenter,
 `3` AppleID, `4` Guest. The register `type` is stored on the save so
 `PlayerDataResponseModel.accountType` reports the right badge.
