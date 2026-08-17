@@ -1,6 +1,6 @@
 {
   "player": {
-    "accountId": 0, "uid": "guest-0001", "name": "KingBug", "castleName": "BugCastle",
+    "accountId": 0, "uid": "", "name": "KingBug", "castleName": "BugCastle",
     "accountType": 1, "level": 100, "exp": 9999999,
     "gold": 290909, "cash": 290909, "paidCash": 0, "heart": 290909,
     "bestClearedStage": 10, "bestClearedTheme": 10,

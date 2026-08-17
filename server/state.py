@@ -87,7 +87,7 @@ def load_state():
         # Saves are created by /auth/register only.
         st["_ephemeral"] = True
         return st
-    uid = st.get("uid", "dev-0001")
+    uid = st.get("uid") or "dev-0001"
     playerdb.save(uid, st)
     playerdb.set_active(uid)
     return st
@@ -96,7 +96,7 @@ def load_state():
 def save_state(st):
     if st.pop("_ephemeral", False):
         return          # a pre-login placeholder; a real write always has a session
-    playerdb.save(st.get("uid", "dev-0001"), st)
+    playerdb.save(st.get("uid") or "dev-0001", st)
 
 
 def patch_state(st, updates):

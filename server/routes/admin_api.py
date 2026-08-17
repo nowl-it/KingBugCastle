@@ -204,7 +204,7 @@ def register(app, srv):
     async def admin_reset_active_player():
         st = copy.deepcopy(srv.DEFAULT_PLAYER)
         # reset the data, keep the identity
-        st["uid"] = playerdb.active() or st.get("uid", "dev-0001")
+        st["uid"] = playerdb.active() or "dev-0001"
         srv.save_state(st)
         return {"ok": True}
 

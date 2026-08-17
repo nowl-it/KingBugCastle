@@ -129,7 +129,10 @@ def _uid_for_login(login_id, prev_token, acct_type=None):
             admin_log(f"[auth] new player {uid} (accountType={acct_type})")
         playerdb.bind_login(login_id, uid)
         return uid
-    return playerdb.active()
+    # Empty id + no token: refuse in multiplayer instead of handing the caller
+    # dev-0001's save. That fallback is single-player-only; a client that lost its
+    # guest id kept getting the stranger's save with a session bound to it.
+    return playerdb.active() if not MULTIPLAYER else None
 
 
 def r_login(body, st):
@@ -187,6 +190,8 @@ def mint_session_token(login_id, acct_type=1):
     and the next /player request lands on this account's save. acct_type default 1 =
     Google (Constants.AccountType)."""
     uid = _uid_for_login(str(login_id or ""), None, acct_type)
+    if uid is None:
+        return None
     token = "DEV." + secrets.token_hex(16)
     playerdb.bind_session(token, uid)
     admin_log(f"[glogin] minted token for uid={uid}")

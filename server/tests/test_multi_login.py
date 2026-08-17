@@ -28,6 +28,7 @@ playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
 playerdb.init()
 
 import server
+import routes.player_routes as pr   # handler reads ITS import-copy of ADOPT_LONE_SAVE
 
 GOOGLE, GUEST = 1, 4   # Constants.AccountType
 
@@ -68,9 +69,9 @@ def check_a_lone_save_is_not_adopted_by_default():
 
 def check_first_login_adopts_the_lone_existing_save():
     _seed_lone_legacy_save()
-    server.ADOPT_LONE_SAVE = True                       # KGC_ADOPT_LONE_SAVE=1
+    pr.ADOPT_LONE_SAVE = True                       # KGC_ADOPT_LONE_SAVE=1
     out, uid = _login("Google_alice", GOOGLE)
-    server.ADOPT_LONE_SAVE = False
+    pr.ADOPT_LONE_SAVE = False
     assert uid == "legacy-0001", f"first login did not adopt the lone save: {uid}"
     assert playerdb.load(uid)["gold"] == 777777, "the adopted save lost its data"
     assert playerdb.load(uid)["accountType"] == GOOGLE, "login type not recorded"
@@ -97,16 +98,31 @@ def check_same_id_restores_same_save_on_another_device():
     print("ok restore: same id -> same save from a fresh device")
 
 
+def check_empty_id_login_is_refused_in_multiplayer():
+    """A client that lost its guest id must not be handed the active save - that
+    is how a re-login looked like "my account became KingBug/NewPlayer"."""
+    server.CURRENT_LOGIN_ID.set("")
+    server.CURRENT_UID.set(None)
+    with playerdb._conn() as c:
+        n_sessions = c.execute("SELECT COUNT(*) FROM sessions").fetchone()[0]
+    out = server.r_login({"id": "", "type": GUEST}, server.load_state())
+    assert out.get("success") is False, "empty-id login must be refused in multiplayer"
+    with playerdb._conn() as c:
+        assert c.execute("SELECT COUNT(*) FROM sessions").fetchone()[0] == n_sessions, \
+            "refused login must not create a session"
+    print("ok refuse: an id-less login is refused instead of stealing the active save")
+
+
 def check_single_player_override_still_works():
     """KGC_MULTIPLAYER=0 must pin everyone to the active save, the old behaviour."""
-    saved = server.MULTIPLAYER
+    saved = pr.MULTIPLAYER
     try:
-        server.MULTIPLAYER = False
+        pr.MULTIPLAYER = False
         playerdb.set_active("legacy-0001")
         _, uid = _login("Someone_new", GOOGLE)
         assert uid == "legacy-0001", "single-player mode minted a separate save"
     finally:
-        server.MULTIPLAYER = saved
+        pr.MULTIPLAYER = saved
     print("ok override: KGC_MULTIPLAYER=0 keeps one shared save")
 
 
@@ -116,5 +132,6 @@ if __name__ == "__main__":
     check_first_login_adopts_the_lone_existing_save()
     check_a_different_account_gets_its_own_save()
     check_same_id_restores_same_save_on_another_device()
+    check_empty_id_login_is_refused_in_multiplayer()
     check_single_player_override_still_works()
     print("\nall multi-account login checks passed")
