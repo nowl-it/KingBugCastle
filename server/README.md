@@ -34,6 +34,18 @@ mechanic experimentation, and private multiplayer.
   which Newtonsoft on the client deserializes without crashing. Important screens
   (auth, player, currencies) are filled from `state/player.json`. Response data
   that isn't request-time logic lives under `data/*.json` (see below).
+- Route handlers are split into modules under `routes/` (`player_routes.py`,
+  `card_routes.py`, `inventory_routes.py`, `challenge_routes.py`,
+  `artifact_routes.py`, `game_routes.py`, `missions_routes.py`,
+  `attendance_routes.py`, `seasonal_events_routes.py`, plus the pre-existing
+  `clan/pvp/shop_routes/roster/rift/...`). Each module owns its handlers and
+  exposes `handlers()` (a path→callable dict) and `register(app, server_module)`;
+  `server.py` merges those dicts into `DYNAMIC_OVERRIDES` at import and the
+  re-export loop at the bottom mirrors `r_*`/`get_st_*`/`_`-prefixed names onto
+  the server module so callers keep using `srv.<helper>` (or `server.<helper>`).
+  Cross-module helpers (grants, item counts) live in `rewards.py`; crypto/CDN/
+  rate-limit/body-cap/security live in `crypto.py`/`cdn.py`/`security.py` and are
+  wired via `register(app, ...)` right after the FastAPI app is created.
 
 ## Architecture discovered
 

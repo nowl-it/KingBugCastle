@@ -137,3 +137,9 @@ server/secrets/*
 .env
 .env.*
 server/state/*.bak
+
+# Agent planning notes (AI-generated scratch, not source)
+plans/
+
+# Python
+.pytest_cache/

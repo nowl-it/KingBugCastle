@@ -175,12 +175,13 @@ def check_forwarded_ip_is_ignored_unless_trusted():
     server._rate_hits.clear()
     fake = {"x-forwarded-for": "198.51.100.7"}
 
-    server.TRUST_PROXY = False
+    import security
+    security.TRUST_PROXY = False
     assert server.client_ip(_req(LOCAL(), fake)) == "127.0.0.1", "forged header was believed"
-    server.TRUST_PROXY = True
+    security.TRUST_PROXY = True
     assert server.client_ip(_req(LOCAL(), fake)) == "198.51.100.7", \
         "KGC_TRUST_PROXY=1 did not take effect - every player shares one bucket"
-    server.TRUST_PROXY = False
+    security.TRUST_PROXY = False
     print("ok: x-forwarded-for honoured only with KGC_TRUST_PROXY=1")
 
 
