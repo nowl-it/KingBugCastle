@@ -41,6 +41,11 @@ The MCP server returns "not initialized." Ask the user: *"I notice this project 
 > at the repo root (`docs/README.md`). This file stays focused on binary patches, RVAs, and
 > il2cpp internals.
 
+> **Task workflow (user-mandated 2026-08-18)**: before ANY task, check **`docs/dev-notes.md`**
+> first — the personal RE knowledge base (task → known decode → exact RVA/offset → verification
+> method → open questions). Follow it if covered; if not, do the work then update it; if it's
+> wrong, investigate first and only update once certain.
+
 ### Goal
 Private server emulator for King God Castle (arm64). Game uses a FastAPI server on port 8080 (HTTP) + a second uvicorn on port 8443 (TLS, `--ssl-keyfile key.pem --ssl-certfile cert.pem`; the old standalone `tls_proxy.py` is gone). Device connects via `adb reverse tcp:80 tcp:8080; adb reverse tcp:443 tcp:8443`. Hosts file on device redirects the API domains → 127.0.0.1.
 
