@@ -104,25 +104,67 @@ def _invasion_claim(st, theme, difficulty, with_pass):
     return rewards
 
 
+def _invasion_pass_index(theme):
+    """Client ThemeIdToPassIndex(theme): the `index` field of the RewardData entry
+    that a (theme, pass) probe matches. 10 themes share one index."""
+    if theme <= 50:
+        return 2 * ((theme - 1) // 10)
+    return 1 + 2 * ((theme - 51) // 10)
+
+
+def _invasion_pass_of(theme):
+    """Client GetStartEndThemesByPassIndex: the panel pass tab that owns the theme
+    (pass 0 = themes 1-5, 2 = 6-10, 4 = 11-15, 6 = 16-20, 1 = 51-55, ...)."""
+    if theme <= 50:
+        return 2 * ((theme - 1) // 5)
+    return 1 + 2 * ((theme - 51) // 5)
+
+
+def _invasion_entry_mask(st, themes):
+    """Fold per-theme 5-bit masks into one RewardData entry's rewardState. The
+    client reads bit (difficulty-1) + 5*((theme-1)%10) inside the entry, so each
+    theme's bits go at its own 5-bit offset."""
+    mask = 0
+    for t in themes:
+        mask |= _invasion_claimed(st).get(str(t), 0) << (5 * ((t - 1) % 10))
+    return mask
+
+
 def r_invasion_reward(body, st):
     """GET lists what is claimable, POST claims one theme/difficulty.
 
     Same GET/POST split as /shop and /accessory: a request naming a theme is a claim,
     a bare one is a listing. ReceiveInvasionRewardRequestModel is {theme, difficulty,
-    pass}, so `theme` is the discriminator the client already sends."""
+    pass}, so `theme` is the discriminator the client already sends.
+
+    The response is InvasionRewardDatasResponseModel: RewardData{index, pass,
+    rewardState}. The panel badge (GetReceivableRewardCount) iterates entries per
+    pass and, for pass > 0, requires an entry with index == pass (HasInvasionPass),
+    so alongside the per-group entries we emit one {index: pass, pass: pass} marker
+    per pass 2..7 (passes 0 and 1 already match their own group entries)."""
     if not body.get("theme"):
-        return {"rewardDatas": [
-            {"theme": t, "difficulty": d,
-             "rewards": row["Rewards"], "passRewards": row["PassRewards"],
-             "received": bool(_invasion_claimed(st).get(str(t), 0) & (1 << (d - 1)))}
-            for (t, d), row in sorted(INVASION_REWARDS.items())]}
+        themes = sorted({t for (t, d) in INVASION_REWARDS})
+        groups = {}
+        for t in themes:
+            groups.setdefault((_invasion_pass_index(t), _invasion_pass_of(t)), []).append(t)
+        datas = [{"index": i, "pass": p, "rewardState": _invasion_entry_mask(st, ts)}
+                 for (i, p), ts in sorted(groups.items())]
+        extra = {}
+        for t in range(1, 21):
+            extra.setdefault(_invasion_pass_index(t), []).append(t)
+        for i, ts in sorted(extra.items()):
+            datas.append({"index": i, "pass": 1,
+                          "rewardState": _invasion_entry_mask(st, ts)})
+        datas += [{"index": p, "pass": p, "rewardState": 0} for p in range(2, 8)]
+        return {"rewardDatas": datas}
     theme = body_int(body.get("theme"), 0)
     rewards = _invasion_claim(st, theme, body_int(body.get("difficulty"), 1),
                               bool(body.get("pass")))
     save_state(st)
     admin_log(f"[invasion] theme {theme} d{body.get('difficulty')} -> {len(rewards)} rewards")
     return {"rewardListData": srv._reward_list_data(rewards),
-            "rewardState": _invasion_claimed(st).get(str(theme), 0)}
+            "rewardState": _invasion_claimed(st).get(str(theme), 0)
+            << (5 * ((theme - 1) % 10))}
 
 
 def r_invasion_reward_all(body, st):

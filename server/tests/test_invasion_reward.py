@@ -36,12 +36,15 @@ def _fresh():
 def check_catalog():
     out = server.r_invasion_reward({}, _fresh())
     rows = out["rewardDatas"]
-    assert len(rows) == len(server.INVASION_REWARDS), "listing dropped rows"
+    assert len(rows) == 16, f"{len(rows)} entries, expected 16 (8 groups + 2 pass-1 + 6 markers)"
     for r in rows:
-        assert r["theme"] >= 1 and 1 <= r["difficulty"] <= 5, r
-        assert r["rewards"] or r["passRewards"], f"theme {r['theme']} d{r['difficulty']} is empty"
-        assert not r["received"]
-    print(f"ok catalog: {len(rows)} theme/difficulty rows, none claimed on a fresh save")
+        assert {"index", "pass", "rewardState"} == set(r), r
+        assert r["index"] >= 0 and r["pass"] >= 0 and r["rewardState"] == 0, r
+    pairs = [(r["index"], r["pass"]) for r in rows]
+    for p in range(8):
+        assert (p, p) in pairs, f"no {p} group/marker entry"
+    assert (0, 1) in pairs and (2, 1) in pairs, "pass-1 entries for themes 1-20 missing"
+    print(f"ok catalog: {len(rows)} RewardData entries {{index, pass, rewardState}}, none claimed")
 
 
 def check_claim_once():
@@ -69,6 +72,21 @@ def check_bitmask_is_per_difficulty():
     assert server.load_state()["invasionRewardState"]["1"] == 0b111, \
         f"mask is {bin(server.load_state()['invasionRewardState']['1'])}, expected 0b111"
     print("ok bitmask: difficulties 1-3 claim independently")
+
+
+def check_claim_state_reaches_listing():
+    """The claim lands in the entry the client's probe actually reads: theme 6 is
+    group {index 0, pass 2}, and the client reads bit (d-1) + 5*((theme-1)%10), so
+    d3 on theme 6 is bit 2 + 25 = 27 of that entry."""
+    st = _fresh()
+    server.r_invasion_reward({"theme": 6, "difficulty": 3, "pass": 1}, st)
+    rows = {(r["index"], r["pass"]): r for r in server.r_invasion_reward({}, st)["rewardDatas"]}
+    entry = rows[(0, 2)]
+    assert entry["rewardState"] & (1 << 27), \
+        f"theme 6 d3 claim missing from pass-2 entry: {entry}"
+    assert not (entry["rewardState"] & (1 << 26)), \
+        f"claim bled into the wrong bit: {entry['rewardState']:#b}"
+    print("ok state: theme 6 d3 claim shows up in {index 0, pass 2} at bit 27")
 
 
 def check_locked_difficulty_refused():
@@ -101,10 +119,16 @@ def check_receive_all_then_nothing_left():
     again = server.r_invasion_reward_all({"pass": 1}, server.load_state())
     assert not again["rewardListData"]["rewardList"], "receive-all paid out twice"
     listed = server.r_invasion_reward({}, server.load_state())["rewardDatas"]
-    unlocked = server.RCFG["player"]["invasionUnlockedDifficulty"]
-    left = [r for r in listed if not r["received"] and r["difficulty"] <= unlocked]
-    assert not left, f"{len(left)} unlocked rows still unclaimed after receive-all"
-    print(f"ok receive-all: {n} rewards, idempotent, nothing unlocked left")
+    for t in sorted({t for (t, d) in server.INVASION_REWARDS}):
+        i, p = server._invasion_pass_index(t), server._invasion_pass_of(t)
+        entry = next(r for r in listed if r["index"] == i and r["pass"] == p)
+        got = (entry["rewardState"] >> (5 * ((t - 1) % 10))) & 0b11111
+        assert got == 0b11111, f"theme {t}: entry {entry} shows {got:#b}, expected all 5 claimed"
+    for i in (0, 2):
+        entry = next(r for r in listed if r["index"] == i and r["pass"] == 1)
+        assert entry["rewardState"] == (1 << 50) - 1, \
+            f"pass-1 entry {entry} not full after receive-all"
+    print(f"ok receive-all: {n} rewards, idempotent, every theme's 5 bits set")
 
 
 def check_no_item_zero():
@@ -120,6 +144,7 @@ if __name__ == "__main__":
     check_catalog()
     check_claim_once()
     check_bitmask_is_per_difficulty()
+    check_claim_state_reaches_listing()
     check_locked_difficulty_refused()
     check_pass_rewards_are_opt_in()
     check_receive_all_then_nothing_left()
