@@ -541,6 +541,23 @@ Broken-accessory fix: `make_accessory()` used an invalid `data.mainStat="ATK"` (
 blank names). `load_corruption_accessories()` now builds the 4 real Invasion II-1 reward accessories
 from `FixedAccessoryPresets.xml` IDs 2000-2003 (valid stat keys AtkPer/MAtkPer/BaseCriticalProb/etc).
 
+### Accessory change-sub-stat — one entry per key in `data.subStats` (fixed 2026-08-18, d843ed5)
+The client renders `AccessoryModel.data.subStats` (`List<{key,value}>`; the parallel
+`subStats: List<string>`/`subStatScores` lists are a deduped second view). `FixedAccessoryPresets`
+tier lines are additive duplicates of the same key (7× `BaseDefDen`), and the factory kept every
+line as its own entry — so seeded accessories showed 7-8 stat lines, and the change handler
+replacing only the first copy left the rest as "extra lower-tier stats" (plus an inflated pool:
+new stat got the full summed score while leftover copies kept theirs). Fix: both
+`make_fixed_accessory` copies (routes/accessory.py, routes/rewardbox.py) merge by key (value =
+score × unit); `ensure_accessory_state` merges duplicates in existing saves (healed 38/38 live
+players); `r_accessory_change_sub_stat` removes ALL `target_stat` entries and inserts one
+`new_stat` with the summed score. Request semantics: `targetSubStat` = the **OLD** stat (confirm
+panel sends `beforeStatNames[targetIndex]`); chosen stat comes from the ticket's
+`SetAccessorySubStat` (e.g. 8400 → AtkPer). Client apply = `CopyFrom` (shallow, no merge) via
+`GameManager` RVA 0x305B060 / `CopyFrom` 0x2CCCAC0 (v172.0.01). Regression:
+`test_accessory_merge_duplicate_substats` in server/tests/test_accessory.py. Full decode:
+docs/dev-notes.md §9a.
+
 ### Inbox (Post) system + custom mail text
 Inbox = "Post" internally. Direct handlers in `server.py` (registered before the ROUTE_MODELS loop):
 - `GET /post` → `PostResponseModel{posts:[PostData]}` (generated route_models wrongly mapped it to
