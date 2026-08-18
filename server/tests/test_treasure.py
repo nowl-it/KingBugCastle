@@ -69,9 +69,20 @@ def check_treasure_overcome_caps_at_max():
     print("ok: overcome without the ingot is a no-op")
 
 
+def check_max_relic_shape():
+    art = ar.make_max_artifact(1, 10001)      # Normal-level relic -> 1 option slot
+    assert art["count"] == 99999, f"count: {art['count']}"
+    assert art["options"]["lvs"] == [6, 0, 0, 0], art["options"]["lvs"]
+    o = art["data"]["options"][0]
+    assert (o["type"], o["value"], o["level"]) == ("AtkSpeedPer", 24, 6), o
+    assert all(x["type"] == "None" for x in art["data"]["options"][1:])
+    print("ok: make_max_artifact grants 10* relic with maxed AtkSpeedPer at column 1")
+
+
 if __name__ == "__main__":
     for fn in (check_treasure_add_exp_levels_up,
                check_treasure_overcome_raises_tier,
-               check_treasure_overcome_caps_at_max):
+               check_treasure_overcome_caps_at_max,
+               check_max_relic_shape):
         fn()
     print("all treasure checks passed")

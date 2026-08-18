@@ -141,9 +141,7 @@ def register(app, srv):
         arts = st.setdefault("artifacts", [])
         arts.clear()
         for i, aid in enumerate(srv.ALL_ARTIFACT_IDS):
-            art = srv.make_artifact(i + 1, aid)
-            art["count"] = 1
-            arts.append(art)
+            arts.append(srv.make_max_artifact(i + 1, aid))
         # -----------------------
         
         playerdb.save(uid, st)

@@ -220,6 +220,19 @@ def make_treasure(i, tr_id):
     }
 
 
+def make_max_artifact(i, art_id):
+    """Grant-side relic: full 10* (count 99999), every option AtkSpeedPer maxed
+    (value 24, level 6 — the pre-fa74808 template values), applying to column 1
+    (safePositions). The gacha summon path keeps the 0* template on purpose."""
+    art = make_artifact(i, art_id)
+    art["count"] = 99999
+    for o in art["data"]["options"]:
+        if o["type"] != "None":
+            o["value"], o["level"] = 24, 6
+    art["options"]["lvs"] = [6 if lv else 0 for lv in art["options"]["lvs"]]
+    return art
+
+
 def make_rift_weapon(i, rw_id):
     t = ITEM_TEMPLATES["riftWeapon"]
     return {

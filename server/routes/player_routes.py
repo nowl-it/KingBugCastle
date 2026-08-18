@@ -116,13 +116,11 @@ def _uid_for_login(login_id, prev_token, acct_type=None):
                 if info.get("min_version", 0) <= srv.CONTENT_GATE:
                     if str(unit_id) in st["cards"]:
                         st["cards"][str(unit_id)]["level"] = 20
-            # Basic Legacies (0*)
+            # Maxed Legacies (10*, full AtkSpeedPer)
             arts = st.setdefault("artifacts", [])
             arts.clear()
             for i, aid in enumerate(srv.ALL_ARTIFACT_IDS):
-                art = srv.make_artifact(i + 1, aid)
-                art["count"] = 1
-                arts.append(art)
+                arts.append(srv.make_max_artifact(i + 1, aid))
             # -----------------------
 
             playerdb.save(uid, st)

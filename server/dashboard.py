@@ -420,17 +420,13 @@ async def api_player_macro(pid: str, body: dict):
         arts = st.setdefault("artifacts", [])
         arts.clear()
         for i, aid in enumerate(server.ALL_ARTIFACT_IDS):
-            art = server.make_artifact(i + 1, aid)
-            art["count"] = 1 # 0*
-            arts.append(art)
+            arts.append(server.make_max_artifact(i + 1, aid))
     elif macro == "legacy_advanced":
         import server
         arts = st.setdefault("artifacts", [])
         arts.clear()
         for i, aid in enumerate(server.ALL_ARTIFACT_IDS):
-            art = server.make_artifact(i + 1, aid)
-            art["count"] = 99999 # 10*
-            arts.append(art)
+            arts.append(server.make_max_artifact(i + 1, aid))
     elif macro == "legacy_max":
         import server, routes.artifact_routes as ar
         arts = st.setdefault("artifacts", [])
@@ -438,9 +434,7 @@ async def api_player_macro(pid: str, body: dict):
         tree = ET.parse(server.XML_DIR / "Artifacts.xml")
         all_relic_ids = [int(el.get("ID")) for el in tree.findall("Artifact") if el.findtext("Type") == "Artifact" and el.findtext("FromType") not in ("Special", "RogueLike", "RogueLikeBuildingArtifact", "Event")]
         for i, aid in enumerate(all_relic_ids):
-            art = server.make_artifact(i + 1, aid)
-            art["count"] = 99999 # 10*
-            arts.append(art)
+            arts.append(server.make_max_artifact(i + 1, aid))
         # Treasure "Legacy" system too: every released treasure at max
         # (overcome 10 -> TreasureOvercomeUp MaxLevel 30, exp 0), keeping
         # the equipped unitId for treasures the account already owns.

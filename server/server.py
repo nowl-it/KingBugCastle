@@ -389,7 +389,7 @@ ALL_RIFT_WEAPON_IDS = _all_rift_weapon_ids()
 
 
 
-from routes.artifact_routes import (make_artifact, make_accessory,
+from routes.artifact_routes import (make_artifact, make_max_artifact, make_accessory,
     make_treasure, make_rift_weapon, make_rift_crystal,
     load_corruption_accessories, get_st_artifacts, get_st_treasures,
     get_st_accessories, _resolve_equipped_artifacts,
