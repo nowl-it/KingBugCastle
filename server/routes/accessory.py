@@ -209,11 +209,9 @@ def recompute_accessory_substats(acc: Dict[str, Any]):
 def ensure_accessory_state(st: Dict[str, Any]) -> bool:
     """Ensure st['accessories'] and st['accessoryPresets'] exist and are healthy."""
     changed = False
-    if "accessories" not in st or not isinstance(st["accessories"], list) or len(st["accessories"]) == 0:
-        st["accessories"] = load_default_corruption_accessories()
-        changed = True
-    else:
-        # Sanitize each accessory model
+    # The default accessory set is seeded by the data-layer migration
+    # (_repair_player_state); here only the existing models get sanitized.
+    if isinstance(st.get("accessories"), list) and len(st["accessories"]) > 0:
         for a in st["accessories"]:
             if not isinstance(a, dict):
                 continue

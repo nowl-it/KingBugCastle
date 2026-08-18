@@ -313,10 +313,8 @@ def _repair_rift_crystals(crystals):
 # ArtifactResultResponseModel.equippedArtifacts = List<EquippedArtifactData>
 # {deckPreset, index, artifact} (dump.cs @0x2C). Persisted server-side as
 def get_st_artifacts(st):
-    _ensure_defaults()
-    if "artifacts" not in st:
-        st["artifacts"] = copy.deepcopy(DEFAULT_ARTIFACTS)
-    return st["artifacts"]
+    # Seeded by the data-layer migration (_repair_player_state); read-only here.
+    return st.get("artifacts", [])
 
 
 def _resolve_equipped_artifacts(st):
@@ -464,10 +462,8 @@ def r_artifact_result(body, st):
 
 
 def get_st_treasures(st):
-    _ensure_defaults()
-    if "treasures" not in st:
-        st["treasures"] = copy.deepcopy(DEFAULT_TREASURES)
-    return st["treasures"]
+    # Seeded by the data-layer migration (_repair_player_state); read-only here.
+    return st.get("treasures", [])
 
 
 def r_treasure(body, st):

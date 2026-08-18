@@ -333,13 +333,10 @@ def ensure_rift_state(st):
     data = _parse_xml()
     changed = False
 
-    # 1. Rift Weapons
+    # 1. Rift Weapons (seeded by the data-layer migration; repair-only here)
     valid_weapon_ids = set()
-    if "riftWeapons" not in st or not isinstance(st["riftWeapons"], list):
-        st["riftWeapons"] = copy.deepcopy(DEFAULT_RIFT_WEAPONS)
-        changed = True
 
-    for w in st["riftWeapons"]:
+    for w in st.get("riftWeapons", []):
         w_id = w.get("id")
         if w_id:
             valid_weapon_ids.add(w_id)
@@ -363,11 +360,8 @@ def ensure_rift_state(st):
             w["subStat"] = [0, 0, 0]
             changed = True
 
-    # 2. Rift Crystals
-    if "riftCrystals" not in st or not isinstance(st["riftCrystals"], list) or not st["riftCrystals"]:
-        st["riftCrystals"] = copy.deepcopy(DEFAULT_RIFT_CRYSTALS)
-        changed = True
-    else:
+    # 2. Rift Crystals (seeded by the data-layer migration; repair-only here)
+    if isinstance(st.get("riftCrystals"), list) and st["riftCrystals"]:
         for c in st["riftCrystals"]:
             # If ceilCount was erroneously set to max ceil (e.g. 70), reset to 0
             rarity_name = RIFT_CRYSTAL_RARITIES.get(c.get("rarity", 1), "Common")
@@ -378,11 +372,9 @@ def ensure_rift_state(st):
         if _repair_rift_crystals(st["riftCrystals"]):
             changed = True
 
-    # 3. Equipped Weapons: Dict[int, List[EquippedRiftWeaponData]]
-    if "equippedRiftWeapons" not in st or not isinstance(st["equippedRiftWeapons"], dict):
-        st["equippedRiftWeapons"] = {}
-        changed = True
-    else:
+    # 3. Equipped Weapons: Dict[int, List[EquippedRiftWeaponData]] (seeded by
+    # the data-layer migration; repair-only here)
+    if isinstance(st.get("equippedRiftWeapons"), dict):
         # Migrate old string keys to int keys and remove orphan equipped weapons
         eq = st["equippedRiftWeapons"]
         str_keys = [k for k in eq if isinstance(k, str)]
@@ -404,25 +396,10 @@ def ensure_rift_state(st):
                 eq[p_key] = cleaned
                 changed = True
 
-    # 4. Rift Gauge
-    if "riftGauge" not in st:
-        st["riftGauge"] = data["gauge_max"]  # Start with full gauge (1000)
-        changed = True
+    # 4. Rift Gauge (seeded by the data-layer migration)
 
-    # 5. RogueLike DLCs (Unlocks Altars 6=Death, 7=Immortality, 8=Domination)
-    all_dlcs = [
-        {"dlc": 2400, "tier": 2},
-        {"dlc": 2410, "tier": 2},
-        {"dlc": 2420, "tier": 2},
-    ]
-    if not st.get("rogueLikeBoughtDlcs") or len(st.get("rogueLikeBoughtDlcs", [])) < 3:
-        st["rogueLikeBoughtDlcs"] = all_dlcs
-        changed = True
-
-    # 6. Rift Weapon Archives
-    if "riftWeaponArchives" not in st:
-        st["riftWeaponArchives"] = []
-        changed = True
+    # 5. RogueLike DLCs and 6. Rift Weapon Archives are seeded by the data-layer
+    # migration; nothing to repair here.
 
     return changed
 

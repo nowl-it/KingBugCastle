@@ -42,24 +42,28 @@ def _enc(payload):
                     headers={"encryptedWithHex": "true"})
 
 
-def invasion_records():
-    """One record per (theme, difficulty) up to the unlocked one.
+def invasion_records(st=None):
+    """Per-player invasion difficulty records, reshaped from the save's real data.
 
-    Accessory/treasure/rift-weapon unlocks gate on invasion cleared difficulty, not on
-    hard mode, so every difficulty up to `invasionUnlockedDifficulty` must be present
-    and carry that same number as its unlockedDifficulty.
-
-    `difficulty` is the highest CLEARED tier and MUST be `unlocked`, not the loop var:
-    GetInvasionClearedDifficulty reads records.First(theme).difficulty, so a `d` there
-    reports cleared=1 and every Invasion II theme (diff >= 6) stays locked in Battle.
-    The d-loop only pads the list length for per-tier indexing (same fix as r_player)."""
-    unlocked = RCFG["player"]["invasionUnlockedDifficulty"]
-    themes = ([t for a, b in RCFG["player"]["invasionThemeRanges"] for t in range(a, b)]
-              + srv._PREREQ_THEMES)
-    themes = sorted(dict.fromkeys(themes),
-                    key=lambda t: (t not in (16, 17, 18, 19, 20, 66, 67, 68, 69, 70), t))
-    return [{"theme": t, "difficulty": unlocked, "unlockedDifficulty": unlocked}
-            for t in themes for d in range(1, unlocked + 1)]
+    The records themselves live in `st["invasionRecords"]` (seeded and updated by the
+    data-layer migration / game-complete handler) - `cleared` is the highest tier
+    actually cleared, `unlocked` the highest playable one. This function only builds
+    the wire list: one row per difficulty tier so ProfilePanel.ReloadChallenge's
+    per-tier indexing holds."""
+    if st is None:
+        st = load_state()
+        from routes.player_routes import _repair_player_state
+        if _repair_player_state(st):
+            save_state(st)
+    from routes.player_routes import invasion_theme_list
+    recs = st.get("invasionRecords") or {}
+    out = []
+    for t in invasion_theme_list():
+        r = recs.get(str(t), {"cleared": 0, "unlocked": 0})
+        for d in range(1, max(1, r["unlocked"]) + 1):
+            out.append({"theme": t, "difficulty": r["cleared"],
+                        "unlockedDifficulty": r["unlocked"]})
+    return out
 
 
 def equip_accessories(st, target_ids, unit_id):
@@ -121,6 +125,9 @@ def register(app, server_module):
     @app.get("/accessory")
     async def accessory_inventory_direct(request: Request):
         st = load_state()
+        from routes.player_routes import _repair_player_state
+        if _repair_player_state(st):
+            save_state(st)
         host = request.headers.get("host", "?")
         admin_log(f"[{host}] DIRECT GET /accessory -> AccessoryInventoryResponseModel")
         import accessory
@@ -130,6 +137,9 @@ def register(app, server_module):
     @app.post("/accessory")
     async def accessory_equip_direct(request: Request):
         st = load_state()
+        from routes.player_routes import _repair_player_state
+        if _repair_player_state(st):
+            save_state(st)
         host = request.headers.get("host", "?")
         body = await _body(request, srv)
         admin_log(f"[{host}] DIRECT POST /accessory -> AccessoryResultResponseModel")
@@ -186,10 +196,8 @@ if __name__ == "__main__":
     recs = invasion_records()
     unlocked = RCFG["player"]["invasionUnlockedDifficulty"]
     assert recs, "no invasion records - accessories/treasures stay locked"
-    assert {r["difficulty"] for r in recs} == set(range(1, unlocked + 1)), \
-        "a gap in the difficulty ladder leaves the unlock gate unsatisfied"
-    assert all(r["unlockedDifficulty"] == unlocked for r in recs), \
-        "the record must carry the unlocked difficulty, not the loop variable"
+    assert all(r["difficulty"] == unlocked and r["unlockedDifficulty"] == unlocked
+               for r in recs), "granted saves must report the unlocked difficulty as cleared"
 
     # Equipping moves the set and clears the previous holder.
     accs = srv.get_st_accessories(st)

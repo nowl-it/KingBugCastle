@@ -55,6 +55,7 @@ def r_game_start(body, st):
 def r_game_complete(body, st):
     gc = RCFG["gameComplete"]
     babel_rewards = []
+    print(f"  [GAME/COMPLETE] body={body}")
     gid = body_str(body.get("gameId"))
     win = bool(body.get("win", False))
     theme = body_int(body.get("theme"), 1, lo=0)
@@ -66,6 +67,17 @@ def r_game_complete(body, st):
     st["exp"] += add_exp
     if win:
         st["winCount"] = st.get("winCount", 0) + 1
+        # Real invasion progress: the complete request carries the cleared difficulty
+        # for invasion themes too - store it so the records derive from actual clears
+        # (the seed grants cleared=unlocked=11; real clears never downgrade it).
+        diff = body_int(body.get("difficulty"), 0)
+        if diff >= 1:
+            from routes.player_routes import invasion_theme_list
+            if theme in set(invasion_theme_list()):
+                rec = st.setdefault("invasionRecords", {}).setdefault(
+                    str(theme), {"cleared": 0, "unlocked": 0})
+                rec["cleared"] = max(rec["cleared"], diff)
+                rec["unlocked"] = max(rec["unlocked"], min(diff + 1, 5))
         # Hard invasion themes (51-70) advance bestClearedHardTheme instead of
         # bestClearedTheme.  The Invasion II section panel gates on the former, so
         # without this update the section stays locked even after clearing I-10 Hard.

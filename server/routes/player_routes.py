@@ -294,14 +294,10 @@ def r_player_rename(body, st):
 # unlockedDifficulty tier (up to 15) -> a shorter list throws
 # IndexOutOfRangeException, aborting Reload() before name/avatar/clan/date ever
 # get set (root cause of the whole profile-popup bug batch).
-_INVASION_THEMES = [t for a, b in _PC["invasionThemeRanges"] for t in range(a, b)]
 # v171.1.00+ builds the invasion carousel from Themes.xml ThemeSeason (1-20, 51-70),
 # so every season theme must be in the records - not just 16-20/66-70 (that gap kept
 # chapter I-1 = theme 1's difficulty bar locked past Easy). Keep the v172-era battle
 # themes first: records-driven clients read chapter I-1 as the FIRST record entry.
-_INVASION_THEMES = sorted(
-    _INVASION_THEMES,
-    key=lambda t: (t not in (16, 17, 18, 19, 20, 66, 67, 68, 69, 70), t))
 # Theme 16 (Invasion I-1) requires ReqPrevThemeDifficulty=3 on the PREVIOUS theme (15,
 # the last Story chapter) - ThemeSelectPanel.IsThemeLocked looks this up by ID-1 in the
 # same invasionDifficultyRecords dictionary (no separate "story difficulty" field exists
@@ -311,6 +307,17 @@ _INVASION_THEMES = sorted(
 # GetInvasionClearedDifficulty; without a record, it returns 0 < ReqPrevThemeDifficulty(3)
 # and the section stays locked). 60-65 = invasion-I hard prerequisite themes.
 _PREREQ_THEMES = [10, 15, 60, 61, 62, 63, 64, 65]
+
+
+def invasion_theme_list():
+    """The full ThemeSeason theme list (1-20, 51-70), v172-era battle themes first.
+
+    Shared by the data-layer migration (which seeds per-player records), the /player
+    and /invasion/record response builders, and the real-progress recorder."""
+    themes = ([t for a, b in _PC["invasionThemeRanges"] for t in range(a, b)]
+              + _PREREQ_THEMES)
+    return sorted(dict.fromkeys(themes),
+                  key=lambda t: (t not in (16, 17, 18, 19, 20, 66, 67, 68, 69, 70), t))
 
 
 def _repair_player_state(st):
@@ -346,6 +353,50 @@ def _repair_player_state(st):
     if st["buildingPoint"] < _building_point_floor(st):
         st["buildingPoint"] = _building_point_floor(st)
         changed = True
+    # --- Data-layer seed: the DB row is the source of truth for player data; this
+    # migration materializes the defaults once, response builders only read back. ---
+    if not isinstance(st.get("invasionRecords"), dict):
+        u = _PC["invasionUnlockedDifficulty"]
+        st["invasionRecords"] = {str(t): {"cleared": u, "unlocked": u}
+                                 for t in invasion_theme_list()}
+        changed = True
+    ld = _PC["listDefaults"]
+    for k in ("eventModeRecord", "rogueLikeBuildingChallengeLevelRecord",
+              "currentRanking", "currentHardRanking"):
+        if not isinstance(st.get(k), list):
+            st[k] = [ld[k + "Value"]] * ld[k + "Count"]
+            changed = True
+    if "rogueLikeBoughtDlcs" not in st:
+        st["rogueLikeBoughtDlcs"] = list(srv.ALL_ROGUE_LIKE_DLCS)
+        changed = True
+    from routes.artifact_routes import _ensure_defaults, DEFAULT_TREASURES, DEFAULT_ARTIFACTS
+    from routes.accessory import load_default_corruption_accessories
+    from routes import rift as _rift
+    _ensure_defaults()
+    if not isinstance(st.get("treasures"), list):
+        st["treasures"] = copy.deepcopy(DEFAULT_TREASURES)
+        changed = True
+    if not isinstance(st.get("accessories"), list) or len(st["accessories"]) == 0:
+        st["accessories"] = copy.deepcopy(load_default_corruption_accessories())
+        changed = True
+    if not isinstance(st.get("artifacts"), list):
+        st["artifacts"] = copy.deepcopy(DEFAULT_ARTIFACTS)
+        changed = True
+    if not isinstance(st.get("riftWeapons"), list):
+        st["riftWeapons"] = copy.deepcopy(_rift.DEFAULT_RIFT_WEAPONS)
+        changed = True
+    if not isinstance(st.get("equippedRiftWeapons"), dict):
+        st["equippedRiftWeapons"] = {}
+        changed = True
+    if not isinstance(st.get("riftCrystals"), list) or not st["riftCrystals"]:
+        st["riftCrystals"] = copy.deepcopy(_rift.DEFAULT_RIFT_CRYSTALS)
+        changed = True
+    if "riftGauge" not in st:
+        st["riftGauge"] = _rift._parse_xml()["gauge_max"]
+        changed = True
+    if "riftWeaponArchives" not in st:
+        st["riftWeaponArchives"] = []
+        changed = True
     return changed
 
 
@@ -361,8 +412,6 @@ def r_player(body, st):
     if _repair_player_state(st):
         save_state(st)
     d = _PC["defaults"]
-    ld = _PC["listDefaults"]
-    unlocked = _PC["invasionUnlockedDifficulty"]
     return {
         "accountId": st.get("accountId", d["accountId"]),
         "name": st.get("name", d["name"]), "castleName": st.get("castleName", d["castleName"]),
@@ -384,22 +433,20 @@ def r_player(body, st):
         "rogueLikeCleared": st.get("rogueLikeCleared", d["rogueLikeCleared"]),
         "invasionDifficultyRecords": [
             # difficulty = highest CLEARED tier (GetInvasionClearedDifficulty reads
-            # .First(theme).difficulty) - must be `unlocked`, not the loop var, or the
-            # first per-theme record reports cleared=1 and content gates (accessory@6,
-            # riftweapon@11) stay locked. The d-loop only pads list length for
-            # ProfilePanel.ReloadChallenge's per-tier indexing.
-            {"theme": i, "difficulty": unlocked, "unlockedDifficulty": unlocked}
-            for i in dict.fromkeys(srv._INVASION_THEMES + srv._PREREQ_THEMES)
-            for d in range(1, unlocked + 1)
+            # .First(theme).difficulty). Rows come from the save's real records
+            # (seeded by the data-layer migration); the d-loop only pads list length
+            # for ProfilePanel.ReloadChallenge's per-tier indexing.
+            {"theme": t, "difficulty": r["cleared"], "unlockedDifficulty": r["unlocked"]}
+            for t in invasion_theme_list()
+            for r in (st["invasionRecords"].get(str(t), {"cleared": 0, "unlocked": 0}),)
+            for d in range(1, max(1, r["unlocked"]) + 1)
         ],
-        "eventModeRecord": st.get("eventModeRecord", [ld["eventModeRecordValue"]] * ld["eventModeRecordCount"]),
-        "rogueLikeBuildingChallengeLevelRecord": st.get(
-            "rogueLikeBuildingChallengeLevelRecord",
-            [ld["rogueLikeBuildingChallengeLevelRecordValue"]] * ld["rogueLikeBuildingChallengeLevelRecordCount"]),
+        "eventModeRecord": st.get("eventModeRecord", []),
+        "rogueLikeBuildingChallengeLevelRecord": st.get("rogueLikeBuildingChallengeLevelRecord", []),
         "rogueLikeGameIndex": st.get("rogueLikeGameIndex", d["rogueLikeGameIndex"]),
         "dimensionRiftGameIndex": st.get("dimensionRiftGameIndex", d["dimensionRiftGameIndex"]),
-        "currentRanking": st.get("currentRanking", [ld["currentRankingValue"]] * ld["currentRankingCount"]),
-        "currentHardRanking": st.get("currentHardRanking", [ld["currentHardRankingValue"]] * ld["currentHardRankingCount"]),
+        "currentRanking": st.get("currentRanking", []),
+        "currentHardRanking": st.get("currentHardRanking", []),
         "tomorrow": next_reset_iso(1),
         "nextWeek": next_reset_iso(7),
         "hasFreeRename": st.get("hasFreeRename", d["hasFreeRename"]),
@@ -430,7 +477,7 @@ def r_player(body, st):
         "customEventDatas": st.get("customEventDatas", []),
         "eventMissionData": st.get("eventMissionData", []),
         "eventData": st.get("eventData", []),
-        "rogueLikeBoughtDlcs": st.get("rogueLikeBoughtDlcs") or srv.ALL_ROGUE_LIKE_DLCS,
+        "rogueLikeBoughtDlcs": st.get("rogueLikeBoughtDlcs") or [],
         "accountCreatedAt": st.get("accountCreatedAt", now_iso(0)),
     }
 
