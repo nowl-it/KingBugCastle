@@ -269,3 +269,69 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
 - One-time `WorldPanel.Reload()` NRE at IL offset 0x00000 — non-blocking, unpinned.
 - `deck-reload`/`deck-reload2` v170 patches still disabled (root-cause investigation 2026-07-02,
   never re-enabled — re-derive v171+ offsets if ever needed).
+
+## 13. Strife Battlefield (Colosseum PvP)
+
+### Season display
+- `ColosseumSettings.xml`: `CurrentSeasonTheme` = "1,2,6,7,8,10,11,12,13,14,15" matches
+  `SeasonTheme Season="72"`. `SeasonThemes` has Season="71" and Season="72".
+- Client logic in `HandleSemiSeasonChanged` → `LeagueContentRankBox.Set<Tier>`: the format
+  string (`ColosseumBetaSeason` vs `ColosseumSeasonFormat`) is chosen by comparing
+  `season` (field offset 0x2C in `PlayerColosseumInfoResponseModel`) against **0x25 = 37**.
+  `csel` at RVA 0x3252e18: if season > 37 → uses `ColosseumSeasonFormat` ("Strife Battlefield
+  Season {0}"), else → `ColosseumBetaSeason` ("Strife Battlefield Beta Season").
+- **Fix (commit 14dc59b)**: `response_config.json` colosseum season `1` → `72`. Now the client
+  shows "Strife Battlefield Season 72". Old value 1 was <=37, triggering Beta Season.
+- `LeagueContentRankBox.Set<Tier>` signature (RVA 0x3b247d0, file offset 0x3b207d0):
+  `Set<Tier>(string seasonFormat, int season, int curSemiSeason, List<LeagueContentScoreData>
+  scoreDatas, DateTime seasonUntilAt, DateTime thisSemiSeasonStartAt, DateTime
+  nextSemiSeasonStartAt, Func<int, int, Tier> getResTierFunc)`. Does
+  `Localizer.Get(seasonFormat)` then `string.Format(result, season)` → `_seasonText.text`.
+
+### Battle flow
+- `OnClickStartColosseum` (RVA 0x3250fb8) → checks level gate, opens confirm dialog →
+  `GameManager.StartColosseumMatchmaking` (RVA 0x3071578).
+- `StartColosseumMatchmaking` → `RestAPI.RequestColosseumMatchmaking` → `POST /colosseum/match`
+  → `ColosseumMatchResponseModel{gameId, serverAddress}`.
+- Empty `serverAddress` = client falls through to local bot stage (single-player colosseum).
+- Battle runs locally → `POST /colosseum/complete-round-data` on completion
+  → `r_colosseum_complete_round` handles score update.
+- `POST /colosseum/round-data` = round-in-progress snapshot (ack only, no persistence needed).
+
+### Key RestAPI endpoints (all from script.json)
+| Method | Endpoint | Response model |
+|---|---|---|
+| `RequestColosseumMatchmaking` | `/colosseum/match` | `ColosseumMatchResponseModel` |
+| `PingColosseumMatchingResult` | `/colosseum/match/ping` | polling for match result |
+| `CancelColosseumMatching` | `/colosseum/match/cancel` | ack |
+| `FetchPlayerColosseum` | `/colosseum` | `PlayerColosseumInfoResponseModel` |
+| `FetchColosseumPlayersData` | `/colosseum/fetch-players-data` | opponent list |
+| `FetchColosseumAddressByGameID` | `/colosseum/server-address` | game server addr |
+| `SaveColosseumRoundData` | `/colosseum/round-data` | ack |
+| `SaveCompleteColosseumRoundData` | `/colosseum/complete-round-data` | score update |
+| `ColosseumGetReward` | `/colosseum/get-reward` | tier rewards |
+| `ColosseumReceiveAllRewards` | `/colosseum/all-tier-rewards` | bulk claim |
+| `GetColosseumRanking` | ranking path | leaderboard |
+| `GetColosseumLeagueRanking` | ranking path | league board |
+| `GetColosseumHallOfFame` | ranking path | hall of fame |
+| `TestColosseumSinglePlay` | `/colosseum/test-single-play` | same as /match |
+| `TestColosseumFreeMatching` | `/colosseum/test-free-match` | same as /match |
+| `CreateColosseumCustomMatch` | `/colosseum/create-custom-match` | custom lobby |
+| `JoinColosseumCustomMatch` | `/colosseum/join-custom-match` | custom join |
+| `ColosseumReenterTried` | `/colosseum/reenter-tried` | ack |
+| `ColosseumReenterSucceed` | `/colosseum/reenter-succeed` | ack |
+| `CheckColosseumReenterEndGame` | `/colosseum/check-end` | ack |
+| `ColosseumRecordMinimumRank` | `/colosseum/record-minimum-rank` | ack |
+| `GetColosseumOpenMissionReward` | `/colosseum/open-mission-reward` | reward list |
+
+### Key model offsets (v172.0.01)
+- `PlayerColosseumInfoResponseModel.season` = field offset 0x2C
+- `PlayerColosseumInfoResponseModel.semiSeason` = field offset 0x54
+- `ColosseumPanel._leagueContentRankBox` = offset 0x28
+- `ColosseumPanel._matchStartButton` = offset 0x50
+- `ColosseumPanel._colosseumEnabled` check via `CheckColosseumEnabled` (RVA 0x32513b4)
+
+### All routes registered
+All 31 colosseum routes are in `routes/pvp.py` → `handlers()`. The `r_colosseum_match` returns
+empty `serverAddress` to trigger local bot battle. `r_colosseum_complete_round` handles score
+delta + tier update. `r_colosseum_round_data` is a no-op ack (client replays own rounds).
