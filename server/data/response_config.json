@@ -62,7 +62,7 @@
 			"deckRecordDifficulty": 0
 		},
 		"seasonDayOffsets": [15, 30],
-		"nextSeasonDayOffsets": [16, 31, 32]
+		"nextSeasonDayOffsets": [-15, 16, 31]
 	},
 	"colosseum": {
 		"fixed": {
@@ -80,8 +80,8 @@
 			"theme": 3000,
 			"allTierRewards": []
 		},
-		"seasonDayOffsets": [15, 30],
-		"nextSeasonDayOffsets": [16, 31, 32]
+		"seasonDayOffsets": [-15, 15],
+		"nextSeasonDayOffsets": [-30, -15, 15]
 	},
 	"pass": {
 		"_comment": "passSeason MUST be a valid SeasonPasses.xml ID or WorldPanel.Reload throws (GameManager.passModel.passSeason -> ResourceBase.Get(id) NRE if id absent).",
