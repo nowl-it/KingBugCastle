@@ -69,6 +69,23 @@ Private server emulator for King God Castle (arm64). Game uses a FastAPI server 
 - ARM64 code: `seasonUntilAtDates[semiSeason - 1]` — same pattern!
 - Fix: set `semiSeason >= 2` with array of 2+ elements
 
+### Date array semantics (critical for correct panel behavior)
+`_isColosseumPreSeason()` (RVA 0x324fba4) calls `GetSeasonStartAt(0)` → `nextSeasonStartAtDates[0]`
+(clamped from -1→0), then checks `nextSeasonStartAtDates[0] > UtcNow`. If TRUE → pre-season
+popup ("Season Ended") shown, game start blocked. **`nextSeasonDayOffsets[0]` MUST be ≤ 0** so
+the first semi-season start date is in the past. Same for `_isSemiSeasonBreakTime()` which checks
+`seasonUntilAtDates[semiSeason-1] <= UtcNow`.
+
+| Array | Index | Meaning | Must be (when semiSeason active) |
+|---|---|---|---|
+| `nextSeasonStartAtDates[0]` | `GetSeasonStartAt(0)` | Start of first semi-season | **PAST** (≤ now) |
+| `nextSeasonStartAtDates[semiSeason-1]` | `GetSeasonStartAt(semiSeason)` | Start of current semi-season | PAST or near now |
+| `nextSeasonStartAtDates[semiSeason]` | `GetNextSeasonStartAt()` | Start of next global season | FUTURE |
+| `seasonUntilAtDates[semiSeason-1]` | `GetCurrentSeasonUntilAt()` | End of current semi-season | FUTURE |
+
+Fix (commit 8753945): colosseum (semiSeason=2) `nextSeasonDayOffsets` `[-30,-15,15]`,
+`seasonDayOffsets` `[-15,15]`; pvpInfo (semiSeason=1) `nextSeasonDayOffsets` `[-15,16,31]`.
+
 ### SSL Bypass Patches (arm64 libil2cpp.so, v170.1.00)
 Three patches at addresses (in APK libil2cpp.so):
 - 0x2CB2248
