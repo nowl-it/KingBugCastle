@@ -207,6 +207,37 @@ Fixed-period loops with no exception = client timer, not retry.
 - Accessories: `load_corruption_accessories()` builds the 4 real Invasion II-1 rewards from
   `FixedAccessoryPresets.xml` IDs 2000-2003 (valid stat keys — `mainStat="ATK"` was garbage).
 
+### 9a. Accessory change-sub-stat — duplicate-tier decode (2026-08-18, d843ed5)
+
+**Client models (v172.0.01)**: `AccessoryChangeSubStatRequestModel{accessoryId, targetSubStat,
+itemId}` — `targetSubStat` is the **OLD** stat (confirm panel `_targetSubStatName` =
+`beforeStatNames[targetIndex]`). Response `AccessoryResultResponseModel{accessories,
+deletedAccessories, playerGold, playerCash, inventories, addedExpItems}` — exactly what
+`_make_result_response` sends; the client's `AccessoryModel.data.subStats` = `List<{key,value}>`
+objects (NOT strings — the parallel `subStats: List<string>`/`subStatScores: List<float>` are a
+second, deduped view).
+
+**Client apply path**: `<OnClickConfirm>d__17.MoveNext` (RVA 0x334FF70) → success → `GameManager`
+@ RVA 0x305B060: for each response accessory, find by id in the owned list then
+**`CopyFrom` (RVA 0x2CCCAC0 = shallow field copy, no merge)** — list entries are never replaced,
+only field-copied; not-found → append; then remove `deletedAccessories`, apply gold/cash.
+
+**Root cause of "chosen stat applied + extra lower-tier stats"**: `FixedAccessoryPresets.xml`
+tier lines are additive duplicates of the same key (e.g. 6× `BaseDefDen 4.0` + 1× `2.0`), and
+`make_fixed_accessory` kept every line as its own `data.subStats` entry (only the parallel lists
+were deduped). The client renders `data.subStats`, so seeded accessories showed 7-8 stat lines;
+the change handler replaced only the FIRST copy, leaving the rest as "extras" (and handing the
+full summed score to the new stat while the leftover copies kept their own — inflated pool).
+
+**Fix (server-side only)**: `make_fixed_accessory` (both copies: `routes/accessory.py` +
+`routes/rewardbox.py`) builds `data.subStats` from the deduped `scores` dict (one entry per key,
+value = score × unit); `ensure_accessory_state` merges duplicates in existing saves (heal —
+38/38 live players fixed at deploy); `r_accessory_change_sub_stat` removes ALL `target_stat`
+entries and inserts one `new_stat` entry with the summed score at the first removed index.
+Regression: `test_accessory_merge_duplicate_substats` in `server/tests/test_accessory.py`.
+Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnant cleanup
+(the old handler had given AtkPer the full 26 pool while leaving BaseDefDen 22 behind).
+
 ## 10. Post/mail system (2026-07-11)
 
 - Inbox = "Post": direct handlers `GET /post`, `POST /post/receive`, `POST /admin/sendmail`
