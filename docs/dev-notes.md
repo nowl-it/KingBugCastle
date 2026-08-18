@@ -280,8 +280,15 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
   `season` (field offset 0x2C in `PlayerColosseumInfoResponseModel`) against **0x25 = 37**.
   `csel` at RVA 0x3252e18: if season > 37 → uses `ColosseumSeasonFormat` ("Strife Battlefield
   Season {0}"), else → `ColosseumBetaSeason` ("Strife Battlefield Beta Season").
-- **Fix (commit 14dc59b)**: `response_config.json` colosseum season `1` → `72`. Now the client
-  shows "Strife Battlefield Season 72". Old value 1 was <=37, triggering Beta Season.
+- **Two-step season source (critical)**: the format string selection does NOT read from the
+  colosseum response model. Assembly chain: `Il2CppClass → static_fields → _singleton →
+  pvpData (offset 0x220) → season (offset 0x2C)`. `GameManager.pvpData` is populated by
+  `/pvp/info` (Arena endpoint), NOT `/colosseum`. So both endpoints must return season > 37.
+- **Fix (commit 14dc59b)**: `response_config.json` colosseum season `1` → `72`. Outer panel
+  gate card showed "Season 72" but inner panel still showed "Beta Season".
+- **Fix (commit b4cf13a)**: `response_config.json` pvpInfo season `1` → `72` (and
+  pvpInfoDirect `1` → `72`). Inner panel reads `GameManager.pvpData.season`, which comes
+  from `/pvp/info`. Old value 1 was <=37, still triggering ColosseumBetaSeason.
 - `LeagueContentRankBox.Set<Tier>` signature (RVA 0x3b247d0, file offset 0x3b207d0):
   `Set<Tier>(string seasonFormat, int season, int curSemiSeason, List<LeagueContentScoreData>
   scoreDatas, DateTime seasonUntilAt, DateTime thisSemiSeasonStartAt, DateTime
