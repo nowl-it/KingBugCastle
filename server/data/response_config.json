@@ -47,7 +47,7 @@
 	},
 	"pvpInfo": {
 		"fixed": {
-			"season": 1,
+			"season": 72,
 			"semiSeason": 1,
 			"pvpEnabled": true,
 			"theme": 0,
@@ -165,7 +165,7 @@
 		"exp": 0
 	},
 	"pvpInfoDirect": {
-		"season": 1,
+		"season": 72,
 		"semiSeason": 1,
 		"pvpEnabled": true,
 		"seasonUntilAtDates": [
