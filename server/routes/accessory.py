@@ -166,7 +166,10 @@ def make_fixed_accessory(preset_id: int, inst_id: int, now: str = "") -> Optiona
         "state": 0,
         "data": {
             "mainStat": p.findtext("MainStat", "AtkPer"),
-            "subStats": [{"key": k, "value": v} for k, v in rolls if k],
+            "subStats": [
+                {"key": k, "value": round(s * VALUE_PER_SCORE.get(k, 1.0), 3)}
+                for k, s in scores.items()
+            ],
         },
         "subStats": list(scores.keys()),
         "subStatScores": [round(s, 3) for s in scores.values()],
@@ -221,6 +224,22 @@ def ensure_accessory_state(st: Dict[str, Any]) -> bool:
             if "subStats" not in a or "subStatScores" not in a:
                 recompute_accessory_substats(a)
                 changed = True
+            sub_stats = a["data"].get("subStats")
+            if isinstance(sub_stats, list):
+                acc_scores: Dict[str, float] = {}
+                for e in sub_stats:
+                    k = e.get("key")
+                    v = float(e.get("value", 0.0))
+                    if k:
+                        unit = VALUE_PER_SCORE.get(k, 1.0)
+                        acc_scores[k] = acc_scores.get(k, 0.0) + (v / unit)
+                if len(acc_scores) != len(sub_stats):
+                    a["data"]["subStats"] = [
+                        {"key": k, "value": round(s * VALUE_PER_SCORE.get(k, 1.0), 3)}
+                        for k, s in acc_scores.items()
+                    ]
+                    recompute_accessory_substats(a)
+                    changed = True
 
     # Ensure presets (10 presets)
     presets = st.setdefault("accessoryPresets", [])
@@ -552,10 +571,6 @@ def r_accessory_change_sub_stat(body: Dict[str, Any], st: Dict[str, Any]) -> Dic
     Rerolls a target sub-stat using conversion stone (item 4200),
     preserving the current sub-stat score and calculating new value.
     """
-    with open("/tmp/change_stat_body.json", "w") as f:
-        import json
-        json.dump(body, f)
-
     ensure_accessory_state(st)
     consts = _load_constants()
     accs = st.get("accessories", [])
@@ -609,12 +624,22 @@ def r_accessory_change_sub_stat(body: Dict[str, Any], st: Dict[str, Any]) -> Dic
     if old_score <= 0.0:
         old_score = 4.0
 
-    # Replace entry of target_stat with new_stat in place
-    for entry in sub_list:
+    # Replace all entries of target_stat with a single new_stat entry
+    first_idx = None
+    remaining = []
+    for i, entry in enumerate(sub_list):
         if entry.get("key") == target_stat:
-            entry["key"] = new_stat
-            entry["value"] = round(old_score * VALUE_PER_SCORE.get(new_stat, 1.0), 3)
-            break
+            if first_idx is None:
+                first_idx = i
+        else:
+            remaining.append(entry)
+    if first_idx is None:
+        first_idx = len(remaining)
+    sub_list[:] = remaining
+    sub_list.insert(first_idx, {
+        "key": new_stat,
+        "value": round(old_score * VALUE_PER_SCORE.get(new_stat, 1.0), 3),
+    })
 
 
     recompute_accessory_substats(acc)

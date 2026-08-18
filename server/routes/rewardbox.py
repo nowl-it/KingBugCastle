@@ -138,7 +138,8 @@ def make_fixed_accessory(preset_id, inst_id, xml_dir=DEFAULT_XML, now=""):
         "level": int(p.findtext("Level", "20")), "exp": 0,
         "synergy": int(p.findtext("Synergy", "0")), "state": 0,
         "data": {"mainStat": p.findtext("MainStat", "AtkPer"),
-                 "subStats": [{"key": k, "value": v} for k, v in rolls]},
+                 "subStats": [{"key": k, "value": round(s * units.get(k, 1), 3)}
+                              for k, s in scores.items()]},
         "subStats": list(scores.keys()), "subStatScores": [round(s, 3) for s in scores.values()],
         "coolTimeEndAt": "2000-01-01T00:00:00.000Z",
         "createdAt": now, "updatedAt": now,

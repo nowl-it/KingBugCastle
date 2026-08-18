@@ -202,6 +202,61 @@ def test_accessory_change_sub_stat(clean_state):
     assert new_cnt == prev_cnt - 1
 
 
+def test_accessory_merge_duplicate_substats(clean_state):
+    # Production bug: preset-seeded accessories carried 7 duplicate key
+    # entries in data.subStats (one per tier line). The client renders
+    # data.subStats, so changing one copy left the rest as "extra" stats.
+    st = copy.deepcopy(clean_state)
+    st["accessories"].append({
+        "id": 99,
+        "accountId": 1,
+        "unitId": 0,
+        "slot": 9,
+        "type": 1,
+        "rarity": 3,
+        "level": 20,
+        "exp": 0,
+        "synergy": 0,
+        "state": 0,
+        "data": {
+            "mainStat": "AtkPer",
+            "subStats": [
+                {"key": "BaseDefDen", "value": 4.0},
+                {"key": "BaseDefDen", "value": 4.0},
+                {"key": "BaseDefDen", "value": 4.0},
+                {"key": "BaseDefDen", "value": 4.0},
+                {"key": "BaseDefDen", "value": 4.0},
+                {"key": "BaseDefDen", "value": 4.0},
+                {"key": "BaseDefDen", "value": 2.0},
+                {"key": "BaseDef", "value": 80.0},
+            ],
+        },
+        "subStats": ["BaseDefDen", "BaseDef"],
+        "subStatScores": [26.0, 4.0],
+        "coolTimeEndAt": "2000-01-01T00:00:00.000Z",
+        "createdAt": now_iso(0),
+        "updatedAt": now_iso(0),
+        "usedThemeList": [],
+        "isEarlyAccessModeTestAccessory": False,
+    })
+    accessory.ensure_accessory_state(st)
+    acc = next(a for a in st["accessories"] if a["id"] == 99)
+    keys = [e["key"] for e in acc["data"]["subStats"]]
+    assert len(keys) == len(set(keys)) == 2
+    den = next(e for e in acc["data"]["subStats"] if e["key"] == "BaseDefDen")
+    assert den["value"] == 26.0
+
+    res = accessory.r_accessory_change_sub_stat({
+        "accessoryId": 99,
+        "targetSubStat": "BaseDefDen",
+        "itemId": 8400,
+    }, st)
+    acc = next(a for a in res["accessories"] if a["id"] == 99)
+    data_keys = [e["key"] for e in acc["data"]["subStats"]]
+    assert data_keys == ["AtkPer", "BaseDef"]
+    assert "BaseDefDen" not in data_keys
+
+
 def test_accessory_presets(clean_state):
     # 1. Fetch presets
     res = accessory.r_accessory_preset_list({}, clean_state)
