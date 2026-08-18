@@ -295,6 +295,27 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
   nextSemiSeasonStartAt, Func<int, int, Tier> getResTierFunc)`. Does
   `Localizer.Get(seasonFormat)` then `string.Format(result, season)` → `_seasonText.text`.
 
+### Pre-season popup fix
+- `_isColosseumPreSeason()` (RVA 0x324fba4): calls `GetSeasonStartAt(colosseumData, 0)` →
+  `nextSeasonStartAtDates[max(0, 0-1)]` = `nextSeasonStartAtDates[0]` (clamped). Then checks:
+  `nextSeasonStartAtDates[0] > UtcNow` → if TRUE, returns true (pre-season), popup shown.
+- `_isSemiSeasonBreakTime()` (RVA 0x324fcf0): calls `GetCurrentSeasonUntilAt()` →
+  `seasonUntilAtDates[semiSeason-1]`. Then checks: `seasonUntilAt <= UtcNow` → break time.
+- `CheckColosseumEnabled` (RVA 0x32513b4) calls both; if either returns true, shows popup
+  and returns false (game start blocked). The popup format is `SeasonEndTimeFormat` with a
+  countdown timer using `nextSeasonStartAtDates[0]` (stored at ColosseumPanel field 0xD8).
+- **Root cause**: `nextSeasonDayOffsets[0]` was `+16` (future). With semiSeason=2, this meant
+  semi-season 1's start date was in the future → pre-season = true → popup.
+- **Fix (commit 8753945)**: `nextSeasonDayOffsets[0]` changed to negative values so
+  `nextSeasonStartAtDates[0]` is in the past:
+  - colosseum (semiSeason=2): `[-30,-15,15]` — semi 1 started 30d ago, semi 2 started 15d ago
+  - pvpInfo (semiSeason=1): `[-15,16,31]` — semi 1 started 15d ago
+  - `seasonDayOffsets` adjusted: colosseum `[-15,15]` (semi 1 ended 15d ago, semi 2 ends in 15d)
+- **Index mapping**:
+  - `GetCurrentSeasonUntilAt()` → `seasonUntilAtDates[semiSeason-1]` (end of current semi)
+  - `GetNextSeasonStartAt()` → `nextSeasonStartAtDates[semiSeason]` (next global season)
+  - `GetSeasonStartAt(semiSeason)` → `nextSeasonStartAtDates[semiSeason-1]` (start of semi)
+
 ### Battle flow
 - `OnClickStartColosseum` (RVA 0x3250fb8) → checks level gate, opens confirm dialog →
   `GameManager.StartColosseumMatchmaking` (RVA 0x3071578).
