@@ -295,6 +295,13 @@ def r_player_rename(body, st):
 # IndexOutOfRangeException, aborting Reload() before name/avatar/clan/date ever
 # get set (root cause of the whole profile-popup bug batch).
 _INVASION_THEMES = [t for a, b in _PC["invasionThemeRanges"] for t in range(a, b)]
+# v171.1.00+ builds the invasion carousel from Themes.xml ThemeSeason (1-20, 51-70),
+# so every season theme must be in the records - not just 16-20/66-70 (that gap kept
+# chapter I-1 = theme 1's difficulty bar locked past Easy). Keep the v172-era battle
+# themes first: records-driven clients read chapter I-1 as the FIRST record entry.
+_INVASION_THEMES = sorted(
+    _INVASION_THEMES,
+    key=lambda t: (t not in (16, 17, 18, 19, 20, 66, 67, 68, 69, 70), t))
 # Theme 16 (Invasion I-1) requires ReqPrevThemeDifficulty=3 on the PREVIOUS theme (15,
 # the last Story chapter) - ThemeSelectPanel.IsThemeLocked looks this up by ID-1 in the
 # same invasionDifficultyRecords dictionary (no separate "story difficulty" field exists
@@ -382,7 +389,7 @@ def r_player(body, st):
             # riftweapon@11) stay locked. The d-loop only pads list length for
             # ProfilePanel.ReloadChallenge's per-tier indexing.
             {"theme": i, "difficulty": unlocked, "unlockedDifficulty": unlocked}
-            for i in srv._INVASION_THEMES + srv._PREREQ_THEMES
+            for i in dict.fromkeys(srv._INVASION_THEMES + srv._PREREQ_THEMES)
             for d in range(1, unlocked + 1)
         ],
         "eventModeRecord": st.get("eventModeRecord", [ld["eventModeRecordValue"]] * ld["eventModeRecordCount"]),

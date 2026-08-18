@@ -56,6 +56,8 @@ def invasion_records():
     unlocked = RCFG["player"]["invasionUnlockedDifficulty"]
     themes = ([t for a, b in RCFG["player"]["invasionThemeRanges"] for t in range(a, b)]
               + srv._PREREQ_THEMES)
+    themes = sorted(dict.fromkeys(themes),
+                    key=lambda t: (t not in (16, 17, 18, 19, 20, 66, 67, 68, 69, 70), t))
     return [{"theme": t, "difficulty": unlocked, "unlockedDifficulty": unlocked}
             for t in themes for d in range(1, unlocked + 1)]
 

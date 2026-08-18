@@ -41,8 +41,8 @@
 			"currentHardRankingValue": 1,
 			"currentHardRankingCount": 20
 		},
-		"_invasionComment": "ThemeSelectPanel.OnClickGameStart builds its Invasion theme carousel (_themes list) directly from this server-reported range; the FIRST entry is what the client sends as 'theme' to /game/start for chapter I-1. Real Invasion themes are ONLY 16-20 and 66-70 (dump.cs: Theme16BattleObserver .. Theme70BattleObserver, the only classes deriving InvasionBattleObserver) - a range starting at 1 makes the client submit theme=1 (Story Chapter 1), which has no InvasionBattleObserver subclass, hanging the battle-load screen. Also: ProfilePanel.ReloadChallenge indexes per unlockedDifficulty tier -> shorter list throws IndexOutOfRangeException. Real content caps at 5 difficulty tiers per theme (InvasionRewards.xml only defines suffix 01-05, Easy~King); InvasionDifficultyBar.SetDifficulty (arm32 RVA 0x20FBC48) calls an index/bounds-checked getter with the raw unclamped difficulty before its own later clamp to [1,5] - a value >5 throws there too.",
-		"invasionThemeRanges": [[16, 21], [66, 71]],
+		"_invasionComment": "Records must cover EVERY ThemeSeason theme (Themes.xml: 1-20 and 51-70; matches InvasionRewards.xml) - the v171.1.00+ client builds its invasion carousel from Themes.xml and plays chapter I-1 on theme 1, so records missing theme 1 keep its difficulty bar locked past Easy. Kept as [16-20, 66-70] FIRST in code order because v171.0.00/v172-era clients read the carousel from the records' theme order (chapter I-1 = first entry = 16); the appended 1-15/51-65 change nothing for them. ProfilePanel.ReloadChallenge indexes per unlockedDifficulty tier (up to 15) -> shorter list throws IndexOutOfRangeException. Real content caps at 5 difficulty tiers per theme (InvasionRewards.xml only defines suffix 01-05, Easy~King); InvasionDifficultyBar.SetDifficulty (arm32 RVA 0x20FBC48) calls an index/bounds-checked getter with the raw unclamped difficulty before its own later clamp to [1,5] - a value >5 throws there too.",
+		"invasionThemeRanges": [[1, 21], [51, 71]],
 		"invasionUnlockedDifficulty": 11
 	},
 	"pvpInfo": {
