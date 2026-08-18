@@ -800,7 +800,7 @@ served, arena battles counted).
   fails on purpose (needs JRE keytool for APK tooling) — plain `pip install -r requirements.txt` is
   what the server needs. `git-lfs` required for `libil2cpp_v171_ssl.so`; `script.json` is gitignored
   and must be rsynced separately from `il2cpp/v171.0.00/`.
-- **Deploy flow**: push to GitHub `nowl-it/kgc-private-server` → on server `git pull` → restart the
+- **Deploy flow**: push to GitHub `nowl-it/KingBugCastle` → on server `git pull` → restart the
   touched service(s). Dashboard auth is username/password only — create the first account with
   `python3 dashboard.py --create-admin <user>` (playerdb.admin_create); there is no token mode.
   Admin API `GET /api/players?admin_token=…` lists players.

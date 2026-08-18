@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report! Please ensure you have read the [README](https://github.com/nowl-it/kgc-private-server/blob/main/README.md) and [SETUP](https://github.com/nowl-it/kgc-private-server/blob/main/SETUP.md) docs before submitting.
+        Thanks for taking the time to fill out this bug report! Please ensure you have read the [README](https://github.com/nowl-it/KingBugCastle/blob/main/README.md) and [SETUP](https://github.com/nowl-it/KingBugCastle/blob/main/SETUP.md) docs before submitting.
   - type: textarea
     id: description
     attributes:
