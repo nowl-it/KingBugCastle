@@ -160,11 +160,20 @@ def _m4_admins(c):
     c.execute("CREATE INDEX IF NOT EXISTS idx_admin_sessions_user ON admin_sessions(username)")
 
 
+def _m5_lobbies(c):
+    """Friendly Battle lobbies — transient rooms keyed by a 6-char code."""
+    c.execute("CREATE TABLE IF NOT EXISTS lobbies ("
+              "code TEXT PRIMARY KEY, host_uid TEXT NOT NULL, "
+              "members TEXT NOT NULL DEFAULT '[]', created_at REAL NOT NULL)")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_lobbies_host ON lobbies(host_uid)")
+
+
 # (version, description, fn). Append only - never edit one that has shipped.
 MIGRATIONS = [
     (2, "indexes + expired-session sweep", _m2_indexes),
     (3, "derived player_items / player_cards / player columns", _m3_derived),
     (4, "dashboard admin accounts + sessions", _m4_admins),
+    (5, "Friendly Battle lobbies", _m5_lobbies),
 ]
 SCHEMA_VERSION = MIGRATIONS[-1][0]
 
@@ -496,6 +505,101 @@ def purge_sessions(now=None):
     now = now if now is not None else time.time()
     with _conn() as c:
         return c.execute("DELETE FROM sessions WHERE created < ?", (now - SESSION_TTL,)).rowcount
+
+
+# --- Friendly Battle lobbies ------------------------------------------------
+
+def lobby_create(code, host_uid):
+    """Create a new lobby with the given code and host.  Members stored as JSON list."""
+    import json as _json
+    with _conn() as c:
+        c.execute("INSERT INTO lobbies (code, host_uid, members, created_at) "
+                  "VALUES (?, ?, ?, ?)",
+                  (code, host_uid, _json.dumps([host_uid]), time.time()))
+
+def lobby_get(code):
+    """Return the lobby row as a dict, or None."""
+    import json as _json
+    with _conn() as c:
+        row = c.execute("SELECT code, host_uid, members, created_at "
+                        "FROM lobbies WHERE code=?", (code,)).fetchone()
+    if not row:
+        return None
+    return {"code": row[0], "host_uid": row[1],
+            "members": _json.loads(row[2]), "created_at": row[3]}
+
+def lobby_get_by_uid(uid):
+    """Return the lobby a player belongs to, or None."""
+    import json as _json
+    with _conn() as c:
+        row = c.execute("SELECT code, host_uid, members, created_at "
+                        "FROM lobbies WHERE host_uid=?", (uid,)).fetchone()
+        if not row:
+            # Check members JSON array
+            for r in c.execute("SELECT code, host_uid, members, created_at "
+                               "FROM lobbies"):
+                if uid in _json.loads(r[2]):
+                    row = r
+                    break
+    if not row:
+        return None
+    return {"code": row[0], "host_uid": row[1],
+            "members": _json.loads(row[2]), "created_at": row[3]}
+
+def lobby_join(code, uid):
+    """Add a player to the lobby.  Returns False if lobby is full (4 players)."""
+    import json as _json
+    with _conn() as c:
+        row = c.execute("SELECT members FROM lobbies WHERE code=?", (code,)).fetchone()
+        if not row:
+            return False
+        members = _json.loads(row[0])
+        if uid in members:
+            return True  # already in
+        if len(members) >= 4:
+            return False
+        members.append(uid)
+        c.execute("UPDATE lobbies SET members=? WHERE code=?",
+                  (_json.dumps(members), code))
+    return True
+
+def lobby_leave(code, uid):
+    """Remove a player from the lobby.  If the host leaves, the lobby is deleted."""
+    import json as _json
+    with _conn() as c:
+        row = c.execute("SELECT host_uid, members FROM lobbies WHERE code=?",
+                        (code,)).fetchone()
+        if not row:
+            return
+        host_uid, members_json = row
+        members = _json.loads(members_json)
+        if uid not in members:
+            return
+        if uid == host_uid:
+            c.execute("DELETE FROM lobbies WHERE code=?", (code,))
+        else:
+            members.remove(uid)
+            c.execute("UPDATE lobbies SET members=? WHERE code=?",
+                      (_json.dumps(members), code))
+
+def lobby_leave_by_uid(uid):
+    """Remove a player from whatever lobby they are in."""
+    lobby = lobby_get_by_uid(uid)
+    if lobby:
+        lobby_leave(lobby["code"], uid)
+
+def lobby_members(code):
+    """Return [{"uid": ...}, ...] for every member in the lobby."""
+    lobby = lobby_get(code)
+    if not lobby:
+        return []
+    return [{"uid": u} for u in lobby["members"]]
+
+def lobby_cleanup(max_age=3600):
+    """Delete lobbies older than max_age seconds (default 1 hour)."""
+    with _conn() as c:
+        c.execute("DELETE FROM lobbies WHERE created_at < ?",
+                  (time.time() - max_age,))
 
 
 def vacuum():
@@ -859,12 +963,37 @@ if __name__ == "__main__":   # self-check: cross-process semantics we depend on
     assert not verify_password("hunter2", hash_password("hunter3"))
     assert admin_delete("root") == 1 and admin_count() == 0
 
+    # --- Friendly Battle lobbies
+    lobby_create("TEST01", "a")
+    lobby_create("TEST02", "b")
+    L = lobby_get("TEST01")
+    assert L and L["host_uid"] == "a" and L["members"] == ["a"]
+    assert lobby_get("NONEXIST") is None
+    assert lobby_join("TEST01", "c") is True
+    L = lobby_get("TEST01")
+    assert "c" in L["members"]
+    assert lobby_get_by_uid("c")["code"] == "TEST01"
+    # host leaves → lobby deleted
+    lobby_leave("TEST01", "a")
+    assert lobby_get("TEST01") is None
+    # non-host leaves → player removed, lobby stays
+    lobby_join("TEST02", "d")
+    lobby_leave("TEST02", "d")
+    L = lobby_get("TEST02")
+    assert "d" not in L["members"]
+    # full lobby
+    for ch in "efg":
+        lobby_join("TEST02", ch)
+    assert lobby_join("TEST02", "zzz") is False  # 4 members = full
+    lobby_leave_by_uid("b")  # host leaves → lobby gone
+    assert lobby_get("TEST02") is None
+
     s = stats()
     assert s["schema_version"] == SCHEMA_VERSION and s["players"] >= 1, s
     vacuum()
     if IS_PG:
         with _conn() as _c:                    # leave the test database as we found it
-            for t in ("player_items", "player_cards", "admin_sessions", "admins",
+            for t in ("lobbies", "player_items", "player_cards", "admin_sessions", "admins",
                       "sessions", "accounts", "players", "meta"):
                 _c.execute(f"DROP TABLE IF EXISTS {t} CASCADE")
     else:

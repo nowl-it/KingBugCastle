@@ -227,8 +227,8 @@ def check_match_routes_answer_without_a_match_server():
     m = server.r_colosseum_match({}, st)
     assert m["gameId"], "a match with no id"
     assert m["serverAddress"] == "", "an address was invented for a server that is not there"
-    c = server.r_colosseum_custom_match({"lobbyId": "abc"}, st)
-    assert c["lobbyId"] == "abc" and c["endPoint"] == ""
+    c = server.r_colosseum_create_custom_match({}, st)
+    assert len(c["lobbyId"]) == 6 and c["endPoint"] == ""
     assert server.r_colosseum_players({}, st)["colosseumPlayerDataList"][0]["cardInfos"], \
         "the player block has no heroes in it"
     print("ok match: match and custom-match answer, no address invented")

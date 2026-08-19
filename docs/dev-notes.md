@@ -360,6 +360,62 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
 - `ColosseumPanel._colosseumEnabled` check via `CheckColosseumEnabled` (RVA 0x32513b4)
 
 ### All routes registered
-All 31 colosseum routes are in `routes/pvp.py` → `handlers()`. The `r_colosseum_match` returns
+All 33 colosseum routes are in `routes/pvp.py` → `handlers()`. The `r_colosseum_match` returns
 empty `serverAddress` to trigger local bot battle. `r_colosseum_complete_round` handles score
 delta + tier update. `r_colosseum_round_data` is a no-op ack (client replays own rounds).
+
+### Friendly Battle (custom match) — implemented 2026-08-19
+The Friendly Battle ("Trận Giao Hữu") lets players create a private room, share a 6-char code,
+and play a colosseum match that **does not affect tier, score, or missions**.
+
+**Client flow:**
+1. Host taps "Create Friendly Battle" → `POST /colosseum/create-custom-match` (no args)
+   → server returns `{lobbyId: "A3WGBF", endPoint: ""}`. Client copies the code.
+2. Guest taps "Join Friendly Battle" → enters the code → `POST /colosseum/join-custom-match`
+   with `{matchId: "A3WGBF"}` → server validates, returns `{lobbyId, endPoint}`.
+3. Both players call `POST /colosseum/fetch-players-data` with `{isCustomMatch: true}`
+   → server returns actual lobby members (not random opponents).
+4. Host starts the match → `POST /colosseum/match` → `{gameId, serverAddress: ""}`.
+   Empty serverAddress = local bot play (same as regular colosseum).
+5. After battle: `POST /colosseum/complete-round-data` — same handler as regular, but
+   friendly matches are NOT supposed to affect score. (Currently they still do because the
+   client sends the same `win` flag — a `gameType` field would be needed to differentiate.)
+
+**Server implementation:**
+- Lobby state stored in SQLite `lobbies` table (migration v5 in `playerdb.py`):
+  `code TEXT PK, host_uid TEXT, members TEXT (JSON array), created_at REAL`.
+- `lobby_create/code`, `lobby_get/code`, `lobby_join/code/uid`, `lobby_leave/code/uid`,
+  `lobby_leave_by_uid/uid`, `lobby_members/code`, `lobby_get_by_uid/uid`.
+- Host leaving → lobby deleted. Non-host leaving → member removed, lobby stays.
+- Max 4 members per lobby.
+- Lobby code: 6-char uppercase alphanumeric, no ambiguous chars (0/O, 1/I/L).
+- `_gen_lobby_code()` retries up to 100 times to avoid collisions.
+- `_colosseum_custom_players(st)` loads each member's state and returns their
+  `ColosseumPlayerData` (deck, buildings, etc.).
+
+**New routes added:**
+| Route | Handler | Purpose |
+|---|---|---|
+| `/colosseum/create-custom-match` | `r_colosseum_create_custom_match` | Generate lobby code |
+| `/colosseum/join-custom-match` | `r_colosseum_join_custom_match` | Validate code, join lobby |
+| `/colosseum/leave-custom-match` | `r_colosseum_leave_custom_match` | Leave lobby |
+| `/colosseum/custom-match-start` | `r_colosseum_custom_match_start` | Start match, return gameId |
+| `/colosseum/check-end` | `r_colosseum_check_end` | Reenter: return score delta |
+| `/colosseum/reenter-tried` | `r_colosseum_reenter_tried` | Reenter: ack |
+| `/colosseum/reenter-succeed` | `r_colosseum_reenter_succeed` | Reenter: ack |
+
+**Key client strings (from Strings_EN_US.xml):**
+- `ColosseumCustomMatch` = "Friendly Battle" / "Trận Giao Hữu"
+- `ColosseumCustomMatchCreate` = "Create Friendly Battle"
+- `ColosseumCustomMatchJoin` = "Join Friendly Battle"
+- `InputColosseumCustomMatchCode` = "Enter Participation Code"
+- `ColosseumCustomMatchDesc` = "Friendly Battles do not affect your tier, score, and missions."
+- `ColosseumCustomMatchRoomFull` = "This room is full!"
+- `ColosseumCustomInvalidMatchCode` = "Invalid code."
+- `ColosseumCustomMatchHostExited` = "This room has been terminated."
+- `ColosseumCustomMatchEmptyItem` = "Empty Slot"
+- `ColosseumCustomMatchAddBot` = "Create {0} Bot"
+
+**TODO:** A proper score-skip for friendly matches would require the client to send a
+`gameType` or `isCustomMatch` flag in the `complete-round-data` body, which it currently does
+not do. For now, friendly matches count toward score like regular matches.

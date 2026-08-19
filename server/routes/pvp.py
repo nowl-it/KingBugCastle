@@ -16,6 +16,8 @@ time. `card_infos()` is public because /player/other draws the same deck row.
 
     python3 pvp.py      # self-check
 """
+import secrets
+import string
 import time
 
 import colosseum
@@ -229,11 +231,15 @@ def r_colosseum_statistics(body, st):
                           "countsByRank": counts}]}
 
 def r_colosseum_players(body, st):
+    is_custom = bool(body.get("isCustomMatch", False))
+    if is_custom:
+        return {"colosseumPlayerDataList": _colosseum_custom_players(st),
+                "isCustomMatch": True}
     # Colosseum is a 4-player mode: you plus up to three real opponents. The client
     # bot-fills whatever is short, so a solo server still starts.
     return {"colosseumPlayerDataList": [_colosseum_player(st)]
                                         + srv._opponents(st, 3, _colosseum_player, fallback=False),
-            "isCustomMatch": bool(body.get("isCustomMatch", False))}
+            "isCustomMatch": False}
 
 def r_colosseum_tier_rewards(body, st):
     """Claim every tier reward the player's best score has earned.
@@ -297,8 +303,95 @@ def r_colosseum_match(body, st):
     return {"gameId": str(body.get("gameId") or f"local-{int(time.time())}"),
             "serverAddress": ""}
 
+def r_colosseum_reenter_tried(body, st):
+    """Client reconnecting after a crash during a custom match."""
+    return {}
+
+def r_colosseum_reenter_succeed(body, st):
+    """Reenter succeeded."""
+    return {}
+
+def r_colosseum_check_end(body, st):
+    """Check if a crashed game has ended.  Returns the score delta and final
+    state so the client can show the result popup.  For a local-bot game the
+    score delta is zero — the round completion already applied it."""
+    return {"scoreDelta": 0, "rank": 0, "round": 0,
+            "gameId": str(body.get("gameId", "")),
+            "tier": 0, "score": 0, "addedToken": 0,
+            "hotTimeBonusValue": 0.0}
+
 def r_colosseum_custom_match(body, st):
     return {"lobbyId": str(body.get("lobbyId") or ""), "endPoint": ""}
+
+# --- Friendly Battle lobby management ----------------------------------------
+
+# Lobby code: 6-char alphanumeric, uppercase, no ambiguous chars (0/O, 1/I/L).
+_CODE_CHARS = string.ascii_uppercase.replace("O", "").replace("I", "").replace("L", "") + "23456789"
+
+def _gen_lobby_code():
+    """Generate a unique 6-char lobby code that does not collide with active lobbies."""
+    import playerdb as _pdb
+    for _ in range(100):
+        code = "".join(secrets.choice(_CODE_CHARS) for _ in range(6))
+        if not _pdb.lobby_get(code):
+            return code
+    return "".join(secrets.choice(_CODE_CHARS) for _ in range(6))
+
+def r_colosseum_create_custom_match(body, st):
+    """Host creates a Friendly Battle lobby.  Returns a 6-char code the guest
+    types into 'Join Friendly Battle'.  The lobby lives in the lobbies table
+    until the host leaves or the match starts."""
+    import playerdb as _pdb
+    code = _gen_lobby_code()
+    uid = st.get("uid", "")
+    _pdb.lobby_create(code, uid)
+    admin_log(f"[colosseum] lobby created: {code} by {uid}")
+    return {"lobbyId": code, "endPoint": ""}
+
+def r_colosseum_join_custom_match(body, st):
+    """Guest joins an existing Friendly Battle lobby by code."""
+    import playerdb as _pdb
+    code = str(body.get("matchId", "")).strip().upper()
+    lobby = _pdb.lobby_get(code)
+    if lobby is None:
+        return {"code": 404, "msg": "Invalid code.", "lobbyId": "", "endPoint": ""}
+    uid = st.get("uid", "")
+    ok = _pdb.lobby_join(code, uid)
+    if not ok:
+        return {"code": 403, "msg": "Room is full.", "lobbyId": "", "endPoint": ""}
+    admin_log(f"[colosseum] lobby joined: {code} by {uid}")
+    return {"lobbyId": code, "endPoint": ""}
+
+def r_colosseum_leave_custom_match(body, st):
+    """Player leaves the Friendly Battle lobby."""
+    import playerdb as _pdb
+    uid = st.get("uid", "")
+    _pdb.lobby_leave_by_uid(uid)
+    return {}
+
+def r_colosseum_custom_match_start(body, st):
+    """Host starts the Friendly Battle.  Returns a gameId so both clients
+    enter the battle scene.  Empty serverAddress → client plays against bots."""
+    code = str(body.get("lobbyId", "")).strip().upper()
+    game_id = f"custom-{code}-{int(time.time())}"
+    return {"gameId": game_id, "serverAddress": ""}
+
+def _colosseum_custom_players(st):
+    """Return the lobby members as ColosseumPlayerData[] for a custom match."""
+    import playerdb as _pdb
+    uid = st.get("uid", "")
+    lobby = _pdb.lobby_get_by_uid(uid)
+    if lobby is None:
+        return [_colosseum_player(st)]
+    members = _pdb.lobby_members(lobby["code"])
+    players = []
+    for m in members:
+        m_st = _pdb.load(m["uid"])
+        if m_st:
+            players.append(_colosseum_player(m_st))
+    if not players:
+        players.append(_colosseum_player(st))
+    return players
 
 
 def register(app, server_module):
@@ -328,14 +421,16 @@ def handlers():
         "/colosseum/match/ping": r_colosseum_match,
         "/colosseum/server-address": r_colosseum_match,
         "/colosseum/match/cancel": ack,
-        "/colosseum/create-custom-match": r_colosseum_custom_match,
-        "/colosseum/join-custom-match": r_colosseum_custom_match,
+        "/colosseum/create-custom-match": r_colosseum_create_custom_match,
+        "/colosseum/join-custom-match": r_colosseum_join_custom_match,
+        "/colosseum/leave-custom-match": r_colosseum_leave_custom_match,
+        "/colosseum/custom-match-start": r_colosseum_custom_match_start,
         "/colosseum/round-data": r_colosseum_round_data,
         "/colosseum/complete-round-data": r_colosseum_complete_round,
-        "/colosseum/check-end": ack,
+        "/colosseum/check-end": r_colosseum_check_end,
         "/colosseum/record-minimum-rank": ack,
-        "/colosseum/reenter-tried": ack,
-        "/colosseum/reenter-succeed": ack,
+        "/colosseum/reenter-tried": r_colosseum_reenter_tried,
+        "/colosseum/reenter-succeed": r_colosseum_reenter_succeed,
         "/colosseum/open-mission-reward": lambda b, st: {
             "rewardListResponseData": srv._reward_list_data([])},
         "/colosseum/fetch-players-data": r_colosseum_players,
@@ -380,6 +475,6 @@ if __name__ == "__main__":
     assert len(info["seasonUntilAtDates"]) >= 2, "PvP season dates are indexed [semiSeason-1]"
 
     paths = handlers()
-    assert len(paths) == 31, f"{len(paths)} routes registered"
+    assert len(paths) == 33, f"{len(paths)} routes registered"
     assert all(callable(h) for h in paths.values())
     print(f"pvp self-check ok ({len(paths)} routes, score {seed} -> {st['colosseumScore']})")
