@@ -340,11 +340,14 @@ def r_artifact_equip(body, st):
     target_id = body_int(body.get("targetId"), 0)
     index = body_int(body.get("index"), 0)
     deck_preset = body_int(body.get("deckPreset"), 0)
+    admin_log(f"[equip-debug] /artifact/equip body={body}")
     equipped = [e for e in st.get("equippedArtifacts", [])
                 if not (e.get("deckPreset", 0) == deck_preset and e.get("index", 0) == index)]
     arts = get_st_artifacts(st)
     art = next((a for a in arts if a.get("id") == target_id or a.get("artifactId") == target_id), None)
     if art:
+        # one instance can only sit in one slot - drop any other entry for it
+        equipped = [e for e in equipped if e.get("artifactId") != art.get("id")]
         equipped.append({"deckPreset": deck_preset, "index": index, "artifactId": art.get("id")})
     st["equippedArtifacts"] = equipped
     save_state(st)

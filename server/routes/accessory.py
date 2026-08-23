@@ -20,7 +20,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 
-from common import now_iso
+from common import admin_log, now_iso
 from state import save_state
 
 XML_DIR = Path(__file__).resolve().parent.parent / "xml_live"
@@ -324,6 +324,7 @@ def r_accessory_equip(body: Dict[str, Any], st: Dict[str, Any]) -> Dict[str, Any
         tid = body.get("targetId")
         target_ids = [tid] if tid else []
     target_ids = [int(i) for i in target_ids] if target_ids else []
+    admin_log(f"[equip-debug] /accessory/equip body={body}")
 
     if unit_id and target_ids:
         # Find target accessory objects to equip

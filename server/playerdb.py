@@ -353,6 +353,10 @@ def load(uid):
     return data
 
 def save(uid, st):
+    # The row key is authoritative: a save loaded under one uid must never write
+    # back under its stale inner uid (the 2787e1 migration copy carried inner
+    # uid=0c10a2, so every gameplay write silently landed on the other row).
+    st["uid"] = uid
     blob = json.dumps(st, ensure_ascii=False)
     with _conn() as c:   # context manager = one transaction, commit or rollback
         c.execute("INSERT INTO players (uid, data, updated) VALUES (?,?,?) "
