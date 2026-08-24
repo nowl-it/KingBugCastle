@@ -21,7 +21,7 @@ if [[ -z "$TOKEN" ]]; then
 fi
 
 payload=$(python3 -c 'import json, sys; print(json.dumps({"content": sys.argv[1]}))' "$1")
-response=$(curl --silent --show-error --fail-with-body \
+response=$(curl --silent --show-error --fail \
     --request POST \
     --header "Authorization: Bot $TOKEN" \
     --header 'Content-Type: application/json' \
