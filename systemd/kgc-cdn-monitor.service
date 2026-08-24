@@ -1,0 +1,14 @@
+[Unit]
+Description=King God Castle CDN update monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/Code/kgc
+ExecStart=%h/Code/kgc/scripts/run_cdn_watcher.sh
+Restart=always
+RestartSec=15
+
+[Install]
+WantedBy=default.target

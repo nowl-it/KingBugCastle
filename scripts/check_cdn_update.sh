@@ -10,6 +10,11 @@ CDN_URL="${CDN_BASE}/?prefix=patch/LIVE/&delimiter=/"
 STATE_FILE="$HOME/.local/share/kgc_cdn_last_date"
 NTFY_TOPIC="https://ntfy.sh/nowl/test"
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+DISCORD_NOTIFY="$PROJECT_DIR/server/discord_notify.sh"
+
+notify_discord() {
+    [ -x "$DISCORD_NOTIFY" ] && "$DISCORD_NOTIFY" "$1" || true
+}
 
 # Colors
 RED='\033[0;31m'
@@ -142,6 +147,7 @@ if [[ -n "$store_ver" && "$store_ver" != "$local_ver" ]]; then
         curl -sf -H "Title: 🏰 KGC client ${store_ver}" -H "Tags: game,kgc,update" \
             -d "Store có client mới: ${local_ver:-"(none)"} → ${store_ver}. CDN vẫn ở ${latest}." \
             "$NTFY_TOPIC" &>/dev/null || true
+        notify_discord "📱 **KGC client update detected**\n${local_ver:-"(none)"} → ${store_ver}\nCDN folder: ${latest}"
     fi
 fi
 [[ -n "$store_ver" ]] && echo "$store_ver" > "$VER_FILE"
@@ -185,6 +191,7 @@ if [[ "$latest" == "$last" ]]; then
         curl -sf -H "Title: 🏰 KGC republish ${latest}" -H "Tags: game,kgc,update" \
             -d "Dev ghi đè lại chính folder ${latest}. Bundle xml đổi nội dung nhưng giữ nguyên tên - cần fetch lại." \
             "$NTFY_TOPIC" &>/dev/null || true
+        notify_discord "♻️ **KGC CDN republish detected**\nFolder **${latest}** was rewritten in place (XML bundle changed)."
         exit 0
     fi
 
@@ -357,3 +364,5 @@ curl -sf \
     "$NTFY_TOPIC" &>/dev/null \
     && echo -e "${GREEN}[✓] Notifications sent (ntfy + desktop).${NC}" \
     || echo -e "${DIM}[ntfy] Push notification failed (network?)${NC}"
+
+notify_discord "🏰 **KGC CDN update detected**\nNew patch: **${latest_fmt}**\nPrevious: ${last:-"(first check)"}"

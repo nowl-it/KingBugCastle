@@ -8,6 +8,7 @@ it and just reports the affected feature as off.
 | File | What it is | Read by |
 |------|-----------|---------|
 | `google_oauth.json` | Google OAuth **web** client, exactly as downloaded from the Cloud Console | `google_login.py` |
+| `discord_bot_token` | Discord bot token, one line | `discord_notify.sh` |
 
 ## google_oauth.json
 
