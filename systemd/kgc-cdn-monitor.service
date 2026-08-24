@@ -5,8 +5,9 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=%h/Code/kgc
-ExecStart=%h/Code/kgc/scripts/run_cdn_watcher.sh
+User=ubuntu
+WorkingDirectory=/home/ubuntu/kgc
+ExecStart=/home/ubuntu/kgc/scripts/run_cdn_watcher.sh
 Restart=always
 RestartSec=15
 
