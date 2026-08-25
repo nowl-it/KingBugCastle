@@ -515,4 +515,155 @@
         </MissionRewards>
     </ChallengeSeason>
 
+    <!-- 71 시즌 (도전의 신전 정식 시즌 / 뱀파이어) -->
+    <ChallengeSeason ID="71" Inherit="0">
+        <!-- 영웅 수 제한 (8인 덱) -->
+        <UnitCount>8</UnitCount>
+
+        <!-- 대상 스테이지 -->
+        <Stages>430071000,430071001,430071002,430071003</Stages>
+
+        <!-- Stories.xml ID -->
+        <StoryID>3010100</StoryID>
+
+        <!-- 페이지 index -->
+        <StoryPageIndex>0</StoryPageIndex>
+        
+        <RefStoryID>2010100</RefStoryID>
+
+        <!-- 난이도 별 적 스탯 강화 계수 (복리) / TODO: 밸런싱 확정 필요 -->
+        <EnemyStatPerBase Type="Atk,MAtk" From="1">1.2</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Atk,MAtk" From="11">1.3</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="1">2.4</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="11">10.0</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="12">1.75</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="21">3.0</EnemyStatPerBase>
+
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="1">1.15</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="11">1.2</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Hp" From="1">1.2</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Hp" From="12">1.3</NormalEnemyStatPerBase>
+
+        <!-- 미션 정보 -->
+        <MissionRewards>
+            <Mission Type="ClearDifficulty" Value="1">
+                <Reward Type="Key" ID="70000" Count="5"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="3">
+                <Reward Type="Key" ID="70000" Count="5"/>
+            </Mission>            
+            <Mission Type="ClearDifficulty" Value="5">
+                <Reward Type="ChallengeToken" Count="2000"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="6">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>            
+            <Mission Type="ClearDifficulty" Value="8">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="10">
+                <Reward Type="ChallengeToken" Count="2500"/>
+            </Mission>            
+            <Mission Type="ClearDifficulty" Value="11">
+                <Reward Type="Key" ID="70000" Count="15"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="14">
+                <Reward Type="ChallengeToken" Count="3500"/>
+            </Mission>                 
+            <Mission Type="ClearDifficulty" Value="17">
+                <Reward Type="Key" ID="70000" Count="15"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="20">
+                <Reward Type="ChallengeToken" Count="4000"/>
+            </Mission>
+
+            <Mission Type="ClearBattleIndex" Value="0">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="1">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="2">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+        </MissionRewards>
+    </ChallengeSeason>
+
+    <!-- 71 시즌 (도전의 신전 정식 시즌 / 뱀파이어) -->
+    <ChallengeSeason ID="72" Inherit="0">
+        <!-- 영웅 수 제한 (8인 덱) -->
+        <UnitCount>3</UnitCount>
+
+        <!-- 대상 스테이지 -->
+        <Stages>430072000,430072001,430072002,430072003</Stages>
+
+        <!-- Stories.xml ID -->
+        <StoryID>3010100</StoryID>
+
+        <!-- 페이지 index -->
+        <StoryPageIndex>0</StoryPageIndex>
+
+        <RefStoryID>2010100</RefStoryID>
+
+        <!-- 난이도 별 적 스탯 강화 계수 (복리) / TODO: 밸런싱 확정 필요 -->
+        <EnemyStatPerBase Type="Atk,MAtk" From="1">1.15</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Atk,MAtk" From="11">1.2</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Atk,MAtk" From="21">1.1</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="1">2.4</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="11">10.0</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="12">2.0</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="16">1.5</EnemyStatPerBase>
+        <EnemyStatPerBase Type="Hp" From="18">1.0</EnemyStatPerBase>
+
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="1">1.1</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="11">1.15</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Atk,MAtk" From="21">1.1</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Hp" From="1">1.1</NormalEnemyStatPerBase>
+        <NormalEnemyStatPerBase Type="Hp" From="12">1.15</NormalEnemyStatPerBase>
+
+        <!-- 미션 정보 -->
+        <MissionRewards>
+            <Mission Type="ClearDifficulty" Value="1">
+                <Reward Type="Key" ID="70000" Count="5"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="3">
+                <Reward Type="Key" ID="70000" Count="5"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="5">
+                <Reward Type="ChallengeToken" Count="2000"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="6">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="8">
+                <Reward Type="Key" ID="70000" Count="10"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="10">
+                <Reward Type="ChallengeToken" Count="2500"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="11">
+                <Reward Type="Key" ID="70000" Count="15"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="14">
+                <Reward Type="ChallengeToken" Count="3500"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="17">
+                <Reward Type="Key" ID="70000" Count="15"/>
+            </Mission>
+            <Mission Type="ClearDifficulty" Value="20">
+                <Reward Type="ChallengeToken" Count="4000"/>
+            </Mission>
+
+            <Mission Type="ClearBattleIndex" Value="0">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="1">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+            <Mission Type="ClearBattleIndex" Value="2">
+                <Reward Type="ChallengeToken" Count="1000"/>
+            </Mission>
+        </MissionRewards>
+    </ChallengeSeason>
+
 </ChallengeSeasons>

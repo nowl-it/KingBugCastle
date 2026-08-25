@@ -25558,21 +25558,21 @@
         <NameFormat>SkinName_LeagueReward_Female_King</NameFormat>
 		<Sprite>LeagueRankRewardSkin_1044005</Sprite>
 		<SpriteInSheet>false</SpriteInSheet>
-		<MinVersion>172001</MinVersion>
+		<MinVersion>999999</MinVersion>
 	</Skin>
 	<Skin ID="104400500" Inherit="1044005">
 		<Prefab>Unit_10440_05_00</Prefab>
         <NameFormat>SkinName_LeagueReward_Female_God</NameFormat>
         <Sprite>LeagueRankRewardSkin_104400500</Sprite>
 		<ChromaColors>415aa1</ChromaColors>
-		<MinVersion>172001</MinVersion>
+		<MinVersion>999999</MinVersion>
 	</Skin>
 	<Skin ID="104400501" Inherit="1044005">
 		<Prefab>Unit_10440_05_01</Prefab>
         <NameFormat>SkinName_LeagueReward_Female_KingGod</NameFormat>
         <Sprite>LeagueRankRewardSkin_104400501</Sprite>
 		<ChromaColors>b74343</ChromaColors>
-		<MinVersion>172001</MinVersion>
+		<MinVersion>999999</MinVersion>
 	</Skin>
 	<!-- 기본 발디르 크로마 -->
 	<Skin ID="1045099" Unit="10450">
@@ -34827,21 +34827,21 @@
         <NameFormat>SkinName_LeagueReward_Female_King</NameFormat>
         <Sprite>LeagueRankRewardSkin_1071004</Sprite>
 		<SpriteInSheet>false</SpriteInSheet>
-		<MinVersion>172001</MinVersion>
+		<MinVersion>999999</MinVersion>
 	</Skin>
 	<Skin ID="107100400" Inherit="1071004">
 		<Prefab>Unit_10710_04_00</Prefab>
         <NameFormat>SkinName_LeagueReward_Female_God</NameFormat>
 		<Sprite>LeagueRankRewardSkin_107100400</Sprite>
 		<ChromaColors>415aa1</ChromaColors>
-		<MinVersion>172001</MinVersion>
+		<MinVersion>999999</MinVersion>
 	</Skin>
 	<Skin ID="107100401" Inherit="1071004">
 		<Prefab>Unit_10710_04_01</Prefab>
         <NameFormat>SkinName_LeagueReward_Female_KingGod</NameFormat>
         <Sprite>LeagueRankRewardSkin_107100401</Sprite>
 		<ChromaColors>b74343</ChromaColors>
-		<MinVersion>172001</MinVersion>
+		<MinVersion>999999</MinVersion>
 	</Skin>
 
 	<!-- 에일린 초회한정 -->

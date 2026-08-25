@@ -14974,8 +14974,6 @@
             [불안정 상태]인 대상에게 아군이 최대 체력의 10%를 초과하는 물리피해를 입히면, 피해량의 [4 + (보구 레벨) X 0.2]%만큼의 피해를 다른 [불안정 상태]인 적에게 특수 피해로 전달하고 모든 [불안정 상태]를 제거</Comment>
 
         <DescParams>
-            <Attribute Name="DamageOverMaxHpPer">./BuffOptions[1]/BuffContents/Treasure30042Action</Attribute>
-            <CalculatedValue>0</CalculatedValue>
         </DescParams>
 
         <TotalDescParams>
@@ -15132,7 +15130,279 @@
             </BuffContents>
         </BuffOptions>
     </BuffData>
+    
+    <!-- 알베론의 멋진 보구 -->
+    <BuffData ID="3300430">
+        <Comment>가장 성급이 높은 영웅의 보구 효과만 적용
+            전투 시작 시점의 주문력으로 자신의 주문력이 고정됩니다.
+            아군을 회복하면 자신 주변 5X5 범위에 4초간 [멋진 오오라]를 펼칩니다. (쿨타임 6초)
+            [멋진 오오라] 내의 장착자를 제외한 아군은 기본 피해가 장착자 주문력의 [보구 레벨]%만큼 상승합니다.</Comment>
 
+        <DescParams>
+        </DescParams>
+
+        <TotalDescParams>
+            <SkillCoefficient ID="9300430">Time</SkillCoefficient>
+            <Range>./BuffOptions[3]/RangeInfo</Range>
+            <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
+            <InnerText>./BuffOptions[2]/CoolTime</InnerText>
+        </TotalDescParams>
+        
+        <!-- 주문력 고정 -->
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <BattleStart />
+            </Conditions>
+            
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+            </RangeInfo>
+
+            <BuffContents>
+                <FixStat StatType="MAtk" />
+            </BuffContents>
+            
+            <Values>
+                <StatPer StatType="AdditionalMAtk" Base="1">1</StatPer>
+            </Values>
+        </BuffOptions>
+        
+        <!-- 오라 생성 -->
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <Heal />
+            </Conditions>
+            
+            <CoolTime>6</CoolTime>
+            
+            <Targets>
+                <Self />
+            </Targets>
+            
+            <RangeInfo>
+            </RangeInfo>
+            
+            <BuffContents>
+                <AddCustomBuffFromSkill SkillID="9300430" />
+            </BuffContents>
+        </BuffOptions>
+        
+        <!-- 오라 내의 아군에게 기본 피해 버프 -->
+        <BuffOptions>
+            <Conditions>
+                <HasSkillBuff ID="9300430" />
+                <DuringBattle />
+            </Conditions>
+            
+            <CoolTime>0.5</CoolTime>
+            
+            <Targets>
+                <Team ExceptMe="true" />
+            </Targets>
+            
+            <RangeInfo>
+                <RangeType>Rect</RangeType>
+                <RangeX>2</RangeX>
+                <RangeY>2</RangeY>
+            </RangeInfo>
+            
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="BaseValue" Time="0.5" />
+            </BuffContents>
+            
+            <Values>
+                <TreasureLevel Apply="MAtkPer">0.5</TreasureLevel>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3300431" Inherit="3300430">
+        <Comment>수호 10당 기본 피해가 주문력의 1%만큼 추가 상승</Comment>
+
+        <DescParams>
+            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
+            <Const>1</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <SkillCoefficient ID="9300430">Time</SkillCoefficient>
+            <Range>./BuffOptions[3]/RangeInfo</Range>
+            <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
+            <InnerText>./BuffOptions[2]/CoolTime</InnerText>
+            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
+            <Const>1</Const>
+        </TotalDescParams>
+
+        <!-- 주문력 고정 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 오라 생성 -->
+        <BuffOptions>
+        </BuffOptions>
+
+        <!-- 오라 내의 아군에게 기본 피해 버프 -->
+        <BuffOptions>
+            <Values>
+                <TreasureLevel Apply="MAtkPer">0.5</TreasureLevel>
+                <DefDenNoLevel Apply="MAtkPer">10</DefDenNoLevel>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3300432" Inherit="3300431">
+        <Comment>쿨타임 -1초</Comment>
+
+        <DescParams>
+            <Const>-1</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <SkillCoefficient ID="9300430">Time</SkillCoefficient>
+            <Range>./BuffOptions[3]/RangeInfo</Range>
+            <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
+            <InnerText>./BuffOptions[2]/CoolTime</InnerText>
+            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
+            <Const>1</Const>
+        </TotalDescParams>
+
+        <!-- 주문력 고정 -->
+        <BuffOptions>
+        </BuffOptions>
+        
+        <!-- 오라 생성 -->
+        <BuffOptions>
+            <CoolTime>5</CoolTime>
+        </BuffOptions>
+
+        <!-- 오라 내의 아군에게 기본 피해 버프 -->
+        <BuffOptions>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3300433" Inherit="3300432">
+        <Comment>오오라 내의 모든 아군 및 자신에게 은총 부여</Comment>
+
+        <DescParams>
+        </DescParams>
+
+        <TotalDescParams>
+            <SkillCoefficient ID="9300430">Time</SkillCoefficient>
+            <Range>./BuffOptions[3]/RangeInfo</Range>
+            <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
+            <InnerText>./BuffOptions[2]/CoolTime</InnerText>
+            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
+            <Const>1</Const>
+        </TotalDescParams>
+
+        <!-- 주문력 고정 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 오라 생성 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 오라 내의 아군에게 기본 피해 버프 -->
+        <BuffOptions>
+        </BuffOptions>
+        
+        <!-- 오라 내의 아군과 자신에게 은총 부여 -->
+        <BuffOptions>
+            <Conditions>
+                <HasSkillBuff ID="9300430" />
+                <DuringBattle />
+            </Conditions>
+
+            <CoolTime>0.5</CoolTime>
+
+            <Targets>
+                <Team ExceptMe="true" />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Rect</RangeType>
+                <RangeX>2</RangeX>
+                <RangeY>2</RangeY>
+            </RangeInfo>
+
+            <BuffContents>
+                <GiveGuard Time="0.5" />
+            </BuffContents>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3300434" Inherit="3300433">
+        <Comment>쿨타임 -1초</Comment>
+
+        <DescParams>
+            <Const>-1</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <SkillCoefficient ID="9300430">Time</SkillCoefficient>
+            <Range>./BuffOptions[3]/RangeInfo</Range>
+            <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
+            <InnerText>./BuffOptions[2]/CoolTime</InnerText>
+            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
+            <Const>1</Const>
+        </TotalDescParams>
+        
+        <!-- 주문력 고정 -->
+        <BuffOptions>
+        </BuffOptions>
+        
+        <!-- 오라 생성 -->
+        <BuffOptions>
+            <CoolTime>4</CoolTime>
+        </BuffOptions>
+
+        <!-- 오라 내의 아군에게 기본 피해 버프 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 오라 내의 아군과 자신에게 은총 부여 -->
+        <BuffOptions>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3300435" Inherit="3300434">
+        <Comment>수호 10당 기본 피해가 주문력의 1%만큼 추가 상승</Comment>
+
+        <DescParams>
+            <Const>10</Const>
+            <Const>1</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <SkillCoefficient ID="9300430">Time</SkillCoefficient>
+            <Range>./BuffOptions[3]/RangeInfo</Range>
+            <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
+            <InnerText>./BuffOptions[2]/CoolTime</InnerText>
+            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
+            <Const>1</Const>
+        </TotalDescParams>
+        
+        <!-- 주문력 고정 -->
+        <BuffOptions>
+        </BuffOptions>
+        <!-- 오라 생성 -->
+        <BuffOptions>
+        </BuffOptions>
+
+        <!-- 오라 내의 아군에게 기본 피해 버프 -->
+        <BuffOptions>
+            <Values>
+                <TreasureLevel Apply="MAtkPer">0.5</TreasureLevel>
+                <DefDenNoLevel Apply="MAtkPer">20</DefDenNoLevel>
+            </Values>
+        </BuffOptions>
+
+        <!-- 오라 내의 아군과 자신에게 은총 부여 -->
+        <BuffOptions>
+        </BuffOptions>
+    </BuffData>
 
     <!-- 아펠피시아 - 렘 테마 -->
     <BuffData ID="3500000">

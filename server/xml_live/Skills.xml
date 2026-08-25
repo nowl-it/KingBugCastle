@@ -44220,6 +44220,21 @@
         <!-- CustomStack 관련 값 수정 시 TreasureBuffDatas.xml 3300405 값 수정 필요 -->
         <CustomStack Key="Stack_30040_Killcount" Target="DefBreak" Bound="100">2000</CustomStack>
     </Skill>
+    
+    <Skill ID="9300430">
+        <NameComment>멋진 오오라</NameComment>
+        <DescComment>4초간 지속</DescComment>
+        
+        <Time>4</Time>
+        
+        <Effect Type='BuffStart'>
+            <Prefab>Fx_Treasure_30043</Prefab>
+            <ZLevel>Ground</ZLevel>
+            <LevelScale>false</LevelScale>
+            <Loop>true</Loop>
+            <LoopStopAtRemove>true</LoopStopAtRemove>
+        </Effect>
+    </Skill>
 	
 	<!-- 94~ : rogue like synergy -->
 	<Skill ID="9420121">

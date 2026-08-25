@@ -749,7 +749,7 @@
         <Type>BuffOption</Type>
 
         <DescParams>
-            <Const>3</Const>
+            <Attribute Name="Time">./BuffOptions[1]/BuffContents/GiveGuard</Attribute>
             <InnerText>./BuffOptions[1]/CoolTime</InnerText>
         </DescParams>
 
@@ -768,7 +768,7 @@
             </RangeInfo>
 
             <BuffContents>
-                <GiveGuard />
+                <GiveGuard Time="3"/>
             </BuffContents>
 
             <Values>

@@ -17992,11 +17992,11 @@ Après le début du Combat, obtient +{11}% de Résistance aux maléfices et +{12
   <String Key="UnitLikes_10810">Pudding au goût de sang...</String>
   <String Key="UnitHates_10810">Neria</String>
   <String Key="UnitNote_10810">La fille du Roi des Vampires Nosferatu et l'exclue de la famille. Cathy est le surnom que sa famille lui donnait quand elle était petite.</String>
-  <String Key="Overcome_10800_0">Chaque fois que l'effet de dégâts à proximité de la forme vampirique inflige des dégâts, DEG infligés en forme vampirique +{Overcome:Unit10800AI_AuraDamagePer}%</String>
+  <String Key="Overcome_10800_0">Chaque fois que l'effet de dégâts à proximité de la forme vampirique inflige des dégâts, DEG infligés en forme vampirique +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="Overcome_10800_1">À chaque Frénésie, PV max totaux de la Forme vampire +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_2">De plus, toutes les Cathy semi-vampire obtiennent {ActiveSkill:10803:0} résurrections</String>
   <String Key="Overcome_10800_3">À chaque Frénésie, PV max totaux de la Forme vampire +{Overcome:Unit10800AI_TotalHpPer}%</String>
-  <String Key="Overcome_10800_4">Chaque fois que l'effet de dégâts à proximité de la Forme vampire inflige des dégâts, DEG infligés en Forme vampire +{Overcome:Unit10800AI_AuraDamagePer}%</String>
+  <String Key="Overcome_10800_4">Chaque fois que l'effet de dégâts à proximité de la Forme vampire inflige des dégâts, DEG infligés en Forme vampire +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="UnitName_10810">Alessia</String>
   <String Key="LeagueName_12">Ligue de la Chaleur</String>
   <String Key="SkinDesc_1044005">&lt;i&gt;Récompense de participation à la Ligue de la Chaleur en Arène&lt;/i&gt;</String>

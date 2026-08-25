@@ -676,7 +676,7 @@
 	</Treasure>
 
 	<Treasure ID="30042">
-		<Comment>베히무스의 멋진 보구</Comment>
+		<Comment>페라타우스</Comment>
 		<Rarity>Special</Rarity>
 		<Role>Toughness</Role>
 		<BuffDataStartID>3300420</BuffDataStartID>
@@ -686,6 +686,17 @@
 		<CardIllustOffsetX>0</CardIllustOffsetX>
 		<CardIllustOffsetY>0</CardIllustOffsetY>
 		<MinVersion>172100</MinVersion>
+	</Treasure>
+
+	<Treasure ID="30043">
+		<Comment>알베론의 멋진 보구</Comment>
+		<Rarity>Special</Rarity>
+		<Role>Mystic</Role>
+		<BuffDataStartID>3300430</BuffDataStartID>
+		<RecommendedUnitIds>10060</RecommendedUnitIds>
+		<Color>8381EE</Color>
+		<SubNameColor>FEEEAA</SubNameColor>
+		<MinVersion>172001</MinVersion>
 	</Treasure>
     
     <Treasure ID="50000">

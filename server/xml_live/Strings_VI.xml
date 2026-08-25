@@ -17945,11 +17945,11 @@ Sau khi bắt đầu Chiến Đấu, mỗi giây Nhận được +{11}% kháng h
   <String Key="UnitLikes_10810">Bánh pudding vị máu...</String>
   <String Key="UnitHates_10810">Neria</String>
   <String Key="UnitNote_10810">Con gái của Chúa Tể Vampire Nosferatu và là người bị xa lánh trong gia tộc. Cathy là biệt danh mà người trong gia tộc gọi cô khi còn nhỏ.</String>
-  <String Key="Overcome_10800_0">Mỗi khi hiệu ứng sát thương xung quanh của dạng Vampire gây sát thương, Sát thương gây ra khi ở dạng Vampire +{Overcome:Unit10800AI_AuraDamagePer}%</String>
+  <String Key="Overcome_10800_0">Mỗi khi hiệu ứng sát thương xung quanh của dạng Vampire gây sát thương, Sát thương gây ra khi ở dạng Vampire +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="Overcome_10800_1">Mỗi lần Cuồng nộ kích hoạt, Máu tối đa tổng của dạng Vampire +{Overcome:Unit10800AI_TotalHpPer}%</String>
   <String Key="Overcome_10800_2">Ngoài ra, tất cả Cathy Nửa Vampire nhận {ActiveSkill:10803:0} lần hồi sinh</String>
   <String Key="Overcome_10800_3">Mỗi lần Cuồng nộ kích hoạt, Máu tối đa tổng của dạng Vampire +{Overcome:Unit10800AI_TotalHpPer}%</String>
-  <String Key="Overcome_10800_4">Mỗi lần hiệu ứng Sát thương xung quanh của dạng Vampire gây sát thương, Sát thương gây ra khi ở dạng Vampire +{Overcome:Unit10800AI_AuraDamagePer}%</String>
+  <String Key="Overcome_10800_4">Mỗi lần hiệu ứng Sát thương xung quanh của dạng Vampire gây sát thương, Sát thương gây ra khi ở dạng Vampire +{Overcome:Unit10800AI_AuraTotalDamagePer}%</String>
   <String Key="UnitName_10810">Alessia</String>
   <String Key="LeagueName_12">Liên Minh Ấm Áp</String>
   <String Key="SkinDesc_1044005">&lt;i&gt;Phần thưởng tham gia Liên Minh Ấm Áp trong Đấu Trường&lt;/i&gt;</String>

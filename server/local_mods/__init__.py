@@ -17,9 +17,11 @@ the one thing that needs a human. Everything else is mechanical.
 The mods (all real fixes, no fabricated numbers):
   1. CCRatio -100 -> 0            enemies become crowd-control-able
   2. Treasure 30040 gate -> 170100  Shadowless shows on a fallback v170 client
-  3. Stage 101 dummy spawns       chapter I-1 walk-over clearable for testing
-  4. UnitPanelData 10800/10810    Cathy/Alessia Profile tab (devs shipped none)
-  5. Cathy Overcome field typo    {Overcome:...AuraDamagePer} -> ...AuraTotalDamagePer
+  3. Treasure 30043 gate -> 172001 Vitacorde shows on the deployed v172.0.01 client
+  4. Stage 101 dummy spawns       chapter I-1 walk-over clearable for testing
+  5. UnitPanelData 10800/10810    Cathy/Alessia Profile tab (devs shipped none)
+  6. Cathy Overcome field typo    {Overcome:...AuraDamagePer} -> ...AuraTotalDamagePer
+  7. FetchComplete strings         the private-server "Ready to bug" loading text
 
 CRITICAL: Strings files must stay comment-free (Localizer breaks on <!-- -->).
 None of these write a comment into a Strings file.
@@ -62,21 +64,33 @@ def _apply_ccratio(xml_dir, warns):
     return 1
 
 
-# ── 2. Shadowless 30040: un-gate to the deployed client's version ─────────────
-def _apply_treasure_gate(xml_dir, warns):
+# ── 2–3. Treasures: un-gate to supported deployed client versions ────────────
+_TREASURE_GATES = {
+    30040: 170100,  # Shadowless: fallback v170 client
+    30043: 172001,  # Vitacorde: deployed v172.0.01 client
+}
+
+
+def _apply_treasure_gates(xml_dir, warns):
     p = pathlib.Path(xml_dir) / "Treasures.xml"
     txt = _read(p)
-    m = re.search(r'<Treasure ID="30040">.*?</Treasure>', txt, re.S)
-    if not m:
-        warns.append("[Treasures.xml] 30040 block not found - dev restructured? gate NOT applied")
+    out = txt
+    for treasure_id, target_version in _TREASURE_GATES.items():
+        m = re.search(rf'<Treasure ID="{treasure_id}">.*?</Treasure>', out, re.S)
+        if not m:
+            warns.append(f"[Treasures.xml] {treasure_id} block not found - dev restructured? gate NOT applied")
+            continue
+        target = f"<MinVersion>{target_version}</MinVersion>"
+        if target in m.group(0):
+            continue
+        block = re.sub(r"<MinVersion>\d+</MinVersion>", target, m.group(0))
+        if block == m.group(0):
+            warns.append(f"[Treasures.xml] {treasure_id} has no MinVersion to un-gate - dev changed it?")
+            continue
+        out = out[:m.start()] + block + out[m.end():]
+    if out == txt:
         return 0
-    if "<MinVersion>170100</MinVersion>" in m.group(0):
-        return 0  # already applied
-    block = re.sub(r"<MinVersion>\d+</MinVersion>", "<MinVersion>170100</MinVersion>", m.group(0))
-    if block == m.group(0):
-        warns.append("[Treasures.xml] 30040 has no MinVersion to un-gate - dev changed it?")
-        return 0
-    _write(p, txt[:m.start()] + block + txt[m.end():])
+    _write(p, out)
     return 1
 
 
@@ -137,12 +151,16 @@ _PANEL = """\t<UnitPanelData ID="{id}">
 def _apply_panels(xml_dir, warns):
     p = pathlib.Path(xml_dir) / "UnitPanelDatas.xml"
     txt = _read(p)
-    if 'UnitPanelData ID="10800"' in txt:
-        return 0  # already applied
     if "</UnitPanelDatas>" not in txt:
         warns.append("[UnitPanelDatas.xml] no </UnitPanelDatas> close - format moved?")
         return 0
-    entries = _PANEL.format(id=10800) + _PANEL.format(id=10810)
+    # New upstream data can contain one of the pair. Preserve it and add only the
+    # missing panel: treating 10800 as proof that 10810 exists dropped Alessia
+    # during the 2026_08_25 rebase.
+    entries = "".join(_PANEL.format(id=unit_id) for unit_id in (10800, 10810)
+                      if f'UnitPanelData ID="{unit_id}"' not in txt)
+    if not entries:
+        return 0
     _write(p, txt.replace("</UnitPanelDatas>", entries + "</UnitPanelDatas>", 1))
     return 1
 
@@ -159,15 +177,53 @@ def _apply_overcome_typo(xml_dir, warns):
     return n
 
 
+# ── 6. Loading complete text: preserve the private-server translation pass ────
+_FETCH_COMPLETE = {
+    "AR": "جاهز للحشرة! نبدأ بالإصلاح الآن!",
+    "DE": "Bereit zum Bug! Fix wird jetzt gestartet!",
+    "EN_US": "Ready to bug! Starting the fix now!",
+    "ES_LA": "¡Listo para el bug! ¡Empezando la corrección ahora!",
+    "FR": "Prêt pour le bug ! On commence la correction !",
+    "JA": "バグ&lt;size=2&gt; &lt;/size&gt;-ready！&lt;size=2&gt; &lt;/size&gt;修正&lt;size=2&gt; &lt;/size&gt;を&lt;size=2&gt; &lt;/size&gt;開始&lt;size=2&gt; &lt;/size&gt;し&lt;size=2&gt; &lt;/size&gt;ます！",
+    "KR": "버그 잡을 준비 완료! 수정 시작합니다!",
+    "PT_BR": "Pronto pro bug! Iniciando a correção agora!",
+    "RU": "Готов к багу! Начинаем исправление!",
+    "TH": "พร้อมจับบั๊ก! เริ่มแก้ไขเดี๋ยวนี้!",
+    "VI": "Sẵn sàng bắt bug! Bắt đầu fix ngay!",
+    "ZH_CH": "准备&lt;size=2&gt; &lt;/size&gt;抓bug！&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;修复！",
+    "ZH_TW": "準備&lt;size=2&gt; &lt;/size&gt;抓bug！&lt;size=2&gt; &lt;/size&gt;開始&lt;size=2&gt; &lt;/size&gt;修復！",
+}
+
+
+def _apply_fetch_complete(xml_dir, warns):
+    n = 0
+    for p in glob.glob(str(pathlib.Path(xml_dir) / "Strings_*.xml")):
+        path = pathlib.Path(p)
+        value = _FETCH_COMPLETE.get(path.stem.removeprefix("Strings_"))
+        if value is None:
+            continue
+        txt = _read(path)
+        out, matches = re.subn(r'(<String Key="FetchComplete">).*?(</String>)',
+                               rf'\g<1>{value}\g<2>', txt, count=1, flags=re.S)
+        if not matches:
+            warns.append(f"[{path.name}] FetchComplete key not found - text NOT applied")
+            continue
+        if out != txt:
+            _write(path, out)
+            n += 1
+    return n
+
+
 def apply(xml_dir):
     """Apply every local mod idempotently. Returns (applied_count, warnings)."""
     warns = []
     n = 0
     n += _apply_ccratio(xml_dir, warns)
-    n += _apply_treasure_gate(xml_dir, warns)
+    n += _apply_treasure_gates(xml_dir, warns)
     n += _apply_stage101(xml_dir, warns)
     n += _apply_panels(xml_dir, warns)
     n += _apply_overcome_typo(xml_dir, warns)
+    n += _apply_fetch_complete(xml_dir, warns)
     return n, warns
 
 
@@ -177,7 +233,8 @@ def _check():
     (d / "Units.xml").write_text(
         "<Units><Unit><CCRatio>-100</CCRatio></Unit></Units>", encoding="utf-8")
     (d / "Treasures.xml").write_text(
-        '<Treasures><Treasure ID="30040"><MinVersion>171000</MinVersion></Treasure></Treasures>',
+        '<Treasures><Treasure ID="30040"><MinVersion>171000</MinVersion></Treasure>'
+        '<Treasure ID="30043"><MinVersion>173100</MinVersion></Treasure></Treasures>',
         encoding="utf-8")
     (d / "Stages.xml").write_text(
         "<Stages>\n\t<Stage ID='101' Theme='1' Inherit='1'>\n\t\t<ValueSum>2</ValueSum>\n\t</Stage>\n</Stages>",
@@ -187,20 +244,33 @@ def _check():
         encoding="utf-8")
     for loc in ("VI", "EN_US"):
         (d / f"Strings_{loc}.xml").write_text(
-            '<Strings><String Key="Overcome_10800_0">+{Overcome:Unit10800AI_AuraDamagePer}%</String></Strings>',
+            '<Strings><String Key="FetchComplete">Ready to go!</String>'
+            '<String Key="Overcome_10800_0">+{Overcome:Unit10800AI_AuraDamagePer}%</String></Strings>',
             encoding="utf-8")
 
     n, warns = apply(str(d))
     assert not warns, warns
-    # 4 structural files + 2 locale Strings files = 6 file writes here (12+ in real data).
-    assert n == 6, f"expected 6 file writes on fresh data, got {n}"
+    # 4 structural files + 2 locale typo edits + 2 FetchComplete edits = 8 writes.
+    assert n == 8, f"expected 8 file writes on fresh data, got {n}"
     assert "<CCRatio>0</CCRatio>" in _read(d / "Units.xml")
     assert "<MinVersion>170100</MinVersion>" in _read(d / "Treasures.xml")
+    assert "<MinVersion>172001</MinVersion>" in _read(d / "Treasures.xml")
     assert _read(d / "Stages.xml").count("99999") == 7
     assert 'UnitPanelData ID="10800"' in _read(d / "UnitPanelDatas.xml")
     assert 'UnitPanelData ID="10810"' in _read(d / "UnitPanelDatas.xml")
     assert "AuraDamagePer" not in _read(d / "Strings_VI.xml")
     assert "AuraTotalDamagePer" in _read(d / "Strings_VI.xml")
+    assert _FETCH_COMPLETE["VI"] in _read(d / "Strings_VI.xml")
+    assert _FETCH_COMPLETE["EN_US"] in _read(d / "Strings_EN_US.xml")
+
+    # Partial upstream migration: Cathy may have shipped while Alessia did not.
+    panels = d / "UnitPanelDatas.xml"
+    _write(panels, re.sub(r'\t<UnitPanelData ID="10810">.*?</UnitPanelData>\n',
+                          "", _read(panels), count=1, flags=re.S))
+    n_partial, warns_partial = apply(str(d))
+    assert n_partial == 1 and not warns_partial, (n_partial, warns_partial)
+    assert 'UnitPanelData ID="10800"' in _read(panels)
+    assert 'UnitPanelData ID="10810"' in _read(panels)
 
     # Idempotent: a second apply changes nothing.
     n2, warns2 = apply(str(d))
@@ -208,7 +278,7 @@ def _check():
 
     import shutil
     shutil.rmtree(d)
-    print("ok: local_mods behave (5 mods, all idempotent)")
+    print("ok: local_mods behave (7 mods, all idempotent)")
 
 
 if __name__ == "__main__":

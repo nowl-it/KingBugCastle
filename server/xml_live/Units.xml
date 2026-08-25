@@ -3657,6 +3657,9 @@
 			<OffsetRotation Min='-10' Max='10' />
 			<ZLevel>UnitOver</ZLevel>
 		</Effect>
+
+		<AIType>Unit10390AI</AIType>
+
 		<!-- 스킬 -->
 		<Skill>10390</Skill>
 		<SkillSpeedByAttackSpeed>true</SkillSpeedByAttackSpeed>
@@ -35606,7 +35609,7 @@
 
 		<Boss>true</Boss>
 		<CanIce>false</CanIce>
-		<CCRatio>-100</CCRatio>
+		<CCRatio>0</CCRatio>
 		<Theme>4100</Theme>
 		<Value>0</Value>
 		<Executable>false</Executable>
@@ -35792,6 +35795,92 @@
 		<Prefab>Unit_21671</Prefab>
 		<AIType>Unit30000031AI</AIType>
 		<Untargetable>true</Untargetable>
+	</Unit>
+
+	<Unit ID="30000040" Inherit="30000000">
+		<Type>Enemy</Type>
+		<Prefab>Unit_30000030</Prefab>
+		<Sprite>Unit_30000030_0</Sprite>
+		<Name>UnitName_30000030</Name>
+		<Height>90</Height>
+		<HeightOffset>-20</HeightOffset>
+		<FixedSize>1.5</FixedSize>
+
+		<AIType>Unit30000040AI</AIType>
+
+		<!-- 능력치 (밸런싱 중) -->
+		<Hp>50000</Hp>
+		<Atk>70</Atk>
+		<MAtk>70</MAtk>
+		<Mana>3</Mana>
+		<BattleStartMana>3</BattleStartMana>
+		<AttackInterval>1</AttackInterval>
+		<Speed>0</Speed>
+
+		<AttackSkill>30000040</AttackSkill>
+		<SkillQueue>30000041,30000042,30000042,30000042,30000000</SkillQueue>
+		<ChallengeBossDescSkills>30000040,</ChallengeBossDescSkills>
+		
+        <Unit30000040AI_FixMAtkPer>100</Unit30000040AI_FixMAtkPer>
+		<Unit30000040AI_ExcessAtkSpdToFinalDamagePer>0.5</Unit30000040AI_ExcessAtkSpdToFinalDamagePer>
+		<Unit30000040AI_TakeDamageIncPer>150</Unit30000040AI_TakeDamageIncPer>
+
+		<!-- 일정 범위 내의 적이 있는지 감지 (쿨타임 5초) -->
+		<ConditionalSkill>
+			<CheckUnitRange CoolTime="7" Repeat="999" RangeType="Rect" RangeX="4" RangeY="4">30000045</CheckUnitRange>
+		</ConditionalSkill>
+
+		<LevelRatio Level='1'>1.0</LevelRatio>
+		<LevelRatio Level='2'>0.0</LevelRatio>
+		<LevelRatio Level='3'>0.0</LevelRatio>
+		<LevelRatio Level='4'>0.0</LevelRatio>
+		<LevelRatio Level='5'>0.0</LevelRatio>
+		<LevelRatio Level='6'>0.0</LevelRatio>
+		<LevelRatio Level='7'>0.0</LevelRatio>
+
+		<TileSize Type='Rect'>
+			<Width>3</Width>
+			<Height>3</Height>
+		</TileSize>
+	</Unit>
+
+	<Unit ID="30000050" Inherit="30000000">
+		<Type>Enemy</Type>
+		<Prefab>Unit_30000030</Prefab>
+		<Sprite>Unit_30000030_0</Sprite>
+		<Name>UnitName_30000030</Name>
+		<Height>90</Height>
+		<HeightOffset>-20</HeightOffset>
+		<FixedSize>1.5</FixedSize>
+
+		<AIType>Unit30000050AI</AIType>
+
+		<!-- 능력치 (밸런싱 중) -->
+		<Hp>47000</Hp>
+		<Atk>100</Atk>
+		<MAtk>100</MAtk>
+		<Mana>1</Mana>
+		<BattleStartMana>1</BattleStartMana>
+		<AttackInterval>1</AttackInterval>
+		<Speed>0</Speed>
+
+		<AttackSkill>30000050</AttackSkill>
+		<SkillQueue>30000051,30000052,30000052,30000053,30000052,30000052,30000053,30000000</SkillQueue>
+		<ConditionalSkill>
+		</ConditionalSkill>
+		
+		<LevelRatio Level='1'>1.0</LevelRatio>
+		<LevelRatio Level='2'>0.0</LevelRatio>
+		<LevelRatio Level='3'>0.0</LevelRatio>
+		<LevelRatio Level='4'>0.0</LevelRatio>
+		<LevelRatio Level='5'>0.0</LevelRatio>
+		<LevelRatio Level='6'>0.0</LevelRatio>
+		<LevelRatio Level='7'>0.0</LevelRatio>
+
+		<TileSize Type='Rect'>
+			<Width>3</Width>
+			<Height>3</Height>
+		</TileSize>
 	</Unit>
 
 	<Unit ID="40025000">
