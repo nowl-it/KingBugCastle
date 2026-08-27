@@ -15,6 +15,7 @@ and inventory helpers it owns resolve at request time.
     python3 territory_routes.py     # self-check
 """
 import datetime
+import random
 
 import territory
 from common import admin_log, body_int, body_list, now_iso
@@ -319,6 +320,109 @@ def r_territory_stat_buffs(body, st):
     return {"statBuffPers": _terr(st).get("statBuffPers", [])}
 
 
+def r_territory_alchemy(body, st):
+    """Spend alchemy stones for a random reward from the tier matching the alchemy
+    building level.  The client sends alchemyBuildingPosIndex, index (reward pool),
+    level, and alchemyCurrencies (what it thinks it is spending)."""
+    t = _terr(st)
+    pos = body_int(body.get("alchemyBuildingPosIndex"), 0)
+    b = _terr_at(t, pos)
+    if b is None:
+        return {**r_territory_fetch({}, st), "msg": "no alchemy building at this slot"}
+    # Find the alchemy tier matching the building level or the requested level.
+    alch_level = body_int(body.get("level"), territory.level(b["buildingId"]))
+    tiers = territory.alchemy_items(XML_DIR)
+    tier = next((a for a in tiers if a["level"] == alch_level), None)
+    if tier is None:
+        return {**r_territory_fetch({}, st), "msg": f"no alchemy tier for level {alch_level}"}
+    # Check the player has enough alchemy stones.
+    cost = tier["reqPoint"]
+    have = srv._item_count(st, territory.ALCHEMY_STONE)
+    if have < cost:
+        return {**r_territory_fetch({}, st),
+                "msg": f"not enough alchemy stones ({have} < {cost})"}
+    # Pick a reward pool by index (default 0).
+    pool_idx = body_int(body.get("index"), 0)
+    pools = [p for p in tier["rewards"] if p["index"] == pool_idx]
+    if not pools:
+        pools = tier["rewards"]
+    if not pools:
+        return {**r_territory_fetch({}, st), "msg": "empty reward pool"}
+    pool = pools[0]
+    # Roll: jackpot if random < jackpotPer, otherwise first item.
+    roll = random.random() * 100
+    if roll < pool["jackpotPer"] and len(pool["pool"]) >= 2:
+        pick = pool["pool"][-1]   # best reward
+    else:
+        pick = pool["pool"][0]    # worst reward
+    # Consume alchemy stones and grant the reward.
+    srv._take_item(st, territory.ALCHEMY_STONE, cost)
+    srv._grant_reward(st, pick["type"], pick["id"], pick["count"])
+    save_state(st)
+    admin_log(f"[territory] alchemy level {alch_level} -> {pick['type']} {pick['id']}x{pick['count']}")
+    out = r_territory_fetch({}, st)
+    out.update({"rewardListResponseData": srv._reward_list_data(
+                    [{"type": pick["type"], "id": pick["id"], "count": pick["count"]}]),
+                "consumedListData": srv._reward_list_data(
+                    [{"type": "Item", "id": territory.ALCHEMY_STONE, "count": cost}]),
+                "jackpotLevel": 1 if roll < pool["jackpotPer"] else 0})
+    return out
+
+
+def r_territory_level_sync_assign(body, st):
+    """Sync a hero's level to a building's level.  The sync entry lives in
+    levelSync[] and expires after a duration (default 24h)."""
+    t = _terr(st)
+    uid = body_int(body.get("unitId"), 0)
+    if uid <= 0:
+        return {**r_territory_fetch({}, st), "msg": "no unit specified"}
+    # Remove any existing sync for this hero (one sync per hero).
+    t["levelSync"] = [s for s in t["levelSync"] if s.get("unitId") != uid]
+    t["levelSync"].append({"unitId": uid, "syncLevel": 1, "syncPotentialTier": 0,
+                           "untilAt": now_iso(delta_days=1)})
+    save_state(st)
+    return {**r_territory_fetch({}, st),
+            "assignedUnits": [uid],
+            "playerLevelSyncData": t["levelSync"]}
+
+
+def r_territory_level_sync_reset_timer(body, st):
+    """Extend a hero's level sync by another cycle."""
+    t = _terr(st)
+    uid = body_int(body.get("unitId"), 0)
+    entry = next((s for s in t["levelSync"] if s.get("unitId") == uid), None)
+    if entry:
+        entry["untilAt"] = now_iso(delta_days=1)
+        save_state(st)
+    return r_territory_fetch({}, st)
+
+
+def r_territory_attendance_check(body, st):
+    """Daily territory attendance - always succeeds and returns the fetch payload."""
+    save_state(st)
+    return r_territory_fetch({}, st)
+
+
+def r_territory_restaurant_claim(body, st):
+    """Claim passive income from a restaurant-type building.  Awards a small
+    amount of gold based on the highest restaurant building level."""
+    t = _terr(st)
+    # Find the best restaurant building (family 10400 = Alchemy Workshop / Restaurant).
+    restaurant_families = {10400}  # alchemy / restaurant building
+    best_level = 0
+    for b in t["buildings"]:
+        fam = territory.family(b["buildingId"])
+        if fam in restaurant_families:
+            best_level = max(best_level, territory.level(b["buildingId"]))
+    if best_level <= 0:
+        return {**r_territory_fetch({}, st), "msg": "no restaurant building"}
+    # Pay out gold proportional to the building level.
+    gold = best_level * 500
+    st["gold"] = st.get("gold", 0) + gold
+    save_state(st)
+    return {"gold": st["gold"], "cash": st.get("cash", 0), "heart": st.get("heart", 0)}
+
+
 def register(app, server_module):
     global srv
     srv = server_module
@@ -341,11 +445,11 @@ def handlers():
         "/territory/recover-labor": r_territory_collect_labor,
         "/territory/assign-units": r_territory_assign,
         "/territory/swap-assigned-units": r_territory_assign,
-        "/territory/level-sync/assign": r_territory_fetch,
-        "/territory/level-sync/reset-timer": r_territory_fetch,
-        "/territory/attendance-check": r_territory_fetch,
-        "/territory/alchemy-new": r_territory_fetch,
-        "/territory/restaurant/claim": r_territory_fetch,
+        "/territory/level-sync/assign": r_territory_level_sync_assign,
+        "/territory/level-sync/reset-timer": r_territory_level_sync_reset_timer,
+        "/territory/attendance-check": r_territory_attendance_check,
+        "/territory/alchemy-new": r_territory_alchemy,
+        "/territory/restaurant/claim": r_territory_restaurant_claim,
         "/territory/fetch-stat-buffs": r_territory_stat_buffs,
         "/territory/equip-skin": r_territory_equip_skin,
         "/territory/hunting/start": r_territory_hunting_start,
@@ -361,6 +465,13 @@ if __name__ == "__main__":
     import pathlib as _pl
     import sys
     import tempfile
+
+    # Ensure the parent server/ directory is on the path for imports like common.
+    _SERVER = _pl.Path(__file__).resolve().parent.parent
+    for _p in (_SERVER, _SERVER / "routes"):
+        _sp = str(_p)
+        if _sp not in sys.path:
+            sys.path.insert(0, _sp)
 
     import playerdb
     playerdb.DB_PATH = _pl.Path(tempfile.mkdtemp()) / "t.db"

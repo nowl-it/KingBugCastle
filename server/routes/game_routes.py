@@ -27,6 +27,7 @@ def handlers():
         "/game/complete": r_game_complete,
         "/game/skip": r_game_complete,
         "/game/revive": r_game_revive,
+        "/game/check-dimension-rift-complete-success": r_dimension_rift_complete,
         "/babel": r_babel,
     }
 
@@ -125,6 +126,39 @@ def r_game_complete(body, st):
     out.update(gc["fixed"])
     if babel_rewards:
         out["rewardListData"] = srv._reward_list_data(babel_rewards)
+    return out
+
+
+def r_dimension_rift_complete(body, st):
+    """Dimension rift run completion. The client sends the run score; the server
+    records the best score and increments the game index so the next run gets a
+    fresh save slot."""
+    gc = RCFG["gameComplete"]
+    print(f"  [GAME/CHECK-DIMENSION-RIFT-COMPLETE-SUCCESS] body={body}")
+    score = body_int(body.get("rogueLikeScore"), 0)
+    win = bool(body.get("win", False))
+    add_gold = gc["baseGold"] + (gc["winBonusGold"] if win else 0)
+    add_exp = gc["baseExp"]
+    st["gold"] += add_gold
+    st["exp"] += add_exp
+    if win:
+        st["winCount"] = st.get("winCount", 0) + 1
+    st["playedCount"] = st.get("playedCount", 0) + 1
+    st["rogueLikePlayedCount"] = st.get("rogueLikePlayedCount", 0) + 1
+    if score > 0:
+        st["rogueLikeScore"] = max(int(st.get("rogueLikeScore", 0)), score)
+    st["dimensionRiftGameIndex"] = int(st.get("dimensionRiftGameIndex", 0)) + 1
+    srv.bump(st, "playGame")
+    if win:
+        srv.bump(st, "clearGame")
+    if st.get("exp", 0) >= gc["expPerLevel"]:
+        st["level"] = min(srv.MAX_PLAYER_LEVEL, st["level"] + st["exp"] // gc["expPerLevel"])
+        st["exp"] = st["exp"] % gc["expPerLevel"] if st["level"] < srv.MAX_PLAYER_LEVEL else 0
+    save_state(st)
+    out = {"addGold": add_gold, "addExp": add_exp,
+           "playerGold": st["gold"], "playerLevel": st["level"], "playerExp": st["exp"],
+           "rogueLikeScore": st.get("rogueLikeScore", 0)}
+    out.update(gc["fixed"])
     return out
 
 

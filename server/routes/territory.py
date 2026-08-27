@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XML = ROOT / "xml_live"
 
 TOWN_HALL = 10000          # family base of the town hall, which caps stored labor
+ALCHEMY_STONE = 700        # inventory item: alchemy currency (TerritoryAlchemyItems)
 _cache = {}
 
 
@@ -268,6 +269,44 @@ def starting_layout(xml_dir=DEFAULT_XML):
              "upgradeEndAt": "", "lastTokenAt": "", "data": ""}]
 
 
+def alchemy_items(xml_dir=DEFAULT_XML):
+    """Alchemy reward tiers from TerritoryAlchemyItems.xml.
+
+    Each tier has a ReqPoint cost (in alchemy stones, item 700) and one or more
+    reward indexes.  Each index carries a JackpotPer rate and a list of rewards
+    with Count values at increasing tiers.  `level` maps to the alchemy building
+    level; `enabled` is false for locked tiers."""
+    key = ("alchemy", str(xml_dir))
+    if key in _cache:
+        return _cache[key]
+    out = []
+    for el in _root(xml_dir, "TerritoryAlchemyItems.xml"):
+        if not el.get("ID"):
+            continue
+        enabled = (el.findtext("Enabled") or "true").strip().lower() != "false"
+        if not enabled:
+            continue
+        item = {"id": int(el.get("ID")),
+                "level": int(float(el.findtext("Level") or "0")),
+                "reqPoint": int(float(el.findtext("ReqPoint") or "0")),
+                "rewards": []}
+        for rw in el.findall("Rewards"):
+            idx = int(rw.get("Index", 0))
+            version = int(rw.get("Version", 0))
+            jackpot = rw.findtext("JackpotPer") or "0"
+            # JackpotPer uses comma as decimal separator
+            jackpot_pct = float(jackpot.replace(",", "."))
+            pool = []
+            for r in rw.findall("Reward"):
+                pool.append({"type": r.get("Type"), "id": int(r.get("ID", 0)),
+                             "count": int(r.get("Count", 0))})
+            item["rewards"].append({"index": idx, "version": version,
+                                    "jackpotPer": jackpot_pct, "pool": pool})
+        out.append(item)
+    _cache[key] = out
+    return out
+
+
 def _self_check():
     b = buildings()
     assert len(b) > 100, f"only {len(b)} territory buildings parsed"
@@ -313,9 +352,15 @@ def _self_check():
     silent = [h for h in hs if not hunting_rewards(h)]
     assert not silent, f"{len(silent)} hunting missions pay nothing: {silent[:5]}"
     paying = hs
+    alch = alchemy_items()
+    assert alch, "no alchemy items parsed"
+    for ai in alch:
+        assert ai["reqPoint"] > 0, f"alchemy item {ai['id']} costs 0"
+        assert ai["rewards"], f"alchemy item {ai['id']} has no reward pool"
     print(f"ok: {len(b)} buildings, town hall to level {max_level(hall1)}, "
           f"start {rate:.0f} labor/h cap {cap}, {len(items)} trade items, "
-          f"{len(paying)}/{len(hs)} huntings pay out, skins {sk}")
+          f"{len(paying)}/{len(hs)} huntings pay out, {len(alch)} alchemy tiers, "
+          f"skins {sk}")
 
 
 if __name__ == "__main__":
