@@ -369,7 +369,9 @@ def _repair_player_state(st):
     if "rogueLikeBoughtDlcs" not in st:
         st["rogueLikeBoughtDlcs"] = list(srv.ALL_ROGUE_LIKE_DLCS)
         changed = True
-    from routes.artifact_routes import _ensure_defaults, DEFAULT_TREASURES, DEFAULT_ARTIFACTS
+    from routes.artifact_routes import (
+        _ensure_defaults, DEFAULT_TREASURES, DEFAULT_ARTIFACTS, ensure_artifact_state,
+    )
     from routes.accessory import load_default_corruption_accessories
     from routes import rift as _rift
     _ensure_defaults()
@@ -381,6 +383,8 @@ def _repair_player_state(st):
         changed = True
     if not isinstance(st.get("artifacts"), list):
         st["artifacts"] = copy.deepcopy(DEFAULT_ARTIFACTS)
+        changed = True
+    if ensure_artifact_state(st):
         changed = True
     if not isinstance(st.get("riftWeapons"), list):
         st["riftWeapons"] = copy.deepcopy(_rift.DEFAULT_RIFT_WEAPONS)

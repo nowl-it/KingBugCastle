@@ -32,7 +32,11 @@ def _terr(st):
     cap of 0, so the player could never bank the labor a first upgrade costs and the
     plot would be permanently stuck."""
     t = st.setdefault("territory", {})
-    if "buildings" not in t:
+    # Older server versions persisted an empty ``buildings`` list while their
+    # territory endpoint still returned an empty model.  Treat that legacy shape
+    # exactly like a missing plot: a Dominion without its town hall has no labor
+    # capacity, so it can never acquire the resources needed to recover itself.
+    if not isinstance(t.get("buildings"), list) or not t["buildings"]:
         t.update({"buildings": territory.starting_layout(XML_DIR), "storedLabor": 0,
                   "lastLaborAt": now_iso(0), "stored": [], "hunting": [],
                   "levelSync": [], "tradeShop": [], "equippedSkin": 0})

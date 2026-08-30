@@ -46,6 +46,18 @@ def check_starting_plot():
           f"{len(out['skins'])} skins")
 
 
+def check_legacy_empty_plot_recovers():
+    """The old empty endpoint persisted this exact shape, which otherwise traps
+    a player in Dominion with zero labor capacity forever."""
+    st = _fresh()
+    st["territory"] = {"buildings": []}
+    server.save_state(st)
+    out = server.r_territory_fetch({}, server.load_state())
+    assert out["buildingDatas"], "a legacy empty Dominion was not repaired"
+    assert out["maxLabor"] > 0, "the recovered Dominion cannot store labor"
+    print("ok legacy empty Dominion recovery")
+
+
 def check_labor_accrues_and_caps():
     st = _fresh()
     server.r_territory_fetch({}, st)
@@ -233,6 +245,7 @@ def check_skin_must_exist():
 
 if __name__ == "__main__":
     check_starting_plot()
+    check_legacy_empty_plot_recovers()
     check_labor_accrues_and_caps()
     check_clock_going_backwards()
     check_upgrade_charges_and_advances()
