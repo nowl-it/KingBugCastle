@@ -278,7 +278,10 @@ DEFAULT_PLAYER = {
     "defaultPotential": {"unit": [], "potential": []},
     "inventory": {"itemIds": list(ALL_ITEM_IDS), "counts": [INV_COUNT] * len(ALL_ITEM_IDS)},
     "inventoryItems": {},
-    "tutorialKeyValues": [],
+    # Tutorial #40 assumes the client itself constructed the free Chamber and Inn.
+    # Private-server accounts receive both in their starter layout, so report the
+    # tutorial complete rather than resuming its modal over an already-built plot.
+    "tutorialKeyValues": [{"key": "Complete_Tutorial_40", "value": "1"}],
     "missions": [{"missionId": 1, "value": 1, "goalValue": 10, "clear": False, "createdAt": now_iso(0), "untilAt": now_iso(86400)}],
     "eventFlag": 0,
     "tokens": [],
@@ -398,13 +401,27 @@ from routes.artifact_routes import (make_artifact, make_max_artifact, make_acces
 # Dynamic overrides: routes whose response genuinely depends on request-time
 # state/body (auth tokens, st.get() reads, mutations) or config wiring. Pure
 # literal responses live in data/static_overrides.json instead (merged in below).
+def _tutorial_key_values(st):
+    """Tutorial state, with the obsolete Dominion construction tutorial retired.
+
+    Old saves stored an empty tutorial list.  Return a non-mutating compatibility
+    row as well as seeding new saves, so the first post-upgrade login clears the
+    client-side tutorial overlay before it fetches Territory.
+    """
+    values = list(st.get("tutorialKeyValues") or [])
+    if not any(row.get("key") == "Complete_Tutorial_40" and row.get("value") == "1"
+               for row in values if isinstance(row, dict)):
+        values.append({"key": "Complete_Tutorial_40", "value": "1"})
+    return values
+
+
 DYNAMIC_OVERRIDES = {
     "/auth/checkPatchVersion": lambda b, st: {"patchVersion": SERVER_VERSION},
     "/auth/getPatchFolder": lambda b, st: {"patchFolder": PATCH_FOLDER},
     "/auth/xcdSeed": lambda b, st: {"seed": secrets.token_hex(8), "serverTime": now_iso(0)},
     "/player/currencies": lambda b, st: {"gold": st.get("gold", 0), "cash": st.get("cash", 0), "heart": st.get("heart", 0)},
-    "/player/tutorial-status": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
-    "/player/tutorial/complete": lambda b, st: {"keyValues": st.get("tutorialKeyValues", [])},
+    "/player/tutorial-status": lambda b, st: {"keyValues": _tutorial_key_values(st)},
+    "/player/tutorial/complete": lambda b, st: {"keyValues": _tutorial_key_values(st)},
     "/player/add-inventory-count": lambda b, st: {
         "playerCash": st.get("cash", 0),
         "inventoryCount": 999
@@ -434,7 +451,7 @@ DYNAMIC_OVERRIDES = {
     # /test/* are the client's own dev buttons. They exist in the build, so they
     # must answer, but nothing here is meant to rewrite a save from a debug menu.
     "/player/tutorial/progress-mission": lambda b, st: {
-        "keyValues": st.get("tutorialKeyValues", [])},
+        "keyValues": _tutorial_key_values(st)},
     # One-way telemetry: posted, never read back.
     **rift.handlers(),
     **clan.handlers(),

@@ -261,12 +261,19 @@ def skins(gate, xml_dir=DEFAULT_XML):
 
 
 def starting_layout(xml_dir=DEFAULT_XML):
-    """The plot a brand-new territory starts with: a level 1 town hall at slot 0.
+    """The plot a brand-new territory starts with its two free tutorial buildings.
 
     Level 0 is the "not built yet" placeholder - starting there leaves the player with
-    a cap of 0 stored labor and no way to earn the labor a first upgrade costs."""
-    return [{"buildingId": TOWN_HALL + 1, "posIndex": 0, "assignedUnits": [],
-             "upgradeEndAt": "", "lastTokenAt": "", "data": ""}]
+    a cap of 0 stored labor and no way to earn the labor a first upgrade costs.  The
+    Inn is also free at level 1; omitting it leaves a client already midway through
+    the Dominion tutorial with a modal that blocks every construction-site tap.
+    """
+    return [
+        {"buildingId": TOWN_HALL + 1, "posIndex": 0, "assignedUnits": [],
+         "upgradeEndAt": "", "lastTokenAt": "", "data": ""},
+        {"buildingId": 10101, "posIndex": 1, "assignedUnits": [],
+         "upgradeEndAt": "", "lastTokenAt": "", "data": ""},
+    ]
 
 
 def alchemy_items(xml_dir=DEFAULT_XML):

@@ -40,6 +40,27 @@ def _terr(st):
         t.update({"buildings": territory.starting_layout(XML_DIR), "storedLabor": 0,
                   "lastLaborAt": now_iso(0), "stored": [], "hunting": [],
                   "levelSync": [], "tradeShop": [], "equippedSkin": 0})
+    # The prior recovery added only the Chamber.  Accounts that had already entered
+    # tutorial #40 were consequently resumed at its "construct an Inn" step, whose
+    # overlay blocks the very site the old layout failed to provide.  Repair just
+    # that starter shape; established Dominions remain untouched.
+    elif (len(t["buildings"]) == 1
+          and territory.family(t["buildings"][0].get("buildingId", 0)) == territory.TOWN_HALL
+          and territory.level(t["buildings"][0].get("buildingId", 0)) == 1):
+        starter_inn = territory.starting_layout(XML_DIR)[1]
+        if _terr_at(t, starter_inn["posIndex"]) is None:
+            t["buildings"].append(starter_inn)
+    # Some interrupted legacy migrations contained a valid building list but none
+    # of the parallel Territory collections.  Normalize those independently: the
+    # presence of a Chamber must not make `/territory/fetch` raise before the
+    # repair above can reach the client.
+    t.setdefault("storedLabor", 0)
+    t.setdefault("lastLaborAt", now_iso(0))
+    t.setdefault("stored", [])
+    t.setdefault("hunting", [])
+    t.setdefault("levelSync", [])
+    t.setdefault("tradeShop", [])
+    t.setdefault("equippedSkin", 0)
     return t
 
 

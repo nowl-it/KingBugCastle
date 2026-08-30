@@ -40,6 +40,8 @@ def check_starting_plot():
     assert territory.family(hall["buildingId"]) == territory.TOWN_HALL
     assert territory.level(hall["buildingId"]) >= 1, \
         "the plot starts at town hall level 0, which stores no labor and cannot progress"
+    assert any(b["buildingId"] == 10101 for b in out["buildingDatas"]), \
+        "the starter plot lacks the free Inn required by the Dominion tutorial"
     assert out["maxLabor"] > 0, "nowhere to store labor on a new plot"
     assert out["equippedSkin"] in out["skins"]
     print(f"ok start: town hall {hall['buildingId']}, cap {out['maxLabor']}, "
@@ -56,6 +58,21 @@ def check_legacy_empty_plot_recovers():
     assert out["buildingDatas"], "a legacy empty Dominion was not repaired"
     assert out["maxLabor"] > 0, "the recovered Dominion cannot store labor"
     print("ok legacy empty Dominion recovery")
+
+
+def check_chamber_only_plot_recovers_from_tutorial_deadlock():
+    """The first recovery shipped only a Chamber, stranding tutorial #40 at Inn."""
+    st = _fresh()
+    st["territory"] = {"buildings": territory.starting_layout(server.XML_DIR)[:1]}
+    st["tutorialKeyValues"] = []
+    server.save_state(st)
+    out = server.r_territory_fetch({}, server.load_state())
+    assert any(b["buildingId"] == 10101 for b in out["buildingDatas"]), \
+        "a Chamber-only Dominion was not given its free Inn"
+    tutorials = server.DYNAMIC_OVERRIDES["/player/tutorial-status"]({}, server.load_state())
+    assert {"key": "Complete_Tutorial_40", "value": "1"} in tutorials["keyValues"], \
+        "the Dominion tutorial was still reported unfinished"
+    print("ok chamber-only Dominion and tutorial #40 recovery")
 
 
 def check_labor_accrues_and_caps():
@@ -246,6 +263,7 @@ def check_skin_must_exist():
 if __name__ == "__main__":
     check_starting_plot()
     check_legacy_empty_plot_recovers()
+    check_chamber_only_plot_recovers_from_tutorial_deadlock()
     check_labor_accrues_and_caps()
     check_clock_going_backwards()
     check_upgrade_charges_and_advances()
