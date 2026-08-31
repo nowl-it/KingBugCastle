@@ -5,9 +5,8 @@ plot that could not be built on. What is here is the real economy: labor accrues
 hour from what is standing, buildings cost labor + gold from master data, hunting pays
 its own reward table, and the trade shop is priced in inventory items.
 
-`_terr` seeds a level 1 town hall on first access. Level 0 is the "not built yet"
-placeholder and gives a stored-labor cap of 0, so a plot starting there could never
-bank the labor a first upgrade costs and would be permanently stuck.
+`_terr` seeds the two starter rows tutorial #40 hides and reveals locally. Later
+upgrades use the labor capacity those buildings provide.
 
 Uses the `register(app, srv)` pattern; `srv` is the live server module, so the reward
 and inventory helpers it owns resolve at request time.
@@ -26,34 +25,23 @@ srv = None      # the live server module, set by register()
 
 
 def _terr(st):
-    """The player's territory, seeded with a level 1 town hall on first access.
-
-    Level 0 is the "not built yet" placeholder: starting there gives a stored-labor
-    cap of 0, so the player could never bank the labor a first upgrade costs and the
-    plot would be permanently stuck."""
+    """Return a normalized Dominion with tutorial #40's server-side snapshot."""
     t = st.setdefault("territory", {})
-    # Older server versions persisted an empty ``buildings`` list while their
-    # territory endpoint still returned an empty model.  Treat that legacy shape
-    # exactly like a missing plot: a Dominion without its town hall has no labor
-    # capacity, so it can never acquire the resources needed to recover itself.
     if not isinstance(t.get("buildings"), list) or not t["buildings"]:
         t.update({"buildings": territory.starting_layout(XML_DIR), "storedLabor": 0,
                   "lastLaborAt": now_iso(0), "stored": [], "hunting": [],
                   "levelSync": [], "tradeShop": [], "equippedSkin": 0})
-    # The prior recovery added only the Chamber.  Accounts that had already entered
-    # tutorial #40 were consequently resumed at its "construct an Inn" step, whose
-    # overlay blocks the very site the old layout failed to provide.  Repair just
-    # that starter shape; established Dominions remain untouched.
-    elif (len(t["buildings"]) == 1
-          and territory.family(t["buildings"][0].get("buildingId", 0)) == territory.TOWN_HALL
-          and territory.level(t["buildings"][0].get("buildingId", 0)) == 1):
-        starter_inn = territory.starting_layout(XML_DIR)[1]
-        if _terr_at(t, starter_inn["posIndex"]) is None:
-            t["buildings"].append(starter_inn)
-    # Some interrupted legacy migrations contained a valid building list but none
-    # of the parallel Territory collections.  Normalize those independently: the
-    # presence of a Chamber must not make `/territory/fetch` raise before the
-    # repair above can reach the client.
+    elif not any(row.get("key") == "Complete_Tutorial_40" and row.get("value") == "1"
+                 for row in st.get("tutorialKeyValues", []) if isinstance(row, dict)):
+        # The client hides these rows, then reveals Chamber at site 1 and Inn at site 0.
+        starters = {territory.family(b.get("buildingId", 0)): b for b in t["buildings"]
+                    if territory.family(b.get("buildingId", 0)) in (territory.TOWN_HALL, 10100)}
+        if len(t["buildings"]) <= 2 and territory.TOWN_HALL in starters:
+            starters[territory.TOWN_HALL]["posIndex"] = 1
+            if 10100 in starters:
+                starters[10100]["posIndex"] = 0
+            else:
+                t["buildings"].append(territory.starting_layout(XML_DIR)[1])
     t.setdefault("storedLabor", 0)
     t.setdefault("lastLaborAt", now_iso(0))
     t.setdefault("stored", [])
@@ -153,9 +141,15 @@ def r_territory_build(body, st):
                                "upgradeEndAt": end, "lastTokenAt": "", "data": ""})
     save_state(st)
     admin_log(f"[territory] slot {pos} -> building {bid}, done at {end}")
+    # Scene_Territory does not re-fetch the whole plot after a build.  It creates
+    # the visible object from refreshRet.buildingRet, so returning only the fetch
+    # payload leaves a correctly saved building invisible to the tutorial/UI.
+    built = _terr_at(t, pos)
     out = r_territory_fetch({}, st)
     out.update({"buildingCore": 0, "townHallCore": 0, "gold": st.get("gold", 0),
-                "cash": st.get("cash", 0), "seasonalToken": 0, "refreshRet": None})
+                "cash": st.get("cash", 0), "seasonalToken": 0,
+                "refreshRet": {"buildingRet": built, "ticketCount": 0,
+                               "playerLevelSyncData": t["levelSync"]}})
     return out
 
 

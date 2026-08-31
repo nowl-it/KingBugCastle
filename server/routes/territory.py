@@ -261,17 +261,11 @@ def skins(gate, xml_dir=DEFAULT_XML):
 
 
 def starting_layout(xml_dir=DEFAULT_XML):
-    """The plot a brand-new territory starts with its two free tutorial buildings.
-
-    Level 0 is the "not built yet" placeholder - starting there leaves the player with
-    a cap of 0 stored labor and no way to earn the labor a first upgrade costs.  The
-    Inn is also free at level 1; omitting it leaves a client already midway through
-    the Dominion tutorial with a modal that blocks every construction-site tap.
-    """
+    """Starter buildings tutorial #40 reveals at its two fixed build sites."""
     return [
-        {"buildingId": TOWN_HALL + 1, "posIndex": 0, "assignedUnits": [],
+        {"buildingId": TOWN_HALL + 1, "posIndex": 1, "assignedUnits": [],
          "upgradeEndAt": "", "lastTokenAt": "", "data": ""},
-        {"buildingId": 10101, "posIndex": 1, "assignedUnits": [],
+        {"buildingId": 10101, "posIndex": 0, "assignedUnits": [],
          "upgradeEndAt": "", "lastTokenAt": "", "data": ""},
     ]
 
@@ -327,6 +321,8 @@ def _self_check():
     assert any(upgrade_seconds(i) > 0 for i in b), "no building has an upgrade time"
 
     placed = starting_layout()
+    assert [(b["buildingId"], b["posIndex"]) for b in placed] == \
+        [(hall1, 1), (10101, 0)], "tutorial starter sites changed"
     cap = max_stored_labor(placed)
     assert cap > 0, "the starting layout stores no labor"
     rate = labor_per_hour(placed)

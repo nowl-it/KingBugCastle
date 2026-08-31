@@ -419,3 +419,17 @@ and play a colosseum match that **does not affect tier, score, or missions**.
 **TODO:** A proper score-skip for friendly matches would require the client to send a
 `gameType` or `isCustomMatch` flag in the `complete-round-data` body, which it currently does
 not do. For now, friendly matches count toward score like regular matches.
+
+### Dominion tutorial #40 native flow (2026-08-31)
+
+Tutorial #40 must remain unfinished, but Dominion must already return Chamber `10001` at
+`posIndex=1` (visual site 8) and Inn `10101` at `posIndex=0` (visual site 3). The client simulates
+construction without calling `/territory/build`: `PrepareTutorial40` snapshots the territory list,
+then predicate `b__68_0` removes roots `10000` and `10100` from the live client list. Step 5 calls
+`Scene_Territory.GetBuildableArea(1)`; callback `b__68_6` restores the snapshot minus Inn, revealing
+Chamber. Step 7 calls `GetBuildableArea(0)`; the later callback restores both rows, revealing Inn.
+`b__68_8` calls `TerritoryBuildingListPanel.GetBuildingCell(10100)`, so an empty server snapshot
+leaves Inn locked and throws `NullReferenceException` before any HTTP build request. The old seeded
+layout had the right rows but reversed positions (`Chamber@0`, `Inn@1`), making each reveal jump to
+the other tutorial site. Normal builds still require `refreshRet.buildingRet`; that response shape
+is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test_territory.py`.

@@ -278,10 +278,8 @@ DEFAULT_PLAYER = {
     "defaultPotential": {"unit": [], "potential": []},
     "inventory": {"itemIds": list(ALL_ITEM_IDS), "counts": [INV_COUNT] * len(ALL_ITEM_IDS)},
     "inventoryItems": {},
-    # Tutorial #40 assumes the client itself constructed the free Chamber and Inn.
-    # Private-server accounts receive both in their starter layout, so report the
-    # tutorial complete rather than resuming its modal over an already-built plot.
-    "tutorialKeyValues": [{"key": "Complete_Tutorial_40", "value": "1"}],
+    # Dominion tutorial #40 builds its free Chamber, then the Inn it unlocks.
+    "tutorialKeyValues": [],
     "missions": [{"missionId": 1, "value": 1, "goalValue": 10, "clear": False, "createdAt": now_iso(0), "untilAt": now_iso(86400)}],
     "eventFlag": 0,
     "tokens": [],
@@ -402,17 +400,8 @@ from routes.artifact_routes import (make_artifact, make_max_artifact, make_acces
 # state/body (auth tokens, st.get() reads, mutations) or config wiring. Pure
 # literal responses live in data/static_overrides.json instead (merged in below).
 def _tutorial_key_values(st):
-    """Tutorial state, with the obsolete Dominion construction tutorial retired.
-
-    Old saves stored an empty tutorial list.  Return a non-mutating compatibility
-    row as well as seeding new saves, so the first post-upgrade login clears the
-    client-side tutorial overlay before it fetches Territory.
-    """
-    values = list(st.get("tutorialKeyValues") or [])
-    if not any(row.get("key") == "Complete_Tutorial_40" and row.get("value") == "1"
-               for row in values if isinstance(row, dict)):
-        values.append({"key": "Complete_Tutorial_40", "value": "1"})
-    return values
+    """Tutorial progress persisted by the client/server, without forced skips."""
+    return list(st.get("tutorialKeyValues") or [])
 
 
 DYNAMIC_OVERRIDES = {

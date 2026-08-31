@@ -34,45 +34,29 @@ def _fresh(gold=10 ** 7):
 
 
 def check_starting_plot():
-    out = server.r_territory_fetch({}, _fresh())
-    assert out["buildingDatas"], "a new territory has no buildings"
-    hall = out["buildingDatas"][0]
-    assert territory.family(hall["buildingId"]) == territory.TOWN_HALL
-    assert territory.level(hall["buildingId"]) >= 1, \
-        "the plot starts at town hall level 0, which stores no labor and cannot progress"
-    assert any(b["buildingId"] == 10101 for b in out["buildingDatas"]), \
-        "the starter plot lacks the free Inn required by the Dominion tutorial"
-    assert out["maxLabor"] > 0, "nowhere to store labor on a new plot"
+    st = _fresh()
+    out = server.r_territory_fetch({}, st)
+    assert [(b["buildingId"], b["posIndex"]) for b in out["buildingDatas"]] == \
+        [(10001, 1), (10101, 0)], "tutorial #40 received the wrong starter snapshot"
+    assert out["maxLabor"] > 0, "the starter snapshot cannot store labor"
+    tutorials = server.DYNAMIC_OVERRIDES["/player/tutorial-status"]({}, server.load_state())
+    assert tutorials["keyValues"] == [], "tutorial #40 was incorrectly reported complete"
     assert out["equippedSkin"] in out["skins"]
-    print(f"ok start: town hall {hall['buildingId']}, cap {out['maxLabor']}, "
-          f"{len(out['skins'])} skins")
+    print(f"ok tutorial snapshot: Chamber@1, Inn@0, cap {out['maxLabor']}")
 
 
-def check_legacy_empty_plot_recovers():
-    """The old empty endpoint persisted this exact shape, which otherwise traps
-    a player in Dominion with zero labor capacity forever."""
+def check_empty_plot_recovers_tutorial_snapshot():
     st = _fresh()
     st["territory"] = {"buildings": []}
     server.save_state(st)
     out = server.r_territory_fetch({}, server.load_state())
-    assert out["buildingDatas"], "a legacy empty Dominion was not repaired"
-    assert out["maxLabor"] > 0, "the recovered Dominion cannot store labor"
-    print("ok legacy empty Dominion recovery")
-
-
-def check_chamber_only_plot_recovers_from_tutorial_deadlock():
-    """The first recovery shipped only a Chamber, stranding tutorial #40 at Inn."""
-    st = _fresh()
-    st["territory"] = {"buildings": territory.starting_layout(server.XML_DIR)[:1]}
-    st["tutorialKeyValues"] = []
-    server.save_state(st)
-    out = server.r_territory_fetch({}, server.load_state())
-    assert any(b["buildingId"] == 10101 for b in out["buildingDatas"]), \
-        "a Chamber-only Dominion was not given its free Inn"
-    tutorials = server.DYNAMIC_OVERRIDES["/player/tutorial-status"]({}, server.load_state())
-    assert {"key": "Complete_Tutorial_40", "value": "1"} in tutorials["keyValues"], \
-        "the Dominion tutorial was still reported unfinished"
-    print("ok chamber-only Dominion and tutorial #40 recovery")
+    assert [(b["buildingId"], b["posIndex"]) for b in out["buildingDatas"]] == \
+        [(10001, 1), (10101, 0)]
+    # Normal post-tutorial builds still need the nested object used for instantiation.
+    out = server.r_territory_build({"id": 10001, "posIndex": 7}, server.load_state())
+    wire = server.build_model("TerritoryBuildBuildingResponseModel", out)
+    assert wire["refreshRet"]["buildingRet"]["posIndex"] == 7
+    print("ok empty Dominion recovery and normal build response")
 
 
 def check_labor_accrues_and_caps():
@@ -120,15 +104,16 @@ def check_clock_going_backwards():
 def check_upgrade_charges_and_advances():
     st = _fresh()
     out = server.r_territory_fetch({}, st)
-    before = out["buildingDatas"][0]["buildingId"]
+    building = out["buildingDatas"][0]
+    before, pos = building["buildingId"], building["posIndex"]
     st = server.load_state()
     st["territory"]["storedLabor"] = 10 ** 6
     server.save_state(st)
     gold_before = server.load_state()["gold"]
 
-    out = server.r_territory_build({"posIndex": 0}, server.load_state())
+    out = server.r_territory_build({"posIndex": pos}, server.load_state())
     assert not out.get("msg"), f"upgrade refused: {out.get('msg')}"
-    after = out["buildingDatas"][0]["buildingId"]
+    after = next(b["buildingId"] for b in out["buildingDatas"] if b["posIndex"] == pos)
     assert after == before + 1, f"building went {before} -> {after}"
     cost = territory.cost(after, server.XML_DIR)
     assert server.load_state()["gold"] == gold_before - cost["gold"], "gold was not charged"
@@ -142,7 +127,8 @@ def check_upgrade_refused_without_funds():
     st["territory"]["storedLabor"] = 0
     st["territory"]["lastLaborAt"] = server.now_iso(0)
     server.save_state(st)
-    before = server.load_state()["territory"]["buildings"][0]["buildingId"]
+    building = server.load_state()["territory"]["buildings"][0]
+    before, pos = building["buildingId"], building["posIndex"]
     # Walk to a level that actually costs something - the first ones are free.
     target = next((b for b in sorted(territory.buildings(server.XML_DIR))
                    if territory.family(b) == territory.TOWN_HALL
@@ -151,7 +137,7 @@ def check_upgrade_refused_without_funds():
     st = server.load_state()
     st["territory"]["buildings"][0]["buildingId"] = target - 1
     server.save_state(st)
-    out = server.r_territory_build({"posIndex": 0}, server.load_state())
+    out = server.r_territory_build({"posIndex": pos}, server.load_state())
     assert out.get("msg"), "an unaffordable upgrade was allowed"
     assert server.load_state()["territory"]["buildings"][0]["buildingId"] == target - 1, \
         "the building advanced despite the refusal"
@@ -163,11 +149,6 @@ def check_assignment_is_exclusive():
     on every building at once."""
     st = _fresh()
     server.r_territory_fetch({}, st)
-    st = server.load_state()
-    st["territory"]["buildings"].append(
-        {"buildingId": st["territory"]["buildings"][0]["buildingId"], "posIndex": 1,
-         "assignedUnits": [], "upgradeEndAt": "", "lastTokenAt": "", "data": ""})
-    server.save_state(st)
 
     server.r_territory_assign({"posIndex": 0, "unitIds": [10260]}, server.load_state())
     server.r_territory_assign({"posIndex": 1, "unitIds": [10260]}, server.load_state())
@@ -180,9 +161,10 @@ def check_assignment_is_exclusive():
 def check_assignment_respects_cap():
     st = _fresh()
     server.r_territory_fetch({}, st)
-    bid = server.load_state()["territory"]["buildings"][0]["buildingId"]
+    building = server.load_state()["territory"]["buildings"][0]
+    bid, pos = building["buildingId"], building["posIndex"]
     cap = territory.spec(bid, "MaxUnitAssignCount", 0, server.XML_DIR)
-    out = server.r_territory_assign({"posIndex": 0, "unitIds": list(range(1, cap + 5))},
+    out = server.r_territory_assign({"posIndex": pos, "unitIds": list(range(1, cap + 5))},
                                     server.load_state())
     assert len(out["assignedUnits"]) == cap, \
         f"assigned {len(out['assignedUnits'])} units to a building capped at {cap}"
@@ -262,8 +244,7 @@ def check_skin_must_exist():
 
 if __name__ == "__main__":
     check_starting_plot()
-    check_legacy_empty_plot_recovers()
-    check_chamber_only_plot_recovers_from_tutorial_deadlock()
+    check_empty_plot_recovers_tutorial_snapshot()
     check_labor_accrues_and_caps()
     check_clock_going_backwards()
     check_upgrade_charges_and_advances()
