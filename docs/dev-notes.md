@@ -433,3 +433,29 @@ leaves Inn locked and throws `NullReferenceException` before any HTTP build requ
 layout had the right rows but reversed positions (`Chamber@0`, `Inn@1`), making each reveal jump to
 the other tutorial site. Normal builds still require `refreshRet.buildingRet`; that response shape
 is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test_territory.py`.
+
+### Blacksmith create / merge / polish contract (v172.0.01, 2026-08-31)
+
+- `ArtifactCraftTab.<Craft>d__13.MoveNext` RVA `0x30B85FC` uses two craft slots. The request's
+  `targetId` identifies a `ResourceArtifact.Type.Piece`; two matching pieces create the normal
+  artifact named by the piece's inherited `<Root>`. With one slot empty, `useDust=true`: consume
+  one piece plus `CraftDustCost[GetFromTypeRank(piece.fromType)]` (`25/50/100`). Piece rows must be
+  present in `/artifact/inventory`'s `artifacts`; the old default inventory contained only the 184
+  `Type=Artifact` rows, so the Craft tab had no selectable materials.
+- `ArtifactMergeTab.ReloadActionButtonInteractable` RVA `0x30BA4D8` requires both merge slots.
+  Consume two matching relics and create their next master-data tier. `GetMergeGoldCost`
+  RVA `0x30BA2B8` resolves the output (`next`) resource first, then charges that tier's
+  `MergeCost` row (King `400/600/800`, God `1000/1500/2000`, KingGod `4000/6000/8000`).
+- `ResourceArtifact.GetFromTypeRank` RVA `0x340E2A8` table for enum values 0..9 is
+  `[0,1,2,2,2,0,-1,-1,2,2]`: ShopCommon/Special=0, ShopRare=1,
+  ShopSpecial/HardMode/Arena/Event/Raid=2; the two RogueLike families are invalid (`-1`).
+- Polishing material request IDs are **resource IDs**, not artifact instance IDs:
+  `MaterialArtifactItem.From` RVA `0x338EA10` copies `ArtifactModel.artifactId` into inherited
+  `UpgradeMaterial.id` and the instance id into separate `uniqueId`. Stones 901/902/903 add
+  10/50/100 points. `ArtifactPolishPointByRank` is transposed relative to the old server code:
+  rows `One..Five` are the current option rank and columns are `FromType` rank. Moving an option
+  position uses `/artifact/polish/replace-option-slot-idx`, costs
+  `ArtifactPolishPointToReplace` (`200/400/800`), and must update both
+  `data.options[i].targets` and `options.targets[i].idx`.
+- Server implementation: `routes/artifact_routes.py`; durable focused regression:
+  `python3 server/tests/test_artifact_blacksmith.py`.

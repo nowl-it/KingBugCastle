@@ -12,7 +12,7 @@ import copy
 import xml.etree.ElementTree as ET
 
 from common import admin_log, body_int, body_list, now_iso
-from config import ITEM_TEMPLATES, XML_DIR
+from config import CONTENT_GATE, ITEM_TEMPLATES, XML_DIR
 from state import save_state
 import accessory
 import rift
@@ -23,6 +23,7 @@ srv = None      # live server module, injected via register()
 DEFAULTS_BUILT = False
 POLISH_ITEM_IDS = (901, 902, 903)
 _ARTIFACT_META = None
+_ARTIFACT_CONSTANTS = None
 
 
 def _ensure_defaults():
@@ -54,7 +55,7 @@ def register(app, server_module):
 def handlers():
     return {
         "/artifact/reroll": r_artifact_result,
-        "/artifact/polish/replace-option-slot-idx": r_artifact_result,
+        "/artifact/polish/replace-option-slot-idx": r_artifact_replace_option_slot_idx,
         "/artifact/inventory": r_artifact_inventory,
         "/artifact/equip": r_artifact_equip,
         "/artifact/crafting": r_artifact_crafting,
@@ -173,24 +174,69 @@ def _artifact_meta():
             "level": level,
             "root": root_id,
             "polishPoints": body_int(field(aid, "AddPolishPoint"), 0),
+            "minVersion": body_int(field(aid, "MinVersion"), 0),
         }
     _ARTIFACT_META = meta
     return meta
 
 
-def ensure_artifact_state(st):
-    """Seed the three real polishing stones once for existing and new saves.
+def _artifact_constants():
+    global _ARTIFACT_CONSTANTS
+    if _ARTIFACT_CONSTANTS is not None:
+        return _ARTIFACT_CONSTANTS
 
-    They are ResourceArtifact entries (not generic inventory items), so keeping
-    them alongside relic instances is what lets the Blacksmith panel send its
-    documented ``polishItemIds`` request.  The client can safely render these
-    three entries; the incompatible synthesis stones remain excluded.
+    root = ET.parse(XML_DIR / "ArtifactConstants.xml").getroot()
+
+    def values(name):
+        node = root.find(name)
+        return [body_int(value, 0) for value in (node.text or "").split(",")] if node is not None else []
+
+    def rows(name):
+        node = root.find(name)
+        return [[body_int(value, 0) for value in (child.text or "").split(",")] for child in node] if node is not None else []
+
+    _ARTIFACT_CONSTANTS = {
+        "craft": values("CraftDustCost"),
+        "merge": rows("MergeCost"),
+        "polish": rows("ArtifactPolishPointByRank"),
+        "replace": values("ArtifactPolishPointToReplace"),
+    }
+    return _ARTIFACT_CONSTANTS
+
+
+def _artifact_cost(values, info):
+    # ResourceArtifact.GetFromTypeRank @ v172.0.01 RVA 0x340E2A8.
+    column = {
+        "ShopCommon": 0, "ShopRare": 1, "ShopSpecial": 2,
+        "HardMode": 2, "Arena": 2, "Special": 0, "Event": 2, "Raid": 2,
+    }.get(info.get("fromType"), -1)
+    return values[column] if 0 <= column < len(values) else None
+
+
+def ensure_artifact_state(st):
+    """Seed Blacksmith materials once for existing and new saves.
+
+    Pieces and polishing stones are ResourceArtifact entries, not generic inventory
+    items. Without them the client's Craft and Polish tabs have no selectable rows.
+    Incompatible synthesis stones remain excluded.
     """
     arts = st.get("artifacts")
     if not isinstance(arts, list):
         return False
     changed = False
     next_id = max((body_int(a.get("id"), 0) for a in arts if isinstance(a, dict)), default=0) + 1
+    meta = _artifact_meta()
+    piece_ids = [aid for aid, info in meta.items()
+                 if info["type"] == "Piece"
+                 and info["minVersion"] <= CONTENT_GATE
+                 and meta.get(info["root"], {}).get("type") == "Artifact"]
+    for aid in piece_ids:
+        if not any(a.get("artifactId") == aid for a in arts):
+            art = make_artifact(next_id, aid)
+            art["count"] = 99999
+            arts.append(art)
+            next_id += 1
+            changed = True
     for aid in POLISH_ITEM_IDS:
         art = next((a for a in arts if a.get("artifactId") == aid), None)
         if art is None:
@@ -426,51 +472,64 @@ def _tier_upgrade_id(artifact_id):
 
 
 def r_artifact_crafting(body, st):
-    """Craft one selected relic, charging the master-data dust cost.
-
-    The client sends the selected artifact as ``targetId``; accepting its resource
-    id as well keeps old clients and the operator API compatible.  King God is the
-    terminal tier and is produced by merging, not dust crafting.
-    """
+    """Consume two matching pieces, or one piece plus dust, to create a relic."""
     arts = get_st_artifacts(st)
-    target = _find_artifact(arts, body.get("targetId") or body.get("artifactId"))
-    if target is None:
-        return _artifact_result(st, msg="no craftable relic selected")
-    info = _artifact_meta().get(target.get("artifactId"), {})
-    if info.get("type") != "Artifact" or info.get("fromType") == "Special":
-        return _artifact_result(st, msg="only relics can be crafted")
-    costs = {"Normal": 25, "King": 50, "God": 100}
-    cost = costs.get(info.get("level"))
+    piece = _find_artifact(arts, body.get("targetId") or body.get("artifactId"))
+    info = _artifact_meta().get(piece.get("artifactId"), {}) if piece else {}
+    use_dust = bool(body.get("useDust"))
+    piece_count = 1 if use_dust else 2
+    if info.get("type") != "Piece" or body_int(piece.get("count"), 0) < piece_count:
+        return _artifact_result(st, msg="not enough matching relic pieces")
+
+    output_id = body_int(info.get("root"), 0)
+    output_info = _artifact_meta().get(output_id, {})
+    if output_info.get("type") != "Artifact":
+        return _artifact_result(st, msg="invalid relic recipe")
+    cost = _artifact_cost(_artifact_constants()["craft"], info) if use_dust else 0
     if cost is None:
-        return _artifact_result(st, msg="King God relics cannot be crafted with dust")
+        return _artifact_result(st, msg="this relic family cannot be crafted")
     if body_int(st.get("dustCount"), 0) < cost:
         return _artifact_result(st, msg="not enough magical dust")
 
-    st["dustCount"] -= cost
-    target["count"] = body_int(target.get("count"), 0) + 1
+    piece["count"] -= piece_count
+    st["dustCount"] = body_int(st.get("dustCount"), 0) - cost
+    output = next((a for a in arts if a.get("artifactId") == output_id), None)
+    if output is None:
+        output = make_artifact(max((body_int(a.get("id"), 0) for a in arts), default=0) + 1, output_id)
+        output["count"] = 0
+        arts.append(output)
+    output["count"] = body_int(output.get("count"), 0) + 1
     save_state(st)
-    return _artifact_result(st, [target])
+    return _artifact_result(st, [piece, output])
 
 
 def r_artifact_merge(body, st):
-    """Combine three copies of one relic into the next master-data tier."""
+    """Combine two matching relics into the next tier and charge its merge cost."""
     arts = get_st_artifacts(st)
-    # Some older clients name the selected stack materialId; prefer whichever
-    # supplied id actually has enough copies to merge.
-    candidates = [_find_artifact(arts, body.get("targetId")),
-                  _find_artifact(arts, body.get("materialId")),
-                  _find_artifact(arts, body.get("artifactId"))]
-    source = next((a for a in candidates if a and body_int(a.get("count"), 0) >= 3),
-                  next((a for a in candidates if a), None))
-    if source is None:
+    target = _find_artifact(arts, body.get("targetId") or body.get("artifactId"))
+    material = _find_artifact(arts, body.get("materialId") or body.get("targetId") or body.get("artifactId"))
+    if target is None or material is None or target.get("artifactId") != material.get("artifactId"):
         return _artifact_result(st, msg="no relic selected for merging")
-    upgraded_id = _tier_upgrade_id(source.get("artifactId"))
+    required = 2 if target is material else 1
+    if body_int(target.get("count"), 0) < required or body_int(material.get("count"), 0) < required:
+        return _artifact_result(st, msg="two matching relics are required for a tier upgrade")
+
+    upgraded_id = _tier_upgrade_id(target.get("artifactId"))
     if upgraded_id is None:
         return _artifact_result(st, msg="this relic is already at the highest tier")
-    if body_int(source.get("count"), 0) < 3:
-        return _artifact_result(st, msg="three copies are required for a tier upgrade")
+    upgraded_info = _artifact_meta()[upgraded_id]
+    row_index = ("Normal", "King", "God", "KingGod").index(upgraded_info["level"])
+    merge_rows = _artifact_constants()["merge"]
+    cost = _artifact_cost(merge_rows[row_index], upgraded_info) if row_index < len(merge_rows) else None
+    if cost is None:
+        return _artifact_result(st, msg="this relic family cannot be merged")
+    if body_int(st.get("gold"), 0) < cost:
+        return _artifact_result(st, msg="not enough gold")
 
-    source["count"] -= 3
+    target["count"] -= required
+    if material is not target:
+        material["count"] -= 1
+    st["gold"] = body_int(st.get("gold"), 0) - cost
     upgraded = next((a for a in arts if a.get("artifactId") == upgraded_id), None)
     if upgraded is None:
         upgraded = make_artifact(max((body_int(a.get("id"), 0) for a in arts), default=0) + 1,
@@ -479,20 +538,41 @@ def r_artifact_merge(body, st):
         arts.append(upgraded)
     upgraded["count"] = body_int(upgraded.get("count"), 0) + 1
     save_state(st)
-    return _artifact_result(st, [source, upgraded])
+    changed = [target, upgraded] if material is target else [target, material, upgraded]
+    return _artifact_result(st, changed)
 
 
 def _polish_cost(artifact, option_level):
-    """ArtifactConstants.xml's quality row, indexed by the current option tier."""
-    quality = _artifact_meta().get(artifact.get("artifactId"), {}).get("level", "Normal")
-    rows = {
-        "Normal": (10, 20, 40), "King": (20, 40, 80),
-        "God": (30, 60, 120), "KingGod": (60, 120, 240),
-    }
-    row = rows.get(quality)
-    if not row or option_level < 1 or option_level > len(row):
+    """ArtifactConstants rows are option ranks; columns are FromType ranks."""
+    rows = _artifact_constants()["polish"]
+    if option_level < 1 or option_level > len(rows):
         return None
-    return row[option_level - 1]
+    return _artifact_cost(rows[option_level - 1], _artifact_meta().get(artifact.get("artifactId"), {}))
+
+
+def _polish_materials(body, arts):
+    ids = body_list(body.get("polishItemIds"), lambda value: body_int(value, 0))
+    counts = body_list(body.get("polishItemCounts"), lambda value: body_int(value, 0, lo=0))
+    if not ids or len(ids) != len(counts):
+        return None
+
+    requested = {}
+    for aid, count in zip(ids, counts):
+        if aid <= 0 or count <= 0:
+            return None
+        requested[aid] = requested.get(aid, 0) + count
+
+    materials = []
+    added = 0
+    meta = _artifact_meta()
+    for aid, count in requested.items():
+        item = next((a for a in arts if a.get("artifactId") == aid), None)
+        points = meta.get(aid, {}).get("polishPoints", 0)
+        if not item or points <= 0 or body_int(item.get("count"), 0) < count:
+            return None
+        materials.append((item, count))
+        added += points * count
+    return materials, added
 
 
 def r_artifact_polish(body, st):
@@ -514,23 +594,10 @@ def r_artifact_polish(body, st):
     if cost is None:
         return _artifact_result(st, [target], "this option is already at the highest phase")
 
-    ids = body_list(body.get("polishItemIds"), lambda v: body_int(v, 0))
-    counts = body_list(body.get("polishItemCounts"), lambda v: body_int(v, 0, lo=0))
-    if not ids or len(ids) != len(counts):
-        return _artifact_result(st, msg="select polishing stones")
-
-    meta = _artifact_meta()
-    materials = []
-    added = 0
-    for aid, count in zip(ids, counts):
-        item = _find_artifact(arts, aid)
-        points = meta.get(aid, {}).get("polishPoints", 0)
-        if not item or item.get("artifactId") != aid or points <= 0 or count <= 0:
-            return _artifact_result(st, msg="invalid polishing material")
-        if body_int(item.get("count"), 0) < count:
-            return _artifact_result(st, msg="not enough polishing stones")
-        materials.append((item, count))
-        added += points * count
+    selected = _polish_materials(body, arts)
+    if selected is None:
+        return _artifact_result(st, msg="invalid polishing materials")
+    materials, added = selected
 
     for item, count in materials:
         item["count"] -= count
@@ -548,6 +615,39 @@ def r_artifact_polish(body, st):
         lvs[slot] = option["level"]
     save_state(st)
     return _artifact_result(st, changed)
+
+
+def r_artifact_replace_option_slot_idx(body, st):
+    """Spend polishing points to move one option's board position."""
+    arts = get_st_artifacts(st)
+    target = _find_artifact(arts, body.get("targetId") or body.get("artifactId"))
+    info = _artifact_meta().get(target.get("artifactId"), {}) if target else {}
+    slot = body_int(body.get("index"), -1)
+    options = (target.get("data") or {}).get("options") if target else None
+    positions = body_list(body.get("replacedOptionSlotIdx"), lambda value: body_int(value, 0))
+    if info.get("type") != "Artifact" or not isinstance(options, list) or slot < 0 or slot >= len(options):
+        return _artifact_result(st, msg="invalid relic option")
+    if not positions or len(positions) != len(set(positions)) or any(position not in range(1, 7) for position in positions):
+        return _artifact_result(st, msg="invalid option positions")
+    cost = _artifact_cost(_artifact_constants()["replace"], info)
+    if cost is None:
+        return _artifact_result(st, msg="this relic family cannot be polished")
+    selected = _polish_materials(body, arts)
+    if selected is None:
+        return _artifact_result(st, msg="invalid polishing materials")
+    materials, added = selected
+
+    for item, count in materials:
+        item["count"] -= count
+    target["polishPoint"] = body_int(target.get("polishPoint"), 0) + added
+    if target["polishPoint"] >= cost:
+        target["polishPoint"] -= cost
+        options[slot]["targets"] = positions
+        nested = (target.get("options") or {}).get("targets")
+        if isinstance(nested, list) and slot < len(nested):
+            nested[slot]["idx"] = positions
+    save_state(st)
+    return _artifact_result(st, [target, *(item for item, _ in materials)])
 
 
 def _resolve_equipped_artifacts(st):
