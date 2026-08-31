@@ -40,6 +40,7 @@ def _fresh_blacksmith_state():
     st["artifacts"] = [relic, piece]
     st["dustCount"] = 1_000
     st["gold"] = 10_000
+    st["inventory"] = {"itemIds": [artifact_routes.SMART_REROLL_ITEM_ID], "counts": [5]}
     st["equippedArtifacts"] = []
     assert artifact_routes.ensure_artifact_state(st)
     expected_pieces = {piece_id for piece_id, info in artifact_routes._artifact_meta().items()
@@ -49,7 +50,7 @@ def _fresh_blacksmith_state():
     return aid, piece_id
 
 
-def check_craft_merge_and_polish():
+def check_craft_merge_polish_and_guaranteed_forge():
     aid, piece_id = _fresh_blacksmith_state()
     st = server.load_state()
     relic = st["artifacts"][0]
@@ -86,6 +87,20 @@ def check_craft_merge_and_polish():
     stone = next(a for a in st["artifacts"] if a["artifactId"] == 901)
     assert stone["count"] == 99993
 
+    token_before = server._item_count(st, artifact_routes.SMART_REROLL_ITEM_ID)
+    forged = artifact_routes.r_artifact_smart_reroll(
+        {"targetId": relic["id"], "stat": "HpPer", "index": 4}, st)
+    assert not forged.get("msg"), forged
+    assert forged["results"][0]["id"] == relic["id"]
+    st = server.load_state()
+    relic = next(a for a in st["artifacts"] if a["id"] == relic["id"])
+    assert relic["data"]["options"][0] == {
+        "targets": [4], "type": "HpPer", "value": 24, "level": 6}
+    assert relic["options"]["types"][0] == "HpPer"
+    assert relic["options"]["lvs"][0] == 6
+    assert relic["options"]["targets"][0]["idx"] == [4]
+    assert server._item_count(st, artifact_routes.SMART_REROLL_ITEM_ID) == token_before - 1
+
     moved = server.r_artifact_replace_option_slot_idx(
         {"targetId": relic["id"], "index": 0, "replacedOptionSlotIdx": [2],
          "polishItemIds": [903], "polishItemCounts": [2]},
@@ -107,8 +122,8 @@ def check_craft_merge_and_polish():
     assert next(a for a in st["artifacts"] if a["id"] == relic["id"])["count"] == 0
     upgraded = next(a for a in st["artifacts"] if a["artifactId"] == upgraded_id)
     assert upgraded["count"] == 1 and st["gold"] == 9_600
-    print("ok Blacksmith: piece crafting, paid merge, polish, and position move persist")
+    print("ok Blacksmith: craft, merge, polish, position move, and guaranteed forge persist")
 
 
 if __name__ == "__main__":
-    check_craft_merge_and_polish()
+    check_craft_merge_polish_and_guaranteed_forge()

@@ -459,3 +459,16 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
   `data.options[i].targets` and `options.targets[i].idx`.
 - Server implementation: `routes/artifact_routes.py`; durable focused regression:
   `python3 server/tests/test_artifact_blacksmith.py`.
+
+### Guaranteed Forge contract (v172.0.01, 2026-08-31)
+
+- `ArtifactRerollTab.<SmartRerollImpl>d__68.MoveNext` RVA `0x31018A0` sends
+  `ArtifactRequestModel{targetId=<instance id>, index=<board position 1..6>,
+  stat=<AtkPer|MAtkPer|AtkSpeedPer|HpPer>}` to `/artifact/smart-reroll`. A successful
+  response must contain the updated artifact in `results[0]`; an empty result is a visible no-op.
+- `GetSmartRerollCost` RVA `0x30C9CB0` indexes `ResourceArtifact.fromType`: ShopCommon 1,
+  ShopSpecial/HardMode/Arena 4, Event 0, Raid 2 Blacksmith's Tokens (inventory item 800).
+  ShopRare, Special, and both RogueLike families return the client's invalid/max sentinel.
+- The selected option becomes level 6/value 24 and is assigned only to the requested position.
+  Update both `data.options[slot]` and the parallel `options.{types,lvs,targets}` representation,
+  then persist and deduct item 800. Regression: `server/tests/test_artifact_blacksmith.py`.
