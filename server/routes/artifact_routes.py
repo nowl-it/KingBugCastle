@@ -549,17 +549,16 @@ def r_artifact_merge(body, st):
 
 
 def r_artifact_smart_reroll(body, st):
-    """Use Blacksmith's Tokens to max one chosen relic option."""
+    """Use Blacksmith's Tokens to max every relic option at one position."""
     arts = get_st_artifacts(st)
     target = _find_artifact(arts, body.get("targetId") or body.get("artifactId"))
     info = _artifact_meta().get(target.get("artifactId"), {}) if target else {}
     stat = body.get("stat")
-    slot = body_int(body.get("index"), 0) - 1
+    position = body_int(body.get("index"), 0)
     options = (target.get("data") or {}).get("options") if target else None
     if (info.get("type") != "Artifact" or body_int(target.get("count"), 0) <= 0
-            or stat not in SMART_REROLL_STATS or not isinstance(options, list)
-            or slot < 0 or slot >= len(options) or not isinstance(options[slot], dict)
-            or options[slot].get("type") == "None"):
+            or stat not in SMART_REROLL_STATS or position not in range(1, 7)
+            or not isinstance(options, list)):
         return _artifact_result(st, msg="invalid guaranteed forge selection")
 
     cost = SMART_REROLL_COSTS.get(info.get("fromType"))
@@ -568,15 +567,23 @@ def r_artifact_smart_reroll(body, st):
     if srv._item_count(st, SMART_REROLL_ITEM_ID) < cost:
         return _artifact_result(st, msg="not enough Blacksmith's Tokens")
 
-    option = options[slot]
-    option.update({"type": stat, "value": 24, "level": 6})
+    active = [(slot, option) for slot, option in enumerate(options)
+              if isinstance(option, dict) and option.get("type") != "None"]
+    if not active:
+        return _artifact_result(st, msg="relic has no forgeable option")
+
     parallel = target.get("options") or {}
     types = parallel.get("types")
     levels = parallel.get("lvs")
-    if isinstance(types, list) and slot < len(types):
-        types[slot] = stat
-    if isinstance(levels, list) and slot < len(levels):
-        levels[slot] = 6
+    targets = parallel.get("targets")
+    for slot, option in active:
+        option.update({"targets": [position], "type": stat, "value": 24, "level": 6})
+        if isinstance(types, list) and slot < len(types):
+            types[slot] = stat
+        if isinstance(levels, list) and slot < len(levels):
+            levels[slot] = 6
+        if isinstance(targets, list) and slot < len(targets) and isinstance(targets[slot], dict):
+            targets[slot]["idx"] = [position]
 
     if cost:
         srv._take_item(st, SMART_REROLL_ITEM_ID, cost)

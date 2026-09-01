@@ -463,15 +463,17 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
 ### Guaranteed Forge contract (v172.0.01, 2026-08-31)
 
 - `ArtifactRerollTab.<SmartRerollImpl>d__68.MoveNext` RVA `0x31018A0` sends
-  `ArtifactRequestModel{targetId=<instance id>, index=<option row 1..4>,
+  `ArtifactRequestModel{targetId=<instance id>, index=<target position 1..6>,
   stat=<AtkPer|MAtkPer|AtkSpeedPer|HpPer>}` to `/artifact/smart-reroll`. A successful
   response must contain the updated artifact in `results[0]`; an empty result is a visible no-op.
-  Proof: `ldr w8,[ArtifactRerollTab,#0x114]` then `add w8,w8,#1` at RVA `0x3101A40` sends
-  the zero-based `_selectedSlotIdx` as a one-based request index. It is not a board position.
+  Generated fields identify `+0x110` as `_smartRerollTypeIndex` and `+0x114` as
+  `_smartRerollTargetIndex`; `OnClickSmartRerollTarget` RVA `0x30C917C` stores the selected
+  zero-based formation position there, and the request sends it plus one.
 - `GetSmartRerollCost` RVA `0x30C9CB0` indexes `ResourceArtifact.fromType`: ShopCommon 1,
   ShopSpecial/HardMode/Arena 4, Event 0, Raid 2 Blacksmith's Tokens (inventory item 800).
   ShopRare, Special, and both RogueLike families return the client's invalid/max sentinel.
-- Only the selected option row changes: it becomes level 6/value 24 while its existing target
-  positions remain unchanged. Update `data.options[slot]` and the parallel `options.{types,lvs}`
-  representation, then persist and deduct item 800. Regression:
+- Every active option row becomes the selected stat at level 6/value 24 and targets only the
+  requested position. This matches `ReloadSmartRerollOptionUI` RVA `0x30C8A5C`, whose four-row
+  preview loop builds each option with the selected type and `targetIndex + 1`. Update both
+  `data.options` and parallel `options.{types,lvs,targets}`, then persist and deduct item 800. Regression:
   `server/tests/test_artifact_blacksmith.py`.

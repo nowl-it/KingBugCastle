@@ -1,5 +1,4 @@
 """Focused Blacksmith contract: craft, merge, and polish change durable relic state."""
-import copy
 import pathlib
 import sys
 import tempfile
@@ -96,8 +95,6 @@ def check_craft_merge_polish_and_guaranteed_forge():
         max(a["id"] for a in st["artifacts"]) + 1, forge_artifact_id)
     forge_relic["count"] = 1
     st["artifacts"].append(forge_relic)
-    options_before = copy.deepcopy(forge_relic["data"]["options"])
-    targets_before = copy.deepcopy(forge_relic["options"]["targets"])
     token_before = server._item_count(st, artifact_routes.SMART_REROLL_ITEM_ID)
     forged = artifact_routes.r_artifact_smart_reroll(
         {"targetId": forge_relic["id"], "stat": "HpPer", "index": 4}, st)
@@ -105,13 +102,12 @@ def check_craft_merge_polish_and_guaranteed_forge():
     assert forged["results"][0]["id"] == forge_relic["id"]
     st = server.load_state()
     forge_relic = next(a for a in st["artifacts"] if a["id"] == forge_relic["id"])
-    assert forge_relic["data"]["options"][:3] == options_before[:3]
-    assert forge_relic["data"]["options"][3] == {
-        **options_before[3], "type": "HpPer", "value": 24, "level": 6}
-    assert forge_relic["options"]["types"][:3] == [o["type"] for o in options_before[:3]]
-    assert forge_relic["options"]["types"][3] == "HpPer"
-    assert forge_relic["options"]["lvs"][3] == 6
-    assert forge_relic["options"]["targets"] == targets_before
+    assert forge_relic["data"]["options"][:4] == [
+        {"targets": [4], "type": "HpPer", "value": 24, "level": 6}
+    ] * 4
+    assert forge_relic["options"]["types"][:4] == ["HpPer"] * 4
+    assert forge_relic["options"]["lvs"][:4] == [6] * 4
+    assert forge_relic["options"]["targets"][:4] == [{"idx": [4]}] * 4
     assert server._item_count(st, artifact_routes.SMART_REROLL_ITEM_ID) == token_before - 1
 
     relic = next(a for a in st["artifacts"] if a["id"] == relic["id"])
