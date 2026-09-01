@@ -1,4 +1,5 @@
 """Focused Blacksmith contract: craft, merge, and polish change durable relic state."""
+import copy
 import pathlib
 import sys
 import tempfile
@@ -87,20 +88,33 @@ def check_craft_merge_polish_and_guaranteed_forge():
     stone = next(a for a in st["artifacts"] if a["artifactId"] == 901)
     assert stone["count"] == 99993
 
+    forge_artifact_id = next(aid for aid, info in artifact_routes._artifact_meta().items()
+                             if info["type"] == "Artifact"
+                             and info["fromType"] == "ShopCommon"
+                             and info["level"] == "KingGod")
+    forge_relic = server.make_artifact(
+        max(a["id"] for a in st["artifacts"]) + 1, forge_artifact_id)
+    forge_relic["count"] = 1
+    st["artifacts"].append(forge_relic)
+    options_before = copy.deepcopy(forge_relic["data"]["options"])
+    targets_before = copy.deepcopy(forge_relic["options"]["targets"])
     token_before = server._item_count(st, artifact_routes.SMART_REROLL_ITEM_ID)
     forged = artifact_routes.r_artifact_smart_reroll(
-        {"targetId": relic["id"], "stat": "HpPer", "index": 4}, st)
+        {"targetId": forge_relic["id"], "stat": "HpPer", "index": 4}, st)
     assert not forged.get("msg"), forged
-    assert forged["results"][0]["id"] == relic["id"]
+    assert forged["results"][0]["id"] == forge_relic["id"]
     st = server.load_state()
-    relic = next(a for a in st["artifacts"] if a["id"] == relic["id"])
-    assert relic["data"]["options"][0] == {
-        "targets": [4], "type": "HpPer", "value": 24, "level": 6}
-    assert relic["options"]["types"][0] == "HpPer"
-    assert relic["options"]["lvs"][0] == 6
-    assert relic["options"]["targets"][0]["idx"] == [4]
+    forge_relic = next(a for a in st["artifacts"] if a["id"] == forge_relic["id"])
+    assert forge_relic["data"]["options"][:3] == options_before[:3]
+    assert forge_relic["data"]["options"][3] == {
+        **options_before[3], "type": "HpPer", "value": 24, "level": 6}
+    assert forge_relic["options"]["types"][:3] == [o["type"] for o in options_before[:3]]
+    assert forge_relic["options"]["types"][3] == "HpPer"
+    assert forge_relic["options"]["lvs"][3] == 6
+    assert forge_relic["options"]["targets"] == targets_before
     assert server._item_count(st, artifact_routes.SMART_REROLL_ITEM_ID) == token_before - 1
 
+    relic = next(a for a in st["artifacts"] if a["id"] == relic["id"])
     moved = server.r_artifact_replace_option_slot_idx(
         {"targetId": relic["id"], "index": 0, "replacedOptionSlotIdx": [2],
          "polishItemIds": [903], "polishItemCounts": [2]},
