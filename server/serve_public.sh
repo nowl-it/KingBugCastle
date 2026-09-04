@@ -18,16 +18,38 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
+# Keep deployment-only values out of git and make interactive starts behave like
+# the deploy hook. The file is operator-owned; do not use a world-writable path.
+if [ -n "${KGC_ENV_FILE:-}" ]; then
+  ENV_FILE="$KGC_ENV_FILE"
+elif [ -r /etc/kgc/server.env ]; then
+  ENV_FILE=/etc/kgc/server.env
+else
+  # A personal-machine deployment normally has no system-owned /etc/kgc.
+  # Keep its credentials beside the already gitignored OAuth client instead.
+  ENV_FILE="$PWD/secrets/server.env"
+fi
+if [ -r "$ENV_FILE" ]; then
+  set -a
+  # shellcheck disable=SC1090
+  . "$ENV_FILE"
+  set +a
+fi
+
 HTTP_PORT="${HTTP_PORT:-8080}"
 TLS_PORT="${TLS_PORT:-8443}"
+BIND_HOST="${KGC_BIND_HOST:-0.0.0.0}"
 PID_FILE="/tmp/kgc_server.pid"
 
-# Inject real Google OAuth client for public testing. Google requires a HTTPS domain.
-export GLOGIN_PUBLIC_URL="https://kingbugcastle.id.vn"
-# Fixed state secret so OAuth state tokens survive server restarts.
-export GLOGIN_STATE_SECRET="${GLOGIN_STATE_SECRET:-a3f7c91e8b2d4f6a0e5c8b3d7f9a2e4c}"
+# Browser origin for the game OAuth callback. Preserve the operator-provided
+# deployment domain from server.env; the historic public domain is only a default.
+export GLOGIN_PUBLIC_URL="${GLOGIN_PUBLIC_URL:-https://kingbugcastle.id.vn}"
+# OAuth state must survive a restart, but the key is deployment-only credential
+# material. Put it in the service environment; never fall back to a tracked value.
+: "${GLOGIN_STATE_SECRET:?set GLOGIN_STATE_SECRET in the deployment environment}"
+export GLOGIN_STATE_SECRET
 
-# Prefer the repo venv, same as run.sh.
+# Prefer the repo venv, same as run.py.
 UVICORN="uvicorn"
 GUNICORN="gunicorn"
 for cand in "../.venv/bin/uvicorn" ".venv/bin/uvicorn"; do
@@ -57,7 +79,7 @@ case "${1:-}" in
         kill "$TLS_PID" 2>/dev/null || true
         sleep 1
         if [ -f key.pem ] && [ -f cert.pem ]; then
-          nohup "$UVICORN" server:app --host 0.0.0.0 --port "${TLS_PORT}" \
+          nohup "$UVICORN" server:app --host "${KGC_BIND_HOST:-0.0.0.0}" --port "${TLS_PORT}" \
               --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
           echo "[✓] TLS uvicorn restarted (PID: $!)"
         fi
@@ -112,6 +134,15 @@ export KGC_MAX_BODY="${KGC_MAX_BODY:-1000000}"
 export KGC_QUIET="${KGC_QUIET:-1}"
 [ -n "${KGC_TRUST_PROXY:-}" ] && export KGC_TRUST_PROXY
 
+# Forwarded-IP headers are trustworthy only when a reverse proxy is the sole
+# ingress. Binding the app to loopback makes that network invariant enforceable
+# instead of relying on a deployment comment that can drift.
+if [ "${KGC_TRUST_PROXY:-}" = "1" ] && [ "$BIND_HOST" != "127.0.0.1" ] && [ "$BIND_HOST" != "::1" ]; then
+  echo "[!] KGC_TRUST_PROXY=1 requires KGC_BIND_HOST=127.0.0.1 or ::1" >&2
+  exit 2
+fi
+export KGC_BIND_HOST="$BIND_HOST"
+
 # Run preflight checks before serving
 echo "[+] preflight"
 if ! "$PY_BIN" cli/preflight.py; then
@@ -123,20 +154,20 @@ echo ""
 
 # Prefer Gunicorn with Uvicorn workers for zero-downtime SIGHUP reload & concurrency
 if command -v "$GUNICORN" >/dev/null 2>&1 || [ -x "$GUNICORN" ]; then
-  echo "[+] Starting Gunicorn + Uvicorn Workers on 0.0.0.0:${HTTP_PORT} (Zero-Downtime Ready)..."
+  echo "[+] Starting Gunicorn + Uvicorn Workers on ${BIND_HOST}:${HTTP_PORT} (Zero-Downtime Ready)..."
   nohup "$GUNICORN" server:app -c gunicorn_conf.py > /tmp/kgc_pub_http.log 2>&1 &
   P1=$!
   echo "$P1" > "$PID_FILE"
 else
   echo "[!] gunicorn not found; falling back to standalone uvicorn..."
-  nohup "$UVICORN" server:app --host 0.0.0.0 --port "${HTTP_PORT}" > /tmp/kgc_pub_http.log 2>&1 &
+  nohup "$UVICORN" server:app --host "$BIND_HOST" --port "${HTTP_PORT}" > /tmp/kgc_pub_http.log 2>&1 &
   P1=$!
   echo "$P1" > "$PID_FILE"
 fi
 
 if [ -f key.pem ] && [ -f cert.pem ]; then
-  echo "[+] HTTPS TLS server 0.0.0.0:${TLS_PORT}"
-  nohup "$UVICORN" server:app --host 0.0.0.0 --port "${TLS_PORT}" \
+  echo "[+] HTTPS TLS server ${BIND_HOST}:${TLS_PORT}"
+  nohup "$UVICORN" server:app --host "$BIND_HOST" --port "${TLS_PORT}" \
       --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
   P2=$!
 else

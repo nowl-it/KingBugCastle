@@ -13,6 +13,8 @@ import xml.etree.ElementTree as ET
 import UnityPy
 from PIL import Image
 
+from bundle_extract import extract_android_bundles
+
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 XML = os.path.join(REPO, "server", "xml_live")
 OUT = os.path.join(REPO, "server", "webui-next", "public", "assets")
@@ -21,9 +23,8 @@ SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(REPO, "apk", "xapk_extr
 BUNDLE_DIR = "/tmp/opencode/kgc_all"
 
 if not os.path.isdir(BUNDLE_DIR) or not os.listdir(BUNDLE_DIR):
-    os.makedirs(BUNDLE_DIR, exist_ok=True)
     apk = os.path.join(SRC, "base_assets.apk")
-    os.system(f'unzip -j -o "{apk}" "assets/aa/Android/*" -d "{BUNDLE_DIR}"')
+    extract_android_bundles(apk, BUNDLE_DIR)
 
 env = UnityPy.load(BUNDLE_DIR)
 sprites = {}

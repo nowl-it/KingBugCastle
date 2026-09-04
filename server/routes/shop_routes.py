@@ -124,8 +124,6 @@ def r_shop(body, st):
     pass down, a request carrying an itemId or gachaId is a purchase/roll; a bare one is a listing.
     That is also self-correcting if the client ever POSTs /shop just to refresh."""
     base = dict(STATIC_OVERRIDES["/shop"])
-    if body:
-        admin_log(f"[shop DEBUG] body keys={list(body.keys())} body={body}")
     if body.get("itemId") or body.get("gachaId"):
         base.update(_shop_buy(body, st))
         save_state(st)

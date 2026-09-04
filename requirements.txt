@@ -1,18 +1,20 @@
 # Server runtime. Install into a venv, not the system Python:
 #
-#   python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+#   python -m venv .venv
+#   python -m pip install -r requirements.txt  # after activating the venv
 #
-# server/run.sh picks .venv/bin up automatically when it exists. Distro Pythons
-# (Arch, Debian) refuse a system-wide `pip install` anyway, and upgrading FastAPI
+# server/run.py finds .venv/bin on macOS/Linux and .venv/Scripts on Windows.
+# Distro Pythons (Arch, Debian) refuse a system-wide `pip install` anyway, and upgrading FastAPI
 # in /usr would move it for every other project on the machine.
 #
 # Pinned to a floor, not an exact version: these are the versions this server is
 # tested against, and anything newer in the same line has been fine.
 fastapi>=0.140.13
 uvicorn[standard]>=0.51.0     # [standard] brings uvloop + httptools + websockets
-gunicorn>=21.2.0              # Process manager for multi-worker zero-downtime serving
-watchfiles>=1.2.0             # run.sh --reload; without it uvicorn silently falls back to
+gunicorn>=21.2.0; sys_platform != "win32"  # Production process manager; Unix only
+watchfiles>=1.2.0             # run.py --reload; without it uvicorn silently falls back to
                               # StatReload, watches only .py, and ignores --reload-include
+windows-curses>=2.4.1; sys_platform == "win32"  # TUI support on Windows
 pycryptodome>=3.23.0          # AES-128-ECB for the game API
 httpx>=0.28.1                 # dashboard -> game-server admin proxy
 

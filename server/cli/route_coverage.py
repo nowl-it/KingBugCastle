@@ -15,7 +15,7 @@ semantically empty, i.e. the feature does nothing.
     python3 route_coverage.py --json     # machine-readable
     python3 route_coverage.py --check N  # exit 1 if handled count drops below N
 """
-import argparse, json, re, sys
+import argparse, json, os, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -23,7 +23,12 @@ SERVER = ROOT.parent
 REPO = ROOT.parent.parent
 if str(SERVER) not in sys.path:
     sys.path.insert(0, str(SERVER))
-SCRIPT_JSON = REPO / "il2cpp" / "v171.0.00" / "script.json"
+# The deployed client is v172.0.01.  The extracted metadata is intentionally not
+# tracked (it is generated from a proprietary APK), so a deployment/CI job must
+# supply it with KGC_IL2CPP_SCRIPT_JSON when it lives elsewhere.
+CLIENT_VERSION = os.environ.get("KGC_CLIENT_VERSION", "172.0.01")
+SCRIPT_JSON = Path(os.environ.get("KGC_IL2CPP_SCRIPT_JSON") or
+                   REPO / "il2cpp" / f"v{CLIENT_VERSION}" / "script.json")
 
 # The il2cpp string table holds every literal starting with "/", not just routes:
 # mono/.NET runtime paths, format fragments, and asset paths all land in it. None of
@@ -44,7 +49,12 @@ def client_paths(script_json=SCRIPT_JSON):
 
     FastAPI routes on the path alone, so `/territory/upgrade-building?posIndex={0}`
     and `/territory/upgrade-building` are the same endpoint here."""
-    strings = json.loads(Path(script_json).read_text())["ScriptString"]
+    script_json = Path(script_json)
+    if not script_json.is_file():
+        raise FileNotFoundError(
+            f"client metadata not found: {script_json}. Extract script.json from the "
+            f"deployed v{CLIENT_VERSION} client, or set KGC_IL2CPP_SCRIPT_JSON.")
+    strings = json.loads(script_json.read_text())["ScriptString"]
     out = set()
     for s in strings:
         v = s.get("Value")
@@ -139,8 +149,10 @@ def main():
     ap.add_argument("--list", choices=("handled", "modelled_only", "bare"), default="bare")
     ap.add_argument("--check", type=int, metavar="N",
                     help="exit 1 if more than N routes are bare")
+    ap.add_argument("--script-json", type=Path,
+                    help="override the deployed client's extracted script.json")
     args = ap.parse_args()
-    r = report()
+    r = report(args.script_json or SCRIPT_JSON)
     total = len(r["client_routes"])
     n_h, n_m, n_b = len(r["handled"]), len(r["modelled_only"]), len(r["bare"])
     if args.json:

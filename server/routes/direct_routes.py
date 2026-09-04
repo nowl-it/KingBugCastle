@@ -24,7 +24,7 @@ srv = None      # the live server module, set by register()
 
 async def _body(request, srv_mod):
     """The request body, AES envelope or plain JSON, never raising on either."""
-    raw = await request.body()
+    raw = await srv_mod._read_capped(request)
     if not raw:
         return {}
     try:
@@ -98,11 +98,18 @@ def register(app, server_module):
         client with no stored token (fresh install / cleared data) never got one:
         its /auth/login went out id-less, r_login refused it (multiplayer), and
         every following request hit load_state()'s throwaway template save - the
-        "KingBug/BugCastle" ghost account. Mint a real session here, same path
-        /auth/register takes."""
+        "KingBug/BugCastle" ghost account. This endpoint may mint a Google
+        session only immediately after the same address retrieved a signed-in
+        handoff from ``/glogin/pending``; accepting a caller-chosen ``id`` here
+        would let anyone impersonate every known Google account."""
         host = request.headers.get("host", "?")
         login_id = str(request.query_params.get("id") or "")
-        admin_log(f"[{host}] GET /auth id={login_id[:24]} cookie={str(request.query_params.get('cookie') or '')[:12]}")
+        admin_log(f"[{host}] GET /auth")
+        import google_login
+        if not google_login.consume_native_auth_grant(
+                google_login._client_ip(request), login_id):
+            return _enc({"code": 200, "msg": "Google sign-in was not verified",
+                         "success": False})
         import secrets
         from common import now_iso
         # routes.player_routes, NOT top-level player_routes: server/routes/ is on
@@ -141,7 +148,11 @@ def register(app, server_module):
         if _repair_player_state(st):
             save_state(st)
         host = request.headers.get("host", "?")
-        body = await _body(request, srv)
+        try:
+            body = await _body(request, srv)
+        except ValueError:
+            from fastapi.responses import JSONResponse
+            return JSONResponse({"error": "request body too large"}, status_code=413)
         admin_log(f"[{host}] DIRECT POST /accessory -> AccessoryResultResponseModel")
         import accessory
         res = accessory.r_accessory_equip(body, st)

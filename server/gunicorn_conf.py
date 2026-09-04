@@ -8,7 +8,8 @@ import multiprocessing
 
 # Network Binding
 http_port = os.environ.get("HTTP_PORT", "8080")
-bind = f"0.0.0.0:{http_port}"
+bind_host = os.environ.get("KGC_BIND_HOST", "0.0.0.0")
+bind = f"{bind_host}:{http_port}"
 
 # Worker configuration
 # Default: 4 workers or 2*cores + 1 (capped reasonably for VPS)

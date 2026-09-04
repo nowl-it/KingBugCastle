@@ -324,7 +324,7 @@ def r_accessory_equip(body: Dict[str, Any], st: Dict[str, Any]) -> Dict[str, Any
         tid = body.get("targetId")
         target_ids = [tid] if tid else []
     target_ids = [int(i) for i in target_ids] if target_ids else []
-    admin_log(f"[equip-debug] /accessory/equip body={body}")
+    admin_log("[accessory] equip request")
 
     if unit_id and target_ids:
         # Find target accessory objects to equip

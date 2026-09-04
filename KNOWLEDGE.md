@@ -128,7 +128,7 @@ needs that mapping; `load_state()` is the one function that changes when it land
 ### Also this session
 - `_XML_LIVE` pointed at `scratchpad/xml_live`, deleted during cleanup → server died on import.
   Now `server/xml_live`, which is what the docs said all along.
-- `server/run.sh`: both uvicorns with `--reload`. With `watchfiles` installed (now in
+- `server/run.py`: both uvicorns use `--reload`. With `watchfiles` installed (now in
   `requirements.txt`) edits to `server.py`, `data/*.json` and `xml_live/*.xml` all reload live;
   `state/` is excluded so the server's own saves cannot cause a restart loop — verified: an xml edit
   and a json edit each reload, a `/player/building/save` does not. Without `watchfiles` uvicorn

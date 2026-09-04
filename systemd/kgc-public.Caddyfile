@@ -1,0 +1,61 @@
+{
+    # Certificates are presented only to Cloudflare.  Existing game TLS is
+    # self-signed too, so Cloudflare must remain in Full mode (not Flexible).
+    auto_https disable_redirects
+}
+
+http://kingbugcastle.id.vn, http://admin.kingbugcastle.id.vn, http://player.kingbugcastle.id.vn {
+    redir https://{host}{uri} permanent
+}
+
+# The game uses plain HTTP after its UnityTls workaround.  Public builds may bake
+# either the DNS name or the origin IP, so direct-IP :80 must reach the same service.
+# Unlike the hostname path, it must clear Cloudflare client headers before proxying;
+# otherwise a direct caller could forge the address that the loopback service trusts.
+http://213.35.110.245 {
+    reverse_proxy https://127.0.0.1:8443 {
+        header_up -CF-Connecting-IP
+        header_up -X-Forwarded-For
+        header_up X-Forwarded-For {remote_host}
+        transport http {
+            tls_insecure_skip_verify
+        }
+    }
+}
+
+https://kingbugcastle.id.vn {
+    tls /etc/caddy/kgc-cert.pem /etc/caddy/kgc-key.pem
+    # cloudflared reaches Caddy across Docker's private bridge.  Reject a direct
+    # public-IP request carrying this Host/SNI, so CF-Connecting-IP remains trusted.
+    @from_cloudflared remote_ip private_ranges
+    handle @from_cloudflared {
+        reverse_proxy https://127.0.0.1:8443 {
+            transport http {
+                tls_insecure_skip_verify
+            }
+        }
+    }
+    respond "Cloudflare Tunnel required" 403
+}
+
+https://213.35.110.245 {
+    tls /etc/caddy/kgc-cert.pem /etc/caddy/kgc-key.pem
+    reverse_proxy https://127.0.0.1:8443 {
+        header_up -CF-Connecting-IP
+        header_up -X-Forwarded-For
+        header_up X-Forwarded-For {remote_host}
+        transport http {
+            tls_insecure_skip_verify
+        }
+    }
+}
+
+https://admin.kingbugcastle.id.vn {
+    tls /etc/caddy/kgc-cert.pem /etc/caddy/kgc-key.pem
+    reverse_proxy http://127.0.0.1:8081
+}
+
+https://player.kingbugcastle.id.vn {
+    tls /etc/caddy/kgc-cert.pem /etc/caddy/kgc-key.pem
+    reverse_proxy http://127.0.0.1:8082
+}

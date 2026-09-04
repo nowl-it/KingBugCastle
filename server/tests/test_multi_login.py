@@ -28,6 +28,7 @@ playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
 playerdb.init()
 
 import server
+import google_login
 import routes.player_routes as pr   # handler reads ITS import-copy of ADOPT_LONE_SAVE
 
 GOOGLE, GUEST = 1, 4   # Constants.AccountType
@@ -135,6 +136,12 @@ def check_auth_route_registers_a_new_account_via_http():
     a 500 / "Failed to log in. Please try again." for brand-new accounts."""
     from fastapi.testclient import TestClient
     with TestClient(server.app, client=("10.9.9.9", 55000)) as tc:
+        # /auth is not a public identity assertion: only the just-completed
+        # browser -> poller handoff may mint a session for its Google id.
+        denied = tc.get("/auth?id=google_brandnew&cookie=x&platform=Android")
+        assert server.aes_decrypt(denied.content).get("success") is False
+        google_login._set_pending("10.9.9.9", "google_brandnew")
+        assert tc.get("/glogin/pending").text == "google_brandnew"
         r = tc.get("/auth?id=google_brandnew&cookie=x&platform=Android")
         assert r.status_code == 200, r.text[:200]
         out = server.aes_decrypt(r.content)

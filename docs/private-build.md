@@ -6,15 +6,15 @@ Status as of 2026-08-14: builds from **v172.0.01** (default), **v172.0.00**, or 
 
 ```bash
 # v172.0.01 (default)
-SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 python3 server/builders/build_v171_private.py
+SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 python3 server/builders/build_private.py
 
 # v172.0.00
 KGC_APK_SRC=xapk_extracted_v1720 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 \
-  python3 server/builders/build_v171_private.py
+  python3 server/builders/build_private.py
 
 # v171.1.00
 KGC_APK_SRC=xapk_extracted_v1711 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 \
-  python3 server/builders/build_v171_private.py
+  python3 server/builders/build_private.py
 ```
 
 One script covers both because the v171.1.00 packer is the **same binary** as v171.0.01's:
@@ -51,7 +51,7 @@ matching the packer `.so` by its SONAME instead of its rotating filename.
 
 This is the private-server path only — the client talks to `127.0.0.1` and nothing else.
 For why the stock v171 cannot run on an emulator against the *official* server, and why no
-mod should try, see [v171-emulator-note.md](v171-emulator-note.md).
+mod should try, see [emulator-note.md](emulator-note.md).
 
 ## What makes v171 different from v170
 
@@ -205,8 +205,8 @@ Two patch sets exist but are **off by default**, behind env flags:
 patches, nothing else. Never hand-patch it in place:
 
 ```bash
-python3 server/patchers/make_v171_ssl_so.py --check   # validate (exit 1 if rotted)
-python3 server/patchers/make_v171_ssl_so.py           # regenerate from pristine
+python3 server/patchers/make_ssl_so.py --check   # validate (exit 1 if rotted)
+python3 server/patchers/make_ssl_so.py           # regenerate from pristine
 ```
 
 It accumulated 21 stray bytes over several sessions, one of which overwrote `mov w8,#-2` with a

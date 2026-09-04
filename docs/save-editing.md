@@ -25,7 +25,7 @@ equippedArtifacts missions tokens buildingPoint ...`.
 
 ## Easiest path — the Admin dashboard
 
-`server/run.sh` (or `python3 server/dashboard.py`) → http://localhost:8081/. Edits `players.db`
+`python3 server/run.py` (or `python3 server/dashboard.py`) → http://localhost:8081/. Edits `players.db`
 through `playerdb`, so no restart is needed — the next `/player` fetch sees it. Tabs:
 
 | Tab | What you can change |
@@ -73,7 +73,7 @@ Plain top-level fields inside the row's JSON blob. Set them (dashboard, or
 ## Treasures (Legacies)
 
 `treasures` is a **list**; the server auto-grants every *released* treasure by default
-(`DEFAULT_TREASURES`, built from `_all_treasure_ids()` which filters `MinVersion > 170100`). To grant a
+(`DEFAULT_TREASURES`, built from `_all_treasure_ids()` which filters `MinVersion > CONTENT_GATE`). To grant a
 specific one that isn't auto-included, append an entry shaped like `make_treasure()`:
 
 ```python
@@ -112,7 +112,7 @@ Editing the save directly works too — `name` / `castleName` in the player row.
 | Item | `st.inventory` (id from `InventoryItems.xml`, incl. reward boxes) |
 | Unit / Card | `st.cards` |
 | UnitSoul | `st.cards[id].soul` |
-| Treasure | granted into `st.treasures` (skipped if already owned - a default save owns all 60) |
+| Treasure | granted into `st.treasures` (skipped if already owned — a default save owns all released treasures) |
 | Artifact / Accessory | **display-only** - gift as an Item reward box instead (direct grant can crash `ArtifactOptionUI`) |
 
 The table above is the **server's** vocabulary. On the wire the client needs its own

@@ -1,18 +1,16 @@
-"""
-Fetch Strife Battlefield (Colosseum, theme 3000) leaderboard.
+"""Fetch Strife Battlefield (Colosseum, theme 3000) leaderboards.
 
 Ranking is NOT served by the main API (kgc-k8s-1 returns 404 for /ranking/*).
-It lives on a dedicated Cloud Run "ranking" service, discovered dynamically:
+It lives on the dedicated production ranking service:
 
-  1. GET <INFRA>/api/cloud-run/default-ranking?location=asia-northeast3&useReplica=false
-       -> {"serverList":[{"name":"qa-ranking-default","url":"https://...run.app",...}]}
-  2. GET <ranking-url>/ranking/colosseum-ranking?season={n}&useCache=true
+  1. GET <ranking-url>/ranking/colosseum-ranking?season={n}&useCache=true
      GET <ranking-url>/ranking/colosseum-league-ranking?leagueSeason={n}&useCache=true
      GET <ranking-url>/ranking/colosseum-hall-of-fame?leagueSeason={n}&useCache=true
 
 season / leagueSeason are read live from GET /colosseum on the main API.
 Auth: header `accesstoken` (auto-loaded by config from KGC_TOKEN or captured_token.txt).
-version header must be 169.1.05 (config default) or the WAF returns 403.
+version header must match the installed client (config defaults to 172.0.01) or the
+WAF returns 403.
 
     KGC_TOKEN=<accesstoken> python3 api/ranking/fetch_strife.py
 """

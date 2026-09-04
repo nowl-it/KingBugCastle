@@ -5,7 +5,7 @@ Serves webui-next/out (Next.js) and hosts:
   - /api/server/*        read-only proxy of server.py's own /admin/api (:8080)
 
 The UI is served from webui-next/out when it exists (bundle via
-`npm run build` in webui-next/).
+`pnpm run build` in webui-next/).
 
 State goes through `playerdb`, the same store server.py reads per request, so an edit
 lands on the client's next fetch with no restart. Master-data name lookups live in
@@ -23,7 +23,8 @@ import copy
 import json
 import os
 import secrets
-from datetime import datetime, timedelta
+import xml.etree.ElementTree as ET
+from datetime import datetime
 
 import httpx
 from fastapi import FastAPI, Request, HTTPException
@@ -40,8 +41,10 @@ for _p in (_HERE, _HERE / "routes", _HERE / "builders", _HERE / "cli"):
         sys.path.insert(0, _sp)
 
 import gamedata
+from common import now_iso
 import dimension
 import playerdb
+import security
 
 app = FastAPI(title="KGC Dashboard")
 
@@ -49,6 +52,7 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 UI_DIR = os.path.join(BASE, "webui-next", "out")
 if not os.path.isdir(UI_DIR):
     os.makedirs(UI_DIR, exist_ok=True)
+UI_ROOT = pathlib.Path(UI_DIR).resolve()
 CONFIG_FILE = os.path.join(BASE, "data", "response_config.json")
 SERVER_URL = os.environ.get("KGC_SERVER_URL", "http://127.0.0.1:8080")
 TRUST_PROXY = os.environ.get("KGC_TRUST_PROXY") == "1"
@@ -77,6 +81,33 @@ SESSION_COOKIE = "kgc_admin"
 _OPEN_PATHS = {"/api/auth/login", "/api/auth/whoami"}
 
 
+def _same_origin(request):
+    """Reject browser cross-site mutations made with an admin cookie.
+
+    SameSite=Lax is the primary browser control; Origin gives the dashboard the
+    explicit server-side check that protects XHR/future cookie-policy changes.
+    Calls without Origin remain available for local operator tooling.
+    """
+    origin = request.headers.get("origin")
+    if not origin:
+        return
+    scheme = request.headers.get("x-forwarded-proto") if TRUST_PROXY else request.url.scheme
+    expected = f"{scheme or request.url.scheme}://{request.headers.get('host', '')}"
+    if origin.rstrip("/") != expected.rstrip("/"):
+        raise HTTPException(403, "cross-site dashboard request refused")
+
+
+def _cookie_is_secure(request):
+    """Whether this response reaches the browser over HTTPS.
+
+    The dashboard stays usable on local plain HTTP.  A public reverse proxy sets
+    ``X-Forwarded-Proto`` and is trusted only under the same deployment invariant
+    that powers origin and client-IP handling above.
+    """
+    scheme = request.headers.get("x-forwarded-proto") if TRUST_PROXY else request.url.scheme
+    return (scheme or "").split(",", 1)[0].strip().lower() == "https"
+
+
 def _session_user(request):
     return playerdb.admin_for_token(request.cookies.get(SESSION_COOKIE))
 
@@ -96,9 +127,10 @@ def _authorized(request):
                    "(python3 dashboard.py --create-admin <user>)")
 
 
-@app.middleware("http")
 async def guard_admin(request, call_next):
     """This whole app edits saves and sends mail, and it binds 0.0.0.0 - gate it."""
+    if request.method not in ("GET", "HEAD", "OPTIONS"):
+        _same_origin(request)
     ok, why = _authorized(request)
     if not ok:
         return JSONResponse({"error": why, "login": True}, status_code=401)
@@ -110,6 +142,17 @@ async def guard_admin(request, call_next):
 # request, so holding it across the proxy call deadlocks both sides until the timeout.
 # The write still happens under a lock - server.py's.
 _DELEGATED = {("POST", "/api/players")}
+
+
+def _owns_state_lock(request):
+    """Whether the endpoint owns its complete transaction and flock itself.
+
+    Request approval changes a wallet, a save/mail, audit rows and its queue row
+    in one playerdb transaction.  Wrapping it in this middleware's separate
+    flock would acquire the same non-reentrant file lock twice.
+    """
+    path = request.url.path
+    return path.startswith(("/api/requests/", "/api/donations/")) or path == "/api/player-portal/tickets"
 
 def _upstream_headers(request):
     """Credential for the /admin/api/* calls we make against the game server.
@@ -124,18 +167,25 @@ def _upstream_headers(request):
 
 
 
-@app.middleware("http")
 async def serialize_state_writes(request, call_next):
     """Hold playerdb's cross-process lock for any request that can mutate state.
     Keyed on method, not path: a new mutating endpoint is then covered by default
     instead of silently racing until someone remembers to add its prefix here."""
     if request.method in ("GET", "HEAD", "OPTIONS"):
         return await call_next(request)
-    if (request.method, request.url.path) in _DELEGATED:
+    if (request.method, request.url.path) in _DELEGATED or _owns_state_lock(request):
         return await call_next(request)
     async with _STATE_GATE:                 # in-process first: flock blocks the loop
         with playerdb.write_lock():
             return await call_next(request)
+
+
+# FastAPI prepends registrations. The state lock must be innermost: unauthenticated,
+# rate-limited, or oversized requests must never occupy it while an operator edit is
+# waiting. Dashboard transactions still use the lock implementation above.
+app.middleware("http")(serialize_state_writes)
+app.middleware("http")(guard_admin)
+security.register_public(app)
 
 
 app.mount("/ui", StaticFiles(directory=UI_DIR), name="ui")
@@ -164,8 +214,104 @@ def _write_state(pid, st):
     playerdb.save(pid, st)
 
 
-def _now_iso(days=0):
-    return (datetime.utcnow() + timedelta(days=days)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+# --- player portal access ---------------------------------------------------
+@app.get("/api/player/{pid}/portal-access")
+def api_player_portal_access(pid: str):
+    _read_state(pid)                         # keep the dashboard's normal 404 contract
+    return {"accounts": playerdb.portal_access_for_uid(pid)}
+
+
+@app.post("/api/player/{pid}/portal-access")
+def api_player_portal_access_grant(pid: str, body: dict):
+    _read_state(pid)
+    login_id = (body or {}).get("loginId", "")
+    if login_id not in playerdb.login_ids_for_uid(pid):
+        raise HTTPException(400, "login id is not bound to this player")
+    try:
+        access = playerdb.portal_guest_access(
+            login_id, (body or {}).get("username", ""),
+            (body or {}).get("password", ""))
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True, "access": access,
+            "accounts": playerdb.portal_access_for_uid(pid)}
+
+
+# --- player portal requests -------------------------------------------------
+def _admin_reward_name(reward_type, reward_id):
+    if reward_type == "Item":
+        return gamedata.item_name(reward_id)
+    if reward_type == "Unit":
+        return gamedata.hero_name(reward_id)
+    return reward_type
+
+
+@app.get("/api/requests")
+def api_requests(status: str | None = None, limit: int = 100):
+    try:
+        return {"entries": playerdb.grant_requests(status=status, limit=limit)}
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+
+
+@app.post("/api/requests/{request_id}/approve")
+def api_request_approve(request_id: int, body: dict, request: Request):
+    body = body or {}
+    reward_type = str(body.get("rewardType") or "")
+    if reward_type not in GRANTABLE_TYPES:
+        raise HTTPException(400, "choose a grantable reward type")
+    try:
+        reward_id, reward_amount = int(body.get("rewardId")), int(body.get("rewardAmount"))
+        result = playerdb.resolve_grant_request(
+            request_id, "approve", _session_user(request), reward_type, reward_id,
+            reward_amount, _admin_reward_name(reward_type, reward_id))
+    except (TypeError, ValueError) as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True, **result}
+
+
+@app.post("/api/requests/{request_id}/deny")
+def api_request_deny(request_id: int, body: dict, request: Request):
+    try:
+        result = playerdb.resolve_grant_request(
+            request_id, "deny", _session_user(request), deny_reason=(body or {}).get("reason"))
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True, **result}
+
+
+# --- player portal donations ------------------------------------------------
+@app.get("/api/donations")
+def api_donations(limit: int = 100):
+    try:
+        return {"entries": playerdb.donations(limit)}
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+
+
+@app.post("/api/donations/{donation_id}/credit")
+def api_donation_credit(donation_id: int, body: dict, request: Request):
+    try:
+        donation = next(entry for entry in playerdb.donations(200) if entry["id"] == donation_id)
+        result = playerdb.admin_credit_tickets(
+            donation["loginId"], (body or {}).get("count"), "donation credit",
+            _session_user(request), donation_id)
+    except StopIteration:
+        raise HTTPException(404, "donation not found")
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True, **result}
+
+
+@app.post("/api/player-portal/tickets")
+def api_player_portal_tickets(body: dict, request: Request):
+    body = body or {}
+    try:
+        result = playerdb.admin_credit_tickets(
+            body.get("loginId"), body.get("count"), body.get("reason"), _session_user(request))
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True, **result}
 
 
 def _summary(pid, st, active=None):
@@ -353,9 +499,13 @@ def api_player_raw(pid: str):
 async def api_player_raw_save(pid: str, body: dict):
     """Full-state replace for the JSON editor. The uid is forced back to the row key -
     a save whose uid disagrees with its key is how a player ends up editing a ghost."""
-    _read_state(pid)
+    current = _read_state(pid)
     if not isinstance(body, dict) or not body:
         raise HTTPException(400, "raw state must be a non-empty object")
+    # accountId is the immutable cross-player identity (ranking/targetId), not a
+    # dashboard-editable field.  Letting a raw JSON paste replace it can duplicate
+    # another player or make every leaderboard fail to deserialize.
+    body["accountId"] = current.get("accountId")
     body["uid"] = pid
     _write_state(pid, body)
     return {"ok": True, "summary": _summary(pid, body)}
@@ -815,7 +965,7 @@ async def api_send_mail(pid: str, body: dict):
         "rewardType": body.get("rewardType", ""),
         "rewardId": int(body.get("rewardId", 0) or 0),
         "rewardAmount": int(body.get("rewardAmount", 0) or 0),
-        "untilAt": _now_iso(int(body.get("days", 30) or 30)),
+        "untilAt": now_iso(int(body.get("days", 30) or 30)),
     })
     _write_state(pid, st)
     return {"ok": True, "postId": next_id, "posts": posts}
@@ -838,7 +988,7 @@ async def api_broadcast_mail(body: dict):
             "rewardType": body.get("rewardType", ""),
             "rewardId": int(body.get("rewardId", 0) or 0),
             "rewardAmount": int(body.get("rewardAmount", 0) or 0),
-            "untilAt": _now_iso(int(body.get("days", 30) or 30)),
+            "untilAt": now_iso(int(body.get("days", 30) or 30)),
         })
         _write_state(pid, st)
         sent.append(pid)
@@ -917,11 +1067,11 @@ def api_login(request: Request, body: dict):
         raise HTTPException(401, "wrong username or password")
     _login_hits.pop(ip, None)
     res = JSONResponse({"ok": True, "user": body.get("username")})
-    # Not `secure`: the dashboard is normally served over plain http on a LAN or a
-    # tunnel that terminates TLS itself. httponly + samesite=lax are what stop a
-    # page in another tab from reading or replaying it.
+    # Local development remains usable over plain HTTP. Public Caddy/Cloudflare
+    # deployments set a trusted forwarded scheme, so never let an admin cookie
+    # travel in cleartext after an HTTPS login.
     res.set_cookie(SESSION_COOKIE, token, httponly=True, samesite="lax",
-                   max_age=playerdb.ADMIN_SESSION_TTL, path="/")
+                   secure=_cookie_is_secure(request), max_age=playerdb.ADMIN_SESSION_TTL, path="/")
     return res
 
 
@@ -980,7 +1130,6 @@ def api_admin_delete(username: str, request: Request):
 @app.get("/")
 @app.head("/")
 def index(request: Request):
-    print(f"GET / headers={request.headers}")
     return FileResponse(os.path.join(UI_DIR, "index.html"), headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
 
 # Next.js static export uses real paths (/players, /heroes, ...). Map any
@@ -989,24 +1138,28 @@ def index(request: Request):
 @app.get("/{path:path}")
 @app.head("/{path:path}")
 def ui_path(path: str, request: Request):
-    print(f"GET /{path} headers={request.headers}")
     if path.startswith(("api/", "ws")) or not path:
         raise HTTPException(404)
-        
+
     clean_path = path.rstrip("/")
-    full = os.path.join(UI_DIR, clean_path)
-    if os.path.isfile(full):
+    try:
+        full = (UI_ROOT / clean_path).resolve()
+        full.relative_to(UI_ROOT)
+        html_file = (UI_ROOT / f"{clean_path}.html").resolve()
+        html_file.relative_to(UI_ROOT)
+    except ValueError:
+        raise HTTPException(404)
+    if full.is_file():
         return FileResponse(full, headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
-        
-    html_file = os.path.join(UI_DIR, f"{clean_path}.html")
-    if os.path.isfile(html_file):
+
+    if html_file.is_file():
         return FileResponse(html_file, headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
-        
-    index = os.path.join(full, "index.html")
-    if os.path.isfile(index):
-        return FileResponse(index, headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
-        
-    return FileResponse(os.path.join(UI_DIR, "index.html"), headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
+
+    nested_index = full / "index.html"
+    if nested_index.is_file():
+        return FileResponse(nested_index, headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
+
+    return FileResponse(UI_ROOT / "index.html", headers={"Cache-Control": "no-cache, no-store, must-revalidate, no-transform"})
 
 
 if __name__ == "__main__":

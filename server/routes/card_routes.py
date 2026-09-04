@@ -170,7 +170,7 @@ def r_card_use_soul_item(body, st):
 
 def r_card_use_candy(body, st):
     with open("scroll_debug.txt", "a") as f:
-        f.write(f"r_card_use_candy: {body}\n")
+        f.write("r_card_use_candy request\n")
     unit_id = body.get("unitId", 0)
     cards = st.setdefault("cards", {})
     key = str(unit_id)

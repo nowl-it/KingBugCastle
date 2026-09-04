@@ -1,7 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
+
+export type JsonObject = Record<string, unknown>;
+type QueryOptions = UseQueryOptions<unknown, Error, unknown, readonly unknown[]>;
 
 // Central fetcher
-export const fetcher = async (url: string, init?: RequestInit) => {
+// API response schemas are endpoint-specific. Until generated schemas are added,
+// this is the single intentional dynamic boundary for raw JSON.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const fetcher = async (url: string, init?: RequestInit): Promise<any> => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
   const headers = new Headers(init?.headers);
   headers.set('Content-Type', 'application/json');
@@ -31,17 +37,22 @@ export const runMutation = async (url: string, init?: RequestInit, successMessag
       window.dispatchEvent(new CustomEvent('kgc:toast', { detail: { message: successMessage || 'Success', type: 'success' } }));
     }
     return data;
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('kgc:toast', { detail: { message: error.message, type: 'error' } }));
+      const message = error instanceof Error ? error.message : 'Request failed';
+      window.dispatchEvent(new CustomEvent('kgc:toast', { detail: { message, type: 'error' } }));
     }
     throw error;
   }
 };
 
 // React Query Hooks mapped to SWR signature
-function useMappedQuery(options: any) {
+function useMappedQuery(options: QueryOptions) {
   const { data, error, isLoading, refetch } = useQuery(options);
+  // API response schemas vary by endpoint and are not yet generated for this
+  // dashboard. Keep the dynamic boundary here rather than propagating casts to
+  // every screen; endpoint schemas can replace it incrementally.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return { data: data as any, error, isLoading, mutate: refetch };
 }
 
@@ -58,6 +69,23 @@ export function useCatalog() {
     queryKey: ['/api/catalog'],
     queryFn: () => fetcher('/api/catalog'),
     refetchOnWindowFocus: false
+  });
+}
+
+export function useGrantRequests(status = "pending") {
+  const query = status === "all" ? "" : `?status=${encodeURIComponent(status)}`;
+  return useMappedQuery({
+    queryKey: ['/api/requests', status],
+    queryFn: () => fetcher(`/api/requests${query}`),
+    refetchOnWindowFocus: false,
+  });
+}
+
+export function useDonations() {
+  return useMappedQuery({
+    queryKey: ['/api/donations'],
+    queryFn: () => fetcher('/api/donations'),
+    refetchOnWindowFocus: false,
   });
 }
 

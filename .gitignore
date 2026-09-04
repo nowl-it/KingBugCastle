@@ -84,6 +84,7 @@ server/certs/
 .fallow/
 .claude/
 .codegraph/
+.agents/
 
 # OCI SSH keys (never publish; oracle/ holds the server rescue keys)
 oracle/
@@ -91,8 +92,9 @@ oracle/
 # Editor/IDE config
 .obsidian/
 .cursor/
-opencode.jsonc
+opencode.json
 .mcp.json
+skills-lock.json
 
 # Training / Personal data
 documentation/
@@ -102,6 +104,7 @@ reports/
 server/state/players.db-wal
 server/state/players.db-shm
 server/state/.write.lock
+server/state/.glogin_pending_*
 
 # Agentmemory runtime store (state_store.db + stream_store, binary; not KGC project data)
 /data/

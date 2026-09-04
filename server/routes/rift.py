@@ -737,17 +737,15 @@ def r_rift_weapon_reroll(body, st):
     """POST /rift-weapon/re-roll -> RiftWeaponResultResponseModel."""
     ensure_rift_state(st)
     data = _parse_xml()
-    admin_log(f"[RIFT REROLL] body={body}")
 
     # Unity may wrap request bodies in a "model" key — unwrap if present
     if "model" in body and isinstance(body["model"], dict):
-        admin_log(f"[RIFT REROLL] unwrapping 'model' key: {body['model']}")
         body = body["model"]
 
     weapon_id = body_int(body.get("riftWeaponId"), 0)
     target_idx = body_int(body.get("targetIdx"), 0)
     target_option_id = body_int(body.get("targetOptionId"), 0)
-    admin_log(f"[RIFT REROLL] weapon_id={weapon_id} target_idx={target_idx} target_option_id={target_option_id} raw_targetOptionId={body.get('targetOptionId')} raw_targetIdx={body.get('targetIdx')}")
+    admin_log("[rift] reroll request")
     preset_idx = body_int(body.get("equipPreset"), 0)
 
     weapon = next((w for w in st.get("riftWeapons", []) if w.get("id") == weapon_id), None)
@@ -799,7 +797,7 @@ def r_rift_weapon_reroll(body, st):
 
 def r_rift_weapon_dismantle(body, st):
     """POST /rift-weapon/dismantle -> RiftWeaponResultResponseModel."""
-    admin_log(f"[RIFT DEBUG] weapon-dismantle body: {body}")
+    admin_log("[rift] weapon dismantle request")
     ensure_rift_state(st)
     data = _parse_xml()
 
@@ -904,7 +902,7 @@ def r_rift_weapon_set_state(body, st):
 
 def r_rift_crystal_charge(body, st):
     """POST /rift-weapon/crystal-charge -> RiftCrystalResultResponseModel."""
-    admin_log(f"[RIFT DEBUG] crystal-charge body: {body}")
+    admin_log("[rift] crystal charge request")
     ensure_rift_state(st)
     data = _parse_xml()
 
@@ -1023,7 +1021,7 @@ def r_rift_crystal_charge(body, st):
 
 def r_rift_crystal_destroy(body, st):
     """POST /rift-weapon/crystal-destroy -> RiftCrystalResultResponseModel."""
-    admin_log(f"[RIFT DEBUG] crystal-destroy body: {body}")
+    admin_log("[rift] crystal destroy request")
     ensure_rift_state(st)
     crystal_id = body_int(body.get("crystalId"), 0)
     use_heart = bool(body.get("useHeart", False))
@@ -1101,7 +1099,7 @@ def r_rift_crystal_set_state(body, st):
 
 def r_rift_buy_gauge(body, st):
     """POST /rift-weapon/buy-rift-gauge -> RiftCrystalResultResponseModel."""
-    admin_log(f"[RIFT DEBUG] buy-gauge body: {body}")
+    admin_log("[rift] buy gauge request")
     ensure_rift_state(st)
     data = _parse_xml()
 

@@ -43,7 +43,7 @@ def trace(*args):
 
 
 def now_iso(delta_days=0, seconds=0):
-    return (datetime.datetime.utcnow() + datetime.timedelta(days=delta_days, seconds=seconds)
+    return (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=delta_days, seconds=seconds)
             ).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
 
@@ -56,7 +56,9 @@ def next_reset_iso(days=1):
     A stored value is frozen at account-creation time, so the check goes
     permanently true and the client re-logins at 1 Hz forever.
     """
-    midnight = datetime.datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    midnight = datetime.datetime.now(datetime.timezone.utc).replace(
+        hour=0, minute=0, second=0, microsecond=0
+    )
     return (midnight + datetime.timedelta(days=days)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
 

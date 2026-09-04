@@ -315,6 +315,70 @@ init — it does NOT prevent `Web.Get` from calling `LogEvent` directly. The fix
 `FirebaseAnalytics.LogEvent` overloads to `ret` (void methods). With the patch, the full flow
 resumes: `usePatch` → `getPatchFolder` → CDN assets → login screen.
 
+### v172.0.01 custom AssetBundle CRC bypass + independent skin assets (2026-08-20)
+
+Custom bundle bytes cannot retain the catalog's original CRC. Do not edit Addressables
+`m_ExtraDataString`: CRC `0000000000` is invalid JSON (leading zeroes), shrinking it to `0` requires
+fragile binary-length repairs, and catalog corruption blocks every bundle. `build_private.py`
+instead forces CRC zero at all four runtime sites:
+
+| File offset | Site | Patch |
+|---|---|---|
+| `0x5FC5F10` | `AssetBundleRequestOptions.get_Crc` | `mov w0,wzr; ret` |
+| `0x5FC8484` | direct CRC argument (`w1`) | `mov w1,wzr` |
+| `0x5FC639C` | direct CRC argument (`w1`) | `mov w1,wzr` |
+| `0x5FC648C` | direct CRC argument (`w2`) | `mov w2,wzr` |
+
+For a new skin, a new XML row is insufficient. Asset name reuse caused Frieren `1057003` to
+overwrite Morning Star `1057002` because both pointed at `Unit_10570_02`. The working layout is
+`1057002 → Unit_10570_02` and `1057003 → Unit_10570_03`. `server/cli/inject_skin.py` restores the
+stock asset split, clones the texture + 19 Sprite objects, the prefab hierarchy/components, its 10
+AnimationClips + AnimatorController and their PPtrs, and the illustration as
+`Unit_Illust_10570_03`. Cloned Sprites receive a distinct deterministic `m_RenderDataKey` GUID;
+sharing `02`'s render GUID can resolve the source Sprite or leave the cloned portrait empty. The
+injector also adds AssetBundle container/preload entries. Container rows alone are not enough: it
+clones five Addressables catalog
+locations — `Unit_10570_03` (Texture2D + Sprite), `Character_Unit_10570_03` (GameObject), and
+`Unit_Illust_10570_03` (Texture2D + Sprite). The target portrait deliberately uses the proven
+sprites-bundle dependency rather than appending to the dedicated illusts bundle: the latter passed
+offline serialization checks but `Utility.LoadIllust`/`SimpleAssetDB.HasSprite` still returned no
+runtime portrait. Provider/type remain identical to the source Sprite locations. Without these
+catalog entries the XML skin row appears, but its thumbnail
+and prefab are blank and its large portrait falls back to the default unit illustration. The
+injector verifies the original `02` assets remain unchanged and all five new locations resolve to
+the new asset paths before a build.
+
+The Frieren sprite source must follow `Unit_10570_02`'s atlas geometry exactly: 650x560, 19 frames,
+each 130x140, five columns with the final bottom-right cell empty, pivot `(0.5, 0.235)`. Do not resize
+the old 2624x1600 design board as one image; that was the cause of distorted poses and frame bleed.
+`server/cli/rebuild_frieren_sprites.py` cuts/rebuilds every frame independently from the checked-in
+high-resolution `Frieren_source_design.png`, derives ordinary character scale from the reference
+atlas, aligns visible bottom/centre, and downsamples with nearest-neighbour sampling. Do not use the
+rejected v3 imagegen atlas for production: its simplified forms and LANCZOS reduction destroyed the
+face/costume pixel detail. The source board contains 20 cells; runtime frame 18 maps to board cell 19
+(front idle), while board cell 18 (side run) is unused. It outputs both the production atlas and a labelled
+comparison under `server/assets/frieren/`. `inject_skin.py` now reads the repository-owned
+`Unit_10570_03.png` and `Unit_Illust_10570_03.png`, never transient `/tmp` assets.
+
+Cloning only `m_Rect`/pivot is not sufficient. The source frames carry silhouette-specific
+`m_RD.textureRect`, `textureRectOffset`, `uvTransform`, tight polygon vertices, and indices. A wider
+replacement is cropped to that old mesh and then appears zoomed in both the thumbnail and prefab.
+For all 19 `Unit_10570_03_*` Sprites, `_set_full_rect_sprite` writes a four-vertex 130x140 quad,
+rectangle settings, the full cell texture rect, and a pivot-derived UV transform. Verification must
+read each serialized `Sprite.image`, require `(130,140)`, and reconstruct an atlas identical to the
+repository PNG; checking the Texture2D alone will miss this failure.
+
+`Unit_10570_03_18` is semantically special: it is the cloned prefab's default Sprite and the skin
+thumbnail named by `<Sprite>`. `SpriteSheetData.sheets` maps Front to `0,1,2,3,4,18`, Side to
+`5,6,7,8,9,5`, Back to `10,11,12,13,14,10`; `15..17` are magic silhouettes. Frame 18 must therefore
+be a front-facing standing idle pose with the complete vertical staff, not an animation/run/profile
+pose. `--frame18` remains an optional explicit override.
+
+The cloned illustration must also use full-rectangle render geometry. Reusing
+`Unit_Illust_10570_02`'s 908x912 tight polygon on the new 1024x1024 portrait makes large transparent
+holes or a blank `UnitIllust` even though the Texture2D/catalog entry are valid. The injector applies
+the same quad conversion and verifies the target portrait Sprite reads back as 1024x1024.
+
 
 `ShopItem.Init` v172: site **file 0x32DB348** (ORIG found by byte search, NOT RVA−0x4000 — the
 0x32DB748 figure from the first pass was wrong). NEW `b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d52bb03394`
@@ -805,10 +869,11 @@ served, arena battles counted).
   `python3 dashboard.py --create-admin <user>` (playerdb.admin_create); there is no token mode.
   Admin API `GET /api/players?admin_token=…` lists players.
 - **CI/CD (GitHub Actions, since 2026-08-01)**: `.github/workflows/ci.yml` runs the full pytest suite
-  (22 tests, `server/tests/`) on push/PR touching `server/**` — needs `pytest httpx httpx2` installed
-  on top of requirements.txt (fastapi 0.141's TestClient wants `httpx2`; dashboard tests import
-  `httpx`, which mitmproxy no longer pulls in). `.github/workflows/deploy.yml` auto-deploys on push to
-  main touching `server/**` (plus `workflow_dispatch`): SSH with a **restricted deploy key** whose
+  (`server/tests/`) on push/PR touching `server/**`, root `requirements.txt`, or `pytest.ini`; it
+  installs the canonical runtime requirements plus `pytest`. `httpx2` is not a project dependency
+  and is not imported by the suite; `httpx` belongs in `requirements.txt`. `.github/workflows/deploy.yml`
+  auto-deploys on push to main touching `server/**` or root `requirements.txt` (plus
+  `workflow_dispatch`): SSH with a **restricted deploy key** whose
   authorized_keys line is `restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh"` — the hook
   (versioned in-repo) refuses on dirty tracked files, `git pull --ff-only`, then `sudo -n systemctl
   restart kgc.service` + `kgc-dashboard.service`. Key = GitHub secret `DEPLOY_KEY`, host key pinned

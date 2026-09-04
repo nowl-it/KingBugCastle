@@ -1,13 +1,18 @@
 "use client"
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { useStatus, usePlayers, useServerSection, fetcher } from "@/lib/api"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Users, Settings, HardDrive, Globe, Database, ScrollText, Crown, Coins, Gem, Heart, MemoryStick, Cpu, Server, Timer, BarChart2, Activity, ListOrdered } from "lucide-react"
+import { type LucideIcon, Users, Settings, HardDrive, Globe, Database, ScrollText, Crown, Coins, Gem, Heart, MemoryStick, Cpu, Server, Timer, BarChart2, Activity, ListOrdered } from "lucide-react"
 import Link from "next/link"
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts"
 
-function Gauge({ label, value, sub, icon: Icon, color }: { label: string; value: string; sub?: string; icon: any; color: string }) {
+type PlayerSummary = { id: string; name: string; active?: boolean; level?: number; gold?: number; cash?: number; heart?: number; counts?: { posts?: number; cards?: number; items?: number } }
+type HistoryPoint = { time: string; ccu: number }
+type SystemHistoryPoint = { time: string; cpu: number; ram: number }
+type ProcessInfo = { pid: number; name: string; cpu: number; mem: number }
+
+function Gauge({ label, value, sub, icon: Icon, color }: { label: string; value: string; sub?: string; icon: LucideIcon; color: string }) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -33,11 +38,13 @@ export default function OverviewPage() {
     refetchInterval: 2000
   })
 
-  const [history, setHistory] = useState<any[]>([])
-  const [sysHistory, setSysHistory] = useState<any[]>([])
+  const [history, setHistory] = useState<HistoryPoint[]>([])
+  const [sysHistory, setSysHistory] = useState<SystemHistoryPoint[]>([])
 
   useEffect(() => {
     if (realtime) {
+      // The query result is an external polling source; preserve each sample for the chart.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setHistory(prev => {
         const next = [...prev, { time: new Date().toLocaleTimeString(), ccu: realtime.ccu }]
         if (next.length > 20) return next.slice(next.length - 20)
@@ -48,6 +55,8 @@ export default function OverviewPage() {
 
   useEffect(() => {
     if (sys?.ok && sys.data) {
+      // The query result is an external polling source; preserve each sample for the chart.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSysHistory(prev => {
         const d = new Date()
         const timeStr = `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}:${d.getSeconds().toString().padStart(2, '0')}`
@@ -62,8 +71,8 @@ export default function OverviewPage() {
     }
   }, [sys])
 
-  const list = Array.isArray(players) ? players : []
-  const totals = list.reduce((acc, p: any) => ({
+  const list = (Array.isArray(players) ? players : []) as PlayerSummary[]
+  const totals = list.reduce((acc, p) => ({
     gold: acc.gold + (p.gold || 0),
     cash: acc.cash + (p.cash || 0),
     heart: acc.heart + (p.heart || 0),
@@ -72,11 +81,11 @@ export default function OverviewPage() {
     items: acc.items + (p.counts?.items || 0),
   }), { gold: 0, cash: 0, heart: 0, posts: 0, cards: 0, items: 0 })
 
-  const top = [...list].sort((a: any, b: any) => (b.level || 0) - (a.level || 0)).slice(0, 5)
+  const top = [...list].sort((a, b) => (b.level || 0) - (a.level || 0)).slice(0, 5)
 
-  const levelDistribution = useMemo(() => {
+  const levelDistribution = (() => {
     const bins = [0, 0, 0, 0, 0] // 1-10, 11-20, 21-30, 31-40, 41-50
-    list.forEach((p: any) => {
+    list.forEach((p) => {
       const lv = p.level || 1
       if (lv <= 10) bins[0]++
       else if (lv <= 20) bins[1]++
@@ -91,7 +100,7 @@ export default function OverviewPage() {
       { name: "31-40", players: bins[3] },
       { name: "41-50", players: bins[4] },
     ]
-  }, [list])
+  })()
 
   if (!status && !error) return <div className="p-8 text-muted-foreground">Loading status...</div>
   if (error) return <div className="p-8 text-destructive">Failed to load system status.</div>
@@ -102,7 +111,7 @@ export default function OverviewPage() {
   const mem = sysData?.mem
   const disk = sysData?.disk
   const cpu = sysData?.cpu
-  const processes = sysData?.processes || []
+  const processes = (sysData?.processes || []) as ProcessInfo[]
   const loadPct = cpu && cpu.cores ? Math.min(100, Math.round((cpu.load1 / cpu.cores) * 100)) : null
 
   const metrics = [
@@ -197,7 +206,7 @@ export default function OverviewPage() {
                     <span className="w-16 text-right">CPU%</span>
                     <span className="w-16 text-right">MEM%</span>
                   </li>
-                  {processes.map((p: any) => (
+                  {processes.map((p) => (
                     <li key={p.pid} className="flex items-center justify-between py-2 text-sm">
                       <span className="w-20 font-mono text-muted-foreground">{p.pid}</span>
                       <span className="flex-1 font-medium truncate pr-2">{p.name}</span>
@@ -322,7 +331,7 @@ export default function OverviewPage() {
           <CardContent>
           {top.length === 0 && <p className="text-sm text-muted-foreground">No players yet.</p>}
           <ul className="divide-y divide-border">
-            {top.map((p: any) => (
+            {top.map((p) => (
               <li key={p.id} className="flex items-center justify-between py-2">
                 <div className="flex items-center gap-3">
                   <span className={`h-2 w-2 rounded-full ${p.active ? 'bg-green-500' : 'bg-muted-foreground/40'}`} />

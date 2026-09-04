@@ -2,12 +2,18 @@
 
 import { useState, useMemo } from "react"
 import { useQuery } from "@tanstack/react-query"
+import Image from "next/image"
 import { fetcher } from "@/lib/api"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Search, Package, UserRound, ScrollText, Gem, Diamond, Shirt, Loader2 } from "lucide-react"
+
+type GameDataEntry = {
+  id: number; name: string; type: string; image?: string; role?: string; rarity?: string
+  fromType?: string; synergy?: string; unitName?: string; [key: string]: string | number | undefined
+}
 
 const TABS = [
   { key: "Hero", label: "Heroes", icon: UserRound, color: "text-blue-400" },
@@ -18,14 +24,17 @@ const TABS = [
   { key: "Skin", label: "Skins", icon: Shirt, color: "text-cyan-400" },
 ]
 
-function Thumb({ entry }: { entry: any }) {
+function Thumb({ entry }: { entry: GameDataEntry }) {
   const [broken, setBroken] = useState(false)
   const cls = "h-14 w-14 shrink-0 rounded-lg border border-border bg-muted object-cover"
   if (entry.image && !broken) {
     return (
-      <img
+      <Image
         src={entry.image}
         alt={entry.name}
+        width={56}
+        height={56}
+        unoptimized
         onError={() => setBroken(true)}
         className={cls}
       />
@@ -51,7 +60,7 @@ export default function GameDataPage() {
     const list = (data && data[tab]) || []
     const query = q.trim().toLowerCase()
     if (!query) return list
-    return list.filter((e: any) =>
+    return list.filter((e: GameDataEntry) =>
       String(e.id).includes(query) ||
       (e.name || "").toLowerCase().includes(query) ||
       (e.role || "").toLowerCase().includes(query) ||
@@ -121,7 +130,7 @@ export default function GameDataPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {rows.slice(0, 300).map((e: any) => (
+                {(rows as GameDataEntry[]).slice(0, 300).map((e) => (
                   <TableRow key={`${tab}-${e.id}`}>
                     <TableCell><Thumb entry={e} /></TableCell>
                     <TableCell className="font-mono text-xs">{e.id}</TableCell>

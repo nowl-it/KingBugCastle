@@ -18,7 +18,7 @@ def parse(s):
 
 
 def main():
-    now = datetime.datetime.utcnow()
+    now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
     tomorrow, next_week = parse(server.next_reset_iso(1)), parse(server.next_reset_iso(7))
     assert tomorrow > now, f"tomorrow already past: {tomorrow}"
     assert (tomorrow.hour, tomorrow.minute, tomorrow.second) == (0, 0, 0), "not a UTC-midnight boundary"

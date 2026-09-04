@@ -20,7 +20,7 @@ WATCH_SUBSTR = ("game/start", "invasion", "theme", "player")
 
 
 def now(d=0):
-    return (datetime.datetime.utcnow() + datetime.timedelta(days=d)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+    return (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=d)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
 
 def _pad(b):

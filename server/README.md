@@ -87,7 +87,7 @@ To clone and run this project from scratch, you need:
 2. **Python Environment**: Install the required Python packages:
    ```bash
    cd server
-   pip install -r requirements.txt
+   python -m pip install -r requirements.txt
    ```
 3. **Original APKs**: You must obtain the original game files (v170.1.00) before you can patch and deploy:
    - Download the original XAPK (e.g., from APKPure).
@@ -97,11 +97,14 @@ To clone and run this project from scratch, you need:
 ## Run
 
 ```bash
-cd server
-python3 -m uvicorn server:app --host 0.0.0.0 --port 8080
-curl localhost:8080/                 # health
-curl -X POST localhost:8080/auth/login -d '{"token":"x"}'
+python server/run.py
+python server/run.py --check         # validate only
 ```
+
+The TUI starts game HTTP/TLS, the admin API, and Next.js on Windows, macOS, and
+Linux. It binds loopback by default; use `KGC_DEV_BIND_HOST=0.0.0.0` only for
+explicit LAN testing. The `serve_*.sh` and systemd files are Linux production
+launchers, not local-development requirements.
 
 Edit `state/player.json` to set currencies/level/etc. For a pure-literal response,
 add it to `data/static_overrides.json` (no code change needed). For a response with
@@ -167,7 +170,8 @@ destroyed-mutex crash). swiftshader is slower but renders correctly and is stabl
 
 ```
 server/
-  server.py              FastAPI emulator (run this)
+  run.py                 cross-platform local development TUI
+  server.py              FastAPI emulator
   rebuild_arm64.py       arm64 client rebuild (SSL+NRE stubs, sign, install)
   rebuild_arm64_mod.py   side-by-side variant (com.nowl.castle); --share bakes a
                           server host + packages KingBugCastle.xapk (see ../SHARE.md)

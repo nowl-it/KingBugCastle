@@ -7,7 +7,7 @@ this — the client reads the bundle directly. This is data plane 2 (see [README
 
 ## Source of truth
 
-- **Edit** `server/xml_live/*.xml` (~143 files: `Units`, `Skills`, `Skins`, `Stages`, `Treasures`,
+- **Edit** `server/xml_live/*.xml` (~137 files: `Units`, `Skills`, `Skins`, `Stages`, `Treasures`,
   every `Strings_<locale>`, …). `server.py` reads this dir (`XML_DIR`) for its JSON API, and it is
   what `rebuild_xml_bundle.py` packs into the bundle. The fallback `xml/<patchFolder>/` is a
   pristine reference clone from the CDN fetch — never edit it.
@@ -21,9 +21,13 @@ never hand-merge 143 files. The 5 mods (all real fixes, no fabricated numbers):
 
 1. `CCRatio -100 → 0` — enemies become crowd-control-able
 2. Treasure 30040 (Shadowless) gate → `170100` — shows on a fallback v170 client
-3. Stage 101 dummy spawns — chapter I-1 walk-over clearable for testing
-4. `UnitPanelData` 10800/10810 — Cathy/Alessia Profile tab (devs shipped no entry)
-5. Cathy Overcome field typo — `{Overcome:...AuraDamagePer}` → `...AuraTotalDamagePer`
+3. Treasure 30043 (Vitacorde) gate → `172001` — shows on the deployed v172.0.01 client
+4. Stage 101 dummy spawns — chapter I-1 walk-over clearable for testing
+5. `UnitPanelData` 10800/10810 — Cathy/Alessia Profile tab. The mod fills either missing
+   entry, including a partially supplied upstream pair.
+6. Cathy Overcome field typo — `{Overcome:...AuraDamagePer}` → `...AuraTotalDamagePer`
+7. `FetchComplete` loading text — restore the private-server "Ready to bug" translations in
+   every shipped locale.
    (the value 10/20 is real in Units.xml; only the string's field name was wrong)
 
 `apply()` is idempotent and appends a **WARN** when an anchor is gone (the devs
@@ -35,16 +39,16 @@ restructured a block we patch) — that is the one thing a human must resolve.
 ```bash
 # NEW PATCH (devs cut a new CDN folder): fetch, normalize changed files, replay mods,
 # rebuild bundle, bump patchFolder:
-python3 server/refresh_master_data.py            # --dry-run / --no-bump available
+python3 server/builders/refresh_master_data.py    # --dry-run / --no-bump available
 
 # REPUBLISH (devs rewrote the SAME folder in place — folder name unchanged, so the
 # diff above sees nothing; check_cdn_update.sh flags it via the bundle etag):
 kgc-cli config fetch -o /tmp/kgc_xml
 kgc-cli config extract -o xml_history/<date> /tmp/kgc_xml/xml_bundle_*
-python3 server/rebase_xml_live.py xml_history/<date>   # wipe xml_live from pristine + replay mods
+python3 server/builders/rebase_xml_live.py xml_history/<date>   # wipe xml_live from pristine + replay mods
 
 # Then, for either path:
-python3 server/rebuild_xml_bundle.py             # real_cdn/xml + AssetHash
+python3 server/builders/rebuild_xml_bundle.py     # real_cdn/xml + AssetHash
 # Restart BOTH uvicorns — they cache real_cdn/ at import (see deploy-and-run.md).
 # The client re-downloads when AssetHash's md5 changes; clearing cache is belt-and-braces:
 adb -s <serial> shell "rm -rf /sdcard/Android/data/com.nowl.castle/files/UnityCache/Shared/xml"

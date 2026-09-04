@@ -7,15 +7,16 @@ POST body: raw hex string (Content-Type: application/json)
 Auth header: accesstoken (not Authorization: Bearer)
 """
 
-BASE_URL = "https://kgc-k8s-1.awesomepiece.com"
-AES_KEY = b"b53019bb76da6b34"  # AES-128, v169.0.03 key (v165-168 used cnf1tl65djs2wp3g)
-
+import os
 import hashlib
 import json
 import time as _time
 import requests
 import msgpack
 from Crypto.Cipher import AES
+
+BASE_URL = "https://kgc-k8s-1.awesomepiece.com"
+AES_KEY = b"b53019bb76da6b34"  # AES-128, v169.0.03 key (v165-168 used cnf1tl65djs2wp3g)
 
 
 def aes_encrypt(data: str) -> str:
@@ -92,8 +93,10 @@ def decode_response(content: bytes) -> dict | list | str:
     return content.decode("utf-8", errors="replace")
 
 
-# Client version. Server WAF returns 403 for stale version headers (e.g. 169.0.03).
-VERSION = "169.1.05"
+# The ranking service rejects stale client versions before it evaluates the token.
+# Keep the current bundled APK as the default; callers can select another installed
+# client with KGC_VERSION without editing this module.
+VERSION = os.environ.get("KGC_VERSION", "172.0.01")
 
 SESSION: requests.Session = requests.Session()
 SESSION.headers.update({

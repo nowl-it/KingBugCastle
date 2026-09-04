@@ -169,7 +169,13 @@ def register(app, srv):
     async def admin_save_player_by_id(pid: str, body: dict):
         # body may contain partial updates or full state
         existing = playerdb.load(pid) or {}
-        existing.update(body)
+        # These two fields identify the database row and the player's public
+        # targetId.  They must not change through a generic save payload.
+        updates = dict(body)
+        updates.pop("uid", None)
+        updates.pop("accountId", None)
+        existing.update(updates)
+        existing["uid"] = pid
         playerdb.save(pid, existing)
         return {"ok": True}
 

@@ -1,7 +1,9 @@
-fastapi
-uvicorn
-gunicorn
-watchfiles        # run.sh --reload; without it uvicorn falls back to StatReload and silently ignores --reload-include
-pycryptodome
-UnityPy
-mitmproxy
+# Runtime dependencies have one canonical source at the repository root.  Keep
+# this compatibility entry point because setup and APK build instructions run
+# from server/, then add only the optional tools those workflows actually need.
+-r ../requirements.txt
+
+# APK / AssetBundle build tooling.  mitmproxy is intentionally not a server
+# dependency; install it separately when using capture scripts.
+UnityPy>=1.25.2
+cryptography>=43.0.0  # setup.py TLS certificate fallback when OpenSSL is unavailable

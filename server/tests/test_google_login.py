@@ -37,6 +37,7 @@ def _configure():
     google_login.CLIENT_ID = "web-client.apps.googleusercontent.com"
     google_login.CLIENT_SECRET = "secret"
     google_login.PUBLIC_URL = "https://kgc.example.com"
+    google_login.PORTAL_PUBLIC_URL = "https://player.kgc.example.com"
 
 
 def _fake_id_token(sub):
@@ -66,6 +67,15 @@ def check_start_redirects_to_google_with_a_signed_state():
     assert q["redirect_uri"][0] == "https://kgc.example.com/glogin/callback"
     assert google_login.check_state(q["state"][0]), "state is not verifiable"
     print("ok start: 302 to Google, redirect_uri and signed state present")
+
+
+def check_portal_uses_its_own_callback_uri():
+    _configure()
+    loc = google_login.authorize_url("portal")
+    q = parse_qs(urlparse(loc).query)
+    assert q["redirect_uri"][0] == "https://player.kgc.example.com/portal/api/auth/google/callback"
+    assert google_login.state_target(q["state"][0]) == "portal"
+    print("ok portal start: separate public origin and signed portal state")
 
 
 def check_callback_parks_the_account_id_for_the_poller():
@@ -115,6 +125,7 @@ def check_the_emitted_id_lands_on_its_own_save():
 if __name__ == "__main__":
     check_unconfigured_is_a_clear_503()
     check_start_redirects_to_google_with_a_signed_state()
+    check_portal_uses_its_own_callback_uri()
     check_callback_parks_the_account_id_for_the_poller()
     check_a_forged_state_is_refused()
     check_the_emitted_id_lands_on_its_own_save()

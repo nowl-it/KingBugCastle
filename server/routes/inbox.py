@@ -22,7 +22,7 @@ import json
 
 from common import admin_log, now_iso
 from fastapi import Request
-from fastapi.responses import Response
+from fastapi.responses import JSONResponse, Response
 from state import load_state, save_state
 
 srv = None      # the live server module, set by register()
@@ -88,7 +88,16 @@ def register(app, server_module):
     @app.post("/admin/sendmail")
     async def admin_send_mail(request: Request):
         st = load_state()
-        body = await request.json()
+        try:
+            raw = await srv._read_capped(request)
+        except ValueError:
+            return JSONResponse({"error": "request body too large"}, status_code=413)
+        try:
+            body = json.loads(raw) if raw else {}
+        except (TypeError, ValueError, json.JSONDecodeError):
+            return JSONResponse({"error": "invalid JSON body"}, status_code=400)
+        if not isinstance(body, dict):
+            return JSONResponse({"error": "JSON body must be an object"}, status_code=400)
         if "posts" not in st:
             st["posts"] = []
         next_id = max((p["id"] for p in st["posts"]), default=0) + 1
@@ -119,7 +128,10 @@ def register(app, server_module):
     async def post_receive_direct(request: Request):
         st = load_state()
         host = request.headers.get("host", "?")
-        raw = await request.body()
+        try:
+            raw = await srv._read_capped(request)
+        except ValueError:
+            return JSONResponse({"error": "request body too large"}, status_code=413)
         body = {}
         if raw:
             try:

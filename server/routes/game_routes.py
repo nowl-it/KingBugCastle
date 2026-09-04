@@ -33,7 +33,6 @@ def handlers():
 
 
 def r_game_start(body, st):
-    print(f"  [GAME/START] body={body}")
     gc = RCFG["gameStart"]
     theme = body_int(body.get("theme"), 1, lo=0)
     stage = body_int(body.get("stage"), 1, lo=0)
@@ -56,7 +55,6 @@ def r_game_start(body, st):
 def r_game_complete(body, st):
     gc = RCFG["gameComplete"]
     babel_rewards = []
-    print(f"  [GAME/COMPLETE] body={body}")
     gid = body_str(body.get("gameId"))
     win = bool(body.get("win", False))
     theme = body_int(body.get("theme"), 1, lo=0)
@@ -134,7 +132,6 @@ def r_dimension_rift_complete(body, st):
     records the best score and increments the game index so the next run gets a
     fresh save slot."""
     gc = RCFG["gameComplete"]
-    print(f"  [GAME/CHECK-DIMENSION-RIFT-COMPLETE-SUCCESS] body={body}")
     score = body_int(body.get("rogueLikeScore"), 0)
     win = bool(body.get("win", False))
     add_gold = gc["baseGold"] + (gc["winBonusGold"] if win else 0)

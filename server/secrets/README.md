@@ -9,6 +9,7 @@ it and just reports the affected feature as off.
 |------|-----------|---------|
 | `google_oauth.json` | Google OAuth **web** client, exactly as downloaded from the Cloud Console | `google_login.py` |
 | `discord_bot_token` | Discord bot token, one line | `discord_notify.sh` |
+| `server.env` | Local deployment configuration, including `GLOGIN_STATE_SECRET` | `serve_public.sh`, `deploy_hook.sh` |
 
 ## google_oauth.json
 
@@ -36,6 +37,12 @@ signing certificate - the wall this whole web flow exists to get around.
 Environment variables win over the file when both are set:
 `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GLOGIN_PUBLIC_URL`.
 `GOOGLE_OAUTH_FILE` points at a different path.
+
+For a public server, also place a freshly generated `GLOGIN_STATE_SECRET` in the
+deployment environment file. Launchers prefer `/etc/kgc/server.env`; when that file is
+absent (the usual personal-machine setup), they use this directory's `server.env`.
+It signs OAuth CSRF state and must never be committed or supplied as a shell-history
+command.
 
 Full setup: [`docs/multi-account-login.md`](../../docs/multi-account-login.md).
 

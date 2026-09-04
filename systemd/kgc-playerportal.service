@@ -1,0 +1,18 @@
+[Unit]
+Description=King Bug Castle Player Dashboard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/kgc/server
+Environment=PLAYER_PORTAL_PUBLIC_URL=https://player.kingbugcastle.id.vn
+Environment=KGC_TRUST_PROXY=1
+EnvironmentFile=-/etc/kgc/playerportal.env
+ExecStart=/bin/sh -c ': "${GLOGIN_STATE_SECRET:?set it in /etc/kgc/playerportal.env}"; exec /home/ubuntu/kgc/.venv/bin/uvicorn playerportal_server:app --host 127.0.0.1 --port 8082'
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

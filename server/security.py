@@ -11,6 +11,7 @@ import asyncio, os, shutil, subprocess, time
 
 from fastapi import Request
 from fastapi.responses import JSONResponse
+from starlette.middleware.base import _CachedRequest
 
 from common import admin_log
 from state import CURRENT_IP, CURRENT_UID
@@ -22,10 +23,28 @@ def register(app, server_module):
     global srv
     srv = server_module
     app.state.kgc_srv = server_module
-    app.middleware("http")(guard_admin)
-    app.middleware("http")(rate_limit)
-    app.middleware("http")(limit_body_size)
+    # FastAPI prepends middleware registrations. Register innermost first so the
+    # public rejection checks run before a request can take the game-state lock.
     app.middleware("http")(serialize_state_writes)
+    install_body_limit(app)
+    app.middleware("http")(rate_limit)
+    app.middleware("http")(guard_admin)
+
+
+def register_public(app):
+    """Install public-network safeguards without the game-state write lock.
+
+    Standalone services own their own state transactions, but they remain
+    Internet-facing and need the same request-size and per-IP rate boundaries as
+    the game API.
+    """
+    app.middleware("http")(rate_limit)
+    install_body_limit(app)
+
+
+def register_portal(app):
+    """Compatibility name for the Player Portal's public middleware setup."""
+    register_public(app)
 
 
 def _srv(request):
@@ -203,12 +222,75 @@ async def rate_limit(request: Request, call_next):
 MAX_BODY = int(os.environ.get("KGC_MAX_BODY") or 1_000_000)
 
 
-async def limit_body_size(request: Request, call_next):
-    declared = request.headers.get("content-length")
-    if declared and declared.isdigit() and int(declared) > MAX_BODY:
-        admin_log(f"[limit] rejected {declared}-byte body on {request.url.path}")
-        return JSONResponse({"error": "request body too large"}, status_code=413)
-    return await call_next(request)
+class CappedBodyMiddleware:
+    """Reject oversized streamed request bodies before FastAPI buffers them.
+
+    ``Content-Length`` is only an advisory header: FastAPI's regular ``body:
+    dict`` parsing otherwise buffers an unbounded chunked request before a route
+    can call :func:`read_capped_body`. It reads at most ``max_body`` bytes and
+    replays them through Starlette's own ``_CachedRequest`` bridge, which is the
+    same lifecycle adapter BaseHTTPMiddleware uses for nested middleware.
+    """
+
+    def __init__(self, app, max_body=MAX_BODY):
+        self.app = app
+        self.max_body = max_body
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        declared = scope.get("headers", ())
+        content_length = next((value for key, value in declared
+                               if key.lower() == b"content-length"), b"")
+        try:
+            too_large = int(content_length) > self.max_body if content_length else False
+        except ValueError:
+            too_large = False
+        if too_large:
+            await self._reject(send)
+            return
+
+        request = _CachedRequest(scope, receive)
+        chunks, total = [], 0
+        async for chunk in request.stream():
+            total += len(chunk)
+            if total > self.max_body:
+                await self._reject(send)
+                return
+            chunks.append(chunk)
+        request._body = b"".join(chunks)
+        await self.app(scope, request.wrapped_receive, send)
+
+    async def _reject(self, send):
+        body = b'{"error":"request body too large"}'
+        await send({"type": "http.response.start", "status": 413,
+                    "headers": [(b"content-type", b"application/json"),
+                                (b"content-length", str(len(body)).encode())]})
+        await send({"type": "http.response.body", "body": body})
+
+
+def install_body_limit(app):
+    """Install the streaming body cap once for a FastAPI application."""
+    app.add_middleware(CappedBodyMiddleware, max_body=MAX_BODY)
+
+
+async def read_capped_body(request: Request, max_body=MAX_BODY):
+    """Read a request stream without allocating beyond the configured limit.
+
+    Content-Length is optional: direct FastAPI routes must use this too, otherwise
+    a chunked upload reaches a direct route reader without a route-local limit.
+    The ASGI middleware provides the outer boundary; this preserves the invariant
+    for direct readers used independently in tests or future mounted apps.
+    """
+    chunks, total = [], 0
+    async for chunk in request.stream():
+        total += len(chunk)
+        if total > max_body:
+            raise ValueError(f"body exceeded {max_body} bytes")
+        chunks.append(chunk)
+    return b"".join(chunks)
 
 
 async def serialize_state_writes(request: Request, call_next):
@@ -219,7 +301,12 @@ async def serialize_state_writes(request: Request, call_next):
     other's changes. CDN traffic never touches state - skip it, it is the bulk
     of the bytes.
     """
-    if request.url.path.startswith("/patch/"):
+    if request.url.path.startswith(("/patch/", "/portal/")):
+        # Phase-1 player-portal requests only manage their own credentials and
+        # browser sessions in SQLite; they do not load/mutate a game save.  Keeping
+        # the game-state flock around password hashing would serialize every login
+        # behind battle writes for no correctness gain.  Ticket/grant mutations add
+        # their own database transaction + state lock at the responsible layer.
         return await call_next(request)
     # Resolve identity BEFORE taking the lock: the ContextVar must be set in this
     # task so the child task call_next() spawns inherits it.

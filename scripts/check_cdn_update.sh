@@ -365,4 +365,8 @@ curl -sf \
     && echo -e "${GREEN}[✓] Notifications sent (ntfy + desktop).${NC}" \
     || echo -e "${DIM}[ntfy] Push notification failed (network?)${NC}"
 
-notify_discord "🏰 **KGC CDN update detected**\nNew patch: **${latest_fmt}**\nPrevious: ${last:-"(first check)"}"
+previous_fmt="(first check)"
+if [[ -n "$last" ]]; then
+    previous_fmt=$(echo "$last" | sed 's/_/-/g')
+fi
+notify_discord "$(printf '🏰 **KGC CDN update detected**\n**New patch:** `%s`\n**Previous patch:** `%s`' "$latest_fmt" "$previous_fmt")"

@@ -23,6 +23,7 @@ from pathlib import Path
 
 DB_PATH = Path(__file__).resolve().parent / "state" / "players.db"
 BACKUP_KEEP = 10          # newest N pre-migration backups to keep
+MAX_LOGIN_ID_LENGTH = 256  # Guest/social identity, never an arbitrary request blob
 
 # PostgreSQL instead of SQLite: KGC_DB_URL=postgresql://user:pw@host/db
 # (needs `pip install "psycopg[binary]"`). SQLite stays the default - it needs no
@@ -168,12 +169,93 @@ def _m5_lobbies(c):
     c.execute("CREATE INDEX IF NOT EXISTS idx_lobbies_host ON lobbies(host_uid)")
 
 
+def _m6_player_portal_auth(c):
+    """Player-portal credentials and sessions.
+
+    A portal credential identifies an account that already exists in ``accounts``;
+    it deliberately does not create a game save.  Google accounts authenticate via
+    the existing OAuth flow, while the operator creates credentials only for Guest
+    accounts after verifying the player owns that account.
+    """
+    c.execute("CREATE TABLE IF NOT EXISTS player_login_creds ("
+              "login_id TEXT PRIMARY KEY, username TEXT NOT NULL UNIQUE COLLATE NOCASE, "
+              "pw_hash TEXT NOT NULL, created REAL NOT NULL, last_login REAL, "
+              "failed_attempts INTEGER NOT NULL DEFAULT 0, locked_until REAL, "
+              "must_change_password INTEGER NOT NULL DEFAULT 1)")
+    c.execute("CREATE TABLE IF NOT EXISTS player_sessions ("
+              "token_hash TEXT PRIMARY KEY, login_id TEXT NOT NULL, created REAL NOT NULL)")
+    c.execute("CREATE TABLE IF NOT EXISTS player_portal_ip_locks ("
+              "ip TEXT PRIMARY KEY, failed_attempts INTEGER NOT NULL, window_started REAL NOT NULL, "
+              "locked_until REAL)")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_player_sessions_login "
+              "ON player_sessions(login_id)")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_player_creds_username "
+              "ON player_login_creds(username)")
+
+
+def _m7_player_tickets(c):
+    """Portal ticket wallet and provider-postback audit trail.
+
+    Provider rewards are an external fact, so every callback gets a durable event
+    id before it can alter a wallet.  This makes retries harmless across both
+    public uvicorn listeners and preserves an operator audit trail.
+    """
+    c.execute("CREATE TABLE IF NOT EXISTS ticket_wallets ("
+              "login_id TEXT PRIMARY KEY, balance INTEGER NOT NULL DEFAULT 0, "
+              "last_earned_at REAL, earned_day TEXT, earned_today INTEGER NOT NULL DEFAULT 0)")
+    ticket_log_id = "BIGSERIAL PRIMARY KEY" if IS_PG else "INTEGER PRIMARY KEY AUTOINCREMENT"
+    c.execute("CREATE TABLE IF NOT EXISTS ticket_log ("
+              f"id {ticket_log_id}, login_id TEXT NOT NULL, "
+              "delta INTEGER NOT NULL, reason TEXT NOT NULL, provider TEXT, "
+              "event_id TEXT, ip TEXT, created REAL NOT NULL)")
+    c.execute("CREATE TABLE IF NOT EXISTS ticket_provider_sessions ("
+              "session_id TEXT PRIMARY KEY, provider TEXT NOT NULL, login_id TEXT NOT NULL, "
+              "created REAL NOT NULL, expires REAL NOT NULL)")
+    c.execute("CREATE TABLE IF NOT EXISTS ticket_provider_events ("
+              "provider TEXT NOT NULL, event_id TEXT NOT NULL, session_id TEXT NOT NULL, "
+              "login_id TEXT NOT NULL, status TEXT NOT NULL, created REAL NOT NULL, "
+              "PRIMARY KEY (provider,event_id))")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_ticket_log_login_created "
+              "ON ticket_log(login_id,created DESC)")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_ticket_sessions_expiry "
+              "ON ticket_provider_sessions(expires)")
+
+
+def _m8_player_grant_requests(c):
+    """A ticket-backed queue for requests that need an operator's judgement."""
+    request_id = "BIGSERIAL PRIMARY KEY" if IS_PG else "INTEGER PRIMARY KEY AUTOINCREMENT"
+    c.execute("CREATE TABLE IF NOT EXISTS grant_requests ("
+              f"id {request_id}, login_id TEXT NOT NULL, uid TEXT NOT NULL, "
+              "text TEXT NOT NULL, item_type TEXT, item_id INTEGER, "
+              "status TEXT NOT NULL DEFAULT 'pending', created REAL NOT NULL, "
+              "resolved_at REAL, resolved_by TEXT)")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_grant_requests_status_created "
+              "ON grant_requests(status,created DESC)")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_grant_requests_login_created "
+              "ON grant_requests(login_id,created DESC)")
+
+
+def _m9_donations(c):
+    """Manual donation notes and their one-time operator ticket credits."""
+    donation_id = "BIGSERIAL PRIMARY KEY" if IS_PG else "INTEGER PRIMARY KEY AUTOINCREMENT"
+    c.execute("CREATE TABLE IF NOT EXISTS donations ("
+              f"id {donation_id}, login_id TEXT NOT NULL, note TEXT, amount TEXT, "
+              "created REAL NOT NULL, credited_at REAL, credited_by TEXT, credited_tickets INTEGER)")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_donations_created ON donations(created DESC)")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_donations_uncredited "
+              "ON donations(credited_at,created DESC)")
+
+
 # (version, description, fn). Append only - never edit one that has shipped.
 MIGRATIONS = [
     (2, "indexes + expired-session sweep", _m2_indexes),
     (3, "derived player_items / player_cards / player columns", _m3_derived),
     (4, "dashboard admin accounts + sessions", _m4_admins),
     (5, "Friendly Battle lobbies", _m5_lobbies),
+    (6, "player portal credentials + sessions", _m6_player_portal_auth),
+    (7, "player ticket wallet + provider postbacks", _m7_player_tickets),
+    (8, "player ticket-backed grant requests", _m8_player_grant_requests),
+    (9, "manual donation notes + one-time ticket credits", _m9_donations),
 ]
 SCHEMA_VERSION = MIGRATIONS[-1][0]
 
@@ -331,6 +413,16 @@ def reindex_all():
     return n
 
 
+_DECK_SLOTS = 6  # Fixed client UI slots; see server._pad_deck for write-side enforcement.
+
+
+def _int_or(value, default=0):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
 def load(uid):
     with _conn() as c:
         row = c.execute("SELECT data FROM players WHERE uid=?", (uid,)).fetchone()
@@ -338,17 +430,51 @@ def load(uid):
         return None
     data = json.loads(row[0])
     
-    # Self-heal bad hero data from previous summon bugs (e.g. Unit 42110)
+    # Self-heal bad hero data from previous summon bugs (e.g. Unit 42110).
+    # This runs before any route sees the state: a malformed card key or a deck
+    # entry of the wrong shape used to make every request for that player fail
+    # while loading the save, leaving no route able to repair it.
     cards = data.get("cards", {})
-    bad_cids = [cid for cid in cards if not (10000 <= int(cid) < 11000)]
-    for cid in bad_cids:
-        del cards[cid]
-        
-    for d in data.get("decks", []):
-        deck = d.get("deck", [])
-        for i in range(len(deck)):
-            if not (10000 <= deck[i] < 11000) and deck[i] != 0:
-                deck[i] = 10000
+    if not isinstance(cards, dict):
+        data["cards"] = {}
+    else:
+        clean_cards = {}
+        for cid, card in cards.items():
+            unit_id = _int_or(cid, -1)
+            if not (10000 <= unit_id < 11000) or not isinstance(card, dict):
+                continue
+            # The map key is authoritative.  Normalising these two fields keeps
+            # cards_list/card_to_dict safe if an old raw-save edit omitted them.
+            card["unitId"] = unit_id
+            card["level"] = max(1, _int_or(card.get("level"), 1))
+            clean_cards[str(unit_id)] = card
+        data["cards"] = clean_cards
+
+    decks = data.get("decks", [])
+    if not isinstance(decks, list):
+        data["decks"] = []
+    else:
+        clean_decks = []
+        for deck_info in decks:
+            if not isinstance(deck_info, dict):
+                continue
+            deck = deck_info.get("deck", [])
+            if not isinstance(deck, (list, tuple)):
+                deck = []
+            repaired = []
+            for value in deck[:_DECK_SLOTS]:
+                unit_id = _int_or(value, 10000)
+                repaired.append(unit_id if unit_id == 0 or 10000 <= unit_id < 11000 else 10000)
+            deck_info["deck"] = (repaired + [0] * _DECK_SLOTS)[:_DECK_SLOTS]
+
+            potential = deck_info.get("potential", [])
+            if not isinstance(potential, (list, tuple)):
+                potential = []
+            deck_info["potential"] = [max(0, _int_or(value)) for value in potential[:_DECK_SLOTS]]
+            deck_info["potential"] = (deck_info["potential"] + [0] * _DECK_SLOTS)[:_DECK_SLOTS]
+            deck_info["firstComerIndex"] = max(0, _int_or(deck_info.get("firstComerIndex")))
+            clean_decks.append(deck_info)
+        data["decks"] = clean_decks
                 
     return data
 
@@ -422,7 +548,9 @@ def backfill_account_ids():
         try:
             v = int(s.get("accountId", 0) or 0)
         except (ValueError, TypeError):
-            continue
+            # A malformed raw-save value is equivalent to a missing id.  Leaving
+            # it alone makes every leaderboard's int(accountId) conversion fail.
+            v = 0
         if v > 0 and v not in taken:
             taken.add(v)
             continue
@@ -469,21 +597,32 @@ def bind_session(token, uid):
         c.execute("DELETE FROM sessions WHERE created < ?", (time.time() - SESSION_TTL,))
 
 def uid_for_token(token):
-    if not token:
+    # Headers are strings, but /auth/login also accepts a body token.  Never
+    # hand an arbitrary decoded JSON value to a DB driver: dict/list values are
+    # unbindable in SQLite and used to turn an otherwise recoverable bad login
+    # into a handler exception.
+    if not isinstance(token, str) or not token:
         return None
     with _conn() as c:
         row = c.execute("SELECT uid FROM sessions WHERE token=? AND created >= ?",
                         (token, time.time() - SESSION_TTL)).fetchone()
     return row[0] if row else None
 
+def valid_login_id(login_id):
+    """Whether an external account identity is safe to persist as an index key."""
+    return isinstance(login_id, str) and 0 < len(login_id) <= MAX_LOGIN_ID_LENGTH
+
+
 def uid_for_login(login_id):
-    if not login_id:
+    if not valid_login_id(login_id):
         return None
     with _conn() as c:
         row = c.execute("SELECT uid FROM accounts WHERE login_id=?", (login_id,)).fetchone()
     return row[0] if row else None
 
 def bind_login(login_id, uid):
+    if not valid_login_id(login_id):
+        raise ValueError("invalid login id")
     with _conn() as c:
         c.execute("INSERT INTO accounts (login_id, uid) VALUES (?,?) "
                   "ON CONFLICT (login_id) DO UPDATE SET uid=excluded.uid", (login_id, uid))
@@ -759,6 +898,661 @@ def admin_logout(token):
         return 0
     with _conn() as c:
         return c.execute("DELETE FROM admin_sessions WHERE token=?", (token,)).rowcount
+
+
+# --- player portal accounts -------------------------------------------------
+# The game already owns the durable identity (accounts.login_id -> uid).  The
+# portal adds a browser session around that identity; it must never create a
+# separate ``player_<name>`` account that can drift away from the game save.
+PLAYER_PORTAL_SESSION_TTL = 7 * 24 * 3600
+PLAYER_PORTAL_LOCKOUT_SECONDS = 10 * 60
+PLAYER_PORTAL_MAX_FAILURES = 5
+
+
+def _portal_token_hash(token):
+    import hashlib
+    return hashlib.sha256((token or "").encode()).hexdigest()
+
+
+def login_ids_for_uid(uid):
+    """All game login ids bound to ``uid`` (for the operator's Guest-access UI)."""
+    with _conn() as c:
+        return [r[0] for r in c.execute(
+            "SELECT login_id FROM accounts WHERE uid=? ORDER BY login_id", (uid,))]
+
+
+def portal_access_for_uid(uid):
+    """Game identities plus any operator-issued Guest portal credential metadata."""
+    with _conn() as c:
+        rows = c.execute(
+            "SELECT a.login_id,c.username,c.created,c.last_login,c.must_change_password "
+            "FROM accounts a LEFT JOIN player_login_creds c ON c.login_id=a.login_id "
+            "WHERE a.uid=? ORDER BY a.login_id", (uid,)).fetchall()
+    return [{"login_id": login_id, "username": username, "created": created,
+             "last_login": last_login, "must_change_password": bool(must_change)}
+            for login_id, username, created, last_login, must_change in rows]
+
+
+def portal_guest_access(login_id, username, password, now=None):
+    """Create or replace an operator-issued Guest portal credential.
+
+    The account has to have entered the game first.  Otherwise an operator typo
+    would silently reserve a login id and the portal could point at no save.
+    """
+    login_id = str(login_id or "").strip()
+    username = str(username or "").strip().lower()
+    password = password or ""
+    now = time.time() if now is None else now
+    if not login_id.startswith("Guest_"):
+        raise ValueError("portal passwords are only for Guest accounts")
+    if not (3 <= len(username) <= 20) or not username.replace("_", "").isalnum():
+        raise ValueError("username must be 3-20 letters, numbers, or underscores")
+    if len(password) < 8:
+        raise ValueError("temporary password must be at least 8 characters")
+    with _conn() as c:
+        if not c.execute("SELECT 1 FROM accounts WHERE login_id=?", (login_id,)).fetchone():
+            raise ValueError("Guest account has not entered the game yet")
+        existing = c.execute(
+            "SELECT login_id FROM player_login_creds WHERE username=? COLLATE NOCASE",
+            (username,)).fetchone()
+        if existing and existing[0] != login_id:
+            raise ValueError("portal username is already in use")
+        c.execute("INSERT INTO player_login_creds "
+                  "(login_id,username,pw_hash,created,last_login,failed_attempts,locked_until,must_change_password) "
+                  "VALUES (?,?,?,?,NULL,0,NULL,1) "
+                  "ON CONFLICT(login_id) DO UPDATE SET username=excluded.username, "
+                  "pw_hash=excluded.pw_hash, failed_attempts=0, locked_until=NULL, "
+                  "must_change_password=1",
+                  (login_id, username, hash_password(password), now))
+        c.execute("DELETE FROM player_sessions WHERE login_id=?", (login_id,))
+    return {"login_id": login_id, "username": username, "must_change_password": True}
+
+
+def _portal_create_session(c, login_id, now):
+    import secrets
+    token = secrets.token_urlsafe(32)
+    c.execute("INSERT INTO player_sessions(token_hash,login_id,created) VALUES (?,?,?)",
+              (_portal_token_hash(token), login_id, now))
+    c.execute("DELETE FROM player_sessions WHERE created < ?",
+              (now - PLAYER_PORTAL_SESSION_TTL,))
+    return token
+
+
+def _portal_ip_is_locked(c, ip, now):
+    if not ip:
+        return False
+    row = c.execute("SELECT locked_until FROM player_portal_ip_locks WHERE ip=?", (ip,)).fetchone()
+    return bool(row and row[0] and row[0] > now)
+
+
+def _portal_record_ip_failure(c, ip, now):
+    if not ip:
+        return
+    row = c.execute("SELECT failed_attempts,window_started FROM player_portal_ip_locks WHERE ip=?",
+                    (ip,)).fetchone()
+    if not row or now - row[1] >= PLAYER_PORTAL_LOCKOUT_SECONDS:
+        failures, started = 1, now
+    else:
+        failures, started = int(row[0]) + 1, row[1]
+    locked_until = now + PLAYER_PORTAL_LOCKOUT_SECONDS \
+        if failures >= PLAYER_PORTAL_MAX_FAILURES else None
+    c.execute("INSERT INTO player_portal_ip_locks(ip,failed_attempts,window_started,locked_until) "
+              "VALUES (?,?,?,?) ON CONFLICT(ip) DO UPDATE SET failed_attempts=excluded.failed_attempts, "
+              "window_started=excluded.window_started,locked_until=excluded.locked_until",
+              (ip, failures, started, locked_until))
+
+
+def portal_password_login(username, password, ip=None, now=None):
+    """Authenticate an operator-issued Guest credential.
+
+    Returns ``(token, login_id, must_change_password, locked)``.  Unknown users
+    still run a scrypt verification so timing does not reveal which portal names
+    exist.  The counter lives in SQLite because :8080/:8443 and Gunicorn workers
+    do not share process memory.
+    """
+    now = time.time() if now is None else now
+    username = str(username or "").strip()
+    with _conn() as c:
+        row = c.execute("SELECT login_id,pw_hash,failed_attempts,locked_until,must_change_password "
+                        "FROM player_login_creds WHERE username=? COLLATE NOCASE",
+                        (username,)).fetchone()
+        stored = row[1] if row else _PORTAL_DECOY_HASH
+        if _portal_ip_is_locked(c, ip, now) or (row and row[3] and row[3] > now):
+            # Keep the same scrypt work even while locked, otherwise lockout leaks
+            # the user name and becomes a cheap username oracle.
+            verify_password(password or "", stored)
+            return None, None, False, True
+        valid = verify_password(password or "", stored)
+        if not row or not valid:
+            _portal_record_ip_failure(c, ip, now)
+            if row:
+                failures = int(row[2] or 0) + 1
+                locked_until = now + PLAYER_PORTAL_LOCKOUT_SECONDS \
+                    if failures >= PLAYER_PORTAL_MAX_FAILURES else None
+                c.execute("UPDATE player_login_creds SET failed_attempts=?,locked_until=? "
+                          "WHERE login_id=?", (failures, locked_until, row[0]))
+            return None, None, False, False
+        token = _portal_create_session(c, row[0], now)
+        if ip:
+            c.execute("DELETE FROM player_portal_ip_locks WHERE ip=?", (ip,))
+        c.execute("UPDATE player_login_creds SET failed_attempts=0,locked_until=NULL,last_login=? "
+                  "WHERE login_id=?", (now, row[0]))
+        return token, row[0], bool(row[4]), False
+
+
+def portal_google_login(login_id, now=None):
+    """Issue a browser session only for an existing Google-backed game account."""
+    login_id = str(login_id or "")
+    if not login_id.startswith("google_"):
+        return None
+    now = time.time() if now is None else now
+    with _conn() as c:
+        if not c.execute("SELECT 1 FROM accounts WHERE login_id=?", (login_id,)).fetchone():
+            return None
+        return _portal_create_session(c, login_id, now)
+
+
+def portal_for_token(token, now=None):
+    if not token:
+        return None
+    now = time.time() if now is None else now
+    with _conn() as c:
+        row = c.execute("SELECT login_id FROM player_sessions "
+                        "WHERE token_hash=? AND created >= ?",
+                        (_portal_token_hash(token), now - PLAYER_PORTAL_SESSION_TTL)).fetchone()
+    return row[0] if row else None
+
+
+def portal_logout(token):
+    if not token:
+        return 0
+    with _conn() as c:
+        return c.execute("DELETE FROM player_sessions WHERE token_hash=?",
+                         (_portal_token_hash(token),)).rowcount
+
+
+def portal_change_password(login_id, old_password, new_password):
+    """Rotate one Guest credential and revoke its other browser sessions."""
+    login_id = str(login_id or "")
+    if len(new_password or "") < 8:
+        raise ValueError("new password must be at least 8 characters")
+    with _conn() as c:
+        row = c.execute("SELECT pw_hash FROM player_login_creds WHERE login_id=?",
+                        (login_id,)).fetchone()
+        if not row or not verify_password(old_password or "", row[0]):
+            return False
+        c.execute("UPDATE player_login_creds SET pw_hash=?,must_change_password=0, "
+                  "failed_attempts=0,locked_until=NULL WHERE login_id=?",
+                  (hash_password(new_password), login_id))
+        c.execute("DELETE FROM player_sessions WHERE login_id=?", (login_id,))
+    return True
+
+
+# Calculated once.  Creating a fresh scrypt hash for every unknown username would
+# let an attacker turn failed logins into needless random-memory work.
+_PORTAL_DECOY_HASH = hash_password("\0portal-decoy")
+
+
+# --- player tickets ---------------------------------------------------------
+# Ticket amounts remain server-owned virtual currency. A browser prepares a
+# rewarded video session; the completion adapter alone reaches
+# credit_ticket_from_provider().
+TICKET_BALANCE_CAP = 10
+TICKET_DAILY_CAP = 20
+TICKET_COOLDOWN_SECONDS = 5 * 60
+TICKET_PROVIDER_SESSION_TTL = 30 * 24 * 3600
+
+
+class TicketUnavailable(ValueError):
+    def __init__(self, code, cooldown_left=0):
+        super().__init__(code)
+        self.code = code
+        self.cooldown_left = max(0, int(cooldown_left))
+
+
+def _ticket_day(now):
+    return time.strftime("%Y-%m-%d", time.gmtime(now))
+
+
+def _ticket_wallet(c, login_id, now):
+    """Return one normalized wallet row, resetting only its UTC daily counter."""
+    c.execute("INSERT INTO ticket_wallets(login_id,balance,last_earned_at,earned_day,earned_today) "
+              "VALUES (?,0,NULL,?,0) ON CONFLICT(login_id) DO NOTHING",
+              (login_id, _ticket_day(now)))
+    row = c.execute("SELECT balance,last_earned_at,earned_day,earned_today "
+                    "FROM ticket_wallets WHERE login_id=?", (login_id,)).fetchone()
+    balance, last_earned_at, earned_day, earned_today = row
+    today = _ticket_day(now)
+    if earned_day != today:
+        earned_day, earned_today = today, 0
+        c.execute("UPDATE ticket_wallets SET earned_day=?,earned_today=0 WHERE login_id=?",
+                  (today, login_id))
+    return int(balance), last_earned_at, earned_day, int(earned_today)
+
+
+def _ticket_snapshot(balance, last_earned_at, earned_today, now):
+    cooldown_left = 0 if not last_earned_at else max(
+        0, int(TICKET_COOLDOWN_SECONDS - (now - last_earned_at)))
+    return {
+        "balance": balance,
+        "cap": TICKET_BALANCE_CAP,
+        "dailyCap": TICKET_DAILY_CAP,
+        "dailyEarned": earned_today,
+        "cooldownLeftSec": cooldown_left,
+    }
+
+
+def ticket_status(login_id, now=None):
+    """Wallet state for a signed-in portal player; daily reset is UTC."""
+    now = time.time() if now is None else now
+    with write_lock():
+        with _conn() as c:
+            balance, last_earned_at, _day, earned_today = _ticket_wallet(c, login_id, now)
+            return _ticket_snapshot(balance, last_earned_at, earned_today, now)
+
+
+def ticket_start_provider_session(login_id, provider="gam", now=None):
+    """Issue an opaque provider user id after enforcing local earning limits.
+
+    The value is random and only maps to a login ID in SQLite; exposing it to the
+    video adapter cannot reveal or let a caller choose another game account.
+    """
+    import secrets
+    now = time.time() if now is None else now
+    with write_lock():
+        with _conn() as c:
+            balance, last_earned_at, _day, earned_today = _ticket_wallet(c, login_id, now)
+            snapshot = _ticket_snapshot(balance, last_earned_at, earned_today, now)
+            if balance >= TICKET_BALANCE_CAP:
+                raise TicketUnavailable("wallet_full")
+            if earned_today >= TICKET_DAILY_CAP:
+                raise TicketUnavailable("daily_limit")
+            if snapshot["cooldownLeftSec"]:
+                raise TicketUnavailable("cooldown", snapshot["cooldownLeftSec"])
+            c.execute("DELETE FROM ticket_provider_sessions WHERE expires < ?", (now,))
+            session_id = secrets.token_urlsafe(24)
+            c.execute("INSERT INTO ticket_provider_sessions "
+                      "(session_id,provider,login_id,created,expires) VALUES (?,?,?,?,?)",
+                      (session_id, provider, login_id, now, now + TICKET_PROVIDER_SESSION_TTL))
+    return session_id
+
+
+def ticket_credit_from_provider(provider, event_id, session_id, ip=None, now=None):
+    """Idempotently credit exactly one ticket from a verified provider event.
+
+    Caller authentication belongs to the provider adapter.  This function owns
+    all persistence/economic invariants and intentionally never accepts an amount
+    from the advertising network.
+    """
+    provider = str(provider or "")
+    event_id = str(event_id or "").strip()
+    session_id = str(session_id or "").strip()
+    if not provider or not session_id or not (1 <= len(event_id) <= 200):
+        raise ValueError("invalid provider event")
+    now = time.time() if now is None else now
+    with write_lock():
+        with _conn() as c:
+            old = c.execute("SELECT login_id,status FROM ticket_provider_events "
+                            "WHERE provider=? AND event_id=?", (provider, event_id)).fetchone()
+            if old:
+                balance, last_earned_at, _day, earned_today = _ticket_wallet(c, old[0], now)
+                return {"credited": False, "duplicate": True, "status": old[1],
+                        **_ticket_snapshot(balance, last_earned_at, earned_today, now)}
+            session = c.execute("SELECT login_id FROM ticket_provider_sessions "
+                                "WHERE session_id=? AND provider=? AND expires >= ?",
+                                (session_id, provider, now)).fetchone()
+            if not session:
+                raise ValueError("unknown or expired provider session")
+            login_id = session[0]
+            balance, last_earned_at, _day, earned_today = _ticket_wallet(c, login_id, now)
+            snapshot = _ticket_snapshot(balance, last_earned_at, earned_today, now)
+            status = None
+            if balance >= TICKET_BALANCE_CAP:
+                status = "wallet_full"
+            elif earned_today >= TICKET_DAILY_CAP:
+                status = "daily_limit"
+            elif snapshot["cooldownLeftSec"]:
+                status = "cooldown"
+            if status:
+                c.execute("INSERT INTO ticket_provider_events "
+                          "(provider,event_id,session_id,login_id,status,created) VALUES (?,?,?,?,?,?)",
+                          (provider, event_id, session_id, login_id, status, now))
+                return {"credited": False, "duplicate": False, "status": status, **snapshot}
+            balance += 1
+            earned_today += 1
+            c.execute("UPDATE ticket_wallets SET balance=?,last_earned_at=?,earned_day=?,earned_today=? "
+                      "WHERE login_id=?", (balance, now, _ticket_day(now), earned_today, login_id))
+            c.execute("INSERT INTO ticket_provider_events "
+                      "(provider,event_id,session_id,login_id,status,created) VALUES (?,?,?,?,?,?)",
+                      (provider, event_id, session_id, login_id, "credited", now))
+            c.execute("INSERT INTO ticket_log(login_id,delta,reason,provider,event_id,ip,created) "
+                      "VALUES (?,?,?,?,?,?,?)",
+                      (login_id, 1, "provider_reward", provider, event_id, ip, now))
+            return {"credited": True, "duplicate": False, "status": "credited",
+                    **_ticket_snapshot(balance, now, earned_today, now)}
+
+
+def ticket_history(login_id, limit=50):
+    limit = max(1, min(int(limit or 50), 100))
+    with _conn() as c:
+        rows = c.execute("SELECT delta,reason,provider,event_id,created FROM ticket_log "
+                         "WHERE login_id=? ORDER BY id DESC LIMIT ?", (login_id, limit)).fetchall()
+    return [{"delta": delta, "reason": reason, "provider": provider,
+             "eventId": event_id, "created": created} for delta, reason, provider, event_id, created in rows]
+
+
+# --- donations and operator ticket top-ups ---------------------------------
+def _donation_row(row):
+    return {"id": int(row[0]), "loginId": row[1], "note": row[2], "amount": row[3],
+            "created": row[4], "creditedAt": row[5], "creditedBy": row[6],
+            "creditedTickets": row[7]}
+
+
+def donation_submit(login_id, note, amount=None, now=None):
+    """Record a transfer note. It never changes a ticket balance."""
+    login_id = str(login_id or "").strip()
+    note = str(note or "").strip()
+    amount = str(amount or "").strip() or None
+    if not login_id:
+        raise ValueError("invalid portal account")
+    if not (1 <= len(note) <= 1_000):
+        raise ValueError("donation note must be between 1 and 1000 characters")
+    if amount and len(amount) > 100:
+        raise ValueError("donation amount is too long")
+    now = time.time() if now is None else now
+    with write_lock():
+        with _conn() as c:
+            account = c.execute("SELECT uid FROM accounts WHERE login_id=?", (login_id,)).fetchone()
+            if not account or not c.execute("SELECT 1 FROM players WHERE uid=?", (account[0],)).fetchone():
+                raise ValueError("game account is no longer available")
+            if IS_PG:
+                donation_id = c.execute(
+                    "INSERT INTO donations(login_id,note,amount,created) VALUES (?,?,?,?) RETURNING id",
+                    (login_id, note, amount, now)).fetchone()[0]
+            else:
+                donation_id = c.execute(
+                    "INSERT INTO donations(login_id,note,amount,created) VALUES (?,?,?,?)",
+                    (login_id, note, amount, now)).lastrowid
+            return {"donationId": int(donation_id)}
+
+
+def donations(limit=100):
+    """Newest manual donation notes for the operator dashboard."""
+    limit = max(1, min(int(limit or 100), 200))
+    with _conn() as c:
+        rows = c.execute("SELECT id,login_id,note,amount,created,credited_at,credited_by,credited_tickets "
+                         "FROM donations ORDER BY id DESC LIMIT ?", (limit,)).fetchall()
+    return [_donation_row(row) for row in rows]
+
+
+def admin_credit_tickets(login_id, count, reason, credited_by, donation_id=None, now=None):
+    """Operator-only ticket credit, optionally settling one donation exactly once."""
+    login_id = str(login_id or "").strip()
+    reason = str(reason or "").strip()
+    credited_by = str(credited_by or "local-operator").strip()[:80] or "local-operator"
+    try:
+        count = int(count)
+    except (TypeError, ValueError):
+        raise ValueError("ticket count must be an integer")
+    if not login_id or not (1 <= count <= 10_000):
+        raise ValueError("ticket count must be between 1 and 10000")
+    if not (1 <= len(reason) <= 500):
+        raise ValueError("top-up reason must be between 1 and 500 characters")
+    if donation_id is not None:
+        try:
+            donation_id = int(donation_id)
+        except (TypeError, ValueError):
+            raise ValueError("invalid donation id")
+    now = time.time() if now is None else now
+    with write_lock():
+        with _conn() as c:
+            if donation_id is not None:
+                donation = c.execute("SELECT login_id,credited_at FROM donations WHERE id=?", (donation_id,)).fetchone()
+                if not donation:
+                    raise ValueError("donation not found")
+                if donation[1] is not None:
+                    raise ValueError("donation is already credited")
+                if donation[0] != login_id:
+                    raise ValueError("donation does not belong to this account")
+            if not c.execute("SELECT 1 FROM accounts WHERE login_id=?", (login_id,)).fetchone():
+                raise ValueError("game account is no longer available")
+            balance, last_earned_at, _day, earned_today = _ticket_wallet(c, login_id, now)
+            balance += count
+            c.execute("UPDATE ticket_wallets SET balance=? WHERE login_id=?", (balance, login_id))
+            event_id = f"donation:{donation_id}" if donation_id is not None else reason
+            c.execute("INSERT INTO ticket_log(login_id,delta,reason,provider,event_id,ip,created) "
+                      "VALUES (?,?,?,?,?,?,?)",
+                      (login_id, count, "admin_topup", "admin", event_id, None, now))
+            if donation_id is not None:
+                c.execute("UPDATE donations SET credited_at=?,credited_by=?,credited_tickets=? WHERE id=? "
+                          "AND credited_at IS NULL", (now, credited_by, count, donation_id))
+            return {"loginId": login_id, "count": count,
+                    **_ticket_snapshot(balance, last_earned_at, earned_today, now)}
+
+
+def _append_portal_mail(st, title, text, reward_type="", reward_id=0, reward_amount=0):
+    """Append one mail in a save already owned by the current DB transaction."""
+    posts = st.setdefault("posts", [])
+    post_id = max((int(p.get("id", 0) or 0) for p in posts if isinstance(p, dict)), default=0) + 1
+    # `routes.inbox._process_posts()` adds @raw: only on the game wire. Persisting
+    # ordinary text avoids exposing the implementation marker to the player.
+    from common import now_iso
+    posts.append({
+        "id": post_id, "type": "Normal", "title": str(title), "text": str(text),
+        "rewardType": str(reward_type), "rewardId": int(reward_id),
+        "rewardAmount": int(reward_amount), "untilAt": now_iso(30),
+    })
+    return post_id
+
+
+def _request_row(row):
+    return {
+        "id": int(row[0]), "loginId": row[1], "uid": row[2], "text": row[3],
+        "itemType": row[4], "itemId": row[5], "status": row[6],
+        "created": row[7], "resolvedAt": row[8], "resolvedBy": row[9],
+    }
+
+
+def _request_text(value):
+    text = str(value or "").strip()
+    if not (1 <= len(text) <= 500):
+        raise ValueError("request text must be between 1 and 500 characters")
+    return text
+
+
+def _request_item(item_type, item_id):
+    item_type = str(item_type or "").strip()
+    if len(item_type) > 80:
+        raise ValueError("requested item type is too long")
+    if item_id in (None, ""):
+        return item_type or None, None
+    try:
+        return item_type or None, int(item_id)
+    except (TypeError, ValueError):
+        raise ValueError("requested item id must be an integer")
+
+
+def ticket_submit_grant_request(login_id, text, item_type=None, item_id=None, now=None):
+    """Spend exactly one ticket and create a pending operator request atomically."""
+    login_id = str(login_id or "")
+    text = _request_text(text)
+    item_type, item_id = _request_item(item_type, item_id)
+    if not login_id:
+        raise ValueError("invalid portal account")
+    now = time.time() if now is None else now
+    with write_lock():
+        with _conn() as c:
+            account = c.execute("SELECT uid FROM accounts WHERE login_id=?", (login_id,)).fetchone()
+            if not account:
+                raise ValueError("game account is no longer available")
+            uid = account[0]
+            if not c.execute("SELECT 1 FROM players WHERE uid=?", (uid,)).fetchone():
+                raise ValueError("enter the game before submitting a request")
+            balance, last_earned_at, _day, earned_today = _ticket_wallet(c, login_id, now)
+            if balance < 1:
+                raise TicketUnavailable("insufficient_tickets")
+            if IS_PG:
+                request_id = c.execute(
+                    "INSERT INTO grant_requests(login_id,uid,text,item_type,item_id,status,created) "
+                    "VALUES (?,?,?,?,?,'pending',?) RETURNING id",
+                    (login_id, uid, text, item_type, item_id, now)).fetchone()[0]
+            else:
+                request_id = c.execute(
+                    "INSERT INTO grant_requests(login_id,uid,text,item_type,item_id,status,created) "
+                    "VALUES (?,?,?,?,?,'pending',?)",
+                    (login_id, uid, text, item_type, item_id, now)).lastrowid
+            c.execute("UPDATE ticket_wallets SET balance=? WHERE login_id=?", (balance - 1, login_id))
+            c.execute("INSERT INTO ticket_log(login_id,delta,reason,provider,event_id,ip,created) "
+                      "VALUES (?,?,?,?,?,?,?)", (login_id, -1, "request", None, None, None, now))
+            return {"requestId": int(request_id),
+                    **_ticket_snapshot(balance - 1, last_earned_at, earned_today, now)}
+
+
+def grant_requests(status=None, login_id=None, limit=100):
+    """Read request rows, scoped to one player when called by the public portal."""
+    if status not in (None, "pending", "approved", "denied"):
+        raise ValueError("invalid request status")
+    limit = max(1, min(int(limit or 100), 200))
+    clauses, params = [], []
+    if status:
+        clauses.append("status=?")
+        params.append(status)
+    if login_id:
+        clauses.append("login_id=?")
+        params.append(str(login_id))
+    where = " WHERE " + " AND ".join(clauses) if clauses else ""
+    with _conn() as c:
+        rows = c.execute("SELECT id,login_id,uid,text,item_type,item_id,status,created,resolved_at,resolved_by "
+                         "FROM grant_requests" + where + " ORDER BY id DESC LIMIT ?",
+                         tuple(params + [limit])).fetchall()
+    return [_request_row(row) for row in rows]
+
+
+def resolve_grant_request(request_id, action, resolved_by, reward_type=None, reward_id=None,
+                          reward_amount=None, reward_name=None, deny_reason=None, now=None):
+    """Resolve one pending request; approval mails a reward, denial refunds its ticket.
+
+    State, mailbox, ticket log, and request status commit together. A second admin
+    cannot resolve the same request because the pending status is checked inside the
+    cross-process lock and transaction.
+    """
+    try:
+        request_id = int(request_id)
+    except (TypeError, ValueError):
+        raise ValueError("invalid request id")
+    if action not in ("approve", "deny"):
+        raise ValueError("invalid request action")
+    resolved_by = str(resolved_by or "local-operator").strip()[:80] or "local-operator"
+    now = time.time() if now is None else now
+    if action == "approve":
+        reward_type, reward_name = str(reward_type or "").strip(), str(reward_name or "").strip()
+        try:
+            reward_id, reward_amount = int(reward_id), int(reward_amount)
+        except (TypeError, ValueError):
+            raise ValueError("reward id and amount must be integers")
+        if not reward_type or not reward_name or reward_amount < 1:
+            raise ValueError("a reward type, name, and positive amount are required")
+    else:
+        deny_reason = str(deny_reason or "").strip()[:500]
+
+    with write_lock():
+        with _conn() as c:
+            row = c.execute("SELECT id,login_id,uid,text,item_type,item_id,status,created,resolved_at,resolved_by "
+                            "FROM grant_requests WHERE id=?", (request_id,)).fetchone()
+            if not row:
+                raise ValueError("request not found")
+            request = _request_row(row)
+            if request["status"] != "pending":
+                raise ValueError("request is already resolved")
+            saved = c.execute("SELECT data FROM players WHERE uid=?", (request["uid"],)).fetchone()
+            if not saved:
+                raise ValueError("game save is no longer available")
+            st = json.loads(saved[0])
+            if action == "approve":
+                post_id = _append_portal_mail(
+                    st, "Yêu cầu Player Portal đã được duyệt",
+                    f"Yêu cầu của bạn đã được duyệt: {request['text']}",
+                    reward_type, reward_id, reward_amount)
+                result = {"refunded": False, "postId": post_id}
+            else:
+                balance, last_earned_at, _day, earned_today = _ticket_wallet(c, request["loginId"], now)
+                balance += 1
+                c.execute("UPDATE ticket_wallets SET balance=? WHERE login_id=?",
+                          (balance, request["loginId"]))
+                c.execute("INSERT INTO ticket_log(login_id,delta,reason,provider,event_id,ip,created) "
+                          "VALUES (?,?,?,?,?,?,?)",
+                          (request["loginId"], 1, "refund", None, str(request_id), None, now))
+                detail = "Yêu cầu của bạn đã bị từ chối. 1 ticket đã được hoàn lại."
+                if deny_reason:
+                    detail += f" Lý do: {deny_reason}"
+                post_id = _append_portal_mail(st, "Yêu cầu Player Portal", detail)
+                result = {"refunded": True, "postId": post_id,
+                          **_ticket_snapshot(balance, last_earned_at, earned_today, now)}
+            st["uid"] = request["uid"]
+            c.execute("UPDATE players SET data=?,updated=? WHERE uid=?",
+                      (json.dumps(st, ensure_ascii=False), now, request["uid"]))
+            try:
+                _write_derived(c, request["uid"], st)
+            except Exception as e:
+                _derived_warn(e)
+            c.execute("UPDATE grant_requests SET status=?,resolved_at=?,resolved_by=? WHERE id=?",
+                      ("approved" if action == "approve" else "denied", now, resolved_by, request_id))
+            return {"requestId": request_id, "status": "approved" if action == "approve" else "denied",
+                    **result}
+
+
+def ticket_redeem_grant(login_id, reward_type, reward_id, reward_amount, reward_name, now=None):
+    """Spend one portal ticket and put one curated reward in the player's mailbox.
+
+    Both the wallet and the game save live in this database. Keeping their updates
+    in the same transaction is essential: a portal request must never consume a
+    ticket without a mail, nor leave a mail that was not paid for. The caller has
+    already matched the reward to the portal's fixed catalog; this function owns
+    the persistence and accounting invariants.
+    """
+    login_id = str(login_id or "")
+    reward_type = str(reward_type or "")
+    reward_name = str(reward_name or "").strip()
+    try:
+        reward_id, reward_amount = int(reward_id), int(reward_amount)
+    except (TypeError, ValueError):
+        raise ValueError("invalid grant reward")
+    if not login_id or not reward_type or not reward_name or reward_amount < 1:
+        raise ValueError("invalid grant reward")
+    now = time.time() if now is None else now
+    with write_lock():
+        with _conn() as c:
+            account = c.execute("SELECT uid FROM accounts WHERE login_id=?", (login_id,)).fetchone()
+            if not account:
+                raise ValueError("game account is no longer available")
+            uid = account[0]
+            row = c.execute("SELECT data FROM players WHERE uid=?", (uid,)).fetchone()
+            if not row:
+                raise ValueError("enter the game before claiming a portal reward")
+            balance, _last, _day, earned_today = _ticket_wallet(c, login_id, now)
+            if balance < 1:
+                raise TicketUnavailable("insufficient_tickets")
+
+            st = json.loads(row[0])
+            post_id = _append_portal_mail(
+                st, "Phần thưởng Player Portal",
+                f"Bạn đã dùng 1 ticket để nhận {reward_name} x{reward_amount}.",
+                reward_type, reward_id, reward_amount)
+            st["uid"] = uid
+            c.execute("UPDATE ticket_wallets SET balance=? WHERE login_id=?",
+                      (balance - 1, login_id))
+            c.execute("INSERT INTO ticket_log(login_id,delta,reason,provider,event_id,ip,created) "
+                      "VALUES (?,?,?,?,?,?,?)",
+                      (login_id, -1, "grant", None, None, None, now))
+            c.execute("UPDATE players SET data=?, updated=? WHERE uid=?",
+                      (json.dumps(st, ensure_ascii=False), now, uid))
+            try:
+                _write_derived(c, uid, st)
+            except Exception as e:
+                _derived_warn(e)
+            return {"postId": post_id, "rewardName": reward_name,
+                    **_ticket_snapshot(balance - 1, _last, earned_today, now)}
+
 
 @contextlib.contextmanager
 def write_lock():

@@ -1,13 +1,20 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { useHeroes, runMutation } from "@/lib/api"
 import { PlayerBar, usePlayerSelection } from "@/components/player-context"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Check, Plus, Trash2, Sparkles, Save, UserRound, Loader2 } from "lucide-react"
+
+type Hero = {
+  unitId: number; name: string; role: string; skins: number; isDimensionUnit?: boolean
+  level: number; exp: number; soul: number; potentialTier: number; overcome?: number; dimensionLevel?: number
+}
+type HeroesResponse = { owned: Hero[]; missing: Hero[] }
 
 const ROLE_STYLE: Record<string, { badge: string; avatar: string; label: string }> = {
   "Warrior": { badge: "bg-orange-500/15 text-orange-400 border-orange-500/30", avatar: "from-orange-500 to-rose-600", label: "W" },
@@ -27,10 +34,13 @@ function Avatar({ name, role, unitId, size = "h-12 w-12 text-lg" }: { name: stri
   const letter = (name || "?").charAt(0).toUpperCase()
   if (!broken) {
     return (
-      <img
+      <Image
         src={`/assets/heroes/${unitId}.webp`}
         alt={name}
         title={name}
+        width={48}
+        height={48}
+        unoptimized
         onError={() => setBroken(true)}
         className={`${size} shrink-0 rounded-full border border-border bg-muted object-cover shadow`}
       />
@@ -73,33 +83,37 @@ export default function HeroesPage() {
   )
 }
 
-function OwnedGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
+function OwnedGrid({ data, onMutate }: { data: HeroesResponse; onMutate: () => void }) {
   const { selectedId } = usePlayerSelection()
   const [drafts, setDrafts] = useState<Record<string, Record<string, string>>>({})
 
   const setField = (unitId: number, key: string, value: string) =>
     setDrafts(prev => ({ ...prev, [unitId]: { ...(prev[unitId] || {}), [key]: value } }))
 
-  const save = async (hero: any) => {
+  const save = async (hero: Hero) => {
     const draft = drafts[hero.unitId] || {}
     const patch: Record<string, number> = {}
     for (const [k, v] of Object.entries(draft)) {
       const n = Number(v)
-      if (!Number.isNaN(n) && n !== hero[k]) patch[k] = n
+      if (!Number.isNaN(n) && n !== hero[k as keyof Hero]) patch[k] = n
     }
     if (!Object.keys(patch).length) return
     await runMutation(`/api/player/${encodeURIComponent(selectedId!)}/heroes/${hero.unitId}`, { method: "PATCH", body: JSON.stringify(patch) }, `Hero ${hero.unitId} updated`)
-    setDrafts(prev => { const { [hero.unitId]: _, ...rest } = prev; return rest })
+    setDrafts(prev => {
+      const rest = { ...prev }
+      delete rest[hero.unitId]
+      return rest
+    })
     onMutate()
   }
 
-  const remove = async (hero: any) => {
+  const remove = async (hero: Hero) => {
     if (!window.confirm(`Remove hero ${hero.unitId} (${hero.name})?`)) return
     await runMutation(`/api/player/${encodeURIComponent(selectedId!)}/heroes/${hero.unitId}`, { method: "DELETE" }, "Hero removed")
     onMutate()
   }
 
-  const field = (h: any, key: string, w = "w-16") => {
+  const field = (h: Hero, key: keyof Hero, w = "w-16") => {
     const d = drafts[h.unitId] || {}
     return (
       <div className="space-y-0.5">
@@ -117,7 +131,7 @@ function OwnedGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
         </h2>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        {data.owned.map((h: any) => {
+        {data.owned.map((h) => {
           const style = roleStyle(h.role)
           return (
             <Card key={h.unitId} className="p-0">
@@ -158,14 +172,14 @@ function OwnedGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
   )
 }
 
-function MissingGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
+function MissingGrid({ data, onMutate }: { data: HeroesResponse; onMutate: () => void }) {
   const { selectedId } = usePlayerSelection()
   const [level, setLevel] = useState("30")
   const [soul, setSoul] = useState("999")
   const [overcome, setOvercome] = useState("0")
   const [dimLevel, setDimLevel] = useState("0")
 
-  const grant = async (h: any) => {
+  const grant = async (h: Hero) => {
     await runMutation(`/api/player/${encodeURIComponent(selectedId!)}/heroes/${h.unitId}`, { method: "POST" }, `${h.name} granted`)
     onMutate()
   }
@@ -209,7 +223,7 @@ function MissingGrid({ data, onMutate }: { data: any; onMutate: () => void }) {
         </div>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        {data.missing.map((h: any) => {
+        {data.missing.map((h) => {
           const style = roleStyle(h.role)
           return (
             <Card key={h.unitId} className="p-0">

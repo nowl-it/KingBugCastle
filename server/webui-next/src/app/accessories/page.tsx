@@ -6,6 +6,15 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Gem, Info } from "lucide-react"
 
+type AccessorySubStat = { label: string; score?: number; grade?: string }
+type Accessory = {
+  id: number; typeName: string; synergyName: string; rarityName: string; level: number
+  unitName?: string; scoreTotal: number; mainStatLabel?: string; subStats?: AccessorySubStat[]
+}
+type AccessoriesResponse = {
+  scoreRange?: Record<string, string | number>; grades?: Record<string, string | number>; accessories?: Accessory[]
+}
+
 export default function AccessoriesPage() {
   const { selectedId } = usePlayerSelection()
   const { data } = useAccessories(selectedId || undefined)
@@ -21,12 +30,12 @@ export default function AccessoriesPage() {
       {selectedId && data && (
         <>
           <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
-            <span className="flex items-center gap-1"><Info className="h-3.5 w-3.5" /> Grade thresholds (score): {Object.entries(data.scoreRange || {}).map(([g, v]: any) => `${g}=${v}`).join(" · ")}</span>
-            <span>Grades: {Object.entries(data.grades || {}).map(([g, l]: any) => `${g}=${l}`).join(" · ")}</span>
+            <span className="flex items-center gap-1"><Info className="h-3.5 w-3.5" /> Grade thresholds (score): {Object.entries((data as AccessoriesResponse).scoreRange || {}).map(([g, v]) => `${g}=${v}`).join(" · ")}</span>
+            <span>Grades: {Object.entries((data as AccessoriesResponse).grades || {}).map(([g, l]) => `${g}=${l}`).join(" · ")}</span>
           </div>
           {!data.accessories?.length && <Card><CardContent className="py-16 text-center text-muted-foreground">No accessories owned.</CardContent></Card>}
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {(data.accessories || []).map((a: any, i: number) => (
+            {((data as AccessoriesResponse).accessories || []).map((a, i) => (
               <Card key={i}>
                 <CardHeader className="pb-2">
                   <div className="flex items-start justify-between">
@@ -54,7 +63,7 @@ export default function AccessoriesPage() {
                     </div>
                   )}
                   <ul className="space-y-1">
-                    {(a.subStats || []).map((s: any, j: number) => (
+                    {(a.subStats || []).map((s, j) => (
                       <li key={j} className="flex items-center justify-between text-sm">
                         <span className="text-muted-foreground">{s.label}</span>
                         <span className="flex items-center gap-2">

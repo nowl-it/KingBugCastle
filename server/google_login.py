@@ -33,18 +33,24 @@ with the Console. Environment variables override the file when both are present:
 
     GOOGLE_CLIENT_ID       web OAuth client id      (required to enable)
     GOOGLE_CLIENT_SECRET   web OAuth client secret  (required to enable)
-    GLOGIN_PUBLIC_URL      public base the browser reaches, e.g.
+    GLOGIN_PUBLIC_URL      public game base the browser reaches, e.g.
                            https://kgc.example.com  (its /glogin/callback must be
                            an authorised redirect URI on the OAuth client)
+    PLAYER_PORTAL_PUBLIC_URL
+                           public player-dashboard base, e.g.
+                           https://player.kgc.example.com (its
+                           /portal/api/auth/google/callback must also be authorised)
     GLOGIN_SCHEME          deep-link scheme back into the app (default kingbugcastle)
     GLOGIN_STATE_SECRET    HMAC key for the CSRF state (default: random per boot)
 
 Setup in Google Cloud (once, by whoever owns the server):
     APIs & Services -> Credentials -> Create OAuth client -> **Web application**
-    Authorised redirect URI:  <GLOGIN_PUBLIC_URL>/glogin/callback
+    Authorised redirect URIs:
+      <GLOGIN_PUBLIC_URL>/glogin/callback
+      <PLAYER_PORTAL_PUBLIC_URL>/portal/api/auth/google/callback
     Scopes needed: openid  (email/profile optional, only for a nicer name)
 """
-import base64, hashlib, hmac, json, os, pathlib, secrets, time, urllib.parse, urllib.request
+import base64, hashlib, hmac, json, os, pathlib, secrets, tempfile, time, urllib.parse, urllib.request
 
 # --- config, from the downloaded client JSON and/or the environment --------------
 SECRETS_DIR = pathlib.Path(__file__).resolve().parent / "secrets"
@@ -96,6 +102,10 @@ _f_id, _f_secret, _f_url = load_client_file()
 CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID") or _f_id
 CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET") or _f_secret
 PUBLIC_URL = (os.environ.get("GLOGIN_PUBLIC_URL") or _f_url).rstrip("/")
+# The downloaded OAuth-client JSON historically contains only the game callback.
+# A dashboard on its own hostname therefore has to be explicit; falling back to
+# PUBLIC_URL keeps local single-origin development and old installations working.
+PORTAL_PUBLIC_URL = os.environ.get("PLAYER_PORTAL_PUBLIC_URL", "").rstrip("/")
 SCHEME = os.environ.get("GLOGIN_SCHEME", "kingbugcastle")
 # Dev mode: exercise the whole client loop (button -> web -> deep link -> login)
 # WITHOUT a real Google OAuth client. /glogin serves a page with a couple of test
@@ -107,6 +117,7 @@ _STATE_SECRET = (os.environ.get("GLOGIN_STATE_SECRET") or secrets.token_hex(16))
 AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth"
 TOKEN_URL = "https://oauth2.googleapis.com/token"
 STATE_TTL = 600   # a consent screen the user leaves open for 10 min is plenty
+NATIVE_AUTH_GRANT_TTL = 60  # native poller fetch -> /auth is immediate
 
 # The token exchange is patched out in tests; kept as a module attribute so a test
 # can swap it without a live Google.
@@ -125,8 +136,19 @@ def _exchange_code(code, redirect_uri):
         return json.loads(r.read())
 
 
+def portal_public_url():
+    """Browser origin which owns the player-dashboard cookie and OAuth callback."""
+    return PORTAL_PUBLIC_URL or PUBLIC_URL
+
+
 def enabled():
+    """Whether the game Google-login bridge is configured (legacy public API)."""
     return bool(CLIENT_ID and CLIENT_SECRET and PUBLIC_URL)
+
+
+def portal_enabled():
+    """Whether Google sign-in is configured for the separate player dashboard."""
+    return bool(CLIENT_ID and CLIENT_SECRET and portal_public_url())
 
 
 def _b64url_json(segment):
@@ -151,36 +173,67 @@ def account_id_for_sub(sub):
     return "google_" + sub
 
 
-def make_state():
-    """A signed, timestamped nonce. Stateless on purpose: the two uvicorn processes
-    (:8080, :8443) share no memory, and a browser redirect can land the start and
-    the callback on different ones, so an in-memory store would drop it."""
+def make_state(target="game"):
+    """A signed, timestamped OAuth state for the game or player portal.
+
+    The normal game state keeps its historic three-part shape.  The portal target
+    is signed into the state rather than trusting a browser query parameter at the
+    callback, so one OAuth response cannot be switched from a portal login into a
+    game-login handoff (or the reverse).
+    """
+    if target not in ("game", "portal"):
+        raise ValueError("unknown Google login target")
     raw = f"{int(time.time())}.{secrets.token_hex(8)}"
+    if target != "game":
+        raw += "." + target
     sig = hmac.new(_STATE_SECRET, raw.encode(), hashlib.sha256).hexdigest()[:16]
     return f"{raw}.{sig}"
 
 
 def check_state(state):
     try:
-        ts, nonce, sig = state.split(".")
+        parts = state.split(".")
+        if len(parts) == 3:
+            ts, nonce, sig = parts
+            target = "game"
+            raw = f"{ts}.{nonce}"
+        elif len(parts) == 4:
+            ts, nonce, target, sig = parts
+            if target != "portal":
+                return False
+            raw = f"{ts}.{nonce}.{target}"
+        else:
+            return False
     except (ValueError, AttributeError):
         return False
-    raw = f"{ts}.{nonce}"
     good = hmac.new(_STATE_SECRET, raw.encode(), hashlib.sha256).hexdigest()[:16]
     if not hmac.compare_digest(sig, good):
         return False
     return abs(time.time() - int(ts)) <= STATE_TTL
 
 
-def _redirect_uri():
-    return f"{PUBLIC_URL}/glogin/callback"
+def state_target(state):
+    """The signed destination of a state that has already passed ``check_state``."""
+    if not check_state(state):
+        return None
+    return "portal" if len(state.split(".")) == 4 else "game"
 
 
-def authorize_url():
+def _redirect_uri(target="game"):
+    if target == "game":
+        return f"{PUBLIC_URL}/glogin/callback"
+    if target == "portal":
+        return f"{portal_public_url()}/portal/api/auth/google/callback"
+    raise ValueError("unknown Google login target")
+
+
+def authorize_url(target="game"):
+    if target not in ("game", "portal"):
+        raise ValueError("unknown Google login target")
     q = urllib.parse.urlencode({
-        "client_id": CLIENT_ID, "redirect_uri": _redirect_uri(),
+        "client_id": CLIENT_ID, "redirect_uri": _redirect_uri(target),
         "response_type": "code", "scope": "openid",
-        "state": make_state(), "prompt": "select_account",
+        "state": make_state(target), "prompt": "select_account",
     })
     return f"{AUTH_URL}?{q}"
 
@@ -238,14 +291,16 @@ def _page(title, body, tail="", bad=False):
 # here; the app's native poller fetches it from /glogin/pending and drives the
 # client's own Scene_Login.Auth(id) - the full auth handshake, ending at the lobby.
 # We pass the id, not a session token: just setting a token skips /auth, and the
-# client bails with "Unable to fetch player data". Single slot: a private server
-# with one player logging in at a time.
-# ponytail: one global slot, no per-device keying. Key it by a device id in the
-# deep link if two people ever log in at the same second.
+# client bails with "Unable to fetch player data". The pending value is bound to
+# the browser/poller's client address; it is an authentication handoff, not a
+# server-wide inbox that another player may consume.
 def _client_ip(request):
-    peer = request.client.host if request.client else "-"
-    fwd = request.headers.get("cf-connecting-ip") or request.headers.get("x-forwarded-for", "")
-    return fwd.split(",")[0].strip() or peer
+    # Keep the login bridge on the exact same proxy-trust policy as the game API.
+    # Unconditionally believing X-Forwarded-For let a direct caller impersonate a
+    # victim's pending-login address; ``security.client_ip`` accepts it only when
+    # the deployment has opted into a loopback-bound trusted proxy.
+    from security import client_ip
+    return client_ip(request)
 
 
 def _pending_file(ip: str):
@@ -253,58 +308,77 @@ def _pending_file(ip: str):
     safe = hashlib.md5(ip.encode()).hexdigest()
     return pathlib.Path(__file__).parent / "state" / f".glogin_pending_{safe}"
 
+def _native_auth_grant_file(ip: str, account_id: str):
+    """One-time grant for this exact address/account pair."""
+    safe = hashlib.sha256(f"{ip}\0{account_id}".encode()).hexdigest()
+    return pathlib.Path(__file__).parent / "state" / f".glogin_auth_{safe}"
+
+
+def _write_handoff(target, value):
+    """Publish a handoff only after its complete value is on disk.
+
+    The callback and native poller run independently.  Writing the destination
+    directly lets the poller observe its zero-length/truncated intermediate
+    state and consume it as an empty result.  A same-directory replacement is
+    atomic on the filesystems used by the service.
+    """
+    target.parent.mkdir(parents=True, exist_ok=True)
+    fd, temp_name = tempfile.mkstemp(prefix=f".{target.name}.", dir=target.parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(value)
+        os.replace(temp_name, target)
+    finally:
+        pathlib.Path(temp_name).unlink(missing_ok=True)
+
+
+def _take_handoff(target):
+    """Atomically take one handoff, if one exists.
+
+    Two native pollers can briefly overlap after an app foreground/background
+    transition.  Moving the target to a unique claim file ensures exactly one
+    request can return the account id; check/read/unlink cannot make that
+    guarantee.
+    """
+    target.parent.mkdir(parents=True, exist_ok=True)
+    fd, claim_name = tempfile.mkstemp(prefix=f".{target.name}.claim-", dir=target.parent)
+    os.close(fd)
+    claim = pathlib.Path(claim_name)
+    try:
+        try:
+            os.replace(target, claim)
+        except FileNotFoundError:
+            return ""
+        return claim.read_text(encoding="utf-8").strip()
+    finally:
+        claim.unlink(missing_ok=True)
+
+
 def _set_pending(ip: str, account_id: str):
-    _pending_file(ip).write_text(account_id)
+    _write_handoff(_pending_file(ip), account_id)
+
 
 def _get_and_clear_pending(ip: str):
-    f = _pending_file(ip)
-    if f.exists():
-        acc = f.read_text().strip()
-        try:
-            f.unlink()
-        except OSError:
-            pass
-        return acc
-    
-    # Fallback for IPv4 vs IPv6 mismatch (e.g. Chrome uses IPv6 via Cloudflare, Unity uses IPv4).
-    # If the strict IP hash file is not found, look for ANY recent pending file (<=60s).
-    state_dir = pathlib.Path(__file__).parent / "state"
-    pending_files = list(state_dir.glob(".glogin_pending_*"))
-    if pending_files:
-        # Sort by modification time, newest first
-        pending_files.sort(key=lambda p: p.stat().st_mtime, reverse=True)
-        now = time.time()
-        for fallback_file in pending_files:
-            mtime = fallback_file.stat().st_mtime
-            if now - mtime > 60:
-                try:
-                    fallback_file.unlink()
-                except OSError:
-                    pass
-                continue
-            acc = fallback_file.read_text().strip()
-            try:
-                fallback_file.unlink()
-            except OSError:
-                pass
-            if acc:
-                return acc
-        
-    # Super fallback for local development split-brain:
-    # If Chrome on the phone uses Secure DNS, it bypasses the hosts file and completes 
-    # OAuth on the public VPS. The Unity game respects the hosts file and polls the local 
-    # laptop. If we are running locally and have no pending files, try asking the VPS!
+    return _take_handoff(_pending_file(ip))
+
+
+def _grant_native_auth(ip: str, account_id: str, now=None):
+    """Authorize exactly one immediate native ``/auth`` request after polling."""
+    now = time.time() if now is None else now
+    _write_handoff(_native_auth_grant_file(ip, account_id), str(now))
+
+
+def consume_native_auth_grant(ip: str, account_id: str, now=None):
+    """Return whether this request owns a fresh, single-use Google auth grant."""
+    if not isinstance(account_id, str) or not account_id.startswith("google_"):
+        return False
+    raw = _take_handoff(_native_auth_grant_file(ip, account_id))
     try:
-        import urllib.request
-        req = urllib.request.Request(f"{PUBLIC_URL}/glogin/pending")
-        with urllib.request.urlopen(req, timeout=3) as r:
-            remote_acc = r.read().decode("utf-8").strip()
-            if remote_acc:
-                return remote_acc
-    except Exception:
-        pass
-        
-    return ""
+        issued = float(raw)
+    except ValueError:
+        return False
+    now = time.time() if now is None else now
+    return 0 <= now - issued <= NATIVE_AUTH_GRANT_TTL
 
 
 def return_page(request, account_id):
@@ -347,9 +421,79 @@ def error_page(title, detail, hint=""):
                  f"<h1>{title}</h1><p>{detail}</p>{hint_html}", bad=True)
 
 
-def register(app):
-    """Add /glogin and /glogin/callback to the FastAPI app. No-op-ish if unconfigured
-    (the routes exist but explain they are off)."""
+def _callback_failure(HTMLResponse, *, error, expected_target):
+    if error:
+        return HTMLResponse(
+            error_page("Sign-in cancelled",
+                       "Google did not complete the sign-in.",
+                       f"Reason: <code>{error}</code>. Start the sign-in again."),
+            status_code=400)
+    configured = enabled() if expected_target == "game" else portal_enabled()
+    if not configured:
+        public_var = "GLOGIN_PUBLIC_URL" if expected_target == "game" else "PLAYER_PORTAL_PUBLIC_URL"
+        return HTMLResponse(
+            error_page("Not available", "Google sign-in is turned off on this server.",
+                       "The operator sets <code>GOOGLE_CLIENT_ID</code>, "
+                       "<code>GOOGLE_CLIENT_SECRET</code> and "
+                       f"<code>{public_var}</code> to enable it."),
+            status_code=503)
+    return None
+
+
+def _complete_callback(request, code, state, error, expected_target):
+    """Complete an OAuth callback on the origin encoded by ``expected_target``.
+
+    The signed state and callback route must agree. This prevents a portal login
+    response from ever being processed by the game bridge (or vice versa), even if
+    both hostnames reach the same machine.
+    """
+    from fastapi.responses import HTMLResponse, RedirectResponse
+
+    failure = _callback_failure(HTMLResponse, error=error, expected_target=expected_target)
+    if failure:
+        return failure
+    target = state_target(state)
+    if target is None:
+        return HTMLResponse(
+            error_page("Sign-in expired", "This sign-in link is no longer valid.",
+                       "It is good for 10 minutes. Start a new sign-in."), status_code=400)
+    if target != expected_target:
+        return HTMLResponse(
+            error_page("Wrong sign-in destination",
+                       "This sign-in link belongs to a different King Bug Castle service.",
+                       "Start the sign-in again from the page or game you want to use."),
+            status_code=400)
+    try:
+        tok = _exchange_code(code, _redirect_uri(target))
+        sub = sub_from_id_token(tok["id_token"])
+    except Exception as e:                      # noqa: BLE001 - user-facing
+        return HTMLResponse(
+            error_page("Could not verify the sign-in",
+                       "Google answered, but the server could not read the reply.",
+                       f"<code>{type(e).__name__}</code> - if this keeps happening, "
+                       "the operator should check the OAuth client settings."),
+            status_code=502)
+    account_id = account_id_for_sub(sub)
+    if target == "game":
+        return HTMLResponse(return_page(request, account_id))
+
+    import playerdb
+    token = playerdb.portal_google_login(account_id)
+    if not token:
+        return HTMLResponse(
+            error_page("Game account not found",
+                       "Open the game once with this Google account before using the player portal."),
+            status_code=403)
+    # The Player Dashboard has its own hostname, whose root is the portal.
+    response = RedirectResponse("/", status_code=303)
+    response.set_cookie("kgc_player", token, httponly=True, samesite="lax",
+                        secure=portal_public_url().startswith("https://"), path="/",
+                        max_age=playerdb.PLAYER_PORTAL_SESSION_TTL)
+    return response
+
+
+def register_game(app):
+    """Add only the game-login bridge to the game API ASGI application."""
     from fastapi import Request
     from fastapi.responses import HTMLResponse, RedirectResponse
 
@@ -370,33 +514,7 @@ def register(app):
 
     @app.get("/glogin/callback")
     def glogin_callback(request: Request, code: str = "", state: str = "", error: str = ""):
-        if error:
-            return HTMLResponse(
-                error_page("Sign-in cancelled",
-                           "Google did not complete the sign-in.",
-                           f"Reason: <code>{error}</code>. Tap the Google button in the "
-                           "game to try again."), status_code=400)
-        if not enabled():
-            return HTMLResponse(error_page("Not available", *_NOT_CONFIGURED),
-                                status_code=503)
-        if not check_state(state):
-            return HTMLResponse(
-                error_page("Sign-in expired",
-                           "This sign-in link is no longer valid.",
-                           "It is good for 10 minutes. Tap the Google button in the game "
-                           "to start a new one."), status_code=400)
-        try:
-            tok = _exchange_code(code, _redirect_uri())
-            sub = sub_from_id_token(tok["id_token"])
-        except Exception as e:                      # noqa: BLE001 - user-facing
-            # The exception type only; the body can carry the client secret back.
-            return HTMLResponse(
-                error_page("Could not verify the sign-in",
-                           "Google answered, but the server could not read the reply.",
-                           f"<code>{type(e).__name__}</code> - if this keeps happening, "
-                           "the operator should check the OAuth client settings."),
-                status_code=502)
-        return HTMLResponse(return_page(request, account_id_for_sub(sub)))
+        return _complete_callback(request, code, state, error, "game")
 
     @app.get("/glogin/go")
     def glogin_go(request: Request, id: str = ""):
@@ -416,8 +534,24 @@ def register(app):
         """The app's native poller reads the just-picked account id here (plain text,
         not AES - it's not a game-API route). Returned once, then cleared."""
         from fastapi.responses import PlainTextResponse
-        acc = _get_and_clear_pending(_client_ip(request))
+        ip = _client_ip(request)
+        acc = _get_and_clear_pending(ip)
+        if acc:
+            _grant_native_auth(ip, acc)
         return PlainTextResponse(acc)
+
+
+def register_portal(app):
+    """Add the player-dashboard OAuth callback to its dedicated ASGI app only."""
+    from fastapi import Request
+
+    @app.get("/portal/api/auth/google/callback")
+    def portal_google_callback(request: Request, code: str = "", state: str = "", error: str = ""):
+        return _complete_callback(request, code, state, error, "portal")
+
+
+# Compatibility for the long-standing game-server import.
+register = register_game
 
 
 if __name__ == "__main__":   # self-check: state round-trip + id derivation + return page

@@ -1,15 +1,19 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import Image from "next/image"
 import { useInventory, useCatalog, runMutation } from "@/lib/api"
 import { PlayerBar, usePlayerSelection } from "@/components/player-context"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Plus, Trash2, Search, Gift, KeyRound, Ticket, ScrollText, TrendingUp, Zap, Package, Sparkles, Boxes } from "lucide-react"
+import { type LucideIcon, Plus, Trash2, Search, Gift, KeyRound, Ticket, ScrollText, TrendingUp, Zap, Package, Sparkles, Boxes } from "lucide-react"
 
-const SUB_STYLE: Record<string, { icon: any; cls: string }> = {
+type CatalogItem = { id: number; name: string; sub: string }
+type InventoryItem = CatalogItem & { count: number }
+
+const SUB_STYLE: Record<string, { icon: LucideIcon; cls: string }> = {
   "RewardBoxInventory": { icon: Gift, cls: "bg-amber-500/15 text-amber-400" },
   "InstantRewardBox": { icon: Gift, cls: "bg-amber-500/15 text-amber-400" },
   "Key": { icon: KeyRound, cls: "bg-yellow-500/15 text-yellow-400" },
@@ -32,9 +36,12 @@ function ItemIcon({ sub, id, size = "h-10 w-10" }: { sub: string; id?: number; s
   const [broken, setBroken] = useState(false)
   if (id && !broken) {
     return (
-      <img
+      <Image
         src={`/assets/items/${id}.webp`}
         alt={String(id)}
+        width={40}
+        height={40}
+        unoptimized
         onError={() => setBroken(true)}
         className={`${size} shrink-0 rounded-lg border border-border bg-muted object-cover`}
       />
@@ -59,7 +66,7 @@ export default function ItemsPage() {
   const matched = useMemo(() => {
     const query = q.trim().toLowerCase()
     const list = query
-      ? items.filter((i: any) => String(i.id).includes(query) || (i.name || "").toLowerCase().includes(query))
+      ? (items as CatalogItem[]).filter((i) => String(i.id).includes(query) || (i.name || "").toLowerCase().includes(query))
       : items
     return list.slice(0, 30)
   }, [items, q])
@@ -106,7 +113,7 @@ export default function ItemsPage() {
                     <TableRow><TableHead>Item</TableHead><TableHead>Sub</TableHead><TableHead className="w-20 text-right">Count</TableHead><TableHead className="w-16" /></TableRow>
                   </TableHeader>
                   <TableBody>
-                    {inv.map((it: any) => (
+                    {(inv as InventoryItem[]).map((it) => (
                       <TableRow key={it.id}>
                         <TableCell>
                           <div className="flex items-center gap-3">
@@ -141,7 +148,7 @@ export default function ItemsPage() {
                 <Input placeholder="Search 173 items..." value={q} onChange={(e) => setQ(e.target.value)} className="pl-8" />
               </div>
               <div className="max-h-[320px] overflow-y-auto border rounded-md divide-y divide-border">
-                {matched.map((i: any) => (
+                {(matched as CatalogItem[]).map((i) => (
                   <button key={i.id} onClick={() => setAddId(String(i.id))} className={`w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-muted/50 ${addId === String(i.id) ? "bg-muted/70" : ""}`}>
                     <ItemIcon sub={i.sub} id={i.id} size="h-9 w-9" />
                     <div className="min-w-0 flex-1">

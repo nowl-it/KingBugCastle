@@ -2,7 +2,7 @@
 """
 One-shot cross-platform setup for the KGC private server.
 
-Run once after cloning:  python3 setup.py
+Run once after cloning:  python setup.py
 
 It: (1) checks the external tools the build needs, with per-OS install hints;
 (2) extracts your game XAPK (dropped in apk/) into apk/xapk_extracted/;
@@ -41,7 +41,7 @@ def check_python():
         ok(f"venv active ({sys.prefix})")
     else:
         warn("no venv detected — some distros block 'pip install' system-wide")
-        warn("recommended: python3 -m venv .venv && source .venv/bin/activate")
+        warn("recommended: python -m venv .venv, then activate it (see SETUP.md)")
     return True
 
 
@@ -68,8 +68,9 @@ def extract_xapk():
         return True
     xapks = sorted(APK_DIR.glob("*.xapk")) + sorted(APK_DIR.glob("*.zip"))
     if not xapks:
-        err(f"no game XAPK found. Use the built-in kgc-cli tool:")
-        err(f"  mkdir -p {APK_DIR} && ./kgc-cli download -v 170.1.00 -o {APK_DIR}")
+        err(f"no game XAPK found. Put a complete arm64 XAPK or zip in {APK_DIR}")
+        if OSX == "Linux" and platform.machine().lower() in ("x86_64", "amd64"):
+            err(f"  or run: ./kgc-cli download -v 170.1.00 -o {APK_DIR}")
         err(f"(Manual download from APKPure may strip libil2cpp.so and cause build failures.)")
         APK_DIR.mkdir(exist_ok=True)
         return False
@@ -138,7 +139,7 @@ def _gen_cert_py(cert, keyf):
     from cryptography.hazmat.primitives.asymmetric import rsa
     k = rsa.generate_private_key(public_exponent=65537, key_size=2048)
     name = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, "kgc")])
-    now = datetime.datetime.utcnow()
+    now = datetime.datetime.now(datetime.timezone.utc)
     crt = (x509.CertificateBuilder().subject_name(name).issuer_name(name)
            .public_key(k.public_key()).serial_number(x509.random_serial_number())
            .not_valid_before(now).not_valid_after(now + datetime.timedelta(days=3650))
@@ -158,12 +159,11 @@ def main():
     gen_cert()
     print("\n== next steps ==")
     if not (tools and xapk and key):
-        print("  Fix the [FAIL] items above, then re-run: python3 setup.py")
+        print("  Fix the [FAIL] items above, then re-run: python setup.py")
         sys.exit(1)
-    print("  1. Create a venv (recommended):  python3 -m venv .venv && source .venv/bin/activate")
-    print("  2. pip install -r server/requirements.txt")
-    print("  3. Start server:  cd server && ../.venv/bin/python -m uvicorn server:app --host 0.0.0.0 --port 8080")
-    print("  4. Build + install the client for YOUR device - see SETUP.md")
+    print("  1. Start the local stack:  python server/run.py")
+    print("  2. Press d in the TUI to wire your adb device")
+    print("  3. Build + install the client for YOUR device - see SETUP.md")
     print("     (redroid / BlueStacks / LDPlayer / real phone all covered there).")
     print("\n  Done. See SETUP.md for device networking per target.")
 

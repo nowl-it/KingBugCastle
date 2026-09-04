@@ -71,7 +71,7 @@ python3 patchers/unpack_neo.py --self-check   # expect: 113836232 bytes
 node webui/check_templates.mjs                # expect: 12 components, 11 modules
 
 # 7. Bring the stack up (game :8080 + :8443 TLS, dashboard :8081)
-./run.sh
+python3 run.py
 ```
 
 Verified baseline (2026-07-31), so you can tell a real regression from noise:
@@ -112,7 +112,7 @@ Most wasted time in this project comes from editing the right value in the wrong
 | # | Plane | Lives in | Change takes effect | Symptom when you pick wrong |
 |---|-------|----------|---------------------|------------------------------|
 | 1 | **Player state** | `server/state/players.db` (SQLite) | Next request. No restart. | - |
-| 2 | **API response shape** | `server.py` + route modules + `data/*.json` | `run.sh` auto-reloads | Client shows nothing / crashes on a null |
+| 2 | **API response shape** | `server.py` + route modules + `data/*.json` | `run.py` auto-reloads | Client shows nothing / crashes on a null |
 | 3 | **Client master data** | `server/xml_live/*.xml` → `real_cdn/xml` bundle | Rebuild bundle + restart + clear device UnityCache | "I edited the XML and nothing happened" |
 | 4 | **Client code** | `libil2cpp.so` inside the APK | Full rebuild + reinstall | Only place a *behaviour* can change |
 
@@ -393,7 +393,7 @@ il2cpp/*/*
 **`KGC_BACKUP_HOURS` was staging real player saves into git.** `server/state/backups/` is now
 ignored. Watch for this whenever you add a new on-disk artefact.
 
-**`adb reverse` is per-connection.** After the emulator restarts, run `./run.sh device` or
+**`adb reverse` is per-connection.** After the emulator restarts, press `d` in `python3 run.py` or
 nothing reaches the server and it looks like a server bug.
 
 **Clear the global proxy on every fresh redroid:** `adb shell settings put global http_proxy :0`.

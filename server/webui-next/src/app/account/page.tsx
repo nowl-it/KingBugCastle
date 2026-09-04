@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { UserPlus, Trash2, ShieldCheck, KeyRound } from "lucide-react"
 
+type Admin = { username: string; created?: number }
+
 export default function AccountPage() {
   const { data: who, mutate: mutateWho } = useWhoAmI()
   const { data: admins, mutate: mutateAdmins } = useAdmins()
@@ -103,7 +105,7 @@ export default function AccountPage() {
         <CardHeader><CardTitle className="text-base">Admins ({list.length})</CardTitle></CardHeader>
         <CardContent className="p-0">
           <ul className="divide-y divide-border">
-            {list.map((a: any) => (
+            {(list as Admin[]).map((a) => (
               <li key={a.username} className="flex items-center justify-between px-4 py-3">
                 <div>
                   <span className="text-sm font-medium">{a.username}</span>

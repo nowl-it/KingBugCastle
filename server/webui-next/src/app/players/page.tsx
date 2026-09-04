@@ -9,6 +9,13 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Search, Plus, Copy, Trash2, Save, RefreshCw, Crown, Zap } from "lucide-react"
 
+type PlayerSummary = {
+  id: string; uid?: string; name: string; castleName?: string; active?: boolean; level?: number
+  gold?: number; cash?: number; heart?: number; counts?: { cards?: number }
+  [key: string]: string | number | boolean | undefined | { cards?: number }
+}
+type PlayerDetailResponse = { summary: PlayerSummary }
+
 const EDITABLE_FIELDS: Record<string, { label: string; type?: string }> = {
   name: { label: "Name" },
   castleName: { label: "Castle name" },
@@ -35,10 +42,10 @@ export default function PlayersPage() {
   const [newUid, setNewUid] = useState("")
 
   const list = useMemo(() => {
-    const arr = Array.isArray(players) ? players : []
+    const arr = (Array.isArray(players) ? players : []) as PlayerSummary[]
     const q = query.trim().toLowerCase()
     if (!q) return arr
-    return arr.filter((p: any) =>
+    return arr.filter((p) =>
       (p.name || "").toLowerCase().includes(q) ||
       (p.id || "").toLowerCase().includes(q) ||
       (p.uid || "").toLowerCase().includes(q))
@@ -106,7 +113,7 @@ export default function PlayersPage() {
           </CardHeader>
           <CardContent className="p-0">
             <ul className="max-h-[65vh] overflow-y-auto divide-y divide-border">
-              {list.map((p: any) => (
+              {list.map((p) => (
                 <li key={p.id}>
                   <button
                     onClick={() => setSelectedId(p.id)}
@@ -155,24 +162,34 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
   const [rawDraft, setRawDraft] = useState<string>("")
   const [rawError, setRawError] = useState<string | null>(null)
 
-  const sum = detail?.summary
-
-  useEffect(() => {
-    if (sum) {
-      const next: Record<string, string> = {}
-      for (const k of Object.keys(EDITABLE_FIELDS)) {
-        next[k] = sum[k] !== undefined && sum[k] !== null ? String(sum[k]) : ""
-      }
-      setEdits(next)
+  const sum = (detail as PlayerDetailResponse | undefined)?.summary
+  const hasSummary = Boolean(sum)
+  const editableFingerprint = JSON.stringify((() => {
+    const next: Record<string, string> = {}
+    for (const key of Object.keys(EDITABLE_FIELDS)) {
+      next[key] = sum?.[key] !== undefined && sum[key] !== null ? String(sum[key]) : ""
     }
-  }, [pid, sum?.name, sum?.gold, sum?.cash, sum?.level])
+    return next
+  })())
 
   useEffect(() => {
-    if (raw) setRawDraft(JSON.stringify(raw, null, 2))
+    if (hasSummary) {
+      // A selected save is an external query result; reset the edit draft only when it changes.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setEdits(JSON.parse(editableFingerprint) as Record<string, string>)
+    }
+  }, [pid, hasSummary, editableFingerprint])
+
+  useEffect(() => {
+    if (raw) {
+      // A selected save is an external query result; initialize the raw-state editor from it.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setRawDraft(JSON.stringify(raw, null, 2))
+    }
   }, [pid, raw])
 
   const saveEdits = async () => {
-    const patch: Record<string, any> = {}
+    const patch: Record<string, string | number> = {}
     for (const [k, v] of Object.entries(edits)) {
       const spec = EDITABLE_FIELDS[k]
       if (spec?.type === "number") {
@@ -189,11 +206,11 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
 
   const saveRaw = async () => {
     setRawError(null)
-    let parsed: any
+    let parsed: unknown
     try {
       parsed = JSON.parse(rawDraft)
-    } catch (e: any) {
-      setRawError("Invalid JSON: " + e.message)
+    } catch (error: unknown) {
+      setRawError("Invalid JSON: " + (error instanceof Error ? error.message : "unknown parse error"))
       return
     }
     await runMutation(`/api/player/${encodeURIComponent(pid)}/raw`, { method: "PUT", body: JSON.stringify(parsed) }, "Raw state replaced")
@@ -241,6 +258,8 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
           <Button className="mt-4" onClick={saveEdits}><Save className="h-4 w-4 mr-1" /> Save fields</Button>
         </CardContent>
       </Card>
+
+      <PortalAccess pid={pid} />
 
       <Card>
         <CardHeader>
@@ -330,4 +349,68 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
       </Card>
     </div>
   )
+}
+
+type PortalAccount = {
+  login_id: string
+  username: string | null
+  created: number | null
+  last_login: number | null
+  must_change_password: boolean
+}
+
+function PortalAccess({ pid }: { pid: string }) {
+  const [accounts, setAccounts] = useState<PortalAccount[]>([])
+  const [loginId, setLoginId] = useState("")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(true)
+
+  const refresh = async () => {
+    setLoading(true)
+    try {
+      const result = await fetch(`/api/player/${encodeURIComponent(pid)}/portal-access`).then(async response => {
+        if (!response.ok) throw new Error((await response.json().catch(() => ({}))).error || "Could not load portal access")
+        return response.json()
+      })
+      const next = result.accounts || []
+      setAccounts(next)
+      const guest = next.find((account: PortalAccount) => account.login_id.startsWith("Guest_"))
+      setLoginId(current => next.some((account: PortalAccount) => account.login_id === current) ? current : (guest?.login_id || ""))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Loading is the effect's external synchronization; the function updates local UI state asynchronously.
+  // eslint-disable-next-line react-hooks/set-state-in-effect, react-hooks/exhaustive-deps
+  useEffect(() => { refresh().catch(() => setAccounts([])) }, [pid])
+
+  const issue = async () => {
+    await runMutation(`/api/player/${encodeURIComponent(pid)}/portal-access`, {
+      method: "POST", body: JSON.stringify({ loginId, username, password }),
+    }, "Guest portal password issued")
+    setPassword("")
+    await refresh()
+  }
+
+  const guests = accounts.filter(account => account.login_id.startsWith("Guest_"))
+  return <Card>
+    <CardHeader>
+      <CardTitle>Player Portal access</CardTitle>
+      <CardDescription>Google accounts use Google sign-in. For a Guest account, issue a temporary password only after verifying its owner.</CardDescription>
+    </CardHeader>
+    <CardContent className="space-y-4">
+      {loading ? <p className="text-sm text-muted-foreground">Loading linked game accounts…</p> : <>
+        {accounts.length === 0 ? <p className="text-sm text-muted-foreground">This save has no game login yet. The player must enter the game before portal access can be granted.</p> :
+          <ul className="space-y-2 text-sm">{accounts.map(account => <li key={account.login_id} className="rounded-md border p-3"><div className="font-mono break-all">{account.login_id}</div><div className="mt-1 text-muted-foreground">{account.login_id.startsWith("google_") ? "Google sign-in" : account.username ? `Guest portal name: ${account.username}${account.must_change_password ? " · password change required" : ""}` : "Guest account — no portal password yet"}</div></li>)}</ul>}
+        {guests.length > 0 && <div className="grid gap-3 rounded-md border p-3 sm:grid-cols-3 sm:items-end">
+          <div className="space-y-1"><label className="text-xs text-muted-foreground">Guest account</label><select className="h-9 w-full rounded-md border bg-background px-2 text-sm" value={loginId} onChange={event => setLoginId(event.target.value)}>{guests.map(account => <option key={account.login_id} value={account.login_id}>{account.login_id}</option>)}</select></div>
+          <div className="space-y-1"><label className="text-xs text-muted-foreground">Portal username</label><Input value={username} onChange={event => setUsername(event.target.value)} placeholder="guest_name" /></div>
+          <div className="space-y-1"><label className="text-xs text-muted-foreground">Temporary password</label><Input value={password} onChange={event => setPassword(event.target.value)} type="password" minLength={8} placeholder="At least 8 characters" /></div>
+          <Button className="sm:col-span-3 sm:w-fit" disabled={!loginId || !username || password.length < 8} onClick={issue}>Issue Guest access</Button>
+        </div>}
+      </>}
+    </CardContent>
+  </Card>
 }

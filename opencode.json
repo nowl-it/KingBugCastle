@@ -5,6 +5,16 @@
     "ghidra": {
       "type": "remote",
       "url": "http://127.0.0.1:8081/mcp"
+    },
+    "aseprite-mcp": {
+      "type": "local",
+      "command": [
+        "uv",
+        "--directory",
+        "/home/nowl/Code/aseprite-mcp",
+        "run",
+        "aseprite-mcp"
+      ]
     }
   }
 }

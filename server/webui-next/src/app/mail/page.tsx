@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react"
 import { useCatalog, usePlayer, usePlayers, runMutation } from "@/lib/api"
-import { PlayerBar, usePlayerSelection } from "@/components/player-context"
+import { usePlayerSelection } from "@/components/player-context"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,14 +10,18 @@ import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { Mail, Send, Trash2, Search, Users, UserRound } from "lucide-react"
 
+type CatalogReward = { id: number; name: string }
+type PlayerSummary = { id: string; name: string }
+type Post = { id: number; title?: string; text?: string; rewardType?: string; rewardId?: number; rewardAmount?: number; untilAt: string }
+
 export default function MailPage() {
   const { data: catData, error: catalogError } = useCatalog()
   const { selectedId } = usePlayerSelection()
   const { data: detail, mutate: mutateDetail } = usePlayer(selectedId || undefined)
   const { data: players } = usePlayers()
 
-  const grantable = catData?.grantable || []
-  const catalog = catData?.catalog || {}
+  const grantable = (catData?.grantable || []) as string[]
+  const catalog = catData?.catalog as Record<string, CatalogReward[]> | undefined
 
   // Recipient mode: "all" (broadcast) or "pick" (one or more players)
   const [mode, setMode] = useState<"all" | "pick">("all")
@@ -33,20 +37,20 @@ export default function MailPage() {
   const [q, setQ] = useState("")
   const [pq, setPq] = useState("")
 
-  const rewardList = useMemo(() => catalog[rewardType] || [], [catalog, rewardType])
+  const rewardList = useMemo(() => catalog?.[rewardType] || [], [catalog, rewardType])
   const matched = useMemo(() => {
     const query = q.trim().toLowerCase()
     const list = query
-      ? rewardList.filter((r: any) => String(r.id).includes(query) || (r.name || "").toLowerCase().includes(query))
+      ? rewardList.filter((r) => String(r.id).includes(query) || (r.name || "").toLowerCase().includes(query))
       : rewardList
     return list.slice(0, 20)
   }, [rewardList, q])
 
   const playerList = useMemo(() => {
-    const arr = Array.isArray(players) ? players : []
+    const arr = (Array.isArray(players) ? players : []) as PlayerSummary[]
     const query = pq.trim().toLowerCase()
     return query
-      ? arr.filter((p: any) => (p.name || "").toLowerCase().includes(query) || (p.id || "").toLowerCase().includes(query))
+      ? arr.filter((p) => (p.name || "").toLowerCase().includes(query) || (p.id || "").toLowerCase().includes(query))
       : arr
   }, [players, pq])
 
@@ -131,7 +135,7 @@ export default function MailPage() {
                     <Input placeholder="Filter players..." value={pq} onChange={(e) => setPq(e.target.value)} className="pl-8 h-9" />
                   </div>
                   <div className="max-h-36 overflow-y-auto rounded-md border border-border divide-y divide-border">
-                    {playerList.map((p: any) => (
+                    {playerList.map((p) => (
                       <label key={p.id} className="flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm hover:bg-muted/50">
                         <input type="checkbox" checked={picked.has(p.id)} onChange={() => togglePick(p.id)} className="accent-primary" />
                         <span className="min-w-0 flex-1 truncate">{p.name}</span>
@@ -189,7 +193,7 @@ export default function MailPage() {
                       <Input placeholder={`Search ${rewardType} names...`} value={q} onChange={(e) => setQ(e.target.value)} className="pl-8" />
                     </div>
                     <div className="max-h-40 overflow-y-auto border rounded-md divide-y divide-border">
-                      {matched.map((r: any) => (
+                      {matched.map((r) => (
                         <button key={r.id} onClick={() => { setRewardId(String(r.id)); setPickedId(String(r.id)) }} className={`w-full flex items-center justify-between px-3 py-1.5 text-left hover:bg-muted/50 ${pickedId === String(r.id) ? "bg-muted/70" : ""}`}>
                           <span className="text-sm">{r.name}</span>
                           <span className="text-xs text-muted-foreground font-mono">#{r.id}</span>
@@ -223,7 +227,7 @@ export default function MailPage() {
             {selectedId && !posts.length && <p className="px-4 py-8 text-sm text-muted-foreground">No mail waiting.</p>}
             {selectedId && posts.length > 0 && (
               <ul className="divide-y divide-border max-h-[52vh] overflow-y-auto">
-                {posts.map((p: any) => (
+                {(posts as Post[]).map((p) => (
                   <li key={p.id} className="flex items-start justify-between gap-3 px-4 py-3">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">

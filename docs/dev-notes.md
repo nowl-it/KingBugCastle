@@ -128,6 +128,47 @@ tests/test_invasion_reward.py` — the `check_*` functions are not pytest-collec
   populated for the caller. Empty fallback model → `RankingPanel` NRE — routes must return
   populated rows.
 
+### Original-server seasonal boards (verified 2026-08-24)
+
+- Production ranking host: `https://kgc-ranking-1.awesomepiece.com` (not the main
+  `kgc-k8s-1` API, which returns 404 for `/ranking/*`). Direct unauthenticated requests with
+  header `version: 172.0.01` reach its auth layer and return `401 WrongTokenError`; stale
+  `169.1.05` returns `403 NotLatestVersion`. The same applies to `172.0.00`.
+- Current season must be read with the same account session: `GET /pvp/info` for Arena and
+  `GET /colosseum` for Strife. Use their `season` field respectively in:
+  `GET /ranking/pvp-ranking?season=<n>&useCache=true` and
+  `GET /ranking/colosseum-ranking?season=<n>&useCache=true`.
+- Auth is the client header `accesstoken`, not `Authorization: Bearer`; preserve a current
+  client `version` header. `api/ranking/fetch_seasonal.py` reads both season values and fetches
+  both boards with `KGC_TOKEN=<accesstoken>`; set `KGC_VERSION` only when using a different APK.
+- Infra discovery `GET https://castle-infra-server-65408603887.asia-northeast3.run.app/api/cloud-run/default-ranking?location=asia-northeast3&useReplica=false`
+  currently returns a `qa-ranking-default` Cloud Run URL. It produced HTTP 500 for direct board
+  reads in this check, so do not substitute it for the verified production ranking host.
+
+### Guest token automation vs XIGNCODE gate (verified live 2026-08-24)
+
+Probed against production `kgc-k8s-1` (main API has no version WAF — old `170.1.00` /
+`169.1.05` headers are still accepted there, unlike the ranking host):
+
+- `POST /auth/register` `{type:4, id:"", userName, castleName, kingPostfix:1, castlePostfix:1,
+  version:172001}` works unauthenticated and returns the account's `loginId`
+  (server-assigned, shape `Guest_` + 10 uppercase alnum). **Arbitrary names are rejected**
+  (`code:400 WrongKingName`, e.g. "Guest1234"); random 8-char uppercase+digits passes.
+  The v170-era "register returns accessToken" behavior is **gone** — v172 always answers
+  `accessToken: null`, regardless of client version headers.
+- Every token-issuing endpoint requires a valid XIGNCODE cookie and answers
+  `401 WrongTokenError` without one: `/auth/auth?id=<loginId>&version=…&cookie=` (alias
+  `/auth` → `code:410 Fail` for these ids), `/auth/xcd?cookie=`, `/auth/login`. Fake cookies
+  fail identically. `/auth/xcdSeed?version=` works unauthenticated and returns the seed for
+  the native SDK. Conclusion: tokens cannot be minted outside the genuine client.
+- Working pipeline: harvest a token from a real session with the passive addon
+  `api/auth/token_harvester.py` (`mitmdump -s api/auth/token_harvester.py`, tap Guest login
+  once in the stock client → writes repo-root `captured_token.txt` + `captured_guest.json`)
+  → `api/ranking/fetch_seasonal.py` auto-loads it. `api/auth/guest_login.py` scripts
+  register / id-reuse / seed fetch but stops at the XIGNCODE gate by design. Two probe
+  accounts (`Guest_D27R24JK8S`, `Guest_2HWUF68893`) remain registered on official from these
+  tests — there is no delete endpoint without auth.
+
 ## 3. Daily reset (2026-07-31)
 
 `tomorrow` must be **derived** (`next_reset_iso()` — next UTC midnight, `+7d` for `nextWeek`),
@@ -135,6 +176,60 @@ never stored: `Scene_Lobby.Update` (RVA `0x34EA5F0`+) re-runs the whole login ch
 `now >= tomorrow_` (`PlayerDataResponseModel.tomorrow` @ 0xD0). A past value = constant
 re-login loop, 17 req/s, NO exceptions. Test: `server/tests/test_daily_reset.py`.
 Fixed-period loops with no exception = client timer, not retry.
+
+## 3a. Discord CDN monitor (2026-08-24)
+
+- `scripts/check_cdn_update.sh` owns update detection; it invokes
+  `server/discord_notify.sh` only for a new CDN folder, an in-place XML republish, or a newly
+  observed store APK version. No-change and local-staleness results must stay quiet.
+- The notifier posts with the existing Discord bot to channel `1541439188686213221`. Its bearer
+  token is a single line in ignored `server/secrets/discord_bot_token` (or `DISCORD_BOT_TOKEN`),
+  never a tracked config value.
+- `systemd/kgc-cdn-monitor.service` runs `scripts/run_cdn_watcher.sh` as a user service. The
+  wrapper posts one online message on start, checks immediately, then sleeps 1800 seconds.
+- **2026-08-25 format fix:** Bash does not turn `\n` inside ordinary double quotes into line
+  breaks. Build the Discord content with `printf`, so it contains real newlines; normalize both
+  folder dates from `YYYY_MM_DD` to `YYYY-MM-DD` before sending.
+- CDN `2026_08_25` was refreshed with `refresh_master_data.py`: 22 local files were rebased,
+  all five `local_mods` replayed without warnings, and `response_config.json` now advertises
+  that patch folder. The rebuilt XML hash is `ef2d0d9c2c26a5a1cb8a3bfc5d001266_4031397`.
+- Pristine `2026_08_13 → 2026_08_25` delta is six files: new v173.1-gated Mystic treasure
+  `30043` (Vitacorde, for unit `10060`), its buffs/visual skill, a guard-duration metadata fix
+  for accessory synergy `10082`, `Unit10390AI` assigned to Rie (`10390`), and KR-only upcoming
+  Pick-and-Pick mode text. Pristine `30043` has `MinVersion=173100`; local_mods lowers it to
+  `172001` for the deployed v172.0.01 client.
+- `FetchComplete` is a deliberate private-server loading-text override: "Ready to bug! Starting
+  the fix now!" and 12 locale equivalents. The `2026_08_25` refresh reset it to the official
+  text; `_apply_fetch_complete` in `server/local_mods` restores all 13 versions idempotently.
+
+### Reference-derived Frieren idle sheet (2026-08-24)
+
+- `server/assets/frieren/frieren/idle_2x2/` contains a standalone four-frame (`2x2`) pixel-art
+  idle loop derived from `Illustration_1040.png`. It is an auxiliary generated asset, not the
+  production `Unit_10570_03` atlas or a replacement for `rebuild_frieren_sprites.py`.
+- Strict processing passed: no source/output edge contact, empty or clamped frames; body-scale CV
+  `0.0103` and anchor-Y std-dev `0.0332` (limits `0.08` / `0.05`).
+
+### Pixelorama Frieren single-sprite refinement (2026-08-25)
+
+- Source: `server/assets/frieren/frieren/Frieren KGC Sprite.pxo` is a Pixelorama `60x76` one-frame,
+  one-layer draft based on `Illustration_1040.png`. The `.pxo` stores raw RGBA at
+  `image_data/frames/1/layer_1` (`60*76*4` bytes) plus an 8x `preview.png`.
+- `server/assets/frieren/frieren/refine_frieren_sprite.py` is deliberately conservative after the
+  first over-processed attempt looked muddy: it preserves every source color/pixel cluster and only
+  clears edge-connected near-black background to alpha. It writes both the legacy refined filenames
+  and explicit `alpha_clean` filenames, including `Frieren KGC Sprite alpha clean.pxo`. It does
+  **not** replace the original `.pxo`.
+- The optional `Frieren KGC Sprite color pass.pxo` is a separate, localized material pass: opaque
+  dark fill clusters (not only pure black) become dark violet (clothing/collar), cold lavender
+  (hair), warm brown (staff metal), warm skin shadow, or boot shadow. It raises only lavender,
+  gold, and red chroma; the white robe, skin, eyes, original canvas size, and hard alpha remain
+  intact. The only pure-black pixels left are the eye/eyelash cluster. It is a revision candidate,
+  never a replacement for the original draft.
+- For subsequent user-directed edits, start directly from `Frieren KGC Sprite.pxo`, not an alpha or
+  colour pass. Do not infer staff-head mechanics from the low-resolution draft: two automated
+  attempts at ruby braces were rejected and deleted. Require a user-marked three-bar overlay or
+  explicit pixel endpoints before altering that assembly.
 
 ## 4. Auth & sessions (2026-08-18)
 
@@ -148,6 +243,89 @@ Fixed-period loops with no exception = client timer, not retry.
   `""` or `guest-0001` row. Full write-up: `docs/multi-account-login.md`.
 - `dev-0001` = NightOwL since 2026-08-18 (uid `p-410890b421a5`, merged; old KingBug save
   deleted, backup in `server/state/backups/players.db.bak-uidmerge-*`).
+
+### Official-token harvesting — Firebase Test Lab verdict (2026-08-24, DEAD END)
+
+Goal was a real official `accesstoken` for the ranking API. Ran the **stock v172.0.01 client**
+on Test Lab physical Pixel 8a (`model=akita,version=34`, project `kgc-harvest-43937`) with a
+custom instrumentation APK that dumped `shared_prefs` every few seconds and auto-tapped dialogs:
+
+- Stock xapk → single APK via APKEditor, then **re-sign** (zipalign + apksigner debug key) or
+  Test Lab rejects with `NO_SIGNATURE`. Harness: plain JUnit4 `@Test` +
+  `InstrumentationRegistry.getInstrumentation()` + UiAutomator; **no** `android.test.*`
+  (removed in API 34 → `NoClassDefFoundError`). `targetPackage=com.awesomepiece.castle`
+  means instrumentation runs inside the game process.
+- Game installs/launches fine and writes prefs (Unity Screenmanager keys, airbridge,
+  tapjoy…), but the process dies at **T+75s on every run**: clean `exit(0)` normally, or
+  `FORTIFY: pthread_mutex_lock called on a destroyed mutex` when our UI-poking races the
+  teardown. Right before death its threads scan `/proc/net/tcp|unix`, `/dev/configfs`,
+  `/system`, and read `Settings.Global adb_enabled` (always on for Test Lab). The GPGS
+  "Create a Play Games profile" dialog is NOT the cause (tapping Cancel only delays it).
+- Verdict: **XIGNCODE environment-kill ~75s after launch, before any server login** — no
+  `loginId`/`accesstoken` is ever written. No amount of UI automation fixes this; don't burn
+  more matrices on this route.
+- Re-confirmed §2 above: `/auth?id=` needs `version` in the **query string** (header alone →
+  `403 최신 버전이 아닙니다 (Version)`); with query version ≥172.0.01 the check passes and an
+  unknown id gives `404 존재하지 않는 계정입니다` (the old iOS guest id is gone/not visible to
+  Android-platform lookups). Registering fresh guests still works but token issuance stays
+  behind the XIGNCODE cookie gate.
+
+### QEMU ARM64 emulator verdict (2026-08-24, blocked)
+
+- Host is x86_64. The normal Android Emulator launcher refuses the API 33 Google APIs ARM64
+  image with `AVD's CPU Architecture 'arm64' is not supported by the QEMU2 emulator on x86_64`.
+- Calling the bundled `qemu-system-aarch64` frontend directly with `-avd-arch arm64` bypasses that
+  check. Its `ranchu` machine then always appends `-soundhw virtio-snd-pci`, which fails because
+  the ARM64 ranchu machine has no PCI bus, even with `-no-audio` and `hw.audioOutput=no`.
+- Adding `-qemu -M virt` avoids the PCI error. The correct AVD `userdata-qemu.img` (8 GiB virtual
+  size) is required; the stock `userdata.img` is only 1 MiB. With that fix Android API 33 mounts
+  system/vendor/data and reaches the vendor HAL start sequence, but the bundled QEMU frontend
+  segfaults around the graphics/USB HAL startup before `adbd` becomes online. `-gpu off` does not
+  change the result. No APK login or token was reached; XIGNCODE was not patched.
+- Do not spend more time on this direct-emulator variant unless switching to a compatible
+  Cuttlefish/full-system image or a different emulator build. Redroid remains the only bootable
+  ARM64 path tested here, but its stock client dies around T+75s before login.
+- Follow-up: Android CI build `16102939` on `aosp-android-latest-release` provides matching
+  ARM64 Cuttlefish images, but the ARM host package cannot execute on this x86_64 host. The
+  x86_64 host package rejects both `qemu_cli` and `crosvm` here, and cannot run the ARM64 guest.
+  The matching x86_64 Cuttlefish image is not useful for this APK: the stock ARM64 APK fails
+  with `INSTALL_FAILED_NO_MATCHING_ABIS` on both Google APIs and Google Play x86_64 AVDs;
+  both report `ro.dalvik.vm.native.bridge=0`. The remaining viable route is a real ARM64
+  device/runner, or an emulator/runtime that explicitly supplies ARM64 translation.
+
+
+### Official iOS iCloud-password prompt — investigation boundary (2026-08-29)
+
+- Reported symptom: the unmodified official iOS client repeatedly presents an iCloud-account
+  password prompt despite an already-signed-in Apple account.
+- Repository evidence: there is no IPA/XCArchive, entitlement, provisioning profile, iOS device
+  log, crash report, or iOS-native source here; the server has no CloudKit, StoreKit, GameKit, or
+  Sign in with Apple implementation. It only records the client-supplied account type (`2`
+  GameCenter, `3` AppleID) after login. Therefore no private-server response is evidenced as the
+  direct source of this OS-owned prompt.
+- Do not attribute the prompt to a particular Apple service without its exact text and device log.
+  The discriminating evidence is the presenting framework/caller in Console/sysdiagnose, plus the
+  official IPA's entitlements. Candidate owners to distinguish are Game Center authentication,
+  iCloud Keychain/CloudKit, and StoreKit receipt/restore; they require different fixes.
+- App Store lookup on 2026-08-30 confirms official iOS `172.1.00` (released 2026-08-26) declares
+  Game Center support. `scripts/capture_ios_auth_logs.sh` captures and redacts the relevant
+  device log services over USB, so the presenting Apple framework can be identified before an
+  IPA patch is considered.
+- **Cause confirmed from the on-device v172.1.00 capture (2026-08-30): this is StoreKit, not
+  Game Center/iCloud.** At `07:51:31` `storekitd`, proxied by
+  `com.awesomepiece.castle`, requests the IAP catalog and transaction/entitlement caches. At
+  `07:51:32.300` it starts `TransactionHistoryRequest` with
+  `AccountRequirement.forceAuthentication(useBiometrics: false)` for the KGC production client;
+  `appstored` then faults that an interactive authentication was requested by a background daemon
+  (it should use silent-preferred) and at `07:51:33.935` presents the Apple Account password UI.
+  The client must not launch that force-auth transaction sync during boot: defer a user-initiated
+  restore/purchase refresh until the shop action, and use a non-interactive entitlement/cache
+  read for launch. This cannot be corrected by the game server; it requires an official iOS source
+  change or a legally supplied, inspectable IPA. The log has one prompt event in this run.
+- A first revision of the capture script did not redact quoted `storekitd.CacheAccount(token: ...)`
+  values. The stored `.log` files are already ignored by Git, but treat that original capture as
+  sensitive and do not upload it. The script now redacts quoted token, GUID, credentials and email
+  values before writing new captures.
 
 ## 5. Reward vocabulary (2026-08-09/18)
 
@@ -188,11 +366,121 @@ Fixed-period loops with no exception = client timer, not retry.
 
 - `docs/cdn-master-data.md` — bundle rebuild, Strings gotchas (no XML comments in
   Strings_*.xml — breaks the whole locale's Localizer), Skill/Unit key-redirect trick.
-- Tools: `server/rebuild_xml_bundle.py`, `server/refresh_master_data.py`; pristine backup
+- Tools: `server/builders/rebuild_xml_bundle.py`, `server/builders/refresh_master_data.py`; pristine backup
   `server/real_cdn/xml.bak` (md5 `779193a15d1377a7b8c2e6edfbe94095`).
 - **Host rebinding needs two passes**: `patch_hosts.py` (stringLiteral table) +
   `patch_leftover_hosts.py` (field/parameter defaults — `castle-infra-server…run.app`,
   `kgc-cdn-1.awesomepiece.com/patch/`). Verify 0 real hosts remain after.
+
+### 8a. Adding a distinct skin asset set (Frieren/Farael, 2026-08-20)
+
+- Never point a new skin row at an existing skin's `<Prefab>` / `<Sprite>` names and then replace
+  that Texture2D. `1057002` owns `Unit_10570_02`, `Unit_10570_02_0..18`, prefab
+  `Unit_10570_02`, and `Unit_Illust_10570_02`; overwriting either texture changes the original
+  Morning Star skin too.
+- Frieren `1057003` uses the independent namespace `Unit_10570_03`:
+  `server/cli/inject_skin.py` restores pristine `base_assets.apk`, clones the sprite Texture2D plus
+  all 19 Sprite sub-assets, clones the prefab hierarchy/components plus its 10 AnimationClips and
+  AnimatorController while sharing materials/VFX/MonoScripts, remaps its 20 external sprite PPtrs,
+  and clones the illustration Texture2D/Sprite as `Unit_Illust_10570_03`. Every cloned Sprite gets a
+  deterministic render GUID distinct from `02`; retaining `m_RenderDataKey` can make Unity resolve
+  the source Sprite or render the cloned portrait empty. It also adds matching AssetBundle
+  container/preload rows; cloning serialized objects without those rows does not make them loadable
+  by name.
+- `Unit_10570_02` is a **650x560 atlas of 19 fixed 130x140 frames** (5 columns, then four
+  frames in the final row); every Sprite uses pivot `(0.5, 0.235)`. Its serialized
+  `SpriteSheetData.sheets` gives the runtime order: Front = `0,1,2,3,4,18`, Side =
+  `5,6,7,8,9,5`, Back = `10,11,12,13,14,10`; `15..17` are magic silhouettes. This mapping is
+  authoritative — frame 18 is the front-facing prefab/thumbnail idle, not a side/run frame.
+  `Unit_10570_02_reference.png` is the unmodified 650x560 Texture2D extracted from the v172
+  `base_assets.apk` sprites bundle; it is a **geometry-only** input and never a character-design
+  reference. `server/cli/rebuild_frieren_sprites.py` rebuilds a direct 5x4 Frieren design board:
+  cells 0..18 map one-to-one to runtime frames and cell 19 remains transparent. It fits each
+  generated pose into the original frame envelope at integer coordinates with NEAREST only, locks
+  the final atlas to a shared 20-colour no-dither palette, and normalizes frames 15..17 to a
+  white/cyan magic silhouette. The design board (`Frieren_source_design.png`) must be created from
+  Frieren-only design reference; never reuse the `02` character's face, hair, costume, palette, or
+  staff. Reproducible inputs/outputs live under `server/assets/frieren/`:
+  `Frieren_source_design.png`, `Unit_10570_02_reference.png`, `Unit_10570_03.png`, and
+  `Unit_10570_03_comparison.png`.
+- `inject_skin.py` consumes those repository assets directly (no `/tmp/farael_assets` dependency).
+  Run the atlas rebuild first, inspect `Unit_10570_03_comparison.png`, then run the injector. The
+  original `Unit_10570_02` hash check is the guard against ever modifying Morning Star again.
+- AssetBundle container rows are still insufficient: Addressables resolves the XML names through
+  `assets/aa/catalog.json`. A missing catalog key produces exactly this symptom: the skin XML row and
+  name render, but the thumbnail/pixel prefab are blank and the large portrait falls back to the
+  unit's default illustration. The injector therefore clones five compact locations from `02`:
+  `Unit_10570_03` (Texture2D + Sprite), `Character_Unit_10570_03` (GameObject), and
+  `Unit_Illust_10570_03` (Texture2D + Sprite). The first illusts-bundle clone passed offline checks
+  but rendered blank at runtime. The target portrait is now stored in the sprites bundle and its
+  catalog locations clone the proven sprite-bundle dependency; provider/resource type remain.
+  It appends 3 internal IDs, 3 ASCII keys/buckets, and 5 seven-int entry records without changing
+  any existing key/index.
+- The private v172.0.01 build disables bundle CRC at runtime:
+  `AssetBundleRequestOptions.get_Crc` file `0x5FC5F10` returns zero, and direct CRC argument reads at
+  `0x5FC8484`, `0x5FC639C`, `0x5FC648C` are replaced with `mov wN,wzr`. Editing catalog ExtraData is
+  unnecessary and error-prone; changing the key/bucket/entry tables is required and independent of
+  CRC bypass.
+- Verification: injector reloads all three bundles, proves the `02` texture/portrait hashes are
+  unchanged, checks `Unit_10570_03_18` points at the cloned texture with a distinct render GUID,
+  and proves every cloned frame renders through `Sprite.image` as a 130x140 full rectangle. This
+  last check is essential: `Sprite.m_Rect` alone does not control rendering. Source `02` stores a
+  silhouette-specific `m_RD.textureRect`, `textureRectOffset`, `uvTransform`, tight polygon
+  `m_VertexData`, and `m_IndexBuffer`; retaining them crops a wider Frieren pose and Unity then
+  magnifies that crop. `_set_full_rect_sprite` replaces all 19 target render records with a
+  four-vertex quad covering the declared cell while preserving pivot `(0.5, 0.235)` and PPU 1.
+  The illustration Sprite has the same trap: cloning `Unit_Illust_10570_02`'s 908x912 tight mesh
+  over Frieren's 1024x1024 portrait cuts the face/body into holes even though the Texture2D and
+  catalog key are correct. The injector now applies the full-rectangle quad to
+  `Unit_Illust_10570_03` too and verifies `Sprite.image == (1024,1024)` plus its cloned texture PPtr.
+  The XML row explicitly sets `<IllustSprite>Unit_Illust_10570_03</IllustSprite>`; this matches the
+  client's inferred default but removes inheritance/format ambiguity during diagnosis.
+  Frame semantics still matter after the geometry is fixed: `Unit_10570_03_18` is both the prefab's
+  default Sprite and the `<Sprite>` used by the skin thumbnail. A running pose in cell 18 therefore
+  makes both UI surfaces look wrong even when every PPtr/UV is valid. The production atlas maps
+  frame 18 to the board's calm **front-facing** standing pose with a complete vertical staff. `--frame18`
+  remains available only as an explicit optional override; the obsolete side-facing v2 override
+  is no longer the default. Runtime confirmation of the new sprites-bundle portrait placement is
+  still pending user inspection; do not mark it solved solely from UnityPy verification.
+  The verifier also confirms both prefabs coexist with disjoint 10-clip/controller dependencies,
+  and checks all five new catalog locations resolve to the three new asset paths. Rebuild
+  `server/real_cdn/xml`
+  afterward so skin `1057003` points at `Unit_10570_03` / `Unit_10570_03_18`.
+
+### 8b. Unit_10570 animation clip semantics (2026-08-20)
+
+The 19 atlas cells are selected by `SpriteSheetData.SetSheet` + `SetSpriteIndex`; they are
+not played as one linear 0→18 animation. In the v172.0.01 `characters_assets_all` bundle,
+`AnimatorController Unit_10570` has ten clips: `Idle_10570`, `Run_10570`,
+`Attack_{Front,Side,Back}_10570`, `Shoot_{Front,Side,Back}_10570`, `Skill_10570`, and
+`End_10570`. The directional sheet arrays are:
+
+```
+Front:  index 0,1,2,3,4,5 -> atlas frames 0,1,2,3,4,18
+Side:   index 0,1,2,3,4,5 -> atlas frames 5,6,7,8,9,5
+Back:   index 0,1,2,3,4,5 -> atlas frames 10,11,12,13,14,10
+```
+
+Clip event timelines (60 Hz clips, seconds):
+
+| clip | events / visual role |
+|---|---|
+| `Idle_10570` | `SetSpriteIndex(5)` at 0.0 → Front idle frame 18 (prefab/thumbnail pose) |
+| `Run_10570` | `SetSpriteIndex(0)` → directional frame 0/5/10; locomotion base |
+| `Attack_Front` | frame 1 at 0.0 (wind-up), `ShootSkill` + frame 2 at 0.333 s (release), end 0.667 s |
+| `Attack_Side` | same timing using Side frames 6→7 |
+| `Attack_Back` | same timing using Back frames 11→12 |
+| `Skill` | frame 3 at 0.0 (cast/wind-up), `ShootSkill` + frame 4 at 0.333 s (active cast), `SkillEnd` at 2.667 s |
+| `Shoot_Front/Side/Back` | one-shot projectile pose: directional index 4 → frame 4/9/14 |
+| `End` | index 0 at 0.0, `SkillEnd` at 0.333 s; returns from skill/action |
+
+The facing sheet is selected by the unit's direction blend/state (`Dir_Blend`); clips reuse the
+same index meanings across Front/Side/Back. Therefore frame 0 specifically means the first
+directional locomotion/base pose (front-facing when the active sheet is Front), not the idle pose
+and not a generic thumbnail. Frame 1 is front attack wind-up, frame 2 the front attack release,
+frame 3 skill wind-up, and frame 4 the front shoot/active pose. Frame 18 must remain the calm
+front idle because the prefab default Sprite and skin thumbnail point to it. A reskin must preserve
+these action roles and staff/hand anchors per frame.
 
 ## 9. Content-unlock gates (2026-07-11)
 
@@ -420,6 +708,421 @@ and play a colosseum match that **does not affect tier, score, or missions**.
 `gameType` or `isCustomMatch` flag in the `complete-round-data` body, which it currently does
 not do. For now, friendly matches count toward score like regular matches.
 
+## 14. Frieren Aseprite frame-0 review draft (2026-08-20)
+
+- The prior `server/assets/frieren/Frieren_frame_00.aseprite` / `Frieren_frame_00.png` paths are
+  stale (verified absent). The current review-only artifact is the v4 pose-matched redraw
+  `server/assets/frieren/drafts/00_frieren_frame_0_v4.aseprite`, with native PNG, 1x/4x/8x
+  previews, source-vs-Frieren comparison, constraint JSON, and build entry point at
+  `pixel-art/frieren-frame-00/build_frieren_v4.py`.
+- Frame 0 is a one-cell 130×140 transparent RGBA redraw. The original sprite is used as the
+  pose/layout reference (head, hands, feet, staff diagonal); the illustration and a dedicated
+  render supply Frieren identity. The result is palette-locked, nearest-neighbour reduced to the
+  68×75 cell, and hard-alpha cleaned. Bbox `(46,38)-(108,109)` is close to source
+  `(45,38)-(108,108)`; the illustration itself is not cropped into a sheet.
+- This is pending user visual approval only; it does not replace `Unit_10570_03.png` or enter the
+  injector/build path. Do not infer or draw frames 1–18 without explicit approval.
+
+## 15. Codex pixel-art skill stack (2026-08-20)
+
+- Codex skills live at `/home/nowl/.codex/skills`. `generate2dsprite` is a symlink to the checked
+  Agent Sprite Forge source at `/home/nowl/tools/agent-sprite-forge`; its isolated `.venv` has
+  Pillow and numpy. `pixel-art-studio` is a Codex-adapted copy with deterministic Pillow tools,
+  Aseprite-compatible JSON export, Codex-specific iterative three-pass instructions, and no
+  remaining hard-coded `.claude`/`/Users` installation paths. `pixel-sprite-reskin` enforces a
+  source-sheet geometry/pose lock for skins.
+- Aseprite CLI (`/usr/bin/aseprite`, v1.3.18.2-dev) and the `aseprite` MCP server are already
+  configured in `/home/nowl/.codex/config.toml`; do not replace that configuration. Use
+  `/home/nowl/sprite-skill-test/` for a minimal validated 32×32 transparent test asset.
+
+## 16. Generated Frieren production reskin (2026-08-20)
+
+- The complete production review export is now
+  `server/assets/frieren/generated/frieren_sprite_sheet_650x560.png`; individual native frames
+  are under `generated/frames/00.png` through `18.png`. It is a 5×4 650×560 RGBA atlas with
+  130×140 cells and an intentionally transparent cell 19.
+- `generated/build_frieren_sprite.py` is the reproducible build: it uses
+  `Unit_10570_02_reference.png` strictly for each cell's bbox/baseline/placement and the
+  independent Frieren design board strictly for character identity. It hardens every output edge
+  to binary alpha and a shared 22-colour Frieren material palette; frame 15–17 use the isolated
+  cyan/white silhouette palette. The large source board is retained as
+  `generated/frieren_design_master.png`, with 19 high-resolution editable pose crops in
+  `generated/design_frames/`; only those crops are reduced once, with NEAREST, for the game atlas.
+  Do not replace this with a whole-atlas resize.
+- `generated/validate_sprite.py` verifies atlas/frame dimensions and mode, binary alpha, an empty
+  final cell, and byte-exact integer grid placement. The last run passed. `geometry_constraints.json`
+  records the measured source envelopes and was checked against every output frame.
+- Editable outputs are `generated/frieren_sprite_sheet.aseprite` (atlas) and
+  `generated/frieren_animation.aseprite` (19 130×140 timeline frames). Its contiguous semantic
+  tags are Front_Base 0–4, Left_Base 5–9, Back_Base 10–14, Magic 15–17, Idle 18; the non-contiguous
+  runtime loops are recorded in `generated/animation_mapping.json`.
+- Accessory correction pass: the staff head now uses the reference's gold ring + red gemstone
+  treatment consistently across full/side/back/idle poses, preserving the original shaft angle,
+  ribbon anchor, and source geometry envelopes. Rebuild and Aseprite exports were regenerated and
+  visually checked after this pass.
+
+## 17. Client UI → web UI fidelity baseline (2026-08-24)
+
+- Do not recreate KGC screens from a screenshot with CSS. Trace the matching-version IL2CPP
+  controller first, export the original Unity `Sprite` assets, then capture the actual client
+  render as the initial visual baseline. Full playbook: `docs/web-ui-reconstruction.md`.
+- Verified Hero Detail is `CardInfoPanel` (v172.0.01 `Show` RVA `0x31829FC`), not the
+  in-battle `UnitInfoPanel`. It owns tabs Hero/Growth/Profile/Skin (`0..3`) and actions
+  `OnClickToggleDotIllust`, `OnClickUnitStatistics`, `OnClickSkillButton`, `OnClickTab(int)`.
+- Prototype: `server/hero-detail-prototype/`. The Farael fixture was captured from the running
+  v172.0.01 client; hero art `Unit_Illust_10570` and source UI sprites (frame/tab/item/skill/
+  treasure) were exported from v172.0.01 bundles. It is intentionally a visual baseline with
+  mapped accessible hotspots, not a claim that the screen's state is already web-native.
+
+## 18. Player Portal Phase 1 (2026-08-27)
+
+- Public portal is `GET /` (with `/player` retained as a compatibility route), served from its own
+  `playerportal_server:app` process on internal `:8082` (default public hostname
+  `https://player.kingbugcastle.id.vn`), from
+  `server/webui-next/out/player.html`; static Next assets are mounted at `/_next`. Game API stays
+  `kingbugcastle.id.vn → :8080`; admin stays `admin.kingbugcastle.id.vn → :8081`. Build with
+  `cd server/webui-next && ./node_modules/.bin/next build --webpack`. The host needs
+  `experimental.cpus=1`: default worker fan-out can exhaust its process limit.
+- **Identity invariant:** portal never creates a game account/save. Existing `accounts.login_id →
+  uid` is authoritative. `google_<sub>` can obtain portal cookie `kgc_player` only after that
+  mapping exists; Guest access can be issued only for an existing `Guest_*` mapping by the admin
+  dashboard. Guest credential password rotation revokes portal sessions; database stores SHA-256
+  token hashes, not browser tokens.
+- `google_login.make_state(target)` signs `game|portal`. Target `game` preserves native poller
+  handoff and only `server:app` registers `/glogin/callback`. Target `portal` is accepted only by
+  `playerportal_server:app` at `/portal/api/auth/google/callback`, then redirects to `/`
+  after issuing only the portal cookie. `playerportal_server:app` calls `playerdb.init()` at startup:
+  this matters because it can run without the game API, and portal session tables first appear in
+  migration v6. Set `PLAYER_PORTAL_PUBLIC_URL` to that hostname and register
+  both its callback and the game callback in Google OAuth. Do not route portal sign-in through
+  `/glogin/pending` or change the APK stub.
+- `SiteShell` portal branch must test `pathname === "/player" ||
+  pathname.startsWith("/player/")`. A bare `startsWith("/player")` also matches admin
+  `/players`, omits `PlayerProvider`, and makes `/players` prerender fail with
+  `usePlayerSelection must be used within PlayerProvider`.
+- Phase 2 uses **Google Ad Manager Rewarded Ads for Web**. `ticket_wallets`,
+  `ticket_provider_sessions`, `ticket_provider_events` and `ticket_log` were added in migration
+  v7. `POST /portal/api/ticket/video/start` creates an opaque `gam` session after local caps;
+  the Next portal loads GPT and only shows the video after `rewardedSlotReady`. Its browser-side
+  `rewardedSlotGranted` event calls `POST /portal/api/ticket/video/complete`, which consumes that
+  session id as its idempotent event id. Cooldown is 5 minutes, wallet cap 10, daily UTC cap 20.
+  This is intentionally weaker than a provider server callback: it is accepted for video-only UX,
+  so keep ticket value/caps conservative. Config: `GAM_REWARDED_AD_UNIT_PATH` is an absolute GAM
+  ad-unit path such as `/123456789/kgc_player_rewarded`.
+- Phase 3 self-grant lives in `playerdb.ticket_redeem_grant()`, not in a route:
+  it holds `write_lock` and changes the ticket wallet, audit log, player save and derived
+  projections in one DB transaction. The portal only exposes the small fixed catalog in
+  `playerportal._GRANT_CATALOG` (Gold 50,000; Heart 10; Item 100×20; Item 150×10). It does
+  not expose Cash, heroes, treasures, artifacts or accessories. Mail text is stored without
+  `@raw:`; `routes.inbox._process_posts()` adds that prefix only on the game wire. Focused proof:
+  `python3 server/tests/test_grant_self.py` verifies mail/ticket atomicity, concurrent spending,
+  and that a stale login mapping cannot consume a ticket.
+
+### Public portal deployment (2026-08-28)
+
+- Public state is a distinct SQLite file on OCI (`/home/ubuntu/kgc/server/state/players.db`), not
+  the workspace DB. The Player Dashboard must run on the OCI host to share its game account,
+  ticket and mailbox transactions. It is enabled as `kgc-playerportal.service`, bound only to
+  `127.0.0.1:8082`; its first start migrated the live database from schema v5 to v8 after the
+  normal automatic backup.
+- Caddy owns public `80/443` and proxies `kingbugcastle.id.vn → :8443`,
+  `admin.kingbugcastle.id.vn → :8081`, and `player.kingbugcastle.id.vn → :8082`. Its tracked
+  sources are `systemd/caddy.service` and `systemd/kgc-public.Caddyfile`; it runs unprivileged
+  with only `CAP_NET_BIND_SERVICE` and reads a root-owned copy of the existing self-signed origin
+  key. Cloudflared is instead a Docker container (`cloudflare/cloudflared`, bridge networking,
+  restart `always`), whose remotely managed Zero Trust ingress currently owns the public hostnames.
+  The portal must remain loopback-only: do **not** point its tunnel service at
+  `http://213.35.110.245:8082`, because Docker cannot reach that listener. Route it via Caddy
+  (`https://213.35.110.245:443` with origin TLS verification disabled for the self-signed
+  certificate) while retaining the `player.kingbugcastle.id.vn` Host header. The external hostname
+  must also have the Cloudflare Tunnel CNAME/DNS route; a tunnel ingress rule alone does not publish
+  DNS. Origin Caddy health returned HTTP 200 for the player host header.
+
+### Player Portal Phase 4–5 (2026-08-28)
+
+- Requests: `grant_requests` (v8) records the resolved game uid at submit time. Submit debits one
+  ticket and writes `ticket_log(request)` in the same transaction; approval mails the admin-selected
+  reward, denial refunds exactly one ticket and mails the reason. `resolve_grant_request()` owns its
+  flock, so dashboard's generic write middleware must skip `/api/requests/*` to avoid a nested
+  `flock` deadlock. UI: portal request panel + admin `/requests`. Proof:
+  `test_requests.py` and `test_requests_api.py`.
+- Donations: v9 adds `donations`, including `credited_at`, `credited_by` and `credited_tickets`.
+  A portal note is only an acknowledgement — it cannot credit tickets. `admin_credit_tickets()` is
+  the sole credit path, logs `admin_topup`, and atomically marks a donation credited so retries fail.
+  The player form is available both on the dashboard and `/player/donate`; admin UI is `/donations`.
+  `PLAYER_DONATE_INSTRUCTIONS` comes from optional `/etc/kgc/playerportal.env`, deliberately blank
+  until an operator supplies payment instructions. Proof: `server/tests/test_donate.py`.
+
+## 19. Project audit — release blockers (2026-08-28)
+
+- **Route coverage now defaults to v172.0.01** and accepts
+  `KGC_IL2CPP_SCRIPT_JSON` for an extracted artifact elsewhere. The verified v172.0.01 artifact is
+  at `il2cpp/v172.0.01/script.json` locally (SHA-256
+  `27349c11aafdae1632719de6d017d0409456be927dfff7044075892204a33445`); it is intentionally
+  untracked because it is generated from the proprietary client. It contains 261333 methods and
+  25742 strings; the v172.0.01 anchors `GetRankingServerEndPoint` (`0x2CBF2C4`),
+  `RegisterHackDetectionCallback` (`0x34E4EDC`), and `CheckFirebase` (`0x30479B8`) match. Keep
+  this exact artifact alongside the deployed server, or set `KGC_IL2CPP_SCRIPT_JSON` to its
+  absolute location. Do not substitute the known-stale generated route list.
+- **OAuth state secret hard-code removed.** Public/portal scripts and the portal systemd unit now
+  require `GLOGIN_STATE_SECRET` from deployment configuration; preflight fails if real Google OAuth
+  is enabled without it. The old tracked value must be treated as leaked and rotated on the host.
+- **Direct request readers share the streaming cap.** `security.read_capped_body()` is used by the
+  generic dispatcher, direct accessory/post routes and admin mail; an oversized chunked request
+  receives 413 before it is buffered. Proof: `server/tests/test_body_limit.py`.
+- **Sensitive debug logs removed from served routes.** Dashboard no longer prints request headers;
+  game/auth/shop/rift/artifact routes no longer write whole request bodies or cookie fragments.
+- **Public deployment configuration is externalized.** `serve_public.sh` and `deploy_hook.sh` load
+  `/etc/kgc/server.env` (override `KGC_ENV_FILE`) before preflight; on a personal machine with no
+  `/etc/kgc`, they fall back to ignored, mode-600 `server/secrets/server.env`. Stand-alone
+  `preflight.py` reads the same simple `NAME=value` configuration without executing it as shell
+  code. This makes the OAuth state key, v172 `script.json` location, and proxy/loopback pairing
+  survive non-interactive deploys. `deploy_hook.sh` now refuses a dirty checkout and
+  dependency-install failure instead of stashing, swallowing errors, and potentially reloading an
+  inconsistent tree.
+- **Public OAuth origin respects deployment configuration.** `serve_public.sh` now treats
+  `https://kingbugcastle.id.vn` as its fallback only; an operator-provided `GLOGIN_PUBLIC_URL` from
+  `/etc/kgc/server.env` is no longer overwritten after that file is loaded. Proof:
+  `server/tests/test_deploy_config.py`.
+- **Public XAPKs can now use either the Cloudflare hostname or the origin IP.** The CI workflow
+  accepts `glogin_poll_port` (public default `80`), and `build_private.py` patches that value into
+  the native raw poller; local builds keep their `:8080` default. `kgc-public.Caddyfile` proxies
+  both `kingbugcastle.id.vn` and `213.35.110.245` to the loopback TLS game service. The direct-IP
+  routes strip client-supplied Cloudflare/forwarded-IP headers and replace `X-Forwarded-For` with
+  Caddy's peer address; the domain route accepts only Cloudflared's private Docker bridge before
+  preserving `CF-Connecting-IP`. This retains the source-address invariant of the Google native
+  handoff while allowing either baked `share_host`. Regression proof:
+  `test_public_caddy_serves_the_game_through_domain_and_origin_ip_safely` and
+  `test_native_poll_port_is_patched_relative_to_the_browser_host_buffer`. The Caddy binary is not
+  installed in this workspace, so validate and reload `/etc/caddy/Caddyfile` on the origin before
+  releasing the XAPK.
+- **Preflight refuses the dev Google-login bypass.** `GLOGIN_DEV=1` can create an authenticated
+  session without real OAuth and is valid only for a local development command. It is now a FAIL,
+  not a WARN, so `serve_public.sh` cannot expose it accidentally. Proof:
+  `test_preflight_refuses_the_google_dev_login_bypass`.
+- **GAM rewarded-video completion is browser-asserted, not provider-verified.** The portal now
+  rejects both browser start/complete calls with 503 even if an ad-unit path is configured; tickets
+  stay protected until a provider-verifiable server callback calls the existing accounting helper.
+- **Standalone portal gets the same public request boundary.** `CappedBodyMiddleware` limits bytes
+  at the ASGI receive layer before FastAPI can buffer a chunked `body: dict`; checking only
+  `Content-Length` or guarding route readers leaves that bypass. `security.register_portal()`
+  installs this cap and the shared per-IP rate limiter for `playerportal_server:app`, without taking
+  the game-save lock (portal ticket/grant transactions retain their own DB lock). Proof:
+  `server/tests/test_portal_body_limit.py`. It buffers no more than the cap and replays with
+  Starlette's own `_CachedRequest` receive bridge, preserving nested middleware's response-disconnect
+  lifecycle rather than fabricating a disconnect itself.
+- **Dashboard uses the public boundary too.** `dashboard.py` owns its own cross-process transaction
+  lock, but its `body: dict` administration endpoints were otherwise outside the game middleware.
+  It now installs `security.register_public()` in the enforced order: body cap → rate limit → admin
+  guard → Dashboard write lock. This prevents oversized or unauthorized writes from occupying the
+  lock while retaining Dashboard's atomic edits.
+- **Dashboard mutations have a server-side CSRF check.** When a browser sends `Origin`, it must
+  match the dashboard host (using `X-Forwarded-Proto` only under trusted-proxy mode); a foreign
+  origin receives 403 before the admin/session logic. Origin-less local operator calls remain
+  supported. Proof: `server/tests/test_dashboard_origin.py`.
+- **Dashboard admin cookies are HTTPS-only when the browser is HTTPS.** Local direct HTTP remains
+  available for development, while a trusted public proxy's `X-Forwarded-Proto: https` now sets the
+  `Secure` cookie attribute. This prevents the authenticated cookie from being sent over a later
+  cleartext request to the same dashboard host. Proof: `test_dashboard_cookie_is_secure_only_for_the_browser_facing_https_scheme`.
+- **Dashboard static fallback stays inside its export root.** Route paths are resolved before every
+  `FileResponse` and must remain under `webui-next/out`; a `..` traversal can no longer read Python
+  source, secrets, or arbitrary sibling files from the dashboard origin. Proof:
+  `test_dashboard_static_fallback_cannot_escape_the_export_root`.
+- **Manual portal launch matches systemd.** `serve_playerportal.sh` now loads
+  `/etc/kgc/playerportal.env` (override `KGC_ENV_FILE`), binds `127.0.0.1` by default, and rejects
+  `KGC_TRUST_PROXY=1` on a non-loopback bind. This prevents its old `0.0.0.0` default from exposing
+  a service intended to live behind Caddy/Tunnel. `bash -n` and the invalid trust/bind combination
+  were checked.
+- **The development stack is a cross-platform Python TUI and loopback-only by default.**
+  `server/run.py` supervises game HTTP/TLS, admin, and Next.js on Linux/macOS with POSIX sessions
+  and on Windows with native process groups plus `CTRL_BREAK_EVENT`/`taskkill` fallback. It finds
+  both `.venv/bin` and `.venv/Scripts`, stores logs in the platform temp directory, and gets curses
+  from the conditional `windows-curses` dependency on Windows. Enter/a/x/r control processes,
+  `d` wires ADB, and `q` stops the owned groups. All services bind to `127.0.0.1`; LAN testing remains
+  an explicit `KGC_DEV_BIND_HOST=0.0.0.0` opt-in. Proof:
+  `test_development_launcher_binds_loopback_unless_lan_access_is_explicit` and
+  `test_development_launcher_stops_the_process_group_it_started`, plus the simulated Windows
+  process-group/configuration checks in `server/tests/test_deploy_config.py`.
+- **Google pending handoff is address-bound.** The old fallback consumed the newest pending entry
+  for *any* source address (and, in local split-brain mode, fetched an entry from a different
+  server). Because the result is a Google account id accepted by `/auth`, that was an account
+  takeover path. `_get_and_clear_pending()` now reads only its hashed source-address slot and
+  `_client_ip()` delegates to `security.client_ip()`, so forwarded headers are trusted only under
+  the existing loopback-bound proxy invariant. Runtime `.glogin_pending_*` handoff files are ignored
+  by git. Proof: `server/tests/test_google_pending_security.py`.
+- **Google pending handoff is atomically published and claimed.** The OAuth callback now writes a
+  temporary same-directory file and atomically replaces the address-bound slot. Pollers atomically
+  move that slot into a unique claim file before reading it, so they cannot see an empty partial write
+  or return the same account id twice during an overlapping native-poller transition. Proof:
+  `test_pending_google_account_is_published_and_consumed_once`.
+- **Native `/auth` cannot mint a session for an arbitrary Google ID.** The endpoint previously
+  treated query parameter `id=google_<sub>` as proof of Google authentication, which permitted a
+  caller who knew an ID to obtain that account's bearer token. Retrieving `/glogin/pending` now issues
+  a 60-second, one-time, address-and-account-bound native-auth grant; `/auth` consumes that grant
+  before it can mint a session. The grant is atomically claimed and rejects different IDs, addresses,
+  replays, and expiry. Proof: `test_native_google_auth_grant_is_address_bound_fresh_and_single_use`;
+  the full native-route test now proves a direct request is denied before the poller handoff.
+- **Runtime maintenance is UTC-aware and lifecycle-owned.** `common.now_iso()` and
+  `next_reset_iso()` now use `datetime.timezone.utc`, preserving the client wire format while
+  avoiding deprecated naive UTC APIs on supported Python versions. The backup worker is owned by
+  FastAPI's lifespan context and is cancelled on shutdown rather than escaping as an orphan task.
+  A direct lifespan check confirms exactly one worker starts and none remains afterward.
+- **Save reads repair malformed card/deck shape before handlers see it.** A raw-save edit with a
+  non-numeric card key, non-dict card/deck, or malformed deck slot previously raised inside
+  `playerdb.load()` and made the entire account unloadable. The persistence layer now drops invalid
+  cards/entries, normalizes card identity/level, and returns exactly six valid-or-empty deck slots
+  plus six non-negative potential slots. Proof: `test_load_repairs_malformed_cards_and_decks_before_routes_use_them`.
+- **Account lookups reject non-string credential values.** `/auth/login` may carry its prior token
+  in decoded JSON; a dict/list was previously passed to SQLite as a bind parameter and raised
+  instead of simply being treated as an unknown token. `uid_for_token()` and `uid_for_login()` now
+  enforce their string contract at the shared persistence boundary. Proof:
+  `test_identity_lookups_reject_non_string_values_before_sqlite_binding`.
+- **External login IDs are bounded database keys.** Identity is now a non-empty string of at most
+  256 characters before it can reach the `accounts` index. Auth treats malformed IDs as absent while
+  preserving a valid token-refresh path; `bind_login()` rejects them at the persistence boundary so a
+  future caller cannot retain an arbitrary request blob. Proof:
+  `test_login_identity_is_a_bounded_string_before_persistence` and
+  `test_auth_rejects_a_malformed_new_identity_but_allows_session_refresh`.
+- **`accountId` is immutable through generic/raw admin saves.** It is the player's unique targetId
+  for rankings and profile lookups; a malformed value used to make a leaderboard's integer conversion
+  fail, and a pasted duplicate broke identity. `backfill_account_ids()` now treats unparsable IDs as
+  missing, while both generic and raw admin writes preserve the row's existing uid/accountId. Proof:
+  `test_backfill_repairs_malformed_account_ids_as_missing_identity` and
+  `test_dashboard_raw_save_preserves_the_player_account_identity`.
+- **Dashboard macro `legacy_max` parses artifact XML correctly.** It referenced `ET.parse()` without
+  importing ElementTree, so the macro always failed before granting relics/treasures. The XML parser
+  is now imported at the module boundary; a direct macro test executes the branch and verifies maxed
+  artifacts plus level-30/overcome-10 treasures.
+- **The WebUI standard is pnpm 11.3.0.** `package.json`, development launcher, portal guidance and
+  operator docs invoke `pnpm run ...`; existing installed binaries still validate TypeScript and
+  ESLint in the restricted environment. pnpm 11 defaults `verifyDepsBeforeRun` to `install`, so the
+  launcher passes `--config.verify-deps-before-run=false`; otherwise starting Next.js tries to
+  migrate/install the legacy npm-only graph and fails on ignored build scripts. Do not manufacture
+  `pnpm-lock.yaml`; migrate it deliberately on a networked development host.
+- **Static WebUI export has no production Next proxy.** The `/api/*` rewrite is declared only for
+  `next dev`; dashboard and portal serve the exported files themselves in production, so a rewrite
+  declaration there is both inert and makes Next warn. `outputFileTracingRoot` is pinned to the
+  repository root so an unrelated parent-directory pnpm lockfile cannot expand tracing. A full
+  webpack export now builds all 16 static pages without warnings.
+- **Runtime dependencies have one authoritative file.** Root `requirements.txt` is the tested
+  server runtime contract; `server/requirements.txt` includes it for compatibility and adds
+  UnityPy for asset/build flows plus cryptography for setup's cross-platform TLS certificate
+  fallback. CI installs the runtime contract plus pytest (not the unused
+  `httpx2` package), and CI/deploy path filters include root dependency changes so a dependency
+  update cannot silently skip validation or rollout. Workflow YAML parses and the current focused
+  test selection passes.
+- **Verification drift:** CI currently collects 69 pytest tests; many route-contract checks are standalone
+  `check_*` functions and are absent from CI. The WebUI TypeScript and ESLint gates now pass cleanly:
+  raw endpoint payloads are narrowed into page-level response types, polling/state synchronization is
+  documented at the exact effects that own it, and static image usage uses `next/image` unoptimized
+  for the export. Use `pnpm` for future frontend operations; the current tree still has only the
+  npm lockfile, and an attempted pnpm import cannot complete in the restricted environment because
+  the registry is unavailable. Perform that lockfile migration deliberately on a networked host.
+  `pytest.ini` pins pytest-asyncio's pending default to a function-scoped loop. On this Python 3.14
+  environment, both Starlette `TestClient` and `httpx.ASGITransport` block before returning from a
+  synchronous FastAPI endpoint (reproduces with an empty app); this is a framework/runtime harness
+  defect, not evidence of a server deadlock. Use focused async-transport tests here or a compatible
+  runtime/real Uvicorn listener for the legacy synchronous-route tests.
+  There is also a large dirty worktree (225 entries on audit), including tracked generated frontend
+  output; establish an owner/clean-build policy before merging unrelated work.
+- **APK bundle extraction never invokes a shell.** The editing and art-export CLIs share
+  `server/cli/bundle_extract.py`, which validates the APK path and invokes `unzip` with literal
+  argument-list semantics. A pathname containing shell metacharacters is therefore data, not code;
+  missing APKs fail before extraction. Proof: `server/tests/test_bundle_extract.py`.
+
+### Blacksmith and legacy Dominion recovery (2026-08-30)
+
+- `/artifact/crafting`, `/artifact/merge`, and `/artifact/polish` must mutate the saved
+  `ArtifactModel` rows; returning the correct response model with empty `results` only makes the
+  Blacksmith UI appear to succeed. Crafting charges 25/50/100 dust for Normal/King/God, merging
+  consumes three matching relics into the next tier within the XML `Root` family, and polishing
+  consumes Artifact ids 901/902/903 using their `AddPolishPoint` before increasing one option level.
+  `ensure_artifact_state()` seeds those three client-renderable polishing stones at 99,999 while
+  keeping incompatible synthesis stones excluded. Proof: `python3 server/tests/test_artifact_blacksmith.py`.
+- Tutorial #40 needs a server-side snapshot containing Chamber `10001` at `posIndex=1` and Inn
+  `10101` at `posIndex=0`; it hides and reveals those rows locally. `_terr()` repairs an empty
+  persisted plot to that snapshot. Proof: `python3 server/tests/test_territory.py`.
+
+### Official v172.0.01 XAPK → AssetRipper Unity project (2026-08-30)
+
+- The official source is `apk/com.awesomepiece.castle@172.0.01.xapk` (package
+  `com.awesomepiece.castle`, SHA-256
+  `c34c717620216121b11f031c5783c99afdc279c2c496810595f69d01f33a42ac`). Do not use the
+  root `KingBugCastle_172.0.01.xapk`: its manifest identifies it as the private
+  `com.nowl.castle` build.
+- AssetRipper 1.3.3 needs an Android directory containing the official
+  `assets/bin/Data` tree, matching `global-metadata.dat`, and a decoded
+  `lib/arm64-v8a/libil2cpp.so`. For this release, take `base_assets.apk` and
+  `config.arm64_v8a.apk` from the official XAPK, extract `assets/bin/Data/*` and
+  `libunity.so`, then place the version-matched recovered
+  `il2cpp/v172.0.01/libil2cpp_v17201_ssl.so` at that libil2cpp path. The three
+  SSL return patches do not affect AssetRipper's static IL2CPP type recovery.
+- The process opens more than the shell default 1024 descriptors. Run it with a
+  process-local `ulimit -n 16384`:
+  `AssetRipper.GUI.Free --cli --input <game-dir> --output <output-dir> --mode unity --script-content-level Level1`.
+  With the installed binary at
+  `/home/nowl/.local/share/rg-toolkit/tools/AssetRipper/AssetRipper.GUI.Free`, the
+  initial output was `unity/king-god-castle-v172.0.01/ExportedProject/` (ignored
+  as generated data): 694 MB, Unity `2022.3.62f3`, 26,650 asset files, 2,285 C#
+  stubs, six scenes, 65 prefabs, and 30 shaders. It was incomplete: the prepared
+  input omitted the Addressables bundles holding the hero content. Do not reuse it.
+- Do not open this Level1-script export as a runnable/editable game project.
+  On Unity `2022.3.62f3`, its generated stubs have three ambiguous
+  `YieldAwaitable` references (`StoryModeBasePanel.cs:125,243` and
+  `ChangeBGMVolumeNodeData.cs:67`), then the editor itself SIGSEGVs during
+  `MonoScriptInfoScraper::ScanForSourceGeneratedMonoScriptInfo` on its initial
+  assembly reload. The reliable viewer-oriented export is AssetRipper with
+  `--disable-script-import` (or stubs preserved outside `Assets/` as text);
+  keep Level1 stubs only for static inspection, not Unity compilation.
+- For the already-exported `v172.0.01` viewer, move `Assets/Scripts` (and its
+  `.meta`) to `AuxiliaryFiles/GeneratedScriptStubs`, and `Assets/Plugins` (and
+  its `.meta`) to `AuxiliaryFiles/GeneratedGameAssemblies`, then delete only
+  that project's `Library/`. The second move matters: AssetRipper copied 97
+  game-runtime DLLs, including `Assembly-CSharp.dll` and `UnityEngine.*`; after
+  scripts are removed Unity still SIGSEGVs at `MonoManager::ReloadAssembly` if
+  it loads them as Editor plugins. Two clean batch launches completed with exit
+  code 0 after both moves. AudioClip import emits FSBTool errors because the
+  extracted files are not valid desktop WAV/OGG payloads; retain them as viewer
+  data because the warnings are non-fatal.
+- **Correct hero export (2026-08-30, shader fix 2026-08-31):** extract the original `base_assets.apk`'s
+  `assets/aa/Android` bundles directly; the prior convenience copy under
+  `apk/xapk_extracted_v17201/bundles/` contained a zero-byte
+  `sprites_assets_all_*.bundle` and must not be trusted. A full 81-bundle input
+  currently triggers AssetRipper 1.3.3's internal `atlas is not the same as
+  mappedAtlas` exception. The working viewer input is the six original bundles
+  `characters`, `prefabs`, `sprites`, `illusts`, `shaders`, and
+  `*_unitybuiltinshaders_*`; it exports 79,801
+  assets to `unity/king-god-castle-v172.0.01/ExportedProject-heroes/ExportedProject/`.
+  The first four-bundle export was not visually valid: 414 of 458 materials,
+  including the `Sprites-Default` material used by hero prefabs, referenced
+  AssetRipper's fake `0000000deadbeef15deadf00d0000000` shader GUID and rendered
+  white/magenta in Unity. Re-exporting all six resolves built-in material refs to
+  `0000000000000000f000000000000000` and leaves zero material references to the
+  fake GUID. Use `--disable-script-import`; Unity 2022.3.62f3 batch-imported the
+  corrected project with exit 0.
+  Hero assets retain their original hierarchy, especially `Assets/00_Unit/`:
+  verification found 1,316 prefabs, 1,352 `Unit_*.png` textures, and 279
+  illustrations. It has no imported C# stubs or DLL plugins.
+
+### Workstation disk hygiene for Unity exports (2026-08-30)
+
+- `/home` and the KGC worktree share `/dev/nvme0n1p3`; freeing `/tmp` or `/var`
+  does not increase the space reported to Unity for this project. Prioritize
+  user cache and ignored, reproducible KGC build directories. In this worktree,
+  `.rebuild_v17201` and `.rebuild_local` are disposable output; keep `unity/`,
+  `apk/`, `il2cpp/`, and the worktree data unless a task explicitly supersedes
+  them.
+- The high-impact user cache is `/home/nowl/.cache` (not source data). System
+  package cache and journal cleanup require local sudo: `paccache -r -k 2`
+  retains two package versions per package, and `journalctl --vacuum-size=500M`
+  retains a 500 MB journal. Never use broad deletion against Android SDK,
+  emulator data, Downloads, or locally installed model directories without an
+  explicit replacement/retention decision.
+- **Unity Hub exception:** it requires the writable directory
+  `~/.cache/unityhub/tmp` during an Android NDK module post-install rename. If
+  `.cache` has been cleared, recreate it with `mkdir -p ~/.cache/unityhub/tmp`
+  before retrying; otherwise Hub reports "Android NDK Install failed" with
+  `ENOENT` from `mkdtemp`, even after checksum validation and extraction passed.
 ### Dominion tutorial #40 native flow (2026-08-31)
 
 Tutorial #40 must remain unfinished, but Dominion must already return Chamber `10001` at
@@ -477,3 +1180,56 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
   preview loop builds each option with the selected type and `targetIndex + 1`. Update both
   `data.options` and parallel `options.{types,lvs,targets}`, then persist and deduct item 800. Regression:
   `server/tests/test_artifact_blacksmith.py`.
+
+### Treasure 50002 / Cor Orbis (2026-09-02)
+
+- `Strings_VI.xml` defines `TreasureName_50002` as `Cor Orbis`, with temporary subname and
+  concept text about borrowing, storing, and releasing Mana from nearby plants and animals.
+  It also defines skill/buff localization keys `3500020..3500025` and packages `1690..1692`.
+- The current `xml_live/Treasures.xml` has no `<Treasure ID="50002">` row, and
+  `TreasureBuffDatas.xml` has no `3500020..3500025` rows. Therefore owner, rarity, role,
+  recommended unit, numeric values, and runtime implementation cannot be determined from the
+  current master data.
+- `StoryStages.xml` equips `50002` on story unit `10010210` (Story Mel) in stages
+  `410101053` and `410101054`; this is only a scripted NPC loadout, not proof of Treasure
+  ownership. Do not confuse it with `Items.xml` item `50002` (Mel's Injury).
+
+## 20. Player Dashboard branding and locale (2026-09-03)
+
+- The public Player Dashboard now supports Vietnamese and English through
+  `webui-next/src/components/portal-i18n.tsx`. It defaults from the browser language, persists the
+  explicit choice under `localStorage["kgc-player-locale"]`, synchronizes same-tab/cross-tab
+  changes with `useSyncExternalStore`, and updates the document `lang`. `SiteShell` installs this
+  provider only for the portal, so the administrator dashboard is unchanged.
+- `PortalMasthead` is shared by `/player` and `/player/donate`. It is intentionally wordmark-only;
+  the old `K / BC` mark and its attempted SVG replacement were removed at the user's request. The
+  masthead owns the accessible `VI / EN` switch, and mobile moves its actions below the title.
+- Portal copy, common API errors, fixed reward names/notes, request statuses and date formatting all
+  follow the selected locale. Operator-authored `PLAYER_DONATE_INSTRUCTIONS` remains literal by
+  design because it is deployment content, not application copy. Object-shaped FastAPI errors such
+  as `{detail: {code: "insufficient_tickets"}}` are normalized by `player-api.ts` before lookup.
+- Verification: `./node_modules/.bin/eslint .` passes; `./node_modules/.bin/next build --webpack`
+  exports all 16 pages with TypeScript clean. Chromium headless checks at 1440x1000 and 390x844
+  confirmed the login view and locale control render without horizontal overflow.
+
+## 21. Rewarded-ad provider gate (2026-09-03)
+
+- Keep `/portal/api/ticket/video/start` and `/complete` disabled. Google explicitly documents that
+  Server-Side Verification is app-only and unavailable for GPT rewarded ads on web; its
+  `rewardedSlotGranted` event therefore remains an untrusted browser assertion.
+- AppLixir is the only direct web rewarded-video candidate verified against current vendor docs.
+  Its v6.1 web callback carries signed `gameApiKey`, `gameId`, `userId`, and unique `tid`; production
+  mode is `MD5 and TID`, so it can map an opaque portal session and deduplicate retries before
+  calling the existing ticket-accounting helper. Do not trust or sign decisions from `customData`.
+- AppLixir is not approved for this project yet. Its current public requirements conflict:
+  the main site says 100,000 monthly impressions, while the publisher FAQ requires 5,000 daily ad
+  impressions or active users; the signup form nevertheless accepts an `Under 100K` range. It also
+  requires a publicly reviewable, original, non-infringing property, exact-domain registration,
+  HTTPS, and `ads.txt`. Obtain written pre-approval for the actual portal, traffic, Vietnam-heavy
+  audience, and content/IP situation before writing integration code or exposing either endpoint.
+- Monetag's signed rewarded postback is documented only for Telegram Mini Apps, not an ordinary web
+  portal. AdswedMedia and the surveyed BitLabs/CPX/Lootably/AdGate-style products are offerwalls
+  (installs, surveys, registrations, tasks), not the requested one-click rewarded-video UX. Other
+  gaming monetization vendors did not publish enough web S2S verification detail to satisfy the
+  trust boundary. The smallest next step is AppLixir pre-qualification; if declined, retain
+  donations/manual ticket credit rather than weakening the callback invariant.

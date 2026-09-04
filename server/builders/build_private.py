@@ -66,9 +66,13 @@ SHARE_HOST = os.environ.get("SHARE_HOST", "127.0.0.1")
 # public build should pass the real domain (kingbugcastle.id.vn) so the browser
 # gets a valid Cloudflare cert - the game API can still point at the origin IP.
 GLOGIN_HOST = os.environ.get("GLOGIN_HOST") or SHARE_HOST
-# Poll host for the native poller (follows HTTP redirects). Defaults to SHARE_HOST.
-# The poller handles Cloudflare's HTTP->HTTPS redirect by downgrading to HTTP on port8080.
+# Poll host/port for the native poller. Local builds talk straight to the dev server
+# on :8080; public builds use the origin IP on :80, where Caddy forwards to the
+# loopback-only game service without Cloudflare's HTTPS redirect.
 GLOGIN_POLL_HOST = os.environ.get("GLOGIN_POLL_HOST") or SHARE_HOST
+GLOGIN_POLL_PORT = os.environ.get("GLOGIN_POLL_PORT", "8080")
+if not GLOGIN_POLL_PORT.isdecimal() or not 0 < int(GLOGIN_POLL_PORT) < 65536:
+    raise SystemExit("GLOGIN_POLL_PORT must be a TCP port between 1 and 65535")
 # Scheme for the browser URL: "http" for local (no TLS cert needed), "https" for public.
 GLOGIN_SCHEME = os.environ.get("GLOGIN_SCHEME", "https" if SHARE_HOST != "127.0.0.1" else "http")
 
@@ -226,6 +230,25 @@ FIREBASE_LOGEVENT_STUBS = {"172.0.01": [
     (0x3776158, 'fe0f1df8f65701a9'),
     # FirebaseAnalytics.LogEvent(string, IEnumerable<Parameter>)
     (0x37761BC, 'fe67bca9f85f01a9'),
+]}.get(VER, [])
+
+# Addressables passes AssetBundleRequestOptions.Crc into Unity's native bundle
+# loader. Custom skin bundles no longer match the catalog's build-time CRC, but
+# editing m_ExtraDataString shifts its separately indexed binary entries. Keep
+# the catalog pristine and make the getter return 0 (Unity's documented
+# "disable CRC validation" value) at runtime instead.
+# dump.cs: RVA 0x5FC9F10, file offset 0x5FC5F10.
+ASSETBUNDLE_CRC_GETTER = {"172.0.01": (
+    0x5FC5F10,
+    '001840b9c0035fd6',  # ldr w0,[x0,#0x18]; ret
+    'e0031f2ac0035fd6',  # mov w0,wzr; ret
+)}.get(VER)
+ASSETBUNDLE_CRC_READS = {"172.0.01": [
+    # AssetBundleResource.LoadLocalBundle: crc argument w1.
+    (0x5FC8484, '011940b9', 'e1031f2a'),
+    # AssetBundleResource.CreateWebRequest: local-file and cached paths.
+    (0x5FC639C, '011940b9', 'e1031f2a'),
+    (0x5FC648C, '021940b9', 'e2031f2a'),
 ]}.get(VER, [])
 
 # --- XIGNCODE NEO loader (the packer .so in the config split) ---------------
@@ -434,6 +457,23 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
         il2_data[off:off+4] = RET
         print(f"  [+] stubbed FirebaseAnalytics.LogEvent @ 0x{off:x} (ret)")
 
+    if ASSETBUNDLE_CRC_GETTER:
+        off, orig_hex, new_hex = ASSETBUNDLE_CRC_GETTER
+        cur = bytes(il2_data[off:off+8])
+        if cur != bytes.fromhex(new_hex):
+            if cur != bytes.fromhex(orig_hex):
+                raise SystemExit(f"AssetBundleRequestOptions.get_Crc @ 0x{off:x}: unexpected bytes {cur.hex()}")
+            il2_data[off:off+8] = bytes.fromhex(new_hex)
+            print(f"  [+] stubbed AssetBundleRequestOptions.get_Crc @ 0x{off:x} -> 0")
+    for off, orig_hex, new_hex in ASSETBUNDLE_CRC_READS:
+        cur = bytes(il2_data[off:off+4])
+        if cur == bytes.fromhex(new_hex):
+            continue
+        if cur != bytes.fromhex(orig_hex):
+            raise SystemExit(f"AssetBundle CRC read @ 0x{off:x}: unexpected bytes {cur.hex()}")
+        il2_data[off:off+4] = bytes.fromhex(new_hex)
+        print(f"  [+] zeroed AssetBundle CRC argument @ 0x{off:x}")
+
     # ShopItem.Init empty list crash bypass
     # ShopItem.Init(int id) reads the shop list without a count check and NREs on an
     # empty one. The fix reads Count off [x20,#0x18] and branches to the method's own
@@ -551,6 +591,26 @@ def replace_xigncode(apk_path):
                         print(f"[*] Patched libxigncode.so KGC_GLOGIN_POLL_HOST -> {GLOGIN_POLL_HOST}")
                     else:
                         print(f"[!] Warning: Could not find KGC_GLOGIN_POLL_HOST buffer!")
+
+                    # The poll port is independent of the browser URL.  Public
+                    # clients use the origin IP on Caddy's :80, while a local
+                    # adb-reverse build retains the development server's :8080.
+                    new_port = GLOGIN_POLL_PORT.encode() + b"\0"
+                    if len(new_port) > 16:
+                        raise SystemExit("GLOGIN_POLL_PORT does not fit native poll buffer")
+                    # `8080` also occurs in unrelated native data, so never find it
+                    # globally.  stub.cpp keeps the port directly after the first
+                    # (browser) 64-byte host buffer.
+                    if idx == -1:
+                        print("[!] Warning: Could not locate KGC_GLOGIN_POLL_PORT without browser host buffer!")
+                    else:
+                        port_start = idx + 64
+                        old_port = bytes(stub_padded[port_start:port_start+16]).split(b"\0", 1)[0]
+                        if old_port == b"8080":
+                            stub_padded[port_start:port_start+16] = new_port.ljust(16, b"\0")
+                            print(f"[*] Patched libxigncode.so KGC_GLOGIN_POLL_PORT -> {GLOGIN_POLL_PORT}")
+                        else:
+                            print(f"[!] Warning: Unexpected KGC_GLOGIN_POLL_PORT buffer: {old_port!r}")
                     
                     # Patch g_kgc_glogin_scheme ("http" for local, "https" for public)
                     old_scheme = b"http\0   "
@@ -677,6 +737,24 @@ def main():
     print(f"[+] Rebinding leftover field-default host URLs -> {SHARE_HOST} (castle-infra/cdn copies patch_hosts misses)...")
     subprocess.run([sys.executable, str(REPO / "server" / "patchers" / "patch_leftover_hosts.py"),
                     str(outputs["base_assets"]), SHARE_HOST], check=True)
+
+    # Normalize split package IDs once more after every bundle/metadata rewrite.
+    # The asset split is repeatedly rewritten in-place above; keeping this as
+    # the final pre-signing pass guarantees Android sees the same package name
+    # in all three APKs (otherwise install-multiple fails atomically with
+    # INSTALL_FAILED_INVALID_APK).
+    print(f"[+] Final split package-id normalization -> {NEW_PKG}...")
+    for name in ("config", "base_assets"):
+        subprocess.run(
+            [
+                sys.executable,
+                str(PATCHERS / "patch_package_id_light.py"),
+                str(outputs[name]),
+                OLD_PKG,
+                NEW_PKG,
+            ],
+            check=True,
+        )
 
     print("\n=== Signing ===")
     for name, apk in outputs.items():

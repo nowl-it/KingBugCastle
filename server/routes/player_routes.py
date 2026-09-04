@@ -64,7 +64,9 @@ def _uid_for_login(login_id, prev_token, acct_type=None):
     (/auth/login carries a token, not an id) -> first-login adoption of a lone
     existing save -> a fresh per-account save (multiplayer) -> the active player.
     """
-    login_id = str(login_id or "")
+    # Account ids become durable indexed keys. Malformed input is absent, but a
+    # valid prior session can still refresh normally below.
+    login_id = login_id if playerdb.valid_login_id(login_id) else ""
     uid = playerdb.uid_for_login(login_id) or playerdb.uid_for_token(prev_token)
     if uid and playerdb.load(uid) is not None:
         return uid
@@ -137,9 +139,7 @@ def r_login(body, st):
     # All date-ish fields must be non-null parseable strings: HandleAuthResponse
     # does DateTime.Parse on expiredAt / serverTime / blockedUntilAt -> null throws
     # ArgumentNullException.
-    # str(): the id is a bearer credential the client picks, and it is hashed - a
-    # numeric one used to raise AttributeError on .encode() and 500 the whole login.
-    login_id = str(srv.CURRENT_LOGIN_ID.get() or body.get("id") or "")
+    login_id = srv.CURRENT_LOGIN_ID.get() or body.get("id") or ""
     # Constants.AccountType: 0 Test, 1 Google, 2 GameCenter, 3 AppleID, 4 Guest.
     # Only /auth/register carries it; None on the token-refresh paths.
     acct_type = body_int(body["type"], None) if isinstance(body, dict) and "type" in body else None
@@ -149,6 +149,7 @@ def r_login(body, st):
     # multiplayer would still hand them all the same save. Only the multiplayer
     # branch, which actually owns the account, writes that mapping.
     uid = _uid_for_login(login_id, body.get("token"), acct_type)
+    login_id = login_id if playerdb.valid_login_id(login_id) else ""
     if uid is None:
         # No save and none may be created (cap or rate limit). Nothing to bind a
         # session to; the alternative was logging the caller into someone else.
@@ -187,7 +188,7 @@ def mint_session_token(login_id, acct_type=1):
     deep link can carry a ready-to-use token: the client sets it as RestAPI.accessToken
     and the next /player request lands on this account's save. acct_type default 1 =
     Google (Constants.AccountType)."""
-    uid = _uid_for_login(str(login_id or ""), None, acct_type)
+    uid = _uid_for_login(login_id, None, acct_type)
     if uid is None:
         return None
     token = "DEV." + secrets.token_hex(16)
@@ -572,8 +573,8 @@ def r_transfer_redeem(body, st):
     src = playerdb.load(uid) or {}
     src.pop("transfer", None)           # single use
     playerdb.save(uid, src)
-    login_id = str(srv.CURRENT_LOGIN_ID.get() or body.get("id") or "")
-    if MULTIPLAYER and login_id:
+    login_id = srv.CURRENT_LOGIN_ID.get() or body.get("id") or ""
+    if MULTIPLAYER and playerdb.valid_login_id(login_id):
         # Only multiplayer owns the account table; in single-player _uid_for_login
         # ignores login ids entirely and writing one here would pin it forever.
         playerdb.bind_login(login_id, uid)

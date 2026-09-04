@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { type ReactNode, useState } from "react"
 import { useServerSection } from "@/lib/api"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -15,24 +15,13 @@ const SECTIONS = [
   { id: "info", label: "Info" },
 ]
 
-function SectionCard({ title, desc, children, right }: { title: string; desc?: string; children: React.ReactNode; right?: React.ReactNode }) {
-  return (
-    <Card>
-      <CardHeader>
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <CardTitle className="text-base flex items-center gap-2"><Server className="h-4 w-4" /> {title}</CardTitle>
-            {desc && <CardDescription>{desc}</CardDescription>}
-          </div>
-          {right}
-        </div>
-      </CardHeader>
-      <CardContent>{children}</CardContent>
-    </Card>
-  )
-}
+type IconComponent = (props: { className?: string }) => ReactNode
+type JsonValue = string | number | boolean | null | JsonObject | JsonValue[]
+type JsonObject = { [key: string]: JsonValue | undefined }
+type RouteRow = { path: string; model?: string; overridden?: boolean }
+type CdnFile = { name: string; size: number }
 
-function MiniStat({ icon: Icon, label, value, color }: { icon: any; label: string; value: any; color: string }) {
+function MiniStat({ icon: Icon, label, value, color }: { icon: IconComponent; label: string; value: ReactNode; color: string }) {
   return (
     <div className="flex items-center gap-3 rounded-md border border-border bg-muted/30 px-3 py-2">
       <Icon className={`h-4 w-4 ${color}`} />
@@ -44,7 +33,7 @@ function MiniStat({ icon: Icon, label, value, color }: { icon: any; label: strin
   )
 }
 
-function JsonView({ data, maxH = "60vh" }: { data: any; maxH?: string }) {
+function JsonView({ data, maxH = "60vh" }: { data: JsonValue; maxH?: string }) {
   return (
     <pre className={`max-h-[${maxH}] overflow-auto rounded-md bg-muted/40 p-4 font-mono text-xs leading-relaxed`}>
       {JSON.stringify(data, null, 2)}
@@ -66,7 +55,7 @@ export default function ServerPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Server Diagnostics</h1>
-        <p className="text-muted-foreground">Read-only proxy of the game server's own admin API (:8080). Auto-refreshes every 5s.</p>
+        <p className="text-muted-foreground">Read-only proxy of the game server&apos;s own admin API (:8080). Auto-refreshes every 5s.</p>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -122,9 +111,9 @@ export default function ServerPage() {
   )
 }
 
-function SectionBody({ section, data }: { section: string; data: any }) {
+function SectionBody({ section, data }: { section: string; data: JsonValue }) {
   if (section === "logs") {
-    const lines = Array.isArray(data) ? data : []
+    const lines = Array.isArray(data) ? data.filter((line): line is string => typeof line === "string") : []
     return (
       <div className="max-h-[60vh] overflow-auto rounded-md bg-black/60 p-3 font-mono text-xs leading-relaxed">
         {lines.map((line: string, i: number) => {
@@ -143,17 +132,19 @@ function SectionBody({ section, data }: { section: string; data: any }) {
   }
 
   if (section === "routes") {
-    const routes = Array.isArray(data?.routes) ? data.routes : []
+    const routeData = data && !Array.isArray(data) && typeof data === "object" ? data : {}
+    const routes = Array.isArray(routeData.routes) ? routeData.routes as RouteRow[] : []
+    const total = typeof routeData.total === "number" ? routeData.total : routes.length
     return (
       <div>
-        <div className="mb-2 text-sm text-muted-foreground">{data?.total ?? routes.length} routes registered</div>
+        <div className="mb-2 text-sm text-muted-foreground">{total} routes registered</div>
         <div className="max-h-[60vh] overflow-auto rounded-md border border-border">
           <table className="w-full text-sm">
             <thead className="bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
               <tr><th className="px-3 py-2">Path</th><th className="px-3 py-2">Model</th><th className="px-3 py-2 text-right">Override</th></tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {routes.map((r: any) => (
+              {routes.map((r) => (
                 <tr key={r.path} className="hover:bg-muted/30">
                   <td className="px-3 py-1.5 font-mono text-xs">{r.path}</td>
                   <td className="px-3 py-1.5 font-mono text-xs text-muted-foreground">{r.model}</td>
@@ -172,18 +163,20 @@ function SectionBody({ section, data }: { section: string; data: any }) {
   }
 
   if (section === "cdn") {
-    const files = Array.isArray(data?.files) ? data.files : []
+    const cdnData = data && !Array.isArray(data) && typeof data === "object" ? data : {}
+    const files = Array.isArray(cdnData.files) ? cdnData.files as CdnFile[] : []
+    const total = typeof cdnData.total === "number" ? cdnData.total : files.length
     const fmt = (n: number) => n > 1024 * 1024 ? `${(n / 1024 / 1024).toFixed(1)} MB` : n > 1024 ? `${(n / 1024).toFixed(1)} KB` : `${n} B`
     return (
       <div>
-        <div className="mb-2 text-sm text-muted-foreground">{data?.total ?? files.length} files in the CDN bundle</div>
+        <div className="mb-2 text-sm text-muted-foreground">{total} files in the CDN bundle</div>
         <div className="max-h-[60vh] overflow-auto rounded-md border border-border">
           <table className="w-full text-sm">
             <thead className="bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
               <tr><th className="px-3 py-2">File</th><th className="px-3 py-2 text-right">Size</th></tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {files.map((f: any) => (
+              {files.map((f) => (
                 <tr key={f.name} className="hover:bg-muted/30">
                   <td className="px-3 py-1.5 font-mono text-xs">{f.name}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-xs text-muted-foreground">{fmt(f.size)}</td>

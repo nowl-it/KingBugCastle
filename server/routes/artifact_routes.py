@@ -722,7 +722,7 @@ def r_artifact_equip(body, st):
     target_id = body_int(body.get("targetId"), 0)
     index = body_int(body.get("index"), 0)
     deck_preset = body_int(body.get("deckPreset"), 0)
-    admin_log(f"[equip-debug] /artifact/equip body={body}")
+    admin_log("[artifact] equip request")
     equipped = [e for e in st.get("equippedArtifacts", [])
                 if not (e.get("deckPreset", 0) == deck_preset and e.get("index", 0) == index)]
     arts = get_st_artifacts(st)
@@ -741,7 +741,7 @@ def r_artifact_equip(body, st):
 
 
 def r_artifact_dismantle(body, st):
-    admin_log(f"[artifact-dismantle] body={body}")
+    admin_log("[artifact] dismantle request")
     arts = get_st_artifacts(st)
     raw_targets = (
         body.get("targets") or
@@ -880,7 +880,7 @@ def r_treasure_release(body, st):
 
 
 def r_treasure_dismantle(body, st):
-    admin_log(f"[treasure-dismantle] body={body}")
+    admin_log("[treasure] dismantle request")
     tr = get_st_treasures(st)
     raw_targets = (
         body.get("treasureIds") or
@@ -1021,7 +1021,7 @@ def _treasure_result(st, added_exp=0):
 def r_treasure_add_exp(body, st):
     """"Enhance Legacy": feed exp items (Legacy Pieces) + gold, level the treasure.
     Mirrors the accessory add-exp flow; response is TreasureResultResponseModel."""
-    admin_log(f"[treasure-add-exp] body={body}")
+    admin_log("[treasure] add-exp request")
     tr = get_st_treasures(st)
     t = next((x for x in tr if x.get("id") == body_int(body.get("targetId"), 0)), None)
     if t is None:
@@ -1054,7 +1054,7 @@ def r_treasure_add_exp(body, st):
 def r_treasure_overcome(body, st):
     """"Tier Transcendence": consume item 3200 (초월의 주괴) per TreasureOvercomeCost
     and raise the treasure's overcome tier (max level +2 per tier, cap 10)."""
-    admin_log(f"[treasure-overcome] body={body}")
+    admin_log("[treasure] overcome request")
     tr = get_st_treasures(st)
     t = next((x for x in tr if x.get("id") == body_int(body.get("targetId"), 0)), None)
     if t is None:

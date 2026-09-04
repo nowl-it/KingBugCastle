@@ -14,6 +14,41 @@ python3 preflight.py                              # must print "ready to expose"
 
 `serve_public.sh` runs `preflight.py` itself and refuses to start on any FAIL.
 
+For the public OCI deployment, keep `/etc/kgc/server.env` readable only by the
+service operator (for example `chmod 600`). It must contain the generated OAuth state
+key and the version-aligned route metadata location:
+
+```sh
+GLOGIN_STATE_SECRET=<generated-random-value>
+KGC_IL2CPP_SCRIPT_JSON=/home/ubuntu/kgc/il2cpp/v172.0.01/script.json
+# Caddy is the sole app ingress (both public hostname and origin-IP routes):
+KGC_TRUST_PROXY=1
+KGC_BIND_HOST=127.0.0.1
+```
+
+`serve_public.sh` and `deploy_hook.sh` load this file automatically. The metadata is
+an extracted proprietary artifact and is intentionally not stored in git; deployment
+must provision it from the exact client version before preflight can pass.
+
+## Domain and origin-IP clients
+
+`systemd/kgc-public.Caddyfile` serves the game on both
+`kingbugcastle.id.vn` and `213.35.110.245`.  This is intentional: a public XAPK can
+bake either value as `share_host`, while its native Google poller uses the origin IP
+on plain HTTP port 80.  In the Build & Release XAPK workflow use:
+
+```text
+share_host: kingbugcastle.id.vn   # or 213.35.110.245
+glogin_host: kingbugcastle.id.vn
+glogin_poll_host: 213.35.110.245
+glogin_poll_port: 80
+```
+
+The IP virtual hosts remove incoming Cloudflare/forwarded-IP headers and set their
+own client address. The domain virtual host accepts only Cloudflared's private Docker
+bridge before retaining `CF-Connecting-IP`. Keep the app loopback-bound with
+`KGC_TRUST_PROXY=1`; exposing :8080/:8443 directly would make those headers forgeable.
+
 ---
 
 ## The threat model
@@ -26,7 +61,7 @@ design, so there is nothing to steal by cheating. What actually matters:
 |---|---|
 | A stranger rewrites or deletes saves via `/admin/api/*` | `guard_admin` - token, admin session, or loopback (see below) |
 | A request with **no token** lands on another player's save | multiplayer `load_state()` hands it a throwaway save; it used to fall back to `playerdb.active()`, i.e. whatever the dashboard had selected (fixed 2026-07-31, `test_public_hardening`) |
-| A stranger logs in as someone else via `/glogin` | `GLOGIN_DEV` must be unset; preflight FAILs on it |
+| A stranger consumes another player's Google sign-in handoff | `GLOGIN_DEV` must be unset; pending handoffs are one-time and source-address-bound |
 | One client fills the disk with saves | `KGC_MAX_PLAYERS`, `KGC_NEW_PLAYER_PER_IP` |
 | One client OOMs the box with a huge POST | `KGC_MAX_BODY`, enforced on declared *and* chunked bodies |
 | One client starves everyone else | `KGC_RATE_LIMIT` per address |
@@ -54,7 +89,10 @@ Two consequences:
    whole server. Fix by setting `KGC_TRUST_PROXY=1`, which reads `cf-connecting-ip` /
    `x-forwarded-for` instead. Only set it when a proxy is the **sole** way in: if
    anyone can reach the port directly, they can forge the header and reset every
-   limit at will.
+   limit at will. `serve_public.sh` enforces that pairing: run the game listeners
+   on loopback too, e.g. `KGC_TRUST_PROXY=1 KGC_BIND_HOST=127.0.0.1 ./serve_public.sh`.
+   Keep the default `KGC_BIND_HOST=0.0.0.0` for a direct-IP deployment and leave
+   `KGC_TRUST_PROXY` unset.
 
 ## Settings
 

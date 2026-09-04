@@ -12,6 +12,10 @@ on:
       glogin_poll_host:
         description: "Host for native glogin poller (IP, bypasses Cloudflare). Defaults to share_host"
         required: false
+      glogin_poll_port:
+        description: "Port for native glogin poller (80 through origin Caddy for public builds)"
+        required: false
+        default: "80"
       tag:
         description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v172.0.01); if it already exists a timestamp suffix is appended"
         required: false
@@ -73,6 +77,7 @@ jobs:
           SHARE_HOST: ${{ github.event.inputs.share_host }}
           GLOGIN_HOST: ${{ github.event.inputs.glogin_host }}
           GLOGIN_POLL_HOST: ${{ github.event.inputs.glogin_poll_host }}
+          GLOGIN_POLL_PORT: ${{ github.event.inputs.glogin_poll_port }}
           KGC_APK_SRC: xapk_extracted_v17201
         run: |
           python3 server/builders/build_private.py --share
@@ -152,5 +157,4 @@ jobs:
         run: |
           echo "Cleaning up stock files and build artifacts..."
           rm -rf apk/xapk_extracted_v17201 KingBugCastle_172.0.01.xapk "KingBugCastle_${TAG}.xapk"
-
 

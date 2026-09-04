@@ -15,10 +15,11 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([])
 
   useEffect(() => {
-    const handleToast = (e: any) => {
-      const { message, type } = e.detail
+    const handleToast = (e: Event) => {
+      const detail = (e as CustomEvent<{ message?: string; type?: ToastType }>).detail
+      const { message = 'Notice', type = 'info' } = detail || {}
       const id = Math.random().toString(36).substring(7)
-      setToasts(prev => [...prev, { id, message, type: type || 'info' }])
+      setToasts(prev => [...prev, { id, message, type }])
       setTimeout(() => {
         setToasts(prev => prev.filter(t => t.id !== id))
       }, 5000)

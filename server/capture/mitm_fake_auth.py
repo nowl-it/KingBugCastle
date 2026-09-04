@@ -16,7 +16,7 @@ from Crypto.Cipher import AES
 KEY = b'b53019bb76da6b34'
 
 def now(d=0):
-    return (datetime.datetime.utcnow()+datetime.timedelta(days=d)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+    return (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=d)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
 def _pad(b):
     p = 16 - len(b) % 16

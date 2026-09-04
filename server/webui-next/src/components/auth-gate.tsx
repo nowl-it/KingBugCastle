@@ -12,18 +12,14 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [busy, setBusy] = useState(false)
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
     const handleUnauthorized = () => {
       mutate()
     }
     window.addEventListener("kgc:unauthorized", handleUnauthorized)
     return () => window.removeEventListener("kgc:unauthorized", handleUnauthorized)
   }, [mutate])
-
-  if (!mounted) return null
 
   if (error || !who) {
     return <div className="flex h-screen items-center justify-center text-muted-foreground">LOADING_ACCESS_DATA...</div>
@@ -46,7 +42,7 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
         body: JSON.stringify({ username, password })
       }, "Logged in successfully")
       await mutate()
-    } catch (e) {
+    } catch {
       // toast is already fired by runMutation
     } finally {
       setBusy(false)

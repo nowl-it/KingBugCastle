@@ -11,6 +11,7 @@ Run:  uvicorn server:app --host 0.0.0.0 --port 8080
 """
 import asyncio, contextvars, json, time, copy, secrets, datetime, pathlib, hashlib, os, sys, random
 import shutil, subprocess
+from contextlib import asynccontextmanager, suppress
 
 _HERE = pathlib.Path(__file__).resolve().parent
 for _p in (_HERE, _HERE / "routes", _HERE / "builders", _HERE / "cli"):
@@ -461,7 +462,44 @@ DYNAMIC_OVERRIDES = {
 
 SERVER_START_TIME = time.time()
 
-app = FastAPI(title="KGC private server", version=SERVER_VERSION)
+# A public server holds other people's progress. Cron is the textbook answer and
+# nobody sets it up, so this runs in-process; playerdb.backup_if_due does the
+# due-check under the cross-process lock, which is what stops :8080 and :8443 both
+# firing. KGC_BACKUP_HOURS=0 turns it off (use your own backups instead).
+BACKUP_HOURS = float(os.environ.get("KGC_BACKUP_HOURS") or 24)
+
+
+async def _periodic_backup_loop(interval):
+    while True:
+        try:
+            # to_thread: the lock and the copy are blocking, and this must not
+            # stall the event loop while a player is mid-request.
+            dst = await asyncio.to_thread(playerdb.backup_if_due, interval)
+            if dst:
+                admin_log(f"[state] backup -> {dst.name}")
+        except Exception as e:
+            admin_log(f"[state] backup failed: {type(e).__name__}: {e}")
+        await asyncio.sleep(min(3600, interval))
+
+
+@asynccontextmanager
+async def _lifespan(_app):
+    """Own the backup worker for the complete ASGI application lifetime."""
+    if BACKUP_HOURS <= 0:
+        admin_log("[state] automatic backups off (KGC_BACKUP_HOURS=0)")
+        yield
+        return
+
+    task = asyncio.create_task(_periodic_backup_loop(BACKUP_HOURS * 3600))
+    try:
+        yield
+    finally:
+        task.cancel()
+        with suppress(asyncio.CancelledError):
+            await task
+
+
+app = FastAPI(title="KGC private server", version=SERVER_VERSION, lifespan=_lifespan)
 _STATE_GATE = asyncio.Lock()
 
 import security
@@ -470,36 +508,8 @@ from security import (TRUST_PROXY, client_ip, _admin_ok, guard_admin,
                       RATE_LIMIT, RATE_WINDOW, RATE_BAN_AFTER, RATE_BAN_SECONDS,
                       IPTABLES_BAN, _rate_hits, _banned, _ban_strikes,
                       _iptables_rule, _unban_later, _ban, _rate_ok, rate_limit,
-                      MAX_BODY, limit_body_size, serialize_state_writes,
+                      MAX_BODY, serialize_state_writes,
                       ADMIN_COOKIE)
-
-# A public server holds other people's progress. Cron is the textbook answer and
-# nobody sets it up, so this runs in-process; playerdb.backup_if_due does the
-# due-check under the cross-process lock, which is what stops :8080 and :8443 both
-# firing. KGC_BACKUP_HOURS=0 turns it off (use your own backups instead).
-BACKUP_HOURS = float(os.environ.get("KGC_BACKUP_HOURS") or 24)
-
-
-@app.on_event("startup")
-async def periodic_backup():
-    if BACKUP_HOURS <= 0:
-        admin_log("[state] automatic backups off (KGC_BACKUP_HOURS=0)")
-        return
-
-    async def loop():
-        interval = BACKUP_HOURS * 3600
-        while True:
-            try:
-                # to_thread: the lock and the copy are blocking, and this must not
-                # stall the event loop while a player is mid-request.
-                dst = await asyncio.to_thread(playerdb.backup_if_due, interval)
-                if dst:
-                    admin_log(f"[state] backup -> {dst.name}")
-            except Exception as e:
-                admin_log(f"[state] backup failed: {type(e).__name__}: {e}")
-            await asyncio.sleep(min(3600, interval))
-
-    asyncio.create_task(loop())
 
 # Google login web flow (client's Google button -> /glogin -> deep link back).
 import google_login
@@ -514,13 +524,7 @@ async def _read_capped(request):
     anyone can check it. Reading the stream ourselves means an attacker gets one
     MAX_BODY allocation, not one per gigabyte they feel like sending.
     """
-    chunks, total = [], 0
-    async for chunk in request.stream():
-        total += len(chunk)
-        if total > MAX_BODY:
-            raise ValueError(f"body exceeded {MAX_BODY} bytes")
-        chunks.append(chunk)
-    return b"".join(chunks)
+    return await security.read_capped_body(request, MAX_BODY)
 
 
 async def respond(path: str, request: Request):
@@ -540,7 +544,7 @@ async def respond(path: str, request: Request):
                 body = json.loads(raw)
             except Exception:
                 if path == "/deck/set":
-                    admin_log(f"[DECK/SET DECRYPT FAIL] raw_len={len(raw)} raw_hex={raw[:64].hex()}")
+                    admin_log(f"[DECK/SET DECRYPT FAIL] raw_len={len(raw)}")
                 body = {}
     # A body of `5`, `"x"` or `[1,2]` is valid JSON but not an object, and every
     # handler below indexes it like a dict. Coerce here rather than guarding each

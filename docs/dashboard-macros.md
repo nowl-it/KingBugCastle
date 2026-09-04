@@ -19,7 +19,7 @@ For players who donate or purchase VIP packages, Server Admins can grant maximum
 
 ## Modifying Macros
 You can edit or add new macro logic in `server/dashboard.py` within the `api_player_macro` route (e.g. `POST /api/player/{pid}/macro`). 
-To add new buttons to the UI, update `server/webui-next/src/app/players/page.tsx` and re-run `npm run build` in the `server/webui-next` directory to update the static assets.
+To add new buttons to the UI, update `server/webui-next/src/app/players/page.tsx` and re-run `pnpm run build` in the `server/webui-next` directory to update the static assets.
 
 ## Realtime Charts
 The dashboard also features real-time charts on the overview page (`/`). It polls the `GET /api/stats/realtime` endpoint every 2 seconds to plot the concurrent active users (CCU) and system stats. This endpoint computes active players by checking saves updated in the last 24 hours.

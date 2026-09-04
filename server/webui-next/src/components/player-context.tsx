@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useContext, useState, useEffect } from "react"
+import React, { createContext, useContext, useState } from "react"
 import { usePlayers } from "@/lib/api"
 
 interface PlayerContextType {
@@ -11,20 +11,18 @@ interface PlayerContextType {
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined)
 
+type PlayerSummary = { id: string; name: string; active?: boolean }
+
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const { data: players } = usePlayers()
+  const { data } = usePlayers()
+  const players = Array.isArray(data) ? data as PlayerSummary[] : []
 
-  const activeId = players?.find((p: any) => p.active)?.id || null
-
-  useEffect(() => {
-    if (!selectedId && activeId) {
-      setSelectedId(activeId)
-    }
-  }, [selectedId, activeId])
+  const activeId = players.find((p) => p.active)?.id || null
+  const effectiveSelectedId = selectedId || activeId
 
   return (
-    <PlayerContext.Provider value={{ selectedId, setSelectedId, activeId }}>
+    <PlayerContext.Provider value={{ selectedId: effectiveSelectedId, setSelectedId, activeId }}>
       {children}
     </PlayerContext.Provider>
   )
@@ -38,10 +36,11 @@ export function usePlayerSelection() {
 
 // Shared component for the Player selection bar used in Heroes, Items, etc.
 export function PlayerBar() {
-  const { data: players } = usePlayers()
+  const { data } = usePlayers()
+  const players = Array.isArray(data) ? data as PlayerSummary[] : []
   const { selectedId, setSelectedId } = usePlayerSelection()
 
-  if (!players?.length) return null
+  if (!players.length) return null
 
   return (
     <div className="flex flex-col gap-3 border-b border-border pb-4 mb-6 sm:flex-row sm:items-center sm:gap-4">
@@ -52,7 +51,7 @@ export function PlayerBar() {
         onChange={(e) => setSelectedId(e.target.value)}
       >
         <option value="" disabled>Select a player...</option>
-        {players.map((p: any) => (
+        {players.map((p) => (
           <option key={p.id} value={p.id}>
             {p.name} {p.active ? '(ACTIVE)' : ''} - {p.id}
           </option>

@@ -11,6 +11,7 @@ something is worth knowing.
 the question without starting anything.
 """
 import os
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -32,6 +33,36 @@ def _env(name):
     return os.environ.get(name) or ""
 
 
+def load_deployment_env():
+    """Load simple operator config before importing server modules.
+
+    ``serve_public.sh`` sources this same file, but preflight is also documented
+    as a stand-alone command.  Only ``NAME=value`` records are accepted here:
+    this deliberately does not execute deployment configuration as shell code.
+    """
+    if _env("KGC_ENV_FILE"):
+        path = Path(_env("KGC_ENV_FILE"))
+    elif Path("/etc/kgc/server.env").is_file():
+        path = Path("/etc/kgc/server.env")
+    else:
+        path = SERVER / "secrets" / "server.env"
+    if not path.is_file():
+        return
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        match = re.fullmatch(r"(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)=(.*)", line)
+        if not match:
+            raise ValueError(f"unsupported configuration syntax in {path}: {raw!r}")
+        name, value = match.groups()
+        if value[:1] in ("'", '\"') and value[-1:] == value[:1]:
+            value = value[1:-1]
+        # Match ``. "$ENV_FILE"`` in the launchers: the selected deployment file
+        # is authoritative over an inherited interactive environment.
+        os.environ[name] = value
+
+
 # --- who can touch the admin surface ----------------------------------------
 def check_admin_credentials():
     import playerdb
@@ -47,9 +78,9 @@ def check_admin_credentials():
 
 def check_dev_backdoors():
     if _env("GLOGIN_DEV") == "1":
-        check(WARN, "GLOGIN_DEV=1",
+        check(FAIL, "GLOGIN_DEV=1",
               "/glogin hands a session to ANY account id it is asked for - anyone can "
-              "log into anyone's save. Left on for public testing.")
+              "log into a matching save. Unset it before public deployment.")
     else:
         check(OK, "no dev login bypass")
 
@@ -66,6 +97,19 @@ def check_dev_backdoors():
               "two players to log in would share one inventory.")
     else:
         check(OK, "multi-account identity on")
+
+
+def check_oauth_state_secret():
+    """A public OAuth callback needs a stable secret across listener restarts."""
+    import google_login
+    if not (google_login.enabled() or google_login.portal_enabled()):
+        check(OK, "Google OAuth disabled")
+    elif _env("GLOGIN_STATE_SECRET"):
+        check(OK, "OAuth state secret configured")
+    else:
+        check(FAIL, "GLOGIN_STATE_SECRET missing",
+              "OAuth state resets on restart. Put a generated secret in the deployment "
+              "environment; never use a tracked fallback.")
 
 
 # --- abuse limits ------------------------------------------------------------
@@ -154,7 +198,7 @@ def check_tls():
 
 def check_route_coverage():
     from cli import route_coverage
-    r = route_coverage.report()
+    r = route_coverage.report(route_coverage.SCRIPT_JSON)
     n = len(r["client_routes"])
     if r["bare"]:
         check(WARN, f"{len(r['bare'])} of {n} client routes have no handler",
@@ -163,11 +207,15 @@ def check_route_coverage():
         check(OK, f"all {n} client routes answered")
 
 
-CHECKS = [check_admin_credentials, check_dev_backdoors, check_limits,
+CHECKS = [check_admin_credentials, check_dev_backdoors, check_oauth_state_secret, check_limits,
           check_state_store, check_master_data, check_tls, check_route_coverage]
 
 
 def main(strict=False):
+    try:
+        load_deployment_env()
+    except (OSError, ValueError) as e:
+        check(FAIL, "deployment configuration could not be read", str(e))
     for fn in CHECKS:
         try:
             fn()

@@ -154,6 +154,12 @@ The **deep link back into the app is not the live path**. `patch_deeplink.py` st
 account id is parked server-side and a native poller in the XIGNCODE stub fetches it. Handing it to
 `Scene_Login.Auth` (rather than `RestAPI.Auth`) is what makes the login scene actually transition.
 
+The pending handoff is bound to the browser/poller's client address and is consumed once. On a
+public Cloudflare deployment, set `KGC_TRUST_PROXY=1` only with the game API bound to loopback, so
+the browser's `CF-Connecting-IP` and the direct native poller's peer address both resolve to the
+real player. Do not restore an "any pending login" fallback for IPv4/IPv6 or split-host testing:
+that turns an in-progress Google sign-in into an account takeover.
+
 `google_<sub>` is stable per Google account, so cross-device restore is automatic
 (the multi-account machinery above keys the save on it). **This half is built and
 tested** (`server/tests/test_google_login.py`; real Google is stubbed).
@@ -167,7 +173,7 @@ tested** (`server/tests/test_google_login.py`; real Google is stubbed).
    ```
    server/secrets/google_oauth.json        # gitignored; see server/secrets/README.md
    chmod 600 server/secrets/google_oauth.json
-   ./run.sh                                # or serve_public.sh
+   python3 run.py                          # or serve_public.sh
    ```
    `google_login.py` reads the id, the secret, **and** the public base URL out of it -
    the base is derived from whichever `redirect_uris` entry ends in `/glogin/callback`,
@@ -179,7 +185,7 @@ tested** (`server/tests/test_google_login.py`; real Google is stubbed).
    GOOGLE_CLIENT_ID=...apps.googleusercontent.com \
    GOOGLE_CLIENT_SECRET=... \
    GLOGIN_PUBLIC_URL=https://kgc.example.com \
-   ./run.sh
+   python3 run.py
    ```
    Prefer the file: a secret on a command line is in `~/.zsh_history` and in the
    process list, readable by any other user on the box.
@@ -188,7 +194,7 @@ tested** (`server/tests/test_google_login.py`; real Google is stubbed).
 
 > **The redirect URI has to be reachable from the device's browser, not from your
 > desktop.** On an emulator the browser reaches the server through the same
-> `adb reverse` the game uses, and `run.sh` only maps `:80 -> :8080` and
+> `adb reverse` the game uses. Press `d` in `run.py` to map `:80 -> :8080` and
 > `:443 -> :8443`. So register `http://localhost/glogin/callback` (port 80) and it
 > works as-is; register `http://localhost:8080/...` and you must also run
 > `adb reverse tcp:8080 tcp:8080` after every emulator restart.
@@ -229,7 +235,7 @@ web login: Scene_Login.Auth("google_devA") - full handshake
 ```
 
 If those hook lines are missing, the hooks never installed - see the hook gotcha in
-[v171-private-build.md](v171-private-build.md) before debugging the login itself.
+[private-build.md](private-build.md) before debugging the login itself.
 
 ### What works cross-device on the repacked build today
 

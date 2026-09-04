@@ -37,6 +37,6 @@ Sẽ có người rao bán/chia sẻ "bản mod chạy được giả lập + se
 ## Chơi thế nào
 
 - **Muốn dùng tài khoản thật, nội dung chính thống:** chơi trên **thiết bị Android thật** (điện thoại, máy tính bảng). Lớp bảo vệ chỉ hỏng trên lớp-dịch của giả lập; trên máy ARM thật game chạy bình thường. Đây là cách nhà phát triển muốn game được chơi.
-- **Muốn nghịch trên giả lập:** chỉ khả thi với **private server** (server tự dựng), tách hẳn khỏi hệ thống chính thống. Không có tài khoản/xếp hạng chính thống, nhưng không đụng gì tới server thật nên không ai bị khóa. Hướng này đã chạy được: bản v171 private vào tới lobby trên redroid (2026-07-19) - xem [v171-private-build.md](v171-private-build.md).
+- **Muốn nghịch trên giả lập:** chỉ khả thi với **private server** (server tự dựng), tách hẳn khỏi hệ thống chính thống. Không có tài khoản/xếp hạng chính thống, nhưng không đụng gì tới server thật nên không ai bị khóa. Hướng này đã chạy được: bản v171 private vào tới lobby trên redroid (2026-07-19) - xem [private-build.md](private-build.md).
 
 Không có cách thứ ba. Không có bản mod nào vừa chạy giả lập vừa vào được server chính thống một cách an toàn - vì đúng cái khiến nó văng trên giả lập cũng chính là cái server dùng để kiểm tra client. Sửa cái này là hỏng cái kia.

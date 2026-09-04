@@ -19,9 +19,9 @@
 char g_kgc_glogin_host[64] = "127.0.0.1\0" "                                                   ";
 char g_kgc_glogin_port[16] = "8080\0" "          ";
 char g_kgc_glogin_scheme[9] = "http\0   ";
-// Separate poll host: the browser opens glogin_host (domain, valid Cloudflare cert),
-// but the native poller must reach the origin directly (Cloudflare redirects HTTP→HTTPS
-// and the raw socket poller can't follow). Build script patches this to the IP address.
+// Separate poll host/port: the browser opens glogin_host (domain, valid Cloudflare
+// cert), but the native poller reaches the origin directly. Public builds use the
+// origin's Caddy :80 route because this raw HTTP client cannot speak HTTPS.
 char g_kgc_glogin_poll_host[64] = "127.0.0.1\0" "                                                   ";
 
 
@@ -355,8 +355,8 @@ static void write_abs_jump(void* at, void* dest);   // defined in the inline-hoo
 // Uncomment the block at the hook site to re-enable.
 
 // GET /glogin/pending on origin.
-// Follows HTTP redirects (301/302): if Location is https://, downgrades to http://
-// and uses port 8080 (direct to origin, bypasses Cloudflare's HTTPS redirect).
+// Follows HTTP redirects (301/302): if Location is https://, downgrades to HTTP and
+// retries the configured poll port against the same origin host.
 // Returns body length, or -1. Plain HTTP, plain text body (not a game-API route).
 static int http_get_pending_once(const char* host, const char* port, char* buf, int buflen) {
     struct addrinfo hints, *res;
@@ -423,8 +423,8 @@ static int http_get_pending_once(const char* host, const char* port, char* buf, 
             // Always keep the ORIGINAL host — the Location header may point at
             // a domain (e.g. kingbugcastle.id.vn) that goes through Cloudflare,
             // which would redirect HTTP→HTTPS again in an infinite loop.
-            // Downgrade https→http, use port 8080 for direct origin access.
-            const char* rport = "8080";
+            // Downgrade https→http while keeping the configured direct-origin port.
+            const char* rport = g_kgc_glogin_port;
             if (strncasecmp(loc, "http://", 7) == 0) {
                 rport = port;  // already http: keep original port
             }
