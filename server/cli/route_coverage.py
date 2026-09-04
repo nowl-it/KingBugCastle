@@ -23,10 +23,10 @@ SERVER = ROOT.parent
 REPO = ROOT.parent.parent
 if str(SERVER) not in sys.path:
     sys.path.insert(0, str(SERVER))
-# The deployed client is v172.0.01.  The extracted metadata is intentionally not
+# The deployed client is v172.1.00.  The extracted metadata is intentionally not
 # tracked (it is generated from a proprietary APK), so a deployment/CI job must
 # supply it with KGC_IL2CPP_SCRIPT_JSON when it lives elsewhere.
-CLIENT_VERSION = os.environ.get("KGC_CLIENT_VERSION", "172.0.01")
+CLIENT_VERSION = os.environ.get("KGC_CLIENT_VERSION", "172.1.00")
 SCRIPT_JSON = Path(os.environ.get("KGC_IL2CPP_SCRIPT_JSON") or
                    REPO / "il2cpp" / f"v{CLIENT_VERSION}" / "script.json")
 
