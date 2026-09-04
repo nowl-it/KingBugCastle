@@ -17,9 +17,9 @@ on:
         required: false
         default: "80"
       tag:
-        description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v172.0.01); if it already exists a timestamp suffix is appended"
+        description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v172.1.00); if it already exists a timestamp suffix is appended"
         required: false
-        default: "v172.0.01"
+        default: "v172.1.00"
 
 jobs:
   build:
@@ -49,21 +49,21 @@ jobs:
         run: |
           pip install -r server/requirements.txt
 
-      - name: Ensure Base XAPK source (v172.0.01)
+      - name: Ensure Base XAPK source (v172.1.00)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ ! -f apk/xapk_extracted_v17201/com.awesomepiece.castle.apk ]; then
-            echo "Base XAPK source missing, downloading from release stock-v172.0.01..."
+          if [ ! -f apk/xapk_extracted_v1721/com.awesomepiece.castle.apk ]; then
+            echo "Base XAPK source missing, downloading from release stock-v172.1.00..."
             mkdir -p apk/xapk_extracted_v17201
-            gh release download stock-v172.0.01 --pattern "*.xapk" --dir /tmp/base_xapk --repo "$GITHUB_REPOSITORY"
-            unzip -o -q /tmp/base_xapk/*.xapk -d apk/xapk_extracted_v17201/
+            gh release download stock-v172.1.00 --pattern "*.xapk" --dir /tmp/base_xapk --repo "$GITHUB_REPOSITORY"
+            unzip -o -q /tmp/base_xapk/*.xapk -d apk/xapk_extracted_v1721/
             rm -rf /tmp/base_xapk
           fi
-          test -f apk/xapk_extracted_v17201/com.awesomepiece.castle.apk
-          test -f apk/xapk_extracted_v17201/config.arm64_v8a.apk
-          test -f apk/xapk_extracted_v17201/base_assets.apk
-          test -f apk/xapk_extracted_v17201/manifest.json
+          test -f apk/xapk_extracted_v1721/com.awesomepiece.castle.apk
+          test -f apk/xapk_extracted_v1721/config.arm64_v8a.apk
+          test -f apk/xapk_extracted_v1721/base_assets.apk
+          test -f apk/xapk_extracted_v1721/manifest.json
 
       - name: Setup Keystore
         run: |
@@ -78,19 +78,19 @@ jobs:
           GLOGIN_HOST: ${{ github.event.inputs.glogin_host }}
           GLOGIN_POLL_HOST: ${{ github.event.inputs.glogin_poll_host }}
           GLOGIN_POLL_PORT: ${{ github.event.inputs.glogin_poll_port }}
-          KGC_APK_SRC: xapk_extracted_v17201
+          KGC_APK_SRC: xapk_extracted_v1721
         run: |
           python3 server/builders/build_private.py --share
 
       - name: Resolve Version
         run: |
           TAG="${{ github.event.inputs.tag }}"
-          [ -z "$TAG" ] && TAG="v172.0.01"
+          [ -z "$TAG" ] && TAG="v172.1.00"
           echo "TAG=$TAG" >> "$GITHUB_ENV"
 
       - name: Prepare Release Asset
         run: |
-          cp KingBugCastle_172.0.01.xapk "KingBugCastle_${TAG}.xapk"
+          cp KingBugCastle_172.1.00.xapk "KingBugCastle_${TAG}.xapk"
           ls -lh "KingBugCastle_${TAG}.xapk"
 
       - name: Upload Artifact
@@ -107,12 +107,12 @@ jobs:
           cat > notes.md <<EOF
           ## King Bug Castle — Private-Server Client
 
-          Custom client (v172.0.01, arm64) for the King Bug Castle private-server project: the
-          original King God Castle v172.0.01 game with compatibility patches so it connects to a
+          Custom client (v172.1.00, arm64) for the King Bug Castle private-server project: the
+          original King God Castle v172.1.00 game with compatibility patches so it connects to a
           self-hosted private server instead of the official backend.
 
           ### What is inside
-          - Game version: v172.0.01 (arm64)
+          - Game version: v172.1.00 (arm64)
           - SSL verification bypass — works with self-signed server certificates
           - Anti-cheat (XIGNCODE NEO) stub — the game boots normally without the official packer
           - Stability fixes — patched crash/NRE sources (lobby, shop, PvP panels, event popups)
@@ -156,5 +156,5 @@ jobs:
         if: always()
         run: |
           echo "Cleaning up stock files and build artifacts..."
-          rm -rf apk/xapk_extracted_v17201 KingBugCastle_172.0.01.xapk "KingBugCastle_${TAG}.xapk"
+          rm -rf apk/xapk_extracted_v1721 KingBugCastle_172.1.00.xapk "KingBugCastle_${TAG}.xapk"
 

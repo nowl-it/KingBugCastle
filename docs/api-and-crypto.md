@@ -1,6 +1,6 @@
-# API & Crypto — talk to the server manually
+# API & Crypto - talk to the server manually
 
-The game API is encrypted, but the scheme is simple enough to script — useful for testing a handler
+The game API is encrypted, but the scheme is simple enough to script - useful for testing a handler
 without the client.
 
 ## Cipher
@@ -8,7 +8,7 @@ without the client.
 - **AES-128-ECB**, key `b53019bb76da6b34` (16 ASCII bytes). Used for both request bodies and responses.
 - **Padding**: the server pads the plaintext JSON with **trailing spaces** to a 16-byte multiple, then
   decodes the first JSON object and ignores trailing pad bytes (Newtonsoft tolerates trailing spaces,
-  not other bytes). Requests may arrive as raw ciphertext **or** ASCII-hex of the ciphertext — hence the
+  not other bytes). Requests may arrive as raw ciphertext **or** ASCII-hex of the ciphertext - hence the
   header name `encryptedWithHex`.
 - Response header: `encryptedWithHex: true`, body = raw AES-ECB ciphertext.
 - Auth header on real requests: `accesstoken: <token>` (NOT `Authorization: Bearer`). Time header =
@@ -41,7 +41,7 @@ req = urllib.request.Request(
 print(dec(urllib.request.urlopen(req).read()))
 ```
 
-`curl` a GET the same way — the response is ciphertext, pipe it through `dec()`:
+`curl` a GET the same way - the response is ciphertext, pipe it through `dec()`:
 
 ```bash
 curl -s http://127.0.0.1:8080/treasure -o /tmp/r.bin      # then decrypt /tmp/r.bin with dec()
@@ -62,7 +62,7 @@ GET  /player/currencies, /card/all, /deck, /treasure, /shop, ... (~280 more)
 
 Success responses need `code: 200` and all model fields at typed defaults so Newtonsoft deserializes
 without crashing. `server.py` fills the important screens from `state/*.json`; everything else returns a
-wire-valid empty model. XIGNCODE3 is client-side anti-cheat — the server only answers the seed
+wire-valid empty model. XIGNCODE3 is client-side anti-cheat - the server only answers the seed
 handshake, a stub seed is enough for the API.
 
 ## Handler registration order

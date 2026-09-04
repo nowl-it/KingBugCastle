@@ -342,7 +342,7 @@ def make_treasure(i, tr_id):
 
 def make_max_artifact(i, art_id):
     """Grant-side relic: full 10* (count 99999), every option AtkSpeedPer maxed
-    (value 24, level 6 — the pre-fa74808 template values), applying to column 1
+    (value 24, level 6 - the pre-fa74808 template values), applying to column 1
     (safePositions). The gacha summon path keeps the 0* template on purpose."""
     art = make_artifact(i, art_id)
     art["count"] = 99999

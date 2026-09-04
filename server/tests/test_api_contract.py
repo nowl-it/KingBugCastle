@@ -12,6 +12,8 @@ import pathlib
 import sys
 import tempfile
 
+import pytest
+
 _SERVER = pathlib.Path(__file__).resolve().parent.parent
 for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
     _sp = str(_p)
@@ -25,7 +27,14 @@ playerdb.DB_PATH = pathlib.Path(tempfile.mkdtemp()) / "players.db"
 import api_audit                                  # noqa: E402
 import server                                     # noqa: E402
 
-server.RATE_LIMIT = 0        # this suite drives every route from one address
+
+@pytest.fixture(autouse=True)
+def _no_rate_limit(monkeypatch):
+    """This suite drives every route from one address - but keep the limiter OFF
+    only for this module. The pin must not live at import time: pytest imports
+    all test modules during collection, so module-level mutations leak the
+    disabled limit into every later suite."""
+    monkeypatch.setattr(server, "RATE_LIMIT", 0)
 
 
 def check_every_registered_handler_is_reachable():

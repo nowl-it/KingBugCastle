@@ -7,6 +7,8 @@ sudoers rule that CI must not have.
 """
 import os, pathlib, sys, tempfile, time
 
+import pytest
+
 _SERVER = pathlib.Path(__file__).resolve().parent.parent
 for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
     _sp = str(_p)
@@ -21,16 +23,25 @@ playerdb.init()
 import server                                       # noqa: E402
 from fastapi.testclient import TestClient           # noqa: E402
 
-# Other test modules may have imported server.py first with default env, and the
-# module globals are read at import time - so pin them directly (same pattern as
-# test_public_hardening's server.ADMIN_TOKEN reset).
-server.RATE_LIMIT = 5
-server.RATE_WINDOW = 60
-server.RATE_BAN_AFTER = 2
-server.RATE_BAN_SECONDS = 300
-server.IPTABLES_BAN = False                          # never touch real firewalls
-
 IP = "198.51.100.7"
+
+
+@pytest.fixture(autouse=True)
+def _pinned_limits(monkeypatch):
+    """Pin low limits for ONLY this module's tests.
+
+    These pins used to live at module import time - but pytest imports every test
+    module during collection, before any test runs, so server.RATE_LIMIT=5 and
+    RATE_BAN_SECONDS=300 leaked into the whole process and every later suite got
+    429-banned (test_dashboard_api drove 127.0.0.1 five times and hit the
+    300-second temp ban). monkeypatch scopes them to this module and restores the
+    defaults afterwards.
+    """
+    monkeypatch.setattr(server, "RATE_LIMIT", 5)
+    monkeypatch.setattr(server, "RATE_WINDOW", 60)
+    monkeypatch.setattr(server, "RATE_BAN_AFTER", 2)
+    monkeypatch.setattr(server, "RATE_BAN_SECONDS", 300)
+    monkeypatch.setattr(server, "IPTABLES_BAN", False)  # never touch real firewalls
 
 
 def _client():

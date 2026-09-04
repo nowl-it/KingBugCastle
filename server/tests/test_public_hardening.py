@@ -184,6 +184,8 @@ def check_one_address_cannot_hog_the_server():
     assert c.get("/patch/AssetHash.txt").status_code == 200, \
         "rate limit broke the CDN, which every fresh install hammers"
     server._rate_hits.clear()
+    server._banned.clear()                       # the burst left a 900s ban behind
+    server._ban_strikes.clear()
     print(f"ok: {server.RATE_LIMIT}/{server.RATE_WINDOW}s per address, CDN exempt")
 
 

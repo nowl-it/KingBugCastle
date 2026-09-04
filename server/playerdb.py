@@ -162,7 +162,7 @@ def _m4_admins(c):
 
 
 def _m5_lobbies(c):
-    """Friendly Battle lobbies — transient rooms keyed by a 6-char code."""
+    """Friendly Battle lobbies - transient rooms keyed by a 6-char code."""
     c.execute("CREATE TABLE IF NOT EXISTS lobbies ("
               "code TEXT PRIMARY KEY, host_uid TEXT NOT NULL, "
               "members TEXT NOT NULL DEFAULT '[]', created_at REAL NOT NULL)")

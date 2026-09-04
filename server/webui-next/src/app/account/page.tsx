@@ -115,7 +115,7 @@ export default function AccountPage() {
                 <Button variant="ghost" size="sm" className="text-destructive" onClick={() => remove(a.username)}><Trash2 className="h-3.5 w-3.5 mr-1" /> Delete</Button>
               </li>
             ))}
-            {!list.length && <p className="px-4 py-8 text-sm text-muted-foreground">No admin accounts — dashboard is token/loopback-only.</p>}
+            {!list.length && <p className="px-4 py-8 text-sm text-muted-foreground">No admin accounts - dashboard is token/loopback-only.</p>}
           </ul>
         </CardContent>
       </Card>

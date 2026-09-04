@@ -1,35 +1,35 @@
 # KGC private server (emulator)
 
 Reverse-engineered private server for **King God Castle** (`com.awesomepiece.castle`),
-supporting client versions **v170.1.00 – v172.0.01** (arm64).
+supporting client versions **v170.1.00 - v172.1.00** (arm64).
 Goal: boot the real client against a server you control for offline testing,
 mechanic experimentation, and private multiplayer.
 
 [![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/6tDBPs9chp)
 
-> Research / interoperability use only. Server-authoritative game — this emulates
+> Research / interoperability use only. Server-authoritative game - this emulates
 > the backend; it does not modify or distribute the client.
 
 **Start here:**
-- **[Discord Server](https://discord.gg/6tDBPs9chp)** — community, help, announcements, bug reports.
-- **[../SETUP.md](../SETUP.md)** — first-run: clone → `setup.py` → run your own server,
+- **[Discord Server](https://discord.gg/6tDBPs9chp)** - community, help, announcements, bug reports.
+- **[../SETUP.md](../SETUP.md)** - first-run: clone → `setup.py` → run your own server,
   on any OS, against redroid / BlueStacks / LDPlayer / a real phone.
-- **[WORKFLOW.md](WORKFLOW.md)** — day-to-day edit/test/deploy loop, "which file do I
+- **[WORKFLOW.md](WORKFLOW.md)** - day-to-day edit/test/deploy loop, "which file do I
   edit" table, rules that have caused real crashes when violated.
-- **[data/README.md](data/README.md)** — schema of the JSON files under `data/`.
-- **[../AGENTS.md](../AGENTS.md)** (repo root) — arm64 patch inventory + RVA map, kept
+- **[data/README.md](data/README.md)** - schema of the JSON files under `data/`.
+- **[../AGENTS.md](../AGENTS.md)** (repo root) - arm64 patch inventory + RVA map, kept
   current with every Ghidra-verified finding.
-- **[../KNOWLEDGE.md](../KNOWLEDGE.md)** — dated session log: what was found, what broke,
+- **[../KNOWLEDGE.md](../KNOWLEDGE.md)** - dated session log: what was found, what broke,
   and why. The fullest incident write-ups live here.
 
 ## What it is
 
-- `pipeline/extract_models.py` — parses `dump.cs` → `generated/models.json` (357 wire
+- `pipeline/extract_models.py` - parses `dump.cs` → `generated/models.json` (357 wire
   models, exact field names/types from `Awesomepiece.Model`) + `generated/restapi.json`
   (431 `RestAPI` methods → request/response model).
-- `pipeline/map_routes.py` — maps the 284 REST route strings (from `stringliteral.json`) →
+- `pipeline/map_routes.py` - maps the 284 REST route strings (from `stringliteral.json`) →
   RestAPI method → response model. Auth-critical paths are hand-pinned.
-- `server.py` — FastAPI app. Registers all 284 routes + a catch-all. Every endpoint
+- `server.py` - FastAPI app. Registers all 284 routes + a catch-all. Every endpoint
   returns a **wire-valid** ResponseModel (`code:0` + all fields at typed defaults),
   which Newtonsoft on the client deserializes without crashing. Important screens
   (auth, player, currencies) are filled from `state/player.json`. Response data
@@ -73,7 +73,7 @@ Backend hosts (all `awesomepiece.com` / GCP):
 | `kgc-cdn-1.awesomepiece.com` | addressables CDN (you already mirror this) |
 
 Transport = HTTPS + JSON (Newtonsoft). Auth = `accessToken` (bearer/cookie).
-Anti-cheat = **XIGNCODE3** (Wellbia) — client-side; server only exchanges a seed,
+Anti-cheat = **XIGNCODE3** (Wellbia) - client-side; server only exchanges a seed,
 so a stub seed is enough for the API. SSL pinning present (`CertificateHandler`,
 2 `pinning` refs) → must be bypassed to MITM.
 
@@ -118,7 +118,7 @@ trusts your cert.
 
 ### A. Redirect hosts (pick one)
 
-1. **DNS / hosts** — on the device/emulator, map the API hosts to your server IP:
+1. **DNS / hosts** - on the device/emulator, map the API hosts to your server IP:
    ```
    <YOUR_IP>  axis-game.awesomepiece.com
    <YOUR_IP>  kgc-k8s-1.awesomepiece.com
@@ -127,10 +127,10 @@ trusts your cert.
    ```
    Leave `kgc-cdn-1` pointing at your addressables mirror (or the real CDN).
 
-2. **mitmproxy reverse/transparent** — run `mitmproxy` and reverse the above hosts to
+2. **mitmproxy reverse/transparent** - run `mitmproxy` and reverse the above hosts to
    `localhost:8080`. Easiest for capturing real traffic to refine responses.
 
-3. **Binary patch** — `INFRA_SERVER_URL` is a hardcoded string literal in `libil2cpp.so`
+3. **Binary patch** - `INFRA_SERVER_URL` is a hardcoded string literal in `libil2cpp.so`
    (and the other hosts in global-metadata). Patch the string in place (same byte
    length, e.g. `http://10.0.0.5:8080/........` padded) to skip DNS entirely. Most
    robust on rooted devices.
@@ -156,7 +156,7 @@ xigncode init to no-op) or patch it out of the APK.
 Most endpoints return empty-but-valid objects. To make a specific screen work:
 1. Run mitmproxy against the **real** server once, hit that screen, capture the JSON.
 2. Drop the captured body into an `OVERRIDES` builder (or a static fixture file).
-3. Restart — the client now sees real-shaped data from your server.
+3. Restart - the client now sees real-shaped data from your server.
 
 Field names/types are already known (`generated/models.json`) so you only supply values.
 
@@ -201,7 +201,7 @@ server/
                           BattleManager.Update; custom-mail hook on PostListItem.Set)
 ```
 
-## Web dashboard — `dashboard.py` + `webui/` (:8081)
+## Web dashboard - `dashboard.py` + `webui/` (:8081)
 
 One web UI + one server. Replaced the old split (a static `tracker_ui/`, its `log_tracker.py`
 backend, and a dead Next.js `admin/` skeleton). Run it and open http://localhost:8081/:
@@ -259,16 +259,16 @@ blank. This turns that into a failure with a line number:
 node webui/check_templates.mjs      # imports every module, compiles every template
 ```
 
-## Native stub (XIGNCODE replacement) — `jni/stub.cpp`
+## Native stub (XIGNCODE replacement) - `jni/stub.cpp`
 
 More than a no-op: after registering stub `ZCWAVE_*` JNI methods (so the client boots past the
-anti-cheat), a worker thread dlopen's `libil2cpp.so` and installs hooks. Two hook techniques —
+anti-cheat), a worker thread dlopen's `libil2cpp.so` and installs hooks. Two hook techniques -
 see `AGENTS.md` "il2cpp hook techniques":
-- **methodPointer swap** — only intercepts Unity engine messages (e.g. `BattleManager.Update`, the
+- **methodPointer swap** - only intercepts Unity engine messages (e.g. `BattleManager.Update`, the
   in-battle GameUnit stat poller that feeds the `dashboard.py` Battle Tracker tab).
-- **inline detour** (`install_inline_hook`) — needed for direct C#→C# calls like `PostListItem.Set`
+- **inline detour** (`install_inline_hook`) - needed for direct C#→C# calls like `PostListItem.Set`
   (custom Inbox mail title/text: server prefixes `@raw:`, the hook strips it and writes the literal
-  via `set_text`, bypassing the Localizer — no CDN Strings rebuild needed).
+  via `set_text`, bypassing the Localizer - no CDN Strings rebuild needed).
 
 Build: cmake in `/tmp/stub_build` (see SETUP.md), then `cp libxigncode.so xigncode_stub/arm64/` and
 run `builders/build_private.py`.

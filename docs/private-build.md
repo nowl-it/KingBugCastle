@@ -1,12 +1,16 @@
 # Private Build (v171 / v172)
 
 How to build, install and run the private client against your own server.
-Status as of 2026-08-14: builds from **v172.0.01** (default), **v172.0.00**, or **v171.x** APKs and
+Status as of 2026-09-05: builds from **v172.1.00** (newest), **v172.0.01** (default), **v172.0.00**, or **v171.x** APKs and
 **boots to a fully rendered lobby on redroid**; Guest and web-Google login both work.
 
 ```bash
 # v172.0.01 (default)
 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 python3 server/builders/build_private.py
+
+# v172.1.00
+KGC_APK_SRC=xapk_extracted_v1721 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 \
+  python3 server/builders/build_private.py
 
 # v172.0.00
 KGC_APK_SRC=xapk_extracted_v1720 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 \
@@ -49,7 +53,7 @@ v171.1.00. `patch_genesis.py` used to hardcode the v171.0.01 pair, so on v171.1.
 finds the file by content (a `System.exit` inside a `loadLibrary` catch) - the same rule as
 matching the packer `.so` by its SONAME instead of its rotating filename.
 
-This is the private-server path only — the client talks to `127.0.0.1` and nothing else.
+This is the private-server path only - the client talks to `127.0.0.1` and nothing else.
 For why the stock v171 cannot run on an emulator against the *official* server, and why no
 mod should try, see [emulator-note.md](emulator-note.md).
 
@@ -72,7 +76,7 @@ So the v171 build has to do three extra things before the familiar patches even 
    [../AGENTS.md](../AGENTS.md). A mismatch is a hard `SystemExit`, never a silent skip.
 2. **Inject a real `libil2cpp.so`**, unpacked out of the packer itself by
    `patchers/unpack_neo.py` (offline, automatic). For a v171.1.00 source that is
-   `il2cpp/v171.1.00/libil2cpp_v17110_ssl.so` — the build's **own** game code.
+   `il2cpp/v171.1.00/libil2cpp_v17110_ssl.so` - the build's **own** game code.
    Recovery recipe: [mftl-extraction.md](mftl-extraction.md).
 3. **Nothing else, on the native path.** The injected lib and the metadata the APK ships
    are from the same build, so their string-literal indices already agree.
@@ -116,7 +120,7 @@ GLOGIN_DEV=1 uvicorn server:app --host 0.0.0.0 --port 8443 --ssl-keyfile key.pem
 # 2. Build + sign + install "King Bug Castle" (com.nowl.castle, side-by-side with the real app)
 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 python3 server/builders/build_private.py
 
-# 3. Route the device back to your server (per-connection — re-run after any reconnect)
+# 3. Route the device back to your server (per-connection - re-run after any reconnect)
 adb reverse tcp:80 tcp:8080
 adb reverse tcp:443 tcp:8443
 adb shell settings put global http_proxy :0     # clear any leftover proxy
@@ -126,12 +130,12 @@ adb shell am start -n com.nowl.castle/co.ab180.airbridge.unity.AirbridgeActivity
 ```
 
 The launcher activity is **`co.ab180.airbridge.unity.AirbridgeActivity`**, not the `MainActivity` used
-for v170 — `monkey -c LAUNCHER` resolves to an obfuscated class and fails.
+for v170 - `monkey -c LAUNCHER` resolves to an obfuscated class and fails.
 
 ## v171 uses plain HTTP, not TLS
 
 The il2cpp SSL patches only cover C# `HttpClient`. Unity's own **UnityTls** (`UnityWebRequest`, inside
-`libunity.so`) validates against the app's baked CA bundle and cannot be patched from il2cpp — a
+`libunity.so`) validates against the app's baked CA bundle and cannot be patched from il2cpp - a
 self-signed cert gets rejected with `Curl error 60: UnityTls error code 7`.
 
 The build works around it by rewriting the backend URLs `https://` → `http://` in
@@ -160,7 +164,7 @@ The client sends `version=171001` (the APK's own version), which is independent 
 
 Then check `adb logcat -s XignCodeStub` for the hook install lines - see the hook gotcha below.
 
-First launch stops at the **"Agreement of Terms and Condition"** consent dialog — tap both checkboxes
+First launch stops at the **"Agreement of Terms and Condition"** consent dialog - tap both checkboxes
 and consent. Fresh installs always show it since the package is uninstalled each build.
 
 ## Login
@@ -186,7 +190,7 @@ Full offset table with original bytes and purpose: **[../AGENTS.md](../AGENTS.md
 - 3 SSL bypasses, baked into `libil2cpp_v171_ssl.so` (raw file offsets).
 - `GameManager.CheckFirebase` → `ret` (FCM init is fatal in the v171 login coroutine and wants Play
   Services, which redroid does not have).
-- 10 lobby-NRE stubs, a direct port of the v170 set — every prologue is byte-identical, only offsets
+- 10 lobby-NRE stubs, a direct port of the v170 set - every prologue is byte-identical, only offsets
   moved.
 
 All are idempotent and guarded: a prologue that does not match raises `SystemExit` instead of writing
@@ -201,7 +205,7 @@ Two patch sets exist but are **off by default**, behind env flags:
 
 ## Gotchas
 
-**Keep `libil2cpp_v171_ssl.so` pristine** — plain `libil2cpp_v171.so` plus *exactly* the 3 SSL
+**Keep `libil2cpp_v171_ssl.so` pristine** - plain `libil2cpp_v171.so` plus *exactly* the 3 SSL
 patches, nothing else. Never hand-patch it in place:
 
 ```bash
@@ -249,7 +253,7 @@ check is permanently true and the client re-logins at 1 Hz (~17 requests/second)
 derives it (`next_reset_iso()`); regression test `server/tests/test_daily_reset.py`.
 
 **First launch after clearing `UnityCache` hangs on "Loading resources".** All 51 requests complete,
-the `xml` bundle downloads, no exception is logged — the scene just never transitions. Launch a
+the `xml` bundle downloads, no exception is logged - the scene just never transitions. Launch a
 second time and it reaches the lobby. Only the *first* launch against a cold cache is affected, so
 budget one throwaway launch after any `rm -rf .../files/UnityCache`. This is easy to misattribute to
 whatever you changed just before; A/B the same change against a warm cache before blaming it.
@@ -269,10 +273,10 @@ stay gated - that is future content this client cannot render.
 generic model, so any array the client iterates unconditionally arrives null and NREs. Hit this with
 `GET /shop/load-custom-pickups` (Summon panel): `CustomPickupsResponseModel.customPickups` is an
 `int[]`, and the empty-model fallback crashed `RestAPI.LoadCustomPickups`. Fixed with a
-`DYNAMIC_OVERRIDES` entry returning `[]`. Watch the log for `[UNKNOWN PATH]` — each one is a latent
+`DYNAMIC_OVERRIDES` entry returning `[]`. Watch the log for `[UNKNOWN PATH]` - each one is a latent
 NRE of this shape.
 
 ## Known issues
 
 - **redroid Choreographer crash** at ~70s is an emulator defect (destroyed-mutex FORTIFY abort via
-  `ndk_translation`), not a client problem — it will not happen on a real ARM device.
+  `ndk_translation`), not a client problem - it will not happen on a real ARM device.

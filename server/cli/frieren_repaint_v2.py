@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Frieren repaint frame 0 — final version, coordinate-based pixel mapping."""
+"""Frieren repaint frame 0 - final version, coordinate-based pixel mapping."""
 from PIL import Image
 
 SRC = "/home/nowl/Code/kgc/server/assets/frieren/reference_frames/00_Unit_10570_02_0.png"
@@ -61,7 +61,7 @@ for y in range(h):
                 op[ox, oy] = (*STAFF[3], 255)
             continue
 
-        # === EARRINGS — left (x=11-13, y=28-30) + right (x=39-41, y=25-27) ===
+        # === EARRINGS - left (x=11-13, y=28-30) + right (x=39-41, y=25-27) ===
         is_earring_l = (11 <= x <= 13 and 28 <= y <= 30)
         is_earring_r = (39 <= x <= 41 and 25 <= y <= 27)
         if (is_earring_l or is_earring_r) and g > 80 and b > 80 and r < 120:
@@ -96,7 +96,7 @@ for y in range(h):
                 op[ox, oy] = (*HAIR[1], 255)  # default hair
             continue
 
-        # === FACE (face box — ALL → skin, remove forehead gem) ===
+        # === FACE (face box - ALL → skin, remove forehead gem) ===
         if in_face:
             if r > 220 and g > 170 and b > 110 and r - b > 80:
                 op[ox, oy] = (*HAIR[0], 255)  # gold near face → hair
@@ -187,4 +187,4 @@ for y in range(h):
         op[ox, oy] = (r, g, b, a)
 
 out.save(OUT)
-print(f"Saved {OUT} — {len(out.getcolors(maxcolors=100000))} colors")
+print(f"Saved {OUT} - {len(out.getcolors(maxcolors=100000))} colors")

@@ -69,7 +69,7 @@ import config
 ROUTE_MODELS = config.load_route_models()
 STATE_DIR.mkdir(parents=True, exist_ok=True)
 
-# Player level cap — client Constants.PlayerMaxLevel = 100
+# Player level cap - client Constants.PlayerMaxLevel = 100
 MAX_PLAYER_LEVEL = 100
 
 # Player state lives in state/players.db (SQLite, WAL). The old JSON files are

@@ -64,7 +64,7 @@ def _apply_ccratio(xml_dir, warns):
     return 1
 
 
-# ── 2–3. Treasures: un-gate to supported deployed client versions ────────────
+# ── 2-3. Treasures: un-gate to supported deployed client versions ────────────
 _TREASURE_GATES = {
     30040: 170100,  # Shadowless: fallback v170 client
     30043: 172001,  # Vitacorde: deployed v172.0.01 client

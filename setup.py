@@ -40,7 +40,7 @@ def check_python():
     if in_venv:
         ok(f"venv active ({sys.prefix})")
     else:
-        warn("no venv detected — some distros block 'pip install' system-wide")
+        warn("no venv detected - some distros block 'pip install' system-wide")
         warn("recommended: python -m venv .venv, then activate it (see SETUP.md)")
     return True
 

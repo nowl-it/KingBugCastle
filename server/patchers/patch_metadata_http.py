@@ -31,7 +31,7 @@ if INPUT.suffix in ('.apk', '.zip') or INPUT.read_bytes()[:2] == b'PK':
     with zipfile.ZipFile(INPUT, 'r') as z:
         info = z.getinfo(APK_ENTRY)
     if info.compress_type != 0:
-        print(f"[!] {APK_ENTRY} is compressed (type={info.compress_type}) — cannot in-place patch")
+        print(f"[!] {APK_ENTRY} is compressed (type={info.compress_type}) - cannot in-place patch")
         sys.exit(1)
     hdr_off = info.header_offset
     fname_len = struct.unpack_from('<H', apk_data, hdr_off + 26)[0]

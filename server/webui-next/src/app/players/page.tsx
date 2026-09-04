@@ -234,7 +234,7 @@ function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
               <CardTitle className="flex items-center gap-2">
                 {sum.name} {sum.active && <Badge variant="secondary">ACTIVE</Badge>}
               </CardTitle>
-              <CardDescription className="break-all font-mono">{pid} · uid {sum.uid} · castle “{sum.castleName || "—"}”</CardDescription>
+              <CardDescription className="break-all font-mono">{pid} · uid {sum.uid} · castle “{sum.castleName || "-"}”</CardDescription>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <Button variant="outline" size="sm" onClick={() => onClone(pid)}><Copy className="h-3.5 w-3.5 mr-1" /> Clone</Button>
@@ -403,7 +403,7 @@ function PortalAccess({ pid }: { pid: string }) {
     <CardContent className="space-y-4">
       {loading ? <p className="text-sm text-muted-foreground">Loading linked game accounts…</p> : <>
         {accounts.length === 0 ? <p className="text-sm text-muted-foreground">This save has no game login yet. The player must enter the game before portal access can be granted.</p> :
-          <ul className="space-y-2 text-sm">{accounts.map(account => <li key={account.login_id} className="rounded-md border p-3"><div className="font-mono break-all">{account.login_id}</div><div className="mt-1 text-muted-foreground">{account.login_id.startsWith("google_") ? "Google sign-in" : account.username ? `Guest portal name: ${account.username}${account.must_change_password ? " · password change required" : ""}` : "Guest account — no portal password yet"}</div></li>)}</ul>}
+          <ul className="space-y-2 text-sm">{accounts.map(account => <li key={account.login_id} className="rounded-md border p-3"><div className="font-mono break-all">{account.login_id}</div><div className="mt-1 text-muted-foreground">{account.login_id.startsWith("google_") ? "Google sign-in" : account.username ? `Guest portal name: ${account.username}${account.must_change_password ? " · password change required" : ""}` : "Guest account - no portal password yet"}</div></li>)}</ul>}
         {guests.length > 0 && <div className="grid gap-3 rounded-md border p-3 sm:grid-cols-3 sm:items-end">
           <div className="space-y-1"><label className="text-xs text-muted-foreground">Guest account</label><select className="h-9 w-full rounded-md border bg-background px-2 text-sm" value={loginId} onChange={event => setLoginId(event.target.value)}>{guests.map(account => <option key={account.login_id} value={account.login_id}>{account.login_id}</option>)}</select></div>
           <div className="space-y-1"><label className="text-xs text-muted-foreground">Portal username</label><Input value={username} onChange={event => setUsername(event.target.value)} placeholder="guest_name" /></div>

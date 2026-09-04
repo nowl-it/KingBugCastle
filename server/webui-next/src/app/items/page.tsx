@@ -95,7 +95,7 @@ export default function ItemsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Items</h1>
-        <p className="text-muted-foreground">Inventory is set by exact count — 0 removes the row. All 173 inventory items available.</p>
+        <p className="text-muted-foreground">Inventory is set by exact count - 0 removes the row. All 173 inventory items available.</p>
       </div>
       <PlayerBar />
       {!selectedId && <Card><CardContent className="py-16 text-center text-muted-foreground">Select a player above.</CardContent></Card>}
@@ -104,7 +104,7 @@ export default function ItemsPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2"><Boxes className="h-4 w-4" /> Inventory ({inv?.length ?? 0})</CardTitle>
-              <CardDescription>Counts are read-only here — set or remove from the catalog panel.</CardDescription>
+              <CardDescription>Counts are read-only here - set or remove from the catalog panel.</CardDescription>
             </CardHeader>
             <CardContent className="p-0">
               {!inv?.length ? <p className="px-4 py-8 text-sm text-muted-foreground">Inventory is empty.</p> : (

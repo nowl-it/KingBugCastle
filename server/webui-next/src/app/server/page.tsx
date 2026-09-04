@@ -27,7 +27,7 @@ function MiniStat({ icon: Icon, label, value, color }: { icon: IconComponent; la
       <Icon className={`h-4 w-4 ${color}`} />
       <div>
         <div className="text-[10px] uppercase tracking-wide text-muted-foreground">{label}</div>
-        <div className="text-sm font-semibold font-mono">{value ?? "—"}</div>
+        <div className="text-sm font-semibold font-mono">{value ?? "-"}</div>
       </div>
     </div>
   )
@@ -77,9 +77,9 @@ export default function ServerPage() {
           <MiniStat icon={Route} label="Routes" value={`${sys.routeCount} + ${sys.overrideCount} ovr`} color="text-violet-400" />
           <MiniStat icon={Database} label="CDN files" value={sys.cdmFiles} color="text-amber-400" />
           <MiniStat icon={ScrollText} label="Log lines" value={sys.logLines} color="text-cyan-400" />
-          <MiniStat icon={MemoryStick} label="Memory" value={mem ? `${mem.used}/${mem.total} MB` : "—"} color="text-rose-400" />
-          <MiniStat icon={Cpu} label="CPU load" value={loadPct !== null ? `${loadPct}% (1m)` : "—"} color="text-emerald-400" />
-          <MiniStat icon={HardDrive} label="Disk" value={disk ? `${disk.used}/${disk.total} GB` : "—"} color="text-lime-400" />
+          <MiniStat icon={MemoryStick} label="Memory" value={mem ? `${mem.used}/${mem.total} MB` : "-"} color="text-rose-400" />
+          <MiniStat icon={Cpu} label="CPU load" value={loadPct !== null ? `${loadPct}% (1m)` : "-"} color="text-emerald-400" />
+          <MiniStat icon={HardDrive} label="Disk" value={disk ? `${disk.used}/${disk.total} GB` : "-"} color="text-lime-400" />
         </div>
       )}
 
@@ -151,7 +151,7 @@ function SectionBody({ section, data }: { section: string; data: JsonValue }) {
                   <td className="px-3 py-1.5 text-right">
                     {r.overridden
                       ? <Badge variant="secondary" className="text-[10px]"><CheckCircle2 className="h-3 w-3 mr-1" /> direct handler</Badge>
-                      : <span className="text-xs text-muted-foreground">—</span>}
+                      : <span className="text-xs text-muted-foreground">-</span>}
                   </td>
                 </tr>
               ))}

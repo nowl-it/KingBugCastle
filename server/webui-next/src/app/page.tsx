@@ -122,10 +122,10 @@ export default function OverviewPage() {
   ]
 
   const hostMetrics = sysData ? [
-    { label: "Memory", value: mem ? `${mem.used} / ${mem.total} MB` : "—", sub: mem ? `${mem.percent}% used` : undefined, icon: MemoryStick, color: "text-rose-400" },
-    { label: "CPU load", value: loadPct !== null ? `${loadPct}%` : "—", sub: cpu ? `load 1m ${cpu.load1} · ${cpu.cores} cores` : undefined, icon: Cpu, color: "text-cyan-400" },
-    { label: "Disk", value: disk ? `${disk.used} / ${disk.total} GB` : "—", sub: disk ? `${disk.percent}% used` : undefined, icon: Server, color: "text-lime-400" },
-    { label: "Uptime", value: sysData.uptimeStr || "—", sub: sysData.startTime ? `since ${sysData.startTime}` : undefined, icon: Timer, color: "text-orange-400" },
+    { label: "Memory", value: mem ? `${mem.used} / ${mem.total} MB` : "-", sub: mem ? `${mem.percent}% used` : undefined, icon: MemoryStick, color: "text-rose-400" },
+    { label: "CPU load", value: loadPct !== null ? `${loadPct}%` : "-", sub: cpu ? `load 1m ${cpu.load1} · ${cpu.cores} cores` : undefined, icon: Cpu, color: "text-cyan-400" },
+    { label: "Disk", value: disk ? `${disk.used} / ${disk.total} GB` : "-", sub: disk ? `${disk.percent}% used` : undefined, icon: Server, color: "text-lime-400" },
+    { label: "Uptime", value: sysData.uptimeStr || "-", sub: sysData.startTime ? `since ${sysData.startTime}` : undefined, icon: Timer, color: "text-orange-400" },
   ] : []
 
   return (

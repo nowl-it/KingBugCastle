@@ -323,7 +323,7 @@ def game_data():
         if not sid:
             continue
         if not s.findtext("Prefab") and not s.findtext("Sprite"):
-            continue          # inherit-only stub (e.g. 1000099) — no visual content
+            continue          # inherit-only stub (e.g. 1000099) - no visual content
         skins.append({
             "id": int(sid),
             "type": "Skin",

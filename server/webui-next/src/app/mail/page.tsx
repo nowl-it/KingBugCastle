@@ -160,7 +160,7 @@ export default function MailPage() {
             <Textarea placeholder="Body (localization key or @raw: literal)" value={text} onChange={(e) => setText(e.target.value)} className="min-h-20" />
 
             {catalogError && (
-              <p className="text-xs text-destructive">Reward catalog unavailable ({catalogError.message}) — only Gold/Cash/Heart can be attached right now.</p>
+              <p className="text-xs text-destructive">Reward catalog unavailable ({catalogError.message}) - only Gold/Cash/Heart can be attached right now.</p>
             )}
 
             <div className="grid grid-cols-2 gap-3">

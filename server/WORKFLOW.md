@@ -1,4 +1,4 @@
-# Workflow — private server dev loop
+# Workflow - private server dev loop
 
 For anyone (human or AI) editing `server/`. Read this before touching `server.py` or
 `data/*.json`. For arm64 binary patches / RVA tables, see `AGENTS.md` at the repo root. For operator playbooks
@@ -9,16 +9,16 @@ crypto API), see **[`../docs/`](../docs/README.md)**.
 
 | You're changing... | Edit this |
 |---|---|
-| A response value with no per-request logic (a constant, an empty list, a fixed struct) | `data/static_overrides.json` — add the route key, no code change |
+| A response value with no per-request logic (a constant, an empty list, a fixed struct) | `data/static_overrides.json` - add the route key, no code change |
 | A constant used by a response that DOES have per-request logic (dates, `st.get()` fallback, formulas) | `data/response_config.json`, referenced from the existing handler in `server.py` |
 | A template field for artifact/accessory/treasure/rift-weapon/rift-crystal | `data/item_templates.json` |
 | Player identity/currency/card-template/deck seed defaults | `data/default_player.json` |
-| New route logic (state mutation, computed values) | The module that owns that subsystem — `clan.py`, `pvp.py`, `shop_routes.py`, `territory_routes.py`, `decoration_routes.py`, `seasonal.py`, `mini_games.py`, `roster.py`, `inbox.py`, `direct_routes.py`, `admin_api.py`. Only wiring and the leftover handlers live in `server.py` now. |
-| A binary patch to the client `.so` | `rebuild_arm64.py` (v170) or `builders/build_private.py` (v171/v172). Offsets are per-version — re-derive from that version's own `dump.cs`, never shift the other set. |
-| A client-side UI behavior / il2cpp method hook (custom mail text, in-battle stat poller) | `jni/stub.cpp` — cmake in `/tmp/stub_build` (see SETUP.md), then `cp libxigncode.so xigncode_stub/arm64/` and rerun `builders/build_private.py`. Pick the right hook technique (methodPointer swap vs inline detour) — see `AGENTS.md` "il2cpp hook techniques" |
+| New route logic (state mutation, computed values) | The module that owns that subsystem - `clan.py`, `pvp.py`, `shop_routes.py`, `territory_routes.py`, `decoration_routes.py`, `seasonal.py`, `mini_games.py`, `roster.py`, `inbox.py`, `direct_routes.py`, `admin_api.py`. Only wiring and the leftover handlers live in `server.py` now. |
+| A binary patch to the client `.so` | `rebuild_arm64.py` (v170) or `builders/build_private.py` (v171/v172). Offsets are per-version - re-derive from that version's own `dump.cs`, never shift the other set. |
+| A client-side UI behavior / il2cpp method hook (custom mail text, in-battle stat poller) | `jni/stub.cpp` - cmake in `/tmp/stub_build` (see SETUP.md), then `cp libxigncode.so xigncode_stub/arm64/` and rerun `builders/build_private.py`. Pick the right hook technique (methodPointer swap vs inline detour) - see `AGENTS.md` "il2cpp hook techniques" |
 | The build/patch/sign/install pipeline itself | `rebuild_arm64.py` (v170), `builders/build_private.py` (v171/v172 side-by-side King Bug Castle) |
 
-Rule of thumb: if the value doesn't change based on `st`/`body`, it's data — put it in
+Rule of thumb: if the value doesn't change based on `st`/`body`, it's data - put it in
 `data/`, not in a Python literal. See `git log` for the 2026-07-02 refactor that moved
 ~50 routes' worth of hardcoded literals into `data/*.json` for this exact reason (the
 whole point was "should be trivial to read/change without touching code").
@@ -30,7 +30,7 @@ whole point was "should be trivial to read/change without touching code").
    ```bash
    python3 -c "import ast; ast.parse(open('server.py').read()); print('ok')"
    ```
-3. Restart the server (no `--reload` — module-level globals like `DEFAULT_ARTIFACTS` are
+3. Restart the server (no `--reload` - module-level globals like `DEFAULT_ARTIFACTS` are
    built once at import time from `data/*.json`, so a stale process serves stale data):
    ```bash
    pkill -f "uvicorn server:app"; sleep 1
@@ -39,11 +39,11 @@ whole point was "should be trivial to read/change without touching code").
    tail -20 /tmp/kgc_server.log             # check for import-time exceptions
    ```
    The combined pkill+restart often reports a spurious "Exit code 144" from the `pkill`
-   half even when the restart itself succeeds — don't trust the exit code, check
+   half even when the restart itself succeeds - don't trust the exit code, check
    `ss -tlnp` and retry the `nohup` line alone if nothing is listening.
 
    The device talks HTTPS, so a **second uvicorn on :8443** must also run (the standalone
-   `tls_proxy.py` is gone — it's just uvicorn with TLS):
+   `tls_proxy.py` is gone - it's just uvicorn with TLS):
    ```bash
    nohup uvicorn server:app --host 0.0.0.0 --port 8443 \
      --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_tls.log 2>&1 &
@@ -56,7 +56,7 @@ whole point was "should be trivial to read/change without touching code").
    python3 tests/test_artifact.py
    ```
 5. Clear logcat, relaunch the app, **ask the user to tap through the screen you changed**
-   — never `adb input tap` for interactive flows, the user does this themselves:
+   - never `adb input tap` for interactive flows, the user does this themselves:
    ```bash
    adb -s 127.0.0.1:5555 logcat -c
    adb -s 127.0.0.1:5555 shell am force-stop com.awesomepiece.castle
@@ -69,10 +69,10 @@ whole point was "should be trivial to read/change without touching code").
    ```
    Empty output = no crash. If something appears, get the full stack:
    `adb -s 127.0.0.1:5555 logcat -d -v time | grep -A20 "<timestamp from the crash line>"`.
-7. One crash at a time. Fix, restart, retest — don't batch multiple unverified guesses
+7. One crash at a time. Fix, restart, retest - don't batch multiple unverified guesses
    into one test cycle, you won't know which one worked or introduced a new regression.
 
-## Rules (violating these has caused real crashes — see `AGENTS.md` and
+## Rules (violating these has caused real crashes - see `AGENTS.md` and
 `../KNOWLEDGE.md` for the full incident write-ups)
 
 - **Never guess a response shape or a value constraint.** Shape comes from
@@ -82,24 +82,24 @@ whole point was "should be trivial to read/change without touching code").
   project started.
 - **AES padding is space-pad, not PKCS7.** Newtonsoft on the client throws
   `JsonReaderException: Additional text after JSON` on non-whitespace trailing bytes but
-  tolerates trailing spaces. `aes_encrypt()` in `server.py` already does this — don't
+  tolerates trailing spaces. `aes_encrypt()` in `server.py` already does this - don't
   change it to PKCS7.
 - **Some request bodies arrive hex-encoded** (ASCII hex text of the ciphertext, not raw
-  binary) — `aes_decrypt()` already detects and unwraps this. If you add a new decrypt
+  binary) - `aes_decrypt()` already detects and unwraps this. If you add a new decrypt
   path, copy the detection, don't assume raw binary.
 - **Direct `@app.get/post` routes must be registered BEFORE the `for _r in ROUTE_MODELS`
-  loop** to win — FastAPI/Starlette matches routes in registration order, first match
+  loop** to win - FastAPI/Starlette matches routes in registration order, first match
   wins. A route added to `OVERRIDES`/`DYNAMIC_OVERRIDES` for a path that ALSO has a direct
   handler is dead code for that path (it's still reachable via other paths mapped to the
-  same function, so isn't always safe to delete — check before assuming).
+  same function, so isn't always safe to delete - check before assuming).
 - **`redroid` here blocks Frida** from hooking `libil2cpp.so` (ndk_translation on x86_64
   host hides the translated library from module enumeration). Don't spend time trying to
-  attach Frida for runtime C# inspection in this environment — it has already been tried
+  attach Frida for runtime C# inspection in this environment - it has already been tried
   and confirmed blocked. Static Ghidra + live logcat/screenshot iteration only.
 - **The user taps the device screen themselves** for anything interactive (login, panel
-  navigation, artifact selection). Don't use `adb input tap` to simulate this — ask and
+  navigation, artifact selection). Don't use `adb input tap` to simulate this - ask and
   wait for the user's report.
-- **Restart the server after every `data/*.json` edit too**, not just `server.py` — the
+- **Restart the server after every `data/*.json` edit too**, not just `server.py` - the
   JSON is read once at import time into module-level globals (`RCFG`, `STATIC_OVERRIDES`,
   `ITEM_TEMPLATES`, `DEFAULT_ARTIFACTS`, etc.), so a running process won't pick up file
   changes.
@@ -107,7 +107,7 @@ whole point was "should be trivial to read/change without touching code").
   (one row per account, always through `playerdb.py`; the old `state/player.json` +
   `state/players/*.json` were imported once and are gone). Deleting the DB regenerates
   from `DEFAULT_PLAYER` (built from `data/default_player.json` + XML-derived id lists) on
-  next registration — and edits to `data/default_player.json` do NOT apply retroactively to
+  next registration - and edits to `data/default_player.json` do NOT apply retroactively to
   an existing save. Edit a live save from the dashboard, not by hand.
 
 ## Sanity-check commands

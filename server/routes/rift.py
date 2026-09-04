@@ -557,7 +557,7 @@ def r_rift_weapon_upgrade(body, st):
             "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
         }
 
-    # ── Coupon upgrade (Guaranteed Upgrade) — runs before broken guard ──
+    # ── Coupon upgrade (Guaranteed Upgrade) - runs before broken guard ──
     if use_item_id > 0:
         # Look up the coupon item's SetRiftWeaponLevel / ResetRiftWeaponBroken
         target_level = 0
@@ -576,7 +576,7 @@ def r_rift_weapon_upgrade(body, st):
         except Exception:
             pass
 
-        # ResetRiftWeaponBroken (item 8200) — unbreak the weapon
+        # ResetRiftWeaponBroken (item 8200) - unbreak the weapon
         if reset_broken:
             if not weapon.get("broken", False):
                 return {
@@ -614,7 +614,7 @@ def r_rift_weapon_upgrade(body, st):
                 "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
             }
 
-        # SetRiftWeaponLevel (items 8120-8133) — set weapon to specific level
+        # SetRiftWeaponLevel (items 8120-8133) - set weapon to specific level
         if target_level > 0:
             spent = 0
             if srv:
@@ -642,7 +642,7 @@ def r_rift_weapon_upgrade(body, st):
                 "equippedWeaponIds": _equipped_weapon_ids_for_preset(st, preset_idx),
             }
 
-        # Unknown coupon item — fail
+        # Unknown coupon item - fail
         return {
             "riftWeapons": st.get("riftWeapons", []),
             "deletedRiftWeapons": [],
@@ -738,7 +738,7 @@ def r_rift_weapon_reroll(body, st):
     ensure_rift_state(st)
     data = _parse_xml()
 
-    # Unity may wrap request bodies in a "model" key — unwrap if present
+    # Unity may wrap request bodies in a "model" key - unwrap if present
     if "model" in body and isinstance(body["model"], dict):
         body = body["model"]
 

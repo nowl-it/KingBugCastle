@@ -144,7 +144,7 @@ def test_coupon_upgrade_reward_list_not_null():
 
     The client's coupon coroutine calls GameManager.HandleRewardListResponseData(
     response.rewardListResponseData) unconditionally; null throws
-    NullReferenceException, killing the coroutine before SetResult — so the
+    NullReferenceException, killing the coroutine before SetResult - so the
     upgrade result panel never animates and the new level only shows after
     re-entering the forge.
     """

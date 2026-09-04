@@ -1,10 +1,10 @@
-# KGC Private Server — Operator Knowledge Base
+# KGC Private Server - Operator Knowledge Base
 
 Practical playbooks for **running and modifying** the King God Castle private server:
 how to grant items, unlock content, build test stages, edit master data, and deploy
 changes to a client. This is the *how-to-operate* layer.
 
-It complements the other docs — read those for the *why* and the *internals*:
+It complements the other docs - read those for the *why* and the *internals*:
 
 | Doc | Scope |
 |-----|-------|
@@ -28,7 +28,7 @@ It complements the other docs — read those for the *why* and the *internals*:
 | **[emulator-note.md](emulator-note.md)** | Player-facing note (VI): why stock v171+ won't run on an emulator |
 | **[multi-account-login.md](multi-account-login.md)** | Multiple accounts/devices, the web-Google login bridge (`GLOGIN_DEV=1`), transfer codes |
 | **[save-editing.md](save-editing.md)** | Grant currency / items / units / skins / treasures by editing player state or sending mail |
-| **[content-unlock.md](content-unlock.md)** | Unlock version-gated content (`MinVersion`) — treasures, skins, units, stages |
+| **[content-unlock.md](content-unlock.md)** | Unlock version-gated content (`MinVersion`) - treasures, skins, units, stages |
 | **[stages-and-spawns.md](stages-and-spawns.md)** | How stage enemies are defined; build a training-dummy test stage |
 | **[cdn-master-data.md](cdn-master-data.md)** | Edit master-data XML and push it to the client via the CDN xml bundle |
 | **[discord-cdn-monitor.md](discord-cdn-monitor.md)** | Configure the Discord CDN-update notifier and its 30-minute monitor |
@@ -39,13 +39,13 @@ It complements the other docs — read those for the *why* and the *internals*:
 
 There are **two separate data planes**, and knowing which one a change lands in saves hours:
 
-1. **Server state / API responses** — `server/state/players.db` (SQLite, one row per player,
+1. **Server state / API responses** - `server/state/players.db` (SQLite, one row per player,
    always through `server/playerdb.py`) + the handlers in `server.py` and the route modules.
    Controls what the game *account* owns and what the REST API returns (currency, cards,
    treasures, mail). Edits here are **live per-request** (`load_state()` re-reads the row each
-   call) — no restart, no client re-download.
+   call) - no restart, no client re-download.
 
-2. **Client master data** — the CDN **xml AssetBundle** (`server/real_cdn/xml`), built from
+2. **Client master data** - the CDN **xml AssetBundle** (`server/real_cdn/xml`), built from
    `server/xml_live/*.xml`. Controls what the *game client itself* reads: stage spawns, skin/unit/
    treasure definitions, localized text, `MinVersion` gates. Edits here need
    `rebuild_xml_bundle.py` → server restart → client re-download (AssetHash change).

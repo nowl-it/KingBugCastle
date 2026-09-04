@@ -30,9 +30,12 @@ for _p in (_SERVER, _SERVER / "routes", _SERVER / "builders", _SERVER / "cli"):
 
 # This fires several thousand requests from one address, which is exactly what the
 # per-IP limit exists to stop - every route past the first 600 came back 429 and the
-# check read it as a crash. Off for the sweep; test_public_hardening covers the limit
-# itself. Set before importing server: RATE_LIMIT is read once at import.
-os.environ["KGC_RATE_LIMIT"] = "0"
+# check read it as a crash. test_public_hardening covers the limit itself. The limiter
+# must be OFF only for this module: pinning at import time leaked into every suite
+# (see test_rate_ban / test_api_contract for the same fix), and the env var below is
+# only read when server.py imports for the first time, which an earlier test file has
+# already done by collection time.
+import pytest
 
 import playerdb
 playerdb.DB_PATH = Path(tempfile.mkdtemp()) / "players.db"
@@ -42,6 +45,12 @@ from tests.seed import one_account
 _SEEDED = one_account()   # multiplayer needs a session; load_state() has no fallback
 import server
 from fastapi.testclient import TestClient
+
+
+@pytest.fixture(autouse=True)
+def _no_rate_limit(monkeypatch):
+    monkeypatch.setattr(server, "RATE_LIMIT", 0)
+
 
 # The requests below must arrive as the SAME player the checks read back with
 # load_state(). Without the header the middleware resolves no identity and

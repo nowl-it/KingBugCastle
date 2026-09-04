@@ -314,7 +314,7 @@ def r_colosseum_reenter_succeed(body, st):
 def r_colosseum_check_end(body, st):
     """Check if a crashed game has ended.  Returns the score delta and final
     state so the client can show the result popup.  For a local-bot game the
-    score delta is zero — the round completion already applied it."""
+    score delta is zero - the round completion already applied it."""
     return {"scoreDelta": 0, "rank": 0, "round": 0,
             "gameId": str(body.get("gameId", "")),
             "tier": 0, "score": 0, "addedToken": 0,

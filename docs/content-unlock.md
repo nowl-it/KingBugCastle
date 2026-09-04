@@ -1,4 +1,4 @@
-# Content Unlock — version gating (`MinVersion`)
+# Content Unlock - version gating (`MinVersion`)
 
 The devs ship data **ahead** of release, then gate it by version. A treasure, skin, unit, or stage can
 already be fully authored (buff logic, art, localized text) yet invisible in-game because its
@@ -13,7 +13,7 @@ version ≥ N".
 
 ## Two gates to lower
 
-1. **Server-side grant filter** — one value, `CONTENT_GATE`, **derived** from `serverVersion` in
+1. **Server-side grant filter** - one value, `CONTENT_GATE`, **derived** from `serverVersion` in
    `server/data/response_config.json` (`"171.1.00"` → `171100`). It decides what the server hands
    out and treats as released. There is nothing to grep and bump any more: set `serverVersion` to
    match the client you deploy and the gate follows. `KGC_CONTENT_GATE=<int>` overrides it for a
@@ -23,11 +23,11 @@ version ≥ N".
    > client can already render - at `171000` against a v171.1.00 client, five entries in
    > `ShopItems`/`Gachas`/`Treasures` gated at exactly `171100` stayed invisible.
 
-2. **Client-side master data** — the `<MinVersion>` tag inside the entry in `server/xml_live/*.xml`.
+2. **Client-side master data** - the `<MinVersion>` tag inside the entry in `server/xml_live/*.xml`.
    Even if the server grants ownership, the client may hide or mis-render an entry whose local
    `MinVersion` is in the future. Lower it to the current version so the client treats it as released.
 
-## Recipe — un-gate one entry
+## Recipe - un-gate one entry
 
 Example: treasure `30040` "Shadowless / Vô Ảnh" (a v171 Legacy) on a v170.1.00 client (done 2026-07-14):
 
@@ -41,17 +41,17 @@ Example: treasure `30040` "Shadowless / Vô Ảnh" (a v171 Legacy) on a v170.1.0
 
 Then:
 1. Lower `MinVersion` → `170100` (passes the server filter *and* the client's own gate).
-2. Grant ownership if needed — treasures are auto-granted once released; others per [save-editing.md](save-editing.md).
+2. Grant ownership if needed - treasures are auto-granted once released; others per [save-editing.md](save-editing.md).
 3. Rebuild + push the bundle so the client sees it released: `rebuild_xml_bundle.py` → restart servers →
    clear cache (see [cdn-master-data.md](cdn-master-data.md)).
 
 ## Caveats
 
 - **Only un-gate what the client can actually render.** Future content whose *art assets* aren't in the
-  current client bundle (e.g. brand-new v171 Beach skins) will show broken or crash — leave those gated
+  current client bundle (e.g. brand-new v171 Beach skins) will show broken or crash - leave those gated
   until the client updates. Un-gating is safe when the asset already ships in the current bundle (most
   data-ahead content does).
-- **`ArtifactOptionUI` crash risk** for directly-granted Artifact/Treasure/Accessory — prefer the normal
+- **`ArtifactOptionUI` crash risk** for directly-granted Artifact/Treasure/Accessory - prefer the normal
   ownership path (release gate + default grant) over mail-granting them raw.
 - When you **bump the whole client to a new version**, set `serverVersion` (and usually
   `patchFolder`) in `response_config.json` - the gate follows from it - and re-derive the ARM64

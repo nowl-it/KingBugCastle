@@ -17,6 +17,7 @@ REPO = pathlib.Path(os.environ.get("KGC_ROOT") or pathlib.Path(__file__).resolve
 # (+0/+0xa8/+0xc0/+0x148). The per-version il2cpp tables below pick the right
 # offsets for each build.
 #   python3 server/builders/build_private.py
+#   KGC_APK_SRC=xapk_extracted_v1721 python3 server/builders/build_private.py
 #   KGC_APK_SRC=xapk_extracted_v1720 python3 server/builders/build_private.py
 #   KGC_APK_SRC=xapk_extracted_v1711 python3 server/builders/build_private.py
 SRC = os.environ.get("KGC_APK_SRC", "xapk_extracted_v17201")
@@ -35,29 +36,35 @@ WORK = REPO / (".rebuild_" + SRC.replace("xapk_extracted_", ""))
 # index of every literal above it, and libil2cpp has those indices baked into its code
 # - so the v171.0.00 lib resolves 94% of its literals to the wrong entry against any
 # newer metadata. Every other section of the two files is identical.
-_NATIVE = REPO / "il2cpp" / "v172.0.01" / "libil2cpp_v17201_ssl.so"
-if SRC == "xapk_extracted_v17201" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-    VER = "172.0.01"
+_NATIVE = REPO / "il2cpp" / "v172.1.00" / "libil2cpp_v1721_ssl.so"
+if SRC == "xapk_extracted_v1721" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+    VER = "172.1.00"
     IL2CPP_DEC = _NATIVE
     METADATA_DEC = None                 # the shipped metadata already matches
 else:
-    _NATIVE = REPO / "il2cpp" / "v172.0.00" / "libil2cpp_v172_ssl.so"
-    if SRC == "xapk_extracted_v1720" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-        VER = "172.0.00"
+    _NATIVE = REPO / "il2cpp" / "v172.0.01" / "libil2cpp_v17201_ssl.so"
+    if SRC == "xapk_extracted_v17201" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+        VER = "172.0.01"
         IL2CPP_DEC = _NATIVE
         METADATA_DEC = None                 # the shipped metadata already matches
     else:
-        _NATIVE = REPO / "il2cpp" / "v171.1.00" / "libil2cpp_v17110_ssl.so"
-        if SRC == "xapk_extracted_v1711" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-            VER = "171.1.00"
+        _NATIVE = REPO / "il2cpp" / "v172.0.00" / "libil2cpp_v172_ssl.so"
+        if SRC == "xapk_extracted_v1720" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+            VER = "172.0.00"
             IL2CPP_DEC = _NATIVE
             METADATA_DEC = None                 # the shipped metadata already matches
         else:
-            VER = "171.0.00"
-            IL2CPP_DEC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
-            METADATA_DEC = REPO / "il2cpp" / "v171.0.00" / "global-metadata.dat"
+            _NATIVE = REPO / "il2cpp" / "v171.1.00" / "libil2cpp_v17110_ssl.so"
+            if SRC == "xapk_extracted_v1711" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+                VER = "171.1.00"
+                IL2CPP_DEC = _NATIVE
+                METADATA_DEC = None                 # the shipped metadata already matches
+            else:
+                VER = "171.0.00"
+                IL2CPP_DEC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
+                METADATA_DEC = REPO / "il2cpp" / "v171.0.00" / "global-metadata.dat"
 # Every il2cpp offset below is per-lib, so this picks which table to use.
-VER_IS_NATIVE = VER in ("171.1.00", "172.0.00", "172.0.01")
+VER_IS_NATIVE = VER in ("171.1.00", "172.0.00", "172.0.01", "172.1.00")
 # Host to rebind the 5 backend hostnames to (private server). Default 127.0.0.1
 # reaches the local server via `adb reverse tcp:443 tcp:8443`. Override with
 # SHARE_HOST=<ip-or-domain> for a remote/shared build.
@@ -100,7 +107,8 @@ ORIG_APKS = {
 CHECKFIREBASE_OFF = {"171.0.00": 0x303C6C0,
                       "171.1.00": 0x3041594 - 0x4000,
                       "172.0.00": 0x304241C,
-                      "172.0.01": 0x30439B8}[VER]
+                      "172.0.01": 0x30439B8,
+                      "172.1.00": 0x3081350 - 0x4000}[VER]
 RET = bytes.fromhex('c0035fd6')  # arm64 `ret`
 
 # OBSOLETE, opt-in only (KGC_ASSETBYPASS=1). The "infinite UniTask recursion" this was
@@ -112,11 +120,13 @@ RET = bytes.fromhex('c0035fd6')  # arm64 `ret`
 # and the whole UI renders garbled.
 CHECKUSEASSET_OFF = {"171.1.00": 0x34f9588 - 0x4000,
                       "172.0.00": 0x3501DD0 - 0x4000,
-                      "172.0.01": 0x3503404 - 0x4000}[VER]
+                      "172.0.01": 0x3503404 - 0x4000,
+                      "172.1.00": 0x353CB6C - 0x4000}[VER]
 # mov w1,#1 (0x52000021) ; b LoadAfterAssetBundle. Displacement per version:
 # v171.1.00 target RVA 0x34f9618 = site +0x8C (0x14000023),
 # v172.0.00 target RVA 0x3501E60 = site +0x90 (0x14000024),
-# v172.0.01 target RVA 0x3503494 = site +0x90 (0x14000024).
+# v172.0.01 target RVA 0x3503494 = site +0x90 (0x14000024),
+# v172.1.00 target RVA 0x353CBFC = site +0x90 (0x14000024).
 CHECKUSEASSET_PATCH = bytes.fromhex('2100005223000014' if VER == "171.1.00" else '2100005224000014')
     
 
@@ -187,10 +197,24 @@ _NRE_STUBS_V17201 = [
     (0x306A180, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
     (0x2CBF2C4, "ranking-endpt", 'fe0f1ef8f44f01a9', bytes.fromhex('48da01f0086545f9080140f9085d40f9000540f9c0035fd6')), # Web.GetRankingServerEndPoint -> Web._endPoint
 ]
+_NRE_STUBS_V17210 = [
+    (0x32984F4, "pvp-init",      'ff8303d1fd7b08a9', RET_FALSE),  # PvPPanel.<Init>d__77.MoveNext
+    (0x32930C0, "pvp-reward",    'fe0f1bf8fa6701a9', RET_FALSE),  # PvPPanel.GetReceivableWinRewardCount
+    (0x3304414, "shop-growth",   'fe0f1af8fc6f01a9', RET_FALSE),  # PackageItem.InitCustomGrowthPackage
+    (0x33064E4, "shop-season",   'ff4301d1fe6701a9', RET_FALSE),  # PackageItem.InitSeasonPassPackage
+    (0x3096C80, "year-event",    'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsYearEventAvailable
+    (0x3098D60, "card-event",    'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsEventCardCollectingAvailable
+    (0x3098C58, "season-event",  'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsSpecialSeasonalEventOpened
+    (0x307E1B8, "babel-data",    'fe0f1df8f65701a9', RET_FALSE),  # GameManager.GetBabelData -> null
+    (0x34EAD68, "content-alert", 'fe0f1bf8fa6701a9', RET_FALSE),  # WorldPanel.ReloadNewContentAlert
+    (0x30A3C14, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
+    (0x2CF6C78, "ranking-endpt", 'fe0f1ef8f44f01a9', bytes.fromhex('68dc01f0085544f9080140f9085d40f9000540f9c0035fd6')), # Web.GetRankingServerEndPoint -> Web._endPoint
+]
 NRE_STUBS = {"171.0.00": _NRE_STUBS_V17100,
              "171.1.00": _NRE_STUBS_V17110,
              "172.0.00": _NRE_STUBS_V17200,
-             "172.0.01": _NRE_STUBS_V17201}[VER]
+             "172.0.01": _NRE_STUBS_V17201,
+             "172.1.00": _NRE_STUBS_V17210}[VER]
 
 # Scene_Base.RegisterHackDetectionCallback @ RVA 0x34DB060 (file 0x34D7060).
 # Stub it to ret (no-op) so the managed callback that shows "File integrity check
@@ -205,7 +229,8 @@ NRE_STUBS = {"171.0.00": _NRE_STUBS_V17100,
 REGISTER_HACK_DETECT_OFF = {"171.0.00": 0x34D7060,
                              "171.1.00": 0x34DC038 - 0x4000,
                              "172.0.00": 0x34E38A8 - 0x4000,
-                             "172.0.01": 0x34E4EDC - 0x4000}[VER]
+                             "172.0.01": 0x34E4EDC - 0x4000,
+                             "172.1.00": 0x351D9F0 - 0x4000}[VER]
 REGISTER_HACK_DETECT_ORIG = 'fe57bea9'  # stp x30, x21, [sp, #-0x20]!
 REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
 
@@ -213,12 +238,13 @@ REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
 # to ret (line 275), canUseFirebase stays false forever.  This cbz silently
 # drops every ranking HTTP dispatch.  NOP it so the dispatch always fires.
 # Ghidra VMA 0x3810ee8 → RVA 0x3710ee8 → file off = RVA − 0x4000 = 0x370cee8.
-CANUSEFIREBASE_OFF = {"172.0.01": 0x370cee8}[VER]
+CANUSEFIREBASE_OFF = {"172.0.01": 0x370cee8,
+                       "172.1.00": 0x37470A4}[VER]
 CANUSEFIREBASE_ORIG = 'c8010034'  # cbz w8, +0x38
 CANUSEFIREBASE_NEW  = '1f2003d5'  # nop
 
 # Stub FirebaseAnalytics.LogEvent → ret.  v172.0.01 embeds LogEvent() inside
-# Awesomepiece.Web.Get[T] — every single HTTP request triggers it.  On redroid
+# Awesomepiece.Web.Get[T] - every single HTTP request triggers it.  On redroid
 # (no Play Services) the FirebaseAnalyticsInternal static cctor throws
 # TypeInitializationException, which kills the HTTP callback mid-flight.
 # Symptom: game fetches usePatch, the response handler crashes, getPatchFolder
@@ -230,6 +256,11 @@ FIREBASE_LOGEVENT_STUBS = {"172.0.01": [
     (0x3776158, 'fe0f1df8f65701a9'),
     # FirebaseAnalytics.LogEvent(string, IEnumerable<Parameter>)
     (0x37761BC, 'fe67bca9f85f01a9'),
+], "172.1.00": [
+    # FirebaseAnalytics.LogEvent(string, Parameter[])
+    (0x37B0314, 'fe0f1df8f65701a9'),
+    # FirebaseAnalytics.LogEvent(string, IEnumerable<Parameter>)
+    (0x37B0378, 'fe67bca9f85f01a9'),
 ]}.get(VER, [])
 
 # Addressables passes AssetBundleRequestOptions.Crc into Unity's native bundle
@@ -242,6 +273,10 @@ ASSETBUNDLE_CRC_GETTER = {"172.0.01": (
     0x5FC5F10,
     '001840b9c0035fd6',  # ldr w0,[x0,#0x18]; ret
     'e0031f2ac0035fd6',  # mov w0,wzr; ret
+), "172.1.00": (
+    0x607D358,
+    '001840b9c0035fd6',  # ldr w0,[x0,#0x18]; ret
+    'e0031f2ac0035fd6',  # mov w0,wzr; ret
 )}.get(VER)
 ASSETBUNDLE_CRC_READS = {"172.0.01": [
     # AssetBundleResource.LoadLocalBundle: crc argument w1.
@@ -249,6 +284,12 @@ ASSETBUNDLE_CRC_READS = {"172.0.01": [
     # AssetBundleResource.CreateWebRequest: local-file and cached paths.
     (0x5FC639C, '011940b9', 'e1031f2a'),
     (0x5FC648C, '021940b9', 'e2031f2a'),
+], "172.1.00": [
+    # AssetBundleResource.LoadLocalBundle: crc argument w1.
+    (0x607F8CC, '011940b9', 'e1031f2a'),
+    # AssetBundleResource.CreateWebRequest: local-file and cached paths.
+    (0x607D7E4, '011940b9', 'e1031f2a'),
+    (0x607D8D4, '021940b9', 'e2031f2a'),
 ]}.get(VER, [])
 
 # --- XIGNCODE NEO loader (the packer .so in the config split) ---------------
@@ -488,7 +529,11 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
     # NOTE: upstream's cbz bail target (0x32E0BEC) is a THROW helper, not the method
     # epilogue - jumping there raises NullReferenceException. Our patch redirects both
     # bails to the real epilogue 0x32E0BD0 (ldp x20,x19,[sp,#0x60];...ret).
-    if VER == "172.0.01":
+    if VER == "172.1.00":
+        SHOP_INIT_OFF = 0x3315BE8
+        SHOP_INIT_ORIG = bytes.fromhex('941300b468ac01b008b140f9f60300aae00314aae1031f2a020140f938063494')
+        SHOP_INIT_NEW = bytes.fromhex('b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d538063494')
+    elif VER == "172.0.01":
         SHOP_INIT_OFF = 0x32E097C - 0x4000
         SHOP_INIT_ORIG = bytes.fromhex('941300b428aa01f0088d41f9f60300aae00314aae1031f2a020140f919a03394')
         SHOP_INIT_NEW = bytes.fromhex('b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d519a03394')

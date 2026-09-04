@@ -7,10 +7,10 @@ layout; use all four.
 
 ## Two useful deliverables
 
-1. **Visual baseline** — an exact, static client render with semantic web hotspots.
+1. **Visual baseline** - an exact, static client render with semantic web hotspots.
    It is the correct first milestone for pixel comparison and controller discovery.
    It does not yet make the UI data-driven.
-2. **Independent web implementation** — recreated DOM/canvas controls using exported
+2. **Independent web implementation** - recreated DOM/canvas controls using exported
    game assets and client-derived state/behavior. Build this only after the baseline
    has been accepted.
 
@@ -68,14 +68,14 @@ client method owns each interaction.
 Use `UnityPy` to enumerate and export individual `Sprite` objects. Relevant sprite
 names frequently live in files such as:
 
-- `spriteatlases_assets_atlas_ui_general_*.bundle` — `Frame_Big_Gray`, `Tab_00`,
+- `spriteatlases_assets_atlas_ui_general_*.bundle` - `Frame_Big_Gray`, `Tab_00`,
   `Tab_Disabled_00`;
-- `spriteatlases_assets_atlas_unitrelateduis_*.bundle` — `Item_Frame_00`,
+- `spriteatlases_assets_atlas_unitrelateduis_*.bundle` - `Item_Frame_00`,
   `Main_Frame_00`;
-- `spriteatlases_assets_atlas_ui_icons_*.bundle` — `ActiveSkill_Frame_02`;
-- `spriteatlases_assets_atlas_treasureicon_*.bundle` —
+- `spriteatlases_assets_atlas_ui_icons_*.bundle` - `ActiveSkill_Frame_02`;
+- `spriteatlases_assets_atlas_treasureicon_*.bundle` -
   `Treasure_Frame_Hexa_Empty`;
-- `illusts_assets_all_*.bundle` — large hero illustrations such as
+- `illusts_assets_all_*.bundle` - large hero illustrations such as
   `Unit_Illust_10570`.
 
 Minimal one-off exporter:

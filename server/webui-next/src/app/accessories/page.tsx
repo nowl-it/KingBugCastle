@@ -23,7 +23,7 @@ export default function AccessoriesPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Accessories</h1>
-        <p className="text-muted-foreground">Read-only view of owned accessories (granting them directly is unsafe — use an Item reward box instead).</p>
+        <p className="text-muted-foreground">Read-only view of owned accessories (granting them directly is unsafe - use an Item reward box instead).</p>
       </div>
       <PlayerBar />
       {!selectedId && <Card><CardContent className="py-16 text-center text-muted-foreground">Select a player above.</CardContent></Card>}
@@ -67,7 +67,7 @@ export default function AccessoriesPage() {
                       <li key={j} className="flex items-center justify-between text-sm">
                         <span className="text-muted-foreground">{s.label}</span>
                         <span className="flex items-center gap-2">
-                          <span className="text-xs text-muted-foreground">score {s.score ?? "—"}</span>
+                          <span className="text-xs text-muted-foreground">score {s.score ?? "-"}</span>
                           {s.grade && <Badge variant="outline" className="text-[10px] px-1.5">{s.grade}</Badge>}
                         </span>
                       </li>

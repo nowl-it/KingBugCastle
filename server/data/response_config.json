@@ -1,7 +1,7 @@
 {
 	"server": {
-		"patchFolder": "2026_08_25",
-		"serverVersion": "172.0.01"
+		"patchFolder": "2026_09_05",
+		"serverVersion": "172.1.00"
 	},
 	"player": {
 		"defaults": {

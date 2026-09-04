@@ -48,7 +48,7 @@ On macOS or Windows, place a legally obtained, complete arm64 `.xapk` or `.zip` 
 
 ## 3. Setup
 
-Create a Python virtual environment (recommended — some distros block system-wide
+Create a Python virtual environment (recommended - some distros block system-wide
 `pip install` with `externally-managed-environment`):
 
 Linux/macOS:
@@ -158,7 +158,7 @@ instead, use `rebuild_arm64.py` (same patches, original package id).
 
 The prebuilt `.so` ship in the repo. Only if you edit `server/jni/stub.cpp` do you need
 NDK 27 (`ndk;27.2.12479018`). NDK 28 has C++ linking issues (`__libcpp_verbose_abort`
-undefined) — do NOT upgrade.
+undefined) - do NOT upgrade.
 
 ```bash
 cd /tmp && rm -rf stub_build && mkdir stub_build && cd stub_build
@@ -217,7 +217,7 @@ On Windows PowerShell, activate with `.\.venv\Scripts\Activate.ps1` instead.
 
 redroid without GApps can't initialize Firebase. The game will show errors like
 `Firebase modules failed to initialize` and `NullReferenceException` at login.
-This is expected — the server still handles all API requests. To add GApps, use
+This is expected - the server still handles all API requests. To add GApps, use
 a redroid image with Google Play Services (e.g. `redroid/redroid:12.0.0-gms-latest`).
 
 ### `adb reverse` stops working after reboot

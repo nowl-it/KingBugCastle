@@ -86,7 +86,7 @@ export default function GameDataPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Game Data</h1>
-        <p className="text-muted-foreground">Full master-data browser — every hero, item, relic, treasure, accessory and skin with its in-game id.</p>
+        <p className="text-muted-foreground">Full master-data browser - every hero, item, relic, treasure, accessory and skin with its in-game id.</p>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -136,7 +136,7 @@ export default function GameDataPage() {
                     <TableCell className="font-mono text-xs">{e.id}</TableCell>
                     <TableCell className="font-medium">{e.name}</TableCell>
                     <TableCell><Badge variant="outline" className="text-[10px]">{e.type}</Badge></TableCell>
-                    {extraCols.map((c) => <TableCell key={c.key} className="text-xs text-muted-foreground">{e[c.key] ?? "—"}</TableCell>)}
+                    {extraCols.map((c) => <TableCell key={c.key} className="text-xs text-muted-foreground">{e[c.key] ?? "-"}</TableCell>)}
                   </TableRow>
                 ))}
                 {!rows.length && (
@@ -145,7 +145,7 @@ export default function GameDataPage() {
               </TableBody>
             </Table>
             {rows.length > 300 && (
-              <p className="px-4 py-3 text-xs text-muted-foreground">Showing first 300 of {rows.length} — refine the search.</p>
+              <p className="px-4 py-3 text-xs text-muted-foreground">Showing first 300 of {rows.length} - refine the search.</p>
             )}
           </CardContent>
         </Card>

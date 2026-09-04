@@ -61,6 +61,15 @@ VERSIONS = {
              (0x597A4F8, "MobileTlsContext.ValidateCertificate")],
         anchors=[(0x2CBAEB0, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
     ),
+    # Recovered from the v172.1.00 packer (libbanenisi.so). All 3 prologues
+    # byte-identical again (fe5fbda9 / ff0302d1 / fe0f1ff8), only offsets moved.
+    "172.1.00": dict(
+        src="libil2cpp_v1721.so", dst="libil2cpp_v1721_ssl.so",
+        ssl=[(0x2CF2864, "PinnedCertHandler.ValidateCertificate"),
+             (0x59D355C, "UnityTlsContext.ValidateCertificate"),
+             (0x59D1C6C, "MobileTlsContext.ValidateCertificate")],
+        anchors=[(0x2CF2864, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
+    ),
 }
 
 VERSION = next((a for a in sys.argv[1:] if not a.startswith("-")), "171.1.00")
