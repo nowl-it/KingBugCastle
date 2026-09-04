@@ -24,7 +24,7 @@ def test_route_coverage_uses_configured_v172_metadata():
         ]}))
         os.environ["KGC_IL2CPP_SCRIPT_JSON"] = str(script)
         route_coverage = importlib.reload(route_coverage)
-        assert route_coverage.CLIENT_VERSION == "172.0.01"
+        assert route_coverage.CLIENT_VERSION == "172.1.00"
         assert route_coverage.client_paths() == ["/pvp/info"]
 
     if previous is None:
