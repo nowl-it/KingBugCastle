@@ -13,6 +13,9 @@ import babel
 
 srv = None      # live server module, injected via register()
 
+_DIMENSION_RIFT_MIN_CHALLENGE = -5
+_DIMENSION_RIFT_MAX_CHALLENGE = 16
+
 
 def register(app, server_module):
     global srv
@@ -128,12 +131,24 @@ def r_game_complete(body, st):
 
 
 def r_dimension_rift_complete(body, st):
-    """Dimension rift run completion. The client sends the run score; the server
-    records the best score and increments the game index so the next run gets a
-    fresh save slot."""
+    """Persist the score and sequential challenge progress for a finished rift."""
     gc = RCFG["gameComplete"]
-    score = body_int(body.get("rogueLikeScore"), 0)
+    score = body_int(body.get("rogueLikeBaseScore"), 0, lo=0)
+    challenge = body_int(body.get("rogueLikeChallengeLevel"),
+                         _DIMENSION_RIFT_MIN_CHALLENGE,
+                         lo=_DIMENSION_RIFT_MIN_CHALLENGE,
+                         hi=_DIMENSION_RIFT_MAX_CHALLENGE)
     win = bool(body.get("win", False))
+    played = max(
+        body_int(st.get("rogueLikePlayedCount"), 0, lo=0),
+        body_int(srv._key_value(st, srv.DIMENSION_RIFT_PLAY_COUNT), 0, lo=0),
+    )
+    max_cleared = body_int(
+        srv._key_value(st, srv.DIMENSION_RIFT_MAX_CLEARED_CHALLENGE),
+        body_int(st.get("rogueLikeChallenge"), -1, lo=-1,
+                 hi=_DIMENSION_RIFT_MAX_CHALLENGE),
+        lo=-1, hi=_DIMENSION_RIFT_MAX_CHALLENGE,
+    )
     add_gold = gc["baseGold"] + (gc["winBonusGold"] if win else 0)
     add_exp = gc["baseExp"]
     st["gold"] += add_gold
@@ -141,9 +156,14 @@ def r_dimension_rift_complete(body, st):
     if win:
         st["winCount"] = st.get("winCount", 0) + 1
     st["playedCount"] = st.get("playedCount", 0) + 1
-    st["rogueLikePlayedCount"] = st.get("rogueLikePlayedCount", 0) + 1
-    if score > 0:
-        st["rogueLikeScore"] = max(int(st.get("rogueLikeScore", 0)), score)
+    st["rogueLikePlayedCount"] = played + 1
+    if score > body_int(st.get("rogueLikeScore"), 0, lo=0):
+        st["rogueLikeScore"] = score
+    # The button is locked for the first five runs, then only max+1 is selectable.
+    if (win and (played > 4 or max_cleared >= 0)
+            and max_cleared < challenge <= max_cleared + 1):
+        max_cleared = challenge
+        st["rogueLikeChallenge"] = challenge
     st["dimensionRiftGameIndex"] = int(st.get("dimensionRiftGameIndex", 0)) + 1
     srv.bump(st, "playGame")
     if win:
@@ -151,11 +171,13 @@ def r_dimension_rift_complete(body, st):
     if st.get("exp", 0) >= gc["expPerLevel"]:
         st["level"] = min(srv.MAX_PLAYER_LEVEL, st["level"] + st["exp"] // gc["expPerLevel"])
         st["exp"] = st["exp"] % gc["expPerLevel"] if st["level"] < srv.MAX_PLAYER_LEVEL else 0
-    save_state(st)
+    srv._set_key_value(st, srv.DIMENSION_RIFT_PLAY_COUNT, played + 1)
+    srv._set_key_value(st, srv.DIMENSION_RIFT_MAX_CLEARED_CHALLENGE, max_cleared)
     out = {"addGold": add_gold, "addExp": add_exp,
-           "playerGold": st["gold"], "playerLevel": st["level"], "playerExp": st["exp"],
-           "rogueLikeScore": st.get("rogueLikeScore", 0)}
+            "playerGold": st["gold"], "playerLevel": st["level"], "playerExp": st["exp"]}
     out.update(gc["fixed"])
+    # The panel displays this response field as this run's score, not the saved best.
+    out["rogueLikeScore"] = score
     return out
 
 

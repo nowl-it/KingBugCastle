@@ -1233,3 +1233,26 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
   gaming monetization vendors did not publish enough web S2S verification detail to satisfy the
   trust boundary. The smallest next step is AppLixir pre-qualification; if declined, retain
   donations/manual ticket credit rather than weakening the callback invariant.
+
+## 22. Dimension Rift difficulty progression (v172.1.00, 2026-09-05)
+
+- Theme 2100 has challenge levels `-5..16` in `RogueLikeSettings.xml`; level 16 is seasonal.
+  `GameCompleteRequestModel` sends `rogueLikeChallengeLevel` @ `0x164` and the run's computed
+  `rogueLikeBaseScore` @ `0x168`. There is no request field named `rogueLikeScore`.
+- `DimensionRiftStartPanel.get__canChallenge` @ RVA `0x347A5C8` enables the challenge button when
+  status `DimensionRiftPlayCount > 4` or `DimensionRiftMaxClearedChallenge >= 0` (defaults 0 and
+  -1 respectively). `RogueLikeChallengePanel.Show` @ `0x347DED4` activates levels only through
+  `maxCleared + 1`.
+- `RogueLikeGameOverPanel.Show` @ `0x3660770` increments play count after every run. On a win it
+  writes the selected challenge only when it exceeds the saved max. Its max lookup unusually uses
+  default 0, while the selection panel uses -1; therefore the server must explicitly send max=-1
+  for a fresh account or clearing level 0 cannot unlock level 1 locally.
+- `GameResponseModel` has `rogueLikeScore` @ `0xCC` but no `updatedKeyValues`. The client updates
+  its local key dictionary itself; the server mirrors both status keys into the save so `/player`
+  restores them after relogin. Existing saves initialize play count from `rogueLikePlayedCount`.
+- Server fix: `r_dimension_rift_complete` reads the two real request fields, clamps challenge to
+  `-5..16`, requires the five-run gate and sequential `max+1` clear, keeps the best score for the
+  leaderboard, and returns the current run score to the game-over panel. Assign the response score
+  after `gameComplete.fixed`: that config contains `rogueLikeScore: 0` and otherwise overwrites it.
+  Regression: `test_dimension_rift_difficulty_progresses_sequentially` in
+  `server/tests/test_ranking.py`.

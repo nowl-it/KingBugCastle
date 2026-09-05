@@ -121,6 +121,57 @@ def check_scores_track_state():
     print("ok scores: boards read the player's own score, not a constant")
 
 
+def test_dimension_rift_difficulty_progresses_sequentially(tmp_path, monkeypatch):
+    monkeypatch.setattr(playerdb, "DB_PATH", tmp_path / "players.db")
+    playerdb.init()
+    uid = "dimension-rift-test"
+    st = server.copy.deepcopy(server.DEFAULT_PLAYER)
+    st["uid"] = uid
+    st["rogueLikePlayedCount"] = 4
+    st.pop("keyValues", None)
+    playerdb.save(uid, st)
+    playerdb.set_active(uid)
+
+    def status(state):
+        return {kv["key"]: kv["value"] for kv in state.get("keyValues", [])}
+
+    server.r_player({}, st)
+    keys = status(playerdb.load(uid))
+    assert keys[server.DIMENSION_RIFT_PLAY_COUNT] == "4"
+    assert keys[server.DIMENSION_RIFT_MAX_CLEARED_CHALLENGE] == "-1"
+
+    # Four prior runs are not enough to select challenge 0. The fifth run only
+    # opens the button; it must not let a forged request skip the gate early.
+    out = server.r_dimension_rift_complete({
+        "win": True, "rogueLikeChallengeLevel": 0,
+        "rogueLikeBaseScore": 123, "rogueLikeScore": 9999,
+    }, playerdb.load(uid))
+    assert out["rogueLikeScore"] == 123
+    keys = status(playerdb.load(uid))
+    assert keys[server.DIMENSION_RIFT_PLAY_COUNT] == "5"
+    assert keys[server.DIMENSION_RIFT_MAX_CLEARED_CHALLENGE] == "-1"
+
+    server.r_dimension_rift_complete({
+        "win": True, "rogueLikeChallengeLevel": 0, "rogueLikeBaseScore": 200,
+    }, playerdb.load(uid))
+    server.r_dimension_rift_complete({
+        "win": True, "rogueLikeChallengeLevel": 2, "rogueLikeBaseScore": 50,
+    }, playerdb.load(uid))
+    keys = status(playerdb.load(uid))
+    assert keys[server.DIMENSION_RIFT_MAX_CLEARED_CHALLENGE] == "0", \
+        "a forged request skipped challenge 1"
+
+    out = server.r_dimension_rift_complete({
+        "win": True, "rogueLikeChallengeLevel": 1, "rogueLikeBaseScore": 50,
+    }, playerdb.load(uid))
+    saved = playerdb.load(uid)
+    keys = status(saved)
+    assert keys[server.DIMENSION_RIFT_MAX_CLEARED_CHALLENGE] == "1"
+    assert out["rogueLikeScore"] == 50, "the panel received the historical best"
+    rank = server.r_roguelike_ranking({}, saved)["playerRank"]
+    assert rank["score"] == 200 and rank["challenge"] == 1
+
+
 def check_clan_board_is_empty_without_a_clan():
     st = server.load_state()
     st.pop("clanId", None)

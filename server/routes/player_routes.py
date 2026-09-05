@@ -18,6 +18,9 @@ import playerdb
 
 srv = None      # live server module, injected via register()
 
+DIMENSION_RIFT_PLAY_COUNT = "DimensionRiftPlayCount"
+DIMENSION_RIFT_MAX_CLEARED_CHALLENGE = "DimensionRiftMaxClearedChallenge"
+
 
 def register(app, server_module):
     global srv
@@ -325,6 +328,23 @@ def _repair_player_state(st):
     """Repair old saves in place before they are served or written again. Returns
     True when anything changed so callers know whether to persist."""
     changed = False
+    key_values = st.get("keyValues")
+    if not isinstance(key_values, list):
+        key_values = [{"key": "profileIconId",
+                       "value": str(_PC["defaults"]["profileIconId"])}]
+        st["keyValues"] = key_values
+        changed = True
+    present_keys = {kv.get("key") for kv in key_values if isinstance(kv, dict)}
+    dimension_defaults = (
+        (DIMENSION_RIFT_PLAY_COUNT,
+         body_int(st.get("rogueLikePlayedCount"), 0, lo=0)),
+        (DIMENSION_RIFT_MAX_CLEARED_CHALLENGE,
+         body_int(st.get("rogueLikeChallenge"), -1, lo=-1, hi=16)),
+    )
+    for key, value in dimension_defaults:
+        if key not in present_keys:
+            key_values.append({"key": key, "value": str(value)})
+            changed = True
     if "decks" not in st or not isinstance(st.get("decks"), list):
         st["decks"] = copy.deepcopy(srv.DEFAULT_DECKS)
         changed = True
