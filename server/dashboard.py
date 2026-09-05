@@ -21,6 +21,7 @@ Two things here are load-bearing and easy to break:
 import asyncio
 import copy
 import json
+import math
 import os
 import secrets
 import xml.etree.ElementTree as ET
@@ -55,6 +56,8 @@ if not os.path.isdir(UI_DIR):
     os.makedirs(UI_DIR, exist_ok=True)
 UI_ROOT = pathlib.Path(UI_DIR).resolve()
 CONFIG_FILE = os.path.join(BASE, "data", "response_config.json")
+DATA_DIR = os.path.join(BASE, "data")
+ADMIN_ACCESSORIES_FILE = os.path.join(DATA_DIR, "admin_accessories.json")
 SERVER_URL = os.environ.get("KGC_SERVER_URL", "http://127.0.0.1:8080")
 TRUST_PROXY = os.environ.get("KGC_TRUST_PROXY") == "1"
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
@@ -514,6 +517,49 @@ async def api_player_raw_save(pid: str, body: dict):
     return {"ok": True, "summary": _summary(pid, body)}
 
 
+def _max_treasures(st):
+    """Max every released treasure: overcome 10 (the 10* Transcendence tier,
+    TreasureOvercomeUp -> MaxLevel 30) and level 30, exp 0. Keeps the equipped
+    unitId for treasures the account already owns."""
+    import server, routes.artifact_routes as ar
+    owned = {t.get("treasureId"): t for t in st.setdefault("treasures", [])}
+    st["treasures"] = []
+    for i, tid in enumerate(server.ALL_TREASURE_IDS):
+        t = owned.get(tid) or ar.make_treasure(i + 1, tid)
+        t["overcome"] = 10
+        t["level"] = 30
+        t["exp"] = 0
+        st["treasures"].append(t)
+
+
+def _set_admin_accessories(st, new_accs):
+    """REPLACE (set) the player's accessories with the admin list, renumbering
+    ids so they stay unique within the save. This is the pre-append behaviour."""
+    st["accessories"] = []
+    for i, a in enumerate(new_accs):
+        a["id"] = i + 1
+        st["accessories"].append(a)
+    return len(st["accessories"])
+
+
+def _admin_accessory_list(pid):
+    """The accessories the `accessory_admin` macro grants.
+
+    Driven by data/admin_accessories.json - one JSON object with
+      { "include_builtin": true|false,
+        "accessories": [ { name, type, rarity, level, synergy, mainStat, subStats } ] }
+    `include_builtin` adds the curated 65-piece best-in-slot set. The JSON's own
+    entries add custom pieces. Falls back to the built-in set when the file is
+    missing or has no accessories - so an empty file never grants nothing."""
+    from cli import grant_accessories
+    cfg = grant_accessories.load_admin_config(ADMIN_ACCESSORIES_FILE)
+    out = []
+    if cfg.get("include_builtin", True):
+        out.extend(grant_accessories.build(pid))
+    out.extend(cfg.get("accessories", []))
+    return out
+
+
 @app.post("/api/player/{pid}/macro")
 async def api_player_macro(pid: str, body: dict):
     st = _read_state(pid)
@@ -569,17 +615,21 @@ async def api_player_macro(pid: str, body: dict):
             c["level"] = 30
             c["soul"] = 9999
     elif macro == "legacy_basic":
+        # 0*: base templates (count=1, level-1 option) - the gacha default.
         import server
         arts = st.setdefault("artifacts", [])
         arts.clear()
         for i, aid in enumerate(server.ALL_ARTIFACT_IDS):
-            arts.append(server.make_max_artifact(i + 1, aid))
+            arts.append(server.make_artifact(i + 1, aid))
     elif macro == "legacy_advanced":
+        # 10*: maxed artifacts (count 99999 + polishPoint + options) AND every
+        # treasure maxed (overcome 10 -> "Transcendence 10", level 30).
         import server
         arts = st.setdefault("artifacts", [])
         arts.clear()
         for i, aid in enumerate(server.ALL_ARTIFACT_IDS):
             arts.append(server.make_max_artifact(i + 1, aid))
+        _max_treasures(st)
     elif macro == "legacy_max":
         import server, routes.artifact_routes as ar
         arts = st.setdefault("artifacts", [])
@@ -588,20 +638,11 @@ async def api_player_macro(pid: str, body: dict):
         all_relic_ids = [int(el.get("ID")) for el in tree.findall("Artifact") if el.findtext("Type") == "Artifact" and el.findtext("FromType") not in ("Special", "RogueLike", "RogueLikeBuildingArtifact", "Event")]
         for i, aid in enumerate(all_relic_ids):
             arts.append(server.make_max_artifact(i + 1, aid))
-        # Treasure "Legacy" system too: every released treasure at max
-        # (overcome 10 -> TreasureOvercomeUp MaxLevel 30, exp 0), keeping
-        # the equipped unitId for treasures the account already owns.
-        owned = {t.get("treasureId"): t for t in st.setdefault("treasures", [])}
-        st["treasures"] = []
-        for i, tid in enumerate(server.ALL_TREASURE_IDS):
-            t = owned.get(tid) or ar.make_treasure(i + 1, tid)
-            t["overcome"] = 10
-            t["level"] = 30
-            t["exp"] = 0
-            st["treasures"].append(t)
+        _max_treasures(st)
     elif macro == "accessory_admin":
-        from cli import grant_accessories
-        st["accessories"] = grant_accessories.build(pid)
+        # SET (replace): the player's accessories are replaced by the admin set
+        # (built-in 65 + data/admin_accessories.json custom pieces).
+        _set_admin_accessories(st, _admin_accessory_list(pid))
     elif macro == "rift_legendary_all":
         _grant_rift_collection_to_player(st, wipe_test_equip=True)
     elif macro == "grant_all_skins":
@@ -927,6 +968,227 @@ async def api_inventory_set(pid: str, body: dict):
     inv["counts"] = list(pairs.values())
     _write_state(pid, st)
     return {"ok": True, "count": len(inv["itemIds"])}
+
+
+# --- admin accessory builder (JSON-driven, persisted) --------------------------
+# data/admin_accessories.json is the source of truth: entries survive dashboard
+# restarts, are read by the `accessory_admin` macro, and are edited through the
+# Accessories tab builder UI (same validation the JSON loader enforces).
+_ACC_TYPE_NAMES = {1: "Necklace", 2: "Bracelet", 3: "Ring", 4: "Earring"}
+_ACC_TYPE_IDS = {v: k for k, v in _ACC_TYPE_NAMES.items()}
+_ACC_RARITIES = {1: "Common", 2: "Rare", 3: "Special"}
+
+
+def _read_admin_accessories():
+    """The raw persisted config: {"include_builtin": bool, "accessories": [...]}."""
+    if not os.path.isfile(ADMIN_ACCESSORIES_FILE):
+        return {"include_builtin": True, "accessories": []}
+    try:
+        with open(ADMIN_ACCESSORIES_FILE, encoding="utf-8") as f:
+            raw = json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        raise HTTPException(500, f"cannot read admin accessory config: {e}")
+    if not isinstance(raw, dict) or not isinstance(raw.get("accessories", []), list):
+        raise HTTPException(500, "admin accessory config must contain an accessories list")
+    return {"include_builtin": bool(raw.get("include_builtin", True)),
+            "accessories": raw.get("accessories") or []}
+
+
+def _write_admin_accessories(cfg):
+    tmp = f"{ADMIN_ACCESSORIES_FILE}.tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(cfg, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+    os.replace(tmp, ADMIN_ACCESSORIES_FILE)
+
+
+def _admin_acc_fingerprint(e):
+    subs = tuple(sorted(
+        (str(s.get("key")), round(float(s.get("value")), 2))
+        for s in (e.get("subStats") or [])))
+    return (e.get("type"), int(e.get("rarity") or 0), int(e.get("level") or 0),
+            e.get("synergy"), e.get("mainStat"), subs)
+
+
+def _validate_admin_accessory(entry):
+    """Normalize + validate one JSON entry against the game's real rules
+    (per AccessoryConstants.xml via cli.grant_accessories). Raises 400 on any
+    violation so the builder cannot half-grant."""
+    from cli import grant_accessories
+    if not isinstance(entry, dict):
+        raise HTTPException(400, "accessory entry must be an object")
+    name = str((entry.get("name") or "").strip() or "Unnamed")
+
+    t = entry.get("type")
+    if isinstance(t, str):
+        t = _ACC_TYPE_IDS.get(t)
+    try:
+        t = int(t)
+    except (TypeError, ValueError):
+        raise HTTPException(400, "type must be Necklace/Bracelet/Ring/Earring or 1..4")
+    if t not in _ACC_TYPE_NAMES:
+        raise HTTPException(400, f"unknown type {t}")
+
+    rar = entry.get("rarity", 3)
+    try:
+        rar = int(rar)
+    except (TypeError, ValueError):
+        raise HTTPException(400, "rarity must be 1..3")
+    if rar not in _ACC_RARITIES:
+        raise HTTPException(400, "rarity must be 1..3")
+
+    lvl = entry.get("level", 20)
+    try:
+        lvl = int(lvl)
+    except (TypeError, ValueError):
+        raise HTTPException(400, "level must be an integer")
+    if not 1 <= lvl <= 20:
+        raise HTTPException(400, "level must be 1..20")
+
+    syn = entry.get("synergy", 0)
+    syn_by_name = {v[0]: k for k, v in grant_accessories.SETS.items()}
+    if isinstance(syn, str):
+        if syn not in syn_by_name:
+            raise HTTPException(400, f"unknown synergy {syn!r} "
+                                     f"(use {', '.join(sorted(syn_by_name))})")
+        syn = syn_by_name[syn]
+    try:
+        syn = int(syn)
+    except (TypeError, ValueError):
+        raise HTTPException(400, "synergy must be a name or an id")
+    if syn not in grant_accessories.SETS:
+        raise HTTPException(400, f"synergy {syn} out of range (0..{max(grant_accessories.SETS)})")
+
+    legal_mains = grant_accessories.allowed_mains()
+    main = entry.get("mainStat")
+    if isinstance(main, str):
+        main = main.strip()
+    if main not in legal_mains[t]:
+        raise HTTPException(400, f"mainStat {main!r} is not legal for {_ACC_TYPE_NAMES[t]} "
+                                 f"({', '.join(legal_mains[t])})")
+
+    units = grant_accessories.per_score()
+    slots, budget = grant_accessories.level_events(rar)
+    mega = bool(entry.get("mega"))
+    subs = entry.get("subStats") or []
+    if not isinstance(subs, list) or not subs:
+        raise HTTPException(400, "at least one subStat is required")
+    if len(subs) > slots:
+        raise HTTPException(400, f"rarity {_ACC_RARITIES[rar]} allows at most {slots} sub-stat(s)")
+
+    normalized, total, seen = [], 0.0, set()
+    for s in subs:
+        if not isinstance(s, dict):
+            raise HTTPException(400, "each subStat must be {key, value}")
+        key = s.get("key")
+        if key not in units:
+            raise HTTPException(400, f"unknown subStat key {key!r}")
+        if key in seen:
+            raise HTTPException(400, f"duplicate subStat key {key!r}")
+        seen.add(key)
+        try:
+            score = round(float(s.get("value")), 3)
+        except (TypeError, ValueError):
+            raise HTTPException(400, f"subStat {key} value must be a number")
+        if not math.isfinite(score):
+            raise HTTPException(400, f"subStat {key} value must be finite")
+        if not (0 <= score <= (1000.0 if mega else 26.0)):
+            raise HTTPException(400, f"subStat {key} score must be 0..{1000.0 if mega else 26.0} "
+                                     f"({'literal MEGA value' if mega else 'SS ceiling'})")
+        if not mega:
+            total += score
+        normalized.append({"key": key, "value": score})
+    if not mega and total > budget + 1e-6:
+        raise HTTPException(400, f"subStat scores sum to {total} but rarity "
+                                 f"'{_ACC_RARITIES[rar]}' caps the shared pool at {budget}")
+
+    out = {"name": name, "type": t, "rarity": rar, "level": lvl,
+           "synergy": syn, "mainStat": main, "subStats": normalized}
+    if mega:
+        out["mega"] = True
+    return out
+
+
+@app.get("/api/admin-accessories")
+def api_admin_accessories():
+    return _read_admin_accessories()
+
+
+@app.get("/api/admin-accessories/options")
+def api_admin_accessory_options():
+    """Legal choices for the builder form, derived from the same XML the loader
+    validates against - the UI can never offer a stat the game rejects."""
+    from cli import grant_accessories
+    return {
+        "types": [{"id": t, "name": _ACC_TYPE_NAMES[t]} for t in sorted(_ACC_TYPE_NAMES)],
+        "rarities": [{"id": r, "name": _ACC_RARITIES[r]} for r in sorted(_ACC_RARITIES)],
+        "levels": {"min": 1, "max": 20},
+        "synergies": [{"id": k, "name": v[0]} for k, v in sorted(grant_accessories.SETS.items())],
+        "mainStatsByType": {_ACC_TYPE_NAMES[t]: grant_accessories.allowed_mains()[t]
+                            for t in sorted(_ACC_TYPE_NAMES)},
+        "subStatKeys": sorted(grant_accessories.per_score().keys()),
+        "scoreMax": 26.0,
+        "slotsByRarity": {r: grant_accessories.level_events(r)[0] for r in sorted(_ACC_RARITIES)},
+        "budgetByRarity": {r: grant_accessories.level_events(r)[1] for r in sorted(_ACC_RARITIES)},
+    }
+
+
+@app.post("/api/admin-accessories")
+async def api_admin_accessory_add(body: dict):
+    if not isinstance(body, dict) or not body:
+        raise HTTPException(400, "empty body")
+    entry = _validate_admin_accessory(body)
+    cfg = _read_admin_accessories()
+    have = {_admin_acc_fingerprint(e) for e in cfg["accessories"]}
+    if _admin_acc_fingerprint(entry) in have:
+        return {"ok": True, "duplicate": True, "entry": entry,
+                "total": len(cfg["accessories"])}
+    cfg["accessories"].append(entry)
+    _write_admin_accessories(cfg)
+    return {"ok": True, "duplicate": False, "entry": entry,
+            "total": len(cfg["accessories"])}
+
+
+@app.post("/api/admin-accessories/config")
+async def api_admin_accessories_config(body: dict):
+    cfg = _read_admin_accessories()
+    if "include_builtin" in body:
+        cfg["include_builtin"] = bool(body["include_builtin"])
+    _write_admin_accessories(cfg)
+    return {"ok": True, "include_builtin": cfg["include_builtin"]}
+
+
+@app.post("/api/admin-accessories/delete")
+async def api_admin_accessories_delete(body: dict):
+    if "index" not in body:
+        raise HTTPException(400, "index required")
+    cfg = _read_admin_accessories()
+    try:
+        idx = int(body["index"])
+    except (TypeError, ValueError):
+        raise HTTPException(400, "index must be an integer")
+    if not 0 <= idx < len(cfg["accessories"]):
+        raise HTTPException(404, "no entry at that index")
+    removed = cfg["accessories"].pop(idx)
+    _write_admin_accessories(cfg)
+    return {"ok": True, "removed": removed, "total": len(cfg["accessories"])}
+
+
+@app.post("/api/admin-accessories/apply")
+async def api_admin_accessories_apply(body: dict):
+    """REPLACE the player's accessories with the whole admin set (built-in +
+    custom JSON), exactly like the `accessory_admin` macro in the Players tab."""
+    pid = (body or {}).get("pid")
+    if not pid:
+        raise HTTPException(400, "pid required")
+    st = _read_state(pid)
+    try:
+        new_accs = _admin_accessory_list(pid)
+    except SystemExit as e:
+        raise HTTPException(400, str(e))
+    count = _set_admin_accessories(st, new_accs)
+    _write_state(pid, st)
+    return {"ok": True, "set": count, "total": len(st.get("accessories") or [])}
 
 
 # --- accessories / treasures (read-only views) ------------------------------
