@@ -872,6 +872,8 @@ not do. For now, friendly matches count toward score like regular matches.
   receives 413 before it is buffered. Proof: `server/tests/test_body_limit.py`.
 - **Sensitive debug logs removed from served routes.** Dashboard no longer prints request headers;
   game/auth/shop/rift/artifact routes no longer write whole request bodies or cookie fragments.
+  `r_card_use_candy` must not create `scroll_debug.txt`: that untracked runtime file dirties the
+  production checkout and makes the guarded deploy hook refuse every later rollout.
 - **Public deployment configuration is externalized.** `serve_public.sh` and `deploy_hook.sh` load
   `/etc/kgc/server.env` (override `KGC_ENV_FILE`) before preflight; on a personal machine with no
   `/etc/kgc`, they fall back to ignored, mode-600 `server/secrets/server.env`. Stand-alone
