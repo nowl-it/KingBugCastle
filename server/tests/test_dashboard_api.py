@@ -237,3 +237,96 @@ if __name__ == "__main__":
     test_catalog_and_status()
     test_account_id_uniqueness()
     print("\nall dashboard API checks passed")
+
+def test_accessory_admin_sets():
+    """accessory_admin must REPLACE (set) the player's accessories - the old
+    pre-append behaviour. A pre-existing accessory is cleared; the admin set is
+    what remains, and ids are unique."""
+    seed("t-acc")
+    playerdb.save("t-acc", {**playerdb.load("t-acc"),
+                            "accessories": [dict(SEED["accessories"][0])]})
+
+    r = client.post("/api/player/t-acc/macro", json={"macro": "accessory_admin"})
+    assert r.status_code == 200, r.text
+    after_l = playerdb.load("t-acc")["accessories"]
+    assert len(after_l) > 0, "accessory_admin must grant accessories"
+    # the pre-existing accessory was cleared (replaced by the admin set)
+    assert not any(a.get("rarity") == 3 and a.get("type") == 3 and a.get("level") == 20
+                   for a in after_l if a.get("id") == 1), \
+        "pre-existing accessory should have been replaced"
+
+    # apply endpoint => same set behaviour
+    r2 = client.post("/api/admin-accessories/apply", json={"pid": "t-acc"})
+    assert r2.status_code == 200, r2.text
+    assert "set" in r2.json()
+    ids2 = [a.get("id") for a in playerdb.load("t-acc")["accessories"]]
+    assert len(ids2) == len(set(ids2)), "ids collided after set"
+    assert ids2 == list(range(1, len(ids2) + 1)), "ids must be 1..n"
+    print(f"ok accessory_admin sets (replaces existing; count={len(after_l)})")
+
+def test_admin_accessories_json_loader():
+    from cli import grant_accessories
+    import tempfile, json as _json, pathlib as _pathlib
+    p = _pathlib.Path(tempfile.mkdtemp()) / "acc.json"
+    p.write_text(_json.dumps({"include_builtin": False, "accessories": [
+        {"name": "t", "type": "Necklace", "rarity": 3, "level": 20,
+         "synergy": "Fear", "mainStat": "AtkPer",
+         "subStats": [{"key": "BaseDefPen", "value": 26.0}]},
+    ]}), encoding="utf-8")
+    cfg = grant_accessories.load_admin_config(str(p))
+    assert cfg["include_builtin"] is False
+    a = cfg["accessories"][0]
+    assert a["type"] == 1 and a["data"]["mainStat"] == "AtkPer"
+    assert a["synergy"] == 1, "Fear syn must resolve to id 1"
+    assert a["data"]["subStats"], "rolls must be spawned from the score"
+    units = grant_accessories.per_score()
+    summed_value = sum(v["value"] for v in a["data"]["subStats"])
+    assert abs(summed_value / units["BaseDefPen"] - 26.0) < 0.01, \
+        f"BaseDefPen rolls must sum to the 26.0 SS score (got {summed_value} / {units['BaseDefPen']})"
+    print("ok admin accessories JSON loader (names -> ids, score -> rolls)")
+
+def test_admin_accessory_api():
+    """Builder endpoints persist to JSON and apply to a player (append + dedup)."""
+    seed("t-builder")
+    # options: legal choices come from the game XML, so they're non-empty
+    opts = client.get("/api/admin-accessories/options").json()
+    assert opts["types"] and opts["synergies"] and opts["subStatKeys"]
+    assert opts["mainStatsByType"]["Necklace"]
+
+    # add a valid entry
+    r = client.post("/api/admin-accessories", json={
+        "name": "builder-test", "type": "Necklace", "rarity": 3, "level": 20,
+        "synergy": "Fear", "mainStat": "AtkPer",
+        "subStats": [{"key": "BaseDefPen", "value": 26.0}]})
+    assert r.status_code == 200, r.text
+    body = r.json()
+    assert body["entry"]["type"] == 1 and body["entry"]["mainStat"] == "AtkPer"
+    assert body["entry"]["synergy"] == 1
+
+    # duplicate is silently skipped
+    r2 = client.post("/api/admin-accessories", json=dict(r.json()["entry"]))
+    assert r2.status_code == 200 and r2.json()["duplicate"] is True
+
+    # persisted
+    cfg = client.get("/api/admin-accessories").json()
+    assert any(e["name"] == "builder-test" for e in cfg["accessories"])
+
+    # invalid: bad main stat for the type
+    bad = client.post("/api/admin-accessories", json={
+        "name": "bad", "type": "Necklace", "rarity": 3, "level": 20,
+        "synergy": 1, "mainStat": "BaseDef", "subStats": [{"key": "HpPer", "value": 4}]})
+    assert bad.status_code == 400, bad.text
+
+    # apply SETS the player's accessories (replaces)
+    app = client.post("/api/admin-accessories/apply", json={"pid": "t-builder"})
+    assert app.status_code == 200, app.text
+    after = len(playerdb.load("t-builder").get("accessories") or [])
+    assert after > 0, "apply must grant accessories"
+    assert app.json().get("set") == after, "apply must return the set count"
+
+    # cleanup the persisted test entry
+    cfg = client.get("/api/admin-accessories").json()
+    idx = next(i for i, e in enumerate(cfg["accessories"]) if e["name"] == "builder-test")
+    assert client.post("/api/admin-accessories/delete", json={"index": idx}).status_code == 200
+    print(f"ok admin accessory API: options/add/dedup/persist/validate/apply(set)/delete "
+          f"(player {after})")

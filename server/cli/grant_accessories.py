@@ -192,6 +192,124 @@ def build(uid):
     return accs
 
 
+def load_admin_config(path):
+    """Load the JSON-driven admin accessory list.
+
+    data/admin_accessories.json shape:
+      {
+        "include_builtin": true,                 # add the curated 65-set too
+        "accessories": [
+          {
+            "name": "anything",                  # just documentation
+            "type": "Necklace",                  # or 1..4
+            "rarity": 3,                         # 1 Common, 2 Rare, 3 Special
+            "level": 20,
+            "synergy": "Fear",                   # or set id 0..12
+            "mainStat": "AtkPer",
+            "subStats": [ {"key": "BaseDefPen", "value": 26.0},
+                          {"key": "HpPer", "value": 4.0} ]
+          }, ...
+        ]
+      }
+
+    `value` is in SCORE units (26.0 = the SS ceiling, 4.0 = a D roll), the same
+    scale as SCORES - the loader splits each score into legal spawn rolls, so
+    stats sum to exactly the advertised number just like the built-in set.
+    A row flagged `"mega": true` bypasses the ceiling on purpose: its sub-stat
+    values are written to the wire literally (one roll per stat, no splitting)
+    so a score of 1000 ships as an actual 1000.0 value (grade badge is hidden -
+    past the 26.5 cutoff). Test/tool only.
+
+    Returns {"include_builtin": bool, "accessories": [wire-shaped, ...]}.
+    A missing file or an empty list is a quiet default - it never raises.
+    """
+    import json as _json
+    from pathlib import Path as _P
+    path = _P(path)
+    if not path.exists():
+        return {"include_builtin": True, "accessories": []}
+    try:
+        raw = _json.loads(path.read_text(encoding="utf-8"))
+    except Exception as e:
+        raise SystemExit(f"admin_accessories.json is not valid JSON: {e}")
+    if not isinstance(raw, dict):
+        raise SystemExit("admin_accessories.json must be a JSON object")
+    include_builtin = bool(raw.get("include_builtin", True))
+
+    rows = raw.get("accessories") or []
+    legal = allowed_mains()
+    units = per_score()
+    syn_by_name = {v[0]: k for k, v in SETS.items()}
+    type_by_name = {"Necklace": NECKLACE, "Bracelet": BRACELET,
+                    "Ring": RING, "Earring": EARRING}
+    now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+
+    out, next_id = [], 1
+    for row in rows:
+        if not isinstance(row, dict):
+            raise SystemExit(f"admin_accessories.json: each accessory must be an object (got {row!r})")
+        typ = row.get("type", "Necklace")
+        if isinstance(typ, str):
+            if typ not in type_by_name:
+                raise SystemExit(f"admin_accessories.json: unknown type {typ!r} "
+                                 f"(use {', '.join(type_by_name)} or 1..4)")
+            typ = type_by_name[typ]
+        typ = int(typ)
+        if typ not in legal:
+            raise SystemExit(f"admin_accessories.json: type {typ} is not 1..4")
+
+        syn = row.get("synergy", 0)
+        if isinstance(syn, str):
+            if syn not in syn_by_name:
+                raise SystemExit(f"admin_accessories.json: unknown synergy {syn!r} "
+                                 f"(use one of {', '.join(sorted(syn_by_name))})")
+            syn = syn_by_name[syn]
+        syn = int(syn)
+        if syn not in SETS:
+            raise SystemExit(f"admin_accessories.json: synergy {syn} is out of range "
+                             f"(expected 0..{max(SETS)})")
+
+        main = row.get("mainStat", "AtkPer")
+        if main not in legal[typ]:
+            raise SystemExit(f"admin_accessories.json: {main!r} is not a legal main stat "
+                             f"for type {typ} ({', '.join(legal[typ])})")
+
+        subs = []
+        rolls = []
+        scores = []
+        mega = bool(row.get("mega"))
+        for s in row.get("subStats") or []:
+            key = s["key"]
+            score = float(s["value"])
+            if key not in units:
+                raise SystemExit(f"admin_accessories.json: unknown sub-stat key {key!r}")
+            if score < 0:
+                raise SystemExit(f"admin_accessories.json: negative score {score} for {key}")
+            subs.append(key)
+            scores.append(round(score, 3))
+            if mega:
+                # literal single roll - the score is past the legal roll range,
+                # so splitting it would create hundreds of synthetic entries.
+                rolls.append({"key": key, "value": round(score, 3)})
+            else:
+                rolls += [{"key": key, "value": v} for v in rolls_for(score, units[key])]
+
+        out.append({
+            "id": next_id, "accountId": 1, "unitId": 0, "slot": 0,
+            "type": typ, "rarity": int(row.get("rarity", RARITY)),
+            "level": int(row.get("level", LEVEL)), "exp": 0,
+            "synergy": syn, "state": 0,
+            "data": {"mainStat": main, "subStats": rolls},
+            "subStats": subs, "subStatScores": scores,
+            "coolTimeEndAt": "2000-01-01T00:00:00.000Z",
+            "createdAt": now, "updatedAt": now,
+            "usedThemeList": [], "isEarlyAccessModeTestAccessory": False,
+        })
+        next_id += 1
+
+    return {"include_builtin": include_builtin, "accessories": out}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--uid", default=None, help="player uid (default: the active player)")

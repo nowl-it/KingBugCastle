@@ -1,0 +1,2853 @@
+{
+  "include_builtin": true,
+  "accessories": [
+    {
+      "name": "Ocean 1 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 1 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 1 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 2 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 2 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 2 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 3 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 3 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 3 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 4 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 4 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 4 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 5 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 5 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 5 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian Guard Ring AtkSpd 1",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian Guard Ring AtkSpd 2",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian Guard Ring Hp 1",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian Guard Ring Hp 2",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 1 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 1 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 1 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 1 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 1 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 2 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 2 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 2 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 2 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 2 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 3 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 3 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 3 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 3 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 3 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 4 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 4 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 4 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 4 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 4 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 5 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 5 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 5 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 5 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 5 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 6 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 6 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 6 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 6 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Steel AB 6 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 0,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDef",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMDef",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 1 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "MAtkPer",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 1 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMDef",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 1 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 1 Earring A",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 1 Earring B",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 2 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "MAtkPer",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 2 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMDef",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 2 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 2 Earring A",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 2 Earring B",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 3 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "MAtkPer",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 3 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMDef",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 3 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 3 Earring A",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 3 Earring B",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 4 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "MAtkPer",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 4 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMDef",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 4 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 4 Earring A",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant SC 4 Earring B",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "BaseMCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseMCriticalDamageMul",
+          "value": 22.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 8.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant Guard Ring AtkSpd 1",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "MAtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant Guard Ring AtkSpd 2",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "MAtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant Guard Ring Hp 1",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "MAtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Covenant Guard Ring Hp 2",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 7,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "MAtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 1 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 1 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 1 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 1 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 1 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "BaseSpecialDamageMul",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 2 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 2 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 2 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 2 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 2 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "BaseSpecialDamageMul",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 3 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 3 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 3 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 3 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 3 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "BaseSpecialDamageMul",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 4 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 4 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 4 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 4 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Barbarian 4 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 5,
+      "mainStat": "BaseSpecialDamageMul",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "AtkPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fear 1 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 1,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefPen",
+          "value": 26.0
+        },
+        {
+          "key": "HpPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fear 1 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 1,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefPen",
+          "value": 26.0
+        },
+        {
+          "key": "HpPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fear 1 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 1,
+      "mainStat": "BaseDefPen",
+      "subStats": [
+        {
+          "key": "BaseDefPen",
+          "value": 26.0
+        },
+        {
+          "key": "HpPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fear 1 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 1,
+      "mainStat": "BaseDefPen",
+      "subStats": [
+        {
+          "key": "BaseDefPen",
+          "value": 26.0
+        },
+        {
+          "key": "HpPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fear 1 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 1,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefPen",
+          "value": 26.0
+        },
+        {
+          "key": "HpPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fear 2 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 1,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefPen",
+          "value": 26.0
+        },
+        {
+          "key": "HpPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fear 2 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 1,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefPen",
+          "value": 26.0
+        },
+        {
+          "key": "HpPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fear 2 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 1,
+      "mainStat": "BaseDefPen",
+      "subStats": [
+        {
+          "key": "BaseDefPen",
+          "value": 26.0
+        },
+        {
+          "key": "HpPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fear 2 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 1,
+      "mainStat": "BaseDefPen",
+      "subStats": [
+        {
+          "key": "BaseDefPen",
+          "value": 26.0
+        },
+        {
+          "key": "HpPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fear 2 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 1,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefPen",
+          "value": 26.0
+        },
+        {
+          "key": "HpPer",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 1 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 1 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 1 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDefDen",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 1 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDefDen",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 1 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 2 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 2 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 2 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDefDen",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 2 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDefDen",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ocean 2 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 3,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension 1 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension 1 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension 1 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "BaseDefDen",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension 1 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "BaseDefDen",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension 1 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension 2 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension 2 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension 2 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "BaseDefDen",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension 2 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "BaseDefDen",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension 2 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 26.0
+        },
+        {
+          "key": "BaseDef",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fatality 1 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 11,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fatality 1 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 11,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fatality 1 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 11,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fatality 1 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 11,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fatality 1 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 11,
+      "mainStat": "BaseSpecialDamageMul",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fatality 2 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 11,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fatality 2 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 11,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fatality 2 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 11,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fatality 2 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 11,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Fatality 2 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 11,
+      "mainStat": "BaseSpecialDamageMul",
+      "subStats": [
+        {
+          "key": "BaseSpecialDamageMul",
+          "value": 26.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 1 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 1 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 1 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 1 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 1 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "BaseCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 2 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 2 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 2 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 2 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 2 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "BaseCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 3 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 3 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 3 Ring A",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 3 Ring B",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "HpPer",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Moonlight AB 3 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "BaseCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseCriticalDamageMul",
+          "value": 18.0
+        },
+        {
+          "key": "BaseCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension Guard Ring 1",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "BaseDefDen",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Ascension Guard Ring 2",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 12,
+      "mainStat": "BaseDefDen",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Eternity Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 8,
+      "mainStat": "BaseMDef",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Eternity Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 8,
+      "mainStat": "MAtkPer",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Eternity Earring 1",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 8,
+      "mainStat": "BaseMCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "Eternity Earring 2",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 8,
+      "mainStat": "BaseMCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "BaseDefDen",
+          "value": 18.0
+        },
+        {
+          "key": "BaseMCriticalProb",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "name": "MEGA 1000 Necklace",
+      "type": "Necklace",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "AtkPer",
+      "subStats": [
+        {
+          "key": "AtkPer",
+          "value": 1000.0
+        },
+        {
+          "key": "HpPer",
+          "value": 1000.0
+        }
+      ],
+      "mega": true
+    },
+    {
+      "name": "MEGA 1000 Ring",
+      "type": "Ring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "AttackSpeedPer",
+      "subStats": [
+        {
+          "key": "AtkPer",
+          "value": 1000.0
+        },
+        {
+          "key": "HpPer",
+          "value": 1000.0
+        }
+      ],
+      "mega": true
+    },
+    {
+      "name": "MEGA 1000 Bracelet",
+      "type": "Bracelet",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "BaseDef",
+      "subStats": [
+        {
+          "key": "AtkPer",
+          "value": 1000.0
+        },
+        {
+          "key": "HpPer",
+          "value": 1000.0
+        }
+      ],
+      "mega": true
+    },
+    {
+      "name": "MEGA 1000 Earring",
+      "type": "Earring",
+      "rarity": 3,
+      "level": 20,
+      "synergy": 9,
+      "mainStat": "BaseCriticalDamageMul",
+      "subStats": [
+        {
+          "key": "AtkPer",
+          "value": 1000.0
+        },
+        {
+          "key": "HpPer",
+          "value": 1000.0
+        }
+      ],
+      "mega": true
+    }
+  ]
+}
