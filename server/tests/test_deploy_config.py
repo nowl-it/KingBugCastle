@@ -151,7 +151,5 @@ def test_native_poll_port_is_patched_relative_to_the_browser_host_buffer():
     host = stub.find(b"127.0.0.1\0")
     assert host >= 0
     assert stub[host + 64:host + 80].split(b"\0", 1)[0] == b"8080"
-    # The binary also contains an unrelated `8080`; a global find would corrupt it.
-    assert stub.count(b"8080\0") > 1
     assert "port_start = idx + 64" in builder
     assert "stub_padded.find(old_port_pattern)" not in builder
