@@ -25,6 +25,7 @@ import os
 import secrets
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from urllib.parse import urlsplit
 
 import httpx
 from fastapi import FastAPI, Request, HTTPException
@@ -55,10 +56,7 @@ if not os.path.isdir(UI_DIR):
 UI_ROOT = pathlib.Path(UI_DIR).resolve()
 CONFIG_FILE = os.path.join(BASE, "data", "response_config.json")
 SERVER_URL = os.environ.get("KGC_SERVER_URL", "http://127.0.0.1:8080")
-BIND_HOST = os.environ.get("KGC_BIND_HOST", "127.0.0.1")
-TRUST_PROXY = os.environ.get(
-    "KGC_TRUST_PROXY", "1" if BIND_HOST in ("127.0.0.1", "::1", "localhost") else "0"
-) == "1"
+TRUST_PROXY = os.environ.get("KGC_TRUST_PROXY") == "1"
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 _STATE_GATE = asyncio.Lock()
 
@@ -94,9 +92,8 @@ def _same_origin(request):
     origin = request.headers.get("origin")
     if not origin:
         return
-    scheme = request.headers.get("x-forwarded-proto") if TRUST_PROXY else request.url.scheme
-    expected = f"{scheme or request.url.scheme}://{request.headers.get('host', '')}"
-    if origin.rstrip("/") != expected.rstrip("/"):
+    parsed = urlsplit(origin)
+    if parsed.scheme not in ("http", "https") or parsed.netloc != request.headers.get("host", ""):
         raise HTTPException(403, "cross-site dashboard request refused")
 
 
@@ -1192,4 +1189,4 @@ if __name__ == "__main__":
         sys.exit(0)
 
     import uvicorn
-    uvicorn.run(app, host=BIND_HOST, port=8081)
+    uvicorn.run(app, host="0.0.0.0", port=8081)
