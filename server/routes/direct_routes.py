@@ -106,7 +106,11 @@ def register(app, server_module):
         login_id = str(request.query_params.get("id") or "")
         admin_log(f"[{host}] GET /auth")
         import google_login
-        if not google_login.consume_native_auth_grant(
+        import playerdb
+        uid = playerdb.uid_for_login(login_id)
+        account = playerdb.load(uid) if uid else None
+        returning_guest = bool(account and account.get("accountType") == 4)
+        if not returning_guest and not google_login.consume_native_auth_grant(
                 google_login._client_ip(request), login_id):
             return _enc({"code": 200, "msg": "Google sign-in was not verified",
                          "success": False})
@@ -118,7 +122,7 @@ def register(app, server_module):
         # (srv._registration_allowed) crashed with AttributeError, a 500, and the
         # client's "Failed to log in. Please try again." on brand-new accounts.
         from routes.player_routes import mint_session_token
-        token = mint_session_token(login_id)
+        token = mint_session_token(login_id, 4) if returning_guest else mint_session_token(login_id)
         if token is None:
             return _enc({"code": 200, "msg": "cannot create an account right now",
                          "success": False})

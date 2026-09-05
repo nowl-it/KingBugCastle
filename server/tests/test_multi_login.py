@@ -167,10 +167,13 @@ def check_guest_register_grants_its_followup_native_auth():
         out = server.aes_decrypt(authenticated.content)
         assert out.get("success") is True, out
         assert out.get("accessToken"), out
-        denied = tc.get(f"/auth?id={guest}&cookie=x&platform=Android")
-        assert server.aes_decrypt(denied.content).get("success") is False, \
-            "guest native grant must be single-use"
-    print("ok guest native auth: register grants exactly one follow-up GET /auth")
+        returning = tc.get(f"/auth?id={guest}&cookie=x&platform=Android")
+        assert server.aes_decrypt(returning.content).get("success") is True, \
+            "a bound Guest id must remain usable after logout"
+        unknown = tc.get("/auth?id=guest-unknown&cookie=x&platform=Android")
+        assert server.aes_decrypt(unknown.content).get("success") is False, \
+            "an unknown Guest id must not create an account through GET /auth"
+    print("ok guest native auth: registered and returning Guest ids authenticate")
 
 
 def check_single_player_override_still_works():

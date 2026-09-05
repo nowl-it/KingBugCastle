@@ -250,6 +250,9 @@ Fixed-period loops with no exception = client timer, not retry.
     handler requires a one-use native grant, so successful type-4 registration must call
     `_grant_native_auth`; otherwise `/auth` returns `success:false`, missing date strings make
     `Scene_Login.HandleAuthResponse` throw `ArgumentNullException`, and UI stays Authenticating.
+    After logout an existing Guest can bypass register and call `/auth` directly, so the handler
+    also accepts an id already bound to an `accountType=4` save. Unknown Guest ids remain denied;
+    Google ids always require the signed browser/poller handoff.
   - The native hook must locate `<AutoRegister>g__AutoRegisterImpl` by stable prefix: its compiler
     suffix changed from `|134_0` to `|137_0` in v172.1.00. Exact lookup silently skipped the hook.
     Regression: `tests/test_multi_login.py::check_guest_register_grants_its_followup_native_auth`.
