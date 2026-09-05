@@ -737,7 +737,10 @@ def main():
     # deep-link->login bridge in jni/stub.cpp are the other half; see
     # docs/multi-account-login.md "Google login via web".
     from patchers import patch_deeplink
-    txt = patch_deeplink.add_scheme(txt, os.environ.get("GLOGIN_SCHEME", "kingbugcastle"))
+    # Deep-link scheme is ALWAYS "kingbugcastle" — it is the custom URI the browser
+    # redirects to after OAuth (kingbugcastle://auth). GLOGIN_SCHEME controls the
+    # browser URL (https://...), which is a different thing entirely.
+    txt = patch_deeplink.add_scheme(txt, "kingbugcastle")
     manifest.write_text(txt, encoding="utf-8")
     
     out = WORK / "rebuilt_base.apk"

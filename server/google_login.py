@@ -173,7 +173,7 @@ def account_id_for_sub(sub):
     return "google_" + sub
 
 
-def make_state(target="game"):
+def make_state(target="game", handoff=""):
     """A signed, timestamped OAuth state for the game or player portal.
 
     The normal game state keeps its historic three-part shape.  The portal target
@@ -184,7 +184,9 @@ def make_state(target="game"):
     if target not in ("game", "portal"):
         raise ValueError("unknown Google login target")
     raw = f"{int(time.time())}.{secrets.token_hex(8)}"
-    if target != "game":
+    if target == "game" and handoff:
+        raw += f".game.{handoff}"
+    elif target != "game":
         raw += "." + target
     sig = hmac.new(_STATE_SECRET, raw.encode(), hashlib.sha256).hexdigest()[:16]
     return f"{raw}.{sig}"
@@ -202,6 +204,11 @@ def check_state(state):
             if target != "portal":
                 return False
             raw = f"{ts}.{nonce}.{target}"
+        elif len(parts) == 5:
+            ts, nonce, target, handoff, sig = parts
+            if target != "game" or not _valid_handoff(handoff):
+                return False
+            raw = f"{ts}.{nonce}.{target}.{handoff}"
         else:
             return False
     except (ValueError, AttributeError):
@@ -219,6 +226,11 @@ def state_target(state):
     return "portal" if len(state.split(".")) == 4 else "game"
 
 
+def state_handoff(state):
+    parts = state.split(".") if check_state(state) else []
+    return parts[3] if len(parts) == 5 else ""
+
+
 def _redirect_uri(target="game"):
     if target == "game":
         return f"{PUBLIC_URL}/glogin/callback"
@@ -227,13 +239,13 @@ def _redirect_uri(target="game"):
     raise ValueError("unknown Google login target")
 
 
-def authorize_url(target="game"):
+def authorize_url(target="game", handoff=""):
     if target not in ("game", "portal"):
         raise ValueError("unknown Google login target")
     q = urllib.parse.urlencode({
         "client_id": CLIENT_ID, "redirect_uri": _redirect_uri(target),
         "response_type": "code", "scope": "openid",
-        "state": make_state(target), "prompt": "select_account",
+        "state": make_state(target, handoff), "prompt": "select_account",
     })
     return f"{AUTH_URL}?{q}"
 
@@ -369,8 +381,8 @@ def _grant_native_auth(ip: str, account_id: str, now=None):
 
 
 def consume_native_auth_grant(ip: str, account_id: str, now=None):
-    """Return whether this request owns a fresh, single-use Google auth grant."""
-    if not isinstance(account_id, str) or not account_id.startswith("google_"):
+    """Return whether this request owns a fresh, single-use native auth grant."""
+    if not isinstance(account_id, str) or not account_id:
         return False
     raw = _take_handoff(_native_auth_grant_file(ip, account_id))
     try:
@@ -381,10 +393,15 @@ def consume_native_auth_grant(ip: str, account_id: str, now=None):
     return 0 <= now - issued <= NATIVE_AUTH_GRANT_TTL
 
 
-def return_page(request, account_id):
+def _valid_handoff(value):
+    return isinstance(value, str) and 16 <= len(value) <= 64 and all(
+        c.isalnum() or c in "_-" for c in value)
+
+
+def return_page(request, account_id, handoff=""):
     """Park the account id for the poller, and hand back a page that deep-links back
     into the app to foreground it (the id travels via the poll, not the link)."""
-    _set_pending(_client_ip(request), account_id)
+    _set_pending(handoff or _client_ip(request), account_id)
     link = f"{SCHEME}://auth"
     return _page(
         "Signed in - King Bug Castle",
@@ -475,7 +492,7 @@ def _complete_callback(request, code, state, error, expected_target):
             status_code=502)
     account_id = account_id_for_sub(sub)
     if target == "game":
-        return HTMLResponse(return_page(request, account_id))
+        return HTMLResponse(return_page(request, account_id, state_handoff(state)))
 
     import playerdb
     token = playerdb.portal_google_login(account_id)
@@ -504,13 +521,13 @@ def register_game(app):
         "test without Google. See docs/multi-account-login.md.")
 
     @app.get("/glogin")
-    def glogin_start():
+    def glogin_start(device: str = ""):
         if not enabled():
             if DEV:
                 return HTMLResponse(dev_page())
             return HTMLResponse(error_page("Not available", *_NOT_CONFIGURED),
                                 status_code=503)
-        return RedirectResponse(authorize_url())
+        return RedirectResponse(authorize_url("game", device if _valid_handoff(device) else ""))
 
     @app.get("/glogin/callback")
     def glogin_callback(request: Request, code: str = "", state: str = "", error: str = ""):
@@ -530,12 +547,12 @@ def register_game(app):
         return HTMLResponse(return_page(request, id))
 
     @app.get("/glogin/pending")
-    def glogin_pending(request: Request):
+    def glogin_pending(request: Request, device: str = ""):
         """The app's native poller reads the just-picked account id here (plain text,
         not AES - it's not a game-API route). Returned once, then cleared."""
         from fastapi.responses import PlainTextResponse
         ip = _client_ip(request)
-        acc = _get_and_clear_pending(ip)
+        acc = _get_and_clear_pending(device if _valid_handoff(device) else ip)
         if acc:
             _grant_native_auth(ip, acc)
         return PlainTextResponse(acc)

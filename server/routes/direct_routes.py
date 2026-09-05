@@ -90,18 +90,18 @@ def register(app, server_module):
 
     @app.get("/auth")
     @app.get("/auth/auth")
-    async def auth_native_google(request: Request):
-        """The client's Google sign-in endpoint (`GET /auth?id=<account>&cookie=...`).
+    async def auth_native(request: Request):
+        """The client's final native sign-in endpoint (`GET /auth?id=...&cookie=...`).
 
         The REAL backend answers it with a full AuthResponseModel carrying an
         accessToken; the route_models fallback used to return an empty model, so a
         client with no stored token (fresh install / cleared data) never got one:
         its /auth/login went out id-less, r_login refused it (multiplayer), and
         every following request hit load_state()'s throwaway template save - the
-        "KingBug/BugCastle" ghost account. This endpoint may mint a Google
-        session only immediately after the same address retrieved a signed-in
-        handoff from ``/glogin/pending``; accepting a caller-chosen ``id`` here
-        would let anyone impersonate every known Google account."""
+        "KingBug/BugCastle" ghost account. It may mint a session only after the
+        same address retrieved a Google handoff from ``/glogin/pending`` or
+        completed Guest registration; accepting an ungranted caller-chosen ``id``
+        would allow impersonation."""
         host = request.headers.get("host", "?")
         login_id = str(request.query_params.get("id") or "")
         admin_log(f"[{host}] GET /auth")

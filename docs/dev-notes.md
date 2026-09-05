@@ -239,6 +239,20 @@ Fixed-period loops with no exception = client timer, not retry.
   `mint_session_token`) - an empty model means a fresh client never gets `accessToken` and every
   later request hits the throwaway template save ("KingBug"). Diagnosis: zero new session rows
   at login time = the login body carried no id.
+- **v172.1.00 post-logout login fixes (2026-09-06):**
+  - Google browser callbacks arrive through Cloudflare while the native poller may reach origin as
+    `127.0.0.1`; IP-only parking makes `/glogin/pending` poll forever. The stub now persists a
+    random 128-bit device handoff key, sends it to both `/glogin?device=` and
+    `/glogin/pending?device=`, and the server signs it into OAuth state before parking the result.
+    Do not use a shared loopback alias: concurrent users could overwrite or consume each other's
+    handoffs. Clients without a device key retain the legacy IP-bound flow.
+  - Guest `AutoRegister` POSTs `/auth/register`, then GETs `/auth` with the same id. The direct
+    handler requires a one-use native grant, so successful type-4 registration must call
+    `_grant_native_auth`; otherwise `/auth` returns `success:false`, missing date strings make
+    `Scene_Login.HandleAuthResponse` throw `ArgumentNullException`, and UI stays Authenticating.
+  - The native hook must locate `<AutoRegister>g__AutoRegisterImpl` by stable prefix: its compiler
+    suffix changed from `|134_0` to `|137_0` in v172.1.00. Exact lookup silently skipped the hook.
+    Regression: `tests/test_multi_login.py::check_guest_register_grants_its_followup_native_auth`.
 - Template uid is `""`; every key fallback is `st.get("uid") or "dev-0001"` - never persist a
   `""` or `guest-0001` row. Full write-up: `docs/multi-account-login.md`.
 - `dev-0001` = NightOwL since 2026-08-18 (uid `p-410890b421a5`, merged; old KingBug save

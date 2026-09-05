@@ -155,6 +155,24 @@ def check_auth_route_registers_a_new_account_via_http():
     print("ok http: GET /auth registers a brand-new google account end to end")
 
 
+def check_guest_register_grants_its_followup_native_auth():
+    """AutoRegister POSTs /auth/register, then immediately GETs /auth with the
+    same guest id. The second step needs a one-use grant just like Google."""
+    from fastapi.testclient import TestClient
+    guest = "guest-native-followup"
+    with TestClient(server.app, client=("10.8.8.8", 55000)) as tc:
+        registered = tc.post("/auth/register", json={"id": guest, "type": GUEST})
+        assert server.aes_decrypt(registered.content).get("success") is True
+        authenticated = tc.get(f"/auth?id={guest}&cookie=x&platform=Android")
+        out = server.aes_decrypt(authenticated.content)
+        assert out.get("success") is True, out
+        assert out.get("accessToken"), out
+        denied = tc.get(f"/auth?id={guest}&cookie=x&platform=Android")
+        assert server.aes_decrypt(denied.content).get("success") is False, \
+            "guest native grant must be single-use"
+    print("ok guest native auth: register grants exactly one follow-up GET /auth")
+
+
 def check_single_player_override_still_works():
     """KGC_MULTIPLAYER=0 must pin everyone to the active save, the old behaviour."""
     saved = pr.MULTIPLAYER
@@ -177,5 +195,6 @@ if __name__ == "__main__":
     check_empty_id_login_is_refused_in_multiplayer()
     check_native_google_auth_mints_a_session()
     check_auth_route_registers_a_new_account_via_http()
+    check_guest_register_grants_its_followup_native_auth()
     check_single_player_override_still_works()
     print("\nall multi-account login checks passed")

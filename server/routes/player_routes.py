@@ -170,6 +170,11 @@ def r_login(body, st):
     token = "DEV." + secrets.token_hex(16)
     playerdb.bind_session(token, uid)   # every later request identifies via this
     CURRENT_UID.set(uid)                # rest of THIS request is already this player
+    if acct_type == 4:
+        # AutoRegister follows POST /auth/register with GET /auth. Authorize that
+        # single native exchange without making arbitrary guest ids impersonable.
+        import google_login
+        google_login._grant_native_auth(CURRENT_IP.get(), login_id)
     # login_id is a bearer credential (whoever presents it gets that save), and
     # admin_log feeds the dashboard log view - record a fingerprint, not the id.
     fp = hashlib.sha1(login_id.encode()).hexdigest()[:8] if login_id else "-"

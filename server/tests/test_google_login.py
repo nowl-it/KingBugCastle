@@ -93,6 +93,20 @@ def check_callback_parks_the_account_id_for_the_poller():
     print("ok callback: sub 42abc -> pending id google_42abc (cleared after one read)")
 
 
+def check_device_key_bridges_different_browser_and_poller_addresses():
+    """A signed per-device key joins the Cloudflare callback to a loopback poller
+    without a shared loopback inbox that another player could consume."""
+    _configure()
+    google_login._exchange_code = lambda code, redirect_uri: {"id_token": _fake_id_token("edge")}
+    device = "0123456789abcdef0123456789abcdef"
+    state = google_login.make_state("game", device)
+    r = client.get(f"/glogin/callback?code=xyz&state={state}")
+    assert r.status_code == 200, r.status_code
+    assert client.get(f"/glogin/pending?device={device}").text == "google_edge"
+    assert client.get(f"/glogin/pending?device={device}").text == ""
+    print("ok device handoff: callback and poller share one signed per-device key")
+
+
 def check_a_forged_state_is_refused():
     _configure()
     google_login._exchange_code = lambda *a, **k: {"id_token": _fake_id_token("x")}
@@ -127,6 +141,7 @@ if __name__ == "__main__":
     check_start_redirects_to_google_with_a_signed_state()
     check_portal_uses_its_own_callback_uri()
     check_callback_parks_the_account_id_for_the_poller()
+    check_device_key_bridges_different_browser_and_poller_addresses()
     check_a_forged_state_is_refused()
     check_the_emitted_id_lands_on_its_own_save()
     print("\nall google-login checks passed")

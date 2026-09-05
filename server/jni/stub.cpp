@@ -138,6 +138,8 @@ typedef void* (*il2cpp_assembly_get_image_t)(const void* assembly);
 typedef const char* (*il2cpp_image_get_name_t)(const void* image);
 typedef void* (*il2cpp_class_from_name_t)(const void* image, const char* namespaze, const char* name);
 typedef void* (*il2cpp_class_get_method_from_name_t)(const void* klass, const char* name, int argsCount);
+typedef void* (*il2cpp_class_get_methods_t)(const void* klass, void** iter);
+typedef const char* (*il2cpp_method_get_name_t)(const void* method);
 typedef void* (*il2cpp_runtime_invoke_t)(const void* method, void* obj, void** params, void** exc);
 typedef void* (*il2cpp_class_get_type_t)(const void* klass);
 typedef void* (*il2cpp_type_get_object_t)(const void* type);
@@ -275,6 +277,18 @@ il2cpp_string_chars_t str_chars = nullptr;
 il2cpp_field_get_value_t f_get_val = nullptr;
 il2cpp_object_get_class_t obj_get_class = nullptr;
 il2cpp_class_get_method_from_name_t class_get_method = nullptr;
+il2cpp_class_get_methods_t class_iter_methods = nullptr;
+il2cpp_method_get_name_t method_get_name = nullptr;
+
+void* find_method_by_prefix(const void* klass, const char* prefix) {
+    if (!class_iter_methods || !method_get_name) return nullptr;
+    void* iter = nullptr;
+    while (void* m = class_iter_methods(klass, &iter)) {
+        const char* name = method_get_name(m);
+        if (name && strncmp(name, prefix, strlen(prefix)) == 0) return m;
+    }
+    return nullptr;
+}
 il2cpp_class_get_parent_t class_get_parent = nullptr;
 il2cpp_class_get_field_from_name_t g_field_from_name = nullptr;
 
@@ -305,6 +319,7 @@ GetStatFunc getStat = nullptr;
 // For public XAPK builds, the python build script binary-patches g_kgc_glogin_host.
 
 static char g_poll_id[160] = {0};
+static char g_handoff_key[33] = {0};
 static volatile bool g_have_id = false;      // set by poll thread, read by Update
 static bool g_login_done = false;
 void* login_poll_thread(void* arg);
@@ -313,9 +328,38 @@ typedef void (*GoogleLoginFunc)(void* _this, void* methodInfo);
 GoogleLoginFunc origGoogleLogin = nullptr;   // trampoline; unused - we skip GPGS entirely
 void* g_openUrlMethod = nullptr;             // UnityEngine.Application::OpenURL(string)
 
+static const char* handoff_key() {
+    if (g_handoff_key[0]) return g_handoff_key;
+    FILE* f = fopen("/data/data/com.nowl.castle/glogin_device_id.txt", "r");
+    if (f) {
+        if (fgets(g_handoff_key, sizeof(g_handoff_key), f) && strlen(g_handoff_key) == 32) {
+            fclose(f);
+            return g_handoff_key;
+        }
+        fclose(f);
+    }
+    unsigned char raw[16];
+    f = fopen("/dev/urandom", "rb");
+    if (!f || fread(raw, 1, sizeof(raw), f) != sizeof(raw)) {
+        if (f) fclose(f);
+        srand(time(NULL) ^ getpid());
+        for (size_t i = 0; i < sizeof(raw); ++i) raw[i] = rand() & 0xff;
+    } else {
+        fclose(f);
+    }
+    for (size_t i = 0; i < sizeof(raw); ++i) sprintf(g_handoff_key + i * 2, "%02x", raw[i]);
+    f = fopen("/data/data/com.nowl.castle/glogin_device_id.txt", "w");
+    if (f) {
+        fputs(g_handoff_key, f);
+        fclose(f);
+    }
+    return g_handoff_key;
+}
+
 void HookedGoogleLogin(void* _this, void* methodInfo) {
     char KGC_GLOGIN_URL[256];
-    snprintf(KGC_GLOGIN_URL, sizeof(KGC_GLOGIN_URL), "%s://%s/glogin", g_kgc_glogin_scheme, g_kgc_glogin_host);
+    snprintf(KGC_GLOGIN_URL, sizeof(KGC_GLOGIN_URL), "%s://%s/glogin?device=%s",
+             g_kgc_glogin_scheme, g_kgc_glogin_host, handoff_key());
     LOGI("Google button -> opening web login %s", KGC_GLOGIN_URL);
     g_have_id = false;
     g_login_done = false;
@@ -387,7 +431,8 @@ static int http_get_pending_once(const char* host, const char* port, char* buf, 
     freeaddrinfo(res);
     
     char req[512];
-    snprintf(req, sizeof(req), "GET /glogin/pending HTTP/1.0\r\nHost: %s:%s\r\n\r\n", host, port);
+    snprintf(req, sizeof(req), "GET /glogin/pending?device=%s HTTP/1.0\r\nHost: %s:%s\r\n\r\n",
+             handoff_key(), host, port);
     write(fd, req, strlen(req));
     char resp[1024]; int total = 0, r;
     while ((r = read(fd, resp + total, sizeof(resp) - 1 - total)) > 0) {
@@ -1086,6 +1131,8 @@ void* worker_thread(void* arg) {
     f_get_val = (il2cpp_field_get_value_t)GetIl2CppSymbol(handle, "il2cpp_field_get_value");
     obj_get_class = (il2cpp_object_get_class_t)GetIl2CppSymbol(handle, "il2cpp_object_get_class");
     class_get_method = (il2cpp_class_get_method_from_name_t)GetIl2CppSymbol(handle, "il2cpp_class_get_method_from_name");
+    class_iter_methods = (il2cpp_class_get_methods_t)GetIl2CppSymbol(handle, "il2cpp_class_get_methods");
+    method_get_name = (il2cpp_method_get_name_t)GetIl2CppSymbol(handle, "il2cpp_method_get_name");
     class_get_parent = (il2cpp_class_get_parent_t)GetIl2CppSymbol(handle, "il2cpp_class_get_parent");
     auto il2cpp_class_get_field_from_name = (il2cpp_class_get_field_from_name_t)GetIl2CppSymbol(handle, "il2cpp_class_get_field_from_name");
     g_field_from_name = il2cpp_class_get_field_from_name;
@@ -1208,11 +1255,14 @@ void* worker_thread(void* arg) {
     void* sceneLoginClass = il2cpp_class_from_name(assemblyCSharpImage, "", "Scene_Login");
     if (sceneLoginClass && g_openUrlMethod) {
         void* autoRegMethod = class_get_method(sceneLoginClass, "<AutoRegister>g__AutoRegisterImpl|134_0", 1);
+        if (!autoRegMethod) autoRegMethod = find_method_by_prefix(sceneLoginClass, "<AutoRegister>g__AutoRegisterImpl");
         if (autoRegMethod) {
             void* autoRegFn = *(void**)autoRegMethod;
             origAutoRegisterImpl = (AutoRegisterImplFunc)install_inline_hook(autoRegFn, (void*)HookedAutoRegisterImpl);
             if (origAutoRegisterImpl) LOGI("Hooked Scene_Login.AutoRegisterImpl -> persistent local ID!");
             else LOGE("AutoRegister hook: inline detour failed");
+        } else {
+            LOGE("AutoRegister hook: <AutoRegister>g__AutoRegisterImpl not found");
         }
 
         void* glMethod = class_get_method(sceneLoginClass, "OnClickGoogleLogin", 0);
