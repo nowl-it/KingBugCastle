@@ -55,7 +55,10 @@ if not os.path.isdir(UI_DIR):
 UI_ROOT = pathlib.Path(UI_DIR).resolve()
 CONFIG_FILE = os.path.join(BASE, "data", "response_config.json")
 SERVER_URL = os.environ.get("KGC_SERVER_URL", "http://127.0.0.1:8080")
-TRUST_PROXY = os.environ.get("KGC_TRUST_PROXY") == "1"
+BIND_HOST = os.environ.get("KGC_BIND_HOST", "127.0.0.1")
+TRUST_PROXY = os.environ.get(
+    "KGC_TRUST_PROXY", "1" if BIND_HOST in ("127.0.0.1", "::1", "localhost") else "0"
+) == "1"
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 _STATE_GATE = asyncio.Lock()
 
@@ -128,9 +131,12 @@ def _authorized(request):
 
 
 async def guard_admin(request, call_next):
-    """This whole app edits saves and sends mail, and it binds 0.0.0.0 - gate it."""
+    """This whole app edits saves and sends mail, so gate every API request."""
     if request.method not in ("GET", "HEAD", "OPTIONS"):
-        _same_origin(request)
+        try:
+            _same_origin(request)
+        except HTTPException as error:
+            return JSONResponse({"detail": error.detail}, status_code=error.status_code)
     ok, why = _authorized(request)
     if not ok:
         return JSONResponse({"error": why, "login": True}, status_code=401)
@@ -1186,4 +1192,4 @@ if __name__ == "__main__":
         sys.exit(0)
 
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8081)
+    uvicorn.run(app, host=BIND_HOST, port=8081)

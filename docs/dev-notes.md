@@ -1215,6 +1215,13 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
 
 ## 20. Player Dashboard branding and locale (2026-09-03)
 
+- **Admin login 500 behind Caddy (fixed 2026-09-06):** public HTTPS terminates at Caddy, while
+  dashboard receives HTTP on loopback. With proxy trust off, `_same_origin` expected `http://...`
+  and rejected the browser's valid `https://...` Origin; raising `HTTPException` from
+  `BaseHTTPMiddleware` escaped as 500. Dashboard now binds loopback by default, trusts forwarded
+  scheme only in that safe topology, and middleware converts origin failures to an explicit 403.
+  Regression: `server/tests/test_dashboard_origin.py`.
+
 - The public Player Dashboard now supports Vietnamese and English through
   `webui-next/src/components/portal-i18n.tsx`. It defaults from the browser language, persists the
   explicit choice under `localStorage["kgc-player-locale"]`, synchronizes same-tab/cross-tab

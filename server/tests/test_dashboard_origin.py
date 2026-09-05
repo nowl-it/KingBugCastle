@@ -8,6 +8,7 @@ if str(_SERVER) not in sys.path:
 
 import dashboard
 from fastapi import HTTPException
+from fastapi.testclient import TestClient
 
 
 class _Request:
@@ -25,6 +26,15 @@ def test_dashboard_rejects_cross_site_origin(monkeypatch):
         assert error.status_code == 403
     else:
         raise AssertionError("cross-site dashboard request was accepted")
+
+
+def test_dashboard_middleware_returns_403_instead_of_500_for_cross_site_login():
+    response = TestClient(dashboard.app).post(
+        "/api/auth/login",
+        headers={"origin": "https://evil.example.test", "host": "admin.example.test"},
+        json={"username": "root", "password": "irrelevant"},
+    )
+    assert response.status_code == 403, response.text
 
 
 def test_dashboard_accepts_its_own_forwarded_https_origin(monkeypatch):
