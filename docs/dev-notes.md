@@ -1298,3 +1298,18 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
   identity text alone leaves the profile panel without hero count or portraits.
 - `api_audit.py` creates a real friendly-match room before probing join. An empty room code is a
   valid business rejection, not evidence that the success response contract is broken.
+
+## 24. Admin accessory forge UI (2026-09-06)
+
+- `/accessories` is organized around the actual operator sequence: configure a legal accessory,
+  assemble the persistent admin manifest, then deploy it to a selected player. The destructive
+  replace behavior is shown beside the deploy action instead of being buried in page copy.
+- The builder keeps the server-supplied rarity slots, stat lists, per-stat maximum and shared score
+  budget as the source of truth. A live budget meter and inline over-budget message prevent invalid
+  saves before the request reaches the API.
+- The saved set is a compact manifest rather than nested cards. The selected player's existing
+  accessories are a separate inventory table with scoring metadata collapsed under an optional
+  reference disclosure. Mobile uses stacked controls and a horizontally scrollable inventory table.
+- The deployable dashboard is the tracked static export under `server/webui-next/out/`; run both
+  `pnpm run lint` and `pnpm run build` after editing the source page. Do not retain the generated
+  `pnpm-lock.yaml`; this repository's committed lockfile is `package-lock.json`.
