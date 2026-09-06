@@ -1007,10 +1007,10 @@ def _treasure_max_level(overcome):
     return _treasure_meta()["up"].get(int(overcome), 10 + 2 * int(overcome))
 
 
-def _treasure_result(st, added_exp=0):
+def _treasure_result(st, added_exp=0, deleted=()):
     return {
         "treasures": get_st_treasures(st),
-        "deletedTreasures": [],
+        "deletedTreasures": list(deleted),
         "playerGold": st.get("gold", 0),
         "playerCash": st.get("cash", 0),
         "inventories": srv._inventory_models(st),
@@ -1064,17 +1064,22 @@ def r_treasure_overcome(body, st):
     overcome = int(t.get("overcome", 0))
     if overcome >= max_overcome:
         return _treasure_result(st)
-    mats = body.get("materialTreasureIds") or []
-    if mats:
-        ids = [int(m.get("id", m) if isinstance(m, dict) else m) for m in mats]
-        tr[:] = [x for x in tr if x.get("id") not in ids]
-        st["treasures"] = tr
-    if need_material and not accessory._deduct_inventory_item(st, TREASURE_OVERCOME_ITEM, need_material):
+    material_ids = list(dict.fromkeys(
+        body_int(i, 0) for i in (body.get("materialTreasureIds") or [])))
+    materials = [x for x in tr if x is not t and x.get("id") in material_ids]
+    item_count = body_int(body.get("materialItemCount"), 0, lo=0)
+    if len(materials) + item_count < need_material:
         return _treasure_result(st)
+    if item_count and not accessory._deduct_inventory_item(
+            st, TREASURE_OVERCOME_ITEM, item_count):
+        return _treasure_result(st)
+    deleted = [x["id"] for x in materials]
+    if deleted:
+        tr[:] = [x for x in tr if x.get("id") not in set(deleted)]
     t["overcome"] = overcome + 1
     t["updatedAt"] = now_iso()
     save_state(st)
-    return _treasure_result(st)
+    return _treasure_result(st, deleted=deleted)
 
 
 def r_rift_weapon(body, st):

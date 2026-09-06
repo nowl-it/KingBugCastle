@@ -99,6 +99,17 @@ def check_locked_difficulty_refused():
     print(f"ok gate: difficulty {unlocked + 1} refused (unlocked = {unlocked})")
 
 
+def check_winning_unlocks_the_next_difficulty():
+    st = _fresh()
+    st["invasionRecords"] = {"1": {"cleared": 11, "unlocked": 11}}
+    server.r_game_complete(
+        {"gameId": "difficulty-11", "win": True, "theme": 1, "stage": 10,
+         "difficulty": 11}, st)
+    record = server.load_state()["invasionRecords"]["1"]
+    assert record == {"cleared": 11, "unlocked": 12}, record
+    print("ok progress: winning difficulty 11 unlocks difficulty 12")
+
+
 def check_pass_rewards_are_opt_in():
     st = _fresh()
     plain = server.r_invasion_reward({"theme": 1, "difficulty": 1},
@@ -146,6 +157,7 @@ if __name__ == "__main__":
     check_bitmask_is_per_difficulty()
     check_claim_state_reaches_listing()
     check_locked_difficulty_refused()
+    check_winning_unlocks_the_next_difficulty()
     check_pass_rewards_are_opt_in()
     check_receive_all_then_nothing_left()
     check_no_item_zero()

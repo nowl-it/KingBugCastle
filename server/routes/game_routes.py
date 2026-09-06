@@ -15,6 +15,7 @@ srv = None      # live server module, injected via register()
 
 _DIMENSION_RIFT_MIN_CHALLENGE = -5
 _DIMENSION_RIFT_MAX_CHALLENGE = 16
+_MAX_INVASION_DIFFICULTY = 15
 
 
 def register(app, server_module):
@@ -79,7 +80,8 @@ def r_game_complete(body, st):
                 rec = st.setdefault("invasionRecords", {}).setdefault(
                     str(theme), {"cleared": 0, "unlocked": 0})
                 rec["cleared"] = max(rec["cleared"], diff)
-                rec["unlocked"] = max(rec["unlocked"], min(diff + 1, 5))
+                rec["unlocked"] = max(
+                    rec["unlocked"], min(diff + 1, _MAX_INVASION_DIFFICULTY))
         # Hard invasion themes (51-70) advance bestClearedHardTheme instead of
         # bestClearedTheme.  The Invasion II section panel gates on the former, so
         # without this update the section stays locked even after clearing I-10 Hard.

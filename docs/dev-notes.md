@@ -511,6 +511,10 @@ these action roles and staff/hand anchors per frame.
   `ProfilePanel.ReloadChallenge`.
 - Accessories: `load_corruption_accessories()` builds the 4 real Invasion II-1 rewards from
   `FixedAccessoryPresets.xml` IDs 2000-2003 (valid stat keys - `mainStat="ATK"` was garbage).
+- **Difficulty progression (2026-09-06):** a winning `/game/complete` stores the cleared
+  difficulty and unlocks the next one through 15. The old `min(diff + 1, 5)` confused the five
+  first-clear reward rows with the playable difficulty ladder, so winning difficulty 11 left 12
+  locked. Regression: `check_winning_unlocks_the_next_difficulty`.
 
 ### 9a. Accessory change-sub-stat - duplicate-tier decode (2026-08-18, d843ed5)
 
@@ -542,6 +546,15 @@ entries and inserts one `new_stat` entry with the summed score at the first remo
 Regression: `test_accessory_merge_duplicate_substats` in `server/tests/test_accessory.py`.
 Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnant cleanup
 (the old handler had given AtkPer the full 26 pool while leaving BaseDefDen 22 behind).
+
+### 9b. Legacy (treasure) upgrading (2026-09-06)
+
+- `TreasureRequestModel` transcendence materials are the combination of
+  `materialTreasureIds: List<int>` and `materialItemCount` (item 3200). Their total must satisfy
+  the rarity's `TreasureOvercomeCost.NeedMaterial`; do not always charge the full cost in ingots.
+- Validate both sources before mutating state, never allow `targetId` to consume itself, and return
+  consumed instance IDs in `TreasureResultResponseModel.deletedTreasures` so the client removes
+  them immediately. Regression: `check_treasure_overcome_accepts_duplicate_legacy`.
 
 ## 10. Post/mail system (2026-07-11)
 
