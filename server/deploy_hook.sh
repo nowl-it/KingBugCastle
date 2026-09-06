@@ -24,7 +24,7 @@ fi
 
 echo "=== [KGC Zero-Downtime Deploy Hook] ==="
 echo "[1/4] Pulling latest code from main..."
-if [ -n "$(git status --porcelain)" ]; then
+if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
   echo "[!] Refusing deploy from a dirty checkout. Commit, discard, or explicitly back up local work first." >&2
   exit 1
 fi

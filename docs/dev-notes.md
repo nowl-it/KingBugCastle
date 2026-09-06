@@ -1317,6 +1317,10 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
   builder as a new variant. Update runs the same game-rule validation as create, preserves list
   order, and rejects a fingerprint duplicate of any other entry. Apply requires confirmation with
   the exact target and deployment count.
+- Production keeps runtime saves in the untracked `server/state/` directory. `deploy_hook.sh` must
+  reject dirty tracked files with `git status --porcelain --untracked-files=no`; checking all
+  untracked files permanently blocks deploy as soon as runtime state exists. Never delete state to
+  make the checkout clean.
 - The deployable dashboard is the tracked static export under `server/webui-next/out/`; run both
   `pnpm run lint` and `pnpm run build` after editing the source page. Do not retain the generated
   `pnpm-lock.yaml`; this repository's committed lockfile is `package-lock.json`.
