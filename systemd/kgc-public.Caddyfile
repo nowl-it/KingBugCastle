@@ -13,6 +13,8 @@ http://kingbugcastle.id.vn, http://admin.kingbugcastle.id.vn, http://player.king
 # Unlike the hostname path, it must clear Cloudflare client headers before proxying;
 # otherwise a direct caller could forge the address that the loopback service trusts.
 http://213.35.110.245 {
+    @client_ip path /__kgc_client_ip
+    respond @client_ip "{remote_host}" 200
     reverse_proxy https://127.0.0.1:8443 {
         header_up -CF-Connecting-IP
         header_up -X-Forwarded-For
