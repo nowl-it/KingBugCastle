@@ -5,21 +5,20 @@ import { useQuery } from "@tanstack/react-query"
 import {
   AlertTriangle,
   Check,
-  ChevronRight,
   Diamond,
   Gem,
+  Info,
   Loader2,
   PackageOpen,
   Plus,
   RotateCcw,
   Save,
-  ShieldCheck,
-  Sparkles,
+  Search,
   Trash2,
-  UserRound,
 } from "lucide-react"
-import { fetcher, runMutation, useAccessories, usePlayers } from "@/lib/api"
-import { usePlayerSelection } from "@/components/player-context"
+import { fetcher, runMutation, useAccessories } from "@/lib/api"
+import { PlayerBar, usePlayerSelection } from "@/components/player-context"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -62,7 +61,6 @@ type AccessoriesResponse = {
   grades?: Record<string, string | number>
   accessories?: Accessory[]
 }
-type PlayerSummary = { id: string; name: string; active?: boolean }
 type SubStatRow = { key: string; value: string }
 
 const fieldClass = "h-10 w-full rounded-md border border-input bg-background px-3 text-sm outline-none transition-colors focus:border-foreground focus:ring-2 focus:ring-ring/20"
@@ -134,8 +132,7 @@ function SubStatRows({
 }
 
 export default function AccessoriesPage() {
-  const { selectedId, setSelectedId } = usePlayerSelection()
-  const { data: playerData } = usePlayers()
+  const { selectedId } = usePlayerSelection()
   const { data, mutate: mutateAccessories } = useAccessories(selectedId || undefined)
   const { data: optionsData, isLoading: optionsLoading, isError: optionsError } = useQuery({
     queryKey: ["/api/admin-accessories/options"],
@@ -156,9 +153,9 @@ export default function AccessoriesPage() {
   const [saving, setSaving] = useState(false)
   const [applying, setApplying] = useState(false)
   const [deleting, setDeleting] = useState<number | null>(null)
+  const [view, setView] = useState<"build" | "inventory">("build")
+  const [setQuery, setSetQuery] = useState("")
 
-  const players = (Array.isArray(playerData) ? playerData : []) as PlayerSummary[]
-  const selectedPlayer = players.find((player) => player.id === selectedId)
   const options = optionsData as BuilderOptions | undefined
   const config = configData as AdminConfig | undefined
   const owned = data as AccessoriesResponse | undefined
@@ -176,6 +173,11 @@ export default function AccessoriesPage() {
   const typeNames = new Map((options?.types || []).map((entry) => [entry.id, entry.name]))
   const rarityNames = new Map((options?.rarities || []).map((entry) => [entry.id, entry.name]))
   const synergyNames = new Map((options?.synergies || []).map((entry) => [entry.id, entry.name]))
+  const query = setQuery.trim().toLowerCase()
+  const filteredAdminList = adminList
+    .map((entry, index) => ({ entry, index }))
+    .filter(({ entry }) => !query || [entry.name, entry.type, entry.mainStat, synergyNames.get(entry.synergy)]
+      .some((value) => String(value || "").toLowerCase().includes(query)))
 
   const resetForm = () => {
     setName("")
@@ -239,53 +241,29 @@ export default function AccessoriesPage() {
   }
 
   return (
-    <div className="mx-auto max-w-[1500px] space-y-6 pb-10">
-      <header className="relative overflow-hidden rounded-xl bg-zinc-950 px-5 py-6 text-zinc-100 shadow-[0_24px_70px_-42px_rgba(0,0,0,0.9)] sm:px-7 sm:py-8">
-        <div className="pointer-events-none absolute -right-16 -top-24 h-72 w-72 rounded-full border border-amber-300/10 shadow-[0_0_0_45px_rgba(251,191,36,0.025),0_0_0_90px_rgba(251,191,36,0.015)]" />
-        <div className="relative grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem] xl:items-end">
-          <div>
-            <p className="mb-3 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-300/80">
-              <Sparkles className="h-3.5 w-3.5" /> Loadout operations
-            </p>
-            <h1 className="max-w-3xl text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Accessory forge</h1>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-400">
-              Build a legal loadout, review it as one set, then deploy it to a player. Deployment replaces that player&apos;s current accessories.
-            </p>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Accessories</h1>
+        <p className="text-muted-foreground">Build one admin set, then replace a player&apos;s accessories with it.</p>
+      </div>
+
+      <PlayerBar />
+
+      <div className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
+        {[
+          ["1", "Add accessories", "Each save adds one item to the admin set."],
+          ["2", "Review the set", `The set currently contains ${adminList.length} item${adminList.length === 1 ? "" : "s"}.`],
+          ["3", "Apply to player", "Apply replaces the selected player's current set."],
+        ].map(([step, title, description]) => (
+          <div key={step} className="flex gap-3 bg-card p-4">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">{step}</span>
+            <div>
+              <p className="text-sm font-medium">{title}</p>
+              <p className="mt-0.5 text-xs leading-5 text-muted-foreground">{description}</p>
+            </div>
           </div>
-          <label className="grid gap-2 rounded-lg border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm">
-            <span className="flex items-center justify-between text-xs font-medium text-zinc-300">
-              <span className="flex items-center gap-2"><UserRound className="h-4 w-4 text-amber-300" /> Deployment target</span>
-              {selectedPlayer?.active && <span className="font-mono text-[10px] uppercase tracking-wider text-emerald-300">Active</span>}
-            </span>
-            <select
-              value={selectedId || ""}
-              onChange={(event) => setSelectedId(event.target.value)}
-              className="h-11 w-full rounded-md border border-white/10 bg-zinc-900 px-3 text-sm text-zinc-100 outline-none transition-colors focus:border-amber-300/60 focus:ring-2 focus:ring-amber-300/10"
-            >
-              <option value="" disabled>Select a player...</option>
-              {players.map((player) => (
-                <option key={player.id} value={player.id}>{player.name} · {player.id}</option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <ol className="relative mt-7 grid gap-2 border-t border-white/10 pt-5 sm:grid-cols-3">
-          {[
-            ["01", "Configure", "Choose legal game stats"],
-            ["02", "Assemble", `${adminList.length} item${adminList.length === 1 ? "" : "s"} in saved set`],
-            ["03", "Deploy", selectedPlayer ? `Target: ${selectedPlayer.name}` : "Choose a target"],
-          ].map(([step, title, detail], index) => (
-            <li key={step} className="flex items-center gap-3 rounded-md px-2 py-2 sm:px-3">
-              <span className="font-mono text-xs text-amber-300/70">{step}</span>
-              <span className="min-w-0">
-                <span className="block text-xs font-semibold text-zinc-200">{title}</span>
-                <span className="block truncate text-[11px] text-zinc-500">{detail}</span>
-              </span>
-              {index < 2 && <ChevronRight className="ml-auto hidden h-4 w-4 text-zinc-700 sm:block" />}
-            </li>
-          ))}
-        </ol>
-      </header>
+        ))}
+      </div>
 
       {optionsError && (
         <div role="alert" className="flex items-center gap-3 border-l-2 border-destructive bg-destructive/5 px-4 py-3 text-sm text-destructive">
@@ -293,268 +271,203 @@ export default function AccessoriesPage() {
         </div>
       )}
 
-      <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,0.92fr)_minmax(34rem,1.08fr)]">
-        <form onSubmit={addEntry} className="overflow-hidden rounded-xl border bg-card xl:sticky xl:top-20">
-          <div className="border-b bg-muted/35 px-5 py-4 sm:px-6">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Blueprint</p>
-                <h2 className="mt-1 text-lg font-semibold tracking-tight">Configure accessory</h2>
-              </div>
-              <Diamond className="h-6 w-6 text-amber-500" />
-            </div>
-          </div>
-
-          <div className="grid gap-6 p-5 sm:p-6">
-            <Field label="Display name" hint="required">
-              <Input value={name} onChange={(event) => setName(event.target.value)} placeholder="e.g. Menace necklace" autoComplete="off" />
-            </Field>
-
-            <fieldset className="grid gap-3">
-              <legend className="mb-1 text-xs font-semibold text-muted-foreground">Base properties</legend>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Type">
-                  <select
-                    value={type}
-                    onChange={(event) => {
-                      setType(event.target.value)
-                      setMainStat(options?.mainStatsByType[event.target.value]?.[0] || "AtkPer")
-                    }}
-                    className={fieldClass}
-                  >
-                    {(options?.types || []).map((entry) => <option key={entry.id} value={entry.name}>{entry.name}</option>)}
-                  </select>
-                </Field>
-                <Field label="Rarity" hint={`${slots} slot${slots === 1 ? "" : "s"}`}>
-                  <select value={rarity} onChange={(event) => setRarity(event.target.value)} className={fieldClass}>
-                    {(options?.rarities || []).map((entry) => <option key={entry.id} value={String(entry.id)}>{entry.name}</option>)}
-                  </select>
-                </Field>
-                <Field label="Level" hint="1–20">
-                  <Input type="number" min={1} max={20} value={level} onChange={(event) => setLevel(event.target.value)} className="font-mono tabular-nums" />
-                </Field>
-                <Field label="Synergy">
-                  <select value={synergy} onChange={(event) => setSynergy(event.target.value)} className={fieldClass}>
-                    {(options?.synergies || []).map((entry) => <option key={entry.id} value={String(entry.id)}>{entry.name}</option>)}
-                  </select>
-                </Field>
-              </div>
-            </fieldset>
-
-            <Field label="Main stat" hint={type}>
-              <select value={mainStat} onChange={(event) => setMainStat(event.target.value)} className={fieldClass}>
-                {mainStats.map((key) => <option key={key} value={key}>{key}</option>)}
-              </select>
-            </Field>
-
-            <fieldset className="grid gap-3">
-              <div className="flex items-end justify-between gap-4">
-                <legend className="text-xs font-semibold text-muted-foreground">Sub-stats</legend>
-                <span className={`font-mono text-xs font-semibold tabular-nums ${overBudget ? "text-destructive" : "text-foreground"}`}>
-                  {subStatsTotal.toFixed(1)} / {budget.toFixed(1)}
-                </span>
-              </div>
-              <div className="h-1.5 overflow-hidden rounded-full bg-muted">
-                <div
-                  className={`h-full rounded-full transition-[width,background-color] duration-300 ${overBudget ? "bg-destructive" : "bg-amber-500"}`}
-                  style={{ width: `${budgetPercent}%` }}
-                />
-              </div>
-              <p className="text-xs leading-5 text-muted-foreground">Shared score budget across {slots} slot{slots === 1 ? "" : "s"}. Each stat accepts up to {scoreMax.toFixed(1)}.</p>
-              <SubStatRows options={subKeys} rows={shownSubStats} max={scoreMax} onChange={setSubStats} />
-              {shownSubStats.length < slots && (
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="justify-self-start"
-                  onClick={() => setSubStats([...shownSubStats, { key: subKeys[0] || "AtkPer", value: "4" }])}
-                >
-                  <Plus className="mr-1.5 h-3.5 w-3.5" /> Add stat slot
-                </Button>
-              )}
-              {overBudget && <p className="text-xs font-medium text-destructive">Reduce the total by {(subStatsTotal - budget).toFixed(1)} points to save.</p>}
-            </fieldset>
-
-            <div className="rounded-lg bg-zinc-950 p-4 text-zinc-100">
-              <div className="flex items-start justify-between gap-4">
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">{name.trim() || "Unnamed accessory"}</p>
-                  <p className="mt-1 text-xs text-zinc-500">{type} · {rarityNames.get(Number(rarity)) || `Rarity ${rarity}`} · Lv {level || "—"}</p>
-                </div>
-                <span className="font-mono text-xl font-semibold text-amber-300 tabular-nums">{subStatsTotal.toFixed(1)}</span>
-              </div>
-              <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3 text-xs">
-                <span className="font-medium text-zinc-300">{mainStat || "No main stat"}</span>
-                <span className="text-zinc-600">main stat</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col-reverse gap-2 border-t bg-muted/25 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-            <Button type="button" variant="ghost" onClick={resetForm}>
-              <RotateCcw className="mr-1.5 h-4 w-4" /> Reset
-            </Button>
-            <Button type="submit" disabled={!canSave || saving} className="sm:min-w-36">
-              {saving ? <Loader2 className="mr-1.5 h-4 w-4 animate-spin" /> : <Save className="mr-1.5 h-4 w-4" />}
-              Save to set
-            </Button>
-          </div>
-        </form>
-
-        <section aria-labelledby="saved-set-heading" className="overflow-hidden rounded-xl border bg-card">
-          <div className="flex flex-col gap-4 border-b px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Deployment manifest</p>
-              <h2 id="saved-set-heading" className="mt-1 flex items-center gap-2 text-lg font-semibold tracking-tight">
-                Saved admin set <span className="font-mono text-sm font-normal text-muted-foreground">({adminList.length})</span>
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground">Persistent across restarts. Applying this manifest replaces the target&apos;s current set.</p>
-            </div>
-            <Button
-              onClick={applyToPlayer}
-              disabled={!selectedId || !adminList.length || applying}
-              className="shrink-0 bg-amber-400 text-zinc-950 hover:bg-amber-300"
-            >
-              {applying ? <Loader2 className="mr-1.5 h-4 w-4 animate-spin" /> : <Check className="mr-1.5 h-4 w-4" />}
-              Deploy set
-            </Button>
-          </div>
-
-          {configLoading ? (
-            <div className="grid gap-3 p-5 sm:p-6">
-              {[0, 1, 2].map((item) => <div key={item} className="h-20 animate-pulse rounded-md bg-muted" />)}
-            </div>
-          ) : !adminList.length ? (
-            <div className="grid min-h-72 place-items-center px-6 py-12 text-center">
-              <div>
-                <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-muted text-muted-foreground"><Gem className="h-5 w-5" /></div>
-                <h3 className="mt-4 text-sm font-semibold">The manifest is empty</h3>
-                <p className="mx-auto mt-1 max-w-sm text-xs leading-5 text-muted-foreground">Configure an accessory in the forge and save it here before deploying.</p>
-              </div>
-            </div>
-          ) : (
-            <ol className="divide-y divide-border">
-              {adminList.map((entry, index) => (
-                <li key={`${entry.name}-${index}`} className="group grid gap-4 px-5 py-4 transition-colors hover:bg-muted/25 sm:grid-cols-[2rem_minmax(0,1fr)_auto] sm:items-center sm:px-6">
-                  <span className="hidden font-mono text-xs text-muted-foreground sm:block">{String(index + 1).padStart(2, "0")}</span>
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="truncate text-sm font-semibold">{entry.name || "Unnamed"}</h3>
-                      <Badge variant="outline" className="rounded-md px-1.5 py-0 font-mono text-[10px]">Lv {entry.level}</Badge>
-                    </div>
-                    <p className="mt-1 truncate text-xs text-muted-foreground">
-                      {typeof entry.type === "number" ? typeNames.get(entry.type) || entry.type : entry.type}
-                      <span className="mx-1.5 text-border">/</span>{rarityNames.get(entry.rarity) || `Rarity ${entry.rarity}`}
-                      <span className="mx-1.5 text-border">/</span>{synergyNames.get(entry.synergy) || entry.synergy}
-                    </p>
-                    <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs">
-                      <span className="font-medium text-foreground">{entry.mainStat} <span className="font-normal text-muted-foreground">main</span></span>
-                      {(entry.subStats || []).map((stat, statIndex) => (
-                        <span key={`${stat.key}-${statIndex}`} className="text-muted-foreground">{stat.key} <b className="font-mono font-medium text-foreground tabular-nums">{stat.value}</b></span>
-                      ))}
-                    </div>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    aria-label={`Remove ${entry.name || `accessory ${index + 1}`}`}
-                    disabled={deleting === index}
-                    className="h-9 w-9 justify-self-end text-muted-foreground opacity-100 hover:text-destructive sm:opacity-0 sm:group-hover:opacity-100 sm:focus-visible:opacity-100"
-                    onClick={() => deleteEntry(index)}
-                  >
-                    {deleting === index ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
-                  </Button>
-                </li>
-              ))}
-            </ol>
-          )}
-
-          <div className="flex items-start gap-3 border-t bg-amber-400/10 px-5 py-4 text-xs leading-5 sm:px-6">
-            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" />
-            <p><b className="font-semibold">Destructive deployment:</b> {selectedPlayer ? `${selectedPlayer.name}'s` : "the selected player's"} existing accessories will be replaced, not merged.</p>
-          </div>
-        </section>
+      <div className="flex w-fit rounded-md border bg-muted/40 p-1" role="tablist" aria-label="Accessory workspace">
+        <button
+          role="tab"
+          aria-selected={view === "build"}
+          onClick={() => setView("build")}
+          className={`rounded px-3 py-1.5 text-sm font-medium transition-colors ${view === "build" ? "bg-background shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          Build set <span className="ml-1 text-xs text-muted-foreground">{adminList.length}</span>
+        </button>
+        <button
+          role="tab"
+          aria-selected={view === "inventory"}
+          onClick={() => setView("inventory")}
+          className={`rounded px-3 py-1.5 text-sm font-medium transition-colors ${view === "inventory" ? "bg-background shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          Player inventory <span className="ml-1 text-xs text-muted-foreground">{owned?.accessories?.length ?? 0}</span>
+        </button>
       </div>
 
-      <section aria-labelledby="inventory-heading" className="overflow-hidden rounded-xl border bg-card">
-        <div className="flex flex-col gap-3 border-b px-5 py-5 sm:flex-row sm:items-end sm:justify-between sm:px-6">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Target inventory</p>
-            <h2 id="inventory-heading" className="mt-1 flex items-center gap-2 text-lg font-semibold tracking-tight">
-              <PackageOpen className="h-5 w-5 text-muted-foreground" /> Current accessories
-            </h2>
-            <p className="mt-1 text-xs text-muted-foreground">
-              {selectedPlayer ? `${selectedPlayer.name} · ${selectedPlayer.id}` : "Choose a deployment target above"}
-            </p>
-          </div>
-          {selectedId && owned && (
-            <details className="text-xs text-muted-foreground sm:text-right">
-              <summary className="cursor-pointer select-none font-medium text-foreground hover:underline">Scoring reference</summary>
-              <p className="mt-2 max-w-xl leading-5">
-                Thresholds: {Object.entries(owned.scoreRange || {}).map(([grade, value]) => `${grade} ${value}`).join(" · ") || "none"}<br />
-                Grades: {Object.entries(owned.grades || {}).map(([grade, label]) => `${grade} ${label}`).join(" · ") || "none"}
-              </p>
-            </details>
-          )}
-        </div>
+      {view === "build" ? (
+        <div className="grid items-start gap-6 xl:grid-cols-[minmax(360px,480px)_minmax(0,1fr)]">
+          <form onSubmit={addEntry} className="xl:sticky xl:top-20">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base"><Diamond className="h-4 w-4" /> 1. Add one accessory</CardTitle>
+                <CardDescription>Saving adds this accessory to the set shown on the right. It does not change a player yet.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Field label="Name" hint="required">
+                  <Input value={name} onChange={(event) => setName(event.target.value)} placeholder="e.g. Menace necklace" autoComplete="off" />
+                </Field>
 
-        {!selectedId ? (
-          <div className="grid min-h-48 place-items-center px-6 py-10 text-center text-sm text-muted-foreground">
-            <div><UserRound className="mx-auto mb-3 h-6 w-6" />Select a player in the header to inspect their inventory.</div>
-          </div>
-        ) : !owned ? (
-          <div className="grid gap-3 p-5 sm:p-6">
-            {[0, 1, 2].map((item) => <div key={item} className="h-16 animate-pulse rounded-md bg-muted" />)}
-          </div>
-        ) : !owned.accessories?.length ? (
-          <div className="grid min-h-48 place-items-center px-6 py-10 text-center text-sm text-muted-foreground">
-            <div><Gem className="mx-auto mb-3 h-6 w-6" />This player owns no accessories.</div>
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[760px] border-collapse text-left text-sm">
-              <thead className="bg-muted/35 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-                <tr>
-                  <th className="px-6 py-3 font-medium">Accessory</th>
-                  <th className="px-4 py-3 font-medium">Main stat</th>
-                  <th className="px-4 py-3 font-medium">Sub-stats</th>
-                  <th className="px-6 py-3 text-right font-medium">Score</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {owned.accessories.map((accessory) => (
-                  <tr key={accessory.id} className="align-top transition-colors hover:bg-muted/20">
-                    <td className="px-6 py-4">
-                      <div className="flex items-start gap-3">
-                        <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-md bg-muted text-muted-foreground"><Gem className="h-4 w-4" /></span>
-                        <span>
-                          <span className="block font-semibold">{accessory.typeName} <span className="font-mono font-normal text-muted-foreground">#{accessory.id}</span></span>
-                          <span className="mt-1 block text-xs text-muted-foreground">{accessory.rarityName} · Lv {accessory.level} · {accessory.synergyName}</span>
-                          {accessory.unitName && <span className="mt-1 block text-xs font-medium text-amber-700 dark:text-amber-300">Equipped by {accessory.unitName}</span>}
-                        </span>
+                <div className="grid gap-3 sm:grid-cols-3 xl:grid-cols-2">
+                  <Field label="Type">
+                    <select
+                      value={type}
+                      onChange={(event) => {
+                        setType(event.target.value)
+                        setMainStat(options?.mainStatsByType[event.target.value]?.[0] || "AtkPer")
+                      }}
+                      className={fieldClass}
+                    >
+                      {(options?.types || []).map((entry) => <option key={entry.id} value={entry.name}>{entry.name}</option>)}
+                    </select>
+                  </Field>
+                  <Field label="Rarity" hint={`${slots} stats`}>
+                    <select value={rarity} onChange={(event) => setRarity(event.target.value)} className={fieldClass}>
+                      {(options?.rarities || []).map((entry) => <option key={entry.id} value={String(entry.id)}>{entry.name}</option>)}
+                    </select>
+                  </Field>
+                  <Field label="Level">
+                    <Input type="number" min={1} max={20} value={level} onChange={(event) => setLevel(event.target.value)} className="font-mono tabular-nums" />
+                  </Field>
+                  <Field label="Synergy">
+                    <select value={synergy} onChange={(event) => setSynergy(event.target.value)} className={fieldClass}>
+                      {(options?.synergies || []).map((entry) => <option key={entry.id} value={String(entry.id)}>{entry.name}</option>)}
+                    </select>
+                  </Field>
+                </div>
+
+                <Field label="Main stat" hint={type}>
+                  <select value={mainStat} onChange={(event) => setMainStat(event.target.value)} className={fieldClass}>
+                    {mainStats.map((key) => <option key={key} value={key}>{key}</option>)}
+                  </select>
+                </Field>
+
+                <fieldset className="space-y-3 rounded-md border p-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <legend className="text-xs font-medium">Sub-stats</legend>
+                    <span className={`font-mono text-xs tabular-nums ${overBudget ? "text-destructive" : "text-muted-foreground"}`}>
+                      {subStatsTotal.toFixed(1)} / {budget.toFixed(1)} points
+                    </span>
+                  </div>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-muted">
+                    <div className={`h-full rounded-full transition-all ${overBudget ? "bg-destructive" : "bg-primary"}`} style={{ width: `${budgetPercent}%` }} />
+                  </div>
+                  <SubStatRows options={subKeys} rows={shownSubStats} max={scoreMax} onChange={setSubStats} />
+                  <div className="flex items-center justify-between gap-3">
+                    {shownSubStats.length < slots ? (
+                      <Button type="button" variant="outline" size="sm" onClick={() => setSubStats([...shownSubStats, { key: subKeys[0] || "AtkPer", value: "4" }])}>
+                        <Plus className="mr-1 h-3.5 w-3.5" /> Add stat
+                      </Button>
+                    ) : <span />}
+                    <span className="text-xs text-muted-foreground">Max {scoreMax.toFixed(1)} each</span>
+                  </div>
+                  {overBudget && <p className="text-xs font-medium text-destructive">Reduce the total by {(subStatsTotal - budget).toFixed(1)} points.</p>}
+                </fieldset>
+
+                <div className="flex flex-col-reverse gap-2 border-t pt-4 sm:flex-row sm:justify-between">
+                  <Button type="button" variant="ghost" onClick={resetForm}><RotateCcw className="mr-1.5 h-4 w-4" /> Reset</Button>
+                  <Button type="submit" disabled={!canSave || saving}>
+                    {saving ? <Loader2 className="mr-1.5 h-4 w-4 animate-spin" /> : <Save className="mr-1.5 h-4 w-4" />} Add to set
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </form>
+
+          <Card className="overflow-hidden">
+            <CardHeader className="pb-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2 text-base"><Gem className="h-4 w-4" /> 2. Review and apply set ({adminList.length})</CardTitle>
+                  <CardDescription className="mt-1">Every item below belongs to the same admin set.</CardDescription>
+                </div>
+                <Button onClick={applyToPlayer} disabled={!selectedId || !adminList.length || applying} className="shrink-0">
+                  {applying ? <Loader2 className="mr-1.5 h-4 w-4 animate-spin" /> : <Check className="mr-1.5 h-4 w-4" />} Apply entire set
+                </Button>
+              </div>
+              <div className="relative mt-2">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input value={setQuery} onChange={(event) => setSetQuery(event.target.value)} placeholder="Search this set..." className="pl-8" />
+              </div>
+            </CardHeader>
+
+            <CardContent className="p-0">
+              {configLoading ? (
+                <div className="space-y-2 p-4">{[0, 1, 2].map((item) => <div key={item} className="h-16 animate-pulse rounded bg-muted" />)}</div>
+              ) : !adminList.length ? (
+                <div className="grid h-64 place-items-center px-6 text-center text-sm text-muted-foreground">
+                  <div><Gem className="mx-auto mb-3 h-6 w-6" />The admin set is empty. Add the first accessory on the left.</div>
+                </div>
+              ) : !filteredAdminList.length ? (
+                <div className="grid h-40 place-items-center px-6 text-center text-sm text-muted-foreground">No accessories match “{setQuery}”.</div>
+              ) : (
+                <ol className="max-h-[570px] divide-y divide-border overflow-y-auto">
+                  {filteredAdminList.map(({ entry, index }) => (
+                    <li key={`${entry.name}-${index}`} className="group flex items-start gap-3 px-4 py-3 hover:bg-muted/30">
+                      <span className="mt-0.5 font-mono text-xs text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="truncate text-sm font-medium">{entry.name || "Unnamed"}</span>
+                          <Badge variant="outline" className="rounded px-1.5 py-0 text-[10px]">Lv {entry.level}</Badge>
+                        </div>
+                        <p className="mt-0.5 truncate text-xs text-muted-foreground">
+                          {typeof entry.type === "number" ? typeNames.get(entry.type) || entry.type : entry.type} · {rarityNames.get(entry.rarity) || `Rarity ${entry.rarity}`} · {synergyNames.get(entry.synergy) || entry.synergy}
+                        </p>
+                        <p className="mt-1 truncate text-xs"><b className="font-medium">{entry.mainStat}</b> <span className="text-muted-foreground">main · {(entry.subStats || []).map((stat) => `${stat.key} ${stat.value}`).join(" · ")}</span></p>
                       </div>
-                    </td>
-                    <td className="px-4 py-4 font-medium">{accessory.mainStatLabel || "—"}</td>
-                    <td className="px-4 py-4">
-                      <div className="flex max-w-xl flex-wrap gap-1.5">
-                        {(accessory.subStats || []).map((stat, index) => (
-                          <span key={`${stat.label}-${index}`} className="inline-flex items-center gap-1.5 rounded-md bg-muted px-2 py-1 text-xs text-muted-foreground">
-                            {stat.label}
-                            <b className="font-mono font-medium text-foreground tabular-nums">{stat.score ?? "—"}</b>
-                            {stat.grade && <span className="text-[10px] text-amber-700 dark:text-amber-300">{stat.grade}</span>}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 text-right font-mono text-lg font-semibold tabular-nums">{accessory.scoreTotal}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </section>
+                      <Button variant="ghost" size="icon" aria-label={`Remove ${entry.name || `accessory ${index + 1}`}`} disabled={deleting === index} className="h-8 w-8 shrink-0 text-muted-foreground hover:text-destructive" onClick={() => deleteEntry(index)}>
+                        {deleting === index ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Trash2 className="h-3.5 w-3.5" />}
+                      </Button>
+                    </li>
+                  ))}
+                </ol>
+              )}
+              <div className="flex items-start gap-2 border-t bg-muted/30 px-4 py-3 text-xs leading-5 text-muted-foreground">
+                <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                <p><b className="font-medium text-foreground">Apply entire set</b> replaces all accessories owned by the player selected above. It does not merge.</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      ) : (
+        <Card className="overflow-hidden">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base"><PackageOpen className="h-4 w-4" /> Player inventory</CardTitle>
+            <CardDescription>Read-only view of the accessories currently owned by the selected player.</CardDescription>
+            {selectedId && owned && (
+              <details className="pt-1 text-xs text-muted-foreground">
+                <summary className="cursor-pointer font-medium text-foreground">Scoring reference</summary>
+                <p className="mt-2 leading-5">Thresholds: {Object.entries(owned.scoreRange || {}).map(([grade, value]) => `${grade} ${value}`).join(" · ") || "none"}<br />Grades: {Object.entries(owned.grades || {}).map(([grade, label]) => `${grade} ${label}`).join(" · ") || "none"}</p>
+              </details>
+            )}
+          </CardHeader>
+          <CardContent className="p-0">
+            {!selectedId ? (
+              <div className="grid h-48 place-items-center text-sm text-muted-foreground">Select a player above.</div>
+            ) : !owned ? (
+              <div className="space-y-2 p-4">{[0, 1, 2].map((item) => <div key={item} className="h-14 animate-pulse rounded bg-muted" />)}</div>
+            ) : !owned.accessories?.length ? (
+              <div className="grid h-48 place-items-center text-sm text-muted-foreground">This player owns no accessories.</div>
+            ) : (
+              <div className="max-h-[65vh] overflow-auto">
+                <table className="w-full min-w-[760px] border-collapse text-left text-sm">
+                  <thead className="sticky top-0 z-10 bg-muted text-xs text-muted-foreground">
+                    <tr><th className="px-4 py-3 font-medium">Accessory</th><th className="px-4 py-3 font-medium">Main stat</th><th className="px-4 py-3 font-medium">Sub-stats</th><th className="px-4 py-3 text-right font-medium">Score</th></tr>
+                  </thead>
+                  <tbody className="divide-y divide-border">
+                    {owned.accessories.map((accessory) => (
+                      <tr key={accessory.id} className="align-top hover:bg-muted/20">
+                        <td className="px-4 py-3">
+                          <span className="font-medium">{accessory.typeName} <span className="font-mono font-normal text-muted-foreground">#{accessory.id}</span></span>
+                          <span className="mt-0.5 block text-xs text-muted-foreground">{accessory.rarityName} · Lv {accessory.level} · {accessory.synergyName}{accessory.unitName ? ` · ${accessory.unitName}` : ""}</span>
+                        </td>
+                        <td className="px-4 py-3 font-medium">{accessory.mainStatLabel || "—"}</td>
+                        <td className="px-4 py-3 text-xs text-muted-foreground">{(accessory.subStats || []).map((stat) => `${stat.label} ${stat.score ?? "—"}${stat.grade ? ` (${stat.grade})` : ""}`).join(" · ") || "—"}</td>
+                        <td className="px-4 py-3 text-right font-mono text-base font-semibold tabular-nums">{accessory.scoreTotal}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
     </div>
   )
 }

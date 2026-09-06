@@ -1299,17 +1299,17 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
 - `api_audit.py` creates a real friendly-match room before probing join. An empty room code is a
   valid business rejection, not evidence that the success response contract is broken.
 
-## 24. Admin accessory forge UI (2026-09-06)
+## 24. Admin accessory builder UI (2026-09-06)
 
-- `/accessories` is organized around the actual operator sequence: configure a legal accessory,
-  assemble the persistent admin manifest, then deploy it to a selected player. The destructive
-  replace behavior is shown beside the deploy action instead of being buried in page copy.
+- `/accessories` follows the same header, `PlayerBar`, card and spacing patterns as the existing
+  Items/Heroes admin pages. Do not introduce a page-specific dark hero or visual system.
+- The UI states the data model explicitly: there is one persistent admin set; every save adds one
+  accessory to it; Apply replaces the selected player's whole accessory inventory and never merges.
+- `Build set` and `Player inventory` are separate tabs. The saved set has search and a fixed 570px
+  scroll region; inventory has a 65vh scroll region with a sticky table header. Neither collection
+  is allowed to make the whole page grow with its item count.
 - The builder keeps the server-supplied rarity slots, stat lists, per-stat maximum and shared score
-  budget as the source of truth. A live budget meter and inline over-budget message prevent invalid
-  saves before the request reaches the API.
-- The saved set is a compact manifest rather than nested cards. The selected player's existing
-  accessories are a separate inventory table with scoring metadata collapsed under an optional
-  reference disclosure. Mobile uses stacked controls and a horizontally scrollable inventory table.
+  budget as the source of truth. A budget meter and inline over-budget message prevent invalid saves.
 - The deployable dashboard is the tracked static export under `server/webui-next/out/`; run both
   `pnpm run lint` and `pnpm run build` after editing the source page. Do not retain the generated
   `pnpm-lock.yaml`; this repository's committed lockfile is `package-lock.json`.
