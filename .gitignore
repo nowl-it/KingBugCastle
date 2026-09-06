@@ -105,6 +105,7 @@ server/state/players.db-wal
 server/state/players.db-shm
 server/state/.write.lock
 server/state/.glogin_pending_*
+server/state/.glogin_auth_*
 
 # Agentmemory runtime store (state_store.db + stream_store, binary; not KGC project data)
 /data/

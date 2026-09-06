@@ -1320,7 +1320,8 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
 - Production keeps runtime saves in the untracked `server/state/` directory. `deploy_hook.sh` must
   reject dirty tracked files with `git status --porcelain --untracked-files=no`; checking all
   untracked files permanently blocks deploy as soon as runtime state exists. Never delete state to
-  make the checkout clean.
+  make the checkout clean. Both `.glogin_pending_*` and `.glogin_auth_*` are ephemeral runtime
+  markers and belong in `.gitignore`.
 - The deployable dashboard is the tracked static export under `server/webui-next/out/`; run both
   `pnpm run lint` and `pnpm run build` after editing the source page. Do not retain the generated
   `pnpm-lock.yaml`; this repository's committed lockfile is `package-lock.json`.
