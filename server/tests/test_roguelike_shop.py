@@ -45,6 +45,22 @@ def check_a_run_survives_a_reload():
     print("ok save: the run blob comes back intact")
 
 
+def check_an_incomplete_dimension_rift_run_is_discarded():
+    _fresh()
+    blob = '{"floorInWorld":1,"cards":[],"fieldUnits":[],"resStages":[]}'
+    server.r_rogue_save({"themeId": 2100, "rogueLikeSaveData": blob,
+                         "state": "0", "saveVersion": 2}, server.load_state())
+    out = server.r_rogue_load({"themeId": 2100}, server.load_state())
+    assert out["state"] == "DELETE" and out["rogueLikeSaveData"] == "", \
+        "an incomplete run was handed to the scene loader"
+    valid = '{"floorInWorld":1,"cards":[{"unitId":10000}],"resStages":[]}'
+    server.r_rogue_save({"themeId": 2100, "rogueLikeSaveData": valid,
+                         "state": "0", "saveVersion": 3}, server.load_state())
+    assert server.r_rogue_load({"themeId": 2100}, server.load_state())["rogueLikeSaveData"] == valid, \
+        "a valid Dimension Rift run was discarded"
+    print("ok invalid save: incomplete Dimension Rift run is discarded")
+
+
 def check_runs_do_not_bleed_between_themes():
     _fresh()
     server.r_rogue_save({"themeId": 5000, "rogueLikeSaveData": "a"}, server.load_state())
@@ -167,6 +183,7 @@ def check_every_route_answers():
 
 if __name__ == "__main__":
     check_a_run_survives_a_reload()
+    check_an_incomplete_dimension_rift_run_is_discarded()
     check_runs_do_not_bleed_between_themes()
     check_the_card_snapshot_is_kept_separately()
     check_deleting_a_run_moves_the_game_index()

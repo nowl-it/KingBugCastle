@@ -21,6 +21,8 @@ Uses the `register(app, srv)` pattern.
 
     python3 mini_games.py     # self-check
 """
+import json
+
 from common import admin_log, body_int, now_iso
 from config import PLAYER_DEFAULTS as _PC
 from decoration import block as _deco
@@ -60,8 +62,21 @@ def r_rogue_snapshot(body, st):
 
 
 def r_rogue_load(body, st):
-    r = _rogue(st, body.get("themeId", 0))
+    theme = body_int(body.get("themeId"), 0)
+    r = _rogue(st, theme)
     save_state(st)
+    if theme == 2100 and r["saveData"]:
+        try:
+            data = json.loads(r["saveData"])
+        except (TypeError, ValueError):
+            data = None
+        if not isinstance(data, dict) or not (data.get("cards") or data.get("resStages")):
+            admin_log(f"[roguelike] discarded incomplete Dimension Rift save version "
+                      f"{r['saveVersion']}")
+            return {"rogueLikeSaveData": "", "rogueLikeOwnCardSnapshot": "",
+                    "state": "DELETE", "saveVersion": r["saveVersion"],
+                    "lastHeartPaidFloor": r["lastHeartPaidFloor"],
+                    "lastGameStartedSeason": r["lastGameStartedSeason"]}
     return {"rogueLikeSaveData": r["saveData"],
             "rogueLikeOwnCardSnapshot": r["ownCardSnapshot"],
             "state": r["state"], "saveVersion": r["saveVersion"],

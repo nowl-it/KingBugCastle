@@ -1338,3 +1338,22 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
 - The deployable dashboard is the tracked static export under `server/webui-next/out/`; run both
   `pnpm run lint` and `pnpm run build` after editing the source page. Do not retain the generated
   `pnpm-lock.yaml`; this repository's committed lockfile is `package-lock.json`.
+
+## 25. Dimension Rift incomplete-save black screen (v172.1.00, 2026-09-06)
+
+- The pre-incident backup for `p-2787e1889bcd` contained a real theme-2100 save (`saveData` 16,684
+  bytes, card snapshot 141,693 bytes, `state="0"`, response `saveVersion=2`). The JSON itself parsed,
+  but the floor-1 run was incomplete: `cards=[]`, `fieldUnits=[]`, and `resStages=[]` while enemy/AI
+  state was already present. Active theme-2100 saves from other players have non-empty cards and
+  stages, including at floor 1. Passing this partial object into scene restore produced the reported
+  black screen; the client subsequently deleted the run.
+- `GameManager.<LoadRogueLikeFromServerImpl>d__731.MoveNext` @ RVA `0x30D822C` checks response
+  `state == "DELETE"` before calling `JsonUtility.FromJson` for the snapshot and save blob
+  (`0x30D94A8` / `0x30D94D8`). This is the client's safe invalid-save path.
+- `r_rogue_load` now applies a narrow theme-2100 check: malformed JSON or a save with neither cards
+  nor stage history returns an empty blob with `state="DELETE"`. Other themes and valid Dimension
+  Rift blobs remain opaque and unchanged. Regression: `check_an_incomplete_dimension_rift_run_is_discarded`
+  in `server/tests/test_roguelike_shop.py`.
+- Do not infer corruption from `rogueLikeGameIndex` when debugging theme 2100. Client
+  `GameManager.GetRogueLikeGameIndex` @ RVA `0x30B3F3C` reads `dimensionRiftGameIndex` for 2100 and
+  `rogueLikeGameIndex` for 2000.
