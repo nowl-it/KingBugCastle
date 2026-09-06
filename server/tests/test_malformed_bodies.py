@@ -124,7 +124,7 @@ def check_a_client_index_cannot_allocate():
                       ("/clan/raid/deck", "index")):
         r = client.post(path, content=server.aes_encrypt({key: 10 ** 9, "deck": [1]}))
         assert r.status_code == 200, f"{path} died on {key}=1e9"
-    st = server.load_state()
+    st = playerdb.load(_SEEDED["uid"])
     assert len(st.get("decks", [])) <= server.DECK_PRESETS, \
         f"deck presets grew to {len(st.get('decks', []))}"
     assert len(server._get_building_data(st)) <= server.BUILDING_PRESETS, \
@@ -136,18 +136,19 @@ def check_a_client_index_cannot_allocate():
 def check_a_negative_index_does_not_write_to_the_end():
     """`preset < len(presets)` passes for -1 and Python indexes from the end, so a
     negative preset used to overwrite the last one instead of the first."""
-    st = server.load_state()
+    st = playerdb.load(_SEEDED["uid"])
     st["currentDeckPreset"] = 0
     st["decks"] = [{"deck": [i] * server.DECK_SLOTS,
                     "potential": [0] * server.DECK_SLOTS, "firstComerIndex": 0}
                    for i in range(server.DECK_PRESETS)]
-    server.save_state(st)
-    last = server.load_state()["decks"][-1]["deck"][:]
+    playerdb.save(_SEEDED["uid"], st)
+    last = playerdb.load(_SEEDED["uid"])["decks"][-1]["deck"][:]
+    marker = 10010
     client.post("/deck/set", content=server.aes_encrypt(
-        {"presetIdx": -1, "deck": [9999] * server.DECK_SLOTS}))
-    decks = server.load_state()["decks"]
+        {"presetIdx": -1, "deck": [marker] * server.DECK_SLOTS}))
+    decks = playerdb.load(_SEEDED["uid"])["decks"]
     assert decks[-1]["deck"] == last, "a negative preset overwrote the last one"
-    assert decks[0]["deck"][0] == 9999, "the write did not land on preset 0"
+    assert decks[0]["deck"][0] == marker, "the write did not land on preset 0"
     print("ok: preset -1 clamps to 0, the last preset is untouched")
 
 
@@ -163,6 +164,7 @@ def check_body_helpers_do_what_they_claim():
 
 
 if __name__ == "__main__":
+    server.RATE_LIMIT = 0
     check_body_helpers_do_what_they_claim()
     check_a_client_index_cannot_allocate()
     check_a_negative_index_does_not_write_to_the_end()

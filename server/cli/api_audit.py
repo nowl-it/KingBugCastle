@@ -27,6 +27,9 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+SERVER = ROOT.parent
+if str(SERVER) not in sys.path:
+    sys.path.insert(0, str(SERVER))
 
 # A string field the client is going to hand to DateTime.Parse. Naming is consistent
 # across the whole API, which is what makes this checkable at all.
@@ -159,7 +162,12 @@ def audit(only=None):
         score = info.get("score")
 
         try:
-            r = client.post(path, content=b"")
+            request_body = b""
+            if path == "/colosseum/join-custom-match":
+                created = client.post("/colosseum/create-custom-match", content=b"")
+                lobby_id = server.aes_decrypt(created.content).get("lobbyId")
+                request_body = server.aes_encrypt({"matchId": lobby_id})
+            r = client.post(path, content=request_body)
             body = server.aes_decrypt(r.content)
             if not isinstance(body, dict):
                 body = json.loads(body)

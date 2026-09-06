@@ -547,24 +547,68 @@ def _key_value(st, key, default=None):
 
 
 def r_change_profile_icon(body, st):
-    # ChangeProfileIconRequestModel = {icon} - the unit whose portrait to show.
-    icon = body_int(body.get("icon"), 0)
-    if icon:
+    # ChangeProfileIconRequestModel = {profileIconId}.
+    icon = body_int(body.get("profileIconId"), 0)
+    if str(icon) in st.get("cards", {}):
         _set_key_value(st, "profileIconId", icon)
     return {"keyValues": _key_values(st)}
 
 
 def r_player_ad(body, st):
+    st["dailyAdCount"] = body_int(st.get("dailyAdCount"), 0, lo=0) + 1
+    save_state(st)
     return {"dailyAdCount": st["dailyAdCount"]}
 
 
 def r_player_other(body, st):
+    from roster import player_by_id
+    st = player_by_id(body_int(body.get("targetId"), 0), st)
     d = _PC["defaults"]
-    return {"name": st.get("name", d["name"]),
-            "castleName": st.get("castleName", d["castleName"]),
-            "kingPostfix": st.get("kingPostfix", 0),
-            "castlePostfix": st.get("castlePostfix", 0),
-            "keyValues": _key_values(st)}
+    decks = st.get("decks") or srv.DEFAULT_DECKS
+    preset = body_int(st.get("currentDeckPreset"), 0, lo=0, hi=len(decks) - 1)
+    deck = decks[preset]
+    cards = st.get("cards", {})
+    current_deck = []
+    for unit_id in deck.get("deck", []):
+        if not unit_id:
+            continue
+        card = cards.get(str(unit_id), {})
+        current_deck.append({
+            "cardId": unit_id,
+            "level": card.get("level", 1),
+            "skin": card.get("currentSkin", 0),
+            "potentialTier": card.get("potentialTier", 0),
+            "isLevelSyncApplied": card.get("isLevelSynced", False),
+            "treasure": None,
+            "accessories": [],
+        })
+    return {
+        "name": st.get("name", d["name"]),
+        "castleName": st.get("castleName", d["castleName"]),
+        "kingPostfix": st.get("kingPostfix", 0),
+        "castlePostfix": st.get("castlePostfix", 0),
+        "profileIconId": body_int(_key_value(st, "profileIconId"), d["profileIconId"]),
+        "profileIconBackgroundId": body_int(_key_value(st, "profileIconBackgroundId"), 0),
+        "nameTagId": st.get("nameTagId", 0),
+        "level": st.get("level", d["level"]),
+        "exp": st.get("exp", d["exp"]),
+        "invasionDifficultyRecords": r_player({}, st)["invasionDifficultyRecords"],
+        "eventModeRecord": st.get("eventModeRecord", []),
+        "rogueLikeBuildingChallengeLevelRecord": st.get("rogueLikeBuildingChallengeLevelRecord", []),
+        "babelRecord": st.get("babelRecord", []),
+        "winCount": st.get("winCount", 0),
+        "heroCount": len(cards),
+        "currentAltar": st.get("currentAltar", 0),
+        "currentDeck": current_deck,
+        "currentPotential": deck.get("potential", []),
+        "firstComerIndex": deck.get("firstComerIndex", 0),
+        "currentRanking": st.get("currentRanking", []),
+        "currentHardRanking": st.get("currentHardRanking", []),
+        "clanId": st.get("clanId", 0),
+        "clanMark": st.get("clanMark", 0),
+        "clanRole": st.get("clanRole", 0),
+        "clanName": st.get("clanName", ""),
+    }
 
 
 def r_transfer_issue(body, st):
@@ -572,7 +616,7 @@ def r_transfer_issue(body, st):
     use: the redeem path pops it, so a replayed code can never log a second
     account in. The player id is recoverable from the code, which is the point."""
     import secrets as _s
-    code = _s.token_hex(3).upper()
+    code = _s.token_hex(4).upper()
     st["transfer"] = {"code": code, "expiresAt": now_iso(1)}
     save_state(st)
     return {"secretCode": code}
@@ -580,8 +624,8 @@ def r_transfer_issue(body, st):
 
 def _transfer_lookup(code):
     """uid whose unexpired save carries this transfer code, else None."""
-    for uid in playerdb.all_uids():
-        t = (playerdb.load(uid) or {}).get("transfer")
+    for uid, st, _updated in playerdb.all_players():
+        t = (st or {}).get("transfer") or {}
         if t.get("code") == code and t.get("expiresAt", "") > now_iso(0):
             return uid
     return None

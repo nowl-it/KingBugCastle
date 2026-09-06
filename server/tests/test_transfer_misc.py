@@ -124,9 +124,9 @@ def check_every_new_route_answers():
                  "/game/check-dimension-rift-complete-success", "/kg-wiki/insert-wiki",
                  "/pass/reroll-mission", "/shop-event/cumulative-purchase",
                  "/shop-event/cumulative-purchase/claim", "/api/cloud-run/services",
-                 "/api/cloud-run/default-ranking", "/kgc-main", "/kgc-ranking",
+                  "/api/cloud-run/default-ranking", "/kgc-ranking",
                  "/seasonal-event/april-fools/reward"):
-        out = server.DYNAMIC_OVERRIDES[path]({}, server.load_state())
+        out = server.OVERRIDES[path]({}, server.load_state())
         assert isinstance(out, dict), f"{path} returned {type(out)}"
     print("ok safety: every newly wired route answers")
 

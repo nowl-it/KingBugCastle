@@ -42,10 +42,10 @@ def check_profile_icon_must_be_an_owned_hero():
     st = _fresh()
     owned = int(next(iter(st["cards"])))
     server.r_change_profile_icon({"profileIconId": owned}, server.load_state())
-    assert server._key_value(server.load_state(), "profileIconId") == owned
+    assert server._key_value(server.load_state(), "profileIconId") == str(owned)
 
     server.r_change_profile_icon({"profileIconId": 999999}, server.load_state())
-    assert server._key_value(server.load_state(), "profileIconId") == owned, \
+    assert server._key_value(server.load_state(), "profileIconId") == str(owned), \
         "an id that resolves to no hero was stored - the avatar renders blank"
     print(f"ok icon: hero {owned} accepted, 999999 refused")
 
@@ -179,13 +179,19 @@ def check_the_ad_counter_moves():
     print("ok ad: the daily counter increments")
 
 
-def check_other_player_is_this_player():
+def check_other_player_resolves_target_id():
     st = server.load_state()
     out = server.r_player_other({"targetId": 1}, st)
     assert out["name"] == st.get("name"), "the profile shows somebody else"
     assert out["heroCount"] == len(st.get("cards", {}))
     assert out["currentDeck"], "the profile draws a deck and got none"
-    print(f"ok other: {out['heroCount']} heroes, {len(out['currentDeck'])} in the deck")
+
+    other = server.copy.deepcopy(st)
+    other.update(uid="other-2", accountId=2, name="OtherPlayer")
+    playerdb.save("other-2", other)
+    out = server.r_player_other({"targetId": 2}, st)
+    assert out["name"] == "OtherPlayer", "targetId returned the caller instead"
+    print(f"ok other: target resolved, {out['heroCount']} heroes, {len(out['currentDeck'])} in the deck")
 
 
 def check_every_player_route_answers():
@@ -208,6 +214,6 @@ if __name__ == "__main__":
     check_the_continuous_bonus_needs_the_whole_board()
     check_pass_points_cost_cash()
     check_the_ad_counter_moves()
-    check_other_player_is_this_player()
+    check_other_player_resolves_target_id()
     check_every_player_route_answers()
     print("\nall player-event checks passed")

@@ -20,7 +20,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 
-from common import admin_log, now_iso
+from common import admin_log, body_int, body_list, now_iso
 from state import save_state
 
 XML_DIR = Path(__file__).resolve().parent.parent / "xml_live"
@@ -318,12 +318,12 @@ def r_accessory_equip(body: Dict[str, Any], st: Dict[str, Any]) -> Dict[str, Any
     """POST /accessory/equip (and POST /accessory)."""
     ensure_accessory_state(st)
     accs = st.get("accessories", [])
-    unit_id = int(body.get("unitId", 0))
+    unit_id = body_int(body.get("unitId"), 0)
     target_ids = body.get("targetIds")
     if target_ids is None and "targetId" in body:
         tid = body.get("targetId")
         target_ids = [tid] if tid else []
-    target_ids = [int(i) for i in target_ids] if target_ids else []
+    target_ids = body_list(target_ids, int)
     admin_log("[accessory] equip request")
 
     if unit_id and target_ids:

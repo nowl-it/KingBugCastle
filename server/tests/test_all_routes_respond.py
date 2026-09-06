@@ -42,7 +42,12 @@ def check_every_client_route_answers_an_empty_body():
     bad = []
     for p in paths:
         try:
-            r = client.post(p, content=b"")
+            request_body = b""
+            if p == "/colosseum/join-custom-match":
+                created = client.post("/colosseum/create-custom-match", content=b"")
+                lobby_id = _decode(created.content).get("lobbyId")
+                request_body = server.aes_encrypt({"matchId": lobby_id})
+            r = client.post(p, content=request_body)
             if r.status_code != 200:
                 bad.append((p, f"HTTP {r.status_code}"))
                 continue
@@ -53,7 +58,7 @@ def check_every_client_route_answers_an_empty_body():
             bad.append((p, repr(e)[:80]))
     assert not bad, "routes that did not answer:\n" + \
         "\n".join(f"  {p}: {why}" for p, why in bad[:25])
-    print(f"ok: {len(paths)} client routes all answered an empty body")
+    print(f"ok: {len(paths)} client routes all answered a minimal body")
 
 
 def check_the_route_list_is_the_clients():

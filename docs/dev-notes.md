@@ -1283,3 +1283,18 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
   after `gameComplete.fixed`: that config contains `rogueLikeScore: 0` and otherwise overwrites it.
   Regression: `test_dimension_rift_difficulty_progresses_sequentially` in
   `server/tests/test_ranking.py`.
+
+## 23. API audit completion fixes (2026-09-06)
+
+- Run the contract tools from the repository root: `python3 server/cli/api_audit.py` and the
+  direct `server/tests/test_{route_coverage,api_contract,all_routes_respond,malformed_bodies}.py`
+  scripts. Their primary checks use `check_*`, so pytest collection alone does not execute them.
+- Account transfer lookup must enumerate `playerdb.all_players()`; the removed `all_uids()` API
+  made every redeem fail. Transfer credentials are eight hex characters, expire after one day,
+  and are deleted on first use.
+- `ChangeProfileIconRequestModel` sends `profileIconId`, not `icon`; only persist an owned card ID.
+  `/player/ad` initializes, increments, and persists `dailyAdCount` for old saves missing the key.
+- `/player/other` must populate `OtherPlayerDataResponseModel` profile and current-deck fields;
+  identity text alone leaves the profile panel without hero count or portraits.
+- `api_audit.py` creates a real friendly-match room before probing join. An empty room code is a
+  valid business rejection, not evidence that the success response contract is broken.

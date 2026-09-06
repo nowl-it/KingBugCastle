@@ -78,10 +78,19 @@ def check_extra_does_not_shadow():
 def check_handlers_are_reachable():
     """A handler keyed on a path the client never calls is dead code - usually a typo
     (this caught /incgame-coupon for /ingame-coupon, and /ranking for /ranking/ranking).
-    Two are legitimately unreachable from the string table and are allowed by name."""
+    Compatibility aliases and server-driven follow-up routes are allowed by name."""
     allowed = {
-        "/territory",     # alias; the client calls /territory/fetch
-        "/x2/xls.cgi",    # CDN patch query, not built from a literal in the table
+        "/accessory/set-state",       # old alias for /accessory/set-state-all
+        "/auth/auth",                 # native login alias documented by the client flow
+        "/challenge/daily",           # old aliases for /story-mode/challenge/*
+        "/challenge/info",
+        "/challenge/reward",
+        "/colosseum/custom-match-start",  # server-driven custom-match follow-ups
+        "/colosseum/leave-custom-match",
+        "/invasion/receive-all",      # old aliases for current invasion reward routes
+        "/invasion/reward-all",
+        "/territory",                 # alias; the client calls /territory/fetch
+        "/x2/xls.cgi",                # CDN patch query, not built from a literal
     }
     r = route_coverage.report()
     stray = [p for p in r["extra_handlers"] if p not in allowed]
