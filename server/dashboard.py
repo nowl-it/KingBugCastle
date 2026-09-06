@@ -1128,6 +1128,7 @@ def api_admin_accessory_options():
                             for t in sorted(_ACC_TYPE_NAMES)},
         "subStatKeys": sorted(grant_accessories.per_score().keys()),
         "scoreMax": 26.0,
+        "builtinCount": len(grant_accessories.SETS) * len(grant_accessories.LOADOUT),
         "slotsByRarity": {r: grant_accessories.level_events(r)[0] for r in sorted(_ACC_RARITIES)},
         "budgetByRarity": {r: grant_accessories.level_events(r)[1] for r in sorted(_ACC_RARITIES)},
     }
@@ -1146,6 +1147,28 @@ async def api_admin_accessory_add(body: dict):
     cfg["accessories"].append(entry)
     _write_admin_accessories(cfg)
     return {"ok": True, "duplicate": False, "entry": entry,
+            "total": len(cfg["accessories"])}
+
+
+@app.post("/api/admin-accessories/update")
+async def api_admin_accessory_update(body: dict):
+    if not isinstance(body, dict) or "index" not in body:
+        raise HTTPException(400, "index required")
+    try:
+        idx = int(body["index"])
+    except (TypeError, ValueError):
+        raise HTTPException(400, "index must be an integer")
+    cfg = _read_admin_accessories()
+    if not 0 <= idx < len(cfg["accessories"]):
+        raise HTTPException(404, "no entry at that index")
+    entry = _validate_admin_accessory(body)
+    fingerprint = _admin_acc_fingerprint(entry)
+    if any(i != idx and _admin_acc_fingerprint(other) == fingerprint
+           for i, other in enumerate(cfg["accessories"])):
+        raise HTTPException(409, "an identical accessory already exists")
+    cfg["accessories"][idx] = entry
+    _write_admin_accessories(cfg)
+    return {"ok": True, "entry": entry, "index": idx,
             "total": len(cfg["accessories"])}
 
 

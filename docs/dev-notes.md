@@ -1310,6 +1310,13 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
   is allowed to make the whole page grow with its item count.
 - The builder keeps the server-supplied rarity slots, stat lists, per-stat maximum and shared score
   budget as the source of truth. A budget meter and inline over-budget message prevent invalid saves.
+- `include_builtin` is an operator-controlled deployment option, not hidden configuration. The
+  options API returns `builtinCount` (derived as `len(SETS) * len(LOADOUT)`, currently 65), and the
+  UI includes it in the deployment total. A built-in-only set is valid and must leave Apply enabled.
+- Custom entries can be edited in place through `/api/admin-accessories/update` or copied into the
+  builder as a new variant. Update runs the same game-rule validation as create, preserves list
+  order, and rejects a fingerprint duplicate of any other entry. Apply requires confirmation with
+  the exact target and deployment count.
 - The deployable dashboard is the tracked static export under `server/webui-next/out/`; run both
   `pnpm run lint` and `pnpm run build` after editing the source page. Do not retain the generated
   `pnpm-lock.yaml`; this repository's committed lockfile is `package-lock.json`.

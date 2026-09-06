@@ -1,15 +1,17 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
+import { useRef, useState, type FormEvent } from "react"
 import { useQuery } from "@tanstack/react-query"
 import {
   AlertTriangle,
   Check,
+  Copy,
   Diamond,
   Gem,
   Info,
   Loader2,
   PackageOpen,
+  Pencil,
   Plus,
   RotateCcw,
   Save,
@@ -31,6 +33,7 @@ type BuilderOptions = {
   mainStatsByType: Record<string, string[]>
   subStatKeys: string[]
   scoreMax: number
+  builtinCount: number
   slotsByRarity: Record<string, number>
   budgetByRarity: Record<string, number>
 }
@@ -132,6 +135,7 @@ function SubStatRows({
 }
 
 export default function AccessoriesPage() {
+  const builderRef = useRef<HTMLFormElement>(null)
   const { selectedId } = usePlayerSelection()
   const { data, mutate: mutateAccessories } = useAccessories(selectedId || undefined)
   const { data: optionsData, isLoading: optionsLoading, isError: optionsError } = useQuery({
@@ -155,6 +159,8 @@ export default function AccessoriesPage() {
   const [deleting, setDeleting] = useState<number | null>(null)
   const [view, setView] = useState<"build" | "inventory">("build")
   const [setQuery, setSetQuery] = useState("")
+  const [editingIndex, setEditingIndex] = useState<number | null>(null)
+  const [togglingBuiltin, setTogglingBuiltin] = useState(false)
 
   const options = optionsData as BuilderOptions | undefined
   const config = configData as AdminConfig | undefined
@@ -165,6 +171,8 @@ export default function AccessoriesPage() {
   const budget = options?.budgetByRarity[rarity] || 0
   const subKeys = options?.subStatKeys || []
   const scoreMax = options?.scoreMax ?? 26
+  const builtinCount = options?.builtinCount ?? 65
+  const deploymentCount = adminList.length + (config?.include_builtin ? builtinCount : 0)
   const shownSubStats = subStats.slice(0, slots)
   const subStatsTotal = shownSubStats.reduce((total, row) => total + (parseFloat(row.value) || 0), 0)
   const budgetPercent = budget ? Math.min(100, (subStatsTotal / budget) * 100) : 0
@@ -180,6 +188,7 @@ export default function AccessoriesPage() {
       .some((value) => String(value || "").toLowerCase().includes(query)))
 
   const resetForm = () => {
+    setEditingIndex(null)
     setName("")
     setType("Necklace")
     setRarity("3")
@@ -194,9 +203,10 @@ export default function AccessoriesPage() {
     if (!canSave) return
     setSaving(true)
     try {
-      await runMutation("/api/admin-accessories", {
+      await runMutation(editingIndex === null ? "/api/admin-accessories" : "/api/admin-accessories/update", {
         method: "POST",
         body: JSON.stringify({
+          ...(editingIndex === null ? {} : { index: editingIndex }),
           name: name.trim(),
           type,
           rarity: Number(rarity),
@@ -205,11 +215,37 @@ export default function AccessoriesPage() {
           mainStat,
           subStats: shownSubStats.map((row) => ({ key: row.key, value: parseFloat(row.value) || 0 })),
         }),
-      }, "Accessory saved to the admin set")
+      }, editingIndex === null ? "Accessory added to the admin set" : "Accessory updated")
       resetForm()
       refetchConfig()
     } finally {
       setSaving(false)
+    }
+  }
+
+  const loadEntry = (entry: AdminEntry, index: number | null) => {
+    setEditingIndex(index)
+    setName(index === null ? `${entry.name} copy` : entry.name)
+    const entryType = typeof entry.type === "number" ? typeNames.get(entry.type) || "Necklace" : entry.type
+    setType(entryType)
+    setRarity(String(entry.rarity))
+    setLevel(String(entry.level))
+    setSynergy(String(entry.synergy))
+    setMainStat(entry.mainStat)
+    setSubStats((entry.subStats || []).map((stat) => ({ key: stat.key, value: String(stat.value) })))
+    requestAnimationFrame(() => builderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }))
+  }
+
+  const updateBuiltin = async (include: boolean) => {
+    setTogglingBuiltin(true)
+    try {
+      await runMutation("/api/admin-accessories/config", {
+        method: "POST",
+        body: JSON.stringify({ include_builtin: include }),
+      }, include ? "Built-in set enabled" : "Built-in set disabled")
+      refetchConfig()
+    } finally {
+      setTogglingBuiltin(false)
     }
   }
 
@@ -227,7 +263,8 @@ export default function AccessoriesPage() {
   }
 
   const applyToPlayer = async () => {
-    if (!selectedId || !adminList.length) return
+    if (!selectedId || !deploymentCount) return
+    if (!window.confirm(`Replace all accessories for ${selectedId} with ${deploymentCount} items?`)) return
     setApplying(true)
     try {
       await runMutation("/api/admin-accessories/apply", {
@@ -252,8 +289,8 @@ export default function AccessoriesPage() {
       <div className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
         {[
           ["1", "Add accessories", "Each save adds one item to the admin set."],
-          ["2", "Review the set", `The set currently contains ${adminList.length} item${adminList.length === 1 ? "" : "s"}.`],
-          ["3", "Apply to player", "Apply replaces the selected player's current set."],
+          ["2", "Review the set", `${adminList.length} custom + ${config?.include_builtin ? builtinCount : 0} built-in items.`],
+          ["3", "Apply to player", `${deploymentCount} items will replace the player's current set.`],
         ].map(([step, title, description]) => (
           <div key={step} className="flex gap-3 bg-card p-4">
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">{step}</span>
@@ -292,11 +329,11 @@ export default function AccessoriesPage() {
 
       {view === "build" ? (
         <div className="grid items-start gap-6 xl:grid-cols-[minmax(360px,480px)_minmax(0,1fr)]">
-          <form onSubmit={addEntry} className="xl:sticky xl:top-20">
+          <form ref={builderRef} onSubmit={addEntry} className="scroll-mt-20 xl:sticky xl:top-20">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-base"><Diamond className="h-4 w-4" /> 1. Add one accessory</CardTitle>
-                <CardDescription>Saving adds this accessory to the set shown on the right. It does not change a player yet.</CardDescription>
+                <CardTitle className="flex items-center gap-2 text-base"><Diamond className="h-4 w-4" /> {editingIndex === null ? "1. Add one accessory" : `Editing item ${editingIndex + 1}`}</CardTitle>
+                <CardDescription>{editingIndex === null ? "Saving adds this accessory to the set shown on the right. It does not change a player yet." : "Save updates this item in place without changing the rest of the set."}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Field label="Name" hint="required">
@@ -362,7 +399,7 @@ export default function AccessoriesPage() {
                 <div className="flex flex-col-reverse gap-2 border-t pt-4 sm:flex-row sm:justify-between">
                   <Button type="button" variant="ghost" onClick={resetForm}><RotateCcw className="mr-1.5 h-4 w-4" /> Reset</Button>
                   <Button type="submit" disabled={!canSave || saving}>
-                    {saving ? <Loader2 className="mr-1.5 h-4 w-4 animate-spin" /> : <Save className="mr-1.5 h-4 w-4" />} Add to set
+                    {saving ? <Loader2 className="mr-1.5 h-4 w-4 animate-spin" /> : <Save className="mr-1.5 h-4 w-4" />} {editingIndex === null ? "Add to set" : "Save changes"}
                   </Button>
                 </div>
               </CardContent>
@@ -373,13 +410,26 @@ export default function AccessoriesPage() {
             <CardHeader className="pb-4">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <CardTitle className="flex items-center gap-2 text-base"><Gem className="h-4 w-4" /> 2. Review and apply set ({adminList.length})</CardTitle>
-                  <CardDescription className="mt-1">Every item below belongs to the same admin set.</CardDescription>
+                  <CardTitle className="flex items-center gap-2 text-base"><Gem className="h-4 w-4" /> 2. Review and apply set ({deploymentCount})</CardTitle>
+                  <CardDescription className="mt-1">{adminList.length} custom and {config?.include_builtin ? builtinCount : 0} built-in accessories will be deployed.</CardDescription>
                 </div>
-                <Button onClick={applyToPlayer} disabled={!selectedId || !adminList.length || applying} className="shrink-0">
+                <Button onClick={applyToPlayer} disabled={!selectedId || !deploymentCount || applying} className="shrink-0">
                   {applying ? <Loader2 className="mr-1.5 h-4 w-4 animate-spin" /> : <Check className="mr-1.5 h-4 w-4" />} Apply entire set
                 </Button>
               </div>
+              <label className="mt-2 flex cursor-pointer items-start gap-3 rounded-md border bg-muted/25 p-3">
+                <input
+                  type="checkbox"
+                  checked={config?.include_builtin ?? false}
+                  disabled={!config || togglingBuiltin}
+                  onChange={(event) => updateBuiltin(event.target.checked)}
+                  className="mt-0.5 h-4 w-4 accent-primary"
+                />
+                <span>
+                  <span className="block text-sm font-medium">Include built-in best-in-slot collection</span>
+                  <span className="mt-0.5 block text-xs text-muted-foreground">Adds {builtinCount} curated accessories to the custom items below when applying.</span>
+                </span>
+              </label>
               <div className="relative mt-2">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input value={setQuery} onChange={(event) => setSetQuery(event.target.value)} placeholder="Search this set..." className="pl-8" />
@@ -391,7 +441,7 @@ export default function AccessoriesPage() {
                 <div className="space-y-2 p-4">{[0, 1, 2].map((item) => <div key={item} className="h-16 animate-pulse rounded bg-muted" />)}</div>
               ) : !adminList.length ? (
                 <div className="grid h-64 place-items-center px-6 text-center text-sm text-muted-foreground">
-                  <div><Gem className="mx-auto mb-3 h-6 w-6" />The admin set is empty. Add the first accessory on the left.</div>
+                  <div><Gem className="mx-auto mb-3 h-6 w-6" />No custom accessories yet.{config?.include_builtin ? ` The ${builtinCount}-item built-in collection is still ready to apply.` : " Add the first item on the left."}</div>
                 </div>
               ) : !filteredAdminList.length ? (
                 <div className="grid h-40 place-items-center px-6 text-center text-sm text-muted-foreground">No accessories match “{setQuery}”.</div>
@@ -410,16 +460,20 @@ export default function AccessoriesPage() {
                         </p>
                         <p className="mt-1 truncate text-xs"><b className="font-medium">{entry.mainStat}</b> <span className="text-muted-foreground">main · {(entry.subStats || []).map((stat) => `${stat.key} ${stat.value}`).join(" · ")}</span></p>
                       </div>
-                      <Button variant="ghost" size="icon" aria-label={`Remove ${entry.name || `accessory ${index + 1}`}`} disabled={deleting === index} className="h-8 w-8 shrink-0 text-muted-foreground hover:text-destructive" onClick={() => deleteEntry(index)}>
-                        {deleting === index ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Trash2 className="h-3.5 w-3.5" />}
-                      </Button>
+                      <div className="flex shrink-0">
+                        <Button variant="ghost" size="icon" aria-label={`Duplicate ${entry.name}`} title="Duplicate" className="h-8 w-8 text-muted-foreground" onClick={() => loadEntry(entry, null)}><Copy className="h-3.5 w-3.5" /></Button>
+                        <Button variant="ghost" size="icon" aria-label={`Edit ${entry.name}`} title="Edit" className="h-8 w-8 text-muted-foreground" onClick={() => loadEntry(entry, index)}><Pencil className="h-3.5 w-3.5" /></Button>
+                        <Button variant="ghost" size="icon" aria-label={`Remove ${entry.name || `accessory ${index + 1}`}`} title="Remove" disabled={deleting === index} className="h-8 w-8 text-muted-foreground hover:text-destructive" onClick={() => deleteEntry(index)}>
+                          {deleting === index ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Trash2 className="h-3.5 w-3.5" />}
+                        </Button>
+                      </div>
                     </li>
                   ))}
                 </ol>
               )}
               <div className="flex items-start gap-2 border-t bg-muted/30 px-4 py-3 text-xs leading-5 text-muted-foreground">
                 <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-                <p><b className="font-medium text-foreground">Apply entire set</b> replaces all accessories owned by the player selected above. It does not merge.</p>
+                <p><b className="font-medium text-foreground">Apply entire set</b> deploys {deploymentCount} items and replaces everything currently owned by the selected player. Confirmation is required.</p>
               </div>
             </CardContent>
           </Card>

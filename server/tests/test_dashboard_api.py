@@ -286,6 +286,7 @@ def test_admin_accessory_api():
     opts = client.get("/api/admin-accessories/options").json()
     assert opts["types"] and opts["synergies"] and opts["subStatKeys"]
     assert opts["mainStatsByType"]["Necklace"]
+    assert opts["builtinCount"] == 65
 
     # add a valid entry
     r = client.post("/api/admin-accessories", json={
@@ -305,6 +306,22 @@ def test_admin_accessory_api():
     cfg = client.get("/api/admin-accessories").json()
     assert any(e["name"] == "builder-test" for e in cfg["accessories"])
 
+    # update in place: editing must not change the set length
+    before_count = len(cfg["accessories"])
+    idx = next(i for i, e in enumerate(cfg["accessories"]) if e["name"] == "builder-test")
+    updated = {**body["entry"], "index": idx, "name": "builder-updated", "level": 19}
+    edit = client.post("/api/admin-accessories/update", json=updated)
+    assert edit.status_code == 200, edit.text
+    cfg = client.get("/api/admin-accessories").json()
+    assert len(cfg["accessories"]) == edit.json()["total"] == before_count
+    assert cfg["accessories"][idx]["name"] == "builder-updated"
+    assert cfg["accessories"][idx]["level"] == 19
+
+    # built-in inclusion is an explicit persisted deployment option
+    assert client.post("/api/admin-accessories/config", json={"include_builtin": False}).status_code == 200
+    assert client.get("/api/admin-accessories").json()["include_builtin"] is False
+    assert client.post("/api/admin-accessories/config", json={"include_builtin": True}).status_code == 200
+
     # invalid: bad main stat for the type
     bad = client.post("/api/admin-accessories", json={
         "name": "bad", "type": "Necklace", "rarity": 3, "level": 20,
@@ -320,7 +337,7 @@ def test_admin_accessory_api():
 
     # cleanup the persisted test entry
     cfg = client.get("/api/admin-accessories").json()
-    idx = next(i for i, e in enumerate(cfg["accessories"]) if e["name"] == "builder-test")
+    idx = next(i for i, e in enumerate(cfg["accessories"]) if e["name"] == "builder-updated")
     assert client.post("/api/admin-accessories/delete", json={"index": idx}).status_code == 200
     print(f"ok admin accessory API: options/add/dedup/persist/validate/apply(set)/delete "
           f"(player {after})")
