@@ -62,21 +62,7 @@ def r_card_upgrade(body, st):
     c = cards.get(key, {"unitId": unit_id, "level": 1, "exp": 0, "potentialTier": 0,
                         "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
                         "randomSkinApply": False, "soul": 0})
-    player_gold = st.get("gold", 0)
-    player_cash = st.get("cash", 0)
-    tier = c.get("potentialTier", 0)
-    if c["level"] >= 16 and tier == 0:
-        tier = 1
-    return {
-        "unitId": c["unitId"], "level": c["level"], "exp": c.get("exp", 0),
-        "potentialTier": tier,
-        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
-        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
-        "playerGold": player_gold, "playerCash": player_cash,
-        "soul": c.get("soul", 0),
-        "originLevel": c["level"], "originPotentialTier": tier,
-        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
-    }
+    return srv.card_to_dict(c, st)
 
 
 def r_card_fast_upgrade(body, st):
@@ -92,19 +78,7 @@ def r_card_fast_upgrade(body, st):
     c = cards.get(key, {"unitId": unit_id, "level": target_level, "exp": 0, "potentialTier": 0,
                         "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
                         "randomSkinApply": False, "soul": 0})
-    tier = c.get("potentialTier", 0)
-    if c["level"] >= 16 and tier == 0:
-        tier = 1
-    return {
-        "unitId": c["unitId"], "level": c["level"], "exp": c.get("exp", 0),
-        "potentialTier": tier,
-        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
-        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
-        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
-        "soul": c.get("soul", 0),
-        "originLevel": c["level"], "originPotentialTier": tier,
-        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
-    }
+    return srv.card_to_dict(c, st)
 
 
 def r_card_use_exp_item(body, st):
@@ -122,19 +96,7 @@ def r_card_use_exp_item(body, st):
             cards[key]["potentialTier"] = 1
         save_state(st)
     c = cards.get(key, {"unitId": unit_id, "level": 1})
-    tier = c.get("potentialTier", 0)
-    if c["level"] >= 16 and tier == 0:
-        tier = 1
-    return {
-        "unitId": c["unitId"], "level": c["level"], "exp": c.get("exp", 0),
-        "potentialTier": tier,
-        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
-        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
-        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
-        "soul": c.get("soul", 0),
-        "originLevel": c["level"], "originPotentialTier": tier,
-        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
-    }
+    return srv.card_to_dict(c, st)
 
 
 def r_card_use_soul_item(body, st):
@@ -153,19 +115,7 @@ def r_card_use_soul_item(body, st):
             cards[key]["potentialTier"] = 1
         save_state(st)
     c = cards.get(key, {"unitId": unit_id, "level": 1})
-    tier = c.get("potentialTier", 0)
-    if c["level"] >= 16 and tier == 0:
-        tier = 1
-    return {
-        "unitId": c["unitId"], "level": c["level"], "exp": c.get("exp", 0),
-        "potentialTier": tier,
-        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
-        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
-        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
-        "soul": c.get("soul", 0),
-        "originLevel": c["level"], "originPotentialTier": tier,
-        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
-    }
+    return srv.card_to_dict(c, st)
 
 
 def r_card_use_candy(body, st):
@@ -178,19 +128,7 @@ def r_card_use_candy(body, st):
             cards[key]["potentialTier"] = 1
         save_state(st)
     c = cards.get(key, {"unitId": unit_id, "level": 1})
-    tier = c.get("potentialTier", 0)
-    if c["level"] >= 16 and tier == 0:
-        tier = 1
-    return {
-        "unitId": c["unitId"], "level": c["level"], "exp": c.get("exp", 0),
-        "potentialTier": tier,
-        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
-        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
-        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
-        "soul": c.get("soul", 0),
-        "originLevel": c["level"], "originPotentialTier": tier,
-        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
-    }
+    return srv.card_to_dict(c, st)
 
 
 def r_card_upgrade_potential(body, st):
@@ -203,7 +141,7 @@ def r_card_upgrade_potential(body, st):
     # The fallback needs potentialTier: without it, upgrading a hero the save does
     # not have raised KeyError and the route answered 500 instead of a card.
     c = cards.get(key, {"unitId": unit_id, "level": 1, "potentialTier": 0})
-    return {**srv.card_to_dict(c),
+    return {**srv.card_to_dict(c, st),
             "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0)}
 
 
@@ -225,20 +163,8 @@ def r_card_buy_skin(body, st):
 
 def _card_view(c, st):
     """Standard card response shape (no level mutation)."""
-    tier = c.get("potentialTier", 0)
-    level = c.get("level", 1)
-    if level >= 16 and tier == 0:
-        tier = 1
-    return {
-        "unitId": c["unitId"], "level": level, "exp": c.get("exp", 0),
-        "potentialTier": tier,
-        "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
-        "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
-        "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
-        "soul": c.get("soul", 0),
-        "originLevel": level, "originPotentialTier": tier,
-        "isLevelSynced": False, "isTemporaryRecruited": False, "createdAt": now_iso(-30),
-    }
+    c.setdefault("level", 1)
+    return srv.card_to_dict(c, st)
 
 
 def r_card_equip_skin(body, st):
@@ -353,7 +279,7 @@ def r_card(body, st):
                 "originPotentialTier": 0, "isLevelSynced": False,
                 "isTemporaryRecruited": False, "createdAt": now_iso(-30),
                 "dimensionUnit": dimension.model(unit_id, xml_dir=XML_DIR)}
-    out = srv.card_to_dict(c)
+    out = srv.card_to_dict(c, st)
     out["playerGold"] = st.get("gold", 0)
     out["playerCash"] = st.get("cash", 0)
     return out

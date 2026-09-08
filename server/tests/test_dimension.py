@@ -58,6 +58,22 @@ def check_only_dimension_heroes_get_a_model():
     print(f"ok model: {len(flagged)} flagged units, only those carry a dimensionUnit")
 
 
+def check_original_and_dimension_hero_share_the_highest_level():
+    st = _fresh()
+    original = 10490
+    st["cards"][str(original)]["level"] = 12
+    st["cards"][str(DIM)]["level"] = 7
+    cards = {c["unitId"]: c for c in server.cards_list(st)}
+    assert cards[DIM]["level"] == 12 and cards[DIM]["originLevel"] == 7
+    assert cards[original]["level"] == 12 and cards[original]["originLevel"] == 12
+    assert cards[DIM]["isLevelSynced"] and cards[original]["isLevelSynced"]
+
+    st["cards"][str(DIM)]["level"] = 16
+    cards = {c["unitId"]: c for c in server.cards_list(st)}
+    assert cards[original]["level"] == 16 and cards[original]["originLevel"] == 12
+    print("ok level sync: original and dimension hero share the highest owned level")
+
+
 def check_upgrade_charges_exactly_the_listed_cost():
     st = _fresh(remnants=dimension.next_cost(0, server.XML_DIR) + 7)
     before = server.r_card({"unitId": DIM}, st)["dimensionUnit"]
@@ -141,6 +157,7 @@ def check_revive_costs_cash():
 
 if __name__ == "__main__":
     check_only_dimension_heroes_get_a_model()
+    check_original_and_dimension_hero_share_the_highest_level()
     check_upgrade_charges_exactly_the_listed_cost()
     check_upgrade_refused_without_remnants()
     check_sync_stops_at_the_cap()

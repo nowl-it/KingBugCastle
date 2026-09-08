@@ -62,6 +62,7 @@ def total_cost(xml_dir=DEFAULT_XML):
 
 
 _dimension_ids_cache = {}
+_sync_groups_cache = {}
 
 
 def dimension_unit_ids(xml_dir=DEFAULT_XML):
@@ -73,6 +74,20 @@ def dimension_unit_ids(xml_dir=DEFAULT_XML):
         _dimension_ids_cache[key] = {int(u.get("ID")) for u in root
                                      if u.get("ID") and (u.findtext("IsDimensionUnit") or "").strip().lower() == "true"}
     return _dimension_ids_cache[key]
+
+
+def level_sync_ids(unit_id, xml_dir=DEFAULT_XML):
+    """Owned cards in this original/dimension family share their highest level."""
+    key = str(xml_dir)
+    if key not in _sync_groups_cache:
+        root = ET.parse(Path(xml_dir) / "Units.xml").getroot()
+        groups = {}
+        for unit in root:
+            original = unit.findtext("OriginalUnit")
+            if unit.get("ID") and original:
+                groups.setdefault(int(original), {int(original)}).add(int(unit.get("ID")))
+        _sync_groups_cache[key] = {uid: group for group in groups.values() for uid in group}
+    return _sync_groups_cache[key].get(int(unit_id), {int(unit_id)})
 
 
 def model(unit_id, level=0, gauge=0, overcome=0, xml_dir=DEFAULT_XML):

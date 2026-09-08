@@ -317,18 +317,29 @@ def build_model(name, overlay=None):
                 out[f["name"]] = date_default(f["name"], now_iso) or out.get(f["name"])
     return out
 
-def card_to_dict(c):
+def card_to_dict(c, st=None):
     tier = c.get("potentialTier", 0)
     if c["level"] >= 16 and tier == 0:
         tier = 1
+    own_level = c["level"]
+    synced = False
+    level = own_level
+    if st is not None:
+        group = dimension.level_sync_ids(c["unitId"], XML_DIR)
+        peers = [card for uid in group
+                 if (card := st.get("cards", {}).get(str(uid))) is not None]
+        if len(peers) > 1:
+            synced = True
+            level = max(card.get("level", 1) for card in peers)
     return {
-        "unitId": c["unitId"], "level": c["level"], "exp": c.get("exp", 0),
+        "unitId": c["unitId"], "level": level, "exp": c.get("exp", 0),
         "potentialTier": tier,
         "skins": c.get("skins", []), "favoriteSkinIds": c.get("favoriteSkinIds", []),
         "currentSkin": c.get("currentSkin", 0), "randomSkinApply": c.get("randomSkinApply", False),
-        "playerGold": 0, "playerCash": 0, "soul": c.get("soul", 0),
-        "originLevel": c["level"], "originPotentialTier": tier,
-        "isLevelSynced": False, "isTemporaryRecruited": False,
+        "playerGold": st.get("gold", 0) if st else 0,
+        "playerCash": st.get("cash", 0) if st else 0, "soul": c.get("soul", 0),
+        "originLevel": own_level, "originPotentialTier": tier,
+        "isLevelSynced": synced, "isTemporaryRecruited": False,
         "createdAt": now_iso(-30),
         # Null for an ordinary hero, which is correct; a dimension hero needs it or
         # its sync panel opens with no level, no gauge and no next cost.
@@ -338,7 +349,7 @@ def card_to_dict(c):
     }
 
 def cards_list(st):
-    return [card_to_dict(c) for c in st.get("cards", {}).values()]
+    return [card_to_dict(c, st) for c in st.get("cards", {}).values()]
 
 # The client's account id for the request being handled: `?id=` on /auth/auth,
 # or `id` in the /auth/register body. Only r_login reads it.

@@ -388,6 +388,10 @@ custom instrumentation APK that dumped `shared_prefs` every few seconds and auto
 - `card_to_dict()` REQUIRES `unitId` in the card dict (server.py:340) - missing it crashes
   `/card/all` → all heroes show "Not Owned".
 - Gacha `<KeyItem>` ≠ Shop `<KeyItem>` (8001→70000, shop 70000→70005) - prefer the gacha's.
+- Dimension level resonance (fixed 2026-09-08): every owned card in an `<OriginalUnit>` family
+  is serialized with the family's highest owned level. `originLevel` keeps that card's unsynced
+  level and `isLevelSynced=true`; the client only considers sync applied when that flag is true
+  and `level > originLevel`. Regression: `check_original_and_dimension_hero_share_the_highest_level`.
 
 ## 7. Awakening / potentialTier (2026-08-01)
 
