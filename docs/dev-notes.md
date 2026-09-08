@@ -201,6 +201,25 @@ Fixed-period loops with no exception = client timer, not retry.
 - `FetchComplete` is a deliberate private-server loading-text override: "Ready to bug! Starting
   the fix now!" and 12 locale equivalents. The `2026_08_25` refresh reset it to the official
   text; `_apply_fetch_complete` in `server/local_mods` restores all 13 versions idempotently.
+- **2026-09-08 CDN snapshot:** pristine bundle md5 `d06f765ad4c726d545c96d57f152310c`
+  (4,689,193 bytes), extracted to ignored `xml_history/2026_09_08`. The previous official base is
+  `2026_08_25`; local `patchFolder=2026_09_05` came from the v172.1.00 client build and is not an
+  official CDN folder. Semantic pristine diff `08_25 -> 09_08`: 40 files (36 modified + 4 new).
+  Main content is Season 73 Harvest Moon Festival: pass 73, map/login skins, advisors 40070/40080,
+  skins 1059003 (Dandelyn) and 1074001 (Suha), event shop/packages, Rift season 73, Arena/Strife
+  season 73 data, and permanent dimension gacha 8500 (pool 10780/10790/10800). The new Pick and
+  Pass mode adds theme 1003, stages 103000-103005, 117 draft definitions, 78 unit options, four
+  item options, nine devil offers, and four new XML tables. Other fixes include Arena opponent
+  reroll limits/prices, Colosseum trigger 160131 `80050 -> 80030`, D.Ophelia chroma effect mappings,
+  rift-gauge ad charging, and corrected Vitacorde description parameters. Most new playable/store
+  rows require client `173000` or `173100`; do not assume v172.1.00 can consume them merely by
+  lowering XML gates because Pick and Pass introduces new client-side models. A trial replay of all
+  `local_mods` completed with 30 writes and zero warnings; the served bundle was not changed.
+- Official v173.0.00 notice `3d51c2e0-6f0e-81ac-a15e-f5a1fc736f88` confirms the Season 73
+  schedule, Pick and Pass, both new skins, package contents, Arena reroll schedule, gacha rates,
+  and Swift/North Rift effects. Its Rift paragraph says "Season 74 Seasonal Effects", but the
+  surrounding section and `DimensionRiftSeasonDatas.xml` ID 73 show this is a notice typo. Full
+  Vietnamese comparison and official artwork: `docs/master-data-2026-09-08.html`.
 
 ### Reference-derived Frieren idle sheet (2026-08-24)
 

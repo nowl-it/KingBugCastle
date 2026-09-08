@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Season 73 - Báo cáo master data 2026-09-08</title>
+  <style>
+    :root {
+      --ink: #f6f1df;
+      --muted: #aaa99f;
+      --night: #0c111b;
+      --panel: #141a25;
+      --panel-2: #1b2230;
+      --line: #303747;
+      --moon: #f2cd75;
+      --moon-soft: #fff0bd;
+      --ok: #72c9a6;
+      --warn: #efb462;
+      --danger: #e48484;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--night);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: var(--moon-soft); }
+    img { display: block; max-width: 100%; }
+    code, .mono {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: .92em;
+    }
+    code {
+      padding: .14em .38em;
+      background: #252b38;
+      border: 1px solid #353d4d;
+      border-radius: 4px;
+      color: #fff1bf;
+    }
+
+    .hero {
+      min-height: 92dvh;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      background: #0a0f19;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(8, 12, 20, .98) 0%, rgba(8, 12, 20, .9) 35%, rgba(8, 12, 20, .15) 76%), linear-gradient(0deg, #0a0f19 0%, transparent 48%);
+      pointer-events: none;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 66% center;
+      opacity: .78;
+    }
+    .hero-inner {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      padding: 72px 0 84px;
+    }
+    .kicker {
+      color: var(--moon);
+      font-size: .77rem;
+      font-weight: 800;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { margin-top: 0; line-height: 1.08; }
+    h1 {
+      max-width: 780px;
+      margin: 18px 0 24px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.4rem, 8vw, 7.2rem);
+      font-weight: 500;
+      letter-spacing: -.055em;
+    }
+    .hero-copy {
+      max-width: 630px;
+      margin: 0 0 32px;
+      color: #dad8ce;
+      font-size: clamp(1rem, 2vw, 1.22rem);
+    }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 11px;
+      border: 1px solid #4b5260;
+      border-radius: 999px;
+      background: rgba(13, 18, 28, .72);
+      color: #e9e6dc;
+      font-size: .78rem;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+    }
+
+    .layout {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 64px;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      padding: 42px 0;
+      max-height: 100dvh;
+      overflow: auto;
+    }
+    nav strong { display: block; margin-bottom: 13px; font-size: .8rem; color: var(--moon); }
+    nav a {
+      display: block;
+      padding: 7px 0;
+      border-bottom: 1px solid #222a37;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .82rem;
+    }
+    nav a:hover, nav a:focus { color: var(--ink); }
+    main { min-width: 0; padding: 78px 0 120px; }
+    section { padding: 0 0 96px; scroll-margin-top: 24px; }
+    section + section { border-top: 1px solid var(--line); padding-top: 96px; }
+    h2 {
+      max-width: 880px;
+      margin-bottom: 20px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 4.3rem);
+      font-weight: 500;
+      letter-spacing: -.04em;
+    }
+    h3 { margin-bottom: 14px; font-size: 1.15rem; }
+    .lede { max-width: 760px; color: #c5c4bc; font-size: 1.08rem; }
+    .section-number { color: var(--moon); font: 700 .75rem/1 "SFMono-Regular", Consolas, monospace; }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: 1.15fr repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-top: 38px;
+    }
+    .metric { padding: 22px 20px 22px 0; }
+    .metric + .metric { padding-left: 20px; border-left: 1px solid var(--line); }
+    .metric b { display: block; color: var(--moon-soft); font: 500 clamp(1.55rem, 3vw, 2.4rem)/1.1 Georgia, serif; }
+    .metric span { color: var(--muted); font-size: .76rem; }
+
+    .callout {
+      margin: 34px 0;
+      padding: 22px 24px;
+      border-left: 4px solid var(--moon);
+      background: #191e28;
+    }
+    .callout strong { color: var(--moon-soft); }
+    .callout.warning { border-color: var(--warn); }
+    .callout.danger { border-color: var(--danger); }
+
+    .comparison { display: grid; gap: 1px; margin-top: 34px; background: var(--line); border: 1px solid var(--line); }
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 190px 140px 1fr;
+      background: var(--panel);
+    }
+    .comparison-row > div { padding: 15px 16px; }
+    .comparison-row > div + div { border-left: 1px solid var(--line); }
+    .comparison-row.header { background: #242b38; color: #d7d5cd; font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .status { font-size: .73rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+    .confirmed { color: var(--ok); }
+    .xml-only { color: #9db9f0; }
+    .notice-only { color: var(--warn); }
+    .conflict { color: var(--danger); }
+
+    .art-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      margin-top: 42px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    figure { margin: 0; background: var(--panel); }
+    .portrait {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      object-fit: contain;
+      background: #f4f1e8;
+    }
+    .motion-preview { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
+    figcaption { padding: 18px 20px 22px; color: #bcbab1; font-size: .85rem; }
+    figcaption b { display: block; margin-bottom: 4px; color: var(--ink); font-size: 1rem; }
+    .wide-art { margin: 36px 0 0; border: 1px solid var(--line); overflow: hidden; }
+    .wide-art img { width: 100%; max-height: 620px; object-fit: cover; }
+
+    .spec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 36px; background: var(--line); border: 1px solid var(--line); }
+    .spec { min-height: 150px; padding: 22px; background: var(--panel); }
+    .spec:nth-child(2n) { background: var(--panel-2); }
+    .spec b { display: block; margin-bottom: 10px; color: var(--moon-soft); font-size: 1.05rem; }
+    .spec p { margin: 0; color: #c1c0b8; font-size: .88rem; }
+
+    .table-wrap { margin-top: 30px; overflow-x: auto; border: 1px solid var(--line); }
+    table { width: 100%; border-collapse: collapse; min-width: 680px; background: var(--panel); }
+    th, td { padding: 13px 15px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { position: sticky; top: 0; background: #222936; color: #dedcd2; font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; }
+    td { color: #c7c5bd; font-size: .86rem; }
+    tr:last-child td { border-bottom: 0; }
+    td:first-child { color: var(--ink); font-weight: 700; }
+
+    details { margin-top: 24px; border: 1px solid var(--line); background: var(--panel); }
+    summary { padding: 16px 18px; cursor: pointer; color: var(--moon-soft); font-weight: 800; }
+    details > .details-body { padding: 0 18px 18px; }
+    .compact-list { columns: 2; column-gap: 42px; padding-left: 18px; }
+    .compact-list li { break-inside: avoid; margin-bottom: 8px; color: #c7c5bd; }
+
+    .bug-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 36px; margin-top: 28px; counter-reset: bugs; }
+    .bug-list div { position: relative; padding: 15px 0 15px 44px; border-top: 1px solid var(--line); color: #c5c3bb; }
+    .bug-list div::before { counter-increment: bugs; content: counter(bugs, decimal-leading-zero); position: absolute; left: 0; color: var(--moon); font: 700 .75rem/1.8 monospace; }
+
+    .source-list { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 28px; }
+    .source-list div { padding: 16px 18px; background: var(--panel); }
+    .source-list b { display: block; color: var(--ink); }
+    .source-list span { color: var(--muted); font-size: .82rem; overflow-wrap: anywhere; }
+    footer { padding: 30px 0; border-top: 1px solid var(--line); color: #797d87; font-size: .78rem; }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; gap: 0; }
+      nav { position: static; max-height: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 16px; padding-bottom: 0; }
+      nav strong { grid-column: 1 / -1; }
+      main { padding-top: 56px; }
+      .metrics, .spec-grid { grid-template-columns: 1fr 1fr; }
+      .metric:nth-child(3) { border-left: 0; padding-left: 0; }
+      .comparison-row { grid-template-columns: 150px 120px 1fr; }
+    }
+    @media (max-width: 640px) {
+      .hero { min-height: 760px; align-items: end; }
+      .hero::after { background: linear-gradient(0deg, #0a0f19 8%, rgba(8,12,20,.87) 54%, rgba(8,12,20,.2) 100%); }
+      .hero-bg { object-position: 60% 0; height: 54%; }
+      .hero-inner, .layout { width: min(100% - 28px, var(--max)); }
+      .hero-inner { padding-bottom: 48px; }
+      h1 { font-size: clamp(3rem, 15vw, 4.7rem); }
+      nav { grid-template-columns: 1fr 1fr; }
+      section, section + section { padding-top: 68px; padding-bottom: 68px; }
+      .metrics, .spec-grid, .art-pair, .bug-list { grid-template-columns: 1fr; }
+      .metric + .metric, .metric:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+      .comparison-row { grid-template-columns: 1fr; }
+      .comparison-row > div + div { border-left: 0; border-top: 1px solid var(--line); }
+      .comparison-row.header { display: none; }
+      .compact-list { columns: 1; }
+    }
+    @media print {
+      :root { --ink: #171717; --muted: #555; --night: #fff; --panel: #fff; --panel-2: #f6f6f3; --line: #bbb; --moon: #7a5814; --moon-soft: #5f430d; }
+      .hero { min-height: 520px; color: white; }
+      .layout { display: block; width: 100%; padding: 0 18mm; }
+      nav { display: none; }
+      section { break-inside: avoid-page; }
+      .table-wrap { overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <img class="hero-bg" src="master-data-2026-09-08-assets/harvest-moon-festival-title-2026.png" alt="Artwork đăng nhập chính thức Lễ hội Trăng Mùa Gặt 2026">
+    <div class="hero-inner">
+      <div class="kicker">King God Castle / Master Data Intelligence</div>
+      <h1>Season 73 dưới ánh trăng</h1>
+      <p class="hero-copy">Đối chiếu snapshot XML ngày 08/09 với patch note chính thức cho bản 173.0.00, từ nội dung công khai đến các chi tiết triển khai không xuất hiện trong thông báo.</p>
+      <div class="hero-meta">
+        <span class="pill">Baseline 2026-08-25</span>
+        <span class="pill">Snapshot 2026-09-08</span>
+        <span class="pill">40 file thay đổi</span>
+        <span class="pill">Client 173.0.00</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav aria-label="Mục lục báo cáo">
+      <strong>MỤC LỤC</strong>
+      <a href="#ket-luan">01. Kết luận</a>
+      <a href="#doi-chieu">02. Đối chiếu nguồn</a>
+      <a href="#season">03. Season & cosmetic</a>
+      <a href="#pick-pass">04. Pick and Pass</a>
+      <a href="#economy">05. Shop & gacha</a>
+      <a href="#competitive">06. Arena, Strife, Rift</a>
+      <a href="#client">07. Thay đổi client</a>
+      <a href="#compat">08. Tương thích</a>
+      <a href="#sources">09. Nguồn</a>
+    </nav>
+
+    <main>
+      <section id="ket-luan">
+        <span class="section-number">01 / KẾT LUẬN</span>
+        <h2>Hai nguồn khớp gần như hoàn toàn</h2>
+        <p class="lede">Patch note xác nhận ý nghĩa sản phẩm và lịch vận hành. XML xác nhận ID, giá, pool, version gate và logic ẩn. Sai lệch đáng chú ý duy nhất là thông báo ghi “Season 74 Seasonal Effects” trong phần Rift, trong khi ngữ cảnh và <code>DimensionRiftSeasonData ID=73</code> đều chỉ Season 73.</p>
+
+        <div class="metrics">
+          <div class="metric"><b>10/09 - 07/10</b><span>Thời gian Season 73 theo thông báo</span></div>
+          <div class="metric"><b>36 + 4</b><span>File sửa + bảng XML mới</span></div>
+          <div class="metric"><b>173.0.00</b><span>Android và iOS</span></div>
+          <div class="metric"><b>4.689.193 B</b><span>Kích thước bundle pristine</span></div>
+        </div>
+
+        <div class="callout danger">
+          <strong>Kết luận cho private client:</strong> không nên hạ hàng loạt <code>MinVersion</code> xuống 172.1.00. Pick and Pass thêm bốn model/table hoàn toàn mới; client cũ có khả năng không có parser, UI và runtime tương ứng. Cosmetic mới cũng cần binary asset của v173.
+        </div>
+      </section>
+
+      <section id="doi-chieu">
+        <span class="section-number">02 / PATCH NOTE VS XML</span>
+        <h2>Điều người chơi thấy và điều dữ liệu thực thi</h2>
+        <p class="lede">Bảng dưới phân biệt nội dung được hai nguồn cùng xác nhận, chi tiết chỉ đọc được từ XML và hành vi runtime chỉ có trong patch note.</p>
+
+        <div class="comparison" role="table" aria-label="Đối chiếu patch note và XML">
+          <div class="comparison-row header" role="row"><div>Nội dung</div><div>Trạng thái</div><div>Kết quả đối chiếu</div></div>
+          <div class="comparison-row" role="row"><div>Season Pass 73</div><div class="status confirmed">Khớp</div><div>30 cấp, Suha là unit/skin pass; toàn bộ reward map đúng sau khi giải ID item.</div></div>
+          <div class="comparison-row" role="row"><div>Skin 1074001</div><div class="status confirmed">Khớp</div><div>“Tinh Quân Ánh Trăng Du Hà” có animation, VFX và âm thanh riêng. XML chỉ rõ prefab, projectile và effect target.</div></div>
+          <div class="comparison-row" role="row"><div>Skin 1059003</div><div class="status confirmed">Khớp</div><div>“Thỏ Mặt Trăng Dandelyn” thuộc package 32075 cùng advisor, login/map skin và 300 gem.</div></div>
+          <div class="comparison-row" role="row"><div>Advisor 40070/40080</div><div class="status confirmed">Khớp</div><div>40070 là advisor package có BGM riêng; 40080 là advisor event shop giá 600 token.</div></div>
+          <div class="comparison-row" role="row"><div>Pick and Pass</div><div class="status xml-only">XML mở rộng</div><div>Thông báo chỉ mô tả 7 vòng. XML lộ 117 draft, 78 unit option, 4 item option, 9 devil offer và 6 stage preset.</div></div>
+          <div class="comparison-row" role="row"><div>Arena reroll</div><div class="status confirmed">Khớp</div><div>3 miễn phí + 10 trả phí; giá 5, 10, 15, 20, 25 rồi giữ 25; tối đa 13/ngày.</div></div>
+          <div class="comparison-row" role="row"><div>Gacha 5055</div><div class="status confirmed">Khớp</div><div>Pool pickup 1,5% gồm 30014 và 30024, tương ứng 0,75% mỗi Legacy trong patch note.</div></div>
+          <div class="comparison-row" role="row"><div>Gacha 8500</div><div class="status xml-only">XML mở rộng</div><div>Rate công khai khớp. XML bổ sung pity 80, tăng rate từ pull 60 và key item 70000.</div></div>
+          <div class="comparison-row" role="row"><div>Temple of Challenge</div><div class="status notice-only">Chỉ patch note</div><div>Menu bị gỡ và Dimensional Shop chuyển sang Event Shop. Đây là thay đổi client/UI, không thể suy ra đầy đủ từ delta XML.</div></div>
+          <div class="comparison-row" role="row"><div>Rift season</div><div class="status conflict">Mâu thuẫn</div><div>Thông báo ghi “Season 74”, nhưng đặt trong mục Season 73; XML ID 73 dùng đúng Swift/North và +20.000/-30.000 điểm. Nhiều khả năng patch note bị typo.</div></div>
+        </div>
+      </section>
+
+      <section id="season">
+        <span class="section-number">03 / SEASON & COSMETIC</span>
+        <h2>Suha dẫn Season Pass, Dandelyn dẫn festival package</h2>
+        <p class="lede">Season 73 chạy từ 11:00 ngày 10/09 đến 23:59 ngày 07/10/2026. Token festival nhận đến hết 30/09 KST; Event Shop mở đến khi Preseason bắt đầu ngày 08/10.</p>
+
+        <div class="art-pair">
+          <figure>
+            <img class="portrait" src="master-data-2026-09-08-assets/moonlit-king-suha-1074001.png" alt="Artwork chính thức skin Tinh Quân Ánh Trăng Du Hà, ID 1074001">
+            <figcaption><b>Tinh Quân Ánh Trăng Du Hà</b>Skin <code>1074001</code>, unit <code>10740</code>, Grade 4, tag SeasonPass và Skin_Limited.</figcaption>
+          </figure>
+          <figure>
+            <img class="portrait" src="master-data-2026-09-08-assets/moon-rabbit-dandelyn-1059003.png" alt="Artwork chính thức skin Thỏ Mặt Trăng Dandelyn, ID 1059003">
+            <figcaption><b>Thỏ Mặt Trăng Dandelyn</b>Skin <code>1059003</code>, unit <code>10590</code>, Grade 2, gắn package <code>32075</code>.</figcaption>
+          </figure>
+        </div>
+
+        <div class="art-pair">
+          <figure>
+            <img class="motion-preview" src="master-data-2026-09-08-assets/moonlit-king-suha-preview.webp" alt="Animation preview chính thức skin Du Hà">
+            <figcaption><b>Preview animation Du Hà</b>Bản WebP nén từ GIF chính thức trong patch note.</figcaption>
+          </figure>
+          <figure>
+            <img class="motion-preview" src="master-data-2026-09-08-assets/moon-rabbit-dandelyn-preview.webp" alt="Animation preview chính thức skin Dandelyn">
+            <figcaption><b>Preview animation Dandelyn</b>Bản WebP nén từ GIF chính thức trong patch note.</figcaption>
+          </figure>
+        </div>
+
+        <div class="spec-grid">
+          <div class="spec"><b>Login Skin 30060</b><p>Scene <code>30005</code>, artwork <code>Title_MoonLight_Event</code>, Grade 2, v173. Thông báo cảnh báo: đổi sang login screen khác thì không thể chọn lại màn festival tự động.</p></div>
+          <div class="spec"><b>Map Skin 30220</b><p>Prefab <code>SeasonalEventMode_Season73</code>, package-only, không bán cash/token và không vào gacha.</p></div>
+          <div class="spec"><b>Advisor 40070</b><p>“Những chú thỏ từ Mặt Trăng”, Grade 3, giữ được BGM festival sau sự kiện qua <code>ExclusiveBGM=Advisor_40070</code>.</p></div>
+          <div class="spec"><b>Advisor 40080</b><p>“Thỏ Mặt Trăng mang thư”, Grade 2, bán riêng trong Event Shop với giá 600 token.</p></div>
+          <div class="spec"><b>Package 32075</b><p>Dandelyn + skin 1059003 + advisor 40070 + login 30060 + map 30220 + 300 gem; giá <code>25000 / 19.99</code>, limit 1.</p></div>
+          <div class="spec"><b>Version gate</b><p>Toàn bộ nhóm cosmetic mới dùng <code>MinVersion=173000</code>. Asset không nằm trong APK 172.1.00 hiện có.</p></div>
+        </div>
+
+        <details>
+          <summary>Reward King God Pass cấp 1-30</summary>
+          <div class="details-body table-wrap">
+            <table>
+              <thead><tr><th>Lv</th><th>Miễn phí</th><th>Pass</th><th>Premium</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Gold x200</td><td>Blacksmith's Token x1</td><td>Blacksmith's Token x1</td></tr>
+                <tr><td>2</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>King Accessory Stone x1</td></tr>
+                <tr><td>3</td><td>Select Hero EXP 150</td><td>Select Hero EXP 150</td><td>Select Hero EXP 300</td></tr>
+                <tr><td>4</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>King Legacy Ore x1</td></tr>
+                <tr><td>5</td><td>King Accessory Stone x1</td><td>Blessing Stone x5</td><td>Transcendence Ingot x1</td></tr>
+                <tr><td>6</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>King Accessory Stone x1</td></tr>
+                <tr><td>7</td><td>Gold x200</td><td>King's Scroll x1</td><td>Blacksmith's Token x1</td></tr>
+                <tr><td>8</td><td>King's Scroll x1</td><td>Supplies Certificate x1</td><td>King Legacy Ore x1</td></tr>
+                <tr><td>9</td><td>Gold x200</td><td>King's Token x10</td><td>King's Token x20</td></tr>
+                <tr><td>10</td><td>Legacy Stone x3</td><td>Legacy Stone x10</td><td>Legacy Stone x10</td></tr>
+                <tr><td>11</td><td>King Legacy Ore x1</td><td>God Legacy Ore x1</td><td>Blacksmith's Token x1</td></tr>
+                <tr><td>12</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>King Accessory Stone x1</td></tr>
+                <tr><td>13</td><td>Gold x300</td><td>Select Hero EXP 150</td><td>Select Hero EXP 300</td></tr>
+                <tr><td>14</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>King Legacy Ore x1</td></tr>
+                <tr><td>15</td><td>King Accessory Stone x1</td><td>Blessing Stone x5</td><td>Transcendence Ingot x1</td></tr>
+                <tr><td>16</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>King Accessory Stone x1</td></tr>
+                <tr><td>17</td><td>Gold x300</td><td>Blacksmith's Token x1</td><td>Blacksmith's Token x1</td></tr>
+                <tr><td>18</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>King Legacy Ore x1</td></tr>
+                <tr><td>19</td><td>Gold x300</td><td>King's Token x10</td><td>King's Token x20</td></tr>
+                <tr><td>20</td><td>Legacy Stone x3</td><td>Legacy Stone x10</td><td>Legacy Stone x10</td></tr>
+                <tr><td>21</td><td>King Legacy Ore x1</td><td>God Legacy Ore x1</td><td>Blacksmith's Token x1</td></tr>
+                <tr><td>22</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>God Accessory Stone x1</td></tr>
+                <tr><td>23</td><td>Legacy Pieces x10</td><td>Legacy Pieces x30</td><td>Legacy Pieces x30</td></tr>
+                <tr><td>24</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>God Legacy Ore x1</td></tr>
+                <tr><td>25</td><td>God Accessory Stone x1</td><td>Blessing Stone x5</td><td>Transcendence Ingot x1</td></tr>
+                <tr><td>26</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>God Accessory Stone x1</td></tr>
+                <tr><td>27</td><td>King Legacy Ore x1</td><td>God Legacy Ore x1</td><td>Blacksmith's Token x1</td></tr>
+                <tr><td>28</td><td>Common Scroll x1</td><td>Supplies Certificate x1</td><td>God Legacy Ore x1</td></tr>
+                <tr><td>29</td><td>Gold x400</td><td>King's Token x10</td><td>Cube of Power (King God) x1</td></tr>
+                <tr><td>30</td><td>Legacy Stone x3</td><td>Legacy Stone x10</td><td>Legacy Stone x10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+
+      <section id="pick-pass">
+        <span class="section-number">04 / PICK AND PASS</span>
+        <h2>Mode công khai đơn giản, cấu trúc dữ liệu khá sâu</h2>
+        <p class="lede">Tên Việt chính thức trong XML là “Chọn và Chuyền”; tên nội bộ của bốn bảng là PickAndPass. Người chơi chọn một trong hai phương án qua 7 vòng, phương án còn lại chuyển cho đối thủ.</p>
+
+        <figure class="wide-art">
+          <img src="master-data-2026-09-08-assets/pick-and-pass-description.png" alt="Ảnh hướng dẫn chính thức mode Pick and Pass">
+          <figcaption><b>Hướng dẫn mode chính thức</b>Patch note xác nhận mode vào từ Gate &gt; Battle &gt; Challenge và dùng Event Flag hằng ngày.</figcaption>
+        </figure>
+
+        <div class="metrics">
+          <div class="metric"><b>117</b><span>Draft definition</span></div>
+          <div class="metric"><b>78</b><span>Unit option, đều level 8</span></div>
+          <div class="metric"><b>4</b><span>Item option</span></div>
+          <div class="metric"><b>9</b><span>Devil offer</span></div>
+        </div>
+
+        <div class="spec-grid">
+          <div class="spec"><b>Theme 1003</b><p>Draft/Event/Seasonal mode; 1 life, không revive, random stage, không save game, không artifact/building/card-level buff.</p></div>
+          <div class="spec"><b>Token economy</b><p><code>BaseToken=45</code>, <code>ClearTokens=30</code>. Patch note bổ sung token còn đến từ Invasion, Rift và Dominion Investigation.</p></div>
+          <div class="spec"><b>6 stage preset</b><p>ID <code>103000-103005</code>, dùng placeholder unit 99990 và nhiều cấu hình level đối xứng/lệch.</p></div>
+          <div class="spec"><b>Season choices</b><p>Option 77 là Dandelyn + skin 1059003; option 78 là Suha + skin 1074001.</p></div>
+          <div class="spec"><b>4 item</b><p>Item 102 AddAtkPer; 202 SuperShield; 302 AddAttackSpeedPer; 402 AddMAtkPer.</p></div>
+          <div class="spec"><b>Devil offer 180</b><p>Không có battle trigger; thắng +50 token, thua -25. Các offer thường chủ yếu thưởng +25 khi thắng.</p></div>
+        </div>
+
+        <div class="callout warning">
+          <strong>Dữ liệu mâu thuẫn:</strong> comment offer 160 mô tả stun 3 giây, nhưng trigger <code>60160</code> đặt <code>FixedValue=1</code>. Runtime theo data nhiều khả năng chỉ stun 1 giây.
+        </div>
+      </section>
+
+      <section id="economy">
+        <span class="section-number">05 / SHOP & GACHA</span>
+        <h2>Event Shop bù cho nội dung bị gỡ khỏi permanent loop</h2>
+        <p class="lede">Patch note giải thích Temple of Challenge chuyển sang mô hình seasonal. XML cho thấy Dimensional Remnant và scroll được đưa thẳng vào shop Season 73.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Shop ID</th><th>Reward</th><th>Giá token</th><th>Limit</th></tr></thead>
+            <tbody>
+              <tr><td>32063</td><td>Dimensional Hero Summon Scroll x1</td><td>500</td><td>5</td></tr>
+              <tr><td>32064</td><td>Mysterious Magic Fabric x1</td><td>250</td><td>5</td></tr>
+              <tr><td>32065</td><td>Transcendence Ingot x1</td><td>500</td><td>1</td></tr>
+              <tr><td>32066</td><td>Dimensional Remnant x5.000</td><td>1.000</td><td>20</td></tr>
+              <tr><td>32067</td><td>King Legacy Ore x1</td><td>100</td><td>5</td></tr>
+              <tr><td>32068</td><td>King Accessory Enhancement Stone x1</td><td>50</td><td>10</td></tr>
+              <tr><td>32069</td><td>Legacy Summoning Stone x1</td><td>100</td><td>10</td></tr>
+              <tr><td>32070</td><td>Gem x20</td><td>100</td><td>5</td></tr>
+              <tr><td>32071</td><td>Gem x10</td><td>30</td><td>5</td></tr>
+              <tr><td>32072</td><td>Gold x5.000</td><td>100</td><td>5</td></tr>
+              <tr><td>32073</td><td>Gold x100</td><td>10</td><td>Không giới hạn</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="art-pair">
+          <figure>
+            <img class="portrait" src="master-data-2026-09-08-assets/meirna-30014.png" alt="Artwork chính thức Legacy Meirna, ID 30014">
+            <figcaption><b>Meirna - Branch of Eternity</b>Treasure <code>30014</code>, rate pickup 0,75% trong gacha 5055.</figcaption>
+          </figure>
+          <figure>
+            <img class="portrait" src="master-data-2026-09-08-assets/tome-of-tides-30024.png" alt="Artwork chính thức Tome of Tides, ID 30024">
+            <figcaption><b>Tome of Tides - Tome of the Black Turtle</b>Treasure <code>30024</code>, rate pickup 0,75% trong gacha 5055.</figcaption>
+          </figure>
+        </div>
+
+        <div class="spec-grid">
+          <div class="spec"><b>Gacha 5055</b><p>10-23/09 KST; Special 2,5%, pickup 1,5%; pity Rare 10, Special 100 và bắt buộc chọn 30014 hoặc 30024 ở guarantee.</p></div>
+          <div class="spec"><b>Gacha 5056</b><p>24/09-07/10; pickup Vitacorde 30043 ở 1%; gate <code>173100</code>. XML không có <code>EnableCeilSelect</code> như 5055.</p></div>
+          <div class="spec"><b>Gacha 8500</b><p>Permanent; Neria 10780, Ophelia 10790, Cathy 10800 trong pool 0,5%; pity shared 80, tăng rate từ pull 60.</p></div>
+        </div>
+
+        <details>
+          <summary>38 ShopItem mới và catalog cosmetic</summary>
+          <div class="details-body">
+            <ul class="compact-list">
+              <li>1690-1693: package Legacy đợt 1, gate 173000.</li>
+              <li>1694-1696: package Vitacorde đợt 2, gate 173100.</li>
+              <li>32063-32073: 11 vật phẩm Event Shop thường.</li>
+              <li>32074-32075: shortcut + full package Dandelyn.</li>
+              <li>32080-32084: 5 skin rerun, mỗi skin 298 gem.</li>
+              <li>32090, 32093-32101: 10 skin cũ, mỗi skin 600 token.</li>
+              <li>32091-32092: Red Fort Ren/Rie, mỗi skin 169 gem.</li>
+              <li>32102: advisor 40080, giá 600 token.</li>
+              <li>32022-32032: 11 item cũ thêm <code>ExcludeSeasons=73</code>.</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <section id="competitive">
+        <span class="section-number">06 / COMPETITIVE & RIFT</span>
+        <h2>Season rules được xác nhận từ cả hai phía</h2>
+        <div class="spec-grid">
+          <div class="spec"><b>Arena half 1</b><p>East heroes nhận Final Attack Speed +40%. XML target East/Brave và trigger 10030/11080.</p></div>
+          <div class="spec"><b>Arena half 2</b><p>Mọi hero: Normal damage +40%, Skill damage -40%; +20% max HP mỗi Tenacity ally, tối đa +60%.</p></div>
+          <div class="spec"><b>Mid-season</b><p>23/09 23:59 đến 24/09 11:00. Arena/Strife đóng; điểm từ 2.000 trở lên reset về 2.000 và Arena deck reset.</p></div>
+          <div class="spec"><b>Strife</b><p>11 theme: Goblins, Orcs, Wraiths, Vampires, Frost Tribe, Void, Dragon Slayer, Void Elf, Eastern Army, Dragon Knight, Eledor.</p></div>
+          <div class="spec"><b>Dimension Rift</b><p>Swift +20.000 điểm mỗi hero sở hữu; North -30.000. XML season ID 73; notice ghi nhầm “Season 74”.</p></div>
+          <div class="spec"><b>Rift gauge</b><p>Ad reward +50 energy, 1 lần/ngày. Mua 100 gauge theo dãy 10,20,30 rồi giữ 30 đến lần thứ 10.</p></div>
+        </div>
+
+        <div class="callout">
+          <strong>Strife data change:</strong> <code>CurrentSeasonTheme</code> thay theme 2 bằng theme 9. Trigger Colosseum <code>160131</code> đổi enemy event <code>80050 → 80030</code>; skill 80030 gây knockback 2 trong 0,5 giây, damage 0.
+        </div>
+      </section>
+
+      <section id="client">
+        <span class="section-number">07 / PATCH-NOTE-ONLY</span>
+        <h2>14 bug fix không thể đọc hết từ master data</h2>
+        <p class="lede">Các mục sau được bổ sung từ thông báo chính thức. Delta XML chỉ phản ánh trực tiếp một phần nhỏ như mapping VFX Ophelia và localization.</p>
+        <div class="bug-list">
+          <div>Saeryung Battlefield Challenger hiển thị sai.</div>
+          <div>Nút Receive Reward bấm liên tục hiện failure message.</div>
+          <div>Một số line break tiếng Trung phồn thể/giản thể sai.</div>
+          <div>VFX Ophelia chroma thứ hai bị cố định kích thước.</div>
+          <div>Combat Boots of Advancement Normal không áp dụng move speed/damage.</div>
+          <div>Apple Account lặp authentication popup khi login.</div>
+          <div>Màu back effect ba skin Luniare Battlefield đôi lúc sai.</div>
+          <div>Hero có thể bị thêm hai lần sau Skin Preview.</div>
+          <div>Grand Arena effect mất sau khi Cathy hồi sinh.</div>
+          <div>Grand Arena effect phụ thuộc sai vào thứ tự xếp hero.</div>
+          <div>Overtime gauge của Strife không giảm.</div>
+          <div>Margin màn hình đổi khi mở lại Arena Formation.</div>
+          <div>Icon đè Profile ở màn chọn Strife.</div>
+          <div>Corrupted Goddess giữ Invincible trong Dimension Rift.</div>
+        </div>
+        <div class="callout"><strong>Thay đổi hiệu năng:</strong> tối ưu logic xử lý 1.000 Relic Summons.</div>
+
+        <h3>Ad reward mới</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tính năng</th><th>Reward</th><th>Giới hạn/ngày</th></tr></thead>
+            <tbody>
+              <tr><td>Rift Energy</td><td>+50 energy</td><td>1</td></tr>
+              <tr><td>Dominion Vitality</td><td>Tương đương 1 giờ sản xuất</td><td>3</td></tr>
+              <tr><td>Arena opponent</td><td>Reroll miễn phí</td><td>3</td></tr>
+              <tr><td>Event Flag</td><td>+1 sau khi dùng hết flag</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>King God Pass bỏ yêu cầu xem quảng cáo. Rift đầy thì không nạp thêm; Dominion vẫn nạp khi kho đầy và tính theo production rate đã tăng nếu Dominion Pass đang hoạt động.</p>
+      </section>
+
+      <section id="compat">
+        <span class="section-number">08 / COMPATIBILITY</span>
+        <h2>Phân loại rủi ro cho client 172.1.00</h2>
+        <div class="comparison">
+          <div class="comparison-row header"><div>Nhóm</div><div>Rủi ro</div><div>Nhận định</div></div>
+          <div class="comparison-row"><div>Giá trị scalar</div><div class="status confirmed">Thấp</div><div>Arena reroll, Colosseum trigger, skin grade/sound flag có thể tồn tại trong schema cũ, nhưng vẫn cần test runtime.</div></div>
+          <div class="comparison-row"><div>Season rows</div><div class="status notice-only">Trung bình</div><div>Pass, shop, gacha có thể parse nếu model không đổi; asset v173 và UI route vẫn là dependency.</div></div>
+          <div class="comparison-row"><div>Cosmetic v173</div><div class="status conflict">Cao</div><div>APK 172.1.00 không có prefab/sprite/illustration mới. Hạ gate tạo row không đồng nghĩa asset load được.</div></div>
+          <div class="comparison-row"><div>Pick and Pass</div><div class="status conflict">Rất cao</div><div>Bốn bảng mới cùng mode/UI mới cho thấy code client mới là bắt buộc. Không hạ gate nếu chưa có v173.</div></div>
+        </div>
+        <div class="callout warning"><strong>Trạng thái local:</strong> đã thử replay 30 thao tác <code>local_mods</code> trên snapshot mới, không warning. Chưa thay <code>server/xml_live</code>, <code>server/real_cdn/xml</code> hay <code>response_config.json</code>.</div>
+      </section>
+
+      <section id="sources">
+        <span class="section-number">09 / PROVENANCE</span>
+        <h2>Nguồn và phạm vi kiểm chứng</h2>
+        <div class="source-list">
+          <div><b>Patch note chính thức</b><span><a href="https://kgcastle-notice.awesomepiece.com/3d51c2e0-6f0e-81ac-a15e-f5a1fc736f88">kgcastle-notice.awesomepiece.com/3d51c2e0-6f0e-81ac-a15e-f5a1fc736f88</a></span></div>
+          <div><b>Snapshot pristine mới</b><span><code>xml_history/2026_09_08/</code> - 147 file; bundle MD5 <code>d06f765ad4c726d545c96d57f152310c</code>.</span></div>
+          <div><b>Baseline pristine</b><span><code>2026_08_25</code> - dùng để tính semantic delta 40 file.</span></div>
+          <div><b>Artwork</b><span>Tất cả hình trong báo cáo được tải trực tiếp từ patch note chính thức. Hai preview động được chuyển sang WebP để giảm dung lượng, không thay đổi nội dung.</span></div>
+          <div><b>Giới hạn</b><span>Patch note mô tả hành vi client nhưng không công bố ID nội bộ. XML công bố cấu hình nhưng không chứng minh client 172.1.00 có code hỗ trợ model mới.</span></div>
+        </div>
+
+        <details>
+          <summary>Danh sách 40 file thay đổi</summary>
+          <div class="details-body">
+            <p><strong>4 file mới:</strong> <code>PickAndPasses.xml</code>, <code>PickAndPassUnitOptions.xml</code>, <code>PickAndPassItemOptions.xml</code>, <code>PickAndPassDevilOffers.xml</code>.</p>
+            <p><strong>23 file data sửa:</strong> Advisors, ArenaSettings, Colors, ColosseumEventTriggers, ColosseumSettings, DimensionRiftSeasonDatas, EarlyAccessModeInfos, GachaPools, Gachas, InventoryItems, LoginScenes, LoginSkins, MapSkins, RiftWeaponConstants, SeasonPasses, ShopItems, Skills, Skins, Stages, Themes, TreasureBuffDatas, Treasures, WorldTriggers.</p>
+            <p><strong>13 locale sửa:</strong> AR, DE, EN_US, ES_LA, FR, JA, KR, PT_BR, RU, TH, VI, ZH_CH, ZH_TW.</p>
+          </div>
+        </details>
+      </section>
+
+      <footer>
+        Báo cáo tạo từ dữ liệu ngày 08/09/2026. Không triển khai thay đổi server hoặc client trong quá trình lập báo cáo.
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
