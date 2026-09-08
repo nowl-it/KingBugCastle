@@ -31,7 +31,6 @@
       line-height: 1.65;
     }
     a { color: var(--moon-soft); }
-    img { display: block; max-width: 100%; }
     code, .mono {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       font-size: .92em;
@@ -59,15 +58,6 @@
       inset: 0;
       background: linear-gradient(90deg, rgba(8, 12, 20, .98) 0%, rgba(8, 12, 20, .9) 35%, rgba(8, 12, 20, .15) 76%), linear-gradient(0deg, #0a0f19 0%, transparent 48%);
       pointer-events: none;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 66% center;
-      opacity: .78;
     }
     .hero-inner {
       width: min(var(--max), calc(100% - 48px));
@@ -190,27 +180,6 @@
     .notice-only { color: var(--warn); }
     .conflict { color: var(--danger); }
 
-    .art-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      margin-top: 42px;
-      background: var(--line);
-      border: 1px solid var(--line);
-    }
-    figure { margin: 0; background: var(--panel); }
-    .portrait {
-      aspect-ratio: 1 / 1;
-      width: 100%;
-      object-fit: contain;
-      background: #f4f1e8;
-    }
-    .motion-preview { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
-    figcaption { padding: 18px 20px 22px; color: #bcbab1; font-size: .85rem; }
-    figcaption b { display: block; margin-bottom: 4px; color: var(--ink); font-size: 1rem; }
-    .wide-art { margin: 36px 0 0; border: 1px solid var(--line); overflow: hidden; }
-    .wide-art img { width: 100%; max-height: 620px; object-fit: cover; }
-
     .spec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 36px; background: var(--line); border: 1px solid var(--line); }
     .spec { min-height: 150px; padding: 22px; background: var(--panel); }
     .spec:nth-child(2n) { background: var(--panel-2); }
@@ -259,7 +228,7 @@
       h1 { font-size: clamp(3rem, 15vw, 4.7rem); }
       nav { grid-template-columns: 1fr 1fr; }
       section, section + section { padding-top: 68px; padding-bottom: 68px; }
-      .metrics, .spec-grid, .art-pair, .bug-list { grid-template-columns: 1fr; }
+      .metrics, .spec-grid, .bug-list { grid-template-columns: 1fr; }
       .metric + .metric, .metric:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
       .comparison-row { grid-template-columns: 1fr; }
       .comparison-row > div + div { border-left: 0; border-top: 1px solid var(--line); }
@@ -278,7 +247,6 @@
 </head>
 <body>
   <header class="hero">
-    <img class="hero-bg" src="master-data-2026-09-08-assets/harvest-moon-festival-title-2026.png" alt="Artwork đăng nhập chính thức Lễ hội Trăng Mùa Gặt 2026">
     <div class="hero-inner">
       <div class="kicker">King God Castle / Master Data Intelligence</div>
       <h1>Season 73 dưới ánh trăng</h1>
@@ -349,28 +317,6 @@
         <h2>Suha dẫn Season Pass, Dandelyn dẫn festival package</h2>
         <p class="lede">Season 73 chạy từ 11:00 ngày 10/09 đến 23:59 ngày 07/10/2026. Token festival nhận đến hết 30/09 KST; Event Shop mở đến khi Preseason bắt đầu ngày 08/10.</p>
 
-        <div class="art-pair">
-          <figure>
-            <img class="portrait" src="master-data-2026-09-08-assets/moonlit-king-suha-1074001.png" alt="Artwork chính thức skin Tinh Quân Ánh Trăng Du Hà, ID 1074001">
-            <figcaption><b>Tinh Quân Ánh Trăng Du Hà</b>Skin <code>1074001</code>, unit <code>10740</code>, Grade 4, tag SeasonPass và Skin_Limited.</figcaption>
-          </figure>
-          <figure>
-            <img class="portrait" src="master-data-2026-09-08-assets/moon-rabbit-dandelyn-1059003.png" alt="Artwork chính thức skin Thỏ Mặt Trăng Dandelyn, ID 1059003">
-            <figcaption><b>Thỏ Mặt Trăng Dandelyn</b>Skin <code>1059003</code>, unit <code>10590</code>, Grade 2, gắn package <code>32075</code>.</figcaption>
-          </figure>
-        </div>
-
-        <div class="art-pair">
-          <figure>
-            <img class="motion-preview" src="master-data-2026-09-08-assets/moonlit-king-suha-preview.webp" alt="Animation preview chính thức skin Du Hà">
-            <figcaption><b>Preview animation Du Hà</b>Bản WebP nén từ GIF chính thức trong patch note.</figcaption>
-          </figure>
-          <figure>
-            <img class="motion-preview" src="master-data-2026-09-08-assets/moon-rabbit-dandelyn-preview.webp" alt="Animation preview chính thức skin Dandelyn">
-            <figcaption><b>Preview animation Dandelyn</b>Bản WebP nén từ GIF chính thức trong patch note.</figcaption>
-          </figure>
-        </div>
-
         <div class="spec-grid">
           <div class="spec"><b>Login Skin 30060</b><p>Scene <code>30005</code>, artwork <code>Title_MoonLight_Event</code>, Grade 2, v173. Thông báo cảnh báo: đổi sang login screen khác thì không thể chọn lại màn festival tự động.</p></div>
           <div class="spec"><b>Map Skin 30220</b><p>Prefab <code>SeasonalEventMode_Season73</code>, package-only, không bán cash/token và không vào gacha.</p></div>
@@ -427,11 +373,6 @@
         <h2>Mode công khai đơn giản, cấu trúc dữ liệu khá sâu</h2>
         <p class="lede">Tên Việt chính thức trong XML là “Chọn và Chuyền”; tên nội bộ của bốn bảng là PickAndPass. Người chơi chọn một trong hai phương án qua 7 vòng, phương án còn lại chuyển cho đối thủ.</p>
 
-        <figure class="wide-art">
-          <img src="master-data-2026-09-08-assets/pick-and-pass-description.png" alt="Ảnh hướng dẫn chính thức mode Pick and Pass">
-          <figcaption><b>Hướng dẫn mode chính thức</b>Patch note xác nhận mode vào từ Gate &gt; Battle &gt; Challenge và dùng Event Flag hằng ngày.</figcaption>
-        </figure>
-
         <div class="metrics">
           <div class="metric"><b>117</b><span>Draft definition</span></div>
           <div class="metric"><b>78</b><span>Unit option, đều level 8</span></div>
@@ -475,17 +416,6 @@
               <tr><td>32073</td><td>Gold x100</td><td>10</td><td>Không giới hạn</td></tr>
             </tbody>
           </table>
-        </div>
-
-        <div class="art-pair">
-          <figure>
-            <img class="portrait" src="master-data-2026-09-08-assets/meirna-30014.png" alt="Artwork chính thức Legacy Meirna, ID 30014">
-            <figcaption><b>Meirna - Branch of Eternity</b>Treasure <code>30014</code>, rate pickup 0,75% trong gacha 5055.</figcaption>
-          </figure>
-          <figure>
-            <img class="portrait" src="master-data-2026-09-08-assets/tome-of-tides-30024.png" alt="Artwork chính thức Tome of Tides, ID 30024">
-            <figcaption><b>Tome of Tides - Tome of the Black Turtle</b>Treasure <code>30024</code>, rate pickup 0,75% trong gacha 5055.</figcaption>
-          </figure>
         </div>
 
         <div class="spec-grid">
@@ -586,7 +516,6 @@
           <div><b>Patch note chính thức</b><span><a href="https://kgcastle-notice.awesomepiece.com/3d51c2e0-6f0e-81ac-a15e-f5a1fc736f88">kgcastle-notice.awesomepiece.com/3d51c2e0-6f0e-81ac-a15e-f5a1fc736f88</a></span></div>
           <div><b>Snapshot pristine mới</b><span><code>xml_history/2026_09_08/</code> - 147 file; bundle MD5 <code>d06f765ad4c726d545c96d57f152310c</code>.</span></div>
           <div><b>Baseline pristine</b><span><code>2026_08_25</code> - dùng để tính semantic delta 40 file.</span></div>
-          <div><b>Artwork</b><span>Tất cả hình trong báo cáo được tải trực tiếp từ patch note chính thức. Hai preview động được chuyển sang WebP để giảm dung lượng, không thay đổi nội dung.</span></div>
           <div><b>Giới hạn</b><span>Patch note mô tả hành vi client nhưng không công bố ID nội bộ. XML công bố cấu hình nhưng không chứng minh client 172.1.00 có code hỗ trợ model mới.</span></div>
         </div>
 

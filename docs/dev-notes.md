@@ -219,7 +219,7 @@ Fixed-period loops with no exception = client timer, not retry.
   schedule, Pick and Pass, both new skins, package contents, Arena reroll schedule, gacha rates,
   and Swift/North Rift effects. Its Rift paragraph says "Season 74 Seasonal Effects", but the
   surrounding section and `DimensionRiftSeasonDatas.xml` ID 73 show this is a notice typo. Full
-  Vietnamese comparison and official artwork: `docs/master-data-2026-09-08.html`.
+  Vietnamese comparison: `docs/master-data-2026-09-08.html`.
 
 ### Reference-derived Frieren idle sheet (2026-08-24)
 
