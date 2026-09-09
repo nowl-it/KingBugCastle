@@ -80,9 +80,12 @@ def check_upgrade_charges_exactly_the_listed_cost():
     cost = before["dimensionNextLevelCost"]
     assert cost == dimension.next_cost(0, server.XML_DIR)
 
-    after = server.r_dimension_upgrade({"unitId": DIM}, server.load_state())["dimensionUnit"]
+    response = server.r_dimension_upgrade({"unitId": DIM}, server.load_state())
+    assert set(response) == {"unit", "remainEcho"}, \
+        "client expects DimensionUpgradeResponseModel, not CardResponseModel"
+    after = response["unit"]
     assert after["dimensionLevel"] == 1, "the sync level did not advance"
-    left = server._item_count(server.load_state(), dimension.REMNANT)
+    left = response["remainEcho"]
     assert left == 7, f"{cost} remnants should have been spent, {left} left over"
     assert after["dimensionNextLevelCost"] == dimension.next_cost(1, server.XML_DIR), \
         "the next cost still quotes the level just paid for"
@@ -92,7 +95,7 @@ def check_upgrade_charges_exactly_the_listed_cost():
 
 def check_upgrade_refused_without_remnants():
     st = _fresh(remnants=dimension.next_cost(0, server.XML_DIR) - 1)
-    out = server.r_dimension_upgrade({"unitId": DIM}, st)["dimensionUnit"]
+    out = server.r_dimension_upgrade({"unitId": DIM}, st)["unit"]
     assert out["dimensionLevel"] == 0, "an unaffordable sync level was granted"
     assert server._item_count(server.load_state(), dimension.REMNANT) == \
         dimension.next_cost(0, server.XML_DIR) - 1, "remnants were taken anyway"
@@ -103,7 +106,7 @@ def check_sync_stops_at_the_cap():
     """The whole track, paid for in full - the cap must hold and must stop charging."""
     st = _fresh(remnants=dimension.total_cost(server.XML_DIR) + 500)
     for _ in range(dimension.level_max(server.XML_DIR) + 3):
-        out = server.r_dimension_upgrade({"unitId": DIM}, server.load_state())["dimensionUnit"]
+        out = server.r_dimension_upgrade({"unitId": DIM}, server.load_state())["unit"]
     assert out["dimensionLevel"] == dimension.level_max(server.XML_DIR), \
         f"sync reached level {out['dimensionLevel']}"
     assert out["dimensionNextLevelCost"] == 0, "the capped panel still quotes a price"

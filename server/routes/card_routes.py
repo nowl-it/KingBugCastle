@@ -294,7 +294,8 @@ def r_dimension_upgrade(body, st):
     unit_id = body_int(body.get("unitId"), 0)
     c = _card(st, unit_id)
     if c is None or dimension.model(unit_id, xml_dir=XML_DIR) is None:
-        return r_card(body, st)
+        return {"unit": dimension.model(unit_id, xml_dir=XML_DIR),
+                "remainEcho": srv._item_count(st, dimension.REMNANT)}
     level = c.get("dimensionLevel", 0)
     cost = dimension.next_cost(level, XML_DIR)
     if cost and srv._item_count(st, dimension.REMNANT) >= cost:
@@ -302,7 +303,10 @@ def r_dimension_upgrade(body, st):
         c["dimensionLevel"] = level + 1
         c["dimensionGauge"] = 0
         save_state(st)
-    return r_card(body, st)
+    return {"unit": dimension.model(unit_id, c.get("dimensionLevel", 0),
+                                    c.get("dimensionGauge", 0), c.get("overcome", 0),
+                                    XML_DIR),
+            "remainEcho": srv._item_count(st, dimension.REMNANT)}
 
 
 def r_dimension_overcome(body, st):

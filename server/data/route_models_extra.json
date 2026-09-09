@@ -38,8 +38,8 @@
 
   "/decoration/advisor/timeout":          {"response": "ResponseModel", "_method": "AdvisorTimeOut"},
 
-  "/dimension-unit/overcome":             {"response": "CardResponseModel", "_method": "(none - dimension hero overcome acts on a card)"},
-  "/dimension-unit/upgrade":              {"response": "CardResponseModel", "_method": "(none - dimension hero upgrade acts on a card)"},
+  "/dimension-unit/overcome":             {"response": "DimensionOvercomeResponseModel", "_method": "DimensionOvercome"},
+  "/dimension-unit/upgrade":              {"response": "DimensionUpgradeResponseModel", "_method": "DimensionUpgrade"},
 
   "/event-card-collecting/gacha":         {"response": "EventCardGachaResponseModel", "_method": "EventCardGacha"},
   "/eventcache":                          {"response": "ResponseModel", "_method": "(none - no RestAPI method; the client only checks code 200)"},

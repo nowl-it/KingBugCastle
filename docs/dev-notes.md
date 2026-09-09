@@ -392,6 +392,10 @@ custom instrumentation APK that dumped `shared_prefs` every few seconds and auto
   is serialized with the family's highest owned level. `originLevel` keeps that card's unsynced
   level and `isLevelSynced=true`; the client only considers sync applied when that flag is true
   and `level > originLevel`. Regression: `check_original_and_dimension_hero_share_the_highest_level`.
+- Dimension sync upgrade response (fixed 2026-09-09): `/dimension-unit/upgrade` must return
+  `DimensionUpgradeResponseModel{unit, remainEcho}`. Returning a `CardResponseModel` spends the
+  remnants server-side but leaves `model.unit` null in `GameManager.HandleDimensionUpgradeResponse`,
+  so the client never applies the new sync level. Regression: `check_upgrade_charges_exactly_the_listed_cost`.
 
 ## 7. Awakening / potentialTier (2026-08-01)
 
