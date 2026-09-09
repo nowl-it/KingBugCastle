@@ -396,6 +396,10 @@ custom instrumentation APK that dumped `shared_prefs` every few seconds and auto
   `DimensionUpgradeResponseModel{unit, remainEcho}`. Returning a `CardResponseModel` spends the
   remnants server-side but leaves `model.unit` null in `GameManager.HandleDimensionUpgradeResponse`,
   so the client never applies the new sync level. Regression: `check_upgrade_charges_exactly_the_listed_cost`.
+- `DimensionUpgradeRequestModel.count` is the amount selected by the upgrade panel's investment
+  slider, not a level count. Add it to `dimensionGauge`, consume each crossed level's cost, preserve
+  partial progress, and cap spending at the amount needed for level 10. Ignoring `count` made every
+  request buy exactly one full level regardless of the slider. Regression: `check_partial_and_multi_level_investment`.
 
 ## 7. Awakening / potentialTier (2026-08-01)
 

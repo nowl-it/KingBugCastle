@@ -80,7 +80,7 @@ def check_upgrade_charges_exactly_the_listed_cost():
     cost = before["dimensionNextLevelCost"]
     assert cost == dimension.next_cost(0, server.XML_DIR)
 
-    response = server.r_dimension_upgrade({"unitId": DIM}, server.load_state())
+    response = server.r_dimension_upgrade({"unitId": DIM, "count": cost}, server.load_state())
     assert set(response) == {"unit", "remainEcho"}, \
         "client expects DimensionUpgradeResponseModel, not CardResponseModel"
     after = response["unit"]
@@ -93,20 +93,37 @@ def check_upgrade_charges_exactly_the_listed_cost():
           f"{after['dimensionNextLevelCost']}")
 
 
-def check_upgrade_refused_without_remnants():
-    st = _fresh(remnants=dimension.next_cost(0, server.XML_DIR) - 1)
-    out = server.r_dimension_upgrade({"unitId": DIM}, st)["unit"]
-    assert out["dimensionLevel"] == 0, "an unaffordable sync level was granted"
-    assert server._item_count(server.load_state(), dimension.REMNANT) == \
-        dimension.next_cost(0, server.XML_DIR) - 1, "remnants were taken anyway"
-    print("ok refusal: one remnant short buys nothing")
+def check_partial_and_multi_level_investment():
+    first = dimension.next_cost(0, server.XML_DIR)
+    second = dimension.next_cost(1, server.XML_DIR)
+    st = _fresh(remnants=first + second + 99)
+
+    out = server.r_dimension_upgrade({"unitId": DIM, "count": first - 1}, st)
+    assert out["unit"]["dimensionLevel"] == 0
+    assert out["unit"]["dimensionGauge"] == first - 1
+
+    out = server.r_dimension_upgrade({"unitId": DIM, "count": second + 1}, server.load_state())
+    assert out["unit"]["dimensionLevel"] == 2
+    assert out["unit"]["dimensionGauge"] == 0
+    assert out["remainEcho"] == 99
+    print("ok gauge: partial investment persists and one request can cross multiple levels")
+
+
+def check_upgrade_invests_available_remnants():
+    available = dimension.next_cost(0, server.XML_DIR) - 1
+    st = _fresh(remnants=available)
+    out = server.r_dimension_upgrade({"unitId": DIM, "count": dimension.next_cost(0, server.XML_DIR)}, st)["unit"]
+    assert out["dimensionLevel"] == 0, "partial investment granted a full sync level"
+    assert out["dimensionGauge"] == available, "partial investment was not preserved"
+    assert server._item_count(server.load_state(), dimension.REMNANT) == 0
+    print("ok partial funds: all available remnants move into the gauge")
 
 
 def check_sync_stops_at_the_cap():
     """The whole track, paid for in full - the cap must hold and must stop charging."""
     st = _fresh(remnants=dimension.total_cost(server.XML_DIR) + 500)
-    for _ in range(dimension.level_max(server.XML_DIR) + 3):
-        out = server.r_dimension_upgrade({"unitId": DIM}, server.load_state())["unit"]
+    out = server.r_dimension_upgrade(
+        {"unitId": DIM, "count": dimension.total_cost(server.XML_DIR) + 500}, st)["unit"]
     assert out["dimensionLevel"] == dimension.level_max(server.XML_DIR), \
         f"sync reached level {out['dimensionLevel']}"
     assert out["dimensionNextLevelCost"] == 0, "the capped panel still quotes a price"
@@ -162,7 +179,8 @@ if __name__ == "__main__":
     check_only_dimension_heroes_get_a_model()
     check_original_and_dimension_hero_share_the_highest_level()
     check_upgrade_charges_exactly_the_listed_cost()
-    check_upgrade_refused_without_remnants()
+    check_partial_and_multi_level_investment()
+    check_upgrade_invests_available_remnants()
     check_sync_stops_at_the_cap()
     check_overcome_spends_one_ticket_per_step()
     check_overcome_refused_without_tickets()

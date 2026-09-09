@@ -286,22 +286,25 @@ def r_card(body, st):
 
 
 def r_dimension_upgrade(body, st):
-    """Spend dimension remnants to raise one sync level.
-
-    One level per call, not one per affordable step: the panel animates a single
-    level-up and re-reads the card, so jumping several would desync the display from
-    the state it just paid for."""
+    """Invest dimension remnants into the sync gauge and apply crossed levels."""
     unit_id = body_int(body.get("unitId"), 0)
     c = _card(st, unit_id)
     if c is None or dimension.model(unit_id, xml_dir=XML_DIR) is None:
         return {"unit": dimension.model(unit_id, xml_dir=XML_DIR),
                 "remainEcho": srv._item_count(st, dimension.REMNANT)}
     level = c.get("dimensionLevel", 0)
-    cost = dimension.next_cost(level, XML_DIR)
-    if cost and srv._item_count(st, dimension.REMNANT) >= cost:
-        srv._take_item(st, dimension.REMNANT, cost)
-        c["dimensionLevel"] = level + 1
-        c["dimensionGauge"] = 0
+    gauge = c.get("dimensionGauge", 0)
+    needed = sum(dimension.next_cost(i, XML_DIR) for i in range(level, dimension.level_max(XML_DIR))) - gauge
+    invested = min(body_int(body.get("count"), 0, lo=0),
+                   srv._item_count(st, dimension.REMNANT), max(0, needed))
+    if invested:
+        srv._take_item(st, dimension.REMNANT, invested)
+        gauge += invested
+        while (cost := dimension.next_cost(level, XML_DIR)) and gauge >= cost:
+            gauge -= cost
+            level += 1
+        c["dimensionLevel"] = level
+        c["dimensionGauge"] = gauge
         save_state(st)
     return {"unit": dimension.model(unit_id, c.get("dimensionLevel", 0),
                                     c.get("dimensionGauge", 0), c.get("overcome", 0),
