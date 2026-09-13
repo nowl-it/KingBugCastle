@@ -30,6 +30,12 @@
         <Type>SummonSkin</Type>
         <Value>F5D470</Value>
     </Color>
+
+    <Color ID="1006">
+        <Desc>전용 배경음악</Desc>
+        <Type>ExclusiveBGM</Type>
+        <Value>B58CFF</Value>
+    </Color>
     
     <!-- 시즌 -->
     <Color ID="2000">

@@ -1741,4 +1741,538 @@
 			</Values>
 		</WorldTriggers>
 	</WorldTrigger>
+	<!-- 데이터 분류: id 60000~69999 : 선택과 집중 - 악마의 제안 (트리거 ID = 60000 + 제안 ID, +1은 보상) -->
+
+	<!-- [악마의 제안1 대가] 아군-적군 영웅 교체 -->
+	<WorldTrigger ID="60100">
+		<DescComment>[악마의 제안1 대가] 아군-적군 영웅 교체</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<SwapStatueTeams />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안1 보상] 랜덤 아군 한 명 성급 +1 -->
+	<WorldTrigger ID="60101">
+		<DescComment>[악마의 제안1 보상] 랜덤 아군 한 명 성급 +1</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddStatueTier Team="1" Amount="1" RandomCount="1" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안2 대가] 아군 5번 환영 영웅 제거 -->
+	<WorldTrigger ID="60110">
+		<DescComment>[악마의 제안2 대가] 아군 5번 환영 영웅 제거</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<RemoveStatueUnit Team="1" Index="4" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안2 보상] 적 1번 환영 영웅 제거 -->
+	<WorldTrigger ID="60111">
+		<DescComment>[악마의 제안2 보상] 적 1번 환영 영웅 제거</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<RemoveStatueUnit Team="2" Index="0" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안3 대가] 랜덤 아군 1명 3초 빙결 -->
+	<WorldTrigger ID="60120">
+		<DescComment>[악마의 제안3 대가] 랜덤 아군 1명 3초 빙결</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo ToAll="true">
+				<Checker>RandomAllyOne</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<BattleStart/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<Ice/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>3</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안3 보상] 적 진영 공격력 -10% -->
+	<WorldTrigger ID="60121">
+		<DescComment>[악마의 제안3 보상] 적 진영 공격력 -10%</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+				<PlayStatueEffect Team="2" Effect="Fx_Down_Dmg_01" />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo ToAll="true">
+				<Checker Team="2">Team</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Atk" StatValueType="TotalPerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-10</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안4 대가] 아군 공격력 -20% -->
+	<WorldTrigger ID="60130">
+		<DescComment>[악마의 제안4 대가] 아군 공격력 -20%</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+				<PlayStatueEffect Team="1" Effect="Fx_Down_Dmg_01" />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo ToAll="true">
+				<Checker Team="1">Team</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Atk" StatValueType="TotalPerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-20</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안4 보상] 아군 방어력 +200 -->
+	<WorldTrigger ID="60131">
+		<DescComment>[악마의 제안4 보상] 아군 방어력 +200</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+				<PlayStatueEffect Team="1" Effect="Fx_Up_Dmg_03" Delay="0.6" />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo ToAll="true">
+				<Checker Team="1">Team</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="Def" StatValueType="Value"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>200</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안5 대가] 아군 마나 회복 불가 -->
+	<WorldTrigger ID="60140">
+		<DescComment>[악마의 제안5 대가] 아군 마나 회복 불가</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo ToAll="true">
+				<Checker Team="1">Team</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="ManaAdaptability" StatValueType="TotalPerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>-100</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안5 보상] 아군 마나 100%로 시작 -->
+	<WorldTrigger ID="60141">
+		<DescComment>[악마의 제안5 보상] 아군 마나 100%로 시작</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo ToAll="true">
+				<Checker Team="1">Team</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<BattleStart/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<HealManaPer LockValue="true"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>100</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안6 대가] 아군 3초 스킬 사용 불가 -->
+	<WorldTrigger ID="60150">
+		<DescComment>[악마의 제안6 대가] 아군 3초 스킬 사용 불가</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo ToAll="true">
+				<Checker Team="1">Team</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<BattleStart/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<ForceSilence SilenceEffect="Fx_Treasure_30010a"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>3</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안6 보상] 랜덤 아군 한 명 성급 +2 -->
+	<WorldTrigger ID="60151">
+		<DescComment>[악마의 제안6 보상] 랜덤 아군 한 명 성급 +2</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddStatueTier Team="1" Amount="2" RandomCount="1" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안7 대가] 아군 1초 기절 -->
+	<WorldTrigger ID="60160">
+		<DescComment>[악마의 제안7 대가] 아군 1초 기절</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo ToAll="true">
+				<Checker Team="1">Team</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<BattleStart/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<Stun/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>1</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+	</WorldTrigger>
+
+	<!-- [악마의 제안7 보상] 아군 광폭화 (이동/공격속도 +200%) -->
+	<WorldTrigger ID="60161">
+		<DescComment>[악마의 제안7 보상] 아군 광폭화 (이동/공격속도 +200%)</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<AddGlobalBuff />
+				<!-- 연출: 아군 버프 이펙트, 기절 이펙트 후 순차 발생 (프리팹 임시) -->
+				<PlayStatueEffect Team="1" Effect="Fx_Up_Spd_01" Delay="0.6" />
+			</Actions>
+
+			<Values>
+			</Values>
+			
+			<BuffInfo ToAll="true">
+				<Checker Team="1">Team</Checker>
+
+				<BuffOptions>
+					<Conditions>
+						<Once/>
+					</Conditions>
+
+					<Targets>
+						<Self/>
+					</Targets>
+
+					<RangeInfo>
+					</RangeInfo>
+
+					<BuffContents>
+						<AddStat StatType="MoveSpeed" StatValueType="TotalPerValue"/>
+						<AddStat StatType="AttackSpeed" StatValueType="TotalPerValue"/>
+					</BuffContents>
+
+					<Values>
+						<FixedValue>200</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+	</WorldTrigger>
+
+
+	<!-- [악마의 제안8 대가] 아군-적군 전체 성급 완전 랜덤(1~7) -->
+	<WorldTrigger ID="60170">
+		<DescComment>[악마의 제안8 대가] 아군-적군 전체 성급 완전 랜덤(1~7)</DescComment>
+		
+		<Type>PickAndPass</Type>
+		
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+
+			<Actions>
+				<RandomizeStatueTiers Min="1" Max="7" />
+			</Actions>
+
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</WorldTrigger>
+
 </WorldTriggers>

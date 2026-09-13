@@ -181,5 +181,22 @@
         <BuffTargets>North,Swift</BuffTargets>
         <WorldTriggers>10050,11100</WorldTriggers>
     </GrandArenaBuff>
+    
+    <GrandArenaBuff Season="73" SemiSeason="1">
+        <BuffTargets>East,Brave</BuffTargets>
+        <WorldTriggers>10030,11080</WorldTriggers>
+    </GrandArenaBuff>
+
+    <GrandArenaBuff Season="73" SemiSeason="2">
+        <BuffTargets>Central,Toughness</BuffTargets>
+        <WorldTriggers>10110,11000</WorldTriggers>
+    </GrandArenaBuff>
     </GrandArenaBuffs>
+
+    <PvPMatchRerollMaxDailyCount>13</PvPMatchRerollMaxDailyCount>
+    <PvPMatchRerollFreeMaxDailyCount>3</PvPMatchRerollFreeMaxDailyCount>
+
+    <PvPMatchRerollInitialPrice>5</PvPMatchRerollInitialPrice>
+    <PvPMatchRerollPriceIncrement>5</PvPMatchRerollPriceIncrement>
+    <PvPMatchRerollMaxPrice>25</PvPMatchRerollMaxPrice>
 </ArenaSettings>

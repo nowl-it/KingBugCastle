@@ -78,6 +78,7 @@ def r_territory_fetch(body, st):
         t["equippedSkin"] = default
     save_state(st)
     return {"labor": labor, "storedLabor": labor,
+            "adChargeLaborRemainCount": 0,
             "buildingDatas": t["buildings"], "lastLaborAt": t["lastLaborAt"],
             "statBuffPers": t.get("statBuffPers", []),
             "storedBuildings": t["stored"], "playerHuntingData": t["hunting"],
@@ -87,6 +88,11 @@ def r_territory_fetch(body, st):
             # The lobby's own territory summary still reads this.
             "buildingPoints": st.get("buildingPoint", 25),
             "maxLabor": territory.max_stored_labor(t["buildings"], XML_DIR)}
+
+
+def r_territory_ad_charge_labor(body, st):
+    """v173 ad charge response; ads are unavailable on the private client."""
+    return {"labor": _terr_labor(st), "adChargeLaborRemainCount": 0}
 
 
 def r_territory(body, st):
@@ -462,6 +468,7 @@ def handlers():
         "/territory/refresh-building": r_territory_fetch,
         "/territory/collect-labor": r_territory_collect_labor,
         "/territory/recover-labor": r_territory_collect_labor,
+        "/territory/ad-charge-labor": r_territory_ad_charge_labor,
         "/territory/assign-units": r_territory_assign,
         "/territory/swap-assigned-units": r_territory_assign,
         "/territory/level-sync/assign": r_territory_level_sync_assign,

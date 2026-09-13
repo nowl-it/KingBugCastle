@@ -18012,10 +18012,7 @@ Tăng sát thương vật lý phải nhận không cộng dồn. Chỉ áp dụn
   <String Key="ResetPVPMatch">Đặt Lại</String>
   <String Key="CannotResetPVPMatchByWatchingAdsAlert">Bạn đã dùng hết lượt đặt lại hôm nay.</String>
   <String Key="PVPDeckSettingReTryAdsPopupTitle">Thử Lại Đội Hình</String>
-  <String Key="PVPDeckSettingReTryAdsPopupDesc">Bạn có muốn xem quảng cáo và thử lại miễn phí không?
-Mua King God Pass sẽ xóa quảng cáo trong game.
-Nếu chọn dùng Đá Quý, lượt thử lại miễn phí bằng quảng cáo hôm nay sẽ không khả dụng.</String>
-  <String Key="PVPDeckSettingReTryAdsCancelAlert">Đóng cửa sổ này sẽ hủy lượt thử lại miễn phí bằng quảng cáo. Hủy thử lại?</String>
+  <String Key="ResetPVPMatchRemain">Đặt lại({0}/{1})</String>
   <String Key="SuperShieldAdaptabilityPer">Cường hóa Tế Đàn Máu {0}
 Tỷ lệ nhận Phòng thủ Tuyệt đối +{1}%</String>
   <String Key="SuperShieldAdaptabilityPer_Piece">Cường hóa Tế Đàn Máu
@@ -18230,56 +18227,86 @@ Khi ấy, sự thánh khiết sẽ giúp bạn.</String>
   <String Key="SpecialPackage_1683">Gói Vitacorde 1</String>
   <String Key="SpecialPackage_1684">Gói Vitacorde 2</String>
   <String Key="SpecialPackage_1685">Gói Vitacorde 3</String>
-  <String Key="BuffDataDesc_3300431">Cứ mỗi {0} Hộ vệ, hệ số Lực phép của hiệu ứng tăng Sát thương cơ bản +{1}%</String>
+  <String Key="BuffDataDesc_3300431">Hệ số Lực phép của hiệu ứng tăng Sát thương Cơ bản mỗi 1 Hộ vệ: +{0}%</String>
   <String Key="BuffDataDesc_3300432">Hồi chiêu {0} giây</String>
   <String Key="BuffDataDesc_3300433">Ban Ân sủng cho tất cả đồng minh trong phạm vi, trừ bản thân</String>
   <String Key="BuffDataDesc_3300434">Hồi chiêu {0} giây</String>
-  <String Key="BuffDataDesc_3300435">Cứ mỗi {0} Hộ vệ, hệ số Lực phép của hiệu ứng tăng Sát thương cơ bản +{1}%</String>
+  <String Key="BuffDataDesc_3300435">Hệ số Lực phép của hiệu ứng tăng Sát thương Cơ bản mỗi 1 Hộ vệ: +{0}%</String>
   <String Key="TreasureSkillDesc_3300430">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu lực của Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Vitacorde
 Lực phép của người mang được cố định theo giá trị lúc bắt đầu Chiến Đấu
 Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng ST cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu: {3} giây)</String>
-  <String Key="TreasureSkillDesc_3300431">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu lực của Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Vitacorde
-Lực phép của người mang được cố định theo giá trị lúc bắt đầu Chiến Đấu
-Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng ST cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu: {3} giây)
-Mỗi {4} Hộ vệ, hệ số Lực phép của hiệu ứng tăng ST cơ bản +{5}%</String>
-  <String Key="TreasureSkillDesc_3300433">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu lực của Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Vitacorde
-Lực phép của người mang được cố định theo giá trị lúc bắt đầu Chiến Đấu
-Khi chữa trị đồng minh, tạo một vùng trong {0} giây, tăng ST cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu: {3} giây)
-Mỗi {4} Hộ vệ, hệ số Lực phép của hiệu ứng tăng ST cơ bản +{5}%
+  <String Key="TreasureSkillDesc_3300431">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu ứng của Anh Hùng có cấp ★ cao nhất đang Gắn Vitacorde
+Cố định Lực phép của người mang theo giá trị lúc bắt đầu Chiến Đấu
+Khi chữa trị đồng minh, tạo ra một vùng trong {0} giây, tăng Sát thương Cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu {3} giây)
+Hệ số Lực phép của hiệu ứng tăng Sát thương Cơ bản mỗi 1 Hộ vệ: +{4}%</String>
+  <String Key="TreasureSkillDesc_3300433">Khi bắt đầu Chiến Đấu, chỉ áp dụng hiệu ứng của Anh Hùng có cấp ★ cao nhất đang Gắn Vitacorde
+Cố định Lực phép của người mang theo giá trị lúc bắt đầu Chiến Đấu
+Khi chữa trị đồng minh, tạo ra một vùng trong {0} giây, tăng Sát thương Cơ bản của đồng minh trong phạm vi {1} xung quanh người mang thêm {2}% Lực phép của người mang (Hồi chiêu {3} giây)
+Hệ số Lực phép của hiệu ứng tăng Sát thương Cơ bản mỗi 1 Hộ vệ: +{4}%
 Ban Ân sủng cho đồng minh trong vùng, trừ người mang</String>
   <String Key="SeasonalEventName_Season72">Lễ Hội Rồng Bay</String>
   <String Key="SeasonalEventMode_Season72">Lễ Hội Rồng Bay</String>
-  <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Tên phụ tạm thời</String>
-  <String Key="TreasureDesc_50002">Mô tả tạm thời - sẽ bổ sung khi có ý tưởng Bảo Cụ - Ý tưởng dự kiến: một viên đá? hiện vật? mượn Mana từ động thực vật xung quanh, tích trữ rồi giải phóng</String>
-  <String Key="TreasureSkillName_50002">Hợp Nhất Mana</String>
-  <String Key="BuffDataName_3500021">Đồng Hóa I</String>
-  <String Key="BuffDataName_3500022">Kết Giới Mana I</String>
-  <String Key="BuffDataName_3500023">Cộng Hưởng Mana</String>
-  <String Key="BuffDataName_3500024">Kết Giới Mana II</String>
-  <String Key="BuffDataName_3500025">Đồng Hóa II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">Cửa Hàng Đặc Biệt Pickup Cor Orbis</String>
-  <String Key="SpecialPackage_1690">Gói Cor Orbis 1</String>
-  <String Key="SpecialPackage_1691">Gói Cor Orbis 2</String>
-  <String Key="SpecialPackage_1692">Gói Cor Orbis 3</String>
-  <String Key="BuffDataDesc_3500021">Cứ mỗi {1}% Sát thương chí mạng phép vượt quá {0}%, mức tăng ST tổng của kỹ năng cường hóa được nhân {2} lần</String>
-  <String Key="BuffDataDesc_3500022">ST phải nhận {0}% đến lần dùng kỹ năng thứ 3</String>
-  <String Key="BuffDataDesc_3500023">Khi dùng kỹ năng cường hóa, dùng thêm cùng kỹ năng lên 2 mục tiêu ngẫu nhiên với ST {0}%</String>
-  <String Key="BuffDataDesc_3500024">ST phải nhận {0}% đến lần dùng kỹ năng thứ 3</String>
-  <String Key="BuffDataDesc_3500025">Cứ mỗi {1}% Sát thương chí mạng phép vượt quá {0}%, mức tăng ST tổng của kỹ năng cường hóa được nhân {2} lần</String>
-  <String Key="TreasureSkillDesc_3500020">Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3
-Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3
-Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%
-Cứ mỗi {4}% Sát thương chí mạng phép vượt quá {3}%, mức tăng ST tổng của kỹ năng cường hóa được nhân {5} lần</String>
-  <String Key="TreasureSkillDesc_3500022">Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3
-Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%
-Cứ mỗi {4}% Sát thương chí mạng phép vượt quá {3}%, mức tăng ST tổng của kỹ năng cường hóa được nhân {5} lần
-ST phải nhận {6}% đến lần dùng kỹ năng thứ 3</String>
-  <String Key="TreasureSkillDesc_3500023">Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3
-Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%
-Cứ mỗi {4}% Sát thương chí mạng phép vượt quá {3}%, mức tăng ST tổng của kỹ năng cường hóa được nhân {5} lần
-ST phải nhận {6}% đến lần dùng kỹ năng thứ 3
-Khi dùng kỹ năng cường hóa, dùng thêm cùng kỹ năng lên 2 mục tiêu ngẫu nhiên với ST {7}%</String>
+  <String Key="SpecialPackage_1690">Gói Đá Triệu Hồi Bảo Cụ Pickup 1</String>
+  <String Key="SpecialPackage_1691">Gói Đá Triệu Hồi Bảo Cụ Pickup 2</String>
+  <String Key="SpecialPackage_1692">Gói Meirna</String>
+  <String Key="SpecialPackage_1693">Gói Bí Kíp Dòng Chảy</String>
   <String Key="AdsSummonRestrictionAlert">Tối đa {0} lần mỗi vòng.</String>
+  <String Key="ThemeName_1003">Chọn và Chuyền</String>
+  <String Key="ModeDesc_1003">Một trong hai lựa chọn là của bạn, lựa chọn còn lại là của đối thủ!
+Hãy chọn tốt nhất, hoàn thành tổ hợp mạnh nhất và giành chiến thắng trong trận quyết đấu cuối cùng!</String>
+  <String Key="PnP_PlayDesc">Hãy chọn mục sẽ vào Ảo Ảnh {0}.
+Mục không được chọn sẽ được đưa vào Binh lực đối phương.</String>
+  <String Key="PnP_ChoiceDone">Hoàn tất lựa chọn cuối</String>
+  <String Key="PnP_BattleStart">Chiến Đấu bắt đầu!</String>
+  <String Key="PnP_Devil_Conditions_100">Hoán đổi phe ta và phe địch.</String>
+  <String Key="PnP_Devil_Conditions_110">Loại bỏ Anh Hùng được đặt ở Ảo Ảnh 5 của phe ta.</String>
+  <String Key="PnP_Devil_Conditions_120">Đóng băng 1 đồng minh ngẫu nhiên trong 3 giây.</String>
+  <String Key="PnP_Devil_Conditions_130">Giảm 20% Lực tấn công tổng của mọi đồng minh.</String>
+  <String Key="PnP_Devil_Conditions_140">Tất cả Anh Hùng phe ta không thể hồi Mana.</String>
+  <String Key="PnP_Devil_Conditions_150">Tất cả Anh Hùng phe ta không thể dùng kỹ năng trong 3 giây.</String>
+  <String Key="PnP_Devil_Conditions_160">Làm choáng tất cả Anh Hùng phe ta trong 1 giây.</String>
+  <String Key="PnP_Devil_Conditions_170">Thay đổi ngẫu nhiên cấp ★ của tất cả Anh Hùng hai bên.</String>
+  <String Key="PnP_Devil_Conditions_180">Khi Thua, -25 Token Sự Kiện từ phần thưởng cơ bản</String>
+  <String Key="PnP_Devil_Rewards_100">Sau khi thay đổi, tăng cấp ★ của 1 Anh Hùng ngẫu nhiên phe ta thêm 1★.
+(Khi Thắng, +25 Token Sự Kiện)</String>
+  <String Key="PnP_Devil_Rewards_110">Loại bỏ Anh Hùng được đặt ở Ảo Ảnh 1 của Binh lực địch.
+(Khi Thắng, +25 Token Sự Kiện)</String>
+  <String Key="PnP_Devil_Rewards_120">Giảm 10% Lực tấn công tổng của Binh lực địch.
+(Khi Thắng: thêm +25 Token Sự Kiện Mùa)</String>
+  <String Key="PnP_Devil_Rewards_130">Tăng 200 Lực phòng thủ cơ bản của toàn bộ đồng minh.
+(Khi Thắng: thêm +25 Token Sự Kiện Mùa)</String>
+  <String Key="PnP_Devil_Rewards_140">Tất cả Anh Hùng phe ta bắt đầu với 100% Mana.
+(Khi Thắng, +25 Token Sự Kiện)</String>
+  <String Key="PnP_Devil_Rewards_150">Tăng cấp ★ của 1 Anh Hùng ngẫu nhiên phe ta thêm 2★.
+(Khi Thắng, +25 Token Sự Kiện)</String>
+  <String Key="PnP_Devil_Rewards_160">Khiến toàn bộ Anh Hùng đồng minh vào trạng thái Cuồng nộ (Tốc độ di chuyển tổng/Tốc độ tấn công +200%).
+(Khi Thắng: thêm +25 Token Sự Kiện Mùa)</String>
+  <String Key="PnP_Devil_Rewards_170">Khi Thắng, +25 Token Sự Kiện</String>
+  <String Key="PnP_Devil_Rewards_180">Khi Thắng, +50 Token Sự Kiện</String>
+  <String Key="ExclusiveBGM">Nhạc nền độc quyền</String>
+  <String Key="GachaNewDimensionUnitPer">Anh Hùng Dị Chiều xuất hiện</String>
+  <String Key="S73BundlePackagePanelDesc">Nhận &lt;color=#ffcf68&gt;Anh Hùng, Skin Sự Kiện, Màn hình đăng nhập, Cố vấn, Nhạc nền và Skin Bản đồ&lt;/color&gt; cùng &lt;color=#369DFF&gt;300 Đá Quý&lt;/color&gt; một lúc!</String>
+  <String Key="GachaDesc_8500">Có thể nhận được Anh Hùng Dị Chiều.</String>
+  <String Key="RandomDimensionUnitCeilFormat">Đảm bảo Anh Hùng Dị Chiều sau {0} lần triệu hồi</String>
+  <String Key="SeasonalEventName_Season73">Lễ hội Trăng Mùa Gặt</String>
+  <String Key="SeasonalEventMode_Season73">Lễ hội Trăng Mùa Gặt</String>
+  <String Key="MapSkinDesc_30220">Skin Bản đồ Lễ hội Trăng Mùa Gặt</String>
+  <String Key="MapSkinName_30220">Lễ hội Trăng Mùa Gặt</String>
+  <String Key="GachaName_8500">Triệu Hồi Anh Hùng Dị Chiều</String>
+  <String Key="LoginSkinName_30060">2026 Lễ hội Trăng Mùa Gặt</String>
+  <String Key="LoginSkinDesc_30060">Màn hình đăng nhập Lễ hội Trăng Mùa Gặt 2026</String>
+  <String Key="AdvisorName_40070">Những chú thỏ từ Mặt Trăng</String>
+  <String Key="AdvisorDesc_40070">Chúng lén rời chỗ làm và hát rất vui.</String>
+  <String Key="AdvisorName_40080">Thỏ Mặt Trăng mang thư</String>
+  <String Key="AdvisorDesc_40080">Nghe nói nó đến để tận hưởng Lễ hội Trăng Mùa Gặt.</String>
+  <String Key="SkinName_1059003">Thỏ Mặt Trăng Dandelyn</String>
+  <String Key="SkinDesc_1059003">Người ta đồn rằng bánh gạo được Dandelyn nện thật kỹ bằng búa của cô ấy ngon đến khó tin.
+
+Skin Lễ hội Trăng Mùa Gặt 2026</String>
+  <String Key="SkinName_1074001">Tinh Quân Ánh Trăng Du Hà</String>
+  <String Key="SkinDesc_1074001">&lt;i&gt;Các Thỏ Mặt Trăng! Mọi người biết là dù sau một năm mới xuống đây cũng không được quậy phá quá đâu, đúng không? Chúc mọi người chơi vui nhé!&lt;/i&gt;</String>
+  <String Key="FestivalMerch_Season73">Ưu đãi Lễ hội Trăng Mùa Gặt</String>
+  <String Key="SeasonalEventNumberFormat">Sự kiện Mùa {0}</String>
+  <String Key="SeasonalEvent">Sự kiện Mùa</String>
+  <String Key="SeasonalEventCeilFormat">Pick-up Mùa {0}</String>
 </Strings>

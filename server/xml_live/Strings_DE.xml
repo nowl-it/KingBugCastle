@@ -18000,10 +18000,7 @@ Die Erhöhung erlittener physischer Schäden stapelt sich nicht. Es gilt der hö
   <String Key="ResetPVPMatch">Neu festlegen</String>
   <String Key="CannotResetPVPMatchByWatchingAdsAlert">Alle heutigen Neu-Festlegungen wurden verbraucht.</String>
   <String Key="PVPDeckSettingReTryAdsPopupTitle">Aufstellung erneut versuchen</String>
-  <String Key="PVPDeckSettingReTryAdsPopupDesc">Möchtest du eine Werbung ansehen und kostenlos erneut versuchen?
-Beim Kauf des King God Pass werden die Werbungen im Spiel entfernt.
-Wenn du Juwelen verwendest, ist der heutige kostenlose Neuversuch per Werbung nicht verfügbar.</String>
-  <String Key="PVPDeckSettingReTryAdsCancelAlert">Wenn du schließt, wird der kostenlose Neuversuch per Werbung abgebrochen. Möchtest du den Neuversuch abbrechen?</String>
+  <String Key="ResetPVPMatchRemain">Zurücksetzen({0}/{1})</String>
   <String Key="SuperShieldAdaptabilityPer">Altar des Blutes {0} Verbessern
 Chance auf absolute Verteidigung +{1}%</String>
   <String Key="SuperShieldAdaptabilityPer_Piece">Altar des Blutes Verbessern
@@ -18218,56 +18215,86 @@ Dann wird die Heiligkeit dir helfen.</String>
   <String Key="SpecialPackage_1683">Vitacorde-Paket 1</String>
   <String Key="SpecialPackage_1684">Vitacorde-Paket 2</String>
   <String Key="SpecialPackage_1685">Vitacorde-Paket 3</String>
-  <String Key="BuffDataDesc_3300431">Pro Schutz {0} erhöht sich der Skill-Schaden-Faktor des Effekts zur Erhöhung des Grundschadens um +{1}%</String>
+  <String Key="BuffDataDesc_3300431">Effekt zur Erhöhung des Grundschadens pro 1 Schutz: Skill-Schaden-Multiplikator +{0}%</String>
   <String Key="BuffDataDesc_3300432">Abklingzeit {0} Sek.</String>
   <String Key="BuffDataDesc_3300433">Gewährt allen Verbündeten im Bereich außer sich selbst Gunst</String>
   <String Key="BuffDataDesc_3300434">Abklingzeit {0} Sek.</String>
-  <String Key="BuffDataDesc_3300435">Pro Schutz {0} erhöht sich der Skill-Schaden-Faktor des Effekts zur Erhöhung des Grundschadens um +{1}%</String>
+  <String Key="BuffDataDesc_3300435">Effekt zur Erhöhung des Grundschadens pro 1 Schutz: Skill-Schaden-Multiplikator +{0}%</String>
   <String Key="TreasureSkillDesc_3300430">Zu Beginn der Schlacht gilt nur der Effekt des Helden mit den meisten ★, der Vitacorde ausgerüstet hat.
 Der Skill-Schaden des Trägers wird auf den Wert zu Beginn der Schlacht fixiert.
 Bei Heilung von Verbündeten wird für {0} Sek. ein Feld erzeugt, das den Standard-Schaden von Verbündeten in Reichweite {1} um den Träger um {2}% des Skill-Schadens des Trägers erhöht (Abklingzeit {3} Sek.)</String>
-  <String Key="TreasureSkillDesc_3300431">Zu Beginn der Schlacht gilt nur der Effekt des Helden mit den meisten ★, der Vitacorde ausgerüstet hat.
-Der Skill-Schaden des Trägers wird auf den Wert zu Beginn der Schlacht fixiert.
-Bei Heilung von Verbündeten wird für {0} Sek. ein Feld erzeugt, das den Standard-Schaden von Verbündeten in Reichweite {1} um den Träger um {2}% des Skill-Schadens des Trägers erhöht (Abklingzeit {3} Sek.)
-Pro {4} Schutz +{5}% Skill-Schaden-Skalierung für die Standard-Schaden-Erhöhung</String>
-  <String Key="TreasureSkillDesc_3300433">Zu Beginn der Schlacht gilt nur der Effekt des Helden mit den meisten ★, der Vitacorde ausgerüstet hat.
-Der Skill-Schaden des Trägers wird auf den Wert zu Beginn der Schlacht fixiert.
-Bei Heilung von Verbündeten wird für {0} Sek. ein Feld erzeugt, das den Standard-Schaden von Verbündeten in Reichweite {1} um den Träger um {2}% des Skill-Schadens des Trägers erhöht (Abklingzeit {3} Sek.)
-Pro {4} Schutz +{5}% Skill-Schaden-Skalierung für die Standard-Schaden-Erhöhung
-Gewährt Verbündeten im Feld außer dem Träger Gunst</String>
+  <String Key="TreasureSkillDesc_3300431">Zu Schlachtbeginn gilt nur der Effekt des Helden mit den höchsten ★, der Vitacorde ausgerüstet hat
+Der Skill-Schaden des Trägers wird auf den Wert zu Schlachtbeginn fixiert
+Bei Heilung von Verbündeten entsteht für {0} Sek. ein Feld, das den Grundschaden verbündeter Einheiten in Reichweite {1} um den Träger um {2}% des Skill-Schadens des Trägers erhöht (Abklingzeit {3} Sek.)
+Effekt zur Erhöhung des Grundschadens pro 1 Schutz: Skill-Schaden-Multiplikator +{4}%</String>
+  <String Key="TreasureSkillDesc_3300433">Zu Schlachtbeginn gilt nur der Effekt des Helden mit den höchsten ★, der Vitacorde ausgerüstet hat
+Der Skill-Schaden des Trägers wird auf den Wert zu Schlachtbeginn fixiert
+Bei Heilung von Verbündeten entsteht für {0} Sek. ein Feld, das den Grundschaden verbündeter Einheiten in Reichweite {1} um den Träger um {2}% des Skill-Schadens des Trägers erhöht (Abklingzeit {3} Sek.)
+Effekt zur Erhöhung des Grundschadens pro 1 Schutz: Skill-Schaden-Multiplikator +{4}%
+Verleiht Verbündeten im Feld außer dem Träger Gunst</String>
   <String Key="SeasonalEventName_Season72">Flug der Drachen-Fest</String>
   <String Key="SeasonalEventMode_Season72">Flug der Drachen-Fest</String>
-  <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Temporärer Untername</String>
-  <String Key="TreasureDesc_50002">Vorläufige Beschreibung - Konzept für das Schmuckstück später ergänzen - Geplantes Konzept: Ein Stein? Ein Artefakt?, das sich MP von Pflanzen und Tieren in der Umgebung leiht, speichert und dann freisetzt</String>
-  <String Key="TreasureSkillName_50002">MP-Kombination</String>
-  <String Key="BuffDataName_3500021">Assimilation I</String>
-  <String Key="BuffDataName_3500022">MP-Barriere I</String>
-  <String Key="BuffDataName_3500023">MP-Resonanz</String>
-  <String Key="BuffDataName_3500024">MP-Barriere II</String>
-  <String Key="BuffDataName_3500025">Assimilation II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">Cor Orbis Pickup Spezial Shop</String>
-  <String Key="SpecialPackage_1690">Cor Orbis-Paket 1</String>
-  <String Key="SpecialPackage_1691">Cor Orbis-Paket 2</String>
-  <String Key="SpecialPackage_1692">Cor Orbis-Paket 3</String>
-  <String Key="BuffDataDesc_3500021">Für je {1}% Zauber-Kritischer Schaden über {0}% wird die Gesamtschaden-Erhöhung der verstärkten Fähigkeit mit {2} multipliziert</String>
-  <String Key="BuffDataDesc_3500022">Erlittener Schaden bis zur 3. Fähigkeitsnutzung {0}%</String>
-  <String Key="BuffDataDesc_3500023">Bei Verwendung einer verstärkten Fähigkeit wird dieselbe Fähigkeit zusätzlich mit {0}% Schaden auf 2 zufällige Ziele eingesetzt</String>
-  <String Key="BuffDataDesc_3500024">Erlittener Schaden bis zur 3. Fähigkeitsnutzung {0}%</String>
-  <String Key="BuffDataDesc_3500025">Für je {1}% Zauber-Kritischer Schaden über {0}% wird die Gesamtschaden-Erhöhung der verstärkten Fähigkeit mit {2} multipliziert</String>
-  <String Key="TreasureSkillDesc_3500020">Ab Beginn der Schlacht erhält der Held mit den meisten ★, der Cor Orbis ausgerüstet hat, bis zur 3. Fähigkeitsnutzung +{0}% Max. MP und {1}% weniger verursachten Gesamtschaden
-Die letzte Fähigkeit wird verstärkt und ihr Gesamtschaden steigt um +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">Ab Beginn der Schlacht erhält der Held mit den meisten ★, der Cor Orbis ausgerüstet hat, bis zur 3. Fähigkeitsnutzung +{0}% Max. MP und {1}% weniger verursachten Gesamtschaden
-Die letzte Fähigkeit wird verstärkt und ihr Gesamtschaden steigt um +{2}%
-Für je {4}% Zauber-Kritischer Schaden über {3}% wird die Gesamtschaden-Erhöhung der verstärkten Fähigkeit mit {5} multipliziert</String>
-  <String Key="TreasureSkillDesc_3500022">Ab Beginn der Schlacht erhält der Held mit den meisten ★, der Cor Orbis ausgerüstet hat, bis zur 3. Fähigkeitsnutzung +{0}% Max. MP und {1}% weniger verursachten Gesamtschaden
-Die letzte Fähigkeit wird verstärkt und ihr Gesamtschaden steigt um +{2}%
-Für je {4}% Zauber-Kritischer Schaden über {3}% wird die Gesamtschaden-Erhöhung der verstärkten Fähigkeit mit {5} multipliziert
-Erlittener Schaden bis zur 3. Fähigkeitsnutzung {6}%</String>
-  <String Key="TreasureSkillDesc_3500023">Ab Beginn der Schlacht erhält der Held mit den meisten ★, der Cor Orbis ausgerüstet hat, bis zur 3. Fähigkeitsnutzung +{0}% Max. MP und {1}% weniger verursachten Gesamtschaden
-Die letzte Fähigkeit wird verstärkt und ihr Gesamtschaden steigt um +{2}%
-Für je {4}% Zauber-Kritischer Schaden über {3}% wird die Gesamtschaden-Erhöhung der verstärkten Fähigkeit mit {5} multipliziert
-Erlittener Schaden bis zur 3. Fähigkeitsnutzung {6}%
-Bei Verwendung einer verstärkten Fähigkeit wird dieselbe Fähigkeit zusätzlich mit {7}% Schaden auf 2 zufällige Ziele eingesetzt</String>
+  <String Key="SpecialPackage_1690">Schmuckstück-Pick-up-Beschwörungsstein-Paket 1</String>
+  <String Key="SpecialPackage_1691">Schmuckstück-Pick-up-Beschwörungsstein-Paket 2</String>
+  <String Key="SpecialPackage_1692">Meirna-Paket</String>
+  <String Key="SpecialPackage_1693">Buch des fließenden Wassers-Paket</String>
   <String Key="AdsSummonRestrictionAlert">Pro Runde maximal {0} Mal möglich.</String>
+  <String Key="ThemeName_1003">Pick and Pass</String>
+  <String Key="ModeDesc_1003">Eine von zwei Optionen ist deine, die andere gehört dem Gegner!
+Triff die beste Wahl, vollende die beste Kombination und erringe im letzten Duell den Sieg!</String>
+  <String Key="PnP_PlayDesc">Bitte wähle die Einheit für Illusion {0}.
+Die nicht gewählte Einheit wird der gegnerischen Truppe zugewiesen.</String>
+  <String Key="PnP_ChoiceDone">Letzte Wahl abgeschlossen</String>
+  <String Key="PnP_BattleStart">Schlacht beginnt!</String>
+  <String Key="PnP_Devil_Conditions_100">Vertauscht Verbündete und Gegner.</String>
+  <String Key="PnP_Devil_Conditions_110">Entfernt den Helden auf Illusion 5 der eigenen Truppe.</String>
+  <String Key="PnP_Devil_Conditions_120">Friert 1 zufälligen Verbündeten 3 Sek. lang ein.</String>
+  <String Key="PnP_Devil_Conditions_130">Senkt die Gesamt-ANG aller Verbündeten um 20%.</String>
+  <String Key="PnP_Devil_Conditions_140">Alle verbündeten Helden können kein MP wiederherstellen.</String>
+  <String Key="PnP_Devil_Conditions_150">Alle verbündeten Helden können 3 Sek. lang keine Skills einsetzen.</String>
+  <String Key="PnP_Devil_Conditions_160">Betäubt alle verbündeten Helden 1 Sek. lang.</String>
+  <String Key="PnP_Devil_Conditions_170">Ändert die ★ aller Helden beider Seiten zufällig.</String>
+  <String Key="PnP_Devil_Conditions_180">Bei Niederlage: -25 Event Token von der Standard-Belohnung</String>
+  <String Key="PnP_Devil_Rewards_100">Nach der Änderung erhöht sich die ★ eines zufälligen verbündeten Helden um 1.
+(Bei Sieg zusätzlich +25 Event Token)</String>
+  <String Key="PnP_Devil_Rewards_110">Entfernt den Helden auf Illusion 1 der gegnerischen Truppe.
+(Bei Sieg zusätzlich +25 Event Token)</String>
+  <String Key="PnP_Devil_Rewards_120">Senkt die Gesamt-ANG der gegnerischen Truppe um 10%.
+(Bei Sieg: Saison-Event Token +25 zusätzlich)</String>
+  <String Key="PnP_Devil_Rewards_130">Erhöht den Basis-Widerstand aller Verbündeten um 200.
+(Bei Sieg: Saison-Event Token +25 zusätzlich)</String>
+  <String Key="PnP_Devil_Rewards_140">Alle verbündeten Helden starten mit 100% MP.
+(Bei Sieg zusätzlich +25 Event Token)</String>
+  <String Key="PnP_Devil_Rewards_150">Erhöht die ★ eines zufälligen verbündeten Helden um 2.
+(Bei Sieg zusätzlich +25 Event Token)</String>
+  <String Key="PnP_Devil_Rewards_160">Versetzt alle verbündeten Helden in Raserei (Gesamt-Bewegungsgeschwindigkeit/ANG-GESCHW +200%).
+(Bei Sieg: Saison-Event Token +25 zusätzlich)</String>
+  <String Key="PnP_Devil_Rewards_170">Bei Sieg zusätzlich +25 Event Token</String>
+  <String Key="PnP_Devil_Rewards_180">Bei Sieg zusätzlich +50 Event Token</String>
+  <String Key="ExclusiveBGM">Exklusive Hintergrundmusik</String>
+  <String Key="GachaNewDimensionUnitPer">Dimensionsheld erscheint</String>
+  <String Key="S73BundlePackagePanelDesc">Erhalte &lt;color=#ffcf68&gt;Held, Event-Skin, Login-Bildschirm, Berater, BGM und Map-Skin&lt;/color&gt; sowie &lt;color=#369DFF&gt;300 Juwelen&lt;/color&gt; auf einmal!</String>
+  <String Key="GachaDesc_8500">Du kannst einen Dimensionshelden erhalten.</String>
+  <String Key="RandomDimensionUnitCeilFormat">Dimensionsheld garantiert nach {0} Beschwörungen</String>
+  <String Key="SeasonalEventName_Season73">Erntemondfest</String>
+  <String Key="SeasonalEventMode_Season73">Erntemondfest</String>
+  <String Key="MapSkinDesc_30220">Map-Skin im Erntemondfest-Design</String>
+  <String Key="MapSkinName_30220">Erntemondfest</String>
+  <String Key="GachaName_8500">Dimensionsheld beschwören</String>
+  <String Key="LoginSkinName_30060">2026 Erntemondfest</String>
+  <String Key="LoginSkinDesc_30060">Login-Bildschirm 2026 Erntemondfest</String>
+  <String Key="AdvisorName_40070">Hasen vom Mond</String>
+  <String Key="AdvisorDesc_40070">Sie sind der Arbeit entkommen und singen fröhlich.</String>
+  <String Key="AdvisorName_40080">Mondhase mit dem Brief</String>
+  <String Key="AdvisorDesc_40080">Es ist wohl hier, um das Erntemondfest zu genießen.</String>
+  <String Key="SkinName_1059003">Mondhase Dandelyn</String>
+  <String Key="SkinDesc_1059003">Man sagt, Reiskuchen, den Dandelyn mit ihrem Hammer kräftig geklopft hat, sei unglaublich lecker.
+
+Skin zum Erntemondfest 2026</String>
+  <String Key="SkinName_1074001">Mondschein-Sternenfürst Suha</String>
+  <String Key="SkinDesc_1074001">&lt;i&gt;Mondhasen! Ihr wisst doch, dass ihr nicht zu viel Unfug treiben dürft, nur weil ihr nach einem Jahr wieder hier seid, oder? Habt alle Spaß und genießt die Zeit!&lt;/i&gt;</String>
+  <String Key="FestivalMerch_Season73">Erntemondfest-Angebote</String>
+  <String Key="SeasonalEventNumberFormat">Saison-{0}-Event</String>
+  <String Key="SeasonalEvent">Saison-Event</String>
+  <String Key="SeasonalEventCeilFormat">Saison-{0}-Pickup</String>
 </Strings>

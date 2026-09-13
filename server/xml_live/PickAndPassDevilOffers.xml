@@ -1,0 +1,103 @@
+<PickAndPassDevilOffers>
+	<!-- 선택과 집중 - 악마의 제안. 제안 ID는 100부터 10 간격. 트리거 ID = 60000 + 제안 ID(대가), +1(보상). 트리거가 없는 제안도 허용 -->
+	<!-- WinToken : 수락 후 승리 시 추가 토큰 / LoseToken : 수락 후 패배 시 가감 토큰(음수 가능). 서버가 이 값으로 지급량을 계산한다 -->
+	<PickAndPassDevilOffer ID='100'>
+		<Comment>아군-적군 영웅 교체 / 교체 후 아군 성급 +1</Comment>
+		<Weight>10</Weight>
+		<WinToken>25</WinToken>
+		<Penalty>
+			<Trigger>60100</Trigger>
+		</Penalty>
+		<Reward>
+			<Trigger>60101</Trigger>
+		</Reward>
+	</PickAndPassDevilOffer>
+
+	<PickAndPassDevilOffer ID='110'>
+		<Comment>아군 5번 환영 영웅 제거 / 적 1번 환영 영웅 제거</Comment>
+		<Weight>10</Weight>
+		<WinToken>25</WinToken>
+		<Penalty>
+			<Trigger>60110</Trigger>
+		</Penalty>
+		<Reward>
+			<Trigger>60111</Trigger>
+		</Reward>
+	</PickAndPassDevilOffer>
+
+	<PickAndPassDevilOffer ID='120'>
+		<Comment>랜덤 아군 1명 3초 빙결 / 적 공격력 -10%</Comment>
+		<Weight>10</Weight>
+		<WinToken>25</WinToken>
+		<Penalty>
+			<Trigger>60120</Trigger>
+		</Penalty>
+		<Reward>
+			<Trigger>60121</Trigger>
+		</Reward>
+	</PickAndPassDevilOffer>
+
+	<PickAndPassDevilOffer ID='130'>
+		<Comment>아군 공격력 -20% / 아군 방어력 +200</Comment>
+		<Weight>10</Weight>
+		<WinToken>25</WinToken>
+		<Penalty>
+			<Trigger>60130</Trigger>
+		</Penalty>
+		<Reward>
+			<Trigger>60131</Trigger>
+		</Reward>
+	</PickAndPassDevilOffer>
+
+	<PickAndPassDevilOffer ID='140'>
+		<Comment>아군 마나 회복 불가 / 아군 마나 100% 시작</Comment>
+		<Weight>10</Weight>
+		<WinToken>25</WinToken>
+		<Penalty>
+			<Trigger>60140</Trigger>
+		</Penalty>
+		<Reward>
+			<Trigger>60141</Trigger>
+		</Reward>
+	</PickAndPassDevilOffer>
+
+	<PickAndPassDevilOffer ID='150'>
+		<Comment>아군 3초 스킬 사용 불가 / 아군 성급 +2</Comment>
+		<Weight>10</Weight>
+		<WinToken>25</WinToken>
+		<Penalty>
+			<Trigger>60150</Trigger>
+		</Penalty>
+		<Reward>
+			<Trigger>60151</Trigger>
+		</Reward>
+	</PickAndPassDevilOffer>
+
+	<PickAndPassDevilOffer ID='160'>
+		<Comment>아군 3초 기절 / 모든 영웅 광폭화</Comment>
+		<Weight>10</Weight>
+		<WinToken>25</WinToken>
+		<Penalty>
+			<Trigger>60160</Trigger>
+		</Penalty>
+		<Reward>
+			<Trigger>60161</Trigger>
+		</Reward>
+	</PickAndPassDevilOffer>
+
+	<PickAndPassDevilOffer ID='170'>
+		<Comment>아군-적군 전체 성급 랜덤 셔플 / 보상 트리거 없음 (승리 토큰만)</Comment>
+		<Weight>10</Weight>
+		<WinToken>25</WinToken>
+		<Penalty>
+			<Trigger>60170</Trigger>
+		</Penalty>
+	</PickAndPassDevilOffer>
+
+	<PickAndPassDevilOffer ID='180'>
+		<Comment>전투 효과 없음. 패배 시 토큰 -25 / 승리 시 토큰 +50</Comment>
+		<Weight>10</Weight>
+		<WinToken>50</WinToken>
+		<LoseToken>-25</LoseToken>
+	</PickAndPassDevilOffer>
+</PickAndPassDevilOffers>

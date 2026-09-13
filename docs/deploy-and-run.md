@@ -177,7 +177,7 @@ adb -s <serial> shell am start -n com.nowl.castle/co.ab180.airbridge.unity.Airbr
 Healthy boot in logcat: `LibMainWrap → libxigncode.so → libmain_real.so → Unity il2cpp`, then
 `Hooked BattleManager.Update` / `Hooked PostListItem.Set`. Then the TLS log fills with `200 OK`.
 
-> Modern builds (v171/v172) use the unified builder
+> Modern builds (v171+) use the unified builder
 > (`server/builders/build_private.py`), `AirbridgeActivity`, and plain HTTP - see
 > [private-build.md](private-build.md).
 

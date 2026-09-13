@@ -2735,5 +2735,17 @@
                 <Overcome>10</Overcome>
             </TestTreasure>
         </TestTreasures>
+    </EarlyAccessModeInfo>
+    <EarlyAccessModeInfo ID="1730" Inherit="1520">
+        <StartAt>20260917_000000</StartAt>
+        <EndAt>20260921_105959</EndAt>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30043</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
     </EarlyAccessModeInfo> 
 </EarlyAccessModeInfos>

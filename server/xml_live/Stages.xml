@@ -12493,6 +12493,140 @@
 		<Gold>15</Gold>
 	</Stage>
 	
+	<!-- 선택과 집중 프리셋1: 전열 일자 -->
+	<Stage ID='103000' Theme='1003'>
+		<SpawnData Team='1' Y='3'>
+			<Spawn ID='99990' Pos='1' Level='3' StatueIndex='0'/>
+			<Spawn ID='99990' Pos='2' Level='3' StatueIndex='1'/>
+			<Spawn ID='99990' Pos='3' Level='3' StatueIndex='2'/>
+			<Spawn ID='99990' Pos='4' Level='3' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='5' Level='3' StatueIndex='4'/>
+		</SpawnData>
+
+		<SpawnData Team='2' Y='3'>
+			<Spawn ID='99990' Pos='1' Level='3' StatueIndex='0'/>
+			<Spawn ID='99990' Pos='2' Level='3' StatueIndex='1'/>
+			<Spawn ID='99990' Pos='3' Level='3' StatueIndex='2'/>
+			<Spawn ID='99990' Pos='4' Level='3' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='5' Level='3' StatueIndex='4'/>
+		</SpawnData>
+	</Stage>
+
+	<!-- 선택과 집중 프리셋2: 2전열 3중열 -->
+	<Stage ID='103001' Theme='1003'>
+		<SpawnData Team='1' Y='3'>
+			<Spawn ID='99990' Pos='2' Level='5' StatueIndex='0'/>
+			<Spawn ID='99990' Pos='4' Level='5' StatueIndex='1'/>
+		</SpawnData>
+		<SpawnData Team='1' Y='2'>
+			<Spawn ID='99990' Pos='1' Level='3' StatueIndex='2'/>
+			<Spawn ID='99990' Pos='3' Level='3' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='5' Level='3' StatueIndex='4'/>
+		</SpawnData>
+
+		<SpawnData Team='2' Y='3'>
+			<Spawn ID='99990' Pos='2' Level='5' StatueIndex='0'/>
+			<Spawn ID='99990' Pos='4' Level='5' StatueIndex='1'/>
+		</SpawnData>
+		<SpawnData Team='2' Y='2'>
+			<Spawn ID='99990' Pos='1' Level='3' StatueIndex='2'/>
+			<Spawn ID='99990' Pos='3' Level='3' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='5' Level='3' StatueIndex='4'/>
+		</SpawnData>
+	</Stage>
+
+	<!-- 선택과 집중 프리셋3: 3전열 2후열 -->
+	<Stage ID='103002' Theme='1003'>
+		<SpawnData Team='1' Y='3'>
+			<Spawn ID='99990' Pos='1' Level='3' StatueIndex='0'/>
+			<Spawn ID='99990' Pos='3' Level='3' StatueIndex='1'/>
+			<Spawn ID='99990' Pos='5' Level='3' StatueIndex='2'/>
+		</SpawnData>
+		<SpawnData Team='1' Y='1'>
+			<Spawn ID='99990' Pos='2' Level='5' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='4' Level='5' StatueIndex='4'/>
+		</SpawnData>
+
+		<SpawnData Team='2' Y='3'>
+			<Spawn ID='99990' Pos='1' Level='3' StatueIndex='0'/>
+			<Spawn ID='99990' Pos='3' Level='3' StatueIndex='1'/>
+			<Spawn ID='99990' Pos='5' Level='3' StatueIndex='2'/>
+		</SpawnData>
+		<SpawnData Team='2' Y='1'>
+			<Spawn ID='99990' Pos='2' Level='5' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='4' Level='5' StatueIndex='4'/>
+		</SpawnData>
+	</Stage>
+
+	<!-- 선택과 집중 프리셋4: V자 대형 -->
+	<Stage ID='103003' Theme='1003'>
+		<SpawnData Team='1' Y='3'>
+			<Spawn ID='99990' Pos='3' Level='5' StatueIndex='0'/>
+		</SpawnData>
+		<SpawnData Team='1' Y='2'>
+			<Spawn ID='99990' Pos='2' Level='3' StatueIndex='1'/>
+			<Spawn ID='99990' Pos='4' Level='3' StatueIndex='2'/>
+		</SpawnData>
+		<SpawnData Team='1' Y='1'>
+			<Spawn ID='99990' Pos='1' Level='1' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='5' Level='1' StatueIndex='4'/>
+		</SpawnData>
+
+		<SpawnData Team='2' Y='3'>
+			<Spawn ID='99990' Pos='3' Level='5' StatueIndex='0'/>
+		</SpawnData>
+		<SpawnData Team='2' Y='2'>
+			<Spawn ID='99990' Pos='2' Level='3' StatueIndex='1'/>
+			<Spawn ID='99990' Pos='4' Level='3' StatueIndex='2'/>
+		</SpawnData>
+		<SpawnData Team='2' Y='1'>
+			<Spawn ID='99990' Pos='1' Level='1' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='5' Level='1' StatueIndex='4'/>
+		</SpawnData>
+	</Stage>
+
+	<!-- 선택과 집중 프리셋5: 후열 밀집 -->
+	<Stage ID='103004' Theme='1003'>
+		<SpawnData Team='1' Y='2'>
+			<Spawn ID='99990' Pos='1' Level='5' StatueIndex='0'/>
+			<Spawn ID='99990' Pos='5' Level='4' StatueIndex='1'/>
+		</SpawnData>
+		<SpawnData Team='1' Y='0'>
+			<Spawn ID='99990' Pos='2' Level='3' StatueIndex='2'/>
+			<Spawn ID='99990' Pos='3' Level='2' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='4' Level='1' StatueIndex='4'/>
+		</SpawnData>
+
+		<SpawnData Team='2' Y='2'>
+			<Spawn ID='99990' Pos='1' Level='5' StatueIndex='0'/>
+			<Spawn ID='99990' Pos='5' Level='4' StatueIndex='1'/>
+		</SpawnData>
+		<SpawnData Team='2' Y='0'>
+			<Spawn ID='99990' Pos='2' Level='1' StatueIndex='2'/>
+			<Spawn ID='99990' Pos='3' Level='2' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='4' Level='3' StatueIndex='4'/>
+		</SpawnData>
+	</Stage>
+
+	<!-- 선택과 집중 프리셋6: 리버스성급대열 -->
+	<Stage ID='103005' Theme='1003'>
+		<SpawnData Team='1' Y='3'>
+			<Spawn ID='99990' Pos='1' Level='1' StatueIndex='0'/>
+			<Spawn ID='99990' Pos='2' Level='2' StatueIndex='1'/>
+			<Spawn ID='99990' Pos='3' Level='3' StatueIndex='2'/>
+			<Spawn ID='99990' Pos='4' Level='4' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='5' Level='5' StatueIndex='4'/>
+		</SpawnData>
+
+		<SpawnData Team='2' Y='3'>
+			<Spawn ID='99990' Pos='1' Level='5' StatueIndex='0'/>
+			<Spawn ID='99990' Pos='2' Level='4' StatueIndex='1'/>
+			<Spawn ID='99990' Pos='3' Level='3' StatueIndex='2'/>
+			<Spawn ID='99990' Pos='4' Level='2' StatueIndex='3'/>
+			<Spawn ID='99990' Pos='5' Level='1' StatueIndex='4'/>
+		</SpawnData>
+	</Stage>
+
 	<!-- 탑 스테이지 ID 정책 3(탑 식별자),00(시즌번호),000(층번호),00(스테이지 번호) 
 e.g. 19시즌 탑 1층 1 스테이지 ID = 31900101 -->
 	<Stage ID="30100101" Theme="300">

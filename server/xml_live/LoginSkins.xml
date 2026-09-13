@@ -207,4 +207,20 @@
 		<AlternateReward Type="Token_SKIN" Count="7" />
 	</LoginSkin>
 
+	<LoginSkin ID="30060">
+		<Comment>2026 달맞이 축제</Comment>
+		<IconSprite>SeasonalEventToken_Moon</IconSprite>
+
+		<MinVersion>173000</MinVersion>
+		<Grade>2</Grade>
+		<LoginSceneId>30005</LoginSceneId>
+		<Sprite>Title_MoonLight_Event</Sprite>
+
+		<!-- 패키지 전용 (스킨 소환 제외) -->
+		<GachaAvailable>false</GachaAvailable>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+	</LoginSkin>
+
 </LoginSkins>

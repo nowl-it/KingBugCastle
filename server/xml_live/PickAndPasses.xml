@@ -1,0 +1,962 @@
+<PickAndPasses>
+	<PickAndPass ID='10000'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='13'/>
+			<Option Type='Unit' TypeId='25'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='10100'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='15'/>
+			<Option Type='Unit' TypeId='44'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='10200'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='18'/>
+			<Option Type='Unit' TypeId='45'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='10300'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='40'/>
+			<Option Type='Unit' TypeId='35'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='10400'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='19'/>
+			<Option Type='Unit' TypeId='30'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='10500'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='28'/>
+			<Option Type='Unit' TypeId='33'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='10600'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='25'/>
+			<Option Type='Unit' TypeId='26'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='10700'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='23'/>
+			<Option Type='Unit' TypeId='58'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='10800'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='3'/>
+			<Option Type='Unit' TypeId='18'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='10900'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='46'/>
+			<Option Type='Unit' TypeId='20'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='11000'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='35'/>
+			<Option Type='Unit' TypeId='16'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='11100'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='1'/>
+			<Option Type='Unit' TypeId='2'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='11200'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='29'/>
+			<Option Type='Unit' TypeId='7'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='11300'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='55'/>
+			<Option Type='Unit' TypeId='67'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='11400'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='15'/>
+			<Option Type='Unit' TypeId='51'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='11500'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='54'/>
+			<Option Type='Unit' TypeId='36'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='11600'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='8'/>
+			<Option Type='Unit' TypeId='65'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='11700'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='6'/>
+			<Option Type='Unit' TypeId='62'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='11800'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='22'/>
+			<Option Type='Unit' TypeId='53'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='11900'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='46'/>
+			<Option Type='Unit' TypeId='68'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='12000'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Season>73</Season>
+		<Options>
+			<Option Type='Unit' TypeId='78'/>
+			<Option Type='Unit' TypeId='77'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='12100'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Season>73</Season>
+		<Options>
+			<Option Type='Unit' TypeId='78'/>
+			<Option Type='Unit' TypeId='77'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='12200'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Season>73</Season>
+		<Options>
+			<Option Type='Unit' TypeId='78'/>
+			<Option Type='Unit' TypeId='77'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='12300'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Season>73</Season>
+		<Options>
+			<Option Type='Unit' TypeId='78'/>
+			<Option Type='Unit' TypeId='77'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='12400'>
+		<RoundIndex>1</RoundIndex>
+		<PlaceValues>1</PlaceValues>
+		<Season>73</Season>
+		<Options>
+			<Option Type='Unit' TypeId='78'/>
+			<Option Type='Unit' TypeId='77'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='20000'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='3'/>
+			<Option Type='Unit' TypeId='16'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='20100'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='34'/>
+			<Option Type='Unit' TypeId='36'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='20200'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<NonAppearanceIds>11200</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='29'/>
+			<Option Type='Unit' TypeId='35'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='20300'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='26'/>
+			<Option Type='Unit' TypeId='43'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='20400'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='32'/>
+			<Option Type='Unit' TypeId='42'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='20500'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='63'/>
+			<Option Type='Unit' TypeId='68'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='20600'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='59'/>
+			<Option Type='Unit' TypeId='24'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='20700'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<NonAppearanceIds>10700</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='58'/>
+			<Option Type='Unit' TypeId='16'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='20800'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<NonAppearanceIds>11000</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='35'/>
+			<Option Type='Unit' TypeId='43'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='20900'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='60'/>
+			<Option Type='Unit' TypeId='30'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='21000'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='45'/>
+			<Option Type='Unit' TypeId='50'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='21100'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<NonAppearanceIds>12000,12100,12200,12300,12400</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='69'/>
+			<Option Type='Unit' TypeId='37'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='21200'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='33'/>
+			<Option Type='Unit' TypeId='61'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='21300'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<NonAppearanceIds>10000</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='13'/>
+			<Option Type='Unit' TypeId='21'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='21400'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='44'/>
+			<Option Type='Unit' TypeId='16'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='21500'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='3'/>
+			<Option Type='Unit' TypeId='15'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='21600'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='56'/>
+			<Option Type='Unit' TypeId='30'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='21700'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<NonAppearanceIds>10400</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='24'/>
+			<Option Type='Unit' TypeId='19'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='21800'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<NonAppearanceIds>10600</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='25'/>
+			<Option Type='Unit' TypeId='57'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='21900'>
+		<RoundIndex>2</RoundIndex>
+		<PlaceValues>2</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='60'/>
+			<Option Type='Unit' TypeId='70'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='30000'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<NonAppearanceIds>11800</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='48'/>
+			<Option Type='Unit' TypeId='53'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='30100'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='71'/>
+			<Option Type='Unit' TypeId='43'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='30200'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<NonAppearanceIds>21000</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='64'/>
+			<Option Type='Unit' TypeId='50'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='30300'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='74'/>
+			<Option Type='Unit' TypeId='64'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='30400'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='52'/>
+			<Option Type='Unit' TypeId='39'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='30500'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='34'/>
+			<Option Type='Unit' TypeId='38'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='30600'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='72'/>
+			<Option Type='Unit' TypeId='45'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='30700'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='73'/>
+			<Option Type='Unit' TypeId='67'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='30800'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<NonAppearanceIds>20100</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='34'/>
+			<Option Type='Unit' TypeId='36'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='30900'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='55'/>
+			<Option Type='Unit' TypeId='68'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='31000'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<NonAppearanceIds>20700</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='58'/>
+			<Option Type='Unit' TypeId='43'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='31100'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='42'/>
+			<Option Type='Unit' TypeId='49'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='31200'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='24'/>
+			<Option Type='Unit' TypeId='36'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='31300'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='48'/>
+			<Option Type='Unit' TypeId='22'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='31400'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='58'/>
+			<Option Type='Unit' TypeId='29'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='31500'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='56'/>
+			<Option Type='Unit' TypeId='41'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='31600'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='14'/>
+			<Option Type='Unit' TypeId='19'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='31700'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='38'/>
+			<Option Type='Unit' TypeId='37'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='31800'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='10'/>
+			<Option Type='Unit' TypeId='31'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='31900'>
+		<RoundIndex>3</RoundIndex>
+		<PlaceValues>3</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='73'/>
+			<Option Type='Unit' TypeId='74'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='40000'>
+		<RoundIndex>4</RoundIndex>
+		<PlaceValues>1,2,3</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='1'/>
+			<Option Type='Item' TypeId='2'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='40100'>
+		<RoundIndex>4</RoundIndex>
+		<PlaceValues>1,2,3</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='1'/>
+			<Option Type='Item' TypeId='3'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='40200'>
+		<RoundIndex>4</RoundIndex>
+		<PlaceValues>1,2,3</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='1'/>
+			<Option Type='Item' TypeId='4'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='40300'>
+		<RoundIndex>4</RoundIndex>
+		<PlaceValues>1,2,3</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='2'/>
+			<Option Type='Item' TypeId='3'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='40400'>
+		<RoundIndex>4</RoundIndex>
+		<PlaceValues>1,2,3</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='2'/>
+			<Option Type='Item' TypeId='4'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='40500'>
+		<RoundIndex>4</RoundIndex>
+		<PlaceValues>1,2,3</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='3'/>
+			<Option Type='Item' TypeId='4'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='50000'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='14'/>
+			<Option Type='Unit' TypeId='47'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='50100'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='40'/>
+			<Option Type='Unit' TypeId='75'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='50200'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='67'/>
+			<Option Type='Unit' TypeId='39'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='50300'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='1'/>
+			<Option Type='Unit' TypeId='47'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='50400'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='49'/>
+			<Option Type='Unit' TypeId='25'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='50500'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='20'/>
+			<Option Type='Unit' TypeId='61'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='50600'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='68'/>
+			<Option Type='Unit' TypeId='75'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='50700'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='52'/>
+			<Option Type='Unit' TypeId='32'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='50800'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='31'/>
+			<Option Type='Unit' TypeId='64'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='50900'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='59'/>
+			<Option Type='Unit' TypeId='66'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='51000'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='38'/>
+			<Option Type='Unit' TypeId='76'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='51100'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='25'/>
+			<Option Type='Unit' TypeId='67'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='51200'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='52'/>
+			<Option Type='Unit' TypeId='2'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='51300'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='25'/>
+			<Option Type='Unit' TypeId='49'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='51400'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='76'/>
+			<Option Type='Unit' TypeId='24'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='51500'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='48'/>
+			<Option Type='Unit' TypeId='53'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='51600'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='59'/>
+			<Option Type='Unit' TypeId='31'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='51700'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='31'/>
+			<Option Type='Unit' TypeId='56'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='51800'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='10'/>
+			<Option Type='Unit' TypeId='16'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='51900'>
+		<RoundIndex>5</RoundIndex>
+		<PlaceValues>4</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='65'/>
+			<Option Type='Unit' TypeId='52'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='60000'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<NonAppearanceIds>50900</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='66'/>
+			<Option Type='Unit' TypeId='28'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='60100'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<NonAppearanceIds>50900,51600</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='24'/>
+			<Option Type='Unit' TypeId='59'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='60200'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='33'/>
+			<Option Type='Unit' TypeId='62'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='60300'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='32'/>
+			<Option Type='Unit' TypeId='58'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='60400'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<NonAppearanceIds>50900,51600</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='66'/>
+			<Option Type='Unit' TypeId='59'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='60500'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<NonAppearanceIds>50300</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='1'/>
+			<Option Type='Unit' TypeId='36'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='60600'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='33'/>
+			<Option Type='Unit' TypeId='29'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='60700'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='37'/>
+			<Option Type='Unit' TypeId='28'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='60800'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='32'/>
+			<Option Type='Unit' TypeId='8'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='60900'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<NonAppearanceIds>51900</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='69'/>
+			<Option Type='Unit' TypeId='52'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='61000'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='76'/>
+			<Option Type='Unit' TypeId='69'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='61100'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<NonAppearanceIds>50900</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='8'/>
+			<Option Type='Unit' TypeId='66'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='61200'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='74'/>
+			<Option Type='Unit' TypeId='30'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='61300'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='51'/>
+			<Option Type='Unit' TypeId='18'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='61400'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<NonAppearanceIds>50100</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='75'/>
+			<Option Type='Unit' TypeId='59'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='61500'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='18'/>
+			<Option Type='Unit' TypeId='37'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='61600'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<NonAppearanceIds>50900</NonAppearanceIds>
+		<Options>
+			<Option Type='Unit' TypeId='28'/>
+			<Option Type='Unit' TypeId='66'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='61700'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='45'/>
+			<Option Type='Unit' TypeId='67'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='61800'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='51'/>
+			<Option Type='Unit' TypeId='44'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='61900'>
+		<RoundIndex>6</RoundIndex>
+		<PlaceValues>5</PlaceValues>
+		<Options>
+			<Option Type='Unit' TypeId='37'/>
+			<Option Type='Unit' TypeId='22'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='70000'>
+		<RoundIndex>7</RoundIndex>
+		<PlaceValues>4,5</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='1'/>
+			<Option Type='Item' TypeId='2'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='70100'>
+		<RoundIndex>7</RoundIndex>
+		<PlaceValues>4,5</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='1'/>
+			<Option Type='Item' TypeId='3'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='70200'>
+		<RoundIndex>7</RoundIndex>
+		<PlaceValues>4,5</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='1'/>
+			<Option Type='Item' TypeId='4'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='70300'>
+		<RoundIndex>7</RoundIndex>
+		<PlaceValues>4,5</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='2'/>
+			<Option Type='Item' TypeId='3'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='70400'>
+		<RoundIndex>7</RoundIndex>
+		<PlaceValues>4,5</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='2'/>
+			<Option Type='Item' TypeId='4'/>
+		</Options>
+	</PickAndPass>
+	<PickAndPass ID='70500'>
+		<RoundIndex>7</RoundIndex>
+		<PlaceValues>4,5</PlaceValues>
+		<Options>
+			<Option Type='Item' TypeId='3'/>
+			<Option Type='Item' TypeId='4'/>
+		</Options>
+	</PickAndPass>
+</PickAndPasses>

@@ -15222,11 +15222,10 @@
     </BuffData>
 
     <BuffData ID="3300431" Inherit="3300430">
-        <Comment>수호 10당 기본 피해가 주문력의 1%만큼 추가 상승</Comment>
+        <Comment>수호 1당 기본 피해가 주문력의 0.1%만큼 추가 상승</Comment>
 
         <DescParams>
-            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
-            <Const>1</Const>
+            <InnerText Mag="0.01" Digit="-2">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
         </DescParams>
 
         <TotalDescParams>
@@ -15234,8 +15233,7 @@
             <Range>./BuffOptions[3]/RangeInfo</Range>
             <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
             <InnerText>./BuffOptions[2]/CoolTime</InnerText>
-            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
-            <Const>1</Const>
+            <InnerText Mag="0.01" Digit="-2">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
         </TotalDescParams>
 
         <!-- 주문력 고정 -->
@@ -15266,8 +15264,7 @@
             <Range>./BuffOptions[3]/RangeInfo</Range>
             <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
             <InnerText>./BuffOptions[2]/CoolTime</InnerText>
-            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
-            <Const>1</Const>
+            <InnerText Mag="0.01" Digit="-2">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
         </TotalDescParams>
 
         <!-- 주문력 고정 -->
@@ -15295,8 +15292,7 @@
             <Range>./BuffOptions[3]/RangeInfo</Range>
             <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
             <InnerText>./BuffOptions[2]/CoolTime</InnerText>
-            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
-            <Const>1</Const>
+            <InnerText Mag="0.01" Digit="-2">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
         </TotalDescParams>
 
         <!-- 주문력 고정 -->
@@ -15346,8 +15342,7 @@
             <Range>./BuffOptions[3]/RangeInfo</Range>
             <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
             <InnerText>./BuffOptions[2]/CoolTime</InnerText>
-            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
-            <Const>1</Const>
+            <InnerText Mag="0.01" Digit="-2">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
         </TotalDescParams>
         
         <!-- 주문력 고정 -->
@@ -15368,11 +15363,11 @@
     </BuffData>
 
     <BuffData ID="3300435" Inherit="3300434">
-        <Comment>수호 10당 기본 피해가 주문력의 1%만큼 추가 상승</Comment>
+        <Comment>수호 1당 기본 피해가 주문력의 0.1%만큼 추가 상승 (누적 0.2%)</Comment>
 
+        <!-- 돌파 증분 표기: (20 - 10) * 0.01 = 0.1. 상위 BuffData와의 차분이라 단일 노드로 유도 불가 -->
         <DescParams>
-            <Const>10</Const>
-            <Const>1</Const>
+            <Const>0.1</Const>
         </DescParams>
 
         <TotalDescParams>
@@ -15380,8 +15375,7 @@
             <Range>./BuffOptions[3]/RangeInfo</Range>
             <InnerText MagTreasureLevel="true">./BuffOptions[3]/Values/TreasureLevel</InnerText>
             <InnerText>./BuffOptions[2]/CoolTime</InnerText>
-            <InnerText Mag="100" Inverse="true">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
-            <Const>1</Const>
+            <InnerText Mag="0.01" Digit="-2">./BuffOptions[3]/Values/DefDenNoLevel</InnerText>
         </TotalDescParams>
         
         <!-- 주문력 고정 -->

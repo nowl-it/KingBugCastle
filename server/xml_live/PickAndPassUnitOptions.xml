@@ -1,0 +1,316 @@
+<PickAndPassUnitOptions>
+	<UnitOption ID='1'>
+		<UnitId>10210</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='2'>
+		<UnitId>10070</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='3'>
+		<UnitId>10020</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='4'>
+		<UnitId>20000</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='5'>
+		<UnitId>20010</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='6'>
+		<UnitId>10040</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='7'>
+		<UnitId>10050</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='8'>
+		<UnitId>10060</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='9'>
+		<UnitId>10070</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='10'>
+		<UnitId>10080</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='11'>
+		<UnitId>10050</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='12'>
+		<UnitId>10020</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='13'>
+		<UnitId>10000</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='14'>
+		<UnitId>10260</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='15'>
+		<UnitId>10150</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='16'>
+		<UnitId>10100</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='17'>
+		<UnitId>10040</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='18'>
+		<UnitId>10190</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='19'>
+		<UnitId>10140</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='20'>
+		<UnitId>10120</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='21'>
+		<UnitId>10240</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='22'>
+		<UnitId>10230</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='23'>
+		<UnitId>10170</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='24'>
+		<UnitId>10180</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='25'>
+		<UnitId>10110</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='26'>
+		<UnitId>10270</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='27'>
+		<UnitId>10060</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='28'>
+		<UnitId>10090</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='29'>
+		<UnitId>10220</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='30'>
+		<UnitId>10250</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='31'>
+		<UnitId>10300</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='32'>
+		<UnitId>10290</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='33'>
+		<UnitId>10330</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='34'>
+		<UnitId>10340</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='35'>
+		<UnitId>10320</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='36'>
+		<UnitId>10310</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='37'>
+		<UnitId>10370</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='38'>
+		<UnitId>10360</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='39'>
+		<UnitId>10380</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='40'>
+		<UnitId>10350</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='41'>
+		<UnitId>10430</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='42'>
+		<UnitId>10440</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='43'>
+		<UnitId>10410</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='44'>
+		<UnitId>10390</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='45'>
+		<UnitId>10420</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='46'>
+		<UnitId>10450</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='47'>
+		<UnitId>10480</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='48'>
+		<UnitId>10510</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='49'>
+		<UnitId>10490</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='50'>
+		<UnitId>10530</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='51'>
+		<UnitId>10540</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='52'>
+		<UnitId>10570</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='53'>
+		<UnitId>10560</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='54'>
+		<UnitId>10520</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='55'>
+		<UnitId>10590</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='56'>
+		<UnitId>10580</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='57'>
+		<UnitId>10600</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='58'>
+		<UnitId>10630</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='59'>
+		<UnitId>10670</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='60'>
+		<UnitId>10640</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='61'>
+		<UnitId>10720</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='62'>
+		<UnitId>10680</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='63'>
+		<UnitId>10690</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='64'>
+		<UnitId>10700</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='65'>
+		<UnitId>10710</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='66'>
+		<UnitId>10730</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='67'>
+		<UnitId>10750</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='68'>
+		<UnitId>10770</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='69'>
+		<UnitId>10740</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='70'>
+		<UnitId>10280</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='71'>
+		<UnitId>10500</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='72'>
+		<UnitId>10010</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='73'>
+		<UnitId>10620</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='74'>
+		<UnitId>10030</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='75'>
+		<UnitId>10760</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='76'>
+		<UnitId>10200</UnitId>
+		<Level>8</Level>
+	</UnitOption>
+	<UnitOption ID='77'>
+		<UnitId>10590</UnitId>
+		<Level>8</Level>
+		<SkinId>1059003</SkinId>
+	</UnitOption>
+	<UnitOption ID='78'>
+		<UnitId>10740</UnitId>
+		<Level>8</Level>
+		<SkinId>1074001</SkinId>
+	</UnitOption>
+</PickAndPassUnitOptions>

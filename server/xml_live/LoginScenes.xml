@@ -247,4 +247,12 @@ xx = 인덱스
         <!-- <BottomGradientColor>FFEBC9</BottomGradientColor> -->
         <DisableBGAndEffects>true</DisableBGAndEffects>
     </LoginScene>
+
+    <LoginScene ID="30005">
+        <Illust>Title_MoonLight_Event</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <IllustScale>1</IllustScale>
+        <DisableBGAndEffects>true</DisableBGAndEffects>
+    </LoginScene>
 </LoginScenes>

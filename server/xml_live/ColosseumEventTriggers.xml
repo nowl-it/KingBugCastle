@@ -182,7 +182,7 @@
 		<EnemyUnitEvents>
 			<EventTrigger>
 				<Trigger Type="StartBattle"/>
-				<Event Type="TriggerUnitUseSkill" HighestUnit="1" Value="80050"/>
+				<Event Type="TriggerUnitUseSkill" HighestUnit="1" Value="80030"/>
 			</EventTrigger>
 		</EnemyUnitEvents>
 	</EventTrigger>

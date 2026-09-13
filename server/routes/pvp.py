@@ -296,6 +296,15 @@ def r_arena_matching(body, st):
     back to the player's own deck, which is what training mode does anyway."""
     return {"targets": srv._opponents(st, 3, _pvp_deck_info)}
 
+
+def r_arena_matching_reroll(body, st):
+    """v173 reroll response adds currency and usage count to the normal targets."""
+    used = int(st.get("pvpMatchRerollUsedCount", 0)) + 1
+    st["pvpMatchRerollUsedCount"] = used
+    save_state(st)
+    return {**r_arena_matching(body, st), "cash": st.get("cash", 0),
+            "pvpMatchRerollUsedCount": used}
+
 def r_colosseum_match(body, st):
     """ColosseumMatchResponseModel. No realtime match server exists here, so the
     address is empty and the client falls through to its own bot stage - the same
@@ -407,6 +416,7 @@ def handlers():
     return {
         "/pvp/info": r_pvp_info,
         "/pvp/matching": r_arena_matching,
+        "/pvp/matching-reroll": r_arena_matching_reroll,
         "/pvp/test-matching": r_arena_matching,
         "/pvp/fetch-log-history": r_arena_logs,
         "/pvp/fetch-log-detail": r_arena_logs,

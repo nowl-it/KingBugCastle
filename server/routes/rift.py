@@ -1127,6 +1127,13 @@ def r_rift_buy_gauge(body, st):
     }
 
 
+def r_rift_ad_charge_gauge(body, st):
+    """v173 ad charge response; ads are unavailable on the private client."""
+    ensure_rift_state(st)
+    return {"riftGauge": st.get("riftGauge", 0),
+            "adChargeRiftGaugeRemainCount": 0}
+
+
 def r_rift_archive(body, st):
     """POST /kg-wiki/rift-weapon/archive -> RiftWeaponResultResponseModel."""
     ensure_rift_state(st)
@@ -1179,6 +1186,7 @@ def handlers():
         "/rift-weapon/crystal-destroy": r_rift_crystal_destroy,
         "/rift-weapon/set-crystal-state": r_rift_crystal_set_state,
         "/rift-weapon/buy-rift-gauge": r_rift_buy_gauge,
+        "/rift-weapon/ad-charge-rift-gauge": r_rift_ad_charge_gauge,
         "/kg-wiki/rift-weapon/archive": r_rift_archive,
         "/kg-wiki/rift-weapon/archive-delete": r_rift_archive_delete,
     }

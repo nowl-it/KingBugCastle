@@ -2484,6 +2484,74 @@
         <MaxStage>8</MaxStage>
     </Theme>
 
+    <Theme ID='1003'>
+        <NameComment>선택과 집중</NameComment>
+        <BackgroundSprite>Themes_Background_1000_S73</BackgroundSprite>
+        <ModeBackgroundSprite>Themes_Background_1000_S73</ModeBackgroundSprite>
+        <UnitsSprite>Themes_Units_1003</UnitsSprite>
+        <ModeUnitSprite>Themes_Units_1003</ModeUnitSprite>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <DraftMode>true</DraftMode>
+        <Map>SeasonalEventMode_Season73</Map>
+        
+        <Barricade>Barricade_01a</Barricade>
+
+        <ShowDeckPreviewInPausePanel>false</ShowDeckPreviewInPausePanel>
+
+        <StartGold>0</StartGold>
+
+        <TimeBonus>10</TimeBonus>
+
+        <Revivable>false</Revivable>
+
+        <StartLife>1</StartLife>
+
+        <BaseToken>45</BaseToken>
+        <ClearTokens>30</ClearTokens>
+        <ClearTokenBaseRounds>0</ClearTokenBaseRounds>
+        
+        <NormalMusic>PickAndPass</NormalMusic>
+
+        <EventMode>true</EventMode>
+        <SeasonalEventMode>true</SeasonalEventMode>
+        <UseBarricade>false</UseBarricade>
+        <GameSave>false</GameSave>
+        <CanSellUnit>false</CanSellUnit>
+        <GetItemByKill>false</GetItemByKill>
+
+        <DevilRateBase>0</DevilRateBase>
+        <DevilRateWin>0</DevilRateWin>
+
+        <ArtifactEnabled>false</ArtifactEnabled>
+        <BuildingEnabled>false</BuildingEnabled>
+        <CardLevelEnabled>false</CardLevelEnabled>
+        <TerritoryBuffEnabled>false</TerritoryBuffEnabled>
+        <ResetField>true</ResetField>
+        <RoundEndCamMove>false</RoundEndCamMove>
+        <InitialCam>0</InitialCam>
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <DragUnitEnabled>false</DragUnitEnabled>
+        <FixCamposToField>true</FixCamposToField>
+        <DisableWaitingField>false</DisableWaitingField>
+
+        <LateComersCount>0</LateComersCount>
+
+        <MaxStage>1</MaxStage>
+        <RandomStage>true</RandomStage>
+
+        <LobbyRewardIcon>SeasonalEventToken_Moon</LobbyRewardIcon>
+    </Theme>
+
     <Theme ID='2000'>
         <NameComment>대균열</NameComment>
 

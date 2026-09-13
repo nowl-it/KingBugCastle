@@ -22,6 +22,7 @@ def handlers():
         "/pass/bonusReward": r_pass,
         "/pass/buyLevel": r_pass,
         "/pass/reroll-mission": r_pass_reroll_mission,
+        "/pass/ad-charge-seasonal-event-flag": r_ad_charge_seasonal_event_flag,
         "/shop-event/cumulative-purchase": r_cumulative_purchase,
         "/shop-event/cumulative-purchase/claim": r_cumulative_purchase_claim,
         "/api/cloud-run/services": r_cloud_run_services,
@@ -35,7 +36,18 @@ def r_pass(body, st):
            "seasonUntilAtDate": now_iso(c["seasonUntilDayOffset"]),
            "nextSeasonStartAtDate": now_iso(c["nextSeasonStartDayOffset"])}
     out.update(c["fixed"])
+    out.setdefault("adChargeSeasonalEventFlagRemainCount", 0)
     return out
+
+
+def r_ad_charge_seasonal_event_flag(body, st):
+    """v173 ad charge response; ads are unavailable on the private client."""
+    mode_id = body_int(body.get("modeId"), 0)
+    modes = RCFG["pass"]["fixed"].get("seasonalEventModes", [])
+    counts = RCFG["pass"]["fixed"].get("seasonalEventModesDailyPlayCount", [])
+    play_count = counts[modes.index(mode_id)] if mode_id in modes else 0
+    return {"modeId": mode_id, "playCount": play_count,
+            "adChargeSeasonalEventFlagRemainCount": 0}
 
 
 def r_pass_reroll_mission(body, st):

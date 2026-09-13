@@ -47,6 +47,34 @@
 - **Offsets move between versions** (v170.0.03 → v171 → v172: every prologue byte-identical,
   offsets shifted). Re-derive per version; never reuse across libs.
 
+### v173.0.00 private-client port (verified 2026-09-13)
+
+- Stock inputs: `apk/xapk_extracted_v1730/`; recovered game code:
+  `il2cpp/v173.0.00/libil2cpp_v173.so`; matching metadata and dump live beside it.
+- `build_private.py` defaults to v173 and selects `_NRE_STUBS_V17300`. The rotating NEO loader is
+  `libbisedich.so`; its eight guarded branch sites are file offsets `0x43914`, `0x4391c`,
+  `0x43924`, `0x43954`, `0x43ae0`, `0x43b24`, `0x43b40`, `0x43b50`; the four parser-return sites
+  are still found by the guarded `08008012 e89700b9` pattern. All 12/12 matched during a real build.
+- v173 SSL raw file offsets are `0x2D24844`, `0x5A02FA8`, `0x5A016B8`.
+  `python3 server/patchers/make_ssl_so.py 173.0.00 --check` verifies the generated SSL-only copy.
+- Full local share build completed as `KingBugCastle_173.0.00.xapk` (1,209 MB). Archive test passed;
+  all three APKs verify with the same v2/v3 debug certificate; base and both split manifests report
+  `com.nowl.castle`; base reports version `173.0.00` and label `King Bug Castle`.
+- Build verification: 95 server tests pass, local mods are idempotent, and route coverage is
+  `355/355`. A clean redroid install registered a guest, completed the tutorial battle, fetched the
+  full lobby chain with HTTP 200, logged `HookedLobbyAwake EXIT`, and rendered the lobby correctly.
+- The first runtime attempt failed in `ResourceManager.LoadMultiThread` after downloading `xml`.
+  Cause: `refresh_master_data.py` rebuilt the new XML files into the previous v172 AssetBundle;
+  replacement cannot add new TextAsset objects, so all four v173 Pick-and-Pass tables were absent
+  (141 non-empty assets vs 145 after the fix). The refresh now copies the newly fetched official
+  bundle over `real_cdn/xml` before replaying `xml_live`; the rebuilt v173 bundle replaces all 147
+  TextAssets and preserves the new object table. Always restart both uvicorn processes and clear the
+  app's UnityCache after rebuilding because CDN bytes are cached at server import and on-device.
+- Apktool's Java process ignores `TMPDIR`. On a nearly full `/tmp` tmpfs, `aapt2 link` misleadingly
+  fails with `failed to write AndroidManifest.xml to archive: Invalid entry name`. Set both
+  `TMPDIR=<workspace>/.tmp` and `JAVA_TOOL_OPTIONS=-Djava.io.tmpdir=<workspace>/.tmp`; the same stock
+  resources then rebuild successfully. This is a local disk-space failure, not malformed v173 data.
+
 ---
 
 ## 1. Invasion rewards - COMPLETE decode (2026-08-18)
@@ -220,6 +248,16 @@ Fixed-period loops with no exception = client timer, not retry.
   and Swift/North Rift effects. Its Rift paragraph says "Season 74 Seasonal Effects", but the
   surrounding section and `DimensionRiftSeasonDatas.xml` ID 73 show this is a notice typo. Full
   Vietnamese comparison: `docs/master-data-2026-09-08.html`.
+- **2026-09-10 in-place republish of CDN folder `2026_09_08`:** bundle md5/etag changed from
+  `d06f765ad4c726d545c96d57f152310c` to `194b61a19e71f67c77f802fd02e21741`
+  (4,684,494 bytes). Only the 13 `Strings_*.xml` files changed; all gameplay/master-data tables
+  are byte-identical after line-ending normalization. Devs removed 19 leaked placeholder keys for
+  the unreleased `Cor Orbis` treasure (`50002` / buffs `350002x`) from every locale, corrected
+  package names `1690..1692`, and added `1693` for the Sep 10-23 treasure pickup (Meirna `30014`
+  and Tome of Tides `30024`). AR instead drops the stale package keys and adds its three missing
+  Pick-and-Pass devil reward strings; JA/ZH add rich-text spacing to those same rewards and make a
+  formatting-only `SkinShop` change. Trial replay of all `local_mods` completed with 30 writes and
+  zero warnings. The served bundle was not changed during this investigation.
 
 ### Reference-derived Frieren idle sheet (2026-08-24)
 

@@ -17999,10 +17999,7 @@ Los aumentos al daño Físico Recibido no se acumulan. Solo se aplica el valor m
   <String Key="ResetPVPMatch">Restablecer</String>
   <String Key="CannotResetPVPMatchByWatchingAdsAlert">Has agotado todos los restablecimientos de hoy.</String>
   <String Key="PVPDeckSettingReTryAdsPopupTitle">Reintento de formación</String>
-  <String Key="PVPDeckSettingReTryAdsPopupDesc">¿Quieres ver un anuncio y reintentar gratis?
-Al comprar el Pase KingGod, se eliminan los anuncios del juego.
-Si eliges usar Gemas, el reintento gratis con anuncio de hoy no estará disponible.</String>
-  <String Key="PVPDeckSettingReTryAdsCancelAlert">Al cerrar esto, se cancelará el reintento gratis con anuncio. ¿Cancelar el reintento?</String>
+  <String Key="ResetPVPMatchRemain">Reiniciar({0}/{1})</String>
   <String Key="SuperShieldAdaptabilityPer">Mejorar Sangre {0}
 Probabilidad de Defensa Absoluta +{1}%</String>
   <String Key="SuperShieldAdaptabilityPer_Piece">Mejorar Sangre
@@ -18217,56 +18214,86 @@ Entonces, la santidad te ayudará.</String>
   <String Key="SpecialPackage_1683">Paquete Vitacorde 1</String>
   <String Key="SpecialPackage_1684">Paquete Vitacorde 2</String>
   <String Key="SpecialPackage_1685">Paquete Vitacorde 3</String>
-  <String Key="BuffDataDesc_3300431">Por cada {0} de Protección, +{1}% al escalado de Poder de habilidad del efecto de aumento de Daño base</String>
+  <String Key="BuffDataDesc_3300431">Multiplicador de Poder de habilidad del efecto de aumento de daño básico por cada 1 Protección: +{0}%</String>
   <String Key="BuffDataDesc_3300432">Recarga {0}s</String>
   <String Key="BuffDataDesc_3300433">Otorga Bendición a todos los aliados del área excepto a sí mismo</String>
   <String Key="BuffDataDesc_3300434">Recarga {0}s</String>
-  <String Key="BuffDataDesc_3300435">Por cada {0} de Protección, +{1}% al escalado de Poder de habilidad del efecto de aumento de Daño base</String>
+  <String Key="BuffDataDesc_3300435">Multiplicador de Poder de habilidad del efecto de aumento de daño básico por cada 1 Protección: +{0}%</String>
   <String Key="TreasureSkillDesc_3300430">Al inicio de la batalla, solo se aplica el efecto del Héroe con más ★ que tenga equipado Vitacorde.
 El Poder de habilidad del portador se fija al valor del inicio de la batalla.
 Al curar a aliados, crea una zona durante {0}s que aumenta el daño básico de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Enfriamiento: {3}s)</String>
-  <String Key="TreasureSkillDesc_3300431">Al inicio de la batalla, solo se aplica el efecto del Héroe con más ★ que tenga equipado Vitacorde.
-El Poder de habilidad del portador se fija al valor del inicio de la batalla.
-Al curar a aliados, crea una zona durante {0}s que aumenta el daño básico de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Enfriamiento: {3}s)
-Por cada {4} de Protección, +{5}% al escalado de Poder de habilidad del aumento de daño básico</String>
-  <String Key="TreasureSkillDesc_3300433">Al inicio de la batalla, solo se aplica el efecto del Héroe con más ★ que tenga equipado Vitacorde.
-El Poder de habilidad del portador se fija al valor del inicio de la batalla.
-Al curar a aliados, crea una zona durante {0}s que aumenta el daño básico de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Enfriamiento: {3}s)
-Por cada {4} de Protección, +{5}% al escalado de Poder de habilidad del aumento de daño básico
-Otorga Bendición a los aliados en la zona, excepto al portador</String>
+  <String Key="TreasureSkillDesc_3300431">Al inicio de la batalla, solo se aplica el efecto del Héroe con más ★ que tenga equipado Vitacorde
+Fija el Poder de habilidad del portador al valor que tenía al inicio de la batalla
+Al curar a aliados, crea durante {0}s un área que aumenta el daño básico de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Reutilización: {3}s)
+Multiplicador de Poder de habilidad del efecto de aumento de daño básico por cada 1 Protección: +{4}%</String>
+  <String Key="TreasureSkillDesc_3300433">Al inicio de la batalla, solo se aplica el efecto del Héroe con más ★ que tenga equipado Vitacorde
+Fija el Poder de habilidad del portador al valor que tenía al inicio de la batalla
+Al curar a aliados, crea durante {0}s un área que aumenta el daño básico de los aliados en un Rango de {1} alrededor del portador en un {2}% del Poder de habilidad del portador (Reutilización: {3}s)
+Multiplicador de Poder de habilidad del efecto de aumento de daño básico por cada 1 Protección: +{4}%
+Otorga Bendición a los aliados del área, excepto al portador</String>
   <String Key="SeasonalEventName_Season72">Festival de vuelo de dragones</String>
   <String Key="SeasonalEventMode_Season72">Festival de vuelo de dragones</String>
-  <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Subnombre temporal</String>
-  <String Key="TreasureDesc_50002">Descripción temporal - añadir más cuando esté listo el concepto del Tesoro - Concepto pensado: ¿una piedra? ¿un artefacto? que toma prestado Mana de plantas y animales cercanos, lo almacena y luego lo libera</String>
-  <String Key="TreasureSkillName_50002">Combinación de Mana</String>
-  <String Key="BuffDataName_3500021">Asimilación I</String>
-  <String Key="BuffDataName_3500022">Barrera de Mana I</String>
-  <String Key="BuffDataName_3500023">Resonancia de Mana</String>
-  <String Key="BuffDataName_3500024">Barrera de Mana II</String>
-  <String Key="BuffDataName_3500025">Asimilación II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">Tienda especial de pickup de Cor Orbis</String>
-  <String Key="SpecialPackage_1690">Paquete Cor Orbis 1</String>
-  <String Key="SpecialPackage_1691">Paquete Cor Orbis 2</String>
-  <String Key="SpecialPackage_1692">Paquete Cor Orbis 3</String>
-  <String Key="BuffDataDesc_3500021">Por cada {1}% de Daño crítico de hechizo por encima de {0}%, el aumento de Daño final de la habilidad mejorada se multiplica por {2}</String>
-  <String Key="BuffDataDesc_3500022">Daño recibido {0}% hasta usar la 3.ª habilidad</String>
-  <String Key="BuffDataDesc_3500023">Al usar una habilidad mejorada, lanza además la misma habilidad sobre 2 objetivos aleatorios con un {0}% de daño</String>
-  <String Key="BuffDataDesc_3500024">Daño recibido {0}% hasta usar la 3.ª habilidad</String>
-  <String Key="BuffDataDesc_3500025">Por cada {1}% de Daño crítico de hechizo por encima de {0}%, el aumento de Daño final de la habilidad mejorada se multiplica por {2}</String>
-  <String Key="TreasureSkillDesc_3500020">Tras iniciar la batalla, el Héroe con más ★ que tenga equipado Cor Orbis obtiene +{0}% de Mana máx. y -{1}% de daño final causado hasta usar una habilidad 3 veces.
-La última habilidad se mejora y su Daño final aumenta en +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">Tras iniciar la batalla, el Héroe con más ★ que tenga equipado Cor Orbis obtiene +{0}% de Mana máx. y -{1}% de daño final causado hasta usar una habilidad 3 veces.
-La última habilidad se mejora y su Daño final aumenta en +{2}%.
-Por cada {4}% de Daño crítico de hechizo por encima de {3}%, el aumento de Daño final de la habilidad mejorada se multiplica por {5}</String>
-  <String Key="TreasureSkillDesc_3500022">Tras iniciar la batalla, el Héroe con más ★ que tenga equipado Cor Orbis obtiene +{0}% de Mana máx. y -{1}% de daño final causado hasta usar una habilidad 3 veces.
-La última habilidad se mejora y su Daño final aumenta en +{2}%.
-Por cada {4}% de Daño crítico de hechizo por encima de {3}%, el aumento de Daño final de la habilidad mejorada se multiplica por {5}
-Daño recibido {6}% hasta usar una habilidad 3 veces</String>
-  <String Key="TreasureSkillDesc_3500023">Tras iniciar la batalla, el Héroe con más ★ que tenga equipado Cor Orbis obtiene +{0}% de Mana máx. y -{1}% de daño final causado hasta usar una habilidad 3 veces.
-La última habilidad se mejora y su Daño final aumenta en +{2}%.
-Por cada {4}% de Daño crítico de hechizo por encima de {3}%, el aumento de Daño final de la habilidad mejorada se multiplica por {5}
-Daño recibido {6}% hasta usar una habilidad 3 veces
-Al usar una habilidad mejorada, lanza además la misma habilidad sobre 2 objetivos aleatorios con un {7}% de daño</String>
+  <String Key="SpecialPackage_1690">Paquete de Piedra de invocación de Tesoro destacado 1</String>
+  <String Key="SpecialPackage_1691">Paquete de Piedra de invocación de Tesoro destacado 2</String>
+  <String Key="SpecialPackage_1692">Paquete de Meirna</String>
+  <String Key="SpecialPackage_1693">Paquete de Libro del flujo</String>
   <String Key="AdsSummonRestrictionAlert">Hasta {0} veces por ronda.</String>
+  <String Key="ThemeName_1003">Elige y pasa</String>
+  <String Key="ModeDesc_1003">¡Una de las dos opciones es tuya, y la otra es de tu oponente!
+¡Haz la mejor elección, completa la mejor combinación y consigue la Victoria en el duelo final!</String>
+  <String Key="PnP_PlayDesc">Elige la unidad que irá a la Ilusión {0}.
+La unidad no elegida se asignará a la Tropa enemiga.</String>
+  <String Key="PnP_ChoiceDone">Selección final completada</String>
+  <String Key="PnP_BattleStart">¡Comienza la batalla!</String>
+  <String Key="PnP_Devil_Conditions_100">Intercambia aliados y enemigos.</String>
+  <String Key="PnP_Devil_Conditions_110">Elimina al Héroe colocado en tu Ilusión 5.</String>
+  <String Key="PnP_Devil_Conditions_120">Congela a 1 aliado aleatorio durante 3 s.</String>
+  <String Key="PnP_Devil_Conditions_130">Reduce el Ataque Final de todos los aliados en un 20%.</String>
+  <String Key="PnP_Devil_Conditions_140">Todos los Héroes aliados no pueden recuperar Mana.</String>
+  <String Key="PnP_Devil_Conditions_150">Todos los Héroes aliados no pueden usar habilidades durante 3 s.</String>
+  <String Key="PnP_Devil_Conditions_160">Aturde a todos los Héroes aliados durante 1 s.</String>
+  <String Key="PnP_Devil_Conditions_170">Cambia al azar la ★ de todos los Héroes de aliados y enemigos.</String>
+  <String Key="PnP_Devil_Conditions_180">En Derrota: -25 Tokens de evento de la recompensa básica</String>
+  <String Key="PnP_Devil_Rewards_100">Después del cambio, aumenta la ★ de 1 Héroe aliado aleatorio en 1.
+(En Victoria, +25 Tokens de evento)</String>
+  <String Key="PnP_Devil_Rewards_110">Elimina al Héroe colocado en la Ilusión 1 de la Tropa enemiga.
+(En Victoria, +25 Tokens de evento)</String>
+  <String Key="PnP_Devil_Rewards_120">Reduce el Ataque Final de la Tropa enemiga en un 10%.
+(Al obtener la Victoria: Token de evento de temporada +25 extra)</String>
+  <String Key="PnP_Devil_Rewards_130">Aumenta la Defensa básica de todos los aliados en 200.
+(Al obtener la Victoria: Token de evento de temporada +25 extra)</String>
+  <String Key="PnP_Devil_Rewards_140">Todos los Héroes aliados empiezan con 100% de Mana.
+(En Victoria, +25 Tokens de evento)</String>
+  <String Key="PnP_Devil_Rewards_150">Aumenta la ★ de 1 Héroe aliado aleatorio en 2.
+(En Victoria, +25 Tokens de evento)</String>
+  <String Key="PnP_Devil_Rewards_160">Otorga Frenesí a todos los Héroes aliados (Velocidad de movimiento final/Velocidad de ataque +200%).
+(Al obtener la Victoria: Token de evento de temporada +25 extra)</String>
+  <String Key="PnP_Devil_Rewards_170">En Victoria, +25 Tokens de evento</String>
+  <String Key="PnP_Devil_Rewards_180">En Victoria, +50 Tokens de evento</String>
+  <String Key="ExclusiveBGM">Música de fondo exclusiva</String>
+  <String Key="GachaNewDimensionUnitPer">Aparece un Héroe dimensional</String>
+  <String Key="S73BundlePackagePanelDesc">Obtén &lt;color=#ffcf68&gt;Héroe, skin de evento, pantalla de inicio de sesión, asesor, Música de fondo y skin de mapa&lt;/color&gt; más &lt;color=#369DFF&gt;300 Gemas&lt;/color&gt; ¡de una vez!</String>
+  <String Key="GachaDesc_8500">Puedes Obtener un Héroe dimensional.</String>
+  <String Key="RandomDimensionUnitCeilFormat">Héroe dimensional garantizado tras {0} Invocaciones</String>
+  <String Key="SeasonalEventName_Season73">Festival de la Luna de la Cosecha</String>
+  <String Key="SeasonalEventMode_Season73">Festival de la Luna de la Cosecha</String>
+  <String Key="MapSkinDesc_30220">Skin de mapa del Festival de la Luna de la Cosecha</String>
+  <String Key="MapSkinName_30220">Festival de la Luna de la Cosecha</String>
+  <String Key="GachaName_8500">Invocación de Héroe dimensional</String>
+  <String Key="LoginSkinName_30060">2026 Festival de la Luna de la Cosecha</String>
+  <String Key="LoginSkinDesc_30060">Pantalla de inicio de sesión del Festival de la Luna de la Cosecha 2026</String>
+  <String Key="AdvisorName_40070">Conejos venidos de la luna</String>
+  <String Key="AdvisorDesc_40070">Se escaparon del trabajo y cantan con alegría.</String>
+  <String Key="AdvisorName_40080">Conejo Lunar con la carta</String>
+  <String Key="AdvisorDesc_40080">Parece que vino a disfrutar del Festival de la Luna de la Cosecha.</String>
+  <String Key="SkinName_1059003">Conejo Lunar Dandelyn</String>
+  <String Key="SkinDesc_1059003">Dicen que los pasteles de arroz que Dandelyn machaca con su martillo son increíblemente deliciosos.
+
+Skin del Festival de la Luna de la Cosecha 2026</String>
+  <String Key="SkinName_1074001">Señor Estelar de la Luz de la Luna Suha</String>
+  <String Key="SkinDesc_1074001">&lt;i&gt;¡Conejos Lunares! Saben que no deben causar demasiados problemas solo porque bajaron después de un año, ¿verdad? ¡Diviértanse todos!&lt;/i&gt;</String>
+  <String Key="FestivalMerch_Season73">Ofertas del Festival de la Luna de la Cosecha</String>
+  <String Key="SeasonalEventNumberFormat">Evento de la temporada {0}</String>
+  <String Key="SeasonalEvent">Evento de temporada</String>
+  <String Key="SeasonalEventCeilFormat">Pickup de la temporada {0}</String>
 </Strings>

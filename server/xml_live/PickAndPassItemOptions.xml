@@ -1,0 +1,26 @@
+<PickAndPassItemOptions>
+	<ItemOption ID='1'>
+		<ItemId>102</ItemId>
+		<FixedOptions>
+			<AddAtkPer/>
+		</FixedOptions>
+	</ItemOption>
+	<ItemOption ID='2'>
+		<ItemId>202</ItemId>
+		<FixedOptions>
+			<SuperShield/>
+		</FixedOptions>
+	</ItemOption>
+	<ItemOption ID='3'>
+		<ItemId>302</ItemId>
+		<FixedOptions>
+			<AddAttackSpeedPer/>
+		</FixedOptions>
+	</ItemOption>
+	<ItemOption ID='4'>
+		<ItemId>402</ItemId>
+		<FixedOptions>
+			<AddMAtkPer/>
+		</FixedOptions>
+	</ItemOption>
+</PickAndPassItemOptions>

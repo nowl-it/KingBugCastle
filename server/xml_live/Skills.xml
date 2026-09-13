@@ -36842,7 +36842,7 @@
 		<Knockback>4</Knockback>
 	</Skill>
 
-    <Skill ID="80050">
+    <Skill ID="80030">
         <NameComment>격전 가시 통나무</NameComment>
         <DescComment></DescComment>
         <Icon>Skill_20670</Icon>

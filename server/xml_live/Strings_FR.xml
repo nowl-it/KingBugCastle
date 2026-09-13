@@ -18059,10 +18059,7 @@ Les augmentations de DEG Phys. subis ne se cumulent pas. Seule la valeur la plus
   <String Key="ResetPVPMatch">Réinitialiser</String>
   <String Key="CannotResetPVPMatchByWatchingAdsAlert">Vous avez utilisé toutes les réinitialisations d'aujourd'hui.</String>
   <String Key="PVPDeckSettingReTryAdsPopupTitle">Nouvel essai de formation</String>
-  <String Key="PVPDeckSettingReTryAdsPopupDesc">Voulez-vous regarder une publicité et faire un Nouvel essai gratuitement?
-L'achat du KingGod Pass supprime les publicités en jeu.
-Si vous choisissez d'utiliser des Gem, le Nouvel essai gratuit avec publicité d'aujourd'hui ne sera pas disponible.</String>
-  <String Key="PVPDeckSettingReTryAdsCancelAlert">Fermer ceci annulera le Nouvel essai gratuit avec publicité. Annuler le Nouvel essai ?</String>
+  <String Key="ResetPVPMatchRemain">Réinitialiser({0}/{1})</String>
   <String Key="SuperShieldAdaptabilityPer">Améliorer Autel du sang {0}
 Chance de défense absolue +{1}%</String>
   <String Key="SuperShieldAdaptabilityPer_Piece">Améliorer Autel du sang
@@ -18277,56 +18274,86 @@ Alors, la sainteté vous aidera.</String>
   <String Key="SpecialPackage_1683">Pack Vitacorde 1</String>
   <String Key="SpecialPackage_1684">Pack Vitacorde 2</String>
   <String Key="SpecialPackage_1685">Pack Vitacorde 3</String>
-  <String Key="BuffDataDesc_3300431">Pour chaque PROTECT {0}, coefficient d'INT de l'effet d'augmentation des Dégâts de base +{1}%</String>
+  <String Key="BuffDataDesc_3300431">Multiplicateur d'INT de l'effet d'augmentation des dégâts de base par 1 PROTECT : +{0}%</String>
   <String Key="BuffDataDesc_3300432">Recharge {0}s</String>
   <String Key="BuffDataDesc_3300433">Accorde GRÂCE à tous les alliés de la zone sauf à soi-même</String>
   <String Key="BuffDataDesc_3300434">Recharge {0}s</String>
-  <String Key="BuffDataDesc_3300435">Pour chaque PROTECT {0}, coefficient d'INT de l'effet d'augmentation des Dégâts de base +{1}%</String>
+  <String Key="BuffDataDesc_3300435">Multiplicateur d'INT de l'effet d'augmentation des dégâts de base par 1 PROTECT : +{0}%</String>
   <String Key="TreasureSkillDesc_3300430">Au début du Combat, seul l'effet du Héros avec le plus de ★ équipé de Vitacorde s'applique
 L'INT du porteur est fixée à sa valeur au début du Combat
 Lorsqu'il soigne des alliés, crée une zone pendant {0}s qui augmente les DEG de base des alliés dans la Zone {1} autour du porteur de {2}% de l'INT du porteur (Recharge : {3}s)</String>
-  <String Key="TreasureSkillDesc_3300431">Au début du Combat, seul l'effet du Héros avec le plus de ★ équipé de Vitacorde s'applique
-L'INT du porteur est fixée à sa valeur au début du Combat
-Lorsqu'il soigne des alliés, crée une zone pendant {0}s qui augmente les DEG de base des alliés dans la Zone {1} autour du porteur de {2}% de l'INT du porteur (Recharge : {3}s)
-Pour chaque {4} PROTECT, +{5}% au coefficient d'INT de l'effet d'augmentation des DEG de base</String>
-  <String Key="TreasureSkillDesc_3300433">Au début du Combat, seul l'effet du Héros avec le plus de ★ équipé de Vitacorde s'applique
-L'INT du porteur est fixée à sa valeur au début du Combat
-Lorsqu'il soigne des alliés, crée une zone pendant {0}s qui augmente les DEG de base des alliés dans la Zone {1} autour du porteur de {2}% de l'INT du porteur (Recharge : {3}s)
-Pour chaque {4} PROTECT, +{5}% au coefficient d'INT de l'effet d'augmentation des DEG de base
+  <String Key="TreasureSkillDesc_3300431">Au début du Combat, seul l'effet du Héros ayant le plus haut Nv. d'étoiles et équipé de Vitacorde s'applique
+Fixe l'INT du porteur à sa valeur au début du Combat
+Quand il soigne des alliés, crée pendant {0}s une zone qui augmente les dégâts de base des alliés dans la Zone {1} à proximité du porteur de {2}% de l'INT du porteur (Recharge : {3}s)
+Multiplicateur d'INT de l'effet d'augmentation des dégâts de base par 1 PROTECT : +{4}%</String>
+  <String Key="TreasureSkillDesc_3300433">Au début du Combat, seul l'effet du Héros ayant le plus haut Nv. d'étoiles et équipé de Vitacorde s'applique
+Fixe l'INT du porteur à sa valeur au début du Combat
+Quand il soigne des alliés, crée pendant {0}s une zone qui augmente les dégâts de base des alliés dans la Zone {1} à proximité du porteur de {2}% de l'INT du porteur (Recharge : {3}s)
+Multiplicateur d'INT de l'effet d'augmentation des dégâts de base par 1 PROTECT : +{4}%
 Accorde GRÂCE aux alliés dans la zone, sauf au porteur</String>
   <String Key="SeasonalEventName_Season72">Fête d'envol des dragons</String>
   <String Key="SeasonalEventMode_Season72">Fête d'envol des dragons</String>
-  <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Sous-nom temporaire</String>
-  <String Key="TreasureDesc_50002">Description temporaire - à compléter quand le concept du Trésor sera prêt - concept prévu : une sorte de pierre ? d'artefact ? qui emprunte des PM aux plantes et animaux à proximité, les accumule puis les libère</String>
-  <String Key="TreasureSkillName_50002">Combinaison de PM</String>
-  <String Key="BuffDataName_3500021">Assimilation I</String>
-  <String Key="BuffDataName_3500022">Barrière de PM I</String>
-  <String Key="BuffDataName_3500023">Résonance de PM</String>
-  <String Key="BuffDataName_3500024">Barrière de PM II</String>
-  <String Key="BuffDataName_3500025">Assimilation II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">Boutique spéciale Pickup de Cor Orbis</String>
-  <String Key="SpecialPackage_1690">Pack Cor Orbis 1</String>
-  <String Key="SpecialPackage_1691">Pack Cor Orbis 2</String>
-  <String Key="SpecialPackage_1692">Pack Cor Orbis 3</String>
-  <String Key="BuffDataDesc_3500021">Pour chaque {1}% de DEG CRIT d'INT au-dessus de {0}%, l'augmentation des DEG totaux de la compétence améliorée est multipliée par {2}</String>
-  <String Key="BuffDataDesc_3500022">DEG subis {0}% jusqu'à la 3e utilisation de compétence</String>
-  <String Key="BuffDataDesc_3500023">Lors de l'utilisation d'une compétence améliorée, utilise en plus la même compétence sur 2 cibles au hasard avec {0}% de DEG</String>
-  <String Key="BuffDataDesc_3500024">DEG subis {0}% jusqu'à la 3e utilisation de compétence</String>
-  <String Key="BuffDataDesc_3500025">Pour chaque {1}% de DEG CRIT d'INT au-dessus de {0}%, l'augmentation des DEG totaux de la compétence améliorée est multipliée par {2}</String>
-  <String Key="TreasureSkillDesc_3500020">Après le début du Combat, le Héros avec le plus de ★ équipé de Cor Orbis gagne +{0}% de PM max et -{1}% de DEG infligés totaux jusqu'à la 3e utilisation de compétence
-La dernière compétence est améliorée et ses DEG totaux augmentent de +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">Après le début du Combat, le Héros avec le plus de ★ équipé de Cor Orbis gagne +{0}% de PM max et -{1}% de DEG infligés totaux jusqu'à la 3e utilisation de compétence
-La dernière compétence est améliorée et ses DEG totaux augmentent de +{2}%
-Pour chaque {4}% de DEG CRIT d'INT au-dessus de {3}%, l'augmentation des DEG totaux de la compétence améliorée est multipliée par {5}</String>
-  <String Key="TreasureSkillDesc_3500022">Après le début du Combat, le Héros avec le plus de ★ équipé de Cor Orbis gagne +{0}% de PM max et -{1}% de DEG infligés totaux jusqu'à la 3e utilisation de compétence
-La dernière compétence est améliorée et ses DEG totaux augmentent de +{2}%
-Pour chaque {4}% de DEG CRIT d'INT au-dessus de {3}%, l'augmentation des DEG totaux de la compétence améliorée est multipliée par {5}
-DEG subis {6}% jusqu'à la 3e utilisation de compétence</String>
-  <String Key="TreasureSkillDesc_3500023">Après le début du Combat, le Héros avec le plus de ★ équipé de Cor Orbis gagne +{0}% de PM max et -{1}% de DEG infligés totaux jusqu'à la 3e utilisation de compétence
-La dernière compétence est améliorée et ses DEG totaux augmentent de +{2}%
-Pour chaque {4}% de DEG CRIT d'INT au-dessus de {3}%, l'augmentation des DEG totaux de la compétence améliorée est multipliée par {5}
-DEG subis {6}% jusqu'à la 3e utilisation de compétence
-Lors de l'utilisation d'une compétence améliorée, utilise en plus la même compétence sur 2 cibles au hasard avec {7}% de DEG</String>
+  <String Key="SpecialPackage_1690">Pack de Pierre d'invocation de Trésor vedette 1</String>
+  <String Key="SpecialPackage_1691">Pack de Pierre d'invocation de Trésor vedette 2</String>
+  <String Key="SpecialPackage_1692">Pack Meïrna</String>
+  <String Key="SpecialPackage_1693">Pack Livre des flots</String>
   <String Key="AdsSummonRestrictionAlert">Jusqu'à {0} fois par manche.</String>
+  <String Key="ThemeName_1003">Choisis et passe</String>
+  <String Key="ModeDesc_1003">L'un des deux choix est à vous, l'autre revient à votre adversaire !
+Faites les meilleurs choix, créez la meilleure combinaison et remportez la Victoire lors du duel final !</String>
+  <String Key="PnP_PlayDesc">Choisissez l'unité pour l'Illusion {0}.
+L'unité non choisie sera attribuée au Deck ennemi.</String>
+  <String Key="PnP_ChoiceDone">Choix final terminé</String>
+  <String Key="PnP_BattleStart">Début du combat !</String>
+  <String Key="PnP_Devil_Conditions_100">Échange alliés et ennemis.</String>
+  <String Key="PnP_Devil_Conditions_110">Retire le Héros placé sur votre Illusion 5.</String>
+  <String Key="PnP_Devil_Conditions_120">Gèle 1 allié aléatoire pendant 3 sec.</String>
+  <String Key="PnP_Devil_Conditions_130">Réduit l'ATQ totale de tous les alliés de 20%.</String>
+  <String Key="PnP_Devil_Conditions_140">Tous les Héros alliés ne peuvent plus récupérer de PM.</String>
+  <String Key="PnP_Devil_Conditions_150">Tous les Héros alliés ne peuvent pas utiliser de compétences pendant 3 sec.</String>
+  <String Key="PnP_Devil_Conditions_160">Étourdit tous les Héros alliés pendant 1 sec.</String>
+  <String Key="PnP_Devil_Conditions_170">Change aléatoirement le Nv. d'étoiles de tous les Héros des deux camps.</String>
+  <String Key="PnP_Devil_Conditions_180">En Défaite, -25 Jetons d'événement sur la récompense Standard</String>
+  <String Key="PnP_Devil_Rewards_100">Après le changement, augmente de 1 le Nv. d'étoiles d'1 Héros allié aléatoire.
+(En Victoire, +25 Jetons d'événement)</String>
+  <String Key="PnP_Devil_Rewards_110">Retire le Héros placé sur l'Illusion 1 du Deck ennemi.
+(En Victoire, +25 Jetons d'événement)</String>
+  <String Key="PnP_Devil_Rewards_120">Réduit l'ATQ Totale du Deck ennemi de 10%.
+(En cas de Victoire : +25 Jetons d'événement de saison)</String>
+  <String Key="PnP_Devil_Rewards_130">Augmente la DEF de base de tous les alliés de 200.
+(En cas de Victoire : +25 Jetons d'événement de saison)</String>
+  <String Key="PnP_Devil_Rewards_140">Tous les Héros alliés commencent avec 100% de PM.
+(En Victoire, +25 Jetons d'événement)</String>
+  <String Key="PnP_Devil_Rewards_150">Augmente de 2 le Nv. d'étoiles d'1 Héros allié aléatoire.
+(En Victoire, +25 Jetons d'événement)</String>
+  <String Key="PnP_Devil_Rewards_160">Confère Frénésie à tous les Héros alliés (vitesse de déplacement totale/AGI +200%).
+(En cas de Victoire : +25 Jetons d'événement de saison)</String>
+  <String Key="PnP_Devil_Rewards_170">En Victoire, +25 Jetons d'événement</String>
+  <String Key="PnP_Devil_Rewards_180">En Victoire, +50 Jetons d'événement</String>
+  <String Key="ExclusiveBGM">Musique de fond exclusive</String>
+  <String Key="GachaNewDimensionUnitPer">Apparition d'un Héros dimensionnel</String>
+  <String Key="S73BundlePackagePanelDesc">Obtenez &lt;color=#ffcf68&gt;Héros, skin d'événement, écran de connexion, conseiller, musique de fond et skin de carte&lt;/color&gt; ainsi que &lt;color=#369DFF&gt;300 Gems&lt;/color&gt; d'un coup !</String>
+  <String Key="GachaDesc_8500">Vous pouvez obtenir un Héros dimensionnel.</String>
+  <String Key="RandomDimensionUnitCeilFormat">Héros dimensionnel garanti après {0} Invocations</String>
+  <String Key="SeasonalEventName_Season73">Festival de la Lune des Moissons</String>
+  <String Key="SeasonalEventMode_Season73">Festival de la Lune des Moissons</String>
+  <String Key="MapSkinDesc_30220">Skin de carte du Festival de la Lune des Moissons</String>
+  <String Key="MapSkinName_30220">Festival de la Lune des Moissons</String>
+  <String Key="GachaName_8500">Invocation de Héros dimensionnel</String>
+  <String Key="LoginSkinName_30060">2026 Festival de la Lune des Moissons</String>
+  <String Key="LoginSkinDesc_30060">Écran de connexion du Festival de la Lune des Moissons 2026</String>
+  <String Key="AdvisorName_40070">Lapins venus de la lune</String>
+  <String Key="AdvisorDesc_40070">Ils se sont échappés du travail et chantent avec joie.</String>
+  <String Key="AdvisorName_40080">Lapin lunaire avec la lettre</String>
+  <String Key="AdvisorDesc_40080">Il paraît qu'il est venu profiter du Festival de la Lune des Moissons.</String>
+  <String Key="SkinName_1059003">Lapin lunaire Dandelyne</String>
+  <String Key="SkinDesc_1059003">On dit que les gâteaux de riz que Dandelyne pilonne avec son marteau sont incroyablement délicieux.
+
+Skin du Festival de la Lune des Moissons 2026</String>
+  <String Key="SkinName_1074001">Seigneur stellaire au clair de lune Suha</String>
+  <String Key="SkinDesc_1074001">&lt;i&gt;Lapins lunaires ! Vous savez bien qu'il ne faut pas faire trop de bêtises juste parce que vous êtes redescendus après un an, n'est-ce pas ? Amusez-vous bien, tout le monde !&lt;/i&gt;</String>
+  <String Key="FestivalMerch_Season73">Offres du Festival de la Lune des Moissons</String>
+  <String Key="SeasonalEventNumberFormat">Événement de la saison {0}</String>
+  <String Key="SeasonalEvent">Événement de saison</String>
+  <String Key="SeasonalEventCeilFormat">Pick-up de la saison {0}</String>
 </Strings>

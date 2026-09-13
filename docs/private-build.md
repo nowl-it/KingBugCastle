@@ -1,11 +1,11 @@
-# Private Build (v171 / v172)
+# Private Build (v171 - v173)
 
 How to build, install and run the private client against your own server.
-Status as of 2026-09-05: builds from **v172.1.00** (newest), **v172.0.01** (default), **v172.0.00**, or **v171.x** APKs and
+Status as of 2026-09-12: builds from **v173.0.00** (newest/default), **v172.x**, or **v171.x** APKs and
 **boots to a fully rendered lobby on redroid**; Guest and web-Google login both work.
 
 ```bash
-# v172.0.01 (default)
+# v173.0.00 (default)
 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 python3 server/builders/build_private.py
 
 # v172.1.00

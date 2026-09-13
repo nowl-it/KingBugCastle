@@ -18012,10 +18012,7 @@ Increases to Physical damage Taken do not Stack. Only the highest value applies
   <String Key="ResetPVPMatch">Reset</String>
   <String Key="CannotResetPVPMatchByWatchingAdsAlert">You have used all reset chances for today.</String>
   <String Key="PVPDeckSettingReTryAdsPopupTitle">Formation Retry</String>
-  <String Key="PVPDeckSettingReTryAdsPopupDesc">Would you like to watch an ad and Retry for free?
-Purchasing the King God Pass removes in-game ads.
-If you choose to use Gems, today's free ad Retry will not be available.</String>
-  <String Key="PVPDeckSettingReTryAdsCancelAlert">Closing this will cancel the free ad Retry. Cancel Retry?</String>
+  <String Key="ResetPVPMatchRemain">Reset({0}/{1})</String>
   <String Key="SuperShieldAdaptabilityPer">Altar of Blood {0} Enhance
 Absolute Defense Chance +{1}%</String>
   <String Key="SuperShieldAdaptabilityPer_Piece">Altar of Blood Enhance
@@ -18230,56 +18227,86 @@ Then sanctity will help you.</String>
   <String Key="SpecialPackage_1683">Vitacorde Package 1</String>
   <String Key="SpecialPackage_1684">Vitacorde Package 2</String>
   <String Key="SpecialPackage_1685">Vitacorde Package 3</String>
-  <String Key="BuffDataDesc_3300431">For every {0} Guard, Spell Power scaling of the base Damage increase effect +{1}%</String>
+  <String Key="BuffDataDesc_3300431">Spell Power multiplier for the Basic Damage increase effect per 1 Guard: +{0}%</String>
   <String Key="BuffDataDesc_3300432">Cooldown {0}s</String>
   <String Key="BuffDataDesc_3300433">Grants Benediction to all allies in the area except self</String>
   <String Key="BuffDataDesc_3300434">Cooldown {0}s</String>
-  <String Key="BuffDataDesc_3300435">For every {0} Guard, Spell Power scaling of the base Damage increase effect +{1}%</String>
+  <String Key="BuffDataDesc_3300435">Spell Power multiplier for the Basic Damage increase effect per 1 Guard: +{0}%</String>
   <String Key="TreasureSkillDesc_3300430">At the start of Battle, only the effect of the highest-Tier Hero equipped with Vitacorde applies.
 The wielder's Spell Power is fixed to its value at the start of Battle.
 When healing allies, creates a zone for {0}s that increases the Basic Damage of allies within {1} Range around the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)</String>
-  <String Key="TreasureSkillDesc_3300431">At the start of Battle, only the effect of the highest-Tier Hero equipped with Vitacorde applies.
-The wielder's Spell Power is fixed to its value at the start of Battle.
-When healing allies, creates a zone for {0}s that increases the Basic Damage of allies within {1} Range around the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
-For every {4} Guard, +{5}% Spell Power scaling to the Basic Damage increase effect</String>
-  <String Key="TreasureSkillDesc_3300433">At the start of Battle, only the effect of the highest-Tier Hero equipped with Vitacorde applies.
-The wielder's Spell Power is fixed to its value at the start of Battle.
-When healing allies, creates a zone for {0}s that increases the Basic Damage of allies within {1} Range around the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
-For every {4} Guard, +{5}% Spell Power scaling to the Basic Damage increase effect
-Grants Benediction to allies in the zone except the wielder</String>
+  <String Key="TreasureSkillDesc_3300431">At the start of Battle, only the effect of the Hero with the highest Tier who has Vitacorde equipped is applied
+Fix the wielder's Spell Power to its value at the start of Battle
+When healing allies, creates a field for {0}s that increases the Basic Damage of allies within Range {1} around the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
+Spell Power multiplier for the Basic Damage increase effect per 1 Guard: +{4}%</String>
+  <String Key="TreasureSkillDesc_3300433">At the start of Battle, only the effect of the Hero with the highest Tier who has Vitacorde equipped is applied
+Fix the wielder's Spell Power to its value at the start of Battle
+When healing allies, creates a field for {0}s that increases the Basic Damage of allies within Range {1} around the wielder by {2}% of the wielder's Spell Power (Cooldown: {3}s)
+Spell Power multiplier for the Basic Damage increase effect per 1 Guard: +{4}%
+Grants Benediction to allies in the field except the wielder</String>
   <String Key="SeasonalEventName_Season72">Flying Dragon Festival</String>
   <String Key="SeasonalEventMode_Season72">Flying Dragon Festival</String>
-  <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Temporary Subname</String>
-  <String Key="TreasureDesc_50002">Temporary description - add more once the Legacy concept is ready - Planned concept: a stone? artifact? that borrows MP from nearby plants and animals, stores it, then releases it</String>
-  <String Key="TreasureSkillName_50002">MP Combination</String>
-  <String Key="BuffDataName_3500021">Assimilation I</String>
-  <String Key="BuffDataName_3500022">MP Barrier I</String>
-  <String Key="BuffDataName_3500023">MP Resonance</String>
-  <String Key="BuffDataName_3500024">MP Barrier II</String>
-  <String Key="BuffDataName_3500025">Assimilation II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">Cor Orbis Pickup Special Shop</String>
-  <String Key="SpecialPackage_1690">Cor Orbis Package 1</String>
-  <String Key="SpecialPackage_1691">Cor Orbis Package 2</String>
-  <String Key="SpecialPackage_1692">Cor Orbis Package 3</String>
-  <String Key="BuffDataDesc_3500021">For every {1}% Spell CRIT Damage above {0}%, the enhanced skill's Final Damage increase is multiplied by {2}</String>
-  <String Key="BuffDataDesc_3500022">Damage Taken {0}% until the 3rd skill use</String>
-  <String Key="BuffDataDesc_3500023">Upon using an enhanced skill, additionally uses the same skill on 2 random targets for {0}% Damage</String>
-  <String Key="BuffDataDesc_3500024">Damage Taken {0}% until the 3rd skill use</String>
-  <String Key="BuffDataDesc_3500025">For every {1}% Spell CRIT Damage above {0}%, the enhanced skill's Final Damage increase is multiplied by {2}</String>
-  <String Key="TreasureSkillDesc_3500020">After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.
-The last skill is enhanced, increasing Final Damage by +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.
-The last skill is enhanced, increasing Final Damage by +{2}%.
-For every {4}% Spell CRIT Damage above {3}%, the enhanced skill's Final Damage increase is multiplied by {5}</String>
-  <String Key="TreasureSkillDesc_3500022">After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.
-The last skill is enhanced, increasing Final Damage by +{2}%.
-For every {4}% Spell CRIT Damage above {3}%, the enhanced skill's Final Damage increase is multiplied by {5}
-Damage Taken {6}% until using a skill 3 times</String>
-  <String Key="TreasureSkillDesc_3500023">After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains +{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.
-The last skill is enhanced, increasing Final Damage by +{2}%.
-For every {4}% Spell CRIT Damage above {3}%, the enhanced skill's Final Damage increase is multiplied by {5}
-Damage Taken {6}% until using a skill 3 times
-Upon using an enhanced skill, additionally uses the same skill on 2 random targets for {7}% Damage</String>
+  <String Key="SpecialPackage_1690">Legacy Pickup Summoning Stone Package 1</String>
+  <String Key="SpecialPackage_1691">Legacy Pickup Summoning Stone Package 2</String>
+  <String Key="SpecialPackage_1692">Meirna Package</String>
+  <String Key="SpecialPackage_1693">Tome of Tides Package</String>
   <String Key="AdsSummonRestrictionAlert">Up to {0} times per round.</String>
+  <String Key="ThemeName_1003">Pick and Pass</String>
+  <String Key="ModeDesc_1003">One of the two choices is yours, and the other belongs to your opponent!
+Make the best choices, complete the best combo, and claim victory in the final showdown!</String>
+  <String Key="PnP_PlayDesc">Please choose the unit for Illusion {0}.
+The unchosen unit will be assigned to the enemy Troop.</String>
+  <String Key="PnP_ChoiceDone">Final Pick Complete</String>
+  <String Key="PnP_BattleStart">Battle Start!</String>
+  <String Key="PnP_Devil_Conditions_100">Swap allies and enemies.</String>
+  <String Key="PnP_Devil_Conditions_110">Remove the Hero placed on your Illusion 5.</String>
+  <String Key="PnP_Devil_Conditions_120">Freeze 1 random ally for 3 sec.</String>
+  <String Key="PnP_Devil_Conditions_130">Reduces all allies' Final ATK by 20%.</String>
+  <String Key="PnP_Devil_Conditions_140">All allied Heroes cannot restore MP.</String>
+  <String Key="PnP_Devil_Conditions_150">All allied Heroes cannot use Skills for 3 sec.</String>
+  <String Key="PnP_Devil_Conditions_160">Stun all allied Heroes for 1 sec.</String>
+  <String Key="PnP_Devil_Conditions_170">Randomly change the Tier of all Heroes on both sides.</String>
+  <String Key="PnP_Devil_Conditions_180">On Defeat: -25 Event Tokens from the default reward</String>
+  <String Key="PnP_Devil_Rewards_100">After the change, increase the Tier of 1 random allied Hero by 1.
+(On Victory, +25 Event Tokens)</String>
+  <String Key="PnP_Devil_Rewards_110">Remove the Hero placed on enemy Illusion 1.
+(On Victory, +25 Event Tokens)</String>
+  <String Key="PnP_Devil_Rewards_120">Reduces the enemy Troop's Final ATK by 10%.
+(On Victory: Season Event Token +25 extra)</String>
+  <String Key="PnP_Devil_Rewards_130">Increases all allies' base DEF by 200.
+(On Victory: Season Event Token +25 extra)</String>
+  <String Key="PnP_Devil_Rewards_140">All allied Heroes start with 100% MP.
+(On Victory, +25 Event Tokens)</String>
+  <String Key="PnP_Devil_Rewards_150">Increase the Tier of 1 random allied Hero by 2.
+(On Victory, +25 Event Tokens)</String>
+  <String Key="PnP_Devil_Rewards_160">Grants all allied Heroes Frenzy (Final Move Speed/Attack Speed +200%).
+(On Victory: Season Event Token +25 extra)</String>
+  <String Key="PnP_Devil_Rewards_170">On Victory, +25 Event Tokens</String>
+  <String Key="PnP_Devil_Rewards_180">On Victory, +50 Event Tokens</String>
+  <String Key="ExclusiveBGM">Exclusive BGM</String>
+  <String Key="GachaNewDimensionUnitPer">Dimensional Hero Appears</String>
+  <String Key="S73BundlePackagePanelDesc">Obtain &lt;color=#ffcf68&gt;Hero, Event Skin, Login Screen, Advisor, BGM, and Map Skin&lt;/color&gt; plus &lt;color=#369DFF&gt;300 Gems&lt;/color&gt; all at once!</String>
+  <String Key="GachaDesc_8500">You can obtain a Dimensional Hero.</String>
+  <String Key="RandomDimensionUnitCeilFormat">Guaranteed Dimensional Hero after {0} Summons</String>
+  <String Key="SeasonalEventName_Season73">Harvest Moon Festival</String>
+  <String Key="SeasonalEventMode_Season73">Harvest Moon Festival</String>
+  <String Key="MapSkinDesc_30220">Harvest Moon Festival Map Skin</String>
+  <String Key="MapSkinName_30220">Harvest Moon Festival</String>
+  <String Key="GachaName_8500">Dimensional Hero Summon</String>
+  <String Key="LoginSkinName_30060">2026 Harvest Moon Festival</String>
+  <String Key="LoginSkinDesc_30060">2026 Harvest Moon Festival Login Screen</String>
+  <String Key="AdvisorName_40070">Rabbits from the Moon</String>
+  <String Key="AdvisorDesc_40070">They slipped away from work and sing cheerfully.</String>
+  <String Key="AdvisorName_40080">Moon Rabbit with the Letter</String>
+  <String Key="AdvisorDesc_40080">It seems to be here to enjoy the Harvest Moon Festival.</String>
+  <String Key="SkinName_1059003">Moon Rabbit Dandelyn</String>
+  <String Key="SkinDesc_1059003">The rice cakes Dandelyn pounds with her hammer are said to be unbelievably delicious.
+
+2026 Harvest Moon Festival Skin</String>
+  <String Key="SkinName_1074001">Moonlight Star Lord Suha</String>
+  <String Key="SkinDesc_1074001">&lt;i&gt;Moon Rabbits! You know you must not cause too much trouble just because you came down after a year, right? Have fun, everyone!&lt;/i&gt;</String>
+  <String Key="FestivalMerch_Season73">Harvest Moon Festival Offers</String>
+  <String Key="SeasonalEventNumberFormat">Season {0} Event</String>
+  <String Key="SeasonalEvent">Season Event</String>
+  <String Key="SeasonalEventCeilFormat">Season {0} Pickup</String>
 </Strings>

@@ -2154,7 +2154,7 @@
 		<ItemTooltipType>Consumable</ItemTooltipType>
 		<InventoryCategory>Consumable</InventoryCategory>
 
-		<Shortcuts>49,47</Shortcuts>
+		<Shortcuts>48,47</Shortcuts>
 	</InventoryItem>
 	<InventoryItem ID="10020">
 		<NameComment>차원 영웅 돌파권</NameComment>
@@ -2176,6 +2176,6 @@
 		<ShortCut Type="None"/>
 		<InventoryCategory>Currency</InventoryCategory>
 
-		<Shortcuts>49,8</Shortcuts>
+		<Shortcuts>48,8</Shortcuts>
 	</InventoryItem>
 </InventoryItems>

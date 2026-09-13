@@ -1,7 +1,7 @@
 # KGC private server (emulator)
 
 Reverse-engineered private server for **King God Castle** (`com.awesomepiece.castle`),
-supporting client versions **v170.1.00 - v172.1.00** (arm64).
+supporting client versions **v170.1.00 - v173.0.00** (arm64).
 Goal: boot the real client against a server you control for offline testing,
 mechanic experimentation, and private multiplayer.
 

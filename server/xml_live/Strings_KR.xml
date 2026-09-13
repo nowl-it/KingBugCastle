@@ -18051,12 +18051,10 @@ D = 1 ~ 4</String>
   <String Key="CannotSummonByWatchingAdsWhileInBattleAlert">전투 중에는 지원하지 않는 기능입니다.</String>
   <String Key="AdsReroll">무료 재감정</String>
   <String Key="AdsDeckSet">무료 재편성</String>
-  <String Key="ResetPVPMatch">재설정
-{0}회 가능</String>
+  <String Key="ResetPVPMatch">다시 설정</String>
   <String Key="CannotResetPVPMatchByWatchingAdsAlert">금일 다시 설정 횟수를 모두 소진했습니다.</String>
   <String Key="PVPDeckSettingReTryAdsPopupTitle">편성 재도전</String>
-  <String Key="ResetPVPMatchRemain">재설정
-{0}회 가능</String>
+  <String Key="ResetPVPMatchRemain">재설정({0}/{1})</String>
   <String Key="SuperShieldAdaptabilityPer">피의 제단 {0} 강화
 절대 방어 획득률 +{1}%</String>
   <String Key="SuperShieldAdaptabilityPer_Piece">피의 제단 강화
@@ -18290,42 +18288,14 @@ D = 1 ~ 4</String>
 영역 내의 장착자를 제외한 아군에게 은총 부여</String>
   <String Key="SeasonalEventName_Season72">비룡제</String>
   <String Key="SeasonalEventMode_Season72">비룡제</String>
-  <String Key="TreasureName_50002">코르 오르비스</String>
-  <String Key="TreasureSubName_50002">임시 서브이름</String>
-  <String Key="TreasureDesc_50002">임시 설명 - 보구 컨셉 나오고 추가 - 생각해둔 컨셉 : 주변 동식물들에게 마나를 빌려와서 축적한 뒤 방출하는 뭔가의 돌? 아티팩트?</String>
-  <String Key="TreasureSkillName_50002">마나합성</String>
-  <String Key="BuffDataName_3500021">동화 I</String>
-  <String Key="BuffDataName_3500022">마나 결계 I</String>
-  <String Key="BuffDataName_3500023">마나 공명</String>
-  <String Key="BuffDataName_3500024">마나 결계 II</String>
-  <String Key="BuffDataName_3500025">동화 II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">코르 오르비스 픽업 특별 상점</String>
-  <String Key="SpecialPackage_1690">코르 오르비스 패키지 1</String>
-  <String Key="SpecialPackage_1691">코르 오르비스 패키지 2</String>
-  <String Key="SpecialPackage_1692">코르 오르비스 패키지 3</String>
-  <String Key="BuffDataDesc_3500021">{0}%를 초과한 주문 치명타 피해량 {1}% 당 강화된 스킬의 최종 피해 증가량 {2}배</String>
-  <String Key="BuffDataDesc_3500022">세 번째 스킬을 사용할 때까지 받는 피해 {0}%</String>
-  <String Key="BuffDataDesc_3500023">강화된 스킬 사용 시 무작위 두 대상에게 피해량 {0}%의 동일한 스킬을 추가 사용</String>
-  <String Key="BuffDataDesc_3500024">세 번째 스킬을 사용할 때까지 받는 피해 {0}%</String>
-  <String Key="BuffDataDesc_3500025">{0}%를 초과한 주문 치명타 피해량 {1}% 당 강화된 스킬의 최종 피해 증가량 {2}배</String>
-  <String Key="TreasureSkillDesc_3500020">가장 성급이 높은 코르 오르비스를 장착한 영웅이 전투 시작 후 스킬을 세 번 사용할 때까지 최대 마나가 {0}% 증가 및 최종 주는 피해량 {1}% 감소
-마지막 스킬은 강화되어 최종 피해량이 +{2}% 증가</String>
-  <String Key="TreasureSkillDesc_3500021">가장 성급이 높은 코르 오르비스를 장착한 영웅이 전투 시작 후 스킬을 세 번 사용할 때까지 최대 마나가 {0}% 증가 및 최종 주는 피해량 {1}% 감소
-마지막 스킬은 강화되어 최종 피해량이 +{2}% 증가
-{3}%를 초과한 주문 치명타 피해량 {4}% 당 강화된 스킬으리 최종 피해 증가량 {5}배</String>
-  <String Key="TreasureSkillDesc_3500022">가장 성급이 높은 코르 오르비스를 장착한 영웅이 전투 시작 후 스킬을 세 번 사용할 때까지 최대 마나가 {0}% 증가 및 최종 주는 피해량 {1}% 감소
-마지막 스킬은 강화되어 최종 피해량이 +{2}% 증가
-{3}%를 초과한 주문 치명타 피해량 {4}% 당 강화된 스킬으리 최종 피해 증가량 {5}배
-스킬을 세 번 사용할 때까지 받는 피해 {6}%</String>
-  <String Key="TreasureSkillDesc_3500023">가장 성급이 높은 코르 오르비스를 장착한 영웅이 전투 시작 후 스킬을 세 번 사용할 때까지 최대 마나가 {0}% 증가 및 최종 주는 피해량 {1}% 감소
-마지막 스킬은 강화되어 최종 피해량이 +{2}% 증가
-{3}%를 초과한 주문 치명타 피해량 {4}% 당 강화된 스킬으리 최종 피해 증가량 {5}배
-스킬을 세 번 사용할 때까지 받는 피해 {6}%
-강화된 스킬 사용 시 무작위 두 대상에게 피해량 {7}%의 동일한 스킬을 추가 사용</String>
+  <String Key="SpecialPackage_1690">보구 픽업 소환석 패키지 1</String>
+  <String Key="SpecialPackage_1691">보구 픽업 소환석 패키지 2</String>
+  <String Key="SpecialPackage_1692">메이르나 패키지</String>
+  <String Key="SpecialPackage_1693">유수지서 패키지</String>
   <String Key="AdsSummonRestrictionAlert">한 라운드에 최대 {0}회까지 가능합니다.</String>
   <String Key="ThemeName_1003">선택과 집중</String>
   <String Key="ModeDesc_1003">두 가지 선택지 중 하나는 내 것, 남은 하나는 상대의 것!
-5번의 선택으로 최고의 조합을 완성하고 마지막 승부에서 승리하세요!</String>
+최선의 선택으로 최고의 조합을 완성하고 마지막 승부에서 승리하세요!</String>
   <String Key="PnP_PlayDesc">{0}번 환영에 들어갈 대상을 골라주세요.
 선택하지 않은 대상은 상대 진영에 반영됩니다.</String>
   <String Key="PnP_ChoiceDone">최종 선택 완료</String>
@@ -18333,7 +18303,7 @@ D = 1 ~ 4</String>
   <String Key="PnP_Devil_Conditions_100">아군과 적군을 서로 바꾼다</String>
   <String Key="PnP_Devil_Conditions_110">아군의 5번 환영에 배치된 영웅을 제거한다.</String>
   <String Key="PnP_Devil_Conditions_120">아군의 랜덤 대상 한 명을 3초간 빙결한다.</String>
-  <String Key="PnP_Devil_Conditions_130">모든 아군의 공격력을 20% 낮춘다.</String>
+  <String Key="PnP_Devil_Conditions_130">모든 아군의 최종 공격력을 20% 낮춘다.</String>
   <String Key="PnP_Devil_Conditions_140">모든 아군 영웅의 마나 회복이 불가능해진다.</String>
   <String Key="PnP_Devil_Conditions_150">모든 아군 영웅을 3초간 스킬 사용불가 상태로 만든다.</String>
   <String Key="PnP_Devil_Conditions_160">모든 아군 영웅을 1초간 기절시킨다.</String>
@@ -18343,17 +18313,42 @@ D = 1 ~ 4</String>
 (승리 시 시즌 이벤트 토큰 +25 추가)</String>
   <String Key="PnP_Devil_Rewards_110">적 진영의 1번 환영에 배치된 영웅을 제거한다.
 (승리 시 시즌 이벤트 토큰 +25 추가)</String>
-  <String Key="PnP_Devil_Rewards_120">적 진영의 공격력을 10% 낮춘다.
+  <String Key="PnP_Devil_Rewards_120">적 진영의 최종 공격력을 10% 낮춘다.
 (승리 시 시즌 이벤트 토큰 +25 추가)</String>
-  <String Key="PnP_Devil_Rewards_130">모든 아군의 방어력을 200 증가시킨다.
+  <String Key="PnP_Devil_Rewards_130">모든 아군의 기본 방어력을 200 증가시킨다.
 (승리 시 시즌 이벤트 토큰 +25 추가)</String>
   <String Key="PnP_Devil_Rewards_140">모든 아군 영웅의 마나가 100%로 시작한다.
 (승리 시 시즌 이벤트 토큰 +25 추가)</String>
   <String Key="PnP_Devil_Rewards_150">아군의 랜덤 영웅 한 명의 성급을 2성 증가시킨다.
 (승리 시 시즌 이벤트 토큰 +25 추가)</String>
-  <String Key="PnP_Devil_Rewards_160">모든 아군 영웅을 광폭화(이동속도 / 공격속도 + 200%)시킨다.
+  <String Key="PnP_Devil_Rewards_160">모든 아군 영웅을 광폭화(최종 이동속도/공격속도 +200%)시킨다.
 (승리 시 시즌 이벤트 토큰 +25 추가)</String>
   <String Key="PnP_Devil_Rewards_170">승리 시 시즌 이벤트 토큰 +25 추가</String>
   <String Key="PnP_Devil_Rewards_180">승리 시 시즌 이벤트 토큰 +50 추가</String>
   <String Key="ExclusiveBGM">전용 배경음악</String>
+  <String Key="GachaNewDimensionUnitPer">차원 영웅 등장</String>
+  <String Key="S73BundlePackagePanelDesc">&lt;color=#ffcf68&gt;영웅, 이벤트 스킨, 로그인 화면, 조언자와 BGM, 맵스킨&lt;/color&gt; 그리고 &lt;color=#369DFF&gt;300보석&lt;/color&gt;까지 한번에 획득하세요!</String>
+  <String Key="GachaDesc_8500">차원 영웅을 획득할 수 있습니다.</String>
+  <String Key="RandomDimensionUnitCeilFormat">{0}회 소환 시 차원 영웅 확정</String>
+  <String Key="SeasonalEventName_Season73">보름달 축제</String>
+  <String Key="SeasonalEventMode_Season73">보름달 축제</String>
+  <String Key="MapSkinDesc_30220">보름달 축제 테마 맵</String>
+  <String Key="MapSkinName_30220">보름달 축제</String>
+  <String Key="GachaName_8500">차원 영웅 소환</String>
+  <String Key="LoginSkinName_30060">2026 보름달 축제</String>
+  <String Key="LoginSkinDesc_30060">2026 보름달 축제 로그인 화면</String>
+  <String Key="AdvisorName_40070">달에서 내려온 토끼들</String>
+  <String Key="AdvisorDesc_40070">일터에서 빠져나와 흥겨운지 노래를 부릅니다.</String>
+  <String Key="AdvisorName_40080">서신을 가져온 달토끼</String>
+  <String Key="AdvisorDesc_40080">보름달 축제를 즐기러 왔다고 합니다.</String>
+  <String Key="SkinName_1059003">달토끼 단델린</String>
+  <String Key="SkinDesc_1059003">단델린의 망치로 흠씬 두들긴 떡은 둘이 먹다 하나 죽을 정도로 맛있다고 소문이 자자합니다.
+
+2026 보름달 축제 스킨</String>
+  <String Key="SkinName_1074001">월하성군 수하</String>
+  <String Key="SkinDesc_1074001">&lt;i&gt;달토끼님들! 한 해 만에 내려오셨다고 너무 말썽을 피우시면 안 되는 거 아시죠? 모두 즐겁게 놀다 가요!&lt;/i&gt;</String>
+  <String Key="FestivalMerch_Season73">보름달 축제 상품</String>
+  <String Key="SeasonalEventNumberFormat">{0}시즌 이벤트</String>
+  <String Key="SeasonalEvent">시즌 이벤트</String>
+  <String Key="SeasonalEventCeilFormat">{0}시즌 픽업</String>
 </Strings>

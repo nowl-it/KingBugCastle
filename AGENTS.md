@@ -153,12 +153,11 @@ The build recovers one and injects it, then NOPs the NEO unpack path - see
 [docs/mftl-extraction.md](docs/mftl-extraction.md) for the unpack recipe and
 [docs/private-build.md](docs/private-build.md) for the operator playbook.
 
-**Default input is v172.0.00** (`KGC_APK_SRC=xapk_extracted_v1720`), and it injects that build's
-**own** game code: `il2cpp/v172.0.00/libil2cpp_v172_ssl.so`, unpacked out of its packer by
+**Default input is v173.0.00** (`KGC_APK_SRC=xapk_extracted_v1730`), and it injects that build's
+**own** game code: `il2cpp/v173.0.00/libil2cpp_v173_ssl.so`, unpacked out of its packer by
 `patchers/unpack_neo.py`. Lib and metadata come from the same build, so **no metadata swap runs**.
-The v172 packer (`libbeniolle.so`) is the **same loader binary** as v171.0.01/v171.1.00 - all 8
-`NEO_SIG_SITES` byte-identical and the `08008012 e89700b9` pattern hits the same 4 offsets; only
-the filename rotated.
+The v173 packer is `libbisedich.so`; its guarded NEO sites were re-derived independently. Older
+versions remain selectable through `KGC_APK_SRC`.
 
 *Fallback* (`KGC_APK_SRC=xapk_extracted_v1711` → v171.1.00 native, or `KGC_FORCE_V17100=1` for any
 older source) injects that build's own lib; only the v171.0.00 fallback **must** swap v171.0.00's
@@ -168,7 +167,7 @@ literal `/auth/xcdSeed?version=` at stringLiteral index 1545 of 25730, shifting 
 indices, and libil2cpp compiles those indices in.
 
 **Every il2cpp offset is per-lib.** The tables live side by side in `build_private.py`
-(`_NRE_STUBS_V17100` / `_NRE_STUBS_V17110` / `_NRE_STUBS_V17200` / `_NRE_STUBS_V17201`) and are picked by `VER`
+(`_NRE_STUBS_V17100` through `_NRE_STUBS_V17300`) and are picked by `VER`
 (**RVA** convention: file offset = `RVA - 0x4000`). They were re-derived from each version's own
 `dump.cs` by exact class + signature match; all 10 stub prologues came back byte-identical across
 the three, which is the cross-check that the re-derivation landed on the same methods.
@@ -185,6 +184,10 @@ with the replacement's `cbz` displacement recomputed against the new bail-out ta
 
 v171.0.01 and v171.1.00 share a column because the packer is the **same binary**: 4 bytes differ
 across 3.3 MB of code and all 12 patch sites sit at identical file offsets.
+
+v173.0.00 uses `libbisedich.so`: integrity branch file offsets are
+`43914 4391c 43924 43954 43ae0 43b24 43b40 43b50`; the four parser returns are located by the
+guarded `08008012 e89700b9` pattern. A verified build matched and NOPed all 12 sites.
 
 The second group is located by **pattern** (`08008012 e89700b9`, exactly 4 hits in both libs); the
 first is a table that now **raises** on a byte mismatch instead of skipping quietly. The loader itself

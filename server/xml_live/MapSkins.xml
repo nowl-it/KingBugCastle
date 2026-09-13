@@ -1581,6 +1581,31 @@
 		<InfoTag>SummonSkin</InfoTag>
 	</MapSkin>
 
+	<MapSkin ID="30220">
+		<Comment>보름달 축제</Comment>
+		<Name>SeasonalEventMode_Season73</Name>
+		<Prefab>SeasonalEventMode_Season73</Prefab>
+		<IconSprite>SeasonalEventToken_Moon</IconSprite>
+
+		<Grade>2</Grade>
+
+		<MinVersion>173000</MinVersion>
+
+		<!-- 중복 획득 시 대체 보상 -->
+		<AlternateReward Type="Token_SKIN" Count="7" />
+
+		<!-- 패키지 전용 (구매 / 스킨 소환 제외) -->
+		<CanPurchase>false</CanPurchase>
+		<GachaAvailable>false</GachaAvailable>
+
+		<!-- 구매 -->
+		<CashPurchaseAvailable>false</CashPurchaseAvailable>
+		<SkinTokenPurchaseAvailable>false</SkinTokenPurchaseAvailable>
+
+		<!-- 태그 -->
+		<InfoTag></InfoTag>
+	</MapSkin>
+
 	<MapSkin ID="40000">
 		<Comment>용살단 습격!</Comment>
 		<Name>ThemeName_11</Name>

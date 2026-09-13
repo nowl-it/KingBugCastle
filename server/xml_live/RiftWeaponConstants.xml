@@ -171,6 +171,12 @@
     
     <!-- 균열 게이지 최대 충전량 -->
     <RiftGaugeMaxValue>1000</RiftGaugeMaxValue>
+
+    <!-- 균열 게이지 광고 충전량 -->
+    <AdChargeRiftGaugeValue>50</AdChargeRiftGaugeValue>
+
+    <!-- 균열 게이지 광고 충전 일일 최대 충전 횟수 -->
+    <AdChargeRiftGaugeMaxDailyCount>1</AdChargeRiftGaugeMaxDailyCount>
     
     <!-- 균열 게이지 구매 비용 및 지급량 -->
     <RiftGaugeBuyInformation Cost="10,20,30,30,30,30,30,30,30,30">100</RiftGaugeBuyInformation>

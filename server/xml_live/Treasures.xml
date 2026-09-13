@@ -689,7 +689,7 @@
 	</Treasure>
 
 	<Treasure ID="30043">
-		<Comment>알베론의 멋진 보구</Comment>
+		<Comment>비타코르데 (알베론)</Comment>
 		<Rarity>Special</Rarity>
 		<Role>Mystic</Role>
 		<BuffDataStartID>3300430</BuffDataStartID>

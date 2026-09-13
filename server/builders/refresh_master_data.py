@@ -7,7 +7,7 @@ One-command master-data refresh for a new game patch.
     python3 server/refresh_master_data.py --no-bump  # skip patchFolder bump
 
 Pipeline (replaces the manual steps documented in docs/cdn-master-data.md):
-  1. kgc-cli config fetch + extract  -> the latest CDN xml bundle
+  1. kgc-cli config fetch + UnityPy extract -> the latest CDN xml bundle
   2. LF-normalize each file (CDN ships CRLF, xml_live is LF) into server/xml_live
   3. server/local_mods.apply()       -> replay our edits idempotently, warn on conflict
   4. rebuild_xml_bundle.py            -> real_cdn/xml + AssetHash
@@ -20,7 +20,7 @@ track the deployed client APK, not the newest game version (see docs).
 
 After a successful run: restart uvicorn + clear the device UnityCache before launch.
 """
-import sys, re, json, subprocess, pathlib, glob, tempfile
+import sys, re, json, subprocess, pathlib, glob, tempfile, shutil
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]        # server/
 REPO = ROOT.parent
@@ -52,7 +52,10 @@ def main():
     bundle = next(iter(glob.glob(str(tmp / "xml_bundle_*"))), None)
     assert bundle, "kgc-cli config fetch produced no bundle"
     out = tmp / "xml"
-    sh([str(KGC_CLI), "config", "extract", "-o", str(out), bundle])
+    sh([sys.executable, str(REPO / "scripts" / "extract_xml.py"), bundle, str(out)])
+    xml_files = list(out.glob("*.xml"))
+    assert len(xml_files) > 100 and all(p.stat().st_size for p in xml_files), \
+        "bundle extraction is incomplete; refusing to overwrite xml_live"
 
     # detect the pulled patch date from kgc-cli's selection log is noisy; derive from
     # the CDN listing instead (same source check_cdn_update.sh uses).
@@ -85,6 +88,9 @@ def main():
         print("  ^ review the WARN lines above before shipping (dev collision / moved anchor).")
 
     print("[4/5] rebuild xml bundle")
+    # A version bump can add TextAssets. Rebuilding the previous bundle can only
+    # replace existing objects, so seed from the newly fetched official bundle.
+    shutil.copy2(bundle, ROOT / "real_cdn" / "xml")
     sh([sys.executable, str(ROOT / "builders" / "rebuild_xml_bundle.py")])
 
     if NO_BUMP or not patch_date:

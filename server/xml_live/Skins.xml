@@ -30222,9 +30222,9 @@
         <PrefabOffsetY>0</PrefabOffsetY>
         <!-- 태그 -->
         <InfoTag>Skin_Season_14</InfoTag>
-        <Grade>0</Grade>
+        <Grade>4</Grade>
         <EffectLevel>1</EffectLevel>
-        <SoundLevel>0</SoundLevel>
+        <SoundLevel>1</SoundLevel>
         <!-- 이펙트 -->
         <!-- 투사체 -->
         <ReplaceUnitArrowPrefab>Fx_10560a_02</ReplaceUnitArrowPrefab>
@@ -31562,6 +31562,84 @@
 		<MinVersion>160000</MinVersion>
 		<ShowAnimationOnBuy>true</ShowAnimationOnBuy>
 		<CanBuy>false</CanBuy>
+	</Skin>
+
+	<!-- 달토끼 단델린 -->
+	<Skin ID="1059003" Unit="10590">
+		<ShowSubName>true</ShowSubName>
+		<Prefab>Unit_10590_03</Prefab>
+		<Sprite>Unit_10590_03_0</Sprite>
+		<Height>60</Height>
+		<!-- UI -->
+		<SpriteOffsetY>-10</SpriteOffsetY>
+		<PrefabOffsetY>0</PrefabOffsetY>
+		<!-- 태그 -->
+		<InfoTag>SeasonalEventName_Season73</InfoTag>
+		<Grade>2</Grade>
+		<EffectLevel>1</EffectLevel>
+		<SoundLevel>1</SoundLevel>
+        <!-- 사운드 -->
+        <AtkSound>se_unit_1059003_atk</AtkSound>
+        <SkillSound Target="10590">se_unit_1059003_skill</SkillSound>
+		<!-- 일러스트 -->
+		<IllustOffsetX>0</IllustOffsetX>
+		<IllustOffsetY>0</IllustOffsetY>
+		<GradationColor>f3cd7a</GradationColor>
+		<GachaGradationColor>f3cd7a</GachaGradationColor>
+		<RogueLikeNewHeroPanelOffsetX>-10</RogueLikeNewHeroPanelOffsetX>
+		<RogueLikeNewHeroPanelOffsetY>-20</RogueLikeNewHeroPanelOffsetY>
+		<RogueLikeNewHeroPanelScale>0.7</RogueLikeNewHeroPanelScale>
+		<!-- 사운드 -->
+		<AtkSound>se_unit_1059001_atk</AtkSound>
+		<SkillSound Target="10590">se_unit_1059001_skill</SkillSound>
+		<!-- 이펙트 -->
+		<ReplaceEffect Type="Unit">
+			<Effect Type="Target">
+				<Prefab>Fx_10590b_03</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+				<OffsetRotation Min="-180" Max="180" />
+			</Effect>
+		</ReplaceEffect>
+		<!-- 스킬 -->
+		<ReplaceEffect Type="Skill" Target="10590">
+			<Effect Type="Shoot">
+				<Prefab>Fx_10590c_03</Prefab>
+				<CenterAlign>true</CenterAlign>
+				<ZLevel>UnitOver</ZLevel>
+			</Effect>
+			<Effect Type='Target'>
+				<Prefab>Fx_10590h_03</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<Loop>true</Loop>
+				<Delay>0.4</Delay>
+			</Effect>				
+		</ReplaceEffect>
+		<ReplaceEffect Type="Skill" Target="10595">		
+			<Effect Type='SplashPos'>
+				<Prefab>Fx_10590g_03</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<World>true</World>
+				<OffsetRotation Min='20' Max='-10' />
+				<RandomOffsetX Min='-10' Max='10' />
+				<RandomOffsetY Min='-3' Max='3' />
+				<OffsetHeight>-25</OffsetHeight>
+                <Sound>se_unit_1059003_skill_tick</Sound>
+			</Effect>
+		</ReplaceEffect>					
+		<ReplaceEffect Type="Skill" Target="1059000">
+			<Effect Type="Target">
+				<Prefab>Fx_10590i_03</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+				<OffsetRotation Min="-180" Max="180" />
+			</Effect>
+		</ReplaceEffect>
+		<!-- 구매 -->
+        <CanBuy>false</CanBuy>
+		<SkinBundlePackage>32075</SkinBundlePackage>
+		<!-- 민버전 -->
+		<MinVersion>173000</MinVersion>
 	</Skin>
 
 	<!-- 황금의 인도자 사라스 -->
@@ -35338,6 +35416,69 @@
 		<MinVersion>158100</MinVersion>
 	</Skin>	
 
+	<!-- 월하성군 수하 -->
+	<Skin ID="1074001" Unit="10740">
+		<Prefab>Unit_10740_01</Prefab>
+		<Sprite>Unit_10740_01_0</Sprite>
+		<Height>60</Height>
+		<!-- UI -->
+		<SpriteOffsetY>-30</SpriteOffsetY>
+		<PrefabOffsetY>10</PrefabOffsetY>
+		<!-- 사운드 -->
+		<AtkSound>se_unit_1074001_atk</AtkSound>
+        <SkillSound Target="10740">se_unit_1074001_skill</SkillSound>
+        <ToTargetSound Target="10745">se_unit_1074001_skill_hit</ToTargetSound>
+		<!-- 일러스트 -->
+		<IllustOffsetX>-20</IllustOffsetX>
+		<IllustOffsetY>0</IllustOffsetY>
+		<GradationColor>ffde90</GradationColor>
+		<GachaGradationColor>ffde90</GachaGradationColor>
+		<RogueLikeNewHeroPanelOffsetX>0</RogueLikeNewHeroPanelOffsetX>
+		<RogueLikeNewHeroPanelOffsetY>-40</RogueLikeNewHeroPanelOffsetY>
+		<!-- 태그 -->
+		<InfoTag>SeasonPass, Skin_Limited</InfoTag>
+		<Grade>4</Grade>
+		<EffectLevel>1</EffectLevel>
+		<SoundLevel>1</SoundLevel>
+		<!-- 투사체 -->
+		<ReplaceUnitArrowPrefab>Fx_10740a_01</ReplaceUnitArrowPrefab>		
+		<!-- 이펙트 -->
+		<ReplaceEffect Type="Unit">		
+			<Effect Type='Target'>
+				<Prefab>Fx_10740b_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<RotationType>Angle</RotationType>
+				<CenterAlign>true</CenterAlign>
+			</Effect>		
+		</ReplaceEffect>				
+		<!-- 스킬 -->
+		<ReplaceEffect Type="Skill" Target="10740">
+			<Effect Type='Self'>
+				<Prefab>Fx_10740c_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+			</Effect>  
+			<Effect Type='Target'>
+				<Prefab>Fx_10740f_01</Prefab>
+				<CenterAlign>true</CenterAlign>
+				<OffsetRotation Min='-10' Max='10' />
+				<ZLevel>UnitOver</ZLevel>
+			</Effect>		
+		</ReplaceEffect>			
+		<ReplaceEffect Type="Skill" Target="10745">	
+			<ReplaceSkillArrowPrefab>Fx_10740d_01</ReplaceSkillArrowPrefab>						
+			<Effect Type='Target'>
+				<Prefab>Fx_10740e_01</Prefab>
+				<ZLevel>UnitOver</ZLevel>
+				<CenterAlign>true</CenterAlign>
+			</Effect>
+		</ReplaceEffect>		
+		<!-- 구매 -->
+		<CanBuy>false</CanBuy>
+		<ShowAnimationOnBuy>true</ShowAnimationOnBuy>
+		<MinVersion>173000</MinVersion>
+	</Skin>	
+	
 	<!-- 기본 다이앤 -->
 	<Skin ID="1075099" Unit="10750">
 		<Name>UnitName_10750</Name>
@@ -35935,38 +36076,104 @@
             <OffsetRotation Min="-90" Max="90" />
         </Effect>
 		</ReplaceEffect>
-
-	<ReplaceEffect Type="Skill" Target="1079000">
-     <Effect Type="SplashRootIgnoreDelay">
+        <ReplaceEffect Type="Skill" Target="10796">
+        <Effect Type="SplashRootIgnoreDelay" Index="1">
             <Prefab>Fx_10790f_99_01</Prefab>
             <ZLevel>Ground</ZLevel>
             <World>true</World>
             <LevelScale>false</LevelScale>
             <Sound>se_unit_10790_skill_02</Sound>
+            <ScaleX>1.4</ScaleX>
+            <ScaleY>1.4</ScaleY>
         </Effect>
-        <EffectToOnlyEnemy>true</EffectToOnlyEnemy>
-        <Effect Type="Target">
-            <Prefab>Fx_10790d_99_01</Prefab>
-            <ZLevel>UnitOver</ZLevel>
-            <CenterAlign>true</CenterAlign>
-            <OffsetRotation Min="-25" Max="25" />
-        </Effect>
-        <EffectToOnlyEnemy>true</EffectToOnlyEnemy>
-        <Effect Type="Target">
-            <Prefab>Fx_10790e_99_01</Prefab>
-            <ZLevel>UnitOver</ZLevel>
-            <CenterAlign>true</CenterAlign>
-            <OffsetRotation Min="-90" Max="90" />
-        </Effect>
-		</ReplaceEffect>
+        </ReplaceEffect>
+        <ReplaceEffect Type="Skill" Target="10797">
+            <Effect Type="SplashRootIgnoreDelay" Index="1">
+                <Prefab>Fx_10790f_99_01</Prefab>
+                <ZLevel>Ground</ZLevel>
+                <World>true</World>
+                <LevelScale>false</LevelScale>
+                <Sound>se_unit_10790_skill_02</Sound>
+                <ScaleX>1.8</ScaleX>
+                <ScaleY>1.8</ScaleY>
+            </Effect>
+        </ReplaceEffect>
+        <ReplaceEffect Type="Skill" Target="10798">
+            <Effect Type="SplashRootIgnoreDelay" Index="1">
+                <Prefab>Fx_10790f_99_01</Prefab>
+                <ZLevel>Ground</ZLevel>
+                <World>true</World>
+                <LevelScale>false</LevelScale>
+                <Sound>se_unit_10790_skill_02</Sound>
+                <ScaleX>2.2</ScaleX>
+                <ScaleY>2.2</ScaleY>
+            </Effect>
+        </ReplaceEffect>
 
-	<ReplaceEffect Type="Skill" Target="107905">
-     <Effect Type="BuffStart">
-            <Prefab>Fx_10790c_99_01</Prefab>
-            <ZLevel>UnitOver</ZLevel>
-            <OffsetY>-20</OffsetY>
-            <LevelScale>false</LevelScale>
-        </Effect>
+        <ReplaceEffect Type="Skill" Target="1079000">
+            <Effect Type="SplashRootIgnoreDelay">
+                <Prefab>Fx_10790f_99_01</Prefab>
+                <ZLevel>Ground</ZLevel>
+                <World>true</World>
+                <LevelScale>false</LevelScale>
+                <Sound>se_unit_10790_skill_02</Sound>
+            </Effect>
+            <EffectToOnlyEnemy>true</EffectToOnlyEnemy>
+            <Effect Type="Target">
+                <Prefab>Fx_10790d_99_01</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <CenterAlign>true</CenterAlign>
+                <OffsetRotation Min="-25" Max="25" />
+            </Effect>
+            <EffectToOnlyEnemy>true</EffectToOnlyEnemy>
+            <Effect Type="Target">
+                <Prefab>Fx_10790e_99_01</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <CenterAlign>true</CenterAlign>
+                <OffsetRotation Min="-90" Max="90" />
+            </Effect>
+        </ReplaceEffect>
+        <ReplaceEffect Type="Skill" Target="1079001">
+            <Effect Type="SplashRootIgnoreDelay">
+                <Prefab>Fx_10790f_99_01</Prefab>
+                <ZLevel>Ground</ZLevel>
+                <World>true</World>
+                <LevelScale>false</LevelScale>
+                <Sound>se_unit_10790_skill_02</Sound>
+                <ScaleX>1.4</ScaleX>
+                <ScaleY>1.4</ScaleY>
+            </Effect>
+        </ReplaceEffect>
+        <ReplaceEffect Type="Skill" Target="1079002">
+            <Effect Type="SplashRootIgnoreDelay">
+                <Prefab>Fx_10790f_99_01</Prefab>
+                <ZLevel>Ground</ZLevel>
+                <World>true</World>
+                <LevelScale>false</LevelScale>
+                <Sound>se_unit_10790_skill_02</Sound>
+                <ScaleX>1.8</ScaleX>
+                <ScaleY>1.8</ScaleY>
+            </Effect>
+        </ReplaceEffect>
+        <ReplaceEffect Type="Skill" Target="1079003">
+            <Effect Type="SplashRootIgnoreDelay">
+                <Prefab>Fx_10790f_99_01</Prefab>
+                <ZLevel>Ground</ZLevel>
+                <World>true</World>
+                <LevelScale>false</LevelScale>
+                <Sound>se_unit_10790_skill_02</Sound>
+                <ScaleX>2.2</ScaleX>
+                <ScaleY>2.2</ScaleY>
+            </Effect>
+        </ReplaceEffect>
+
+        <ReplaceEffect Type="Skill" Target="107905">
+            <Effect Type="BuffStart">
+                <Prefab>Fx_10790c_99_01</Prefab>
+                <ZLevel>UnitOver</ZLevel>
+                <OffsetY>-20</OffsetY>
+                <LevelScale>false</LevelScale>
+            </Effect>
 		</ReplaceEffect>
   	</Skin>
 

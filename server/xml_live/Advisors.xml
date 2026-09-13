@@ -19,6 +19,7 @@
 	10-1) TodoListBadgePosYOffset (default: 0)
 	11) Default (default: false)
 	12) Hidden (default: false)
+	13) ExclusiveBGM (default: none) - 적용 시 성문(로비) 배경음악을 대체하는 오디오 ID
 -->
 
 <Advisors>
@@ -548,4 +549,45 @@
         <TodoListBadgePosYOffset>10</TodoListBadgePosYOffset>
 
     </Advisor>	
+
+    <!-- 추석 단델린 풀세트 패키지 -->
+    <Advisor ID="40070">
+        <Comment>달에서 온 토끼들</Comment>
+
+        <Sprite>messenger_Event_00</Sprite>
+        <Grade>3</Grade>
+
+        <MinVersion>173000</MinVersion>
+
+        <Permanent>true</Permanent>
+
+        <ExclusiveBGM>Advisor_40070</ExclusiveBGM>
+        <InfoTag>ExclusiveBGM</InfoTag>
+
+        <!-- 구매 -->
+        <CanContract>false</CanContract>
+        <Hidden>true</Hidden>
+
+        <SpriteOffsetY>-8</SpriteOffsetY>
+        <TodoListBadgePosYOffset>10</TodoListBadgePosYOffset>
+    </Advisor>
+
+		<!-- 보름달 축제 판매용 조언자 -->
+    <Advisor ID="40080">
+        <Comment>서신을 들고 온 달토끼</Comment>
+
+        <Sprite>messenger_Event_01</Sprite>
+        <Grade>2</Grade>
+
+        <MinVersion>173000</MinVersion>
+
+        <Permanent>true</Permanent>
+
+        <!-- 구매 -->
+        <CanContract>false</CanContract>
+        <Hidden>true</Hidden>
+
+        <SpriteOffsetY>-8</SpriteOffsetY>
+        <TodoListBadgePosYOffset>10</TodoListBadgePosYOffset>
+    </Advisor>
 </Advisors>

@@ -17952,10 +17952,7 @@ Aumentos de Dano Físico Recebido não acumulam. Só o maior valor é aplicado
   <String Key="ResetPVPMatch">Redefinir</String>
   <String Key="CannotResetPVPMatchByWatchingAdsAlert">Você usou todas as redefinições de hoje.</String>
   <String Key="PVPDeckSettingReTryAdsPopupTitle">Nova tentativa de formação</String>
-  <String Key="PVPDeckSettingReTryAdsPopupDesc">Deseja assistir a um anúncio e tentar novamente de graça?
-Ao comprar o Passe KingGod, os anúncios do jogo são removidos.
-Se escolher usar Diamantes, a tentativa grátis com anúncio de hoje não ficará disponível.</String>
-  <String Key="PVPDeckSettingReTryAdsCancelAlert">Fechar isto cancelará a tentativa grátis com anúncio. Cancelar a tentativa?</String>
+  <String Key="ResetPVPMatchRemain">Redefinir({0}/{1})</String>
   <String Key="SuperShieldAdaptabilityPer">Melhorar Altar do Sangue {0}
 Chance de Defesa Absoluta +{1}%</String>
   <String Key="SuperShieldAdaptabilityPer_Piece">Melhorar Altar do Sangue
@@ -18170,56 +18167,86 @@ Então, a santidade vai ajudar você.</String>
   <String Key="SpecialPackage_1683">Pacote Vitacorde 1</String>
   <String Key="SpecialPackage_1684">Pacote Vitacorde 2</String>
   <String Key="SpecialPackage_1685">Pacote Vitacorde 3</String>
-  <String Key="BuffDataDesc_3300431">A cada {0} de Proteção, coeficiente de Poder de habilidade do efeito de aumento de Dano base +{1}%</String>
+  <String Key="BuffDataDesc_3300431">Multiplicador de Poder de habilidade do efeito de aumento de dano básico por 1 Proteção: +{0}%</String>
   <String Key="BuffDataDesc_3300432">Recarga {0}s</String>
   <String Key="BuffDataDesc_3300433">Concede Graça a todos os aliados na área, exceto a si mesmo</String>
   <String Key="BuffDataDesc_3300434">Recarga {0}s</String>
-  <String Key="BuffDataDesc_3300435">A cada {0} de Proteção, coeficiente de Poder de habilidade do efeito de aumento de Dano base +{1}%</String>
+  <String Key="BuffDataDesc_3300435">Multiplicador de Poder de habilidade do efeito de aumento de dano básico por 1 Proteção: +{0}%</String>
   <String Key="TreasureSkillDesc_3300430">No início da Batalha, só se aplica o efeito do Herói com mais ★ equipado com Vitacorde.
 O Poder de habilidade do portador fica fixo no valor do início da Batalha.
 Ao curar aliados, cria uma área por {0}s que aumenta o Dano Básico dos aliados dentro da Área {1} ao redor do portador em {2}% do Poder de habilidade do portador (Recarga: {3}s)</String>
-  <String Key="TreasureSkillDesc_3300431">No início da Batalha, só se aplica o efeito do Herói com mais ★ equipado com Vitacorde.
-O Poder de habilidade do portador fica fixo no valor do início da Batalha.
-Ao curar aliados, cria uma área por {0}s que aumenta o Dano Básico dos aliados dentro da Área {1} ao redor do portador em {2}% do Poder de habilidade do portador (Recarga: {3}s)
-A cada {4} de Proteção, +{5}% na escala de Poder de habilidade do aumento de Dano Básico</String>
-  <String Key="TreasureSkillDesc_3300433">No início da Batalha, só se aplica o efeito do Herói com mais ★ equipado com Vitacorde.
-O Poder de habilidade do portador fica fixo no valor do início da Batalha.
-Ao curar aliados, cria uma área por {0}s que aumenta o Dano Básico dos aliados dentro da Área {1} ao redor do portador em {2}% do Poder de habilidade do portador (Recarga: {3}s)
-A cada {4} de Proteção, +{5}% na escala de Poder de habilidade do aumento de Dano Básico
+  <String Key="TreasureSkillDesc_3300431">No início da Batalha, aplica apenas o efeito do Herói com mais ★ que está com Vitacorde equipada
+Fixa o Poder de habilidade do portador no valor do início da Batalha
+Ao curar aliados, cria por {0}s uma área que aumenta o dano básico dos aliados em Área {1} ao redor do portador em {2}% do Poder de habilidade do portador (Recarga: {3}s)
+Multiplicador de Poder de habilidade do efeito de aumento de dano básico por 1 Proteção: +{4}%</String>
+  <String Key="TreasureSkillDesc_3300433">No início da Batalha, aplica apenas o efeito do Herói com mais ★ que está com Vitacorde equipada
+Fixa o Poder de habilidade do portador no valor do início da Batalha
+Ao curar aliados, cria por {0}s uma área que aumenta o dano básico dos aliados em Área {1} ao redor do portador em {2}% do Poder de habilidade do portador (Recarga: {3}s)
+Multiplicador de Poder de habilidade do efeito de aumento de dano básico por 1 Proteção: +{4}%
 Concede Graça aos aliados na área, exceto ao portador</String>
   <String Key="SeasonalEventName_Season72">Festival de Voo dos Dragões</String>
   <String Key="SeasonalEventMode_Season72">Festival de Voo dos Dragões</String>
-  <String Key="TreasureName_50002">Cor Orbis</String>
-  <String Key="TreasureSubName_50002">Subnome temporário</String>
-  <String Key="TreasureDesc_50002">Descrição temporária - adicionar depois que o conceito do Tesouro estiver pronto - Conceito pensado: uma pedra? um artefato? que pega Mana emprestada de plantas e animais próximos, acumula e depois libera</String>
-  <String Key="TreasureSkillName_50002">Combinação de Mana</String>
-  <String Key="BuffDataName_3500021">Assimilação I</String>
-  <String Key="BuffDataName_3500022">Barreira de Mana I</String>
-  <String Key="BuffDataName_3500023">Ressonância de Mana</String>
-  <String Key="BuffDataName_3500024">Barreira de Mana II</String>
-  <String Key="BuffDataName_3500025">Assimilação II</String>
-  <String Key="SpecialShop_TreasurePickUp50002">Loja Especial de Pickup de Cor Orbis</String>
-  <String Key="SpecialPackage_1690">Pacote Cor Orbis 1</String>
-  <String Key="SpecialPackage_1691">Pacote Cor Orbis 2</String>
-  <String Key="SpecialPackage_1692">Pacote Cor Orbis 3</String>
-  <String Key="BuffDataDesc_3500021">A cada {1}% de Dano Crítico de Feitiço acima de {0}%, o aumento do Dano Final da habilidade melhorada é multiplicado por {2}</String>
-  <String Key="BuffDataDesc_3500022">Dano Recebido {0}% até a 3ª vez que usar uma habilidade</String>
-  <String Key="BuffDataDesc_3500023">Ao usar uma habilidade melhorada, usa a mesma habilidade adicionalmente em 2 alvos aleatórios com {0}% de dano</String>
-  <String Key="BuffDataDesc_3500024">Dano Recebido {0}% até a 3ª vez que usar uma habilidade</String>
-  <String Key="BuffDataDesc_3500025">A cada {1}% de Dano Crítico de Feitiço acima de {0}%, o aumento do Dano Final da habilidade melhorada é multiplicado por {2}</String>
-  <String Key="TreasureSkillDesc_3500020">Após o início da Batalha, o Herói com mais ★ equipado com Cor Orbis recebe +{0}% de Mana Máx. e -{1}% de Dano Final causado até a 3ª vez que usar uma habilidade.
-A última habilidade é melhorada, aumentando o Dano Final em +{2}%</String>
-  <String Key="TreasureSkillDesc_3500021">Após o início da Batalha, o Herói com mais ★ equipado com Cor Orbis recebe +{0}% de Mana Máx. e -{1}% de Dano Final causado até a 3ª vez que usar uma habilidade.
-A última habilidade é melhorada, aumentando o Dano Final em +{2}%.
-A cada {4}% de Dano Crítico de Feitiço acima de {3}%, o aumento do Dano Final da habilidade melhorada é multiplicado por {5}</String>
-  <String Key="TreasureSkillDesc_3500022">Após o início da Batalha, o Herói com mais ★ equipado com Cor Orbis recebe +{0}% de Mana Máx. e -{1}% de Dano Final causado até a 3ª vez que usar uma habilidade.
-A última habilidade é melhorada, aumentando o Dano Final em +{2}%.
-A cada {4}% de Dano Crítico de Feitiço acima de {3}%, o aumento do Dano Final da habilidade melhorada é multiplicado por {5}
-Dano Recebido {6}% até a 3ª vez que usar uma habilidade</String>
-  <String Key="TreasureSkillDesc_3500023">Após o início da Batalha, o Herói com mais ★ equipado com Cor Orbis recebe +{0}% de Mana Máx. e -{1}% de Dano Final causado até a 3ª vez que usar uma habilidade.
-A última habilidade é melhorada, aumentando o Dano Final em +{2}%.
-A cada {4}% de Dano Crítico de Feitiço acima de {3}%, o aumento do Dano Final da habilidade melhorada é multiplicado por {5}
-Dano Recebido {6}% até a 3ª vez que usar uma habilidade
-Ao usar uma habilidade melhorada, usa a mesma habilidade adicionalmente em 2 alvos aleatórios com {7}% de dano</String>
+  <String Key="SpecialPackage_1690">Pacote de Pedra de Evocação de Tesouros em Destaque 1</String>
+  <String Key="SpecialPackage_1691">Pacote de Pedra de Evocação de Tesouros em Destaque 2</String>
+  <String Key="SpecialPackage_1692">Pacote de Meirna</String>
+  <String Key="SpecialPackage_1693">Pacote de Livro das Marés</String>
   <String Key="AdsSummonRestrictionAlert">Até {0} vezes por rodada.</String>
+  <String Key="ThemeName_1003">Escolha e Passe</String>
+  <String Key="ModeDesc_1003">Uma das duas opções é sua, e a outra é do seu oponente!
+Faça as melhores escolhas, complete a melhor combinação e conquiste a Vitória no confronto final!</String>
+  <String Key="PnP_PlayDesc">Escolha a unidade que entrará na Ilusão {0}.
+A unidade não escolhida será atribuída à Tropa inimiga.</String>
+  <String Key="PnP_ChoiceDone">Seleção final concluída</String>
+  <String Key="PnP_BattleStart">Início da Batalha!</String>
+  <String Key="PnP_Devil_Conditions_100">Troca aliados e inimigos.</String>
+  <String Key="PnP_Devil_Conditions_110">Remove o Herói colocado na sua Ilusão 5.</String>
+  <String Key="PnP_Devil_Conditions_120">Congela 1 aliado aleatório por 3 s.</String>
+  <String Key="PnP_Devil_Conditions_130">Reduz o Ataque Final de todos os aliados em 20%.</String>
+  <String Key="PnP_Devil_Conditions_140">Todos os Heróis aliados não podem recuperar Mana.</String>
+  <String Key="PnP_Devil_Conditions_150">Todos os Heróis aliados não podem usar habilidades por 3 s.</String>
+  <String Key="PnP_Devil_Conditions_160">Atordoa todos os Heróis aliados por 1 s.</String>
+  <String Key="PnP_Devil_Conditions_170">Altera aleatoriamente a ★ de todos os Heróis aliados e inimigos.</String>
+  <String Key="PnP_Devil_Conditions_180">Na Derrota: -25 Tokens de Evento da Temporada da recompensa básica</String>
+  <String Key="PnP_Devil_Rewards_100">Após a mudança, aumenta a ★ de 1 Herói aliado aleatório em 1.
+(Em Vitória, +25 Tokens de Evento da Temporada)</String>
+  <String Key="PnP_Devil_Rewards_110">Remove o Herói colocado na Ilusão 1 da Tropa inimiga.
+(Em Vitória, +25 Tokens de Evento da Temporada)</String>
+  <String Key="PnP_Devil_Rewards_120">Reduz o Ataque Final da Tropa inimiga em 10%.
+(Na Vitória: Token de Evento da Temporada +25 extra)</String>
+  <String Key="PnP_Devil_Rewards_130">Aumenta a Defesa Básica de todos os aliados em 200.
+(Na Vitória: Token de Evento da Temporada +25 extra)</String>
+  <String Key="PnP_Devil_Rewards_140">Todos os Heróis aliados começam com 100% de Mana.
+(Em Vitória, +25 Tokens de Evento da Temporada)</String>
+  <String Key="PnP_Devil_Rewards_150">Aumenta a ★ de 1 Herói aliado aleatório em 2.
+(Em Vitória, +25 Tokens de Evento da Temporada)</String>
+  <String Key="PnP_Devil_Rewards_160">Concede Frenesi a todos os Heróis aliados (Velocidade de movimento Final/Velocidade de ataque +200%).
+(Na Vitória: Token de Evento da Temporada +25 extra)</String>
+  <String Key="PnP_Devil_Rewards_170">Em Vitória, +25 Tokens de Evento da Temporada</String>
+  <String Key="PnP_Devil_Rewards_180">Em Vitória, +50 Tokens de Evento da Temporada</String>
+  <String Key="ExclusiveBGM">Música de fundo exclusiva</String>
+  <String Key="GachaNewDimensionUnitPer">Aparece um Herói Dimensional</String>
+  <String Key="S73BundlePackagePanelDesc">Obtenha &lt;color=#ffcf68&gt;Herói, Skin de Evento, Tela de login, Conselheiro, BGM e Skin de Mapa&lt;/color&gt; e também &lt;color=#369DFF&gt;300 Diamantes&lt;/color&gt; de uma vez!</String>
+  <String Key="GachaDesc_8500">Você pode obter um Herói Dimensional.</String>
+  <String Key="RandomDimensionUnitCeilFormat">Herói Dimensional garantido após {0} Evocações</String>
+  <String Key="SeasonalEventName_Season73">Festival da Lua da Colheita</String>
+  <String Key="SeasonalEventMode_Season73">Festival da Lua da Colheita</String>
+  <String Key="MapSkinDesc_30220">Skin de Mapa do Festival da Lua da Colheita</String>
+  <String Key="MapSkinName_30220">Festival da Lua da Colheita</String>
+  <String Key="GachaName_8500">Evocação de Herói Dimensional</String>
+  <String Key="LoginSkinName_30060">2026 Festival da Lua da Colheita</String>
+  <String Key="LoginSkinDesc_30060">Tela de login do Festival da Lua da Colheita 2026</String>
+  <String Key="AdvisorName_40070">Coelhos vindos da lua</String>
+  <String Key="AdvisorDesc_40070">Eles escaparam do trabalho e cantam alegres.</String>
+  <String Key="AdvisorName_40080">Coelho Lunar com a carta</String>
+  <String Key="AdvisorDesc_40080">Parece que veio aproveitar o Festival da Lua da Colheita.</String>
+  <String Key="SkinName_1059003">Coelho Lunar Dandelyn</String>
+  <String Key="SkinDesc_1059003">Dizem que os bolos de arroz que Dandelyn bate bem com seu martelo são incrivelmente deliciosos.
+
+Skin do Festival da Lua da Colheita 2026</String>
+  <String Key="SkinName_1074001">Senhor Estelar ao Luar Suha</String>
+  <String Key="SkinDesc_1074001">&lt;i&gt;Coelhos Lunares! Vocês sabem que não podem aprontar muito só porque desceram depois de um ano, certo? Divirtam-se, todos!&lt;/i&gt;</String>
+  <String Key="FestivalMerch_Season73">Ofertas do Festival da Lua da Colheita</String>
+  <String Key="SeasonalEventNumberFormat">Evento da temporada {0}</String>
+  <String Key="SeasonalEvent">Evento de temporada</String>
+  <String Key="SeasonalEventCeilFormat">Pickup da temporada {0}</String>
 </Strings>

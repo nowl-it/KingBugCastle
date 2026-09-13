@@ -7,7 +7,7 @@
 <!--        <HideInGachaShopPanel>true</HideInGachaShopPanel>-->
 <!--    </Gacha>-->
     <!-- new 영웅 소환서 아이콘용 가챠 -->
-    <Gacha ID="100" Children="2007">
+    <Gacha ID="100" Children="2007, 8500">
         <Name>RegularSummon</Name>
         <GachaIcon>Theme_Progress_Bar_Icon_09</GachaIcon>
         <Permanent>true</Permanent>
@@ -8142,6 +8142,101 @@
         </Pickups>
     </Gacha>
 
+    <!--이중픽업 메이르나 이중 픽업/유수지서 이중 픽업 보구 픽업-->
+    <Gacha ID="5055" Parent="102">
+        <Name>GachaName_4010</Name>
+        <Desc>GachaDesc_4010</Desc>
+
+        <MinVersion>173000</MinVersion>
+
+        <Type>TreasureGacha</Type>
+        <LevelLimit>LevelLimit_Treasure</LevelLimit>
+
+        <StartDate>20260910</StartDate>
+        <EndDate>20260923</EndDate>
+
+        <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
+
+        <BackgroundPrefab>GachaShopPanelBG_TreasureDoublePickup</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
+
+        <KeyItem>371</KeyItem>
+
+        <UseStack>false</UseStack>
+
+        <GachaCeil Key="TreasurePickupGachaCeil_Rare" Target="Rare" PoolID="221000">10</GachaCeil>
+        <GachaCeil Key="TreasurePickupGachaCeil_Special" Target="Special" PoolID="231055">100</GachaCeil>
+
+        <EnableCeilSelect>true</EnableCeilSelect>
+
+        <Results>
+            <Result Type="TreasureGacha" Rate="100"/>
+        </Results>
+
+        <FixedTreasures Count="1">
+            <Treasure Rate="87.5" Rarity="Common" PoolID="210000"/>
+            <Treasure Rate="10" Rarity="Rare" PoolID="220000"/>
+            <Treasure Rate="2.5" Rarity="Special" PoolID="230055"/>
+        </FixedTreasures>
+
+        <Images>
+        </Images>
+
+        <Pickups>
+            <Pickup Type="Treasure" Rarity="Special" PoolID="231055" Rate="1.5"/>
+        </Pickups>
+    </Gacha>
+
+    <!--알베론 비타코르테 출시 보구 픽업-->
+    <Gacha ID="5056" Parent="102">
+        <Name>GachaName_4010</Name>
+        <Desc>GachaDesc_4010</Desc>
+
+        <MinVersion>173100</MinVersion>
+
+        <Type>TreasureGacha</Type>
+        <LevelLimit>LevelLimit_Treasure</LevelLimit>
+
+        <StartDate>20260924</StartDate>
+        <EndDate>20261007</EndDate>
+
+        <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
+
+        <BackgroundPrefab>GachaShopPanelBG_Treasure</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
+
+        <KeyItem>371</KeyItem>
+
+        <UseStack>false</UseStack>
+
+        <GachaCeil Key="TreasurePickupGachaCeil_Rare" Target="Rare" PoolID="221000">10</GachaCeil>
+        <GachaCeil Key="TreasurePickupGachaCeil_Special" Target="Special" PoolID="231056">100</GachaCeil>
+
+        <Results>
+            <Result Type="TreasureGacha" Rate="100"/>
+        </Results>
+
+        <FixedTreasures Count="1">
+            <Treasure Rate="87.5" Rarity="Common" PoolID="210000"/>
+            <Treasure Rate="10" Rarity="Rare" PoolID="220000"/>
+            <Treasure Rate="2.5" Rarity="Special" PoolID="230056"/>
+        </FixedTreasures>
+
+        <Images>
+            <Image Name="Gacha_Background_01" Scale="4" Color="5553b3"/>
+            <Image Name="Gacha_Background_02" Scale="4" Color="5553b3"/>
+            <Image Name="Gacha_Background_03" Scale="4" Color="5553b3"/>
+            <Image Name="Treasure_BgMask_00" X="0" Y="148.5" Scale="1.5" Mask="true"/>
+            <Image Name="TreasureIllust_30043_BG" X="0" Y="150" Scale="1.5"/>
+            <Image Name="Treasure_Frame_3_Mystic" X="0" Y="148.5" Scale="1.5"/>
+            <Image Name="TreasureIllust_30043" X="0" Y="210" Scale="1.3"/>
+        </Images>
+
+        <Pickups>
+            <Pickup Type="Treasure" Rarity="Special" PoolID="231056" Rate="1"/>
+        </Pickups>
+    </Gacha>
+
     <!-- 왕의 보구 -->
     <Gacha ID="6000">
         <Name>GachaName_6000</Name>
@@ -8523,6 +8618,53 @@
             <Image Name="Gacha_Glow" ScaleX="3.5" ScaleY="2.5" Y="-27" X="12" Color="8B4444"/>
             <Image Name="Gacha_Glow" ScaleX="2" ScaleY="2" Y="252" X="0" Color="A85555"/>
             <Image Name="Unit_Illust_10800" ScaleX="1" ScaleY="1" Y="126" X="0" Color="FFFFFF"/>
+        </Images>
+        <ImageMaskEnabled>false</ImageMaskEnabled>
+    </Gacha>
+
+    <!-- 차원 영웅 통상 가챠 (상시) -->
+    <Gacha ID="8500" Parent="100">
+        <Name>GachaName_8500</Name>
+        <Desc>GachaDesc_8500</Desc>
+        <Type>DimensionUnitGacha</Type>
+        <KeyItem>70000</KeyItem>
+
+        <ResultTableDesc>DimensionUnitGachaDesc_Normal</ResultTableDesc>
+
+        <Visible>true</Visible>
+        <Permanent>true</Permanent>
+        <MinVersion>173000</MinVersion>
+        
+        <SortingOrder>2</SortingOrder>
+
+        <UseStack>false</UseStack>
+
+        <!-- 픽업 가챠와 동일한 스택을 사용함 -->
+        <GachaCeil Key="DimGachaCeil_PickUp" Target="0" ResetOnTargetHit="true">80</GachaCeil>
+        <TargetRateIncrement IncreaseAfter="60" Target="0" DecreasePool="NonFixedRate" DecreaseMode="Weighted">4</TargetRateIncrement>
+        <Results>
+            <Result IsReward="true" Type="DimensionalUnitPool" ID="400000" Rate="0.5" FixedRate="true"/>
+            <Result IsReward="true" Type="UnitPool" Rate="1.5" Min="1" FixedRate="true"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="1" Rate="24"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="2" Rate="16"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10000" Min="3" Rate="8"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="100" Rate="24"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="300" Rate="16"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="500" Rate="8"/>
+            <Result IsReward="true" Type="InventoryItem" ID="10010" Min="1500" Rate="2"/>
+        </Results>
+
+        <BackgroundPrefab>GachaShopPanelBG_Pickup_Dimension</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
+
+        <Images>
+            <Image Name="Gacha_Background_03" ScaleX="5" ScaleY="5" Y="-45" X="60" Color="49455D"/>
+            <Image Name="fx_glow" ScaleX="15" ScaleY="15" Y="0" X="0" Color="49455D"/>
+            <Image Name="Gacha_Glow" ScaleX="3.5" ScaleY="2.5" Y="-27" X="12" Color="D50B0B"/>
+            <Image Name="Gacha_Glow" ScaleX="2" ScaleY="2" Y="252" X="0" Color="FFD572"/>
+            <Image Name="Unit_Illust_10790" ScaleX="0.7" ScaleY="0.7" Y="222" X="12" Color="FFFFFF"/>
+            <Image Name="Unit_Illust_10780" ScaleX="0.7" ScaleY="0.7" Y="36" X="-191" Color="FFFFFF"/>            
+            <Image Name="Unit_Illust_10800" ScaleX="0.7" ScaleY="0.7" Y="-53" X="135" Color="FFFFFF"/> 
         </Images>
         <ImageMaskEnabled>false</ImageMaskEnabled>
     </Gacha>
