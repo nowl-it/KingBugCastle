@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Tra cứu toàn bộ Chiến Lược, Tarot và cơ chế Strife Battlefield mùa 73.">
+  <title>Strife Compendium - Chiến Lược & Tarot</title>
+  <style>
+    :root {
+      --bg: #0b1016;
+      --surface: #121923;
+      --surface-2: #18212c;
+      --text: #edf0eb;
+      --muted: #9ca7a5;
+      --line: #2b3741;
+      --gold: #d7b66b;
+      --gold-soft: #f0daa1;
+      --red: #a94d49;
+      --green: #75b99c;
+      --shadow: rgba(0, 0, 0, .28);
+      --max: 1320px;
+    }
+    :root[data-theme="light"] {
+      --bg: #e9e7df;
+      --surface: #f7f5ef;
+      --surface-2: #eeece5;
+      --text: #172024;
+      --muted: #5e696b;
+      --line: #c8c8c0;
+      --gold: #846628;
+      --gold-soft: #604817;
+      --red: #8e3e39;
+      --green: #32775d;
+      --shadow: rgba(40, 48, 48, .12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+    }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    .icon-arrow { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .inline-arrow { width: 14px; height: 14px; margin: 0 3px; vertical-align: -.13em; }
+    .shell { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+    .masthead {
+      position: relative;
+      min-height: min(760px, 92dvh);
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 78% 30%, color-mix(in srgb, var(--red) 28%, transparent) 0 8%, transparent 33%),
+        linear-gradient(125deg, var(--bg) 15%, var(--surface-2) 100%);
+    }
+    .masthead::before {
+      content: "XVII";
+      position: absolute;
+      right: -2vw;
+      top: -15vh;
+      color: transparent;
+      -webkit-text-stroke: 1px color-mix(in srgb, var(--gold) 28%, transparent);
+      font: 500 clamp(17rem, 44vw, 42rem)/1 Georgia, serif;
+      letter-spacing: -.12em;
+      opacity: .72;
+      transform: rotate(-8deg);
+      pointer-events: none;
+    }
+    .topbar {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 68px;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
+    }
+    .brand { font: 700 .8rem/1 ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase; }
+    .topbar-actions { display: flex; align-items: center; gap: 7px; }
+    .lang-control { display: flex; border: 1px solid var(--line); background: var(--surface); }
+    .lang-toggle, .theme-toggle {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .lang-toggle { border: 0; padding-inline: 9px; }
+    .lang-toggle + .lang-toggle { border-left: 1px solid var(--line); }
+    .lang-toggle[aria-pressed="true"] { background: var(--gold); color: #15130d; }
+    .hero { position: relative; z-index: 1; padding: 90px 0 76px; }
+    .eyebrow { color: var(--gold); font: 700 .72rem/1 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 850px;
+      margin: 18px 0 22px;
+      font: 600 clamp(3.3rem, 8.2vw, 7.3rem)/.88 "Arial Narrow", "Roboto Condensed", sans-serif;
+      letter-spacing: -.065em;
+      text-transform: uppercase;
+    }
+    .hero-copy { max-width: 600px; color: var(--muted); font-size: 1.07rem; }
+    .stats {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      max-width: 840px;
+      margin-top: 38px;
+      border-block: 1px solid var(--line);
+    }
+    .stat { padding: 17px 20px 17px 0; }
+    .stat + .stat { padding-left: 20px; border-left: 1px solid var(--line); }
+    .stat b { display: block; color: var(--gold-soft); font: 600 1.55rem/1.15 ui-monospace, monospace; }
+    .stat span { color: var(--muted); font-size: .73rem; }
+    main { padding: 52px 0 110px; }
+    .intro { display: grid; grid-template-columns: 1.15fr .85fr; gap: 72px; margin-bottom: 48px; }
+    h2 { margin-bottom: 12px; font-size: clamp(2rem, 4vw, 3.7rem); line-height: 1; letter-spacing: -.045em; }
+    .intro p { max-width: 68ch; color: var(--muted); }
+    .rules { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
+    .rule { padding: 16px; background: var(--surface); }
+    .rule:nth-child(even) { border-left: 1px solid var(--line); }
+    .rule:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .rule b { display: block; color: var(--gold-soft); font-family: ui-monospace, monospace; }
+    .rule span { color: var(--muted); font-size: .78rem; }
+    .mechanics { margin: 0 0 72px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .mechanics-head { max-width: 780px; margin-bottom: 30px; }
+    .mechanics-head p { color: var(--muted); }
+    .level-track {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+      background: var(--line);
+      gap: 1px;
+    }
+    .level {
+      position: relative;
+      min-height: 122px;
+      padding: 15px 13px;
+      background: var(--surface);
+    }
+    .level b { display: block; color: var(--gold-soft); font: 700 1.25rem/1 ui-monospace, monospace; }
+    .level span { display: block; margin-top: 8px; color: var(--muted); font-size: .74rem; }
+    .level .tier { color: var(--text); font-weight: 700; }
+    .level:first-child { background: var(--surface-2); }
+    .mechanic-note { margin: 0 0 30px; color: var(--muted); font-size: .8rem; }
+    .example {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      margin: 28px 0 34px;
+      border: 1px solid var(--gold);
+      background: var(--surface-2);
+    }
+    .example-mark { display: grid; place-items: center; min-height: 180px; border-right: 1px solid var(--gold); background: #181315; }
+    .example-mark img { width: 104px; height: 104px; object-fit: contain; image-rendering: auto; }
+    .example-copy { padding: 23px 26px; }
+    .example-copy h3 { margin-bottom: 8px; font-size: 1.35rem; }
+    .example-copy p { margin-bottom: 9px; color: var(--muted); }
+    .example-copy p:last-child { margin-bottom: 0; }
+    .mechanic-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    details.mechanic { border: 1px solid var(--line); background: var(--surface); }
+    details.mechanic[open] { grid-column: 1 / -1; }
+    details.mechanic summary { display: flex; gap: 13px; align-items: baseline; padding: 18px; cursor: pointer; list-style: none; font-weight: 700; }
+    details.mechanic summary::-webkit-details-marker { display: none; }
+    details.mechanic summary::before { content: "+"; color: var(--gold); font: 700 1rem/1 ui-monospace, monospace; }
+    details.mechanic[open] summary::before { content: "−"; }
+    .mechanic-body { padding: 0 18px 20px 44px; color: var(--muted); font-size: .9rem; }
+    .mechanic-body p:last-child { margin-bottom: 0; }
+    .mechanic-body strong { color: var(--text); }
+    .formula { padding: 13px 15px; border-left: 3px solid var(--gold); background: var(--surface-2); color: var(--text); font-family: ui-monospace, monospace; }
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    .data-table th, .data-table td { padding: 9px 10px; border: 1px solid var(--line); text-align: left; font-size: .76rem; }
+    .data-table th { color: var(--text); background: var(--surface-2); }
+    .data-table td { color: var(--muted); }
+    .flow { display: flex; align-items: stretch; margin: 15px 0; overflow-x: auto; }
+    .flow span { min-width: 130px; padding: 11px; border: 1px solid var(--line); color: var(--text); text-align: center; font-size: .76rem; }
+    .flow i { display: grid; place-items: center; min-width: 34px; color: var(--gold); font-style: normal; }
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      margin-bottom: 30px;
+      padding: 13px 0;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(14px);
+      border-block: 1px solid var(--line);
+    }
+    .control-row { display: grid; grid-template-columns: minmax(220px, 1fr) auto; gap: 12px; }
+    .search {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      outline: none;
+      background: var(--surface);
+      color: var(--text);
+      padding: 10px 14px;
+    }
+    .search::placeholder { color: var(--muted); }
+    .search:focus { border-color: var(--gold); box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 20%, transparent); }
+    .tabs, .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tab, .filter {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 9px 14px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .tab[aria-pressed="true"], .filter[aria-pressed="true"] { border-color: var(--gold); background: var(--gold); color: #15130d; }
+    .filter-row { display: flex; justify-content: space-between; gap: 18px; align-items: center; margin-top: 10px; }
+    .catalog-status, .view-control { display: flex; align-items: center; }
+    .catalog-status { gap: 12px; }
+    .view-control { border: 1px solid var(--line); }
+    .view-toggle {
+      width: 38px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      background: var(--surface);
+      cursor: pointer;
+    }
+    .view-toggle + .view-toggle { border-left: 1px solid var(--line); }
+    .view-toggle[aria-pressed="true"] { background: var(--gold); color: #15130d; }
+    .view-icon { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+    #result-count { color: var(--muted); font: .78rem/1.3 ui-monospace, monospace; white-space: nowrap; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+    .card {
+      grid-column: span 4;
+      min-height: 282px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 16px 36px var(--shadow);
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--gold) 65%, var(--line)); }
+    .card-head { display: flex; justify-content: space-between; gap: 12px; padding: 18px 18px 13px; border-bottom: 1px solid var(--line); }
+    .number { color: var(--gold); font: 700 .78rem/1 ui-monospace, monospace; }
+    .tag { color: var(--muted); font: 700 .67rem/1 ui-monospace, monospace; text-transform: uppercase; letter-spacing: .08em; }
+    .card-body { flex: 1; padding: 19px 18px; }
+    .card-icon {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      margin: -4px 0 16px;
+      border: 1px solid color-mix(in srgb, var(--gold) 34%, var(--line));
+      background: #171c22;
+    }
+    .card-icon img { width: 58px; height: 58px; object-fit: contain; }
+    .tarot-card .card-icon { width: 82px; height: 92px; background: #171315; }
+    .tarot-card .card-icon img { width: 68px; height: 78px; }
+    .card h3 { margin-bottom: 11px; font-size: 1.18rem; line-height: 1.2; }
+    .effect { margin: 0; color: var(--muted); font-size: .89rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 18px 18px; }
+    .chip { border: 1px solid var(--line); padding: 4px 7px; color: var(--muted); font: .7rem/1.2 ui-monospace, monospace; }
+    .chip.live { border-color: color-mix(in srgb, var(--green) 55%, var(--line)); color: var(--green); }
+    .chip.locked { border-color: color-mix(in srgb, var(--red) 60%, var(--line)); color: var(--red); }
+    .tarot-card { min-height: 320px; position: relative; overflow: hidden; }
+    .tarot-card::after {
+      content: attr(data-roman);
+      position: absolute;
+      right: -7px;
+      bottom: -35px;
+      color: color-mix(in srgb, var(--gold) 8%, transparent);
+      font: 500 8.5rem/1 Georgia, serif;
+      pointer-events: none;
+    }
+    .tarot-card .card-body, .tarot-card .meta { position: relative; z-index: 1; }
+    .grid.list-view { grid-template-columns: 1fr; }
+    .grid.list-view .card {
+      grid-column: 1 / -1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(160px, .6fr) minmax(320px, 1.7fr) minmax(240px, 1fr);
+    }
+    .grid.list-view .card-head { align-items: center; border-right: 1px solid var(--line); border-bottom: 0; }
+    .grid.list-view .card-body { display: grid; grid-template-columns: 80px 1fr; align-items: center; gap: 0 14px; padding-block: 14px; }
+    .grid.list-view .card-icon { grid-row: 1 / 3; margin: 0; }
+    .grid.list-view .card h3 { align-self: end; margin-bottom: 5px; }
+    .grid.list-view .effect { align-self: start; }
+    .grid.list-view .meta { align-content: center; align-items: center; padding: 14px 18px; border-left: 1px solid var(--line); }
+    .grid.list-view .tarot-card::after { display: none; }
+    .empty { grid-column: 1 / -1; padding: 80px 20px; border-block: 1px solid var(--line); text-align: center; color: var(--muted); }
+    .timeline { display: none; grid-template-columns: repeat(4, 1fr); margin-bottom: 28px; border: 1px solid var(--line); }
+    .timeline.show { display: grid; }
+    .moment { padding: 18px; background: var(--surface-2); }
+    .moment + .moment { border-left: 1px solid var(--line); }
+    .moment b { display: block; color: var(--gold-soft); font: 700 1.15rem/1 ui-monospace, monospace; }
+    .moment span { color: var(--muted); font-size: .78rem; }
+    footer { margin-top: 70px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: .76rem; }
+    @media (max-width: 980px) {
+      .intro { grid-template-columns: 1fr; gap: 24px; }
+      .card { grid-column: span 6; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .stat:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+      .stat:nth-child(4) { border-top: 1px solid var(--line); }
+      .timeline { grid-template-columns: 1fr 1fr; }
+      .moment:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+      .moment:nth-child(4) { border-top: 1px solid var(--line); }
+      .level-track { grid-template-columns: repeat(4, 1fr); }
+      .level:nth-child(n+5) { border-top: 1px solid var(--line); }
+    }
+    @media (max-width: 680px) {
+      .shell { width: min(var(--max), calc(100% - 26px)); }
+      .masthead { min-height: 680px; }
+      .masthead::before { right: -22vw; top: 4vh; }
+      h1 { font-size: clamp(3rem, 16vw, 5rem); }
+      .hero { padding-bottom: 44px; }
+      .control-row { grid-template-columns: 1fr; }
+      .tabs { display: grid; grid-template-columns: 1fr 1fr; }
+      .filter-row { align-items: flex-start; flex-direction: column; }
+      .catalog-status { width: 100%; justify-content: space-between; }
+      .filters { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+      .filter { min-height: 39px; padding: 7px 11px; }
+      .card { grid-column: 1 / -1; min-height: 0; }
+      .grid.list-view .card { display: flex; }
+      .grid.list-view .card-head { border-right: 0; border-bottom: 1px solid var(--line); }
+      .grid.list-view .card-body { display: block; }
+      .grid.list-view .card-icon { margin: -4px 0 16px; }
+      .grid.list-view .meta { border-left: 0; }
+      .timeline { grid-template-columns: 1fr; }
+      .moment + .moment { border-left: 0; border-top: 1px solid var(--line); }
+      .level-track { grid-template-columns: 1fr 1fr; }
+      .level { min-height: 106px; }
+      .level:last-child { grid-column: 1 / -1; }
+      .example { grid-template-columns: 1fr; }
+      .example-mark { min-height: 110px; border-right: 0; border-bottom: 1px solid var(--gold); }
+      .mechanic-list { grid-template-columns: 1fr; }
+      details.mechanic[open] { grid-column: auto; }
+      .mechanic-body { padding-left: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .card { transition: none; }
+      .card:hover { transform: none; }
+    }
+    @media print {
+      .masthead { min-height: 420px; }
+      .topbar, .controls { position: static; }
+      .topbar-actions, .filters { display: none; }
+      .card { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <symbol id="icon-arrow" viewBox="0 0 24 24">
+      <path d="M5 12h14M14 7l5 5-5 5"/>
+    </symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+    </symbol>
+    <symbol id="icon-list" viewBox="0 0 24 24">
+      <path d="M9 6h12M9 12h12M9 18h12"/><rect x="3" y="4" width="3" height="3"/><rect x="3" y="10.5" width="3" height="3"/><rect x="3" y="17" width="3" height="3"/>
+    </symbol>
+  </svg>
+  <header class="masthead">
+    <div class="topbar shell">
+      <span class="brand">KGC / Strife Field Manual</span>
+      <div class="topbar-actions">
+        <div class="lang-control" role="group" aria-label="Ngôn ngữ">
+          <button class="lang-toggle" type="button" data-lang="vi" aria-pressed="true">VI</button>
+          <button class="lang-toggle" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Đổi giao diện sáng tối">Sáng / Tối</button>
+      </div>
+    </div>
+    <div class="hero shell">
+      <span class="eyebrow">Season 73 / Client 173.0.00</span>
+      <h1>Strife Compendium</h1>
+      <p class="hero-copy">Tra cứu toàn bộ Chiến Lược và Tarot từ dữ liệu thực thi, gồm cấp bậc, điều kiện xuất hiện và trạng thái mùa.</p>
+      <div class="stats">
+        <div class="stat"><b>67</b><span>Chiến Lược gốc</span></div>
+        <div class="stat"><b>141</b><span>Bản ghi cấp bậc</span></div>
+        <div class="stat"><b>17</b><span>Lá Tarot</span></div>
+        <div class="stat"><b>11/15</b><span>Theme đang mở</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="intro" aria-labelledby="guide-title">
+      <div>
+        <h2 id="guide-title">Đọc trận địa đúng cách</h2>
+        <p>Chiến Lược dùng EXP và tăng tối đa cấp 7. Tarot là biến cố độc lập: chọn một trong ba lá ở vòng 7, 12, 17; vòng 22 hệ thống tự rút một lá định mệnh.</p>
+        <p>Hiệu ứng dưới đây ưu tiên chuỗi thực thi <code>WorldTriggers</code><svg class="icon-arrow inline-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg><code>ColosseumEventTriggers</code><svg class="icon-arrow inline-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg><code>ColosseumBuffDatas</code>, không sao chép mù quáng các comment đã lỗi thời.</p>
+      </div>
+      <div class="rules" aria-label="Thông số nhanh">
+        <div class="rule"><b>3 lựa chọn</b><span>mỗi lần tăng cấp</span></div>
+        <div class="rule"><b>5 reroll</b><span>đổi riêng từng ô</span></div>
+        <div class="rule"><b>0<svg class="icon-arrow inline-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg>420 EXP</b><span>7 mốc cấp Chiến Lược</span></div>
+        <div class="rule"><b>W 10<svg class="icon-arrow inline-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg>50</b><span>trọng số tương đối</span></div>
+      </div>
+    </section>
+
+    <section class="mechanics" id="co-che" aria-labelledby="mechanics-title">
+      <div class="mechanics-head">
+        <h2 id="mechanics-title">Toàn bộ cơ chế trong một ván</h2>
+        <p>Game không rút từ cả 141 dòng cùng lúc. Nó xác định bậc hiện tại, dựng pool hợp lệ, loại các lá xung đột rồi mới quay số theo Weight.</p>
+      </div>
+
+      <div class="level-track" aria-label="Tiến trình cấp Chiến Lược">
+        <div class="level"><b>Cấp 1</b><span>0 EXP</span><span class="tier">Khởi đầu · chưa chọn</span></div>
+        <div class="level"><b>Cấp 2</b><span>40 EXP</span><span class="tier">Chọn lá bậc 1</span></div>
+        <div class="level"><b>Cấp 3</b><span>70 EXP</span><span class="tier">Chọn lá bậc 1</span></div>
+        <div class="level"><b>Cấp 4</b><span>120 EXP</span><span class="tier">Chọn lá bậc 2</span></div>
+        <div class="level"><b>Cấp 5</b><span>200 EXP</span><span class="tier">Chọn lá bậc 2</span></div>
+        <div class="level"><b>Cấp 6</b><span>300 EXP</span><span class="tier">Chọn lá bậc 3</span></div>
+        <div class="level"><b>Cấp 7</b><span>420 EXP</span><span class="tier">Chọn lá bậc 3</span></div>
+      </div>
+      <p class="mechanic-note">Bậc là thuộc tính của lá; cấp là tiến trình chung của người chơi. Client tính bậc nội bộ bằng chỉ số lần nâng cấp chia 2.</p>
+
+      <div class="example">
+        <div class="example-mark"><img src="strife-assets/strategies/50030.png" alt="Icon Máu Ác Ma"></div>
+        <div class="example-copy">
+          <h3>Ví dụ: săn Máu Ác Ma</h3>
+          <p><strong>Cấp 2–3:</strong> không thể ra vì đây là hai lượt chọn lá bậc 1 và Máu Ác Ma không có bản bậc 1.</p>
+          <p><strong>Cấp 4–5:</strong> ID <code>50031</code> vào pool bậc 2 với Weight 25.</p>
+          <p><strong>Cấp 6–7:</strong> ID <code>50032</code> vào pool bậc 3 với Weight 25. Năm reroll giúp thử thêm, nhưng không bảo đảm xuất hiện.</p>
+        </div>
+      </div>
+
+      <div class="mechanic-list">
+        <details class="mechanic" open>
+          <summary>01. Pipeline tạo ba lựa chọn</summary>
+          <div class="mechanic-body">
+            <div class="flow"><span>Xác định bậc</span><i><svg class="icon-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></i><span>Lọc pool</span><i><svg class="icon-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></i><span>Quay Weight</span><i><svg class="icon-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></i><span>Loại lá vừa rút</span><i><svg class="icon-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></i><span>Đủ 3 ô</span></div>
+            <p>Pool trước tiên chỉ giữ bản ghi đúng bậc. Sau đó client loại lá <code>Disabled</code>, theme không thuộc mùa, root đã sở hữu/đã bỏ, danh mục đặc biệt xung đột và các điều kiện đội hình chưa đạt. Ba lá được rút tuần tự, không phải ba lần độc lập có thể trùng nhau.</p>
+            <p>Nếu bộ lọc quá chặt khiến không đủ lựa chọn, client có nhánh thử lại để nới điều kiện chống lặp; mục tiêu là vẫn lấp đầy giao diện thay vì treo vòng chọn.</p>
+          </div>
+        </details>
+
+        <details class="mechanic">
+          <summary>02. Weight tính xác suất thế nào?</summary>
+          <div class="mechanic-body">
+            <p><code>Weight</code> chỉ được tính sau khi pool hợp lệ đã hình thành. Nó là vé trong cùng một hộp, không phải phần trăm cố định.</p>
+            <p class="formula">P(lá A ở lượt rút kế) = Weight(A) / tổng Weight còn lại</p>
+            <p>Ví dụ pool chỉ còn W10, W25 và W50: xác suất lượt đầu lần lượt là 11,8%, 29,4% và 58,8%. Sau mỗi lần rút, lá trúng bị bỏ khỏi pool nên mẫu số thay đổi.</p>
+          </div>
+        </details>
+
+        <details class="mechanic">
+          <summary>03. Reroll và lá đã bỏ</summary>
+          <div class="mechanic-body">
+            <p>Mỗi ván bắt đầu với <strong>5 reroll Chiến Lược</strong>. Reroll thay riêng ô được chọn, không quay lại cả ba ô. Lá bị bỏ được ghi vào <code>abandonedAbilities</code> để không lập tức quay trở lại trong lần rút bình thường.</p>
+            <p>Reroll không đổi bậc của lượt nâng cấp và không đưa theme bị khóa vào pool. Khi pool cạn, nhánh retry có thể nới chống lặp, nhưng vẫn phải thỏa các gate cốt lõi.</p>
+          </div>
+        </details>
+
+        <details class="mechanic">
+          <summary>04. Gate đội hình, danh mục và theme</summary>
+          <div class="mechanic-body">
+            <p><strong>Gate đề cử</strong> quyết định lá có vào pool: số ô hiện tại, vòng hiện tại, có hero vùng/vai trò phù hợp, trạng thái <code>Disabled</code>, theme mùa và danh mục đã sở hữu.</p>
+            <p><strong>Gate kích hoạt</strong> là lớp thứ hai. Ví dụ có 3 hero Bắc có thể cho Giáp Mùa Đông xuất hiện, nhưng phải bố trí ít nhất 4 hero Bắc thì buff +150% HP mới chạy trong trận.</p>
+            <p>Mùa 73 mở theme <code>1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15</code>; theme 2–5 bị loại. Bot có lá theme bị cấm sẽ được đổi sang một lá chưa sở hữu trong fallback pool.</p>
+          </div>
+        </details>
+
+        <details class="mechanic">
+          <summary>05. EXP và sáu lần chọn lá</summary>
+          <div class="mechanic-body">
+            <p>Cấp Chiến Lược tối đa là 7, với mốc tổng EXP <code>0 / 40 / 70 / 120 / 200 / 300 / 420</code>. Khi mục tiêu xâm chiếm bị đánh bại, EXP nhận theo vị trí mục tiêu là <code>70 / 100 / 130 / 160</code>.</p>
+            <p>Mỗi lần đạt cấp 2–7 sẽ mở màn chọn một trong ba lá. Vì bậc tăng sau mỗi hai lần chọn nên một build hoàn chỉnh tối đa có hai lá bậc 1, hai lá bậc 2 và hai lá bậc 3.</p>
+          </div>
+        </details>
+
+        <details class="mechanic">
+          <summary>06. Khi nào hiệu ứng thực sự chạy?</summary>
+          <div class="mechanic-body">
+            <p>Lá tài nguyên tức thời có thể chạy ngay khi chọn. Lá có <code>ApplyAfterBattle=true</code> được đưa vào trạng thái chiến đấu; thời điểm thực thi vẫn do trigger quyết định như <code>StageStart</code>, <code>ReadyPhaseStart</code>, <code>BattleStart</code>, thắng/thua, dùng kỹ năng hoặc hạ địch.</p>
+            <p>Một số hiệu ứng dùng custom stack để giới hạn số vòng, số lần hoặc reset cuối trận. Vì vậy mô tả ngắn không đủ để mô phỏng chính xác; thứ tự tin cậy là WorldTriggers, EventTriggers rồi BuffDatas.</p>
+          </div>
+        </details>
+
+        <details class="mechanic">
+          <summary>07. Token và Shop Xâm Chiếm</summary>
+          <div class="mechanic-body">
+            <p>Token Xâm Chiếm tối đa mặc định là <strong>10</strong>, mức tăng giới hạn là <strong>2</strong>, và mỗi lần làm mới shop tốn <strong>1 Token</strong>. Bậc Đá Triệu Hồi trong shop phụ thuộc Cấp Chiến Lược:</p>
+            <table class="data-table">
+              <thead><tr><th>Cấp</th><th>B1</th><th>B2</th><th>B3</th><th>B4</th><th>B5</th><th>B6</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>100%</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>2</td><td>60%</td><td>30%</td><td>10%</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>3</td><td>45%</td><td>35%</td><td>15%</td><td>5%</td><td>0</td><td>0</td></tr>
+                <tr><td>4</td><td>30%</td><td>40%</td><td>15%</td><td>10%</td><td>5%</td><td>0</td></tr>
+                <tr><td>5</td><td>24%</td><td>30%</td><td>20%</td><td>15%</td><td>10%</td><td>1%</td></tr>
+                <tr><td>6</td><td>14%</td><td>20%</td><td>25%</td><td>20%</td><td>18%</td><td>3%</td></tr>
+                <tr><td>7</td><td>6%</td><td>8%</td><td>30%</td><td>27%</td><td>24%</td><td>5%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="mechanic">
+          <summary>08. Nhiệt Ác Chiến</summary>
+          <div class="mechanic-body">
+            <p>Chuỗi thắng 1–6 đặt nhiệt đối thủ theo dãy <code>10 / 20 / 40 / 80 / 120 / 200</code>; từ 7 trận trở lên client tính tiếp bằng code. Mỗi 1 nhiệt tăng <strong>2% ATK, 2% phép, 0,4% tốc đánh, 2,5% HP, 8% phòng thủ lai và 1,3% kháng khống chế</strong>.</p>
+            <p>Khi toàn bộ đều thắng, nhiệt nền tăng 6; số trận thua làm giảm theo dãy <code>0 / 10 / 20 / 30</code>. Tarot Cái Chết cộng cố định 30 nhiệt sau khi nhận.</p>
+          </div>
+        </details>
+
+        <details class="mechanic">
+          <summary>09. Tarot khác Chiến Lược</summary>
+          <div class="mechanic-body">
+            <p>Tarot không dùng EXP, không chiếm một trong sáu ô Chiến Lược và không có Weight trong XML. Vòng 7, 12, 17 mở 10 giây để chọn 1 trong 3 lá thường; vòng 22 có pha 10 giây và tự rút một trong 5 lá định mệnh.</p>
+            <p>Các tiêu chí chọn người chơi gồm: HP thấp nhất và nhiệt cao nhất từ phase 2, nhiều Bạc nhất, tổng bậc Đá cao nhất, đội hình nhỏ nhất và tổng EXP Chiến Lược cao nhất.</p>
+          </div>
+        </details>
+
+        <details class="mechanic">
+          <summary>10. Nhịp trận và phần thưởng</summary>
+          <div class="mechanic-body">
+            <p>Data cấu hình thời gian chuẩn bị theo dãy <code>30 / 45 / 55 / 55 / 55 giây</code>, chiến đấu <code>12 / 18 / 24 / 30 giây</code>, và mỗi pha Tarot 10 giây.</p>
+            <p>Ba rương cuối ván yêu cầu đạt vòng <code>5 / 10 / 15</code>, giá mở lần lượt <code>5 / 10 / 20 Lương Thực</code>. Rương tăng cường có xác suất 20% thường hoặc 100% trong hot time, thưởng thêm 50%. Pool chỉ được cấu hình reset ở vòng 100.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section aria-label="Bộ tra cứu">
+      <div class="controls">
+        <div class="control-row">
+          <input class="search" id="search" type="search" placeholder="Tìm tên, ID, hiệu ứng, buff..." aria-label="Tìm kiếm dữ liệu Strife">
+          <div class="tabs" role="group" aria-label="Loại dữ liệu">
+            <button class="tab" type="button" data-view="strategy" aria-pressed="true">Chiến Lược · 67</button>
+            <button class="tab" type="button" data-view="tarot" aria-pressed="false">Tarot · 17</button>
+          </div>
+        </div>
+        <div class="filter-row">
+          <div class="filters" id="filters" aria-label="Lọc danh mục"></div>
+          <div class="catalog-status">
+            <span id="result-count" aria-live="polite"></span>
+            <div class="view-control" id="view-control" role="group" aria-label="Kiểu hiển thị">
+              <button class="view-toggle" type="button" data-layout="grid" aria-pressed="true" aria-label="Dạng lưới" title="Dạng lưới"><svg class="view-icon" aria-hidden="true"><use href="#icon-grid"/></svg></button>
+              <button class="view-toggle" type="button" data-layout="list" aria-pressed="false" aria-label="Dạng danh sách" title="Dạng danh sách"><svg class="view-icon" aria-hidden="true"><use href="#icon-list"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline" id="timeline" aria-label="Lịch Tarot">
+        <div class="moment"><b>Vòng 07</b><span>Chọn 1 trong 3 lá thường</span></div>
+        <div class="moment"><b>Vòng 12</b><span>Chọn 1 trong 3 lá thường</span></div>
+        <div class="moment"><b>Vòng 17</b><span>Chọn 1 trong 3 lá thường</span></div>
+        <div class="moment"><b>Vòng 22</b><span>Tự rút 1 lá định mệnh</span></div>
+      </div>
+      <div class="grid" id="catalog"></div>
+    </section>
+
+    <footer>Nguồn: snapshot XML v173.0.00 đang phục vụ Season 73. Cập nhật 15/09/2026.</footer>
+  </main>
+
+  <script>
+    const strategies = [
+      ["10000",["10000","10001","10002"],"Rương Bạc","Kinh tế",10,"Nhận ngay 40 / 60 / 90 Bạc.","Pool chung"],
+      ["10010",["10010","10011"],"Loại 1 Tên!","Kinh tế",15,"Mỗi khi người chơi khác bị loại, nhận 80 Bạc.","Pool chung"],
+      ["10020",["10020"],"Cướp Đoạt","Kinh tế",30,"Mỗi lần xâm chiếm thành công, nhận 25 Bạc.","Pool chung"],
+      ["10030",["10030","10031","10032"],"Trưng Binh","Kinh tế",10,"Nhận 4 đợt, mỗi đợt 3 / 4 / 6 Thư Triệu Hồi Anh Hùng Cao Cấp.","Pool chung"],
+      ["10040",["10040"],"Tiền Thưởng","Kinh tế",30,"Đầu các vòng tinh anh 6, 11, 16, 21, nhận 25 Bạc.","Pool chung"],
+      ["10050",["10050"],"Càng Nhiều Càng Tốt","Kinh tế",30,"Khi binh lực đạt 7, nhận 50 Bạc một lần.","Chỉ xuất hiện khi có dưới 7 ô"],
+      ["10060",["10061","10062"],"Kiệt Tác Tham Vọng","Kinh tế",30,"Nhận ngay 1 Kiệt Tác Tham Vọng ngẫu nhiên.","Chỉ có bậc 2–3"],
+      ["10070",["10070","10071","10072"],"Thuật Giả Kim","Kinh tế",10,"Nhận Đá Hiền Triết đổi trang bị cùng bậc, kèm 20 Bạc.","Pool chung"],
+      ["10080",["10080","10081"],"Kiếm Vua","Kinh tế",15,"Mỗi khi một hero đạt 6 sao, nhận 1 trang bị bậc Thần ngẫu nhiên.","Bậc 1–2"],
+      ["10090",["10090"],"Hợp Đồng Cấp Phát","Kinh tế",30,"Mỗi đầu vòng nhận 1 trang bị bậc 1 ngẫu nhiên.","Pool chung"],
+      ["10100",["10100"],"Tôi Luyện","Kinh tế",30,"Nhận ngay 1 trang bị Thần Vương.","Chỉ trước vòng 7"],
+      ["20000",["20000","20001"],"Lửa Thần","Tế Đàn",25,"Tất cả 6 Tế Đàn tăng 7 cấp.","Hai bậc cùng hiệu ứng"],
+      ["20010",["20010","20011"],"Cường Hóa Tăng Trưởng","Tế Đàn",25,"Tế Đàn Anh Hùng, Thợ Rèn, Tham Vọng +10 cấp; mở rèn trang bị bậc 2 / 3.","BuildingLevel"],
+      ["20020",["20020","20021"],"Cường Hóa Hạng Cân","Tế Đàn",25,"Tế Đàn Máu, Cự Thần và Pháp Sư tăng 10 cấp.","BuildingLevel"],
+      ["30000",["30001"],"Khách Quen","Shop Xâm Chiếm",50,"Lượt mua Đá Triệu Hồi đầu tiên mỗi vòng giảm 2 Token.","Chỉ bậc 2"],
+      ["30010",["30011"],"Khách Hàng Khó Tính","Shop Xâm Chiếm",50,"Mỗi reroll giảm 1 Token giá đá; mua một viên sẽ xóa toàn bộ giảm giá tích lũy.","Chỉ bậc 2"],
+      ["30020",["30021"],"Tập Trung Phòng Ngự","Shop Xâm Chiếm",50,"Mỗi đầu vòng nhận 14 Bạc, đổi lại mỗi Đá Triệu Hồi tăng 1 Token.","Chỉ bậc 2"],
+      ["30030",["30031","30032"],"Chất Hơn Lượng","Shop Xâm Chiếm",25,"Đá Boss giảm 2 Token; tần suất Boss tăng 15% / 70%.","Bậc 2–3"],
+      ["30040",["30042"],"Thợ Triệu Hồi Ma Vật","Shop Xâm Chiếm",50,"Mọi đá giảm 1 Token, nhưng đầu chuẩn bị mất 1 Token Xâm Chiếm.","Chỉ bậc 3"],
+      ["30050",["30052"],"Thợ Săn Đầu Người","Shop Xâm Chiếm",50,"Mọi đá tăng 1 Token; shop chỉ xuất hiện đá bậc 4 trở lên.","Chỉ bậc 3"],
+      ["40000",["40000","40001","40002"],"Lễ Trao Huân Chương","Tiến trình",10,"Từ vòng sau, nhận 1 Huân Chương Chiến Công trong 2 / 3 / 4 vòng.","Pool chung"],
+      ["40010",["40010"],"Nâng Cấp","Tiến trình",30,"Khi cấp Chiến Lược tăng từ 2–7, nhận 2 đá ngẫu nhiên bậc bằng cấp trừ 1.","Pool chung"],
+      ["40020",["40021","40022"],"Lửa Hận Thù","Tiến trình",15,"Sau khi thua, giai đoạn chuẩn bị kế nhận 5 Token Xâm Chiếm và 15 Bạc.","Bậc 2–3"],
+      ["50000",["50001","50002"],"Luyện Tột Cùng","Hero cao sao",25,"Đòn đánh thường của hero sao cao nhất tạo bản sao mục tiêu 4 giây; bản gốc nhận 200% sát thương bản sao.","Buff 150000"],
+      ["50010",["50011","50012"],"Thần Hộ Mệnh Tuyệt Hảo","Hero cao sao",25,"Mỗi trận thêm một cộng dồn: -10% sát thương nhận, +10 phản sát thương, +25% HP; tối đa 7.","Buff 150010"],
+      ["50020",["50021","50022"],"Ma Thần Thịnh Nộ","Hero cao sao",25,"Mỗi lần hero sao cao nhất dùng kỹ năng, lặp lại kỹ năng một lần lên mục tiêu ngẫu nhiên.","Buff 150020"],
+      ["50030",["50031","50032"],"Máu Ác Ma","Hero cao sao",25,"+50 hút máu vật lý/phép; trên 80% HP sẽ đổi 25% HP tối đa lấy +30% tốc đánh/chạy trong 4 giây.","Buff 150030"],
+      ["60000",["60000","60001","60002"],"Sức Mạnh Anh Hùng","Toàn đội",10,"Mỗi trang bị: +6% sát thương và -6% sát thương nhận, tối đa 10 cộng dồn.","Buff 160000"],
+      ["60010",["60011","60012"],"Trang Bị Ảo Mộng","Toàn đội",15,"Bốn hero sao thấp nhất tạm đeo trang bị Thần / Thần Vương ngẫu nhiên.","Disabled theo root"],
+      ["60020",["60020","60021","60022"],"Đội Quân Tinh Nhuệ","Toàn đội",10,"Chỉ số trang bị trên 4 hero sao cao nhất tăng 25%.","Buff 160020"],
+      ["60030",["60030","60031","60032"],"Thanh Kiếm Sắc Bén","Toàn đội",10,"Nhận 1 Thần Kiếm / 1 Vương Kiếm + 1 Thần Kiếm / 2 Thần Kiếm.","Item 102 / 101"],
+      ["60040",["60040","60041","60042"],"Gậy Thần Bí","Toàn đội",10,"Nhận 1 Thần Trượng / 1 Vương Trượng + 1 Thần Trượng / 2 Thần Trượng.","Item 402 / 401"],
+      ["60050",["60050","60051","60052"],"Cung Tốc Độ","Toàn đội",10,"Nhận 1 Thần Cung / 1 Vương Cung + 1 Thần Cung / 2 Thần Cung.","Item 302 / 301"],
+      ["60060",["60060","60061","60062"],"Giáp Chắn Chắn","Toàn đội",10,"Nhận 1 Thần Giáp / 1 Vương Giáp + 1 Thần Giáp / 2 Thần Giáp.","Item 202 / 201"],
+      ["60070",["60070","60071","60072"],"Chiến Đấu Bền Bỉ","Toàn đội",10,"Toàn đội giảm 80% sát thương nhận, đồng thời giảm 20% tổng sát thương gây ra.","Buff 160070"],
+      ["60080",["60080","60081","60082"],"Tấn Công Thủ Lĩnh","Toàn đội",10,"Đối đầu Boss: -70% sát thương nhận, +30% sát thương gây ra; Boss -70% hồi máu.","Buff 160080 / 160081"],
+      ["60090",["60090","60091","60092"],"Âm Dương Hòa Hợp","Toàn đội",10,"Đánh thường tích chí mạng phép; dùng skill tích chí mạng vật lý. Reset cuối trận.","Buff 160090"],
+      ["60100",["60100","60101","60102"],"Đe Ngẫu Nhiên","Toàn đội",10,"Mỗi trận nhận ngẫu nhiên +20% ATK, +60% phép, +30% tốc đánh hoặc +120% HP.","Buff 160100–160103"],
+      ["60110",["60110"],"Lính Kỳ Cựu","Toàn đội",30,"Bắt đầu +15% sát thương; mỗi đầu trận tăng vĩnh viễn thêm 3% trong ván.","Buff 160110"],
+      ["60120",["60121","60122"],"Chỉ Tiến Không Lùi","Toàn đội",15,"Khi chỉ còn 1 Cờ, toàn đội tăng 50% tổng sát thương.","Buff 160121"],
+      ["60130",["60131","60132"],"Khúc Gỗ Gai","Toàn đội",25,"Khi mục tiêu bị xâm chiếm bắt đầu trận, đẩy đội hình đối thủ 2 ô.","Event 160131"],
+      ["70000",["70000","70001","70002"],"Giáp Mùa Đông","Vùng & vai trò",50,"Có đội hình Bắc; bố trí ít nhất 4 hero Bắc để toàn đội +150% HP.","Miền Bắc"],
+      ["70010",["70010","70011","70012"],"Gia Hộ Của Thánh Thú","Vùng & vai trò",50,"Có đội hình Đông; bố trí ít nhất 4 hero Đông để nhận +30 Uy Hiếp và +30 mana.","Miền Đông"],
+      ["70020",["70020","70021","70022"],"Khả Năng Hồi Vĩnh Cửu","Vùng & vai trò",50,"Có đội hình Tây; bố trí ít nhất 4 hero Tây để nhận -60% sát thương và +30 Hộ Vệ.","Miền Tây"],
+      ["70030",["70030","70031","70032"],"Lực Lượng Đế Quốc","Vùng & vai trò",50,"Có đội hình Nam; 4 hero Nam khiến lần hạ địch đầu gây Sợ Hãi 2 giây và +20% sát thương.","Miền Nam"],
+      ["70040",["70040","70041","70042"],"Khí Phách Anh Hùng","Vùng & vai trò",50,"Có đội hình Trung; bố trí ít nhất 3 hero Trung để +60% ATK, phép và tốc đánh.","Miền Trung"],
+      ["70050",["70050","70051","70052"],"Dũng Mãnh Tăng Tiến","Vùng & vai trò",50,"Hero Dũng Mãnh hồi sinh một lần đầy HP/mana và giảm 60% sát thương nhận.","Vai trò Dũng Mãnh"],
+      ["70060",["70060","70061","70062"],"Trận Tuyến Kiên Cường","Vùng & vai trò",50,"Hero Kiên Cường bắt đầu trận với 2 giây bất tử và miễn khống chế.","Vai trò Kiên Cường"],
+      ["70070",["70070","70071","70072"],"Cơn Thịnh Nộ Nguyên Tố","Vùng & vai trò",50,"Hero Nguyên Tố dùng skill tích +10% sát thương chí mạng vật lý và phép, tối đa 150%.","Vai trò Nguyên Tố"],
+      ["70080",["70080","70081","70082"],"Gió Thần Tốc","Vùng & vai trò",50,"Hero Thần Tốc nhận +40% tổng tốc đánh và +100% tốc chạy.","Vai trò Thần Tốc"],
+      ["70090",["70090","70091","70092"],"Học Giả Thần Bí","Vùng & vai trò",50,"Hero Thần Bí bắt đầu +100% ATK/phép; mỗi đồng minh chết giảm 10 điểm phần trăm.","Vai trò Thần Bí"],
+      ["70100",["70100","70101","70102"],"Vào Trong Bóng Đen","Vùng & vai trò",50,"Mỗi trận một lần, đòn chí mạng để lại 1 HP, cho 10 Phòng Thủ Tuyệt Đối và ẩn thân 2 giây.","Vai trò Bóng Đen"],
+      ["80000",["80001","80002"],"Chúa Tể Goblin","Theme",20,"Nhận Đá Châu, nâng pool Goblin; giảm giá chuồng 1 / 2 Token.","Theme 1 · đang mở",true],
+      ["80010",["80011"],"Thủ Lĩnh Băng Cướp","Theme",40,"Mỗi reroll thứ 8 đưa Đá Mara vào shop; nâng chuồng và giảm giá 1 Token.","Theme 2 · bị khóa",false],
+      ["80020",["80020"],"Quân Đoàn Slime","Theme",40,"Nhận các đợt Đá Slime tăng dần ở vòng 5, 10, 15, 20, 25 và 30.","Theme 3 · bị khóa",false],
+      ["80030",["80030","80031"],"Vùng Đất Undead","Theme",20,"Undead được gọi bằng skill nhận +100% HP, ATK, phép và +1 Phòng Thủ Tuyệt Đối.","Theme 4 · bị khóa",false],
+      ["80040",["80040","80041"],"Elf Tinh Nhuệ","Theme",20,"Đá Elf +2 Token; Elf +200% HP, ATK và phép.","Theme 5 · bị khóa",false],
+      ["80050",["80050","80051"],"Orc Máu","Theme",20,"Tăng 50% hiệu ứng thường của Đá Orc nếu xâm chiếm vòng trước thành công.","Theme 6 · đang mở",true],
+      ["80060",["80061","80062"],"Ác Linh Nguyền Rủa","Theme",20,"Hiệu ứng Thử Thách lên đối thủ mạnh hơn 66%; thay đá bằng biến thể mạnh.","Theme 7 · đang mở",true],
+      ["80070",["80072"],"Chúa Tể Vampire","Theme",40,"Nhận 1 Đá Nosferatu ngay và thêm một viên mỗi 3 vòng.","Theme 8 · đang mở",true],
+      ["80080",["80081","80082"],"Trái Tim Sương Giá","Theme",20,"Mỗi Đá Tộc Sương Giá triệu hồi thêm 1 Totem Sương Giá trên sân đối thủ.","Theme 9 · đang mở",true],
+      ["80090",["80092"],"Mài Mòn Hư Vô","Theme",30,"Đặt tỉ lệ theme khác về -100%, khiến shop chỉ ra Đá Hư Vô.","Theme 10 · đang mở",true],
+      ["80100",["80100","80101"],"Ý Chí Diệt Rồng","Theme",20,"Hiệu ứng Đá Triệu Hồi Đội Diệt Rồng tăng 100%, tức gấp đôi.","Theme 11 · đang mở",true],
+      ["80110",["80110","80111","80112"],"Xâm Thực Vô Tận","Theme",20,"Quái chuồng Elf Hư Vô chết khiến địch trong vùng 5×5 nhận 2 Phòng Thủ Tuyệt Đối.","Theme 12 · đang mở",true],
+      ["80120",["80121"],"Đỗ Trạng Nguyên","Theme",20,"Giảm 1 vòng nâng cấp Đá Đông Phương Quân; sau vòng 2, Thủ Lĩnh thành Võ Sĩ Hộ Vệ.","Theme 13 · đang mở",true],
+      ["80130",["80130"],"Rồng Phẫn Nộ","Theme",20,"Khi mất Cờ, nâng Đá Hiệp Sĩ Rồng; nhận Đá Nosferatu Quân Lính và Pháp Sư Máu.","Theme 14 · đang mở",true],
+      ["80140",["80141"],"Ngọn Lửa Thiên Đàng","Theme",20,"Tất cả Tế Đàn +5 cấp; mỗi Tế Đàn đạt 15 sẽ gọi thêm Đá Eledor tương ứng.","Theme 15 · đang mở",true]
+    ];
+
+    const tarots = [
+      ["10000","0","Chàng Khờ","Thường","Giảm 1 Bạc cho mỗi 3 Bạc hiện có.","Nhận ở vòng 7 / 12 / 17"],
+      ["10010","I","Nhà Ảo Thuật","Thường","Nhận 1 Bạc cho mỗi 2 Bạc hiện có.","Nhận ở vòng 7 / 12 / 17"],
+      ["10020","II","Nữ Tư Tế","Thường","Trong 3 vòng kế, nếu phòng thủ thất bại và mất Cờ, nhận 30 Bạc.","Theo dõi bằng custom stack"],
+      ["10030","IV","Hoàng Đế","Thường","Phí tăng cường binh lực ở vòng này giảm 30%.","Áp dụng cả khi mua thêm ô"],
+      ["10040","V","Giáo Hoàng","Thường","Tăng 1 sao cho hero có cấp sao cao nhất đang được bố trí.","Hiệu lực ngay"],
+      ["10050","VI","Người Yêu","Thường","Binh lực tăng thêm 1.","Cấp item mở rộng 10022"],
+      ["10060","VII","Cỗ Xe Ngựa","Thường","Trong 3 vòng kế, xâm chiếm thành công gây mất Cờ sẽ thưởng trang bị bậc 3.","Có thể kích hoạt mỗi lần thành công"],
+      ["10070","IX","Ẩn Sĩ","Thường","Trong 3 vòng kế, đầu trận xóa 1 Đá Triệu Hồi ngẫu nhiên; nếu không có đá, vòng sau mất 5 Token.","Bất lợi"],
+      ["10080","X","Số Phận","Thường","Tháo mọi trang bị, nhận 10 Bạc và Đá Hiền Triết chỉ tồn tại trong vòng này.","Trang bị được gỡ khỏi toàn bộ hero"],
+      ["10090","XVII","Ngôi Sao","Thường","Trong 3 vòng kế, đầu trận sao chép 1 Đá Triệu Hồi ngẫu nhiên.","Tối đa một bản sao mỗi trận"],
+      ["10100","XVIII","Mặt Trăng","Thường","Trong 15 giây, bán hero 1 sao nhận thêm 1 Bạc.","Kích hoạt đầu chuẩn bị"],
+      ["10110","XIX","Mặt Trời","Thường","Mọi triệu hồi trong vòng này dùng hiệu ứng Thư Cao Cấp, nhưng không thể bán hero.","Kích hoạt đầu chuẩn bị"],
+      ["20000","VIII","Sức Mạnh","Định mệnh","Từ khi nhận, mọi Đá Triệu Hồi gọi số lượng đơn vị gấp đôi.","Tự rút ở vòng 22"],
+      ["20010","XII","Người Treo Ngược","Định mệnh","Tăng mạnh xác suất Đá Triệu Hồi bậc 5–6 trong Shop Xâm Chiếm.","FixedValue 200"],
+      ["20020","XIII","Cái Chết","Định mệnh","Từ khi nhận, Nhiệt Ác Chiến tăng 30.","Trigger 20020"],
+      ["20030","XV","Ác Ma","Định mệnh","Từ khi nhận, số ma vật xuất hiện mặc định tăng gấp đôi, trừ Đá Triệu Hồi.","Action EnableDevilStage"],
+      ["20040","XVI","Tòa Tháp","Định mệnh","Từ khi nhận, mỗi vòng có 10 lần làm mới Đá Triệu Hồi miễn phí.","Cộng lại ở mỗi StageStart"]
+    ];
+
+    const strategyEn = [
+      ["Silver Chest","Economy","Immediately gain 40 / 60 / 90 Silver.","General pool"],
+      ["One Down!","Economy","Whenever another player is eliminated, gain 80 Silver.","General pool"],
+      ["Plunder","Economy","Gain 25 Silver after each successful invasion.","General pool"],
+      ["Conscription","Economy","Receive 4 waves of 3 / 4 / 6 Advanced Hero Summon Scrolls.","General pool"],
+      ["Bounty","Economy","At the start of elite rounds 6, 11, 16 and 21, gain 25 Silver.","General pool"],
+      ["The More the Merrier","Economy","When troop capacity reaches 7, gain 50 Silver once.","Appears only below 7 slots"],
+      ["Masterpiece of Greed","Economy","Immediately gain 1 random Masterpiece of Greed.","Tier 2-3 only"],
+      ["Alchemy","Economy","Gain a Philosopher's Stone that exchanges equipment at the same tier, plus 20 Silver.","General pool"],
+      ["Royal Sword","Economy","Whenever a hero reaches 6 stars, gain 1 random God-tier equipment.","Tier 1-2"],
+      ["Supply Contract","Economy","At the start of each round, gain 1 random tier-1 equipment.","General pool"],
+      ["Tempering","Economy","Immediately gain 1 God-King equipment.","Before round 7 only"],
+      ["God's Flame","Altar","All 6 Altars gain 7 levels.","Both tiers share the effect"],
+      ["Growth Enhancement","Altar","Altar of Heroes, Blacksmith and Greed +10 levels; unlock tier-2 / tier-3 equipment forging.","BuildingLevel"],
+      ["Size Enhancement","Altar","Altars of Blood, Giant and Mage gain 10 levels.","BuildingLevel"],
+      ["Regular","Invasion Shop","The first Summon Stone purchase each round costs 2 fewer Tokens.","Tier 2 only"],
+      ["Picky Customer","Invasion Shop","Each reroll reduces stone cost by 1 Token; buying one clears all accumulated discounts.","Tier 2 only"],
+      ["Focus on Defense","Invasion Shop","At the start of each round gain 14 Silver, but every Summon Stone costs 1 more Token.","Tier 2 only"],
+      ["Quality Before Quantity","Invasion Shop","Boss Stones cost 2 fewer Tokens; Boss frequency rises by 15% / 70%.","Tier 2-3"],
+      ["Monster Summoner","Invasion Shop","All stones cost 1 fewer Token, but lose 1 Invasion Token at preparation start.","Tier 3 only"],
+      ["Headhunter","Invasion Shop","All stones cost 1 more Token; the shop offers only tier-4 or higher stones.","Tier 3 only"],
+      ["Medal Presentation","Progression","Starting next round, gain 1 Medal of Valor for 2 / 3 / 4 rounds.","General pool"],
+      ["Promotion","Progression","When Strategy level rises from 2-7, gain 2 random stones of tier level minus 1.","General pool"],
+      ["Thirst for Vengeance","Progression","After a loss, gain 5 Invasion Tokens and 15 Silver in the next preparation phase.","Tier 2-3"],
+      ["Ultimate Smelting","High-star Hero","Basic attacks from the highest-star hero create a target copy for 4 seconds; the original takes 200% of copy damage.","Buff 150000"],
+      ["Guardian God's Excellence","High-star Hero","Each battle adds one stack: -10% damage taken, +10 reflected damage, +25% HP; max 7.","Buff 150010"],
+      ["Berserk Demon God","High-star Hero","Whenever the highest-star hero uses a skill, repeat it once on a random target.","Buff 150020"],
+      ["Devil's Blood","High-star Hero","+50 physical/spell drain; above 80% HP, trade 25% max HP for +30% attack/move speed for 4 seconds.","Buff 150030"],
+      ["Hero's Power","Whole Team","Per equipment: +6% damage and -6% damage taken, up to 10 stacks.","Buff 160000"],
+      ["Mirage Equipment","Whole Team","The four lowest-star heroes temporarily equip random God / God-King equipment.","Disabled by root"],
+      ["Elite Troop","Whole Team","Equipment stats on the 4 highest-star heroes increase by 25%.","Buff 160020"],
+      ["Sharp Sword","Whole Team","Gain 1 God Sword / 1 King Sword + 1 God Sword / 2 God Swords.","Item 102 / 101"],
+      ["Magical Staff","Whole Team","Gain 1 God Staff / 1 King Staff + 1 God Staff / 2 God Staffs.","Item 402 / 401"],
+      ["Quick Bow","Whole Team","Gain 1 God Bow / 1 King Bow + 1 God Bow / 2 God Bows.","Item 302 / 301"],
+      ["Adamant Armor","Whole Team","Gain 1 God Armor / 1 King Armor + 1 God Armor / 2 God Armors.","Item 202 / 201"],
+      ["Tenacious Battle","Whole Team","The team takes 80% less damage while dealing 20% less total damage.","Buff 160070"],
+      ["Aiming for the Leader","Whole Team","Against Bosses: -70% damage taken, +30% damage dealt; Boss healing -70%.","Buff 160080 / 160081"],
+      ["Yin and Yang","Whole Team","Basic attacks stack spell critical chance; skills stack physical critical chance. Resets after battle.","Buff 160090"],
+      ["Random Anvil","Whole Team","Each battle randomly grants +20% ATK, +60% spell power, +30% attack speed or +120% HP.","Buff 160100-160103"],
+      ["Veteran","Whole Team","Start with +15% damage; permanently gain another 3% at each battle start for the run.","Buff 160110"],
+      ["One Last Stand","Whole Team","When only 1 Flag remains, the team gains 50% total damage.","Buff 160121"],
+      ["Spiked Log","Whole Team","When an invaded target starts battle, push the opponent formation back 2 tiles.","Event 160131"],
+      ["Winter Armor","Region & Role","Requires a North lineup; deploy at least 4 North heroes for team +150% HP.","North"],
+      ["Sacred Beast's Blessing","Region & Role","Requires an East lineup; deploy at least 4 East heroes for +30 Threat and +30 mana.","East"],
+      ["Eternal Regeneration","Region & Role","Requires a West lineup; deploy at least 4 West heroes for -60% damage and +30 Guard.","West"],
+      ["Empire's Force","Region & Role","Requires a South lineup; 4 South heroes make the first kill inflict Fear for 2 seconds and +20% damage.","South"],
+      ["Hero's Vigor","Region & Role","Requires a Central lineup; deploy at least 3 Central heroes for +60% ATK, spell power and attack speed.","Central"],
+      ["Rise of Courage","Region & Role","Mighty heroes revive once at full HP/mana and take 60% less damage.","Mighty role"],
+      ["Tenacious Formation","Region & Role","Robust heroes start battle with 2 seconds of invincibility and crowd-control immunity.","Robust role"],
+      ["Elemental Overdrive","Region & Role","Element heroes using skills stack +10% physical and spell critical damage, up to 150%.","Element role"],
+      ["Wind of Swiftness","Region & Role","Swift heroes gain +40% total attack speed and +100% move speed.","Swift role"],
+      ["Scholar of the Mystique","Region & Role","Mystic heroes start with +100% ATK/spell power; each ally death reduces it by 10 percentage points.","Mystic role"],
+      ["Into the Shadows","Region & Role","Once per battle, a critical hit leaves 1 HP, grants 10 Absolute Defense and stealth for 2 seconds.","Shadow role"],
+      ["Goblin Lord","Theme","Gain a Jewel Stone and improve the Goblin pool; pen cost -1 / -2 Tokens.","Theme 1 - active",true],
+      ["Bandit Leader","Theme","Every 8th reroll adds a Mara Stone to the shop; improve the pen and reduce cost by 1 Token.","Theme 2 - locked",false],
+      ["Slime Corps","Theme","Gain progressively stronger Slime Stone waves on rounds 5, 10, 15, 20, 25 and 30.","Theme 3 - locked",false],
+      ["Land of the Undead","Theme","Undead summoned by skills gain +100% HP, ATK, spell power and +1 Absolute Defense.","Theme 4 - locked",false],
+      ["Elite Elf","Theme","Elf Stones cost +2 Tokens; Elves gain +200% HP, ATK and spell power.","Theme 5 - locked",false],
+      ["Sanguine Orc","Theme","Increase normal Orc Stone effects by 50% if the previous round's invasion succeeded.","Theme 6 - active",true],
+      ["Wraith's Curse","Theme","Challenge effects on opponents are 66% stronger; replace stones with stronger variants.","Theme 7 - active",true],
+      ["Vampire Lord","Theme","Immediately gain 1 Nosferatu Stone and another every 3 rounds.","Theme 8 - active",true],
+      ["Frost Heart","Theme","Each Frost Tribe Stone summons 1 additional Frost Totem on the opponent's field.","Theme 9 - active",true],
+      ["Void Erosion","Theme","Set other theme rates to -100%, making the shop offer only Void Stones.","Theme 10 - active",true],
+      ["Dragon Slayer's Will","Theme","Dragon Slayer Squad Summon Stone effects increase by 100%, doubling them.","Theme 11 - active",true],
+      ["Endless Corruption","Theme","Void Elf pen monsters that die make enemies in a 5x5 area take 2 Absolute Defense damage.","Theme 12 - active",true],
+      ["Greatest Honor","Theme","Reduce Eastern Army Stone upgrade time by 1 round; after round 2, the Leader becomes a Guardian Warrior.","Theme 13 - active",true],
+      ["Dragon's Wrath","Theme","On losing a Flag, upgrade the Dragon Knight Stone; gain Nosferatu Soldier and Blood Mage Stones.","Theme 14 - active",true],
+      ["Celestial Flame","Theme","All Altars +5 levels; each Altar reaching 15 summons its matching Eledor Stone.","Theme 15 - active",true]
+    ];
+
+    const tarotEn = [
+      ["The Fool","Common","Lose 1 Silver for every 3 Silver currently held.","Obtained on round 7 / 12 / 17"],
+      ["The Magician","Common","Gain 1 Silver for every 2 Silver currently held.","Obtained on round 7 / 12 / 17"],
+      ["The High Priestess","Common","For the next 3 rounds, gain 30 Silver when defense fails and a Flag is lost.","Tracked by custom stack"],
+      ["The Emperor","Common","Troop-capacity expansion costs 30% less this round.","Also applies when buying another slot"],
+      ["The Hierophant","Common","Increase the star rank of the highest-star deployed hero by 1.","Immediate"],
+      ["The Lovers","Common","Troop capacity increases by 1.","Expansion item level 10022"],
+      ["The Chariot","Common","For the next 3 rounds, successful invasions that remove a Flag award tier-3 equipment.","Can trigger on every success"],
+      ["The Hermit","Common","For the next 3 rounds, remove 1 random Summon Stone at battle start; with no stone, lose 5 Tokens next round.","Drawback"],
+      ["Wheel of Fortune","Common","Unequip everything, gain 10 Silver and Philosopher's Stones that last only this round.","Equipment is removed from every hero"],
+      ["The Star","Common","For the next 3 rounds, copy 1 random Summon Stone at battle start.","At most one copy per battle"],
+      ["The Moon","Common","For 15 seconds, selling a 1-star hero grants 1 extra Silver.","Activates at preparation start"],
+      ["The Sun","Common","All summons this round use Advanced Scroll effects, but heroes cannot be sold.","Activates at preparation start"],
+      ["Strength","Fated","From acquisition onward, every Summon Stone summons twice as many units.","Auto-drawn on round 22"],
+      ["The Hanged Man","Fated","Greatly increase tier-5-6 Summon Stone odds in the Invasion Shop.","FixedValue 200"],
+      ["Death","Fated","From acquisition onward, Strife Heat increases by 30.","Trigger 20020"],
+      ["The Devil","Fated","From acquisition onward, default monster spawns double, excluding Summon Stones.","Action EnableDevilStage"],
+      ["The Tower","Fated","From acquisition onward, each round grants 10 free Summon Stone refreshes.","Replenished at each StageStart"]
+    ];
+
+    const categoryEn = {
+      "Tất cả":"All", "Kinh tế":"Economy", "Tế Đàn":"Altar", "Shop Xâm Chiếm":"Invasion Shop",
+      "Tiến trình":"Progression", "Hero cao sao":"High-star Hero", "Toàn đội":"Whole Team",
+      "Vùng & vai trò":"Region & Role", "Theme":"Theme", "Thường":"Common", "Định mệnh":"Fated"
+    };
+
+    const staticEn = {
+      "Sáng / Tối":"Light / Dark",
+      "Tra cứu toàn bộ Chiến Lược và Tarot từ dữ liệu thực thi, gồm cấp bậc, điều kiện xuất hiện và trạng thái mùa.":"Browse every Strategy and Tarot card from runtime data, including tiers, appearance gates and season status.",
+      "Chiến Lược gốc":"Strategy roots", "Bản ghi cấp bậc":"Tier records", "Lá Tarot":"Tarot cards", "Theme đang mở":"Active themes",
+      "Đọc trận địa đúng cách":"Read the battlefield correctly",
+      "Chiến Lược dùng EXP và tăng tối đa cấp 7. Tarot là biến cố độc lập: chọn một trong ba lá ở vòng 7, 12, 17; vòng 22 hệ thống tự rút một lá định mệnh.":"Strategies use EXP and level up to 7. Tarot is independent: choose one of three cards on rounds 7, 12 and 17; on round 22 the system automatically draws a fated card.",
+      "Hiệu ứng dưới đây ưu tiên chuỗi thực thi":"The effects below prioritize the runtime chain",
+      ", không sao chép mù quáng các comment đã lỗi thời.":", rather than blindly copying outdated comments.",
+      "3 lựa chọn":"3 choices", "mỗi lần tăng cấp":"at each level-up", "5 reroll":"5 rerolls", "đổi riêng từng ô":"replace one slot at a time",
+      "7 mốc cấp Chiến Lược":"7 Strategy level marks", "trọng số tương đối":"relative weights",
+      "Toàn bộ cơ chế trong một ván":"Every mechanic in one run",
+      "Game không rút từ cả 141 dòng cùng lúc. Nó xác định bậc hiện tại, dựng pool hợp lệ, loại các lá xung đột rồi mới quay số theo Weight.":"The game does not draw from all 141 rows at once. It determines the current tier, builds a valid pool, removes conflicting cards, then rolls by Weight.",
+      "Cấp 1":"Level 1", "Cấp 2":"Level 2", "Cấp 3":"Level 3", "Cấp 4":"Level 4", "Cấp 5":"Level 5", "Cấp 6":"Level 6", "Cấp 7":"Level 7",
+      "Khởi đầu · chưa chọn":"Start · no pick", "Chọn lá bậc 1":"Pick a tier-1 card", "Chọn lá bậc 2":"Pick a tier-2 card", "Chọn lá bậc 3":"Pick a tier-3 card",
+      "Bậc là thuộc tính của lá; cấp là tiến trình chung của người chơi. Client tính bậc nội bộ bằng chỉ số lần nâng cấp chia 2.":"Tier belongs to the card; level is the player's shared progression. Internally, the client calculates tier as the upgrade index divided by 2.",
+      "Ví dụ: săn Máu Ác Ma":"Example: hunting Devil's Blood", "Cấp 2–3:":"Levels 2-3:", "Cấp 4–5:":"Levels 4-5:", "Cấp 6–7:":"Levels 6-7:",
+      "không thể ra vì đây là hai lượt chọn lá bậc 1 và Máu Ác Ma không có bản bậc 1.":"it cannot appear because these are the two tier-1 picks and Devil's Blood has no tier-1 version.",
+      "vào pool bậc 2 với Weight 25.":"enters the tier-2 pool with Weight 25.", "vào pool bậc 3 với Weight 25. Năm reroll giúp thử thêm, nhưng không bảo đảm xuất hiện.":"enters the tier-3 pool with Weight 25. Five rerolls provide more attempts, but do not guarantee an appearance.",
+      "01. Pipeline tạo ba lựa chọn":"01. Three-choice generation pipeline", "Xác định bậc":"Determine tier", "Lọc pool":"Filter pool", "Quay Weight":"Roll Weight", "Loại lá vừa rút":"Remove drawn card", "Đủ 3 ô":"Fill 3 slots",
+      "Pool trước tiên chỉ giữ bản ghi đúng bậc. Sau đó client loại lá":"The pool first keeps only rows of the correct tier. The client then removes",
+      ", theme không thuộc mùa, root đã sở hữu/đã bỏ, danh mục đặc biệt xung đột và các điều kiện đội hình chưa đạt. Ba lá được rút tuần tự, không phải ba lần độc lập có thể trùng nhau.":", themes outside the season, owned/abandoned roots, conflicting special categories and unmet lineup conditions. Three cards are drawn sequentially, not as independent draws that may duplicate.",
+      "Nếu bộ lọc quá chặt khiến không đủ lựa chọn, client có nhánh thử lại để nới điều kiện chống lặp; mục tiêu là vẫn lấp đầy giao diện thay vì treo vòng chọn.":"If filtering is too strict to supply enough choices, the client retries with relaxed duplicate prevention; the goal is to fill the UI rather than stall the selection.",
+      "02. Weight tính xác suất thế nào?":"02. How does Weight determine probability?",
+      "chỉ được tính sau khi pool hợp lệ đã hình thành. Nó là vé trong cùng một hộp, không phải phần trăm cố định.":"is considered only after a valid pool exists. It represents tickets in the same box, not a fixed percentage.",
+      "P(lá A ở lượt rút kế) = Weight(A) / tổng Weight còn lại":"P(card A on next draw) = Weight(A) / total remaining Weight",
+      "Ví dụ pool chỉ còn W10, W25 và W50: xác suất lượt đầu lần lượt là 11,8%, 29,4% và 58,8%. Sau mỗi lần rút, lá trúng bị bỏ khỏi pool nên mẫu số thay đổi.":"For a pool containing only W10, W25 and W50, first-draw odds are 11.8%, 29.4% and 58.8%. The selected card is removed after each draw, so the denominator changes.",
+      "03. Reroll và lá đã bỏ":"03. Rerolls and abandoned cards", "5 reroll Chiến Lược":"5 Strategy rerolls",
+      "Mỗi ván bắt đầu với":"Each run starts with", ". Reroll thay riêng ô được chọn, không quay lại cả ba ô. Lá bị bỏ được ghi vào":". A reroll replaces only the selected slot, not all three. The abandoned card is recorded in",
+      "để không lập tức quay trở lại trong lần rút bình thường.":"so it does not immediately return in a normal draw.",
+      "Reroll không đổi bậc của lượt nâng cấp và không đưa theme bị khóa vào pool. Khi pool cạn, nhánh retry có thể nới chống lặp, nhưng vẫn phải thỏa các gate cốt lõi.":"Rerolling does not change the upgrade tier or add locked themes to the pool. When the pool is exhausted, retry may relax duplicate prevention, but core gates still apply.",
+      "04. Gate đội hình, danh mục và theme":"04. Lineup, category and theme gates", "Gate đề cử":"Offer gates", "Gate kích hoạt":"Activation gates",
+      "quyết định lá có vào pool: số ô hiện tại, vòng hiện tại, có hero vùng/vai trò phù hợp, trạng thái":"decide whether a card enters the pool: current slots and round, matching region/role heroes,",
+      ", theme mùa và danh mục đã sở hữu.":", season themes and owned categories.", "là lớp thứ hai. Ví dụ có 3 hero Bắc có thể cho Giáp Mùa Đông xuất hiện, nhưng phải bố trí ít nhất 4 hero Bắc thì buff +150% HP mới chạy trong trận.":"are a second layer. For example, 3 North heroes may offer Winter Armor, but at least 4 must be deployed for its +150% HP buff to activate in battle.",
+      "Mùa 73 mở theme":"Season 73 enables themes", "; theme 2–5 bị loại. Bot có lá theme bị cấm sẽ được đổi sang một lá chưa sở hữu trong fallback pool.":"; themes 2-5 are excluded. A bot with a forbidden theme card receives an unowned card from the fallback pool instead.",
+      "05. EXP và sáu lần chọn lá":"05. EXP and six card picks",
+      "Cấp Chiến Lược tối đa là 7, với mốc tổng EXP":"Maximum Strategy level is 7, at cumulative EXP thresholds", ". Khi mục tiêu xâm chiếm bị đánh bại, EXP nhận theo vị trí mục tiêu là":". Defeating an invasion target awards EXP by target position:",
+      "Mỗi lần đạt cấp 2–7 sẽ mở màn chọn một trong ba lá. Vì bậc tăng sau mỗi hai lần chọn nên một build hoàn chỉnh tối đa có hai lá bậc 1, hai lá bậc 2 và hai lá bậc 3.":"Reaching each level from 2-7 opens a choice of three cards. Because tier rises every two picks, a complete build can contain at most two cards from each tier.",
+      "06. Khi nào hiệu ứng thực sự chạy?":"06. When do effects actually run?",
+      "Lá tài nguyên tức thời có thể chạy ngay khi chọn. Lá có":"Instant resource cards may run as soon as selected. Cards with", "được đưa vào trạng thái chiến đấu; thời điểm thực thi vẫn do trigger quyết định như":"enter battle state; triggers still determine execution timing, such as", ", thắng/thua, dùng kỹ năng hoặc hạ địch.":", victory/defeat, skill use or a kill.",
+      "Một số hiệu ứng dùng custom stack để giới hạn số vòng, số lần hoặc reset cuối trận. Vì vậy mô tả ngắn không đủ để mô phỏng chính xác; thứ tự tin cậy là WorldTriggers, EventTriggers rồi BuffDatas.":"Some effects use custom stacks to limit rounds or activations, or reset after battle. Short descriptions are therefore insufficient for exact simulation; trust WorldTriggers, then EventTriggers, then BuffDatas.",
+      "07. Token và Shop Xâm Chiếm":"07. Tokens and the Invasion Shop", "10":"10", "2":"2", "1 Token":"1 Token",
+      "Token Xâm Chiếm tối đa mặc định là":"Default maximum Invasion Tokens are", ", mức tăng giới hạn là":", the capped increase is", ", và mỗi lần làm mới shop tốn":", and each shop refresh costs", ". Bậc Đá Triệu Hồi trong shop phụ thuộc Cấp Chiến Lược:":". Summon Stone tiers in the shop depend on Strategy level:", "Cấp":"Level",
+      "08. Nhiệt Ác Chiến":"08. Strife Heat",
+      "Chuỗi thắng 1–6 đặt nhiệt đối thủ theo dãy":"Win streaks 1-6 set opponent heat to", "; từ 7 trận trở lên client tính tiếp bằng code. Mỗi 1 nhiệt tăng":"; from 7 wins onward the client calculates it in code. Each heat adds", "2% ATK, 2% phép, 0,4% tốc đánh, 2,5% HP, 8% phòng thủ lai và 1,3% kháng khống chế":"2% ATK, 2% spell power, 0.4% attack speed, 2.5% HP, 8% hybrid defense and 1.3% crowd-control resistance", ".":".",
+      "Khi toàn bộ đều thắng, nhiệt nền tăng 6; số trận thua làm giảm theo dãy":"When all battles are won, base heat rises by 6; losses reduce it by", ". Tarot Cái Chết cộng cố định 30 nhiệt sau khi nhận.":". The Death Tarot permanently adds 30 heat when acquired.",
+      "09. Tarot khác Chiến Lược":"09. How Tarot differs from Strategies",
+      "Tarot không dùng EXP, không chiếm một trong sáu ô Chiến Lược và không có Weight trong XML. Vòng 7, 12, 17 mở 10 giây để chọn 1 trong 3 lá thường; vòng 22 có pha 10 giây và tự rút một trong 5 lá định mệnh.":"Tarot uses no EXP, occupies none of the six Strategy slots and has no XML Weight. Rounds 7, 12 and 17 allow 10 seconds to choose 1 of 3 common cards; round 22 has a 10-second phase and auto-draws 1 of 5 fated cards.",
+      "Các tiêu chí chọn người chơi gồm: HP thấp nhất và nhiệt cao nhất từ phase 2, nhiều Bạc nhất, tổng bậc Đá cao nhất, đội hình nhỏ nhất và tổng EXP Chiến Lược cao nhất.":"Player-selection criteria include: lowest HP and highest heat from phase 2, most Silver, highest total Stone tier, smallest lineup and highest total Strategy EXP.",
+      "10. Nhịp trận và phần thưởng":"10. Match timing and rewards",
+      "Data cấu hình thời gian chuẩn bị theo dãy":"Data configures preparation times of", ", chiến đấu":", battle times of", ", và mỗi pha Tarot 10 giây.":", and 10 seconds for each Tarot phase.",
+      "Ba rương cuối ván yêu cầu đạt vòng":"The three end-of-run chests require reaching rounds", ", giá mở lần lượt":", and cost", ". Rương tăng cường có xác suất 20% thường hoặc 100% trong hot time, thưởng thêm 50%. Pool chỉ được cấu hình reset ở vòng 100.":" to open. Enhanced chests have a 20% normal chance or 100% during hot time and award 50% extra. The pool is configured to reset only on round 100.",
+      "30 / 45 / 55 / 55 / 55 giây":"30 / 45 / 55 / 55 / 55 seconds", "12 / 18 / 24 / 30 giây":"12 / 18 / 24 / 30 seconds", "5 / 10 / 20 Lương Thực":"5 / 10 / 20 Food",
+      "Chiến Lược · 67":"Strategies · 67", "Tarot · 17":"Tarot · 17",
+      "Vòng 07":"Round 07", "Vòng 12":"Round 12", "Vòng 17":"Round 17", "Vòng 22":"Round 22",
+      "Chọn 1 trong 3 lá thường":"Choose 1 of 3 common cards", "Tự rút 1 lá định mệnh":"Auto-draw 1 fated card",
+      "Nguồn: snapshot XML v173.0.00 đang phục vụ Season 73. Cập nhật 15/09/2026.":"Source: XML v173.0.00 snapshot serving Season 73. Updated September 15, 2026."
+    };
+
+    const attrText = {
+      ".lang-control":["aria-label","Ngôn ngữ","Language"],
+      "#theme-toggle":["aria-label","Đổi giao diện sáng tối","Toggle light/dark theme"],
+      ".intro .rules":["aria-label","Thông số nhanh","Quick facts"],
+      ".level-track":["aria-label","Tiến trình cấp Chiến Lược","Strategy level progression"],
+      ".example-mark img":["alt","Icon Máu Ác Ma","Devil's Blood icon"],
+      "main > section:last-of-type":["aria-label","Bộ tra cứu","Catalog browser"],
+      "#search":["aria-label","Tìm kiếm dữ liệu Strife","Search Strife data"],
+      ".tabs":["aria-label","Loại dữ liệu","Data type"],
+      "#filters":["aria-label","Lọc danh mục","Filter categories"],
+      "#view-control":["aria-label","Kiểu hiển thị","Display layout"],
+      "#timeline":["aria-label","Lịch Tarot","Tarot schedule"]
+    };
+    const originalText = new WeakMap();
+    let language = new URLSearchParams(location.search).get("lang") === "en" ? "en" : "vi";
+
+    const categories = ["Tất cả", ...new Set(strategies.map(x => x[3]))];
+    const state = { view: "strategy", category: "Tất cả", query: "", layout: localStorage.getItem("strife-layout") === "list" ? "list" : "grid" };
+    const catalog = document.querySelector("#catalog");
+    const filters = document.querySelector("#filters");
+    const resultCount = document.querySelector("#result-count");
+    const timeline = document.querySelector("#timeline");
+    const normalize = value => value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    function applyLanguage(next, updateUrl = true) {
+      language = next;
+      document.documentElement.lang = next;
+      document.title = next === "en" ? "Strife Compendium - Strategies & Tarot" : "Strife Compendium - Chiến Lược & Tarot";
+      document.querySelector('meta[name="description"]').content = next === "en"
+        ? "Browse every Strategy, Tarot card and Strife Battlefield mechanic for Season 73."
+        : "Tra cứu toàn bộ Chiến Lược, Tarot và cơ chế Strife Battlefield mùa 73.";
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode: node => /^(SCRIPT|STYLE)$/.test(node.parentElement?.tagName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+      });
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        if (!originalText.has(node)) originalText.set(node, node.nodeValue);
+        const source = originalText.get(node);
+        const key = source.trim();
+        node.nodeValue = next === "en" && staticEn[key] ? source.replace(key, staticEn[key]) : source;
+      }
+      Object.entries(attrText).forEach(([selector, [attr, vi, en]]) => {
+        const element = document.querySelector(selector);
+        if (element) element.setAttribute(attr, next === "en" ? en : vi);
+      });
+      const search = document.querySelector("#search");
+      search.placeholder = next === "en" ? "Search name, ID, effect, buff..." : "Tìm tên, ID, hiệu ứng, buff...";
+      document.querySelectorAll(".view-toggle").forEach(button => {
+        const isGrid = button.dataset.layout === "grid";
+        const label = next === "en" ? (isGrid ? "Grid view" : "List view") : (isGrid ? "Dạng lưới" : "Dạng danh sách");
+        button.setAttribute("aria-label", label);
+        button.title = label;
+      });
+      document.querySelectorAll(".lang-toggle").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.lang === next)));
+      if (updateUrl) {
+        const url = new URL(location.href);
+        url.searchParams.set("lang", next);
+        history.replaceState(null, "", url);
+      }
+      render();
+    }
+
+    function renderFilters() {
+      const values = state.view === "strategy" ? categories : ["Tất cả", "Thường", "Định mệnh"];
+      if (!values.includes(state.category)) state.category = "Tất cả";
+      filters.replaceChildren(...values.map(value => {
+        const button = document.createElement("button");
+        button.className = "filter";
+        button.type = "button";
+        button.textContent = language === "en" ? categoryEn[value] : value;
+        button.setAttribute("aria-pressed", String(state.category === value));
+        button.onclick = () => { state.category = value; render(); };
+        return button;
+      }));
+    }
+
+    function strategyCard(item, index) {
+      const [root, ids, viName, viCategory, weight, viEffect, viGate, active] = item;
+      const translated = strategyEn[strategies.indexOf(item)];
+      const [name, category, effect, gate] = language === "en" ? translated : [viName, viCategory, viEffect, viGate];
+      const status = viCategory === "Theme" ? `<span class="chip ${active ? "live" : "locked"}">${language === "en" ? (active ? "Season 73: active" : "Season 73: locked") : (active ? "Mùa 73: mở" : "Mùa 73: khóa")}</span>` : "";
+      return `<article class="card">
+        <div class="card-head"><span class="number">${String(index + 1).padStart(2, "0")} / ${root}</span><span class="tag">${category}</span></div>
+        <div class="card-body"><div class="card-icon"><img src="strife-assets/strategies/${root}.png" alt="" loading="lazy"></div><h3>${name}</h3><p class="effect">${effect}</p></div>
+        <div class="meta"><span class="chip">ID ${ids.join(" · ")}</span><span class="chip">W ${weight}</span><span class="chip">${gate}</span>${status}</div>
+      </article>`;
+    }
+
+    function tarotCard(item, index) {
+      const [id, roman, viName, viKind, viEffect, viNote] = item;
+      const [name, kind, effect, note] = language === "en" ? tarotEn[tarots.indexOf(item)] : [viName, viKind, viEffect, viNote];
+      return `<article class="card tarot-card" data-roman="${roman}">
+        <div class="card-head"><span class="number">${roman} / ${id}</span><span class="tag">${kind}</span></div>
+        <div class="card-body"><div class="card-icon"><img src="strife-assets/tarots/${id}.png" alt="" loading="lazy"></div><h3>${name}</h3><p class="effect">${effect}</p></div>
+        <div class="meta"><span class="chip">${note}</span></div>
+      </article>`;
+    }
+
+    function render() {
+      renderFilters();
+      const source = state.view === "strategy" ? strategies : tarots;
+      const filtered = source.filter(item => {
+        const category = state.view === "strategy" ? item[3] : item[3];
+        const translated = state.view === "strategy" ? strategyEn[strategies.indexOf(item)] : tarotEn[tarots.indexOf(item)];
+        return (state.category === "Tất cả" || category === state.category) && normalize(`${item.join(" ")} ${translated.join(" ")}`).includes(normalize(state.query));
+      });
+      timeline.classList.toggle("show", state.view === "tarot");
+      catalog.classList.toggle("list-view", state.layout === "list");
+      document.querySelectorAll(".view-toggle").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.layout === state.layout)));
+      catalog.innerHTML = filtered.length
+        ? filtered.map(state.view === "strategy" ? strategyCard : tarotCard).join("")
+        : `<div class="empty">${language === "en" ? "No matching entries. Remove a filter or try another search term." : "Không tìm thấy mục phù hợp. Hãy bỏ bớt bộ lọc hoặc thử từ khóa khác."}</div>`;
+      resultCount.textContent = `${filtered.length} / ${source.length} ${language === "en" ? "entries" : "mục"}`;
+    }
+
+    document.querySelector("#search").addEventListener("input", event => { state.query = event.target.value; render(); });
+    document.querySelectorAll(".tab").forEach(button => button.addEventListener("click", () => {
+      state.view = button.dataset.view;
+      state.category = "Tất cả";
+      document.querySelectorAll(".tab").forEach(tab => tab.setAttribute("aria-pressed", String(tab === button)));
+      render();
+    }));
+    document.querySelectorAll(".view-toggle").forEach(button => button.addEventListener("click", () => {
+      state.layout = button.dataset.layout;
+      localStorage.setItem("strife-layout", state.layout);
+      render();
+    }));
+    document.querySelector("#theme-toggle").addEventListener("click", () => {
+      document.documentElement.dataset.theme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+    });
+    document.querySelectorAll(".lang-toggle").forEach(button => button.addEventListener("click", () => applyLanguage(button.dataset.lang)));
+
+    const tierRows = strategies.reduce((sum, item) => sum + item[1].length, 0);
+    if (strategies.length !== 67 || strategyEn.length !== 67 || tierRows !== 141 || tarots.length !== 17 || tarotEn.length !== 17) throw new Error("Catalog count mismatch");
+    applyLanguage(language, false);
+  </script>
+</body>
+</html>
