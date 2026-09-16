@@ -239,7 +239,9 @@
       background: var(--surface);
       box-shadow: 0 16px 36px var(--shadow);
       transition: transform .18s ease, border-color .18s ease;
+      cursor: pointer;
     }
+    .card:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
     .card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--gold) 65%, var(--line)); }
     .card-head { display: flex; justify-content: space-between; gap: 12px; padding: 18px 18px 13px; border-bottom: 1px solid var(--line); }
     .number { color: var(--gold); font: 700 .78rem/1 ui-monospace, monospace; }
@@ -259,6 +261,18 @@
     .tarot-card .card-icon img { width: 68px; height: 78px; }
     .card h3 { margin-bottom: 11px; font-size: 1.18rem; line-height: 1.2; }
     .effect { margin: 0; color: var(--muted); font-size: .89rem; }
+    .no-show { margin-top: 14px; padding-top: 11px; border-top: 1px solid var(--line); color: var(--muted); font-size: .76rem; }
+    .no-show b { display: block; margin-bottom: 3px; color: var(--red); font: 700 .66rem/1.2 ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .no-show b:not(:first-child) { margin-top: 9px; }
+    .root-family { display: flex; gap: 10px; align-items: center; padding: 8px; border: 1px solid var(--line); background: var(--surface-2); }
+    .root-family img { width: 42px; height: 42px; flex: 0 0 auto; object-fit: contain; background: #171c22; }
+    .root-family strong { display: block; margin-bottom: 4px; color: var(--text); font-size: .82rem; }
+    .tier-records { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tier-record { padding: 3px 5px; border: 1px solid var(--line); font: .64rem/1.2 ui-monospace, monospace; }
+    .conflict-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; max-height: 190px; padding-right: 5px; overflow-x: hidden; overflow-y: auto; scrollbar-width: thin; }
+    .conflict-card { min-width: 0; display: flex; align-items: center; gap: 8px; padding: 7px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); }
+    .conflict-card img { width: 34px; height: 34px; flex: 0 0 auto; object-fit: contain; background: #171c22; }
+    .conflict-card span { display: block; font-size: .67rem; line-height: 1.25; }
     .meta { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 18px 18px; }
     .chip { border: 1px solid var(--line); padding: 4px 7px; color: var(--muted); font: .7rem/1.2 ui-monospace, monospace; }
     .chip.live { border-color: color-mix(in srgb, var(--green) 55%, var(--line)); color: var(--green); }
@@ -286,6 +300,7 @@
     .grid.list-view .card-icon { grid-row: 1 / 3; margin: 0; }
     .grid.list-view .card h3 { align-self: end; margin-bottom: 5px; }
     .grid.list-view .effect { align-self: start; }
+    .grid.list-view .no-show { grid-column: 2; }
     .grid.list-view .meta { align-content: center; align-items: center; padding: 14px 18px; border-left: 1px solid var(--line); }
     .grid.list-view .tarot-card::after { display: none; }
     .empty { grid-column: 1 / -1; padding: 80px 20px; border-block: 1px solid var(--line); text-align: center; color: var(--muted); }
@@ -296,6 +311,24 @@
     .moment b { display: block; color: var(--gold-soft); font: 700 1.15rem/1 ui-monospace, monospace; }
     .moment span { color: var(--muted); font-size: .78rem; }
     footer { margin-top: 70px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: .76rem; }
+    .modal[hidden] { display: none; }
+    .modal { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 24px; background: rgba(3, 7, 11, .82); backdrop-filter: blur(9px); }
+    .modal-panel { position: relative; width: min(900px, 100%); max-height: min(820px, calc(100dvh - 48px)); overflow-y: auto; border: 1px solid var(--gold); background: var(--surface); box-shadow: 0 30px 90px rgba(0, 0, 0, .62); }
+    .modal-close { position: sticky; z-index: 2; top: 14px; float: right; width: 42px; height: 42px; display: grid; place-items: center; margin: 14px 14px -56px 0; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); cursor: pointer; }
+    .modal-close:hover, .modal-close:focus-visible { border-color: var(--gold); outline: none; }
+    .modal-close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+    .modal-body { padding: 34px; }
+    .modal-hero { display: grid; grid-template-columns: 136px 1fr; gap: 26px; padding: 18px 60px 28px 0; border-bottom: 1px solid var(--line); }
+    .modal-icon { width: 136px; height: 136px; display: grid; place-items: center; border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--line)); background: #171c22; }
+    .modal-icon img { width: 112px; height: 112px; object-fit: contain; }
+    .modal-icon.tarot { height: 166px; background: #171315; }
+    .modal-icon.tarot img { width: 108px; height: 142px; }
+    .modal-kicker { color: var(--gold); font: 700 .7rem/1.2 ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .modal-body h2 { margin: 10px 0 12px; font-size: clamp(2rem, 5vw, 3.6rem); }
+    .modal-effect { max-width: 66ch; color: var(--muted); }
+    .modal-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 17px; }
+    .modal-rules { margin-top: 25px; }
+    body.modal-open { overflow: hidden; }
     @media (max-width: 980px) {
       .intro { grid-template-columns: 1fr; gap: 24px; }
       .card { grid-column: span 6; }
@@ -336,6 +369,16 @@
       .mechanic-list { grid-template-columns: 1fr; }
       details.mechanic[open] { grid-column: auto; }
       .mechanic-body { padding-left: 18px; }
+      .modal { padding: 10px; }
+      .modal-panel { max-height: calc(100dvh - 20px); }
+      .modal-body { padding: 20px; }
+      .modal-hero { grid-template-columns: 82px 1fr; gap: 15px; padding: 36px 0 20px; }
+      .modal-icon { width: 82px; height: 82px; }
+      .modal-icon img { width: 68px; height: 68px; }
+      .modal-icon.tarot { height: 102px; }
+      .modal-icon.tarot img { width: 64px; height: 86px; }
+      .modal-body h2 { font-size: 1.75rem; }
+      .conflict-strip { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -360,6 +403,9 @@
     </symbol>
     <symbol id="icon-list" viewBox="0 0 24 24">
       <path d="M9 6h12M9 12h12M9 18h12"/><rect x="3" y="4" width="3" height="3"/><rect x="3" y="10.5" width="3" height="3"/><rect x="3" y="17" width="3" height="3"/>
+    </symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="M5 5l14 14M19 5L5 19"/>
     </symbol>
   </svg>
   <header class="masthead">
@@ -522,6 +568,26 @@
             <p>Ba rương cuối ván yêu cầu đạt vòng <code>5 / 10 / 15</code>, giá mở lần lượt <code>5 / 10 / 20 Lương Thực</code>. Rương tăng cường có xác suất 20% thường hoặc 100% trong hot time, thưởng thêm 50%. Pool chỉ được cấu hình reset ở vòng 100.</p>
           </div>
         </details>
+
+        <details class="mechanic">
+          <summary>11. Khi nào Strategy không xuất hiện lại?</summary>
+          <div class="mechanic-body">
+            <p>Root là ID đã bỏ chữ số bậc cuối: 10000 / 10001 / 10002 cùng root 10000; 50031 / 50032 cùng root 50030. Chọn một ID sẽ khóa mọi ID còn lại của root đó.</p>
+            <p>Strategy có category bị loại nếu build đã sở hữu bất kỳ category trùng nhau. Vì vậy mỗi ván chỉ lấy được một lá Tế Đàn, một lá Hero cao sao, một lá Vùng &amp; vai trò và một lá Theme.</p>
+            <table class="data-table">
+              <thead><tr><th>Nhóm loại trừ</th><th>Strategy bị khóa lẫn nhau</th></tr></thead>
+              <tbody>
+                <tr><td>Tế Đàn</td><td>3 Strategy ID 20000–20020</td></tr>
+                <tr><td>Shop Xâm Chiếm</td><td>6 Strategy ID 30000–30050, cộng Theme 1 / 5 / 10</td></tr>
+                <tr><td>Hero cao sao</td><td>4 Strategy ID 50000–50030</td></tr>
+                <tr><td>Vùng &amp; vai trò</td><td>11 Strategy ID 70000–70100</td></tr>
+                <tr><td>Theme</td><td>Toàn bộ 15 Strategy ID 80000–80140</td></tr>
+              </tbody>
+            </table>
+            <p>Theme 1, 5 và 10 thuộc đồng thời nhóm Theme và Shop Xâm Chiếm. Chọn một trong ba lá này khóa cả hai nhóm; ngược lại, một Strategy Shop đã chọn cũng chặn ba Theme đó.</p>
+            <p>Lá vừa reroll chỉ bị loại theo đúng ID trong lượt dựng pool thường. Nếu pool không đủ ba lựa chọn, nhánh retry bỏ giới hạn abandoned này nên lá có thể quay lại; Disabled, theme mùa và các gate cứng vẫn không được bỏ qua.</p>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -557,6 +623,13 @@
 
     <footer>Nguồn: snapshot XML v173.0.00 đang phục vụ Season 73. Cập nhật 15/09/2026.</footer>
   </main>
+
+  <div class="modal" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-panel">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Đóng chi tiết"><svg aria-hidden="true"><use href="#icon-close"/></svg></button>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
 
   <script>
     const strategies = [
@@ -739,6 +812,59 @@
       ["The Tower","Fated","From acquisition onward, each round grants 10 free Summon Stone refreshes.","Replenished at each StageStart"]
     ];
 
+    const exclusionGroups = [
+      ["20000","20010","20020"],
+      ["30000","30010","30020","30030","30040","30050","80000","80040","80090"],
+      ["50000","50010","50020","50030"],
+      ["70000","70010","70020","70030","70040","70050","70060","70070","70080","70090","70100"],
+      ["80000","80010","80020","80030","80040","80050","80060","80070","80080","80090","80100","80110","80120","80130","80140"]
+    ];
+
+    const appearanceRules = {
+      "10050":["Không vào pool khi binh lực đã đạt 7 ô.", "Leaves the pool once troop capacity reaches 7."],
+      "10100":["Không vào pool từ vòng 7 trở đi.", "Leaves the pool from round 7 onward."],
+      "60010":["Disabled=true: không bao giờ vào pool.", "Disabled=true: never enters the pool."],
+      "70000":["Cần ít nhất 3 hero Bắc.", "Requires at least 3 North heroes."],
+      "70010":["Cần ít nhất 3 hero Đông.", "Requires at least 3 East heroes."],
+      "70020":["Cần ít nhất 3 hero Tây.", "Requires at least 3 West heroes."],
+      "70030":["Cần ít nhất 3 hero Nam.", "Requires at least 3 South heroes."],
+      "70040":["Cần ít nhất 3 hero Trung.", "Requires at least 3 Central heroes."],
+      "70050":["Cần ít nhất 1 hero Dũng Mãnh cấp 5+.", "Requires at least 1 level-5+ Mighty hero."],
+      "70060":["Cần ít nhất 1 hero Kiên Cường cấp 5+.", "Requires at least 1 level-5+ Robust hero."],
+      "70070":["Cần ít nhất 1 hero Nguyên Tố cấp 5+.", "Requires at least 1 level-5+ Element hero."],
+      "70080":["Cần ít nhất 1 hero Thần Tốc cấp 5+.", "Requires at least 1 level-5+ Swift hero."],
+      "70090":["Cần ít nhất 1 hero Thần Bí cấp 5+.", "Requires at least 1 level-5+ Mystic hero."],
+      "70100":["Cần ít nhất 1 hero Bóng Đen cấp 5+.", "Requires at least 1 level-5+ Shadow hero."]
+    };
+
+    function exclusionText(item) {
+      const root = item[0];
+      const hasConflicts = exclusionGroups.some(group => group.includes(root));
+      const reasons = [language === "en"
+        ? (hasConflicts ? "Blocked after any Strategy pictured above is selected." : "Blocked after any tier of this Strategy is selected or queued.")
+        : (hasConflicts ? "Bị chặn sau khi chọn bất kỳ Strategy nào có ảnh phía trên." : "Bị chặn sau khi một bậc của Strategy này được chọn hoặc xếp vào hàng chờ.")];
+      if (appearanceRules[root]) reasons.push(appearanceRules[root][language === "en" ? 1 : 0]);
+      if (item[7] === false) reasons.push(language === "en" ? "This theme is locked in Season 73." : "Theme này bị khóa trong Mùa 73.");
+      return reasons.join(" ");
+    }
+
+    function rootFamily(item, name) {
+      const [root, ids] = item;
+      const tiers = ids.map(id => `<span class="tier-record">${language === "en" ? "Tier" : "Bậc"} ${Number(id.at(-1)) + 1} · ${id}</span>`).join("");
+      return `<div class="root-family"><img src="strife-assets/strategies/${root}.png" alt="" loading="lazy"><div><strong>${name}</strong><div class="tier-records">${tiers}</div></div></div>`;
+    }
+
+    function conflictingStrategies(root) {
+      const roots = [...new Set(exclusionGroups.filter(group => group.includes(root)).flat())].filter(value => value !== root);
+      if (!roots.length) return "";
+      const cards = roots.map(value => {
+        const index = strategies.findIndex(item => item[0] === value);
+        const name = language === "en" ? strategyEn[index][0] : strategies[index][2];
+        return `<div class="conflict-card" title="${name}"><img src="strife-assets/strategies/${value}.png" alt="" loading="lazy"><span>${name}</span></div>`;
+      }).join("");
+      return `<b>${language === "en" ? "Mutually exclusive Strategies" : "Các Strategy loại trừ lẫn nhau"}</b><div class="conflict-strip">${cards}</div>`;
+    }
+
     const categoryEn = {
       "Tất cả":"All", "Kinh tế":"Economy", "Tế Đàn":"Altar", "Shop Xâm Chiếm":"Invasion Shop",
       "Tiến trình":"Progression", "Hero cao sao":"High-star Hero", "Toàn đội":"Whole Team",
@@ -797,6 +923,17 @@
       "Data cấu hình thời gian chuẩn bị theo dãy":"Data configures preparation times of", ", chiến đấu":", battle times of", ", và mỗi pha Tarot 10 giây.":", and 10 seconds for each Tarot phase.",
       "Ba rương cuối ván yêu cầu đạt vòng":"The three end-of-run chests require reaching rounds", ", giá mở lần lượt":", and cost", ". Rương tăng cường có xác suất 20% thường hoặc 100% trong hot time, thưởng thêm 50%. Pool chỉ được cấu hình reset ở vòng 100.":" to open. Enhanced chests have a 20% normal chance or 100% during hot time and award 50% extra. The pool is configured to reset only on round 100.",
       "30 / 45 / 55 / 55 / 55 giây":"30 / 45 / 55 / 55 / 55 seconds", "12 / 18 / 24 / 30 giây":"12 / 18 / 24 / 30 seconds", "5 / 10 / 20 Lương Thực":"5 / 10 / 20 Food",
+      "11. Khi nào Strategy không xuất hiện lại?":"11. When does a Strategy stop appearing?",
+      "Root là ID đã bỏ chữ số bậc cuối: 10000 / 10001 / 10002 cùng root 10000; 50031 / 50032 cùng root 50030. Chọn một ID sẽ khóa mọi ID còn lại của root đó.":"A root is the ID with its final tier digit removed: 10000 / 10001 / 10002 share root 10000; 50031 / 50032 share root 50030. Selecting one ID blocks every other ID in that root.",
+      "Strategy có category bị loại nếu build đã sở hữu bất kỳ category trùng nhau. Vì vậy mỗi ván chỉ lấy được một lá Tế Đàn, một lá Hero cao sao, một lá Vùng & vai trò và một lá Theme.":"A categorized Strategy is removed if the build already owns any overlapping category. A run can therefore take only one Altar, one High-star Hero, one Region & Role and one Theme Strategy.",
+      "Nhóm loại trừ":"Exclusion group", "Strategy bị khóa lẫn nhau":"Mutually exclusive Strategies",
+      "Tế Đàn":"Altar", "3 Strategy ID 20000–20020":"3 Strategies, IDs 20000-20020",
+      "Shop Xâm Chiếm":"Invasion Shop", "6 Strategy ID 30000–30050, cộng Theme 1 / 5 / 10":"6 Strategies, IDs 30000-30050, plus Themes 1 / 5 / 10",
+      "Hero cao sao":"High-star Hero", "4 Strategy ID 50000–50030":"4 Strategies, IDs 50000-50030",
+      "Vùng & vai trò":"Region & Role", "11 Strategy ID 70000–70100":"11 Strategies, IDs 70000-70100",
+      "Theme":"Theme", "Toàn bộ 15 Strategy ID 80000–80140":"All 15 Strategies, IDs 80000-80140",
+      "Theme 1, 5 và 10 thuộc đồng thời nhóm Theme và Shop Xâm Chiếm. Chọn một trong ba lá này khóa cả hai nhóm; ngược lại, một Strategy Shop đã chọn cũng chặn ba Theme đó.":"Themes 1, 5 and 10 belong to both Theme and Invasion Shop. Selecting one locks both groups; conversely, an owned Shop Strategy also blocks those three Themes.",
+      "Lá vừa reroll chỉ bị loại theo đúng ID trong lượt dựng pool thường. Nếu pool không đủ ba lựa chọn, nhánh retry bỏ giới hạn abandoned này nên lá có thể quay lại; Disabled, theme mùa và các gate cứng vẫn không được bỏ qua.":"A rerolled card is excluded by exact ID during the normal pool pass. If the pool cannot supply three choices, retry drops this abandoned-card restriction, so it may return; Disabled, seasonal themes and hard gates remain enforced.",
       "Chiến Lược · 67":"Strategies · 67", "Tarot · 17":"Tarot · 17",
       "Vòng 07":"Round 07", "Vòng 12":"Round 12", "Vòng 17":"Round 17", "Vòng 22":"Round 22",
       "Chọn 1 trong 3 lá thường":"Choose 1 of 3 common cards", "Tự rút 1 lá định mệnh":"Auto-draw 1 fated card",
@@ -814,7 +951,8 @@
       ".tabs":["aria-label","Loại dữ liệu","Data type"],
       "#filters":["aria-label","Lọc danh mục","Filter categories"],
       "#view-control":["aria-label","Kiểu hiển thị","Display layout"],
-      "#timeline":["aria-label","Lịch Tarot","Tarot schedule"]
+      "#timeline":["aria-label","Lịch Tarot","Tarot schedule"],
+      "#modal-close":["aria-label","Đóng chi tiết","Close details"]
     };
     const originalText = new WeakMap();
     let language = new URLSearchParams(location.search).get("lang") === "en" ? "en" : "vi";
@@ -825,6 +963,10 @@
     const filters = document.querySelector("#filters");
     const resultCount = document.querySelector("#result-count");
     const timeline = document.querySelector("#timeline");
+    const modal = document.querySelector("#detail-modal");
+    const modalBody = document.querySelector("#modal-body");
+    const modalClose = document.querySelector("#modal-close");
+    let modalTrigger = null;
     const normalize = value => value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
     function applyLanguage(next, updateUrl = true) {
@@ -884,9 +1026,9 @@
       const translated = strategyEn[strategies.indexOf(item)];
       const [name, category, effect, gate] = language === "en" ? translated : [viName, viCategory, viEffect, viGate];
       const status = viCategory === "Theme" ? `<span class="chip ${active ? "live" : "locked"}">${language === "en" ? (active ? "Season 73: active" : "Season 73: locked") : (active ? "Mùa 73: mở" : "Mùa 73: khóa")}</span>` : "";
-      return `<article class="card">
+      return `<article class="card" data-kind="strategy" data-key="${root}" tabindex="0" role="button" aria-label="${language === "en" ? "View details for" : "Xem chi tiết"} ${name}">
         <div class="card-head"><span class="number">${String(index + 1).padStart(2, "0")} / ${root}</span><span class="tag">${category}</span></div>
-        <div class="card-body"><div class="card-icon"><img src="strife-assets/strategies/${root}.png" alt="" loading="lazy"></div><h3>${name}</h3><p class="effect">${effect}</p></div>
+        <div class="card-body"><div class="card-icon"><img src="strife-assets/strategies/${root}.png" alt="" loading="lazy"></div><h3>${name}</h3><p class="effect">${effect}</p><div class="no-show"><b>${language === "en" ? "Tiers of this Strategy" : "Các bậc của Strategy này"}</b>${rootFamily(item, name)}${conflictingStrategies(root)}<b>${language === "en" ? "Will not appear when" : "Không xuất hiện khi"}</b>${exclusionText(item)}</div></div>
         <div class="meta"><span class="chip">ID ${ids.join(" · ")}</span><span class="chip">W ${weight}</span><span class="chip">${gate}</span>${status}</div>
       </article>`;
     }
@@ -894,11 +1036,50 @@
     function tarotCard(item, index) {
       const [id, roman, viName, viKind, viEffect, viNote] = item;
       const [name, kind, effect, note] = language === "en" ? tarotEn[tarots.indexOf(item)] : [viName, viKind, viEffect, viNote];
-      return `<article class="card tarot-card" data-roman="${roman}">
+      return `<article class="card tarot-card" data-kind="tarot" data-key="${id}" data-roman="${roman}" tabindex="0" role="button" aria-label="${language === "en" ? "View details for" : "Xem chi tiết"} ${name}">
         <div class="card-head"><span class="number">${roman} / ${id}</span><span class="tag">${kind}</span></div>
         <div class="card-body"><div class="card-icon"><img src="strife-assets/tarots/${id}.png" alt="" loading="lazy"></div><h3>${name}</h3><p class="effect">${effect}</p></div>
         <div class="meta"><span class="chip">${note}</span></div>
       </article>`;
+    }
+
+    function strategyDetail(item) {
+      const [root, ids, viName, viCategory, weight, viEffect, viGate, active] = item;
+      const [name, category, effect, gate] = language === "en" ? strategyEn[strategies.indexOf(item)] : [viName, viCategory, viEffect, viGate];
+      const status = viCategory === "Theme" ? `<span class="chip ${active ? "live" : "locked"}">${language === "en" ? (active ? "Season 73: active" : "Season 73: locked") : (active ? "Mùa 73: mở" : "Mùa 73: khóa")}</span>` : "";
+      return `<div class="modal-hero">
+        <div class="modal-icon"><img src="strife-assets/strategies/${root}.png" alt=""></div>
+        <div><span class="modal-kicker">${category} · Root ${root}</span><h2 id="modal-title">${name}</h2><p class="modal-effect">${effect}</p><div class="modal-meta"><span class="chip">ID ${ids.join(" · ")}</span><span class="chip">W ${weight}</span><span class="chip">${gate}</span>${status}</div></div>
+      </div>
+      <div class="modal-rules no-show"><b>${language === "en" ? "Tiers of this Strategy" : "Các bậc của Strategy này"}</b>${rootFamily(item, name)}${conflictingStrategies(root)}<b>${language === "en" ? "Will not appear when" : "Không xuất hiện khi"}</b>${exclusionText(item)}</div>`;
+    }
+
+    function tarotDetail(item) {
+      const [id, roman, viName, viKind, viEffect, viNote] = item;
+      const [name, kind, effect, note] = language === "en" ? tarotEn[tarots.indexOf(item)] : [viName, viKind, viEffect, viNote];
+      return `<div class="modal-hero">
+        <div class="modal-icon tarot"><img src="strife-assets/tarots/${id}.png" alt=""></div>
+        <div><span class="modal-kicker">${kind} · ${roman} · ID ${id}</span><h2 id="modal-title">${name}</h2><p class="modal-effect">${effect}</p><div class="modal-meta"><span class="chip">${note}</span></div></div>
+      </div>`;
+    }
+
+    function openDetail(card) {
+      const source = card.dataset.kind === "strategy" ? strategies : tarots;
+      const item = source.find(entry => entry[0] === card.dataset.key);
+      if (!item) return;
+      modalTrigger = card;
+      modalBody.innerHTML = card.dataset.kind === "strategy" ? strategyDetail(item) : tarotDetail(item);
+      modal.hidden = false;
+      document.body.classList.add("modal-open");
+      modalClose.focus();
+    }
+
+    function closeDetail() {
+      if (modal.hidden) return;
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+      modalTrigger?.focus();
+      modalTrigger = null;
     }
 
     function render() {
@@ -930,6 +1111,27 @@
       localStorage.setItem("strife-layout", state.layout);
       render();
     }));
+    catalog.addEventListener("click", event => {
+      const card = event.target.closest(".card");
+      if (card) openDetail(card);
+    });
+    catalog.addEventListener("keydown", event => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const card = event.target.closest(".card");
+      if (!card) return;
+      event.preventDefault();
+      openDetail(card);
+    });
+    modalClose.addEventListener("click", closeDetail);
+    modal.addEventListener("click", event => { if (event.target === modal) closeDetail(); });
+    document.addEventListener("keydown", event => {
+      if (modal.hidden) return;
+      if (event.key === "Escape") closeDetail();
+      if (event.key === "Tab") {
+        event.preventDefault();
+        modalClose.focus();
+      }
+    });
     document.querySelector("#theme-toggle").addEventListener("click", () => {
       document.documentElement.dataset.theme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
     });
@@ -938,6 +1140,7 @@
     const tierRows = strategies.reduce((sum, item) => sum + item[1].length, 0);
     if (strategies.length !== 67 || strategyEn.length !== 67 || tierRows !== 141 || tarots.length !== 17 || tarotEn.length !== 17) throw new Error("Catalog count mismatch");
     applyLanguage(language, false);
+    if (location.hash === "#catalog") requestAnimationFrame(() => catalog.scrollIntoView());
   </script>
 </body>
 </html>
