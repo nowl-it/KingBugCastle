@@ -179,6 +179,21 @@
     .flow { display: flex; align-items: stretch; margin: 15px 0; overflow-x: auto; }
     .flow span { min-width: 130px; padding: 11px; border: 1px solid var(--line); color: var(--text); text-align: center; font-size: .76rem; }
     .flow i { display: grid; place-items: center; min-width: 34px; color: var(--gold); font-style: normal; }
+    .calculator { margin: 0 0 72px; padding: 26px; border: 1px solid var(--gold); background: var(--surface); }
+    .calculator-head { display: grid; grid-template-columns: 1fr .8fr; gap: 30px; margin-bottom: 22px; }
+    .calculator-head p { margin: 0; color: var(--muted); }
+    .calc-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .calc-field { min-width: 0; padding: 12px; border: 1px solid var(--line); background: var(--surface-2); }
+    .calc-field > span { display: block; margin-bottom: 7px; color: var(--gold-soft); font: 700 .68rem/1.2 ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; }
+    .calc-field select { width: 100%; min-height: 42px; border: 1px solid var(--line); border-radius: 0; background: var(--surface); color: var(--text); padding: 8px; }
+    .calc-preview { display: flex; align-items: center; gap: 9px; min-height: 52px; margin-top: 9px; color: var(--muted); font-size: .72rem; }
+    .calc-preview img { width: 46px; height: 46px; flex: 0 0 auto; object-fit: contain; border: 1px solid var(--line); background: #171c22; }
+    .calc-target { grid-column: span 2; }
+    .calc-result { grid-column: span 2; min-height: 154px; padding: 17px; border: 1px solid var(--line); background: var(--bg); }
+    .calc-result strong { display: block; color: var(--gold-soft); font: 700 clamp(2.2rem, 5vw, 4rem)/1 ui-monospace, monospace; }
+    .calc-result p { margin: 9px 0 0; color: var(--muted); font-size: .82rem; }
+    .calc-result .calc-warning { color: var(--red); }
+    .calc-assumption { margin: 13px 0 0; color: var(--muted); font-size: .74rem; }
     .controls {
       position: sticky;
       top: 0;
@@ -340,6 +355,8 @@
       .moment:nth-child(4) { border-top: 1px solid var(--line); }
       .level-track { grid-template-columns: repeat(4, 1fr); }
       .level:nth-child(n+5) { border-top: 1px solid var(--line); }
+      .calculator-head { grid-template-columns: 1fr; gap: 8px; }
+      .calc-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 680px) {
       .shell { width: min(var(--max), calc(100% - 26px)); }
@@ -369,6 +386,9 @@
       .mechanic-list { grid-template-columns: 1fr; }
       details.mechanic[open] { grid-column: auto; }
       .mechanic-body { padding-left: 18px; }
+      .calculator { padding: 16px; }
+      .calc-grid { grid-template-columns: 1fr; }
+      .calc-target, .calc-result { grid-column: auto; }
       .modal { padding: 10px; }
       .modal-panel { max-height: calc(100dvh - 20px); }
       .modal-body { padding: 20px; }
@@ -589,6 +609,24 @@
           </div>
         </details>
       </div>
+    </section>
+
+    <section class="calculator" id="roll-calculator" aria-labelledby="calculator-title">
+      <div class="calculator-head">
+        <div><span class="eyebrow">Weighted roll simulator</span><h2 id="calculator-title">Tính tỉ lệ Strategy xuất hiện</h2></div>
+        <p>Chọn ba Strategy đang hiện trên màn hình, cấp hiện tại và Strategy mục tiêu. Kết quả là xác suất mục tiêu thay vào một ô ở lần reroll kế tiếp.</p>
+      </div>
+      <div class="calc-grid">
+        <label class="calc-field"><span>Cấp đang roll</span><select id="calc-level">
+          <option value="2">Cấp 2 · Bậc 1</option><option value="3">Cấp 3 · Bậc 1</option><option value="4" selected>Cấp 4 · Bậc 2</option><option value="5">Cấp 5 · Bậc 2</option><option value="6">Cấp 6 · Bậc 3</option><option value="7">Cấp 7 · Bậc 3</option>
+        </select></label>
+        <label class="calc-field"><span>Strategy đang hiện 1</span><select class="calc-owned" data-default="10000"></select><div class="calc-preview"></div></label>
+        <label class="calc-field"><span>Strategy đang hiện 2</span><select class="calc-owned" data-default="10010"></select><div class="calc-preview"></div></label>
+        <label class="calc-field"><span>Strategy đang hiện 3</span><select class="calc-owned" data-default="10060"></select><div class="calc-preview"></div></label>
+        <label class="calc-field calc-target"><span>Strategy mong muốn</span><select id="calc-target" data-default="50030"></select><div class="calc-preview"></div></label>
+        <div class="calc-result" id="calc-result" aria-live="polite"></div>
+      </div>
+      <p class="calc-assumption">Giả định chưa có lịch sử abandoned trước đó và các gate đội hình, vòng, binh lực, root/category từ lá đã sở hữu đều cho phép. Calculator vẫn loại sai bậc, ba card đang hiện, Disabled và theme bị khóa trong Mùa 73.</p>
     </section>
 
     <section aria-label="Bộ tra cứu">
@@ -865,6 +903,86 @@
       return `<b>${language === "en" ? "Mutually exclusive Strategies" : "Các Strategy loại trừ lẫn nhau"}</b><div class="conflict-strip">${cards}</div>`;
     }
 
+    function tierForLevel(level) {
+      return Math.floor((level - 2) / 2) + 1;
+    }
+
+    function tierRecord(item, tier) {
+      return item[1].find(id => Number(id.at(-1)) + 1 === tier);
+    }
+
+    function calculatorPool(visibleRoots, tier) {
+      return strategies.flatMap(item => {
+        const root = item[0];
+        const record = tierRecord(item, tier);
+        if (!record || visibleRoots.includes(root) || root === "60010" || item[7] === false) return [];
+        return [{ root, record, weight: item[4] }];
+      });
+    }
+
+    function rerollChance(pool, targetRoot) {
+      const target = pool.find(item => item.root === targetRoot);
+      return target ? target.weight / pool.reduce((sum, item) => sum + item.weight, 0) : 0;
+    }
+
+    function strategyLabel(root) {
+      const index = strategies.findIndex(item => item[0] === root);
+      return language === "en" ? strategyEn[index][0] : strategies[index][2];
+    }
+
+    function updateCalculatorPreview(select) {
+      const preview = select.parentElement.querySelector(".calc-preview");
+      const root = select.value;
+      const tier = tierForLevel(Number(document.querySelector("#calc-level").value));
+      const item = strategies.find(strategy => strategy[0] === root);
+      preview.innerHTML = `<img src="strife-assets/strategies/${root}.png" alt=""><span>${strategyLabel(root)}<br>${language === "en" ? "Tier" : "Bậc"} ${tier} · ${tierRecord(item, tier)}</span>`;
+    }
+
+    function renderCalculatorOptions() {
+      const tier = tierForLevel(Number(document.querySelector("#calc-level").value));
+      const choices = strategies.filter(item => tierRecord(item, tier) && item[0] !== "60010" && item[7] !== false);
+      const visibleRoots = new Set();
+      document.querySelectorAll(".calc-owned, #calc-target").forEach(select => {
+        const selected = select.value || select.dataset.default;
+        select.innerHTML = choices.map(item => `<option value="${item[0]}">${strategyLabel(item[0])}</option>`).join("");
+        const selectedAvailable = choices.some(item => item[0] === selected);
+        if (select.classList.contains("calc-owned")) {
+          select.value = selectedAvailable && !visibleRoots.has(selected) ? selected : choices.find(item => !visibleRoots.has(item[0]))[0];
+          visibleRoots.add(select.value);
+        } else {
+          select.value = selectedAvailable ? selected : choices.find(item => !visibleRoots.has(item[0]))[0];
+        }
+        updateCalculatorPreview(select);
+      });
+      calculateRoll();
+    }
+
+    function calculateRoll() {
+      const visible = [...document.querySelectorAll(".calc-owned")].map(select => select.value);
+      const targetRoot = document.querySelector("#calc-target").value;
+      const level = Number(document.querySelector("#calc-level").value);
+      const tier = tierForLevel(level);
+      const target = strategies.find(item => item[0] === targetRoot);
+      const result = document.querySelector("#calc-result");
+      if (new Set(visible).size !== visible.length) {
+        result.innerHTML = `<strong>0%</strong><p class="calc-warning">${language === "en" ? "Choose three different visible Strategies." : "Hãy chọn ba Strategy đang hiện khác nhau."}</p>`;
+        return;
+      }
+      const blocked = visible.includes(targetRoot)
+        ? (language === "en" ? "The target is already one of the three visible cards, so it cannot replace the rerolled slot on the normal pass." : "Mục tiêu đang nằm trong ba card hiện tại nên không thể thay vào ô reroll ở lượt thường.")
+        : "";
+      const pool = calculatorPool(visible, tier);
+      const totalWeight = pool.reduce((sum, item) => sum + item.weight, 0);
+      const probability = blocked ? 0 : rerollChance(pool, targetRoot);
+      const percent = new Intl.NumberFormat(language === "en" ? "en-US" : "vi-VN", { maximumFractionDigits: 2 }).format(probability * 100);
+      const targetRecordId = tierRecord(target, tier);
+      const summary = language === "en"
+        ? `${strategyLabel(targetRoot)} · ID ${targetRecordId} on the next single-slot reroll. Eligible pool: ${pool.length} Strategies, total Weight ${totalWeight}.`
+        : `${strategyLabel(targetRoot)} · ID ${targetRecordId} ở lần reroll một ô kế tiếp. Pool hợp lệ: ${pool.length} Strategy, tổng Weight ${totalWeight}.`;
+      const gate = appearanceRules[targetRoot]?.[language === "en" ? 1 : 0];
+      result.innerHTML = `<strong>${percent}%</strong><p>${summary}</p>${blocked ? `<p class="calc-warning">${blocked}</p>` : ""}${gate ? `<p class="calc-warning">${language === "en" ? "Conditional gate" : "Gate điều kiện"}: ${gate}</p>` : ""}`;
+    }
+
     const categoryEn = {
       "Tất cả":"All", "Kinh tế":"Economy", "Tế Đàn":"Altar", "Shop Xâm Chiếm":"Invasion Shop",
       "Tiến trình":"Progression", "Hero cao sao":"High-star Hero", "Toàn đội":"Whole Team",
@@ -934,6 +1052,11 @@
       "Theme":"Theme", "Toàn bộ 15 Strategy ID 80000–80140":"All 15 Strategies, IDs 80000-80140",
       "Theme 1, 5 và 10 thuộc đồng thời nhóm Theme và Shop Xâm Chiếm. Chọn một trong ba lá này khóa cả hai nhóm; ngược lại, một Strategy Shop đã chọn cũng chặn ba Theme đó.":"Themes 1, 5 and 10 belong to both Theme and Invasion Shop. Selecting one locks both groups; conversely, an owned Shop Strategy also blocks those three Themes.",
       "Lá vừa reroll chỉ bị loại theo đúng ID trong lượt dựng pool thường. Nếu pool không đủ ba lựa chọn, nhánh retry bỏ giới hạn abandoned này nên lá có thể quay lại; Disabled, theme mùa và các gate cứng vẫn không được bỏ qua.":"A rerolled card is excluded by exact ID during the normal pool pass. If the pool cannot supply three choices, retry drops this abandoned-card restriction, so it may return; Disabled, seasonal themes and hard gates remain enforced.",
+      "Tính tỉ lệ Strategy xuất hiện":"Calculate Strategy appearance rate",
+      "Chọn ba Strategy đang hiện trên màn hình, cấp hiện tại và Strategy mục tiêu. Kết quả là xác suất mục tiêu thay vào một ô ở lần reroll kế tiếp.":"Choose the three Strategies currently shown, the current level and the target Strategy. The result is the chance that the target replaces one slot on the next reroll.",
+      "Cấp đang roll":"Roll level", "Strategy đang hiện 1":"Visible Strategy 1", "Strategy đang hiện 2":"Visible Strategy 2", "Strategy đang hiện 3":"Visible Strategy 3", "Strategy mong muốn":"Target Strategy",
+      "Cấp 2 · Bậc 1":"Level 2 · Tier 1", "Cấp 3 · Bậc 1":"Level 3 · Tier 1", "Cấp 4 · Bậc 2":"Level 4 · Tier 2", "Cấp 5 · Bậc 2":"Level 5 · Tier 2", "Cấp 6 · Bậc 3":"Level 6 · Tier 3", "Cấp 7 · Bậc 3":"Level 7 · Tier 3",
+      "Giả định chưa có lịch sử abandoned trước đó và các gate đội hình, vòng, binh lực, root/category từ lá đã sở hữu đều cho phép. Calculator vẫn loại sai bậc, ba card đang hiện, Disabled và theme bị khóa trong Mùa 73.":"Assumes no earlier abandoned-card history and that lineup, round, troop-capacity and previously owned root/category gates allow the target. The calculator still removes wrong tiers, the three visible cards, Disabled entries and themes locked in Season 73.",
       "Chiến Lược · 67":"Strategies · 67", "Tarot · 17":"Tarot · 17",
       "Vòng 07":"Round 07", "Vòng 12":"Round 12", "Vòng 17":"Round 17", "Vòng 22":"Round 22",
       "Chọn 1 trong 3 lá thường":"Choose 1 of 3 common cards", "Tự rút 1 lá định mệnh":"Auto-draw 1 fated card",
@@ -1005,6 +1128,7 @@
         history.replaceState(null, "", url);
       }
       render();
+      renderCalculatorOptions();
     }
 
     function renderFilters() {
@@ -1111,6 +1235,14 @@
       localStorage.setItem("strife-layout", state.layout);
       render();
     }));
+    document.querySelector("#roll-calculator").addEventListener("change", event => {
+      if (event.target.id === "calc-level") {
+        renderCalculatorOptions();
+        return;
+      }
+      if (event.target.matches(".calc-owned, #calc-target")) updateCalculatorPreview(event.target);
+      calculateRoll();
+    });
     catalog.addEventListener("click", event => {
       const card = event.target.closest(".card");
       if (card) openDetail(card);
