@@ -7,6 +7,7 @@ and exports structured JSON to docs/strife-leaderboard-data.json.
 """
 import json
 import os
+import re
 import sys
 import xml.etree.ElementTree as ET
 from datetime import datetime
@@ -233,9 +234,21 @@ def main():
         print(f"    Top 10 Cutoff: {data['summary']['top10Cutoff']} pts")
         print(f"    Total Players: {data['totalRanked']}")
 
-        # Re-render HTML page
-        from scripts.build_leaderboard_page import main as build_html
-        build_html()
+        # Directly sync snapshot into docs/strife-leaderboard.html if present
+        html_file = REPO_ROOT / "docs" / "strife-leaderboard.html"
+        if html_file.exists():
+            html_text = html_file.read_text(encoding="utf-8")
+            pattern = r'(<script id="embedded-data" type="application/json">)(.*?)(</script>)'
+            if re.search(pattern, html_text, flags=re.DOTALL):
+                new_embedded = json.dumps(data, ensure_ascii=False, indent=2)
+                updated_html = re.sub(
+                    pattern,
+                    rf'\g<1>\n{new_embedded}\n  \g<3>',
+                    html_text,
+                    flags=re.DOTALL
+                )
+                html_file.write_text(updated_html, encoding="utf-8")
+                print(f"[+] Synced snapshot directly into {html_file}")
 
         return 0
     except Exception as e:

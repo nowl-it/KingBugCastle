@@ -655,7 +655,7 @@
           <button class="lang-toggle" type="button" data-lang="vi" aria-pressed="true">VI</button>
           <button class="lang-toggle" type="button" data-lang="en" aria-pressed="false">EN</button>
         </div>
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Đổi giao diện">Sáng / Tối</button>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Đổi giao diện" data-i18n="theme_toggle">Sáng / Tối</button>
       </div>
     </div>
 
@@ -675,7 +675,7 @@
         </div>
         <div class="stat">
           <b id="stat-top10">--</b>
-          <span data-i18n="stat_top10">Mốc Vua Thần (Top 10)</span>
+          <span data-i18n="stat_top10">Mốc Thần Vương (Top 10)</span>
         </div>
         <div class="stat">
           <b id="stat-top100">--</b>
@@ -2962,6 +2962,7 @@
       vi: {
         nav_compendium: "Chiến Lược & Tarot",
         nav_leaderboard: "Bảng Xếp Hạng",
+        theme_toggle: "Sáng / Tối",
         hero_eyebrow: "ĐẠI ĐẤU TRƯỜNG • MÙA 73",
         hero_title: "BẢNG XẾP HẠNG THẾ GIỚI",
         hero_desc: "Bảng vinh danh 100 vị lãnh chúa xuất sắc nhất mùa giải 73 trong đấu trường sinh tử King God Castle.",
@@ -2988,6 +2989,9 @@
         th_score: "Điểm Số",
         th_progress: "Tiến Độ / Tỉ Lệ",
         btn_refresh: "Làm mới",
+        podium_badge_1: "QUÁN QUÂN • TOP 1",
+        podium_badge_2: "Á QUÂN • TOP 2",
+        podium_badge_3: "HẠNG 3 • TOP 3",
         pts: "điểm",
         showing: "Hiển thị",
         of: "/",
@@ -2999,6 +3003,7 @@
       en: {
         nav_compendium: "Strategies & Tarots",
         nav_leaderboard: "Leaderboard",
+        theme_toggle: "Light / Dark",
         hero_eyebrow: "STRIFE BATTLEFIELD • SEASON 73",
         hero_title: "GLOBAL LEADERBOARD",
         hero_desc: "Hall of fame featuring the top 100 players in Season 73 of King God Castle Strife Battlefield.",
@@ -3025,6 +3030,9 @@
         th_score: "Score",
         th_progress: "Progress Ratio",
         btn_refresh: "Refresh",
+        podium_badge_1: "CHAMPION • RANK 1",
+        podium_badge_2: "RUNNER-UP • RANK 2",
+        podium_badge_3: "3RD PLACE • RANK 3",
         pts: "pts",
         showing: "Showing",
         of: "/",
@@ -3066,6 +3074,9 @@
     }
 
     function updateLangUI() {
+      document.title = currentLang === 'vi'
+        ? "Strife Leaderboard - Bảng Xếp Hạng Đại Đấu Trường Mùa 73"
+        : "Strife Leaderboard - Global Strife Battlefield Season 73";
       document.querySelectorAll(".lang-toggle").forEach(btn => {
         btn.setAttribute("aria-pressed", btn.dataset.lang === currentLang);
       });
@@ -3076,6 +3087,15 @@
         }
       });
       document.getElementById("search-input").placeholder = I18N[currentLang].search_placeholder;
+      if (appData) {
+        const dot = document.getElementById("status-dot");
+        const isPoller = dot && (dot.style.background === "rgb(0, 255, 136)" || dot.style.background === "#00ff88");
+        document.getElementById("sync-status").textContent = isPoller ? I18N[currentLang].live_poller : I18N[currentLang].static_snapshot;
+        if (appData.updatedAt) {
+          const dt = new Date(appData.updatedAt);
+          document.getElementById("last-updated-txt").textContent = `${I18N[currentLang].last_updated}: ${dt.toLocaleString(currentLang === 'vi' ? 'vi-VN' : 'en-US')}`;
+        }
+      }
     }
 
     // Countdown Timer
@@ -3119,9 +3139,9 @@
       const p3 = appData.summary.top3Player;
 
       const items = [
-        { player: p2, rank: 2, crown: "🥈", cls: "rank-2", badge: "TOP 2" },
-        { player: p1, rank: 1, crown: "👑", cls: "rank-1", badge: "QUÁN QUÂN • TOP 1" },
-        { player: p3, rank: 3, crown: "🥉", cls: "rank-3", badge: "TOP 3" },
+        { player: p2, rank: 2, crown: "🥈", cls: "rank-2", badge: I18N[currentLang].podium_badge_2 },
+        { player: p1, rank: 1, crown: "👑", cls: "rank-1", badge: I18N[currentLang].podium_badge_1 },
+        { player: p3, rank: 3, crown: "🥉", cls: "rank-3", badge: I18N[currentLang].podium_badge_3 },
       ];
 
       root.innerHTML = items.map(({ player, rank, crown, cls, badge }) => {
