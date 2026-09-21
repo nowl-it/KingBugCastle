@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-09-21T20:10:22.931592",
+  "updatedAt": "2026-09-21T20:25:26.045552",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
   "totalRanked": 100,
   "summary": {
     "topScore": 6604,
-    "top10Cutoff": 4922,
+    "top10Cutoff": 4937,
     "top100Cutoff": 2768,
     "top1Player": {
       "rank": 1,
@@ -264,10 +264,10 @@
     },
     {
       "rank": 10,
-      "score": 4922,
-      "accountId": 7882774,
-      "userName": "토토",
-      "castleName": "토",
+      "score": 4937,
+      "accountId": 9456409,
+      "userName": "푸딩",
+      "castleName": "스카이",
       "tier": 80,
       "tierInfo": {
         "id": 80,
@@ -278,17 +278,17 @@
         "group": "king-god",
         "color": "#cd7f32"
       },
-      "profileIcon": 1064004,
+      "profileIcon": 1072002,
       "heroName": "",
-      "flagId": 70020,
-      "nameTagId": 70020
+      "flagId": 15370,
+      "nameTagId": 15370
     },
     {
       "rank": 11,
-      "score": 4918,
-      "accountId": 9456409,
-      "userName": "푸딩",
-      "castleName": "스카이",
+      "score": 4922,
+      "accountId": 7882774,
+      "userName": "토토",
+      "castleName": "토",
       "tier": 71,
       "tierInfo": {
         "id": 71,
@@ -299,10 +299,10 @@
         "group": "god",
         "color": "#a855f7"
       },
-      "profileIcon": 1072002,
+      "profileIcon": 1064004,
       "heroName": "",
-      "flagId": 15370,
-      "nameTagId": 15370
+      "flagId": 70020,
+      "nameTagId": 70020
     },
     {
       "rank": 12,
