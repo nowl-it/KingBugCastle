@@ -185,6 +185,31 @@
       font-size: 1.05rem;
       line-height: 1.5;
     }
+    .refresh-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font: 600 .76rem/1 ui-monospace, monospace;
+      letter-spacing: .04em;
+      color: var(--gold-soft);
+      background: color-mix(in srgb, var(--gold) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--gold) 26%, transparent);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-top: 14px;
+    }
+    .refresh-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #00ff88;
+      box-shadow: 0 0 8px #00ff88;
+      animation: pulse-dot 2s infinite ease-in-out;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .35; transform: scale(.75); }
+    }
 
     /* Stats Grid */
     .stats {
@@ -663,6 +688,12 @@
       <span class="eyebrow" data-i18n="hero_eyebrow">ĐẠI ĐẤU TRƯỜNG • MÙA 73</span>
       <h1 data-i18n="hero_title">BẢNG XẾP HẠNG THẾ GIỚI</h1>
       <p class="hero-copy" data-i18n="hero_desc">Bảng vinh danh 100 vị lãnh chúa xuất sắc nhất mùa giải 73 trong đấu trường sinh tử King God Castle.</p>
+      <div>
+        <div class="refresh-badge">
+          <span class="refresh-pulse"></span>
+          <span data-i18n="refresh_interval">Tự động cập nhật mỗi 15 phút</span>
+        </div>
+      </div>
 
       <div class="stats">
         <div class="stat">
@@ -2997,7 +3028,8 @@
         of: "/",
         last_updated: "Cập nhật lúc",
         live_poller: "Trực tiếp từ Local Poller (9100)",
-        static_snapshot: "Dữ liệu máy chủ Mùa 73",
+        static_snapshot: "Dữ liệu máy chủ Mùa 73 (Cập nhật mỗi 15 phút)",
+        refresh_interval: "Tự động cập nhật mỗi 15 phút",
         season_ended: "Mùa giải đã kết thúc"
       },
       en: {
@@ -3038,7 +3070,8 @@
         of: "/",
         last_updated: "Updated at",
         live_poller: "Live from Local Poller (9100)",
-        static_snapshot: "Season 73 Server Snapshot",
+        static_snapshot: "Season 73 Server Snapshot (Updates every 15 mins)",
+        refresh_interval: "Auto-updates every 15 mins",
         season_ended: "Season ended"
       }
     };

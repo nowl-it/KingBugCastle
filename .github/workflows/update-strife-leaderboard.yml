@@ -2,8 +2,8 @@ name: Update Strife Leaderboard
 
 on:
   schedule:
-    # Run every 2 hours (at minute 15)
-    - cron: '15 */2 * * *'
+    # Run every 15 minutes
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 
 permissions:
