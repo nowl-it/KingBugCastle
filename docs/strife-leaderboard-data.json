@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T16:29:40.524001",
+  "updatedAt": "2026-09-21T16:43:23.520127",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
@@ -558,7 +558,7 @@
     },
     {
       "rank": 24,
-      "score": 3781,
+      "score": 3819,
       "accountId": 3851960,
       "userName": "엑셀렌",
       "castleName": "방굴",
@@ -894,28 +894,7 @@
     },
     {
       "rank": 40,
-      "score": 3398,
-      "accountId": 244734,
-      "userName": "뻑",
-      "castleName": "남",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 10690,
-      "heroName": "Ivi",
-      "flagId": 20170,
-      "nameTagId": 10000
-    },
-    {
-      "rank": 41,
-      "score": 3387,
+      "score": 3457,
       "accountId": 6132062,
       "userName": "MOTO",
       "castleName": "SUBO",
@@ -935,8 +914,8 @@
       "nameTagId": 40010
     },
     {
-      "rank": 42,
-      "score": 3383,
+      "rank": 41,
+      "score": 3405,
       "accountId": 3412331,
       "userName": "DragonDark",
       "castleName": "TheSinsOf",
@@ -954,6 +933,27 @@
       "heroName": "",
       "flagId": 40040,
       "nameTagId": 40050
+    },
+    {
+      "rank": 42,
+      "score": 3398,
+      "accountId": 244734,
+      "userName": "뻑",
+      "castleName": "남",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 10690,
+      "heroName": "Ivi",
+      "flagId": 20170,
+      "nameTagId": 10000
     },
     {
       "rank": 43,
@@ -1356,27 +1356,6 @@
     },
     {
       "rank": 62,
-      "score": 3155,
-      "accountId": 7191677,
-      "userName": "왕",
-      "castleName": "성",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1064002,
-      "heroName": "",
-      "flagId": 20170,
-      "nameTagId": 10360
-    },
-    {
-      "rank": 63,
       "score": 3149,
       "accountId": 9489991,
       "userName": "NightOwL",
@@ -1395,6 +1374,27 @@
       "heroName": "",
       "flagId": 15370,
       "nameTagId": 20030
+    },
+    {
+      "rank": 63,
+      "score": 3121,
+      "accountId": 7191677,
+      "userName": "왕",
+      "castleName": "성",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1064002,
+      "heroName": "",
+      "flagId": 20170,
+      "nameTagId": 10360
     },
     {
       "rank": 64,
