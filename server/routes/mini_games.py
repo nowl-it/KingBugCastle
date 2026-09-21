@@ -22,9 +22,10 @@ Uses the `register(app, srv)` pattern.
     python3 mini_games.py     # self-check
 """
 import json
+import xml.etree.ElementTree as ET
 
 from common import admin_log, body_int, now_iso
-from config import PLAYER_DEFAULTS as _PC
+from config import PLAYER_DEFAULTS as _PC, RCFG, XML_DIR
 from decoration import block as _deco
 from state import save_state
 
@@ -113,6 +114,82 @@ def r_rogue_statistics(body, st):
     """Clear rates across the playerbase. One player is not a sample, and inventing
     one would print made-up percentages next to real mission names."""
     return {"rogueLikeMissionStatistics": [], "totalRogueLikeUser": 1}
+
+
+_RIFT_SEASONS_CACHE = None
+
+
+def _get_dimension_rift_seasons():
+    """Parse and cache Dimension Rift seasons from DimensionRiftSeasonDatas.xml."""
+    global _RIFT_SEASONS_CACHE
+    if _RIFT_SEASONS_CACHE is None:
+        xml_path = XML_DIR / "DimensionRiftSeasonDatas.xml"
+        seasons = {}
+        if xml_path.is_file():
+            root = ET.parse(xml_path).getroot()
+            for node in root.findall("DimensionRiftSeasonData"):
+                sid = int(node.get("ID", "0"))
+                elites_text = node.findtext("ChallengeElites", "")
+                elites = [int(x.strip()) for x in elites_text.split(",") if x.strip().isdigit()]
+                boss_id = int(node.findtext("ChallengeBoss", "0") or 0)
+                adv_region = node.findtext("SeasonAdvantageRegion", "") or ""
+                adv_role = node.findtext("SeasonAdvantageRole", "") or ""
+                adv_buff = int(node.findtext("SeasonAdvantageBuffId", "0") or 0)
+                pen_region = node.findtext("SeasonPenaltyRegion", "") or ""
+                pen_role = node.findtext("SeasonPenaltyRole", "") or ""
+                pen_buff = int(node.findtext("SeasonPenaltyBuffId", "0") or 0)
+                seasons[sid] = {
+                    "seasonalChallengeBossId": boss_id,
+                    "seasonalChallengeEliteIds": elites,
+                    "seasonalAdvantageRegion": adv_region,
+                    "seasonalAdvantageRole": adv_role,
+                    "seasonalAdvantageBuffId": adv_buff,
+                    "seasonalPenaltyRegion": pen_region,
+                    "seasonalPenaltyRole": pen_role,
+                    "seasonalPenaltyBuffId": pen_buff,
+                }
+        _RIFT_SEASONS_CACHE = seasons
+    return _RIFT_SEASONS_CACHE
+
+
+def r_rogue_season_info(body, st):
+    """Season information for the Great Rift / Dimension Rift.
+
+    Enables Phase 16 (Seasonal Challenge Mode) by returning seasonEnabled: True
+    along with active date bounds and seasonal boss/buff configurations.
+    """
+    seasons = _get_dimension_rift_seasons()
+    target_season = RCFG.get("pvpInfo", {}).get("season", 72)
+    if target_season in seasons:
+        sdata = seasons[target_season]
+    elif seasons:
+        sdata = seasons[max(seasons.keys())]
+    else:
+        sdata = {
+            "seasonalChallengeBossId": 70120,
+            "seasonalChallengeEliteIds": [721050, 721150, 721280, 721350, 721460, 721580],
+            "seasonalAdvantageRegion": "South",
+            "seasonalAdvantageRole": "",
+            "seasonalAdvantageBuffId": 600000,
+            "seasonalPenaltyRegion": "",
+            "seasonalPenaltyRole": "Shadow",
+            "seasonalPenaltyBuffId": 600100,
+        }
+
+    return {
+        "errorCode": 0,
+        "seasonEnabled": True,
+        "seasonStartAtDate": now_iso(-10),
+        "seasonUntilAtDate": now_iso(30),
+        "seasonalChallengeBossId": sdata["seasonalChallengeBossId"],
+        "seasonalChallengeEliteIds": list(sdata["seasonalChallengeEliteIds"]),
+        "seasonalAdvantageRegion": sdata["seasonalAdvantageRegion"],
+        "seasonalAdvantageRole": sdata["seasonalAdvantageRole"],
+        "seasonalAdvantageBuffId": sdata["seasonalAdvantageBuffId"],
+        "seasonalPenaltyRegion": sdata["seasonalPenaltyRegion"],
+        "seasonalPenaltyRole": sdata["seasonalPenaltyRole"],
+        "seasonalPenaltyBuffId": sdata["seasonalPenaltyBuffId"],
+    }
 
 
 def _tycoon_tokens(st):
@@ -250,6 +327,7 @@ def handlers():
         "/rogueLike/delete-roguelike": r_rogue_delete,
         "/rogueLike/revive": r_rogue_revive,
         "/rogueLike/can-revive-by-ad": r_rogue_can_revive_by_ad,
+        "/rogueLike/season-info": r_rogue_season_info,
         "/mission/roguelike-statistics": r_rogue_statistics,
         "/territory-tycoon/fetch-token": r_tycoon_tokens,
         "/territory-tycoon/collect-gold-token": r_tycoon_collect_gold,
@@ -316,7 +394,12 @@ if __name__ == "__main__":
         assert isinstance(out, dict) and out, f"{fn.__name__} answered empty"
         assert not any(v is None for v in out.values()), f"{fn.__name__} sent a null: {out}"
 
+    sinfo = r_rogue_season_info({}, st)
+    assert sinfo["seasonEnabled"] is True
+    assert sinfo["seasonalChallengeBossId"] > 0
+    assert len(sinfo["seasonalChallengeEliteIds"]) > 0
+
     paths = handlers()
-    assert len(paths) == 30, f"{len(paths)} routes registered"
+    assert len(paths) == 31, f"{len(paths)} routes registered"
     assert all(callable(h) for h in paths.values())
     print(f"mini_games self-check ok ({len(paths)} routes)")

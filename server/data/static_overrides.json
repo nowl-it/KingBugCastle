@@ -29,10 +29,6 @@
 		"maxBossHp": 1000000,
 		"phase": 1
 	},
-	"/rogueLike/season-info": {
-		"seasonInfo": {},
-		"seasonRewards": []
-	},
 	"/rogueLike/startFloor": {
 		"errorCode": 0,
 		"cards": []
