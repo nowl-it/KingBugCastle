@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-09-21T21:23:55.496702",
+  "updatedAt": "2026-09-21T21:34:55.536515",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
   "totalRanked": 100,
   "summary": {
     "topScore": 6604,
-    "top10Cutoff": 4967,
-    "top100Cutoff": 2768,
+    "top10Cutoff": 4986,
+    "top100Cutoff": 2769,
     "top1Player": {
       "rank": 1,
       "score": 6604,
@@ -31,7 +31,7 @@
     },
     "top2Player": {
       "rank": 2,
-      "score": 6442,
+      "score": 6451,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -96,7 +96,7 @@
     },
     {
       "rank": 2,
-      "score": 6442,
+      "score": 6451,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -264,7 +264,7 @@
     },
     {
       "rank": 10,
-      "score": 4967,
+      "score": 4986,
       "accountId": 9456409,
       "userName": "푸딩",
       "castleName": "스카이",
@@ -831,6 +831,27 @@
     },
     {
       "rank": 37,
+      "score": 3484,
+      "accountId": 2265156,
+      "userName": "Lycht",
+      "castleName": "Lycht",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1071003,
+      "heroName": "",
+      "flagId": 70030,
+      "nameTagId": 50000
+    },
+    {
+      "rank": 38,
       "score": 3476,
       "accountId": 8377857,
       "userName": "국",
@@ -851,7 +872,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 38,
+      "rank": 39,
       "score": 3475,
       "accountId": 2434487,
       "userName": "Kimwell01",
@@ -872,7 +893,7 @@
       "nameTagId": 70020
     },
     {
-      "rank": 39,
+      "rank": 40,
       "score": 3464,
       "accountId": 7065981,
       "userName": "Fumiko",
@@ -893,7 +914,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 40,
+      "rank": 41,
       "score": 3457,
       "accountId": 6132062,
       "userName": "MOTO",
@@ -912,27 +933,6 @@
       "heroName": "",
       "flagId": 40000,
       "nameTagId": 40010
-    },
-    {
-      "rank": 41,
-      "score": 3447,
-      "accountId": 2265156,
-      "userName": "Lycht",
-      "castleName": "Lycht",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1071003,
-      "heroName": "",
-      "flagId": 70030,
-      "nameTagId": 50000
     },
     {
       "rank": 42,
@@ -1944,6 +1944,27 @@
     },
     {
       "rank": 90,
+      "score": 2823,
+      "accountId": 165152,
+      "userName": "왕봉봉",
+      "castleName": "봉봉이의봉봉",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": -1,
+      "heroName": "",
+      "flagId": 10000,
+      "nameTagId": 10000
+    },
+    {
+      "rank": 91,
       "score": 2821,
       "accountId": 1928458,
       "userName": "갓정화",
@@ -1964,7 +1985,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 91,
+      "rank": 92,
       "score": 2808,
       "accountId": 9309929,
       "userName": "vinahau",
@@ -1985,7 +2006,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 92,
+      "rank": 93,
       "score": 2801,
       "accountId": 5874801,
       "userName": "GhostIcey",
@@ -2006,7 +2027,7 @@
       "nameTagId": 40040
     },
     {
-      "rank": 93,
+      "rank": 94,
       "score": 2798,
       "accountId": 9408245,
       "userName": "Quoc",
@@ -2027,7 +2048,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 94,
+      "rank": 95,
       "score": 2798,
       "accountId": 7435650,
       "userName": "heheboy",
@@ -2048,7 +2069,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 95,
+      "rank": 96,
       "score": 2790,
       "accountId": 7238962,
       "userName": "JulGun",
@@ -2069,7 +2090,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 96,
+      "rank": 97,
       "score": 2786,
       "accountId": 6135296,
       "userName": "뻑",
@@ -2090,7 +2111,7 @@
       "nameTagId": 70030
     },
     {
-      "rank": 97,
+      "rank": 98,
       "score": 2780,
       "accountId": 5530709,
       "userName": "Turuturu",
@@ -2111,7 +2132,7 @@
       "nameTagId": 20000
     },
     {
-      "rank": 98,
+      "rank": 99,
       "score": 2771,
       "accountId": 5029146,
       "userName": "프리",
@@ -2132,7 +2153,7 @@
       "nameTagId": 40050
     },
     {
-      "rank": 99,
+      "rank": 100,
       "score": 2769,
       "accountId": 354119,
       "userName": "두부",
@@ -2151,27 +2172,6 @@
       "heroName": "",
       "flagId": 20170,
       "nameTagId": 20030
-    },
-    {
-      "rank": 100,
-      "score": 2768,
-      "accountId": 3303658,
-      "userName": "p3tly",
-      "castleName": "貓鯨鯊",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1069002,
-      "heroName": "",
-      "flagId": 20030,
-      "nameTagId": 40000
     }
   ]
 }
