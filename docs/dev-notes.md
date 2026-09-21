@@ -47,6 +47,83 @@
 - **Offsets move between versions** (v170.0.03 → v171 → v172: every prologue byte-identical,
   offsets shifted). Re-derive per version; never reuse across libs.
 
+### iOS stock-client router capture (RPi4/OpenWrt, verified 2026-09-19)
+
+- RPi4 runs OpenWrt 25.12.5, whose package manager is `apk` (not `opkg`). Topology:
+  `eth0` = DHCP WAN on the home network (`192.168.1.0/24`); `br-lan`/5 GHz AP =
+  `192.168.2.1/24`; clients receive DHCP/NAT behind the RPi. Do not bridge `eth0` into
+  `br-lan`: that leaves the RPi itself without a default route and lets the upstream router
+  issue client leases directly.
+- Installed packages: `tcpdump`, `curl`, `jq`, `coreutils-base64`, `coreutils-nohup`, and
+  `openssh-sftp-server`. SSH alias `rpi4` on the analysis workstation uses a dedicated key.
+  No credentials are stored in this repository.
+- iPhone has a static DHCP lease at `192.168.2.239` for its per-SSID private MAC. Capture uses
+  `ether host <MAC>` on `br-lan` so it includes both IPv4 and IPv6. Commands installed on the
+  RPi: `kgc-clients`, `kgc-start [IP-or-MAC]`, `kgc-status`, `kgc-stop`.
+- PCAPs live under `/tmp/kgc-capture` (RAM), not the ~87 MB OpenWrt overlay. `tcpdump` rotates
+  ten 25 MB files (250 MB maximum). They intentionally disappear on reboot. Copy them with
+  `scp rpi4:/tmp/kgc-capture/iphone_mac.pcap0 ...`; SFTP support is installed, so modern `scp`
+  needs no legacy `-O` flag.
+- Verified force-close/reopen official-client capture: 3,056 packets / 2.1 MB / zero drops.
+  Official endpoints observed: `kgc-k8s-1.awesomepiece.com` → `34.144.251.178` (main API),
+  `kgc-cdn-1.awesomepiece.com` → `34.116.0.13`, and
+  `kgc-ranking-1.awesomepiece.com` → `34.117.208.203`. DNS and TLS/QUIC metadata are visible;
+  HTTPS application request/response bodies remain encrypted on a stock non-jailbroken iOS
+  client. The two plaintext HTTP requests seen at `13.113.122.221/x2/xls.cgi` were unrelated
+  telemetry, not KGC API data.
+
+### iOS MITM attempt: game is SSL-pinned, bodies unreachable (tested 2026-09-19)
+
+To read request/response BODIES you need HTTPS interception. Tried the standard iOS setup:
+mitmproxy 12.2.3 in regular-proxy mode on the PC (`mitmdump --listen-host 0.0.0.0
+--listen-port 8080 -w flows.mitm`), iPhone Wi-Fi proxy → PC:8080, mitmproxy CA installed as
+an iOS profile with Full Trust enabled (Settings → General → VPN & Device Management →
+install profile, then General → About → Certificate Trust Settings → Full Trust).
+
+Results (mitmdump log, `kgc-k8s-1.awesomepiece.com` on `34.144.251.178`):
+
+```
+[client connect] ... [server connect kgc-k8s-1.awesomepiece.com:443 (34.144.251.178:443)]
+[85ms later] Client TLS handshake failed. The client disconnected during the handshake.
+```
+
+- The game DOES honor the iOS system proxy: mitmproxy saw `client connect` + a real
+  `server connect` to the KGC host. Only the TLS handshake was rejected by the client.
+- The OS/Safari/ads/Apple flows all MITM-decrypt fine (proxy + CA pipeline is correct), so
+  the rejection is the game's own certificate validation, not our setup.
+- Conclusion: **the iOS KGC client pins/self-validates its TLS certs (same
+  PinnedCertHandler / UnityTlsProvider.ValidateCertificate family the Android build needed
+  binary patches for) and ignores the OS trust store. On a stock, non-jailbroken iPhone the
+  API bodies are unreadable from the wire - DNS/SNI/IP/conversation metadata only.** The game
+  hangs at the awesomepiece logo while the proxy intercepts, because its `usePatch`/login
+  (`POST /auth/...` on kgc-k8s-1) can't complete. Turn the proxy Off on the iPhone to restore
+  normal gameplay (the installed CA profile is inert without the proxy).
+- Setup notes: don't rely on `apk add py3-pip` (OpenWrt 25.12 names it `python3-pip`; Python
+  3.13.9 has no `ensurepip`). mitmproxy ≥ 12 needs the Rust `mitmproxy-rs` wheel, which has
+  no aarch64-musl build - installing mitmproxy on the RPi4 fails; run it on the PC instead.
+  DNAT-to-another-host does NOT work for transparent mode (proxy loses SO_ORIGINAL_DST), so
+  if a transparent MITM is ever needed it must run on the RPi4 itself (REDIRECT + local
+  listener) - which currently can't host mitmproxy (see above).
+
+- **Full pinning map (test B, 2026-09-19, same session):** with mitmproxy running regular
+  proxy mode + the iPhone's system proxy pointed at it, the host-by-host result is:
+
+  | KGC host | Transport | Result |
+  |---|---|---|
+  | `kgc-k8s-1.awesomepiece.com` (API: /auth, /pvp/*) | TCP:443 TLS | **pinned** - client rejects our CA, handshake dead in ~85 ms |
+  | `kgc-cdn-1.awesomepiece.com` (patch/CDN assets) | TCP:443 TLS | **pinned** - same rejection (3 retries, all failed) |
+  | `kgc-ranking-1.awesomepiece.com` (leaderboard) | QUIC/HTTP3 natively; **TCP:443 when a system proxy is set** | **pinned** - with the proxy on, the game falls back to TCP CONNECT and rejects the CA exactly like the other two (confirmed 2026-09-19, mitm_d run: 3 tries at `21:40:10`, all `Client TLS handshake failed`) |
+
+  Native (no-proxy) operation uses QUIC, which mitmproxy cannot MITM; with a system proxy
+  configured the client downgrades to TCP, which proves pinning there too. **All three
+  awesomepiece hosts are unreachable for body inspection on a stock iOS client.** Route
+  enumeration workspace: `kgc-ranking-1` → `34.117.208.203`, all QUIC Initial/Handshake
+  packets in the pcap are to this IP. `--ignore-hosts "kgc-k8s-1\.awesomepiece\.com|kgc-cdn-1\.awesomepiece\.com"`
+  lets the game boot normally while everything else is still MITM'd (SDK/ads/analytics flows
+  decrypt fine and are visible in the log) - a useful isolation trick if a future question is
+  ever "which non-game host does the client cleanly talk to". The game is v173.0.00
+  (`an=173.0.0.iphone.com.awesomepiece.castle` in the AdMob request).
+
 ### v173.0.00 private-client port (verified 2026-09-13)
 
 - Stock inputs: `apk/xapk_extracted_v1730/`; recovered game code:
@@ -659,6 +736,30 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
 
 ## 13. Strife Battlefield (Colosseum PvP)
 
+### Strategy/ColosseumAbility catalog (verified 2026-09-15)
+- Full catalog: `docs/strife-compendium.html`. The served v173 season-73 data contains **141 tier
+  rows grouped into 67 strategy roots**. ID last digit is the zero-based tier (`0/1/2` = tier
+  `1/2/3`); some roots intentionally start at tier 2 or 3.
+- `ColosseumAbilitySelectPanel.ABILITY_PICK_COUNT=3`; `PickRandomAbilities` uses `Weight`, tier,
+  current categories/composition, abandoned choices and season themes. Settings provide 5 rerolls,
+  max strategy level 7, and EXP thresholds `0,40,70,120,200,300,420`.
+- Season 73 themes are `1,6,7,8,9,10,11,12,13,14,15`, so theme strategies 2-5 are excluded.
+  Region/role strategy offer gates (`AppearWhenRegionUnit3`, `AppearWhenRoleLevel5`) are distinct
+  from their in-battle activation conditions.
+- v173 `PickRandomAbilities` exclusion rules: uncategorized abilities compare `_inheritFrom`
+  (the root; e.g. `50031/50032 -> 50030`) against both `ColosseumData.abilities` and
+  `abilityQueue`, so selecting one tier blocks every tier of that root. Categorized abilities are
+  blocked on any shared category: `BuildingLevel` (3 roots), `InvadeShop` (6 shop roots plus theme
+  roots 80000/80040/80090), `HighestLevel` (4), `UnitRegionOrRole` (11), and `InvadeChapter`
+  (all 15 themes). A rerolled exact ID is excluded only on the normal pass; retry ignores
+  `abandonedAbilities`. Hard gates remain: slot count `<7` (10050), stage `<7` (10100),
+  `Disabled` (60010), 3 matching-region heroes (70000-70040), or one matching-role hero level
+  5+ (70050-70100).
+- For mechanics, trust `WorldTriggers -> ColosseumEventTriggers -> ColosseumBuffDatas`, not
+  `DescComment`: multiple comments are stale. Confirmed examples: Silver Chest T1=40 (not 30),
+  Plunder=25 (not 20), Focus on Defense=14 Silver (not 16), Winter Armor=+150% HP (not 200),
+  Hero's Vigor=+60% stats (not 70), Guardian God's Excellence=+25% HP/max 7 stacks, and Devil's
+  Blood runtime attack-speed buff=30% while its UI params say 40%.
 ### Season display
 - `ColosseumSettings.xml`: `CurrentSeasonTheme` = "1,2,6,7,8,10,11,12,13,14,15" matches
   `SeasonTheme Season="72"`. `SeasonThemes` has Season="71" and Season="72".
@@ -1426,3 +1527,9 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
 - Do not infer corruption from `rogueLikeGameIndex` when debugging theme 2100. Client
   `GameManager.GetRogueLikeGameIndex` @ RVA `0x30B3F3C` reads `dimensionRiftGameIndex` for 2100 and
   `rogueLikeGameIndex` for 2000.
+
+### iOS Token Extraction (AwesomePrefs)
+Unity's PlayerPrefs on iOS are stored in `Library/Preferences/com.awesomepiece.castle.plist`. The game uses `AwesomePrefs` which encrypts keys and values using TripleDES ECB (PKCS7 padding). The TripleDES key is `MD5("APPROJECTL2")` (static across devices).
+The prefix for plain keys is `T:_79ee6c63096ae9b47a7567aadb779e05`.
+To extract credentials, parse the plist and decrypt all keys/values using this TripleDES key. Look for `accessToken`.
+See `tools/extract_ios_token.py` for the implementation.

@@ -82,7 +82,12 @@
       min-height: 68px;
       border-bottom: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
     }
-    .brand { font: 700 .8rem/1 ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase; }
+    .topbar-left { display: flex; align-items: center; gap: 24px; }
+    .brand { font: 700 .8rem/1 ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); }
+    .topbar-nav { display: flex; gap: 6px; }
+    .nav-link { font: 600 .78rem/1 ui-monospace, monospace; text-transform: uppercase; letter-spacing: .08em; padding: 7px 14px; border: 1px solid transparent; transition: all .2s ease; color: var(--muted); text-decoration: none; }
+    .nav-link:hover { color: var(--text); border-color: var(--line); background: var(--surface); }
+    .nav-link.active { color: var(--gold); border-color: var(--gold); background: color-mix(in srgb, var(--gold) 12%, transparent); }
     .topbar-actions { display: flex; align-items: center; gap: 7px; }
     .lang-control { display: flex; border: 1px solid var(--line); background: var(--surface); }
     .lang-toggle, .theme-toggle {
@@ -441,7 +446,13 @@
   </svg>
   <header class="masthead">
     <div class="topbar shell">
-      <span class="brand">KGC / Strife Field Manual</span>
+      <div class="topbar-left">
+        <span class="brand">KGC / Strife Field Manual</span>
+        <nav class="topbar-nav" aria-label="Chuyển trang">
+          <a href="strife-compendium.html" class="nav-link active" id="nav-compendium">Chiến Lược & Tarot</a>
+          <a href="strife-leaderboard.html" class="nav-link" id="nav-leaderboard">Bảng Xếp Hạng</a>
+        </nav>
+      </div>
       <div class="topbar-actions">
         <div class="lang-control" role="group" aria-label="Ngôn ngữ">
           <button class="lang-toggle" type="button" data-lang="vi" aria-pressed="true">VI</button>
@@ -1052,6 +1063,8 @@
     };
 
     const staticEn = {
+      "Chiến Lược & Tarot":"Strategies & Tarots",
+      "Bảng Xếp Hạng":"Leaderboard",
       "Sáng / Tối":"Light / Dark",
       "Tra cứu toàn bộ Chiến Lược và Tarot từ dữ liệu thực thi, gồm cấp bậc, điều kiện xuất hiện và trạng thái mùa.":"Browse every Strategy and Tarot card from runtime data, including tiers, appearance gates and season status.",
       "Chiến Lược gốc":"Strategy roots", "Bản ghi cấp bậc":"Tier records", "Lá Tarot":"Tarot cards", "Theme đang mở":"Active themes",

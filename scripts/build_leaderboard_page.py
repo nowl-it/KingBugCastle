@@ -1,0 +1,1169 @@
+#!/usr/bin/env python3
+"""
+Generate docs/strife-leaderboard.html from template and docs/strife-leaderboard-data.json.
+"""
+import json
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DATA_PATH = REPO_ROOT / "docs" / "strife-leaderboard-data.json"
+OUTPUT_HTML = REPO_ROOT / "docs" / "strife-leaderboard.html"
+
+HTML_TEMPLATE = """<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Bảng xếp hạng Đại Đấu Trường (Strife Battlefield) King God Castle Mùa 73. Tra cứu điểm số, thứ hạng và bậc rank của 100 người chơi hàng đầu thế giới.">
+  <title>Strife Leaderboard - Bảng Xếp Hạng Đại Đấu Trường Mùa 73</title>
+  <style>
+    :root {
+      --bg: #0b1016;
+      --surface: #121923;
+      --surface-2: #18212c;
+      --surface-3: #1f2c3a;
+      --text: #edf0eb;
+      --muted: #9ca7a5;
+      --line: #2b3741;
+      --gold: #d7b66b;
+      --gold-soft: #f0daa1;
+      --red: #a94d49;
+      --green: #75b99c;
+      --cyan: #00d2d3;
+      --purple: #a29bfe;
+      --rank-gold: #ffd700;
+      --rank-silver: #d1d5db;
+      --rank-bronze: #d97706;
+      --shadow: rgba(0, 0, 0, .35);
+      --max: 1320px;
+    }
+    :root[data-theme="light"] {
+      --bg: #e9e7df;
+      --surface: #f7f5ef;
+      --surface-2: #eeece5;
+      --surface-3: #e2dfd7;
+      --text: #172024;
+      --muted: #5e696b;
+      --line: #c8c8c0;
+      --gold: #846628;
+      --gold-soft: #604817;
+      --red: #8e3e39;
+      --green: #32775d;
+      --cyan: #0984e3;
+      --purple: #6c5ce7;
+      --rank-gold: #b45309;
+      --rank-silver: #64748b;
+      --rank-bronze: #92400e;
+      --shadow: rgba(40, 48, 48, .12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    button, input, select { font: inherit; color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+
+    /* Masthead & Topbar */
+    .masthead {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 82% 25%, color-mix(in srgb, var(--gold) 16%, transparent) 0 10%, transparent 35%),
+        radial-gradient(circle at 20% 80%, color-mix(in srgb, var(--red) 14%, transparent) 0 15%, transparent 40%),
+        linear-gradient(135deg, var(--bg) 10%, var(--surface-2) 100%);
+    }
+    .masthead::before {
+      content: "TOP 100";
+      position: absolute;
+      right: -3vw;
+      top: -6vh;
+      color: transparent;
+      -webkit-text-stroke: 1px color-mix(in srgb, var(--gold) 22%, transparent);
+      font: 800 clamp(10rem, 24vw, 24rem)/1 "Arial Narrow", sans-serif;
+      letter-spacing: -.08em;
+      opacity: .45;
+      pointer-events: none;
+    }
+    .topbar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 68px;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .brand {
+      font: 800 .84rem/1 ui-monospace, monospace;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+    }
+    .topbar-nav {
+      display: flex;
+      gap: 6px;
+    }
+    .nav-link {
+      font: 600 .78rem/1 ui-monospace, monospace;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: 7px 14px;
+      border: 1px solid transparent;
+      transition: all .2s ease;
+      color: var(--muted);
+    }
+    .nav-link:hover {
+      color: var(--text);
+      border-color: var(--line);
+      background: var(--surface);
+    }
+    .nav-link.active {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: color-mix(in srgb, var(--gold) 12%, transparent);
+    }
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .lang-control {
+      display: flex;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .lang-toggle, .theme-toggle {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 7px 12px;
+      cursor: pointer;
+      font-size: .8rem;
+      transition: background .2s, color .2s;
+    }
+    .lang-toggle {
+      border: 0;
+      padding-inline: 10px;
+      font-family: ui-monospace, monospace;
+      font-weight: 700;
+    }
+    .lang-toggle + .lang-toggle {
+      border-left: 1px solid var(--line);
+    }
+    .lang-toggle[aria-pressed="true"] {
+      background: var(--gold);
+      color: #15130d;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      z-index: 2;
+      padding: 60px 0 54px;
+    }
+    .eyebrow {
+      display: inline-block;
+      color: var(--gold);
+      font: 700 .74rem/1 ui-monospace, monospace;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding: 4px 10px;
+      background: color-mix(in srgb, var(--gold) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent);
+    }
+    h1 {
+      margin: 6px 0 16px;
+      font: 700 clamp(2.4rem, 6.5vw, 4.8rem)/.95 "Arial Narrow", "Roboto Condensed", sans-serif;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+    }
+    .hero-copy {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    /* Stats Grid */
+    .stats {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      max-width: 920px;
+      margin-top: 36px;
+      border-block: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 40%, transparent);
+    }
+    .stat {
+      padding: 16px 20px 16px 0;
+    }
+    .stat + .stat {
+      padding-left: 20px;
+      border-left: 1px solid var(--line);
+    }
+    .stat b {
+      display: block;
+      color: var(--gold-soft);
+      font: 700 1.55rem/1.15 ui-monospace, monospace;
+      letter-spacing: -.02em;
+    }
+    .stat span {
+      color: var(--muted);
+      font-size: .74rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* Main Content */
+    main {
+      padding: 56px 0 90px;
+    }
+
+    /* Section Headings */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+    .section-title {
+      font: 700 1.6rem/1.2 "Arial Narrow", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--gold-soft);
+    }
+    .section-subtitle {
+      font-size: .84rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Podium (Top 3) */
+    .podium-container {
+      margin-bottom: 56px;
+    }
+    .podium-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.12fr 1fr;
+      gap: 18px;
+      align-items: end;
+    }
+    .podium-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 24px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform .25s ease, box-shadow .25s ease;
+      box-shadow: 0 12px 32px var(--shadow);
+    }
+    .podium-card:hover {
+      transform: translateY(-4px);
+    }
+    .podium-card.rank-1 {
+      border: 2px solid var(--gold);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--gold) 15%, var(--surface)) 0%, var(--surface) 100%);
+      padding: 32px 24px 26px;
+      box-shadow: 0 16px 44px color-mix(in srgb, var(--gold) 20%, transparent);
+    }
+    .podium-card.rank-2 {
+      border-color: color-mix(in srgb, var(--rank-silver) 60%, var(--line));
+    }
+    .podium-card.rank-3 {
+      border-color: color-mix(in srgb, var(--rank-bronze) 60%, var(--line));
+    }
+    .podium-crown {
+      font-size: 2.2rem;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .rank-badge {
+      display: inline-block;
+      font: 800 .76rem/1 ui-monospace, monospace;
+      padding: 5px 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      border-radius: 2px;
+    }
+    .podium-card.rank-1 .rank-badge {
+      background: var(--rank-gold);
+      color: #181203;
+    }
+    .podium-card.rank-2 .rank-badge {
+      background: var(--rank-silver);
+      color: #111827;
+    }
+    .podium-card.rank-3 .rank-badge {
+      background: var(--rank-bronze);
+      color: #ffffff;
+    }
+    .podium-player {
+      font: 700 1.45rem/1.2 "Arial Narrow", sans-serif;
+      letter-spacing: .02em;
+      margin-bottom: 3px;
+      word-break: break-word;
+    }
+    .podium-card.rank-1 .podium-player {
+      font-size: 1.8rem;
+      color: var(--gold-soft);
+    }
+    .podium-castle {
+      font: .82rem/1.2 ui-monospace, monospace;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .podium-score {
+      font: 800 1.85rem/1 ui-monospace, monospace;
+      color: var(--gold-soft);
+      letter-spacing: -.02em;
+      margin-bottom: 6px;
+    }
+    .podium-card.rank-1 .podium-score {
+      font-size: 2.3rem;
+      color: var(--gold);
+    }
+    .podium-tier {
+      display: inline-block;
+      font: 700 .74rem/1.2 ui-monospace, monospace;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* Filter Toolbar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+    .search-box {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      height: 42px;
+      padding: 0 14px 0 38px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .search-box input:focus {
+      border-color: var(--gold);
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      width: 16px;
+      height: 16px;
+    }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .filter-btn {
+      height: 38px;
+      padding: 0 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      font: 600 .74rem/1 ui-monospace, monospace;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      transition: all .2s;
+    }
+    .filter-btn:hover {
+      background: var(--surface-3);
+      border-color: var(--gold);
+    }
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #15130d;
+    }
+    .sort-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sort-box select {
+      height: 38px;
+      padding: 0 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      outline: none;
+      font: .78rem/1 ui-monospace, monospace;
+    }
+    .results-count {
+      font: .78rem/1 ui-monospace, monospace;
+      color: var(--muted);
+      padding: 0 4px;
+    }
+
+    /* Leaderboard Table */
+    .table-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      overflow-x: auto;
+      box-shadow: 0 12px 32px var(--shadow);
+    }
+    table.leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th, td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    th {
+      font: 700 .74rem/1 ui-monospace, monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--surface-2);
+      position: sticky;
+      top: 0;
+    }
+    tr.lb-row {
+      transition: background .15s ease;
+    }
+    tr.lb-row:hover {
+      background: color-mix(in srgb, var(--surface-2) 80%, transparent);
+    }
+    tr.highlight-row {
+      background: color-mix(in srgb, var(--gold) 15%, transparent) !important;
+      border-left: 3px solid var(--gold);
+    }
+    .col-rank {
+      width: 90px;
+      font: 800 1.25rem/1 ui-monospace, monospace;
+    }
+    .rank-num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 32px;
+      padding: 0 8px;
+      font-weight: 800;
+      border-radius: 2px;
+    }
+    .rank-num-1 {
+      background: var(--rank-gold);
+      color: #181203;
+    }
+    .rank-num-2 {
+      background: var(--rank-silver);
+      color: #111827;
+    }
+    .rank-num-3 {
+      background: var(--rank-bronze);
+      color: #ffffff;
+    }
+    .rank-num-top10 {
+      background: color-mix(in srgb, var(--gold) 20%, transparent);
+      color: var(--gold-soft);
+      border: 1px solid var(--gold);
+    }
+    .rank-num-other {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .player-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .player-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .castle-name {
+      font: .78rem/1.2 ui-monospace, monospace;
+      color: var(--muted);
+    }
+    .tier-badge {
+      display: inline-block;
+      font: 700 .72rem/1.2 ui-monospace, monospace;
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+      border-radius: 2px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .col-score {
+      font: 800 1.25rem/1 ui-monospace, monospace;
+      color: var(--gold-soft);
+      white-space: nowrap;
+      text-align: right;
+    }
+    .score-progress-col {
+      width: 180px;
+    }
+    .score-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--line);
+      overflow: hidden;
+    }
+    .score-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+      transition: width .4s ease;
+    }
+
+    /* Footer & Data Freshness */
+    .footer {
+      margin-top: 50px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      color: var(--muted);
+      font: .8rem/1.4 ui-monospace, monospace;
+    }
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
+    .btn-refresh {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 6px 14px;
+      cursor: pointer;
+      font: 600 .76rem/1 ui-monospace, monospace;
+      transition: all .2s;
+    }
+    .btn-refresh:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Responsive */
+    @media (max-width: 920px) {
+      .podium-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .podium-card.rank-1 {
+        order: -1;
+      }
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      .stat:nth-child(3) {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        padding-left: 0;
+      }
+      .stat:nth-child(4) {
+        border-top: 1px solid var(--line);
+      }
+      .score-progress-col {
+        display: none;
+      }
+    }
+    @media (max-width: 680px) {
+      .shell {
+        width: min(var(--max), calc(100% - 24px));
+      }
+      .topbar-left {
+        gap: 12px;
+      }
+      .topbar-nav {
+        display: none;
+      }
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-box {
+        min-width: 100%;
+      }
+      .filter-group {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 4px;
+      }
+      th, td {
+        padding: 10px 12px;
+      }
+      .col-rank {
+        width: 60px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="topbar shell">
+      <div class="topbar-left">
+        <span class="brand">KGC / STRIFE BATTLEFIELD</span>
+        <nav class="topbar-nav" aria-label="Chuyển trang">
+          <a href="strife-compendium.html" class="nav-link" data-i18n="nav_compendium">Chiến Lược & Tarot</a>
+          <a href="strife-leaderboard.html" class="nav-link active" data-i18n="nav_leaderboard">Bảng Xếp Hạng</a>
+        </nav>
+      </div>
+      <div class="topbar-actions">
+        <div class="lang-control" role="group" aria-label="Ngôn ngữ">
+          <button class="lang-toggle" type="button" data-lang="vi" aria-pressed="true">VI</button>
+          <button class="lang-toggle" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Đổi giao diện">Sáng / Tối</button>
+      </div>
+    </div>
+
+    <div class="hero shell">
+      <span class="eyebrow" data-i18n="hero_eyebrow">ĐẠI ĐẤU TRƯỜNG • MÙA 73</span>
+      <h1 data-i18n="hero_title">BẢNG XẾP HẠNG THẾ GIỚI</h1>
+      <p class="hero-copy" data-i18n="hero_desc">Bảng vinh danh 100 vị lãnh chúa xuất sắc nhất mùa giải 73 trong đấu trường sinh tử King God Castle.</p>
+
+      <div class="stats">
+        <div class="stat">
+          <b id="countdown-val">--d --h --m</b>
+          <span data-i18n="stat_countdown">Thời gian mùa giải còn lại</span>
+        </div>
+        <div class="stat">
+          <b id="stat-top1">--</b>
+          <span data-i18n="stat_top1">Điểm Quán Quân (Top 1)</span>
+        </div>
+        <div class="stat">
+          <b id="stat-top10">--</b>
+          <span data-i18n="stat_top10">Mốc Vua Thần (Top 10)</span>
+        </div>
+        <div class="stat">
+          <b id="stat-top100">--</b>
+          <span data-i18n="stat_top100">Mốc Xếp Hạng (Top 100)</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="shell">
+
+    <!-- Podium Section -->
+    <section class="podium-container" aria-label="Bục Vinh Danh Top 3">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title" data-i18n="sec_podium">BỤC VINH DANH • TAM ĐẠI CAO THỦ</h2>
+          <p class="section-subtitle" data-i18n="sec_podium_desc">Top 3 người chơi có điểm số cao nhất mùa 73 toàn cầu</p>
+        </div>
+      </div>
+
+      <div class="podium-grid" id="podium-root">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- Full Leaderboard Section -->
+    <section class="leaderboard-section" aria-label="Danh sách Top 100">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title" data-i18n="sec_leaderboard">BẢNG XẾP HẠNG TOP 100</h2>
+          <p class="section-subtitle" data-i18n="sec_leaderboard_desc">Danh sách chi tiết 100 vị trí dẫn đầu mùa giải</p>
+        </div>
+      </div>
+
+      <!-- Filter / Search Toolbar -->
+      <div class="toolbar">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="search-input" placeholder="Tìm người chơi hoặc thành trì (ví dụ: PhucHoang)..." autocomplete="off">
+        </div>
+
+        <div class="filter-group">
+          <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Tất cả (100)</button>
+          <button class="filter-btn" data-filter="king-god" data-i18n="filter_king_god">👑 Thần Vương (Top 10)</button>
+          <button class="filter-btn" data-filter="god" data-i18n="filter_god">⚡ Thần (Top 11-100)</button>
+          <button class="filter-btn" data-filter="king" data-i18n="filter_king">Vương (King)</button>
+          <button class="filter-btn" data-filter="diamond" data-i18n="filter_diamond">Kim Cương</button>
+        </div>
+
+        <div class="sort-box">
+          <select id="sort-select">
+            <option value="rank-asc" data-i18n="sort_rank_asc">Thứ hạng: Cao → Thấp</option>
+            <option value="score-desc" data-i18n="sort_score_desc">Điểm số: Cao → Thấp</option>
+            <option value="name-asc" data-i18n="sort_name_asc">Tên người chơi: A → Z</option>
+          </select>
+        </div>
+
+        <div class="results-count" id="results-count">Hiển thị 100 / 100</div>
+      </div>
+
+      <!-- Leaderboard Table -->
+      <div class="table-card">
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th class="col-rank" data-i18n="th_rank">Hạng</th>
+              <th data-i18n="th_player">Người Chơi & Thành Trì</th>
+              <th data-i18n="th_tier">Bậc Rank</th>
+              <th class="col-score" data-i18n="th_score">Điểm Số</th>
+              <th class="score-progress-col" data-i18n="th_progress">Tiến Độ / Tỉ Lệ</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Rendered via JS -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="status-indicator">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="sync-status">Đang tải dữ liệu...</span>
+      </div>
+      <div>
+        <span id="last-updated-txt">Cập nhật lần cuối: --</span>
+        &bull;
+        <button class="btn-refresh" id="btn-refresh" type="button" data-i18n="btn_refresh">Làm mới</button>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Embedded Snapshot Data -->
+  <script id="embedded-data" type="application/json">
+__EMBEDDED_JSON__
+  </script>
+
+  <!-- Application Logic -->
+  <script>
+    const I18N = {
+      vi: {
+        nav_compendium: "Chiến Lược & Tarot",
+        nav_leaderboard: "Bảng Xếp Hạng",
+        hero_eyebrow: "ĐẠI ĐẤU TRƯỜNG • MÙA 73",
+        hero_title: "BẢNG XẾP HẠNG THẾ GIỚI",
+        hero_desc: "Bảng vinh danh 100 vị lãnh chúa xuất sắc nhất mùa giải 73 trong đấu trường sinh tử King God Castle.",
+        stat_countdown: "Thời gian mùa giải còn lại",
+        stat_top1: "Điểm Quán Quân (Top 1)",
+        stat_top10: "Mốc Thần Vương (Top 10)",
+        stat_top100: "Mốc Xếp Hạng (Top 100)",
+        sec_podium: "BỤC VINH DANH • TAM ĐẠI CAO THỦ",
+        sec_podium_desc: "Top 3 người chơi có điểm số cao nhất mùa 73 toàn cầu",
+        sec_leaderboard: "BẢNG XẾP HẠNG TOP 100",
+        sec_leaderboard_desc: "Danh sách chi tiết 100 vị trí dẫn đầu mùa giải",
+        search_placeholder: "Tìm người chơi hoặc thành trì (ví dụ: PhucHoang)...",
+        filter_all: "Tất cả",
+        filter_king_god: "👑 Thần Vương (Top 10)",
+        filter_god: "⚡ Thần (Top 11-100)",
+        filter_king: "Vương (King)",
+        filter_diamond: "Kim Cương",
+        sort_rank_asc: "Thứ hạng: Cao → Thấp",
+        sort_score_desc: "Điểm số: Cao → Thấp",
+        sort_name_asc: "Tên người chơi: A → Z",
+        th_rank: "Hạng",
+        th_player: "Người Chơi & Thành Trì",
+        th_tier: "Bậc Rank",
+        th_score: "Điểm Số",
+        th_progress: "Tiến Độ / Tỉ Lệ",
+        btn_refresh: "Làm mới",
+        pts: "điểm",
+        showing: "Hiển thị",
+        of: "/",
+        last_updated: "Cập nhật lúc",
+        live_poller: "Trực tiếp từ Local Poller (9100)",
+        static_snapshot: "Dữ liệu máy chủ Mùa 73",
+        season_ended: "Mùa giải đã kết thúc"
+      },
+      en: {
+        nav_compendium: "Strategies & Tarots",
+        nav_leaderboard: "Leaderboard",
+        hero_eyebrow: "STRIFE BATTLEFIELD • SEASON 73",
+        hero_title: "GLOBAL LEADERBOARD",
+        hero_desc: "Hall of fame featuring the top 100 players in Season 73 of King God Castle Strife Battlefield.",
+        stat_countdown: "Season Time Remaining",
+        stat_top1: "Champion Score (Rank 1)",
+        stat_top10: "King God Cutoff (Top 10)",
+        stat_top100: "Leaderboard Cutoff (Top 100)",
+        sec_podium: "PODIUM • TOP 3 CHAMPIONS",
+        sec_podium_desc: "Top 3 highest-ranking players worldwide in Season 73",
+        sec_leaderboard: "TOP 100 LEADERBOARD",
+        sec_leaderboard_desc: "Detailed rankings of the top 100 players this season",
+        search_placeholder: "Search player or castle (e.g. PhucHoang)...",
+        filter_all: "All",
+        filter_king_god: "👑 King God (Top 10)",
+        filter_god: "⚡ God (Top 11-100)",
+        filter_king: "King",
+        filter_diamond: "Diamond",
+        sort_rank_asc: "Rank: 1 → 100",
+        sort_score_desc: "Score: High → Low",
+        sort_name_asc: "Player Name: A → Z",
+        th_rank: "Rank",
+        th_player: "Player & Castle",
+        th_tier: "Tier",
+        th_score: "Score",
+        th_progress: "Progress Ratio",
+        btn_refresh: "Refresh",
+        pts: "pts",
+        showing: "Showing",
+        of: "/",
+        last_updated: "Updated at",
+        live_poller: "Live from Local Poller (9100)",
+        static_snapshot: "Season 73 Server Snapshot",
+        season_ended: "Season ended"
+      }
+    };
+
+    let currentLang = localStorage.getItem("kgc_lang") || "vi";
+    let currentTheme = localStorage.getItem("kgc_theme") || "dark";
+    let appData = null;
+    let currentFilter = "all";
+    let currentSearch = "";
+    let currentSort = "rank-asc";
+
+    // Initialize Theme
+    function initTheme() {
+      document.documentElement.setAttribute("data-theme", currentTheme);
+      document.getElementById("theme-toggle").addEventListener("click", () => {
+        currentTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", currentTheme);
+        localStorage.setItem("kgc_theme", currentTheme);
+      });
+    }
+
+    // Initialize Lang
+    function initLang() {
+      document.querySelectorAll(".lang-toggle").forEach(btn => {
+        btn.addEventListener("click", () => {
+          currentLang = btn.dataset.lang;
+          localStorage.setItem("kgc_lang", currentLang);
+          updateLangUI();
+          render();
+        });
+      });
+      updateLangUI();
+    }
+
+    function updateLangUI() {
+      document.querySelectorAll(".lang-toggle").forEach(btn => {
+        btn.setAttribute("aria-pressed", btn.dataset.lang === currentLang);
+      });
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (I18N[currentLang][key]) {
+          el.textContent = I18N[currentLang][key];
+        }
+      });
+      document.getElementById("search-input").placeholder = I18N[currentLang].search_placeholder;
+    }
+
+    // Countdown Timer
+    function startCountdown(endTimeStr) {
+      if (!endTimeStr) return;
+      const target = new Date(endTimeStr).getTime();
+      function tick() {
+        const now = Date.now();
+        const diff = target - now;
+        const el = document.getElementById("countdown-val");
+        if (diff <= 0) {
+          el.textContent = I18N[currentLang].season_ended;
+          return;
+        }
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / 1000 / 60) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        el.textContent = `${String(d).padStart(2, '0')}d ${String(h).padStart(2, '0')}h ${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
+      }
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    // Render Stats
+    function renderStats() {
+      if (!appData || !appData.summary) return;
+      const s = appData.summary;
+      document.getElementById("stat-top1").textContent = Number(s.topScore || 0).toLocaleString();
+      document.getElementById("stat-top10").textContent = Number(s.top10Cutoff || 0).toLocaleString();
+      document.getElementById("stat-top100").textContent = Number(s.top100Cutoff || 0).toLocaleString();
+    }
+
+    // Render Podium
+    function renderPodium() {
+      const root = document.getElementById("podium-root");
+      if (!appData || !appData.summary) return;
+
+      const p1 = appData.summary.top1Player;
+      const p2 = appData.summary.top2Player;
+      const p3 = appData.summary.top3Player;
+
+      const items = [
+        { player: p2, rank: 2, crown: "🥈", cls: "rank-2", badge: "TOP 2" },
+        { player: p1, rank: 1, crown: "👑", cls: "rank-1", badge: "QUÁN QUÂN • TOP 1" },
+        { player: p3, rank: 3, crown: "🥉", cls: "rank-3", badge: "TOP 3" },
+      ];
+
+      root.innerHTML = items.map(({ player, rank, crown, cls, badge }) => {
+        if (!player) return "";
+        const tierName = player.tierInfo ? player.tierInfo[currentLang] : `Tier ${player.tier}`;
+        const scoreFmt = Number(player.score).toLocaleString();
+        return `
+          <div class="podium-card ${cls}">
+            <div class="podium-crown">${crown}</div>
+            <span class="rank-badge">${badge}</span>
+            <div class="podium-player">${escapeHtml(player.userName)}</div>
+            <div class="podium-castle">${player.castleName ? escapeHtml(player.castleName) : "—"}</div>
+            <div class="podium-score">${scoreFmt} <span style="font-size: .9rem; font-weight: normal; color: var(--muted);">${I18N[currentLang].pts}</span></div>
+            <div class="podium-tier">${tierName}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Render Table
+    function renderTable() {
+      if (!appData || !appData.ranking) return;
+      const tbody = document.getElementById("table-body");
+      const topScore = appData.summary.topScore || 1;
+
+      let list = [...appData.ranking];
+
+      // Filter by tier
+      if (currentFilter !== "all") {
+        list = list.filter(p => {
+          if (!p.tierInfo) return false;
+          return p.tierInfo.group === currentFilter;
+        });
+      }
+
+      // Search query
+      if (currentSearch.trim()) {
+        const q = currentSearch.trim().toLowerCase();
+        list = list.filter(p => {
+          const u = (p.userName || "").toLowerCase();
+          const c = (p.castleName || "").toLowerCase();
+          return u.includes(q) || c.includes(q);
+        });
+      }
+
+      // Sort
+      if (currentSort === "score-desc") {
+        list.sort((a, b) => b.score - a.score);
+      } else if (currentSort === "name-asc") {
+        list.sort((a, b) => a.userName.localeCompare(b.userName));
+      } else {
+        list.sort((a, b) => a.rank - b.rank);
+      }
+
+      document.getElementById("results-count").textContent = `${I18N[currentLang].showing} ${list.length} ${I18N[currentLang].of} ${appData.ranking.length}`;
+
+      tbody.innerHTML = list.map(p => {
+        const tierName = p.tierInfo ? p.tierInfo[currentLang] : `Tier ${p.tier}`;
+        const scoreFmt = Number(p.score).toLocaleString();
+        const percent = Math.min(100, Math.max(0, (p.score / topScore) * 100)).toFixed(1);
+        
+        let rankBadge = "";
+        if (p.rank === 1) rankBadge = `<span class="rank-num-badge rank-num-1">#1</span>`;
+        else if (p.rank === 2) rankBadge = `<span class="rank-num-badge rank-num-2">#2</span>`;
+        else if (p.rank === 3) rankBadge = `<span class="rank-num-badge rank-num-3">#3</span>`;
+        else if (p.rank <= 10) rankBadge = `<span class="rank-num-badge rank-num-top10">#${p.rank}</span>`;
+        else rankBadge = `<span class="rank-num-badge rank-num-other">#${p.rank}</span>`;
+
+        const isHighlight = currentSearch && (p.userName.toLowerCase().includes(currentSearch.toLowerCase()) || p.castleName.toLowerCase().includes(currentSearch.toLowerCase()));
+
+        return `
+          <tr class="lb-row ${isHighlight ? 'highlight-row' : ''}">
+            <td class="col-rank">${rankBadge}</td>
+            <td>
+              <div class="player-cell">
+                <span class="player-name">${escapeHtml(p.userName)}</span>
+                <span class="castle-name">${p.castleName ? escapeHtml(p.castleName) : "—"}</span>
+              </div>
+            </td>
+            <td>
+              <span class="tier-badge" style="border-color: ${p.tierInfo ? p.tierInfo.color : 'var(--line)'}; color: ${p.tierInfo ? p.tierInfo.color : 'inherit'};">
+                ${tierName}
+              </span>
+            </td>
+            <td class="col-score">${scoreFmt}</td>
+            <td class="score-progress-col">
+              <div class="score-progress-bar" title="${percent}%">
+                <div class="score-progress-fill" style="width: ${percent}%;"></div>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function render() {
+      renderStats();
+      renderPodium();
+      renderTable();
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return str.replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag));
+    }
+
+    // Try fetching from local poller or fallback
+    async function loadData() {
+      // 1. First parse embedded data for instant load
+      try {
+        const raw = document.getElementById("embedded-data").textContent;
+        appData = JSON.parse(raw);
+        document.getElementById("sync-status").textContent = I18N[currentLang].static_snapshot;
+        if (appData.updatedAt) {
+          const dt = new Date(appData.updatedAt);
+          document.getElementById("last-updated-txt").textContent = `${I18N[currentLang].last_updated}: ${dt.toLocaleString(currentLang === 'vi' ? 'vi-VN' : 'en-US')}`;
+        }
+        startCountdown(appData.seasonEndTime);
+        render();
+      } catch (e) {
+        console.warn("Embedded data parse error:", e);
+      }
+
+      // 2. Try fetching static json file for newer snapshot if available
+      try {
+        const res = await fetch("./strife-leaderboard-data.json", { cache: "no-cache" });
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.ranking) {
+            appData = json;
+            render();
+          }
+        }
+      } catch (e) {}
+
+      // 3. Try checking local poller (http://127.0.0.1:9100/data)
+      try {
+        const pollerRes = await fetch("http://127.0.0.1:9100/data", { timeout: 1500 });
+        if (pollerRes.ok) {
+          const pollerData = await pollerRes.json();
+          if (pollerData.ok && pollerData.strife && pollerData.strife.leaderboard) {
+            document.getElementById("status-dot").style.background = "#00ff88";
+            document.getElementById("sync-status").textContent = I18N[currentLang].live_poller;
+          }
+        }
+      } catch (e) {}
+    }
+
+    // Event Listeners
+    document.addEventListener("DOMContentLoaded", () => {
+      initTheme();
+      initLang();
+      loadData();
+
+      // Search input
+      const searchInput = document.getElementById("search-input");
+      searchInput.addEventListener("input", (e) => {
+        currentSearch = e.target.value;
+        renderTable();
+      });
+
+      // Filter buttons
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          renderTable();
+        });
+      });
+
+      // Sort select
+      const sortSelect = document.getElementById("sort-select");
+      sortSelect.addEventListener("change", (e) => {
+        currentSort = e.target.value;
+        renderTable();
+      });
+
+      // Refresh button
+      document.getElementById("btn-refresh").addEventListener("click", () => {
+        loadData();
+      });
+    });
+  </script>
+</body>
+</html>
+"""
+
+
+def main():
+    if not DATA_PATH.exists():
+        print(f"[!] Data file {DATA_PATH} not found. Run scripts/update_strife_leaderboard.py first!")
+        return 1
+
+    data_text = DATA_PATH.read_text(encoding="utf-8")
+    html_content = HTML_TEMPLATE.replace("__EMBEDDED_JSON__", data_text)
+
+    OUTPUT_HTML.write_text(html_content, encoding="utf-8")
+    print(f"[+] Successfully generated {OUTPUT_HTML} ({OUTPUT_HTML.stat().st_size} bytes)")
+    return 0
+
+
+if __name__ == "__main__":
+    main()

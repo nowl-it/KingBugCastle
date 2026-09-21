@@ -29,7 +29,7 @@ mkdir -p "$(dirname "$STATE_FILE")"
 
 # ─── Fetch CDN S3 listing ────────────────────────────────────────
 echo -e "${BOLD}╔══════════════════════════════════════════════╗${NC}"
-echo -e "${BOLD}║     KGC CDN Update Checker                  ║${NC}"
+echo -e "${BOLD}║            KGC CDN Update Checker            ║${NC}"
 echo -e "${BOLD}╚══════════════════════════════════════════════╝${NC}"
 echo ""
 
