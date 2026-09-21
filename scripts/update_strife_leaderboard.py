@@ -222,6 +222,10 @@ def main():
     print("  KGC Strife Leaderboard Data Updater")
     print("=" * 60)
 
+    if not config.SESSION.headers.get("accesstoken"):
+        print("[!] Error: No accesstoken found! Please set KGC_TOKEN env var or provide captured_token.txt.")
+        return 1
+
     try:
         data = fetch_leaderboard_data()
         OUTPUT_JSON.parent.mkdir(parents=True, exist_ok=True)
