@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T21:22:23.477017",
+  "updatedAt": "2026-09-22T21:34:50.999232",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
@@ -31,7 +31,7 @@
     },
     "top2Player": {
       "rank": 2,
-      "score": 6745,
+      "score": 6755,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -96,7 +96,7 @@
     },
     {
       "rank": 2,
-      "score": 6745,
+      "score": 6755,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
