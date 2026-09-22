@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T20:48:08.315970",
+  "updatedAt": "2026-09-22T21:09:13.924306",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
@@ -7,7 +7,7 @@
   "summary": {
     "topScore": 6882,
     "top10Cutoff": 5050,
-    "top100Cutoff": 2801,
+    "top100Cutoff": 2806,
     "top1Player": {
       "rank": 1,
       "score": 6882,
@@ -31,7 +31,7 @@
     },
     "top2Player": {
       "rank": 2,
-      "score": 6728,
+      "score": 6737,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -96,7 +96,7 @@
     },
     {
       "rank": 2,
-      "score": 6728,
+      "score": 6737,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -2049,6 +2049,27 @@
     },
     {
       "rank": 95,
+      "score": 2839,
+      "accountId": 7238962,
+      "userName": "JulGun",
+      "castleName": "Baginushk",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1063003,
+      "heroName": "",
+      "flagId": 20170,
+      "nameTagId": 15370
+    },
+    {
+      "rank": 96,
       "score": 2833,
       "accountId": 354119,
       "userName": "두부",
@@ -2069,7 +2090,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 96,
+      "rank": 97,
       "score": 2829,
       "accountId": 4923471,
       "userName": "Lusano",
@@ -2090,7 +2111,7 @@
       "nameTagId": 15360
     },
     {
-      "rank": 97,
+      "rank": 98,
       "score": 2824,
       "accountId": 8362901,
       "userName": "의자",
@@ -2111,7 +2132,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 98,
+      "rank": 99,
       "score": 2811,
       "accountId": 6349548,
       "userName": "StyleY",
@@ -2132,7 +2153,7 @@
       "nameTagId": 10160
     },
     {
-      "rank": 99,
+      "rank": 100,
       "score": 2806,
       "accountId": 6533239,
       "userName": "touma",
@@ -2151,27 +2172,6 @@
       "heroName": "Zuo Bai",
       "flagId": 20170,
       "nameTagId": 20030
-    },
-    {
-      "rank": 100,
-      "score": 2801,
-      "accountId": 5874801,
-      "userName": "GhostIcey",
-      "castleName": "NOVI",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1077001,
-      "heroName": "",
-      "flagId": 40000,
-      "nameTagId": 40040
     }
   ]
 }
