@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T10:11:49.334047",
+  "updatedAt": "2026-09-22T10:28:46.425565",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
@@ -7,7 +7,7 @@
   "summary": {
     "topScore": 6772,
     "top10Cutoff": 5050,
-    "top100Cutoff": 2790,
+    "top100Cutoff": 2786,
     "top1Player": {
       "rank": 1,
       "score": 6772,
@@ -2049,27 +2049,6 @@
     },
     {
       "rank": 95,
-      "score": 2808,
-      "accountId": 9309929,
-      "userName": "vinahau",
-      "castleName": "vinahau",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1015005,
-      "heroName": "",
-      "flagId": 20170,
-      "nameTagId": 20030
-    },
-    {
-      "rank": 96,
       "score": 2801,
       "accountId": 5874801,
       "userName": "GhostIcey",
@@ -2090,7 +2069,7 @@
       "nameTagId": 40040
     },
     {
-      "rank": 97,
+      "rank": 96,
       "score": 2798,
       "accountId": 9408245,
       "userName": "Quoc",
@@ -2111,7 +2090,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 98,
+      "rank": 97,
       "score": 2798,
       "accountId": 7435650,
       "userName": "heheboy",
@@ -2132,7 +2111,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 99,
+      "rank": 98,
       "score": 2794,
       "accountId": 1928458,
       "userName": "갓정화",
@@ -2153,7 +2132,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 100,
+      "rank": 99,
       "score": 2790,
       "accountId": 7238962,
       "userName": "JulGun",
@@ -2172,6 +2151,27 @@
       "heroName": "",
       "flagId": 20170,
       "nameTagId": 15370
+    },
+    {
+      "rank": 100,
+      "score": 2786,
+      "accountId": 6135296,
+      "userName": "뻑",
+      "castleName": "사춘기와",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1069001,
+      "heroName": "",
+      "flagId": 40060,
+      "nameTagId": 70030
     }
   ]
 }
