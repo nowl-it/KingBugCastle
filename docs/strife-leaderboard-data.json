@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-09-22T07:49:27.706484",
+  "updatedAt": "2026-09-22T08:15:15.400238",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
   "totalRanked": 100,
   "summary": {
-    "topScore": 6727,
+    "topScore": 6760,
     "top10Cutoff": 5050,
     "top100Cutoff": 2794,
     "top1Player": {
       "rank": 1,
-      "score": 6727,
+      "score": 6760,
       "accountId": 452516,
       "userName": "쉬드",
       "castleName": "도천",
@@ -31,7 +31,7 @@
     },
     "top2Player": {
       "rank": 2,
-      "score": 6505,
+      "score": 6524,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -75,7 +75,7 @@
   "ranking": [
     {
       "rank": 1,
-      "score": 6727,
+      "score": 6760,
       "accountId": 452516,
       "userName": "쉬드",
       "castleName": "도천",
@@ -96,7 +96,7 @@
     },
     {
       "rank": 2,
-      "score": 6505,
+      "score": 6524,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -159,7 +159,7 @@
     },
     {
       "rank": 5,
-      "score": 5566,
+      "score": 5588,
       "accountId": 7488208,
       "userName": "비둘기",
       "castleName": "이세계",
@@ -789,27 +789,6 @@
     },
     {
       "rank": 35,
-      "score": 3582,
-      "accountId": 7023007,
-      "userName": "三毛猫",
-      "castleName": "ホームズ",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1044004,
-      "heroName": "",
-      "flagId": 20170,
-      "nameTagId": 70010
-    },
-    {
-      "rank": 36,
       "score": 3577,
       "accountId": 2265156,
       "userName": "Lycht",
@@ -828,6 +807,27 @@
       "heroName": "",
       "flagId": 70030,
       "nameTagId": 50000
+    },
+    {
+      "rank": 36,
+      "score": 3567,
+      "accountId": 7740437,
+      "userName": "Ice文Cream",
+      "castleName": "XD",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1039006,
+      "heroName": "",
+      "flagId": 15370,
+      "nameTagId": 15370
     },
     {
       "rank": 37,
@@ -852,6 +852,27 @@
     },
     {
       "rank": 38,
+      "score": 3565,
+      "accountId": 7023007,
+      "userName": "三毛猫",
+      "castleName": "ホームズ",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1044004,
+      "heroName": "",
+      "flagId": 20170,
+      "nameTagId": 70010
+    },
+    {
+      "rank": 39,
       "score": 3546,
       "accountId": 244734,
       "userName": "뻑",
@@ -872,7 +893,7 @@
       "nameTagId": 10000
     },
     {
-      "rank": 39,
+      "rank": 40,
       "score": 3528,
       "accountId": 8377857,
       "userName": "국",
@@ -888,27 +909,6 @@
         "color": "#6366f1"
       },
       "profileIcon": 1026001,
-      "heroName": "",
-      "flagId": 15370,
-      "nameTagId": 15370
-    },
-    {
-      "rank": 40,
-      "score": 3520,
-      "accountId": 7740437,
-      "userName": "Ice文Cream",
-      "castleName": "XD",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1039006,
       "heroName": "",
       "flagId": 15370,
       "nameTagId": 15370
@@ -999,7 +999,7 @@
     },
     {
       "rank": 45,
-      "score": 3396,
+      "score": 3441,
       "accountId": 2417535,
       "userName": "청월",
       "castleName": "청월",
@@ -1020,7 +1020,7 @@
     },
     {
       "rank": 46,
-      "score": 3383,
+      "score": 3405,
       "accountId": 9154965,
       "userName": "scrmngslme",
       "castleName": "novakids",
