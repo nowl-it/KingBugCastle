@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T05:40:54.855137",
+  "updatedAt": "2026-09-23T05:49:07.154272",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
@@ -747,6 +747,27 @@
     },
     {
       "rank": 33,
+      "score": 3738,
+      "accountId": 4129114,
+      "userName": "Thanhki",
+      "castleName": "hoibantron",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1004003,
+      "heroName": "",
+      "flagId": 20170,
+      "nameTagId": 20030
+    },
+    {
+      "rank": 34,
       "score": 3727,
       "accountId": 119963,
       "userName": "2nd",
@@ -767,7 +788,7 @@
       "nameTagId": 20020
     },
     {
-      "rank": 34,
+      "rank": 35,
       "score": 3722,
       "accountId": 7023007,
       "userName": "三毛猫",
@@ -788,29 +809,8 @@
       "nameTagId": 70010
     },
     {
-      "rank": 35,
-      "score": 3685,
-      "accountId": 4129114,
-      "userName": "Thanhki",
-      "castleName": "hoibantron",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1004003,
-      "heroName": "",
-      "flagId": 20170,
-      "nameTagId": 20030
-    },
-    {
       "rank": 36,
-      "score": 3662,
+      "score": 3707,
       "accountId": 707959,
       "userName": "진성",
       "castleName": "권진",
@@ -978,7 +978,7 @@
     },
     {
       "rank": 44,
-      "score": 3576,
+      "score": 3605,
       "accountId": 9154965,
       "userName": "scrmngslme",
       "castleName": "novakids",
@@ -2070,6 +2070,27 @@
     },
     {
       "rank": 96,
+      "score": 2892,
+      "accountId": 4465675,
+      "userName": "퀘이사",
+      "castleName": "준",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1028005,
+      "heroName": "",
+      "flagId": 40040,
+      "nameTagId": 40040
+    },
+    {
+      "rank": 97,
       "score": 2871,
       "accountId": 1928458,
       "userName": "갓정화",
@@ -2090,7 +2111,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 97,
+      "rank": 98,
       "score": 2861,
       "accountId": 1741496,
       "userName": "완두콩퓨레",
@@ -2109,27 +2130,6 @@
       "heroName": "",
       "flagId": 40010,
       "nameTagId": 40010
-    },
-    {
-      "rank": 98,
-      "score": 2852,
-      "accountId": 4465675,
-      "userName": "퀘이사",
-      "castleName": "준",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1028005,
-      "heroName": "",
-      "flagId": 40040,
-      "nameTagId": 40040
     },
     {
       "rank": 99,
