@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T04:13:13.232316",
+  "updatedAt": "2026-09-23T04:32:56.241657",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
@@ -31,7 +31,7 @@
     },
     "top2Player": {
       "rank": 2,
-      "score": 6887,
+      "score": 6897,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -96,7 +96,7 @@
     },
     {
       "rank": 2,
-      "score": 6887,
+      "score": 6897,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -159,7 +159,7 @@
     },
     {
       "rank": 5,
-      "score": 5708,
+      "score": 5734,
       "accountId": 7488208,
       "userName": "비둘기",
       "castleName": "이세계",
@@ -621,6 +621,27 @@
     },
     {
       "rank": 27,
+      "score": 3814,
+      "accountId": 87559,
+      "userName": "제누",
+      "castleName": "신",
+      "tier": 71,
+      "tierInfo": {
+        "id": 71,
+        "vi": "Thần+ (Hạng 11~30)",
+        "en": "God+ (Rank 11~30)",
+        "kr": "갓+(11~30위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#a855f7"
+      },
+      "profileIcon": 1021005,
+      "heroName": "",
+      "flagId": 40000,
+      "nameTagId": 40000
+    },
+    {
+      "rank": 28,
       "score": 3808,
       "accountId": 2382675,
       "userName": "nelse",
@@ -641,7 +662,7 @@
       "nameTagId": 50000
     },
     {
-      "rank": 28,
+      "rank": 29,
       "score": 3773,
       "accountId": 5284963,
       "userName": "Akai",
@@ -660,27 +681,6 @@
       "heroName": "",
       "flagId": 20170,
       "nameTagId": 20030
-    },
-    {
-      "rank": 29,
-      "score": 3763,
-      "accountId": 87559,
-      "userName": "제누",
-      "castleName": "신",
-      "tier": 71,
-      "tierInfo": {
-        "id": 71,
-        "vi": "Thần+ (Hạng 11~30)",
-        "en": "God+ (Rank 11~30)",
-        "kr": "갓+(11~30위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#a855f7"
-      },
-      "profileIcon": 1021005,
-      "heroName": "",
-      "flagId": 40000,
-      "nameTagId": 40000
     },
     {
       "rank": 30,
@@ -999,6 +999,27 @@
     },
     {
       "rank": 45,
+      "score": 3536,
+      "accountId": 9154965,
+      "userName": "scrmngslme",
+      "castleName": "novakids",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 10800,
+      "heroName": "Cathy",
+      "flagId": 70030,
+      "nameTagId": 20030
+    },
+    {
+      "rank": 46,
       "score": 3508,
       "accountId": 7065981,
       "userName": "Fumiko",
@@ -1016,27 +1037,6 @@
       "profileIcon": 1069002,
       "heroName": "",
       "flagId": 20170,
-      "nameTagId": 20030
-    },
-    {
-      "rank": 46,
-      "score": 3494,
-      "accountId": 9154965,
-      "userName": "scrmngslme",
-      "castleName": "novakids",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 10800,
-      "heroName": "Cathy",
-      "flagId": 70030,
       "nameTagId": 20030
     },
     {
@@ -1125,6 +1125,27 @@
     },
     {
       "rank": 51,
+      "score": 3328,
+      "accountId": 7058101,
+      "userName": "Gaxyt",
+      "castleName": "DateALive",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1035004,
+      "heroName": "",
+      "flagId": 40050,
+      "nameTagId": 40050
+    },
+    {
+      "rank": 52,
       "score": 3327,
       "accountId": 5492123,
       "userName": "ThugLakz",
@@ -1145,7 +1166,7 @@
       "nameTagId": 10360
     },
     {
-      "rank": 52,
+      "rank": 53,
       "score": 3322,
       "accountId": 8244198,
       "userName": "xLey",
@@ -1166,7 +1187,7 @@
       "nameTagId": 40060
     },
     {
-      "rank": 53,
+      "rank": 54,
       "score": 3318,
       "accountId": 4234934,
       "userName": "エミリア",
@@ -1185,27 +1206,6 @@
       "heroName": "",
       "flagId": 15370,
       "nameTagId": 15370
-    },
-    {
-      "rank": 54,
-      "score": 3300,
-      "accountId": 7058101,
-      "userName": "Gaxyt",
-      "castleName": "DateALive",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1035004,
-      "heroName": "",
-      "flagId": 40050,
-      "nameTagId": 40050
     },
     {
       "rank": 55,
@@ -1524,10 +1524,10 @@
     },
     {
       "rank": 70,
-      "score": 3058,
-      "accountId": 62983,
-      "userName": "린간",
-      "castleName": "릴리",
+      "score": 3097,
+      "accountId": 8867907,
+      "userName": "ZiOO",
+      "castleName": "Omega",
       "tier": 70,
       "tierInfo": {
         "id": 70,
@@ -1538,14 +1538,14 @@
         "group": "god",
         "color": "#6366f1"
       },
-      "profileIcon": -1,
+      "profileIcon": 1023005,
       "heroName": "",
-      "flagId": 10000,
-      "nameTagId": 10000
+      "flagId": 20170,
+      "nameTagId": 20030
     },
     {
       "rank": 71,
-      "score": 3058,
+      "score": 3088,
       "accountId": 4480445,
       "userName": "elzu",
       "castleName": "엘",
@@ -1566,6 +1566,27 @@
     },
     {
       "rank": 72,
+      "score": 3058,
+      "accountId": 62983,
+      "userName": "린간",
+      "castleName": "릴리",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": -1,
+      "heroName": "",
+      "flagId": 10000,
+      "nameTagId": 10000
+    },
+    {
+      "rank": 73,
       "score": 3035,
       "accountId": 165152,
       "userName": "왕봉봉",
@@ -1586,7 +1607,7 @@
       "nameTagId": 10000
     },
     {
-      "rank": 73,
+      "rank": 74,
       "score": 3031,
       "accountId": 3303658,
       "userName": "p3tly",
@@ -1605,27 +1626,6 @@
       "heroName": "",
       "flagId": 20030,
       "nameTagId": 40000
-    },
-    {
-      "rank": 74,
-      "score": 3028,
-      "accountId": 8867907,
-      "userName": "ZiOO",
-      "castleName": "Omega",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1023005,
-      "heroName": "",
-      "flagId": 20170,
-      "nameTagId": 20030
     },
     {
       "rank": 75,
