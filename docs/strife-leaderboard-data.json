@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-09-23T05:26:56.179316",
+  "updatedAt": "2026-09-23T05:40:54.855137",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
   "totalRanked": 100,
   "summary": {
-    "topScore": 6971,
+    "topScore": 6978,
     "top10Cutoff": 5116,
     "top100Cutoff": 2839,
     "top1Player": {
       "rank": 1,
-      "score": 6971,
+      "score": 6978,
       "accountId": 452516,
       "userName": "쉬드",
       "castleName": "도천",
@@ -31,7 +31,7 @@
     },
     "top2Player": {
       "rank": 2,
-      "score": 6908,
+      "score": 6918,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -75,7 +75,7 @@
   "ranking": [
     {
       "rank": 1,
-      "score": 6971,
+      "score": 6978,
       "accountId": 452516,
       "userName": "쉬드",
       "castleName": "도천",
@@ -96,7 +96,7 @@
     },
     {
       "rank": 2,
-      "score": 6908,
+      "score": 6918,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -579,6 +579,27 @@
     },
     {
       "rank": 25,
+      "score": 3920,
+      "accountId": 3412331,
+      "userName": "DragonDark",
+      "castleName": "TheSinsOf",
+      "tier": 71,
+      "tierInfo": {
+        "id": 71,
+        "vi": "Thần+ (Hạng 11~30)",
+        "en": "God+ (Rank 11~30)",
+        "kr": "갓+(11~30위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#a855f7"
+      },
+      "profileIcon": 1058004,
+      "heroName": "",
+      "flagId": 40040,
+      "nameTagId": 40050
+    },
+    {
+      "rank": 26,
       "score": 3888,
       "accountId": 87559,
       "userName": "제누",
@@ -599,7 +620,7 @@
       "nameTagId": 40000
     },
     {
-      "rank": 26,
+      "rank": 27,
       "score": 3873,
       "accountId": 2220591,
       "userName": "Kaiwen",
@@ -620,7 +641,7 @@
       "nameTagId": 50000
     },
     {
-      "rank": 27,
+      "rank": 28,
       "score": 3863,
       "accountId": 6100440,
       "userName": "La",
@@ -639,27 +660,6 @@
       "heroName": "",
       "flagId": 20170,
       "nameTagId": 20030
-    },
-    {
-      "rank": 28,
-      "score": 3857,
-      "accountId": 3412331,
-      "userName": "DragonDark",
-      "castleName": "TheSinsOf",
-      "tier": 71,
-      "tierInfo": {
-        "id": 71,
-        "vi": "Thần+ (Hạng 11~30)",
-        "en": "God+ (Rank 11~30)",
-        "kr": "갓+(11~30위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#a855f7"
-      },
-      "profileIcon": 1058004,
-      "heroName": "",
-      "flagId": 40040,
-      "nameTagId": 40050
     },
     {
       "rank": 29,
@@ -684,10 +684,10 @@
     },
     {
       "rank": 30,
-      "score": 3773,
-      "accountId": 5284963,
-      "userName": "Akai",
-      "castleName": "Bahay",
+      "score": 3777,
+      "accountId": 2933751,
+      "userName": "nh3",
+      "castleName": "Axion",
       "tier": 71,
       "tierInfo": {
         "id": 71,
@@ -698,13 +698,34 @@
         "group": "god",
         "color": "#a855f7"
       },
+      "profileIcon": 1058003,
+      "heroName": "",
+      "flagId": 40060,
+      "nameTagId": 70010
+    },
+    {
+      "rank": 31,
+      "score": 3773,
+      "accountId": 5284963,
+      "userName": "Akai",
+      "castleName": "Bahay",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
       "profileIcon": 1011002,
       "heroName": "",
       "flagId": 20170,
       "nameTagId": 20030
     },
     {
-      "rank": 31,
+      "rank": 32,
       "score": 3741,
       "accountId": 244734,
       "userName": "뻑",
@@ -723,27 +744,6 @@
       "heroName": "Ivi",
       "flagId": 20170,
       "nameTagId": 10000
-    },
-    {
-      "rank": 32,
-      "score": 3736,
-      "accountId": 2933751,
-      "userName": "nh3",
-      "castleName": "Axion",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1058003,
-      "heroName": "",
-      "flagId": 40060,
-      "nameTagId": 70010
     },
     {
       "rank": 33,
