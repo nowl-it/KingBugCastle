@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-09-23T02:53:16.607216",
+  "updatedAt": "2026-09-23T03:13:38.213940",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
   "totalRanked": 100,
   "summary": {
-    "topScore": 6934,
+    "topScore": 6945,
     "top10Cutoff": 5116,
     "top100Cutoff": 2824,
     "top1Player": {
       "rank": 1,
-      "score": 6934,
+      "score": 6945,
       "accountId": 452516,
       "userName": "쉬드",
       "castleName": "도천",
@@ -31,7 +31,7 @@
     },
     "top2Player": {
       "rank": 2,
-      "score": 6852,
+      "score": 6859,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -75,7 +75,7 @@
   "ranking": [
     {
       "rank": 1,
-      "score": 6934,
+      "score": 6945,
       "accountId": 452516,
       "userName": "쉬드",
       "castleName": "도천",
@@ -96,7 +96,7 @@
     },
     {
       "rank": 2,
-      "score": 6852,
+      "score": 6859,
       "accountId": 5231962,
       "userName": "PhucHoang",
       "castleName": "VN",
@@ -810,27 +810,6 @@
     },
     {
       "rank": 36,
-      "score": 3654,
-      "accountId": 7023007,
-      "userName": "三毛猫",
-      "castleName": "ホームズ",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1044004,
-      "heroName": "",
-      "flagId": 20170,
-      "nameTagId": 70010
-    },
-    {
-      "rank": 37,
       "score": 3642,
       "accountId": 2080418,
       "userName": "일루",
@@ -849,6 +828,27 @@
       "heroName": "",
       "flagId": 40050,
       "nameTagId": 40060
+    },
+    {
+      "rank": 37,
+      "score": 3635,
+      "accountId": 7023007,
+      "userName": "三毛猫",
+      "castleName": "ホームズ",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1044004,
+      "heroName": "",
+      "flagId": 20170,
+      "nameTagId": 70010
     },
     {
       "rank": 38,
@@ -957,7 +957,7 @@
     },
     {
       "rank": 43,
-      "score": 3566,
+      "score": 3613,
       "accountId": 707959,
       "userName": "진성",
       "castleName": "권진",
@@ -1167,7 +1167,7 @@
     },
     {
       "rank": 53,
-      "score": 3306,
+      "score": 3297,
       "accountId": 5492123,
       "userName": "ThugLakz",
       "castleName": "BrgyAngas",
@@ -1881,6 +1881,27 @@
     },
     {
       "rank": 87,
+      "score": 2949,
+      "accountId": 354119,
+      "userName": "두부",
+      "castleName": "두부캐슬",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1004007,
+      "heroName": "",
+      "flagId": 20170,
+      "nameTagId": 20030
+    },
+    {
+      "rank": 88,
       "score": 2944,
       "accountId": 5530709,
       "userName": "Turuturu",
@@ -1901,7 +1922,7 @@
       "nameTagId": 20000
     },
     {
-      "rank": 88,
+      "rank": 89,
       "score": 2917,
       "accountId": 7938112,
       "userName": "ZWD9A5ML",
@@ -1922,7 +1943,7 @@
       "nameTagId": 10360
     },
     {
-      "rank": 89,
+      "rank": 90,
       "score": 2909,
       "accountId": 8799324,
       "userName": "quangg",
@@ -1943,7 +1964,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 90,
+      "rank": 91,
       "score": 2905,
       "accountId": 7238962,
       "userName": "JulGun",
@@ -1962,27 +1983,6 @@
       "heroName": "",
       "flagId": 20170,
       "nameTagId": 15370
-    },
-    {
-      "rank": 91,
-      "score": 2894,
-      "accountId": 354119,
-      "userName": "두부",
-      "castleName": "두부캐슬",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1004007,
-      "heroName": "",
-      "flagId": 20170,
-      "nameTagId": 20030
     },
     {
       "rank": 92,
