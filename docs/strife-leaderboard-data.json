@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T09:29:53.854227",
+  "updatedAt": "2026-09-23T09:43:23.250163",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
@@ -537,27 +537,6 @@
     },
     {
       "rank": 23,
-      "score": 4018,
-      "accountId": 8725690,
-      "userName": "Austin",
-      "castleName": "Powers",
-      "tier": 71,
-      "tierInfo": {
-        "id": 71,
-        "vi": "Thần+ (Hạng 11~30)",
-        "en": "God+ (Rank 11~30)",
-        "kr": "갓+(11~30위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#a855f7"
-      },
-      "profileIcon": 10720,
-      "heroName": "Eileen",
-      "flagId": 20030,
-      "nameTagId": 15360
-    },
-    {
-      "rank": 24,
       "score": 4004,
       "accountId": 3851960,
       "userName": "엑셀렌",
@@ -576,6 +555,27 @@
       "heroName": "Cathy",
       "flagId": 40050,
       "nameTagId": 70000
+    },
+    {
+      "rank": 24,
+      "score": 3997,
+      "accountId": 8725690,
+      "userName": "Austin",
+      "castleName": "Powers",
+      "tier": 71,
+      "tierInfo": {
+        "id": 71,
+        "vi": "Thần+ (Hạng 11~30)",
+        "en": "God+ (Rank 11~30)",
+        "kr": "갓+(11~30위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#a855f7"
+      },
+      "profileIcon": 10720,
+      "heroName": "Eileen",
+      "flagId": 20030,
+      "nameTagId": 15360
     },
     {
       "rank": 25,
@@ -747,7 +747,7 @@
     },
     {
       "rank": 33,
-      "score": 3762,
+      "score": 3743,
       "accountId": 119963,
       "userName": "2nd",
       "castleName": "May",
@@ -1776,6 +1776,27 @@
     },
     {
       "rank": 82,
+      "score": 2983,
+      "accountId": 4923471,
+      "userName": "Lusano",
+      "castleName": "Harivon",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1015005,
+      "heroName": "",
+      "flagId": 15360,
+      "nameTagId": 70010
+    },
+    {
+      "rank": 83,
       "score": 2980,
       "accountId": 6420288,
       "userName": "Genos",
@@ -1796,7 +1817,7 @@
       "nameTagId": 40000
     },
     {
-      "rank": 83,
+      "rank": 84,
       "score": 2976,
       "accountId": 7871674,
       "userName": "boss",
@@ -1817,7 +1838,7 @@
       "nameTagId": 70010
     },
     {
-      "rank": 84,
+      "rank": 85,
       "score": 2964,
       "accountId": 8109034,
       "userName": "ChekSeaLS",
@@ -1838,7 +1859,7 @@
       "nameTagId": 40050
     },
     {
-      "rank": 85,
+      "rank": 86,
       "score": 2961,
       "accountId": 2289388,
       "userName": "샤렌4세",
@@ -1859,7 +1880,7 @@
       "nameTagId": 15150
     },
     {
-      "rank": 86,
+      "rank": 87,
       "score": 2955,
       "accountId": 5976396,
       "userName": "subcero39",
@@ -1880,7 +1901,7 @@
       "nameTagId": 15260
     },
     {
-      "rank": 87,
+      "rank": 88,
       "score": 2953,
       "accountId": 9600513,
       "userName": "KingLGC",
@@ -1899,27 +1920,6 @@
       "heroName": "",
       "flagId": 20170,
       "nameTagId": 20020
-    },
-    {
-      "rank": 88,
-      "score": 2949,
-      "accountId": 4923471,
-      "userName": "Lusano",
-      "castleName": "Harivon",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1015005,
-      "heroName": "",
-      "flagId": 15360,
-      "nameTagId": 70010
     },
     {
       "rank": 89,
