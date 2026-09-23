@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T09:43:23.250163",
+  "updatedAt": "2026-09-23T09:52:12.473660",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
@@ -52,7 +52,7 @@
     },
     "top3Player": {
       "rank": 3,
-      "score": 5883,
+      "score": 5897,
       "accountId": 7488208,
       "userName": "비둘기",
       "castleName": "이세계",
@@ -117,7 +117,7 @@
     },
     {
       "rank": 3,
-      "score": 5883,
+      "score": 5897,
       "accountId": 7488208,
       "userName": "비둘기",
       "castleName": "이세계",
@@ -159,7 +159,7 @@
     },
     {
       "rank": 5,
-      "score": 5823,
+      "score": 5838,
       "accountId": 858172,
       "userName": "kc",
       "castleName": "kingdom",
@@ -1860,27 +1860,6 @@
     },
     {
       "rank": 86,
-      "score": 2961,
-      "accountId": 2289388,
-      "userName": "샤렌4세",
-      "castleName": "샤례니안",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 1035003,
-      "heroName": "",
-      "flagId": 10000,
-      "nameTagId": 15150
-    },
-    {
-      "rank": 87,
       "score": 2955,
       "accountId": 5976396,
       "userName": "subcero39",
@@ -1901,7 +1880,7 @@
       "nameTagId": 15260
     },
     {
-      "rank": 88,
+      "rank": 87,
       "score": 2953,
       "accountId": 9600513,
       "userName": "KingLGC",
@@ -1922,7 +1901,7 @@
       "nameTagId": 20020
     },
     {
-      "rank": 89,
+      "rank": 88,
       "score": 2949,
       "accountId": 354119,
       "userName": "두부",
@@ -1943,7 +1922,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 90,
+      "rank": 89,
       "score": 2947,
       "accountId": 3828954,
       "userName": "Jang7457",
@@ -1964,7 +1943,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 91,
+      "rank": 90,
       "score": 2945,
       "accountId": 4773873,
       "userName": "왕",
@@ -1985,7 +1964,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 92,
+      "rank": 91,
       "score": 2929,
       "accountId": 8749270,
       "userName": "Mazeto",
@@ -2006,7 +1985,7 @@
       "nameTagId": 10360
     },
     {
-      "rank": 93,
+      "rank": 92,
       "score": 2917,
       "accountId": 7938112,
       "userName": "ZWD9A5ML",
@@ -2027,7 +2006,7 @@
       "nameTagId": 10360
     },
     {
-      "rank": 94,
+      "rank": 93,
       "score": 2916,
       "accountId": 5530709,
       "userName": "Turuturu",
@@ -2048,7 +2027,7 @@
       "nameTagId": 20000
     },
     {
-      "rank": 95,
+      "rank": 94,
       "score": 2909,
       "accountId": 8799324,
       "userName": "quangg",
@@ -2069,7 +2048,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 96,
+      "rank": 95,
       "score": 2892,
       "accountId": 4465675,
       "userName": "퀘이사",
@@ -2088,6 +2067,27 @@
       "heroName": "",
       "flagId": 40040,
       "nameTagId": 40040
+    },
+    {
+      "rank": 96,
+      "score": 2891,
+      "accountId": 2289388,
+      "userName": "샤렌4세",
+      "castleName": "샤례니안",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1035003,
+      "heroName": "",
+      "flagId": 10000,
+      "nameTagId": 15150
     },
     {
       "rank": 97,
