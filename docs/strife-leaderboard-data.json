@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T17:48:27.305946",
+  "updatedAt": "2026-09-23T18:14:38.925661",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
@@ -7,7 +7,7 @@
   "summary": {
     "topScore": 7053,
     "top10Cutoff": 4986,
-    "top100Cutoff": 2889,
+    "top100Cutoff": 2865,
     "top1Player": {
       "rank": 1,
       "score": 7053,
@@ -726,27 +726,6 @@
     },
     {
       "rank": 32,
-      "score": 3782,
-      "accountId": 3754946,
-      "userName": "yt",
-      "castleName": "yt",
-      "tier": 70,
-      "tierInfo": {
-        "id": 70,
-        "vi": "Thần (Hạng 31~100)",
-        "en": "God (Rank 31~100)",
-        "kr": "갓(31~100위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#6366f1"
-      },
-      "profileIcon": 10200,
-      "heroName": "Yeon",
-      "flagId": 15120,
-      "nameTagId": 10000
-    },
-    {
-      "rank": 33,
       "score": 3779,
       "accountId": 244734,
       "userName": "뻑",
@@ -767,7 +746,7 @@
       "nameTagId": 10000
     },
     {
-      "rank": 34,
+      "rank": 33,
       "score": 3777,
       "accountId": 4129114,
       "userName": "Thanhki",
@@ -788,7 +767,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 35,
+      "rank": 34,
       "score": 3758,
       "accountId": 5284963,
       "userName": "Akai",
@@ -809,7 +788,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 36,
+      "rank": 35,
       "score": 3752,
       "accountId": 2080418,
       "userName": "일루",
@@ -830,7 +809,7 @@
       "nameTagId": 40060
     },
     {
-      "rank": 37,
+      "rank": 36,
       "score": 3750,
       "accountId": 2434487,
       "userName": "Kimwell01",
@@ -851,7 +830,7 @@
       "nameTagId": 70020
     },
     {
-      "rank": 38,
+      "rank": 37,
       "score": 3738,
       "accountId": 7740437,
       "userName": "Ice文Cream",
@@ -872,7 +851,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 39,
+      "rank": 38,
       "score": 3735,
       "accountId": 7023007,
       "userName": "三毛猫",
@@ -893,7 +872,7 @@
       "nameTagId": 70010
     },
     {
-      "rank": 40,
+      "rank": 39,
       "score": 3686,
       "accountId": 2265156,
       "userName": "Lycht",
@@ -914,7 +893,7 @@
       "nameTagId": 50000
     },
     {
-      "rank": 41,
+      "rank": 40,
       "score": 3678,
       "accountId": 6132062,
       "userName": "MOTO",
@@ -935,7 +914,7 @@
       "nameTagId": 40010
     },
     {
-      "rank": 42,
+      "rank": 41,
       "score": 3659,
       "accountId": 8377857,
       "userName": "국",
@@ -956,7 +935,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 43,
+      "rank": 42,
       "score": 3601,
       "accountId": 9201327,
       "userName": "窝在蓝星OL当欧皇",
@@ -977,7 +956,7 @@
       "nameTagId": 70000
     },
     {
-      "rank": 44,
+      "rank": 43,
       "score": 3593,
       "accountId": 5066673,
       "userName": "이터",
@@ -998,7 +977,7 @@
       "nameTagId": 15360
     },
     {
-      "rank": 45,
+      "rank": 44,
       "score": 3566,
       "accountId": 7065981,
       "userName": "Fumiko",
@@ -1019,7 +998,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 46,
+      "rank": 45,
       "score": 3520,
       "accountId": 2861048,
       "userName": "GRYFFINDOR",
@@ -1040,7 +1019,7 @@
       "nameTagId": 15360
     },
     {
-      "rank": 47,
+      "rank": 46,
       "score": 3491,
       "accountId": 7576047,
       "userName": "Near",
@@ -1061,7 +1040,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 48,
+      "rank": 47,
       "score": 3489,
       "accountId": 2417535,
       "userName": "청월",
@@ -1082,7 +1061,7 @@
       "nameTagId": 70010
     },
     {
-      "rank": 49,
+      "rank": 48,
       "score": 3432,
       "accountId": 4234934,
       "userName": "エミリア",
@@ -1103,7 +1082,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 50,
+      "rank": 49,
       "score": 3402,
       "accountId": 7058101,
       "userName": "Gaxyt",
@@ -1124,7 +1103,7 @@
       "nameTagId": 40050
     },
     {
-      "rank": 51,
+      "rank": 50,
       "score": 3395,
       "accountId": 1724608,
       "userName": "PhungHoang",
@@ -1145,7 +1124,7 @@
       "nameTagId": 70010
     },
     {
-      "rank": 52,
+      "rank": 51,
       "score": 3322,
       "accountId": 8244198,
       "userName": "xLey",
@@ -1166,7 +1145,7 @@
       "nameTagId": 40060
     },
     {
-      "rank": 53,
+      "rank": 52,
       "score": 3300,
       "accountId": 6674800,
       "userName": "MrHavi",
@@ -1187,7 +1166,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 54,
+      "rank": 53,
       "score": 3288,
       "accountId": 8781617,
       "userName": "츄츄",
@@ -1208,7 +1187,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 55,
+      "rank": 54,
       "score": 3287,
       "accountId": 5492123,
       "userName": "ThugLakz",
@@ -1229,7 +1208,7 @@
       "nameTagId": 10350
     },
     {
-      "rank": 56,
+      "rank": 55,
       "score": 3235,
       "accountId": 5779823,
       "userName": "xRekzy",
@@ -1250,7 +1229,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 57,
+      "rank": 56,
       "score": 3221,
       "accountId": 8594979,
       "userName": "tibe",
@@ -1271,7 +1250,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 58,
+      "rank": 57,
       "score": 3216,
       "accountId": 6235291,
       "userName": "율",
@@ -1292,7 +1271,7 @@
       "nameTagId": 70010
     },
     {
-      "rank": 59,
+      "rank": 58,
       "score": 3203,
       "accountId": 8867907,
       "userName": "ZiOO",
@@ -1313,7 +1292,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 60,
+      "rank": 59,
       "score": 3199,
       "accountId": 4990262,
       "userName": "B",
@@ -1334,7 +1313,7 @@
       "nameTagId": 40060
     },
     {
-      "rank": 61,
+      "rank": 60,
       "score": 3185,
       "accountId": 5976396,
       "userName": "subcero39",
@@ -1355,7 +1334,7 @@
       "nameTagId": 15260
     },
     {
-      "rank": 62,
+      "rank": 61,
       "score": 3177,
       "accountId": 8312983,
       "userName": "Drimm",
@@ -1376,7 +1355,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 63,
+      "rank": 62,
       "score": 3170,
       "accountId": 8919564,
       "userName": "Ark",
@@ -1397,7 +1376,7 @@
       "nameTagId": 10000
     },
     {
-      "rank": 64,
+      "rank": 63,
       "score": 3149,
       "accountId": 9489991,
       "userName": "NightOwL",
@@ -1418,7 +1397,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 65,
+      "rank": 64,
       "score": 3129,
       "accountId": 4480445,
       "userName": "elzu",
@@ -1439,7 +1418,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 66,
+      "rank": 65,
       "score": 3125,
       "accountId": 3427134,
       "userName": "Elendil",
@@ -1460,7 +1439,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 67,
+      "rank": 66,
       "score": 3117,
       "accountId": 12087,
       "userName": "아리스와케이왕",
@@ -1481,7 +1460,7 @@
       "nameTagId": 70020
     },
     {
-      "rank": 68,
+      "rank": 67,
       "score": 3104,
       "accountId": 6335157,
       "userName": "패",
@@ -1502,7 +1481,7 @@
       "nameTagId": 10350
     },
     {
-      "rank": 69,
+      "rank": 68,
       "score": 3098,
       "accountId": 165152,
       "userName": "왕봉봉",
@@ -1523,7 +1502,7 @@
       "nameTagId": 10000
     },
     {
-      "rank": 70,
+      "rank": 69,
       "score": 3095,
       "accountId": 9209387,
       "userName": "HieuKiLang",
@@ -1544,7 +1523,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 71,
+      "rank": 70,
       "score": 3083,
       "accountId": 3303658,
       "userName": "p3tly",
@@ -1565,7 +1544,7 @@
       "nameTagId": 40000
     },
     {
-      "rank": 72,
+      "rank": 71,
       "score": 3058,
       "accountId": 62983,
       "userName": "린간",
@@ -1586,7 +1565,7 @@
       "nameTagId": 10000
     },
     {
-      "rank": 73,
+      "rank": 72,
       "score": 3037,
       "accountId": 6658515,
       "userName": "Zero",
@@ -1607,7 +1586,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 74,
+      "rank": 73,
       "score": 3026,
       "accountId": 5102072,
       "userName": "Zero",
@@ -1628,7 +1607,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 75,
+      "rank": 74,
       "score": 3026,
       "accountId": 4923471,
       "userName": "Lusano",
@@ -1649,7 +1628,7 @@
       "nameTagId": 70010
     },
     {
-      "rank": 76,
+      "rank": 75,
       "score": 3019,
       "accountId": 3372070,
       "userName": "Ryu",
@@ -1670,7 +1649,7 @@
       "nameTagId": 20020
     },
     {
-      "rank": 77,
+      "rank": 76,
       "score": 3006,
       "accountId": 6862716,
       "userName": "lucasc",
@@ -1691,7 +1670,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 78,
+      "rank": 77,
       "score": 3006,
       "accountId": 4773873,
       "userName": "왕",
@@ -1712,7 +1691,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 79,
+      "rank": 78,
       "score": 3000,
       "accountId": 9032576,
       "userName": "KING",
@@ -1733,7 +1712,7 @@
       "nameTagId": 15300
     },
     {
-      "rank": 80,
+      "rank": 79,
       "score": 3000,
       "accountId": 6135296,
       "userName": "뻑",
@@ -1754,7 +1733,7 @@
       "nameTagId": 70030
     },
     {
-      "rank": 81,
+      "rank": 80,
       "score": 3000,
       "accountId": 2771042,
       "userName": "fushasaki",
@@ -1775,7 +1754,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 82,
+      "rank": 81,
       "score": 2989,
       "accountId": 6767099,
       "userName": "FERMIN",
@@ -1796,7 +1775,7 @@
       "nameTagId": 20020
     },
     {
-      "rank": 83,
+      "rank": 82,
       "score": 2985,
       "accountId": 8749270,
       "userName": "Mazeto",
@@ -1817,7 +1796,7 @@
       "nameTagId": 10350
     },
     {
-      "rank": 84,
+      "rank": 83,
       "score": 2980,
       "accountId": 6420288,
       "userName": "Genos",
@@ -1838,7 +1817,7 @@
       "nameTagId": 40000
     },
     {
-      "rank": 85,
+      "rank": 84,
       "score": 2976,
       "accountId": 7871674,
       "userName": "boss",
@@ -1859,7 +1838,7 @@
       "nameTagId": 70010
     },
     {
-      "rank": 86,
+      "rank": 85,
       "score": 2974,
       "accountId": 5530709,
       "userName": "Turuturu",
@@ -1880,7 +1859,7 @@
       "nameTagId": 20000
     },
     {
-      "rank": 87,
+      "rank": 86,
       "score": 2964,
       "accountId": 8109034,
       "userName": "ChekSeaLS",
@@ -1901,7 +1880,7 @@
       "nameTagId": 40050
     },
     {
-      "rank": 88,
+      "rank": 87,
       "score": 2953,
       "accountId": 9600513,
       "userName": "KingLGC",
@@ -1922,7 +1901,7 @@
       "nameTagId": 20020
     },
     {
-      "rank": 89,
+      "rank": 88,
       "score": 2951,
       "accountId": 3167134,
       "userName": "Zennod",
@@ -1943,7 +1922,7 @@
       "nameTagId": 15360
     },
     {
-      "rank": 90,
+      "rank": 89,
       "score": 2949,
       "accountId": 354119,
       "userName": "두부",
@@ -1964,7 +1943,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 91,
+      "rank": 90,
       "score": 2948,
       "accountId": 8362901,
       "userName": "의자",
@@ -1985,7 +1964,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 92,
+      "rank": 91,
       "score": 2947,
       "accountId": 3828954,
       "userName": "Jang7457",
@@ -2006,7 +1985,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 93,
+      "rank": 92,
       "score": 2946,
       "accountId": 1398259,
       "userName": "빠삐",
@@ -2027,7 +2006,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 94,
+      "rank": 93,
       "score": 2917,
       "accountId": 7938112,
       "userName": "ZWD9A5ML",
@@ -2048,7 +2027,7 @@
       "nameTagId": 10350
     },
     {
-      "rank": 95,
+      "rank": 94,
       "score": 2915,
       "accountId": 1928458,
       "userName": "갓정화",
@@ -2069,7 +2048,7 @@
       "nameTagId": 20030
     },
     {
-      "rank": 96,
+      "rank": 95,
       "score": 2909,
       "accountId": 8799324,
       "userName": "quangg",
@@ -2090,7 +2069,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 97,
+      "rank": 96,
       "score": 2904,
       "accountId": 2289388,
       "userName": "샤렌4세",
@@ -2111,7 +2090,7 @@
       "nameTagId": 15150
     },
     {
-      "rank": 98,
+      "rank": 97,
       "score": 2892,
       "accountId": 4465675,
       "userName": "퀘이사",
@@ -2132,7 +2111,7 @@
       "nameTagId": 40040
     },
     {
-      "rank": 99,
+      "rank": 98,
       "score": 2889,
       "accountId": 9811248,
       "userName": "cuccut",
@@ -2153,7 +2132,7 @@
       "nameTagId": 20020
     },
     {
-      "rank": 100,
+      "rank": 99,
       "score": 2889,
       "accountId": 7238962,
       "userName": "JulGun",
@@ -2172,6 +2151,27 @@
       "heroName": "",
       "flagId": 20170,
       "nameTagId": 15370
+    },
+    {
+      "rank": 100,
+      "score": 2865,
+      "accountId": 6349548,
+      "userName": "StyleY",
+      "castleName": "Chelsea",
+      "tier": 70,
+      "tierInfo": {
+        "id": 70,
+        "vi": "Thần (Hạng 31~100)",
+        "en": "God (Rank 31~100)",
+        "kr": "갓(31~100위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#6366f1"
+      },
+      "profileIcon": 1034006,
+      "heroName": "",
+      "flagId": 15150,
+      "nameTagId": 10150
     }
   ]
 }
