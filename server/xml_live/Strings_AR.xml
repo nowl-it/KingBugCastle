@@ -943,8 +943,8 @@ Pay Silver to refresh the Wandering Merchant's shop once</String>
   <String Key="AddDefPerCount">- {0} ضرر متلقي بالتناسب مع عدد الأبطال الموضوعين 
 ({1} بحد أقصى)</String>
   <String Key="AddDefPerCount_Piece">إنخفاض الضرر المتلقي بالتناسب مع عدد الأبطال الموضوعين</String>
-  <String Key="AtkPerByRange">Damage Dealt by Normal/Skill attacks +{0} per tile of distance to the target (max. distance {1})</String>
-  <String Key="AtkPerByRange_Piece">The farther the target of Normal/Skill attacks, the higher the Damage Dealt</String>
+  <String Key="AtkPerByRange">All Heroes' Range +1, Damage Dealt by Normal/Skill Attacks +{0} per point of distance to the target (max. distance {1})</String>
+  <String Key="AtkPerByRange_Piece">All Heroes' Range +1, Damage Dealt by Normal/Skill Attacks increases with distance to the target</String>
   <String Key="ArtifactName_100">مسحوق سحري</String>
   <String Key="ArtifactDesc_100">مسحوق سحري يتم الحصول عليه بطحن القطع الأثرية</String>
   <String Key="ArtifactName_10000">سيف الإمبراطورية العظيم</String>
@@ -11668,6 +11668,7 @@ Simply gazing upon it brings peace to the mind and body.</String>
   <String Key="AccessorySynergyName_9">Moonlight</String>
   <String Key="AccessorySynergyName_9_Pre">Moonlit</String>
   <String Key="AccessorySynergyDesc_10090">+{1}% final ATK, &lt;color=#f33&gt;{0}% final Spell Power&lt;/color&gt;</String>
+  <String Key="AccessorySynergyDesc_10091">Range +{0}, Physical CRIT Damage +{2}% per {1} Range (max. 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Hides for {0} sec at the beginning of the battle, +{2}% Physical CRIT Chance after {1} sec</String>
   <String Key="InventoryItemName_5010">Moonlit Accessory Selection Chest</String>
   <String Key="ShopItemName_41012">Random Moonlight Accessory</String>
@@ -12619,7 +12620,7 @@ You can use "Gems" or "Rift Equipment Unupgradable Status Removal Ticket" to res
   <String Key="RiftWeaponBuffDesc_130">Deals {0}% special damage to 3 targets upon dealing normal damage after using skill</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} Physical DEF</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} Spell DEF</String>
-  <String Key="RiftWeaponBuffDesc_160">Movement Speed +{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">Range +{0}</String>
   <String Key="RiftWeaponBuffDesc_170">+{0}% Physical HP Drain</String>
   <String Key="RiftWeaponBuffDesc_180">+{0}% Spell HP Drain</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} DEF</String>

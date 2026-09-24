@@ -1,4 +1,4 @@
-<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
+<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-818f-a70b-d21e2d73d559</String>
   <String Key="Title">キングゴッド&lt;size=2&gt; &lt;/size&gt;キャッスル</String>
@@ -953,8 +953,8 @@ ROOT&lt;size=2&gt; &lt;/size&gt;化&lt;size=2&gt; &lt;/size&gt;を&lt;size=2&gt;
   <String Key="AddDefPerCount">配置&lt;size=2&gt; &lt;/size&gt;さ&lt;size=2&gt; &lt;/size&gt;れ&lt;size=2&gt; &lt;/size&gt;た&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;ごと&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;被&lt;size=2&gt; &lt;/size&gt;ダメージ&lt;size=2&gt; &lt;/size&gt;量{0}&lt;size=2&gt; &lt;/size&gt;減少
 (最大{1})</String>
   <String Key="AddDefPerCount_Piece">配置&lt;size=2&gt; &lt;/size&gt;さ&lt;size=2&gt; &lt;/size&gt;れ&lt;size=2&gt; &lt;/size&gt;た&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;が&lt;size=2&gt; &lt;/size&gt;多い&lt;size=2&gt; &lt;/size&gt;ほど&lt;size=2&gt; &lt;/size&gt;被&lt;size=2&gt; &lt;/size&gt;ダメージ&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;減少</String>
-  <String Key="AtkPerByRange">ノーマル&lt;size=2&gt; &lt;/size&gt;/&lt;size=2&gt; &lt;/size&gt;スキル&lt;size=2&gt; &lt;/size&gt;攻撃&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;対象&lt;size=2&gt; &lt;/size&gt;と&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;距離1&lt;size=2&gt; &lt;/size&gt;マス&lt;size=2&gt; &lt;/size&gt;ごと&lt;size=2&gt; &lt;/size&gt;に&lt;size=2&gt; &lt;/size&gt;与える&lt;size=2&gt; &lt;/size&gt;ダメージ&lt;size=2&gt; &lt;/size&gt;量{0}&lt;size=2&gt; &lt;/size&gt;増加(最大&lt;size=2&gt; &lt;/size&gt;距離{1})</String>
-  <String Key="AtkPerByRange_Piece">ノーマル&lt;size=2&gt; &lt;/size&gt;/&lt;size=2&gt; &lt;/size&gt;スキル&lt;size=2&gt; &lt;/size&gt;攻撃&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;対象&lt;size=2&gt; &lt;/size&gt;が&lt;size=2&gt; &lt;/size&gt;遠い&lt;size=2&gt; &lt;/size&gt;ほど&lt;size=2&gt; &lt;/size&gt;与える&lt;size=2&gt; &lt;/size&gt;ダメージ&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;増加</String>
+  <String Key="AtkPerByRange">全&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;範囲+1、&lt;size=2&gt; &lt;/size&gt;通常/&lt;size=2&gt; &lt;/size&gt;スキル&lt;size=2&gt; &lt;/size&gt;攻撃&lt;size=2&gt; &lt;/size&gt;は&lt;size=2&gt; &lt;/size&gt;対象&lt;size=2&gt; &lt;/size&gt;と&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;距離&lt;size=2&gt; &lt;/size&gt;ごと&lt;size=2&gt; &lt;/size&gt;に&lt;size=2&gt; &lt;/size&gt;与える&lt;size=2&gt; &lt;/size&gt;ダメージ&lt;size=2&gt; &lt;/size&gt;量{0}&lt;size=2&gt; &lt;/size&gt;増加（&lt;size=2&gt; &lt;/size&gt;最大&lt;size=2&gt; &lt;/size&gt;距離{1}）</String>
+  <String Key="AtkPerByRange_Piece">全&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;範囲+1、&lt;size=2&gt; &lt;/size&gt;通常/&lt;size=2&gt; &lt;/size&gt;スキル&lt;size=2&gt; &lt;/size&gt;攻撃&lt;size=2&gt; &lt;/size&gt;は&lt;size=2&gt; &lt;/size&gt;対象&lt;size=2&gt; &lt;/size&gt;が&lt;size=2&gt; &lt;/size&gt;遠い&lt;size=2&gt; &lt;/size&gt;ほど&lt;size=2&gt; &lt;/size&gt;与える&lt;size=2&gt; &lt;/size&gt;ダメージ&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;増加</String>
   <String Key="ArtifactName_100">神秘の粉</String>
   <String Key="ArtifactDesc_100">遺物&lt;size=2&gt; &lt;/size&gt;を&lt;size=2&gt; &lt;/size&gt;分解&lt;size=2&gt; &lt;/size&gt;する&lt;size=2&gt; &lt;/size&gt;と&lt;size=2&gt; &lt;/size&gt;獲得&lt;size=2&gt; &lt;/size&gt;できる&lt;size=2&gt; &lt;/size&gt;神秘の粉</String>
   <String Key="ArtifactName_10000">帝国の大剣</String>
@@ -1244,8 +1244,11 @@ ROOT&lt;size=2&gt; &lt;/size&gt;化&lt;size=2&gt; &lt;/size&gt;を&lt;size=2&gt;
   <String Key="ItemName_10020">陣営&lt;size=2&gt; &lt;/size&gt;拡張</String>
   <String Key="ItemDesc_10020">陣営&lt;size=2&gt; &lt;/size&gt;が1&lt;size=2&gt; &lt;/size&gt;拡張&lt;size=2&gt; &lt;/size&gt;し&lt;size=2&gt; &lt;/size&gt;ます。</String>
   <String Key="ItemName_10030">シルバー&lt;size=2&gt; &lt;/size&gt;+5&lt;size=2&gt; &lt;/size&gt;枚</String>
+  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">シルバー&lt;size=2&gt; &lt;/size&gt;+10&lt;size=2&gt; &lt;/size&gt;枚</String>
+  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">シルバー&lt;size=2&gt; &lt;/size&gt;+20&lt;size=2&gt; &lt;/size&gt;枚</String>
+  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">勲章</String>
   <String Key="ItemDesc_10040">フィールド&lt;size=2&gt; &lt;/size&gt;に&lt;size=2&gt; &lt;/size&gt;いる&lt;size=2&gt; &lt;/size&gt;ランダム&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;等級&lt;size=2&gt; &lt;/size&gt;を1&lt;size=2&gt; &lt;/size&gt;上昇&lt;size=2&gt; &lt;/size&gt;さ&lt;size=2&gt; &lt;/size&gt;せ&lt;size=2&gt; &lt;/size&gt;ます。</String>
   <String Key="ItemName_10050">プレミアム&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;召喚&lt;size=2&gt; &lt;/size&gt;書(2回)</String>
@@ -11689,6 +11692,7 @@ EXP&lt;size=2&gt; &lt;/size&gt;に&lt;size=2&gt; &lt;/size&gt;切り替え&lt;si
   <String Key="AccessorySynergyName_9">月光</String>
   <String Key="AccessorySynergyName_9_Pre">月光&lt;size=2&gt; &lt;/size&gt;の</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;&lt;size=2&gt; &lt;/size&gt;最終&lt;size=2&gt; &lt;/size&gt;呪文&lt;size=2&gt; &lt;/size&gt;力{0}%&lt;/color&gt;、&lt;size=2&gt; &lt;/size&gt;最終&lt;size=2&gt; &lt;/size&gt;攻撃&lt;size=2&gt; &lt;/size&gt;力+{1}%</String>
+  <String Key="AccessorySynergyDesc_10091">範囲&lt;size=2&gt; &lt;/size&gt;+{0}、&lt;size=2&gt; &lt;/size&gt;範囲{1}&lt;size=2&gt; &lt;/size&gt;ごと&lt;size=2&gt; &lt;/size&gt;に&lt;size=2&gt; &lt;/size&gt;物理&lt;size=2&gt; &lt;/size&gt;クリティカル&lt;size=2&gt; &lt;/size&gt;ダメージ&lt;size=2&gt; &lt;/size&gt;量+{2}%（&lt;size=2&gt; &lt;/size&gt;最大80&lt;size=2&gt; &lt;/size&gt;%）</String>
   <String Key="AccessorySynergyDesc_10092">戦闘&lt;size=2&gt; &lt;/size&gt;開始&lt;size=2&gt; &lt;/size&gt;時{0}&lt;size=2&gt; &lt;/size&gt;秒間&lt;size=2&gt; &lt;/size&gt;隠&lt;size=2&gt; &lt;/size&gt;身、{1}&lt;size=2&gt; &lt;/size&gt;秒&lt;size=2&gt; &lt;/size&gt;後&lt;size=2&gt; &lt;/size&gt;に&lt;size=2&gt; &lt;/size&gt;物理&lt;size=2&gt; &lt;/size&gt;クリティカル&lt;size=2&gt; &lt;/size&gt;率+{2}%</String>
   <String Key="InventoryItemName_5010">月光&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;装身具&lt;size=2&gt; &lt;/size&gt;選択&lt;size=2&gt; &lt;/size&gt;ボックス</String>
   <String Key="ShopItemName_41012">ランダム&lt;size=2&gt; &lt;/size&gt;月光&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;装身具</String>
@@ -12642,7 +12646,7 @@ EXP&lt;size=2&gt; &lt;/size&gt;に&lt;size=2&gt; &lt;/size&gt;切り替え&lt;si
   <String Key="RiftWeaponBuffDesc_130">スキル&lt;size=2&gt; &lt;/size&gt;使用&lt;size=2&gt; &lt;/size&gt;後、&lt;size=2&gt; &lt;/size&gt;一般&lt;size=2&gt; &lt;/size&gt;ダメージ&lt;size=2&gt; &lt;/size&gt;的中&lt;size=2&gt; &lt;/size&gt;時3&lt;size=2&gt; &lt;/size&gt;体&lt;size=2&gt; &lt;/size&gt;に{0}%&lt;size=2&gt; &lt;/size&gt;の&lt;size=2&gt; &lt;/size&gt;特殊&lt;size=2&gt; &lt;/size&gt;ダメージ</String>
   <String Key="RiftWeaponBuffDesc_140">物理&lt;size=2&gt; &lt;/size&gt;防御&lt;size=2&gt; &lt;/size&gt;力+{0}</String>
   <String Key="RiftWeaponBuffDesc_150">呪文&lt;size=2&gt; &lt;/size&gt;防御&lt;size=2&gt; &lt;/size&gt;力+{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">移動&lt;size=2&gt; &lt;/size&gt;速度+{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">範囲&lt;size=2&gt; &lt;/size&gt;+{0}</String>
   <String Key="RiftWeaponBuffDesc_170">物理&lt;size=2&gt; &lt;/size&gt;吸血+{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">呪文&lt;size=2&gt; &lt;/size&gt;吸血+{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">防御&lt;size=2&gt; &lt;/size&gt;力+{0}</String>

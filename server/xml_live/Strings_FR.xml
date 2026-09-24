@@ -1,4 +1,4 @@
-<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
+<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">Fort KingGod</String>
@@ -962,8 +962,8 @@ lors du rappel de héros 1★</String>
   <String Key="AddDefPerCount">↓ {0} DEG subis proportionnellement au nombre de héros placés
 (-{1} max)</String>
   <String Key="AddDefPerCount_Piece">Plus il y a de héros placés, reçoit moins de DEG.</String>
-  <String Key="AtkPerByRange">DEG infligés par les attaques normales/de compétence +{0} par case de distance à la cible (distance max. {1})</String>
-  <String Key="AtkPerByRange_Piece">Plus la cible des attaques normales/de compétence est loin, plus les DEG infligés augmentent</String>
+  <String Key="AtkPerByRange">Portée de tous les Héros +1, DEG infligés par les attaques normales/de compétence +{0} par point de distance à la cible (distance max. {1})</String>
+  <String Key="AtkPerByRange_Piece">Portée de tous les Héros +1, les DEG infligés par les attaques normales/de compétence augmentent avec la distance à la cible</String>
   <String Key="ArtifactName_100">Poudre fabuleuse</String>
   <String Key="ArtifactDesc_100">Poudre extraordinaire qui peut être obtenue en broyant des reliques</String>
   <String Key="ArtifactName_10000">Épée de l'empire</String>
@@ -1252,8 +1252,11 @@ Voulez-vous les vérifier ?</String>
   <String Key="ItemName_10020">Camp +</String>
   <String Key="ItemDesc_10020">+ 1 case au camp</String>
   <String Key="ItemName_10030">Argent +5</String>
+  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">Argent +10</String>
+  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">Argent +20</String>
+  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">Médaille de mérite</String>
   <String Key="ItemDesc_10040">Augmente de 1 le nv.★ d'un héros sur le terrain.</String>
   <String Key="ItemName_10050">Appel majeur (x 2)</String>
@@ -11736,6 +11739,7 @@ Rien qu'en la contemplant, on se sent apaisé.</String>
   <String Key="AccessorySynergyName_9">Clairlune</String>
   <String Key="AccessorySynergyName_9_Pre">de clairlune</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;INT totale {0}%&lt;/color&gt;, ATQ totale +{1}%</String>
+  <String Key="AccessorySynergyDesc_10091">Portée +{0}, DEG CRIT phys. +{2}% par {1} de Portée (max. 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Au début du combat, furtivité pendant {0} s et après {1} s, CHANCES CRIT phys. +{2}%.</String>
   <String Key="InventoryItemName_5010">Coffre d'Accessoire de clairlune au choix</String>
   <String Key="ShopItemName_41012">Accessoire de clairlune aléatoire</String>
@@ -12687,7 +12691,7 @@ Toutefois, il peut être réinitialisé au nv.15 en utilisant des Gems ou un Ré
   <String Key="RiftWeaponBuffDesc_130">Lors des DEG normaux infligés après utilisation de compétence, inflige {0}% en DEG spéciaux à 3 ennemis.</String>
   <String Key="RiftWeaponBuffDesc_140">DEF phys. +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">DEF d'INT +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">Vitesse de déplacement +{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">Portée +{0}</String>
   <String Key="RiftWeaponBuffDesc_170">Conversion DEG phys. en PV +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">Conversion DEG d'INT en PV +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">DEF +{0}</String>

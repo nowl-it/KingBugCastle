@@ -1,4 +1,4 @@
-<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
+<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">神&lt;size=2&gt; &lt;/size&gt;王&lt;size=2&gt; &lt;/size&gt;城堡</String>
@@ -946,8 +946,8 @@
   <String Key="AddDefPerCount">每&lt;size=2&gt; &lt;/size&gt;多一名&lt;size=2&gt; &lt;/size&gt;部署&lt;size=2&gt; &lt;/size&gt;英雄，&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;将&lt;size=2&gt; &lt;/size&gt;减少{0}
 （最多{1}）</String>
   <String Key="AddDefPerCount_Piece">部署&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;越多，&lt;size=2&gt; &lt;/size&gt;受到&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;将&lt;size=2&gt; &lt;/size&gt;随之&lt;size=2&gt; &lt;/size&gt;减少</String>
-  <String Key="AtkPerByRange">一般&lt;size=2&gt; &lt;/size&gt;/&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;攻击&lt;size=2&gt; &lt;/size&gt;与&lt;size=2&gt; &lt;/size&gt;目标&lt;size=2&gt; &lt;/size&gt;每&lt;size=2&gt; &lt;/size&gt;相距1&lt;size=2&gt; &lt;/size&gt;格，&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量 +{0} (&lt;size=2&gt; &lt;/size&gt;最大&lt;size=2&gt; &lt;/size&gt;距离 {1})</String>
-  <String Key="AtkPerByRange_Piece">一般&lt;size=2&gt; &lt;/size&gt;/&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;攻击&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;目标&lt;size=2&gt; &lt;/size&gt;越&lt;size=2&gt; &lt;/size&gt;远，&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;越&lt;size=2&gt; &lt;/size&gt;高</String>
+  <String Key="AtkPerByRange">所有&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;射程 + 1，&lt;size=2&gt; &lt;/size&gt;普通/&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;攻击&lt;size=2&gt; &lt;/size&gt;每1点&lt;size=2&gt; &lt;/size&gt;与&lt;size=2&gt; &lt;/size&gt;目标&lt;size=2&gt; &lt;/size&gt;距离，&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;增加 {0}（最大距离 {1}）</String>
+  <String Key="AtkPerByRange_Piece">所有&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;射程 + 1，&lt;size=2&gt; &lt;/size&gt;普通/&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;攻击&lt;size=2&gt; &lt;/size&gt;与&lt;size=2&gt; &lt;/size&gt;目标&lt;size=2&gt; &lt;/size&gt;距离&lt;size=2&gt; &lt;/size&gt;越&lt;size=2&gt; &lt;/size&gt;远，&lt;size=2&gt; &lt;/size&gt;造成&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量&lt;size=2&gt; &lt;/size&gt;越&lt;size=2&gt; &lt;/size&gt;高</String>
   <String Key="ArtifactName_100">神秘&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;粉末</String>
   <String Key="ArtifactDesc_100">通过&lt;size=2&gt; &lt;/size&gt;分解&lt;size=2&gt; &lt;/size&gt;神器&lt;size=2&gt; &lt;/size&gt;可&lt;size=2&gt; &lt;/size&gt;获得&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;神秘&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;粉末</String>
   <String Key="ArtifactName_10000">帝国&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;长剑</String>
@@ -1236,8 +1236,11 @@
   <String Key="ItemName_10020">阵营&lt;size=2&gt; &lt;/size&gt;扩张</String>
   <String Key="ItemDesc_10020">扩张&lt;size=2&gt; &lt;/size&gt;1&lt;size=2&gt; &lt;/size&gt;阵营。</String>
   <String Key="ItemName_10030">银币&lt;size=2&gt; &lt;/size&gt;+5</String>
+  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">银币&lt;size=2&gt; &lt;/size&gt;+10</String>
+  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">银币&lt;size=2&gt; &lt;/size&gt;+20</String>
+  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">武功&lt;size=2&gt; &lt;/size&gt;勋章</String>
   <String Key="ItemDesc_10040">对&lt;size=2&gt; &lt;/size&gt;战场&lt;size=2&gt; &lt;/size&gt;内&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;随机&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;提升1&lt;size=2&gt; &lt;/size&gt;星级。</String>
   <String Key="ItemName_10050">高级&lt;size=2&gt; &lt;/size&gt;英雄&lt;size=2&gt; &lt;/size&gt;召唤&lt;size=2&gt; &lt;/size&gt;书（2次）</String>
@@ -11687,6 +11690,7 @@ Lv&lt;size=2&gt; &lt;/size&gt;. {0} ▶ Lv. {1}</String>
   <String Key="AccessorySynergyName_9">月光</String>
   <String Key="AccessorySynergyName_9_Pre">月光&lt;size=2&gt; &lt;/size&gt;的</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;法术&lt;size=2&gt; &lt;/size&gt;强度{0}%&lt;/color&gt;，&lt;size=2&gt; &lt;/size&gt;最终&lt;size=2&gt; &lt;/size&gt;攻击力+{1}%</String>
+  <String Key="AccessorySynergyDesc_10091">射程&lt;size=2&gt; &lt;/size&gt; +{0}，&lt;size=2&gt; &lt;/size&gt;每&lt;size=2&gt; &lt;/size&gt;拥有 {1} &lt;size=2&gt; &lt;/size&gt;射程，&lt;size=2&gt; &lt;/size&gt;物理&lt;size=2&gt; &lt;/size&gt;暴&lt;size=2&gt; &lt;/size&gt;击&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;量 +{2}%（最大 80%）</String>
   <String Key="AccessorySynergyDesc_10092">战斗&lt;size=2&gt; &lt;/size&gt;开始&lt;size=2&gt; &lt;/size&gt;时&lt;size=2&gt; &lt;/size&gt;隐身{0}秒，{1}秒&lt;size=2&gt; &lt;/size&gt;后&lt;size=2&gt; &lt;/size&gt;物理&lt;size=2&gt; &lt;/size&gt;暴&lt;size=2&gt; &lt;/size&gt;击&lt;size=2&gt; &lt;/size&gt;率+{2}%</String>
   <String Key="InventoryItemName_5010">月光&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;饰品&lt;size=2&gt; &lt;/size&gt;选择&lt;size=2&gt; &lt;/size&gt;宝箱</String>
   <String Key="ShopItemName_41012">随机&lt;size=2&gt; &lt;/size&gt;月光&lt;size=2&gt; &lt;/size&gt;饰品</String>
@@ -12638,7 +12642,7 @@ Lv&lt;size=2&gt; &lt;/size&gt;. {0} ▶ Lv. {1}</String>
   <String Key="RiftWeaponBuffDesc_130">使用&lt;size=2&gt; &lt;/size&gt;技能&lt;size=2&gt; &lt;/size&gt;后&lt;size=2&gt; &lt;/size&gt;一般&lt;size=2&gt; &lt;/size&gt;伤害&lt;size=2&gt; &lt;/size&gt;击中&lt;size=2&gt; &lt;/size&gt;时，&lt;size=2&gt; &lt;/size&gt;对3&lt;size=2&gt; &lt;/size&gt;名&lt;size=2&gt; &lt;/size&gt;造成{0}%&lt;size=2&gt; &lt;/size&gt;的&lt;size=2&gt; &lt;/size&gt;特殊&lt;size=2&gt; &lt;/size&gt;伤害</String>
   <String Key="RiftWeaponBuffDesc_140">物理&lt;size=2&gt; &lt;/size&gt;防御力+{0}</String>
   <String Key="RiftWeaponBuffDesc_150">法术&lt;size=2&gt; &lt;/size&gt;防御力+{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">移动&lt;size=2&gt; &lt;/size&gt;速度 +{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">射程&lt;size=2&gt; &lt;/size&gt; +{0}</String>
   <String Key="RiftWeaponBuffDesc_170">物理&lt;size=2&gt; &lt;/size&gt;吸血+{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">法术&lt;size=2&gt; &lt;/size&gt;吸血+{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">防御力&lt;size=2&gt; &lt;/size&gt;+{0}</String>

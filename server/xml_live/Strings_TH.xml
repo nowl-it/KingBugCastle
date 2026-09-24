@@ -1,4 +1,4 @@
-<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
+<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -949,8 +949,8 @@
   <String Key="AddDefPerCount">ลดดาเมจที่ได้รับต่อฮีโร่ที่จัดไว้คนละ {0} หน่วย
 (สูงสุด {1} หน่วย)</String>
   <String Key="AddDefPerCount_Piece">ยิ่งมีฮีโร่ที่ถูกจัดไว้มากก็จะยิ่งลดดาเมจที่ได้รับ</String>
-  <String Key="AtkPerByRange">ดาเมจที่มอบจากการโจมตีปกติ/สกิล +{0} ต่อทุก 1 ช่องที่ห่างจากเป้าหมาย (ระยะสูงสุด {1})</String>
-  <String Key="AtkPerByRange_Piece">ยิ่งเป้าหมายของการโจมตีปกติ/สกิลอยู่ไกล ดาเมจที่มอบยิ่งเพิ่มขึ้น</String>
+  <String Key="AtkPerByRange">ระยะโจมตีของฮีโร่ทั้งหมด + 1, ดาเมจที่มอบจากการโจมตีธรรมดา/สกิล +{0} ต่อระยะห่างจากเป้าหมายทุก 1 (ระยะสูงสุด {1})</String>
+  <String Key="AtkPerByRange_Piece">ระยะโจมตีของฮีโร่ทั้งหมด + 1, ดาเมจที่มอบจากการโจมตีธรรมดา/สกิลเพิ่มขึ้นตามระยะห่างจากเป้าหมาย</String>
   <String Key="ArtifactName_100">ผงวิเศษ</String>
   <String Key="ArtifactDesc_100">ผงวิเศษที่สามารถรับได้จากการแยกชิ้นส่วนสมบัติ</String>
   <String Key="ArtifactName_10000">ดาบใหญ่แห่งจักรวรรดิ</String>
@@ -1239,8 +1239,11 @@
   <String Key="ItemName_10020">ขยายกลุ่ม</String>
   <String Key="ItemDesc_10020">ขยายกลุ่ม 1</String>
   <String Key="ItemName_10030">เงิน +5</String>
+  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">เงิน +10</String>
+  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">เงิน +20</String>
+  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">เหรียญตราวีรกรรม</String>
   <String Key="ItemDesc_10040">เพิ่มดาวของฮีโร่บนสนามแบบสุ่ม 1 ดาว</String>
   <String Key="ItemName_10050">หนังสืออัญเชิญฮีโร่ขั้นสูง (2 ครั้ง)</String>
@@ -11681,6 +11684,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AccessorySynergyName_9">แสงจันทร์</String>
   <String Key="AccessorySynergyName_9_Pre">แห่งแสงจันทร์</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;เวทมนตร์สุดท้าย {0}%&lt;/color&gt;, พลังโจมตีสุดท้าย +{1}%</String>
+  <String Key="AccessorySynergyDesc_10091">ระยะโจมตี +{0}, ดาเมจคริติคอลกายภาพ +{2}% ต่อระยะโจมตีที่มีทุก {1} (สูงสุด 80%)</String>
   <String Key="AccessorySynergyDesc_10092">เมื่อเริ่มการต่อสู้ หลบซ่อน {0} วินาที, อัตราคริติคอลกายภาพ +{2}% หลัง {1} วินาที</String>
   <String Key="InventoryItemName_5010">หีบเลือกเครื่องประดับแห่งแสงจันทร์</String>
   <String Key="ShopItemName_41012">เครื่องประดับแสงจันทร์แรนด้อม</String>
@@ -12633,7 +12637,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="RiftWeaponBuffDesc_130">เมื่อดาเมจธรรมดาโดนเป้าหลังใช้สกิล จะทำดาเมจพิเศษ {0}% แก่ 3 ราย</String>
   <String Key="RiftWeaponBuffDesc_140">พลังป้องกันกายภาพ +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">พลังป้องกันเวทมนตร์ +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">ความเร็วเคลื่อนที่ +{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">ระยะโจมตี +{0}</String>
   <String Key="RiftWeaponBuffDesc_170">ดูดเลือดกายภาพ +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">ดูดเลือดเวทมนตร์ +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">พลังป้องกัน +{0}</String>

@@ -1,4 +1,4 @@
-<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
+<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -951,8 +951,8 @@ Erhöht MP zu Beginn der Runde aller Verbündeten mit 5★ oder mehr</String>
   <String Key="AddDefPerCount">Verringert den erlittenen Schaden um {0} für jeden Helden auf dem Schlachtfeld
 (Max. {1})</String>
   <String Key="AddDefPerCount_Piece">Der erlittene Schaden verringert sich, je mehr Helden auf dem Schlachtfeld platziert sind.</String>
-  <String Key="AtkPerByRange">Verursachter Schaden von Normalangriffen/Fähigkeiten +{0} pro Feld Entfernung zum Ziel (max. Distanz {1})</String>
-  <String Key="AtkPerByRange_Piece">Je weiter das Ziel von Normalangriffen/Fähigkeiten entfernt ist, desto höher ist der verursachte Schaden</String>
+  <String Key="AtkPerByRange">Reichweite aller Helden + 1, Verursachter Schaden von Normal-/Skill-Angriffen +{0} pro Distanz zum Ziel (max. Entfernung {1})</String>
+  <String Key="AtkPerByRange_Piece">Reichweite aller Helden + 1, Verursachter Schaden von Normal-/Skill-Angriffen steigt mit der Entfernung zum Ziel</String>
   <String Key="ArtifactName_100">Magiestaub</String>
   <String Key="ArtifactDesc_100">Ihr könnt Magiestaub durch das Einschmelzen von Relikten erhalten.</String>
   <String Key="ArtifactName_10000">Kaiserliches Großschwert</String>
@@ -1241,8 +1241,11 @@ Möchtet Ihr sie Euch ansehen?</String>
   <String Key="ItemName_10020">Truppenerweiterung</String>
   <String Key="ItemDesc_10020">Erweitert die Truppen um 1.</String>
   <String Key="ItemName_10030">+5 Silber</String>
+  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">+10 Silber</String>
+  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">+20 Silber</String>
+  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">Ehrenmedaille</String>
   <String Key="ItemDesc_10040">Befördert einen zufälligen Helden auf dem Schlachtfeld um 1.</String>
   <String Key="ItemName_10050">Premium Helden Beschwörungsrolle
@@ -11684,6 +11687,7 @@ Schon der Anblick beruhigt Geist und Körper.</String>
   <String Key="AccessorySynergyName_9">Mondlicht</String>
   <String Key="AccessorySynergyName_9_Pre">Mondlichts</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;Gesamt-Zaubermacht {0} %&lt;/color&gt;, Gesamt-ANG +{1} %</String>
+  <String Key="AccessorySynergyDesc_10091">Reichweite +{0}, Phys.-Kritischer Schaden +{2}% je {1} Reichweite (max. 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Beginn der Runde {0} Sek. verborgen, nach {1} Sek. Phys.-Kritische Trefferchance +{2} %</String>
   <String Key="InventoryItemName_5010">Mondlichts-Accessoire Auswahltruhe</String>
   <String Key="ShopItemName_41012">Zufälliges Mondlicht-Accessoire</String>
@@ -12636,7 +12640,7 @@ Möchtest du zu diesem Ort wechseln?</String>
   <String Key="RiftWeaponBuffDesc_130">Verursacht nach Verwendung der Fähigkeit an 3 Gegnern Spezialschaden in Höhe von {0} % des Normal-ANG, wenn dieser trifft</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} Phys.-Widerstand</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} Zauber-Widerstand</String>
-  <String Key="RiftWeaponBuffDesc_160">Bewegungsgeschwindigkeit +{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">Reichweite +{0}</String>
   <String Key="RiftWeaponBuffDesc_170">+{0} % Phys. Lebensraub</String>
   <String Key="RiftWeaponBuffDesc_180">+{0} % Zauber Lebensraub</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} Widerstand</String>

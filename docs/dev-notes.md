@@ -1396,7 +1396,57 @@ not do. For now, friendly matches count toward score like regular matches.
   verification found 1,316 prefabs, 1,352 `Unit_*.png` textures, and 279
   illustrations. It has no imported C# stubs or DLL plugins.
 
-### Workstation disk hygiene for Unity exports (2026-08-30)
+### Official v173.1.00 XAPK → AssetRipper Unity project, FULL 81-bundle export (2026-09-24)
+
+The `atlas is not the same as mappedAtlas` failure on a full input is a known
+AssetRipper bug (issue #740, Skul) — **not** a reason to drop the 64
+`spriteatlases_assets_atlas_*` bundles. The fix (PR #2318, still unmerged at
+2.0.0) is 2 source files; Recipe:
+
+- **Source + patch.** Clone AssetRipper at commit `1ac666f4` (= v2.0.0) to
+  `/home/nowl/AssetRipper-2318/` and apply PR #2318 by hand:
+  `Source/AssetRipper.Processing/Textures/SpriteInformationObject.cs` (drop the
+  `throw` when the same sprite is mapped by two different atlas instances) and
+  `SpriteProcessor.cs` (prefer the direct atlas mapping). Build with
+  `-p:PublishAot=false` (JIT; no clang/AOT needed) → `out-free/AssetRipper.GUI.Free`.
+- **The built binary has NO `--cli`.** Public source `Arguments.cs` only parses
+  Port/Log/LogPath/LocalWebFiles/Headless — the `CliRunner` exists only in the
+  rg-toolkit binary build, do not pass it `--cli`. Write a wrapper instead:
+  `/tmp/opencode/arcli` (`Program.cs` calls `GameFileLoader.LoadAndProcess` +
+  `ExportUnityProject` with `Headless=true`, `ScriptContentLevel.Level0`; run via
+  `dotnet bin/Release/net10.0/arcli.dll <input> <output>`). `dotnet 10.0.112` available.
+- **Input = full 81 bundles** from `base_assets.apk`: the 17 content bundles
+  (`characters`, `prefabs`, `sprites`, `illusts`, `shaders`, `*_unitybuiltinshaders_*`,
+  `storymodedata_assets_all`, …) **plus all 64** `spriteatlases_assets_atlas_*`
+  (accessoryicon…unitrelateduis, ui_*), plus `assets/bin/Data`. Staging:
+  `/tmp/opencode/kgc_v1731_input/`. Run under `ulimit -n 16384`; export to
+  `/home` (NOT `/tmp` — tmpfs is 7.7G and runs dry mid-export, EXIT=134).
+- **Output** (gitignored): `unity/king-god-castle-v173.1.00-ExportedProject/
+  ExportedProject/Assets`. Logs: `/tmp/opencode/ar_v1731_fixed.log` (success,
+  EXIT=0) vs `ar_v1731_full.log` (pre-patch atlas crash). Export adds one layer:
+  root output contains `ExportedProject/Assets` + `AuxiliaryFiles`.
+- **Verification (post-patch, all 81 bundles):**
+  - 168 `sactx-*` atlas textures exported as PNG (e.g. `Texture2D/sactx-0-2048x2048-
+    Uncompressed-UI_Icons-8aee2437.png` = the UI_Icons atlas). Pre-patch/atlasless
+    export had zero. All 50 distinct `m_AtlasTags` found in sprites have a
+    matching sactx texture — no atlas pixel data missing.
+  - **56,294 / 58,034 sprites (97%)** have valid `m_RD.texture` (atlas-packed
+    sprites now bind to their atlas texture; `InventoryItem_3302.asset` →
+    `m_RD.texture {guid: 2e1d1b1d…}` = the UI_Icons sactx PNG, previously `fileID: 0`).
+  - The remaining 1,740 with `m_RD.texture: {fileID: 0}` all carry a non-empty
+    `m_RenderDataKey` + `m_AtlasTags` — they are atlas-packed sprites whose
+    texture lives in the SpriteAtlas `RenderDataMap`, not in the sprite. Their
+    pixel data IS in the exported sactx PNG. AssetRipper clears `m_SpriteAtlas`
+    (`SpriteProcessor`) after processing and only back-fills `m_RD.texture` when
+    it re-derives the packed-sprite texture, which fails for sprites serialized
+    *inside* an atlas bundle (e.g. `Sprite/HPBar_Rework_04.asset`, atlas
+    `UnitRelatedUIs`). This is a Unity-serialization artifact, not data loss;
+    a textures-`fileID: 0` count must regex the `m_RD:` block only (`m_AtlasRD:
+    texture: 0` is normal — raw grep counts 32,637 false positives).
+  - Counts vs the atlasless export: Textures 6,125 → 6,192 PNG; AudioClips 1,608
+    and AnimationClips 4,372 / Prefabs 6,068 unchanged. `Sprite/<name>_0.asset`
+    files are name-collision variants (same-master sprite from a second bundle)
+    and often hold the recoverable texture twin.
 
 - `/home` and the KGC worktree share `/dev/nvme0n1p3`; freeing `/tmp` or `/var`
   does not increase the space reported to Unity for this project. Prioritize

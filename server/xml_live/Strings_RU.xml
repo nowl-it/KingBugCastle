@@ -1,4 +1,4 @@
-<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
+<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -949,8 +949,8 @@
   <String Key="AddDefPerCount">Уменьш. получаемого урона на {0} за каждого размещенного героя
 (Макс. до {1})</String>
   <String Key="AddDefPerCount_Piece">Чем больше размещенных героев, тем меньше получаемый урон</String>
-  <String Key="AtkPerByRange">Наносимый урон обычных атак/навыков +{0} за каждую клетку расстояния до цели (макс. расстояние {1})</String>
-  <String Key="AtkPerByRange_Piece">Чем дальше цель обычных атак/навыков, тем выше наносимый урон</String>
+  <String Key="AtkPerByRange">Длина атаки всех Героев +1, Нанос. урон обычных атак/навыков +{0} за каждую ед. расстояния до цели (макс. расстояние {1})</String>
+  <String Key="AtkPerByRange_Piece">Длина атаки всех Героев +1, Нанос. урон обычных атак/навыков растет с расстоянием до цели</String>
   <String Key="ArtifactName_100">Мистический порошок</String>
   <String Key="ArtifactDesc_100">Мистический порошок, который вы сможете получить при разборе реликвий.</String>
   <String Key="ArtifactName_10000">Великий меч империи</String>
@@ -1239,8 +1239,11 @@
   <String Key="ItemName_10020">Увеличение отряда</String>
   <String Key="ItemDesc_10020">Отряд был увеличен на 1.</String>
   <String Key="ItemName_10030">+5 серебряных монет</String>
+  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">+10 серебряных монет</String>
+  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">+20 серебряных монет</String>
+  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">Медаль за боевые заслуги</String>
   <String Key="ItemDesc_10040">Случайным образом увеличивает показатель звезд на 1 для героя, находящегося на поле.</String>
   <String Key="ItemName_10050">Могущественный свиток призыва героя (2 р.)</String>
@@ -11697,6 +11700,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="AccessorySynergyName_9">лунного света</String>
   <String Key="AccessorySynergyName_9_Pre">лунного света</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;Общ. Маг. АТК {0}%&lt;/color&gt;, общ. АТК +{1}%</String>
+  <String Key="AccessorySynergyDesc_10091">Длина атаки +{0}, Крит. физ. урон +{2}% за каждые {1} Длины атаки (макс. 80%)</String>
   <String Key="AccessorySynergyDesc_10092">В начале битвы скрытность на {0} сек., через {1} сек. шанс физ. крита +{2}%</String>
   <String Key="InventoryItemName_5010">Сундук выбора с аксессуарами лунного света</String>
   <String Key="ShopItemName_41012">Случ. аксессуар лунного света</String>
@@ -12649,7 +12653,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="RiftWeaponBuffDesc_130">После использования навыка при попадании обычн. уроном наносит {0}% особ. урона 3 целям</String>
   <String Key="RiftWeaponBuffDesc_140">Физ. ЗЩТ +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">Маг. ЗЩТ +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">Скорость передвижения +{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">Длина атаки +{0}</String>
   <String Key="RiftWeaponBuffDesc_170">Физ. вампиризм +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">Маг. вампиризм +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">ЗЩТ +{0}</String>

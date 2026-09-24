@@ -1,4 +1,4 @@
-<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
+<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -936,8 +936,8 @@ Atualiza a loja 1 vez após pagar Prata ao Vendedor Ambulante</String>
   <String Key="AddDefPerCount">-{0} de dano sofrido para cada Herói alocado
 (Máx. de {1})</String>
   <String Key="AddDefPerCount_Piece">- dano sofrido quanto mais Heróis alocados</String>
-  <String Key="AtkPerByRange">Dano causado por ataques normais/de habilidade +{0} por cada casa de distância até o alvo (distância máx. {1})</String>
-  <String Key="AtkPerByRange_Piece">Quanto mais longe estiver o alvo de ataques normais/de habilidade, maior o Dano causado</String>
+  <String Key="AtkPerByRange">Alcance de todos os Heróis + 1, Dano caus. por ataques normais/de habilidade +{0} por cada ponto de distância até o alvo (distância máxima {1})</String>
+  <String Key="AtkPerByRange_Piece">Alcance de todos os Heróis + 1, Dano caus. por ataques normais/de habilidade aumenta com a distância até o alvo</String>
   <String Key="ArtifactName_100">Pó Misterioso</String>
   <String Key="ArtifactDesc_100">Um pó misterioso obtido ao triturar relíquias.</String>
   <String Key="ArtifactName_10000">Espada do Império</String>
@@ -1224,8 +1224,11 @@ Deseja ver?</String>
   <String Key="ItemName_10020">Expansão de Capacidade</String>
   <String Key="ItemDesc_10020">Expande a capacidade em 1.</String>
   <String Key="ItemName_10030">+5 de Prata</String>
+  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">+10 de Prata</String>
+  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">+20 de Prata</String>
+  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">Medalha de Honra</String>
   <String Key="ItemDesc_10040">Aumenta 1 ★ de um Herói aleatório no campo de batalha.</String>
   <String Key="ItemName_10050">Pergaminho de Herói Superior (2x)</String>
@@ -11631,6 +11634,7 @@ Relaxa o corpo e a mente só de olhá-lo.</String>
   <String Key="AccessorySynergyName_9">Luar</String>
   <String Key="AccessorySynergyName_9_Pre">do Luar</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;{0}% de poder de feitiço final&lt;/color&gt; e +{1}% de ataque final</String>
+  <String Key="AccessorySynergyDesc_10091">Alcance +{0}, Dano Crítico Físico +{2}% por cada {1} de Alcance (máx. 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Ativa modo furtivo durante {0}s no começo da batalha e +{2}% de chance de crítico físico após {1}s</String>
   <String Key="InventoryItemName_5010">Baú de Seleção de Acessório do Luar</String>
   <String Key="ShopItemName_41012">Acessório do Luar Aleatório</String>
@@ -12583,7 +12587,7 @@ Use “Bilhete de Remoção de Impossibilidade de Melhoria de Equipamento da Rup
   <String Key="RiftWeaponBuffDesc_130">Causa {0}% de dano especial a 3 inimigos ao infligir dano normal após usar habilidade</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} de defesa física</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} de defesa de feitiço</String>
-  <String Key="RiftWeaponBuffDesc_160">Velocidade de Movimento +{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">Alcance +{0}</String>
   <String Key="RiftWeaponBuffDesc_170">+{0}% de absorção física</String>
   <String Key="RiftWeaponBuffDesc_180">+{0}% de absorção de feitiço</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} de defesa</String>

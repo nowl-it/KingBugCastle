@@ -12489,7 +12489,7 @@
     </ShopItem>
 
     <ShopItem ID='1694'>
-        <Name>SpecialPackage_1694</Name>
+        <Name>SpecialPackage_1683</Name>
         <Holiday>TreasurePickUp30043</Holiday>
         <NameComment>알베론 비타코르테 출시 보구 1</NameComment>
         <Type>EventPackage</Type>
@@ -12514,7 +12514,7 @@
     </ShopItem>
 
     <ShopItem ID='1695'>
-        <Name>SpecialPackage_1695</Name>
+        <Name>SpecialPackage_1684</Name>
         <Holiday>TreasurePickUp30043</Holiday>
         <NameComment>알베론 비타코르테 출시 보구 2</NameComment>
         <Type>EventPackage</Type>
@@ -12539,7 +12539,7 @@
     </ShopItem>
 
     <ShopItem ID='1696'>
-        <Name>SpecialPackage_1696</Name>
+        <Name>SpecialPackage_1685</Name>
         <Holiday>TreasurePickUp30043</Holiday>
         <NameComment>알베론 비타코르테 출시 보구 3</NameComment>
         <Type>EventPackage</Type>

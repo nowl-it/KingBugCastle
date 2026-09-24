@@ -957,8 +957,8 @@
   <String Key="AddDefPerCount">배치된 영웅당 받는 피해량이 {0} 감소
 (최대 {1})</String>
   <String Key="AddDefPerCount_Piece">배치된 영웅이 많을수록 받는 피해량 감소</String>
-  <String Key="AtkPerByRange">일반/스킬 공격 대상과의 거리당 주는 피해량 {0} 증가 (최대 거리 {1})</String>
-  <String Key="AtkPerByRange_Piece">일반/스킬 공격 대상이 멀수록 주는 피해량 증가</String>
+  <String Key="AtkPerByRange">모든 영웅 사거리 + 1, 일반/스킬 공격 대상과의 거리당 주는 피해량 {0} 증가 (최대 거리 {1})</String>
+  <String Key="AtkPerByRange_Piece">모든 영웅 사거리 + 1, 일반/스킬 공격 대상이 멀수록 주는 피해량 증가</String>
   <String Key="ArtifactName_100">신비한 가루</String>
   <String Key="ArtifactDesc_100">유물을 분해하여 얻을 수 있는 신비한 가루</String>
   <String Key="ArtifactName_10000">제국의 대검</String>
@@ -6889,8 +6889,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArtifactName_14020">드워프 조준경</String>
   <String Key="ArtifactDesc_14020">드워프들의 기술이 집약된 조준경.
 사용자는 더 멀리, 더 정확히 공격할 수 있지만, 무거워서 들고다닐 수는 없습니다.</String>
-  <String Key="MoveStopTimeDesc_Piece">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 +4, 저격 장소에서 처음으로 벗어나기 전까지 처음 및 매 5회 일반 피해의 주는 피해량 증가</String>
-  <String Key="MoveStopTimeDesc">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 +{1}, 저격 장소에서 처음으로 벗어나기 전까지 처음 및 매 5회마다 일반 피해의 주는 피해량 +{0}%.</String>
+  <String Key="MoveStopTimeDesc_Piece">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 획득, 일정 시간 &lt;color=#f33&gt;이동 불가&lt;/color&gt;, 사거리 +3, 처음 및 매 5회마다 일반 피해의 주는 피해량 증가</String>
+  <String Key="MoveStopTimeDesc">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 +{2}, {0}초간 &lt;color=#f33&gt;이동 불가&lt;/color&gt;, 사거리 +3, 처음 및 매 5회마다 일반 피해의 주는 피해량 +{1}%.</String>
   <String Key="ColosseumBanned">격전의 전장 시즌 이용 제한</String>
   <String Key="GachaName_1036">웃음기 없는 미소</String>
   <String Key="Name_Potential_10560_3">고양</String>
@@ -11718,6 +11718,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AccessorySynergyName_9">월광</String>
   <String Key="AccessorySynergyName_9_Pre">월광의</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;최종 주문력 {0}%&lt;/color&gt;, 최종 공격력 +{1}%</String>
+  <String Key="AccessorySynergyDesc_10091">사거리 +{0}, 보유한 사거리 {1}마다 물리 치명타 피해량 +{2}%(최대 80%)</String>
   <String Key="AccessorySynergyDesc_10092">전투 시작 시 {0}초간 은신, {1}초 후 물리 치명타 확률 +{2}%</String>
   <String Key="InventoryItemName_5010">월광의 장신구 선택 상자</String>
   <String Key="ShopItemName_41012">무작위 월광 장신구</String>
@@ -12670,7 +12671,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="RiftWeaponBuffDesc_130">스킬 사용 후 일반 피해 시 3명에게 {0}%의 특수 피해</String>
   <String Key="RiftWeaponBuffDesc_140">물리 방어력 +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">주문 방어력 +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">이동속도 +{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">사거리 +{0}</String>
   <String Key="RiftWeaponBuffDesc_170">물리 흡혈 +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">주문 흡혈 +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">방어력 +{0}</String>

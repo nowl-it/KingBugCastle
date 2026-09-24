@@ -1,4 +1,4 @@
-<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
+<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81fb-a733-cc6e02547a98</String>
   <String Key="Title">King God Castle</String>
@@ -950,8 +950,8 @@ cho 3 anh hùng có cấp ★ cao nhất: {0}</String>
   <String Key="AddDefPerCount">Sát thương phải nhận trên mỗi anh hùng đã bố trí -{0}
 (tối đa {1})</String>
   <String Key="AddDefPerCount_Piece">Bố trí càng nhiều anh hùng sát thương phải nhận càng thấp</String>
-  <String Key="AtkPerByRange">ST gây ra của đòn đánh thường/kỹ năng tăng {0} theo mỗi ô khoảng cách đến mục tiêu (khoảng cách tối đa {1})</String>
-  <String Key="AtkPerByRange_Piece">Mục tiêu của đòn đánh thường/kỹ năng càng xa, ST gây ra càng tăng</String>
+  <String Key="AtkPerByRange">Phạm vi tấn công của tất cả Anh Hùng + 1, Sát thương gây ra bởi đòn đánh thường/kỹ năng tăng {0} theo mỗi điểm khoảng cách tới mục tiêu (khoảng cách tối đa {1})</String>
+  <String Key="AtkPerByRange_Piece">Phạm vi tấn công của tất cả Anh Hùng + 1, Sát thương gây ra bởi đòn đánh thường/kỹ năng tăng theo khoảng cách tới mục tiêu</String>
   <String Key="ArtifactName_100">Bột Thần Bí</String>
   <String Key="ArtifactDesc_100">Bột Thần Bí nhận được khi phân hủy Cổ Vật</String>
   <String Key="ArtifactName_10000">Đại Kiếm Đế Quốc</String>
@@ -1240,8 +1240,11 @@ Giúp tấn công phủ đầu từ vị trí nằm ngoài tầm đánh của k�
   <String Key="ItemName_10020">Tăng Cường Binh Lực</String>
   <String Key="ItemDesc_10020">Binh lực tăng thêm 1.</String>
   <String Key="ItemName_10030">Bạc +5</String>
+  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">Bạc +10</String>
+  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">Bạc +20</String>
+  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">Huân Chương Chiến Công</String>
   <String Key="ItemDesc_10040">Tăng 1 cấp ★ cho anh hùng ngẫu nhiên ở chiến trường.</String>
   <String Key="ItemName_10050">Thư Triệu Hồi Anh Hùng Cao Cấp (2 lần)</String>
@@ -11691,6 +11694,7 @@ Chỉ cần nhìn vào cũng khiến tâm hồn và thể xác trở nên bình 
   <String Key="AccessorySynergyName_9">Ánh Trăng</String>
   <String Key="AccessorySynergyName_9_Pre">Ánh Trăng</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;Tổng lực phép {0}%&lt;/color&gt;, tổng lực tấn công +{1}%</String>
+  <String Key="AccessorySynergyDesc_10091">Phạm vi tấn công +{0}, Sát thương chí mạng vật lý +{2}% mỗi {1} phạm vi tấn công (tối đa 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Khi khai trận, ẩn thân {0} giây, sau {1} giây, xác suất chí mạng vật lý +{2}%</String>
   <String Key="InventoryItemName_5010">Rương Chọn Trang Sức Ánh Trăng</String>
   <String Key="ShopItemName_41012">Trang Sức Ánh Trăng Ngẫu Nhiên</String>
@@ -12643,7 +12647,7 @@ Có thể dùng "Đá Quý" hoặc "Thẻ Gỡ Chặn Cường Hóa Trang Bị K
   <String Key="RiftWeaponBuffDesc_130">Gây {0}% sát thương đặc biệt cho 3 mục tiêu khi đánh trúng bằng sát thương thường sau khi dùng kỹ năng</String>
   <String Key="RiftWeaponBuffDesc_140">Lực phòng thủ vật lý +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">Lực phòng thủ phép +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">Tốc độ di chuyển +{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">Phạm vi tấn công +{0}</String>
   <String Key="RiftWeaponBuffDesc_170">Hút máu vật lý +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">Hút máu phép +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">Lực phòng thủ +{0}</String>

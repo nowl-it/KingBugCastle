@@ -1,4 +1,4 @@
-<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
+<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -960,8 +960,8 @@ when dismissing Tier 1 hero</String>
   <String Key="AddDefPerCount">Deduct damage taken per hero on the battlefield by {0}
 (max {1})</String>
   <String Key="AddDefPerCount_Piece">The more heroes on the battlefield, the less damage they take.</String>
-  <String Key="AtkPerByRange">Damage Dealt by Normal/Skill attacks +{0} per tile of distance to the target (max. distance {1})</String>
-  <String Key="AtkPerByRange_Piece">The farther the target of Normal/Skill attacks, the higher the Damage Dealt</String>
+  <String Key="AtkPerByRange">All Heroes' Range +1, Damage Dealt by Normal/Skill Attacks +{0} per point of distance to the target (max. distance {1})</String>
+  <String Key="AtkPerByRange_Piece">All Heroes' Range +1, Damage Dealt by Normal/Skill Attacks increases with distance to the target</String>
   <String Key="ArtifactName_100">Magical Dust</String>
   <String Key="ArtifactDesc_100">Magical Dust that can be obtained by dismantling Relics.</String>
   <String Key="ArtifactName_10000">Great Sword of the Empire</String>
@@ -1251,8 +1251,11 @@ Do you want to check?</String>
   <String Key="ItemName_10020">Expand Troop</String>
   <String Key="ItemDesc_10020">Expand the Troop by 1</String>
   <String Key="ItemName_10030">+5 Silver</String>
+  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">+10 Silver</String>
+  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">+20 Silver</String>
+  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">Medal of Honor</String>
   <String Key="ItemDesc_10040">Upgrade a random Hero’s Tier on the field by 1</String>
   <String Key="ItemName_10050">Premium Hero Scroll
@@ -11691,6 +11694,7 @@ Simply gazing upon it brings peace to the mind and body.</String>
   <String Key="AccessorySynergyName_9">Moonlight</String>
   <String Key="AccessorySynergyName_9_Pre">Moonlit</String>
   <String Key="AccessorySynergyDesc_10090">+{1}% final ATK, &lt;color=#f33&gt;{0}% final Spell Power&lt;/color&gt;</String>
+  <String Key="AccessorySynergyDesc_10091">Range +{0}, Physical CRIT Damage +{2}% per {1} Range (max. 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Hides for {0} sec at the beginning of the battle, +{2}% Physical CRIT Chance after {1} sec</String>
   <String Key="InventoryItemName_5010">Moonlit Accessory Selection Chest</String>
   <String Key="ShopItemName_41012">Random Moonlight Accessory</String>
@@ -12643,7 +12647,7 @@ You can use "Gems" or "Rift Equipment Unupgradable Status Removal Ticket" to res
   <String Key="RiftWeaponBuffDesc_130">Deals {0}% special damage to 3 targets upon dealing normal damage after using skill</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} Physical DEF</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} Spell DEF</String>
-  <String Key="RiftWeaponBuffDesc_160">Movement Speed +{0}%</String>
+  <String Key="RiftWeaponBuffDesc_160">Range +{0}</String>
   <String Key="RiftWeaponBuffDesc_170">+{0}% Physical HP Drain</String>
   <String Key="RiftWeaponBuffDesc_180">+{0}% Spell HP Drain</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} DEF</String>
