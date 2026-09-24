@@ -1,15 +1,36 @@
 {
-  "updatedAt": "2026-09-24T06:18:57.586612",
+  "updatedAt": "2026-09-24T06:51:38.203967",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
-  "totalRanked": 7,
+  "totalRanked": 9,
   "summary": {
-    "topScore": 2382,
+    "topScore": 2441,
     "top10Cutoff": 0,
-    "top100Cutoff": 2229,
+    "top100Cutoff": 2219,
     "top1Player": {
       "rank": 1,
+      "score": 2441,
+      "accountId": 6488387,
+      "userName": "King",
+      "castleName": "King",
+      "tier": 82,
+      "tierInfo": {
+        "id": 82,
+        "vi": "Thần Vương (Hạng 1)",
+        "en": "King God (Rank 1)",
+        "kr": "킹갓(1위)",
+        "icon": "Tier_08",
+        "group": "king-god",
+        "color": "#ffd700"
+      },
+      "profileIcon": 1074001,
+      "heroName": "",
+      "flagId": 15370,
+      "nameTagId": 15370
+    },
+    "top2Player": {
+      "rank": 2,
       "score": 2382,
       "accountId": 858172,
       "userName": "kc",
@@ -28,27 +49,6 @@
       "heroName": "",
       "flagId": 15370,
       "nameTagId": 70010
-    },
-    "top2Player": {
-      "rank": 2,
-      "score": 2376,
-      "accountId": 6488387,
-      "userName": "King",
-      "castleName": "King",
-      "tier": 71,
-      "tierInfo": {
-        "id": 71,
-        "vi": "Thần+ (Hạng 11~30)",
-        "en": "God+ (Rank 11~30)",
-        "kr": "갓+(11~30위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#a855f7"
-      },
-      "profileIcon": 1074001,
-      "heroName": "",
-      "flagId": 15370,
-      "nameTagId": 15370
     },
     "top3Player": {
       "rank": 3,
@@ -75,6 +75,27 @@
   "ranking": [
     {
       "rank": 1,
+      "score": 2441,
+      "accountId": 6488387,
+      "userName": "King",
+      "castleName": "King",
+      "tier": 82,
+      "tierInfo": {
+        "id": 82,
+        "vi": "Thần Vương (Hạng 1)",
+        "en": "King God (Rank 1)",
+        "kr": "킹갓(1위)",
+        "icon": "Tier_08",
+        "group": "king-god",
+        "color": "#ffd700"
+      },
+      "profileIcon": 1074001,
+      "heroName": "",
+      "flagId": 15370,
+      "nameTagId": 15370
+    },
+    {
+      "rank": 2,
       "score": 2382,
       "accountId": 858172,
       "userName": "kc",
@@ -93,27 +114,6 @@
       "heroName": "",
       "flagId": 15370,
       "nameTagId": 70010
-    },
-    {
-      "rank": 2,
-      "score": 2376,
-      "accountId": 6488387,
-      "userName": "King",
-      "castleName": "King",
-      "tier": 71,
-      "tierInfo": {
-        "id": 71,
-        "vi": "Thần+ (Hạng 11~30)",
-        "en": "God+ (Rank 11~30)",
-        "kr": "갓+(11~30위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#a855f7"
-      },
-      "profileIcon": 1074001,
-      "heroName": "",
-      "flagId": 15370,
-      "nameTagId": 15370
     },
     {
       "rank": 3,
@@ -180,6 +180,27 @@
     },
     {
       "rank": 6,
+      "score": 2234,
+      "accountId": 532218,
+      "userName": "크래시",
+      "castleName": "임페리얼",
+      "tier": 71,
+      "tierInfo": {
+        "id": 71,
+        "vi": "Thần+ (Hạng 11~30)",
+        "en": "God+ (Rank 11~30)",
+        "kr": "갓+(11~30위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#a855f7"
+      },
+      "profileIcon": -1,
+      "heroName": "",
+      "flagId": 15210,
+      "nameTagId": 70010
+    },
+    {
+      "rank": 7,
       "score": 2230,
       "accountId": 1059848,
       "userName": "KLewis",
@@ -200,7 +221,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 7,
+      "rank": 8,
       "score": 2229,
       "accountId": 6096171,
       "userName": "Renziiii",
@@ -219,6 +240,27 @@
       "heroName": "",
       "flagId": 40060,
       "nameTagId": 40060
+    },
+    {
+      "rank": 9,
+      "score": 2219,
+      "accountId": 452516,
+      "userName": "쉬드",
+      "castleName": "도천",
+      "tier": 71,
+      "tierInfo": {
+        "id": 71,
+        "vi": "Thần+ (Hạng 11~30)",
+        "en": "God+ (Rank 11~30)",
+        "kr": "갓+(11~30위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#a855f7"
+      },
+      "profileIcon": 10360,
+      "heroName": "Haerang",
+      "flagId": 50000,
+      "nameTagId": 70010
     }
   ]
 }
