@@ -4516,8 +4516,8 @@
 		<SplashRangeType>Sum</SplashRangeType>
 		<SplashRangeSum>2</SplashRangeSum>
 
-		<Damage>35</Damage>
-		<MAtkPer Target="Damage">350</MAtkPer>
+		<Damage>30</Damage>
+		<MAtkPer Target="Damage">300</MAtkPer>
 
 		<TargetType>Enemy</TargetType>
 
@@ -4553,8 +4553,8 @@
 		<Tier>2</Tier>
 		<SplashRangeType>Sum</SplashRangeType>
 		<SplashRangeSum>3</SplashRangeSum>
-		<Damage>63</Damage>
-		<MAtkPer Target="Damage">420</MAtkPer>
+		<Damage>54</Damage>
+		<MAtkPer Target="Damage">360</MAtkPer>
 		<ComboSkill>10261</ComboSkill>
 	</Skill>
 
@@ -4566,8 +4566,8 @@
 
 		<SplashRangeType>Sum</SplashRangeType>
 		<SplashRangeSum>4</SplashRangeSum>
-		<Damage>98</Damage>
-		<MAtkPer Target="Damage">490</MAtkPer>
+		<Damage>84</Damage>
+		<MAtkPer Target="Damage">420</MAtkPer>
 		<ComboSkill>10262</ComboSkill>
 	</Skill>
 
@@ -4579,8 +4579,8 @@
 		<Tier>4</Tier>
 		<SplashRangeType>Sum</SplashRangeType>
 		<SplashRangeSum>5</SplashRangeSum>
-		<Damage>140</Damage>
-		<MAtkPer Target="Damage">560</MAtkPer>
+		<Damage>120</Damage>
+		<MAtkPer Target="Damage">480</MAtkPer>
 		<ComboSkill>10263</ComboSkill>
 	</Skill>
 

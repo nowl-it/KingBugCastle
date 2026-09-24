@@ -1,4 +1,4 @@
-<Strings>
+<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">Fort KingGod</String>
@@ -962,10 +962,8 @@ lors du rappel de héros 1★</String>
   <String Key="AddDefPerCount">↓ {0} DEG subis proportionnellement au nombre de héros placés
 (-{1} max)</String>
   <String Key="AddDefPerCount_Piece">Plus il y a de héros placés, reçoit moins de DEG.</String>
-  <String Key="AtkPerByRange">Portée de tous les héros +1
-DEG infligés +{0} en proportion à la distance avec la cible ennemie d'attaque normale/compétence (distance max {1})</String>
-  <String Key="AtkPerByRange_Piece">Portée de tous les héros +1
-↑ DEG infligés en proportion à la distance avec la cible ennemie d'attaque normale/compétence</String>
+  <String Key="AtkPerByRange">DEG infligés par les attaques normales/de compétence +{0} par case de distance à la cible (distance max. {1})</String>
+  <String Key="AtkPerByRange_Piece">Plus la cible des attaques normales/de compétence est loin, plus les DEG infligés augmentent</String>
   <String Key="ArtifactName_100">Poudre fabuleuse</String>
   <String Key="ArtifactDesc_100">Poudre extraordinaire qui peut être obtenue en broyant des reliques</String>
   <String Key="ArtifactName_10000">Épée de l'empire</String>
@@ -3527,7 +3525,7 @@ Alors danse !&lt;/i&gt;</String>
   <String Key="ShopItemName_1015_Post">Pack Progression nv. 11</String>
   <String Key="ShopItemName_1016_Post">Pack Progression nv. 13</String>
   <String Key="ShopItemName_1017_Post">Pack Progression nv. 15</String>
-  <String Key="RedValve ">Red Valve</String>
+  <String Key="RedValve">Red Valve</String>
   <String Key="LilCat">LilCat</String>
   <String Key="VeryLittleBear">VeryLittleBear</String>
   <String Key="NewUnitGachaPanelNewUnit">Apparition de héros!</String>
@@ -6916,8 +6914,8 @@ génère une marque sur chaque ennemi qui amplifie les DEG de la prochaine comp�
   <String Key="ArtifactName_14020">Viseur des nains</String>
   <String Key="ArtifactDesc_14020">Un viseur réalisé par la technologie des nains.
 L'utilisateur peut attaquer une cible plus éloignée avec plus de précision, mais l'appareil n'est guère portable dû à son poids.</String>
-  <String Key="MoveStopTimeDesc_Piece">Désigne 2 cases du Champ de bataille comme postes de tireur d'élite. Les Héros déployés gagnent Parade, sont &lt;color=#f33&gt;immobiles&lt;/color&gt; pendant un certain temps, Portée +3, et leurs DEG normaux infligés augmentent au 1er coup puis tous les 5 coups</String>
-  <String Key="MoveStopTimeDesc">Désigne 2 cases du Champ de bataille comme postes de tireur d'élite. Les Héros déployés gagnent Parade +{2}, sont &lt;color=#f33&gt;immobiles&lt;/color&gt; pendant {0} sec., Portée +3, et leurs DEG normaux infligés augmentent de +{1}% au 1er coup puis tous les 5 coups.</String>
+  <String Key="MoveStopTimeDesc_Piece">Désigne deux cases du Champ de bataille comme postes de tir. Les Héros déployés gagnent Parade +4. Jusqu'à ce qu'ils quittent leur poste de tir pour la première fois, le 1er coup et chaque 5e coup de DEG normaux infligent plus de DEG</String>
+  <String Key="MoveStopTimeDesc">Désigne deux cases du Champ de bataille comme postes de tir. Les Héros déployés gagnent Parade +{1}. Jusqu'à ce qu'ils quittent leur poste de tir pour la première fois, le 1er coup et chaque 5e coup de DEG normaux infligent +{0}% de DEG.</String>
   <String Key="ColosseumBanned">Accès temporairement restreint à l'acharnement</String>
   <String Key="GachaName_1036">Sourire froid</String>
   <String Key="Name_Potential_10560_3">Exaltation</String>
@@ -10314,7 +10312,7 @@ vous pouvez obtenir les objets ci-dessous.</String>
   <String Key="ArtifactBuffDataDesc_10030_Piece">Augmentation d'INT pour tous les héros</String>
   <String Key="RankRangeFormat">Rang {0} à {1}</String>
   <String Key="Potential_10080_0">DEG subis -30% pendant l'utilisation de &lt;Souffle de feu&gt;</String>
-  <String Key="Potential_10260_2">En éliminant la cible, utilise immédiatement &lt;Coupe du dragon bleu&gt;. DEG totaux +40% lors de &lt;Coupe du dragon bleu&gt;.</String>
+  <String Key="Potential_10260_2">Lors de l'élimination, utilise instantanément &lt;Coupe du dragon bleu&gt;, DEG totaux de &lt;Coupe du dragon bleu&gt; +20%</String>
   <String Key="SkillDesc_10690_Long">Inflige à la cible {Damage} DEG d'INT de compétence pour chaque {AttackCountByMaxManaPerDesc} PM utilisés par le lanceur. Augmente les PM max du lanceur de {10695@MaxMana} à chaque utilisation de &lt;Mana croissant&gt; (cumulable {10695@MaxBuffOverlap} fois max).</String>
   <String Key="SkillName_42205">Déchaînement du sang</String>
   <String Key="SkillDesc_UI_42205">L'apôtre du sang entre en résonance avec le 'cristal de sang'. Le 'cristal de sang' devient le bénéficiaire prioritaire pour les compétences de soins utilisées par les héros sur leurs alliés, et les soins qu'il reçoit augmentent considérablement en fonction de PROTECT de ces héros. Une partie des soins reçues par le cristal de sang est conférée à tous les héros.</String>
@@ -11738,7 +11736,6 @@ Rien qu'en la contemplant, on se sent apaisé.</String>
   <String Key="AccessorySynergyName_9">Clairlune</String>
   <String Key="AccessorySynergyName_9_Pre">de clairlune</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;INT totale {0}%&lt;/color&gt;, ATQ totale +{1}%</String>
-  <String Key="AccessorySynergyDesc_10091">Portée +{0}. Pour chaque {1} portée(s) possédée(s), DEG CRIT phys. +{2}% (80% max).</String>
   <String Key="AccessorySynergyDesc_10092">Au début du combat, furtivité pendant {0} s et après {1} s, CHANCES CRIT phys. +{2}%.</String>
   <String Key="InventoryItemName_5010">Coffre d'Accessoire de clairlune au choix</String>
   <String Key="ShopItemName_41012">Accessoire de clairlune aléatoire</String>
@@ -12690,7 +12687,7 @@ Toutefois, il peut être réinitialisé au nv.15 en utilisant des Gems ou un Ré
   <String Key="RiftWeaponBuffDesc_130">Lors des DEG normaux infligés après utilisation de compétence, inflige {0}% en DEG spéciaux à 3 ennemis.</String>
   <String Key="RiftWeaponBuffDesc_140">DEF phys. +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">DEF d'INT +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">Portée +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">Vitesse de déplacement +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">Conversion DEG phys. en PV +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">Conversion DEG d'INT en PV +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">DEF +{0}</String>
@@ -18353,7 +18350,9 @@ Skin du Festival de la Lune des Moissons 2026</String>
   <String Key="SkinName_1074001">Seigneur stellaire au clair de lune Suha</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Lapins lunaires ! Vous savez bien qu'il ne faut pas faire trop de bêtises juste parce que vous êtes redescendus après un an, n'est-ce pas ? Amusez-vous bien, tout le monde !&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Offres du Festival de la Lune des Moissons</String>
-  <String Key="SeasonalEventNumberFormat">Événement de la saison {0}</String>
-  <String Key="SeasonalEvent">Événement de saison</String>
-  <String Key="SeasonalEventCeilFormat">Pick-up de la saison {0}</String>
+  <String Key="UnitGachaPickupCountFormat">&lt;color=#FFD247&gt;Héros en vedette garanti&lt;/color&gt; après &lt;color=#FFD247&gt;{0}&lt;/color&gt; Invocations</String>
+  <String Key="PlayReward_Semi1">Récompense de 1re moitié</String>
+  <String Key="PlayReward_Semi2">Récompense de 2de moitié</String>
+  <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; parties</String>
+  <String Key="BlessedTreasure">Trésor béni</String>
 </Strings>

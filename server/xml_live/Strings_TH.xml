@@ -1,4 +1,4 @@
-<Strings>
+<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -949,10 +949,8 @@
   <String Key="AddDefPerCount">ลดดาเมจที่ได้รับต่อฮีโร่ที่จัดไว้คนละ {0} หน่วย
 (สูงสุด {1} หน่วย)</String>
   <String Key="AddDefPerCount_Piece">ยิ่งมีฮีโร่ที่ถูกจัดไว้มากก็จะยิ่งลดดาเมจที่ได้รับ</String>
-  <String Key="AtkPerByRange">ระยะโจมตีของฮีโร่ทั้งหมด +1,
-เพิ่มดาเมจ {0} หน่วยตามระยะห่างของเป้าหมายการโจมตีธรรมดา/สกิล (ระยะสูงสุด{1})</String>
-  <String Key="AtkPerByRange_Piece">ระยะโจมตีของฮีโร่ +1,
-ยิ่งเป้าหมายการโจมตีธรรมดา/สกิลอยู่ไกลดาเมจที่มอบให้ก็จะยิ่งแรงขึ้น</String>
+  <String Key="AtkPerByRange">ดาเมจที่มอบจากการโจมตีปกติ/สกิล +{0} ต่อทุก 1 ช่องที่ห่างจากเป้าหมาย (ระยะสูงสุด {1})</String>
+  <String Key="AtkPerByRange_Piece">ยิ่งเป้าหมายของการโจมตีปกติ/สกิลอยู่ไกล ดาเมจที่มอบยิ่งเพิ่มขึ้น</String>
   <String Key="ArtifactName_100">ผงวิเศษ</String>
   <String Key="ArtifactDesc_100">ผงวิเศษที่สามารถรับได้จากการแยกชิ้นส่วนสมบัติ</String>
   <String Key="ArtifactName_10000">ดาบใหญ่แห่งจักรวรรดิ</String>
@@ -3485,7 +3483,7 @@
   <String Key="ShopItemName_1015_Post">แพ็กเกจเติบโตเลเวล 11</String>
   <String Key="ShopItemName_1016_Post">แพ็กเกจเติบโตเลเวล 13</String>
   <String Key="ShopItemName_1017_Post">แพ็กเกจเติบโตเลเวล 15</String>
-  <String Key="RedValve ">Red Valve</String>
+  <String Key="RedValve">Red Valve</String>
   <String Key="LilCat">LilCat</String>
   <String Key="VeryLittleBear">VeryLittleBear</String>
   <String Key="NewUnitGachaPanelNewUnit">รับฮีโร่!</String>
@@ -6865,8 +6863,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArtifactName_14020">สโคปคนแคระ</String>
   <String Key="ArtifactDesc_14020">สโคปที่รวบรวมเทคโนโลยีของคนแคระเอาไว้
 ผู้ใช้สามารถโจมตีได้ไกลขึ้นและแม่นยำยิ่งขึ้น แต่มันมีน้ำหนักมากดังนั้นจึงไม่สามารถบรรทุกได้</String>
-  <String Key="MoveStopTimeDesc_Piece">กำหนด 2 ช่องในสนามรบเป็นจุดซุ่มยิง ฮีโร่ที่วางจะได้รับป้องกันเด็ดขาด, &lt;color=#f33&gt;เคลื่อนที่ไม่ได้&lt;/color&gt; ชั่วระยะเวลาหนึ่ง, ระยะโจมตี +3 และดาเมจธรรมดาที่มอบจะเพิ่มขึ้นในการโจมตีครั้งแรกและทุกการโจมตีครั้งที่ 5</String>
-  <String Key="MoveStopTimeDesc">กำหนด 2 ช่องในสนามรบเป็นจุดซุ่มยิง ฮีโร่ที่วางจะได้รับป้องกันเด็ดขาด +{2}, &lt;color=#f33&gt;เคลื่อนที่ไม่ได้&lt;/color&gt; เป็นเวลา {0} วินาที, ระยะโจมตี +3 และดาเมจธรรมดาที่มอบ +{1}% ในการโจมตีครั้งแรกและทุกการโจมตีครั้งที่ 5</String>
+  <String Key="MoveStopTimeDesc_Piece">กำหนด 2 ช่องในสนามรบเป็นจุดซุ่มยิง ฮีโร่ที่วางได้รับ ป้องกันเด็ดขาด +4 จนกว่าจะออกจากจุดซุ่มยิงเป็นครั้งแรก ดาเมจธรรมดาฮิตแรกและทุกๆ 5 ฮิตจะมอบดาเมจเพิ่มขึ้น</String>
+  <String Key="MoveStopTimeDesc">กำหนด 2 ช่องในสนามรบเป็นจุดซุ่มยิง ฮีโร่ที่วางได้รับ ป้องกันเด็ดขาด +{1} จนกว่าจะออกจากจุดซุ่มยิงเป็นครั้งแรก ดาเมจธรรมดาฮิตแรกและทุกๆ 5 ฮิตจะมอบดาเมจ +{0}%.</String>
   <String Key="ColosseumBanned">จำกัดการใช้งานสนามรบต่อสู้ดุเดือด</String>
   <String Key="GachaName_1036">รอยยิ้มที่ไร้เสียงหัวเราะ</String>
   <String Key="Name_Potential_10560_3">ยกระดับ</String>
@@ -10259,7 +10257,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArtifactBuffDataDesc_10030_Piece">เพิ่มเวทมนตร์ของฮีโร่ทั้งหมด</String>
   <String Key="RankRangeFormat">ลำดับที่ {0} - {1}</String>
   <String Key="Potential_10080_0">ลดดาเมจที่ได้รับ 30% ขณะใช้ &lt;ลมเปลวไฟ&gt;</String>
-  <String Key="Potential_10260_2">เมื่อกำจัดศัตรูจะใช้งาน &lt;มังกรฟ้าสังหาร&gt; ทันที ขยายดาเมจสุดท้ายของ &lt;มังกรฟ้าสังหาร&gt; +40%</String>
+  <String Key="Potential_10260_2">เมื่อกำจัดศัตรู ใช้ &lt;มังกรฟ้าสังหาร&gt; ทันที, ดาเมจสุดท้ายของ &lt;มังกรฟ้าสังหาร&gt; +20%</String>
   <String Key="SkillDesc_10690_Long">สร้างดาเมจสกิลเวทมนตร์ {Damage} แก่เป้าหมายซ้ำทุกครั้งที่ใช้มานา {AttackCountByMaxManaPerDesc} เมื่อใช้ &lt;พลังเวทที่เติบโต&gt; มานาสูงสุดจะเพิ่มขึ้นทีละ {10695@MaxMana} ทุกครั้ง (ซ้อนทับได้สูงสุด {10695@MaxBuffOverlap} ครั้ง)</String>
   <String Key="SkillName_42205">ความโกรธแห่งเลือด</String>
   <String Key="SkillDesc_UI_42205">อัครสาวกแห่งเลือดจะสั่นพ้องกับ 'คริสตัลแห่งเลือด' โดย 'คริสตัลแห่งเลือด' จะถูกกำหนดเป็นเป้าหมายหลักสำหรับสกิลการรักษาผู้อื่นที่เหล่าฮีโร่ใช้ และการรักษาที่ได้รับจะเพิ่มขึ้นอย่างมากตามการพิทักษ์ ฮีโร่ทุกคนจะได้รับการรักษาตามสัดส่วนของการรักษาคริสตัลแห่งเลือด</String>
@@ -11683,7 +11681,6 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AccessorySynergyName_9">แสงจันทร์</String>
   <String Key="AccessorySynergyName_9_Pre">แห่งแสงจันทร์</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;เวทมนตร์สุดท้าย {0}%&lt;/color&gt;, พลังโจมตีสุดท้าย +{1}%</String>
-  <String Key="AccessorySynergyDesc_10091">ระยะโจมตี +{0}, ดาเมจคริติคอลกายภาพ +{2}% สำหรับทุกระยะโจมตี {1} ที่มี (สูงสุด 80%)</String>
   <String Key="AccessorySynergyDesc_10092">เมื่อเริ่มการต่อสู้ หลบซ่อน {0} วินาที, อัตราคริติคอลกายภาพ +{2}% หลัง {1} วินาที</String>
   <String Key="InventoryItemName_5010">หีบเลือกเครื่องประดับแห่งแสงจันทร์</String>
   <String Key="ShopItemName_41012">เครื่องประดับแสงจันทร์แรนด้อม</String>
@@ -12636,7 +12633,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="RiftWeaponBuffDesc_130">เมื่อดาเมจธรรมดาโดนเป้าหลังใช้สกิล จะทำดาเมจพิเศษ {0}% แก่ 3 ราย</String>
   <String Key="RiftWeaponBuffDesc_140">พลังป้องกันกายภาพ +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">พลังป้องกันเวทมนตร์ +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">เพิ่มระยะโจมตี +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">ความเร็วเคลื่อนที่ +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">ดูดเลือดกายภาพ +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">ดูดเลือดเวทมนตร์ +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">พลังป้องกัน +{0}</String>
@@ -18296,7 +18293,9 @@ D = 1 ~ 4</String>
   <String Key="SkinName_1074001">จ้าวดาราใต้แสงจันทร์ ซูฮา</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;เหล่ากระต่ายพระจันทร์! รู้ใช่ไหมว่า ถึงจะลงมาหลังจากหนึ่งปี ก็ห้ามก่อเรื่องวุ่นวายเกินไปนะ? ทุกคนไปสนุกกันเถอะ!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">สินค้าเทศกาลจันทร์เก็บเกี่ยว</String>
-  <String Key="SeasonalEventNumberFormat">อีเวนต์ซีซัน {0}</String>
-  <String Key="SeasonalEvent">อีเวนต์ซีซัน</String>
-  <String Key="SeasonalEventCeilFormat">พิกอัปซีซัน {0}</String>
+  <String Key="UnitGachaPickupCountFormat">อัญเชิญ &lt;color=#FFD247&gt;{0}&lt;/color&gt; ครั้ง &lt;color=#FFD247&gt;รับประกันฮีโร่พิคอัพ&lt;/color&gt;</String>
+  <String Key="PlayReward_Semi1">รางวัลครึ่งแรก</String>
+  <String Key="PlayReward_Semi2">รางวัลครึ่งหลัง</String>
+  <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt;ครั้ง</String>
+  <String Key="BlessedTreasure">ขุมทรัพย์แห่งพร</String>
 </Strings>

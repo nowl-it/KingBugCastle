@@ -106,6 +106,7 @@
         <NameComment>유닛 상품</NameComment>
         <Type>Unit</Type>
         <CashPrice>149</CashPrice>
+        <IsUnavailable>true</IsUnavailable>
     </ShopItem>
 
     <ShopItem ID='201'>
@@ -121,6 +122,7 @@
         <NameComment>스킨만 보유한 유닛 구매 상품</NameComment>
         <Type>Unit</Type>
         <CashPrice>149</CashPrice>
+        <IsUnavailable>true</IsUnavailable>
     </ShopItem>
 
     <ShopItem ID='210'>
@@ -128,6 +130,7 @@
         <NameComment>유닛 스킨 상품</NameComment>
         <Type>Skin</Type>
         <CashPrice>149</CashPrice>
+        <IsUnavailable>true</IsUnavailable>
     </ShopItem>
 
     <!-- 가챠 박스 -->

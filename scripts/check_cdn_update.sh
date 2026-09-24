@@ -183,7 +183,7 @@ if [[ "$latest" == "$last" ]]; then
         echo -e "  ${YELLOW}▸${NC} Fetch the new pristine snapshot:"
         echo -e "    ${DIM}./kgc-cli config fetch -o /tmp/kgc_xml && ./kgc-cli config extract -o xml_history/${latest} /tmp/kgc_xml/xml_bundle_*${NC}"
         echo -e "  ${YELLOW}▸${NC} Re-base local edits onto it, then rebuild the served bundle:"
-        echo -e "    ${DIM}python3 server/rebase_xml_live.py xml_history/${latest} && python3 server/rebuild_xml_bundle.py${NC}"
+        echo -e "    ${DIM}python3 server/builders/rebase_xml_live.py xml_history/${latest} && python3 server/builders/rebuild_xml_bundle.py${NC}"
         if command -v notify-send &>/dev/null; then
             DISPLAY="${DISPLAY:-:0}" notify-send -u critical -a "KGC Watcher" \
                 "🏰 KGC CDN republish" "${latest} rewritten in place" &
@@ -206,9 +206,9 @@ if [[ "$latest" == "$last" ]]; then
         stale_warnings+=("⚠ IOS snapshot outdated: ${local_latest} → ${latest}")
     fi
     if [[ -n "$server_patch" && "$server_patch" != "$latest" ]]; then
-        echo -e "${YELLOW}[!] Server PATCH_FOLDER (${server_patch}) is behind CDN (${latest})${NC}"
-        echo -e "    Update PATCH_FOLDER in server/server.py"
-        stale_warnings+=("⚠ Server PATCH_FOLDER outdated: ${server_patch} → ${latest}")
+        echo -e "${YELLOW}[!] Server patchFolder (${server_patch}) is behind CDN (${latest})${NC}"
+        echo -e "    Update patchFolder in server/data/response_config.json"
+        stale_warnings+=("⚠ Server patchFolder outdated: ${server_patch} → ${latest}")
     fi
 
     # Send local desktop notification if there are staleness warnings
@@ -279,8 +279,8 @@ if [[ -n "$local_latest" && "$local_latest" != "$latest" ]]; then
 fi
 
 if [[ -n "$server_patch" && "$server_patch" != "$latest" ]]; then
-    echo -e "  ${YELLOW}▸${NC} Update server/server.py PATCH_FOLDER:"
-    echo -e "    ${DIM}sed -i 's/PATCH_FOLDER = \"${server_patch}\"/PATCH_FOLDER = \"${latest}\"/' server/server.py${NC}"
+    echo -e "  ${YELLOW}▸${NC} Update patchFolder in server/data/response_config.json:"
+    echo -e "    ${DIM}sed -i 's/\"patchFolder\": \"${server_patch}\"/\"patchFolder\": \"${latest}\"/' server/data/response_config.json${NC}"
     needs_action=true
 fi
 

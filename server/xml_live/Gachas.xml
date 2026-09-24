@@ -8672,6 +8672,9 @@
     <Gacha ID="9000">
         <Name>GachaName_9000</Name>
         <Desc>HeroSummonDesc</Desc>
+
+        <IsUnavailable>true</IsUnavailable>
+        
         <ResultTableDesc>GachaListDesc_KingGod</ResultTableDesc>
         <Type>WelcomeGacha</Type>
         <Permanent>true</Permanent>

@@ -1,4 +1,4 @@
-<Strings>
+<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -960,10 +960,8 @@ when dismissing Tier 1 hero</String>
   <String Key="AddDefPerCount">Deduct damage taken per hero on the battlefield by {0}
 (max {1})</String>
   <String Key="AddDefPerCount_Piece">The more heroes on the battlefield, the less damage they take.</String>
-  <String Key="AtkPerByRange">All hero range +1,
-Increases damage by {0} per distance from the target of normal/skill attack (max distance {1})</String>
-  <String Key="AtkPerByRange_Piece">All hero range +1,
-Increases damage per distance from the target of normal/skill attack</String>
+  <String Key="AtkPerByRange">Damage Dealt by Normal/Skill attacks +{0} per tile of distance to the target (max. distance {1})</String>
+  <String Key="AtkPerByRange_Piece">The farther the target of Normal/Skill attacks, the higher the Damage Dealt</String>
   <String Key="ArtifactName_100">Magical Dust</String>
   <String Key="ArtifactDesc_100">Magical Dust that can be obtained by dismantling Relics.</String>
   <String Key="ArtifactName_10000">Great Sword of the Empire</String>
@@ -3489,7 +3487,7 @@ Only then I shall spare your life. Now, dance!&lt;/i&gt;</String>
   <String Key="ShopItemName_1015_Post">Level 11 Growth Package</String>
   <String Key="ShopItemName_1016_Post">Level 13 Growth Package</String>
   <String Key="ShopItemName_1017_Post">Level 15 Growth Package</String>
-  <String Key="RedValve ">Red Valve</String>
+  <String Key="RedValve">Red Valve</String>
   <String Key="LilCat">LilCat</String>
   <String Key="VeryLittleBear">VeryLittleBear</String>
   <String Key="NewUnitGachaPanelNewUnit">Hero Summon!</String>
@@ -6876,8 +6874,8 @@ The mark is generated every 3 sec</String>
   <String Key="ArtifactName_14020">Dwarven Scope</String>
   <String Key="ArtifactDesc_14020">A scope that embodies Dwarven technology.
 Although it allows the user to see further and attack more precisely, its weight makes it difficult to be carried around.</String>
-  <String Key="MoveStopTimeDesc_Piece">Marks 2 tiles in the Battlefield as sniper spots. Deployed Heroes gain Mighty Block, are &lt;color=#f33&gt;unable to move&lt;/color&gt; for a certain time, Range +3, and their Normal damage dealt increases on the 1st and every 5th hit</String>
-  <String Key="MoveStopTimeDesc">Marks 2 tiles in the Battlefield as sniper spots. Deployed Heroes gain Mighty Block +{2}, are &lt;color=#f33&gt;unable to move&lt;/color&gt; for {0} sec., Range +3, and their Normal damage dealt increases by +{1}% on the 1st and every 5th hit.</String>
+  <String Key="MoveStopTimeDesc_Piece">Designate two tiles on the Battlefield as sniper spots. Placed Heroes gain Mighty Block +4. Until they leave the sniper spot for the first time, the first and every 5th Normal damage hit deals increased damage</String>
+  <String Key="MoveStopTimeDesc">Designate two tiles on the Battlefield as sniper spots. Placed Heroes gain Mighty Block +{1}. Until they leave the sniper spot for the first time, the first and every 5th Normal damage hit deals +{0}% damage.</String>
   <String Key="ColosseumBanned">Strife Battlefield entry restricted</String>
   <String Key="GachaName_1036">Cold Smile</String>
   <String Key="Name_Potential_10560_3">Uplift</String>
@@ -10269,7 +10267,7 @@ you can obtain the items below.</String>
   <String Key="ArtifactBuffDataDesc_10030_Piece">Increases Spell Power of all heroes</String>
   <String Key="RankRangeFormat">Rank {0} - {1}</String>
   <String Key="Potential_10080_0">Reduces damage taken by 30% while using &lt;Flamebreath&gt;</String>
-  <String Key="Potential_10260_2">Uses &lt;Azure Dragon Slash&gt; instantly upon killing an enemy. +40% final damage for the instant &lt;Azure Dragon Slash&gt;</String>
+  <String Key="Potential_10260_2">Upon killing, instantly use &lt;Azure Dragon Slash&gt;, Final Damage Dealt of &lt;Azure Dragon Slash&gt; +20%</String>
   <String Key="SkillDesc_10690_Long">Deals {Damage} spell skill damage to the target for every {AttackCountByMaxManaPerDesc} MP used. Whenever &lt;Growing Mana&gt; is used, Max MP increases by {10695@MaxMana} (max {10695@MaxBuffOverlap} stacks).</String>
   <String Key="SkillName_42205">Bloody Rampage</String>
   <String Key="SkillDesc_UI_42205">The Herald of Blood resonates with the Blood Crystal. The Blood Crystal is prioritized as the target for healing skills used by heroes, and the healing it receives is greatly increased depending on Guard. All heroes are healed by a portion of the healing received by the Blood Crystal.</String>
@@ -11693,7 +11691,6 @@ Simply gazing upon it brings peace to the mind and body.</String>
   <String Key="AccessorySynergyName_9">Moonlight</String>
   <String Key="AccessorySynergyName_9_Pre">Moonlit</String>
   <String Key="AccessorySynergyDesc_10090">+{1}% final ATK, &lt;color=#f33&gt;{0}% final Spell Power&lt;/color&gt;</String>
-  <String Key="AccessorySynergyDesc_10091">+{0} Range, +{2}% physical CRIT damage for every {1} Range owned (Max 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Hides for {0} sec at the beginning of the battle, +{2}% Physical CRIT Chance after {1} sec</String>
   <String Key="InventoryItemName_5010">Moonlit Accessory Selection Chest</String>
   <String Key="ShopItemName_41012">Random Moonlight Accessory</String>
@@ -12646,7 +12643,7 @@ You can use "Gems" or "Rift Equipment Unupgradable Status Removal Ticket" to res
   <String Key="RiftWeaponBuffDesc_130">Deals {0}% special damage to 3 targets upon dealing normal damage after using skill</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} Physical DEF</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} Spell DEF</String>
-  <String Key="RiftWeaponBuffDesc_160">+{0} Range</String>
+  <String Key="RiftWeaponBuffDesc_160">Movement Speed +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">+{0}% Physical HP Drain</String>
   <String Key="RiftWeaponBuffDesc_180">+{0}% Spell HP Drain</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} DEF</String>
@@ -18306,7 +18303,9 @@ The unchosen unit will be assigned to the enemy Troop.</String>
   <String Key="SkinName_1074001">Moonlight Star Lord Suha</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Moon Rabbits! You know you must not cause too much trouble just because you came down after a year, right? Have fun, everyone!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Harvest Moon Festival Offers</String>
-  <String Key="SeasonalEventNumberFormat">Season {0} Event</String>
-  <String Key="SeasonalEvent">Season Event</String>
-  <String Key="SeasonalEventCeilFormat">Season {0} Pickup</String>
+  <String Key="UnitGachaPickupCountFormat">Guaranteed &lt;color=#FFD247&gt;Pickup Hero&lt;/color&gt; after &lt;color=#FFD247&gt;{0}&lt;/color&gt; Summons</String>
+  <String Key="PlayReward_Semi1">First Half Reward</String>
+  <String Key="PlayReward_Semi2">Second Half Reward</String>
+  <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; Plays</String>
+  <String Key="BlessedTreasure">Blessed Legacy</String>
 </Strings>

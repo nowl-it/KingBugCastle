@@ -335,6 +335,44 @@ Fixed-period loops with no exception = client timer, not retry.
   Pick-and-Pass devil reward strings; JA/ZH add rich-text spacing to those same rewards and make a
   formatting-only `SkinShop` change. Trial replay of all `local_mods` completed with 30 writes and
   zero warnings. The served bundle was not changed during this investigation.
+- **2026-09-22 CDN folder `2026_09_22`** (new slot; `response_config.json` was switched to
+  advertise it):
+  - Pristine snapshot extracted to ignored `xml_history/2026_09_22` (147 files). Diff vs the
+    `2026_09_08` snapshot = **4 master-data files + the 13 Strings_*.xml**, everything else
+    byte-identical (no new/removed files).
+  - The older `2026_09_10` republish (Cor Orbis `50002` key purge, package `1690..1692` renames,
+    package `1693`) is already folded into the served bundle, so what is genuinely NEW in `09_22`
+    was isolated by checking which rows/keys the served `xml_live` already had:
+    - **ShopItems `200`/`202`/`210` → `<IsUnavailable>true</IsUnavailable>`** - the cash storefront
+      for heroes/skins (direct hero buy, buy-hero-when-skin-owned, unit-skin buy). `Unit`+`Skin`
+      rows only; the PassUnit row `201` stays available.
+    - **Gacha `9000` (WelcomeGacha, new-player summon) → `<IsUnavailable>true`**.
+    - **Skills `102650..102653` nerf (~-14.3% all 4 tiers)**: 청아 (unit 10260) ultimate
+      "2식 청룡참" (2nd-form Azure Dragon Slash) Damage/MAtkPer 350→300, 420→360, 490→420, 560→480.
+      The unit row is unchanged - only the tiered skill numbers moved.
+    - **Advisors `40070`/`40080`** (Season 73 Harvest-Moon rabbit advisors): `SpriteOffsetY -8 → 0`.
+    - **Strings**: orphan key `RedValve ` (trailing space) renamed `RedValve`; 11 unused keys
+      dropped (`ArtifactOptionProbUrl`, `AtkPerByRange(+_Piece)`, `MoveStopTimeDesc(+_Piece)`,
+      `RiftWeaponBuffDesc_160`, `SeasonalEvent(+CeilFormat+NumberFormat)`, `SimplifyAISaveData`,
+      `AccessorySynergyDesc_10091`); 3 placeholder `ItemDesc_10030/31/32` = "+5/+10/+20 Silver"
+      (no `InventoryItems` row references them yet); KR-only `UnitGachaPickupCountFormat` added.
+      34 EN values differ but are all trailing-space/newline padding noise (Localizer line-break
+      padding) - no gameplay text edits.
+    - Net read: a balance/cleanup hotfix (hero-ultimate nerf + cash storefront shutdown), no new
+      content, no season/Strife data changes. `ColosseumRankScoreTable/Tiers` identical to `09_08`,
+      so the Strife score math below is unaffected by this update.
+- **2026-09-23 in-place republish of CDN folder `2026_09_22`:** bundle etag changed from
+  `7d08aeb133fb7bff9008055ff6c8c106` to `5a6d7db2aeb8d932684548b53761741b`.
+  Diff vs initial `2026_09_22` snapshot:
+  - **TreasureBuffDatas.xml**: Vitacorde (treasure `30043`, for Alberon `10060`) buffed:
+    - BuffData `3300431`: `DefDenNoLevel` MAtkPer `10 → 20` (protection scaling doubled: `0.1% → 0.2%` MAtk per Guard).
+    - BuffData `3300435`: `DefDenNoLevel` MAtkPer `20 → 40` (overcome increment `0.1% → 0.2%`, cumulative `0.2% → 0.4%`).
+  - **Strings_*.xml (all 13 locales)**:
+    - `Potential_10260_2`: Chung Ah potential 2 final damage nerfed `+40% → +20%` (matches her ultimate skill nerf).
+    - Restored the 11 keys dropped in initial `09_22` (`ArtifactOptionProbUrl`, `AtkPerByRange`, `MoveStopTimeDesc`, etc.).
+    - Removed stale placeholder keys `ItemDesc_10030..32` (+5/+10/+20 Silver).
+    - Added new keys across all locales: `BlessedTreasure` ("Blessed Legacy" / "축복받은 유산"), `PlayReward_Semi1`/`PlayReward_Semi2` ("First/Second Half Reward"), `PlayRewardPlayCountFormat` ("({0}/{1}) Plays"), `UnitGachaPickupCountFormat`.
+    - Rich-text padding cleanup (`<size=2> </size>`) across Asian locales (JA, ZH_CH, ZH_TW).
 
 ### Reference-derived Frieren idle sheet (2026-08-24)
 
@@ -813,6 +851,30 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
 - Battle runs locally → `POST /colosseum/complete-round-data` on completion
   → `r_colosseum_complete_round` handles score update.
 - `POST /colosseum/round-data` = round-in-progress snapshot (ack only, no persistence needed).
+
+### Scoring (server-side, `routes/colosseum.py` + `routes/pvp.py`)
+- The server owns the running total; the client owns the battle. A finished round hits
+  `/colosseum/complete-round-data` → `r_colosseum_complete_round` (pvp.py:194) → `_pvp_record`
+  (pvp.py:52) → `colosseum.apply_result(before, win)` (colosseum.py:111).
+- **Delta** comes from `ColosseumRankScoreTable.xml` (`score_delta`, colosseum.py:97): pick the row
+  with the highest `ReqScore <= current`, take `WinScore` if win else `LoseScore` (loss deltas are
+  negative). Example rows: 0→+300/−70, 1000→+126/−80, 2000→+80/−64, 2450→+73/−62; win at 1000 = 1126.
+- **Floor clamp**: `apply_result = max(bottom_tier.reqScore, score + delta)` - a loss cannot push the
+  score below the bottom tier's floor (0). Verified: `python3 routes/colosseum.py` self-check.
+- **Tier** = `tier_for(score, rank)` from `ColosseumRankTiers.xml` (27 tiers, 0..2400): score-decisive
+  below the shared-score tiers; at 2200 the `갓/갓+(31~100/11~30위)` pair and at 2400 the
+  `킹갓(6~10/2~5/1위)` trio are split ONLY by the leaderboard rank bracket spelled in their
+  `NameComment` (`_rank_bracket`, required for rank>=1; rank 0 = unranked = lowest of the shared tier).
+- **Tier rewards**: `r_colosseum_tier_rewards` (`/colosseum/get-reward`) pays every tier ≤ current
+  via `tier_rewards_up_to`; each tier pays once (claimed set in `st["colosseumClaimed"]`).
+- **Win/loss bookkeeping**: `colosseumWin/Lose` counters, `colosseumTier`, `colosseumLogs` (50 cap,
+  ids from a monotonic `colosseumLogSeq`), scores seeded from `response_config.json` `colosseum.fixed`
+  (score 1000, season 72, semiSeason 2, theme 3000 = Strife). The 4-player statistics histogram
+  `countsByRank` = `[wins, losses, 0, 0]`.
+- **Arena shares the machinery** with prefix `pvp`, `ArenaSettings.xml` win-count reward steps
+  (`arena_rewards_for`, cumulative counts), and the same `ColosseumRank*` tables for delta/tier.
+- Both score tables are unchanged between CDN `2026_09_08` and `2026_09_22` - the update did not
+  touch Strife scoring.
 
 ### Key RestAPI endpoints (all from script.json)
 | Method | Endpoint | Response model |

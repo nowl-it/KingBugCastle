@@ -25,6 +25,10 @@ xml_history/
 server/admin/node_modules/
 server/admin/.next/
 
+# Scratch pristine extraction used to rebase server/xml_live (see
+# server/builders/rebase_xml_live.py); snapshots also live in xml_history/.
+server/builders/xml_live/
+
 # APK and archive files
 apk/
 KingBugCastle_share/

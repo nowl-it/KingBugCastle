@@ -1,4 +1,4 @@
-<Strings>
+<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -949,10 +949,8 @@
   <String Key="AddDefPerCount">Уменьш. получаемого урона на {0} за каждого размещенного героя
 (Макс. до {1})</String>
   <String Key="AddDefPerCount_Piece">Чем больше размещенных героев, тем меньше получаемый урон</String>
-  <String Key="AtkPerByRange">Длина атаки всех героев +1,
-увелич. наносимого урона на {0} при каждой клетке расстояния между героем и целью обычн. атаки / атаки навыком (Макс. кол-во кл.: {1}).</String>
-  <String Key="AtkPerByRange_Piece">Длина атаки всех героев +1,
-чем дальше цель обычн. атаки / атаки навыком, тем больше урона наносится.</String>
+  <String Key="AtkPerByRange">Наносимый урон обычных атак/навыков +{0} за каждую клетку расстояния до цели (макс. расстояние {1})</String>
+  <String Key="AtkPerByRange_Piece">Чем дальше цель обычных атак/навыков, тем выше наносимый урон</String>
   <String Key="ArtifactName_100">Мистический порошок</String>
   <String Key="ArtifactDesc_100">Мистический порошок, который вы сможете получить при разборе реликвий.</String>
   <String Key="ArtifactName_10000">Великий меч империи</String>
@@ -3494,7 +3492,7 @@
   <String Key="ShopItemName_1015_Post">Набор улучшения 11 ур.</String>
   <String Key="ShopItemName_1016_Post">Набор улучшения 13 ур.</String>
   <String Key="ShopItemName_1017_Post">Набор улучшения 15 ур.</String>
-  <String Key="RedValve ">Red Valve</String>
+  <String Key="RedValve">Red Valve</String>
   <String Key="LilCat">LilCat</String>
   <String Key="VeryLittleBear">VeryLittleBear</String>
   <String Key="NewUnitGachaPanelNewUnit">Появление героя!</String>
@@ -6874,8 +6872,8 @@ nПри использовании дает бонус к пополнению �
   <String Key="ArtifactName_14020">Гномий прицел</String>
   <String Key="ArtifactDesc_14020">Прицел, созданный по технологии гномов.
 С ним можно атаковать более удаленные цели с большей точностью, но из-за веса его трудно переносить.</String>
-  <String Key="MoveStopTimeDesc_Piece">Отмечает 2 клетки на Поле боя как позиции снайпера. Размещённые Герои получают Абсолютная ЗЩТ, не могут &lt;color=#f33&gt;двигаться&lt;/color&gt; некоторое время, Длина атаки +3, а их Нанос. Обычн. урон увеличивается при 1-м и каждом 5-м попадании</String>
-  <String Key="MoveStopTimeDesc">Отмечает 2 клетки на Поле боя как позиции снайпера. Размещённые Герои получают Абсолютная ЗЩТ +{2}, не могут &lt;color=#f33&gt;двигаться&lt;/color&gt; {0} сек., Длина атаки +3, а их Нанос. Обычн. урон увеличивается на +{1}% при 1-м и каждом 5-м попадании.</String>
+  <String Key="MoveStopTimeDesc_Piece">Выберите две клетки Поля боя как снайперские позиции. Размещенные Герои получают Абсолютная ЗЩТ +4. Пока они впервые не покинут позицию, 1-е и каждое 5-е попадание обычным уроном наносят больше урона</String>
+  <String Key="MoveStopTimeDesc">Выберите две клетки Поля боя как снайперские позиции. Размещенные Герои получают Абсолютная ЗЩТ +{1}. Пока они впервые не покинут позицию, 1-е и каждое 5-е попадание обычным уроном наносят +{0}% урона.</String>
   <String Key="ColosseumBanned">Доступ к сезону Поля боя Побоища ограничен</String>
   <String Key="GachaName_1036">Натянутая улыбка</String>
   <String Key="Name_Potential_10560_3">Духовный подъем</String>
@@ -10275,7 +10273,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="ArtifactBuffDataDesc_10030_Piece">Увелич. Маг. АТК всех героев</String>
   <String Key="RankRangeFormat">{0}-{1} места</String>
   <String Key="Potential_10080_0">Получ. урон -30% во время использования &lt;Дыхания пламени&gt;</String>
-  <String Key="Potential_10260_2">При уничтожении врага мгновенное использование &lt;Острого когтя голубого дракона&gt;, общ. урон &lt;Острого когтя голубого дракона&gt; +40%</String>
+  <String Key="Potential_10260_2">При уничтожении врага мгновенно применяет &lt;2-я техника: Разрез Лазурного дракона&gt;, итоговый урон &lt;2-я техника: Разрез Лазурного дракона&gt; +20%</String>
   <String Key="SkillDesc_10690_Long">Наносит цели {Damage} маг. урона от навыка повторно за кажд. {AttackCountByMaxManaPerDesc} исп. ОМ. При каждом использовании &lt;Растущей магии&gt; увеличивает макс. ОМ на {10695@MaxMana}. (Макс. до {10695@MaxBuffOverlap} р.)</String>
   <String Key="SkillName_42205">Нахлынувшая кровь</String>
   <String Key="SkillDesc_UI_42205">Апостол крови резонирует с Кровавым кристаллом. Кровавый кристалл приоритетно выбирается в качестве цели для навыков исцеления, используемых героями. Чем выше значение охраны, тем больше получ. исцеление. Все герои исцеляются на часть от количества исцеления Кровавого кристалла.</String>
@@ -11699,7 +11697,6 @@ nПри использовании дает бонус к пополнению �
   <String Key="AccessorySynergyName_9">лунного света</String>
   <String Key="AccessorySynergyName_9_Pre">лунного света</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;Общ. Маг. АТК {0}%&lt;/color&gt;, общ. АТК +{1}%</String>
-  <String Key="AccessorySynergyDesc_10091">Дальность атаки +{0}, за кажд. {1} имеющ. ед. дальности атаки крит. физ. урон +{2}% (макс. 80%)</String>
   <String Key="AccessorySynergyDesc_10092">В начале битвы скрытность на {0} сек., через {1} сек. шанс физ. крита +{2}%</String>
   <String Key="InventoryItemName_5010">Сундук выбора с аксессуарами лунного света</String>
   <String Key="ShopItemName_41012">Случ. аксессуар лунного света</String>
@@ -12652,7 +12649,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="RiftWeaponBuffDesc_130">После использования навыка при попадании обычн. уроном наносит {0}% особ. урона 3 целям</String>
   <String Key="RiftWeaponBuffDesc_140">Физ. ЗЩТ +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">Маг. ЗЩТ +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">Увеличение дальности атаки +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">Скорость передвижения +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">Физ. вампиризм +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">Маг. вампиризм +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">ЗЩТ +{0}</String>
@@ -18312,7 +18309,9 @@ D = 1 - 4</String>
   <String Key="SkinName_1074001">Звёздный владыка лунного света Суха</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Лунные кролики! Вы же знаете, что не стоит слишком шалить только потому, что спустились спустя год, верно? Желаю всем хорошо провести время!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Товары Праздника Луны Урожая</String>
-  <String Key="SeasonalEventNumberFormat">Событие сезона {0}</String>
-  <String Key="SeasonalEvent">Сезонное событие</String>
-  <String Key="SeasonalEventCeilFormat">Пикап сезона {0}</String>
+  <String Key="UnitGachaPickupCountFormat">После &lt;color=#FFD247&gt;{0}&lt;/color&gt; призывов &lt;color=#FFD247&gt;пикап-герой гарантирован&lt;/color&gt;</String>
+  <String Key="PlayReward_Semi1">Награда 1-й половины</String>
+  <String Key="PlayReward_Semi2">Награда 2-й половины</String>
+  <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; игр</String>
+  <String Key="BlessedTreasure">Благословенное божеств. оружие</String>
 </Strings>

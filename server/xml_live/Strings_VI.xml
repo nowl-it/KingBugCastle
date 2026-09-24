@@ -1,4 +1,4 @@
-<Strings>
+<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81fb-a733-cc6e02547a98</String>
   <String Key="Title">King God Castle</String>
@@ -950,10 +950,8 @@ cho 3 anh hùng có cấp ★ cao nhất: {0}</String>
   <String Key="AddDefPerCount">Sát thương phải nhận trên mỗi anh hùng đã bố trí -{0}
 (tối đa {1})</String>
   <String Key="AddDefPerCount_Piece">Bố trí càng nhiều anh hùng sát thương phải nhận càng thấp</String>
-  <String Key="AtkPerByRange">Phạm vi tấn công của mọi anh hùng +1,
-mỗi đơn vị khoảng cách với mục tiêu tấn công thường/ kỹ năng giúp tăng {0} sát thương gây ra (Tối đa {1} đơn vị)</String>
-  <String Key="AtkPerByRange_Piece">Phạm vi tấn công của mọi anh hùng +1,
-mục tiêu tấn công thường/ kỹ năng càng ở xa, sát thương gây ra càng tăng</String>
+  <String Key="AtkPerByRange">ST gây ra của đòn đánh thường/kỹ năng tăng {0} theo mỗi ô khoảng cách đến mục tiêu (khoảng cách tối đa {1})</String>
+  <String Key="AtkPerByRange_Piece">Mục tiêu của đòn đánh thường/kỹ năng càng xa, ST gây ra càng tăng</String>
   <String Key="ArtifactName_100">Bột Thần Bí</String>
   <String Key="ArtifactDesc_100">Bột Thần Bí nhận được khi phân hủy Cổ Vật</String>
   <String Key="ArtifactName_10000">Đại Kiếm Đế Quốc</String>
@@ -3495,7 +3493,7 @@ Nào, hãy nhảy một điệu đi!&lt;/i&gt;</String>
   <String Key="ShopItemName_1015_Post">Gói Tăng Trưởng Cấp 11</String>
   <String Key="ShopItemName_1016_Post">Gói Tăng Trưởng Cấp 13</String>
   <String Key="ShopItemName_1017_Post">Gói Tăng Trưởng Cấp 15</String>
-  <String Key="RedValve ">Red Valve</String>
+  <String Key="RedValve">Red Valve</String>
   <String Key="LilCat">LilCat</String>
   <String Key="VeryLittleBear">VeryLittleBear</String>
   <String Key="NewUnitGachaPanelNewUnit">Ra anh hùng!</String>
@@ -6875,8 +6873,8 @@ Dấu Ấn được tái tạo theo chu kỳ 3 giây</String>
   <String Key="ArtifactName_14020">Ống Ngắm Dwarf</String>
   <String Key="ArtifactDesc_14020">Ống ngắm tích hợp công nghệ của các Dwarf.
 Người sử dụng có thể tấn công xa hơn và chính xác hơn, nhưng lại không thể mang theo vì khối lượng khá nặng.</String>
-  <String Key="MoveStopTimeDesc_Piece">Đánh dấu 2 ô trên Chiến Trường làm vị trí bắn tỉa. Anh Hùng được triển khai nhận Phòng thủ tuyệt đối, &lt;color=#f33&gt;không thể di chuyển&lt;/color&gt; trong một thời gian, Phạm vi tấn công +3, và sát thương thường gây ra tăng ở đòn đầu tiên và mỗi 5 đòn</String>
-  <String Key="MoveStopTimeDesc">Đánh dấu 2 ô trên Chiến Trường làm vị trí bắn tỉa. Anh Hùng được triển khai nhận Phòng thủ tuyệt đối +{2}, &lt;color=#f33&gt;không thể di chuyển&lt;/color&gt; trong {0} giây, Phạm vi tấn công +3, và sát thương thường gây ra +{1}% ở đòn đầu tiên và mỗi 5 đòn.</String>
+  <String Key="MoveStopTimeDesc_Piece">Chỉ định 2 ô trên Chiến Trường làm vị trí bắn tỉa. Anh Hùng được triển khai nhận Phòng thủ tuyệt đối +4. Trước khi rời vị trí bắn tỉa lần đầu, đòn sát thương thường đầu tiên và mỗi đòn thứ 5 tăng ST gây ra</String>
+  <String Key="MoveStopTimeDesc">Chỉ định 2 ô trên Chiến Trường làm vị trí bắn tỉa. Anh Hùng được triển khai nhận Phòng thủ tuyệt đối +{1}. Trước khi rời vị trí bắn tỉa lần đầu, đòn sát thương thường đầu tiên và mỗi đòn thứ 5 gây +{0}% ST.</String>
   <String Key="ColosseumBanned">Bị cấm vào mùa Chiến Trường Ác Chiến</String>
   <String Key="GachaName_1036">Nụ Cười Thầm Lặng</String>
   <String Key="Name_Potential_10560_3">Nâng Cao</String>
@@ -10269,7 +10267,7 @@ khi phân hủy {0} vật phẩm đã chọn.</String>
   <String Key="ArtifactBuffDataDesc_10030_Piece">Tăng lực phép của mọi anh hùng</String>
   <String Key="RankRangeFormat">Hạng {0}~{1}</String>
   <String Key="Potential_10080_0">Khi dùng &lt;Hơi Thở Của Lửa&gt;, sát thương phải nhận -30%</String>
-  <String Key="Potential_10260_2">Dùng &lt;Thanh Long Trảm Chiêu 2&gt; ngay khi tiêu diệt địch, tổng sát thương của &lt;Thanh Long Trảm Chiêu 2&gt; +40%</String>
+  <String Key="Potential_10260_2">khi tiêu diệt, lập tức dùng &lt;Thức 2: Chém Rồng Xanh&gt;, tổng ST gây ra của &lt;Thức 2: Chém Rồng Xanh&gt; +20%</String>
   <String Key="SkillDesc_10690_Long">Gây {Damage} sát thương kỹ năng phép cho mục tiêu lặp lại trên mỗi {AttackCountByMaxManaPerDesc} mana đã dùng. Mana tối đa tăng {10695@MaxMana} mỗi khi dùng &lt;Ma Lực Tăng Trưởng&gt;. (Cộng dồn tối đa {10695@MaxBuffOverlap} lần)</String>
   <String Key="SkillName_42205">Cuồng Nộ Máu</String>
   <String Key="SkillDesc_UI_42205">Sứ Đồ Máu cộng hưởng với "Kết Tinh Máu". Ưu tiên chỉ định "Kết Tinh Máu" làm đối tượng của kỹ năng chữa trị cho người khác mà anh hùng dùng, và lượng chữa trị nhận được tăng đáng kể theo số lượng hộ vệ. Toàn bộ anh hùng được chữa trị bằng một phần của lượng chữa trị của Kết Tinh Máu.</String>
@@ -11693,7 +11691,6 @@ Chỉ cần nhìn vào cũng khiến tâm hồn và thể xác trở nên bình 
   <String Key="AccessorySynergyName_9">Ánh Trăng</String>
   <String Key="AccessorySynergyName_9_Pre">Ánh Trăng</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;Tổng lực phép {0}%&lt;/color&gt;, tổng lực tấn công +{1}%</String>
-  <String Key="AccessorySynergyDesc_10091">Phạm vi tấn công +{0}, sát thương chí mạng vật lý +{2}% với mỗi {1} phạm vi tấn công sở hữu (tối đa 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Khi khai trận, ẩn thân {0} giây, sau {1} giây, xác suất chí mạng vật lý +{2}%</String>
   <String Key="InventoryItemName_5010">Rương Chọn Trang Sức Ánh Trăng</String>
   <String Key="ShopItemName_41012">Trang Sức Ánh Trăng Ngẫu Nhiên</String>
@@ -12646,7 +12643,7 @@ Có thể dùng "Đá Quý" hoặc "Thẻ Gỡ Chặn Cường Hóa Trang Bị K
   <String Key="RiftWeaponBuffDesc_130">Gây {0}% sát thương đặc biệt cho 3 mục tiêu khi đánh trúng bằng sát thương thường sau khi dùng kỹ năng</String>
   <String Key="RiftWeaponBuffDesc_140">Lực phòng thủ vật lý +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">Lực phòng thủ phép +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">Phạm vi tấn công +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">Tốc độ di chuyển +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">Hút máu vật lý +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">Hút máu phép +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">Lực phòng thủ +{0}</String>
@@ -18306,7 +18303,9 @@ Skin Lễ hội Trăng Mùa Gặt 2026</String>
   <String Key="SkinName_1074001">Tinh Quân Ánh Trăng Du Hà</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Các Thỏ Mặt Trăng! Mọi người biết là dù sau một năm mới xuống đây cũng không được quậy phá quá đâu, đúng không? Chúc mọi người chơi vui nhé!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Ưu đãi Lễ hội Trăng Mùa Gặt</String>
-  <String Key="SeasonalEventNumberFormat">Sự kiện Mùa {0}</String>
-  <String Key="SeasonalEvent">Sự kiện Mùa</String>
-  <String Key="SeasonalEventCeilFormat">Pick-up Mùa {0}</String>
+  <String Key="UnitGachaPickupCountFormat">Sau &lt;color=#FFD247&gt;{0}&lt;/color&gt; lần triệu hồi, &lt;color=#FFD247&gt;đảm bảo Anh Hùng Pickup&lt;/color&gt;</String>
+  <String Key="PlayReward_Semi1">Thưởng nửa đầu</String>
+  <String Key="PlayReward_Semi2">Thưởng nửa sau</String>
+  <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; lượt chơi</String>
+  <String Key="BlessedTreasure">Bảo Cụ Chúc Phúc</String>
 </Strings>

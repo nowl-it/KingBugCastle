@@ -549,7 +549,7 @@
   <String Key="SelectEquipItemComment">영웅에게 장착할 장비를 3개 선택하세요</String>
   <String Key="Equip">장착하기</String>
   <String Key="ReviveLabel">여신의 구원</String>
-  <String Key="ReviveBonus">(2티어 제련 장비가 지급됩니다) </String>
+  <String Key="ReviveBonus">(2티어 제련 장비가 지급됩니다)</String>
   <String Key="AdRevive">광고 보고 부활</String>
   <String Key="CashRevive">보석 바치고 부활</String>
   <String Key="Ignore">무시하기</String>
@@ -698,7 +698,7 @@
   <String Key="SkillName_20551">붉은 대지</String>
   <String Key="SkillDesc_20551">분노로 가득찬 마그라가 가장 멀리있는 적에게 뛰어 적들에게 {Damage:MAtkPer}의 피해를 주고 {StunTime} 초간 기절시킵니다.</String>
   <String Key="SkillName_20621">사악한 손길</String>
-  <String Key="SkillDesc_20621">주변의 적들을 자신이 보는 방향으로 3칸 밀쳐냅니다. </String>
+  <String Key="SkillDesc_20621">주변의 적들을 자신이 보는 방향으로 3칸 밀쳐냅니다.</String>
   <String Key="SkillName_20631">파멸의 공포</String>
   <String Key="SkillDesc_20631">자신과 가장 가까운 적을 2초동안 공포에 빠지게 합니다. 공포에 빠진 적은 도망치게 됩니다.</String>
   <String Key="SkillName_20651">죽음의 그림자</String>
@@ -736,7 +736,7 @@
   <String Key="SkillDesc_25600">창을 크게 휘둘러 주변의 적을 모두 공격합니다.</String>
   <String Key="SkillName_25610">세발의 탄환</String>
   <String Key="SkillDesc_25610">세 명의 적에게 총을 발사합니다.</String>
-  <String Key="SkillDesc_25621">주변의 적들을 자신이 보는 방향으로 {Knockback}칸 밀쳐냅니다. </String>
+  <String Key="SkillDesc_25621">주변의 적들을 자신이 보는 방향으로 {Knockback}칸 밀쳐냅니다.</String>
   <String Key="Potential_10000_1">&lt;강인한 결의&gt; 필요 마나 -20</String>
   <String Key="Potential_10010_0">&lt;빛의 심판&gt; 피격시 2초간 기절</String>
   <String Key="Potential_10010_1">최종 최대 체력 + 20%</String>
@@ -957,10 +957,8 @@
   <String Key="AddDefPerCount">배치된 영웅당 받는 피해량이 {0} 감소
 (최대 {1})</String>
   <String Key="AddDefPerCount_Piece">배치된 영웅이 많을수록 받는 피해량 감소</String>
-  <String Key="AtkPerByRange">모든 영웅 사거리 + 1,
-일반/스킬 공격 대상과의 거리당 주는 피해량 {0} 증가 (최대 거리 {1})</String>
-  <String Key="AtkPerByRange_Piece">모든 영웅 사거리 + 1,
-일반/스킬 공격 대상이 멀수록 주는 피해량 증가</String>
+  <String Key="AtkPerByRange">일반/스킬 공격 대상과의 거리당 주는 피해량 {0} 증가 (최대 거리 {1})</String>
+  <String Key="AtkPerByRange_Piece">일반/스킬 공격 대상이 멀수록 주는 피해량 증가</String>
   <String Key="ArtifactName_100">신비한 가루</String>
   <String Key="ArtifactDesc_100">유물을 분해하여 얻을 수 있는 신비한 가루</String>
   <String Key="ArtifactName_10000">제국의 대검</String>
@@ -1013,7 +1011,7 @@
 하나하나는 힘없는 민초일지라도 모이면 강해집니다.</String>
   <String Key="ArtifactName_12090">결속의 기검</String>
   <String Key="ArtifactDesc_12090">완벽히 동일하게 생긴 기검
-여러자루 기검으로 펼쳐지는 신속한 어검술은 보고도 피할 수 없습니다. </String>
+여러자루 기검으로 펼쳐지는 신속한 어검술은 보고도 피할 수 없습니다.</String>
   <String Key="ArtifactName_13000">투지의 철투구</String>
   <String Key="ArtifactDesc_13000">신체와 정신을 보호하는 철투구.
 소유자는 불굴의 의지로 절대 무릎꿇지 않습니다.</String>
@@ -1274,7 +1272,7 @@
   <String Key="SkillDrain">주문 흡혈</String>
   <String Key="AddAttackMana">일반 공격시 마나충전</String>
   <String Key="SuperShieldFormat">절대 방어 {0}회</String>
-  <String Key="ExecutionPerFormat">체력 {0} 미만 적 처형 </String>
+  <String Key="ExecutionPerFormat">체력 {0} 미만 적 처형</String>
   <String Key="BoltFormat">스킬 사용 후 일반 피해 시 3명에게 {0}%의 특수 피해</String>
   <String Key="AttackStunPerFormat">일반 피해시 {0} 확률로 기절</String>
   <String Key="KillGoldBonus">처치 시 은화</String>
@@ -1936,14 +1934,14 @@
   <String Key="UnitSubName_10270">북초원의 사냥꾼</String>
   <String Key="Potential_10270_0">&lt;사냥 명령&gt; 사용 후 공격속도 +35% (최대 3회)</String>
   <String Key="Potential_10270_1">&lt;사냥 명령&gt;대상의 약점을 노출시켜 받는 피해량 +10% (최대 2회, 보스에게 반감)</String>
-  <String Key="SkinDesc_Default_10270">중북부에 위치한 초원지역에는 사냥의 명수인 전투 부족들이 존재합니다. 라호크는 천둥매를 다루는 부족 출신으로, 초원의 벼락이라 불렸습니다. </String>
+  <String Key="SkinDesc_Default_10270">중북부에 위치한 초원지역에는 사냥의 명수인 전투 부족들이 존재합니다. 라호크는 천둥매를 다루는 부족 출신으로, 초원의 벼락이라 불렸습니다.</String>
   <String Key="SkillName_10270">사냥 명령</String>
   <String Key="MissionDesc_10327">라호크를 사용하여 플레이</String>
   <String Key="Cant_RefreshDailyShopByCash">새로 고침 횟수를 모두 사용하였습니다</String>
   <String Key="Cant_RefreshDailyShopByAd">광고 시청 횟수를 모두 사용하였습니다.</String>
   <String Key="WatchAd">광고</String>
   <String Key="UsedAllRemainRefreshCount">&lt;color=#FF4C4C&gt;오늘 새로 고침을 모두 사용했습니다.&lt;/color&gt;
-새로 고침 초기화까지 </String>
+새로 고침 초기화까지</String>
   <String Key="RefreshDailyShop">상점 새로 고침</String>
   <String Key="RefreshDailyShopDesc">일일 상점의 품목들을 새로 고침할 수 있습니다.
 새로 고침 가능 횟수는 매일 갱신됩니다.</String>
@@ -2139,7 +2137,7 @@
   <String Key="SkillDesc_40001">전방 3x3 범위의 모든 적들에게 {Damage:MAtkPer}만큼의 피해를 입히고 {StunTime}초간 기절시킵니다.</String>
   <String Key="SkillName_40100">말살의 포격</String>
   <String Key="SkillDesc_40100">물리 일반 피해를 입히는 신성한 포격을 빠른 속도로 세 번 연속 발사합니다.</String>
-  <String Key="SkillName_40201">낙하하는 성화 </String>
+  <String Key="SkillName_40201">낙하하는 성화</String>
   <String Key="SkillDesc_40201">적들에게 신성한 불꽃을 떨어트려 {SplashRangeSum}칸 이내의 모든 적들에게 {Damage:MAtkPer}의 피해를 주고, {StunTime}초간 기절시킵니다.</String>
   <String Key="SkillName_40301">심판의 화염</String>
   <String Key="SkillDesc_40301">주변 {SplashRangeSum}칸 이내에 있는 모든 적들에게 {Damage:MAtkPer}의 피해를 주는 심판을 내립니다.</String>
@@ -2352,7 +2350,7 @@
   <String Key="ExpPanelDesc_KingSoulToExp">&lt;color=#ffcf68&gt;왕의 증표&lt;/color&gt;는 11레벨 이상의 영웅을 레벨업 하는데 사용됩니다.
 왕의 증표는 원하는 영웅의 증표로 전환할 수 있습니다.</String>
   <String Key="ExpPanelDesc_KingSoul">&lt;color=#ffcf68&gt;왕의 증표&lt;/color&gt;는 11레벨 이상의 영웅을 레벨업 하는데 사용됩니다.
-왕의 증표는 원하는 영웅의 증표로 전환할 수 있습니다.  </String>
+왕의 증표는 원하는 영웅의 증표로 전환할 수 있습니다.</String>
   <String Key="GachaList">획득 가능 목록</String>
   <String Key="GachaArtifact">온전한 유물 확정</String>
   <String Key="GachaArtifact2">온전한 희귀 유물 확정</String>
@@ -2616,7 +2614,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="Name_Potential_10210_3">해방</String>
   <String Key="Name_Potential_10220_3">콩알탄</String>
   <String Key="Potential_10220_3">&lt;폭탄비&gt; 지속 시간동안 두 명의 적에게 폭탄 투척
-폭탄의 최종 피해량 -45% </String>
+폭탄의 최종 피해량 -45%</String>
   <String Key="ArtifactName_13120">축복의 성물</String>
   <String Key="ArtifactDesc_13120">사용자의 신체에 축복을 부여하는 성물
 축복을 받기 위한 기도에는 시간이 필요합니다.</String>
@@ -3375,7 +3373,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="SeasonalEventMode_Season21">북부 마물제</String>
   <String Key="SeasonalEventName_Season21">북부 마물제</String>
   <String Key="SkinName_1001004">성기사왕 다니엘</String>
-  <String Key="SkinDesc_1001004"> &lt;i&gt;북부 놈들이 쳐들어온다라!
+  <String Key="SkinDesc_1001004">&lt;i&gt;북부 놈들이 쳐들어온다라!
 이 땅이 누구 땅인지 잊어버렸나 보군.
 여봐라! 내 망치를 가져와라!&lt;/i&gt;</String>
   <String Key="SkinName_1033002">슬라임의 친구 미르실</String>
@@ -3402,7 +3400,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="SaveTowerEliteScore">도전 점수 기록</String>
   <String Key="ReturnToCastle">귀환</String>
   <String Key="SeasonPassPlus">킹갓패스 플러스</String>
-  <String Key="SeasonPass_Season_Benefit_10">패스 임무 새로고침 기능 무료 </String>
+  <String Key="SeasonPass_Season_Benefit_10">패스 임무 새로고침 기능 무료</String>
   <String Key="SeasonPass_Season_Benefit_11">패스 레벨 30 달성 이후 추가 보상 X 2</String>
   <String Key="RerollMission?">임무를 새로고침 하시겠습니까?
 기존 임무가 무작위의 다른 임무로 교체됩니다.</String>
@@ -3510,7 +3508,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="ShopItemName_1015_Post">11레벨 성장 패키지</String>
   <String Key="ShopItemName_1016_Post">13레벨 성장 패키지</String>
   <String Key="ShopItemName_1017_Post">15레벨 성장 패키지</String>
-  <String Key="RedValve ">붉은밸브</String>
+  <String Key="RedValve">붉은밸브</String>
   <String Key="LilCat">릴캣</String>
   <String Key="VeryLittleBear">베리작은곰</String>
   <String Key="NewUnitGachaPanelNewUnit">영웅 등장!</String>
@@ -3857,7 +3855,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="ItemName_40393">오버로드</String>
   <String Key="ItemName_40403">마신의 폭주</String>
   <String Key="ItemName_40413">은방패</String>
-  <String Key="ItemDesc_40413">보유 은화 100 당 받는 피해가 {0}% 감소 (최대 {1}%) </String>
+  <String Key="ItemDesc_40413">보유 은화 100 당 받는 피해가 {0}% 감소 (최대 {1}%)</String>
   <String Key="ItemName_40423">만전</String>
   <String Key="ItemDesc_40423">장착/사용하지 않은 아이템 하나 당 공격속도가 {0}% 증가 (최대 {1}%)</String>
   <String Key="ItemName_40433">저금</String>
@@ -3997,7 +3995,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="RogueLikeEvent_10011_Result_Ignore_Desc">정화된 제국군이 사례를 합니다.</String>
   <String Key="RogueLikeEventOption_AddGold_Desc">&lt;color=#66FF66&gt;{0}&lt;/color&gt;은화 획득</String>
   <String Key="RogueLikeEvent_10012_Desc">두 번째 제국군도 잠식으로부터 정화되었습니다.
-이제 마지막 제국군만이 남아있습니다. </String>
+이제 마지막 제국군만이 남아있습니다.</String>
   <String Key="RogueLikeEvent_10012_Result_win_Desc">마지막 제국군을 정화합니다.</String>
   <String Key="RogueLikeEventOption_EliteReward">정예 선택 보상을 지급받습니다.</String>
   <String Key="RogueLikeEventResult_EliteReward">정예 선택 보상을 지급받습니다.</String>
@@ -4192,7 +4190,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="RogueLikeEventOption_AddRandomEquip_Desc">무작위 {0}등급 장비 &lt;color=#ffcc00&gt;{1}&lt;/color&gt;개 획득</String>
   <String Key="RogueLikeEvent_10150_Option_Open">&lt;color=#FFD145&gt;열어&lt;/color&gt;본다</String>
   <String Key="RogueLikeEvent_10150_Option_PickUpJunks">근처를 &lt;color=#FFD145&gt;탐색&lt;/color&gt;한다</String>
-  <String Key="RogueLikeEventResult_BattleInUnit">다음 &lt;color=#00bbff&gt;{0}&lt;/color&gt; 몬스터가 포함된 채로 전투를 진행합니다. </String>
+  <String Key="RogueLikeEventResult_BattleInUnit">다음 &lt;color=#00bbff&gt;{0}&lt;/color&gt; 몬스터가 포함된 채로 전투를 진행합니다.</String>
   <String Key="RogueLikeEventResult_10150_Open">봉인함을 열었더니 안에서 갑자기 마물들이 뛰쳐나옵니다.</String>
   <String Key="RogueLikeEventResult_10150_FindOther">봉인함 근처에서 쓸만한 장비를 주웠습니다.</String>
   <String Key="RogueLikeEvent_10160_Title">부서진 피의 제단</String>
@@ -4655,7 +4653,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="RogueLikeEvent_10310_Result_OpenFail_Desc">탐욕의 신의 저주가 내립니다.</String>
   <String Key="RogueLikeEventResult_10310_Open">상자는 은화로 가득 차 있었습니다.</String>
   <String Key="RogueLikeEventResult_10310_OpenFail">빈 상자에서 탐욕의 신의 기운이 흘러나와 온 몸을 감쌉니다.</String>
-  <String Key="RogueLikeUnitInfoPanel_HeroOwnDesc">보유 영웅 특성 활성화 </String>
+  <String Key="RogueLikeUnitInfoPanel_HeroOwnDesc">보유 영웅 특성 활성화</String>
   <String Key="CancelByOnlyStun">true</String>
   <String Key="ArenaRewardPostTitle_Season25">아레나 시즌25 랭크 보상</String>
   <String Key="ArenaRewardPostDesc_Season25">아레나 시즌25 랭크 보상을 드립니다!</String>
@@ -4751,7 +4749,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="RogueLikeUnlockChallengeDesc">대균열 강화 개방</String>
   <String Key="RogueLikeUnlockBeginnerTitle">균열의 정화</String>
   <String Key="RogueLikeUnlockBeginnerDesc">대균열 정화 개방</String>
-  <String Key="RogueLikeAchieveHeroCountTitle">분대장 </String>
+  <String Key="RogueLikeAchieveHeroCountTitle">분대장</String>
   <String Key="RogueLikeAchieveHeroCountDesc">영웅 {0}명 보유</String>
   <String Key="RogueLikeAchieveGoldTitle">공허의 거상 {0}</String>
   <String Key="RogueLikeAchieveGoldDesc">보유 은화 {0}개 달성</String>
@@ -5183,7 +5181,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
 도탄 피해량 70% → 120%로 변경</String>
   <String Key="EliteType5Format">정예 몬스터 {0}기 추가 등장</String>
   <String Key="HardModeShopTitle">잠식 토큰 상점</String>
-  <String Key="Ingame_Setting_DealMeterCheck">전투력 측정 </String>
+  <String Key="Ingame_Setting_DealMeterCheck">전투력 측정</String>
   <String Key="Character_Class_Mystic">신비</String>
   <String Key="Character_Class_Element">원소</String>
   <String Key="Character_Class_Swift">신속</String>
@@ -5277,7 +5275,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="AddMaxLaborPer_Desc">활력 저장량 증가</String>
   <String Key="AddMaxLaborPer_Format">활력 저장량 {0}% 증가</String>
   <String Key="ShortenTimePer_Desc">조사 시간 감소</String>
-  <String Key="ShortenTimePer_Format">조사 시간 {0}% 감소 </String>
+  <String Key="ShortenTimePer_Format">조사 시간 {0}% 감소</String>
   <String Key="AddJackpotPer_Desc">연금 등급 상승 확률 증가</String>
   <String Key="AddJackpotPer_Format">연금 등급 상승 확률 {0}% 증가</String>
   <String Key="AddAtkPerBuffPer_Desc">모든 영웅 공격력 증가</String>
@@ -5293,7 +5291,7 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="AddMaxLaborPerRoleBonus_Desc">활력 저장량 추가 증가</String>
   <String Key="AddMaxLaborPerRoleBonus_Format">활력 저장량 {0}% 추가 증가</String>
   <String Key="ShortenTimePerRoleBonus_Desc">조사 시간 추가 감소</String>
-  <String Key="ShortenTimePerRoleBonus_Format">조사 시간 {0}% 추가 감소 </String>
+  <String Key="ShortenTimePerRoleBonus_Format">조사 시간 {0}% 추가 감소</String>
   <String Key="AddJackpotPerRoleBonus_Desc">연금 등급 상승 확률 추가 증가</String>
   <String Key="AddJackpotPerRoleBonus_Format">연금 등급 상승 확률 {0}% 추가 증가</String>
   <String Key="AddAtkPerBuffPerRoleBonus_Desc">모든 영웅 공격력 추가 증가</String>
@@ -5445,8 +5443,8 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="TerritoryUpgradeCompletedFormat">{0} 업그레이드 완료</String>
   <String Key="CantReplaceWhileUpgrade">건설/업그레이드 중인 건물과 자리를 바꿀 수 없습니다.</String>
   <String Key="LevelSync_Desc_1">계승 레벨은 성소의 최대 계승 레벨과
-배치된 영웅 중 최소 레벨 영웅에 따라 결정됩니다. </String>
-  <String Key="LevelSync_Desc">영웅에 계승되는 레벨은 성소의 계승 레벨에 따라 결정됩니다. </String>
+배치된 영웅 중 최소 레벨 영웅에 따라 결정됩니다.</String>
+  <String Key="LevelSync_Desc">영웅에 계승되는 레벨은 성소의 계승 레벨에 따라 결정됩니다.</String>
   <String Key="UnitAssignment_AssignedUnit">배치 중</String>
   <String Key="UnitAssignment_LevelSyncUnit">성소
 배치 중</String>
@@ -6891,8 +6889,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArtifactName_14020">드워프 조준경</String>
   <String Key="ArtifactDesc_14020">드워프들의 기술이 집약된 조준경.
 사용자는 더 멀리, 더 정확히 공격할 수 있지만, 무거워서 들고다닐 수는 없습니다.</String>
-  <String Key="MoveStopTimeDesc_Piece">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 획득, 일정 시간 &lt;color=#f33&gt;이동 불가&lt;/color&gt;, 사거리 +3, 처음 및 매 5회마다 일반 피해의 주는 피해량 증가</String>
-  <String Key="MoveStopTimeDesc">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 +{2}, {0}초간 &lt;color=#f33&gt;이동 불가&lt;/color&gt;, 사거리 +3, 처음 및 매 5회마다 일반 피해의 주는 피해량 +{1}%.</String>
+  <String Key="MoveStopTimeDesc_Piece">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 +4, 저격 장소에서 처음으로 벗어나기 전까지 처음 및 매 5회 일반 피해의 주는 피해량 증가</String>
+  <String Key="MoveStopTimeDesc">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 +{1}, 저격 장소에서 처음으로 벗어나기 전까지 처음 및 매 5회마다 일반 피해의 주는 피해량 +{0}%.</String>
   <String Key="ColosseumBanned">격전의 전장 시즌 이용 제한</String>
   <String Key="GachaName_1036">웃음기 없는 미소</String>
   <String Key="Name_Potential_10560_3">고양</String>
@@ -7303,7 +7301,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="GoToFamilyMonthPackage">가정의 달 특가상품 바로가기</String>
   <String Key="MissionDesc_10112">챕터 II-3 플레이</String>
   <String Key="MissionDesc_10212">챕터 II-3 클리어</String>
-  <String Key="UnitName_21200">백호군 </String>
+  <String Key="UnitName_21200">백호군</String>
   <String Key="UnitName_21210">현무군</String>
   <String Key="UnitName_21220">주작군</String>
   <String Key="UnitName_21230">청룡군</String>
@@ -7379,9 +7377,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;성급 초월
 
 &lt;/size&gt;보구의 &lt;color=#ffbc00&gt;성급 초월&lt;/color&gt;을 통해 보구능력에 &lt;color=#ffbc00&gt;추가 효과를 부여&lt;/color&gt;할 수 있습니다.
- 성급 초월 에는 &lt;color=#ffbc00&gt;동일한 보구&lt;/color&gt;가 필요합니다.
-
-</String>
+ 성급 초월 에는 &lt;color=#ffbc00&gt;동일한 보구&lt;/color&gt;가 필요합니다.</String>
   <String Key="SkinName_1032006">푸른 파도 티아</String>
   <String Key="SkinName_1036004">푸른 파도 해랑</String>
   <String Key="SkinName_1042003">푸른 파도 태백</String>
@@ -7455,8 +7451,7 @@ Lv. {0} ▶ Lv. {1}</String>
 무적 상태에서 주는 피해량 +{1}%</String>
   <String Key="TreasureSkillDesc_3300033">뮤어를 장착한 가장 높은 성급의 영웅이 각 1회 한정 체력의 {0}%에 도달하거나, 죽음에 달하는 피해를 입을 시, {1}초간 무적
 (무적 상태 시 회복 및 쉴드 부여 불가)
-무적 상태에서 주는 피해량 +{2}%
-</String>
+무적 상태에서 주는 피해량 +{2}%</String>
   <String Key="TreasureSkillDesc_3300034">뮤어를 장착한 가장 높은 성급의 영웅이 각 1회 한정 체력의 {0}%에 도달하거나, 죽음에 달하는 피해를 입을 시, {1}초간 무적
 (무적 상태 시 회복 및 쉴드 부여 불가)
 무적 상태에서 주는 피해량 +{2}%
@@ -7686,15 +7681,11 @@ Lv. {0} ▶ Lv. {1}</String>
  &lt;size=25&gt;성급 초월
 
 &lt;/size&gt;보구의 &lt;color=#ffbc00&gt;성급 초월&lt;/color&gt;을 통해 보구능력에 &lt;color=#ffbc00&gt;추가 효과를 부여&lt;/color&gt;할 수 있습니다.
- 성급 초월 에는 &lt;color=#ffbc00&gt;동일한 보구&lt;/color&gt;가 필요합니다.
-
-</String>
+ 성급 초월 에는 &lt;color=#ffbc00&gt;동일한 보구&lt;/color&gt;가 필요합니다.</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;보구 강화
 
 &lt;/size&gt;보구를 &lt;color=#ffbc00&gt;강화&lt;/color&gt;하여 &lt;color=#ffbc00&gt;보구능력 효과를&lt;/color&gt; 증가시킬 수 있습니다.
-보구 &lt;color=#ffbc00&gt;강화 재료&lt;/color&gt;는 인벤토리에서 보구를 &lt;color=#ffbc00&gt;분해&lt;/color&gt;하거나, &lt;color=#ffbc00&gt;상점에서 구매&lt;/color&gt;하여 획득할 수 있습니다.
-
-</String>
+보구 &lt;color=#ffbc00&gt;강화 재료&lt;/color&gt;는 인벤토리에서 보구를 &lt;color=#ffbc00&gt;분해&lt;/color&gt;하거나, &lt;color=#ffbc00&gt;상점에서 구매&lt;/color&gt;하여 획득할 수 있습니다.</String>
   <String Key="TreasureOvercome">성급 초월</String>
   <String Key="TreasureOvercome_Short">성급 초월</String>
   <String Key="ViewNextOvercome">다음 초월 보기</String>
@@ -9511,7 +9502,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="PvpDormantTooltip_2_0">&lt;color=#B4B4B4&gt;3일 이상 전투 휴면 시, 매 3일마다 {0}점이 하락합니다.&lt;/color&gt;</String>
   <String Key="PvpDormantTooltip_Tip_0">3일 이상 전투 휴면 시, 3일마다 {0}점이 하락됩니다.
 점수는 2000점 미만으로 하락하지 않습니다.</String>
-  <String Key="InvasionPassDesc">패스를 구매하고 추가 보상을 획득하세요! </String>
+  <String Key="InvasionPassDesc">패스를 구매하고 추가 보상을 획득하세요!</String>
   <String Key="InvasionRewardPanelTabFormat">습격 {0} Part {1}</String>
   <String Key="InvasionPassNameFormat">습격 {0} Part {1} 패스</String>
   <String Key="FetchInvasionRewardInfoFailed">습격 보상 정보를 가져올 수 없습니다!</String>
@@ -9522,7 +9513,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="UnitSubName_10670">전장의 기수</String>
   <String Key="Potential_10670_0">수호 +30</String>
   <String Key="Potential_10670_1">전투 시작 후 처음으로 피해를 받은 후 2초간 받는 피해 -70%</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;제국의 명문가인 리테르가는 다양한 분야에서 뛰어난 인재들을 배출해 왔습니다. 파트로스는 리테르가 출신 치고는 타고난 능력은 없지만, 누구보다 뛰어난 노력으로 제국군의 모범적인 지휘관이 되었습니다.&lt;/i&gt; </String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;제국의 명문가인 리테르가는 다양한 분야에서 뛰어난 인재들을 배출해 왔습니다. 파트로스는 리테르가 출신 치고는 타고난 능력은 없지만, 누구보다 뛰어난 노력으로 제국군의 모범적인 지휘관이 되었습니다.&lt;/i&gt;</String>
   <String Key="SkillName_10670">제국을 위하여!</String>
   <String Key="SkillDesc_10670">{TotalAttackTime}초 동안 아군을 격려하여 {Time}초 마다 자신 주변 {SplashRangeX}{x}{SplashRangeY}범위 내 모든 아군을 {Heal}만큼 치유하고 공격속도를 {AttackSpeedPerUnit10670}% 상승시킵니다. 공격속도 상승량은 동일한 이름의 스킬 중 가장 높은 효과가 적용됩니다.</String>
   <String Key="SkillDesc_10670_Short">{TotalAttackTime}초간 주변 {SplashRangeX}{x}{SplashRangeY}범위 아군을 {Time}초 마다 {Heal}만큼 치유하고, 공격 속도를 {AttackSpeedPerUnit10670}% 상승시킵니다. 가장 높은 &lt;제국을 위하여!&gt;의 공격 속도 상승량만 적용됩니다.</String>
@@ -9822,8 +9813,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="BaseHybridDefOnInvade">습격 금화 보상 {0} 증가
 습격에서 모든 영웅의 방어력 +{1}
 재련 불가, 연마를 통한 강화 불가</String>
-  <String Key="ArtifactOptionDesc_Event_15000">
-연마를 통한 위치 이동 무료(~24.12.3)</String>
+  <String Key="ArtifactOptionDesc_Event_15000">연마를 통한 위치 이동 무료(~24.12.3)</String>
   <String Key="SkinName_1032007">달의 여신 티아</String>
   <String Key="SkinName_1032007_NewLine">달의 여신 티아</String>
   <String Key="TerritoryBuildingName_40300">달의 여신상</String>
@@ -10133,7 +10123,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="UnitNote_10690">영원숲 외곽에 혼자 있던 이비를 미르실이 거둬서 보살핌</String>
   <String Key="TreasureName_30014">메이르나</String>
   <String Key="TreasureSubName_30014">영원의 가지</String>
-  <String Key="TreasureDesc_30014">메이르나는 영원숲의 고목으로 마력 흡수율이 뛰어난 성질을 띄어 지팡이로 많이 제작 되었습니다. 이비는 자신의 마력을 담은 지팡이가 망가지지 않았을 때 굉장히 기뻐했습니다. </String>
+  <String Key="TreasureDesc_30014">메이르나는 영원숲의 고목으로 마력 흡수율이 뛰어난 성질을 띄어 지팡이로 많이 제작 되었습니다. 이비는 자신의 마력을 담은 지팡이가 망가지지 않았을 때 굉장히 기뻐했습니다.</String>
   <String Key="TreasureSkillName_30014">마법 씨앗</String>
   <String Key="TreasureSkillDesc_3300140">─마법 씨앗─
 스킬 사용 시 무작위 적에게 주문력 {0}%의 주문 스킬 피해
@@ -10304,7 +10294,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArtifactBuffDataDesc_10030_Piece">모든 영웅의 주문력 증가</String>
   <String Key="RankRangeFormat">{0}~{1}위</String>
   <String Key="Potential_10080_0">&lt;화염 숨결&gt; 사용 중 받는 피해 30% 감소</String>
-  <String Key="Potential_10260_2">적 처치 시 즉시 &lt;2식 청룡참&gt;사용, &lt;2식 청룡참&gt;의 최종 피해량 +40%</String>
+  <String Key="Potential_10260_2">적 처치 시 즉시 &lt;2식 청룡참&gt;사용, &lt;2식 청룡참&gt;의 최종 피해량 +20%</String>
   <String Key="SkillDesc_10690_Long">사용한 마나 {AttackCountByMaxManaPerDesc}마다 대상에게 {Damage}의 주문 스킬 피해를 반복해서 가합니다. &lt;성장하는 마력&gt;을 사용할 때 마다 최대 마나가 {10695@MaxMana}씩 증가합니다. (최대 {10695@MaxBuffOverlap}회 중첩)</String>
   <String Key="SkillName_42205">피의 폭주</String>
   <String Key="SkillDesc_UI_42205">피의 사도는 '피의 결정'과 공명합니다. '피의 결정'은 영웅들이 사용하는 타인 치유 스킬의 대상으로 우선 지정되며, 수호에 따라 받는 치유량이 크게 증가합니다. 피의 결정 치유량의 일부만큼 전체 영웅이 치유됩니다.</String>
@@ -10351,7 +10341,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ClanRaidRankRewardInfoSubTitle_Boss">보스등급 보상</String>
   <String Key="ClanRaidRankRewardDesc_Boss">보스등급 보상은 해당 보스등급 도달 시 즉시 지급되며 최대 킹-16 등급까지 지급됩니다.</String>
   <String Key="ClanRaidRetryAlertDesc_1">출정 시 보스 처치에 성공한 토벌대는 재출정이 가능하며, 토벌대 당 최대 &lt;color=#ffd264&gt;2&lt;/color&gt;회의 재출정이 가능합니다.</String>
-  <String Key="ClanRaidRetryAlertDesc_2">토벌대 재출정 시 이전 전투에서 남은 시간과 신성력을 이어서 진행합니다. </String>
+  <String Key="ClanRaidRetryAlertDesc_2">토벌대 재출정 시 이전 전투에서 남은 시간과 신성력을 이어서 진행합니다.</String>
   <String Key="ClanRaidRetryAlertDesc_3">토벌대 재출정 시 오늘의 출정 횟수나 토벌대 사용 횟수는 차감되지 않습니다.</String>
   <String Key="ClanRaidRetryAlertDesc_4">재출정 가능한 토벌대는 하루가 지나면 초기화 됩니다.</String>
   <String Key="ClanRaidRankReward">랭킹 보상</String>
@@ -10545,7 +10535,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArenaTrainingInformation_2">평가전에서는 승리하거나 패배해도 아레나 점수는 그대로 유지됩니다.</String>
   <String Key="ArenaTrainingInformation_3">평가전은 하루에 5번만 플레이 할 수 있습니다.</String>
   <String Key="ArenaTrainingInformation_4">그랜드 아레나인 유저들은 평가전에 참여시, 진형 사용 횟수가 차감되지 않습니다.</String>
-  <String Key="ArenaTrainingInformation_5">그랜드 아레나인 유저들도 평가전에서 승리 보상을 얻을 수 있습니다 </String>
+  <String Key="ArenaTrainingInformation_5">그랜드 아레나인 유저들도 평가전에서 승리 보상을 얻을 수 있습니다</String>
   <String Key="DoNotShowInThisSeason">이번 시즌동안 다시 보지 않기</String>
   <String Key="ArenaTrainingNeedDeckMessage">평가전은 아레나에 참여하는 진형을 그대로 사용합니다.
 
@@ -10917,7 +10907,7 @@ Lv. {0} ▶ Lv. {1}</String>
 서로 다른 서부 영웅 마다 앞 2열에 배치된 영웅의 받는 피해량 -{0}%
 뒤 2열에 배치된 영웅의 최종 피해량 +{1}%</String>
   <String Key="Guard">은총</String>
-  <String Key="StatInformationDesc_Guard">은총을 받은 영웅은 물리/주문 피해를 받을 때, 최대 체력의 [15000 ÷ (은총을 제공한 영웅의 수호+50)] %을 초과하여 체력이 감소하지 않는다. 피해량 제한량은 은총을 제공한 영웅의 스킬 티어에 반비례 (1~2성 1배, 3~4성 1/2배, 5~6성 1/3배, 7성 1/4배) 한다. 쉴드는 은총의 적용을 받지 않는다. 피해량 제한 수치는 오버타임 배율의 영향을 받는다. </String>
+  <String Key="StatInformationDesc_Guard">은총을 받은 영웅은 물리/주문 피해를 받을 때, 최대 체력의 [15000 ÷ (은총을 제공한 영웅의 수호+50)] %을 초과하여 체력이 감소하지 않는다. 피해량 제한량은 은총을 제공한 영웅의 스킬 티어에 반비례 (1~2성 1배, 3~4성 1/2배, 5~6성 1/3배, 7성 1/4배) 한다. 쉴드는 은총의 적용을 받지 않는다. 피해량 제한 수치는 오버타임 배율의 영향을 받는다.</String>
   <String Key="HealEfficiency">주는 치유량</String>
   <String Key="StatInformationDesc_HealEfficiency">대상에게 전달하는 치유량을 보유한 주는 치유량 수치만큼 증폭시킨다.</String>
   <String Key="Execution">처형율</String>
@@ -11212,7 +11202,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="OutgameTutorial_160_01">&lt;color=#ffc13d&gt;재련은 유물을 더욱 강하게 만들 수 있는 방법&lt;/color&gt;입니다.
 
 &lt;color=#BBE3FB&gt;제가 가지고 있는 유물을 이용해서 설명을 드리겠습니다.&lt;/color&gt;</String>
-  <String Key="OutgameTutorial_160_02">재련은 유물의 &lt;color=#ffc13d&gt;유물 옵션&lt;/color&gt;을 변경할 수 있는 시스템으로, 이를 통해 영웅들과의 시너지를 극대화할 수 있습니다. </String>
+  <String Key="OutgameTutorial_160_02">재련은 유물의 &lt;color=#ffc13d&gt;유물 옵션&lt;/color&gt;을 변경할 수 있는 시스템으로, 이를 통해 영웅들과의 시너지를 극대화할 수 있습니다.</String>
   <String Key="OutgameTutorial_160_03">재련은 &lt;color=#ffc13d&gt;킹갓등급 유물&lt;/color&gt;만 가능합니다. &lt;color=#ffc13d&gt;재련 버튼&lt;/color&gt;을 눌러 재련 화면으로 들어갈 수 있습니다.</String>
   <String Key="OutgameTutorial_160_04">재련을 통해 다음과 같은 옵션들이 &lt;color=#ffc13d&gt;모두 무작위로 변경&lt;/color&gt;됩니다.</String>
   <String Key="OutgameTutorial_160_05">변경을 원하지 않는 옵션이 있다면,
@@ -11226,7 +11216,7 @@ Lv. {0} ▶ Lv. {1}</String>
 촉매는 &lt;color=#ffc13d&gt;변경되는 옵션의 수치를 어느정도 조정&lt;/color&gt;할 수 있습니다.
 촉매의 종류에 따라 &lt;color=#ffc13d&gt;특정 종류의 옵션으로만 등장&lt;/color&gt;하게 할 수 있고,
 &lt;color=#ffc13d&gt;특정 단계 이상의 옵션으로만 등장&lt;/color&gt;하게 할 수도 있습니다.</String>
-  <String Key="OutgameTutorial_160_09">&lt;color=#BBE3FB&gt;전 모든 옵션이 3단계 이상으로만 등장하게 하는&lt;/color&gt; &lt;color=#ffc13d&gt;킹갓 빛나는 촉매&lt;/color&gt; &lt;color=#BBE3FB&gt;를 사용해 보겠습니다.&lt;/color&gt; </String>
+  <String Key="OutgameTutorial_160_09">&lt;color=#BBE3FB&gt;전 모든 옵션이 3단계 이상으로만 등장하게 하는&lt;/color&gt; &lt;color=#ffc13d&gt;킹갓 빛나는 촉매&lt;/color&gt; &lt;color=#BBE3FB&gt;를 사용해 보겠습니다.&lt;/color&gt;</String>
   <String Key="OutgameTutorial_160_10">변경할 옵션과, 재료, 촉매를 모두 정했다면 이제 비용을 지불하고 재련을 시작할 수 있습니다.
 보석 혹은 금화를 지불하고 재련을 시작할 수 있지만, &lt;color=#ffc13d&gt;지금같이 높은 등급의 재련석을 사용할 경우 비용이 0이 됩니다.&lt;/color&gt;</String>
   <String Key="OutgameTutorial_160_11">&lt;color=#ffc13d&gt;예&lt;/color&gt; 버튼을 눌러서 재련을 시작할 수 있습니다.</String>
@@ -11374,7 +11364,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="StarterMissionSubStepTitle_2-3">&lt;Size=20&gt;2-3&lt;/Size&gt;
 습격을 효과적으로 막는 방법</String>
   <String Key="StarterMissionSubStepTitle_3-1">&lt;Size=20&gt;3-1&lt;/Size&gt;
-영웅의 각성 </String>
+영웅의 각성</String>
   <String Key="StarterMissionSubStepTitle_3-2">&lt;Size=20&gt;3-2&lt;/Size&gt;
 유물 재련과 연마</String>
   <String Key="StarterMissionSubStepTitle_3-3">&lt;Size=20&gt;3-3&lt;/Size&gt;
@@ -11400,7 +11390,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="MissionDesc_ColosseumGameRankOver">격전의 전장 {0}위 이상 달성 {Value}회</String>
   <String Key="MissionDesc_PvPAttainmentRank">아레나 {0} 티어 달성</String>
   <String Key="MissionDesc_ClearBabelFloor">{0} {1}층 클리어</String>
-  <String Key="MissionDesc_TreasureOvercomeLevel">{0} {Value}초월 달성 </String>
+  <String Key="MissionDesc_TreasureOvercomeLevel">{0} {Value}초월 달성</String>
   <String Key="MissionDesc_TreasureCount_Lv">보구 {0}레벨 누적 {Value}회 달성</String>
   <String Key="MissionDesc_EquipAccessory">장신구 장착 {Value}회</String>
   <String Key="MissionDesc_LevelUpAccessory">장신구 강화 {Value}회</String>
@@ -11408,8 +11398,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AddDifficultyUnlockDesc">피해 없이 클리어 할 경우 난이도가 2단계씩 해방됩니다.</String>
   <String Key="AccessoryLevelUpTutorialLock">잠식 II-1 클리어 후 열람하실 수 있습니다.</String>
   <String Key="NotAccessoryLevelUp">강화할 수 있는 장신구가 없습니다</String>
-  <String Key="ArtifactOptionDesc_Event_15020">
-연마를 통한 위치 이동 무료 (&lt;color=#ffbd4a&gt;~{0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">연마를 통한 위치 이동 무료 (&lt;color=#ffbd4a&gt;~{0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">챕터 {0}-{1} {Diff} 난이도 이상 클리어</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">[잠식] 챕터 {0}-{1} {Diff} 난이도 이상 클리어</String>
   <String Key="Polish_EventArtifact_Alert">해당 유물은 연마를 통한 강화가 불가능합니다!</String>
@@ -11480,7 +11469,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="UnitName_10720">에일린</String>
   <String Key="UnitSubName_10720">야수 추적자</String>
   <String Key="Potential_10720_0">돌진 피해를 가한 적에게 1.5초간 기절 부여</String>
-  <String Key="Potential_10720_1">돌진 피해를 가한 적에게 3초간 방어력 -300 </String>
+  <String Key="Potential_10720_1">돌진 피해를 가한 적에게 3초간 방어력 -300</String>
   <String Key="SkinDesc_Default_10720">&lt;i&gt;비밀스럽고 은밀한 은빛송곳니의 수장인 에일린은 저주받은 대검을 짊어진채 자신들의 잘못을 바로 잡기위해 끝없이 야수들을 추적합니다.&lt;/i&gt;</String>
   <String Key="SkillName_10720">야수 사냥</String>
   <String Key="SkillDesc_10720_Short">대상에게 돌진하여 {Damage}의 피해를 가하고 다음 {10725@RemoveBuffAfterAttackCount}회의 일반 공격을 강화합니다.</String>
@@ -11729,7 +11718,6 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AccessorySynergyName_9">월광</String>
   <String Key="AccessorySynergyName_9_Pre">월광의</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;최종 주문력 {0}%&lt;/color&gt;, 최종 공격력 +{1}%</String>
-  <String Key="AccessorySynergyDesc_10091">사거리 +{0}, 보유한 사거리 {1}마다 물리 치명타 피해량 +{2}%(최대 80%)</String>
   <String Key="AccessorySynergyDesc_10092">전투 시작 시 {0}초간 은신, {1}초 후 물리 치명타 확률 +{2}%</String>
   <String Key="InventoryItemName_5010">월광의 장신구 선택 상자</String>
   <String Key="ShopItemName_41012">무작위 월광 장신구</String>
@@ -11761,8 +11749,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SpecialPackage_1556">에테르나 패키지 1</String>
   <String Key="SpecialPackage_1557">에테르나 패키지 2</String>
   <String Key="SpecialPackage_1558">에테르나 패키지 3</String>
-  <String Key="MakeAllLateComerExceptSlot">진영의 {0}에 위치한 영웅을 제외한 모든 영웅들에게 후발대 효과 부여
-</String>
+  <String Key="MakeAllLateComerExceptSlot">진영의 {0}에 위치한 영웅을 제외한 모든 영웅들에게 후발대 효과 부여</String>
   <String Key="Order_1">첫 번째</String>
   <String Key="Order_2">두 번째</String>
   <String Key="Order_3">세 번째</String>
@@ -12683,7 +12670,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="RiftWeaponBuffDesc_130">스킬 사용 후 일반 피해 시 3명에게 {0}%의 특수 피해</String>
   <String Key="RiftWeaponBuffDesc_140">물리 방어력 +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">주문 방어력 +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">사거리 +{0} 증가</String>
+  <String Key="RiftWeaponBuffDesc_160">이동속도 +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">물리 흡혈 +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">주문 흡혈 +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">방어력 +{0}</String>
@@ -12768,7 +12755,7 @@ Lv. {0} ▶ Lv. {1}</String>
 &lt;i&gt;”운명의 결말에 따라 마법을 내리노니”&lt;/i&gt;</String>
   <String Key="RogueLikeEvent_10320_RollDice_Name">주사위를 굴린다.</String>
   <String Key="RogueLikeEvent_10320_RollDice_Desc">그에 따른 결과를 받습니다.</String>
-  <String Key="RogueLikeEventResult_10320_RollDice">주사위에서 &lt;color=#49f&gt;{0}&lt;/color&gt;과 &lt;color=#49f&gt;{1}&lt;/color&gt;의 눈이 나왔습니다. </String>
+  <String Key="RogueLikeEventResult_10320_RollDice">주사위에서 &lt;color=#49f&gt;{0}&lt;/color&gt;과 &lt;color=#49f&gt;{1}&lt;/color&gt;의 눈이 나왔습니다.</String>
   <String Key="RogueLikeEventResult_HighEliteReward_Triple">더 강력한 정예 선택 보상을 &lt;color=#ffc13d&gt;세 번&lt;/color&gt; 지급받습니다!</String>
   <String Key="RogueLikeEventResult_HighEliteReward">더 강력한 정예 선택 보상을 지급받습니다!</String>
   <String Key="RogueLikeEventResult_RewardGold">은화를 지급 받습니다.</String>
@@ -14092,7 +14079,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AccessorySubStatInfo_0">보조 능력치는 특급 장신구에 2개, 희귀 및 일반 장신구에 1개가 부여됩니다.</String>
   <String Key="AccessorySubStatInfo_1">보조 능력치는 각 보조 능력치 별 등급에 따라 옵션 수치가 결정됩니다.</String>
   <String Key="AccessorySubStatInfo_2">보조 능력치의 등급은 최대 SS등급부터 최하 D등급까지 있습니다.</String>
-  <String Key="AccessorySubStatInfo_3">같은 보조 능력치 등급이라도 옵션 수치가 다를 수 있습니다. </String>
+  <String Key="AccessorySubStatInfo_3">같은 보조 능력치 등급이라도 옵션 수치가 다를 수 있습니다.</String>
   <String Key="AccessorySubStatInfo_4">보조 능력치 등급마다 정해진 점수가 있으며, 보조 능력치 등급 점수 합산은 최대 30점을 넘을 수 없습니다.</String>
   <String Key="AccessorySubStatInfo_5">보조 능력치 별 점수는 다음과 같습니다.
 SS = 22.5 ~ 26
@@ -14373,7 +14360,7 @@ D = 1 ~ 4</String>
   <String Key="TreasureDesc_30030">교단의 기사들은 자신들의 무구에 신념을 새겨 넣는 축성의 과정을 거칩니다.
 기드닐은 자신의 건틀릿 ‘트리그바른’에 자신의 신념과, 냉철한 의지,
 그리고 모든 적을 응징하겠다는 굳은 결의를 담아 축성을 마쳤습니다.</String>
-  <String Key="Potential_10260_3">3회째 &lt;2식 청룡참&gt; 대신 단일 대상에게 횡룡섬의 27배 피해를 확정적으로 가하는 &lt;3식 뇌룡강림&gt; 사용 </String>
+  <String Key="Potential_10260_3">3회째 &lt;2식 청룡참&gt; 대신 단일 대상에게 횡룡섬의 27배 피해를 확정적으로 가하는 &lt;3식 뇌룡강림&gt; 사용</String>
   <String Key="TargetIsNotSplashSelfMainTarget">true</String>
   <String Key="OutgameTutorial_30_19">이제 왕께서는 새로운 챕터인 &lt;color=#ffc13d&gt;도적단 습격&lt;/color&gt;의 전투에 참전하실 수 있습니다.</String>
   <String Key="OutgameTutorial_30_20">앞으로도 많은 역경과 고난이 기다리겠지만, 강력한 영웅들과 함께 적들을 물리치고 성을 방어하실 수 있길 바라겠습니다.
@@ -14445,8 +14432,7 @@ D = 1 ~ 4</String>
   <String Key="AltarHelpBuilding_5">은화 수급량 늘려 영웅 소환과 상점 이용을 용이하게 할 수 있는 제단입니다.
 
 추천: 습격, 아레나</String>
-  <String Key="ArtifactBuffDataDesc_15010">습격 및 원정에서 전투 시작 시 선발 영웅의 공격속도 +{0}% (선발 영웅이 없을 경우 효과없음)
-</String>
+  <String Key="ArtifactBuffDataDesc_15010">습격 및 원정에서 전투 시작 시 선발 영웅의 공격속도 +{0}% (선발 영웅이 없을 경우 효과없음)</String>
   <String Key="Post_Name_AltarGoldRefund">제단 불꽃 확장 골드 환급</String>
   <String Key="Post_Desc_AltarGoldRefund">제단 불꽃 확장에 소모한 골드를 지급해드립니다.</String>
   <String Key="OutgameTutorial_140_00">성의 왕이여, 오랜만입니다. &lt;color=#FFC13D&gt;기사단 사령관 아슬린입니다.&lt;/color&gt;
@@ -15202,7 +15188,7 @@ D = 1 ~ 4</String>
   <String Key="SpecialPackage_1633">앵화 패키지 3</String>
   <String Key="UnitName_10770">한라</String>
   <String Key="UnitSubName_10770">꽃피는 불꽃</String>
-  <String Key="Potential_10770_0">같은 적을 연속으로 30회 공격 시 최종 주는 피해량 +15%, 다른 적 공격 시 초기화 </String>
+  <String Key="Potential_10770_0">같은 적을 연속으로 30회 공격 시 최종 주는 피해량 +15%, 다른 적 공격 시 초기화</String>
   <String Key="Potential_10770_1">같은 적 공격 시 방어력 +40(최대 30중첩), 다른 적 공격 시 초기화</String>
   <String Key="SkinDesc_Default_10770">&lt;i&gt;불을 다루는 무녀는 타오르는 불길과는 상반되는 흔들리지 않는 마음을 지녀야 합니다. 한라는 자신이 다루는 불꽃이 주변에 따스함만을 가져다 줄 수 있도록 평정심을 기르는 수련을 게을리 하지 않습니다.&lt;/i&gt;</String>
   <String Key="SkillName_10770">낙화</String>
@@ -15270,7 +15256,7 @@ D = 1 ~ 4</String>
   <String Key="ArtifactCraft_Action_2_Smart_Help_4">이대로 재련하시겠습니까?</String>
   <String Key="NotEnoughResourceFormat">{0}이(가) 부족합니다.</String>
   <String Key="Statistics">통계</String>
-  <String Key="HeroStatisticsHelp_0">착용 통계는 하루에 한번 유저들의 캐릭터 정보를 기반으로 집계됩니다. </String>
+  <String Key="HeroStatisticsHelp_0">착용 통계는 하루에 한번 유저들의 캐릭터 정보를 기반으로 집계됩니다.</String>
   <String Key="HeroStatisticsHelp_1">20레벨 이상의 캐릭터 중 보구와 장신구를 모두 장착한 경우만 통계로 집계합니다.</String>
   <String Key="HeroStatistics">착용 통계</String>
   <String Key="AwakeningSkillAdoptionRate">각성 능력 채택율</String>
@@ -15387,7 +15373,7 @@ D = 1 ~ 4</String>
   <String Key="SkillDesc_21940">넉백 면역. 일반 공격 대신 {ChannelingTime}초 동안 정신 집중한 뒤, 모든 범위에 ({Damage} + 대상 최대 체력의 {MaxHpRatioAtk}%)의 주문 스킬 피해를 {AttackCount}회 입힙니다.</String>
   <String Key="SkillDesc_21951">용들이 받은 피해의 {BossTempParam}%를 주문 피해로 소환수를 제외한 최대 체력이 가장 높은 영웅에게 전이합니다.</String>
   <String Key="SkillDesc_21952">용들의 방어력 {BossTempParam} 증가. 물리방어력+주문방어력의 &lt;color=#ffcc00&gt;5&lt;/color&gt;%만큼 최종 피해량 증가. 받는 위협의 기본 효과 +&lt;color=#ffcc00&gt;300&lt;/color&gt;%</String>
-  <String Key="SkillDesc_21953">시련 동안 적 영웅의 공격 속도를 &lt;color=#ffcc00&gt;0.5&lt;/color&gt;로 고정 및 공격속도의 증가 및 감소에 영향받지 않음. 일반 공격 시 마나충전 +&lt;color=#ffcc00&gt;75&lt;/color&gt;, 최종 공격력/주문력 +&lt;color=#ffcc00&gt;200&lt;/color&gt;%. </String>
+  <String Key="SkillDesc_21953">시련 동안 적 영웅의 공격 속도를 &lt;color=#ffcc00&gt;0.5&lt;/color&gt;로 고정 및 공격속도의 증가 및 감소에 영향받지 않음. 일반 공격 시 마나충전 +&lt;color=#ffcc00&gt;75&lt;/color&gt;, 최종 공격력/주문력 +&lt;color=#ffcc00&gt;200&lt;/color&gt;%.</String>
   <String Key="SkillDesc_21954">용들이 받는 물리 피해량 -&lt;color=#ffcc00&gt;99&lt;/color&gt;%. 시련 동안 적 영웅이 받는 치유량 +&lt;color=#ffcc00&gt;100&lt;/color&gt;%, 받는 쉴드 획득량 +&lt;color=#ffcc00&gt;100&lt;/color&gt;%, 물리/주문 흡혈 불가</String>
   <String Key="InventoryItemName_5602">인기 보구 선택 상자</String>
   <String Key="RewardBoxInventoryDesc_5602">사용률이 높은 보구를 선택하여 7개 획득할 수 있는 상자</String>
@@ -15493,7 +15479,7 @@ D = 1 ~ 4</String>
   <String Key="SpecialPackage_1635">아펠피시아 패키지 2</String>
   <String Key="SpecialPackage_1636">아펠피시아 패키지 3</String>
   <String Key="SkillDesc_60545">가장 멀리 있는 적을 향해 거대한 바위를 던져 대상과 주변 3X3범위의 모든 적들을 공격하고 3초간 기절시킵니다.</String>
-  <String Key="SkillDesc_60626">주변의 적들을 자신이 보는 방향으로 5칸 밀쳐냅니다. </String>
+  <String Key="SkillDesc_60626">주변의 적들을 자신이 보는 방향으로 5칸 밀쳐냅니다.</String>
   <String Key="SkillDesc_60636">자신과 가장 가까운 적을 3초동안 공포에 빠지게 합니다. 공포에 빠진 적은 도망치게 됩니다.</String>
   <String Key="SeasonInformation">시즌 정보</String>
   <String Key="SeasonInformationHelp_0">이번 시즌에서 제공되는 침공 소환석의 챕터 정보와 보정된 영웅 능력치 정보를 확인하실 수 있습니다.</String>
@@ -15576,7 +15562,7 @@ D = 1 ~ 4</String>
   <String Key="CumulativePurchaseEvent">&lt;color=#FFD247&gt;누적 결제&lt;/color&gt; 이벤트</String>
   <String Key="CumulativePurchaseEventPostName">누적 결제 이벤트 보상</String>
   <String Key="CumulativePurchaseEventPostDesc">이벤트 기간 내 수령하지 못한 누적 결제 이벤트 보상을 지급해 드립니다.</String>
-  <String Key="CumulativePurchaseEventBannerName"> &lt;color=#FFD247&gt;누적 결제&lt;/color&gt; 이벤트</String>
+  <String Key="CumulativePurchaseEventBannerName">&lt;color=#FFD247&gt;누적 결제&lt;/color&gt; 이벤트</String>
   <String Key="CumulativePurchaseEventPanelInfo_101">패키지 포인트 획득 시 &lt;color=#ffd264&gt;엘레나 조언자&lt;/color&gt; 및
 &lt;color=#ffd264&gt;초월의 주괴&lt;/color&gt; 등 푸짐한 보상 지급</String>
   <String Key="CumulativePurchaseEventPanelDesc_101">패키지 포인트는 한정 보구 특별 상점의 패키지 구매 시 획득할 수 있습니다.</String>
@@ -15821,18 +15807,18 @@ D = 1 ~ 4</String>
 해당 기록을 초기화하고 새로운 스토리를 시작 하시겠습니까?</String>
   <String Key="ImpossibleRetreatBattleAlert">본 전투는 후퇴가 불가능합니다.</String>
   <String Key="StoryModeDialogue_1010100_0_1_Narr">숲길을 따라 움직이는 허름한 마차, 잠시 눈을 붙이고 있던 소녀는 시끄러운 소음에 잠에서 깬다.</String>
-  <String Key="StoryModeDialogue_1010100_0_2_Bardrey">와~ 경치 좋다! 남부 지역에 이런 곳이 있었다니. </String>
-  <String Key="StoryModeDialogue_1010100_0_3_Bardrey">지도에서 보던 것과 완전 다르다! </String>
+  <String Key="StoryModeDialogue_1010100_0_2_Bardrey">와~ 경치 좋다! 남부 지역에 이런 곳이 있었다니.</String>
+  <String Key="StoryModeDialogue_1010100_0_3_Bardrey">지도에서 보던 것과 완전 다르다!</String>
   <String Key="StoryModeDialogue_1010100_0_4_Driver">지도엔 벌레들은 안 보였겠지?</String>
-  <String Key="StoryModeDialogue_1010100_0_5_Bardrey">아하하 짓궂으시네요. </String>
+  <String Key="StoryModeDialogue_1010100_0_5_Bardrey">아하하 짓궂으시네요.</String>
   <String Key="StoryModeDialogue_1010100_0_6_Bardrey">태워주셔서 고마워요 아저씨!</String>
-  <String Key="StoryModeDialogue_1010100_0_7_Bardrey">이것도… 노래로.. 만들어야지! “낭만적인 숲, 단 벌레 많음.” 메모. </String>
+  <String Key="StoryModeDialogue_1010100_0_7_Bardrey">이것도… 노래로.. 만들어야지! “낭만적인 숲, 단 벌레 많음.” 메모.</String>
   <String Key="StoryModeDialogue_1010100_0_8_Bardrey">아. 방금 건 연습.</String>
   <String Key="StoryModeDialogue_1010100_0_9_Mel">으음…</String>
   <String Key="StoryModeDialogue_1010100_0_10_Bardrey">어, 깼어? 미안. 내가 조금… 많이 시끄러웠니?</String>
   <String Key="StoryModeDialogue_1010100_0_11_Mel">…</String>
-  <String Key="StoryModeDialogue_1010100_0_12_Bardrey">반가워! 난 신화와 전설을 좇아 여행하는 바드리라고 해! </String>
-  <String Key="StoryModeDialogue_1010100_0_13_Bardrey">넌? </String>
+  <String Key="StoryModeDialogue_1010100_0_12_Bardrey">반가워! 난 신화와 전설을 좇아 여행하는 바드리라고 해!</String>
+  <String Key="StoryModeDialogue_1010100_0_13_Bardrey">넌?</String>
   <String Key="StoryModeDialogue_1010100_0_14_Mel">…</String>
   <String Key="StoryModeDialogue_1010100_0_15_Bardrey">오오~ 무명의 떠돌이 여검사인가~?</String>
   <String Key="StoryModeDialogue_1010100_0_16_Mel">… 멜.</String>
@@ -15868,7 +15854,7 @@ D = 1 ~ 4</String>
   <String Key="StoryModeDialogue_1010100_0_45_Driver">아까처럼 고블린이 또 나오면 어쩌려고 그래?</String>
   <String Key="StoryModeDialogue_1010100_0_46_Driver">물론 아가씨 실력이면 문제는 없을 것 같지만…</String>
   <String Key="StoryModeDialogue_1010100_0_47_Mel">아뇨,</String>
-  <String Key="StoryModeDialogue_1010100_0_48_Mel">전… 떠나는 게 좋겠습니다. </String>
+  <String Key="StoryModeDialogue_1010100_0_48_Mel">전… 떠나는 게 좋겠습니다.</String>
   <String Key="StoryModeDialogue_1010100_0_49_Mel">함께 있으면 더 위험해질 거예요.</String>
   <String Key="StoryModeDialogue_1010100_0_50_System">어딘가 불안해보이는 눈빛으로, 방금 전까지 용맹하게 고블린과 싸웠던 소녀는 숲길로 사라진다.</String>
   <String Key="StoryModeDialogue_1010100_0_51_Driver">허허…</String>
@@ -15882,7 +15868,7 @@ D = 1 ~ 4</String>
   <String Key="StoryModeDialogue_1010100_1_7_Mel">이동 중에 무언가 특이한 부분을 발견하면, &lt;color=#ff8800&gt;상호작용 버튼&lt;/color&gt;을 눌러서 확인해보자.</String>
   <String Key="StoryModeDialogue_1010100_1_8_Mel">내 말을 다시 듣고 싶으면, 좌상단의 &lt;color=#ff8800&gt;대화 다시 보기&lt;/color&gt; 버튼을 눌러봐.</String>
   <String Key="StoryModeDialogue_1010100_1_9_Mel">…내가 자꾸 누구랑 이야기하는 거지?</String>
-  <String Key="StoryModeDialogue_1010100_14_1_Mel">뭐지? 방금 지나쳤던 장소 같은데… </String>
+  <String Key="StoryModeDialogue_1010100_14_1_Mel">뭐지? 방금 지나쳤던 장소 같은데…</String>
   <String Key="StoryModeDialogue_1010100_14_2_Mel">아냐, 그럴 리가 없지. 생각보다 길이 복잡한 것 같네.</String>
   <String Key="StoryModeDialogue_1010100_2_1_Mel">얼마나 더 쓰러뜨려야 하는 거지?</String>
   <String Key="StoryModeDialogue_1010100_2_2_Mel">윽...! 방금전의 전투에서 다친 건가?</String>
@@ -15896,13 +15882,13 @@ D = 1 ~ 4</String>
   <String Key="StoryModeDialogue_1010100_16_1_Mel">집으로… 돌아가고 싶어.</String>
   <String Key="StoryModeDialogue_1010100_5_1_Mel">더 이상은…</String>
   <String Key="StoryModeDialogue_1010100_6_1_Ian">결국 할아버지도, 너 때문에…</String>
-  <String Key="StoryModeDialogue_1010100_6_2_Mel">이안…! 할아버지…..! </String>
-  <String Key="StoryModeDialogue_1010100_6_3_Mel">다 나 때문이야… 다 나 때문인 거야.. </String>
+  <String Key="StoryModeDialogue_1010100_6_2_Mel">이안…! 할아버지…..!</String>
+  <String Key="StoryModeDialogue_1010100_6_3_Mel">다 나 때문이야… 다 나 때문인 거야..</String>
   <String Key="StoryModeDialogue_1010100_6_4_Mel">나 때문에 마을이, 마을 사람들이, 할아버지가, 전부…!</String>
   <String Key="StoryModeDialogue_1010100_6_5_Mel">윽...</String>
   <String Key="StoryModeDialogue_1010101_7_1_Mel">이런 길도 있었나? 분명 아까는 길이 없었던 것 같았는데...?</String>
   <String Key="StoryModeDialogue_1010101_8_1_Mel">오두막...? 이런 숲에 사람이 살던 흔적이 있네.</String>
-  <String Key="StoryModeDialogue_1010101_8_2_Mel">안에는 먼지 투성이에 금방이라도 쓰러질 것 같아. </String>
+  <String Key="StoryModeDialogue_1010101_8_2_Mel">안에는 먼지 투성이에 금방이라도 쓰러질 것 같아.</String>
   <String Key="StoryModeDialogue_1010101_8_3_Mel">굳이 들어가볼 필요가 있을까?</String>
   <String Key="StoryModeDialogue_1010101_8_S2_1_Mel">혹시 전투에서 도움이 될만한 물건이 있으려나?</String>
   <String Key="StoryModeDialogue_1010101_8_S2_2_Mel">안쪽을 살펴봐야겠어.</String>
@@ -15920,10 +15906,10 @@ D = 1 ~ 4</String>
   <String Key="StoryModeDialogue_1010101_12_3_Mel">할아버지, 죄송해요…</String>
   <String Key="StoryModeDialogue_1010101_13_1_Mel">목걸이는 챙겨야지.</String>
   <String Key="StoryModeDialogue_1010103_1_1_Bardrey">우으… 걱정돼서 따라오긴 했는데…</String>
-  <String Key="StoryModeDialogue_1010103_1_2_Bardrey">나무도 많고, 멜이 어디로 간 건지도 모르겠고… </String>
+  <String Key="StoryModeDialogue_1010103_1_2_Bardrey">나무도 많고, 멜이 어디로 간 건지도 모르겠고…</String>
   <String Key="StoryModeDialogue_1010103_1_3_Bardrey">역시 돌아가는 게 좋으려나?</String>
   <String Key="StoryModeDialogue_1010103_1_4_Bardrey">아니야, 바드루나, 겁먹지 말자!</String>
-  <String Key="StoryModeDialogue_1010103_1_5_Bardrey">멜은 혼자 간다고 말했지만, 분명 어딘가 초조해보였어. </String>
+  <String Key="StoryModeDialogue_1010103_1_5_Bardrey">멜은 혼자 간다고 말했지만, 분명 어딘가 초조해보였어.</String>
   <String Key="StoryModeDialogue_1010103_1_6_Bardrey">그리고 왠진 모르겠지만, 멜을 따라가면 엄청난 이야기가 펼쳐질 것 같단 말이지~!</String>
   <String Key="StoryModeDialogue_1010103_1_7_Bardrey">멜을 찾아서 힘차게 출발~!</String>
   <String Key="StoryModeDialogue_1010103_2_1_Bardrey">헉, 고블린 무리들이잖아?</String>
@@ -16009,7 +15995,7 @@ D = 1 ~ 4</String>
   <String Key="StoryModeDialogue_1010104_15_2_Mel">으…! 근처에 고블린들이 많네.</String>
   <String Key="StoryModeDialogue_1010104_15_3_Bardrey">멜, 이번엔 내가 도와줄게!</String>
   <String Key="StoryModeDialogue_1010104_16_1_Stranger">으...</String>
-  <String Key="StoryModeDialogue_1010104_16_2_Stranger">도와…세… </String>
+  <String Key="StoryModeDialogue_1010104_16_2_Stranger">도와…세…</String>
   <String Key="StoryModeDialogue_1010104_16_3_Mel">여전히 상태가 안 좋나봐...</String>
   <String Key="StoryModeDialogue_1010104_16_4_Mel">이상한 소리가 들려.</String>
   <String Key="StoryModeDialogue_1010104_16_5_Bardrey">그야.. 진짜 소리가 나니까!</String>
@@ -16026,7 +16012,7 @@ D = 1 ~ 4</String>
   <String Key="StoryModeDialogue_1010104_19_4_Mel">멈춰!</String>
   <String Key="StoryModeDialogue_1010104_19_5_Mel">바드리, 도와줄 수 있겠어?</String>
   <String Key="StoryModeDialogue_1010104_19_6_Bardrey">물론이지!</String>
-  <String Key="StoryModeDialogue_1010104_20_1_Mel">괜찮으세요? </String>
+  <String Key="StoryModeDialogue_1010104_20_1_Mel">괜찮으세요?</String>
   <String Key="StoryModeDialogue_1010104_20_2_Citizen">으으… 마을 사람들이 고블린들에게 잡혀 위쪽 길로 끌려갔습니다.</String>
   <String Key="StoryModeDialogue_1010104_20_3_Citizen">저는 간신히 도망치다가 잡혀서 그만...</String>
   <String Key="StoryModeDialogue_1010104_20_4_Citizen2">제발 부탁입니다.</String>
@@ -16041,9 +16027,9 @@ D = 1 ~ 4</String>
   <String Key="StoryModeDialogue_1010104_21_1_Bardrey">저길 봐, 멜!</String>
   <String Key="StoryModeDialogue_1010104_21_2_Bardrey">마을 사람들이 붙잡혀 있어!</String>
   <String Key="StoryModeDialogue_1010104_21_3_Bardrey">게다가 무시무시해보이는 괴물까지…</String>
-  <String Key="StoryModeDialogue_1010104_21_4_Chau">캬악! 검! 노란머리! 멜! </String>
+  <String Key="StoryModeDialogue_1010104_21_4_Chau">캬악! 검! 노란머리! 멜!</String>
   <String Key="StoryModeDialogue_1010104_21_5_Bardrey">멜! 저 녀석 네 이름을 불렀어!</String>
-  <String Key="StoryModeDialogue_1010104_21_6_Mel">나도 들었어! </String>
+  <String Key="StoryModeDialogue_1010104_21_6_Mel">나도 들었어!</String>
   <String Key="StoryModeDialogue_1010104_21_7_Bardrey">널 아나 봐. 혹시 고블린 친구도 있었어?</String>
   <String Key="StoryModeDialogue_1010104_21_8_Mel">그럴 리가 있겠어?!</String>
   <String Key="StoryModeDialogue_1010104_21_9_Mel">우선 마을 주민들부터 구하자.</String>
@@ -16065,7 +16051,7 @@ D = 1 ~ 4</String>
   <String Key="StoryModeDialogue_1010104_25_5_Bardrey">헤헤, 다들 다치신 곳은 없나요?</String>
   <String Key="StoryModeDialogue_1010104_25_6_Citizen">네 덕분에요.</String>
   <String Key="StoryModeDialogue_1010104_25_7_Citizen3">엄마아~ 이제 집에 갈 수 있어?</String>
-  <String Key="StoryModeDialogue_1010104_25_8_Citizen2">저희를 구해준 보답을 하고 싶네요. </String>
+  <String Key="StoryModeDialogue_1010104_25_8_Citizen2">저희를 구해준 보답을 하고 싶네요.</String>
   <String Key="StoryModeDialogue_1010104_25_9_Citizen2">마을 여관에서 식사라도 대접해드리겠습니다. 저희 마을로 가시죠.</String>
   <String Key="StoryModeDialogue_1010104_25_10_Mel">(내가 마을에 가면 마을 사람들이 다시 위험해질지도 몰라.)</String>
   <String Key="StoryModeDialogue_1010104_25_11_Mel">(하지만...)</String>
@@ -16125,7 +16111,7 @@ D = 1 ~ 4</String>
   <String Key="StoryModeDialogue_1010100_Battle_0_7_Mel">내 말을 다시 듣고 싶으면, 좌상단의 &lt;color=#ff8800&gt;대화 다시 보기&lt;/color&gt; 버튼을 눌러봐.</String>
   <String Key="StoryModeDialogue_1010100_Battle_0_8_Mel">…내가 누구랑 이야기 하고 있는 거지?</String>
   <String Key="StoryModeDialogue_1010100_Battle_2_1_Mel">어째서 이렇게나 마물이 많이…</String>
-  <String Key="StoryModeDialogue_1010100_Battle_3_1_Mel">아니야… 그럴리가 없어… </String>
+  <String Key="StoryModeDialogue_1010100_Battle_3_1_Mel">아니야… 그럴리가 없어…</String>
   <String Key="StoryModeDialogue_1010100_Battle_3_2_Mel">마을 사람들은 분명 다…</String>
   <String Key="StoryModeDialogue_1010100_Battle_3_3_Mel">나 때문에…</String>
   <String Key="StoryModeDialogue_1010100_Battle_4_1_Mel">…!</String>
@@ -16339,12 +16325,12 @@ D = 1 ~ 4</String>
   <String Key="SkinName_1063004_NewLine">지배의 여신
 벨리나</String>
   <String Key="SkinDesc_1063004_1">&lt;i&gt;만물을 자신의 손아귀에 쥐려고 하는 타락한 여신
- 그녀의 눈동자를 보는 것만으로도 자아를 잃고 꼭두각시로 변한다고 한다.&lt;/i&gt; </String>
+ 그녀의 눈동자를 보는 것만으로도 자아를 잃고 꼭두각시로 변한다고 한다.&lt;/i&gt;</String>
   <String Key="SkinDesc_1063004_2">어머, 잘도 나에 대해 제멋대로 떠들고 있었네?
-미안하지만, &lt;i&gt;다시 써줄래?&lt;/i&gt; </String>
+미안하지만, &lt;i&gt;다시 써줄래?&lt;/i&gt;</String>
   <String Key="SkinDesc_1063004">&lt;i&gt;아아, 여신님
 저를 이끌어주세요.
-당신을 위해서라면, 제 몸도, 영혼도, 모두 바치겠습니다.&lt;/i&gt; </String>
+당신을 위해서라면, 제 몸도, 영혼도, 모두 바치겠습니다.&lt;/i&gt;</String>
   <String Key="TerritoryBuildingName_40600">지배의 여신상</String>
   <String Key="TerritoryBuildingDesc_40600">기분나쁜 미소를 짓고 있는 여신상.
 .
@@ -18348,7 +18334,9 @@ D = 1 ~ 4</String>
   <String Key="SkinName_1074001">월하성군 수하</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;달토끼님들! 한 해 만에 내려오셨다고 너무 말썽을 피우시면 안 되는 거 아시죠? 모두 즐겁게 놀다 가요!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">보름달 축제 상품</String>
-  <String Key="SeasonalEventNumberFormat">{0}시즌 이벤트</String>
-  <String Key="SeasonalEvent">시즌 이벤트</String>
-  <String Key="SeasonalEventCeilFormat">{0}시즌 픽업</String>
+  <String Key="UnitGachaPickupCountFormat">&lt;color=#FFD247&gt;{0}&lt;/color&gt;회 소환 시 &lt;color=#FFD247&gt;픽업 영웅 확정&lt;/color&gt;</String>
+  <String Key="PlayReward_Semi1">전반기 보상</String>
+  <String Key="PlayReward_Semi2">후반기 보상</String>
+  <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt;플레이</String>
+  <String Key="BlessedTreasure">축복 보구</String>
 </Strings>

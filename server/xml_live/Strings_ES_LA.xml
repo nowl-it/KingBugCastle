@@ -1,4 +1,4 @@
-<Strings>
+<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -947,10 +947,8 @@ plata extra al descartar héroes de 1★</String>
   <String Key="AddDefPerCount">-{0} de daño recibido por cada héroe asignado
 (Máximo {1})</String>
   <String Key="AddDefPerCount_Piece">Reduce el daño recibido mientras haya más héroes asignados</String>
-  <String Key="AtkPerByRange">+1 al alcance de todos los héroes,
-+daño causado en {0} por la distancia hasta el objetivo de un ataque común/de habilidad. (Distancia máxima {1})</String>
-  <String Key="AtkPerByRange_Piece">+1 al alcance de todos los héroes,
-+daño causado mientras más lejos esté el objetivo de un ataque común/de habilidad.</String>
+  <String Key="AtkPerByRange">Daño causado por ataques normales/de habilidad +{0} por cada casilla de distancia al objetivo (distancia máx. {1})</String>
+  <String Key="AtkPerByRange_Piece">Cuanto más lejos esté el objetivo de los ataques normales/de habilidad, mayor será el Daño causado</String>
   <String Key="ArtifactName_100">Polvo mágico</String>
   <String Key="ArtifactDesc_100">Polvo mágico que se obtiene al desmantelar reliquias.</String>
   <String Key="ArtifactName_10000">Gran espada del imperio</String>
@@ -3487,7 +3485,7 @@ y bloquear miles de sables, te dejaré vivir.
   <String Key="ShopItemName_1015_Post">Paquete de crecimiento de nivel 11</String>
   <String Key="ShopItemName_1016_Post">Paquete de crecimiento de nivel 13</String>
   <String Key="ShopItemName_1017_Post">Paquete de crecimiento de nivel 15</String>
-  <String Key="RedValve ">Red Valve</String>
+  <String Key="RedValve">Red Valve</String>
   <String Key="LilCat">LilCat</String>
   <String Key="VeryLittleBear">VeryLittleBear</String>
   <String Key="NewUnitGachaPanelNewUnit">¡Aparición de héroes!</String>
@@ -6863,8 +6861,8 @@ Las marcas se regeneran cada 3 segundos.</String>
   <String Key="ArtifactName_14020">Mira de enano</String>
   <String Key="ArtifactDesc_14020">Mira que integra las habilidades de los enanos.
 Permite al usuario atacar más lejos y de manera más precisa, pero es tan pesada que no puede cargarse.</String>
-  <String Key="MoveStopTimeDesc_Piece">Marca 2 casillas del Campo de batalla como puestos de francotirador. Los Héroes desplegados obtienen Defensa absoluta, quedan &lt;color=#f33&gt;inmóviles&lt;/color&gt; por un tiempo, Alcance +3 y aumenta el Daño causado de su Daño común en el 1.er golpe y cada 5 golpes</String>
-  <String Key="MoveStopTimeDesc">Marca 2 casillas del Campo de batalla como puestos de francotirador. Los Héroes desplegados obtienen Defensa absoluta +{2}, quedan &lt;color=#f33&gt;inmóviles&lt;/color&gt; por {0} seg., Alcance +3 y su Daño común causado aumenta +{1}% en el 1.er golpe y cada 5 golpes.</String>
+  <String Key="MoveStopTimeDesc_Piece">Designa dos casillas del Campo de batalla como puntos de francotirador. Los Héroes desplegados obtienen Defensa absoluta +4. Hasta que salgan del punto de francotirador por primera vez, el primer golpe y cada 5.º golpe de Daño común infligen más daño</String>
+  <String Key="MoveStopTimeDesc">Designa dos casillas del Campo de batalla como puntos de francotirador. Los Héroes desplegados obtienen Defensa absoluta +{1}. Hasta que salgan del punto de francotirador por primera vez, el primer golpe y cada 5.º golpe de Daño común infligen +{0}% de daño.</String>
   <String Key="ColosseumBanned">Acceso a la temporada del campo de batalla brutal limitado</String>
   <String Key="GachaName_1036">Sonrisa vacía</String>
   <String Key="Name_Potential_10560_3">Ánimos</String>
@@ -10256,7 +10254,7 @@ podrás obtener el siguiente ítem.</String>
   <String Key="ArtifactBuffDataDesc_10030_Piece">Aumenta el poder de hechizo de todos los héroes</String>
   <String Key="RankRangeFormat">{0}.° a {1}.°</String>
   <String Key="Potential_10080_0">Mientras se usa &lt;Aliento de fuego&gt;, -30% de daño recibido</String>
-  <String Key="Potential_10260_2">Al derrotar enemigos, usa &lt;Corte de dragón azul&gt; de inmediato. +40% de daño final de &lt;Corte de dragón azul&gt;.</String>
+  <String Key="Potential_10260_2">Al derrotar, usa al instante &lt;Corte de dragón azul&gt;, Daño final de &lt;Corte de dragón azul&gt; +20%</String>
   <String Key="SkillDesc_10690_Long">Causa {Damage} de daño de hechizo como daño de habilidad al objetivo continuamente por cada {AttackCountByMaxManaPerDesc} de mana usado. Con cada uso de &lt;Mana en crecimiento&gt;, aumenta el mana máx. en {10695@MaxMana} (hasta {10695@MaxBuffOverlap} veces).</String>
   <String Key="SkillName_42205">Descontrol de sangre</String>
   <String Key="SkillDesc_UI_42205">Apóstol de sangre resuena con 'Cristal de sangre'. 'Cristal de sangre' es designado primero a habilidades de curación ajenas usadas por héroes. Su curación aumenta considerablemente según la protección. Todos los héroes son curados un valor parcial de la curación de 'Cristal de sangre'.</String>
@@ -11680,7 +11678,6 @@ Solo con mirarla, la mente y el cuerpo se calman.</String>
   <String Key="AccessorySynergyName_9">Luz lunar</String>
   <String Key="AccessorySynergyName_9_Pre">de luz lunar</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;{0}% de poder de hechizo final&lt;/color&gt;, +{1}% de ataque final</String>
-  <String Key="AccessorySynergyDesc_10091">+{0} de alcance. Por cada {1} de alcance poseído, +{2}% de daño crítico de físico (máx. 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Al inicio de la batalla, invisibilidad durante {0} segundos, y luego de {1} segundos, +{2}% de prob. de crítico de físico</String>
   <String Key="InventoryItemName_5010">Cofre de selección de accesorio de luz lunar</String>
   <String Key="ShopItemName_41012">Accesorio de luz lunar aleatorio</String>
@@ -12633,7 +12630,7 @@ Usa «gemas» o un «tique de eliminación de estado no mejorable de armamento d
   <String Key="RiftWeaponBuffDesc_130">Al causar daño común después de usar una habilidad, causa un daño especial de un {0}% de daño común a 3 enemigos.</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} de defensa de físico</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} de defensa de hechizo</String>
-  <String Key="RiftWeaponBuffDesc_160">+{0} de alcance</String>
+  <String Key="RiftWeaponBuffDesc_160">Velocidad de movimiento +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">+{0}% de absorción de físico</String>
   <String Key="RiftWeaponBuffDesc_180">+{0}% de absorción de hechizo</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} de defensa</String>
@@ -18293,7 +18290,9 @@ Skin del Festival de la Luna de la Cosecha 2026</String>
   <String Key="SkinName_1074001">Señor Estelar de la Luz de la Luna Suha</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;¡Conejos Lunares! Saben que no deben causar demasiados problemas solo porque bajaron después de un año, ¿verdad? ¡Diviértanse todos!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Ofertas del Festival de la Luna de la Cosecha</String>
-  <String Key="SeasonalEventNumberFormat">Evento de la temporada {0}</String>
-  <String Key="SeasonalEvent">Evento de temporada</String>
-  <String Key="SeasonalEventCeilFormat">Pickup de la temporada {0}</String>
+  <String Key="UnitGachaPickupCountFormat">Garantizado &lt;color=#FFD247&gt;Héroe Pickup&lt;/color&gt; tras &lt;color=#FFD247&gt;{0}&lt;/color&gt; Invocaciones</String>
+  <String Key="PlayReward_Semi1">Recompensa de la primera mitad</String>
+  <String Key="PlayReward_Semi2">Recompensa de la segunda mitad</String>
+  <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; Partidas</String>
+  <String Key="BlessedTreasure">Tesoro bendito</String>
 </Strings>

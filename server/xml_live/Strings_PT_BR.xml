@@ -1,4 +1,4 @@
-<Strings>
+<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -936,10 +936,8 @@ Atualiza a loja 1 vez após pagar Prata ao Vendedor Ambulante</String>
   <String Key="AddDefPerCount">-{0} de dano sofrido para cada Herói alocado
 (Máx. de {1})</String>
   <String Key="AddDefPerCount_Piece">- dano sofrido quanto mais Heróis alocados</String>
-  <String Key="AtkPerByRange">+1 de alcance de todos os Heróis,
-aumento de dano causado em {0} por distância em relação ao alvo de ataque de habilidade/normal (distância máx de {1})</String>
-  <String Key="AtkPerByRange_Piece">+1 de alcance de todos os Heróis,
-aumento de dano causado quanto mais longe estiver o alvo de ataque de habilidade/normal</String>
+  <String Key="AtkPerByRange">Dano causado por ataques normais/de habilidade +{0} por cada casa de distância até o alvo (distância máx. {1})</String>
+  <String Key="AtkPerByRange_Piece">Quanto mais longe estiver o alvo de ataques normais/de habilidade, maior o Dano causado</String>
   <String Key="ArtifactName_100">Pó Misterioso</String>
   <String Key="ArtifactDesc_100">Um pó misterioso obtido ao triturar relíquias.</String>
   <String Key="ArtifactName_10000">Espada do Império</String>
@@ -3440,7 +3438,7 @@ Que comece a dança!&lt;/i&gt;</String>
   <String Key="ShopItemName_1015_Post">Pacote de Progresso ao Nv.11</String>
   <String Key="ShopItemName_1016_Post">Pacote de Progresso ao Nv.13</String>
   <String Key="ShopItemName_1017_Post">Pacote de Progresso ao Nv.15</String>
-  <String Key="RedValve ">Red Valve</String>
+  <String Key="RedValve">Red Valve</String>
   <String Key="LilCat">LilCat</String>
   <String Key="VeryLittleBear">VeryLittleBear</String>
   <String Key="NewUnitGachaPanelNewUnit">Evocação de Herói!</String>
@@ -6811,8 +6809,8 @@ A marca é gerada a cada 3s.</String>
   <String Key="ArtifactName_14020">Luneta de Anão</String>
   <String Key="ArtifactDesc_14020">Luneta integrada com a tecnologia de anões.
 O usuário consegue atacar à uma distância maior e com mais precisão, porém não consegue carregá-la por ser pesada.</String>
-  <String Key="MoveStopTimeDesc_Piece">Marca 2 casas no Campo de Batalha como pontos de atirador. Os Heróis posicionados ganham Defesa Absoluta, ficam &lt;color=#f33&gt;imóveis&lt;/color&gt; por um tempo, Alcance +3, e o Dano Normal causado aumenta no 1º e a cada 5º acerto</String>
-  <String Key="MoveStopTimeDesc">Marca 2 casas no Campo de Batalha como pontos de atirador. Os Heróis posicionados ganham Defesa Absoluta +{2}, ficam &lt;color=#f33&gt;imóveis&lt;/color&gt; por {0} seg., Alcance +3, e o Dano Normal causado aumenta em +{1}% no 1º e a cada 5º acerto.</String>
+  <String Key="MoveStopTimeDesc_Piece">Designe duas casas do Campo de Batalha como pontos de atirador. Heróis posicionados recebem Defesa Absoluta +4. Até saírem do ponto de atirador pela primeira vez, o primeiro acerto e cada 5º acerto de Dano Normal causam mais dano</String>
+  <String Key="MoveStopTimeDesc">Designe duas casas do Campo de Batalha como pontos de atirador. Heróis posicionados recebem Defesa Absoluta +{1}. Até saírem do ponto de atirador pela primeira vez, o primeiro acerto e cada 5º acerto de Dano Normal causam +{0}% de dano.</String>
   <String Key="ColosseumBanned">Proibição de acesso à temporada do Campo de Batalha Árdua</String>
   <String Key="GachaName_1036">Sorriso Amarelo</String>
   <String Key="Name_Potential_10560_3">Exaltação</String>
@@ -10209,7 +10207,7 @@ ao triturar o(s) {0} item(ns) selecionado(s).</String>
   <String Key="ArtifactBuffDataDesc_10030_Piece">Aumenta o poder de feitiço de todos os Heróis</String>
   <String Key="RankRangeFormat">De {0}.° ao {1}.° lugar</String>
   <String Key="Potential_10080_0">-30% de dano sofrido durante o uso de &lt;Sopro de Fogo&gt;</String>
-  <String Key="Potential_10260_2">Usa &lt;Golpe do Dragão Azul&gt; imediatamente se o inimigo for derrotado. +40% de dano final de &lt;Golpe do Dragão Azul&gt;</String>
+  <String Key="Potential_10260_2">Ao derrotar, usa &lt;Golpe do Dragão Azul&gt; imediatamente, Dano Final de &lt;Golpe do Dragão Azul&gt; +20%</String>
   <String Key="SkillDesc_10690_Long">Causa repetidamente {Damage} de dano de habilidade de feitiço no inimigo a cada {AttackCountByMaxManaPerDesc} de mana usado. Aumenta {10695@MaxMana} de mana máx. a cada uso de &lt;Poder Mágico Crescente&gt;. (Acumula até {10695@MaxBuffOverlap} vez(es))</String>
   <String Key="SkillName_42205">Descontrole do Sangue</String>
   <String Key="SkillDesc_UI_42205">O apóstolo do sangue ressoa com o 'Cristal de Sangue'. O 'Cristal de Sangue' é priorizado como alvo da habilidade de cura usada pelos Heróis e a quantidade de cura recebida aumenta consideravelmente com base na proteção. Todos os Heróis são curados por uma parte da cura do Cristal de Sangue.</String>
@@ -11633,7 +11631,6 @@ Relaxa o corpo e a mente só de olhá-lo.</String>
   <String Key="AccessorySynergyName_9">Luar</String>
   <String Key="AccessorySynergyName_9_Pre">do Luar</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;{0}% de poder de feitiço final&lt;/color&gt; e +{1}% de ataque final</String>
-  <String Key="AccessorySynergyDesc_10091">+{0} de alcance e +{2}% de dano crítico físico a cada {1} de alcance possuído (Máx. de 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Ativa modo furtivo durante {0}s no começo da batalha e +{2}% de chance de crítico físico após {1}s</String>
   <String Key="InventoryItemName_5010">Baú de Seleção de Acessório do Luar</String>
   <String Key="ShopItemName_41012">Acessório do Luar Aleatório</String>
@@ -12586,7 +12583,7 @@ Use “Bilhete de Remoção de Impossibilidade de Melhoria de Equipamento da Rup
   <String Key="RiftWeaponBuffDesc_130">Causa {0}% de dano especial a 3 inimigos ao infligir dano normal após usar habilidade</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} de defesa física</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} de defesa de feitiço</String>
-  <String Key="RiftWeaponBuffDesc_160">+{0} de alcance</String>
+  <String Key="RiftWeaponBuffDesc_160">Velocidade de Movimento +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">+{0}% de absorção física</String>
   <String Key="RiftWeaponBuffDesc_180">+{0}% de absorção de feitiço</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} de defesa</String>
@@ -18246,7 +18243,9 @@ Skin do Festival da Lua da Colheita 2026</String>
   <String Key="SkinName_1074001">Senhor Estelar ao Luar Suha</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Coelhos Lunares! Vocês sabem que não podem aprontar muito só porque desceram depois de um ano, certo? Divirtam-se, todos!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Ofertas do Festival da Lua da Colheita</String>
-  <String Key="SeasonalEventNumberFormat">Evento da temporada {0}</String>
-  <String Key="SeasonalEvent">Evento de temporada</String>
-  <String Key="SeasonalEventCeilFormat">Pickup da temporada {0}</String>
+  <String Key="UnitGachaPickupCountFormat">Após &lt;color=#FFD247&gt;{0}&lt;/color&gt; Evocações, &lt;color=#FFD247&gt;Herói Pickup garantido&lt;/color&gt;</String>
+  <String Key="PlayReward_Semi1">Recompensa da 1ª metade</String>
+  <String Key="PlayReward_Semi2">Recompensa da 2ª metade</String>
+  <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; Partidas</String>
+  <String Key="BlessedTreasure">Tesouro Abençoado</String>
 </Strings>

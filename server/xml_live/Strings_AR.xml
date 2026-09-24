@@ -143,9 +143,9 @@
 
 (التكلفة: {0} الماس)</String>
   <String Key="King_1">الملك</String>
-  <String Key="King_2"> </String>
+  <String Key="King_2"></String>
   <String Key="Castle_1">القصر</String>
-  <String Key="Castle_2"> </String>
+  <String Key="Castle_2"></String>
   <String Key="LoadingPopupText">الاتصال بالخادم...</String>
   <String Key="LoginByGoogle">تسجيل الدخول عبر Google PLAY</String>
   <String Key="LoginByApple">تسجيل الدخول عبر Apple</String>
@@ -304,9 +304,9 @@
   <String Key="DailyGoldPackage_PostContent">Receive your daily Gold!</String>
   <String Key="DailyCashPackage_CanGetPost">البريد جاهز للإستلام</String>
   <String Key="DailyCashPackage_AlreadyGetPost">تم الإستلام</String>
-  <String Key="SeasonPass_Season_Skin"> جلد حصري بالموسم&lt;{0}&gt;</String>
-  <String Key="SeasonPass_Season_Benefit_1"> جلد حصري بالموسم&lt;{0}&gt;</String>
-  <String Key="SeasonPass_Season_Benefit_2"> 10000 ذهب متاح فورا</String>
+  <String Key="SeasonPass_Season_Skin">جلد حصري بالموسم&lt;{0}&gt;</String>
+  <String Key="SeasonPass_Season_Benefit_1">جلد حصري بالموسم&lt;{0}&gt;</String>
+  <String Key="SeasonPass_Season_Benefit_2">10000 ذهب متاح فورا</String>
   <String Key="SeasonPass_Season_Benefit_4">Increase max Supplies by 20</String>
   <String Key="SeasonPass_Season_Benefit_5">King God Pass Reward Unlock</String>
   <String Key="SeasonPass_Season_Benefit_6">Earn 20% Extra Daily Mission Reward Point</String>
@@ -943,10 +943,8 @@ Pay Silver to refresh the Wandering Merchant's shop once</String>
   <String Key="AddDefPerCount">- {0} ضرر متلقي بالتناسب مع عدد الأبطال الموضوعين 
 ({1} بحد أقصى)</String>
   <String Key="AddDefPerCount_Piece">إنخفاض الضرر المتلقي بالتناسب مع عدد الأبطال الموضوعين</String>
-  <String Key="AtkPerByRange">All hero range +1,
-Increases damage by {0} per distance from the target of normal/skill attack (max distance {1})</String>
-  <String Key="AtkPerByRange_Piece">All hero range +1,
-Increases damage per distance from the target of normal/skill attack</String>
+  <String Key="AtkPerByRange">Damage Dealt by Normal/Skill attacks +{0} per tile of distance to the target (max. distance {1})</String>
+  <String Key="AtkPerByRange_Piece">The farther the target of Normal/Skill attacks, the higher the Damage Dealt</String>
   <String Key="ArtifactName_100">مسحوق سحري</String>
   <String Key="ArtifactDesc_100">مسحوق سحري يتم الحصول عليه بطحن القطع الأثرية</String>
   <String Key="ArtifactName_10000">سيف الإمبراطورية العظيم</String>
@@ -1025,7 +1023,7 @@ Increases damage per distance from the target of normal/skill attack</String>
   <String Key="ThemeName_55">[إعتداء] هجوم الآلاف!</String>
   <String Key="ThemeName_56">[إعتداء] هجوم الأورك!</String>
   <String Key="ThemeName_57">[إعتداء] هجوم الأرواح الشريرة!</String>
-  <String Key="ThemeName_58">هجوم مصاصي الدماء! [إعتداء] </String>
+  <String Key="ThemeName_58">هجوم مصاصي الدماء! [إعتداء]</String>
   <String Key="NewThemeCommingSoon">فصل جديد متوفر عن قريب!</String>
   <String Key="NewThemeName">هجوم ؟؟!</String>
   <String Key="UnitName_20000">العفاريت السارقة</String>
@@ -1233,11 +1231,11 @@ Increases damage per distance from the target of normal/skill attack</String>
   <String Key="ItemName_10020">إمداد القوات</String>
   <String Key="ItemDesc_10020">تمت إضافة خلية 1 للقوات</String>
   <String Key="ItemName_10030">+5 فضة</String>
-  <String Key="ItemDesc_10030"> </String>
+  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">+10 فضة</String>
-  <String Key="ItemDesc_10031"> </String>
+  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">+20 فضة</String>
-  <String Key="ItemDesc_10032"> </String>
+  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">وسام الشرف</String>
   <String Key="ItemDesc_10040">ترقية بطل عشوائي في الساحة بمقدار 1</String>
   <String Key="ItemName_10050">لفيفة ااستدعاء الأبطال الرئيسية (2 مرات)</String>
@@ -1624,13 +1622,13 @@ The mark is generated every 3 sec</String>
   <String Key="Post_Push_Contents36">سنقوم بتعويض المستخدمين الذين تعرضوا للضرر أثناء حدوث الخطأ في الأرينا. نحن آسفون جدا على الإزعاج</String>
   <String Key="Post_Push_Contents37">تعويض عن الخلل والخطأ</String>
   <String Key="Post_Push_Contents38">سنقوم بتعويض المستخدمين الذين تعرضوا للضرر أثناء حدوث الخلل والخطأ. نحن آسفون جدا على الإزعاج</String>
-  <String Key="SkinName_1000001">مهرجان الصيد شالدا </String>
-  <String Key="SkinDesc_1000001">توقعت فوزها بالمسابقة بصيد كركند ضخم على نحو ما في مهرجان الصيد الذي اُفتتح في قرية بحرية بالصيف. ولكن عندما دخلت إلى قاعة العرض ورأت قرشا عملاقا وسرطانا كبيرا، فقدت القدرة على الكلام </String>
+  <String Key="SkinName_1000001">مهرجان الصيد شالدا</String>
+  <String Key="SkinDesc_1000001">توقعت فوزها بالمسابقة بصيد كركند ضخم على نحو ما في مهرجان الصيد الذي اُفتتح في قرية بحرية بالصيف. ولكن عندما دخلت إلى قاعة العرض ورأت قرشا عملاقا وسرطانا كبيرا، فقدت القدرة على الكلام</String>
   <String Key="SkinName_1002001">مهرجان الصيد ليونهارد</String>
-  <String Key="SkinDesc_1002001">كان ليونهارد يشارك في مهرجان الصيد سنويا ويراهن دائما مع زميلته في جيش نخبة الإمبراطورية روزات على من يصيد السمك أكبر. وأدهش الجميع في المهرجان الذي شارك فيه المرة الأخيرة حاملا سرطان كبير لم يره أحد. </String>
+  <String Key="SkinDesc_1002001">كان ليونهارد يشارك في مهرجان الصيد سنويا ويراهن دائما مع زميلته في جيش نخبة الإمبراطورية روزات على من يصيد السمك أكبر. وأدهش الجميع في المهرجان الذي شارك فيه المرة الأخيرة حاملا سرطان كبير لم يره أحد.</String>
   <String Key="UnitName_10250">كاين</String>
   <String Key="UnitSubName_10250">قاتل رمادي</String>
-  <String Key="SkinDesc_Default_10250">لا يميز سيف كاين بين عقل العدو وفطرته وأيضا بين الخير والشر. حصدت بهلوانيته التي تستدعي الموت الكثير من الأرواح مثل عاصفة الصحراء. </String>
+  <String Key="SkinDesc_Default_10250">لا يميز سيف كاين بين عقل العدو وفطرته وأيضا بين الخير والشر. حصدت بهلوانيته التي تستدعي الموت الكثير من الأرواح مثل عاصفة الصحراء.</String>
   <String Key="SkillName_10250">بهلوانية الموت</String>
   <String Key="MissionDesc_10325">اللعب باستخدام كاين</String>
   <String Key="CocoAloe">Cocoaloe</String>
@@ -1840,7 +1838,7 @@ Physical/Spell HP Drain</String>
   <String Key="SkinName_1015001">Water Spirit Lily</String>
   <String Key="SkinDesc_1015001">When black mana stains the atmosphere, there comes a time when it won't rain for several months even in the verdant Eternal Forest. Sha-sha stores water from the Spring of Vitality and goes on a journey with Lily to help the withered beings in the forest.</String>
   <String Key="SkinName_1008001">Blue Flame Draco</String>
-  <String Key="SkinDesc_1008001">Draco, a half-dragon and half-human, could use the power of an adult dragon at a much younger age than a pure dragon. As he pursued destructive power, his flame was concentrated and enveloped in blue mana, becoming even hotter than before. </String>
+  <String Key="SkinDesc_1008001">Draco, a half-dragon and half-human, could use the power of an adult dragon at a much younger age than a pure dragon. As he pursued destructive power, his flame was concentrated and enveloped in blue mana, becoming even hotter than before.</String>
   <String Key="ThemeName_9">Frost Tribe Invasion!</String>
   <String Key="ThemeName_59">[Corruption] Frost Tribe Invasion!</String>
   <String Key="UnitName_20800">Frost Golem Fragment</String>
@@ -3407,7 +3405,7 @@ The previous mission will be switched to a new random mission.</String>
   <String Key="BoxStackInfoTitle">Enhanced Scroll</String>
   <String Key="BoxStackInfoDesc">On every &lt;color=#FFD247&gt;fourth Scroll purchase&lt;/color&gt;, you can purchase an &lt;color=#FFD247&gt;enhanced Scroll&lt;/color&gt; that has &lt;color=#FFD247&gt;double&lt;/color&gt; the value.</String>
   <String Key="HeroSummonPercentageTable">Hero Summon Probability Chart</String>
-  <String Key="GachaListDesc_NewHero"> Heroes you own will be converted to random Hero's Tokens.</String>
+  <String Key="GachaListDesc_NewHero">Heroes you own will be converted to random Hero's Tokens.</String>
   <String Key="GachaAllExpToUnitExpItem">Obtained as Books of EXP</String>
   <String Key="RandomUnitExp">Random Hero EXP</String>
   <String Key="ArtifactSummonDesc">You can obtain random Relic Pieces and Relics.</String>
@@ -3470,7 +3468,7 @@ Only then I shall spare your life. Now, dance!&lt;/i&gt;</String>
   <String Key="ShopItemName_1015_Post">حزمة نمو المستوى 11</String>
   <String Key="ShopItemName_1016_Post">حزمة نمو المستوى 13</String>
   <String Key="ShopItemName_1017_Post">حزمة نمو المستوى 15</String>
-  <String Key="RedValve ">Red Valve</String>
+  <String Key="RedValve">Red Valve</String>
   <String Key="LilCat">LilCat</String>
   <String Key="VeryLittleBear">VeryLittleBear</String>
   <String Key="NewUnitGachaPanelNewUnit">Hero Summon!</String>
@@ -3538,7 +3536,7 @@ And all that remained was ashes, a glimpse of what once was a battlefield.&lt;/i
   <String Key="InventoryItemDesc_110">A book filled with various experiences from around the world.
 Can be converted into hero EXP of your choice.</String>
   <String Key="InventoryItemDesc_120">A token bestowed to a hero.
-Used for hero Awakening and level up after level 16. </String>
+Used for hero Awakening and level up after level 16.</String>
   <String Key="InventoryItemDesc_130">A King’s Token bestowed to the best hero.
 Can be converted into a Hero’s Token of your choice.</String>
   <String Key="InventoryItemName_150">Shard of Growth</String>
@@ -3579,7 +3577,7 @@ Are you sure you want to use it?</String>
   <String Key="GachaName_1002">Shadow’s Manipulation</String>
   <String Key="CardInfo_TransformSummons">View Summoned Creature</String>
   <String Key="UnitSubName_10400">Doll of Darkness</String>
-  <String Key="SkillAltDesc_10400_0">Machina deals damage equal to {Unit@AtkByParentMatkPer}% of Rie's Spell Power on normal attack, and has {Unit@HpByParentHpPer}% of Rie's HP and &lt;color=#ffcc00&gt;100&lt;/color&gt;% of Rie's Spell Power, Attack Speed, and Movement Speed. </String>
+  <String Key="SkillAltDesc_10400_0">Machina deals damage equal to {Unit@AtkByParentMatkPer}% of Rie's Spell Power on normal attack, and has {Unit@HpByParentHpPer}% of Rie's HP and &lt;color=#ffcc00&gt;100&lt;/color&gt;% of Rie's Spell Power, Attack Speed, and Movement Speed.</String>
   <String Key="SkillAltDesc_10400">Machina deals damage equal to {Unit@OverwriteAtkByParent:MAtkPer:BaseValue}% of Rie's Spell Power upon normal attack, and has {Unit@OverwriteHpByParent:HpPer:BaseValue}% of Rie's HP and {Unit@OverwriteAtkSpeedByParent:AttackSpeedPer:BaseValue}% of Rie's Spell Power, Attack Speed, and Movement Speed. Machina's damage is counted as spell normal damage dealt by Rie.</String>
   <String Key="ReceivedPostFlag">Claimed Banner of Honor reward.</String>
   <String Key="Post_Push_Contents102">Rewards for Reaching 2,000 Likes on the Official Facebook Page</String>
@@ -3832,7 +3830,7 @@ Sales price increases by {0} Silver when a battle is won (max {1}).</String>
   <String Key="ItemDescSub_40463_00">+{0}% ATK</String>
   <String Key="ItemDescSub_40463_01">+{0}% Attack Speed</String>
   <String Key="ItemDescSub_40463_02">+{0} Protection</String>
-  <String Key="ItemDescSub_40463_03">+{0}% Spell Power </String>
+  <String Key="ItemDescSub_40463_03">+{0}% Spell Power</String>
   <String Key="ItemDescSub_40463_04">+{0}% Physical/Spell HP Drain</String>
   <String Key="ItemDescSub_40463_05">Recovers base MP by {0}%</String>
   <String Key="ItemDescSub_40463_06">+{0}% Max HP</String>
@@ -4972,6 +4970,7 @@ Witness my overwhelming power!&lt;/i&gt;</String>
   <String Key="Hero_Awaken_Noti">{0} has reached level 16 and can now be Awakened.
 Upon Awakening, the hero's &lt;color=#FFD247&gt;Awakened Abilities&lt;/color&gt; can be used.</String>
   <String Key="ItemDescSub_40463_07">صد مطلق {0} مرات</String>
+  <String Key="SimplifyAISaveData">true</String>
   <String Key="CustomPickupDesc">When a Hero appears, the &lt;color=#FFD247&gt;selected Hero&lt;/color&gt; is &lt;color=#FFD247&gt;guaranteed!&lt;/color&gt;</String>
   <String Key="SelectPickupUnit">Select Heroes</String>
   <String Key="SelectPickupUnitAgain">Reset</String>
@@ -5477,10 +5476,10 @@ We apologize for the inconvenience.</String>
   <String Key="InventoryItemName_2107">Castle EXP</String>
   <String Key="InventoryItemDesc_2107">The EXP that increases the level of the castle. It is needed for the growth of the Dominion, Altars, and other components.</String>
   <String Key="InventoryItemName_2108">Alliance EXP</String>
-  <String Key="InventoryItemDesc_2108">The EXP that increases the level of the Alliance. Alliance skills can be developed according to the Alliance level. </String>
+  <String Key="InventoryItemDesc_2108">The EXP that increases the level of the Alliance. Alliance skills can be developed according to the Alliance level.</String>
   <String Key="TerritoryPass_Short">Blessing</String>
   <String Key="AlchemyRemainPointAlert">Materials over stage {0} will disappear.
-Would you like to proceed with the Alchemy? </String>
+Would you like to proceed with the Alchemy?</String>
   <String Key="TerritoryPass_FreeHuntingReroll">Free chance to refresh Dominion Blessing
 {0}/{1} remaining</String>
   <String Key="TerritoryCantUpgradeImmediatelyNow">Immediate completion is unavailable when the remaining time is 5 seconds or below.
@@ -5496,7 +5495,7 @@ You can obtain related class bonus from the Dominion or other content.</String>
   <String Key="UnitRegion_Tooltip">Hero's active region
 You can obtain related regional bonus from the Dominion and other content.</String>
   <String Key="TerritoryPass_CannotRefund">※ Dominion's Blessing is a product that cannot be refunded.
-※ The amount of immediately provided Vitality varies depending on the Chamber level. </String>
+※ The amount of immediately provided Vitality varies depending on the Chamber level.</String>
   <String Key="LocalPushItemTitle_101">كينج غاد كاسل(KingGod Castle)</String>
   <String Key="LocalPushItemTitle_102">كينج غاد كاسل(KingGod Castle)</String>
   <String Key="LocalPushItemSubTitle_101">Max Vitality</String>
@@ -6557,7 +6556,7 @@ That was the title for which he trained his fist.&lt;/i&gt;</String>
   <String Key="FlagsName_PreviousColosseum">Strife Battlefield Season {0} Banner of Honor</String>
   <String Key="FlagsDesc_PreviousColosseum">Reached {1} in Strife Battlefield Season {0}</String>
   <String Key="NameTagName_Colosseum">{0} Ruler's Decoration</String>
-  <String Key="NameTagDesc_Colosseum">An honorable reward for reaching {0} in the Strife Battlefield </String>
+  <String Key="NameTagDesc_Colosseum">An honorable reward for reaching {0} in the Strife Battlefield</String>
   <String Key="ArtufactPolishValue">Effect</String>
   <String Key="ArtifactPolishAction_ReplaceOptionIdx">Move Position</String>
   <String Key="PolishItemRewardPostTitle">Polishing Stone for Revamp of Polishing System</String>
@@ -6580,12 +6579,12 @@ Additionally charges &lt;color=#FFD247&gt;50%&lt;/color&gt; of Forging Energy up
   <String Key="ArtifactName_902">King Magical Polishing Stone</String>
   <String Key="ArtifactName_903">God Magical Polishing Stone</String>
   <String Key="ArtifactOption_901">Can be used as a material to polish a King God Relic
-Charges Polishing Gauge by &lt;color=#FFD247&gt;10&lt;/color&gt; </String>
+Charges Polishing Gauge by &lt;color=#FFD247&gt;10&lt;/color&gt;</String>
   <String Key="ArtifactOption_902">Can be used as a material to polish a King God Relic
-Charges Polishing Gauge by &lt;color=#FFD247&gt;50&lt;/color&gt; </String>
+Charges Polishing Gauge by &lt;color=#FFD247&gt;50&lt;/color&gt;</String>
   <String Key="ArtifactOption_903">Can be used as a material to polish a King God Relic
-Charges Polishing Gauge by &lt;color=#FFD247&gt;100&lt;/color&gt; </String>
-  <String Key="ArtifactDesc_901">A polishing stone that emits magical energy. As a very rare material, it can transform a Relic into its strongest form. </String>
+Charges Polishing Gauge by &lt;color=#FFD247&gt;100&lt;/color&gt;</String>
+  <String Key="ArtifactDesc_901">A polishing stone that emits magical energy. As a very rare material, it can transform a Relic into its strongest form.</String>
   <String Key="Polish_Gauge_Info">Whenever a Relic is forged, its Forging Energy is charged. When it is charged up to 100% or more,
 Forging Energy is consumed and you obtain 1 &lt;color=#FFD247&gt;Magical Polishing Stone&lt;/color&gt;.
 You can obtain additional Forging Energy by using Forge Stones and Catalysts.
@@ -6613,7 +6612,7 @@ Invasion mode Gold</String>
   <String Key="ArtifactDesc_14000">A sword that emits mysterious darkness.
 When it detects someone's fear of the unknown, it consumes their fear and emits even more darkness.</String>
   <String Key="DamagePerByStageTime_Piece">Increases damage according to the time passed after the beginning of the battle</String>
-  <String Key="DamagePerByStageTime">Increases damage by {0} per sec after the beginning of the battle (Max {1}) </String>
+  <String Key="DamagePerByStageTime">Increases damage by {0} per sec after the beginning of the battle (Max {1})</String>
   <String Key="ArtifactName_14010">Staff of Ancient Magic</String>
   <String Key="ArtifactDesc_14010">A needlessly heavy staff.
 Though it can cast archaic magic, it is just as heavy and big.</String>
@@ -6852,8 +6851,8 @@ The mark is generated every 3 sec</String>
   <String Key="ArtifactName_14020">Dwarven Scope</String>
   <String Key="ArtifactDesc_14020">A scope that embodies Dwarven technology.
 Although it allows the user to see further and attack more precisely, its weight makes it difficult to be carried around.</String>
-  <String Key="MoveStopTimeDesc_Piece">Marks 2 tiles in the Battlefield as sniper spots. Deployed Heroes gain Mighty Block, are &lt;color=#f33&gt;unable to move&lt;/color&gt; for a certain time, Range +3, and their Normal damage dealt increases on the 1st and every 5th hit</String>
-  <String Key="MoveStopTimeDesc">Marks 2 tiles in the Battlefield as sniper spots. Deployed Heroes gain Mighty Block +{2}, are &lt;color=#f33&gt;unable to move&lt;/color&gt; for {0} sec., Range +3, and their Normal damage dealt increases by +{1}% on the 1st and every 5th hit.</String>
+  <String Key="MoveStopTimeDesc_Piece">Designate two tiles on the Battlefield as sniper spots. Placed Heroes gain Mighty Block +4. Until they leave the sniper spot for the first time, the first and every 5th Normal damage hit deals increased damage</String>
+  <String Key="MoveStopTimeDesc">Designate two tiles on the Battlefield as sniper spots. Placed Heroes gain Mighty Block +{1}. Until they leave the sniper spot for the first time, the first and every 5th Normal damage hit deals +{0}% damage.</String>
   <String Key="ColosseumBanned">Strife Battlefield entry restricted</String>
   <String Key="GachaName_1036">Cold Smile</String>
   <String Key="Name_Potential_10560_3">Uplift</String>
@@ -6905,6 +6904,7 @@ For more details, please contact customer support.</String>
   <String Key="Clan_Menu_ChangeName">Change</String>
   <String Key="ColosseumSeasonRankingReward">Season Reward</String>
   <String Key="ColosseumRanking">Ranking</String>
+  <String Key="ArtifactOptionProbUrl">https://kgcastle-notice.awesomepiece.com/bfbeff93-e1e2-45da-a500-5866015cd34d</String>
   <String Key="ArtifactOptionProbDetail">Relic Probability Details</String>
   <String Key="ArtifactOptionProbDetailDesc">You will be redirected to the announcement that details the probabilities for paid probability-based items.</String>
   <String Key="ColosseumNetworkChanged">Reconnecting due to network change.</String>
@@ -6912,8 +6912,8 @@ For more details, please contact customer support.</String>
   <String Key="ColosseumLeagueRankingRewardNotice">League Point Rewards</String>
   <String Key="ColosseumLeagueRankingRewardCondition_Rank">League &lt;color=#ffcf68&gt;rank {0} and above&lt;/color&gt;</String>
   <String Key="ColosseumLeagueRankingRewardCondition_Point">League &lt;color=#ffcf68&gt;points {0} and above&lt;/color&gt;</String>
-  <String Key="ColosseumLeaguePointFormula_1">King Tier League points = When the Tier ends, 1 point added per 100 points after 1 League point </String>
-  <String Key="ColosseumLeaguePointFormula_2">God Tier League points = When the Tier ends, 1 point added for every 3rd place after 20 League points </String>
+  <String Key="ColosseumLeaguePointFormula_1">King Tier League points = When the Tier ends, 1 point added per 100 points after 1 League point</String>
+  <String Key="ColosseumLeaguePointFormula_2">God Tier League points = When the Tier ends, 1 point added for every 3rd place after 20 League points</String>
   <String Key="ColosseumLeagueRankingRewardTitle">{0} Point Rewards</String>
   <String Key="ColosseumHallOfFame">Hall of Fame</String>
   <String Key="ColosseumSeasonRanking">Season Ranking</String>
@@ -7339,9 +7339,7 @@ We apologize for the inconvenience.</String>
   <String Key="OvercomeDesc">&lt;size=25&gt;Tier Transcendence
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;You can grant additional effects&lt;/color&gt; to Paragons through &lt;color=#ffbc00&gt;tier transcendence&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Identical Paragons&lt;/color&gt; are required to perform tier transcendence.
-
-</String>
+&lt;color=#ffbc00&gt;Identical Paragons&lt;/color&gt; are required to perform tier transcendence.</String>
   <String Key="SkinName_1032006">Blue Wave Tia</String>
   <String Key="SkinName_1036004">Blue Wave Haerang</String>
   <String Key="SkinName_1042003">Blue Wave Taebaek</String>
@@ -7415,8 +7413,7 @@ Now, come forth and dance to my will.&lt;/i&gt;</String>
 +{1}% damage dealt during invincibility</String>
   <String Key="TreasureSkillDesc_3300033">When hero with the highest tier equipped with Mur reaches {0}% HP or takes lethal damage, the hero becomes invincible 1 time each for {1} sec
 (HP Recovery and Protection unavailable during invincibility)
-+{2}% damage dealt during invincibility
-</String>
++{2}% damage dealt during invincibility</String>
   <String Key="TreasureSkillDesc_3300034">When hero with the highest tier equipped with Mur reaches {0}% HP or takes lethal damage, the hero becomes invincible 1 time each for {1} sec
 (HP Recovery and Protection unavailable during invincibility)
 +{2}% damage dealt during invincibility
@@ -7646,15 +7643,11 @@ The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be
  &lt;size=25&gt;Tier Transcendence
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;You can grant additional effects&lt;/color&gt; to Legacies through &lt;color=#ffbc00&gt;tier transcendence&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform tier transcendence.
-
-</String>
+&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform tier transcendence.</String>
   <String Key="TreasureLevelUpInformationDesc">&lt;size=25&gt;Legacy Enhancement
 
 &lt;/size&gt;Legacies can be &lt;color=#ffbc00&gt;enhanced&lt;/color&gt; to increase the effectiveness of &lt;color=#ffbc00&gt;Legacy Effects&lt;/color&gt;.
-The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be obtained by &lt;color=#ffbc00&gt;dismantling&lt;/color&gt; Legacies from the inventory or &lt;color=#ffbc00&gt;purchasing them from the Shop&lt;/color&gt;.
-
-</String>
+The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be obtained by &lt;color=#ffbc00&gt;dismantling&lt;/color&gt; Legacies from the inventory or &lt;color=#ffbc00&gt;purchasing them from the Shop&lt;/color&gt;.</String>
   <String Key="TreasureOvercome">Tier Transcendence</String>
   <String Key="TreasureOvercome_Short">Tier Transcendence</String>
   <String Key="ViewNextOvercome">View Next Transcendence</String>
@@ -8203,9 +8196,7 @@ The &lt;color=#ffbc00&gt;enhancement materials&lt;/color&gt; for Legacies can be
  &lt;size=25&gt;Tier Transcendence
 
 &lt;/size&gt;&lt;color=#ffbc00&gt;You can grant additional effects&lt;/color&gt; to Legacies through &lt;color=#ffbc00&gt;Tier Transcendence&lt;/color&gt;.
-&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform Tier Transcendence."
-
-</String>
+&lt;color=#ffbc00&gt;Identical Legacies&lt;/color&gt; are required to perform Tier Transcendence."</String>
   <String Key="TreasureSkillDesc_3300010">+{0}% CRIT Chance
 Deactivated for {1} sec upon taking damage</String>
   <String Key="TreasureSkillDesc_3300011">+{0}% CRIT Chance
@@ -9468,7 +9459,7 @@ Your score will not drop below 2,000 points.</String>
   <String Key="UnitSubName_10670">War Banner Bearer</String>
   <String Key="Potential_10670_0">+30 Guard</String>
   <String Key="Potential_10670_1">-70% damage taken for 2 sec after taking damage for the first time in battle</String>
-  <String Key="SkinDesc_Default_10670">&lt;i&gt;The Litere family, a prestigious lineage of the Empire, has produced outstanding talents in various fields. Although Patros, a member of the Litere family, was not born with innate abilities, he became an exemplary commanding officer of the Imperial Army through exceptional effort.&lt;/i&gt; </String>
+  <String Key="SkinDesc_Default_10670">&lt;i&gt;The Litere family, a prestigious lineage of the Empire, has produced outstanding talents in various fields. Although Patros, a member of the Litere family, was not born with innate abilities, he became an exemplary commanding officer of the Imperial Army through exceptional effort.&lt;/i&gt;</String>
   <String Key="SkillName_10670">For the Empire!</String>
   <String Key="SkillDesc_10670">Encourages allies for {TotalAttackTime} sec, healing all allies within {SplashRangeX}{x}{SplashRangeY} range nearby by {Heal} every {Time} sec while also increasing their Attack Speed by {AttackSpeedPerUnit10670}% every time. The highest Attack Speed increase is applied among the increases from skills with the same name.</String>
   <String Key="SkillDesc_10670_Short">For {TotalAttackTime} sec, heals allies within {SplashRangeX}{x}{SplashRangeY} range nearby by {Heal} every {Time} sec while also increasing their Attack Speed by {AttackSpeedPerUnit10670}% every time. Only the highest Attack Speed increase from &lt;For the Empire!&gt; is applied.</String>
@@ -9768,8 +9759,7 @@ You &lt;color=#FF0000&gt;cannot change&lt;/color&gt; the selected Legacies after
   <String Key="BaseHybridDefOnInvade">+{0} Gold reward from Invasion
 +{1} DEF to all heroes in Invasion
 Cannot be enhanced through forging or polishing</String>
-  <String Key="ArtifactOptionDesc_Event_15000">
-Free position movement through polishing
+  <String Key="ArtifactOptionDesc_Event_15000">Free position movement through polishing
 (until Dec 3, 2024)</String>
   <String Key="SkinName_1032007">Tia the Moon Goddess</String>
   <String Key="SkinName_1032007_NewLine">Tia the Moon Goddess</String>
@@ -10254,7 +10244,7 @@ you can obtain the items below.</String>
   <String Key="ArtifactBuffDataDesc_10030_Piece">Increases Spell Power of all heroes</String>
   <String Key="RankRangeFormat">Rank {0} - {1}</String>
   <String Key="Potential_10080_0">Reduces damage taken by 30% while using &lt;Flamebreath&gt;</String>
-  <String Key="Potential_10260_2">Uses &lt;Azure Dragon Slash&gt; instantly upon killing an enemy. +40% final damage for the instant &lt;Azure Dragon Slash&gt;</String>
+  <String Key="Potential_10260_2">Upon killing, instantly use &lt;Azure Dragon Slash&gt;, Final Damage Dealt of &lt;Azure Dragon Slash&gt; +20%</String>
   <String Key="SkillDesc_10690_Long">Deals {Damage} spell skill damage to the target for every {AttackCountByMaxManaPerDesc} MP used. Whenever &lt;Growing Mana&gt; is used, Max MP increases by {10695@MaxMana} (max {10695@MaxBuffOverlap} stacks).</String>
   <String Key="SkillName_42205">Bloody Rampage</String>
   <String Key="SkillDesc_UI_42205">The Herald of Blood resonates with the Blood Crystal. The Blood Crystal is prioritized as the target for healing skills used by heroes, and the healing it receives is greatly increased depending on Guard. All heroes are healed by a portion of the healing received by the Blood Crystal.</String>
@@ -11358,8 +11348,7 @@ Challenge &amp; Achievement</String>
   <String Key="AddDifficultyUnlockDesc">If cleared without damage, the difficulty will be unlocked by 2 levels.</String>
   <String Key="AccessoryLevelUpTutorialLock">Unlocked after clearing Corruption II-1.</String>
   <String Key="NotAccessoryLevelUp">No Accessories available for enhancement</String>
-  <String Key="ArtifactOptionDesc_Event_15020">
-Free position movement through polishing (&lt;color=#ffbd4a&gt;until {0}&lt;/color&gt;)</String>
+  <String Key="ArtifactOptionDesc_Event_15020">Free position movement through polishing (&lt;color=#ffbd4a&gt;until {0}&lt;/color&gt;)</String>
   <String Key="MissionDesc_ThemeDifficultyClear">Clear Chapter {0}-{1} {Diff} level or higher.</String>
   <String Key="MissionDesc_ThemeDifficultyClear_Hard">Clear [Corruption] Chapter {0}-{1} {Diff} level or higher.</String>
   <String Key="Polish_EventArtifact_Alert">This Relic cannot be enhanced through polishing!</String>
@@ -11679,7 +11668,6 @@ Simply gazing upon it brings peace to the mind and body.</String>
   <String Key="AccessorySynergyName_9">Moonlight</String>
   <String Key="AccessorySynergyName_9_Pre">Moonlit</String>
   <String Key="AccessorySynergyDesc_10090">+{1}% final ATK, &lt;color=#f33&gt;{0}% final Spell Power&lt;/color&gt;</String>
-  <String Key="AccessorySynergyDesc_10091">+{0} Range, +{2}% physical CRIT damage for every {1} Range owned (Max 80%)</String>
   <String Key="AccessorySynergyDesc_10092">Hides for {0} sec at the beginning of the battle, +{2}% Physical CRIT Chance after {1} sec</String>
   <String Key="InventoryItemName_5010">Moonlit Accessory Selection Chest</String>
   <String Key="ShopItemName_41012">Random Moonlight Accessory</String>
@@ -11711,8 +11699,7 @@ If the attack target's Max HP is higher than the user's Max HP, an additional sw
   <String Key="SpecialPackage_1556">Eterna Package 1</String>
   <String Key="SpecialPackage_1557">Eterna Package 2</String>
   <String Key="SpecialPackage_1558">Eterna Package 3</String>
-  <String Key="MakeAllLateComerExceptSlot">Grants the Backup effect to all heroes except for the hero positioned {0} in the Troop.
-</String>
+  <String Key="MakeAllLateComerExceptSlot">Grants the Backup effect to all heroes except for the hero positioned {0} in the Troop.</String>
   <String Key="Order_1">first</String>
   <String Key="Order_2">second</String>
   <String Key="Order_3">third</String>
@@ -12632,7 +12619,7 @@ You can use "Gems" or "Rift Equipment Unupgradable Status Removal Ticket" to res
   <String Key="RiftWeaponBuffDesc_130">Deals {0}% special damage to 3 targets upon dealing normal damage after using skill</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} Physical DEF</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} Spell DEF</String>
-  <String Key="RiftWeaponBuffDesc_160">+{0} Range</String>
+  <String Key="RiftWeaponBuffDesc_160">Movement Speed +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">+{0}% Physical HP Drain</String>
   <String Key="RiftWeaponBuffDesc_180">+{0}% Spell HP Drain</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} DEF</String>
@@ -14393,8 +14380,7 @@ Recommended: Strife Battlefield</String>
   <String Key="AltarHelpBuilding_5">An Altar that increases the supply of Silver to facilitate hero summoning and shop usage.
 
 Recommended: Invasion, Arena</String>
-  <String Key="ArtifactBuffDataDesc_15010">+{0}% Attack Speed for the Vanguard hero at the beginning of the battle in Invasion and Expedition (no effect if there is no Vanguard hero)
-</String>
+  <String Key="ArtifactBuffDataDesc_15010">+{0}% Attack Speed for the Vanguard hero at the beginning of the battle in Invasion and Expedition (no effect if there is no Vanguard hero)</String>
   <String Key="Post_Name_AltarGoldRefund">Refund of Altar Ember Expansion Cost</String>
   <String Key="Post_Desc_AltarGoldRefund">This is a refund of the Gold spent on expanding Ember at the Altars.</String>
   <String Key="OutgameTutorial_140_00">Greetings, King of the Castle. It's been a while. &lt;color=#FFC13D&gt;I am Knight Commander Aslyn.&lt;/color&gt;
@@ -18187,6 +18173,10 @@ Spell Power multiplier for the Basic Damage increase effect per 1 Guard: +{4}%
 Grants Benediction to allies in the field except the wielder</String>
   <String Key="SeasonalEventName_Season72">Flying Dragon Festival</String>
   <String Key="SeasonalEventMode_Season72">Flying Dragon Festival</String>
+  <String Key="SpecialPackage_1690">Legacy Pickup Summoning Stone Package 1</String>
+  <String Key="SpecialPackage_1691">Legacy Pickup Summoning Stone Package 2</String>
+  <String Key="SpecialPackage_1692">Meirna Package</String>
+  <String Key="SpecialPackage_1693">Tome of Tides Package</String>
   <String Key="AdsSummonRestrictionAlert">Up to {0} times per round.</String>
   <String Key="ThemeName_1003">Pick and Pass</String>
   <String Key="ModeDesc_1003">One of the two choices is yours, and the other belongs to your opponent!
@@ -18243,7 +18233,9 @@ The unchosen unit will be assigned to the enemy Troop.</String>
   <String Key="SkinName_1074001">Moonlight Star Lord Suha</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Moon Rabbits! You know you must not cause too much trouble just because you came down after a year, right? Have fun, everyone!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Harvest Moon Festival Offers</String>
-  <String Key="SeasonalEventNumberFormat">Season {0} Event</String>
-  <String Key="SeasonalEvent">Season Event</String>
-  <String Key="SeasonalEventCeilFormat">Season {0} Pickup</String>
+  <String Key="UnitGachaPickupCountFormat">Guaranteed &lt;color=#FFD247&gt;Pickup Hero&lt;/color&gt; after &lt;color=#FFD247&gt;{0}&lt;/color&gt; Summons</String>
+  <String Key="PlayReward_Semi1">First Half Reward</String>
+  <String Key="PlayReward_Semi2">Second Half Reward</String>
+  <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; Plays</String>
+  <String Key="BlessedTreasure">Blessed Legacy</String>
 </Strings>

@@ -1,4 +1,4 @@
-<Strings>
+<Strings TranslationBaseCommit="efa364085207af02d20ab068dab385a325cabf86">
   <String Key="UpdateNoticeVersion">172000</String>
   <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
   <String Key="Title">King God Castle</String>
@@ -951,10 +951,8 @@ Erhöht MP zu Beginn der Runde aller Verbündeten mit 5★ oder mehr</String>
   <String Key="AddDefPerCount">Verringert den erlittenen Schaden um {0} für jeden Helden auf dem Schlachtfeld
 (Max. {1})</String>
   <String Key="AddDefPerCount_Piece">Der erlittene Schaden verringert sich, je mehr Helden auf dem Schlachtfeld platziert sind.</String>
-  <String Key="AtkPerByRange">+1 Reichweite für alle Helden
-Erhöht den Schaden für jedes Feld bis zum Ziel des Normal-/Skill-ANG um {0} (Max. Reichweite {1})</String>
-  <String Key="AtkPerByRange_Piece">+1 Reichweite für alle Helden
-Erhöht den Schaden für jedes Feld bis zum Ziel des Normal-/Skill-ANG um {0} (Max. Reichweite {1})</String>
+  <String Key="AtkPerByRange">Verursachter Schaden von Normalangriffen/Fähigkeiten +{0} pro Feld Entfernung zum Ziel (max. Distanz {1})</String>
+  <String Key="AtkPerByRange_Piece">Je weiter das Ziel von Normalangriffen/Fähigkeiten entfernt ist, desto höher ist der verursachte Schaden</String>
   <String Key="ArtifactName_100">Magiestaub</String>
   <String Key="ArtifactDesc_100">Ihr könnt Magiestaub durch das Einschmelzen von Relikten erhalten.</String>
   <String Key="ArtifactName_10000">Kaiserliches Großschwert</String>
@@ -3487,7 +3485,7 @@ bei &lt;color=#FFD247&gt;jedem 4. Kauf&lt;/color&gt; einer Relikt-Truhe kaufen.<
   <String Key="ShopItemName_1015_Post">Level 11 Wachstumspaket</String>
   <String Key="ShopItemName_1016_Post">Level 13 Wachstumspaket</String>
   <String Key="ShopItemName_1017_Post">Level 15 Wachstumspaket</String>
-  <String Key="RedValve ">Red Valve</String>
+  <String Key="RedValve">Red Valve</String>
   <String Key="LilCat">LilCat</String>
   <String Key="VeryLittleBear">VeryLittleBear</String>
   <String Key="NewUnitGachaPanelNewUnit">Held erhalten!</String>
@@ -6864,8 +6862,8 @@ das den Schaden des nächsten Skills auf einen Gegner um 130% amplifiziert</Stri
   <String Key="ArtifactName_14020">Zwergen Visier</String>
   <String Key="ArtifactDesc_14020">Ein Visier, das mit der Technologie der Zwerge gebaut wurde.
 Wer das Visier benutzt, kann weiter entfernte Ziele noch genauer angreifen, aber dafür ist es aufgrund seines Gewichts auch schwer zu transportieren.</String>
-  <String Key="MoveStopTimeDesc_Piece">Markiert 2 Felder im Schlachtfeld als Scharfschützenplätze. Platzierte Helden erhalten Absolute VERT, sind für eine gewisse Zeit &lt;color=#f33&gt;bewegungsunfähig&lt;/color&gt;, Reichweite +3 und beim ersten sowie bei jedem 5. Treffer erhöht sich ihr verursachter Normal-Schaden</String>
-  <String Key="MoveStopTimeDesc">Markiert 2 Felder im Schlachtfeld als Scharfschützenplätze. Platzierte Helden erhalten Absolute VERT +{2}, sind für {0} Sek. &lt;color=#f33&gt;bewegungsunfähig&lt;/color&gt;, Reichweite +3 und beim ersten sowie bei jedem 5. Treffer erhöht sich ihr verursachter Normal-Schaden um +{1}%.</String>
+  <String Key="MoveStopTimeDesc_Piece">Bestimmt zwei Felder des Schlachtfelds als Scharfschützenplätze. Platzierte Helden erhalten Absolute VERT +4. Bis sie den Platz zum ersten Mal verlassen, verursacht der erste sowie jeder 5. Treffer mit Normal-Schaden erhöhten Schaden</String>
+  <String Key="MoveStopTimeDesc">Bestimmt zwei Felder des Schlachtfelds als Scharfschützenplätze. Platzierte Helden erhalten Absolute VERT +{1}. Bis sie den Platz zum ersten Mal verlassen, verursacht der erste sowie jeder 5. Treffer mit Normal-Schaden +{0}% Schaden.</String>
   <String Key="ColosseumBanned">Zugang zum Schlachtfeld des erbitterten Kampfs Saison gesperrt</String>
   <String Key="GachaName_1036">Freudloses Lächeln</String>
   <String Key="Name_Potential_10560_3">Anfeuern</String>
@@ -10262,7 +10260,7 @@ könnt Ihr die folgenden Gegenstände erhalten.</String>
   <String Key="ArtifactBuffDataDesc_10030_Piece">Erhöht die Zaubermacht aller Helden</String>
   <String Key="RankRangeFormat">Rang {0}-{1}</String>
   <String Key="Potential_10080_0">Verringert während &lt;Flammenatem&gt; den erlittenen Schaden um 30 %.</String>
-  <String Key="Potential_10260_2">Wendet sofort &lt;Blaudrachenschneide&gt; an, wenn ein Gegner besiegt wird. +40 % Gesamtschaden für &lt;Blaudrachenschneide&gt;.</String>
+  <String Key="Potential_10260_2">Beim Besiegen sofort &lt;Blaudrachenschneide&gt; einsetzen, Gesamtschaden von &lt;Blaudrachenschneide&gt; +20%</String>
   <String Key="SkillDesc_10690_Long">Verursacht beim Ziel fortlaufend {Damage} Zauber-Skill-Schaden pro {AttackCountByMaxManaPerDesc} verbrauchte MP. Jedes Mal, wenn &lt;Wachsendes Machtpotenzial&gt; verwendet wird, erhöhen sich die Max. MP um {10695@MaxMana}. (Max. {10695@MaxBuffOverlap}x stapelbar)</String>
   <String Key="SkillName_42205">Blutraserei</String>
   <String Key="SkillDesc_UI_42205">Der Blutapostel resoniert mit dem „Blutkristall“. Der „Blutkristall“ wird vorrangig als Ziel für Heilfähigkeiten verwendet, die von Helden eingesetzt werden, und die erhaltene Heilungsrate erhöht sich erheblich proportional zum Schutz des Wirkers. Ein Teil der Heilungsrate des Blutkristalls wird auf alle Helden verteilt.</String>
@@ -11686,7 +11684,6 @@ Schon der Anblick beruhigt Geist und Körper.</String>
   <String Key="AccessorySynergyName_9">Mondlicht</String>
   <String Key="AccessorySynergyName_9_Pre">Mondlichts</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;Gesamt-Zaubermacht {0} %&lt;/color&gt;, Gesamt-ANG +{1} %</String>
-  <String Key="AccessorySynergyDesc_10091">Reichweite + {0}, für jede {1} Reichweite Phys.-Kritischer Schaden +{2} % (max. 80 %)</String>
   <String Key="AccessorySynergyDesc_10092">Beginn der Runde {0} Sek. verborgen, nach {1} Sek. Phys.-Kritische Trefferchance +{2} %</String>
   <String Key="InventoryItemName_5010">Mondlichts-Accessoire Auswahltruhe</String>
   <String Key="ShopItemName_41012">Zufälliges Mondlicht-Accessoire</String>
@@ -12639,7 +12636,7 @@ Möchtest du zu diesem Ort wechseln?</String>
   <String Key="RiftWeaponBuffDesc_130">Verursacht nach Verwendung der Fähigkeit an 3 Gegnern Spezialschaden in Höhe von {0} % des Normal-ANG, wenn dieser trifft</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} Phys.-Widerstand</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} Zauber-Widerstand</String>
-  <String Key="RiftWeaponBuffDesc_160">+{0} Reichweite</String>
+  <String Key="RiftWeaponBuffDesc_160">Bewegungsgeschwindigkeit +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">+{0} % Phys. Lebensraub</String>
   <String Key="RiftWeaponBuffDesc_180">+{0} % Zauber Lebensraub</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} Widerstand</String>
@@ -18294,7 +18291,9 @@ Skin zum Erntemondfest 2026</String>
   <String Key="SkinName_1074001">Mondschein-Sternenfürst Suha</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Mondhasen! Ihr wisst doch, dass ihr nicht zu viel Unfug treiben dürft, nur weil ihr nach einem Jahr wieder hier seid, oder? Habt alle Spaß und genießt die Zeit!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Erntemondfest-Angebote</String>
-  <String Key="SeasonalEventNumberFormat">Saison-{0}-Event</String>
-  <String Key="SeasonalEvent">Saison-Event</String>
-  <String Key="SeasonalEventCeilFormat">Saison-{0}-Pickup</String>
+  <String Key="UnitGachaPickupCountFormat">Bei &lt;color=#FFD247&gt;{0}&lt;/color&gt; Beschwörungen ist &lt;color=#FFD247&gt;der Pickup-Held garantiert&lt;/color&gt;</String>
+  <String Key="PlayReward_Semi1">Belohnung 1. Hälfte</String>
+  <String Key="PlayReward_Semi2">Belohnung 2. Hälfte</String>
+  <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; Spiele</String>
+  <String Key="BlessedTreasure">Gesegnetes Schmuckstück</String>
 </Strings>

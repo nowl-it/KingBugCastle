@@ -568,7 +568,7 @@
         <CanContract>false</CanContract>
         <Hidden>true</Hidden>
 
-        <SpriteOffsetY>-8</SpriteOffsetY>
+        <SpriteOffsetY>0</SpriteOffsetY>
         <TodoListBadgePosYOffset>10</TodoListBadgePosYOffset>
     </Advisor>
 
@@ -587,7 +587,7 @@
         <CanContract>false</CanContract>
         <Hidden>true</Hidden>
 
-        <SpriteOffsetY>-8</SpriteOffsetY>
+        <SpriteOffsetY>0</SpriteOffsetY>
         <TodoListBadgePosYOffset>10</TodoListBadgePosYOffset>
     </Advisor>
 </Advisors>
