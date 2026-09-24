@@ -16,10 +16,17 @@ on:
         description: "Port for native glogin poller (80 through origin Caddy for public builds)"
         required: false
         default: "80"
-      tag:
-        description: "Version, used as release name 'King Bug Castle <tag>' and file 'KingBugCastle_<tag>.xapk' (e.g. v173.0.00); if it already exists a timestamp suffix is appended"
+      version:
+        description: "Game version to build, e.g. 173.1.00. Defaults to the bundled client version in api/config.py (single source of truth). Drives the stock source dir/url, the built artifact name and the release names - so this workflow works for any version without further edits."
         required: false
-        default: "v173.0.00"
+        default: ""
+      tag:
+        description: "Release tag/name override; defaults to 'v<version>' (e.g. v173.1.00). If the tag already exists a timestamp suffix is appended"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -49,21 +56,37 @@ jobs:
         run: |
           pip install -r server/requirements.txt
 
-      - name: Ensure Base XAPK source (v173.0.00)
+      - name: Resolve Version and Source
+        run: |
+          VERSION="${{ inputs.version }}"
+          if [ -z "$VERSION" ]; then
+            VERSION="$(python api/version.py)"
+          fi
+          # Source dir convention: xapk_extracted_v<major><minor> (173.0.00 -> v1730, 173.1.00 -> v1731).
+          SRC="xapk_extracted_v$(echo "$VERSION" | cut -d. -f1-2 | tr -d .)"
+          TAG="${{ inputs.tag }}"
+          [ -z "$TAG" ] && TAG="v${VERSION}"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "SRC=$SRC" >> "$GITHUB_ENV"
+          echo "STOCK_TAG=stock-v${VERSION}" >> "$GITHUB_ENV"
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          echo "Building KingBugCastle_${VERSION}.xapk from ${SRC} (release $TAG)"
+
+      - name: Ensure Base XAPK source
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ ! -f apk/xapk_extracted_v1730/com.awesomepiece.castle.apk ]; then
-            echo "Base XAPK source missing, downloading from release stock-v173.0.00..."
-            mkdir -p apk/xapk_extracted_v1730
-            gh release download stock-v173.0.00 --pattern "*.xapk" --dir /tmp/base_xapk --repo "$GITHUB_REPOSITORY"
-            unzip -o -q /tmp/base_xapk/*.xapk -d apk/xapk_extracted_v1730/
+          if [ ! -f "apk/${SRC}/com.awesomepiece.castle.apk" ]; then
+            echo "Base XAPK source missing, downloading from release stock-v${VERSION}..."
+            mkdir -p "apk/${SRC}"
+            gh release download "stock-v${VERSION}" --pattern "*.xapk" --dir /tmp/base_xapk --repo "$GITHUB_REPOSITORY"
+            unzip -o -q /tmp/base_xapk/*.xapk -d "apk/${SRC}/"
             rm -rf /tmp/base_xapk
           fi
-          test -f apk/xapk_extracted_v1730/com.awesomepiece.castle.apk
-          test -f apk/xapk_extracted_v1730/config.arm64_v8a.apk
-          test -f apk/xapk_extracted_v1730/base_assets.apk
-          test -f apk/xapk_extracted_v1730/manifest.json
+          test -f "apk/${SRC}/com.awesomepiece.castle.apk"
+          test -f "apk/${SRC}/config.arm64_v8a.apk"
+          test -f "apk/${SRC}/base_assets.apk"
+          test -f "apk/${SRC}/manifest.json"
 
       - name: Setup Keystore
         run: |
@@ -78,19 +101,13 @@ jobs:
           GLOGIN_HOST: ${{ github.event.inputs.glogin_host }}
           GLOGIN_POLL_HOST: ${{ github.event.inputs.glogin_poll_host }}
           GLOGIN_POLL_PORT: ${{ github.event.inputs.glogin_poll_port }}
-          KGC_APK_SRC: xapk_extracted_v1730
+          KGC_APK_SRC: ${{ env.SRC }}
         run: |
           python3 server/builders/build_private.py --share
 
-      - name: Resolve Version
-        run: |
-          TAG="${{ github.event.inputs.tag }}"
-          [ -z "$TAG" ] && TAG="v173.0.00"
-          echo "TAG=$TAG" >> "$GITHUB_ENV"
-
       - name: Prepare Release Asset
         run: |
-          cp KingBugCastle_173.0.00.xapk "KingBugCastle_${TAG}.xapk"
+          cp "KingBugCastle_${VERSION}.xapk" "KingBugCastle_${TAG}.xapk"
           ls -lh "KingBugCastle_${TAG}.xapk"
 
       - name: Upload Artifact
@@ -107,12 +124,12 @@ jobs:
           cat > notes.md <<EOF
           ## King Bug Castle — Private-Server Client
 
-          Custom client (v173.0.00, arm64) for the King Bug Castle private-server project: the
-          original King God Castle v173.0.00 game with compatibility patches so it connects to a
+          Custom client (v${VERSION}, arm64) for the King Bug Castle private-server project: the
+          original King God Castle v${VERSION} game with compatibility patches so it connects to a
           self-hosted private server instead of the official backend.
 
           ### What is inside
-          - Game version: v173.0.00 (arm64)
+          - Game version: v${VERSION} (arm64)
           - SSL verification bypass — works with self-signed server certificates
           - Anti-cheat (XIGNCODE NEO) stub — the game boots normally without the official packer
           - Stability fixes — patched crash/NRE sources (lobby, shop, PvP panels, event popups)
@@ -156,4 +173,4 @@ jobs:
         if: always()
         run: |
           echo "Cleaning up stock files and build artifacts..."
-          rm -rf apk/xapk_extracted_v1730 KingBugCastle_173.0.00.xapk "KingBugCastle_${TAG}.xapk"
+          rm -rf "apk/${SRC}" "KingBugCastle_${VERSION}.xapk" "KingBugCastle_${TAG}.xapk"

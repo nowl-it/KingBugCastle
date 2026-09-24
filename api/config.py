@@ -95,8 +95,10 @@ def decode_response(content: bytes) -> dict | list | str:
 
 # The ranking service rejects stale client versions before it evaluates the token.
 # Keep the current bundled APK as the default; callers can select another installed
-# client with KGC_VERSION without editing this module.
-VERSION = os.environ.get("KGC_VERSION", "173.0.00")
+# client with KGC_VERSION without editing this module. This default is the single
+# source of truth for "the version we bundle" - api/version.py reads it back, and
+# CI jobs derive their version header from it.
+VERSION = os.environ.get("KGC_VERSION", "173.1.00")
 
 SESSION: requests.Session = requests.Session()
 SESSION.headers.update({

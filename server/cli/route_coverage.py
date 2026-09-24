@@ -23,10 +23,19 @@ SERVER = ROOT.parent
 REPO = ROOT.parent.parent
 if str(SERVER) not in sys.path:
     sys.path.insert(0, str(SERVER))
-# The deployed client is v173.0.00.  The extracted metadata is intentionally not
-# tracked (it is generated from a proprietary APK), so a deployment/CI job must
-# supply it with KGC_IL2CPP_SCRIPT_JSON when it lives elsewhere.
-CLIENT_VERSION = os.environ.get("KGC_CLIENT_VERSION", "173.0.00")
+# The deployed client is the bundled version from api/config.py (single source of
+# truth). The extracted metadata is intentionally not tracked (it is generated from
+# a proprietary APK), so a deployment/CI job must supply it with
+# KGC_IL2CPP_SCRIPT_JSON when it lives elsewhere.
+CLIENT_VERSION = os.environ.get("KGC_CLIENT_VERSION") or ""
+if not CLIENT_VERSION:
+    # Self-contained: read api/config.py's VERSION default through api/version.py
+    # without relying on the `api` package being importable from this cwd.
+    _api_dir = Path(__file__).resolve().parents[2] / "api"
+    if str(_api_dir) not in sys.path:
+        sys.path.insert(0, str(_api_dir))
+    import version as _v
+    CLIENT_VERSION = _v.get_bundled_version()
 SCRIPT_JSON = Path(os.environ.get("KGC_IL2CPP_SCRIPT_JSON") or
                    REPO / "il2cpp" / f"v{CLIENT_VERSION}" / "script.json")
 

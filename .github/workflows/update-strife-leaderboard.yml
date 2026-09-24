@@ -5,6 +5,11 @@ on:
     # Run every 15 minutes
     - cron: '*/15 * * * *'
   workflow_dispatch:
+    inputs:
+      version:
+        description: "Client version header to send (default: auto from api/config.py)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -32,7 +37,16 @@ jobs:
         env:
           KGC_TOKEN: ${{ secrets.KGC_TOKEN }}
         run: |
-          python scripts/update_strife_leaderboard.py
+          # The ranking API rejects stale client versions (403 NotLatestVersion)
+          # before the token is even evaluated. Use the explicit input when given,
+          # otherwise derive the version of the bundled client from api/config.py
+          # so this job can never drift stale again.
+          VERSION="${{ inputs.version }}"
+          if [ -z "$VERSION" ]; then
+            VERSION="$(python api/version.py)"
+          fi
+          echo "Sending client version: $VERSION"
+          KGC_VERSION="$VERSION" python scripts/update_strife_leaderboard.py
 
       - name: Commit and Push if Changed
         run: |
