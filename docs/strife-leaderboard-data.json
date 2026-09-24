@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-09-24T07:13:50.199651",
+  "updatedAt": "2026-09-24T07:33:42.882693",
   "season": 73,
   "seasonEndTime": "2026-09-23T14:58:00.000+0000",
   "seasonStartTime": "2026-09-10T02:00:00.000+0000",
   "totalRanked": 10,
   "summary": {
     "topScore": 2475,
-    "top10Cutoff": 2201,
-    "top100Cutoff": 2201,
+    "top10Cutoff": 2219,
+    "top100Cutoff": 2219,
     "top1Player": {
       "rank": 1,
       "score": 2475,
@@ -180,7 +180,7 @@
     },
     {
       "rank": 6,
-      "score": 2234,
+      "score": 2271,
       "accountId": 532218,
       "userName": "크래시",
       "castleName": "임페리얼",
@@ -201,6 +201,27 @@
     },
     {
       "rank": 7,
+      "score": 2238,
+      "accountId": 7948284,
+      "userName": "Khoitanana",
+      "castleName": "Thanhthanh",
+      "tier": 71,
+      "tierInfo": {
+        "id": 71,
+        "vi": "Thần+ (Hạng 11~30)",
+        "en": "God+ (Rank 11~30)",
+        "kr": "갓+(11~30위)",
+        "icon": "Tier_07",
+        "group": "god",
+        "color": "#a855f7"
+      },
+      "profileIcon": 1026005,
+      "heroName": "",
+      "flagId": 20160,
+      "nameTagId": 20020
+    },
+    {
+      "rank": 8,
       "score": 2230,
       "accountId": 1059848,
       "userName": "KLewis",
@@ -221,7 +242,7 @@
       "nameTagId": 15370
     },
     {
-      "rank": 8,
+      "rank": 9,
       "score": 2229,
       "accountId": 6096171,
       "userName": "Renziiii",
@@ -242,7 +263,7 @@
       "nameTagId": 40060
     },
     {
-      "rank": 9,
+      "rank": 10,
       "score": 2219,
       "accountId": 452516,
       "userName": "쉬드",
@@ -261,27 +282,6 @@
       "heroName": "Haerang",
       "flagId": 50000,
       "nameTagId": 70010
-    },
-    {
-      "rank": 10,
-      "score": 2201,
-      "accountId": 7948284,
-      "userName": "Khoitanana",
-      "castleName": "Thanhthanh",
-      "tier": 71,
-      "tierInfo": {
-        "id": 71,
-        "vi": "Thần+ (Hạng 11~30)",
-        "en": "God+ (Rank 11~30)",
-        "kr": "갓+(11~30위)",
-        "icon": "Tier_07",
-        "group": "god",
-        "color": "#a855f7"
-      },
-      "profileIcon": 1026005,
-      "heroName": "",
-      "flagId": 20160,
-      "nameTagId": 20020
     }
   ]
 }
