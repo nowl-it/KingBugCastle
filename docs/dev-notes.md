@@ -169,7 +169,7 @@ Results (mitmdump log, `kgc-k8s-1.awesomepiece.com` on `34.144.251.178`):
 - NRE stubs (RVA; file = RVA - 0x4000): pvp-init `0x32E4EA0`, pvp-reward `0x32DFAD0`,
   shop-growth `0x3352448`, shop-season `0x3354584`, year-event `0x30E0B30`, card-event `0x30E2DC4`,
   season-event `0x30E2CBC`, babel-data `0x30C7BAC`, content-alert `0x35392BC`, accessory
-  `0x30EDEB4` (RET_TRUE), ranking-endpt `0x2D37F58`. Specials: firebase-check file `0x30C8D50`,
+  `0x30EDEB4` (RET_TRUE), ranking-endpt `0x2D37F58`. Specials: firebase-check file `0x30C6D50`,
   RegisterHackDetection file `0x3568CA8`, canUseFirebase gate file `0x3798E14` (fingerprint
   `080140f9880200b408e14839c8010034`, tail-call dispatch → `0x37EB890`), LogEvent file
   `0x37EB890` + `0x37EB8F4`, CRC getter file `0x60CA5BC` (orig `001840b9c0035fd6` = the real
@@ -179,6 +179,27 @@ Results (mitmdump log, `kgc-k8s-1.awesomepiece.com` on `34.144.251.178`):
 - Share build completed as `KingBugCastle_173.1.00.xapk` (1,209 MB), host baked 127.0.0.1 for
   adb-reverse local play. Server working tree (T1/T2 commits `9457c65` + `3d0e913`) sets
   `VERSION=173.1.00` + `serverVersion=173.1.00` so gated Gacha/Shop content goes live.
+- **"Failed to connect" & "Loading resources" hang - AES Zero Padding & CheckFirebase Typo (2026-09-25):**
+  - **AES Zero Padding**: The v173.1.00 client's `Utility$$AESDecryptWithServer` now explicitly configures `PaddingMode.Zeros` (`mov w1, #3` into `SymmetricAlgorithm.set_Padding`). The server previously used Space padding, which `PaddingMode.Zeros` does NOT strip. This caused Newtonsoft JSON to throw `JsonReaderException` on the trailing spaces, resulting in "Failed to connect" errors (e.g. after `/auth/getPatchFolder`). Fixed by updating `server/crypto.py` to pad AES payloads with `\x00`.
+  - **CheckFirebase Typo**: `build_private.py` had a typo for `CHECKFIREBASE_OFF` (`0x30C8D50` instead of `0x30C6D50`). This caused the patch to miss `GameManager.CheckFirebase`, leading to a fatal GMS init crash on Redroid when downloading resources. Fixed the offset so `CheckFirebase` is properly stubbed to `ret`.
+- **"Loading resources" hang - `GetDevServers` AES mismatch (2026-09-25):**
+  `Scene_Login.Awake` calls `RestAPI.GetDevServers()` which hits
+  `http://127.0.0.1/api/cloud-run/services?location=asia-northeast3` (endpoint rewritten from
+  `INFRA_SERVER_URL = https://castle-infra-server-65408603887.asia-northeast3.run.app` by
+  `patch_hosts` + `patch_metadata_http` + `patch_leftover_hosts`). The coroutine
+  (`<GetDevServers>d__437.MoveNext`, RVA `0x2D04250`) calls `Web.Get<T>` overload **d__15**
+  (RVA `0x50AA460`, signature `Get<T>(endPoint, uri, List<(string,string)> customHeaders,
+  bool useSystemSerializeFunc)`) which reads raw `DownloadHandler.data` → UTF8 decode →
+  `JsonConvert.DeserializeObject`. This overload does **NOT** call `DecryptResponseBody`. But
+  the generic `respond()` path in `server.py` AES-encrypts every response. The client receives
+  AES ciphertext, UTF8-decodes it (producing `U+FFFD` for invalid byte sequences), and throws
+  `JsonReaderException: Unexpected character ... position 0`. Fix: serve `/api/cloud-run/services`
+  and `/api/cloud-run/default-ranking` as direct `JSONResponse` routes registered before the
+  `ROUTE_MODELS` loop. The `ServerListResponse` model (`base: null`, not a `ResponseModel`)
+  carries only `serverList: ServerData[]` (`{name, url, cachedInfo}`). Also note:
+  `GetDefaultInfraRankingServer` (`<d__438>`, RVA `0x2D03CF4`) uses the same infra endpoint
+  with URI `/api/cloud-run/default-ranking?location=asia-northeast3&useReplica={0}` and the
+  same non-AES `Web.Get` overload. Both routes need the plain-JSON treatment.
 
 ---
 

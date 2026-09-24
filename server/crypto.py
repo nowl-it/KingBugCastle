@@ -14,14 +14,14 @@ import json
 
 from Crypto.Cipher import AES
 
-AES_KEY = b"b53019bb76da6b34"
+AES_KEY = b"a6072ad6b9c959ff"
 
 
 def aes_encrypt(payload: dict) -> bytes:
-    # Space-pad to 16-byte blocks (NOT PKCS7): see module docstring.
-    raw = json.dumps(payload).encode()
+    # Zero-pad to 16-byte blocks because v173.1.00 client uses PaddingMode.Zeros
+    raw = json.dumps(payload, separators=(',', ':')).encode()
     if len(raw) % 16:
-        raw += b" " * (16 - len(raw) % 16)
+        raw += b"\x00" * (16 - len(raw) % 16)
     return AES.new(AES_KEY, AES.MODE_ECB).encrypt(raw)
 
 

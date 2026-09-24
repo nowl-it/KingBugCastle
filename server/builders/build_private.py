@@ -130,7 +130,7 @@ CHECKFIREBASE_OFF = {"171.0.00": 0x303C6C0,
                       "172.0.01": 0x30439B8,
                       "172.1.00": 0x3081350 - 0x4000,
                       "173.0.00": 0x30B7844,
-                      "173.1.00": 0x30C8D50}[VER]
+                      "173.1.00": 0x30C6D50}[VER]
 RET = bytes.fromhex('c0035fd6')  # arm64 `ret`
 
 # OBSOLETE, opt-in only (KGC_ASSETBYPASS=1). The "infinite UniTask recursion" this was

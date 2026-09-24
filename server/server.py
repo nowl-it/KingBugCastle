@@ -432,6 +432,13 @@ DYNAMIC_OVERRIDES = {
     # advisory only - but it has to be the truthful one, since the CDN check runs
     # either way and we serve real cloned bundles.
     "/auth/usePatch": lambda b, st: {"usePatch": True},
+    "/api/cloud-run/default-ranking": lambda b, st: {
+        "serverList": [{
+            "name": "default-ranking",
+            "url": "http://127.0.0.1",
+            "cachedInfo": {"useSideCar": False, "useReplicaDB": False},
+        }]
+    },
     "/kgc-ranking": roster.r_ranking,
     "/ranking/ranking": roster.r_ranking,
     "/ranking/pvp-ranking": roster.r_ranking,
@@ -737,6 +744,22 @@ assert set(DYNAMIC_OVERRIDES) <= set(OVERRIDES), "a handler group registered too
 
 import cdn
 cdn.register(app, sys.modules[__name__])
+
+# ── Infra discovery (plain JSON, no AES) ──
+# GetDevServers() and GetDefaultInfraRankingServer() use Web.Get overload d__15
+# (with customHeaders param), which reads raw DownloadHandler.data → UTF8 decode
+# → JsonConvert.DeserializeObject.  It does NOT call DecryptResponseBody().
+# The generic respond() path AES-encrypts everything, so the client receives
+# ciphertext, UTF8-decodes it to U+FFFD, and throws JsonReaderException at
+# position 0 → "Loading resources" hang.  Serve these as plain JSONResponse.
+@app.api_route("/api/cloud-run/services", methods=["GET", "POST"])
+async def infra_discovery(request: Request):
+    endpoint_data = {
+        "name": "default-ranking",
+        "url": "http://127.0.0.1",
+        "cachedInfo": {"useSideCar": False, "useReplicaDB": False},
+    }
+    return JSONResponse({"serverList": [endpoint_data]})
 
 for _r in ROUTE_MODELS:
     app.add_api_route(_r, make_handler(_r), methods=["GET", "POST", "PUT"])
