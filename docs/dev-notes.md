@@ -152,6 +152,34 @@ Results (mitmdump log, `kgc-k8s-1.awesomepiece.com` on `34.144.251.178`):
   `TMPDIR=<workspace>/.tmp` and `JAVA_TOOL_OPTIONS=-Djava.io.tmpdir=<workspace>/.tmp`; the same stock
   resources then rebuild successfully. This is a local disk-space failure, not malformed v173 data.
 
+### v173.1.00 private-client port (verified 2026-09-24, build runtime-OK)
+
+- Stock inputs: `apk/xapk_extracted_v1731/` (from `com.awesomepiece.castle@173.1.00-arm64.xapk`,
+  versionCode 1133, arm64 split only). Recovered game code: `il2cpp/v173.1.00/libil2cpp_v1731.so`;
+  matching metadata + dump + script.json live beside it. All offsets below were re-derived from this
+  build's own script.json by exact `ScriptMethod[].Name` match (namespace included, e.g.
+  `Awesomepiece.Web$$GetRankingServerEndPoint`) and verify against the v173.0.00 table 11/11.
+- `build_private.py` defaults to `xapk_extracted_v1731`, selects `_NRE_STUBS_V17310`, and uses the
+  same NEO table as v173.0.00: the v173.1.00 packer `liberallisi.so` (SONAME `libappsign4a.so`) is
+  byte-identical to v173.0.00's `libbisedich.so` at all 8 guarded branch sites + the 4 parser-error
+  sites (`08008012 e89700b9` x4). Build NOPed 12/12 during a real run.
+- v173 SSL raw file offsets: `0x2D33B44` (PinnedCertHandler), `0x5A1E9C4` (UnityTlsProvider),
+  `0x5A1D0D4` (MobileTlsContext). Regenerated via `make_ssl_so.py 173.1.00`; `--check` clean
+  (3 patches + anchor + zero stray bytes).
+- NRE stubs (RVA; file = RVA - 0x4000): pvp-init `0x32E4EA0`, pvp-reward `0x32DFAD0`,
+  shop-growth `0x3352448`, shop-season `0x3354584`, year-event `0x30E0B30`, card-event `0x30E2DC4`,
+  season-event `0x30E2CBC`, babel-data `0x30C7BAC`, content-alert `0x35392BC`, accessory
+  `0x30EDEB4` (RET_TRUE), ranking-endpt `0x2D37F58`. Specials: firebase-check file `0x30C8D50`,
+  RegisterHackDetection file `0x3568CA8`, canUseFirebase gate file `0x3798E14` (fingerprint
+  `080140f9880200b408e14839c8010034`, tail-call dispatch → `0x37EB890`), LogEvent file
+  `0x37EB890` + `0x37EB8F4`, CRC getter file `0x60CA5BC` (orig `001840b9c0035fd6` = the real
+  `get_Crc`), CRC reads `0x60CCB30`/`0x60CAA48`/`0x60CAB38`, ShopItem.Init file `0x3363E24`
+  (ORIG `941300b468ac01f0080945f9f60300aae00314aae1031f2a020140f9e1ca3394`; both cbz
+  displacements +0x254/+0x24C match v173.0.00, final `bl` → `e1ca3394` = #0x40569C4).
+- Share build completed as `KingBugCastle_173.1.00.xapk` (1,209 MB), host baked 127.0.0.1 for
+  adb-reverse local play. Server working tree (T1/T2 commits `9457c65` + `3d0e913`) sets
+  `VERSION=173.1.00` + `serverVersion=173.1.00` so gated Gacha/Shop content goes live.
+
 ---
 
 ## 1. Invasion rewards - COMPLETE decode (2026-08-18)
@@ -1595,3 +1623,64 @@ Unity's PlayerPrefs on iOS are stored in `Library/Preferences/com.awesomepiece.c
 The prefix for plain keys is `T:_79ee6c63096ae9b47a7567aadb779e05`.
 To extract credentials, parse the plist and decrypt all keys/values using this TripleDES key. Look for `accessToken`.
 See `tools/extract_ios_token.py` for the implementation.
+
+---
+
+## 26. "Sniper Spot" tile buff - Dwarven Scope artifact (2026-09-24, leaker cross-check)
+
+Leaker's item description: *"Placed Heroes gain Mighty Block +400; first và mọi Normal damage hit
+thứ 5 +25% damage"*. Master data cross-check (2026-09-22 CDN rebase, `server/xml_live/`):
+
+### What it actually is
+Artifact family **14020-14024 "Dwarven Scope"** (KR 드워프 조준경):
+
+| Artifact | Tier | TileBuffItem | Range check |
+|---|---|---|---|
+| 14020 | Piece (shard) | - | - |
+| 14021 | Normal | 21030 | `TileBuffItems X=1 Y=1` + `X=5 Y=1` |
+| 14022 | King | 21031 (Inherit 21030) | same two tiles |
+| 14023 | God | 21032 (Inherit 21030) | same |
+| 14024 | KingGod | 21033 (Inherit 21030) | same |
+
+`<ArtifactDesc_14020>`: "A scope that embodies Dwarven technology...". The two tiles at (1,1)/(5,1)
+are the "sniper spots" from the desc key `MoveStopTimeDesc`
+(`Strings_*.xml`): *"Designate two tiles on the Battlefield as sniper spots. Placed Heroes gain
+Mighty Block +{1}. Until they leave the sniper spot for the first time, the first and every 5th
+Normal damage hit deals +{0}% damage."*
+
+### Item 21030 buff options (all `BattleStart`, `Targets Self` = the placed hero)
+1. `ShowTileEffect Prefab="Fx_Artifact_14020"` - tile visual only.
+2. `AddMoveStopTime` FixedValue 10/15/20/25 (per tier) - hero is pinned to the spot (that's the
+   "Until they leave... for the first time" condition).
+3. `AddStat StatType="Range"` FixedValue 3 - +3 Range (the "sniper" reach).
+4. `AdjustNormalDamage Count="5" First="true"` + `AddDamagePer` FixedValue 100/200/300/400 - the
+   **first** normal hit AND **every 5th** normal hit deal +{0}% damage.
+5. Same condition + `ShowEffect Damaged="true"` - hit visual.
+6. `AddSuperShield` FixedValue 1/2/3/4 - grants N **Mighty Blocks** (EN localizes SuperShield as
+   "Mighty Block", see `BuildingEffect_SuperShield` = "Mighty Block {Value} time(s)").
+
+DescParams on the item bind `./ItemBuffOptions[2]/Values/FixedValue`, `[4]`, `[6]` (XPath 1-based =
+AddMoveStopTime / AddDamagePer / AddSuperShield) so the tooltip renders the stop time, the per-5th-hit
+damage % and the Mighty Block count from JSON-deserialized options.
+
+### Per-tier values (Items.xml 21030-21033)
+
+| Tier | Item | AddMoveStopTime | AddDamagePer (5th hit) | AddSuperShield (Mighty Block) | CoolTime (recall) |
+|---|---|---|---|---|---|
+| Normal | 21030 | 10 | 100 | 1 | 10 |
+| King | 21031 | 15 | 200 | 2 | 15 |
+| God | 21032 | 20 | 300 | 3 | 20 |
+| KingGod | 21033 | 25 | 400 | 4 | 25 |
+
+Buff recall (four trailing `ItemBuffOptions`, `RemoveTileEffect` + `Dispose` on `DuringBattle`
+(cooltime) and `AfterMove`) removes the tile buff if the hero leaves the spot - matching "Until
+they leave the sniper spot for the first time".
+
+### Verdict vs leaker
+- **Structure matches**: two sniper-spot tiles, Mighty Block grant, first + every-5th-hit damage
+  amp - exactly `MoveStopTimeDesc`.
+- **Numbers do NOT match**: no tier grants "Mighty Block +400" (max is +4 at KingGod) and no tier
+  uses +25% (damage amp is 100/200/300/400%). The leaker likely read a fan-translation or a
+  modded/mis-scaled sheet. Ground truth is the table above.
+- If a player asks "what is the sniper spot item": it is **Artifact 14020-14024 Dwarven Scope**,
+  dropped/upgraded through ShopSpecial (FromType), piece 14020 → 14024 KingGod.

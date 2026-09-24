@@ -153,11 +153,13 @@ The build recovers one and injects it, then NOPs the NEO unpack path - see
 [docs/mftl-extraction.md](docs/mftl-extraction.md) for the unpack recipe and
 [docs/private-build.md](docs/private-build.md) for the operator playbook.
 
-**Default input is v173.0.00** (`KGC_APK_SRC=xapk_extracted_v1730`), and it injects that build's
-**own** game code: `il2cpp/v173.0.00/libil2cpp_v173_ssl.so`, unpacked out of its packer by
+**Default input is v173.1.00** (`KGC_APK_SRC=xapk_extracted_v1731`), and it injects that build's
+**own** game code: `il2cpp/v173.1.00/libil2cpp_v1731_ssl.so`, unpacked out of its packer by
 `patchers/unpack_neo.py`. Lib and metadata come from the same build, so **no metadata swap runs**.
-The v173 packer is `libbisedich.so`; its guarded NEO sites were re-derived independently. Older
-versions remain selectable through `KGC_APK_SRC`.
+The v173.1.00 packer is `liberallisi.so`, **byte-identical** to v173.0.00's `libbisedich.so` at all
+12 NEO patch sites (both SONAME `libappsign4a.so`), so the same v173 NEO table covers both builds;
+its guarded NEO sites were re-derived independently. Older versions remain selectable through
+`KGC_APK_SRC` (`xapk_extracted_v1730`, `xapk_extracted_v1721`, …).
 
 *Fallback* (`KGC_APK_SRC=xapk_extracted_v1711` → v171.1.00 native, or `KGC_FORCE_V17100=1` for any
 older source) injects that build's own lib; only the v171.0.00 fallback **must** swap v171.0.00's
@@ -167,10 +169,10 @@ literal `/auth/xcdSeed?version=` at stringLiteral index 1545 of 25730, shifting 
 indices, and libil2cpp compiles those indices in.
 
 **Every il2cpp offset is per-lib.** The tables live side by side in `build_private.py`
-(`_NRE_STUBS_V17100` through `_NRE_STUBS_V17300`) and are picked by `VER`
+(`_NRE_STUBS_V17100` through `_NRE_STUBS_V17310`) and are picked by `VER`
 (**RVA** convention: file offset = `RVA - 0x4000`). They were re-derived from each version's own
 `dump.cs` by exact class + signature match; all 10 stub prologues came back byte-identical across
-the three, which is the cross-check that the re-derivation landed on the same methods.
+the versions, which is the cross-check that the re-derivation landed on the same methods.
 `ShopItem.Init` does NOT match by bytes (immediates changed) - it is matched by instruction shape,
 with the replacement's `cbz` displacement recomputed against the new bail-out target.
 
@@ -588,7 +590,7 @@ above); current server caps `idx` at 1 element.
 Full workflow, the "no XML comments in Strings_*.xml" gotcha (breaks Localizer runtime
 registration for the whole locale, cost ~10 failed attempts to isolate on 2026-07-05),
 and the Skill/Unit `<Name>`/`<Desc>`/`<SubName>` key-redirect trick are documented in
-`docs/cdn-master-data.md`. Tool: `server/rebuild_xml_bundle.py` or
+`docs/cdn-master-data.md`. Tool: `server/builders/rebuild_xml_bundle.py` or
 `server/refresh_master_data.py` (full CDN refresh + local mods + bundle rebuild in one shot).
 Pristine bundle backup: `server/real_cdn/xml.bak` (md5 `779193a15d1377a7b8c2e6edfbe94095`).
 

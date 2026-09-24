@@ -170,13 +170,13 @@ It reports one of three states:
   ```bash
   ./kgc-cli config fetch && ./kgc-cli config extract -o xml_history/<date>/
   python3 server/refresh_master_data.py         # --dry-run first
-  python3 server/rebuild_xml_bundle.py
+  python3 server/builders/rebuild_xml_bundle.py
   ```
 - **`REPUBLISH DETECTED`** - the devs rewrote the **same** folder in place. The folder name
   did not change, so `refresh_master_data.py`'s diff sees nothing. Use the other script:
   ```bash
   python3 server/rebase_xml_live.py xml_history/<date>
-  python3 server/rebuild_xml_bundle.py
+  python3 server/builders/rebuild_xml_bundle.py
   ```
 
   This trap is real and cost a full debugging session: the devs **do** silently rewrite a

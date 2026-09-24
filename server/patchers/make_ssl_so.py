@@ -72,12 +72,24 @@ VERSIONS = {
     ),
     # Recovered from the v173.0.00 packer (libbisedich.so). Prologues remain
     # byte-identical; all offsets were re-derived from this build's dump.cs.
+    # Recovered from the v173.0.00 packer (libbisedich.so). Prologues remain
+    # byte-identical; all offsets were re-derived from this build's dump.cs.
     "173.0.00": dict(
         src="libil2cpp_v173.so", dst="libil2cpp_v173_ssl.so",
         ssl=[(0x2D24844, "PinnedCertHandler.ValidateCertificate"),
              (0x5A02FA8, "UnityTlsProvider.ValidateCertificate"),
              (0x5A016B8, "MobileTlsContext.ValidateCertificate")],
         anchors=[(0x2D24844, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
+    ),
+    # Recovered from the v173.1.00 packer (liberallisi.so - byte-identical to
+    # v173.0.00's libbisedich.so at all 12 NEO patch sites). Prologues remain
+    # byte-identical; all offsets were re-derived from this build's dump.cs.
+    "173.1.00": dict(
+        src="libil2cpp_v1731.so", dst="libil2cpp_v1731_ssl.so",
+        ssl=[(0x2D33B44, "PinnedCertHandler.ValidateCertificate"),
+             (0x5A1E9C4, "UnityTlsProvider.ValidateCertificate"),
+             (0x5A1D0D4, "MobileTlsContext.ValidateCertificate")],
+        anchors=[(0x2D33B44, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
     ),
 }
 

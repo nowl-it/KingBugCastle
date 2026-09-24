@@ -1,12 +1,17 @@
 # Private Build (v171 - v173)
 
 How to build, install and run the private client against your own server.
-Status as of 2026-09-12: builds from **v173.0.00** (newest/default), **v172.x**, or **v171.x** APKs and
-**boots to a fully rendered lobby on redroid**; Guest and web-Google login both work.
+Status as of 2026-09-24: builds from **v173.1.00** (newest/default), **v173.0.00**, **v172.x**, or
+**v171.x** APKs. v173.1.00 share build verified end-to-end (127.0.0.1 host, adb-reverse local play);
+redroid boot verification is manual (see the v173.1.00 dev-notes section).
 
 ```bash
-# v173.0.00 (default)
+# v173.1.00 (default) - needs apk/xapk_extracted_v1731/ + il2cpp/v173.1.00/libil2cpp_v1731_ssl.so
 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 python3 server/builders/build_private.py
+
+# v173.0.00
+KGC_APK_SRC=xapk_extracted_v1730 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 \
+  python3 server/builders/build_private.py
 
 # v172.1.00
 KGC_APK_SRC=xapk_extracted_v1721 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 \
@@ -21,10 +26,10 @@ KGC_APK_SRC=xapk_extracted_v1711 SHARE_HOST=127.0.0.1 ADB_SERIAL=localhost:5555 
   python3 server/builders/build_private.py
 ```
 
-One script covers both because the v171.1.00 packer is the **same binary** as v171.0.01's:
-4 bytes differ across 3.3 MB of code and all 12 NEO patch sites sit at identical file offsets
-(verified byte-for-byte). `KGC_APK_SRC` picks the extracted XAPK; `WORK` follows it, so the two
-builds do not overwrite each other's output.
+One script covers both v173 builds because the v173.1.00 packer `liberallisi.so` is **byte-identical**
+to v173.0.00's `libbisedich.so` at all 12 NEO patch sites (both SONAME `libappsign4a.so`) - only the
+per-version il2cpp tables moved. `KGC_APK_SRC` picks the extracted XAPK; `WORK` follows it, so the
+two builds do not overwrite each other's output.
 
 ## v171.1.00: why a stock, unmodified client crash-loops on redroid
 

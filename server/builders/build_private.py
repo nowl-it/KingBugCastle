@@ -17,11 +17,15 @@ REPO = pathlib.Path(os.environ.get("KGC_ROOT") or pathlib.Path(__file__).resolve
 # (+0/+0xa8/+0xc0/+0x148). The per-version il2cpp tables below pick the right
 # offsets for each build.
 #   python3 server/builders/build_private.py
+#   KGC_APK_SRC=xapk_extracted_v1731 python3 server/builders/build_private.py
 #   KGC_APK_SRC=xapk_extracted_v1730 python3 server/builders/build_private.py
 #   KGC_APK_SRC=xapk_extracted_v1721 python3 server/builders/build_private.py
 #   KGC_APK_SRC=xapk_extracted_v1720 python3 server/builders/build_private.py
 #   KGC_APK_SRC=xapk_extracted_v1711 python3 server/builders/build_private.py
-SRC = os.environ.get("KGC_APK_SRC", "xapk_extracted_v1730")
+# The v173.1.00 packer (liberallisi.so) is byte-identical to v173.0.00's
+# (libbisedich.so) at all 8 NEO_SIG_SITES + 4 parser-error sites, so the v173
+# NEO table covers both builds - only the per-version il2cpp tables moved.
+SRC = os.environ.get("KGC_APK_SRC", "xapk_extracted_v1731")
 XAPK = REPO / "apk" / SRC
 if not XAPK.is_dir():
     raise SystemExit(f"no such APK source: {XAPK}")
@@ -37,41 +41,50 @@ WORK = REPO / (".rebuild_" + SRC.replace("xapk_extracted_", ""))
 # index of every literal above it, and libil2cpp has those indices baked into its code
 # - so the v171.0.00 lib resolves 94% of its literals to the wrong entry against any
 # newer metadata. Every other section of the two files is identical.
-_NATIVE = REPO / "il2cpp" / "v173.0.00" / "libil2cpp_v173_ssl.so"
-if SRC == "xapk_extracted_v1730" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-    VER = "173.0.00"
+# v173.1.00 is the newest build (2026-09-22 patch). Its recovered lib (unpacked
+# from the liberallisi.so packer by server/patchers/unpack_neo.py) pairs with the
+# shipped metadata - no swap needed.
+_NATIVE = REPO / "il2cpp" / "v173.1.00" / "libil2cpp_v1731_ssl.so"
+if SRC == "xapk_extracted_v1731" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+    VER = "173.1.00"
     IL2CPP_DEC = _NATIVE
     METADATA_DEC = None                 # the shipped metadata already matches
 else:
-    _NATIVE = REPO / "il2cpp" / "v172.1.00" / "libil2cpp_v1721_ssl.so"
-    if SRC == "xapk_extracted_v1721" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-        VER = "172.1.00"
+    _NATIVE = REPO / "il2cpp" / "v173.0.00" / "libil2cpp_v173_ssl.so"
+    if SRC == "xapk_extracted_v1730" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+        VER = "173.0.00"
         IL2CPP_DEC = _NATIVE
         METADATA_DEC = None                 # the shipped metadata already matches
     else:
-        _NATIVE = REPO / "il2cpp" / "v172.0.01" / "libil2cpp_v17201_ssl.so"
-        if SRC == "xapk_extracted_v17201" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-            VER = "172.0.01"
+        _NATIVE = REPO / "il2cpp" / "v172.1.00" / "libil2cpp_v1721_ssl.so"
+        if SRC == "xapk_extracted_v1721" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+            VER = "172.1.00"
             IL2CPP_DEC = _NATIVE
             METADATA_DEC = None                 # the shipped metadata already matches
         else:
-            _NATIVE = REPO / "il2cpp" / "v172.0.00" / "libil2cpp_v172_ssl.so"
-            if SRC == "xapk_extracted_v1720" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-                VER = "172.0.00"
+            _NATIVE = REPO / "il2cpp" / "v172.0.01" / "libil2cpp_v17201_ssl.so"
+            if SRC == "xapk_extracted_v17201" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+                VER = "172.0.01"
                 IL2CPP_DEC = _NATIVE
                 METADATA_DEC = None                 # the shipped metadata already matches
             else:
-                _NATIVE = REPO / "il2cpp" / "v171.1.00" / "libil2cpp_v17110_ssl.so"
-                if SRC == "xapk_extracted_v1711" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-                    VER = "171.1.00"
+                _NATIVE = REPO / "il2cpp" / "v172.0.00" / "libil2cpp_v172_ssl.so"
+                if SRC == "xapk_extracted_v1720" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+                    VER = "172.0.00"
                     IL2CPP_DEC = _NATIVE
                     METADATA_DEC = None                 # the shipped metadata already matches
                 else:
-                    VER = "171.0.00"
-                    IL2CPP_DEC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
-                    METADATA_DEC = REPO / "il2cpp" / "v171.0.00" / "global-metadata.dat"
+                    _NATIVE = REPO / "il2cpp" / "v171.1.00" / "libil2cpp_v17110_ssl.so"
+                    if SRC == "xapk_extracted_v1711" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
+                        VER = "171.1.00"
+                        IL2CPP_DEC = _NATIVE
+                        METADATA_DEC = None                 # the shipped metadata already matches
+                    else:
+                        VER = "171.0.00"
+                        IL2CPP_DEC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
+                        METADATA_DEC = REPO / "il2cpp" / "v171.0.00" / "global-metadata.dat"
 # Every il2cpp offset below is per-lib, so this picks which table to use.
-VER_IS_NATIVE = VER in ("171.1.00", "172.0.00", "172.0.01", "172.1.00", "173.0.00")
+VER_IS_NATIVE = VER in ("171.1.00", "172.0.00", "172.0.01", "172.1.00", "173.0.00", "173.1.00")
 # Host to rebind the 5 backend hostnames to (private server). Default 127.0.0.1
 # reaches the local server via `adb reverse tcp:443 tcp:8443`. Override with
 # SHARE_HOST=<ip-or-domain> for a remote/shared build.
@@ -116,7 +129,8 @@ CHECKFIREBASE_OFF = {"171.0.00": 0x303C6C0,
                       "172.0.00": 0x304241C,
                       "172.0.01": 0x30439B8,
                       "172.1.00": 0x3081350 - 0x4000,
-                      "173.0.00": 0x30B7844}[VER]
+                      "173.0.00": 0x30B7844,
+                      "173.1.00": 0x30C8D50}[VER]
 RET = bytes.fromhex('c0035fd6')  # arm64 `ret`
 
 # OBSOLETE, opt-in only (KGC_ASSETBYPASS=1). The "infinite UniTask recursion" this was
@@ -130,7 +144,8 @@ CHECKUSEASSET_OFF = {"171.1.00": 0x34f9588 - 0x4000,
                       "172.0.00": 0x3501DD0 - 0x4000,
                       "172.0.01": 0x3503404 - 0x4000,
                       "172.1.00": 0x353CB6C - 0x4000,
-                      "173.0.00": 0x3577CF4}[VER]
+                      "173.0.00": 0x3577CF4,
+                      "173.1.00": 0x3587424}[VER]
 # mov w1,#1 (0x52000021) ; b LoadAfterAssetBundle. Displacement per version:
 # v171.1.00 target RVA 0x34f9618 = site +0x8C (0x14000023),
 # v172.0.00 target RVA 0x3501E60 = site +0x90 (0x14000024),
@@ -232,12 +247,26 @@ _NRE_STUBS_V17300 = [
     (0x30DE9A0, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),
     (0x2D28C58, "ranking-endpt", 'fe0f1ef8f44f01a9', bytes.fromhex('48dc01f008ad47f9080140f9085d40f9000540f9c0035fd6')),
 ]
+_NRE_STUBS_V17310 = [
+    (0x32E4EA0, "pvp-init",      'ff8303d1fd7b08a9', RET_FALSE),  # PvPPanel.<Init>d__77.MoveNext
+    (0x32DFAD0, "pvp-reward",    'fe0f1bf8fa6701a9', RET_FALSE),  # PvPPanel.GetReceivableWinRewardCount
+    (0x3352448, "shop-growth",   'fe0f1af8fc6f01a9', RET_FALSE),  # PackageItem.InitCustomGrowthPackage
+    (0x3354584, "shop-season",   'ff4301d1fe6701a9', RET_FALSE),  # PackageItem.InitSeasonPassPackage
+    (0x30E0B30, "year-event",    'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsYearEventAvailable
+    (0x30E2DC4, "card-event",    'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsEventCardCollectingAvailable
+    (0x30E2CBC, "season-event",  'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsSpecialSeasonalEventOpened
+    (0x30C7BAC, "babel-data",    'fe0f1df8f65701a9', RET_FALSE),  # GameManager.GetBabelData -> null
+    (0x35392BC, "content-alert", 'fe0f1bf8fa6701a9', RET_FALSE),  # WorldPanel.ReloadNewContentAlert
+    (0x30EDEB4, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
+    (0x2D37F58, "ranking-endpt", 'fe0f1ef8f44f01a9', bytes.fromhex('a8dc01f0089542f9080140f9085d40f9000540f9c0035fd6')), # Web.GetRankingServerEndPoint -> Web._endPoint
+]
 NRE_STUBS = {"171.0.00": _NRE_STUBS_V17100,
              "171.1.00": _NRE_STUBS_V17110,
              "172.0.00": _NRE_STUBS_V17200,
              "172.0.01": _NRE_STUBS_V17201,
              "172.1.00": _NRE_STUBS_V17210,
-             "173.0.00": _NRE_STUBS_V17300}[VER]
+             "173.0.00": _NRE_STUBS_V17300,
+             "173.1.00": _NRE_STUBS_V17310}[VER]
 
 # Scene_Base.RegisterHackDetectionCallback @ RVA 0x34DB060 (file 0x34D7060).
 # Stub it to ret (no-op) so the managed callback that shows "File integrity check
@@ -254,7 +283,8 @@ REGISTER_HACK_DETECT_OFF = {"171.0.00": 0x34D7060,
                              "172.0.00": 0x34E38A8 - 0x4000,
                              "172.0.01": 0x34E4EDC - 0x4000,
                              "172.1.00": 0x351D9F0 - 0x4000,
-                             "173.0.00": 0x35595A0}[VER]
+                             "173.0.00": 0x35595A0,
+                             "173.1.00": 0x3568CA8}[VER]
 REGISTER_HACK_DETECT_ORIG = 'fe57bea9'  # stp x30, x21, [sp, #-0x20]!
 REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
 
@@ -264,7 +294,8 @@ REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
 # Ghidra VMA 0x3810ee8 → RVA 0x3710ee8 → file off = RVA − 0x4000 = 0x370cee8.
 CANUSEFIREBASE_OFF = {"172.0.01": 0x370cee8,
                        "172.1.00": 0x37470A4,
-                       "173.0.00": 0x37872B0}[VER]
+                       "173.0.00": 0x37872B0,
+                       "173.1.00": 0x3798E14}[VER]
 CANUSEFIREBASE_ORIG = 'c8010034'  # cbz w8, +0x38
 CANUSEFIREBASE_NEW  = '1f2003d5'  # nop
 
@@ -289,6 +320,9 @@ FIREBASE_LOGEVENT_STUBS = {"172.0.01": [
 ], "173.0.00": [
     (0x37DA4BC, 'fe0f1df8f65701a9'),
     (0x37DA520, 'fe67bca9f85f01a9'),
+], "173.1.00": [
+    (0x37EB890, 'fe0f1df8f65701a9'),
+    (0x37EB8F4, 'fe67bca9f85f01a9'),
 ]}.get(VER, [])
 
 # Addressables passes AssetBundleRequestOptions.Crc into Unity's native bundle
@@ -309,6 +343,10 @@ ASSETBUNDLE_CRC_GETTER = {"172.0.01": (
     0x60ACDA4,
     '001840b9c0035fd6',
     'e0031f2ac0035fd6',
+), "173.1.00": (
+    0x60CA5BC,
+    '001840b9c0035fd6',
+    'e0031f2ac0035fd6',
 )}.get(VER)
 ASSETBUNDLE_CRC_READS = {"172.0.01": [
     # AssetBundleResource.LoadLocalBundle: crc argument w1.
@@ -326,6 +364,10 @@ ASSETBUNDLE_CRC_READS = {"172.0.01": [
     (0x60AF318, '011940b9', 'e1031f2a'),
     (0x60AD230, '011940b9', 'e1031f2a'),
     (0x60AD320, '021940b9', 'e2031f2a'),
+], "173.1.00": [
+    (0x60CCB30, '011940b9', 'e1031f2a'),
+    (0x60CAA48, '011940b9', 'e1031f2a'),
+    (0x60CAB38, '021940b9', 'e2031f2a'),
 ]}.get(VER, [])
 
 # --- XIGNCODE NEO loader (the packer .so in the config split) ---------------
@@ -350,7 +392,7 @@ NEO_SIG_SITES = [
     (0x43914, '80feff37'), (0x4391c, '40feff37'), (0x43924, '00feff37'),
     (0x43954, '80fcff37'), (0x43ae0, '20f0ff37'), (0x43b24, '0013f837'),
     (0x43b40, '0012f837'), (0x43b50, 'a01100b4'),
-] if VER == "173.0.00" else _NEO_SIG_SITES_OLD
+] if VER in ("173.0.00", "173.1.00") else _NEO_SIG_SITES_OLD
 # Payload-parser error returns: `mov w8,#-1 ; str w8,[sp,#0x94] ; b <exit>`.
 # NOP the `b` so the error is ignored. Located by pattern rather than offset -
 # the 8-byte prefix occurs exactly 4x in both v171.0.00 and v171.0.01, at the
@@ -570,7 +612,16 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
     # NOTE: upstream's cbz bail target (0x32E0BEC) is a THROW helper, not the method
     # epilogue - jumping there raises NullReferenceException. Our patch redirects both
     # bails to the real epilogue 0x32E0BD0 (ldp x20,x19,[sp,#0x60];...ret).
-    if VER == "173.0.00":
+    if VER == "173.1.00":
+        # Re-derived from this build's script.json: ShopItem$$Init (index 5)
+        # RVA 0x3367BAC -> site +0x274 = file 0x3363E24. Both cbz displacements
+        # (+0x254 to the real epilogue ldp x20,x19 / +0x24C to the canary cmp)
+        # happen to match v173.0.00 exactly; only the final `bl` moved
+        # (67bb3394 -> e1ca3394, target #0x40569C4).
+        SHOP_INIT_OFF = 0x3363E24
+        SHOP_INIT_ORIG = bytes.fromhex('941300b468ac01f0080945f9f60300aae00314aae1031f2a020140f9e1ca3394')
+        SHOP_INIT_NEW = bytes.fromhex('b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d5e1ca3394')
+    elif VER == "173.0.00":
         SHOP_INIT_OFF = 0x33545E8
         SHOP_INIT_ORIG = bytes.fromhex('941300b408ac019008c141f9f60300aae00314aae1031f2a020140f967bb3394')
         SHOP_INIT_NEW = bytes.fromhex('b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d567bb3394')
