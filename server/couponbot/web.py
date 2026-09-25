@@ -24,13 +24,14 @@ in this file has both translations.
 
 from __future__ import annotations
 
+import hashlib
 import os
 import threading
 import time
 from http import HTTPStatus
 
 from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -53,6 +54,12 @@ _write_hits: dict[str, list[float]] = {}
 _run_flag = {"running": False}
 
 app = FastAPI(title="KGC Coupon Bot", docs_url=None, redoc_url=None)
+# Anything under /static/ is served WITHOUT the no-store policy defined below,
+# so Cloudflare may cache it for up to 4 h - the page itself only uses the
+# dedicated /app.js and /i18n.js routes. Put any new page asset on its own
+# route (and in `_asset_version()`), not behind this mount. An explicit
+# "/static/..." route added later would never match anyway: routes are matched
+# in registration order and this mount is registered first.
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
@@ -101,16 +108,49 @@ class CodeIn(BaseModel):
 
 
 # --- read routes ------------------------------------------------------------
+# Static asset policy: this page sits behind Cloudflare (auto-coupon
+# .kingbugcastle.id.vn), which caches `.js` by default - with no Cache-Control
+# from the origin it invents its own `max-age=14400`, for BOTH the edge and the
+# visitor's browser. A deploy therefore left the edge (and the browser) serving
+# the PREVIOUS app.js for up to 4 h: the bilingual build shipped on top of a
+# stale login-era app.js, which died at `$("loginForm").onsubmit` before
+# applyLang() could ever run - reported as "song ngữ không hoạt động".
+# Two defences, both needed: `no-store` on everything we serve, and a
+# content-hash `?v=` in the HTML so an entry already sitting in someone's cache
+# is simply a different URL.
+_NO_STORE = {"Cache-Control": "no-store, max-age=0"}
+
+
+def _asset_version(*names: str) -> str:
+    """Short content hash of the static files - any edit, any deploy, new URL."""
+    h = hashlib.sha1()
+    for n in names:
+        with open(os.path.join(STATIC_DIR, n), "rb") as fh:
+            h.update(fh.read())
+    return h.hexdigest()[:12]
+
 
 @app.get("/")
 def index():
-    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
+    with open(os.path.join(STATIC_DIR, "index.html"), encoding="utf-8") as fh:
+        html = fh.read()
+    v = _asset_version("app.js", "i18n.js")
+    html = (html.replace('src="/i18n.js"', f'src="/i18n.js?v={v}"')
+                .replace('src="/app.js"', f'src="/app.js?v={v}"'))
+    return Response(content=html, media_type="text/html; charset=utf-8",
+                    headers=_NO_STORE)
 
 
 @app.get("/app.js")
 def app_js():
     return FileResponse(os.path.join(STATIC_DIR, "app.js"),
-                        media_type="application/javascript")
+                        media_type="application/javascript", headers=_NO_STORE)
+
+
+@app.get("/i18n.js")
+def i18n_js():
+    return FileResponse(os.path.join(STATIC_DIR, "i18n.js"),
+                        media_type="application/javascript", headers=_NO_STORE)
 
 
 def _status_payload() -> dict:

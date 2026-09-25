@@ -297,6 +297,44 @@ def test_every_server_error_code_is_translated_too(client):
     assert r.json()["error"], "the Vietnamese human message stays for logs/curl"
 
 
+def test_assets_carry_no_store_and_the_page_urls_are_versioned(client):
+    """Cloudflare caches `.js` with its own `max-age=14400` (edge AND browser)
+    when the origin sends no Cache-Control - it served the previous app.js for
+    hours after a deploy and the bilingual page died on the stale
+    `$("loginForm")` binding. no-store + a content-hash `?v=` close that door."""
+    page = client.get("/")
+    assert page.status_code == 200
+    assert "no-store" in page.headers.get("cache-control", "")
+    assert "data-i18n" in page.text, "we must be serving our own index.html"
+    refs = [u for u in re.findall(r'src="([^"]+)"', page.text) if ".js" in u]
+    assert len(refs) == 2, refs
+    versions = set()
+    for u in refs:
+        m = re.fullmatch(r"/(?:app|i18n)\.js\?v=([0-9a-f]{12})", u)
+        assert m, f"unversioned or unexpected script ref: {u}"
+        versions.add(m.group(1))
+        r = client.get(u)
+        assert r.status_code == 200
+        assert "no-store" in r.headers.get("cache-control", "")
+    assert len(versions) == 1, "one version for both files, so a deploy busts both"
+    # a bare (stale-cache) URL must still work - only its cache entry is old
+    assert client.get("/app.js").status_code == 200
+
+
+def test_asset_version_changes_when_a_static_file_changes(tmp_path, monkeypatch, client):
+    import shutil
+
+    dst = tmp_path / "static"
+    shutil.copytree(pathlib.Path(web.STATIC_DIR), dst)
+    monkeypatch.setattr(web, "STATIC_DIR", str(dst))
+    v1 = web._asset_version("app.js", "i18n.js")
+    f = dst / "app.js"
+    f.write_text(f.read_text(encoding="utf-8") + "\n// bump\n", encoding="utf-8")
+    v2 = web._asset_version("app.js", "i18n.js")
+    assert v1 != v2, "editing a static file must produce a new URL"
+    assert f"?v={v2}" in client.get("/").text
+
+
 def test_first_request_on_a_db_that_does_not_exist_yet(tmp_path, monkeypatch):
     """Real curl on a fresh box gave `no such table: accounts` -> 500: the test
     fixture always inits the DB first, so only a first-ever request could see it."""

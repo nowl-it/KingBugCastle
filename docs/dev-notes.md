@@ -2009,6 +2009,25 @@ page never shows a Vietnamese sentence. Two regressions keep it honest:
 key must exist in **both** dicts) and `test_every_server_error_code_is_translated_too` (scans
 `web.py` for `code="..."`).
 
+**Static assets are never cacheable - incident 2026-09-26**: the page sits behind Cloudflare
+(`auto-coupon.kingbugcastle.id.vn`), which caches `.js` on its own: with no `Cache-Control` from
+the origin it invents `max-age=14400`, for **both** the edge and the visitor's browser. After the
+bilingual deploy the edge kept serving the previous `app.js` (login-era, `$("loginForm").onsubmit`)
+for hours, so the new page threw at line 139 **before `applyLang()` could run** - reported as
+"song ngữ không hoạt động", with the i18n dict itself perfectly fine. `web.py` now sends
+`Cache-Control: no-store` on `/`, `/app.js` and `/i18n.js`, and stamps the HTML with a content
+hash (`_asset_version()`, one version for **both** files) so an entry already sitting in any
+cache is simply a different URL - no CF purge needed. i18n is served from `/i18n.js` (its own
+route, like `/app.js`) rather than the `/static` mount: routes match in registration order and
+that mount is registered first, so a later `/static/...` route would never be reached. Regression
+tests: `test_assets_carry_no_store_and_the_page_urls_are_versioned`,
+`test_asset_version_changes_when_a_static_file_changes`.
+
+The `static.cloudflareinsights.com/beacon.min.js` integrity/CORS errors that show up in the
+console are Cloudflare Web Analytics being injected at the edge and then blocked - the reported
+"computed hash" is SHA-512 of an **empty body**, i.e. an ad-blocker dropped the request. Harmless
+and unrelated to the page.
+
 ### Open questions
 - Exact success-page wording (need one real code) and the real code format (does the extractor's
   `[A-Z0-9]{8,20}` + letter/digit rule cover it?).
