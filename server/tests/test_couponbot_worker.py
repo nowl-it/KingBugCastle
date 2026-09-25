@@ -225,3 +225,11 @@ def test_run_endpoint_runs_once(client, monkeypatch):
             break
         time.sleep(0.05)
     assert len(calls) == 1
+
+
+def test_cli_accepts_the_flags_the_systemd_unit_passes(db, quiet, capsys):
+    """`ExecStart=... --once` failed once with argparse exit 2 - keep it green."""
+    assert worker.main(["--once", "--dry"]) == 0
+    assert "dry" in capsys.readouterr().out
+    assert worker.main(["--dry", "--no-lock", "--code", "KGCFEST123"]) == 0
+    assert state.codes()[0]["code"] == "KGCFEST123"

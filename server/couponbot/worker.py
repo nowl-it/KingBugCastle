@@ -206,6 +206,10 @@ def _report(summary: dict) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="KGC coupon auto-redeem cycle")
+    # `--once` is the default (and only) mode: one locked cycle per invocation.
+    # It exists so the systemd unit documents what it does at a glance.
+    ap.add_argument("--once", action="store_true",
+                    help="run exactly one cycle (default)")
     ap.add_argument("--code", help="also add and try this code now")
     ap.add_argument("--dry", action="store_true", help="read/report only")
     ap.add_argument("--no-lock", action="store_true", help="ignore the cycle lock")

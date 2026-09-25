@@ -119,8 +119,7 @@ server/state/players.db
 server/state/pre-sqlite-backup/
 # Coupon auto-redeem bot: its own SQLite store, unrecognised raw site responses
 # (those pages contain Player-IDs), and the per-cycle flock.
-server/state/coupons.db
-server/state/coupons.db-*
+server/state/coupons.db*
 server/state/coupon_raw/
 server/state/coupon.lock*
 # ...and the automatic rotations of it. players.db itself was ignored but this
