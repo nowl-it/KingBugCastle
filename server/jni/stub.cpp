@@ -191,7 +191,26 @@ AutoRegisterImplFunc origAutoRegisterImpl = nullptr;
 
 void HookedAutoRegisterImpl(void* _this, void* id, void* methodInfo) {
     int len = id ? *(int32_t*)((char*)id + 0x10) : 0;
-    if (len == 0) {
+    // A device signed into Google Play Games makes Scene_Login.GetGoogleUserId()
+    // return a REAL google account id ("google_..."), and AutoRegister feeds it
+    // straight into AutoRegisterImpl. The old guard only replaced EMPTY ids, so
+    // on such a device "create guest account" POSTed /auth/register with the
+    // device's real google id + type=4, and the server resolved it to whatever
+    // save that id is bound to - dev-0001 when the operator's account was
+    // signed in. Treat a trailing "google_" id like an empty one: force the
+    // persistent guest device id. A returning guest's own id (guest-...) and any
+    // other non-empty id keep their existing behaviour. Il2CppString layout:
+    // length (int32) at +0x10, UTF-16LE chars at +0x14.
+    bool is_google_uid = false;
+    if (id && len >= 7) {
+        const uint16_t* ch = (const uint16_t*)((char*)id + 0x14);
+        static const uint16_t kGoogle[] = {'g', 'o', 'o', 'g', 'l', 'e', '_'};
+        is_google_uid = true;
+        for (int i = 0; i < 7 && is_google_uid; ++i) {
+            if (ch[i] != kGoogle[i]) is_google_uid = false;
+        }
+    }
+    if (len == 0 || is_google_uid) {
         static char device_id[64] = {0};
         if (device_id[0] == 0) {
             FILE* f = fopen("/data/data/com.nowl.castle/guest_id.txt", "r");

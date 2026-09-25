@@ -176,6 +176,43 @@ def check_guest_register_grants_its_followup_native_auth():
     print("ok guest native auth: registered and returning Guest ids authenticate")
 
 
+def check_guest_register_cannot_take_over_a_google_save():
+    """A Guest (type=4) register presenting an id that already resolves to a
+    Google-typed save must be refused. The private v173 client's guest button
+    sends the device's REAL Google id (GetGoogleUserId is not patched to return
+    a synthetic id on v173), so before this guard pressing "create guest
+    account" on a machine signed into a bound Google account logged straight
+    into that save - dev-0001 for the operator."""
+    from fastapi.testclient import TestClient
+    with TestClient(server.app, client=("10.7.7.7", 55000)) as tc:
+        owner = tc.post("/auth/register", json={"id": "google_102274623045401309225",
+                                                "type": GOOGLE})
+        owner_out = server.aes_decrypt(owner.content)
+        assert owner_out.get("success") is True, owner_out
+        # Guest button on the same device: must NOT get the Google save.
+        taken = tc.post("/auth/register", json={"id": "google_102274623045401309225",
+                                                "type": GUEST})
+        taken_out = server.aes_decrypt(taken.content)
+        assert taken_out.get("success") is False, \
+            "guest register took over a Google save"
+        assert taken_out.get("accessToken") is None, \
+            "refused guest register must not mint a session"
+        # The same id via Google login still works (owner re-attaches to own save).
+        again = tc.post("/auth/register", json={"id": "google_102274623045401309225",
+                                                "type": GOOGLE})
+        again_out = server.aes_decrypt(again.content)
+        assert again_out.get("success") is True, "legit Google login was blocked"
+    # A genuine returning Guest with a guest-typed save still re-attaches.
+    with TestClient(server.app, client=("10.8.8.8", 55000)) as tc:
+        first = tc.post("/auth/register", json={"id": "guest_stable", "type": GUEST})
+        assert server.aes_decrypt(first.content).get("success") is True
+        second = tc.post("/auth/register", json={"id": "guest_stable", "type": GUEST})
+        out4 = server.aes_decrypt(second.content)
+        assert out4.get("success") is True, "returning Guest must re-attach to own save"
+        assert out4.get("accessToken"), out4
+    print("ok guard: guest register cannot take over a Google save (dev-0001)")
+
+
 def check_single_player_override_still_works():
     """KGC_MULTIPLAYER=0 must pin everyone to the active save, the old behaviour."""
     saved = pr.MULTIPLAYER
@@ -199,5 +236,6 @@ if __name__ == "__main__":
     check_native_google_auth_mints_a_session()
     check_auth_route_registers_a_new_account_via_http()
     check_guest_register_grants_its_followup_native_auth()
+    check_guest_register_cannot_take_over_a_google_save()
     check_single_player_override_still_works()
     print("\nall multi-account login checks passed")

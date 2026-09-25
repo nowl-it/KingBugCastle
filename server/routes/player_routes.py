@@ -71,8 +71,22 @@ def _uid_for_login(login_id, prev_token, acct_type=None):
     # valid prior session can still refresh normally below.
     login_id = login_id if playerdb.valid_login_id(login_id) else ""
     uid = playerdb.uid_for_login(login_id) or playerdb.uid_for_token(prev_token)
-    if uid and playerdb.load(uid) is not None:
-        return uid
+    if uid:
+        acct = playerdb.load(uid)
+        if acct is not None:
+            # A Guest register (type=4) must never attach to a save that was
+            # created as a Google/GameCenter/AppleID account. The private
+            # client's guest button sends the device's REAL Google id
+            # (GetGoogleUserId is not patched to synthesize one on v173), so
+            # an unguarded resolve handed whoever pressed "create guest
+            # account" the save bound to that Google id - dev-0001 when the
+            # device is signed into the operator's account. Only a save whose
+            # own accountType is Guest may be re-entered as a Guest.
+            if acct_type == 4 and acct.get("accountType") != 4:
+                admin_log(f"[auth] refused guest register: "
+                          f"id resolves to non-guest save {uid}")
+                return None
+            return uid
     if MULTIPLAYER and login_id:
         # One-shot migration for a server that was single-player until now: hand its
         # lone unbound save to the first login instead of orphaning it. Off by

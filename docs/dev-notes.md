@@ -481,6 +481,38 @@ Fixed-period loops with no exception = client timer, not retry.
   `""` or `guest-0001` row. Full write-up: `docs/multi-account-login.md`.
 - `dev-0001` = NightOwL since 2026-08-18 (uid `p-410890b421a5`, merged; old KingBug save
   deleted, backup in `server/state/backups/players.db.bak-uidmerge-*`).
+- **Guest takeover guard (2026-09-25):** a Guest register (`type:4`) whose `id` resolves to an
+  EXISTING save that was created as a non-Guest (accountType != 4) is now REFUSED in
+  `_uid_for_login` (returns `None` → `success:false`, no session). Root cause of the report
+  "pressed create guest account → ended up in dev-0001": the v173.1.00 private client does NOT
+  patch `GetGoogleUserId` to return a synthetic id (the old v171 pattern lived in
+  `patch_apk_inplace.py` Patch 7 and was never ported to `build_private.py`), so the guest
+  button sends the device's REAL Google Play Games id as `id` with `type:4`. The server then
+  resolved `uid_for_login(id)` to that account's save and minted a session - i.e. anyone on a
+  machine signed into NightOwL's Google account (`google_102274623045401309225`) got `dev-0001`
+  with a fresh token. Repro (local): `r_login({'id': 'google_...225', 'type': 4})` →
+  `accessToken: True, uid: dev-0001`. Live proof: accounts `google_112752210344722037317` →
+  `p-4ffd36398c99` etc. were created with `accountType=4` - real guest presses carrying real
+  google ids. Returning Guests (save accountType==4) still re-attach; Google login via
+  type:1/`/auth` unaffected. Regression:
+  `tests/test_multi_login.py::check_guest_register_cannot_take_over_a_google_save`.
+  **Client-side fix (2026-09-25, done, both shipped)**: do NOT port the old
+  `GetGoogleUserId → GenerateRandomName` prologue patch (`patch_apk_inplace.py` Patch 7). That
+  would break guest persistence: `GenerateRandomName(8)` returns a NEW random id every call, so
+  auto-register would mint a fresh save each launch instead of re-attaching the persistent
+  `device_id` (`guest-<r>-<r>` in `/data/data/com.nowl.castle/guest_id.txt`) that
+  `server/jni/stub.cpp`'s `HookedAutoRegisterImpl` already injects. Instead the fix lives in that
+  existing hook: `AutoRegister` (RVA `0x358F3F0`) calls `GetGoogleUserId` (`0x358E388`) and
+  tail-calls `<AutoRegister>g__AutoRegisterImpl|139_0` (`0x35905E0`) with the result as `id` - the
+  exact function the stub detours. The old guard only replaced id when its length (Il2CppString
+  `int32` at `+0x10`) was 0; a device signed into Google Play Games made `GetGoogleUserId` return
+  the REAL `google_...` account id (non-empty) -> it sailed through. `HookedAutoRegisterImpl` now
+  also treats an id with the UTF-16LE prefix `google_` (chars at `+0x14`) like an empty one and
+  substitutes the persistent `device_id`. Returning guests (own `guest-...` id) and Google login
+  (type:1/`/auth`) unchanged. Rebuild recipe: SETUP.md "Rebuilding the native .so" (NDK 27, cmake)
+  -> `cp libxigncode.so server/xigncode_stub/arm64/ server/xigncode_stub/` (BOTH copies - they
+  drifted once). The `.so` ships in-repo, so the next client build picks it up via
+  `build_private.py` (which pads it back to the APK's original size on injection).
 
 ### Official-token harvesting - Firebase Test Lab verdict (2026-08-24, DEAD END)
 
