@@ -976,8 +976,18 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
 - `GameListBox.ReloadDimensionRiftSeasonRemainTime` (RVA `0x3442164`) draws the lobby rift
   button's "Season N / ends in" from the same `RogueLikeDataSet` (theme 2100) date fields.
 - The **effects** (advantage region/role, boss) DO come from `/rogueLike/season-info`, which
-  picks a `DimensionRiftSeasonDatas.xml` row by `RCFG.pvpInfo.season` (`r_rogue_season_info`,
-  fallback = max row). Keeping `pvpInfo.season` ≠ `passSeason` shows a mismatched title/effects.
+  picks a `DimensionRiftSeasonDatas.xml` row by season number in `r_rogue_season_info`
+  (fallback = max row). Keeping the effect row ≠ `passSeason` shows a mismatched title/effects.
+- **Gotcha (found 2026-09-25, after the 73 bump)**: `r_rogue_season_info` originally read
+  `RCFG["pvpInfo"]["season"]` (top-level) - but the top-level pvpInfo dict has NO `season` key
+  (only `fixed`, `seasonDayOffsets`, `nextSeasonDayOffsets`), so `.get("season", 72)` always
+  returned the hardcoded **72**. Result: title "Season 73" + effects row 72 (South/Shadow) -
+  same mismatch as the old 71-vs-72 bug. `/pvp/info` (POST, `_pvp_state` → `fixed`) and the GET
+  direct route (`pvpInfoDirect.season`) both read the right place, which is why only the rift
+  effects lagged. Fixed to read `pvpInfo.fixed.season` first, top-level as fallback, then 72.
+  Regression: `test_dimension_rift_season_info_serves_current_season_effects` in
+  `server/tests/test_rift_season.py` (asserts the served row equals the config season + master
+  data row for every field).
 - **Fix (2026-09-25, commit to be pushed)**: `response_config.json` bumped to Season 73
   (Harvest Moon Festival, the newest - SeasonPasses.xml rows go `3..73`):
   - `pass.fixed.passSeason`: 71 → 73 (rift title + pass panel; ID 73 has full reward table)

@@ -159,7 +159,13 @@ def r_rogue_season_info(body, st):
     along with active date bounds and seasonal boss/buff configurations.
     """
     seasons = _get_dimension_rift_seasons()
-    target_season = RCFG.get("pvpInfo", {}).get("season", 72)
+    # The season number lives under "fixed" (what /pvp/info serves); the
+    # top-level pvpInfo dict only carries offsets. Reading "season" at the top
+    # level silently fell back to the default (72) after the season bump, so
+    # the rift effects kept serving the previous season's row while every other
+    # panel showed the new one (title 73 + South/Shadow effects 72 mismatch).
+    target_season = (RCFG.get("pvpInfo", {}).get("fixed", {}) or {}
+                     ).get("season", RCFG.get("pvpInfo", {}).get("season", 72))
     if target_season in seasons:
         sdata = seasons[target_season]
     elif seasons:

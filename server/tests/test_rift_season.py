@@ -43,6 +43,44 @@ def test_dimension_rift_season_info_returns_enabled():
     assert isinstance(out.get("seasonalPenaltyBuffId"), int)
 
 
+def test_dimension_rift_season_info_serves_current_season_effects():
+    """The rift effects must come from the SAME season the config serves.
+    Regression: r_rogue_season_info read `RCFG[pvpInfo].season` (top level,
+    absent) and fell back to the hardcoded default 72, so after the bump to
+    season 73 the effects still showed row 72 (South/Shadow) while the season
+    title said 73."""
+    import json as _json
+    from pathlib import Path as _Path
+    from config import CONFIG_FILE
+
+    cfg = _json.loads(_Path(CONFIG_FILE).read_text())
+    expected_season = cfg["pvpInfo"]["fixed"]["season"]
+
+    st = server.load_state()
+    handler = server.OVERRIDES["/rogueLike/season-info"]
+    out = handler({"themeId": 2100}, st)
+
+    # The served effect row must match the config season, not the fallback.
+    import xml.etree.ElementTree as _ET
+    from config import XML_DIR
+    root = _ET.parse(XML_DIR / "DimensionRiftSeasonDatas.xml").getroot()
+    row = None
+    for node in root.findall("DimensionRiftSeasonData"):
+        if int(node.get("ID", "0")) == expected_season:
+            row = node
+            break
+    assert row is not None, f"season {expected_season} missing from master data"
+    assert out.get("seasonalAdvantageRole") == (row.findtext("SeasonAdvantageRole", "") or "")
+    assert out.get("seasonalAdvantageRegion") == (row.findtext("SeasonAdvantageRegion", "") or "")
+    assert out.get("seasonalPenaltyRole") == (row.findtext("SeasonPenaltyRole", "") or "")
+    assert out.get("seasonalPenaltyRegion") == (row.findtext("SeasonPenaltyRegion", "") or "")
+    assert out["seasonalAdvantageBuffId"] == int(row.findtext("SeasonAdvantageBuffId", "0") or 0)
+    assert out["seasonalPenaltyBuffId"] == int(row.findtext("SeasonPenaltyBuffId", "0") or 0)
+    assert out["seasonalChallengeBossId"] == int(row.findtext("ChallengeBoss", "0") or 0)
+    assert out["seasonalChallengeEliteIds"] == [int(x) for x in
+        (row.findtext("ChallengeElites", "") or "").split(",") if x.strip().isdigit()]
+
+
 def test_dimension_rift_phase_16_complete_progression():
     st = server.load_state()
     # Set player as having cleared Phase 15
@@ -68,5 +106,6 @@ def test_dimension_rift_phase_16_complete_progression():
 
 if __name__ == "__main__":
     test_dimension_rift_season_info_returns_enabled()
+    test_dimension_rift_season_info_serves_current_season_effects()
     test_dimension_rift_phase_16_complete_progression()
     print("All rift season tests passed!")
