@@ -2035,3 +2035,24 @@ and unrelated to the page.
 - ~~Whether the official `📢` channel carries codes~~ - resolved: the official server has **no**
   announcement channel (codes live in the text channel `#event`, which Follow cannot mirror), so
   codes are forwarded by hand into our own `#coupon` and polled from there.
+
+## 28. Strife Leaderboard turned off (2026-09-26)
+
+Two halves were disabled because the scheduled fetch kept failing (upstream
+`https://kgc-k8s-1.awesomepiece.com/colosseum` returns **403 NotLatestVersion**, and GitHub mails
+one failure notification per run - the cron was every 15 minutes):
+
+1. **CI/CD**: workflow `Update Strife Leaderboard` disabled as a repo *setting*, not in git -
+   `state: disabled_manually` via `gh workflow disable "Update Strife Leaderboard"`. The cron in
+   `.github/workflows/update-strife-leaderboard.yml` is untouched (still `*/15`), so re-enabling is
+   `gh workflow enable "Update Strife Leaderboard"` and it starts again with the same file.
+2. **Web**: GitHub Pages page deleted - `docs/strife-leaderboard.html` (404 now) and its data
+   `docs/strife-leaderboard-data.json`, plus both inbound links: the nav item in
+   `docs/strife-compendium.html` (`#nav-leaderboard`) and the paragraph in `docs/index.html`.
+   `scripts/update_strife_leaderboard.py` already guards the HTML with "if present" (only the JSON
+   path is unconditional), so a re-enabled workflow would just re-commit the JSON.
+
+**To bring it back**: `gh workflow enable "Update Strife Leaderboard"` then
+`git revert <the delete commit>` (restores the page + data + both links). If the 403 persists,
+pass the `version` workflow_dispatch input (the runner derives it from `api/version.py`, and the
+403 means the ranking API is ahead of the bundled client).
