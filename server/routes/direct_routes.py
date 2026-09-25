@@ -123,7 +123,13 @@ def register(app, server_module):
         uid = playerdb.uid_for_login(login_id)
         account = playerdb.load(uid) if uid else None
         returning_guest = bool(account and account.get("accountType") == 4)
-        if not returning_guest and not google_login.consume_native_auth_grant(
+        # A returning account (a save already bound to this login id) may re-auth
+        # without a fresh browser/poller handoff: the v173 client re-POSTs /auth
+        # with its stored id on EVERY launch - "out game, vào lại" - while the
+        # one-shot grant is consumed by the first login, so re-entry hung on
+        # "Retrying authentication..." forever. Unknown ids still need the
+        # handoff so the bare id alone cannot mint a new save (anti-squatting).
+        if not account and not google_login.consume_native_auth_grant(
                 google_login._client_ip(request), login_id):
             return _enc({"code": 200, "msg": "Google sign-in was not verified",
                          "success": False})

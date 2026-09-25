@@ -558,6 +558,25 @@ Fixed-period loops with no exception = client timer, not retry.
   NOT part of CI - a regression in one of those must be pinned in a `test_*`-style file to be
   CI-enforced.
 
+- **Returning Google re-login needs no fresh handoff (2026-09-25, fixed).** The v173.1.00 client
+  re-issues `POST /auth` with its STORED id on EVERY launch ("out game, vào lại"), because the id
+  persists in AwesomePrefs across logout/restart (same statement as §4 step 4 above). But
+  `auth_native` required the one-shot browser/poller grant (`NATIVE_AUTH_GRANT_TTL=60`, single-use,
+  in `google_login.py`) for EVERY Google id - even one already bound to a save. The first login
+  consumed the grant; re-entry had no fresh `/glogin/callback` (live proof: `grep -c
+  'glogin/callback' /tmp/kgc_pub_tls.log` == **1** for the whole day vs 3 google `POST /auth`), so
+  re-entry got `success:false` → the client's `ReAuth...` = "Retrying authentication..." forever,
+  while the stub's `/glogin/pending` poller (1/s, background noise) waited for a handoff never
+  re-armed. Fix: the grant is now required only when NO save is bound to the login id (unknown id
+  → still anti-squatting); any returning account (save bound, ANY accountType) re-auths freely -
+  exactly the policy already applied to returning Guests. `_uid_for_login`'s existing guard still
+  stops a type:4 register from taking over a Google save. Security note: the handoff's IP-binding
+  is vacuous on this deploy anyway (every request arrives as 127.0.0.1 through the loopback DNAT),
+  so the grant only ever meaningfully gated brand-new ids. Regression:
+  `tests/test_multi_login.py::check_returning_google_relogin_without_handoff` (legacy runner).
+  Follow-up idea (not done): the POST /auth body carries a `cookie` (seen on `GET /auth/xcd?cookie=…`)
+  that could serve as a stable per-device credential for a stronger re-auth gate.
+
 ### Official-token harvesting - Firebase Test Lab verdict (2026-08-24, DEAD END)
 
 Goal was a real official `accesstoken` for the ranking API. Ran the **stock v172.0.01 client**

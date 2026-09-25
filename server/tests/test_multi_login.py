@@ -207,6 +207,36 @@ def check_post_auth_mints_a_session_for_a_returning_guest():
     print("ok POST /auth: v173 returning-guest auth mints a session, unknowns refused")
 
 
+def check_returning_google_relogin_without_handoff():
+    """A returning Google account (save already bound to its id) must re-auth via
+    POST /auth WITHOUT a fresh browser handoff. The v173 client auto-reauths with
+    the stored id on every launch, but the one-shot grant is consumed by the first
+    login - so "out game, vào lại" hung on "Retrying authentication..." forever."""
+    from fastapi.testclient import TestClient
+    gid = "google_relogin"
+    with TestClient(server.app, client=("10.6.6.6", 55000)) as tc:
+        # First login: browser OAuth + poller handoff -> grant -> accepted.
+        google_login._grant_native_auth("10.6.6.6", gid)
+        first = tc.post("/auth", json={"id": gid, "cookie": "x", "platform": "Android"})
+        out = server.aes_decrypt(first.content)
+        assert out.get("success") is True, out
+        uid = playerdb.uid_for_token(out["accessToken"])
+        assert uid and uid.startswith("p-"), uid
+        # Re-entry auto-login: same id, NO fresh grant -> must still succeed and
+        # land on the SAME save.
+        again = tc.post("/auth", json={"id": gid, "cookie": "x", "platform": "Android"})
+        out2 = server.aes_decrypt(again.content)
+        assert out2.get("success") is True, out2
+        assert out2.get("accessToken"), out2
+        assert playerdb.uid_for_token(out2["accessToken"]) == uid, \
+            "returning google re-login must land on the same save"
+        # An unknown, ungranted id still cannot mint through POST /auth.
+        denied = tc.post("/auth", json={"id": "google_stranger"})
+        assert server.aes_decrypt(denied.content).get("success") is False, \
+            "unknown google id must still need the handoff"
+    print("ok google re-login: returning Google account re-auths without a fresh handoff")
+
+
 def check_guest_register_cannot_take_over_a_google_save():
     """A Guest (type=4) register presenting an id that already resolves to a
     Google-typed save must be refused. The private v173 client's guest button
@@ -268,6 +298,7 @@ if __name__ == "__main__":
     check_auth_route_registers_a_new_account_via_http()
     check_guest_register_grants_its_followup_native_auth()
     check_post_auth_mints_a_session_for_a_returning_guest()
+    check_returning_google_relogin_without_handoff()
     check_guest_register_cannot_take_over_a_google_save()
     check_single_player_override_still_works()
     print("\nall multi-account login checks passed")
