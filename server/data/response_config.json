@@ -56,7 +56,7 @@
   },
   "pvpInfo": {
     "fixed": {
-      "season": 72,
+      "season": 73,
       "semiSeason": 1,
       "pvpEnabled": true,
       "theme": 0,
@@ -82,7 +82,7 @@
   },
   "colosseum": {
     "fixed": {
-      "season": 72,
+      "season": 73,
       "score": 1000,
       "tier": 1,
       "rank": 0,
@@ -110,7 +110,7 @@
     "_comment": "passSeason MUST be a valid SeasonPasses.xml ID or WorldPanel.Reload throws (GameManager.passModel.passSeason -> ResourceBase.Get(id) NRE if id absent).",
     "fixed": {
       "enabled": true,
-      "passSeason": 71,
+      "passSeason": 73,
       "passLevel": 1,
       "passPoint": 0,
       "passExp": 0,
@@ -188,7 +188,7 @@
     "exp": 0
   },
   "pvpInfoDirect": {
-    "season": 72,
+    "season": 73,
     "semiSeason": 1,
     "pvpEnabled": true,
     "seasonUntilAtDates": [

@@ -965,6 +965,29 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
   nextSemiSeasonStartAt, Func<int, int, Tier> getResTierFunc)`. Does
   `Localizer.Get(seasonFormat)` then `string.Format(result, season)` → `_seasonText.text`.
 
+#### Dimension Rift season-number source (the "Season 71" mystery, decoded 2026-09-25)
+- The rift season-info popup ("Season N Dimensional Rift Seasonal Effects") gets its **N** from
+  `GameManager.passModel.passSeason`, NOT from `/rogueLike/season-info` (the response model
+  `RogueLikeSeasonInfoResponseModel` has **no** `season` field - verified in dump.cs).
+- Assembly chain (from `DimensionRiftSeasonInfoPanel.Reload` RVA `0x34C6070`, v173.1.00):
+  `GameManager._singleton → [x8, #0x2d0] = passModel (SeasonPassResponseModel) → [x8, #0x38] =
+  passSeason`. `SeasonPassResponseModel.passSeason` @ 0x38 (dump.cs line ~232386). So the panel
+  title = the **Season Pass** number the server advertises.
+- `GameListBox.ReloadDimensionRiftSeasonRemainTime` (RVA `0x3442164`) draws the lobby rift
+  button's "Season N / ends in" from the same `RogueLikeDataSet` (theme 2100) date fields.
+- The **effects** (advantage region/role, boss) DO come from `/rogueLike/season-info`, which
+  picks a `DimensionRiftSeasonDatas.xml` row by `RCFG.pvpInfo.season` (`r_rogue_season_info`,
+  fallback = max row). Keeping `pvpInfo.season` ≠ `passSeason` shows a mismatched title/effects.
+- **Fix (2026-09-25, commit to be pushed)**: `response_config.json` bumped to Season 73
+  (Harvest Moon Festival, the newest - SeasonPasses.xml rows go `3..73`):
+  - `pass.fixed.passSeason`: 71 → 73 (rift title + pass panel; ID 73 has full reward table)
+  - `pvpInfo.fixed.season` and `pvpInfoDirect.season`: 72 → 73 (rift effects → S73 row:
+    adv `Swift` / penalty `North`; Arena label + `GameManager.pvpData.season`)
+  - `colosseum.fixed.season`: 72 → 73 (Strife label)
+  - Arena/Strife labels are plain `string.Format(seasonFormat, season)` - no master-data lookup
+    by season number, so 73 can't NRE. `ChallengeSeasons.xml` max=72 is the Hall-of-Challenge
+    table, unrelated.
+
 ### Pre-season popup fix
 - `_isColosseumPreSeason()` (RVA 0x324fba4): calls `GetSeasonStartAt(colosseumData, 0)` →
   `nextSeasonStartAtDates[max(0, 0-1)]` = `nextSeasonStartAtDates[0]` (clamped). Then checks:
