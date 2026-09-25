@@ -89,22 +89,35 @@ def register(app, server_module):
     from fastapi import Request
 
     @app.get("/auth")
+    @app.post("/auth")
     @app.get("/auth/auth")
+    @app.post("/auth/auth")
     async def auth_native(request: Request):
-        """The client's final native sign-in endpoint (`GET /auth?id=...&cookie=...`).
+        """The client's final native sign-in endpoint (`/auth?id=...&cookie=...`).
 
         The REAL backend answers it with a full AuthResponseModel carrying an
         accessToken; the route_models fallback used to return an empty model, so a
         client with no stored token (fresh install / cleared data) never got one:
         its /auth/login went out id-less, r_login refused it (multiplayer), and
         every following request hit load_state()'s throwaway template save - the
-        "KingBug/BugCastle" ghost account. It may mint a session only after the
-        same address retrieved a Google handoff from ``/glogin/pending`` or
-        completed Guest registration; accepting an ungranted caller-chosen ``id``
-        would allow impersonation."""
+        "KingBug/BugCastle" ghost account. v173 sends this account Auth as
+        **POST /auth** (no GET /auth traffic at all on this client), so the route
+        is answered for both verbs with the same mint. It may mint a session only
+        after the same address retrieved a Google handoff from ``/glogin/pending``
+        or completed Guest registration; accepting an ungranted caller-chosen
+        ``id`` would allow impersonation."""
         host = request.headers.get("host", "?")
-        login_id = str(request.query_params.get("id") or "")
-        admin_log(f"[{host}] GET /auth")
+        body = {}
+        try:
+            if request.method == "POST":
+                body = await _body(request, srv)
+        except Exception:
+            body = {}
+        if not isinstance(body, dict):
+            body = {}
+        login_id = str(request.query_params.get("id") or body.get("id") or "")
+        admin_log(f"[{host}] {getattr(request, 'method', 'GET')} /auth "
+                  f"id={login_id!r} body_keys={sorted(str(k) for k in body)[:12]}")
         import google_login
         import playerdb
         uid = playerdb.uid_for_login(login_id)

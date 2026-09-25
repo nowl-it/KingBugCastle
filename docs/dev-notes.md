@@ -513,6 +513,50 @@ Fixed-period loops with no exception = client timer, not retry.
   -> `cp libxigncode.so server/xigncode_stub/arm64/ server/xigncode_stub/` (BOTH copies - they
   drifted once). The `.so` ships in-repo, so the next client build picks it up via
   `build_private.py` (which pads it back to the APK's original size on injection).
+  **Live verification (2026-09-25, release `v173.1.00`, public server 213.35.110.245):**
+  redroid pressed "create guest account" → logcat
+  `HookedAutoRegisterImpl injected persistent ID: guest-2034096186-1184495937` (12:38:09) →
+  public `players.db` gained `accounts ('guest-2034096186-1184495937','p-6dbedb9fc64b')`
+  (accountType=4, name "Player1667", lvl 100) + `sessions` row
+  `DEV.627a3bb… → p-6dbedb9fc64b` minted 12:38:13 UTC → client reached the real lobby.
+  `dev-0001`/`p-410890b421a5` untouched (no new session). Ephemeral gotchas while verifying:
+  (a) ICMP ping to the OCI box is blocked → use `toybox nc -w 3 <ip> 80` for device-side
+  connectivity, not `ping`; (b) Android's `sh` has no `/dev/tcp` (bash-ism); (c) the baked
+  `http://213.35.110.245` lives in `base_assets.apk`'s `global-metadata.dat`, NOT in
+  `libil2cpp.so` string tables - grep the metadata; (d) the public HTTP uvicorn runs
+  access-log-`OFF` (`INFO:…` lines only exist in `/tmp/kgc_pub_tls.log`), so an absent log entry
+  proves nothing - the `players.db` `accounts`/`sessions` tables are the source of truth.
+  New client-side crash found in the same test run: tapping the Arena tab throws
+  `IndexOutOfRangeException` in `ArenaWinRewardUI.Reload()` (via `PvPPanel.Reload()`, 12:40:50,
+  non-fatal, game continues) - a v173 code path with no existing NRE stub; see §4 arena note if
+  it bothers players.
+- **v173 sends the account Auth as `POST /auth`, not `GET /auth` (2026-09-25, fixed).** The
+  reported bug: logout → re-login guest → "still lands on KingBug" (the template save:
+  name="KingBug", castle "BugCastle", gold 290909, uid=""). Root cause chain, proven by live
+  traffic + code:
+  1. The v173.1.00 client issues **`POST /auth`** for `RestAPI.Auth` (zero `GET /auth` hits in
+     /tmp/kgc_pub_tls.log across the whole day; stringLiteral `'/auth'` @ `0x6b140a0`).
+  2. `direct_routes.py` `auth_native` was registered **GET-only**, so `POST /auth` fell into the
+     generic dispatcher: `data/route_models_extra.json` maps bare `/auth` →
+     `AuthResponseModel`, `respond()` had no OVERRIDE → **empty model (no `accessToken`)**.
+  3. The client then runs `RestAPI.Login` = `POST /auth/login` with the token from (2) = empty →
+     `_uid_for_login` returns `None` (multiplayer) → `r_login` refuses silently (no `[auth]`
+     trace, no session; the refusal only lands in the per-worker in-memory `LOG_BUF`, read via
+     `/admin/api/logs`) → every following request hits `load_state()`'s throwaway template save.
+  4. The first-ever login worked only because a NEW account takes the **register** path
+     (`POST /auth/register` → `r_login` mints a real token). Every subsequent launch/logout takes
+     the **Auth** path (id stored in AwesomePrefs survives logout) → broken.
+  Fix (`direct_routes.py`): `auth_native` now answers `POST /auth` (and `POST /auth/auth`) with
+  the same mint as GET; `id` is read from the query string OR the JSON body (mirrors
+  `server.py:597`), body read only on POST; logs
+  `[host] POST /auth id=... body_keys=[...]` to admin_log (stderr → `/tmp/kgc_pub_tls.log`, always
+  printed even under `KGC_QUIET=1`). Returning guests (bound `accountType=4`) mint; unknown
+  ungranted ids stay refused. Regressions: `tests/test_multi_login.py::check_post_auth_mints_a_session_for_a_returning_guest`
+  (legacy runner) + `tests/test_post_auth.py::test_post_auth_mints_for_a_returning_guest`
+  (pytest-collected). Note: the pytest suite only collects files with `test_*`-named functions
+  (98 items); the `check_*` files are standalone scripts via `if __name__ == "__main__"` and are
+  NOT part of CI - a regression in one of those must be pinned in a `test_*`-style file to be
+  CI-enforced.
 
 ### Official-token harvesting - Firebase Test Lab verdict (2026-08-24, DEAD END)
 

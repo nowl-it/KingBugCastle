@@ -176,6 +176,37 @@ def check_guest_register_grants_its_followup_native_auth():
     print("ok guest native auth: registered and returning Guest ids authenticate")
 
 
+def check_post_auth_mints_a_session_for_a_returning_guest():
+    """v173 sends the account Auth as **POST /auth** (the live client shows zero
+    GET /auth traffic). The route_models fallback answered an empty
+    AuthResponseModel (no accessToken), so logout -> guest re-login ran Login
+    token-less, r_login refused it, and the client fell onto the throwaway
+    template save ("KingBug/BugCastle" ghost account). POST /auth must mint
+    exactly like GET /auth, reading the id from the JSON body or the query."""
+    from fastapi.testclient import TestClient
+    guest = "guest-post-auth"
+    with TestClient(server.app, client=("10.7.7.7", 55000)) as tc:
+        registered = tc.post("/auth/register", json={"id": guest, "type": GUEST})
+        assert server.aes_decrypt(registered.content).get("success") is True
+        # returning-guest auth: id in the JSON body (the v173 REST call shape)
+        auth = tc.post("/auth", json={"id": guest, "cookie": "x",
+                                      "platform": "Android"})
+        out = server.aes_decrypt(auth.content)
+        assert out.get("success") is True, out
+        token = out.get("accessToken")
+        assert token, "POST /auth must mint a session token"
+        uid = playerdb.uid_for_token(token)
+        assert uid and uid.startswith("p-"), uid
+        # id in the query string must work too (mirrors GET /auth?id=...)
+        queryy = tc.post(f"/auth?id={guest}")
+        out2 = server.aes_decrypt(queryy.content)
+        assert out2.get("success") is True and out2.get("accessToken"), out2
+        # an unknown, ungranted Guest id must NOT mint through POST /auth
+        denied = tc.post("/auth", json={"id": "guest-unknown"})
+        assert server.aes_decrypt(denied.content).get("success") is False
+    print("ok POST /auth: v173 returning-guest auth mints a session, unknowns refused")
+
+
 def check_guest_register_cannot_take_over_a_google_save():
     """A Guest (type=4) register presenting an id that already resolves to a
     Google-typed save must be refused. The private v173 client's guest button
@@ -236,6 +267,7 @@ if __name__ == "__main__":
     check_native_google_auth_mints_a_session()
     check_auth_route_registers_a_new_account_via_http()
     check_guest_register_grants_its_followup_native_auth()
+    check_post_auth_mints_a_session_for_a_returning_guest()
     check_guest_register_cannot_take_over_a_google_save()
     check_single_player_override_still_works()
     print("\nall multi-account login checks passed")
