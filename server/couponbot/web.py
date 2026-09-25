@@ -2,10 +2,11 @@
 
 Runs as its own process (see `systemd/kgc-coupon.service`): the emulator server
 on :8080 must never share a failure domain with a tool that holds player IDs and
-calls an external API. Bind loopback and let the ingress (Caddy) or an SSH
-tunnel decide who reaches it; `COUPON_WEB_PASSWORD` guards the API either way.
+calls an external API. It binds 0.0.0.0:8083 on purpose - same posture as the
+admin dashboard on :8081 - and `COUPON_WEB_PASSWORD` is what guards it (5 bad
+tries locks the IP out for 10 minutes).
 
-    .venv/bin/uvicorn couponbot.web:app --host 127.0.0.1 --port 8083
+    .venv/bin/uvicorn couponbot.web:app --host 0.0.0.0 --port 8083
 """
 
 from __future__ import annotations
@@ -257,7 +258,7 @@ def last_run():
 def main() -> int:  # pragma: no cover - exercised on the box, not in CI
     import uvicorn
     port = int(config.get("COUPON_WEB_PORT", "8083"))
-    host = config.get("COUPON_WEB_BIND", "127.0.0.1")
+    host = config.get("COUPON_WEB_BIND", "0.0.0.0")
     uvicorn.run(app, host=host, port=port, log_level="info")
     return 0
 

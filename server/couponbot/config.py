@@ -26,6 +26,9 @@ DEFAULTS = {
     # already uses). Empty disables notifications.
     "COUPON_NOTIFY_CHANNEL": "1541439188686213221",
     "COUPON_WEB_PORT": "8083",
+    # Public bind is deliberate (same posture as the :8081 admin dashboard) -
+    # COUPON_WEB_PASSWORD is the gate, not the network.
+    "COUPON_WEB_BIND": "0.0.0.0",
     "COUPON_MIN_INTERVAL": "2.0",
     "COUPON_LANG": "en_us",
 }
