@@ -2,6 +2,12 @@
 "use strict";
 
 const $ = (id) => document.getElementById(id);
+
+/* Everything rendered into innerHTML comes from user-supplied label/code text,
+   so it all goes through esc() first - the page is public and unauthenticated. */
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
 const emoji = (s) => ({
   ok: "✅", used_or_invalid: "⛔", no_coupon: "❔", no_pid: "⛔",
   expired: "⌛", not_available: "⏳", limit_reached: "🚫", error: "❌",
@@ -13,6 +19,10 @@ const stateName = (s) => ({
   limit_reached: "hết lượt", error: "lỗi",
 }[s] || s);
 
+const codeStatus = (s) => ({
+  new: "mới", invalid: "không tồn tại", expired: "hết hạn", used: "đã dùng",
+}[s] || s);
+
 async function api(path, opts = {}) {
   const res = await fetch(path, {
     headers: { "Content-Type": "application/json" },
@@ -21,13 +31,9 @@ async function api(path, opts = {}) {
   });
   let data = {};
   try { data = await res.json(); } catch (_) { /* non-JSON */ }
-  if (res.status === 401) { showLogin(); throw new Error(data.error || "login required"); }
   if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
   return data;
 }
-
-function showLogin() { $("login").hidden = false; }
-function hideLogin() { $("login").hidden = true; $("logout").hidden = false; }
 
 function msg(el, text, cls) {
   el.textContent = text || "";
@@ -37,67 +43,92 @@ function msg(el, text, cls) {
   el.style.minHeight = "18px";
 }
 
-function when(ts) {
+function whenText(ts) {
   if (!ts) return "–";
-  const d = new Date(ts * 1000);
-  return d.toLocaleString("vi-VN", { hour12: false });
+  return new Date(ts * 1000).toLocaleString("vi-VN", { hour12: false });
+}
+
+const when = (ts) => (ts ? esc(whenText(ts)) : '<span class="muted">–</span>');
+
+function renderAccList(accs) {
+  $("accCount").textContent = accs.length;
+  if (!accs.length) {
+    $("acclist").innerHTML = "Chưa có Player-ID nào.";
+    return;
+  }
+  let h = '<div class="scroll"><table><thead><tr><th>Player-ID</th><th>Ghi chú</th>' +
+          '<th>Thêm lúc</th><th>Thử cuối</th><th>Kết quả</th></tr></thead><tbody>';
+  for (const a of accs) {
+    const off = a.enabled ? "" : ' <span class="pill off">đã tắt</span>';
+    h += `<tr><td class="code">${esc(a.uid)}${off}</td>` +
+         `<td>${a.label ? esc(a.label) : '<span class="muted">–</span>'}</td>` +
+         `<td>${when(a.added_at)}</td><td>${when(a.last_run_at)}</td>` +
+         `<td>${a.last_result ? esc(stateName(a.last_result)) : '<span class="muted">–</span>'}</td></tr>`;
+  }
+  $("acclist").innerHTML = h + "</tbody></table></div>";
+}
+
+function renderCodeList(codes) {
+  $("codeCount").textContent = codes.length;
+  if (!codes.length) {
+    $("codelist").innerHTML = "Chưa có code nào.";
+    return;
+  }
+  let h = '<div class="scroll"><table><thead><tr><th>Code</th><th>Trạng thái</th>' +
+          '<th>Nguồn</th><th>Phát hiện lúc</th></tr></thead><tbody>';
+  for (const c of codes) {
+    const src = String(c.source || "");
+    const srcLabel = src.startsWith("discord:") ? "discord" : (src || "–");
+    const quote = c.source_text ? ` title="${esc(c.source_text.slice(0, 400))}"` : "";
+    h += `<tr><td class="code"${quote}>${esc(c.code)}</td>` +
+         `<td><span class="pill">${esc(codeStatus(c.status))}</span></td>` +
+         `<td class="muted">${esc(srcLabel)}</td><td>${when(c.first_seen_at)}</td></tr>`;
+  }
+  $("codelist").innerHTML = h + "</tbody></table></div>";
+}
+
+function renderMatrix(accs, codes, mx) {
+  if (!accs.length || !codes.length) {
+    $("grid").innerHTML = "Cần ít nhất 1 Player-ID và 1 code để thấy ma trận.";
+    return;
+  }
+  let h = '<div class="scroll"><table><thead><tr><th>Player-ID</th>';
+  for (const c of codes) h += `<th class="code">${esc(c.code)}</th>`;
+  h += "</tr></thead><tbody>";
+
+  for (const a of accs) {
+    h += `<tr><td class="code">${esc(a.uid)}</td>`;
+    for (const c of codes) {
+      const st = (mx[a.uid] || {})[c.code];
+      h += st
+        ? `<td><span class="st" data-s="${st === "ok" ? "ok" : (st === "error" ? "wait" : "bad")}"` +
+          ` title="${esc(stateName(st))}">${emoji(st)}</span></td>`
+        : '<td><span class="muted">–</span></td>';
+    }
+    h += "</tr>";
+  }
+  $("grid").innerHTML = h + "</tbody></table></div>";
 }
 
 function render(data) {
   $("mode").textContent = data.discord_mode === "poll" ? "poll" : "thủ công";
   $("rate").textContent = data.rate_remaining ?? "–";
   $("lastrun").textContent = data.last_run && data.last_run.finished_at
-    ? when(data.last_run.finished_at) : "chưa chạy";
+    ? whenText(data.last_run.finished_at) : "chưa chạy";
   $("run").disabled = !!data.running;
   $("run").textContent = data.running ? "Đang chạy…" : "Chạy ngay";
 
-  const codes = (data.codes || []).slice(0, 12);
-  const accs = (data.accounts || []).filter((a) => a.enabled);
-  const disabled = (data.accounts || []).filter((a) => !a.enabled);
-  const mx = data.matrix || {};
-
-  if (!accs.length && !codes.length) {
-    $("grid").innerHTML = "Chưa có Player-ID lẫn code nào.";
-    return;
-  }
-
-  let html = "<table><thead><tr><th>Player-ID</th>";
-  for (const c of codes) html += `<th class="code">${c.code}<br><span class="pill">${c.status}</span></th>`;
-  html += "<th></th></tr></thead><tbody>";
-
-  for (const a of accs) {
-    html += `<tr><td>${a.uid}${a.label ? ` <span class="muted">(${a.label})</span>` : ""}`;
-    for (const c of codes) {
-      const st = (mx[a.uid] || {})[c.code];
-      html += st
-        ? `<td><span class="st" data-s="${st === "ok" ? "ok" : (st === "error" ? "wait" : "bad")}"
-             title="${stateName(st)}">${emoji(st)}</span></td>`
-        : `<td><span class="muted">–</span></td>`;
-    }
-    html += `<td><button class="link" data-del="${a.uid}">tắt</button></td></tr>`;
-  }
-  html += "</tbody></table>";
-
-  if (disabled.length) {
-    html += `<div class="muted" style="margin-top:8px">Đã tắt: ${
-      disabled.map((a) => `${a.uid} <button class="link" data-on="${a.uid}">bật lại</button>`).join(", ")
-    }</div>`;
-  }
-  if (!codes.length) html += '<div class="muted" style="margin-top:8px">Chưa có code nào.</div>';
-  $("grid").innerHTML = html;
-
-  for (const btn of document.querySelectorAll("[data-del]"))
-    btn.onclick = async () => { await api(`/api/accounts/${btn.dataset.del}`, { method: "DELETE" }); refresh(); };
-  for (const btn of document.querySelectorAll("[data-on]"))
-    btn.onclick = async () => { await api(`/api/accounts/${btn.dataset.on}/enable`, { method: "POST" }); refresh(); };
+  const accs = data.accounts || [];
+  const codes = data.codes || [];
+  renderAccList(accs);
+  renderCodeList(codes);
+  renderMatrix(accs, codes, data.matrix || {});
 }
 
 async function refresh() {
   try {
-    hideLogin();
     render(await api("/api/state"));
   } catch (e) {
-    if (!$("login").hidden) return;
     $("grid").textContent = `Lỗi: ${e.message}`;
   }
 }
@@ -135,17 +166,6 @@ $("run").onclick = async () => {
     setTimeout(refresh, 1500);
   } catch (e) { alert(e.message); }
 };
-
-$("loginForm").onsubmit = async (e) => {
-  e.preventDefault();
-  try {
-    await api("/api/login", { method: "POST", body: JSON.stringify({ password: $("pw").value }) });
-    $("pw").value = "";
-    hideLogin(); refresh();
-  } catch (err) { $("loginMsg").textContent = err.message; }
-};
-
-$("logout").onclick = async () => { await api("/api/logout", { method: "POST" }); location.reload(); };
 
 refresh();
 setInterval(refresh, 15000);

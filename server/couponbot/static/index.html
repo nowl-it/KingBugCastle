@@ -18,6 +18,9 @@
   .chip b { color:var(--fg); font-weight:600; }
   .spacer { flex:1; }
   main { padding:18px; max-width:1180px; margin:0 auto; }
+  .notice { font-size:13px; color:var(--dim); border:1px dashed var(--line);
+            border-radius:8px; padding:9px 12px; margin-bottom:16px; }
+  .notice b { color:var(--fg); }
   .card { background:var(--card); border:1px solid var(--line); border-radius:10px;
           padding:16px; margin-bottom:16px; }
   .card h2 { font-size:14px; margin:0 0 12px; color:var(--dim);
@@ -34,22 +37,19 @@
   th,td { border-bottom:1px solid var(--line); padding:8px 10px; text-align:center; }
   th:first-child,td:first-child { text-align:left; }
   th { color:var(--dim); font-weight:600; font-size:12px; text-transform:uppercase; }
-  td.code { font-family:ui-monospace,Menlo,monospace; font-size:13px; }
+  td.code,th.code { font-family:ui-monospace,Menlo,monospace; font-size:13px; text-align:left; }
+  .scroll { overflow-x:auto; }
   .st { font-size:16px; }
   .st[data-s=ok] { color:var(--ok); }
   .st[data-s=wait] { color:var(--wait); }
   .st[data-s=bad] { color:var(--bad); }
   .muted { color:var(--dim); font-size:13px; }
-  #msg { font-size:13px; margin-top:8px; min-height:18px; }
-  #msg.err { color:var(--bad); }
-  #msg.ok { color:var(--ok); }
-  .overlay { position:fixed; inset:0; background:rgba(6,8,11,.86); display:flex;
-             align-items:center; justify-content:center; }
-  .overlay .card { width:min(360px,92vw); margin:0; }
+  .msg { font-size:13px; margin-top:8px; min-height:18px; }
+  .msg.err { color:var(--bad); }
+  .msg.ok { color:var(--ok); }
   .pill { font-size:11px; padding:2px 7px; border-radius:6px; border:1px solid var(--line); }
   .pill.on { color:var(--ok); }
   .pill.off { color:var(--bad); }
-  .link { background:none; border:none; color:var(--acc); padding:0; font-size:13px; }
 </style>
 </head>
 <body>
@@ -60,10 +60,15 @@
   <span class="chip">Rate limit: <b id="rate">–</b></span>
   <span class="spacer"></span>
   <button class="primary" id="run">Chạy ngay</button>
-  <button id="logout" hidden>Đăng xuất</button>
 </header>
 
 <main>
+  <div class="notice">
+    Trang <b>công khai, không cần đăng nhập</b>: bất kỳ ai cũng có thể thêm Player-ID của mình
+    để nhận code. Danh sách <b>toàn bộ ID</b> và <b>toàn bộ code</b> hiển thị cho mọi khách,
+    và <b>không thể xóa</b> khỏi trang này.
+  </div>
+
   <div class="card">
     <h2>Thêm Player-ID</h2>
     <form class="row" id="acctForm">
@@ -72,6 +77,16 @@
       <button class="primary" type="submit">Thêm &amp; kiểm tra ID</button>
     </form>
     <div id="acctMsg" class="msg"></div>
+  </div>
+
+  <div class="card">
+    <h2>Player-ID đang ghi nhận (<span id="accCount">0</span>)</h2>
+    <div id="acclist" class="muted">Đang tải…</div>
+  </div>
+
+  <div class="card">
+    <h2>Code đang lưu (<span id="codeCount">0</span>)</h2>
+    <div id="codelist" class="muted">Đang tải…</div>
   </div>
 
   <div class="card">
@@ -92,17 +107,6 @@
     </div>
   </div>
 </main>
-
-<div class="overlay" id="login" hidden>
-  <div class="card">
-    <h2>Đăng nhập</h2>
-    <form class="row" id="loginForm">
-      <input id="pw" type="password" placeholder="Mật khẩu" autocomplete="current-password">
-      <button class="primary" type="submit">Vào</button>
-    </form>
-    <div id="loginMsg" class="msg"></div>
-  </div>
-</div>
 
 <script src="/app.js"></script>
 </body>

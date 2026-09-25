@@ -1,18 +1,24 @@
-"""Coupon bot dashboard + JSON API.
+"""Coupon bot dashboard + JSON API - public, no login.
 
 Runs as its own process (see `systemd/kgc-coupon.service`): the emulator server
 on :8080 must never share a failure domain with a tool that holds player IDs and
-calls an external API. It binds 0.0.0.0:8083 on purpose - same posture as the
-admin dashboard on :8081 - and `COUPON_WEB_PASSWORD` is what guards it (5 bad
-tries locks the IP out for 10 minutes).
+calls an external API. It binds 0.0.0.0:8083 on purpose.
+
+Deliberately open (operator decision, 2026-09-25): anyone may register their own
+Player-ID, every visitor sees the same full list of IDs and codes, and **nothing
+can be removed through the API** - there is no delete/disable route at all, only
+the add/read ones. The escape hatch for a bad row is the operator running
+`state.set_account_enabled(uid, False)` from a shell on the box; the worker then
+skips it (`accounts(enabled_only=True)`).
+
+Because the probe on add-account costs one real request to the official coupon
+site, the write routes are throttled per client IP (WRITE_LIMITS).
 
     .venv/bin/uvicorn couponbot.web:app --host 0.0.0.0 --port 8083
 """
 
 from __future__ import annotations
 
-import hashlib
-import hmac
 import os
 import threading
 import time
@@ -27,68 +33,55 @@ from . import config, state, worker
 from .coupon_client import Limiter, Result, make_client, redeem
 
 STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
-COOKIE = "coupon_sess"
-SESSION_TTL = 7 * 24 * 3600
 PROBE_CODE = "ZZZZZZZZZZ9"          # verified live: always "coupon does not exist"
-LOCKOUT_AFTER, LOCKOUT_SECONDS = 5, 10 * 60
-_login_hits: dict[str, list[float]] = {}
+
+# (max requests, window seconds) per client IP, per route. The probe and every
+# redeem hit the official site from OUR IP, so an unauthenticated page needs a
+# floor on how fast a single visitor can spend that budget.
+WRITE_LIMITS: dict[str, tuple[int, float]] = {
+    "account": (20, 3600),          # 1 external probe each
+    "code": (20, 3600),             # 1 redeem per account on the next cycle
+    "run": (5, 600),                # a whole cycle
+}
+_write_hits: dict[str, list[float]] = {}
+
 _run_flag = {"running": False}
 
 app = FastAPI(title="KGC Coupon Bot", docs_url=None, redoc_url=None)
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
-# --- auth -------------------------------------------------------------------
-
-def _sign(payload: str) -> str:
-    return hmac.new(config.web_secret().encode(), payload.encode(), hashlib.sha256).hexdigest()
-
-
-def _issue_cookie() -> str:
-    expiry = int(time.time()) + SESSION_TTL
-    return f"{expiry}.{_sign(str(expiry))}"
-
-
-def _authed(request: Request) -> bool:
-    password = config.web_password()
-    if not password:
-        return True
-    raw = request.cookies.get(COOKIE, "")
-    expiry, _, sig = raw.partition(".")
-    if not (expiry.isdigit() and sig):
-        return False
-    if int(expiry) < time.time():
-        return False
-    return hmac.compare_digest(sig, _sign(expiry))
-
-
 def _json(status: int, **data) -> JSONResponse:
     return JSONResponse(status_code=status, content=data)
 
 
-def _unauthorized() -> JSONResponse:
-    return _json(HTTPStatus.UNAUTHORIZED, error="login required")
+def _ensure_db() -> None:
+    """`CREATE TABLE IF NOT EXISTS` on every entry point.
+
+    A fresh box has no `coupons.db` until the first cycle or add, and the first
+    `GET /api/state` then 500'd with "no such table" (found with curl - the test
+    fixture always inits the DB first, so it could never see this).
+    """
+    state.init_db()
 
 
 def _client_ip(request: Request) -> str:
     return request.client.host if request.client else "?"
 
 
-def _locked_out(ip: str) -> bool:
-    hits = [t for t in _login_hits.get(ip, []) if time.time() - t < LOCKOUT_SECONDS]
-    _login_hits[ip] = hits
-    return len(hits) >= LOCKOUT_AFTER
-
-
-@app.middleware("http")
-async def require_auth(request: Request, call_next):
-    # The login page (and its endpoint) must answer before the cookie exists.
-    if request.url.path in ("/", "/app.js", "/favicon.ico", "/api/login") \
-            or request.url.path.startswith("/static/"):
-        return await call_next(request)
-    if not _authed(request):
-        return _unauthorized()
-    return await call_next(request)
+def _throttled(bucket: str, request: Request) -> bool:
+    limit, window = WRITE_LIMITS[bucket]
+    now = time.time()
+    if len(_write_hits) > 4096:                      # bound the memory, not the rule
+        for key in [k for k, v in _write_hits.items() if not v or now - v[-1] > window * 2]:
+            _write_hits.pop(key, None)
+    key = f"{bucket}:{_client_ip(request)}"
+    hits = [t for t in _write_hits.get(key, []) if now - t < window]
+    _write_hits[key] = hits
+    if len(hits) >= limit:
+        return True
+    hits.append(now)
+    return False
 
 
 # --- models -----------------------------------------------------------------
@@ -100,35 +93,6 @@ class AccountIn(BaseModel):
 
 class CodeIn(BaseModel):
     code: str
-
-
-class LoginIn(BaseModel):
-    password: str
-
-
-# --- auth routes ------------------------------------------------------------
-
-@app.post("/api/login")
-def login(body: LoginIn, request: Request):
-    ip = _client_ip(request)
-    if _locked_out(ip):
-        return _json(HTTPStatus.TOO_MANY_REQUESTS, error="quá nhiều lần sai, thử lại sau 10 phút")
-    expected = config.web_password()
-    if not expected or not hmac.compare_digest(body.password, expected):
-        _login_hits.setdefault(ip, []).append(time.time())
-        return _json(HTTPStatus.UNAUTHORIZED, error="sai mật khẩu")
-    _login_hits.pop(ip, None)
-    return JSONResponse(
-        content={"ok": True},
-        headers={"Set-Cookie": f"{COOKIE}={_issue_cookie()}; HttpOnly; SameSite=Lax;"
-                               f" Path=/; Max-Age={SESSION_TTL}"},
-    )
-
-
-@app.post("/api/logout")
-def logout():
-    return JSONResponse(content={"ok": True},
-                        headers={"Set-Cookie": f"{COOKIE}=; HttpOnly; Path=/; Max-Age=0"})
 
 
 # --- read routes ------------------------------------------------------------
@@ -145,6 +109,9 @@ def app_js():
 
 
 def _status_payload() -> dict:
+    # Both lists are complete on purpose: this page's whole job is showing every
+    # registered ID and every stored code to everyone who opens it.
+    _ensure_db()
     accounts = state.accounts(enabled_only=False)
     codes = state.codes()
     return {
@@ -157,7 +124,6 @@ def _status_payload() -> dict:
         "rate_remaining": _rate_remaining(),
         "running": _run_flag["running"],
         "runs": _recent_runs(),
-        "auth_required": bool(config.web_password()),
     }
 
 
@@ -181,10 +147,20 @@ def api_state():
     return _json(HTTPStatus.OK, **_status_payload())
 
 
-# --- write routes -----------------------------------------------------------
+@app.get("/api/runs/last")
+def last_run():
+    return _json(HTTPStatus.OK, last_run=state.last_run(),
+                 running=_run_flag["running"], mode=state.meta_get("discord_mode"))
+
+
+# --- write routes (add-only; there is deliberately no delete) ---------------
 
 @app.post("/api/accounts")
 def add_account(body: AccountIn, request: Request):
+    if _throttled("account", request):
+        return _json(HTTPStatus.TOO_MANY_REQUESTS,
+                     error="quá nhiều yêu cầu, thử lại sau ít phút")
+    _ensure_db()
     uid = body.uid.strip()
     if not uid or len(uid) > 24 or any(c.isspace() for c in uid):
         return _json(HTTPStatus.BAD_REQUEST, error="Player-ID không hợp lệ")
@@ -204,26 +180,16 @@ def add_account(body: AccountIn, request: Request):
     if out.result is Result.ERROR:
         return _json(HTTPStatus.BAD_GATEWAY, error=f"không kiểm tra được ID: {out.message}")
 
-    state.add_account(uid, body.label.strip())
+    state.add_account(uid, body.label.strip()[:40])
     return _json(HTTPStatus.OK, ok=True, uid=uid, probe=out.result.value)
 
 
-@app.delete("/api/accounts/{uid}")
-def disable_account(uid: str):
-    if not state.set_account_enabled(uid, False):
-        return _json(HTTPStatus.NOT_FOUND, error="không tìm thấy Player-ID")
-    return _json(HTTPStatus.OK, ok=True, uid=uid, enabled=False)
-
-
-@app.post("/api/accounts/{uid}/enable")
-def enable_account(uid: str):
-    if not state.set_account_enabled(uid, True):
-        return _json(HTTPStatus.NOT_FOUND, error="không tìm thấy Player-ID")
-    return _json(HTTPStatus.OK, ok=True, uid=uid, enabled=True)
-
-
 @app.post("/api/codes")
-def add_code(body: CodeIn):
+def add_code(body: CodeIn, request: Request):
+    if _throttled("code", request):
+        return _json(HTTPStatus.TOO_MANY_REQUESTS,
+                     error="quá nhiều yêu cầu, thử lại sau ít phút")
+    _ensure_db()
     code = body.code.strip().upper()
     if not (8 <= len(code) <= 24):
         return _json(HTTPStatus.BAD_REQUEST, error="code phải 8-24 ký tự")
@@ -234,7 +200,10 @@ def add_code(body: CodeIn):
 
 
 @app.post("/api/run")
-def run_now():
+def run_now(request: Request):
+    if _throttled("run", request):
+        return _json(HTTPStatus.TOO_MANY_REQUESTS,
+                     error="quá nhiều yêu cầu, thử lại sau ít phút")
     if _run_flag["running"]:
         return _json(HTTPStatus.CONFLICT, error="đang có một lượt chạy")
     _run_flag["running"] = True
@@ -247,12 +216,6 @@ def run_now():
 
     threading.Thread(target=_go, daemon=True).start()
     return _json(HTTPStatus.OK, ok=True, started=True)
-
-
-@app.get("/api/runs/last")
-def last_run():
-    return _json(HTTPStatus.OK, last_run=state.last_run(),
-                 running=_run_flag["running"], mode=state.meta_get("discord_mode"))
 
 
 def main() -> int:  # pragma: no cover - exercised on the box, not in CI

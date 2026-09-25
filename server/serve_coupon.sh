@@ -21,7 +21,7 @@ elif [ -r secrets/coupon.env ]; then
 fi
 
 PORT="${COUPON_WEB_PORT:-8083}"
-BIND_HOST="${COUPON_WEB_BIND:-0.0.0.0}"   # public on purpose - password guards it
+BIND_HOST="${COUPON_WEB_BIND:-0.0.0.0}"   # public on purpose - no login, throttle only
 PID_FILE="/tmp/kgc_coupon.pid"
 LOG_FILE="/tmp/kgc_coupon.log"
 

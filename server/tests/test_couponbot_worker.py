@@ -170,30 +170,61 @@ def test_blocked_reader_degrades_to_manual_once(db, quiet, monkeypatch):
 
 @pytest.fixture()
 def client(db, monkeypatch):
-    monkeypatch.setattr(config, "web_password", lambda: "hunter2")
-    monkeypatch.setattr(config, "web_secret", lambda: "test-secret")
-    monkeypatch.setattr(web, "_login_hits", {})
+    # No auth exists any more (the page is public), and the write throttle is
+    # per client IP - so every test starts from a clean slate.
+    web._write_hits.clear()
     return TestClient(web.app)
 
 
-def _login(client, password="hunter2"):
-    return client.post("/api/login", json={"password": password})
+def test_api_is_public_no_login_anywhere(client):
+    """Operator decision: anyone adds their own ID, nobody logs in."""
+    assert client.get("/").status_code == 200
+    assert client.get("/api/state").status_code == 200      # no cookie, no password
+    assert client.post("/api/login", json={"password": "x"}).status_code == 404
+    assert client.post("/api/logout").status_code == 404
 
 
-def test_api_requires_login(client):
-    assert client.get("/api/state").status_code == 401
-    assert client.get("/").status_code == 200, "login page itself is public"
-    assert _login(client, "wrong").status_code == 401
-    for _ in range(4):
-        _login(client, "wrong")
-    assert _login(client, "hunter2").status_code == 429, "lockout after 5 bad tries"
-    web._login_hits.clear()          # simulate the 10-minute window elapsing
-    assert _login(client).status_code == 200
-    assert client.get("/api/state").status_code == 200
+def test_nothing_can_be_deleted_through_the_api(client, monkeypatch):
+    monkeypatch.setattr(web, "redeem",
+                        lambda *a, **k: Outcome(Result.NO_COUPON, "This coupon does not exist."))
+    assert client.post("/api/accounts", json={"uid": "S6R83U", "label": "main"}).status_code == 200
+    assert client.post("/api/codes", json={"code": "KGCFEST123"}).status_code == 200
+
+    assert client.delete("/api/accounts/S6R83U").status_code == 404
+    assert client.post("/api/accounts/S6R83U/enable").status_code == 404
+    assert client.delete("/api/codes/KGCFEST123").status_code == 404
+
+    payload = client.get("/api/state").json()
+    assert [a["uid"] for a in payload["accounts"]] == ["S6R83U"]
+    assert [c["code"] for c in payload["codes"]] == ["KGCFEST123"]
+
+
+def test_state_lists_every_id_and_every_code(client, monkeypatch):
+    monkeypatch.setattr(web, "redeem",
+                        lambda *a, **k: Outcome(Result.NO_COUPON, "This coupon does not exist."))
+    for uid in ("AAAA11", "BBBB22"):
+        assert client.post("/api/accounts", json={"uid": uid}).status_code == 200
+    for i in range(15):
+        assert client.post("/api/codes", json={"code": f"KGC{i:02d}TEST"}).status_code == 200
+
+    payload = client.get("/api/state").json()
+    assert [a["uid"] for a in payload["accounts"]] == ["AAAA11", "BBBB22"]
+    assert len(payload["codes"]) == 15, "the old UI capped the list at 12"
+    # an anonymous GET really does receive the ID list
+    assert "AAAA11" in client.get("/api/state").text
+
+
+def test_write_throttle_stops_probe_spam(client, monkeypatch):
+    """The add-account probe costs one real request to the official site."""
+    monkeypatch.setitem(web.WRITE_LIMITS, "account", (2, 60))
+    monkeypatch.setattr(web, "redeem",
+                        lambda *a, **k: Outcome(Result.NO_COUPON, "This coupon does not exist."))
+    for i in range(2):
+        assert client.post("/api/accounts", json={"uid": f"AAAA{i}"}).status_code == 200
+    assert client.post("/api/accounts", json={"uid": "AAAA2"}).status_code == 429
 
 
 def test_account_probe_rejects_unknown_player_id(client, monkeypatch):
-    _login(client)
     monkeypatch.setattr(web, "redeem",
                         lambda *a, **k: Outcome(Result.NO_PID, "This Player-ID does not exist."))
     r = client.post("/api/accounts", json={"uid": "NOPE12", "label": "x"})
@@ -208,14 +239,12 @@ def test_account_probe_rejects_unknown_player_id(client, monkeypatch):
 
 
 def test_code_validation(client):
-    _login(client)
     assert client.post("/api/codes", json={"code": "kgcfest123"}).json()["code"] == "KGCFEST123"
     assert client.post("/api/codes", json={"code": "12345678"}).status_code == 400
     assert client.post("/api/codes", json={"code": "abc"}).status_code == 400
 
 
 def test_run_endpoint_runs_once(client, monkeypatch):
-    _login(client)
     calls = []
     monkeypatch.setattr(worker, "run_cycle", lambda **k: calls.append(k) or {"ok": 0})
     r = client.post("/api/run")
@@ -225,6 +254,18 @@ def test_run_endpoint_runs_once(client, monkeypatch):
             break
         time.sleep(0.05)
     assert len(calls) == 1
+
+
+def test_first_request_on_a_db_that_does_not_exist_yet(tmp_path, monkeypatch):
+    """Real curl on a fresh box gave `no such table: accounts` -> 500: the test
+    fixture always inits the DB first, so only a first-ever request could see it."""
+    monkeypatch.setattr(state, "DB_PATH", str(tmp_path / "fresh.db"))
+    web._write_hits.clear()
+    fresh = TestClient(web.app)
+    assert fresh.get("/api/state").status_code == 200
+    payload = fresh.get("/api/state").json()
+    assert payload["accounts"] == [] and payload["codes"] == []
+    assert fresh.post("/api/codes", json={"code": "KGCFRESH01"}).status_code == 200
 
 
 def test_cli_accepts_the_flags_the_systemd_unit_passes(db, quiet, capsys):

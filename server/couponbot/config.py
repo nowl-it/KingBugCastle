@@ -26,8 +26,8 @@ DEFAULTS = {
     # already uses). Empty disables notifications.
     "COUPON_NOTIFY_CHANNEL": "1541439188686213221",
     "COUPON_WEB_PORT": "8083",
-    # Public bind is deliberate (same posture as the :8081 admin dashboard) -
-    # COUPON_WEB_PASSWORD is the gate, not the network.
+    # The dashboard is public by design (no login): anyone may add their own
+    # Player-ID and everyone sees the same ID/code lists.
     "COUPON_WEB_BIND": "0.0.0.0",
     "COUPON_MIN_INTERVAL": "2.0",
     "COUPON_LANG": "en_us",
@@ -69,33 +69,6 @@ def bot_token() -> str:
     if path.is_file():
         return path.read_text().strip()
     return ""
-
-
-def web_password() -> str:
-    """Dashboard password. Empty means auth is disabled (local dev only)."""
-    _load_env_file()
-    return os.environ.get("COUPON_WEB_PASSWORD", "")
-
-
-def web_secret() -> str:
-    """HMAC key for the session cookie; auto-generated on first web start."""
-    _load_env_file()
-    secret = os.environ.get("COUPON_WEB_SECRET", "")
-    if secret:
-        return secret
-    path = SECRETS / "coupon_web_secret"
-    if path.is_file():
-        return path.read_text().strip()
-    # Deterministic-enough per boot is wrong for a session cookie: persist it.
-    import secrets as _secrets
-    value = _secrets.token_hex(32)
-    try:
-        SECRETS.mkdir(parents=True, exist_ok=True)
-        path.write_text(value + "\n")
-        path.chmod(0o600)
-    except OSError:
-        pass
-    return value
 
 
 def read_channel() -> str:

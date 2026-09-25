@@ -1955,14 +1955,18 @@ for calibration; the success page's exact wording is still to be captured (first
   Missing Access** (`code 50001`). A *discoverable* guild (tried `Castle` `515820161694171141`,
   a different game) does leak its channel list via `GET /guilds/{id}/channels` while the bot is
   not a member - but message reads stay 403, so that leak is useless on its own.
-- **Chosen approach**: the operator uses Discord's client feature *Follow Announcement Channel*
-  on an official `📢 Announcements` channel, mirroring it into our own guild (the CDN monitor's
-  webhook then posts there). `couponbot.discord_feed.fetch_new_messages` polls that channel with
-  the existing bot token (`GET /channels/{id}/messages?after=<snowflake>`, cursor in
-  `meta.discord_cursor`). Read-only, no user token, no ToS risk.
+- **Chosen approach (superseded twice)**: first *Follow Announcement Channel* (the official server
+  has no `📢` channel - the codes are posted in `#event`, a plain text channel, so Follow cannot
+  mirror them), then a user-token selfbot (the user declined to supply one). **What actually runs**:
+  the operator forwards codes into **`#coupon` in our own guild** (King Bug Castle
+  `1537853106132484146`, channel `1553078533486682133`), and
+  `couponbot.discord_feed.fetch_new_messages` polls that channel with the existing bot token
+  (`GET /channels/{id}/messages?after=<snowflake>`, cursor in `meta.discord_cursor`). Read-only,
+  no user token, no ToS risk. The official notice site was checked too: the 2026-08/09 updates
+  carry no coupon keyword, so it is not a source.
 - Config lives in `/etc/kgc/coupon.env` (or `server/secrets/coupon.env`): `COUPON_DISCORD_CHANNEL`
-  (mirror channel), `COUPON_NOTIFY_CHANNEL` (default `1541439188686213221`, the CDN channel),
-  `COUPON_WEB_PASSWORD`, `COUPON_WEB_PORT` (8083). Missing/failed token degrades the reader to
+  (`1553078533486682133`), `COUPON_NOTIFY_CHANNEL` (default `1541439188686213221`, the CDN channel),
+  `COUPON_WEB_PORT` (8083). Missing/failed token degrades the reader to
   `discord_mode=manual` (codes can still be added by hand on the dashboard) and notifies once.
 
 ### Layout
@@ -1971,20 +1975,32 @@ for calibration; the success page's exact wording is still to be captured (first
 server/couponbot/{config,state,codes,coupon_client,discord_feed,worker,web}.py
 server/couponbot/static/{index.html,app.js}     # vanilla JS, no build step
 server/state/coupons.db                         # accounts / codes / redemptions / runs / meta
-systemd/kgc-coupon.service                      # uvicorn on 127.0.0.1:8083 (8082 is playerportal)
+systemd/kgc-coupon.service                      # uvicorn on 0.0.0.0:8083, PUBLIC (8082 is playerportal)
 systemd/kgc-coupon-worker.{service,timer}       # 10 min cycle, RandomizedDelaySec=60
 server/serve_coupon.sh                          # manual start/stop wrapper
-server/tests/test_couponbot{,_worker}.py        # 21 tests, network-free
+server/tests/test_couponbot{,_worker}.py        # 25 tests, network-free
 ```
 
 Cycle = pull codes → for every enabled account × open code with no `redemptions` row →
 `redeem()` (2 s throttle, stops early when `X-Rate-Limit-Remaining <= 5` or `Retry-After` seen).
 A `flock` on `server/state/coupon.lock` keeps the timer and the dashboard's "Chạy ngay" button
-from running concurrently. Dashboard = password (`COUPON_WEB_PASSWORD`, 5 sai/10 phút lockout,
-cookie = HMAC session) with add-account (ID probe), manual code entry, account × code matrix.
+from running concurrently.
+
+**Dashboard = public, no login** (operator decision 2026-09-25): anyone may `POST /api/accounts`
+(ID probe against the official site) or `POST /api/codes`, and an anonymous `GET /api/state`
+returns the **complete ID list, complete code list** and the account × code matrix. There is
+deliberately **no delete/disable route** (the routes do not exist - 404), so nothing on the page
+can be removed; the operator escape hatch is `state.set_account_enabled(uid, False)` from a shell
+on the box (the worker then skips it). Because the page is open, the three write routes are
+throttled per client IP (`web.WRITE_LIMITS`: 20 account probes / h, 20 codes / h, 5 runs / 10 min)
+- every probe and redeem is spent from OUR IP against the official site, and the site's rate limit
+is what an unauthenticated page would otherwise hand to a troll. All user text is HTML-escaped in
+`app.js` (`label` is free text and would otherwise be stored XSS on a public page).
 
 ### Open questions
 - Exact success-page wording (need one real code) and the real code format (does the extractor's
   `[A-Z0-9]{8,20}` + letter/digit rule cover it?).
 - Is `usage limit has been reached` global or per-account? Treated as per-pair one-shot either way.
-- Whether the official `📢` channel actually carries codes (depends on what the follow mirrors).
+- ~~Whether the official `📢` channel carries codes~~ - resolved: the official server has **no**
+  announcement channel (codes live in the text channel `#event`, which Follow cannot mirror), so
+  codes are forwarded by hand into our own `#coupon` and polled from there.
