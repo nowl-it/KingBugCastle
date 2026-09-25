@@ -1704,6 +1704,28 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
   Regression: `test_dimension_rift_difficulty_progresses_sequentially` in
   `server/tests/test_ranking.py`.
 
+### Operator: unlock "full rift phase" for an account (2026-09-25)
+
+"Full rift phase" = Dimension Rift (theme 2100) challenge levels `-5..16` all selectable, incl.
+Phase 16 (Seasonal Challenge Mode). No API exists to set it - patch the save in place, the same
+way `/player` serves it:
+
+1. Keys live in the save's `keyValues` list (`{key, value}` strings), served verbatim by `/player`:
+   - `DimensionRiftPlayCount` = `"5"` (must be `> 4`; `DimensionRiftStartPanel.get__canChallenge`
+     @ `0x347A5C8` unlocks the button with `PlayCount > 4` OR `MaxClearedChallenge >= 0`).
+   - `DimensionRiftMaxClearedChallenge` = `"16"` (`RogueLikeChallengePanel.Show` @ `0x347DED4`
+     activates levels through `maxCleared + 1`, capped at the max 16).
+2. Mirror into plain keys so server-side fallbacks/ranking stay consistent: `st["rogueLikeChallenge"]`
+   = 16, `st["rogueLikePlayedCount"]` = 5. (`r_roguelike_ranking` shows `rogueLikeChallenge`;
+   `r_dimension_rift_complete` reads the keyValues via `_key_value` with `rogueLikeChallenge` fallback.)
+3. Phase 16 also needs a live season: `/rogueLike/season-info` already returns `seasonEnabled:
+   True` with active date bounds (`now_iso(-10)`..`now_iso(30)`), so no season work is needed.
+4. Write with the server's own writer (`playerdb.load` → mutate → `playerdb.save`, never raw SQL
+   so derived rows stay consistent), after a `sqlite3` `src.backup()` snapshot.
+5. Verify end-to-end: `curl -H 'accesstoken: <tok>' http://127.0.0.1:8080/player` answers
+   `encryptedwithhex: true` (AES) - decrypt with `server.crypto.aes_decrypt` and check the two
+   `keyValues` entries. Applied to public `dev-0001` (KingBug, lvl 100) 2026-09-25.
+
 ## 23. API audit completion fixes (2026-09-06)
 
 - Run the contract tools from the repository root: `python3 server/cli/api_audit.py` and the
