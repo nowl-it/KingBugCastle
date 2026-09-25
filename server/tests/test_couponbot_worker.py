@@ -3,7 +3,9 @@
 Everything network-facing is monkeypatched: the cycle only ever touches the
 Discord/coupon endpoints on the box, never in CI.
 """
+import json
 import pathlib
+import re
 import sys
 import time
 
@@ -254,6 +256,45 @@ def test_run_endpoint_runs_once(client, monkeypatch):
             break
         time.sleep(0.05)
     assert len(calls) == 1
+
+
+_STATIC = pathlib.Path(__file__).resolve().parent.parent / "couponbot" / "static"
+
+
+def _i18n() -> dict:
+    """static/i18n.js is `const KGC_I18N = <JSON>;` on purpose so it parses here."""
+    txt = (_STATIC / "i18n.js").read_text(encoding="utf-8")
+    blob = txt[txt.index("KGC_I18N =") + len("KGC_I18N ="):]
+    return json.loads(blob[blob.index("{"):blob.rindex("}") + 1])
+
+
+def test_every_string_the_page_uses_is_translated_in_both_languages():
+    """A key missing from one language would silently fall back to the other."""
+    dicts = _i18n()
+    assert set(dicts) == {"vi", "en"}
+    html = (_STATIC / "index.html").read_text(encoding="utf-8")
+    js = (_STATIC / "app.js").read_text(encoding="utf-8")
+    used = set(re.findall(r'data-i18n(?:-html|-ph)?="([^"]+)"', html))
+    used |= set(re.findall(r'\bt\(\s*"([a-z0-9_]+)"', js))
+    assert used, "no keys matched - the i18n markers in the page rotted"
+    vi, en = set(dicts["vi"]), set(dicts["en"])
+    assert vi == en, f"the two languages drifted apart: {sorted(vi ^ en)}"
+    assert not (used - vi), f"untranslated key(s): {sorted(used - vi)}"
+
+
+def test_every_server_error_code_is_translated_too(client):
+    """The English page must not end up showing a Vietnamese API sentence."""
+    dicts = _i18n()
+    src = pathlib.Path(web.__file__).read_text(encoding="utf-8")
+    server_codes = set(re.findall(r'code="([a-z_]+)"', src))
+    assert server_codes, "no error codes found in web.py - marker rotted"
+    assert server_codes <= set(dicts["vi"]), sorted(server_codes - set(dicts["vi"]))
+    assert server_codes <= set(dicts["en"]), sorted(server_codes - set(dicts["en"]))
+    # ...and the field really is on the wire ("ABCD1" is too short, so the
+    # length check fires before the letters+digits one)
+    r = client.post("/api/codes", json={"code": "ABCD1"})
+    assert r.status_code == 400 and r.json()["code"] == "code_len"
+    assert r.json()["error"], "the Vietnamese human message stays for logs/curl"
 
 
 def test_first_request_on_a_db_that_does_not_exist_yet(tmp_path, monkeypatch):

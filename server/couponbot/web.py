@@ -14,6 +14,11 @@ skips it (`accounts(enabled_only=True)`).
 Because the probe on add-account costs one real request to the official coupon
 site, the write routes are throttled per client IP (WRITE_LIMITS).
 
+The UI is bilingual (VI/EN, `static/i18n.js`): errors carry a machine-readable
+`code` for the page to translate alongside the human `error`, which stays
+Vietnamese for logs and curl. `test_couponbot_worker.py` checks every `code=`
+in this file has both translations.
+
     .venv/bin/uvicorn couponbot.web:app --host 0.0.0.0 --port 8083
 """
 
@@ -157,15 +162,19 @@ def last_run():
 
 @app.post("/api/accounts")
 def add_account(body: AccountIn, request: Request):
+    # `code` is the machine key the dashboard translates (static/i18n.js);
+    # `error` stays the human Vietnamese sentence for logs and curl.
     if _throttled("account", request):
-        return _json(HTTPStatus.TOO_MANY_REQUESTS,
+        return _json(HTTPStatus.TOO_MANY_REQUESTS, code="throttled",
                      error="quá nhiều yêu cầu, thử lại sau ít phút")
     _ensure_db()
     uid = body.uid.strip()
     if not uid or len(uid) > 24 or any(c.isspace() for c in uid):
-        return _json(HTTPStatus.BAD_REQUEST, error="Player-ID không hợp lệ")
+        return _json(HTTPStatus.BAD_REQUEST, code="bad_uid",
+                     error="Player-ID không hợp lệ")
     if state.account(uid):
-        return _json(HTTPStatus.CONFLICT, error="Player-ID đã có trong danh sách")
+        return _json(HTTPStatus.CONFLICT, code="dup_uid",
+                     error="Player-ID đã có trong danh sách")
 
     # Probe: a code that does not exist - the site validates the ID first, so
     # "Player-ID does not exist" here means the ID is wrong (Phase 0, live).
@@ -175,10 +184,11 @@ def add_account(body: AccountIn, request: Request):
     finally:
         client.close()
     if out.result is Result.NO_PID:
-        return _json(HTTPStatus.UNPROCESSABLE_ENTITY,
+        return _json(HTTPStatus.UNPROCESSABLE_ENTITY, code="no_pid",
                      error="Player-ID không tồn tại (kiểm tra lại trong game: Settings)")
     if out.result is Result.ERROR:
-        return _json(HTTPStatus.BAD_GATEWAY, error=f"không kiểm tra được ID: {out.message}")
+        return _json(HTTPStatus.BAD_GATEWAY, code="probe_failed",
+                     error=f"không kiểm tra được ID: {out.message}", detail=out.message)
 
     state.add_account(uid, body.label.strip()[:40])
     return _json(HTTPStatus.OK, ok=True, uid=uid, probe=out.result.value)
@@ -187,14 +197,16 @@ def add_account(body: AccountIn, request: Request):
 @app.post("/api/codes")
 def add_code(body: CodeIn, request: Request):
     if _throttled("code", request):
-        return _json(HTTPStatus.TOO_MANY_REQUESTS,
+        return _json(HTTPStatus.TOO_MANY_REQUESTS, code="throttled",
                      error="quá nhiều yêu cầu, thử lại sau ít phút")
     _ensure_db()
     code = body.code.strip().upper()
     if not (8 <= len(code) <= 24):
-        return _json(HTTPStatus.BAD_REQUEST, error="code phải 8-24 ký tự")
+        return _json(HTTPStatus.BAD_REQUEST, code="code_len",
+                     error="code phải 8-24 ký tự")
     if not any(c.isdigit() for c in code) or not any(c.isalpha() for c in code):
-        return _json(HTTPStatus.BAD_REQUEST, error="code phải có cả chữ và số")
+        return _json(HTTPStatus.BAD_REQUEST, code="code_charset",
+                     error="code phải có cả chữ và số")
     new = state.add_code(code, "manual")
     return _json(HTTPStatus.OK, ok=True, code=code, new=new)
 
@@ -202,10 +214,11 @@ def add_code(body: CodeIn, request: Request):
 @app.post("/api/run")
 def run_now(request: Request):
     if _throttled("run", request):
-        return _json(HTTPStatus.TOO_MANY_REQUESTS,
+        return _json(HTTPStatus.TOO_MANY_REQUESTS, code="throttled",
                      error="quá nhiều yêu cầu, thử lại sau ít phút")
     if _run_flag["running"]:
-        return _json(HTTPStatus.CONFLICT, error="đang có một lượt chạy")
+        return _json(HTTPStatus.CONFLICT, code="busy",
+                     error="đang có một lượt chạy")
     _run_flag["running"] = True
 
     def _go():

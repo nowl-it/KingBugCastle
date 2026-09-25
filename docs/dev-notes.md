@@ -1973,12 +1973,12 @@ for calibration; the success page's exact wording is still to be captured (first
 
 ```
 server/couponbot/{config,state,codes,coupon_client,discord_feed,worker,web}.py
-server/couponbot/static/{index.html,app.js}     # vanilla JS, no build step
+server/couponbot/static/{index.html,app.js}     # vanilla JS + i18n.js, no build step
 server/state/coupons.db                         # accounts / codes / redemptions / runs / meta
 systemd/kgc-coupon.service                      # uvicorn on 0.0.0.0:8083, PUBLIC (8082 is playerportal)
 systemd/kgc-coupon-worker.{service,timer}       # 10 min cycle, RandomizedDelaySec=60
 server/serve_coupon.sh                          # manual start/stop wrapper
-server/tests/test_couponbot{,_worker}.py        # 25 tests, network-free
+server/tests/test_couponbot{,_worker}.py        # 27 tests, network-free
 ```
 
 Cycle = pull codes → for every enabled account × open code with no `redemptions` row →
@@ -1996,6 +1996,18 @@ throttled per client IP (`web.WRITE_LIMITS`: 20 account probes / h, 20 codes / h
 - every probe and redeem is spent from OUR IP against the official site, and the site's rate limit
 is what an unauthenticated page would otherwise hand to a troll. All user text is HTML-escaped in
 `app.js` (`label` is free text and would otherwise be stored XSS on a public page).
+
+**Bilingual (song ngữ, 2026-09-26)**: every string lives in `static/i18n.js` as
+`const KGC_I18N = {vi, en}` written as **JSON inside the const** so the test suite can parse it.
+`index.html` marks its text with `data-i18n` / `data-i18n-html` / `data-i18n-ph`, `app.js` renders
+dynamic text through `t(key, vars)` with `{name}` placeholders (user data is `esc()`aped before it
+is substituted), and the header button toggles VI/EN - the language follows the browser on first
+visit, then the choice is stored in `localStorage.coupon_lang`. API errors carry a machine
+`code` (`web.py`) plus the human Vietnamese `error`; the page translates the `code`, so the English
+page never shows a Vietnamese sentence. Two regressions keep it honest:
+`test_every_string_the_page_uses_is_translated_in_both_languages` (every `data-i18n`/`t("...")`
+key must exist in **both** dicts) and `test_every_server_error_code_is_translated_too` (scans
+`web.py` for `code="..."`).
 
 ### Open questions
 - Exact success-page wording (need one real code) and the real code format (does the extractor's

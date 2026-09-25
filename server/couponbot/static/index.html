@@ -55,59 +55,61 @@
 <body>
 <header>
   <h1>🎟️ KGC Coupon Bot</h1>
-  <span class="chip">Nguồn Discord: <b id="mode">–</b></span>
-  <span class="chip">Lượt chạy: <b id="lastrun">–</b></span>
+  <span class="chip"><span data-i18n="chip_discord">Nguồn Discord:</span> <b id="mode">–</b></span>
+  <span class="chip"><span data-i18n="chip_lastrun">Lượt chạy:</span> <b id="lastrun">–</b></span>
   <span class="chip">Rate limit: <b id="rate">–</b></span>
   <span class="spacer"></span>
-  <button class="primary" id="run">Chạy ngay</button>
+  <button id="lang" title="Switch language / Đổi ngôn ngữ">EN</button>
+  <button class="primary" id="run" data-i18n="run_btn">Chạy ngay</button>
 </header>
 
 <main>
-  <div class="notice">
+  <div class="notice" data-i18n-html="notice_html">
     Trang <b>công khai, không cần đăng nhập</b>: bất kỳ ai cũng có thể thêm Player-ID của mình
     để nhận code. Danh sách <b>toàn bộ ID</b> và <b>toàn bộ code</b> hiển thị cho mọi khách,
     và <b>không thể xóa</b> khỏi trang này.
   </div>
 
   <div class="card">
-    <h2>Thêm Player-ID</h2>
+    <h2 data-i18n="add_acct_h">Thêm Player-ID</h2>
     <form class="row" id="acctForm">
-      <input id="uid" placeholder="Player-ID (Settings menu, vd S6R83U)" maxlength="24" required>
-      <input id="label" placeholder="Ghi chú (tùy chọn)" maxlength="40">
-      <button class="primary" type="submit">Thêm &amp; kiểm tra ID</button>
+      <input id="uid" data-i18n-ph="uid_ph" placeholder="Player-ID (Settings menu, vd S6R83U)" maxlength="24" required>
+      <input id="label" data-i18n-ph="label_ph" placeholder="Ghi chú (tùy chọn)" maxlength="40">
+      <button class="primary" type="submit" data-i18n="add_acct_btn">Thêm &amp; kiểm tra ID</button>
     </form>
     <div id="acctMsg" class="msg"></div>
   </div>
 
   <div class="card">
-    <h2>Player-ID đang ghi nhận (<span id="accCount">0</span>)</h2>
-    <div id="acclist" class="muted">Đang tải…</div>
+    <h2><span data-i18n="acclist_h">Player-ID đang ghi nhận</span> (<span id="accCount">0</span>)</h2>
+    <div id="acclist" class="muted" data-i18n="loading">Đang tải…</div>
   </div>
 
   <div class="card">
-    <h2>Code đang lưu (<span id="codeCount">0</span>)</h2>
-    <div id="codelist" class="muted">Đang tải…</div>
+    <h2><span data-i18n="codelist_h">Code đang lưu</span> (<span id="codeCount">0</span>)</h2>
+    <div id="codelist" class="muted" data-i18n="loading">Đang tải…</div>
   </div>
 
   <div class="card">
-    <h2>Ma trận Account × Code</h2>
-    <div id="grid" class="muted">Đang tải…</div>
+    <h2 data-i18n="matrix_h">Ma trận Account × Code</h2>
+    <div id="grid" class="muted" data-i18n="loading">Đang tải…</div>
   </div>
 
   <div class="card">
-    <h2>Thêm code thủ công</h2>
+    <h2 data-i18n="addcode_h">Thêm code thủ công</h2>
     <form class="row" id="codeForm">
       <input id="code" placeholder="COUPON CODE" maxlength="24" style="text-transform:uppercase">
-      <button type="submit">Thêm</button>
+      <button type="submit" data-i18n="addcode_btn">Thêm</button>
     </form>
     <div id="codeMsg" class="msg"></div>
-    <div class="muted" style="margin-top:8px">
+    <div class="muted" style="margin-top:8px" data-i18n-html="code_hint_html">
       Code tự động lấy từ Discord (channel mirror trong server của bạn).
       Dùng ô trên khi nguồn Discord đang tạm dừng.
     </div>
   </div>
 </main>
 
+<script src="/static/i18n.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>
