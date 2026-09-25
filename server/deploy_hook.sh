@@ -45,6 +45,28 @@ PY_BIN="python3"
 [ -n "$VENV_DIR" ] && [ -x "$VENV_DIR/bin/python" ] && PY_BIN="$VENV_DIR/bin/python"
 "$PY_BIN" cli/preflight.py
 
+echo "[3b/4] Refreshing repo-versioned systemd units..."
+# systemctl reads only /etc/systemd/system, so a unit committed under systemd/
+# otherwise never lands - the coupon dashboard's --host stayed 127.0.0.1 for a
+# deploy whose whole point was changing exactly that. Non-fatal where sudo is
+# absent (the deploy still reloads the app itself).
+if sudo -n true 2>/dev/null; then
+  UNITS_REFRESHED=0
+  for u in kgc-coupon.service kgc-coupon-worker.service kgc-coupon-worker.timer; do
+    if [ -f "systemd/$u" ] && ! sudo -n cmp -s "systemd/$u" "/etc/systemd/system/$u" 2>/dev/null; then
+      echo "    refreshing /etc/systemd/system/$u"
+      sudo -n cp "systemd/$u" "/etc/systemd/system/$u" && UNITS_REFRESHED=1 \
+        || echo "    (failed to refresh $u)"
+    fi
+  done
+  if [ "$UNITS_REFRESHED" = 1 ]; then
+    sudo -n systemctl daemon-reload || true
+    sudo -n systemctl enable kgc-coupon.service kgc-coupon-worker.timer 2>/dev/null || true
+  fi
+else
+  echo "    (no passwordless sudo - skipped)"
+fi
+
 echo "[4/4] Triggering Zero-Downtime Graceful Reload..."
 ./serve_public.sh reload
 
