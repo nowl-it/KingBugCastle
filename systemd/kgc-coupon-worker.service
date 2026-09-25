@@ -1,0 +1,17 @@
+[Unit]
+Description=KGC coupon auto-redeem cycle (read Discord -> redeem for every account)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/home/ubuntu/kgc/server
+EnvironmentFile=-/etc/kgc/coupon.env
+ExecStart=/home/ubuntu/kgc/.venv/bin/python -m couponbot.worker --once
+# Non-zero exit (transport errors) shows up as a failed unit in `systemctl
+# status`; the cycle itself already reports the details to Discord.
+TimeoutStartSec=20min
+
+[Install]
+WantedBy=multi-user.target

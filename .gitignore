@@ -117,6 +117,12 @@ server/state/.glogin_auth_*
 # Live player save (runtime state; WAL/shm/lock already ignored above)
 server/state/players.db
 server/state/pre-sqlite-backup/
+# Coupon auto-redeem bot: its own SQLite store, unrecognised raw site responses
+# (those pages contain Player-IDs), and the per-cycle flock.
+server/state/coupons.db
+server/state/coupons.db-*
+server/state/coupon_raw/
+server/state/coupon.lock*
 # ...and the automatic rotations of it. players.db itself was ignored but this
 # directory was not, so KGC_BACKUP_HOURS quietly staged real player saves for
 # commit - names, castle names, currency, the lot.

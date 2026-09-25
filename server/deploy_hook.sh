@@ -51,6 +51,9 @@ echo "[4/4] Triggering Zero-Downtime Graceful Reload..."
 echo "[4b/4] Restarting dashboard (it has no reload path)..."
 sudo -n systemctl restart kgc-dashboard.service 2>/dev/null || echo "    (dashboard restart skipped - not a systemd service here)"
 
+echo "[4c/4] Restarting coupon bot dashboard (it has no reload path)..."
+sudo -n systemctl restart kgc-coupon.service 2>/dev/null || echo "    (coupon dashboard restart skipped - not installed here)"
+
 echo "[5/5] Checking server health on port 8080..."
 sleep 2
 COMMIT_MSG=$(git log -1 --format='%s' HEAD)

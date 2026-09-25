@@ -1905,3 +1905,86 @@ they leave the sniper spot for the first time".
   modded/mis-scaled sheet. Ground truth is the table above.
 - If a player asks "what is the sniper spot item": it is **Artifact 14020-14024 Dwarven Scope**,
   dropped/upgraded through ShopSpecial (FromType), piece 14020 → 14024 KingGod.
+
+## 27. Coupon auto-redeem bot (2026-09-25)
+
+Auto-redeem codes from the official Discord into every registered Player-ID, via the public
+coupon site. Plan: `plans/coupon-autoredeem/` (agent-local, gitignored). Code: `server/couponbot/`.
+
+### The official site (all verified live 2026-09-25)
+
+`POST https://kgc-coupon.awesomepiece.com/submitCoupon`, body
+`uid=<Player-ID>&code=<CODE>&lang=en_us` (`application/x-www-form-urlencoded`, no cookies, no
+captcha) → **HTML only**, no JSON variant (tested `Accept: application/json`). Result = the
+`<h1>` + first `<p>` of the page. Header `X-Rate-Limit-Remaining` starts at 299.
+
+Response vocabulary (English pinned by `lang=en_us`; h1 is `Success!` / `Failed to enter coupon`):
+
+| `<p>` text | Result enum | Meaning |
+|---|---|---|
+| `Rewards have been sent to your inbox. Please log in to check.` | `ok` | redeemed |
+| `This Player-ID does not exist. Please check and try again.` | `no_pid` | uid wrong |
+| `This coupon does not exist.` | `no_coupon` | **code** unknown (global → stop trying it on other accounts) |
+| `This coupon number is invalid or has already been used.` | `used_or_invalid` | ambiguous: wrong code *or* this uid already used it |
+| `This coupon has expired.` | `expired` | global |
+| `The coupon cannot be entered currently. Please try again later.` | `not_available` | transient |
+| `The usage limit has been reached.` | `limit_reached` | ambiguous: global cap or per-account |
+
+The h1/body strings match the game's `KG_Coupon_*` keys in `Strings_EN_US.xml`.
+
+**Validation order is uid first, then code.** Proven by two live probes:
+`uid=TESTUID000,code=ABCDE12345` → `no_pid`; `uid=S6R83U,code=ZZZZZZZZZZ9` → `no_coupon`.
+That gives a **Player-ID probe** (dashboard "add account" uses exactly this) and it means
+`no_coupon`/`expired` are global facts worth short-circuiting, while `used_or_invalid` must be
+treated as one-shot per pair - **each `(uid, code)` is attempted exactly once**
+(`redemptions` PK, first result wins). Player-ID format seen: 6-char alphanumeric (`S6R83U`).
+
+Unrecognised pages are saved under `server/state/coupon_raw/` (gitignored - they contain UIDs)
+for calibration; the success page's exact wording is still to be captured (first real code).
+
+### Discord: the bot token cannot read the official server
+
+- Official server: **KingGodCastle**, guild `766554437275615242`, invite `discord.gg/5d2H4sfHcA`
+  (from the Google Play listing's "Official Forum" link). Features include `NEWS`/`COMMUNITY`.
+- Our only token on the box is `server/secrets/discord_bot_token` = **bot** token
+  (`King Bug Castle Bot`, user id `1538471329588842556`), member only of our own guild
+  **King Bug Castle** `1537853106132484146`. It is *not* a user token - a selfbot plan needs a
+  user token and the user declined to supply one after the finding.
+- Live checks with that token against the official guild: `GET /guilds/…` → **404 Unknown Guild**,
+  `GET /guilds/…/channels` → **403 Missing Access**, `GET /channels/{id}/messages` → **403
+  Missing Access** (`code 50001`). A *discoverable* guild (tried `Castle` `515820161694171141`,
+  a different game) does leak its channel list via `GET /guilds/{id}/channels` while the bot is
+  not a member - but message reads stay 403, so that leak is useless on its own.
+- **Chosen approach**: the operator uses Discord's client feature *Follow Announcement Channel*
+  on an official `📢 Announcements` channel, mirroring it into our own guild (the CDN monitor's
+  webhook then posts there). `couponbot.discord_feed.fetch_new_messages` polls that channel with
+  the existing bot token (`GET /channels/{id}/messages?after=<snowflake>`, cursor in
+  `meta.discord_cursor`). Read-only, no user token, no ToS risk.
+- Config lives in `/etc/kgc/coupon.env` (or `server/secrets/coupon.env`): `COUPON_DISCORD_CHANNEL`
+  (mirror channel), `COUPON_NOTIFY_CHANNEL` (default `1541439188686213221`, the CDN channel),
+  `COUPON_WEB_PASSWORD`, `COUPON_WEB_PORT` (8083). Missing/failed token degrades the reader to
+  `discord_mode=manual` (codes can still be added by hand on the dashboard) and notifies once.
+
+### Layout
+
+```
+server/couponbot/{config,state,codes,coupon_client,discord_feed,worker,web}.py
+server/couponbot/static/{index.html,app.js}     # vanilla JS, no build step
+server/state/coupons.db                         # accounts / codes / redemptions / runs / meta
+systemd/kgc-coupon.service                      # uvicorn on 127.0.0.1:8083 (8082 is playerportal)
+systemd/kgc-coupon-worker.{service,timer}       # 10 min cycle, RandomizedDelaySec=60
+server/serve_coupon.sh                          # manual start/stop wrapper
+server/tests/test_couponbot{,_worker}.py        # 21 tests, network-free
+```
+
+Cycle = pull codes → for every enabled account × open code with no `redemptions` row →
+`redeem()` (2 s throttle, stops early when `X-Rate-Limit-Remaining <= 5` or `Retry-After` seen).
+A `flock` on `server/state/coupon.lock` keeps the timer and the dashboard's "Chạy ngay" button
+from running concurrently. Dashboard = password (`COUPON_WEB_PASSWORD`, 5 sai/10 phút lockout,
+cookie = HMAC session) with add-account (ID probe), manual code entry, account × code matrix.
+
+### Open questions
+- Exact success-page wording (need one real code) and the real code format (does the extractor's
+  `[A-Z0-9]{8,20}` + letter/digit rule cover it?).
+- Is `usage limit has been reached` global or per-account? Treated as per-pair one-shot either way.
+- Whether the official `📢` channel actually carries codes (depends on what the follow mirrors).

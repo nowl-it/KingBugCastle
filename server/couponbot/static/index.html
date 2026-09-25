@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KGC Coupon Bot</title>
+<style>
+  :root { --bg:#0f1216; --card:#171b21; --line:#262c35; --fg:#e6e9ee; --dim:#8b93a1;
+          --ok:#3fb950; --wait:#d29922; --bad:#f85149; --acc:#4493f8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  header { display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+           padding:14px 18px; border-bottom:1px solid var(--line); background:var(--card); }
+  header h1 { font-size:17px; margin:0 12px 0 0; }
+  .chip { font-size:12px; padding:3px 9px; border:1px solid var(--line);
+          border-radius:999px; color:var(--dim); background:#12161c; }
+  .chip b { color:var(--fg); font-weight:600; }
+  .spacer { flex:1; }
+  main { padding:18px; max-width:1180px; margin:0 auto; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:16px; margin-bottom:16px; }
+  .card h2 { font-size:14px; margin:0 0 12px; color:var(--dim);
+             text-transform:uppercase; letter-spacing:.05em; }
+  form.row { display:flex; flex-wrap:wrap; gap:8px; }
+  input,button { font:inherit; border-radius:8px; border:1px solid var(--line);
+                 background:#12161c; color:var(--fg); padding:9px 11px; }
+  input { min-width:180px; flex:1; }
+  button { cursor:pointer; background:#1f2530; white-space:nowrap; }
+  button:hover { border-color:var(--acc); }
+  button.primary { background:var(--acc); border-color:var(--acc); color:#08131f; font-weight:600; }
+  button:disabled { opacity:.5; cursor:default; }
+  table { border-collapse:collapse; width:100%; font-size:14px; }
+  th,td { border-bottom:1px solid var(--line); padding:8px 10px; text-align:center; }
+  th:first-child,td:first-child { text-align:left; }
+  th { color:var(--dim); font-weight:600; font-size:12px; text-transform:uppercase; }
+  td.code { font-family:ui-monospace,Menlo,monospace; font-size:13px; }
+  .st { font-size:16px; }
+  .st[data-s=ok] { color:var(--ok); }
+  .st[data-s=wait] { color:var(--wait); }
+  .st[data-s=bad] { color:var(--bad); }
+  .muted { color:var(--dim); font-size:13px; }
+  #msg { font-size:13px; margin-top:8px; min-height:18px; }
+  #msg.err { color:var(--bad); }
+  #msg.ok { color:var(--ok); }
+  .overlay { position:fixed; inset:0; background:rgba(6,8,11,.86); display:flex;
+             align-items:center; justify-content:center; }
+  .overlay .card { width:min(360px,92vw); margin:0; }
+  .pill { font-size:11px; padding:2px 7px; border-radius:6px; border:1px solid var(--line); }
+  .pill.on { color:var(--ok); }
+  .pill.off { color:var(--bad); }
+  .link { background:none; border:none; color:var(--acc); padding:0; font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎟️ KGC Coupon Bot</h1>
+  <span class="chip">Nguồn Discord: <b id="mode">–</b></span>
+  <span class="chip">Lượt chạy: <b id="lastrun">–</b></span>
+  <span class="chip">Rate limit: <b id="rate">–</b></span>
+  <span class="spacer"></span>
+  <button class="primary" id="run">Chạy ngay</button>
+  <button id="logout" hidden>Đăng xuất</button>
+</header>
+
+<main>
+  <div class="card">
+    <h2>Thêm Player-ID</h2>
+    <form class="row" id="acctForm">
+      <input id="uid" placeholder="Player-ID (Settings menu, vd S6R83U)" maxlength="24" required>
+      <input id="label" placeholder="Ghi chú (tùy chọn)" maxlength="40">
+      <button class="primary" type="submit">Thêm &amp; kiểm tra ID</button>
+    </form>
+    <div id="acctMsg" class="msg"></div>
+  </div>
+
+  <div class="card">
+    <h2>Ma trận Account × Code</h2>
+    <div id="grid" class="muted">Đang tải…</div>
+  </div>
+
+  <div class="card">
+    <h2>Thêm code thủ công</h2>
+    <form class="row" id="codeForm">
+      <input id="code" placeholder="COUPON CODE" maxlength="24" style="text-transform:uppercase">
+      <button type="submit">Thêm</button>
+    </form>
+    <div id="codeMsg" class="msg"></div>
+    <div class="muted" style="margin-top:8px">
+      Code tự động lấy từ Discord (channel mirror trong server của bạn).
+      Dùng ô trên khi nguồn Discord đang tạm dừng.
+    </div>
+  </div>
+</main>
+
+<div class="overlay" id="login" hidden>
+  <div class="card">
+    <h2>Đăng nhập</h2>
+    <form class="row" id="loginForm">
+      <input id="pw" type="password" placeholder="Mật khẩu" autocomplete="current-password">
+      <button class="primary" type="submit">Vào</button>
+    </form>
+    <div id="loginMsg" class="msg"></div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
