@@ -1684,6 +1684,43 @@ is unrelated to the tutorial's local reveal flow. Regression: `server/tests/test
 - `StoryStages.xml` equips `50002` on story unit `10010210` (Story Mel) in stages
   `410101053` and `410101054`; this is only a scripted NPC loadout, not proof of Treasure
   ownership. Do not confuse it with `Items.xml` item `50002` (Mel's Injury).
+- **Text restored 2026-09-26** (`local_mods` mod 8): 20 keys replayed into
+  `Strings_EN_US`/`Strings_VI` after every refresh - `TreasureName/SubName/Desc`,
+  `TreasureSkillName`, `BuffDataName/Desc_3500021..25`, `TreasureSkillDesc_3500020..23`,
+  `SpecialShop_TreasurePickUp50002`. All values are the operator-supplied leak block
+  byte-exact (verified: 20/20 EN keys match; VI matches the official VI snapshot) - the
+  subname/desc keep the shipped placeholder wording ("Temporary Subname" / the
+  "Planned concept: a stone? artifact? ..." note), nothing is rewritten in-game style.
+  `_apply_cororbis` therefore **overwrites** a differing value instead of only inserting.
+  `SpecialPackage_1690..1692` are NOT written (operator dropped them: they are live keys
+  renamed by the 2026-09-10 republish, restored to `Legacy Pickup Summoning Stone Package
+  1/2` / `Meirna Package`); `AdsSummonRestrictionAlert` already equals the supplied text.
+- **Rows added 2026-09-26** (`local_mods` mod 9): `<Treasure ID="50002">` + `BuffData
+  3500020..3500025`, so the text actually renders. Two things about them are deliberate
+  guesses, both flagged in the code:
+  - **The buff numbers are TEST VALUES** - the official `350002x` table never leaked. What is
+    *not* a guess: every `DescParams`/`TotalDescParams` carries exactly as many `<Const>` as the
+    leaked string has `{N}` placeholders, in index order (verified: `3/6/7/8` skill params for
+    rows `020..023`, `0/3/1/1/1/3` buff params for `020..025`).
+  - **Two desc/effect gaps**: "until using a skill 3 times" is implemented as a permanent
+    `BattleStart` buff (no generic 3-cast counter exists), and `BuffDataDesc_3500023`'s
+    splash-on-enhanced-skill became a mana refund on skill cast (there is no
+    `Treasure50002Action` and no skill `9500020`). Effects follow the `30038` shape:
+    add one `<BuffOptions>` per level, then override in place for the II tiers
+    (`option counts = 2,3,4,5,5,5`).
+  - Art: no override tags - the row uses the header's own defaults
+    (`TreasureIcon_50002` / `TreasureIllust_50002` / `TreasureCardIllust_50002` /
+    `TreasureSkillIcon_50002`), which resolve to the client's placeholder (operator
+    request: never borrow another treasure's art). `MinVersion` is `170000` so the row
+    passes `CONTENT_GATE` on any deployed client.
+  - Ownership is **not** automatic: `player_routes` only seeds `st["treasures"]` when the key
+    is absent. Grant with `POST /admin/api/treasures/give-all` (or the `Treasure` reward type
+    in `POST /admin/sendmail` for a non-destructive single grant).
+- **30044 is NOT Cor Orbis** (checked 2026-09-26): `30044` is the next regular-treasure slot
+  (would be buff series `330044x`, none exists in any snapshot) with placeholder black art only,
+  registered in Addressables since v172.1.00. Cor Orbis is `50002` (limited series, `350002x`).
+  The `30044` IDs elsewhere are unrelated namespaces: `GachaPool 230044` and `ShopItem 30044`
+  ("왕의 소환서", EventShop S15).
 
 ## 20. Player Dashboard branding and locale (2026-09-03)
 
@@ -2056,3 +2093,40 @@ one failure notification per run - the cron was every 15 minutes):
 `git revert <the delete commit>` (restores the page + data + both links). If the 403 persists,
 pass the `version` workflow_dispatch input (the runner derives it from `api/version.py`, and the
 403 means the ranking API is ahead of the bundled client).
+
+## 29. Hand-granting a custom accessory set (2026-09-27)
+
+Recipe used to grant `p-2787e1889bcd` a "Barbarian" set with 9999% sub-stats (also the general
+shape for any future admin grant - no endpoint exists, so it goes through `playerdb` like §22):
+
+- **Slot layout is 5 per hero, not 4**: the client pads `targetIds` to 5
+  (`r_accessory_equip`'s `is_padded = len(target_ids) >= 5`) and the observed pattern per unit is
+  `type 1, 2, 3, 3, 4` = Necklace, Bracelet, **Ring x2**, Earring. Only 4 `<AccessoryType>` rows
+  exist in `AccessoryConstants.xml` (Ring just occupies two slots).
+- **Set = the `synergy` int**, not a name: `AccessorySynergyName_5 = Barbarian` (0 Steel, 1 Fear,
+  2 Sharpness, 3 Ocean, 4 Wind, 5 Barbarian, 6 Adamant, ...); `AccessorySynergyBuff` ids are
+  `10000 + synergy*10`, e.g. Barbarian's 2-piece is `AccessorySynergyDesc_10050 = +% ATK`.
+- **Stat keys vs display labels** (Strings_EN_US): `MAtk` = "Spell Power", `SpecialDamageMul` =
+  "Special Damage" - so the accessory keys are `MAtkPer` (Spell Power %) and
+  `BaseSpecialDamageMul` (Special Damage %). Both `ValuePerScore = 1.0`, so `subStatScores` = raw
+  value and any huge value lands on the top grade (`AccessorySubStatScoreRange` tops out at 26.5).
+- **Sub-stat pool constraints are generation-time only.** `MainStatInfo.SubStats` and
+  `roll_accessory`'s sampling decide what a *rolled* item may get; nothing validates what is in
+  the save. The one hard rule is `data.mainStat` must be a legal main for the type or the client
+  renders an empty name (Necklace `AtkPer|MAtkPer`, Bracelet `BaseDef|BaseMDef`, Ring
+  `HpPer|AttackSpeedPer|BaseDefPen|BaseDefDen`, Earring `BaseCriticalDamageMul|
+  BaseMCriticalDamageMul|BaseDef|BaseMDef|BaseSpecialDamageMul`).
+- **Shape**: copy sibling keys from an existing item, then set `data.subStats` (unique keys),
+  parallel `subStats` + `subStatScores` (= value / `VALUE_PER_SCORE`), `synergy`, `rarity: 3`,
+  `level: 20`, `unitId: 0`, `slot: 0`. Ids are per-save; the next mint is `max(id)+1`
+  (`rewards._next_accessory_id`), so appending at max+1 never collides.
+- **Verify with the real route**, not just a re-read: `routes.accessory.r_accessory_inventory({}, st)`
+  runs `ensure_accessory_state` (which merges duplicate sub-stat keys and recomputes the parallel
+  lists) - `changed` must be `False` for hand-written items. The GET `/accessory` wiring is
+  `routes/direct_routes.py` (server.py's `"/accessory"` POST entry is the *equip* handler).
+- Backup first via `playerdb._backup('<tag>')` (sqlite `.backup` API), write with
+  `playerdb.load/save`.
+
+Grant applied: ids 68-72, synergy 5, mains `MAtkPer / BaseDef-ish / HpPer / AttackSpeedPer /
+BaseSpecialDamageMul`, both sub-stats `BaseSpecialDamageMul` 9999 + `MAtkPer` 9999.
+Backup `players-20260927-152403-barb9999.db`.
