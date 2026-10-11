@@ -422,6 +422,26 @@ Fixed-period loops with no exception = client timer, not retry.
     - Removed stale placeholder keys `ItemDesc_10030..32` (+5/+10/+20 Silver).
     - Added new keys across all locales: `BlessedTreasure` ("Blessed Legacy" / "축복받은 유산"), `PlayReward_Semi1`/`PlayReward_Semi2` ("First/Second Half Reward"), `PlayRewardPlayCountFormat` ("({0}/{1}) Plays"), `UnitGachaPickupCountFormat`.
     - Rich-text padding cleanup (`<size=2> </size>`) across Asian locales (JA, ZH_CH, ZH_TW).
+- **2026-10-06 CDN folder `2026_10_06_xGrY0WbLgR` (v174.0.00) - treasure audit 2026-10-08:**
+  pristine extracted to `xml_history/2026_10_06_xGrY0WbLgR` (150 files); served
+  `response_config.json` still advertises `2026_09_22` (refresh not yet run).
+  **No new treasure.** `Treasures.xml` + `TreasureBuffDatas.xml` are byte-identical to
+  `2026_09_24b` (still 62 rows: `30000..30043`, `50000`, `50001`; no `330044x` buffs), and the
+  set of `Treasure*_[id]` keys across all 13 `Strings_*.xml` is unchanged (434 -> 434, zero
+  added/removed; no `TreasureName_30044` anywhere). No `<Reward Type="Treasure">` cites an id
+  above `30043`. Treasure-adjacent deltas: new GachaPools `230057`/`231057` = **double pickup of
+  existing `30002` (Sacramentum) + `30009` (Rain of Fire)** (`IncompatibleWithPermanentPool`
+  false); `InventoryItemDesc_SelectableTreasureBox` added to item/box `5603` (box contents
+  unchanged: 30002/30007/30015/30017/30022/30030); `BlessedTreasure` string dropped; ShopItems
+  `590/591/592` moved into the new `ShopItems_deprecated.xml`; `EarlyAccessModeInfos` early-access
+  test loadouts cleared (incl. test treasure `30017`); 14 new `RewardBoxInventoryData` rows
+  (47->61), none treasure-typed. New files overall: `ShopItems_deprecated.xml`,
+  `SingleArenaSettings.xml`, `Videos.xml`.
+  **Unity (v174 export `unity/kgc-rebuild`)**: treasure art ids cover `30000..30044` +
+  `50000/50001`, still no `50002` art. `30044` has the full 18-file UI set but **deliberate `!`
+  placeholder pixels** (illust mean RGB 6/255; icon = black hexagon + white exclamation, verified
+  by crop), no `Fx_Treasure_30044`, no buffs/text - it is the next regular slot, already
+  registered since v172.1.00 (see the Cor Orbis section), not new in v174.
 
 ### Reference-derived Frieren idle sheet (2026-08-24)
 
@@ -1614,6 +1634,327 @@ AssetRipper bug (issue #740, Skul) — **not** a reason to drop the 64
   `.cache` has been cleared, recreate it with `mkdir -p ~/.cache/unityhub/tmp`
   before retrying; otherwise Hub reports "Android NDK Install failed" with
   `ENOENT` from `mkdtemp`, even after checksum validation and extraction passed.
+### Official v174.0.00 XAPK → AssetRipper Unity project (2026-10-08)
+
+Same pipeline as v173.1.00 above; only the deltas are listed. Source:
+`./kgc-cli download -v 174.0.00 -o apk/` → `apk/com.awesomepiece.castle@174.0.00.xapk`
+(1.08 GB; XAPK holds `base_assets.apk` 950 MB + `config.arm64_v8a.apk` 153 MB).
+
+- **Packer is `libxpoulled.so`** (115 MB, `SONAME = libappsign4a.so`) - filename
+  rotates again, never match on it. `patchers/unpack_neo.py` needed no change
+  (still TARA v4): `unpack_neo.py libxpoulled.so libil2cpp_v17400.so` → 115,323,624 bytes.
+- **The `arcli` wrapper now lives at `tools/arcli/`** - it had been in
+  `/tmp/opencode/arcli` and was wiped, so this cycle it had to be rewritten from
+  scratch (`tools/` is gitignored, so it survives on disk, not in git). It is 20
+  lines over the patched AssetRipper clone; build `dotnet build -c Release`, run
+  under `ulimit -n 16384`, usage `arcli <input> <output> [level]` (level matters -
+  see the rebuild-project section below). The `dump.cs` set-diff used below is
+  `tools/dump_diff.py`.
+- **Il2CppDumper aborts before writing anything when stdin/stdout is redirected**
+  ("Press any key to exit..." → `InvalidOperationException` → core, EXIT=134, and
+  *no* `dump.cs` on disk even though every stage printed `Done!`). Wrap it in a
+  pty: `script -qec "dotnet Il2CppDumper.dll <lib> <metadata> <outdir>" /dev/null`.
+  Output for this build: `il2cpp/v174.0.00/` (`dump.cs` 44 MB, `script.json` 122 MB,
+  `il2cpp.h` 122 MB, `stringliteral.json`, `DummyDll/`).
+- **Input staging** unchanged: `assets/bin/Data/*` (1,625 files, 0.47 GB) + all
+  `assets/aa/Android/*.bundle` (81) + `lib/arm64-v8a/libunity.so` + decoded
+  `libil2cpp.so` → `/tmp/opencode/kgc_v174_input/` (1.1 GB). Temp apks and the
+  staging dir are disposable; the XAPK in `apk/` is the canonical source.
+- **Output**: `unity/king-god-castle-v174.0.00-ExportedProject/ExportedProject/`
+  - 187,360 files, 2.6 GB, EXIT=0. 6 scenes, 6087 prefabs, 5,166 PNG,
+    33,210 `Sprite/*.asset`, 152 `sactx-*` atlas textures, 1,611 audio files.
+    Sprite texture binding is healthy: **32,118 / 33,210 (97%)** have a non-zero
+    `m_RD.texture`; the 1,092 `fileID: 0` are the known in-atlas serialization
+    artifact (their pixels are in the sactx PNGs).
+  - `Assets/Scripts` (4,707 Level0 dummy stubs, comment-only bodies) was moved to
+    `AuxiliaryFiles/GeneratedScriptStubs/` straight away, as with v172/v173 -
+    they are useless for reading code (use `dump.cs`) and would break an editor
+    assembly reload. No `Assets/Plugins` is produced at Level0.
+- **Disk**: `/home` was at 100% (2.6 GB export fits with ~1.9 GB left). `uv cache
+  clean` freed only 35 MB despite `du` showing 6.5 GB (hardlinked/sparse), so the
+  real reclaimable space is elsewhere - check `du -sh /home/nowl/*` before assuming
+  a cache will save you. **The single biggest recurring leak is
+  `~/.local/share/rg-toolkit/tools/AssetRipper/temp/`** - the rg-toolkit GUI build
+  leaves per-run work dirs there (13 GB after the v173 exports, plus old export
+  logs in the same folder); it is pure cache, delete it after every export. Also
+  recoverable without touching any real data: `~/.local/share/Trash`, `Code/kgc/
+  .rebuild_*`, and `~/.cache/*`. A disk cleanup on 2026-10-08 took `/home` from
+  1.7 GB to 78 GB free; `redroid-data` (the Android 12 test volume) and the docker
+  images were deliberately kept.
+
+**What v174.0.00 adds** (diff vs v173.1.00: `tools/dump_diff.py` on both `dump.cs`, and
+a set diff of both `stringliteral.json`): +64 classes / 0 removed, +215 / -19 string
+literals.
+
+1. **Single Arena - a whole new mode.** 20 new `SingleArena*` classes (panels,
+   deck-choice/match/log/ranking/reward UI) plus `ResourceSingleArenaSetting`,
+   7 `SingleArena*ResponseModel`/`RequestModel`, and 10 new endpoints:
+   `/single-arena/{info,matching,matching-reroll,fetch-log-history,mission-reward,
+   rank-reward,rank-all-rewards,reward-info}` and `/ranking/single-arena-ranking`.
+   New master-data file `SingleArenaSettings.xml`; deck/match constants
+   (`Constants.SINGLE_ARENA = 210`, `MATCH_*`, `DECK_TYPE_*`), daily counters
+   (`DailyAttackCount`, `DailyMatchRerollFreeCount`, …), AP/lose-point fields.
+   Nothing routes these yet in `server/server.py` → unknown paths fall back to the
+   empty `ResponseModel`.
+2. **Video playback subsystem** (`VideoPlayer`, `VideoUrl`, `VideoCache`,
+   `VideoIntroLoopPlayer`, `VideoOverlayPlayer`, `SeasonEventPanel`): lobby /
+   season-event background videos, downloaded from
+   `https://storage.googleapis.com/kgcastle_patch/` (new external host!) with a
+   local cache (`[Video] Cache hit/download started` log strings) and a new
+   master-data file `Videos.xml`.
+3. **6th anniversary**: `Lobby_6th`, `SixthYearDailyAttendanceEvent*` (incl. a
+   premium track), `SurpriseAttendanceEventID`, `ForceEventLobbyBGM` /
+   `SavedEventLobbyBGM`; `Constants.DEFAULT_LOBBY_BGM = "Advisor_40070"` was
+   removed (that literal and `MoonEventIllustAvailable_20260908` dropped out too -
+   the Moon event is over).
+4. Smaller: `CombatPowerCalculator.CalculateCombatPower` gained an
+   `int[] territoryStatBuffPers` argument (territory stat buffs now count toward
+   combat power - ranking scores shift), `GiveSoulIfAlreadyHasUnit`,
+   `IncarnationOvercome`, `TerritoryHuntingDifficulty_1..3`, `PassSkinUntilSeason`,
+   `RankTier`/`RankTiers`, `HasSeasonEventPanel`, and an internal QA host moving
+   `10.0.1.31:7070` → `10.0.1.41:7070`.
+
+### Unity rebuild project (S0, 2026-10-08)
+
+Plan + denominator + stage table: **`plans/unity-rebuild.md`**. Rebuild project:
+`unity/kgc-rebuild/ExportedProject/` (project root; gitignored, reproducible from
+`tools/arcli`). Master-data reader + gate: `Assets/Game/MasterData.cs` +
+`Assets/Game/Editor/MasterDataSmokeTest.cs` (run with
+`-batchmode -quit -executeMethod Kgc.Editor.MasterDataSmokeTest.Run`, throws →
+Unity exits non-zero; reads `server/xml_live` by walking up from `Assets/`, env
+`KGC_MASTER_DATA` overrides).
+
+- **`tools/arcli` now takes a level argument**: `arcli <input> <output> [level]`.
+  The v174 *viewer* export used **Level0** (no scripts loaded) - at that level the
+  10,679 `MonoBehaviour` assets serialize **only `m_Script` + `m_Name`**, all game
+  field names/values are missing. **Level1** ("methods are stubbed") is the right
+  level for the rebuild: same art, but `.asset` files carry real per-instance fields
+  (`_keys`, `_styles`, sprite refs) and the stubs have the real class shape
+  (`Scene_Lobby : Scene_Base`, nested compiler-generated classes, fields - just empty
+  method bodies). Level2/3 differ only in processing layers that the public build
+  does not ship (`RecoveryProcessingLayers` is null → Level3 ≡ Level2).
+- Level1 output differs from Level0 in two more ways: `Assets/Scripts` is 2,336 files
+  (nested classes folded, 19 MB) not 4,707 dummies, and **`Assets/Plugins/` is
+  produced** (real game DLLs: `ACTk.Runtime`, `AirbridgeSDK`, `appsign4acs`, …) -
+  keep those. `Assets/Scripts` must still be moved out of `Assets/` before the first
+  editor open (same assembly-reload SIGSEGV trap as v172/v173): →
+  `AuxiliaryFiles/GeneratedScriptStubs/`.
+- `ProjectSettings/ProjectVersion.txt` = **2022.3.62f3**, exactly the installed
+  editor, so batchmode opens it with no upgrade pass.
+- **The 94 stub DLLs in `Assets/Plugins` crash Unity** - build succeeds, then
+  `Begin MonoManager ReloadAssembly` → `MonoScriptInfoScraper::
+  GetAssemblyScrapedMonoScripts` → SIGSEGV (exit 139), no `error CS` anywhere, so
+  it looks like the old Scripts trap but isn't. Bisect (set-based, one Unity
+  batchmode run per set, ~15 s/run with a warm `Library/`):
+  `/tmp/opencode/bisect_plugins.py` → **exactly one culprit,
+  `Unity.MemoryProfiler.dll`** (a Unity *package* DLL AssetRipper dumped into
+  Plugins, not game code). Keep the other 93: they are signature-only reconstructions
+  (no real DLL exists anywhere in the APK), but their `.meta` guids are what prefab
+  `m_Script` references point at - swap real assemblies in later, keeping the metas.
+  The culprit stays in `AuxiliaryFiles/Plugins/`.
+- **S0 gate result**: `-batchmode -quit -executeMethod Kgc.Editor.
+  MasterDataSmokeTest.Run` → exit 0, 0 compile errors, `Units 1043 / Skills 2342 /
+  InventoryItems 173 / Strings_EN_US 15923 rows`.
+
+### Unity rebuild — stub DLL swap, full stub compile, scene audit (2026-10-08)
+
+Continues the S0 section above. Everything here is about making the exported project
+*actually render and compile* rather than merely open.
+
+1. **The 93 `Assets/Plugins` DLLs are signature-only reconstructions - and uGUI's stub is a
+   silent killer.** `tools/ilsize <dll>` (histogram of IL body sizes) shows median body 1-2 B
+   = `ret` / `ldnull;throw`; `tools/ilsize --dump "UI.Text::set_text" <dll>` prints the IL:
+   `Text.set_text` → `ret` (setting text silently does nothing), `Image.OnPopulateMesh` →
+   `ret` (**no mesh is generated → every uGUI element renders invisible, with no exception**).
+   So a scene full of Images looks "fine" (0 missing scripts, no errors) and still shows
+   nothing. Do not trust a clean log as proof of rendering.
+2. **Recipe: swap in a real `UnityEngine.UI.dll`, keeping the prefab guids.**
+   - Scratch project `unity/_pkgbuild/` whose manifest pins `com.unity.ugui` to the version in
+     `Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/package.json`
+     (1.0.0 for 2022.3.62f3), batchmode `-quit` once →
+     `Library/ScriptAssemblies/UnityEngine.UI.dll` (250,880 B vs the 131,072 B stub).
+   - `cp` it over `Assets/Plugins/UnityEngine.UI.dll` **without touching `.dll.meta`**.
+     Safe because script refs into an assembly key on the *assembly* guid + a fileID derived
+     from namespace+class name, so content can change freely as long as type names don't.
+     Project must NOT also have `com.unity.ugui` in its own manifest (conflict:
+     "Multiple precompiled assemblies with the same name").
+   - After swap: `set_text` 74 B of real IL, `OnPopulateMesh` 118 B, 44 % of bodies >20 B,
+     project still `UNITY_EXIT=0`.
+3. **Which stub DLLs the assets actually depend on** (counted `m_Script` refs across 82,025
+   asset files): `UnityEngine.UI` **40,539** / `UIEffect` **32,605** / `Coffee.UIParticle`
+   **924** / `PolyNav` 90 / `Unity.RenderPipelines.Core` 26 + `Universal` 5 /
+   `FancyCarouselView` 5 / `LeTai.TranslucentImage` 3 / `AirbridgeSDK` 3 / `Tapjoy` 2 /
+   `ACTk`·`UIEffect_Demo`·`DOTween`·`OfferWallEdge`·`Sirenix.Serialization.Config` 1 each.
+   **TextMeshPro = 0 refs**: the game uses legacy uGUI `Text`, not TMP - don't install TMP.
+   A stubbed UIEffect is survivable (`BaseMeshEffect.ModifyMesh` = `ret` = effect ignored,
+   element still renders); swap it when UI fidelity starts to matter.
+4. **All 1,793 stub classes compile inside the project** (copy
+   `AuxiliaryFiles/GeneratedScriptStubs/Scripts/` back to `Assets/Scripts/`). They are
+   ILSpy-shaped and syntactically valid (void → `{ }`, non-void → `return null/false`,
+   state machines preserved as nested types). One fix needed: **3 files take
+   `using YieldAwaitable = Cysharp.Threading.Tasks.YieldAwaitable;`** after the Cysharp using
+   (`StoryModeBasePanel.cs`, `Data/StoryMode/EventChain/Node/ChangeBGMVolumeNodeData.cs`,
+   `VideoOverlayPlayer.cs`) or CS0104 collides with
+   `System.Runtime.CompilerServices.YieldAwaitable` from the BCL - the v172 trap, now solved
+   with an alias instead of moving files out of `Assets/`.
+5. **`Assets/Game/Editor/SceneAudit.Run`** (env `KGC_AUDIT_SCENE=Scene_Logo,...`,
+   `KGC_AUDIT_STRICT=1` to throw): counts missing scripts, Images with sprites, empty Texts,
+   and LocalizedText keys resolved against `Strings_EN_US.xml`.
+   - `Scene_Logo`: missing **1** - GameObject `AndroidManager` has `m_Script: {fileID: 0}`;
+     `AndroidManager` appears nowhere in `dump.cs`/`DummyDll`/`stringliteral.json`, so the
+     class genuinely is not in the metadata → known export defect, not ours to fix.
+   - `Scene_Loading`: missing 0, 1/1 loc key.
+   - `Scene_Login`: **missing 0, 139 Images (114 with a sprite), 80 Texts (8 empty = filled
+     by code at runtime), 31/31 localizer keys resolve.**
+6. **Screenshots work headless**: the machine is Arch (not Debian - `dpkg` is empty), Xvfb and
+   Mesa `swrast_dri.so` are installed, `DISPLAY=:1` is an Xwayland session with NVIDIA 4060 +
+   Intel iGPU. `xvfb-run -a -s "-screen 0 1280x2048x24" Unity -batchmode -quit -force-glcore
+   -executeMethod Kgc.Editor.CaptureScene.Run` creates an OpenGL 4.6 device.
+   `CaptureScene` re-parents every Canvas to `ScreenSpaceCamera` (**Overlay canvases are not
+   drawn by `Camera.Render()`**, so they must be forced), renders into a RenderTexture, writes
+   `KGC_CAPTURE_DIR/shot_<scene>.png`; env `KGC_CAPTURE_W/H` default 1080x1920.
+7. **Scope of the login flow**: 29 classes / **577 methods** (Scene_Login 80, Scene_Loading 113,
+   AudioController 155, SignInWithApple 32, SimpleAssetDB 31, Popup 30, DeepLinkManager 27,
+   Scene_Loading 113, the rest trivial). `Localizer` is a singleton over `_stringMap` /
+   `_krStringMap` fed by `ParseTextAsset(locale, TextAsset)`, with
+   `AddPending(ILocalizedComponent)` → `HandleLocalizerInitialized()`; `LocalizedText` carries
+   serialized `key` + `format: '{0}'` and writes `Text.text`.
+
+### Unity rebuild — S1: Localizer + Scene_Login boot trong Play mode (2026-10-08)
+
+S1 done = play capture có button login + text EN. Code ghi đè method body trong
+`Assets/Scripts/Assembly-CSharp/` (giữ `.meta`), không thêm class mới.
+
+1. **`Localizer`** (đã ghi đè stub): singleton `Instance` + `Locales` init trong static ctor;
+   `Initialize()` idempotent đọc `Strings_<locale>.xml` qua `Kgc.MasterData`
+   (`Root ?? FindRoot()` → `Load` → `Doc("Strings_"+locale)`; root `<Strings>`, row
+   `<String Key="…">text</String>`, 15923 rows EN). Default locale: env `KGC_LOCALE` →
+   `Application.systemLanguage==Vietnamese` → VI → EN_US. `AddPending` **self-heal**: chưa
+   init → `Initialize()` rồi `HandleLocalizerInitialized()` ngay (file local đọc đồng bộ,
+   không cần queue; `_onLoaded` giữ shape API). `Localize(key)` miss → `null` →
+   `LocalizedText` giữ text serialized trong scene. `ChangeLocale` reload map nhưng
+   **không refresh component đã apply** (ceiling - LocalePanel inactive, sửa nếu S2+ cần).
+2. **`ReloadLoginPanel(show)` disasm** (RVA `0x3642250`) - semantic verify từng lệnh:
+   show=true → `loginPanel.SetActive(true)`; `Utility.SetActive(loginButtonGroup, true)`;
+   `Utility.SetActive(testLoginIdInput, true)` (unconditional - không phải bug); nhánh
+   admin/US-replica (static ObscuredBool gate) bỏ qua; `DOTween.Kill(logo)` +
+   `DOFade(logo→0, 0.5)`; `loginButtonGroup.alpha=0` + tail-call `DOFade(→1, 0.5)`.
+   show=false → inverse, **không** đụng `loginPanel`, + audio call SE `0x13` (bỏ qua).
+   `Utility.SetActive(Component,bool)` (`0x2C84C00`/`0x2C8F034`) = null-check →
+   `gameObject.SetActive`. **DOTween là stub (no-op) → phải set end-state trực tiếp**
+   (`logo.alpha=0`, `loginButtonGroup.alpha=1`); bám nguyên disasm (`alpha=0` + gọi DOFade
+   stub) là button group kẹt ở alpha 0 = invisible, không lỗi nào báo.
+3. **`Scene_Login` flow**: `Awake` = `Instance = this; base.Awake()` (`Scene_Base.Awake` =
+   `Localizer.Instance.Initialize()` - mọi scene derive Scene_Base nên một chỗ là đủ;
+   `LocalizedText.OnEnable` self-heal nên thứ tự Awake/OnEnable không quan trọng);
+   `Start` = `ApplyLoginSceneIllustData(); SocialInit(); ReadyToAuth();` - **bỏ
+   `CheckUseAssetBundle` chain** (rebuild không có CDN/Addressables; riêng warning
+   `KGC_ASSETBYPASS` trong AGENTS chỉ áp cho client trỏ CDN thật). `SocialInit` =
+   google+guest ON, apple/gameCenter/appleGuest OFF, bỏ social-SDK init. `ReadyToAuth` =
+   tail-call `ReloadLoginPanel(true)`, `showComment` không dùng (đúng disasm).
+4. **Play-mode capture** (`KGC_CAPTURE_PLAY=1`, **không** `-quit`):
+   `CaptureScene.Run` set `SessionState["KGC.PlayCapture"]` + `EditorApplication.isPlaying`,
+   `[InitializeOnLoad] PlayCaptureDriver` hook `EditorApplication.update` - static ctor chạy
+   lại sau domain reload (SessionState sống sót, static `_ticks` reset = đếm từ lúc vào play).
+   Tick: wall-clock 120s → Exit(1); đang play + 60 tick + `Time.frameCount≥10` → log 10
+   `LocalizedText` active đầu (`key => text`) → `RenderShot` → `EditorApplication.Exit`.
+   ```
+   KGC_CAPTURE_PLAY=1 timeout 300 xvfb-run -a -s "-screen 0 1280x2048x24" \
+     Unity -batchmode -force-glcore -projectPath <proj> \
+     -executeMethod Kgc.Editor.CaptureScene.Run -logFile <log>
+   ```
+   Edit-mode capture (không env) giữ nguyên hành vi cũ.
+5. **Gates (cùng 2026-10-08)**: compile `MasterDataSmokeTest.Run` → `UNITY_EXIT=0`,
+   0 `error CS`; `SceneAudit` `KGC_AUDIT_SCENE=Scene_Login KGC_AUDIT_STRICT=1` →
+   missing 0, locKeys 31/31 (giống trước S1); play log →
+   `[LOCALIZE] initialized=True locale=EN_US`, `GuestLogin => Guest Login`,
+   `LoginByGoogle => Sign in with Google Play`; ảnh `/tmp/opencode/shot_Scene_Login.png`
+   1.09 MB có illustration + 2 button (edit-mode trước S1 = illustration không text).
+   Trong play chỉ **2 LocalizedText active** - key còn lại nằm trong register/terms panel
+   (inactive, mở theo yêu cầu) - đúng kỳ vọng, không phải lỗi resolve.
+6. **Boot flow `Scene_Logo → Scene_Login`** (cùng 2026-10-08, complete S1):
+   - `Scene_Logo` (driver = `Update`, không phải Start): `Awake` = base + `SetAlpha(logo,0)`
+     + `GameManager.LoadSetting` + DOTween sequence fade (`OnComplete → _canMoveToLoginScene`);
+     `Start` (async void) = `DontDestroyOnLoad` + `SimpleAssetDB.Initialize()`; `Update` =
+     countdown `_loginSceneIllustDataFetchStartTimer` 3→0 → `FetchLoginSceneIllustData`
+     (async `RestAPI.LoginSceneIllustData()` + `UniTask.Delay(5000)` → flag
+     `_loginSceneIllustDataFetched`) → gate 2: SimpleAssetDB ready →
+     `_loginSceneLoadHandler = LoadSceneAsync(<static string>, Single); allowSceneActivation=false`
+     → gate 3: `_canMoveToLoginScene` → `allowSceneActivation=true`.
+   - **Rebuild bypass**: DOTween + REST đều là stub → `Start()` set thẳng
+     `_loginSceneIllustDataFetched` + `_canMoveToLoginScene = true`; `Update` giữ
+     async-load + activation mechanism, đích hardcode `"Scene_Login"`; bỏ SimpleAssetDB gate.
+   - **Đích RE method (recipe tái sử dụng)**: text `"Scene_Login"` KHÔNG tồn tại trong
+     `.so` (literal giữ trong metadata, quét adrp+add = 0 hit) → resolve qua **static slot
+     readers**: slot `0x695f000+0x3a0` (arg `LoadSceneAsync` của Logo) chỉ được LDR, không
+     STR, bởi `SettingsPanel.OnClickLogout/OnClickAccountTransferConfirm`,
+     `Web.HandleErrorCode`, `LinkAccountPanel`, `NicknameChangePopup`,
+     `Scene_Lobby/Territory.Awake` = toàn bộ ngữ cảnh "về login" → value = `"Scene_Login"`.
+   - **`Scene_Loading` KHÔNG thuộc boot**: `Scene_Loading.Start` = sync
+     `LoadScene(<arg>)` với arg = graph 3 nấc `[[0x6969000+0x2d8]→field0]→+0xb8→[0]`
+     (instance của `GameManager`, slot chỉ readers: `GameManager.LoadScene` state machine
+     + `Scene_Game.StartSingleArenaBattleAfterDeckRecord`) - boot chưa set → NRE nếu đi
+     qua; `Scene_Loading` là trung gian transition `GameManager.LoadScene(target)` →
+     làm ở S2. `Scene_Loading.cs` giữ nguyên stub.
+   - **Capture fix**: `PlayCaptureDriver.Tick` chụp theo `SceneManager.GetActiveScene().name`
+     (env `KGC_CAPTURE_SCENE` chỉ để mở scene ban đầu; play flow đã load sang scene khác →
+     filter canvas theo tên cũ sẽ ra ảnh đen).
+   - **Gate**: `KGC_CAPTURE_PLAY=1 KGC_CAPTURE_SCENE=Scene_Logo …` → exit 0, log
+     `Opening scene 'Assets/Scene_Logo.unity'` → `Loaded scene 'Assets/Scene_Login.unity'`
+     → `[LOCALIZE] GuestLogin => Guest Login` → `[CAPTURE Scene_Login] canvases=2
+     1091209 bytes` → screenshot login đầy đủ (illustration + 2 button EN).
+
+### Unity rebuild — S1.5: swap DLL thật UIEffect + Coffee.UIParticle (2026-10-08)
+
+2/93 stub DLL có asset ref thật (`UIEffect.dll` 32.605 ref, `Coffee.UIParticle.dll` 924
+ref) → build source upstream **đúng version** thành DLL, thay vào `Assets/Plugins/` giữ
+nguyên file name + `.meta` guid (script ref = guid + fileID hash(namespace.class) → cùng
+type name = cùng fileID → ref không vỡ).
+
+1. **Công thức xác định version CHÍNH XÁC từ stub** (không đoán bằng type match): stub
+   giữ `<PrivateImplementationDetails>` + `UnitySourceGeneratedAssemblyMonoScriptTypes_v1`
+   — 2 field byte[] blob của chúng = payload source-gen `MonoScriptData`
+   (`FilePathsData` + `TypesData`). Dump từ PE: `ikdasm <stub>.dll` lấy field RVA
+   (`at I_2050`), bóc section table → file offset → bytes → `strings`:
+   - **UIEffect**: path `\Library\PackageCache\com.coffee.ui-effect@b43e40508b\...` =
+     git SHA → `git rev-list --all | grep ^b43e40508b` trong mob-sakai/UIEffect =
+     **tag `4.0.0-preview.9`**. FilePathsData liệt kê 18/22 file (4 file enum-only bị
+     source-gen loại; `Enums/EffectArea.cs` còn vì chứa class static
+     `EffectAreaExtensions`). ⚠️ `4.0.0-preview.10` type/field/method cũng khớp 28/28
+     (stub strip hết body → không phân biệt được) → **phải chốt bằng SHA trong path,
+     không phải type diff**.
+   - **UIParticle**: path `\Assets\UIParticleEffect\Scripts\*.cs` (8 file, import loose,
+     không version) → tìm bằng history repo mob-sakai/ParticleEffectForUGUI (repo cũ tên
+     `UIParticle`, đã đổi tên): `git log -S 'namespace Coffee.UIParticleExtensions'` →
+     namespace bị migrate ở `8c1bef4` (ship từ 4.10.0), `b76bf5a` xóa chính 3 type có
+     trong stub (BakingCamera/CombineInstanceEx/MeshHelper) → `git describe --tags
+     b76bf5a^` = **3.3.12** = upper bound; không commit runtime nào giữa 3.3.12 →
+     b76bf5a; type diff 15/15 + 8 file list khớp → **chốt 3.3.12**.
+2. **Build**: `tools/unity/build_plugin.sh <name> <src_root> <out.dll>` — csc (Roslyn
+   trong dotnet SDK) với `-nostdlib+` trỏ đúng profile Unity dùng
+   (`MonoBleedingEdge/lib/mono/unityjit-linux` = mscorlib/System/System.Core +
+   `Facades/netstandard.dll`; engine modules 2022.3 ref `netstandard` facade — xác nhận
+   bằng `monodis --assemblyref Library/ScriptAssemblies/Assembly-CSharp.dll` = refs
+   `mscorlib`), ref toàn bộ `Managed/UnityEngine/UnityEngine*.dll` +
+   `Assets/Plugins/UnityEngine.UI.dll`, define = chuỗi `UNITY_*_OR_NEWER` đến 2022.3 +
+   `UNITY_ANDROID`, **không** `UNITY_EDITOR`, `-langversion:9`,
+   `AssemblyVersion=0.0.0.0` (= stub), chỉ `Scripts/` trừ `Editor/`.
+3. **Verify** (`tools/unity/diff_dll.py`, parse ikdasm): diff typedef + field name +
+   method name từng type — trước build: type 28/28 + 15/15 khớp stub; sau build: **0
+   field, 0 method diff**. Diff duy nhất còn lại = `MonoScriptData` + PID blob (artifact
+   source-gen của Unity — plugin DLL không cần, Unity đọc type plugin qua reflection;
+   fileID tính từ guid + namespace.class).
+4. Game code chỉ dùng `Coffee.UIEffects` (19 file: UIEffect×13, BaseMeshEffect×11,
+   UIShadow×6, UIGradient×2, UIShiny×1), không file nào gọi API UIParticle → mảng ref
+   UIParticle là component trong scene/prefab, không phụ thuộc API.
+5. **Gates** (cùng bộ S1, chạy lại sau khi thay DLL): compile `MasterDataSmokeTest` →
+   exit 0 / 0 `error CS`; `SceneAudit` Scene_Login strict → `missingScripts=0`;
+   boot capture `KGC_CAPTURE_PLAY=1 KGC_CAPTURE_SCENE=Scene_Logo` → exit 0, screenshot
+   login 1.71 MB đầy đủ, không exception mới. `Script error: OnParticleUpdateJobScheduled`
+   (×3) **pre-existing** — có trong cả log S1 trước swap, engine message "will be
+   ignored", benign. Stub cũ backup: `/tmp/opencode/stubs_backup/` (mất thì tái tạo từ
+   AssetRipper export). `Unity.MemoryProfiler.dll` (culprit SIGSEGV) vẫn không đụng.
+
 ### Dominion tutorial #40 native flow (2026-08-31)
 
 Tutorial #40 must remain unfinished, but Dominion must already return Chamber `10001` at
@@ -2130,3 +2471,805 @@ shape for any future admin grant - no endpoint exists, so it goes through `playe
 Grant applied: ids 68-72, synergy 5, mains `MAtkPer / BaseDef-ish / HpPer / AttackSpeedPer /
 BaseSpecialDamageMul`, both sub-stats `BaseSpecialDamageMul` 9999 + `MAtkPer` 9999.
 Backup `players-20260927-152403-barb9999.db`.
+
+## 30. Official-client patch-flow decode + il2cpp literal xref recipe (2026-10-05)
+
+Decoded from the OFFICIAL 173.1.00 dump (`il2cpp/v173.1.00/`: `stringliteral.json`, `dump.cs`,
+`libil2cpp_v1731.so`) - answers "how does the real client fetch master data" with zero
+private-server code involved.
+
+**How the official client builds CDN URLs:**
+
+- Base `https://kgc-cdn-1.awesomepiece.com/patch/` + relative folder + `ANDROID` + `/AssetHash.txt`
+  etc. Routes baked in metadata: `/auth/getPatchFolder` (`RestAPI.GetPatchFolder()` ->
+  `PatchFolderResponseModel.patchFolder`), `/auth/usePatch?platform=`, `/auth/checkPatchVersion`.
+- Folder fallback `LIVE/2026_09_22` has exactly ONE code reader: `Constants..cctor` @ RVA
+  `0x2FC7160`. There is no standalone `LIVE` literal, so the client never prepends `LIVE/` itself -
+  whatever the backend returns IS the relative path (official backend presumably returns
+  `LIVE/<date>`; our `response_config.json` returns bare `2026_09_22` and `server/cdn.py` matches
+  by final filename, which is why the shape difference is invisible privately. Do not "fix" one
+  shape into the other blindly).
+- CDN base is read by exactly 3 coroutines: `AssetBundleManager.<Load>d__30` (MoveNext RVA
+  `0x37826E0`), `<LoadTargetAsset>d__27` (`0x3783A84`), `<UpdatePatchSetList>d__35` (`0x3784444`);
+  `AssetBundleManager.GetPatchFolder()` RVA `0x3781E5C` returns the static field filled from the
+  server response; `CurrentPlatformString()` RVA `0x3781E1C` -> `"ANDROID"`
+  (`CommonDataWrapper.GetPlatform()` RVA `0x60E5138` = twin).
+- 0 of 25,905 string literals are list-query params (`prefix=`/`max-keys`/`list-type`) - the client
+  never lists the bucket, only concrete GETs, so the GCS list denial is invisible to it.
+
+**il2cpp literal xref recipe (which method uses string S):**
+
+1. The code section is named **`il2cpp`**, NOT `.text` (`readelf -SW`); `RVA = fileoff + 0x4000`
+   (cross-check against `dump.cs` `Offset:`). Scanning `.text` silently returns 0 sites - that bug
+   cost a whole debug round.
+2. `stringliteral.json` gives `value -> address`; `.rela.dyn` (24-byte entries - parse with numpy,
+   not `readelf -r` on the full file) maps `offset` (GOT slot vaddr) -> `addend` (literal address).
+   Find the slot(s) for S.
+3. Scan the `il2cpp` section for `ldr xT,[xN,#pageoff]` (compare `(w & 0xFFFFFC00)` against
+   `0xF9400000 | (off/8 << 10)`) and `add xT,xN,#off`; walk back <=8 instructions for a same-reg
+   `adrp` whose computed page == the slot's page.
+4. Map site RVA -> dump.cs: the `// RVA: 0x...` line + the NEXT line = signature; but ALSO track
+   the nearest preceding `class X` / `struct X.<M>d__N` declaration, otherwise every async method
+   resolves to an anonymous `MoveNext()`.
+5. Always sanity-check the scanner against a KNOWN site first - a 0 result from an untested
+   scanner is a bug, not a finding (this is what exposed step 1).
+
+String access in this build is exclusively GOT-slot (adrp+ldr through `.rela.dyn`);
+`il2cpp_codegen_string_literal_from_index` is absent from dynsyms - skip the movz-index technique
+here. Scan script from the session: `/tmp/opencode/scan_literal_refs_v2.py` (recipe above is
+self-sufficient to recreate).
+
+RESOLVED 2026-10-05: official `/auth/getPatchFolder` (prod `kgc-k8s-1.awesomepiece.com`) IS
+pre-auth readable (spec `AccessToken` required=false) with the exact client recipe - verified
+HTTP 200, response shape = **`LIVE/2026_09_22`** (full `LIVE/<date>`, not bare date); the dev
+env returns `patchFolder: ""`. Wired into `scripts/check_cdn_update.sh` as the primary folder
+source (union into all_dates, beats the 45-day HEAD-probe ceiling). Request recipe: see §31
+tail. Budget note: ~10 prod requests spent on this (~290/300 left).
+
+## 31. Official-client request headers, complete list (v173.1.00, 2026-10-05)
+
+Exhaustive: BL-scan of `UnityWebRequest.SetRequestHeader` (RVA `0x644B668`) yields exactly **32
+call sites**, all decoded (`(w>>26)==0x25`, sign-extend imm26, target = siteRVA + imm; numpy scan
+runs in <1s). No header can exist outside this list + the `WWW`-dict path below.
+
+**Game API - every `RestAPI.*` call funnels through these `Web.*` MoveNexts:**
+
+| header | value | set in | site RVA |
+|---|---|---|---|
+| `Content-Type` | `application/json` | `Post d__17` / `Put d__19` / `Delete d__21` | `0x538F8CC` / `0x53984FC` / `0x4FB96FC` |
+| `version` | `Application.get_version()` | `Get14`, `Get15`, `Post17`, `Put19`, `Delete21` | `0x50A95D4` / `0x50AA95C` / `0x538F910` / `0x5398540` / `0x4FB9740` |
+| `platform` | `Application.get_platform().Enum.ToString()` | same five | `0x50A9624` / `0x50AA9AC` / `0x538F960` / `0x5398590` / `0x4FB9790` |
+| `time` | `Utility.GetServerTimestampV2()` when session-key flag set, else `GetServerTimestamp()` (`0x379B864` / `0x379B614`, both return a string, fallback `DateTime.Now`) | `Get14`, `Post17`, `Put19`, `Delete21` - **not** `Get15` | `0x50A9680` / `0x538F9BC` / `0x53985EC` / `0x4FB97EC` |
+| `accessToken` | state field (`[x19,#0x38]`), emitted only if non-null (`cbz` skip) | same four | `0x50A96A4` / `0x538F9E0` / `0x5398610` / `0x4FB9810` |
+| caller pairs | `List<(name,value)>` loop, one `SetRequestHeader` per element | `Get d__15` only | `0x50AAA00` (shared-generic `0x50ABAE4/0x50ABB5C/0x50ABC08`) |
+
+`Web.Get(endPoint, uri, customHeaders)` (`0x3CE77A0`) has exactly **2 callers**:
+`RestAPI.<GetDefaultInfraRankingServer>d__438` and `RestAPI.<GetDevServers>d__437`. So the normal
+path (`Web.Get(uri, accessToken)` `0x3CE76EC`, 105 callers / `Post` `0x3CE7BBC`, 228) never sees
+caller headers. `Web.HandleWebHeader` (`0x2D38F00`) reads response `NeedTriggerFetch` only.
+
+**Non-Web sites (the other 8):**
+- `TimeCheatingDetector.GetWebRequest` (`0x2BF69D0`): `Accept-Encoding` = `""`, only when
+  AndroidSDKLevel < 18 (site `0x2BF6C04`); both callers are inside TimeCheatingDetector itself.
+- `DeepLinkManager` anti-piracy POSTs - `AxisBladeCheckPost d__5` (`0x3569AD8`),
+  `AxisBladeOpenEventRequest d__6` (`0x356AA64`), `IsekaiGateCheckPost d__8` (`0x356B3C8`): each
+  sets `Content-Type: application/json`.
+- `Unity.Services.Analytics.Internal.WebRequestHelper.CreateWebRequest` (`0x60EC580`):
+  `x-client-id` = its own field `+0x10` (site `0x60EC670`) + `uploadHandler.contentType =
+  application/json`; 0 BL callers (interface-dispatched from the analytics dispatcher).
+- Unity internals: `UnityWebRequest.SetupPost` (`0x644C400`) copies `WWWForm.headers`;
+  `WWW.ctor(url,post,headers)` (`0x644D044`) copies a caller dict - generic loops, no literals.
+
+**Third path (not `SetRequestHeader`)**: `BugReportApi.<Submit>d__19` calls `WWW` with a dict -
+`Content-Type: application/json`, `Accept`, `Method: POST`, `X-ApiKey` ->
+`http://srdebugger.stompyrobot.uk/report/submit` (SRDebugger reporter). Firebase
+`<AddFirebaseTokensAsync>d__27/d__28` set `Authorization` for Firebase sockets (Firebase is stubbed).
+
+**Absent (checked, do not re-derive):** `User-Agent`, `Accept`, `Cookie`, `Authorization` in the
+game layer (reverse literal pass hits only System.Net/Newtonsoft/`HttpHeaders..cctor`), `nonce`,
+`sign`/`signature`, lowercase `accesstoken`, and `encryptedWithHex` - the last is **not in
+`stringliteral.json` at all**. No signing scheme: `Utility.MD5` (RVA `0x378A360`) has **0 BL
+callers** and its method pointer appears once (the pointer table) = dead code in this build.
+
+Related (not a header): POST/PUT/DELETE bodies are **always** AES-encrypted - the MoveNext calls
+`Utility.AESEncryptWithSessionKey` (`0x3799FFC`) or `AESEncryptWithServer` (`0x37989E0`, produces
+hex via `{0:x2}`) right before `UnityWebRequest.PostWwwForm` (Post sites `0x538F878` / `0x538F894`);
+the private server already handles this (`server/crypto.py::aes_decrypt`, `server.py:559`).
+
+Scanner: `/tmp/opencode/bl_callers.py` (BL -> caller method incl. state-machine owner), built on the
+§30 recipe; `dumpblk.py` for annotated block disassembly.
+
+**Value decodes (follow-up disasm, same session):**
+
+- `GetServerTimestamp` (V1 `0x379B614`) = `AES_hex(str(unix_ms))` after login, and
+  **`AES_hex("beforeLogin")` when `GameManager.logined == false`** - NOT md5 (the older
+  `docs/api-and-crypto.md` claim "MD5(unix_timestamp)" is wrong for this build; `Utility.MD5`
+  is dead code). V1 = AESEncryptWithServer: AES-128-**ECB**, **Zeros** pad, lowercase `{0:x2}`
+  hex, key = the static `crypto.py AES_KEY`. V2 (`0x379B864`) = AESEncryptWithSessionKey
+  (AES-CBC/PKCS7, X25519 session key) but `useSessionKey = accessToken != null && HasSessionKey`
+  and the handshake only exists in-game -> **V1 is the live path for every pre-auth call**.
+  `time` header value goes in as-is (no prefix).
+- `RestAPI.<GetPatchFolder>d__7.MoveNext` body build: `platform` = `Application.get_platform()
+  .Enum.ToString()` -> **`"Android"`** (NOT `CurrentPlatformString()`/"ANDROID" - those differ:
+  header+body use "Android", the CDN folder literal uses "ANDROID"), `version` =
+  `Application.get_version()`, `isDev` = `Constants.DEVELOPMENT_MODE`, then `JsonUtility.ToJson`
+  -> `Web.Post<T>(uri, json, accessToken=NULL, useSystemSerializeFunc=false)`; the null token
+  skips the `accessToken` header and forces the V1 encryptor.
+- Wire form: `AESEncryptWithServer(json)` -> lowercase hex string posted verbatim as
+  `UploadHandlerRaw` content (form-encoding is a no-op on hex), `Content-Type` then overridden
+  to `application/json`.
+
+**Verified pre-auth recipe (prod 200, 2026-10-05):**
+
+```
+POST https://kgc-k8s-1.awesomepiece.com/auth/getPatchFolder
+Headers: version: 173.1.00 | platform: Android | Content-Type: application/json
+         time: hex_aes("beforeLogin")
+Body:    hex_aes('{"platform":"Android","version":"173.1.00","isDev":false}')
+hex_aes = lowercase hex of AES-128-ECB(a6072ad6b9c959ff, zero-padded utf8)
+Resp:    hex_aes -> {"code":200,"msg":null,"patchFolder":"LIVE/2026_09_22","success":true}
+```
+
+Plain JSON body => 400; raw binary body => 400; empty `{}` => 400 (all rejected before the
+controller). Dev env with the same recipe => 200 but `patchFolder: ""`.
+
+**VERSION-GATE (chứng minh 2026-10-08)**: `patchFolder` phụ thuộc `version` header/body —
+cùng recipe, `173.1.00` → `LIVE/2026_09_22` (bị pin), `174.0.00` → `LIVE/2026_10_06_xGrY0WbLgR`
+(bản đang phát). Luôn gửi version của client mới nhất. Từ bản này folder mang **suffix ngẫu nhiên**
+`YYYY_MM_DD_<10 ký tự base62>` (không đoán được → HEAD-probe vô dụng với tên mới, chỉ API biết);
+`timeCreated` GCS = 2026-10-07T22:09Z (≈4h trước maintenance 08/10 11:00 KST — "upload trước
+1-2 ngày" đúng theo TÊN folder 10_06, upload thật cách release <1 ngày).
+
+## 32. Unity rebuild — S1 polish: locale runtime + ApplyLoginSceneIllustData (v174.0.00, 2026-10-09)
+
+Scope: 2 mục S1 còn treo — (1) `ApplyLoginSceneIllustData` đúng bản gốc,
+(2) đổi ngôn ngữ runtime từ LocalePanel (login). Toàn bộ RE đọc từ
+`il2cpp/v174.0.00/` (`dump.cs` RVA + `script.json` + disasm/Ghidra decomp),
+code ghi vào `unity/kgc-rebuild/ExportedProject/Assets/Scripts/Assembly-CSharp/`.
+**4 gate pass** (xem cuối mục).
+
+### Bảng RVA đã decode
+
+| Method | RVA | Ghi chú |
+|---|---|---|
+| `Scene_Login.Awake` | `0x36424D4` | |
+| `Scene_Login.ApplyLoginSceneIllustData` | `0x36435F8` | |
+| `Scene_Login.OnClickLocaleButton` | `0x3647244` | `localePanel.Show(OnSelectLocale)` — Show bị inline |
+| `Scene_Login.OnSelectLocale` | `0x36472D4` | |
+| `Scene_Login.ReloadTermsPanel` | `0x3647358` | bị inline vào OnSelectLocale → decomp thấy 2 câu `L("LanguageName")` |
+| `LocalePanel.Show` | `0x3343C30` | |
+| `LocalePanel.OnSelectLocale` | `0x3343D18` | |
+| `Localizer.ChangeLocale` | `0x34DBA10` | |
+| `Localizer.SetCanvasRoot` | `0x34DC744` | setter 8 byte |
+| `LocalizerUtility.L(str)` / `L(str,def,fromKR)` / `KR` | `0x34DCB80` / `0x34DCC18` / `0x34DCDA4` | |
+| `Utility.SetActive` ×4 | `0x2C84C00` Mono / `0x2C8F008` Transform / `0x2C8F034` CanvasGroup / `0x2C8F060` Renderer | |
+| `Utility.ToColor(string)` | `0x2C8CEB8` | |
+| `Utility.MakeOriginSize` | `0x2C94374` | |
+| `Utility.SetColorWithoutAlpha` | `0x2C98D68` | |
+| `ResourceSkill.HandleLanguageChanged` | `0x2DF8DA4` | |
+| `GameManager.Get` / `.ctor` / `SaveSetting` / `.cctor` | `0x3148984` / `0x3147E7C` / `0x3149B8C` / `0x3185F4C` | |
+
+### Decode từng chỗ (đủ để port lại, không cần decomp lại)
+
+- **`Utility.SetActive` ×4** = `@this.gameObject.SetActive(value);` — null `this`/
+  null `gameObject` → NRE (IL2CPP check, không guard).
+- **`Utility.ToColor(s)`**: `uint.TryParse(s, NumberStyles.HexNumber /*0x203*/,
+  InvariantCulture, out v)` fail → `Color.white`; asm dùng
+  `w11=0xff; bfi w11,w8,#8,#0x18` = **`(v<<8)|0xFF` khi `s.Length==6`**, `csel` theo
+  `cmp len,#6`; rồi `rev w8` → component = byte cao trước. Port đúng:
+  `len==6 → v=(v<<8)|0xFF`, return `((v>>24)&0xff, (v>>16)&0xff, (v>>8)&0xff, v&0xff)/255f`.
+  Length 6 = `RRGGBB` (alpha=255), length 8 = `RRGGBBAA`.
+- **`MakeOriginSize(image, scale=1)`**: `if (image.sprite==null) return;`
+  `image.rectTransform.sizeDelta = (sprite.rect.width*scale, sprite.rect.height*scale)`
+  — asm đọc `image.sprite` **3 lần** (guard + width + height), const `-1f` là default
+  của nhánh chết sau guard.
+- **`SetColorWithoutAlpha(image,color)`**: `var c=image.color;
+  image.color=new Color(color.r,color.g,color.b,c.a);` (alpha tham số bị bỏ).
+- **`ForEach`/`Find`**: loop chỉ số thuần; Find trả phần tử đầu match / `default`.
+- **`ReloadTermsPanel()`**: `localeText.text=L("LanguageName")` →
+  `termAgreeButton.interactable=false` → `ForEach(termAgreements, t=>t.isOn=false)`
+  (setter — KHÔNG phải `SetIsOnWithoutNotify`, invoke không điều kiện) →
+  `nightPushAggrement.SetActive(currentLocale==KR)` (**`GameObject.SetActive` trực tiếp**,
+  không phải extension) → `nightPushAggrementToggle.isOn=false` → `loginPanel.SetActive(false)`.
+  Mọi truy cập đều trực tiếp → NRE-faithful.
+- **`Scene_Login.OnSelectLocale(locale)`**: `_locale=locale` (field +0x260, **câu đầu tiên**)
+  → `localeText.text=L("LanguageName")` → `ReloadTermsPanel()`.
+- **`LocalePanel.Show(cb)`**: `_callback=cb` → `Utility.SetActive(buttons[buttons.Length-1],
+  Constants.DEVELOPMENT_MODE)` (null buttons → NRE, rỗng → IndexOutOfRange; asm bounds check
+  `uint` nên cả -1 cũng IOOR) → `gameObject.SetActive(true)`. `DEVELOPMENT_MODE` = `ObscuredBool`
+  → implicit `bool` (ACTk thật).
+- **`LocalePanel.OnSelectLocale(idx)` đúng thứ tự**:
+  `var old=_locale` → `_locale=Localizer.Locales[idx]` (uint bounds) →
+  `GameManager.Get().settings.newLocale=_locale.ToString()` → `GameManager.Get().SaveSetting()`
+  → `Localizer.Instance.ChangeLocale(_locale)` → `Utility.LogAdjust("t4335r",
+  ("before_locale",old.ToString()??""),("after_locale",_locale.ToString()??""))` →
+  `_callback?.Invoke(_locale)` → `Utility.SetActive(this,false)`. Hai `Get()` **riêng biệt**.
+- **`SaveSetting()`**: `AwesomePrefs.SetString("Settings", JsonUtility.ToJson(settings), false);
+  AwesomePrefs.Save();` — key `"Settings"` lấy từ cell `0x69762a0` (**xem recipe rela.dyn bên dưới**).
+- **`Localizer.ChangeLocale(locale)`**: `Clear(); Initialize(locale);
+  if (canvasRoot!=null){ foreach t in canvasRoot.GetComponentsInChildren<LocalizedText>(true) t.OnEnable();
+  foreach i in …<LocalizedImage>(true) i.OnEnable(); }` rồi tail = **3 cờ static
+  `CrossAssemblyDefinitions` (locale==JA / ZH_TW / ZH_CH) — BỎ**, class không có trong
+  export và code LocalizedText không đọc → chỉ còn `ResourceSkill.HandleLanguageChanged()`.
+  **Không có guard `Locale.None`** (None → `Initialize` map về DefaultLocale).
+- **`ResourceSkill.HandleLanguageChanged()`**: `foreach (kv in datas)` với
+  `var s=(ResourceSkill)kv.Value;` (castclass cứng, null value → cast ok rồi NRE ở field store),
+  null 4 cache `_longDesc/_shortDesc/_altShortDesc/_altLongDesc`. **`datas` null → NRE**;
+  root-cause fix = initializer `ResourceBase<T>.datas = new Dictionary<int,object>()`
+  (ResourceBase chưa bao giờ load → không bao giờ gán), không guard từng caller.
+- **`GameManager` minimal** (chỉ đủ cho locale flow; body 5.800 dòng còn lại để stub):
+  `.cctor` → `_singleton=new GameManager()` (bỏ 3×`WorkTimer.GenerateSimpleKey()` + list/pool,
+  có comment); `.ctor` → `settings=new Settings()` (field +0x130, bỏ phần còn lại);
+  `Get()` → `return _singleton;` — **trước đây `return null` làm OnSelectLocale NRE**.
+- **`AwesomePrefs` vẫn stub** (`GetString→null`, `SetString/Save` no-op) → Apply chạy
+  particle-size rồi `FromJson(null)→null→return` = **đúng nhánh lần đầu của bản gốc khi key
+  chưa có** (asm có `if (data==null) return;` ngay sau assign → FromJson(null) không ném, nếu
+  ném thì game gốc đã crash lần boot đầu).
+
+### `ApplyLoginSceneIllustData` (`0x36435F8`) — thứ tự chính xác
+
+1. `int w=Screen.width, h=Screen.height` (lưu trước — asm gọi lại `get_width/height` lần 2
+   cho shape.scale, giá trị như nhau → port dùng `w/h`).
+2. `var shape=_screenParticle.shape; shape.scale=new Vector3(w/10f+10f, h/10f+10f, 0f);`
+3. `var emission=_screenParticle.emission;
+   emission.rateOverTime=new ParticleSystem.MinMaxCurve((int)Math.Round(w*h/150000f));`
+4. `var main=_screenParticle.main; main.maxParticles=(int)Math.Round(w*h/30000f);`
+   (`Math.Round` = banker's rounding — asm `modf` ±0.5 + even check → mặc định C# ✓;
+   `(int)` cast inf → int.MinValue, unchecked ✓. **`main` local dùng lại ở bước 13**.)
+5. `loginSceneIllustData = JsonUtility.FromJson<…>(AwesomePrefs.GetString(LoginScenePrefsKey,null,false));`
+   → assign **trước khi** check null. Key const = `"LastLoginSceneIllustData_20260422"`.
+6. `if (loginSceneIllustData==null) return;`
+7. `sprite=Utility.Find(_loginIllusts, s=>s.name==data.illust); _illustImage.sprite=sprite;`
+   (predicate đọc **static field** → không capture → asm cache delegate trong `<>c` +0x20;
+   port dùng local `data` = display class, hành vi như nhau).
+8. `_illustImage.MakeOriginSize(1f)` (asm truyền `0x3f800000` explicit).
+9. `transform.localScale=Vector3.one*data.scale`
+   → `rectTransform.anchoredPosition=new Vector2(data.x,data.y)` (x,y là **int**)
+   → `rectTransform.rotation=Quaternion.Euler(0f,0f,data.rotation)` (asm inlined
+   `*Deg2Rad` rồi `Internal_FromEulerRad`).
+10. `ForEach(_effectImages, x=>x.gameObject.SetActive(!data.disableBGAndEffects))` →
+    `_effectParticle.SetActive(!data.disableBGAndEffects)`.
+11. nếu `disableBGAndEffects`: `_castleBG.SetActive(false); _bgBlur.spriteBlending=1f;`
+    — **`spriteBlending` là FIELD của `LeTai.TranslucentImage`** (không có `get_/set_` trong
+    #Strings; asm `str` thẳng +0x144). Đã xác minh có trong DLL.
+12. `effectColor=ToColor(data.effectColor)` (đóng closure +0x10) →
+    `bottomGradientColor=ToColor(data.bottomGradientColor)`.
+13. `ForEach(_effectImages, x=>x.SetColorWithoutAlpha(effectColor))` (closure không cache) →
+    `_bottomColoredImage.SetColorWithoutAlpha(bottomGradientColor)` →
+    `_bottomColoredGradationImage.color1=new Color(b.rgb, color1.a)` (`a` lấy lại của image,
+    `color1.a` @UIGradient+0x50, `color2.a` @+0x60) → `color2=` tương tự →
+    `main.startColor=effectColor` (**dùng lại local `main` ở bước 4**).
+14. `AwesomePrefs.SetString(LoginScenePrefsKey, JsonUtility.ToJson(loginSceneIllustData), false);`
+
+`LoginSceneIllustDataResponseModel` field offsets khớp dump: `illust@0x30 x@0x38 y@0x3C
+rotation@0x40 scale@0x44 effectColor@0x48 bottomGradientColor@0x50 disableBGAndEffects@0x58`.
+
+### `SetCanvasRoot` — tìm call site bằng BL-scan (recipe tái sử dụng)
+
+`SetCanvasRoot` là setter 8 byte, không đọc từ code đọc được. Quét `.so` lấy BL tới
+RVA `0x34DC744` (`(w>>26)==0x25`, imm26 sign-extend, `target = rva + imm*4`, RVA = file+0x4000)
+→ **đúng 3 caller**:
+`Scene_Game.Awake` (`0x2E642A0`), `Scene_Lobby.Awake` (`0x362B50C`),
+`Scene_Login.<LoadAfterAssetBundleImpl>d__84.MoveNext` (`0x365197C`) — cả 3 đều
+`SetCanvasRoot(this.transform)` (disasm quanh call site: `get_transform(x19=this)` → `x0=Instance`).
+Kết luận: **KHÔNG có trong `Scene_Base.Awake`** → port:
+`Scene_Login.Awake` gọi `Localizer.Instance.SetCanvasRoot(transform)` (rebuild bỏ chuỗi
+`LoadAfterAssetBundleImpl`); Scene_Lobby/Scene_Game **phải tự thêm lúc S2** (Awake của 2 scene
+này là stub trống, không gọi `base.Awake()`).
+Ghi chú: Scene_Login component **đứng trên object "Canvas" (root)**; Scene_Lobby component
+đứng trên **"BaseCanvas" (root)** → refresh chỉ phủ subtree canvas đó (bản gốc cũng vậy).
+
+### Recipe resolve string trong `.data` (cell pointer = 0 trong file)
+
+`script.json` `ScriptString[].Address` là **số thập phân (RVA)**; `.data` cell trong Ghidra
+khác script space **+0x100000**. File bytes tại cell = `00` (relocatable) → đọc **`.rela.dyn`**
+(`SHT_RELA`, entsize 24): `r_offset` = VMA cell, `r_addend` = VMA string → tra `ScriptString`.
+Đã dùng cho: `0x69762A0 → "Settings"` (SaveSetting key), `0x6982AE8 → "LanguageName"`,
+cells LogAdjust `0x69819D0/9D8/9E0 → "before_locale" / "t4335r" / "after_locale"`.
+`script.json` `ScriptString.Value` có thể rỗng → fallback đọc bytes tại addend.
+
+### Porting gotchas gặp thật
+
+- **CS1612** `Cannot modify the return value of 'ParticleSystem.shape'/'emission'/'main'`:
+  module struct Unity 2022 trả về bản copy → bắt buộc `var main = ps.main; main.x=…;`.
+  Khớp với decomp (result của `get_main` nằm **trên stack slot, dùng lại 2 lần** →
+  bản gốc cũng khai local).
+- `Utility.ToColor` cần `using System.Globalization;` (Utility.cs không có).
+- `Locales`: `Enum.GetValues` = **14** entry (có AR@13) vs blob gốc 13 (AR loại) —
+  13 button trong scene wired `OnSelectLocale` arg **0..12** → AR không tới được, vô hại.
+- `Localized*` component: **Scene_Login.unity không có cái nào** (0 ref) →
+  canvasRoot refresh là no-op ở login; `Scene_Lobby.unity` có hàng trăm (dưới BaseCanvas/
+  PopupCanvas/OverlayCanvas — 3 **root** riêng) → quan tâm lúc S2.
+
+### Gate (tất cả pass 2026-10-09)
+
+| Gate | Lệnh | Kết quả |
+|---|---|---|
+| compile | `Unity -batchmode -nographics -quit -projectPath <proj> -executeMethod Kgc.Editor.MasterDataSmokeTest.Run` | exit 0, 0 `error CS`, `[S0] master data` 4 bảng |
+| locale (mới) | `-executeMethod Kgc.Editor.LocaleSmokeTest.Run` | exit 0, `[S1] locale smoke test OK` — check ToColor (6/8-digit, parse-fail→white), ForEach/Find, `GameManager.Get()+settings+SaveSetting`, `ChangeLocale(VI/EN_US)` → `L("LanguageName")` = `Tiếng Việt`/`English`, `HandleLanguageChanged` không NRE |
+| audit | `KGC_AUDIT_SCENE=Scene_Login KGC_AUDIT_STRICT=1 … -executeMethod Kgc.Editor.SceneAudit.Run` | exit 0, `missingScripts=0 locKeys=31/31` |
+| play capture | `KGC_CAPTURE_PLAY=1 timeout 300 xvfb-run -a -s "-screen 0 1280x2048x24" <Unity> -batchmode -force-glcore -projectPath <proj> -executeMethod Kgc.Editor.CaptureScene.Run` | exit 0, `[PLAYCAPTURE] play capture ok`, screenshot `/tmp/opencode/shot_Scene_Login.png` render đúng, không exception |
+
+## 33. v174 request-format audit + the AES key bug (2026-10-09)
+
+Prompted by "lỗi không phải do token, mà do cách req/res mình đang làm". Checked the client
+code, then A/B-tested prod. **Verdict: the format had 2 real bugs, neither explains the dead
+tokens.**
+
+### Client header set re-derived on v174.0.00 (same as §31, re-verified)
+
+`Web.<Get>d__14<object>.MoveNext` (generic inst RVA **0x5120F64**) sets exactly
+`version` ← `Application.get_version()`, **`platform`** ← `Application.get_platform().ToString()`,
+`time` ← `GetServerTimestampV2/V1()`, `accessToken` ← state field (skipped when null).
+No `x-unity-version`, no `encryptedwithhex` (still absent from `stringliteral.json`).
+`Web.SetHandler` (0x2DAAAF8) only installs the certificate handler - no headers.
+The 3 other `SetRequestHeader` callers in game code are `DeepLinkManager` collab POSTs
+(`Content-Type: application/json` only).
+
+**Bugs found in `api/config.py` (both fixed, test `server/tests/test_api_client_format.py`):**
+
+1. `AES_KEY` was `b53019bb76da6b34` (the v169 value) -> prod answers **HTTP 400** to every POST
+   and responses are undecryptable. Correct = `a6072ad6b9c959ff` (`server/crypto.py`).
+   Verified live: same body, only the key differs -> 400 vs 200.
+2. `platform` header missing; `time` was `md5(unix_seconds)` instead of
+   `AES(str(unix_ms))`; `x-unity-version` + `encryptedwithhex` were invented.
+   `tools/prod_probe.py` A/B on `/auth/getPatchFolder`: `time` = **md5 still returns 200**,
+   so the server does not validate the `time` value - only its presence was in doubt and the
+   400 turned out to be cause (3) below, not `time`.
+
+### Extra finding: an invalid `accesstoken` header turns a pre-auth 200 into HTTP 400
+
+`/auth/getPatchFolder` answers 200 with no token but **400** when the auto-loaded dead token
+from `captured_token.txt` rides along. So a 400 there is a *token* symptom, not a body symptom.
+
+### Token blocker unchanged - format is NOT the cause
+
+`GET /player` with the same (dead) token, correct headers vs the old config.py shape, one
+minute apart: **both `401 NotCertifiedToken`**. Header shape changes no token verdict.
+Re-confirmed dead ends:
+- The captured plist holds only `accessToken`, `lastLoginId`, `GuestId` - **no XIGNCODE cookie**
+  (all 506 prefs keys decrypted, `tools/extract_ios_token.decrypt_3des`); cookie stays runtime-only.
+- `POST /auth/login` (with token in query and/or `accesstoken` header, real `deviceUuid` =
+  `UnityInstallationId` from the plist) cannot revive a purged session -> same 401.
+- Every other endpoint tested without a token -> `401 WrongTokenError`.
+
+Open question: authenticated POST bodies may be encrypted with the **session key** established by
+`RestAPI.Auth`'s `BeginCryptoV2Handshake` (X25519) rather than `AESEncryptWithServer`; untestable
+until a live token exists. GETs (all of find_player) have no body, so this only affects POSTs.
+
+### Tooling (now in-repo, replaces the /tmp scanners in §30)
+
+- `tools/lit_refs.py` - string literal -> ADRP/LDR sites -> owning method (fixes the §30 step 1
+  trap: scan every exec section, the code is in `il2cpp`, not `.text`; also reads the
+  `/* GenericInstMethod : */` RVAs, which is where generic MoveNexts like `Web.<Get>d__14` live).
+- `tools/bl_callers.py <dump> <so> <target_rva> [--literals]` - callers of one method + their literals.
+- `tools/method_lits.py <dump> <so> <rva...>` - literals of one method.
+- `tools/prod_probe.py [--player]` - the format matrix above (each variant = 1 prod request).
+
+## 34. XIGNCODE cookie call-chain (route B) + fast token capture via incremental backup (2026-10-10)
+
+Goal was still a live official `accesstoken` for `api/find_player.py`. Two routes worked in
+parallel; route A (capture) is the one expected to pay off, route B is mapped but parked.
+
+### Route B - the `cookie` that gates `/auth/xcd` is computed by a packed native core
+
+Full static chain, all from `apk/com.awesomepiece.castle@174.0.00.xapk`, resolved offline:
+
+1. C# `RestAPI.GetXigncodeSeed()` @ `0x2D2F030` -> `GET /auth/xcdSeed?version=`; the coroutine
+   using `/auth/xcdSeed?version=` has MoveNext @ `0x2D7F020`.
+   `RestAPI.XigncodeValidCheck(cookie)` @ `0x2D2F0F8` -> `GET /auth/xcd?cookie=`
+   (MoveNext @ `0x2DAA65C`). Endpoint strings are set in `RestAPI..cctor` @ `0x2D2E088`.
+2. `AppSignManager.GetCookie(seed)` @ **`0x361FC5C`** (image `appsign4acs.dll`) is a 104-byte
+   wrapper: `AppSign.System.get_Instance()` then tail-calls **`System.GetCookie2(seed)`**
+   @ `0x2C397E0`. `AppSign.System` is an `AndroidJavaClass` wrapper, so this is JNI:
+   `_clazz = new AndroidJavaClass("com.wellbia.xigncode.AppSignClientSystem")`, methods
+   `"getCookie2"` / `"setUserInfo"`. `AppSignManager.SetUserInfo(info)` @ `0x361FCC4`.
+3. `lib/arm64-v8a/libxigncode.so` (559 KB, in `config.arm64_v8a.apk`) is only a **JNI shim** -
+   24 exports, all `Java_com_wellbia_xigncode_*`, no algorithm.
+   `Java_..._AppSignClientSystem_ZCWAVE_GetCookie2` @ `0x1EB18` does:
+   `GetStringUTFChars` -> `System->ZCWAVE_SendCommand(0x20, buf, 0x104, seed)` -> `NewStringUTF`.
+   `GetCooke` (v1) @ `0x1E728` uses cmd **`0x1c`**; `Cleanup` @ `0x1E524` uses `0x16`.
+   The `System*` is `*(u64*)0x8C0B0` (.bss, a `shared_ptr{ptr,ctrl}` pair - ptr first), and the
+   command entry point is the **atomic slot `System+0x30`** (`ldar` on read, `stlr` on write at
+   `0x10644`).
+4. That slot is filled by `dlsym(handle, "ZCWAVE_SendCommand")` in the init function starting
+   @ **`0xFF04`** (`libxigncode.so`). The symbol name is built on the stack with a **double XOR**:
+   `key = 0x6e` at `[sp]`, `byte[i] = (key+i) ^ MASK[i]`, then re-XORed with `(key+i)` - the two
+   passes cancel, so the plaintext is just the mask bytes. Mask =
+   `5a 43 57 41 56 45 5f 53 65 6e 64 43 6f 6d 6d 61 6e 64` = **`ZCWAVE_SendCommand`** (18 chars).
+   The `dlopen` handle comes from `System+8+0x924` (an in-object path), `bl 0xE5B0`.
+5. The symbol is **not** in any on-disk `.so`'s `.dynsym`. `libgabriel.so` (8.6 MB) is a 0x3C-byte
+   stub (SONAME `dummy_symbol`, `.text` 60 bytes) that **embeds uncompressed arm64 ELFs** at
+   `0xDF620`, `0x120620`, `0x6BE620` (ELF magics also at `0`, and a bogus one at `0x6869C8`).
+   Carve + `readelf`:
+   | carve | SONAME | size | `ZCWAVE_SendCommand` |
+   |---|---|---|---|
+   | `0xDF620..0x120620` | `libraphael_barrier.so` | 266 KB | `0xD388` (104 B) |
+   | `0x120620..0x6869C8` | (no dynsym - the packed core) | 5.6 MB | - |
+   | `0x6BE620..0x848620` | `libsariel.so` | 1.6 MB | `0x22414` (104 B) |
+6. Both are the same varargs trampoline: pack `(cmd, buf, size, seed, ...)` into a `va_list` and
+   tail-call **`ZCWAVE_SendCommandVa`** (`libraphael_barrier.so` `0xD250`, 312 B).
+   **PLT/GOT mapping trap**: `.rela.plt` is NOT in PLT-slot order here. Resolve by `r_offset`
+   (GOT address) instead of relocation iteration index - GOT `0x43E20` -> `ZCWAVE_SendCommandVa`
+   while the first relocation is `usleep`. `bl 0x87D0` = SendCommandVa, not usleep.
+7. `SendCommandVa`: `w8 = cmd - 0x15; if w8 > 0xf -> default`; byte jump table at
+   **`0x301A0`**, target = `0xD290 + table[w8]*4`. Table = `00 1c 10 10 10 10 3a 10 10 10 10 10
+   10 10 00 00`, so cmd `0x20` (GetCookie2) and `0x1c` (GetCooke) both land on **`0xD2D0`**,
+   which is *another* indirection: `handler = *(u64*)0x44040; handler(cmd, ap)`.
+   That global is set at init, and the registered implementation lives in the **packed 5.6 MB
+   core** (`gabriel_p2`), which has no symbol table.
+
+**Where route B stops**: reversing cmd `0x20`'s real body requires unpacking that core (same class
+of work as `server/patchers/unpack_neo.py` for libil2cpp), and the cookie may still embed a device
+fingerprint set by `setUserInfo`/init, in which case a Python port would not validate. Revisit only
+if route A proves impossible.
+
+Tools added (generic, work on any stripped arm64 `.so` where `vaddr == file offset`):
+`tools/xign_xref.py` (ADRP+ADD -> literal xref), `tools/xign_bl.py` (BL/B -> target),
+`tools/xign_absrefs.py` (ADRP + encoded imm12 load/store -> exact absolute address; the naive
+capstone page-tracking version leaks across basic blocks and produces garbage - don't reuse it).
+
+#### Route B progress (2026-10-10, second pass): Unicorn emulator reaches the cookie handler; blocker = the packer's runtime GOT/reloc decryption
+
+Built `.tmp/xign/emulate_cookie.py` (Unicorn, arm64). It **loads xign_core.so, applies all
+relocs, and executes `ZCWAVE_SendCommandVa(0x20, buf, 0x104, seed)`** — a `--pc` trace proves the
+full dispatch path runs: `0x1961c0` (export: `sub w8,w0,#0x11; cmp w8,#0x16` cmd-range check +
+byte-table at `0x436A7E`) -> cmd `0x20` block `0x196398` -> `0x1d248c` (global-object dispatcher)
+-> vtable[+0x70]. This is a working skeleton; only the last hop fails.
+
+**ELF layout (verified; the headers lie for the RW region - packed):**
+- 7 phdrs. `PH[0]` R-X off 0 vaddr 0 filesz `0x54a9fc`; `PH[1]` RW off `0x54bf90` vaddr `0x54ff90`
+  filesz `0x206d0` memsz `0x29880`; `PH[2]` DYNAMIC off `0x562db0` (this one is **empty/stale**).
+- Real `DYNAMIC` is at **file `0x563db0`** (found by scanning for a valid DT-tag run). Its values
+  (SYMTAB `0xa40`, STRTAB `0x2330`, RELA `0x2f38`, JMPREL `0x37198`, INIT_ARRAY `0x54ff90`) are
+  **+0x1000 off from the actual file bytes** for the R-X metadata region: real SYMTAB file `0x1a40`,
+  STRTAB `0x3330`, RELA `0x3f38`, JMPREL `0x38198`. `ZCWAVE_SendCommandVa` st_value `0x1951c0` but
+  the code is at file/guest **`0x1961c0`** (`0x1951c0` is mid-function string-decrypt).
+- Relocs apply cleanly in "file offset == guest VA" space: 8859 RELATIVE + 20 GLOB_DAT + 257
+  JUMP_SLOT (+21 other). R_AARCH64_RELATIVE addends are true VAs; PH[1] maps file `= VA-0x4000`.
+
+**The blocker (precise):** cmd `0x20` needs the core object at bss **`0x571C98`** (reloc
+`*(0x567C88)=0x571C98`; dispatcher `0x1d248c` does `ldr x8,[0x567C88]; ldr x8,[x8]; vtable=*[x8];
+bl vtable[+0x70]`). With no object it returns `0xe0190304`. Bootstrapping a minimal object
+(vtable `0x557540`, ctor `0x1d2574`) makes the dispatcher fire, and the cookie handler then runs
+until it hits **PLT thunk `0x3a7b0` -> GOT slot `0x5686c8` -> raw `0x389b0` = `udf`** -> crash.
+That GOT slot is **NOT in JMPREL** and has **no reloc**. In fact the whole `0x568000+` GOT region
+(the INIT_ARRAY thunks at `0x568030+` AND the cookie handler's imports) is placeholder'd with
+`0x389b0` (udf / packed-reloc sentinel). `xign_core.so` here is **byte-identical to libgabriel's
+embedded container copy** (`0x120620..0x68D300`) = the **raw pre-decryption** image.
+
+**Root cause:** XIGNCODE does not encrypt code (hence the dispatch executes) but **hides the
+reloc table / lazy-binding GOT** behind a sentinel. `libraphael_barrier.so`'s init (`0x96c0`,
+XOR-decrypts filenames + file I/O; the caller fwrite's the cleaned ELF to a temp file and
+`dlopen`s it) produces the clean, initializable image. Our emulator runs the **raw** copy, so both
+the core-object init (INIT_ARRAY thunks -> `0x389b0`) and the handler's imports fail.
+
+**Next step to finish route B:** obtain the **decrypted xign_core.so** (emulate/extract libraphael's
+unpacker, same class of work as `server/patchers/unpack_neo.py`) and load *that* in the emulator —
+then init constructs the object and cmd `0x20` should emit the cookie.
+**Caveat (unchanged from above):** the cookie may embed a device fingerprint from `setUserInfo`/
+init, so even a correctly computed cookie might not validate server-side — test once one computes.
+
+### Route A - capture the plist token fast (incremental MobileBackup2)
+
+Verified fact: the plist token **is** the token the client sends, and prod recognises it
+(`402 ExpiredToken` = server-issued, just expired). So the whole problem is the ~115 s full-backup
+latency, not token validity. Real profile on this iPhone: the game plist lands ~150 s in, and the
+device streams ~500 files/s (51 k+ files, 1.7 GB discarded) before `Manifest.db` arrives.
+
+`tools/extract_ios_token_live.py` was one-shot and **aborted the stream the moment the plist was
+read**, so `Manifest.db` was never written and pymobiledevice3 could never go incremental. Now:
+
+- `KGC_KEEP_BACKUP` (default **1**) keeps `.tmp/kgc-live-backup/` instead of `rmtree`-ing it.
+- `KGC_BACKUP_COMPLETE=1` suppresses both `raise TargetPlistCaptured` sites so the backup runs to
+  the end - **required once**, so the device commits incremental state.
+- `_instrumented_upload` now **keeps** `Manifest.db`/`Manifest.db-{shm,wal}`/`Manifest.plist`/
+  `Status.plist`/`Info.plist` into `<BACKUP_DIR>/<udid>/`; previously everything but the game
+  container was drained, so the metadata never existed locally.
+- `_incremental_ready()` then makes `main()` pass `full=False`, and pymobiledevice3's own
+  `_should_do_full_backup` re-forces a full run if the three required files are missing/empty.
+
+One-off bootstrap: `KGC_BACKUP_COMPLETE=1 KGC_KEEP_BACKUP=1 python3 -u tools/extract_ios_token_live.py`
+(keep the phone unlocked; a passcode prompt appears). Afterwards plain
+`python3 tools/capture_and_probe.py` should capture in seconds and probe immediately.
+**Risk still open**: the *device* decides full vs incremental (the `Backup` request carries no
+flag), so if it never committed a snapshot the "incremental" run silently streams everything again.
+The timing printed by the extractor is the verdict.
+
+#### Route B progress (2026-10-10, third pass): relocs fixed, cookie fn reachable, blocker = JNI runtime env
+
+`.tmp/xign/emulate_cookie.py` now loads the raw `xign_core.so`, applies **all** relocs correctly
+and drives the dispatcher to the cookie handler. Corrections over the second pass above (the
+`0x567C88` / vtable `0x557540` figures there were the **un-shifted** wrong addresses):
+
+- **Metadata shift is real but `dynsym` is SPLIT by the packer.** DYNAMIC values (`SYMTAB 0xa40`,
+  `STRTAB 0x3330`, `RELA 0x3f38`, `JMPREL 0x38198`) and `st_value` are **+0x1000** in file space
+  (`ZCWAVE_SendCommandVa` st_value `0x1951c0` → code `0x1961c0`). `INIT_ARRAY` read at
+  `0x54ff90+0x1000 = 0x550f90`. **`.dynsym` entries 3..61 live at file `0xa40`, 62..265 at `0x1a40`**
+  (`0x1a40 + 266*0x18 == 0x3330 == STRTAB`); merging both ranges resolves 202 more imports and makes
+  `idx 264 → ZCWAVE_SendCommandVa` self-resolve. All relocations write to `r_offset + 0x1000`, addend
+  un-shifted. Result: 8859 RELATIVE + 20 GLOB_DAT + 257 JUMP_SLOT + 21 ABS64 applied.
+- **Cmd table (byte table `0x436a7e`, `index = cmd-0x11`, `handler = 0x1961ec + byte*4`):** every
+  handler ends `ldr x30,[sp],#0x10; b TARGET`. cmd `0x23`/`0x24` → `0x1961ec` (reads 6 va-args) →
+  **`0x1d2158` = lazy-init, the ONLY writer of `*(0x571c98)`** (object cell). If the cell is already
+  set it returns `0xe0191011`. cmd `0x1d`/`0x20` → `0x196398` → **`0x1d248c` dispatcher**.
+- **JNI surface (`libxigncode.so`) — the real call sequence:** `SetUserInfo(info)` @ `0x1ed68` →
+  tail-call `0x1930c` → **sends cmd `0x1d`** with the userInfo string. `GetCookie2(seed)` @ `0x1eb18`
+  → `GetStringUTFChars` → **sends cmd `0x20`** with `x1=buf, x2=0x104, x3=seed-C-string-ptr` (the
+  seed is a **string pointer**, not an integer). `Initialize` @ `0x1dd98` only JNI-converts strings
+  and stores them in shim globals (does **not** send a cmd). No `.so` sends cmd `0x23`/`0x24` (the
+  `movz` scan only finds return values) and there are **zero direct B/BL callers** of `0x1d2158` —
+  so who creates the object in production is still unconfirmed (likely an internal core init).
+- **Dispatcher `0x1d248c`:** `x8 = **(0x568c88)` (= `*(0x571c98)`; reloc `*(0x568c88)=0x571c98`);
+  null → `0xe0190304`; else `vtable = *obj; br vtable[+0x70]` = **`0x2509d8`** (cookie fn).
+- **Object ctor `0x22ce98`** stores `obj[0]=0x558e18` (vtable), `obj[8]=0x558f18`, `obj[16]=0x558f48`.
+  A hand-built object (`--bootstrap`, vtable `0x558e18`) makes the dispatcher **reach `0x2509d8`**.
+- **Syscalls:** the core issues raw `svc #0` (bionic wrappers @ `0x31a1xx`). aarch64 numbers (NOT
+  x86-64): `79 newfstatat, 56 openat, 48 faccessat, 34 mkdirat, 35 unlinkat, 63 read, 57 close,
+  61 getdents64, 78 readlinkat`. `UC_HOOK_INTR` handles them; a fake FS makes `/proc/self/maps`
+  parse. **`UC_ARM64_REG_X8` must be imported** or the hook crashes.
+- **vtable entries are control-flow-flattened** — `0x2509d8`, `0x24d830`, `0x250cf8` all begin
+  mid-`std::string`/basic-block (no prologue). The obfuscator scrambles BB order, so entering at the
+  vtable value with stale regs/flags follows bogus branches (observed: reads unmapped `0x57b000`).
+
+**Blocker (precise): cmd `0x23` init cannot complete in the emulator.** The chain is
+`0x1d2158` → scan `0x229908(arg1)` (result → `**(0x568d10)`) → `malloc(0x2e8)` → ctor `0x22ce98` →
+init `0x22d3b8` → `0x218b90`. Three environment dependencies, each revealed by bypassing the last:
+1. `0x229908` filesystem/anti-tamper scan builds paths `/data/data/<pkg>/xigncode/...` using a
+   package name from **JNI `getPackageName`**; with no JNI env the name is `(null)` and the format
+   strings themselves are **not plaintext** in this raw image (runtime-decrypted).
+2. `0x218b90` reads `*(0x575818)->[0x5c0]`, a **JNI-populated ops-table fn ptr** (NULL here) → `blr 0`.
+3. Bypassing those two (`--bypassscan/--bypassinit`) just moves the crash deeper (`0x225788` reads a
+   garbage pointer `0x7f0000875404` derived from the zeroed dummy config).
+
+**Conclusion (route B):** the emulator is architecturally correct and reaches the cookie handler, but
+producing a valid cookie requires reconstructing the **XIGNCODE JNI runtime** — a fake `JNIEnv`
+(`FindClass`/`GetMethodID`/`CallObjectMethod`/`GetStringUTFChars`), the ops table at `*(0x575818)`,
+and the scan config at `**(0x568d10)` — plus working through control-flow-flattened code. That is a
+multi-session effort with uncertain payoff (the cookie may still embed a device fingerprint). The
+reusable assets are `emulate_cookie.py` (reloc/metadata/dynsym-split + syscall emulation + cmd
+dispatch, all verified) and this decode. Route A (capture) remains the simpler path but needs a live
+device and beats the ~115 s TTL race.
+
+### Official AES key rotated BACK to `cnf1tl65djs2wp3g` (verified 2026-10-11)
+
+The key documented in §33 / `api/config.py` / `server/crypto.py` / `tools/prod_probe.py`
+(`a6072ad6b9c959ff`, "current prod") is **stale**: it now yields HTTP 400 on request-body
+endpoints and garbage on response decrypt. The **current key is `cnf1tl65djs2wp3g`** (the old
+v165-168 value — official rotated back). Empirical check on `kgc-k8s-1.awesomepiece.com`:
+
+- `GET /auth/xcdSeed` decrypts cleanly with `cnf1tl65djs2wp3g` → `{"code":200,...,"seed":<long
+  random string, changes every request>}`; `a6072ad6…`/`b53019bb…` → garbage.
+- `POST /auth/getPatchFolder` enc'd with `cnf1tl65djs2wp3g` → HTTP 500 (body decrypted, failed
+  on missing auth); enc'd with `a6072ad6…`/`b53019bb…` → HTTP 400 (undecryptable). So
+  `cnf1tl65djs2wp3g` is the universal request+response key, not endpoint-specific.
+
+### Cookie capture = MITM, and `token_harvester.py` now also grabs it (2026-10-11)
+
+The plist-based `tools/extract_ios_token_live.py` captures the **token** only (TTL ~2 min —
+reconfirmed: the Oct-10 captured token answers `401 NotCertifiedToken`). The durable **cookie**
+exists only inside the HTTPS request URL `GET /auth/xcd?cookie=…`; it is not persisted to the
+plist (searched — no cookie-shaped value). `api/auth/xigncode.xel` in the app container is
+XIGNCODE's encrypted state file (magic `mLxz`, 2.88 MB), not plaintext.
+
+`api/auth/token_harvester.py` (passive mitmproxy addon) was extended to capture the cookie
+from the request query (`request()` hook → `captured_cookie.json`) and the seed from the
+`/auth/xcdSeed` response (`response()` hook → `captured_seed.txt`), in addition to the token.
+It overrides `config.AES_KEY = b"cnf1tl65djs2wp3g"` locally. Verified end-to-end through
+`mitmdump --listen-host 0.0.0.0 -p 8888 -s api/auth/token_harvester.py` (curl needs `-k`
+unless the system trusts the mitmproxy CA). **Caveat not yet tested on the stock iOS client:**
+the game ships `PinnedCertHandler` (the private build patches `ValidateCertificate`→true to
+accept a self-signed cert), so live-HTTPS MITM may be rejected by cert pinning — §34's route B
+emulation exists precisely because the cookie can't otherwise be minted. If the iPhone capture
+works, next step is to test cookie **reusability** (is the cookie a stable per-device value, or
+bound to the per-request seed?).
+
+### MITM is dead on the stock iOS client — cert pinning confirmed (2026-10-11)
+
+Set the iPhone Wi-Fi proxy to the host (`192.168.1.55:8888`, mitmproxy CA installed + trusted).
+mitmproxy log: Apple Game Center domains (`init.gc.apple.com`, `friend.gc.apple.com`) return **200**
+(system-CA trust), but **`kgc-k8s-1.awesomepiece.com:443` fails the client TLS handshake** ("client
+disconnected during the handshake … does not trust the proxy's certificate"). The game's own backend
+is pinned (`PinnedCertHandler`), so the cookie cannot be intercepted on a stock client. Revert the
+proxy after testing — with it set, the game hangs at the dev-logo screen (its first backend call is
+the pinned one). Route B (compute the cookie) exists precisely because capture is blocked.
+
+### Route B emulate: x30 clobber fixed; scan = anti-tamper + custom JNI-wrapper; cookie fn uses MD5 (2026-10-11)
+
+Continued `.tmp/xign/emulate_cookie.py` (Unicorn arm64). Concrete findings, in the order they unblocked:
+
+1. **Fake-syscall stack clobber (fixed).** cmd `0x23` (init) crashed at `0x21f3a0` (`ret` → x30 was
+   0 → executed the ELF header at VA 0). Root cause: the fake `newfstatat` (svc 79) handler wrote a
+   **256-byte** `struct stat` (`pack(8×Q)=64 + 192`), but the aarch64 **kernel** `struct stat` is
+   **128 bytes**. The oversized `emu.mem_write` overflowed the caller's stack stat buffer into
+   `0x21c3d0`'s saved x30 slot (`sp_final+0x2A8`). Fixed to 128 bytes with `st_mode@16` / `st_nlink@20`.
+   **Debug recipe**: watch the saved-x30 slot (`stp x29,x30,[sp,#0x50]` → x30 at frame `sp_final+0x2A8`);
+   a Python-side `emu.mem_write` from a syscall/stub does **not** fire `UC_HOOK_MEM_WRITE`, so instrument
+   the `_w`/`memcpy`/`memset` stubs with an overlap guard — the guest-write hook alone misses it.
+
+2. **The scan is anti-tamper and uses a custom XIGNCODE JNI-wrapper.** After the x30 fix the scan runs
+   with a healthy stack but then jumps to the tamper sentinel **`0x2600000000`** (unmapped → intentional
+   halt). It reaches JNI through a **wrapper ops-table at `*(0x575818)`** — *not* the raw JNINativeInterface:
+   observed method offsets `+0x1d0` (a `fn(outbuf, size, str)` format/copy wrapper), `+0x478`, `+0x5c0`.
+   `*(0x575818)` is NULL after INIT_ARRAY (a ctor does not populate it). The `--fakjni` mode (fill the
+   table with per-slot logging stubs, `JNI_STUB_BASE+i*16`, so the code hook derives the offset from the
+   stub addr) fires the calls, but zero-returns flow into object-graph building (`object[x19+0x20]` vtable
+   derefs) as garbage pointers → `READ_UNMAPPED`. Running the scan to completion = reimplement this wrapper
+   layer + the object graph + the anti-tamper checks. Multi-session.
+
+3. **The cookie fn computes with MD5 (portable once the input is known).** cmd `0x20` → dispatcher
+   `0x1d248c` → object vtable `[0x70]` = `0x2509d8` (control-flow flattened). It strips `'-'` (0x2d) from a
+   device-ID **`std::string`** held in the object, then assembles the cookie. **MD5** init constants
+   `H0-H3` (`0x67452301/0xefcdab89/0x98badcfe/0x10325476`) sit at `0x4c73c0-0x4c73cc`; no SHA-256 constants
+   exist. So the checksum is standard MD5 — portable to Python **if** the exact input (seed + fingerprint
+   + any secret/composition) is known. With a zeroed `--bootstrap` object it loops reading a null
+   `std::string` ptr → crash.
+
+**Net**: route B now has two concrete sub-paths, both still needing the object layout: (a) run the scan to
+completion (reverse the JNI-wrapper + object graph + anti-tamper), or (b) craft an object with a **known**
+fingerprint string → run the cookie fn → capture an (input, output) pair → reverse the MD5 composition
+empirically → port to Python. (b) is the shorter path to a *portable* cookie but still requires finding
+the fingerprint `std::string` field offset in the object. Neither is quick; the honest endgame for a real
+cookie fast remains running the **real** `libxigncode.so` on redroid (real JNI env + real anti-tamper
+passes natively) with an SSL-bypass build, MITM-capturing the cookie, and reversing the algorithm from
+real cookie+seed pairs.
+
+## 35. Official-token sprint: session refresh mechanism, TTL race, and why every capture failed (2026-10-10)
+
+### The answer to "how does the game never log out if the token expires"
+
+**`Scene_Game.UpdateImpl` -> `RestAPI.ShakeHand()` -> `GET /auth/shake-hand`**
+
+`RestAPI.ShakeHand()` (RVA **0x2D2EE9C**) has exactly **one** caller in the whole binary:
+`Scene_Game$$UpdateImpl` at call site RVA **0x2E73388**. So the game pings the keep-alive
+**from its main gameplay loop**. The server slides the session window on every ping, which is
+why the client never needs to re-login while playing.
+
+Related (found while hunting the refresh, kept for completeness):
+
+| Method | RVA | Called from |
+|---|---|---|
+| `Scene_Login.AutoLogin` | (caller, site 0x36442F0) | → `Login(token)` 0x364434C **and** → `ReAuth()` 0x36443F0 |
+| `Scene_Login.CheckError` | 0x36463BC | site 0x36464C0 → **`ReAuth()`** (error path re-auths) |
+| `CheckError` callers | — | `<Auth>d__97.MoveNext` 0x364B2B8, `<Login>d__95.MoveNext` 0x3652998 |
+| `HandleAuthResponse` (writes prefs + `RestAPI.accessToken`) | 0x364452C | `<Auth>d__97` 0x364B2A8, **`<ReAuth>d__122.MoveNext` 0x36537D0** |
+| `Auth(id)` | 0x364448C | Google/Apple login, AutoRegister, AccountTransfer, Register |
+| `RestAPI.NextDay(token, cookie)` | 0x2D2EB60 | `Scene_Base.<FetchNextDay>d__40.MoveNext` 0x3625130 (daily reset, see §"daily-reset boundary") |
+
+**Recipe for "who calls X" on il2cpp** (reused 3× this session): scan the `.so` for `BL` with
+`(w>>26)==0x25`, sign-extend the 26-bit `imm26`, target = `site_RVA + imm*4`; file offset =
+`RVA - 0x4000`; identify the enclosing function by binary-searching `script.json`'s sorted
+`ScriptMethod.Address`. Do this instead of grepping — it answers in one pass.
+The mirror trick (find callers of a **string literal**) does **not** work by ADRP: literals are
+reached through a static field, so direct page references to `/auth/shake-hand` (0x6B97F58)
+scanned to **0 hits**. Go via the method's RVA instead.
+
+### The real blocker: capture (119 s) vs token lifetime (~100 s)
+
+Six capture+probe runs on 2026-10-10. `tools/capture_and_probe.py` reads the game plist
+**~119 s** into a MobileBackup2 stream (device streams ~9000 files at ~75 files/s before the
+plist; the game's own container is near the *end* of the stream).
+
+Verdict matrix observed:
+
+| Verdict | Meaning | Cause here |
+|---|---|---|
+| `200` | live token | plist written **recently** (game had been sitting in lobby, token <81 s old) |
+| `402 ExpiredToken` | **genuine**, server-issued, just expired | plist written >~100 s before the read |
+| `401 NotCertifiedToken` | server does not recognise it | plist captured **before login completed** (early/mid-auth write) |
+
+**Timing model (fits all 6 runs):** force-quit + relaunch → an *early* token lands in the plist
+within seconds, but the **certified** token lands ~**90 s after relaunch**; token then lives
+~100 s. Therefore:
+
+- relaunch **before** capture starts → read at T+119 → age ~150 s → **402**
+- relaunch at T+55 → certified write would be ~T+145, read at T+118 → reads the early
+  uncertified token → **401**
+- (untested sweet spot) relaunch **at T=0** → certified ~T+90, read T+119 → age ~29 s → should be 200
+
+Capture and mint are therefore fundamentally racy until capture is <30 s. That is exactly why
+**route B (compute the cookie locally)** is the real prize: with `ZCWAVE_SendCommand` ported to
+Python, `GET /auth/xcdSeed` → cookie → `GET /auth/xcd?cookie=` mints a token on demand, in
+milliseconds, no backup stream at all.
+
+### Incremental backup still does not work (closed for now)
+
+- Client-side `KGC_BACKUP_COMPLETE=1` run reaches ~65 k files then dies with device error
+  **205 "Manifest references files not in backup"** — our instrumented upload **discards** files,
+  so the device's own manifest cross-check fails. `Manifest.db` (128 MB) *is* still downloaded.
+- A subsequent run *does* print `Starting INCREMENTAL stream backup` (Status.plist +
+  `Manifest.plist` are on disk) but the **device still streams everything** and still takes 115 s,
+  so no speedup — the device never committed a successful snapshot.
+- **Stock, unfiltered `Mobilebackup2Service` backup** (store everything, ~63 GB free) is the way
+  to make the device commit; it was started at 01:09 and died with
+  `ConnectionTerminatedError` at 01:14 (~5 min in, only 3 MB written — never even got the passcode
+  stream going properly). **Not yet retried.**
+- API gotcha: `Mobilebackup2Service.__init__(lockdown)` takes **no** `backup_directory`; pass it to
+  `await mb.backup(full=True, backup_directory=...)`.
+- House Arrest/AFC into the game container → `InstallationLookupFailed` (no file-sharing shortcut).
+
+### Tooling traps recorded this session
+
+- **`tools/prod_probe.py`**: default mode is the **format matrix on `/auth/getPatchFolder`
+  (3 prod requests per run)**; `--endpoint X` is *not* a flag — the flag is **`--player`**.
+  Two accidental runs cost ~6 requests of the ~290 budget. Print the mode before calling it.
+- Probe verdict can be read from the `plain = {"code":...}` line; `GET /player` is the cheapest
+  liveness check (200 = live, 402 = expired, 401 = unknown).
+- `api/find_player.py` only scans **top rankings**; even with a live token it reported
+  "not found in top rankings" and skipped Strife because `/colosseum` needs the token too.
+  Searching by name needs a wider sweep (or the Account ID) — **still open**.
+
+### Honest state at handoff
+
+No working official token yet. Everything else is mapped: request format (§33), the full cookie
+call-chain (§34), the session-refresh mechanism (§35). The two remaining paths are (a) retry the
+stock full backup once so captures become incremental/fast, then use the relaunch-at-T=0 window;
+or (b) finish route B and mint tokens locally. A handoff prompt for a fresh agent is checked in
+at `docs/handoff-official-token.md`.
+
+## 36. Official-server auth BREAKTHROUGH: real-xigncode cookie → token → login, and the scale blocker (2026-10-11)
+
+### The breakthrough (route: private build + real libxigncode.so on x86 redroid)
+- Private build `com.nowl.castle` (shows v173.1.00; ships the **v174 real** `libxigncode.so`) runs
+  on x86 redroid via ndk_translation. The real `libxigncode.so` (559296 B from
+  `apk/xapk_stock_174/config.arm64_v8a.apk`) was swapped into the config APK (stub→real,
+  re-signed `.debug.keystore`), installed via `install-multiple -r`.
+- Auth host `kgc-k8s-1.awesomepiece.com` appended to device `/system/etc/hosts` → 127.0.0.1
+  (`adb root` + `remount`). `adb reverse tcp:80 → tcp:9090` to `logproxy2.py` (fakes 200 for
+  `/auth/*`, forwards `/patch` to the local server :8080).
+- Capture: `am start …AirbridgeActivity` → wait for the login screen → `input tap 540 1612`
+  (Guest Login; white button band y≈1563-1662 on 1080x1920) → real xigncode computes the cookie →
+  client `POST /auth/xcd` (form body `cookie=…&client_id=…`, header `X-KGC-Device-UUID`) → proxy
+  captures the raw body.
+- Captured cookie (uuid `0fe32f28-6d7d-418f-9b3c-4b094b6f2380`):
+  `926988259842277236_809719a0b875d60aba56908821a52a6d_686d6c652d30303031<+23 nulls>`.
+  Component 3 = ASCII `"hmle-0001"` + null padding (32 B). Component 1 (num, 59-bit) = the
+  **device-id** (the server's `loginId` = `guest-<num>-<rand>`).
+
+### Official accepts it (end-to-end verified)
+- `GET /auth/xcd?cookie=<real>` → 200 `{"accesstoken":"…","refreshtoken":"…"}` (POST form also OK;
+  plain, no AES needed on this path).
+- `POST /auth/login` header `accesstoken` → 200 `{"loginId":"guest-926988259842277236-445246881","loginResult":1}`.
+- MD5 fakes (uuid±dash, raw bytes) do NOT match → there is a secret/salt. The num is not a uuid
+  reinterpretation (tested big/little-endian, first8/last8).
+
+### The scale blocker: the cookie is NOT freely reusable
+- Re-`/auth/xcd` with the same cookie after ~minutes → **401 `WrongTokenError`** (not rate-limit;
+  `x-rate-limit-remaining: 299`). Two *immediate* xcd calls (GET+POST) both minted the SAME token,
+  then a few minutes later → 401 ⇒ the cookie is **time/session-windowed** (neither single-use nor
+  eternal). ⇒ Scale requires minting a **fresh cookie per auth**: either (a) per-device capture
+  (rotate the device uuid + re-run the fragile emulator capture) or (b) crack the algorithm to
+  generate fresh cookies offline.
+
+### Emulator capture is a lottery (why it is not reliable)
+- x86 redroid runs arm64 via ndk_translation; the game **intermittently crashes** in libil2cpp
+  `ResourceSkin$$Init → ResourceBase.LoadFromString → String.Format` on the background
+  `ResourceManager.StartLoadingThread` (a race, ~10-18 s after login-screen `Awake`). The login
+  screen renders *before* the crash, but the window is racy; ~15+ capture attempts after the first
+  success all failed (crash killed the game before the tap→xcd flow completed, or the
+  "Failed to log in" auto-resume state disabled the button). One clean success proves it is
+  possible but not repeatable enough to scale.
+
+### Route B (offline Unicorn oracle) — real progress this session
+- `.tmp/xign/emulate_cookie.py` emulates `ZCWAVE_SendCommandVa` over `xign_core.so`. The prior
+  session's "**anti-tamper 0x2600000000**" is **misdiagnosed**: it is the **JNI ops-table**
+  (`*(0x575818)`) being unpopulated — init does `ldr x11,[x11,#0x1d0]; blr x11` (wrapper slot at
+  +0x1d0) and branches to garbage. Not an integrity check.
+- `--bootstrap` builds the core object at `*(0x571C98)` (vtable `0x558e18`) and `--noinitcmd` skips
+  init ⇒ the **cookie fn `0x2509d8` is reached and runs** (dispatcher path works). It then reads
+  the device-uuid from the object (dash-strip loop `ldrb w8,[x11]; cmp #0x2d` @ `0x250a0c`); with a
+  zeroed object the uuid pointer is garbage ⇒ the uuid field must be set.
+- Fixed: the RW-segment .bss map was too short (globals at `0x57b000`/`0x590000` unmapped); bumped
+  `map_seg` memsz `0x2A880`→`0x40000`.
+- `--fakjni` fills the ops-table with logging stubs ⇒ init proceeds past `0x2600000000` and calls
+  the JNI wrapper (`obj+0x1d0(env,0x410,buf)` ×2, `obj+0x478` ×2 = device-info reads), then crashes
+  deref-ing the stub's `0` return @ `0x22af54`. **Next**: implement the wrapper stubs to return a
+  valid device-uuid (jstring), let init complete, then reproduce the ground-truth cookie
+  (`0fe32f28… → 9269882598…_809719a0…`) to validate the oracle; then rotate the uuid for unlimited
+  fresh cookies.
+
+### Tooling for this session (not committed; lives in `.tmp/xign/`)
+- `logproxy2.py` — HTTP-aware proxy :9090 (fake `/auth/*`, forward `/patch`→:8080, log raw bodies).
+- `capture_cookie.py` / `harvest.py` / `diag_tap.py` — emulator capture + login drivers (fragile).
+- `emulate_cookie.py` — the Unicorn oracle (see Route B above).
+- `d.py` — capstone disasm helper (`python3 d.py <hex-file-off> [len]`, file-offset = RVA−0x4000).
