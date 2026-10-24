@@ -80,6 +80,9 @@ def test_raid_battle_loop_persists_and_advances(tmp_path, monkeypatch):
     assert set(info["bossList"]) == {42200, 42500}
     assert info["battleStartedAt"], "DateTime.Parse throws on a null date"
     hp0 = info["remainHp"]
+    # the pool must equal the boss unit's master-data HP - the client caps its HP
+    # bar at Units.xml <Hp>, so anything larger renders as an over-full bar
+    assert hp0 == clan._unit_hp_cache()[42200] == 375_000
 
     # partial damage drops remainHp and persists into the clan record
     end = clan.r_clan_raid_end({"damage": 1000, "isPracticeBattle": False}, st)
@@ -99,7 +102,7 @@ def test_raid_battle_loop_persists_and_advances(tmp_path, monkeypatch):
     after = clan._raid(st)
     assert after["killCount"] == 1
     assert after["round"] == 2
-    assert after["remainHp"] == clan._raid_max_hp(1)
+    assert after["remainHp"] == clan._raid_max_hp(after["boss"])
 
     # decks persist under the model field name, not the old `decks`
     decks = clan.r_clan_raid_deck({"deckIdx": 0, "deck": [10000, 10010]}, st)

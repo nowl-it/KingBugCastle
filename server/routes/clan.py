@@ -106,8 +106,13 @@ def r_clan(body, st):
             "seasonUntilAtDate": next_reset_iso(7),
             "nextSeasonStartAtDate": next_reset_iso(8),
             "clanRaidEnabled": bool(c),
+            # Same bracket as the PvP seasons (AGENTS.md): the client calls the raid
+            # "Raid Ended" and shows a countdown to nextClanRaidStartAtDate whenever
+            # now < that date, so the start must be in the PAST and the end in the
+            # future or the panel can never open. Was next_reset_iso(8) = "starts in
+            # 7 days" forever.
             "clanRaidUntilAtDate": next_reset_iso(7),
-            "nextClanRaidStartAtDate": next_reset_iso(8),
+            "nextClanRaidStartAtDate": now_iso(-1),
             "canReceiveClanPointAt": now_iso(-1),
             "canPlayClanRaidAt": now_iso(-1),
             "clanRaidLockedByLeaveUntilAt": now_iso(-1)}
@@ -215,11 +220,13 @@ def r_clan_noop_member(body, st):
 # c["raid"] so it survives a restart and a re-log.
 CLAN_RAID_ATTEMPTS = 5          # battles per reset window
 CLAN_RAID_ROUNDS_PER_STAGE = 5  # rounds before the stage (and boss HP) steps up
-# ClanRaidBossPowers.xml carries power-scaling tables, not HP, and boss max HP is
-# not in master data either, so a private server picks a deterministic base and
-# scales it by stage. The client draws the HP bar from the boss unit definition
-# and only needs remainHp from us.
-CLAN_RAID_BASE_HP = 5_000_000
+# Boss max HP IS master data: Units.xml carries <Hp> per boss unit (42200 Bronze
+# 375000, 42201 Silver 1050000 ... 42204/5 Diamond+King 5000000), and the client
+# clamps the HP bar to the boss unit it draws (GameManager.GetClanRaidBossHp).
+# The old CLAN_RAID_BASE_HP = 5_000_000 constant ignored that, so a fresh Bronze
+# raid opened at 5,000,000/375,000 - an over-full bar that cannot drop below
+# 4.6M no matter what the first battle reports.
+_RAID_VERSION = 2               # v1 seeded remainHp from the invented constant
 
 _XML_CACHE: dict = {}
 
@@ -239,8 +246,39 @@ def _raid_boss_ids():
            if (r.get("ID") or "").isdigit()]
     return ids or [42200, 42500]
 
-def _raid_max_hp(stage):
-    return CLAN_RAID_BASE_HP * max(1, stage)
+def _unit_hp_cache():
+    """unitId -> <Hp> from Units.xml, honouring Inherit (the Bronze boss defines
+    its own Hp; Silver..King override it). Parsed once, like the other tables."""
+    if "__hp__" not in _XML_CACHE:
+        hp, parents = {}, {}
+        for el in _xml_rows("Units.xml", "Unit"):
+            uid = el.get("ID")
+            if not (uid or "").isdigit():
+                continue
+            uid = int(uid)
+            h = el.findtext("Hp")
+            if h and h.isdigit():
+                hp[uid] = int(h)
+            p = el.get("Inherit")
+            if p and p.isdigit():
+                parents[uid] = int(p)
+        def resolve(u, depth=0):
+            if u in hp or depth > 8:
+                return hp.get(u, 0)
+            p = parents.get(u)
+            if p is None:
+                return 0
+            hp[u] = resolve(p, depth + 1)
+            return hp[u]
+        for u in list(parents):
+            resolve(u)
+        _XML_CACHE["__hp__"] = hp
+    return _XML_CACHE["__hp__"]
+
+def _raid_max_hp(boss):
+    """The boss unit's master-data HP - the exact number the client caps its HP
+    bar at. A boss id missing from Units.xml falls back to the Bronze base."""
+    return _unit_hp_cache().get(int(boss)) or _unit_hp_cache().get(42200, 375_000)
 
 def _raid_rank_for(kill_count):
     """Highest rank tier whose ReqBossKill the clan has reached -> (tierId, goldBonus)."""
@@ -265,12 +303,18 @@ def _raid(st):
     r = c.get("raid")
     if not r:
         bosses = _raid_boss_ids()
-        r = {"bossIndex": 0, "boss": bosses[0], "stage": 1, "round": 1,
-             "killCount": 0, "score": 0, "remainHp": _raid_max_hp(1),
+        r = {"version": _RAID_VERSION, "bossIndex": 0, "boss": bosses[0], "stage": 1,
+             "round": 1, "killCount": 0, "score": 0, "remainHp": _raid_max_hp(bosses[0]),
              "remainBattleCount": CLAN_RAID_ATTEMPTS, "remainResetCount": 1,
              "battleStartedAt": now_iso(0), "lastBattleAt": now_iso(-1),
              "supportUnitCardInfo": None, "decks": []}
         c["raid"] = r
+    elif r.get("version", 1) < _RAID_VERSION:
+        # v1 state carries the invented 5M pool the client can never show;
+        # re-seat HP onto the current boss's master-data value once.
+        r["version"] = _RAID_VERSION
+        r["remainHp"] = _raid_max_hp(r.get("boss", _raid_boss_ids()[0]))
+        save_state(st)
     return r
 
 def _raid_card_info(st, unit_id):
@@ -329,7 +373,7 @@ def _clan_raid_model(st):
     return {"clanId": c.get("id", 1), "score": r.get("score", 0),
             "killCount": r.get("killCount", 0), "stage": r.get("stage", 1),
             "round": r.get("round", 1), "boss": boss,
-            "remainHp": r.get("remainHp", _raid_max_hp(r.get("stage", 1))),
+            "remainHp": r.get("remainHp", _raid_max_hp(boss)),
             "currentPlayer": 1, "currentPlayerName": st.get("name", d["name"]),
             "battleStartedAt": r.get("battleStartedAt") or now_iso(0),
             "remainBattleCount": r.get("remainBattleCount", CLAN_RAID_ATTEMPTS),
@@ -437,7 +481,7 @@ def r_clan_raid_end(body, st):
             bosses = _raid_boss_ids()
             r["bossIndex"] = (r.get("bossIndex", 0) + 1) % len(bosses)
             r["boss"] = bosses[r["bossIndex"]]
-            r["remainHp"] = _raid_max_hp(r["stage"])
+            r["remainHp"] = _raid_max_hp(r["boss"])
             r["remainBattleCount"] = CLAN_RAID_ATTEMPTS
         save_state(st)
     return {"clanRaid": _clan_raid_model(st), "killBoss": kill}
