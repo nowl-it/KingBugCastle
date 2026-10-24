@@ -7554,3 +7554,33 @@ trả **200** (danh sách domain ở `docs`/patch_hosts), còn listing bucket CD
   (ASLR đổi mỗi lần chạy).
 - Trước khi quy tội cho miếng vá của mình: **chạy đối chứng không vá**. Cả một buổi đi tìm
   "XIGNCODE phát hiện byte trong RAM" chỉ vì thiếu lần đo đó.
+
+## §82 — Admin dashboard redesign + dark mode, audit log, raid admin (2026-10-25)
+
+Backend (`server/dashboard.py`, `server/playerdb.py`):
+- Audit log: mỗi admin action ghi qua `playerdb.audit_record` (bảng riêng trong `players.db`),
+  đọc bằng `GET /api/audit?limit=`.
+- Raid admin: `GET /api/raid/admin` (progress theo clan) + các endpoint mutate/`pids` bulk.
+- `GET /api/server/logs?lines=`: tail file log (`KGC_LOG_FILE`, mặc định `/tmp/kgc_server.log`).
+  Route này đăng ký **trước** proxy `/api/server/{section}` nên section `logs` cũ không còn
+  đi qua proxy `/admin/api/logs`.
+- Boss HP clan raid: nguồn đúng là `Units.xml` (base HP live), không phải constant cũ —
+  `server/routes/clan.py` (fix 5M/375k lệch máu boss).
+
+Web UI (`server/webui-next/`, Next 16 + Tailwind 4, export tĩnh vào `out/` — **build phải được
+commit cùng tay source**):
+- Token system: mọi màu đi qua `var(--background)`… (late-bound nên `.dark` chỉ cần override
+  biến gốc là đổi toàn bộ component). Dark mode class-strategy: `@custom-variant dark`,
+  `public/theme.js` áp class trước paint (localStorage `kgc-theme`, fallback system),
+  `ThemeToggle` dùng `useSyncExternalStore` (MutationObserver + storage event).
+- Trang mới: `/raid`, `/audit`; server page có tab Logs (tail 3s + pause, giữ nguyên nền
+  zinc-950 ở cả hai theme); accessories tách `components/accessories/*` (builder remount
+  theo `draftNonce`, không đổi luồng API).
+- Bẫy lint: engine của IDE KHÁC eslint của repo (react/no-array-index-key, compiler-deps chỉ
+  IDE báo; eslint gate thật là `next build` CI) — phải thỏa cả hai bằng cấu trúc thật, disable
+  comment khôngmute được IDE. Formatter hay viết lại chữ ký dài (api.ts `fetcher`) làm lệch
+  `eslint-disable-next-line` → dùng block `/* eslint-disable */ … /* eslint-enable */`.
+
+Verify: `pytest server/tests -q` → 144 passed; `eslint src` sạch; `pnpm run build` 18 trang.
+Push main → CI chạy pytest + `deploy.yml` → `deploy_hook.sh` trên host production
+(zero-downtime, preflight route_coverage chặn deploy từ checkout bẩn).
