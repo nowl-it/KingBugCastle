@@ -246,6 +246,20 @@ def _m9_donations(c):
               "ON donations(credited_at,created DESC)")
 
 
+def _m10_admin_audit(c):
+    """Trail of every admin mutation the dashboard performs.
+
+    Grants, mail, raw-save writes and raid edits all change a player's world; when
+    a save looks wrong the first question is "what did the dashboard do to it".
+    One append-only row per mutating call answers that. Never stores secrets -
+    the detail column is a short JSON summary chosen by the caller."""
+    audit_id = "BIGSERIAL PRIMARY KEY" if IS_PG else "INTEGER PRIMARY KEY AUTOINCREMENT"
+    c.execute("CREATE TABLE IF NOT EXISTS admin_audit ("
+              f"id {audit_id}, ts REAL NOT NULL, username TEXT NOT NULL, "
+              "action TEXT NOT NULL, target TEXT, detail TEXT)")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_admin_audit_ts ON admin_audit(ts DESC)")
+
+
 # (version, description, fn). Append only - never edit one that has shipped.
 MIGRATIONS = [
     (2, "indexes + expired-session sweep", _m2_indexes),
@@ -256,6 +270,7 @@ MIGRATIONS = [
     (7, "player ticket wallet + provider postbacks", _m7_player_tickets),
     (8, "player ticket-backed grant requests", _m8_player_grant_requests),
     (9, "manual donation notes + one-time ticket credits", _m9_donations),
+    (10, "admin action audit trail", _m10_admin_audit),
 ]
 SCHEMA_VERSION = MIGRATIONS[-1][0]
 
@@ -898,6 +913,39 @@ def admin_logout(token):
         return 0
     with _conn() as c:
         return c.execute("DELETE FROM admin_sessions WHERE token=?", (token,)).rowcount
+
+
+# --- admin action audit ------------------------------------------------------
+# Append-only trail of dashboard mutations (grants, mail, raw writes, raid edits).
+# Best-effort by design: a failed audit insert must never fail the action it
+# records, and detail is a short caller-chosen JSON summary, never a secret.
+
+def audit_log(username, action, target=None, detail=None, now=None):
+    try:
+        payload = json.dumps(detail, default=str)[:2000] if detail is not None else None
+        with _conn() as c:
+            c.execute("INSERT INTO admin_audit (ts,username,action,target,detail) "
+                      "VALUES (?,?,?,?,?)",
+                      (time.time() if now is None else now, str(username or "local-operator")[:80],
+                       str(action or "")[:80], str(target or "")[:120] or None, payload))
+    except Exception as e:
+        print(f"[playerdb] audit_log({action}): {e}", flush=True)
+
+
+def audit_list(limit=100):
+    limit = max(1, min(int(limit or 100), 500))
+    with _conn() as c:
+        rows = c.execute("SELECT id,ts,username,action,target,detail "
+                         "FROM admin_audit ORDER BY id DESC LIMIT ?", (limit,)).fetchall()
+    out = []
+    for rid, ts, username, action, target, detail in rows:
+        try:
+            detail = json.loads(detail) if detail else None
+        except Exception:
+            pass
+        out.append({"id": rid, "ts": ts, "username": username, "action": action,
+                    "target": target, "detail": detail})
+    return out
 
 
 # --- player portal accounts -------------------------------------------------

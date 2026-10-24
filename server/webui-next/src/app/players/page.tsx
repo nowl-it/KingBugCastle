@@ -1,416 +1,970 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useMemo } from "react"
-import { usePlayers, usePlayer, usePlayerRaw, runMutation } from "@/lib/api"
-import { usePlayerSelection } from "@/components/player-context"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Search, Plus, Copy, Trash2, Save, RefreshCw, Crown, Zap } from "lucide-react"
+import { useEffect, useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import {
+	usePlayers,
+	usePlayer,
+	usePlayerRaw,
+	runMutation,
+	fetcher,
+} from "@/lib/api";
+import { usePlayerSelection } from "@/components/player-context";
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Select } from "@/components/ui/select";
+import {
+	Dialog,
+	DialogContent,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+} from "@/components/ui/dialog";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
+import {
+	Search,
+	Plus,
+	Copy,
+	Trash2,
+	Save,
+	RefreshCw,
+	Zap,
+	X,
+	UserCheck,
+	ChevronDown,
+	ChevronRight,
+} from "lucide-react";
 
 type PlayerSummary = {
-  id: string; uid?: string; name: string; castleName?: string; active?: boolean; level?: number
-  gold?: number; cash?: number; heart?: number; counts?: { cards?: number }
-  [key: string]: string | number | boolean | undefined | { cards?: number }
-}
-type PlayerDetailResponse = { summary: PlayerSummary }
+	id: string;
+	uid?: string;
+	name: string;
+	castleName?: string;
+	active?: boolean;
+	level?: number;
+	gold?: number;
+	cash?: number;
+	heart?: number;
+	lastActive?: number;
+	counts?: { cards?: number; posts?: number; items?: number };
+	[key: string]:
+		| string
+		| number
+		| boolean
+		| undefined
+		| { cards?: number; posts?: number; items?: number };
+};
+type PlayerDetailResponse = { summary: PlayerSummary };
 
 const EDITABLE_FIELDS: Record<string, { label: string; type?: string }> = {
-  name: { label: "Name" },
-  castleName: { label: "Castle name" },
-  gold: { label: "Gold", type: "number" },
-  cash: { label: "Cash", type: "number" },
-  heart: { label: "Heart", type: "number" },
-  level: { label: "Account level", type: "number" },
-  exp: { label: "Exp", type: "number" },
-  bestClearedStage: { label: "Best stage", type: "number" },
-  bestClearedTheme: { label: "Best theme", type: "number" },
-  bestClearedHardStage: { label: "Best hard stage", type: "number" },
-  bestClearedHardTheme: { label: "Best hard theme", type: "number" },
-  buildingPoints: { label: "Building points", type: "number" },
-  playedCount: { label: "Battles played", type: "number" },
-  winCount: { label: "Battles won", type: "number" },
+	name: { label: "Name" },
+	castleName: { label: "Castle name" },
+	gold: { label: "Gold", type: "number" },
+	cash: { label: "Cash", type: "number" },
+	heart: { label: "Heart", type: "number" },
+	level: { label: "Account level", type: "number" },
+	exp: { label: "Exp", type: "number" },
+	bestClearedStage: { label: "Best stage", type: "number" },
+	bestClearedTheme: { label: "Best theme", type: "number" },
+	bestClearedHardStage: { label: "Best hard stage", type: "number" },
+	bestClearedHardTheme: { label: "Best hard theme", type: "number" },
+	buildingPoints: { label: "Building points", type: "number" },
+	playedCount: { label: "Battles played", type: "number" },
+	winCount: { label: "Battles won", type: "number" },
+};
+
+type SortKey = "name" | "level" | "gold" | "lastActive";
+
+function timeAgo(ts?: number) {
+	if (!ts) return "-";
+	const s = Math.max(0, Date.now() / 1000 - ts);
+	if (s < 90) return "just now";
+	if (s < 3600) return `${Math.round(s / 60)}m ago`;
+	if (s < 86400) return `${Math.round(s / 3600)}h ago`;
+	return `${Math.round(s / 86400)}d ago`;
 }
 
 export default function PlayersPage() {
-  const { data: players, mutate: mutatePlayers } = usePlayers()
-  const { selectedId, setSelectedId } = usePlayerSelection()
-  const [query, setQuery] = useState("")
-  const [showCreate, setShowCreate] = useState(false)
-  const [newName, setNewName] = useState("")
-  const [newUid, setNewUid] = useState("")
+	const { data: players, mutate: mutatePlayers } = usePlayers();
+	const { setSelectedId } = usePlayerSelection();
+	const [query, setQuery] = useState("");
+	const [sort, setSort] = useState<SortKey>("level");
+	const [active24h, setActive24h] = useState(false);
+	const [showCreate, setShowCreate] = useState(false);
+	const [newName, setNewName] = useState("");
+	const [newUid, setNewUid] = useState("");
+	const [drawerPid, setDrawerPid] = useState<string | null>(null);
+	const [checked, setChecked] = useState<Set<string>>(new Set());
+	// Wall-clock snapshot updated on a timer so the 24h filter stays pure inside useMemo.
+	const [now, setNow] = useState(() => Date.now());
 
-  const list = useMemo(() => {
-    const arr = (Array.isArray(players) ? players : []) as PlayerSummary[]
-    const q = query.trim().toLowerCase()
-    if (!q) return arr
-    return arr.filter((p) =>
-      (p.name || "").toLowerCase().includes(q) ||
-      (p.id || "").toLowerCase().includes(q) ||
-      (p.uid || "").toLowerCase().includes(q))
-  }, [players, query])
+	useEffect(() => {
+		const id = setInterval(() => setNow(Date.now()), 30000);
+		return () => clearInterval(id);
+	}, []);
 
-  const handleCreate = async () => {
-    if (!newName.trim()) return
-    await runMutation("/api/players", {
-      method: "POST",
-      body: JSON.stringify({ name: newName, uid: newUid.trim() || undefined }),
-    }, "Player created")
-    setNewName(""); setNewUid(""); setShowCreate(false)
-    mutatePlayers()
-  }
+	const list = useMemo(() => {
+		let arr = (Array.isArray(players) ? players : []) as PlayerSummary[];
+		const q = query.trim().toLowerCase();
+		if (q) {
+			arr = arr.filter(
+				(p) =>
+					(p.name || "").toLowerCase().includes(q) ||
+					(p.id || "").toLowerCase().includes(q) ||
+					(p.uid || "").toLowerCase().includes(q) ||
+					(p.castleName || "").toLowerCase().includes(q),
+			);
+		}
+		if (active24h)
+			arr = arr.filter(
+				(p) => p.active || (p.lastActive && now / 1000 - p.lastActive < 86400),
+			);
+		return [...arr].sort((a, b) => {
+			if (sort === "name") return (a.name || "").localeCompare(b.name || "");
+			if (sort === "gold") return (b.gold || 0) - (a.gold || 0);
+			if (sort === "lastActive")
+				return (b.lastActive || 0) - (a.lastActive || 0);
+			return (b.level || 0) - (a.level || 0);
+		});
+	}, [players, query, sort, active24h, now]);
 
-  const handleClone = async (pid: string) => {
-    await runMutation(`/api/players/${encodeURIComponent(pid)}/clone`, { method: "POST" }, "Player cloned")
-    mutatePlayers()
-  }
+	const toggleCheck = (pid: string) => {
+		setChecked((prev) => {
+			const next = new Set(prev);
+			if (next.has(pid)) next.delete(pid);
+			else next.add(pid);
+			return next;
+		});
+	};
+	const allChecked = list.length > 0 && list.every((p) => checked.has(p.id));
+	const toggleAll = () =>
+		setChecked(allChecked ? new Set() : new Set(list.map((p) => p.id)));
 
-  const handleDelete = async (pid: string) => {
-    if (!window.confirm(`Delete player ${pid}? This is irreversible.`)) return
-    await runMutation(`/api/players/${encodeURIComponent(pid)}`, { method: "DELETE" }, "Player deleted")
-    if (selectedId === pid) setSelectedId(null)
-    mutatePlayers()
-  }
+	const bulkMutate = async (
+		url: string,
+		body: Record<string, unknown>,
+		msg: string,
+	) => {
+		await runMutation(
+			url,
+			{ method: "POST", body: JSON.stringify({ pids: [...checked], ...body }) },
+			msg,
+		);
+		setChecked(new Set());
+		mutatePlayers();
+	};
 
-  return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Players</h1>
-          <p className="text-muted-foreground">Manage saves, edit currency and raw state.</p>
-        </div>
-        <div className="flex flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input placeholder="Search name / id..." value={query} onChange={(e) => setQuery(e.target.value)} className="w-full pl-8 sm:w-64" />
-          </div>
-          <Button onClick={() => setShowCreate(v => !v)} className="w-full sm:w-auto"><Plus className="h-4 w-4 mr-1" /> New player</Button>
-        </div>
-      </div>
+	const handleCreate = async () => {
+		if (!newName.trim()) return;
+		await runMutation(
+			"/api/players",
+			{
+				method: "POST",
+				body: JSON.stringify({
+					name: newName,
+					uid: newUid.trim() || undefined,
+				}),
+			},
+			"Player created",
+		);
+		setNewName("");
+		setNewUid("");
+		setShowCreate(false);
+		mutatePlayers();
+	};
 
-      {showCreate && (
-        <Card>
-          <CardHeader><CardTitle>Create player</CardTitle><CardDescription>Built by the game server (default save + content-version expansion).</CardDescription></CardHeader>
-          <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-end">
-            <div className="flex-1 space-y-1">
-              <label className="text-xs text-muted-foreground">Name</label>
-              <Input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="e.g. Newbie" />
-            </div>
-            <div className="flex-1 space-y-1">
-              <label className="text-xs text-muted-foreground">UID (optional, auto-generated)</label>
-              <Input value={newUid} onChange={(e) => setNewUid(e.target.value)} placeholder="player-xxxx" className="font-mono" />
-            </div>
-            <Button onClick={handleCreate} disabled={!newName.trim()}>Create</Button>
-          </CardContent>
-        </Card>
-      )}
+	const openInHeroes = (pid: string) => {
+		setSelectedId(pid);
+	};
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(320px,380px)_1fr]">
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium">{list.length} player{list.length === 1 ? "" : "s"}</CardTitle>
-          </CardHeader>
-          <CardContent className="p-0">
-            <ul className="max-h-[65vh] overflow-y-auto divide-y divide-border">
-              {list.map((p) => (
-                <li key={p.id}>
-                  <button
-                    onClick={() => setSelectedId(p.id)}
-                    className={`w-full flex items-center justify-between gap-2 px-4 py-3 text-left hover:bg-muted/50 transition-colors ${selectedId === p.id ? "bg-muted/70" : ""}`}
-                  >
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className={`h-2 w-2 rounded-full shrink-0 ${p.active ? "bg-green-500" : "bg-muted-foreground/40"}`} />
-                        <span className="text-sm font-medium truncate">{p.name}</span>
-                        {p.active && <Badge variant="secondary" className="text-[10px] px-1.5">ACTIVE</Badge>}
-                      </div>
-                      <div className="text-xs text-muted-foreground font-mono truncate">{p.id}</div>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <div className="text-sm">lv {p.level}</div>
-                      <div className="text-xs text-muted-foreground">{p.counts?.cards ?? 0} heroes</div>
-                    </div>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
+	return (
+		<div className="space-y-5">
+			<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+				<div>
+					<h1 className="text-2xl font-semibold tracking-tight">Players</h1>
+					<p className="text-sm text-muted-foreground">
+						{list.length} of {(Array.isArray(players) ? players : []).length}{" "}
+						saves shown.
+					</p>
+				</div>
+				<Button onClick={() => setShowCreate(true)}>
+					<Plus className="h-4 w-4" /> New player
+				</Button>
+			</div>
 
-        {selectedId ? <PlayerDetail pid={selectedId} onMutate={mutatePlayers} onClone={handleClone} onDelete={handleDelete} /> : (
-          <Card>
-            <CardContent className="py-16 text-center text-muted-foreground">
-              Select a player to view or edit their save.
-            </CardContent>
-          </Card>
-        )}
-      </div>
-    </div>
-  )
+			{/* Toolbar */}
+			<div className="flex flex-wrap items-center gap-3">
+				<div className="relative">
+					<Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+					<Input
+						placeholder="Search name / id / castle..."
+						value={query}
+						onChange={(e) => setQuery(e.target.value)}
+						className="w-64 pl-8"
+					/>
+				</div>
+				<Select
+					value={sort}
+					onChange={(e) => setSort(e.target.value as SortKey)}
+					className="w-44"
+				>
+					<option value="level">Sort: level</option>
+					<option value="gold">Sort: gold</option>
+					<option value="lastActive">Sort: last active</option>
+					<option value="name">Sort: name</option>
+				</Select>
+				<Button
+					variant={active24h ? "primary" : "outline"}
+					size="sm"
+					onClick={() => setActive24h((v) => !v)}
+				>
+					Active 24h
+				</Button>
+			</div>
+
+			<Card>
+				<CardContent className="p-0">
+					<Table compact>
+						<TableHeader>
+							<TableRow>
+								<TableHead className="w-10">
+									<input
+										type="checkbox"
+										aria-label="Select all"
+										checked={allChecked}
+										onChange={toggleAll}
+										className="h-4 w-4 accent-[var(--primary)]"
+									/>
+								</TableHead>
+								<TableHead>Player</TableHead>
+								<TableHead>Castle</TableHead>
+								<TableHead className="text-right">Level</TableHead>
+								<TableHead className="text-right">Gold</TableHead>
+								<TableHead className="text-right">Heroes</TableHead>
+								<TableHead className="text-right">Last active</TableHead>
+								<TableHead className="w-28" />
+							</TableRow>
+						</TableHeader>
+						<TableBody>
+							{list.map((p) => (
+								<TableRow
+									key={p.id}
+									className="cursor-pointer"
+									onClick={() => setDrawerPid(p.id)}
+								>
+									<TableCell>
+										<input
+											type="checkbox"
+											aria-label={`Select ${p.name}`}
+											checked={checked.has(p.id)}
+											onClick={(e) => e.stopPropagation()}
+											onChange={() => toggleCheck(p.id)}
+											className="h-4 w-4 accent-[var(--primary)]"
+										/>
+									</TableCell>
+									<TableCell>
+										<div className="flex items-center gap-2">
+											<span
+												className={`h-2 w-2 shrink-0 rounded-full ${p.active ? "bg-success" : "bg-muted-foreground/30"}`}
+											/>
+											<div className="min-w-0">
+												<div className="truncate font-medium">{p.name}</div>
+												<div className="truncate font-mono text-xs text-muted-foreground">
+													{p.id}
+												</div>
+											</div>
+										</div>
+									</TableCell>
+									<TableCell className="max-w-[12rem] truncate text-muted-foreground">
+										{p.castleName || "-"}
+									</TableCell>
+									<TableCell className="tnum text-right">{p.level}</TableCell>
+									<TableCell className="tnum text-right">
+										{(p.gold ?? 0).toLocaleString()}
+									</TableCell>
+									<TableCell className="tnum text-right">
+										{p.counts?.cards ?? 0}
+									</TableCell>
+									<TableCell className="tnum text-right text-muted-foreground">
+										{timeAgo(p.lastActive)}
+									</TableCell>
+									<TableCell>
+										<div className="flex items-center justify-end gap-1">
+											<Button
+												variant="ghost"
+												size="sm"
+												title="Use in Heroes page"
+												onClick={(e) => {
+													e.stopPropagation();
+													openInHeroes(p.id);
+												}}
+											>
+												<UserCheck className="h-4 w-4" />
+											</Button>
+											<ChevronRight className="h-4 w-4 text-muted-foreground" />
+										</div>
+									</TableCell>
+								</TableRow>
+							))}
+							{list.length === 0 && (
+								<TableRow>
+									<TableCell
+										colSpan={8}
+										className="py-12 text-center text-muted-foreground"
+									>
+										No players match.
+									</TableCell>
+								</TableRow>
+							)}
+						</TableBody>
+					</Table>
+				</CardContent>
+			</Card>
+
+			{/* Bulk bar */}
+			{checked.size > 0 && (
+				<div className="fixed bottom-5 left-1/2 z-40 flex -translate-x-1/2 flex-wrap items-center gap-2 rounded-xl border bg-card px-4 py-3 shadow-card">
+					<span className="tnum mr-1 text-sm font-medium">
+						{checked.size} selected
+					</span>
+					<Button
+						size="sm"
+						variant="secondary"
+						onClick={() =>
+							bulkMutate(
+								"/api/players/grant-all-skins",
+								{},
+								`Granted all skins to ${checked.size} player(s)`,
+							)
+						}
+					>
+						All skins
+					</Button>
+					<Button
+						size="sm"
+						variant="secondary"
+						onClick={() =>
+							bulkMutate(
+								"/api/players/grant-all-legendary-rift-crystals",
+								{ wipeTestEquip: false },
+								`Granted legendary crystals to ${checked.size} player(s)`,
+							)
+						}
+					>
+						Legendary crystals
+					</Button>
+					<Button
+						size="sm"
+						variant="secondary"
+						onClick={() =>
+							bulkMutate(
+								"/api/players/grant-all-premium-altars",
+								{},
+								`Granted premium altars to ${checked.size} player(s)`,
+							)
+						}
+					>
+						Premium altars
+					</Button>
+					<Button
+						size="sm"
+						variant="secondary"
+						onClick={() =>
+							bulkMutate(
+								"/api/players/toggle-infinity-rift",
+								{ enable: true },
+								`Enabled Infinity Rift for ${checked.size} player(s)`,
+							)
+						}
+					>
+						Infinity rift on
+					</Button>
+					<Button
+						size="sm"
+						variant="ghost"
+						onClick={() => setChecked(new Set())}
+					>
+						<X className="h-4 w-4" /> Clear
+					</Button>
+				</div>
+			)}
+
+			{/* Create dialog */}
+			<Dialog open={showCreate} onClose={() => setShowCreate(false)}>
+				<DialogHeader onClose={() => setShowCreate(false)}>
+					<DialogTitle>Create player</DialogTitle>
+					<p className="mt-1 text-sm text-muted-foreground">
+						Built by the game server (default save + content-version expansion).
+					</p>
+				</DialogHeader>
+				<DialogContent className="space-y-3">
+					<div className="space-y-1">
+						<label className="text-xs text-muted-foreground" htmlFor="new-name">
+							Name
+						</label>
+						<Input
+							id="new-name"
+							value={newName}
+							onChange={(e) => setNewName(e.target.value)}
+							placeholder="e.g. Newbie"
+						/>
+					</div>
+					<div className="space-y-1">
+						<label className="text-xs text-muted-foreground" htmlFor="new-uid">
+							UID (optional, auto-generated)
+						</label>
+						<Input
+							id="new-uid"
+							value={newUid}
+							onChange={(e) => setNewUid(e.target.value)}
+							placeholder="player-xxxx"
+							className="font-mono"
+						/>
+					</div>
+				</DialogContent>
+				<DialogFooter>
+					<Button variant="ghost" onClick={() => setShowCreate(false)}>
+						Cancel
+					</Button>
+					<Button onClick={handleCreate} disabled={!newName.trim()}>
+						Create
+					</Button>
+				</DialogFooter>
+			</Dialog>
+
+			{drawerPid && (
+				<PlayerDrawer
+					pid={drawerPid}
+					onClose={() => setDrawerPid(null)}
+					onMutate={mutatePlayers}
+				/>
+			)}
+		</div>
+	);
 }
 
-function PlayerDetail({ pid, onMutate, onClone, onDelete }: {
-  pid: string
-  onMutate: () => void
-  onClone: (pid: string) => void
-  onDelete: (pid: string) => void
+function PlayerDrawer({
+	pid,
+	onClose,
+	onMutate,
+}: {
+	pid: string;
+	onClose: () => void;
+	onMutate: () => void;
 }) {
-  const { data: detail } = usePlayer(pid)
-  const { data: raw } = usePlayerRaw(pid)
-  const [edits, setEdits] = useState<Record<string, string>>({})
-  const [rawDraft, setRawDraft] = useState<string>("")
-  const [rawError, setRawError] = useState<string | null>(null)
+	const { data: detail } = usePlayer(pid);
+	const sum = (detail as PlayerDetailResponse | undefined)?.summary;
+	const [showRaw, setShowRaw] = useState(false);
 
-  const sum = (detail as PlayerDetailResponse | undefined)?.summary
-  const hasSummary = Boolean(sum)
-  const editableFingerprint = JSON.stringify((() => {
-    const next: Record<string, string> = {}
-    for (const key of Object.keys(EDITABLE_FIELDS)) {
-      next[key] = sum?.[key] !== undefined && sum[key] !== null ? String(sum[key]) : ""
-    }
-    return next
-  })())
+	useEffect(() => {
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === "Escape") onClose();
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [onClose]);
 
-  useEffect(() => {
-    if (hasSummary) {
-      // A selected save is an external query result; reset the edit draft only when it changes.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setEdits(JSON.parse(editableFingerprint) as Record<string, string>)
-    }
-  }, [pid, hasSummary, editableFingerprint])
+	const handleActivate = async () => {
+		await runMutation(
+			`/api/players/${encodeURIComponent(pid)}/activate`,
+			{ method: "POST" },
+			`Activated ${sum?.name ?? pid}`,
+		);
+		onMutate();
+	};
+	const handleClone = async () => {
+		await runMutation(
+			`/api/players/${encodeURIComponent(pid)}/clone`,
+			{ method: "POST" },
+			"Player cloned",
+		);
+		onMutate();
+	};
+	const handleDelete = async () => {
+		if (!window.confirm(`Delete player ${pid}? This is irreversible.`)) return;
+		await runMutation(
+			`/api/players/${encodeURIComponent(pid)}`,
+			{ method: "DELETE" },
+			"Player deleted",
+		);
+		onClose();
+		onMutate();
+	};
 
-  useEffect(() => {
-    if (raw) {
-      // A selected save is an external query result; initialize the raw-state editor from it.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setRawDraft(JSON.stringify(raw, null, 2))
-    }
-  }, [pid, raw])
+	return (
+		<div className="fixed inset-0 z-50">
+			<button
+				type="button"
+				aria-label="Close drawer"
+				onClick={onClose}
+				className="absolute inset-0 cursor-default bg-black/40"
+			/>
+			<aside className="absolute bottom-0 right-0 top-0 w-[min(95vw,44rem)] overflow-y-auto border-l bg-card shadow-card">
+				<div className="sticky top-0 z-10 flex items-start justify-between gap-3 border-b bg-card px-5 py-4">
+					<div className="min-w-0">
+						<h2 className="flex items-center gap-2 text-lg font-semibold tracking-tight">
+							<span className="truncate">{sum?.name ?? pid}</span>
+							{sum?.active && <Badge variant="success">in session</Badge>}
+						</h2>
+						<p className="truncate font-mono text-xs text-muted-foreground">
+							{pid} · uid {sum?.uid} · castle “{sum?.castleName || "-"}”
+						</p>
+					</div>
+					<Button
+						variant="ghost"
+						size="icon"
+						onClick={onClose}
+						aria-label="Close"
+					>
+						<X className="h-4 w-4" />
+					</Button>
+				</div>
 
-  const saveEdits = async () => {
-    const patch: Record<string, string | number> = {}
-    for (const [k, v] of Object.entries(edits)) {
-      const spec = EDITABLE_FIELDS[k]
-      if (spec?.type === "number") {
-        const n = Number(v)
-        if (!Number.isNaN(n) && n !== sum?.[k]) patch[k] = n
-      } else if (v !== sum?.[k]) {
-        patch[k] = v
-      }
-    }
-    if (!Object.keys(patch).length) return
-    await runMutation(`/api/player/${encodeURIComponent(pid)}`, { method: "PATCH", body: JSON.stringify(patch) }, "Save updated")
-    onMutate()
-  }
+				<div className="space-y-5 p-5">
+					<WalletEditor pid={pid} sum={sum} onMutate={onMutate} />
 
-  const saveRaw = async () => {
-    setRawError(null)
-    let parsed: unknown
-    try {
-      parsed = JSON.parse(rawDraft)
-    } catch (error: unknown) {
-      setRawError("Invalid JSON: " + (error instanceof Error ? error.message : "unknown parse error"))
-      return
-    }
-    await runMutation(`/api/player/${encodeURIComponent(pid)}/raw`, { method: "PUT", body: JSON.stringify(parsed) }, "Raw state replaced")
-    onMutate()
-  }
+					{/* Quick actions */}
+					<div className="flex flex-wrap gap-2">
+						{!sum?.active && (
+							<Button variant="outline" size="sm" onClick={handleActivate}>
+								<UserCheck className="h-4 w-4" /> Set active session
+							</Button>
+						)}
+						<Button variant="outline" size="sm" onClick={handleClone}>
+							<Copy className="h-4 w-4" /> Clone
+						</Button>
+						<Button variant="destructive" size="sm" onClick={handleDelete}>
+							<Trash2 className="h-4 w-4" /> Delete
+						</Button>
+					</div>
 
-  const handleMacro = async (macroId: string) => {
-    if (!window.confirm(`Apply macro '${macroId}'? This will overwrite relevant fields.`)) return
-    await runMutation(`/api/player/${encodeURIComponent(pid)}/macro`, { method: "POST", body: JSON.stringify({ macro: macroId }) }, "Macro applied successfully")
-    onMutate()
-  }
+					<MacroQuickActions pid={pid} onMutate={onMutate} />
 
-  if (!detail || !sum) return <Card><CardContent className="py-16 text-center text-muted-foreground">Loading player...</CardContent></Card>
+					<PortalAccess pid={pid} />
 
-  return (
-    <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <CardTitle className="flex items-center gap-2">
-                {sum.name} {sum.active && <Badge variant="secondary">ACTIVE</Badge>}
-              </CardTitle>
-              <CardDescription className="break-all font-mono">{pid} · uid {sum.uid} · castle “{sum.castleName || "-"}”</CardDescription>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Button variant="outline" size="sm" onClick={() => onClone(pid)}><Copy className="h-3.5 w-3.5 mr-1" /> Clone</Button>
-              <Button variant="destructive" size="sm" onClick={() => onDelete(pid)}><Trash2 className="h-3.5 w-3.5 mr-1" /> Delete</Button>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {Object.entries(EDITABLE_FIELDS).map(([k, spec]) => (
-              <div key={k} className="space-y-1">
-                <label className="text-xs text-muted-foreground">{spec.label}</label>
-                <Input
-                  type={spec.type || "text"}
-                  value={edits[k] ?? ""}
-                  onChange={(e) => setEdits(prev => ({ ...prev, [k]: e.target.value }))}
-                />
-              </div>
-            ))}
-          </div>
-          <Button className="mt-4" onClick={saveEdits}><Save className="h-4 w-4 mr-1" /> Save fields</Button>
-        </CardContent>
-      </Card>
+					{/* Raw JSON editor */}
+					<div className="rounded-lg border">
+						<button
+							type="button"
+							onClick={() => setShowRaw((v) => !v)}
+							className="flex w-full items-center justify-between px-4 py-3 text-sm font-medium hover:bg-surface-2"
+						>
+							Raw state (JSON editor)
+							{showRaw ? (
+								<ChevronDown className="h-4 w-4 text-muted-foreground" />
+							) : (
+								<ChevronRight className="h-4 w-4 text-muted-foreground" />
+							)}
+						</button>
+						{showRaw && <RawEditor pid={pid} onMutate={onMutate} />}
+					</div>
+				</div>
+			</aside>
+		</div>
+	);
+}
 
-      <PortalAccess pid={pid} />
+function WalletEditor({
+	pid,
+	sum,
+	onMutate,
+}: {
+	pid: string;
+	sum?: PlayerSummary;
+	onMutate: () => void;
+}) {
+	const [edits, setEdits] = useState<Record<string, string>>({});
+	const hasSummary = Boolean(sum);
+	const editableFingerprint = JSON.stringify(
+		(() => {
+			const next: Record<string, string> = {};
+			for (const key of Object.keys(EDITABLE_FIELDS)) {
+				next[key] =
+					sum?.[key] !== undefined && sum[key] !== null ? String(sum[key]) : "";
+			}
+			return next;
+		})(),
+	);
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Zap className="h-4 w-4" /> Macro Profiles</CardTitle>
-          <CardDescription>Quickly grant bundles of items and resources without editing individual fields.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col gap-4">
-            <div>
-              <h4 className="text-sm font-medium mb-2">Resources & Inventory</h4>
-              <div className="flex flex-wrap gap-2">
-                <Button variant="secondary" onClick={() => handleMacro("max_resources")}>Max Resources (290909)</Button>
-                <Button variant="secondary" onClick={() => handleMacro("max_wealth")}>Max Wealth (Gold, Cash, Tokens)</Button>
-                <Button variant="secondary" onClick={() => handleMacro("max_inventory")}>Max All Inventory Items</Button>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-sm font-medium mb-2">Heroes & Skins</h4>
-              <div className="flex flex-wrap gap-2">
-                <Button variant="secondary" onClick={() => handleMacro("hero_basic")}>Basic Heroes (Lv.20)</Button>
-                <Button variant="secondary" onClick={() => handleMacro("hero_advanced")}>Advanced Heroes (Lv.30)</Button>
-                <Button variant="secondary" onClick={() => handleMacro("hero_max")}>Max Heroes (+ Unreleased)</Button>
-                <Button variant="secondary" onClick={() => handleMacro("grant_all_skins")}>👔 Grant All Hero Skins (Selected)</Button>
-                <Button variant="outline" onClick={async () => {
-                  if (!window.confirm("Grant all 748+ hero skins to ALL players on the server?")) return
-                  await runMutation("/api/players/grant-all-skins", { method: "POST" }, "Granted all skins to all players")
-                  onMutate()
-                }}>⚡ Grant All Skins to ALL Players</Button>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-sm font-medium mb-2">Legacies & Accessories</h4>
-              <div className="flex flex-wrap gap-2">
-                <Button variant="secondary" onClick={() => handleMacro("legacy_basic")}>Basic Legacies (0*)</Button>
-                <Button variant="secondary" onClick={() => handleMacro("legacy_advanced")}>Advanced Legacies (10*)</Button>
-                <Button variant="secondary" onClick={() => handleMacro("legacy_max")}>Max Legacies (+ Unreleased)</Button>
-                <Button variant="secondary" onClick={() => handleMacro("accessory_admin")}>Admin Accessories</Button>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-sm font-medium mb-2">Altars & Great Rift (Crystals / DLC)</h4>
-              <div className="flex flex-wrap gap-2">
-                <Button variant="secondary" onClick={() => handleMacro("grant_premium_altars")}>⛩️ Grant Premium Altars (Selected)</Button>
-                <Button variant="secondary" onClick={() => handleMacro("rift_legendary_all")}>✨ Grant Full Crystals (222 Crystals, Selected)</Button>
-                <Button variant="secondary" onClick={() => handleMacro("toggle_infinity_rift")}>♾️ Toggle Infinity Rift Energy (Selected)</Button>
-                <Button variant="outline" onClick={async () => {
-                  if (!window.confirm("Grant All Premium Altars (Altar of Death, Immortality, Domination + Normal Premium) to ALL players?")) return
-                  await runMutation("/api/players/grant-all-premium-altars", { method: "POST" }, "Granted premium altars to all players")
-                  onMutate()
-                }}>⚡ Grant Premium Altars to ALL Players</Button>
-                <Button variant="outline" onClick={async () => {
-                  if (!window.confirm("Grant Full Set of 222 Legendary Rift Crystals (including 6 Universal All-Altar) to ALL players?")) return
-                  await runMutation("/api/players/grant-all-legendary-rift-crystals", { method: "POST" }, "Granted 222 crystals to all players")
-                  onMutate()
-                }}>⚡ Grant Full Crystals to ALL Players</Button>
-                <Button variant="outline" onClick={async () => {
-                  if (!window.confirm("Enable Infinity Rift Energy for ALL players on the server?")) return
-                  await runMutation("/api/players/toggle-infinity-rift", { method: "POST", body: JSON.stringify({ enable: true }) }, "Enabled Infinity Rift for all players")
-                  onMutate()
-                }}>⚡ Enable Infinity Rift for ALL Players</Button>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+	useEffect(() => {
+		if (hasSummary) {
+			// A selected save is an external query result; reset the edit draft only when it changes.
+			// eslint-disable-next-line react-hooks/set-state-in-effect
+			setEdits(JSON.parse(editableFingerprint) as Record<string, string>);
+		}
+	}, [pid, hasSummary, editableFingerprint]);
 
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="flex items-center gap-2"><Crown className="h-4 w-4" /> Raw state (JSON)</CardTitle>
-              <CardDescription>Full save as the game server reads it. uid is forced back to the row key on save.</CardDescription>
-            </div>
-            <Button variant="outline" size="sm" onClick={() => setRawDraft(JSON.stringify(raw, null, 2))}><RefreshCw className="h-3.5 w-3.5 mr-1" /> Reload</Button>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <textarea
-            value={rawDraft}
-            onChange={(e) => setRawDraft(e.target.value)}
-            spellCheck={false}
-            className="w-full h-96 rounded-md border border-input bg-background p-3 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-ring"
-          />
-          {rawError && <p className="mt-2 text-sm text-destructive">{rawError}</p>}
-          <Button className="mt-3" onClick={saveRaw}><Save className="h-4 w-4 mr-1" /> Replace raw state</Button>
-        </CardContent>
-      </Card>
-    </div>
-  )
+	const saveEdits = async () => {
+		const patch: Record<string, string | number> = {};
+		for (const [k, v] of Object.entries(edits)) {
+			const spec = EDITABLE_FIELDS[k];
+			if (spec?.type === "number") {
+				const n = Number(v);
+				if (!Number.isNaN(n) && n !== sum?.[k]) patch[k] = n;
+			} else if (v !== sum?.[k]) {
+				patch[k] = v;
+			}
+		}
+		if (!Object.keys(patch).length) return;
+		await runMutation(
+			`/api/player/${encodeURIComponent(pid)}`,
+			{ method: "PATCH", body: JSON.stringify(patch) },
+			"Save updated",
+		);
+		onMutate();
+	};
+
+	if (!sum)
+		return (
+			<Card>
+				<CardContent className="py-8 text-center text-sm text-muted-foreground">
+					Loading player…
+				</CardContent>
+			</Card>
+		);
+
+	return (
+		<Card>
+			<CardHeader>
+				<div>
+					<CardTitle>Fields</CardTitle>
+					<CardDescription>
+						Wallet and progress. Only changed values are sent.
+					</CardDescription>
+				</div>
+				<Button size="sm" onClick={saveEdits}>
+					<Save className="h-4 w-4" /> Save
+				</Button>
+			</CardHeader>
+			<CardContent>
+				<div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+					{Object.entries(EDITABLE_FIELDS).map(([k, spec]) => (
+						<div key={k} className="space-y-1">
+							<label
+								htmlFor={`field-${k}`}
+								className="text-xs text-muted-foreground"
+							>
+								{spec.label}
+							</label>
+							<Input
+								id={`field-${k}`}
+								type={spec.type || "text"}
+								value={edits[k] ?? ""}
+								onChange={(e) =>
+									setEdits((prev) => ({ ...prev, [k]: e.target.value }))
+								}
+							/>
+						</div>
+					))}
+				</div>
+			</CardContent>
+		</Card>
+	);
+}
+
+const MACROS: { id: string; label: string; group: string }[] = [
+	{ id: "max_resources", label: "Max Resources (290909)", group: "Resources" },
+	{ id: "max_wealth", label: "Max Wealth + tokens", group: "Resources" },
+	{ id: "max_inventory", label: "Max inventory", group: "Resources" },
+	{ id: "hero_basic", label: "Heroes lv20", group: "Heroes" },
+	{ id: "hero_advanced", label: "Heroes lv30 + souls", group: "Heroes" },
+	{ id: "hero_max", label: "Max heroes", group: "Heroes" },
+	{ id: "grant_all_skins", label: "All skins", group: "Heroes" },
+	{ id: "legacy_basic", label: "Legacies 0*", group: "Legacies" },
+	{ id: "legacy_advanced", label: "Legacies 10*", group: "Legacies" },
+	{ id: "legacy_max", label: "Max legacies", group: "Legacies" },
+	{ id: "accessory_admin", label: "Admin accessories", group: "Legacies" },
+	{ id: "grant_premium_altars", label: "Premium altars", group: "Rift" },
+	{ id: "rift_legendary_all", label: "Legendary crystals", group: "Rift" },
+	{ id: "toggle_infinity_rift", label: "Toggle infinity rift", group: "Rift" },
+];
+
+function MacroQuickActions({
+	pid,
+	onMutate,
+}: {
+	pid: string;
+	onMutate: () => void;
+}) {
+	const [busy, setBusy] = useState<string | null>(null);
+	const groups = [...new Set(MACROS.map((m) => m.group))];
+
+	const handleMacro = async (macroId: string) => {
+		if (
+			!window.confirm(
+				`Apply macro '${macroId}'? This will overwrite relevant fields.`,
+			)
+		)
+			return;
+		setBusy(macroId);
+		try {
+			await runMutation(
+				`/api/player/${encodeURIComponent(pid)}/macro`,
+				{ method: "POST", body: JSON.stringify({ macro: macroId }) },
+				"Macro applied",
+			);
+			onMutate();
+		} finally {
+			setBusy(null);
+		}
+	};
+
+	return (
+		<Card>
+			<CardHeader>
+				<div>
+					<CardTitle className="flex items-center gap-2">
+						<Zap className="h-4 w-4" /> Macros
+					</CardTitle>
+					<CardDescription>
+						Bundles applied to this player only.
+					</CardDescription>
+				</div>
+			</CardHeader>
+			<CardContent className="space-y-3">
+				{groups.map((g) => (
+					<div key={g} className="flex flex-wrap items-center gap-2">
+						<span className="w-20 shrink-0 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+							{g}
+						</span>
+						{MACROS.filter((m) => m.group === g).map((m) => (
+							<Button
+								key={m.id}
+								size="sm"
+								variant="secondary"
+								disabled={busy === m.id}
+								onClick={() => handleMacro(m.id)}
+							>
+								{busy === m.id ? "…" : m.label}
+							</Button>
+						))}
+					</div>
+				))}
+			</CardContent>
+		</Card>
+	);
+}
+
+function RawEditor({ pid, onMutate }: { pid: string; onMutate: () => void }) {
+	const { data: raw } = usePlayerRaw(pid);
+	const [rawDraft, setRawDraft] = useState("");
+	const [rawError, setRawError] = useState<string | null>(null);
+
+	useEffect(() => {
+		if (raw) {
+			// A selected save is an external query result; initialize the raw-state editor from it.
+			// eslint-disable-next-line react-hooks/set-state-in-effect
+			setRawDraft(JSON.stringify(raw, null, 2));
+		}
+	}, [raw]);
+
+	const saveRaw = async () => {
+		setRawError(null);
+		let parsed: unknown;
+		try {
+			parsed = JSON.parse(rawDraft);
+		} catch (error: unknown) {
+			setRawError(
+				"Invalid JSON: " +
+					(error instanceof Error ? error.message : "unknown parse error"),
+			);
+			return;
+		}
+		await runMutation(
+			`/api/player/${encodeURIComponent(pid)}/raw`,
+			{ method: "PUT", body: JSON.stringify(parsed) },
+			"Raw state replaced",
+		);
+		onMutate();
+	};
+
+	return (
+		<div className="border-t px-4 py-4">
+			<p className="mb-2 text-xs text-muted-foreground">
+				Full save as the game server reads it. uid is forced back to the row key
+				on save.
+			</p>
+			<textarea
+				value={rawDraft}
+				onChange={(e) => setRawDraft(e.target.value)}
+				spellCheck={false}
+				className="h-96 w-full rounded-md border border-input bg-surface-2 p-3 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-ring"
+			/>
+			{rawError && <p className="mt-2 text-sm text-destructive">{rawError}</p>}
+			<div className="mt-3 flex gap-2">
+				<Button onClick={saveRaw}>
+					<Save className="h-4 w-4" /> Replace raw state
+				</Button>
+				<Button
+					variant="outline"
+					onClick={() => setRawDraft(JSON.stringify(raw, null, 2))}
+				>
+					<RefreshCw className="h-4 w-4" /> Reload
+				</Button>
+			</div>
+		</div>
+	);
 }
 
 type PortalAccount = {
-  login_id: string
-  username: string | null
-  created: number | null
-  last_login: number | null
-  must_change_password: boolean
-}
+	login_id: string;
+	username: string | null;
+	created: number | null;
+	last_login: number | null;
+	must_change_password: boolean;
+};
 
 function PortalAccess({ pid }: { pid: string }) {
-  const [accounts, setAccounts] = useState<PortalAccount[]>([])
-  const [loginId, setLoginId] = useState("")
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [loading, setLoading] = useState(true)
+	const { data, isLoading } = useQuery({
+		queryKey: ["/api/player/portal-access", pid],
+		queryFn: () =>
+			fetcher(`/api/player/${encodeURIComponent(pid)}/portal-access`),
+		refetchOnWindowFocus: false,
+	});
+	const [loginId, setLoginId] = useState("");
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
 
-  const refresh = async () => {
-    setLoading(true)
-    try {
-      const result = await fetch(`/api/player/${encodeURIComponent(pid)}/portal-access`).then(async response => {
-        if (!response.ok) throw new Error((await response.json().catch(() => ({}))).error || "Could not load portal access")
-        return response.json()
-      })
-      const next = result.accounts || []
-      setAccounts(next)
-      const guest = next.find((account: PortalAccount) => account.login_id.startsWith("Guest_"))
-      setLoginId(current => next.some((account: PortalAccount) => account.login_id === current) ? current : (guest?.login_id || ""))
-    } finally {
-      setLoading(false)
-    }
-  }
+	const accounts: PortalAccount[] = data?.accounts ?? [];
+	const guests = accounts.filter((account) =>
+		account.login_id.startsWith("Guest_"),
+	);
+	// Derive the effective selection instead of syncing state on prop changes:
+	// keep the picked guest when it still exists, else the first guest.
+	const activeLogin = guests.some((g) => g.login_id === loginId)
+		? loginId
+		: (guests[0]?.login_id ?? "");
 
-  // Loading is the effect's external synchronization; the function updates local UI state asynchronously.
-  // eslint-disable-next-line react-hooks/set-state-in-effect, react-hooks/exhaustive-deps
-  useEffect(() => { refresh().catch(() => setAccounts([])) }, [pid])
-
-  const issue = async () => {
-    await runMutation(`/api/player/${encodeURIComponent(pid)}/portal-access`, {
-      method: "POST", body: JSON.stringify({ loginId, username, password }),
-    }, "Guest portal password issued")
-    setPassword("")
-    await refresh()
-  }
-
-  const guests = accounts.filter(account => account.login_id.startsWith("Guest_"))
-  return <Card>
-    <CardHeader>
-      <CardTitle>Player Portal access</CardTitle>
-      <CardDescription>Google accounts use Google sign-in. For a Guest account, issue a temporary password only after verifying its owner.</CardDescription>
-    </CardHeader>
-    <CardContent className="space-y-4">
-      {loading ? <p className="text-sm text-muted-foreground">Loading linked game accounts…</p> : <>
-        {accounts.length === 0 ? <p className="text-sm text-muted-foreground">This save has no game login yet. The player must enter the game before portal access can be granted.</p> :
-          <ul className="space-y-2 text-sm">{accounts.map(account => <li key={account.login_id} className="rounded-md border p-3"><div className="font-mono break-all">{account.login_id}</div><div className="mt-1 text-muted-foreground">{account.login_id.startsWith("google_") ? "Google sign-in" : account.username ? `Guest portal name: ${account.username}${account.must_change_password ? " · password change required" : ""}` : "Guest account - no portal password yet"}</div></li>)}</ul>}
-        {guests.length > 0 && <div className="grid gap-3 rounded-md border p-3 sm:grid-cols-3 sm:items-end">
-          <div className="space-y-1"><label className="text-xs text-muted-foreground">Guest account</label><select className="h-9 w-full rounded-md border bg-background px-2 text-sm" value={loginId} onChange={event => setLoginId(event.target.value)}>{guests.map(account => <option key={account.login_id} value={account.login_id}>{account.login_id}</option>)}</select></div>
-          <div className="space-y-1"><label className="text-xs text-muted-foreground">Portal username</label><Input value={username} onChange={event => setUsername(event.target.value)} placeholder="guest_name" /></div>
-          <div className="space-y-1"><label className="text-xs text-muted-foreground">Temporary password</label><Input value={password} onChange={event => setPassword(event.target.value)} type="password" minLength={8} placeholder="At least 8 characters" /></div>
-          <Button className="sm:col-span-3 sm:w-fit" disabled={!loginId || !username || password.length < 8} onClick={issue}>Issue Guest access</Button>
-        </div>}
-      </>}
-    </CardContent>
-  </Card>
+	const issue = async () => {
+		await runMutation(
+			`/api/player/${encodeURIComponent(pid)}/portal-access`,
+			{
+				method: "POST",
+				body: JSON.stringify({ loginId: activeLogin, username, password }),
+			},
+			"Guest portal password issued",
+		);
+		setPassword("");
+	};
+	return (
+		<Card>
+			<CardHeader>
+				<div>
+					<CardTitle>Player Portal access</CardTitle>
+					<CardDescription>
+						Google accounts use Google sign-in. For a Guest account, issue a
+						temporary password only after verifying its owner.
+					</CardDescription>
+				</div>
+			</CardHeader>
+			<CardContent className="space-y-4">
+				{isLoading ? (
+					<p className="text-sm text-muted-foreground">
+						Loading linked game accounts…
+					</p>
+				) : (
+					<>
+						{accounts.length === 0 ? (
+							<p className="text-sm text-muted-foreground">
+								This save has no game login yet. The player must enter the game
+								before portal access can be granted.
+							</p>
+						) : (
+							<ul className="space-y-2 text-sm">
+								{accounts.map((account) => (
+									<li key={account.login_id} className="rounded-md border p-3">
+										<div className="font-mono break-all">
+											{account.login_id}
+										</div>
+										<div className="mt-1 text-muted-foreground">
+											{account.login_id.startsWith("google_")
+												? "Google sign-in"
+												: account.username
+													? `Guest portal name: ${account.username}${account.must_change_password ? " · password change required" : ""}`
+													: "Guest account - no portal password yet"}
+										</div>
+									</li>
+								))}
+							</ul>
+						)}
+						{guests.length > 0 && (
+							<div className="grid gap-3 rounded-md border p-3 sm:grid-cols-3 sm:items-end">
+								<div className="space-y-1">
+									<label
+										htmlFor="portal-guest"
+										className="text-xs text-muted-foreground"
+									>
+										Guest account
+									</label>
+									<Select
+										id="portal-guest"
+										value={activeLogin}
+										onChange={(event) => setLoginId(event.target.value)}
+									>
+										{guests.map((account) => (
+											<option key={account.login_id} value={account.login_id}>
+												{account.login_id}
+											</option>
+										))}
+									</Select>
+								</div>
+								<div className="space-y-1">
+									<label
+										htmlFor="portal-username"
+										className="text-xs text-muted-foreground"
+									>
+										Portal username
+									</label>
+									<Input
+										id="portal-username"
+										value={username}
+										onChange={(event) => setUsername(event.target.value)}
+										placeholder="guest_name"
+									/>
+								</div>
+								<div className="space-y-1">
+									<label
+										htmlFor="portal-password"
+										className="text-xs text-muted-foreground"
+									>
+										Temporary password
+									</label>
+									<Input
+										id="portal-password"
+										value={password}
+										onChange={(event) => setPassword(event.target.value)}
+										type="password"
+										minLength={8}
+										placeholder="At least 8 characters"
+									/>
+								</div>
+								<Button
+									className="sm:col-span-3 sm:w-fit"
+									disabled={!activeLogin || !username || password.length < 8}
+									onClick={issue}
+								>
+									Issue Guest access
+								</Button>
+							</div>
+						)}
+					</>
+				)}
+			</CardContent>
+		</Card>
+	);
 }

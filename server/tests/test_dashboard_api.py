@@ -343,6 +343,45 @@ def test_admin_accessory_api():
           f"(player {after})")
 
 
+def test_raid_admin_and_audit():
+    seed("t-raid", clan={"id": 7, "name": "Raiders",
+                         "raid": {"version": 2, "boss": 42200, "stage": 1, "round": 1,
+                                  "killCount": 3, "score": 12345, "remainHp": 999,
+                                  "remainBattleCount": 5}})
+    raids = client.get("/api/raid/admin").json()["raids"]
+    row = next(r for r in raids if r["pid"] == "t-raid")
+    assert row["killCount"] == 3 and row["boss"] == 42200, row
+
+    r = client.post("/api/raid/admin/set", json={"pid": "t-raid", "field": "killCount", "value": 9})
+    assert r.status_code == 200, r.text
+    assert playerdb.load("t-raid")["clan"]["raid"]["killCount"] == 9
+    assert client.post("/api/raid/admin/set", json={"pid": "t-raid", "field": "uid", "value": 1}).status_code == 400
+    assert client.post("/api/raid/admin/set", json={"pid": "t-raid", "field": "score", "value": -5}).status_code == 400
+
+    assert client.post("/api/raid/admin/reset", json={"pid": "t-raid"}).status_code == 200
+    assert playerdb.load("t-raid")["clan"]["raid"] is None   # clan.py re-seeds on next fetch
+
+    entries = client.get("/api/audit?limit=50").json()["entries"]
+    actions = [e["action"] for e in entries]
+    assert "POST /api/raid/admin/set" in actions, actions[:10]
+    assert "POST /api/raid/admin/reset" in actions, actions[:10]
+    assert not any(a.startswith("POST /api/auth/") for a in actions), "auth must stay out of the audit"
+    print("ok raid admin: read/set/reset + audit trail")
+
+
+def test_bulk_pids_and_log_tail():
+    seed("t-bulk-a")
+    seed("t-bulk-b")
+    r = client.post("/api/players/grant-all-skins", json={"pids": ["t-bulk-a"]})
+    assert r.status_code == 200 and r.json()["playersUpdated"] == 1, r.text
+
+    dashboard.LOG_FILE = str(pathlib.Path(_TMP.name) / "tail.log")
+    pathlib.Path(dashboard.LOG_FILE).write_text("line1\nline2\n", encoding="utf-8")
+    out = client.get("/api/server/logs").json()
+    assert out["ok"] is True and out["lines"] == ["line1", "line2"], out
+    print("ok bulk pids + local log tail")
+
+
 if __name__ == "__main__":
     test_guard()
     test_crud()
@@ -356,4 +395,6 @@ if __name__ == "__main__":
     test_accessory_admin_sets()
     test_admin_accessories_json_loader()
     test_admin_accessory_api()
+    test_raid_admin_and_audit()
+    test_bulk_pids_and_log_tail()
     print("\nall dashboard API checks passed")

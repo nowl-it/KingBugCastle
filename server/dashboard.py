@@ -194,6 +194,36 @@ app.middleware("http")(guard_admin)
 security.register_public(app)
 
 
+# --- admin action audit -------------------------------------------------------
+# One append-only row per mutating API call. Registered last so it is the
+# OUTERMOST middleware: it runs after the response completed, once
+# serialize_state_writes has released the non-reentrant flock - recording
+# inside that lock would deadlock. Best-effort like playerdb.audit_log:
+# a failed record must never fail the action it documents.
+_AUDIT_SKIP = ("/api/auth/",)
+
+
+async def audit_mutations(request, call_next):
+    response = await call_next(request)
+    if (request.method not in ("GET", "HEAD", "OPTIONS")
+            and request.url.path.startswith("/api/")
+            and not request.url.path.startswith(_AUDIT_SKIP)):
+        playerdb.audit_log(
+            _session_user(request), f"{request.method} {request.url.path}",
+            target=request.url.path.split("/")[3] if request.url.path.startswith("/api/player/") else None,
+            detail={"status": response.status_code})
+    return response
+
+
+app.middleware("http")(audit_mutations)
+
+
+@app.get("/api/audit")
+def api_audit(limit: int = 100):
+    """Newest admin actions, for the Audit Log page and the Overview feed."""
+    return {"entries": playerdb.audit_list(limit)}
+
+
 app.mount("/ui", StaticFiles(directory=UI_DIR), name="ui")
 
 CATALOG = gamedata.load_catalog()
@@ -218,6 +248,16 @@ def _read_state(pid):
 
 def _write_state(pid, st):
     playerdb.save(pid, st)
+
+
+def _selected_players(body):
+    """[(uid, state)] for a bulk op: only the pids named in the body when given,
+    every save when not - the original all-players behaviour, so an empty body
+    stays compatible with the pre-bulk UI."""
+    pids = {str(p) for p in ((body or {}).get("pids") or [])}
+    for uid, st, _updated in playerdb.all_players():
+        if st and (not pids or uid in pids):
+            yield uid, st
 
 
 # --- player portal access ---------------------------------------------------
@@ -407,9 +447,11 @@ def api_stats_realtime():
 def api_players():
     active = playerdb.active()
     out = []
-    for pid, st, _updated in playerdb.all_players():
+    for pid, st, updated in playerdb.all_players():
         try:
-            out.append(_summary(pid, st, active))
+            row = _summary(pid, st, active)
+            row["lastActive"] = updated          # save-file mtime, for UI sort/filter
+            out.append(row)
         except Exception as e:
             out.append({"id": pid, "error": str(e)})
     return out
@@ -825,11 +867,9 @@ async def api_player_grant_all_skins(pid: str):
 
 
 @app.post("/api/players/grant-all-skins")
-async def api_players_grant_all_skins():
+async def api_players_grant_all_skins(body: dict = None):
     count = 0
-    for uid, st, _ in playerdb.all_players():
-        if not st:
-            continue
+    for uid, st in _selected_players(body):
         _grant_all_skins_to_player(st)
         playerdb.save(uid, st)
         count += 1
@@ -854,9 +894,7 @@ async def api_players_toggle_infinity_rift(body: dict = None):
     b = body or {}
     enable = b.get("enable", True)
     count = 0
-    for uid, st, _ in playerdb.all_players():
-        if not st:
-            continue
+    for uid, st in _selected_players(b):
         st["infinityRiftEnergy"] = enable
         if enable:
             st["riftGauge"] = 1000
@@ -883,9 +921,7 @@ async def api_grant_all_players_legendary_rift_crystals(body: dict = None):
     b = body or {}
     wipe = bool(b.get("wipeTestEquip", True))
     count = 0
-    for uid, st, _ in playerdb.all_players():
-        if not st:
-            continue
+    for uid, st in _selected_players(b):
         _grant_rift_collection_to_player(st, wipe_test_equip=wipe)
         playerdb.save(uid, st)
         count += 1
@@ -922,11 +958,9 @@ async def api_grant_premium_altars(pid: str):
 
 
 @app.post("/api/players/grant-all-premium-altars")
-async def api_grant_all_players_premium_altars():
+async def api_grant_all_players_premium_altars(body: dict = None):
     count = 0
-    for uid, st, _ in playerdb.all_players():
-        if not st:
-            continue
+    for uid, st in _selected_players(body):
         _grant_premium_altars_to_player(st)
         playerdb.save(uid, st)
         count += 1
@@ -1297,6 +1331,86 @@ async def api_delete_mail(pid: str, post_id: int):
 PROXY_SECTIONS = {"system": "/admin/api/system", "logs": "/admin/api/logs",
                   "routes": "/admin/api/routes", "cdn": "/admin/api/cdn",
                   "config": "/admin/api/config", "info": "/admin/api/info"}
+
+# uvicorn's own stdout/stderr never passes through server.py's logger, so the
+# proxy's "logs" section cannot see it. The tail endpoint reads the file the
+# process was redirected to (start_server.sh / systemd write it).
+LOG_FILE = os.environ.get("KGC_LOG_FILE", "/tmp/kgc_server.log")
+
+
+@app.get("/api/server/logs")
+def api_server_log_tail(lines: int = 200):
+    """Last N lines of the game server's log file, newest last. Registered before
+    the {section} proxy so the specific path wins."""
+    lines = max(10, min(int(lines or 200), 2000))
+    try:
+        with open(LOG_FILE, "r", encoding="utf-8", errors="replace") as f:
+            tail = f.read()[-400_000:].splitlines()[-lines:]
+        return {"ok": True, "file": LOG_FILE, "lines": tail}
+    except FileNotFoundError:
+        return {"ok": False, "file": LOG_FILE, "lines": [],
+                "error": "log file not found (set KGC_LOG_FILE)"}
+    except Exception as e:
+        return {"ok": False, "file": LOG_FILE, "lines": [], "error": str(e)}
+
+
+# --- clan raid administration ------------------------------------------------
+# The raid lives inside each clan record (c["raid"], routes/clan.py). The panel
+# only ever advances through real battles; when a season needs a nudge (or a
+# reset after testing), this is the operator's side door onto the same state.
+RAID_SET_FIELDS = {"killCount", "score", "remainHp", "round", "stage", "bossIndex"}
+
+
+@app.get("/api/raid/admin")
+def api_raid_admin():
+    out = []
+    for pid, st, _updated in playerdb.all_players():
+        c = (st or {}).get("clan")
+        if not c:
+            continue
+        r = c.get("raid") or {}
+        out.append({"pid": pid, "clanId": c.get("id"), "clanName": c.get("name", ""),
+                    "boss": r.get("boss"), "stage": r.get("stage"), "round": r.get("round"),
+                    "killCount": r.get("killCount", 0), "score": r.get("score", 0),
+                    "remainHp": r.get("remainHp"), "remainBattleCount": r.get("remainBattleCount"),
+                    "battleStartedAt": r.get("battleStartedAt"), "seeded": bool(r)})
+    return {"raids": out}
+
+
+@app.post("/api/raid/admin/reset")
+async def api_raid_admin_reset(body: dict):
+    pid = (body or {}).get("pid")
+    st = _read_state(pid)
+    c = st.get("clan")
+    if not c:
+        raise HTTPException(400, f"player {pid} is not in a clan")
+    c["raid"] = None                      # clan.py _raid() re-seeds on next fetch
+    _write_state(pid, st)
+    return {"ok": True, "pid": pid}
+
+
+@app.post("/api/raid/admin/set")
+async def api_raid_admin_set(body: dict):
+    b = body or {}
+    pid, field = b.get("pid"), b.get("field")
+    if field not in RAID_SET_FIELDS:
+        raise HTTPException(400, f"field must be one of {sorted(RAID_SET_FIELDS)}")
+    try:
+        value = int(b.get("value"))
+    except (TypeError, ValueError):
+        raise HTTPException(400, "value must be an integer")
+    if value < 0:
+        raise HTTPException(400, "value must be >= 0")
+    st = _read_state(pid)
+    c = st.get("clan")
+    if not c:
+        raise HTTPException(400, f"player {pid} is not in a clan")
+    r = c.get("raid") or {}                # absent -> clan.py seeds defaults, then we patch
+    r.setdefault("version", 2)
+    r[field] = value
+    c["raid"] = r
+    _write_state(pid, st)
+    return {"ok": True, "pid": pid, "field": field, "value": value}
 
 
 @app.get("/api/server/{section}")

@@ -1,354 +1,535 @@
-"use client"
-import { useState, useEffect } from "react"
-import { useQuery } from "@tanstack/react-query"
-import { useStatus, usePlayers, useServerSection, fetcher } from "@/lib/api"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { type LucideIcon, Users, Settings, HardDrive, Globe, Database, ScrollText, Crown, Coins, Gem, Heart, MemoryStick, Cpu, Server, Timer, BarChart2, Activity, ListOrdered } from "lucide-react"
-import Link from "next/link"
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts"
+"use client";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import {
+	useStatus,
+	usePlayers,
+	useServerSection,
+	useRealtimeStats,
+	useAudit,
+	useRaidAdmin,
+	fetcher,
+} from "@/lib/api";
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+	type LucideIcon,
+	Users,
+	Activity,
+	Coins,
+	Gem,
+	Heart,
+	ScrollText,
+	Cpu,
+	MemoryStick,
+	Swords,
+	History,
+	ChevronRight,
+} from "lucide-react";
+import {
+	LineChart,
+	Line,
+	XAxis,
+	YAxis,
+	Tooltip,
+	ResponsiveContainer,
+	CartesianGrid,
+	Legend,
+} from "recharts";
 
-type PlayerSummary = { id: string; name: string; active?: boolean; level?: number; gold?: number; cash?: number; heart?: number; counts?: { posts?: number; cards?: number; items?: number } }
-type HistoryPoint = { time: string; ccu: number }
-type SystemHistoryPoint = { time: string; cpu: number; ram: number }
-type ProcessInfo = { pid: number; name: string; cpu: number; mem: number }
+type PlayerSummary = {
+	id: string;
+	name: string;
+	active?: boolean;
+	level?: number;
+	gold?: number;
+	cash?: number;
+	heart?: number;
+	counts?: { posts?: number; cards?: number; items?: number };
+};
+type ChartPoint = { time: string; [k: string]: string | number };
+type RaidRow = {
+	pid: string;
+	clanId?: string;
+	clanName?: string;
+	boss?: string;
+	stage?: number;
+	round?: number;
+	killCount?: number;
+	score?: number;
+	remainHp?: number;
+	remainBattleCount?: number;
+};
 
-function Gauge({ label, value, sub, icon: Icon, color }: { label: string; value: string; sub?: string; icon: LucideIcon; color: string }) {
-  return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{label}</CardTitle>
-        <Icon className={`h-4 w-4 ${color}`} />
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
-        {sub && <div className="text-xs text-muted-foreground">{sub}</div>}
-      </CardContent>
-    </Card>
-  )
+const HISTORY_POINTS = 60;
+
+// Polling samples arrive from react-query; the effects below append each one
+// to a capped rolling window (newest last) so the charts hold a 60-point view
+// without any server-side history.
+function pushPoint(prev: ChartPoint[], p: ChartPoint): ChartPoint[] {
+	return [...prev.slice(-(HISTORY_POINTS - 1)), p];
 }
 
+function nowStr() {
+	const d = new Date();
+	return `${d.getHours().toString().padStart(2, "0")}:${d.getMinutes().toString().padStart(2, "0")}:${d.getSeconds().toString().padStart(2, "0")}`;
+}
+
+function fmt(n: number | undefined | null) {
+	if (n === undefined || n === null) return "-";
+	return n.toLocaleString();
+}
+
+function Kpi({
+	label,
+	value,
+	sub,
+	icon: Icon,
+	accent,
+}: {
+	label: string;
+	value: string;
+	sub?: string;
+	icon: LucideIcon;
+	accent?: string;
+}) {
+	return (
+		<Card>
+			<CardHeader>
+				<CardTitle className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+					<Icon className={`h-4 w-4 ${accent ?? "text-muted-foreground"}`} />
+					{label}
+				</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<div className="tnum text-2xl font-semibold tracking-tight">
+					{value}
+				</div>
+				{sub && (
+					<div className="mt-0.5 text-xs text-muted-foreground">{sub}</div>
+				)}
+			</CardContent>
+		</Card>
+	);
+}
+
+const CHART_TICK = {
+	fontSize: 11,
+	tickLine: false,
+	axisLine: false,
+	stroke: "var(--muted-foreground)",
+} as const;
+
 export default function OverviewPage() {
-  const { data: status, error } = useStatus()
-  const { data: players } = usePlayers()
-  const { data: sys } = useServerSection("system", 2000)
-  
-  const { data: realtime } = useQuery({
-    queryKey: ['/api/stats/realtime'],
-    queryFn: () => fetcher('/api/stats/realtime'),
-    refetchInterval: 2000
-  })
+	const { data: status, error } = useStatus();
+	const { data: players } = usePlayers();
+	const { data: sys } = useServerSection("system", 2000);
+	const { data: realtime } = useRealtimeStats();
+	const { data: audit } = useAudit(5);
+	const { data: raid } = useRaidAdmin();
+	const { data: pending } = useQuery({
+		queryKey: ["/api/requests", "pending"],
+		queryFn: () => fetcher("/api/requests?status=pending"),
+		refetchInterval: 15000,
+	});
 
-  const [history, setHistory] = useState<HistoryPoint[]>([])
-  const [sysHistory, setSysHistory] = useState<SystemHistoryPoint[]>([])
+	const [ccuHistory, setCcuHistory] = useState<ChartPoint[]>([]);
+	const [sysHistory, setSysHistory] = useState<ChartPoint[]>([]);
 
-  useEffect(() => {
-    if (realtime) {
-      // The query result is an external polling source; preserve each sample for the chart.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setHistory(prev => {
-        const next = [...prev, { time: new Date().toLocaleTimeString(), ccu: realtime.ccu }]
-        if (next.length > 20) return next.slice(next.length - 20)
-        return next
-      })
-    }
-  }, [realtime])
+	useEffect(() => {
+		if (!realtime) return;
+		// The query result is an external polling source; appending here is the
+		// intended reactive pattern.
+		// eslint-disable-next-line react-hooks/set-state-in-effect
+		setCcuHistory((prev) =>
+			pushPoint(prev, { time: nowStr(), ccu: realtime.ccu }),
+		);
+	}, [realtime]);
 
-  useEffect(() => {
-    if (sys?.ok && sys.data) {
-      // The query result is an external polling source; preserve each sample for the chart.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSysHistory(prev => {
-        const d = new Date()
-        const timeStr = `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}:${d.getSeconds().toString().padStart(2, '0')}`
-        const next = [...prev, { 
-          time: timeStr, 
-          cpu: sys.data.cpu.load1,
-          ram: sys.data.mem.percent
-        }]
-        if (next.length > 20) return next.slice(next.length - 20)
-        return next
-      })
-    }
-  }, [sys])
+	useEffect(() => {
+		if (!sys?.ok || !sys.data) return;
+		// eslint-disable-next-line react-hooks/set-state-in-effect
+		setSysHistory((prev) =>
+			pushPoint(prev, {
+				time: nowStr(),
+				cpu: sys.data.cpu.load1,
+				ram: sys.data.mem.percent,
+			}),
+		);
+	}, [sys]);
 
-  const list = (Array.isArray(players) ? players : []) as PlayerSummary[]
-  const totals = list.reduce((acc, p) => ({
-    gold: acc.gold + (p.gold || 0),
-    cash: acc.cash + (p.cash || 0),
-    heart: acc.heart + (p.heart || 0),
-    posts: acc.posts + (p.counts?.posts || 0),
-    cards: acc.cards + (p.counts?.cards || 0),
-    items: acc.items + (p.counts?.items || 0),
-  }), { gold: 0, cash: 0, heart: 0, posts: 0, cards: 0, items: 0 })
+	if (!status && !error)
+		return <div className="p-8 text-muted-foreground">Loading status...</div>;
+	if (error)
+		return (
+			<div className="p-8 text-destructive">Failed to load system status.</div>
+		);
 
-  const top = [...list].sort((a, b) => (b.level || 0) - (a.level || 0)).slice(0, 5)
+	const list = (Array.isArray(players) ? players : []) as PlayerSummary[];
+	const totals = list.reduce(
+		(acc, p) => ({
+			gold: acc.gold + (p.gold || 0),
+			cash: acc.cash + (p.cash || 0),
+			heart: acc.heart + (p.heart || 0),
+		}),
+		{ gold: 0, cash: 0, heart: 0 },
+	);
 
-  const levelDistribution = (() => {
-    const bins = [0, 0, 0, 0, 0] // 1-10, 11-20, 21-30, 31-40, 41-50
-    list.forEach((p) => {
-      const lv = p.level || 1
-      if (lv <= 10) bins[0]++
-      else if (lv <= 20) bins[1]++
-      else if (lv <= 30) bins[2]++
-      else if (lv <= 40) bins[3]++
-      else bins[4]++
-    })
-    return [
-      { name: "1-10", players: bins[0] },
-      { name: "11-20", players: bins[1] },
-      { name: "21-30", players: bins[2] },
-      { name: "31-40", players: bins[3] },
-      { name: "41-50", players: bins[4] },
-    ]
-  })()
+	const raids = (raid?.raids ?? []) as RaidRow[];
+	const activeRaids = raids.filter((r) => r.remainBattleCount);
+	const pendingCount = pending?.entries?.length ?? 0;
+	const sysData = sys?.ok ? sys.data : null;
 
-  if (!status && !error) return <div className="p-8 text-muted-foreground">Loading status...</div>
-  if (error) return <div className="p-8 text-destructive">Failed to load system status.</div>
+	return (
+		<div className="space-y-6">
+			<div>
+				<h1 className="text-2xl font-semibold tracking-tight">Overview</h1>
+				<p className="text-sm text-muted-foreground">
+					Live server health, economy and pending work.
+				</p>
+			</div>
 
-  const gd = status.gamedata || {}
+			{/* KPI row */}
+			<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+				<Kpi
+					label="Players"
+					value={fmt(status.players)}
+					sub={`${fmt(realtime?.active_24h)} active 24h`}
+					icon={Users}
+					accent="text-blue-600 dark:text-blue-400"
+				/>
+				<Kpi
+					label="CCU"
+					value={fmt(realtime?.ccu)}
+					sub="last 15s"
+					icon={Activity}
+					accent="text-emerald-600 dark:text-emerald-400"
+				/>
+				<Kpi
+					label="Gold"
+					value={fmt(realtime?.total_gold ?? totals.gold)}
+					sub="all accounts"
+					icon={Coins}
+					accent="text-amber-600 dark:text-amber-400"
+				/>
+				<Kpi
+					label="Cash"
+					value={fmt(realtime?.total_cash ?? totals.cash)}
+					sub="all accounts"
+					icon={Gem}
+					accent="text-violet-600 dark:text-violet-400"
+				/>
+				<Kpi
+					label="Heart"
+					value={fmt(totals.heart)}
+					sub="all accounts"
+					icon={Heart}
+					accent="text-rose-600 dark:text-rose-400"
+				/>
+				<Link href="/requests" className="block">
+					<Card className="h-full transition-colors hover:bg-surface-2">
+						<CardHeader>
+							<CardTitle className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+								<ScrollText className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+								Requests
+							</CardTitle>
+						</CardHeader>
+						<CardContent>
+							<div className="tnum flex items-center gap-2 text-2xl font-semibold tracking-tight">
+								{fmt(pendingCount)}
+								{pendingCount > 0 && <Badge variant="warn">pending</Badge>}
+							</div>
+							<div className="mt-0.5 text-xs text-muted-foreground">
+								player grant queue
+							</div>
+						</CardContent>
+					</Card>
+				</Link>
+			</div>
 
-  const sysData = sys?.ok ? sys.data : null
-  const mem = sysData?.mem
-  const disk = sysData?.disk
-  const cpu = sysData?.cpu
-  const processes = (sysData?.processes || []) as ProcessInfo[]
-  const loadPct = cpu && cpu.cores ? Math.min(100, Math.round((cpu.load1 / cpu.cores) * 100)) : null
+			{/* Charts */}
+			<div className="grid gap-4 lg:grid-cols-2">
+				<Card>
+					<CardHeader>
+						<div>
+							<CardTitle className="flex items-center gap-2">
+								Realtime CCU
+							</CardTitle>
+							<CardDescription>
+								Concurrent users, 2s samples (60-point window).
+							</CardDescription>
+						</div>
+					</CardHeader>
+					<CardContent className="h-64">
+						<ResponsiveContainer width="100%" height="100%">
+							<LineChart
+								data={ccuHistory}
+								margin={{ top: 5, right: 10, left: -25, bottom: 0 }}
+							>
+								<CartesianGrid
+									strokeDasharray="3 3"
+									vertical={false}
+									stroke="var(--border)"
+								/>
+								<XAxis dataKey="time" tick={CHART_TICK} minTickGap={40} />
+								<YAxis allowDecimals={false} tick={CHART_TICK} width={40} />
+								<Tooltip
+									contentStyle={{
+										backgroundColor: "var(--card)",
+										borderColor: "var(--border)",
+										borderRadius: "8px",
+										fontSize: 12,
+									}}
+								/>
+								<Line
+									type="monotone"
+									dataKey="ccu"
+									name="CCU"
+									stroke="var(--color-success)"
+									strokeWidth={2}
+									dot={false}
+								/>
+							</LineChart>
+						</ResponsiveContainer>
+					</CardContent>
+				</Card>
 
-  const metrics = [
-    { label: "Players", value: status.players, icon: Users, color: "text-blue-400" },
-    { label: "Server Version", value: status.version, icon: Settings, color: "text-violet-400" },
-    { label: "Patch Folder", value: status.patchFolder, icon: HardDrive, color: "text-amber-400" },
-    { label: "Multiplayer", value: status.multiplayer ? "Enabled" : "Disabled", icon: Globe, color: "text-emerald-400" },
-  ]
+				<Card>
+					<CardHeader>
+						<div>
+							<CardTitle className="flex items-center gap-2">
+								Host CPU / RAM
+							</CardTitle>
+							<CardDescription>
+								Load 1m &amp; memory utilization (%).
+							</CardDescription>
+						</div>
+						{sysData && (
+							<span className="tnum flex items-center gap-3 text-xs text-muted-foreground">
+								<span className="flex items-center gap-1">
+									<Cpu size={12} />
+									{sysData.cpu.load1}
+								</span>
+								<span className="flex items-center gap-1">
+									<MemoryStick size={12} />
+									{sysData.mem.percent}%
+								</span>
+							</span>
+						)}
+					</CardHeader>
+					<CardContent className="h-64">
+						<ResponsiveContainer width="100%" height="100%">
+							<LineChart
+								data={sysHistory}
+								margin={{ top: 5, right: 10, left: -25, bottom: 0 }}
+							>
+								<CartesianGrid
+									strokeDasharray="3 3"
+									vertical={false}
+									stroke="var(--border)"
+								/>
+								<XAxis dataKey="time" tick={CHART_TICK} minTickGap={40} />
+								<YAxis tick={CHART_TICK} width={40} />
+								<Tooltip
+									contentStyle={{
+										backgroundColor: "var(--card)",
+										borderColor: "var(--border)",
+										borderRadius: "8px",
+										fontSize: 12,
+									}}
+								/>
+								<Legend wrapperStyle={{ fontSize: 12 }} />
+								<Line
+									type="monotone"
+									dataKey="cpu"
+									name="CPU load"
+									stroke="var(--chart-line)"
+									strokeWidth={2}
+									dot={false}
+								/>
+								<Line
+									type="monotone"
+									dataKey="ram"
+									name="RAM %"
+									stroke="var(--warning)"
+									strokeWidth={2}
+									dot={false}
+								/>
+							</LineChart>
+						</ResponsiveContainer>
+					</CardContent>
+				</Card>
+			</div>
 
-  const hostMetrics = sysData ? [
-    { label: "Memory", value: mem ? `${mem.used} / ${mem.total} MB` : "-", sub: mem ? `${mem.percent}% used` : undefined, icon: MemoryStick, color: "text-rose-400" },
-    { label: "CPU load", value: loadPct !== null ? `${loadPct}%` : "-", sub: cpu ? `load 1m ${cpu.load1} · ${cpu.cores} cores` : undefined, icon: Cpu, color: "text-cyan-400" },
-    { label: "Disk", value: disk ? `${disk.used} / ${disk.total} GB` : "-", sub: disk ? `${disk.percent}% used` : undefined, icon: Server, color: "text-lime-400" },
-    { label: "Uptime", value: sysData.uptimeStr || "-", sub: sysData.startTime ? `since ${sysData.startTime}` : undefined, icon: Timer, color: "text-orange-400" },
-  ] : []
+			{/* Side panels: raid + recent actions */}
+			<div className="grid gap-4 lg:grid-cols-2">
+				<Card>
+					<CardHeader>
+						<div>
+							<CardTitle className="flex items-center gap-2">
+								<Swords className="h-4 w-4" /> Clan Raid
+							</CardTitle>
+							<CardDescription>Latest boss progress per clan.</CardDescription>
+						</div>
+						<Link
+							href="/raid"
+							className="flex items-center gap-0.5 text-xs font-medium text-muted-foreground hover:text-foreground"
+						>
+							Manage <ChevronRight size={12} />
+						</Link>
+					</CardHeader>
+					<CardContent>
+						{raids.length === 0 && (
+							<p className="text-sm text-muted-foreground">
+								No clans formed yet.
+							</p>
+						)}
+						<ul className="divide-y divide-border">
+							{raids.slice(0, 5).map((r) => (
+								<li
+									key={r.pid}
+									className="flex items-center justify-between gap-3 py-2.5 text-sm"
+								>
+									<div className="min-w-0">
+										<p className="truncate font-medium">
+											{r.clanName || r.clanId}
+										</p>
+										<p className="tnum truncate text-xs text-muted-foreground">
+											round {r.round ?? "-"} · stage {r.stage ?? "-"} · kills{" "}
+											{fmt(r.killCount)} · score {fmt(r.score)}
+										</p>
+									</div>
+									{r.remainHp != null && (
+										<Badge
+											variant={r.remainHp <= 0 ? "success" : "neutral"}
+											className="tnum shrink-0"
+										>
+											HP {fmt(r.remainHp)}
+										</Badge>
+									)}
+								</li>
+							))}
+						</ul>
+						{activeRaids.length > 0 && (
+							<p className="tnum mt-2 text-xs text-muted-foreground">
+								{activeRaids.length} battle(s) in progress
+							</p>
+						)}
+					</CardContent>
+				</Card>
 
-  return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Overview</h1>
-        <p className="text-muted-foreground">System telemetry and account totals.</p>
-      </div>
+				<Card>
+					<CardHeader>
+						<div>
+							<CardTitle className="flex items-center gap-2">
+								<History className="h-4 w-4" /> Recent admin actions
+							</CardTitle>
+							<CardDescription>
+								Newest entries in the audit trail.
+							</CardDescription>
+						</div>
+						<Link
+							href="/audit"
+							className="flex items-center gap-0.5 text-xs font-medium text-muted-foreground hover:text-foreground"
+						>
+							Full log <ChevronRight size={12} />
+						</Link>
+					</CardHeader>
+					<CardContent>
+						{(audit?.entries ?? []).length === 0 && (
+							<p className="text-sm text-muted-foreground">
+								No admin actions recorded yet.
+							</p>
+						)}
+						<ul className="divide-y divide-border">
+							{(audit?.entries ?? []).map(
+								(e: {
+									id: number;
+									ts: number;
+									username: string;
+									action: string;
+									target?: string | null;
+								}) => (
+									<li
+										key={e.id}
+										className="flex items-center justify-between gap-3 py-2 text-sm"
+									>
+										<div className="min-w-0">
+											<span className="font-medium">{e.action}</span>
+											{e.target && (
+												<span className="ml-2 font-mono text-xs text-muted-foreground">
+													{e.target}
+												</span>
+											)}
+										</div>
+										<span className="tnum shrink-0 text-xs text-muted-foreground">
+											{new Date(e.ts * 1000).toLocaleTimeString()} ·{" "}
+											{e.username}
+										</span>
+									</li>
+								),
+							)}
+						</ul>
+					</CardContent>
+				</Card>
+			</div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {metrics.map((m, i) => (
-          <Card key={i}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{m.label}</CardTitle>
-              <m.icon className={`h-4 w-4 ${m.color}`} />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{m.value}</div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {sysData && (
-        <div>
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Host</h2>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {hostMetrics.map((m, i) => <Gauge key={i} {...m} />)}
-          </div>
-          
-          <div className="grid gap-4 md:grid-cols-3 mt-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2"><Cpu className="w-5 h-5" /> Realtime CPU Load</CardTitle>
-                <CardDescription>System load average (1m).</CardDescription>
-              </CardHeader>
-              <CardContent className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={sysHistory} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="opacity-20" />
-                    <XAxis dataKey="time" fontSize={12} tickLine={false} axisLine={false} />
-                    <YAxis allowDecimals={false} fontSize={12} tickLine={false} axisLine={false} />
-                    <Tooltip contentStyle={{ backgroundColor: 'var(--background)', borderColor: 'var(--border)', borderRadius: '6px' }} />
-                    <Line type="monotone" dataKey="cpu" stroke="currentColor" strokeWidth={2} dot={false} className="stroke-cyan-400" />
-                  </LineChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2"><MemoryStick className="w-5 h-5" /> Realtime Memory</CardTitle>
-                <CardDescription>System RAM utilization (%).</CardDescription>
-              </CardHeader>
-              <CardContent className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={sysHistory} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="opacity-20" />
-                    <XAxis dataKey="time" fontSize={12} tickLine={false} axisLine={false} />
-                    <YAxis allowDecimals={false} fontSize={12} tickLine={false} axisLine={false} domain={[0, 100]} />
-                    <Tooltip contentStyle={{ backgroundColor: 'var(--background)', borderColor: 'var(--border)', borderRadius: '6px' }} />
-                    <Line type="monotone" dataKey="ram" stroke="currentColor" strokeWidth={2} dot={false} className="stroke-rose-400" />
-                  </LineChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2"><ListOrdered className="w-5 h-5" /> Top Processes</CardTitle>
-                <CardDescription>Highest CPU consumers.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="divide-y divide-border">
-                  <li className="flex items-center justify-between py-2 text-xs text-muted-foreground uppercase tracking-wider font-semibold">
-                    <span className="w-20">PID</span>
-                    <span className="flex-1">COMMAND</span>
-                    <span className="w-16 text-right">CPU%</span>
-                    <span className="w-16 text-right">MEM%</span>
-                  </li>
-                  {processes.map((p) => (
-                    <li key={p.pid} className="flex items-center justify-between py-2 text-sm">
-                      <span className="w-20 font-mono text-muted-foreground">{p.pid}</span>
-                      <span className="flex-1 font-medium truncate pr-2">{p.name}</span>
-                      <span className="w-16 text-right text-cyan-400">{p.cpu}</span>
-                      <span className="w-16 text-right text-rose-400">{p.mem}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      )}
-
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Database className="w-5 h-5" /> Master Data</CardTitle>
-            <CardDescription>Loaded from the local XML bundle.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Heroes (Units)</p>
-                <p className="text-xl font-semibold">{gd.heroes || 0}</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Items</p>
-                <p className="text-xl font-semibold">{gd.items || 0}</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Buffs</p>
-                <p className="text-xl font-semibold">{gd.buffs || 0}</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Skills</p>
-                <p className="text-xl font-semibold">{gd.skills || 0}</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Localization strings</p>
-                <p className="text-xl font-semibold">{gd.strings || 0}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Coins className="w-5 h-5" /> Economy (all players)</CardTitle>
-            <CardDescription>Summed across every save on disk.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground flex items-center gap-1"><Crown className="w-3.5 h-3.5" /> Gold</p>
-                <p className="text-xl font-semibold">{totals.gold.toLocaleString()}</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground flex items-center gap-1"><Gem className="w-3.5 h-3.5" /> Cash</p>
-                <p className="text-xl font-semibold">{totals.cash.toLocaleString()}</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground flex items-center gap-1"><Heart className="w-3.5 h-3.5" /> Heart</p>
-                <p className="text-xl font-semibold">{totals.heart.toLocaleString()}</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground flex items-center gap-1"><ScrollText className="w-3.5 h-3.5" /> Mail waiting</p>
-                <p className="text-xl font-semibold">{totals.posts}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><BarChart2 className="w-5 h-5" /> Level Distribution</CardTitle>
-            <CardDescription>Number of players per level range (real-time).</CardDescription>
-          </CardHeader>
-          <CardContent className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={levelDistribution} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="opacity-20" />
-                <XAxis dataKey="name" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis allowDecimals={false} fontSize={12} tickLine={false} axisLine={false} />
-                <Tooltip 
-                  cursor={{ fill: 'currentColor', opacity: 0.1 }}
-                  contentStyle={{ backgroundColor: 'var(--background)', borderColor: 'var(--border)', borderRadius: '6px' }} 
-                />
-                <Bar dataKey="players" fill="currentColor" radius={[4, 4, 0, 0]} className="fill-primary" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Activity className="w-5 h-5" /> Realtime CCU</CardTitle>
-            <CardDescription>Concurrent users active in the last 15 seconds.</CardDescription>
-          </CardHeader>
-          <CardContent className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={history} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="opacity-20" />
-                <XAxis dataKey="time" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis allowDecimals={false} fontSize={12} tickLine={false} axisLine={false} />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: 'var(--background)', borderColor: 'var(--border)', borderRadius: '6px' }} 
-                />
-                <Line type="monotone" dataKey="ccu" stroke="currentColor" strokeWidth={2} dot={false} className="stroke-primary" />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card className="md:col-span-2">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Users className="w-5 h-5" /> Highest-level accounts</CardTitle>
-            <CardDescription>Top 5 by account level.</CardDescription>
-          </CardHeader>
-          <CardContent>
-          {top.length === 0 && <p className="text-sm text-muted-foreground">No players yet.</p>}
-          <ul className="divide-y divide-border">
-            {top.map((p) => (
-              <li key={p.id} className="flex items-center justify-between py-2">
-                <div className="flex items-center gap-3">
-                  <span className={`h-2 w-2 rounded-full ${p.active ? 'bg-green-500' : 'bg-muted-foreground/40'}`} />
-                  <Link href={`/players`} className="text-sm font-medium hover:underline">{p.name}</Link>
-                  <span className="text-xs text-muted-foreground font-mono">{p.id}</span>
-                </div>
-                <div className="flex items-center gap-4 text-sm">
-                  <span className="text-muted-foreground">lv {p.level}</span>
-                  <span className="text-muted-foreground font-mono">{p.gold?.toLocaleString()} gold</span>
-                  <span className="text-muted-foreground">{p.counts?.cards} heroes</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
-      </div>
-    </div>
-  )
+			{/* Server facts */}
+			<Card>
+				<CardHeader>
+					<div>
+						<CardTitle>Server</CardTitle>
+						<CardDescription>Configuration and host facts.</CardDescription>
+					</div>
+					<Link
+						href="/server"
+						className="flex items-center gap-0.5 text-xs font-medium text-muted-foreground hover:text-foreground"
+					>
+						Diagnostics <ChevronRight size={12} />
+					</Link>
+				</CardHeader>
+				<CardContent>
+					<dl className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm md:grid-cols-4">
+						<div>
+							<dt className="text-xs uppercase tracking-wide text-muted-foreground">
+								Version
+							</dt>
+							<dd className="tnum mt-0.5 font-medium">{status.version}</dd>
+						</div>
+						<div>
+							<dt className="text-xs uppercase tracking-wide text-muted-foreground">
+								Patch folder
+							</dt>
+							<dd className="mt-0.5 font-medium">{status.patchFolder}</dd>
+						</div>
+						<div>
+							<dt className="text-xs uppercase tracking-wide text-muted-foreground">
+								Multiplayer
+							</dt>
+							<dd className="mt-0.5">
+								<Badge variant={status.multiplayer ? "success" : "neutral"}>
+									{status.multiplayer ? "Enabled" : "Disabled"}
+								</Badge>
+							</dd>
+						</div>
+						<div>
+							<dt className="text-xs uppercase tracking-wide text-muted-foreground">
+								Uptime
+							</dt>
+							<dd className="mt-0.5 font-medium">
+								{sysData?.uptimeStr ?? "-"}
+							</dd>
+						</div>
+					</dl>
+				</CardContent>
+			</Card>
+		</div>
+	);
 }
