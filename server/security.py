@@ -7,7 +7,7 @@ test_dashboard_api execs server.py a second time as a separate module instance,
 and a shared global made every registered app read config from the last
 instance that registered.
 """
-import asyncio, os, shutil, subprocess, time
+import asyncio, inspect, os, shutil, subprocess, time
 
 from fastapi import Request
 from fastapi.responses import JSONResponse
@@ -15,6 +15,12 @@ from starlette.middleware.base import _CachedRequest
 
 from common import admin_log
 from state import CURRENT_IP, CURRENT_UID
+
+# Newer starlette added a required ``send`` argument to _CachedRequest (the
+# recursion-detection version bump); older lines take only (scope, receive).
+# Probe once at import so the body-cap middleware works on either pin.
+_CACHED_REQUEST_TAKES_SEND = (
+    len(inspect.signature(_CachedRequest.__init__).parameters) >= 4)
 
 srv = None      # fallback server module, set by register()
 
@@ -252,7 +258,10 @@ class CappedBodyMiddleware:
             await self._reject(send)
             return
 
-        request = _CachedRequest(scope, receive)
+        if _CACHED_REQUEST_TAKES_SEND:
+            request = _CachedRequest(scope, receive, send)
+        else:
+            request = _CachedRequest(scope, receive)
         chunks, total = [], 0
         async for chunk in request.stream():
             total += len(chunk)
