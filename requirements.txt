@@ -18,6 +18,7 @@ windows-curses>=2.4.1; sys_platform == "win32"  # TUI support on Windows
 pycryptodome>=3.23.0          # AES-128-ECB for the game API
 httpx>=0.28.1                 # dashboard -> game-server admin proxy
 requests>=2.32                # api/ client package (api/config.py) - pulled in by server tests
+msgpack>=1.1.2                # api/ client payload codec (api/config.py) - same tests
 
 # --- optional, tooling only (not needed to run the server) -------------------
 # UnityPy>=1.25.2             # asset/bundle work: rebuild_xml_bundle.py, extractors
