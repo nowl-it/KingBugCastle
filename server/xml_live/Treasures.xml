@@ -727,4 +727,17 @@
         <CardIllustOffsetY>0</CardIllustOffsetY>
         <MinVersion>167100</MinVersion>
     </Treasure>
+    <Treasure ID="50002">
+        <Comment>Cor Orbis (local row - not shipped by the devs)</Comment>
+        <Rarity>Special</Rarity>
+        <LimitedEdition>true</LimitedEdition>
+
+        <Role>Mystic</Role>
+        <BuffDataStartID>3500020</BuffDataStartID>
+        <Color>8381EE</Color>
+        <SubNameColor>FEEEAA</SubNameColor>
+        <CardIllustOffsetX>0</CardIllustOffsetX>
+        <CardIllustOffsetY>0</CardIllustOffsetY>
+        <MinVersion>170000</MinVersion>
+    </Treasure>
 </Treasures>

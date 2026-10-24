@@ -1,6 +1,6 @@
-<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
+<Strings TranslationBaseCommit="b53f5c202519e52ec712d65feedb55aff10c9efe">
   <String Key="UpdateNoticeVersion">172000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/en</String>
   <String Key="Title">King God Castle</String>
   <String Key="Tags">Awesomepiece, ZombieHighschool, TFT, Auto-Battler, Auto-Chess, LoL-Chess, King God Castle, Auto-Battle, Taktikspiel, TeamfightTactics, TFT, Ends, HelpmeEnds, Kombination, Verteidigung</String>
   <String Key="Store_ShortDesc">Nutzt die Helden und die Macht der Götter, um das Schloss gegen die verschiedenen Feinde zu verteidigen! King God Castle!</String>
@@ -951,8 +951,8 @@ Erhöht MP zu Beginn der Runde aller Verbündeten mit 5★ oder mehr</String>
   <String Key="AddDefPerCount">Verringert den erlittenen Schaden um {0} für jeden Helden auf dem Schlachtfeld
 (Max. {1})</String>
   <String Key="AddDefPerCount_Piece">Der erlittene Schaden verringert sich, je mehr Helden auf dem Schlachtfeld platziert sind.</String>
-  <String Key="AtkPerByRange">Reichweite aller Helden + 1, Verursachter Schaden von Normal-/Skill-Angriffen +{0} pro Distanz zum Ziel (max. Entfernung {1})</String>
-  <String Key="AtkPerByRange_Piece">Reichweite aller Helden + 1, Verursachter Schaden von Normal-/Skill-Angriffen steigt mit der Entfernung zum Ziel</String>
+  <String Key="AtkPerByRange">Verursachter Schaden von Normal-/Skill-Angriffen steigt pro Feld Abstand zum Ziel um {0} (max. Abstand {1})</String>
+  <String Key="AtkPerByRange_Piece">Verursachter Schaden von Normal-/Skill-Angriffen steigt mit der Entfernung zum Ziel</String>
   <String Key="ArtifactName_100">Magiestaub</String>
   <String Key="ArtifactDesc_100">Ihr könnt Magiestaub durch das Einschmelzen von Relikten erhalten.</String>
   <String Key="ArtifactName_10000">Kaiserliches Großschwert</String>
@@ -1241,11 +1241,8 @@ Möchtet Ihr sie Euch ansehen?</String>
   <String Key="ItemName_10020">Truppenerweiterung</String>
   <String Key="ItemDesc_10020">Erweitert die Truppen um 1.</String>
   <String Key="ItemName_10030">+5 Silber</String>
-  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">+10 Silber</String>
-  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">+20 Silber</String>
-  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">Ehrenmedaille</String>
   <String Key="ItemDesc_10040">Befördert einen zufälligen Helden auf dem Schlachtfeld um 1.</String>
   <String Key="ItemName_10050">Premium Helden Beschwörungsrolle
@@ -2749,8 +2746,8 @@ Möchtet Ihr trotzdem fortfahren?</String>
   <String Key="CashCart">Ein Karren Juwelen</String>
   <String Key="UnitName_10320">Tia</String>
   <String Key="UnitSubName_10320">Wächterin der Ewigkeit</String>
-  <String Key="Potential_10320_0">+20 % verursachter Gesamtschaden bei Gegnern in 3 Feldern Reichweite</String>
-  <String Key="Potential_10320_1">Wenn ein Gegner stirbt, schießt der nächste &lt;Windstoß&gt; doppelt so viele Pfeile</String>
+  <String Key="Potential_10320_0">Gegen Gegner im Umkreis von 4 Feldern: Gesamt verursachter Schaden +30%</String>
+  <String Key="Potential_10320_1">Der erste Pfeil von &lt;Windstoß&gt; ignoriert 100% des Phys.-Widerstands des Gegners</String>
   <String Key="SkinDesc_Default_10320">Tia ist Hauptmann der Wächtereinheit des Elfenkönigreichs. Sie bewegt sich geschwind wie ein Windstoß und mit ihrem herausragenden Bogenschützentalent sichert sie schon sehr lange die Grenzen des Ewigwaldes.</String>
   <String Key="SkillName_10320">Windstoß</String>
   <String Key="SkillDesc_10320">Bewegt sich {MoveDistance} Felder zurück, sobald das Ziel in {BuffRangeSum} Feldern Reichweite ist und greift danach {AttackCount}-mal mit Phys.-Normal-ANG an. Greift außerdem {AttackCount}-mal mit {10325@Damage:AtkPer:BaseValue} % des ANG an, wenn das Ziel nicht in {BuffRangeSum} Feldern Reichweite ist.</String>
@@ -6865,8 +6862,8 @@ das den Schaden des nächsten Skills auf einen Gegner um 130% amplifiziert</Stri
   <String Key="ArtifactName_14020">Zwergen Visier</String>
   <String Key="ArtifactDesc_14020">Ein Visier, das mit der Technologie der Zwerge gebaut wurde.
 Wer das Visier benutzt, kann weiter entfernte Ziele noch genauer angreifen, aber dafür ist es aufgrund seines Gewichts auch schwer zu transportieren.</String>
-  <String Key="MoveStopTimeDesc_Piece">Bestimmt zwei Felder des Schlachtfelds als Scharfschützenplätze. Platzierte Helden erhalten Absolute VERT +4. Bis sie den Platz zum ersten Mal verlassen, verursacht der erste sowie jeder 5. Treffer mit Normal-Schaden erhöhten Schaden</String>
-  <String Key="MoveStopTimeDesc">Bestimmt zwei Felder des Schlachtfelds als Scharfschützenplätze. Platzierte Helden erhalten Absolute VERT +{1}. Bis sie den Platz zum ersten Mal verlassen, verursacht der erste sowie jeder 5. Treffer mit Normal-Schaden +{0}% Schaden.</String>
+  <String Key="MoveStopTimeDesc_Piece">Bestimmt 2 Felder im Schlachtfeld als Scharfschützenpositionen. Platzierte Helden erhalten Absolute VERT +4, sind für eine Zeit &lt;color=#f33&gt;unbeweglich&lt;/color&gt; und solange sie auf einer Scharfschützenposition sind, steigt ihr Normal-Schaden in bestimmten Abständen.</String>
+  <String Key="MoveStopTimeDesc">Bestimmt 2 Felder im Schlachtfeld als Scharfschützenpositionen. Platzierte Helden erhalten Absolute VERT +{1}, sind {2} Sek. lang &lt;color=#f33&gt;unbeweglich&lt;/color&gt;. Bis sie die Scharfschützenposition zum ersten Mal verlassen, gilt: beim ersten und danach alle 5 Angriffe Verursachter Normal-Schaden +{0}%.</String>
   <String Key="ColosseumBanned">Zugang zum Schlachtfeld des erbitterten Kampfs Saison gesperrt</String>
   <String Key="GachaName_1036">Freudloses Lächeln</String>
   <String Key="Name_Potential_10560_3">Anfeuern</String>
@@ -8962,7 +8959,7 @@ Das ist dein Schicksal.&lt;/i&gt;</String>
   <String Key="SpecialPackage_1491">Feuerregen Paket 2</String>
   <String Key="SpecialPackage_1492">Feuerregen Paket 3</String>
   <String Key="SkillDesc_10110">Für {Time} Sek. werden {AtkCount} zusätzliche Angriffe ausgeführt.</String>
-  <String Key="Potential_10110_0">Erhöht während der Dauer von &lt;Pfeilhagel&gt; die Phys.-Kritische Trefferchance um +15 %</String>
+  <String Key="Potential_10110_0">Während &lt;Pfeilhagel&gt; Reichweite +1</String>
   <String Key="Potential_10110_1_00">Erhöht, während ein Bogen-Gegenstand ausgerüstet ist, den Gesamt-ANG pro Gegenstand um +15 %</String>
   <String Key="Potential_10110_2_00">Bei der Verwendung von &lt;Pfeilhagel&gt; wird &lt;Regensturm&gt; angewendet, wodurch beim Ziel und allen Gegnern in 2 Feldern Reichweite Phys. Skill-Schaden in Höhe von 250 % des ANG [3/4/5/6]x zufügt und die Gesamt-BEW-GESCHW für 3 Sek. um 30 % verringert wird.</String>
   <String Key="Potential_10110_3">Wenn bei der Verwendung von &lt;Pfeilhagel&gt;, demselben Ziel 10x Normal-Schaden zugefügt wird, wird die Wirkungsdauer von &lt;Pfeilhagel&gt; zurückgesetzt und der ANG um 50 % erhöht.
@@ -10652,7 +10649,7 @@ Gegner, die von der Explosion getroffen werden, werden für {6} Sek. betäubt.</
 Bei einer Explosion erhöht sich der Phys.-Kritischer Schaden für {4} Sek. um +{5} %
 Gegner, die von der Explosion getroffen werden, werden für {6} Sek. betäubt.
 Bei einer Explosion erhöht sich die Phys.-Kritische Trefferchance für {7} Sek. um +{8} %.</String>
-  <String Key="Potential_10110_1">Während der Verwendung von &lt;Pfeilhagel&gt; erhöht sich der Gesamt-ANG um +30 %</String>
+  <String Key="Potential_10110_1">Während &lt;Pfeilhagel&gt; Phys.-Kritische Trefferchance +30%</String>
   <String Key="Potential_10110_2">Während der Verwendung von &lt;Pfeilhagel&gt; wird der 7. Normal-ANG durch &lt;Regensturm&gt; ersetzt, der bei allen Gegnern in 2 Feldern Reichweite Phys.-Skill-Schaden in Höhe von 250 % des ANG [4/5/6/7]x verursacht.</String>
   <String Key="Potential_10420_1">-30 % erlittener Schaden während der Verwendung von &lt;Weißer Tigerkick&gt;</String>
   <String Key="SkillDesc_1011000_Long">Mit der Bogenschießkunst der Phönix Familie wird die ANG-Anzahl der Normal-ANG für {10110@Time} Sek. um {10110@AtkCount} erhöht. Anstatt nur beim {1011005@NeedComboCount+1}. Normal-ANG wird Regensturm verwendet, der bei allen Gegnern in {1011010@SplashRangeSum} Feldern Reichweite {1011010@AttackCount}x {1011010@Damage} Phys.-Skill-Schaden verursacht.</String>
@@ -10930,7 +10927,7 @@ Möchtet Ihr die Wunschliste anwenden?</String>
 Möchtet Ihr die Wunschliste schließen, ohne die Änderungen anzuwenden?</String>
   <String Key="OwnedTreasureStatus">Besitzstatus</String>
   <String Key="ColosseumTierRewardAutoReceiveTitle">Schlachtfeld des erbitterten Kampfs Saison {0} Rang Belohnung</String>
-  <String Key="ColossseumTierRewardAutoReceiveDesc">Wir übersenden Euch die nicht abgeholte {1} Abschlussbelohnung aus der Schlachtfeld des erbitterten Kampfs Saison {0}.</String>
+  <String Key="ColosseumTierRewardAutoReceiveDesc">Wir übersenden Euch die nicht abgeholte {1} Abschlussbelohnung aus der Schlachtfeld des erbitterten Kampfs Saison {0}.</String>
   <String Key="TreasureName_30018">Eiserner Wille</String>
   <String Key="TreasureSubName_30018">Stahlbastion</String>
   <String Key="TreasureDesc_30018">Die Familie Deneve wurde über Generationen hinweg als Helden an der Front des Schlachtfelds im Kampf gegen Feinde des Reiches bekannt. Das Symbol der Familie, das Stählernde Schild, repräsentiert den unbeugsamen Willen der Familie.</String>
@@ -11687,7 +11684,7 @@ Schon der Anblick beruhigt Geist und Körper.</String>
   <String Key="AccessorySynergyName_9">Mondlicht</String>
   <String Key="AccessorySynergyName_9_Pre">Mondlichts</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;Gesamt-Zaubermacht {0} %&lt;/color&gt;, Gesamt-ANG +{1} %</String>
-  <String Key="AccessorySynergyDesc_10091">Reichweite +{0}, Phys.-Kritischer Schaden +{2}% je {1} Reichweite (max. 80%)</String>
+  <String Key="AccessorySynergyDesc_10091">Phys.-Kritischer Schaden +{0}%. Wenn die aktuellen TP erstmals auf {1}% oder weniger der max. TP sinken, Phys.-Kritischer Schaden -{0}%</String>
   <String Key="AccessorySynergyDesc_10092">Beginn der Runde {0} Sek. verborgen, nach {1} Sek. Phys.-Kritische Trefferchance +{2} %</String>
   <String Key="InventoryItemName_5010">Mondlichts-Accessoire Auswahltruhe</String>
   <String Key="ShopItemName_41012">Zufälliges Mondlicht-Accessoire</String>
@@ -12640,7 +12637,7 @@ Möchtest du zu diesem Ort wechseln?</String>
   <String Key="RiftWeaponBuffDesc_130">Verursacht nach Verwendung der Fähigkeit an 3 Gegnern Spezialschaden in Höhe von {0} % des Normal-ANG, wenn dieser trifft</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} Phys.-Widerstand</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} Zauber-Widerstand</String>
-  <String Key="RiftWeaponBuffDesc_160">Reichweite +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">Bewegungsgeschwindigkeit +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">+{0} % Phys. Lebensraub</String>
   <String Key="RiftWeaponBuffDesc_180">+{0} % Zauber Lebensraub</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} Widerstand</String>
@@ -13597,7 +13594,7 @@ Wenn alle Schwachstellen verfehlt werden, ändert sich das Muster des Bosses und
   <String Key="ArenaStarterBuffDesc_2">Wenn Sie die Arena erstmals innerhalb von 72 Stunden nach dem Ende der Saison betreten, wird ab der nächsten Saison der Segen des Schlachtfelds angewendet.</String>
   <String Key="SkillDesc_10070_Short">Erhält für {Time} Sekunden {TotalAttackSpeedPer:BaseValue}% finale ANG-GESCHW-Erhöhung; bei einem Normal-ANG wird Schaden in Höhe von ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% des ANG zugefügt.</String>
   <String Key="SkillDesc_10070_Long">Zhaun ist voller Wut, erhält für {Time} Sekunden zusätzlich {TotalAttackSpeedPer:BaseValue}% Gesamt-ANG-GESCHW; während derselben Zeit wird bei einem Normal-ANG Normal-Phys.-Schaden in Höhe von ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% des ANG zugefügt.</String>
-  <String Key="Potential_10070_0">+100 Widerstand für Zhaun während &lt;Wutanfall&gt;</String>
+  <String Key="Potential_10070_0">Während &lt;Wutanfall&gt; Reichweite von Zhaun +1</String>
   <String Key="Potential_10070_1">+40% physischer/Zauber Lebensraub für Zhaun während &lt;Wutanfall&gt;</String>
   <String Key="Potential_10070_2">ANG-Anzahl +1 (nicht stapelbar) bei 40 Treffern mit Normal-Schaden am selben Gegner
 Erhöhung wird zurückgesetzt, wenn Normal-Schaden an einem anderen Gegner verursacht wird.</String>
@@ -14630,9 +14627,9 @@ x {0}</String>
   <String Key="GachaName_1083">Die Eremiten</String>
   <String Key="InventoryItemName_700">Alchemiestein</String>
   <String Key="InventoryItemDesc_700">Ein im Auftrag der Ermittlungstruppe erhaltenes Alchemie-Material. Hiermit könnt Ihr in der Alchemiewerkstatt verschiedene Belohnungen erhalten.</String>
-  <String Key="TerritoryTradeShopDesc">Warenhändler-Artikel werden auf &lt;color=#ffd264&gt;Basis des Warenhändler-Levels bestimmt&lt;/color&gt;.
-Artikel des Warenhändler-Levels 4 oder niedriger werden &lt;color=#ffd264&gt;jede Woche zurückgesetzt&lt;/color&gt;
-und Artikel des Warenhändler-Levels 5 oder höher werden &lt;color=#ffd264&gt;alle zwei Wochen zurückgesetzt&lt;/color&gt;.</String>
+  <String Key="TerritoryTradeShopDesc">Die Waren des Warenhändlers werden &lt;color=#ffd264&gt;durch das Level des Warenhändlers bestimmt&lt;/color&gt;.
+Waren auf Warenhändler-Level 2~3 werden &lt;color=#ffd264&gt;wöchentlich zurückgesetzt&lt;/color&gt;,
+Waren auf Warenhändler-Level 4 oder höher werden &lt;color=#ffd264&gt;alle 2 Wochen zurückgesetzt&lt;/color&gt;.</String>
   <String Key="ChangeAccessorySubStat">Sekundärwert ändern</String>
   <String Key="ChangeAccessorySubStatDesc_0">Bitte wählt ein Accessoire aus, dessen Sekundärwert Ihr ändern möchtet.</String>
   <String Key="ChangeAccessorySubStatDesc_1">Bitte wählt den Sekundärwert aus, den Ihr ändern möchtet.</String>
@@ -16604,7 +16601,8 @@ Skill-Amplifizierung der Freunde +{6}% des Zauber-Widerstands des Trägers
   <String Key="NewUnitGachaInfo">Du kannst 1 Helden erhalten, den du noch nicht besitzt.
 Die Erscheinungsrate ist für alle Helden, die du noch nicht besitzt, gleich.</String>
   <String Key="InventoryItemName_5603">Spezielles Schmuckstück Auswahltruhe</String>
-  <String Key="RewardBoxInventoryDesc_5603">Eine Truhe, mit der Ihr 1 Spezielles Schmuckstück auswählen und erhalten könnt.</String>
+  <String Key="RewardBoxInventoryDesc_5603">Wähle ein Spezielles Schmuckstück und erhalte es.
+(Zeitlich begrenzte Schmuckstücke ausgenommen)</String>
   <String Key="GachaDesc_PickUpResetAlert">Es gibt einen nicht auswählbaren Helden. Daher wurde automatisch zurückgesetzt.</String>
   <String Key="UnitName_10780">Neria</String>
   <String Key="UnitSubName_10780">Rächerin des Wahnsinns</String>
@@ -16997,8 +16995,7 @@ Je nach verbleibender Dauer bis zu +{5}% Phys.-Kritischer Schaden
   <String Key="Name_Overcome_2">Kampfbeginn-Skill verbessern</String>
   <String Key="Name_Overcome_3">Talent verbessern</String>
   <String Key="Name_Overcome_4">Skill verbessern</String>
-  <String Key="InventoryItemDesc_70000">Eine Beschwörungsrolle mit geheimnisvoller Aura.
-Ermöglicht 1 Dimensionsbeschwörung.</String>
+  <String Key="InventoryItemDesc_70000">Eine Beschwörungsrolle mit mystischer Aura.</String>
   <String Key="InventoryItemDesc_10000">Ein kleiner Kern, in dem die Kraft einer anderen Dimension verdichtet ist.
 Kann im Dimensions-Shop gegen verschiedene Waren getauscht werden.</String>
   <String Key="InventoryItemName_10000">Kern der Dimension</String>
@@ -17064,8 +17061,7 @@ Bei Standardangriffen aller Verbündeten: erhaltene Ressourcen +{0}%</String>
   <String Key="SpecialPackage_1666">Tempester-Paket</String>
   <String Key="SpecialShop_TreasureDoublePickUp10013">Schmuckstück-Spezialshop</String>
   <String Key="ShopItemName_70000">Schriftrolle zur Dimensions-Heldenbeschwörung</String>
-  <String Key="ShopItemDesc_70000">Eine Beschwörungsrolle mit geheimnisvoller Aura.
-Damit kann 1 Dimensionsbeschwörung durchgeführt werden.</String>
+  <String Key="ShopItemDesc_70000">Eine Beschwörungsrolle mit mystischer Aura.</String>
   <String Key="RewardBoxInventoryDesc_7100">Du kannst Gegenstände mit der festgelegten Wahrscheinlichkeit erhalten.</String>
   <String Key="DimensionHeroAttendanceEventTitle">Login-Event zum Dimensionshelden</String>
   <String Key="ReservedText">Reserviert</String>
@@ -18295,9 +18291,234 @@ Skin zum Erntemondfest 2026</String>
   <String Key="SkinName_1074001">Mondschein-Sternenfürst Suha</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Mondhasen! Ihr wisst doch, dass ihr nicht zu viel Unfug treiben dürft, nur weil ihr nach einem Jahr wieder hier seid, oder? Habt alle Spaß und genießt die Zeit!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Erntemondfest-Angebote</String>
+  <String Key="SeasonalEventNumberFormat">Saison-{0}-Event</String>
+  <String Key="SeasonalEvent">Saison-Event</String>
+  <String Key="SeasonalEventCeilFormat">Saison-{0}-Pickup</String>
+  <String Key="SeasonalEventName_Season74">Arena des Windes</String>
+  <String Key="SeasonalEventDesc_Season74">Entscheidung in nur 1 Kampf!</String>
+  <String Key="UniversalEventText">EVENT</String>
+  <String Key="SingleArenaNeedAdForReroll">Bitte sieh dir eine Werbung an, um den Gegner zurückzusetzen.</String>
+  <String Key="SingleArena_ApFormat">AP {0}</String>
+  <String Key="SingleArena_AttackDeck">Angriffstruppe</String>
+  <String Key="SingleArena_AttackDeckSet">Angriffstruppe zusammenstellen</String>
+  <String Key="SingleArena_AttackSelect_Desc">Du kannst deine bereits festgelegte Angriffstruppe nutzen oder sie nach Prüfung der gegnerischen Truppe neu zusammenstellen.
+
+Wenn du die bestehende Angriffstruppe nutzt, kannst du sofort kämpfen. Bei einer Neuaufstellung wird alles ab der Heldenauswahl neu festgelegt. (Die Angriffstruppe kann pro Tag bis zu 5-mal neu zusammengestellt werden.)
+
+Bitte wähle eine Angriffsmethode.</String>
+  <String Key="SingleArena_AttackSelect_Title">Angriffstruppe wählen</String>
+  <String Key="SingleArena_CompleteDeck">Aufstellung fertig</String>
+  <String Key="SingleArena_DefenseDeck">Verteidigungstruppe</String>
+  <String Key="SingleArena_DefenseDeckSet">Verteidigungstruppe zusammenstellen</String>
+  <String Key="SingleArena_EnemyDeckPreview">Gegnerisches Deck ansehen</String>
+  <String Key="SingleArena_FinalAttackSelect_Desc">Möchtest du die neu zusammengestellte Angriffstruppe als neue Angriffstruppe speichern und in die Schlacht ziehen?
+
+Wenn du die bestehende Angriffstruppe nutzt, wird die neue Angriffstruppe automatisch gelöscht.</String>
+  <String Key="SingleArena_FinalDeckSelect_Desc">Bitte wähle die Truppe, die du verwenden möchtest.</String>
+  <String Key="SingleArena_FinalDeckSelect_Title">Finale Truppenauswahl</String>
+  <String Key="SingleArena_FirstDeckSetAlert">Nur beim 1. Mal werden Verteidigungs- und Angriffstruppe gleichzeitig gespeichert.
+Danach kannst du Verteidigungs- und Angriffstruppe getrennt zusammenstellen.</String>
+  <String Key="SingleArena_Intro_Desc1">In der Arena des Windes entscheidet ein einziger Kampf über Sieg oder Niederlage.</String>
+  <String Key="SingleArena_Intro_Desc2">Es werden insgesamt zwei Truppen genutzt: eine Angriffs- und eine Verteidigungstruppe.</String>
+  <String Key="SingleArena_Intro_Desc3">Die Angriffstruppe wird genutzt, um die gegnerische Verteidigungstruppe zu prüfen und anzugreifen.</String>
+  <String Key="SingleArena_Intro_Desc4">Die Verteidigungstruppe dient dazu, gegnerische Angriffe abzuwehren. Scheitert die Verteidigung, verlierst du Siegpunkte. (Siegpunkte können pro Tag bis zu 3-mal verloren werden.)</String>
+  <String Key="SingleArena_Intro_Desc5">Die erste Truppenzusammenstellung ist zwangsweise fixiert, danach kannst du frei zusammenstellen.</String>
+  <String Key="SingleArena_Intro_Desc6">Auch wenn du nach der Prüfung der gegnerischen Verteidigungstruppe deine Angriffstruppe änderst, ändert sich die gegnerische Truppe nicht.</String>
+  <String Key="SingleArena_Intro_Desc7">Stelle deine Truppe passend zum Gegner frei zusammen und erringe den Sieg!</String>
+  <String Key="SingleArena_LeftGameAlertFormat">Eine nicht abgeschlossene Schlacht wurde als Niederlage gewertet. ({0} Punkte)</String>
+  <String Key="SingleArena_Log_Attack">Angriff</String>
+  <String Key="SingleArena_Log_Def">VERT</String>
+  <String Key="SingleArena_Log_Empty">Keine Einträge.</String>
+  <String Key="SingleArena_MissionCondFormat">Insgesamt {0} Angriffe</String>
+  <String Key="SingleArena_NeedDeck">Bitte stelle zuerst Angriffstruppe und Verteidigungstruppe zusammen.</String>
+  <String Key="SingleArena_NeedFieldUnit">Es sind keine Helden aufgestellt.</String>
+  <String Key="SingleArena_NewAttackDeck">Neue Angriffstruppe</String>
+  <String Key="SingleArena_NewDefenseDeck">Neue Verteidigungstruppe</String>
+  <String Key="SingleArena_NoMoreDeckChange">Heute kannst du die Truppe nicht mehr ändern.</String>
+  <String Key="SingleArena_OldAttackDeck">Bestehende Angriffstruppe</String>
+  <String Key="SingleArena_OldDefenseDeck">Bestehende Verteidigungstruppe</String>
+  <String Key="SingleArena_RankNotReached">Dieser Rang ist noch nicht erreicht.</String>
+  <String Key="SingleArena_RankingPanelTitle">Rangliste der Arena des Windes</String>
+  <String Key="SingleArena_RankingReward_Desc">Am Saisonende erhältst du Belohnungen entsprechend deiner Endplatzierung.</String>
+  <String Key="SingleArena_RankingTop">Top 300</String>
+  <String Key="SingleArena_RecordFormat">Angriff {0} Siege {1} Niederlagen / Verteidigung {2} Siege {3} Niederlagen</String>
+  <String Key="SingleArena_ReformAttackDeck">Angriffstruppe neu zusammenstellen</String>
+  <String Key="SingleArena_RemainAttackFormat">Verbleibende Angriffe {0}/{1}</String>
+  <String Key="SingleArena_RerollRemainFormat">Gegner ändern {0}/{1}</String>
+  <String Key="SingleArena_RetreatWarning">Wenn du dich zurückziehst, wird die Arena-Zusammenstellung abgebrochen. (Bei getrennter Zusammenstellung wird die tägliche Änderungsanzahl verbraucht.)</String>
+  <String Key="SingleArena_Search">Gegner suchen</String>
+  <String Key="SingleArena_SelectTargetFirst">Bitte wähle zuerst einen Gegner.</String>
+  <String Key="SingleArena_StagePreviewDesc">Du kannst die Aufstellungen beider Truppen vorab ansehen.</String>
+  <String Key="SingleArena_StagePreviewTitle">Aufstellungsinfo</String>
+  <String Key="SingleArena_Title">Arena des Windes</String>
+  <String Key="SingleArena_UseAttackDeck">Angriffstruppe verwenden</String>
+  <String Key="SingleArena_UseNewDeck">Neue Truppe verwenden</String>
+  <String Key="SingleArena_UseOldDeck">Bestehende Truppe verwenden</String>
+  <String Key="SingleArena_RankingRewardPanel_Title">Ranglistenbelohnungen der Arena des Windes</String>
+  <String Key="SingleArena_RankingRewardPanel_Desc">Belohnungen werden nach der Rangliste zum Saisonende vergeben.
+Um in den Top 300 der Rangliste zu erscheinen, musst du mindestens den König-Rang erreichen.</String>
+  <String Key="SingleArena_MatchHistory">Bilanz der Arena des Windes</String>
+  <String Key="SeasonalEventOperationFormat">{0} ist während des Events von Saison {1} ohne Unterteilung in erste und zweite Hälfte verfügbar.
+
+Verbleibende Zeit : {2}</String>
+  <String Key="MissionDesc_SingleArena_Attack">Spiele {0} Mal in der Arena des Windes</String>
+  <String Key="SingleArena_Mission">Missionen der Arena des Windes</String>
+  <String Key="SixthYearDailyAttendanceEvent">&lt;color=#ffd264&gt;6. Jubiläum&lt;/color&gt; Login-Event</String>
+  <String Key="SeasonalEvent_ButtonName_Rift">Riss</String>
+  <String Key="SeasonalEvent_ButtonName_Arena">Arena</String>
+  <String Key="SeasonalEvent_ButtonName_Battlefield">Schlachtfelder</String>
+  <String Key="IncarnationUnit">Transzendenter Held</String>
+  <String Key="Passive">Passiv</String>
+  <String Key="UltimateSkill">Ultimative Fähigkeit</String>
+  <String Key="SingleStackBuff">Einzelstapel-Buff</String>
+  <String Key="SingleStackBuff_Desc">Wenn derselbe Buff gestapelt wird, steigt die Stapelzahl eines Buffs. Wenn die Stapelzahl steigt, wird die Dauer auf das Maximum zurückgesetzt.</String>
+  <String Key="PassiveSkillHelp_0">Passive Fähigkeiten werden im Kampf je nach Bedingung automatisch angewendet.</String>
+  <String Key="PassiveSkillHelp_1">Keine Änderung je nach ★ des Helden im Kampf.</String>
+  <String Key="PassiveSkillHelp_2">Die angezeigten Werte können durch Helden-Aufstieg verbessert werden.</String>
+  <String Key="UltimateMeterFormat">Leiste der Ultimativen Fähigkeit {0}/{1}</String>
+  <String Key="UltimateSkillHelp_0">Die Werte der Ultimativen Fähigkeit werden je nach ★ des Helden im Kampf verbessert.</String>
+  <String Key="UltimateSkillHelp_1">Die angezeigten Werte können durch Helden-Aufstieg verbessert werden.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_0">Wenn du beim Helden beschwören einen bereits erhaltenen Transzendenten Helden erneut beschwörst, ist Aufstieg möglich.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_1">Aufstieg ist bis Stufe 5 möglich.</String>
+  <String Key="AddAttackCountEveryFourthNormalAttackFormat">Bei jedem 4. Normal-ANG: Trefferanzahl +1, Schaden des Zusatzangriffs {0}</String>
+  <String Key="SkillName_10820">Rera-at-katu</String>
+  <String Key="SkillDesc_10820_Short">Nach {ChannelingTime} Sek. Konzentration wird ein Windpfeil abgefeuert, der das Schlachtfeld durchdringt und allen Gegnern auf seinem 1X1-Pfad {Damage:AtkPer:BaseValue}% ANG als physischen Skill-Schaden zufügt.</String>
+  <String Key="SkillDesc_10820_Long">Yhoundeh markiert die Position eines gegnerischen Helden, sammelt {ChannelingTime} Sek. lang die Kraft des Windes und feuert dann einen Windpfeil auf die markierte Position ab, der das Schlachtfeld durchdringt und allen Gegnern auf seinem 1X1-Pfad {Damage:AtkPer:BaseValue}% ANG als physischen Skill-Schaden zufügt. Bei Verwendung der Fähigkeit: Leiste der Ultimativen Fähigkeit +1.</String>
+  <String Key="SkillDesc_10820_Short_2">Nach {ChannelingTime} Sek. Konzentration wird ein Windpfeil abgefeuert, der das Schlachtfeld durchdringt und allen Gegnern auf seinem 1X1-Pfad {Damage:AtkPer:BaseValue}% ANG als physischen Skill-Schaden zufügt.</String>
+  <String Key="SkillDesc_10820_Long_2">Yhoundeh markiert die Position eines gegnerischen Helden, sammelt {ChannelingTime} Sek. lang die Kraft des Windes und feuert dann einen Windpfeil auf die markierte Position ab, der das Schlachtfeld durchdringt und allen Gegnern auf seinem 1X1-Pfad {Damage:AtkPer:BaseValue}% ANG als physischen Skill-Schaden zufügt. Bei Verwendung der Fähigkeit: Kar-Stapel +5 und Leiste der Ultimativen Fähigkeit +1.</String>
+  <String Key="PassiveSkillName_10820">Rera kar</String>
+  <String Key="PassiveSkillDesc_10820_Short">Bei einem Normal-ANG Kar-Stapel +1. Max. {10820@Unit10820AI_FocusMaxStack}. Pro Stapel ANG-GESCHW +{10820@Unit10820AI_FocusAttackSpeedPer}%. Wechselt das Ziel des Normal-ANGs, werden die Stapel auf 0 zurückgesetzt und +1.</String>
+  <String Key="PassiveSkillDesc_10820_Long">Bei einem Normal-ANG wird 1 Kar-Stapel hinzugefügt. Bis max. {10820@Unit10820AI_FocusMaxStack} Stapel, und pro Stapel steigt die ANG-GESCHW um +{10820@Unit10820AI_FocusAttackSpeedPer}%. Trifft ein Normal-ANG ein anderes Ziel als zuvor, werden die Kar-Stapel auf 0 zurückgesetzt und danach 1 Stapel erhalten.</String>
+  <String Key="PassiveSkillDesc_10820_Short_1">Bei einem Normal-ANG Kar-Stapel +1. Max. {10820@Unit10820AI_FocusMaxStack}. Pro Stapel ANG-GESCHW +{10820@Unit10820AI_FocusAttackSpeedPer}%. Wechselt das Ziel des Normal-ANGs, werden die Stapel zurückgesetzt und +1. Mind. 10 Stapel bleiben erhalten.</String>
+  <String Key="PassiveSkillDesc_10820_Long_1">Bei einem Normal-ANG wird 1 Kar-Stapel hinzugefügt. Bis max. {10820@Unit10820AI_FocusMaxStack} Stapel, und pro Stapel steigt die ANG-GESCHW um +{10820@Unit10820AI_FocusAttackSpeedPer}%. Trifft ein Normal-ANG ein anderes Ziel als zuvor, werden die Kar-Stapel zurückgesetzt und danach 1 Stapel erhalten. Kar-Stapel bleiben mindestens bei 10 Stapeln.</String>
+  <String Key="PassiveSkillDesc_10820_Short_2">Bei einem Normal-ANG Kar-Stapel +1. Max. {10820@Unit10820AI_FocusMaxStack}. Pro Stapel ANG-GESCHW +{10820@Unit10820AI_FocusAttackSpeedPer}%. Wechselt das Ziel des Normal-ANGs, werden die Stapel zurückgesetzt und +1. Mind. 10 Stapel bleiben erhalten. Bei Verwendung einer Fähigkeit oder Ultimativen Fähigkeit: Kar-Stapel +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_2">Bei einem Normal-ANG wird 1 Kar-Stapel hinzugefügt. Bis max. {10820@Unit10820AI_FocusMaxStack} Stapel, und pro Stapel steigt die ANG-GESCHW um +{10820@Unit10820AI_FocusAttackSpeedPer}%. Trifft ein Normal-ANG ein anderes Ziel als zuvor, werden die Kar-Stapel zurückgesetzt und danach 1 Stapel erhalten. Kar-Stapel bleiben mindestens bei 10 Stapeln. Bei Verwendung einer Fähigkeit oder Ultimativen Fähigkeit werden 5 Kar-Stapel erhalten.</String>
+  <String Key="PassiveSkillDesc_10820_Short_3">Bei einem Normal-ANG Kar-Stapel +1. Max. {10820@Unit10820AI_FocusMaxStack}. Pro Stapel ANG-GESCHW +{10820@Unit10820AI_FocusAttackSpeedPer}%. Wechselt das Ziel des Normal-ANGs, werden die Stapel zurückgesetzt und +1. Mind. 10 Stapel bleiben erhalten. Bei Verwendung einer Fähigkeit oder Ultimativen Fähigkeit: Kar-Stapel +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_3">Bei einem Normal-ANG wird 1 Kar-Stapel hinzugefügt. Bis max. {10820@Unit10820AI_FocusMaxStack} Stapel, und pro Stapel steigt die ANG-GESCHW um +{10820@Unit10820AI_FocusAttackSpeedPer}%. Trifft ein Normal-ANG ein anderes Ziel als zuvor, werden die Kar-Stapel zurückgesetzt und danach 1 Stapel erhalten. Kar-Stapel bleiben mindestens bei 10 Stapeln. Bei Verwendung einer Fähigkeit oder Ultimativen Fähigkeit werden 5 Kar-Stapel erhalten.</String>
+  <String Key="PassiveSkillDesc_10820_Short_4">Bei einem Normal-ANG Kar-Stapel +1. Max. {10820@Unit10820AI_FocusMaxStack}(+30 gegenüber Standard). Pro Stapel ANG-GESCHW +{10820@Unit10820AI_FocusAttackSpeedPer}%. Wechselt das Ziel des Normal-ANGs, werden die Stapel zurückgesetzt und +1. Mind. 10 Stapel bleiben erhalten. Bei Verwendung einer Fähigkeit oder Ultimativen Fähigkeit: Kar-Stapel +5. Bei max. Stapeln trifft ein Normal-ANG garantiert kritisch.</String>
+  <String Key="PassiveSkillDesc_10820_Long_4">Bei einem Normal-ANG wird 1 Kar-Stapel hinzugefügt. Bis max. {10820@Unit10820AI_FocusMaxStack} Stapel(+30 gegenüber dem Standard-Maximum), und pro Stapel steigt die ANG-GESCHW um +{10820@Unit10820AI_FocusAttackSpeedPer}%. Trifft ein Normal-ANG ein anderes Ziel als zuvor, werden die Kar-Stapel zurückgesetzt und danach 1 Stapel erhalten. Kar-Stapel bleiben mindestens bei 10 Stapeln. Bei Verwendung einer Fähigkeit oder Ultimativen Fähigkeit werden 5 Kar-Stapel erhalten. Bei max. Kar-Stapeln trifft ein Normal-ANG garantiert kritisch.</String>
+  <String Key="PassiveSkillDesc_10820_Short_5">Bei einem Normal-ANG Kar-Stapel +1. Max. {10820@Unit10820AI_FocusMaxStack}(+30 gegenüber Standard). Pro Stapel ANG-GESCHW +{10820@Unit10820AI_FocusAttackSpeedPer}%. Wechselt das Ziel des Normal-ANGs, werden die Stapel zurückgesetzt und +1. Mind. 10 Stapel bleiben erhalten. Bei Verwendung einer Fähigkeit oder Ultimativen Fähigkeit: Kar-Stapel +5. Bei max. Stapeln trifft ein Normal-ANG garantiert kritisch. Beim Besiegen eines Gegners bleiben die Kar-Stapel auch beim nächsten Angriffsziel erhalten.</String>
+  <String Key="PassiveSkillDesc_10820_Long_5">Bei einem Normal-ANG wird 1 Kar-Stapel hinzugefügt. Bis max. {10820@Unit10820AI_FocusMaxStack} Stapel(+30 gegenüber dem Standard-Maximum), und pro Stapel steigt die ANG-GESCHW um +{10820@Unit10820AI_FocusAttackSpeedPer}%. Trifft ein Normal-ANG ein anderes Ziel als zuvor, werden die Kar-Stapel zurückgesetzt und danach 1 Stapel erhalten. Kar-Stapel bleiben mindestens bei 10 Stapeln. Bei Verwendung einer Fähigkeit oder Ultimativen Fähigkeit werden 5 Kar-Stapel erhalten. Bei max. Kar-Stapeln trifft ein Normal-ANG garantiert kritisch. Beim Besiegen eines Gegners bleiben die Kar-Stapel auch beim nächsten Angriffsziel erhalten.</String>
+  <String Key="UltimateSkillName_10820">Rera epunkine</String>
+  <String Key="UltimateSkillDesc_10820_Short">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner.</String>
+  <String Key="UltimateSkillDesc_10820_Long">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt.</String>
+  <String Key="UltimateSkillDesc_10821_Short">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner.</String>
+  <String Key="UltimateSkillDesc_10821_Long">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt.</String>
+  <String Key="UltimateSkillDesc_10822_Short">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner.</String>
+  <String Key="UltimateSkillDesc_10822_Long">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt.</String>
+  <String Key="UltimateSkillDesc_10823_Short">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Zu Beginn der Schlacht Leiste der Ultimativen Fähigkeit +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt. Zu Beginn der Schlacht erhöht sich die Leiste der Ultimativen Fähigkeit um {AddBattleStartUltimateGauge}.</String>
+  <String Key="UltimateSkillDesc_10820_Short_2">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner.</String>
+  <String Key="UltimateSkillDesc_10820_Long_2">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt.</String>
+  <String Key="UltimateSkillDesc_10821_Short_2">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner.</String>
+  <String Key="UltimateSkillDesc_10821_Long_2">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt.</String>
+  <String Key="UltimateSkillDesc_10822_Short_2">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner.</String>
+  <String Key="UltimateSkillDesc_10822_Long_2">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt.</String>
+  <String Key="UltimateSkillDesc_10823_Short_2">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Zu Beginn der Schlacht Leiste der Ultimativen Fähigkeit +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_2">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt. Zu Beginn der Schlacht erhöht sich die Leiste der Ultimativen Fähigkeit um {AddBattleStartUltimateGauge}.</String>
+  <String Key="UltimateSkillDesc_10820_Short_3">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Wird ein Gegner besiegt, wird die Dauer zurückgesetzt.</String>
+  <String Key="UltimateSkillDesc_10820_Long_3">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Wird während der Ultimativen Fähigkeit ein Gegner besiegt, wird die Dauer zurückgesetzt. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt.</String>
+  <String Key="UltimateSkillDesc_10821_Short_3">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Wird ein Gegner besiegt, wird die Dauer zurückgesetzt.</String>
+  <String Key="UltimateSkillDesc_10821_Long_3">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Wird während der Ultimativen Fähigkeit ein Gegner besiegt, wird die Dauer zurückgesetzt. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt.</String>
+  <String Key="UltimateSkillDesc_10822_Short_3">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Wird ein Gegner besiegt, wird die Dauer zurückgesetzt.</String>
+  <String Key="UltimateSkillDesc_10822_Long_3">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Wird während der Ultimativen Fähigkeit ein Gegner besiegt, wird die Dauer zurückgesetzt. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt.</String>
+  <String Key="UltimateSkillDesc_10823_Short_3">Yhoundeh steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Wird ein Gegner besiegt, wird die Dauer zurückgesetzt. Zu Beginn der Schlacht Leiste der Ultimativen Fähigkeit +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_3">Yhoundeh verlässt das Schlachtfeld, steigt in den Himmel auf und schießt {Time} Sek. lang Pfeile auf einen Gegner. Wird während der Ultimativen Fähigkeit ein Gegner besiegt, wird die Dauer zurückgesetzt. Bei Verwendung der Ultimativen Fähigkeit werden alle Statuseffekte, Bindungen und Verbindungen entfernt. Zu Beginn der Schlacht erhöht sich die Leiste der Ultimativen Fähigkeit um {AddBattleStartUltimateGauge}.</String>
+  <String Key="Name_Overcome_10820_0">Rera Aye</String>
+  <String Key="Overcome_10820_0">Kar bleibt bei mind. 10 Stapeln</String>
+  <String Key="Name_Overcome_10820_1">Rera Nisor</String>
+  <String Key="Overcome_10820_1">Bei Verwendung einer Fähigkeit oder Ultimativen Fähigkeit: 5 Kar-Stapel erhalten</String>
+  <String Key="Name_Overcome_10820_2">Kamuy Epunkine</String>
+  <String Key="Overcome_10820_2">Wird während Rera epunkine ein Gegner besiegt, wird die Dauer von Rera epunkine zurückgesetzt</String>
+  <String Key="Name_Overcome_10820_3">Yupke Rera</String>
+  <String Key="Overcome_10820_3">Max. Kar-Stapel +30. Bei max. Kar-Stapeln trifft ein Normal-ANG gegen sein Ziel garantiert kritisch</String>
+  <String Key="Name_Overcome_10820_4">Rera Kanto</String>
+  <String Key="Overcome_10820_4">Beim Besiegen eines Gegners bleiben die Kar-Stapel auch beim nächsten Angriffsziel erhalten</String>
+  <String Key="IncarnationUnitSummon">Transzendenzhelden beschwören</String>
+  <String Key="UnitGachaHighCountFormat">Nach &lt;color=#FFD247&gt;{0}&lt;/color&gt; Beschwörungen ist ein &lt;color=#FFD247&gt;Transzendenter Held/Dimensionsheld garantiert&lt;/color&gt;</String>
   <String Key="UnitGachaPickupCountFormat">Bei &lt;color=#FFD247&gt;{0}&lt;/color&gt; Beschwörungen ist &lt;color=#FFD247&gt;der Pickup-Held garantiert&lt;/color&gt;</String>
+  <String Key="GachaNewIncarnationUnitPer">Transzendenter Held erscheint!</String>
+  <String Key="IncarnationUnitPickupGachaDesc">Ab der 81. Beschwörung steigt die Chance, dass ein Transzendenz-/Dimensionsheld erscheint, mit jeder Beschwörung um 5%.
+Erscheint ein Transzendenz-/Dimensionsheld, wird der Garantiezähler zurückgesetzt.
+Falls du einen anderen Transzendenz-/Dimensionshelden beschwörst, ist der nächste erhaltene Transzendenz-/Dimensionsheld garantiert der Pickup-Held.
+Wenn du denselben Transzendenzhelden bei maximalem Aufstieg beschwörst, erhältst du stattdessen 10 Beschwörungstickets für Dimensionshelden.</String>
+  <String Key="Premium">Premium</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumButton">2x Belohnungen! 20x Effizienz!</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_0">Wenn du den Premium-Login kaufst, erhältst du alle Belohnungen 2x.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_1">Wenn du den Premium-Login kaufst, werden auch bereits erhaltene Belohnungen 2x ausgezahlt.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_2">Der Premium-Login kann nicht storniert werden.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumApplied">2x Belohnungen aktiv!</String>
+  <String Key="SeasonalEventMode_Season74">Arena des Windes</String>
+  <String Key="SpecialDamageMulFormat">Spezialschaden +{0}%</String>
+  <String Key="FlagsName_60000">Flagge der Arena des Windes</String>
+  <String Key="FlagsDesc_60000">Die Flagge derer, die in der Arena des Windes ihren Wert bewiesen haben</String>
+  <String Key="FlagsName_60010">Flagge der Inkarnation des Windes</String>
+  <String Key="FlagsDesc_60010">Eine Flagge für die Ankunft der 'Inkarnation des Windes' und den 'Verheißenen Sieg'</String>
   <String Key="PlayReward_Semi1">Belohnung 1. Hälfte</String>
   <String Key="PlayReward_Semi2">Belohnung 2. Hälfte</String>
   <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; Spiele</String>
+  <String Key="SpecialPackage_1699">Schwur-Paket</String>
+  <String Key="SpecialPackage_1700">Feuerregen-Paket</String>
+  <String Key="InventoryItemName_5605">King God Pass-Skin-Auswahltruhe</String>
+  <String Key="SeasonPassScheduledHeroTitle_74">Transzendenten Helden &lt;color=#D8B4FF&gt;Yhoundeh&lt;/color&gt; erhalten</String>
+  <String Key="SeasonPassScheduledHeroBenefit">Neuer Held als Geschenk</String>
+  <String Key="InventoryItemName_SSGuaranteedSetFormat">Zufälliges SS-{0}</String>
+  <String Key="InventoryItemName_SSGuaranteedBoxFormat">Zufälliges SS-{0}</String>
+  <String Key="InventoryItemDesc_SSGuaranteedBoxFormat">Erhalte eine Auswahltruhe mit einem zufälligen SS-Speziellen Accessoire des gewählten Sets.</String>
+  <String Key="InventoryItemDesc_SSGuaranteedSetFormat">Erhalte das gewählte Accessoire. 1 zufälliger Sekundärwert hat Rang SS.</String>
+  <String Key="AlreadyHaveFlag">Nicht erhalten, da du die Flagge bereits besitzt.</String>
+  <String Key="SeasonPassScheduledHeroInfo_74">Wenn du den Helden bereits hast: 1 Helden-Aufstieg
+Wenn der Held den max. Aufstieg erreicht hat, erhältst du stattdessen &lt;color=#ffd264&gt;10 Beschwörungsrollen für Dimensionshelden&lt;/color&gt;</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_Class">&lt;{0}&gt; {1}</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_ThreeClasses">&lt;{0}&gt; &lt;{1}&gt; &lt;{2}&gt; {3}</String>
+  <String Key="Post_Title_6thAnniversaryGift">Besonderes Geschenk zum 6. Jubiläum</String>
+  <String Key="KingsTreasureSelectiveSummon">King-Schmuckstück-Auswahlbeschwörung</String>
   <String Key="BlessedTreasure">Gesegnetes Schmuckstück</String>
+  <String Key="TreasureCustomPickupTitle">Beschwörung gesegneter Schmuckstücke</String>
+  <String Key="UnitName_10820">Yhoundeh</String>
+  <String Key="UnitSubName_10820_1">Einst auch als Hanzi bekannt.</String>
+  <String Key="UnitSubName_10820">Wächter des Windes</String>
+  <String Key="SkinDesc_Default_10820">In einem kleinen Dorf im Osten wurde ein stiller Wächter geboren,
+der alles gab, um die Menschen zu beschützen.
+
+Der Pfeil, der den Himmel beherrscht, setzt das Land nicht mehr in Brand,
+sondern wurde nur zum Herrn des endlosen Windes.
+
+Solange er das Dorf beschützt,
+kann kein Wesen von außen den Frieden zerstören.
+.
+.
+.
+.
+.
+.</String>
+  <String Key="IncarnationUnit_10820">Katastrophe</String>
+  <String Key="Introduce_10820">Aufzeichnungen eines Überlebenden</String>
+  <String Key="SkinDesc_Default_10820_1">Im letzten Sommer begann ein kalter Wind zu wehen.
+Frostiger Nebel wie Rauch lag dicht in alle Richtungen,
+und kalter, weißer Staub bedeckte Dächer, Felder und Blätter.
+Pflanzen froren ein, und die Früchte fielen zu Boden, ohne ihre Form zu halten.
+
+Weil der Wind nicht aufhörte, wurden Holz und Stein abgetragen und begannen zu zerfallen.
+Das Feuer breitete sich schneller aus, als wir es löschen konnten, und wir verloren die Kontrolle.
+Die Wellen wurden endlos höher, und weil wir uns ihnen nicht widersetzen konnten, verloren wir das Meer.
+Es gibt keinen Schutz vor der beißenden Kälte und keinen Weg, den Wind wie Klingen aufzuhalten.
+Darum kann kein Ungeheuer sich nähern.
+
+Wir haben Frieden erhalten.
+Wir haben die Zukunft verloren.
+Uns blieb nur, gefroren vom endlosen Wind verschlungen zu werden…</String>
+  <String Key="InventoryItemDesc_SelectableTreasureBox">Truhe, mit der ein Spezielles Schmuckstück aus der permanenten Beschwörung ausgewählt und erhalten werden kann.
+ Bei Verwendung kann eine Belohnung aus der Gegenstandsliste gewählt werden.</String>
+  <String Key="IncarnationUnitPickupSummon">Transzendenzhelden beschwören</String>
+  <String Key="GachaPickupDescFormat">Du kannst einen Transzendenten Helden erhalten.</String>
+  <String Key="IncarnationUnitMaxOvercomeConvertedTicket">Ein Held mit max. Aufstieg wurde beschworen. Du hast 10 Beschwörungsrollen für Dimensionshelden erhalten.</String>
+  <String Key="SpecialTreasureSelectTitle">Auswahlbeschwörung für Spezielle Schmuckstücke</String>
+  <String Key="SpecialTreasureSelectDesc">Wähle 1 Spezielles Schmuckstück, das in der permanenten Schmuckstück Beschwörung erscheinen kann, und erhalte es.
+Wenn du auf den Kauf-Button tippst, wird eine Liste der erhältlichen Schmuckstücke angezeigt.</String>
+  <String Key="SkinDesc_Default_10820_Simple">Der Pfeil, der den Himmel beherrscht, setzt das Land nicht mehr in Brand,
+sondern wurde nur zum Herrn des endlosen Windes.</String>
+  <String Key="LoginSkinName_10020">Login-Bildschirm zum 6. Jubiläum</String>
+  <String Key="LoginSkinDesc_10020">Login-Bildschirm zum 6. Jubiläum</String>
+  <String Key="ObtainableBySummoningIncarnationUnit">Erhältlich durch Beschwörung eines Transzendenten Helden</String>
 </Strings>

@@ -1,6 +1,6 @@
 <Strings>
   <String Key="UpdateNoticeVersion">172000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/en</String>
   <String Key="Title">كينج غاد كاسل(KingGod Castle)</String>
   <String Key="Tags">أوسوم بيس، Lolchess، Autochess، Zombiehighschool، كينج غاد كاسل(KingGod Castle)، إستراتيجية، تيم فايت تاكتيكس، تي اف تي، أنس، مج، دفاع</String>
   <String Key="Store_ShortDesc">كينج غاد كاسل! إستخدم الأبطال والقوة العظمى للدفاع غلى القصر ضد الأعداء المختلفة!</String>
@@ -943,8 +943,8 @@ Pay Silver to refresh the Wandering Merchant's shop once</String>
   <String Key="AddDefPerCount">- {0} ضرر متلقي بالتناسب مع عدد الأبطال الموضوعين 
 ({1} بحد أقصى)</String>
   <String Key="AddDefPerCount_Piece">إنخفاض الضرر المتلقي بالتناسب مع عدد الأبطال الموضوعين</String>
-  <String Key="AtkPerByRange">All Heroes' Range +1, Damage Dealt by Normal/Skill Attacks +{0} per point of distance to the target (max. distance {1})</String>
-  <String Key="AtkPerByRange_Piece">All Heroes' Range +1, Damage Dealt by Normal/Skill Attacks increases with distance to the target</String>
+  <String Key="AtkPerByRange">Damage Dealt by Normal/Skill attacks increases by {0} per tile of distance from the target (max. distance {1})</String>
+  <String Key="AtkPerByRange_Piece">Damage Dealt by Normal/Skill attacks increases the farther the target is</String>
   <String Key="ArtifactName_100">مسحوق سحري</String>
   <String Key="ArtifactDesc_100">مسحوق سحري يتم الحصول عليه بطحن القطع الأثرية</String>
   <String Key="ArtifactName_10000">سيف الإمبراطورية العظيم</String>
@@ -2731,8 +2731,8 @@ Guess the result and earn Event Tokens!
   <String Key="CashCart">Cart of Gems</String>
   <String Key="UnitName_10320">Tia</String>
   <String Key="UnitSubName_10320">Watcher of Eternity</String>
-  <String Key="Potential_10320_0">+20% final damage dealt to enemies within 3 blocks</String>
-  <String Key="Potential_10320_1">Next &lt;Gust&gt; shoots double the amount of arrows when the target is killed</String>
+  <String Key="Potential_10320_0">Against enemies within 4 tiles: Final Damage Dealt +30%</String>
+  <String Key="Potential_10320_1">The first arrow of &lt;Gust&gt; ignores 100% of the enemy's Physical DEF</String>
   <String Key="SkinDesc_Default_10320">Tia is a captain of watchers in the Elven King's royal troop. Moving swiftly like gust and flaunting her innate talent as a skilled archer, she has protected the borders of Eternal Forest for a long time.</String>
   <String Key="SkillName_10320">Gust</String>
   <String Key="SkillDesc_10320">If the target is within {BuffRangeSum} block(s), moves {MoveDistance} block(s) backwards and inflicts {AttackCount} normal attacks that deal physical damage. If the target is not within {BuffRangeSum} block(s), deals damage equal to {10325@Damage:AtkPer:BaseValue}% of ATK {AttackCount} time(s).</String>
@@ -6851,8 +6851,8 @@ The mark is generated every 3 sec</String>
   <String Key="ArtifactName_14020">Dwarven Scope</String>
   <String Key="ArtifactDesc_14020">A scope that embodies Dwarven technology.
 Although it allows the user to see further and attack more precisely, its weight makes it difficult to be carried around.</String>
-  <String Key="MoveStopTimeDesc_Piece">Designate two tiles on the Battlefield as sniper spots. Placed Heroes gain Mighty Block +4. Until they leave the sniper spot for the first time, the first and every 5th Normal damage hit deals increased damage</String>
-  <String Key="MoveStopTimeDesc">Designate two tiles on the Battlefield as sniper spots. Placed Heroes gain Mighty Block +{1}. Until they leave the sniper spot for the first time, the first and every 5th Normal damage hit deals +{0}% damage.</String>
+  <String Key="MoveStopTimeDesc_Piece">Designates 2 tiles on the Battlefield as sniper positions. Placed Heroes gain Mighty Block +4, become &lt;color=#f33&gt;unable to move&lt;/color&gt; for a set time, and while on a sniper position, their Normal Damage Dealt increases at set intervals.</String>
+  <String Key="MoveStopTimeDesc">Designates 2 tiles on the Battlefield as sniper positions. Placed Heroes gain Mighty Block +{1}, become &lt;color=#f33&gt;unable to move&lt;/color&gt; for {2}s, and until they leave the sniper position for the first time, Normal Damage Dealt +{0}% on the first attack and every 5 attacks after.</String>
   <String Key="ColosseumBanned">Strife Battlefield entry restricted</String>
   <String Key="GachaName_1036">Cold Smile</String>
   <String Key="Name_Potential_10560_3">Uplift</String>
@@ -8946,7 +8946,7 @@ This is your fate.&lt;/i&gt;</String>
   <String Key="SpecialPackage_1491">Rain of Fire Package 2</String>
   <String Key="SpecialPackage_1492">Rain of Fire Package 3</String>
   <String Key="SkillDesc_10110">Attacks {AtkCount} more time(s) for {Time} sec.</String>
-  <String Key="Potential_10110_0">+15% Physical CRIT Chance when using &lt;Rapid Arrows&gt;</String>
+  <String Key="Potential_10110_0">During &lt;Rapid Arrows&gt;, Range +1</String>
   <String Key="Potential_10110_1_00">+15% final ATK for every bow equipped</String>
   <String Key="Potential_10110_2_00">When using &lt;Rapid Arrows&gt;, casts &lt;Rainstorm&gt; that deals physical skill damage equal to 250% of ATK to all enemies within 2-block range around the target [3/4/5/6] times and reduces their final Movement Speed by 30% for 3 sec.</String>
   <String Key="Potential_10110_3">Upon dealing normal damage to the same target 10 times while using &lt;Rapid Arrows&gt;, resets the duration of &lt;Rapid Arrows&gt; and increases ATK by 50%
@@ -10633,7 +10633,7 @@ Stuns targets hit by the explosion for {6} sec</String>
 +{5}% physical CRIT damage for {4} sec upon explosion
 Stuns targets hit by the explosion for {6} sec
 +{8}% Physical CRIT Chance for {7} sec upon explosion</String>
-  <String Key="Potential_10110_1">+30% final ATK while using &lt;Rapid Arrows&gt;</String>
+  <String Key="Potential_10110_1">During &lt;Rapid Arrows&gt;, Physical CRIT Chance +30%</String>
   <String Key="Potential_10110_2">While using &lt;Rapid Arrows&gt;, instead of the 7th normal attack, casts [Rainstorm] that deals physical skill damage equal to 250% of ATK to all enemies within 2-block range around the target [4/5/6/7] times</String>
   <String Key="Potential_10420_1">-30% damage taken while using &lt;White Tiger Kick&gt;</String>
   <String Key="SkillDesc_1011000_Long">Using the archery technique passed down to the members of the Phoenix family, Hansi increases the attack count of her normal attacks by {10110@AtkCount} for {10110@Time} sec. Instead of the {1011005@NeedComboCount+1}st/nd/rd/th normal attack, she casts Rainstorm that deals {1011010@Damage} physical skill damage {1011010@AttackCount} times to all enemies within {1011010@SplashRangeSum} block(s) around the target.</String>
@@ -10911,7 +10911,7 @@ Would you like to apply the Wishlist?</String>
 Would you like to close the Wishlist without applying the changes?</String>
   <String Key="OwnedTreasureStatus">Inventory Status</String>
   <String Key="ColosseumTierRewardAutoReceiveTitle">Strife Battlefield Season {0} Rank Rewards</String>
-  <String Key="ColossseumTierRewardAutoReceiveDesc">Here are the unclaimed {1} achievement rewards from Strife Battlefield Season {0}.</String>
+  <String Key="ColosseumTierRewardAutoReceiveDesc">Here are the unclaimed {1} achievement rewards from Strife Battlefield Season {0}.</String>
   <String Key="TreasureName_30018">Spirit of Iron Bulwark</String>
   <String Key="TreasureSubName_30018">Bastion of Steel</String>
   <String Key="TreasureDesc_30018">The Deneb family, over generations, came to be known as heroes by fighting on the front lines of the battlefield against enemies. The family's symbol, the iron shield, represents their indomitable will.</String>
@@ -11668,7 +11668,7 @@ Simply gazing upon it brings peace to the mind and body.</String>
   <String Key="AccessorySynergyName_9">Moonlight</String>
   <String Key="AccessorySynergyName_9_Pre">Moonlit</String>
   <String Key="AccessorySynergyDesc_10090">+{1}% final ATK, &lt;color=#f33&gt;{0}% final Spell Power&lt;/color&gt;</String>
-  <String Key="AccessorySynergyDesc_10091">Range +{0}, Physical CRIT Damage +{2}% per {1} Range (max. 80%)</String>
+  <String Key="AccessorySynergyDesc_10091">Physical CRIT Damage +{0}%. When current HP first falls to {1}% or less of max HP, Physical CRIT Damage -{0}%</String>
   <String Key="AccessorySynergyDesc_10092">Hides for {0} sec at the beginning of the battle, +{2}% Physical CRIT Chance after {1} sec</String>
   <String Key="InventoryItemName_5010">Moonlit Accessory Selection Chest</String>
   <String Key="ShopItemName_41012">Random Moonlight Accessory</String>
@@ -12620,7 +12620,7 @@ You can use "Gems" or "Rift Equipment Unupgradable Status Removal Ticket" to res
   <String Key="RiftWeaponBuffDesc_130">Deals {0}% special damage to 3 targets upon dealing normal damage after using skill</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} Physical DEF</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} Spell DEF</String>
-  <String Key="RiftWeaponBuffDesc_160">Range +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">Movement Speed +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">+{0}% Physical HP Drain</String>
   <String Key="RiftWeaponBuffDesc_180">+{0}% Spell HP Drain</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} DEF</String>
@@ -13578,7 +13578,7 @@ If all weaknesses fail to be targeted, the boss's pattern is changed and skills 
   <String Key="ArenaStarterBuffDesc_2">If you enter the Arena for the first time within 72 hours before the end of the season, the Blessing of the Battlefield will be applied starting from the next season.</String>
   <String Key="SkillDesc_10070_Short">Obtains {TotalAttackSpeedPer:BaseValue}% final Attack Speed for {Time} sec, and deals damage equal to ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% of ATK upon normal attack.</String>
   <String Key="SkillDesc_10070_Long">Zuo Yun becomes enraged and obtains {TotalAttackSpeedPer:BaseValue}% of additional final Attack Speed for {Time} sec. For the same duration, he deals normal physical damage equal to ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% of ATK upon normal attack.</String>
-  <String Key="Potential_10070_0">+100 DEF to Zuo Yun while using &lt;Enrage&gt;</String>
+  <String Key="Potential_10070_0">During &lt;Enrage&gt;, Zuo Yun's Range +1</String>
   <String Key="Potential_10070_1">+40% Physical/Spell HP Drain to Zuo Yun while using &lt;Enrage&gt;</String>
   <String Key="Potential_10070_2">+1 attack count upon dealing normal damage 40 times to the same enemy (cannot be stacked)
 The count increase is reset upon dealing normal damage to another enemy</String>
@@ -14614,9 +14614,9 @@ If all weaknesses fail to be targeted, the 'Demise' trial is applied, preventing
   <String Key="GachaName_1083">Hermits</String>
   <String Key="InventoryItemName_700">Alchemy Stone</String>
   <String Key="InventoryItemDesc_700">An alchemy material obtained from the investigation team's inquiry. Use it at the Alchemy Workshop to obtain various rewards.</String>
-  <String Key="TerritoryTradeShopDesc">The Trading Post's items are determined based on the &lt;color=#ffd264&gt;Trading Post Level&lt;/color&gt;.
-Items at Trading Post Level 4 or below &lt;color=#ffd264&gt;reset every week&lt;/color&gt;, and
-items at Trading Post Level 5 or above &lt;color=#ffd264&gt;reset every two weeks&lt;/color&gt;.</String>
+  <String Key="TerritoryTradeShopDesc">Trading Post goods are &lt;color=#ffd264&gt;determined by the Trading Post Level&lt;/color&gt;.
+Goods at Trading Post Level 2~3 are &lt;color=#ffd264&gt;reset every week&lt;/color&gt;,
+and goods at Trading Post Level 4 or higher are &lt;color=#ffd264&gt;reset every 2 weeks&lt;/color&gt;.</String>
   <String Key="ChangeAccessorySubStat">Change Secondary Stat</String>
   <String Key="ChangeAccessorySubStatDesc_0">Please select an Accessory to change the secondary stat.</String>
   <String Key="ChangeAccessorySubStatDesc_1">Select the secondary stat to change.</String>
@@ -16543,7 +16543,8 @@ Friends' Skill Amplification increases by {6}% of the wielder's Spell DEF
   <String Key="NewUnitGachaInfo">You can obtain 1 Hero you do not own.
 The rate is the same for every Hero you do not own.</String>
   <String Key="InventoryItemName_5603">Unique Legacy Selection Chest</String>
-  <String Key="RewardBoxInventoryDesc_5603">A chest you can open to select and obtain 1 Unique Legacy.</String>
+  <String Key="RewardBoxInventoryDesc_5603">Select a Unique Legacy to Obtain.
+(Limited-time Legacies excluded)</String>
   <String Key="GachaDesc_PickUpResetAlert">There is an unselectable Hero, so it has been reset automatically.</String>
   <String Key="UnitName_10780">Neria</String>
   <String Key="UnitSubName_10780">Avenger of Madness</String>
@@ -16936,8 +16937,7 @@ Physical CRIT Damage up to +{5}% based on remaining duration
   <String Key="Name_Overcome_2">Enhance Battle Start Skill</String>
   <String Key="Name_Overcome_3">Enhance Trait</String>
   <String Key="Name_Overcome_4">Enhance Skill</String>
-  <String Key="InventoryItemDesc_70000">A Summon Scroll wrapped in a mysterious aura.
-Lets you perform 1 Dimension Summon.</String>
+  <String Key="InventoryItemDesc_70000">A Summon Scroll with a mystique aura.</String>
   <String Key="InventoryItemDesc_10000">A small core condensed with power from another dimension.
 Can be exchanged for various goods in the Dimensional Shop.</String>
   <String Key="InventoryItemName_10000">Dimensional Core</String>
@@ -17003,8 +17003,7 @@ All allies' basic attacks: resource gain +{0}%</String>
   <String Key="SpecialPackage_1666">Tempester Package</String>
   <String Key="SpecialShop_TreasureDoublePickUp10013">Legacy Rate-up Special Shop</String>
   <String Key="ShopItemName_70000">Dimensional Hero Summon Scroll</String>
-  <String Key="ShopItemDesc_70000">A summon scroll with a mysterious aura.
-Lets you perform 1 Dimension Summon.</String>
+  <String Key="ShopItemDesc_70000">A Summon Scroll with a mystique aura.</String>
   <String Key="RewardBoxInventoryDesc_7100">Items can be Obtained based on set probabilities.</String>
   <String Key="DimensionHeroAttendanceEventTitle">Dimensional Hero Celebration Login Event</String>
   <String Key="ReservedText">Reserved</String>
@@ -18234,9 +18233,232 @@ The unchosen unit will be assigned to the enemy Troop.</String>
   <String Key="SkinName_1074001">Moonlight Star Lord Suha</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Moon Rabbits! You know you must not cause too much trouble just because you came down after a year, right? Have fun, everyone!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Harvest Moon Festival Offers</String>
+  <String Key="SeasonalEventNumberFormat">Season {0} Event</String>
+  <String Key="SeasonalEvent">Season Event</String>
+  <String Key="SeasonalEventCeilFormat">Season {0} Pickup</String>
+  <String Key="SeasonalEventName_Season74">Windstrike Arena</String>
+  <String Key="SeasonalEventDesc_Season74">Decided in a single battle!</String>
+  <String Key="UniversalEventText">EVENT</String>
+  <String Key="SingleArenaNeedAdForReroll">Please watch an ad to Reset the opponent.</String>
+  <String Key="SingleArena_ApFormat">AP {0}</String>
+  <String Key="SingleArena_AttackDeck">Attack Troop</String>
+  <String Key="SingleArena_AttackDeckSet">Form Attack Troop</String>
+  <String Key="SingleArena_AttackSelect_Desc">You can use your existing Attack Troop or check the enemy Troop and form a new one.
+
+If you use the existing Attack Troop, you can start battle right away. If you form a new one, you must set everything again starting from Hero selection. (You can reform your Attack Troop up to 5 times per day.)
+
+Please choose an attack method.</String>
+  <String Key="SingleArena_AttackSelect_Title">Select Attack Troop</String>
+  <String Key="SingleArena_CompleteDeck">Formation Complete</String>
+  <String Key="SingleArena_DefenseDeck">Defense Troop</String>
+  <String Key="SingleArena_DefenseDeckSet">Form Defense Troop</String>
+  <String Key="SingleArena_EnemyDeckPreview">Preview Enemy Troop</String>
+  <String Key="SingleArena_FinalAttackSelect_Desc">Do you want to save the newly formed Attack Troop as your new Attack Troop and enter battle?
+
+If you use the existing Attack Troop, the new Attack Troop will be deleted automatically.</String>
+  <String Key="SingleArena_FinalDeckSelect_Desc">Please select the Troop you want to use.</String>
+  <String Key="SingleArena_FinalDeckSelect_Title">Final Troop Selection</String>
+  <String Key="SingleArena_FirstDeckSetAlert">Only the first time, the Defense Troop and Attack Troop are saved together.
+After that, you can form the Defense Troop and Attack Troop separately.</String>
+  <String Key="SingleArena_Intro_Desc1">In Windstrike Arena, a single match decides victory or defeat.</String>
+  <String Key="SingleArena_Intro_Desc2">You use two Troops in total: an Attack Troop and a Defense Troop.</String>
+  <String Key="SingleArena_Intro_Desc3">The Attack Troop is used to check and attack the enemy Defense Troop.</String>
+  <String Key="SingleArena_Intro_Desc4">The Defense Troop is used to block enemy attacks. If your defense fails, you will lose Victory Points. (Victory Points can be lost up to 3 times per day.)</String>
+  <String Key="SingleArena_Intro_Desc5">Your first Troop Formation is fixed, but after that you can form your Troops freely.</String>
+  <String Key="SingleArena_Intro_Desc6">Even if you change your Attack Troop after checking the enemy Defense Troop, the enemy Troop will not change.</String>
+  <String Key="SingleArena_Intro_Desc7">Form your Troops freely to match the enemy and claim victory!</String>
+  <String Key="SingleArena_LeftGameAlertFormat">An unfinished battle has been counted as a defeat. ({0} points)</String>
+  <String Key="SingleArena_Log_Attack">Attack</String>
+  <String Key="SingleArena_Log_Def">Defense</String>
+  <String Key="SingleArena_Log_Empty">No records.</String>
+  <String Key="SingleArena_MissionCondFormat">Total Attacks {0}</String>
+  <String Key="SingleArena_NeedDeck">Please form your Attack Troop and Defense Troop first.</String>
+  <String Key="SingleArena_NeedFieldUnit">No Heroes deployed.</String>
+  <String Key="SingleArena_NewAttackDeck">New Attack Troop</String>
+  <String Key="SingleArena_NewDefenseDeck">New Defense Troop</String>
+  <String Key="SingleArena_NoMoreDeckChange">You can no longer change your Troop today.</String>
+  <String Key="SingleArena_OldAttackDeck">Existing Attack Troop</String>
+  <String Key="SingleArena_OldDefenseDeck">Existing Defense Troop</String>
+  <String Key="SingleArena_RankNotReached">This Rank has not been reached yet.</String>
+  <String Key="SingleArena_RankingPanelTitle">Windstrike Arena Ranking</String>
+  <String Key="SingleArena_RankingReward_Desc">Obtain rewards based on your final ranking at season end.</String>
+  <String Key="SingleArena_RankingTop">Top 300</String>
+  <String Key="SingleArena_RecordFormat">Attack {0} Wins {1} Losses / Defense {2} Wins {3} Losses</String>
+  <String Key="SingleArena_ReformAttackDeck">Reform Attack Troop</String>
+  <String Key="SingleArena_RemainAttackFormat">Remaining Attacks {0}/{1}</String>
+  <String Key="SingleArena_RerollRemainFormat">Change Opponent {0}/{1}</String>
+  <String Key="SingleArena_RetreatWarning">If you retreat, Arena Formation will be canceled. (If you are forming separately, your daily change count will be used.)</String>
+  <String Key="SingleArena_Search">Search Opponent</String>
+  <String Key="SingleArena_SelectTargetFirst">Please select an opponent first.</String>
+  <String Key="SingleArena_StagePreviewDesc">You can preview both troops' formations.</String>
+  <String Key="SingleArena_StagePreviewTitle">Formation Info</String>
+  <String Key="SingleArena_Title">Windstrike Arena</String>
+  <String Key="SingleArena_UseAttackDeck">Use Attack Troop</String>
+  <String Key="SingleArena_UseNewDeck">Use New Troop</String>
+  <String Key="SingleArena_UseOldDeck">Use Existing Troop</String>
+  <String Key="SingleArena_RankingRewardPanel_Title">Windstrike Arena Ranking Rewards</String>
+  <String Key="SingleArena_RankingRewardPanel_Desc">Rewards are given based on your ranking at season end.
+To enter the Top 300 Ranking, you must reach at least King Tier.</String>
+  <String Key="SingleArena_MatchHistory">Windstrike Arena Record</String>
+  <String Key="SeasonalEventOperationFormat">{0} will be available during the Season {1} event with no first-half or second-half split.
+
+Time Left : {2}</String>
+  <String Key="MissionDesc_SingleArena_Attack">Play Windstrike Arena {0} times</String>
+  <String Key="SingleArena_Mission">Windstrike Arena Missions</String>
+  <String Key="SixthYearDailyAttendanceEvent">&lt;color=#ffd264&gt;6th Anniversary&lt;/color&gt; Login Event</String>
+  <String Key="SeasonalEvent_ButtonName_Rift">Rift</String>
+  <String Key="SeasonalEvent_ButtonName_Arena">Arena</String>
+  <String Key="SeasonalEvent_ButtonName_Battlefield">Battlefield</String>
+  <String Key="IncarnationUnit">Transcendent Hero</String>
+  <String Key="Passive">Passive</String>
+  <String Key="UltimateSkill">UltimateSkill</String>
+  <String Key="SingleStackBuff">Single Stack Buff</String>
+  <String Key="SingleStackBuff_Desc">When the same buff is stacked, the Stack count increases on a single buff. When the Stack increases, the buff duration resets to max.</String>
+  <String Key="PassiveSkillHelp_0">Passive skills are applied automatically in Battle based on conditions.</String>
+  <String Key="PassiveSkillHelp_1">No changes based on the Hero's Tier in battle.</String>
+  <String Key="PassiveSkillHelp_2">Displayed values can be enhanced through Hero Ascend.</String>
+  <String Key="UltimateMeterFormat">UltimateSkill Gauge {0}/{1}</String>
+  <String Key="UltimateSkillHelp_0">UltimateSkill power increases based on the Hero's Tier in battle.</String>
+  <String Key="UltimateSkillHelp_1">Displayed values can be enhanced through Hero Ascend.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_0">In Hero Summon, if you summon a Transcendent Hero you already own again, you can Ascend it.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_1">You can Ascend up to 5 times.</String>
+  <String Key="AddAttackCountEveryFourthNormalAttackFormat">Every 4th normal attack: Attack Count +1, bonus attack damage {0}</String>
+  <String Key="SkillName_10820">rera-at-katu</String>
+  <String Key="SkillDesc_10820_Short">After {ChannelingTime}s of Concentration, fires a Wind arrow that pierces the Battlefield and deals Physical Skill damage equal to {Damage:AtkPer:BaseValue}% of ATK to all enemies in its 1X1 path.</String>
+  <String Key="SkillDesc_10820_Long">Yhoundeh marks the location of an enemy Hero, gathers the power of Wind for {ChannelingTime}s, then fires a Wind arrow at the marked location that pierces the Battlefield and deals Physical Skill damage equal to {Damage:AtkPer:BaseValue}% of ATK to all enemies in its 1X1 path. Upon using skill: UltimateSkill Gauge +1.</String>
+  <String Key="SkillDesc_10820_Short_2">After {ChannelingTime}s of Concentration, fires a Wind arrow that pierces the Battlefield and deals Physical Skill damage equal to {Damage:AtkPer:BaseValue}% of ATK to all enemies in its 1X1 path.</String>
+  <String Key="SkillDesc_10820_Long_2">Yhoundeh marks the location of an enemy Hero, gathers the power of Wind for {ChannelingTime}s, then fires a Wind arrow at the marked location that pierces the Battlefield and deals Physical Skill damage equal to {Damage:AtkPer:BaseValue}% of ATK to all enemies in its 1X1 path. Upon using skill: Kar Stack +5 and UltimateSkill Gauge +1.</String>
+  <String Key="PassiveSkillName_10820">rerakar</String>
+  <String Key="PassiveSkillDesc_10820_Short">Upon normal attack, Kar Stack +1. Max {10820@Unit10820AI_FocusMaxStack}. Attack Speed +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, reset Stacks to 0, then +1.</String>
+  <String Key="PassiveSkillDesc_10820_Long">Upon normal attack, gains 1 Kar Stack. Can Stack up to {10820@Unit10820AI_FocusMaxStack}, and Attack Speed increases by +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, Kar Stacks reset to 0, then gains 1 Stack.</String>
+  <String Key="PassiveSkillDesc_10820_Short_1">Upon normal attack, Kar Stack +1. Max {10820@Unit10820AI_FocusMaxStack}. Attack Speed +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, reset Stacks, then +1. Keeps at least 10 Stacks.</String>
+  <String Key="PassiveSkillDesc_10820_Long_1">Upon normal attack, gains 1 Kar Stack. Can Stack up to {10820@Unit10820AI_FocusMaxStack}, and Attack Speed increases by +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, Kar Stacks reset, then gains 1 Stack. Kar Stacks are kept at a minimum of 10.</String>
+  <String Key="PassiveSkillDesc_10820_Short_2">Upon normal attack, Kar Stack +1. Max {10820@Unit10820AI_FocusMaxStack}. Attack Speed +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, reset Stacks, then +1. Keeps at least 10 Stacks. Upon using skill or Ultimate Skill: Kar Stacks +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_2">Upon normal attack, gains 1 Kar Stack. Can Stack up to {10820@Unit10820AI_FocusMaxStack}, and Attack Speed increases by +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, Kar Stacks reset, then gains 1 Stack. Kar Stacks are kept at a minimum of 10. Upon using skill or Ultimate Skill: Kar Stacks +5.</String>
+  <String Key="PassiveSkillDesc_10820_Short_3">Upon normal attack, Kar Stack +1. Max {10820@Unit10820AI_FocusMaxStack}. Attack Speed +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, reset Stacks, then +1. Keeps at least 10 Stacks. Upon using skill or Ultimate Skill: Kar Stacks +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_3">Upon normal attack, gains 1 Kar Stack. Can Stack up to {10820@Unit10820AI_FocusMaxStack}, and Attack Speed increases by +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, Kar Stacks reset, then gains 1 Stack. Kar Stacks are kept at a minimum of 10. Upon using skill or Ultimate Skill: Kar Stacks +5.</String>
+  <String Key="PassiveSkillDesc_10820_Short_4">Upon normal attack, Kar Stack +1. Max {10820@Unit10820AI_FocusMaxStack}(+30 from Default). Attack Speed +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, reset Stacks, then +1. Keeps at least 10 Stacks. Upon using skill or Ultimate Skill: Kar Stacks +5. At max Stacks, normal attacks always CRIT.</String>
+  <String Key="PassiveSkillDesc_10820_Long_4">Upon normal attack, gains 1 Kar Stack. Can Stack up to {10820@Unit10820AI_FocusMaxStack}(+30 from the Default max), and Attack Speed increases by +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, Kar Stacks reset, then gains 1 Stack. Kar Stacks are kept at a minimum of 10. Upon using skill or Ultimate Skill: Kar Stacks +5. At max Kar Stacks, normal attacks always CRIT.</String>
+  <String Key="PassiveSkillDesc_10820_Short_5">Upon normal attack, Kar Stack +1. Max {10820@Unit10820AI_FocusMaxStack}(+30 from Default). Attack Speed +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, reset Stacks, then +1. Keeps at least 10 Stacks. Upon using skill or Ultimate Skill: Kar Stacks +5. At max Stacks, normal attacks always CRIT. Upon killing an enemy, Kar Stacks are kept for the next target.</String>
+  <String Key="PassiveSkillDesc_10820_Long_5">Upon normal attack, gains 1 Kar Stack. Can Stack up to {10820@Unit10820AI_FocusMaxStack}(+30 from the Default max), and Attack Speed increases by +{10820@Unit10820AI_FocusAttackSpeedPer}% per Stack. If the normal attack target changes, Kar Stacks reset, then gains 1 Stack. Kar Stacks are kept at a minimum of 10. Upon using skill or Ultimate Skill: Kar Stacks +5. At max Kar Stacks, normal attacks always CRIT. Upon killing an enemy, Kar Stacks are kept for the next target.</String>
+  <String Key="UltimateSkillName_10820">rera epunkine</String>
+  <String Key="UltimateSkillDesc_10820_Short">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec.</String>
+  <String Key="UltimateSkillDesc_10820_Long">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. Upon using Ultimate Skill, all status effects, bonds, and links are removed.</String>
+  <String Key="UltimateSkillDesc_10821_Short">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec.</String>
+  <String Key="UltimateSkillDesc_10821_Long">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. Upon using Ultimate Skill, all status effects, bonds, and links are removed.</String>
+  <String Key="UltimateSkillDesc_10822_Short">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec.</String>
+  <String Key="UltimateSkillDesc_10822_Long">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. Upon using Ultimate Skill, all status effects, bonds, and links are removed.</String>
+  <String Key="UltimateSkillDesc_10823_Short">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec. At Battle start, Ultimate Gauge +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. Upon using Ultimate Skill, all status effects, bonds, and links are removed. At Battle start, Ultimate Gauge increases by {AddBattleStartUltimateGauge}.</String>
+  <String Key="UltimateSkillDesc_10820_Short_2">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec.</String>
+  <String Key="UltimateSkillDesc_10820_Long_2">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. Upon using Ultimate Skill, all status effects, bonds, and links are removed.</String>
+  <String Key="UltimateSkillDesc_10821_Short_2">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec.</String>
+  <String Key="UltimateSkillDesc_10821_Long_2">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. Upon using Ultimate Skill, all status effects, bonds, and links are removed.</String>
+  <String Key="UltimateSkillDesc_10822_Short_2">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec.</String>
+  <String Key="UltimateSkillDesc_10822_Long_2">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. Upon using Ultimate Skill, all status effects, bonds, and links are removed.</String>
+  <String Key="UltimateSkillDesc_10823_Short_2">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec. At Battle start, Ultimate Gauge +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_2">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. Upon using Ultimate Skill, all status effects, bonds, and links are removed. At Battle start, Ultimate Gauge increases by {AddBattleStartUltimateGauge}.</String>
+  <String Key="UltimateSkillDesc_10820_Short_3">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec. Upon killing an enemy, duration resets.</String>
+  <String Key="UltimateSkillDesc_10820_Long_3">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. If an enemy is killed during Ultimate Skill, duration resets. Upon using Ultimate Skill, all status effects, bonds, and links are removed.</String>
+  <String Key="UltimateSkillDesc_10821_Short_3">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec. Upon killing an enemy, duration resets.</String>
+  <String Key="UltimateSkillDesc_10821_Long_3">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. If an enemy is killed during Ultimate Skill, duration resets. Upon using Ultimate Skill, all status effects, bonds, and links are removed.</String>
+  <String Key="UltimateSkillDesc_10822_Short_3">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec. Upon killing an enemy, duration resets.</String>
+  <String Key="UltimateSkillDesc_10822_Long_3">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. If an enemy is killed during Ultimate Skill, duration resets. Upon using Ultimate Skill, all status effects, bonds, and links are removed.</String>
+  <String Key="UltimateSkillDesc_10823_Short_3">Yhoundeh rises into the sky and fires arrows at an enemy for {Time} sec. Upon killing an enemy, duration resets. At Battle start, Ultimate Gauge +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_3">Yhoundeh leaves the Battlefield, rises into the sky, and fires arrows at an enemy for {Time} sec. If an enemy is killed during Ultimate Skill, duration resets. Upon using Ultimate Skill, all status effects, bonds, and links are removed. At Battle start, Ultimate Gauge increases by {AddBattleStartUltimateGauge}.</String>
+  <String Key="Name_Overcome_10820_0">Rera Aye</String>
+  <String Key="Overcome_10820_0">Kar is kept at a minimum of 10 Stacks</String>
+  <String Key="Name_Overcome_10820_1">Rera Nisor</String>
+  <String Key="Overcome_10820_1">Upon using skill or Ultimate Skill: Kar Stacks +5</String>
+  <String Key="Name_Overcome_10820_2">Kamuy Epunkine</String>
+  <String Key="Overcome_10820_2">Upon killing an enemy during Rera epunkine, Rera epunkine duration resets</String>
+  <String Key="Name_Overcome_10820_3">Yupke Rera</String>
+  <String Key="Overcome_10820_3">Max Kar Stacks +30. At max Kar Stacks, normal attacks against the target always CRIT</String>
+  <String Key="Name_Overcome_10820_4">Rera Kanto</String>
+  <String Key="Overcome_10820_4">Upon killing an enemy, Kar Stacks are kept for the next target</String>
+  <String Key="IncarnationUnitSummon">Transcendence Hero Summon</String>
+  <String Key="UnitGachaHighCountFormat">After &lt;color=#FFD247&gt;{0}&lt;/color&gt; summons, &lt;color=#FFD247&gt;a Transcendent/Dimensional Hero is guaranteed&lt;/color&gt;</String>
   <String Key="UnitGachaPickupCountFormat">Guaranteed &lt;color=#FFD247&gt;Pickup Hero&lt;/color&gt; after &lt;color=#FFD247&gt;{0}&lt;/color&gt; Summons</String>
+  <String Key="IncarnationUnitPickupGachaDesc">From summon 81 onward, the chance to summon a Transcendence/Dimensional Hero increases by 5% with each summon.
+When a Transcendence/Dimensional Hero appears, the guaranteed summon count resets.
+If you summon a Transcendence/Dimensional Hero that is not the Pickup Hero, the next time you Obtain a Transcendence/Dimensional Hero, it is guaranteed to be the Pickup Hero.
+If you summon the same Transcendence Hero while at max Ascend, you Obtain 10 Dimensional Hero Summon Tickets instead.</String>
+  <String Key="Premium">Premium</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumButton">2x Rewards! 20x Efficiency!</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_0">If you purchase Premium Login, you can Obtain all rewards at 2x.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_1">If you purchase Premium Login, rewards you already obtained will also be given at 2x.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_2">Premium Login cannot be refunded.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumApplied">2x Rewards Active!</String>
+  <String Key="SeasonalEventMode_Season74">Windstrike Arena</String>
+  <String Key="SpecialDamageMulFormat">Special Damage +{0}%</String>
+  <String Key="FlagsName_60000">Windstrike Arena Flag</String>
+  <String Key="FlagsDesc_60000">The flag of those who proved their worth in Windstrike Arena</String>
+  <String Key="FlagsName_60010">Avatar of Wind Flag</String>
+  <String Key="FlagsDesc_60010">A flag that wishes for the coming of the 'Avatar of Wind' and the 'Promised Victory'</String>
   <String Key="PlayReward_Semi1">First Half Reward</String>
   <String Key="PlayReward_Semi2">Second Half Reward</String>
   <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; Plays</String>
+  <String Key="SpecialPackage_1699">Sacramentum Package</String>
+  <String Key="SpecialPackage_1700">Rain of Fire Package</String>
+  <String Key="InventoryItemName_5605">King God Pass Skin Selection Chest</String>
+  <String Key="SeasonPassScheduledHeroTitle_74">Obtain Transcendent Hero &lt;color=#D8B4FF&gt;Yhoundeh&lt;/color&gt;</String>
+  <String Key="SeasonPassScheduledHeroBenefit">New Hero Gift</String>
+  <String Key="InventoryItemName_SSGuaranteedSetFormat">Random SS {0}</String>
+  <String Key="InventoryItemName_SSGuaranteedBoxFormat">Random SS {0}</String>
+  <String Key="InventoryItemDesc_SSGuaranteedBoxFormat">Obtain a Selection Chest with a random SS Unique Accessory from the selected Set.</String>
+  <String Key="InventoryItemDesc_SSGuaranteedSetFormat">Obtain the selected Accessory. 1 random Secondary Stat will be SS Tier.</String>
+  <String Key="AlreadyHaveFlag">Not received because you already own the flag.</String>
+  <String Key="SeasonPassScheduledHeroInfo_74">If you own the Hero: Hero Ascend +1
+If the Hero is at max Ascend, receive &lt;color=#ffd264&gt;10 Dimensional Hero Summon Scrolls&lt;/color&gt; instead</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_Class">&lt;{0}&gt; {1}</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_ThreeClasses">&lt;{0}&gt; &lt;{1}&gt; &lt;{2}&gt; {3}</String>
+  <String Key="Post_Title_6thAnniversaryGift">6th Anniversary Special Gift</String>
+  <String Key="KingsTreasureSelectiveSummon">King's Legacy Select Summon</String>
   <String Key="BlessedTreasure">Blessed Legacy</String>
+  <String Key="TreasureCustomPickupTitle">Blessed Legacy Summon</String>
+  <String Key="UnitName_10820">Yhoundeh</String>
+  <String Key="UnitSubName_10820_1">Once known as Hansi.</String>
+  <String Key="UnitSubName_10820">wind guardian</String>
+  <String Key="SkinDesc_Default_10820">In a small village in the East, a quiet guardian was born
+and gave everything to protect the people.
+
+The arrow that rules the sky no longer burns the land,
+it has simply become the master of the endless wind.
+
+As long as the guardian protects the village,
+no outside being can break its peace.
+.
+.
+.
+.
+.
+.</String>
+  <String Key="IncarnationUnit_10820">Catastrophe</String>
+  <String Key="Introduce_10820">A Survivor's Record</String>
+  <String Key="SkinDesc_Default_10820_1">Last summer, a cold wind began to blow.
+Frosty mist like smoke filled every direction,
+and cold, white dust covered roofs, fields, and leaves.
+Plants froze, and fruit fell to the ground without keeping its shape.
+
+Because the wind never stopped, wood and stone alike wore down and began to crumble.
+The fire spread faster than we could contain it, and we lost control of the flames.
+The waves rose without end, and because we could not resist them, we lost the sea.
+There is no way to escape the biting cold, and no way to stop the blade-like wind.
+So no monster can come near.
+
+We gained peace.
+We lost the future.
+All that remained for us was to be swallowed, frozen, by the endless wind…</String>
+  <String Key="InventoryItemDesc_SelectableTreasureBox">A Chest that lets you select and obtain a Unique Legacy available from the Permanent Summon.
+ When used, you can select a reward from the item list.</String>
+  <String Key="IncarnationUnitPickupSummon">Transcendence Hero Summon</String>
+  <String Key="GachaPickupDescFormat">You can obtain a Transcendent Hero.</String>
+  <String Key="IncarnationUnitMaxOvercomeConvertedTicket">A max Ascend Hero was summoned. You obtained 10 Dimensional Hero Summon Scrolls.</String>
+  <String Key="SpecialTreasureSelectTitle">Unique Legacy Select Summon</String>
+  <String Key="SpecialTreasureSelectDesc">Choose 1 Unique Legacy from the Legacies that can appear in permanent Legacy Summon and obtain it.
+Tap the purchase button to see the list of obtainable Legacies.</String>
+  <String Key="SkinDesc_Default_10820_Simple">The arrow that rules the sky no longer burns the land,
+it has simply become the master of the endless wind.</String>
+  <String Key="LoginSkinName_10020">6th Anniversary Login Screen</String>
+  <String Key="LoginSkinDesc_10020">6th Anniversary Login Screen</String>
 </Strings>

@@ -49,7 +49,17 @@ check_platform() {
 }
 
 # ── Android / APKPure ──────────────────────────────────────────────────────
-android_version=$(curl -sL --max-time 15 \
+# apkpure.net trả Cloudflare challenge (~5.7KB, không có "version") từ 2026-10-22
+# → scrape fail âm thầm, không bao giờ notify. apkeep dùng api.pureapk.com (còn 200)
+# → nguồn chính; scrape giữ làm fallback.
+android_version=""
+if command -v apkeep >/dev/null 2>&1; then
+    _tmpdir=$(mktemp -d)
+    android_version=$(apkeep -a "$APP_ID" "$_tmpdir" -d apk-pure -l 2>/dev/null \
+        | tr ',' '\n' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | sort -V | tail -1) || true
+    rm -rf "$_tmpdir"
+fi
+[[ -z "$android_version" ]] && android_version=$(curl -sL --max-time 15 \
     -H "Accept-Language: en-US,en;q=0.9" \
     -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
     "https://apkpure.net/king-god-castle/${APP_ID}" \
@@ -57,7 +67,7 @@ android_version=$(curl -sL --max-time 15 \
 import sys, re
 m = re.search(r'\"version\":\"(\d+\.\d+\.\d+)\"', sys.stdin.read())
 print(m.group(1) if m else '')
-" 2>/dev/null) || android_version=""
+" 2>/dev/null) || true
 
 PLAY_URL="https://apkpure.net/king-god-castle/${APP_ID}"
 check_platform "android" "$android_version" "$PLAY_URL" || true

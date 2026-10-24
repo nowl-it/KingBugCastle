@@ -46,6 +46,26 @@
 		<PreviewOffsetY>-5</PreviewOffsetY>
 	</LoginSkin>
 	
+	<LoginSkin ID="10020">
+		<Comment>기본 로그인 - 2026 6주년 (이호운데 로그인 일러스트)</Comment>
+
+		<Sprite>Title_6Th_Event</Sprite>
+
+		<Default>true</Default>
+
+		<MinVersion>174100</MinVersion>
+		<Grade>0</Grade>
+		<LoginSceneId>3</LoginSceneId>
+		
+		<Scale>1</Scale>
+		<OffsetX>-60</OffsetX>
+		<OffsetY>0</OffsetY>
+
+		<PreviewScale>1</PreviewScale>
+		<PreviewOffsetX>0</PreviewOffsetX>
+		<PreviewOffsetY>0</PreviewOffsetY>
+	</LoginSkin>
+	
 	<LoginSkin ID="20000">
 		<Comment>해변 축제</Comment>
 		<IconSprite>SeasonalEventToken_Beach</IconSprite>

@@ -17,7 +17,8 @@ this - the client reads the bundle directly. This is data plane 2 (see [README](
 Every change we make on top of the devs' pristine data is a function in the
 **`server/local_mods/`** package - one idempotent `apply(xml_dir)`, the single source
 of truth. A data refresh overwrites `xml_live` wholesale and then replays these, so we
-never hand-merge 148 files. The 7 mods (all real fixes, no fabricated numbers):
+never hand-merge 148 files. The 9 mods (all real fixes except mod 9's buff numbers, which
+are documented test values):
 
 1. `CCRatio -100 → 0` - enemies become crowd-control-able
 2. Treasure 30040 (Shadowless) gate → `170100` - shows on a fallback v170 client
@@ -29,10 +30,19 @@ never hand-merge 148 files. The 7 mods (all real fixes, no fabricated numbers):
 7. `FetchComplete` loading text - restore the private-server "Ready to bug" translations in
    every shipped locale.
    (the value 10/20 is real in Units.xml; only the string's field name was wrong)
+8. Cor Orbis `50002` strings - replay the operator-supplied leak block (20 keys, byte-exact)
+   into `Strings_EN_US` + `Strings_VI` only; a differing value is overwritten, not kept.
+   The `SpecialPackage_1690..1692` keys are intentionally not written (live, renamed by the
+   2026-09-10 republish) and `AdsSummonRestrictionAlert` already matches.
+9. Cor Orbis `50002` rows - the `<Treasure>` row and `BuffData 3500020..3500025` that mod 8's
+   strings describe. **The buff numbers are TEST VALUES** (the official table never shipped);
+   each row's `DescParams`/`TotalDescParams` is sized to the leaked string's placeholder count
+   so no `{N}` renders blank. Art uses the header defaults `TreasureIcon_50002` /
+   `TreasureIllust_50002` (no assets in any build) so the client draws its placeholder.
 
 `apply()` is idempotent and appends a **WARN** when an anchor is gone (the devs
 restructured a block we patch) - that is the one thing a human must resolve.
-`python3 server/local_mods/__init__.py --check` self-tests all seven.
+`python3 server/local_mods/__init__.py --check` self-tests all nine.
 
 ## Workflow - two refresh paths, both replay local_mods
 

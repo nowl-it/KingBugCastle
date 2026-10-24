@@ -1,6 +1,6 @@
-<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
+<Strings TranslationBaseCommit="b53f5c202519e52ec712d65feedb55aff10c9efe">
   <String Key="UpdateNoticeVersion">172000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/en</String>
   <String Key="Title">King God Castle</String>
   <String Key="Tags">Awesomepiece, ZombieHighschool, AutoChess, lolChess, KingGodCastle, Autobatalha, estratégia, batalhasestratégicasdeequipe, TFT, Ends, HelpmeEnds, Merge, defesa</String>
   <String Key="Store_ShortDesc">Proteja o castelo contra inimigos invasores através dos Heróis e do poder divino!</String>
@@ -936,8 +936,8 @@ Atualiza a loja 1 vez após pagar Prata ao Vendedor Ambulante</String>
   <String Key="AddDefPerCount">-{0} de dano sofrido para cada Herói alocado
 (Máx. de {1})</String>
   <String Key="AddDefPerCount_Piece">- dano sofrido quanto mais Heróis alocados</String>
-  <String Key="AtkPerByRange">Alcance de todos os Heróis + 1, Dano caus. por ataques normais/de habilidade +{0} por cada ponto de distância até o alvo (distância máxima {1})</String>
-  <String Key="AtkPerByRange_Piece">Alcance de todos os Heróis + 1, Dano caus. por ataques normais/de habilidade aumenta com a distância até o alvo</String>
+  <String Key="AtkPerByRange">Dano caus. por ataques normais/de habilidade +{0} por casa de distância do alvo (distância máx. {1})</String>
+  <String Key="AtkPerByRange_Piece">Dano caus. por ataques normais/de habilidade aumenta quanto mais longe estiver o alvo</String>
   <String Key="ArtifactName_100">Pó Misterioso</String>
   <String Key="ArtifactDesc_100">Um pó misterioso obtido ao triturar relíquias.</String>
   <String Key="ArtifactName_10000">Espada do Império</String>
@@ -1224,11 +1224,8 @@ Deseja ver?</String>
   <String Key="ItemName_10020">Expansão de Capacidade</String>
   <String Key="ItemDesc_10020">Expande a capacidade em 1.</String>
   <String Key="ItemName_10030">+5 de Prata</String>
-  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">+10 de Prata</String>
-  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">+20 de Prata</String>
-  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">Medalha de Honra</String>
   <String Key="ItemDesc_10040">Aumenta 1 ★ de um Herói aleatório no campo de batalha.</String>
   <String Key="ItemName_10050">Pergaminho de Herói Superior (2x)</String>
@@ -2704,8 +2701,8 @@ Quer mesmo continuar?</String>
   <String Key="CashCart">Vagoneta de Diamantes</String>
   <String Key="UnitName_10320">Tiya</String>
   <String Key="UnitSubName_10320">Vigia da Eternidade</String>
-  <String Key="Potential_10320_0">+20% de dano final causado ao inimigo dentro de 3 casas</String>
-  <String Key="Potential_10320_1">Se derrotar o inimigo, a Rajada de Vento seguinte atira o dobro de flechas.</String>
+  <String Key="Potential_10320_0">Contra inimigos em um raio de 4 casas: Dano caus. final +30%</String>
+  <String Key="Potential_10320_1">A primeira flecha de &lt;Rajada de Vento&gt; ignora 100% da Defesa Física do inimigo</String>
   <String Key="SkinDesc_Default_10320">Tiya é a capitã dos vigias da tropa da família real élfica. Ela se move agilmente como uma rajada de vento, ao mesmo tempo que apresenta um talento nato com arco e flecha, tendo protegido as fronteiras da Floresta Eterna por um longo tempo.</String>
   <String Key="SkillName_10320">Rajada de Vento</String>
   <String Key="SkillDesc_10320">Se o alvo estiver dentro de {BuffRangeSum} casa(s), se move {MoveDistance} casa(s) para trás e desfere ataque normal que causa dano físico {AttackCount} vez(es). Se o alvo não estiver dentro de {BuffRangeSum} casa(s), ataca {AttackCount} vez(es) com {10325@Damage:AtkPer:BaseValue}% do ataque.</String>
@@ -4936,7 +4933,7 @@ Contemplem o meu poder estremecedor!&lt;/i&gt;</String>
   <String Key="SelectPickupUnit">Selecionar Heróis</String>
   <String Key="SelectPickupUnitAgain">Reconfigurar</String>
   <String Key="SelectPickupUnitComplete">Seleção finalizada</String>
-  <String Key="GachaName_9000">Evocação de Boas-vindas</String>
+  <String Key="GachaName_9000">Evocação de Boas-Vindas</String>
   <String Key="OutgameTutorial_30_01">A &lt;color=#ffc13d&gt;evocação&lt;/color&gt; é indispensável para fortalecer e evocar novos heróis.</String>
   <String Key="OutgameTutorial_30_03">Para obter um novo Herói, vamos tentar uma &lt;color=#ffc13d&gt;Evocação Normal de Herói&lt;/color&gt;.</String>
   <String Key="OutgameTutorial_30_05">Para desejar sucesso e crescimento a este Castelo, esta evocação será &lt;color=#ffc13d&gt;grátis&lt;/color&gt; desta vez.</String>
@@ -5816,7 +5813,7 @@ Verifique e tente novamente.</String>
   <String Key="RogueLikeBuildingPackageTitleFormat">Pacote do {0} {1}</String>
   <String Key="RogueLikeBuildingPackageConfirm">É possível comprar apenas um dos Pacotes do {0} I, II ou III.
 Quer continuar a compra mesmo assim?</String>
-  <String Key="LevelFormat">Nv. {0}</String>
+  <String Key="LevelFormat">Nível {0}</String>
   <String Key="BuildingsAlreadyComplete">Você já selecionou todos os Altares.</String>
   <String Key="DeathBuildingPackage">Pacote do Altar da Morte</String>
   <String Key="ArtifactName_13160">Códice da Morte</String>
@@ -6812,8 +6809,8 @@ A marca é gerada a cada 3s.</String>
   <String Key="ArtifactName_14020">Luneta de Anão</String>
   <String Key="ArtifactDesc_14020">Luneta integrada com a tecnologia de anões.
 O usuário consegue atacar à uma distância maior e com mais precisão, porém não consegue carregá-la por ser pesada.</String>
-  <String Key="MoveStopTimeDesc_Piece">Designe duas casas do Campo de Batalha como pontos de atirador. Heróis posicionados recebem Defesa Absoluta +4. Até saírem do ponto de atirador pela primeira vez, o primeiro acerto e cada 5º acerto de Dano Normal causam mais dano</String>
-  <String Key="MoveStopTimeDesc">Designe duas casas do Campo de Batalha como pontos de atirador. Heróis posicionados recebem Defesa Absoluta +{1}. Até saírem do ponto de atirador pela primeira vez, o primeiro acerto e cada 5º acerto de Dano Normal causam +{0}% de dano.</String>
+  <String Key="MoveStopTimeDesc_Piece">Designa 2 casas nos Campos de Batalha como posições de atirador. Os Heróis posicionados recebem Defesa Absoluta +4, ficam &lt;color=#f33&gt;imóveis&lt;/color&gt; por um tempo e, enquanto estiverem na posição de atirador, o Dano Normal aumenta em intervalos fixos.</String>
+  <String Key="MoveStopTimeDesc">Designa 2 casas nos Campos de Batalha como posições de atirador. Os Heróis posicionados recebem Defesa Absoluta +{1}, ficam &lt;color=#f33&gt;imóveis&lt;/color&gt; por {2}s e, até saírem da posição de atirador pela primeira vez, Dano Normal causado +{0}% no primeiro ataque e depois a cada 5 ataques.</String>
   <String Key="ColosseumBanned">Proibição de acesso à temporada do Campo de Batalha Árdua</String>
   <String Key="GachaName_1036">Sorriso Amarelo</String>
   <String Key="Name_Potential_10560_3">Exaltação</String>
@@ -8909,7 +8906,7 @@ E prepare-se para brutalizar o seu destino.&lt;/i&gt;</String>
   <String Key="SpecialPackage_1491">Pacote de Chuva de Fogo 2</String>
   <String Key="SpecialPackage_1492">Pacote de Chuva de Fogo 3</String>
   <String Key="SkillDesc_10110">Ataca mais {AtkCount} vez(es) por {Time}s.</String>
-  <String Key="Potential_10110_0">+15% de chance de crítico físico durante o uso de Chuva de Flechas</String>
+  <String Key="Potential_10110_0">Durante &lt;Chuva de Flechas&gt;, Alcance +1</String>
   <String Key="Potential_10110_1_00">+15% de ataque final para cada arco equipado</String>
   <String Key="Potential_10110_2_00">Ao usar Chuva de Flechas, causa dano de habilidade física equivalente a 250% do ataque [3/4/5/6] vezes em todos os inimigos em uma área de 2 casas ao redor do alvo e conjura Dilúvio que reduz a velocidade de movimento final em 30% por 3s</String>
   <String Key="Potential_10110_3">+50% de ataque e redefinição da duração de Chuva de Flechas ao causar dano normal 10 vezes no mesmo alvo durante o uso da habilidade.
@@ -10599,7 +10596,7 @@ Atordoa os alvos atingidos pela explosão por {6}s</String>
 +{5}% de dano crítico físico por {4}s ao explodir
 Atordoa os alvos atingidos pela explosão por {6}s
 +{8}% de chance de crítico físico por {7}s ao explodir</String>
-  <String Key="Potential_10110_1">+30% de ataque final durante o uso de &lt;Chuva de Flechas&gt;</String>
+  <String Key="Potential_10110_1">Durante &lt;Chuva de Flechas&gt;, Chance de Crítico Físico +30%</String>
   <String Key="Potential_10110_2">Durante o uso de &lt;Chuva de Flechas&gt;, usa [Dilúvio] que causa dano de habilidade física equivalente a 250% do ataque [4/5/6/7] vezes em todos os inimigos em uma área de 2 casas ao redor do alvo em vez do 7º ataque normal</String>
   <String Key="Potential_10420_1">-30% de dano recebido durante o uso de &lt;Patada de Tigre Branco&gt;</String>
   <String Key="SkillDesc_1011000_Long">Aumenta a quantidade de ataques normais em {10110@AtkCount} durante {10110@Time}s com a técnica de arquearia herdada da família Fênix. Usa Dilúvio que causa {1011010@Damage} de dano de habilidade física {1011010@AttackCount} vez(es) em todos os inimigos em uma área de {1011010@SplashRangeSum} casas ao redor do alvo em vez do {1011005@NeedComboCount+1}º ataque normal.</String>
@@ -10877,7 +10874,7 @@ Quer aplicar a Lista de Desejos?</String>
 Quer encerrar a Lista de Desejos sem aplicar as alterações?</String>
   <String Key="OwnedTreasureStatus">Status de Obtenção</String>
   <String Key="ColosseumTierRewardAutoReceiveTitle">Recompensa de Ranque da Temporada {0} do Campo de Batalha Árdua</String>
-  <String Key="ColossseumTierRewardAutoReceiveDesc">Enviamos a recompensa de alcance não recebida de {1} da Temporada {0} do Campo de Batalha Árdua.</String>
+  <String Key="ColosseumTierRewardAutoReceiveDesc">Enviamos a recompensa de alcance não recebida de {1} da Temporada {0} do Campo de Batalha Árdua.</String>
   <String Key="TreasureName_30018">Espírito de Luta Inexpugnável</String>
   <String Key="TreasureSubName_30018">Bastião de Ferro</String>
   <String Key="TreasureDesc_30018">A família Deneb tornou-se conhecida como a família heroica lutando contra inimigos na linha de frente do campo de batalha através das gerações. O escudo de ferro, considerado o símbolo da família, representa a sua determinação indomável.</String>
@@ -11634,7 +11631,7 @@ Relaxa o corpo e a mente só de olhá-lo.</String>
   <String Key="AccessorySynergyName_9">Luar</String>
   <String Key="AccessorySynergyName_9_Pre">do Luar</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;{0}% de poder de feitiço final&lt;/color&gt; e +{1}% de ataque final</String>
-  <String Key="AccessorySynergyDesc_10091">Alcance +{0}, Dano Crítico Físico +{2}% por cada {1} de Alcance (máx. 80%)</String>
+  <String Key="AccessorySynergyDesc_10091">Dano Crítico Físico +{0}%. Quando a Vida atual cair pela primeira vez para {1}% ou menos da Vida máxima, Dano Crítico Físico -{0}%</String>
   <String Key="AccessorySynergyDesc_10092">Ativa modo furtivo durante {0}s no começo da batalha e +{2}% de chance de crítico físico após {1}s</String>
   <String Key="InventoryItemName_5010">Baú de Seleção de Acessório do Luar</String>
   <String Key="ShopItemName_41012">Acessório do Luar Aleatório</String>
@@ -12587,7 +12584,7 @@ Use “Bilhete de Remoção de Impossibilidade de Melhoria de Equipamento da Rup
   <String Key="RiftWeaponBuffDesc_130">Causa {0}% de dano especial a 3 inimigos ao infligir dano normal após usar habilidade</String>
   <String Key="RiftWeaponBuffDesc_140">+{0} de defesa física</String>
   <String Key="RiftWeaponBuffDesc_150">+{0} de defesa de feitiço</String>
-  <String Key="RiftWeaponBuffDesc_160">Alcance +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">Velocidade de Movimento +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">+{0}% de absorção física</String>
   <String Key="RiftWeaponBuffDesc_180">+{0}% de absorção de feitiço</String>
   <String Key="RiftWeaponBuffDesc_190">+{0} de defesa</String>
@@ -13545,7 +13542,7 @@ Altera o padrão do chefe e melhora sua habilidade ao falhar em todas as fraquez
   <String Key="ArenaStarterBuffDesc_2">Se entrar pela primeira vez nas últimas 72 horas até o fim da temporada da Arena, a Bênção do Campo de Batalha será aplicada a partir da próxima temporada.</String>
   <String Key="SkillDesc_10070_Short">Recebe {TotalAttackSpeedPer:BaseValue}% de aumento de velocidade de ataque final durante {Time}s e, ao realizar ataque normal, causa dano equivalente a ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% do ataque.</String>
   <String Key="SkillDesc_10070_Long">Zuo Yun fica enfurecido, recebendo {TotalAttackSpeedPer:BaseValue}% velocidade de ataque final adicional durante {Time}s e, ao realizar ataque normal, causa dano físico normal equivalente a ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% do ataque durante esse mesmo tempo.</String>
-  <String Key="Potential_10070_0">+100 de defesa de Zuo Yun durante o uso de &lt;Fúria&gt;</String>
+  <String Key="Potential_10070_0">Durante &lt;Fúria&gt;, Alcance de Zuo Yun +1</String>
   <String Key="Potential_10070_1">+40% absorção física/de feitiço de Zuo Yun durante o uso de &lt;Fúria&gt;</String>
   <String Key="Potential_10070_2">+1 ataque ao infligir dano normal no mesmo inimigo 40 vezes (não se acumula)
 O aumento é redefinido se infligir dano normal em outro inimigo</String>
@@ -14582,9 +14579,9 @@ Concede a provação “Extinção” que impede o uso de habilidades ao falhar 
   <String Key="GachaName_1083">Eremitas</String>
   <String Key="InventoryItemName_700">Pedra Alquímica</String>
   <String Key="InventoryItemDesc_700">Material de alquimia obtido através da Equipe de Inspeção. Você pode usá-lo na Oficina de Alquimia para obter várias recompensas.</String>
-  <String Key="TerritoryTradeShopDesc">Os itens da Loja Comercial são &lt;color=#ffd264&gt;decididos conforme o nível da loja&lt;/color&gt;.
-Os itens da Loja Comercial de Nv. 4 ou inferior são &lt;color=#ffd264&gt;redefinidos toda semana&lt;/color&gt; e
-os itens da Loja Comercial de Nv. 5 ou superior são &lt;color=#ffd264&gt;redefinidos a cada duas semanas&lt;/color&gt;.</String>
+  <String Key="TerritoryTradeShopDesc">Os produtos da Loja Comercial são &lt;color=#ffd264&gt;determinados pelo Nível da Loja Comercial&lt;/color&gt;.
+Os produtos da Loja Comercial de Nível 2~3 são &lt;color=#ffd264&gt;reiniciados toda semana&lt;/color&gt;
+e os produtos da Loja Comercial de Nível 4 ou superior são &lt;color=#ffd264&gt;reiniciados a cada 2 semanas&lt;/color&gt;.</String>
   <String Key="ChangeAccessorySubStat">Alteração de Atributo Secundário</String>
   <String Key="ChangeAccessorySubStatDesc_0">Selecione o acessório para alterar o atributo secundário.</String>
   <String Key="ChangeAccessorySubStatDesc_1">Selecione o atributo secundário que deseja alterar.</String>
@@ -16556,7 +16553,8 @@ A Amplificação de Habilidade dos Amigos aumenta em {6}% da Defesa de Feitiço 
   <String Key="NewUnitGachaInfo">Você pode Obter 1 Herói que não possui.
 A taxa é igual para todos os Heróis que não possui.</String>
   <String Key="InventoryItemName_5603">Baú de Seleção de Tesouro Especial</String>
-  <String Key="RewardBoxInventoryDesc_5603">Baú que permite selecionar e obter 1 Tesouro Especial.</String>
+  <String Key="RewardBoxInventoryDesc_5603">Selecione um Tesouro Especial para obtê-lo.
+(Tesouros por tempo limitado excluídos)</String>
   <String Key="GachaDesc_PickUpResetAlert">Há um Herói que não pode ser selecionado, então a seleção foi redefinida automaticamente.</String>
   <String Key="UnitName_10780">Neria</String>
   <String Key="UnitSubName_10780">Vingadora da Loucura</String>
@@ -16949,8 +16947,7 @@ Dano Crítico Físico de até +{5}% conforme a duração restante
   <String Key="Name_Overcome_2">Melhorar Habilidade de Início de Batalha</String>
   <String Key="Name_Overcome_3">Melhorar Traço</String>
   <String Key="Name_Overcome_4">Melhorar Habilidade</String>
-  <String Key="InventoryItemDesc_70000">Um pergaminho de Evocação envolto por uma aura misteriosa.
-Permite fazer 1 Evocação Dimensional.</String>
+  <String Key="InventoryItemDesc_70000">Um Pergaminho de Evocação com uma aura mística.</String>
   <String Key="InventoryItemDesc_10000">Um pequeno núcleo condensado com o poder de outra dimensão.
 Pode ser trocado por vários itens na Loja Dimensional.</String>
   <String Key="InventoryItemName_10000">Núcleo Dimensional</String>
@@ -17016,8 +17013,7 @@ Ataques básicos de todos os aliados: obtenção de recursos +{0}%</String>
   <String Key="SpecialPackage_1666">Pacote de Tempester</String>
   <String Key="SpecialShop_TreasureDoublePickUp10013">Loja Especial de Tesouro</String>
   <String Key="ShopItemName_70000">Pergaminho dimensional de Evocação de Heróis</String>
-  <String Key="ShopItemDesc_70000">Um pergaminho de evocação com uma aura misteriosa.
-Permite realizar 1 Evocação Dimensional.</String>
+  <String Key="ShopItemDesc_70000">Um Pergaminho de Evocação com uma aura mística.</String>
   <String Key="RewardBoxInventoryDesc_7100">Você pode obter itens conforme as probabilidades definidas.</String>
   <String Key="DimensionHeroAttendanceEventTitle">Evento de Login Comemorativo do Herói Dimensional</String>
   <String Key="ReservedText">Reservado</String>
@@ -18247,9 +18243,234 @@ Skin do Festival da Lua da Colheita 2026</String>
   <String Key="SkinName_1074001">Senhor Estelar ao Luar Suha</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Coelhos Lunares! Vocês sabem que não podem aprontar muito só porque desceram depois de um ano, certo? Divirtam-se, todos!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Ofertas do Festival da Lua da Colheita</String>
+  <String Key="SeasonalEventNumberFormat">Evento da temporada {0}</String>
+  <String Key="SeasonalEvent">Evento de temporada</String>
+  <String Key="SeasonalEventCeilFormat">Pickup da temporada {0}</String>
+  <String Key="SeasonalEventName_Season74">Arena do Vento</String>
+  <String Key="SeasonalEventDesc_Season74">Decidido em uma única batalha!</String>
+  <String Key="UniversalEventText">EVENT</String>
+  <String Key="SingleArenaNeedAdForReroll">Assista a um anúncio para redefinir o oponente.</String>
+  <String Key="SingleArena_ApFormat">AP {0}</String>
+  <String Key="SingleArena_AttackDeck">Tropa de ataque</String>
+  <String Key="SingleArena_AttackDeckSet">Formar Tropa de ataque</String>
+  <String Key="SingleArena_AttackSelect_Desc">Você pode usar sua Tropa de ataque atual ou verificar a Tropa inimiga e formar uma nova.
+
+Se usar a Tropa de ataque atual, você pode entrar em batalha na hora. Se formar uma nova, deverá configurar tudo outra vez a partir da seleção de Heróis. (Você pode reformar sua Tropa de ataque até 5 vezes por dia.)
+
+Escolha um método de ataque.</String>
+  <String Key="SingleArena_AttackSelect_Title">Selecionar Tropa de ataque</String>
+  <String Key="SingleArena_CompleteDeck">Formação completa</String>
+  <String Key="SingleArena_DefenseDeck">Tropa de defesa</String>
+  <String Key="SingleArena_DefenseDeckSet">Formar Tropa de defesa</String>
+  <String Key="SingleArena_EnemyDeckPreview">Ver Tropa inimiga</String>
+  <String Key="SingleArena_FinalAttackSelect_Desc">Deseja salvar a Tropa de ataque recém-formada como sua nova Tropa de ataque e entrar em batalha?
+
+Se usar a Tropa de ataque atual, a nova Tropa de ataque será apagada automaticamente.</String>
+  <String Key="SingleArena_FinalDeckSelect_Desc">Selecione a Tropa que deseja usar.</String>
+  <String Key="SingleArena_FinalDeckSelect_Title">Seleção final de Tropa</String>
+  <String Key="SingleArena_FirstDeckSetAlert">Só na 1ª vez, a Tropa de defesa e a Tropa de ataque serão salvas ao mesmo tempo.
+Depois, você poderá formá-las separadamente.</String>
+  <String Key="SingleArena_Intro_Desc1">Na Arena do Vento, uma única partida decide a vitória ou a derrota.</String>
+  <String Key="SingleArena_Intro_Desc2">Você usa duas Tropas no total: uma Tropa de ataque e uma Tropa de defesa.</String>
+  <String Key="SingleArena_Intro_Desc3">A Tropa de ataque é usada para verificar e atacar a Tropa de defesa inimiga.</String>
+  <String Key="SingleArena_Intro_Desc4">A Tropa de defesa é usada para bloquear ataques inimigos. Se sua defesa falhar, você perderá pontos de Vitória. (Os pontos de Vitória podem ser perdidos até 3 vezes por dia.)</String>
+  <String Key="SingleArena_Intro_Desc5">Sua primeira formação de Tropa ficará fixa, mas depois você poderá formar suas Tropas livremente.</String>
+  <String Key="SingleArena_Intro_Desc6">Mesmo que você mude sua Tropa de ataque depois de verificar a Tropa de defesa inimiga, a Tropa inimiga não mudará.</String>
+  <String Key="SingleArena_Intro_Desc7">Forme suas Tropas livremente de acordo com o inimigo e conquiste a vitória!</String>
+  <String Key="SingleArena_LeftGameAlertFormat">Uma batalha não concluída foi contada como derrota. ({0} pontos)</String>
+  <String Key="SingleArena_Log_Attack">Ataque</String>
+  <String Key="SingleArena_Log_Def">Defesa</String>
+  <String Key="SingleArena_Log_Empty">Não há registros.</String>
+  <String Key="SingleArena_MissionCondFormat">Ataques totais {0}</String>
+  <String Key="SingleArena_NeedDeck">Forme primeiro sua Tropa de ataque e sua Tropa de defesa.</String>
+  <String Key="SingleArena_NeedFieldUnit">Não há Heróis posicionados.</String>
+  <String Key="SingleArena_NewAttackDeck">Nova Tropa de ataque</String>
+  <String Key="SingleArena_NewDefenseDeck">Nova Tropa de defesa</String>
+  <String Key="SingleArena_NoMoreDeckChange">Você não pode mais mudar sua Tropa hoje.</String>
+  <String Key="SingleArena_OldAttackDeck">Tropa de ataque atual</String>
+  <String Key="SingleArena_OldDefenseDeck">Tropa de defesa atual</String>
+  <String Key="SingleArena_RankNotReached">Este grau ainda não foi alcançado.</String>
+  <String Key="SingleArena_RankingPanelTitle">Classificação da Arena do Vento</String>
+  <String Key="SingleArena_RankingReward_Desc">Obtenha recompensas com base na sua classificação final ao fim da temporada.</String>
+  <String Key="SingleArena_RankingTop">Top 300</String>
+  <String Key="SingleArena_RecordFormat">Ataque {0} vitórias {1} derrotas / Defesa {2} vitórias {3} derrotas</String>
+  <String Key="SingleArena_ReformAttackDeck">Reformar Tropa de ataque</String>
+  <String Key="SingleArena_RemainAttackFormat">Ataques restantes {0}/{1}</String>
+  <String Key="SingleArena_RerollRemainFormat">Trocar oponente {0}/{1}</String>
+  <String Key="SingleArena_RetreatWarning">Se recuar, a Formação da Arena será cancelada. (Se estiver formando separadamente, seu número diário de mudanças será usado.)</String>
+  <String Key="SingleArena_Search">Buscar oponente</String>
+  <String Key="SingleArena_SelectTargetFirst">Selecione primeiro um oponente.</String>
+  <String Key="SingleArena_StagePreviewDesc">Você pode ver com antecedência a formação das duas Tropas.</String>
+  <String Key="SingleArena_StagePreviewTitle">Informações de formação</String>
+  <String Key="SingleArena_Title">Arena do Vento</String>
+  <String Key="SingleArena_UseAttackDeck">Usar Tropa de ataque</String>
+  <String Key="SingleArena_UseNewDeck">Usar nova Tropa</String>
+  <String Key="SingleArena_UseOldDeck">Usar Tropa existente</String>
+  <String Key="SingleArena_RankingRewardPanel_Title">Recompensas da Classificação da Arena do Vento</String>
+  <String Key="SingleArena_RankingRewardPanel_Desc">As recompensas são dadas com base na classificação ao fim da temporada.
+Para entrar no Top 300 da classificação, você precisa alcançar pelo menos o Grau Real.</String>
+  <String Key="SingleArena_MatchHistory">Histórico da Arena do Vento</String>
+  <String Key="SeasonalEventOperationFormat">{0} estará disponível durante o evento da Temporada {1}, sem divisão entre primeira e segunda metade.
+
+Tempo restante : {2}</String>
+  <String Key="MissionDesc_SingleArena_Attack">Jogue na Arena do Vento {0} vezes</String>
+  <String Key="SingleArena_Mission">Missões da Arena do Vento</String>
+  <String Key="SixthYearDailyAttendanceEvent">Evento de login comemorativo do &lt;color=#ffd264&gt;6º aniversário&lt;/color&gt;</String>
+  <String Key="SeasonalEvent_ButtonName_Rift">Fenda</String>
+  <String Key="SeasonalEvent_ButtonName_Arena">Arena</String>
+  <String Key="SeasonalEvent_ButtonName_Battlefield">Campos de Batalha</String>
+  <String Key="IncarnationUnit">Herói Transcendente</String>
+  <String Key="Passive">Passiva</String>
+  <String Key="UltimateSkill">Habilidade Suprema</String>
+  <String Key="SingleStackBuff">Buff de Acúmulo Único</String>
+  <String Key="SingleStackBuff_Desc">Quando o mesmo buff é acumulado, a contagem de Acúmulo aumenta em um único buff. Quando o Acúmulo aumenta, a duração do buff é redefinida para o máximo.</String>
+  <String Key="PassiveSkillHelp_0">As habilidades Passivas são aplicadas automaticamente em Batalha conforme as condições.</String>
+  <String Key="PassiveSkillHelp_1">Não há mudanças conforme a ★ do Herói em batalha.</String>
+  <String Key="PassiveSkillHelp_2">Os valores exibidos podem ser melhorados com a Ascensão do Herói.</String>
+  <String Key="UltimateMeterFormat">Medidor de Habilidade Suprema {0}/{1}</String>
+  <String Key="UltimateSkillHelp_0">O poder da Habilidade Suprema aumenta conforme a ★ do Herói em batalha.</String>
+  <String Key="UltimateSkillHelp_1">Os valores exibidos podem ser melhorados com a Ascensão do Herói.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_0">Na Evocação de Heróis, se você evocar novamente um Herói Transcendente que já possui, poderá fazer Ascensão.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_1">A Ascensão é possível até 5 vezes.</String>
+  <String Key="AddAttackCountEveryFourthNormalAttackFormat">A cada 4 ataques normais: Número de ataques +1, dano de ataque adicional {0}</String>
+  <String Key="SkillName_10820">Rera-at-katu</String>
+  <String Key="SkillDesc_10820_Short">Após {ChannelingTime}s de Concentração, dispara uma flecha de Vento que atravessa os Campos de Batalha e causa Dano de Habilidade Física igual a {Damage:AtkPer:BaseValue}% do Ataque a todos os inimigos em sua trajetória 1X1.</String>
+  <String Key="SkillDesc_10820_Long">Yhoundeh marca a posição de um Herói inimigo, reúne o poder do Vento por {ChannelingTime}s e então dispara uma flecha de Vento em direção à posição marcada, atravessando os Campos de Batalha e causando Dano de Habilidade Física igual a {Damage:AtkPer:BaseValue}% do Ataque a todos os inimigos em sua trajetória 1X1. Ao usar habilidade: barra de Habilidade Suprema +1.</String>
+  <String Key="SkillDesc_10820_Short_2">Após {ChannelingTime}s de Concentração, dispara uma flecha de Vento que atravessa os Campos de Batalha e causa Dano de Habilidade Física igual a {Damage:AtkPer:BaseValue}% do Ataque a todos os inimigos em sua trajetória 1X1.</String>
+  <String Key="SkillDesc_10820_Long_2">Yhoundeh marca a posição de um Herói inimigo, reúne o poder do Vento por {ChannelingTime}s e então dispara uma flecha de Vento em direção à posição marcada, atravessando os Campos de Batalha e causando Dano de Habilidade Física igual a {Damage:AtkPer:BaseValue}% do Ataque a todos os inimigos em sua trajetória 1X1. Ao usar habilidade: Acúmulo de Kar +5 e barra de Habilidade Suprema +1.</String>
+  <String Key="PassiveSkillName_10820">Rera kar</String>
+  <String Key="PassiveSkillDesc_10820_Short">Ao realizar ataque normal, Acúmulo de Kar +1. Máx. {10820@Unit10820AI_FocusMaxStack}. Velocidade de ataque +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o alvo do ataque normal mudar, redefine os Acúmulos para 0 e depois +1.</String>
+  <String Key="PassiveSkillDesc_10820_Long">Ao realizar ataque normal, ganha 1 Acúmulo de Kar. Pode acumular até {10820@Unit10820AI_FocusMaxStack}, e a Velocidade de ataque aumenta +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o ataque normal atingir um alvo diferente do anterior, os Acúmulos de Kar são redefinidos para 0 e depois ganha 1 Acúmulo.</String>
+  <String Key="PassiveSkillDesc_10820_Short_1">Ao realizar ataque normal, Acúmulo de Kar +1. Máx. {10820@Unit10820AI_FocusMaxStack}. Velocidade de ataque +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o alvo do ataque normal mudar, redefine os Acúmulos e depois +1. Mantém no mínimo 10 Acúmulos.</String>
+  <String Key="PassiveSkillDesc_10820_Long_1">Ao realizar ataque normal, ganha 1 Acúmulo de Kar. Pode acumular até {10820@Unit10820AI_FocusMaxStack}, e a Velocidade de ataque aumenta +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o ataque normal atingir um alvo diferente do anterior, os Acúmulos de Kar são redefinidos e depois ganha 1 Acúmulo. Os Acúmulos de Kar são mantidos em no mínimo 10.</String>
+  <String Key="PassiveSkillDesc_10820_Short_2">Ao realizar ataque normal, Acúmulo de Kar +1. Máx. {10820@Unit10820AI_FocusMaxStack}. Velocidade de ataque +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o alvo do ataque normal mudar, redefine os Acúmulos e depois +1. Mantém no mínimo 10 Acúmulos. Ao usar habilidade ou Habilidade Suprema: Acúmulos de Kar +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_2">Ao realizar ataque normal, ganha 1 Acúmulo de Kar. Pode acumular até {10820@Unit10820AI_FocusMaxStack}, e a Velocidade de ataque aumenta +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o ataque normal atingir um alvo diferente do anterior, os Acúmulos de Kar são redefinidos e depois ganha 1 Acúmulo. Os Acúmulos de Kar são mantidos em no mínimo 10. Ao usar habilidade ou Habilidade Suprema, ganha 5 Acúmulos de Kar.</String>
+  <String Key="PassiveSkillDesc_10820_Short_3">Ao realizar ataque normal, Acúmulo de Kar +1. Máx. {10820@Unit10820AI_FocusMaxStack}. Velocidade de ataque +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o alvo do ataque normal mudar, redefine os Acúmulos e depois +1. Mantém no mínimo 10 Acúmulos. Ao usar habilidade ou Habilidade Suprema: Acúmulos de Kar +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_3">Ao realizar ataque normal, ganha 1 Acúmulo de Kar. Pode acumular até {10820@Unit10820AI_FocusMaxStack}, e a Velocidade de ataque aumenta +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o ataque normal atingir um alvo diferente do anterior, os Acúmulos de Kar são redefinidos e depois ganha 1 Acúmulo. Os Acúmulos de Kar são mantidos em no mínimo 10. Ao usar habilidade ou Habilidade Suprema, ganha 5 Acúmulos de Kar.</String>
+  <String Key="PassiveSkillDesc_10820_Short_4">Ao realizar ataque normal, Acúmulo de Kar +1. Máx. {10820@Unit10820AI_FocusMaxStack}(+30 do padrão). Velocidade de ataque +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o alvo do ataque normal mudar, redefine os Acúmulos e depois +1. Mantém no mínimo 10 Acúmulos. Ao usar habilidade ou Habilidade Suprema: Acúmulos de Kar +5. Com Acúmulos máximos, o ataque normal sempre é Crítico.</String>
+  <String Key="PassiveSkillDesc_10820_Long_4">Ao realizar ataque normal, ganha 1 Acúmulo de Kar. Pode acumular até {10820@Unit10820AI_FocusMaxStack}(+30 do máximo padrão), e a Velocidade de ataque aumenta +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o ataque normal atingir um alvo diferente do anterior, os Acúmulos de Kar são redefinidos e depois ganha 1 Acúmulo. Os Acúmulos de Kar são mantidos em no mínimo 10. Ao usar habilidade ou Habilidade Suprema, ganha 5 Acúmulos de Kar. Com Acúmulos máximos de Kar, o ataque normal sempre é Crítico.</String>
+  <String Key="PassiveSkillDesc_10820_Short_5">Ao realizar ataque normal, Acúmulo de Kar +1. Máx. {10820@Unit10820AI_FocusMaxStack}(+30 do padrão). Velocidade de ataque +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o alvo do ataque normal mudar, redefine os Acúmulos e depois +1. Mantém no mínimo 10 Acúmulos. Ao usar habilidade ou Habilidade Suprema: Acúmulos de Kar +5. Com Acúmulos máximos, o ataque normal sempre é Crítico. Ao derrotar um inimigo, os Acúmulos de Kar são mantidos para o próximo alvo.</String>
+  <String Key="PassiveSkillDesc_10820_Long_5">Ao realizar ataque normal, ganha 1 Acúmulo de Kar. Pode acumular até {10820@Unit10820AI_FocusMaxStack}(+30 do máximo padrão), e a Velocidade de ataque aumenta +{10820@Unit10820AI_FocusAttackSpeedPer}% por Acúmulo. Se o ataque normal atingir um alvo diferente do anterior, os Acúmulos de Kar são redefinidos e depois ganha 1 Acúmulo. Os Acúmulos de Kar são mantidos em no mínimo 10. Ao usar habilidade ou Habilidade Suprema, ganha 5 Acúmulos de Kar. Com Acúmulos máximos de Kar, o ataque normal sempre é Crítico. Ao derrotar um inimigo, os Acúmulos de Kar são mantidos para o próximo alvo.</String>
+  <String Key="UltimateSkillName_10820">Rera epunkine</String>
+  <String Key="UltimateSkillDesc_10820_Short">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s.</String>
+  <String Key="UltimateSkillDesc_10820_Long">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações.</String>
+  <String Key="UltimateSkillDesc_10821_Short">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s.</String>
+  <String Key="UltimateSkillDesc_10821_Long">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações.</String>
+  <String Key="UltimateSkillDesc_10822_Short">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s.</String>
+  <String Key="UltimateSkillDesc_10822_Long">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações.</String>
+  <String Key="UltimateSkillDesc_10823_Short">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s. No início da Batalha, Medidor da Habilidade Suprema +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações. No início da Batalha, o Medidor da Habilidade Suprema aumenta em {AddBattleStartUltimateGauge}.</String>
+  <String Key="UltimateSkillDesc_10820_Short_2">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s.</String>
+  <String Key="UltimateSkillDesc_10820_Long_2">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações.</String>
+  <String Key="UltimateSkillDesc_10821_Short_2">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s.</String>
+  <String Key="UltimateSkillDesc_10821_Long_2">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações.</String>
+  <String Key="UltimateSkillDesc_10822_Short_2">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s.</String>
+  <String Key="UltimateSkillDesc_10822_Long_2">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações.</String>
+  <String Key="UltimateSkillDesc_10823_Short_2">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s. No início da Batalha, Medidor da Habilidade Suprema +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_2">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações. No início da Batalha, o Medidor da Habilidade Suprema aumenta em {AddBattleStartUltimateGauge}.</String>
+  <String Key="UltimateSkillDesc_10820_Short_3">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao derrotar um inimigo, a duração é reiniciada.</String>
+  <String Key="UltimateSkillDesc_10820_Long_3">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Se derrotar um inimigo durante a Habilidade Suprema, a duração é reiniciada. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações.</String>
+  <String Key="UltimateSkillDesc_10821_Short_3">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao derrotar um inimigo, a duração é reiniciada.</String>
+  <String Key="UltimateSkillDesc_10821_Long_3">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Se derrotar um inimigo durante a Habilidade Suprema, a duração é reiniciada. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações.</String>
+  <String Key="UltimateSkillDesc_10822_Short_3">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao derrotar um inimigo, a duração é reiniciada.</String>
+  <String Key="UltimateSkillDesc_10822_Long_3">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Se derrotar um inimigo durante a Habilidade Suprema, a duração é reiniciada. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações.</String>
+  <String Key="UltimateSkillDesc_10823_Short_3">Yhoundeh sobe aos céus e dispara flechas contra um inimigo por {Time} s. Ao derrotar um inimigo, a duração é reiniciada. No início da Batalha, Medidor da Habilidade Suprema +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_3">Yhoundeh deixa o Campo de Batalha, sobe aos céus e dispara flechas contra um inimigo por {Time} s. Se derrotar um inimigo durante a Habilidade Suprema, a duração é reiniciada. Ao usar a Habilidade Suprema, remove todos os efeitos de status, Vínculos e ligações. No início da Batalha, o Medidor da Habilidade Suprema aumenta em {AddBattleStartUltimateGauge}.</String>
+  <String Key="Name_Overcome_10820_0">Rera Aye</String>
+  <String Key="Overcome_10820_0">Os Acúmulos de Kar são mantidos em no mínimo 10</String>
+  <String Key="Name_Overcome_10820_1">Rera Nisor</String>
+  <String Key="Overcome_10820_1">Ao usar habilidade ou Habilidade Suprema, ganha 5 Acúmulos de Kar</String>
+  <String Key="Name_Overcome_10820_2">Kamuy Epunkine</String>
+  <String Key="Overcome_10820_2">Ao derrotar um inimigo durante Rera epunkine, a duração de Rera epunkine é reiniciada</String>
+  <String Key="Name_Overcome_10820_3">Yupke Rera</String>
+  <String Key="Overcome_10820_3">Máx. de Acúmulos de Kar +30. Com Acúmulos de Kar no máximo, os ataques normais contra o alvo sempre são Críticos</String>
+  <String Key="Name_Overcome_10820_4">Rera Kanto</String>
+  <String Key="Overcome_10820_4">Ao derrotar um inimigo, os Acúmulos de Kar são mantidos para o próximo alvo</String>
+  <String Key="IncarnationUnitSummon">Evocação de Heróis de Transcendência</String>
+  <String Key="UnitGachaHighCountFormat">Após &lt;color=#FFD247&gt;{0}&lt;/color&gt; evocações, &lt;color=#FFD247&gt;um Herói Transcendente/Dimensional é garantido&lt;/color&gt;</String>
   <String Key="UnitGachaPickupCountFormat">Após &lt;color=#FFD247&gt;{0}&lt;/color&gt; Evocações, &lt;color=#FFD247&gt;Herói Pickup garantido&lt;/color&gt;</String>
+  <String Key="GachaNewIncarnationUnitPer">Herói Transcendente aparece!</String>
+  <String Key="IncarnationUnitPickupGachaDesc">A partir da 81ª evocação, a chance de aparecer um Herói de Transcendência/Herói Dimensional aumenta em 5% a cada evocação.
+Quando um Herói de Transcendência/Herói Dimensional aparece, a contagem da evocação garantida é reiniciada.
+Se você evocar um Herói de Transcendência/Herói Dimensional que não seja o Herói em destaque, na próxima vez que obtiver um Herói de Transcendência/Herói Dimensional, será garantido que ele será o Herói em destaque.
+Se você evocar o mesmo Herói de Transcendência com Ascensão máxima, obtém 10 Bilhetes de Evocação de Herói Dimensional no lugar.</String>
+  <String Key="Premium">Premium</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumButton">2x Recompensas! 20x Eficiência!</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_0">Se comprar o Login Premium, você poderá obter todas as recompensas em 2x.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_1">Se comprar o Login Premium, as recompensas que você já obteve também serão dadas em 2x.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_2">O Login Premium não pode ser reembolsado.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumApplied">2x Recompensas Ativas!</String>
+  <String Key="SeasonalEventMode_Season74">Arena do Vento</String>
+  <String Key="SpecialDamageMulFormat">Dano Especial +{0}%</String>
+  <String Key="FlagsName_60000">Bandeira da Arena do Vento</String>
+  <String Key="FlagsDesc_60000">A bandeira daqueles que provaram seu valor na Arena do Vento</String>
+  <String Key="FlagsName_60010">Bandeira da Encarnação do Vento</String>
+  <String Key="FlagsDesc_60010">Uma bandeira que deseja a chegada da 'Encarnação do Vento' e da 'Vitória Prometida'</String>
   <String Key="PlayReward_Semi1">Recompensa da 1ª metade</String>
   <String Key="PlayReward_Semi2">Recompensa da 2ª metade</String>
   <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; Partidas</String>
+  <String Key="SpecialPackage_1699">Pacote de Juramento</String>
+  <String Key="SpecialPackage_1700">Pacote de Chuva de Fogo</String>
+  <String Key="InventoryItemName_5605">Baú de Seleção de Skin do King God Pass</String>
+  <String Key="SeasonPassScheduledHeroTitle_74">Obter Herói Transcendente &lt;color=#D8B4FF&gt;Yhoundeh&lt;/color&gt;</String>
+  <String Key="SeasonPassScheduledHeroBenefit">Novo Herói de Presente</String>
+  <String Key="InventoryItemName_SSGuaranteedSetFormat">SS Aleatório {0}</String>
+  <String Key="InventoryItemName_SSGuaranteedBoxFormat">SS Aleatório {0}</String>
+  <String Key="InventoryItemDesc_SSGuaranteedBoxFormat">Obter um Baú de seleção com um Acessório Especial SS aleatório do Conjunto selecionado.</String>
+  <String Key="InventoryItemDesc_SSGuaranteedSetFormat">Obtenha o Acessório selecionado. 1 Atributo Secundário aleatório será de Grau SS.</String>
+  <String Key="AlreadyHaveFlag">Não foi recebido porque você já possui a bandeira.</String>
+  <String Key="SeasonPassScheduledHeroInfo_74">Se já possui o Herói: Ascensão do Herói +1
+Se o Herói estiver na Ascensão máxima, recebe &lt;color=#ffd264&gt;10 Pergaminhos de Evocação de Herói Dimensional&lt;/color&gt; em vez disso</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_Class">&lt;{0}&gt; {1}</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_ThreeClasses">&lt;{0}&gt; &lt;{1}&gt; &lt;{2}&gt; {3}</String>
+  <String Key="Post_Title_6thAnniversaryGift">Presente especial de 6º aniversário</String>
+  <String Key="KingsTreasureSelectiveSummon">Evocação Seletiva do Tesouro Real</String>
   <String Key="BlessedTreasure">Tesouro Abençoado</String>
+  <String Key="TreasureCustomPickupTitle">Evocação de Tesouro Abençoado</String>
+  <String Key="UnitName_10820">Yhoundeh</String>
+  <String Key="UnitSubName_10820_1">Antes, também era conhecida como Han Shi.</String>
+  <String Key="UnitSubName_10820">Guardião do Vento</String>
+  <String Key="SkinDesc_Default_10820">No pequeno vilarejo do Leste, nasceu uma guardiã de natureza calma
+que deu tudo para proteger as pessoas.
+
+A flecha que domina o céu não queima mais a terra,
+apenas se tornou a mestra do vento sem fim.
+
+Enquanto ela proteger o vilarejo,
+nenhum ser de fora poderá quebrar sua paz.
+.
+.
+.
+.
+.
+.</String>
+  <String Key="IncarnationUnit_10820">Catástrofe</String>
+  <String Key="Introduce_10820">Registro de um sobrevivente</String>
+  <String Key="SkinDesc_Default_10820_1">No verão passado, um vento frio começou a soprar.
+Uma névoa de gelo, como fumaça, cobriu tudo ao redor,
+e um pó branco e frio cobriu telhados, campos e folhas.
+As plantas congelaram, e os frutos caíram no chão sem manter a forma.
+
+Como o vento não parava, madeira e pedra se desgastaram e começaram a ruir.
+O fogo se espalhou mais rápido do que podíamos conter, e perdemos o controle das chamas.
+As ondas cresceram sem fim e, como não podíamos resistir, perdemos o mar.
+Não há como fugir do frio cortante, nem como barrar o vento como lâminas.
+Por isso, nenhum monstro pode se aproximar.
+
+Ganhamos a paz.
+Perdemos o futuro.
+Tudo o que nos restou foi sermos engolidos, congelados, pelo vento sem fim…</String>
+  <String Key="InventoryItemDesc_SelectableTreasureBox">Baú que permite selecionar e obter um Tesouro Especial disponível na Evocação permanente.
+ Ao usar, você pode selecionar uma recompensa da lista de itens.</String>
+  <String Key="IncarnationUnitPickupSummon">Evocação de Heróis de Transcendência</String>
+  <String Key="GachaPickupDescFormat">Você pode obter um Herói Transcendente.</String>
+  <String Key="IncarnationUnitMaxOvercomeConvertedTicket">Foi evocado um Herói com Ascensão máxima. Você obteve 10 Pergaminhos de Evocação de Herói Dimensional.</String>
+  <String Key="SpecialTreasureSelectTitle">Evocação Seletiva de Tesouro Especial</String>
+  <String Key="SpecialTreasureSelectDesc">Escolha 1 Tesouro Especial entre os Tesouros que podem aparecer na Evocação Permanente de Tesouros e obtenha-o.
+Toque no botão de compra para ver a lista de Tesouros disponíveis.</String>
+  <String Key="SkinDesc_Default_10820_Simple">A flecha que domina o céu não queima mais a terra,
+apenas se tornou a mestra do vento sem fim.</String>
+  <String Key="LoginSkinName_10020">Tela de Login do 6º Aniversário</String>
+  <String Key="LoginSkinDesc_10020">Tela de Login do 6º Aniversário</String>
+  <String Key="ObtainableBySummoningIncarnationUnit">Pode ser obtido ao invocar um Herói Transcendente</String>
 </Strings>

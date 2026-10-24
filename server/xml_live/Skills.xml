@@ -4427,7 +4427,7 @@
 		<RangeY>1</RangeY>
 		<SplashRangeFrom>Self</SplashRangeFrom>
 		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>2</SplashRangeSum>
+		<SplashRangeSum>3</SplashRangeSum>
 		
 		<Damage>25</Damage>
 		<MAtkPer Target="Damage">250</MAtkPer>
@@ -4446,6 +4446,9 @@
 
 		<Effect Type='Shoot'>
 			<Prefab>Fx_10260e</Prefab>
+			<LevelScale>false</LevelScale>
+            <ScaleX>1.1</ScaleX>
+            <ScaleY>1.1</ScaleY>
 			<RotationType>DirBlend</RotationType>
 			<World>true</World>
 			<ZLevel>OverUI</ZLevel>
@@ -4464,8 +4467,6 @@
 		<ShortDesc>SkillDesc_10266_Short</ShortDesc>
 
 		<Tier>2</Tier>
-		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>3</SplashRangeSum>
 		<Damage>45</Damage>
 		<MAtkPer Target="Damage">300</MAtkPer>
 		<ComboSkill>10261</ComboSkill>
@@ -4477,8 +4478,6 @@
 		<LongDesc>SkillDesc_10266_Long</LongDesc>
 		<ShortDesc>SkillDesc_10266_Short</ShortDesc>
 
-		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>4</SplashRangeSum>
 		<Damage>70</Damage>
 		<MAtkPer Target="Damage">350</MAtkPer>
 		<ComboSkill>10262</ComboSkill>
@@ -4490,8 +4489,6 @@
 		<ShortDesc>SkillDesc_10266_Short</ShortDesc>
 
 		<Tier>4</Tier>
-		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>5</SplashRangeSum>
 		<Damage>100</Damage>
 		<MAtkPer Target="Damage">400</MAtkPer>
 		<ComboSkill>10263</ComboSkill>
@@ -4514,7 +4511,7 @@
 		<RangeY>1</RangeY>
 		<SplashRangeFrom>Self</SplashRangeFrom>
 		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>2</SplashRangeSum>
+		<SplashRangeSum>3</SplashRangeSum>
 
 		<Damage>30</Damage>
 		<MAtkPer Target="Damage">300</MAtkPer>
@@ -4533,6 +4530,9 @@
 
 		<Effect Type='Shoot'>
 			<Prefab>Fx_10260e</Prefab>
+			<LevelScale>false</LevelScale>
+            <ScaleX>1.1</ScaleX>
+            <ScaleY>1.1</ScaleY>
 			<RotationType>DirBlend</RotationType>
 			<World>true</World>
 			<ZLevel>OverUI</ZLevel>
@@ -4551,8 +4551,6 @@
 		<ShortDesc>SkillDesc_10266_Short</ShortDesc>
 
 		<Tier>2</Tier>
-		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>3</SplashRangeSum>
 		<Damage>54</Damage>
 		<MAtkPer Target="Damage">360</MAtkPer>
 		<ComboSkill>10261</ComboSkill>
@@ -4564,8 +4562,6 @@
 		<LongDesc>SkillDesc_10266_Long</LongDesc>
 		<ShortDesc>SkillDesc_10266_Short</ShortDesc>
 
-		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>4</SplashRangeSum>
 		<Damage>84</Damage>
 		<MAtkPer Target="Damage">420</MAtkPer>
 		<ComboSkill>10262</ComboSkill>
@@ -4577,8 +4573,6 @@
 		<ShortDesc>SkillDesc_10266_Short</ShortDesc>
 
 		<Tier>4</Tier>
-		<SplashRangeType>Sum</SplashRangeType>
-		<SplashRangeSum>5</SplashRangeSum>
 		<Damage>120</Damage>
 		<MAtkPer Target="Damage">480</MAtkPer>
 		<ComboSkill>10263</ComboSkill>
@@ -5701,7 +5695,7 @@
 		<MoveDistance>3</MoveDistance>
 		<AttackCount>4</AttackCount>
 		<AttackDelay>0.065</AttackDelay>
-		<ChangeSkillTrigger Target="10326">TargetIsNotInBuffRange</ChangeSkillTrigger>
+		<ChangeSkillTrigger Target="10326" OverrideParentTrigger="true">TargetIsNotInBuffRange</ChangeSkillTrigger>
 		<Damage>0</Damage>
 		<AtkPer Target="Damage">100</AtkPer>
 	</Skill>
@@ -5711,7 +5705,7 @@
 		<MoveDistance>3</MoveDistance>
 		<AttackCount>4</AttackCount>
 		<AttackDelay>0.055</AttackDelay>
-		<ChangeSkillTrigger Target="10327">TargetIsNotInBuffRange</ChangeSkillTrigger>
+		<ChangeSkillTrigger Target="10327" OverrideParentTrigger="true">TargetIsNotInBuffRange</ChangeSkillTrigger>
 		<Damage>0</Damage>
 		<AtkPer Target="Damage">100</AtkPer>
 	</Skill>
@@ -5721,7 +5715,7 @@
 		<MoveDistance>3</MoveDistance>
 		<AttackCount>4</AttackCount>
 		<AttackDelay>0.045</AttackDelay>
-		<ChangeSkillTrigger Target="10328">TargetIsNotInBuffRange</ChangeSkillTrigger>
+		<ChangeSkillTrigger Target="10328" OverrideParentTrigger="true">TargetIsNotInBuffRange</ChangeSkillTrigger>
 		<Damage>0</Damage>
 		<AtkPer Target="Damage">100</AtkPer>
 	</Skill>
@@ -5815,39 +5809,83 @@
 	<Skill ID="103200" Inherit="10320">
 		<NameComment>티아 4렙특 근접한 적에게 스킬피해 n% 증가</NameComment>
 		<Damage>0</Damage>
-		<AtkPer Target="Damage">120</AtkPer>
+		<AtkPer Target="Damage">130</AtkPer>
+        <ChangeSkillTrigger Target="103205" OverrideParentTrigger="true">TargetIsNotInBuffRange</ChangeSkillTrigger>
 	</Skill>
 
 	<Skill ID="103201" Inherit="10320">
 		<Damage>0</Damage>
-		<AtkPer Target="Damage">120</AtkPer>
+		<AtkPer Target="Damage">130</AtkPer>
 		<Tier>2</Tier>
 		<AttackDelay>0.065</AttackDelay>
-		<ChangeSkillTrigger Target="10326">TargetIsNotInBuffRange</ChangeSkillTrigger>
+		<ChangeSkillTrigger Target="103206" OverrideParentTrigger="true">TargetIsNotInBuffRange</ChangeSkillTrigger>
 	</Skill>
 
 	<Skill ID="103202" Inherit="10320">
 		<Damage>0</Damage>
-		<AtkPer Target="Damage">120</AtkPer>
+		<AtkPer Target="Damage">130</AtkPer>
 		<Tier>3</Tier>
 		<AttackDelay>0.055</AttackDelay>
-		<ChangeSkillTrigger Target="10327">TargetIsNotInBuffRange</ChangeSkillTrigger>
+		<ChangeSkillTrigger Target="103207" OverrideParentTrigger="true">TargetIsNotInBuffRange</ChangeSkillTrigger>
 	</Skill>
 
 	<Skill ID="103203" Inherit="10320">
 		<Damage>0</Damage>
-		<AtkPer Target="Damage">120</AtkPer>
+		<AtkPer Target="Damage">130</AtkPer>
 		<Tier>4</Tier>
 		<AttackDelay>0.045</AttackDelay>
-		<ChangeSkillTrigger Target="10328">TargetIsNotInBuffRange</ChangeSkillTrigger>
+		<ChangeSkillTrigger Target="103208" OverrideParentTrigger="true">TargetIsNotInBuffRange</ChangeSkillTrigger>
 	</Skill>
-	
-	<!-- 8특용 더미 버프 -->
-	<Skill ID="103205">
-		<Time>-1</Time>
-		<MaxBuffOverlap>4</MaxBuffOverlap>
-		<RemoveBuffAtSkillStart>true</RemoveBuffAtSkillStart>
-	</Skill>
+
+    <Skill ID="103205" Inherit="10325">
+        <Tier>1</Tier>
+        <Damage>0</Damage>
+        <AtkPer Target="Damage">182</AtkPer> <!-- 140 * 1.3 -->
+        <AnimTrigger>SKILL</AnimTrigger>
+        <AnimTrigger>SKILL_2</AnimTrigger>
+        <BuffRangeType>Sum</BuffRangeType>
+        <BuffRangeSum>4</BuffRangeSum>
+        <ChangeSkillTrigger Target="10325">TargetIsNotInBuffRange</ChangeSkillTrigger>
+    </Skill>
+
+    <Skill ID="103206" Inherit="10325">
+        <Tier>2</Tier>
+        <Damage>0</Damage>
+        <AtkPer Target="Damage">208</AtkPer> <!-- 160 * 1.3 -->
+        <AttackCount>4</AttackCount>
+        <AttackDelay>0.065</AttackDelay>
+        <AnimTrigger>SKILL</AnimTrigger>
+        <AnimTrigger>SKILL_2</AnimTrigger>
+        <BuffRangeType>Sum</BuffRangeType>
+        <BuffRangeSum>4</BuffRangeSum>
+        <ChangeSkillTrigger Target="10326">TargetIsNotInBuffRange</ChangeSkillTrigger>
+    </Skill>
+
+    <Skill ID="103207" Inherit="10325">
+        <Tier>3</Tier>
+        <Damage>0</Damage>
+        <AtkPer Target="Damage">234</AtkPer> <!-- 180 * 1.3 -->
+        <AttackCount>4</AttackCount>
+        <AttackDelay>0.055</AttackDelay>
+        <AnimTrigger>SKILL</AnimTrigger>
+        <AnimTrigger>SKILL_2</AnimTrigger>
+        <BuffRangeType>Sum</BuffRangeType>
+        <BuffRangeSum>4</BuffRangeSum>
+        <ChangeSkillTrigger Target="10327">TargetIsNotInBuffRange</ChangeSkillTrigger>
+    </Skill>
+
+    <Skill ID="103208" Inherit="10325">
+        <Tier>4</Tier>
+        <Damage>0</Damage>
+        <AtkPer Target="Damage">260</AtkPer> <!-- 200 * 1.3 -->
+        <AttackCount>4</AttackCount>
+        <AttackDelay>0.045</AttackDelay>
+        <AnimTrigger>SKILL</AnimTrigger>
+        <AnimTrigger>SKILL_2</AnimTrigger>
+        <BuffRangeType>Sum</BuffRangeType>
+        <BuffRangeSum>4</BuffRangeSum>
+        <ChangeSkillTrigger Target="10328">TargetIsNotInBuffRange</ChangeSkillTrigger>
+    </Skill>
 
 	<!-- 1각 -->
 	<Skill ID="1032000">
@@ -8044,6 +8082,9 @@
 		<ArrowSpeed>700</ArrowSpeed>
 		
 		<TargetType>Enemy</TargetType>
+        <RangeType>Rect</RangeType>
+        <RangeX>6</RangeX>
+        <RangeY>6</RangeY>
 
 		<AttackCount>15</AttackCount>
 		<AttackDelay>0.07</AttackDelay>
@@ -12327,8 +12368,8 @@
 		<AtkType>Melee</AtkType>
 		<TargetType>Enemy</TargetType>
 		<RangeType>Rect</RangeType>
-		<RangeX>1</RangeX>
-		<RangeY>1</RangeY>
+		<RangeX>3</RangeX>
+		<RangeY>3</RangeY>
 
 			<!-- 이펙트 -->
 			<Effect Type='Shoot'>
@@ -12377,8 +12418,8 @@
 		<AtkType>Melee</AtkType>
 		<TargetType>Enemy</TargetType>
 		<RangeType>Rect</RangeType>
-		<RangeX>1</RangeX>
-		<RangeY>1</RangeY>
+		<RangeX>3</RangeX>
+		<RangeY>3</RangeY>
 
 		<SplashRangeType>Rect</SplashRangeType>
 		<SplashRangeX>2</SplashRangeX>
@@ -15039,6 +15080,254 @@
 
     <!-- 오라 마나순환에 필요한 dummy skill -->
     <Skill ID="108100">
+    </Skill>
+
+    <!-- 창천의 화살 - 한시 (화신 영웅) -->
+    <!-- 차징 관통 사격 : 정신집중 0.7초 뒤 1회 발동하는 단발 스킬. -->
+    <!-- 좌표 고정과 관통 경로 판정은 Unit10820AI(ICustomSplash)가 담당한다. -->
+    <Skill ID="10820">
+        <NameComment>차징 관통 사격</NameComment>
+        <DescComment>1초 동안 활을 당긴 뒤 지정한 좌표로 화살을 발사하여 맵을 관통, 1x1 경로 상의 모든 적에게 공격력의 300% 물리 스킬 피해</DescComment>
+        <Icon>Skill_10820</Icon>
+        <Tier>1</Tier>
+
+        <AtkType>Melee</AtkType>
+        <TargetType>Enemy</TargetType>
+
+        <!-- 차징. 정신집중 동안 이동이 막히고 종료 시점에 스킬이 1회 발동된다. -->
+        <ChannelingTime>1</ChannelingTime>
+        <!-- 패시브 집중. 판정은 Unit10820AI 가 담당하고, 돌파 강화분은 유닛의 Overcome 블록에서 합산된다. -->
+        <!-- 같은 대상을 연속 공격할 때마다 공격속도 +10%, 최대 20중첩 -->
+        <Unit10820AI_FocusAttackSpeedPer>10</Unit10820AI_FocusAttackSpeedPer>
+        <Unit10820AI_FocusMaxStack>20</Unit10820AI_FocusMaxStack>
+
+        <!-- UseSkill 본문은 채널링 시작 시점에 실행되므로 여기서는 타일을 그리지 않는다. -->
+        <!-- 발사 시점 표시는 Unit10820AI 가 데미지 판정과 같은 지점에서 처리한다. -->
+        <ShowTileEffect>false</ShowTileEffect>
+
+        <!-- 판정 형태 표기용. 실제 대상 선정은 Unit10820AI 가 대체한다. -->
+        <SplashRangeType>Rect</SplashRangeType>
+        <SplashRangeX>0</SplashRangeX>
+        <SplashRangeY>0</SplashRangeY>
+        <SplashToPath>true</SplashToPath>
+        <SplashToPathInfinite>true</SplashToPathInfinite>
+        <AttackSplashOnly>true</AttackSplashOnly>
+
+        <Damage>0</Damage>
+        <AtkPer Target="Damage">300</AtkPer>
+        <ForceDamageType>SkillPhysical</ForceDamageType>
+        
+        <Sound></Sound>
+        <!-- ChannelingSound 는 상속되지 않아 성급 스킬(10821~10823)에도 적는다. -->
+        <ChannelingSound>se_unit_10820_skill_charge_loop</ChannelingSound>
+        <SkillCastEndSound>se_unit_10820_skill_shot</SkillCastEndSound>
+        <HitSound>se_unit_10820_skill_hit</HitSound>
+
+        <!-- 차징 시작 -->
+        <!-- 위치만 캐릭터 방향을 따른다 (RotationType 이 없으면 방향 계산을 건너뛰어 항상 왼쪽 기준 위치에 뜬다). OffsetX : 앞쪽 거리 (왼쪽 기준이라 음수가 앞) / OffsetHeight : 방향과 무관한 높이 -->
+        <Effect Type='ChargeStart'>
+            <Prefab>Fx_10820_Charge</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <CenterAlign>true</CenterAlign>
+            <RotationType>OnlyOffset</RotationType>
+            <OffsetX>-27</OffsetX>
+            <OffsetHeight>32</OffsetHeight>
+        </Effect>
+
+        <!-- 발사 화살. Unit10820AI 가 발사 시점에 고정 좌표 방향으로 표시한다. -->
+        <!-- 시작 위치는 차징 시작과 같은 지점이 되도록 오프셋 값을 맞춘다. -->
+        <Effect Type='ChargeShot'>
+            <Prefab>FX_10820_ChargeShot</Prefab>
+            <ZLevel>Over</ZLevel>
+            <RotationType>AngleCasterToTarget</RotationType>
+            <World>true</World>
+            <Moving>true</Moving>
+            <MoveSpeed>3000</MoveSpeed>
+            <LifeTime>2</LifeTime>
+            <CenterAlign>true</CenterAlign>
+            <OffsetX>-27</OffsetX>
+            <OffsetHeight>32</OffsetHeight>
+        </Effect>
+
+        <!-- 적중 -->
+        <Effect Type='Target'>
+            <Prefab>Fx_10820b</Prefab>
+            <RotationType>AngleCasterToTarget</RotationType>
+            <CenterAlign>true</CenterAlign>
+            <ZLevel>UnitOver</ZLevel>
+			<OffsetRotation Min="140" Max="220" />
+        </Effect>
+    </Skill>
+
+    <!-- 2성 : 공격력 배율 +100% -->
+    <Skill ID="10821" Inherit="10820">
+        <Tier>2</Tier>
+        <AtkPer Target="Damage">400</AtkPer>
+        <ChannelingSound>se_unit_10820_skill_charge_loop</ChannelingSound>
+    </Skill>
+
+    <!-- 3성 : 공격력 배율 +100% -->
+    <Skill ID="10822" Inherit="10820">
+        <Tier>3</Tier>
+        <AtkPer Target="Damage">500</AtkPer>
+        <ChannelingSound>se_unit_10820_skill_charge_loop</ChannelingSound>
+    </Skill>
+
+    <!-- 4성 : 최종 차징 시간 0.25초 -->
+    <Skill ID="10823" Inherit="10820">
+        <Tier>4</Tier>
+        <AtkPer Target="Damage">500</AtkPer>
+        <ChannelingTime>0.35</ChannelingTime>
+        <ChannelingSound>se_unit_10820_skill_charge_short_loop</ChannelingSound>
+
+        <!-- 차징 시작 -->
+        <Effect Type='ChargeStart'>
+            <Prefab>Fx_10820_Charge_Short</Prefab>
+        </Effect>
+    </Skill>
+
+    <!-- 궁극기 - 파마의 화살 -->
+    <!-- 유닛의 <UltimateSkill> 슬롯에 연결된다. 게이지 소모와 발동 판정은 범용 궁극기 시스템이 처리하고, -->
+    <!-- 고유 로직(사라짐 / 전장 밖 공격 / 낙하 위치 선정)은 Unit10820AI 가 담당한다. -->
+    <Skill ID="10825">
+        <NameComment>파마의 화살</NameComment>
+        <DescComment>{0}초 동안 지정 불가 및 무적 상태로 전장에서 사라져, 전장 밖에서 적 하나에게 즉발 일반 공격을 반복합니다</DescComment>
+
+        <Name>UltimateSkillName_10820</Name>
+        <LongDesc>UltimateSkillDesc_10820_Long</LongDesc>
+        <ShortDesc>UltimateSkillDesc_10820_Short</ShortDesc>
+        
+        <Icon>Skill_10821</Icon>
+        <Tier>1</Tier>
+
+        <AtkType>Melee</AtkType>
+        <TargetType>Enemy</TargetType>
+
+        <!-- 궁극기 사거리는 무한 -->
+        <RangeType>Infinity</RangeType>
+        <DontUseAtkRange>true</DontUseAtkRange>
+        <IgnoreRangeArtifact>true</IgnoreRangeArtifact>
+
+        <PredelayCancel>false</PredelayCancel>
+
+        <!-- 궁극기 상태 버프. 기본 공격을 즉발 공격(108200)으로 치환하고 기교를 잠근다. -->
+        <BuffAtCastSkill>108205</BuffAtCastSkill>
+        <SetAttackInterval>0</SetAttackInterval>
+
+        <!-- {0} : 고정수치 3초. AI 가 지속시간으로 읽는다. -->
+        <Time>3</Time>
+
+        <!-- Skill_Ultimate_10820 애니메이션이 1초부터 0.25초 동안 날아오르므로 그 구간에 맞춰 사라진다. -->
+        <HideDelay>1</HideDelay>
+        <HideTime>0.25</HideTime>
+        <!-- 낙하 등장 애니메이션(Appear_10150) 길이. 이 시간 동안 페이드 인하고, 끝날 때까지 공격하지 않는다. -->
+        <AppearTime>1</AppearTime>
+
+        <!-- 시전 즉시 / 날아오르기 시작(Skill_Ultimate_10820 의 1초 ShootSkill 이벤트)부터 UseSkillSoundDelay 뒤 / 사라짐이 끝난 뒤 궁극기가 끝날 때까지 루프 -->
+        <Sound>se_unit_10820_skill_ultra01</Sound>
+        <UseSkillSound>se_unit_10820_skill_ultra02</UseSkillSound>
+        <UseSkillSoundDelay>0.1</UseSkillSoundDelay>
+        <Unit10820AI_UltimateLoopSound>se_unit_10820_skill_ultra03</Unit10820AI_UltimateLoopSound>
+
+        <!-- 날아오르는 연출. Unit10820AI 가 사라지기 직전에 시전 위치에 표시한다. -->
+        <Effect Type='UltimateFly'>
+            <Prefab>Fx_10820_Ult_Fly</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <CenterAlign>true</CenterAlign>
+        </Effect>
+
+        <!-- 필드 전역 바람. 궁극기 동안 화면 기준 고정 위치에 표시하고, 궁극기가 끝나면 Unit10820AI 가 걷어낸다. -->
+        <!-- 프리팹이 월드 원점 기준으로 제작되어 있어 원점에 고정한다. -->
+        <Effect Type='UltimateWind'>
+            <Delay>0.7</Delay>
+            <Prefab>Fx_10820_Wind_AOE</Prefab>
+            <World>true</World>
+            <FixedPos>0,0</FixedPos>
+            <ZLevel>UnitOver</ZLevel>
+            <LevelScale>false</LevelScale>
+        </Effect>
+    </Skill>
+
+    <Skill ID="10826" Inherit="10825">
+        <Tier>2</Tier>
+        <LongDesc>UltimateSkillDesc_10821_Long</LongDesc>
+        <ShortDesc>UltimateSkillDesc_10821_Short</ShortDesc>
+    </Skill>
+
+    <!-- 3성 : 지속 시간 4초 증가 -->
+    <Skill ID="10827" Inherit="10825">
+        <Tier>3</Tier>
+        <LongDesc>UltimateSkillDesc_10822_Long</LongDesc>
+        <ShortDesc>UltimateSkillDesc_10822_Short</ShortDesc>
+        
+        <Time>7</Time>
+        <BuffAtCastSkill>108206</BuffAtCastSkill>
+    </Skill>
+
+    <!-- 4성 : 전투 시작 시 궁극기 게이지 +3 -->
+    <Skill ID="10828" Inherit="10825">
+        <Tier>4</Tier>
+        <LongDesc>UltimateSkillDesc_10823_Long</LongDesc>
+        <ShortDesc>UltimateSkillDesc_10823_Short</ShortDesc>
+        
+        <Time>7</Time>
+        <BuffAtCastSkill>108206</BuffAtCastSkill>
+        <AddBattleStartUltimateGauge>3</AddBattleStartUltimateGauge>
+    </Skill>
+    
+    <!-- 궁극기 중 전장 밖에서 쏘는 즉발 공격. 일반 공격 판정이므로 집중 패시브가 적용된다. -->
+    <!-- 5번의 공격을 모아 한번에 가하고, 공격 딜레이는 3배로 적용한다. -->
+    <Skill ID="108200">
+        <NameComment>파마의 화살 (즉발 공격)</NameComment>
+        <AtkType>Melee</AtkType>
+        <TargetType>Enemy</TargetType>
+        <RangeType>Infinity</RangeType>
+        <DontUseAtkRange>true</DontUseAtkRange>
+        <IgnoreRangeArtifact>true</IgnoreRangeArtifact>
+        <SetFixedTarget>false</SetFixedTarget>
+
+        <!-- 일반 공격 판정 : 투사체가 아닌 즉발형 -->
+        <UseAttackTrigger>true</UseAttackTrigger>
+        <ForceDamageType>NormalPhysical</ForceDamageType>
+        <Damage>0</Damage>
+        <AtkPer Target="Damage">100</AtkPer>
+
+        <!-- 피해 5회를 딜레이 없이 한번에 가한다. 피해마다 개별 일반 공격 적중 판정이 발생한다. -->
+        <!-- 대상이 죽으면 남은 횟수는 다른 대상에게 전이되지 않는다. (CancelWhenFixedTargetIsDead 기본값) -->
+        <AttackCount>5</AttackCount>
+        <AttackDelay>0</AttackDelay>
+
+        <!-- 공격 딜레이 : 1 / 공격속도 * 3. 배율 적용은 Unit10820AI 가 담당한다. -->
+        <Unit10820AI_AttackIntervalMul>3</Unit10820AI_AttackIntervalMul>
+
+        <!-- 공격 사운드는 타격 이펙트에 붙여 공격 1회(5타)당 한 번 재생한다. -->
+        <Sound></Sound>
+        <Effect Type='Target'>
+            <Prefab>FX_10820_Ult_Attack</Prefab>
+            <ZLevel>UnitOver</ZLevel>
+            <CenterAlign>true</CenterAlign>
+            <LevelScale>false</LevelScale>
+            <ShowOnlyOnce>true</ShowOnlyOnce>
+            <Sound>se_unit_10820_skill_ultra04</Sound>
+        </Effect>
+    </Skill>
+
+    <!-- 궁극기 상태 버프 : 지속시간 동안 기본 공격이 즉발 공격으로 바뀐다. -->
+    <!-- 궁극기 사용 중에는 일반 스킬 자원 충전을 막는다. 한시는 기교를 쓰므로 TechniqueLock 이 실제 차단을 담당하고, -->
+    <!-- ManaLock 은 게이지를 잠긴 색으로 표시하는 용도다. -->
+    <Skill ID="108205">
+        <NameComment>파마의 화살 (상태)</NameComment>
+        <Time>3</Time>
+        <MaxBuffOverlap>1</MaxBuffOverlap>
+
+        <ChangeAttackSkill>108200</ChangeAttackSkill>
+        <ManaLock>true</ManaLock>
+        <TechniqueLock>true</TechniqueLock>
+    </Skill>
+
+    <!-- 3/4성 : 지속시간 7초 -->
+    <Skill ID="108206" Inherit="108205">
+        <Time>7</Time>
     </Skill>
 
 	<!-- 도깨비 스킬-->

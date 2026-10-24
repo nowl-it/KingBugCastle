@@ -14,6 +14,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include "video_overlay_dex.h"
 
 // Globals for build-time binary patching of the glogin redirect
 char g_kgc_glogin_host[64] = "127.0.0.1\0" "                                                   ";
@@ -23,6 +24,8 @@ char g_kgc_glogin_scheme[9] = "http\0   ";
 // cert), but the native poller reaches the origin directly. Public builds use the
 // origin's Caddy :80 route because this raw HTTP client cannot speak HTTPS.
 char g_kgc_glogin_poll_host[64] = "127.0.0.1\0" "                                                   ";
+
+static JavaVM* g_jvm = nullptr;  // saved in JNI_OnLoad, used by video overlay
 
 
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, "XignCodeStub", __VA_ARGS__)
@@ -108,6 +111,7 @@ static void start_worker() {
 }
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
+    g_jvm = vm;  // save for video overlay JNI calls
     JNIEnv* env = 0;
     if (vm->GetEnv((void**)&env, JNI_VERSION_1_6) != JNI_OK) return JNI_ERR;
     // v171 loads "xigncode" from AppSignClientSystem.<clinit>, so XigncodeClientSystem
@@ -588,6 +592,250 @@ void HookedLobbyAwake(void* _this, void* mi) {
     if (origLobbyAwake) origLobbyAwake(_this, mi);
     LOGI("HookedLobbyAwake EXIT (origLobbyAwake returned)");
 }
+
+// === SKIN INTRO VIDEO OVERLAY ===================================================
+// Hooks CardInfoPanel.OnClickSkin(Action): on first open of the skin tab/panel in a session,
+// shows a full-screen MP4 video overlay (Android VideoView via an embedded Java helper DEX).
+// On completion, error, or tap/back to skip, the overlay is removed.
+// A boolean flag signals the Unity thread (via CardInfoPanel.Update() / Scene_Lobby.Update())
+// to call origOnClickSkin safely on the Unity main thread, opening the skin panel.
+
+static volatile bool g_video_playing          = false;  // true while overlay is on-screen
+static volatile bool g_video_pending_complete = false;  // signaled from Android UI thread
+
+static void* g_skin_tab_this     = nullptr;  // saved CardInfoPanel instance
+static void* g_skin_tab_callback = nullptr;  // saved onCloseSkinBox Action
+static void* g_skin_tab_mi       = nullptr;  // saved MethodInfo
+
+typedef void (*OnClickSkinFunc)(void* _this, void* onCloseSkinBox, void* mi);
+static OnClickSkinFunc origOnClickSkin = nullptr;
+
+typedef void (*PanelUpdateFunc)(void* _this, void* mi);
+static PanelUpdateFunc origCardInfoPanelUpdate = nullptr;
+static PanelUpdateFunc origLobbyUpdate          = nullptr;
+
+static jclass g_videoOverlayClass  = nullptr;
+static bool   g_dex_load_attempted = false;
+
+// --- JNI callback: VideoOverlay.nativeOnVideoComplete() --------------------------
+// Called on Android UI thread when the video finishes, fails, or is skipped.
+// Does NOT touch IL2CPP/Unity directly — sets flag for the Unity thread to pick up.
+static void JNICALL native_on_video_complete(JNIEnv* /*env*/, jclass /*cls*/) {
+    LOGI("native_on_video_complete: video done/skipped on UI thread, signaling Unity thread");
+    g_video_playing          = false;
+    g_video_pending_complete = true;
+}
+
+// --- Load the embedded DEX and register the native callback ----------------------
+static bool loadVideoOverlayClass(JNIEnv* env, jobject activity) {
+    if (g_dex_load_attempted) return g_videoOverlayClass != nullptr;
+    g_dex_load_attempted = true;
+
+    if (kVideoOverlayDexSize == 0) {
+        LOGE("loadVideoOverlay: Video DEX header empty");
+        return false;
+    }
+
+    char dex_path[512] = "/data/data/com.nowl.castle/cache/kgc_video.dex";
+    char opt_dir[512]  = "/data/data/com.nowl.castle/cache";
+    if (activity) {
+        jclass actCls = env->GetObjectClass(activity);
+        jmethodID mGetCache = env->GetMethodID(actCls, "getCacheDir", "()Ljava/io/File;");
+        if (mGetCache) {
+            jobject fileObj = env->CallObjectMethod(activity, mGetCache);
+            if (fileObj) {
+                jclass fileCls = env->GetObjectClass(fileObj);
+                jmethodID mGetPath = env->GetMethodID(fileCls, "getAbsolutePath", "()Ljava/lang/String;");
+                if (mGetPath) {
+                    jstring jPath = (jstring)env->CallObjectMethod(fileObj, mGetPath);
+                    if (jPath) {
+                        const char* cPath = env->GetStringUTFChars(jPath, nullptr);
+                        if (cPath) {
+                            snprintf(dex_path, sizeof(dex_path), "%s/kgc_video.dex", cPath);
+                            snprintf(opt_dir,  sizeof(opt_dir),  "%s", cPath);
+                            env->ReleaseStringUTFChars(jPath, cPath);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    FILE* f = fopen(dex_path, "wb");
+    if (!f) {
+        LOGE("loadVideoOverlay: cannot write %s (errno=%d)", dex_path, errno);
+        return false;
+    }
+    fwrite(kVideoOverlayDex, 1, kVideoOverlayDexSize, f);
+    fclose(f);
+    LOGI("loadVideoOverlay: wrote %zu bytes to %s", kVideoOverlayDexSize, dex_path);
+
+    jclass dclClass = env->FindClass("dalvik/system/DexClassLoader");
+    if (!dclClass || env->ExceptionCheck()) {
+        env->ExceptionClear();
+        LOGE("loadVideoOverlay: DexClassLoader class not found");
+        return false;
+    }
+    jmethodID dclCtor = env->GetMethodID(dclClass, "<init>",
+        "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/ClassLoader;)V");
+
+    jclass actCls = env->GetObjectClass(activity);
+    jmethodID mGetCL = env->GetMethodID(actCls, "getClassLoader", "()Ljava/lang/ClassLoader;");
+    jobject parentCL = env->CallObjectMethod(activity, mGetCL);
+
+    jstring jDexPath = env->NewStringUTF(dex_path);
+    jstring jOptDir  = env->NewStringUTF(opt_dir);
+    jobject loader = env->NewObject(dclClass, dclCtor, jDexPath, jOptDir,
+                                    (jobject)nullptr, parentCL);
+    if (env->ExceptionCheck() || !loader) {
+        env->ExceptionClear();
+        LOGE("loadVideoOverlay: DexClassLoader ctor failed");
+        return false;
+    }
+
+    jmethodID loadClass = env->GetMethodID(
+        dclClass, "loadClass", "(Ljava/lang/String;)Ljava/lang/Class;");
+    jstring jClassName = env->NewStringUTF("com.kgc.stub.VideoOverlay");
+    jobject cls = env->CallObjectMethod(loader, loadClass, jClassName);
+    if (env->ExceptionCheck() || !cls) {
+        env->ExceptionClear();
+        LOGE("loadVideoOverlay: class com.kgc.stub.VideoOverlay not found in DEX");
+        return false;
+    }
+
+    g_videoOverlayClass = (jclass)env->NewGlobalRef(cls);
+
+    JNINativeMethod nm = {
+        (char*)"nativeOnVideoComplete", (char*)"()V",
+        (void*)native_on_video_complete
+    };
+    if (env->RegisterNatives(g_videoOverlayClass, &nm, 1) != 0) {
+        env->ExceptionClear();
+        LOGE("loadVideoOverlay: RegisterNatives failed");
+        g_videoOverlayClass = nullptr;
+        return false;
+    }
+
+    LOGI("loadVideoOverlay: VideoOverlay class loaded & native registered!");
+    return true;
+}
+
+static inline bool is_target_skin_hero(int32_t unitId) {
+    return unitId == 10480;  // Ian
+}
+
+// --- Hook: CardInfoPanel.OnClickSkin(Action) -----------------------------------
+void HookedOnClickSkin(void* _this, void* onCloseSkinBox, void* mi) {
+    // Read unitId from CardInfoPanel.resUnit (offset 0x428) -> ResourceUnit.id (offset 0x10)
+    void* resUnit = _this ? *(void**)((char*)_this + 0x428) : nullptr;
+    int32_t unitId = resUnit ? *(int32_t*)((char*)resUnit + 0x10) : 0;
+
+    LOGI("HookedOnClickSkin: this=%p resUnit=%p unitId=%d playing=%d",
+         _this, resUnit, (int)unitId, (int)g_video_playing);
+
+    // Only play video for designated hero/skin: Ian (unitId == 10480)
+    if (!is_target_skin_hero(unitId)) {
+        LOGI("HookedOnClickSkin: unitId %d != 10480 (not Ian) — opening skin directly", (int)unitId);
+        if (origOnClickSkin) origOnClickSkin(_this, onCloseSkinBox, mi);
+        return;
+    }
+
+    // If video is currently playing, ignore duplicate tap
+    if (g_video_playing) {
+        return;
+    }
+
+    JNIEnv* env = nullptr;
+    if (!g_jvm || g_jvm->GetEnv((void**)&env, JNI_VERSION_1_6) != JNI_OK || !env) {
+        LOGE("HookedOnClickSkin: no JNIEnv, falling back to original");
+        if (origOnClickSkin) origOnClickSkin(_this, onCloseSkinBox, mi);
+        return;
+    }
+
+    // Get Activity from UnityPlayer.currentActivity
+    jclass upClass = env->FindClass("com/unity3d/player/UnityPlayer");
+    if (!upClass || env->ExceptionCheck()) {
+        env->ExceptionClear();
+        LOGE("HookedOnClickSkin: UnityPlayer not found");
+        if (origOnClickSkin) origOnClickSkin(_this, onCloseSkinBox, mi);
+        return;
+    }
+    jfieldID actField = env->GetStaticFieldID(upClass, "currentActivity",
+                                              "Landroid/app/Activity;");
+    jobject activity = env->GetStaticObjectField(upClass, actField);
+    if (!activity) {
+        LOGE("HookedOnClickSkin: currentActivity is null");
+        if (origOnClickSkin) origOnClickSkin(_this, onCloseSkinBox, mi);
+        return;
+    }
+
+    if (!loadVideoOverlayClass(env, activity)) {
+        LOGE("HookedOnClickSkin: DEX not loaded, falling back");
+        if (origOnClickSkin) origOnClickSkin(_this, onCloseSkinBox, mi);
+        return;
+    }
+
+    jmethodID playMethod = env->GetStaticMethodID(
+        g_videoOverlayClass, "play",
+        "(Landroid/app/Activity;Ljava/lang/String;)V");
+    if (!playMethod) {
+        LOGE("HookedOnClickSkin: play() method not found");
+        if (origOnClickSkin) origOnClickSkin(_this, onCloseSkinBox, mi);
+        return;
+    }
+
+    char video_url[256];
+    snprintf(video_url, sizeof(video_url), "%s://%s/static/intro/skin_intro.mp4",
+             g_kgc_glogin_scheme, g_kgc_glogin_host);
+
+    g_video_playing     = true;
+    g_skin_tab_this     = _this;
+    g_skin_tab_callback = onCloseSkinBox;
+    g_skin_tab_mi       = mi;
+
+    jstring jUrl = env->NewStringUTF(video_url);
+    env->CallStaticVoidMethod(g_videoOverlayClass, playMethod, activity, jUrl);
+
+    if (env->ExceptionCheck()) {
+        env->ExceptionClear();
+        LOGE("HookedOnClickSkin: VideoOverlay.play() threw, falling back");
+        g_video_playing = false;
+        if (origOnClickSkin) origOnClickSkin(_this, onCloseSkinBox, mi);
+        return;
+    }
+
+    LOGI("HookedOnClickSkin: video overlay launched (%s) for unit %d, skin deferred", video_url, (int)unitId);
+}
+
+// Helper: dispatch deferred origOnClickSkin on Unity main thread
+static inline void check_dispatch_skin() {
+    if (g_video_pending_complete) {
+        g_video_pending_complete = false;
+        if (origOnClickSkin && g_skin_tab_this) {
+            LOGI("Dispatching deferred origOnClickSkin on Unity main thread");
+            void* target = g_skin_tab_this;
+            void* cb     = g_skin_tab_callback;
+            void* m      = g_skin_tab_mi;
+            g_skin_tab_this     = nullptr;
+            g_skin_tab_callback = nullptr;
+            g_skin_tab_mi       = nullptr;
+            origOnClickSkin(target, cb, m);
+        }
+    }
+}
+
+// Hook: CardInfoPanel.Update()
+void HookedCardInfoPanelUpdate(void* _this, void* mi) {
+    if (origCardInfoPanelUpdate) origCardInfoPanelUpdate(_this, mi);
+    check_dispatch_skin();
+}
+
+// Hook: Scene_Lobby.Update()
+void HookedLobbyUpdate(void* _this, void* mi) {
+    if (origLobbyUpdate) origLobbyUpdate(_this, mi);
+    check_dispatch_skin();
+}
+// === END SKIN INTRO VIDEO =======================================================
 
 void HookedUpdate(void* _this, void* methodInfo) {
     if (origUpdate) {
@@ -1339,6 +1587,59 @@ void* worker_thread(void* arg) {
     } else {
         LOGE("Scene_Lobby.Awake hook not wired: gm=%p get=%p cctor=%p lobby=%p",
              gmClass, g_gmGet, g_gmCctor, sceneLobbyClass);
+    }
+
+    // --- Skin intro video hooks ---
+    // 1. Hook CardInfoPanel.OnClickSkin(Action) via inline detour
+    void* cardInfoPanelClass = il2cpp_class_from_name(assemblyCSharpImage, "", "CardInfoPanel");
+    if (cardInfoPanelClass) {
+        void* onClickSkinM = class_get_method(cardInfoPanelClass, "OnClickSkin", 1);
+        if (onClickSkinM) {
+            void* onClickSkinFn = *(void**)onClickSkinM;
+            origOnClickSkin = (OnClickSkinFunc)install_inline_hook(
+                onClickSkinFn, (void*)HookedOnClickSkin);
+            if (origOnClickSkin) {
+                LOGI("Hooked CardInfoPanel.OnClickSkin(Action) (inline detour) for skin intro video!");
+            } else {
+                LOGE("Skin video hook: inline detour on OnClickSkin failed — using methodPointer swap");
+                origOnClickSkin = (OnClickSkinFunc)*(void**)onClickSkinM;
+                long ps = sysconf(_SC_PAGESIZE);
+                void* pg = (void*)((uintptr_t)onClickSkinM & ~(uintptr_t)(ps - 1));
+                mprotect(pg, ps, PROT_READ | PROT_WRITE | PROT_EXEC);
+                *(void**)onClickSkinM = (void*)HookedOnClickSkin;
+                LOGI("Hooked CardInfoPanel.OnClickSkin (methodPointer swap fallback)!");
+            }
+        } else {
+            LOGE("Skin video hook: OnClickSkin(Action) method not found");
+        }
+
+        // 2. Hook CardInfoPanel.Update() to dispatch deferred skin show on Unity main thread
+        void* panelUpdateM = class_get_method(cardInfoPanelClass, "Update", 0);
+        if (panelUpdateM) {
+            origCardInfoPanelUpdate = (PanelUpdateFunc)*(void**)panelUpdateM;
+            long ps = sysconf(_SC_PAGESIZE);
+            void* pg = (void*)((uintptr_t)panelUpdateM & ~(uintptr_t)(ps - 1));
+            mprotect(pg, ps, PROT_READ | PROT_WRITE | PROT_EXEC);
+            *(void**)panelUpdateM = (void*)HookedCardInfoPanelUpdate;
+            LOGI("Hooked CardInfoPanel.Update (methodPointer swap) for video completion dispatch!");
+        } else {
+            LOGE("Skin video hook: CardInfoPanel.Update method not found");
+        }
+    } else {
+        LOGE("Skin video hook: CardInfoPanel class not found");
+    }
+
+    // 3. Hook Scene_Lobby.Update() as fallback dispatcher on Unity main thread
+    if (sceneLobbyClass) {
+        void* lobbyUpdateM = class_get_method(sceneLobbyClass, "Update", 0);
+        if (lobbyUpdateM) {
+            origLobbyUpdate = (PanelUpdateFunc)*(void**)lobbyUpdateM;
+            long ps = sysconf(_SC_PAGESIZE);
+            void* pg = (void*)((uintptr_t)lobbyUpdateM & ~(uintptr_t)(ps - 1));
+            mprotect(pg, ps, PROT_READ | PROT_WRITE | PROT_EXEC);
+            *(void**)lobbyUpdateM = (void*)HookedLobbyUpdate;
+            LOGI("Hooked Scene_Lobby.Update (methodPointer swap) for video completion dispatch!");
+        }
     }
 
     il2cpp_thread_detach(thread);

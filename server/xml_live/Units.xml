@@ -629,10 +629,9 @@
         
 		<!-- 특성 -->
 		<Potential ReqLevel='4' TargetSkill="10070">
-			<DescComment>스킬 사용 도중 자운의 방어력 +100</DescComment>
-            <Def>100</Def>
-            <MDef>100</MDef>
-			<PotentialIcon>PotentialIcon_07</PotentialIcon>
+			<DescComment>스킬 사용 도중 자운의 사거리 +1</DescComment>
+			<Range>1</Range>
+			<PotentialIcon>PotentialIcon_05</PotentialIcon>
 		</Potential>
 
 		<Potential ReqLevel='8' TargetSkill="10070">
@@ -1071,30 +1070,30 @@
 		<UseLevelForSkillTier>true</UseLevelForSkillTier>
 		<!-- 특성 -->
 		<Potential ReqLevel='4' TargetSkill="10110">
-			<DescComment>스킬 사용 중 치명타 확률 +15%</DescComment>
-			<CriticalProb>15</CriticalProb>
-			<PotentialIcon>PotentialIcon_21</PotentialIcon>
+			<DescComment>스킬 사용 중 사거리 +1</DescComment>
+			<Range>1</Range>
+			<PotentialIcon>PotentialIcon_05</PotentialIcon>
 		</Potential>
 		<Potential ReqLevel='4' TargetSkill="1011000">
-			<DescComment>스킬 사용 중 치명타 확률 +15%</DescComment>
-			<CriticalProb>15</CriticalProb>
+			<DescComment>스킬 사용 중 사거리 +1</DescComment>
+			<Range>1</Range>
 		</Potential>
 		<Potential ReqLevel='4' TargetSkill="1011020">
-			<DescComment>스킬 사용 중 치명타 확률 +15%</DescComment>
-			<CriticalProb>15</CriticalProb>
+			<DescComment>스킬 사용 중 사거리 +1</DescComment>
+			<Range>1</Range>
 		</Potential>
 		<Potential ReqLevel='8' TargetSkill="10110">
-			<DescComment>스킬 사용 중 최종 공격력 +30%</DescComment>
-			<TotalAtkPer>30</TotalAtkPer>
-			<PotentialIcon>PotentialIcon_01</PotentialIcon>
+			<DescComment>스킬 사용 중 물리 치명타 확률 +30%</DescComment>
+			<CriticalProb>30</CriticalProb>
+			<PotentialIcon>PotentialIcon_21</PotentialIcon>
 		</Potential>
 		<Potential ReqLevel='8' TargetSkill="1011000">
-			<DescComment>스킬 사용 중 최종 공격력 +30%</DescComment>
-			<TotalAtkPer>30</TotalAtkPer>
+			<DescComment>스킬 사용 중 물리 치명타 확률 +30%</DescComment>
+			<CriticalProb>30</CriticalProb>
 		</Potential>
 		<Potential ReqLevel='8' TargetSkill="1011020">
-			<DescComment>스킬 사용 중 최종 공격력 +30%</DescComment>
-			<TotalAtkPer>30</TotalAtkPer>
+			<DescComment>스킬 사용 중 물리 치명타 확률 +30%</DescComment>
+			<CriticalProb>30</CriticalProb>
 		</Potential>
 		<Potential ReqLevel='16' Tier='1'>
 			<DescComment>속사의 비 사용 시 대상 주변 2칸 범위에 공격력의 250%의 물리 스킬 피해 부여 및 3초간 이동속도 30% 감소</DescComment>
@@ -1833,7 +1832,9 @@
 			<Modulator Theme='3000'>0.0</Modulator>
 		</ThemeDefenseModulator>
 		<!-- 시너지  -->		
-		<RogueLikeSynergies>Shielder,RaidTrooper</RogueLikeSynergies>	
+        <RogueLikeSynergies>Shielder,RaidTrooper</RogueLikeSynergies>
+        <!-- 추후 시너지 출시 시 아래로 교체 -->
+        <!-- <RogueLikeSynergies>Shielder,RaidTrooper,Acrobat</RogueLikeSynergies> -->
 	</Unit>
 
 	<!-- 연 -->
@@ -2383,6 +2384,8 @@
         </ThemeDefenseModulator>
         <!-- 시너지  -->
         <RogueLikeSynergies>Assassin</RogueLikeSynergies>
+        <!-- 추후 출시 시 아래로 교체 -->
+        <!-- <RogueLikeSynergies>Assassin,Acrobat</RogueLikeSynergies> -->
         
         <!-- 리메이크 -->
         <MinVersion>164100</MinVersion>
@@ -2509,7 +2512,7 @@
 		<!-- 사거리 -->
 		<RangeType>Rect</RangeType>
 		<RangeX>2</RangeX>
-		<RangeY>4</RangeY>
+		<RangeY>5</RangeY>
 		<!-- 투사체 -->
 		<ArrowPrefab>Fx_10270a</ArrowPrefab>
 		<ArrowSpeed>700</ArrowSpeed>
@@ -2942,7 +2945,7 @@
 		<HomingRotateSpeed>20</HomingRotateSpeed>
 		<!-- 사거리 -->
 		<RangeType>Sum</RangeType>
-		<RangeSum>5</RangeSum>
+		<RangeSum>6</RangeSum>
 		<!-- 이펙트 -->
 		<Effect Type='Shoot'>
 			<Prefab>Fx_10320a</Prefab>
@@ -2962,31 +2965,33 @@
 			<ZLevel>UnitOver</ZLevel>
 			<OffsetHeight>10</OffsetHeight>
 		</Effect>
+		<!-- AI -->
+		<AIType>Unit10320AI</AIType>
 		<!-- 스킬 -->
 		<Skill>10320</Skill>
 		<SkillSpeedByAttackSpeed>true</SkillSpeedByAttackSpeed>
 		<!-- 특성 -->
 		<Potential ReqLevel='4'>
-			<DescComment>근접한 적에게 주는 피해량 20% 증가</DescComment>
+			<DescComment>근접한 적에게 주는 피해량 30% 증가</DescComment>
 			<PotentialChangeSkillID>103200</PotentialChangeSkillID>
-			<AddAttackDamagePerToCloseEnemies>20</AddAttackDamagePerToCloseEnemies>
+			<AddAttackDamagePerToCloseEnemies>30</AddAttackDamagePerToCloseEnemies>
 			<AddAttackDamagePerToCloseEnemiesRangeType>Sum</AddAttackDamagePerToCloseEnemiesRangeType>
-			<AddAttackDamagePerToCloseEnemiesRangeSum>3</AddAttackDamagePerToCloseEnemiesRangeSum>
+			<AddAttackDamagePerToCloseEnemiesRangeSum>4</AddAttackDamagePerToCloseEnemiesRangeSum>
 			<PotentialIcon>PotentialIcon_10</PotentialIcon>
 		</Potential>
 
-		<Potential ReqLevel='8'>
-			<BuffAtKill>103205</BuffAtKill>
-			<BuffAtKillCount>4</BuffAtKillCount>
-			<PotentialIcon>PotentialIcon_12</PotentialIcon>
+		<Potential ReqLevel="8" TargetSkill="10325">
+			<DescComment>스킬의 첫 화살이 적의 물리 방어력을 100% 관통</DescComment>
+			<Unit10320AI_FirstArrowDefBreak>100</Unit10320AI_FirstArrowDefBreak>
+			<PotentialIcon>PotentialIcon_10</PotentialIcon>
 		</Potential>
-		<Potential ReqLevel='8' TargetSkill="10325">
-			<DescComment>적 처치시 다음 스킬의 공격 횟수 +3</DescComment>
-			<AddAttackCountPerBuffCount>103205</AddAttackCountPerBuffCount>
+		<Potential ReqLevel="8" TargetSkill="103200">
+			<DescComment>스킬의 첫 화살이 적의 물리 방어력을 100% 관통</DescComment>
+			<Unit10320AI_FirstArrowDefBreak>100</Unit10320AI_FirstArrowDefBreak>
 		</Potential>
-		<Potential ReqLevel='8' TargetSkill="103200">
-			<DescComment>적 처치시 다음 스킬의 공격 횟수 +3</DescComment>
-			<AddAttackCountPerBuffCount>103205</AddAttackCountPerBuffCount>
+		<Potential ReqLevel="8" TargetSkill="103205">
+			<DescComment>스킬의 첫 화살이 적의 물리 방어력을 100% 관통</DescComment>
+			<Unit10320AI_FirstArrowDefBreak>100</Unit10320AI_FirstArrowDefBreak>
 		</Potential>
 
 		<Potential ReqLevel='16' Tier='1'>
@@ -2997,6 +3002,10 @@
 		</Potential>
 
 		<Potential ReqLevel='16' Tier='1' Slot='2' TargetSkill="10325">
+			<DescComment>적이 3칸 이내에 없을 때 첫 화살이 대상 2칸 넉백</DescComment>
+			<BuffAtCastSkill>1032010</BuffAtCastSkill>
+		</Potential>
+		<Potential ReqLevel='16' Tier='1' Slot='2' TargetSkill="103205">
 			<DescComment>적이 3칸 이내에 없을 때 첫 화살이 대상 2칸 넉백</DescComment>
 			<BuffAtCastSkill>1032010</BuffAtCastSkill>
 		</Potential>
@@ -6468,8 +6477,8 @@
 		<BattleStartMana>0</BattleStartMana>
 		<AttackInterval>1</AttackInterval>
 		<RangeType>Rect</RangeType>
-		<RangeX>1</RangeX>
-		<RangeY>1</RangeY>
+		<RangeX>3</RangeX>
+		<RangeY>3</RangeY>
 
 		<AttackSkill>10650</AttackSkill>
 		<AttackSkillCanLevelUp>true</AttackSkillCanLevelUp>
@@ -7660,7 +7669,7 @@
 		<IllustOffsetX>-10</IllustOffsetX>
 		<IllustOffsetY>25</IllustOffsetY>
 		<GradationColor>49455D</GradationColor>
-		<RogueLikeNewHeroPanelOffsetY>-50</RogueLikeNewHeroPanelOffsetY>
+		<RogueLikeNewHeroPanelOffsetY>-60</RogueLikeNewHeroPanelOffsetY>
 		<!-- 능력치 -->
 		<Hp>125</Hp>
 		<Mana>0</Mana>
@@ -8120,6 +8129,115 @@
 		</DimensionStat>
         <OriginalUnit>10430</OriginalUnit>
     </Unit>
+
+	<!-- 창천의 화살 - 한시 (화신 영웅) 이호운데. 초월 영웅 -->
+	<Unit ID="10820">
+		<!-- 기본정보 -->
+		<Comment>화신 한시</Comment>
+		<Type>Player</Type>
+		<Prefab>Unit_10820</Prefab>
+		<Sprite>Unit_10820_0</Sprite>
+		<Height>65</Height>
+		<Role>Swift</Role>
+        <Region>East</Region>
+        <!-- 추후 출시 시 해제 -->
+        <!-- <RogueLikeSynergies>Acrobat</RogueLikeSynergies> -->
+        <DefaultSkinDesc>SkinDesc_Default_10820_Simple</DefaultSkinDesc>
+		<!-- 화신 영웅 이름 색상 -->
+		<NameColor>D8B4FF</NameColor>
+        <!-- 화신 등급 영웅 -->
+        <IsIncarnationUnit>true</IsIncarnationUnit>
+        <IncarnationDescOutlineColor>B7EDFF</IncarnationDescOutlineColor>
+        <IncarnationDescOutlineAlpha>0.3</IncarnationDescOutlineAlpha>
+        <IncarnationProfileTransitionEffect>Fx_10820_Wind_AOE</IncarnationProfileTransitionEffect>
+        <!-- UI -->
+        <IllustOffsetY>75</IllustOffsetY>
+        <GradationColor>89d1ff</GradationColor>		
+		<SpriteOffsetX>-5</SpriteOffsetX>		
+		<SpriteOffsetY>-30</SpriteOffsetY>		
+        <RogueLikeNewHeroPanelOffsetY>-55</RogueLikeNewHeroPanelOffsetY>
+        <RogueLikeNewHeroPanelOffsetX>35</RogueLikeNewHeroPanelOffsetX>	
+		<RogueLikeNewHeroPanelScale>1</RogueLikeNewHeroPanelScale>				
+		<!-- 능력치 -->
+		<Hp>150</Hp>
+		<Mana>0</Mana>
+		<Atk>50</Atk>
+		<MAtk>0</MAtk>
+		<AttackInterval>2</AttackInterval>
+		<!-- 기교 -->
+		<SkillEnergyType>Technique</SkillEnergyType>
+		<Technique>90</Technique>
+		<BattleStartTechnique>90</BattleStartTechnique>
+		<!-- 기본공격 -->
+		<AtkType>Arrow</AtkType>
+		<!-- 이펙트 전용 리소스 미제작. 차원 네리아 이펙트 임시 사용 -->
+		<ArrowPrefab>FX_10820a</ArrowPrefab>
+		<ArrowSpeed>700</ArrowSpeed>
+		<!-- <Effect Type="Shoot">
+			<Prefab>Fx_10110b_07</Prefab>
+			<ZLevel>UnitOver</ZLevel>
+			<UseAttackSpeed>true</UseAttackSpeed>
+			<RotationType>DirBlend</RotationType>
+		</Effect> -->
+		<Effect Type="Target">
+			<Prefab>Fx_10820b</Prefab>
+			<RotationType>Angle</RotationType>
+			<CenterAlign>true</CenterAlign>
+			<ZLevel>UnitOver</ZLevel>
+			<OffsetHeight>10</OffsetHeight>
+			<OffsetRotation Min="-180" Max="180" />
+		</Effect>
+		<!-- 사거리 -->
+		<RangeType>Sum</RangeType>
+		<RangeSum>6</RangeSum>
+		<!-- 스킬 : 차징 관통 사격. 좌표 고정과 관통 경로 판정은 전용 AI에서 처리 -->
+		<AIType>Unit10820AI</AIType>
+		<Skill>10820</Skill>
+		<!-- 궁극기 : 파마의 화살. 게이지가 최대(5)가 되면 발동한다. -->
+		<UltimateSkill>10825</UltimateSkill>
+		<UltimateGauge>5</UltimateGauge>
+		<UltimateGaugeAtUseSkill>1</UltimateGaugeAtUseSkill>
+        <!-- 패시브 스킬 관련 표기용 -->
+        <PassiveSkill>
+            <Icon>PotentialIcons/General/PotentialIcon_43</Icon>
+            <BuffType>SingleStackBuff</BuffType>
+        </PassiveSkill>
+		<!-- 1 : 집중 최소 중첩 10 -->
+		<Overcome ReqOvercome="1" TargetSkill="10820">
+            <Name>Name_Overcome_10820_0</Name>
+			<Unit10820AI_FocusMinStack>10</Unit10820AI_FocusMinStack>
+		</Overcome>
+		<!-- 2 : 스킬 혹은 궁극기 사용 시, 집중 중첩 5 획득 -->
+		<Overcome ReqOvercome="2" TargetSkill="10820">
+            <Name>Name_Overcome_10820_1</Name>
+			<Unit10820AI_FocusStackAtCastSkill>5</Unit10820AI_FocusStackAtCastSkill>
+		</Overcome>
+		<!-- 3 : 파마의 화살 중에 적 처치 시, 파마의 화살 지속시간 초기화 -->
+		<Overcome ReqOvercome="3" TargetSkill="10820">
+            <Name>Name_Overcome_10820_2</Name>
+			<Unit10820AI_ResetUltimateTimeAtKill>1</Unit10820AI_ResetUltimateTimeAtKill>
+		</Overcome>
+		<!-- 4 : 집중 최대 스택 +30, 집중 스택이 최대치일 때 일반 공격이 반드시 치명타 -->
+		<Overcome ReqOvercome="4" TargetSkill="10820">
+            <Name>Name_Overcome_10820_3</Name>
+			<Unit10820AI_FocusMaxStack>30</Unit10820AI_FocusMaxStack>
+			<Unit10820AI_CriticalAtMaxFocus>1</Unit10820AI_CriticalAtMaxFocus>
+		</Overcome>
+		<!-- 5 : 적 처치 시, 다음 공격 대상에게도 집중 스택 유지 -->
+		<Overcome ReqOvercome="5" TargetSkill="10820">
+            <Name>Name_Overcome_10820_4</Name>
+			<Unit10820AI_KeepFocusAtKill>1</Unit10820AI_KeepFocusAtKill>
+		</Overcome>
+
+        <!-- 가챠 연출 -->
+        <AcquireVideo Type="XML">
+            <Source>102</Source>
+            <AspectMode>EnvelopeParent</AspectMode>
+        </AcquireVideo>
+        
+		<!-- 버전 -->
+		<MinVersion>174100</MinVersion>
+	</Unit>
 
 	<Unit ID="20000">
 		<!-- 기본정보 -->
@@ -12255,7 +12373,7 @@
 		<RandomSkillPool>214700,214701,214702</RandomSkillPool>
 		<SkillCountForUlt>3</SkillCountForUlt>
 		<BossGaugeBar>Boss_21470_Skill_Bar</BossGaugeBar>
-		<UltimateSkill>214703</UltimateSkill>
+		<BossUltimateSkill>214703</BossUltimateSkill>
 		<SubBossId>21480</SubBossId>
 
 		<Potential ReqLevel='1'>
@@ -12316,7 +12434,7 @@
 		<RandomSkillPool>214700,214701,214702</RandomSkillPool>
 		<SkillCountForUlt>3</SkillCountForUlt>
 		<BossGaugeBar>Boss_21470_Skill_Bar</BossGaugeBar>
-		<UltimateSkill>214703</UltimateSkill>
+		<BossUltimateSkill>214703</BossUltimateSkill>
 		<SubBossId>21480</SubBossId>
 	</Unit>
 
@@ -18622,7 +18740,7 @@
 		<RandomSkillPool>264700,264701,264702</RandomSkillPool>
 		<SkillCountForUlt>3</SkillCountForUlt>
 		<BossGaugeBar>Boss_21470_Skill_Bar</BossGaugeBar>
-		<UltimateSkill>264703</UltimateSkill>
+		<BossUltimateSkill>264703</BossUltimateSkill>
 		<SubBossId>26480</SubBossId>
 
 		<Potential ReqLevel='1'>
@@ -18683,7 +18801,7 @@
 		<RandomSkillPool>264700,264701,264702</RandomSkillPool>
 		<SkillCountForUlt>3</SkillCountForUlt>
 		<BossGaugeBar>Boss_20860_Skill_Bar</BossGaugeBar>
-		<UltimateSkill>264703</UltimateSkill>
+		<BossUltimateSkill>264703</BossUltimateSkill>
 		<SubBossId>26480</SubBossId>
 	</Unit>
 

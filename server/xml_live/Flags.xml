@@ -694,6 +694,19 @@
 		<PreviewOffsetY>-20</PreviewOffsetY>
 		<SpriteOffsetY>-30</SpriteOffsetY>
 	</Flag>
+
+<!-- 단일 아레나 -->
+    <Flag ID="60000">
+        <FlagName>바람의 아레나 깃발</FlagName>
+        <Desc>단판 아레나 킹 등급 달성 보상</Desc>
+        <Type>Reward</Type>
+    </Flag>
+    <Flag ID="60010">
+        <FlagName>바람의 화신 깃발</FlagName>
+        <Desc>단판 아레나 100위 이내 순위 보상</Desc>
+        <Type>Reward</Type>
+    </Flag>
+
     
 <!-- 이벤트-->
     <Flag ID="70000">

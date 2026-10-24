@@ -1,5 +1,7 @@
 <TerritoryTradeShops>
+    <!-- 1008 업데이트(174) 이전 상점: 173 이하 클라이언트 전용, 구매 이력 추적용으로 유지 -->
     <TerritoryTradeShop ID="10000">
+        <MaxVersion>173999</MaxVersion>
         <!-- 사용 가능 재화 -->
         <AvailableCurrencies>
             <Currency Type="InventoryItem" ID="3000" Index="0"/>
@@ -24,6 +26,7 @@
     </TerritoryTradeShop>
 
     <TerritoryTradeShop ID="10100">
+        <MaxVersion>173999</MaxVersion>
         <!-- 사용 가능 재화 -->
         <AvailableCurrencies>
             <Currency Type="Cash" Index="0"/>
@@ -50,6 +53,7 @@
     </TerritoryTradeShop>
 
     <TerritoryTradeShop ID="10200">
+        <MaxVersion>173999</MaxVersion>
         <!-- 사용 가능 재화 -->
         <AvailableCurrencies>
             <Currency Type="Artifact" ID="100" Index="0"/>
@@ -70,6 +74,7 @@
     </TerritoryTradeShop>
 
     <TerritoryTradeShop ID="10300">
+        <MaxVersion>173999</MaxVersion>
         <!-- 사용 가능 재화 -->
         <AvailableCurrencies>
             <Currency Type="Gold" Index="0"/>
@@ -115,22 +120,166 @@
             </TradeItem>
         </TradeItems>
     </TerritoryTradeShop>
-    
+
+    <!-- 무역상 레벨 5: 격주 초기화 상점 2 -->
     <TerritoryTradeShop ID="10400">
         <RefreshSetting StartAt="20251201" IntervalWeek="2"/>
-        
-        <!-- 사용 가능 재화 -->
+
         <AvailableCurrencies>
             <Currency Type="InventoryItem" ID="700" Index="0"/>
         </AvailableCurrencies>
 
-        <!-- 판매 물품 리스트 -->
         <TradeItems>
-            <TradeItem Type="InventoryItem" BuyLimit="1" ID="163" ItemId="10401">
+            <TradeItem Type="InventoryItem" ID="163" Count="1" BuyLimit="1" ItemId="10401">
                 <Currency Index="0" Price="100"/>
             </TradeItem>
-            <TradeItem Type="InventoryItem" BuyLimit="1" ID="7000" ItemId="10402">
+            <TradeItem Type="InventoryItem" ID="7000" Count="1" BuyLimit="1" ItemId="10402">
                 <Currency Index="0" Price="100"/>
+            </TradeItem>
+        </TradeItems>
+    </TerritoryTradeShop>
+
+    <!-- 무역상 레벨 1: 상시 상점 -->
+    <TerritoryTradeShop ID="10010">
+        <MinVersion>174000</MinVersion>
+        <AvailableCurrencies>
+            <Currency Type="Cash" Index="0"/>
+            <Currency Type="Artifact" ID="100" Index="1"/>
+        </AvailableCurrencies>
+
+        <TradeItems>
+            <TradeItem Type="NewUnitGachaItem" BuyLimit="-1" ItemId="10011">
+                <Currency Index="0" Price="149"/>
+            </TradeItem>
+            <TradeItem Type="Artifact" ID="601" Count="1" BuyLimit="-1" ItemId="10012">
+                <Currency Index="1" Price="800"/>
+            </TradeItem>
+            <TradeItem Type="Artifact" ID="801" Count="1" BuyLimit="-1" ItemId="10013">
+                <Currency Index="1" Price="1000"/>
+            </TradeItem>
+            <TradeItem Type="Artifact" ID="902" Count="1" BuyLimit="-1" ItemId="10014">
+                <Currency Index="1" Price="2500"/>
+            </TradeItem>
+        </TradeItems>
+    </TerritoryTradeShop>
+
+    <!-- 무역상 레벨 2: 주간 초기화 상점 1 -->
+    <TerritoryTradeShop ID="10110">
+        <MinVersion>174000</MinVersion>
+        <AvailableCurrencies>
+            <Currency Type="Gold" Index="0"/>
+            <Currency Type="InventoryItem" ID="3000" Index="1"/>
+            <Currency Type="InventoryItem" ID="3001" Index="2"/>
+        </AvailableCurrencies>
+
+        <TradeItems>
+            <TradeItem Type="Treasure_Special" Count="1" BuyLimit="2" ItemId="10111">
+                <Currency Index="2" Price="20"/>
+            </TradeItem>
+            <TradeItem Type="Treasure_Special" Count="1" BuyLimit="-1" ItemId="10112">
+                <Currency Index="2" Price="45"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="3001" Count="1" BuyLimit="5" ItemId="10113">
+                <Currency Index="1" Price="5"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="3100" Count="1" BuyLimit="10" ItemId="10114">
+                <Currency Index="0" Price="4000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="3000" Count="1" BuyLimit="10" ItemId="10115">
+                <Currency Index="0" Price="2000"/>
+            </TradeItem>
+        </TradeItems>
+    </TerritoryTradeShop>
+
+    <!-- 무역상 레벨 3: 주간 초기화 상점 2 -->
+    <TerritoryTradeShop ID="10210">
+        <MinVersion>174000</MinVersion>
+        <AvailableCurrencies>
+            <Currency Type="Gold" Index="0"/>
+            <Currency Type="InventoryItem" ID="4000" Index="1"/>
+        </AvailableCurrencies>
+
+        <TradeItems>
+            <!-- 특급 장신구 선택 상자: 최신 버전만 클라이언트가 선택하도록 버전 행을 유지한다. -->
+            <TradeItem Type="InventoryItem" ID="5000" Count="1" BuyLimit="-1" ItemId="10211">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5500" Count="1" BuyLimit="-1" ItemId="10211" Version="1">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5501" Count="1" BuyLimit="-1" ItemId="10211" Version="2">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5502" Count="1" BuyLimit="-1" ItemId="10211" Version="3">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5503" Count="1" BuyLimit="-1" ItemId="10211" Version="4">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5504" Count="1" BuyLimit="-1" ItemId="10211" Version="5">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5505" Count="1" BuyLimit="-1" ItemId="10211" Version="6">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5506" Count="1" BuyLimit="-1" ItemId="10211" Version="7">
+                <Currency Index="0" Price="100000"/>
+            </TradeItem>
+
+            <!-- 장신구 파편으로 구매하는 특급 장신구 선택 상자 -->
+            <TradeItem Type="InventoryItem" ID="5000" Count="1" BuyLimit="10" ItemId="10212">
+                <Currency Index="1" Price="10"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5500" Count="1" BuyLimit="10" ItemId="10212" Version="1">
+                <Currency Index="1" Price="10"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5501" Count="1" BuyLimit="10" ItemId="10212" Version="2">
+                <Currency Index="1" Price="10"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5502" Count="1" BuyLimit="10" ItemId="10212" Version="3">
+                <Currency Index="1" Price="10"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5503" Count="1" BuyLimit="10" ItemId="10212" Version="4">
+                <Currency Index="1" Price="10"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5504" Count="1" BuyLimit="10" ItemId="10212" Version="5">
+                <Currency Index="1" Price="10"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5505" Count="1" BuyLimit="10" ItemId="10212" Version="6">
+                <Currency Index="1" Price="10"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="5506" Count="1" BuyLimit="10" ItemId="10212" Version="7">
+                <Currency Index="1" Price="10"/>
+            </TradeItem>
+
+            <TradeItem Type="InventoryItem" ID="4100" Count="1" BuyLimit="10" ItemId="10213">
+                <Currency Index="0" Price="2000"/>
+            </TradeItem>
+            <TradeItem Type="InventoryItem" ID="800" Count="1" BuyLimit="4" ItemId="10214">
+                <Currency Index="0" Price="50000"/>
+            </TradeItem>
+        </TradeItems>
+    </TerritoryTradeShop>
+
+    <!-- 무역상 레벨 4: 격주 초기화 상점 1 -->
+    <TerritoryTradeShop ID="10310">
+        <MinVersion>174000</MinVersion>
+        <RefreshSetting StartAt="20251201" IntervalWeek="2"/>
+
+        <AvailableCurrencies>
+            <Currency Type="InventoryItem" ID="3001" Index="0"/>
+            <Currency Type="Gold" Index="1"/>
+        </AvailableCurrencies>
+
+        <TradeItems>
+            <TradeItem Type="PermanentSpecialTreasure" Count="1" BuyLimit="1" ItemId="10311">
+                <Currency Index="0" Price="45"/>
+            </TradeItem>
+            <TradeItem Type="Key" ID="370" Count="1" BuyLimit="30" ItemId="10312">
+                <Currency Index="0" Price="1"/>
+            </TradeItem>
+            <TradeItem Type="Key" ID="370" Count="1" BuyLimit="10" ItemId="10313">
+                <Currency Index="1" Price="100000"/>
             </TradeItem>
         </TradeItems>
     </TerritoryTradeShop>

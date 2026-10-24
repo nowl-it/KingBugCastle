@@ -14,7 +14,7 @@ Every op is idempotent (safe to run repeatedly) and appends a WARN it cannot
 silently resolve - a missing anchor means the devs restructured the block we patch,
 the one thing that needs a human. Everything else is mechanical.
 
-The mods (all real fixes, no fabricated numbers):
+The mods (all real fixes EXCEPT the buff numbers of mod 9, which are test values):
   1. CCRatio -100 -> 0            enemies become crowd-control-able
   2. Treasure 30040 gate -> 170100  Shadowless shows on a fallback v170 client
   3. Treasure 30043 gate -> 172001 Vitacorde shows on the deployed v172.0.01 client
@@ -22,6 +22,17 @@ The mods (all real fixes, no fabricated numbers):
   5. UnitPanelData 10800/10810    Cathy/Alessia Profile tab (devs shipped none)
   6. Cathy Overcome field typo    {Overcome:...AuraDamagePer} -> ...AuraTotalDamagePer
   7. FetchComplete strings         the private-server "Ready to bug" loading text
+  8. Cor Orbis 50002 strings (EN/VI)  leaked 2026-09-08, purged by the 2026-09-10
+                                  republish.
+  9. Cor Orbis 50002 rows         the Treasure + BuffData 3500020..3500025 rows those
+                                  strings describe. The official design was never
+                                  shipped, so the BUFF NUMBERS ARE TEST VALUES (see
+                                  the ponytail note on _CORORBIS_BUFFS). The desc-param
+                                  constants are NOT guesses: they are forced to match
+                                   the placeholder count of the leaked strings. Art uses
+                                   the default TreasureIcon_50002 / TreasureIllust_50002
+                                   names (missing in every build) so the client shows
+                                   its placeholder - never another treasure's art.
 
 CRITICAL: Strings files must stay comment-free (Localizer breaks on <!-- -->).
 None of these write a comment into a Strings file.
@@ -214,6 +225,494 @@ def _apply_fetch_complete(xml_dir, warns):
     return n
 
 
+# ── 8. Cor Orbis (Treasure 50002) strings: leaked 2026-09-08, purged 2026-09-10 ──
+# Text only. A rendering treasure still needs a <Treasure ID="50002"> row and
+# BuffData 3500020..25, neither of which was ever leaked - do not invent them here.
+# 18 keys are VERBATIM operator-supplied data (the 2026-09-08 leak block). The
+# operator asked for the two placeholders back in-game style, so TreasureSubName/
+# TreasureDesc are ours again: "Breath of the Living" + the mana poem. Everything
+# else must stay byte-exact. SpecialPackage_1690..1692 and AdsSummonRestrictionAlert
+# are NOT written (live keys the operator dropped). _apply_cororbis OVERWRITES a
+# differing value so this stays true after every refresh.
+_CORORBIS = {
+    "EN_US": {
+        "TreasureName_50002": "Cor Orbis",
+        "TreasureSubName_50002": "Breath of the Living",
+        "TreasureDesc_50002": (
+            "From root and fang it drinks the wandering mana,\n"
+            "hoards it in silence,\n"
+            "then pours it all back in a single flood"),
+        "TreasureSkillName_50002": "MP Combination",
+        "BuffDataName_3500021": "Assimilation I",
+        "BuffDataName_3500022": "MP Barrier I",
+        "BuffDataName_3500023": "MP Resonance",
+        "BuffDataName_3500024": "MP Barrier II",
+        "BuffDataName_3500025": "Assimilation II",
+        "SpecialShop_TreasurePickUp50002": "Cor Orbis Pickup Special Shop",
+        "BuffDataDesc_3500021": "For every {1}% Spell CRIT Damage above {0}%, "
+                                "the enhanced skill's Final Damage increase is multiplied by {2}",
+        "BuffDataDesc_3500022": "Damage Taken {0}% until the 3rd skill use",
+        "BuffDataDesc_3500023": "Upon using an enhanced skill, additionally uses the same skill "
+                                "on 2 random targets for {0}% Damage",
+        "BuffDataDesc_3500024": "Damage Taken {0}% until the 3rd skill use",
+        "BuffDataDesc_3500025": "For every {1}% Spell CRIT Damage above {0}%, "
+                                "the enhanced skill's Final Damage increase is multiplied by {2}",
+        "TreasureSkillDesc_3500020": (
+            "After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains "
+            "+{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.\n"
+            "The last skill is enhanced, increasing Final Damage by +{2}%"),
+        "TreasureSkillDesc_3500021": (
+            "After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains "
+            "+{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.\n"
+            "The last skill is enhanced, increasing Final Damage by +{2}%.\n"
+            "For every {4}% Spell CRIT Damage above {3}%, the enhanced skill's Final Damage "
+            "increase is multiplied by {5}"),
+        "TreasureSkillDesc_3500022": (
+            "After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains "
+            "+{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.\n"
+            "The last skill is enhanced, increasing Final Damage by +{2}%.\n"
+            "For every {4}% Spell CRIT Damage above {3}%, the enhanced skill's Final Damage "
+            "increase is multiplied by {5}\n"
+            "Damage Taken {6}% until using a skill 3 times"),
+        "TreasureSkillDesc_3500023": (
+            "After Battle starts, the highest-Tier Hero equipped with Cor Orbis gains "
+            "+{0}% Max MP and -{1}% Final Damage Dealt until using a skill 3 times.\n"
+            "The last skill is enhanced, increasing Final Damage by +{2}%.\n"
+            "For every {4}% Spell CRIT Damage above {3}%, the enhanced skill's Final Damage "
+            "increase is multiplied by {5}\n"
+            "Damage Taken {6}% until using a skill 3 times\n"
+            "Upon using an enhanced skill, additionally uses the same skill on 2 random "
+            "targets for {7}% Damage"),
+    },
+    "VI": {
+        "TreasureName_50002": "Cor Orbis",
+        "TreasureSubName_50002": "Hơi Thở Của Sinh Mệnh",
+        "TreasureDesc_50002": (
+            "Từ rễ cây đến nanh thú, nó hút lấy Mana lang thang,\n"
+            "giữ yên trong lặng,\n"
+            "rồi đổ trào trả lại tất cả"),
+        "TreasureSkillName_50002": "Hợp Nhất Mana",
+        "BuffDataName_3500021": "Đồng Hóa I",
+        "BuffDataName_3500022": "Kết Giới Mana I",
+        "BuffDataName_3500023": "Cộng Hưởng Mana",
+        "BuffDataName_3500024": "Kết Giới Mana II",
+        "BuffDataName_3500025": "Đồng Hóa II",
+        "SpecialShop_TreasurePickUp50002": "Cửa Hàng Đặc Biệt Pickup Cor Orbis",
+        "BuffDataDesc_3500021": "Cứ mỗi {1}% Sát thương chí mạng phép vượt quá {0}%, "
+                                "mức tăng ST tổng của kỹ năng cường hóa được nhân {2} lần",
+        "BuffDataDesc_3500022": "ST phải nhận {0}% đến lần dùng kỹ năng thứ 3",
+        "BuffDataDesc_3500023": "Khi dùng kỹ năng cường hóa, dùng thêm cùng kỹ năng "
+                                "lên 2 mục tiêu ngẫu nhiên với ST {0}%",
+        "BuffDataDesc_3500024": "ST phải nhận {0}% đến lần dùng kỹ năng thứ 3",
+        "BuffDataDesc_3500025": "Cứ mỗi {1}% Sát thương chí mạng phép vượt quá {0}%, "
+                                "mức tăng ST tổng của kỹ năng cường hóa được nhân {2} lần",
+        "TreasureSkillDesc_3500020": (
+            "Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn "
+            "Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3\n"
+            "Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%"),
+        "TreasureSkillDesc_3500021": (
+            "Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn "
+            "Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3\n"
+            "Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%\n"
+            "Cứ mỗi {4}% Sát thương chí mạng phép vượt quá {3}%, mức tăng ST tổng của kỹ năng "
+            "cường hóa được nhân {5} lần"),
+        "TreasureSkillDesc_3500022": (
+            "Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn "
+            "Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3\n"
+            "Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%\n"
+            "Cứ mỗi {4}% Sát thương chí mạng phép vượt quá {3}%, mức tăng ST tổng của kỹ năng "
+            "cường hóa được nhân {5} lần\n"
+            "ST phải nhận {6}% đến lần dùng kỹ năng thứ 3"),
+        "TreasureSkillDesc_3500023": (
+            "Sau khi Chiến Đấu bắt đầu, Anh Hùng có cấp ★ cao nhất trong số các Anh Hùng gắn "
+            "Cor Orbis nhận +{0}% Mana tối đa và -{1}% ST gây ra tổng đến lần dùng kỹ năng thứ 3\n"
+            "Kỹ năng cuối được cường hóa, tăng ST tổng +{2}%\n"
+            "Cứ mỗi {4}% Sát thương chí mạng phép vượt quá {3}%, mức tăng ST tổng của kỹ năng "
+            "cường hóa được nhân {5} lần\n"
+            "ST phải nhận {6}% đến lần dùng kỹ năng thứ 3\n"
+            "Khi dùng kỹ năng cường hóa, dùng thêm cùng kỹ năng lên 2 mục tiêu ngẫu nhiên "
+            "với ST {7}%"),
+    },
+}
+
+
+def _apply_cororbis(xml_dir, warns):
+    n = 0
+    for loc, entries in _CORORBIS.items():
+        p = pathlib.Path(xml_dir) / f"Strings_{loc}.xml"
+        if not p.exists():
+            warns.append(f"[Strings_{loc}.xml] locale not present - Cor Orbis text NOT applied")
+            continue
+        txt = _read(p)
+        if "</Strings>" not in txt:
+            warns.append(f"[Strings_{loc}.xml] no </Strings> close - format moved?")
+            continue
+        changed = False
+        for k, v in entries.items():
+            m = re.search(rf'<String Key="{re.escape(k)}">(.*?)</String>', txt, re.S)
+            if m is None:
+                txt = txt.replace("</Strings>",
+                                  f'  <String Key="{k}">{v}</String>\n</Strings>', 1)
+                changed = True
+            elif m.group(1) != v:
+                txt = txt[:m.start(1)] + v + txt[m.end(1):]
+                changed = True
+        if not changed:
+            continue
+        _write(p, txt)
+        n += 1
+    return n
+
+
+# ── 9. Cor Orbis 50002 rows (Treasures + TreasureBuffDatas) ──────────────────
+# ponytail: the FixedValue/MCritic/TakeDamage numbers below are TEST VALUES - the
+# official Cor Orbis buff table never shipped, so nobody knows them. The
+# DescParams/TotalDescParams constants are NOT guesses: each row carries exactly
+# as many <Const> as the leaked string for that row has {N} placeholders, in
+# index order, so every placeholder renders a real number instead of blank.
+# Two desc/effect gaps are deliberate (no generic machinery can express them):
+#   * "until using a skill 3 times"  -> buffs are applied at BattleStart, permanent
+#   * BuffDataDesc_3500023 splash    -> implemented as a Mana refund on skill cast
+_TREASURE_50002 = """    <Treasure ID="50002">
+        <Comment>Cor Orbis (local row - not shipped by the devs)</Comment>
+        <Rarity>Special</Rarity>
+        <LimitedEdition>true</LimitedEdition>
+
+        <Role>Mystic</Role>
+        <BuffDataStartID>3500020</BuffDataStartID>
+        <Color>8381EE</Color>
+        <SubNameColor>FEEEAA</SubNameColor>
+        <CardIllustOffsetX>0</CardIllustOffsetX>
+        <CardIllustOffsetY>0</CardIllustOffsetY>
+        <MinVersion>170000</MinVersion>
+    </Treasure>
+"""
+
+# Every DescParams/TotalDescParams list below is sized to the placeholder count of
+# the leaked string it feeds, in {N} index order - so no placeholder renders blank.
+_CORORBIS_BUFFS = """    <BuffData ID="3500020">
+        <Comment>Cor Orbis TEST VALUES - battle start: +Max MP, -Final Damage Dealt</Comment>
+
+        <DescParams>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="MaxMana" StatValueType="TotalPerValue" MaxOverlapCount="1" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="TotalPerValue" MaxOverlapCount="1" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-20</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3500021" Inherit="3500020">
+        <Comment>Assimilation I (TEST VALUES)</Comment>
+
+        <DescParams>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue" MaxOverlapCount="1" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>50</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3500022" Inherit="3500021">
+        <Comment>MP Barrier I (TEST VALUES)</Comment>
+
+        <DescParams>
+            <Const>-30</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+            <Const>-30</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" MaxOverlapCount="1" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3500023" Inherit="3500022">
+        <Comment>MP Resonance (TEST VALUES - mana refund stands in for the leaked splash effect)</Comment>
+
+        <DescParams>
+            <Const>250</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+            <Const>-30</Const>
+            <Const>250</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <AfterCastSkill />
+            </Conditions>
+
+            <CoolTime>3</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <HealManaPer />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3500024" Inherit="3500023">
+        <Comment>MP Barrier II (TEST VALUES - overrides option 4 in place)</Comment>
+
+        <DescParams>
+            <Const>-40</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+            <Const>-30</Const>
+            <Const>250</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Values>
+                <FixedValue>-40</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3500025" Inherit="3500024">
+        <Comment>Assimilation II (TEST VALUES - overrides option 3 in place)</Comment>
+
+        <DescParams>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>3</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+            <Const>-30</Const>
+            <Const>250</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Values>
+                <FixedValue>100</FixedValue>
+            </Values>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Values>
+                <FixedValue>-40</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+    </BuffData>
+
+"""
+
+
+def _apply_cororbis_rows(xml_dir, warns):
+    n = 0
+    p = pathlib.Path(xml_dir) / "Treasures.xml"
+    if not p.exists():
+        warns.append("[Treasures.xml] missing - Cor Orbis row NOT applied")
+    else:
+        txt = _read(p)
+        if '<Treasure ID="50002">' not in txt:
+            if "</Treasures>" not in txt:
+                warns.append("[Treasures.xml] no </Treasures> close - Cor Orbis row NOT applied")
+            else:
+                _write(p, txt.replace("</Treasures>", _TREASURE_50002 + "</Treasures>", 1))
+                n += 1
+        else:
+            # Strip the borrowed-50000 art tags from an already-present row so the
+            # defaults (TreasureIcon_50002 / TreasureIllust_50002 -> placeholder) win.
+            def _no_art(m):
+                return re.sub(r"\s*<(IconName|IllustName|IllustBGName|CardIllustName|SkillIcon)>"
+                              r"[^<]*</\1>", "", m.group(0))
+            new = re.sub(r'<Treasure ID="50002">.*?</Treasure>', _no_art, txt,
+                         count=1, flags=re.S)
+            if new != txt:
+                _write(p, new)
+                n += 1
+
+    p = pathlib.Path(xml_dir) / "TreasureBuffDatas.xml"
+    if not p.exists():
+        warns.append("[TreasureBuffDatas.xml] missing - Cor Orbis buff rows NOT applied")
+    else:
+        txt = _read(p)
+        if '<BuffData ID="3500020">' not in txt:
+            if "</BuffDatas>" not in txt:
+                warns.append("[TreasureBuffDatas.xml] no </BuffDatas> close - buff rows NOT applied")
+            else:
+                _write(p, txt.replace("</BuffDatas>", _CORORBIS_BUFFS + "</BuffDatas>", 1))
+                n += 1
+    return n
+
+
 def apply(xml_dir):
     """Apply every local mod idempotently. Returns (applied_count, warnings)."""
     warns = []
@@ -224,6 +723,8 @@ def apply(xml_dir):
     n += _apply_panels(xml_dir, warns)
     n += _apply_overcome_typo(xml_dir, warns)
     n += _apply_fetch_complete(xml_dir, warns)
+    n += _apply_cororbis(xml_dir, warns)
+    n += _apply_cororbis_rows(xml_dir, warns)
     return n, warns
 
 
@@ -242,6 +743,9 @@ def _check():
     (d / "UnitPanelDatas.xml").write_text(
         '<UnitPanelDatas>\n\t<UnitPanelData ID="10790"></UnitPanelData>\n</UnitPanelDatas>',
         encoding="utf-8")
+    (d / "TreasureBuffDatas.xml").write_text(
+        "<BuffDatas>\n    <BuffData ID=\"3500010\">\n    </BuffData>\n</BuffDatas>",
+        encoding="utf-8")
     for loc in ("VI", "EN_US"):
         (d / f"Strings_{loc}.xml").write_text(
             '<Strings><String Key="FetchComplete">Ready to go!</String>'
@@ -250,8 +754,10 @@ def _check():
 
     n, warns = apply(str(d))
     assert not warns, warns
-    # 4 structural files + 2 locale typo edits + 2 FetchComplete edits = 8 writes.
-    assert n == 8, f"expected 8 file writes on fresh data, got {n}"
+    # Units + Treasures(gates) + Stages + UnitPanelDatas (4) + 2 locale typo edits
+    # + 2 FetchComplete edits + 2 Cor Orbis locale edits + 2 Cor Orbis row edits
+    # (Treasures + TreasureBuffDatas) = 12 writes.
+    assert n == 12, f"expected 12 file writes on fresh data, got {n}"
     assert "<CCRatio>0</CCRatio>" in _read(d / "Units.xml")
     assert "<MinVersion>170100</MinVersion>" in _read(d / "Treasures.xml")
     assert "<MinVersion>172001</MinVersion>" in _read(d / "Treasures.xml")
@@ -262,6 +768,22 @@ def _check():
     assert "AuraTotalDamagePer" in _read(d / "Strings_VI.xml")
     assert _FETCH_COMPLETE["VI"] in _read(d / "Strings_VI.xml")
     assert _FETCH_COMPLETE["EN_US"] in _read(d / "Strings_EN_US.xml")
+    assert _CORORBIS["VI"]["TreasureSubName_50002"] in _read(d / "Strings_VI.xml")
+    assert _CORORBIS["EN_US"]["TreasureSkillDesc_3500023"] in _read(d / "Strings_EN_US.xml")
+    # The dropped package keys must never be written.
+    assert "SpecialPackage_1690" not in _read(d / "Strings_EN_US.xml")
+    # Mod 9: the Cor Orbis rows exist and are complete.
+    assert '<Treasure ID="50002">' in _read(d / "Treasures.xml")
+    assert "<MinVersion>170000</MinVersion>" in _read(d / "Treasures.xml")
+    # No art override: defaults are TreasureIcon_50002 / TreasureIllust_50002,
+    # which do not exist in any build, so the client shows its placeholder.
+    row = re.search(r'<Treasure ID="50002">.*?</Treasure>',
+                    _read(d / "Treasures.xml"), re.S).group(0)
+    assert "50000" not in row, "Cor Orbis must not borrow 50000 art"
+    assert "<IconName>" not in row
+    buffs = _read(d / "TreasureBuffDatas.xml")
+    for i in range(3500020, 3500026):
+        assert f'<BuffData ID="{i}"' in buffs, i
 
     # Partial upstream migration: Cathy may have shipped while Alessia did not.
     panels = d / "UnitPanelDatas.xml"
@@ -278,7 +800,7 @@ def _check():
 
     import shutil
     shutil.rmtree(d)
-    print("ok: local_mods behave (7 mods, all idempotent)")
+    print("ok: local_mods behave (9 mods, all idempotent)")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
-<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
+<Strings TranslationBaseCommit="b53f5c202519e52ec712d65feedb55aff10c9efe">
   <String Key="UpdateNoticeVersion">172000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/en</String>
   <String Key="Title">King God Castle</String>
   <String Key="Tags">AwesomePiece, ZombieHighSchool, AutoChess, LolChess, KingGodCasctle, Автобой, Стратегия, СтратегическаяБитва, TFT, Ends, HelpMeEnds, Объединение, Защита</String>
   <String Key="Store_ShortDesc">Защищайте замок от вражеских вторжений вместе с героями и силами богов в King God Castle!</String>
@@ -949,8 +949,8 @@
   <String Key="AddDefPerCount">Уменьш. получаемого урона на {0} за каждого размещенного героя
 (Макс. до {1})</String>
   <String Key="AddDefPerCount_Piece">Чем больше размещенных героев, тем меньше получаемый урон</String>
-  <String Key="AtkPerByRange">Длина атаки всех Героев +1, Нанос. урон обычных атак/навыков +{0} за каждую ед. расстояния до цели (макс. расстояние {1})</String>
-  <String Key="AtkPerByRange_Piece">Длина атаки всех Героев +1, Нанос. урон обычных атак/навыков растет с расстоянием до цели</String>
+  <String Key="AtkPerByRange">Нанос. урон обычных атак/умений +{0} за каждую клетку до цели (макс. расстояние {1})</String>
+  <String Key="AtkPerByRange_Piece">Нанос. урон обычных атак/умений растет с расстоянием до цели</String>
   <String Key="ArtifactName_100">Мистический порошок</String>
   <String Key="ArtifactDesc_100">Мистический порошок, который вы сможете получить при разборе реликвий.</String>
   <String Key="ArtifactName_10000">Великий меч империи</String>
@@ -1239,11 +1239,8 @@
   <String Key="ItemName_10020">Увеличение отряда</String>
   <String Key="ItemDesc_10020">Отряд был увеличен на 1.</String>
   <String Key="ItemName_10030">+5 серебряных монет</String>
-  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">+10 серебряных монет</String>
-  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">+20 серебряных монет</String>
-  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">Медаль за боевые заслуги</String>
   <String Key="ItemDesc_10040">Случайным образом увеличивает показатель звезд на 1 для героя, находящегося на поле.</String>
   <String Key="ItemName_10050">Могущественный свиток призыва героя (2 р.)</String>
@@ -2751,8 +2748,8 @@
   <String Key="CashCart">Тележка алмазов</String>
   <String Key="UnitName_10320">Тия</String>
   <String Key="UnitSubName_10320">Дозорный вечности</String>
-  <String Key="Potential_10320_0">Общ. нанос. по врагам в радиусе 3 кл. урон +20%</String>
-  <String Key="Potential_10320_1">При уничтожении врага следующий &lt;Вихрь&gt; выпускает в 2 раза больше стрел</String>
+  <String Key="Potential_10320_0">Против врагов в радиусе 4 клеток: Общ. нанос. урон +30%</String>
+  <String Key="Potential_10320_1">Первая стрела &lt;Вихря&gt; игнорирует 100% Физ. ЗЩТ врага</String>
   <String Key="SkinDesc_Default_10320">Тия – капитан дозорных в эльфийском королевском отряде. Она прирожденная лучница, быстрая, словно вихрь, и уже много лет защищает границы Вечного леса.</String>
   <String Key="SkillName_10320">Вихрь</String>
   <String Key="SkillDesc_10320">Если в радиусе {BuffRangeSum} кл. есть цель, перемещается на {MoveDistance} кл. назад и наносит обычн. атаку физ. уроном {AttackCount} р. Если целей нет в радиусе {BuffRangeSum} кл., то атакует {AttackCount} р., нанося урон, равный {10325@Damage:AtkPer:BaseValue}% от АТК.</String>
@@ -5001,7 +4998,7 @@
   <String Key="SelectPickupUnit">Выбрать героев</String>
   <String Key="SelectPickupUnitAgain">Выбрать повторно</String>
   <String Key="SelectPickupUnitComplete">Выбор сделан</String>
-  <String Key="GachaName_9000">Призыв приветствия</String>
+  <String Key="GachaName_9000">Приветственный призыв</String>
   <String Key="OutgameTutorial_30_01">&lt;color=#ffc13d&gt;Призыв&lt;/color&gt; необходим для усиления героев и призыва новых.</String>
   <String Key="OutgameTutorial_30_03">Чтобы получить нового героя, давайте попробуем &lt;color=#ffc13d&gt;Обычный призыв героя&lt;/color&gt;.</String>
   <String Key="OutgameTutorial_30_05">Чтобы пожелать этому замку удачи и процветания, этот призыв будет &lt;color=#ffc13d&gt;бесплатным&lt;/color&gt;.</String>
@@ -5880,7 +5877,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="RogueLikeBuildingPackageTitleFormat">Набор [{0} {1}]</String>
   <String Key="RogueLikeBuildingPackageConfirm">К покупке доступен только один вид набора [{0}]: I, II или III.
 Продолжить покупку?</String>
-  <String Key="LevelFormat">Ур. {0}</String>
+  <String Key="LevelFormat">Уровень {0}</String>
   <String Key="BuildingsAlreadyComplete">Все алтари уже выбраны.</String>
   <String Key="DeathBuildingPackage">Набор [Алтарь жнеца]</String>
   <String Key="ArtifactName_13160">Книга смерти</String>
@@ -6875,8 +6872,8 @@ nПри использовании дает бонус к пополнению �
   <String Key="ArtifactName_14020">Гномий прицел</String>
   <String Key="ArtifactDesc_14020">Прицел, созданный по технологии гномов.
 С ним можно атаковать более удаленные цели с большей точностью, но из-за веса его трудно переносить.</String>
-  <String Key="MoveStopTimeDesc_Piece">Выберите две клетки Поля боя как снайперские позиции. Размещенные Герои получают Абсолютная ЗЩТ +4. Пока они впервые не покинут позицию, 1-е и каждое 5-е попадание обычным уроном наносят больше урона</String>
-  <String Key="MoveStopTimeDesc">Выберите две клетки Поля боя как снайперские позиции. Размещенные Герои получают Абсолютная ЗЩТ +{1}. Пока они впервые не покинут позицию, 1-е и каждое 5-е попадание обычным уроном наносят +{0}% урона.</String>
+  <String Key="MoveStopTimeDesc_Piece">Отмечает 2 клетки на Поле боя как позиции снайпера. Размещённые Герои получают Абсолютная ЗЩТ +4, на время становятся &lt;color=#f33&gt;неподвижны&lt;/color&gt;, и пока находятся на позиции снайпера, их Обычн. урон растёт через заданные интервалы.</String>
+  <String Key="MoveStopTimeDesc">Отмечает 2 клетки на Поле боя как позиции снайпера. Размещённые Герои получают Абсолютная ЗЩТ +{1}, становятся &lt;color=#f33&gt;неподвижны&lt;/color&gt; на {2}с, и до первого выхода с позиции снайпера Обычн. урон +{0}% при первой атаке и затем каждые 5 атак.</String>
   <String Key="ColosseumBanned">Доступ к сезону Поля боя Побоища ограничен</String>
   <String Key="GachaName_1036">Натянутая улыбка</String>
   <String Key="Name_Potential_10560_3">Духовный подъем</String>
@@ -8970,7 +8967,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="SpecialPackage_1491">Набор огненного дождя 2</String>
   <String Key="SpecialPackage_1492">Набор огненного дождя 3</String>
   <String Key="SkillDesc_10110">В течение {Time} сек. атакует еще {AtkCount} р.</String>
-  <String Key="Potential_10110_0">Во время использования &lt;Дождя беглого огня&gt; шанс физ. крита +15%</String>
+  <String Key="Potential_10110_0">Во время &lt;Дождя беглого огня&gt;: Длина атаки +1</String>
   <String Key="Potential_10110_1_00">Общ. АТК +15% за кажд. экипированный лук</String>
   <String Key="Potential_10110_2_00">При использовании &lt;Дождя беглого огня&gt; наносит всем врагам в радиусе 2 кл. вокруг цели физ. урон от навыка, равный 250% от АТК, 3/4/5/6 р. и выстреливает &lt;Ливнем&gt;, уменьшающим общ. скорость передвижения на 30% на 3 сек.</String>
   <String Key="Potential_10110_3">Во время использования &lt;Дождя беглого огня&gt; при нанесении обычн. урона одной и той же цели 10 р. сбрасывает время действия &lt;Дождя беглого огня&gt; и увеличивает АТК на 50%
@@ -10665,7 +10662,7 @@ nПри использовании дает бонус к пополнению �
 При взрыве крит. физ. урон +{5}% на {4} сек.
 Оглушает получивших урон от взрыва целей на {6} сек.
 При взрыве шанс физ. крита +{8}% на {7} сек.</String>
-  <String Key="Potential_10110_1">Во время использования «Беглого огня» общ. АТК +30%</String>
+  <String Key="Potential_10110_1">Во время &lt;Дождя беглого огня&gt;: Шанс физ. крита +30%</String>
   <String Key="Potential_10110_2">Во время использования «Беглого огня» вместо 7-й обычн. атаки используется «Ливень», наносящий всем врагам в радиусе 2 кл. вокруг цели физ. урон от навыка, равный 250% от АТК, 4/5/6/7 р.</String>
   <String Key="Potential_10420_1">Во время использования «Удара Белого тигра» получ. урон -30%</String>
   <String Key="SkillDesc_1011000_Long">С помощью техники лука клана Феникса в течение {10110@Time} сек. увеличивает кол-во обычн. атак на {10110@AtkCount} р. Вместо {1011005@NeedComboCount+1}-й обычн. атаки используется «Ливень», наносящий всем врагам в радиусе {1011010@SplashRangeSum} кл. вокруг цели {1011010@Damage} физ. урона от навыка {1011010@AttackCount} р.</String>
@@ -10943,7 +10940,7 @@ nПри использовании дает бонус к пополнению �
 Закрыть Список желаний без сохранения изменений?</String>
   <String Key="OwnedTreasureStatus">В наличии</String>
   <String Key="ColosseumTierRewardAutoReceiveTitle">Награды рейтинга Поля боя Побоища сезона {0}</String>
-  <String Key="ColossseumTierRewardAutoReceiveDesc">Отправляем неполученную награду за достижение ранга [{1}] в {0} сезоне Поля боя Побоища.</String>
+  <String Key="ColosseumTierRewardAutoReceiveDesc">Отправляем неполученную награду за достижение ранга [{1}] в {0} сезоне Поля боя Побоища.</String>
   <String Key="TreasureName_30018">Дух стальной преграды</String>
   <String Key="TreasureSubName_30018">Стальная цитадель</String>
   <String Key="TreasureDesc_30018">Семья Денеб из поколения в поколение сражалась на передовой Поля боя, за что ее прозвали героической. Их стальной щит, символ семьи, олицетворяет их непобедимую волю.</String>
@@ -11700,7 +11697,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="AccessorySynergyName_9">лунного света</String>
   <String Key="AccessorySynergyName_9_Pre">лунного света</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;Общ. Маг. АТК {0}%&lt;/color&gt;, общ. АТК +{1}%</String>
-  <String Key="AccessorySynergyDesc_10091">Длина атаки +{0}, Крит. физ. урон +{2}% за каждые {1} Длины атаки (макс. 80%)</String>
+  <String Key="AccessorySynergyDesc_10091">Крит. физ. урон +{0}%. Когда текущие ОЗ впервые падают до {1}% или ниже от макс. ОЗ, Крит. физ. урон -{0}%</String>
   <String Key="AccessorySynergyDesc_10092">В начале битвы скрытность на {0} сек., через {1} сек. шанс физ. крита +{2}%</String>
   <String Key="InventoryItemName_5010">Сундук выбора с аксессуарами лунного света</String>
   <String Key="ShopItemName_41012">Случ. аксессуар лунного света</String>
@@ -12653,7 +12650,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="RiftWeaponBuffDesc_130">После использования навыка при попадании обычн. уроном наносит {0}% особ. урона 3 целям</String>
   <String Key="RiftWeaponBuffDesc_140">Физ. ЗЩТ +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">Маг. ЗЩТ +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">Длина атаки +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">Скорость передвижения +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">Физ. вампиризм +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">Маг. вампиризм +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">ЗЩТ +{0}</String>
@@ -13611,7 +13608,7 @@ nПри использовании дает бонус к пополнению �
   <String Key="ArenaStarterBuffDesc_2">При первичном входе на Арену в течение 72 ч. до завершения сезона Арены эффект благословения поля боя применяется, начиная со следующего сезона.</String>
   <String Key="SkillDesc_10070_Short">Получает увеличение общ. СКР АТК на {TotalAttackSpeedPer:BaseValue}% на {Time} сек., при обычн. атаке наносит урон, равный ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% от АТК.</String>
   <String Key="SkillDesc_10070_Long">Джаун переполняется гневом, получает доп. увеличение общ. СКР АТК на {TotalAttackSpeedPer:BaseValue}% на {Time} сек., при обычн атаке в то же время наносит обычн. физ. урон, равный ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% от АТК.</String>
-  <String Key="Potential_10070_0">Во время использования &lt;Ярости&gt; ЗЩТ Джауна +100</String>
+  <String Key="Potential_10070_0">Во время &lt;Ярости&gt;: Длина атаки Джауна +1</String>
   <String Key="Potential_10070_1">Во время использования &lt;Ярости&gt; физ. / маг. вампиризм Джауна +40%</String>
   <String Key="Potential_10070_2">При попадании обычн. уроном по одному врагу 40 р. кол-во атак +1 (не суммируется)
 При обычн. уроне другому врагу сброс увеличения</String>
@@ -14648,9 +14645,9 @@ D = 1 - 4</String>
   <String Key="GachaName_1083">Отшельники</String>
   <String Key="InventoryItemName_700">Камень алхимии</String>
   <String Key="InventoryItemDesc_700">Материал алхимии, который можно получить через поручения следственной группы. Позволяет получить различные предметы при использовании в алхимической мастерской.</String>
-  <String Key="TerritoryTradeShopDesc">Список вещей торговой точки &lt;color=#ffd264&gt;зависит от уровня торговой точки&lt;/color&gt;.
-Вещи торговой точки ур. 4 и ниже &lt;color=#ffd264&gt;сбрасываются каждую неделю&lt;/color&gt;,
-а вещи торговой точки ур. 5 и выше - &lt;color=#ffd264&gt;раз в две недели&lt;/color&gt;.</String>
+  <String Key="TerritoryTradeShopDesc">Товары Торговой точки &lt;color=#ffd264&gt;определяются уровнем Торговой точки&lt;/color&gt;.
+Товары Торговой точки уровня 2~3 &lt;color=#ffd264&gt;обновляются каждую неделю&lt;/color&gt;,
+а товары Торговой точки уровня 4 и выше &lt;color=#ffd264&gt;обновляются раз в 2 недели&lt;/color&gt;.</String>
   <String Key="ChangeAccessorySubStat">Изменить доп. показатели</String>
   <String Key="ChangeAccessorySubStatDesc_0">Выберите аксессуар для изменения доп. показателей</String>
   <String Key="ChangeAccessorySubStatDesc_1">Выберите доп. показатели для изменения.</String>
@@ -16622,7 +16619,8 @@ D = 1 - 4</String>
   <String Key="NewUnitGachaInfo">Вы можете получить 1 героя, которого у вас нет.
 Шанс появления одинаков для всех героев, которых у вас нет.</String>
   <String Key="InventoryItemName_5603">Сундук выбора со спец. божественным оружием</String>
-  <String Key="RewardBoxInventoryDesc_5603">Сундук, дающий 1 спец. божественное оружие по выбору.</String>
+  <String Key="RewardBoxInventoryDesc_5603">Выберите спец. божественное оружие и получите его.
+(Временное божественное оружие не входит)</String>
   <String Key="GachaDesc_PickUpResetAlert">Есть герой, которого нельзя выбрать, поэтому выбор был сброшен автоматически.</String>
   <String Key="UnitName_10780">Нерия</String>
   <String Key="UnitSubName_10780">Мстительница безумия</String>
@@ -17015,8 +17013,7 @@ D = 1 - 4</String>
   <String Key="Name_Overcome_2">Усиление навыка начала боя</String>
   <String Key="Name_Overcome_3">Усиление особенности</String>
   <String Key="Name_Overcome_4">Усиление навыка</String>
-  <String Key="InventoryItemDesc_70000">Свиток Призыва, окутанный таинственной аурой.
-Позволяет выполнить 1 Призыв измерения.</String>
+  <String Key="InventoryItemDesc_70000">Свиток призыва с мистической аурой.</String>
   <String Key="InventoryItemDesc_10000">Маленькое ядро, в котором сжата сила другого измерения.
 Можно обменять на разные товары в Магазине измерений.</String>
   <String Key="InventoryItemName_10000">Ядро измерения</String>
@@ -17082,8 +17079,7 @@ D = 1 - 4</String>
   <String Key="SpecialPackage_1666">Набор Темпестера</String>
   <String Key="SpecialShop_TreasureDoublePickUp10013">Особый магазин божеств. оружия</String>
   <String Key="ShopItemName_70000">Свиток призыва межпространственного героя</String>
-  <String Key="ShopItemDesc_70000">Свиток призыва с таинственной аурой.
-Позволяет выполнить 1 Призыв измерения.</String>
+  <String Key="ShopItemDesc_70000">Свиток призыва с мистической аурой.</String>
   <String Key="RewardBoxInventoryDesc_7100">Можно получить предметы по заданной вероятности.</String>
   <String Key="DimensionHeroAttendanceEventTitle">Событие входа в честь Героя из другого измерения</String>
   <String Key="ReservedText">Зарезервировано</String>
@@ -18313,9 +18309,234 @@ D = 1 - 4</String>
   <String Key="SkinName_1074001">Звёздный владыка лунного света Суха</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Лунные кролики! Вы же знаете, что не стоит слишком шалить только потому, что спустились спустя год, верно? Желаю всем хорошо провести время!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Товары Праздника Луны Урожая</String>
+  <String Key="SeasonalEventNumberFormat">Событие сезона {0}</String>
+  <String Key="SeasonalEvent">Сезонное событие</String>
+  <String Key="SeasonalEventCeilFormat">Пикап сезона {0}</String>
+  <String Key="SeasonalEventName_Season74">Арена Ветра</String>
+  <String Key="SeasonalEventDesc_Season74">Все решается в одном бою!</String>
+  <String Key="UniversalEventText">EVENT</String>
+  <String Key="SingleArenaNeedAdForReroll">Чтобы сменить соперника, посмотрите рекламу.</String>
+  <String Key="SingleArena_ApFormat">AP {0}</String>
+  <String Key="SingleArena_AttackDeck">Атакующий отряд</String>
+  <String Key="SingleArena_AttackDeckSet">Сформировать атакующий отряд</String>
+  <String Key="SingleArena_AttackSelect_Desc">Вы можете использовать текущий атакующий отряд или проверить отряд соперника и сформировать новый.
+
+Если использовать текущий атакующий отряд, битва начнется сразу. Если сформировать новый, придется заново настроить все с выбора героев. (Атакующий отряд можно переформировать до 5 раз в день.)
+
+Выберите способ атаки.</String>
+  <String Key="SingleArena_AttackSelect_Title">Выбор атакующего отряда</String>
+  <String Key="SingleArena_CompleteDeck">Формирование завершено</String>
+  <String Key="SingleArena_DefenseDeck">Оборонительный отряд</String>
+  <String Key="SingleArena_DefenseDeckSet">Сформировать оборонительный отряд</String>
+  <String Key="SingleArena_EnemyDeckPreview">Посмотреть отряд соперника</String>
+  <String Key="SingleArena_FinalAttackSelect_Desc">Сохранить новый атакующий отряд как основной и вступить в битву?
+
+Если использовать текущий атакующий отряд, новый атакующий отряд будет удален автоматически.</String>
+  <String Key="SingleArena_FinalDeckSelect_Desc">Выберите отряд, который хотите использовать.</String>
+  <String Key="SingleArena_FinalDeckSelect_Title">Финальный выбор отряда</String>
+  <String Key="SingleArena_FirstDeckSetAlert">Только в первый раз оборонительный и атакующий отряды сохраняются вместе.
+После этого их можно формировать отдельно.</String>
+  <String Key="SingleArena_Intro_Desc1">На Арене Ветра исход решает всего один бой.</String>
+  <String Key="SingleArena_Intro_Desc2">Вы используете два отряда: атакующий и оборонительный.</String>
+  <String Key="SingleArena_Intro_Desc3">Атакующий отряд нужен, чтобы посмотреть оборонительный отряд соперника и атаковать.</String>
+  <String Key="SingleArena_Intro_Desc4">Оборонительный отряд нужен, чтобы сдерживать атаки соперника. Если защита не удастся, вы потеряете очки победы. (Очки победы можно терять до 3 раз в день.)</String>
+  <String Key="SingleArena_Intro_Desc5">Первое формирование отряда будет зафиксировано, но после этого вы сможете формировать отряды свободно.</String>
+  <String Key="SingleArena_Intro_Desc6">Даже если вы измените атакующий отряд после просмотра оборонительного отряда соперника, отряд соперника не изменится.</String>
+  <String Key="SingleArena_Intro_Desc7">Соберите отряд под соперника и одержите победу!</String>
+  <String Key="SingleArena_LeftGameAlertFormat">Незавершенная битва засчитана как поражение. ({0} очков)</String>
+  <String Key="SingleArena_Log_Attack">Атака</String>
+  <String Key="SingleArena_Log_Def">Защита</String>
+  <String Key="SingleArena_Log_Empty">Записей нет.</String>
+  <String Key="SingleArena_MissionCondFormat">Всего атак {0}</String>
+  <String Key="SingleArena_NeedDeck">Сначала сформируйте атакующий и оборонительный отряды.</String>
+  <String Key="SingleArena_NeedFieldUnit">Нет размещенных героев.</String>
+  <String Key="SingleArena_NewAttackDeck">Новый атакующий отряд</String>
+  <String Key="SingleArena_NewDefenseDeck">Новый оборонительный отряд</String>
+  <String Key="SingleArena_NoMoreDeckChange">Сегодня вы больше не можете менять отряд.</String>
+  <String Key="SingleArena_OldAttackDeck">Текущий атакующий отряд</String>
+  <String Key="SingleArena_OldDefenseDeck">Текущий оборонительный отряд</String>
+  <String Key="SingleArena_RankNotReached">Этот ранг еще не достигнут.</String>
+  <String Key="SingleArena_RankingPanelTitle">Рейтинг Арены Ветра</String>
+  <String Key="SingleArena_RankingReward_Desc">Получите награды по итоговому рейтингу в конце сезона.</String>
+  <String Key="SingleArena_RankingTop">Топ 300</String>
+  <String Key="SingleArena_RecordFormat">Атака {0} побед {1} поражений / Защита {2} побед {3} поражений</String>
+  <String Key="SingleArena_ReformAttackDeck">Переформировать атакующий отряд</String>
+  <String Key="SingleArena_RemainAttackFormat">Осталось атак {0}/{1}</String>
+  <String Key="SingleArena_RerollRemainFormat">Смена соперника {0}/{1}</String>
+  <String Key="SingleArena_RetreatWarning">Если вы отступите, Формирование Арены будет отменено. (При раздельном формировании будет потрачено ежедневное число изменений.)</String>
+  <String Key="SingleArena_Search">Найти соперника</String>
+  <String Key="SingleArena_SelectTargetFirst">Сначала выберите соперника.</String>
+  <String Key="SingleArena_StagePreviewDesc">Можно заранее посмотреть расстановку обоих отрядов.</String>
+  <String Key="SingleArena_StagePreviewTitle">Информация о расстановке</String>
+  <String Key="SingleArena_Title">Арена Ветра</String>
+  <String Key="SingleArena_UseAttackDeck">Использовать атакующий отряд</String>
+  <String Key="SingleArena_UseNewDeck">Использовать новый отряд</String>
+  <String Key="SingleArena_UseOldDeck">Использовать текущий отряд</String>
+  <String Key="SingleArena_RankingRewardPanel_Title">Награды рейтинга Арены Ветра</String>
+  <String Key="SingleArena_RankingRewardPanel_Desc">Награды выдаются по рейтингу на момент конца сезона.
+Чтобы попасть в Топ 300 рейтинга, нужно достичь как минимум ранга Король.</String>
+  <String Key="SingleArena_MatchHistory">История матчей Арены Ветра</String>
+  <String Key="SeasonalEventOperationFormat">Во время события сезона {1} режим {0} будет доступен без разделения на первую и вторую половину.
+
+Оставшееся время : {2}</String>
+  <String Key="MissionDesc_SingleArena_Attack">Сыграть в Арену Ветра {0} раз</String>
+  <String Key="SingleArena_Mission">Миссии Арены Ветра</String>
+  <String Key="SixthYearDailyAttendanceEvent">Событие входа в честь &lt;color=#ffd264&gt;6-летия&lt;/color&gt;</String>
+  <String Key="SeasonalEvent_ButtonName_Rift">Разлом</String>
+  <String Key="SeasonalEvent_ButtonName_Arena">Арена</String>
+  <String Key="SeasonalEvent_ButtonName_Battlefield">Поле боя</String>
+  <String Key="IncarnationUnit">Трансцендентный герой</String>
+  <String Key="Passive">Пассивный навык</String>
+  <String Key="UltimateSkill">Ультимативный навык</String>
+  <String Key="SingleStackBuff">Бафф с единым накоплением</String>
+  <String Key="SingleStackBuff_Desc">Когда накладывается тот же бафф, увеличивается число накоплений одного баффа. Когда накопление растёт, время действия баффа сбрасывается до максимума.</String>
+  <String Key="PassiveSkillHelp_0">Пассивные навыки автоматически применяются в Битве по условиям.</String>
+  <String Key="PassiveSkillHelp_1">В Битве нет изменений в зависимости от Звезд героя.</String>
+  <String Key="PassiveSkillHelp_2">Показанные значения можно усилить через Возвышение героя.</String>
+  <String Key="UltimateMeterFormat">Шкала Ультимативного навыка {0}/{1}</String>
+  <String Key="UltimateSkillHelp_0">Ультимативный навык усиливается в Битве в зависимости от Звезд героя.</String>
+  <String Key="UltimateSkillHelp_1">Показанные значения можно усилить через Возвышение героя.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_0">Если в Призыве героя повторно призвать уже имеющегося Трансцендентного героя, можно выполнить Возвышение.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_1">Возвышение возможно до 5 этапа.</String>
+  <String Key="AddAttackCountEveryFourthNormalAttackFormat">Каждая 4-я обычн. атака: число атак +1, урон доп. атаки {0}</String>
+  <String Key="SkillName_10820">Рера-ат-кату</String>
+  <String Key="SkillDesc_10820_Short">После {ChannelingTime}с Концентрации выпускает стрелу ветра, пронзающую Поле боя и наносящую всем врагам на пути 1X1 Физ. урон от навыка, равный {Damage:AtkPer:BaseValue}% от АТК.</String>
+  <String Key="SkillDesc_10820_Long">Ихоунде отмечает позицию вражеского Героя, собирает силу ветра {ChannelingTime}с, затем выпускает в отмеченную точку стрелу ветра, пронзающую Поле боя и наносящую всем врагам на пути 1X1 Физ. урон от навыка, равный {Damage:AtkPer:BaseValue}% от АТК. При использовании навыка: шкала Ультимативного навыка +1.</String>
+  <String Key="SkillDesc_10820_Short_2">После {ChannelingTime}с Концентрации выпускает стрелу ветра, пронзающую Поле боя и наносящую всем врагам на пути 1X1 Физ. урон от навыка, равный {Damage:AtkPer:BaseValue}% от АТК.</String>
+  <String Key="SkillDesc_10820_Long_2">Ихоунде отмечает позицию вражеского Героя, собирает силу ветра {ChannelingTime}с, затем выпускает в отмеченную точку стрелу ветра, пронзающую Поле боя и наносящую всем врагам на пути 1X1 Физ. урон от навыка, равный {Damage:AtkPer:BaseValue}% от АТК. При использовании навыка: суммирование Кар +5 и шкала Ультимативного навыка +1.</String>
+  <String Key="PassiveSkillName_10820">Рера кар</String>
+  <String Key="PassiveSkillDesc_10820_Short">При обычной атаке: суммирование Кара +1. Макс. {10820@Unit10820AI_FocusMaxStack}. СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если цель обычной атаки меняется, суммирование сбрасывается до 0, затем +1.</String>
+  <String Key="PassiveSkillDesc_10820_Long">При обычной атаке добавляется 1 суммирование Кара. Макс. {10820@Unit10820AI_FocusMaxStack}. СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если обычная атака поражает другую цель, суммирование Кара сбрасывается до 0, затем добавляется 1 суммирование.</String>
+  <String Key="PassiveSkillDesc_10820_Short_1">При обычной атаке: суммирование Кара +1. Макс. {10820@Unit10820AI_FocusMaxStack}. СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если цель обычной атаки меняется, суммирование сбрасывается, затем +1. Сохраняется не менее 10 суммирований.</String>
+  <String Key="PassiveSkillDesc_10820_Long_1">При обычной атаке добавляется 1 суммирование Кара. Макс. {10820@Unit10820AI_FocusMaxStack}. СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если обычная атака поражает другую цель, суммирование Кара сбрасывается, затем добавляется 1 суммирование. Суммирование Кара сохраняется как минимум на 10.</String>
+  <String Key="PassiveSkillDesc_10820_Short_2">При обычной атаке: суммирование Кара +1. Макс. {10820@Unit10820AI_FocusMaxStack}. СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если цель обычной атаки меняется, суммирование сбрасывается, затем +1. Сохраняется не менее 10 суммирований. При использовании навыка или Ультимативного навыка: суммирование Кара +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_2">При обычной атаке добавляется 1 суммирование Кара. Макс. {10820@Unit10820AI_FocusMaxStack}. СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если обычная атака поражает другую цель, суммирование Кара сбрасывается, затем добавляется 1 суммирование. Суммирование Кара сохраняется как минимум на 10. При использовании навыка или Ультимативного навыка: суммирование Кара +5.</String>
+  <String Key="PassiveSkillDesc_10820_Short_3">При обычной атаке: суммирование Кара +1. Макс. {10820@Unit10820AI_FocusMaxStack}. СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если цель обычной атаки меняется, суммирование сбрасывается, затем +1. Сохраняется не менее 10 суммирований. При использовании навыка или Ультимативного навыка: суммирование Кара +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_3">При обычной атаке добавляется 1 суммирование Кара. Макс. {10820@Unit10820AI_FocusMaxStack}. СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если обычная атака поражает другую цель, суммирование Кара сбрасывается, затем добавляется 1 суммирование. Суммирование Кара сохраняется как минимум на 10. При использовании навыка или Ультимативного навыка: суммирование Кара +5.</String>
+  <String Key="PassiveSkillDesc_10820_Short_4">При обычной атаке: суммирование Кара +1. Макс. {10820@Unit10820AI_FocusMaxStack}(+30 от базового). СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если цель обычной атаки меняется, суммирование сбрасывается, затем +1. Сохраняется не менее 10 суммирований. При использовании навыка или Ультимативного навыка: суммирование Кара +5. При макс. суммировании обычная атака всегда наносит крит. удар.</String>
+  <String Key="PassiveSkillDesc_10820_Long_4">При обычной атаке добавляется 1 суммирование Кара. Макс. {10820@Unit10820AI_FocusMaxStack}(+30 от базового максимума). СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если обычная атака поражает другую цель, суммирование Кара сбрасывается, затем добавляется 1 суммирование. Суммирование Кара сохраняется как минимум на 10. При использовании навыка или Ультимативного навыка: суммирование Кара +5. Когда суммирование Кара достигает максимума, обычная атака всегда наносит крит. удар.</String>
+  <String Key="PassiveSkillDesc_10820_Short_5">При обычной атаке: суммирование Кара +1. Макс. {10820@Unit10820AI_FocusMaxStack}(+30 от базового). СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если цель обычной атаки меняется, суммирование сбрасывается, затем +1. Сохраняется не менее 10 суммирований. При использовании навыка или Ультимативного навыка: суммирование Кара +5. При макс. суммировании обычная атака всегда наносит крит. удар. При уничтожении врага суммирование Кара сохраняется для следующей цели.</String>
+  <String Key="PassiveSkillDesc_10820_Long_5">При обычной атаке добавляется 1 суммирование Кара. Макс. {10820@Unit10820AI_FocusMaxStack}(+30 от базового максимума). СКР АТК +{10820@Unit10820AI_FocusAttackSpeedPer}% за суммирование. Если обычная атака поражает другую цель, суммирование Кара сбрасывается, затем добавляется 1 суммирование. Суммирование Кара сохраняется как минимум на 10. При использовании навыка или Ультимативного навыка: суммирование Кара +5. Когда суммирование Кара достигает максимума, обычная атака всегда наносит крит. удар. При уничтожении врага суммирование Кара сохраняется для следующей цели.</String>
+  <String Key="UltimateSkillName_10820">Рера эпункине</String>
+  <String Key="UltimateSkillDesc_10820_Short">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу.</String>
+  <String Key="UltimateSkillDesc_10820_Long">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи.</String>
+  <String Key="UltimateSkillDesc_10821_Short">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу.</String>
+  <String Key="UltimateSkillDesc_10821_Long">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи.</String>
+  <String Key="UltimateSkillDesc_10822_Short">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу.</String>
+  <String Key="UltimateSkillDesc_10822_Long">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи.</String>
+  <String Key="UltimateSkillDesc_10823_Short">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. В начале Битвы: шкала Ультимативного навыка +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи. В начале Битвы шкала Ультимативного навыка увеличивается на {AddBattleStartUltimateGauge}.</String>
+  <String Key="UltimateSkillDesc_10820_Short_2">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу.</String>
+  <String Key="UltimateSkillDesc_10820_Long_2">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи.</String>
+  <String Key="UltimateSkillDesc_10821_Short_2">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу.</String>
+  <String Key="UltimateSkillDesc_10821_Long_2">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи.</String>
+  <String Key="UltimateSkillDesc_10822_Short_2">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу.</String>
+  <String Key="UltimateSkillDesc_10822_Long_2">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи.</String>
+  <String Key="UltimateSkillDesc_10823_Short_2">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. В начале Битвы: шкала Ультимативного навыка +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_2">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи. В начале Битвы шкала Ультимативного навыка увеличивается на {AddBattleStartUltimateGauge}.</String>
+  <String Key="UltimateSkillDesc_10820_Short_3">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При уничтожении врага длительность сбрасывается.</String>
+  <String Key="UltimateSkillDesc_10820_Long_3">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. Если во время действия Ультимативного навыка уничтожен враг, длительность сбрасывается. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи.</String>
+  <String Key="UltimateSkillDesc_10821_Short_3">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При уничтожении врага длительность сбрасывается.</String>
+  <String Key="UltimateSkillDesc_10821_Long_3">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. Если во время действия Ультимативного навыка уничтожен враг, длительность сбрасывается. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи.</String>
+  <String Key="UltimateSkillDesc_10822_Short_3">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При уничтожении врага длительность сбрасывается.</String>
+  <String Key="UltimateSkillDesc_10822_Long_3">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. Если во время действия Ультимативного навыка уничтожен враг, длительность сбрасывается. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи.</String>
+  <String Key="UltimateSkillDesc_10823_Short_3">Ихоунде взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. При уничтожении врага длительность сбрасывается. В начале Битвы: шкала Ультимативного навыка +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_3">Ихоунде покидает Поле боя, взмывает в небо и в течение {Time} сек. выпускает стрелы по врагу. Если во время действия Ультимативного навыка уничтожен враг, длительность сбрасывается. При использовании Ультимативного навыка снимает все эффекты состояния, Связанность и связи. В начале Битвы шкала Ультимативного навыка увеличивается на {AddBattleStartUltimateGauge}.</String>
+  <String Key="Name_Overcome_10820_0">Рера Айе</String>
+  <String Key="Overcome_10820_0">Суммирование Кара сохраняется как минимум на 10</String>
+  <String Key="Name_Overcome_10820_1">Рера Нисор</String>
+  <String Key="Overcome_10820_1">При использовании навыка или Ультимативного навыка: суммирование Кара +5</String>
+  <String Key="Name_Overcome_10820_2">Камуй Эпункине</String>
+  <String Key="Overcome_10820_2">Во время Рера эпункине при уничтожении врага длительность Рера эпункине сбрасывается</String>
+  <String Key="Name_Overcome_10820_3">Юпке Рера</String>
+  <String Key="Overcome_10820_3">Макс. суммирование Кара +30. При макс. суммировании Кара обычные атаки по цели всегда наносят крит. удар</String>
+  <String Key="Name_Overcome_10820_4">Рера Канто</String>
+  <String Key="Overcome_10820_4">При уничтожении врага суммирование Кара сохраняется для следующей цели</String>
+  <String Key="IncarnationUnitSummon">Призыв Героев Превосходства</String>
+  <String Key="UnitGachaHighCountFormat">После &lt;color=#FFD247&gt;{0}&lt;/color&gt; призывов &lt;color=#FFD247&gt;гарантирован Трансцендентный герой/Герой из другого измерения&lt;/color&gt;</String>
   <String Key="UnitGachaPickupCountFormat">После &lt;color=#FFD247&gt;{0}&lt;/color&gt; призывов &lt;color=#FFD247&gt;пикап-герой гарантирован&lt;/color&gt;</String>
+  <String Key="GachaNewIncarnationUnitPer">Появился трансцендентный герой!</String>
+  <String Key="IncarnationUnitPickupGachaDesc">В Призыве Героев Превосходства с 81-го призыва шанс появления Героя Превосходства/Героя из другого измерения увеличивается на 5% с каждым призывом.
+При появлении Героя Превосходства/Героя из другого измерения счётчик гарантированного призыва сбрасывается.
+Если вы призвали не героя повышенного шанса, то при следующем получении Героя Превосходства/Героя из другого измерения вы гарантированно призовёте героя повышенного шанса.
+Если вы призвали того же Героя Превосходства при максимальном Возвышении, то вместо этого получите 10 Свитков призыва Героя из другого измерения.</String>
+  <String Key="Premium">Премиум</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumButton">Награды x2! Эффективность x20!</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_0">Если вы купите Премиум-вход, то сможете получить все награды x2.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_1">При покупке Премиум-входа награды, полученные ранее, тоже будут выданы x2.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_2">Премиум-вход нельзя вернуть.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumApplied">Награды x2 активны!</String>
+  <String Key="SeasonalEventMode_Season74">Арена Ветра</String>
+  <String Key="SpecialDamageMulFormat">Особ. урон +{0}%</String>
+  <String Key="FlagsName_60000">Флаг Арены Ветра</String>
+  <String Key="FlagsDesc_60000">Флаг тех, кто доказал свою ценность на Арене Ветра</String>
+  <String Key="FlagsName_60010">Флаг Аватара ветра</String>
+  <String Key="FlagsDesc_60010">Флаг в ожидании прихода 'Аватара ветра' и 'Обещанной победы'</String>
   <String Key="PlayReward_Semi1">Награда 1-й половины</String>
   <String Key="PlayReward_Semi2">Награда 2-й половины</String>
   <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; игр</String>
+  <String Key="SpecialPackage_1699">Набор «Клятва»</String>
+  <String Key="SpecialPackage_1700">Набор «Огненный дождь»</String>
+  <String Key="InventoryItemName_5605">Сундук выбора скина King God Pass</String>
+  <String Key="SeasonPassScheduledHeroTitle_74">Получить Трансцендентного героя &lt;color=#D8B4FF&gt;Ихоунде&lt;/color&gt;</String>
+  <String Key="SeasonPassScheduledHeroBenefit">Подарок: новый герой</String>
+  <String Key="InventoryItemName_SSGuaranteedSetFormat">Случайный SS {0}</String>
+  <String Key="InventoryItemName_SSGuaranteedBoxFormat">Случайный SS {0}</String>
+  <String Key="InventoryItemDesc_SSGuaranteedBoxFormat">Получить сундук выбора со случайным SS спец. аксессуаром из выбранного комплекта.</String>
+  <String Key="InventoryItemDesc_SSGuaranteedSetFormat">Получить выбранный аксессуар. 1 случайный доп. показатель будет ранга SS.</String>
+  <String Key="AlreadyHaveFlag">Не получено, потому что у вас уже есть флаг.</String>
+  <String Key="SeasonPassScheduledHeroInfo_74">Если у вас уже есть герой: Возвышение героя +1
+Если герой достиг максимального Возвышения, вы получите &lt;color=#ffd264&gt;10 Свитков призыва Героя из другого измерения&lt;/color&gt;</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_Class">&lt;{0}&gt; {1}</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_ThreeClasses">&lt;{0}&gt; &lt;{1}&gt; &lt;{2}&gt; {3}</String>
+  <String Key="Post_Title_6thAnniversaryGift">Особый подарок к 6-летию</String>
+  <String Key="KingsTreasureSelectiveSummon">Выборочный призыв божеств. оружия короля</String>
   <String Key="BlessedTreasure">Благословенное божеств. оружие</String>
+  <String Key="TreasureCustomPickupTitle">Призыв благослов. божеств. оружия</String>
+  <String Key="UnitName_10820">Ихоунде</String>
+  <String Key="UnitSubName_10820_1">Когда-то её называли Ханс.</String>
+  <String Key="UnitSubName_10820">Хранитель ветра</String>
+  <String Key="SkinDesc_Default_10820">В маленькой деревне на Востоке родилась тихая хранительница,
+которая отдала всё, чтобы защитить людей.
+
+Стрела, властвующая в небе, больше не сжигает землю,
+а лишь стала хозяйкой бесконечного ветра.
+
+Пока она защищает деревню,
+ни одно существо извне не сможет разрушить её покой.
+.
+.
+.
+.
+.
+.</String>
+  <String Key="IncarnationUnit_10820">Катастрофа</String>
+  <String Key="Introduce_10820">Запись выжившего</String>
+  <String Key="SkinDesc_Default_10820_1">Прошлым летом подул холодный ветер.
+Морозный туман, похожий на дым, заполнил всё вокруг,
+а холодная белая пыль покрыла крыши, поля и листья.
+Растения замёрзли, а плоды падали на землю, теряя форму.
+
+Так как ветер не прекращался, дерево и камень стирались и начали крошиться.
+Огонь распространялся быстрее, чем мы успевали его сдерживать, и мы потеряли над ним контроль.
+Волны поднимались всё выше без конца, и, не в силах им противостоять, мы потеряли море.
+Нет способа укрыться от пронизывающего холода и остановить ветер, острый как клинок.
+Поэтому ни одно чудовище не может приблизиться.
+
+Мы обрели покой.
+Мы потеряли будущее.
+Нам осталось лишь быть поглощёнными вечным ветром, застыв во льду…</String>
+  <String Key="InventoryItemDesc_SelectableTreasureBox">Сундук, в котором можно выбрать и получить спец. божественное оружие, доступное в постоянном Призыве.
+ При использовании можно выбрать награду из списка предметов.</String>
+  <String Key="IncarnationUnitPickupSummon">Призыв Героев Превосходства</String>
+  <String Key="GachaPickupDescFormat">Можно получить Трансцендентного героя.</String>
+  <String Key="IncarnationUnitMaxOvercomeConvertedTicket">Был призван герой с максимальным Возвышением. Вы получили 10 Свитков призыва Героя из другого измерения.</String>
+  <String Key="SpecialTreasureSelectTitle">Выборочный призыв спец. божеств. оружия</String>
+  <String Key="SpecialTreasureSelectDesc">Можно выбрать и получить 1 Спец. божеств. оружие из тех, что могут появиться в постоянном Призыве божеств. оружия.
+Нажмите кнопку покупки, чтобы увидеть список доступных божеств. оружий.</String>
+  <String Key="SkinDesc_Default_10820_Simple">Стрела, властвующая в небе, больше не сжигает землю,
+а лишь стала хозяйкой бесконечного ветра.</String>
+  <String Key="LoginSkinName_10020">Экран входа 6-й годовщины</String>
+  <String Key="LoginSkinDesc_10020">Экран входа 6-й годовщины</String>
+  <String Key="ObtainableBySummoningIncarnationUnit">Можно получить при призыве Трансцендентного героя</String>
 </Strings>

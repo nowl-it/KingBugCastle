@@ -40,6 +40,7 @@ def handlers():
         "/player/building/resetPoint": r_building_reset_point,
         "/auth/transfer/code": r_transfer_issue,
         "/auth/transfer": r_transfer_redeem,
+        "/auth/next-day": r_next_day,
         "/player/ad": r_player_ad,
         "/player/changeProfileIcon": r_change_profile_icon,
         "/player/other": r_player_other,
@@ -150,6 +151,32 @@ def _uid_for_login(login_id, prev_token, acct_type=None):
     # dev-0001's save. That fallback is single-player-only; a client that lost its
     # guest id kept getting the stranger's save with a session bound to it.
     return playerdb.active() if not MULTIPLAYER else None
+
+
+def r_next_day(body, st):
+    """Day-rollover session refresh (`Scene_Base.FetchNextDay` -> `RestAPI.NextDay`).
+
+    The client is already mid-session and sends its live token, so load_state has
+    resolved the account into `st`; answer with a freshly bound session for that uid
+    rather than an empty AuthResponseModel. An unset accessToken is null, and the
+    client would overwrite its stored token with it = dropped session at midnight.
+    Same shape and date-non-null contract as r_login."""
+    uid = st.get("uid") if isinstance(st, dict) else None
+    if not uid:
+        return {"success": False, "msg": "no active session"}
+    token = "DEV." + secrets.token_hex(16)
+    playerdb.bind_session(token, uid)
+    CURRENT_UID.set(uid)
+    login_id = srv.CURRENT_LOGIN_ID.get() or st.get("loginId", "") or uid
+    return {
+        "accessToken": token,
+        "expiredAt": now_iso(7),
+        "seed": secrets.token_hex(8),
+        "serverTime": now_iso(0),
+        "blockedUntilAt": now_iso(0),
+        "blockedComment": "",
+        "loginId": login_id,
+    }
 
 
 def r_login(body, st):

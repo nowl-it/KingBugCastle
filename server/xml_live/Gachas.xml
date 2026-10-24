@@ -6,8 +6,12 @@
 <!--        <Permanent>true</Permanent>-->
 <!--        <HideInGachaShopPanel>true</HideInGachaShopPanel>-->
 <!--    </Gacha>-->
+    
+    <!-- Parent Gacha로 묶는거는 74-2 시즌 이후로 사용하지 않습니다. -->
+    
     <!-- new 영웅 소환서 아이콘용 가챠 -->
-    <Gacha ID="100" Children="2007, 8500">
+    <Gacha ID="100">
+        <SortingOrder>2</SortingOrder>
         <Name>RegularSummon</Name>
         <GachaIcon>Theme_Progress_Bar_Icon_09</GachaIcon>
         <Permanent>true</Permanent>
@@ -25,7 +29,7 @@
     <!-- 보구 소환 아이콘용 가챠 (3999: 상시 소환) -->
     <!-- 4000 ~ 4012는 레거시 -->
     <Gacha ID="102" Children="3999">
-        <Name>TreasureBox</Name>
+        <TabName>Treasure</TabName>
         <GachaIcon>Theme_Progress_Bar_Icon_14</GachaIcon>
         <Permanent>true</Permanent>
         <BackgroundPrefab>GachaShopPanelBG_Treasure</BackgroundPrefab>
@@ -34,14 +38,13 @@
 
     <!-- 치장 아이템 소환 아이콘용 가챠 -->
     <Gacha ID="103" Children="7000">
-        <Name>SummonSkin</Name>
+        <TabName>Skin</TabName>
         <GachaIcon>Theme_Progress_Bar_Icon_16</GachaIcon>
         <Permanent>true</Permanent>
         <BackgroundPrefab>GachaShopPanelBG_Decoration</BackgroundPrefab>
         <LevelLimit>LevelLimit_Decoration</LevelLimit>
     </Gacha>
-    
-    
+
     <Gacha ID="300" Parent="100">
         <Name>ShopItemName_300</Name>
         <Desc>HeroSummonDesc</Desc>
@@ -4646,7 +4649,8 @@
         <MinVersion>168000</MinVersion>
     </Gacha>
 
-    <Gacha ID="2007" Parent="100">
+    <Gacha ID="2007">
+        <TabName>RegularSummon</TabName>
         <Name>GachaName_2000</Name>
         <Desc>GachaDesc_PickUpDefault</Desc>
         <ResultTableDesc>GachaListDesc_CustomPickUp</ResultTableDesc>
@@ -4657,6 +4661,9 @@
         <TagImage>Tier_Tag_03</TagImage>
         <GachaBoxIndex>3</GachaBoxIndex>
         <Permanent>true</Permanent>
+
+        <!-- 축복 소환 제거 예정: 174.0.00 구버전 대응으로 IsUnavailable·Visible 미적용. 구버전 종료 후 다음 업데이트에서 IsUnavailable, Visible=false 추가 -->
+        <HideInGachaShopPanel>true</HideInGachaShopPanel>
 
         <!--아이콘 정렬 순서-->
         <SortingOrder>1</SortingOrder>
@@ -4707,6 +4714,9 @@
     
         <NewUserOpenDuringDay>14</NewUserOpenDuringDay>
         <HideInGachaShopPanel>true</HideInGachaShopPanel>
+
+        <!-- 축복 소환 제거 예정: 174.0.00 구버전 대응으로 IsUnavailable 미적용. 구버전 종료 후 다음 업데이트에서 IsUnavailable 추가 -->
+        <Visible>false</Visible>
     
         <!--아이콘 정렬 순서-->
         <SortingOrder>1</SortingOrder>
@@ -8237,6 +8247,51 @@
         </Pickups>
     </Gacha>
 
+    <!--이중픽업 화우 더블픽업 패키지/화우 더블픽업 패키지 보구 픽업-->
+    <Gacha ID="5057" Parent="102">
+        <Name>GachaName_4010</Name>
+        <Desc>GachaDesc_4010</Desc>
+
+        <MinVersion>174000</MinVersion>
+
+        <Type>TreasureGacha</Type>
+        <LevelLimit>LevelLimit_Treasure</LevelLimit>
+
+        <StartDate>20261008</StartDate>
+        <EndDate>20261021</EndDate>
+
+        <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
+
+        <BackgroundPrefab>GachaShopPanelBG_TreasureDoublePickup</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
+
+        <KeyItem>371</KeyItem>
+
+        <UseStack>false</UseStack>
+
+        <GachaCeil Key="TreasurePickupGachaCeil_Rare" Target="Rare" PoolID="221000">10</GachaCeil>
+        <GachaCeil Key="TreasurePickupGachaCeil_Special" Target="Special" PoolID="231057">100</GachaCeil>
+
+        <EnableCeilSelect>true</EnableCeilSelect>
+
+        <Results>
+            <Result Type="TreasureGacha" Rate="100"/>
+        </Results>
+
+        <FixedTreasures Count="1">
+            <Treasure Rate="87.5" Rarity="Common" PoolID="210000"/>
+            <Treasure Rate="10" Rarity="Rare" PoolID="220000"/>
+            <Treasure Rate="2.5" Rarity="Special" PoolID="230057"/>
+        </FixedTreasures>
+
+        <Images>
+        </Images>
+
+        <Pickups>
+            <Pickup Type="Treasure" Rarity="Special" PoolID="231057" Rate="1.5"/>
+        </Pickups>
+    </Gacha>
+
     <!-- 왕의 보구 -->
     <Gacha ID="6000">
         <Name>GachaName_6000</Name>
@@ -8463,6 +8518,54 @@
         </Images>
     </Gacha>
 
+    <!-- 싱글 왕의 보구 -->
+    <Gacha ID="6005">
+        <TabName>BlessedTreasure</TabName>
+        <Name>KingsTreasureSelectiveSummon</Name>
+        <Desc>GachaDesc_4010</Desc>
+        <ResultTableDesc>GachaListDesc_TreasurePickup</ResultTableDesc>
+        <GachaIcon>Theme_Progress_Bar_Icon_15</GachaIcon>
+
+        <Type>CustomTreasureGacha</Type>
+        <LevelLimit>LevelLimit_Treasure</LevelLimit>
+
+        <KeyItem>371</KeyItem>
+        <UseStack>false</UseStack>
+
+        <StartDate>20261022</StartDate>
+        <EndDate>20261104</EndDate>
+        <MinVersion>174100</MinVersion>
+
+        <!--아이콘 정렬 순서-->
+        <SortingOrder>1</SortingOrder>
+
+        <BackgroundPrefab>GachaShopPanelBG_TreasureCustomPickup</BackgroundPrefab>
+        <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
+        <!-- <BackgroundPrefabGachaNameTextOutlineColor>000000</BackgroundPrefabGachaNameTextOutlineColor> -->
+
+        <GachaCeil Key="TreasurePickupGachaCeil_Rare" Target="Rare" PoolID="321000">10</GachaCeil>
+        <GachaCeil Key="TreasurePickupGachaCeil_Special" Target="Special" PoolID="336000">100</GachaCeil>
+
+        <EnableCeilSelect>false</EnableCeilSelect>
+
+        <Results>
+            <Result Type="TreasureGacha" Rate="100"/>
+        </Results>
+
+        <FixedTreasures Count="1">
+            <Treasure Rate="87.5" Rarity="Common" PoolID="310000"/>
+            <Treasure Rate="10" Rarity="Rare" PoolID="320000"/>
+            <Treasure Rate="2.5" Rarity="Special" PoolID="336000"/>
+        </FixedTreasures>
+
+        <Pickups>
+            <Pickup Type="Treasure" Rarity="Special" CustomPoolSize="1" Rate="1.5"/>
+        </Pickups>
+
+        <Images>
+        </Images>
+    </Gacha>
+
     <Gacha ID="7000" Parent="103">
         <Name>SummonSkin</Name>
         <Desc>SummonSkinNotice</Desc>
@@ -8523,7 +8626,7 @@
             <Result IsReward="true" Type="InventoryItem" ID="10010" Min="1500" Rate="2"/>
         </Results>
 
-        <BackgroundPrefab>GachaShopPanelBG_Pickup_Dimension</BackgroundPrefab>
+        <BackgroundPrefab>GachaShopPanelBG_Pickup_SpecialUnit</BackgroundPrefab>
         <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
 
         <Images>
@@ -8566,7 +8669,7 @@
             <Result IsReward="true" Type="InventoryItem" ID="10010" Min="1500" Rate="2"/>
         </Results>
 
-        <BackgroundPrefab>GachaShopPanelBG_Pickup_Dimension</BackgroundPrefab>
+        <BackgroundPrefab>GachaShopPanelBG_Pickup_SpecialUnit</BackgroundPrefab>
         <BackgroundPrefabGachaNameTextColor>E4C896</BackgroundPrefabGachaNameTextColor>
 
         <Images>
@@ -8609,7 +8712,7 @@
             <Result IsReward="true" Type="InventoryItem" ID="10010" Min="1500" Rate="2"/>
         </Results>
 
-        <BackgroundPrefab>GachaShopPanelBG_Pickup_Dimension</BackgroundPrefab>
+        <BackgroundPrefab>GachaShopPanelBG_Pickup_SpecialUnit</BackgroundPrefab>
         <BackgroundPrefabGachaNameTextColor>F5B0A0</BackgroundPrefabGachaNameTextColor>
 
         <Images>
@@ -8623,10 +8726,13 @@
     </Gacha>
 
     <!-- 차원 영웅 통상 가챠 (상시) -->
-    <Gacha ID="8500" Parent="100">
-        <Name>GachaName_8500</Name>
+    <Gacha ID="8500">
+        <TabName>DimensionUnit</TabName>
+        <TypeName>GachaName_8500</TypeName>
         <Desc>GachaDesc_8500</Desc>
         <Type>DimensionUnitGacha</Type>
+        <SortingOrder>2</SortingOrder>
+        <GachaIcon>Theme_Progress_Bar_Icon_09</GachaIcon>
         <KeyItem>70000</KeyItem>
 
         <ResultTableDesc>DimensionUnitGachaDesc_Normal</ResultTableDesc>
@@ -8654,7 +8760,7 @@
             <Result IsReward="true" Type="InventoryItem" ID="10010" Min="1500" Rate="2"/>
         </Results>
 
-        <BackgroundPrefab>GachaShopPanelBG_Pickup_Dimension</BackgroundPrefab>
+        <BackgroundPrefab>GachaShopPanelBG_Pickup_SpecialUnit</BackgroundPrefab>
         <BackgroundPrefabGachaNameTextColor>ffd264</BackgroundPrefabGachaNameTextColor>
 
         <Images>
@@ -8665,6 +8771,62 @@
             <Image Name="Unit_Illust_10790" ScaleX="0.7" ScaleY="0.7" Y="222" X="12" Color="FFFFFF"/>
             <Image Name="Unit_Illust_10780" ScaleX="0.7" ScaleY="0.7" Y="36" X="-191" Color="FFFFFF"/>            
             <Image Name="Unit_Illust_10800" ScaleX="0.7" ScaleY="0.7" Y="-53" X="135" Color="FFFFFF"/> 
+        </Images>
+        <ImageMaskEnabled>false</ImageMaskEnabled>
+    </Gacha>
+
+    <!-- 화신 영웅 픽업 가챠 - 창천의 화살 한시 -->
+    <Gacha ID="8600" KeyPrefix="IncGacha">
+        <TabName>IncarnationUnit</TabName>
+        <TypeName>IncarnationUnitSummon</TypeName>
+        <Desc>GachaDesc_8600</Desc>
+        <Type>IncarnationUnitGacha</Type>
+        <ResultTableDesc>IncarnationUnitPickupGachaDesc</ResultTableDesc>
+        <SortingOrder>3</SortingOrder>
+        <KeyItem>70000</KeyItem>
+        <UseStack>false</UseStack>
+        
+        <GachaIcon>Avatar_082</GachaIcon>
+
+        <Visible>true</Visible>
+        <MinVersion>174100</MinVersion>
+        <StartDate>20261021</StartDate>
+        
+        <!-- 픽업 종료일 확정되면 EndDate 수정 후 ShowTimeLeft=true -->
+        <EndDate>21000101</EndDate>
+        <ShowTimeLeft>false</ShowTimeLeft>
+
+        <GachaCeil GenerateKey="true" Target="0,1" ResetOnTargetHit="true">100</GachaCeil>
+        <TargetRateIncrement IncreaseAfter="80" Target="0,1" DecreaseMode="Ordered" DecreaseOrder="4,3,2">5</TargetRateIncrement>
+        <PickupGuarantee GenerateKey="true" Target="0" Trigger="1"/>
+        <Results>
+            <Result IsReward="true" Type="Unit" ID="10820" Min="1" Rate="0.5"/>
+            <Result IsReward="true" Type="DimensionalUnitPool" ID="400000" Min="1" Rate="0.5"/>
+            <Result IsReward="true" Type="NormalUnitPool" Min="1" Rate="50"/>
+            <Result IsReward="true" Type="NormalUnitSoulPool" Min="50" Rate="25"/>
+            <Result IsReward="true" Type="UnitSoulItem" ID="-1" Min="50" Rate="24"/>
+        </Results>
+
+        <BackgroundPrefab>GachaShopPanelBG_Pickup_SpecialUnit</BackgroundPrefab>
+        <BackgroundVideo Type="XML">
+            <Source>100</Source>
+            <AspectMode>EnvelopeParent</AspectMode>
+        </BackgroundVideo>
+        <BackgroundPrefabGachaNameTextColor>D8B4FF</BackgroundPrefabGachaNameTextColor>
+        <!-- 초월 영웅 픽업 이름 장식(DescBg_00). 생략한 값은 프리팹 값 사용 -->
+        <PickupUnitNameStyle>
+            <Background Name="SeasonEvent_TitleImage1" Color="5E9BFF"/>
+            <BackgroundGlow Name="HaloGlow" Color="58ABFFAB"/>
+            <UnitName Color="FFFFFF" GlowColor="B7EDFFCC"/>
+            <UnitSubName Color="BAEDFF"/>
+        </PickupUnitNameStyle>
+
+        <Images>
+            <Image Name="Gacha_Background_03" ScaleX="5" ScaleY="5" Y="-45" X="60" Color="77ddff"/>
+            <Image Name="fx_glow" ScaleX="15" ScaleY="15" Y="0" X="0" Color="77ddff"/>
+            <Image Name="Gacha_Glow" ScaleX="3.5" ScaleY="2.5" Y="-27" X="12" Color="88c8ff"/>
+            <Image Name="Gacha_Glow" ScaleX="2" ScaleY="2" Y="252" X="0" Color="c4f3ff"/>
+            <Image Name="Unit_Illust_10820" ScaleX="1" ScaleY="1" Y="186" X="20" Color="ffffff"/>
         </Images>
         <ImageMaskEnabled>false</ImageMaskEnabled>
     </Gacha>

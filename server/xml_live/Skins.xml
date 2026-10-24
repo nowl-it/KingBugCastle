@@ -13932,6 +13932,9 @@
 		<ReplaceEffect Type="Skill" Target="10265">
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_00</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
 				<World>true</World>
 				<ZLevel>OverUI</ZLevel>
@@ -13946,6 +13949,9 @@
 		<ReplaceEffect Type="Skill" Target="102650">
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_00</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
 				<World>true</World>
 				<ZLevel>OverUI</ZLevel>
@@ -14035,6 +14041,9 @@
 			</Effect>
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_01</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
 				<UseAttackSpeed>true</UseAttackSpeed>
 				<World>true</World>
@@ -14057,6 +14066,9 @@
 			</Effect>
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_01</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
 				<UseAttackSpeed>true</UseAttackSpeed>
 				<World>true</World>
@@ -14136,6 +14148,9 @@
 		<ReplaceEffect Type="Skill" Target="10265">
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_02</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
 				<World>true</World>
 				<ZLevel>OverUI</ZLevel>
@@ -14150,6 +14165,9 @@
 		<ReplaceEffect Type="Skill" Target="102650">
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_02</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
 				<World>true</World>
 				<ZLevel>OverUI</ZLevel>
@@ -14223,8 +14241,11 @@
 		<ReplaceEffect Type="Skill" Target="10265">
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_03</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
-				<World>true</World>아
+				<World>true</World>
 				<ZLevel>OverUI</ZLevel></Effect>
 			<Effect Type="Target">
 				<Prefab>Fx_10260f_03</Prefab>
@@ -14236,8 +14257,11 @@
 		<ReplaceEffect Type="Skill" Target="102650">
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_03</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
-				<World>true</World>아
+				<World>true</World>
 				<ZLevel>OverUI</ZLevel></Effect>
 			<Effect Type="Target">
 				<Prefab>Fx_10260f_03</Prefab>
@@ -14296,6 +14320,9 @@
 		<ReplaceEffect Type="Skill" Target="10265">
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_04</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
 				<World>true</World>
 				<ZLevel>OverUI</ZLevel>
@@ -14310,6 +14337,9 @@
 		<ReplaceEffect Type="Skill" Target="102650">
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_04</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
 				<World>true</World>
 				<ZLevel>OverUI</ZLevel>
@@ -14377,6 +14407,9 @@
 		<ReplaceEffect Type="Skill" Target="10265">
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_00</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
 				<World>true</World>
 				<ZLevel>OverUI</ZLevel>
@@ -14391,6 +14424,9 @@
 		<ReplaceEffect Type="Skill" Target="102650">
 			<Effect Type="Shoot">
 				<Prefab>Fx_10260e_00</Prefab>
+                <LevelScale>false</LevelScale>
+                <ScaleX>1.1</ScaleX>
+                <ScaleY>1.1</ScaleY>
 				<RotationType>DirBlend</RotationType>
 				<World>true</World>
 				<ZLevel>OverUI</ZLevel>

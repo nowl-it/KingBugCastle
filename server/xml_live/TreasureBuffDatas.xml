@@ -16218,4 +16218,285 @@
             </BuffContents>
         </BuffOptions>
     </BuffData>
+    <BuffData ID="3500020">
+        <Comment>Cor Orbis TEST VALUES - battle start: +Max MP, -Final Damage Dealt</Comment>
+
+        <DescParams>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="MaxMana" StatValueType="TotalPerValue" MaxOverlapCount="1" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="Damage" StatValueType="TotalPerValue" MaxOverlapCount="1" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-20</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3500021" Inherit="3500020">
+        <Comment>Assimilation I (TEST VALUES)</Comment>
+
+        <DescParams>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="MCriticalDamageMul" StatValueType="BaseValue" MaxOverlapCount="1" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>50</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3500022" Inherit="3500021">
+        <Comment>MP Barrier I (TEST VALUES)</Comment>
+
+        <DescParams>
+            <Const>-30</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+            <Const>-30</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <BattleStart />
+            </Conditions>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddStat StatType="TakeDamage" StatValueType="TotalPerValue" MaxOverlapCount="1" />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>-30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3500023" Inherit="3500022">
+        <Comment>MP Resonance (TEST VALUES - mana refund stands in for the leaked splash effect)</Comment>
+
+        <DescParams>
+            <Const>250</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+            <Const>-30</Const>
+            <Const>250</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Conditions>
+                <MeIsBestTierUnit />
+                <AfterCastSkill />
+            </Conditions>
+
+            <CoolTime>3</CoolTime>
+
+            <Targets>
+                <Self />
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <HealManaPer />
+            </BuffContents>
+
+            <Values>
+                <FixedValue>30</FixedValue>
+            </Values>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3500024" Inherit="3500023">
+        <Comment>MP Barrier II (TEST VALUES - overrides option 4 in place)</Comment>
+
+        <DescParams>
+            <Const>-40</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+            <Const>-30</Const>
+            <Const>250</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Values>
+                <FixedValue>-40</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+    </BuffData>
+
+    <BuffData ID="3500025" Inherit="3500024">
+        <Comment>Assimilation II (TEST VALUES - overrides option 3 in place)</Comment>
+
+        <DescParams>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>3</Const>
+        </DescParams>
+
+        <TotalDescParams>
+            <Const>30</Const>
+            <Const>20</Const>
+            <Const>40</Const>
+            <Const>20</Const>
+            <Const>10</Const>
+            <Const>2</Const>
+            <Const>-30</Const>
+            <Const>250</Const>
+        </TotalDescParams>
+
+        <BuffOptions>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Values>
+                <FixedValue>100</FixedValue>
+            </Values>
+        </BuffOptions>
+
+        <BuffOptions>
+            <Values>
+                <FixedValue>-40</FixedValue>
+            </Values>
+        </BuffOptions>
+        <BuffOptions>
+        </BuffOptions>
+    </BuffData>
+
 </BuffDatas>

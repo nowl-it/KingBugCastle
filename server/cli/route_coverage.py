@@ -34,6 +34,9 @@ if not CLIENT_VERSION:
     _api_dir = Path(__file__).resolve().parents[2] / "api"
     if str(_api_dir) not in sys.path:
         sys.path.insert(0, str(_api_dir))
+        if str(SERVER) in sys.path:
+            sys.path.remove(str(SERVER))
+        sys.path.insert(0, str(SERVER))
     import version as _v
     CLIENT_VERSION = _v.get_bundled_version()
 SCRIPT_JSON = Path(os.environ.get("KGC_IL2CPP_SCRIPT_JSON") or

@@ -191,6 +191,16 @@
         <BuffTargets>Central,Toughness</BuffTargets>
         <WorldTriggers>10110,11000</WorldTriggers>
     </GrandArenaBuff>
+    
+    <GrandArenaBuff Season="74" SemiSeason="1">
+        <BuffTargets>South,Element</BuffTargets>
+        <WorldTriggers>10120,11070</WorldTriggers>
+    </GrandArenaBuff>
+
+    <GrandArenaBuff Season="74" SemiSeason="2">
+        <BuffTargets>West,Mystic</BuffTargets>
+        <WorldTriggers>10100,11050</WorldTriggers>
+    </GrandArenaBuff>
     </GrandArenaBuffs>
 
     <PvPMatchRerollMaxDailyCount>13</PvPMatchRerollMaxDailyCount>

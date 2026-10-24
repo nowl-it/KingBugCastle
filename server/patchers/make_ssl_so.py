@@ -91,6 +91,16 @@ VERSIONS = {
              (0x5A1D0D4, "MobileTlsContext.ValidateCertificate")],
         anchors=[(0x2D33B44, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
     ),
+    # Recovered from the v174.1.00 packer (libbaningan.so). All 3 prologues
+    # byte-identical again; offsets re-derived from this build's own dump.cs
+    # (RVA - 0x4000), anchored by the pre-patch prologue.
+    "174.1.00": dict(
+        src="libil2cpp_v1741.so", dst="libil2cpp_v1741_ssl.so",
+        ssl=[(0x2DFDF60, "PinnedCertHandler.ValidateCertificate"),
+             (0x5AECE80, "UnityTlsProvider.ValidateCertificate"),
+             (0x5AEB590, "MobileTlsContext.ValidateCertificate")],
+        anchors=[(0x2DFDF60, "fe5fbda9", "PinnedCertHandler prologue (pre-patch)")],
+    ),
 }
 
 VERSION = next((a for a in sys.argv[1:] if not a.startswith("-")), "171.1.00")

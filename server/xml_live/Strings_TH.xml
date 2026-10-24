@@ -1,6 +1,6 @@
-<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
+<Strings TranslationBaseCommit="b53f5c202519e52ec712d65feedb55aff10c9efe">
   <String Key="UpdateNoticeVersion">172000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/en</String>
   <String Key="Title">King God Castle</String>
   <String Key="Tags">Awesomepiece, Zombie High School, Auto Chess, Teamfight Tactics, King God Castle, Auto Battler, กลยุทธ์, ต่อสู้แบบทีมด้วยกลยุทธ์, TFT, Ens, HelpmeEns, ป้องกัน</String>
   <String Key="Store_ShortDesc">ปกป้องปราสาทจากศัตรูต่างๆ ที่กำลังบุกรุกโดยพลังแห่งพระเจ้าและฮีโร่ต่างๆ King God Castle!</String>
@@ -949,8 +949,8 @@
   <String Key="AddDefPerCount">ลดดาเมจที่ได้รับต่อฮีโร่ที่จัดไว้คนละ {0} หน่วย
 (สูงสุด {1} หน่วย)</String>
   <String Key="AddDefPerCount_Piece">ยิ่งมีฮีโร่ที่ถูกจัดไว้มากก็จะยิ่งลดดาเมจที่ได้รับ</String>
-  <String Key="AtkPerByRange">ระยะโจมตีของฮีโร่ทั้งหมด + 1, ดาเมจที่มอบจากการโจมตีธรรมดา/สกิล +{0} ต่อระยะห่างจากเป้าหมายทุก 1 (ระยะสูงสุด {1})</String>
-  <String Key="AtkPerByRange_Piece">ระยะโจมตีของฮีโร่ทั้งหมด + 1, ดาเมจที่มอบจากการโจมตีธรรมดา/สกิลเพิ่มขึ้นตามระยะห่างจากเป้าหมาย</String>
+  <String Key="AtkPerByRange">ดาเมจที่มอบของการโจมตีปกติ/สกิล +{0} ต่อระยะห่างจากเป้าหมาย 1 ช่อง (ระยะสูงสุด {1})</String>
+  <String Key="AtkPerByRange_Piece">เป้าหมายยิ่งไกล ดาเมจที่มอบของการโจมตีปกติ/สกิลยิ่งเพิ่มขึ้น</String>
   <String Key="ArtifactName_100">ผงวิเศษ</String>
   <String Key="ArtifactDesc_100">ผงวิเศษที่สามารถรับได้จากการแยกชิ้นส่วนสมบัติ</String>
   <String Key="ArtifactName_10000">ดาบใหญ่แห่งจักรวรรดิ</String>
@@ -1239,11 +1239,8 @@
   <String Key="ItemName_10020">ขยายกลุ่ม</String>
   <String Key="ItemDesc_10020">ขยายกลุ่ม 1</String>
   <String Key="ItemName_10030">เงิน +5</String>
-  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">เงิน +10</String>
-  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">เงิน +20</String>
-  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">เหรียญตราวีรกรรม</String>
   <String Key="ItemDesc_10040">เพิ่มดาวของฮีโร่บนสนามแบบสุ่ม 1 ดาว</String>
   <String Key="ItemName_10050">หนังสืออัญเชิญฮีโร่ขั้นสูง (2 ครั้ง)</String>
@@ -2751,8 +2748,8 @@
   <String Key="CashCart">รถเข็นเพชร</String>
   <String Key="UnitName_10320">ทีอาร์</String>
   <String Key="UnitSubName_10320">ทหารสังเกตการณ์นิรันดร</String>
-  <String Key="Potential_10320_0">ดาเมจสุดท้ายที่มอบให้แก่ศัตรูที่อยู่ในเขต 3 ช่อง +20%</String>
-  <String Key="Potential_10320_1">&lt;ลมกระโชก&gt;ครั้งถัดไป จะยิงธนู 2 เท่า เมื่อกำจัดศัตรูได้</String>
+  <String Key="Potential_10320_0">ต่อศัตรูภายใน 4 ช่องรอบตัว: ดาเมจที่มอบสุดท้าย +30%</String>
+  <String Key="Potential_10320_1">ลูกศรดอกแรกของ &lt;ลมกระโชก&gt; เจาะพลังป้องกันกายภาพของศัตรู 100%</String>
   <String Key="SkinDesc_Default_10320">ทีอาร์เป็นหัวหน้าทหารสังเกตการณ์แห่งกองทัพที่อยู่ภายใต้สังกัดของราชวงศ์เอลฟ์ ในขณะที่เคลื่อนไหวอย่างคล่องแคล่วราวกับลมกระโชก เธอก็แสดงทักษะการยิงธนูที่เป็นพรสวรรค์ของเธอให้ได้เห็น อีกทั้งยังปกป้องเขตแดนของป่านิรันดรมาเป็นเวลาช้านาน</String>
   <String Key="SkillName_10320">ลมกระโชก</String>
   <String Key="SkillDesc_10320">เมื่อเป้าหมายอยู่ในเขต {BuffRangeSum} ช่อง หลังจากเคลื่อนที่ไปด้านหลัง {MoveDistance} ช่อง จะโจมตีธรรมดาที่ทำดาเมจกายภาพ {AttackCount} ครั้ง แต่หากเป้าหมายไม่ได้อยู่ในเขต {BuffRangeSum} ช่องจะเพิ่มการโจมตีเท่ากับ {10325@Damage:AtkPer:BaseValue}% ของพลังโจมตี {AttackCount} ครั้ง</String>
@@ -4992,7 +4989,7 @@ EXP ที่สามารถได้รับการสนับสนุ�
   <String Key="SelectPickupUnit">เลือกฮีโร่</String>
   <String Key="SelectPickupUnitAgain">ตั้งใหม่</String>
   <String Key="SelectPickupUnitComplete">เลือกเสร็จสิ้น</String>
-  <String Key="GachaName_9000">อัญเชิญแห่งต้อนรับ</String>
+  <String Key="GachaName_9000">อัญเชิญต้อนรับ</String>
   <String Key="OutgameTutorial_30_01">การ&lt;color=#ffc13d&gt;อัญเชิญ&lt;/color&gt;เป็นสิ่งที่จำเป็น เพื่อทำให้เหล่าฮีโร่แข็งแกร่งขึ้นและเพื่ออัญเชิญฮีโร่ใหม่ๆ</String>
   <String Key="OutgameTutorial_30_03">เพื่อรับฮีโร่ใหม่ ลอง &lt;color=#ffc13d&gt;อัญเชิญฮีโร่ธรรมดา&lt;/color&gt; กัน</String>
   <String Key="OutgameTutorial_30_05">เพื่ออวยพรให้ปราสาทแห่งนี้ประสบความสำเร็จและเติบโต การอัญเชิญครั้งนี้จะให้ &lt;color=#ffc13d&gt;ฟรี&lt;/color&gt;</String>
@@ -6866,8 +6863,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArtifactName_14020">สโคปคนแคระ</String>
   <String Key="ArtifactDesc_14020">สโคปที่รวบรวมเทคโนโลยีของคนแคระเอาไว้
 ผู้ใช้สามารถโจมตีได้ไกลขึ้นและแม่นยำยิ่งขึ้น แต่มันมีน้ำหนักมากดังนั้นจึงไม่สามารถบรรทุกได้</String>
-  <String Key="MoveStopTimeDesc_Piece">กำหนด 2 ช่องในสนามรบเป็นจุดซุ่มยิง ฮีโร่ที่วางได้รับ ป้องกันเด็ดขาด +4 จนกว่าจะออกจากจุดซุ่มยิงเป็นครั้งแรก ดาเมจธรรมดาฮิตแรกและทุกๆ 5 ฮิตจะมอบดาเมจเพิ่มขึ้น</String>
-  <String Key="MoveStopTimeDesc">กำหนด 2 ช่องในสนามรบเป็นจุดซุ่มยิง ฮีโร่ที่วางได้รับ ป้องกันเด็ดขาด +{1} จนกว่าจะออกจากจุดซุ่มยิงเป็นครั้งแรก ดาเมจธรรมดาฮิตแรกและทุกๆ 5 ฮิตจะมอบดาเมจ +{0}%.</String>
+  <String Key="MoveStopTimeDesc_Piece">กำหนด 2 ช่องในสนามรบเป็นตำแหน่งซุ่มยิง ฮีโร่ที่วางจะได้รับ ป้องกันเด็ดขาด +4, &lt;color=#f33&gt;เคลื่อนที่ไม่ได้&lt;/color&gt; ชั่วขณะ และขณะอยู่ในตำแหน่งซุ่มยิง ดาเมจธรรมดาจะเพิ่มขึ้นทุกช่วงที่กำหนด</String>
+  <String Key="MoveStopTimeDesc">กำหนด 2 ช่องในสนามรบเป็นตำแหน่งซุ่มยิง ฮีโร่ที่วางจะได้รับ ป้องกันเด็ดขาด +{1}, &lt;color=#f33&gt;เคลื่อนที่ไม่ได้&lt;/color&gt; เป็นเวลา {2} วินาที และจนกว่าจะออกจากตำแหน่งซุ่มยิงเป็นครั้งแรก ดาเมจธรรมดาที่มอบ +{0}% ในการโจมตีครั้งแรกและทุก 5 ครั้งหลังจากนั้น</String>
   <String Key="ColosseumBanned">จำกัดการใช้งานสนามรบต่อสู้ดุเดือด</String>
   <String Key="GachaName_1036">รอยยิ้มที่ไร้เสียงหัวเราะ</String>
   <String Key="Name_Potential_10560_3">ยกระดับ</String>
@@ -8961,7 +8958,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SpecialPackage_1491">แพ็กเกจฝนเพลิง 2</String>
   <String Key="SpecialPackage_1492">แพ็กเกจฝนเพลิง 3</String>
   <String Key="SkillDesc_10110">โจมตีอีก {AtkCount} ครั้งเป็นเวลา {Time} วินาที</String>
-  <String Key="Potential_10110_0">ขณะใช้ &lt;ฝนลูกศร&gt; อัตราคริติคอลกายภาพ +15%</String>
+  <String Key="Potential_10110_0">ระหว่างใช้ &lt;ฝนลูกศร&gt; ระยะโจมตี +1</String>
   <String Key="Potential_10110_1_00">เมื่อสวมใส่ไอเทมธนู พลังโจมตีสุดท้าย +15% ต่อชิ้น</String>
   <String Key="Potential_10110_2_00">ขณะใช้ &lt;ฝนลูกศร&gt; ทำดาเมจสกิลกายภาพ 250% ของพลังโจมตี [3/4/5/6] ครั้งใส่ศัตรูทั้งหมดในขอบเขต 2 ช่องรอบเป้าหมาย ร่าย &lt;พายุฝน&gt; ที่ลดความเร็วเคลื่อนที่สุดท้าย 30% นาน 3 วินาที</String>
   <String Key="Potential_10110_3">ขณะใช้ &lt;ฝนลูกศร&gt; หากมอบดาเมจธรรมดา 10 ครั้งให้เป้าหมายตัวเดียวกัน จะรีเซ็ตระยะเวลาต่อเนื่องของ &lt;ฝนลูกศร&gt; และเพิ่มพลังโจมตี 50%
@@ -10649,7 +10646,7 @@ Lv. {0} ▶ Lv. {1}</String>
 เมื่อเกิดระเบิด ดาเมจคริติคอลกายภาพ +{5}% นาน {4} วินาที
 สตันเป้าหมายที่โดนระเบิด {6} วินาที
 เมื่อเกิดระเบิด อัตราคริติคอลกายภาพ +{8}% นาน {7} วินาที</String>
-  <String Key="Potential_10110_1">เมื่อใช้ &lt;ฝนลูกศร&gt; พลังโจมตีสุดท้าย +30%</String>
+  <String Key="Potential_10110_1">ระหว่างใช้ &lt;ฝนลูกศร&gt; อัตราคริติคอลกายภาพ +30%</String>
   <String Key="Potential_10110_2">ขณะใช้ &lt;ฝนลูกศร&gt; การโจมตีธรรมดาครั้งที่ 7 จะถูกแทนที่ด้วยการร่าย [พายุฝน] ที่ทำดาเมจสกิลกายภาพ 250% ของพลังโจมตีแก่ศัตรูทั้งหมดในเขต 2 ช่องรอบเป้าหมาย [4/5/6/7] ครั้ง</String>
   <String Key="Potential_10420_1">ขณะใช้ &lt;ลำแข้งเสือขาว&gt; ดาเมจที่ได้รับจะ -30%</String>
   <String Key="SkillDesc_1011000_Long">ด้วยวิชาธนูที่สืบทอดจากตระกูลหงส์แดง จำนวนการโจมตีของการโจมตีธรรมดาจะเพิ่มขึ้น {10110@AtkCount} ครั้งเป็นเวลา {10110@Time} วินาที แทนที่จะเป็นการโจมตีธรรมดาครั้งที่ {1011005@NeedComboCount+1} จะร่ายพายุฝนที่ทำดาเมจสกิลกายภาพ {1011010@Damage} หน่วยแก่ศัตรูทั้งหมดในเขต {1011010@SplashRangeSum} ช่องรอบเป้าหมาย {1011010@AttackCount} ครั้ง</String>
@@ -10927,7 +10924,7 @@ Lv. {0} ▶ Lv. {1}</String>
 คุณต้องการจบวิชลิสต์โดยไม่ใช้การเปลี่ยนแปลงหรือไม่?</String>
   <String Key="OwnedTreasureStatus">สถานะการมีอยู่</String>
   <String Key="ColosseumTierRewardAutoReceiveTitle">รางวัลแรงค์สนามรบต่อสู้ดุเดือดซีซั่น {0}</String>
-  <String Key="ColossseumTierRewardAutoReceiveDesc">จะส่งรางวัลบรรลุ {1} ที่ยังไม่ได้รับจากสนามรบต่อสู้ดุเดือดซีซั่น {0}</String>
+  <String Key="ColosseumTierRewardAutoReceiveDesc">จะส่งรางวัลบรรลุ {1} ที่ยังไม่ได้รับจากสนามรบต่อสู้ดุเดือดซีซั่น {0}</String>
   <String Key="TreasureName_30018">จิตวิญญาณแห่งกำแพงเหล็ก</String>
   <String Key="TreasureSubName_30018">ป้อมปราการเหล็กกล้า</String>
   <String Key="TreasureDesc_30018">ตระกูลเดเนปได้ต่อสู้กับศัตรูที่แนวหน้าของสนามรบมาหลายชั่วอายุคน จนได้รับการขนานนามว่าเป็นฮีโร่ โล่เหล็กกล้าซึ่งเป็นสัญลักษณ์ของตระกูล แสดงถึงความมุ่งมั่นที่ทรหดของตระกูล</String>
@@ -11684,7 +11681,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AccessorySynergyName_9">แสงจันทร์</String>
   <String Key="AccessorySynergyName_9_Pre">แห่งแสงจันทร์</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;เวทมนตร์สุดท้าย {0}%&lt;/color&gt;, พลังโจมตีสุดท้าย +{1}%</String>
-  <String Key="AccessorySynergyDesc_10091">ระยะโจมตี +{0}, ดาเมจคริติคอลกายภาพ +{2}% ต่อระยะโจมตีที่มีทุก {1} (สูงสุด 80%)</String>
+  <String Key="AccessorySynergyDesc_10091">ดาเมจคริติคอลกายภาพ +{0}%. เมื่อพลังชีวิตปัจจุบันลดลงเหลือ {1}% หรือน้อยกว่าของพลังชีวิตสูงสุดเป็นครั้งแรก ดาเมจคริติคอลกายภาพ -{0}%</String>
   <String Key="AccessorySynergyDesc_10092">เมื่อเริ่มการต่อสู้ หลบซ่อน {0} วินาที, อัตราคริติคอลกายภาพ +{2}% หลัง {1} วินาที</String>
   <String Key="InventoryItemName_5010">หีบเลือกเครื่องประดับแห่งแสงจันทร์</String>
   <String Key="ShopItemName_41012">เครื่องประดับแสงจันทร์แรนด้อม</String>
@@ -12637,7 +12634,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="RiftWeaponBuffDesc_130">เมื่อดาเมจธรรมดาโดนเป้าหลังใช้สกิล จะทำดาเมจพิเศษ {0}% แก่ 3 ราย</String>
   <String Key="RiftWeaponBuffDesc_140">พลังป้องกันกายภาพ +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">พลังป้องกันเวทมนตร์ +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">ระยะโจมตี +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">ความเร็วเคลื่อนที่ +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">ดูดเลือดกายภาพ +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">ดูดเลือดเวทมนตร์ +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">พลังป้องกัน +{0}</String>
@@ -13595,7 +13592,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArenaStarterBuffDesc_2">เมื่อเข้าอารีน่าเป็นครั้งแรกภายใน 72 ชั่วโมงหลังซีซั่นจบ จะได้รับพรแห่งสนามรบตั้งแต่ซีซั่นถัดไป</String>
   <String Key="SkillDesc_10070_Short">ได้รับความเร็วโจมตีเพิ่มขึ้น {TotalAttackSpeedPer:BaseValue}% และเมื่อโจมตีธรรมดา จะสร้างดาเมจ ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% ของพลังโจมตี เป็นเวลา {Time} วินาที</String>
   <String Key="SkillDesc_10070_Long">จั๊วยุนเต็มไปด้วยความโกรธ ได้รับความเร็วโจมตีสุดท้ายเพิ่มขึ้น {TotalAttackSpeedPer:BaseValue}% และในช่วงเวลาเดียวกัน เมื่อโจมตีธรรมดา จะสร้างดาเมจกายภาพทั่วไป ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% ของพลังโจมตี เป็นเวลา {Time} วินาที</String>
-  <String Key="Potential_10070_0">ขณะใช้ &lt;เดือดดาล&gt; พลังป้องกันของจั๊วยุน +100</String>
+  <String Key="Potential_10070_0">ระหว่างใช้ &lt;เดือดดาล&gt; ระยะโจมตีของจั๊วยุน +1</String>
   <String Key="Potential_10070_1">ขณะใช้ &lt;เดือดดาล&gt; ดูดเลือดกายภาพ/ดูดเลือดเวทมนตร์ของจั๊วยุน +40%</String>
   <String Key="Potential_10070_2">เมื่อโจมตีศัตรูตัวเดิมด้วยดาเมจธรรมดา 40 ครั้ง จำนวนการโจมตี +1 (ไม่สามารถซ้อนทับกันได้)
 เมื่อโจมตีศัตรูตัวอื่นด้วยดาเมจธรรมดา จะรีเซ็ตจำนวนที่เพิ่มขึ้น</String>
@@ -14632,9 +14629,9 @@ D = 1 ~ 4</String>
   <String Key="GachaName_1083">เหล่าฤๅษี</String>
   <String Key="InventoryItemName_700">หินแปรธาตุ</String>
   <String Key="InventoryItemDesc_700">วัตถุดิบแปรธาตุที่ได้รับผ่านคำขอของหน่วยสืบสวน เมื่อใช้ในโรงแปรธาตุจะสามารถรับรางวัลหลากหลาย</String>
-  <String Key="TerritoryTradeShopDesc">สินค้าในร้านซื้อขายจะขึ้นอยู่กับ&lt;color=#ffd264&gt;เลเวลของร้านซื้อขาย&lt;/color&gt;
-สินค้าที่มีร้านซื้อขายเลเวล 4 หรือต่ำกว่าจะถูก&lt;color=#ffd264&gt;รีเซ็ตทุกสัปดาห์&lt;/color&gt;และ
-สินค้าที่มีร้านซื้อขายเลเวล 5 หรือสูงกว่าจะถูก&lt;color=#ffd264&gt;รีเซ็ตทุกสองสัปดาห์&lt;/color&gt;</String>
+  <String Key="TerritoryTradeShopDesc">สินค้าของร้านซื้อขายจะ &lt;color=#ffd264&gt;ถูกกำหนดตามเลเวลร้านซื้อขาย&lt;/color&gt;
+สินค้าของร้านซื้อขายเลเวล 2~3 จะ &lt;color=#ffd264&gt;รีเซ็ตทุกสัปดาห์&lt;/color&gt;
+และสินค้าของร้านซื้อขายเลเวล 4 ขึ้นไปจะ &lt;color=#ffd264&gt;รีเซ็ตทุก 2 สัปดาห์&lt;/color&gt;</String>
   <String Key="ChangeAccessorySubStat">เปลี่ยนค่าพลังเสริม</String>
   <String Key="ChangeAccessorySubStatDesc_0">โปรดเลือกเครื่องประดับที่จะเปลี่ยนค่าพลังเสริม</String>
   <String Key="ChangeAccessorySubStatDesc_1">โปรดเลือกค่าพลังเสริมที่จะเปลี่ยน</String>
@@ -16606,7 +16603,8 @@ D = 1 ~ 4</String>
   <String Key="NewUnitGachaInfo">คุณสามารถได้รับฮีโร่ 1 คนที่ยังไม่มี
 อัตราปรากฏของฮีโร่ที่ยังไม่มีเท่ากันทั้งหมด</String>
   <String Key="InventoryItemName_5603">หีบเลือกขุมทรัพย์พิเศษ</String>
-  <String Key="RewardBoxInventoryDesc_5603">หีบที่สามารถเลือกได้รับขุมทรัพย์พิเศษ 1 ชิ้น</String>
+  <String Key="RewardBoxInventoryDesc_5603">เลือกขุมทรัพย์พิเศษเพื่อได้รับ
+(ไม่รวมขุมทรัพย์จำกัดเวลา)</String>
   <String Key="GachaDesc_PickUpResetAlert">มีฮีโร่ที่ไม่สามารถเลือกได้ จึงรีเซ็ตอัตโนมัติ</String>
   <String Key="UnitName_10780">เนเรีย</String>
   <String Key="UnitSubName_10780">ผู้ล้างแค้นแห่งความบ้าคลั่ง</String>
@@ -16999,8 +16997,7 @@ D = 1 ~ 4</String>
   <String Key="Name_Overcome_2">อัพเกรดสกิลเริ่มการต่อสู้</String>
   <String Key="Name_Overcome_3">อัพเกรดคุณสมบัติ</String>
   <String Key="Name_Overcome_4">อัพเกรดสกิล</String>
-  <String Key="InventoryItemDesc_70000">คัมภีร์อัญเชิญที่อบอวลด้วยพลังลึกลับ
-ใช้ทำการอัญเชิญมิติได้ 1 ครั้ง</String>
+  <String Key="InventoryItemDesc_70000">คัมภีร์อัญเชิญที่มีไอพลังมิสติก.</String>
   <String Key="InventoryItemDesc_10000">แกนเล็กๆ ที่อัดแน่นด้วยพลังจากอีกมิติหนึ่ง.
 สามารถแลกเป็นสินค้าต่างๆ ได้ที่ร้านค้ามิติ</String>
   <String Key="InventoryItemName_10000">แกนแห่งมิติ</String>
@@ -17066,8 +17063,7 @@ D = 1 ~ 4</String>
   <String Key="SpecialPackage_1666">แพ็กเกจเทมเพสเตอร์</String>
   <String Key="SpecialShop_TreasureDoublePickUp10013">ร้านค้าพิเศษขุมทรัพย์</String>
   <String Key="ShopItemName_70000">คัมภีร์อัญเชิญฮีโร่มิติ</String>
-  <String Key="ShopItemDesc_70000">คัมภีร์อัญเชิญที่มีพลังลึกลับ
-ใช้ทำการอัญเชิญมิติได้ 1 ครั้ง</String>
+  <String Key="ShopItemDesc_70000">คัมภีร์อัญเชิญที่มีไอพลังมิสติก.</String>
   <String Key="RewardBoxInventoryDesc_7100">คุณสามารถได้รับไอเทมตามอัตราที่กำหนดได้</String>
   <String Key="DimensionHeroAttendanceEventTitle">กิจกรรมล็อกอินฉลองฮีโร่ต่างมิติ</String>
   <String Key="ReservedText">สงวนไว้</String>
@@ -18297,9 +18293,234 @@ D = 1 ~ 4</String>
   <String Key="SkinName_1074001">จ้าวดาราใต้แสงจันทร์ ซูฮา</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;เหล่ากระต่ายพระจันทร์! รู้ใช่ไหมว่า ถึงจะลงมาหลังจากหนึ่งปี ก็ห้ามก่อเรื่องวุ่นวายเกินไปนะ? ทุกคนไปสนุกกันเถอะ!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">สินค้าเทศกาลจันทร์เก็บเกี่ยว</String>
+  <String Key="SeasonalEventNumberFormat">อีเวนต์ซีซัน {0}</String>
+  <String Key="SeasonalEvent">อีเวนต์ซีซัน</String>
+  <String Key="SeasonalEventCeilFormat">พิกอัปซีซัน {0}</String>
+  <String Key="SeasonalEventName_Season74">อารีน่าแห่งสายลม</String>
+  <String Key="SeasonalEventDesc_Season74">ตัดสินกันในศึกเดียว!</String>
+  <String Key="UniversalEventText">EVENT</String>
+  <String Key="SingleArenaNeedAdForReroll">โปรดดูโฆษณาเพื่อรีเซ็ตคู่ต่อสู้</String>
+  <String Key="SingleArena_ApFormat">AP {0}</String>
+  <String Key="SingleArena_AttackDeck">ทีมโจมตี</String>
+  <String Key="SingleArena_AttackDeckSet">จัดทีมโจมตี</String>
+  <String Key="SingleArena_AttackSelect_Desc">คุณสามารถใช้ทีมโจมตีที่ตั้งไว้แล้ว หรือดูทีมคู่ต่อสู้แล้วจัดใหม่ได้.
+
+หากใช้ทีมโจมตีเดิม คุณจะเข้าสู่การต่อสู้ได้ทันที ส่วนการจัดใหม่จะต้องตั้งค่าทุกอย่างใหม่ตั้งแต่เลือกฮีโร่(จัดทีมโจมตีใหม่ได้สูงสุดวันละ 5 ครั้ง)
+
+โปรดเลือกวิธีโจมตี</String>
+  <String Key="SingleArena_AttackSelect_Title">เลือกทีมโจมตี</String>
+  <String Key="SingleArena_CompleteDeck">จัดทีมเสร็จ</String>
+  <String Key="SingleArena_DefenseDeck">ทีมป้องกัน</String>
+  <String Key="SingleArena_DefenseDeckSet">จัดทีมป้องกัน</String>
+  <String Key="SingleArena_EnemyDeckPreview">ดูทีมคู่ต่อสู้</String>
+  <String Key="SingleArena_FinalAttackSelect_Desc">บันทึกทีมโจมตีที่จัดใหม่เป็นทีมโจมตีใหม่ แล้วเข้าสู่การต่อสู้หรือไม่?
+
+หากใช้ทีมโจมตีเดิม ทีมโจมตีใหม่จะถูกลบอัตโนมัติ</String>
+  <String Key="SingleArena_FinalDeckSelect_Desc">โปรดเลือกทีมที่จะใช้</String>
+  <String Key="SingleArena_FinalDeckSelect_Title">เลือกทีมสุดท้าย</String>
+  <String Key="SingleArena_FirstDeckSetAlert">เฉพาะครั้งแรกเท่านั้น ทีมป้องกันและทีมโจมตีจะถูกบันทึกพร้อมกัน.
+หลังจากนั้น คุณจะแยกจัดทีมป้องกันและทีมโจมตีได้</String>
+  <String Key="SingleArena_Intro_Desc1">ในอารีน่าแห่งสายลม การต่อสู้เพียงครั้งเดียวจะตัดสินแพ้ชนะ</String>
+  <String Key="SingleArena_Intro_Desc2">ใช้ทั้งหมด 2 ทีม คือทีมโจมตีและทีมป้องกัน</String>
+  <String Key="SingleArena_Intro_Desc3">ทีมโจมตีใช้สำหรับดูและโจมตีทีมป้องกันของคู่ต่อสู้</String>
+  <String Key="SingleArena_Intro_Desc4">ทีมป้องกันใช้สำหรับหยุดการโจมตีของคู่ต่อสู้ หากป้องกันไม่สำเร็จ คุณจะเสียแต้มชัยชนะ(แต้มชัยชนะเสียได้สูงสุดวันละ 3 ครั้ง)</String>
+  <String Key="SingleArena_Intro_Desc5">การจัดทีมครั้งแรกจะถูกล็อกไว้ แต่หลังจากนั้นคุณจะจัดทีมได้อย่างอิสระ</String>
+  <String Key="SingleArena_Intro_Desc6">แม้คุณจะเปลี่ยนทีมโจมตีหลังจากดูทีมป้องกันของคู่ต่อสู้แล้ว ทีมของคู่ต่อสู้จะไม่เปลี่ยน</String>
+  <String Key="SingleArena_Intro_Desc7">จัดทีมให้เข้ากับคู่ต่อสู้ แล้วคว้าชัยชนะ!</String>
+  <String Key="SingleArena_LeftGameAlertFormat">การต่อสู้ที่ยังไม่จบถูกนับเป็นพ่ายแพ้ ({0}คะแนน)</String>
+  <String Key="SingleArena_Log_Attack">โจมตี</String>
+  <String Key="SingleArena_Log_Def">ป้องกัน</String>
+  <String Key="SingleArena_Log_Empty">ไม่มีสถิติ</String>
+  <String Key="SingleArena_MissionCondFormat">โจมตีสะสม {0} ครั้ง</String>
+  <String Key="SingleArena_NeedDeck">โปรดจัดทีมโจมตีและทีมป้องกันก่อน</String>
+  <String Key="SingleArena_NeedFieldUnit">ไม่มีฮีโร่ที่จัดวางอยู่</String>
+  <String Key="SingleArena_NewAttackDeck">ทีมโจมตีใหม่</String>
+  <String Key="SingleArena_NewDefenseDeck">ทีมป้องกันใหม่</String>
+  <String Key="SingleArena_NoMoreDeckChange">วันนี้คุณไม่สามารถเปลี่ยนทีมได้อีกแล้ว</String>
+  <String Key="SingleArena_OldAttackDeck">ทีมโจมตีเดิม</String>
+  <String Key="SingleArena_OldDefenseDeck">ทีมป้องกันเดิม</String>
+  <String Key="SingleArena_RankNotReached">คุณยังไปไม่ถึงแรงก์นี้</String>
+  <String Key="SingleArena_RankingPanelTitle">อารีน่าแห่งสายลม แรงกิ้ง</String>
+  <String Key="SingleArena_RankingReward_Desc">รับรางวัลตามอันดับสุดท้ายเมื่อสิ้นสุดซีซัน</String>
+  <String Key="SingleArena_RankingTop">Top 300</String>
+  <String Key="SingleArena_RecordFormat">โจมตี ชนะ {0} แพ้ {1} / ป้องกัน ชนะ {2} แพ้ {3}</String>
+  <String Key="SingleArena_ReformAttackDeck">จัดทีมโจมตีใหม่</String>
+  <String Key="SingleArena_RemainAttackFormat">โจมตีที่เหลือ {0}/{1}</String>
+  <String Key="SingleArena_RerollRemainFormat">เปลี่ยนคู่ต่อสู้ {0}/{1}</String>
+  <String Key="SingleArena_RetreatWarning">หากคุณถอย การจัดตั้งอารีน่าจะถูกยกเลิก (หากเป็นการจัดทีมแยก จำนวนครั้งเปลี่ยนรายวันจะถูกใช้)</String>
+  <String Key="SingleArena_Search">ค้นหาคู่ต่อสู้</String>
+  <String Key="SingleArena_SelectTargetFirst">โปรดเลือกคู่ต่อสู้ก่อน</String>
+  <String Key="SingleArena_StagePreviewDesc">คุณสามารถดูล่วงหน้าการจัดวางของทั้งสองทีมได้</String>
+  <String Key="SingleArena_StagePreviewTitle">ข้อมูลการจัดวาง</String>
+  <String Key="SingleArena_Title">อารีน่าแห่งสายลม</String>
+  <String Key="SingleArena_UseAttackDeck">ใช้ทีมโจมตี</String>
+  <String Key="SingleArena_UseNewDeck">ใช้ทีมใหม่</String>
+  <String Key="SingleArena_UseOldDeck">ใช้ทีมเดิม</String>
+  <String Key="SingleArena_RankingRewardPanel_Title">รางวัลแรงกิ้งอารีน่าแห่งสายลม</String>
+  <String Key="SingleArena_RankingRewardPanel_Desc">รางวัลจะมอบตามแรงกิ้งเมื่อสิ้นสุดซีซัน
+หากต้องการติด Top 300 คุณต้องถึงระดับ คิง เป็นอย่างน้อย</String>
+  <String Key="SingleArena_MatchHistory">สถิติอารีน่าแห่งสายลม</String>
+  <String Key="SeasonalEventOperationFormat">{0} จะเปิดในช่วงอีเวนต์ซีซัน {1} โดยไม่แบ่งครึ่งแรกครึ่งหลัง.
+
+เวลาที่เหลือ : {2}</String>
+  <String Key="MissionDesc_SingleArena_Attack">เล่นอารีน่าแห่งสายลม {0} ครั้ง</String>
+  <String Key="SingleArena_Mission">ภารกิจอารีน่าแห่งสายลม</String>
+  <String Key="SixthYearDailyAttendanceEvent">&lt;color=#ffd264&gt;ครบรอบ 6 ปี&lt;/color&gt; อีเวนต์เช็กชื่อ</String>
+  <String Key="SeasonalEvent_ButtonName_Rift">รอยแยก</String>
+  <String Key="SeasonalEvent_ButtonName_Arena">อารีน่า</String>
+  <String Key="SeasonalEvent_ButtonName_Battlefield">สนามรบ</String>
+  <String Key="IncarnationUnit">ฮีโร่เหนือขีดจำกัด</String>
+  <String Key="Passive">สกิลติดตัว</String>
+  <String Key="UltimateSkill">ท่าไม้ตาย</String>
+  <String Key="SingleStackBuff">บัฟสะสมเดี่ยว</String>
+  <String Key="SingleStackBuff_Desc">เมื่อบัฟเดียวกันซ้อนทับ จำนวนซ้อนทับของบัฟนั้นจะเพิ่มขึ้น เมื่อจำนวนซ้อนทับเพิ่มขึ้น เวลาคงอยู่ของบัฟจะรีเซ็ตเป็นค่าสูงสุด</String>
+  <String Key="PassiveSkillHelp_0">สกิลติดตัวจะทำงานอัตโนมัติตามเงื่อนไขระหว่างต่อสู้</String>
+  <String Key="PassiveSkillHelp_1">ไม่มีการเปลี่ยนแปลงตามดาวของฮีโร่ในการต่อสู้</String>
+  <String Key="PassiveSkillHelp_2">ค่าที่แสดงสามารถอัพเกรดได้ด้วยการเลื่อนขั้นฮีโร่</String>
+  <String Key="UltimateMeterFormat">เกจท่าไม้ตาย {0}/{1}</String>
+  <String Key="UltimateSkillHelp_0">พลังของท่าไม้ตายเพิ่มขึ้นตามดาวของฮีโร่ในการต่อสู้</String>
+  <String Key="UltimateSkillHelp_1">ค่าที่แสดงสามารถอัพเกรดได้ด้วยการเลื่อนขั้นฮีโร่</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_0">ในการอัญเชิญฮีโร่ หากอัญเชิญฮีโร่เหนือขีดจำกัดที่มีอยู่แล้วซ้ำ จะสามารถเลื่อนขั้นได้</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_1">สามารถเลื่อนขั้นได้สูงสุด 5 ขั้น</String>
+  <String Key="AddAttackCountEveryFourthNormalAttackFormat">ทุกการโจมตีธรรมดาครบ 4 ครั้ง: จำนวนการโจมตี +1, ดาเมจโจมตีเพิ่ม {0}</String>
+  <String Key="SkillName_10820">เรรา อัตคาตุ</String>
+  <String Key="SkillDesc_10820_Short">หลังตั้งสติ {ChannelingTime} วินาที จะยิงลูกศรลมที่ทะลุสนามรบ สร้างดาเมจสกิลกายภาพเท่ากับ {Damage:AtkPer:BaseValue}% ของพลังโจมตีแก่ศัตรูทั้งหมดบนเส้นทาง 1X1</String>
+  <String Key="SkillDesc_10820_Long">อีโฮอุนเดกำหนดตำแหน่งของฮีโร่ศัตรู รวบรวมพลังลมเป็นเวลา {ChannelingTime} วินาที แล้วจึงยิงลูกศรลมที่ทะลุสนามรบไปยังตำแหน่งนั้น สร้างดาเมจสกิลกายภาพเท่ากับ {Damage:AtkPer:BaseValue}% ของพลังโจมตีแก่ศัตรูทั้งหมดบนเส้นทาง 1X1 เมื่อใช้สกิล: ได้รับเกจท่าไม้ตาย +1</String>
+  <String Key="SkillDesc_10820_Short_2">หลังตั้งสติ {ChannelingTime} วินาที จะยิงลูกศรลมที่ทะลุสนามรบ สร้างดาเมจสกิลกายภาพเท่ากับ {Damage:AtkPer:BaseValue}% ของพลังโจมตีแก่ศัตรูทั้งหมดบนเส้นทาง 1X1</String>
+  <String Key="SkillDesc_10820_Long_2">อีโฮอุนเดกำหนดตำแหน่งของฮีโร่ศัตรู รวบรวมพลังลมเป็นเวลา {ChannelingTime} วินาที แล้วจึงยิงลูกศรลมที่ทะลุสนามรบไปยังตำแหน่งนั้น สร้างดาเมจสกิลกายภาพเท่ากับ {Damage:AtkPer:BaseValue}% ของพลังโจมตีแก่ศัตรูทั้งหมดบนเส้นทาง 1X1 เมื่อใช้สกิล: ได้รับ Kar ซ้อนทับ +5 และเกจท่าไม้ตาย +1</String>
+  <String Key="PassiveSkillName_10820">เรรา คาร์</String>
+  <String Key="PassiveSkillDesc_10820_Short">เมื่อโจมตีธรรมดา Kar ซ้อนทับ +1 สูงสุด {10820@Unit10820AI_FocusMaxStack} ซ้อนทับ ความเร็วโจมตี +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากเปลี่ยนเป้าหมายการโจมตีธรรมดา รีเซ็ตซ้อนทับเป็น 0 แล้ว +1</String>
+  <String Key="PassiveSkillDesc_10820_Long">เมื่อโจมตีธรรมดา จะเพิ่ม Kar 1 ซ้อนทับ ซ้อนทับได้สูงสุด {10820@Unit10820AI_FocusMaxStack} และความเร็วโจมตีจะเพิ่มขึ้น +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากโจมตีธรรมดาใส่เป้าหมายที่ต่างจากก่อนหน้า จะรีเซ็ต Kar ซ้อนทับเป็น 0 แล้วได้รับ 1 ซ้อนทับ</String>
+  <String Key="PassiveSkillDesc_10820_Short_1">เมื่อโจมตีธรรมดา Kar ซ้อนทับ +1 สูงสุด {10820@Unit10820AI_FocusMaxStack} ซ้อนทับ ความเร็วโจมตี +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากเปลี่ยนเป้าหมายการโจมตีธรรมดา รีเซ็ตซ้อนทับ แล้ว +1 คงไว้อย่างน้อย 10 ซ้อนทับ</String>
+  <String Key="PassiveSkillDesc_10820_Long_1">เมื่อโจมตีธรรมดา จะเพิ่ม Kar 1 ซ้อนทับ ซ้อนทับได้สูงสุด {10820@Unit10820AI_FocusMaxStack} และความเร็วโจมตีจะเพิ่มขึ้น +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากโจมตีธรรมดาใส่เป้าหมายที่ต่างจากก่อนหน้า จะรีเซ็ต Kar ซ้อนทับ แล้วได้รับ 1 ซ้อนทับ Kar ซ้อนทับจะคงไว้อย่างน้อย 10 ซ้อนทับ</String>
+  <String Key="PassiveSkillDesc_10820_Short_2">เมื่อโจมตีธรรมดา Kar ซ้อนทับ +1 สูงสุด {10820@Unit10820AI_FocusMaxStack} ซ้อนทับ ความเร็วโจมตี +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากเปลี่ยนเป้าหมายการโจมตีธรรมดา รีเซ็ตซ้อนทับ แล้ว +1 คงไว้อย่างน้อย 10 ซ้อนทับ เมื่อใช้สกิลหรือท่าไม้ตาย Kar ซ้อนทับ +5</String>
+  <String Key="PassiveSkillDesc_10820_Long_2">เมื่อโจมตีธรรมดา จะเพิ่ม Kar 1 ซ้อนทับ ซ้อนทับได้สูงสุด {10820@Unit10820AI_FocusMaxStack} และความเร็วโจมตีจะเพิ่มขึ้น +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากโจมตีธรรมดาใส่เป้าหมายที่ต่างจากก่อนหน้า จะรีเซ็ต Kar ซ้อนทับ แล้วได้รับ 1 ซ้อนทับ Kar ซ้อนทับจะคงไว้อย่างน้อย 10 ซ้อนทับ เมื่อใช้สกิลหรือท่าไม้ตาย จะได้รับ Kar 5 ซ้อนทับ</String>
+  <String Key="PassiveSkillDesc_10820_Short_3">เมื่อโจมตีธรรมดา Kar ซ้อนทับ +1 สูงสุด {10820@Unit10820AI_FocusMaxStack} ซ้อนทับ ความเร็วโจมตี +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากเปลี่ยนเป้าหมายการโจมตีธรรมดา รีเซ็ตซ้อนทับ แล้ว +1 คงไว้อย่างน้อย 10 ซ้อนทับ เมื่อใช้สกิลหรือท่าไม้ตาย Kar ซ้อนทับ +5</String>
+  <String Key="PassiveSkillDesc_10820_Long_3">เมื่อโจมตีธรรมดา จะเพิ่ม Kar 1 ซ้อนทับ ซ้อนทับได้สูงสุด {10820@Unit10820AI_FocusMaxStack} และความเร็วโจมตีจะเพิ่มขึ้น +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากโจมตีธรรมดาใส่เป้าหมายที่ต่างจากก่อนหน้า จะรีเซ็ต Kar ซ้อนทับ แล้วได้รับ 1 ซ้อนทับ Kar ซ้อนทับจะคงไว้อย่างน้อย 10 ซ้อนทับ เมื่อใช้สกิลหรือท่าไม้ตาย จะได้รับ Kar 5 ซ้อนทับ</String>
+  <String Key="PassiveSkillDesc_10820_Short_4">เมื่อโจมตีธรรมดา Kar ซ้อนทับ +1 สูงสุด {10820@Unit10820AI_FocusMaxStack}(+30 จากค่าเริ่มต้น) ความเร็วโจมตี +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากเปลี่ยนเป้าหมายการโจมตีธรรมดา รีเซ็ตซ้อนทับ แล้ว +1 คงไว้อย่างน้อย 10 ซ้อนทับ เมื่อใช้สกิลหรือท่าไม้ตาย Kar ซ้อนทับ +5 เมื่อซ้อนทับสูงสุด การโจมตีธรรมดาจะติดคริติคอลแน่นอน</String>
+  <String Key="PassiveSkillDesc_10820_Long_4">เมื่อโจมตีธรรมดา จะเพิ่ม Kar 1 ซ้อนทับ ซ้อนทับได้สูงสุด {10820@Unit10820AI_FocusMaxStack}(เพิ่ม 30 จากซ้อนทับสูงสุดพื้นฐาน) และความเร็วโจมตีจะเพิ่มขึ้น +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากโจมตีธรรมดาใส่เป้าหมายที่ต่างจากก่อนหน้า จะรีเซ็ต Kar ซ้อนทับ แล้วได้รับ 1 ซ้อนทับ Kar ซ้อนทับจะคงไว้อย่างน้อย 10 ซ้อนทับ เมื่อใช้สกิลหรือท่าไม้ตาย จะได้รับ Kar 5 ซ้อนทับ เมื่อ Kar ซ้อนทับเต็ม การโจมตีธรรมดาจะติดคริติคอลแน่นอน</String>
+  <String Key="PassiveSkillDesc_10820_Short_5">เมื่อโจมตีธรรมดา Kar ซ้อนทับ +1 สูงสุด {10820@Unit10820AI_FocusMaxStack}(+30 จากค่าเริ่มต้น) ความเร็วโจมตี +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากเปลี่ยนเป้าหมายการโจมตีธรรมดา รีเซ็ตซ้อนทับ แล้ว +1 คงไว้อย่างน้อย 10 ซ้อนทับ เมื่อใช้สกิลหรือท่าไม้ตาย Kar ซ้อนทับ +5 เมื่อซ้อนทับสูงสุด การโจมตีธรรมดาจะติดคริติคอลแน่นอน แต่เมื่อกำจัดศัตรู Kar ซ้อนทับจะคงอยู่ไปยังเป้าหมายถัดไปด้วย</String>
+  <String Key="PassiveSkillDesc_10820_Long_5">เมื่อโจมตีธรรมดา จะเพิ่ม Kar 1 ซ้อนทับ ซ้อนทับได้สูงสุด {10820@Unit10820AI_FocusMaxStack}(เพิ่ม 30 จากซ้อนทับสูงสุดพื้นฐาน) และความเร็วโจมตีจะเพิ่มขึ้น +{10820@Unit10820AI_FocusAttackSpeedPer}% ต่อซ้อนทับ หากโจมตีธรรมดาใส่เป้าหมายที่ต่างจากก่อนหน้า จะรีเซ็ต Kar ซ้อนทับ แล้วได้รับ 1 ซ้อนทับ Kar ซ้อนทับจะคงไว้อย่างน้อย 10 ซ้อนทับ เมื่อใช้สกิลหรือท่าไม้ตาย จะได้รับ Kar 5 ซ้อนทับ เมื่อ Kar ซ้อนทับเต็ม การโจมตีธรรมดาจะติดคริติคอลแน่นอน แต่เมื่อกำจัดศัตรู Kar ซ้อนทับจะคงอยู่ไปยังเป้าหมายถัดไปด้วย</String>
+  <String Key="UltimateSkillName_10820">เรรา เอปุนคิเน</String>
+  <String Key="UltimateSkillDesc_10820_Short">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที</String>
+  <String Key="UltimateSkillDesc_10820_Long">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์</String>
+  <String Key="UltimateSkillDesc_10821_Short">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที</String>
+  <String Key="UltimateSkillDesc_10821_Long">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์</String>
+  <String Key="UltimateSkillDesc_10822_Short">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที</String>
+  <String Key="UltimateSkillDesc_10822_Long">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์</String>
+  <String Key="UltimateSkillDesc_10823_Short">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที เมื่อเริ่มต่อสู้ เกจท่าไม้ตาย +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์ เมื่อเริ่มต่อสู้ เกจท่าไม้ตายเพิ่มขึ้น {AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10820_Short_2">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที</String>
+  <String Key="UltimateSkillDesc_10820_Long_2">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์</String>
+  <String Key="UltimateSkillDesc_10821_Short_2">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที</String>
+  <String Key="UltimateSkillDesc_10821_Long_2">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์</String>
+  <String Key="UltimateSkillDesc_10822_Short_2">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที</String>
+  <String Key="UltimateSkillDesc_10822_Long_2">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์</String>
+  <String Key="UltimateSkillDesc_10823_Short_2">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที เมื่อเริ่มต่อสู้ เกจท่าไม้ตาย +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_2">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์ เมื่อเริ่มต่อสู้ เกจท่าไม้ตายเพิ่มขึ้น {AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10820_Short_3">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที หากกำจัดศัตรูได้ ระยะเวลาจะรีเซ็ต</String>
+  <String Key="UltimateSkillDesc_10820_Long_3">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที หากกำจัดศัตรูได้ระหว่างใช้ท่าไม้ตาย ระยะเวลาจะรีเซ็ต เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์</String>
+  <String Key="UltimateSkillDesc_10821_Short_3">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที หากกำจัดศัตรูได้ ระยะเวลาจะรีเซ็ต</String>
+  <String Key="UltimateSkillDesc_10821_Long_3">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที หากกำจัดศัตรูได้ระหว่างใช้ท่าไม้ตาย ระยะเวลาจะรีเซ็ต เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์</String>
+  <String Key="UltimateSkillDesc_10822_Short_3">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที หากกำจัดศัตรูได้ ระยะเวลาจะรีเซ็ต</String>
+  <String Key="UltimateSkillDesc_10822_Long_3">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที หากกำจัดศัตรูได้ระหว่างใช้ท่าไม้ตาย ระยะเวลาจะรีเซ็ต เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์</String>
+  <String Key="UltimateSkillDesc_10823_Short_3">อีโฮอุนเดพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที หากกำจัดศัตรูได้ ระยะเวลาจะรีเซ็ต เมื่อเริ่มต่อสู้ เกจท่าไม้ตาย +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_3">อีโฮอุนเดออกจากสนามรบแล้วพุ่งขึ้นสู่ท้องฟ้า แล้วยิงธนูใส่ศัตรู 1 ตัวเป็นเวลา {Time} วินาที หากกำจัดศัตรูได้ระหว่างใช้ท่าไม้ตาย ระยะเวลาจะรีเซ็ต เมื่อใช้ท่าไม้ตาย จะลบสถานะผิดปกติทั้งหมด เชื่อมต่อ และลิงก์ เมื่อเริ่มต่อสู้ เกจท่าไม้ตายเพิ่มขึ้น {AddBattleStartUltimateGauge}</String>
+  <String Key="Name_Overcome_10820_0">เรรา ไอเย</String>
+  <String Key="Overcome_10820_0">Kar จะคงไว้อย่างน้อย 10 ซ้อนทับ</String>
+  <String Key="Name_Overcome_10820_1">เรรา นิซอร์</String>
+  <String Key="Overcome_10820_1">เมื่อใช้สกิลหรือท่าไม้ตาย จะได้รับ Kar 5 ซ้อนทับ</String>
+  <String Key="Name_Overcome_10820_2">คามุย เอปุนคิเน</String>
+  <String Key="Overcome_10820_2">หากกำจัดศัตรูได้ระหว่างใช้ เรรา เอปุนคิเน ระยะเวลาของ เรรา เอปุนคิเน จะรีเซ็ต</String>
+  <String Key="Name_Overcome_10820_3">ยูปเค เรรา</String>
+  <String Key="Overcome_10820_3">Kar ซ้อนทับสูงสุด +30 เมื่อ Kar ซ้อนทับเต็ม ดาเมจการโจมตีธรรมดาที่มอบแก่เป้าหมายจะติดคริติคอลแน่นอน</String>
+  <String Key="Name_Overcome_10820_4">เรรา คันโต</String>
+  <String Key="Overcome_10820_4">เมื่อกำจัดศัตรู Kar จะคงอยู่ไปยังเป้าหมายถัดไป</String>
+  <String Key="IncarnationUnitSummon">อัญเชิญฮีโร่บรรลุ</String>
+  <String Key="UnitGachaHighCountFormat">เมื่ออัญเชิญครบ &lt;color=#FFD247&gt;{0}&lt;/color&gt; ครั้ง &lt;color=#FFD247&gt;การันตีฮีโร่เหนือขีดจำกัด/ฮีโร่ต่างมิติ&lt;/color&gt;</String>
   <String Key="UnitGachaPickupCountFormat">อัญเชิญ &lt;color=#FFD247&gt;{0}&lt;/color&gt; ครั้ง &lt;color=#FFD247&gt;รับประกันฮีโร่พิคอัพ&lt;/color&gt;</String>
+  <String Key="GachaNewIncarnationUnitPer">ฮีโร่เหนือขีดจำกัดปรากฏตัว!</String>
+  <String Key="IncarnationUnitPickupGachaDesc">การอัญเชิญฮีโร่บรรลุ ตั้งแต่การอัญเชิญครั้งที่ 81 เป็นต้นไป โอกาสปรากฏของฮีโร่บรรลุ/ฮีโร่ต่างมิติจะเพิ่มขึ้น 5% ทุกครั้งที่อัญเชิญ
+เมื่อฮีโร่บรรลุ/ฮีโร่ต่างมิติปรากฏ จำนวนการอัญเชิญการันตีจะถูกรีเซ็ต
+หากอัญเชิญฮีโร่บรรลุ/ฮีโร่ต่างมิติที่ไม่ใช่ฮีโร่ Pickup เมื่อได้รับฮีโร่บรรลุ/ฮีโร่ต่างมิติครั้งถัดไป จะอัญเชิญฮีโร่ Pickup อย่างแน่นอน
+หากอัญเชิญฮีโร่เดียวกันของฮีโร่บรรลุในสถานะเลื่อนขั้นสูงสุด จะได้รับตั๋วอัญเชิญฮีโร่ต่างมิติ 10 ใบแทน</String>
+  <String Key="Premium">พรีเมียม</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumButton">รางวัล 2 เท่า! คุ้มค่า 20 เท่า!</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_0">เมื่อซื้อเช็กชื่อพรีเมียม คุณจะได้รับรางวัลทั้งหมด 2 เท่า</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_1">เมื่อซื้อเช็กชื่อพรีเมียม รางวัลที่ได้รับไปแล้วก่อนหน้านี้ก็จะได้รับ 2 เท่าเช่นกัน</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_2">เช็กชื่อพรีเมียมไม่สามารถขอคืนเงินได้</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumApplied">รางวัล 2 เท่า กำลังมีผล!</String>
+  <String Key="SeasonalEventMode_Season74">อารีน่าแห่งสายลม</String>
+  <String Key="SpecialDamageMulFormat">ดาเมจพิเศษ +{0}%</String>
+  <String Key="FlagsName_60000">ธงอารีน่าแห่งสายลม</String>
+  <String Key="FlagsDesc_60000">ธงของผู้ที่พิสูจน์คุณค่าของตนในอารีน่าแห่งสายลม</String>
+  <String Key="FlagsName_60010">ธงอวตารแห่งลม</String>
+  <String Key="FlagsDesc_60010">ธงที่อธิษฐานถึงการมาของ 'อวตารแห่งลม' และ 'ชัยชนะที่สัญญาไว้'</String>
   <String Key="PlayReward_Semi1">รางวัลครึ่งแรก</String>
   <String Key="PlayReward_Semi2">รางวัลครึ่งหลัง</String>
   <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt;ครั้ง</String>
+  <String Key="SpecialPackage_1699">แพ็กเกจคำปฏิญาณ</String>
+  <String Key="SpecialPackage_1700">แพ็กเกจฝนเพลิง</String>
+  <String Key="InventoryItemName_5605">กล่องเลือกสกินคิงก็อดพาส</String>
+  <String Key="SeasonPassScheduledHeroTitle_74">ได้รับฮีโร่เหนือขีดจำกัด &lt;color=#D8B4FF&gt;อีโฮอุนเด&lt;/color&gt;</String>
+  <String Key="SeasonPassScheduledHeroBenefit">มอบฮีโร่ใหม่</String>
+  <String Key="InventoryItemName_SSGuaranteedSetFormat">แรนด้อม SS {0}</String>
+  <String Key="InventoryItemName_SSGuaranteedBoxFormat">แรนด้อม SS {0}</String>
+  <String Key="InventoryItemDesc_SSGuaranteedBoxFormat">ได้รับหีบเลือกเครื่องประดับพิเศษ SS แบบสุ่มจากเซ็ตที่เลือก</String>
+  <String Key="InventoryItemDesc_SSGuaranteedSetFormat">ได้รับเครื่องประดับที่เลือก และค่าพลังเสริมแรนด้อม 1 อย่างจะเป็นระดับ SS</String>
+  <String Key="AlreadyHaveFlag">ไม่ได้รับ เพราะมีธงนี้อยู่แล้ว</String>
+  <String Key="SeasonPassScheduledHeroInfo_74">หากมีฮีโร่อยู่แล้ว จะเลื่อนขั้นฮีโร่ 1 ครั้ง
+หากฮีโร่เลื่อนขั้นสูงสุดแล้ว จะมอบ &lt;color=#ffd264&gt;คัมภีร์อัญเชิญฮีโร่ต่างมิติ 10 ใบ&lt;/color&gt; แทน</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_Class">&lt;{0}&gt; {1}</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_ThreeClasses">&lt;{0}&gt; &lt;{1}&gt; &lt;{2}&gt; {3}</String>
+  <String Key="Post_Title_6thAnniversaryGift">ของขวัญพิเศษครบรอบ 6 ปี</String>
+  <String Key="KingsTreasureSelectiveSummon">อัญเชิญขุมทรัพย์คิงแบบเลือก</String>
   <String Key="BlessedTreasure">ขุมทรัพย์แห่งพร</String>
+  <String Key="TreasureCustomPickupTitle">อัญเชิญขุมทรัพย์แห่งพร</String>
+  <String Key="UnitName_10820">อีโฮอุนเด</String>
+  <String Key="UnitSubName_10820_1">ครั้งหนึ่งเคยเป็นที่รู้จักในชื่อ ฮันซี</String>
+  <String Key="UnitSubName_10820">ผู้พิทักษ์แห่งสายลม</String>
+  <String Key="SkinDesc_Default_10820">ในหมู่บ้านเล็กๆ แห่งหนึ่งทางภาคตะวันออก มีผู้พิทักษ์ผู้เงียบขรึมคนหนึ่งถือกำเนิดขึ้น
+และยอมมอบทุกสิ่งของตนเพื่อปกป้องผู้คน.
+
+ลูกศรที่ปกครองท้องฟ้าไม่ได้เผาผลาญผืนดินอีกต่อไป
+มันเพียงกลายเป็นเจ้าแห่งสายลมที่ไม่เคยหยุดนิ่ง.
+
+ตราบใดที่เขายังคุ้มครองหมู่บ้าน
+ไม่มีสิ่งใดจากภายนอกจะทำลายความสงบสุขได้.
+.
+.
+.
+.
+.
+.</String>
+  <String Key="IncarnationUnit_10820">หายนะ</String>
+  <String Key="Introduce_10820">บันทึกของผู้รอดชีวิต</String>
+  <String Key="SkinDesc_Default_10820_1">เมื่อฤดูร้อนปีที่แล้ว ลมหนาวเริ่มพัดมา.
+หมอกน้ำค้างแข็งราวกับควันปกคลุมไปทั่วทุกทิศ
+และฝุ่นสีขาวเย็นเยียบก็ตกคลุมหลังคา ทุ่งนา และใบไม้.
+พืชพรรณแข็งตัว และผลไม้ร่วงลงสู่พื้นทั้งที่ยังคงรูปไว้ไม่ได้.
+
+เพราะลมไม่เคยหยุด ทั้งไม้และหินจึงสึกกร่อนและเริ่มพังทลาย.
+ไฟลุกลามเร็วกว่าที่เราจะควบคุมได้ และเราก็สูญเสียการควบคุมเปลวไฟ.
+คลื่นสูงขึ้นไม่สิ้นสุด และเพราะเราไม่อาจต้านทานได้ เราจึงสูญเสียทะเล.
+ไม่มีทางหนีจากความหนาวที่บาดผิว และไม่มีทางหยุดลมที่คมดุจคมมีด.
+ดังนั้นจึงไม่มีอสูรตนใดเข้าใกล้ได้.
+
+เราได้มาซึ่งความสงบ.
+เราเสียอนาคตไป.
+สิ่งที่เหลือให้เรามีก็มีเพียงการถูกกลืนกินทั้งที่แข็งค้าง โดยสายลมที่ไม่มีวันหยุด…</String>
+  <String Key="InventoryItemDesc_SelectableTreasureBox">หีบที่ให้เลือกและได้รับขุมทรัพย์พิเศษที่ปรากฏในการอัญเชิญถาวรได้.
+ เมื่อใช้ สามารถเลือกของรางวัลจากรายการไอเทมได้.</String>
+  <String Key="IncarnationUnitPickupSummon">อัญเชิญฮีโร่บรรลุ</String>
+  <String Key="GachaPickupDescFormat">สามารถได้รับฮีโร่เหนือขีดจำกัด</String>
+  <String Key="IncarnationUnitMaxOvercomeConvertedTicket">อัญเชิญฮีโร่ที่เลื่อนขั้นสูงสุดแล้ว จึงได้รับคัมภีร์อัญเชิญฮีโร่ต่างมิติ 10 ใบ</String>
+  <String Key="SpecialTreasureSelectTitle">อัญเชิญขุมทรัพย์พิเศษแบบเลือก</String>
+  <String Key="SpecialTreasureSelectDesc">เลือกขุมทรัพย์พิเศษ 1 ชิ้นจากขุมทรัพย์ที่สามารถปรากฏในอัญเชิญขุมทรัพย์ถาวรแล้วรับได้
+แตะปุ่มซื้อเพื่อดูรายชื่อขุมทรัพย์ที่สามารถได้รับ</String>
+  <String Key="SkinDesc_Default_10820_Simple">ลูกศรที่ปกครองท้องฟ้าไม่ได้เผาผลาญผืนดินอีกต่อไป
+มันเพียงกลายเป็นเจ้าแห่งสายลมที่ไม่เคยหยุดนิ่ง.</String>
+  <String Key="LoginSkinName_10020">หน้าจอล็อกอินครบรอบ 6 ปี</String>
+  <String Key="LoginSkinDesc_10020">หน้าจอล็อกอินครบรอบ 6 ปี</String>
+  <String Key="ObtainableBySummoningIncarnationUnit">ได้รับเมื่ออัญเชิญฮีโร่เหนือขีดจำกัด</String>
 </Strings>

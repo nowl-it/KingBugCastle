@@ -796,7 +796,7 @@
         </Buffs>
     </AccessorySynergyBuff>
     <AccessorySynergyBuff ID="10091" Inherit="10090">
-        <Comment>사거리 + 2, 보유한 사거리 1마다 물리 치명타 피해량 +8% (최대 80%)</Comment>
+        <Comment>물리 치명타 피해량 +65%. 최초로 현재 체력이 최대 체력의 95% 이하가 되면 물리 치명타 피해량 -65%</Comment>
 
         <Count>3</Count>
 
@@ -804,49 +804,48 @@
 
         <DescParams>
             <InnerText>./BuffOptions[1]/Values/FixedValue</InnerText>
-            <Const>1</Const>
-            <InnerText>./BuffOptions[2]/Values/Range</InnerText>
+            <Attribute Name="Value">./BuffOptions[2]/Conditions/UnderHpPer</Attribute>
         </DescParams>
 
         <BuffOptions>
             <Conditions>
-                <Once/>
+                <BattleStart/>
             </Conditions>
-            
+
             <Targets>
                 <Self/>
             </Targets>
-            
+
             <RangeInfo>
             </RangeInfo>
-            
+
             <BuffContents>
-                <AddStat StatType="Range" StatValueType="Value" />
+                <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue"/>
             </BuffContents>
-            
+
             <Values>
-                <FixedValue>2</FixedValue>
+                <FixedValue>65</FixedValue>
             </Values>
         </BuffOptions>
-        
         <BuffOptions>
             <Conditions>
-                <Once/>
+                <DuringBattle/>
+                <UnderHpPer Value="95" OrEqual="true" Count="1"/>
             </Conditions>
-            
+
             <Targets>
                 <Self/>
             </Targets>
-            
+
             <RangeInfo>
             </RangeInfo>
-            
+
             <BuffContents>
-                <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue" HaveToBind="true" Max="80" />
+                <AddStat StatType="CriticalDamageMul" StatValueType="BaseValue" IgnoreCCRatio="true"/>
             </BuffContents>
-            
+
             <Values>
-                <Range>8</Range>
+                <FixedValue>0</FixedValue>
             </Values>
         </BuffOptions>
     </AccessorySynergyBuff>

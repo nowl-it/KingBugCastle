@@ -842,7 +842,7 @@
         <UpgradeTime>00:00:00</UpgradeTime>
         <ReqTownHallLevel>3</ReqTownHallLevel>
         <Specs>
-            <UnlockedTradeShop>10000</UnlockedTradeShop>
+            <UnlockedTradeShop>10010</UnlockedTradeShop>
         </Specs>
     </TerritoryBuilding>
     <TerritoryBuilding ID="10902" Inherit="10901">
@@ -853,7 +853,7 @@
         <UpgradeTime>00:00:00</UpgradeTime>
         <ReqTownHallLevel>5</ReqTownHallLevel>
         <Specs>
-            <UnlockedTradeShop>10100</UnlockedTradeShop>
+            <UnlockedTradeShop>10110</UnlockedTradeShop>
         </Specs>
     </TerritoryBuilding>
     <TerritoryBuilding ID="10903" Inherit="10902">
@@ -864,7 +864,7 @@
         <UpgradeTime>00:00:00</UpgradeTime>
         <ReqTownHallLevel>8</ReqTownHallLevel>
         <Specs>
-            <UnlockedTradeShop>10200</UnlockedTradeShop>
+            <UnlockedTradeShop>10210</UnlockedTradeShop>
         </Specs>
     </TerritoryBuilding>
     <TerritoryBuilding ID="10904" Inherit="10903">
@@ -875,7 +875,7 @@
         <UpgradeTime>00:00:00</UpgradeTime>
         <ReqTownHallLevel>10</ReqTownHallLevel>
         <Specs>
-            <UnlockedTradeShop>10300</UnlockedTradeShop>
+            <UnlockedTradeShop>10310</UnlockedTradeShop>
         </Specs>
     </TerritoryBuilding>
     <TerritoryBuilding ID="10905" Inherit="10904">

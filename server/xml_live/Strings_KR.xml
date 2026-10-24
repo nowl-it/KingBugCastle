@@ -1,6 +1,6 @@
 <Strings>
   <String Key="UpdateNoticeVersion">172000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/eac1c2e0-6f0e-8340-a227-01806c0dfe2c</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/kr</String>
   <String Key="Title">킹갓캐슬</String>
   <String Key="Tags">어썸피스, 좀비고, 오토체스,롤토체스, 킹갓캐슬, 오토배틀러, 전략, 전략적팀전투,TFT,엔즈,도와줘엔즈,머지,디펜스</String>
   <String Key="Store_ShortDesc">영웅들과 신의 힘을 이용해 침략하는 다양한 적들로부터 성을 지켜라! 킹갓캐슬!</String>
@@ -957,8 +957,8 @@
   <String Key="AddDefPerCount">배치된 영웅당 받는 피해량이 {0} 감소
 (최대 {1})</String>
   <String Key="AddDefPerCount_Piece">배치된 영웅이 많을수록 받는 피해량 감소</String>
-  <String Key="AtkPerByRange">모든 영웅 사거리 + 1, 일반/스킬 공격 대상과의 거리당 주는 피해량 {0} 증가 (최대 거리 {1})</String>
-  <String Key="AtkPerByRange_Piece">모든 영웅 사거리 + 1, 일반/스킬 공격 대상이 멀수록 주는 피해량 증가</String>
+  <String Key="AtkPerByRange">일반/스킬 공격 대상과의 거리당 주는 피해량 {0} 증가 (최대 거리 {1})</String>
+  <String Key="AtkPerByRange_Piece">일반/스킬 공격 대상이 멀수록 주는 피해량 증가</String>
   <String Key="ArtifactName_100">신비한 가루</String>
   <String Key="ArtifactDesc_100">유물을 분해하여 얻을 수 있는 신비한 가루</String>
   <String Key="ArtifactName_10000">제국의 대검</String>
@@ -2759,8 +2759,8 @@ WiFi/Data가 정상이라면 인터넷 연결 재시작 후 재시도해주시�
   <String Key="CashCart">보석 수레</String>
   <String Key="UnitName_10320">티아</String>
   <String Key="UnitSubName_10320">영원의 감시자</String>
-  <String Key="Potential_10320_0">3칸 이내의 적에게 최종 주는 피해량 +20%</String>
-  <String Key="Potential_10320_1">적 처치 시 다음 &lt;돌풍&gt;은 2배의 화살 발사</String>
+  <String Key="Potential_10320_0">자신 기준 4칸 안의 적에게 최종 주는 피해량 +30%</String>
+  <String Key="Potential_10320_1">&lt;돌풍&gt;의 첫 화살이 적의 물리 방어력을 100% 관통</String>
   <String Key="SkinDesc_Default_10320">티아는 엘프 왕가 직속 부대의 감시대장입니다. 그녀는 돌풍과 같이 민첩하게 움직이면서도 천부적인 궁술을 선보이며, 기나긴 세월동안 영원숲의 경계를 지켜왔습니다.</String>
   <String Key="SkillName_10320">돌풍</String>
   <String Key="SkillDesc_10320">대상이 {BuffRangeSum}칸 이내에 있다면, 뒤로 {MoveDistance}칸 이동 후 {AttackCount}회의 물리 피해를 주는 일반 공격을 가합니다. 대상이 {BuffRangeSum}칸 이내에 없으면, 공격력의 {10325@Damage:AtkPer:BaseValue}%로 {AttackCount}번 공격을 가합니다.</String>
@@ -5894,7 +5894,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="RogueLikeBuildingPackageTitleFormat">{0} 패키지 {1}</String>
   <String Key="RogueLikeBuildingPackageConfirm">{0} 패키지는 I, II, III 단계 중 하나만 구매가 가능합니다.
 구매를 진행하시겠습니까?</String>
-  <String Key="LevelFormat">{0}레벨</String>
+  <String Key="LevelFormat">레벨 {0}</String>
   <String Key="BuildingsAlreadyComplete">이미 제단을 모두 선택하였습니다.</String>
   <String Key="DeathBuildingPackage">사신의 제단 패키지</String>
   <String Key="ArtifactName_13160">죽음의 서</String>
@@ -6686,7 +6686,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="BigTiger">대호랑이</String>
   <String Key="SodaSlime">&lt;i&gt;탄산슬라임&lt;/i&gt;</String>
   <String Key="Cherrytomato">체리토마토</String>
-  <String Key="StrongPrairie">힘쎈프레리독</String>
+  <String Key="StrongPrairie">힘센프레리독</String>
   <String Key="Cosmoberry">우주베리</String>
   <String Key="MightySeal">강한물범</String>
   <String Key="OneTrillionCoffee">원조커피</String>
@@ -6889,8 +6889,8 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArtifactName_14020">드워프 조준경</String>
   <String Key="ArtifactDesc_14020">드워프들의 기술이 집약된 조준경.
 사용자는 더 멀리, 더 정확히 공격할 수 있지만, 무거워서 들고다닐 수는 없습니다.</String>
-  <String Key="MoveStopTimeDesc_Piece">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 획득, 일정 시간 &lt;color=#f33&gt;이동 불가&lt;/color&gt;, 사거리 +3, 처음 및 매 5회마다 일반 피해의 주는 피해량 증가</String>
-  <String Key="MoveStopTimeDesc">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 +{2}, {0}초간 &lt;color=#f33&gt;이동 불가&lt;/color&gt;, 사거리 +3, 처음 및 매 5회마다 일반 피해의 주는 피해량 +{1}%.</String>
+  <String Key="MoveStopTimeDesc_Piece">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 +4, 일정 시간 &lt;color=#f33&gt;이동 불가&lt;/color&gt;, 저격 장소에 있는 동안 일정 회수 마다 일반 피해량 증가</String>
+  <String Key="MoveStopTimeDesc">전장의 두 칸을 저격 장소로 지정. 배치된 영웅은 절대 방어 +{1}, {2}초간 &lt;color=#f33&gt;이동 불가&lt;/color&gt;, 저격 장소에서 처음으로 벗어나기 전까지 처음 및 매 5회마다 일반 피해의 주는 피해량 +{0}%.</String>
   <String Key="ColosseumBanned">격전의 전장 시즌 이용 제한</String>
   <String Key="GachaName_1036">웃음기 없는 미소</String>
   <String Key="Name_Potential_10560_3">고양</String>
@@ -9001,7 +9001,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="SpecialPackage_1491">화우 패키지 2</String>
   <String Key="SpecialPackage_1492">화우 패키지 3</String>
   <String Key="SkillDesc_10110">{Time}초동안 {AtkCount}회 더 공격합니다.</String>
-  <String Key="Potential_10110_0">&lt;속사의 비&gt; 사용 중 물리 치명타 확률 +15%</String>
+  <String Key="Potential_10110_0">&lt;속사의 비&gt; 사용 중 사거리 +1</String>
   <String Key="Potential_10110_1_00">활 아이템 장착 시 하나 당 최종 공격력 +15%</String>
   <String Key="Potential_10110_2_00">&lt;속사의 비&gt; 사용 시 대상 주변 2칸 범위 내 모든 적들에게 공격력의 250%의 물리 스킬 피해를 [3/4/5/6]회 가하고 3초간 최종 이동속도를 30% 감소시키는 &lt;폭우&gt; 시전</String>
   <String Key="Potential_10110_3">&lt;속사의 비&gt; 사용 중 같은 대상에게 10회의 일반 피해를 줄 시 &lt;속사의 비&gt; 지속시간을 초기화 하고 공격력 50% 상승
@@ -10683,7 +10683,7 @@ Lv. {0} ▶ Lv. {1}</String>
 폭발 발생 시 {4}초간 물리 치명타 피해량 +{5}%
 폭발 피격 대상에게 {6}초간 기절 부여
 폭발 발생 시 {7}초간 물리 치명타 확률 +{8}%</String>
-  <String Key="Potential_10110_1">&lt;속사의 비&gt; 사용 중 최종 공격력 +30%</String>
+  <String Key="Potential_10110_1">&lt;속사의 비&gt; 사용 중 물리 치명타 확률 +30%</String>
   <String Key="Potential_10110_2">&lt;속사의 비&gt; 사용 중 7번째 일반 공격 대신 대상 주변 2칸 범위 내 모든 적들에게 공격력의 250%의 물리 스킬 피해 [4/5/6/7]회 가하는 [폭우] 시전</String>
   <String Key="Potential_10420_1">&lt;백호각&gt; 사용 중 받는 피해량 -30%</String>
   <String Key="SkillDesc_1011000_Long">주작가에 내려져오는 궁술로 {10110@Time}초동안 일반 공격의 공격 횟수가 {10110@AtkCount}회 증가합니다. {1011005@NeedComboCount+1}번째 일반 공격 대신 대상 주변 {1011010@SplashRangeSum}칸 내 모든 적들에게 {1011010@Damage}의 물리 스킬 피해를 {1011010@AttackCount}회 가하는 폭우를 시전합니다.</String>
@@ -10961,7 +10961,7 @@ Lv. {0} ▶ Lv. {1}</String>
 변경사항을 적용하지 않고 위시리스트를 종료 하시겠습니까?</String>
   <String Key="OwnedTreasureStatus">보유 현황</String>
   <String Key="ColosseumTierRewardAutoReceiveTitle">격전의 전장 시즌 {0} 랭크 보상</String>
-  <String Key="ColossseumTierRewardAutoReceiveDesc">격전의 전장 시즌 {0}에서 미수령했던 {1} 달성 보상을 보내드립니다.</String>
+  <String Key="ColosseumTierRewardAutoReceiveDesc">격전의 전장 시즌 {0}에서 미수령했던 {1} 달성 보상을 보내드립니다.</String>
   <String Key="TreasureName_30018">철벽의 투지</String>
   <String Key="TreasureSubName_30018">강철의 보루</String>
   <String Key="TreasureDesc_30018">데네브 가문은 세대를 거듭해 전장의 최전선에서 적들과 맞서 싸우며 영웅이라고 불리우게 되었습니다. 가문의 상징인 강철 방패는 가문의 불굴의 의지를 나타냅니다.</String>
@@ -11718,7 +11718,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="AccessorySynergyName_9">월광</String>
   <String Key="AccessorySynergyName_9_Pre">월광의</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;최종 주문력 {0}%&lt;/color&gt;, 최종 공격력 +{1}%</String>
-  <String Key="AccessorySynergyDesc_10091">사거리 +{0}, 보유한 사거리 {1}마다 물리 치명타 피해량 +{2}%(최대 80%)</String>
+  <String Key="AccessorySynergyDesc_10091">물리 치명타 피해량 +{0}%. 최초로 현재 체력이 최대 체력의 {1}% 이하가 되면 물리 치명타 피해량 -{0}%</String>
   <String Key="AccessorySynergyDesc_10092">전투 시작 시 {0}초간 은신, {1}초 후 물리 치명타 확률 +{2}%</String>
   <String Key="InventoryItemName_5010">월광의 장신구 선택 상자</String>
   <String Key="ShopItemName_41012">무작위 월광 장신구</String>
@@ -12671,7 +12671,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="RiftWeaponBuffDesc_130">스킬 사용 후 일반 피해 시 3명에게 {0}%의 특수 피해</String>
   <String Key="RiftWeaponBuffDesc_140">물리 방어력 +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">주문 방어력 +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">사거리 +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">이동속도 +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">물리 흡혈 +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">주문 흡혈 +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">방어력 +{0}</String>
@@ -13629,7 +13629,7 @@ Lv. {0} ▶ Lv. {1}</String>
   <String Key="ArenaStarterBuffDesc_2">아레나 시즌 종료 72시간 이내에 최초 진입 시 다음 시즌 부터 전장의 축복이 적용됩니다.</String>
   <String Key="SkillDesc_10070_Short">{Time}초간 {TotalAttackSpeedPer:BaseValue}%의 최종 공격 속도 증가를 얻고, 일반 공격 시 공격력의 ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% 피해를 가합니다.</String>
   <String Key="SkillDesc_10070_Long">자운이 분노로 가득 차, {Time}초 동안 {TotalAttackSpeedPer:BaseValue}%의 최종 공격속도를 추가로 얻고, 동일한 시간 동안 일반 공격 시 공격력의 ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})%만큼 일반 물리 피해를 가합니다.</String>
-  <String Key="Potential_10070_0">&lt;격노&gt; 사용 중 자운의 방어력 +100</String>
+  <String Key="Potential_10070_0">&lt;격노&gt; 사용 중 자운의 사거리 +1</String>
   <String Key="Potential_10070_1">&lt;격노&gt; 사용 중 자운의 물리/주문 흡혈 +40%</String>
   <String Key="Potential_10070_2">같은 적에게 일반 피해 40회 적중 시 공격 횟수 +1 (중첩 불가)
 다른 적에게 일반 피해 시 증가분 초기화</String>
@@ -14667,8 +14667,8 @@ D = 1 ~ 4</String>
   <String Key="InventoryItemName_700">연금석</String>
   <String Key="InventoryItemDesc_700">조사단 의뢰를 통해 획득한 연금 재료. 연금 공방에서 사용하여 다양한 보상을 획득할 수 있다.</String>
   <String Key="TerritoryTradeShopDesc">무역상 물품은 &lt;color=#ffd264&gt;무역상 레벨에 따라 결정&lt;/color&gt; 됩니다.
-무역상 레벨 4 이하의 물품은 &lt;color=#ffd264&gt;일주일마다 초기화&lt;/color&gt; 되고
-무역상 레벨 5 이상의 물품은 &lt;color=#ffd264&gt;격주마다 초기화&lt;/color&gt; 됩니다.</String>
+무역상 레벨 2~3의 물품은 &lt;color=#ffd264&gt;일주일마다 초기화&lt;/color&gt; 되고
+무역상 레벨 4 이상의 물품은 &lt;color=#ffd264&gt;격주마다 초기화&lt;/color&gt; 됩니다.</String>
   <String Key="ChangeAccessorySubStat">보조 능력치 변경</String>
   <String Key="ChangeAccessorySubStatDesc_0">보조 능력치를 변경할 장신구를 선택해 주세요</String>
   <String Key="ChangeAccessorySubStatDesc_1">변경하려는 보조 능력치를 선택하세요.</String>
@@ -16640,7 +16640,8 @@ D = 1 ~ 4</String>
   <String Key="NewUnitGachaInfo">보유하지 않은 영웅 중 한 명을 획득할 수 있습니다.
 영웅의 등장 확률은 보유하지 않은 영웅별로 모두 동일합니다.</String>
   <String Key="InventoryItemName_5603">특급 보구 선택 상자</String>
-  <String Key="RewardBoxInventoryDesc_5603">특급 보구를 선택하여 1개 획득할 수 있는 상자</String>
+  <String Key="RewardBoxInventoryDesc_5603">특급 보구를 선택하여 획득할 수 있다.
+(기간 한정 보구 제외)</String>
   <String Key="GachaDesc_PickUpResetAlert">선택 불가능한 영웅이 있어 자동 초기화되었습니다.</String>
   <String Key="UnitName_10780">네리아</String>
   <String Key="UnitSubName_10780">광기의 복수자</String>
@@ -17033,8 +17034,7 @@ D = 1 ~ 4</String>
   <String Key="Name_Overcome_2">개전 스킬 강화</String>
   <String Key="Name_Overcome_3">특성 강화</String>
   <String Key="Name_Overcome_4">스킬 강화</String>
-  <String Key="InventoryItemDesc_70000">신비한 기운이 감도는 소환서.
-차원 소환을 1회 진행할 수 있다.</String>
+  <String Key="InventoryItemDesc_70000">신비한 기운이 감도는 소환서.</String>
   <String Key="InventoryItemDesc_10000">이차원의 힘이 응축된 자그마한 핵.
 차원 상점에서 다양한 물품과 교환할 수 있다.</String>
   <String Key="InventoryItemName_10000">차원 핵</String>
@@ -17100,8 +17100,7 @@ D = 1 ~ 4</String>
   <String Key="SpecialPackage_1666">템페스터 패키지</String>
   <String Key="SpecialShop_TreasureDoublePickUp10013">보구 픽업 특별 상점</String>
   <String Key="ShopItemName_70000">차원 영웅 소환서</String>
-  <String Key="ShopItemDesc_70000">신비한 기운이 감도는 소환서.
-차원 소환을 1회 진행할 수 있다.</String>
+  <String Key="ShopItemDesc_70000">신비한 기운이 감도는 소환서.</String>
   <String Key="RewardBoxInventoryDesc_7100">정해진 확률에 따라 아이템을 획득할 수 있습니다.</String>
   <String Key="DimensionHeroAttendanceEventTitle">차원영웅 기념 출석 이벤트</String>
   <String Key="ReservedText">예약됨</String>
@@ -18335,9 +18334,234 @@ D = 1 ~ 4</String>
   <String Key="SkinName_1074001">월하성군 수하</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;달토끼님들! 한 해 만에 내려오셨다고 너무 말썽을 피우시면 안 되는 거 아시죠? 모두 즐겁게 놀다 가요!&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">보름달 축제 상품</String>
+  <String Key="SeasonalEventNumberFormat">{0}시즌 이벤트</String>
+  <String Key="SeasonalEvent">시즌 이벤트</String>
+  <String Key="SeasonalEventCeilFormat">{0}시즌 픽업</String>
+  <String Key="SeasonalEventName_Season74">바람의 아레나</String>
+  <String Key="SeasonalEventDesc_Season74">단판으로 겨루는 승부!</String>
+  <String Key="UniversalEventText">EVENT</String>
+  <String Key="SingleArenaNeedAdForReroll">상대를 재설정하려면 광고를 시청해 주세요.</String>
+  <String Key="SingleArena_ApFormat">AP {0}</String>
+  <String Key="SingleArena_AttackDeck">공격 진영</String>
+  <String Key="SingleArena_AttackDeckSet">공격 진영 편성</String>
+  <String Key="SingleArena_AttackSelect_Desc">이미 설정해둔 공격 진영을 사용하거나, 상대 진영을 확인하여 재편성할 수 있습니다.
+
+기존 공격 진영 사용 시 즉시 전투가 가능하며 재편성은 영웅 선택부터 모든 것을 다시 설정합니다.(공격 진영 재편성은 하루 최대 5회 가능합니다.)
+
+공격 방식을 선택해 주세요.</String>
+  <String Key="SingleArena_AttackSelect_Title">공격 진영 선택</String>
+  <String Key="SingleArena_CompleteDeck">편성 완료</String>
+  <String Key="SingleArena_DefenseDeck">방어 진영</String>
+  <String Key="SingleArena_DefenseDeckSet">방어 진영 편성</String>
+  <String Key="SingleArena_EnemyDeckPreview">상대 덱 보기</String>
+  <String Key="SingleArena_FinalAttackSelect_Desc">신규로 편성한 공격 진영을 새로운 공격 진영으로 저장하고 전투하시겠습니까?
+
+기존 공격 진영 사용 시 신규 공격 진영은 자동 삭제됩니다.</String>
+  <String Key="SingleArena_FinalDeckSelect_Desc">사용할 진영을 선택해 주세요.</String>
+  <String Key="SingleArena_FinalDeckSelect_Title">진영 최종 선택</String>
+  <String Key="SingleArena_FirstDeckSetAlert">최초 1회 한정으로 방어 진영과 공격 진영이 동시에 저장됩니다.
+이후에는 방어 진영과 공격 진영을 따로 구성할 수 있습니다.</String>
+  <String Key="SingleArena_Intro_Desc1">바람의 아레나는 단 한판으로 승패를 정하는 아레나입니다.</String>
+  <String Key="SingleArena_Intro_Desc2">공격 진영과 방어 진영, 총 두 개의 진영을 사용합니다.</String>
+  <String Key="SingleArena_Intro_Desc3">공격 진영은 상대의 방어 진영을 확인하고 공격하는 데 사용됩니다.</String>
+  <String Key="SingleArena_Intro_Desc4">방어 진영은 상대의 공격을 막아내는데 사용되며, 방어에 실패하면 승점을 잃게 됩니다.(승점은 하루 최대 3회까지 잃을 수 있습니다.)</String>
+  <String Key="SingleArena_Intro_Desc5">최초의 진영 편성은 강제로 고정되지만, 최초 이후의 편성은 자유롭게 구성이 가능합니다.</String>
+  <String Key="SingleArena_Intro_Desc6">상대의 방어 진영을 확인한 후 공격 진영을 변경해도 상대 진영이 바뀌지 않습니다.</String>
+  <String Key="SingleArena_Intro_Desc7">상대에 맞춰 자유롭게 진영을 구성하고 승리를 쟁취하세요!</String>
+  <String Key="SingleArena_LeftGameAlertFormat">완료되지 않은 전투가 패배 처리되었습니다. ({0}점)</String>
+  <String Key="SingleArena_Log_Attack">공격</String>
+  <String Key="SingleArena_Log_Def">방어</String>
+  <String Key="SingleArena_Log_Empty">전적이 없습니다.</String>
+  <String Key="SingleArena_MissionCondFormat">누적 공격 {0}회</String>
+  <String Key="SingleArena_NeedDeck">공격 진영과 방어 진영을 먼저 편성해주세요.</String>
+  <String Key="SingleArena_NeedFieldUnit">배치된 영웅이 없습니다.</String>
+  <String Key="SingleArena_NewAttackDeck">신규 공격 진영</String>
+  <String Key="SingleArena_NewDefenseDeck">신규 방어 진영</String>
+  <String Key="SingleArena_NoMoreDeckChange">오늘은 더 이상 진영을 변경할 수 없습니다.</String>
+  <String Key="SingleArena_OldAttackDeck">기존 공격 진영</String>
+  <String Key="SingleArena_OldDefenseDeck">기존 방어 진영</String>
+  <String Key="SingleArena_RankNotReached">아직 도달하지 못한 랭크입니다.</String>
+  <String Key="SingleArena_RankingPanelTitle">바람의 아레나 랭킹</String>
+  <String Key="SingleArena_RankingReward_Desc">시즌 종료 시 최종 순위에 따라 보상을 획득합니다.</String>
+  <String Key="SingleArena_RankingTop">상위 300위</String>
+  <String Key="SingleArena_RecordFormat">공격 {0}승 {1}패 / 방어 {2}승 {3}패</String>
+  <String Key="SingleArena_ReformAttackDeck">공격 진영 재편성</String>
+  <String Key="SingleArena_RemainAttackFormat">남은 공격 횟수 {0}/{1}</String>
+  <String Key="SingleArena_RerollRemainFormat">상대 변경 {0}/{1}</String>
+  <String Key="SingleArena_RetreatWarning">후퇴하실 경우 아레나 편성이 중지됩니다. (개별 편성일 경우 일일 변경 횟수가 소진됩니다.)</String>
+  <String Key="SingleArena_Search">상대 검색</String>
+  <String Key="SingleArena_SelectTargetFirst">상대를 먼저 선택해주세요.</String>
+  <String Key="SingleArena_StagePreviewDesc">양측 진영의 배치를 미리 확인할 수 있습니다.</String>
+  <String Key="SingleArena_StagePreviewTitle">배치 정보</String>
+  <String Key="SingleArena_Title">바람의 아레나</String>
+  <String Key="SingleArena_UseAttackDeck">공격 진영 사용</String>
+  <String Key="SingleArena_UseNewDeck">신규 진영 사용</String>
+  <String Key="SingleArena_UseOldDeck">기존 진영 사용</String>
+  <String Key="SingleArena_RankingRewardPanel_Title">바람의 아레나 랭킹 보상</String>
+  <String Key="SingleArena_RankingRewardPanel_Desc">보상은 시즌 종료 시점 랭킹으로 지급됩니다.
+랭킹 300위 안에 등록되려면 최소 킹 등급 이상을 달성해야 합니다.</String>
+  <String Key="SingleArena_MatchHistory">바람의 아레나 전적</String>
+  <String Key="SeasonalEventOperationFormat">{0}는 전반기 후반기 구분없이 {1}시즌 이벤트 기간 동안 운영됩니다.
+
+남은 시간 : {2}</String>
+  <String Key="MissionDesc_SingleArena_Attack">바람의 아레나 {0}회 플레이</String>
+  <String Key="SingleArena_Mission">바람의 아레나 미션</String>
+  <String Key="SixthYearDailyAttendanceEvent">&lt;color=#ffd264&gt;6주년&lt;/color&gt; 기념 출석체크 이벤트</String>
+  <String Key="SeasonalEvent_ButtonName_Rift">균열</String>
+  <String Key="SeasonalEvent_ButtonName_Arena">아레나</String>
+  <String Key="SeasonalEvent_ButtonName_Battlefield">전장</String>
+  <String Key="IncarnationUnit">초월 영웅</String>
+  <String Key="Passive">패시브</String>
+  <String Key="UltimateSkill">궁극기</String>
+  <String Key="SingleStackBuff">단일 중첩 버프</String>
+  <String Key="SingleStackBuff_Desc">동일 버프 중첩 시 하나의 버프 중첩 수가 증가됩니다. 버프 스택 증가 시 버프 지속시간이 최대로 초기화됩니다.</String>
+  <String Key="PassiveSkillHelp_0">패시브 스킬은 전투 중 조건에 따라 자동으로 적용됩니다.</String>
+  <String Key="PassiveSkillHelp_1">인게임 영웅 성급에 따른 변화가 없습니다.</String>
+  <String Key="PassiveSkillHelp_2">표시 수치는 영웅 돌파로 강화될 수 있습니다.</String>
+  <String Key="UltimateMeterFormat">궁극기 게이지 {0}/{1}</String>
+  <String Key="UltimateSkillHelp_0">궁극기 스킬은 인게임 영웅 성급에 따라 능력치 강화됩니다.</String>
+  <String Key="UltimateSkillHelp_1">표시 수치는 영웅 돌파로 강화될 수 있습니다.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_0">영웅 소환에서 이미 보유한 초월 영웅이 중복 소환되면 돌파가 가능합니다.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_1">돌파는 최대 5단계까지 가능합니다.</String>
+  <String Key="AddAttackCountEveryFourthNormalAttackFormat">일반 공격 4회마다 공격 횟수 +1, 추가 공격 피해량 {0}</String>
+  <String Key="SkillName_10820">레라 앗카투</String>
+  <String Key="SkillDesc_10820_Short">{ChannelingTime}초 동안 정신 집중 후, 전장을 관통하는 바람 화살을 발사하여 1X1 경로상의 모든 적에게 공격력의 {Damage:AtkPer:BaseValue}%의 물리 스킬 피해를 가합니다.</String>
+  <String Key="SkillDesc_10820_Long">이호운데가 적 영웅의 위치를 지정하여 {ChannelingTime}초 동안 바람의 힘을 모은 뒤, 지정한 위치를 향해 전장을 관통하는 바람 화살을 발사하여 1X1 경로상의 모든 적에게 공격력의 {Damage:AtkPer:BaseValue}%의 물리 스킬 피해를 가합니다. 스킬 사용 시, 궁극기 게이지 1을 획득합니다.</String>
+  <String Key="SkillDesc_10820_Short_2">{ChannelingTime}초 동안 정신 집중 후, 전장을 관통하는 바람 화살을 발사하여 1X1 경로상의 모든 적에게 공격력의 {Damage:AtkPer:BaseValue}%의 물리 스킬 피해를 가합니다.</String>
+  <String Key="SkillDesc_10820_Long_2">이호운데가 적 영웅의 위치를 지정하여 {ChannelingTime}초 동안 바람의 힘을 모은 뒤, 지정한 위치로 향해 전장을 관통하는 바람 화살을 발사하여 1X1 경로상의 모든 적에게 공격력의 {Damage:AtkPer:BaseValue}%의 물리 스킬 피해를 가합니다. 스킬 사용 시, 카르 5중첩과 궁극기 게이지 1을 획득합니다.</String>
+  <String Key="PassiveSkillName_10820">레라 카르</String>
+  <String Key="PassiveSkillDesc_10820_Short">일반 공격 시 카르 중첩 +1. 최대 중첩 {10820@Unit10820AI_FocusMaxStack}. 중첩 당 공격속도 +{10820@Unit10820AI_FocusAttackSpeedPer}% 증가. 일반 공격 대상 변경 시 중첩 0으로 초기화 후 +1.</String>
+  <String Key="PassiveSkillDesc_10820_Long">일반 공격 시 카르 중첩이 1 추가됩니다. 최대 {10820@Unit10820AI_FocusMaxStack}까지 중첩되며, 중첩 당 공격속도가 +{10820@Unit10820AI_FocusAttackSpeedPer}% 증가합니다. 이전과 다른 대상에게 일반 공격할 경우, 카르 중첩을 0으로 초기화한 뒤 1중첩을 획득합니다.</String>
+  <String Key="PassiveSkillDesc_10820_Short_1">일반 공격 시 카르 중첩 +1. 최대 중첩 {10820@Unit10820AI_FocusMaxStack}. 중첩당 공격속도 +{10820@Unit10820AI_FocusAttackSpeedPer}%. 일반 공격 대상 변경 시 중첩 초기화 후 중첩 +1. 최소 10중첩 유지.</String>
+  <String Key="PassiveSkillDesc_10820_Long_1">일반 공격 시 카르 중첩이 1 추가됩니다. 최대 {10820@Unit10820AI_FocusMaxStack}까지 중첩되며, 중첩당 공격속도가 +{10820@Unit10820AI_FocusAttackSpeedPer}% 증가합니다. 이전과 다른 대상에게 일반 공격할 경우, 카르 중첩을 초기화한 뒤 1중첩을 획득합니다. 카르 중첩은 최소 10중첩으로 유지됩니다.</String>
+  <String Key="PassiveSkillDesc_10820_Short_2">일반 공격 시 카르 중첩 +1. 최대 중첩 {10820@Unit10820AI_FocusMaxStack}. 중첩당 공격속도 +{10820@Unit10820AI_FocusAttackSpeedPer}%. 일반 공격 대상 변경 시 중첩 초기화 후 중첩 +1. 최소 10중첩 유지. 스킬 또는 궁극기 사용 시 카르 중첩 +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_2">일반 공격 시 카르 중첩이 1 추가됩니다. 최대 {10820@Unit10820AI_FocusMaxStack}까지 중첩되며, 중첩당 공격속도가 +{10820@Unit10820AI_FocusAttackSpeedPer}% 증가합니다. 이전과 다른 대상에게 일반 공격할 경우, 카르 중첩을 초기화한 뒤 1중첩을 획득합니다. 카르 중첩은 최소 10중첩으로 유지됩니다. 스킬 또는 궁극기 사용 시 카르 5중첩을 획득합니다.</String>
+  <String Key="PassiveSkillDesc_10820_Short_3">일반 공격 시 카르 중첩 +1. 최대 중첩 {10820@Unit10820AI_FocusMaxStack}. 중첩당 공격속도 +{10820@Unit10820AI_FocusAttackSpeedPer}%. 일반 공격 대상 변경 시 중첩 초기화 후 중첩 +1. 최소 10중첩 유지. 스킬 또는 궁극기 사용 시 카르 중첩 +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_3">일반 공격 시 카르 중첩이 1 추가됩니다. 최대 {10820@Unit10820AI_FocusMaxStack}까지 중첩되며, 중첩당 공격속도가 +{10820@Unit10820AI_FocusAttackSpeedPer}% 증가합니다. 이전과 다른 대상에게 일반 공격할 경우, 카르 중첩을 초기화한 뒤 1중첩을 획득합니다. 카르 중첩은 최소 10중첩으로 유지됩니다. 스킬 또는 궁극기 사용 시 카르 5중첩을 획득합니다.</String>
+  <String Key="PassiveSkillDesc_10820_Short_4">일반 공격 시 카르 중첩 +1. 최대 중첩 {10820@Unit10820AI_FocusMaxStack}. 중첩당 공격속도 +{10820@Unit10820AI_FocusAttackSpeedPer}%. 일반 공격 대상 변경 시 중첩 초기화 후 +1. 최소 10중첩 유지. 스킬 또는 궁극기 사용 시 카르 중첩 +5. 최대 중첩 시 일반 공격이 반드시 치명타로 적중.</String>
+  <String Key="PassiveSkillDesc_10820_Long_4">일반 공격 시 카르 중첩이 1 추가됩니다. 최대 {10820@Unit10820AI_FocusMaxStack}까지 중첩되며, 중첩당 공격속도가 +{10820@Unit10820AI_FocusAttackSpeedPer}% 증가합니다. 이전과 다른 대상에게 일반 공격할 경우, 카르 중첩을 초기화한 뒤 1중첩을 획득합니다. 카르 중첩은 최소 10중첩으로 유지됩니다. 스킬 또는 궁극기 사용 시 카르 5중첩을 획득합니다. 카르 중첩이 최대일 때, 일반 공격이 반드시 치명타로 적중합니다.</String>
+  <String Key="PassiveSkillDesc_10820_Short_5">일반 공격 시 카르 중첩 +1. 최대 중첩 {10820@Unit10820AI_FocusMaxStack}. 중첩당 공격속도 +{10820@Unit10820AI_FocusAttackSpeedPer}%. 일반 공격 대상 변경 시 중첩 초기화 후 +1. 최소 10중첩 유지. 스킬 또는 궁극기 사용 시 카르 중첩 +5. 최대 중첩 시 일반 공격이 반드시 치명타로 적중. 단, 적 처치 시 다음 공격 대상에게도 카르 중첩 유지.</String>
+  <String Key="PassiveSkillDesc_10820_Long_5">일반 공격 시 카르 중첩이 1 추가됩니다. 최대 {10820@Unit10820AI_FocusMaxStack}까지 중첩되며, 중첩당 공격속도가 +{10820@Unit10820AI_FocusAttackSpeedPer}% 증가합니다. 이전과 다른 대상에게 일반 공격할 경우, 카르 중첩을 초기화한 뒤 1중첩을 획득합니다. 카르 중첩은 최소 10중첩으로 유지됩니다. 스킬 또는 궁극기 사용 시 카르 5중첩을 획득합니다. 카르 중첩이 최대일 때, 일반 공격이 반드시 치명타로 적중합니다. 단, 적 처치 시에는 다음 공격 대상에게도 카르 중첩이 유지됩니다.</String>
+  <String Key="UltimateSkillName_10820">레라 에푼키네</String>
+  <String Key="UltimateSkillDesc_10820_Short">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다.</String>
+  <String Key="UltimateSkillDesc_10820_Long">이호운데가 전장을 벗어나 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다.</String>
+  <String Key="UltimateSkillDesc_10821_Short">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다.</String>
+  <String Key="UltimateSkillDesc_10821_Long">이호운데가 전장을 벗어나 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다.</String>
+  <String Key="UltimateSkillDesc_10822_Short">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다.</String>
+  <String Key="UltimateSkillDesc_10822_Long">이호운데가 전장을 벗어나 하늘로 날아올라,  {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다.</String>
+  <String Key="UltimateSkillDesc_10823_Short">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 전투 시작 시 궁극기 게이지 +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long">이호운데가 전장을 벗어나 하늘로 날아올라,  {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다. 전투 시작 시 궁극기 게이지가 {AddBattleStartUltimateGauge} 증가합니다.</String>
+  <String Key="UltimateSkillDesc_10820_Short_2">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다.</String>
+  <String Key="UltimateSkillDesc_10820_Long_2">이호운데가 전장을 벗어나 하늘로 날아올라,  {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다.</String>
+  <String Key="UltimateSkillDesc_10821_Short_2">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다.</String>
+  <String Key="UltimateSkillDesc_10821_Long_2">이호운데가 전장을 벗어나 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다.</String>
+  <String Key="UltimateSkillDesc_10822_Short_2">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다.</String>
+  <String Key="UltimateSkillDesc_10822_Long_2">이호운데가 전장을 벗어나 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다.</String>
+  <String Key="UltimateSkillDesc_10823_Short_2">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 전투 시작 시 궁극기 게이지 +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_2">이호운데가 전장을 벗어나 하늘로 날아올라,  {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다. 전투 시작 시 궁극기 게이지가 {AddBattleStartUltimateGauge} 증가합니다.</String>
+  <String Key="UltimateSkillDesc_10820_Short_3">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 적을 처치하면 지속 시간이 초기화됩니다.</String>
+  <String Key="UltimateSkillDesc_10820_Long_3">이호운데가 전장을 벗어나 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 중 적을 처치하면 지속 시간이 초기화됩니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다.</String>
+  <String Key="UltimateSkillDesc_10821_Short_3">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 적을 처치하면 지속 시간이 초기화됩니다.</String>
+  <String Key="UltimateSkillDesc_10821_Long_3">이호운데가 전장을 벗어나 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 중 적을 처치하면 지속 시간이 초기화됩니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다.</String>
+  <String Key="UltimateSkillDesc_10822_Short_3">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 적을 처치하면 지속 시간이 초기화됩니다.</String>
+  <String Key="UltimateSkillDesc_10822_Long_3">이호운데가 전장을 벗어나 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 중 적을 처치하면 지속 시간이 초기화됩니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다.</String>
+  <String Key="UltimateSkillDesc_10823_Short_3">이호운데가 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 적을 처치하면 지속 시간이 초기화됩니다. 전투 시작 시 궁극기 게이지 +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_3">이호운데가 전장을 벗어나 하늘로 날아올라, {Time}초 동안 적 하나에게 화살을 발사합니다. 궁극기 사용 중 적을 처치하면 지속 시간이 초기화됩니다. 궁극기 사용 시 모든 상태 이상, 결속, 연결을 해제합니다. 전투 시작 시 궁극기 게이지가 {AddBattleStartUltimateGauge} 증가합니다.</String>
+  <String Key="Name_Overcome_10820_0">레라 아이에</String>
+  <String Key="Overcome_10820_0">카르가 최소 10 중첩으로 유지</String>
+  <String Key="Name_Overcome_10820_1">레라 니소르</String>
+  <String Key="Overcome_10820_1">스킬 혹은 궁극기 사용 시, 카르 5 중첩 획득</String>
+  <String Key="Name_Overcome_10820_2">카무이 에푼키네</String>
+  <String Key="Overcome_10820_2">레라 에푼키네 사용 중 적 처치 시, 레라 에푼키네 지속시간 초기화</String>
+  <String Key="Name_Overcome_10820_3">유프케 레라</String>
+  <String Key="Overcome_10820_3">카르 최대 중첩 +30. 카르 중첩이 최대치일 때, 일반 공격 대상에게 주는 일반 공격 피해가 반드시 치명타로 적중</String>
+  <String Key="Name_Overcome_10820_4">레라 칸토</String>
+  <String Key="Overcome_10820_4">적 처치 시 다음 공격 대상에게도 카르 스택 유지</String>
+  <String Key="IncarnationUnitSummon">초월 영웅 소환</String>
+  <String Key="UnitGachaHighCountFormat">&lt;color=#FFD247&gt;{0}&lt;/color&gt;회 소환 시 &lt;color=#FFD247&gt;초월/차원 영웅 확정&lt;/color&gt;</String>
   <String Key="UnitGachaPickupCountFormat">&lt;color=#FFD247&gt;{0}&lt;/color&gt;회 소환 시 &lt;color=#FFD247&gt;픽업 영웅 확정&lt;/color&gt;</String>
+  <String Key="GachaNewIncarnationUnitPer">초월 영웅 등장!</String>
+  <String Key="IncarnationUnitPickupGachaDesc">초월 영웅 소환은 81회 소환 부터 초월/차원 영웅 등장 확률이 5%씩 증가합니다.
+초월/차원 영웅 등장 시 소환 확정 횟수는 초기화 됩니다.
+픽업이 아닌 초월/차원 영웅을 소환 했다면, 다음 번 초월/차원 영웅 획득 시 반드시 픽업 영웅이 소환됩니다.
+초월 영웅의 최대 돌파상태에서 같은 영웅을 소환한 경우, 차원 영웅 소환서 10개를 대신 획득합니다.</String>
+  <String Key="Premium">프리미엄</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumButton">보상 2배! 20배 효율!</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_0">프리미엄 출석을 구매하면 모든 보상을 2배로 획득할 수 있습니다.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_1">프리미엄 출석 구매 시 이전에 획득한 보상 또한 2배로 지급됩니다.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_2">프리미엄 출석은 청약철회가 불가능한 상품입니다.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumApplied">보상 2배 적용 중!</String>
+  <String Key="SeasonalEventMode_Season74">바람의 아레나</String>
+  <String Key="SpecialDamageMulFormat">특수 피해량 +{0}%</String>
+  <String Key="FlagsName_60000">바람의 아레나 깃발</String>
+  <String Key="FlagsDesc_60000">바람의 아레나에서 자신의 가치를 증명한 자들의 깃발</String>
+  <String Key="FlagsName_60010">바람의 화신 깃발</String>
+  <String Key="FlagsDesc_60010">바람의 화신'의 강림과 '약속된 승리'를 기원하는 깃발</String>
   <String Key="PlayReward_Semi1">전반기 보상</String>
   <String Key="PlayReward_Semi2">후반기 보상</String>
   <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt;플레이</String>
+  <String Key="SpecialPackage_1699">맹세 패키지</String>
+  <String Key="SpecialPackage_1700">화우 패키지</String>
+  <String Key="InventoryItemName_5605">킹갓패스 스킨 선택 상자</String>
+  <String Key="SeasonPassScheduledHeroTitle_74">초월 영웅 &lt;color=#D8B4FF&gt;이호운데&lt;/color&gt; 획득</String>
+  <String Key="SeasonPassScheduledHeroBenefit">신규 출시 영웅 증정</String>
+  <String Key="InventoryItemName_SSGuaranteedSetFormat">랜덤 SS {0}</String>
+  <String Key="InventoryItemName_SSGuaranteedBoxFormat">랜덤 SS {0}</String>
+  <String Key="InventoryItemDesc_SSGuaranteedBoxFormat">선택한 세트의 랜덤 SS 특급 장신구 선택 상자를 획득합니다.</String>
+  <String Key="InventoryItemDesc_SSGuaranteedSetFormat">선택한 장신구를 획득하며, 무작위 보조 능력치 1개가 SS등급이 됩니다.</String>
+  <String Key="AlreadyHaveFlag">이미 깃발을 보유하고 있어 수령되지 않았습니다.</String>
+  <String Key="SeasonPassScheduledHeroInfo_74">영웅 보유시, 영웅 돌파 1회
+영웅이 최대 돌파일 경우, &lt;color=#ffd264&gt;차원 영웅 소환서 10개&lt;/color&gt;로 지급</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_Class">&lt;{0}&gt; {1}</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_ThreeClasses">&lt;{0}&gt; &lt;{1}&gt; &lt;{2}&gt; {3}</String>
+  <String Key="Post_Title_6thAnniversaryGift">6주년 특별 선물</String>
+  <String Key="KingsTreasureSelectiveSummon">왕의 보구 선택 소환</String>
   <String Key="BlessedTreasure">축복 보구</String>
+  <String Key="TreasureCustomPickupTitle">축복 보구 소환</String>
+  <String Key="UnitName_10820">이호운데</String>
+  <String Key="UnitSubName_10820_1">한때는 한시라고도 불렸지.</String>
+  <String Key="UnitSubName_10820">바람의 수호자</String>
+  <String Key="SkinDesc_Default_10820">동부의 작은 마을에서 태어난 어느 조용한 성격의 수호자는
+사람들을 지키기 위해 자신의 모든 것을 바쳤습니다.
+
+하늘을 지배하는 화살은 더이상 일대를 불태우지 않고
+그저 멈추지 않는 바람의 주인이 되었을 뿐입니다.
+
+그가 마을을 지키고 있는 한,
+그 어떤 외부의 존재도 평화를 부술 수 없을 것입니다.
+.
+.
+.
+.
+.
+.</String>
+  <String Key="IncarnationUnit_10820">재앙</String>
+  <String Key="Introduce_10820">생존자의 기록</String>
+  <String Key="SkinDesc_Default_10820_1">작년 여름, 찬바람이 불기 시작했다.
+연기 같은 서리안개가 사방에 꽉 끼었으며
+지붕과 밭, 잎사귀에도 차갑고 허연 먼지가 덮였다.
+초목은 얼어붙고 열매는 형태를 유지하지 못한 채 땅에 떨어졌다.
+
+바람이 그치지 않으니 목재와 석재 할 것 없이 닳아 무너지기 시작했다.
+불을 잡는 속도보다 퍼지는 속도가 빨라지며 우리는 불의 통제권을 잃었다.
+파도가 끝없이 높아지며 감히 거스를 수 없으니 우리는 바다를 잃었다.
+살을 에는 추위를 피할 방법도, 칼날과 같은 바람을 막을 방법도 없다.
+그러니 그 어떤 마물도 다가올 수 없다.
+
+우리는 평화를 얻었다.
+우리는 미래를 잃었다.
+우리에게 남은 것은, 그저 얼어붙은 채로 멈추지 않는 바람에 삼켜지는 것…</String>
+  <String Key="InventoryItemDesc_SelectableTreasureBox">선택하여 상시 소환에서 등장하는 특급 보구를 획득할 수 있는 상자.
+ 사용 시 아이템 목록의 보상을 선택할 수 있다.</String>
+  <String Key="IncarnationUnitPickupSummon">초월 영웅 소환</String>
+  <String Key="GachaPickupDescFormat">초월 영웅 획득이 가능합니다.</String>
+  <String Key="IncarnationUnitMaxOvercomeConvertedTicket">최대 돌파 상태의 영웅이 소환되어 차원 영웅 소환서 10개를 획득했습니다.</String>
+  <String Key="SpecialTreasureSelectTitle">특급 보구 선택 소환</String>
+  <String Key="SpecialTreasureSelectDesc">상시 보구 소환에서 등장할 수 있는 특급 등급의 보구 중 하나를 선택해서 획득 가능.
+구매 버튼 터치 시 획득 가능한 보구 리스트 제공.</String>
+  <String Key="SkinDesc_Default_10820_Simple">하늘을 지배하는 화살은 더이상 일대를 불태우지 않고
+그저 멈추지 않는 바람의 주인이 되었을 뿐입니다.</String>
+  <String Key="LoginSkinName_10020">6주년 로그인 화면</String>
+  <String Key="LoginSkinDesc_10020">6주년 로그인 화면</String>
+  <String Key="ObtainableBySummoningIncarnationUnit">초월 영웅 소환 시 획득 가능</String>
 </Strings>

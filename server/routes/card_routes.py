@@ -5,6 +5,8 @@ Most responses share one card shape (_card_view); the level-up handlers mutate
 the card then re-render it. Server-owned helpers (cards_list, card_to_dict,
 _pad_deck, DEFAULT_DECKS) stay in server.py and are reached through srv.
 """
+import xml.etree.ElementTree as ET
+
 from common import admin_log, body_int, body_list, now_iso
 from config import XML_DIR
 from state import save_state
@@ -167,13 +169,30 @@ def _card_view(c, st):
     return srv.card_to_dict(c, st)
 
 
+_SKIN_IDS = None
+
+
+def _skin_ids():
+    """Every skin id that exists in Skins.xml (cached)."""
+    global _SKIN_IDS
+    if _SKIN_IDS is None:
+        _SKIN_IDS = {int(s.get("ID"))
+                     for s in ET.parse(XML_DIR / "Skins.xml").getroot().findall("Skin")
+                     if s.get("ID")}
+    return _SKIN_IDS
+
+
 def r_card_equip_skin(body, st):
     # EquipSkinRequestModel = {unit, skin}  (NOT unitId/skinId)
+    # Skin-mod: ownership is NOT required - the modded client stubs
+    # GameManager.HasSkin to true, so it equips skins the save never had.
+    # Existence is still checked so a bogus id can never be persisted as
+    # currentSkin; equipping deliberately does NOT grant the skin.
     unit_id = body.get("unit", body.get("unitId", 0))
     skin_id = body.get("skin", body.get("skinId", 0))
     cards = st.setdefault("cards", {})
     c = cards.get(str(unit_id))
-    if c is not None and (skin_id == 0 or skin_id in c.get("skins", [])):
+    if c is not None and (skin_id == 0 or skin_id in _skin_ids()):
         c["currentSkin"] = skin_id
         save_state(st)
     return _card_view(c or {"unitId": unit_id, "currentSkin": skin_id}, st)

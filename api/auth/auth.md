@@ -5,7 +5,8 @@ Base URL: `https://kgc-k8s-1.awesomepiece.com`
 ## Encryption
 
 - AES-128-ECB, zero padding, hex output
-- Key v169.0.03: `b53019bb76da6b34` (v165-168: `cnf1tl65djs2wp3g`)
+- Key: `a6072ad6b9c959ff` (current prod, = `server/crypto.py`; the v169 value
+  `b53019bb76da6b34` gets HTTP 400, see dev-notes §33. v165-168: `cnf1tl65djs2wp3g`)
 - POST body: raw hex string, `Content-Type: application/json`
 - Auth header: `accesstoken: <token>` (not `Authorization: Bearer`)
 - Response: raw binary AES-ECB → msgpack or JSON

@@ -1621,6 +1621,138 @@ inherit된 것과 level이 같고 subStat node가 없을 때만 inherit됩니다
         </SubStats>
         <FixedBonusSubStat Key="BaseMCriticalDamageMul" Value="2"/>
     </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4070">
+        <DescComment>갓스킨 멜 예리 세트 - 목걸이 1</DescComment>
+        <Synergy>2</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalProb" Value="13.5"/>
+            <SubStat Key="BaseCriticalDamageMul" Value="9"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4071">
+        <DescComment>갓스킨 멜 예리 세트 - 팔찌 1</DescComment>
+        <Synergy>2</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalProb" Value="13.5"/>
+            <SubStat Key="BaseDef" Value="180"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4072">
+        <DescComment>갓스킨 멜 예리 세트 - 팔찌 2</DescComment>
+        <Synergy>2</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="AtkPer" Value="13.5"/>
+            <SubStat Key="BaseCriticalProb" Value="9"/>
+        </SubStats>
+        <FixedBonusSubStat Key="AtkPer" Value="1.5"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4073">
+        <DescComment>갓스킨 멜 예리 세트 - 반지 1</DescComment>
+        <Synergy>2</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AttackSpeedPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalProb" Value="13.5"/>
+            <SubStat Key="AttackSpeedPer" Value="9"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalProb" Value="1.5"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4074">
+        <DescComment>갓스킨 멜 예리 세트 - 귀고리 1</DescComment>
+        <Synergy>2</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalDamageMul" Value="13.5"/>
+            <SubStat Key="AtkPer" Value="9"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="1.5"/>
+    </FixedAccessoryPreset>
+
+    <FixedAccessoryPreset ID="4080">
+        <DescComment>갓스킨 가람 강철 세트 - 목걸이 1</DescComment>
+        <Synergy>0</Synergy>
+        <Type>1</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AtkPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalDamageMul" Value="13.5"/>
+            <SubStat Key="BaseCriticalProb" Value="9"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="1.5"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4081">
+        <DescComment>갓스킨 가람 강철 세트 - 팔찌 1</DescComment>
+        <Synergy>0</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMDef" Value="270"/>
+            <SubStat Key="BaseDef" Value="180"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMDef" Value="30"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4082">
+        <DescComment>갓스킨 가람 강철 세트 - 팔찌 2</DescComment>
+        <Synergy>0</Synergy>
+        <Type>2</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseMDef</MainStat>
+        <SubStats>
+            <SubStat Key="BaseDef" Value="270"/>
+            <SubStat Key="BaseMDef" Value="180"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseDef" Value="30"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4083">
+        <DescComment>갓스킨 가람 강철 세트 - 반지 1</DescComment>
+        <Synergy>0</Synergy>
+        <Type>3</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>AttackSpeedPer</MainStat>
+        <SubStats>
+            <SubStat Key="BaseMDef" Value="270"/>
+            <SubStat Key="BaseDef" Value="180"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseMDef" Value="30"/>
+    </FixedAccessoryPreset>
+    <FixedAccessoryPreset ID="4084">
+        <DescComment>갓스킨 가람 강철 세트 - 귀고리 1</DescComment>
+        <Synergy>0</Synergy>
+        <Type>4</Type>
+        <Rarity>3</Rarity>
+        <Level>20</Level>
+        <MainStat>BaseCriticalDamageMul</MainStat>
+        <SubStats>
+            <SubStat Key="BaseCriticalDamageMul" Value="13.5"/>
+            <SubStat Key="AtkPer" Value="9"/>
+        </SubStats>
+        <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="1.5"/>
+    </FixedAccessoryPreset>
     
 <FixedAccessoryPreset ID="4065">
         <DescComment>5.5주년 - 목걸이</DescComment>

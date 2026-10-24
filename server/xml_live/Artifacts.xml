@@ -1847,9 +1847,8 @@
 		<FromType>Arena</FromType>
 		<Level>Normal</Level>
 		<Root>13021</Root>
-		<Range>1</Range>
-		<AtkPerByRange>3</AtkPerByRange>
-		<AtkPerByRangeMaxRange>5</AtkPerByRangeMaxRange>
+		<AtkPerByRange>10</AtkPerByRange>
+		<AtkPerByRangeMaxRange>10</AtkPerByRangeMaxRange>
 
 		<RogueLikePossibleFixedBuildings>100,101</RogueLikePossibleFixedBuildings>
 		<RogueLikeBuildingLevel>1</RogueLikeBuildingLevel>
@@ -1863,9 +1862,8 @@
 		<FromType>Arena</FromType>
 		<Level>King</Level>
 		<Root>13021</Root>
-		<Range>1</Range>
-		<AtkPerByRange>4</AtkPerByRange>
-		<AtkPerByRangeMaxRange>5</AtkPerByRangeMaxRange>
+		<AtkPerByRange>10</AtkPerByRange>
+		<AtkPerByRangeMaxRange>10</AtkPerByRangeMaxRange>
 
 		<RogueLikePossibleFixedBuildings>100,101</RogueLikePossibleFixedBuildings>
 		<RogueLikeBuildingLevel>2</RogueLikeBuildingLevel>
@@ -1879,9 +1877,8 @@
 		<FromType>Arena</FromType>
 		<Level>God</Level>
 		<Root>13021</Root>
-		<Range>1</Range>
-		<AtkPerByRange>5</AtkPerByRange>
-		<AtkPerByRangeMaxRange>5</AtkPerByRangeMaxRange>
+		<AtkPerByRange>10</AtkPerByRange>
+		<AtkPerByRangeMaxRange>10</AtkPerByRangeMaxRange>
 
 		<RogueLikePossibleFixedBuildings>100,101</RogueLikePossibleFixedBuildings>
 		<RogueLikeBuildingLevel>4</RogueLikeBuildingLevel>
@@ -1895,9 +1892,8 @@
 		<FromType>Arena</FromType>
 		<Level>KingGod</Level>
 		<Root>13021</Root>
-		<Range>1</Range>
-		<AtkPerByRange>6</AtkPerByRange>
-		<AtkPerByRangeMaxRange>5</AtkPerByRangeMaxRange>
+		<AtkPerByRange>10</AtkPerByRange>
+		<AtkPerByRangeMaxRange>10</AtkPerByRangeMaxRange>
 
 		<RogueLikePossibleFixedBuildings>100,101</RogueLikePossibleFixedBuildings>
 		<RogueLikeBuildingLevel>5</RogueLikeBuildingLevel>

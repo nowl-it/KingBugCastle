@@ -217,6 +217,7 @@
         <NameComment>픽업 소환서</NameComment>
         <Type>Gacha</Type>
         <CashPrice>80</CashPrice>
+        <!-- 축복 소환 제거 예정: 174.0.00 구버전 대응으로 IsUnavailable 미적용. 구버전 종료 후 다음 업데이트에서 IsUnavailable 추가 -->
     </ShopItem>
 
     <ShopItem ID='310'>
@@ -545,50 +546,8 @@
     
     <!-- 축복 소환서 -->
 
-    <ShopItem ID="590">
-        <NameComment>축복의 소환서 패키지</NameComment>
-        <Type>Package</Type>
-        <BoxKey ID="305" Count="4"/>
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <Efficiency>4</Efficiency>
-        <ValueAmount>400</ValueAmount>
-        <ProductID>box_key_305_package_1</ProductID>
-        <AlwaysActivatedMoneyPackage>true</AlwaysActivatedMoneyPackage>
-        <PackageItemCount>1</PackageItemCount>
-        <BuyLimit>-1</BuyLimit>
-        <MinVersion>462</MinVersion>
-    </ShopItem>
 
-    <ShopItem ID="591">
-        <NameComment>킹 축복의 소환서 패키지</NameComment>
-        <Type>Package</Type>
-        <BoxKey ID="305" Count="12"/>
-        <MoneyPrice>25000</MoneyPrice>
-        <DolarPrice>19.99</DolarPrice>
-        <Efficiency>4</Efficiency>
-        <ValueAmount>1000</ValueAmount>
-        <ProductID>box_key_305_package_2</ProductID>
-        <AlwaysActivatedMoneyPackage>true</AlwaysActivatedMoneyPackage>
-        <PackageItemCount>1</PackageItemCount>
-        <BuyLimit>-1</BuyLimit>
-        <MinVersion>462</MinVersion>
-    </ShopItem>
 
-    <ShopItem ID="592">
-        <NameComment>갓 축복의 소환서 패키지</NameComment>
-        <Type>Package</Type>
-        <BoxKey ID="305" Count="28"/>
-        <MoneyPrice>49000</MoneyPrice>
-        <DolarPrice>39.99</DolarPrice>
-        <Efficiency>5</Efficiency>
-        <ValueAmount>2000</ValueAmount>
-        <ProductID>box_key_305_package_3</ProductID>
-        <AlwaysActivatedMoneyPackage>true</AlwaysActivatedMoneyPackage>
-        <PackageItemCount>1</PackageItemCount>
-        <BuyLimit>-1</BuyLimit>
-        <MinVersion>462</MinVersion>
-    </ShopItem>
 
     <!-- 차원 영웅 소환서 -->    
 
@@ -1592,6 +1551,17 @@
         <ProductID>shop_item_933</ProductID>
     </ShopItem>
 
+    <ShopItem ID='934'>
+        <Name>SurpriseAttendancePassName</Name>
+        <NameComment>King God Castle 6th Special Pass</NameComment>
+        <Type>SurpriseAttendancePass</Type>
+        <SurpriseAttendanceEventID>6</SurpriseAttendanceEventID>
+        <MoneyPrice>49000</MoneyPrice>
+        <DolarPrice>39.99</DolarPrice>
+        <Efficiency>20</Efficiency>
+        <ProductID>event_pakage_tier_40</ProductID>
+    </ShopItem>
+
     <!-- 매일 지급 패키지 -->
     <ShopItem ID='950'>
         <NameComment>일일 보석 보급</NameComment>
@@ -2240,36 +2210,6 @@
 
         <EventPlayerPackage>true</EventPlayerPackage>
     </ShopItem>
-    <ShopItem ID='1030'>
-        <NameComment>레벨 4 달성 패키지 3</NameComment>
-        <Name>Event_Blessed_Scroll</Name>
-        <Type>Package</Type>
-
-        <BuyLimit>1</BuyLimit>
-
-        <KeyID>305</KeyID>
-        <KeyCount>8</KeyCount>
-
-        <MoneyPrice>12000</MoneyPrice>
-        <DolarPrice>9.99</DolarPrice>
-        <ProductID>event_pakage_tier_10</ProductID>
-        <Efficiency>6</Efficiency>
-        <ValueAmount>720</ValueAmount>
-
-        <PackageItemCount>1</PackageItemCount>
-
-        <ConditionType>PlayerLevelUp</ConditionType>
-        <ConditionValue>4</ConditionValue>
-
-        <TimeLimit>36</TimeLimit>
-
-        <NoPackageIcon>true</NoPackageIcon>
-
-        <ConditionType2>CanNewUnitGacha</ConditionType2>
-        <ConditionValue2>1</ConditionValue2>
-
-        <EventPlayerPackage>true</EventPlayerPackage>
-    </ShopItem>
 
     <ShopItem ID='1031'>
         <NameComment>레벨 4 달성 패키지 4</NameComment>
@@ -2401,31 +2341,6 @@
         <EventPlayerPackage>true</EventPlayerPackage>
     </ShopItem>
     
-    <ShopItem ID='1050'>
-        <NameComment>축복 소환서 팝업 패키지</NameComment>
-        <Type>Package</Type>
-
-        <BuyLimit>3</BuyLimit>
-
-        <KeyID>305</KeyID>
-        <KeyCount>12</KeyCount>
-
-        <MoneyPrice>20000</MoneyPrice>
-        <DolarPrice>14.99</DolarPrice>
-        <ProductID>event_pakage_tier_16</ProductID>
-
-        <Efficiency>5</Efficiency>
-        <ValueAmount>500</ValueAmount>
-
-        <TimeLimit>36</TimeLimit>
-        <PlayerPackage>true</PlayerPackage>
-        <RecommendPriority>2000</RecommendPriority>
-
-        <PackageItemCount>1</PackageItemCount>
-
-        <Visible>false</Visible>
-        <MinVersion>462</MinVersion>
-    </ShopItem>
     
     <ShopItem ID='1051'>
         <NameComment>재련석 팝업 패키지</NameComment>
@@ -5629,25 +5544,6 @@
         <PackageItemCount>1</PackageItemCount>
     </ShopItem>
 
-    <ShopItem ID='1365'>
-        <Name>Event_Blessed_Scroll</Name>
-        <NameComment>픽업 소환서 3 + 100pp</NameComment>
-        <Type>EventPackage</Type>
-        <Cash>0</Cash>
-        <Gold>0</Gold>
-        <KeyID>305</KeyID>
-        <KeyCount>3</KeyCount>
-        <UnitExpCount>100</UnitExpCount>
-
-        <MoneyPrice>8900</MoneyPrice>
-        <DolarPrice>6.99</DolarPrice>
-        <ProductID>event_pakage_tier_7</ProductID>
-        <Efficiency>4</Efficiency>
-        <ValueAmount>365</ValueAmount>
-        <BuyLimit>3</BuyLimit>
-
-        <PackageItemCount>2</PackageItemCount>
-    </ShopItem>
     
     <ShopItem ID='1370'>
         <Name>Event_King_Scroll</Name>
@@ -5834,26 +5730,6 @@
         <PackageItemCount>1</PackageItemCount>
     </ShopItem>
 
-    <ShopItem ID='1379'>
-        <Name>Event_Blessed_Scroll</Name>
-        <NameComment>픽업 소환서 4 + 80보석</NameComment>
-        <Type>EventPackage</Type>
-        <Cash>80</Cash>
-        <Gold>0</Gold>
-        <KeyID>305</KeyID>
-        <KeyCount>4</KeyCount>
-        <UnitExpCount>0</UnitExpCount>
-
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <ProductID>event_pakage_tier_8</ProductID>
-        <Efficiency>4</Efficiency>
-        <ValueAmount>400</ValueAmount>
-        <BuyLimit>3</BuyLimit>
-
-        <PackageItemCount>2</PackageItemCount>
-
-    </ShopItem>
 
     <ShopItem ID='137000'>
         <Name>Event_Power_Cube</Name>
@@ -6075,23 +5951,6 @@
 
     </ShopItem>
 
-    <ShopItem ID='1397'>
-        <Name>Event_Blessed_Scroll</Name>
-        <NameComment>축복의 소환서 8</NameComment>
-        <NameTag>MothlySpecial</NameTag>
-        <Type>EventPackage</Type>
-        <KeyID>305</KeyID>
-        <KeyCount>8</KeyCount>
-
-        <MoneyPrice>12000</MoneyPrice>
-        <DolarPrice>9.99</DolarPrice>
-        <ProductID>event_pakage_tier_10</ProductID>
-        <Efficiency>6</Efficiency>
-        <ValueAmount>720</ValueAmount>
-
-        <PackageItemCount>1</PackageItemCount>
-        <BuyLimit>3</BuyLimit>
-    </ShopItem>
 
     <ShopItem ID='1398'>
         <Name>Event_Artifact_Reroll</Name>
@@ -6309,25 +6168,6 @@
         <BuyLimit>3</BuyLimit>
     </ShopItem>
 
-    <ShopItem ID='1410'>
-        <NameComment>픽업 소환서 25개</NameComment>
-        <Name>Event_Blessed_Scroll</Name>
-        <NameTag>MothlySpecial</NameTag>
-        <Type>EventPackage</Type>
-
-        <KeyID>305</KeyID>
-        <KeyCount>25</KeyCount>
-
-        <MoneyPrice>37000</MoneyPrice>
-        <DolarPrice>30.99</DolarPrice>
-        <Efficiency>6</Efficiency>
-        <ValueAmount>2400</ValueAmount>
-
-        <ProductID>event_pakage_tier_30</ProductID>
-
-        <PackageItemCount>1</PackageItemCount>
-        <BuyLimit>3</BuyLimit>
-    </ShopItem>
 
     <ShopItem ID='1411'>
         <NameComment>신의 소환서 30개</NameComment>
@@ -6428,25 +6268,6 @@
 
     </ShopItem>
 
-    <ShopItem ID='1423'>
-        <Name>Event_Blessed_Scroll</Name>
-        <NameTag>MothlySpecial</NameTag>
-        <NameComment>픽업 소환서 40장</NameComment>
-        <Type>EventPackage</Type>
-        <Cash>0</Cash>
-        <KeyID>305</KeyID>
-        <KeyCount>40</KeyCount>
-        <UnitExpCount>0</UnitExpCount>
-
-        <MoneyPrice>49000</MoneyPrice>
-        <DolarPrice>39.99</DolarPrice>
-        <ProductID>event_pakage_tier_40</ProductID>
-        <Efficiency>6</Efficiency>
-        <ValueAmount>3200</ValueAmount>
-
-        <PackageItemCount>1</PackageItemCount>
-
-    </ShopItem>
     
     <ShopItem ID='1424'>
         <Name>Event_Artifact_Reroll</Name>
@@ -6467,92 +6288,10 @@
 
     </ShopItem>
 
-    <ShopItem ID='1430'>
-        <Name>SuperScrollPackage</Name>
-        <NameTag>MothlySpecial</NameTag>
-        <NameComment>픽업 소환서 25장 + 신의 소환서 25장</NameComment>
-        <Type>EventPackage</Type>
-        <Cash>0</Cash>
-
-        <BoxKey ID="302" Count="25"/>
-        <BoxKey ID="305" Count="25"/>
-        <UnitExpCount>0</UnitExpCount>
-
-        <MoneyPrice>65000</MoneyPrice>
-        <DolarPrice>49.99</DolarPrice>
-        <ProductID>event_pakage_tier_50</ProductID>
-        <Efficiency>6</Efficiency>
-        <ValueAmount>4000</ValueAmount>
-
-        <PackageItemCount>2</PackageItemCount>
-        <BuyLimit>1</BuyLimit>
-
-    </ShopItem>
-
-    <ShopItem ID='1440'>
-        <Name>SuperScrollPackage</Name>
-        <NameTag>MothlySpecial</NameTag>
-        <NameComment>픽업 소환서 40장 + 신의 소환서 40장</NameComment>
-        <Type>EventPackage</Type>
-        <Cash>0</Cash>
-        <BoxKey ID="302" Count="40"/>
-        <BoxKey ID="305" Count="40"/>
-
-        <MoneyPrice>99000</MoneyPrice>
-        <DolarPrice>79.99</DolarPrice>
-        <ProductID>event_pakage_tier_56</ProductID>
-        <Efficiency>6</Efficiency>
-        <ValueAmount>6400</ValueAmount>
-
-        <PackageItemCount>2</PackageItemCount>
-        <BuyLimit>1</BuyLimit>
-
-    </ShopItem>
 
 
-    <ShopItem ID='1441'>
-        <Name>SuperScrollPackage</Name>
-        <NameTag>MothlySpecial</NameTag>
-        <NameComment>픽업 소환서 30장 + 신의 소환서 30장 + 왕의 소환서 30장</NameComment>
-        <Type>EventPackage</Type>
-        <Cash>0</Cash>
-        <BoxKey ID="301" Count="30"/>
-        <BoxKey ID="302" Count="30"/>
-        <BoxKey ID="305" Count="30"/>
 
-        <MoneyPrice>99000</MoneyPrice>
-        <DolarPrice>79.99</DolarPrice>
-        <ProductID>event_pakage_tier_56</ProductID>
-        <Efficiency>6</Efficiency>
-        <ValueAmount>6400</ValueAmount>
 
-        <PackageItemCount>2</PackageItemCount>
-        <BuyLimit>1</BuyLimit>
-
-    </ShopItem>
-
-    <ShopItem ID='1450'>
-        <Name>SpecialPackage_1450</Name>
-        <Holiday>Chirstmas</Holiday>
-        <NameComment>크리스마스 소환 패키지</NameComment>
-        <Type>EventPackage</Type>
-
-        <NewUnitGacha>true</NewUnitGacha>
-        <BoxKey ID="305" Count="4"/>
-        <BoxKey ID="302" Count="4"/>
-        <BoxKey ID="301" Count="4"/>
-        <UnitExpCount>0</UnitExpCount>
-
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <ProductID>event_pakage_tier_8</ProductID>
-        <Efficiency>9</Efficiency>
-        <ValueAmount>600</ValueAmount>
-
-        <PackageItemCount>4</PackageItemCount>
-        <BuyLimit>1</BuyLimit>
-
-    </ShopItem>
 
     <ShopItem ID='1451'>
         <Name>SpecialPackage_1451</Name>
@@ -6596,28 +6335,6 @@
 
     </ShopItem>
 
-    <ShopItem ID='1453'>
-        <Name>SpecialPackage_1453</Name>
-        <Holiday>LunaNewYear</Holiday>
-        <NameComment>설날 소환 패키지</NameComment>
-        <Type>EventPackage</Type>
-
-        <NewUnitGacha>true</NewUnitGacha>
-        <BoxKey ID="305" Count="4"/>
-        <BoxKey ID="302" Count="4"/>
-        <BoxKey ID="301" Count="4"/>
-        <UnitExpCount>0</UnitExpCount>
-
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <ProductID>event_pakage_tier_8</ProductID>
-        <Efficiency>9</Efficiency>
-        <ValueAmount>600</ValueAmount>
-
-        <PackageItemCount>4</PackageItemCount>
-        <BuyLimit>1</BuyLimit>
-
-    </ShopItem>
 
     <ShopItem ID='1454'>
         <Name>SpecialPackage_1454</Name>
@@ -6660,28 +6377,6 @@
 
     </ShopItem>
 
-    <ShopItem ID='1456'>
-        <Name>SpecialPackage_1456</Name>
-        <Holiday>RerollRenewal</Holiday>
-        <NameComment>소환 특별 패키지</NameComment>
-        <Type>EventPackage</Type>
-
-        <NewUnitGacha>true</NewUnitGacha>
-        <BoxKey ID="305" Count="4"/>
-        <BoxKey ID="302" Count="4"/>
-        <BoxKey ID="301" Count="4"/>
-        <UnitExpCount>0</UnitExpCount>
-
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <ProductID>event_pakage_tier_8</ProductID>
-        <Efficiency>9</Efficiency>
-        <ValueAmount>600</ValueAmount>
-
-        <PackageItemCount>4</PackageItemCount>
-        <BuyLimit>1</BuyLimit>
-
-    </ShopItem>
 
     <ShopItem ID='1457'>
         <Name>SpecialPackage_1457</Name>
@@ -6723,28 +6418,6 @@
 
     </ShopItem>
 
-    <ShopItem ID='1459'>
-        <Name>SpecialPackage_1459</Name>
-        <Holiday>RerollRenewal</Holiday>
-        <NameComment>추석 소환 패키지</NameComment>
-        <Type>EventPackage</Type>
-
-        <NewUnitGacha>true</NewUnitGacha>
-        <BoxKey ID="305" Count="4"/>
-        <BoxKey ID="302" Count="4"/>
-        <BoxKey ID="301" Count="4"/>
-        <UnitExpCount>0</UnitExpCount>
-
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <ProductID>event_pakage_tier_8</ProductID>
-        <Efficiency>9</Efficiency>
-        <ValueAmount>600</ValueAmount>
-
-        <PackageItemCount>4</PackageItemCount>
-        <BuyLimit>1</BuyLimit>
-
-    </ShopItem>
 
     <ShopItem ID='1460'>
         <Name>SpecialPackage_1460</Name>
@@ -6788,29 +6461,6 @@
 
     </ShopItem>
     
-    <ShopItem ID='1462'>
-        <Name>SpecialPackage_1462</Name>
-        <Holiday>LunaNewYear</Holiday>
-        <NameComment>2024 설날 소환 패키지</NameComment>
-        <Type>EventPackage</Type>
-        
-        <BoxKey ID="301" Count="4"/>
-        <BoxKey ID="302" Count="4"/>
-        <BoxKey ID="305" Count="4"/>
-        <NewUnitGacha>true</NewUnitGacha>
-        
-        <PackageItemCount>4</PackageItemCount>
-        <BuyLimit>2</BuyLimit>
-        
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <ProductID>event_pakage_tier_8</ProductID>
-        
-        <Efficiency>10</Efficiency>
-        <ValueAmount>600</ValueAmount>
-        
-        <MinVersion>479</MinVersion>
-    </ShopItem>
 
     <ShopItem ID='1463'>
         <Name>SpecialPackage_1463</Name>
@@ -6858,30 +6508,6 @@
         <MinVersion>479</MinVersion>
     </ShopItem>
 
-    <ShopItem ID='1465'>
-        <Name>SpecialPackage_1465</Name>
-        <Holiday>SpringTime</Holiday>
-        <NameComment>봄맞이 소환 패키지</NameComment>
-        <Type>EventPackage</Type>
-
-        <NewUnitGacha>true</NewUnitGacha>
-        <BoxKey ID="305" Count="4"/>
-        <BoxKey ID="302" Count="4"/>
-        <BoxKey ID="301" Count="4"/>
-
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <ProductID>event_pakage_tier_8</ProductID>
-        <Efficiency>10</Efficiency>
-        <ValueAmount>600</ValueAmount>
-
-        <PackageItemCount>4</PackageItemCount>
-        <BuyLimit>2</BuyLimit>
-
-        <PackageItemPrefab>PackageItem_SpringTime</PackageItemPrefab>
-
-        <MinVersion>498</MinVersion>
-    </ShopItem>
 
     <ShopItem ID='1466'>
         <Name>SpecialPackage_1466</Name>
@@ -6932,30 +6558,6 @@
         <MinVersion>498</MinVersion>
     </ShopItem>
 
-    <ShopItem ID='1468'>
-        <Name>SpecialPackage_1468</Name>
-        <Holiday>FamilyMonth</Holiday>
-        <NameComment>가정의 달 소환 패키지</NameComment>
-        <Type>EventPackage</Type>
-
-        <BoxKey ID="301" Count="4"/>
-        <BoxKey ID="302" Count="4"/>
-        <BoxKey ID="305" Count="4"/>
-        <NewUnitGacha>true</NewUnitGacha>
-
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <ProductID>event_pakage_tier_8</ProductID>
-        <Efficiency>10</Efficiency>
-        <ValueAmount>600</ValueAmount>
-
-        <PackageItemCount>4</PackageItemCount>
-        <BuyLimit>2</BuyLimit>
-
-        <PackageItemPrefab>PackageItem_FamilyMonth</PackageItemPrefab>
-
-        <MinVersion>539</MinVersion>
-    </ShopItem>
 
     <ShopItem ID='1469'>
         <Name>SpecialPackage_1469</Name>
@@ -7577,30 +7179,6 @@
         <ValueAmount>8000</ValueAmount>
 
         <MinVersion>608</MinVersion>
-    </ShopItem>
-    <ShopItem ID='1496'>
-        <Name>SpecialPackage_1496</Name>
-        <Holiday>FallFestival</Holiday>
-        <NameComment>추석 소환 패키지</NameComment>
-        <Type>EventPackage</Type>
-
-        <BoxKey ID="301" Count="4"/>
-        <BoxKey ID="302" Count="4"/>
-        <BoxKey ID="305" Count="4"/>
-        <NewUnitGacha>true</NewUnitGacha>
-
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <ProductID>event_pakage_tier_8</ProductID>
-        <Efficiency>10</Efficiency>
-        <ValueAmount>600</ValueAmount>
-
-        <PackageItemCount>4</PackageItemCount>
-        <BuyLimit>2</BuyLimit>
-
-        <PackageItemPrefab>PackageItem_FamilyMonth</PackageItemPrefab>
-
-        <MinVersion>618</MinVersion>
     </ShopItem>
 
     <ShopItem ID='1497'>
@@ -12564,6 +12142,188 @@
         <MinVersion>173100</MinVersion>
     </ShopItem>
 
+    <ShopItem ID='1697'>
+        <Name>SpecialPackage_1480</Name>
+        <Holiday>TreasureDoublePickUp10016</Holiday>
+        <HolidayName>SpecialShop_TreasureDoublePickUp10000</HolidayName>
+        <NameComment>보구 픽업 소환석 패키지 1</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="20"/>
+        <Cash>130</Cash>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>9900</MoneyPrice>
+        <DolarPrice>7.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20261008_000000</StartAt>
+        <EndAt>20261021_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_1</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>750</ValueAmount>
+
+        <MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='1698'>
+        <Name>SpecialPackage_1481</Name>
+        <Holiday>TreasureDoublePickUp10016</Holiday>
+        <HolidayName>SpecialShop_TreasureDoublePickUp10000</HolidayName>
+        <NameComment>보구 픽업 소환석 패키지 2</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="55"/>
+        <InventoryItem ID="3102" Count="3"/>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>25000</MoneyPrice>
+        <DolarPrice>19.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20261008_000000</StartAt>
+        <EndAt>20261021_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_2</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>2000</ValueAmount>
+
+        <MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='1699'>
+        <Name>SpecialPackage_1699</Name>
+        <Holiday>TreasureDoublePickUp10016</Holiday>
+        <HolidayName>SpecialShop_TreasureDoublePickUp10000</HolidayName>
+        <NameComment>화우 더블픽업 패키지 픽업 소환석 패키지</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="200"/>
+        <TreasureIds>30002</TreasureIds>
+        <TreasureCounts>1</TreasureCounts>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>99000</MoneyPrice>
+        <DolarPrice>79.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20261008_000000</StartAt>
+        <EndAt>20261021_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_3</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>8000</ValueAmount>
+
+        <MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='1700'>
+        <Name>SpecialPackage_1700</Name>
+        <Holiday>TreasureDoublePickUp10016</Holiday>
+        <HolidayName>SpecialShop_TreasureDoublePickUp10000</HolidayName>
+        <NameComment>화우 더블픽업 패키지 픽업 소환석 패키지</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="200"/>
+        <TreasureIds>30009</TreasureIds>
+        <TreasureCounts>1</TreasureCounts>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>99000</MoneyPrice>
+        <DolarPrice>79.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20261008_000000</StartAt>
+        <EndAt>20261021_235959</EndAt>
+
+        <ProductID>treasure_pickup_package_3</ProductID>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>8000</ValueAmount>
+
+        <MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='1701'>
+        <Name>SpecialPackage_1651</Name>
+        <Holiday>TreasureCustomPickup</Holiday>
+        <NameComment>왕의 보구 특별 패키지 1</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="20"/>
+        <Cash>130</Cash>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>9900</MoneyPrice>
+        <DolarPrice>7.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+
+        <ProductID>treasure_pickup_package_1</ProductID>
+
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20261022_000000</StartAt>
+        <EndAt>20261104_235959</EndAt>
+        <MinVersion>174100</MinVersion>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>750</ValueAmount>
+    </ShopItem>
+
+    <ShopItem ID='1702'>
+        <Name>SpecialPackage_1652</Name>
+        <Holiday>TreasureCustomPickup</Holiday>
+        <NameComment>왕의 보구 특별 패키지 2</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="55"/>
+        <InventoryItem ID="3102" Count="3"/>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>25000</MoneyPrice>
+        <DolarPrice>19.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+
+        <ProductID>treasure_pickup_package_2</ProductID>
+
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20261022_000000</StartAt>
+        <EndAt>20261104_235959</EndAt>
+        <MinVersion>174100</MinVersion>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>2000</ValueAmount>
+    </ShopItem>
+
+    <ShopItem ID='1703'>
+        <Name>SpecialPackage_1653</Name>
+        <Holiday>TreasureCustomPickup</Holiday>
+        <NameComment>왕의 보구 특별 패키지 3</NameComment>
+        <Type>EventPackage</Type>
+
+        <BoxKey ID="371" Count="200"/>
+        <InventoryItem ID="3200" Count="6"/>
+        <PackageItemCount>2</PackageItemCount>
+
+        <MoneyPrice>99000</MoneyPrice>
+        <DolarPrice>79.99</DolarPrice>
+        <BuyLimit>2</BuyLimit>
+
+        <ProductID>treasure_pickup_package_3</ProductID>
+
+        <TreasurePackage>true</TreasurePackage>
+        <StartAt>20261022_000000</StartAt>
+        <EndAt>20261104_235959</EndAt>
+        <MinVersion>174100</MinVersion>
+
+        <Efficiency>5</Efficiency>
+        <ValueAmount>8000</ValueAmount>
+    </ShopItem>    
+
+
     <ShopItem ID='2000'>
         <Name>Gold_80</Name>
         <NameComment>80 골드</NameComment>
@@ -15965,29 +15725,6 @@
     </ShopItem>
 
     <!-- 특별 패키지를 50XX 번으로 -->
-    <ShopItem ID='5000'>
-        <Name>SpecialPackage_1462</Name>
-        <Holiday>LunaNewYear</Holiday>
-        <NameComment>2025 설날 소환 패키지</NameComment>
-        <Type>EventPackage</Type>
-
-        <BoxKey ID="301" Count="4"/>
-        <BoxKey ID="302" Count="4"/>
-        <BoxKey ID="305" Count="4"/>
-        <NewUnitGacha>true</NewUnitGacha>
-
-        <PackageItemCount>4</PackageItemCount>
-        <BuyLimit>2</BuyLimit>
-
-        <MoneyPrice>9900</MoneyPrice>
-        <DolarPrice>7.99</DolarPrice>
-        <ProductID>event_pakage_tier_8</ProductID>
-
-        <Efficiency>10</Efficiency>
-        <ValueAmount>600</ValueAmount>
-
-        <MinVersion>479</MinVersion>
-    </ShopItem>
 
     <ShopItem ID='5001'>
         <Name>SpecialPackage_1463</Name>
@@ -17733,12 +17470,11 @@
 
         <UnitExpCount>1000</UnitExpCount>
         <Gold>20000</Gold>
-        
-        <InventoryItem ID="170" Count="1"/>
-        
-        <ArtifactIds>601,801</ArtifactIds>
-        <ArtifactCounts>30,15</ArtifactCounts>
-        
+
+        <InventoryItem ID="6600" Count="1"/>
+        <InventoryItem ID="5613" Count="1"/>
+        <BoxKey ID="370" Count="60"/>
+
         <UnitID>10210</UnitID>
         <SkinID>1021005</SkinID>
 
@@ -17842,11 +17578,10 @@
         <UnitExpCount>1000</UnitExpCount>
         <Gold>20000</Gold>
 
-        <ArtifactIds>601,801</ArtifactIds>
-        <ArtifactCounts>30,15</ArtifactCounts>
+        <InventoryItem ID="6600" Count="1"/>
+        <InventoryItem ID="5613" Count="1"/>
+        <BoxKey ID="370" Count="60"/>
 
-        <InventoryItem ID="170" Count="1"/>
-        
         <UnitID>10210</UnitID>
         <SkinID>1021005</SkinID>
 
@@ -18364,39 +18099,6 @@
         <ValueAmount>3250</ValueAmount>
     </ShopItem>
 
-    <ShopItem ID='8062'>
-        <NameComment>달의 여신 티아 패키지 III</NameComment>
-        <AdminToolOnlyName>달의 여신 티아 패키지 III</AdminToolOnlyName>
-
-        <ProductID>god_skin_package_tier_3</ProductID>
-        <Type>GodSkinPackage</Type>
-
-        <MoneyPrice>120000</MoneyPrice>
-        <DolarPrice>99.99</DolarPrice>
-
-        <Tier>3</Tier>
-
-        <Flag>40030</Flag>
-        <NameTag>40030</NameTag>
-
-        <TerritoryBuilding>40301</TerritoryBuilding>
-
-        <UnitExpCount>1000</UnitExpCount>
-        <Gold>20000</Gold>
-
-        <InventoryItem ID="170" Count="1"/>
-        <BoxKey ID="305" Count="40"/>
-
-        <ArtifactIds>903</ArtifactIds>
-        <ArtifactCounts>20</ArtifactCounts>
-
-        <UnitID>10320</UnitID>
-        <SkinID>1032007</SkinID>
-
-        <MinVersion>515</MinVersion>
-
-        <ValueAmount>6000</ValueAmount>
-    </ShopItem>
 
     <ShopItem ID='8063'>
         <NameComment>달의 여신 티아 패키지 II 업그레이드</NameComment>
@@ -18473,39 +18175,6 @@
         <ValueAmount>3250</ValueAmount>
     </ShopItem>
 
-    <ShopItem ID='8072'>
-        <NameComment>달의 여신 티아 세일 패키지 III</NameComment>
-        <AdminToolOnlyName>달의 여신 티아 세일 패키지 III</AdminToolOnlyName>
-
-        <ProductID>god_skin_package_tier_3_sale</ProductID>
-        <Type>GodSkinSalePackage</Type>
-
-        <MoneyPrice>99000</MoneyPrice>
-        <DolarPrice>79.99</DolarPrice>
-
-        <Tier>3</Tier>
-
-        <Flag>40030</Flag>
-        <NameTag>40030</NameTag>
-
-        <TerritoryBuilding>40301</TerritoryBuilding>
-
-        <UnitExpCount>1000</UnitExpCount>
-        <Gold>20000</Gold>
-
-        <ArtifactIds>903</ArtifactIds>
-        <ArtifactCounts>20</ArtifactCounts>
-
-        <BoxKey ID="305" Count="40"/>
-
-        <InventoryItem ID="170" Count="1"/>
-
-        <UnitID>10320</UnitID>
-        <SkinID>1032007</SkinID>
-
-        <MinVersion>515</MinVersion>
-        <ValueAmount>6000</ValueAmount>
-    </ShopItem>
 
     <ShopItem ID='8073'>
         <NameComment>달의 여신 티아 세일 패키지 II 업그레이드</NameComment>
@@ -18584,6 +18253,7 @@
         <ValueAmount>3250</ValueAmount>
     </ShopItem>
 
+
     <ShopItem ID='8082'>
         <NameComment>창조의 여신 가람 패키지 III</NameComment>
         <AdminToolOnlyName>창조의 여신 가람 패키지 III</AdminToolOnlyName>
@@ -18605,11 +18275,9 @@
         <UnitExpCount>1000</UnitExpCount>
         <Gold>20000</Gold>
 
-        <InventoryItem ID="170" Count="1"/>
-        <BoxKey ID="305" Count="40"/>
-
-        <ArtifactIds>903</ArtifactIds>
-        <ArtifactCounts>20</ArtifactCounts>
+        <InventoryItem ID="6700" Count="1"/>
+        <InventoryItem ID="5611" Count="1"/>
+        <BoxKey ID="370" Count="60"/>
 
         <UnitID>10580</UnitID>
         <SkinID>1058004</SkinID>
@@ -18697,6 +18365,7 @@
         <ValueAmount>3250</ValueAmount>
     </ShopItem>
 
+
     <ShopItem ID='8092'>
         <NameComment>창조의 여신 가람 세일 패키지 III</NameComment>
         <AdminToolOnlyName>창조의 여신 가람 세일 패키지 III</AdminToolOnlyName>
@@ -18718,12 +18387,9 @@
         <UnitExpCount>1000</UnitExpCount>
         <Gold>20000</Gold>
 
-        <ArtifactIds>903</ArtifactIds>
-        <ArtifactCounts>20</ArtifactCounts>
-
-        <BoxKey ID="305" Count="40"/>
-
-        <InventoryItem ID="170" Count="1"/>
+        <InventoryItem ID="6700" Count="1"/>
+        <InventoryItem ID="5611" Count="1"/>
+        <BoxKey ID="370" Count="60"/>
 
         <UnitID>10580</UnitID>
         <SkinID>1058004</SkinID>
@@ -83362,7 +83028,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <Gold>100</Gold>
         <Order>51</Order>
@@ -83371,8 +83037,6 @@
         <BuyLimit>-1</BuyLimit>
 
         <ShowBuyConfirm>false</ShowBuyConfirm>
-
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32023'>
@@ -83381,7 +83045,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <Gold>1000</Gold>
         <Order>50</Order>
@@ -83390,7 +83054,6 @@
         <BuyLimit>-1</BuyLimit>
 
         <ShowBuyConfirm>false</ShowBuyConfirm>
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32024'>
@@ -83399,7 +83062,7 @@
         <Sprite>ShopItem_370_Key</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <KeyID>370</KeyID>
         <KeyCount>1</KeyCount>
@@ -83407,7 +83070,6 @@
         <TokenPrice>100</TokenPrice>
         <BuyLimit>10</BuyLimit>
         <ShowBuyConfirm>false</ShowBuyConfirm>
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32025'>
@@ -83416,7 +83078,7 @@
         <Sprite>ShopItem_501</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <Cash>10</Cash>
 
@@ -83425,8 +83087,6 @@
         <TokenPrice>30</TokenPrice>
         <BuyLimit>10</BuyLimit>
         <Order>40</Order>
-
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32026'>
@@ -83435,7 +83095,7 @@
         <Sprite>InventoryItem_4101</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <InventoryItem ID="4101" Count="1"/>
 
@@ -83443,7 +83103,6 @@
         <BuyLimit>10</BuyLimit>
         <Order>2</Order>
         <ShowBuyConfirm>false</ShowBuyConfirm>
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32027'>
@@ -83452,7 +83111,7 @@
         <Sprite>ShopItem_301_Key</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <KeyID>301</KeyID>
         <KeyCount>1</KeyCount>
@@ -83463,8 +83122,6 @@
 
         <TokenPrice>100</TokenPrice>
         <BuyLimit>3</BuyLimit>
-
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32028'>
@@ -83473,7 +83130,7 @@
         <Sprite>InventoryItem_3101</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <InventoryItem ID="3101" Count="1"/>
 
@@ -83481,7 +83138,6 @@
         <BuyLimit>5</BuyLimit>
         <Order>1</Order>
         <ShowBuyConfirm>false</ShowBuyConfirm>
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32029'>
@@ -83490,7 +83146,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <ArtifactId>601</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -83502,7 +83158,6 @@
         <ShowBuyConfirm>false</ShowBuyConfirm>
 
         <MinLevel>7</MinLevel>
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32030'>
@@ -83511,7 +83166,7 @@
         <Sprite>ShopItem_130</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <!-- 왕의 증표 지급 -->
         <SoulItemCount>5</SoulItemCount>
@@ -83521,8 +83176,6 @@
         <TokenPrice>80</TokenPrice>
         <BuyLimit>3</BuyLimit>
         <Order>9</Order>
-
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32031'>
@@ -83531,7 +83184,7 @@
         <Sprite>InventoryItem_3200</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <InventoryItem ID="3200" Count="1"/>
 
@@ -83540,7 +83193,6 @@
         <Order>0</Order>
 
         <ShowBuyConfirm>false</ShowBuyConfirm>
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32032'>
@@ -83549,7 +83201,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT</EventType>
+        <EventType>SEASONAL_EVENT_S72</EventType>
 
         <ArtifactId>801</ArtifactId>
         <ArtifactCount>1</ArtifactCount>
@@ -83561,7 +83213,6 @@
         <ShowBuyConfirm>false</ShowBuyConfirm>
 
         <MinLevel>7</MinLevel>
-        <ExcludeSeasons>73</ExcludeSeasons>
     </ShopItem>
 
     <ShopItem ID='32033'>
@@ -84017,7 +83668,7 @@
         <Sprite>ShopItem_70000_Key</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <KeyID>70000</KeyID>
         <KeyCount>1</KeyCount>
@@ -84037,7 +83688,7 @@
         <Sprite>ShopItem_390_Key</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <KeyID>390</KeyID>
         <KeyCount>1</KeyCount>
@@ -84057,7 +83708,7 @@
         <Sprite>InventoryItem_3200</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <InventoryItem ID="3200" Count="1"/>
 
@@ -84076,7 +83727,7 @@
         <Sprite>InventoryItem_10010</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <InventoryItem ID="10010" Count="5000"/>
 
@@ -84095,7 +83746,7 @@
         <Sprite>InventoryItem_3101</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <InventoryItem ID="3101" Count="1"/>
 
@@ -84114,7 +83765,7 @@
         <Sprite>InventoryItem_4101</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <InventoryItem ID="4101" Count="1"/>
 
@@ -84133,7 +83784,7 @@
         <Sprite>ShopItem_370_Key</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <KeyID>370</KeyID>
         <KeyCount>1</KeyCount>
@@ -84153,7 +83804,7 @@
         <Sprite>ShopItem_501</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <Cash>20</Cash>
 
@@ -84172,7 +83823,7 @@
         <Sprite>ShopItem_501</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <Cash>10</Cash>
 
@@ -84191,7 +83842,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <Gold>5000</Gold>
 
@@ -84210,7 +83861,7 @@
         <Sprite>ShopItem_401</Sprite>
 
         <Type>EventShop</Type>
-        <EventType>SEASONAL_EVENT_S73</EventType>
+        <EventType>SEASONAL_EVENT</EventType>
 
         <Gold>100</Gold>
 
@@ -84566,6 +84217,279 @@
         <Order>27</Order>
 
         <MinVersion>173000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32111'>
+        <Name>Skin</Name>
+        <NameComment>5사이클 복각 : 징벌의 왕 아라미스 15시즌</NameComment>
+        <Sprite>Unit_10050_03[Unit_10050_03_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1005003</Skin>
+
+        <CashPrice>298</CashPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>11</Order>
+
+        <MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32112'>
+        <Name>Skin</Name>
+        <NameComment>4사이클 복각 : 우마왕 베히무스 27시즌</NameComment>
+        <Sprite>Unit_10190_04[Unit_10190_04_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1019004</Skin>
+
+        <CashPrice>298</CashPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>12</Order>
+
+        <MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32113'>
+        <Name>Skin</Name>
+        <NameComment>3사이클 복각 : 성광의 여왕 에스테아 41시즌</NameComment>
+        <Sprite>Unit_10440_04[Unit_10440_04_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1044004</Skin>
+
+        <CashPrice>298</CashPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>13</Order>
+
+        <MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32114'>
+        <Name>Skin</Name>
+        <NameComment>2사이클 복각 : 백목의 황제 가람 52시즌</NameComment>
+        <Sprite>Unit_10580_03[Unit_10580_03_15]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1058003</Skin>
+
+        <CashPrice>298</CashPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>14</Order>
+
+        <MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32115'>
+        <Name>Skin</Name>
+        <NameComment>1사이클 복각 : 공허의 여왕 아슈타르 - 파괴 66시즌</NameComment>
+        <Sprite>Unit_10730_02[Unit_10730_02_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1073002</Skin>
+
+        <CashPrice>298</CashPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>15</Order>
+
+        <MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <!-- 시즌61 동화 축제 -->
+    <ShopItem ID='32116'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 (보석판매) : 병정기사 빅토리아 </NameComment>
+        <Sprite>Unit_10520_02[Unit_10520_02_2]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1052002</Skin>
+
+        <CashPrice>169</CashPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>5</Order>
+
+		<MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32117'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 검은 마녀 프리아 </NameComment>
+        <Sprite>Unit_10040_02[Unit_10040_02_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1004002</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>26</Order>
+
+		<MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32118'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 이상한 나라의 프리아 </NameComment>
+        <Sprite>Unit_10040_06[Unit_10040_06_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1004006</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>27</Order>
+
+		<MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32119'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 호두까기 인형 아라미스 </NameComment>
+        <Sprite>Unit_10050_05[Unit_10050_05_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1005005</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>28</Order>
+
+		<MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32120'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 베짱이 바드리 </NameComment>
+        <Sprite>Unit_10090_06[Unit_10090_06_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1009006</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>29</Order>
+
+		<MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32121'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 후크선장 마라 </NameComment>
+        <Sprite>Unit_10100_05[Unit_10100_05_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1010005</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>30</Order>
+
+		<MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32122'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 백설공주 한시 </NameComment>
+        <Sprite>Unit_10110_04[Unit_10110_04_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1011004</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>31</Order>
+
+		<MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32123'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 변장한 라이카  </NameComment>
+        <Sprite>Unit_10120_04[Unit_10120_04_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1012004</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>32</Order>
+
+		<MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32124'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 빨간망토 티아 </NameComment>
+        <Sprite>Unit_10320_02[Unit_10320_02_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1032002</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>33</Order>
+
+		<MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32125'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 하트여왕 리에  </NameComment>
+        <Sprite>Unit_10390_03[Unit_10390_03_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1039003</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>34</Order>
+
+		<MinVersion>174000</MinVersion>
+    </ShopItem>
+
+    <ShopItem ID='32126'>
+        <Name>Skin</Name>
+        <NameComment>기존 이벤트 스킨 : 독사과 에스테아 </NameComment>
+        <Sprite>Unit_10440_02[Unit_10440_02_0]</Sprite>
+
+        <Type>EventShop</Type>
+        <EventType>SEASONAL_EVENT_S74</EventType>
+
+        <Skin>1044002</Skin>
+
+        <TokenPrice>600</TokenPrice>
+        <BuyLimit>1</BuyLimit>
+        <Order>35</Order>
+
+		<MinVersion>174000</MinVersion>
     </ShopItem>
 
     <ShopItem ID='32102'>

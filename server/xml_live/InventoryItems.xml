@@ -970,7 +970,7 @@
 		<TreasureOvercomeMaterial>true</TreasureOvercomeMaterial>
 		<ItemTooltipType>Treasure</ItemTooltipType>
 		<InventoryCategory>Currency</InventoryCategory>
-		<Shortcuts>1,32,39,38,28</Shortcuts>
+		<Shortcuts>1,32,39,38</Shortcuts>
 	</InventoryItem>
 
 	<InventoryItem ID="3300">
@@ -1000,6 +1000,17 @@
 		<Shortcuts>28</Shortcuts>
 		
 		<NameFormat LocalizeTextArg0="TreasureRarityShort_Special">RandomTreasureFormat</NameFormat>
+	</InventoryItem>
+
+	<InventoryItem ID="3303">
+		<NameComment>특급 보구 선택 소환 (보상 타입 PermanentSpecialTreasure 표시용)</NameComment>
+		<Name>SpecialTreasureSelectTitle</Name>
+		<AdminToolOnlyName>특급 보구 선택 소환</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>SpecialTreasureSelectDesc</Desc>
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Treasure</ItemTooltipType>
+		<HideInInventory>true</HideInInventory>
 	</InventoryItem>
 <!-- 장신구 관련 아이템 -->
 	<!-- 4000번대
@@ -1359,6 +1370,202 @@
 		<Shortcuts>28,29</Shortcuts>
 		</InventoryItem>			
 	
+	<InventoryItem ID="5101">
+		<NameComment>SS 확정 강철의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5001">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5001</Sprite>
+		<AdminToolOnlyName>SS 확정 강철의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5101</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5102">
+		<NameComment>SS 확정 두려움의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5002">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5002</Sprite>
+		<AdminToolOnlyName>SS 확정 두려움의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5102</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5103">
+		<NameComment>SS 확정 예리의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5003">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5003</Sprite>
+		<AdminToolOnlyName>SS 확정 예리의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5103</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5104">
+		<NameComment>SS 확정 바다의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5004">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5004</Sprite>
+		<AdminToolOnlyName>SS 확정 바다의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5104</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5105">
+		<NameComment>SS 확정 바람의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5005">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5005</Sprite>
+		<AdminToolOnlyName>SS 확정 바람의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5105</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5106">
+		<NameComment>SS 확정 야만의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5006">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5006</Sprite>
+		<AdminToolOnlyName>SS 확정 야만의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5106</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5107">
+		<NameComment>SS 확정 금강의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5007">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5007</Sprite>
+		<AdminToolOnlyName>SS 확정 금강의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5107</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5108">
+		<NameComment>SS 확정 계약의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5008">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5008</Sprite>
+		<AdminToolOnlyName>SS 확정 계약의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5108</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5109">
+		<NameComment>SS 확정 영원의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5009">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5009</Sprite>
+		<AdminToolOnlyName>SS 확정 영원의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5109</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5110">
+		<NameComment>SS 확정 월광의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5010">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5010</Sprite>
+		<AdminToolOnlyName>SS 확정 월광의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5110</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5111">
+		<NameComment>SS 확정 억압의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5011">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5011</Sprite>
+		<AdminToolOnlyName>SS 확정 억압의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5111</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5112">
+		<NameComment>SS 확정 절명의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5012">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5012</Sprite>
+		<AdminToolOnlyName>SS 확정 절명의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5112</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5113">
+		<NameComment>SS 확정 승천의 장신구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5013">InventoryItemName_SSGuaranteedSetFormat</NameFormat>
+		<Sprite>InventoryItem_5013</Sprite>
+		<AdminToolOnlyName>SS 확정 승천의 장신구 선택 상자</AdminToolOnlyName>
+		<Desc>InventoryItemDesc_SSGuaranteedSetFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5113</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5507">
+		<NameComment>SS 확정 특급 장신구 선택 상자(~ 승천)</NameComment>
+		<NameFormat LocalizeTextArg0="InventoryItemName_5000">InventoryItemName_SSGuaranteedBoxFormat</NameFormat>
+		<AdminToolOnlyName>SS 확정 특급 장신구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5000</Sprite>
+		<Desc>InventoryItemDesc_SSGuaranteedBoxFormat</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5507</RewardBoxInventoryDataID>
+
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+		</InventoryItem>
+
 	<InventoryItem ID="5600">
 		<NameComment>4주년 후발대 선택상자</NameComment>
 		<Name>InventoryItemName_5600</Name>
@@ -1413,7 +1620,7 @@
 		<Name>InventoryItemName_5603</Name>
 		<AdminToolOnlyName>2026-05-21 30038 오류, 위시리스트 선택 상자</AdminToolOnlyName>
 		<Sprite>InventoryItem_5602</Sprite>
-		<Desc>InventoryItemDesc_SelectableBox</Desc>
+		<Desc>InventoryItemDesc_SelectableTreasureBox</Desc>
 
 		<Type>RewardBoxInventory</Type>
 		<RewardBoxInventoryDataID>5603</RewardBoxInventoryDataID>
@@ -1432,6 +1639,142 @@
 
 		<Type>RewardBoxInventory</Type>
 		<RewardBoxInventoryDataID>5604</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5605">
+		<NameComment>킹갓패스 스킨 선택 상자 (73시즌까지)</NameComment>
+		<Name>InventoryItemName_5605</Name>
+		<AdminToolOnlyName>킹갓패스 스킨 선택 상자 (73시즌까지)</AdminToolOnlyName>
+		<Sprite>InventoryItem_5601</Sprite>
+		<Desc>InventoryItemDesc_SkinBox</Desc>
+		<DescFormatting>Season</DescFormatting>
+		<Season>73</Season>
+		<Type>SkinBoxInventory</Type>
+		<PassSkinUntilSeason>73</PassSkinUntilSeason>
+		<AlternateReward Type="Cash" Count="100" />
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5606">
+		<NameComment>신속/그림자/원소 특급 보구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="Character_Class_Swift" LocalizeTextArg1="Character_Class_Shadow" LocalizeTextArg2="Character_Class_Element" LocalizeTextArg3="InventoryItemName_5603">&lt;{0}&gt; &lt;{1}&gt; &lt;{2}&gt; {3}</NameFormat>
+		<AdminToolOnlyName>신속/그림자/원소 특급 보구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableTreasureBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5606</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5607">
+		<NameComment>신비/강인/용기 특급 보구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="Character_Class_Mystic" LocalizeTextArg1="Character_Class_Toughness" LocalizeTextArg2="Character_Class_Brave" LocalizeTextArg3="InventoryItemName_5603">&lt;{0}&gt; &lt;{1}&gt; &lt;{2}&gt; {3}</NameFormat>
+		<AdminToolOnlyName>신비/강인/용기 특급 보구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableTreasureBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5607</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5608">
+		<NameComment>신속 특급 보구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="Character_Class_Swift" LocalizeTextArg1="InventoryItemName_5603">&lt;{0}&gt; {1}</NameFormat>
+		<AdminToolOnlyName>신속 특급 보구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableTreasureBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5608</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5609">
+		<NameComment>강인 특급 보구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="Character_Class_Toughness" LocalizeTextArg1="InventoryItemName_5603">&lt;{0}&gt; {1}</NameFormat>
+		<AdminToolOnlyName>강인 특급 보구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableTreasureBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5609</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5610">
+		<NameComment>원소 특급 보구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="Character_Class_Element" LocalizeTextArg1="InventoryItemName_5603">&lt;{0}&gt; {1}</NameFormat>
+		<AdminToolOnlyName>원소 특급 보구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableTreasureBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5610</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5611">
+		<NameComment>그림자 특급 보구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="Character_Class_Shadow" LocalizeTextArg1="InventoryItemName_5603">&lt;{0}&gt; {1}</NameFormat>
+		<AdminToolOnlyName>그림자 특급 보구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableTreasureBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5611</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5612">
+		<NameComment>신비 특급 보구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="Character_Class_Mystic" LocalizeTextArg1="InventoryItemName_5603">&lt;{0}&gt; {1}</NameFormat>
+		<AdminToolOnlyName>신비 특급 보구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableTreasureBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5612</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="5613">
+		<NameComment>용기 특급 보구 선택 상자</NameComment>
+		<NameFormat LocalizeTextArg0="Character_Class_Brave" LocalizeTextArg1="InventoryItemName_5603">&lt;{0}&gt; {1}</NameFormat>
+		<AdminToolOnlyName>용기 특급 보구 선택 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5602</Sprite>
+		<Desc>InventoryItemDesc_SelectableTreasureBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>5613</RewardBoxInventoryDataID>
 
 		<ForceImageScale>0.6</ForceImageScale>
 		<ItemTooltipType>Consumable</ItemTooltipType>
@@ -1665,6 +2008,36 @@
 		<ItemTooltipType>Consumable</ItemTooltipType>
 		<InventoryCategory>Consumable</InventoryCategory>
 	</InventoryItem>	
+
+	<InventoryItem ID="6600">
+		<NameComment>멜 패키지 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_6100</Name>
+		<AdminToolOnlyName>예리 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5003</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6600</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
+
+	<InventoryItem ID="6700">
+		<NameComment>가람 패키지 장신구 선택 상자</NameComment>
+		<Name>InventoryItemName_6300</Name>
+		<AdminToolOnlyName>강철 세트 장신구 상자</AdminToolOnlyName>
+		<Sprite>InventoryItem_5001</Sprite>
+		<Desc>InventoryItemDesc_FixableBox</Desc>
+
+		<Type>RewardBoxInventory</Type>
+		<RewardBoxInventoryDataID>6700</RewardBoxInventoryDataID>
+
+		<ForceImageScale>0.6</ForceImageScale>
+		<ItemTooltipType>Consumable</ItemTooltipType>
+		<InventoryCategory>Consumable</InventoryCategory>
+	</InventoryItem>
 	
 	<!-- 7000 ~ : 확률형 선택 상자 -->
     <InventoryItem ID="7000">

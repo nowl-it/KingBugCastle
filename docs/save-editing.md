@@ -70,6 +70,10 @@ Plain top-level fields inside the row's JSON blob. Set them (dashboard, or
 > reverted to default in lobby and never showed in battle. `set-skin-favorite` / `set-random-skin-apply`
 > use `CardSkinEtcRequestModel {unitId, skinId, flag}`. See `r_card_equip_skin` in `server.py`.
 
+> **Skin-mod (2026-10-15):** equipping no longer requires ownership - the handler accepts any real
+> `Skins.xml` id and sets `currentSkin` only (never grants). Ownership still gates nothing except
+> the unmodded client's UI, which is stubbed open (`has-skin` patch, dev-notes §37).
+
 ## Treasures (Legacies)
 
 `treasures` is a **list**; the server auto-grants every *released* treasure by default

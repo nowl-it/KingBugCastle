@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <EarlyAccessModeInfos>
-    <EarlyAccessModeInfo ID="1520">
-        <StartAt>20250205_000000</StartAt>
-        <EndAt>20250210_105959</EndAt>
+    <EarlyAccessModeInfo ID="1000">
+        <StartAt>20000101_000000</StartAt>
+        <EndAt>20000101_105959</EndAt>
         <!-- 영웅 -->
         <TestUnits>
-            <TestUnit>
-                <UnitID>10710</UnitID>
-                <CardLevel>20</CardLevel>
-                <PotentialTier>1</PotentialTier>
-            </TestUnit>
         </TestUnits>
         <!-- 보구 -->
         <TestTreasures>
-            <TestTreasure>
-                <TreasureID>30017</TreasureID>
-                <Level>30</Level>
-                <Overcome>10</Overcome>
-            </TestTreasure>
         </TestTreasures>
         <!-- 장신구 -->
         <TestAccessories>
@@ -1701,7 +1691,7 @@
                 </SubStats>
                 <FixedBonusSubStat Key="BaseCriticalDamageMul" Value="2" />
             </TestAccessory>
-         <TestAccessory>
+            <TestAccessory>
                 <Synergy>10</Synergy>
                 <Type>1</Type>
                 <Rarity>3</Rarity>
@@ -1893,7 +1883,7 @@
                 </SubStats>
                 <FixedBonusSubStat Key="BaseDefPen" Value="2" />
             </TestAccessory>    
-          <TestAccessory>
+            <TestAccessory>
                 <Synergy>11</Synergy>
                 <Type>1</Type>
                 <Rarity>3</Rarity>
@@ -2292,11 +2282,30 @@
                 <FixedBonusSubStat Key="BaseDefDen" Value="2" />
             </TestAccessory>                
         </TestAccessories>
-    
-        
     </EarlyAccessModeInfo>
 
-    <EarlyAccessModeInfo ID="1530" Inherit="1520">
+    <EarlyAccessModeInfo ID="1520" Inherit="1000">
+        <StartAt>20250205_000000</StartAt>
+        <EndAt>20250210_105959</EndAt>
+        <!-- 영웅 -->
+        <TestUnits>
+            <TestUnit>
+                <UnitID>10710</UnitID>
+                <CardLevel>20</CardLevel>
+                <PotentialTier>1</PotentialTier>
+            </TestUnit>
+        </TestUnits>
+        <!-- 보구 -->
+        <TestTreasures>
+            <TestTreasure>
+                <TreasureID>30017</TreasureID>
+                <Level>30</Level>
+                <Overcome>10</Overcome>
+            </TestTreasure>
+        </TestTreasures>
+    </EarlyAccessModeInfo>
+
+    <EarlyAccessModeInfo ID="1530" Inherit="1000">
         <StartAt>20250226_000000</StartAt>
         <EndAt>20250312_105959</EndAt>
         <!-- 영웅 -->
@@ -2311,7 +2320,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1540" Inherit="1520">
+    <EarlyAccessModeInfo ID="1540" Inherit="1000">
         <StartAt>20250326_000000</StartAt>
         <EndAt>20250407_105959</EndAt>
         <!-- 영웅 -->
@@ -2331,7 +2340,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1550" Inherit="1520">
+    <EarlyAccessModeInfo ID="1550" Inherit="1000">
         <StartAt>20250501_000000</StartAt>
         <EndAt>20250505_105959</EndAt>
         <!-- 영웅 -->
@@ -2346,7 +2355,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1551" Inherit="1520">
+    <EarlyAccessModeInfo ID="1551" Inherit="1000">
         <StartAt>20250515_000000</StartAt>
         <EndAt>20250519_105959</EndAt>
         <!-- 영웅 -->
@@ -2361,7 +2370,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1560" Inherit="1520">
+    <EarlyAccessModeInfo ID="1560" Inherit="1000">
         <StartAt>20250529_000000</StartAt>
         <EndAt>20250602_105959</EndAt>
         <!-- 영웅 -->
@@ -2381,7 +2390,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1570" Inherit="1520">
+    <EarlyAccessModeInfo ID="1570" Inherit="1000">
         <StartAt>20250626_000000</StartAt>
         <EndAt>20250630_105959</EndAt>
         <!-- 영웅 -->
@@ -2396,7 +2405,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1580" Inherit="1520">
+    <EarlyAccessModeInfo ID="1580" Inherit="1000">
         <StartAt>20250718_000000</StartAt>
         <EndAt>20250721_105959</EndAt>
         <!-- 영웅 -->
@@ -2416,7 +2425,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>    
-    <EarlyAccessModeInfo ID="1581" Inherit="1520">
+    <EarlyAccessModeInfo ID="1581" Inherit="1000">
         <StartAt>20250807_000000</StartAt>
         <EndAt>20250811_105959</EndAt>
         <!-- 영웅 -->
@@ -2431,7 +2440,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>    
-    <EarlyAccessModeInfo ID="1590" Inherit="1520">
+    <EarlyAccessModeInfo ID="1590" Inherit="1000">
         <StartAt>20250821_000000</StartAt>
         <EndAt>20250825_105959</EndAt>
         <!-- 영웅 -->
@@ -2451,7 +2460,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo> 
-    <EarlyAccessModeInfo ID="1600" Inherit="1520">
+    <EarlyAccessModeInfo ID="1600" Inherit="1000">
         <StartAt>20250918_000000</StartAt>
         <EndAt>20250922_105959</EndAt>
         <!-- 보구 -->
@@ -2463,7 +2472,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>     
-<EarlyAccessModeInfo ID="1601" Inherit="1520">
+<EarlyAccessModeInfo ID="1601" Inherit="1000">
         <StartAt>20251002_000000</StartAt>
         <EndAt>20251006_105959</EndAt>
         <!-- 보구 -->
@@ -2475,7 +2484,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-<EarlyAccessModeInfo ID="1610" Inherit="1520">
+<EarlyAccessModeInfo ID="1610" Inherit="1000">
         <StartAt>20251016_000000</StartAt>
         <EndAt>20251020_105959</EndAt>
         <!-- 영웅 -->
@@ -2495,7 +2504,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>    
-<EarlyAccessModeInfo ID="1620" Inherit="1520">
+<EarlyAccessModeInfo ID="1620" Inherit="1000">
         <StartAt>20251113_000000</StartAt>
         <EndAt>20251117_105959</EndAt>
         <!-- 보구 -->
@@ -2507,7 +2516,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>       
-<EarlyAccessModeInfo ID="1630" Inherit="1520">
+<EarlyAccessModeInfo ID="1630" Inherit="1000">
         <StartAt>20251211_000000</StartAt>
         <EndAt>20251215_105959</EndAt>
         <!-- 영웅 -->
@@ -2527,7 +2536,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>        
-<EarlyAccessModeInfo ID="1621" Inherit="1520">
+<EarlyAccessModeInfo ID="1621" Inherit="1000">
         <StartAt>20251127_000000</StartAt>
         <EndAt>20251201_105959</EndAt>
         <!-- 보구 -->
@@ -2539,7 +2548,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>            
-    <EarlyAccessModeInfo ID="1640" Inherit="1520">
+    <EarlyAccessModeInfo ID="1640" Inherit="1000">
         <StartAt>20260108_000000</StartAt>
         <EndAt>20260112_105959</EndAt>
         <!-- 영웅 -->
@@ -2559,7 +2568,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1641" Inherit="1520">
+    <EarlyAccessModeInfo ID="1641" Inherit="1000">
         <StartAt>20260122_000000</StartAt>
         <EndAt>20260126_105959</EndAt>
         <!-- 보구 -->
@@ -2571,7 +2580,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1650" Inherit="1520">
+    <EarlyAccessModeInfo ID="1650" Inherit="1000">
         <StartAt>20260205_000000</StartAt>
         <EndAt>20260209_105959</EndAt>
         <!-- 영웅 -->
@@ -2591,7 +2600,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1660" Inherit="1520">
+    <EarlyAccessModeInfo ID="1660" Inherit="1000">
         <StartAt>20260305_000000</StartAt>
         <EndAt>20260309_105959</EndAt>
         <!-- 보구 -->
@@ -2603,7 +2612,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>  
-    <EarlyAccessModeInfo ID="1670" Inherit="1520">
+    <EarlyAccessModeInfo ID="1670" Inherit="1000">
         <StartAt>20260403_000000</StartAt>
         <EndAt>20260406_105959</EndAt>
         <!-- 보구 -->
@@ -2615,7 +2624,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>       
-    <EarlyAccessModeInfo ID="1680" Inherit="1520">
+    <EarlyAccessModeInfo ID="1680" Inherit="1000">
         <StartAt>20260430_000000</StartAt>
         <EndAt>20260504_105959</EndAt>
         <!-- 보구 -->
@@ -2627,7 +2636,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>       
-    <EarlyAccessModeInfo ID="1681" Inherit="1520">
+    <EarlyAccessModeInfo ID="1681" Inherit="1000">
         <StartAt>20260514_000000</StartAt>
         <EndAt>20260518_105959</EndAt>
         <!-- 보구 -->
@@ -2639,7 +2648,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>          
-    <EarlyAccessModeInfo ID="1690" Inherit="1520">
+    <EarlyAccessModeInfo ID="1690" Inherit="1000">
         <StartAt>20260528_000000</StartAt>
         <EndAt>20260601_105959</EndAt>
         <!-- 보구 -->
@@ -2651,7 +2660,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>         
-    <EarlyAccessModeInfo ID="1691" Inherit="1520">
+    <EarlyAccessModeInfo ID="1691" Inherit="1000">
         <StartAt>20260611_000000</StartAt>
         <EndAt>20260615_105959</EndAt>
         <!-- 보구 -->
@@ -2665,7 +2674,7 @@
         <TestTreasures>
         </TestTreasures>
     </EarlyAccessModeInfo>    
-    <EarlyAccessModeInfo ID="1700" Inherit="1520">
+    <EarlyAccessModeInfo ID="1700" Inherit="1000">
         <StartAt>20260625_000000</StartAt>
         <EndAt>20260629_105959</EndAt>
         <!-- 보구 -->
@@ -2677,7 +2686,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>          
-    <EarlyAccessModeInfo ID="1701" Inherit="1520">
+    <EarlyAccessModeInfo ID="1701" Inherit="1000">
         <StartAt>20260709_000000</StartAt>
         <EndAt>20260713_105959</EndAt>
         <TestDimensionUnits>
@@ -2696,7 +2705,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1710" Inherit="1520">
+    <EarlyAccessModeInfo ID="1710" Inherit="1000">
         <StartAt>20260723_000000</StartAt>
         <EndAt>20260727_105959</EndAt>
         <!-- 보구 -->
@@ -2709,7 +2718,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1711" Inherit="1520">
+    <EarlyAccessModeInfo ID="1711" Inherit="1000">
         <StartAt>20260806_000000</StartAt>
         <EndAt>20260810_105959</EndAt>
         <TestDimensionUnits>
@@ -2723,7 +2732,7 @@
         <TestTreasures>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1720" Inherit="1520">
+    <EarlyAccessModeInfo ID="1720" Inherit="1000">
         <StartAt>20260820_000000</StartAt>
         <EndAt>20260824_105959</EndAt>
         <!-- 보구 -->
@@ -2736,7 +2745,7 @@
             </TestTreasure>
         </TestTreasures>
     </EarlyAccessModeInfo>
-    <EarlyAccessModeInfo ID="1730" Inherit="1520">
+    <EarlyAccessModeInfo ID="1730" Inherit="1000">
         <StartAt>20260917_000000</StartAt>
         <EndAt>20260921_105959</EndAt>
         <!-- 보구 -->

@@ -1364,6 +1364,8 @@
 			<MAtkPer/>
 		</RecommendedStats>
 	</UnitPanelData>
+	<UnitPanelData ID="10820">
+	</UnitPanelData>
 	<UnitPanelData ID="10810">
 		<Type>Profile</Type>
 		<ProfileData>

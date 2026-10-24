@@ -11,8 +11,10 @@ Handlers keep the (body, st) shape server.py's DYNAMIC_OVERRIDES expects; call
 
     python3 clan.py     # self-check
 """
+import xml.etree.ElementTree as ET
+
 from common import body_int, body_list, body_str, next_reset_iso, now_iso
-from config import PLAYER_DEFAULTS as _PC, RCFG, STATIC_OVERRIDES
+from config import PLAYER_DEFAULTS as _PC, RCFG, XML_DIR
 from decoration import block as _deco
 from state import save_state
 
@@ -200,47 +202,250 @@ def r_clan_noop_member(body, st):
     panel consistent instead of leaving it on stale data."""
     return r_clan(body, st)
 
-def r_clan_raid_deck(body, st):
-    c = _clan(st) or {}
-    decks = c.setdefault("raidDecks", []) if _clan(st) else []
-    if _clan(st) is not None and (body.get("deck") or body.get("units")):
-        idx = body_int(body.get("index"), 0, lo=0, hi=CLAN_RAID_DECKS - 1)
-        while len(decks) <= idx:
-            decks.append({"index": len(decks), "name": "", "deck": [], "potential": []})
-        decks[idx] = {"index": idx,
-                      "name": body.get("name", decks[idx].get("name", "")),
-                      "deck": body.get("deck") or body.get("units") or [],
-                      "potential": body.get("potential") or []}
-        save_state(st)
-    return {"decks": decks, "bestDeck": decks[0] if decks else None}
+# ── Clan Raid ────────────────────────────────────────────────────────────────
+# The v174 raid routes answered the wrong shape: /clan/raid returned a flat
+# {bossId, bossHp, phase} where the client reads ClanRaidResponseModel.clanRaid
+# (a nested ClanRaidModel), and every sibling handler spelled its keys as
+# decks/memberDamages/supports/bestDeck while the models declare
+# clanRaidDeckInfos/members/supporters/bestDecks. The panel opened on nulls.
+#
+# The client runs the battle itself; the server only owns the persistent raid
+# state (which boss, how much HP is left, kill count, decks) and applies the
+# damage reported at /clan/raid/end. That state lives inside the clan record as
+# c["raid"] so it survives a restart and a re-log.
+CLAN_RAID_ATTEMPTS = 5          # battles per reset window
+CLAN_RAID_ROUNDS_PER_STAGE = 5  # rounds before the stage (and boss HP) steps up
+# ClanRaidBossPowers.xml carries power-scaling tables, not HP, and boss max HP is
+# not in master data either, so a private server picks a deterministic base and
+# scales it by stage. The client draws the HP bar from the boss unit definition
+# and only needs remainHp from us.
+CLAN_RAID_BASE_HP = 5_000_000
 
-def r_clan_raid_delete_deck(body, st):
+_XML_CACHE: dict = {}
+
+def _xml_rows(fname, tag):
+    """Parse a master-data file once; a missing or broken file degrades to []."""
+    if fname not in _XML_CACHE:
+        try:
+            _XML_CACHE[fname] = [el for el in ET.parse(XML_DIR / fname).getroot()
+                                 if el.tag == tag]
+        except Exception:
+            _XML_CACHE[fname] = []
+    return _XML_CACHE[fname]
+
+def _raid_boss_ids():
+    ids = [int(r.get("ID")) for r in _xml_rows("ClanRaidBossPowers.xml",
+                                               "ClanRaidBossPower")
+           if (r.get("ID") or "").isdigit()]
+    return ids or [42200, 42500]
+
+def _raid_max_hp(stage):
+    return CLAN_RAID_BASE_HP * max(1, stage)
+
+def _raid_rank_for(kill_count):
+    """Highest rank tier whose ReqBossKill the clan has reached -> (tierId, goldBonus)."""
+    rows = []
+    for r in _xml_rows("ClanRaidRankTiers.xml", "ClanRaidRankTier"):
+        req = r.find("ReqBossKill")
+        gb = r.find("GoldBonus")
+        rows.append((int(req.text) if req is not None and req.text else 0,
+                     int(r.get("ID") or 0),
+                     int(gb.text) if gb is not None and gb.text else 0))
+    tier = bonus = 0
+    for req, tid, gb in sorted(rows):
+        if kill_count >= req:
+            tier, bonus = tid, gb
+    return tier, bonus
+
+def _raid(st):
+    """The clan's persistent raid state, seeded on first use. None with no clan."""
+    c = _clan(st)
+    if c is None:
+        return None
+    r = c.get("raid")
+    if not r:
+        bosses = _raid_boss_ids()
+        r = {"bossIndex": 0, "boss": bosses[0], "stage": 1, "round": 1,
+             "killCount": 0, "score": 0, "remainHp": _raid_max_hp(1),
+             "remainBattleCount": CLAN_RAID_ATTEMPTS, "remainResetCount": 1,
+             "battleStartedAt": now_iso(0), "lastBattleAt": now_iso(-1),
+             "supportUnitCardInfo": None, "decks": []}
+        c["raid"] = r
+    return r
+
+def _raid_card_info(st, unit_id):
+    """One owned hero as a ClanRaidCardInfo, or a bare stub for an unowned id."""
+    card = next((c for c in st.get("cards", {}).values()
+                 if c.get("unitId") == unit_id), None) or {}
+    return {"unitId": unit_id, "level": card.get("level", 1),
+            "skin": card.get("currentSkin", 0), "potential": card.get("potential", 0),
+            "potentialTier": card.get("potentialTier", 0), "overcome": card.get("overcome", 0),
+            "dimensionLevel": card.get("dimensionLevel", 0),
+            "incarnationSkillLevel": card.get("incarnationSkillLevel", 0),
+            "incarnationUltimateSkillLevel": card.get("incarnationUltimateSkillLevel", 0),
+            "isLevelSyncApplied": False, "supported": False,
+            "accountId": 0, "accountName": None, "treasure": None, "accessories": []}
+
+def _raid_deck_data(st, d):
+    """A stored raid deck (flat id lists) back into the ClanRaidDeckData the client renders."""
+    return {"cards": [_raid_card_info(st, uid) for uid in d.get("deck", [])],
+            "buildings": d.get("buildingLevels", []),
+            "roundData": None,
+            "artifacts": [], "potentials": d.get("potential", []),
+            "territoryStatBuffPers": [], "divinePower": 0.0, "riftWeapons": []}
+
+def _raid_deck_infos(st):
+    """The clan's raid decks as List<ClanRaidDeckInfo>. The model names this field
+    clanRaidDeckInfos - answering `decks` is exactly the bug this module fixes."""
+    r = _raid(st)
+    if r is None:
+        return []
+    infos = []
+    for i, d in enumerate(r.get("decks", [])):
+        infos.append({"id": d.get("id", i + 1), "idx": d.get("idx", i),
+                      "remainCount": r.get("remainBattleCount", 0),
+                      "deckName": d.get("name", "") or "",
+                      "deck": _raid_deck_data(st, d)})
+    return infos
+
+def _ensure_raid_deck(r, idx):
+    decks = r.setdefault("decks", [])
+    while len(decks) <= idx:
+        j = len(decks)
+        decks.append({"id": j + 1, "idx": j, "name": "", "deck": [], "potential": [],
+                      "buildingLevels": [], "artifactIds": [], "riftWeaponIds": [],
+                      "remainCount": 0})
+    return decks
+
+def _clan_raid_model(st):
+    r = _raid(st)
+    if r is None:
+        return None
+    c = _clan(st) or {}
+    d = _PC["defaults"]
+    bosses = _raid_boss_ids()
+    boss = bosses[min(r.get("bossIndex", 0), len(bosses) - 1)]
+    tier, bonus = _raid_rank_for(r.get("killCount", 0))
+    return {"clanId": c.get("id", 1), "score": r.get("score", 0),
+            "killCount": r.get("killCount", 0), "stage": r.get("stage", 1),
+            "round": r.get("round", 1), "boss": boss,
+            "remainHp": r.get("remainHp", _raid_max_hp(r.get("stage", 1))),
+            "currentPlayer": 1, "currentPlayerName": st.get("name", d["name"]),
+            "battleStartedAt": r.get("battleStartedAt") or now_iso(0),
+            "remainBattleCount": r.get("remainBattleCount", CLAN_RAID_ATTEMPTS),
+            "remainResetCount": r.get("remainResetCount", 1),
+            "decks": _raid_deck_infos(st),
+            "supportUnitCardInfo": r.get("supportUnitCardInfo"),
+            "retryInfo": None, "bossList": bosses,
+            "seasonEndRank": tier, "goldBonusTier": bonus, "usedSupporter": []}
+
+def r_clan_raid(body, st):
+    """FetchClanRaid -> ClanRaidResponseModel. clanRaid holds the full nested
+    ClanRaidModel; killBoss is only ever true in the /end response."""
+    return {"clanRaid": _clan_raid_model(st), "killBoss": False}
+
+def r_clan_raid_deck(body, st):
+    """SetClanRaidDeckPreset: store one raid deck from the client's flat id lists,
+    then echo the deck list under clanRaidDeckInfos (not the old `decks`)."""
     c = _clan(st)
     if c is not None:
-        idx = body_int(body.get("index"), -1)
-        decks = c.get("raidDecks", [])
+        r = _raid(st)
+        idx = body_int(body.get("deckIdx", body.get("index")), 0, lo=0, hi=CLAN_RAID_DECKS - 1)
+        decks = _ensure_raid_deck(r, idx)
+        decks[idx].update({
+            "deck": body_list(body.get("deck")),
+            "potential": body_list(body.get("potential")),
+            "buildingLevels": body_list(body.get("buildingLevels")),
+            "artifactIds": body_list(body.get("artifactIds")),
+            "riftWeaponIds": body_list(body.get("riftWeaponIds")),
+        })
+        save_state(st)
+    return {"clanRaidDeckInfos": _raid_deck_infos(st), "retryInfo": None}
+
+def r_clan_raid_deck_name(body, st):
+    """SetClanRaidDeckName: rename one slot, echo the deck list."""
+    c = _clan(st)
+    if c is not None:
+        r = _raid(st)
+        idx = body_int(body.get("deckIdx", body.get("index")), 0, lo=0, hi=CLAN_RAID_DECKS - 1)
+        decks = _ensure_raid_deck(r, idx)
+        name = body_str(body.get("deckName", body.get("name")))
+        if name:
+            decks[idx]["name"] = name
+        save_state(st)
+    return {"clanRaidDeckInfos": _raid_deck_infos(st), "retryInfo": None}
+
+def r_clan_raid_delete_deck(body, st):
+    """DeleteClanRaidDeck: drop one slot, re-index, echo the deck list."""
+    c = _clan(st)
+    if c is not None:
+        r = _raid(st)
+        idx = body_int(body.get("deckIdx", body.get("index")), -1)
+        decks = r.get("decks", [])
         if 0 <= idx < len(decks):
             decks.pop(idx)
             for i, d in enumerate(decks):
-                d["index"] = i
+                d["idx"] = i
+                d["id"] = i + 1
             save_state(st)
-    return r_clan_raid_deck({}, st)
+    return {"clanRaidDeckInfos": _raid_deck_infos(st), "retryInfo": None}
+
+def r_clan_raid_best_deck(body, st):
+    """FetchClanRaidBestDecks -> ClanRaidBestDeckResponseModel (`bestDecks`).
+    One clan of one, so there are no rival decks to rank against."""
+    return {"bestDecks": []}
 
 def r_clan_raid_state(body, st):
-    """Damage is per member and there is one member, so the sum is the player's."""
-    d = _PC["defaults"]
-    dmg = (_clan(st) or {}).get("raidDamage", 0)
-    return {"memberDamages": [{"accountId": st.get("accountId", d["accountId"]),
-                               "userName": st.get("name", d["name"]),
-                               "damage": dmg}] if _clan(st) else [],
-            "totalDamage": dmg}
+    """FetchClanRaidCurrentState -> ClanRaidMemberDamageSumResponseModel. The model
+    reads `members`, each with `damageSum` - not the old memberDamages/damage."""
+    if _clan(st) is None:
+        return {"members": []}
+    r = _raid(st)
+    mem = _clan_member(st)
+    return {"members": [{
+        "accountId": mem["accountId"], "castleName": mem["castleName"],
+        "userName": mem["userName"], "profileIconId": mem["profileIconId"],
+        "profileIconBackgroundId": mem["profileIconBackgroundId"],
+        "nameTagId": mem["nameTagId"], "damageSum": r.get("score", 0),
+        "lastUpdatedAt": r.get("lastBattleAt") or now_iso(0)}]}
 
 def r_clan_raid_end(body, st):
+    """EndClanRaid -> ClanRaidResponseModel. Apply the reported damage to the boss,
+    persist it, and advance the raid when the boss dies. Practice battles do not
+    count and a retry does not spend another attempt."""
     c = _clan(st)
-    if c is not None:
-        c["raidDamage"] = max(c.get("raidDamage", 0), body_int(body.get("damage"), 0))
+    if c is None:
+        return {"clanRaid": None, "killBoss": False}
+    r = _raid(st)
+    damage = body_int(body.get("damage"), 0, lo=0)
+    practice = str(body.get("isPracticeBattle", "")).lower() in ("true", "1")
+    retrying = str(body.get("isRetrying", "")).lower() in ("true", "1")
+    r["lastBattleAt"] = now_iso(0)
+    kill = False
+    if not practice:
+        r["score"] = r.get("score", 0) + damage
+        r["remainHp"] = max(0, r.get("remainHp", 0) - damage)
+        if not retrying:
+            r["remainBattleCount"] = max(0, r.get("remainBattleCount", 0) - 1)
+        if r["remainHp"] <= 0:
+            kill = True
+            r["killCount"] = r.get("killCount", 0) + 1
+            r["round"] = r.get("round", 1) + 1
+            if r["round"] > CLAN_RAID_ROUNDS_PER_STAGE:
+                r["round"] = 1
+                r["stage"] = r.get("stage", 1) + 1
+            bosses = _raid_boss_ids()
+            r["bossIndex"] = (r.get("bossIndex", 0) + 1) % len(bosses)
+            r["boss"] = bosses[r["bossIndex"]]
+            r["remainHp"] = _raid_max_hp(r["stage"])
+            r["remainBattleCount"] = CLAN_RAID_ATTEMPTS
         save_state(st)
-    return dict(STATIC_OVERRIDES["/clan/raid"])
+    return {"clanRaid": _clan_raid_model(st), "killBoss": kill}
+
+def r_clan_raid_support(body, st):
+    """FetchClanRaidSupporters -> ClanRaidSupportResponseModel (`supporters`). With a
+    single member there is nobody to lend a hero, so the list is empty."""
+    return {"supporters": []}
 
 def r_clan_support(body, st):
     """Support is one member handing another a hero. With one member there is nobody
@@ -273,13 +478,14 @@ def handlers():
         "/clan/changeMemberRole": r_clan_noop_member,
         "/clan/requestJoin": r_clan_noop_member,
         "/clan/processRequestJoin": r_clan_noop_member,
+        "/clan/raid": r_clan_raid,
         "/clan/raid/deck": r_clan_raid_deck,
-        "/clan/raid/best-deck": r_clan_raid_deck,
-        "/clan/raid/deck-name": r_clan_raid_deck,
+        "/clan/raid/deck-name": r_clan_raid_deck_name,
+        "/clan/raid/best-deck": r_clan_raid_best_deck,
         "/clan/raid/delete-deck": r_clan_raid_delete_deck,
         "/clan/raid/currentState": r_clan_raid_state,
         "/clan/raid/end": r_clan_raid_end,
-        "/clan/raid/support": r_clan_support,
+        "/clan/raid/support": r_clan_raid_support,
         "/clan/support": r_clan_support,
         "/clan/requestSupport": r_clan_support,
         **mod,

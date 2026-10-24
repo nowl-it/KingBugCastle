@@ -2,13 +2,12 @@
 KGC API - shared config, AES-ECB encrypt/decrypt, session helper
 Base URL: https://kgc-k8s-1.awesomepiece.com
 
-AES: ECB, Zeros padding, hex output, key = cnf1tl65djs2wp3g (AES-128)
+AES: ECB, Zeros padding, lowercase hex output, key = AES_KEY (AES-128)
 POST body: raw hex string (Content-Type: application/json)
 Auth header: accesstoken (not Authorization: Bearer)
 """
 
 import os
-import hashlib
 import json
 import time as _time
 import requests
@@ -16,7 +15,13 @@ import msgpack
 from Crypto.Cipher import AES
 
 BASE_URL = "https://kgc-k8s-1.awesomepiece.com"
-AES_KEY = b"b53019bb76da6b34"  # AES-128, v169.0.03 key (v165-168 used cnf1tl65djs2wp3g)
+# AES-128 key the game uses for request bodies and responses. Same key as the
+# private server (server/crypto.py). The old v169 value (b53019bb76da6b34)
+# makes prod answer HTTP 400 to every POST - verified 2026-10-09.
+AES_KEY = b"a6072ad6b9c959ff"
+# Client sends Application.platform.ToString(): IPhonePlayer on iOS, Android on
+# Android. Affects which platform an account id is visible under.
+PLATFORM = os.environ.get("KGC_PLATFORM", "IPhonePlayer")
 
 
 def aes_encrypt(data: str) -> str:
@@ -36,9 +41,9 @@ def aes_decrypt(hex_str: str) -> bytes:
 
 
 def _time_header() -> str:
-    """Generate time header: MD5 of current unix timestamp as string."""
-    ts = str(int(_time.time()))
-    return hashlib.md5(ts.encode()).hexdigest()
+    """time header = AESEncryptWithServer(str(unix_ms)) - NOT md5 (dev-notes §31:
+    Utility.MD5 is dead code in this build, GetServerTimestamp does the AES)."""
+    return aes_encrypt(str(int(_time.time() * 1000)))
 
 
 def _try_decode(raw: bytes) -> dict | list | str | None:
@@ -98,13 +103,15 @@ def decode_response(content: bytes) -> dict | list | str:
 # client with KGC_VERSION without editing this module. This default is the single
 # source of truth for "the version we bundle" - api/version.py reads it back, and
 # CI jobs derive their version header from it.
-VERSION = os.environ.get("KGC_VERSION", "173.1.00")
+VERSION = os.environ.get("KGC_VERSION", "174.1.00")
 
 SESSION: requests.Session = requests.Session()
+# The full client header set is version / platform / time / accessToken
+# (dev-notes §31 - BL-scan of UnityWebRequest.SetRequestHeader). x-unity-version
+# and encryptedwithhex were never sent by the client and are gone.
 SESSION.headers.update({
     "version": VERSION,
-    "x-unity-version": "2022.3.62f3",
-    "encryptedwithhex": "true",
+    "platform": PLATFORM,
     "Content-Type": "application/json",
     "Accept": "*/*",
     "Accept-Encoding": "gzip, deflate, br",

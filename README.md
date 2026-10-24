@@ -1,6 +1,6 @@
 <div align="center">
   <h1>🏰 King Bug Castle (KBC)</h1>
-  <p><strong>A fully-featured Private Server & Reverse Engineering Toolkit for "King God Castle" (v170.1.00 - v173.0.00)</strong></p>
+  <p><strong>A fully-featured Private Server & Reverse Engineering Toolkit for "King God Castle" (v170.1.00 - v174.1.00)</strong></p>
 
   [![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/6tDBPs9chp)
   ![Python](https://img.shields.io/badge/Python-3.11+-blue.svg?style=flat&logo=python)

@@ -2617,4 +2617,55 @@
 		<WorldTriggers>
 		</WorldTriggers>
 	</RogueLikeSynergy>
+
+    <!--
+	<RogueLikeSynergy ID="20170" Theme="2100">
+		<Comment>곡예사</Comment>
+		<DescComment>곡예사가 스킬 사용 후 1초간 최종 피해량 +30%</DescComment>
+		<DescParams>
+			<Attribute Name="Time">./WorldTriggers[1]/BuffInfo/BuffOptions/BuffContents/AddStat</Attribute>
+			<InnerText>./WorldTriggers[1]/BuffInfo/BuffOptions/Values/FixedValue</InnerText>
+		</DescParams>
+		<Condition Synergy="Acrobat" UnitCount="2"/>
+		<WorldTriggers>
+			<Conditions>
+				<ImmediatelyOnce/>
+			</Conditions>
+			<Actions>
+				<AddGlobalBuff />
+			</Actions>
+			<Values>
+			</Values>
+			<BuffInfo>
+				<Checker Name="Acrobat">RogueLikeSynergyTarget</Checker>
+				<BuffOptions>
+					<Conditions>
+						<CastSkill/>
+					</Conditions>
+					<Targets>
+						<Self/>
+					</Targets>
+					<RangeInfo>
+					</RangeInfo>
+					<BuffContents>
+						<AddStat StatType="Damage" StatValueType="TotalPerValue" Time="1" MaxOverlapCount="1"/>
+					</BuffContents>
+					<Values>
+						<FixedValue>30</FixedValue>
+					</Values>
+				</BuffOptions>
+			</BuffInfo>
+		</WorldTriggers>
+		<WorldTriggers>
+			<Conditions>
+				<Dispose/>
+			</Conditions>
+			<Actions>
+				<RemoveGlobalBuff ProviderWorldTriggerIdx="0"/>
+			</Actions>
+			<Values>
+			</Values>
+		</WorldTriggers>
+	</RogueLikeSynergy>
+    -->
 </RogueLikeSynergies>

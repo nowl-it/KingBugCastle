@@ -8537,6 +8537,20 @@
 		<SpawnFromClanRaid>true</SpawnFromClanRaid>
 	</Stage>
 
+	<!-- 단판제 아레나 편성 -->
+	<Stage ID='20901' Theme='209'>
+		<Gold>0</Gold>
+		<ValueSum>0</ValueSum>
+		<CanComplete>true</CanComplete>
+	</Stage>
+
+	<!-- 단판제 아레나 전투 (21001은 테마2 난이도 스테이지와 충돌하여 21099 사용) -->
+	<Stage ID='21099' Theme='210'>
+		<Gold>0</Gold>
+		<SpawnFromPvpEnemyDeck>true</SpawnFromPvpEnemyDeck>
+		<Score>100</Score>
+	</Stage>
+
 	<!-- 전투력 측정 -->
 	<!-- 허수아비 1개 -->
 	<Stage ID='90000'>

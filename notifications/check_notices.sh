@@ -59,12 +59,22 @@ check_lang_notices() {
         local body
         body=$(python3 "$FETCH_SCRIPT" "$page_id" 2>/dev/null) || body="(could not fetch notice body)"
 
-        # fetch_notices dumps every block incl. image filenames + "Go Back" nav;
-        # drop those for a clean preview, keep first 3 real lines.
+        # Bảo cụ (Legacy): nếu notice có nhắc, đưa thẳng các dòng đó vào excerpt —
+        # title KR các kỳ trước ghi tên bảo cụ mới ("신규 보구: … <…>"), đây là nguồn
+        # SỚM NHẤT (trước bundle CDN ~1 ngày). Xem docs/dev-notes.md §70.
+        local legacy_lines
+        legacy_lines=$(echo "$body" | grep -iE '보구|legacy|bảo cụ' | grep -vE '\.(png|gif|jpe?g)$' | head -8 || true)
+
         local excerpt
-        excerpt=$(echo "$body" \
-            | grep -viE '\.(png|gif|jpe?g)$|Go Back to List' \
-            | grep -vE '^[[:space:]]*$' | head -3 || true)
+        if [[ -n "$legacy_lines" ]]; then
+            excerpt="$legacy_lines"
+        else
+            # fetch_notices dumps every block incl. image filenames + "Go Back" nav;
+            # drop those for a clean preview, keep first 3 real lines.
+            excerpt=$(echo "$body" \
+                | grep -viE '\.(png|gif|jpe?g)$|Go Back to List' \
+                | grep -vE '^[[:space:]]*$' | head -3 || true)
+        fi
 
         local notice_url="https://kgcastle-notice.awesomepiece.com/${page_id}"
         local notice_text
@@ -96,6 +106,11 @@ check_lang_notices() {
 
 log "[check_notices] Checking notices..."
 if [[ "$(check_lang_notices "en" || true)" == "new" ]]; then
+    HAS_NEW=true
+fi
+
+# KR = bản gốc, đăng trước bản dịch EN → nguồn sớm nhất cho tên bảo cụ.
+if [[ "$(check_lang_notices "kr" || true)" == "new" ]]; then
     HAS_NEW=true
 fi
 

@@ -5,14 +5,18 @@ without the client.
 
 ## Cipher
 
-- **AES-128-ECB**, key `b53019bb76da6b34` (16 ASCII bytes). Used for both request bodies and responses.
+- **AES-128-ECB**, key `a6072ad6b9c959ff` (16 ASCII bytes, same as `server/crypto.py`). Used for both
+  request bodies and responses. The older `b53019bb76da6b34` (v169) gets **HTTP 400** from prod —
+  verified 2026-10-09, see `docs/dev-notes.md` §33.
 - **Padding**: the server pads the plaintext JSON with **trailing spaces** to a 16-byte multiple, then
   decodes the first JSON object and ignores trailing pad bytes (Newtonsoft tolerates trailing spaces,
   not other bytes). Requests may arrive as raw ciphertext **or** ASCII-hex of the ciphertext - hence the
   header name `encryptedWithHex`.
 - Response header: `encryptedWithHex: true`, body = raw AES-ECB ciphertext.
 - Auth header on real requests: `accesstoken: <token>` (NOT `Authorization: Bearer`). Time header =
-  `MD5(unix_timestamp)`. For local testing against your own server these are not enforced.
+  AES hex of the same scheme (NOT md5 — see `docs/dev-notes.md` §31: pre-login value is the
+  constant `AES_hex("beforeLogin")`, post-login `AES_hex(unix_ms)`). For local testing against
+  your own server these are not enforced.
 
 ## Encrypt a request / decrypt a response (python)
 
@@ -20,12 +24,12 @@ without the client.
 from Crypto.Cipher import AES
 import json, urllib.request
 
-KEY = b"b53019bb76da6b34"
+KEY = b"a6072ad6b9c959ff"
 
 def enc(d: dict) -> bytes:
     raw = json.dumps(d).encode()
     if len(raw) % 16:
-        raw += b" " * (16 - len(raw) % 16)      # space-pad
+        raw += b"\x00" * (16 - len(raw) % 16)    # zero pad (client: PaddingMode.Zeros)
     return AES.new(KEY, AES.MODE_ECB).encrypt(raw)
 
 def dec(b: bytes) -> dict:

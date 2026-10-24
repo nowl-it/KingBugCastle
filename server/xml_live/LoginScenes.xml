@@ -36,6 +36,16 @@ xx = 인덱스
         <BottomGradientColor>41A4F4</BottomGradientColor>
     </LoginScene>
     
+    <LoginScene ID="3">
+        <Illust>Title_6Th_Event</Illust>
+        <IllustOffsetX>-40</IllustOffsetX>
+        <IllustOffsetY>0</IllustOffsetY>
+        <IllustScale>1</IllustScale>
+        <EffectColor>FFEFAD</EffectColor>
+        <BottomGradientColor>41A4F4</BottomGradientColor>
+        <BotGradientComponentOff>true</BotGradientComponentOff>
+    </LoginScene>
+    
     
     <LoginScene ID="10037">
         <Illust>Unit_Illust_10390_04</Illust>

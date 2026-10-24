@@ -1,0 +1,29 @@
+# kgc-adblock — sink ad / attribution / analytics endpoints (appended to /system/etc/hosts).
+# Under ndk_translation the ad SDKs' native stack (AdMob webview + UnityAds + Airbridge)
+# kills the process with SIGABRT ("pthread_mutex_lock called on a destroyed mutex") or a
+# SIGSEGV within ~1 minute of the lobby.  Blocking their endpoints removes the whole path
+# and the client then runs indefinitely.  Do NOT block the game API/CDN/XIGNCODE hosts.
+0.0.0.0 googleads.g.doubleclick.net
+0.0.0.0 pagead2.googlesyndication.com
+0.0.0.0 tpc.googlesyndication.com
+0.0.0.0 googleadservices.com
+0.0.0.0 www.googleadservices.com
+0.0.0.0 adservice.google.com
+0.0.0.0 partner.googleadservices.com
+0.0.0.0 pubads.g.doubleclick.net
+0.0.0.0 unityads.unity3d.com
+0.0.0.0 api.unityads.unity3d.com
+0.0.0.0 dsp-vg.unityads.unity3d.com
+0.0.0.0 webview.unityads.unity3d.com
+0.0.0.0 api.applovin.com
+0.0.0.0 ws.applovin.com
+0.0.0.0 o.applovin.com
+0.0.0.0 api.airbridge.io
+0.0.0.0 app-measurement.com
+0.0.0.0 firebase-settings.crashlytics.com
+0.0.0.0 api.vungle.com
+0.0.0.0 ads.ironsource.mobi
+0.0.0.0 api.chartboost.com
+0.0.0.0 ads.mintegral.com
+0.0.0.0 api.inmobi.com
+0.0.0.0 ads.adcolony.com

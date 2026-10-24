@@ -78,7 +78,6 @@
         <MissionReward HighestTokenRequired="90000">
             <Reward Type="UnitSoulItem" ID="130" Count="500" Index="6"/>
             <Reward Type="InventoryItem" ID="4102" Count="5" Index="7"/>
-            <Reward Type="Key" ID="305" Count="20" Index="8"/>
         </MissionReward>
         <MissionReward HighestTokenRequired="120000">
             <Reward Type="InventoryItem" ID="3200" Count="3" Index="9"/>

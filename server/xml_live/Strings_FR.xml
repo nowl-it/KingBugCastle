@@ -1,6 +1,6 @@
-<Strings TranslationBaseCommit="2a46359eb105245f81698b0ddf9f85b3d0933af8">
+<Strings TranslationBaseCommit="b53f5c202519e52ec712d65feedb55aff10c9efe">
   <String Key="UpdateNoticeVersion">172000</String>
-  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/3ba1c2e0-6f0e-81a3-b96e-c1a538106fb7</String>
+  <String Key="UpdateNoticeUrl">https://kgcastle-notice.awesomepiece.com/en</String>
   <String Key="Title">Fort KingGod</String>
   <String Key="Tags">Awesomepiece, Zombie High School, Auto Chess, TFT, Fort KingGod, Auto battler, Stratégie, Teamfight Tactics, Ends, HelpmeEnds, Merge, Défense</String>
   <String Key="Store_ShortDesc">Invoquez le pouvoir des dieux et défendez votre fort contre les ennemis dans le Fort KingGod !</String>
@@ -962,8 +962,8 @@ lors du rappel de héros 1★</String>
   <String Key="AddDefPerCount">↓ {0} DEG subis proportionnellement au nombre de héros placés
 (-{1} max)</String>
   <String Key="AddDefPerCount_Piece">Plus il y a de héros placés, reçoit moins de DEG.</String>
-  <String Key="AtkPerByRange">Portée de tous les Héros +1, DEG infligés par les attaques normales/de compétence +{0} par point de distance à la cible (distance max. {1})</String>
-  <String Key="AtkPerByRange_Piece">Portée de tous les Héros +1, les DEG infligés par les attaques normales/de compétence augmentent avec la distance à la cible</String>
+  <String Key="AtkPerByRange">DEG infligés par les attaques normales/de compétence +{0} par case de distance jusqu'à la cible (distance max. {1})</String>
+  <String Key="AtkPerByRange_Piece">Les DEG infligés par les attaques normales/de compétence augmentent avec la distance à la cible</String>
   <String Key="ArtifactName_100">Poudre fabuleuse</String>
   <String Key="ArtifactDesc_100">Poudre extraordinaire qui peut être obtenue en broyant des reliques</String>
   <String Key="ArtifactName_10000">Épée de l'empire</String>
@@ -1252,11 +1252,8 @@ Voulez-vous les vérifier ?</String>
   <String Key="ItemName_10020">Camp +</String>
   <String Key="ItemDesc_10020">+ 1 case au camp</String>
   <String Key="ItemName_10030">Argent +5</String>
-  <String Key="ItemDesc_10030"></String>
   <String Key="ItemName_10031">Argent +10</String>
-  <String Key="ItemDesc_10031"></String>
   <String Key="ItemName_10032">Argent +20</String>
-  <String Key="ItemDesc_10032"></String>
   <String Key="ItemName_10040">Médaille de mérite</String>
   <String Key="ItemDesc_10040">Augmente de 1 le nv.★ d'un héros sur le terrain.</String>
   <String Key="ItemName_10050">Appel majeur (x 2)</String>
@@ -2786,8 +2783,8 @@ Voulez-vous vraiment continuer ?</String>
   <String Key="CashCart">Chariot de Gems</String>
   <String Key="UnitName_10320">Tia</String>
   <String Key="UnitSubName_10320">Veilleuse de l'éternité</String>
-  <String Key="Potential_10320_0">DEG totaux infligés aux ennemis à portée de 3 cases +20%</String>
-  <String Key="Potential_10320_1">En éliminant un ennemi, tire 2 fois plus de flèches à la prochaine &lt;Bourrasque&gt;</String>
+  <String Key="Potential_10320_0">Contre les ennemis dans un rayon de 4 cases : DEG infligés totaux +30%</String>
+  <String Key="Potential_10320_1">La première flèche de &lt;Bourrasque&gt; ignore 100% de la DEF phys. de l'ennemi</String>
   <String Key="SkinDesc_Default_10320">Tia est la commandante des veilleurs qui servent la famille royale des elfes. Aussi rapide que le vent et possédant un talent extraordinaire en archerie, elle a gardé les abords de la forêt éternelle depuis de longues années.</String>
   <String Key="SkillName_10320">Bourrasque</String>
   <String Key="SkillDesc_10320">Si la cible est à portée de {BuffRangeSum} case(s), recule de {MoveDistance} case(s) et inflige {AttackCount} fois des DEG phys. en attaque normale. Si la cible n'est pas à portée de {BuffRangeSum} case(s), inflige {AttackCount} coups avec {10325@Damage:AtkPer:BaseValue}% de l'ATQ.</String>
@@ -5920,7 +5917,7 @@ Réessayez après avoir vérifié.</String>
   <String Key="RogueLikeBuildingPackageTitleFormat">Pack {0} {1}</String>
   <String Key="RogueLikeBuildingPackageConfirm">Vous ne pouvez acheter qu'un seul Pack {0} parmi I, II et III.
 Voulez-vous tout de même l'acheter ?</String>
-  <String Key="LevelFormat">Nv. {0}</String>
+  <String Key="LevelFormat">nv. {0}</String>
   <String Key="BuildingsAlreadyComplete">Vous avez déjà choisi tous les autels.</String>
   <String Key="DeathBuildingPackage">Pack Autel de la mort</String>
   <String Key="ArtifactName_13160">Livre de la mort</String>
@@ -6917,8 +6914,8 @@ génère une marque sur chaque ennemi qui amplifie les DEG de la prochaine comp�
   <String Key="ArtifactName_14020">Viseur des nains</String>
   <String Key="ArtifactDesc_14020">Un viseur réalisé par la technologie des nains.
 L'utilisateur peut attaquer une cible plus éloignée avec plus de précision, mais l'appareil n'est guère portable dû à son poids.</String>
-  <String Key="MoveStopTimeDesc_Piece">Désigne deux cases du Champ de bataille comme postes de tir. Les Héros déployés gagnent Parade +4. Jusqu'à ce qu'ils quittent leur poste de tir pour la première fois, le 1er coup et chaque 5e coup de DEG normaux infligent plus de DEG</String>
-  <String Key="MoveStopTimeDesc">Désigne deux cases du Champ de bataille comme postes de tir. Les Héros déployés gagnent Parade +{1}. Jusqu'à ce qu'ils quittent leur poste de tir pour la première fois, le 1er coup et chaque 5e coup de DEG normaux infligent +{0}% de DEG.</String>
+  <String Key="MoveStopTimeDesc_Piece">Désigne 2 cases du Champ de bataille comme positions de tireur d'élite. Les Héros placés obtiennent Parade +4, deviennent &lt;color=#f33&gt;immobiles&lt;/color&gt; pendant un certain temps et, tant qu'ils restent sur une position de tireur d'élite, leurs DEG normaux augmentent à intervalles réguliers.</String>
+  <String Key="MoveStopTimeDesc">Désigne 2 cases du Champ de bataille comme positions de tireur d'élite. Les Héros placés obtiennent Parade +{1}, deviennent &lt;color=#f33&gt;immobiles&lt;/color&gt; pendant {2}s et, jusqu'à ce qu'ils quittent la position de tireur d'élite pour la première fois, DEG normaux infligés +{0}% lors de la première attaque puis toutes les 5 attaques.</String>
   <String Key="ColosseumBanned">Accès temporairement restreint à l'acharnement</String>
   <String Key="GachaName_1036">Sourire froid</String>
   <String Key="Name_Potential_10560_3">Exaltation</String>
@@ -9015,7 +9012,7 @@ et tremble devant ce qui t'attend.&lt;/i&gt;</String>
   <String Key="SpecialPackage_1491">Pack Déluge enflammé 2</String>
   <String Key="SpecialPackage_1492">Pack Déluge enflammé 3</String>
   <String Key="SkillDesc_10110">Attaque {AtkCount} fois de plus pendant {Time} s.</String>
-  <String Key="Potential_10110_0">Pendant l'utilisation de &lt;Pluie de flèches&gt;, CHANCES CRIT phys. +15%.</String>
+  <String Key="Potential_10110_0">Pendant &lt;Pluie de flèches&gt; : Portée +1</String>
   <String Key="Potential_10110_1_00">ATQ totale +15% par arc porté par le lanceur.</String>
   <String Key="Potential_10110_2_00">Lors de l'utilisation de &lt;Pluie de flèches&gt;, utilise &lt;Déluge&gt; qui inflige 3/4/5/6 fois des DEG phys. de compétence égaux à 250% de l'ATQ à tous les ennemis à portée de 2 cases autour de la cible et qui réduit la vitesse de déplacement totale de 30% pendant 3 s.</String>
   <String Key="Potential_10110_3">En infligeant 10 fois des DEG normaux à la même cible pendant l'utilisation de &lt;Pluie de flèches&gt;, réinitialise la durée de &lt;Pluie de flèches&gt; et augmente l'ATQ de 50%.
@@ -10704,7 +10701,7 @@ Lors de l'explosion, DEG CRIT phys. +{5}% pendant {4} s.
 Lors de l'explosion, DEG CRIT phys. +{5}% pendant {4} s.
 Étourdit les cibles touchées par l'explosion pendant {6} s.
 Lors de l'explosion, CHANCES CRIT phys. +{8}% pendant {7} s.</String>
-  <String Key="Potential_10110_1">Lors de l'utilisation de &lt;Pluie de flèches&gt;, ATQ totale +30%.</String>
+  <String Key="Potential_10110_1">Pendant &lt;Pluie de flèches&gt; : CHANCES CRIT phys. +30%</String>
   <String Key="Potential_10110_2">Lors de l'utilisation de &lt;Pluie de flèches&gt;, à la place de la 7e attaque normale, utilise [Déluge] qui inflige 4/5/6/7 fois des DEG phys. de compétence à hauteur de 250% de l'ATQ à tous les ennemis dans 2 cases autour de la cible.</String>
   <String Key="Potential_10420_1">DEG subis -30% lors de l'utilisation de &lt;Coup de pied du tigre blanc&gt;.</String>
   <String Key="SkillDesc_1011000_Long">Grâce à l'archerie transmise par la famille Oiseau vermillon, augmente le nb d'attaques normales de {10110@AtkCount} pendant {10110@Time} s. À la place de la {1011005@NeedComboCount+1}e attaque normale, utilise Déluge qui inflige {1011010@AttackCount} fois {1011010@Damage} DEG phys. de compétence à tous les ennemis dans {1011010@SplashRangeSum} case(s) autour de la cible.</String>
@@ -10982,7 +10979,7 @@ Voulez-vous appliquer la liste de souhaits ?</String>
 Voulez-vous quitter la liste de souhaits sans appliquer les modifications ?</String>
   <String Key="OwnedTreasureStatus">État d'acquisition</String>
   <String Key="ColosseumTierRewardAutoReceiveTitle">Récomp. de classement à la saison {0} de l'acharnement</String>
-  <String Key="ColossseumTierRewardAutoReceiveDesc">Voici la récompense non récupérée du grade {1} de la saison {0} du champ de bataille d'acharnement.</String>
+  <String Key="ColosseumTierRewardAutoReceiveDesc">Voici la récompense non récupérée du grade {1} de la saison {0} du champ de bataille d'acharnement.</String>
   <String Key="TreasureName_30018">Combativité de fer</String>
   <String Key="TreasureSubName_30018">Bastion d'acier</String>
   <String Key="TreasureDesc_30018">De génération en génération, la famille Denev a combattu en première ligne sur le champ de bataille, ce qui a valu à ses membres le titre de héros. Le bouclier d'acier, symbole de la famille, représente sa volonté inébranlable.</String>
@@ -11739,7 +11736,7 @@ Rien qu'en la contemplant, on se sent apaisé.</String>
   <String Key="AccessorySynergyName_9">Clairlune</String>
   <String Key="AccessorySynergyName_9_Pre">de clairlune</String>
   <String Key="AccessorySynergyDesc_10090">&lt;color=#f33&gt;INT totale {0}%&lt;/color&gt;, ATQ totale +{1}%</String>
-  <String Key="AccessorySynergyDesc_10091">Portée +{0}, DEG CRIT phys. +{2}% par {1} de Portée (max. 80%)</String>
+  <String Key="AccessorySynergyDesc_10091">DEG CRIT phys. +{0}%. Quand les PV actuels tombent pour la première fois à {1}% ou moins des PV max., DEG CRIT phys. -{0}%</String>
   <String Key="AccessorySynergyDesc_10092">Au début du combat, furtivité pendant {0} s et après {1} s, CHANCES CRIT phys. +{2}%.</String>
   <String Key="InventoryItemName_5010">Coffre d'Accessoire de clairlune au choix</String>
   <String Key="ShopItemName_41012">Accessoire de clairlune aléatoire</String>
@@ -12691,7 +12688,7 @@ Toutefois, il peut être réinitialisé au nv.15 en utilisant des Gems ou un Ré
   <String Key="RiftWeaponBuffDesc_130">Lors des DEG normaux infligés après utilisation de compétence, inflige {0}% en DEG spéciaux à 3 ennemis.</String>
   <String Key="RiftWeaponBuffDesc_140">DEF phys. +{0}</String>
   <String Key="RiftWeaponBuffDesc_150">DEF d'INT +{0}</String>
-  <String Key="RiftWeaponBuffDesc_160">Portée +{0}</String>
+  <String Key="RiftWeaponBuffDesc_160">Vitesse de déplacement +{0}%</String>
   <String Key="RiftWeaponBuffDesc_170">Conversion DEG phys. en PV +{0}%</String>
   <String Key="RiftWeaponBuffDesc_180">Conversion DEG d'INT en PV +{0}%</String>
   <String Key="RiftWeaponBuffDesc_190">DEF +{0}</String>
@@ -13649,7 +13646,7 @@ En cas d'échec de l'exploitation de tous les points faibles, les actions du bos
   <String Key="ArenaStarterBuffDesc_2">Si vous entrez pour la 1re fois dans l'arène dans les 72 heures avant la fin de la saison, la bénédiction du champ de bataille s'appliquera à partir de la saison suivante.</String>
   <String Key="SkillDesc_10070_Short">Augmente l'AGI totale de {TotalAttackSpeedPer:BaseValue}% pendant {Time} s, et lors de l'attaque normale, inflige des DEG égaux à ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% de l'ATQ.</String>
   <String Key="SkillDesc_10070_Long">Devient enragé, augmente l'AGI totale {TotalAttackSpeedPer:BaseValue}% suppl. pendant {Time} s, et durant ce temps, lors de l'attaque normale, inflige des DEG phys. normaux égaux à ({100700@Damage:AtkPer:BaseValue}+{100700@Damage:AtkPer:MAtkPer})% de l'ATQ.</String>
-  <String Key="Potential_10070_0">DEF +100 du lanceur pendant &lt;Rage&gt;</String>
+  <String Key="Potential_10070_0">Pendant &lt;Rage&gt; : Portée de Zaoun +1</String>
   <String Key="Potential_10070_1">Conversion DEG phys./d'INT en PV +40% pour le lanceur pendant &lt;Rage&gt;.</String>
   <String Key="Potential_10070_2">Après 40 coups de DEG normaux infligés sur le même ennemi, nb d'attaques +1 (non cumulable).
 Réinitialise l'augmentation si DEG normaux infligés à un autre ennemi.</String>
@@ -14687,9 +14684,9 @@ x{1}&lt;/color&gt;</String>
   <String Key="GachaName_1083">Ermites</String>
   <String Key="InventoryItemName_700">Pierre d'alchimie</String>
   <String Key="InventoryItemDesc_700">Ingrédient d'alchimie obtenu en accomplissant des requêtes d'enquêtes. Utilisé dans l'Atelier d'alchimie, il permet d'obtenir diverses récompenses.</String>
-  <String Key="TerritoryTradeShopDesc">Les produits du comptoir &lt;color=#ffd264&gt;diffèrent selon le nv.&lt;/color&gt; de ce bâtiment.
-Ceux de nv. 4 ou moins sont &lt;color=#ffd264&gt;réinitialisés toutes les semaines&lt;/color&gt;
-et ceux de nv. 5 ou plus sont &lt;color=#ffd264&gt;réinitialisés toutes les deux semaines.&lt;/color&gt;</String>
+  <String Key="TerritoryTradeShopDesc">Les marchandises du Comptoir commercial sont &lt;color=#ffd264&gt;déterminées par le nv. du Comptoir commercial&lt;/color&gt;.
+Les marchandises du Comptoir commercial de nv. 2~3 sont &lt;color=#ffd264&gt;réinitialisées chaque semaine&lt;/color&gt;
+et celles du Comptoir commercial de nv. 4 ou plus sont &lt;color=#ffd264&gt;réinitialisées toutes les 2 semaines&lt;/color&gt;.</String>
   <String Key="ChangeAccessorySubStat">Changer effet second.</String>
   <String Key="ChangeAccessorySubStatDesc_0">Veuillez choisir l'Accessoire dont vous voulez changer l'effet secondaire.</String>
   <String Key="ChangeAccessorySubStatDesc_1">Choisissez l'effet secondaire à changer.</String>
@@ -16663,7 +16660,8 @@ L'Amplification de compétence des Amis augmente de {6}% de la DEF d'INT du port
   <String Key="NewUnitGachaInfo">Vous pouvez obtenir 1 Héros que vous ne possédez pas.
 Le taux d'apparition est le même pour chaque Héros que vous ne possédez pas.</String>
   <String Key="InventoryItemName_5603">Coffre de Trésor spécial au choix</String>
-  <String Key="RewardBoxInventoryDesc_5603">Un coffre qui permet d'obtenir 1 Trésor spécial au choix</String>
+  <String Key="RewardBoxInventoryDesc_5603">Sélectionnez un Trésor spécial pour l'obtenir.
+(Trésors à durée limitée exclus)</String>
   <String Key="GachaDesc_PickUpResetAlert">Un Héros ne peut pas être sélectionné, réinitialisation automatique effectuée.</String>
   <String Key="UnitName_10780">Neria</String>
   <String Key="UnitSubName_10780">Vengeresse de la folie</String>
@@ -17056,8 +17054,7 @@ DEG CRIT phys. jusqu'à +{5}% selon la durée restante
   <String Key="Name_Overcome_2">Améliorer la compétence de début de combat</String>
   <String Key="Name_Overcome_3">Améliorer le trait</String>
   <String Key="Name_Overcome_4">Améliorer la compétence</String>
-  <String Key="InventoryItemDesc_70000">Un parchemin d'Invocation enveloppé d'une aura mystérieuse.
-Permet d'effectuer 1 Invocation dimensionnelle.</String>
+  <String Key="InventoryItemDesc_70000">Un parchemin d'Invocation enveloppé d'une aura mystique.</String>
   <String Key="InventoryItemDesc_10000">Un petit noyau condensé de la puissance d'une autre dimension.
 Peut être échangé contre divers objets dans la Boutique dimensionnelle.</String>
   <String Key="InventoryItemName_10000">Noyau dimensionnel</String>
@@ -17123,8 +17120,7 @@ Attaques Standard de tous les alliés : ressources obtenues +{0}%</String>
   <String Key="SpecialPackage_1666">Pack Tempester</String>
   <String Key="SpecialShop_TreasureDoublePickUp10013">Boutique spéciale Appar. UP de Trésor</String>
   <String Key="ShopItemName_70000">Parchemin dimensionnel d'Invocation de héros</String>
-  <String Key="ShopItemDesc_70000">Un parchemin d'invocation à l'aura mystérieuse.
-Permet d'effectuer 1 Invocation dimensionnelle.</String>
+  <String Key="ShopItemDesc_70000">Un parchemin d'Invocation enveloppé d'une aura mystique.</String>
   <String Key="RewardBoxInventoryDesc_7100">Vous pouvez obtenir des objets selon les probabilités définies.</String>
   <String Key="DimensionHeroAttendanceEventTitle">Événement de connexion célébrant le Héros dimensionnel</String>
   <String Key="ReservedText">Réservé</String>
@@ -18354,9 +18350,234 @@ Skin du Festival de la Lune des Moissons 2026</String>
   <String Key="SkinName_1074001">Seigneur stellaire au clair de lune Suha</String>
   <String Key="SkinDesc_1074001">&lt;i&gt;Lapins lunaires ! Vous savez bien qu'il ne faut pas faire trop de bêtises juste parce que vous êtes redescendus après un an, n'est-ce pas ? Amusez-vous bien, tout le monde !&lt;/i&gt;</String>
   <String Key="FestivalMerch_Season73">Offres du Festival de la Lune des Moissons</String>
+  <String Key="SeasonalEventNumberFormat">Événement de la saison {0}</String>
+  <String Key="SeasonalEvent">Événement de saison</String>
+  <String Key="SeasonalEventCeilFormat">Pick-up de la saison {0}</String>
+  <String Key="SeasonalEventName_Season74">Arène du Vent</String>
+  <String Key="SeasonalEventDesc_Season74">Tout se joue en un seul combat !</String>
+  <String Key="UniversalEventText">EVENT</String>
+  <String Key="SingleArenaNeedAdForReroll">Regardez une pub pour réinitialiser l'adversaire.</String>
+  <String Key="SingleArena_ApFormat">AP {0}</String>
+  <String Key="SingleArena_AttackDeck">Troupe d'attaque</String>
+  <String Key="SingleArena_AttackDeckSet">Former troupe d'attaque</String>
+  <String Key="SingleArena_AttackSelect_Desc">Vous pouvez utiliser votre troupe d'attaque actuelle ou vérifier la troupe ennemie pour en former une nouvelle.
+
+Si vous utilisez la troupe d'attaque actuelle, vous pouvez lancer le combat tout de suite. Si vous en formez une nouvelle, vous devrez tout régler à nouveau à partir du choix des Héros. (Vous pouvez reformer votre troupe d'attaque jusqu'à 5 fois par jour.)
+
+Veuillez choisir une méthode d'attaque.</String>
+  <String Key="SingleArena_AttackSelect_Title">Sélection de la troupe d'attaque</String>
+  <String Key="SingleArena_CompleteDeck">Formation terminée</String>
+  <String Key="SingleArena_DefenseDeck">Troupe de défense</String>
+  <String Key="SingleArena_DefenseDeckSet">Former troupe de défense</String>
+  <String Key="SingleArena_EnemyDeckPreview">Voir la troupe ennemie</String>
+  <String Key="SingleArena_FinalAttackSelect_Desc">Voulez-vous enregistrer la nouvelle troupe d'attaque comme votre troupe d'attaque et entrer en combat ?
+
+Si vous utilisez la troupe d'attaque actuelle, la nouvelle troupe d'attaque sera supprimée automatiquement.</String>
+  <String Key="SingleArena_FinalDeckSelect_Desc">Veuillez choisir la troupe à utiliser.</String>
+  <String Key="SingleArena_FinalDeckSelect_Title">Sélection finale de troupe</String>
+  <String Key="SingleArena_FirstDeckSetAlert">La première fois seulement, la troupe de défense et la troupe d'attaque sont enregistrées en même temps.
+Ensuite, vous pourrez les former séparément.</String>
+  <String Key="SingleArena_Intro_Desc1">Dans l'Arène du Vent, un seul combat décide de la victoire ou de la défaite.</String>
+  <String Key="SingleArena_Intro_Desc2">Vous utilisez deux troupes au total : une troupe d'attaque et une troupe de défense.</String>
+  <String Key="SingleArena_Intro_Desc3">La troupe d'attaque sert à vérifier et attaquer la troupe de défense ennemie.</String>
+  <String Key="SingleArena_Intro_Desc4">La troupe de défense sert à repousser les attaques ennemies. Si elle échoue, vous perdrez des points de victoire. (Vous pouvez perdre des points de victoire jusqu'à 3 fois par jour.)</String>
+  <String Key="SingleArena_Intro_Desc5">Votre première formation de troupe est fixée, mais après cela vous pourrez former vos troupes librement.</String>
+  <String Key="SingleArena_Intro_Desc6">Même si vous changez votre troupe d'attaque après avoir vérifié la troupe de défense ennemie, la troupe ennemie ne changera pas.</String>
+  <String Key="SingleArena_Intro_Desc7">Formez librement vos troupes selon l'adversaire et remportez la victoire !</String>
+  <String Key="SingleArena_LeftGameAlertFormat">Un combat non terminé a été compté comme une défaite. ({0} points)</String>
+  <String Key="SingleArena_Log_Attack">Attaque</String>
+  <String Key="SingleArena_Log_Def">Défense</String>
+  <String Key="SingleArena_Log_Empty">Aucun résultat.</String>
+  <String Key="SingleArena_MissionCondFormat">Attaques totales {0}</String>
+  <String Key="SingleArena_NeedDeck">Veuillez d'abord former votre troupe d'attaque et votre troupe de défense.</String>
+  <String Key="SingleArena_NeedFieldUnit">Aucun Héros déployé.</String>
+  <String Key="SingleArena_NewAttackDeck">Nouvelle troupe d'attaque</String>
+  <String Key="SingleArena_NewDefenseDeck">Nouvelle troupe de défense</String>
+  <String Key="SingleArena_NoMoreDeckChange">Vous ne pouvez plus changer votre troupe aujourd'hui.</String>
+  <String Key="SingleArena_OldAttackDeck">Troupe d'attaque actuelle</String>
+  <String Key="SingleArena_OldDefenseDeck">Troupe de défense actuelle</String>
+  <String Key="SingleArena_RankNotReached">Ce rang n'a pas encore été atteint.</String>
+  <String Key="SingleArena_RankingPanelTitle">Classement de l'Arène du Vent</String>
+  <String Key="SingleArena_RankingReward_Desc">Obtenez des récompenses selon votre classement final à la fin de la saison.</String>
+  <String Key="SingleArena_RankingTop">Top 300</String>
+  <String Key="SingleArena_RecordFormat">Attaque {0} victoires {1} défaites / Défense {2} victoires {3} défaites</String>
+  <String Key="SingleArena_ReformAttackDeck">Reformer la troupe d'attaque</String>
+  <String Key="SingleArena_RemainAttackFormat">Attaques restantes {0}/{1}</String>
+  <String Key="SingleArena_RerollRemainFormat">Changer d'adversaire {0}/{1}</String>
+  <String Key="SingleArena_RetreatWarning">Si vous vous retirez, la formation de troupe d'arène sera annulée. (Si vous formez séparément, votre nombre quotidien de changements sera utilisé.)</String>
+  <String Key="SingleArena_Search">Chercher un adversaire</String>
+  <String Key="SingleArena_SelectTargetFirst">Veuillez d'abord choisir un adversaire.</String>
+  <String Key="SingleArena_StagePreviewDesc">Vous pouvez voir à l'avance la formation des deux troupes.</String>
+  <String Key="SingleArena_StagePreviewTitle">Infos de formation</String>
+  <String Key="SingleArena_Title">Arène du Vent</String>
+  <String Key="SingleArena_UseAttackDeck">Utiliser la troupe d'attaque</String>
+  <String Key="SingleArena_UseNewDeck">Utiliser la nouvelle troupe</String>
+  <String Key="SingleArena_UseOldDeck">Utiliser la troupe actuelle</String>
+  <String Key="SingleArena_RankingRewardPanel_Title">Récompenses de classement de l'Arène du Vent</String>
+  <String Key="SingleArena_RankingRewardPanel_Desc">Les récompenses sont accordées selon le classement à la fin de la saison.
+Pour figurer dans le Top 300 du classement, vous devez atteindre au moins le grade King.</String>
+  <String Key="SingleArena_MatchHistory">Historique de l'Arène du Vent</String>
+  <String Key="SeasonalEventOperationFormat">{0} sera disponible pendant l'événement de la saison {1}, sans distinction entre première et deuxième moitié.
+
+Temps restant : {2}</String>
+  <String Key="MissionDesc_SingleArena_Attack">Jouez à l'Arène du Vent {0} fois</String>
+  <String Key="SingleArena_Mission">Missions de l'Arène du Vent</String>
+  <String Key="SixthYearDailyAttendanceEvent">Événement de connexion du &lt;color=#ffd264&gt;6e anniversaire&lt;/color&gt;</String>
+  <String Key="SeasonalEvent_ButtonName_Rift">Faille</String>
+  <String Key="SeasonalEvent_ButtonName_Arena">Arène</String>
+  <String Key="SeasonalEvent_ButtonName_Battlefield">Champ de bataille</String>
+  <String Key="IncarnationUnit">Héros transcendant</String>
+  <String Key="Passive">Passif</String>
+  <String Key="UltimateSkill">Compétence ultime</String>
+  <String Key="SingleStackBuff">Buff à cumul unique</String>
+  <String Key="SingleStackBuff_Desc">Quand le même buff est cumulé, le nombre de cumuls augmente sur un seul buff. Quand le cumul augmente, la durée du buff est réinitialisée au maximum.</String>
+  <String Key="PassiveSkillHelp_0">Les compétences passives s'appliquent automatiquement en Combat selon les conditions.</String>
+  <String Key="PassiveSkillHelp_1">Aucun changement selon la ★ du Héros en combat.</String>
+  <String Key="PassiveSkillHelp_2">Les valeurs affichées peuvent être améliorées via l'Ascension du Héros.</String>
+  <String Key="UltimateMeterFormat">Jauge de Compétence ultime {0}/{1}</String>
+  <String Key="UltimateSkillHelp_0">La puissance de la Compétence ultime augmente selon la ★ du Héros en combat.</String>
+  <String Key="UltimateSkillHelp_1">Les valeurs affichées peuvent être améliorées via l'Ascension du Héros.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_0">Dans l'Invocation de héros, si vous invoquez à nouveau un Héros transcendant que vous possédez déjà, vous pouvez effectuer son Ascension.</String>
+  <String Key="IncarnationUnitOvercomeTabHelp_1">L'Ascension est possible jusqu'à 5 fois.</String>
+  <String Key="AddAttackCountEveryFourthNormalAttackFormat">Toutes les 4 attaques normales : nombre d'attaques +1, dégâts d'attaque bonus {0}</String>
+  <String Key="SkillName_10820">Rera-at-katu</String>
+  <String Key="SkillDesc_10820_Short">Après {ChannelingTime}s de Concentration, tire une flèche de Vent qui traverse le Champ de bataille et inflige à tous les ennemis sur sa trajectoire 1X1 des DEG de compétence phys. équivalents à {Damage:AtkPer:BaseValue}% de l'ATQ.</String>
+  <String Key="SkillDesc_10820_Long">Yhoundeh marque la position d'un Héros ennemi, rassemble la puissance du Vent pendant {ChannelingTime}s, puis tire vers cette position une flèche de Vent qui traverse le Champ de bataille et inflige à tous les ennemis sur sa trajectoire 1X1 des DEG de compétence phys. équivalents à {Damage:AtkPer:BaseValue}% de l'ATQ. Lors de l'utilisation de compétence : jauge de Compétence ultime +1.</String>
+  <String Key="SkillDesc_10820_Short_2">Après {ChannelingTime}s de Concentration, tire une flèche de Vent qui traverse le Champ de bataille et inflige à tous les ennemis sur sa trajectoire 1X1 des DEG de compétence phys. équivalents à {Damage:AtkPer:BaseValue}% de l'ATQ.</String>
+  <String Key="SkillDesc_10820_Long_2">Yhoundeh marque la position d'un Héros ennemi, rassemble la puissance du Vent pendant {ChannelingTime}s, puis tire vers cette position une flèche de Vent qui traverse le Champ de bataille et inflige à tous les ennemis sur sa trajectoire 1X1 des DEG de compétence phys. équivalents à {Damage:AtkPer:BaseValue}% de l'ATQ. Lors de l'utilisation de compétence : Cumul de Kar +5 et jauge de Compétence ultime +1.</String>
+  <String Key="PassiveSkillName_10820">Rera kar</String>
+  <String Key="PassiveSkillDesc_10820_Short">Lors de l'attaque normale : cumul de Kar +1. Max {10820@Unit10820AI_FocusMaxStack}. AGI +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si la cible de l'attaque normale change, cumuls réinitialisés à 0 puis +1.</String>
+  <String Key="PassiveSkillDesc_10820_Long">Lors de l'attaque normale, gagne 1 cumul de Kar. Cumulable jusqu'à {10820@Unit10820AI_FocusMaxStack}, et l'AGI augmente de +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si l'attaque normale touche une cible différente de la précédente, les cumuls de Kar sont réinitialisés à 0, puis 1 cumul est gagné.</String>
+  <String Key="PassiveSkillDesc_10820_Short_1">Lors de l'attaque normale : cumul de Kar +1. Max {10820@Unit10820AI_FocusMaxStack}. AGI +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si la cible de l'attaque normale change, cumuls réinitialisés puis +1. Conserve au moins 10 cumuls.</String>
+  <String Key="PassiveSkillDesc_10820_Long_1">Lors de l'attaque normale, gagne 1 cumul de Kar. Cumulable jusqu'à {10820@Unit10820AI_FocusMaxStack}, et l'AGI augmente de +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si l'attaque normale touche une cible différente de la précédente, les cumuls de Kar sont réinitialisés, puis 1 cumul est gagné. Les cumuls de Kar restent à un minimum de 10.</String>
+  <String Key="PassiveSkillDesc_10820_Short_2">Lors de l'attaque normale : cumul de Kar +1. Max {10820@Unit10820AI_FocusMaxStack}. AGI +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si la cible de l'attaque normale change, cumuls réinitialisés puis +1. Conserve au moins 10 cumuls. Lors de l'utilisation de compétence ou de Compétence ultime : cumuls de Kar +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_2">Lors de l'attaque normale, gagne 1 cumul de Kar. Cumulable jusqu'à {10820@Unit10820AI_FocusMaxStack}, et l'AGI augmente de +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si l'attaque normale touche une cible différente de la précédente, les cumuls de Kar sont réinitialisés, puis 1 cumul est gagné. Les cumuls de Kar restent à un minimum de 10. Lors de l'utilisation de compétence ou de Compétence ultime : cumuls de Kar +5.</String>
+  <String Key="PassiveSkillDesc_10820_Short_3">Lors de l'attaque normale : cumul de Kar +1. Max {10820@Unit10820AI_FocusMaxStack}. AGI +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si la cible de l'attaque normale change, cumuls réinitialisés puis +1. Conserve au moins 10 cumuls. Lors de l'utilisation de compétence ou de Compétence ultime : cumuls de Kar +5.</String>
+  <String Key="PassiveSkillDesc_10820_Long_3">Lors de l'attaque normale, gagne 1 cumul de Kar. Cumulable jusqu'à {10820@Unit10820AI_FocusMaxStack}, et l'AGI augmente de +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si l'attaque normale touche une cible différente de la précédente, les cumuls de Kar sont réinitialisés, puis 1 cumul est gagné. Les cumuls de Kar restent à un minimum de 10. Lors de l'utilisation de compétence ou de Compétence ultime : cumuls de Kar +5.</String>
+  <String Key="PassiveSkillDesc_10820_Short_4">Lors de l'attaque normale : cumul de Kar +1. Max {10820@Unit10820AI_FocusMaxStack}(+30 par rapport à la valeur standard). AGI +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si la cible de l'attaque normale change, cumuls réinitialisés puis +1. Conserve au moins 10 cumuls. Lors de l'utilisation de compétence ou de Compétence ultime : cumuls de Kar +5. À cumuls max., l'attaque normale inflige toujours un coup critique.</String>
+  <String Key="PassiveSkillDesc_10820_Long_4">Lors de l'attaque normale, gagne 1 cumul de Kar. Cumulable jusqu'à {10820@Unit10820AI_FocusMaxStack}(+30 par rapport au maximum standard), et l'AGI augmente de +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si l'attaque normale touche une cible différente de la précédente, les cumuls de Kar sont réinitialisés, puis 1 cumul est gagné. Les cumuls de Kar restent à un minimum de 10. Lors de l'utilisation de compétence ou de Compétence ultime : cumuls de Kar +5. Quand les cumuls de Kar sont au max., l'attaque normale inflige toujours un coup critique.</String>
+  <String Key="PassiveSkillDesc_10820_Short_5">Lors de l'attaque normale : cumul de Kar +1. Max {10820@Unit10820AI_FocusMaxStack}(+30 par rapport à la valeur standard). AGI +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si la cible de l'attaque normale change, cumuls réinitialisés puis +1. Conserve au moins 10 cumuls. Lors de l'utilisation de compétence ou de Compétence ultime : cumuls de Kar +5. À cumuls max., l'attaque normale inflige toujours un coup critique. Lors de l'élimination d'un ennemi, les cumuls de Kar sont conservés pour la cible suivante.</String>
+  <String Key="PassiveSkillDesc_10820_Long_5">Lors de l'attaque normale, gagne 1 cumul de Kar. Cumulable jusqu'à {10820@Unit10820AI_FocusMaxStack}(+30 par rapport au maximum standard), et l'AGI augmente de +{10820@Unit10820AI_FocusAttackSpeedPer}% par cumul. Si l'attaque normale touche une cible différente de la précédente, les cumuls de Kar sont réinitialisés, puis 1 cumul est gagné. Les cumuls de Kar restent à un minimum de 10. Lors de l'utilisation de compétence ou de Compétence ultime : cumuls de Kar +5. Quand les cumuls de Kar sont au max., l'attaque normale inflige toujours un coup critique. Lors de l'élimination d'un ennemi, les cumuls de Kar sont conservés pour la cible suivante.</String>
+  <String Key="UltimateSkillName_10820">Rera epunkine</String>
+  <String Key="UltimateSkillDesc_10820_Short">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s.</String>
+  <String Key="UltimateSkillDesc_10820_Long">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens.</String>
+  <String Key="UltimateSkillDesc_10821_Short">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s.</String>
+  <String Key="UltimateSkillDesc_10821_Long">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens.</String>
+  <String Key="UltimateSkillDesc_10822_Short">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s.</String>
+  <String Key="UltimateSkillDesc_10822_Long">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens.</String>
+  <String Key="UltimateSkillDesc_10823_Short">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Au début du Combat, jauge de Compétence ultime +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens. Au début du Combat, la jauge de Compétence ultime augmente de {AddBattleStartUltimateGauge}.</String>
+  <String Key="UltimateSkillDesc_10820_Short_2">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s.</String>
+  <String Key="UltimateSkillDesc_10820_Long_2">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens.</String>
+  <String Key="UltimateSkillDesc_10821_Short_2">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s.</String>
+  <String Key="UltimateSkillDesc_10821_Long_2">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens.</String>
+  <String Key="UltimateSkillDesc_10822_Short_2">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s.</String>
+  <String Key="UltimateSkillDesc_10822_Long_2">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens.</String>
+  <String Key="UltimateSkillDesc_10823_Short_2">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Au début du Combat, jauge de Compétence ultime +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_2">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens. Au début du Combat, la jauge de Compétence ultime augmente de {AddBattleStartUltimateGauge}.</String>
+  <String Key="UltimateSkillDesc_10820_Short_3">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'élimination d'un ennemi, la durée est réinitialisée.</String>
+  <String Key="UltimateSkillDesc_10820_Long_3">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Si un ennemi est éliminé pendant la Compétence ultime, la durée est réinitialisée. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens.</String>
+  <String Key="UltimateSkillDesc_10821_Short_3">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'élimination d'un ennemi, la durée est réinitialisée.</String>
+  <String Key="UltimateSkillDesc_10821_Long_3">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Si un ennemi est éliminé pendant la Compétence ultime, la durée est réinitialisée. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens.</String>
+  <String Key="UltimateSkillDesc_10822_Short_3">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'élimination d'un ennemi, la durée est réinitialisée.</String>
+  <String Key="UltimateSkillDesc_10822_Long_3">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Si un ennemi est éliminé pendant la Compétence ultime, la durée est réinitialisée. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens.</String>
+  <String Key="UltimateSkillDesc_10823_Short_3">Yhoundeh s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Lors de l'élimination d'un ennemi, la durée est réinitialisée. Au début du Combat, jauge de Compétence ultime +{AddBattleStartUltimateGauge}</String>
+  <String Key="UltimateSkillDesc_10823_Long_3">Yhoundeh quitte le Champ de bataille, s'élève dans le ciel et tire des flèches sur un ennemi pendant {Time} s. Si un ennemi est éliminé pendant la Compétence ultime, la durée est réinitialisée. Lors de l'utilisation de la Compétence ultime, retire tous les effets d'état, Enchaînements et liens. Au début du Combat, la jauge de Compétence ultime augmente de {AddBattleStartUltimateGauge}.</String>
+  <String Key="Name_Overcome_10820_0">Rera Aye</String>
+  <String Key="Overcome_10820_0">Les cumuls de Kar restent à un minimum de 10</String>
+  <String Key="Name_Overcome_10820_1">Rera Nisor</String>
+  <String Key="Overcome_10820_1">Lors de l'utilisation de compétence ou de Compétence ultime : cumuls de Kar +5</String>
+  <String Key="Name_Overcome_10820_2">Kamuy Epunkine</String>
+  <String Key="Overcome_10820_2">Lors de l'élimination d'un ennemi pendant Rera epunkine, la durée de Rera epunkine est réinitialisée</String>
+  <String Key="Name_Overcome_10820_3">Yupke Rera</String>
+  <String Key="Overcome_10820_3">Cumuls de Kar max. +30. À cumuls de Kar max., les attaques normales contre la cible infligent toujours un coup critique</String>
+  <String Key="Name_Overcome_10820_4">Rera Kanto</String>
+  <String Key="Overcome_10820_4">Lors de l'élimination d'un ennemi, les cumuls de Kar sont conservés pour la cible suivante</String>
+  <String Key="IncarnationUnitSummon">Invocation de Héros de Transcendance</String>
+  <String Key="UnitGachaHighCountFormat">Après &lt;color=#FFD247&gt;{0}&lt;/color&gt; invocations, &lt;color=#FFD247&gt;un Héros transcendant/dimensionnel est garanti&lt;/color&gt;</String>
   <String Key="UnitGachaPickupCountFormat">&lt;color=#FFD247&gt;Héros en vedette garanti&lt;/color&gt; après &lt;color=#FFD247&gt;{0}&lt;/color&gt; Invocations</String>
+  <String Key="GachaNewIncarnationUnitPer">Un Héros transcendant apparaît !</String>
+  <String Key="IncarnationUnitPickupGachaDesc">À partir de la 81e invocation, la probabilité d'invoquer un Héros de Transcendance/Héros dimensionnel augmente de 5% à chaque invocation.
+Lorsqu'un Héros de Transcendance/Héros dimensionnel apparaît, le compteur d'invocation garantie est réinitialisé.
+Si vous invoquez un Héros de Transcendance/Héros dimensionnel qui n'est pas le Héros mis en avant, le prochain Héros de Transcendance/Héros dimensionnel que vous obtenez sera garanti comme étant le Héros mis en avant.
+Si vous invoquez le même Héros de Transcendance à l'Ascension maximale, vous obtenez 10 tickets d'Invocation de Héros dimensionnel à la place.</String>
+  <String Key="Premium">Premium</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumButton">Récompenses x2 ! Efficacité x20 !</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_0">Si vous achetez la Connexion Premium, vous pourrez obtenir toutes les récompenses en x2.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_1">Si vous achetez la Connexion Premium, les récompenses déjà obtenues seront aussi données en x2.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumDesc_2">La Connexion Premium n'est pas remboursable.</String>
+  <String Key="SixthYearDailyAttendanceEventPremiumApplied">Récompenses x2 actives !</String>
+  <String Key="SeasonalEventMode_Season74">Arène du Vent</String>
+  <String Key="SpecialDamageMulFormat">DEG spéciaux +{0}%</String>
+  <String Key="FlagsName_60000">Drapeau de l'Arène du Vent</String>
+  <String Key="FlagsDesc_60000">Le drapeau de ceux qui ont prouvé leur valeur dans l'Arène du Vent</String>
+  <String Key="FlagsName_60010">Drapeau de l'Avatar du Vent</String>
+  <String Key="FlagsDesc_60010">Un drapeau qui annonce la venue de l'Avatar du Vent et de la Victoire promise</String>
   <String Key="PlayReward_Semi1">Récompense de 1re moitié</String>
   <String Key="PlayReward_Semi2">Récompense de 2de moitié</String>
   <String Key="PlayRewardPlayCountFormat">&lt;color=#ffd264&gt;({0}/{1})&lt;/color&gt; parties</String>
+  <String Key="SpecialPackage_1699">Pack Serment</String>
+  <String Key="SpecialPackage_1700">Pack Déluge enflammé</String>
+  <String Key="InventoryItemName_5605">Coffre de sélection de skin du King God Pass</String>
+  <String Key="SeasonPassScheduledHeroTitle_74">Obtenir le Héros transcendant &lt;color=#D8B4FF&gt;Yhoundeh&lt;/color&gt;</String>
+  <String Key="SeasonPassScheduledHeroBenefit">Nouveau Héros offert</String>
+  <String Key="InventoryItemName_SSGuaranteedSetFormat">SS aléatoire {0}</String>
+  <String Key="InventoryItemName_SSGuaranteedBoxFormat">SS aléatoire {0}</String>
+  <String Key="InventoryItemDesc_SSGuaranteedBoxFormat">Obtenir un Coffre de sélection contenant un Accessoire spécial SS aléatoire du Set sélectionné.</String>
+  <String Key="InventoryItemDesc_SSGuaranteedSetFormat">Obtenez l'Accessoire sélectionné. 1 Effet secondaire aléatoire sera de grade SS.</String>
+  <String Key="AlreadyHaveFlag">Non reçu, car vous possédez déjà ce drapeau.</String>
+  <String Key="SeasonPassScheduledHeroInfo_74">Si vous possédez déjà le Héros : Ascension du Héros +1
+Si le Héros est à l'Ascension max., vous recevez &lt;color=#ffd264&gt;10 parchemins d'Invocation de Héros dimensionnel&lt;/color&gt; à la place</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_Class">&lt;{0}&gt; {1}</String>
+  <String Key="InventoryItemNameFormat_SelectableTreasureBox_ThreeClasses">&lt;{0}&gt; &lt;{1}&gt; &lt;{2}&gt; {3}</String>
+  <String Key="Post_Title_6thAnniversaryGift">Cadeau spécial du 6e anniversaire</String>
+  <String Key="KingsTreasureSelectiveSummon">Invocation sélective du trésor royal</String>
   <String Key="BlessedTreasure">Trésor béni</String>
+  <String Key="TreasureCustomPickupTitle">Invocation de trésor béni</String>
+  <String Key="UnitName_10820">Yhoundeh</String>
+  <String Key="UnitSubName_10820_1">Autrefois, on l'appelait aussi Hansi.</String>
+  <String Key="UnitSubName_10820">Gardien du vent</String>
+  <String Key="SkinDesc_Default_10820">Dans un petit village de l'Est, un gardien au caractère calme est né
+et a tout donné pour protéger les habitants.
+
+La flèche qui domine le ciel ne brûle plus la terre,
+elle est seulement devenue la maîtresse du vent sans fin.
+
+Tant que ce gardien protège le village,
+aucun être venu de l'extérieur ne pourra briser la paix.
+.
+.
+.
+.
+.
+.</String>
+  <String Key="IncarnationUnit_10820">Catastrophe</String>
+  <String Key="Introduce_10820">Le récit d'un survivant</String>
+  <String Key="SkinDesc_Default_10820_1">L'été dernier, un vent froid a commencé à souffler.
+Une brume de givre, comme de la fumée, remplissait tout autour,
+et une poussière froide et blanchâtre couvrait les toits, les champs et les feuilles.
+Les plantes gelaient, et les fruits tombaient au sol sans garder leur forme.
+
+Comme le vent ne s'arrêtait pas, le bois comme la pierre s'usaient et commençaient à s'effondrer.
+Le feu se propageait plus vite que nous ne pouvions le contenir, et nous en avons perdu le contrôle.
+Les vagues montaient sans fin, et comme nous ne pouvions pas leur résister, nous avons perdu la mer.
+Il n'y a aucun moyen d'échapper au froid mordant ni d'arrêter le vent semblable à des lames.
+Alors, aucun monstre ne peut approcher.
+
+Nous avons obtenu la paix.
+Nous avons perdu l'avenir.
+Il ne nous restait qu'à être engloutis, figés par le vent sans fin…</String>
+  <String Key="InventoryItemDesc_SelectableTreasureBox">Coffre permettant de sélectionner et d'obtenir un Trésor spécial disponible dans l'Invocation permanente.
+ Lors de l'utilisation, vous pouvez sélectionner une récompense dans la liste des objets.</String>
+  <String Key="IncarnationUnitPickupSummon">Invocation de Héros de Transcendance</String>
+  <String Key="GachaPickupDescFormat">Vous pouvez obtenir un Héros transcendant.</String>
+  <String Key="IncarnationUnitMaxOvercomeConvertedTicket">Un Héros à l'Ascension max. a été invoqué. Vous avez obtenu 10 parchemins d'Invocation de Héros dimensionnel.</String>
+  <String Key="SpecialTreasureSelectTitle">Invocation sélective de trésor spécial</String>
+  <String Key="SpecialTreasureSelectDesc">Choisissez 1 Trésor spécial parmi ceux qui peuvent apparaître dans l'Invocation permanente de Trésor, puis obtenez-le.
+Touchez le bouton d'achat pour voir la liste des Trésors disponibles.</String>
+  <String Key="SkinDesc_Default_10820_Simple">La flèche qui domine le ciel ne brûle plus la terre,
+elle est seulement devenue la maîtresse du vent sans fin.</String>
+  <String Key="LoginSkinName_10020">Écran de connexion du 6e anniversaire</String>
+  <String Key="LoginSkinDesc_10020">Écran de connexion du 6e anniversaire</String>
+  <String Key="ObtainableBySummoningIncarnationUnit">Peut être obtenu en invoquant un Héros transcendant</String>
 </Strings>

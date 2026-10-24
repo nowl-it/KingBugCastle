@@ -293,7 +293,7 @@
         <RandomOptions>
             <AddAttackSpeedPer>50</AddAttackSpeedPer>
             <BaseBaseMana>20</BaseBaseMana>
-            <BaseRange>1</BaseRange>
+            <BaseSpecialDamageMul>15</BaseSpecialDamageMul>
             <Bolt>35</Bolt>
             <BaseDefDen>10</BaseDefDen>
             <SuperShield>3</SuperShield>
@@ -320,7 +320,7 @@
         <RandomOptions>
             <AddAttackSpeedPer>50</AddAttackSpeedPer>
             <BaseBaseMana>20</BaseBaseMana>
-            <BaseRange>1</BaseRange>
+            <BaseSpecialDamageMul>15</BaseSpecialDamageMul>
             <BaseDefDen>10</BaseDefDen>
             <SuperShield>3</SuperShield>
             <Bolt>35</Bolt>
@@ -717,7 +717,7 @@
         <MergeLevelFrom>1</MergeLevelFrom>
         <MergeLevelTo>2</MergeLevelTo>
 
-        <HideTheme>1000</HideTheme>
+        <HideTheme>1000,209</HideTheme>
     </Item>
 
     <Item ID='10001'>
@@ -729,7 +729,7 @@
         <MergeLevelFrom>1</MergeLevelFrom>
         <MergeLevelTo>4</MergeLevelTo>
 
-        <HideTheme>1000</HideTheme>
+        <HideTheme>1000,209</HideTheme>
     </Item>
 
     <Item ID='10002'>
@@ -741,7 +741,7 @@
         <MergeLevelFrom>1</MergeLevelFrom>
         <MergeLevelTo>6</MergeLevelTo>
 
-        <HideTheme>1000</HideTheme>
+        <HideTheme>1000,209</HideTheme>
     </Item>
 
     <Item ID='10010'>
@@ -753,7 +753,7 @@
         <DescComment>성의 내구도가 1회복됩니다.</DescComment>
         <Heal>1</Heal>
         
-        <HideTheme>101,103,201,203,300,1000,3000</HideTheme>
+        <HideTheme>101,103,201,203,300,1000,3000,209</HideTheme>
     </Item>
 
     <Item ID='10011'>
@@ -769,7 +769,7 @@
         <DescComment>성의 내구도가 1회복됩니다.</DescComment>
         <Heal>1</Heal>
 
-        <HideTheme>101,103,201,203,300,1000,3000</HideTheme>
+        <HideTheme>101,103,201,203,300,1000,3000,209</HideTheme>
     </Item>
 
     <!-- <Item ID='10012'>
@@ -792,7 +792,7 @@
         <DescComment>진영이 1 확장됩니다.</DescComment>
         <Food>1</Food>
 
-        <HideTheme>1000</HideTheme>
+        <HideTheme>1000,209</HideTheme>
     </Item>
 
     <Item ID='10021'>
@@ -808,7 +808,7 @@
         <DescComment>진영이 1확장됩니다.</DescComment>
         <Food>1</Food>
 
-        <HideTheme>1000</HideTheme>
+        <HideTheme>1000,209</HideTheme>
     </Item>
 
     <Item ID='10022'>
@@ -824,7 +824,7 @@
         <DescComment>진영이 1확장됩니다.</DescComment>
         <Food>1</Food>
 
-        <HideTheme>1000</HideTheme>
+        <HideTheme>1000,209</HideTheme>
     </Item>
 
     <Item ID='10030'>
@@ -835,7 +835,7 @@
 
         <Gold>5</Gold>
 
-        <HideTheme>101,103,300</HideTheme>
+        <HideTheme>101,103,300,209</HideTheme>
     </Item>
 
     <Item ID='10031'>
@@ -846,7 +846,7 @@
 
         <Gold>10</Gold>
 
-        <HideTheme>101,103,300</HideTheme>
+        <HideTheme>101,103,300,209</HideTheme>
     </Item>
 
     <Item ID='10032'>
@@ -857,7 +857,7 @@
 
         <Gold>20</Gold>
 
-        <HideTheme>101,103,300</HideTheme>
+        <HideTheme>101,103,300,209</HideTheme>
     </Item>
 
     <Item ID='10040'>
@@ -869,7 +869,7 @@
         <RandomLevelUp>1</RandomLevelUp>
         <ShowTier>false</ShowTier>
 
-        <HideTheme>101,103,104,202,300,1000</HideTheme>
+        <HideTheme>101,103,104,202,300,1000,209</HideTheme>
     </Item>
 
     <Item ID='10041'>
@@ -885,7 +885,7 @@
         <RandomLevelUp>1</RandomLevelUp>
         <ShowTier>false</ShowTier>
 
-        <HideTheme>101,103,104,202,300,1000</HideTheme>
+        <HideTheme>101,103,104,202,300,1000,209</HideTheme>
     </Item>
 
     <!-- <Item ID='10042'>
@@ -907,7 +907,7 @@
         <DescComment>다음 2회의 영웅소환시 2성 영웅이 소환됩니다.</DescComment>
         <SpawnLevelUpCount>2</SpawnLevelUpCount>
 
-        <HideTheme>1000</HideTheme>
+        <HideTheme>1000,209</HideTheme>
     </Item>
 
     <Item ID='10051'>
@@ -919,7 +919,7 @@
         <DescComment>다음 4회의 영웅소환시 2성 영웅이 소환됩니다.</DescComment>
         <SpawnLevelUpCount>4</SpawnLevelUpCount>
 
-        <HideTheme>1000</HideTheme>
+        <HideTheme>1000,209</HideTheme>
     </Item>
 
     <Item ID='10052'>
@@ -931,7 +931,7 @@
         <DescComment>다음 6회의 영웅소환시 2성 영웅이 소환됩니다.</DescComment>
         <SpawnLevelUpCount>6</SpawnLevelUpCount>
 
-        <HideTheme>1000</HideTheme>
+        <HideTheme>1000,209</HideTheme>
     </Item>
 
     <Item ID='10053'>
@@ -1290,9 +1290,9 @@
         <DescParams>
             <InnerText>./ItemBuffOptions[2]/Values/FixedValue</InnerText>
             <InnerText>./ItemBuffOptions[4]/Values/FixedValue</InnerText>
-            <InnerText>./ItemBuffOptions[6]/Values/FixedValue</InnerText>
+            <InnerText>./ItemBuffOptions[5]/Values/FixedValue</InnerText>
         </DescParams>
-        
+
     <!-- 버프 지급 -->
         <!-- 타일 제거용 타일 설치 -->
         <ItemBuffOptions>
@@ -1313,50 +1313,6 @@
             </BuffContents>
 
             <Values>
-            </Values>
-        </ItemBuffOptions>
-        <!-- 6초간 이동 중지 -->
-        <ItemBuffOptions>
-            <Conditions>
-                <BattleStart/>
-            </Conditions>
-            
-            <Targets>
-                <Self/>
-            </Targets>
-            
-            <RangeInfo>
-                <RangeType>Self</RangeType>
-            </RangeInfo>
-            
-            <BuffContents>
-                <AddMoveStopTime/>
-            </BuffContents>
-            
-            <Values>
-                <FixedValue>10</FixedValue>
-            </Values>
-        </ItemBuffOptions>
-        <!-- 사거리 증가 -->
-        <ItemBuffOptions>
-           <Conditions>
-               <BattleStart/>
-           </Conditions>
-            
-            <Targets>
-                <Self/>
-            </Targets>
-            
-            <RangeInfo>
-                <RangeType>Self</RangeType>
-            </RangeInfo>
-            
-            <BuffContents>
-                <AddStat StatType="Range" StatValueType="Value"/>
-            </BuffContents>
-            
-            <Values>
-                <FixedValue>3</FixedValue>
             </Values>
         </ItemBuffOptions>
         <!-- 매 5회 공격 시 데미지 증폭 -->
@@ -1425,36 +1381,33 @@
             </BuffContents>
 
             <Values>
-                <FixedValue>1</FixedValue>
+                <FixedValue>4</FixedValue>
+            </Values>
+        </ItemBuffOptions>
+        <!-- 이동 불가 -->
+        <ItemBuffOptions>
+            <Conditions>
+                <BattleStart/>
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <AddMoveStopTime/>
+            </BuffContents>
+
+            <Values>
+                <FixedValue>3</FixedValue>
             </Values>
         </ItemBuffOptions>
         
-    <!-- 버프 회수 -->
-        <!-- 타일 제거 -->
-        <ItemBuffOptions>
-            <CoolTime>10</CoolTime>
-            <ResetCounters>false</ResetCounters>
-
-            <Conditions>
-                <DuringBattle/>
-            </Conditions>
-
-            <Targets>
-                <Self/>
-            </Targets>
-
-            <RangeInfo>
-                <RangeType>Self</RangeType>
-            </RangeInfo>
-
-            <BuffContents>
-                <RemoveTileEffect Prefab="Fx_Artifact_14020" AllTiles="true"/>
-            </BuffContents>
-
-            <Values>
-            </Values>
-        </ItemBuffOptions>
-        <!-- 타일 제거 -->
+    <!-- 버프 회수: 저격 장소에서 벗어나면 해제 (넉백/끌려감/스킬 이동 = AfterMove, 도보 이동 = TileMoveUpdate) -->
         <ItemBuffOptions>
             <Conditions>
                 <AfterMove />
@@ -1475,48 +1428,63 @@
             <Values>
             </Values>
         </ItemBuffOptions>
-        <!-- 버프 제거 -->
-        <ItemBuffOptions>
-            <CoolTime>10</CoolTime>
-            <ResetCounters>false</ResetCounters>
-            
-            <Conditions>
-                <DuringBattle/>
-            </Conditions>
-            
-            <Targets>
-                <Self/>
-            </Targets>
-            
-            <RangeInfo>
-                <RangeType>Self</RangeType>
-            </RangeInfo>
-            
-            <BuffContents>
-                <Dispose/>
-            </BuffContents>
-            
-            <Values>
-            </Values>
-        </ItemBuffOptions>
-        <!-- 버프 제거 -->
         <ItemBuffOptions>
             <Conditions>
                 <AfterMove />
             </Conditions>
-            
+
             <Targets>
                 <Self/>
             </Targets>
-            
+
             <RangeInfo>
                 <RangeType>Self</RangeType>
             </RangeInfo>
-            
+
             <BuffContents>
                 <Dispose/>
             </BuffContents>
-            
+
+            <Values>
+            </Values>
+        </ItemBuffOptions>
+        <ItemBuffOptions>
+            <Conditions>
+                <TileMoveUpdate />
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <RemoveTileEffect Prefab="Fx_Artifact_14020" AllTiles="true"/>
+            </BuffContents>
+
+            <Values>
+            </Values>
+        </ItemBuffOptions>
+        <ItemBuffOptions>
+            <Conditions>
+                <TileMoveUpdate />
+            </Conditions>
+
+            <Targets>
+                <Self/>
+            </Targets>
+
+            <RangeInfo>
+                <RangeType>Self</RangeType>
+            </RangeInfo>
+
+            <BuffContents>
+                <Dispose/>
+            </BuffContents>
+
             <Values>
             </Values>
         </ItemBuffOptions>
@@ -1533,13 +1501,6 @@
         </ItemBuffOptions>
         <ItemBuffOptions>
             <Values>
-                <FixedValue>15</FixedValue>
-            </Values>
-        </ItemBuffOptions>
-        <ItemBuffOptions>
-        </ItemBuffOptions>
-        <ItemBuffOptions>
-            <Values>
                 <FixedValue>200</FixedValue>
             </Values>
         </ItemBuffOptions>
@@ -1547,20 +1508,18 @@
         </ItemBuffOptions>
         <ItemBuffOptions>
             <Values>
-                <FixedValue>2</FixedValue>
+                <FixedValue>4</FixedValue>
             </Values>
         </ItemBuffOptions>
-        
+        <ItemBuffOptions>
+        </ItemBuffOptions>
+
         <!-- 버프 회수 -->
         <ItemBuffOptions>
-            <CoolTime>15</CoolTime>
-            <ResetCounters>false</ResetCounters>
         </ItemBuffOptions>
         <ItemBuffOptions>
         </ItemBuffOptions>
         <ItemBuffOptions>
-            <CoolTime>15</CoolTime>
-            <ResetCounters>false</ResetCounters>
         </ItemBuffOptions>
         <ItemBuffOptions>
         </ItemBuffOptions>
@@ -1572,13 +1531,6 @@
         </ItemBuffOptions>
         <ItemBuffOptions>
             <Values>
-                <FixedValue>20</FixedValue>
-            </Values>
-        </ItemBuffOptions>
-        <ItemBuffOptions>
-        </ItemBuffOptions>
-        <ItemBuffOptions>
-            <Values>
                 <FixedValue>300</FixedValue>
             </Values>
         </ItemBuffOptions>
@@ -1586,20 +1538,18 @@
         </ItemBuffOptions>
         <ItemBuffOptions>
             <Values>
-                <FixedValue>3</FixedValue>
+                <FixedValue>4</FixedValue>
             </Values>
+        </ItemBuffOptions>
+        <ItemBuffOptions>
         </ItemBuffOptions>
 
         <!-- 버프 회수 -->
         <ItemBuffOptions>
-            <CoolTime>20</CoolTime>
-            <ResetCounters>false</ResetCounters>
         </ItemBuffOptions>
         <ItemBuffOptions>
         </ItemBuffOptions>
         <ItemBuffOptions>
-            <CoolTime>20</CoolTime>
-            <ResetCounters>false</ResetCounters>
         </ItemBuffOptions>
         <ItemBuffOptions>
         </ItemBuffOptions>
@@ -1607,13 +1557,6 @@
 
     <Item ID="21033" Inherit="21030">
         <!-- 버프 지급 -->
-        <ItemBuffOptions>
-        </ItemBuffOptions>
-        <ItemBuffOptions>
-            <Values>
-                <FixedValue>25</FixedValue>
-            </Values>
-        </ItemBuffOptions>
         <ItemBuffOptions>
         </ItemBuffOptions>
         <ItemBuffOptions>
@@ -1628,17 +1571,15 @@
                 <FixedValue>4</FixedValue>
             </Values>
         </ItemBuffOptions>
+        <ItemBuffOptions>
+        </ItemBuffOptions>
 
         <!-- 버프 회수 -->
         <ItemBuffOptions>
-            <CoolTime>25</CoolTime>
-            <ResetCounters>false</ResetCounters>
         </ItemBuffOptions>
         <ItemBuffOptions>
         </ItemBuffOptions>
         <ItemBuffOptions>
-            <CoolTime>25</CoolTime>
-            <ResetCounters>false</ResetCounters>
         </ItemBuffOptions>
         <ItemBuffOptions>
         </ItemBuffOptions>

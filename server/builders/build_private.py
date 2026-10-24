@@ -25,7 +25,7 @@ REPO = pathlib.Path(os.environ.get("KGC_ROOT") or pathlib.Path(__file__).resolve
 # The v173.1.00 packer (liberallisi.so) is byte-identical to v173.0.00's
 # (libbisedich.so) at all 8 NEO_SIG_SITES + 4 parser-error sites, so the v173
 # NEO table covers both builds - only the per-version il2cpp tables moved.
-SRC = os.environ.get("KGC_APK_SRC", "xapk_extracted_v1731")
+SRC = os.environ.get("KGC_APK_SRC", "xapk_extracted_v1741")
 XAPK = REPO / "apk" / SRC
 if not XAPK.is_dir():
     raise SystemExit(f"no such APK source: {XAPK}")
@@ -41,50 +41,32 @@ WORK = REPO / (".rebuild_" + SRC.replace("xapk_extracted_", ""))
 # index of every literal above it, and libil2cpp has those indices baked into its code
 # - so the v171.0.00 lib resolves 94% of its literals to the wrong entry against any
 # newer metadata. Every other section of the two files is identical.
-# v173.1.00 is the newest build (2026-09-22 patch). Its recovered lib (unpacked
-# from the liberallisi.so packer by server/patchers/unpack_neo.py) pairs with the
-# shipped metadata - no swap needed.
-_NATIVE = REPO / "il2cpp" / "v173.1.00" / "libil2cpp_v1731_ssl.so"
-if SRC == "xapk_extracted_v1731" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-    VER = "173.1.00"
-    IL2CPP_DEC = _NATIVE
-    METADATA_DEC = None                 # the shipped metadata already matches
-else:
-    _NATIVE = REPO / "il2cpp" / "v173.0.00" / "libil2cpp_v173_ssl.so"
-    if SRC == "xapk_extracted_v1730" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-        VER = "173.0.00"
-        IL2CPP_DEC = _NATIVE
-        METADATA_DEC = None                 # the shipped metadata already matches
-    else:
-        _NATIVE = REPO / "il2cpp" / "v172.1.00" / "libil2cpp_v1721_ssl.so"
-        if SRC == "xapk_extracted_v1721" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-            VER = "172.1.00"
-            IL2CPP_DEC = _NATIVE
-            METADATA_DEC = None                 # the shipped metadata already matches
-        else:
-            _NATIVE = REPO / "il2cpp" / "v172.0.01" / "libil2cpp_v17201_ssl.so"
-            if SRC == "xapk_extracted_v17201" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-                VER = "172.0.01"
-                IL2CPP_DEC = _NATIVE
-                METADATA_DEC = None                 # the shipped metadata already matches
-            else:
-                _NATIVE = REPO / "il2cpp" / "v172.0.00" / "libil2cpp_v172_ssl.so"
-                if SRC == "xapk_extracted_v1720" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-                    VER = "172.0.00"
-                    IL2CPP_DEC = _NATIVE
-                    METADATA_DEC = None                 # the shipped metadata already matches
-                else:
-                    _NATIVE = REPO / "il2cpp" / "v171.1.00" / "libil2cpp_v17110_ssl.so"
-                    if SRC == "xapk_extracted_v1711" and _NATIVE.exists() and not os.environ.get("KGC_FORCE_V17100"):
-                        VER = "171.1.00"
-                        IL2CPP_DEC = _NATIVE
-                        METADATA_DEC = None                 # the shipped metadata already matches
-                    else:
-                        VER = "171.0.00"
-                        IL2CPP_DEC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
-                        METADATA_DEC = REPO / "il2cpp" / "v171.0.00" / "global-metadata.dat"
+# Each row is a build whose recovered lib (unpacked from that build's own packer
+# by server/patchers/unpack_neo.py) pairs with the metadata the APK ships - no
+# metadata swap needed. Newest first; SRC picks the row.
+_NATIVE_LADDER = [
+    ("174.1.00", "xapk_extracted_v1741", "v174.1.00", "libil2cpp_v1741_ssl.so"),
+    ("173.1.00", "xapk_extracted_v1731", "v173.1.00", "libil2cpp_v1731_ssl.so"),
+    ("173.0.00", "xapk_extracted_v1730", "v173.0.00", "libil2cpp_v173_ssl.so"),
+    ("172.1.00", "xapk_extracted_v1721", "v172.1.00", "libil2cpp_v1721_ssl.so"),
+    ("172.0.01", "xapk_extracted_v17201", "v172.0.01", "libil2cpp_v17201_ssl.so"),
+    ("172.0.00", "xapk_extracted_v1720", "v172.0.00", "libil2cpp_v172_ssl.so"),
+    ("171.1.00", "xapk_extracted_v1711", "v171.1.00", "libil2cpp_v17110_ssl.so"),
+]
+VER = IL2CPP_DEC = METADATA_DEC = None
+if not os.environ.get("KGC_FORCE_V17100"):
+    for _ver, _src, _dir, _lib in _NATIVE_LADDER:
+        _p = REPO / "il2cpp" / _dir / _lib
+        if SRC == _src and _p.exists():
+            VER, IL2CPP_DEC, METADATA_DEC = _ver, _p, None
+            break
+if VER is None:                                   # v171.0.00 fallback (needs the swap)
+    VER = "171.0.00"
+    IL2CPP_DEC = REPO / "il2cpp" / "v171.0.00" / "libil2cpp_v171_ssl.so"
+    METADATA_DEC = REPO / "il2cpp" / "v171.0.00" / "global-metadata.dat"
+print(f"[+] game version: {VER}")
 # Every il2cpp offset below is per-lib, so this picks which table to use.
-VER_IS_NATIVE = VER in ("171.1.00", "172.0.00", "172.0.01", "172.1.00", "173.0.00", "173.1.00")
+VER_IS_NATIVE = VER not in ("171.0.00",)
 # Host to rebind the 5 backend hostnames to (private server). Default 127.0.0.1
 # reaches the local server via `adb reverse tcp:443 tcp:8443`. Override with
 # SHARE_HOST=<ip-or-domain> for a remote/shared build.
@@ -106,7 +88,7 @@ GLOGIN_SCHEME = os.environ.get("GLOGIN_SCHEME", "https" if SHARE_HOST != "127.0.
 # Private-server identity: rename so it installs side-by-side with the real app.
 OLD_PKG = "com.awesomepiece.castle"
 NEW_PKG = "com.nowl.castle"
-NEW_LABEL = "King Bug Castle"
+NEW_LABEL = os.environ.get("APP_LABEL", "King Bug Castle")
 PATCHERS = REPO / "server" / "patchers"
 
 ORIG_APKS = {
@@ -130,7 +112,8 @@ CHECKFIREBASE_OFF = {"171.0.00": 0x303C6C0,
                       "172.0.01": 0x30439B8,
                       "172.1.00": 0x3081350 - 0x4000,
                       "173.0.00": 0x30B7844,
-                      "173.1.00": 0x30C6D50}[VER]
+                      "173.1.00": 0x30C6D50,
+                      "174.1.00": 0x318DC64 - 0x4000}[VER]
 RET = bytes.fromhex('c0035fd6')  # arm64 `ret`
 
 # OBSOLETE, opt-in only (KGC_ASSETBYPASS=1). The "infinite UniTask recursion" this was
@@ -145,13 +128,17 @@ CHECKUSEASSET_OFF = {"171.1.00": 0x34f9588 - 0x4000,
                       "172.0.01": 0x3503404 - 0x4000,
                       "172.1.00": 0x353CB6C - 0x4000,
                       "173.0.00": 0x3577CF4,
-                      "173.1.00": 0x3587424}[VER]
+                      "173.1.00": 0x3587424,
+                      "174.1.00": 0x3696934 - 0x4000}[VER]
 # mov w1,#1 (0x52000021) ; b LoadAfterAssetBundle. Displacement per version:
 # v171.1.00 target RVA 0x34f9618 = site +0x8C (0x14000023),
 # v172.0.00 target RVA 0x3501E60 = site +0x90 (0x14000024),
 # v172.0.01 target RVA 0x3503494 = site +0x90 (0x14000024),
-# v172.1.00 target RVA 0x353CBFC = site +0x90 (0x14000024).
-CHECKUSEASSET_PATCH = bytes.fromhex('2100005223000014' if VER == "171.1.00" else '2100005224000014')
+# v172.1.00 target RVA 0x353CBFC = site +0x90 (0x14000024),
+# v174.1.00 target RVA 0x36969C4 = site +0x8C (0x14000023).
+CHECKUSEASSET_PATCH = bytes.fromhex('2100005223000014'
+                                    if VER in ("171.1.00", "174.1.00") else
+                                    '2100005224000014')
     
 
 # PvPPanel.<Init>d__77.MoveNext -> early return false. Same NRE stub v170 applies
@@ -259,6 +246,25 @@ _NRE_STUBS_V17310 = [
     (0x35392BC, "content-alert", 'fe0f1bf8fa6701a9', RET_FALSE),  # WorldPanel.ReloadNewContentAlert
     (0x30EDEB4, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
     (0x2D37F58, "ranking-endpt", 'fe0f1ef8f44f01a9', bytes.fromhex('a8dc01f0089542f9080140f9085d40f9000540f9c0035fd6')), # Web.GetRankingServerEndPoint -> Web._endPoint
+    (0x30EFD3C, "has-skin",      'ff4301d1fe5f02a9', RET_TRUE),   # GameManager.HasSkin -> every skin counts as owned (skin mod)
+]
+# v174.1.00 (2026-10-22 patch). Same 12 stubs; every RVA re-derived from this
+# build's own dump.cs by class + signature, prologue cross-checked against the
+# lib (11/12 byte-identical to v173.1.00 - only PvPPanel.<Init>d__77.MoveNext's
+# stack frame grew, 0x1e0 -> 0x170).
+_NRE_STUBS_V17410 = [
+    (0x33AD518, "pvp-init",      'ffc303d1fd7b09a9', RET_FALSE),  # PvPPanel.<Init>d__77.MoveNext
+    (0x33A8090, "pvp-reward",    'fe0f1bf8fa6701a9', RET_FALSE),  # PvPPanel.GetReceivableWinRewardCount
+    (0x343D078, "shop-growth",   'fe0f1af8fc6f01a9', RET_FALSE),  # PackageItem.InitCustomGrowthPackage
+    (0x343F1CC, "shop-season",   'ff4301d1fe6701a9', RET_FALSE),  # PackageItem.InitSeasonPassPackage
+    (0x31A4160, "year-event",    'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsYearEventAvailable
+    (0x31A63F4, "card-event",    'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsEventCardCollectingAvailable
+    (0x31A62EC, "season-event",  'fe0f1ef8f44f01a9', RET_FALSE),  # GameManager.IsSpecialSeasonalEventOpened
+    (0x318AA90, "babel-data",    'fe0f1df8f65701a9', RET_FALSE),  # GameManager.GetBabelData -> null
+    (0x3625DE8, "content-alert", 'fe0f1bf8fa6701a9', RET_FALSE),  # WorldPanel.ReloadNewContentAlert
+    (0x31B1628, "accessory",     'fe0f1ff8088c40f9', RET_TRUE),   # GameManager.IsAccessoryUnlocked
+    (0x2E02374, "ranking-endpt", 'fe0f1ef8f44f01a9', bytes.fromhex('28dd01f0087546f9080140f9085d40f9000540f9c0035fd6')), # Web.GetRankingServerEndPoint -> Web._endPoint (slot page 0x69a9000 + 0xce8)
+    (0x31B34B0, "has-skin",      'ff4301d1fe5f02a9', RET_TRUE),   # GameManager.HasSkin -> every skin counts as owned (skin mod)
 ]
 NRE_STUBS = {"171.0.00": _NRE_STUBS_V17100,
              "171.1.00": _NRE_STUBS_V17110,
@@ -266,7 +272,8 @@ NRE_STUBS = {"171.0.00": _NRE_STUBS_V17100,
              "172.0.01": _NRE_STUBS_V17201,
              "172.1.00": _NRE_STUBS_V17210,
              "173.0.00": _NRE_STUBS_V17300,
-             "173.1.00": _NRE_STUBS_V17310}[VER]
+             "173.1.00": _NRE_STUBS_V17310,
+             "174.1.00": _NRE_STUBS_V17410}[VER]
 
 # Scene_Base.RegisterHackDetectionCallback @ RVA 0x34DB060 (file 0x34D7060).
 # Stub it to ret (no-op) so the managed callback that shows "File integrity check
@@ -284,7 +291,8 @@ REGISTER_HACK_DETECT_OFF = {"171.0.00": 0x34D7060,
                              "172.0.01": 0x34E4EDC - 0x4000,
                              "172.1.00": 0x351D9F0 - 0x4000,
                              "173.0.00": 0x35595A0,
-                             "173.1.00": 0x3568CA8}[VER]
+                             "173.1.00": 0x3568CA8,
+                             "174.1.00": 0x3677830 - 0x4000}[VER]
 REGISTER_HACK_DETECT_ORIG = 'fe57bea9'  # stp x30, x21, [sp, #-0x20]!
 REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
 
@@ -295,7 +303,8 @@ REGISTER_HACK_DETECT_NEW  = 'c0035fd6'  # ret
 CANUSEFIREBASE_OFF = {"172.0.01": 0x370cee8,
                        "172.1.00": 0x37470A4,
                        "173.0.00": 0x37872B0,
-                       "173.1.00": 0x3798E14}[VER]
+                       "173.1.00": 0x3798E14,
+                       "174.1.00": 0x2CDAB2C - 0x4000}[VER]
 CANUSEFIREBASE_ORIG = 'c8010034'  # cbz w8, +0x38
 CANUSEFIREBASE_NEW  = '1f2003d5'  # nop
 
@@ -323,6 +332,9 @@ FIREBASE_LOGEVENT_STUBS = {"172.0.01": [
 ], "173.1.00": [
     (0x37EB890, 'fe0f1df8f65701a9'),
     (0x37EB8F4, 'fe67bca9f85f01a9'),
+], "174.1.00": [
+    (0x388E4B4, 'fe0f1df8f65701a9'),
+    (0x388E518, 'fe67bca9f85f01a9'),
 ]}.get(VER, [])
 
 # Addressables passes AssetBundleRequestOptions.Crc into Unity's native bundle
@@ -347,6 +359,10 @@ ASSETBUNDLE_CRC_GETTER = {"172.0.01": (
     0x60CA5BC,
     '001840b9c0035fd6',
     'e0031f2ac0035fd6',
+), "174.1.00": (
+    0x619CA78 - 0x4000,
+    '001840b9c0035fd6',  # ldr w0,[x0,#0x18]; ret
+    'e0031f2ac0035fd6',  # mov w0,wzr; ret
 )}.get(VER)
 ASSETBUNDLE_CRC_READS = {"172.0.01": [
     # AssetBundleResource.LoadLocalBundle: crc argument w1.
@@ -368,6 +384,10 @@ ASSETBUNDLE_CRC_READS = {"172.0.01": [
     (0x60CCB30, '011940b9', 'e1031f2a'),
     (0x60CAA48, '011940b9', 'e1031f2a'),
     (0x60CAB38, '021940b9', 'e2031f2a'),
+], "174.1.00": [
+    (0x619EFEC - 0x4000, '011940b9', 'e1031f2a'),
+    (0x619CF04 - 0x4000, '011940b9', 'e1031f2a'),
+    (0x619CFF4 - 0x4000, '021940b9', 'e2031f2a'),
 ]}.get(VER, [])
 
 # --- XIGNCODE NEO loader (the packer .so in the config split) ---------------
@@ -392,7 +412,7 @@ NEO_SIG_SITES = [
     (0x43914, '80feff37'), (0x4391c, '40feff37'), (0x43924, '00feff37'),
     (0x43954, '80fcff37'), (0x43ae0, '20f0ff37'), (0x43b24, '0013f837'),
     (0x43b40, '0012f837'), (0x43b50, 'a01100b4'),
-] if VER in ("173.0.00", "173.1.00") else _NEO_SIG_SITES_OLD
+] if VER in ("173.0.00", "173.1.00", "174.1.00") else _NEO_SIG_SITES_OLD
 # Payload-parser error returns: `mov w8,#-1 ; str w8,[sp,#0x94] ; b <exit>`.
 # NOP the `b` so the error is ignored. Located by pattern rather than offset -
 # the 8-byte prefix occurs exactly 4x in both v171.0.00 and v171.0.01, at the
@@ -612,7 +632,14 @@ def patch_aledatic_and_inject_il2cpp(apk_path):
     # NOTE: upstream's cbz bail target (0x32E0BEC) is a THROW helper, not the method
     # epilogue - jumping there raises NullReferenceException. Our patch redirects both
     # bails to the real epilogue 0x32E0BD0 (ldp x20,x19,[sp,#0x60];...ret).
-    if VER == "173.1.00":
+    if VER == "174.1.00":
+        # ShopItem$$Init site +0x278 into the method; the epilogue (`ldp x20,x19,
+        # [sp,#0x60] ... ret`) sits at +0x254 exactly as in v172/v173, so both cbz
+        # displacements are the same words again - only the trailing `bl` differs.
+        SHOP_INIT_OFF = 0x344F034
+        SHOP_INIT_ORIG = bytes.fromhex('941300b4e8ab01b0084d46f9f60300aae00314aae1031f2a020140f9060b3394')
+        SHOP_INIT_NEW = bytes.fromhex('b41200b4881a40b968120034f60300aae00314aae1031f2a1f2003d5060b3394')
+    elif VER == "173.1.00":
         # Re-derived from this build's script.json: ShopItem$$Init (index 5)
         # RVA 0x3367BAC -> site +0x274 = file 0x3363E24. Both cbz displacements
         # (+0x254 to the real epilogue ldp x20,x19 / +0x24C to the canary cmp)
@@ -785,7 +812,7 @@ def main():
 
     base_apk = outputs["base"]
 
-    print("[+] Renaming label -> King Bug Castle...")
+    print(f"[+] Renaming label -> {NEW_LABEL}...")
     subprocess.run([sys.executable, str(PATCHERS / "patch_rename.py"),
                     str(base_apk), NEW_LABEL], check=True)
 

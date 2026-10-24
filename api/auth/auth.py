@@ -7,7 +7,8 @@ Real auth flow (confirmed from MITM captures v165):
   3. GET /auth/xcd?cookie=<xigncode_cookie> -> accessToken stored on device
   4. POST /auth/login + accesstoken header  -> player state loaded
 
-AES key v169.0.03: b53019bb76da6b34 (ECB, zeros pad, hex body)
+AES key: a6072ad6b9c959ff (ECB, zeros pad, hex body) - the same key as server/crypto.py;
+the old v169 value b53019bb76da6b34 makes prod answer HTTP 400 (dev-notes §33)
 POST body format: raw hex string, Content-Type: application/json
 Auth header name: accesstoken (not Authorization: Bearer)
 
@@ -100,8 +101,10 @@ def register(
 
 
 def shake_hand() -> dict:
-    """POST /auth/shake-hand - heartbeat, keep session alive."""
-    return post("/auth/shake-hand")
+    """GET /auth/shake-hand - heartbeat, keep session alive (the game pings this
+    from Scene_Game.UpdateImpl to slide the server's session window).
+    POST returns 405 - verified 2026-10-11."""
+    return get("/auth/shake-hand")
 
 
 def check_patch_version(version: str) -> dict:

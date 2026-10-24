@@ -423,6 +423,9 @@ DYNAMIC_OVERRIDES = {
     "/player/currencies": lambda b, st: {"gold": st.get("gold", 0), "cash": st.get("cash", 0), "heart": st.get("heart", 0)},
     "/player/tutorial-status": lambda b, st: {"keyValues": _tutorial_key_values(st)},
     "/player/tutorial/complete": lambda b, st: {"keyValues": _tutorial_key_values(st)},
+    # [S4-3] Mua thêm slot deck (§73): DeckSlotCount là client-authoritative (keyValues),
+    # server chỉ cần trả success để client tự tăng count + ReloadAllToggles.
+    "/deck/buyDeckSlot": lambda b, st: {"success": True, "code": 200, "msg": None},
     "/player/add-inventory-count": lambda b, st: {
         "playerCash": st.get("cash", 0),
         "inventoryCount": 999
@@ -760,6 +763,13 @@ async def infra_discovery(request: Request):
         "cachedInfo": {"useSideCar": False, "useReplicaDB": False},
     }
     return JSONResponse({"serverList": [endpoint_data]})
+
+# --- Static file serving (skin intro videos, etc.) ---
+from pathlib import Path as _Path
+_static_dir = _Path(__file__).parent / "static"
+if _static_dir.is_dir():
+    from starlette.staticfiles import StaticFiles
+    app.mount("/static", StaticFiles(directory=str(_static_dir)), name="static")
 
 for _r in ROUTE_MODELS:
     app.add_api_route(_r, make_handler(_r), methods=["GET", "POST", "PUT"])

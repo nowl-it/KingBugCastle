@@ -10,7 +10,11 @@
         <Icon> 진입 버튼 아이콘
         <Illust> 일러스트
         <IllustOffsetX>, <IllustOffsetY> 일러스트 오프셋
-        <IllustScale> 일러스트 스케일
+        <IllustScale> 일러스트 스케일 (IllustAutoScale=false이면 고정 배율)
+        <IllustAutoScale> true이면 스케일 조정, false이면 배율을 유지하고 영역 높이 조정 (기본 false)
+        <IllustMinHeight> 배율 적용 전 최소 Height (기본 0, 최대 높이 이하로 제한, false이면 RectTransform.height 기준)
+        <IllustMaxHeight> 배율 적용 전 최대 Height (생략 또는 0이면 프리팹 높이, true이면 해당 높이에 맞춰 스케일 조정)
+        <IllustTopMargin> 화면 UI 좌표 기준 상단 여백 (기본 0, 최대 높이가 들어갈 공간이 있으면 미적용, 최소 높이 우선)
     -->
     <SurpriseAttendanceEvent ID='1'>
         <Title>Christmas_Attendance_Event</Title>
@@ -228,5 +232,84 @@
         <IllustOffsetX>-30</IllustOffsetX>
         <IllustOffsetY>-50</IllustOffsetY>
         <IllustScale>1.3</IllustScale>
+    </SurpriseAttendanceEvent>
+    <SurpriseAttendanceEvent ID='6'>
+        <Title>SixthYearDailyAttendanceEvent</Title>
+        <ParticipateStartAt>20261008</ParticipateStartAt>
+        <ParticipateEndAt>20261104</ParticipateEndAt>
+        <EventEndAt>20261104</EventEndAt>
+        <Type>15</Type>
+        <MaxDay>28</MaxDay>
+        <AttendanceRewards>
+            <AttendanceReward Day='1'>
+                <Reward Type='Treasure_Special' Count='1' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='2'>
+                <Reward Type='NewUnitGachaItem' ID='-1' Count='3' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='3'>
+                <Reward Type='Treasure_Special' Count='1' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='4'>
+                <Reward Type='NewUnitGachaItem' ID='-1' Count='3' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='5'>
+                <Reward Type='Cash' ID='-1' Count='100' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='6'>
+                <Reward Type='InventoryItem' ID='5506' Count='5' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='7'>
+                <Reward Type='InventoryItem' ID='7000' Count='1' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='8'>
+                <Reward Type='InventoryItem' ID='5506' Count='5' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='9'>
+                <Reward Type='InventoryItem' ID='7000' Count='1' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='10'>
+                <Reward Type='InventoryItem' ID='5507' Count='1' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='11'>
+                <Reward Type='InventoryItem' ID='8123' Count='1' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='12'>
+                <Reward Type='InventoryItem' ID='8200' Count='1' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='13'>
+                <Reward Type='InventoryItem' ID='8125' Count='1' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='14'>
+                <Reward Type='InventoryItem' ID='8200' Count='1' />
+            </AttendanceReward>
+
+            <AttendanceReward Day='15'>
+                <Reward Type='InventoryItem' ID='8128' Count='1' />
+            </AttendanceReward>
+        </AttendanceRewards>
+        <ContinuousReward Type='Key' ID='70000' Count='2' />
+        <Icon>Attendance_Check</Icon>
+        <IconScale>2</IconScale>
+        <Illust>Event_Illust_SixthYearAttendance</Illust>
+        <IllustOffsetX>0</IllustOffsetX>
+        <IllustOffsetY>-20</IllustOffsetY>
+        <IllustScale>1.3</IllustScale>
+        <IllustAutoScale>false</IllustAutoScale>
+        <IllustMinHeight>328</IllustMinHeight>
+        <IllustMaxHeight>500</IllustMaxHeight>
     </SurpriseAttendanceEvent>
 </SurpriseAttendanceEvents>

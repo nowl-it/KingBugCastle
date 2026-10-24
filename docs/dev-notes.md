@@ -1714,6 +1714,45 @@ literals.
    `RankTier`/`RankTiers`, `HasSeasonEventPanel`, and an internal QA host moving
    `10.0.1.31:7070` → `10.0.1.41:7070`.
 
+### Official v174.1.00 XAPK → AssetRipper Unity project (2026-10-22)
+
+Same pipeline as v174.0.00; deltas only. Source: `./kgc-cli download -v 174.1.00 -o apk/`
+→ `apk/com.awesomepiece.castle@174.1.00.xapk` (1.04 GB; `base_assets.apk` 957 MB +
+`config.arm64_v8a.apk` 154 MB).
+
+- **Packer is `libbaningan.so`** (116 MB, `SONAME = libappsign4a.so`). `patchers/unpack_neo.py`
+  needed no change (still TARA v4) → decoded `libil2cpp.so` 115,695,304 B.
+- Export took **2m10s** (dotnet JIT warm, Level0) to
+  `unity/king-god-castle-v174.1.00-ExportedProject/ExportedProject/` - 198,104 files / 2.9 GB,
+  EXIT=0. 81 bundles, all re-hashed but the bundle *set* is identical to v174.0.00. 168 `sactx-*`
+  atlas PNGs, 6,097 prefabs, 6,268 `Assets/Texture2D/*.png`, 4,384 anim, 2,007 controllers.
+  `Assets/Scripts` (4,713 Level0 stubs) moved to `AuxiliaryFiles/GeneratedScriptStubs/` as usual
+  (no `Assets/Plugins` at Level0).
+- Cheaper asset delta used instead of a second full export: dump `type<TAB>name` for every object
+  in each bundle set with UnityPy and set-diff. v174.0.00 vs v174.1.00 = **+165 / −11** unique
+  objects (Sprite +60, GameObject +45, Texture2D +30, Material +10, AnimationClip +9, MonoScript +6,
+  Mesh +2, AnimatorController +2, MonoBehaviour +1). 15 s per version, answers "what art is new".
+- **New hero 10820 `Yhoundeh`** ("Hansi", East/Swift/Arrow, first **Incarnation**
+  (`<IsIncarnationUnit>true`) unit): 28 sprite frames 110x140 from a 440x980 sheet, illust 1024²,
+  `Unit_10820.prefab` + controller, 9 clips (`Attack/Skill × Front/Side/Back`, `Skill_Ultimate`),
+  9 FX prefabs and 9 `MT_10820*` materials. Match same-id master data in
+  `xml_history/2026_10_20_bhhtbJKhrR` (units, `Skill_10820*`, `Overcome_10820_0..4`).
+- New UI: `IncarnationSkillInfoSlot/IncarnationSkillDetailSlot` scripts + `IncarnationSkills`
+  (Passive/Ultimate tabs) - the **Incarnation** progression UI; `GachaShopPanelBG_Pickup_SpecialUnit`;
+  `Prefabs/Video/VideoOverlayPlayer` (+`ThemeIntroVideoOverlayPlayer`, `AcquireVideoOverlayPlayer`,
+  `BgVideo`) - the v174 `Videos.xml` runtime; `DimensionUnitOvercomeTicketPanel` →
+  **`UnitOvercomeTicketPanel`** (ticket UI generalized past dimension units).
+- Content art: treasure **30045** (illust 760², card illust, icon 54x60, skill icon 30x30),
+  map-skin shop sprite **`MapSkinSprite_40200`** (skin itself existed), season theme
+  `Themes_Background/Title_1000_S74`, `SeasonEvent_Banner_07` + `SeasonEvent_TitleImage1`,
+  **`Title_6Th_Event`** (6th anniversary), `Title_Hansi`, `Synergy_17`, `PotentialIcon_43`,
+  `Avatar_082`/`Portrait_082`, and skin FX `Fx_1040000_07` (skin 1040000 = unit 10400).
+  Treasure 30045 / map skin 40200 are **not yet in the CDN master data** (client ships ahead of
+  `xml` bundle) - expect them in the next CDN refresh.
+- Private build (`server/builders/build_private.py`) has **no 174 table**: `VER` tops out at
+  173.1.00, so v174.1.00 is asset-inspection only until the NEO/`NRE_STUBS` rows are re-derived
+  from its own `dump.cs`.
+
 ### Unity rebuild project (S0, 2026-10-08)
 
 Plan + denominator + stage table: **`plans/unity-rebuild.md`**. Rebuild project:
@@ -2526,6 +2565,15 @@ env returns `patchFolder: ""`. Wired into `scripts/check_cdn_update.sh` as the p
 source (union into all_dates, beats the 45-day HEAD-probe ceiling). Request recipe: see §31
 tail. Budget note: ~10 prod requests spent on this (~290/300 left).
 
+RESOLVED 2026-10-20: `getPatchFolder` POINTER LÀ VERSION-GATE — cùng endpoint, đổi header
+`version` là đổi kết quả: `174.0.x` → `LIVE/2026_10_06_xGrY0WbLgR`, `≥174.1.00` (thử tới
+`999.0.00` đều được) → `LIVE/2026_10_20_bhhtbJKhrR`. Nghĩa là: (1) probe version "quá mới"
+`999.0.00` = luôn trả newest → biết data mới TRƯỚC cả khi store có client mới (APKPure vẫn
+174.0.00 lúc đó); (2) KHÔNG hardcode version thật — `scripts/check_cdn_update.sh`
+`official_patch_folder()` giờ probe cả client_ver lẫn `999.0.00` rồi `max()`. Tương lai
+dev flip folder mới → watcher tự thấy, không cần bump version tay. Cách này find ra bản
+10-20 trong khi HEAD-probe +45 ngày fail hoàn toàn (folder có suffix ngẫu nhiên).
+
 ## 31. Official-client request headers, complete list (v173.1.00, 2026-10-05)
 
 Exhaustive: BL-scan of `UnityWebRequest.SetRequestHeader` (RVA `0x644B668`) yields exactly **32
@@ -3273,3 +3321,4236 @@ at `docs/handoff-official-token.md`.
 - `capture_cookie.py` / `harvest.py` / `diag_tap.py` — emulator capture + login drivers (fragile).
 - `emulate_cookie.py` — the Unicorn oracle (see Route B above).
 - `d.py` — capstone disasm helper (`python3 d.py <hex-file-off> [len]`, file-offset = RVA−0x4000).
+
+### Capture root-cause (2026-10-12): ToS dialog + SIGSEGV — why the "lottery" never hits
+
+Two findings that explain the ~45 failed capture attempts this session and reframe the emulator route:
+
+1. **Fresh-install shows a Terms-of-Service dialog BEFORE the login buttons** (`Agreement of Terms and
+   Condition`, two checkboxes + an "I have read and consent" button). After `pm clear` the game does
+   NOT go straight to the login buttons — the ToS dialog pops OVER the login illustration at ~10 s.
+   Old drivers tapped blindly at the Guest coords and hit the dialog. Proven accept sequence (1080x1920,
+   0.4 s apart): checkbox `(257,975)` → checkbox `(257,1093)` → consent `(540,1300)`. The **login buttons
+   (Sign-in-with-Google / Guest Login) only render AFTER resources finish loading** ("Loading resources…"
+   at the bottom) — tapping Guest before they render does nothing. A PIL detector for the white Guest pill
+   (crop `(320,1555)-(760,1665)`, >8000 px with r,g,b>220) reliably tells "buttons up" from "still loading".
+
+2. **The killer is a native SIGSEGV, not the managed abort.** Logcat `E CRASH`: `signal 11 (SIGSEGV),
+   code 1 (SEGV_MAPERR)`, thread `IL2CPP Threadpo` (the background Addressables loading worker), `#00 pc
+   0x2ad0aac libil2cpp.so` (does not resolve in v173.1.00 `script.json`). It fires ~12-22 s in, i.e. while
+   "Loading resources…" is still up, **before the login buttons ever render**. This is an ndk_translation
+   x86-translation crash — intermittent, near-unfixable. A separate SIGABRT `terminating` (managed
+   exception → abort) tombstone also exists but the segfault is the common one.
+
+Consequence: the emulator capture is a pure **race** (main-thread button render vs worker-thread crash),
+win rate ~1/15–1/30. The FIRST launch after `pm clean` is the only one that reliably reaches ToS+buttons;
+later launches (partial state from a crash) hang on "Loading resources" and never show buttons — so
+blindly retrying without clearing does not help. Capture CAN win (once reached buttons + ToS-dismiss) but
+is not repeatable enough to depend on. One win is enough to keep a session alive (shake-hand), so a long
+campaign may still land a live token, but the robust path remains **Route B (offline Unicorn oracle)**.
+
+- `capture_full.py` — the current best driver: `pm clear` → launch → dismiss ToS → detect Guest button
+  (PIL) → tap → read cookie from proxy log → mint token against official. Flaky (see above).
+- `capture_btn.py` / `capture_tos.py` / `capture_fresh.py` / `rapid.py` — earlier iterations of the same
+  (superseded by `capture_full.py`).
+- `api/official.py` — scriptable official-API client: `--cookie` mints (xcd→login), demo-calls
+  `/player`+`/player/getInventory`+`/card/all`, `--keepalive N` pings `GET /auth/shake-hand` every N s.
+  `api/auth/auth.py` `shake_hand()` fixed to **GET** (POST returns 405; the game uses GET from
+  `Scene_Game.UpdateImpl` to slide the session window). Live session saved to `/tmp/xsign/live_token.txt`.
+
+## 37. Skin-mod: equip skins you don't own (v173.1.00, 2026-10-15)
+
+Question: "bản mod skin" - a player with no skin can still use it. Two touch points, both landed:
+
+- **Client gate**: `GameManager.HasSkin(int)` - v173.1.00 RVA `0x30EFD3C` (file `0x30EBD3C`,
+  prologue `ff4301d1fe5f02a9`). Stubbed to `RET_TRUE` as the `has-skin` row in
+  `_NRE_STUBS_V17310` (`server/builders/build_private.py`). All 12 `bl` callers are UI/shop
+  only - `SkinInfoPanel.ReloadBottomButtons` (Equip vs Buy button), the
+  `SkinInfoPanel.<ShowCatalogImpl>b__93_1` catalog predicate, `SkinInfoTab_Old.AfterSetSelectedSkin`,
+  `SeasonalEventShopItem.Set`, `WorldPanel.Reload` (new-content badge), gacha/package panels.
+  **No battle renderer calls it**: every skin's prefab/texture ships in the client bundle and
+  lobby/battle/PvP render purely from `currentSkin`, so ownership is a UI/shop concept only.
+  Re-derive the RVA per version from that version's own `dump.cs` before adding the row to
+  another `_NRE_STUBS_*` table (the build raises on a prologue mismatch, never corrupts).
+- **Server**: `r_card_equip_skin` (`server/routes/card_routes.py`) no longer requires the skin
+  to be in `card.skins`. It validates the id exists in `Skins.xml` (`_skin_ids()`, cached parse)
+  and persists `currentSkin` WITHOUT granting ownership - equipping ≠ owning is the whole point.
+  `r_card_buy_skin` is unchanged and remains the real grant path (stock buy flow, gacha-style).
+  Stock/unpatched clients are unaffected: they never send unowned ids, and their buy popup still
+  routes to `/card/buySkin`.
+- **Tests**: `server/tests/test_skin_mod.py` - equip-unowned persists, unknown id refused,
+  skin 0 unequips, ownership never granted.
+- **BL-scan recipe (gotcha cost me an hour)**: scan in FILE space end-to-end. For a `bl` at file
+  offset `F`: `imm = sign_extend26(w & 0x3FFFFFF)`, `target_file = F + imm*4`, compare against
+  `wanted_rva - 0x4000`; the caller's RVA is `F + 0x4000` (never `F - 0x4000` - mixing the two
+  spaces maps every caller to the wrong enclosing method, silently).
+
+## 38. Unity rebuild — S2 Slice A: guest login chain chạy thật + 2 DLL stub "silent" của AssetRipper (2026-10-15)
+
+### Kết quả Slice A
+- Play mode (batch + xvfb + glcore): trigger `AutoLoginAsGuest` → `POST /auth/register` →
+  `POST /auth` → `POST /auth/login?id=` → `GET /player` (header `accesstoken`) →
+  `auth chain OK: uid=p-fbc904313418 name=Player3640` → `LoadScene("Scene_Lobby")`, capture
+  160 canvas. Gate: `KGC_CAPTURE_PLAY=1 KGC_CAPTURE_LOGIN=1 … CaptureScene.Run` exit 0
+  (`/tmp/opencode/s2gate/login_play20.log`).
+- Guest id persist ở PlayerPrefs key `KGC.GuestId`; **register LUÔN gọi trước Auth** —
+  `/auth/register` → `r_login` (routes/player_routes.py:34) idempotent (id đã bind = login,
+  chưa bind = tạo save) → tự chữa được id lưu từ lần register đầu lỗi/mất mạng.
+
+### UniTask fork KHÔNG dùng được trong môi trường này → netcode = pure callback
+- Probe 2026-10-15: (1) `async UniTask<T>` body **không chạy** khi invoke; (2) awaiter
+  không resume kể cả `UniTaskCompletionSource.TrySetResult` gọi từ coroutine; (3)
+  `PlayerLoopHelper` không init (`mainThreadId=0`, runners rỗng); `Init()` 0-param no-op.
+- `Task`/async-await cũng không được: await continuation rơi threadpool → `Debug.Log` ném
+  `UnityException: GetMethod can only be called from the main thread`; context-ful
+  continuation queue không bao giờ pump trong batch editor play.
+- **Contract**: `Web.Send<T>(req, accessToken, useSystemSerializeFunc, Action<T> onDone)` —
+  decrypt/parse/`MakeFail` TOÀN BỘ trong `op.completed` lambda (engine guarantee: main
+  thread, kể cả khi op đã done). Get/Post overload đều explicit 5-6 tham số (optional
+  param phải đứng trước `onDone`). `RestAPI.Auth/Login/Register/GetPlayerInfo` →
+  `void …(Action<T> onDone)`; `Scene_Login` chain nested callback (depth ~4).
+- `op.completed` dispatch **theo frame**; editor tick (`EditorApplication.update`) chạy
+  nhanh hơn frame → gate driver đợi theo `Time.frameCount` (900 frame post-trigger), KHÔNG
+  đếm tick (play17 stall = budget 600 tick hết trước khi response kịp dispatch).
+- `Debug` ambiguity: file có `using System.Diagnostics;` phải viết `UnityEngine.Debug.`
+  đầy đủ.
+
+### AssetRipper export DLL plugin = STUB (method bodies rỗng) — sai logic im lặng, không exception
+Triệu chứng chung: call chạy không ném exception, trả `null`/default. Đã gặp 2 DLL:
+1. **`Newtonsoft.Json.dll` 167KB** (bản thật netstandard2.0 ~705KB): MỌI
+   `JsonConvert.DeserializeObject<T>(json object)` trả NULL — kể cả
+   `Dictionary<string,object>`; `DefaultContractResolver.ResolveContract` trả NULL;
+   `Version=13.0.0.0` giả mạo. Fix: thay nuget `Newtonsoft.Json 13.0.3 netstandard2.0`
+   tại `Assets/Plugins/Newtonsoft.Json.dll`; bản stub giữ ở
+   `ExportedProject/Newtonsoft.Json.dll.bak-ripped`. (Bản 167KB không phải reference
+   assembly — method body stub trả default.)
+2. **`ACTk.Runtime.dll` 76KB** (CodeStage anti-cheat): `ObscuredString("DEV.abc123")`
+   implicit→string trả NULL → `RestAPI.accessToken` (ObscuredString) mất → `GET /player`
+   KHÔNG gửi header `accesstoken` → server single-player mode fallback `playerdb.active()`
+   → trả save **dev-0001 (KingBug)** thay vì player vừa login. Đây chính là cách bug
+   "login xong nhưng data của KingBug" manifest — server OK hoàn toàn, curl verify tách
+   bìa. Fix: xóa `ACTk.Runtime.dll` + `ACTk.Examples*.dll` (+ .meta; chỉ 3 DLL này tham
+   chiếu lẫn nhau) → thay **source shim**
+   `Assets/Scripts/Assembly-CSharp/CodeStageShim.cs` — namespace `CodeStage.AntiCheat.
+   ObscuredTypes`, 6 type (Int/Long/Float/Double/Bool là struct, **String là class** để
+   `== null` + implicit qua string hoạt động), lưu plain value, đủ implicit 2 chiều +
+   so sánh + số học + `++/--` + `+` concatenate. Wire model (`Awesomepiece/Model/*`) không
+   chứa field Obscured (grep verified) → JSON contract không đổi.
+   - `Scene_Login.unity` chứa component `SpeedHackDetector` (MonoBehaviour từ ACTk.Runtime,
+     block `--- !u!114 &1108` + entry `- component: {fileID: 1108}` trong GameObject 191
+     tên "SpeedHackDetector") → **gỡ khỏi scene YAML trước khi xóa DLL** (còn lại
+     `SpeedHackHandler` source — method rỗng, harmless).
+- **Cảnh báo**: nhiều DLL khác trong `Assets/Plugins/` kích thước bất thường nhỏ
+  (Firebase.* 3-28KB, GoogleMobileAds 6-9KB, Tapjoy/Airbridge, Unity.Burst 21KB,
+  Google.Protobuf 157KB, UniTask 497KB…) — có thể cũng stub. Chưa swap vì path chưa chạy
+  tới; khi activate path nào thì probe lại DLL đó theo pattern `JsonProbe`.
+
+### Server-side quan sát (local server 8080)
+- `GET /player` với token thiếu/không hợp lệ → single-player mode trả `playerdb.active()`
+  (dev-0001) — KHÔNG phải lỗi parse phía client. Muốn biết server nghĩ gì về token:
+  curl decrypt response (AES-ECB, key ASCII `a6072ad6b9c959ff`, zero-pad, TrimEnd NUL/space).
+- `/auth` POST từ chối id chưa bind: msg "Google sign-in was not verified"
+  (routes/direct_routes.py auth_native) → register-first bắt buộc với guest.
+
+### Tool giữ lại
+- `Kgc.Editor.JsonProbe.Run` (Assets/Game/Editor/JsonProbe.cs): regression probe cho lớp
+  lỗi stub-DLL — parse `AuthResponseModel` + contract + ObscuredString roundtrip. Chạy:
+  `Unity -batchmode -quit -executeMethod Kgc.Editor.JsonProbe.Run -logFile <log>` rồi grep
+  `JSONPROBE` (mong đợi `obj = ok`, `obscured = DEV.abc123`).
+- Backups ngoài Assets: `ExportedProject/Newtonsoft.Json.dll.bak-ripped`,
+  `ExportedProject/ACTk*.dll`.
+
+## 39. Unity rebuild — S2 Slice B: Scene_Lobby fetch chain chạy thật (2026-10-15)
+
+**Gate GREEN** (`/tmp/opencode/s2gate/lobby_b2_play.log` + `shot_Scene_Lobby.png`): login →
+`Lobby.Init` → 9 fetch tuần tự đều 200 → `lobby data: name=Player3640 lv=100 gold=290909
+cards=73 inv=161 posts=1 buildPoint=25 territory=0 mission=OK shop=OK`, 0 exception,
+black overlay nhả (ShowBlack(false) chạy). Compile + MasterDataSmokeTest + LocaleSmokeTest
+đều exit 0.
+
+### Decode Scene_Lobby (v174, decomp cache `/tmp/opencode/s2re/lobby_batch1.txt`)
+- `Awake` RVA **0x362B1F0** (script.json decimal 56799728): `base.Awake` →
+  `GameManager.InstantiateSimpleAssetDB(gm,false)` → `PopupManager.Clear(false)` →
+  `Localizer.SetCanvasRoot` → `timeScale=1` → **check `RestAPI.accessToken` rỗng → quay
+  Scene_Login** → `ShopPanel/DeckPanel/WorldPanel/ClanPanel/ArchivePanel.PreInit(false)`
+  (fields ở offset +0xc0..+0xe0) → `WorkTimer.ClearAll` + `WorkTimer.Do(...)` →
+  `targetFrameRate=60` → `CenterText.Show` (nếu flag static) → `CheckSavedGame` →
+  `GameManager.CheckXcd` → `WorkTimer.Do(45f,...)`.
+- `Start` RVA **0x362D2EC**: `WorkTimer.Do(1.25f, Init)` — delay splash rồi Init.
+- `Init` RVA **0x362D7D4**: `GameManager.Init` → `InventoryFilterSaveData` ctor →
+  `PlayLobbyBGM` → `Screen/Utility.GetScale` → lấp list panel (field +0x158/+0x370).
+- Fetch chain gốc bắn từ **closure trong `Update`** (`Scene_Lobby.<Update>g__Fetch|257_1`,
+  MoveNext RVA decimal 56832100) — KHÔNG phải từ Init. `Update` cũng chứa
+  `FetchNextDay`-relogin vector (đã biết) → **Update để nguyên stub = tránh luôn bug loop**.
+- `ReloadPanels` RVA 0x36323A8; `FetchPlayerInfo` MoveNext 0x363E58C gọi
+  `RestAPI.GetPlayerInfo` rồi check `isSuccess`, `VoidedPurchasePanel.Show` khi `level<0`.
+
+### Port (behavior-faithful, callback — không UniTask)
+- `Scene_Lobby.Init` = kick chain **tuần tự**: player → currencies → card/all →
+  getInventory → post → building → territory/fetch → mission → shop → `ReloadPanels` +
+  `ShowBlack(false)`. Mỗi `Fetch*(Action onDone = null)`: `Web.Get<Model>(path,
+  RestAPI.accessToken, false /*Newtonsoft*/, cb)` → `gm.HandleXxx(r)` → log `[S2]` →
+  `onDone?.Invoke()` **luôn luôn** (fail 1 bước không chặn bước sau).
+- `GameManager.Handle*` bodies mới (AssetRipper stub, chữ ký gốc giữ nguyên):
+  `HandlePlayerDataResponse` (data từ `/player`), `HandlePlayerCurrencies`,
+  `HandleCardListResponse`×2 → `UpdateOrAddCards` (tìm theo `unitId.value`) →
+  `ApplyDimensionUnitData` (overcome/dimensionLevel/dimensionGauge từ `dimensionUnit`),
+  `HandleInventoryResponse` (2 list song song → `inventory` dict) + `GetInventoryItemCount`,
+  `HandlePostResponse`→`postModel`, `HandleBuildingResponse`→`buildingPoint`+`buildingData`,
+  `HandlePlayerTerritory` (response→`PlayerTerritoryModel`, buildings convert
+  `TerritoryBuildingResponseModel`→`TerritoryBuildingData`, level-sync list→dict key
+  `unitId`), `HandleMissionsResponse`→`missionModel` thô, `HandleShopResponse`→`currentShop`.
+  Storage đều là field/property GỐC của GameManager (`currentShop`/`missionModel`/
+  `postModel`/`inventory`/`playerTerritoryModel` — không thêm field mới).
+- `PlayerData.name/castleName` => đọc từ `model` (trước stub `=> null` → HUD không tên).
+- `Scene_Login.HandlePlayerDataResponse` → delegate `gm.HandlePlayerDataResponse` (dùng chung).
+
+### Endpoint ↔ model: dùng `server/generated/route_models.json` (authoritative)
+Không cần đọc path từ il2cpp (path là static field, không phải string literal —
+`stringliteral.json` không match). Map core: `/player`→PlayerDataResponseModel,
+`/player/currencies`→PlayerCurrenciesResponseModel, `/card/all`→CardListResponseModel,
+`/player/getInventory`→InventoryResponseModel, `/post` GET→PostResponseModel,
+`/player/building`→BuildingResponseModel, `/territory/fetch`→PlayerTerritoryResponseModel,
+`/mission`→MissionResponseModel, `/shop`→ShopResponseModel. Server chấp nhận
+GET/POST/PUT tất cả route (`server.py:772`), handler state-only khi không có body.
+
+### Gotchas đã tốn thời gian — đừng lặp lại
+1. **`PreInit()` của panel KHÔNG nhận argument** trong export (`PreInit(bool)` là của bản
+   gốc; AssetRipper xuất stub 0-tham số) → `CS1501` nếu port thẳng `PreInit(false)`.
+2. **Field scene-wiring**: field `public` trong Scene_Base/Scene_Lobby (baseCanvas, black,
+   blackBack, shopPanel..archivePanel, screenScroller, tabManager, loadingPopup, …) **có
+   entry trong `Scene_Lobby.unity` YAML → tự wire**. Field `private` KHÔNG có
+   `[SerializeField]` (toàn bộ `_xxxPanel` popup ở Scene_Lobby.cs:1241-1301) → KHÔNG có
+   YAML entry → null runtime. Muốn nối: thêm `[SerializeField]` (public cũng được) rồi
+   **scene YAML phải có entry sẵn** — nếu không có thì phải tự gán trong editor/prefab (S4).
+3. **WorkTimer là stub no-op toàn bộ** (Do/ClearAll rỗng) → `Start` port gọi `Init()` thẳng
+   thay vì `WorkTimer.Do(1.25f, Init)` (callback không bao giờ bắn).
+4. **ShowBlack**: set alpha trực tiếp trên `black`/`blackBack` Image (không đụng DOTween —
+   `DOTween.dll` 71KB chưa probe stub hay thật; nếu cần fade mượt thì probe trước, kiểu
+   như Newtonsoft).
+5. **Gate driver** (`CaptureScene.PlayCaptureDriver`): slice A capture SẬP khi vừa sang
+   Scene_Lobby (fetch chain chưa kịp chạy) → thêm settle window: `_lobbyFrame` ghi frameCount
+   lúc thấy Scene_Lobby, chờ thêm `KGC_CAPTURE_SETTLE` frames (default **420**) rồi mới
+   capture; wall-clock nâng 120s→**240s**. `KGC_CAPTURE_SETTLE=0` = hành vi slice A.
+6. **ObscuredInt `==` với `int`**: shim có cả implicit 2 chiều → có thể ambiguity; dùng
+   `x.unitId.value == m.unitId` cho chắc.
+
+### Còn lại của lobby (S4+)
+- `ReloadPanels` thật: từng panel con (`PlayerInfoPanel`/currency HUD/Quest/Inbox/… ) cần
+  `[SerializeField]` + body `Reload` — slice B chỉ log summary. HUD top (25/20-20/55000/1300)
+  vẫn là value mặc định trong scene, chưa đọc `GameManager.data`.
+- Fetches chưa port (ràng buộc unlock, S4 theo hệ thống): artifact/treasure/accessory/rift
+  inventory, clan/raid, babel, season pass, event (year/eventmode/attendance/surprise/
+  card-collecting/shop-event), challenge, deck, PvP/colosseum, daily-consumed currencies.
+- `Awake` bỏ qua (stub/no-op, không đụng luồng data): `CheckSavedGame`, `CheckXcd`,
+  `CenterText`, `InstantiateFlag`, `SetResolution`/`OnResolutionChanged`, `GameManager.LoadScene`.
+- `Update()` để nguyên stub có chủ đích: chứa `FetchNextDay`-relogin 1Hz vector.
+
+## 40. Unity rebuild — S4a: TopPanel HUD port (2026-10-16)
+
+Reverse + port xong HUD top của lobby: `LerpText`, `Gauge`, `TopPanel`, event bus trong
+`GameManager`, wire vào fetch-chain terminal của `Scene_Lobby.Init`. Gate **GREEN** —
+screenshot `shot_Scene_Lobby.png`: level **100**, gold **290909**, cash **290909** (force →
+nhảy ngay), heart gauge **"390/20"** = LerpText đang animate tâm (heart thật 290909, display
+leo từ 0, capture đúng lúc ở 390 — đúng hành vi; DB confirm heart account test = 290909).
+
+### RE method batch này
+- Ghidra headless batch scripts `/tmp/opencode/s2re/decomp_batch*.java` (pattern:
+  `Object[][] = {{decimalRVA, label}}` → `analyzeHeadless /tmp/ghidra_proj KGC -process
+  libil2cpp_v17400.so -noanalysis -scriptPath ... -postScript ...`), output `lobby_batch*.txt`.
+- **Pitfall decimal→hex**: tự tay đổi hex→decimal rồi truyền vào script → trúng nhầm hàm
+  cách hàng nghìn byte (batch7 lần 1 decode nhầm `UICirclePosition.SetDistance` thay vì
+  `GetNextPlayerExp`). Luôn tính decimal bằng `python3 -c "print(0x302D5A0)"`.
+- Ghidra struct-return mangle: `Gauge.Init` show `param_3/param_4` = s2/s3 của `Rect` return
+  (width/height), không phải tham số thật.
+- Method-var delegate (closure cache trong `<>c`) resolve qua `.rela.dyn` addend →
+  `script.json ScriptMetadataMethod`; ô tĩnh TopPanel: `+0` = `<>c` instance,
+  `+8` = `Func<long,long,string>` cache heart format (`<Init>b__32_0` = `"{0}/{1}"`).
+
+### Layout & semantics đã decode (v174, field offset từ decomp)
+- **LerpText** (header 0x20): `valueText+0x20, speedRatio+0x28, delay+0x2c, signed+0x30,
+  _value+0x38, _displayValue+0x40, _format+0x48, _valueCallback+0x50, _maxCallback+0x58,
+  _delayTimer+0x60, _reloadAction+0x68, _minValue+0x70`.
+  `Set(value, fmt, force)`: `_reloadAction ??= b__13_0` (viết text); `_value=value;
+  _format=fmt; _delayTimer=delay; force→_displayValue=value`; flush `reloadAction(Max(_minValue,_displayValue))`.
+  `Update`: countdown delay; `|display−value|<2` → snap; else `display = Lerp(dt*speedRatio,
+  display, value)` + ngưỡng ±1 step; rồi `_valueCallback`/`_reloadAction` với `Max(_minValue,display)`.
+  String-overload `Set(value,"{0}",force)` = closure quanh format string → port gói thành Func.
+- **Gauge** (layout đọc được): `valueText+0x30, valueLerpText+0x38, gauge+0x40, shieldGauge+0x48,
+  directGauge+0x50, speedRatio+0x58, delay+0x5c, displayRealValue+0x68, _maxValue+0x78,
+  _value+0x80, _displayValueP+0x88, displayValueDivide+0x90, _delayTimer+0xb0,
+  _shieldValue+0xc0, _isInited+0xd0, rect captures +0xd4..+0xe4, _isDirty+0xe8,
+  _forceNextReload+0xe9`.
+  - `Init` (=`Awake`): capture rect size của gauge/directGauge/shieldGauge, lazy `_isInited`
+    (anchor self-assign = no-op, bỏ).
+  - `Set(value,max,force)`: max/value; `force→_forceNextReload+_displayValueP=div*value`;
+    `_isDirty`; tail inline `valueLerpText.Set(display, Func(gauge,b__42_0), force)` —
+    `b__42_0 = b__43_0 = b__52_0` = `_textFormatFunc(v, _maxValue)`.
+    `SetValue(value,force)` = y hệt + `_delayTimer=delay`.
+  - `Update`: nếu delay>0 → countdown, dirty thì flush; animate `step=min(div*max, div*value−disp)
+    /5*speedRatio`, `|step|<speedRatio` → snap `disp=div*value`; per-frame
+    `_valueCallback(BankersRound(disp/div))`; khi `disp/div==max` → `_maxCallback`; shield-anim
+    `_displayShieldValue` step ±.
+  - `LateUpdate` = `if(_isDirty) Flush()`; `ReloadGauge` = `Flush()` (2 body decomp giống hệt).
+    Flush: `Init`; force → `_displayValueP=div*value`; text chỉ ghi khi
+    `valueText!=null && _textFormatFunc!=null && valueLerpText==null`;
+    `maxEff = shield>0 ? Max(max, value+shield) : max`; ratio/directRatio clamp [0,1];
+    **fill rule**: `horizontal = (value==max) || (max<0 && value>0)` — full thì ngang
+    (scale `sizeDelta.x` theo width), chưa full thì dọc (scale `sizeDelta.y` theo height);
+    shieldGauge sizeDelta theo shieldFill; `gaugeMarker.Set(value, shield, maxEff)`;
+    force tail → `_valueCallback(value)` + `maxCallback nếu max<=value`.
+  - `SetTextFormatFunc`: set func; `valueText.text=func(value,max)` (NRE nếu func null);
+    `valueLerpText = Utility.Get<LerpText>(valueText)`; inline `Set(disp, b__52_0)` với
+    `_displayValue=disp` **không điều kiện** (≈ force:true).
+  - `Start`: `Init`; `shieldGauge!=null && _shieldValue<1 → SetActive(false)`;
+    `_textFormatFunc ??= (v,_)=>"{0}"`; `valueLerpText ??= Get<LerpText>(valueText)` →
+    `Set(disp, b__52_0, force:true)`; `_delayTimer=-1f`.
+- **TopPanel** (field region): `Instance`(static), `levelText, expGauge, heartGauge,
+  heartTimerText, goldText, cashText, touchBlocker, inMatchmakingObject, _riftWeaponDustText,
+  _lastLevel/_lastExp/_lastHeart/_lastGold/_lastGem` (sentinel: heart<0, gold/cash<1).
+  - `Awake`: `_instance=this`. `Init`: `heartGauge.SetTextFormatFunc("{0}/{1}")`;
+    `ReloadAll(true)`; WorkTimer 0.5s loop → `ReloadHeartTimer` (**port: InvokeRepeating**);
+    smart-reroll block (ResourceBase.Get(800)) skip; `touchBlocker?.SetActive(false)`.
+  - `OnEnable` subscribe đúng thứ tự: `(Exp,LevelUp)→ReloadLevelExp`, `(LevelUp,Heart)→ReloadHeart`,
+    `Gold→ReloadGold`, `Cash→ReloadCash`, rồi **Add thẳng tuple `(RiftWeapon, ReloadRiftWeaponDust)`
+    vào `_callbacks`** (không qua Subscribe — Subscribe tương đương trong port). `OnDisable` mirror +
+    WorkTimer cleanup (bỏ, key không port). Ngoài cùng: `inMatchmakingObject.SetActive(gm._isInMatchmaking)`
+    → phải make `_isInMatchmaking` public.
+  - `ReloadLevelExp(force)` (paramless = event target): `levelText.text=level`;
+    **lv100 → `expGauge.Set(0,0,force)`, return sớm** (không effect, không update _last);
+    else `Gauge.Set(exp, GetNextPlayerExp(level), force)`; effect gate
+    `(_lastLevel>0&&_lastLevel<level)||(_lastExp>0&&_lastExp<exp)` → GetMoneyEffect.Show(5) **skip**;
+    `_lastLevel/_lastExp = ...`.
+  - `ReloadHeart`: `_lastHeart<0 || heart<=_lastHeart` → closure `ReloadGauge` trực tiếp;
+    tăng → sound+effect skip, WorkTimer(0.5) → direct call; **luôn** `ReloadHeartTimer();
+    _lastHeart=heart`. Closure: `heartGauge.Set(heart, GetMaxHeart(), force:false)` + toggle
+    ConditionalImage heart-full trên directGauge (**skip**).
+  - `ReloadHeartTimer`: max → tắt timer object, return; else bật, `span=(model.tomorrow_
+    −Now)+FromMinutes(1)`, `text=ToPrettyFormat2_2(span)`; `TotalMinutes<=0 → "0h 0m"`.
+  - `ReloadGold/ReloadCash(force)`: 2 nhánh tăng/giảm chỉ khác sound/effect (skip hết) →
+    thẳng `goldText/cashText.Set(v, "{0}", force)`; `_lastGold/_lastGem=v`.
+  - `ReloadRiftWeaponDust(force)`: `_riftWeaponDustText?.Set(GetInventoryItemCount(8000), "{0}", force)`.
+- **GameManager.HandlePlayerDataResponse** (@0x3150CAC) event fires: exp đổi → `Shoot(Exp)`;
+  level đổi → `Shoot(LevelUp)`; `handlePlayerCurrencies` → gold/cash/heart đổi → set + shoot
+  `Gold/Cash/Heart` (gốc qua SetGold/SetCash/SetHeart); sau `d.model=model` →
+  `Shoot(ProfileIcon)` **không điều kiện**. Bus port: `_callbacks: List<(CallbackType,Action)>`,
+  `Subscribe/Unsubscribe(RemoveAll)/ShootCallback(snapshot ToArray)/ClearCallbacks`.
+- **Helpers**: `GetMaxHeart()=20` (hằng); `IsMaxHeart()=heart.v>=20`.
+  `Constants.GetNextPlayerExp` (@0x302D5A0): `lv>99→int.MaxValue`, master-data dict key type 6
+  index `level-1` — port chưa có bảng → `return 0` (= hệt bản gốc khi table vắng; Gauge guard
+  `maxEff>0` nên không chia 0). `Utility.Lerp(long,long,t)=a+BankersRound(clamp01(t)*(b−a))`
+  (half-to-even); `Lerp(double,..)=(b−a)*clamp01(t)+a`; `ToPrettyFormat2_2` = `"{H}h {M}m "`;
+  `ToSignedString(v)=(v<1?"":"+")+v`. BankersRound port = `(long)Math.Round(v, ToEven)`
+  (IL2CPP inline chính là Math.Round; inf → long.MinValue do unchecked cast tự nhiên).
+  `Utility.Get<T>` (generic inline, không resolve RVA) port = `GetComponent<T>` (+Find khi có name).
+
+### Port decisions / gotcha
+- **`Image.sizeDelta` không tồn tại** → luôn `image.rectTransform.sizeDelta`.
+- `CallbackType` là nested enum trong `GameManager` → `GameManager.CallbackType.X`.
+- Stub AssetRipper có sẵn `ReloadHeartTimer()` rỗng ở nửa sau file → duplicate CS0111, gỡ bản rỗng.
+- `_displayValue` generated property (`=> 0.0`) retype thành accessor thật:
+  `displayRealValue ? _value : BankersRound(_displayValueP/divide)`.
+- Field name `_gaugeHeight@+0xd4/_gaugeWidth@+0xd8` trong export trái ngược usage decomp
+  (width scale x, height scale y); port ghép **semantic** (width↔x, height↔y) — field private
+  không serialized nên không ảnh hưởng scene.
+- `tomorrow_` property stub → `DateTime.TryParse(tomorrow)` (server gửi ISO next-reset).
+- Scene wiring: `TopPanel.Instance?.Init()` sau `ReloadPanels()`, trước `ShowBlack(false)` —
+  OnEnable đã subscribe từ lúc scene load, Init chạy lúc data thật về.
+- Font số bitmap ở góc phải screenshot render thô (atlas SpriteFont) — tình trạng cũ từ
+  trước, không thuộc S4a.
+
+### Bước tiếp theo
+- S4b: các panel con trong `ReloadPanels` (`PlayerInfoPanel`, Quest/Inbox/… mỗi cái cần
+  `[SerializeField]` nối ref + body `Reload`), rồi ~20 `Fetch*` còn lại theo `route_models.json`.
+
+## 41. Unity rebuild — master-data slice: ResourceBase core + ResourceInventoryItem + ResourceUnit UI subset (2026-10-16)
+
+Mục tiêu: "connect luôn cả master data xml đi để UI nó chuẩn hẳn" — wire bảng XML vào runtime UI.
+
+### Kết quả / gates
+- **Compile gate GREEN**: `KGC_MASTER_DATA=/home/nowl/Code/kgc/server/xml_live timeout 420 <Unity> -batchmode -nographics -quit -projectPath unity/kgc-rebuild/ExportedProject -executeMethod Kgc.Editor.MasterDataSmokeTest.Run` → `ResourceUnit: 1043 rows (sample 'Shelda')`, `ResourceInventoryItem: 173 rows (sample '{0} EXP')`.
+- **Play-capture gate GREEN**: `KGC_CAPTURE_PLAY=1 KGC_CAPTURE_LOGIN=1 KGC_CAPTURE_DIR=/tmp/opencode/mdcap timeout 420 xvfb-run -a -s "-screen 0 1280x2048x24" <Unity> -batchmode -force-glcore -projectPath … -executeMethod Kgc.Editor.CaptureScene.Run` → `shot_Scene_Lobby.png` **giống hệt baseline S4a** (chỉ 390/20→393/20 = stamina theo thời gian) → không regression localization.
+
+### CRTP constraint (compile lỗi nếu quên)
+- `ResourceBase<T>` phải khai `where T : ResourceBase<T>, new()` — `LoadFromString` gọi `item.Init(e)`/`item.id` trên `T`. Mọi subclass đều CRTP (`ResourceUnit : ResourceBase<ResourceUnit>`…), kể cả generic trung gian `ResourceAbstractRankTier<T>` phải mang cùng constraint. Các generic helper sẵn trong export (`IRecursiveInheritable<T>`, `ResourceGachaPool.GetPoolAsResource<T>`, `Utility.GetChild<T>`…) đã khai CRTP từ trước.
+
+### Utility.cs — 3 fix root-cause trong helper dùng chung
+- **`ToEnum<T>`/`ToEnumIgnoreCase<T>` là stub `return default`** → sửa = `Enum.TryParse(text[, ignoreCase], out v) ? v : @default` (null → false → default, khớp máy).
+- **`Utility.GetVersion()` decode (RVA 0x2CA19B4)**: cache field static+0x108; `Application.version.Replace(".","")` → int (`"174.0.00"`→**174000**, khớp thang MinVersion trong Units.xml: 152100…172000, và các value nhỏ 311-654 đều ≤). Cache chỉ khi ≥1 (parse fail → 0 parse lại lần sau). `ProjectSettings.asset bundleVersion: 174.0.00` ✓.
+- XML helpers (`GetChild*/GetAttributeInt/GetSplitInt/…`) port trước slice này — pattern: `child?.InnerText ?? default` với inherit fallback `SelectSingleNode("./"+key)`.
+
+### ResourceUnit.Init (RVA 0x2E268C0) — decode máy + port
+- **4 dict phải tạo ở TOP của Init**: export không có `.ctor`/field initializer — máy init trong `.ctor`: `stringValues(0x180)`, `_valuesWithCoefficient(0x1B8)`, `_enumWithValuesDict(0x318)`, `_enumWithValueCoefficientDict(0x310)`. `_temporaryCoefficientNode(0x1C0)` để null (deferred).
+- **Inherit**: `inheritFrom = GetAttributeInt("Inherit",-1)`; `≥1 && Get(inheritFrom)≠null` → kế thừa: `pn = parent._xmlNode`, name/subName default theo **parent.id** (không phải parent.root — Units.xml không có Inherit depth≥2 nên trùng thực tế) + inherit=pn, copy `parent.stringValues` (last-wins), `root = parent.id`. Gốc (không parent): default `UnitName_{id}`/`UnitSubName_{id}`, `root = id`.
+- **identity/display**: `type` = GetChildText("Type") (inherit, default null) → ToEnum(Type.None); `_prefab`/`spriteName`/`uiSpriteName` (inherit, default null); `portraitName` = `Portrait_{(id%10000000)/10-1000:000}`, `avatarName` = `Avatar_{…:000}` (inherit); `illustName` = `Unit_Illust_{id%10000000}` (**không inherit**); `unitPanelDataId` default = `id%10000000` (inherit); `cost` default 1; `spriteInSheet` default **true**; `atkType` = GetChildText("AtkType", **"Melee"**) → ToEnum(AtkType.None).
+- **nameColor + layout (TẤT CẢ không inherit)**: `nameColor`=ToColor("NameColor"→null→white); `illustOffsetX/Y` default 0; `illustScale` default **0.75**; `gachaIllustOffsetX/Y`, `gachaBackIllustOffsetX/Y` default 0; `gradationColor`/`gachaGradationColor`/`gachaExplosionColor` = ToColor.
+- **skill ids**: `_skill`="Skill"(-1), `attackSkill`="AttackSkill"(-1), `deathSkill`="DeathSkill"(-1), `activeSkillId`="ActiveSkill"(-1), tất cả inherit=pn.
+- **children loop (đầu = `n.ChildNodes.FirstChild`)**: bỏ non-XmlElement; **skip-set 19**: `Name, Prefab, Height, Hp, Atk, Speed, ArrowPrefab, ArrowSpeed, ArrowType, ArrowOffsetY, Boss, SkillAtk, Effect, Potential, LevelRatio, GenExcept, OnClick, AIType` + `#comment` (loại bằng NodeType). Upsert last-wins (`stringValues.Remove` trước); **rule số thuần**: `!value.Contains(",") && double.TryParse(value, NumberStyles.Float, InvariantCulture)` → nhánh coefficient (**deferred, KHÔNG thêm vào stringValues** — và Remove đã chạy nên key biến mất hẳn).
+- **Sau loop**: `isDimensionUnit`("IsDimensionUnit",false,pn), `originalUnitId`("OriginalUnit",0,pn), `visible`(**default true**,pn), `summonTrigger`("SummonTrigger",null,pn), `minVersion`("MinVersion",0,pn), `aiType`("AIType", **"MoveAttackAI"**, pn — gốc gọi `AIFactory.CacheConstructor` ngay sau → defer), `clanBossAvatarSpriteName`("ClanBossAvatarSprite",null,pn).
+- **Block 0x1F0-0x1FA (deferred — combat/behavior, keys đã resolve)**: `DontDestroyWithParent`(false, **không inherit**), `IgnoreSkillFromParent`(false, không inherit), `RewardGold`(0, inherit — máy default **0**, không phải 500 như ghi nhận cũ), `FixDirection`(false, inherit), `ApplyTeamDirection`(**default true**, inherit), `IsClanRaidBoss`(false, inherit).
+- **Tail**: `MaxPlayerUnitId` static = `if (type==Player && visible && MaxPlayerUnitId<id) MaxPlayerUnitId=id`; `stringValues → _enumWithValuesDict`: `Enum.TryParse<UnitTag>(key)` thì `.Add(tag,value)` (XML name không được bắt đầu bằng chữ số → parse số không xảy ra, Add không đụng); `kgWikiCollectable = GetChildBoolean("KGWikiCollectable", true) && type==Player && visible` (**chạy SAU khi visible đã gán**); coefficient dict loop no-op (dict rỗng).
+
+### Getters đã decode + port
+- `fullName` = `string.Format("FullNameFormat".L(null), base.name, subNameKey.L(null))` — Strings_EN_US: `{1} {0}` (subName đứng trước); `name` = `GetValueBool(UseFullName=63) ? fullName : base.name`; `pureName` = `base.name`.
+- `koreanName`: máy mơ hồ (locale==1 Localize trực tiếp vs reverse-search map KR) → port `nameKey.KR()` (GetKorean key-fallback) + TODO.
+- `prefab`: máy có nhánh scene-conditional (`UnitTag.UIPrefab=241` / `StoryModePrefab=242`) → port `_prefab` + TODO.
+- `GetSubName(skinID)`: skin branch = `L(skin.name).Replace(name,"").Trim()` — **ResourceSkin là stub** (`GetValueBool→false`, `name→null`) → branch dead, luôn trả `subNameKey` key-fallback. `ResourceSkin.Get(-1)` an toàn: `ResourceSkin.Init` stub không set id → `LoadFromString` skip (`id != 0`).
+- **`GetValueText/GetValueBool/GetValueTextList/HasValue/HasStringValue`** đọc `_enumWithValuesDict`:
+  - GetValueBool: **key thiếu → @default; key có mà bool.Parse fail → false** (không phải default).
+  - GetValueTextList: key thiếu → **List rỗng** (@default bị bỏ qua); có → `Split(',')` giữ nguyên phần tử rỗng, đóng gói List mới.
+  - `HasValue` = `HasCoefficientValue || ContainsKey`; `HasCoefficientValue` = ContainsKey dict 0x310 (luôn false khi deferred).
+- **`GetValueInt` (cả 2 overload: GameUnit/Func)** = **coefficient-only**: `HasCoefficientValue(key) ? (int)Math.Round(GetValueWithBound(...)) : @default` — round banker's (Math.Round mặc định), cast infinity → int.MinValue. **KHÔNG đọc string dict** → deferred ⇒ luôn `@default`.
+- `GetParentIDIfHas`: IsTransform → GetValueInt(TransformRootUnit) (deferred -1) → fallback coeff(TransformUnit); không IsTransform → `!HasValue(Summoner) ? id : coeff(Summoner)` ⇒ dưới deferral quy về `!IsTransform && !Summoner → id`, còn lại -1. `GetParentIfHas` = `Get(GetParentIDIfHas()) ?? this`. `GetChildIDIfHas`: `!HasValue(TransformUnit) || IsTransform ? (HasValue(SummonedUnit) ? -1 : id) : -1`. `IsSubUnit` = `GetValueBool(455) || HasValue(448)`. `GetRootUnitId` = `restoreUnit(0x104) ≥ 1 ? restoreUnit : id` — **KHÔNG phải field `root`**.
+- `isPlayerUnit` = `type == Type.Player`.
+- `GetAllPlayerUnits(checkFunc)` (RVA 0x2E31B84, verify bằng 2 lambda `b__215_0`/`b__1`): `type==Player && visible && minVersion ≤ Utility.GetVersion() && checkFunc`, **cộng cap `id ≤ GameManager.GetKeyValueInt("LatestPlayerUnitId", HeartTimerHash dword thấp)`** — `GameManager.GetKeyValue` chưa port → **TODO cap = int.MaxValue (mở hết)**.
+- `Load()` = `Load("Units.xml"); AfterLoad();` (máy có nhánh queue nền, port đồng bộ). `AfterLoad()` = `_xmlNode = null` (máy còn `_temporaryCoefficientNode=null` + `BuffDictSet.RemoveParsedKeys` ×2 trên dict 0x180/0x1B8 — defer tới khi port BuffDictSet).
+
+### Resolver recipe (PTR_DAT trong decomp)
+- `PTR_DAT_06aXXXXXX` → `python3 /tmp/opencode/s2re/resolve_strings.py 0x6aXXXXXX …` (đọc `script.json ScriptString[].Value` qua cell→addend). Raw-garbage (vd `'\x050'`, `'!'`) = **empty string hoặc inline-cache member handle, không phải string** — khi cần dùng dump.cs RVA list thay thế (grep class body theo `RVA:` line).
+- Định vị method không có RVA sẵn: grep dump.cs theo tên → lấy `RVA:` predecessor → file offset = RVA − 0x4000 / decomp qua `analyzeHeadless … -postScript decomp_batchNN.java` (batch scripts cache tại `/tmp/opencode/s2re/unit_batch*.txt`).
+- Key const hay dùng (Init Units): Type 0x6a528d0, Prefab 0x6a52888, Sprite 0x6a52b38, UISprite 0x6a62cb0, Portrait 0x6a632a8, Avatar 0x6a64860, IllustSprite 0x6a62d90, UnitPanelData 0x6a648c0, Skill 0x6a64a08, AttackSkill 0x6a647c8, DeathSkill 0x6a649f8, ActiveSkill 0x6a648b0, SummonTrigger 0x6a649c0, MinVersion 0x6a52b78, AIType 0x6a64800 (default 'MoveAttackAI' 0x6a649e8), RogueLikeSynergies 0x6a64828, OriginalUnit 0x6a649c8, LatestPlayerUnitId 0x6a64c68; format: `Portrait_{0:000}` 0x6a647e0, `Avatar_{0:000}` 0x6a648b8, `Unit_Illust_{0}` 0x6a64880.
+
+### ReloadPanels original — DECODED (blueprint S4b, giữ nguyên)
+- `foreach (p in screenScroller.lobbyPanels) p.Init()` — `ScreenScroller.lobbyPanels : BaseLobbyPanel[]` @obj+0x20; vtable slot 4 = `BaseLobbyPanel.Init`; cờ `inited`.
+
+### Deferred / open từ slice này
+- ResourceUnit combat/stat block: hp/atk/def…(0x68-0xE4), height 0x164-0x178 (`Height` default **30f**, `HeightOffset` **-10**, `FloatingY`/`HeightWhenBuff`/`BossHpBarIndex`/`UseGroggyBar`), RangeInfo, sounds, attackInterval/attackCount/restoreUnit-reward parse, skillEnergyType, levelRatio (`.//LevelRatio` + parent-copy `if(!bVar12)`), overcomes, effects, transformConditions, dimensionLevelStats, tileSize (`.//TileSize`), `ParseCoefficientValue` + `_temporaryCoefficientNode` attrs Target/Key/Bound/Min, rogueLikeSynergies `.Select(parse)`, aiType CacheConstructor, block 0x1F0-0x1FA.
+- `GetValueInt/Long/Double` coefficient branch (`ValueWithCoefficient.GetValueWithBound` + round) — cần port `ResourceSkill.ValueWithCoefficient`.
+- `AfterLoad` `BuffDictSet.RemoveParsedKeys` ×2 (verify kiểu 2 field 0x180/0x1B8).
+- `GetValueText(string key)` overload (export @~1271) — không có trong dump scan → giữ stub null, TODO.
+- koreanName locale reverse-search; prefab scene-conditional 241/242; `GetChildIDIfHas/GetParentIDIfHas` coefficient round restore; GetAllPlayerUnits cap (`GetKeyValueInt("LatestPlayerUnitId")` — cần `GameManager.GetKeyValue`/keyValues server).
+- Utility stubs còn lại: `GetChildTextList`, `GetChildStringArray`, `GetChildVector2Int`, `GetAttributeIntArray`, `GetAttributeLong`, ToEnum non-generic overloads (combat), `SetSprite`/`ToRoman`/`CheckLevelAvailable` (S0 ghi nhận rồi).
+- ResourceSkin (+ LoginSkins/MapSkins/TerritorySkins/SkinReturnShopInfos) chưa port — Init stub, Get() trả null an toàn.
+- `Role`/`Region` (ToEnum; region default idx 5?) chưa port — rogue-like synergy UI.
+- Câu hỏi cũ treo: `~/Downloads/Eternum` folder mất, `~/Downloads/tnt_win_linux.zip` (4.3GB) giữ/xoá.
+
+## 42. Unity rebuild — S4b: ReloadPanels loop + lobby profile binding (2026-10-16)
+
+### Kết quả
+- Cả 2 gate GREEN: compile/smoke (1043 units 'Shelda', 173 items) + play-capture **0 exception** (lần đầu — các lần trước lần lượt vỡ ở `WorldPanel.Init` → `PlayerProfile.Set` → `InstantiatePrefab`, debug bằng checkpoint log).
+- Ảnh capture: banner NameTag_10000 instantiate thật (quad trắng — sprite art defer), text profile set = `Player3640`/`Castle8223` (khớp server `p-fbc904313418`; trắng-trên-trắng nên không thấy trên ảnh, art defer).
+
+### Đã port (RVA máy)
+| Method | RVA | Body |
+|---|---|---|
+| `Scene_Lobby.ReloadPanels` | 0x36323A8 | vòng lặp vô điều kiện `lobbyPanels[i].Init()` (5 panel: Shop/Deck/World/Clan/Archive) |
+| `ArchivePanel.Init` | 0x31DF878 | `Reload(); inited = true;` (Reload body defer archive system) |
+| `Utility.CheckLevelAvailable` | 0x2CA1AE4 | `data==null → lv=1`; `return limit <= level` (AwesomeInt `.v`) |
+| `ResourceConstant.Init/Get` | Init dump Strip; Get 0x360CDB8 | Init parse Type/Index/Value + **fill `_singleData` ngay lúc parse** (máy fill trong Init/AfterLoad — dump strip, không thấy); `Get`: key vắng → 0, dict null → NRE; `EnsureLoaded()` mở protected |
+| `ResourceNameTag.Init` | 0x2C6B9E4 | spriteId/prefab/tier/type; **`prefab = <Prefab> ?? "NameTag_" + id`** (row 10000 không có `<Prefab>` → máy sẽ `InstantiatePrefab(null)` NRE; default theo tên id vì `NameTag_10000.prefab` có thật) |
+| `ResourceNameTag.defaultNameTagId` | — | **không thấy writer nào trong dump** → port gán `= 10000` (row có thật trong NameTags.xml); `isTierTag = type ∈ {PvPTier,TowerTier,ColosseumTier}`; `GetSeasonNameTag` STUB `return null` (defer — chỉ dùng cho tag tier trang bị) |
+| `GameManager.GetProfileIconId` | 0x31586B0 | `int.Parse(GetKeyValue("ProfileIconId") ?? "-1")` |
+| `GameManager.GetEquippedNameTagId` | 0x316591C | inventory model null → default; equipped null → NRE; Get(id) null → default; isTierTag → GetSeasonNameTag (null → default) |
+| `GameManager.SetProfileUI` | 0x316FF68 | info rỗng (accountId/nameTagId/iconId = 0) → icon + nametag + castle/king lấy từ `data`; res null → `Get(default)`; `pp==null` → NRE; `pp.Set(...)` + `pp.SetAccountId(...)` |
+| `PlayerProfile.Set` | 0x37AFB08 | sprite name: `-1 → Avatar_Default`, `<1e6 → Avatar_{0:000}` (`id/10-1000`), `≥1e6 → Avatar_{0:000}_{1:00}`; icon ẩn khi sprite null (`enabled=false`); tag khác prefab → Destroy + Instantiate dưới `_nameTagRoot` + `SetParent(GetAvatarRoot().transform)`; `_nameTag.Set(res)` + 2 Text set (null → NRE từng bước) |
+| `PlayerProfile.SetAccountId/SetOnClick` | 0x37B01F8/0x37B0200 | store `_accountId`; button null → return; onClick null → `interactable=false`; else RemoveAll+AddListener(`onClick(_accountId)`) |
+| `NameTag.Set` | 0x37AF840 | `prefab != "NameTag_10000"` → early return; else gán sprite 3 Image (sizeDelta theo sprite.rect defer); `GetAvatarRoot() = _avatarFrameImage.transform`; `GetPrefabName() = _resNameTag?.prefab` |
+| `SimpleAssetDB` | 0x2E3835C/0x2E2652C/0x2E38900 | `Awake: _instance = this` (RegistDict defer); `GetSprite/GetPrefab = Resources.Load(name)` (null/empty → null); `InstantiatePrefab = GetPrefab → null? null : Instantiate` |
+| `GameManager.InstantiateSimpleAssetDB` | 0x3174468 | `new GameObject("SimpleAssetDB") + DontDestroyOnLoad + AddComponent` (thay Addressables instantiate), guard `Instance == null` |
+| `WorldPanel.Init` | 0x35CCB74 | level-gate 5 nút (`LevelLimit_Missions`=**3**, `LevelLimit_SeasonPass`) + event statics; `ClanPanel.Instance = lobbyPanels[3].GetComponent<ClanPanel>() → PreInit()` (body PreInit defer clan); `if (themeSelectPanel != null)`: ReloadIsHardMode + Reload/ReloadLobbyDeck/ReloadProfileIcon/ReloadPassGauge(true)/ReloadMissionBadge/ReloadGachaNewBadge + `inited=true`; **đuôi review-popup defer** |
+| `WorldPanel.ReloadProfileIcon` + click | 0x35CDD44/0x35DC8EC | `SetProfileUI(new ProfileUIInfo { playerProfile = _playerProfile })` + `SetOnClick(_ => ReloadProfileIcon_OnClickProfile())`; handler: `_profilePanel.Reload()` (ShowImpl private trong export — port thân ProfilePanel sẽ mở lại; Firebase/GameListBox/TabManager tail defer) |
+| `Scene_Lobby.Instance` | — | export **không có điểm gán** (dump static có, không thấy writer) → `WorldPanel.Init` NRE ở ClanPanel lookup; fix: `Instance = this` trong `Awake()` |
+
+### Gotchas (tái sử dụng)
+1. **`Resources.Load("name")` bare-name chỉ tìm asset nằm NGAY ROOT của folder `Resources/`** (Unity 2022.3.62f3, verify bằng probe): asset trong `Resources/Sub/` → `Load(name)` = null dù `LoadAll` thấy và `Load(sub/name)` OK. → NameTag prefabs đã **flatten về `Assets/Resources/`**; sprite art về sau phải đặt cùng cách (hoặc load theo subpath).
+2. **UI Image sprite null = quad TRẮNG** (không phải trong suốt) → banner nametag trắng đặc khi sprite art defer; text trắng-trên-trắng = không thấy trên ảnh nhưng vẫn set (verify qua 0-exception + giá trị server).
+3. **Roslyn không chấp nhận tên method `<...>` trong source** (IL-name style) → đổi `ReloadProfileIcon_OnClickProfile`.
+4. Debug NRE kiểu "offset trỏ vào `ret` + line = dấu `}` cuối method" → forensics IL không đáng tin; dùng **checkpoint Debug.Log** khoanh vùng, lần ra ngay.
+5. Prefab move giữ `*.meta` cùng folder (guid tham chiếu toàn cục); tên folder Resources phải đúng chính xác `Resources`.
+
+### Deferred / open từ slice này
+- `WorldPanel.Reload()` body (30 call) + DeckPanel/ShopPanel/ClanPanel `Init` bodies + `ClanPanel.PreInit` body + review-popup tail — theo system work của S4.
+- `GetSeasonNameTag` (pvpData+0x220/colosseum+0x3d0 season map) — chỉ ảnh hưởng tag tier trang bị.
+- Sprite art: `Avatar_*`, `Nametag_*` → Resources (theo gotcha #1) — icon ẩn + nametag trắng hiện tại.
+- `NameTag.Set` sizeDelta dance theo sprite.rect + frame `SetSizeWithCurrentAnchors` — chờ nameTagSprite data.
+- `SimpleAssetDB` RegistDict (material/font) + GetMaterial/GetFont/GetSpriteFromAtlas.
+- Profile click tail: `_isOtherPlayerInfo`/`GameListBox.OnClickClose`/`TabManager.OnClick`/Firebase Log + `ShowImpl` (private trong export — đổi access khi port ProfilePanel).
+
+## 43. Unity rebuild — S4b+ part 1: WorldPanel.Reload orchestrator + 2 bug level-gate (2026-10-17)
+
+Port thân `WorldPanel.Reload()` (deferred từ §42) + lung ra 2 bug thật khi đối chiếu decode:
+
+### Decode (v174.0.00, Ghidra batch24 `/tmp/opencode/s2re/const_batch24.txt`)
+
+| Method | RVA | Nội dung |
+|---|---|---|
+| `WorldPanel.Reload` | 0x35CD0E0 | kim tự tháp gate lồng: `Get<ConditionalBase>(_territoryButton)` (ConditionalGroup trên cùng GO) != null → `SetValue(CheckLevelAvailable(Get(LevelLimit_Territory)))` + `_territoryButton.SetActive(true)` → cùng shape với `_territoryTycoonButton` (SeasonalEventMode) → `ReloadTerritoryTycoonButton`+`ReloadStockEventButton` → `if (GameManager.Instance != null)`: `_streamingButton.SetActive(GetAvailableStreamingIndex() >= 0)` → **23 `Reload*` badge/nút + `RefreshMissions`** → `if (gameListBox != null) GameListBox.Reload(false)` → skin-package gate (`pkg=GetCurrentNewHeroSkinPackage` → `UnitID`→`ResourceUnit.Get` → level gate → `GetVersion() >= unit.minVersion` → `!HasSkin(SkinID)`) → `newHeroPackButton.SetActive(show)` + `SetSprite(icon, unit.avatarSprite)` → `bankBadge=GetShowBankButtonBadge()`; **`bankButton.SetActive(false)` cứng**; `if (bankButtonBadge != null) SetActive(bankBadge)` + đuôi layout defer |
+| `ResourceConstant.Init` | 0x360CA74 | `index = GetChildInt("Index", default = -1)` → row **không có `<Index>` store key -1** (LevelLimit_* đều không Index). Value slot 4 kiểu (int/text/intlist/textlist) theo 2 flag bool — port chỉ cần int path |
+| `ResourceConstant.Get` | 0x360CDB8 | re-verify: `_singleData` null → NRE; `!ContainsKey(type)` → 0; `d==null` → NRE; `!ContainsKey(index)` → 0 (FindEntry throw bất khả đạt) — port khớp |
+
+### 2 bug fix (cùng slice)
+1. **`ResourceConstant.Init` index default `0` → `-1`**: port cũ store row không-Index ở key 0, còn `Get(type)` mặc định index **-1** → miss → trả 0 → `CheckLevelAvailable(0)` = **mọi level-gate LUÔN MỞ** (sai với máy). Máy: `Get(LevelLimit_Missions)=3` (Constants.xml Value), SeasonPass=4, Territory=10, SeasonalEventMode=8, NewHeroPackage=8 → account lv1 bị gate đúng như máy.
+2. **`WorldPanel.Init` bỏ wrap `ResourceConstant.Get`**: 2 site `CheckLevelAvailable((int)ResourceConstant.Type.X)` so sánh level với **ordinal enum** (Missions=55!, SeasonPass=56) thay vì Value trong Constants.xml → đổi thành `CheckLevelAvailable(ResourceConstant.Get(Type.X))` theo máy. Test lv100 nên 2 version đều "mở" → gate xanh không phát hiện — chỉ đối chiếu decode mới thấy.
+
+### Verification
+- Probe tạm `UnityEngine.Debug.Log` đầu `Reload` (gỡ sau khi xong): `cond=TerritoryButton (ConditionalGroup)` tìm thấy, đủ field (`tycoonBtn/streaming/listBox/pkgBtn/bankBadgeGO` non-null, `gm=True`) → cả pyramid đi qua; **0 exception** cả capture.
+- Gates cuối (probe đã gỡ): compile GREEN (1043 units/173 items) + play-capture `shot_Scene_Lobby.png` GREEN 0 exception.
+- **Flaky**: run capture đầu卡 ở Scene_Login (auth chain không kịp trong budget 900-frame của `PlayCaptureDriver`) dù server đã trả register 200 → chạy lại là qua. Không phải regression — cùng code run 2 chạy sạch.
+
+### Gotchas
+- `WorldPanel.cs` có `using System.Diagnostics` → `Debug.Log` ambiguous (CS0104) → viết `UnityEngine.Debug.Log` (lần này không phải System.Diagnostics; lần trước là ngược — check file nào đang dùng).
+
+### Deferred / open từ slice này
+- Đuôi layout popup-package trong `Reload` (FindAll `gm+0x120` shop-item lists + `UILayoutGenerator.GenerateLayout(_popupPackageButtonPrefab, _popupPackageButtonsRoot, count, cb)`) — cần ResourceShopItem family → S4c.
+- `GetShowBankButtonBadge()` body thật (FindAll 2 list shop items, cùng family) — stub `return false` ≈ máy khi shop data vắng.
+- `ConditionalBase.SetValue(int)` = stub `{}` (visual only — ConditionalGroup không update state) — port body ValueColorPair/ValueSpritePair khi làm conditional family.
+- `bankButton.SetActive(false)` **không điều kiện** đúng như máy (nút bank retire; badge GO `Badge` riêng vẫn nhận trạng thái) — đừng "sửa" thành có điều kiện.
+
+## 44. Unity rebuild — S4b+ part 2: Deck/Shop/Clan Init slices (2026-10-17)
+
+Ba panel Init port + gate xanh. DeckPanel làm ở session trước (chưa ghi), ShopPanel là slice lớn nhất (decode batch29/30/31 + ASM), ClanPanel nhỏ và gọn.
+
+### DeckPanel.Init (RVA 0x32ACC0C — v174)
+Singleton → dev-mode/offline guard (`Constants.DEVELOPMENT_MODE && GameManager.Get().offlineMode → return`) → `Reload(reloadUnitPage: true)` → `ReloadArtifacts(false, false)` → `ReloadRiftWeaponUI()` → `BarrackAltarBox.Instance.Reload()` (null → abort, `inited` giữ false = máy NRE-fallthrough) → `deckSlotToggle.Init(true)` + `_onExtended = OnDeckSlotExtended` → KGWiki level-gate (`CheckLevelAvailable(Get(LevelLimit_KGWiki))`, không qua → `inited=true; return`) → `Scene_Lobby.Instance.kgWikiPanel.FetchKGWiki(no-op cb)` → `inited = true`. Callback delegate cell không phân giải được → no-op `delegate { }` có comment (wiki data server chưa serve). Tiền lệ cross-class: `DeckSlotToggle._onExtended` đổi `internal`.
+
+### ShopPanel (Init ELF 0x340EE1C, file 0x340AE1C; port ~10 methods)
+File export **không có bất kỳ compiler-generated member nào** → mọi lambda được đặt tên người: `OnMainTabClicked` (b__1/`<Init>b__138_1`), `OnPackageTabClicked` (b__2), `OnSpecialTabClicked` (b__4), `OnTabLayoutNextFrame` (b__169_2), predicate `x => x.IsActive()` inline.
+
+| Method | Nội dung |
+|---|---|
+| `Init` | dev/offline guard → singleton → `!readyToReload` → `Subscribe(CardExp/CardLevelUp, OnCardDataChanged)` (cell 06a85fe8 = paramless void, KHÔNG phân giải được → no-op placeholder) → `_callback` wiring 3 TabManager (method group) → `maxHolidayCount = holidayPackageAreas.Length` → `specialTabManager.OnClick(1)` → `unitBundlePackages.All(x => !x.IsActive())` → hide toggle + OnClick(1) → `!HasActiveSpecialPackage()` → OnClick(0) → idx = `maxHolidayCount; (idx<1 → 0) | (eventPackageItems.Count>0 → idx++)` → `packageTabManager.OnClick(idx)` → `moneyTabManager._callback = ReloadMoney; OnClick(0)` → `SetActive(tabs[2], CheckLevelAvailable(Get(LevelLimit_Hero_PickUp=61)))` → `Reload(true)` → tail `ReloadShopTabEnable()` |
+| `OnMainTabClicked(int)` | `idx==5 → goldFreeBadge.SetActive(false)` (Utility ext, Image); `4 → dailyNewBadge`; `3 → packageTabNewBadge` (GameObject) → 9 `anchoredPosition = Vector2.zero` đúng thứ tự: recommendScroll, subscribeScroll, eventPackageArea, `holidayPackageAreas.ForEach(zero)` (b__138_5), unitBundlePackageArea, specialPackageArea, playerPackageArea, dailyArea, moneyScroll → `Reload(false)` |
+| `OnPackageTabClicked(int)` | recompute `maxHolidayCount` locally (displayClass field máy; array bất biến → tương đương): `idx < m || idx == m+1 → ReloadEventPackage()`; `idx == m → ReloadPlayerPackage()`; còn lại return. Quirk +1 = trang event cuối cùng nằm SAU trang player |
+| `OnSpecialTabClicked(int)` | `0 → ReloadUnitBundlePackage(); 1 → ReloadSpecialPackage()` → tail **unconditional** `ReloadShopSubtabEnable(type)` — type = static cell 0x69538c8 (encoded handle, KHÔNG phân giải được; callee compare đầu `type == <same>` always-true) → port `ReloadShopSubtabEnable(null)` + TODO comment, callee còn stub nên inert |
+| `ReloadShopTabEnable` | 3 badge `transform.SetParent(enabledTabs[3/4/5], false)` → 4 tab actives: tabs[0] = `recommendationCarouselView.DataCount < 2 ? recommendPackageItems.Count > 0 : true`; tabs[1] = `unitBundlePackages.Any(IsActive) || HasActiveSpecialPackage()`; tabs[2] = `subscribePackages.Any(IsActive)`; tabs[3] = `CheckLevelAvailable(Get(LevelLimit_PackageShop=65))` → `ForceRebuildLayoutImmediate(tabManager.transform as RectTransform)` → `Observable.NextFrame().Subscribe(OnTabLayoutNextFrame)` (UniRx; `Unit` phải viết **`UniRx.Unit` đầy đủ** — global `Unit` (hero) thắng simple-name lookup) |
+| `OnTabLayoutNextFrame(UniRx.Unit)` | loop `i < enabledTabs.Count`: **copy LẠC hướng** — `enabled[i].position = new Vector3(disabled[i].position.x, enabled[i].position.y, 0f)` (ASM: v8 chỉ lưu x của get#1, s1 = y của get#2, `fmov s2,wzr` → z=0) và `enabled[i].sizeDelta = new Vector2(disabled[i].rect.width, enabled[i].rect.height)` (v8=v2/width get#1, v1←v3/height get#2) → 2× `SetParent(enabledTabs[0].parent, false)` (packageTabNewBadge, dailyNewBadge) + 1× một-arg `SetParent(enabledTabs[0].parent)` = default **true** (goldFreeBadge, method-pointer thunk truyền `1`) |
+| `HasActiveSpecialPackage` | `specialPackages.Exists(x => x.IsActive()) \|\| _skinBundlePackageItems.FindIndex(0, Count, x => x.IsActive()) != -1` (b__148_0/1 + b__169_0/1 đều = `x => x.IsActive()` — tail-call `Utility$$IsActive`, ASM xác nhận) |
+| forwarders | `RecommendActive() = ReloadRecommendPackage(); SubscribeTabActive() = ReloadSubscribePackage();` — **mỗi cái đúng 1 instr `b` tail-jump** (quyết định cũ ghi "empty" là SAI — đã sửa). `SpecialTabActive`/`PackageTabActive` stub + decode pointer trong comment |
+
+- `TabManager._callback` → `internal`; field init `_skinBundlePackageItems`/`_skinBundlePackageItemPrefabNames` = `new()` (máy init trong .ctor, export .ctor rỗng); `using System.Linq` + `using UniRx` thêm vào file.
+- **Gate NRE thật + fix**: `ReloadShopTabEnable` NRE ở `recommendPackageItems.Count` — field **không nằm trong YAML scene** của APK (Unity bỏ qua list null khi serialize; máy gốc invariant do `Reload(true)` → `ReloadRecommendPackage()` build list TRƯỚC khiReloadShopTabEnable chạy) — slice này Reload là stub → thêm guard `recommendPackageItems != null &&` + comment gỡ khi ReloadRecommendPackage port.
+- **Defer đã ghi trong comment**: Reload body (cấu trúc đã decode: `!readyToReload return; isReloaded=true;` + dispatch 6 tab theo IsActive, moneyTab inline arm offerwall/instantiate), ReloadMoney body, ReloadShopSubtabEnable body (cần resolve string cell 0x69538c8/0x69817e0 — raw encoded handles trong .data struct 0x6BB1E10/0x6BACB60, KHÔNG burn thêm time), OnCardDataChanged body.
+
+### ClanPanel.Init (ELF 0x32338B0)
+`clan == null → return` → `clan.id < 1 → return` → foreach `clan.members`: `member.accountId == GameManager.Get().data.model.accountId` → match thì break, hết list → return (machine: MoveNext-false → Dispose+return) → tail `GameManager.Get().isDevTestClanRaid = false` + `Scene_Lobby.Instance.FetchClanRaid()` (async void, state machine còn stub → no-op, gate-safe). Field map: `GameManager.clan` = k__BackingField @0x310 (property `clan`), `data` @0x118, `PlayerData.model` @0xC0, `PlayerDataResponseModel.accountId` @0x2C, `ClanModel.id` @0x10 / `members` @0x80, `ClanMemberModel.accountId` @0x10. Gán value: ASM `mov w0,wzr` → `op_Implicit(false)`; **+0xC8 = `isDevTestClanRaid`, KHÔNG phải `clanRaidEnabled`** (@0x60 đọc nhầm sẽ sai ngữ nghĩa).
+
+### Verification
+- 3 vòng gate: compile GREEN ×3 (0 error, chỉ CS0169 quen thuộc) + play-capture GREEN (1 vòng fail NRE → fix guard → 2 vòng sạch, `shot_Scene_Lobby.png` render bình thường, **0 exception**).
+
+### Gotchas mới
+- **CaptureScene KHÔNG tự tạo thư mục output**: `rm -rf` trước run → `capture fail: Could not find a part of the path .../shot_Scene_Lobby.png` (exit 2). luôn `mkdir -p $KGC_CAPTURE_DIR`.
+- **dump.cs v174 có offset field trong comment** (`public int id; // 0x10`) — cho tên + offset trực tiếp, không cần scan getter qua capstone nữa (vẫn cần ASM cho giá trị hằng/số chiều cột như `mov w0,wzr`).
+- Ghidra decompiler **inline tail call** vẫn là law xuyên suốt slice này: Init ShopPanel chứa nguyên thân ReloadShopTabEnable; b__1 tail chứa structure Reload; luôn đối chiếu script.json lấy extent thật.
+- Method-pointer thunk (`FUN_02c5690c`/`get-method-pointer-by-name`) truyền `worldPositionStays=1` ở lệnh SetParent thứ 3 trong OnTabLayoutNextFrame — đừng "đồng bộ hoá" 3 lệnh thành cùng một overload.
+
+### Deferred / open từ slice này
+- Reload body + mọi `Reload*Package`/`ReloadDaily`/`ReloadMoney`/`ReloadShopSubtabEnable`/`SpecialTabActive`/`PackageTabActive` — decode pointer đã nằm trong comment code từng method.
+- `OnCardDataChanged` body (cell 06a85fe8 không phân giải).
+- `TabManager.OnClick` port (slice riêng); b__0 wiring ShopPanel; ClanPanel các method còn lại (PreInit/OnClickClanTab/Reload/OnPanelEnabled...).
+
+## 45. Unity rebuild — S4b+ part 3: Awake fetch-chain completion (2026-10-17)
+
+### Scope
+Hoàn tất "batch A" của S4b+ part 3: `_isLobbyAlive` thật, port 9 `Fetch*` còn thiếu của
+`Scene_Lobby` + toàn bộ `GameManager.Handle*` bodies tương ứng, kéo dài `Scene_Lobby.Init`
+chain từ 9 → 17 bước (SeasonPass → ArtifactInventory → Clan → ClanRaid → Babel → Challenge →
+DailyAttendanceEvents → SeasonPassEventBooster → [gated] EventCardCollecting). Decode nguồn:
+Ghidra batch32 (`0x3164578` HandleClan 7-param, `0x3146338` HandleClanRaid, `0x3185CBC`
+HandleChallengeMode, `0x315426C` HandleEventModeResponse, `0x3163198/0x31639F8` SeasonPass/
+EventCard) + batch33 (`0x3164458` HandleClan(ClanResponseModel), `0x3145E1C` HandlePlayerBabel,
+`0x3154460` HandleArtifactInventory) + MoveNext của từng fetch.
+
+### Ported
+- `Scene_Lobby._isLobbyAlive` (`0x3626774`): `this != null && Instance == this && main != null`
+  (trước: `=> false` — mọi fetch guard sẽ chết nếu bỏ sót).
+- Fetch ports (mẫu callback `Web.Get<T>(path, token, false, r => {…; onDone?.Invoke();})`,
+  attribute `[AsyncStateMachine]` giữ nguyên theo precedent FetchShop):
+  - `FetchSeasonPass` (GET `/pass`): guard `isLobbyAlive` → `_fetchNextSeason=false` → Handle
+    + `ReloadPassGauge(true)` + `ReloadHeart` + `ShopPanel.Reload` +
+    `themeSelectPanel.ReloadStartButtonAndFoodBooster` (máy d__239 @0x363F364).
+  - `FetchSeasonPassEventBooster` (`/pass/passEventBooster`), `FetchClan` (`/clan`),
+    `FetchClanRaid` (`/clan/raid`, success-only, KHÔNG isLobbyAlive), `FetchBabel` (`/babel`),
+    `FetchChallenge` (`/story-mode/challenge/info`), `FetchEventMode` (`/game/eventMode`,
+    `reloadUI` → `SwitchMode(true,true,true)` — máy truyền x1=x2=x3=1, x4 junk 0),
+    `FetchArtifactInventory` (`/artifact/inventory`), `FetchPlayerEventCardCollecting`
+    (`/event-card-collecting/fetch`).
+  - `FetchClan` tail: `ClanPanel.Instance.inited` → `Reload` + `clanChatPanel.ReloadChat(r.clan.chats)`;
+    member popup luôn gọi `Reload(members, joined, maxMemberCount, roleNames)` với
+    `joined = r.clan.id == gm.clan.id && Constants.ClanRole.Check(gm.clanRole, Member)` —
+    KHÔNG gộp joined vào gate (máy gọi cả khi joined=false).
+  - `FetchDailyAttendanceEvents`: `r.eventIds.Count>0` (null → NRE tự nhiên như máy) →
+    `dailyAttendanceEventsData = r` → chọn `WorldPanel.Instance ?? this.worldPanel` →
+    `StartCoroutine(AfterFetchDailyAttendance(r))` — stub-gap guard `co != null` (stub trả null).
+- `GameManager.Handle*` bodies:
+  - `HandleClan(ClanResponseModel)` (`0x3164458`): null → NRE tự nhiên;
+    `!IsNullOrEmpty(seasonUntilAtDate)` (field +0x50, KHÔNG phải field clan-raid — faithful)
+    → set `clanRaidEnabled` + parse 2 date → ủy quyền overload 7-param
+    (param_7 `clanRaidLockedByLeaveUntilAt_` máy truyền nhưng **không store** — discard).
+  - `HandleClan` 7-param (`0x3164578`): stores clan@0x310/role/clanRequestSupportCooltime/
+    canReceiveClanPointAt/canPlayClanRaidAt → `ClanPanel.Instance.clanChatPanel` active →
+    `ReloadButtons()` → `BottomPanel.Instance.Reload()`.
+  - `HandleClanRaid` (`0x3146338`): `_clanRaid = model` + `ShootCallback(ClanRaid)` (máy inline
+    loop `_callbacks` Item1==0x16 — chính là ShootCallback).
+  - `HandleChallengeMode` (`0x3185CBC`): null/fail → return; store; difficulty: bestCleared≥1 →
+    best+1 cap 24→25; else unlocked: `<6` giữ; ≥6 & `data.bestClearedHardTheme<61` giữ;
+    theme≥61 & diff<11 giữ; theme≥61 & diff≥11 & pass gate `CheckLevelAvailable(
+    ResourceConstant.Get(Type.LevelLimit_DimensionRift=70))` → giữ + cap 25; fail gate → 6.
+    `data` null khi diff≥6 → NRE (máy invariant: player data load trước).
+  - `HandleEventModeResponse` (`0x315426C`): `openEventModes = model.eventModes` (ref copy);
+    `eventModesFlagCost` lazy-init (export thiếu field initializer, máy init cctor) → Clear →
+    fill song song `allEventModes[i]`/`eventModeFlagCost[i]`.
+  - `HandleEventCardCollecting` (`0x31639F8`): null → store model rỗng; lazy-init
+    `collectionStates`/`eventCardCounts`; store; `WorldPanel.Instance` active →
+    `ReloadEventCardCollectingButton()`.
+  - `HandleSeasonPass`/`HandleSeasonPassEventBooster`: store `passModel`/`passEventBoosterModel`
+    (render tail SeasonPassPanel defer slice panel).
+  - `HandlePlayerBabel` (`0x3145E1C`): `babelBarrack = new` + store + `ShootCallback(Babel)`.
+  - `HandleArtifactInventory` (`0x3154460`): inventory cũ còn & ret rỗng
+    (`artifacts.Count==0 && dustCount==0`) → return giữ bản cũ; store;
+    `SetEquippedArtifactPreset(data.currentDeckPreset)` (data+0x7C, KHÔNG phải presetIdx mới);
+    `!handlePlayerCurrencies` → ShootCallback(Artifact) sớm; else sync
+    `SetGold/SetCash(response, "", "", true)` khi value ≥0 và khác current
+    (`AwesomeInt.v` property) rồi callback. Literal productId = metadata pool không đọc được
+    (0x6A4FC70→0x13CE0AC) → dùng `""`, chỉ ảnh hưởng analytics log.
+- `ClanResponseModel`: 8 getter `*_` `=> default` → `DateTime.TryParse(src, out var d) ? d : default`.
+
+### Gates
+- Compile GREEN (exit=0, 0 `error CS`); play-capture GREEN (`shot_Scene_Login.png`,
+  **0 exception** — fetch chain mới không bắn NRE trong scene-capture scope).
+
+### Gotchas mới
+- **`Constants.ClanRole`/`ClanRoleEnum` lồng trong `abstract class Constants`** — tên trần
+  `ClanRole.Check` fail CS0103; `ResourceConstant` thì global-namespace tên trần OK. Đừng
+  generalize "Constants.cs không namespace" → check nesting từng class.
+- **Lambda chain 17 bước**: đóng đúng `}` + 17 `)` + `;` — sai 2 ngoặc là CS1026/CS1002 row
+  line đó; đếm số fetch mở ngoặc = số `)` cần.
+- **Resolve PTR_DAT literal qua `.rela.dyn`**: `readelf -rW | grep <addr>` → `R_AARCH64_RELATIVE`
+  addend → VMA đích; method ptrs resolve được qua `script.json ScriptMethod` (Scene_Game
+  `<Init>b__511_0/1` = enqueue Action targets), nhưng string literals v174 nằm encoded trong
+  metadata pool → không đọc ASCII trực tiếp từ `.so`.
+- Machine `HandleClan(7-param)` BottomPanel-block dùng `ClanPanel.Instance.clanChatPanel`
+  (@0x68 trên ClanPanel), KHÔNG phải field nào của BottomPanel (BottomPanel+0x68 = `dustEffect`
+  — đọc nhầm class sẽ ra type mismatch vô nghĩa).
+
+### Deferred / open
+- HandleClan prefs block (HasKey + SetInt clan-id + SetString supportCompleted + Save) +
+  3 popupQueue enqueue (Localizer literals 0x6A76FF0/FF8/000, cached Action từ Scene_Game
+  `<Init>b__511_0/1`) — cần port `HandlePopupAndEvents`/`ShowFromPopupQueue` trước.
+- HandleSeasonPass SeasonPassPanel render tail; HandleEventCardCollecting button tail;
+  HandleClan(2-param) wrapper.
+- FetchYearEvent / FetchSurpriseAttendanceEvent / FetchShopEventCumulativePurchase
+  (b__257_0 season-chain-only), FetchSingleArenaRewardInfo (no server route),
+  FetchCard / FetchPlayerDailyConsumedCurrencies, HandlePopupAndEvents/ShowFromPopupQueue.
+
+## §46 — S4b+ part 4: popup-queue plumbing + HandleClan prefs/enqueue + ShopEventCumul store (2026-10-18)
+
+### Resolve literal string v174 (recipe tái sử dụng — chốt sai 1 lần mới ra)
+Sai lầm tốn kém: `PTR_DAT_06xxxxxx` trong Ghidra là **ELF VMA + 0x100000**. `grep readelf` bằng
+địa chỉ Ghidra → đọc nhầm slot hoàn toàn (ra toàn method-ptr/code bytes). Slot thật = Ghidra − 0x100000.
+
+Đúng (2-hop indirection):
+1. `slot_elf = ghidra_ptr − 0x100000`.
+2. `readelf -rW libil2cpp_v17400.so | grep <slot_elf>` → `R_AARCH64_RELATIVE` **addend**.
+3. Addend đó **không** chứa bytes string — nó là **địa chỉ của một slot khác** nằm trong bảng
+   `stringliteral.json`/`ScriptString` (dải `0x6b94ea0–0x6bc7e40`). Lookup `stringliteral.json` theo
+   `address == addend` → `value`. (Il2CppDumper chỉ map bảng slot này; slot code dùng delegate/literal
+   `0x69xxxxxx` trỏ vào nó → hop 2.)
+4. Method-ptr slots (delegate cache, vd `0x6b88478/0x6b88480`) **không có reloc tĩnh** (il2cpp init
+   điền runtime) → không resolve được target bằng tĩnh; suy ra từ `script.json ScriptMethod` nearby.
+
+Literal đã resolve (slot → value):
+| ELF slot | value | dùng ở |
+|---|---|---|
+| 0x6976FF8 / 0x6977000 / 0x6976FF0 | `Clan_Alert_Joined` / `Clan_Alert_LeaveDelete` / `Clan_Alert_NameBanned` | HandleClan enqueue |
+| 0x6977008 / 0x6977010 | `LastClanID` / `LastClanSupportCompletedModel` | HandleClan prefs |
+| 0x69920C8 / 0x697D2C0 | `Colosseum_Left_Popup` (StartsWith) / `_Ignored` (EndsWith) | ShowFromPopupQueue routing |
+| 0x6991F20 / 0x6991F28 / 0x6964070 | `RogueLikeSaveWarning` / `CantReloadNextSeason` / `RogueLike` | HandlePopupAndEvents part2 (defer) |
+| 0x694FC70 | `""` | SetGold/SetCash productId (xác nhận đoán trước) |
+
+Class-gate slots: `PTR_DAT_06a51bf0` → `Scene_Lobby_TypeInfo` (check `is Scene_Lobby`). Fields:
+`Scene_Base.popup@0x68` / `popup2@0x70` (kế thừa Scene_Lobby); `Scene_Lobby.tabManager@0x158` /
+`outgameTutorialPanel@0x160`; `GameManager.currentScene@0x148` / `popupQueue@0x230` /
+`resShopEventCumulativePurchaseData@0x408` / `pvpData@0x220`.
+
+### Ported (gate: compile GREEN 0 `error CS` + play-capture 0 exception, `shot_Scene_Lobby.png`)
+- `GameManager.HandleClan(2-param)` @0x3164C10 → ủy quyền 7-param (`default` dates/model).
+- `GameManager.HandleClan` 7-param @0x3164578 → điền prefs block + 3 enqueue:
+  `HasKey("LastClanID") && !(currentScene is Scene_Lobby)` → `GetInt(-1)`; join (`clan!=null && prevId==0
+  && clan.id>=1 && Check(role,Member)`) → enqueue `Clan_Alert_Joined`; leave (`prevId!=0 && (clan==null||
+  clan.id==0)`) → `Clan_Alert_LeaveDelete`. tail: `Check(Member)→SetInt(clanIdKey, clan?.id:0)`;
+  `clan==null||id==0→SetInt(0)`; `supportCompleted!=null&&supportCompleted→SetString(JsonUtility.ToJson)`;
+  `Save`; `BottomPanel.Reload`; namebanned (`clan!=null && nameBanned && Check(Master) && !is-Scene_Lobby`)
+  → enqueue `Clan_Alert_NameBanned`. **Tất cả enqueue `action=null`** (defer ack body `b__439_0` = mở tab
+  clan / `b__439_1` = 247 dòng). Inert: `Constants.ClanRole.Check` là stub `{return false;}` + gate not-in-lobby.
+- `GameManager.HandleShopEventCumulativePurchase` @0x316DDB8 → `resShopEventCumulativePurchaseData = ret`.
+- `Scene_Lobby.ShowFromPopupQueue` @0x3631F5C → full: `item=q[0]`; `StartsWith("Colosseum_Left_Popup") &&
+  EndsWith("_Ignored")` → `colosseumLeftAlertPopup.Show(key)` (property hiện `=>null` → NRE fallthrough =
+  faithful, defer wiring); else `popup.Show(key.L(), Popup.Type.Ok, item.action)`; `q.RemoveAt(0)`.
+- `Scene_Lobby.HandlePopupAndEvents` @0x362C8B0 → part1 drain (`Count>0 → ShowFromPopupQueue`, 1 popup/lần).
+
+### Deferred (decode pointer)
+- **HandlePopupAndEvents part2** (pvp season-end popup): prefs `RogueLikeSaveWarning` GetString→Parse,
+  `pvpData.GetCurrentSeasonUntilAt`, `(until.Day−Now.Day)<4 && lastShown.Day!=Now.Day` → `popup2.Show(
+  Format("CantReloadNextSeason","RogueLike"))` + `SetString(Now.ToString(InvariantCulture))`; **gate
+  `gm+0x4c8.@0x98` chưa resolve** (`// 0x4c8` không có trong dump.cs GameManager block).
+- **HandlePopupAndEvents part3** (outgame tutorial): `outgameTutorialPanel(+0x160).StartTutorial(30,
+  GetKeyValueBool(static key 0x6A68AB8+0x68), cached Action 0x6A91F18)` — cần resolve static key + Action.
+- **HandleClan ack bodies** `b__439_0` (0x318b2a8, mở tab clan: TabManager.OnClick(tab,3)+clanMenuPanel
+  vtable 0x188) / `b__439_1` (0x318b200, 247 dòng) → enqueue với action null.
+- **colosseumLeftAlertPopup wiring**: property `=>null`, cần nối ref prefab.
+
+### Gotcha
+`Constants.ClanRole.Check(int, ClanRoleEnum)` là **stub `{return false;}`** (dead-gate OK) — enqueue shape
+đúng, sẽ fire thật khi Check implement. `ClanRoleEnum`/`ClanRole` đều nested trong `abstract class Constants`.
+
+## §47 — S2 Tier-2: event-fetch surface (4 callback fetch + store-only Handles) (2026-10-18)
+
+Hoàn tất netcode tier S2: port 4 `Fetch*` event của `Scene_Lobby` (UniTask → callback, parameterless
+giống export) + 2 `Handle*` store-only. **Unwired** — season chain `Scene_Lobby.<Update>b__257_0`
+(@0x36350D4) chưa port, và các event bị patch-off (`IsYearEventAvailable`→false …) — nên đây là
+**surface netcode** để wiring sau này chỉ cần nối chain, không phải viết fetch. Endpoint/model lấy
+từ `route_models.json` (score ≥1.0), KHÔNG decode path literal.
+
+| Fetch (Scene_Lobby) | endpoint | model | Handle | máy MoveNext |
+|---|---|---|---|---|
+| `FetchYearEvent()` | `player/year-event` | `FifthHalfYearEventResponseModel` | `gm.HandleYearEvent(r)` | d__241 @0x3641C64 |
+| `FetchSurpriseAttendanceEvent()` | `player/surprise-attendance-event` | `SurpriseAttendanceEventResponseModel` | `gm.HandleSurpriseAttendanceEvent(r)` | d__242 @0x36410E4 |
+| `FetchShopEvent()` | `shop-event/cumulative-purchase` | `ShopEventCumulativePurchaseResponseModel` | `gm.HandleShopEventCumulativePurchase(r)` | d__255 @0x364080C |
+| `FetchPlayerDailyConsumedCurrencies()` | `player/daily-consumed-currencies` | `PlayerCurrenciesResponseModel` | `gm.HandlePlayerDailyConsumedCurrencies(r)` | d__226 @0x363DDF4 |
+
+Gate callback: YearEvent/Surprise = `r!=null && _isLobbyAlive && r.isSuccess`; ShopEvent/DailyConsumed =
+`r!=null && r.isSuccess` (máy không có isLobbyAlive ở 2 cái này). `FetchShopEvent` (d__255) **inline store**
+`gm.resShopEventCumulativePurchaseData` (@+0x408) chứ không gọi Handle → gọi `HandleShopEventCumulativePurchase`
+(store cùng chỗ @0x316DDB8) cho gọn.
+
+**Handles**:
+- `HandleYearEvent(ret)` → `fifthHalfYearEventModel = ret` (@GameManager+0x2E8). Monster tail **427 dòng**
+  deferred (refresh `FifthHalfYearEventPanel` + attendance/pass reward UI).
+- `HandleSurpriseAttendanceEvent(ret)` → `surpriseAttendanceEventModel = ret` (@+0x2F0). Monster tail
+  **366 dòng** deferred (refresh surprise-attendance panel).
+- `HandleShopEventCumulativePurchase(ret)` → store `resShopEventCumulativePurchaseData` (@+0x408) — **đã port §46**.
+- `HandlePlayerDailyConsumedCurrencies(ret)` → **deferred body**. Máy @0x315241C mutate `List<KeyValue>` tại
+  `playerData(@+0x118)+0xb8`: find-or-add theo **static-key @0x6A68AB8+0x110** (chưa resolve), value =
+  `ret.@0x34.ToString()` (int field @0x34 của `PlayerCurrenciesResponseModel`). Cosmetic (currency-usage tracker).
+
+**Deferred**: `FetchCard(int)` (d__252 @0x363AD28 → `RestAPI.GetCard(cardID)` → `UpdateOrAddCards`) — **unwired,
+không có caller**, cần decode endpoint `GetCard` trước. `HandleYearEvent`/`HandleSurpriseAttendanceEvent`
+monster tails store-only decode pointers ở trên.
+
+**Gate**: compile GREEN (smoke `ResourceUnit 1043 rows 'Shelda'` / `ResourceInventoryItem 173 rows`, 0 `error CS`)
++ play-capture **0 exception** (`shot_Scene_Lobby.png` 286KB, vào lobby thật).
+
+### Gotcha
+Các `Fetch*` event này **không có trong Init chain 17 bước** — chúng do season chain (`b__257_0`) fire khi
+phát hiện đổi mùa/event. Port xong = netcode surface đầy đủ; wiring đòi hỏi port `Scene_Lobby.Update` +
+`b__257_0` (S4 event-panel tier).
+
+## §48 — S3a: lobby → Scene_Game entry (battle transition) (2026-10-18)
+
+**Chain (v174.0.00, trace by subagent — scan-based hunts FAILED trước đó):**
+```
+WorldPanel.GameStart (void, d__396 @0x35e1568)
+  → build GameStartRequestModel → RestAPI.<GameStart>d__53 @0x2d6fcfc = Web.Post<GameStartResponseModel>("/game/start")
+  → success: Scene_Base.ShowLoading(false), CloseGameStartPopup, ConsumeHeart(resp+0x2C heart),
+    gm.currentGameId(0x1C8) = resp.gameId(0x48), SetSeasonalEventModePlayCount, SetFlag(resp+0x50 eventFlag),
+    ReloadPlayCounts, gm.rankingStageUnits(0x1D8) = resp.rankingStageUnits(0x58), HandleCardListResponse(resp.cards@0x40)
+  → WorkTimer.Do(0.5f, WorldPanel.<>c.<GameStart>b__396_1 @0x35dcd00)   // matchmaking guard + fade canvas + UnitStarGameDirection
+    → WorkTimer.Do(0.5f, Scene_Lobby.<>c.<StartGame>b__222_1 @0x36363a0) // THE load site: tail-call
+      → GameManager.LoadSceneAsync(gm, "Scene_Game", LoadSceneMode.Single) @0x3171d38
+        → HandleSceneChanging(gm, "Scene_Game", 0) fires dict gm+0x158 handleSceneChanging
+        → SceneManagerAPI.LoadSceneAsyncNameIndexInternal("Scene_Game")
+```
+- `SimpleStartGame` (d__434) + `StartEventMode` (d__438) **cùng funnel vào `b__222_1`** (mỗi cái có lambda `b__X_1` của nó, 0.5s delay → `b__222_1`).
+- **`GameManager.LoadScene` wrapper (@0x3171b78, 20 caller) KHÔNG nằm trên đường này** — 20 caller toàn game-over→lobby exit (GameOverPanel.OnClickClose, RogueLikeSaveAndLobby, SettingsPanel.OnClickLogout…). Hai caller inline state machine của nó: `WorldPanel.LoadTerritoryScene` (→ "Scene_Territory", Additive) + `Scene_Lobby.<CheckLastGameCompleteRequest>b__259_0` (→ "Scene_Login").
+- **Scene_Loading chỉ là chiều RA** (exit Scene_Game→Lobby): `GameManager.<LoadScene>d__566 @0x31d5d44` rewrite target → "Scene_Loading" (lưu target thật vào static của Scene_Loading); `Scene_Loading.Start @0x36265dc` load target thật + run callback. **Vào Scene_Game không đụng Scene_Loading.**
+- String `"Scene_Game"` literal @ stringliteral 0x6BB0390, String* reloc slot @ ELF 0x6966938 (R_AARCH64_RELATIVE addend 0x6BB0390). **Direct ADRP+ADD/LDR scan → 0 hit** (page data đông: 7249 ADRP landing on page) — đừng scan kiểu này again; trace từ method chain nhanh hơn.
+- `WorldPanel.StartSingleArena(targetDeck)` build req `+0x20 = targetDeck` → start `StartEventMode_d__438` state machine (dùng chung generic start).
+
+**Server contract (`r_game_start`, game_routes.py:39):** chỉ đọc `theme` + `stage` (deck/buildings BỊ BỎ — battle chạy client-side hoàn toàn). Deduct heart, mint `gameId` (secrets.token_hex(8) → `_game_store`), trả `{heart, lastHeartTime, buildingData, cards, gameId, eventFlag}`. **Response KHÔNG có theme/stage** → client tự giữ selection.
+
+**gm field offsets (v174):** `currentTheme` @0x144 (GameManager proper, export L2720); `currentGameId` @0x1C8 (export L2754); `rankingStageUnits` @0x1D8 (export L2764); `handleSceneChanging` dict @0x158 (export L2726); `currentStage` @0x18 **thuộc `GameManager.BabelState`** (dump 77512/77517) — **KHÔNG phải GameManager**, `gm.currentStage` không tồn tại → stage plumbing cho InitStage để ở S3b.
+
+**Ported (compile GREEN 0 error, runtime test lùi sang S3b khi Scene_Game init xong):**
+- `WorldPanel.GameStart()` → callback tối giản: set `gm.currentTheme` (fallback 1 — stage-select chưa port), `Web.Post<GameStartResponseModel>("game/start", JsonUtility.ToJson(req), …)` → apply `currentGameId`/`rankingStageUnits`/`HandleCardListResponse(cards)` → `WorkTimer.Do(0.5f)` → `gm.LoadSceneAsync("Scene_Game", Single)`. Deferred: deck/artifact request-build (server bỏ), pre-check popup, animation chain. Chú ý: `Awesomepiece.Web`/`RestAPI` phải fully-qualify (WorldPanel thiếu `using Awesomepiece;`).
+- `GameManager.LoadSceneAsync` → `HandleSceneChanging` + `UnityEngine.SceneManagement.SceneManager.LoadSceneAsync`.
+- `GameManager.HandleSceneChanging` → guarded TryGetValue/Invoke/Remove trên `handleSceneChanging` (hiện inert — `Add/RemoveHandleSceneChangeAction` còn stub → dict luôn rỗng; global-key fire khi Single defer do chưa resolve PTR_DAT_06a4fc70).
+- `GameManager.LoadScene` (d__566, qua Scene_Loading) **chưa port** — chỉ cần cho exit; vào Scene_Game đi qua LoadSceneAsync.
+
+## §49 — S3b: Scene_Game init — trigger mechanism + Init structure (2026-10-18)
+
+**Câu hỏi đã giải quyết: "Ai gọi `Scene_Game.Init` khi vào trận lần đầu?"** → **`Scene_Game.Awake` → `ResourceManager.Load(callback)` (async gate) → callback → Init.** `ResourceManager.Load` là **stub `{}` trong export** → callback không bao giờ fire → battle không start (đây là root-cause "vào Scene_Game nhưng không có gì xảy ra").
+
+**Lifecycle đã trace (v174.0.00, imagebase 0x100000, RVA):**
+- `Awake` @0x2e63da8 (batch53): `Scene_Base.Awake` → `GameManager.InstantiateSimpleAssetDB` → `Screen.sleepTimeout` → `PopupManager.Clear` → `SetActive(false)` 5 GameObject field (0x298/0x2a0/0x2a8/0x2b0/0x2b8) → `Localizer.SetCanvasRoot(0x268)` → `Localizer.Initialize` → **`Action..ctor(uVar10, this, cachedPtr)` + `ResourceManager.Load(uVar10)`** → `CacheAllUnitAssets` → `ResetMergibleAlpha` → `Utility.SetScreenFirebase` → `GameManager.CheckXcd` → `Action..ctor + WorkTimer.Do(120f, …)` (Action#2, timer unrelated) → 3 `LocalizerUtility.L` so sánh → set byte flags (0x6da/0x6db/0x6dc). Awake **KHÔNG gọi Init**; phần sau `Load` chạy đồng bộ (asset setup), chỉ `Load(callback)` là async → init trigger.
+- `Update` @0x2e72ea4 / `UpdateImpl` @0x2e72fa8 (batch55): **KHÔNG gọi Init/LoadGame**. Chỉ gọi `StartStage` (guarded timer `fVar26<=0`) + timer-text helpers + `BattleManager.Update`. → Init KHÔNG phải first-frame check.
+- `GameManager.LoadSceneAsync` @0x3171d38 (batch52): path `Single` (param_3==0, Scene_Game dùng path này) → `HandleSceneChanging` (dispatch dict 0x158, không có Init) → `SceneManagerAPI.LoadSceneAsync` → **return, KHÔNG register completion callback**. Path Additive mới register `AsyncOperation.add_completed` — không liên quan Scene_Game.
+
+**Init là battle-setup sequencer, 4100 dòng, mode-branching (batch53, Init @0x2e44008).** Core sequence (không-branch):
+`GameManager.Init` → ~15 `LocalizerUtility.L` (string load, defer được) → `Time.maximumDeltaTime/fixedDeltaTime` → **`BattleManager.Init(idx)`** (`idx` = `List<int>.get_Item` param — deck/theme index) → `get_playerBattle` → `GameManager.GetBuildingLevels` → **`BattleManager.InitArtifactAndBuildings`** → `GameManager.GetDefaultDeck` → `GameManager.GetCardInfos` (deck → card infos; 2 nhánh clan-raid vs normal) → **`BattleManager.InitHeroPool(deck, cardInfos, …)`** → [mode branch: `InitColosseumData`/`GameManager.InitRogueLike`/`InitStoryMode`/storyModeGameData] → **`InitMap`** → InitPotentialInfos/InitObstacles → gold/building effects (`GetArtifactValueSum`) → activeSkillManager → [mode branch: **`InitStage`** @L3490] → `OpeningSequence` (chỉ 1 caller = Init @0x2e49690).
+- `LoadGame` @0x2e67ef4 (1 caller = Init @0x2e488c8): gọi `InitMap` @0x2e687c8 + `InitStage` @0x2e6945c → LoadGame = "setup map+stage cho state đã cho".
+
+**Init's 6 direct BL callers — TẤT CẢ là re-init/dev/continue, KHÔNG có first-entry:**
+`RestartBabel`, `SetTheme` (dev: MainUI.OnClickDevMenu b__260_3 + DevClanRaidPanel.OnClickConfirmButton), `SetCurrentEventDifficulty` (dev), `DevRoguelikeReLoadImpl` (dev), `DevLoadDeckPanel.OnClickConfirm` (dev), `GameOverPanel.<ContinueGame>d__59.MoveNext` (continue sau game-over).
+
+**Tại sao trigger resolve không được (runtime-mediated delegate — ĐỪNG thử lại):**
+- Callback method ptr tải qua **2 deref**: `GOT 0x6966928` (R_AARCH64_RELATIVE → 0x6b7a260) → `*0x6b7a260` = **0x60002cb5**. Vùng 0x6b7a200–0x6b7a2b8 là **bảng generic-method-pointer của il2cpp** (toàn giá trị 0x6000xxxx, KHÔNG phải code address — 0x60002cb5 không 4-aligned). Không reloc AT 0x6b7a260 → giá trị do il2cpp runtime resolve, không ra được tĩnh.
+- Method-pointer table `&Ready`@0x6a75f70, `&Init`@0x6a76468, `&InitMap`@0x6a76478, `&OpeningSequence`@0x6a76480, `&InitStage`@0x6a76490, `&LoadGame`@0x6a76be8 — **0 direct ADRP+LDR/ADD reference** (dispatch qua runtime delegate, base pointer gián tiếp). → "who invokes Init via delegate" = lrabbit-hole il2cpp runtime, không xử được tĩnh.
+
+**Port decision (deviation, document rõ):** rebuild `ResourceManager.Load(callback)` sẽ **invoke callback đồng bộ** (asset local/sync trong editor), và `Scene_Game.Awake` truyền **`Init`** làm callback (suy luận: Init là sequencer duy nhất; callback gốc dẫn tới Init qua delegate gián tiếp — không show direct BL). Awake ported faithful phần asset setup (base.Awake + InstantiateSimpleAssetDB + PopupManager.Clear + Localizer init + CacheAllUnitAssets); defer 5-GameObject toggles (cần map field-offset 0x298…→tên export), SetScreenFirebase/CheckXcd/WorkTimer.
+
+**S3b port plan (Init core — bước tiếp theo, LỚN, nhiều session):** port Init path tối giản cho arena/story: `GameManager.Init`, `BattleManager.Init(idx)`, `InitArtifactAndBuildings`, `GetDefaultDeck`/`GetCardInfos`, `InitHeroPool`, `InitMap`, `InitStage` (bỏ non-arena mode branches: colosseum/roguelike/clanraid/babel). BattleManager.Init/InitHeroPool + InitMap/InitStage cần decompile riêng (chưa có trong batch).
+
+## §50 — S3b: Scene_Game.Init core port (arena sequencer) (2026-10-19)
+
+**Mục tiêu slice:** port khung `Scene_Game.Init` + `InitMap` + `InitStage` + `OpeningSequence` + `GameManager.Init` + grid/map plumbing để `Awake → Init` hoàn tất mà không throw. **Cổng xanh: compile gate GREEN (0 lỗi CS) + play-capture GREEN (0 exception, `shot_Scene_Lobby.png` 287KB).** Lưu ý: capture harness chỉ chơi scene được mở sẵn → **đường `Scene_Game.Init` CHƯA được exercise runtime**; gate runtime thật là S3e (end-to-end battle).
+
+### RVAs đã decompile & port ở slice này
+
+| Method | RVA | Bản chất đã extract |
+|---|---|---|
+| `Scene_Game.Init` | `0x2e44008` | sequencer (xem dưới) |
+| `Scene_Game.InitMap` | `0x2e66e18` | theme/map-skin resolve + `bm.HandleInitMap` loop |
+| `Scene_Game.InitStage` | `0x2e4acd0` | BeforeInitStage → reset flags → ClearEnemies/FieldUnits → `effectPool.Clear` → mode branch → `AfterInitStage` |
+| `Scene_Game.OpeningSequence` | `0x2e6a2dc` | DOTween camera/alpha Sequence + `_opening` |
+| `Scene_Game.GetDefaultFlagPrefab` | `0x2e6b008` | `return defaultFlagPrefab` (field `0x270`) |
+| `Scene_Game.LocalToBattlePosition` | `0x2e5dd0c` | **`pos.x += battleIdx * 1000f; return pos;`** (toàn thân chỉ 1 phép tính, y/z giữ nguyên) |
+| `Scene_Game.BattleToLocalPosition` | `0x2e5dd20` | phép nghịch đảo (chưa decompile riêng — suy từ cặp gọi) |
+| `Scene_Game.<Init>b__511_0` | `0x2ea7df8` | **`s => s.theme == _theme.v`** — predicate của `ResourceStage.GetAll` |
+| `Scene_Game.InitPvPPresetStage` / `InitRankedPvPStage` / `InitClanRaidStage` | `0x2e6cc88` / `0x2e6eed4` / `0x2e4bdf8` | defer (mode PvP) |
+| `GameManager.Init` | `0x3148d1c` | `if (_inited) return;` → `data=new PlayerData` → `LoadSetting` → `isEarlyAccessMode=false` → `CheckFirebase` → subscribe `Application.lowMemory`+`quitting` → `_inited=true` → LocalPushManager instantiate |
+| `UnitGrid.Init(BattleManager, Color)` | `0x2fa1f7c` | default-color fallback → `_defaultColor` → `Init(size+bonusSize)` → `ClearFocus()` → `battle=bm` |
+| `UnitGrid.Init(int,int)` | `0x2fa2060` | `_lastSize` cache → `_width/_height` → `AddTile(x,y)` nested loop |
+| `GridMap..ctor(bm,w,h)` | `0x2f791f4` | `_minPos/_maxPos` formula + 5 mảng + 2 HashSet + 4 Queue + 2 List + 1 PriorityQueue |
+| `BattleManager.HandleInitMap` | `0x2edae38` | `_resMapSkin` → reuse-or-return map → Instantiate×3 (map / skin / default) → đọc `Map` component → obstacle reset → `localPosition=(0,20,100)` → `SetActive(true)` → `ReloadFog` |
+| `BattleManager.<HandleInitMap>g__InstantiateMapPrefab\|228_0` | `0x2edb8d4` | usePool → `Scene_Game.Instance.mapPool.Rent` else giữ `fieldObject`; go≠null → `SetParent(transform, true)`; go==null → `SimpleAssetDB.Instance.InstantiatePrefabWithDefaultName(map, transform)` |
+| `BattleManager.ReloadFog` / `SetStageTileBuff` | `0x2edba4c` / `0x2edbdd0` | **defer** (text lookup artifact value, sâu, cosmetic/tile-buff) |
+| `EffectPool.Clear` | `0x2f6533c` | `RemoveLoopWorldEffects()` + `foreach t in _byeTriggerTimers: WorkTimer.Stop(t)` + `Clear()` |
+| `Utility.ClearSeed` | `0x2c93e70` | clear **cả 2** dict tĩnh: `_seedCallCount` + `_randomWithSeeds` |
+
+### Solved logic (không phải suy đoán — đọc từ decompile)
+
+1. **Theme/Time block của `Init`:** `_theme.v = gm.currentTheme` (field `0x308`) → 12 cờ Localizer (`0x70C..0x719`) → **`if (_theme == 0) { gm.currentTheme = 1; _theme.v = 1; }` else `if (_theme.v < 0) { gm.eliteLevels = new int[5]; gm.difficulty = 0; mainUI.basePanel.SetInvasionDifficulty(0); }`** → `_resTheme = ResourceBase.Get<ResourceTheme>(_theme.v)` (throw nếu null) → Time:
+   - `ResourceTheme.useFixedUpdate` (`0x14C`) **false** → `maximumDeltaTime = 0.33333334f (0x3eaaaaab)`, `fixedDeltaTime = 0.02f (0x3ca3d70a)`
+   - **true** → cả hai = `0.016666668f (0x3d888889)`
+2. **Deck resolve:** `stored = gm.data.currentDeck` (`PlayerData+0x68`, `int[]`). Validate từng phần tử qua `ResourceBase.Get<ResourceUnit>(id, ResourceUnit.Type)` (token `PTR_DAT_06a59b48`). **Tất cả resolve → dùng `stored` + `firstComer = data.currentFirstComerIndex` (`+0x78`); có phần tử fail → `gm.GetDefaultDeck()` + `firstComer = -1`.** (Vòng lặp C# gốc gán `bVar33 = i < count` ở tail — trường hợp `count == 0` cũng rơi vào nhánh "use stored" nghĩa là deck rỗng; rebuild **cố ý** đổi thành fallback `GetDefaultDeck()` để không bao giờ ra deck rỗng.)
+3. **`_resStages`:** `isRogueLike || isStoryMode` → `new List<ResourceStage>()`; `isBabel` → `GetBabelStages()`; còn lại → **`ResourceStage.GetAll(s => s.theme == _theme.v)`**. (`ResourceStage.theme` @`0x20`, `.stage` @`0x24`.) Có thêm 2 predicate ứng viên `b__511_2` (`resTheme.<0x94> < s.stage`) và `b__511_16` (`excluded[Scene_Game+0x5D0] !Contains && theme match`, `0x5D0 = _pvpPresetStages`) — chọn `_0` vì nó là predicate `Func<ResourceStage,bool>` khớp kiểu `GetAll`.
+4. **`InitMap` arena path:** `theme = _resTheme` (nhánh `isPvPDeckRecord` defer — key literal `PTR_DAT_06a66aa0` chưa resolve). `mapKey = theme.mapPrefab` (`0x28`). **Map-skin override:** `gm.decorationInfo` (`PlayerDecorationInfoResponseModel`, GM `+0x2C0`) `.equipInfo` (`+0x58`) `.appliedMapSkinData` (`Dictionary<int,int>`, `PlayerDecorationEquipInfoResponseModel+0x30`) — key = `theme.id`, value = map-skin id → `ResourceMapSkin.Get(id)`; nếu skin `!= null && !skin.isDefault` (`0x70`) thì `mapKey = skin.mapPrefab`. Rồi `foreach bm: bm.HandleInitMap(mapKey, theme, resMapSkin, usePool: true)`.
+5. **`InitStage` arena path:** `Utility.ClearSeed()` khi `isColosseum` → `foreach bm (isSurvived): [isStoryMode → DisposeWorldTrigger(null)] + BeforeInitStage()` → `_isStageStarted=false` (`ObscuredBool` `0x368`) → `stageValueSum=0` (`0x6D4`) → `useStageValueSum=true` (`0x6D8`) → `effectPool.Clear()` → `isRogueLike` **hoặc** `curStage.theme ∈ {2000, 2100}` → `InitRogueLikeStage(); return;` → arena: `mainUI.SetStartButtonState(StartButtonState.RogueLikeStartBattle)` (**giá trị enum `1` — đúng theo bytecode, dù tên nghe lệch mode**) → `randomItemGetCount.Set(0)` + `freeMerchantRefreshCount.Set(0)` → `Constants.IsInvasion(_resTheme.id)` → `remainAdHeroSummonCount = 2` + `mainUI.ReloadAdRandomHeroButton()` → `foreach bm: AfterInitStage(_devilEffectCount, _devilCond)` → key-gated `InitPvPPresetStage`/`InitRankedPvPStage`/`InitClanRaidStage` (defer) → `isBabel → InitBabelStage()` → `isSkinPreview → InitSkinPreviewStage()`.
+6. **`GridMap` ctor:** `offX = (w >= 7 ? w-7 : w-6)`, `offY = (h >= 12 ? h-12 : h-11)`, rồi `off = off >= 0 ? -(off >> 1) : 0`. `_minPos = (offX, offY)`, **`_maxPos = _minPos + (w, h)`**. Với default **7x12 → offX=offY=0** (`_minPos=(0,0)`, `_maxPos=(7,12)`). Allocation: `_map/_visited/_targetVisited/_gValue/_hValue` mỗi cái `w*h`; `_holdedUnits=HashSet<GameUnit>`, `_aiMapChangeListeners=HashSet<BaseAI>`; `_pathNodePool/_rented/_bfsQueue/_inverseBfsQueue` = 4 `Queue<PathNode>`; `_lst/_failedNodes` = 2 `List<PathNode>`; `_aStarPriorityQueue` = `PriorityQueue<PathNode>` (**defer — chỉ cần cho A*, S3d**).
+7. **`UnitGrid.Init(int,int)`:** `_lastSize` cache → `_width = cellSize.x*w + gapSize.x*max(w-1,0)`, `_height = cellSize.y*h + gapSize.y*max(h-1,0)` → `for y = -offset.y .. h-offset.y-1` / `for x = -offset.x .. w-offset.x-1` → `AddTile(x, y)`. Gọi từ `Init(BattleManager,Color)` với **`w = bonusSize.x + size.x`, `h = bonusSize.y + size.y`** (đọc field `0x30+0x28`, `0x34+0x2c`).
+8. **Default color của UnitGrid** = **`Colors.GridColors.DefaultOutlineColor`** (class có static field Color đầu tiên = `Colors.GridColors`, giải được bằng cách tìm class có `static_fields[0..3]` là 4 float). Kiểm tra `defaultColor.sqrMagnitude < eps` → Unity **`Color` không có `sqrMagnitude`**, rebuild dùng `defaultColor == default(Color)` (nguyên nhân: mọi caller truyền `default(Color)` nên cùng kết quả).
+9. **`Map` MonoBehaviour là "map info component"** đọc trong `HandleInitMap`: `mapSkinPresets` (`GameObject[]`, `0x40`), `berserkPreset` (`0x48`), `obstacleObjects` (`ObstacleObject[]`, `0x50`), `bossObstacleObject` (`0x58`), `bannedObstacles` (`List<int>`, `0x60`). `fieldObject.transform.localPosition = (0f, 20f, 100f)` rồi `SetActive(true)`.
+
+### Deviations (defer, document trong code)
+
+- `Scene_Game.OpeningSequence`: **không port DOTween Sequence** — set thẳng `worldCam.orthographicSize = _camSize` (`ObscuredFloat`, `0x440`) rồi `_opening = null` (bản gốc tween 600 → `_camSize` + `DOLocalMove(MainUI.GetCameraPosition(0))` + `DOFade` mask + DisplayClass closure). Gọi `CheckGameStartEffects(out bonusTier)` để giữ bonus-tier side effect.
+- Localizer feature flags `0x70C..0x719` (12 cờ) — **để false**; Localizer chưa port, key thiếu trả về chính key nên mọi so sánh sẽ sai.
+- `isClanRaidDeckRecord` / `isPvPDeckRecord` → `false` (key literal chưa resolve, không liên quan arena).
+- `curStage` dev-fallback `return _resStages[^1]` — defer, trả `null`.
+- `HandleInitMap`: defer nhánh colosseum/pvp preset + vòng spawn map-effect particles (`resMapSkin.effectPrefabs` = `List<(string,float)>`, dùng `SimpleAssetDB.InstantiatePrefab` + DisplayClass + timer).
+- `GameManager.Init`: defer block LocalPushManager (key prefab `PTR_DAT_06a76290` chưa resolve) — chỉ notification plumbing.
+- `GridMap`: defer `_aStarPriorityQueue`.
+- `ReloadFog` / `SetStageTileBuff` — defer (deep text-lookup, cosmetic/tile-buff).
+- Nhánh mode trong `Init`: colosseum multi-battle (`battleCount` luôn 1), dev artifact options (`enemyLevelBonus != 2 && !isRankedPvP`).
+
+### Traps đã gặp (đừng lặp lại)
+
+- **`EffectAreaDrawer` field tên là `battle`, KHÔNG phải `battleManager`** (`SpawnManager` thì đúng là `battleManager` — dễ nhầm).
+- **`AwesomeInt` KHÔNG có `op_Equality`/`op_Implicit` trong export** → so sánh qua `.v` (`_theme.v == 0`), ghi qua `.v = x` hoặc `.Set(x)`. `_theme` là class → `_theme == null` là reference check, và bản gốc deref thẳng `get_v` nên **thêm null-guard khởi tạo `new AwesomeInt(0)`** (stub-gap guard law).
+- **`Color` không có `sqrMagnitude`** (tính tay 4 thành phần hoặc so bằng `default(Color)`).
+- **`_theme`/`resTheme` bị duplicate** — export có stub cũ `public ResourceTheme resTheme => null;` ở ~L2442, phải xóa trước khi thêm bản port.
+- **Batch Ghidra:** tách output bằng header `########## 0x<rva> ##########` — nếu filter `^#` sẽ nuốt header và trộn body 2 method liên tiếp với nhau (đã 2 lần đọc nhầm sang method kế). Dùng `sed -n 'N,Mp'` theo dòng của `grep -n "##########"`.
+
+### Bước tiếp theo (S3c)
+
+`StartStage` (`0x2e42a5c`) / `StartStage_d__565` + spawn: `GameUnit.Init` / `AddUnitTo`. Sau đó S3d (`UpdateImpl` → `BattleManager.Update` → `BaseAI.Update`, 62 `Unit*AI` qua `AIFactory`/`SetAI`), S3e (damage/die/win → `POST /game/complete`). Gate runtime thật (Scene_Game render + battle chạy) thuộc S3e.
+
+## §51 — S3c part 1: start-stage chain (Update → StartStage → HandleStartStage → BattleManager.StartStage) (2026-10-19)
+
+**Mục tiêu slice:** dựng chuỗi "bấm Start → battle flagged started". **Cổng xanh: compile GREEN (0 lỗi CS) + play-capture GREEN (0 exception, `shot_Scene_Lobby.png` 287KB).** Gate runtime thật (Scene_Game render) vẫn là S3e.
+
+### RVAs đã decompile & port
+
+| Method | RVA | Bản chất |
+|---|---|---|
+| `Scene_Game.Update` | `0x2e72ea4` | điều phối `UpdateImpl()` (+ timer-text UI, defer) |
+| `Scene_Game.UpdateImpl` | `0x2e72fa8` | **gọi `StartStage()` khi một ObscuredFloat timer (12B @`+0x4FC..+0x508`) `<= 0.0f`**; rồi update start/ranking/story timer text |
+| `Scene_Game.StartStage` | `0x2e42a5c` | wrapper **UniTaskVoid** → `AsyncUniTaskVoidMethodBuilder.Start<<StartStage>d__565>` |
+| `Scene_Game.<StartStage>d__565.MoveNext` | `0x2ed0324` | ~890 dòng, 5 "await" (xem dưới) |
+| `Scene_Game.<>c$$<StartStage>b__565_0` | `0x2ead868` | **`bm => bm != null`** (predicate của `Enumerable.All`) |
+| `Scene_Game.<>c$$<StartStage>b__565_1` | `0x2ead880` | **`bm => { BattleManager.StartStage(bm); … }`** (action của `List.ForEach`) |
+| `Scene_Game.HandleStartStage` | `0x2e7e06c` | per-bm setup → `battleManagers.ForEach(bm => bm.StartStage())` |
+| `BattleManager.StartStage` | `0x2ef102c` | `isBattleStarted=true` → clear dmg dict → RegisterAllUnitsToMap/… → StartEnemiesBattle → `fieldUnits.ForEach(u => u.StartBattle(true))` → `fieldGrid.ClearFocus()` → `ApplyWorldTrigger(BattleStart)` → `dealMeterPanel.LogBattleStart(this)` |
+
+### Solved logic
+
+1. **`Update` → `StartStage` trigger:** bản gốc guard bằng một **ObscuredFloat timer 12B @`Scene_Game+0x4FC..0x508`** (`<= 0.0f` → gọi). Field **chưa identify được tên** trong export (ffoff không match). Rebuild dùng **`if (!_isStageStarted) StartStage();`** — net effect giống vì `StartStage` tự gate và `_isStageStarted` chỉ true khi đã start thật.
+2. **5 gate/await của `MoveNext` (rebuild = return sớm để `Update` gọi lại frame sau):**
+   - `battleManagers != null` **và mọi `bm != null`** (`All(bm => bm != null)` — lambda `b__565_0`).
+   - `isStoryMode && !storyModeStageEntered` (`+0x870`) → return.
+   - `mainUI.activeSkillPopupPanel.Close()` (không phải gate — side effect).
+   - `AwesomePrefs.GetInt(<key>, 1) == 1 && !isColosseum` → `AutoMoveUnitToField()`.
+   - **`mainUI.CheckFieldUnitCount()` == false → return** (đây là await thật sự).
+   - Còn lại side effects (xem §).
+3. **State mutations sau gate (đọc trực tiếp từ MoveNext):**
+   | Field | Offset | Ghi |
+   |---|---|---|
+   | `mainUI.startTimer` | MainUI+0x498 | `.SetActive(false)` |
+   | `_currentBattlePhase` | `+0x178` | `0` |
+   | `_isStageStarted` | `+0x368` | `ObscuredBool(true)` ← **đây là battle-started flag** |
+   | `_isStageEndPostCalled` | `+0x374` | `ObscuredBool(false)` |
+   | `_stageStartAt` | `+0x338` | `ObscuredFloat(GetCurrentTime())` |
+   | `_bossTimeCounter` | `+0x350` | `ObscuredFloat(GetCurrentTime())` |
+   | `touchCamera.enabled` | `+0x248` | `true` |
+   | `pvpStarted` | `+0x5CC` | `true` (chỉ khi `isRankedPvP`) |
+   | `_eventModeRoundData` | `+0x6C8` | `= SavePlayerUnits()` (chỉ `isContinuableEventMode`) |
+   | (click flag) | `+0x54E` | `1` — **field KHÔNG có trong export** (`IsStartStageClicked` không tồn tại) → defer |
+   Gọi kèm: `mainUI.RefreshInvasionSpeedUpButton()`, `MainUI.Instance.SetCamPosition(0)`, `mainUI.PvPLock(true)`, `mainUI.ContinuableEventLock(true)`, `isBabel → StartStage_Babel()`.
+4. **`HandleStartStage` (RVA 0x2e7e06c):** `foreach bm: bm.eventTriggerManager.ClearUnitTriggerCoolTimeDic()` → `foreach bm: RefreshCanMerge(); InitStageStartUnitData(); CheckStartStageArtifact(); [mode-gated CheckStartStageStoryChallengeMode/CheckStartStagePickAndPassMode]; StartTileBuff()` → `ResetSingleArenaGoblinHp(); AdjustActiveSkill(); MainUI.Instance.dealMeterPanel.Run()` → `battleManagers.ForEach(bm => bm.StartStage())`.
+5. **`BattleManager.StartStage` (RVA 0x2ef102c):**
+   ```
+   isBattleStarted = true                       // +0x364
+   unSummonedUnitTotalDamage.Clear()            // +0xB0  Dictionary<int,Dictionary<int,long>>
+   RegisterAllUnitsToMap(); HighestLevelUnitCache(); SaveConnectedBuffersConnectedTargetAtStartBattle();
+   StartEnemiesBattle();
+   foreach u in fieldUnits (+0x70): u.StartBattle(true)
+   fieldGrid.ClearFocus()                      // +0x198 UnitGrid
+   _enemyWorldTriggerBundles = null             // +0xE8
+   fieldGrid.tiles.ForEach(<GridTile vtable 0x28>)   // defer — GridTile method chưa resolve
+   _afterBattleStartSubject.OnNext(<Null>)      // +0x160 Subject<Null> — type token chưa resolve → defer
+   ApplyWorldTrigger(WorldTrigger.Conditions.BattleStart)   // 0xb = 11
+   MainUI.Instance.dealMeterPanel.LogBattleStart(this)      // MainUI+0x2A8
+   ```
+6. **`UniTask`/`UniTaskVoid` KHÔNG có source trong export** — `Assets/Plugins/UniTask.dll` là binary DLL. Policy vĩnh viễn: **đổi signature `UniTask`/`UniTaskVoid` → `void`, bỏ body state-machine, chạy đồng bộ** (giống precedent `FetchShop`). Giữ attribute `[AsyncStateMachine(typeof(...))]` cho khớp metadata.
+
+### Deviations / defer (đã document trong code)
+
+- **Music selection** (7 nhánh `AudioController.PlayMusic/GetCurrentMusic`) — defer thuần audio.
+- `IsStartStageClicked` (+0x54E) — field không tồn tại trong export.
+- babel auto-mode (`babelData.autoMode` → `activeSkillManager.ReserveRandomForAuto()`) — field/key chưa resolve.
+- `SpawnManager.SpawnUnit` (RVA của spawn) + `BattleManager.GetAllFieldUnits` stat aggregation + `StoryModeStageStart` + `ReloadWithSkinPreview` + destroy start-prep GOs — **S3c part 2**.
+- `GameUnit.StartBattle(bool)` (export stub L2713), `RegisterAllUnitsToMap`, `HighestLevelUnitCache`, `SaveConnectedBuffersConnectedTargetAtStartBattle`, `StartEnemiesBattle`, `RefreshCanMerge`, `InitStageStartUnitData`, `CheckStartStageArtifact`, `StartTileBuff`, `ClearUnitTriggerCoolTimeDic`, `AutoMoveUnitToField`, `AdjustActiveSkill`, `ResetSingleArenaGoblinHp`, `DealMeterPanel.Run/LogBattleStart` — **tất cả đều là stub `{}` trong export**, gọi thẳng là an toàn (no-op).
+
+### Traps đã gặp
+
+- **`WorldTrigger.Conditions.BattleStart = 11`** — `ApplyWorldTrigger` nhận enum, không nhận `int`. (`BattleStart = 11`, `StageStart = 5`, `BattleLose = 10`.)
+- **Ghidra batch double-offset:** mảng `targets` phải chứa **RVA thuần** — script tự + `IMAGEBASE_OFFSET`. Đã 1 lần ghi sẵn Ghidra-addr (RVA+0x100000) → kết quả trỏ sai 0x100000 và decompile ra `fn_<sai>` (Ghidra không tìm function → body lộn xộn `unaff_x19`). **Nhận diện:** nếu header in đúng RVA nhưng tên function là `fn_<hex>` thay vì `Scene_Game$$X` → sai offset.
+- `UnitGrid.tiles` là **property** (`=> null` stub), không phải field `_tiles` — không dùng trực tiếp field.
+- `EffectAreaDrawer.battle` (không phải `.battleManager`), `MainUI+0x498 = startTimer`, `MainUI+0x2A8 = dealMeterPanel`.
+- `Scene_Game+0x54E` không phải field (ffoff: "no exact", kẹp giữa `_finalRankingScore`(0x530) và `_gameTimer`(0x558)).
+
+### Bước tiếp theo (S3c part 2)
+
+`SpawnManager.SpawnUnit` (RVA cần tìm) + `BattleManager.AddUnitTo` (RVA 0x2efa530, đã decompile batch62) + `GameUnit.Init` (RVA 0x308f7e8, đã decompile) + `BattleManager.GetAllFieldUnits` (0x2edfe70). Rồi S3d/S3e.
+
+## §52 — S3c part 2: spawn chain (GameUnit.Init + SpawnManager.SpawnUnit + BattleManager.AddUnitTo) (2026-10-19)
+
+**Mục tiêu slice:** "unit thực sự được tạo ra". **Cổng xanh: compile GREEN (0 lỗi CS) + play-capture GREEN (0 exception, 286KB).** Gate runtime thật vẫn là S3e.
+
+### RVAs đã decompile & port
+
+| Method | RVA | Bản chất |
+|---|---|---|
+| `GameUnit.Init` | `0x308f7e8` | 17 tham số; resolver `ResourceUnit` → identity/state fields → `SetTeam` → `ReloadTerritoryStatBuffs` → `SetResourceUnit` → `InitLevelIcon` → `live=true` |
+| `GameUnit.SetTilePosition` | `0x309f958` | `gridObj.tilePos = pos` → `parentGrid.GetPosFromTile(pos)` + `gridObj.offset` → `transform.position = (x, y, GetZ(y,x)+off.z)` ; `applyZPosition` → skip localPosition |
+| `BattleManager.GetCard` | `0x2ee8f04` | **`cardInfos.Find(c => c.cardId == unitId)`** (List<CardInfo> @+0xC8) |
+| `SpawnManager.SpawnUnit` | `0x3139478` | `unitPool.CanRent(id,skin)` → `Rent` + `SetParent` ; else `Instantiate(Scene_Game.Instance.unitPrefab, bm.transform).Get<GameUnit>()` → `Init(...)` → `SetPosition` → `SetDraggable(false)` → `CacheUnitAssets`/`DivinePowerToUnit`/`HandleSpawnUnit` |
+| `BattleManager.AddUnitTo` | `0x2efa530` | resolve `resUnit`/`GetParentIDIfHas`/`GetCard`/rogueCard → level<1 ? lấy từ cardInfo → `SpawnManager.SpawnUnit` → isField ? `fieldUnits.Add`+`SetTilePosition(fieldGrid.GetTilePos)`+`ShowHpGauge(false,true)`+`SetAI(null)`+`CheckTransformCondition(true)`+`RefreshCanMerge`+`SetUnitsOrder` : `waitingUnits.Add`+`ShowHpGauge(true,true)`+`SetAI(AIFactory.GetSuitableAI(unit))` → `_spawnUnitSubject.OnNext(unit)` |
+| `AIFactory.GetSuitableAI` | `0x3005bf8` | `unit.resUnit` (+0x2E8) → `.aiClassName` (+0x208) → cache dict → ctor delegate(unit) — **defer (S3d)** |
+
+### Solved logic
+
+1. **`GameUnit.Init` param map** (Ghidra đặt tên theo thứ tự register, KHÔNG khớp chữ ký C# — suy ra bằng offset write):
+   | Ghidra param | C# param | Ghi về |
+   |---|---|---|
+   | `param_2` | `id` | → `ResourceBase.Get<ResourceUnit>`; null → log + return |
+   | `param_3` | `team` | → `SetTeam(team, true)` |
+   | `param_4` | `level` | → `SetResourceUnit(resUnit, level, skin, true)` |
+   | `param_5` | `cardLevel` | `_cardLevel` (ObscuredInt @`0x584`) |
+   | `param_6` | `buildingLevels` (Ghidra ghi `undefined4` — sai type) | → `SetBuildingLevels` khi != null |
+   | `param_7` | `skin` | → `SetResourceUnit` |
+   | `param_8` | `artifacts` | `<artifacts>k__BackingField` @`0x918` |
+   | `param_9` | `poolIdx` | `_poolIdx` @`0x948` |
+   | `param_10` | `potentialSlot` | `_potentialSlot` @`0x9D8` |
+   | `param_11` | `potentialTier` | `_potentialTier` @`0x9DC` |
+   | `param_12` | `battleManagerIdx` | @`0xA68` |
+   | `param_15/16` | `statueIndex/statueId` | @`0x230`/`0x234` |
+   | `param_17/18` | `overcome/dimensionLevel` | `_overcomeLevel` @`0x390` / `_dimensionLevel` @`0x3A0` |
+   **Thứ tự:** `initializedForBattle=false`(@`0x1EA`) → `battleManagerIdx` → **`_uid = ++static int`**(@`0x128`, đếm tăng mỗi unit) → defer `_debugColor=Random.ColorHSV` + static phase float → `SetItemCount(0)` → `itemCountGroup.alpha` → `buffPanel.Clear()` → `_cardLevel` → potentials → `_potentialSlot/_potentialTier/_overcomeLevel/_dimensionLevel` → `_iceObject.SetActive(false)`(@`0x888`) → reset `isClone`/`creatureInfo`(@`0x250`)/`forceNoHpGauge`/`ignoreBuildingStatBuff`/`isStatueCandidate`/`cantAttackUntilUseSkill`/`canUseSkillOnlyOnce` → `statueIndex/statueId` → `[defer buff-gauge wiring 0xA8/0xB0/0xD8/0x1F8/0x200]` → `SetBuildingLevels` → `artifacts` → `_poolIdx` → **`SetTeam(team,true)` → `ReloadTerritoryStatBuffs()` → `SetResourceUnit(resUnit, level, skin, true)` → `InitLevelIcon()` → `live=true`(@`0x1E9`)**.
+   `potentialSlot == 999` là **sentinel "auto"** (bản gốc đọc `resUnit.GetPotentials(...).First().<0x80>`, null/-1 khi không có).
+2. **`SetTilePosition` (RVA 0x309f958):** `gridObj` @GameUnit+`0xC8`; `GridObject` fields: `parentGrid`(UnitGrid) @`0x20`, `tilePos`(Vector2Int) @`0x28`, `offset`(Vector3) @`0x30`, `applyZPosition`(bool) @`0x3C`.
+   ```
+   if (gridObj.parentGrid == null) return;
+   gridObj.tilePos = pos;
+   p = parentGrid.GetPosFromTile(pos);   off = gridObj.offset;
+   transform.position = (p.x+off.x, p.y+off.y, Scene_Game.GetZ(y,x) + off.z);
+   if (applyZPosition) return;           transform.localPosition = (x, y, 0);
+   ```
+   `Scene_Game.GetZ(float y, float x = 0f)` (export L3719).
+3. **`SpawnManager.SpawnUnit`:** `battleManager` (SpawnManager+`0x10`) → `bm.unitPool` (**BattleManager+`0x368`**). Branch:
+   - `unitPool.CanRent(unitId, skinId)` → `unitPool.Rent(...)` + `unit.transform.SetParent(bm.transform)`
+   - else → `Object.Instantiate(Scene_Game.Instance.unitPrefab (+`0x298`), bm.transform)` → `SetActive(true)` → `go.Get<GameUnit>()` (extension `Utility.Get<T>(this GameObject)` — **KHÔNG PHẢI `GetComponent`**)
+   Rồi `unit.Init(..., battleManagerIdx: bm.battleManagerIdx, ...)` → `SetPosition(pos)` → `SetDraggable(false)` → `Scene_Game.CacheUnitAssets(resUnit, skin)` → `DivinePowerToUnit(unit)` → `HandleSpawnUnit(unit)`.
+4. **`AddUnitTo` flow:** `resUnit = ResourceUnit.Get(id)` → **`id = resUnit.GetParentIDIfHas()`** (transform-unit map về parent) → `cardInfo = GetCard(id)` → rogueCard (isRogueLike) → `level < 1` ⇒ lấy `cardInfo.level` (skin/potentialTier cũng lấy từ cardInfo) → `spawnManager.SpawnUnit(pos, id, team:0, ...)` → **isField** branch vs waiting branch (xem bảng trên) → `_spawnUnitSubject.OnNext(unit)`.
+5. **`BattleManager.GetCard`** = `cardInfos.Find(c => c.cardId == unitId)`. `CardInfo` layout: `cardId`@`0x10`, `level`@`0x14`, `skin`@`0x18`, `potentialTier`, `overcome`, `dimensionLevel`, `isLevelSyncApplied`.
+
+### Deviations / defer (đã document trong code)
+
+- `_debugColor = Random.ColorHSV` + static phase float @GameManager static `+0x28` — cosmetic.
+- buff-gauge wiring (`hpDestroyAnim1/2`, `buffManager`, `incapacitatedManager`, `levelIconBattle`) — lookup gián tiếp chưa resolve.
+- statue GO SetActive (`statueIndexBox/IndexText/IndexEffect`).
+- potentials: giữ sentinel `potentialSlot` thay vì `resUnit.GetPotentials(...).First()`.
+- test-mode `CardInfo` copy từ `CardData` (`GameManager.GetCard(id, true)`).
+- rogueLike default treasure/accessories (`GetDefaultRogueLikeTreasure/Accessories`).
+- `SpawnUnit`: `id == 100000-2` (0x1869E) → `Scene_Game.HandleCustomEvent`; clan-raid & colosseum branches.
+- `AIFactory.GetSuitableAI` — **S3d** (cache dict + ctor delegate, 62 `Unit*AI`).
+- `team` trong `AddUnitTo` hardcode `0` (player) — chữ ký không có team.
+
+### Traps đã gặp
+
+- **`Utility.Get<T>(this GameObject)` là extension method**, không phải `GetComponent<T>`. Bản gốc gọi `Utility.Get<GameUnit>(go)`.
+- **`Scene_Game.DivinePowerToUnit`** — game typo "Divine" (Ghidra cũng ra "Divine"); KHÔNG sửa thành "Divide" nếu muốn khớp metadata.
+- **`SpawnManager.SpawnUnit` là instance method** — `AddUnitTo` phải gọi `spawnManager.SpawnUnit(...)` (spawnManager @BattleManager+`0x330`).
+- Ghidra đặt tên param theo thứ tự register, **không khớp thứ tự chữ ký C#** — luôn map lại qua offset write.
+- `BattleManager+0x368 = unitPool`, `+0xC8 = cardInfos`, `+0x70 = fieldUnits`, `+0x79/0x1A0?` = waitingGrid (`+0x1A0`), `waitingUnits` là field riêng.
+
+### Bước tiếp theo (S3d)
+
+`Scene_Game.UpdateImpl` (đã port minimal) → `BattleManager.Update` → `GameUnit.Update/UpdateImpl` → `BaseAI.Update`. 62 `Unit*AI` qua `AIFactory.CacheConstructor` + `GetSuitableAI` (`unit.resUnit.aiClassName` @`ResourceUnit+0x208`). Cần decompile: `BattleManager.Update`, `AIFactory.CacheConstructor`, `ResourceUnit+0x208` field name, `GameUnit.Update`.
+
+## §53 — S3d part 1: tick entry (GameUnit.Update/FixedUpdate + BaseAI.Update) + recon BattleManager.Update & GameUnit.UpdateImpl (2026-10-19)
+
+**Mục tiêu slice:** vào được vòng lặp tick. **Cổng xanh: compile GREEN (0 lỗi CS) + play-capture GREEN (0 exception, 286KB).** Gate runtime thật vẫn là S3e.
+
+### RVAs đã decompile & port
+
+| Method | RVA | Bản chất |
+|---|---|---|
+| `GameUnit.Update` | `0x3098b88` | `Scene_Game.Instance.resTheme.useFixedUpdate == true` → return ; else `UpdateImpl()` |
+| `GameUnit.FixedUpdate` | `0x3098c14` | **mirror suy luận** (chưa decompile — batch66 chạy ra kết quả batch cũ, cần rerun) |
+| `GameUnit.UpdateImpl` | `0x3098ca0` | **RECON ONLY** — 414 dòng, chưa port |
+| `BattleManager.Update` | `0x2ed9e9c` | **RECON ONLY** — 442 dòng, input/UI handler, chưa port |
+| `AIFactory.CacheConstructor` | `0x3005d08` | **RECON ONLY** — reflection (`Type.GetTypeFromHandle` ×2 + ctor delegate cache), chưa port |
+| `BaseAI.Update` | `0x303c0a8` | `if (!enabled) return; OnActionFixed(currentAction); if (keep) return; time -= dt; if (time<=0) OnActionEnd(currentAction)` |
+
+### Solved logic
+
+1. **`GameUnit.Update` (RVA 0x3098b88)** — 8 dòng, gate theo theme:
+   ```csharp
+   var scene = Scene_Game.Instance;               // Scene_Game static field 0
+   if (scene == null || scene.resTheme == null) throw new NullReferenceException();
+   if (scene.resTheme.useFixedUpdate) return;      // ResourceTheme.useFixedUpdate @+0x14C
+   UpdateImpl();                                    // vtable call
+   ```
+   `GameUnit.FixedUpdate` = mirror (`!useFixedUpdate` → return). **Chưa verify bằng Ghidra** — batch66 bị lỗi regex nên ra lại output batch59; rerun khi port `UpdateImpl`.
+2. **`BaseAI` layout** (foff): `me`(GameUnit) @`0x10`, `currentAction`(struct `AIAction`) @`0x18`, `skillId` @`0x24`, `enabled`(bool) @`0x28`.
+   `AIAction = { State state(int)@+0, float time@+4, bool keep(bool)@+8 }` size 12 → tại BaseAI: `state`@`0x18`, `time`@`0x1C`, `keep`@`0x20`.
+   `BaseAI.Update`:
+   ```csharp
+   if (!enabled) return;
+   OnActionFixed(currentAction);                    // vtable +0x188, AIAction by value (12B → 2 chunk)
+   if (currentAction.keep) return;
+   currentAction.time -= dt;
+   if (currentAction.time <= 0f) OnActionEnd(currentAction);   // vtable +0x1A8
+   ```
+   Ghidra render thành `(this, param_2[3]=*(this+0x18) long, (int)param_2[4]=*(this+0x20), *(vtable+400))` — tức **struct 12 byte passed by value** + `MethodInfo*`. Slot 0x188 (=vtable[49]) & 0x1A8 (=vtable[53]) nhận diện **bằng semantics** (per-frame hook vs expiry hook), CHƯA đối chiếu slot index thật. BaseAI có đúng 4 virtual nhận `AIAction`: `OnActionStart`/`OnAction`/`OnActionFixed`/`OnActionEnd` (dump.cs L65239–65248, khai báo theo thứ tự đó, `Update(float)` ở L65251).
+
+### Recon — `BattleManager.Update` (RVA 0x2ed9e9c, CHƯA port)
+
+Input/UI handler (KHÔNG đụng battle sim), cấu trúc:
+```csharp
+private void Update()
+{
+    if (battleManagerIdx != 0) return;            // +0x34 — chỉ bm chính tick
+    var scene = Scene_Game.Instance;
+    var mainUI = scene.mainUI;                    // Scene_Game+0x268 = MainUI
+    if (Input.GetMouseButtonDown(0))
+    {
+        if (mainUI.tutorialPanel.<blockRaycast>)  // MainUI+0x3F0 = IngameTutorialPanel; +0x8C = <blockRaycast>
+            ... /* tutorial block */
+        if (Utility.IsPointerOverUIObject()) { /* colosseum invade panel */ }
+        else if (ColosseumInvadeInfoPanel.Instance.isActiveAndEnabled
+                 && Utility.IsPointerOver(ColosseumInvadeInfoPanel.Instance.transform)) { /* keep open */ }
+        else ColosseumInvadeInfoPanel.Instance.Hide();
+        if (Scene_Game.Instance.isRogueLike) { /* roguelike branch */ }
+        else {
+            if (Input.GetMouseButtonDown(0) && Utility.IsPointerOver(mainUI.itemInfoPanel.transform)) { /* keep open */ }
+            mainUI.itemInfoPanel.Hide();          // MainUI+0x158 = ItemInfoPanel
+            mainUI.basePanel.devilInfo.SetActive(false);   // MainUI+0x3D0 = BasePanel; +0x198 = Border devilInfo
+            mainUI.basePanel.eliteInfo.SetActive(false);   // BasePanel+0x168 = Border eliteInfo
+            ...
+        }
+    }
+    /* ... 300 dòng còn lại: drag/selection, fieldGrid(+0x198), waitingGrid, unit picking ... */
+}
+```
+Field đã resolve: `MainUI.mainUI`/`Instance`, `MainUI+0x158=itemInfoPanel`, `+0x3D0=basePanel`, `+0x3F0=tutorialPanel` (`IngameTutorialPanel+0x8C=<blockRaycast>`), `BasePanel+0x198=devilInfo(Border)`, `+0x168=eliteInfo(Border)`. `Utility.IsPointerOverUIObject()` / `Utility.IsPointerOver(Transform)` có sẵn (Utility.cs L1802/L1807). `ItemInfoPanel.Hide()` L75, `ColosseumInvadeInfoPanel.Hide()` L29.
+
+### Recon — `GameUnit.UpdateImpl` (RVA 0x3098ca0, CHƯA port)
+
+414 dòng; call graph (thứ tự xuất hiện):
+```
+sizeRatio / height / transform.localPosition  (visual offset — +0x5E0 là 1 list/timer)
+battle (get_battle) -> if (!battle.isBattleStarted) return-ish   // BattleManager+0x364 = isBattleStarted
+  Rigidbody2D.velocity set (khi Object.op_Inequality(...))       // GameUnit+0x30 = rigidbody
+  if (live /*+0x1E9*/) {                                          // live @0x1E9
+    ... Time.deltaTime accumulator (+0x7DC, +0x7A8 counters)
+    if (!<+0x228>) CheckNextPath();  TileMoveUpdate();
+    if (buffManager(+0x1F8) != null) ...
+    UpdateChannelingBar();  UpdateInvincibleTimers();
+    CanUseSkill() / atkRange / skillRange / CheckRangeTo(...) / SetTarget(null)  // target invalidate
+    ... ShowEffect(...) when height timer expires
+    UpdateCCTimers();
+    if (<+0x22A>) ...
+    UpdateAITimers();       // <- đây gọi BaseAI.Update
+    ...
+  }
+```
+**Đã resolve đủ field (foff) — việc còn lại là transcription, không phải discovery:**
+
+| Offset | Field | Ghi chú |
+|---|---|---|
+| `+0x5E0` | `private readonly List<ValueTuple<DamageInfo.BlockedBy, GameObject>> _superShieldEffects` | đầu method: đếm >0 rồi set `transform.localPosition` theo `sizeRatio`/`height` + `Time.time` |
+| `+0x7DC` | `public bool isSummoning` | |
+| `+0x7A8` | `private int _tileMoveWaitFrame` | |
+| `+0x228` | `private bool _isMoving` | `if (!_isMoving) CheckNextPath();` |
+| `+0x22A` | `public bool isField` | |
+| `+0x30` | `public Rigidbody2D rigidbody` | `set_velocity` khi battle đang chạy |
+| `+0x1E9` | `public bool live` | tick body bao bởi `if (live)` |
+| `+0x1F8` | `public BuffManager buffManager` | |
+| getters | `sizeRatio` (GameUnit.cs L1045, stub `=> 0f`), `height` (L1047, stub `=> 0f`), `battle` | stub → gọi được ngay |
+
+Các `Update*Timers` (`UpdateChannelingBar`/`UpdateInvincibleTimers`/`UpdateCCTimers`/`UpdateAITimers`/`TileMoveUpdate`/`CheckNextPath`/`CheckRangeTo`/`SetTarget`/`ShowEffect`/`CanUseSkill`) đều là stub trong export → **an toàn khi gọi**. `BattleManager.isBattleStarted` @`+0x364` là gate ở đầu nhánh battle.
+
+### Recon — `AIFactory.CacheConstructor` (RVA 0x3005d08, CHƯA port)
+
+```csharp
+public static void CacheConstructor(string aiName)   // ResourceUnit.aiType @+0x208
+{
+    if (_cache.ContainsKey(aiName)) return;
+    var type = <Type.GetTypeFromHandle(...)×2>;       // reflection
+    var ctor = type.GetConstructor(new[]{ typeof(GameUnit) });
+    _cache[aiName] = ctor;
+}
+```
+`GetSuitableAI(unit)` = `if (unit?.resUnit == null) throw; var aiType = unit.resUnit.aiType; if (!_cache.ContainsKey(aiType)) CacheConstructor(aiType); return _cache[aiType](unit);`
+**Ponytail:** reflection-based AI loading = 62 class name → ctor. Thay vì port reflection, có thể map `aiType` string → `new XxxAI(unit)` qua 1 dict tĩnh (an toàn, không AOT/IL2CPP issue, đúng semantics). Quyết định này thuộc S3d part 2.
+
+### Deviations / defer (đã document trong code)
+
+- `GameUnit.FixedUpdate` — mirror **suy luận**, chưa Ghidra-verify (batch66 failed).
+- `BaseAI.Update` — 2 virtual slot nhận diện bằng semantics, chưa đối chiếu slot index.
+- `BattleManager.Update` (input/UI, 442 dòng) — chưa port.
+- `GameUnit.UpdateImpl` (414 dòng) — chưa port.
+- `AIFactory.CacheConstructor` / `GetSuitableAI` — reflection, chưa port (S3d part 2).
+
+### Traps đã gặp
+
+- **`GameManager+0x460 = rogueLikeSystem`, KHÔNG phải `_resTheme`.** `_resTheme` @`Scene_Game+0x460`. Cú pháp Ghidra `**(long**)(cls + 0xb8) + 0x460` nghĩa là *singleton của class PTR_DAT_06a51c58 (= Scene_Game)* rồi +0x460 — KHÔNG đọc nhầm là GameManager.
+- **Batch Ghidra chạy lại ra output cũ** khi regex thay targets array fail (decomp_batch66.java giữ nguyên targets của batch59). Luôn `grep -n "##########"` để verify header khớp RVA mới trước khi split.
+- `BaseAI.currentAction` là **struct field** — `currentAction.time -= dt` mutate in-place được (C# struct field trên class là lvalue).
+- `BattleManager+0x158 = _gridUpdateSubject` (Subject<GameUnit>), `+0x3D0 = _nullInts` — **KHÔNG** phải itemInfoPanel/basePanel (đó là MainUI offsets).
+
+### Bước tiếp theo (S3d part 2)
+
+1. Port `GameUnit.UpdateImpl` (resolve `sizeRatio`/`height`/`battle` getters + 5 field offsets + `Update*Timers`).
+2. Port `AIFactory` bằng dict tĩnh (không reflection) + `GetSuitableAI` + 62 `Unit*AI` skeleton.
+3. Port `BattleManager.Update` (input handler) — thấp nhất ưu tiên, không ảnh hưởng sim.
+4. Rerun Ghidra verify `GameUnit.FixedUpdate`.
+
+## §54 — S3d part 2: unit tick body + AI factory (GameUnit.UpdateImpl + AIFactory) (2026-10-19)
+
+**Mục tiêu slice:** 1 unit trên field thật sự tick mỗi frame (AI + di chuyển + timer + target invalidation). **Cổng xanh: compile GREEN (0 lỗi CS) + play-capture GREEN (0 exception, 286KB).** Gate runtime thật vẫn là S3e.
+
+### RVAs đã decompile & port
+
+| Method | RVA | Bản chất |
+|---|---|---|
+| `GameUnit.UpdateImpl` | `0x3098ca0` | tick body — xem cấu trúc bên dưới |
+| `AIFactory.GetSuitableAI` | `0x3005bf8` | `unit.resUnit.aiType` → cache dict → `ctor(unit)` |
+| `AIFactory.CacheConstructor` | `0x3005d08` | `Type.GetType(aiName).GetConstructor([GameUnit])` → cache delegate |
+
+### Solved logic — `GameUnit.UpdateImpl` cấu trúc
+
+```
+1) _superShieldEffects (List<ValueTuple<BlockedBy, GameObject>> @+0x5E0):
+   nếu Count > 0 thì bay quanh unit — step = (360f/n) * PI/180, ang = Time.time * 1.5f,
+   mỗi phần tử: localPosition = (cos*sr*25, height*0.5 + sin*sr*25, 0)   [sincosf -> Mathf.Sin/Cos]
+
+2) gate: var b = battle; if (b == null) return;  if (!b.isBattleStarted) return;
+   if (rigidbody != null) rigidbody.velocity = Vector2.zero;       // GameUnit+0x30
+   if (!live) return;                                               // +0x1E9
+
+3) if (_interactionOffTime > 0) -= dt;                              // +0x834
+
+4) if (!isSummoning) { ...toàn bộ tick body... }                    // +0x7DC
+   - ai.Update(Time.deltaTime);                                     // ai @+0x2D8, vtable +0x1C8
+   - if (_tileMoveWaitFrame > 0) _tileMoveWaitFrame--;              // +0x7A8
+   - if (!_isMoving) CheckNextPath();  TileMoveUpdate();            // _isMoving @+0x228
+   - if (buffManager != null) buffManager.Update();                 // +0x1F8
+   - UpdateChannelingBar(); UpdateInvincibleTimers();
+   - if (_moveStopTime > 0) { -= dt; if (<=0) { var r = CanUseSkill() ? skillRange : atkRange;
+                                                if (!CheckRangeTo(target, r)) SetTarget(null); } }   // +0x28C, target @+0x1D0
+   - if (_addDamageMultCooltimeTimer > 0 && -=dt <= 0) ShowEffect(null, (0, height*0.5, -1), zero,...)  // +0x500
+     rồi _addDamageMultCooltimeTimer -= dt
+   - UpdateCCTimers();
+   - if (buffManager != null && isField) { var di = default(DamageInfo);
+       buffManager.ApplyBuffOption(BuffOption.Conditions.DuringBattle, ref di); }     // Conditions.DuringBattle = 29
+   - if (defDenListCurrentFrame != null) Clear();                    // +0x808 (List<GameUnit>)
+
+5) BA TIMER ƯU TIÊN (if/else-if/else): _stopTime (+0x838) > buffChannelingTime (+0x850) > ice/AI-timers
+   a) _stopTime > 0:
+      -= dt; if (<0) { =0; if (resUnit.GetValueBool(ManaLockWhenStop)) SwapManaAndBuffBar(); ai.HandleStopEnd(); }
+      if (resUnit.GetValueBool(ManaLockWhenStop)) {
+          v = GetSkillValueDoubleSum(resSkill, SkillTag.StopTime);
+          if (v <= 0) return;
+          buffGaugeOrBossBuffGauge?.Set((long)(_stopTime*1000), (long)(v*1000)); }
+   b) buffChannelingTime > 0:
+      -= dt; if (<0) { =0; if (GetValueBool(ManaLockWhenBuffChanneling)) SwapManaAndBuffBar(); ai.HandleStopEnd(); }
+      if (GetValueBool(ManaLockWhenBuffChanneling)) {
+          v = GetSkillValueDoubleSum(resSkill, SkillTag.BuffChannelingTime);
+          if (v > 0) buffGaugeOrBossBuffGauge?.Set((long)(buffChannelingTime*1000), (long)(v*1000)); }
+      then if (_iceTime (+0x26C) > 0) { -= dt; if (>0) return; EndIce(true); }
+   c) else:
+      if (_iceTime > 0) { -= dt; if (>0) return; EndIce(true); return; }
+      UpdateAITimers();
+      // fixedTarget invalidation:
+      if (fixedTarget (+0x1D8) == null) return;
+      if (fixedTarget.live) return;
+      if (fixedTarget.killedBy (+0x7A0) != this) return;
+      if (_isSkillAttacking (+0x221) && _curControllerSkill (+0xAA0) != null
+          && GetSkillValueBool(_curControllerSkill, SkillTag.CancelWhenNoTarget)) return;
+      if (_curControllerSkill != null && GetSkillValueBool(_curControllerSkill, SkillTag.SetCurControllerSkill)
+          && GetAttackSkillID() == _curControllerSkill.id) return;
+      if (_channelingTime (+0x274) > 0
+          && !resUnit.GetValueBool(UnitTag.CancelWhenFixedTargetIsDeadWhileChanneling, true)) return;
+      if (_isSkillAttacking && resUnit.GetValueBool(UnitTag.ForceContinueWhenFixedTargetIsDeadDuringSkill)) return;
+      if (_isAttacking (+0x220) && _curControllerSkill != null
+          && GetAttackSkillID() == _curControllerSkill.id
+          && resUnit.GetValueBool(UnitTag.ForceContinueWhenFixedTargetIsDeadDuringSkill)) return;
+      CancelMotion(); fixedTarget = null;
+```
+
+### ★ Magic-key decode — `UnitTag` & `SkillTag` (đây là "tên code" của 4 tag)
+
+`ResourceUnit.GetValueBool(UnitTag key, bool @default)` (ResourceUnit.cs L1363) và
+`GameUnit.GetSkillValueDoubleSum(ResourceSkill resSkill, SkillTag key, double seed)` (L3559):
+
+| Số | Tên | Dùng ở đâu trong UpdateImpl |
+|---|---|---|
+| `UnitTag` 206 (0xCE) | **`ForceContinueWhenFixedTargetIsDeadDuringSkill`** | `_isSkillAttacking` / `_isAttacking` → GIỮ target đã chết |
+| `UnitTag` 207 (0xCF) | **`CancelWhenFixedTargetIsDeadWhileChanneling`** | `_channelingTime > 0`, default **`true`** (khác các tag khác!) |
+| `UnitTag` 208 (0xD0) | **`ManaLockWhenBuffChanneling`** | nhánh `buffChannelingTime` |
+| `UnitTag` 209 (0xD1) | **`ManaLockWhenStop`** | nhánh `_stopTime` |
+| `SkillTag` 535 (0x217) | **`SetCurControllerSkill`** | fixedTarget invalidation |
+| `SkillTag` 536 (0x218) | **`CancelWhenNoTarget`** | fixedTarget invalidation |
+| `SkillTag` 537 (0x219) | **`BuffChannelingTime`** | max value của buff-channeling gauge |
+| `SkillTag` 538 (0x21A) | **`StopTime`** | max value của stop gauge |
+
+Các enum này nằm trong file `ResourceUnit.cs` L14+ (`public enum UnitTag`) và `ResourceSkill.cs` L~546 (`public enum SkillTag`) — **tra bằng `grep -rn "= 206,\|= 207,..." ResourceUnit.cs`**, KHÔNG cần Ghidra.
+
+`Gauge.Set(long value, long maxValue, bool force = false)` (Gauge.cs L149). `buffGaugeOrBossBuffGauge` là property stub `=> null` (L962) → cả gauge branch đều no-op cho tới khi port property.
+
+### Solved logic — `AIFactory`
+
+`ResourceUnit.aiType` (+`0x208`) là **string**; `GetSuitableAI(unit)`:
+```csharp
+if (unit == null || unit.resUnit == null) throw new NullReferenceException();
+var aiName = unit.resUnit.aiType;
+if (!_constructorDict.ContainsKey(aiName)) CacheConstructor(aiName);
+return _constructorDict[aiName](unit);        // delegate (GameUnit) -> BaseAI
+```
+`CacheConstructor`: `Type.GetType(aiName).GetConstructor([typeof(GameUnit)])` → cache `u => (BaseAI)ctor.Invoke([u])`.
+99 file `*AI.cs` trong export (đều global namespace, Assembly-CSharp) → `Type.GetType(<tên>)` resolve được trong Editor.
+**Defer/ghi chú:** bản gốc dùng **indexer** (ném `KeyNotFoundException` nếu type không resolve) — port guard + `Debug.LogWarning` để 1 aiType sai không crash cả trận. Nếu build IL2CPP link-strip 62 class AI → thay bằng dict tĩnh `aiName -> new XxxAI(u)`.
+
+### Deviations / defer (đã document trong code)
+
+- `_superShieldEffects` hằng `_UNK_013e3510` = `PI/180` (đổi độ→radian); `sincosf` → `Mathf.Sin`/`Mathf.Cos` (Unity 2022.3 **không có** `Mathf.SinCos`).
+- `ai.Update(Time.deltaTime)` (vtable +0x1C8) & `ai.HandleStopEnd()` (vtable +0x418) — nhận diện **bằng semantics**, chưa đối chiếu slot index.
+- `ShowEffect(null, (0, height*0.5, -1), Vector3.zero, 0f, false, false, null, default, this)` — đọc lại theo overload `(string, Vector3, Vector3, float, bool, bool, ResourceSkill, ResourceSkill.Effect, GameUnit)`; Ghidra tách `ResourceSkill.Effect` 288B ra cuối và đảo thứ tự.
+- `buffGaugeOrBossBuffGauge` là stub `=> null` → 2 gauge branch no-op.
+- `GetSkillValueDoubleSum`/`GetSkillValueBool`/`Update*CCTimers/Invincible/Channeling/AITimers/TileMoveUpdate/CheckNextPath/CheckRangeTo/SetTarget/CancelMotion/EndIce/CanUseSkill` đều là stub trong export → an toàn khi gọi.
+- `buffManager.ApplyBuffOption(BuffOption.Conditions.DuringBattle, ref di)` — `DuringBattle = 29` (0x1D); `DamageInfo` struct 264B zero-init.
+- `AIFactory`: guard thay vì indexer.
+
+### Traps đã gặp
+
+- **`Mathf.SinCos` không tồn tại trong Unity 2022.3** → dùng `Mathf.Sin`/`Mathf.Cos` (sinh lỗi CS0117).
+- **`UnitTag` là nested enum của `ResourceUnit`** → phải viết `ResourceUnit.UnitTag.X` (sinh lỗi CS0103 nếu viết裸 `UnitTag`).
+- **`AIFactory.cs` thiếu `using UnityEngine;`** (chỉ có `System` + `System.Collections.Generic`) → `Debug` không resolve.
+- `_UNK_013e3510` / `_UNK_013e4080` trong Ghidra = hằng float trong `.rodata` — đọc trực tiếp bằng con số (`PI/180`, `1000.0`) thay vì đoán.
+
+### Bước tiếp theo
+
+1. Port `BattleManager.Update` (442 dòng input/UI handler — recon §53, không ảnh hưởng sim).
+2. Rerun Ghidra verify `GameUnit.FixedUpdate` (§53 batch66 fail).
+3. S3e: damage/die/win-lose → `/game/complete` — **đây là gate runtime thật** của Scene_Game.
+
+## §55 — S3e part 1: win/lose decision core (CanEndStage + CheckStageEnd + HandleStageClear/Lose) (2026-10-19)
+
+**Mục tiêu slice:** luồng thắng/thua của 1 trận. **Cổng xanh: compile GREEN (0 lỗi CS) + play-capture GREEN (0 exception, 286KB).** Gate runtime thật (đánh 1 trận thật) vẫn cần `GameUnit.Damaged`/`Die`.
+
+### RVAs đã decompile & port
+
+| Method | RVA | Bản chất |
+|---|---|---|
+| `BattleManager.CanEndStage` | `0x2ef163c` | đếm unit sống sót → `(canEnd, isWin)` |
+| `<CanEndStage>g__CountLeftUnit\|331_0` | `0x2ef1778` | helper đếm (bản gốc là display-class lambda) |
+| `BattleManager.CheckStageEnd` | `0x2ef1ecc` | cache → `CanEndStage` → dọn battle → `HandleStageClear`/`HandleStageLose` |
+| `BattleManager.HandleStageClear` | `0x2ef23dc` | clear → `ApplyBuffsToFieldUnits(BattleWin)` → `StageEnd()` |
+| `BattleManager.HandleStageLose` | `0x2ef26a8` | mirror, `BattleLose` + `ApplyWorldTrigger(BattleLose)` |
+
+### Solved logic — chuỗi thắng/thua
+
+**`CountLeftUnit(list, cnt)`** (RVA `0x2ef1778`, cnt là `int[3]`):
+```csharp
+foreach (var u in list) {
+    if (u.isMimic) continue;      // GameUnit+0x22E = isMimic  (KHÔNG PHẢI isClone như +0x22D)
+    if (!u.live) continue;        // +0x1E9
+    // [defer] nhánh type-check u.ai (Il2CppClass type-token của PTR_DAT_06a69e70)
+    if (u.originalTeam == Constants.Team.Player) {
+        if (!u.isSummoned) cnt[0]++;    // +0x548 = isSummoned
+        cnt[1]++;
+    }
+    if (u.originalTeam == Constants.Team.Enemy) cnt[2]++;
+}
+```
+→ `cnt[0]` = player sống **không** tính summon ; `cnt[1]` = player sống **có** tính summon ; `cnt[2]` = enemy sống.
+
+**`CanEndStage()`**:
+```csharp
+var cnt = new int[3];
+_countLeftUnit(fieldUnits /*+0x70*/, cnt);
+_countLeftUnit(enemies     /*+0x98*/, cnt);
+_countLeftUnit(summonedUnits /*+0xA0*/, cnt);
+bool useSummoned = resTheme.GetValueBool(<key>, true);   // def = true
+int playerAlive  = useSummoned ? cnt[1] : cnt[0];
+return (playerAlive < 1, cnt[2] < 1);                    // (canEnd, isWin)
+```
+
+**`CheckStageEnd()`** (trả `(bool,bool)`, cache qua `_stageEndResult` Nullable @`+0x3D8`):
+```csharp
+if (_stageEndResult.HasValue) return _stageEndResult.Value;
+var r = CanEndStage();  canEnd = r.Item1;  isWin = r.Item2;
+if (!isBattleStarted (+0x364)) { if (!canEnd && !isWin) return (false,false); }   // chưa start -> không dọn
+else {
+    if (!canEnd && !isWin) return (false,false);
+    isBattleStarted = false;  DisposeDisposables();  KGCRegistry.ClearAll();
+    ApplyBuffsToFieldUnits(BuffOption.Conditions.BattleEnd /*3*/, ref DamageInfo);
+    MainUI.Instance.dealMeterPanel.LogBattleEnd(this);      // MainUI+0x2A8
+    UnEquipTemporalItems();
+    win = isWin;                                            // [defer] seasonal-quiz branch
+    if (battleManagerIdx == 0) {                            // +0x34 — chỉ bm chính
+        if (!win) { winningStreak (+0x360) = 0; HandleStageLose(); }
+        else      { winningStreak++;             HandleStageClear(); }
+    }
+    // [defer] colosseum: StaticColosseumDataClass.GetColosseumData(this) -> HandleEndColosseumBattle(...)
+}
+return (canEnd, isWin);
+```
+
+**`HandleStageClear` / `HandleStageLose`** — đều: `ClearSummonedUnits()` → `ClearArtifactSkillUnits()` → `ApplyBuffsToFieldUnits(BattleWin=6 / BattleLose=7, ref di)`; Lose thêm `ApplyWorldTrigger(WorldTrigger.Conditions.BattleLose = 10)`; rồi `StageEnd()`. `battleManagerIdx != 0` thì về thẳng `StageEnd()` (bỏ qua UI).
+
+### ★ Constants.Team — đọc từ tên, không cần giá trị
+
+`Constants.Team` (Constants.cs L258) là `public static class` với **4 static int**: `None`(+0) / **`Player`(+4)** / **`Enemy`(+8)** / `End`(+12) — đúng 2 offset mà Ghidra đọc (`*(staticFields + 4)` và `+ 8`). Dùng symbol `Constants.Team.Player`/`.Enemy` nên không cần biết giá trị; bản gốc cũng không hardcode.
+Cùng class này xuất hiện ở nhánh seasonal-quiz của `CheckStageEnd` — cùng 2 offset.
+
+### Deviations / defer (đã document trong code)
+
+- `CountLeftUnit` viết thành **private static helper `_countLeftUnit`** thay vì display-class lambda `<CanEndStage>g__CountLeftUnit|331_0` — cùng semantics, ít file hơn.
+- `CanEndStage`: key string của theme flag (`ResourceTheme.GetValueBool(string, bool)` — **string key**, không phải enum) chưa resolve khỏi `.rodata` (`PTR_DAT_06a67668`) → hằng `_STAGE_END_SUMMONED_KEY` = `"<TODO...>"` với **default `true`**. Với theme thường thì default là đúng.
+- `CountLeftUnit`: nhánh type-check `u.ai` (Il2CppClass type-token) bỏ qua.
+- `CheckStageEnd`: seasonal-quiz branch (so `Scene_Game.selectedTeamForQuiz` ObscuredInt @`+0x670` với 2 static answer) → giữ `win = isWin`; colosseum end-of-battle → defer.
+- `HandleStageClear`/`HandleStageLose`: `MainUI.ShowBattleAnim(trigger)` / `AudioController.Play(clip)` / `CenterText.Show(..., 0.5f, MainUI+0x170, LocalizerUtility.L(key))` — 3 string trong `.rodata` chưa resolve, **cosmetic** → defer. `isSeasonalQuizMode`/`isRankedPvP` chỉ đổi chuỗi, không đổi control flow.
+
+### Traps đã gặp
+
+- **`GameUnit+0x22E = isMimic`** (khác hẳn `+0x22D = isClone`) — `CountLeftUnit` skip `isMimic`, không phải `isClone`.
+- **`ResourceTheme.GetValueBool` nhận STRING key** (ResourceTheme.cs L202), không phải enum — khác `ResourceUnit.GetValueBool(UnitTag, bool)` (L1363, enum). Đừng nhầm.
+- `BattleManager.winningStreak` @`+0x360` (không phải `_stageClearCount`); `_stageEndResult` Nullable<(bool,bool)> @`+0x3D8`.
+- `BattleManager+0x98 = enemies`, `+0xA0 = summonedUnits` (không phải waitingUnits).
+
+### Bước tiếp theo (S3e part 2)
+
+`GameUnit.Damaged` (RVA `0x30cb664`, export L2053, 604 dòng decompile sẵn trong `batch67.log`) →
+`GameUnit.Die` (RVA `0x30c9588`, export L2169, 832 dòng) → `BattleManager.HandleUnitDead` (RVA `0x2eef840`, export L1181, 869 dòng) →
+`Scene_Game.HandleStageLose`(`0x2e75af4`) / `HandleGameEnd`(`0x2e59770`) / `HandleGameEndImpl`(`0x2e85b3c`) → `POST /game/complete`.
+Cả 3 method lớn đều đã decompile sẵn — việc còn lại là transcription.
+
+## §56 — S3e part 2: damage pipeline core (DamageInfo + ApplyDamage + ApplyDamageToHpImpl) (2026-10-19)
+
+**Mục tiêu slice:** damage đi được từ entry xuống HP và xuống `Die()`. **Cổng xanh: compile GREEN (0 lỗi CS) + play-capture GREEN (0 exception, 288KB).**
+
+### RVAs đã decompile & port
+
+| Method | RVA | Trạng thái |
+|---|---|---|
+| `DamageInfo.GetDamage(bool apply)` | `0x02f61f90` | ✅ port |
+| `DamageInfo.GetDamage()` | `0x02f62540` | ✅ port |
+| `DamageInfo.DamageBlocked()` | `0x02f628c4` | ✅ port |
+| `GameUnit.ApplyDamage(ref DamageInfo, GameUnit)` | `0x30c7ddc` | ✅ port |
+| `GameUnit.ApplyDamageToHpImpl(ref DamageInfo, GameUnit)` | `0x30c856c` | ✅ port |
+| `GameUnit.get_battle` | `0x0308f760` | ✅ port (sửa stub `=> null`) |
+| `GameUnit.OverwriteDamage(ref DamageInfo, GameUnit)` | `0x30c5340` | ⏸ decompile sẵn (374 dòng), **defer** |
+| `GameUnit.Damaged` | `0x30cb664` | ⏸ decompile sẵn (604 dòng), part 3 |
+| `GameUnit.Die` | `0x30c9588` | ⏸ decompile sẵn (832 dòng), part 3 |
+
+### ★ DamageInfo — layout đầy đủ (47 field, dump.cs TypeDefIndex 1644)
+
+Static: `UniqueIdCounter`@0x0, **`NonBlockedList`**@0x8 (`static readonly List<BlockedBy>`).
+Instance chính: `value`@0x8, `uniqueDamageCompoundMult`@0x10, `damagePer`@0x18, `damageMult`@0x20,
+`damageInc`@0x28, `team`@0x30, `resSkill`@0x38, `damageIdx`@0x40, `type`@0x44, `isCritical`@0x48,
+`blockedBy`@0x4C, `systemScaler`@0x50, `stunTime`@0x58, `splashRoot`@0x5C, `splashRootPos`@0x60,
+`isSplash`@0x68, `isExecution`@0x69, `isShared`@0x6A, `damageWithShieldReduction`@0xD8,
+**`_applied`**@0xE0, `damageLog`@0xE8, `damageLogPostFix`@0xF8, `useSkillOnHit`@0x100. Struct = **0x108 = 264 byte**.
+
+> `foff.py` đọc được struct (`python3 foff.py DamageInfo 0xNN`) — cùng cách với class. **Tra struct bằng dump.cs, không đoán.**
+
+### ★★ Damage formula — đọc ra được và cross-check bằng "neutral reset"
+
+```
+d = ( value * (Max(MinDmgRelatedValue, damagePer) + 1)
+            * (Max(MinDmgRelatedValue, damageMult) + 1)
+            *  Max(MinDmgRelatedValue + 1, uniqueDamageCompoundMult)
+       + damageInc )
+  * ( systemScaler + 1 )
+```
+Rồi round **banker's** (`MidpointRounding.ToEven`), Infinity → `long.MinValue`.
+
+**Làm sao biết 3 floor là hằng `MinDmgRelatedValue` chứ không phải 0 bừa:** 3 lần đọc cùng1 static
+(`PTR_DAT_06a6c820 -> staticFields+0x10`). Grepping `dump.cs` với pattern `static double .* // 0x10`
+ra **đúng1 dòng**: `Constants.StatLimit.MinDmgRelatedValue` (dòng 9595, class `public static class
+Constants.StatLimit`). Xác nhận thêm bằng 4 câu **reset về neutral** ở nhánh apply:
+`damagePer=0, damageMult=0, uniqueDamageCompoundMult=1.0(0x3ff0000000000000), systemScaler=0`
+— đúng là các giá trị使得 `Max(m,x)+1 = 1` / `Max(m+1,x) = 1`. Nếu floor khác 0 thì reset này không neutral.
+→ Dùng **symbol** `Constants.StatLimit.MinDmgRelatedValue` (trong export = 0 vì `.cctor` stub) — không hardcode.
+
+**Banker's rounding:** Ghidra unroll thành `modf` + `if (frac == ±0.5) { if (ip odd) ip += ±1 } else ip = (long)(x±0.5)`.
+Đây **chính xác** là `Math.Round(x, MidpointRounding.ToEven)` → viết 1 dòng thay 25 dòng
+(`DamageInfo.RoundToLong`), giữ guard `== PositiveInfinity -> long.MinValue`.
+
+### ★ `GetDamage(apply)` — "bake một lần", side-effect là thứ quan trọng
+
+```
+!_applied && !apply  -> d = compute (không mutate)          -> return Round(d)
+apply && !_applied   -> d = compute
+                        _applied = true
+                        value = damageWithShieldReduction = Round(d)   // NƯỚNG vào struct
+                        damagePer=0, damageMult=0, uniqueDamageCompoundMult=1, systemScaler=0
+                        -> return Round(d)
+_applied (bất kỳ)    -> d = value thô                       -> return Round(value)
+```
+**`ApplyDamage` gọi `GetDamage(true)` rồi BỎ kết quả** — nó cần đúng side-effect `value` được nướng
++ `_applied = true`, để mọi `GetDamage()` phía sau (shield math, hp math) trả số đã nướng.
+`GetDamage()` (no-arg) ≡ `GetDamage(false)`.
+
+### ★ `DamageBlocked()` = `!NonBlockedList.Contains(blockedBy)`
+
+`BlockedBy` = `None(0) Miss(1) SuperShield(2) SuperMAtkShield(3) SuperAtkShield(4) Ignore(5)`.
+`.cctor` stub → `NonBlockedList == null` → **guard**: coi list đúng = `{None, Ignore}`
+(None = "không bị chặn", Ignore = "bỏ qua chặn"); `Miss`/`SuperShield*` vẫn chặn.
+Nếu list đúng là null thật thì `!Contains(x)` = **true với mọi x = mọi damage bị chặn hết** → không ai đánh trúng ai, nên guard là bắt buộc.
+
+### ★ `GameUnit.battle` — stub `=> null` là bug chặn cả pipeline
+
+Getter thật (RVA `0x308f760`): **`Scene_Game.Instance.battleManagers[GameUnit.battleManagerIdx @+0xA68]`**.
+Gốc ném `ArgumentOutOfRangeException`/NRE khi index hỏng; port trả `null` + guard (documented).
+`Damaged`/`ApplyDamageToHpImpl`/`Die` đều deref `battle` — không sửa getter này thì **mọi damage bail ra chỗ khác**.
+
+### Solved logic — `ApplyDamage(ref di, from)`
+
+```
+di.GetDamage(true)                 // bake (side-effect)
+OverwriteDamage(ref di, from)      // [STUB defer] hub 374 dòng
+if (shield != null && shield > 0):  // guard: AddShield là stub -> field null
+    dmg = di.GetDamage()
+    if (shield < dmg) { di.damageWithShieldReduction -= shield
+                        buffManager.ConsumePriorityShield(shield); SetShield(0, handleShieldBroken:true) }
+    else              { SetShield(shield - dmg, handleShieldBroken:true)
+                        buffManager.ConsumePriorityShield(dmg); di.damageWithShieldReduction = 0 }
+r = ApplyDamageToHpImpl(ref di, from)
+RefreshHpBar(); return r
+```
+
+### Solved logic — `ApplyDamageToHpImpl(ref di, from)` → (bool,bool)
+
+```
+ApplyHpRatioTriggers(ref di, from)                                  // [stub]
+overkill = (curHp < di.value && !di.isExecution)
+             ? Round(di.damageWithShieldReduction) - curHp : 0
+if (resUnit.GetValueBool(UnitTag.ApplyDamageToHp /*155*/, true))     // Instance! không phải static
+    hp = (long)hp - Round(di.damageWithShieldReduction)
+if (di.isExecution) di.value = 0
+if (hp < 1) {
+    hp = 0
+    battle.ApplyBuffsToFieldUnits(BuffOption.Conditions.BeforeTeamDead /*40*/, ref di, [this])
+    buffManager.ApplyBuffOption(BuffOption.Conditions.BeforeDead /*41*/, ref di, [this])
+    rev = PrepareReviveIfCan()
+    if (rev.Item1 || rev.Item2) return rev                          // sống lại -> trả kết quả revive
+    from.HandleBeforeKillUnit(this, ref di)
+    Die(reward:true, deathSkill:_canDeathSkill /*+0x83C*/, suicide:false, from:from,
+        doNotTreatAsDead:false, disableEffect:false)
+    from.HandleKillUnit(this, ref di)                               // virtual, vtable +0x288
+    range = from.GetSkillValueIntSum(di.resSkill, SkillTag.OverKillSplashRange /*129*/, 0)
+    if (overkill > 0 && range > 0 && from.overKillSplashFlag /*+0x94C*/)
+        HandleOverKillSplashDamage(from, overkill, range)
+}
+return (false, false)   // CẢ HAI nhánh sống lẫn chết đều (false,false)
+```
+
+> **`ApplyDamageToHpImpl` trả (false,false) cả khi chết** — tuple này KHÔNG mang nghĩa "đã chết"
+> mà mang nghĩa "đã revive (r.Item1/Item2)". `ApplyDamage` check `r.Item2` chỉ để gate nhánh
+> thorns, và sau khi `Die()` thì `live == false` nên nhánh đó tự tắt. **Đừng "sửa" thành `(true,false)`.**
+
+### ★ Tra magic-key enum — kỹ thuật §54 tái sử dụng, không cần Ghidra
+
+`grep -nE "=\s*155," ResourceUnit.cs` → `ApplyDamageToHp = 155`. Tất cả key dùng ở slice này:
+`UnitTag`: `InteractionOff=94 (0x5E)`, `DamagedManaOffset=125 (0x7D)`, `DontSwapManaAndBuffBar=128`,
+`DamageOwnerToSummoner=153 (0x99)`, `DamagedColor=154 (0x9A)`, **`ApplyDamageToHp=155 (0x9B)`**.
+`SkillTag`: `FromDirEffect=125`, `BreakExecutionLimit=126`, `AddExecution=127`,
+`DamageColor=128`, **`OverKillSplashRange=129 (0x81)`**.
+`BuffOption.Conditions`: **`BeforeTeamDead=40 (0x28)`**, **`BeforeDead=41 (0x29)`** (còn `BattleEnd=3`, `BattleWin=6`, `BattleLose=7` xem §55).
+
+### Deviations / defer (đã document trong code)
+
+- **`OverwriteDamage` (RVA `0x30c5340`) = stub no-op** — hub 374 dòng: `UnitTag 0xA4` zero+`SetBlocked(5)`,
+  `ResourceUnit.GetValueDouble` fixed-damage override, magic/physical guard
+  (`GetConditionalGuard`/`GetGuardValue`), invincible + `SkillTag 0x82` zero, `GetArtifactValueDoubleSum`.
+  Mọi nhánh đều ghi `di.value`/`di.damageWithShieldReduction`. **Đây là defer lớn nhất của slice.**
+- `GetDamage(apply)` : nhánh damage-log (`object[5]` + `string.Format`, gate bởi static ObscuredBool).
+- `ApplyDamage` : thorns/reflect visual (`UnitController.ShootColor`), **class-K AI redirect**
+  (ai có vtable type `PTR_DAT_06a70c88` thì `target = ai.+0xB0` thay vì `this`, + nhánh copy hp từ đó).
+- `ApplyDamageToHpImpl` : damage-stat accumulators — `ObscuredLong` blocks @`+0x680` physical /
+  `+0x6A8` magic / `+0x6D0` special (chọn theo `Utility.IsMagicDamage/IsSpecialDamage(di.type)`),
+  `+0x748` (khi `!_isSkillAttacking && _channelingTime<=0`), `+0x750 = damagedSumDuringChanneling`
+  (khi `_channelingTime > 0`), `+0x340 = _strongestSkillDamage` + `+0x330 = _strongestSkillHaveBeenDamaged`,
+  và `DealMeterPanel.LogDev(from, to, di, killed)` — **telemetry thuần**.
+- `GameUnit.battle` port trả `null` thay vì ném exception (index hỏng).
+
+### Traps đã gặp
+
+- **`ResourceUnit.GetValueBool` là INSTANCE method** (`resUnit.GetValueBool(key, def)`), **không phải static**
+  — Ghidra luôn hiện `ResourceUnit__GetValueBool(this, key, def, 0)` nên dễ viết sai 3 tham số.
+  (Còn `ResourceTheme.GetValueBool(string key, bool def)` — string key, xem §55.)
+- **`hp` là `EncryptedLong` class** với `implicit operator long` + `implicit operator EncryptedLong(long)`
+  → `hp = (long)hp - dmg;` và `hp = 0L;` đều hợp lệ, không cần `new`.
+- `DealMeterPanel.LogDev(GameUnit from, GameUnit to, DamageInfo info, bool killed)` — có sẵn trong export,
+  `Utility.IsMagicDamage/IsSpecialDamage` là **extension trên `DamageInfo.Type`**.
+- **`GameUnit.battle` stub `=> null`** — chặn toàn bộ pipeline; getter thật ở `Scene_Game.battleManagers[idx]`.
+
+### Bước tiếp theo (S3e part 3)
+
+`GameUnit.Damaged` (`0x30cb664`, 604 dòng sẵn trong `batch67.log`) → `GameUnit.Die` (`0x30c9588`, 832 dòng) →
+`BattleManager.HandleUnitDead` (`0x2eef840`, 869 dòng) — **chain còn thiếu vì `Die()` gọi `HandleUnitDead`**
+để gỡ unit khỏi `fieldUnits`, nếu không `CanEndStage` (§55) không bao giờ thấy enemy chết → trận không kết thúc.
+Sau đó: `Scene_Game.HandleStageLose`(`0x2e75af4`) / `HandleGameEnd`(`0x2e59770`) / `HandleGameEndImpl`(`0x2e85b3c`) → `POST /game/complete`.
+
+## §57 — S3e part 3: damage entry + unit death + removal + stage-end dispatch (2026-10-19)
+
+Chain hoàn chỉnh: `Damaged` → `ApplyDamage`(§56) → `ApplyDamageToHpImpl`(§56) → `Die` →
+`HandleUnitDead` → `Scene_Game.CheckStageEnd` → `HandleStageClear`/`HandleStageLose`.
+
+### GameUnit.Damaged (RVA `0x30cb664`, 604 dòng — `batch67.log` L1930)
+`Damaged(DamageInfo damageInfo, GameUnit from, bool forceShowHitEffectOnDeadUnit = false)`.
+Ghidra: `param_1 = this`, `param_2 = &damageInfo`, `param_3 = from`, `param_4 = forceShow…`.
+Thứ tự đã port:
+1. Đồng bộ cờ CC-state: `isFearing(0x7E8) = _fearTime>0`, `isCharming(0x7E9) = _charmTime>0`,
+   `isIcing(0x7EA) = _iceTime>0`.
+2. `if (!live) { if (!forceShow…) return; ShowHitEffect(); return; }`
+3. `if (battle == null || !battle.isBattleStarted(0x364)) return;`
+4. `if (from == null || from.resUnit == null) return;`
+5. **`UnitTag.DamageOwnerToSummoner(153)` hoặc `from.isMimic(0x22E)` → `from = from.parentUnit(0x538)`**
+   (redirect damage về summoner — quan trọng để kill credit đi đúng chỗ).
+6. `if (!damageInfo.DamageBlocked() && !isInvincible)` → `FindDamageReductionBuffUnit()`
+   → `reducer.buffManager.GetValueDoubleSum(BuffManager.BuffTag.BuffDamageReduction /*=11*/)`
+   → `damageInfo.uniqueDamageCompoundMult *= (1 - red/100)`.
+   **Lưu ý: `GetValueDoubleSum` nhận `BuffTag`, không phải int.**
+7. `if (!damageInfo.DamageBlocked()) ApplyDamage(ref damageInfo, from);`
+Deferred: `this is <3 class>` early-return (3 `Il2CppClass*` global, chưa resolve),
+`UnitTag.Executable(152)` execution branch, totem-chain (`TotemUnit.Damage`),
+projectile (`DamageInfo.ToDamageShootData` + `DamageShooter.Shoot` + `Damage.ChainTo`),
+`ShowHitEffect` local-fn, `CheckBlockDamage`/`AdjustBeforeDamaged`/`HandleHitUnit`/`HandleTakeDamage` (vẫn stub).
+
+### GameUnit.Die (RVA `0x30c9588`, 832 dòng — `batch67.log` L1098)
+Signature `Die(bool reward, bool deathSkill, bool suicide, GameUnit from, bool doNotTreatAsDead, bool disableEffect)`.
+**Ghidra tham số lệch +4**: `param_(4+i)` = C# param_i. Đã xác nhận bằng 3 mốc độc lập —
+`param_4 = this`, `param_6 = deathSkill` (gate `GetResUnitDeathSkillID`), `param_8 = from`
+(vào `DisplayClass+0x18`), `param_10 = disableEffect` (gate `DieAnim`). `param_1..3` là artifact
+của HFA `transform.position` (`_diePosition`@0x900 = 3 float trả về s0/s1/s2, decompiler gán
+`_diePosition.y/z = (int)param_2/param_3`). **Law: nếu callee map được `this` ở index 4 thì thứ tự
+còn lại khớp y hệt chữ ký C#.**
+- CLOSURE `DisplayClass711_0` chỉ chứa `{ +0x10 = this, +0x18 = from, +0x20 = !suicide }` → inline hết.
+- Toàn bộ `GameUnit.GetUnitEffects` / `ShowEffect(s)` / `AudioController.Play` / tile-effect tweens
+  / pre-grab·fear·charm·ice cleanup (`0x858/0x860/0x868/0x870` + `_fearTime`…) → deferred.
+
+**★ FLAG 0x70F DECODE** — nhánh `if (**(class+0xb8) != 0) if (*(byte*)(*static_fields + 0x70f))`
+là `Scene_Game.Instance.useRemoveSummonedUnitsAfterHandleUnitDead`
+(**instance** field @ Scene_Game 0x70F, KHÔNG phải static — `**(long**)(class+0xb8)` = static
+field `_instance`, rồi `+0x70F` là offset instance). Scene `Assets/Scene_Game.unity` set = 1.
+Nghĩa: nó chỉ chọn **điểm gọi** `HandleUnitDead`:
+```
+removeSummonsFirst = Scene_Game.Instance?.useRemoveSummonedUnitsAfterHandleUnitDead;
+if (removeSummonsFirst)  battle.HandleUnitDead(this, from, reward, doNotTreatAsDead);  // early
+// … summoned-units cascade (deferred) …
+if (!removeSummonsFirst) battle.HandleUnitDead(this, from, reward, doNotTreatAsDead);  // late
+```
+→ đúng 1 lần gọi. Không phải "có/gọi không".
+- `HandleUnitDead(unit, from, reward, ignoreArtifact)` — **`ignoreArtifact` nhận `doNotTreatAsDead`**.
+- Cuối method: `incapacitatedManager(0x200).EndSubdue()` → `handleDead(0x1F0)?.Invoke()` →
+  `buffManager.ApplyBuffOption(BuffOption.Conditions.Dead /*=39*/, ref default(DamageInfo))` → `Clear(true)`.
+- UnitTag đã resolve: `DieWhenOnlySummonsLeft=139`, `DeathTrigger=140`, `UnreserveOnDie=141`(default true).
+- Field mới: `parentUnit(0x538)`, `tauntedFrom(0x7F0)`, `hpGauge(0x40)`+`Gauge.canvasGroup(0x28)`,
+  `cloneUnitIcon(0x118)`, `hpDestroyAnim(0xB8)`, `summonedUnits(0x528)`, `incapacitatedManager(0x200)`,
+  `handleDead(0x1F0)`, `_fearTime(0x264)`, `_charmTime(0x268)`, `_iceTime(0x26C)`,
+  `isGrabbed(0x7DD)`, `isFearing(0x7E8)`, `isCharming(0x7E9)`, `isIcing(0x7EA)`.
+
+### UseDeathSkillImpl (local fn `Die.g__UseDeathSkill|4`, RVA `0x3127584`)
+Tách closure → method riêng. `CancelMotion()` → `_isMoving=_isAttacking=_isSkillAttacking=false`
+→ `resSkill = ResourceSkill.Get(id)` → `_canDeathSkill(0x83C)=false` →
+`SkillTag.DeathSkillToFrom(229)` → `targets=[from]` → `UseSkill(resSkill.id, forceSelfTrigger:true, skillTargets:targets)`.
+**`isAttacking`/`isSkillAttacking` là read-only property trong export — field thật là `_isAttacking`/`_isSkillAttacking`.**
+
+### BattleManager.HandleUnitDead (RVA `0x2eef840`, 869 dòng — `batch67.log` L229)
+`(this, unit, from, reward /*x4*/, ignoreArtifact /*x5*/)`:
+1. `if (unit.parentUnit != null) unit.parentUnit.HandleSummonedUnitDead(unit);`
+2. `_unitDeadSubject(0x148)?.OnNext((unit, from));`
+3. `CheckUnitDeadTriggerArtifacts(unit);`
+4. `if (summonedUnits(0xA0).Contains(unit)) { summonedUnits.Remove; fieldUnits(0x70).Remove;
+   allFieldUnits(0x68).Remove; [defer] unSummonedUnitTotalDamage rollup; gridMap(0x208).UnregisterAIMapChangeLister(unit.ai(0x2D8)); }`
+5. `if (unit.team == Constants.Team.Player)` → [defer] roguelike `RogueLikeBasePanel.ReloadHero`
+   `else if (unit.team == Constants.Team.Enemy)` → `unit.battle.gridMap.UnregisterAIMapChangeLister(unit.ai)`;
+   `enemies(0x98).Remove`; `allFieldUnits(0x68).Remove`
+6. `Scene_Game.Instance.CheckStageEnd();`
+
+**★ `fieldUnits` CHỈ bị Remove ở nhánh summoned-units.** `CanEndStage`/`CountLeftUnit` (§55) đếm theo
+cờ `live` chứ không theo membership list — nên unit Player chết vẫn chặn được battle-end dù list chưa dọn.
+Không phải bug, đừng "sửa".
+`Constants.Team` = static ints: `None@+0 / Player@+4 / Enemy@+8` (Ghidra so `iVar6 == *(static+N)`).
+
+### Scene_Game.CheckStageEnd (RVA `0x2e80824`, `batch72.log` L55)
+```csharp
+if (_resTheme == null) return;                      // NRE guard
+if (_resTheme.isStoryMode /*0x76*/) return;
+if (gameEndProcessed /*0x6D9*/) return;
+var results = new List<(bool,bool)>();
+foreach (bm in battleManagers /*0x230*/) results.Add(bm.CheckStageEnd());
+bool canEnd = any Item1, isWin = any Item2;
+if (canEnd || isWin) { if (isWin) HandleStageClear(); else HandleStageLose(); }
+```
+**Khác `BattleManager.CheckStageEnd` (§55)** vốn tự xử lý winningStreak + `ApplyBuffsToFieldUnits(BattleEnd)`
+bên trong. Ở đây Scene_Game gom kết quả rồi dispatch.
+Deferred: quiz-mode branch (`selectedTeamForQuiz@0x670` / `_pvpWinCount@0x680`) + `WorkTimer.Do`;
+`_resTheme.isRankedPvP(0x65)` stage-value-sum bookkeeping.
+
+### Ghidra batch recipe — thêm 1 bẫy mới
+Script template clone phải **đổi tên class bên trong file** (`public class decomp_batchNN extends GhidraScript`),
+nếu không `analyzeHeadless` báo `ClassNotFoundException: decomp_batchNN not found` và **skip** —
+log không có line `##########` nào → nhận ra ngay, không phải đọc nhầm output batch cũ.
+
+### Gate
+Compile GREEN (0 `error CS`, `ResourceUnit: 1043 rows`, `ResourceInventoryItem: 173 rows`) +
+play-capture GREEN (`shot_Scene_Lobby.png` 291KB, 0 exception). Scene_Game vẫn CHƯA chạy thật
+trong capture — gate thật là S3e part 4 (POST `/game/complete` + `GameOverPanel`).
+
+---
+
+## §58 — S3e part 4: runtime gate thật — Scene_Game chạy được trong Editor + master-data generic `Init` (2026-10-19)
+
+### Kết quả
+
+`KGC_CAPTURE_GAMESTART=1` (harness mới) giờ chạy trọn chuỗi: guest login → Scene_Lobby →
+`WorldPanel.GameStart()` → `POST /game/start` → `WorkTimer.Do(0.5f, LoadSceneAsync("Scene_Game"))`
+→ `Scene_Game.Awake` → `Init` (InitMap → InitStage → OpeningSequence) → `Scene_Game.StartStage()`
+→ **0 runtime exception**, screenshot `shot_Scene_Game.png` render map + UI Summon/Expand Troop
++ unit trên field + banner "고블린 도적단 8번째 침락".
+
+Trước khi sửa: 3605 exception/2 phút chạy (2× `GameUnit.Update`, 2× `GameUnit.FixedUpdate`,
+1× `Scene_Game.Init`), Scene_Game render được nhưng battle không tick.
+
+### 4 blocker, mỗi cái là một bug class
+
+**1. `WorkTimer.Do` là stub rỗng** (`WorkTimer.cs`) — gate `LoadSceneAsync("Scene_Game")`.
+`GameStart` POST xong `200` nhưng scene không bao giờ switch. `WorkTimer` là scheduler được gọi
+rải rác (HandleStageClear ×4, Die, CheckStageEnd, Scene_Game.Init…), không phải game logic.
+
+Decode (v174): `UpdateItem` `time@+0x10 timer@+0x14 callback@+0x18 condition@+0x20 loop@+0x28
+loopCount@+0x2c index@+0x30` (`UpdateItem..ctor` `0x2cafab0` == `Set` `0x2cafa18`).
+`Do(float,cb,cond,loop,loopCount)` (`0x2cb00d4`) = `Do(GenerateSimpleKey(), …, refresh:false)`
+→ core `Do` (`0x2cb0024`): key đã có → `refresh=false` thì bỏ qua, `true` thì `item.Set(...)`;
+chưa có → `RentItem` + `map[key]=item`.
+`IsDone(key)` (`0x2cb0830`): key không trong map → **true**; có → `item.timer <= 0f`
+(**item KHÔNG bị xoá khỏi map khi xong**, chỉ timer ≤ 0).
+`GenerateSimpleKey` (`0x2caffbc`) = `++_keyIndexer`.
+`UpdateImpl` (`0x2cb11bc`) tick: `condition()==null || condition()` → `timer -= dt`; `timer <= 0`
+→ invoke; loop → reset timer, hết `loopCount` → bỏ.
+Bản gốc dùng object-pool (`UpdateList` sort keys → `PriorityQueue` + `HashSet` return-list) —
+đó là tối ưu, không phải semantics. Port thẳng 1 vòng + snapshot key list (callback gọi
+`Do`/`Stop` giữa chừng không làm hỏng enumerator). `Instance` lazy-tạo `GameObject("[WorkTimer]")`
++ `DontDestroyOnLoad` (export không có scene object nào chứa MonoBehaviour này).
+
+**2. `readonly` collection bị AssetRipper bỏ initializer — 292 fields, một bug class.**
+`public readonly List<BattleManager> battleManagers;` không có `= new …()` → Unity KHÔNG serialize
+`readonly` → runtime `null` → `battleManagers.Count` NRE ngay đầu `Scene_Game.Init`.
+Bản gốc các field này non-null (initializer chạy trong instance ctor; export không có ctor nào
+đăng ký trong `script.json` → cctor/ctor bị strip). Fix root-cause **toàn cục** thay vì patch từng
+caller:
+
+```python
+# instance: (public|private|…) readonly (List|Dictionary|HashSet|Queue|Stack)<…> name;
+#           → name = new T();
+# static:   thêm optional 'static' — cctor bị strip nên initializer cũng không chạy.
+```
+
+242 instance + 50 static, `Scene_Game` 7, `BattleManager` 6, `GameUnit` 2, `DamageInfo`
+(`NonBlockedList` — trước đây phải null-guard ở `GetDamage`), `Constants` 3, `Utility` 3…
+
+**3. Master-data `ResourceTheme.Init` / `ResourceStage.Init` là stub rỗng** → `datas` trống →
+`ResourceTheme.Get(1) == null` → `Scene_Game.Init` throw, và mọi `GameUnit.Update/FixedUpdate`
+ném NRE 3000 lần/phút (guard `scene.resTheme == null`).
+
+Gần như **mọi** `Resource*.Init` trong export đều là stub. Port tay từng bảng là khoản đầu tư sai
+(`ResourceTheme.Init` `0x2e1c6b8` ≈ 2400 dòng decompile, map 147 element name → 94 field).
+Thay vào đó `ResourceBase<T>.InitGenericFields(n, aliases)` — reflection, per-T field cache:
+
+- element name == field name, case-insensitive  (`<MaxStage>` → `maxStage`)
+- bool nhận thêm prefix `is`                     (`<StoryMode>` → `isStoryMode`)
+- alias table cho tên lệch                       (`<Map>`→`mapPrefab`, `<Fog>`→`fogPrefab`,
+  `<LobbyRewardIcon>`→`lobbyRewardIconName`, `<Barricade>`→`barricadePrefabs`, `<StartItem>`→`startItems`)
+- `List<int>`/`List<string>` **append** (XML lặp element, `<Barricade>`×3 phải tích luỹ)
+- type khác (List<struct/class>, Dictionary<int,T>) → bỏ qua, không set
+
+`ResourceTheme` thêm `values` dict (`Dictionary<string,Value>` field **+0xF8**, xác nhận bằng
+`HasValue` `0x2e203c8` / `GetValueBool` `0x2e20560` đọc `param_1+0xf8`) = mọi child element
+name → innerText. **key == element name** được xác nhận nhân chứng: code gọi
+`GetValueText("BattleObserver")` ↔ XML có `<BattleObserver>`.
+
+> **Trap: `Inherit` copy không được đụng field của `ResourceBase<T>`.**
+> `GetFields(Instance|Public|NonPublic)` **có** trả về public field của base class →
+> `InitInheritFrom` copy `id` từ row cha → row con ghi đè `datas[parentId]`, row con biến mất
+> khỏi bảng (`ResourceStage.Count()` 932 thay vì 1224, `Get(101)` = null, `theme` rải rác
+> 2100/1001/300…). Fix: `if (fi.DeclaringType != typeof(T)) continue;` — áp cho cả
+> `InitGenericFields` (element `<ID>`/`<Name>` sẽ đè `id`/`nameKey` nếu không chặn).
+> Cùng guard trong `InitInheritFrom` phải **deep-copy list** (`new List<int>(src)`), không
+> share reference — nếu không `InitGenericFields` append làm hỏng row cha.
+
+**Trap: thứ tự trong `ResourceStage.Init`.** `Stages.xml` phẳng, KHÔNG có `<Theme>` child —
+`<Stage ID='101' Theme='1' Inherit='1'>` để trong **attribute**. `InitInheritFrom` copy mọi field
+đơn giản từ row cha (template stage 1 có `theme=0`) → attribute phải set **SAU** `InitInheritFrom`,
+không thì bị đè.
+
+**4. `_stage` không được set.** `_resStages` đã có 13 rows cho theme 1 nhưng `_stage.v == 0` →
+`curStage` lấy `_resStages[-1]` → `ArgumentOutOfRangeException`.
+Bản gốc đọc từ state đã lưu trên `GameManager`; `WorldPanel.GameStart` chỉ gửi `theme`
+(server `r_game_start` cũng tự default `stage=1`). Fallback `_stage.v = 1` như `_theme`.
+Kèm fix asymmetry trong getter: `else if (_stage.v - 1 >= 0 && _stage.v - 1 < _resStages.Count)`.
+
+### Bonus: `Constants.xml` drift → `ResourceConstant` fail-closed
+
+`Enum.Parse<Type>(t)` ném trên type lạ (`RerollArtifactCash`, `RerollArtifactGold`,
+`LevelLimit_ArtifactSupport` — master data `server/xml_live` mới hơn client build) → **cả bảng
+`Constants` fail**. Fix tại đúng 1 chỗ (site parse dùng chung): `Enum.TryParse` + `return` trước
+khi store → 1 type lạ chỉ mất row đó. Log warning kèm `ID` để dễ dò.
+
+### Harness: `KGC_CAPTURE_GAMESTART=1` (+ `KGC_CAPTURE_BATTLE_FRAMES`, mặc định 900)
+
+`CaptureScene.cs` thêm phase thứ ba sau login + lobby settle:
+1. active scene == `Scene_Lobby` → `FindObjectOfType<WorldPanel>().GameStart()`
+2. chờ sang `Scene_Game` (budget 1800 frame) → chờ `curStage != null && playerBattle != null`
+   (nghĩa là `Init` xong) → `Scene_Game.Instance.StartStage()`
+3. đợi `KGC_CAPTURE_BATTLE_FRAMES` frame rồi chụp
+
+> **Trap: `KGC_MASTER_DATA` PHẢI set cả trong play-capture**, không chỉ trong compile gate.
+> `ResourceBase.ReadDataFile` resolve root qua env; không set thì **không có warning nào** —
+> master data simply never loads, và triệu chứng đầu tiên là `ResourceTheme.Get(1) == null`
+> ở tận `Scene_Game.Init`, rất dễ đoán sai hướng.
+
+### Gate hiện tại
+
+```
+compile  : ResourceUnit: 1043 rows / ResourceInventoryItem: 173 rows
+           ResourceTheme: 77 rows, theme1 maxStage=10 map=Field_01
+           ResourceStage: 1719 rows, theme1 n=13 stage1=1
+play     : KGC_CAPTURE_GAMESTART=1 → 0 runtime exception, shot_Scene_Game.png render map+UI+unit
+```
+
+`MasterDataSmokeTest` giờ assert luôn 4 contract của generic Init (`ResourceTheme.Get(1) != null`,
+`HasValue("MaxStage")`, `maxStage > 0`, `mapPrefab` không rỗng, bool flags của theme 1 đúng,
+`ResourceStage.GetAll(theme==1).Count > 0`, `stage > 0`) — fail nhanh trong 3 phút compile gate
+thay vì 10 phút play run.
+
+### Deferred (không block gate)
+
+- `Scene_Game.HandleStageLose` (`0x2e75af4`, 567 dòng, đã decompile `batch72.log` L749) /
+  `HandleStageClear` (877 dòng, `batch73.log` L54) — UI + reward tail, stub rỗng hiện giờ.
+- `HandleGameEnd`/`HandleGameEndImpl` = **async void** → logic nằm trong
+  `<HandleGameEnd>d__595.MoveNext` (`0x2ebf91c`) / `<HandleGameEndImpl>d__597.MoveNext`
+  (`0x2ec1078`) → `POST /game/complete` → `GameOverPanel`. **Chưa decompile.**
+  Lưu ý: `HandleStageClear`/`HandleStageLose` KHÔNG gọi `HandleGameEnd` — chúng gọi `StageEnd`
+  (`0x2e81834`, UI teardown + `ClearStageEndDestroySelf` + `GiveItemRewards`) và `StageEndPost`
+  (`0x2e823c8`, UI reload + `DealMeterPanel.Stop`) — cả hai đều không đụng network.
+- `_stage` chưa được `HandleStageClear` tăng (chạy đa stage) — chỉ stage 1 mới đúng.
+- Generic `Init` chưa fill: `ResourceTheme.stageInfos`/`spawnSets`/`effectPrefabs`/
+  `upgradeSlotCost`/`rewardGaugeIcons`; `ResourceStage.SpawnData`/`ObstaclePreset`/`RandomEquip`.
+  → enemy spawn chi tiết, obstacle, world-trigger chưa có data.
+- `ResourceConstant` unknown-type rows bị skip (drift giữa `server/xml_live` và client build).
+
+---
+
+## §59 — S3e part 5: end-of-stage pipeline (StageEnd + HandleStageClear/Lose + NextStage) (2026-10-19)
+
+S3e part 4 (§58) mở được Scene_Game + chạy battle. Part 5 đóng **vòng lặp arena**: thắng stage →
+`_stage++` → `InitStage()` stage kế. Gate = `KGC_CAPTURE_KILL_ENEMIES=1` (kill hết enemy để force
+battle end — combat thật quá dài/kinh nghiệm để làm gate deterministic).
+
+### 59.1 — `HandleStageClear` (RVA `0x2E767A4`, 877 dòng, `batch73.log` L54)
+
+`_stage++` **ở đây**, không phải `NextStage`. Guard là `!isColosseum && !isSkinPreview && !isStoryMode`:
+
+```
+if (!_isStageStarted) return;
+activeSkillManager.OnStageClear();
+mainUI.activeSkillPopupPanel.Reload()            // defer (accessor stub => null)
+int n = playerBattle.itemRewards.Count           // ★ snapshot TRƯỚC StageEnd (StageEnd dọn list)
+StageEnd()
+reward item counting (playerBattle.items / _itemQueue)   // defer
+if (usingTimeScore) { AddStageClearScore(0); ReloadTimeScorePanel(); _stageClearScore = 0 }
+music (defer)
+if (!isPvPMode && !isColosseum) GiveReward(delay)         // defer — server authoritative
+else if (isRankedPvP || isSingleArena) RankedPvPEnemyInfoPanel.RegisterScore / PvPGameOverPanel.RegisterScore
+if (isFinalStage && isClanRaid) clanRaidScore += GetClanRaidScore()
+if (IsSeasonalQuizMode()) SeasonalEventAnswerPanel.Show(...)
+if (isFinalStage && !isColosseum && !isClanRaidDeckRecord) { WorkTimer.Do(1f, <final>); return }
+HandleCustomEvent(curStage.GetValueText(<stage custom-event key>))
+if (!isColosseum && !isSkinPreview && !isStoryMode) {
+    foreach (bm in battleManagers) bm._beforeNextStageSubject.OnNext(true);
+    _stage.v++;                                        // ★★★ ADVANCE
+    CrashReportHandler.SetUserMetadata("stage", _stage.v.ToString());
+}
+if (!isColosseum && !isStoryMode) WorkTimer.Do(rewardCount*k + 2f, () => NextStage(false, addedDelay))
+```
+
+★ **Trap**: `playerBattle.itemRewards` (BattleManager `+0x230`, `List<Item>`) phải snapshot **trước**
+`StageEnd()` — `StageEnd` gọi `GiveItemRewards()` làm cạn list, đọc sau ra 0 → delay sai.
+(Chưa dùng vì `GiveReward` còn defer, nhưng giữ nguyên comment để port `GiveReward` không tái bẫy.)
+
+★ **Trap**: `_beforeNextStageSubject` là field `private Subject<bool>` @ BattleManager `+0x170` —
+AssetRipper **giữ field, bỏ accessor body** (`beforeNextStageSubject => null`). accessor stub trả
+`null` → `OnNext` thành no-op âm thầm, không NRE. Sửa accessor về `=> _beforeNextStageSubject`.
+
+### 59.2 — `HandleStageLose` (RVA `0x2E75AF4`, 567 dòng, `batch72.log` L749)
+
+```
+if (!_isStageStarted) return;
+activeSkillManager.OnStageLose(theme GetValueBool(<key>))   // key chưa resolve -> false
+StageEnd()                                                  // ★ UNCONDITIONAL (hsl.txt L161)
+live-- (playerBattle.life / CheckLifeAnim)                  // defer: guard gồm 2 theme key lạ
+```
+
+★ **Trap**: `StageEnd()` ở lose path gọi **vô điều kiện** — KHÁNG cái suy nghĩ "chỉ clear mới teardown".
+Nếu chỉ `StageEnd()` trong `HandleStageClear`, lose = battle treo với `touchCamera.enabled=false`.
+
+### 59.3 — `StageEnd` (RVA `0x2E81834`, ~150 dòng, `batch73.log` L931)
+
+```
+eventMode max-damage rollup (defer: GameUnit.allDamageSum stub => 0L)
+if (!skipCamChange) mainUI.SetCamPosition()
+_isStageStarted = false;                                    // ★ ObscuredBool @+0x368
+if (touchCamera != null) {
+    touchCamera.enabled = false;
+    if (Time.timeScale < 4f && _theme != _themeEnd) { mainUI.ShowOvertime(); Time.timeScale = 1f; }
+}
+if (_resTheme != null) {
+    if (_resTheme.GetValueBool(<key>)) currentMerchantPopup = null;
+    if (!isColosseum) playerBattle.GiveItemRewards();
+    mainUI.ReloadWithSkinPreview();
+    ClearStageEndDestroySelf();
+}
+```
+
+★ `_isStageStarted` là `ObscuredBool` 12 byte @ `+0x368`; gán `false` = clear flag end-to-end.
+★ `param_1+899` = `+0x383` = **`skipCamChange`** (bool). Đọc qua `Scene_Game.Instance.skipCamChange`.
+
+### 59.4 — `NextStage` (RVA `0x2E821E0`) + `StageEndPost` (RVA `0x2E823C8`)
+
+`NextStage(obstacleChanged, addedDelay)` — bản gốc **trả `float`** (addedDelay đã điều chỉnh),
+chỉ gọi nội bộ từ lambda trong `HandleStageClear`:
+
+```
+StageEndPost(true);
+if (!obstacleChanged) { if (isColosseum) SetStage(_stage.v + 1); InitStage(); }
+else { WorkTimer.Do(addedDelay, () => InitStage()); CenterText.Show(<Stage Start key>); }
+t = (curStage.HasValue(k1) || curStage.HasValue(k2) || isFinalStage) ? 2.0f : 1.5f;
+if (Instance.skipCamChange) { addedDelay = 0; Instance.skipCamChange = false; }
+if (playerBattle.isSurvived) WorkTimer.Do(addedDelay, closure ShowStageSurrender);
+```
+
+`StageEndPost(win)`:
+```
+_isStageEndPostCalled = true;                               // ObscuredBool @+0x374
+mainUI._showPvPInfoAfterRandomItem = 0;                     // defer (+0x5D8)
+foreach (bm in battleManagers) { bm.AddPreventSellUnitStageCount(-1); bm.AddUnlimitedSpawnLevelUpStageCount(-1); }
+mainUI.ReloadStageText(win); mainUI.ReloadButtons(true);
+mainUI.dealMeterPanel.Stop();
+boss-hp-bar teardown loop (defer) ; playerBattle.StageEndPost(); IngameTutorialPanel.StartTutorial (defer)
+```
+
+### 59.5 — Field map decode (ResourceTheme + Scene_Game + BattleManager)
+
+`ResourceTheme` bool block @ `+0x60..+0x76` (đọc từ `dump.cs`, khớp 1-1 offset decompile):
+
+| +0x60 | `isEventMode` | | +0x64 | `isPvPMode` | | +0x65 | `isRankedPvP` |
+| +0x71 | `isClanRaid` | | +0x72 | `isRogueLike` | | +0x73 | `isColosseum` |
+| +0x74 | `isBabel` | | +0x75 | `isSkinPreview` | | +0x76 | `isStoryMode` |
+| +0xB0 | `normalMusic` (string) | | +0x94 | `maxStage` | | +0x88 | `stageInfos` |
+
+`Scene_Game`: `+0x2F8 _stage`(AwesomeInt 16B), `+0x308 _theme`(AwesomeInt), `+0x383 skipCamChange`,
+`+0x468 gameCompleteRequestModel`, `+0x4D0 _stageClearScore`, `+0x708 _currentStageTimeScalePhase`,
+`+0x720 stageEndDestroySelfs (List<DestroySelf>)`, `+0x830 recentlyKilledBossIds`,
+`+0x838 currentMerchantPopup`.
+`BattleManager`: `+0x170 _beforeNextStageSubject (Subject<bool>)`, `+0x188 items (List<ItemUnit>)`,
+`+0x228 _itemQueue (List<Item>)`, `+0x230 itemRewards (List<Item>)`, `+0x3B0 _curObstacle (int)`.
+
+### 59.6 — Properties port
+
+- `isFinalStage` (RVA `0x2E5968C`): `isRogueLike→false; isBabel→true; isSkinPreview→false;`
+  `else _stage.v == _resStages.Count`. Defer branch `IsSeasonalModeWithoutDeck()` (đọc `_themeEnd` `+0x300` + `_resTheme.maxStage`).
+- `BattleManager.beforeNextStageSubject` → sửa stub `=> null` về `=> _beforeNextStageSubject`.
+- `ResourceTheme` mode-bool getters đã port sẵn từ §50 — không phải viết lại.
+
+### 59.7 — Gate: `KGC_CAPTURE_KILL_ENEMIES=1`
+
+Harness `CaptureScene.cs` thêm phase **kill-enemies** sau khi battle chạy `KGC_CAPTURE_BATTLE_FRAMES`:
+`foreach (e in playerBattle.enemies) e.Die(false)` (try/catch từng con) rồi chờ 900 frame cho
+`HandleStageClear → StageEnd → _stage++ → WorkTimer(1s) → NextStage → InitStage` chạy hết.
+
+Lý do không gate bằng combat thật: thời gian end phụ thuộc AI/stats, không deterministic;
+`GameUnit.Clear()` là stub rỗng nên không kill được bằng cách đó — `Die()` là đường chính
+(`Die → HandleUnitDead → RemoveUnit → Scene_Game.CheckStageEnd → HandleStageClear`).
+
+### 59.8 — Defer list của part 5 (không block)
+
+`GiveReward`/`GiveRewardImpl`(RVA `0x2E81CF0`)/`AddItemReward`/`CheckBarricadeFromStage` (reward UI —
+trên private server gold/item đến từ `POST /game/complete`, server authoritative);
+`GetThemeRandomItems`(RVA `0x2E81B30`, đọc `_resTheme.randomItems`)/`GetThemeMerchants`;
+`HandleCustomEvent`(RVA `0x2E81D40`, string-dispatch vào `BossSkillGauge.Show/SetStep`);
+music selection (`AudioController.PlayMusic` + `_resTheme.normalMusic`); PvP/colosseum/quiz/clan-raid
+score registration; `CrashReportHandler.SetUserMetadata`; event-mode round bookkeeping
+(`gameCompleteRequestModel` round list); `CheckStageEndImpl`; `HandleGameEnd`/`HandleGameEndImpl`
++ `<HandleGameEnd>d__595.MoveNext`(`0x2ebf91c`)/`<HandleGameEndImpl>d__597.MoveNext`(`0x2ec1078`)
+→ `POST /game/complete` → `GameOverPanel`; `MainUI.ShowStageSurrender` + skipCamChange camera tail;
+`GameUnit.allDamageSum` (stub `=> 0L`); `activeSkillManager` accessor (stub `=> null`).
+
+### 59.9 — ★★★ BLOCKER MỚI: battle THẬT CHƯA BAO GIỜ CHẠY (khám phá từ gate part 5)
+
+Gate `KGC_CAPTURE_KILL_ENEMIES=1` dispatch `Scene_Game.CheckStageEnd()` trực tiếp
+(`isWin=true` vì 0 enemy) → **`HandleStageClear` KHÔNG được gọi, 0 exception**.
+Đi ngược ngược dòng tìm được **3 stub chặn chuỗi battle, xếp theo thứ tự chặn**:
+
+1. **`MainUI.CheckFieldUnitCount()` (RVA `0x2FE7818`) stub `return false`**
+   → `Scene_Game.StartStage()` **abort TẠI ĐÂY**, trước khi chạy
+   `startTimer.SetActive(false); _currentBattlePhase=0; _isStageStarted=true; ... HandleStartStage()`.
+   → `_isStageStarted` không bao giờ = true → `HandleStageClear/Lose` guard
+   `if (!_isStageStarted) return;` nuốt sạch dispatch.
+   Bản gốc (batch82.log):
+   ```
+   var pb = Scene_Game.Instance.playerBattle;
+   if (pb == null || pb.fieldUnits == null) return false;
+   if (pb.fieldUnits.Count == 0) { mainUI.centerText.Show(L(key_0unit)); return false; }
+   if (pb.fieldUnits.Count == 1 && pb.fieldUnits[0].resUnit.id == 100000-2 /*0x1869E*/)
+       { mainUI.centerText.Show(L(key_special)); return false; }
+   return true;
+   ```
+   → **Điều kiện qua gate = có ≥1 unit trên field.**
+
+2. **`Scene_Game.AutoMoveUnitToField()` (RVA `0x2E81090`) stub rỗng**
+   → `waitingUnits` không bao giờ được chuyển lên field. Bản gốc (batch82.log):
+   ```
+   mainUI.CancelDrag();
+   int free = playerBattle.maxUnitCount - playerBattle.GetPlayerFieldUnitCount();
+   while (free-- > 0) {
+       var u = playerBattle.waitingUnits[0];
+       if (_resTheme.isColosseum) { ... } else {
+           playerBattle.HandleBeforeUnitGridMove(u);
+           u.gridObj.parentGrid = playerBattle.fieldGrid;      // gridObj@+0xC8, parentGrid@+0x20
+           u.gridObj.Set(playerBattle.fieldGrid.GetEmptyPos());
+           playerBattle.HandleUnitGridMoved(u, playerBattle.fieldGrid);
+       }
+   }
+   ```
+
+3. **`BattleManager.AddUnitTo` KHÔNG BAO GIỜ ĐƯỢC GỌI** — grep toàn Assembly-CSharp chỉ ra
+   định nghĩa, không có call-site. → `waitingUnits` (BattleManager `+0x78`) và `fieldUnits`
+   (`+0x70`) rỗng từ đầu. `BattleManager.maxUnitCount` cũng stub `=> 0`.
+
+4. **Không có enemy** (§59 phần trên): `enemies.Add` không tồn tại trong export;
+   `BattleManager.ReBatch`(`0x2EE98D4`)/`AfterBatchEnemies`(`0x2EEA1BC`)/
+   `CheckAndSpawnCreatures`(`0x2F0258C`) + `SpawnManager.BatchAIUnit`/`GenSpawnData`/
+   `BatchValueSumEnemies`/`HandleSpawnInfoList` đều stub.
+   `ReBatch()` thật (batch81.log): iterate `List<BattleManager.LastStageInfo>` (`+0x218`)
+   → `SpawnManager.BatchAIUnit(spawnManager, pos, id, level, bm.?, ...)` từng con →
+   `AfterBatchEnemies()` → `SetStageTileBuff()`.
+
+★ **Kết luận trung thực**: screenshot §58 (`shot_Scene_Game.png`) chỉ là **map + UI + banner** đã
+render đúng — **chưa có combat nào chạy**. `Scene_Game.Init/Awake/InitMap/InitStage` OK,
+nhưng seed unit (deck → waiting → field) và spawn enemy đều là stub.
+
+### 59.10 — S3f (tier kế tiếp): pipeline seed unit + spawn enemy
+
+Thứ tự port đề xuất (mỗi bước 1 gate riêng):
+1. `MainUI.CheckFieldUnitCount` (2 nhánh, ~20 dòng) — bỏ block ngay.
+2. `BattleManager.maxUnitCount` + `GetPlayerFieldUnitCount` (đang `=> 0` / stub).
+3. `Scene_Game.AutoMoveUnitToField` (~40 dòng, code ở §59.9).
+4. **Seed deck**: tìm call-site gốc của `AddUnitTo` — khả năng nằm ở
+   `HandleStartStage`(`0x2E7E06C`) / `InitStage`(`0x2E4ACD0`, đã port §50 nhưng chỉ Init map/stage)
+   / `BattleManager.InitHeroPool`(`0x2ED89E0`) / `InitBuildings`(`0x2ED8D04`).
+5. **Spawn enemy**: `ResourceStage.SpawnData`/`ResourceTheme.spawnSets` →
+   `lastStageInfos`(`+0x218`) → `ReBatch()` → `SpawnManager.BatchAIUnit` (đổ vào `enemies`)
+   → `AfterBatchEnemies()`.
+6. Khi đó gate kill-enemies mới thật sự exercise được `HandleStageClear`/`HandleStageLose`.
+
+---
+
+## §60 — S3f: seed-deck + spawn-enemy pipeline, phần 1 (decode + 2 stub âm thầm chặn) (2026-10-19)
+
+### 60.1 Kết quả runtime
+
+Capture `KGC_CAPTURE_GAMESTART=1` (2026-10-19, `cap_s3f/shot_Scene_Game.png`):
+`exit 0`, **0 exception**, `Scene_Game.Init: theme=1 stage=1 maxStage=10 map=Field_01`,
+Scene_Game render thật (HUD "고블린 도적단 8번째 침략", Summon 3 / Expand Troop 10 / 0-5 slot),
+**1 knight sprite trong world**. Không có marker `[S3e§59] HandleStageClear` → chưa hề clear stage
+(chữ "8번째 침략" là text placeholder, không phải stage thật).
+
+### 60.2 ★ Theme 1 (arena thường) KHÔNG CÓ `StartUnitLevels` → bàn cờ bắt đầu TRỐNG
+
+`CheckGameStartEffects` chỉ seed hero khi
+`_resTheme.startUnitLevels != null && Count >= 1 && !_loadBabel` (nhánh `[D]`).
+Quét `server/xml_live/Themes.xml`: **chỉ theme 1000 và 1002** có `<StartUnitLevels>`
+(`3,3,3,3,3,3`) + `<StartItem>101</StartItem>`. Theme 1 (`고블린 습격`, `Map=Field_01`,
+`MaxStage=10`, `BossUnit=20040`) **không có element đó, cũng không `<Inherit>`** →
+`startUnitLevels == null` → nhánh `[D]` bị bỏ qua → 0 unit được seed.
+
+**Suy ra (khẳng định bằng BL-scan)**: trong arena thường, unit chỉ vào bàn cờ qua
+`BattleManager.AddUnitToWaitings`, và caller duy nhất hợp lý là **`GenRandomHero` (nút Summon)**.
+Các caller còn lại: `CheckGameStartEffects`(chỉ theme có startUnitLevels), `InitSingleArenaRecordStage`,
+`HandleInstantItem`, các lambda của `UpdateImpl`, `LoadColosseumSnapshot`,
+`MainUI.OnClickDevMenu`, `OnClickRandomHero`. `BattleManager.AddUnitTo`
+(giỏi `fieldUnits`/`waitingUnits`) **không có caller arena-fresh nào**.
+→ `CheckFieldUnitCount()==false` → `StartStage()` return sớm → `_isStageStarted` không bao giờ true
+là **hành vi đúng**, không phải bug. Muốn có unit phải Summon (port `GenRandomHero`, §60.8).
+
+### 60.3 ★ 2 stub âm thầm đã sửa (compile xanh nhưng chặn seeding)
+
+| File | Stub cũ | Đã sửa thành | Vì sao chặn |
+|---|---|---|---|
+| `Scene_Game.cs` | `public int stage => 0;` | `public int stage => _stage.v;` | `AddUnitToWaitings` auto-place unit lên field chỉ khi `stage == 1` (hoặc `isBabel`). Stub `0` ⇒ mọi unit nằm mãi ở `waitingUnits`. |
+| `BattleManager.cs` | `public EncryptedInt[] heroPool => null;` | `=> _heroPool;` | `CheckGameStartEffects` đọc `pb.heroPool.ToList()` ⇒ stub `null` ⇒ `ArgumentNullException`. |
+
+> **Bài học**: stub có kiểu trả về hợp lý (`=> 0`, `=> null`) không bao giờ gây `error CS`.
+> Khi port một hàm dùng accessor X, kiểm tra X **đã port chưa** — grep stub `=> 0` / `=> null`
+> trong accessor mà code mới đọc, không chỉ trong hàm mới.
+
+### 60.4 `CardInfo` — class data thật (dump.cs @234009, KHÔNG nhầm với `CardInfoPanel.*`)
+
+```
+cardId@0x10  level@0x14  skin@0x18  potentialTier@0x1C  overcome@0x20  dimensionLevel@0x24
+isLevelSyncApplied@0x28  treasure@0x30  accessories@0x38(List<AccessoryModel>)
+```
+`BattleManager.GetCard(int unitId) → CardInfo` (RVA ~0x2EFD0D8, dump.cs L46885).
+Tất cả field là `int` thuần (không `ObscuredInt`) — disasm có gọi `ObscuredInt.op_Implicit`
+là round-trip int→ObscuredInt→int của compiler, giá trị cuối vẫn bằng field.
+
+### 60.5 `AddUnitToWaitings` (RVA 0x2EF9A7C) — đã port (§60.6) với mapping disasm-proven
+
+Đọc disasm toàn khung, mapping **chuẩn** (Ghidra reorder + drop args, không tin decompile):
+
+| Arg `SpawnManager.SpawnUnit` | Nguồn (disasm) |
+|---|---|
+| `pos` | `Vector2` static field đầu tiên của class @`0x694fd70` → `Vector2.zero` (placeholder, bị `gridObj.Set` ghi đè ngay) |
+| `id` | `w21` (param) |
+| `team` | `w2 = 1` = `Constants.Team.Player` |
+| `level` | `[sp,#0x23c]` = `w24` = **param `level`** |
+| `cardLevel` | `w4 = 1` — **hardcode 1**, KHÔNG lấy từ card |
+| `buildingLevels` | `null` |
+| `skin` | `[sp,#0x238]` = `w23` = `cardInfo.skin` |
+| `artifacts` | `get_artifacts()` (vẫn là stub → null) |
+| `poolIdx` | `w20`: `_heroPool[i]==id` → `i+1` (1-based), không thấy → `-1` |
+| `potentialSlot` | `w26`: `potentialSlots[i]` khi tìm thấy poolIdx,否则 `-1` |
+| `potentialTier` | `[sp,#0x74]` = `w20` = `cardInfo.potentialTier` |
+| `parent` | `null` |
+| `treasure` / `accessories` | `x27` / `x24` = `cardInfo.treasure` / `cardInfo.accessories` (đọc `ldp x27,x22,[x25,#0x30]`) |
+| `fixPos` | `false` |
+| `statueIndex` / `statueId` | `-1` / `-1` |
+| `overcome` / `dimensionLevel` | `w29` / `w22` = `cardInfo.overcome` / `cardInfo.dimensionLevel` |
+
+Nhánh `isRogueLike` đọc `rlCard+0xc8`(potentialTier)/`+0xe4`(overcome)/`+0xe8`(dimensionLevel)
+— **defer** (chỉ dùng cho roguelike).
+
+Tail: `u.isField=false` → `if (battleManagerIdx != 0) SetActive(false)` → `waitingUnits.Add(u)`
+→ `u.gridObj.parentGrid = waitingGrid; u.gridObj.Set(waitingGrid.GetEmptyPos())` →
+`SetDraggable(true); ShowHpGauge(false,true); SetAI(null)` → nếu `(stage==1)||isBabel`
+và `maxUnitCount > GetPlayerFieldUnitCount() && !isBattleStarted && !isStageStarted && !isTestMode`
+và `!(battleManagerIdx==0 && !colosseumIsReady && isColosseum)` thì
+`HandleBeforeUnitGridMove(u)` → `gridObj.parentGrid = fieldGrid` → `Set(fieldGrid.GetEmptyPos())`
+→ `HandleUnitGridMoved(u, fieldGrid)` → `CheckPopItemQueue()` (0x2EF6F1C) →
+`CheckTransformCondition(u, false)`.
+
+Field map mới: `Scene_Game.colosseumIsReady@0x118`, `BattleManager.battleManagerIdx@0x34` (int!).
+
+### 60.6 Đã port trong phần này
+
+1. `BattleManager.AddUnitToWaitings` (xem 60.5).
+2. `Scene_Game.CheckGameStartEffects(out int bonusTier)` — nhánh `[B]` `startItems`→`GetItem(id,true)`,
+   `[C]` `InitArtifactItems()`, `[D]` seed `SlotUp(n - slotBonus)` + `heroPool.ToList()` +
+   `Shuffle()` (trừ `isBabel`) + loop `AddUnitToWaitings(pool[i], levels[i])` +
+   `SetTilePosition(new Vector2Int(i + i/3, 0))` (magic div-by-3 = disasm `umull #0xAAAAAAAB; lsr #33`),
+   exit-branch `fieldUnits.Find(x => x.resUnit.id == 99998)` →
+   `SetTilePosition(new Vector2Int(gridMap.width/2, 0))`. Defer `[A]` (DOTween tarot delay +
+   isSingleArena early-return đã port `bonusTier=0; return;`).
+3. Sửa 2 stub (§60.3).
+
+Compile gate `s3f2gate.log`: **0 `error CS`**, đủ 4 dòng smoke.
+
+### 60.7 Cấu trúc master-data cho enemy spawn (đã decode)
+
+```csharp
+ResourceStage.SpawnData (class):            y@0x10, spawn: SimpleSpawn[]@0x18
+ResourceStage.SpawnData.SimpleSpawn (struct, 0x10): pos@0x0, boss@0x4, level@0x8, id@0xC
+ResourceTheme.SpawnSet (class):             stages(List<int>)@0x10, levels(List<int>)@0x18
+BattleManager.LastStageInfo (struct, 0x28): unitId@0x0, pos(Vector2Int)@0x4, level@0xC,
+                                            boss@0x10, skin@0x14, equips(List<int>)@0x18,
+                                            preservedItems(List<Item>)@0x20
+```
+`GridMap.width@0x10` (outer class; dump grep sẽ va nhầm nested `PathNode.operation@0x10`).
+`ResourceStage` còn có `mySpawnDatas@0x40`, `spawnDatas@0x48` (Dictionary<int,List<Spawn>>);
+`ResourceTheme.spawnSets@0x128`.
+
+### 60.8 Chuỗi spawn enemy — TOÀN BỘ còn là stub
+
+**BL-scan (v174) chứng minh wiring:**
+
+```
+Scene_Game.InitStage()
+  └─ bm.AfterInitStage(_devilEffectCount, _devilCond)      [BattleManager.cs:861 — STUB]
+       ├─ DisposeWorldTrigger(null)
+       ├─ AddWorldTriggerBundle(theme-res @ curStage+200) / AddWorldTriggerBundle(stage-res)
+       └─ spawnManager.InitStage(devilEffectCount, devilCond)   [SpawnManager.cs:10 — STUB, RVA 0x3131E24]
+            ├─ GenSpawnData(...)              [SpawnManager.cs:14 — STUB, RVA 0x3134CA0]
+            └─ BatchValueSumEnemies(...)      [SpawnManager.cs:18 — STUB, RVA 0x31363B8]
+                 └─ BatchAIUnit(...)          [SpawnManager.cs:22 — STUB, RVA 0x3137E74]
+                      └─ SpawnManager.SpawnUnit(...)  ← ĐÃ PORT
+```
+`GenSpawnData`/`BatchValueSumEnemies` còn có caller thứ hai: `Scene_Game.InitRogueLikeStage`.
+
+**`ReBatch()` (RVA 0x2EE98D4, `BattleManager.cs` STUB)** — sinh lại enemy từ `_lastStage(+0x218)`:
+```csharp
+public void ReBatch() {
+    if (effectAreaDrawer != null) effectAreaDrawer.Clear();      // +0x58
+    if (_lastStage != null)
+        foreach (var info in _lastStage)
+            if (Scene_Game.Instance.isTestMode) { /* defer: batch preset test (ResourceUnit.GetValueBool(key 0x1D9, true)) */ }
+            else {
+                var u = spawnManager.BatchAIUnit(info.pos, info.unitId, info.level, 1 /*team arg*/,
+                        info.boss, info.equips, reBatch:true, ..., info.skin, ...);
+                if (info.preservedItems != null) foreach (var it in info.preservedItems) u.Equip(it);
+            }
+    AfterBatchEnemies();
+    // nếu "đã batch" → SetStageTileBuff()
+}
+```
+`ReBatch` ← `Scene_Game.{Revive, TestRun, HandleStageLoseCallback_Babel, <HandleStageLose>b__0}`.
+`AfterBatchEnemies` ← `Scene_Game.{InitStage, LoadGame, InitRogueLikeStage, BatchFinalRogueLikeBossUnit}` + `ReBatch`.
+`AfterBatchEnemies` (RVA 0x2EEA1BC) đọc `Scene_Game.curStage`:
+`curStage+0xA8 == 100` → `Dictionary<int,object>()`, ngược lại → `bm.enemies(+0x98).ForEach(...)`.
+
+**`BatchAIUnit` (RVA 0x3137E74) — 25 param, core đã decode:**
+```csharp
+public GameUnit BatchAIUnit(int id, Vector2Int pos, int level, int team = 2, int boss = 0,
+    List<int> equips, bool reBatch = false, int cardLevel = 1, int[] buildingLevels,
+    int skin = 0, List<ArtifactModel> artifacts, int poolIdx = -1, int potentialSlot = -1,
+    bool equipExcept4TierOption = false, int potentialTier = 0, bool loaded = false,
+    TreasureModel treasure, List<AccessoryModel> accessories, bool skipAnimation = false,
+    bool fixPos = false, bool fixEquip = false, int statueIndex = -1, int statueId = -1,
+    int overcome = 0, int dimensionLevel = 0)
+```
+Flow: tạo display-class; `if (Scene_Game.Instance.???@+8 != team) pos = pos.ToReversePos(gridMap)`
+(dùng `Scene_Game.Instance.playerBattle.gridMap`); bounds-check `pos` so với
+`gridMap+0x58`(min) và `gridMap+0x60`(max) → sai thì `Debug.LogError` + `return null`;
+`if (Scene_Game.Instance.???@+8 == team) level = Scene_Game.Instance.GetUnitLevelByDifficulty(level)`;
+`GridMap.GetPosition(gridMap, pos)` → `spawnManager.SpawnUnit(...)` → lưu vào holder@+0x18;
+`u.SetAI(AIFactory.GetSuitableAI(u))`; `u.tilePos@+0x568` ↔ `creatureInfo.prevPos@+0x28`;
+`u.gridObj.parentGrid@+0x20 = fieldGrid(+0x198)`; `boss==2` → `Scene_Game+0x740 = resUnit.GetValueInt(key 0x4F)`;
+`u.RefreshLevelIcon()`; `!skipAnimation` && `!isTestMode` → alpha/`SetActive`/`UnitEffect` loop.
+
+**`GenRandomHero(bool isAdSummon = false)` (RVA 0x2EF8738, `BattleManager.cs:1736` STUB)**
+= nút Summon. Core: guard `Scene_Game.Instance.isSingleArenaPreparationBattle` → return;
+`waitingUnits.Count`/`fieldUnits.Count`; mana-gate `EncryptedInt@+0x388` (spawn cost) +
+`ResourceConstant.Get(0x4A)` + `Utility.CheckLevelAvailable` + `Constants.IsInvasion/IsEventBattle`;
+chọn id từ `_heroPool(+0x200)`; rồi **`AddUnitToWaitings(id, level=uVar8 + 1)`** (line 566).
+`MainUI.OnClickSummon` RVA `0x3305770` (decompile batch90).
+→ **chưa port**.
+
+### 60.9 Các RVAs mới trong phần này
+
+| Hàm | RVA | Trạng thái |
+|---|---|---|
+| `BattleManager.AddUnitToWaitings` | 0x2EF9A7C | **PORTED §60** |
+| `Scene_Game.CheckGameStartEffects` | 0x2E4A0F0 | **PORTED §60** |
+| `<CheckGameStartEffects>b__515_1` | 0x2EACA90 | `u => u.resUnit.id == 99998` (inlined) |
+| `BattleManager.AfterInitStage` | 0x2EDE390 | decode — cần port |
+| `SpawnManager.InitStage` | 0x3131E24 | decode — cần port |
+| `SpawnManager.GenSpawnData` | 0x3134CA0 | decode — cần port |
+| `SpawnManager.BatchValueSumEnemies` | 0x31363B8 | chưa decode |
+| `SpawnManager.BatchAIUnit` | 0x3137E74 | decode — cần port |
+| `SpawnManager.HandleSpawnInfoList` | 0x313AAB8 | chưa decode (gọi từ `EventTriggerManager.HandleEventTriggered`) |
+| `BattleManager.GenRandomHero` (Summon) | 0x2EF8738 | decode — cần port |
+| `MainUI.OnClickSummon` | 0x3305770 | decompile batch90 |
+| `BattleManager.ReBatch` | 0x2EE98D4 | decode — cần port |
+| `BattleManager.AfterBatchEnemies` | 0x2EEA1BC | decode — cần port |
+| `BattleManager.SetStageTileBuff` | ? | stub |
+| `BattleManager.CheckPopItemQueue` | (gọi 0x2EF6F1C) | gọi từ AddUnitToWaitings |
+| `Utility.ToReversePos(pos, gridMap)` | static | `Utility.cs:1045` |
+
+### 60.10 ★ Enemy spawn thực sự của arena thường = `BatchValueSumEnemies` (ngân sách `ValueSum`)
+
+Quét `server/xml_live/Stages.xml` (21 stage theme 1):
+
+| Stage | `ValueSum` | `<Spawn>` explicit | id |
+|---|---|---|---|
+| 101 | 0 | 7 | `99999` (KHÔNG có trong `Units.xml` → ô placeholder rỗng) |
+| 102 | 3 | 0 | — |
+| 103 | 4 | 0 | — |
+| 104 | 5 | 0 | — |
+| 105 | 4 | 1 | `20020` (boss/elite) |
+| 106 | 5 | 0 | — |
+
+→ **`ResourceStage.valueSum`(@+0x78) là ngân sách**, `BatchValueSumEnemies(valueSum, …)`
+tự chọn enemy từ `enemyPool` sao cho tổng "giá trị" ≤ ngân sách. `<SpawnData>` chỉ dành cho
+wave đặc biệt (boss/elite). `GenSpawnData` xử lý `<SpawnData>` explicit.
+`<Inherit='N'>` kế thừa row khác (stage 102 `Inherit=2`, 103 `Inherit=3`, …) —
+`ResourceBase<T>` đã xử lý inherit, `InitGenericFields` COPY list tránh share reference.
+
+→ **Thứ tự port còn lại của S3f (mức ưu tiên)**:
+1. `SpawnManager.BatchValueSumEnemies` (`0x31363B8`) — generator chính của arena.
+2. `SpawnManager.GenSpawnData` (`0x3134CA0`) — wave explicit (`<SpawnData>`).
+3. `SpawnManager.BatchAIUnit` (`0x3137E74`) — decode xong (§60.8), port.
+4. `BattleManager.GenRandomHero` (`0x2EF8738`, nút Summon) — CHẶN mọi unit của player.
+5. `BattleManager.ReBatch` (`0x2EE98D4`) + `AfterBatchEnemies` (`0x2EEA1BC`) + `SetStageTileBuff`.
+6. `BattleManager.InitStageStartUnitData` (`0x2EE6560`) — **SNAPSHOT** fieldUnits/enemies vào
+   `stageStartData@+0x2A0` / list@+0x2A8 (mỗi entry 0x18 byte: `+0x20`=tilePos, `+0x24`=0,
+   `+0x28`=resUnit, `+0x30`=level, `+0x34`=0); bỏ qua unit `resUnit.id==0x1869E`(99998).
+   Đây là "ghi lại bàn cờ lúc bắt đầu trận" để restore khi retry — KHÔNG phải seeder.
+
+`AfterInitStage` đã port trong phần này (chỉ giữ nhánh `DisposeWorldTrigger` +
+`spawnManager.InitStage`; 2 nhánh `AddWorldTriggerBundle(curStage+0xC8 / +0x58)` defer).
+
+**Gate**: `s3f3gate.log` — 0 `error CS`, đủ 4 dòng smoke. `cap_s3f` (GAMESTART) — exit 0, 0 exception.
+
+## §61 — S3f: enemy-spawn pipeline — runtime-proven end-to-end (2026-10-19)
+
+### 61.1 Chuỗi spawn enemy (đã port + chạy thật)
+
+```
+Scene_Game.InitStage
+  → BattleManager.AfterInitStage        (port: chỉ giữ DisposeWorldTrigger + spawnManager.InitStage;
+                                         2 nhánh AddWorldTriggerBundle defer)
+  → SpawnManager.InitStage   (0x3131E24) — bản gốc ~1000 dòng, port bản arena-core
+  → SpawnManager.GenSpawnData (0x3134CA0)
+  → SpawnManager.BatchAIUnit  (0x3137E74) — funnel spawn-info → SpawnUnit + bookkeeping + đăng ký
+  → SpawnManager.SpawnUnit    (0x3139478) — unitPool.Rent / Instantiate → unit.Init(...)
+```
+
+- `GenSpawnData(data, team, addLevel, usedPos, applyStoryModeSpec)`: duyệt `{Y → List<Spawn>}` của
+  `Stage.spawnDatas` (Team=2 → địch) / `mySpawnDatas` (Team=0 → player, chỉ mode đặc biệt).
+  `usedPos` dedup: cùng ô chỉ 1 spawn địch. `[SPAWN-DIAG]` log từng dòng để chẩn.
+- `BatchAIUnit`: `pos.ToReversePos(gridMap)` cho team != Player (địch trượt nửa đối diện bàn —
+  grid cao 12: reqPos y=2 → tile y=9, chứng minh runtime `(2,2)→(2,9)`) → bounds-check
+  minPos/maxPos (out → LogError + null) → enemy: `level = scene.GetUnitLevelByDifficulty(level)`
+  → `SpawnUnit(worldPos,…)` → `AIFactory.GetSuitableAI` → **tilePos bookkeeping** →
+  `SetAI/SetLevel/SetBoss/RefreshLevelIcon` → **đăng ký vào list team**.
+
+### 61.2 Hai khối bookkeeping then chốt (port từng bỏ sót — "0 enemy để kill")
+
+1. **tilePos** (sau `GetSuitableAI`, trước `SetAI`): `unit.tilePos@0x568 = gridMap.GetTilePosition(worldPos)`;
+   `unit.gridObj.tilePos@0x28 = tilePos`. Hai hàm `GetPosition`/`GetTilePosition` là hai chiều
+   ngược nhau → round-trip = pos gốc; port dùng thẳng `pos` (đã ToReversePos) để tránh mất số
+   nguyên. **Trước đây bỏ → mọi unit tile=(0,0) → grid/battle logic đọc sai ô.**
+2. **Đăng ký team** (cuối `BatchAIUnit`, bản gốc):
+   ```csharp
+   if (!reBatch && bm.allFieldUnits != null) {
+       bm.allFieldUnits.Add(unit);                       // LUÔN
+       if (team == Constants.Team.Player) bm.fieldUnits.Add(unit);
+       else bm.enemies.Add(unit);                        // Constants.Team đọc statics @+0xb8+4
+   }                                                      // re-batch KHÔNG re-add (tránh double-count)
+   ```
+   **Root cause kép của "0 enemy để kill"**: (a) port arena-core bỏ khối này; (b) AssetRipper bỏ
+   field initializer → `bm.enemies/fieldUnits/allFieldUnits` = null (cùng gốc rễ với §58's 292-site
+   fix) → CanEndStage đếm 0 enemy → isWin ngay lập tức.
+
+### 61.3 Exonerations (các nghi phạm đã được xử sạch, KHÔNG phải lỗi)
+
+- **Master data/server**: `[SPAWN-DIAG]` chứng minh server phục vụ đủ 7 dòng `<Spawn>` stage 101.
+- **id 99999 không có trong `Units.xml`**: benign — spawn thành unit shell dùng sprite placeholder
+  (`Sample_Stun_0`, sprite thật `Unit_10000_18` khi resUnit resolve được), vẫn register/kill được.
+- **tilePos=(0,0)**: không phải lỗi grid/mapping — chỉ là bookkeeping bị bỏ (§61.2.1).
+- **`Utility.GetWeightedRandom` stub** (trả về index 0): không chặn enemy (không dùng cho enemy pool);
+  summon thì đã có guard `idx<0 → 0`.
+
+### 61.4 Constants.Team + Spawn attr map
+
+- `Constants.Team` là **static-class**, `cctor` (0x3033C94) gán các statics; offset đọc trong code
+  là **byte-offset trong static-fields** (Player@+0xb8+4…) — KHÔNG phải giá trị. `GetOtherTeam`
+  (0x3033BE0). Port: inline initializer giống runtime.
+- `<Spawn>`/`<SpawnData>` attr map (đã port trong `Spawn` class): id/level/pos-x/pos-y/count/boss/
+  equips/fix-equip/statue-index… Theme 1 stage 101 = 7 scarecrows id 99999 (§60.10).
+- **Sửa note cũ sai**: `0x3305770` = `MapSkinInfoPanel.OnClickSummon` (panel skin), KHÔNG PHẢI nút
+  summon của battle (nút thật = `MainUI.OnClickRandomHero` §62).
+
+### 61.5 Verification (runtime)
+
+- `cap_s3f7`: 7 scarecrows spawn + register (`bmEnemies=7`) + kill được bằng `e.Die()` thật.
+- `cap_s3f9`: tilePos thật `(1,10)`.
+- **`cap_s3f13` (full loop hai phía, gate `s3f13gate` xanh)**: login → lobby → GameStart →
+  `Init` (seed slotBonus=3 → maxUnitCount=3) → `GenRandomHero` (chosen=10000) → unit auto-place
+  `playerField=1` → StartStage → 7 enemies spawn tile=(2,9)/(4,9) (`bmEnemies=7`) → combat tick
+  (`[SHOT-DIAG]` 7 mục tiêu) → kill-all → `CheckStageEnd` → **`HandleStageClear → _stage++ = 2`**
+  → PNG `shot_Scene_Game.png`. **0 exception.**
+
+### 61.6 Deferred (S3f enemy pipeline)
+
+BatchValueSumEnemies (stages 102+, generator chính — stub); GenSpawnData: conditionKey filter /
+equip-gen / clan-raid idList / story snapshot / challenge statue / spawnPeriod / destroy-duplicate;
+BatchAIUnit: bm+0x218 enemy bookkeeping (spawn-info pos/equips — không liên quan win-count),
+boss==2 `bossTimeBonus` (key 0x4f không resolve) + DOTween spawn-drop anim; SetResourceUnit tail;
+SetTeam tint; team z-layer.
+
+## §62 — S3f: summon / deck / slot — mở khoá battle start (2026-10-19)
+
+### 62.1 ★★★ EncryptedInt là stub HOÀN TOÀN — nguyên nhân gốc sâu nhất của chuỗi "battle không start"
+
+`AwesomeData.Encrypted.EncryptedInt` (byte[] `_value` + int `_key`, gốc mã hoá XOR anti-tamper):
+stub cũ = ctor **rỗng** (không lưu), `GetDecrypted()`→0, `implicit operator int` → **`return 0`**,
+`implicit operator EncryptedInt(int)` → **`return null`**. Compile xanh, chạy sai âm thầm (§60.3
+mức độ class — một GIÁ TRỊ TYPE stub thì MỌI `(int)x`=0):
+
+- `GenRandomHero` filter: `ResourceUnit.Get((int)id)` = `Get(0)` = null → **afterFilter=0** →
+  không summon được (log `cap_s3f12`: `heroPool.len=6 nonNull=6 afterFilter=0`).
+- `BattleManager.slot/slotBonus`: setter `_slot = op_Implicit(value)` = **NULL**, getter stub → 0
+  → seed loop chạy mà `maxUnitCount` vẫn 0 → `AutoMoveUnitToField` không place gì.
+
+**Fix**: bản rebuild là plain-value wrapper (`_plain` int; null-guard `op_Implicit`→0 giữ hành vi
+stub cũ). Protocol/save KHÔNG serialize class này (wire dùng int nguyên) → anti-tamper không cần.
+Sau fix: `cap_s3f13` `afterFilter=5` (1 hero bị loại thật bởi LateComers), `chosen=10000`,
+`playerField=1` (tức maxUnitCount=3 đã sống).
+
+→ **Luôn nghi ngờ một GIÁ TRỊ CLASS stub trước khi port caller đọc nó**: EncryptedInt (đã fix),
+ObscuredInt (CodeStage — THẬT, proven: `.value` cho id/level chuẩn), AwesomeInt (`.v` — THẬT).
+
+### 62.2 Deck: GetDefaultDeck + currentDeck
+
+- `PlayerData.currentDeck` **KHÔNG BAO GIỜ được gán** trong port (grep `.currentDeck =` → 0) →
+  `Scene_Game.Init` LUÔN fallback `GetDefaultDeck()`.
+- `GameManager.GetDefaultDeck` (0x314BAE4, batch101): cache path (static+0xb0, `GetCard` stub→null
+  nên All luôn false anyway) **defer**; compute: `data.cards` có `level.value>0 && ResourceUnit.Get!=null`
+  → sort desc theo level → take 6 → `unitId.value[]`. Runtime: 6 hero mặc định.
+- `BattleManager.InitHeroPool` (0x2ED89E0): `_heroPool = deck.Select(id => new EncryptedInt(id)).ToArray()`
+  (sửa EncryptedInt là đủ —之前 ctor rỗng nên mọi entry _plain=0).
+
+### 62.3 ★ Init slot-seed loop (RVA 0x2E463C4, trong `Scene_Game.Init`) — chốt maxUnitCount
+
+```csharp
+if (_resTheme != null && !isRogueLike)
+    foreach (var bm in battleManagers) {
+        bm.tileBuffs?.Clear();      // _tileBuffs@+0x220 (List, §58 initializer)
+        bm.slot = 0;
+        bm.slotBonus = 3 - (int)bm.GetArtifactValueSum("MinusSlot");
+    }
+```
+
+- Disasm-proven: `w22=3` hằng; `(int)+Inf` idiom = `FCVTZS` + `fcmp +Inf` + `csel w1,0x80000003,…`
+  = unchecked wrap mặc định của C# → biểu thức C# thường là đủ; `GetArtifactValueSum` stub → 0.0
+  → slotBonus=3.
+- **Key `"MinusSlot"`** (artifact penalty slot — base 3, không artifact → 3): resolve bằng
+  **★★★ ADRP LAW**: `disasm_ctx.py` (capstone theo FILE offset) in ADRP target theo **trang file**;
+  target VMA/GOT thật = printed + **0x4000** (code delta). `0x6961b20` → `0x6965b20` →
+  `R_AARCH64_RELATIVE` → `0x6baa860` → ScriptString `"MinusSlot"`. Mọi key GOT resolve theo cách
+  này trước đây bị lệch 1 trang (PTR_DAT_* lookup trực tiếp thì đúng, không ảnh hưởng).
+- **Math cross-check**: theme CÓ `StartUnitLevels` (count=6): `SlotUp(6 − slotBonus=3)` → `_slot=3`
+  → maxUnitCount=6=count ✓; theme 1 (không có → khối bỏ qua): slot=0+slotBonus=3 → **maxUnitCount=3** ✓.
+  → KHÔNG cần theme-SetSlot key cho theme 1 (path SetSlot chỉ theme 2000/2100).
+- Hai call `playerBattle.GetArtifactValueSum` phía trên (→ `EncryptedInt` @Scene_Game+0x6b8/+0x6b0):
+  key đã resolve = `"MerchantRefreshCost"` (GOT 0x6965ac0→0x6baa4c0) / `"MerchantRefreshTime"`
+  (0x6965a38→0x6baa4c8) — merchant UI/economy fields, defer (không ảnh hưởng battle).
+  Post-loop field inits (+0x3f8/+0x530/+0x37c) defer.
+- `_slot`/`_slotBonus` writer map: `set_slot` ← Scene_Game.Init / LoadGame / LoadPlayerUnits /
+  HandleInstantItem / GameManager.InitRogueLike; `set_slotBonus` ← same + InitSingleArenaRecordStage /
+  LoadRogueLikeImpl / RogueLikeRoom.EnterRoom / DevRogueLikeItemPanel.Close.
+- `LoadPlayerUnits` (0x2E6C420): `SetGold(data+0x88); slot=data+0x8c; slotBonus=data+0x90;
+  SetSpawnLevelUpCount(data+0xc4)` — mọi bước `cbz data → no-op`; **chỉ caller = InitStage**;
+  fresh stage (data=null) → không ghi đè slot.
+
+### 62.4 Property stubs đã sửa (BattleManager)
+
+- `slot`/`slotBonus`: stub `return 0`/no-op → wrapper thật quanh `_slot`/`_slotBonus` (EncryptedInt).
+- `tileBuffs` getter `=> null` → `_tileBuffs` (không caller nào phụ thuộc null); `_tileBuffs`/
+  `_itemQueue` thêm `= new List<…>()` (§58-class).
+- `SetSlot(count)` (0x2EFB51C) = `_slot = count`; defer: mainUI slot-label refresh + đếm enemy
+  +0x7E9 (UI-only). `SlotUp` (0x2EFB090) decode xong nhưng **để sau stub `CanSlotUp()`→false**
+  (theme 1 không cần; body gồm ReloadUnitCount/ShowAnim/Firebase/ApplyWorldTrigger(6) — defer).
+- `HandleCheckGameStartEffects` (0x2EDD93C) = **`_itemQueue.Clear()`** (list @+0x228; original NRE
+  nếu null → guard). Không battle-critical.
+
+### 62.5 CheckGameStartEffects — LAB tail theme 1 = no-op (early-return là tương đương)
+
+LAB tail (shared, khi `startUnitLevels != null`): (a) `HasValue("SetSlot")` → foreach bm SetSlot
+(theme 1 KHÔNG có element → no-op; key PTR_06a65ba8 không resolve — defer); (b) `currentMerchantPopup`
+(+0x838) = null (đã null); (c) `startSpawnLevelUp(+0xE8)>0` → spawnLevelUpCount += (theme 1 = 0);
+(d) foreach bm `HandleCheckGameStartEffects()` (= _itemQueue.Clear, queue rỗng).
+Theme 1: `startUnitLevels` null/empty → either LAB hoặc bỏ qua → **port early-return là tương đương**,
+không restructure (comment trong code ghi rõ).
+
+### 62.6 Nút Summon (MainUI) — decode xong, chưa wire
+
+- `MainUI.get_battleManager` (0x2FE1860) = `Scene_Game.Instance.battleManagers[battleManagerIdx@+0x5B0]`
+  (Instance/list null → original NRE; out-of-range get_Item → throw; port guard cả hai).
+- `OnClickRandomHeroImpl` (0x2FED718, private, `bool isAdSummon=false`) = `battleManager.GenRandomHero(isAdSummon)`
+  + nhánh save defer: gate `Scene_Game.testMode(+0x388, ObscuredInt) < 0` (mặc định 0 → KHÔNG chạy)
+  && `_canSave(+0x851)` && `_theme != field+0x310` && theme GetValueBool(key) && !isStory && !isColosseum
+  && !isRogueLike → `StartCoroutine(SaveGameImpl(restoreFromLastSave, restoreWaiting))` / `SaveRogueLikeImpl`
+  (SaveGame write-path vốn deferred).
+- `OnClickRandomHero` (public bool, 0x2FED4B4): `bm.fieldGrid`-adjacent grid @bm+0x1a0 →
+  `GetEmptyPos() == (-1,-1)` → CenterText "full" + false; `ConsumeGold(getRandomHeroCost)` false → false;
+  `Scene_Game.isTutorial` (stub→false) → tutorial branch (IngameTutorialPanel.GetHero) bypass; else Impl.
+  **Chưa port/gán** (cần ConsumeGold thật + getRandomHeroCost; capture gọi thẳng `playerBattle.GenRandomHero()`).
+- `OnClickAdRandomHero`/`ReloadAdRandomHeroButton`/`OnRandomHeroPointerDown/Up` defer (ad-UI).
+
+### 62.7 GenRandomHero (0x2EF8738) — port đã chạy thật
+
+Guard `isSingleArenaPreparationBattle` → return; `pool = _heroPool.ToList()`; filter RemoveAll
+`ResourceUnit.Get((int)id)==null || res.GetValueBool(UnitTag.LateComers=451)` (b__383_0/b__383_3);
+`Utility.GetWeightedRandom` stub → idx 0 (guard `idx<0 → 0`); `level = 1`;
+`AddUnitToWaitings(chosen, 1)` → unit vào waiting → `AutoMoveUnitToField` đẩy sang field
+(StartStage). Runtime: 6→5 (1 LateComers thật) → chosen=10000 → field=1.
+
+### 62.8 Verification
+
+- `s3f13gate.log`: GATE_EXIT=0, 0 `error CS`.
+- **`cap_s3f13`**: `afterFilter=5 chosen=10000 → unit=ok` → StartStage → `playerField=1 playerWaiting=0`
+  → 7 enemies (§61.5) → kill-all → `HandleStageClear → _stage++ = 2` → PNG. **0 exception —
+  battle hai phía đầu tiên chạy trọn vòng.**
+
+### 62.9 Deferred (§62)
+
+GenRandomHero: late-comers branch (`+0x388` count/SetLateComersLeftCount), ad-summon, composition-weight,
+theme+0xec summon-chance path, RemoveRange edge-trim, deck-value, trumpet/Firebase; GetDefaultDeck cache
+(static+0xb0); Init post-loop field inits (+0x3f8/+0x530/+0x37c) + 2 merchant-EncryptedInt dùng liệu;
+SetSlot UI-label + enemy+0x7E9; SlotUp body sau khi CanSlotUp được decode; save-sau-summon
+(SaveGameImpl/SaveRogueLikeImpl); OnClickRandomHero gate wiring (ConsumeGold/getRandomHeroCost/+0x1a0 grid id).
+**FUN_02c56950** = per-slot lazy init (bss flag) — decode nó sẽ mở khoá toàn bộ key `PTR_DAT_*`
+còn treo (EventDispatcher/CheckFieldUnitCount/InitStage keys…).
+
+## 63. S3f — BatchValueSumEnemies (value-sum generator, stage 102+) — RUNTIME-PROVEN (2026-10-19)
+
+Mục tiêu: stage 102+ không có `<SpawnData>` tường minh → trước đây 0 enemy auto-win. Nguồn:
+`SpawnManager.BatchValueSumEnemies` RVA **0x31363B8** (call trong InitStage @file 0x312f4xx),
+closure `<>c__DisplayClass3_0` (valueSum/monsters/y/usedPos/this/resStage/addLevel),
+lambda `b__2` filter @0x313DC84, `g__UpdateY|0` @0x313907C, `g__BatchEnemy|1` @0x31390E0,
+sorters `b__3_4..8`, `DisplayClass3_1.b__3` (obstacle) @0x313DD58, `DisplayClass3_2.b__9`
+(LastStageInfo match) @0x313DE04. InitStage extract: `/tmp/opencode/s2re/b105_3131e24.txt`,
+body: `/tmp/opencode/s2re/batch_value_sum.txt`; Ghidra batch105/106 extracts `b105_*.txt`.
+
+### 63.1 Chuẩn bị decode (những mảnh ghép bắt buộc)
+
+- **Stages.xml reveal key names** (không cần resolve PTR): `<ValueSum>`(1301), `<BatchSameLine>`(581),
+  `<BatchWithEmpty>`(445), `<MaxValueAdd>`(473 = cap), `<MonsterLevel>`, `<MinMonsterPool>`/`<MaxMonsterPool>`,
+  `<RandomEquip>`(67)/`<RandomItem>`(32 — 2 key của equip-tail), `<StatPer>`.
+- **UnitTag**: `CanEquip=80, Order=81, MaxGen=82, GenStageFrom=84, GenStageTo=83, Value=115, Theme=440, LateComers=451`.
+- **ResourceStage field map** (offset khớp thứ tự khai báo): `+0x60 defaultGen (List<(int,int)>)`,
+  `+0x78 valueSum` (base budget), `+0x7C monsterLevel`, `+0x98 values (Dict<string,string>)`, `stage@+0x24`.
+- **ResourceUnit**: `type@+0x30` (`Type.Enemy=2`), `genStageExcept@+0x200 (List<int>)`, `id@+0x10`, `resUnit@+0x2e8` (GameUnit).
+- **BattleManager map** (đúng class): `enemies@0x98`, `allFieldUnits@0x68`, `fieldUnits@0x70`,
+  `waitingUnits@0x78`, `obstacles@0xA8`, `fieldGrid=UnitGrid@0x198`, `waitingGrid=UnitGrid@0x1A0`
+  (← giải luôn TODO grid của OnClickRandomHero), `gridMap@0x208`, `_lastStage(List<LastStageInfo>)@0x218`.
+- **UnitGrid.size@0x28 = Vector2Int** → `fieldGrid.size.x` = width (center=size.x/2, mirror=width-1-x).
+- **Scene_Game._enemyLevelBonus** (ObscuredInt@0x318) — BatchEnemy level = `(int)enemyLevelBonus + monsterLevel + addLevel`.
+- **addLevel = GameManager.eliteLevels[1] + devilBonus** (eliteLevels int[]; gate `eliteLevels!=null && Length>=2`;
+  devilBonus = `devilEffectCount>0 && devilCond∈[4,6] ? 1 : 0`; devil multiplier = floatTable[cond-1]×(bonus+base)).
+  CẢ eliteLevels VÀ ratio bonus đều bị null-gate trong port → addLevel=0, bonus=0 (deviation đã document).
+- Stages.xml theme-1: stage 101 `ValueSum=0`+7 scarecrows tường minh; 102=3; 103=4; 104=5; 105=4+boss 20020;
+  pool theme-1 stage2: 20000(Value1)/20010(Value1,from2)/10020000(Value1) — 20020 from6, 20040 Value0 → loại.
+
+### 63.2 Algorithm (decode → port)
+
+```csharp
+closure { budget=valueSum, monsters={}, y=-1, usedPos, this, resStage, addLevel }
+prefill: defaultGen [(id,cnt)] → monsters[ru]=cnt; budget -= ru.Value*cnt
+while (budget >= 1):
+    candidates = enemyPool.FindAll(b__2: Value<=budget && (!picked || cnt < MaxGen默认int.Max))
+    if empty → budget--; continue
+    pick = Utility.Pick(candidates, bm.actionSeed); budget -= pick.Value; monsters[pick]++
+// exit (budget<1) → spawn phase (non-batchSameLine):
+sort monsters desc-by-count (b__3_4 — máy là bool-compare degenerate, thứ tự cosmetic)
+foreach kv: UpdateY(); (count lẻ → BatchEnemy((width/2, y)))
+    weights = [1]*(width/2); loop: x = GetWeightedRandom(weights, -1, actionSeed)
+    x<0 (dòng kín) → UpdateY + weights mới (defer batchWithEmpty edge-zeroing)
+    BatchEnemy((x,y)) + BatchEnemy((width-1-x,y)) [mirror]; weights[x]=0; count -= ok1+ok2
+BatchEnemy(pos,id): obstacles.Any(o=>o.tilePos==pos.ToReversePos(bm.gridMap)) → false;
+    usedPos[y].Add(x); BatchAIUnit(id,pos,level,team=Enemy,cardLevel=1)
+UpdateY: do { y++; } while (usedPos.ContainsKey(y))
+```
+
+Tail (defer, cosmetic/difficulty): batchSameLine branch (group-by-line sort theo UnitTag.Order),
+RandomEquip/RandomItem loop (`resStage.values` 2 key → PickRandomEquip(battleSeed) → target =
+enemies.FindAll(team==2).Pick / Find(team==0 && resUnit.CanEquip parse true) → remove+re-Add
+LastStageInfo với equips list → target.Equip(item) → buff), MinMonsterPool/MaxMonsterPool clamp.
+
+### 63.3 Stub-gap fixes (bắt buộc — nếu thiếu: pool rỗng hoặc infinite loop)
+
+1. **`ResourceUnit._numericValues`** (mới): parser vốn `continue`-bỏ các số thuần khỏi stringValues
+   (coefficient path deferred) → `GetValueInt` KHÔNG BAO GIỜ thấy `<Value>1</Value>`. Fix: nhánh
+   continue ghi `_numericValues[ntag] = (int)Math.Round(nv)` (upsert last-wins). `GetValueInt` 2 overload
+   trả từ dict này (statFunc/me-scaling deferred).
+2. **`Utility.GetWeightedRandom(int[])` thật** (sum<0 → tự tính; all-0 → **-1**; Random(seed) deterministic).
+   Caller cũ duy nhất GenRandomHero có guard idx<0→0 → an toàn, summon-weight giờ thật.
+3. **`Utility.Pick(List<T>)` thật** (seed-deterministic; empty → default). 2 overload kia defer (0 caller).
+4. **`Scene_Game.enemyLevelBonus`** property → đọc `_enemyLevelBonus` thật (trước `=> default`).
+5. CS0121 trap: `GetValueInt(tag, null, -1)` mơ hồ 2 overload → dùng named arg `GetValueInt(tag, @default: -1)`.
+6. `BatchAIUnit` là **method của SpawnManager** (không phải BattleManager) — port GenSpawnData gọi
+   không qualifying; BatchEnemy cũng gọi unqualified.
+
+### 63.4 InitStage wiring
+
+Sau GenSpawnData 2 wave (usedPos đã có dữ liệu wave → UpdateY tự tránh):
+`enemyPool = ResourceUnit.GetAll(b__1)` (trong port: lambda inline — type==Enemy && Theme==targetTheme(=1,
+máy là GetKeyValueInt key PTR unresolvable, default 1) && GenStageFrom<=curStage.stage<=GenStageTo(默认20)
+&& !genStageExcept.Contains(stage) && Value>0) →
+`BatchValueSumEnemies(curStage.valueSum, addLevel=0, curStage, enemyPool, usedPos, curStage.defaultGen,
+GetValueBool("BatchSameLine"), GetValueBool("BatchWithEmpty"))`.
+GATEeliteLevels omitted (null trong port → machine sẽ skip, ta gọi thẳng — deviation, ratio bonus=0).
+
+### 63.5 Verification (gate s3f14gate + cap_s3f14, 2026-10-19)
+
+- Compile: GATE_EXIT=0, 0 error CS.
+- Play-capture (KILL_ENEMIES=1, 900 frame sau kill): **CAP_EXIT=0, 0 exception**, PNG OK.
+  - Stage 101: `[VSUM-DIAG] valueSum=0 picks=0 pool=2` → không sinh thêm (đúng, budget 0); 7 bù nhìn tường minh.
+  - Stage 101 clear: `killed 7 → HandleStageClear → _stage++=2 → WorkTimer(1s) → NextStage → InitStage`.
+  - Stage 102: `[VSUM-DIAG] valueSum=3 picks=1 totalUnits=3 budgetLeft=0 pool=3` →
+    `[VSUM-DIAG] spawn id=20000 count=3` — 3 Goblin(20000), budget 3 / Value 1 = hết sạch.
+    Stack thật: `WorkTimer.Update → <HandleStageClear>b__751_0 → NextStage → Scene_Game.InitStage →
+    BattleManager.AfterInitStage → SpawnManager.InitStage → BatchValueSumEnemies`.
+- DIAG: `[VSUM-DIAG]` 2 dòng/pick-phase + 1 dòng/unit-type (SpawnManager.cs ~225) — giữ cho tới khi
+  CaptureScene tự verify stage-2 thì xoá.
+
+### 63.6 Deferred (§63)
+
+batchSameLine branch (sort UnitTag.Order + group-by-line), batchWithEmpty edge-zeroing
+(positions[0]/[last]=0 khi count≥4), RandomEquip/RandomItem equip-tail, eliteLevels/eliteLevelRatio
+ratio bonus + addLevel (cần port GameManager.eliteLevels data từ server), MinMonsterPool/MaxMonsterPool
+clamp, FUN_02c56950 (per-slot lazy init — mở khoá PTR_DAT keys: targetTheme key, MaxValueAdd/BatchSameLine
+đã khỏi need nhờ XML nhưng các key khác còn).
+
+### 64. Gold cluster + nút Summon gate (2026-10-19)
+
+**Decode** (batch107/108/110 + b109 + b104, resolve key qua `.rela.dyn` `R_AARCH64_RELATIVE`
+→ addend → `script.json.ScriptString`):
+- `MainUI..ctor` RVA **0x2FF3C58** (dump.cs omit!) — initializers ghi trực tiếp: `sellCost=2`,
+  `randomHeroCosts={3}` (summon cost), `randomItemCosts={10}`, `randomHeroLevelUp={7}`,
+  `addUpgradeSlotCost=0`, `_camPosition=1`, `_cachedUnitMaxLevelEffectObjs=Dictionary`,
+  `basePanelPos={-442,0,-570}`, `subStartButtonPos={244,320}`; defer blob-init: `SELL_GOLD[7]`,
+  `camSize[3]`, `RANDOM_HERO_FIRST_DELAY@+0x690`. **readonly fields không có trong YAML** →
+  port BẮT BUỘC có ctor (máy dựa vào managed ctor).
+- `HasGold(v) = v <= _gold`; `getRandomHeroCost = randomHeroCosts[0]`.
+- `SetGold(v)` (BM 0x2EF6494): equal→early-out; `_gold=v`; `_maxOwnedGold=max`;
+  focused→`mainUI.SetGold`; bmIdx==0→`gameCompleteRequestModel.maxGold` record (@0x84).
+  Defer tail: `BasePanel.SetReward(curStage)` refresh + items-listener.
+- `AddGold` (0x2EF0B14): `amt = round((GetArtifactValueSum("RoguelikeGoldPer")/100+1)*value)`
+  (stub→0 → amt=value; param `addDeckValue` chết trong binary) → focused→`ShowAddGold`
+  (+RogueLike) → bmIdx==0→`deckValue+=amt` → `HandleAddGold` (no-op) → `SetGold(gold+amt)`.
+- `ConsumeGold(value, checkUnitCount)` (0x2EF67B4): bmIdx!=0→true; `gold<value`→toast
+  **"NotEnoughSilver"**→false; `checkUnitCount && gold-value<3 && field+waiting rỗng`→false;
+  success: `HandleAddGold(-value)` + `SetGold(gold-value)` + `totalUsedGold+=value`.
+- `MainUI.SetGold` (0x2FE6CE8): `goldText.text=Format("{0}",v)` + tint cost-labels theo affordance
+  (defer tint). `OnClickRandomHero` (0x2FED4B4): GetEmptyPos==(-1,-1)→toast **"FieldSlotFull"**
+  →false; `ConsumeGold(cost,false)` fail→false; !isTutorial→`OnClickRandomHeroImpl()`→true.
+- **Start-gold** (init_body 3030-3077): `model.startGold=playerBattle.gold` (trước reset);
+  foreach bm: `startGold = GetBuildingEffect("StartGoldBonus") + (ResourceTheme.startGold<0 ? 7 : startGold)`;
+  player bm → `_deckValue=startGold`; `bm.SetGold(0); bm.AddGold(startGold,true,false,false)`.
+  **`ResourceTheme.startGold = GetChildInt("StartGold", -1)** — XML không có → -1 → fallback **7**
+  (port field原本=0 → không fallback → bug gold=0, fix: initializer `= -1` vì `InitGenericFields`
+  chỉ ghi đè khi element CÓ).
+- Kill-gold: `HandleUnitDead`→`reward = GetChildInt(node,"Reward",0)` (**resolve key =
+  'Reward' qua rela; Units.xml không có `<Reward>` → luôn 0** — kill không cho gold ở theme1);
+  `HandleKillUnit` bonus = SkillTag.AddGoldOnSkillKill(200) + UnitTag.KillGoldBonus(114) +
+  BuffTag.KillGoldBonus(175) + `_cloneKillGoldBonus` — cũng 0 với unit thường. Nguồn gold
+  theme1 = start gold + GiveReward.
+
+**Port** (§64): MainUI ctor + `getRandomHeroCost` + `MainUI.SetGold` + `OnClickRandomHero`;
+BM `gold/maxOwnedGold/SetMaxOwnedGold/SetGold/HasGold/ConsumeGold/AddGold`;
+`Scene_Game.deckValue` property (gắn `_deckValue` — stub cũ get=0/set no-op làm mất record);
+Init start-gold block (giữa InitMap và InitStage, đúng thứ tự máy); `ResourceTheme.startGold=-1`;
+CaptureScene summon giờ gọi `mainUI.OnClickRandomHero()` thật (bỏ GenRandomHero thẳng).
+
+**Verification (gate s3goldgate + cap_s3gold, 2026-10-19)**: GATE_EXIT=0/0 error;
+capture CAP_EXIT=0/0 exception: `[PLAYCAPTURE] OnClickRandomHero (summon): ok=True gold 7 -> 4`
++ `[SUMMON-DIAG] chosen=10520 -> unit=ok` + `after StartStage: playerField=1`.
+(`waiting=0` là pre-existing — stage1 auto-to-field, log cũ cũng vậy.)
+
+**Deferred (§64)**: SetGold/AddGold tail (SetReward refresh + items-listener), MainUI.SetGold
+cost-label tint (resolve statics Color class), CenterText toasts (key đã resolve — wire
+`centerText.Show`), `UnitGrid.GetEmptyPos` + `GridTile.tilePos` thật (stub (0,0) → full-grid
+branch không nổ; multi-summon placement), blob-init SELL_GOLD/camSize/RANDOM_HERO_FIRST_DELAY,
+AddGold banker's-round chi tiết (chỉ khác với artifact % ≠ 0), kill-gold nếu sau này master data
+có `<Reward>`.
+
+## §65 — S3f: game-end cluster (HandleGameEnd / HandleGameEndImpl / POST game/complete / GameOverPanel) — RUNTIME-PROVEN (2026-10-20)
+
+### 65.1 Caller-scan law: PHẢI scan cả B lẫn BL (mới, quan trọng)
+
+Scan chỉ BL (`(w>>26)==0x25`) **bỏ sót mọi tail-call `b`** (`(w>>26)==0x05`) — HandleStageClear
+bình thường tới HandleGameEnd qua `b`, không qua `bl`. Công thức: 4-byte aligned từ 0x4000; BL
+`imm26` sign-extend ×4; B cùng công thức. dump.cs name: `^\s*// RVA: (0x…)` rồi dòng kế =
+signature. **HandleGameEnd (RVA 0x2E59770) trigger map — 16 site (B+BL đầy đủ)**:
+
+| Site (RVA) | Callable / bối cảnh | semantics |
+|---|---|---|
+| 0x2eeefec (BL) | `SetLife` | `battleManagerIdx==0 && life<1 && !isColosseum` → `HandleGameEnd(false)` |
+| 0x2eef4d8 (B) | `ForceSetLife` tail | defeat override |
+| 0x2e77188→0x2e7769c (B) | `HandleStageClear` final-branch | **WIN**: final + !colosseum + !clanraid + !story |
+| 0x2EB2F80 (B) | `<HandleStageClear>b__1` | `ldr x0,[x0,#0x10]; mov w1,#1; b HandleGameEnd(true)` |
+| 0x2ea87f4 (B) | `<StageEndPost>b__583_1` | `mov w1,#1; b HandleGameEnd(true)` — gate HeroRevive (xem 65.3) |
+| 0x2ea87fc (B) | `<HandleGameEnd>b__595_0` | `mov w1,wzr; mov w2,wzr; b HandleGameEndImpl(false,false)` |
+| 0x2eb2abc / 0x2eb2d48 (B) | `<HandleStageLose>b__0 / b__2` | lose-skip |
+| 0x2e4bb4c / 0x2e584e4 / 0x2e9a5e0 / 0x2ea8894 / 0x2ea9b9c / 0x2ecb338+0x2ecb39c / 0x2d1ad30+0x2d24680 / 0x2fe8f40 / 0x2fef66c | InitStage CanComplete (colosseum) / WaitForNextPhase / ShowSingleArenaDeckChoice / OnClickSkipRanking / HandleReadyPhase d__168 (roguelike) / story / OnClickDevMenu / OnClickStageComplete | mode-specific, defer |
+
+`HandleGameEndImpl(bool cleared, bool adBonus)` @0x2E85B3C — callers: LoadGame 0x2e69340,
+RankedPvPGiveUp 0x2e8875c, LoadRogueLikeImpl 0x2e95158, `HandleGameEnd` d__595 0x2ec0348/0x2ec0c54.
+`RestAPI.GameComplete(UniTask)` @0x2d31310 — callers: d__597 0x2ec7964, PausePanel <>c 0x2ffe0c8
+(give-up), DimensionRiftStartPanel 0x354f2bc.
+
+### 65.2 WIN path: final-branch + elite-gate + **encoded-method-index resolver** (kỹ thuật mới)
+
+`HandleStageClear` (0x2e77188): `isFinalStage && !isColosseum && !isClanRaidDeckRecord &&
+!isStoryMode` → **jump FORWARD tới 0x2e7769c, BỎ QUA `_stage++`** (0x2e77298/0x2e772ac —
+get_v/set_v) → elite gate → `Action.ctor(x1=displayClass575_0, x2=*slot)` → `WorkTimer.Do(2.0,
+action)` (CẢ 2 nhánh đều 2.0s — dùng chung `fmov s0,#2.0` sau join 0x2e7779c):
+
+- gate PASS = `GetEliteLevelSum()==0xf && !this.@0x47C && !theme.@0x60(isEventMode) &&
+  AwesomePrefs.GetInt("RankingStageEnable",1,1)==1` → slot **0x6967120**
+- gate FAIL (bình thường) → slot **0x6967128**
+
+**Slot → lambda identity (không thể resolve bằng adrp/ldr thường — BỎ QUA method-pointer
+"cells"):**
+
+1. Slot static (vd `adrp x8,#0x6967000; ldr x8,[x8,#0x120]` → 0x6967120) → rela r_offset →
+   **addend = cell address `.data`** (vd 0x6b8e688). `.data` vaddr 0x6a028d0/file 0x69f68d0 →
+   **delta 0xC000: file offset = vaddr − 0xC000**. Đọc 8 byte tại cell → **encoded method index
+   `0x6000xxxx`** (KHÔNG rela, KHÔNG có store nào trong code — chính nó là giá trị khởi tạo file).
+2. Decode: index **tăng +2 mỗi lambda theo thứ tự dump.cs** (method definition order).
+   Anchor chốt: slot **0x6967130** (common-path schedule NextStage @0x2e77364) → cell 0x6b8e698 →
+   `0x600032a3` — `DisplayClass575_0` dump order: b__0, b__1, b__2… → **b__2 (NextStage) = 0x32a3**
+   ⇒ b__0=0x329F, b__1=0x32A1.
+3. Kết luận: gate-FAIL (bình thường) → 0x600032A1 = **b__1 → `HandleGameEnd(true)` @2.0s** ✓;
+   gate-PASS (ranking) → 0x6000329F = b__0 @0x2EB2DB8 (iterate list@0x230 → remove-buff — ranking
+   flow, defer). Cross-check cell block 0x6b8e680: `…329b 329f 32a1 32a3 32a7 32a5 32a9…` —
+   b__4 đứng TRƯỚC b__3 trong dump (RVA 0x2EB31C8 < 0x2EB31FC) nên cell 0x6b8e6a0=b__3(0x32a7),
+   0x6b8e6a8=b__4(0x32a5) — khớp.
+
+**⚠ TRAP capstone mới**: bản capstone này in `op_str` CÓ ngoặc vuông (`adrp [x8, #0x…]`) →
+`re.match(r'x…')` FAIL THẲNG — mọi scan full-binary dùng `re.match` trước đó đều im lặng sai.
+Dùng `re.search`. (Bug này đã làm 5 scan liên tiếp trả về rỗng.)
+
+Delegate "raw pointer cells" (0x6a77c18→0x2eb2f80…, rela addend = code addr) **không có ai
+đọc** — chỉ là data artifact; identity lấy qua encoded index như trên, không qua cells đó.
+
+### 65.3 StageEndPost — decode lại SẠCH (checkpoint cũ bị lệch offset)
+
+`StageEndPost(bool win)` @0x2e823c8 (đúng slice `data[RVA−0x4000:]`, base=RVA): ObscuredBool
+@+0x374=true, EncryptedInt(0) @mainUI+0x5d8, list@0x230 `AddPreventSellUnitStageCount(-1)` +
+`AddUnlimitedSpawnLevelUpStageCount(-1)`, `ReloadStageText(win)`, `ReloadButtons(true)`, boss-bar
+hide loop, `playerBattle.StageEndPost()` @0x2ef2c40, timeScale restore, `ReloadUnitCount()`, rồi:
+
+```
+if (!_resTheme.GetValueBool(key=*slot 0x6967668 /* "HeroRevive" */, default:true))   // w2=1
+    if (!Any(list@0x230, cachedPred /* *0x6967660 */ /* 0x3bdc328 */))
+        WorkTimer.Do(2.0, Action(x1=this, *0x6967658 = b__583_1));   // → HandleGameEnd(true)
+```
+
+`<StageEndPost>b__583_1` @0x2ea87f4 = `mov w1,#1; b HandleGameEnd`.
+**HeroRevive=false CHỈ có trong theme event 1000/1002/2000** (Themes.xml, 3 hits: 2 active +
+1 comment) — theme 1 vắng key → default true → **skip → StageEndPost KHÔNG end game ở theme 1**
+(mọi NextStage đều gọi nó). `NextStage` @0x2e821e0 gọi `StageEndPost(true)` trước → port đã có
+body này (Scene_Game:4329). Ghi nhận: checkpoint §64 ghi "HeroRevive branch defer" — ĐÚNG, và
+branch này chỉ phục vụ event themes.
+
+### 65.4 Life / SetLife / lose path
+
+- `_life = new EncryptedInt(0)` trong ctor (@0x2f04288); **không có writer khởi tạo từ theme**
+  → fresh game life=0. Theme 1 (server/xml_live/Themes.xml) **thiếu cả 3 flag**
+  SkipStageWhenLose / DecreaseLifeWhenSkipStage / GiveAllGoldWhenLose → GetValueBool all false →
+  stage-lose LUÔN `life--` (comment §59 "theme 1 không rơi vào" SAI — đã sửa trong port).
+  Stage-lose đầu: `SetLife(0−1=−1)` → life<1 → `HandleGameEnd(false)` — life start 0 là ĐÚNG máy,
+  **không artificial-init**.
+- Port `BattleManager.SetLife(int, bool anim=true)`: clamp trần `value ≤ Scene_Game.Instance.
+  startLife` (mới — property đọc `_resTheme.startLife`, vì `_resTheme` private trên Scene_Game);
+  `_life = value`; focused → `mainUI.SetHp`; `RefreshFlags()` (stub an toàn);
+  `battleManagerIdx==0 && life<1 && !isColosseum → Instance.HandleGameEnd(false)` + log.
+
+### 65.5 Ports (tất cả gate-pass, compile 0 error)
+
+- **BattleManager.cs**: `life` property get/set `_life` (trước stub `=> 0`); `SetLife` body (65.4).
+- **Scene_Game.cs**: `startLife` property; `InitGameCompleteModel()` (`_startTime=UtcNow`, model
+  `{gameId=gm.currentGameId, theme, stage}`, ẩn gameOverPanel) gọi trong `Init()` trước
+  `InitStage()`; `InitStage` top set `model.stage=_stage.v`; `HandleStageLose` mở rộng (đọc 2 flag,
+  `loseCount++`, `ReloadInGameMissions`, `pb.SetLife(pb.life-1)`, `pb.life<1 return`,
+  `WorkTimer.Do(bmCount*0.5f+2, HandleStageLoseDelayed)`); NEW `HandleStageLoseDelayed` (b__0:
+  gold vơi 50%, `StageEndPost(false)`, flag==0 ReBatch, flag==1 final→HandleGameEnd(true) else
+  `_stage.v++ + InitStage`, tail `mainUI.HandleStageEnd(false,2.5f) + SaveGame(false,true)`);
+  **win-gate** `HandleStageClear`: `bool finalWin = isFinalStage && !isColosseum &&
+  !isClanRaidDeckRecord && !isStoryMode` tính TRƯỚC khối `_stage.v++` (chỉ chạy khi `!finalWin`) →
+  `finalWin ? WorkTimer.Do(2f, ()=>HandleGameEnd(true)) : WorkTimer.Do(1f, ()=>NextStage(false,0f))`;
+  `HandleGameEnd` (guard `gameEndProcessed` → `ClosePausePanelIfActive` → `SaveGame(false,true)` →
+  `WorkTimer.Do(cleared?1.8f:0.3f)` → win&&!story `AudioController.StopMusic()` (static) →
+  `!isPvPMode && !isColosseum && !isStoryMode → HandleGameEndImpl(cleared,false)` else defer log);
+  `ClosePausePanelIfActive` (pausePanel SetActive(false)); `HandleGameEndImpl` (điền model
+  `gameId/theme/stage/win/adBonus/endTime/playTime` → `Web.Post<GameResponseModel>("game/complete",
+  …, callback)` → fail: log+`mainUI.ShowRestRetry()` → ok: `GameOverPanelData{win,addGold,addExp}`
+  → `mainUI.gameOverPanel.Show`).
+- **GameOverPanel.cs**: `Show(data)` minimal = `SetActive(true)` + `_resultText.text =
+  win ? "VICTORY" : "DEFEAT"` (chính là banner text field — render đúng).
+- **CaptureScene.cs**: `KGC_CAPTURE_FORCE_FINAL=1` — reflection set `_stage.v = resStages.Count`
+  (1-based; `isFinalStage = _stage.v == Count`) TRƯỚC kill-loop; `KGC_CAPTURE_FORCE_DEFEAT=1` —
+  `playerBattle.SetLife(-1,false)` SAU StartStage (không kill env).
+- Traps đã tránh: `GameOverPanelData` là nested class → `GameOverPanel.GameOverPanelData`
+  (CS0246); `RefreshFlags(bool init=false)` default-arg; `_stage` là **struct** AwesomeInt →
+  reflection phải unbox/`SetValue` trả về; `SaveGame(bool,bool)` stub rỗng (an toàn gọi thật);
+  `Scene_Game.isFinalStage` computed — capture phải set `_stage`, không set được isFinalStage.
+
+**Verification (gate s3f_gate65b + cap_s3end + cap_s3lose, 2026-10-20)**:
+
+- GATE_EXIT=0 / 0 `error CS`.
+- **WIN** (cap_s3end, CAP_EXIT=0, **0 exception**): `[PLAYCAPTURE] FORCE_FINAL: _stage → 13
+  isFinalStage=True (resStages=13)` → `killed 7 enemies` → `[S3f§65] final-stage win (theme 1
+  stage 13) → HandleGameEnd(true) sau 2.0s` (**KHÔNG có log `_stage++`** — nhánh final bỏ
+  increment đúng máy) → `[S3f§65] HandleGameEnd(cleared=True)` → `[S3f§65] POST game/complete
+  (gameId=8ccf64306d102d1f theme=1 stage=13 win=True)` → `[S3f§65] game/complete ok: addGold=1600
+  addExp=120` → `GameOverPanel.Show win=True`; server `/tmp/kgc_local_http.log`:
+  `POST /game/complete → GameResponseModel 200 OK`. Screenshot: banner **VICTORY** + Theme 1
+  header + reward rows.
+- **DEFEAT** (cap_s3lose, CAP_EXIT=0, **0 exception**): `FORCE_DEFEAT: SetLife(-1) life 0 → -1
+  idx=0` → `[S3f§65] SetLife: life<1 → HandleGameEnd(false)` → `HandleGameEnd(cleared=False)` →
+  `POST game/complete (… stage=1 win=False)` → `ok addGold=600 addExp=120` →
+  `GameOverPanel.Show win=False`; server 200 lần 2. Screenshot: banner **DEFEAT**.
+- Theme 1 runtime `resStages = 13` (101–110, 11001, 115, 120 — 21 rows regex-match nhưng 8 rows
+  nằm trong `<!-- -->` comment; `_resStages = GetAll(theme==1)` = 13 khớp non-comment rows).
+
+**Deferred (§65)**: elite/ranking gate → b__0 flow (ranking stage result; slots 0x6967120/
+0x6967128 không cần resolve thêm — semantics đã chốt); StageEndPost HeroRevive branch (event
+themes 1000/1002/2000 + `Any(list@0x230)` predicate); `<HandleStageLose>b__2` @0x2eb2d48;
+mode-specific GameOver branches (pvp/colosseum/babel/story/roguelike → panels riêng);
+revive panel/flow + `b__595_0` revive-decline; retry AwesomePrefs storage + `_sendGameComplete`
+guard + 3.0s timeout WorkTimer; `FetchPlayerTutorialStatus`; **GameOverPanel full UI** (reward
+rows hiện static `+600 (3/3)` từ prefab — CHƯA map từ `GameResponseModel.addGold=1600`; cấp
+thực: map addGold/addExp/newRecord/newThemeClear/beforeLevel/beforeExp + artifact/accessory/
+exp-card lists, localize key Win/Lose thay "VICTORY"/"DEFEAT" literal, `Fit()`);
+`model.endTime` format (server không đọc — ISO giả); deck/endFieldUnits/endTime payload đầy đủ;
+post-win lobby progression (server bestCleared* đã ghi nhưng client chưa hiện world-clear flow);
+HandleStageLoseDelay TAIL `playerBattle` action @delay+k; MerchantCheckTerm.
+
+## §66 — S3 (method cuối): BattleManager.Update (input/UI pick + hide-cascade) — RUNTIME-PROVEN (2026-10-20)
+
+**Scope**: `BattleManager.Update` RVA `0x2ED9E9C` (file `0x2ED5E9C`, dài đến `CheckSpawnTimers`
+@`0x2EDA7E4` = 0x948 byte, ~442 dòng decompile — `bmupdate_2ed9e9c.c`, Ghidra batch114).
+Method **luôn chạy mỗi frame** trong Scene_Game nhưng body chính là input branch
+(`GetMouseButtonDown/Up`) — batchmode không có chuột → input branches không fire trong capture;
+runtime proof = 0-exception trong 900-frame battle (Update chạy mọi frame, guard/field-read
+path exercised). Port vào stub rỗng `BattleManager.cs` (old line 716).
+
+**Gate/capture evidence**: compile gate `GATE_EXIT=0`, 0 `error CS`
+(`/tmp/opencode/s3upd_gate.log`); play-capture `CAP_EXIT=0`,
+`[PLAYCAPTURE] play capture ok (exit 0)`, **0 `NullReferenceException`**
+(`/tmp/opencode/s3upd_cap2.log`, shot `/tmp/opencode/cap_s3upd/shot_Scene_Game.png`).
+Lưu ý: lần capture đầu fail `Could not find a part of the path .../shot_Scene_Game.png` —
+**`KGC_CAPTURE_DIR` phải tồn tại trước** (harness không mkdir).
+
+### §66.1 Cấu trúc nguồn (disasm-verified)
+
+```
+Update():
+  if (battleManagerIdx != 0) return;                 // field int @+0x34
+  var mainUI = Scene_Game.Instance.mainUI;           // static[0]=Instance (NRE nếu null) → +0x268
+  if (Input.GetMouseButtonDown(0)) {
+    if (!mainUI.tutorialPanel.blockRaycast) {        // NRE-check mainUI/tutorialPanel TRƯỚC test
+      bool overUI = Utility.IsPointerOverUIObject();
+      // ColosseumInvadeInfoPanel.Instance != null (UnityEngine.Object.op_Inequality):
+      //   !overUI → Instance.Hide();
+      //   else nếu Instance.isActiveAndEnabled && !IsPointerOver(Instance.transform) → Hide();
+      //   (Hide/transform/isActiveAndEnabled mỗi lần re-fetch static → Roslyn emit lại cbz — faithful)
+      if (!Scene_Game.Instance.isRogueLike)          // get_isRogueLike(Instance)
+          item/rogue-panel keep/hide (unified xem §66.2)
+      BasePanel 7-child cascade (unified xem §66.2)
+      if (!overUI && gameCanvasGroup.blocksRaycasts) // gameCanvasGroup @BM+0x1C8
+        pick: wp = Scene_Game.Instance.worldCam.ScreenToWorldPoint(Input.mousePosition);
+              hits = new Collider2D[8];
+              n = Physics2D.OverlapPointNonAlloc(wp, hits);   // 2 arg thật (script.json)
+              for i<n: col = hits[i];
+                if (col.name.Equals("ButtonCollider"))        // instance String.Equals(this=name, literal)
+                  unit = Utility.Get<GameUnit>(col.transform.parent);
+                  if (unit != null) _clicked = unit;          // @BM+0x3A0, KHÔNG cast (T=GameUnit)
+    }
+  }
+  if (Input.GetMouseButtonUp(0)) {
+    if (mainUI.tutorialPanel.blockRaycast) return;   // early return → KHÔNG clear _clicked
+    overUI = IsPointerOverUIObject();
+    if (!overUI && gameCanvasGroup.blocksRaycasts) {  // pick loop y hệt,
+      ... if (unit != null && _clicked == unit) unit.OnClick();   // KHÔNG store
+    }
+    _clicked = null;                                  // mọi mouse-up khác tutorial-block
+  }
+```
+
+**7-child cascade order** (BasePanel, dump.cs field types): `devilInfo`+0x198 (Border),
+`eliteInfo`+0x168 (Border), `difficultyInfo`+0x180 (Border), `arenaInfo`+0x208 (ArenaInfoUI),
+`seasonalEventInfo`+0x218 (**GameObject**), `pvpDeckRecordInfo`+0x158 (**GameObject**),
+`divinePowerInfo`+0x1b0 (Border). Item panels: `itemInfoPanel` MainUI+0x158,
+`rogueLikeItemInfoPanel` +0x160 (non-rogue/rogue mutually exclusive).
+
+**Form unified NRE-faithful** (mỗi child 1 statement):
+```csharp
+if (!(overUI && Utility.IsPointerOver(bp.devilInfo.transform)))
+    bp.devilInfo.SetActive(false);
+```
+- `overUI=true` → evaluate check: `bp.devilInfo.transform` — basePanel null → NRE, child null → NRE
+  (khớp cbz kép của check-block @0x2eda3d8…).
+- `overUI=false` → short-circuit → hide: Border/ArenaInfoUI bind **extension**
+  `Utility.SetActive(this MonoBehaviour,…)` (null → KHÔNG NRE, khớp 0x2eda418 không cbz field);
+  `GameObject.SetActive` là instance (null → NRE, khớp check `lVar9==0 → NRE` @0x2eda568/0x5c8).
+- **Disasm chứng minh fall-through** (không đoán từ decompile print order — print order ≠ address order):
+  `hide-devil` @0x2eda3a8: `tbz w20,#0,0x2eda418` (w20 = overUI) → overUI=false **skip toàn bộ
+  check-blocks**, hide → hide → … → `hide-pvp` @0x2eda5e4 `tbz → 0x2eda628` = **hide-divine
+  thẳng** (check-divine @0x5e8 chỉ chạy ở over-path). over-path: check → over? keep : hide →
+  check kế. `hide-divine` @0x650: `tbnz w20,#0 → 0x2ed9f88` (overUI=true → skip pick);
+  fall → 0x658 `gameCanvasGroup.blocksRaycasts` gate → pick. → tức unified short-circuit
+  **khớp máy 100% kể cả NRE nhánh divine-null**.
+- Rogue/non-rogue entry: overUI=true → goto check-path (0x368); overUI=false → goto hide-path
+  (0x3a8) — unified form tự hội tụ.
+
+### §66.2 Cell/token scheme (.got → .data token table) — RESOLVED
+
+Update preamble bắn `FUN_02c56950(cell)` cho 8 cell; resolver `0x2b00290(slot,1)`:
+bit0==0 → no-op epilogue (rela'd pointer đã relocate); bit0==1 → decode
+`(type=bits29–31, index=(t>>1)&0x0FFFFFFF)` → table lookup → `str x0,[x19]` ghi về slot.
+**.data regions là mảng token liên tiếp** (qword, step +2 = index tăng dần):
+- `cellC` (GOT 0x69673d8 → addend 0x6b9d660): tokens type5 `0xa00021f1,0xa00021f3,…` =
+  stringLiteral indices 4344,4345,… → `ScriptString[4344]` = **`"ButtonCollider"`** —
+  operand `ldr x1,[cellC→slot]` của `String.Equals` = literal inline.
+- `cellB` (GOT 0x69673b8 → 0x6b7eef8): tokens type6 — **ĐÂY LÀ `MethodInfo*` cell ẩn của
+  `Get<object>`, KHÔNG phải arg C#** — disasm `ldr x1,[x29]; mov x0,x22; bl Get` —
+  script.json Signature: `Il2CppObject* Utility__Get_object_(Component_o* target, const MethodInfo_3D41914* method)`
+  = **1 arg thật**. Decompile `Get(uVar14, *cellB)` = (target, methodinfo). T instantiation
+  canonical = `object` (generic sharing) — source = `Utility.Get<GameUnit>(parent)` (return
+  gán thẳng `_clicked` không castclass → T phải là GameUnit). Port `Get<T>(Component)` =
+  `target.GetComponent<T>()`.
+- `cellA` (0x6a67378→0x6b27a98): elem klass token → `FUN_02c569f4(elemKlass, 8)` = `new Collider2D[8]`.
+- `cellD` ColosseumInvadeInfoPanel klass, `cellE` Scene_Game klass, `cellF` Utility klass,
+  `cellG` UnityEngine.Object klass, `cellH` Physics2D klass (init-guard `klass+0xe0`/`thunk_FUN_02c6124c`).
+- Class-init thunks + `cbz` NRE guards trong decompile = boilerplate IL2CPP/Roslyn → C# tự sinh,
+  KHÔNG port (NRE fidelity đến từ expression tự nhiên như §66.1).
+
+**Invoke**: `(**(code**)(*obj + 0x3b8))(obj, *(*obj + 0x3c0))` = vtable slot 40 →
+dump.cs `GameUnit.OnClick() … Slot: 40` (vtable start 0x138 + 40*16 = 0x3B0 {method,ptr} →
+ptr@0x3B8) → port `unit.OnClick()` (virtual dispatch, port stub @GameUnit.cs:3231).
+
+### §66.3 Laws/thuật toán dùng lại
+
+- **script.json ScriptMethod keys** = `Address/Name/Signature/TypeSignature` (**KHÔNG có
+  `Class`/`ClassName`** — KeyError nếu đoán); Name dạng `"Class$$Method"`,
+  `Signature` = C-signature thật (giải quyết arity/hidden-MethodInfo), `TypeSignature` = `iii`.
+- BL scan trong range: `(w>>26)==0x25`, imm26 sign-extend ×4 → `bisect` vào ScriptMethod
+  sorted-by-Address, match nếu `target - entry.Address < 0x8000`.
+- **Decompile print order ≠ machine address order** — mọi nhánh control-flow quyết định
+  bằng disasm thật tại fall-through (xem §66.1 `tbz` map), không tin vị trí label in output.
+
+**Deferred**: spawned units của port chưa đặt child collider tên `"ButtonCollider"`
+(không gặp trong capture — input không fire; kiểm tra khi S4 test click trong battle);
+`Utility.Get<T>(Component)` = GetComponent là suy đoán hợp lý (1-arg, đã ghi S4a) — nếu
+original là recursive-find sẽ sửa khi test pick thật.
+
+## §67 — S4-1: deck (data flow) — RUNTIME-PROVEN (2026-10-20)
+
+Scope slice 1: REST deck → GameManager sync → data.currentDeck sống → Scene_Game seed
+stored deck. DeckPanel UI (Equip/UnEquip/Swap/Reload) = slice 2. Capture chứng minh:
+`[web] GET /deck -> 200`, `[DECK1] GET /deck ok deckInfos=5 preset=0
+currentDeck=[10000..10050]`, `[DECK1] Scene_Game deck resolve useStored=True`,
+0 NRE, `play capture ok`.
+
+### §67.1 Nguồn dữ liệu deck (định luật)
+
+**Deck đến từ MỘT mình `GET /deck`** — `PlayerDataResponseModel` không có
+deckInfos/currentDeck (chỉ `currentDeckPreset @0x88`); GET /deck có đúng 1 BL-caller =
+`DeckPanel.<RestoreDeckFromServer>d__161.MoveNext`. Không có auto-fetch tại panel-open
+qua BL-scan (SaveDeck-failure path + 0 BL-caller còn lại → trigger gốc delegate/UnityEvent-
+invisible, không tìm ra). **Wiring chủ động của port**: `DeckPanel.OnPanelEnabled()` gọi
+`RestoreDeckFromServer()` (comment rõ trong code) — không otherwise data.deckInfos luôn
+null → Scene_Game luôn fallback `GetDefaultDeck()`. `HandlePlayerDataResponse` chỉ
+`store preset + Ensure()` khi `data.model == null || accountId khác` (refresh /player
+bình thường KHÔNG đè preset đổi local).
+
+PlayerData: currentDeck@0x68 (int[]), currentPotential@0x70 (int[]), currentFirstComerIndex
+@0x78 (int), currentDeckPreset@0x7C, deckInfos@0x80 (DeckInfo[]). DeckInfo = {deck,
+potential, firstComerIndex} — refs được COPY (không alias) từ deckInfos[preset].
+
+### §67.2 Port (các file)
+
+- **RestAPI.cs** (callback, d__107/110/111/114 MoveNext URI qua cell-decode type5):
+  `GetDeck → Web.Get<DeckResponseModel>("/deck", accessToken, false, cb)`;
+  `SetDeck → Web.Post("/deck/set", JsonUtility.ToJson(req), …)`;
+  `BuyDeckSlot → Web.Post("/deck/buyDeckSlot", JsonUtility.ToJson(model), …) → ResponseModel`;
+  `SetDeckSlotName → Web.Post("/deck/set-deck-slot-name", JsonConvert.SerializeObject(req), …)`
+  — **riêng set-deck-slot-name dùng Newtonsoft JsonConvert, 3 cái kia JsonUtility** (binary
+  nói rõ). `Web.Combine` tự xử slash → "/deck" hay "deck" đều ok.
+- **GameManager.cs**:
+  - `EnsureCurrentDeckSynced` (0x3153DE8): điều kiện sync = `deck != di.deck ||
+    potential != di.potential` (không so firstComer!); log `string.Format("[GET - <color=…>
+    RESPONSE</color>] REST API ", preset)` — fmt ScriptString[18785] **KHÔNG placeholder**
+    (Format bỏ thừa arg = chuỗi hằng) — giữ y. Copy order: potential(+0x70)←di+0x18,
+    deck(+0x68)←di+0x10, firstComer(+0x78)←di+0x20. Log wrapper FUN_02da98b4 →
+    `Debug.LogWarning` (26 callers, mức log leaning — cosmetic).
+  - `HandleDeckResponse` (0x3153F20) — **disasm: mọi null (model/data/deckInfos/di/
+    defaultPotential/dip) → NRE pad; preset OOB → IndexOutOfRange pad** — port C# tự nhiên
+    KHÔNG null-guard (khác với suy đoán từ decompile trước). Thành công = loop
+    `defaultPotential.Clear(); for i<dip.unit.Count: Add(dip.unit[i], dip.potential[i])`
+    rồi ret. **`defaultPotential` (@0x360) phải luôn != null** → port field-initializer
+    `new Dictionary<int,int>()` (máy: Roslyn ctor-init); `GetDefaultPotential(int)` =
+    `defaultPotential.TryGetValue(...)` (tail-call 0x3153d8c — ready để port sau).
+    Server luôn trả `defaultPotentialInfo` (card_routes r_deck/r_deck_set) → dip không null.
+  - `SetCurrentDeckPreset` (0x31513D0): store preset + Ensure (máy inline → port source call).
+- **DeckPanel.cs**:
+  - `CheckDeckDesynced` (0x32B0DB0): cùng `Time.frameCount` đã check → true; Ensure fail →
+    false; else set _deckDesyncedFrame, `SetDraggingCard(null)`,
+    `_deckSlotToggles.ForEach(<lambda cell 0x6a7e6d8 — type1/table chưa map — DEFER>)`,
+    `Reload(true)`, true.
+  - `OnPanelEnabled` (0x32B1028): base → CheckDeckDesynced →
+    `Utility.SetScreenFirebase("DeckPanel","BarrackPanel")` (cell decode) →
+    `BarrackAltarBox.Instance.Reload()` (null → NRE pad) → **deferred tail**: loop
+    list GameManager+0x38 = `devTestClanRaidDeckInfos` (dev-test-only, server thật rỗng
+    → no-op) invoke cached Action (cell 0x6a7e6e0 chưa map) → **+ wiring RestoreDeckFromServer**.
+  - `SaveDeck` (d__160 MoveNext 0x32BC104): desync → skip; `ShootCallback(DeckChange=5)`
+    TRƯỚC khi build `{presetIdx,deck,potential,firstComerIndex}`; SetDeck callback:
+    `res.isSuccess` → HandleDeckResponse; else `Debug.Log("Saved to client version is
+    {0}" + res.msg)` + `RestoreDeckFromServer()`. res null → NRE (máy throw pad — port
+    deref tự nhiên, KHÁC Restore có null-check).
+  - `RestoreDeckFromServer` (d__161): GetDeck → `res != null && res.isSuccess` →
+    HandleDeckResponse + `Reload()`; else im lặng.
+  - `SaveFirstComerIndex` (d__163): `SetFirstComerIndex(idx, toast:1)` → build SetDeck req
+    (KHÔNG CheckDeckDesynced, KHÔNG ShootCallback) → fail chỉ log (KHÔNG Restore).
+  - `SetFirstComerIndex` (0x32B23E4): `idx>=0` → `currentDeck[idx] as DraggableUnitCard`
+    (máy: currentDeck null → NRE, OOB → IndexOutOfRange) → `unitPrefab != null →
+    Attack()` (plVar8[0x15] = **0xA8 = decimal 0x15×8** ← BẪY hay nhầm thành 0xA0=
+    unitObjCanvas!); chọn lại index hiện tại → idx=-1; `deck[idx] < 1` → -1 (OOB thì giữ
+    idx, không ném — outer `idx<len` gate); toast (`&& currentFirstComerIndex != idx`) →
+    log key `idx<0 ? "StatB" : "SetTarotPhase"` (gốc CenterText.Show delay=1f ctx=
+    GameManager+0x148→+0x60 — convention toast→log); `_firstComerSettings.
+    CloseFirstComerSettingUI(idx)` (null → NRE pad, KHÔNG có else-return);
+    `data.currentFirstComerIndex = idx`; **tail-call `GameManager.ShootCallback(0x17=
+    FirstComerChange=23)`** (mov w1,#0x17; ldp epilogue; b 0x3145e88 — decompiler render
+    thành inline loop get_Item = BODY của ShootCallback bị inlining, disasm mới thấy tail-call).
+  - `GetCurrentDeck` (0x32B626C): singleton/data null → null; else data.currentDeck.
+    `GetCurrentFirstComerIndex` (0x32B630C): `int? ?? -1` dance → null → -1.
+- **Scene_Game.cs**: đã có stored-deck resolve (§50/S3b) — chỉ thêm log
+  `[DECK1] … useStored=` để verify.
+
+### §67.3 RE laws tái-validation + pitfalls mới
+
+- **Decimal-index trap**: `plVar8[0x15]` trong decompile = ×8 = **0xA8**, KHÔNG phải 0xA0
+  (đọc nhầm = field sai ngầm — may có cross-check type UnitController@0xA8).
+- **Tail-call bị decompiler inline**: `b <callee>` cuối function + epilogue restore trước nó
+  = tail-call; Ghidra render ra BODY callee (loop get_Item…) thay vì call — quyết định
+  bằng disasm (0x32b27f8-0x32b280c).
+- **HandleDeckResponse semantics chỉ có ở disasm**: decompile render `if (x != 0) {body}`
+  + throw-pad cuối thành "fall through", dễ hiểu nhầm thành optional-guard — physical
+  `cbz → 0x3154074(bl NRE)` chứng minh mọi null ĐỀU throw. Luôn disasm tail khi decompile
+  kết thúc bằng FUN_02c56ba0.
+- **Log FUNs (chốt)**: FUN_02d4fdb4 = `Debug.Log` (Web.Get d__14 gọi đúng 2× = REQUEST/
+  RESPONSE fmt pair 18784/18786 → không thể LogError); FUN_02da98b4 = `Debug.LogWarning`
+  (leaning, 26 callers).
+- **type1/type3 token → table vẫn unresolved**: idx=raw>>1; type1 (klass token, ví dụ
+  GameManager cell51b30 = 0x2001503f idx43039) tra cả 4 bảng đều garbage → các cell
+  klass/action (0x6a765b8, 0x6a7e4e8→DraggableUnitCard suy ra từ field @0xA8, 0x6a7e6c0,
+  0x6a7e6e0) resolve bằng usage-context. type3 = type token (ScriptMetadata Name
+  kết thúc `_TypeInfo` — 2/2 mẫu) nhưng delegate-method cell vẫn sai → lambda defer.
+- Toast keys decode qua cell (dùng y): EquipCard dupe=`AlreadyUsingUnit` ("hero already
+  recruited"), slot-full=`DeckNameLengthOver` (key lạ nhưng binary nói vậy — không sửa),
+  SetFirstComer=`SetTarotPhase`/`StatB`.
+- Caller map: EquipCard/UnEquipCard/SwapDeckCard/SaveFirstComerIndex/SetCurrentDeckPreset/
+  GetCurrentDeck = **0 BL-caller** → UnityEvent/delegate (UI slice 2); SetDeck ← d__160+
+  d__163; `PotentialButton.<SetPotential>d__19.MoveNext` → HandleDeckResponse (setPotential
+  response cũng là DeckResponseModel — slice potential sau); DeckPanel.Reload() 0-arg ←
+  Restore + HandlePlayerLevelSyncData + IAPManager + CardInfoPanel + OutgameTutorial.
+- `CallbackType`: DeckChange=5, FirstComerChange=23 — nested trong GameManager →
+  `GameManager.CallbackType.X` khi gọi từ DeckPanel (global-namespace file, không có
+  `using Awesomepiece;` → qualify `Awesomepiece.RestAPI.` — precedent Scene_Game/WorldPanel).
+
+### §67.4 Deferred (slice 2+)
+
+EquipCard (0x32B14A4 — scan slot trùng unitId → toast AlreadyUsingUnit; slot full →
+toast; `AddToDeck2(idx, unitId, false)`), UnEquipCard (0x32B1BEC — `Utility.Find` +
+vtable+0x178 visual-call chưa naming), SwapDeckCard (0x32B2018, ~800 dòng, gọi
+SetFirstComerIndex), AddToDeck2/RemoveFromDeck2 → RestAPI AddToDeck/RemoveFromDeck
+(d__108/109), Reload(bool) 0x32ADDD4 (700 dòng) + ReloadDeck 0x32AEEB0 + ReloadFirstComer
+0x32AF580, OnPanelEnabled notify-tail, CheckDeckDesynced lambda cell 0x6a7e6d8,
+type1/3/6 bảng, GetDefaultPotential port. RestAPI stubs còn lại: SetAllCardPotential/
+SetCardPotential (d__112/113). Nguồn: `/tmp/opencode/decomp115.log` + `decomp116.log`
+(tmpfs — re-run từ `/tmp/opencode/s2re/decomp_batch11{5,6}.java` nếu mất).
+
+## §68 — S4-2: deck UI (DeckPanel + UnitCard + DeckSlotToggle) — COMPILE-PROVEN (2026-10-20)
+
+Scope: render grid unit + deck slot + preset + sort + page. **Gate PASS 0 error CS** (gate_deck2b/2c;
+MasterDataSmokeTest ok). Chưa play-capture. `/tmp` bị wipe giữa session → decomp116–120 logs mất;
+port đã nằm trong project files (bền). Muốn đọc lại: re-run Ghidra batch (template §67.4).
+
+### §68.1 Field map ground truth (dump.cs — KHÔNG dùng declaration order của AssetRipper!)
+
+AssetRipper xếp field theo *declaration order*; IL2CPP layout thật lấy từ **dump.cs comment**.
+DeckSlotToggle (dump.cs:100647): `rectTransform@0x20, deckNameInput@0x28, nameInputIcon@0x30,
+toggles(Toggle[])@0x38, toggleText(Text[])@0x40, toggleLockIcon(GameObject[])@0x48,
+changeSlotPageButton@0x50, <curPage>@0x58(int), _deckPanel@0x5C, _extended@0x5D, _inited@0x5E,
+_showingBuySlotPopup@0x5F, _onExtended(Action)@0x60`.
+**`toggles` = 10 phần tử = 2 trang × 5** (ReloadDeckPanelDeckSlotToggle loop cứng 10; SetActive theo
+`GetDeckPageByToggleIndex(i)`). `ReloadToggles` threshold "+" = `_deckPanel ? 4 : 5` (**KHÔNG phải
+`_extended`** — dễ nhầm; cả điều kiện nhãn "+" `deckIdx==slotCount` cũng gate `_deckPanel`).
+
+DeckPanel: `currentDeck(UnitCard[])@0x158, cardDatas(List<CardData>)@0x198,
+unitCards(List<DraggableUnitCard>)@0x1A0, _deckSlotToggles@0x90, _currentUnitPage@0x220,
+_maxUnitPage@0x224, _showSoul@0x1E0, curSort@0x1D0, curSortDesc@0x1D4`.
+DraggableUnitCard: `slot@0x84, bg@0x88, uis@0x90, unitObj@0x98, unitObjCanvas@0xA0,
+unitPrefab@0xA8, statusText@0xB0, statusBox@0xB8, setEffect@0xC8, artifactEffects@0xD0,
+newObject@0xD8, accountNameText@0xE0, potentialLevelBox@0xE8, _lightEffectGroup@0xF0,
+_uiLightEffect@0xF8, _spriteLightEffect@0x100, _treasureItem@0x108, _unitPrefabDraggingRoot@0x110`.
+
+### §68.2 Các method ĐÃ PORT (compile pass)
+
+- **UnitCard.cs**: `usingCard/ownCard` getters; `Awake` (Subscribe callback 6 CardExp / 7
+  CardLevelUp / 5 DeckChange → ReloadFromCallback); `OnDestroy` (unsubscribe); `ReloadFromCallback`;
+  full `Set(CardData, Action<UnitCard>, own, usingCard, showSkin, canNotUseCard, showOriginLevel,
+  showExpGauge, showPotential)`; full `Reload`; `OnClick`; `MaxUnitLevel=29` const + color placeholders.
+  Offsets: unitSprite@0x20, spriteEffect@0x28, nameText@0x30, levelText@0x38, expGauge@0x40,
+  emptyObject@0x48, gaugeCond@0x50, levelBox@0x58, levelBoxCond@0x60, _usingCard@0x68,
+  _ownCard@0x69, cardData@0x70, _onClickCallback@0x78, _awaked@0x80, _showOriginLevel@0x81,
+  _showExpGauge@0x82, _showPotential@0x83.
+  Sprite offset: `res.GetValueDouble(ResourceUnit.UnitTag.SpriteOffsetX, (GameUnit)null, 0.0)` /
+  `SpriteOffsetY` (enum 470/469). **`res.GetValueDouble` là stub return 0.0** → offset chưa áp.
+- **GameManager.cs**: `GetKeyValue` (null list → null), `GetKeyValueInt` (TryParse /
+  `CultureInfo.InvariantCulture` — **KHÔNG phải NumberFormatInfo**), `GetDeckSlotCount`
+  (`GetKeyValue("DeckSlotCount") ?? "5"`, cell 0x6a4ff30 defer), `GetDeckSlotName`.
+- **FirstComerSettings.cs**: `SetFirstComerAvatar`, 2× `SetFirstComerSettingUI` (SetDraggable(value==0);
+  GameManager is-inst tail defer).
+- **DeckPanel.cs**: 5 property getters (unitCountPerPage placeholder 10f — cell 0x6a77208 class
+  statics colsA/colsB defer), `SortCards` (5 comparers, §68.3), `ReloadItemCountUI`, `SetSortDesc`,
+  `ReloadAllToggles`, `OnToggle`, `SetAllToggleInteractable`, `ReloadPrefab(int unitId)`,
+  `OnClickUnitPageMove(bool)` + `(bool, int)`.
+- **DeckSlotToggle.cs**: `GetDeckPageByToggleIndex` (ceil((i+1)/5)), `SetToggle`,
+  `ReloadToggles`, `ReloadDeckPanelDeckSlotToggle(bool extended, int idx=-1)`.
+
+### §68.3 SortCards (static, 5 comparator)
+
+`desc = curSortDesc ? -1 : 1`; `Instance==null → throw`. **Mọi comparer: unowned (level==0) → 1/-1
+để dồn cuối**. ByName=`string.Compare(a.name,b.name,InvariantCulture)*desc` (dùng `ResourceUnit.Get`);
+ByID=`((int)a.unitId).CompareTo((int)b.unitId)*desc`; ByLevel=level→potentialTier→exp (mỗi cái *desc);
+ByRegion=`RegionSortFunc(ra.region,rb.region)*desc`, tiebreak `((int)b.level).CompareTo((int)a.level)`
+(NOT *desc) rồi name; ByRole=`ra.role.CompareTo(rb.role)*desc`, tiebreak level rồi name.
+**ObscuredInt `.CompareTo` KHÔNG public** → phải `((int)x).CompareTo((int)y)`; `== 0` thì OK nhờ
+implicit op. (Compile fix: 6 dòng CS7036 MemoryExtensions.CompareTo.)
+
+### §68.4 Laws mới (rút ra session này)
+
+- **Tail-call overlap**: lambda `b__168_0` @0x32b8978 cách ReloadToggles @0x32b898c **20 byte** →
+  thân "lambda" thực ra là **tail-call body của ReloadToggles**; ReloadAllToggles chỉ là
+  `foreach (t) t.ReloadToggles()`. Dấu hiệu: hai RVA liền nhau (<0x20) + body trùng.
+- **ObscuredInt CompareTo** → cast `(int)` (compiler rơi vào MemoryExtensions.CompareTo của
+  ReadOnlySpan<char>, đòi comparisonType).
+- **OnToggle(int idx, DeckSlotToggle from)** @0x32B2C3C: `SetDraggingCard(null)` →
+  `data.currentDeckPreset=idx`; copy `currentDeck/potential/firstComerIndex ← deckInfos[idx]`
+  (+0x10/+0x18/+0x20) → `SetEquippedArtifactPreset(idx)` + `SetEquippedRiftWeaponPreset(idx)` →
+  `ReloadDeckArtifactOptions()` → `BarrackAltarBox.Instance?.Reload()` → foreach toggles
+  `ReloadDeckPanelDeckSlotToggle(false, idx)` + `toggles[i].SetIsOnWithoutNotify(idx-curPage*5==i)` →
+  `ShootCallback(DeckChange=5)` → [defer LogFirebase] → foreach currentDeck `((DraggableUnitCard)w)
+  .unitPrefab?.Attack()`. `from` param KHÔNG dùng. [defer] block GetDeckPageByToggleIndex ×2
+  (singleton +0x158/+0x20==1) — 2 kết quả bị discard, decompiler mất branch.
+- **ReloadPrefab(int unitId)** @0x32B38E4: null currentDeck/unitCards → **throw NRE pad**; quét
+  currentDeck + unitCards, `cardData.unitId == unitId → d.ReloadPrefab(true)` rồi `d.Idle()`;
+  null cardData trong unitCards → throw, trong currentDeck → bỏ qua.
+- **OnClickUnitPageMove(right, count)** @0x32B3CA8: lặp count: trái `_currentUnitPage--; <0 →
+  _maxUnitPage-1`; phải `+1 < _max ? +1 : 0` (wrap). Thu pageCards =
+  `cardDatas[page*per .. +per]`. Loop unitCards[i]: `i < pageCards.Count` →
+  `w.SetActive(i<per); w.SetDeck(this); w.Set(pageCards[i], ShowCardInfo, pageCards[i].level>0,
+  false, true, false, false, true, true)`; else `w.SetActive(false)`. OnClickUnitPageMove(bool) =
+  tail-call `(right, 1)`. [defer] NEW-badge (AwesomePrefs GetInt/SetInt cell 0x6a7e6a8, threshold
+  max unitId; rightPageNewObject.SetActive) + page-dots (DisplayClass176_1, CanvasGroup.DOFade) +
+  `w.<field@0x160> = (int)(cardDatas.Count/per)`.
+- **ReloadDeckPanelDeckSlotToggle(extended, idx)**: idx=-1 → currentDeckPreset; page=ceil((idx+1)/5);
+  `!extended` → `toggles[i].SetActive(page==ceil((i+1)/5))`; [defer] extended → Utility.ForEach
+  (lambda b__28_0 cell0x6a7e970); `deckNameInput.SetTextWithoutNotify(GetDeckSlotName(idx))`;
+  `_extended = extended`; `_onExtended?.Invoke()`.
+- **SetSortDesc** @0x32B34EC: `SetDraggingCard(null); curSortDesc=!curSortDesc; Reload(true);
+  AwesomePrefs.SetString(key0x6a7e508, curSortDesc.ToString(), true)` [key placeholder "DeckSortDesc"];
+  [defer] LogFirebase + tail inlined GetString decrypt (default cell 0x6a51278/0x6a51280).
+- **ReloadToggles** @0x32B898C: "+"-button `SetActive(slotCount > (_deckPanel?4:5))`; loop 10:
+  deckIdx=curPage*5+i; `deckIdx<slotCount` → `toggleText[i].text=(deckIdx+1).ToString()`,
+  lockOn; `deckIdx==slotCount && _deckPanel` → text "+" (cell 0x6a54dc0), lockOn; else text ""
+  (statics 0x6a50260) [defer], lockOff; **`SetToggle(data.currentDeckPreset)`**.
+
+### §68.5 Compile fixes ghi nhớ
+
+`NumberFormatInfo.InvariantCulture` → `CultureInfo.InvariantCulture`; ObscuredInt `.CompareTo` →
+`(int)` cast; `MakeOriginSize(Image, float)` (không phải `(float, Image)`); GetValueDouble key là
+`ResourceUnit.UnitTag` (không phải `ResourceSkill.SkillTag`); 2 overload GetValueDouble trùng khi
+`null` → cast `(GameUnit)null`.
+
+### §68.6 Còn stub (cần re-decode sau /tmp wipe)
+
+DraggableUnitCard: `Set` override (0x…), `Reload` override, `SetDeck`, drag system
+`OnBeginDrag/OnDrag/OnEndDrag/SwapCard/Restore`; DeckPanel: `Reload()` + `Reload(bool)` +
+`ReloadDeck` + `ReloadFirstComer` + `ReloadUnitPage` + `AddCard` + `OnClick*` + `ShowCardInfo` +
+`SetDraggingCard` + `EquipCard` + `UnEquipCard` + `SwapDeckCard` + `Awake`; DeckSlotToggle:
+`Init/Awake/OnToggle/ReloadToggles`done/`ChangeSlotPage`/`BuyDeckSlot`; RestAPI d__108/109/112/113.
+`ReloadAllToggles` đã nối đúng vào `ReloadToggles`.
+
+## §69 — Cửa ngõ data trước ngày ship: `getPatchFolder` version-gate + notice hub `/en` (2026-10-20)
+
+**`POST kgc-k8s-1.awesomepiece.com/auth/getPatchFolder`** — body/headers AES-ECB key
+`a6072ad6b9c959ff` (header `time` = hex AES của `"beforeLogin"`), **response cũng mã hoá** cùng key.
+Gate theo header `version`: `174.0.00` → folder cũ, **`≥174.1.00` (kể cả `999.0.00`) → folder mới
+nhất**. `platform` (Android/iOS/PC/Windows/AOS/Amazon/OneStore) cho cùng kết quả; `isDev:true` →
+`patchFolder: ""`. ⇒ Dùng `999.0.00` làm probe "luôn newest" (đã nối vào `official_patch_folder()`).
+
+**Notice hub đổi route 2026-10-20**: `kgcastle-notice.awesomepiece.com/<news-page-id>` giờ **301 →
+`/en`**; `GET /en` trả `__NEXT_DATA__.props.pageProps.recordMap` của News page (~33 page block,
+title nằm ở `block[].value.properties.title`). Trang detail vẫn là `/<block-id>` **không** prefix
+(`/en/<id>` trả về hub). `scripts/kgc_new_unit_watch.py` đã đổi `NOTICE_LIST_URL` sang `/en`.
+
+**Cloud Run dev envs đã bị xoá**: `*-x4bivlxmuq-du.a.run.app` (single-treasure-gacha, unit-10820,
+qa-1008…) → 404 toàn bộ; `castle-infra-server-…/api/cloud-run/services` → 404. Không còn swagger
+diff để đọc trước tính năng. Kênh còn sống: getPatchFolder (data đã public), CDN object GET,
+notice hub, `kgc-k8s-1` `/health` `/healthcheck` `/promo-test` (AES), `kgc-ranking-1` `/health`
+(còn lại 401 `WrongTokenError`).
+
+## §70 — Service dev còn sống: hash project KHÔNG đoán, nhưng tên service thì đoán được (2026-10-20)
+
+**Sửa lại kết luận §69**: "không còn swagger diff" là SAI. Project hash `x4bivlxmuq` **vẫn dùng
+được** — cái chết chỉ là gateway *liệt kê* service (`/api/cloud-run/services` → 404). Hash không bao
+giờ phải đoán: nó được **đọc** từ JSON của gateway đó (host gateway thì lấy từ string literal trong
+`libil2cpp.so`). Chỉ **project GCP mới** mới cần leak.
+
+**Oracle**: `GET https://<name>-x4bivlxmuq-du.a.run.app/health`
+- `404` + body **272 B** `text/html` (`Error: Page not found`) = service không tồn tại
+- bất kỳ mã nào khác = service có thật
+
+> Bẫy: đo `len(e.read(200))` sẽ khiến mọi 404 thành "200B" và báo dương tính giả hàng loạt. So
+> `content-length` thật hoặc md5 body với body của một hostname bịa.
+
+**Sống (sau khi sweep ~200 tên)**: `default-x4bivlxmuq-du.a.run.app` — game API dev, branch mới nhất.
+`qa-ranking-default-…` sống nhưng 500 mọi path. Toàn bộ 7 env cũ (balancing, update-1008main,
+qa-1008, qa-0923, unit-10820, single-treasure-gacha) đã xoá.
+
+**`default` — recipe**:
+```bash
+curl -s https://default-x4bivlxmuq-du.a.run.app/v2/api-docs -o /tmp/v2.bin
+python3 - <<'P'
+from Crypto.Cipher import AES; import json
+d=AES.new(b'cnf1tl65djs2wp3g',AES.MODE_ECB).decrypt(open('/tmp/v2.bin','rb').read()).rstrip(b'\0')
+print(len(json.loads(d)['paths']))   # baseline 2026-10-20: 469 paths / 159 definitions
+P
+```
+- `/v2/api-docs`, `/swagger-ui.html`, `/swagger-resources` **mở** (key legacy `cnf1tl65djs2wp3g`)
+- `/health`, `/healthcheck` **plaintext** (khác prod, prod mã hoá)
+- `/version`, `/actuator/*` → 401 `WrongTokenError`
+- `/auth/getPatchFolder` → `patchFolder: ""` cho mọi `version`/`isDev` (dev env không map CDN).
+  Request body phải mã hoá bằng key **hiện tại** `a6072ad6b9c959ff` (body hex + header `time`); key
+  legacy cho body → 400 `Bad Request`.
+- Không có endpoint master data ⇒ **không** đọc được treasure/Bảo Cụ ở đây; chỉ là tín hiệu API.
+
+**Delta 469 vs 463 (spec 1021 staging)**: `+20/-0`, toàn bộ là `/incarnation-unit/*` +
+`/single-arena/*` (+ test twins). Xác nhận branch hiện tại = incarnation + single arena; **không** có
+endpoint treasure mới ⇒ Bảo Cụ 11-05 tái dùng `/treasure/*`.
+
+Dùng làm early-warning: diff số path + danh sách path mỗi lần chạy watcher; path mới = feature đã merge.
+
+## §71 — S4-2 hoàn tất: drag & drop deck, DeckSlotToggle, lobby 0 NRE (2026-10-20)
+
+**Runtime proof**: `tools` capture `KGC_CAPTURE_PLAY=1 … CaptureScene.Run` → `[PLAYCAPTURE] play
+capture ok (exit 0)`, **0 NullReferenceException** trong toàn bộ chuỗi login → Scene_Lobby →
+`Scene_Lobby.Init → ReloadPanels → DeckPanel.Init → Reload → ReloadDeck`. Ảnh lobby render đủ
+bottom-nav (Shop/Barracks/Gate/Alliance/Battleground) và currency.
+
+### 3 luật mới (đã trả giá bằng 3 lần capture)
+
+1. **AssetRipper làm RƠI tham chiếu serialized trên instance trong Scene** (không phải trên prefab).
+   6 `DraggableUnitCard` của deck trong `Scene_Lobby.unity` có `unitSprite: {fileID: 0}`,
+   `spriteEffect: 0`, `emptyObject: 0`, `levelBoxCond: 0` (component vẫn là DraggableUnitCard —
+   guid `841addb1…`, KHÔNG phải UnitCard `0d93b393…`; YAML Unity serialize cả field của base class
+   nên dễ đọc nhầm). Hệ quả: `UnitCard.Set` NRE ở `unitSprite.sprite`.
+   → Vá tại chỗ dùng được: trong `DraggableUnitCard.Set`, nếu `unitSprite == null && unitObj != null`
+   thì `unitSprite = unitObj.GetComponent<Image>()` (ảnh unit chính là Image trên child "UnitObj";
+   con duy nhất của UnitObj là "RecommendIcon"). Card sinh từ prefab `unitCardPrefab` có ref đủ nên
+   không bị ảnh hưởng.
+   *Cách kiểm tra data loss nhanh*: `grep -c "unitSprite: {fileID: 0}" Assets/Scene_*.unity`.
+2. **AssetRipper bỏ field initializer của private field** (`= new List<T>()`) → null lúc runtime.
+   Biểu hiện: `DeckPanel.AddToggleListner` NRE (`_deckSlotToggles.Contains`). Field **public/serialize**
+   thì Unity tự tạo list rỗng từ scene YAML (`cardDatas: []`), nên chỉ private mới chết.
+   Đã thêm initializer cho `_deckSlotToggles`, `_unitBgObjects`, `_pageConds`, `_artifactCards`,
+   `_artifacts`, `_riftWeaponInfo`.
+3. **`GameManager.GetCard/GetCards/GetCardOrMakeZeroLevel` từng là stub `return null`** — đây là gốc
+   của NRE `DeckPanel.SortCards` (comparer deref null) chứ không phải lỗi deck panel. Đã port:
+   - `GetCard` RVA `0x314B424`: nguồn `data.cards` (@0x88), `List.Find(c => c.unitId == id)`;
+     `ignoreTemporaryRecruitedUnit && card.isTemporaryRecruited` (@0x61) → null.
+   - `GetCards` RVA `0x314C008`: `data.cards.FindAll(condition)` (FindAll không bao giờ null).
+   - `GetCardOrMakeZeroLevel` RVA `0x314BEB4`: `GetCard(id) ?? new CardData { unitId = id, level = 0 }`
+     rồi `data.cards.Add`.
+   - `[defer]` nhánh rogue-like (`inGame && currentRogueLikeDataSet.<0x90>.<0x10>`): property chưa port.
+
+### IDraggableDeck — default interface body là code THẬT, không phải stub
+
+`dump.cs` liệt kê 6 method `virtual` có RVA trong interface (slot 10,12,13,18,19,20). Đã port đúng:
+`GetDeckBgObject`/`GetLayoutBgObject` → `null`; `GetIndexFromCurrentLayout` → **-1** (export ghi `0`);
+`CheckBeforeEquipCard` → `ret`; `HasToCheckBeforeEquipCard` → `false`;
+`CanEquipCard` RVA `0x32CD074` = gate "trùng `ResourceUnit.aiType` trong deck" (card/cardData null →
+true; `resUnit == null || aiType != <literal>` → true; ngược lại duyệt `GetCurrentDeck()`, bỏ qua idx,
+trùng → `CenterText.Show(<key>)` + false). **`[defer]`**: literal `aiType` + key nằm trong
+**metadata-usage table** (`0x6C185xx`), KHÔNG resolve được qua `.rela.dyn` → hiện `return true`
+(đúng cho mọi unit không thuộc nhóm bị giới hạn). `DeckPanel` KHÔNG override 6 method này —
+đừng đi tìm chúng trong DeckPanel.cs.
+
+### Drag & drop (DraggableUnitCard) — port xong
+
+| Method | RVA | Semantics |
+|---|---|---|
+| `OnBeginDrag` | 0x32CA3D0 | guard `cardData == null \|\| !_draggable`; `_deck.SetDraggingCard(this)`; `_dragging = true`; Button.interactable = false; `_originUiY = uis.localPosition.y`, `uis.SetParent(unitObj)`; `unitObj.localEulerAngles = (0,0,20)`, sortingOrder +2; `_unitPrefabOriginRoot = (parent as RectTransform, siblingIndex)` rồi SetParent(`_unitPrefabDraggingRoot`); `AudioController.Play("se_unit_drag_start", null)` |
+| `OnDrag` | 0x32CA9C0 | `unitObj.position = ScreenToWorldPoint(evt.position) + (0,20,0)`; `uis` theo unitObj; highlight qua `Utility.GetCurrentSelectedObject<DraggableUnitCard>()` |
+| `OnEndDrag` | 0x32CB0C4 | trả unitObj về `_unitPrefabOriginRoot`; `AudioController.Play("se_unit_drag_end", null)`; `DraggableRange.type == Unit` → `SetDraggingCard(null)`+`SaveDeck()`+`SetEffect()`; fallback `FindCardFromCurrentDeck` khi con trỏ trên `GetDeckLayout()`; nhánh đích là ô deck → `CanEquipCard` → (`HasToCheckBeforeEquipCard` ? `CheckBeforeEquipCard(idx, this, …, Restore)` : trực tiếp) `SwapCard`; nhánh kéo RA khỏi deck → `CheckIsInMatchmakingAndShowCenterText(-1)`, `UnEquipCard(cardData)`, `SaveDeck()` |
+| `SwapCard` | 0x32CBF60 | `GetCurrentFirstComerIndex() == targetIdx` → `SetFirstComerIndex(-1, true)`; `selected != null` → `UnEquipCard(selected.cardData)`; `EquipCard(targetIdx, this)`; `SaveDeck()`; `SetEffect()` |
+| `Restore` | 0x32C0D58 | `_dragging = false`; unitObj local pos/euler = 0, sortingOrder = `_baseSortingOrder`; `uis.SetParent(transform)` + `(0,_originUiY,0)`; `_lightEffectGroup` về transform; statusBox SetAsLastSibling; spriteRenderers.sortingOrder reset; trả bg `_oldSelectedCard` / `_oldSelectedBg` |
+
+### DeckPanel / DeckSlotToggle port xong
+
+`DeckPanel`: `Awake` (Instance=this, tắt 2 prefab, prefs sort, Subscribe 12 callback, 
+`FirstComerSettings.Initialize`, `SetDeck(this)` cho từng card), `ReloadCrystalBadge`
+(`AwesomePrefs.HasKey("NewRiftCrystalAdded") | CanAdChargeRiftGauge()`, `_riftCrystalBadgeCond.SetValue`),
+`ReloadDeckCombatPower`, `OnPanelDisabled` (`_dragging?.Restore()`), `OnSortChange`
+(`curSort = (curSort+1)%5; Reload(true)`).
+**`Awake` KHÔNG được gọi `Reload(true)`**: máy chỉ gọi trong nhánh tween cuối (khối
+`_unitPageArrowButtons`), còn Awake chạy trước khi `/player` trả về → `data == null` → NRE
+`ReloadDeck`. Nơi Reload chạy đúng là `Scene_Lobby.Init → ReloadPanels → DeckPanel.Init`.
+`DeckSlotToggle`: `Awake` (`Init(DeckPanel.Instance.deckSlotToggle == this)`), `Init(bool)`,
+`OnToggle(int)` (allOff → SetIsOnWithoutNotify), `OnToggle(int,bool,bool)` (slot = curPage*5+idx,
+gate `GetDeckSlotCount()`, `BuyDeckSlot()` khi slot == count && _deckPanel),
+`ChangeSlotPage`, `OnClickChangeSlotPage`.
+
+### Còn `[defer]` ở deck (không chặn build)
+`ApplyBoxBgEffects` ×2 (tô màu bg), `ReloadArtifactEffects`/`ReloadArtifacts*`/`ReloadRiftWeaponUI`
+(chờ slice artifact), tween page-arrow + page-dot fade, NEW-badge prefs, `SetStatusBox`,
+`SetAccountName`, `ShowDimensionUnitOvercome`, nhánh rogue-like của GetCard(s), literal `aiType`.
+
+### Bước kế tiếp
+Slice 3 (Barracks mở panel deck bằng capture), rồi S4 theo thứ tự plan: gacha → artifact →
+territory → pvp → clan → rogue-like → story.
+
+## §72 — Build APK từ Unity Editor: ĐÃ RA APK (2026-10-21)
+
+**Kết quả**: `unity/kgc-rebuild/ExportedProject/Builds/kgc-mono.apk` — 99.9 MB, `com.awesomepiece.castle`,
+versionCode 174 / versionName 174.0.00, `armeabi-v7a`, đủ 6 scene (Logo/Login/Lobby/Game/Territory/Loading).
+`Build Finished, Result: Success`, exit 0.
+
+### Lệnh build
+
+```bash
+# Mono (đường đang chạy được), ~10 phút:
+KGC_BUILD_SKIP_IL2CPP=1 /home/nowl/Unity/Hub/Editor/2022.3.62f3/Editor/Unity \
+  -batchmode -quit -projectPath unity/kgc-rebuild/ExportedProject \
+  -buildTarget Android -executeMethod Kgc.Editor.BuildApk.Run -logFile /tmp/build.log
+```
+Script: `Assets/Game/Editor/BuildApk.cs` (Kgc.Editor.BuildApk): `Run()` (IL2CPP trước, fallback Mono nếu
+`KGC_BUILD_SKIP_IL2CPP` khác `1`), `BuildMono()`, `Probe()` in cấu hình. Output `Builds/kgc.apk` /
+`Builds/kgc-mono.apk`.
+
+### 6 lỗi export phải sửa (tất cả do AssetRipper, không phải code game)
+
+| # | Triệu chứng | Nguyên nhân thật | Sửa |
+|---|---|---|---|
+| 1 | `UnityException: Target architecture not specified` (dù `AndroidTargetArchitectures: 2`) | `ProjectSettings.asset` export để kiến trúc trống; **Mono + ARM64-only** bị prerequisite từ chối và thông báo sai lệch | IL2CPP + ARM64, hoặc Mono + **ARMv7** |
+| 2 | `The Assembly UnityEditor.CoreModule is referenced by UnityEngine.UI ('Assets/Plugins/UnityEngine.UI.dll')` | DLL `UnityEngine.UI.dll` **giả 5 KB** do AssetRipper sinh; project còn **không cài** `com.unity.ugui` nên phải dựa vào nó | thêm `"com.unity.ugui": "1.0.0"` vào `Packages/manifest.json`, **xoá** DLL giả |
+| 3 | 9 lỗi `CS0246 UnityAds*` khi build Android | đã đặt DLL giả `UnityEngine.Advertisements.dll` thành Editor-only → Android mất type | thay bằng shim thật `Assets/Scripts/Assembly-CSharp/UnityAdsShim.cs` (enum + 3 interface; `UnityAdsManager` vốn no-op), **xoá** DLL giả |
+| 4 | `Fatal error in Unity CIL Linker … ResolveFromAssemblyStep.ProcessExecutable` (IL2CPP) | chưa xác định — `__Generated.dll` (assembly rỗng, ref `Unity.IL2CPP.Metadata`) chỉ là 1 nghi phạm; 88 DLL trong `Assets/Plugins` đều hợp lệ (monodis: đủ type, không trùng tên, **0 ref không resolve**) | **còn mở**; Mono không chạy linker nên đây là lý do dùng Mono |
+| 5 | Gradle `android.defaultConfig.versionCode is set to 0` | `AndroidBundleVersionCode: 0` trong ProjectSettings | `AndroidBundleVersionCode: 174` + ép trong `BuildApk.Run` |
+| 6 | bundle id rỗng → `com.Awesomepiece.` | `applicationIdentifier: {}` | `applicationIdentifier: { Android: com.awesomepiece.castle }` |
+
+### Luật rút ra
+
+- **DLL 2–5 KB trong `Assets/Plugins` = stub AssetRipper** (chỉ khai báo type, không có thân hàm).
+  Chúng compile được nhưng **không được vào player build**: gây lỗi tham chiếu `UnityEditor.*` hoặc
+  UnityLinker NRE. Kiểm tra nhanh: `find Assets -name '*.dll' -printf '%s %p\n' | sort -n | head`.
+  Plugin nào game dùng thật ở runtime thì phải thay bằng package thật hoặc shim trong
+  `Assets/Scripts/Assembly-CSharp/`.
+- **Trước khi build, kiểm tra `ProjectSettings.asset`**: `AndroidTargetArchitectures`,
+  `AndroidBundleVersionCode`, `applicationIdentifier`, `scriptingBackend` — export hay để trống.
+- **Mono + ARM64 = không hợp lệ** ở Unity 2022; muốn Mono thì ARMv7 (hoặc thêm ARMv7 vào bitmask).
+- Build Mono ~10 phút (8 phút phần lớn là Gradle/assets), IL2CPP chết sớm ở UnityLinker (~2 phút).
+
+### Còn mở
+
+- **IL2CPP**: UnityLinker NRE. Bước tiếp: thử (a) IL2CPP + ARMv7 để loại trừ yếu tố kiến trúc,
+  (b) chạy lại linker thủ công với `Temp/StagingArea` được giữ lại, (c) gỡ dần DLL stub khỏi
+  `Assets/Plugins` theo nhóm (chỉ những plugin game không dùng ở runtime).
+- Chưa cài lên redroid để test runtime (`adb devices` trống lúc build).
+
+## §73 — S4-3: mua deck slot, keyValues, IsPointerOver (2026-10-21)
+
+### Kết quả
+- **Deck slot mua được** (client-authoritative): `DeckSlotToggle.BuyDeckSlot` → popup BuyConfirm →
+  `RequestBuyDeckSlot` → `POST /deck/buyDeckSlot` → `SetDeckSlotCount(count+1)` →
+  `DeckPanel.ReloadAllToggles()` → `OnToggle(count - curPage*5, force:true, expand:true)`.
+- Gate compile `gate_deckslot4` **PASS** (0 `error CS`).
+
+### Bảng RVA (v174.0.00, file offset = RVA − 0x4000)
+| Method | RVA | Ghi chú |
+|---|---|---|
+| `DeckSlotToggle.OnDestroy` | 0x32BDBDC | chỉ `_onExtended = null` (field @0x60) |
+| `DeckSlotToggle.SetDeafultState` | 0x32BDBE4 | `ReloadDeckPanelDeckSlotToggle(false,-1)`; nhánh `!_deckPanel` gọi `ClickOutsideClose.Show` qua interface slot 51 ⇒ [defer] |
+| `DeckSlotToggle.Update` | 0x32BDCE8 | `_extended(0x5D) && !_showingBuySlotPopup(0x5F) && Input.GetMouseButtonDown(0) && !Utility.IsPointerOver_New(transform)` → thu gọn |
+| `DeckSlotToggle.BuyDeckSlot` | 0x32BE2D4 | giá = `ResourceConstant.Get(Type.DeckSlot=15, GetDeckSlotCount()+1)`; `Scene_Lobby.Instance.popup2.Show(key BuySlotCostAlert, Popup.Type.BuyConfirm, cb, 0, cash, 0)`; gate `EarlyAccessModeClickableObject` [defer] |
+| `DeckSlotToggle.RequestBuyDeckSlot` | 0x32BE5EC | async `RestAPI.BuyDeckSlot(new DeckRequestModel())` (d__33) |
+| `RequestBuyDeckSlot` continuation | 0x32BF208 (trong d__33.MoveNext) | `SetDeckSlotCount(count+1)` → `DeckPanel.ReloadAllToggles` (0x32B2B40) → `OnToggle(count - curPage*5, 1, 1)` |
+| `GameManager.SetDeckSlotCount` | 0x3162F64 | `Int32.ToString` + ghi keyValues ⇒ `SetOrAddKeyValue("DeckSlotCount", …)` |
+| `GameManager.HandleSetDeckSlotName` | 0x3162FCC | `SetOrAddKeyValue(prefix, index.ToString(), name)` |
+| `GameManager.GetDeckSlotName` | 0x3163064 | `GetKeyValue(prefix, index)`; rỗng → `Format(L(DeckSlotNameDefaultFormat), index+1)` |
+| `Utility.IsPointerOver_New` | 0x2C98714 | null/`!activeSelf` → false; `GetMousePosition()` + `GetTopmostCanvas()` + rect test |
+| `Utility.IsPointerOver(Transform)` | 0x2C98364 | cùng logic |
+
+### Bài học / quy ước mới
+- **`DeckSlotCount` KHÔNG phải state server**: client đọc/ghi trong `PlayerData.keyValues`
+  (`GetKeyValue("DeckSlotCount") ?? "5"`). Server chỉ cần trả success; đã thêm
+  `DYNAMIC_OVERRIDES["/deck/buyDeckSlot"]` trong `server/server.py`.
+- **Endpoint mua slot**: literal `/deck/buyDeckSlot` (gom từ metadata: `/deck`, `/deck/buyDeckSlot`,
+  `/deck/set`, `/deck/setPotential`). `RestAPI.BuyDeckSlot` đã ở dạng callback trong port.
+- **keyValues chỉ có overload 1 key** trong port; bản máy dùng `(key, index)` ⇒ đã thêm overload
+  `GetKeyValue(key, index)` / `SetOrAddKeyValue(key, index, value)` (nối chuỗi `key + index`).
+  `SetKeyValue` = chỉ ghi đè; `SetOrAddKeyValue` = ghi đè hoặc thêm mới.
+- **`ResponseModel` không có `success`** — dùng `isSuccess` (`code == 200`). Build_model của server
+  set `code = 200`, nên handler chỉ cần trả `{}`/`code`.
+- **`Popup.Type.BuyConfirm = 2`**, `Popup.Show(string text, Type type, Action<bool> cb, int gold, int cash, int heart)`.
+  Popup của lobby là `Scene_Lobby.Instance.popup2` (field @0x70 của `Scene_Base`), fallback `.popup` @0x68.
+- **Caller-scan BL dùng lại được**: quét `(w>>26)==0x25`, `site = i*4 + 0x4000`, `target = site + imm*4`
+  → tìm được continuation của async MoveNext (0x32BF208) mà grep annotation bỏ sót.
+
+### Còn mở (§73)
+- `DeckSlotToggle.OnSlotNameChanged` / `OnSlotNameEndEdit` / `SetDeckSlotName` (d__35/d__36) +
+  `CheckDeckNameValidity`: chuỗi async đổi tên slot (await `DeckResponseModel`) — chưa port.
+- `DeckPanel.OnDestroy` (0x32AC570), `ReloadLevelLockedUI` (0x32B0674), `ReloadRiftWeaponUI`.
+- Nhánh `ClickOutsideClose.Show` và gate `EarlyAccessModeClickableObject`.
+
+### Runtime verify (§73)
+- `ShopPanel.ReloadShopTabEnable` NRE: `goldFreeBadge` **không được serialize trong scene export**
+  (AssetRipper mất ref) → guard null. Đây là NRE mới lộ ra khi chain `ReloadPanels` chạy tới
+  `ShopPanel.Init` (qua `FetchSeasonPassEventBooster`).
+- Capture `cap_s73b` (login → lobby, settle 150): **0 NullReferenceException**,
+  `[PLAYCAPTURE] play capture ok (exit 0)`, ảnh `shot_Scene_Lobby.png`.
+- Gate compile `gate_s73b`: 0 `error CS`.
+
+## §74 — iOS: ký lại IPA là chết ở FairPlay, trước khi Unity kịp chạy (2026-10-21)
+
+Câu hỏi: có thể mod skin và chơi trên **official server** bằng IPA ký lại (ESign/VSign) không?
+
+**Đã kiểm chứng bằng IPA thật** (`ipatool download -b com.awesomepiece.castle`, v174.0.00, 815MB):
+
+- **Static patch: không thể.** Mọi Mach-O trong IPA đều FairPlay (`cryptid=1`), không chỉ binary
+  chính — `ProductName`, `UnityFramework`, `xigncode`, `appsign4i`, `Airbridge`. ESign không decrypt.
+- **Nhưng `UnityFramework` export 241 symbol il2cpp** (`il2cpp_class_from_name`,
+  `il2cpp_class_get_method_from_name`, `il2cpp_domain_get`, `il2cpp_runtime_invoke`) — export table
+  nằm trong `__LINKEDIT`, không bị mã hoá. Nên về lý thuyết inject dylib rồi hook theo **tên**
+  (giống `stub.cpp` bên Android) là làm được **không cần dump offset**.
+- **`appsign4i` export** `AsGetCookie2Impl`, `AsGuardValidate`, `AsGuardGetSalt`, `AsGuardGetKey64`,
+  `AsGuardUpdateTimestamp`, `AsReportTamper` → đúng cơ chế AppSign cookie (bản iOS của
+  `libappsign4a.so`), kèm chống replay + báo tamper.
+
+**Test quyết định (VSign, bundle id giữ nguyên, IPA stock 100% không sửa, không inject gì):**
+app cài được nhưng **văng ngay khi mở**, trước cả khi Unity vào scene nào.
+
+Crash report `/ProductName-2026-10-21-005652.ips`:
+
+```
+EXC_BAD_ACCESS / KERN_PROTECTION_FAILURE at 0x1045f520c
+pc = far = 0x1045f520c        (nhảy vào vùng không thực thi)
+xigncode.framework/xigncode  0x104598000 + 0x5d20c
+  <- dyld4::LibSystemHelpers::callInitializer
+  <- dyld4::Loader::findAndRunAllInitializers
+```
+
+Chữ ký sau khi ký lại: `SignerIdentity = "iPhone Distribution: Beihang University"`,
+`application-identifier = ZXB3TS7QD4.cn.edu.buaa.wxwork.notifyext`, team `ZXB3TS7QD4` — tức
+application-identifier **không còn khớp bundle id**, chứ không chỉ đổi cert.
+
+**Loại trừ XIGNCODE (2026-10-21, cùng ngày):** dựng `scripts/strip_ios_framework.py` để xoá
+`Frameworks/xigncode.framework/` (12 entry) và đổi `LC_LOAD_DYLIB` → `LC_LOAD_WEAK_DYLIB`
+(`0x80000018`) trong `ProductName`, giữ nguyên `appsign4i`. Ký lại bằng VSign → **vẫn văng**, nhưng
+crash **đổi chỗ**:
+
+```
+/ProductName-2026-10-21-010950.ips
+EXC_BAD_ACCESS / KERN_PROTECTION_FAILURE at 0x102ca005c
+appsign4i  base 0x102c9c000 + 0x405c  ->  RegisterInitializeObserver + 0x0
+  <- dyld4::LibSystemHelpers::callInitializer
+```
+
+Cùng một kiểu lỗi, ở framework mã hoá kế tiếp, ngay **instruction đầu tiên của initializer**. Và
+đây là mấu chốt: `0x405c` nằm trong `__TEXT` của `appsign4i` (`vm=0x0+0x8000`, `initprot=5` = RX)
+— trang **đáng lẽ phải executable** mà kernel vẫn từ chối cấp exec. Không phải anti-cheat phát hiện
+gì cả: **FairPlay không giải mã được sau khi ký lại**, nên `__TEXT` không được map executable và
+lệnh đầu tiên trong hàm là fault.
+
+Đây cũng là lý do các tool sideload đều đòi IPA **đã decrypt**: `cryptid=1` + chữ ký khác Apple =
+chết ở instruction đầu tiên của mọi image mã hoá (`ProductName`, `UnityFramework`, `xigncode`,
+`appsign4i`, `Airbridge` — tất cả đều `cryptid=1`).
+
+**Kết luận cuối: đường ESign/VSign/AltStore/Sideloadly lên official server là bất khả thi trên iOS
+với IPA lấy từ App Store.** Chặn ở tầng thấp nhất (FairPlay), trước cả anti-cheat, trước cả auth —
+nên bỏ xigncode, inject dylib, hay đổi cert đều vô nghĩa: chưa có dòng code nào của game chạy được.
+Đường đi tiếp chỉ còn: **IPA đã decrypt** (cần jailbreak để dump, hoặc lấy từ nguồn ngoài) — và kể
+cả có IPA decrypt thì `appsign4i` vẫn tính AppSign cookie trên chữ ký mới, mà server official
+kiểm tra cookie đó (xem `docs/handoff-official-token.md`). iOS 26.7.1 không có jailbreak → đóng.
+
+Công cụ thêm vào repo: `scripts/inspect_ios_ipa.py` (stdlib, có `--selftest`) — đọc `cryptid` từng
+Mach-O, tách marker il2cpp mạnh/yếu (`il2cpp_init` vs `global-metadata.dat`), in quan hệ
+RVA→file offset; `scripts/strip_ios_framework.py` (có `--selftest`) — xoá 1 framework + hạ load
+command xuống weak, dùng cho chẩn đoán kiểu "lib nào giết app". Lưu ý: `ipatool` phải là bản
+**linux-amd64**; tarball `linux-arm64` tải nhầm trên máy x86_64 chỉ cho ra
+`qemu-aarch64-static: Could not open '/lib/ld-linux-aarch64.so.1'`.
+
+### §73b — Đổi tên deck slot (port xong)
+- `DeckSlotToggle.CheckDeckNameValidity` (0x32BE7AC): quá `ResourceConstant.Get(Type.DeckSlotNameMaxLength=33)`
+  → popup `DeckSlotNameLengthOver`; rỗng/chỉ space → `DeckSlotNameCannotBeEmpty`. (Regex pattern còn [defer].)
+- `DeckSlotToggle.SetDeckSlotName` (0x32BE70C / d__36): popup lỗi → revert `InputField.text =
+  GetDeckSlotName(idx)`; hợp lệ → `DeckNameRequestModel{presetIdx, name}` →
+  `RestAPI.SetDeckSlotName` (callback) → `HandleSetDeckSlotName(idx, name)`.
+- `OnSlotNameEndEdit` (0x32BE680 / d__35) → `SetDeckSlotName(currentDeckPreset, deckNameInput.text, deckNameInput)`.
+  `OnSlotNameChanged` (0x32BE67C) = `ret` trong bản máy.
+- Gate `gate_s73c` PASS (0 error CS).
+
+### Mức hoàn thành thật (2026-10-21, đo bằng regex trên `Assembly-CSharp`)
+`20.654` method khai báo trong port, **`14.503` (70%) vẫn là stub rỗng**. Đó là thước đo trung thực cho
+"giống 100%": phần hành vi còn thiếu nằm ở các hệ S4/S5 (gacha, artifact, territory, pvp, clan,
+rogue-like, story, battle). Nhiều stub rỗng là hợp lệ (Unity message rỗng, interface no-op), nên con số
+thật thấp hơn 70% một chút — nhưng vẫn còn rất xa 100%.
+
+## §74 — S4 tiếp theo: gacha (bản đồ điểm vào, cho phiên sau)
+
+### Trạng thái
+- `GachaPanel.Close()` **đã port** (override ở `GachaPanel.cs:393`, không phải stub).
+- `GachaPanel` còn **36 stub**, toàn bộ là animation/state-machine của màn mở hộp.
+
+### Bản đồ RVA (v174.0.00, file = RVA − 0x4000) — `GachaPanel`
+| Method | RVA | Ghi chú |
+|---|---|---|
+| `get_curBox` / `get_dismantleAllSelected` | 0x33AD248 / 0x33AD284 | property nhỏ |
+| `Show()` / `Show(ResourceGacha, GachaResultCollection, …)` | 0x33AD378 / 0x33AD37C | entry chính; nhận `(gacha, results, x3, w4, x5)` |
+| `ShowOvercomeRewardChromaSkinResult(List<GachaResult>, Action)` | 0x33AD44C | dimension hero |
+| `Hide()` | 0x33AD4F4 | animation đóng |
+| `Close()` | 0x33AD7C0 | `if (field 0x190) base.PopupPanel.Close()` — ĐÃ CÓ |
+| `OnClick()` | 0x33AD7D8 | |
+| `BoxOpen()` / `SkipBoxOpen()` / `SkipCardOpen()` | 0x33ADAB0 / 0x33AD9D4 / 0x33ADC08 | |
+| `ShowNextItem()` | 0x33ADD30 | |
+| `ShowResult()` / `ShowResultOnly(...)` | 0x33AE6FC / 0x33AF2D4 | |
+| `ShowCardEffect(Animator, bool)` | 0x33AE554 | |
+| `UnFoldResult()` | 0x33B05F0 | |
+
+### Đường request (server đã xong)
+- Server: `server/shop_routes.py` xử lý `/shop` với `gachaId` (2 nhánh: mua trực tiếp + mua scroll),
+  trả `newUnitIds`, `cardExpResults`, `upgrade`, reward `DimensionOvercome` — §"Dimension hero gacha".
+- Client: `RestAPI` đã có sẵn stub callback cho `/shop`; việc cần làm là **port `ShopPanel` apply kết quả
+  → `GachaPanel.Show(resGacha, result)`** rồi animation.
+- Cách tìm nhanh call-site: quét BL tới `GachaPanel$$Show` (0x33AD37C) bằng numpy
+  (`(w>>26)==0x25`, `site=i*4+0x4000`, `target=site+imm*4`) — không cần Ghidra.
+
+### Thứ tự làm gacha (đề xuất)
+1. `RestAPI` gacha request nếu còn stub + `ShopPanel` apply `newUnitIds`/`cardExpResults`.
+2. `GachaPanel.Show(...)` (dựng list + `SetActive(true)`), rồi `ShowResult`/`UnFoldResult`.
+3. Animation: `BoxOpen`/`SkipBoxOpen`/`SkipCardOpen`/`ShowNextItem` — port sau cùng, có thể
+   tạm cho `SkipCardOpen` nhảy thẳng `Hide()`.
+--- GachaPanel.Show(args) (0x33ad37c) callers=17
+   site 0x3387d20  in BuyGachaButtonGroup$$HandleNewUnitGachaResult +0x578
+   site 0x338b700  in BuyGachaButtonGroup.<>c__DisplayClass33_0$$<HandleUnitGachaResult>g__OpenGacha|0 +0x103c
+   site 0x338be8c  in BuyGachaButtonGroup$$<HandleArtifactGachaResult>g__OpenGacha|34_0 +0x508
+   site 0x33939e0  in BuyGachaConfirmPanel.<>c__DisplayClass34_0$$<BuyFourGacha>g__OpenGacha|1 +0x6a0
+   site 0x3393fa0  in BuyGachaConfirmPanel.<>c__DisplayClass34_0$$<BuyFourGacha>g__OpenGacha|2 +0x448
+   site 0x3406bbc  in ShopItem.<>c__DisplayClass91_0$$<BuyProcess>g__OpenGacha|1 +0x3b8
+--- ShowOvercomeRewardChromaSkinResult (0x33ad44c) callers=1
+   site 0x33b5228  in GachaPanel.<ShowOvercomeRewardChromaSkinResult>d__55$$MoveNext +0x4bc
+--- ShowResult (0x33ae6fc) callers=1
+   site 0x33b5468  in GachaPanel.<ShowResultOnly>d__64$$MoveNext +0x98
+
+### §74b — Call-site của `GachaPanel.Show` (quét BL, v174)
+17 caller. Nhóm theo đường request:
+- **`BuyGachaButtonGroup`**: `HandleNewUnitGachaResult` (+0x578), `HandleUnitGachaResult` g__OpenGacha|0,
+  `HandleArtifactGachaResult` g__OpenGacha|34_0, `HandleBoxGachaResult`… ⇒ đây là **trung tâm** của flow gacha
+  một-lần (unit / artifact / box).
+- **`BuyGachaConfirmPanel.<BuyFourGacha>g__OpenGacha|1|2`** ⇒ flow mua 4 lần (x10 liên tiếp).
+- **`ShopItem.<BuyProcess>g__OpenGacha|1`** ⇒ flow mua qua shop item (scroll).
+- `ShowOvercomeRewardChromaSkinResult` chỉ được gọi từ chính `d__55.MoveNext`;
+  `ShowResult` chỉ từ `ShowResultOnly(d__64).MoveNext` ⇒ 2 hàm này là animation nội bộ, port sau.
+⇒ **Việc cần port trước**: `BuyGachaButtonGroup.Handle*GachaResult` (apply result + gọi `GachaPanel.Show`),
+rồi `BuyGachaConfirmPanel.BuyFourGacha`, rồi `ShopItem.BuyProcess`.
+
+### §74c — RVA entry gacha (đã chốt, port theo đúng thứ tự này)
+| Method | RVA |
+|---|---|
+| `BuyGachaButtonGroup.HandleNewUnitGachaResult(BuyResponseModel)` | 0x33877A8 |
+| `BuyGachaButtonGroup.HandleUnitGachaResult(BuyResponseModel, int, int)` | 0x33872B0 |
+| `BuyGachaButtonGroup.HandleArtifactGachaResult(BuyResponseModel, int, int)` | 0x3387640 |
+| `BuyGachaButtonGroup.HandleTreasureGachaResult(BuyResponseModel, int)` | 0x3387E2C |
+| `BuyGachaButtonGroup.HandleSkinGachaResult(BuyResponseModel, int)` | 0x33881BC |
+| `BuyGachaButtonGroup.OnClickBuy` / `Buy` | 0x3385DA8 / 0x3386C48 |
+| `BuyGachaConfirmPanel.BuyFourGacha()` (async d__34) | 0x33930C4 |
+| `ShopItem.<BuyProcess>d__91` (async, nhánh scroll) | — (MoveNext 0x3B78704 là Start) |
+
+Cách port: `HandleNewUnitGachaResult` là entry nhỏ nhất (chỉ nhận `ret`), nó dựng
+`GachaResultCollection` rồi gọi `GachaPanel.Show(...)` (17 call-site đã liệt kê ở §74b).
+Thứ tự: HandleNewUnit → HandleUnit → HandleArtifact → BuyFourGacha → ShopItem.BuyProcess → animation.
+
+## §75 — Hàng đợi "hoàn thiện toàn bộ" (đo 2026-10-21, xếp theo đòn bẩy)
+
+Quét stub rỗng (`{ }`) trên `Assembly-CSharp` — 1.697 file còn stub, tổng 14.503/20.654 (70%).
+
+| # | File | stub/tổng | Nhận xét / cách làm |
+|---|---|---|---|
+| 1 | `Awesomepiece/RestAPI.cs` | **906/1359** | **Đòn bẩy lớn nhất, cơ học**: mỗi method chỉ là `Web.Post/Get<T>(uri, json, token, false, cb)`. URI + verb + model lấy từ binary (mỗi hàm 30–60 lệnh; literal URI + `Web.Post<T>` là annotation). Port được theo lô, mỗi lô 20–40 hàm + 1 gate. Mở khoá gần như mọi panel. |
+| 2 | `Scene_Game.cs` | 420/549 | vòng đời battle: init → Update → GameOver. Cần `BattleManager` trước. |
+| 3 | `GameManager.cs` | 328/718 | phần lớn là handler response (`Handle*`) — làm cùng RestAPI từng cặp. |
+| 4 | `GameUnit.cs` | 314/584 | unit runtime trong battle (stat/skill/kéo thả). |
+| 5 | `BuffOption.cs` | 286/407 | parse `BuffOptions.xml` — thuần dữ liệu, test bằng master data. |
+| 6 | `WorldPanel.cs` | 149/180 | lobby world map. |
+| 7 | `WorldTrigger.cs` | 119/153 | trigger map — dữ liệu. |
+| 8 | `BattleManager.cs` | 110/212 | điều phối battle. |
+| 9 | `Scene_Lobby.cs` | 96/137 | còn lại là các panel reload. |
+| 10 | `MainUI.cs` / `SettingsPanel` / `CardInfoPanel` | 95+90+85 | UI panel. |
+
+### Thứ tự đề xuất (mỗi mục = 1 phiên có gate + capture)
+1. **RestAPI theo lô** (ưu tiên: auth/player/deck/shop/gacha/card → mission/clan/pvp/territory).
+2. **GameManager.Handle\*** tương ứng từng lô (dùng `_apply_*` đã có).
+3. **BuyGachaButtonGroup.Handle\*GachaResult** + `GachaPanel` (§74c) ⇒ gacha chạy thật.
+4. `BuffOption` + `WorldTrigger` (dữ liệu, không cần scene).
+5. `BattleManager` → `GameUnit` → `Scene_Game` (S5 battle).
+6. Panel còn lại theo bảng trên.
+
+### Nguyên tắc khi port lô lớn
+- Mỗi lô: `kdis.py <RVA>` → lấy URI + `Web.*` + model → viết callback-style (netcode law) → gate.
+- Không port animation/particle cho tới khi logic chạy; chúng là stub rỗng hợp lệ.
+- Đo lại % sau mỗi lô bằng đúng script regex ở đầu §75 để biết còn bao xa.
+
+### §75b — Danh mục URI client (bền, không nằm ở /tmp)
+`docs/restapi-uris.txt` = **392 literal URI** trích từ `script.json` `ScriptString` (v174.0.00), sắp xếp.
+Dùng để khớp `RestAPI` stub ↔ endpoint thay vì dò từng hàm:
+```
+python3 - <<'PY'
+import json
+ss=json.load(open('il2cpp/v174.0.00/script.json'))['ScriptString']
+uris=sorted({x['Value'] for x in ss if isinstance(x.get('Value'),str) and x['Value'].startswith('/') and len(x['Value'])>3})
+open('docs/restapi-uris.txt','w').write('\n'.join(uris)); print(len(uris))
+PY
+```
+Phân bố: player 39, clan 38, territory 27, colosseum 23, shop 15, auth 15, rift-weapon 14,
+artifact 14, ranking 13, card 13, accessory 11, rogueLike 10, …
+**Nhiều stub dùng chung 1 URI (khác model/overload)** ⇒ khớp theo *cặp* (uri, kiểu response), không chỉ uri.
+
+### §75c — CẢNH BÁO khi sinh bảng stub↔RVA (đừng lặp lại lỗi)
+Script regex ngây thơ `[\w<>\[\],\.]+\s+(\w+)\s*\(([^;{}()]*)\)\s*\{\s*\}` chỉ khớp **2/906**
+stub trong `RestAPI.cs` (bắt nhầm `MoveNext`/`SetStateMachine` của struct state-machine). Nguyên nhân:
+regex dừng ở `(` đầu tiên của **attribute**/generic, không bắt được khai báo thật.
+Cách đúng để liệt kê stub: dùng regex đã kiểm chứng ở §75
+(`(?:public|private|protected|internal)[^;{}=\n]*\([^;{}]*\)\s*\{\s*\}`) rồi tách tên bằng
+`re.search(r'(\w+)\s*\(', tail)` trên phần `name(params)`, KHÔNG khớp từ đầu chuỗi.
+Chưa có file `docs/restapi-stub-rvas.txt` (đã xoá bản sai) — sinh lại bằng cách trên ở lô RestAPI #1.
+
+## §76 — Lô RestAPI #1: 380 endpoint callback (gate PASS 2026-10-21)
+
+### Đã làm
+1. `scripts/restapi/restmap.py` — sinh bảng `method → (verb, model, uri)` cho mọi
+   `RestAPI.<X>d__N.MoveNext` bằng capstone + `.rela.dyn` + `ScriptString`.
+   Kết quả: **453 dòng, 403 URI resolve được** → `docs/restapi-endpoints.txt`.
+   *Lưu ý tên đầy đủ là `Awesomepiece.RestAPI.<X>d__N$$MoveNext`* (lọc `RestAPI.<` sẽ ra 0 dòng).
+2. `scripts/restapi/gen_restapi.py` — sinh overload callback từ bảng trên, dựa vào
+   **khai báo sẵn có trong port** (`public static UniTask<Resp> X(params)`) để lấy kiểu response
+   và danh sách tham số; chèn trước `}` của class.
+   Kết quả: **380 method** `public static void X(params, Action<Resp> onDone)` gọi
+   `Web.Post/Get<Resp>(uri, [JsonUtility.ToJson(model),] accessToken, false, onDone)`.
+3. `Web.Get/Post<T>` đổi constraint `where T : ResponseModel, new()` → `where T : new()`
+   (6 endpoint trả `ServerListResponse` không kế thừa `ResponseModel`; `Send<T>` vẫn
+   `is ResponseModel` runtime check nên `code/msg` vẫn set được khi là ResponseModel).
+
+Gate `gate_restapi5`: **exit=0, 0 `error CS`, `Exiting batchmode successfully`**.
+
+### Bẫy đã gặp (đừng lặp)
+- Chèn code phải tính index trên **nguyên** `src` (`i1=src.rfind('}')`, `idx=src.rfind('}',0,i1)`);
+  dùng `src.rstrip()` rồi cắt `src` ⇒ lệch vài ký tự, đổ vào trong method cuối → 1725 lỗi giả.
+- JSON rỗng phải là chuỗi `"{}"` (không phải `{}`).
+- Tham số optional (`= default`) phải bị bỏ default trong overload mới, không thì `CS1737`
+  (75 lỗi) vì `onDone` nằm sau.
+- `uri` có `{0}` mà method không có tham số ⇒ giữ nguyên literal, đừng `string.Format`.
+
+### Còn lại của RestAPI (bước kế, cơ học)
+- 7 endpoint không sinh được (`skip_nosig`): không có khai báo `UniTask<...>` trong port.
+- **906 stub thật** của `RestAPI.cs` là body `MoveNext` của các state-machine — vô dụng với
+  netcode callback. Đừng port chúng.
+- **Việc đúng**: đổi 453 method `UniTask<Resp> X(params) { return default; }` thành
+  `void X(params, Action<Resp> onDone)` (dùng đúng URI bảng §76) rồi sửa call-site
+  `await RestAPI.X(...)` → `RestAPI.X(..., res => { ... })`. Trình tự: đổi một nhóm
+  (auth/player/deck/shop) → gate → sửa call-site theo danh sách lỗi → gate.
+- Đo lại: tổng method 21.034, stub rỗng 14.502 — **% không giảm** vì stub thật nằm ở body
+  `MoveNext`/`return default`, không phải `{ }`. Chỉ số đúng để đo tiến độ là
+  *số method còn `return default;` / body rỗng trong file logic* (RestAPI 906 state machine).
+
+### §76b — ĐÃ CONVERT (không chỉ thêm overload)
+`scripts/restapi/conv_restapi.py` đổi **tại chỗ** 380 method
+`public static UniTask<Resp> X(params) { return default; }` →
+`public static void X(params, Action<Resp> onDone) { Web.Post/Get<Resp>(uri, …); }`
+(URI lấy từ `docs/restapi-endpoints.txt`).
+
+Gate `gate_restapi6`: **exit=0, 0 `error CS`** ⇒ **không còn call-site nào dùng
+`await RestAPI.X(...)`** (các panel gọi chúng vẫn là stub). Nghĩa là tầng API client
+giờ đã chạy thật theo netcode callback, dùng được ngay cho mọi panel port sau này:
+```csharp
+RestAPI.BuyGacha(model, res => { if (res.isSuccess) … });
+```
+Port panel mới: chỉ cần gọi overload `(params, Action<Resp>)`, không phải viết `Web.*` tay nữa.
+
+Chạy lại toàn bộ chuỗi sinh bảng khi cần (sau khi thêm/sửa gì ở RestAPI):
+```
+python3 scripts/restapi/restmap.py          # -> docs/restapi-endpoints.txt
+python3 scripts/restapi/conv_restapi.py     # -> sửa RestAPI.cs tại chỗ
+```
+Lưu ý: `conv_restapi.py` chỉ khớp body đúng `return default;` **một dòng** — nếu file đã
+được chỉnh tay, kiểm tra số `converted` in ra (kỳ vọng 380).
+
+### §76c — Lobby sạch NRE sau khi đổi tầng API (capture `cap_r76f`)
+Sau khi convert RestAPI, play capture lộ ra chuỗi NRE do **export drop tham chiếu serialized**;
+đã sửa tận gốc từng lớp:
+
+| Vị trí | Nguyên nhân | Sửa |
+|---|---|---|
+| `UnitCard.Set` | `unitSprite`/`nameText`/`levelText`/`expGauge` (fileID 0 trên prefab UnitCard) | `Awake()` tự tìm `Image` qua `GetComponentInChildren`; các chỗ dùng còn lại null-guard |
+| `UnitCard.Reload` | `throw new NullReferenceException()` khi `gaugeCond == null` | guard, không throw |
+| `Utility.SetActive(MonoBehaviour/Transform/CanvasGroup/...)` | `@this == null` → NRE ở **mọi** call-site | guard `if (@this == null) return;` trong **tất cả** overload (fix một chỗ, sửa cả lớp lỗi) |
+| `DeckPanel`/`FirstComerSettings`/`DeckSlotToggle` | 23 NRE-pad `throw new NullReferenceException()` khi ref null | đổi thành guard `return;` (`return default;` cho hàm trả int) |
+
+Bẫy: NRE-pad nằm trong hàm **trả về int** (`DeckPanel` sort comparer) ⇒ `return;` gây
+`CS0126`; phải `return default;`. Đọc số dòng từ log rồi vá theo dòng là nhanh nhất.
+
+Capture `cap_r76f`: **0 `error CS`, 0 `NullReferenceException`,
+`[PLAYCAPTURE] play capture ok (exit 0)`** — lobby + DeckPanel.Reload chain chạy trọn,
+không còn cảnh báo đỏ nào (trước đó `cap_s73b` vẫn còn 1 NRE).
+Ảnh xác nhận: `/tmp/opencode/cap_r76f/shot_Scene_Lobby.png`.
+
+## §77 — S4 gacha bắt đầu từ `ShopPanel` (2026-10-21)
+
+### Đã port (gate `gate_s77`: exit 0, 0 error CS)
+| Method | RVA | Nội dung |
+|---|---|---|
+| `ShopPanel.Reload()` | 0x34101B8 | tail-call `Reload(false)` |
+| `ShopPanel.Reload(bool init)` | 0x340F5DC | `!readyToReload → return`; `isReloaded = true`; init → Recommend+Special+Subscribe rồi return; không thì dispatch theo `Utility.IsActive(...)` của `recommendTab(0x40) specialTab(0x58) subscribeTab(0x60) packageTab(0x48) dailyTab(0x50) moneyTab(0x78)` |
+| `ShopPanel.Update()` | 0x34105F4 | tail-call `UpdateDaily()` |
+| `ShopPanel.SpecialTabActive()` | 0x34105FC | ReloadUnitBundle+ReloadSpecial; `unitBundlePackages(0x1E0).All(x => !x.IsActive())` → `unitBundlePackageToggle(0xC0).SetActive(false)` + `specialTabManager(0xD0).OnClick(1)`; `!HasActiveSpecialPackage()` → `OnClick(0)`; `ReloadShopSubtabEnable("Special")` |
+| `ShopPanel.PackageTabActive()` | 0x341077C | ReloadPlayer+ReloadEvent; `ReloadShopSubtabEnable("Package")`; `Utility.ScrollToIndex(packageTabsLayout(0x138).GetComponent<LayoutGroup>(), packageTabManager(0x130).index(0x20))` |
+
+**Literal cell**: `0x69538C8 → "Special"`, `0x69817E0 → "Package"` (giải bằng `.rela.dyn` + `ScriptString`,
+đúng Cell-resolver law §). Đây là mẫu để decode mọi `ReloadShopSubtabEnable(<cell>)`.
+
+### Đã decode nhưng CHƯA port (đủ dữ kiện, port nhanh)
+`UpdateDaily()` 0x34101C0 (121+ lệnh): `if (!isReloaded) return;` → so `DateTime.Now.Second` với
+field `0x2F0` (private DateTime, cache giây) → nếu khác thì cập nhật `expRefreshTime(0x160)` =
+`Utility.GetRemainTimeText(<shop>.nextRefreshTime_, strA, strB, true, true, true, null)` rồi
+so `moneyItems(0x210).Count` với `list@+0x18` của shop data để rebuild lưới money.
+Còn thiếu: tên class của static cell `0x6950B30` (→ `static_fields[]` → `+0x120` = shop response).
+
+### Chưa decode (việc kế tiếp của file này)
+`ReloadRecommendPackage` 0x3411394 · `ReloadUnitBundlePackage` 0x3413BD4 · `ReloadSpecialPackage`
+0x34141DC (đã thấy: `ForEach` action + `hasBundlePackageSkins` + `IsSkinBundlePackageItemsValid` +
+`RebuildSkinBundlePackageItems` + `PackageItem.InitByPrefabType` + `transform.SetSiblingIndex` → pooling item)
+· `ReloadSubscribePackage` 0x3414CB4 · `ReloadPlayerPackage` 0x3415220 · `ReloadEventPackage` 0x3415AD8
+· `ReloadDaily` 0x340C7C0 · `ReloadMoney` 0x3410840 · `ReloadDailyCashPackages` 0x3418744
+· `ReloadPackageBadge` 0x3418114 · `ReloadShopSubtabEnable` 0x3418930 · `IsSkinBundlePackageItemsValid`
+0x3414418 · `RebuildSkinBundlePackageItems` 0x341452C · `GetSkinBundlePackageItemPrefabName` 0x3414A08
+· `GetSkinBundlePackageItemPrefab` 0x3414A94 (trả `null` hiện tại → NRE tiềm ẩn).
+
+### Thứ tự đúng cho gacha (đã xác nhận bằng call-site scan §74b)
+`ShopPanel.Reload` → tab handlers (§77 xong khung) → `BuyGachaButtonGroup.Buy` 0x3386C48
+→ `RestAPI.BuyGacha` (đã có, §76) → `Handle*GachaResult` (0x33872B0/0x3387640/0x33877A8/0x3387E2C/0x33881BC)
+→ `GachaPanel.Show` 0x33AD37C → animation (`ShowResult` 0x33AE6FC, `UnFoldResult` 0x33B05F0).
+
+### §77b — Skin bundle package items (gate `gate_s77c` PASS)
+| Method | RVA | Port |
+|---|---|---|
+| `IsSkinBundlePackageItemsValid(List<ShopItemModel>)` | 0x3414418 | so `_skinBundlePackageItemPrefabNames.Count` với list đầu vào (khác → false), rồi so từng tên với `GetSkinBundlePackageItemPrefabName(list[i])` |
+| `GetSkinBundlePackageItemPrefabName(ShopItemModel)` | 0x3414A08 | `ResourceShopItem.Get(model.itemId).GetValueText("PackageItemPrefab", "")` (cell `0x6986300` = `"PackageItemPrefab"`, `0x694FC70` = `""`) |
+| `GetSkinBundlePackageItemPrefab(string)` | 0x3414A94 | `Utility.IsNullOrEmpty → null`; `SimpleAssetDB.Instance.GetPrefab(name,false)?.GetComponent<PackageItem>()` |
+
+Field map xác nhận: `0x1F8 = _skinBundlePackageItems (List<PackageItem>)`,
+`0x200 = _skinBundlePackageItemPrefabNames (List<string>)`, `0x1F0 = playerPackageItems`,
+`0x130 = packageTabManager (index @0x20)`, `0x138 = packageTabsLayout (RectTransform)`,
+`0x1E0 = unitBundlePackages`, `0x1E8 = specialPackages`, `0xC0 = unitBundlePackageToggle`,
+`0xD0 = specialTabManager`, `0x160 = expRefreshTime (Text)`, `0x210 = moneyItems (List<ShopItem>)`.
+
+`FindSkinBundlePackageItem(int skinId)` 0x3414928 = `_skinBundlePackageItems.Find(x => x.resSkin != null && x.resSkin.id == skinId)`.
+Cách giải: lambda cached `<>c__DisplayClass149_0.<FindSkinBundlePackageItem>b__0` @ **0x341CF9C** cho thấy
+`[x1,#0xE8]` = `ShopItem.resSkin (ResourceSkin*)`, null → `-1`, ngược lại đọc `[resSkin,#0x10]` = `ResourceBase<ResourceSkin>.id`.
+→ **Bài học**: field 0xE8 không có trong `PackageItem` mà thuộc `ShopItem`; `ResourceSkin` không khai báo field 0x10,
+nó là `id` của `ResourceBase<T>` — khi tra offset luôn đi ngược lên base class.
+
+### §77c — `ShopPanel.OnClickProvabilityInfo` (gate `gate_s77e` PASS)
+RVA 0x3418610: `Utility.LogFirebase("click_provability_info")` → `Application.OpenURL("ProvabilityInfoURL".L())`
+(cell `0x6986528` = `"click_provability_info"`, `0x6986530` = `"ProvabilityInfoURL"`; phần tử thứ 2 của
+`LogFirebase` là `params Parameter[]` nên truyền rỗng).
+
+### §77d — `ShopPanel.SetCashItems` / `OnClickDailyInfo` / `ReloadDailyCashPackages` (gate `gate_s77h` PASS)
+
+- **`SetCashItems(ShopItemModel[] items)`** 0x341848C: `moneyItems == null || Count == 0` → return;
+  `items == null || items.Length < 1` → return; loop `moneyItems[i].Init(items[i])`.
+  vtable `+0x178` = **`ShopItem.Init(ShopItemModel)`** — `ShopItem.Set` **không tồn tại** (CS1061 đã mắc 1 lần).
+- **`OnClickDailyInfo()`** 0x3418558: `expInfoPopup` null-guard (NRE-pad → guard) → `SetActive(true)` →
+  `Utility.Get<CanvasGroup>(popup)`, null-guard → `cg.alpha = 0f; cg.DOFade(1f, 0.3f)` (**thiếu `using DG.Tweening;`** = CS1061).
+  Hằng duration đọc từ binary: `ldr s1, [x8, #0x90c]` với `adrp x8,#0x12E3000` → địa chỉ là **`0x12E3000+0x90C = 0x12E390C`**
+  (đọc nhầm `0x12E3090` ra 0.0f) — **bẫy: luôn cộng đúng `page + imm12`, đừng gộp thành hex chẵn**.
+- **`ReloadDailyCashPackages()`** 0x3418744: 4 khối `if (pkg != null) pkg.Reload();` cho
+  `dailyCashPackage 0xE0` · `dailyCashPackage2 0xE8` · `dailyGoldPackage 0xF0` · `dailyHeartPackage 0xF8`
+  (thứ 4 là tail-call `b`).
+- **★ Bài học init-block quanh `!=`**: trước mỗi `Object.op_Inequality` có chuỗi
+  `ldr x0,[x21]` → `ldr w8,[x0,#0xe0]` → `cbnz skip` → `bl 0x2b56a84`. Resolve cell (`0x694FD90`) qua
+  `.rela.dyn → ScriptMetadata` = **`UnityEngine.Object_TypeInfo`** ⇒ đó là codegen `il2cpp_runtime_class_init`
+  mà il2cpp sinh ra cho **extern operator** `op_Inequality` của `UnityEngine.Object`. **C# tự sinh nó — bỏ qua, không port**
+  (kết quả kiểm tra không hề được dùng lại). Vòng resolve: `adrp+ldr` → cell → addend → `ScriptMetadata`.
+- Add `using DG.Tweening;` vào `ShopPanel.cs`.
+
+### §77e — `ShopPanel.ReloadPackageBadge` (gate `gate_s77i` PASS, method khó nhất cụm ShopPanel)
+
+RVA 0x3418114 (0x378 byte). Cấu trúc thật:
+
+```csharp
+var list = GameManager.Get().currentShop.packageItems;   // 3 cbz chain -> return nếu null
+bool anyHigh=false, anyLow=false;
+foreach (ShopItemModel m in list) {
+    var res = ResourceShopItem.Get(m.itemId);            // ResourceBase<T>.Get(int) static, cbz -> return
+    int v = res.GetValueInt("ConditionValue", -1);
+    if (AwesomePrefs.GetInt(string.Format("CheckPakage{0}", m.itemId), -1, true) == 1) continue;
+    if (m.soldOut) continue;
+    if (v > 50) anyHigh = true;
+    if (v < 51) anyLow = true;                           // OR = "còn gói chưa đọc"
+}
+if (tabManager?.tabs == null || tabs.Length <= 3) return;
+packageTabNewBadge.SetActive((anyHigh||anyLow) && Utility.IsActive(tabManager.tabs[3]));
+```
+
+**Bài học tra cứu:**
+- **Decode chuỗi static**: `ldr x8,[klass,#0xb8]` = `static_fields` → `ldr x8,[x8]` = block[0] = `_singleton` →
+  `[+0x120]` = `GameManager.currentShop` (offset xác nhận trong dump.cs) → `[+0x50]` = `ShopResponseModel.packageItems`
+  (`List<ShopItemModel>`). Cell `ScriptMetadata` type + `static_fields` layout là 2 bước tách bạch.
+- **Phân biệt codegen vs logic**: 12× `bl 0x2b56950` (init 1 lần theo cờ `ldrb/strb` @`0x6e0a000+...`) = class-init codegen →
+  bỏ; `bl 0x2b56a8c` với `x0=int_TypeInfo, x1=&int` = **box** int cho `string.Format`; `mov x1,xzr` thừa sau
+  `op_Inequality`/`IsActive`/`SetActive` = dead register (dump chỉ có 1-2 params) → đừng cố tìm thêm arg.
+- **Array index qua bounds check**: `ldr w9,[x8,#0x18]; cmp w9,#3; b.ls -> pad` = `max_length` (array law) +
+  `[x8,#0x38]` = `elements + 3*8` ⇒ **`tabManager.tabs[3]`**; pad = guard `Length <= 3 -> return`.
+- **Field tìm được nhờ grep bờ**: `bool @0x22` không có trong `ResourceShopItem` → grep `; // 0x22` cả dump ⇒
+  `ShopItemModel.soldOut @0x22` (cùng class có `itemId @0x10`) → element type = `ShopItemModel`.
+- 4 NRE-pad (`0x34183EC/3F0/3F4/3F8`) → guard `return;`.
+
+### §77f — `ShopPanel.ReloadSpecialPackage` + `hasBundlePackageSkins` (gate `gate_s77k` PASS)
+
+`ReloadSpecialPackage()` 0x34141DC (không tham số):
+
+```csharp
+if (_skinBundlePackageItems == null) return;
+_skinBundlePackageItems.ForEach(x => x.InitByPrefabType(-1));      // lambda b__147_0 @0x341A094
+List<ShopItemModel> pkgs = hasBundlePackageSkins;                  // get_ 0x340E72C
+if (!IsSkinBundlePackageItemsValid(pkgs)) RebuildSkinBundlePackageItems(pkgs);
+for (int i = 0; i < _skinBundlePackageItems.Count; i++) {
+    var item = _skinBundlePackageItems[i];
+    Utility.SetActive(item, true);          // 0x2C84C00
+    item.InitByPrefabType(i);               // 0x33D3704
+    item.transform.SetSiblingIndex(i);      // 0x6284270 get_transform + 0x6295574
+}
+specialPackageToggle.SetActive(HasActiveSpecialPackage());          // 0xC8 + 0x340F434
+// [defer] 0x34143E4..0x3414410: specialPackageArea.GetComponent<T>() rồi `ldp x2,x1,[x8,#0x178]; br x2`
+```
+
+**★ Bài học lớn (giải luôn bí ẩn "tham số thừa" của các session trước)**: tham số `x1`/`x2` đứng
+trước các `bl` **static generic** là **`MethodInfo*`**, không phải tham số C#. Ví dụ
+`Enumerable.Where(list, pred, methodInfo)` → x1 = delegate, x2 = MethodInfo; `Enumerable.ToList(src)`
+→ x1 = MethodInfo; còn `List<T>.RemoveAll(pred)` (instance, mutate tại chỗ, trả chính list) thì
+`x2 = delegate`. Vì vậy các lệnh `mov x1,xzr` trước `op_Inequality`/`IsActive`/`SetActive` (đã gặp
+ở §77d/§77e) là **register chết** — đừng đi tìm overload 2 tham số nữa.
+
+**`hasBundlePackageSkins`** 0x340E72C = LINQ trên `GameManager.Get().currentShop.eventShopItems`
+(`static_fields[0]` → `+0x120` → `+0x68`):
+
+```
+Where(b__133_0 @0x3419A58)  → x => ResourceShopItem.Get(x.itemId).GetValueInt("ConditionValue",-1) > 0
+ToList()
+Select(b__133_1 @0x3419ADC) → ResourceShopItem.Get(item.itemId) rồi ResourceSkin.GetValue... + Utility.GetVersion
+                              rồi `new ShopItemModel()` (0x2DCE020) với stp w8,w19,[+0x10] (itemId, unitId)
+ToList()
+RemoveAll(b__133_2 @0x3419C38) → x => x == null
+```
+
+⇒ **[defer]** `hasBundlePackageSkins` tạm trả `new List<ShopItemModel>()` (property stub cũ là
+`=> null`): 3 lambda đã có RVA, chỉ còn chốt nhánh `ResourceSkin.GetValue` + `Utility.GetVersion`
+trong `b__133_1`. Hệ quả: special tab không dựng skin bundle; phần còn lại của ShopPanel không đổi.
+
+### §77g — `ShopPanel.RebuildSkinBundlePackageItems` (gate `gate_s77l` PASS)
+
+RVA 0x341452C (0x3FC byte, 255 lệnh — hàm dài nhất còn lại của cụm skin-bundle):
+
+```csharp
+_skinBundlePackageItems.ForEach(x => { Utility.SetActive(x, false); Object.Destroy(x.gameObject); }); // b__151_0 @0x341A160
+_skinBundlePackageItems.Clear();            // List.Clear inlined: _size=0, _version++, Array.Clear(_items,0,oldSize)
+_skinBundlePackageItemPrefabNames.Clear();  // 0x200
+if (skinBundlePackages == null) return;
+foreach (ShopItemModel model in skinBundlePackages) {
+    string prefabName = GetSkinBundlePackageItemPrefabName(model);   // 0x3414A08
+    PackageItem prefab = GetSkinBundlePackageItemPrefab(prefabName); // 0x3414A94
+    _skinBundlePackageItems.Add(Object.Instantiate(prefab, specialPackageArea));  // 0x3C393FC = Instantiate<T>(T, Transform)
+    _skinBundlePackageItemPrefabNames.Add(prefabName);
+}
+```
+
+**Bài học decode:**
+- `List<T>.Clear()` **inline** trong codegen: `ldp w2,w9,[list,#0x18]` (size+version) → `version+1` → `stp wzr,w9`
+  → `if (oldSize >= 1) Array.Clear(_items, 0, oldSize)` (`ldr x0,[list,#0x10]`, `bl 0x58B0360`). Thấy mẫu này là Clear.
+- `List<T>.Add` **inline**: `version++` → nếu `_size >= _items.max_length` → `bl 0x40C9380` (AddWithResize) →
+  ngược lại `_items[_size] = value; _size++`; element ghi ở `[array + 0x20 + i*8]` = array elements law.
+- `Object.Instantiate` generic: `bl 0x3C393FC` với `x0=prefab, x1=parent, x2=MethodInfo` ⇒ `Instantiate<PackageItem>(prefab, specialPackageArea)`
+  (parent = `specialPackageArea` @0xB0 — đúng là RectTransform).
+- Lambda pool-destroy `b__151_0`: `Utility.SetActive(x,false)` rồi `Object.Destroy(x.gameObject)` (`0x62842AC` get_gameObject → tail `b 0x628C198`).
+
+### §77h — `ShopPanel.ReloadUnitBundlePackage` (gate `gate_s77h` PASS)
+
+RVA 0x3413BD4. `... [0x120 currentShop] +0x50 packageItems` (giống `ReloadPackageBadge`):
+
+```csharp
+List<ResourceShopItem> items = shop.packageItems
+    .Select(x => ResourceShopItem.Get(x.itemId))    // b__146_0 @0x3419FB0
+    .ToList()
+    .FindAll(r => r.unitBundlePackage);             // b__146_1 @0x341A000 → ResourceShopItem.0x169 bool
+PackageItem prefab = unitBundlePackages.Find(p => p.packageType == PackageItem.PackageType.UnitBundle);
+                                                    // b__146_2 @0x341A01C → PackageItem.0x2A8 enum, UnitBundle = 9
+for (int i = 0; i < items.Count; i++) {
+    var pkg = (i < unitBundlePackages.Count) ? unitBundlePackages[i]
+                                             : Object.Instantiate(prefab, unitBundlePackageArea);  // 0xA8
+    Utility.SetActive(pkg, true);
+    pkg.InitByPrefabType(items[i].GetValueInt("Index", -1));   // literal cell 0x6954100 = "Index"
+    pkg.transform.SetSiblingIndex(i);
+    if (i >= unitBundlePackages.Count) unitBundlePackages.Add(pkg);
+}
+unitBundlePackageToggle.SetActive(unitBundlePackages.Any(x => Utility.IsActive(x)));
+                                                    // b__146_3 @0x341A03C, 0xC0, Enumerable.Any 0x3BBF664
+```
+
+**Bài học decode (bổ sung luật đọc codegen):**
+- **Danh sách delegate cache của `<>c`** nằm ở `[<>c_TypeInfo] → +0xb8` (static_fields) `+ 0x80/0x88/0x90/0x98`
+  cho `<>9__146_0..3`. Mẫu `ldr x21,[block,#0x88]; cbnz x21,ok` + khối `bl 0x2b56b98` +
+  `bl 0x5563708 (Func ctor)` / `bl 0x44d9990 (Predicate ctor)` + `str x21,[block,#0x88]` = **cached delegate**.
+- `Enumerable.Select` 0x3BD3C68, `Enumerable.ToList` 0x3BE1A6C, `Enumerable.Any` 0x3BBF664 — đều static generic
+  nên **`x2` (Select) hay `x1` (ToList/Any) = `MethodInfo*`**, không phải tham số.
+- **`List<T>.FindAll(pred)` 0x40C9A88** (trả list mới) vs **`List<T>.Find(pred)` 0x40C99E0** (trả 1 phần tử):
+  phân biệt bằng kiểu trả về được dùng sau đó (FindAll → `.Count`/`get_Item`; Find → truyền làm prefab cho `Instantiate`).
+- `GameObject.SetActive` 0x6287480; `Component.GetComponent` 0x3B8CAC4; `Utility.IsActive` 0x2C8F0A0.
+- `if (Count <= i)` (mẫu `b.le` ngay sau `cmp w8,w22`) = nhánh tái dùng pool thất bại → Instantiate; `Add`
+  đặt **sau** `SetSiblingIndex`, điều kiện tương đương "vừa Instantiate" (viết lại bằng if/else vẫn đúng).
+- **[defer] chung**: cả `ReloadSpecialPackage` (0xB0 `specialPackageArea`) và hàm này (0xA8
+  `unitBundlePackageArea`) kết thúc bằng `GetComponent<T>()` (cell `0x69555F8`) rồi
+  `ldp x2,x1,[x8,#0x178]; br x2`. Đuôi này là hiệu ứng layout sau khi dựng item (không ảnh hưởng dữ liệu);
+  muốn giải cần đọc `Il2CppClass+0x178` của type trong cell 0x69555F8 (addend 0x6B6B778, KHÔNG có trong
+  `ScriptMetadata`) + xác định virtual method 1 tham số.
+
+### §77i — `ShopPanel.Awake` / `Start` (gate `gate_s77i` PASS)
+
+`Awake()` 0x340EA24 (360 byte — **lifecycle, trước đây rỗng nên ShopPanel không có Instance/singleton**):
+
+```csharp
+if (Instance == null) Instance = this;         // static field block[0] của ShopPanel_TypeInfo (0x6976880 → +0xb8 → [0])
+canvasGroup.alpha = 0f;                        // BaseLobbyPanel.canvasGroup @0x20 (CanvasGroup.set_alpha 0x6484F50)
+GameManager.Get().Subscribe(GameManager.CallbackType.AddCard, OnCardDataChanged);  // 0x3149C1C, type = 4
+```
+
+`Start()` 0x340EB8C:
+
+```csharp
+for (int i = 0; i < tabManager.maxIndex; i++) {          // get_maxIndex 0x2F26D6C
+    TabComponent[] tabs = tabManager.tabs;               // TabManager.tabs @0x30
+    if (tabs == null || i >= tabs.Length) return;        // 0x2B56BA8 = throw IndexOutOfRange → port: return
+    TabComponent t = tabs[i];
+    if (t == null) return;
+    if (!t.isActiveAndEnabled) continue;                 // Behaviour.get_isActiveAndEnabled 0x6283834
+    tabManager.OnClick(i);                               // 0x2F26DE0
+    return;
+}
+```
+
+**Bài học decode:**
+- `AsyncVoidMethodBuilder$$Create` (0x57C4F14) + `AsyncVoidMethodBuilder$$Start<ShopPanel.<X>d__N>(ref)` =
+  method **`async void`**; thân thật nằm ở `<X>d__N.MoveNext` (tra RVA trong dump.cs). Gặp 2 call
+  CompilerServices liên tiếp + `movi v0.2d,#0` zero 0x40 byte stack = state machine local, **không phải**
+  string interpolation.
+- `ShopPanel.DevResetDailyShopRefreshCount` 0x3419284 → `d__171.MoveNext` 0x341D234;
+  `DevSetUnitBundlePackageUntilAt` 0x34194D4 → `d__173.MoveNext` 0x341D5DC. **Chưa port** (dev-only, async).
+- `OpenOfferWallButton` 0x3418870: `if (GameManager.Get() == null) return; if (Get().CheckIsInMatchmakingAndShowCenterText(-1)) return;
+  if (offerWallPanel == null) return; offerWallPanel.Show();` — **chờ** `ShopPanel.offerWallPanel` getter
+  (`get_offer...` 0x340DE34) đang là stub `=> null`, nên chưa port.
+- **Cell method-ptr = 0**: `*cell(...)` (vd 0x6985FF8 → addend 0x6B6E798) đôi khi **bằng 0 trong file**
+  (il2cpp điền lúc runtime) ⇒ không resolve được bằng ScriptMethod; phải suy từ ngữ nghĩa
+  (đây là callback `CallbackType.AddCard` → `OnCardDataChanged`).
+- `PreInit()` 0x340EE18 = đúng **1 lệnh `ret`** ⇒ thân rỗng là bản port đúng, không phải stub thiếu.
+
+## §78 — Crit: damage type nào crit được (v174.0.00) — **Special KHÔNG crit** (2026-10-21)
+
+Câu hỏi: "special damage có crit được không?" → **Không**, trừ khi unit có buff
+`BuffTag.ApplyCriticalHighest (349)`.
+
+### Chuỗi quyết định
+
+1. `Utility.IsPhysicalDamage` @ `0x2CA4BE0` = `type < 2 || type == 5` → `{NormalPhysical, SkillPhysical, ExtraPhysical}`
+2. `Utility.IsMagicDamage` @ `0x2CA4BFC` = `(type & ~1) == 2 || type == 6` → `{NormalMagic, SkillMagic, ExtraMagic}`
+3. `Utility.IsSpecialDamage` @ `0x2CA4BD4` = `type == 4` (đúng 1 lệnh `cmp w0,#4; cset`)
+
+`GameUnit.AdjustDamage` @ `0x30E08D8` (khối crit ~`0x30E15AC`, sau vòng `foreach`, **không** có nhánh
+lọc type nào trước nó) gọi `GameUnit.GetCriticalInfo` @ `0x30FACC0`:
+
+```
+p  = clamp(GetCriticalProbWithBound(resSkill), 0, 100)     // slot 29 / 0x30E9010
+pm = GetCriticalDamageMulWithBound(0)                     // 0x30E9094
+m  = clamp(GetMCriticalProbWithBound(resSkill), 0, 100)    // 0x30E91A4
+mm = GetMCriticalDamageMulWithBound(0)                    // 0x30E91F4
+
+if (IsPhysicalDamage(type)) { prob = p;  mul = pm; }
+else if (IsMagicDamage(type)) { prob = m; mul = mm; }
+else                        { prob = -1.0f; mul = 0.0; }  // <-- Special(4) / NotADamage(7) / None(8)
+
+if (buffManager.GetValueBoolOr(BuffTag.ApplyCriticalHighest /*349*/)) {
+    prob = max(p, m);  mul = max(pm, mm);                 // ghi đè, KHÔNG lọc type
+}
+return (prob, mul)
+```
+
+Roll (tại `0x30E1618`): `if (prob/100 >= Random.value)` → `di.isCritical = true` và
+`di.uniqueDamageCompoundMult *= 1 + mul/100`. Với `prob = -1` ⇒ `-0.01` luôn `< random[0,1)`
+⇒ **không bao giờ crit**.
+
+### Ngoại lệ duy nhất
+
+`ApplyCriticalHighest` (buff, không phải stat) thay prob/mul bằng **max(p, m)** bất kể damage type
+⇒ lúc đó special damage crit được, dùng crit phys/magic cao hơn của unit. Nguồn buff trong master data:
+`AccessorySynergyBuffs.xml` ID `10022` (set 예리/Sharp 5 món: +20% HybridCriticalProb, +10%
+HybridCriticalDamageMul, + custom buff `ApplyCriticalHighest`). Đây là hiệu ứng phụ ngoài ý đồ mô tả
+("물리/주문 중 더 높은 수치" chỉ nói phys/magic), nhưng là hành vi thật của build.
+
+### Special damage vẫn ăn multiplier riêng
+
+`AdjustDamage` @ `0x30E18C4`: `if (IsSpecialDamage(di.type)) di.damageMult += GetSpecialDamageMul()/100`
+(vtable slot 33, `0x30E92D0`; stat tương ứng là `BaseSpecialDamageMul` trên phụ kiện), rồi
+`di.uniqueDamageCompoundMult *= buffManager.GetValueDouble(BuffTag 306, 1)`.
+Damage type `Special` do master data chọn: `<ForceDamageType>Special</ForceDamageType>` (Skills.xml
+50035, 700507) / `<UseSpecialDamage>true</UseSpecialDamage>` (9300200).
+
+### Áp dụng: Chungah (10260) + bộ Tuyệt Mệnh (synergy 11)
+
+- `AccessorySynergyBuffs.xml`: set 11 = `10110` (2 món, +10% `SpecialDamageMul`/lần cast, stack 5),
+  `10111` (3 món: +25% special cuối; hero **Mana/Technique/Void ≤ 45** hoặc channeling thì đổi thành
+  **−50% crit damage cuối + +100% special**), `10112` (5 món: −10% Atk/MAtk, khi deal `SkillMagic/
+  SkillPhysical` thì thêm 1 hit `Special` 20%).
+- **Set 11 KHÔNG có `ApplyCriticalHighest`** ⇒ special damage của nó không crit, `BaseMCriticalProb`
+  (crit phép) chỉ áp cho type 2/3/6. Chungah `Mana=15` ≤ 45 ⇒ rơi vào nhánh 3 món −50% crit damage.
+- Muốn special crit phải dùng set **2 (Sắc Bén)** 5 món (`10022`) — 5 slot nên không thể đồng thời có
+  5 món cả 2 set.
+
+### Tra RVA
+
+`dump.cs` RVA → file offset = `RVA - 0x4000`; disasm bằng capstone trên `il2cpp/v174.0.00/libil2cpp_v17400.so`.
+Caller của một method: quét `BL` (`(w>>26)==0x25`), `B`/`B.cond`/`CBZ`/`TBZ` như §56.
+
+## §79 — Official client trên emulator: qua được NEO, chết ở core XIGNCODE (2026-10-21)
+
+Thử dựng **client v174.0.00 stock** (giữ nguyên host official, TLS pinning, `libxigncode.so` thật,
+package id, metadata) chỉ vá đúng phần NEO + inject `libil2cpp` đã giải mã - tức là bỏ mỗi cái
+`System.exit` của packer:
+
+- **Packer v174 = `libxpoulled.so`** (115,966,484 B, SONAME `libappsign4a.so`). Loader của nó
+  **giống hệt v173.0/173.1**: 8 integrity site cùng offset/byte
+  (`0x43914 0x4391c 0x43924 0x43954 0x43ae0 0x43b24 0x43b40 0x43b50`) và pattern
+  `08008012e89700b9` hit đúng 4 chỗ (`0x12ba6c 0x12bb14 0x12bb2c 0x12bbb4`). Chỉ cần NOP 12 chỗ
+  như `patch_neo_loader()` là packer thôi `System.exit(1)`.
+- `il2cpp/v174.0.00/libil2cpp_v17400.so` (unpack từ chính packer đó) inject vào
+  `lib/arm64-v8a/libil2cpp.so` là Unity load được; không cần swap metadata.
+- **Kết quả: qua bytehook + packer, nhưng chết ~2 s sau launch trong XIGNCODE thật**:
+  `SIGSEGV SEGV_ACCERR`, cùng một `fault addr 0x77f0b1bd0dda` ở cả 3 lần chạy. Địa chỉ đó nằm
+  trong mapping `r--` của **`/system/lib64/libndk_translation.so`** (không phải heap của game).
+  Backtrace ARM: `memset` ← core XIGNCODE (`xraphael_arm64.xem`) ← `ZCWAVE_SendCommandVa` ←
+  `ZCWAVE_SendCommand` ← JNI shim `libxigncode.so`, tức là path **AppSign `SetUserInfo`**
+  (`Java_..._AppSignClientSystem_ZCWAVE_1SetUserInfo`) - đúng bước xigncode lấy device info trước
+  `GetCookie2`.
+- Đây **không phải lỗi của packer/NEO patch**: core xigncode lấy từ `libgabriel.so` (mapping `.xem`)
+  và không hề bị sửa. Client v173.1 private + đúng lib xigncode v174 đó thì core chạy (đó là cách
+  §36 lấy được cookie), nhưng chính client v173.1 lại chết ở `UnityMain` null-deref ~18 s
+  (ndk_translation), nên cả hai hướng đều không dùng được lâu.
+- **Hệ quả:** không có patch client nào cứu được. Cookie official do chính core đang crash tính ra;
+  thay/stub nó thì không còn AppSign cookie để `/auth/xcd` mint token. Muốn official + XIGNCODE thật
+  thì phải chạy **ARM native** (máy thật, hoặc container/VM ARM64), không phải lớp dịch x86.
+- Build recipe (không đưa vào repo vì là dead-end cho official): copy 3 split của
+  `apk/xapk_stock_174`, NOP 12 NEO site trong `libxpoulled.so`, inject
+  `il2cpp/v174.0.00/libil2cpp_v17400.so` (đã stub `CheckFirebase` @ file `0x3145340` và 2 overload
+  `FirebaseAnalytics.LogEvent` @ `0x384EA08`/`0x384EA6C` → `ret`, vì redroid không có Play Services),
+  zipalign + ký debug. APK thử nghiệm: `/tmp/opencode/kgc-official174/`.
+
+## §80 — Vá lớp dịch ndk_translation: XIGNCODE hết SEGV_ACCERR (2026-10-21)
+
+§79 kết luận "phải chạy ARM native" là **sai**. Cú crash 2s trong core XIGNCODE là lỗi của
+**ndk_translation**, và sửa được bằng đúng **1 byte** trong `libndk_translation.so`.
+
+**Cơ chế thật**: `fault addr 0x77f0b1bd0dda` nằm trong mapping `r--` của
+`/system/lib64/libndk_translation.so`, tại **offset 0x66dda** → nằm giữa string literal
+`/system/bin/arm64/app_process64` (bắt đầu `0x66dc8`), đúng **+0x12** = ngay sau
+`/system/bin/arm64/`, tức `basename` của argv[0]/AT_EXECFN. Guest (core XIGNCODE, path
+`ZCWAVE_SetUserInfo`) **memset basename của argv[0]** - việc hoàn toàn hợp lệ trên ARM thật - nhưng
+translator đưa cho guest một con trỏ trỏ thẳng vào **.rodata của chính nó** (LOAd#1 chỉ có quyền R),
+nên `memset` → `SEGV_ACCERR`. Địa chỉ giống hệt nhau qua nhiều lần chạy vì `randomize_va_space=2`
+nhưng layout của lib trong process app là tất định.
+
+**Fix**: cho LOAD#1 (segment R-only chứa .dynsym/.dynstr/.rodata) quyền **W**.
+
+```
+# file offset 0x7c = p_flags của LOAD#1 trong program header (phoff 0x40, phentsize 0x38)
+# 04 00 00 00 (R) -> 06 00 00 00 (RW)
+printf '\x06' | dd of=libndk_translation.so bs=1 seek=$((0x7c)) conv=notrunc
+```
+
+- md5 gốc `8e750abfb70a9fbd670301b08aa2a5f2` (2,467,648 B, BuildId `9805a5ea90f28caa52fbba663bbe87b7`),
+  md5 đã vá `2a563c08057ac2b6cab5faf5bcecaea1`. `cmp -l` chỉ ra **1 byte khác**.
+- Redroid 12 (`redroid/redroid:12.0.0-latest`) mount `/` bằng **overlay rw**, nên chỉ cần
+  `adb shell 'cp /data/local/tmp/libndk_translation_rw.so /system/lib64/libndk_translation.so'`
+  (backup gốc ở `/data/local/tmp/libndk_translation.orig.so`), rồi `adb shell stop; adb shell start`
+  (zygote preload native bridge; chỉ khởi động lại app là không đủ). Mapping đầu tiên sau đó là
+  `rw-p`, và **không còn** SIGSEGV.
+- Không cần đổi `libnb.so` (nó là symlink → `libndk_translation.so`).
+
+**Kết quả**: client v174 dựng theo §79 (NEO NOP + inject libil2cpp) chạy **qua** XIGNCODE, vào tới
+`Scene_Login:Awake()`, hiện màn hình login + "Failed to connect to the server" (vì
+`/system/etc/hosts` đang redirect domain official về 127.0.0.1). Trước đó chết ở 2s, 100% reproducible.
+
+**Giới hạn còn lại**: client **stock nguyên bản** vẫn chết trước đó ở packer:
+`bytehook init ... return: 3` → Java `System.exit(1)` (lặp vô hạn). Đây là blocker độc lập, **không**
+do segment R-only (guest code page của translator cũng là `r--`, nhưng bytehook fail ngay ở init).
+Muốn chạy stock không sửa gì thì phải làm bytehook init thành công dưới ndk_translation - chưa tìm ra;
+còn không thì vẫn phải dùng build NEO-NOP.
+
+**Bài học**: `SEGV_ACCERR` với fault addr nằm trong mapping của chính translator ⇒ **guest đang ghi
+vào dữ liệu host mà translator đưa cho nó** (string literal, argv/auxv, bảng hằng). Đừng kết luận
+"phải chạy ARM native" trước khi map fault addr về string/section: đọc `readelf -l/-S`, tính
+`offset = fault - mapping_start`, rồi `data.rfind(b'\0',0,o)` để lấy nguyên string.
+
+**Sau khi vá translator (2026-10-21, cùng ngày)**: build `kgc-official174` (hosts official, TLS pinning
+thật, xigncode thật) boot **qua** XIGNCODE → màn hình login → `Scene_Login:Awake()` → "Loading
+resources…" → tải patch CDN **31/31** → **"Ready to go! Starting the game now!"**. Tức là blocker
+§79 đã hết; những gì còn lại là lỗi khác:
+
+- **Crash `UnityMain` null-deref** (Crashlytics): `x0=0`, `ldr x8,[x0]` tại libunity **vaddr
+  0x584164** (file `0x580164`; mapping in-APK entry `0xfe8000` → nhớ trừ entry offset khi symbolize).
+  Ngay trước là `bl #0xba4d80` trả `x0 = NULL`, rồi `ldr x8,[x0]; ldr x8,[x8,#0xa28]; blr x8`
+  (virtual call trên con trỏ null). Cùng chữ ký với crash ~18-21 s của build private v173.1
+  (`com.nowl.castle`, cũng `x0=0`, `lr==pc`) ⇒ **không phải** Play Services, mà là một subsystem
+  của Unity trả null (nghi timing/timeout vì máy chạy qua translate).
+- **Thoát sạch `exit(0)` ~50 s sau `Scene_Login:Awake`** ở các lần chạy sau (asset đã cache):
+  log `FORTIFY: pthread_mutex_lock called on a destroyed mutex` chỉ là **hệ quả lúc teardown**
+  (mutex thuộc `.bss` của libunity, có lần thuộc `.bss` của chính libndk_translation) rồi
+  `Zygote: Process … exited cleanly (0)`. Nghi XIGNCODE tự `exit(0)` khi không lấy được cookie
+  hoặc client tự quit sau timeout - chưa xác định.
+- **Chưa có request `/auth` nào** tới `castle-infra-server-*.run.app`; các kết nối TLS thấy được là
+  `kgc-k8s-1.awesomepiece.com` (API), `kgc-cdn-1` (CDN) và SDK ads/attribution.
+- Redroid **không có Google Play Services** (`GooglePlayServicesUtil: … missing`), nên kể cả khi
+  hết crash thì login Google chính thức vẫn không chạy được.
+
+Cách lấy địa chỉ mutex → lib: `adb shell cat /proc/<pid>/maps` (chụp **trong lúc app còn sống**, ASLR
+đổi mỗi lần), rồi tìm mapping chứa địa chỉ; entry trong APK (lib load thẳng từ `split_config_*.apk`)
+suy ra lib bằng `data_offset` của zip entry (`lib/arm64-v8a/libunity.so` = `0xfe8000`).
+
+**Nguyên nhân "game tự văng" (2026-10-21)**: `dumpsys activity exit-info com.awesomepiece.castle` →
+`reason=1 (EXIT_SELF) status=0` ⇒ app **tự gọi exit(0)**; dòng `FORTIFY: pthread_mutex_lock called on
+a destroyed mutex` chỉ là nhiễu lúc teardown (mutex nằm trong `.bss` của libunity / của
+libndk_translation), không phải nguyên nhân. Thủ phạm là **`libxigncode.so` thật**: thay nó bằng stub
+(`server/xigncode_stub/arm64/libxigncode.so`, build `/tmp/opencode/build_noxign174.py`) thì process
+sống >10 phút, lên đủ màn hình login (nút "Sign in with Google Play" + "Guest Login"), hook theo tên
+vẫn khớp v174 (`Hooked BattleManager.Update`, `Scene_Login.AutoRegisterImpl`, ...).
+
+**Nhưng login official bị chặn bởi integrity check**: bấm "Guest Login" → `Authenticating…` →
+dialog *"File integrity check failed. The account could not be logged in. - Game wasn't installed
+normally from Google Play - Temporary error"*. Đây chính là XIGNCODE AppSign (server/client so chữ ký
+APK với bản Play). ⇒ **không thể login official bằng APK đã sửa/ký lại**, dù có stub hay không.
+
+⇒ Con đường duy nhất còn lại để login official trên emulator: APK **nguyên bản** + XIGNCODE thật,
+tức phải vượt `bytehook init … return: 3` của packer dưới ndk_translation (blocker duy nhất còn lại
+của stock).
+
+## §81 — ĐÃ login official bằng client stock (APK nguyên bản): 4 miếng vá ngoài APK (2026-10-21)
+
+Kết quả: client **Play-signed nguyên bản** chạy trên redroid, **tự login guest lên server chính thức**
+(`Guest_4M8QR22RTR`, tên server cấp `D3747448`), vào lobby thật (38 mail, event "ISEKAI GATE",
+Alliance lv13), chơi được tutorial battle. Không sửa 1 byte nào trong APK — mọi thứ nằm ở system /
+mount-ns / RAM. Bộ script: `scripts/stock-redroid/` (`up.sh`, `kgcdev.c`, `hosts-adblock`).
+
+### (1) `bytehook init … return: 3` = bhook đọc sai linker, không phải "translator không hỗ trợ"
+
+XIGNCODE NEO packer gọi `bytehook_init`; bhook `dlopen` **đúng path hard-code `/system/bin/linker64`**
+để lấy `.symtab` của linker guest, trong khi linker thật của guest nằm ở `/system/bin/arm64/linker64`
+(`AT_BASE`). Trên redroid, `/system/bin/linker64` là **symlink → linker x86_64 của host**, nên bhook
+parse ELF x86_64 như ELF arm64 → `e_shstrndx` ngoài range → `INITERR_SYM` (3) → packer `System.exit(1)`.
+Không liên quan gì tới việc "translator không chạy được bytehook".
+
+Vá: bind-mount linker arm64 đè lên path đó **trong mount namespace của riêng zygote64** (không đụng
+namespace của init/adbd, nên `adb shell` vẫn chạy binary x86_64 bình thường):
+
+```
+nsenter -t $(pidof zygote64) -m -- mount --make-rprivate /
+nsenter -t $(pidof zygote64) -m -- mount --bind /system/bin/arm64/linker64 /system/bin/linker64
+```
+
+Sau đó `bytehook init(mode: AUTOMATIC, debuggable: false), return: 0, real-init: yes`.
+
+**Cái bẫy**: trong namespace đó **không exec được binary x86_64 nào nữa** (`PT_INTERP` của chúng cũng
+là `/system/bin/linker64`, giờ là linker arm64) ⇒ `crash_dump`/`debuggerd` chết với
+*"Accessing a corrupted shared library"* ⇒ **không có tombstone**, và chính `nsenter … mount` cũng
+chết sau lần bind đầu tiên. Vì vậy helper `kgcdev` (static x86_64, không `PT_INTERP`) tự làm
+`setns()` + `mount(2)`: `kgcdev nsbind <zygote_pid>`. Mount này **mất mỗi lần zygote/container
+restart** → chạy lại `up.sh`.
+
+### (2) `Firebase modules failed to initialize: messaging` giết luôn chuỗi login
+
+Máy ảo không có GMS ⇒ `FirebaseApp` init ném `InitializationException` **từ trong `GameManager.Init()`**
+(qua `GameManager.CheckFirebase`), exception thoát ra khỏi `Scene_Login.<LoadAfterAssetBundleImpl>d__84.MoveNext`
+⇒ không tải patch CDN ⇒ `Scene_Login.OnResourceLoadCompleted()` NRE ⇒ ~30-70 s sau crash native
+(`libunity` vaddr `0x584164`, PhysX `TaskManager` `pthread_getspecific` trả NULL). Đây là *hệ quả*,
+không phải bug TLS của translator.
+
+Vá (RAM-only, APK vẫn nguyên): đổi instruction đầu của `GameManager.CheckFirebase` thành `ret` **trong
+image `memfd:libil2cpp.so` mà packer vừa giải mã**:
+
+| | v174.0.00 |
+|---|---|
+| `dump.cs` Offset | `0x3145340` |
+| RVA (`Offset + 0x4000`) | `0x3149340` |
+| prologue gốc | `fe0f1bf8fa6701a9f85f02a9f65703a9` |
+| patch | `c0035fd6` (`ret`) |
+
+`kgcdev patch <pkg> <rva> <expect_hex>` poll `/proc` 20 ms/lần, dò mapping `libil2cpp.so` có
+`offset 0` (= vaddr 0) ⇒ `addr = base + RVA`, đọc qua `/proc/pid/mem`. **Packer ftruncate memfd rồi
+giải mã dần**, nên lần đọc đầu có thể ra 0 hoặc ra rác: chỉ coi là xong khi prologue khớp (hoặc khi
+đọc ra đúng `ret` = đã bị process khác vá rồi — đừng "kẹt" ở trạng thái mismatch, đó là bug thật đã
+gặp: 2 daemon cùng chạy thì cái sau thấy prologue đã đổi và poll mãi).
+
+### (3) Crash 50-90 s — hai kiểu, và **cả hai không do miếng vá của mình**
+
+Đo bằng cách relaunch nhiều lần (mỗi lần 120-150 s, đếm số lần còn sống):
+
+| cấu hình | kết quả | thời điểm chết |
+|---|---|---|
+| patch `CheckFirebase` (giữ nguyên) | 2/4 sống | 57-75 s |
+| patch + **hoàn nguyên** prologue sau 25 s | 0/4 sống | process chính `exited cleanly (0)` ở ~118 s |
+| **không patch gì** (đối chứng) | 0/2 sống | SIGSEGV ~70-80 s |
+
+⇒ Đối chứng quan trọng nhất: **không patch gì cũng chết cùng kiểu, cùng khoảng thời gian**. Vậy
+instability là của *stack* (redroid + ndk_translation + Unity 2022 + XIGNCODE + ads), không phải do
+byte `ret` trong `CheckFirebase`. Đừng đi tìm "XIGNCODE phát hiện patch" nữa.
+
+Ba kiểu chết đã thấy:
+
+| kiểu | log | luồng |
+|---|---|---|
+| SIGABRT | `FORTIFY: pthread_mutex_lock called on a destroyed mutex (0x…)` | `UnityChoreograp` |
+| SIGSEGV có backtrace | `Cause: null pointer dereference`, `pc == lr`, `x0 = 0`, ngay trước đó Unity log `Graphics device is null.` | `UnityMain` |
+| SIGSEGV **không** backtrace | chỉ `Zygote: Process <pid> exited due to signal 11`; **không** có `F libc: Fatal signal`, **không** tombstone | ? |
+
+Chi tiết đáng nhớ:
+
+- Crash hay xảy ra **ngay sau khi tải xong asset** (`31/31`, "Ready to go! Starting the game now!")
+  khoảng 10-30 s. Trong lần crash có ghi được log: 13 s trước đó app `dlopen(libGLESv2_angle.so)` và
+  dựng WebView (`cr_*`) — SDK consent/ads. Đây mới là **nghi phạm**, chưa có bằng chứng.
+
+- SIGSEGV có backtrace nằm ở `libunity` vaddr **`0x584164`** = `bl 0xba4d80 (GetGfxDevice)` rồi
+  `ldr x8,[x0]`. Getter `0xba4d80` khi TLS rỗng thì log `"Graphics device is null."` rồi **vẫn trả
+  NULL**, caller không kiểm tra ⇒ deref null. (Đây đúng là crash từng bị coi là "hệ quả của chuỗi
+  init hỏng" ở §80 — sai: nó xảy ra cả trên client đã login sạch.)
+- **Bẫy khi vá chỗ này**: thay `ldr x8,[x0]` bằng `cbz x0,+0x14` là **hỏng** — chính instruction đó
+  là chỗ nạp `x8`, nên khi `x0 != NULL` thì fallthrough với `x8` rác và chết ở
+  `ldr x8,[x8,#0xa28]` (quan sát được: `pc 0x584170`, `x8 = 0xab34242b4b8633d5`). Guard đúng phải là
+  trampoline: `cbz x0,skip; ldr x8,[x0]; b 0x584168; skip: b 0x584178`. Nhưng segment RX của
+  `libunity` **không có run zero/nop nào ≥16 B** → phải tìm cave ở lib khác trong ±128 MB hoặc ở
+  vùng RW (translator đọc code từ trang `r--p`/`rw-p` nên chỗ đặt không cần quyền X).
+- SIGABRT: `pthread_mutex_destroy` set `__kind = 0xffff` (disasm libc `0xa3088`), lần `lock` sau đó
+  gặp sentinel ⇒ FORTIFY abort. Vá được ở tầng hệ thống (xem (3b)).
+- Đường **thoát êm**: `Web.HandleErrorCode` gọi `Web.HandleUpdateAlert` khi `errorCode`/HTTP **403**
+  (`0x193`), mà `HandleUpdateAlertImpl` là coroutine có `deadline` rồi gọi `Application.Quit()`.
+  Toàn bộ client chỉ có 2 chỗ gọi `Application.Quit()`: coroutine này và `SimpleCameraController.Update`
+  (script mẫu của Unity). Nên "app tự thoát, exit code 0" thường là do server trả 403 (update alert).
+
+### (3b) Vá `pthread_mutex_destroy` trong guest libc (đã áp dụng)
+
+`/system/lib64/arm64/libc.so` (arm64 guest, **không** phải libc của host x86_64), file offset
+`0xa3088` (`pthread_mutex_destroy`): `fd7bbfa9fd030091` → `00008052c0035fd6` (`mov w0,#0; ret`).
+Backup: `/data/local/tmp/libc.so.orig`. Sau khi vá phải **restart framework** (`adb shell stop;
+adb shell start`) để không process nào còn map trang cũ từ page cache — và nhớ chạy lại `up.sh` vì
+mount-ns của zygote mất. **`adb reboot` KHÔNG reboot container redroid** (uptime không đổi) — đừng
+dựa vào nó.
+
+### (4) Không có GMS ⇒ chỉ login guest, và chỉ với APK Play-signed
+
+`/auth/login` id-less bị server từ chối (xem `docs/multi-account-login.md`), nhưng client stock tự
+chạy **guest auto-register**: PlayerPrefs `Guest_<id>`, lobby hiện tên do server cấp. Đây là tài khoản
+**rác** — dùng để nghiên cứu/capture, đừng trỏ vào tài khoản thật: miếng vá (2) nằm trong RAM, về lý
+thuyết XIGNCODE có memory check.
+
+### (5) `kgcdev patchlib` — vá một lib nằm trong split APK
+
+Guest linker map thẳng file APK (lib ở dạng STORED, không giải nén), nên `/proc/<pid>/maps` hiện
+**tên APK** và cột offset = **vị trí trong file APK**, không phải offset của lib. Ví dụ v174.0.00
+`lib/arm64-v8a/libunity.so` có data offset `0xfe8000` trong `config.arm64_v8a.apk`.
+
+```
+pos  = zip_data_offset + elf_file_offset(vaddr)      # elf_file_offset lấy từ program headers
+addr = mapping.start + (pos - mapping.off)           # mapping chứa pos
+kgcdev patchlib <pkg> split_config.arm64_v8a.apk <pos_hex> <expect_hex> [repl_hex] [revert_s]
+```
+
+Ba cái bẫy: (a) phải lọc theo **tên APK**, không lọc theo tên lib (maps không nhắc tên lib);
+(b) cùng một offset có thể có **hai** mapping (map cả file + map từng segment) — chọn cái chứa `pos`;
+(c) đừng quên `repl` (mặc định là `ret`) — xem bẫy `cbz` ở (3).
+
+### (6) Watchdog — vì instability là của môi trường, không phải của patch
+
+`scripts/stock-redroid/watchdog.sh` (chạy `setsid`, sống ngoài adb): 5 s/lần kiểm tra `pidof`, thấy
+chết thì `am start` lại; daemon `kgcdev` tự vá process mới. Tài khoản là guest trên server thật nên
+lần launch sau vẫn vào đúng nhân vật. Dừng: `pkill -f watchdog.sh`.
+
+Thử thêm (kết quả: **không cải thiện**): stub `AdManager.Init` (RVA `0x2C4B660`) và
+`AdmobManager.Init` (RVA `0x2C4B9E8`) bằng `ret` — vẫn chết y nguyên, và WebView Chromium **vẫn** được
+tạo (từ SDK consent/UMP + Airbridge chứ không chỉ AdMob). Nên đừng đi đường "tắt ads để hết crash".
+
+### (7) Kẹt "Loading resources…" = `UnityCache` hỏng (do chính `am force-stop`)
+
+Triệu chứng: vào scene login, `Utility::LoadResource() Failed to load Datas/Strings/…`, màn hình
+"Loading resources…" đứng im, không có kết nối TCP nào tới CDN (kiểm tra bằng cách đối chiếu inode
+socket trong `/proc/<pid>/fd` với `/proc/net/tcp{,6}`), rồi ~60 s sau SIGSEGV.
+
+Nguyên nhân: cache Addressables (`/sdcard/Android/data/<pkg>/files/UnityCache`) bị **force-stop giữa
+lúc đang tải** ⇒ catalog còn, bundle thiếu/hỏng ⇒ client không tải lại, cũng không bỏ qua.
+
+Fix (đã kiểm chứng): `rm -rf /sdcard/Android/data/com.awesomepiece.castle/files/UnityCache` rồi
+relaunch ⇒ log ra `Ready to go! Starting the game now!` + progress **31/31** rồi mới vào game. Đừng
+`pm clear` (mất `Guest_…` trong playerprefs = mất luôn tài khoản guest).
+`up.sh` có `KGC_CLEAR_CACHE=1` cho việc này.
+
+Ghi chú: server/CDN thật vẫn sống — `https://kgc-k8s-1.awesomepiece.com/auth/xcdSeed?version=174.0.00`
+trả **200** (danh sách domain ở `docs`/patch_hosts), còn listing bucket CDN đã bị khoá
+(`AccessDenied`) nên đừng dùng listing để kiểm tra version còn được phục vụ hay không.
+
+### Bài học chung
+
+- XIGNCODE NEO trên emulator **không** phải bất khả thi: chỉ cần đúng *một* path (`/system/bin/linker64`)
+  đúng nội dung trong đúng namespace. Đừng patch cả `/system/bin` (sẽ giết mọi binary x86_64).
+- Mọi thứ "app tự văng" trước đây có **hai** nguyên nhân khác nhau: packer `exit(1)` (bytehook) và
+  crash ad-SDK; đừng gộp.
+- Địa chỉ mutex trong log chỉ dùng được nếu đã chụp `/proc/<pid>/maps` **trong lúc process còn sống**
+  (ASLR đổi mỗi lần chạy).
+- Trước khi quy tội cho miếng vá của mình: **chạy đối chứng không vá**. Cả một buổi đi tìm
+  "XIGNCODE phát hiện byte trong RAM" chỉ vì thiếu lần đo đó.

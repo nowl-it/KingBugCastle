@@ -11,20 +11,54 @@ Point the device/redroid at the proxy (system CA installed), press Guest login
 once; this writes repo-root captured_token.txt (+ captured_guest.json), which
 api.config._autoload_token picks up for api/ranking/fetch_seasonal.py.
 
+It also captures the durable XIGNCODE cookie from the request URL of
+`GET /auth/xcd?cookie=...` (the token expires in ~2 min; the cookie is what mints
+fresh tokens on demand) and the seed from `GET /auth/xcdSeed`, writing
+captured_cookie.json + captured_seed.txt.
+
 Read-only: every flow passes through untouched.
 """
 import json
 import os
 import sys
+from datetime import datetime, timezone
 from mitmproxy import http
 
 API_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, API_DIR)
+import config as _config  # noqa: E402
 from config import decode_response  # noqa: E402
+
+# Official rotated BACK to the v165-168 AES key (verified 2026-10-11): the
+# documented a6072ad6b9c959ff now yields HTTP 400 / garbage; cnf1tl65djs2wp3g
+# decodes /auth/xcdSeed and is accepted by request-body endpoints.
+_config.AES_KEY = b"cnf1tl65djs2wp3g"
 
 TOKEN_PATH = os.path.join(API_DIR, "..", "captured_token.txt")
 STATE_PATH = os.path.join(API_DIR, "..", "captured_guest.json")
+COOKIE_PATH = os.path.join(API_DIR, "..", "captured_cookie.json")
+SEED_PATH = os.path.join(API_DIR, "..", "captured_seed.txt")
 OFFICIAL_HOSTS = ("kgc-k8s-1.awesomepiece.com",)
+
+
+def request(flow: http.HTTPFlow) -> None:
+    """Capture the XIGNCODE cookie from GET /auth/xcd?cookie=... (request URL)."""
+    if flow.request.pretty_host not in OFFICIAL_HOSTS:
+        return
+    if not flow.request.path.startswith("/auth/xcd"):
+        return
+    cookie = flow.request.query.get("cookie")
+    if not cookie:
+        return
+    state = {
+        "cookie": cookie,
+        "path": flow.request.path,
+        "captured_at": datetime.now(timezone.utc).isoformat(),
+    }
+    with open(COOKIE_PATH, "w") as f:
+        json.dump(state, f, indent=1)
+    print(f"[token_harvester] captured cookie: {cookie[:28]}... "
+          f"(len={len(cookie)}) from {flow.request.path}")
 
 
 def response(flow: http.HTTPFlow) -> None:
@@ -36,7 +70,15 @@ def response(flow: http.HTTPFlow) -> None:
         body = decode_response(flow.response.raw_content or b"")
     except Exception:
         return
-    if not isinstance(body, dict) or not body.get("accessToken"):
+    if not isinstance(body, dict):
+        return
+    # Capture the seed issued by /auth/xcdSeed (input to cookie generation).
+    if flow.request.path.startswith("/auth/xcdSeed") and body.get("seed"):
+        with open(SEED_PATH, "w") as f:
+            f.write(body["seed"])
+        print(f"[token_harvester] captured seed: {body['seed'][:16]}... "
+              f"(len={len(body['seed'])})")
+    if not body.get("accessToken"):
         return
     token = body["accessToken"]
     state = {

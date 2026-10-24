@@ -77,6 +77,42 @@
    }
   ]
  },
+ "AuthRequestModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "id",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "version",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "platform",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "cookie",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "clientPubKey",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   }
+  ]
+ },
  "LoginRequestModel": {
   "ns": "Awesomepiece.Model",
   "base": null,
@@ -202,6 +238,12 @@
   "base": null,
   "fields": [
    {
+    "name": "singleArenaDeckType",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
     "name": "theme",
     "ctype": "int",
     "jtype": "int",
@@ -246,6 +288,18 @@
    {
     "name": "targetDifficulty",
     "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "expectedClanRaidKillCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "expectedClanRaidRemainHp",
+    "ctype": "long",
     "jtype": "int",
     "default": 0
    },
@@ -325,6 +379,12 @@
     "name": "gameId",
     "ctype": "string",
     "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "singleArenaDeck",
+    "ctype": "SingleArenaDeckRequestModel",
+    "jtype": "object",
     "default": null
    },
    {
@@ -578,6 +638,12 @@
     "ctype": "List<bool>",
     "jtype": "array",
     "default": []
+   },
+   {
+    "name": "devilOfferId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
    },
    {
     "name": "pvpDeckRecordData",
@@ -844,6 +910,12 @@
     "default": 0
    },
    {
+    "name": "challengeModeSeason",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
     "name": "challengeModeDifficulty",
     "ctype": "int",
     "jtype": "int",
@@ -1079,6 +1151,24 @@
    },
    {
     "name": "value6",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "DevCloneLiveUserDataRequestModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "loginId",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "accountId",
     "ctype": "int",
     "jtype": "int",
     "default": 0
@@ -1370,6 +1460,90 @@
     "ctype": "bool",
     "jtype": "bool",
     "default": false
+   }
+  ]
+ },
+ "SingleArenaDeckRequestModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "deckType",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "deck",
+    "ctype": "int[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "potential",
+    "ctype": "int[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "buildingLevels",
+    "ctype": "int[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "artifactIds",
+    "ctype": "int[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "riftWeaponIds",
+    "ctype": "int[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "deckPower",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "isByAd",
+    "ctype": "bool",
+    "jtype": "bool",
+    "default": false
+   }
+  ]
+ },
+ "SingleArenaRewardRequestModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "step",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "tierId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "SingleArenaLogRequestModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "idLimit",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
    }
   ]
  },
@@ -1781,6 +1955,18 @@
   "fields": [
    {
     "name": "resMissionId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "AdChargeSeasonalEventFlagRequestModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "modeId",
     "ctype": "int",
     "jtype": "int",
     "default": 0
@@ -2412,6 +2598,12 @@
    {
     "name": "selectIdx",
     "ctype": "bool[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "selectedTreasureIds",
+    "ctype": "int[]",
     "jtype": "array",
     "default": []
    },
@@ -3071,6 +3263,12 @@
    },
    {
     "name": "itemVersion",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "selectedTreasureId",
     "ctype": "int",
     "jtype": "int",
     "default": 0
@@ -3872,6 +4070,12 @@
     "ctype": "string",
     "jtype": "string",
     "default": null
+   },
+   {
+    "name": "serverPubKey",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
    }
   ]
  },
@@ -4313,6 +4517,36 @@
    }
   ]
  },
+ "CustomEventData": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "eventName",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "startAt",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "untilAt",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "rewardId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
  "RogueLikeBoughtDlcData": {
   "ns": "Awesomepiece.Model",
   "base": null,
@@ -4355,6 +4589,30 @@
    },
    {
     "name": "potentialTier",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "overcome",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dimensionLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "incarnationSkillLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "incarnationUltimateSkillLevel",
     "ctype": "int",
     "jtype": "int",
     "default": 0
@@ -4403,6 +4661,30 @@
    },
    {
     "name": "potentialTier",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "overcome",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dimensionLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "incarnationSkillLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "incarnationUltimateSkillLevel",
     "ctype": "int",
     "jtype": "int",
     "default": 0
@@ -4625,6 +4907,216 @@
    }
   ]
  },
+ "DimensionUnitModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "unitId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "overcome",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dimensionLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dimensionGauge",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dimensionNextLevelCost",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "IncarnationUnitModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "unitId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "overcome",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "incarnationSkillLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "incarnationUltimateSkillLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "DimensionUpgradeRequestModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "unitId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "count",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "DimensionUpgradeResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "unit",
+    "ctype": "DimensionUnitModel",
+    "jtype": "object",
+    "default": null
+   },
+   {
+    "name": "remainEcho",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "DimensionOvercomeRequestModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "unitId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "count",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "DimensionOvercomeResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "unit",
+    "ctype": "DimensionUnitModel",
+    "jtype": "object",
+    "default": null
+   },
+   {
+    "name": "remainTicket",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "IncarnationOvercomeRequestModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "unitId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "count",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "IncarnationOvercomeResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "unit",
+    "ctype": "IncarnationUnitModel",
+    "jtype": "object",
+    "default": null
+   },
+   {
+    "name": "remainTicket",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
  "CardResponseModel": {
   "ns": "Awesomepiece.Model",
   "base": "ResponseModel",
@@ -4735,6 +5227,18 @@
     "name": "createdAt",
     "ctype": "string",
     "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "dimensionUnit",
+    "ctype": "DimensionUnitModel",
+    "jtype": "object",
+    "default": null
+   },
+   {
+    "name": "incarnationUnit",
+    "ctype": "IncarnationUnitModel",
+    "jtype": "object",
     "default": null
    }
   ]
@@ -5270,6 +5774,12 @@
     "ctype": "int",
     "jtype": "int",
     "default": 0
+   },
+   {
+    "name": "dimensionUnitId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
    }
   ]
  },
@@ -5356,6 +5866,12 @@
     "default": null
    },
    {
+    "name": "surpriseAttendancePass",
+    "ctype": "SurpriseAttendanceEventReceiveRewardResponseModel",
+    "jtype": "object",
+    "default": null
+   },
+   {
     "name": "gachas",
     "ctype": "List<GachaResultCollection>",
     "jtype": "array",
@@ -5369,6 +5885,12 @@
    },
    {
     "name": "soldOut",
+    "ctype": "bool",
+    "jtype": "bool",
+    "default": false
+   },
+   {
+    "name": "gachaStoppedByInventoryMax",
     "ctype": "bool",
     "jtype": "bool",
     "default": false
@@ -5450,6 +5972,12 @@
     "ctype": "GachaStack",
     "jtype": "object",
     "default": null
+   },
+   {
+    "name": "gachaCeil",
+    "ctype": "Dictionary<string, int>",
+    "jtype": "object",
+    "default": {}
    },
    {
     "name": "eventFlag",
@@ -5561,6 +6089,12 @@
    },
    {
     "name": "mapSkin",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "advisor",
     "ctype": "int",
     "jtype": "int",
     "default": 0
@@ -6608,6 +7142,12 @@
     "ctype": "int",
     "jtype": "int",
     "default": 0
+   },
+   {
+    "name": "pvpMatchRerollUsedCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
    }
   ]
  },
@@ -6650,6 +7190,438 @@
     "ctype": "PvPDeckInfo[]",
     "jtype": "array",
     "default": []
+   }
+  ]
+ },
+ "SingleArenaRewardInfoResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "attackCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "bestTier",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "receivedMissionSteps",
+    "ctype": "List<int>",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "receivedRankTiers",
+    "ctype": "List<int>",
+    "jtype": "array",
+    "default": []
+   }
+  ]
+ },
+ "SingleArenaInfoResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "SingleArenaRewardInfoResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "attackCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "bestTier",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "receivedMissionSteps",
+    "ctype": "List<int>",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "receivedRankTiers",
+    "ctype": "List<int>",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "season",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "semiSeason",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "eventAvailable",
+    "ctype": "bool",
+    "jtype": "bool",
+    "default": false
+   },
+   {
+    "name": "rewardAvailable",
+    "ctype": "bool",
+    "jtype": "bool",
+    "default": false
+   },
+   {
+    "name": "startAtDate",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "endAtDate",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "rewardEndAtDate",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "ap",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "points",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "bestPoints",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "tier",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "ranking",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "winCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "loseCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "defenseWinCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "defenseLoseCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dailyAttackCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dailyDefenseLoseCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dailyAttackDeckChangeCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dailyDefenseDeckChangeCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dailyRerollCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "attackDeckInfo",
+    "ctype": "PvPDeckInfo",
+    "jtype": "object",
+    "default": null
+   },
+   {
+    "name": "defenseDeckInfo",
+    "ctype": "PvPDeckInfo",
+    "jtype": "object",
+    "default": null
+   },
+   {
+    "name": "unreadLogCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "SingleArenaLogResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "logs",
+    "ctype": "List<SingleArenaLogResponseModel.SingleArenaLogData>",
+    "jtype": "array",
+    "default": []
+   }
+  ]
+ },
+ "SingleArenaScoreInfo": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "addPoints",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "points",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "tier",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "ranking",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "SingleArenaMatchResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "cash",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "targets",
+    "ctype": "PvPDeckInfo[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "difficulties",
+    "ctype": "int[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "aps",
+    "ctype": "int[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "dailyRerollCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "SingleArenaRewardResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "receivedMissionSteps",
+    "ctype": "List<int>",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "rewardListResponseData",
+    "ctype": "RewardListResponseData",
+    "jtype": "object",
+    "default": null
+   }
+  ]
+ },
+ "SingleArenaRankingResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "rankings",
+    "ctype": "List<PvPRankingResponseModel.PvPRankingData>",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "myRanking",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "myPoints",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "PvPMatchRerollResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "targets",
+    "ctype": "PvPDeckInfo[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "cash",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "pvpMatchRerollUsedCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
    }
   ]
  },
@@ -7558,6 +8530,12 @@
     "default": []
    },
    {
+    "name": "adChargeSeasonalEventFlagRemainCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
     "name": "seasonalEventUntilAtDate",
     "ctype": "string",
     "jtype": "string",
@@ -7745,6 +8723,42 @@
    },
    {
     "name": "prevMissionId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "AdChargeSeasonalEventFlagResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "modeId",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "playCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "adChargeSeasonalEventFlagRemainCount",
     "ctype": "int",
     "jtype": "int",
     "default": 0
@@ -8794,6 +9808,30 @@
     "default": 0
    },
    {
+    "name": "overcome",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dimensionLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "incarnationSkillLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "incarnationUltimateSkillLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
     "name": "treasure",
     "ctype": "TreasureModel",
     "jtype": "object",
@@ -8915,6 +9953,30 @@
    },
    {
     "name": "potentialTier",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "overcome",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dimensionLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "incarnationSkillLevel",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "incarnationUltimateSkillLevel",
     "ctype": "int",
     "jtype": "int",
     "default": 0
@@ -9958,6 +11020,12 @@
     "default": 0
    },
    {
+    "name": "adChargeLaborRemainCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
     "name": "buildingDatas",
     "ctype": "List<TerritoryBuildingResponseModel>",
     "jtype": "array",
@@ -10037,6 +11105,12 @@
    },
    {
     "name": "storedLabor",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "adChargeLaborRemainCount",
     "ctype": "int",
     "jtype": "int",
     "default": 0
@@ -10499,6 +11573,36 @@
    },
    {
     "name": "storedLabor",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
+ "TerritoryAdChargeLaborResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "labor",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "adChargeLaborRemainCount",
     "ctype": "int",
     "jtype": "int",
     "default": 0
@@ -12190,6 +13294,18 @@
     "default": null
    },
    {
+    "name": "passPurchased",
+    "ctype": "bool",
+    "jtype": "bool",
+    "default": false
+   },
+   {
+    "name": "continuousRewardCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
     "name": "eventId",
     "ctype": "int",
     "jtype": "int",
@@ -13379,6 +14495,36 @@
    }
   ]
  },
+ "AdChargeRiftGaugeResponseModel": {
+  "ns": "Awesomepiece.Model",
+  "base": "ResponseModel",
+  "fields": [
+   {
+    "name": "code",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "msg",
+    "ctype": "string",
+    "jtype": "string",
+    "default": null
+   },
+   {
+    "name": "riftGauge",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "adChargeRiftGaugeRemainCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   }
+  ]
+ },
  "AdLogResponseModel": {
   "ns": "Awesomepiece.Model",
   "base": "ResponseModel",
@@ -14002,6 +15148,12 @@
     "default": null
    },
    {
+    "name": "dailyRewardClaimedDifficulty",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
     "name": "seasonEnabled",
     "ctype": "bool",
     "jtype": "bool",
@@ -14048,6 +15200,84 @@
     "ctype": "ChallengeModeRankingResponseModel.ChallengeModeRankingData",
     "jtype": "object",
     "default": null
+   }
+  ]
+ },
+ "SingleArenaTestRequestModel": {
+  "ns": "Awesomepiece.Model",
+  "base": null,
+  "fields": [
+   {
+    "name": "points",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "bestPoints",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "ap",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "attackCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dailyAttackCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dailyDefenseLoseCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dailyAttackDeckChangeCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dailyDefenseDeckChangeCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "dailyRerollCount",
+    "ctype": "int",
+    "jtype": "int",
+    "default": 0
+   },
+   {
+    "name": "clearMatches",
+    "ctype": "bool",
+    "jtype": "bool",
+    "default": false
+   },
+   {
+    "name": "poolIds",
+    "ctype": "int[]",
+    "jtype": "array",
+    "default": []
+   },
+   {
+    "name": "userIds",
+    "ctype": "string[]",
+    "jtype": "array",
+    "default": []
    }
   ]
  }

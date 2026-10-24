@@ -1927,6 +1927,95 @@
         <ReqLevel>6</ReqLevel>
     </Theme>
     
+    <Theme ID='209'>
+        <NameComment>단판제 아레나 편성</NameComment>
+        <Name>PvPSeasonChapter</Name>
+        <TimeBonus>5</TimeBonus>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <StartGold>200</StartGold>
+
+        <Map>Seasonal_Event_Wind</Map>
+
+        <MaxStage>1</MaxStage>
+
+        <LateComersCount>3</LateComersCount>
+        <PauseComment>SingleArena_RetreatWarning</PauseComment>
+
+        <SingleArenaDeckRecord>true</SingleArenaDeckRecord>
+        <UseBarricade>false</UseBarricade>
+        <EventMode>true</EventMode>
+        <GameSave>false</GameSave>
+        <CanSurrender>true</CanSurrender>
+        <UseEventBox>true</UseEventBox>
+        <FastRandomItem>true</FastRandomItem>
+        <RoundEndCamMove>false</RoundEndCamMove>
+
+        <NormalMusic>SingleArena_Ready</NormalMusic>
+        <BattleMusic>SingleArena_Battle</BattleMusic>
+        <BossMusic>SingleArena_Battle</BossMusic>
+    </Theme>
+
+    <Theme ID='210'>
+        <NameComment>단판제 아레나</NameComment>
+        <Name>SingleArena_Title</Name>
+
+        <GoldRewardRatio>0</GoldRewardRatio>
+        <ExpRewardRatio>0</ExpRewardRatio>
+
+        <NormalMusic>SingleArena_Ready</NormalMusic>
+        <BattleMusic>SingleArena_Battle</BattleMusic>
+        <BossMusic>SingleArena_Battle</BossMusic>
+
+        <BaseGold>0</BaseGold>
+        <BaseExp>0</BaseExp>
+
+        <ClearGold>0</ClearGold>
+        <ClearExp>0</ClearExp>
+
+        <Map>Seasonal_Event_Wind</Map>
+        <Barricade>Barricade_01a</Barricade>
+
+        <StartGold>0</StartGold>
+
+        <TimeBonus>5</TimeBonus>
+
+        <EventMode>true</EventMode>
+        <PvPMode>true</PvPMode>
+        <SingleArena>true</SingleArena>
+        <MasterValueRatio>0.2</MasterValueRatio>
+        <MasterAddCCRatio>-0.5</MasterAddCCRatio>
+        <StageHealRatioToDef>true</StageHealRatioToDef>
+        <DefaultDef>500</DefaultDef>
+        <GetItemByKill>false</GetItemByKill>
+        <UseBarricade>false</UseBarricade>
+        <Weight>false</Weight>
+        <GameSave>false</GameSave>
+        <FastRandomItem>true</FastRandomItem>
+        <ShowStageNum>true</ShowStageNum>
+        <SkipStageWhenLose>true</SkipStageWhenLose>
+        <FixEliteLevels>0,0,0,0,0</FixEliteLevels>
+        <RoundEndCamMove>false</RoundEndCamMove>
+        <InitialCam>0</InitialCam>
+        <GoldAreaActive>false</GoldAreaActive>
+        <UnitCountAreaActive>false</UnitCountAreaActive>
+        <PauseComment>PvPPauseComment</PauseComment>
+        <FixCamposToField>true</FixCamposToField>
+        <DisableWaitingField>false</DisableWaitingField>
+
+        <MaxRewardGold>450</MaxRewardGold>
+
+        <MaxStage>1</MaxStage>
+    </Theme>
+
     <Theme ID="300">
         <NameComment>(구) 시련의 탑</NameComment>
         
@@ -2319,8 +2408,8 @@
         <ClearGold>0</ClearGold>
         <ClearExp>0</ClearExp>
 
-        <Map>Seasonal_Event_Dragon</Map>
-        <ModeBackgroundSprite>Themes_Background_1000_S72</ModeBackgroundSprite>
+        <Map>Seasonal_Event_Fairytale</Map>
+        <ModeBackgroundSprite>Themes_Background_1000_S61</ModeBackgroundSprite>
         <Barricade>Barricade_01a</Barricade>
 
         <StartGold>25</StartGold>
@@ -2379,8 +2468,8 @@
         <ClearExp>0</ClearExp>
 
         <QuizMode>true</QuizMode>
-        <Map>Seasonal_Event_Dragon</Map>
-        <ModeBackgroundSprite>Themes_Background_1000_S72</ModeBackgroundSprite>
+        <Map>Seasonal_Event_Fairytale</Map>
+        <ModeBackgroundSprite>Themes_Background_1000_S61</ModeBackgroundSprite>
         <Barricade>Barricade_01a</Barricade>
 
         <ShowDeckPreviewInPausePanel>false</ShowDeckPreviewInPausePanel>

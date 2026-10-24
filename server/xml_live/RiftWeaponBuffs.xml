@@ -326,20 +326,20 @@
     </BuffData>
     
     <BuffData ID="160" Building="1,2,4">
-        <Comment>사거리 +x 증가</Comment>
+        <Comment>이동속도 +x%</Comment>
 
-        <Sprite>PotentialIcon_05</Sprite>
-        
+        <Sprite>PotentialIcon_04</Sprite>
+
         <DescParams>
             <CalculatedValue>0</CalculatedValue>
         </DescParams>
-        
+
         <BuffOptions>
             <Conditions> <Once/> </Conditions>
             <Targets> <Self/> </Targets>
             <RangeInfo> </RangeInfo>
-            <BuffContents> <AddStat StatType="Range" StatValueType="BaseValue" /> </BuffContents>
-            <Values> <RiftWeaponBuildingRatio RoundDigits="0">0.2000001</RiftWeaponBuildingRatio> </Values>
+            <BuffContents> <AddStat StatType="MoveSpeed" StatValueType="PerValue" /> </BuffContents>
+            <Values> <RiftWeaponBuildingRatio>1.2</RiftWeaponBuildingRatio> </Values>
         </BuffOptions>
     </BuffData>
 

@@ -2,9 +2,14 @@
  "Auth": {
   "request": null,
   "response": "AuthResponseModel",
-  "args": "string id, string cookie = \"\""
+  "args": "string id, string cookie"
  },
  "Login": {
+  "request": null,
+  "response": "AuthResponseModel",
+  "args": "string token, string cookie = \"\""
+ },
+ "NextDay": {
   "request": null,
   "response": "AuthResponseModel",
   "args": "string token, string cookie = \"\""
@@ -284,6 +289,51 @@
   "response": "EventModeResponseModel",
   "args": ""
  },
+ "FetchSingleArenaInfo": {
+  "request": null,
+  "response": "SingleArenaInfoResponseModel",
+  "args": ""
+ },
+ "FetchSingleArenaRewardInfo": {
+  "request": null,
+  "response": "SingleArenaRewardInfoResponseModel",
+  "args": ""
+ },
+ "SingleArenaMatching": {
+  "request": null,
+  "response": "SingleArenaMatchResponseModel",
+  "args": ""
+ },
+ "SingleArenaMatchingReroll": {
+  "request": null,
+  "response": "SingleArenaMatchResponseModel",
+  "args": "bool isByAd"
+ },
+ "ReceiveSingleArenaMissionReward": {
+  "request": "SingleArenaRewardRequestModel",
+  "response": "SingleArenaRewardResponseModel",
+  "args": "SingleArenaRewardRequestModel model"
+ },
+ "ReceiveSingleArenaRankReward": {
+  "request": "SingleArenaRewardRequestModel",
+  "response": "SingleArenaRewardResponseModel",
+  "args": "SingleArenaRewardRequestModel model"
+ },
+ "ReceiveSingleArenaRankAllRewards": {
+  "request": null,
+  "response": "SingleArenaRewardResponseModel",
+  "args": ""
+ },
+ "GetSingleArenaRanking": {
+  "request": null,
+  "response": "SingleArenaRankingResponseModel",
+  "args": ""
+ },
+ "FetchSingleArenaLogHistory": {
+  "request": "SingleArenaLogRequestModel",
+  "response": "SingleArenaLogResponseModel",
+  "args": "SingleArenaLogRequestModel model"
+ },
  "FetchPvPInfo": {
   "request": null,
   "response": "PvPInfoResponseModel",
@@ -297,6 +347,11 @@
  "TestPvPMatching": {
   "request": null,
   "response": "PvPMatchResponseModel",
+  "args": ""
+ },
+ "PvPMatchingReroll": {
+  "request": null,
+  "response": "PvPMatchRerollResponseModel",
   "args": ""
  },
  "PvPReceiveAllRewards": {
@@ -383,6 +438,56 @@
   "request": null,
   "response": "CardResponseModel",
   "args": "int cardId"
+ },
+ "TestDimensionUnitAcquire": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int unitId"
+ },
+ "TestDimensionUnitSetLevel": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int unitId, int level"
+ },
+ "TestDimensionUnitSetOvercome": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int unitId, int overcome"
+ },
+ "TestIncarnationUnitAcquire": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int unitId"
+ },
+ "TestIncarnationUnitSetSkillLevel": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int unitId, int level"
+ },
+ "TestIncarnationUnitSetUltimateSkillLevel": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int unitId, int level"
+ },
+ "TestIncarnationUnitSetOvercome": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "int unitId, int overcome"
+ },
+ "DimensionUpgrade": {
+  "request": null,
+  "response": "DimensionUpgradeResponseModel",
+  "args": "int unitId, int count"
+ },
+ "DimensionOvercome": {
+  "request": null,
+  "response": "DimensionOvercomeResponseModel",
+  "args": "int unitId, int count"
+ },
+ "IncarnationOvercome": {
+  "request": null,
+  "response": "IncarnationOvercomeResponseModel",
+  "args": "int unitId, int count"
  },
  "UpgradeCard": {
   "request": "UpgradeCardRequestModel",
@@ -723,6 +828,11 @@
   "request": "RerollPassMissionRequestModel",
   "response": "RerollPassMissionResponseModel",
   "args": "RerollPassMissionRequestModel model"
+ },
+ "AdChargeSeasonalEventFlag": {
+  "request": "AdChargeSeasonalEventFlagRequestModel",
+  "response": "AdChargeSeasonalEventFlagResponseModel",
+  "args": "AdChargeSeasonalEventFlagRequestModel model"
  },
  "FetchClan": {
   "request": null,
@@ -1254,6 +1364,11 @@
   "response": "TerritoryCollectLaborResponseModel",
   "args": "int amount"
  },
+ "TerritoryAdChargeLabor": {
+  "request": null,
+  "response": "TerritoryAdChargeLaborResponseModel",
+  "args": ""
+ },
  "AssignTerritoryLevelSync": {
   "request": "AssignTerritoryLevelSyncRequestModel",
   "response": "TerritoryLevelSyncResponseModel",
@@ -1649,6 +1764,11 @@
   "response": "RiftCrystalResultResponseModel",
   "args": ""
  },
+ "AdChargeRiftGauge": {
+  "request": null,
+  "response": "AdChargeRiftGaugeResponseModel",
+  "args": ""
+ },
  "FetchShopEventCumulativePurchase": {
   "request": null,
   "response": "ShopEventCumulativePurchaseResponseModel",
@@ -1790,6 +1910,11 @@
   "args": ""
  },
  "ChallengeModeReward": {
+  "request": "ChallengeModeRequestModel",
+  "response": "ChallengeModeResponseModel",
+  "args": "ChallengeModeRequestModel model"
+ },
+ "ChallengeModeDailyReward": {
   "request": "ChallengeModeRequestModel",
   "response": "ChallengeModeResponseModel",
   "args": "ChallengeModeRequestModel model"
@@ -2139,6 +2264,11 @@
   "response": "TestGetDeckResponseModel",
   "args": ""
  },
+ "DevCloneLiveUserData": {
+  "request": null,
+  "response": "ResponseModel",
+  "args": "string loginId, int accountId"
+ },
  "TestKGMarbleRequest": {
   "request": "TestRequestModel",
   "response": "KGMarbleResponseModel",
@@ -2150,6 +2280,11 @@
   "args": ""
  },
  "TestStoryRequest": {
+  "request": "TestRequestModel",
+  "response": "ResponseModel",
+  "args": "TestRequestModel model"
+ },
+ "TestStoryClearedPageSet": {
   "request": "TestRequestModel",
   "response": "ResponseModel",
   "args": "TestRequestModel model"

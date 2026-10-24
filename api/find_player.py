@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from api.config import SESSION
 from api.player.player import get_other_player
 from api.colosseum.colosseum import fetch_players_data
-from api.ranking.ranking import get_ranking, get_colosseum_ranking
+from api.ranking.ranking import get_ranking, get_colosseum_ranking, get_pvp_ranking
 
 
 def search_by_match(game_id: str):
@@ -70,9 +70,23 @@ def search_by_id(account_id: int):
         print(f"[-] Error: {e}")
 
 
+def _current_colosseum_season() -> int:
+    """Season must come from the live /colosseum response - hardcoding it goes
+    stale every season (was 69 while the live one is 73)."""
+    from api.ranking.fetch_seasonal import current_season
+    return current_season("colosseum")
+
+
 def search_by_name(player_name: str):
     print(f"[*] Searching for player '{player_name}' in ranking databases...")
-    
+
+    try:
+        season = _current_colosseum_season()
+        print(f"[*] Current Strife season: {season}")
+    except Exception as e:
+        season = None
+        print(f"[!] Could not read current season ({e}) - skipping Strife ranking.")
+
     def do_search(exact: bool):
         found = []
         # 1. Search in normal ranking
@@ -88,18 +102,33 @@ def search_by_name(player_name: str):
             pass
 
         # 2. Search in colosseum (Strife) ranking
+        if season:
+            try:
+                col_rank = get_colosseum_ranking(season=season, use_cache=True)
+                if isinstance(col_rank, dict):
+                    for entry in col_rank.get("ranking", []):
+                        uname = entry.get("userName", "")
+                        if (exact and uname.lower() == player_name.lower()) or (not exact and (player_name.lower() in uname.lower() or uname.lower() in player_name.lower())):
+                            entry["source"] = "Strife (Colosseum) Ranking"
+                            found.append(entry)
+            except Exception as e:
+                pass
+
+        # 3. Search in Arena (PvP) ranking
         try:
-            col_rank = get_colosseum_ranking(season=69, use_cache=True) # current season
-            if isinstance(col_rank, dict):
-                for entry in col_rank.get("ranking", []):
+            from api.ranking.fetch_seasonal import current_season
+            pvp_season = current_season("pvp")
+            pvp_rank = get_pvp_ranking(season=pvp_season, use_cache=True)
+            if isinstance(pvp_rank, dict):
+                for entry in pvp_rank.get("ranking", []):
                     uname = entry.get("userName", "")
                     if (exact and uname.lower() == player_name.lower()) or (not exact and (player_name.lower() in uname.lower() or uname.lower() in player_name.lower())):
-                        entry["source"] = "Strife (Colosseum) Ranking"
+                        entry["source"] = f"Arena (PvP) Ranking (Season {pvp_season})"
                         found.append(entry)
         except Exception as e:
             pass
 
-        # 3. Search in local ranking.json
+        # 4. Search in local ranking.json
         try:
             json_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ranking.json")
             if os.path.exists(json_path):

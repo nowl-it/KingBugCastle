@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    단판 아레나의 횟수 제한, 매칭, 승점, 보상 설정. AP는 덱 전투력, Points는 랭크를 결정하는 승점이다. Per는 백분율(%) 단위이다. 등급 번호: 10
+    브론즈, 20 실버, 30 골드, 40 플래티넘, 50 다이아, 60 킹, 70 갓, 80 킹갓. 11~13처럼 끝자리가 붙으면 해당 등급의 세부 단계이다. 이벤트 일정은
+    이 파일이 아닌 별도 이벤트 설정을 따른다.
+-->
+<SingleArenaSettings>
+    <!-- 하루 공격 전투 가능 횟수. 전투 결과와 관계없이 인게임 진입 시 1회 사용한다. -->
+    <DailyAttackCount>5</DailyAttackCount>
+    <!-- 하루 방어 패배 중 승점 차감을 적용하는 최대 횟수. 초과한 방어 패배는 승점을 차감하지 않는다. 방어 전투 발생 횟수 제한은 아니다. -->
+    <DailyDefenseLoseCount>3</DailyDefenseLoseCount>
+    <!-- 하루 공격 진영 재편성 가능 횟수. 편성용 인게임 진입 시 사용한다. 공격·방어 진영이 모두 없는 최초 생성은 제외한다. -->
+    <DailyAttackDeckChangeCount>5</DailyAttackDeckChangeCount>
+    <!-- 하루 방어 진영 재편성 가능 횟수. 편성용 인게임 진입 시 사용한다. 공격·방어 진영이 모두 없는 최초 생성은 제외한다. -->
+    <DailyDefenseDeckChangeCount>1</DailyDefenseDeckChangeCount>
+    <!-- 하루 상대 무료 재탐색 횟수. 무료 횟수를 먼저 사용한다. -->
+    <DailyMatchRerollFreeCount>3</DailyMatchRerollFreeCount>
+    <!-- 무료 횟수 소진 후 광고로 추가 재탐색할 수 있는 하루 횟수. 현재 하루 총 한도는 무료 3회 + 광고 10회이다. -->
+    <DailyMatchRerollAdCount>10</DailyMatchRerollAdCount>
+    <!-- 이전 클라이언트 호환을 위해 남긴 미사용 설정. 현재 보석 재탐색은 없으며, 값을 늘려도 현행 클라·서버에서 활성화되지 않는다. 0을 유지한다. -->
+    <DailyMatchRerollCashCount>0</DailyMatchRerollCashCount>
+
+    <!-- 상대 탐색 시 적용할 전투력 범위와 선택 가중치. 아래 비율은 내 덱 전투력을 기준으로 계산한다. -->
+    <Matching>
+        <!-- 킹 미만 쉬움 상대의 전투력 상한 보정률. -30이면 내 전투력의 70% 이하를 찾는다. -->
+        <EasyApPer>-30</EasyApPer>
+        <!-- 킹 미만 보통 상대의 전투력 허용 폭. 15이면 내 전투력의 85~115% 범위에서 찾는다. 상한에는 NormalApCap도 적용한다. -->
+        <NormalApPer>15</NormalApPer>
+        <!-- 킹 미만 어려움 상대의 전투력 하한 보정률. 30이면 내 전투력의 130% 이상을 찾는다. -->
+        <HardApPer>30</HardApPer>
+        <!-- 킹 이상 쉬움 탐색 경로의 전투력 상한 보정률. -35이면 내 전투력의 65% 이하이다. -->
+        <KingEasyApPer>-35</KingEasyApPer>
+        <!-- 킹 이상 어려움 탐색 경로의 전투력 하한 보정률. 35이면 내 전투력의 135% 이상이다. -->
+        <KingHardApPer>35</KingHardApPer>
+        <!--
+            보통 상대 전투력의 절대 상한(기획서 매칭 랭크 AP). Tier는 큰 등급 번호, MaxAp는 상대 전투력의 최댓값이며 비율 상한과 비교해 더 작은 값을 쓴다.
+            범위에 후보가 없으면 해당 등급 봇을 배치한다. 쉬움·어려움에는 적용하지 않는다. 미등록 등급에는 별도 절대 상한이 없고 킹 이상에는 적용하지 않는다.
+        -->
+        <NormalApCap Tier="10" MaxAp="1600"/>
+        <NormalApCap Tier="20" MaxAp="5000"/>
+        <NormalApCap Tier="30" MaxAp="20000"/>
+        <NormalApCap Tier="40" MaxAp="80000"/>
+        <NormalApCap Tier="50" MaxAp="120000"/>
+        <!--
+            킹 이상 보통 상대의 탐색 범위를 위에서 아래 순서로 넓힌다. LowPer는 내 전투력보다 낮은 쪽 허용 %, HighPer는 높은 쪽 허용 %이다. 첫 범위에 후보가
+            없을 때만 다음 행을 시도한다. 현재 ±15%, ±25%, ±35% 순서이다.
+        -->
+        <SearchStep LowPer="15" HighPer="15"/>
+        <SearchStep LowPer="25" HighPer="25"/>
+        <SearchStep LowPer="35" HighPer="35"/>
+        <!--
+            오늘 방어 전투를 치른 횟수별 상대 선택 가중치. 쉼표 순서대로 0회, 1회, 2회, 3회 이상에 적용한다. 100,70,30,10은 상대적인 선택 비중이며 확률(%)이
+            아니다. 마지막 값은 그 이상의 횟수에도 계속 적용된다.
+        -->
+        <ExposeWeights>100,70,30,10</ExposeWeights>
+    </Matching>
+
+    <!-- 쉬움 공격 승리 시 AttackPoint.Win에 더할 승점. -10이면 기본 승리 승점에서 10점을 뺀다. 전투력을 변경하는 값이 아니다. -->
+    <ApBonusEasy>-10</ApBonusEasy>
+    <!-- 보통 공격 승리 시 AttackPoint.Win에 더할 승점. 최종 승리 승점은 최소 0점이다. -->
+    <ApBonusNormal>0</ApBonusNormal>
+    <!-- 어려움 공격 승리 시 AttackPoint.Win에 더할 승점. 10이면 기본 승리 승점에 10점을 더한다. -->
+    <ApBonusHard>10</ApBonusHard>
+
+    <!-- 쉬움 공격 패배 승점의 보정값. AttackPoint의 LoseEasy가 없거나 음수일 때만 Lose에 더한다. LoseEasy가 0 이상이면 그 값을 그대로 사용한다. -->
+    <LoseApBonusEasy>-5</LoseApBonusEasy>
+    <!-- 보통 공격 패배 시 AttackPoint.Lose에 더할 승점. 최종값에는 MinimumAttackLosePoint 하한을 적용한다. -->
+    <LoseApBonusNormal>0</LoseApBonusNormal>
+    <!-- 어려움 공격 패배 승점의 보정값. AttackPoint의 LoseHard가 없거나 음수일 때만 Lose에 더한다. LoseHard가 0 이상이면 그 값을 그대로 사용한다. -->
+    <LoseApBonusHard>5</LoseApBonusHard>
+    <!-- Lose + 난이도별 패배 보정값으로 계산할 때의 최소 승점. LoseEasy/LoseHard에 직접 지정한 0 이상 값에는 적용하지 않는다. -->
+    <MinimumAttackLosePoint>0</MinimumAttackLosePoint>
+
+    <!-- 승점에 따른 세부 등급 기준표. ReqPoints가 낮은 순서로 배치한다. -->
+    <RankTiers>
+        <!-- 등급 한 단계. ID는 등급 번호, ReqPoints는 해당 등급 진입에 필요한 최소 승점이다. 여러 기준을 만족하면 아래쪽의 더 높은 등급을 적용한다. -->
+        <RankTier ID="10" ReqPoints="0"/>
+        <RankTier ID="11" ReqPoints="50"/>
+        <RankTier ID="12" ReqPoints="100"/>
+        <RankTier ID="13" ReqPoints="150"/>
+        <RankTier ID="20" ReqPoints="200"/>
+        <RankTier ID="21" ReqPoints="250"/>
+        <RankTier ID="22" ReqPoints="300"/>
+        <RankTier ID="23" ReqPoints="350"/>
+        <RankTier ID="30" ReqPoints="400"/>
+        <RankTier ID="31" ReqPoints="450"/>
+        <RankTier ID="32" ReqPoints="500"/>
+        <RankTier ID="33" ReqPoints="550"/>
+        <RankTier ID="40" ReqPoints="600"/>
+        <RankTier ID="41" ReqPoints="650"/>
+        <RankTier ID="42" ReqPoints="700"/>
+        <RankTier ID="43" ReqPoints="750"/>
+        <RankTier ID="50" ReqPoints="800"/>
+        <RankTier ID="51" ReqPoints="850"/>
+        <RankTier ID="52" ReqPoints="900"/>
+        <RankTier ID="53" ReqPoints="950"/>
+        <RankTier ID="60" ReqPoints="1000"/>
+        <RankTier ID="70" ReqPoints="1200"/>
+        <RankTier ID="80" ReqPoints="1400"/>
+    </RankTiers>
+
+    <!-- 공격 전투 승패별 승점 표. Tier는 큰 등급 번호이며 같은 등급의 세부 단계에 공통 적용한다. 킹 이상은 Tier=60 행을 함께 사용한다. -->
+    <AttackPoints>
+        <!--
+            Win은 승리 기본 승점(난이도별 ApBonus를 더함), Lose는 보통 패배 기본 승점이다. LoseEasy/LoseHard는 쉬움/어려움 패배 시 직접 적용할
+            승점이다. 패배 값이 양수이면 패배해도 승점을 얻는다. WinEasy/WinHard는 쉬움/어려움 승리 시 직접 적용할 승점이며, 0 이상이면 ApBonus를 더하지
+            않고 그 값을 그대로 사용한다. 예: 브론즈 승리 20/30/40점, 패배 0/5/10점(쉬움/보통/어려움).
+        -->
+        <AttackPoint Tier="10" Win="30" Lose="5" LoseEasy="0" LoseHard="10"/>
+        <AttackPoint Tier="20" Win="28" Lose="4" LoseEasy="0" LoseHard="9"/>
+        <AttackPoint Tier="30" Win="26" Lose="3" LoseEasy="0" LoseHard="8"/>
+        <AttackPoint Tier="40" Win="24" Lose="2" LoseEasy="0" LoseHard="7"/>
+        <AttackPoint Tier="50" Win="22" Lose="1" LoseEasy="0" LoseHard="5"/>
+        <AttackPoint Tier="60" Win="20" Lose="0" LoseEasy="0" LoseHard="0"/>
+    </AttackPoints>
+
+    <!--
+        특정 시즌에만 AttackPoints 대신 적용할 공격 승점 표. Season은 적용할 시즌 번호, SemiSeason은 격전의 전장 기준 전반기(1)/후반기(2)이며
+        생략하면 시즌 전체에 적용한다. 행 형식은 AttackPoints와 같고, 해당 시즌에 없는 Tier는 이 표의 마지막 행을 사용한다. 74시즌 후반기 임시
+        승점이며 시즌 종료 후 삭제한다.
+    -->
+    <SeasonAttackPoints Season="74" SemiSeason="2">
+        <AttackPoint Tier="10" Win="45" WinEasy="30" WinHard="60" Lose="8" LoseEasy="0" LoseHard="15"/>
+        <AttackPoint Tier="20" Win="42" WinEasy="28" WinHard="56" Lose="7" LoseEasy="0" LoseHard="14"/>
+        <AttackPoint Tier="30" Win="39" WinEasy="26" WinHard="52" Lose="6" LoseEasy="0" LoseHard="13"/>
+        <AttackPoint Tier="40" Win="27" WinEasy="16" WinHard="38" Lose="2" LoseEasy="0" LoseHard="8"/>
+        <AttackPoint Tier="50" Win="24" WinEasy="14" WinHard="35" Lose="1" LoseEasy="0" LoseHard="6"/>
+        <AttackPoint Tier="60" Win="20" WinEasy="10" WinHard="30" Lose="0" LoseEasy="0" LoseHard="0"/>
+    </SeasonAttackPoints>
+
+    <!-- 방어 패배 시 적용할 승점 변화량. 하루 적용 횟수는 DailyDefenseLoseCount를 따른다. 킹 이상은 Tier=60 행을 함께 사용한다. -->
+    <DefenseLosePoints>
+        <!-- Tier는 큰 등급 번호, Lose는 방어 패배 1회당 승점 변화량이다. -4이면 4점 차감, 0이면 차감 없음. 차감 후 총 승점은 0 미만으로 내려가지 않는다. -->
+        <DefenseLosePoint Tier="10" Lose="0"/>
+        <DefenseLosePoint Tier="20" Lose="-2"/>
+        <DefenseLosePoint Tier="30" Lose="-4"/>
+        <DefenseLosePoint Tier="40" Lose="-6"/>
+        <DefenseLosePoint Tier="50" Lose="-8"/>
+        <DefenseLosePoint Tier="60" Lose="-10"/>
+    </DefenseLosePoints>
+
+    <!-- 해당 시즌의 누적 공격 참여 횟수 보상. 승리 횟수가 아니라 공격 인게임 진입 횟수로 판정하며, 각 단계는 시즌당 한 번 수령한다. -->
+    <MissionRewards>
+        <!--
+            Step은 보상 수령 여부를 구분하는 고유 단계 번호(0부터 시작), AttackCount는 필요한 누적 공격 횟수이다. 이미 운영 중인 Step을 바꾸거나 재사용하면
+            수령 이력이 달라질 수 있다. 내부 Reward가 지급 보상이다.
+        -->
+        <MissionReward Step="0" AttackCount="1">
+            <!--
+                지급할 보상 한 종류. Type은 Gold=골드, Cash=보석, InventoryItem=아이템이다. ID는 InventoryItem의 아이템 데이터 번호이며
+                Gold/Cash에서는 생략한다. Count는 지급 수량이다. 한 단계 안에 Reward를 여러 줄 넣으면 함께 지급한다.
+            -->
+            <Reward Type="Gold" Count="100000"/>
+        </MissionReward>
+        <MissionReward Step="1" AttackCount="5">
+            <Reward Type="Token_SEASONAL_EVENT" Count="200"/>
+        </MissionReward>
+        <MissionReward Step="2" AttackCount="10">
+            <Reward Type="Cash" Count="100"/>
+        </MissionReward>
+        <MissionReward Step="3" AttackCount="15">
+            <Reward Type="Key" ID="370" Count="5"/>
+        </MissionReward>
+        <MissionReward Step="4" AttackCount="20">
+            <Reward Type="Gold" Count="100000"/>
+        </MissionReward>
+        <MissionReward Step="5" AttackCount="25">
+            <Reward Type="Token_SEASONAL_EVENT" Count="300"/>
+        </MissionReward>
+        <MissionReward Step="6" AttackCount="30">
+            <Reward Type="Cash" Count="100"/>
+        </MissionReward>
+        <MissionReward Step="7" AttackCount="35">
+            <Reward Type="Key" ID="370" Count="5"/>
+        </MissionReward>
+        <MissionReward Step="8" AttackCount="40">
+            <Reward Type="Token_SEASONAL_EVENT" Count="500"/>
+        </MissionReward>
+        <MissionReward Step="9" AttackCount="45">
+            <Reward Type="InventoryItem" ID="3200" Count="1"/>
+        </MissionReward>
+        <MissionReward Step="10" AttackCount="50">
+            <Reward Type="Key" ID="70000" Count="5"/>
+        </MissionReward>
+    </MissionRewards>
+
+    <!-- 해당 시즌 최고 달성 등급에 따른 1회 보상. 현재 승점이 내려가도 이미 달성한 등급의 보상은 받을 수 있다. 시즌 종료 순위 보상(RankingRewards)과 별개이다. -->
+    <RankRewards>
+        <!-- Tier는 보상을 받을 최소 세부 등급 번호(RankTier.ID)이다. 해당 등급별로 시즌당 한 번 수령하며 내부 Reward가 지급 보상이다. -->
+        <RankReward Tier="11">
+            <Reward Type="Gold" Count="50000"/>
+        </RankReward>
+        <RankReward Tier="12">
+            <Reward Type="UnitExpItem" Count="1000"/>
+        </RankReward>
+        <RankReward Tier="13">
+            <Reward Type="UnitSoulItem" Count="200"/>
+        </RankReward>
+        <RankReward Tier="20">
+            <Reward Type="Key" ID="370" Count="5"/>
+        </RankReward>
+        <RankReward Tier="21">
+            <Reward Type="Gold" Count="100000"/>
+        </RankReward>
+        <RankReward Tier="22">
+            <Reward Type="UnitExpItem" Count="1000"/>
+        </RankReward>
+        <RankReward Tier="23">
+            <Reward Type="Cash" Count="100"/>
+        </RankReward>
+        <RankReward Tier="30">
+            <Reward Type="Key" ID="370" Count="10"/>
+        </RankReward>
+        <RankReward Tier="31">
+            <Reward Type="InventoryItem" ID="4102" Count="5"/>
+        </RankReward>
+        <RankReward Tier="32">
+            <Reward Type="UnitSoulItem" Count="300"/>
+        </RankReward>
+        <RankReward Tier="33">
+            <Reward Type="Cash" Count="100"/>
+        </RankReward>
+        <RankReward Tier="40">
+            <Reward Type="Key" ID="370" Count="10"/>
+        </RankReward>
+        <RankReward Tier="41">
+            <Reward Type="InventoryItem" ID="3102" Count="5"/>
+        </RankReward>
+        <RankReward Tier="42">
+            <Reward Type="Key" ID="390" Count="10"/>
+        </RankReward>
+        <RankReward Tier="43">
+            <Reward Type="InventoryItem" ID="3200" Count="1"/>
+        </RankReward>
+        <RankReward Tier="50">
+            <Reward Type="Key" ID="370" Count="10"/>
+        </RankReward>
+        <RankReward Tier="51">
+            <Reward Type="InventoryItem" ID="10010" Count="100000"/>
+        </RankReward>
+        <RankReward Tier="52">
+            <Reward Type="Key" ID="70000" Count="5"/>
+        </RankReward>
+        <RankReward Tier="53">
+            <Reward Type="Treasure_Special" Count="1"/>
+        </RankReward>
+        <RankReward Tier="60">
+            <Reward Type="Flag" ID="60000" Count="1"/>
+        </RankReward>
+    </RankRewards>
+    <!-- 시즌 종료 순위별 보상 표. Start/End 순위가 겹치지 않도록 배치한다. -->
+    <RankingRewards>
+        <!--
+            Start는 적용 시작 순위, End는 적용 마지막 순위이며 양 끝을 포함한다. Cash는 해당 구간의 보석 지급 수량이다. 예: Start=4, End=10은
+            4~10위에게 같은 보상을 지급한다. 하위 Reward는 보석과 함께 지급하는 추가 보상이다.
+        -->
+        <RankingReward Start="1" End="1" Cash="1500">
+            <Reward Type="Flag" ID="60010" Count="1"/>
+        </RankingReward>
+        <RankingReward Start="2" End="2" Cash="1000">
+            <Reward Type="Flag" ID="60010" Count="1"/>
+        </RankingReward>
+        <RankingReward Start="3" End="3" Cash="700">
+            <Reward Type="Flag" ID="60010" Count="1"/>
+        </RankingReward>
+        <RankingReward Start="4" End="10" Cash="500">
+            <Reward Type="Flag" ID="60010" Count="1"/>
+        </RankingReward>
+        <RankingReward Start="11" End="30" Cash="400">
+            <Reward Type="Flag" ID="60010" Count="1"/>
+        </RankingReward>
+        <RankingReward Start="31" End="100" Cash="300">
+            <Reward Type="Flag" ID="60010" Count="1"/>
+        </RankingReward>
+        <RankingReward Start="101" End="300" Cash="200"/>
+    </RankingRewards>
+</SingleArenaSettings>
