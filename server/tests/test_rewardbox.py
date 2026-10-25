@@ -138,6 +138,35 @@ def check_use_inventory():
     print("ok useInventory: item spent, inventory returned as List<InventoryItem>")
 
 
+def check_use_inventory_opens_box():
+    """A reward box routed to /player/useInventory (voucher/quick-use panel) must be
+    OPENED, not silently spent - the "Dimensional Piece bundle grants nothing" hole."""
+    st = _fresh()
+    server._grant_reward(st, "Item", 8300, 2)
+    server.save_state(st)
+    out = server.r_use_inventory({"itemID": 8300, "count": 1}, server.load_state())
+    rewards = out.get("addedRewardList", {}).get("rewardList", [])
+    assert rewards, f"box via useInventory returned no rewards: {out}"
+    piece = next((r for r in rewards if r["id"] == 8000), None)
+    assert piece and piece["type"] == "InventoryItem", f"no Dimensional Piece in {rewards}"
+    after = server.load_state()
+    assert server._item_count(after, 8000) == piece["count"], "pieces not landed in state"
+    assert server._item_count(after, 8300) == 1, "box not consumed"
+    print(f"ok useInventory box: 8300 opened -> {piece['count']} pieces, echoed as InventoryItem")
+
+
+def check_desynced_save_does_not_crash():
+    """Legacy saves can carry more itemIds than counts. Reading a missing slot must
+    be 0, not IndexError (the dispatcher swallows exceptions into an empty response,
+    which looks to the player like an item that does nothing)."""
+    st = _fresh()
+    st["inventory"] = {"itemIds": [8300, 8000, 4000], "counts": [1]}
+    assert server._item_count(st, 8000) == 0
+    assert server._take_item(st, 8000, 1) == 0
+    assert server._take_item(st, 4000, 1) == 0
+    print("ok desync: missing count slots read as 0 instead of raising")
+
+
 def check_missing_box_is_harmless():
     """An unknown box id must not raise - it is client-supplied."""
     st = _fresh()
@@ -163,6 +192,8 @@ if __name__ == "__main__":
     check_selectable_box()
     check_card_or_soul()
     check_use_inventory()
+    check_use_inventory_opens_box()
+    check_desynced_save_does_not_crash()
     check_missing_box_is_harmless()
     check_routes_registered()
     print("\nall reward-box checks passed")

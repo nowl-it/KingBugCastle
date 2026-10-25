@@ -36,7 +36,13 @@ def _inventory_models(st):
 def _item_count(st, item_id):
     inv = _inventory(st)
     ids = inv.get("itemIds", [])
-    return inv.get("counts", [])[ids.index(item_id)] if item_id in ids else 0
+    if item_id not in ids:
+        return 0
+    i = ids.index(item_id)
+    cnts = inv.get("counts", [])
+    # Legacy saves can carry more itemIds than counts; a missing slot reads as 0
+    # rather than IndexError (which the dispatcher swallows into an empty response).
+    return cnts[i] if i < len(cnts) else 0
 
 
 def _take_item(st, item_id, n=1):
@@ -49,7 +55,10 @@ def _take_item(st, item_id, n=1):
     if item_id not in ids:
         return 0
     i = ids.index(item_id)
-    n = max(0, min(n, cnts[i]))
+    have = cnts[i] if i < len(cnts) else 0   # desynced legacy save: treat as 0
+    n = max(0, min(n, have))
+    if i >= len(cnts):
+        return 0
     cnts[i] -= n
     if cnts[i] <= 0:
         ids.pop(i)

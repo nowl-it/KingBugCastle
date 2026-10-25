@@ -96,6 +96,23 @@ def _presets(xml_dir):
     return out
 
 
+def box_items(xml_dir=DEFAULT_XML):
+    """inventory item id -> box `<Type>` for RewardBoxInventory/InstantRewardBox rows.
+
+    The use-item routes need this because the client's voucher/quick-use panel sends
+    boxes to /player/useInventory instead of use-reward-box-inventory-item, and
+    InventoryItems.xml is the only place naming which item ids are boxes at all."""
+    key = ("boxitem", str(xml_dir))
+    if key not in _cache:
+        out = {}
+        for it in _root(xml_dir, "InventoryItems.xml").findall("InventoryItem"):
+            t = it.findtext("Type")
+            if t in ("RewardBoxInventory", "InstantRewardBox"):
+                out[int(it.get("ID"))] = t
+        _cache[key] = out
+    return _cache[key]
+
+
 def load_boxes(xml_dir=DEFAULT_XML):
     """box id -> {type, count, rewards[]}. Rewards keep their raw XML attributes."""
     key = ("boxes", str(xml_dir))

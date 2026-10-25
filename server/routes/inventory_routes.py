@@ -5,7 +5,9 @@ client reads the result panel from addedRewardList, NOT rewardList - the box
 panel's MoveNext passes the field at offset 0x38 to ShowResultPanel and all
 Handle*Result calls); skin boxes name their own prize.
 """
+import rewardbox
 from common import body_int
+from config import XML_DIR
 from state import save_state
 
 srv = None      # live server module, injected via register()
@@ -45,9 +47,21 @@ def r_use_inventory(body, st):
     InventoryItems.xml carries no effect payload (only tooltip/category metadata), and
     the client applies the visible effect itself off that metadata, so the server's job
     is to spend the item and hand back the authoritative inventory.
+
+    Exception: reward boxes. The client's voucher/quick-use panel sends them here too
+    (UseInventoryRequestModel), and spending-without-opening is exactly the
+    "Dimensional Piece bundle opens and grants nothing" hole - the box vanishes and
+    the pieces never land. Open them through the same path use-reward-box uses.
     ponytail: no per-item effect table; add one if an item turns out to need server state."""
     item_id = body.get("itemID") or body.get("itemId") or 0
-    srv._take_item(st, item_id, body_int(body.get("count"), 1, lo=1))
+    n = body_int(body.get("count"), 1, lo=1)
+    if item_id in rewardbox.box_items(XML_DIR):
+        rewards = srv._open_reward_box(st, item_id, None, n)
+        save_state(st)
+        return {"playerHeart": st.get("heart", 0), "eventFlag": 0,
+                "addedRewardList": srv._reward_list_data(rewards),
+                "inventoryItems": srv._inventory_models(st)}
+    srv._take_item(st, item_id, n)
     save_state(st)
     return {"playerHeart": st.get("heart", 0), "eventFlag": 0,
             "inventoryItems": srv._inventory_models(st)}
