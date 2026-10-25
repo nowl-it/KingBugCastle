@@ -22,5 +22,10 @@ jobs:
           echo "$DEPLOY_KEY" > ~/.ssh/kgc_deploy
           chmod 600 ~/.ssh/kgc_deploy
           echo "$SERVER_HOST_KEY" >> ~/.ssh/known_hosts
+          # Keepalive probes are not cosmetic: the deploy hook's preflight phase runs
+          # for minutes with no channel traffic, and an idle NAT timeout killed the
+          # session mid-deploy on 2026-10-25 (exit 255) with the pull already landed
+          # and the reload never sent - leaving production down.
           ssh -i ~/.ssh/kgc_deploy -o IdentitiesOnly=yes \
+            -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=8 \
             ubuntu@213.35.110.245 "mkdir -p ~/kgc/server/secrets && echo \"\$GOOGLE_OAUTH_JSON_B64\" | base64 -d > ~/kgc/server/secrets/google_oauth.json && (cd ~/kgc/server && ./deploy_hook.sh || deploy)"
