@@ -147,6 +147,22 @@ def check_the_wish_list_accepts_numeric_rarity_keys():
     print("ok rarity keys: \"2\" reads as Rare")
 
 
+def check_the_wish_list_saves_the_real_request_shape():
+    """SaveTreasureWishList is TreasureWishListRequestModel: {treasureIds, targetRarity}
+    - one rarity per call, NOT a wishList dictionary. Reading body["wishList"] (which the
+    client never sends) collapsed every save to empty, so the Legacy wishlist was dead."""
+    _fresh()
+    a, b = server.ALL_TREASURE_IDS[0], server.ALL_TREASURE_IDS[2]
+    server.r_save_treasure_wish_list({"treasureIds": [a], "targetRarity": 2}, server.load_state())
+    # a second call for another rarity must not wipe the first
+    server.r_save_treasure_wish_list({"treasureIds": [b, 999999], "targetRarity": "Common"},
+                                      server.load_state())
+    wl = server.r_treasure_wish_list({}, server.load_state())["wishList"]
+    assert wl["Rare"] == [a], f"targetRarity=2 (Rare) did not persist: {wl['Rare']}"
+    assert wl["Common"] == [b], f"non-treasure 999999 not dropped: {wl['Common']}"
+    print("ok wish list: treasureIds+targetRarity persists and merges per rarity")
+
+
 def check_custom_pickups_are_per_banner():
     _fresh()
     server.r_save_custom_pickups({"shopItemId": 11, "customPickups": [10260, 10150]},
@@ -192,6 +208,7 @@ if __name__ == "__main__":
     check_roguelike_statistics_invent_nothing()
     check_the_wish_list_rejects_things_that_are_not_treasures()
     check_the_wish_list_accepts_numeric_rarity_keys()
+    check_the_wish_list_saves_the_real_request_shape()
     check_custom_pickups_are_per_banner()
     check_nothing_is_owed_by_the_store()
     check_every_route_answers()

@@ -903,6 +903,16 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
 - Validate both sources before mutating state, never allow `targetId` to consume itself, and return
   consumed instance IDs in `TreasureResultResponseModel.deletedTreasures` so the client removes
   them immediately. Regression: `check_treasure_overcome_accepts_duplicate_legacy`.
+- **Wishlist Legacy save shape (2026-10-25)**: `SaveTreasureWishList` is
+  `TreasureWishListRequestModel` = `{treasureIds: List<int>, targetRarity: ResourceTreasure.Rarity}`
+  - **one rarity per call**, NOT the whole `wishList` dictionary (`GetTreasureWishList`'s
+  `TreasureWishListResponseModel` and `CheckTreasureWishListValid`'s request DO use the dict).
+  `r_save_treasure_wish_list` used to read `body["wishList"]` (never sent) so every save collapsed
+  to empty lists and the wishlist looked dead. Fix merges the one rarity into the stored dict,
+  accepting `targetRarity` as enum value (Newtonsoft default: None=0/Common=1/Rare=2/Special=3) or
+  name. Transcendence (`/treasure/overcome`) itself was never broken - it matches
+  `TreasureRequestModel` and needs item 3200 ingots for Rare/Special. Regression:
+  `check_the_wish_list_saves_the_real_request_shape` in `server/tests/test_roguelike_shop.py`.
 
 ## 10. Post/mail system (2026-07-11)
 

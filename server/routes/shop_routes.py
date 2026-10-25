@@ -564,6 +564,22 @@ def r_shop_refresh(body, st):
 # ResourceTreasure.Rarity. The wish list is keyed by it, and Newtonsoft writes an
 # enum dictionary key as its name, so the keys have to be the names.
 TREASURE_RARITIES = ["Common", "Rare", "Special"]
+# ResourceTreasure.Rarity enum values (None=0, Common=1, Rare=2, Special=3). The
+# client sends targetRarity as a bare enum, which Newtonsoft writes as its integer
+# value unless a StringEnumConverter is registered - so accept both forms.
+RARITY_BY_VALUE = {1: "Common", 2: "Rare", 3: "Special"}
+
+def _treasure_rarity_key(val):
+    """Normalise a rarity given as an enum name ("Rare") or enum value (2) to the
+    canonical name key, or None if it is not a real treasure rarity."""
+    if isinstance(val, str):
+        for name in TREASURE_RARITIES:
+            if val.lower() == name.lower():
+                return name
+        val = int(val) if val.isdigit() else None
+    if isinstance(val, int) and not isinstance(val, bool):
+        return RARITY_BY_VALUE.get(val)
+    return None
 
 def r_treasure_wish_list(body, st):
     saved = st.get("treasureWishList", {})
@@ -571,18 +587,32 @@ def r_treasure_wish_list(body, st):
 
 def r_save_treasure_wish_list(body, st):
     """Store the wish list, keeping only ids that are really treasures - a wish for
-    something that does not exist comes back as a blank row in the panel."""
+    something that does not exist comes back as a blank row in the panel.
+
+    The client's SaveTreasureWishList request is TreasureWishListRequestModel:
+    ``{treasureIds: List<int>, targetRarity: ResourceTreasure.Rarity}`` - a single
+    rarity per call, NOT the whole wishList dictionary. Reading body["wishList"]
+    (which the client never sends) collapsed every save to empty lists, so the
+    Legacy wishlist looked dead. Merge the one rarity into the stored dict; a full
+    wishList dictionary is still accepted for any older caller."""
     srv = _get_srv()
-    sent = body.get("wishList")
-    sent = sent if isinstance(sent, dict) else {}
     known = set(srv.ALL_TREASURE_IDS)
-    out = {}
-    for rarity in TREASURE_RARITIES:
-        ids = sent.get(rarity) or sent.get(str(TREASURE_RARITIES.index(rarity) + 1))
-        out[rarity] = [i for i in body_list(ids, int) if i in known]
-    st["treasureWishList"] = out
+    saved = {r: list(st.get("treasureWishList", {}).get(r, [])) for r in TREASURE_RARITIES}
+
+    rarity = _treasure_rarity_key(body.get("targetRarity"))
+    if rarity is not None and "treasureIds" in body:
+        saved[rarity] = [i for i in body_list(body.get("treasureIds"), int) if i in known]
+    else:
+        sent = body.get("wishList")
+        sent = sent if isinstance(sent, dict) else {}
+        for key, ids in sent.items():
+            r = _treasure_rarity_key(key)
+            if r is not None:
+                saved[r] = [i for i in body_list(ids, int) if i in known]
+
+    st["treasureWishList"] = saved
     save_state(st)
-    return {"wishList": out}
+    return {"wishList": {r: list(saved.get(r, [])) for r in TREASURE_RARITIES}}
 
 def r_custom_pickups(body, st):
     """The heroes or treasures pinned to a custom-pickup banner, per banner/gacha id."""
