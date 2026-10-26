@@ -21,6 +21,7 @@ Uses the `register(app, srv)` pattern.
 import json
 
 from common import admin_log, now_iso
+from rewards import _WIRE_TYPE
 from fastapi import Request
 from fastapi.responses import JSONResponse, Response
 from state import load_state, save_state
@@ -56,6 +57,11 @@ def _process_posts(posts: list) -> list:
             p["title"] = _ensure_raw_prefix(p["title"])
         if isinstance(p.get("text"), str):
             p["text"] = _ensure_raw_prefix(p["text"])
+        # Translate the server's reward vocabulary to the client's so the icon
+        # resolves correctly ("Unit" → "Card", "Item" → "InventoryItem", etc.).
+        rt = p.get("rewardType")
+        if rt and rt in _WIRE_TYPE:
+            p["rewardType"] = _WIRE_TYPE[rt]
         out.append(p)
     return out
 
