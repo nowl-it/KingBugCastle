@@ -957,6 +957,13 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
   no-op with success=True in the response -> client shows 0 stars. Fix: wrap material handling in
   `if need_material > 0`, cap `ingot_use` to `need_material - treasure_use` to never over-consume.
   Regression tests: `check_common_overcome_requires_no_material`, `check_overcome_consumes_only_required_ingots`.
+- **Transcendence over-spend fix (2026-10-27)**: the earlier `max(client_item_count, have_ingots)`
+  "server-authoritative" fallback + batch mode (`steps = units // need_material`) meant a player who
+  *selected* 6 ingots on a Special Legacy (NeedMaterial 6/tier) but *owned* 60+ got the whole 10-tier
+  track burned in one request. `materialItemCount` is the player's stepper selection and is
+  authoritative — `ingots = client_item_count`; owned ingots are diagnostic-only in the rejection log.
+  Batching still works when the client itself selects multiple tiers' worth. Over-reporting is safe:
+  `_deduct_inventory_item` validates the real balance. Regression: `check_overcome_spends_only_the_selected_ingots`.
 
 ## 10. Post/mail system (2026-07-11)
 

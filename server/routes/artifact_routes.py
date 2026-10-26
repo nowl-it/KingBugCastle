@@ -1078,9 +1078,10 @@ def r_treasure_overcome(body, st):
             body_int(i, 0) for i in (body.get("materialTreasureIds") or [])))
         materials = [x for x in tr if x is not t and x.get("id") in material_ids]
         client_item_count = body_int(body.get("materialItemCount"), 0, lo=0)
-        # Server-authoritative fallback: if the client under-reports its ingot
-        # spend (stale UI, desync after purchase), trust the actual inventory
-        # count so a player who has enough can still transcend.
+        # Diagnostic only: the player's owned ingots must NEVER raise the spend.
+        # The client stepper reports exactly what the player selected, and an
+        # earlier "server-authoritative" max() here silently transcended many
+        # tiers (chose 6 Special ingots, owned 60+ -> full 10-star track).
         _inv = st.get("inventory", {})
         _ids = _inv.get("itemIds", [])
         have_ingots = 0
@@ -1088,12 +1089,12 @@ def r_treasure_overcome(body, st):
             _cnts = _inv.get("counts", [])
             _i = _ids.index(TREASURE_OVERCOME_ITEM)
             have_ingots = _cnts[_i] if _i < len(_cnts) else 0
-        ingots = max(client_item_count, have_ingots)
+        ingots = client_item_count
         # The client batches a multi-tier transcend into ONE request and the
         # TreasureRequestModel has no step-count field, so the number of tiers
-        # is implied by the total material units offered: each duplicate and
-        # each ingot is one unit, and `need_material` units make one tier (the
-        # client's own addedOvercome preview is the same count // need).
+        # is implied by the total material units the player *selected*: each
+        # duplicate and each ingot is one unit, and `need_material` units make
+        # one tier (the client's own addedOvercome preview is the same count // need).
         steps = min((len(materials) + ingots) // need_material, max_overcome - overcome)
         if steps <= 0:
             admin_log(f"[treasure] overcome insufficient: need {need_material} per "

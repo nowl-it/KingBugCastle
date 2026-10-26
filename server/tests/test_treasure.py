@@ -144,6 +144,24 @@ def check_special_batches_from_twelve_ingots():
     print("ok special: 13 ingots (6/tier) -> overcome 2, 1 ingot spared")
 
 
+def check_overcome_spends_only_the_selected_ingots():
+    """The reported bug: player chose 6 ingots on a Special Legacy but owned 60+;
+    the old server-authoritative max(owned, selected) burned the whole 10-tier
+    track in one request. The spend must key off materialItemCount only."""
+    st, _ = _seed()
+    special = ar.make_treasure(max(x["id"] for x in st["treasures"]) + 1, 30000)
+    special["overcome"] = 0
+    st["treasures"].append(special)
+    st["inventory"]["counts"][1] = 60     # owns far more than the 6 selected
+    out = OVERRIDES["/treasure/overcome"](
+        {"targetId": special["id"], "materialItemCount": 6}, st)
+    t = next(x for x in out["treasures"] if x["id"] == special["id"])
+    assert t["overcome"] == 1, f"6 selected (6/tier) -> exactly 1 tier, got {t['overcome']}"
+    inv = {i: c for i, c in zip(*[st["inventory"][k] for k in ("itemIds", "counts")])}
+    assert inv.get(3200, 0) == 54, f"only the 6 selected ingots spent: {inv.get(3200)}"
+    print("ok selected: 6 of 60 owned ingots -> overcome 1, 54 spared")
+
+
 def check_overcome_caps_at_max_when_batching():
     """A batch must stop at the tier cap and only take material for granted tiers."""
     st, tid = _seed(rid=20000)
@@ -167,6 +185,7 @@ if __name__ == "__main__":
                check_common_overcome_requires_no_material,
                check_overcome_batches_multiple_tiers,
                check_special_batches_from_twelve_ingots,
+               check_overcome_spends_only_the_selected_ingots,
                check_overcome_caps_at_max_when_batching,
                check_max_relic_shape):
         fn()
