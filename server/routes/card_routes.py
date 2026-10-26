@@ -6,6 +6,7 @@ the card then re-render it. Server-owned helpers (cards_list, card_to_dict,
 _pad_deck, DEFAULT_DECKS) stay in server.py and are reached through srv.
 """
 import xml.etree.ElementTree as ET
+from functools import lru_cache
 
 from common import admin_log, body_int, body_list, now_iso
 from config import XML_DIR
@@ -13,6 +14,67 @@ from state import save_state
 import dimension
 
 srv = None      # live server module, injected via register()
+
+
+# ── Exp curve and candy helpers ──────────────────────────────────────────────
+
+@lru_cache(maxsize=1)
+def _unit_need_exp():
+    """UnitNeedExp[index] = exp required to advance FROM that level.
+    Loaded from Constants.xml; cached for the process lifetime."""
+    root = ET.parse(XML_DIR / "Constants.xml").getroot()
+    curve = {}
+    for c in root:
+        if c.findtext("Type") == "UnitNeedExp":
+            idx = int(c.findtext("Index") or 0)
+            curve[idx] = int(c.findtext("Value") or 0)
+    return curve
+
+
+@lru_cache(maxsize=1)
+def _candy_type_map():
+    """item_id -> CandyType string ('Exp', 'LvUp', 'Gold') from InventoryItems.xml."""
+    root = ET.parse(XML_DIR / "InventoryItems.xml").getroot()
+    mapping = {}
+    for item in root:
+        if item.findtext("Type") == "CardLevelUpItem":
+            iid = int(item.get("ID", 0))
+            ct = item.findtext("CandyType") or ""
+            mapping[iid] = ct
+    return mapping
+
+
+def _apply_exp(card, exp_gain):
+    """Add exp_gain to card, cascade level-ups when thresholds are crossed.
+    Mutates card in-place. Returns number of levels gained."""
+    curve = _unit_need_exp()
+    card["exp"] = card.get("exp", 0) + exp_gain
+    levels_gained = 0
+    max_level = max(curve.keys()) + 1 if curve else 30
+    while card["level"] < max_level:
+        needed = curve.get(card["level"] - 1, 0)
+        if needed == 0 or card["exp"] < needed:
+            break
+        card["exp"] -= needed
+        card["level"] += 1
+        levels_gained += 1
+    return levels_gained
+
+
+def _remaining_candies(st, candy_ids):
+    """After consuming candies, return list of {id, count} for remaining CardLevelUpItems."""
+    ctmap = _candy_type_map()
+    inv = st.get("inventoryItems", {})
+    ids = inv.get("itemIds", [])
+    cnts = inv.get("counts", [])
+    result = []
+    for iid in ctmap:
+        if iid in ids:
+            idx = ids.index(iid)
+            count = cnts[idx] if idx < len(cnts) else 0
+            if count > 0:
+                result.append({"id": iid, "count": count})
+    return result
 
 
 def register(app, server_module):
@@ -53,55 +115,85 @@ def r_card_all(body, st):
 
 
 def r_card_upgrade(body, st):
-    unit_id = body.get("unitId", 0)
+    # UpgradeCardRequestModel = {cardId, candies: [itemIds]}
+    card_id = body.get("cardId") or body.get("unitId", 0)
+    candies = body.get("candies") or []
     cards = st.setdefault("cards", {})
-    key = str(unit_id)
+    key = str(card_id)
+    levels_gained = 0
     if key in cards:
-        cards[key]["level"] += 1
+        ctmap = _candy_type_map()
+        exp_total = 0
+        lvup_total = 0
+        for cid in candies:
+            ctype = ctmap.get(cid, "")
+            if ctype == "Exp":
+                exp_total += 1
+            elif ctype == "LvUp":
+                lvup_total += 1
+            # consume from inventory
+            srv._take_item(st, cid, 1)
+        if exp_total:
+            levels_gained += _apply_exp(cards[key], exp_total)
+        if lvup_total:
+            cards[key]["level"] += lvup_total
+            levels_gained += lvup_total
         if cards[key]["level"] >= 16 and cards[key].get("potentialTier", 0) == 0:
             cards[key]["potentialTier"] = 1
         save_state(st)
-    c = cards.get(key, {"unitId": unit_id, "level": 1, "exp": 0, "potentialTier": 0,
+    c = cards.get(key, {"unitId": card_id, "level": 1, "exp": 0, "potentialTier": 0,
                         "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
                         "randomSkinApply": False, "soul": 0})
-    return srv.card_to_dict(c, st)
+    # CardWithCandiesResponseModel: nested cardResponseModel + candies + unitExpItem/SoulItem
+    card_resp = srv.card_to_dict(c, st)
+    return {
+        "cardResponseModel": card_resp,
+        "candies": _remaining_candies(st, candies),
+        "unitExpItem": srv._item_count(st, 151) + srv._item_count(st, 156),
+        "unitSoulItem": srv._item_count(st, 152) + srv._item_count(st, 157),
+    }
 
 
 def r_card_fast_upgrade(body, st):
-    unit_id = body.get("unitId", 0)
-    target_level = body.get("targetLevel", 1)
+    # FastUpgradeCardRequestModel = {cardId, addLevel}
+    card_id = body.get("cardId") or body.get("unitId", 0)
+    add_level = body.get("addLevel") or body.get("targetLevel", 1)
     cards = st.setdefault("cards", {})
-    key = str(unit_id)
+    key = str(card_id)
     if key in cards:
-        cards[key]["level"] = target_level
-        if target_level >= 16 and cards[key].get("potentialTier", 0) == 0:
+        cards[key]["level"] = max(cards[key].get("level", 1), add_level)
+        if cards[key]["level"] >= 16 and cards[key].get("potentialTier", 0) == 0:
             cards[key]["potentialTier"] = 1
         save_state(st)
-    c = cards.get(key, {"unitId": unit_id, "level": target_level, "exp": 0, "potentialTier": 0,
+    c = cards.get(key, {"unitId": card_id, "level": add_level, "exp": 0, "potentialTier": 0,
                         "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
                         "randomSkinApply": False, "soul": 0})
     return srv.card_to_dict(c, st)
 
 
 def r_card_use_exp_item(body, st):
+    # UseUnitExpItemRequestModel = {unitId, count}
     unit_id = body.get("unitId", 0)
     count = body_int(body.get("count"), 1, lo=1)
 
-    # Deduct item 151 (Exp Box) or 156 (King Exp Box). We assume 151 for now.
-    srv._take_item(st, 151, count)
+    # Deduct item 151 (Exp Box) or 156 (King Exp Box); prefer 151, fall back to 156.
+    spent = srv._take_item(st, 151, count)
+    if spent < count:
+        srv._take_item(st, 156, count - spent)
 
     cards = st.setdefault("cards", {})
     key = str(unit_id)
     if key in cards:
-        cards[key]["level"] += 1
+        _apply_exp(cards[key], count)
         if cards[key]["level"] >= 16 and cards[key].get("potentialTier", 0) == 0:
             cards[key]["potentialTier"] = 1
         save_state(st)
-    c = cards.get(key, {"unitId": unit_id, "level": 1})
-    return srv.card_to_dict(c, st)
+    # Response is just ResponseModel (code/msg/success) — client does its own exp display.
+    return {"code": 200, "msg": None, "success": True}
 
 
 def r_card_use_soul_item(body, st):
+    # UseUnitSoulItemRequestModel = {unitId, count} → ResponseModel
     unit_id = body.get("unitId", 0)
     count = body_int(body.get("count"), 1, lo=1)
     cards = st.setdefault("cards", {})
@@ -111,25 +203,42 @@ def r_card_use_soul_item(body, st):
         # Deduct soul
         current_soul = cards[key].get("soul", 0)
         cards[key]["soul"] = max(0, current_soul - count)
-
-        cards[key]["level"] += 1
+        # Soul items act like LvUp: each one directly increments level
+        cards[key]["level"] += count
         if cards[key]["level"] >= 16 and cards[key].get("potentialTier", 0) == 0:
             cards[key]["potentialTier"] = 1
         save_state(st)
-    c = cards.get(key, {"unitId": unit_id, "level": 1})
-    return srv.card_to_dict(c, st)
+    return {"code": 200, "msg": None, "success": True}
 
 
 def r_card_use_candy(body, st):
-    unit_id = body.get("unitId", 0)
+    # Also used by useUnitSoulItemToExp/useUnitSoulToExp (ResponseModel) where
+    # only success/code matter. For /card/useCandy the response is CardWithCandies.
+    unit_id = body.get("unitId") or body.get("cardId", 0)
+    candies = body.get("candies") or []
     cards = st.setdefault("cards", {})
     key = str(unit_id)
     if key in cards:
-        cards[key]["level"] += 1
+        ctmap = _candy_type_map()
+        exp_total = 0
+        lvup_total = 0
+        for cid in candies:
+            ctype = ctmap.get(cid, "")
+            if ctype == "Exp":
+                exp_total += 1
+            elif ctype == "LvUp":
+                lvup_total += 1
+            srv._take_item(st, cid, 1)
+        if exp_total:
+            _apply_exp(cards[key], exp_total)
+        if lvup_total:
+            cards[key]["level"] += lvup_total
         if cards[key]["level"] >= 16 and cards[key].get("potentialTier", 0) == 0:
             cards[key]["potentialTier"] = 1
         save_state(st)
-    c = cards.get(key, {"unitId": unit_id, "level": 1})
+    c = cards.get(key, {"unitId": unit_id, "level": 1, "exp": 0, "potentialTier": 0,
+                        "skins": [], "favoriteSkinIds": [], "currentSkin": 0,
+                        "randomSkinApply": False, "soul": 0})
     return srv.card_to_dict(c, st)
 
 

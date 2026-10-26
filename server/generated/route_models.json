@@ -208,7 +208,7 @@
  },
  "/card/upgrade": {
   "method": "LevelUpCard",
-  "response": "CardResponseModel",
+  "response": "CardWithCandiesResponseModel",
   "pinned": true,
   "score": 1.0
  },
