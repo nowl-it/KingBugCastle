@@ -1054,7 +1054,9 @@ def r_treasure_add_exp(body, st):
 def r_treasure_overcome(body, st):
     """"Tier Transcendence": consume item 3200 (초월의 주괴) per TreasureOvercomeCost
     and raise the treasure's overcome tier (max level +2 per tier, cap 10)."""
-    admin_log("[treasure] overcome request")
+    admin_log(f"[treasure] overcome REQ target={body.get('targetId')} "
+              f"mats={body.get('materialTreasureIds')} "
+              f"itemCount={body.get('materialItemCount')}")
     tr = get_st_treasures(st)
     t = next((x for x in tr if x.get("id") == body_int(body.get("targetId"), 0)), None)
     if t is None:
@@ -1070,8 +1072,21 @@ def r_treasure_overcome(body, st):
         material_ids = list(dict.fromkeys(
             body_int(i, 0) for i in (body.get("materialTreasureIds") or [])))
         materials = [x for x in tr if x is not t and x.get("id") in material_ids]
-        item_count = body_int(body.get("materialItemCount"), 0, lo=0)
+        client_item_count = body_int(body.get("materialItemCount"), 0, lo=0)
+        # Server-authoritative fallback: if the client under-reports its ingot
+        # spend (stale UI, desync after purchase), trust the actual inventory
+        # count so a player who has enough can still transcend.
+        _inv = st.get("inventory", {})
+        _ids = _inv.get("itemIds", [])
+        have_ingots = 0
+        if TREASURE_OVERCOME_ITEM in _ids:
+            have_ingots = _inv.get("counts", [])[_ids.index(TREASURE_OVERCOME_ITEM)]
+        remaining = max(0, need_material - len(materials))
+        item_count = min(max(client_item_count, have_ingots), remaining)
         if len(materials) + item_count < need_material:
+            admin_log(f"[treasure] overcome insufficient: need {need_material}, "
+                      f"got {len(materials)} dupes + {item_count} ingots "
+                      f"(client={client_item_count} have={have_ingots})")
             return _treasure_result(st)
         # Consume only what's required: duplicate treasures first, then ingots.
         treasure_use = min(len(materials), need_material)
