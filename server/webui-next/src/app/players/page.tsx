@@ -555,6 +555,8 @@ function PlayerDrawer({
 
 					<MacroQuickActions pid={pid} onMutate={onMutate} />
 
+					<RiftEnhanceRates pid={pid} />
+
 					<PortalAccess pid={pid} />
 
 					{/* Raw JSON editor */}
@@ -962,6 +964,141 @@ function PortalAccess({ pid }: { pid: string }) {
 								</Button>
 							</div>
 						)}
+					</>
+				)}
+			</CardContent>
+		</Card>
+	);
+}
+
+type RiftRateFields = { success: string; fail: string; down: string; broken: string };
+const RIFT_RATE_KEYS = ["success", "fail", "down", "broken"] as const;
+
+function RiftEnhanceRates({ pid }: { pid: string }) {
+	const { data, isLoading } = useQuery({
+		queryKey: ["/api/player/rift-upgrade-rates", pid],
+		queryFn: () =>
+			fetcher(`/api/player/${encodeURIComponent(pid)}/rift-upgrade-rates`),
+		refetchOnWindowFocus: false,
+	});
+	const master: Record<string, number> | null = data?.rates ?? null;
+	const fingerprint = JSON.stringify(master);
+	const [enabled, setEnabled] = useState(false);
+	const [fields, setFields] = useState<RiftRateFields>({
+		success: "100",
+		fail: "0",
+		down: "0",
+		broken: "0",
+	});
+
+	useEffect(() => {
+		// A loaded save is an external query result; reset the draft only when the
+		// stored override (or the selected account) changes.
+		// eslint-disable-next-line react-hooks/set-state-in-effect
+		setEnabled(Boolean(master));
+		if (master) {
+			setFields({
+				success: String(master.success ?? 0),
+				fail: String(master.fail ?? 0),
+				down: String(master.down ?? 0),
+				broken: String(master.broken ?? 0),
+			});
+		} else {
+			setFields({ success: "100", fail: "0", down: "0", broken: "0" });
+		}
+		// `master` is re-derived from `fingerprint`; depending on the object itself
+		// would re-run the effect on every query refetch.
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [pid, fingerprint]);
+
+	const total = RIFT_RATE_KEYS.reduce((sum, k) => sum + (Number(fields[k]) || 0), 0);
+	const invalid =
+		enabled &&
+		(total <= 0 ||
+			RIFT_RATE_KEYS.some((k) => {
+				const n = Number(fields[k]);
+				return fields[k] === "" || Number.isNaN(n) || n < 0 || n > 100;
+			}));
+
+	const save = async () => {
+		const body = enabled
+			? {
+					success: Number(fields.success),
+					fail: Number(fields.fail),
+					down: Number(fields.down),
+					broken: Number(fields.broken),
+				}
+			: { clear: true };
+		await runMutation(
+			`/api/player/${encodeURIComponent(pid)}/rift-upgrade-rates`,
+			{ method: "POST", body: JSON.stringify(body) },
+			enabled ? "Enhance rates updated" : "Enhance rates reset to default",
+		);
+	};
+
+	return (
+		<Card>
+			<CardHeader>
+				<div>
+					<CardTitle>Rift Enhance rates</CardTitle>
+					<CardDescription>
+						Override the success / fail / down / broken outcome for this
+						account&apos;s rift-weapon (đồ khe) enhancement. Values are relative
+						weights; leave off to use per-level master data.
+					</CardDescription>
+				</div>
+			</CardHeader>
+			<CardContent className="space-y-4">
+				{isLoading ? (
+					<p className="text-sm text-muted-foreground">Loading…</p>
+				) : (
+					<>
+						<label className="flex items-center gap-2 text-sm">
+							<input
+								type="checkbox"
+								checked={enabled}
+								onChange={(e) => setEnabled(e.target.checked)}
+								className="h-4 w-4 accent-[var(--primary)]"
+							/>
+							Use custom Enhance rates for this account
+						</label>
+						{enabled && (
+							<>
+								<div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+									{RIFT_RATE_KEYS.map((k) => (
+										<div key={k} className="space-y-1">
+											<label
+												htmlFor={`rift-${k}`}
+												className="text-xs capitalize text-muted-foreground"
+											>
+												{k} %
+											</label>
+											<Input
+												id={`rift-${k}`}
+												type="number"
+												min={0}
+												max={100}
+												value={fields[k]}
+												onChange={(e) =>
+													setFields((prev) => ({ ...prev, [k]: e.target.value }))
+												}
+											/>
+										</div>
+									))}
+								</div>
+								<p className="text-xs text-muted-foreground">
+									Total {total}%. Weights are normalised to 100% at roll time
+									{total > 0 && Math.abs(total - 100) > 0.001
+										? ` — effective success ≈ ${(Number(fields.success) * 100 / total).toFixed(1)}%`
+										: ""}
+									.
+								</p>
+							</>
+						)}
+						<Button size="sm" disabled={invalid} onClick={save}>
+							<Save className="h-4 w-4" />
+							{enabled ? "Save rates" : "Reset to default"}
+						</Button>
 					</>
 				)}
 			</CardContent>

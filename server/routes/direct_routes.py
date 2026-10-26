@@ -116,6 +116,13 @@ def register(app, server_module):
         if not isinstance(body, dict):
             body = {}
         login_id = str(request.query_params.get("id") or body.get("id") or "")
+        # The native v173/v174 build carries its persistent device handoff key in
+        # the Xigncode-sourced `cookie` field of the /auth body (see jni/stub.cpp
+        # GetCookie -> RestAPI.Auth(id, cookie)). The poller sent the same key to
+        # /glogin/pending, which armed a device-bound grant, so a brand-new account
+        # can be minted even when the poll (raw-socket origin IP) and this /auth
+        # (through Cloudflare) resolve to different client_ip.
+        device = str(request.query_params.get("device") or body.get("cookie") or "")
         admin_log(f"[{host}] {getattr(request, 'method', 'GET')} /auth "
                   f"id={login_id!r} body_keys={sorted(str(k) for k in body)[:12]}")
         import google_login
@@ -129,10 +136,14 @@ def register(app, server_module):
         # one-shot grant is consumed by the first login, so re-entry hung on
         # "Retrying authentication..." forever. Unknown ids still need the
         # handoff so the bare id alone cannot mint a new save (anti-squatting).
-        if not account and not google_login.consume_native_auth_grant(
-                google_login._client_ip(request), login_id):
-            return _enc({"code": 200, "msg": "Google sign-in was not verified",
-                         "success": False})
+        if not account:
+            granted = google_login.consume_native_auth_grant(
+                google_login._client_ip(request), login_id)
+            if not granted and google_login._valid_handoff(device):
+                granted = google_login.consume_native_auth_grant(device, login_id)
+            if not granted:
+                return _enc({"code": 200, "msg": "Google sign-in was not verified",
+                             "success": False})
         import secrets
         from common import now_iso
         # routes.player_routes, NOT top-level player_routes: server/routes/ is on

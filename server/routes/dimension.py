@@ -5,6 +5,13 @@ so it arrived null for every hero. For an ordinary hero that is correct; for a
 dimension hero (Units.xml `IsDimensionUnit`) it leaves the sync panel with no level,
 no gauge and no next cost, and neither of its two routes did anything.
 
+Incarnation heroes (Units.xml `IsIncarnationUnit`, v174.1.00 Yhoundeh 10820) share
+the CardData.overcome offset but are serialized through the sibling `incarnationUnit`
+sub-model (IncarnationUnitModel) - ApplySpecialUnitData on the client reads overcome
+from one sub-model or the other depending on the unit's own flag, so an incarnation
+hero with only a null `dimensionUnit` reads back overcome 0 even when the server
+granted it.
+
 Two separate tracks, two separate currencies:
 
   sync level  0..DimensionLevelMax, paid in 차원의 잔향 (item 10010), the per-level
@@ -99,6 +106,29 @@ def model(unit_id, level=0, gauge=0, overcome=0, xml_dir=DEFAULT_XML):
             "dimensionNextLevelCost": next_cost(level, xml_dir)}
 
 
+_incarnation_ids_cache = {}
+
+
+def incarnation_unit_ids(xml_dir=DEFAULT_XML):
+    """Every unit flagged IsIncarnationUnit (v174.1.00: 10820 Yhoundeh)."""
+    key = str(xml_dir)
+    if key not in _incarnation_ids_cache:
+        root = ET.parse(Path(xml_dir) / "Units.xml").getroot()
+        _incarnation_ids_cache[key] = {int(u.get("ID")) for u in root
+                                       if u.get("ID") and (u.findtext("IsIncarnationUnit") or "").strip().lower() == "true"}
+    return _incarnation_ids_cache[key]
+
+
+def incarnation_model(unit_id, overcome=0, skill_level=0, ultimate_level=0, xml_dir=DEFAULT_XML):
+    """IncarnationUnitModel, or None for a hero that is not an incarnation unit.
+    Field names match the client model exactly (CardResponseModel.incarnationUnit)."""
+    if int(unit_id) not in incarnation_unit_ids(xml_dir):
+        return None
+    return {"unitId": int(unit_id), "overcome": int(overcome),
+            "incarnationSkillLevel": int(skill_level),
+            "incarnationUltimateSkillLevel": int(ultimate_level)}
+
+
 def _self_check():
     lmax, omax = _consts(DEFAULT_XML)["levelMax"], overcome_max()
     assert lmax > 0 and omax > 0
@@ -119,8 +149,14 @@ def _self_check():
     m = model(10790, level=3)
     assert m["dimensionNextLevelCost"] == costs[3]
 
+    inc = incarnation_unit_ids()
+    assert 10820 in inc, "Yhoundeh is the first incarnation unit but is not flagged"
+    assert incarnation_model(10790) is None, "a dimension hero got an incarnation model"
+    im = incarnation_model(10820, overcome=5)
+    assert im["overcome"] == 5 and im["incarnationSkillLevel"] == 0
+
     print(f"ok: {len(ids)} dimension units, sync to {lmax} for {total_cost()} remnants, "
-          f"overcome to {omax}")
+          f"overcome to {omax}; {len(inc)} incarnation units")
 
 
 if __name__ == "__main__":

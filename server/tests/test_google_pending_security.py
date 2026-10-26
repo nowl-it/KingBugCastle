@@ -107,6 +107,53 @@ def test_native_auth_route_requires_the_google_handoff_grant(monkeypatch, tmp_pa
         direct_routes.srv = original_srv
 
 
+def test_native_auth_route_accepts_the_device_grant_when_the_address_differs(monkeypatch, tmp_path):
+    """The IPv6/CGNAT fix: a brand-new Google id whose poll arrived from one address
+    but whose /auth arrives (via Cloudflare) from a different address still mints,
+    because the native build carries its device handoff key in the /auth `cookie`
+    and the poller armed a device-bound grant. Without the device grant this was the
+    silent 'Google sign-in was not verified' path that hung the client."""
+    device = "a" * 32   # _valid_handoff: 16-64 alnum
+
+    class Request:
+        headers = {"host": "kgc.test"}
+        # id via query (GET-style) plus the device key the stub puts in body.cookie
+        query_params = {"id": "google_new", "device": device}
+        client = SimpleNamespace(host="203.0.113.99")   # NOT the poll's address
+
+    original_srv = direct_routes.srv
+    app = FastAPI()
+    direct_routes.register(app, SimpleNamespace(
+        aes_encrypt=lambda payload: json.dumps(payload).encode("utf-8")))
+    endpoint = next(route.endpoint for route in app.routes if route.path == "/auth")
+    minted = []
+    monkeypatch.setattr(player_routes, "mint_session_token",
+                        lambda login_id, *a: minted.append(login_id) or "session-token")
+    monkeypatch.setattr(
+        google_login, "_native_auth_grant_file",
+        lambda key, account: tmp_path / f"grant-{key}-{account}")
+    try:
+        # No grant at all yet -> denied.
+        denied = asyncio.run(endpoint(Request()))
+        assert json.loads(denied.body) == {
+            "code": 200, "msg": "Google sign-in was not verified", "success": False}
+        assert minted == []
+
+        # The /glogin/pending poll armed a DEVICE grant (keyed by the device, not IP).
+        google_login._grant_native_auth(device, "google_new")
+        accepted = asyncio.run(endpoint(Request()))
+        assert json.loads(accepted.body)["success"] is True
+        assert minted == ["google_new"]
+
+        # One-shot: a replay of the same /auth cannot re-mint via the consumed grant.
+        minted.clear()
+        redeny = asyncio.run(endpoint(Request()))
+        assert json.loads(redeny.body)["success"] is False
+        assert minted == []
+    finally:
+        direct_routes.srv = original_srv
+
+
 class _Request:
     class client:
         host = "198.51.100.10"

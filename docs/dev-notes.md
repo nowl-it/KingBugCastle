@@ -497,6 +497,44 @@ Fixed-period loops with no exception = client timer, not retry.
   - The native hook must locate `<AutoRegister>g__AutoRegisterImpl` by stable prefix: its compiler
     suffix changed from `|134_0` to `|137_0` in v172.1.00. Exact lookup silently skipped the hook.
     Regression: `tests/test_multi_login.py::check_guest_register_grants_its_followup_native_auth`.
+- **Google login "hangs at Authenticating..." = IP-bound native-auth grant, not client (live
+  triage 2026-10-26, origin `213.35.110.245`, v174.1.00).** Two sub-cases, confirmed via
+  `/tmp/kgc_pub_tls.log` + `server/state/players.db`:
+  * **(A) consent completes -> hangs = grant IP mismatch (the real bug).** Player reports: browser
+    opens, Google consent succeeds, auto-redirect back to game, then stuck "Authenticating...".
+    Proof: brand-new ids `google_116130023122951925166` (6 `/auth` hits) and `google_115208177785305188521`
+    (4 hits) retry `/auth`, NEVER mint, and are ABSENT from `accounts` (so they REQUIRE the grant).
+    Every OTHER reject branch is logged and was **0** (`refused new player`, `rate-limited new player`).
+    The ONLY silent exit is `Google sign-in was not verified` (`direct_routes.py:132-135`), which
+    returns `_enc(...)` with NO `admin_log` - so grepping the log for it ALWAYS shows 0 and does NOT
+    prove it didn't fire (an earlier note here got this backwards). Mechanism: the one-shot grant is
+    written by `/glogin/pending` (`_grant_native_auth(_client_ip(poll), acc)`) where the poll is a raw
+    socket to the ORIGIN IP (`g_kgc_glogin_poll_host`), but consumed by `/auth` which arrives via the
+    DOMAIN through Cloudflare (`client_ip` = `cf-connecting-ip`). On IPv6/CGNAT mobile those resolve
+    differently -> `consume_native_auth_grant` False -> new save refused -> client retries forever.
+    Existing accounts skip the grant (`direct_routes.py:124`), which is why 31 google accounts work and
+    only NEW ones on some networks hang. Fix (server-only; SECURITY-SENSITIVE - operator sign-off +
+    L3 scan before deploy): stop IP-binding the grant, key it by `account_id` (keep one-shot + short
+    TTL); a grant still only exists after a completed OAuth handoff and `google_<sub>` is unguessable,
+    so residual risk is just a <=TTL race to consume a fresh grant first. Strongest variant needs a
+    client rebuild (carry the device key into `/auth`, key the grant on it).
+    *IMPLEMENTED (2026-10-26, Option B):* carrier is the Xigncode cookie. `jni/stub.cpp` now returns
+    `handoff_key()` from `z_str`/`z_str_seed` (ZCWAVE_GetCooke/GetCookie2/3), so `RestAPI.Auth(id,cookie)`
+    puts the 32-hex device key in `POST /auth` body.cookie (confirmed dump.cs: `Auth(string id, string
+    cookie)` @230536, cookie <- Utility.GetCookie <- XigncodeClientSystem.GetCookie @157912). Server:
+    `/glogin/pending` now arms BOTH an IP grant and a DEVICE grant (`google_login.py`); `/auth`
+    (`direct_routes.py`) tries IP grant first, then falls back to the device grant keyed by
+    `body.cookie`/`?device=` (`_valid_handoff`), one-shot + TTL preserved. Old builds send a non-handoff
+    cookie -> `_valid_handoff` false -> unchanged IP-only path (safe, still broken on IPv6 until they
+    update). MUST rebuild `libxigncode.so` with NDK 27 (SETUP.md:159-178; not buildable in this env) ->
+    `cp` into `server/xigncode_stub/{,arm64}/` -> repack XAPK. Test:
+    `tests/test_google_pending_security.py::test_native_auth_route_accepts_the_device_grant_when_the_address_differs`.
+  * **(B) browser never opened = genuine client issue.** Devices polling `/glogin/pending?device=`
+    forever with **0** `/glogin` browser starts + 0 callbacks (3de011, f996d9): the OpenURL hop or a
+    `g_kgc_glogin_host` baked to `127.0.0.1` never reached us. Triage by grepping the player's `device=`
+    key: 0 `glogin?device=` hits = case B; has callback but no mint = case A. Server entry verified
+    healthy: `GET https://kingbugcastle.id.vn/glogin?device=<key>` -> `307 accounts.google.com` with a
+    valid 5-part state, and browser/poller share the same device key on every completer.
 - Template uid is `""`; every key fallback is `st.get("uid") or "dev-0001"` - never persist a
   `""` or `guest-0001` row. Full write-up: `docs/multi-account-login.md`.
 - `dev-0001` = NightOwL since 2026-08-18 (uid `p-410890b421a5`, merged; old KingBug save
@@ -7610,3 +7648,34 @@ commit cùng tay source**):
 Verify: `pytest server/tests -q` → 144 passed; `eslint src` sạch; `pnpm run build` 18 trang.
 Push main → CI chạy pytest + `deploy.yml` → `deploy_hook.sh` trên host production
 (zero-downtime, preflight route_coverage chặn deploy từ checkout bẩn).
+
+
+## §83 — Per-account Rift Enhance-rate override trên admin dashboard (2026-10-26)
+
+User request: "admin dashboard bổ sung chỉnh **tỉ lệ nâng cấp đồ khe** cho từng tài khoản".
+"Đồ khe" = **rift weapon** (không phải accessory). "Tỉ lệ Enhance" = 4 kết quả roll trong
+`r_rift_weapon_upgrade` (`server/routes/rift.py`): success (+1) / fail (giữ nguyên) /
+down (−1) / broken. Master data `RiftConstants.xml` `LevelCost/Cost` cho ra `{Success,Fail,Down,Broken}`
+theo từng level (level cao success giảm). Accessory level-up thì **không có fail rate** (deterministic),
+nên đây chắc chắn là rift weapon.
+
+Cơ chế (server-authoritative, lưu theo account):
+- Field mới `st["riftUpgradeRates"] = {success, fail, down, broken}` (float 0-100). Không có = dùng master data.
+- `r_rift_weapon_upgrade`: sau khi lấy `cost_info` rates, nếu có override thì
+  `_apply_upgrade_rate_override()` **thay toàn bộ** 4 trọng số (chuẩn hoá về tổng 100 → nhập kiểu
+  trọng số tương đối được) và **bỏ qua nhánh useCash protection** (admin đã kiểm soát cả 4 outcome).
+  Tổng ≤0 → fallback success=100 (đảm bảo không rớt vào bucket broken do nhập dở).
+- Dashboard (`server/dashboard.py`): `GET/POST /api/player/{pid}/rift-upgrade-rates`. POST validate
+  từng key 0-100, tổng >0; `{"clear": true}` → xoá field. Middleware `guard_admin` lo auth + same-origin,
+  handler không tự gọi. `_write_state` → `playerdb.save` (state lock do middleware `serialize_state_writes`).
+- UI (`server/webui-next/src/app/players/page.tsx`): component `RiftEnhanceRates` — card trong drawer
+  từng account (đặt giữa `MacroQuickActions` và `PortalAccess`). Checkbox bật/tắt custom rate + 4 Input
+  số + nút Save/Reset. Pattern theo `PortalAccess` (useQuery GET + runMutation POST); useEffect reset draft
+  theo `fingerprint` (JSON của override) để không re-run mỗi refetch.
+
+Verify: `pytest server/tests -q` → **147 passed** (thêm `test_upgrade_rate_override` trong `test_rift.py`
++ `test_rift_upgrade_rates_round_trip` trong `test_dashboard_api.py`); `pnpm run build` 18 trang OK
+(eslint gate thật là next build). Bẫy: `react/no-unescaped-entities` — text JSX có dấu `'` phải viết
+`&apos;` (CardDescription "account's").
+
+Chưa deploy — local only.

@@ -31,18 +31,28 @@ static JavaVM* g_jvm = nullptr;  // saved in JNI_OnLoad, used by video overlay
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, "XignCodeStub", __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "XignCodeStub", __VA_ARGS__)
 
+// Defined further below, once the web-login section is set up. The Xigncode cookie
+// getters return it so the native /auth body carries the persistent device handoff
+// key: RestAPI.Auth(id, cookie) -> POST /auth body.cookie, and the same key was
+// sent to /glogin?device= and /glogin/pending?device=. The server arms a
+// device-bound grant from the poll and consumes it at /auth, which fixes the
+// "hangs at Authenticating" case where the raw-socket origin poll and the
+// Cloudflare-fronted /auth resolve to different client_ip (IPv6/CGNAT mobile).
+static const char* handoff_key();
+
 // --- XIGNCODE STUB METHODS ---
 static jint     z_int(JNIEnv* e, jclass c, ...)       { return 0; }
 static void     z_void(JNIEnv* e, jclass c, ...)      { }
-static jstring  z_str(JNIEnv* e, jclass c, ...)       { return e->NewStringUTF(""); }
+static jstring  z_str(JNIEnv* e, jclass c, ...)       { return e->NewStringUTF(handoff_key()); }
 static jstring  z_str_seed(JNIEnv* e, jclass c, jstring seed) {
-    if (!seed) return e->NewStringUTF("dummy_cookie");
-    const char* utf = e->GetStringUTFChars(seed, nullptr);
-    if (!utf) return e->NewStringUTF("dummy_cookie");
-    // Return the seed itself as the cookie (server might accept non-empty)
-    jstring result = e->NewStringUTF(utf);
-    e->ReleaseStringUTFChars(seed, utf);
-    return result;
+    // Ignore the seed: the cookie is repurposed to carry the device handoff key.
+    // The private server never validates the Xigncode cookie, and /auth reads this
+    // value as the device key. Consume+release the seed to avoid a UTFChars leak.
+    if (seed) {
+        const char* s = e->GetStringUTFChars(seed, nullptr);
+        if (s) e->ReleaseStringUTFChars(seed, s);
+    }
+    return e->NewStringUTF(handoff_key());
 }
 static jboolean z_true(JNIEnv* e, jclass c, ...)      { return JNI_TRUE; }
 

@@ -283,6 +283,54 @@ def api_player_portal_access_grant(pid: str, body: dict):
             "accounts": playerdb.portal_access_for_uid(pid)}
 
 
+# --- per-account rift-weapon Enhance rates ----------------------------------
+# `r_rift_weapon_upgrade` reads st["riftUpgradeRates"] to override the
+# master-data success/fail/down/broken weights for that account only. Absent
+# means fall back to AccessoryConstants/RiftConstants master data.
+RIFT_UPGRADE_RATE_KEYS = ("success", "fail", "down", "broken")
+
+
+def _clean_rift_upgrade_rates(body):
+    """Validate a {success, fail, down, broken} percent dict from the dashboard.
+    Each value must be a number in 0-100 and the total must be positive. Returns
+    a plain float dict, or None when the request asks to clear the override."""
+    if not isinstance(body, dict) or body.get("clear"):
+        return None
+    out = {}
+    for k in RIFT_UPGRADE_RATE_KEYS:
+        raw = body.get(k)
+        if raw in (None, ""):
+            raise HTTPException(400, f"'{k}' is required")
+        try:
+            val = float(raw)
+        except (TypeError, ValueError):
+            raise HTTPException(400, f"'{k}' must be a number")
+        if not 0 <= val <= 100:
+            raise HTTPException(400, f"'{k}' must be between 0 and 100")
+        out[k] = val
+    if sum(out.values()) <= 0:
+        raise HTTPException(400, "at least one rate must be greater than 0")
+    return out
+
+
+@app.get("/api/player/{pid}/rift-upgrade-rates")
+def api_player_rift_upgrade_rates(pid: str):
+    st = _read_state(pid)
+    return {"rates": st.get("riftUpgradeRates") or None}
+
+
+@app.post("/api/player/{pid}/rift-upgrade-rates")
+def api_player_rift_upgrade_rates_set(pid: str, body: dict):
+    st = _read_state(pid)
+    rates = _clean_rift_upgrade_rates(body)
+    if rates is None:
+        st.pop("riftUpgradeRates", None)
+    else:
+        st["riftUpgradeRates"] = rates
+    _write_state(pid, st)
+    return {"ok": True, "rates": st.get("riftUpgradeRates") or None}
+
+
 # --- player portal requests -------------------------------------------------
 def _admin_reward_name(reward_type, reward_id):
     if reward_type == "Item":

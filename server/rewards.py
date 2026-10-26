@@ -8,8 +8,10 @@ modules use, so there is no import cycle.
 """
 from config import XML_DIR
 from common import now_iso
+from pathlib import Path
 import missions
 import rewardbox
+import xml.etree.ElementTree as ET
 
 srv = None      # live server module, set by server.py after import
 
@@ -68,6 +70,33 @@ def _take_item(st, item_id, n=1):
 
 def _next_accessory_id(st):
     return max((a.get("id", 0) for a in srv.get_st_accessories(st)), default=0) + 1
+
+
+_overcome_cache = {}
+
+
+def _overcome_wire_type(rid, xml_dir=None):
+    """'DimensionOvercome' / 'IncarnationOvercome' for a unit on the overcome
+    track (Units.xml IsDimensionUnit / IsIncarnationUnit), None for an ordinary
+    hero. Both tracks land on the same CardData.overcome offset, but the
+    client's reward handler only dispatches on the type string matching the
+    unit's own flag, and each track has its own icon in the results popup."""
+    key = str(xml_dir or XML_DIR)
+    if key not in _overcome_cache:
+        flags = {}
+        try:
+            root = ET.parse(Path(key) / "Units.xml").getroot()
+            for u in root:
+                if not u.get("ID"):
+                    continue
+                if (u.findtext("IsDimensionUnit") or "").strip().lower() == "true":
+                    flags[int(u.get("ID"))] = "DimensionOvercome"
+                elif (u.findtext("IsIncarnationUnit") or "").strip().lower() == "true":
+                    flags[int(u.get("ID"))] = "IncarnationOvercome"
+        except Exception:
+            pass
+        _overcome_cache[key] = flags
+    return _overcome_cache[key].get(int(rid))
 
 
 def _open_reward_box(st, item_id, select_idx=None, times=1):
@@ -158,14 +187,17 @@ def _grant_mission_reward(st, r):
 
 def _grant_reward(st, rt, rid, amt):
     """Apply a claimed mail reward to player state. Currencies, inventory items, and hero
-    souls/cards persist here; the client re-fetches /player, /player/getInventory and /card/all
-    after a claim so the granted state appears. Treasure is granted as a real owned instance
-    (same shape make_treasure builds for the default inventory). Artifact/Accessory stay
-    display-only - they trip client panel invariants (see AGENTS.md ArtifactOptionUI crash);
-    gift those as an Item reward box (InventoryItems.xml Type=RewardBoxInventory/
-    InstantRewardBox) which the player opens.
+    souls/cards persist here; the claim response must carry the refreshed state to the
+    client itself (treasureResult.inventories for items, overcome-track reward types for
+    heroes) - the client does NOT re-fetch after /post/receive. Treasure is granted as a
+    real owned instance (same shape make_treasure builds for the default inventory).
+    Artifact/Accessory stay display-only - they trip client panel invariants (see
+    AGENTS.md ArtifactOptionUI crash); gift those as an Item reward box
+    (InventoryItems.xml Type=RewardBoxInventory/InstantRewardBox) which the player opens.
 
-    Returns True when a duplicate dimension hero was granted (caller should set upgrade=True)."""
+    Returns True when a duplicate overcome-track hero (dimension or incarnation)
+    was granted (caller should set upgrade=True and emit the wire type from
+    _overcome_wire_type with count = the new total overcome)."""
     if rt == "Gold":
         st["gold"] = max(0, min(1_000_000_000, st.get("gold", 0) + amt))
     elif rt == "Cash":
@@ -184,31 +216,16 @@ def _grant_reward(st, rt, rid, amt):
     elif rt in ("Unit", "Card") and rid:
         cards = st.setdefault("cards", {})
         s_rid = str(rid)
+        overcome_track = _overcome_wire_type(rid) is not None
         if s_rid not in cards:
             cards[s_rid] = {"unitId": rid, **srv.SEED["cardTemplate"]}
-            # Dimension heroes start at overcome=1 (1 star) on first acquisition
-            try:
-                import xml.etree.ElementTree as ET
-                tree = ET.parse(XML_DIR / "Units.xml")
-                for u in tree.findall("Unit"):
-                    if u.get("ID") == str(rid) and u.findtext("IsDimensionUnit") == "true":
-                        cards[s_rid]["overcome"] = 1
-                        break
-            except Exception:
-                pass
+            # Dimension/incarnation heroes start at overcome=1 (1 star) on first
+            # acquisition; ordinary heroes convert duplicates to souls instead.
+            if overcome_track:
+                cards[s_rid]["overcome"] = 1
         else:
             c = cards[s_rid]
-            is_dim = False
-            try:
-                import xml.etree.ElementTree as ET
-                tree = ET.parse(XML_DIR / "Units.xml")
-                for u in tree.findall("Unit"):
-                    if u.get("ID") == str(rid) and u.findtext("IsDimensionUnit") == "true":
-                        is_dim = True
-                        break
-            except Exception:
-                pass
-            if is_dim:
+            if overcome_track:
                 c["overcome"] = c.get("overcome", 0) + (amt or 1)
                 return True
             else:

@@ -321,7 +321,13 @@ def _pending_file(ip: str):
     return pathlib.Path(__file__).parent / "state" / f".glogin_pending_{safe}"
 
 def _native_auth_grant_file(ip: str, account_id: str):
-    """One-time grant for this exact address/account pair."""
+    """One-time grant for this exact address (or device handoff key)/account pair.
+
+    The first argument is an opaque binding key: normally the client address, but
+    a native login may also present its persistent device handoff key (carried in
+    the /auth ``cookie`` field) so the grant matches even when the poll and /auth
+    resolve to different ``client_ip`` (raw-socket origin poll vs Cloudflare API).
+    """
     safe = hashlib.sha256(f"{ip}\0{account_id}".encode()).hexdigest()
     return pathlib.Path(__file__).parent / "state" / f".glogin_auth_{safe}"
 
@@ -554,7 +560,17 @@ def register_game(app):
         ip = _client_ip(request)
         acc = _get_and_clear_pending(device if _valid_handoff(device) else ip)
         if acc:
+            # Two grants, one-shot + short TTL each: the address-bound one for
+            # legacy builds, and a DEVICE-bound one so the native /auth can prove
+            # it is the same phone that polled even when the poll (raw socket to
+            # the origin IP) and /auth (via the domain through Cloudflare) present
+            # different client_ip - the IPv4/IPv6 + CGNAT split that strands a
+            # brand-new Google login at "Authenticating...". /auth prefers the
+            # device grant only when the address grant is absent, so the stronger
+            # same-address proof is still used whenever it holds.
             _grant_native_auth(ip, acc)
+            if _valid_handoff(device):
+                _grant_native_auth(device, acc)
         return PlainTextResponse(acc)
 
 

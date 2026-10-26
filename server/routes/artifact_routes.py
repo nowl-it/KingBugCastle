@@ -1053,7 +1053,12 @@ def r_treasure_add_exp(body, st):
 
 def r_treasure_overcome(body, st):
     """"Tier Transcendence": consume item 3200 (초월의 주괴) per TreasureOvercomeCost
-    and raise the treasure's overcome tier (max level +2 per tier, cap 10)."""
+    and raise the treasure's overcome tier (max level +2 per tier, cap 10).
+
+    The client batches several tiers into one request and the request model has no
+    step-count field, so the tiers granted = total material units // per-tier cost
+    (each duplicate or ingot is one unit), capped at the remaining track. A Common
+    treasure (cost 0) carries no material to batch on and rises one tier a request."""
     admin_log(f"[treasure] overcome REQ target={body.get('targetId')} "
               f"mats={body.get('materialTreasureIds')} "
               f"itemCount={body.get('materialItemCount')}")
@@ -1080,25 +1085,37 @@ def r_treasure_overcome(body, st):
         _ids = _inv.get("itemIds", [])
         have_ingots = 0
         if TREASURE_OVERCOME_ITEM in _ids:
-            have_ingots = _inv.get("counts", [])[_ids.index(TREASURE_OVERCOME_ITEM)]
-        remaining = max(0, need_material - len(materials))
-        item_count = min(max(client_item_count, have_ingots), remaining)
-        if len(materials) + item_count < need_material:
-            admin_log(f"[treasure] overcome insufficient: need {need_material}, "
-                      f"got {len(materials)} dupes + {item_count} ingots "
+            _cnts = _inv.get("counts", [])
+            _i = _ids.index(TREASURE_OVERCOME_ITEM)
+            have_ingots = _cnts[_i] if _i < len(_cnts) else 0
+        ingots = max(client_item_count, have_ingots)
+        # The client batches a multi-tier transcend into ONE request and the
+        # TreasureRequestModel has no step-count field, so the number of tiers
+        # is implied by the total material units offered: each duplicate and
+        # each ingot is one unit, and `need_material` units make one tier (the
+        # client's own addedOvercome preview is the same count // need).
+        steps = min((len(materials) + ingots) // need_material, max_overcome - overcome)
+        if steps <= 0:
+            admin_log(f"[treasure] overcome insufficient: need {need_material} per "
+                      f"tier, got {len(materials)} dupes + {ingots} ingots "
                       f"(client={client_item_count} have={have_ingots})")
             return _treasure_result(st)
-        # Consume only what's required: duplicate treasures first, then ingots.
-        treasure_use = min(len(materials), need_material)
-        ingot_use = min(item_count, need_material - treasure_use)
+        # Consume only what the granted tiers cost: duplicate treasures first,
+        # then ingots, so leftover material is never burnt on an ungranted tier.
+        units = steps * need_material
+        treasure_use = min(len(materials), units)
+        ingot_use = units - treasure_use
         if ingot_use and not accessory._deduct_inventory_item(
                 st, TREASURE_OVERCOME_ITEM, ingot_use):
             return _treasure_result(st)
         deleted = [x["id"] for x in materials[:treasure_use]]
         if deleted:
             tr[:] = [x for x in tr if x.get("id") not in set(deleted)]
-
-    t["overcome"] = overcome + 1
+        t["overcome"] = overcome + steps
+    else:
+        # Common (NeedMaterial 0) is free and carries no material to batch on,
+        # so a request raises exactly one tier.
+        t["overcome"] = overcome + 1
     t["updatedAt"] = now_iso()
     save_state(st)
     return _treasure_result(st, deleted=deleted)

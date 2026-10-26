@@ -346,6 +346,14 @@ def card_to_dict(c, st=None):
         "dimensionUnit": dimension.model(c["unitId"], c.get("dimensionLevel", 0),
                                          c.get("dimensionGauge", 0),
                                          c.get("overcome", 0), XML_DIR),
+        # ApplySpecialUnitData reads CardData.overcome from dimensionUnit for a
+        # dimension unit and from incarnationUnit for an incarnation unit (the two
+        # flags are exclusive) - an incarnation hero without this key always
+        # arrives with overcome 0 no matter what the save holds.
+        "incarnationUnit": dimension.incarnation_model(
+            c["unitId"], c.get("overcome", 0),
+            c.get("incarnationSkillLevel", 0),
+            c.get("incarnationUltimateSkillLevel", 0), XML_DIR),
     }
 
 def cards_list(st):

@@ -113,17 +113,50 @@ def check_common_overcome_requires_no_material():
     print("ok: Common transcend works with zero ingots even if client sends item_count")
 
 
-def check_overcome_consumes_only_required_ingots():
-    """For Rare (need=1), if client sends item_count=3, only 1 should be consumed."""
+def check_overcome_batches_multiple_tiers():
+    """The reported bug: a single request that carries material for 2+ tiers used
+    to raise overcome by only 1. Rare (need 1): 3 ingots -> 3 tiers, all consumed."""
     st, tid = _seed(rid=20000)
-    st["inventory"]["counts"][1] = 5   # 5 ingots available
+    st["inventory"]["counts"][1] = 3    # exactly the 3 the client will spend
     out = OVERRIDES["/treasure/overcome"](
         {"targetId": tid, "materialItemCount": 3}, st)
     t = next(x for x in out["treasures"] if x["id"] == tid)
-    assert t["overcome"] == 1, f"overcome: {t['overcome']}"
+    assert t["overcome"] == 3, f"3 Rare ingots must give 3 tiers, got {t['overcome']}"
     inv = {i: c for i, c in zip(*[st["inventory"][k] for k in ("itemIds", "counts")])}
-    assert inv.get(3200, 0) == 4, f"should consume 1 not 3: {inv.get(3200)}"
-    print("ok: overcome deducts only the required number of ingots")
+    assert inv.get(3200, 0) == 0, f"all 3 ingots should be spent: {inv.get(3200)}"
+    print("ok batch: one request of 3 Rare ingots -> overcome 3")
+
+
+def check_special_batches_from_twelve_ingots():
+    """Special costs 6 per tier, so 12 ingots in one request -> 2 tiers (the user's
+    repro). Leftover ingots beyond the granted tiers are not consumed."""
+    st, _ = _seed()
+    special = ar.make_treasure(max(x["id"] for x in st["treasures"]) + 1, 30000)
+    special["overcome"] = 0
+    st["treasures"].append(special)
+    st["inventory"]["counts"][1] = 13    # 12 needed for 2 tiers, 1 spare
+    out = OVERRIDES["/treasure/overcome"](
+        {"targetId": special["id"], "materialItemCount": 13}, st)
+    t = next(x for x in out["treasures"] if x["id"] == special["id"])
+    assert t["overcome"] == 2, f"12 of 13 ingots -> 2 tiers, got {t['overcome']}"
+    inv = {i: c for i, c in zip(*[st["inventory"][k] for k in ("itemIds", "counts")])}
+    assert inv.get(3200, 0) == 1, f"only 12 consumed, 1 left: {inv.get(3200)}"
+    print("ok special: 13 ingots (6/tier) -> overcome 2, 1 ingot spared")
+
+
+def check_overcome_caps_at_max_when_batching():
+    """A batch must stop at the tier cap and only take material for granted tiers."""
+    st, tid = _seed(rid=20000)
+    t0 = next(x for x in st["treasures"] if x["id"] == tid)
+    t0["overcome"] = 9                     # Rare cap 10, only 1 tier remains
+    st["inventory"]["counts"][1] = 5
+    out = OVERRIDES["/treasure/overcome"](
+        {"targetId": tid, "materialItemCount": 5}, st)
+    t = next(x for x in out["treasures"] if x["id"] == tid)
+    assert t["overcome"] == 10, f"must cap at 10, got {t['overcome']}"
+    inv = {i: c for i, c in zip(*[st["inventory"][k] for k in ("itemIds", "counts")])}
+    assert inv.get(3200, 0) == 4, f"only 1 ingot spent for the last tier: {inv.get(3200)}"
+    print("ok cap: batch stops at 10 and burns only the tier it granted")
 
 
 if __name__ == "__main__":
@@ -132,7 +165,9 @@ if __name__ == "__main__":
                check_treasure_overcome_caps_at_max,
                check_treasure_overcome_accepts_duplicate_legacy,
                check_common_overcome_requires_no_material,
-               check_overcome_consumes_only_required_ingots,
+               check_overcome_batches_multiple_tiers,
+               check_special_batches_from_twelve_ingots,
+               check_overcome_caps_at_max_when_batching,
                check_max_relic_shape):
         fn()
     print("all treasure checks passed")

@@ -61,11 +61,18 @@ def _process_posts(posts: list) -> list:
 
 
 def claim(st, post_id=0, receive_all=False):
-    """Claim mail and grant what it carries. Returns the wire reward list.
+    """Claim mail and grant what it carries. Returns (claimed_posts, wire_reward_list).
 
     Reward grant goes through srv._grant_reward, which is the same path the mission
     and shop claims use - Artifact/Treasure/Accessory are deliberately NOT granted
-    into state there (it trips ArtifactOptionUI); gift those as an Item reward box."""
+    into state there (it trips ArtifactOptionUI); gift those as an Item reward box.
+
+    Duplicate overcome-track heroes (dimension/incarnation) come back as
+    Dimension/IncarnationOvercome with count = the NEW TOTAL, because the client's
+    reward handler assigns `card.overcome = count` outright (it does not add) - same
+    convention as the gacha path. A brand-new overcome hero keeps its Card entry (so
+    the client AddCards it) plus a companion overcome line, since the client-side
+    Card handler creates the card with overcome 0."""
     posts = get_st_posts(st)
     claimed = [p for p in posts if receive_all or p["id"] == post_id]
     reward_list = []
@@ -73,9 +80,22 @@ def claim(st, post_id=0, receive_all=False):
         amt = p.get("rewardAmount", 0)
         rt = p.get("rewardType", "")
         rid = p.get("rewardId", 0)
-        srv._grant_reward(st, rt, rid, amt)
+        upgraded = srv._grant_reward(st, rt, rid, amt)
         if amt or rid:
-            reward_list.append({"type": rt, "id": rid, "count": amt})
+            entry = {"type": rt, "id": rid, "count": amt}
+            if rt in ("Unit", "Card") and rid:
+                wt = srv._overcome_wire_type(rid)
+                c = st.get("cards", {}).get(str(rid))
+                if wt and c and c.get("overcome", 0) > 0:
+                    if upgraded:
+                        # duplicate: absolute overcome replaces the Unit entry
+                        entry = {"type": wt, "id": rid, "count": c["overcome"]}
+                    else:
+                        # first grant: Card entry creates the client-side card,
+                        # companion entry carries the 1-star overcome onto it
+                        reward_list.append(entry)
+                        entry = {"type": wt, "id": rid, "count": c["overcome"]}
+            reward_list.append(entry)
     st["posts"] = [p for p in posts if p not in claimed]
     save_state(st)
     return claimed, reward_list
@@ -144,14 +164,27 @@ def register(app, server_module):
         got, reward_list = claim(st, body.get("postId", 0), body.get("receiveAll", False))
         admin_log(f"[{host}] DIRECT POST /post/receive claimed={len(got)} "
                   f"-> PostReceiveResponseModel")
+        # PostReceiveResponseModel is only `rewardListResponseData` - top-level
+        # playerGold/Cash/Heart here would be parsed into nothing, and the client
+        # does NOT re-fetch after a claim. HandleRewardListResponseData pushes a
+        # non-null treasureResult through HandleTreasureResult, which rebuilds the
+        # inventory cache from `inventories` (and merges treasures); without it a
+        # claimed item only shows up after a game restart.
         payload = {
             "code": 200, "msg": None, "success": True,
             "rewardListResponseData": {
                 "rewardList": srv._wire_rewards(reward_list),
-                "artifactResult": None, "treasureResult": None, "accessoryResult": None,
+                "artifactResult": None,
+                "treasureResult": {
+                    "treasures": srv.get_st_treasures(st),
+                    "deletedTreasures": [],
+                    "playerGold": st.get("gold", 0),
+                    "playerCash": st.get("cash", 0),
+                    "inventories": srv._inventory_models(st),
+                    "addedExpItems": 0,
+                },
+                "accessoryResult": None,
             },
-            "playerGold": st.get("gold", 0), "playerCash": st.get("cash", 0),
-            "playerHeart": st.get("heart", 0),
         }
         return Response(srv.aes_encrypt(payload), media_type="application/json",
                         headers={"encryptedWithHex": "true"})

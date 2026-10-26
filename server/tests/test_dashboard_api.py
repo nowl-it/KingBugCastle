@@ -178,6 +178,34 @@ def test_accessories():
     print("ok accessories: stat labels + grades resolved")
 
 
+def test_rift_upgrade_rates_round_trip():
+    """Per-account rift-weapon Enhance-rate override: stored on the save that
+    server.py reads, validated on the way in, and clearable back to master data."""
+    seed()
+    assert client.get("/api/player/t-1/rift-upgrade-rates").json()["rates"] is None
+
+    r = client.post("/api/player/t-1/rift-upgrade-rates",
+                    json={"success": 80, "fail": 10, "down": 5, "broken": 5})
+    assert r.status_code == 200
+    want = {"success": 80.0, "fail": 10.0, "down": 5.0, "broken": 5.0}
+    assert r.json()["rates"] == want
+    assert playerdb.load("t-1")["riftUpgradeRates"] == want
+
+    assert client.post("/api/player/t-1/rift-upgrade-rates",
+                       json={"success": 150, "fail": 0, "down": 0, "broken": 0}).status_code == 400
+    assert client.post("/api/player/t-1/rift-upgrade-rates",
+                       json={"success": 0, "fail": 0, "down": 0, "broken": 0}).status_code == 400
+    assert client.post("/api/player/t-1/rift-upgrade-rates",
+                       json={"success": "x", "fail": 0, "down": 0, "broken": 0}).status_code == 400
+    assert client.post("/api/player/t-1/rift-upgrade-rates",
+                       json={"success": 50}).status_code == 400
+
+    assert client.post("/api/player/t-1/rift-upgrade-rates", json={"clear": True}).status_code == 200
+    assert client.get("/api/player/t-1/rift-upgrade-rates").json()["rates"] is None
+    assert "riftUpgradeRates" not in playerdb.load("t-1")
+    print("ok rift upgrade rates: round-trip + validation + clear")
+
+
 def test_mail():
     seed()
     r = client.post("/api/player/t-1/mail", json={"title": "@raw: Hi", "text": "  body ", "days": 7})

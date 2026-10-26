@@ -524,6 +524,25 @@ def r_rift_weapon_release_equip(body, st):
     }
 
 
+def _apply_upgrade_rate_override(override):
+    """Normalise an admin-set {success, fail, down, broken} dict into a 0-100
+    quadruple summing to 100, so the operator can enter them as relative
+    weights. Missing/non-numeric keys read as 0; a non-positive total falls
+    back to a guaranteed success so a half-filled override never strands the
+    roll in the broken bucket.
+    """
+    def _f(key):
+        try:
+            return max(0.0, float(override.get(key, 0) or 0))
+        except (TypeError, ValueError):
+            return 0.0
+    s, fl, d, b = _f("success"), _f("fail"), _f("down"), _f("broken")
+    total = s + fl + d + b
+    if total <= 0:
+        return 100.0, 0.0, 0.0, 0.0
+    return s * 100 / total, fl * 100 / total, d * 100 / total, b * 100 / total
+
+
 def r_rift_weapon_upgrade(body, st):
     """POST /rift-weapon/upgrade -> RiftWeaponResultResponseModel.
 
@@ -701,7 +720,14 @@ def r_rift_weapon_upgrade(body, st):
     down_rate = cost_info["down"]
     broken_rate = cost_info["broken"]
 
-    if use_cash and cash_needed > 0:
+    # Per-account Enhance-rate override (set from the admin dashboard). When
+    # present it fully replaces the master-data outcome weights and takes
+    # precedence over the cash protection, because the operator is now driving
+    # all four outcomes explicitly.
+    override = st.get("riftUpgradeRates")
+    if override:
+        success_rate, fail_rate, down_rate, broken_rate = _apply_upgrade_rate_override(override)
+    elif use_cash and cash_needed > 0:
         down_rate = 0
         broken_rate = 0
         fail_rate = 100 - success_rate

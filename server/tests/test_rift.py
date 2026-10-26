@@ -139,6 +139,43 @@ def test_cash_protection_upgrade():
     print("ok test_cash_protection_upgrade")
 
 
+def test_upgrade_rate_override():
+    """Per-account st['riftUpgradeRates'] (set from the admin dashboard) replaces
+    the master-data success/fail/down/broken weights, and takes precedence over
+    the cash-protection path so an operator can pin Enhance to any outcome."""
+    # forced SUCCESS even at a high level that normally can fail/break
+    st = _fresh_state()
+    w = st["riftWeapons"][0]
+    w.update(level=30, rarity=3, broken=False)
+    st["riftUpgradeRates"] = {"success": 100, "fail": 0, "down": 0, "broken": 0}
+    server.save_state(st)
+    for _ in range(5):
+        res = rift.r_rift_weapon_upgrade({"riftWeaponId": w["id"], "useCash": False}, st)
+        assert res["upgradeState"] == 0
+    assert w["level"] == 35
+
+    # forced BROKEN wins even when cash protection is requested
+    st = _fresh_state()
+    w = st["riftWeapons"][0]
+    w.update(level=30, rarity=3, broken=False)
+    st["riftUpgradeRates"] = {"success": 0, "fail": 0, "down": 0, "broken": 100}
+    server.save_state(st)
+    res = rift.r_rift_weapon_upgrade({"riftWeaponId": w["id"], "useCash": True}, st)
+    assert res["upgradeState"] == 3
+    assert w["broken"] is True
+
+    # partial dict normalises to the given key -> forced DOWN
+    st = _fresh_state()
+    w = st["riftWeapons"][0]
+    w.update(level=30, rarity=3, broken=False)
+    st["riftUpgradeRates"] = {"down": 100}
+    server.save_state(st)
+    res = rift.r_rift_weapon_upgrade({"riftWeaponId": w["id"], "useCash": False}, st)
+    assert res["upgradeState"] == 2
+    assert w["level"] == 29
+    print("ok test_upgrade_rate_override")
+
+
 def test_coupon_upgrade_reward_list_not_null():
     """Coupon (useItemId) responses must carry a non-null rewardListResponseData.
 
@@ -302,6 +339,7 @@ def main():
     test_equip_and_release()
     test_weapon_upgrade_levels_and_costs()
     test_cash_protection_upgrade()
+    test_upgrade_rate_override()
     test_substat_reroll()
     test_weapon_dismantle()
     test_weapon_reset()
