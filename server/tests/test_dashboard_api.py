@@ -382,11 +382,51 @@ def test_bulk_pids_and_log_tail():
     print("ok bulk pids + local log tail")
 
 
+def test_hero_skin_grant_revoke():
+    """Per-hero skin list / grant / revoke (the /heroes skin manager)."""
+    seed()
+    # hero 10000 must be owned before its skins route works
+    assert client.get("/api/player/t-1/heroes/10000/skins").status_code == 200
+    not_owned = client.get("/api/player/t-999/heroes/99999/skins")
+    assert not_owned.status_code == 404, "unowned hero must 404 on skins list"
+
+    listing = client.get("/api/player/t-1/heroes/10000/skins").json()
+    assert listing["unitId"] == 10000
+    sid = listing["skins"][0]["id"] if listing["skins"] else None
+    if sid is None:
+        print("ok hero skins: no skins in master data for 10000, list-only check passed")
+        return
+    assert "name" in listing["skins"][0]
+
+    # grant one
+    r = client.post("/api/player/t-1/heroes/10000/skins", json={"skinId": sid})
+    assert r.status_code == 200, r.text
+    assert sid in playerdb.load("t-1")["cards"]["10000"]["skins"]
+    # idempotent re-grant keeps the list unique
+    client.post("/api/player/t-1/heroes/10000/skins", json={"skinId": sid})
+    assert playerdb.load("t-1")["cards"]["10000"]["skins"].count(sid) == 1
+
+    # a foreign skin id must be rejected
+    bad = client.post("/api/player/t-1/heroes/10000/skins", json={"skinId": 99999999})
+    assert bad.status_code == 400, "foreign skin id was accepted"
+
+    # revoke it and confirm currentSkin resets when the revoked skin was equipped
+    equip = client.patch("/api/player/t-1/heroes/10000", json={"currentSkin": sid})
+    assert equip.status_code == 200
+    r = client.delete(f"/api/player/t-1/heroes/10000/skins/{sid}")
+    assert r.status_code == 200, r.text
+    card = playerdb.load("t-1")["cards"]["10000"]
+    assert sid not in card["skins"]
+    assert card["currentSkin"] == 0, "revoke must unequip the removed skin"
+    print("ok hero skins: list/grant/revoke + validation")
+
+
 if __name__ == "__main__":
     test_guard()
     test_crud()
     test_delete_guard()
     test_heroes_and_inventory()
+    test_hero_skin_grant_revoke()
     test_accessories()
     test_mail()
     test_server_proxy_when_down()

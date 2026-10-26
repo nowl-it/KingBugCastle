@@ -876,6 +876,77 @@ async def api_players_grant_all_skins(body: dict = None):
     return {"ok": True, "playersUpdated": count}
 
 
+def _skin_meta():
+    """sid -> {name, grade, image} for every Skins.xml entry. Inherit-only stubs
+    carry no Grade of their own; fall back to the parent skin's grade."""
+    tree = ET.parse(pathlib.Path(gamedata.XML_DIR) / "Skins.xml")
+    elems = {}
+    for s in tree.findall("Skin"):
+        if s.get("ID"):
+            elems[int(s.get("ID"))] = s
+    out = {}
+    for sid, s in elems.items():
+        grade = s.findtext("Grade")
+        if not grade and s.get("Inherit"):
+            parent = elems.get(int(s.get("Inherit")))
+            grade = parent.findtext("Grade") if parent is not None else None
+        out[sid] = {
+            "name": gamedata.STRINGS.get(f"SkinName_{sid}") or s.findtext("Name") or f"Skin {sid}",
+            "grade": grade,
+            "image": gamedata._art("skins", f"{sid}.webp"),
+        }
+    return out
+
+
+@app.get("/api/player/{pid}/heroes/{unit_id}/skins")
+def api_hero_skins(pid: str, unit_id: int):
+    st = _read_state(pid)
+    card = (st.get("cards") or {}).get(str(unit_id))
+    if card is None:
+        raise HTTPException(404, f"hero {unit_id} not owned")
+    meta = _skin_meta()
+    owned = set(card.get("skins") or [])
+    skins = [{"id": sid, "owned": sid in owned, **(meta.get(sid) or {})}
+             for sid in _load_all_hero_skins().get(unit_id, [])]
+    return {"unitId": unit_id, "currentSkin": card.get("currentSkin", 0), "skins": skins}
+
+
+@app.post("/api/player/{pid}/heroes/{unit_id}/skins")
+async def api_hero_skin_grant(pid: str, unit_id: int, body: dict = None):
+    b = body or {}
+    ids = b.get("skinIds") if b.get("skinIds") is not None else [b["skinId"]] if "skinId" in b else None
+    if not ids:
+        raise HTTPException(400, "skinId or skinIds required")
+    st = _read_state(pid)
+    card = (st.get("cards") or {}).get(str(unit_id))
+    if card is None:
+        raise HTTPException(404, f"hero {unit_id} not owned")
+    valid = set(_load_all_hero_skins().get(unit_id, []))
+    ids = [int(sid) for sid in ids]
+    bad = [sid for sid in ids if sid not in valid]
+    if bad:
+        raise HTTPException(400, f"skin(s) {bad} do not belong to hero {unit_id}")
+    skins = set(card.setdefault("skins", []))
+    skins.update(ids)
+    card["skins"] = sorted(skins)
+    _write_state(pid, st)
+    return {"ok": True, "skins": card["skins"]}
+
+
+@app.delete("/api/player/{pid}/heroes/{unit_id}/skins/{skin_id}")
+async def api_hero_skin_revoke(pid: str, unit_id: int, skin_id: int):
+    st = _read_state(pid)
+    card = (st.get("cards") or {}).get(str(unit_id))
+    if card is None:
+        raise HTTPException(404, f"hero {unit_id} not owned")
+    card["skins"] = [s for s in (card.get("skins") or []) if s != skin_id]
+    # An equipped-but-revoked skin renders as a missing prefab client-side.
+    if card.get("currentSkin") == skin_id:
+        card["currentSkin"] = 0
+    _write_state(pid, st)
+    return {"ok": True, "skins": card["skins"]}
+
+
 @app.post("/api/player/{pid}/toggle-infinity-rift")
 async def api_player_toggle_infinity_rift(pid: str):
     st = _read_state(pid)

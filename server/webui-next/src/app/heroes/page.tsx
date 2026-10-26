@@ -1,19 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { useHeroes, runMutation } from "@/lib/api";
+import { fetcher, runMutation, useHeroes } from "@/lib/api";
 import { PlayerBar, usePlayerSelection } from "@/components/player-context";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
+	Dialog,
+	DialogHeader,
+	DialogTitle,
+	DialogDescription,
+	DialogFooter,
+} from "@/components/ui/dialog";
+import {
 	Check,
 	Plus,
 	Trash2,
 	Sparkles,
 	Save,
+	Search,
+	Shirt,
 	UserRound,
 	Loader2,
 } from "lucide-react";
@@ -123,6 +132,7 @@ function Avatar({
 export default function HeroesPage() {
 	const { selectedId } = usePlayerSelection();
 	const { data, mutate, isLoading } = useHeroes(selectedId || undefined);
+	const [query, setQuery] = useState("");
 
 	return (
 		<div className="space-y-6">
@@ -134,6 +144,17 @@ export default function HeroesPage() {
 				</p>
 			</div>
 			<PlayerBar />
+			{selectedId && data && (
+				<div className="relative -mt-2 max-w-sm">
+					<Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+					<Input
+						value={query}
+						onChange={(e) => setQuery(e.target.value)}
+						placeholder="Search heroes by name or id..."
+						className="pl-8"
+					/>
+				</div>
+			)}
 			{!selectedId && (
 				<Card>
 					<CardContent className="py-16 text-center text-muted-foreground">
@@ -151,25 +172,48 @@ export default function HeroesPage() {
 			)}
 			{selectedId && data && (
 				<>
-					<OwnedGrid data={data} onMutate={mutate} />
-					<MissingGrid data={data} onMutate={mutate} />
+					<OwnedGrid data={data} onMutate={mutate} query={query} />
+					<MissingGrid data={data} onMutate={mutate} query={query} />
 				</>
 			)}
 		</div>
 	);
 }
 
+function matchesQuery(h: { name: string; unitId: number }, query: string) {
+	const q = query.trim().toLowerCase();
+	if (!q) return true;
+	return h.name.toLowerCase().includes(q) || String(h.unitId).includes(q);
+}
+
 function OwnedGrid({
 	data,
 	onMutate,
+	query,
 }: {
 	data: HeroesResponse;
 	onMutate: () => void;
+	query: string;
 }) {
 	const { selectedId } = usePlayerSelection();
 	const [drafts, setDrafts] = useState<Record<string, Record<string, string>>>(
 		{},
 	);
+	const [skinHero, setSkinHero] = useState<Hero | null>(null);
+
+	const owned = useMemo(
+		() => data.owned.filter((h) => matchesQuery(h, query)),
+		[data.owned, query],
+	);
+
+	const grantAllSkins = async () => {
+		await runMutation(
+			`/api/player/${encodeURIComponent(selectedId!)}/grant-all-skins`,
+			{ method: "POST" },
+			"All skins granted to every hero",
+		);
+		onMutate();
+	};
 
 	const setField = (unitId: number, key: string, value: string) =>
 		setDrafts((prev) => ({
@@ -232,14 +276,25 @@ function OwnedGrid({
 
 	return (
 		<div>
-			<div className="mb-3 flex items-center justify-between">
+			<div className="mb-3 flex items-center justify-between gap-3">
 				<h2 className="flex items-center gap-2 text-base font-semibold">
 					<UserRound className="h-4 w-4 text-muted-foreground" /> Owned (
-					{data.owned.length})
+					{owned.length}
+					{query.trim() && ` of ${data.owned.length}`})
 				</h2>
+				<Button variant="outline" size="sm" onClick={grantAllSkins}>
+					<Shirt className="h-3.5 w-3.5" /> All skins
+				</Button>
 			</div>
+			{!owned.length && (
+				<Card>
+					<CardContent className="py-6 text-sm text-muted-foreground">
+						No owned heroes match the search.
+					</CardContent>
+				</Card>
+			)}
 			<div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-				{data.owned.map((h) => {
+				{owned.map((h) => {
 					const style = roleStyle(h.role);
 					return (
 						<Card key={h.unitId} className="p-0">
@@ -287,6 +342,15 @@ function OwnedGrid({
 											variant="outline"
 											size="icon"
 											className="h-8 w-8"
+											title="Manage skins"
+											onClick={() => setSkinHero(h)}
+										>
+											<Shirt className="h-3.5 w-3.5" />
+										</Button>
+										<Button
+											variant="outline"
+											size="icon"
+											className="h-8 w-8"
 											title="Save"
 											onClick={() => save(h)}
 										>
@@ -308,22 +372,206 @@ function OwnedGrid({
 					);
 				})}
 			</div>
+			{skinHero && (
+				<SkinDialog
+					hero={skinHero}
+					onClose={() => setSkinHero(null)}
+					onMutate={onMutate}
+				/>
+			)}
 		</div>
+	);
+}
+
+// --- per-hero skin manager ---------------------------------------------------
+type SkinEntry = {
+	id: number;
+	owned: boolean;
+	name?: string;
+	grade?: string | null;
+	image?: string | null;
+};
+
+function SkinDialog({
+	hero,
+	onClose,
+	onMutate,
+}: {
+	hero: Hero;
+	onClose: () => void;
+	onMutate: () => void;
+}) {
+	const { selectedId } = usePlayerSelection();
+	const [skins, setSkins] = useState<SkinEntry[] | null>(null);
+	const [busy, setBusy] = useState(false);
+	const base = `/api/player/${encodeURIComponent(selectedId!)}/heroes/${hero.unitId}/skins`;
+
+	const load = () =>
+		fetcher(base)
+			.then((d: { skins: SkinEntry[] }) => setSkins(d.skins))
+			.catch(() => setSkins([]));
+
+	useEffect(() => {
+		load();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const toggle = async (s: SkinEntry) => {
+		setBusy(true);
+		try {
+			if (s.owned) {
+				await runMutation(`${base}/${s.id}`, { method: "DELETE" }, "Skin revoked");
+			} else {
+				await runMutation(
+					base,
+					{ method: "POST", body: JSON.stringify({ skinId: s.id }) },
+					`${s.name || `Skin ${s.id}`} granted`,
+				);
+			}
+			await load();
+			onMutate();
+		} catch {
+			/* runMutation already surfaced the toast */
+		}
+		setBusy(false);
+	};
+
+	const grantMissing = async () => {
+		const ids = (skins || []).filter((s) => !s.owned).map((s) => s.id);
+		if (!ids.length) return;
+		setBusy(true);
+		try {
+			await runMutation(
+				base,
+				{ method: "POST", body: JSON.stringify({ skinIds: ids }) },
+				`${ids.length} skin(s) granted`,
+			);
+			await load();
+			onMutate();
+		} catch {
+			/* runMutation already surfaced the toast */
+		}
+		setBusy(false);
+	};
+
+	const ownedCount = (skins || []).filter((s) => s.owned).length;
+	const missingCount = (skins || []).filter((s) => !s.owned).length;
+
+	return (
+		<Dialog open onClose={onClose} wide>
+			<DialogHeader onClose={onClose}>
+				<DialogTitle>Skins · {hero.name}</DialogTitle>
+				<DialogDescription>
+					Grant or revoke individual skins for hero #{hero.unitId}. The client
+					picks them up on its next fetch.
+				</DialogDescription>
+			</DialogHeader>
+			<div className="max-h-[55vh] overflow-y-auto px-5 py-4">
+				{!skins ? (
+					<div className="flex items-center justify-center gap-2 py-10 text-muted-foreground">
+						<Loader2 className="h-5 w-5 animate-spin text-primary" />
+						Loading skins...
+					</div>
+				) : !skins.length ? (
+					<div className="py-10 text-center text-sm text-muted-foreground">
+						No skins exist for this hero in master data.
+					</div>
+				) : (
+					<div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+						{skins.map((s) => (
+							<div
+								key={s.id}
+								className={`flex items-center gap-2.5 rounded-lg border p-2 ${
+									s.owned
+										? "border-emerald-200 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10"
+										: "border-border bg-card"
+								}`}
+							>
+								{s.image ? (
+									<Image
+										src={s.image}
+										alt={s.name || String(s.id)}
+										width={48}
+										height={48}
+										unoptimized
+										className="h-12 w-12 shrink-0 rounded-md border border-border bg-muted object-cover"
+									/>
+								) : (
+									<div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-border bg-muted">
+										<Shirt className="h-5 w-5 text-muted-foreground" />
+										</div>
+								)}
+								<div className="min-w-0 flex-1">
+									<div className="truncate text-sm font-medium">
+										{s.name || `Skin ${s.id}`}
+									</div>
+									<div className="flex items-center gap-1.5">
+										<span className="font-mono text-xs text-muted-foreground">
+											#{s.id}
+										</span>
+										{s.grade && (
+											<Badge variant="neutral" className="px-1.5 py-0 text-[10px]">
+												{s.grade}
+											</Badge>
+										)}
+									</div>
+								</div>
+								<Button
+									variant={s.owned ? "ghost" : "outline"}
+									size="sm"
+									className="shrink-0"
+									disabled={busy}
+									onClick={() => toggle(s)}
+								>
+									{s.owned ? (
+										<>
+											<Check className="h-3.5 w-3.5" /> Owned
+										</>
+									) : (
+										<>
+											<Plus className="h-3.5 w-3.5" /> Grant
+										</>
+									)}
+								</Button>
+							</div>
+						))}
+					</div>
+				)}
+			</div>
+			<DialogFooter>
+				<span className="mr-auto text-xs text-muted-foreground">
+					{ownedCount}/{(skins || []).length} owned
+				</span>
+				<Button variant="outline" size="sm" onClick={onClose}>
+					Close
+				</Button>
+				<Button size="sm" disabled={busy || !missingCount} onClick={grantMissing}>
+					<Sparkles className="h-3.5 w-3.5" /> Grant all missing
+				</Button>
+			</DialogFooter>
+		</Dialog>
 	);
 }
 
 function MissingGrid({
 	data,
 	onMutate,
+	query,
 }: {
 	data: HeroesResponse;
 	onMutate: () => void;
+	query: string;
 }) {
 	const { selectedId } = usePlayerSelection();
 	const [level, setLevel] = useState("30");
 	const [soul, setSoul] = useState("999");
 	const [overcome, setOvercome] = useState("0");
 	const [dimLevel, setDimLevel] = useState("0");
+
+	const missing = useMemo(
+		() => data.missing.filter((h) => matchesQuery(h, query)),
+		[data.missing, query],
+	);
 
 	const grant = async (h: Hero) => {
 		await runMutation(
@@ -365,7 +613,8 @@ function MissingGrid({
 			<div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 				<h2 className="flex items-center gap-2 text-base font-semibold">
 					<Sparkles className="h-4 w-4 text-muted-foreground" /> Missing (
-					{data.missing.length})
+					{missing.length}
+					{query.trim() && ` of ${data.missing.length}`})
 				</h2>
 				<div className="flex flex-wrap items-end gap-2">
 					<div className="space-y-0.5">
@@ -434,7 +683,7 @@ function MissingGrid({
 				</div>
 			</div>
 			<div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-				{data.missing.map((h) => {
+				{missing.map((h) => {
 					const style = roleStyle(h.role);
 					return (
 						<Card key={h.unitId} className="p-0">
