@@ -1357,6 +1357,16 @@ not do. For now, friendly matches count toward score like regular matches.
   survive non-interactive deploys. `deploy_hook.sh` now refuses a dirty checkout and
   dependency-install failure instead of stashing, swallowing errors, and potentially reloading an
   inconsistent tree.
+- **TLS uvicorn reload must verify, not fire-and-forget (2026-10-26 incident).** `serve_public.sh
+  reload` used to SIGTERM the first `pgrep | head -1` match, sleep 1s, spawn a replacement, and
+  print success unconditionally. During the f6ed810 deploy the old TLS process ignored SIGTERM
+  (wedged in a busy loop, 2.5h CPU), kept binding :8443, and the fresh instance silently failed to
+  bind - the deploy log claimed "TLS uvicorn restarted" while every HTTPS request hung and
+  Cloudflare served errors to players. The CI health check only probes :8080, so it passed. The
+  reload path now kills ALL matching PIDs, waits up to 10s for real exit (SIGKILL fallback), and
+  polls the new instance on :8443 for up to 15s, printing `[X]` + log tail if it never answers.
+  Recovery of the incident itself: `kill -9` both stale PIDs on the host, relaunch uvicorn from
+  `/home/ubuntu/kgc/server`, confirm `local8443: 200` before touching Cloudflare.
 - **Public OAuth origin respects deployment configuration.** `serve_public.sh` now treats
   `https://kingbugcastle.id.vn` as its fallback only; an operator-provided `GLOGIN_PUBLIC_URL` from
   `/etc/kgc/server.env` is no longer overwritten after that file is loaded. Proof:

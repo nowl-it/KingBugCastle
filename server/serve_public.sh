@@ -72,16 +72,42 @@ case "${1:-}" in
       echo "[+] Sending SIGHUP to master process (PID: $PID) for Zero-Downtime reload..."
       kill -HUP "$PID"
 
-      # Also restart TLS uvicorn (separate process, not managed by gunicorn SIGHUP)
-      TLS_PID=$(pgrep -f "uvicorn.*server:app.*--port.*${TLS_PORT}" 2>/dev/null | head -1 || true)
-      if [ -n "$TLS_PID" ]; then
-        echo "[+] Restarting TLS uvicorn (PID: $TLS_PID)..."
-        kill "$TLS_PID" 2>/dev/null || true
-        sleep 1
-        if [ -f key.pem ] && [ -f cert.pem ]; then
-          nohup "$UVICORN" server:app --host "${KGC_BIND_HOST:-0.0.0.0}" --port "${TLS_PORT}" \
-              --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
-          echo "[✓] TLS uvicorn restarted (PID: $!)"
+      # Also restart TLS uvicorn (separate process, not managed by gunicorn SIGHUP).
+      # Kill ALL matching instances (a double-spawn leaves orphans that can't
+      # rebind the port), wait for real exit, then verify the new one answers
+      # before declaring success - a silently failed bind once took HTTPS down
+      # while the deploy log still printed [OK].
+      _tls_pids=$(pgrep -f "uvicorn.*server:app.*--port.*${TLS_PORT}" 2>/dev/null || true)
+      if [ -n "$_tls_pids" ]; then
+        echo "[+] Restarting TLS uvicorn (PIDs: $(echo $_tls_pids | tr '\n' ' '))..."
+        kill $_tls_pids 2>/dev/null || true
+        for _i in 1 2 3 4 5 6 7 8 9 10; do
+          sleep 1
+          pgrep -f "uvicorn.*server:app.*--port.*${TLS_PORT}" >/dev/null 2>&1 || break
+        done
+        _tls_left=$(pgrep -f "uvicorn.*server:app.*--port.*${TLS_PORT}" 2>/dev/null || true)
+        if [ -n "$_tls_left" ]; then
+          echo "[!] TLS uvicorn ignored SIGTERM; SIGKILL $_tls_left"
+          kill -9 $_tls_left 2>/dev/null || true
+          sleep 1
+        fi
+      fi
+      if [ -f key.pem ] && [ -f cert.pem ]; then
+        nohup "$UVICORN" server:app --host "${KGC_BIND_HOST:-0.0.0.0}" --port "${TLS_PORT}" \
+            --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
+        _tls_new=$!
+        _tls_ok=0
+        for _i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+          sleep 1
+          if curl -m 3 -sk -o /dev/null "https://127.0.0.1:${TLS_PORT}/" 2>/dev/null; then
+            _tls_ok=1; break
+          fi
+        done
+        if [ "$_tls_ok" = 1 ]; then
+          echo "[✓] TLS uvicorn restarted (PID: $_tls_new), verified on :${TLS_PORT}"
+        else
+          echo "[X] TLS uvicorn NOT answering on :${TLS_PORT} - check /tmp/kgc_pub_tls.log"
+          tail -5 /tmp/kgc_pub_tls.log || true
         fi
       fi
 
