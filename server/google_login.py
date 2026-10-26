@@ -54,6 +54,38 @@ import base64, hashlib, hmac, json, os, pathlib, secrets, tempfile, time, urllib
 
 # --- config, from the downloaded client JSON and/or the environment --------------
 SECRETS_DIR = pathlib.Path(__file__).resolve().parent / "secrets"
+
+
+def _load_server_env(path=None):
+    """Seed os.environ from server/secrets/server.env before any config is read.
+
+    The state HMAC key below defaults to a fresh random value per process when
+    GLOGIN_STATE_SECRET is unset. The public server runs gunicorn with several
+    uvicorn workers and preload off, so each worker imports this module on its
+    own and would derive a DIFFERENT key - the OAuth `state` minted on /glogin by
+    one worker then fails check_state() on /glogin/callback handled by another,
+    and every sign-in comes back as "Sign-in expired". Loading the one shared
+    secret from disk at import makes all workers (and restarts) agree. Real
+    environment variables still win, so a systemd EnvironmentFile can override.
+    """
+    path = pathlib.Path(path or SECRETS_DIR / "server.env")
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return
+    for line in lines:
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+_load_server_env()
+
 OAUTH_FILE = pathlib.Path(os.environ.get("GOOGLE_OAUTH_FILE")
                           or SECRETS_DIR / "google_oauth.json")
 
@@ -421,12 +453,20 @@ def return_page(request, account_id, handoff=""):
         tail=f"<script>location.href={json.dumps(link)};</script>")
 
 
-def dev_page():
+def dev_page(handoff=""):
     """A no-Google stand-in for the consent screen: buttons that fire the deep link
-    for a few fixed dev accounts, so the client loop can be tested end to end."""
+    for a few fixed dev accounts, so the client loop can be tested end to end.
+
+    The device handoff key that arrived on /glogin?device= is threaded into every
+    button so the chosen id is parked under that key, which is exactly what the
+    app's native poller reads back at /glogin/pending?device=. Without it the id
+    would park under the browser's client_ip and the poller would never find it -
+    the local "hangs at Authenticating" case even with the picker working."""
     ids = ["google_devA", "google_devB", "google_devC"]
+    suffix = f"&device={handoff}" if _valid_handoff(handoff) else ""
     buttons = "".join(
-        f"<a class='btn alt' href='/glogin/go?id={i}'>Sign in as {i}</a>" for i in ids)
+        f"<a class='btn alt' href='/glogin/go?id={i}{suffix}'>Sign in as {i}</a>"
+        for i in ids)
     return _page(
         "Dev login - King Bug Castle",
         "<h1>Dev login</h1>"
@@ -528,9 +568,13 @@ def register_game(app):
 
     @app.get("/glogin")
     def glogin_start(device: str = ""):
+        # GLOGIN_DEV=1 wins over a configured OAuth client: this is how a private /
+        # local build runs the whole loop on 127.0.0.1 (see docs/multi-account-login
+        # .md). A public server must leave GLOGIN_DEV unset so the redirect below is
+        # used - the picker is a no-auth fallback, not a real sign-in.
+        if DEV:
+            return HTMLResponse(dev_page(device if _valid_handoff(device) else ""))
         if not enabled():
-            if DEV:
-                return HTMLResponse(dev_page())
             return HTMLResponse(error_page("Not available", *_NOT_CONFIGURED),
                                 status_code=503)
         return RedirectResponse(authorize_url("game", device if _valid_handoff(device) else ""))
@@ -540,7 +584,7 @@ def register_game(app):
         return _complete_callback(request, code, state, error, "game")
 
     @app.get("/glogin/go")
-    def glogin_go(request: Request, id: str = ""):
+    def glogin_go(request: Request, id: str = "", device: str = ""):
         """Park a chosen account id and hand back the return page. The dev page's
         buttons point here; only accepts the dev ids unless real Google is on (a raw
         id here would otherwise let anyone log in as any account)."""
@@ -550,7 +594,9 @@ def register_game(app):
                            "That account cannot be signed into this way.",
                            "Only the dev test accounts work while Google is off."),
                 status_code=403)
-        return HTMLResponse(return_page(request, id))
+        # Park under the device handoff key when present, so the native poller
+        # (which reads /glogin/pending?device=) retrieves the same value.
+        return HTMLResponse(return_page(request, id, device if _valid_handoff(device) else ""))
 
     @app.get("/glogin/pending")
     def glogin_pending(request: Request, device: str = ""):

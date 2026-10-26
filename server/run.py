@@ -158,6 +158,14 @@ class Service:
 
 def build_services() -> list[Service]:
     host = os.environ.get("KGC_DEV_BIND_HOST", "127.0.0.1")
+    # A local dev run cannot complete real Google OAuth: the authorised redirect URI
+    # is bound to the public domain, so the browser callback lands on the production
+    # server while the native poller / auth stay on 127.0.0.1 (split-brain -> "Sign-in
+    # expired" / hangs at "Authenticating"). The dev picker keeps the whole loop on
+    # loopback. Export GLOGIN_DEV=0 (plus a local http://localhost OAuth client) to
+    # opt into real Google instead; an explicit value always wins over this default.
+    if host in ("127.0.0.1", "localhost"):
+        os.environ.setdefault("GLOGIN_DEV", "1")
     uvicorn = _executable(
         "uvicorn",
         ROOT.parent / ".venv" / "bin" / "uvicorn",
