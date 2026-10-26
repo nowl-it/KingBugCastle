@@ -913,6 +913,12 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
   name. Transcendence (`/treasure/overcome`) itself was never broken - it matches
   `TreasureRequestModel` and needs item 3200 ingots for Rare/Special. Regression:
   `check_the_wish_list_saves_the_real_request_shape` in `server/tests/test_roguelike_shop.py`.
+- **Transcendence Common-rarity fix (2026-10-26)**: `r_treasure_overcome` had the material check
+  outside a rarity guard. For Common (NeedMaterial=0), if the client sent `materialItemCount > 0`
+  (UI default) and the player had no item-3200 ingots, `_deduct_inventory_item` failed -> silent
+  no-op with success=True in the response -> client shows 0 stars. Fix: wrap material handling in
+  `if need_material > 0`, cap `ingot_use` to `need_material - treasure_use` to never over-consume.
+  Regression tests: `check_common_overcome_requires_no_material`, `check_overcome_consumes_only_required_ingots`.
 
 ## 10. Post/mail system (2026-07-11)
 

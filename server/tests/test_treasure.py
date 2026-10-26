@@ -100,11 +100,39 @@ def check_max_relic_shape():
     print("ok: make_max_artifact grants 10* relic with maxed AtkSpeedPer at column 1")
 
 
+def check_common_overcome_requires_no_material():
+    """Common treasure (NeedMaterial=0) must transcend even when the client
+    sends item_count=1 but the player has 0 ingots — server should not
+    attempt to deduct more than need_material."""
+    st, tid = _seed(rid=10000)         # 10000 = Common
+    st["inventory"]["counts"][1] = 0   # zero ingots
+    out = OVERRIDES["/treasure/overcome"](
+        {"targetId": tid, "materialItemCount": 1}, st)
+    t = next(x for x in out["treasures"] if x["id"] == tid)
+    assert t["overcome"] == 1, f"Common overcome should succeed free, got: {t['overcome']}"
+    print("ok: Common transcend works with zero ingots even if client sends item_count")
+
+
+def check_overcome_consumes_only_required_ingots():
+    """For Rare (need=1), if client sends item_count=3, only 1 should be consumed."""
+    st, tid = _seed(rid=20000)
+    st["inventory"]["counts"][1] = 5   # 5 ingots available
+    out = OVERRIDES["/treasure/overcome"](
+        {"targetId": tid, "materialItemCount": 3}, st)
+    t = next(x for x in out["treasures"] if x["id"] == tid)
+    assert t["overcome"] == 1, f"overcome: {t['overcome']}"
+    inv = {i: c for i, c in zip(*[st["inventory"][k] for k in ("itemIds", "counts")])}
+    assert inv.get(3200, 0) == 4, f"should consume 1 not 3: {inv.get(3200)}"
+    print("ok: overcome deducts only the required number of ingots")
+
+
 if __name__ == "__main__":
     for fn in (check_treasure_add_exp_levels_up,
                check_treasure_overcome_raises_tier,
                check_treasure_overcome_caps_at_max,
                check_treasure_overcome_accepts_duplicate_legacy,
+               check_common_overcome_requires_no_material,
+               check_overcome_consumes_only_required_ingots,
                check_max_relic_shape):
         fn()
     print("all treasure checks passed")

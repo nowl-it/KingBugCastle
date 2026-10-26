@@ -1064,18 +1064,25 @@ def r_treasure_overcome(body, st):
     overcome = int(t.get("overcome", 0))
     if overcome >= max_overcome:
         return _treasure_result(st)
-    material_ids = list(dict.fromkeys(
-        body_int(i, 0) for i in (body.get("materialTreasureIds") or [])))
-    materials = [x for x in tr if x is not t and x.get("id") in material_ids]
-    item_count = body_int(body.get("materialItemCount"), 0, lo=0)
-    if len(materials) + item_count < need_material:
-        return _treasure_result(st)
-    if item_count and not accessory._deduct_inventory_item(
-            st, TREASURE_OVERCOME_ITEM, item_count):
-        return _treasure_result(st)
-    deleted = [x["id"] for x in materials]
-    if deleted:
-        tr[:] = [x for x in tr if x.get("id") not in set(deleted)]
+
+    deleted = []
+    if need_material > 0:
+        material_ids = list(dict.fromkeys(
+            body_int(i, 0) for i in (body.get("materialTreasureIds") or [])))
+        materials = [x for x in tr if x is not t and x.get("id") in material_ids]
+        item_count = body_int(body.get("materialItemCount"), 0, lo=0)
+        if len(materials) + item_count < need_material:
+            return _treasure_result(st)
+        # Consume only what's required: duplicate treasures first, then ingots.
+        treasure_use = min(len(materials), need_material)
+        ingot_use = min(item_count, need_material - treasure_use)
+        if ingot_use and not accessory._deduct_inventory_item(
+                st, TREASURE_OVERCOME_ITEM, ingot_use):
+            return _treasure_result(st)
+        deleted = [x["id"] for x in materials[:treasure_use]]
+        if deleted:
+            tr[:] = [x for x in tr if x.get("id") not in set(deleted)]
+
     t["overcome"] = overcome + 1
     t["updatedAt"] = now_iso()
     save_state(st)
