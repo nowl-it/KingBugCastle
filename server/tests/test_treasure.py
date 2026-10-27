@@ -163,35 +163,37 @@ def check_overcome_spends_only_the_selected_ingots():
 
 
 def check_special_transcends_from_one_five_star_duplicate():
-    """The live bug (player p-c2bb01fe32df): transcending a Special (need 6) with a
-    single already-transcended duplicate. A copy is worth (overcome + 1) units, so a
-    5-star copy = 6 = one full tier. The old len(materials) math saw '1 dupe' and
-    rejected it ('insufficient: need 6, got 1 dupes'), so the transcend silently
-    failed even though the client previewed 1 star."""
+    """The live rule (player p-c2bb01fe32df): 1 duplicate Legacy = 1 full tier =
+    need_material ingots (Special 6), and a copy transcended to N stars is worth
+    (N + 1) tiers. The old unit-per-copy math counted a 0-star copy as a single
+    ingot and rejected a Special transcend ('need 6, got 1'). Verify the base case
+    and the star-scaled case."""
     st, _ = _seed()
     special = ar.make_treasure(max(x["id"] for x in st["treasures"]) + 1, 30000)
     special["overcome"] = 0
     st["treasures"].append(special)
     st["inventory"]["counts"][1] = 0                 # no ingots at all
-    five = ar.make_treasure(max(x["id"] for x in st["treasures"]) + 1, 30000)
-    five["overcome"] = 5                             # worth 6 units
-    st["treasures"].append(five)
-    out = OVERRIDES["/treasure/overcome"](
-        {"targetId": special["id"], "materialTreasureIds": [five["id"]],
-         "materialItemCount": 0}, st)
-    t = next(x for x in out["treasures"] if x["id"] == special["id"])
-    assert t["overcome"] == 1, f"one 5-star copy (6 units) -> 1 tier, got {t['overcome']}"
-    assert out["deletedTreasures"] == [five["id"]], out["deletedTreasures"]
-    # A 0-star copy is only worth 1 unit -> still insufficient for a 6-cost tier.
+    # Base case: a single 0-star copy covers one whole Special tier (= 6 ingots).
     one = ar.make_treasure(max(x["id"] for x in st["treasures"]) + 1, 30000)
     one["overcome"] = 0
     st["treasures"].append(one)
-    out2 = OVERRIDES["/treasure/overcome"](
+    out = OVERRIDES["/treasure/overcome"](
         {"targetId": special["id"], "materialTreasureIds": [one["id"]],
          "materialItemCount": 0}, st)
+    t = next(x for x in out["treasures"] if x["id"] == special["id"])
+    assert t["overcome"] == 1, f"one 0-star copy -> 1 tier, got {t['overcome']}"
+    assert out["deletedTreasures"] == [one["id"]], out["deletedTreasures"]
+    # Star-scaled: a 5-star copy is worth 6 tiers (target 1 -> 7).
+    five = ar.make_treasure(max(x["id"] for x in st["treasures"]) + 1, 30000)
+    five["overcome"] = 5
+    st["treasures"].append(five)
+    out2 = OVERRIDES["/treasure/overcome"](
+        {"targetId": special["id"], "materialTreasureIds": [five["id"]],
+         "materialItemCount": 0}, st)
     t2 = next(x for x in out2["treasures"] if x["id"] == special["id"])
-    assert t2["overcome"] == 1, f"a lone 0-star copy must NOT add a tier, got {t2['overcome']}"
-    print("ok tier-value: one 5-star duplicate (6 units) -> +1 tier; 0-star copy rejected")
+    assert t2["overcome"] == 7, f"one 5-star copy -> +6 tiers (1->7), got {t2['overcome']}"
+    assert out2["deletedTreasures"] == [five["id"]], out2["deletedTreasures"]
+    print("ok tier-value: 0-star copy -> +1 tier; 5-star copy -> +6 tiers")
 
 
 def check_overcome_caps_at_max_when_batching():

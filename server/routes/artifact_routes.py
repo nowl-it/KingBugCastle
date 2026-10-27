@@ -1052,13 +1052,16 @@ def r_treasure_add_exp(body, st):
 
 
 def r_treasure_overcome(body, st):
-    """"Tier Transcendence": consume item 3200 (초월의 주괴) per TreasureOvercomeCost
-    and raise the treasure's overcome tier (max level +2 per tier, cap 10).
+    """"Tier Transcendence": consume item 3200 (초월의 주괴) or duplicate Legacy
+    treasures per TreasureOvercomeCost and raise the treasure's overcome tier
+    (max level +2 per tier, cap 10).
 
-    The client batches several tiers into one request and the request model has no
-    step-count field, so the tiers granted = total material units // per-tier cost
-    (each duplicate or ingot is one unit), capped at the remaining track. A Common
-    treasure (cost 0) carries no material to batch on and rises one tier a request."""
+    One tier costs `need_material` ingots (Common 0 / Rare 1 / Special 6) OR one
+    duplicate Legacy, and a copy already transcended to N stars is worth (N + 1)
+    of them (a 5-star copy = 6 tiers = 36 Special ingots). The client batches
+    several tiers into one request and the model has no step-count field, so
+    tiers granted = total units // need_material, capped at the remaining track.
+    A Common treasure (cost 0) carries no material and rises one tier a request."""
     admin_log(f"[treasure] overcome REQ target={body.get('targetId')} "
               f"mats={body.get('materialTreasureIds')} "
               f"itemCount={body.get('materialItemCount')}")
@@ -1091,25 +1094,24 @@ def r_treasure_overcome(body, st):
             have_ingots = _cnts[_i] if _i < len(_cnts) else 0
         ingots = client_item_count
 
-        # A duplicate Legacy is NOT worth one unit: it is worth its OWN
-        # transcendence tier + 1 (a 0-star copy = 1, a 5-star copy = 6). This is
-        # why feeding a single high-star copy can cover a whole Special tier
-        # (NeedMaterial 6) - the client's addedOvercome preview counts the same
-        # way. Treating every copy as 1 silently rejected those transcends
-        # ("insufficient: need 6, got 1 dupes") for players sacrificing
-        # already-transcended duplicates.
+        # A duplicate Legacy is worth a FULL tier per star it already carries:
+        # `need_material` ingots buy one tier and one (0-star) copy buys that same
+        # one tier, so a copy transcended to N stars is worth (N + 1) tiers (a
+        # 5-star copy = 6 tiers = 36 Special ingots). Express it in ingot units so
+        # duplicates and ingots add into one total: (overcome + 1) * need_material.
+        # The old code counted a copy as a single ingot, so a Special transcend fed
+        # by one duplicate was wrongly rejected as "insufficient: need 6, got 1".
         def _dupe_units(x):
-            return int(x.get("overcome", 0)) + 1
+            return (int(x.get("overcome", 0)) + 1) * need_material
         dupe_units = sum(_dupe_units(x) for x in materials)
         # The client batches a multi-tier transcend into ONE request and the
-        # TreasureRequestModel has no step-count field, so the number of tiers
-        # is implied by the total material units the player *selected*: each
-        # duplicate contributes (overcome + 1) units, each ingot one unit, and
-        # `need_material` units make one tier (client preview = total // need).
+        # TreasureRequestModel has no step-count field, so tiers granted = the
+        # total ingot-units the player *selected* // need_material (each copy
+        # (overcome + 1) * need_material units, each ingot one unit).
         steps = min((dupe_units + ingots) // need_material, max_overcome - overcome)
         if steps <= 0:
-            admin_log(f"[treasure] overcome insufficient: need {need_material} per "
-                      f"tier, got {dupe_units} dupe-units ({len(materials)} copies) "
+            admin_log(f"[treasure] overcome insufficient: need {need_material} ingots "
+                      f"per tier, got {dupe_units} dupe-units ({len(materials)} copies) "
                       f"+ {ingots} ingots (client={client_item_count} have={have_ingots})")
             return _treasure_result(st)
         # Consume only what the granted tiers cost: duplicate treasures first

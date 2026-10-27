@@ -965,16 +965,16 @@ Verified live: dev-0001 acc 62 `[AtkPer 26.0, BaseDef 80.0]` after manual remnan
   Batching still works when the client itself selects multiple tiers' worth. Over-reporting is safe:
   `_deduct_inventory_item` validates the real balance. Regression: `check_overcome_spends_only_the_selected_ingots`.
 - **Transcendence duplicate-tier-value fix (2026-10-27)**: player `p-c2bb01fe32df` still reported
-  transcendence broken after the over-spend fix; video showed a **5-star** Ur Kav duplicate fed to a
-  Special (NeedMaterial 6) with **0 ingots** and nothing happening. TLS log: `target=389 mats=[218]
-  insufficient: need 6, got 1 dupes`. Root cause: a duplicate Legacy is NOT worth a flat 1 unit — it
-  is worth **its own overcome tier + 1** (0-star=1, 5-star=6). `len(materials)` saw "1 dupe" and
-  rejected a transcend the client correctly previewed as +1 star. Fix in `r_treasure_overcome`: value
-  each copy via `_dupe_units(x)=overcome+1`, `steps=(dupe_units+ingots)//need_material`, and spend
-  **whole duplicates by value first** (a copy is consumed even if its last units overshoot — a
-  treasure can't be split), then ingots for the remainder. Note: the rejected requests never
-  consumed material, so no rollback needed for affected players. Regression:
-  `check_special_transcends_from_one_five_star_duplicate`. Deployed 54dddcc.
+  transcendence broken after the over-spend fix; video showed feeding a single Ur Kav (Special) copy
+  with **0 ingots** and nothing happening. TLS log: `target=389 mats=[218] insufficient: need 6 per
+  tier, got 1 dupes`. **Game rule (user-corrected): `need_material` ingots = 1 tier = 1 duplicate
+  Legacy** (Special 6, Rare 1, Common 0), and a copy already transcended to N stars is worth
+  **(N + 1) tiers** (a 5★ copy = 6 tiers = 36 Special ingots). The old code counted a copy as a
+  single ingot-unit, so a Special transcend fed by one duplicate was rejected ("need 6, got 1").
+  Fix in `r_treasure_overcome`: `_dupe_units(x) = (overcome + 1) * need_material` (ingot units),
+  `steps = (dupe_units + ingots) // need_material`, spend whole duplicates by value first then
+  ingots. Note: the rejected requests never consumed material, so no rollback needed. Regression:
+  `check_special_transcends_from_one_five_star_duplicate` (0★→+1 tier, 5★→+6 tiers). Deployed.
 
 ## 10. Post/mail system (2026-07-11)
 
