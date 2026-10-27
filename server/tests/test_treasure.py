@@ -162,6 +162,38 @@ def check_overcome_spends_only_the_selected_ingots():
     print("ok selected: 6 of 60 owned ingots -> overcome 1, 54 spared")
 
 
+def check_special_transcends_from_one_five_star_duplicate():
+    """The live bug (player p-c2bb01fe32df): transcending a Special (need 6) with a
+    single already-transcended duplicate. A copy is worth (overcome + 1) units, so a
+    5-star copy = 6 = one full tier. The old len(materials) math saw '1 dupe' and
+    rejected it ('insufficient: need 6, got 1 dupes'), so the transcend silently
+    failed even though the client previewed 1 star."""
+    st, _ = _seed()
+    special = ar.make_treasure(max(x["id"] for x in st["treasures"]) + 1, 30000)
+    special["overcome"] = 0
+    st["treasures"].append(special)
+    st["inventory"]["counts"][1] = 0                 # no ingots at all
+    five = ar.make_treasure(max(x["id"] for x in st["treasures"]) + 1, 30000)
+    five["overcome"] = 5                             # worth 6 units
+    st["treasures"].append(five)
+    out = OVERRIDES["/treasure/overcome"](
+        {"targetId": special["id"], "materialTreasureIds": [five["id"]],
+         "materialItemCount": 0}, st)
+    t = next(x for x in out["treasures"] if x["id"] == special["id"])
+    assert t["overcome"] == 1, f"one 5-star copy (6 units) -> 1 tier, got {t['overcome']}"
+    assert out["deletedTreasures"] == [five["id"]], out["deletedTreasures"]
+    # A 0-star copy is only worth 1 unit -> still insufficient for a 6-cost tier.
+    one = ar.make_treasure(max(x["id"] for x in st["treasures"]) + 1, 30000)
+    one["overcome"] = 0
+    st["treasures"].append(one)
+    out2 = OVERRIDES["/treasure/overcome"](
+        {"targetId": special["id"], "materialTreasureIds": [one["id"]],
+         "materialItemCount": 0}, st)
+    t2 = next(x for x in out2["treasures"] if x["id"] == special["id"])
+    assert t2["overcome"] == 1, f"a lone 0-star copy must NOT add a tier, got {t2['overcome']}"
+    print("ok tier-value: one 5-star duplicate (6 units) -> +1 tier; 0-star copy rejected")
+
+
 def check_overcome_caps_at_max_when_batching():
     """A batch must stop at the tier cap and only take material for granted tiers."""
     st, tid = _seed(rid=20000)
@@ -186,6 +218,7 @@ if __name__ == "__main__":
                check_overcome_batches_multiple_tiers,
                check_special_batches_from_twelve_ingots,
                check_overcome_spends_only_the_selected_ingots,
+               check_special_transcends_from_one_five_star_duplicate,
                check_overcome_caps_at_max_when_batching,
                check_max_relic_shape):
         fn()

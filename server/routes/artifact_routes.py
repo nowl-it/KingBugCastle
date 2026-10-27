@@ -1090,26 +1090,45 @@ def r_treasure_overcome(body, st):
             _i = _ids.index(TREASURE_OVERCOME_ITEM)
             have_ingots = _cnts[_i] if _i < len(_cnts) else 0
         ingots = client_item_count
+
+        # A duplicate Legacy is NOT worth one unit: it is worth its OWN
+        # transcendence tier + 1 (a 0-star copy = 1, a 5-star copy = 6). This is
+        # why feeding a single high-star copy can cover a whole Special tier
+        # (NeedMaterial 6) - the client's addedOvercome preview counts the same
+        # way. Treating every copy as 1 silently rejected those transcends
+        # ("insufficient: need 6, got 1 dupes") for players sacrificing
+        # already-transcended duplicates.
+        def _dupe_units(x):
+            return int(x.get("overcome", 0)) + 1
+        dupe_units = sum(_dupe_units(x) for x in materials)
         # The client batches a multi-tier transcend into ONE request and the
         # TreasureRequestModel has no step-count field, so the number of tiers
         # is implied by the total material units the player *selected*: each
-        # duplicate and each ingot is one unit, and `need_material` units make
-        # one tier (the client's own addedOvercome preview is the same count // need).
-        steps = min((len(materials) + ingots) // need_material, max_overcome - overcome)
+        # duplicate contributes (overcome + 1) units, each ingot one unit, and
+        # `need_material` units make one tier (client preview = total // need).
+        steps = min((dupe_units + ingots) // need_material, max_overcome - overcome)
         if steps <= 0:
             admin_log(f"[treasure] overcome insufficient: need {need_material} per "
-                      f"tier, got {len(materials)} dupes + {ingots} ingots "
-                      f"(client={client_item_count} have={have_ingots})")
+                      f"tier, got {dupe_units} dupe-units ({len(materials)} copies) "
+                      f"+ {ingots} ingots (client={client_item_count} have={have_ingots})")
             return _treasure_result(st)
-        # Consume only what the granted tiers cost: duplicate treasures first,
-        # then ingots, so leftover material is never burnt on an ungranted tier.
+        # Consume only what the granted tiers cost: duplicate treasures first
+        # (a whole copy is spent even if its last units overshoot - a treasure
+        # cannot be split), then ingots for the remainder, so leftover ingots
+        # are never burnt on an ungranted tier.
         units = steps * need_material
-        treasure_use = min(len(materials), units)
-        ingot_use = units - treasure_use
+        spent = 0
+        used = []
+        for x in materials:
+            if spent >= units:
+                break
+            used.append(x)
+            spent += _dupe_units(x)
+        ingot_use = max(0, units - spent)
         if ingot_use and not accessory._deduct_inventory_item(
                 st, TREASURE_OVERCOME_ITEM, ingot_use):
             return _treasure_result(st)
-        deleted = [x["id"] for x in materials[:treasure_use]]
+        deleted = [x["id"] for x in used]
         if deleted:
             tr[:] = [x for x in tr if x.get("id") not in set(deleted)]
         t["overcome"] = overcome + steps
