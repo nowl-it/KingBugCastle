@@ -74,40 +74,50 @@ case "${1:-}" in
 
       # Also restart TLS uvicorn (separate process, not managed by gunicorn SIGHUP).
       # Kill ALL matching instances (a double-spawn leaves orphans that can't
-      # rebind the port), wait for real exit, then verify the new one answers
-      # before declaring success - a silently failed bind once took HTTPS down
-      # while the deploy log still printed [OK].
-      _tls_pids=$(pgrep -f "uvicorn.*server:app.*--port.*${TLS_PORT}" 2>/dev/null || true)
+      # rebind the port), wait for real exit AND port release, then let the
+      # watchdog respawn + verify. The previous inline respawn raced the kernel
+      # socket teardown (Errno 98) whenever the reload fired twice in a row,
+      # leaving :8443 dark until the systemd timer caught it ~2 min later.
+      _tls_pids=$(pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" 2>/dev/null || true)
       if [ -n "$_tls_pids" ]; then
         echo "[+] Restarting TLS uvicorn (PIDs: $(echo $_tls_pids | tr '\n' ' '))..."
         kill $_tls_pids 2>/dev/null || true
         for _i in 1 2 3 4 5 6 7 8 9 10; do
           sleep 1
-          pgrep -f "uvicorn.*server:app.*--port.*${TLS_PORT}" >/dev/null 2>&1 || break
+          pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" >/dev/null 2>&1 || break
         done
-        _tls_left=$(pgrep -f "uvicorn.*server:app.*--port.*${TLS_PORT}" 2>/dev/null || true)
+        _tls_left=$(pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" 2>/dev/null || true)
         if [ -n "$_tls_left" ]; then
           echo "[!] TLS uvicorn ignored SIGTERM; SIGKILL $_tls_left"
           kill -9 $_tls_left 2>/dev/null || true
-          sleep 1
         fi
       fi
+      # Wait up to 5s for the listening socket to actually disappear before respawn.
+      for _i in 1 2 3 4 5; do
+        ss -ltn 2>/dev/null | grep -q ":${TLS_PORT} " || break
+        sleep 1
+      done
       if [ -f key.pem ] && [ -f cert.pem ]; then
-        nohup "$UVICORN" server:app --host "${KGC_BIND_HOST:-0.0.0.0}" --port "${TLS_PORT}" \
-            --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
-        _tls_new=$!
-        _tls_ok=0
-        for _i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
-          sleep 1
-          if curl -m 3 -sk -o /dev/null "https://127.0.0.1:${TLS_PORT}/" 2>/dev/null; then
-            _tls_ok=1; break
-          fi
-        done
-        if [ "$_tls_ok" = 1 ]; then
-          echo "[✓] TLS uvicorn restarted (PID: $_tls_new), verified on :${TLS_PORT}"
+        if [ -x ./tls_watchdog.sh ]; then
+          ./tls_watchdog.sh || true
         else
-          echo "[X] TLS uvicorn NOT answering on :${TLS_PORT} - check /tmp/kgc_pub_tls.log"
-          tail -5 /tmp/kgc_pub_tls.log || true
+          # Fallback if tls_watchdog.sh has not landed yet (older checkout).
+          nohup "$UVICORN" server:app --host "${KGC_BIND_HOST:-0.0.0.0}" --port "${TLS_PORT}" \
+              --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
+          _tls_new=$!
+          _tls_ok=0
+          for _i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+            sleep 1
+            if curl -m 3 -sk -o /dev/null "https://127.0.0.1:${TLS_PORT}/" 2>/dev/null; then
+              _tls_ok=1; break
+            fi
+          done
+          if [ "$_tls_ok" = 1 ]; then
+            echo "[✓] TLS uvicorn restarted (PID: $_tls_new), verified on :${TLS_PORT}"
+          else
+            echo "[X] TLS uvicorn NOT answering on :${TLS_PORT} - check /tmp/kgc_pub_tls.log"
+            tail -5 /tmp/kgc_pub_tls.log || true
+          fi
         fi
       fi
 
