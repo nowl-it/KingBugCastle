@@ -25,8 +25,14 @@ PROBE_TRIES="${PROBE_TRIES:-3}"
 PROBE_GAP="${PROBE_GAP:-3}"
 
 healthy() {
-    # Only a 200 counts as up; anything else (000, 502, timeout) is treated as down.
-    [ "$(curl -sk --max-time 6 -o /dev/null -w '%{http_code}' "$TLS_PROBE" 2>/dev/null)" = "200" ]
+    # A matching uvicorn process AND a listening socket on TLS_PORT together mean
+    # the endpoint is alive, even if the single worker is currently backlogged.
+    # The old curl-with-timeout probe treated "slow but serving" as "dead" and
+    # SIGKILLed a working uvicorn during load spikes, causing the very restart
+    # churn it was meant to prevent. Only a missing process or missing socket
+    # counts as down.
+    pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" >/dev/null 2>&1 \
+        && ss -ltn 2>/dev/null | grep -q ":${TLS_PORT} "
 }
 
 # Probe with retries so a transient blip (busy worker, slow TLS handshake) does
