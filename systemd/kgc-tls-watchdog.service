@@ -7,10 +7,15 @@ Wants=network-online.target
 Type=oneshot
 User=ubuntu
 WorkingDirectory=/home/ubuntu/kgc/server
-# Logic lives in server/tls_watchdog.sh (probes :8443; on anything but 200 it runs
-# serve_public.sh reload, whose TLS-respawn path is verified against :8443 before
-# declaring success). Kept in a script so systemd does not touch the shell vars.
-# It only fires on an actual outage, so the gunicorn SIGHUP stays rare.
+# The recovery spawns a detached uvicorn (setsid) that must OUTLIVE this oneshot.
+# The default control-group KillMode reaps the whole cgroup when the script exits,
+# which SIGTERMs the TLS uvicorn the moment the watchdog reports "recovered OK".
+# Kill only the script process, leaving the detached uvicorn running.
+KillMode=process
+# Logic lives in server/tls_watchdog.sh: it probes :8443 with retries and, only
+# when confirmed dead, starts a fresh TLS uvicorn directly and verifies it before
+# declaring success. Kept in a script so systemd does not touch the shell vars.
+# It only acts on a real outage, so healthy runs are a cheap no-op.
 ExecStart=/bin/bash /home/ubuntu/kgc/server/tls_watchdog.sh
 TimeoutStartSec=3min
 
