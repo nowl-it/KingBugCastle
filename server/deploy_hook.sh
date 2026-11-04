@@ -28,7 +28,22 @@ if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
   echo "[!] Refusing deploy from a dirty checkout. Commit, discard, or explicitly back up local work first." >&2
   exit 1
 fi
+_PRE_HEAD=$(git rev-parse HEAD)
 git pull --ff-only origin main
+_POST_HEAD=$(git rev-parse HEAD)
+# Re-exec ourselves if the pull changed HEAD. Bash reads scripts lazily by byte
+# offset, so a `git pull` that rewrites this very file mid-run leaves the rest
+# of the invocation running a splice of old + new source. Observed on
+# 2026-11-04: the pull landed after step [1] and the remaining steps
+# (caddy-sync + reload + probe) executed with stale offsets, silently skipping
+# the Caddyfile rewrite while :8443 had already been retired - players saw 502
+# even though the deploy reported "ZERO DOWNTIME". Guard with a single re-exec
+# flag so a misconfigured repo cannot loop us.
+if [ "$_PRE_HEAD" != "$_POST_HEAD" ] && [ -z "${KGC_DEPLOY_REEXEC:-}" ]; then
+  echo "[!] HEAD moved ($_PRE_HEAD -> $_POST_HEAD) - re-exec deploy_hook from new source"
+  export KGC_DEPLOY_REEXEC=1
+  exec /bin/bash "$0" "$@"
+fi
 
 echo "[2/4] Verifying Python virtual environment..."
 VENV_DIR=""

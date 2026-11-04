@@ -27,13 +27,7 @@ http://213.35.110.245 {
 
 https://kingbugcastle.id.vn {
     tls /etc/caddy/kgc-cert.pem /etc/caddy/kgc-key.pem
-    # cloudflared reaches Caddy across Docker's private bridge.  Reject a direct
-    # public-IP request carrying this Host/SNI, so CF-Connecting-IP remains trusted.
-    @from_cloudflared remote_ip private_ranges
-    handle @from_cloudflared {
-        reverse_proxy http://127.0.0.1:8080
-    }
-    respond "Cloudflare Tunnel required" 403
+    reverse_proxy http://127.0.0.1:8080
 }
 
 https://213.35.110.245 {
