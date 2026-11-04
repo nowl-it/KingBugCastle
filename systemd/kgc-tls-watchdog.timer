@@ -1,0 +1,10 @@
+[Unit]
+Description=Probe KGC TLS :8443 every 2 minutes and recover it if down
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=2min
+RandomizedDelaySec=15
+
+[Install]
+WantedBy=timers.target

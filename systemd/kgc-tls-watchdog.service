@@ -1,0 +1,18 @@
+[Unit]
+Description=KGC TLS (:8443) liveness watchdog - respawn if the orphan uvicorn died
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/home/ubuntu/kgc/server
+# Logic lives in server/tls_watchdog.sh (probes :8443; on anything but 200 it runs
+# serve_public.sh reload, whose TLS-respawn path is verified against :8443 before
+# declaring success). Kept in a script so systemd does not touch the shell vars.
+# It only fires on an actual outage, so the gunicorn SIGHUP stays rare.
+ExecStart=/bin/bash /home/ubuntu/kgc/server/tls_watchdog.sh
+TimeoutStartSec=3min
+
+[Install]
+WantedBy=multi-user.target

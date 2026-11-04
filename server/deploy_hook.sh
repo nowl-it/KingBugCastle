@@ -52,7 +52,7 @@ echo "[3b/4] Refreshing repo-versioned systemd units..."
 # absent (the deploy still reloads the app itself).
 if sudo -n true 2>/dev/null; then
   UNITS_REFRESHED=0
-  for u in kgc-coupon.service kgc-coupon-worker.service kgc-coupon-worker.timer; do
+  for u in kgc-coupon.service kgc-coupon-worker.service kgc-coupon-worker.timer kgc-tls-watchdog.service kgc-tls-watchdog.timer; do
     if [ -f "systemd/$u" ] && ! sudo -n cmp -s "systemd/$u" "/etc/systemd/system/$u" 2>/dev/null; then
       echo "    refreshing /etc/systemd/system/$u"
       sudo -n cp "systemd/$u" "/etc/systemd/system/$u" && UNITS_REFRESHED=1 \
@@ -62,6 +62,10 @@ if sudo -n true 2>/dev/null; then
   if [ "$UNITS_REFRESHED" = 1 ]; then
     sudo -n systemctl daemon-reload || true
     sudo -n systemctl enable kgc-coupon.service kgc-coupon-worker.timer 2>/dev/null || true
+    # The :8443 TLS uvicorn runs as a nohup orphan outside kgc.service, so an OOM
+    # kill there leaves the game dark while kgc still reports "active". Keep the
+    # liveness timer armed so it self-recovers.
+    sudo -n systemctl enable --now kgc-tls-watchdog.timer 2>/dev/null || true
   fi
 else
   echo "    (no passwordless sudo - skipped)"
@@ -78,6 +82,14 @@ sudo -n systemctl restart kgc-coupon.service 2>/dev/null || echo "    (coupon da
 
 echo "[5/5] Checking server health on port 8080..."
 sleep 2
+# The reload above SIGKILLs + respawns the :8443 TLS uvicorn, which can race the
+# port release (Errno 98) and leave it dead even though 8080 reloaded fine. Probe
+# 8443 the way players reach it and let the watchdog recover it if needed.
+TLS_CODE=$(curl -sk --max-time 6 -o /dev/null -w '%{http_code}' https://127.0.0.1:8443/ || echo 000)
+if [ "$TLS_CODE" != "200" ]; then
+    echo "    :8443 not healthy (got $TLS_CODE) - running TLS watchdog"
+    ./tls_watchdog.sh || echo "    (watchdog could not recover :8443 - check /tmp/kgc_pub_tls.log)"
+fi
 COMMIT_MSG=$(git log -1 --format='%s' HEAD)
 [ -x ./discord_notify.sh ] && ./discord_notify.sh "✅ **Deploy completed!** Branch: main
 \`$COMMIT_MSG\`" 1542559680361140386 || echo "    (discord notify skipped - script not present)"
