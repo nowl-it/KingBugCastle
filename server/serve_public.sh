@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
 # Run the KGC private server for REMOTE players (the shared XAPK points here).
 #
-# The client hits https://<baked-host>/  on port 443. Pick ONE exposure path:
+# The KGC private server listens on ONE HTTP port. How it is exposed to players:
 #
-#   A. Cloudflare Tunnel (recommended - no static IP, no open ports, valid TLS):
+#   A. Behind a TLS-terminating reverse proxy (production: Caddy + Cloudflare).
+#      Set KGC_TRUST_PROXY=1 + KGC_BIND_HOST=127.0.0.1 in /etc/kgc/server.env; the
+#      proxy owns 443 and forwards plain HTTP to this script's :8080. No local TLS
+#      listener is started (see TLS_LISTENER below), so the whole box serves one
+#      gunicorn pool and reload cannot orphan a second listener.
+#
+#   B. Cloudflare Tunnel (no static IP, no open ports, valid TLS):
 #        cloudflared tunnel --url http://localhost:8080          # quick (random host)
-#        # or a NAMED tunnel bound to your own short domain (<=26 chars), e.g. kgc.mydomain.com
-#      Then rebuild the XAPK with that host:  --host kgc.mydomain.com
 #      Only the :8080 HTTP server below is needed (Cloudflare terminates TLS).
 #
-#   B. Static public IP + port-forward 443 -> this box:
-#      Forward external 443 to local 8443 (this script's TLS port), bake --host <your.ip>.
-#
-#   C. LAN test: bake --host <this-box-LAN-ip>, players on same Wi-Fi hit :443 (forward 443->8443).
+#   C. Static public IP / LAN without a proxy - device talks HTTPS directly.
+#      This is what local redroid testing does: `adb reverse tcp:443 tcp:8443`
+#      expects a TLS uvicorn here. In that mode leave KGC_TRUST_PROXY unset and
+#      drop key.pem + cert.pem into server/ so the :8443 listener starts.
 #
 # The SSL-bypass patch makes the client accept ANY cert, so the self-signed cert.pem is fine.
 set -euo pipefail
@@ -40,6 +44,19 @@ HTTP_PORT="${HTTP_PORT:-8080}"
 TLS_PORT="${TLS_PORT:-8443}"
 BIND_HOST="${KGC_BIND_HOST:-0.0.0.0}"
 PID_FILE="/tmp/kgc_server.pid"
+
+# TLS listener policy. When a reverse proxy in front of us already terminates TLS
+# (KGC_TRUST_PROXY=1), starting a second :8443 uvicorn would double-encrypt every
+# request, waste CPU, and - critically - live as a nohup orphan outside
+# kgc.service's cgroup so `Restart=on-failure` cannot rescue it after an OOM kill.
+# In that mode we serve plain HTTP on :8080 only and let Caddy own TLS. For local
+# redroid testing without a proxy, keep spawning :8443 as before so
+# `adb reverse tcp:443 tcp:8443` still resolves.
+if [ "${KGC_TRUST_PROXY:-}" = "1" ]; then
+  TLS_LISTENER=0
+else
+  TLS_LISTENER=auto
+fi
 
 # Browser origin for the game OAuth callback. Preserve the operator-provided
 # deployment domain from server.env; the historic public domain is only a default.
@@ -72,52 +89,59 @@ case "${1:-}" in
       echo "[+] Sending SIGHUP to master process (PID: $PID) for Zero-Downtime reload..."
       kill -HUP "$PID"
 
-      # Also restart TLS uvicorn (separate process, not managed by gunicorn SIGHUP).
-      # Kill ALL matching instances (a double-spawn leaves orphans that can't
-      # rebind the port), wait for real exit AND port release, then let the
-      # watchdog respawn + verify. The previous inline respawn raced the kernel
-      # socket teardown (Errno 98) whenever the reload fired twice in a row,
-      # leaving :8443 dark until the systemd timer caught it ~2 min later.
-      _tls_pids=$(pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" 2>/dev/null || true)
-      if [ -n "$_tls_pids" ]; then
-        echo "[+] Restarting TLS uvicorn (PIDs: $(echo $_tls_pids | tr '\n' ' '))..."
-        kill $_tls_pids 2>/dev/null || true
-        for _i in 1 2 3 4 5 6 7 8 9 10; do
-          sleep 1
-          pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" >/dev/null 2>&1 || break
-        done
-        _tls_left=$(pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" 2>/dev/null || true)
-        if [ -n "$_tls_left" ]; then
-          echo "[!] TLS uvicorn ignored SIGTERM; SIGKILL $_tls_left"
-          kill -9 $_tls_left 2>/dev/null || true
-        fi
-      fi
-      # Wait up to 5s for the listening socket to actually disappear before respawn.
-      for _i in 1 2 3 4 5; do
-        ss -ltn 2>/dev/null | grep -q ":${TLS_PORT} " || break
-        sleep 1
-      done
-      if [ -f key.pem ] && [ -f cert.pem ]; then
-        if [ -x ./tls_watchdog.sh ]; then
-          ./tls_watchdog.sh || true
-        else
-          # Fallback if tls_watchdog.sh has not landed yet (older checkout).
-          nohup "$UVICORN" server:app --host "${KGC_BIND_HOST:-0.0.0.0}" --port "${TLS_PORT}" \
-              --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
-          _tls_new=$!
-          _tls_ok=0
-          for _i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+      # When we still own a TLS listener (local dev without proxy), cycle it too.
+      # The gunicorn SIGHUP does not touch that standalone process, and the port is
+      # not released by a HUP alone. Kill by resolved PID, wait for the socket to
+      # actually go away (the kernel can hold it a few seconds after SIGKILL), then
+      # respawn; the previous inline path raced Errno 98 whenever reload fired
+      # twice in a row and left :8443 dark for a whole timer interval.
+      if [ "$TLS_LISTENER" != "0" ] && [ -f key.pem ] && [ -f cert.pem ]; then
+        _tls_pids=$(pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" 2>/dev/null || true)
+        if [ -n "$_tls_pids" ]; then
+          echo "[+] Restarting TLS uvicorn (PIDs: $(echo $_tls_pids | tr '\n' ' '))..."
+          kill $_tls_pids 2>/dev/null || true
+          for _i in 1 2 3 4 5 6 7 8 9 10; do
             sleep 1
-            if curl -m 3 -sk -o /dev/null "https://127.0.0.1:${TLS_PORT}/" 2>/dev/null; then
-              _tls_ok=1; break
-            fi
+            pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" >/dev/null 2>&1 || break
           done
-          if [ "$_tls_ok" = 1 ]; then
-            echo "[✓] TLS uvicorn restarted (PID: $_tls_new), verified on :${TLS_PORT}"
-          else
-            echo "[X] TLS uvicorn NOT answering on :${TLS_PORT} - check /tmp/kgc_pub_tls.log"
-            tail -5 /tmp/kgc_pub_tls.log || true
+          _tls_left=$(pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" 2>/dev/null || true)
+          if [ -n "$_tls_left" ]; then
+            echo "[!] TLS uvicorn ignored SIGTERM; SIGKILL $_tls_left"
+            kill -9 $_tls_left 2>/dev/null || true
           fi
+        fi
+        for _i in 1 2 3 4 5; do
+          ss -ltn 2>/dev/null | grep -q ":${TLS_PORT} " || break
+          sleep 1
+        done
+        nohup "$UVICORN" server:app --host "$BIND_HOST" --port "${TLS_PORT}" \
+            --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
+        _tls_new=$!
+        _tls_ok=0
+        for _i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+          sleep 1
+          if curl -m 3 -sk -o /dev/null "https://127.0.0.1:${TLS_PORT}/" 2>/dev/null; then
+            _tls_ok=1; break
+          fi
+        done
+        if [ "$_tls_ok" = 1 ]; then
+          echo "[✓] TLS uvicorn restarted (PID: $_tls_new), verified on :${TLS_PORT}"
+        else
+          echo "[X] TLS uvicorn NOT answering on :${TLS_PORT} - check /tmp/kgc_pub_tls.log"
+          tail -5 /tmp/kgc_pub_tls.log || true
+        fi
+      else
+        echo "[i] TLS listener managed by reverse proxy - nothing to cycle here."
+        # Migration safety net: if a pre-refactor :8443 orphan is still bound
+        # (from a deploy before KGC_TRUST_PROXY=1 took effect), retire it now so
+        # the box really has one backend. Cheap no-op once none exists.
+        _orphan=$(pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" 2>/dev/null || true)
+        if [ -n "$_orphan" ]; then
+          echo "[+] Retiring orphan TLS uvicorn from a previous deploy (PIDs: $(echo $_orphan | tr '\n' ' '))..."
+          kill $_orphan 2>/dev/null || true
+          sleep 2
+          _still=$(pgrep -f "uvicorn server:app .*--port ${TLS_PORT}( |$)" 2>/dev/null || true)
+          [ -n "$_still" ] && kill -9 $_still 2>/dev/null || true
         fi
       fi
 
@@ -143,7 +167,9 @@ case "${1:-}" in
       rm -f "$PID_FILE"
     fi
     pkill -f "gunicorn.*server:app" 2>/dev/null || true
-    pkill -f "uvicorn.*server:app" 2>/dev/null || true
+    if [ "$TLS_LISTENER" != "0" ]; then
+      pkill -f "uvicorn.*server:app.*--port ${TLS_PORT}" 2>/dev/null || true
+    fi
     echo "[✓] Server stopped."
     exit 0
     ;;
@@ -201,13 +227,16 @@ else
   echo "$P1" > "$PID_FILE"
 fi
 
-if [ -f key.pem ] && [ -f cert.pem ]; then
+if [ "$TLS_LISTENER" = "0" ]; then
+  echo "[i] TLS listener skipped (KGC_TRUST_PROXY=1): reverse proxy terminates TLS upstream to :${HTTP_PORT}."
+  P2=""
+elif [ -f key.pem ] && [ -f cert.pem ]; then
   echo "[+] HTTPS TLS server ${BIND_HOST}:${TLS_PORT}"
   nohup "$UVICORN" server:app --host "$BIND_HOST" --port "${TLS_PORT}" \
       --ssl-keyfile key.pem --ssl-certfile cert.pem > /tmp/kgc_pub_tls.log 2>&1 &
   P2=$!
 else
-  echo "[!] cert.pem/key.pem missing - HTTPS not started (Cloudflare Tunnel terminates TLS)"
+  echo "[!] cert.pem/key.pem missing - HTTPS not started (Cloudflare Tunnel or reverse proxy must terminate TLS)"
   P2=""
 fi
 

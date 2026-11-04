@@ -1,6 +1,9 @@
 {
-    # Certificates are presented only to Cloudflare.  Existing game TLS is
+    # Certificates are presented only to Cloudflare.  The game's TLS is
     # self-signed too, so Cloudflare must remain in Full mode (not Flexible).
+    # Upstream to the app is plain HTTP on loopback - the app no longer needs
+    # its own TLS listener.  Caddy terminates TLS once, and gunicorn's
+    # multi-worker HTTP backend serves the traffic (see gunicorn_conf.py).
     auto_https disable_redirects
 }
 
@@ -15,13 +18,10 @@ http://kingbugcastle.id.vn, http://admin.kingbugcastle.id.vn, http://player.king
 http://213.35.110.245 {
     @client_ip path /__kgc_client_ip
     respond @client_ip "{remote_host}" 200
-    reverse_proxy https://127.0.0.1:8443 {
+    reverse_proxy http://127.0.0.1:8080 {
         header_up -CF-Connecting-IP
         header_up -X-Forwarded-For
         header_up X-Forwarded-For {remote_host}
-        transport http {
-            tls_insecure_skip_verify
-        }
     }
 }
 
@@ -31,24 +31,17 @@ https://kingbugcastle.id.vn {
     # public-IP request carrying this Host/SNI, so CF-Connecting-IP remains trusted.
     @from_cloudflared remote_ip private_ranges
     handle @from_cloudflared {
-        reverse_proxy https://127.0.0.1:8443 {
-            transport http {
-                tls_insecure_skip_verify
-            }
-        }
+        reverse_proxy http://127.0.0.1:8080
     }
     respond "Cloudflare Tunnel required" 403
 }
 
 https://213.35.110.245 {
     tls /etc/caddy/kgc-cert.pem /etc/caddy/kgc-key.pem
-    reverse_proxy https://127.0.0.1:8443 {
+    reverse_proxy http://127.0.0.1:8080 {
         header_up -CF-Connecting-IP
         header_up -X-Forwarded-For
         header_up X-Forwarded-For {remote_host}
-        transport http {
-            tls_insecure_skip_verify
-        }
     }
 }
 

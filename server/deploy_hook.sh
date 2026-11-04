@@ -52,23 +52,59 @@ echo "[3b/4] Refreshing repo-versioned systemd units..."
 # absent (the deploy still reloads the app itself).
 if sudo -n true 2>/dev/null; then
   UNITS_REFRESHED=0
-  for u in kgc-coupon.service kgc-coupon-worker.service kgc-coupon-worker.timer kgc-tls-watchdog.service kgc-tls-watchdog.timer; do
+  for u in kgc-coupon.service kgc-coupon-worker.service kgc-coupon-worker.timer; do
     if [ -f "systemd/$u" ] && ! sudo -n cmp -s "systemd/$u" "/etc/systemd/system/$u" 2>/dev/null; then
       echo "    refreshing /etc/systemd/system/$u"
       sudo -n cp "systemd/$u" "/etc/systemd/system/$u" && UNITS_REFRESHED=1 \
         || echo "    (failed to refresh $u)"
     fi
   done
+  # One-time teardown of the retired :8443 watchdog. That listener is gone now
+  # (Caddy terminates TLS and proxies plain HTTP to gunicorn :8080), so the
+  # timer would just probe a port nothing owns and log noise. Disable, remove,
+  # reload the daemon so systemd forgets the units.
+  for u in kgc-tls-watchdog.service kgc-tls-watchdog.timer; do
+    if sudo -n test -e "/etc/systemd/system/$u"; then
+      echo "    retiring obsolete $u"
+      sudo -n systemctl disable --now "$u" 2>/dev/null || true
+      sudo -n rm -f "/etc/systemd/system/$u"
+      UNITS_REFRESHED=1
+    fi
+  done
   if [ "$UNITS_REFRESHED" = 1 ]; then
     sudo -n systemctl daemon-reload || true
     sudo -n systemctl enable kgc-coupon.service kgc-coupon-worker.timer 2>/dev/null || true
-    # The :8443 TLS uvicorn runs as a nohup orphan outside kgc.service, so an OOM
-    # kill there leaves the game dark while kgc still reports "active". Keep the
-    # liveness timer armed so it self-recovers.
-    sudo -n systemctl enable --now kgc-tls-watchdog.timer 2>/dev/null || true
   fi
 else
   echo "    (no passwordless sudo - skipped)"
+fi
+
+echo "[3c/4] Syncing Caddy config from repo if changed..."
+# The reverse-proxy topology (Caddy terminates TLS and forwards plain HTTP to
+# the gunicorn backend) is a tracked file. Without this step an operator has to
+# remember to `sudo cp` + `caddy reload` on every port change, and the drift
+# between /etc/caddy/Caddyfile and systemd/kgc-public.Caddyfile has bitten us
+# more than once. We only touch caddy when the content actually differs, and we
+# validate before reload so a bad file cannot leave the box without ingress.
+if sudo -n true 2>/dev/null && [ -f systemd/kgc-public.Caddyfile ]; then
+  if ! sudo -n cmp -s systemd/kgc-public.Caddyfile /etc/caddy/Caddyfile 2>/dev/null; then
+    echo "    /etc/caddy/Caddyfile differs - staging + validating"
+    sudo -n cp /etc/caddy/Caddyfile /etc/caddy/Caddyfile.pre-kgc-deploy 2>/dev/null || true
+    sudo -n cp systemd/kgc-public.Caddyfile /etc/caddy/Caddyfile
+    if sudo -n caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1; then
+      sudo -n systemctl reload caddy 2>/dev/null || sudo -n systemctl restart caddy 2>/dev/null || true
+      echo "    caddy reloaded with the repo Caddyfile"
+    else
+      echo "    (!) validation failed - restoring previous Caddyfile"
+      sudo -n cp /etc/caddy/Caddyfile.pre-kgc-deploy /etc/caddy/Caddyfile 2>/dev/null || true
+      sudo -n systemctl reload caddy 2>/dev/null || true
+      echo "    leaving caddy on the prior config; deploy continues but caddy was not updated"
+    fi
+  else
+    echo "    (caddy config unchanged)"
+  fi
+else
+  echo "    (no passwordless sudo or no Caddyfile in repo - skipped)"
 fi
 
 echo "[4/4] Triggering Zero-Downtime Graceful Reload..."
@@ -82,13 +118,25 @@ sudo -n systemctl restart kgc-coupon.service 2>/dev/null || echo "    (coupon da
 
 echo "[5/5] Checking server health on port 8080..."
 sleep 2
-# The reload above SIGKILLs + respawns the :8443 TLS uvicorn, which can race the
-# port release (Errno 98) and leave it dead even though 8080 reloaded fine. Probe
-# 8443 the way players reach it and let the watchdog recover it if needed.
-TLS_CODE=$(curl -sk --max-time 6 -o /dev/null -w '%{http_code}' https://127.0.0.1:8443/ || echo 000)
-if [ "$TLS_CODE" != "200" ]; then
-    echo "    :8443 not healthy (got $TLS_CODE) - running TLS watchdog"
-    ./tls_watchdog.sh || echo "    (watchdog could not recover :8443 - check /tmp/kgc_pub_tls.log)"
+# The reload above SIGHUPs the gunicorn master, which spawns new workers and
+# drains the old ones; the listening socket never closes across a healthy reload.
+# If :8080 stops answering, the master itself died - let systemd's
+# Restart=on-failure handle it (kgc.service wraps this script as Type=simple).
+HTTP_CODE=$(curl -s --max-time 6 -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/ || echo 000)
+if [ "$HTTP_CODE" != "200" ]; then
+    echo "    :8080 not healthy (got $HTTP_CODE) - check systemctl status kgc + /tmp/kgc_pub_http.log"
+    tail -20 /tmp/kgc_pub_http.log 2>/dev/null || true
+fi
+# Also verify the reverse-proxy hop: the switch from :8443 to :8080 in the
+# Caddyfile means a typo there would still leave :8080 "healthy" while players
+# get 502. Probe through caddy itself via the public hostname (forced to
+# 127.0.0.1 with --resolve so we don't depend on Cloudflare round-tripping),
+# ignoring the self-signed cert.
+CADDY_CODE=$(curl -sk --max-time 6 --resolve kingbugcastle.id.vn:443:127.0.0.1 \
+    -o /dev/null -w '%{http_code}' https://kingbugcastle.id.vn/ || echo 000)
+if [ "$CADDY_CODE" != "200" ]; then
+    echo "    (!) caddy :443 -> backend returned $CADDY_CODE; players may be seeing errors"
+    sudo -n systemctl status caddy --no-pager 2>/dev/null | head -20 || true
 fi
 COMMIT_MSG=$(git log -1 --format='%s' HEAD)
 [ -x ./discord_notify.sh ] && ./discord_notify.sh "✅ **Deploy completed!** Branch: main
