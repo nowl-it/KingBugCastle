@@ -123,7 +123,7 @@ The table above is the **server's** vocabulary. On the wire the client needs its
 (`Item` → `InventoryItem`, `Unit` → `Card`, `UnitSoul` → `CardSoul`); `_wire_rewards()` in
 `server.py` translates inside `_reward_list_data()`. Send an unknown type and the reward renders
 with the wrong icon and a garbage count instead of failing - see the reward-type note in
-[../AGENTS.md](../AGENTS.md).
+[../AGENTS.md](https://github.com/nowl-it/KingBugCastle/blob/main/AGENTS.md).
 
 Send via the dashboard Admin tab or by appending to a player's `posts` array (server serves it with a
 `@raw:` prefix so literal title/text render, bypassing the Localizer). Mechanism: [inbox notes in AGENTS.md].

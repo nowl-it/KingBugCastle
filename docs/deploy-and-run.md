@@ -181,7 +181,7 @@ Healthy boot in logcat: `LibMainWrap → libxigncode.so → libmain_real.so → 
 > (`server/builders/build_private.py`), `AirbridgeActivity`, and plain HTTP - see
 > [private-build.md](private-build.md).
 
-For **remote players** (no adb) you bake a public host instead - see [../SHARE.md](../SHARE.md).
+For **remote players** (no adb) you bake a public host instead - see [../SHARE.md](https://github.com/nowl-it/KingBugCastle/blob/main/SHARE.md).
 
 ## Push a master-data change to the client
 

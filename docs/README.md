@@ -10,13 +10,13 @@ It complements the other docs - read those for the *why* and the *internals*:
 
 | Doc | Scope |
 |-----|-------|
-| **[../HANDOVER.md](../HANDOVER.md)** | Taking over the project: day-1 checklist, the recurring job, the trap ledger, known debt |
-| **[../README.md](../README.md)** | Project landing, feature list, repo layout |
-| **[../SETUP.md](../SETUP.md)** | First-run: clone → `setup.py` → run your own server |
-| **[../SHARE.md](../SHARE.md)** | Distribute a baked XAPK to remote players |
-| **[../AGENTS.md](../AGENTS.md)** | ARM64 binary-patch inventory, RVA map, il2cpp internals |
-| **[../KNOWLEDGE.md](../KNOWLEDGE.md)** | Datamine reference: API modules, IL2CPP, master-data files |
-| **[../server/WORKFLOW.md](../server/WORKFLOW.md)** | Day-to-day edit/test/deploy loop, "which file do I edit" |
+| **[../HANDOVER.md](https://github.com/nowl-it/KingBugCastle/blob/main/HANDOVER.md)** | Taking over the project: day-1 checklist, the recurring job, the trap ledger, known debt |
+| **[../README.md](https://github.com/nowl-it/KingBugCastle/blob/main/README.md)** | Project landing, feature list, repo layout |
+| **[../SETUP.md](https://github.com/nowl-it/KingBugCastle/blob/main/SETUP.md)** | First-run: clone → `setup.py` → run your own server |
+| **[../SHARE.md](https://github.com/nowl-it/KingBugCastle/blob/main/SHARE.md)** | Distribute a baked XAPK to remote players |
+| **[../AGENTS.md](https://github.com/nowl-it/KingBugCastle/blob/main/AGENTS.md)** | ARM64 binary-patch inventory, RVA map, il2cpp internals |
+| **[../KNOWLEDGE.md](https://github.com/nowl-it/KingBugCastle/blob/main/KNOWLEDGE.md)** | Datamine reference: API modules, IL2CPP, master-data files |
+| **[../server/WORKFLOW.md](https://github.com/nowl-it/KingBugCastle/blob/main/server/WORKFLOW.md)** | Day-to-day edit/test/deploy loop, "which file do I edit" |
 
 ## This folder
 

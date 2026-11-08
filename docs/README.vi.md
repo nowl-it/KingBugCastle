@@ -8,13 +8,13 @@ Nó bổ trợ cho các tài liệu khác - đọc những tài liệu đó đ�
 
 | Tài liệu | Phạm vi |
 |-----|-------|
-| **[../HANDOVER.md](../HANDOVER.md)** | Tiếp quản dự án: checklist ngày đầu, công việc định kỳ, sổ tay bẫy, nợ kỹ thuật đã biết |
-| **[../README.vi.md](../README.vi.md)** | Trang chủ dự án, danh sách tính năng, bố cục repo |
-| **[../SETUP.md](../SETUP.md)** | Chạy lần đầu: clone → `setup.py` → tự chạy server |
-| **[../SHARE.md](../SHARE.md)** | Phát hành XAPK đã bake cho người chơi từ xa |
-| **[../AGENTS.md](../AGENTS.md)** | Bảng patch nhị phân ARM64, bản đồ RVA, nội bộ il2cpp |
-| **[../KNOWLEDGE.md](../KNOWLEDGE.md)** | Tham chiếu datamine: module API, IL2CPP, file master data |
-| **[../server/WORKFLOW.md](../server/WORKFLOW.md)** | Vòng lặp sửa/test/deploy hằng ngày, "tôi phải sửa file nào" |
+| **[../HANDOVER.md](https://github.com/nowl-it/KingBugCastle/blob/main/HANDOVER.md)** | Tiếp quản dự án: checklist ngày đầu, công việc định kỳ, sổ tay bẫy, nợ kỹ thuật đã biết |
+| **[../README.vi.md](https://github.com/nowl-it/KingBugCastle/blob/main/README.vi.md)** | Trang chủ dự án, danh sách tính năng, bố cục repo |
+| **[../SETUP.md](https://github.com/nowl-it/KingBugCastle/blob/main/SETUP.md)** | Chạy lần đầu: clone → `setup.py` → tự chạy server |
+| **[../SHARE.md](https://github.com/nowl-it/KingBugCastle/blob/main/SHARE.md)** | Phát hành XAPK đã bake cho người chơi từ xa |
+| **[../AGENTS.md](https://github.com/nowl-it/KingBugCastle/blob/main/AGENTS.md)** | Bảng patch nhị phân ARM64, bản đồ RVA, nội bộ il2cpp |
+| **[../KNOWLEDGE.md](https://github.com/nowl-it/KingBugCastle/blob/main/KNOWLEDGE.md)** | Tham chiếu datamine: module API, IL2CPP, file master data |
+| **[../server/WORKFLOW.md](https://github.com/nowl-it/KingBugCastle/blob/main/server/WORKFLOW.md)** | Vòng lặp sửa/test/deploy hằng ngày, "tôi phải sửa file nào" |
 
 ## Thư mục này
 

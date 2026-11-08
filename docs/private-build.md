@@ -78,7 +78,7 @@ So the v171 build has to do three extra things before the familiar patches even 
 
 1. **NOP the NEO unpack path** in the packer (12 sites: 8 fixed signature-check branches +
    4 pattern-matched validation bail-outs). Offsets are per-packer-build - table in
-   [../AGENTS.md](../AGENTS.md). A mismatch is a hard `SystemExit`, never a silent skip.
+   [../AGENTS.md](https://github.com/nowl-it/KingBugCastle/blob/main/AGENTS.md). A mismatch is a hard `SystemExit`, never a silent skip.
 2. **Inject a real `libil2cpp.so`**, unpacked out of the packer itself by
    `patchers/unpack_neo.py` (offline, automatic). For a v171.1.00 source that is
    `il2cpp/v171.1.00/libil2cpp_v17110_ssl.so` - the build's **own** game code.
@@ -188,7 +188,7 @@ Both paths work and land on the same lobby:
 
 ## Patches
 
-Full offset table with original bytes and purpose: **[../AGENTS.md](../AGENTS.md)** →
+Full offset table with original bytes and purpose: **[../AGENTS.md](https://github.com/nowl-it/KingBugCastle/blob/main/AGENTS.md)** →
 *ARM64 Patch Inventory - v171 private build*. Short version:
 
 - 12 NEO NOPs in the packer `.so` (see above).
@@ -234,7 +234,7 @@ engine bug. **If the client crashes there, run `--check` before theorising about
 what *produces* the black lobby: `ldr x0,[x23]` loads `Il2CppClass*` out of its GOT slot, so
 `mov x0,x23` leaves x0 = the slot address, `klass->static_fields` (`+0xb8`) reads garbage and
 `GameManager._singleton` comes back null → NRE inside `Scene_Lobby.Init`. Full annotated disassembly
-and the proving tombstone: [../AGENTS.md](../AGENTS.md).
+and the proving tombstone: [../AGENTS.md](https://github.com/nowl-it/KingBugCastle/blob/main/AGENTS.md).
 
 **If a hook "does nothing", first prove it was installed.** The stub logs one line per hook. Three
 separate ways it silently installed nothing, all hit in one session:

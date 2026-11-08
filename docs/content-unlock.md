@@ -55,4 +55,4 @@ Then:
   ownership path (release gate + default grant) over mail-granting them raw.
 - When you **bump the whole client to a new version**, set `serverVersion` (and usually
   `patchFolder`) in `response_config.json` - the gate follows from it - and re-derive the ARM64
-  patch offsets, which do NOT carry across a version bump. See [../AGENTS.md](../AGENTS.md).
+  patch offsets, which do NOT carry across a version bump. See [../AGENTS.md](https://github.com/nowl-it/KingBugCastle/blob/main/AGENTS.md).

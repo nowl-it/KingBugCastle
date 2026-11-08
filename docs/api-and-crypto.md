@@ -74,4 +74,4 @@ handshake, a stub seed is enough for the API.
 Direct `@app.get/post` handlers (e.g. `/pvp/info`) must register **before** the
 `for _r in ROUTE_MODELS` loop to win. Lobby responses can also be filled via `OVERRIDES` (raw dict,
 bypasses `build_model`). Unknown paths log `[UNKNOWN PATH]` and return a generic model. Full RVA/model
-map: [../AGENTS.md](../AGENTS.md); datamine reference: [../KNOWLEDGE.md](../KNOWLEDGE.md).
+map: [../AGENTS.md](https://github.com/nowl-it/KingBugCastle/blob/main/AGENTS.md); datamine reference: [../KNOWLEDGE.md](https://github.com/nowl-it/KingBugCastle/blob/main/KNOWLEDGE.md).
