@@ -132,9 +132,12 @@ def test_public_caddy_serves_the_game_through_domain_and_origin_ip_safely():
     caddy = (_SERVER.parent / "systemd" / "kgc-public.Caddyfile").read_text(encoding="utf-8")
     assert "http://213.35.110.245" in caddy
     assert "https://213.35.110.245" in caddy
-    assert "@from_cloudflared remote_ip private_ranges" in caddy
-    assert "header_up -CF-Connecting-IP" in caddy
-    assert "header_up X-Forwarded-For {remote_host}" in caddy
+    # Both direct-IP hosts must scrub Cloudflare headers so a caller cannot forge the
+    # address the loopback service trusts.  (The old shared @from_cloudflared matcher is
+    # gone: the config exposes a /__kgc_client_ip probe instead.)
+    assert "path /__kgc_client_ip" in caddy
+    assert caddy.count("header_up -CF-Connecting-IP") == 2
+    assert caddy.count("header_up X-Forwarded-For {remote_host}") == 2
 
 
 def test_public_xapk_polls_origin_caddy_port_80_while_local_builder_keeps_8080_default():
