@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toàn bộ hồ sơ kỹ thuật — King Bug Castle</title>
+<meta name="description" content="Từng bước reverse engineering: trích master data, bung IL2CPP, bypass SSL, mô phỏng protocol, hook runtime, inject nội dung và phương pháp debug.">
+<link rel="stylesheet" href="blog.css">
+<link rel="alternate" hreflang="en" href="full.html">
+</head>
+<body>
+<a class="skip" href="#main">Tới nội dung</a>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="mark">King Bug Castle</span>
+    <nav>
+      <a href="vi.html">Câu chuyện</a>
+      <a href="full.vi.html" aria-current="page">Hồ sơ kỹ thuật</a>
+      <span class="lang">
+        <a href="full.html">EN</a>
+        <a href="full.vi.html" aria-current="true">VI</a>
+      </span>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Toàn bộ hồ sơ kỹ thuật</p>
+    <h1>Thực tế đã làm thế nào, từng bước</h1>
+    <p class="lede">
+      Không kể chuyện, không giấu nghề. Toàn bộ quy trình: master data lấy ở đâu, binary được
+      phục hồi ra sao, client được dạy cách tin một kẻ lạ, protocol được dựng lại thế nào, và mỗi
+      cú crash được định vị bằng cách nào. Kèm offset, đoạn code, và cả sai lầm.
+    </p>
+    <div class="meta">
+      <span>Đọc ~35 phút</span>
+      <span>12 phần</span>
+      <span>Không che gì ngoài credential</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+
+<nav class="toc">
+  <h2>Mục lục</h2>
+  <ol>
+    <li><a href="#method">Phương pháp và công cụ</a></li>
+    <li><a href="#target">Mục tiêu: bốn lớp</a></li>
+    <li><a href="#data">Lớp 1 — master data</a></li>
+    <li><a href="#binary">Lớp 2 — binary không được ship</a></li>
+    <li><a href="#read">Lớp 3 — đọc C# đã biên dịch</a></li>
+    <li><a href="#gates">Lớp 4 — bỏ các cổng chặn</a></li>
+    <li><a href="#protocol">Protocol</a></li>
+    <li><a href="#state">State người chơi và bất biến</a></li>
+    <li><a href="#hooks">Hook runtime</a></li>
+    <li><a href="#content">Inject nội dung</a></li>
+    <li><a href="#ops">Vận hành</a></li>
+    <li><a href="#debug">Phương pháp debug</a></li>
+  </ol>
+</nav>
+
+<!-- 1 -->
+<section class="chapter" id="method">
+  <span class="num">01</span>
+  <h2>Phương pháp và công cụ</h2>
+  <p class="first">
+    Không plugin, không framework, không phép màu. Toàn bộ dự án là bốn loại bằng chứng đối chiếu
+    lẫn nhau, cộng một luật: khi chúng mâu thuẫn, client đúng.
+  </p>
+  <dl class="kv">
+    <div><dt>Quan sát</dt><dd>Lưu lượng TLS/HTTP của client, logcat, ảnh chụp màn hình từ thiết bị thật hoặc emulator.</dd></div>
+    <div><dt>Khai báo</dt><dd>XML master data — game <em>nói</em> nội dung của nó là gì.</dd></div>
+    <div><dt>Biên dịch</dt><dd><code>libil2cpp.so</code> + <code>global-metadata.dat</code> — game <em>thực sự</em> làm gì.</dd></div>
+    <div><dt>Tổng hợp</dt><dd>Một server tạo ra đúng những byte mà lớp biên dịch chờ đợi, đúng thời điểm nó chờ.</dd></div>
+  </dl>
+  <p>
+    Bộ công cụ hoàn toàn bình thường: <code>Il2CppDumper</code> (metadata → khung C#),
+    <code>Ghidra</code> (decompiler), <code>capstone</code> (vài lệnh mỗi lần),
+    <code>UnityPy</code> (asset bundle), <code>apktool</code>/<code>apksigner</code>/<code>zipalign</code>
+    (build client), disassembly thô cho packer, và Python cho mọi thứ còn lại. Thiết bị test là
+    redroid — điều này quan trọng về sau: nó chạy ARM64 qua translator trên x86_64, và điều đó
+    thay đổi những gì debugger nhìn thấy.
+  </p>
+  <div class="note">
+    <b>Luật số 0.</b> Client là đặc tả. Mọi câu hỏi XML không trả lời được ("field này là số lượng
+    hay sức chứa?", "đánh chỉ số từ 0 hay 1?") đều được trả lời bởi chính hàm đọc nó — không bao
+    giờ bằng một phỏng đoán nghe hợp lý.
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="chapter" id="target">
+  <span class="num">02</span>
+  <h2>Mục tiêu: bốn lớp</h2>
+  <p>
+    King God Castle là game Unity (IL2CPP, ARM64) với kiến trúc backend mobile kinh điển. Mô hình
+    tư duy hữu ích: client tự tải nội dung của nó lúc khởi động, nên game được ghép từ bốn lớp độc
+    lập, và mỗi lớp hỏng theo một kiểu khác nhau.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Lớp</th><th>Nằm ở</th><th>Quyết định</th><th>Hỏng kiểu</th></tr>
+      <tr><td>Nội dung</td><td>bundle XML trên CDN (AssetBundle)</td><td>mọi con số, chuỗi, stage, bảng rơi</td><td>sai text, thiếu nội dung, gate chặn</td></tr>
+      <tr><td>Code</td><td><code>libil2cpp.so</code> + metadata</td><td>toàn bộ logic, mọi bất biến</td><td>crash, im lặng không làm gì, sai panel</td></tr>
+      <tr><td>Protocol</td><td>HTTPS + body AES</td><td>tài khoản sở hữu gì</td><td>panel rỗng, null reference, state cũ</td></tr>
+      <tr><td>Tin cậy</td><td>pinning TLS, anti-cheat, toàn vẹn</td><td>client có chạy được không</td><td>loading vô hạn, thoát ngay</td></tr>
+    </table>
+  </div>
+  <p>
+    Gần như mọi giả thuyết sai trong dự án đều do gán triệu chứng vào nhầm lớp. Panel trắng là lớp
+    3; panel trắng <em>và</em> treo luôn UI là lớp 2; panel không bao giờ hiện vì nội dung bị gate
+    là lớp 1.
+  </p>
+</section>
+
+<!-- 3 -->
+<section class="chapter" id="data">
+  <span class="num">03</span>
+  <h2>Lớp 1 — master data</h2>
+  <p>
+    Client hỏi backend một <em>patch folder</em>, rồi tải bundle <code>xml</code> từ CDN. Bundle đó
+    là một Unity AssetBundle chứa vài <code>TextAsset</code> — XML thuần, mỗi bảng một file — cộng
+    <code>AssetHash.txt</code> ghi tên bundle và md5.
+  </p>
+  <pre><b>GET /auth/getPatchFolder</b>        → { "patchFolder": "172" }
+<b>GET /patch/172/AssetHash.txt</b>     → xml:&lt;md5hex&gt;_&lt;size&gt;
+<b>GET /patch/172/xml</b>               → AssetBundle( TextAsset: Skills, Units, Stages, … )</pre>
+  <p>
+    Nên việc trích xuất là cơ học: tải bundle, nạp bằng UnityPy, duyệt các object
+    <code>TextAsset</code>, ghi mỗi <code>m_Name</code> ra file. Chạy vậy với mọi patch là có một
+    corpus có phiên bản; <code>xml_history/</code> chính là nó — ảnh chụp nguyên bản theo từng patch,
+    không bao giờ sửa, dùng làm nền để diff.
+  </p>
+  <p>
+    Các sửa đổi mà server thực sự phục vụ nằm riêng (<code>server/xml_live/</code>, cộng một bộ
+    "mod" nhỏ phát lại được trong code). Việc tách này quan trọng: refresh từ CDN thật và áp dụng
+    sửa đổi cục bộ là hai thao tác khác nhau, và bước refresh phải phát lại mod, nếu không chúng
+    biến mất trong im lặng.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Trong XML thực sự có gì</h3>
+  <p>
+    Khoảng 40 bảng. Những bảng gánh phần lớn dự án:
+    <code>Units</code>, <code>Skills</code>, <code>Buffs</code>, <code>Stages</code>,
+    <code>ShopItems</code>, <code>Gachas</code>, <code>InventoryItems</code>,
+    <code>FixedAccessoryPresets</code>, <code>Treasures</code>, <code>ChallengeSeasons</code>,
+    và một bảng bản địa hoá mỗi ngôn ngữ (<code>Strings_EN_US</code>, <code>Strings_VI</code>, …).
+  </p>
+  <p>
+    Hai sự thật cấu trúc cần biết trước khi sửa bất cứ thứ gì:
+  </p>
+  <ul>
+    <li><strong>Skill là chuỗi, không phải dòng.</strong> Một bậc skill là <code>Skill</code> kế
+      thừa từ cái khác qua <code>Inherit="id"</code>, thường nhảy qua
+      <code>TransformSkill</code> / <code>BuffAtCastSkill</code>. Một <code>Inherit</code> sai tạo
+      ra bậc dùng nhầm chỉ số gốc — không có lỗi nào cả.</li>
+    <li><strong>Text là key, không nội tuyến.</strong> Tên hiển thị của unit là key dạng
+      <code>UnitName_10810</code>, phân giải qua <code>Localizer</code> lúc chạy. Bất kỳ element XML
+      nào nhận text key (ví dụ <code>&lt;SubName&gt;</code>) đều có thể trỏ tới một key
+      <em>đã tồn tại</em> để dùng lại text mà dev chưa từng mở ra.</li>
+  </ul>
+
+  <div class="note warn">
+    <b>Cái bẫy tốn mười lần thử.</b> Một comment XML (<code>&lt;!-- --&gt;</code>) bất kỳ trong file
+    <code>Strings_*.xml</code> làm <code>Localizer.ParseTextAsset</code> mất <em>toàn bộ locale</em>:
+    mọi <code>Localize(key)</code> trả về key thô, cả game hiện <code>SkillName_10800</code> thay vì
+    "Cathy". Comment trong <code>Skills</code>/<code>Units</code>/<code>Stages</code> thì không sao —
+    parser khác. Bộ build bundle nay từ chối chạy nếu thấy comment, và việc từ chối đó không được
+    lách.
+  </div>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Diff một lần republish</h3>
+  <p>
+    Đôi khi dev ghi đè <em>cùng</em> patch folder tại chỗ, nên tên folder không đổi và một watcher
+    ngây thơ ("có folder mới không?") không thấy gì. Tín hiệu đáng tin là md5 của bundle trong
+    <code>AssetHash.txt</code>. Diff theo dòng giữa hai bộ XML trả lời "thực sự đổi cái gì" — và
+    nên làm trước khi đọc patch note chính thức, vì patch note nói ý định còn XML nói kết quả. Một
+    lần diff như vậy phát hiện một skill có tầm khai báo tăng từ 3 ô ở bậc 1 lên 41 ô ở bậc 3
+    trong dữ liệu <em>chính thức</em>.
+  </p>
+</section>
+
+<!-- 4 -->
+<section class="chapter" id="binary">
+  <span class="num">04</span>
+  <h2>Lớp 2 — binary không được ship</h2>
+  <p>
+    Đến v170 thì đây là bài đã giải: unzip APK, lấy <code>lib/arm64-v8a/libil2cpp.so</code> và
+    <code>assets/bin/Data/Managed/Metadata/global-metadata.dat</code>, đưa cả hai cho Il2CppDumper.
+    Từ v171 file đó đơn giản là không có. Thay vào đó là một thư viện anti-cheat mà lúc khởi động
+    sẽ giải mã game code vào bộ nhớ rồi map nó.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Tìm packer</h3>
+  <p>
+    <em>Tên file của thư viện loader xoay vòng mỗi build</em> — đã từng là
+    <code>libaledatic.so</code>, <code>librolineng.so</code>, <code>libxenerene.so</code>,
+    <code>libbisedich.so</code>, <code>liberallisi.so</code>. Đừng bao giờ khoá tooling vào tên.
+    <code>SONAME</code> của nó thì ổn định: <code>libappsign4a.so</code>.
+  </p>
+  <pre>$ readelf -d lib/arm64-v8a/lib*.so | grep SONAME
+  SONAME  [libappsign4a.so]          <b>← đây là loader</b></pre>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Chuỗi bung gói</h3>
+  <p>
+    Container là một header theo sau là các lớp biến đổi. Theo thứ tự:
+    <strong>RSA-1024</strong> (khối key/chữ ký của payload) → <strong>ChaCha20</strong> (stream) →
+    <strong>LZ4</strong> (payload). Đảo ngược chuỗi đó offline cho ra một ELF bình thường, nạp, link
+    và phân tích được. <code>server/patchers/unpack_neo.py</code> là toàn bộ chuỗi đó.
+  </p>
+  <p>
+    Có được ELF mới là nửa việc. Loader còn tự bảo vệ: một byte lệch trong code của chính nó là
+    chết trước khi bung, và parser từ chối header bất thường. Những kiểm tra đó là nội dung của
+    patch — mười hai vị trí trong bản build đã kiểm chứng:
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Nhóm</th><th>Hình dạng</th><th>Số lượng</th><th>Kích hoạt khi</th></tr>
+      <tr><td>toàn vẹn</td><td><code>bl</code> ; <code>tbnz w0,#31,&lt;fail&gt;</code></td><td>8</td><td>hash code/segment lệch sau khi patch</td></tr>
+      <tr><td>parser</td><td><code>mov w8,#-1</code> ; <code>str w8,[sp,#0x94]</code> ; <code>b</code></td><td>4</td><td>guard header/định dạng trên buffer đã giải mã</td></tr>
+    </table>
+  </div>
+  <p>
+    Nhóm thứ hai tìm bằng pattern (<code>08008012 e89700b9</code> — đúng bốn hit trong mọi loader
+    đã gặp), nhóm đầu bằng bảng, và <em>bảng khác nhau theo build, không dịch theo một hằng số</em>:
+    <code>libaledatic.so</code> map file offset == VMA, <code>librolineng.so</code> map VMA == file
+    − 0x4000, và bản thân hàm loader đã lớn lên giữa các phiên bản. Khoá vào "offset mới = offset
+    cũ + delta" là bảo đảm mất vài giờ.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Metadata phải khớp libil2cpp tuyệt đối</h3>
+  <p>
+    IL2CPP không phân giải chuỗi theo tên lúc chạy. Nó phân giải theo <em>chỉ số trong bảng string
+    literal của metadata</em>, được biên dịch vào code dưới dạng immediate. v171.0.01 chèn một
+    literal ở index 1545/25.730; việc đó dịch 94% các chỉ số phía sau. Trộn binary v171.0.01 với
+    metadata v171.0.00 không cảnh báo — nó hiện text rác, hoặc crash ở một chỗ chẳng liên quan gì
+    tới chuỗi.
+  </p>
+  <div class="note">
+    <b>Hệ quả thực tế.</b> Một bản build client là một bộ ba: <em>binary</em>, <em>metadata</em>,
+    <em>bundle nội dung</em>. Không bao giờ trộn bộ ba. Script build lấy cả ba từ cùng một thư mục
+    nguồn chính vì lý do này.
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="chapter" id="read">
+  <span class="num">05</span>
+  <h2>Lớp 3 — đọc C# đã biên dịch</h2>
+  <p>
+    Il2CppDumper cho ra <code>dump.cs</code> — một khung C#: tên class, offset field, chữ ký hàm,
+    và với mỗi hàm một dòng <code>RVA:</code>. File đó là mục lục. Nó không phải source, và không
+    bao giờ đủ một mình.
+  </p>
+  <pre><span style="color:var(--ink-faint)">// dump.cs</span>
+public class PvPInfoResponseModel {
+  // Fields
+  public int semiSeason;        // 0x20
+  public long[] seasonUntilAtDates; // 0x28
+  // Methods
+  public DateTime GetCurrentSeasonUntilAt(); <b>// RVA: 0x2CC27FC Offset: 0x2CBE7FC</b>
+}</pre>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">RVA, file offset, địa chỉ lúc chạy</h3>
+  <dl class="kv">
+    <div><dt>script.json</dt><dd><code>ScriptMethod[].Address</code> là <strong>RVA</strong>, cùng không gian với <code>pc</code> trong tombstone.</dd></div>
+    <div><dt>File offset</dt><dd>RVA − 0x4000 với <code>libil2cpp.so</code> <strong>mà thôi</strong>. Thư viện khác khác; phải kiểm, đừng giả định.</dd></div>
+    <div><dt>Địa chỉ runtime</dt><dd><code>dlpi_addr</code> từ <code>dl_iterate_phdr</code> + VMA của symbol. LOAD đầu của libil2cpp ở vaddr 0 nên không cần bù trừ.</dd></div>
+    <div><dt>"Offset" trong dump.cs</dt><dd>May mắn là đã bằng RVA − 0x4000 — nên vài tool đọc trực tiếp. Hãy đối chiếu với một patch đã biết đúng trước khi tin nó trên build mới.</dd></div>
+  </dl>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Đọc một hàm bằng tay</h3>
+  <p>
+    Ví dụ đã làm, vì đây chính là kỹ năng thật: <code>GetCurrentSeasonUntilAt</code> gọi property,
+    và property làm
+  </p>
+  <pre>seasonUntilAtDates[<b>semiSeason - 1</b>]</pre>
+  <p>
+    Cái <code>-1</code> đó là toàn bộ bug. Với <code>semiSeason = 0</code>, chỉ số là −1 →
+    <code>IndexOutOfRangeException</code> bên trong <code>MoveNext</code> của một panel, và biểu
+    hiện ra là "màn PvP hỏng, nguyên nhân không ở đâu cả". Sửa: gửi <code>semiSeason ≥ 1</code> và
+    mảng ngày đủ dài. Không patch client, không hack server — chỉ là field mà hàm đó thực sự đọc.
+  </p>
+  <p>
+    Cũng cách đọc đó làm các panel mùa hoạt động đúng. Hai kiểm tra liên quan quyết định game có
+    hiện "pre-season" và chặn chơi hay không:
+  </p>
+  <pre>isPreSeason  = GetSeasonStartAt(0) &gt; UtcNow      → nextSeasonStartAtDates[0] phải <b>trong quá khứ</b>
+isBreakTime  = seasonUntilAtDates[semiSeason-1] &lt;= UtcNow  → kết thúc hiện tại phải <b>trong tương lai</b></pre>
+  <p>
+    Cả hai chỉ là giá trị mảng với offset ngày. Sửa là một bảng offset, không phải sửa code — nhưng
+    chỉ sau khi đọc hai vị từ đó.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Offset field, và ObscuredInt</h3>
+  <p>
+    `dump.cs` cho offset mọi field, và đó là thứ khiến hook native khả thi: để đọc "level người
+    chơi" từ một object sống, bạn cần <code>*(int*)((char*)obj + offset)</code>. Một số field là
+    <code>ObscuredInt</code> — struct 20 byte phải đọc theo cặp rồi giải mã qua một thunk. Mọi lần
+    UI đọc <code>CardData.potentialTier</code> (offset 0xB8) theo đúng khuôn đó, nên một
+    <code>ldr w8,[x, #0xb8]</code> ngây thơ sẽ ra rác.
+  </p>
+</section>
+
+<!-- 6 -->
+<section class="chapter" id="gates">
+  <span class="num">06</span>
+  <h2>Lớp 4 — bỏ các cổng chặn</h2>
+  <p>
+    Bốn thứ độc lập ngăn một client đã patch nói chuyện với bạn. Cả bốn đều nhỏ khi đã định vị
+    được; không cái nào định vị được bằng cách đoán.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">a. Certificate pinning</h3>
+  <p>
+    Unity có ba đường kiểm chứng chứng chỉ, và một chứng chỉ tự ký phải sống sót cả ba. Mỗi cái là
+    một hàm mà câu trả lời đúng duy nhất là "có":
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Hàm</th><th>File offset v171</th><th>Patch</th></tr>
+      <tr><td><code>PinnedCertHandler.ValidateCertificate</code></td><td>0x2CB68D8</td><td><code>mov w0,#1 ; ret</code></td></tr>
+      <tr><td><code>UnityTlsProvider.ValidateCertificate</code></td><td>0x596EF64</td><td><code>mov w0,#1 ; ret</code></td></tr>
+      <tr><td><code>MobileTlsContext.ValidateCertificate</code></td><td>0x596D674</td><td><code>mov w0,#1 ; ret</code></td></tr>
+    </table>
+  </div>
+  <p>
+    <code>20008052 c0035fd6</code> = <code>mov w0,#1</code> rồi <code>ret</code>. Bốn byte patch mỗi
+    hàm, và toàn bộ mô hình tin cậy TLS của client biến mất.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">b. Anti-cheat</h3>
+  <p>
+    XIGNCODE không chịu khởi động nếu không bắt tay với Wellbia. Cách làm không phải mô phỏng
+    protocol mà thay cả thư viện: một stub <code>.so</code> đăng ký đúng các entry point JNI
+    (<code>ZCWAVE_*</code>) thành no-op, trả <code>/auth/xcdSeed</code> một giá trị đúng hình dạng
+    seed, và trả thành công cho các truy vấn toàn vẹn. Game khởi động và không hỏi lại.
+  </p>
+  <p>
+    Stub đó cũng là chỗ duy nhất thuận tiện để chạy code native trong tiến trình, nên nó lớn dần
+    thành host hook (phần 9).
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">c. Tên host — hai lượt, không phải một</h3>
+  <p>
+    Đổi host API bằng cách viết lại <em>bảng string literal</em> của il2cpp phủ được hầu hết URL.
+    Hai cái không nằm ở đó: chúng là giá trị mặc định của field/parameter, vô hình với cách duyệt
+    đó, và client lặng lẽ tiếp tục nói chuyện với backend thật.
+  </p>
+  <pre><b>lượt 1</b>  bảng stringLiteral      → mọi URL literal (viết lại cùng độ dài, sửa CRC)
+<b>lượt 2</b>  quét byte thô           → URL mặc định của field mà lượt 1 không thấy
+kiểm     quét metadata tìm chuỗi host thật → phải ra <b>0</b></pre>
+  <p>
+    Bước kiểm mới là quan trọng: "tôi đã patch rồi" không phải bằng chứng, "quét thấy 0 chuỗi host
+    thật" mới là.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">d. CRC của asset bundle</h3>
+  <p>
+    Byte bundle tuỳ biến không bao giờ tạo ra được CRC gốc, và catalog nằm trong gói tải về đã ký.
+    Sửa catalog để nói dối về CRC làm hỏng cả gói (JSON không hợp lệ, phải sửa độ dài, mọi bundle
+    fail). Nên chính phép kiểm bị bỏ lúc chạy, tại bốn vị trí:
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>File offset v172</th><th>Vị trí</th><th>Patch</th></tr>
+      <tr><td>0x5FC5F10</td><td><code>AssetBundleRequestOptions.get_Crc</code></td><td><code>mov w0,wzr ; ret</code></td></tr>
+      <tr><td>0x5FC8484</td><td>đối số CRC trực tiếp (<code>w1</code>)</td><td><code>mov w1,wzr</code></td></tr>
+      <tr><td>0x5FC639C</td><td>đối số CRC trực tiếp (<code>w1</code>)</td><td><code>mov w1,wzr</code></td></tr>
+      <tr><td>0x5FC648C</td><td>đối số CRC trực tiếp (<code>w2</code>)</td><td><code>mov w2,wzr</code></td></tr>
+    </table>
+  </div>
+  <div class="note warn">
+    <b>Mọi patch build đều có guard.</b> Script patch kiểm byte gốc mong đợi tại từng vị trí và
+    dừng lại thay vì làm hỏng binary. Điều này tồn tại vì có lần một bản build ship thư viện patch
+    tay với 21 byte lạc — trong đó một nhánh ghi đè hằng số bên trong state machine, biến coroutine
+    tuyến tính thành đệ quy vô hạn. Nó bị chẩn đoán hai lần là "bug cố hữu của IL2CPP" trước khi ai
+    đó diff file với bản nguyên.
+  </div>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">e. Patch duy nhất đã sai</h3>
+  <p>
+    Thời gian đầu, 65 vị trí trong init của lobby bị đổi từ <code>ldr x0,[xR]</code> sang
+    <code>mov x0,xR</code>, theo giả thuyết một fixup con trỏ klass không chạy dưới translator ARM.
+    Nó chạy. <code>xR</code> giữ GOT slot; <code>ldr</code> chính là lệnh nạp con trỏ class ra khỏi
+    slot. Viết lại khiến <code>x0</code> trỏ vào slot, nên đọc static field ra rác và singleton
+    trông như null — đúng triệu chứng mà patch định sửa. Nó được bật suốt nhiều tuần vì lobby đôi
+    khi vẫn render.
+  </p>
+</section>
+
+<!-- 7 -->
+<section class="chapter" id="protocol">
+  <span class="num">07</span>
+  <h2>Protocol</h2>
+  <p>
+    API là HTTPS với body AES-128-ECB và trên thực tế <em>không</em> có auth header có ý nghĩa với
+    server cục bộ. Sự đơn giản đó là thứ khiến việc dựng lại toàn bộ khả thi.
+  </p>
+  <pre><b>key</b>      a6072ad6b9c959ff           (16 byte ASCII, AES-128-ECB)
+<b>padding</b>  khoảng trắng hoặc zero ở cuối cho đủ bội số 16; decoder bỏ qua pad
+<b>request</b>  ciphertext thô hoặc ASCII-hex của nó → header <b>encryptedWithHex: true</b>
+<b>auth</b>     header <b>accesstoken: &lt;token&gt;</b>   (không phải Authorization: Bearer)
+<b>time</b>     header = AES-hex("beforeLogin") trước login, AES-hex(unix_ms) sau login</pre>
+  <p>
+    Nghĩa là một handler có thể được thử mà không cần game:
+  </p>
+  <pre>KEY = b"a6072ad6b9c959ff"
+def enc(d): raw = json.dumps(d).encode().ljust(16*((len(json.dumps(d))+15)//16), b" ")
+            return AES.new(KEY, AES.MODE_ECB).encrypt(raw)
+def dec(b): pt = AES.new(KEY, AES.MODE_ECB).decrypt(b)
+            return json.loads(pt[:pt.rindex(b"}")+1])</pre>
+  <p>
+    Chuỗi khởi động ngắn và đã map đủ:
+  </p>
+  <pre>POST /auth/shake-hand            POST /auth/checkPatchVersion
+GET  /auth/getPatchFolder        GET  /auth/xcdSeed        GET /auth/xcd
+POST /auth/register | /auth/login     → AuthResponseModel { accessToken, seed, serverTime }
+GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … khoảng 350 nữa</pre>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Ánh xạ route → model, và cái bẫy model rỗng</h3>
+  <p>
+    `dump.cs` cho mọi class request/response; việc còn lại là nối chuỗi path của client với đúng
+    class. Chỗ không chứng minh được thì dùng heuristic giống tên — và mọi lần đoán sai đều ra cùng
+    một triệu chứng: <strong>null reference trong một panel đã nhận model hợp lệ nhưng rỗng</strong>.
+  </p>
+  <pre>[RankingPanel.&lt;ShowRanking&gt;d__14.MoveNext]
+  myRankingItem.Set(model.playerRank, true)   ← model.playerRank null → NRE</pre>
+  <p>
+    Nên: route lạ → model rỗng → panel crash. Cách sửa không phải code phòng thủ ở client, mà là
+    một response thật. Vài route cần handler trực tiếp đăng ký <em>trước</em> vòng lặp chung, vì
+    bảng chung map sai hẳn model (<code>GET /post</code> → model "receive" không có field
+    <code>posts</code>).
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Bộ từ vựng đóng</h3>
+  <p>
+    Chuỗi trong response không tự do. <code>RewardResponseData.type</code> được so với một tập
+    literal cố định — <code>InventoryItem</code>, <code>Key</code>, <code>UnitExpItem</code>,
+    <code>UnitSoulItem</code>, <code>CardSoul</code>, <code>Gold</code>, <code>Cash</code>,
+    <code>Heart</code>, <code>Artifact</code>, <code>Treasure_*</code>, <code>Skin</code>,
+    <code>NameTag</code>, <code>Flag</code>… — và <strong>không có <code>"Item"</code></strong>.
+    Type không khớp không báo lỗi: phần thưởng hiện không icon và một con số vô nghĩa. Vì vậy server
+    giữ một bộ từ vựng nội bộ và dịch đúng một lần, ở ranh giới wire.
+  </p>
+  <p>
+    Bẫy liên quan: <code>Key</code> là id <em>ShopItem</em>, không phải id inventory. ShopItem 370
+    có <code>&lt;KeyItem&gt;</code> là dòng inventory 380; 70000 → 70005. Gộp cái này vào cái kia sẽ
+    cấp nhầm vật phẩm, trong im lặng.
+  </p>
+</section>
+
+<!-- 8 -->
+<section class="chapter" id="state">
+  <span class="num">08</span>
+  <h2>State người chơi và bất biến</h2>
+  <p>
+    Hai mặt phẳng, và sự phân biệt này giải thích hầu hết báo cáo "tôi sửa mà không thấy gì":
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Mặt phẳng</th><th>Nằm ở</th><th>Độ trễ thay đổi</th></tr>
+      <tr><td>State tài khoản / API</td><td>SQLite, mỗi người chơi một dòng, đọc lại mỗi request</td><td>tức thì</td></tr>
+      <tr><td>Master data phía client</td><td>bundle xml trên CDN</td><td>rebuild + restart + client tải lại</td></tr>
+    </table>
+  </div>
+  <p>
+    Cấp một treasure là mặt phẳng 1. Làm treasure đó <em>tồn tại</em> với client là mặt phẳng 2. Sửa
+    nhầm mặt phẳng tạo ra một no-op rất thuyết phục.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Các bất biến nên ghi lại</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Bất biến</th><th>Xuất phát từ</th><th>Hỏng ra sao</th></tr>
+      <tr><td>độ dài deck == 6</td><td>hai mảng UI: một cái đánh chỉ số 6, một cái lặp theo độ dài của bạn</td><td>IndexOutOfRange khi load, hoặc crash khi sửa deck</td></tr>
+      <tr><td>card có <code>unitId</code></td><td><code>card_to_dict</code> đọc nó</td><td>cả <code>/card/all</code> chết → <em>mọi</em> hero hiện "Not Owned"</td></tr>
+      <tr><td><code>potentialTier</code> ∈ {0,1}</td><td><code>Constants.PotentialTier.Max = 1</code></td><td>badge hiện thức tỉnh không đổi được</td></tr>
+      <tr><td><code>targets.Count</code> của artifact == số opt</td><td><code>ArtifactOptionUI.Init</code> lặp theo nó</td><td>tra từ điển <code>"None"</code> → crash</td></tr>
+      <tr><td>một entry mỗi key <code>subStats</code></td><td>client gộp theo key khi apply</td><td>7–8 dòng stat; đổi stat chỉ thay một bản</td></tr>
+      <tr><td>unit id ∈ 10000..10999</td><td>kích thước mảng card</td><td>client crash</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Hai luật học bằng giá đắt</h3>
+  <p>
+    <strong>Suy ra thời gian, đừng lưu.</strong> Lobby so <code>now</code> với field
+    <code>tomorrow</code> và chạy lại cả chuỗi fetch khi sang ngày. Một <code>tomorrow</code> bị lưu
+    và đóng băng lúc tạo tài khoản làm "ngày mới" đến vĩnh viễn: client login lại 1 Hz — mười bảy
+    request mỗi giây, không exception, không dòng logcat, ~400k request/ngày. Nay nó được tính từ
+    đồng hồ ở mỗi response.
+  </p>
+  <p>
+    <strong>Không bao giờ suy ra danh tính.</strong> "Nếu không có id thì dùng save đang hoạt động"
+    đúng cho demo và thảm hoạ cho dịch vụ: một client mất guest id nhận thế giới của người khác, kèm
+    session gắn vào. Câu trả lời đúng ở chế độ nhiều người là từ chối. Guest id mới nhận save mới;
+    save cũ được gắn lại có chủ đích, đúng tên.
+  </p>
+</section>
+
+<!-- 9 -->
+<section class="chapter" id="hooks">
+  <span class="num">09</span>
+  <h2>Hook runtime</h2>
+  <p>
+    Có thứ không sửa được từ server: một chỉ số phải được hiển thị, một nội dung thư phải đi vòng
+    qua localizer. Đó là việc của thư viện stub — nó chứa code native bên trong game đang chạy.
+  </p>
+  <p>
+    Có hai cơ chế, và chọn sai tạo ra hook báo cài thành công nhưng không bao giờ chạy.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>hoán con trỏ methodPointer</th><th>inline detour</th></tr>
+      <tr><td>Chặn được</td><td>chỉ những gì Unity gọi qua <code>MethodInfo.methodPointer</code></td><td>mọi caller, kể cả <code>bl</code> trực tiếp</td></tr>
+      <tr><td>Hợp với</td><td><code>Update</code>, <code>Awake</code>, <code>OnEnable</code></td><td>gọi C#→C#, callback UI</td></tr>
+      <tr><td>Giá</td><td>một lần ghi con trỏ</td><td>nhảy prologue + trampoline thực thi được</td></tr>
+    </table>
+  </div>
+  <pre><b>prologue detour (16 byte)</b>
+  LDR  X17, #8
+  BR   X17
+  .quad target
+<b>trampoline</b>
+  &lt;16 byte bị lấy&gt; ; nhảy về target+16</pre>
+  <p>
+    Guard rất quan trọng: nếu một trong bốn lệnh bị lấy là PC-relative
+    (<code>ADR</code>/<code>ADRP</code>/load literal/<code>B</code>/<code>BL</code>/nhánh có điều
+    kiện) thì không thể dời được và hook phải abort. Hầu hết prologue là
+    <code>stp</code>/<code>mov</code>/<code>sub sp</code> nên đều ổn.
+  </p>
+  <div class="note">
+    <b>Ba thất bại im lặng, mỗi cái một phiên.</b> (1) Vòng poll nhận handle
+    <code>dlopen("libil2cpp.so")</code> đầu tiên — hoá ra là <em>packer</em>, được nạp từ rất lâu
+    trước game, nên mọi <code>dlsym</code> fail. Chỉ nhận handle nếu nó export
+    <code>il2cpp_domain_get</code>. (2) Quét <code>/proc/self/maps</code> lọc <code>r-xp</code>
+    không thấy gì, vì trang ARM64 của guest được map <code>r--p</code> và được translator thực
+    thi — phải dùng <code>dl_iterate_phdr</code>. (3) Một phiên chẩn đoán bọc ba tính năng trong
+    <code>#if 0</code> và không bao giờ khôi phục.
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="chapter" id="content">
+  <span class="num">10</span>
+  <h2>Inject nội dung</h2>
+  <p>
+    Sửa text thì dễ; bắt client hiển thị một thứ chưa ai từng tạo ra là năm bài toán riêng. Ví dụ đã
+    làm là một bộ trang phục mới.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">1. Dòng dữ liệu</h3>
+  <p>
+    Một dòng trong XML unit/skin trỏ tới tên asset. Cần thiết, và tự nó chỉ tạo ra thumbnail trắng.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">2. Bundle</h3>
+  <p>
+    Bundle được định địa chỉ theo nội dung và kiểm CRC so với catalog đã bake. Byte tuỳ biến không
+    thể khớp CRC; catalog không thể sửa. Vì vậy phép kiểm CRC lúc chạy bị bỏ (phần 6d). Không có
+    bước này thì không bước nào khác trong pipeline chạy được.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">3. Atlas — hình học, không phải pixel</h3>
+  <p>
+    Hoạt ảnh chiến đấu của một nhân vật là 19 khung trong lưới cố định (130×140, năm cột, ô cuối
+    cùng bên phải để trống), và mỗi khung mang một polygon khít tính cho đúng silhouette đó cộng UV
+    transform suy từ pivot. Dùng lại một ảnh rộng hơn trong lưới cũ sẽ cắt và phóng: sai dáng, mất
+    góc, tràn sang ô bên cạnh. Mọi khung phải được dựng lại thành quad bốn đỉnh phủ đủ ô.
+  </p>
+  <pre>kiểm: đọc lại từng Sprite.image đã serialize → phải đúng (130,140)
+      dựng lại atlas → phải giống hệt file PNG trong repo</pre>
+  <p>
+    Khung 18 đặc biệt: nó là Sprite mặc định của prefab và là thumbnail của skin, nên phải là dáng
+    đứng nhìn thẳng với silhouette đầy đủ — không phải khung chạy.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">4. Prefab</h3>
+  <p>
+    Clone nhân vật gốc: hierarchy, component, 10 animation clip, animator controller, và mọi PPtr.
+    Gán cho sprite clone một <em>render-data key riêng, tất định</em>. Dùng chung key với bản gốc thì
+    chân dung phân giải về ảnh gốc — hoặc về không gì cả, cả hai đều không báo lỗi.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">5. Catalog addressables</h3>
+  <p>
+    Phải thêm năm location, không phải một: texture + sprite cho atlas chiến đấu, texture + sprite
+    cho illustration, và GameObject prefab. Đúng bốn trên năm thì entry vẫn hiện trong shop với
+    thumbnail trắng và chân dung lớn mặc định.
+  </p>
+  <div class="note">
+    <b>Bẫy thứ tự.</b> Bundle illustration cũng cần hình học render phủ đủ hình chữ nhật — dùng lại
+    polygon khít 908×912 của bản gốc trên chân dung 1024×1024 tạo ra lỗ trong suốt lớn hoặc panel
+    trắng, dù texture và entry catalog đều hoàn hảo.
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="chapter" id="ops">
+  <span class="num">11</span>
+  <h2>Vận hành</h2>
+  <p>
+    Chạy cho người lạ đổi bài toán từ "nó có chạy không" thành "nó có chạy tiếp không".
+  </p>
+  <dl class="kv">
+    <div><dt>Cổng</dt><dd>HTTP 8080 (API game sau workaround TLS), TLS 8443, admin 8081, player portal 8082.</dd></div>
+    <div><dt>Thiết bị</dt><dd><code>adb reverse tcp:80 tcp:8080</code> + <code>adb reverse tcp:443 tcp:8443</code>; hosts trỏ domain thật về loopback.</dd></div>
+    <div><dt>Proxy</dt><dd>Caddy kết thúc TLS một lần cho ba hostname rồi forward về loopback; request trực tiếp bằng IP bị bỏ header Cloudflare để không ai giả được địa chỉ client.</dd></div>
+    <div><dt>Deploy</dt><dd>Một key có dòng <code>authorized_keys</code> ghim đúng một lệnh: từ chối nếu bẩn → <code>git pull --ff-only</code> → restart unit.</dd></div>
+    <div><dt>CI</dt><dd>pytest đầy đủ khi push; một workflow riêng build client đã patch và phát hành release.</dd></div>
+    <div><dt>Chi phí</dt><dd>Bằng 0, theo yêu cầu. Đó là lý do gói game gốc 1,1 GB được tải từ GitHub trong lúc build rồi xoá: egress bị tính tiền, release asset thì không.</dd></div>
+  </dl>
+  <p>
+    Hai lỗi vận hành đáng gọi tên. Thứ nhất, vòng reset ngày (phần 8) — một vấn đề dịch vụ sinh ra
+    từ một quyết định mô hình dữ liệu. Thứ hai, "deploy chẳng làm gì": các unit chuyển output ra
+    file trong <code>/tmp</code> chứ không vào journald, nên một lần restart trông như fail thực ra
+    đã thành công, và một thay đổi cấu hình trông như đã áp thực ra chưa. Hãy đọc đúng file mà tiến
+    trình thực sự ghi.
+  </p>
+</section>
+
+<!-- 12 -->
+<section class="chapter" id="debug">
+  <span class="num">12</span>
+  <h2>Phương pháp debug</h2>
+  <p>
+    Đây là phần đáng mang sang dự án khác, vì nó tổng quát hoá được và chính nó biến những hố nhiều
+    phiên thành sửa trong một giờ.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">a. Biến exception managed thành fault thật</h3>
+  <p>
+    Một <code>NullReferenceException</code> của IL2CPP báo tên hàm và không báo dòng. Tạm NOP các
+    nhánh null-check trong hàm nghi ngờ; object null đầu tiên sẽ rơi vào chính lệnh deref của nó và
+    SIGSEGV tại một PC định vị được.
+  </p>
+  <pre>#00 0x03040134  GameManager$$Init      +0x98  ldrb w8,[x19,#0x1b0]   x19 == 0
+#01 0x034E5624  Scene_Lobby$$Init      +0x270 bl GameManager.Init
+#02 0x034E368C  Scene_Lobby$$Awake     +0x6E0</pre>
+  <p>
+    Đó là nguyên nhân gốc kèm toạ độ. Cũng chính cách này chứng minh patch ở phần 6e là sai: tại
+    đúng thời điểm đó, singleton vẫn đọc được bình thường qua đường chuẩn.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">b. Tìm caller bằng cách quét <code>BL</code></h3>
+  <p>
+    Khi câu hỏi là "ai gọi endpoint này", hãy tìm entry point C# của endpoint rồi quét binary tìm
+    lệnh branch-link trỏ tới RVA của nó — không cần decompiler:
+  </p>
+  <pre>(w &gt;&gt; 26) == 0x25  →  imm26 = w &amp; 0x3FFFFFF, sign-extend → target = site + imm*4
+file offset = target - 0x4000</pre>
+  <p>
+    Hai bước nhảy như vậy tìm ra vòng login 1 Hz: <code>POST /auth/login</code> ←
+    <code>RestAPI.Login</code> ← <code>Scene_Lobby.Update</code>.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">c. Không tin bất kỳ "đã chạy" nào</h3>
+  <table>
+    <tr><th>Tuyên bố</th><th>Thứ thực sự chứng minh</th></tr>
+    <tr><td>"đã cài hook"</td><td>handler có log một lần gọi</td></tr>
+    <tr><td>"đã patch hosts"</td><td>quét metadata thấy 0 chuỗi host thật</td></tr>
+    <tr><td>"đã inject asset"</td><td>từng sprite đọc lại đúng 130×140 và atlas dựng lại giống hệt</td></tr>
+    <tr><td>"route đã trả lời"</td><td>panel hiện ra trên thiết bị</td></tr>
+    <tr><td>"binary đã patch"</td><td>diff ra đúng ba vị trí dự định và không gì khác</td></tr>
+  </table>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">d. Kiểm môi trường trước khi kiểm code</h3>
+  <p>
+    Vụ treo "Loading resources…" không phải bug mạng: helper HTTP của client đã mọc thêm một lệnh
+    gọi analytics, và khởi tạo analytics ném exception trên thiết bị không có Play Services. Request
+    đi ra, response về, callback chết giữa đường. Hai stub <code>ret</code> sửa xong. Trong emulator
+    hay môi trường bị lược bớt, platform cũng là một lớp.
+  </p>
+  <div class="note warn">
+    <b>Và luật ở tầng trên.</b> Bịa một lời giải thích nghe hợp lý tệ hơn nói "tôi chưa biết" — một
+    cái giá một giờ, cái kia giá một tuần. Mọi cuộc đi đường vòng dài trong dự án này đều bắt đầu
+    bằng một câu khẳng định đầy tự tin mà chưa ai kiểm chứng.
+  </div>
+</section>
+
+<section class="chapter">
+  <span class="num">Kết</span>
+  <h2>Toàn bộ hồ sơ rút lại là gì</h2>
+  <p>
+    Không có gì ở đây là cao siêu. Không thuật toán thông minh, không kỹ thuật mới, không nghiên
+    cứu exploit. Đó là một chuỗi kỹ năng bình thường áp đúng thứ tự, cộng một kỷ luật ở trên cùng:
+    <strong>kiểm chứng bằng lớp không thể nói dối</strong>.
+  </p>
+  <p>
+    Game không phải phần khó. Phần khó là tin vào bằng chứng thay vì tin vào lời giải thích.
+  </p>
+  <div class="cards">
+    <a class="card" href="vi.html">
+      <h3>Đọc bản kể chuyện</h3>
+      <p>Cùng dự án, kể như một câu chuyện, kèm tranh luận và sai lầm.</p>
+    </a>
+    <a class="card" href="../history/lessons.md">
+      <h3>Sổ tay bẫy</h3>
+      <p>Mọi thất bại nhóm theo triệu chứng bạn sẽ gặp lại.</p>
+    </a>
+    <a class="card" href="../history/synthesis.md">
+      <h3>Tổng hợp tri thức</h3>
+      <p>Các quyết định vẫn chi phối code, và bản đồ nơi từng câu trả lời nằm.</p>
+    </a>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>
+      Công bố chỉ cho mục đích nghiên cứu tương tác hệ thống. Nội dung game thuộc về chủ sở hữu;
+      giấy phép MIT chỉ phủ code của dự án. Trang này không chứa credential, token hay dữ liệu
+      người chơi.
+    </p>
+    <p><a href="full.html">Read in English →</a> · <a href="vi.html">← Câu chuyện</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

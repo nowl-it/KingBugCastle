@@ -316,3 +316,78 @@ footer a { color: var(--ink-dim); }
 
 .skip { position: absolute; left: -999px; }
 .skip:focus { left: 1rem; top: 1rem; background: var(--gold); color: #12100e; padding: 0.5rem 1rem; z-index: 99; }
+
+/* ---------- long-form technical pages ---------- */
+
+.toc {
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  padding: 1.3rem 1.5rem;
+  margin: 2.5rem 0 3rem;
+  font-size: 0.88rem;
+}
+.toc h2 {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 500;
+  margin: 0 0 0.9rem;
+}
+.toc ol { margin: 0; padding-left: 1.3rem; }
+.toc li { margin: 0.28rem 0; }
+.toc a { color: var(--ink-dim); text-decoration: none; }
+.toc a:hover { color: var(--gold); }
+
+.step { margin-top: 3.2rem; }
+.step .num {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.7rem;
+}
+.step h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 3.6vw, 1.85rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+}
+
+.note {
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--moss);
+  background: var(--bg-soft);
+  padding: 1rem 1.2rem;
+  margin: 1.6rem 0;
+  font-size: 0.9rem;
+  color: var(--ink-dim);
+}
+.note b { color: var(--ink); }
+.note.warn { border-left-color: var(--blood); }
+
+.kv { margin: 1.5rem 0; font-size: 0.88rem; }
+.kv div {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 0.8rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.kv dt { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-faint); margin: 0; }
+.kv dd { margin: 0; color: var(--ink-dim); }
+
+figure { margin: 1.8rem 0; }
+figcaption {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  margin-top: 0.5rem;
+}
+

@@ -38,6 +38,7 @@ Nó bổ trợ cho các tài liệu khác — đọc những tài liệu đó đ
 | **[history/timeline.vi.md](history/timeline.vi.md)** | Dòng thời gian dự án, theo giai đoạn |
 | **[history/lessons.md](history/lessons.md)** | Sổ tay các bẫy: mọi thất bại từng tốn một phiên |
 | **[blog/vi.html](blog/vi.html)** | Blog kể chuyện dựng server (VI/EN) |
+| **[blog/full.vi.html](blog/full.vi.html)** | Toàn bộ hồ sơ kỹ thuật: từng bước, offset, đoạn code (VI/EN) |
 | **[next-steps.md](next-steps.md)** | Việc nên làm tiếp để đóng dự án gọn gàng — và những gì không nên làm |
 
 ## Mô hình tư duy duy nhất giải thích mọi thứ

@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The full technical record — King Bug Castle</title>
+<meta name="description" content="Every step of the reverse engineering: master-data extraction, IL2CPP unpacking, SSL bypass, protocol emulation, runtime hooks, content injection and debugging method.">
+<link rel="stylesheet" href="blog.css">
+<link rel="alternate" hreflang="vi" href="full.vi.html">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="mark">King Bug Castle</span>
+    <nav>
+      <a href="index.html">Story</a>
+      <a href="full.html" aria-current="page">Technical record</a>
+      <span class="lang">
+        <a href="full.html" aria-current="true">EN</a>
+        <a href="full.vi.html">VI</a>
+      </span>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">The full technical record</p>
+    <h1>How it was actually done, step by step</h1>
+    <p class="lede">
+      No narrative, no mystery. The complete process: how the master data was obtained, how the
+      binary was recovered, how the client was taught to trust a stranger, how its protocol was
+      reimplemented, and how every crash was located. Includes the offsets, the snippets, and the
+      mistakes.
+    </p>
+    <div class="meta">
+      <span>Read time ~35 min</span>
+      <span>12 sections</span>
+      <span>Everything unredacted except credentials</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#method">Method and tools</a></li>
+    <li><a href="#target">The target: four layers</a></li>
+    <li><a href="#data">Layer 1 — the master data</a></li>
+    <li><a href="#binary">Layer 2 — the binary that isn't shipped</a></li>
+    <li><a href="#read">Layer 3 — reading compiled C#</a></li>
+    <li><a href="#gates">Layer 4 — removing the gates</a></li>
+    <li><a href="#protocol">The protocol</a></li>
+    <li><a href="#state">Player state and invariants</a></li>
+    <li><a href="#hooks">Runtime hooks</a></li>
+    <li><a href="#content">Content injection</a></li>
+    <li><a href="#ops">Operations</a></li>
+    <li><a href="#debug">The debugging method</a></li>
+  </ol>
+</nav>
+
+<!-- ============ 1 ============ -->
+<section class="chapter" id="method">
+  <span class="num">01</span>
+  <h2>Method and tools</h2>
+  <p class="first">
+    There is no plugin, no framework and no magic. The whole project is four kinds of evidence
+    cross-checked against each other, plus one rule: when they disagree, the client wins.
+  </p>
+  <dl class="kv">
+    <div><dt>Observed</dt><dd>TLS/HTTP traffic from the client, logcat, screenshots from a real device or emulator.</dd></div>
+    <div><dt>Declared</dt><dd>Master-data XML — what the game says its content is.</dd></div>
+    <div><dt>Compiled</dt><dd><code>libil2cpp.so</code> + <code>global-metadata.dat</code> — what the game actually does.</dd></div>
+    <div><dt>Synthesised</dt><dd>A server that produces exactly the bytes the compiled layer expects, in the moment it expects them.</dd></div>
+  </dl>
+  <p>
+    The toolchain is entirely unexceptional: <code>Il2CppDumper</code> (metadata → C# skeleton),
+    <code>Ghidra</code> (decompiler), <code>capstone</code> (a few instructions at a time),
+    <code>UnityPy</code> (asset bundles), <code>apktool</code>/<code>apksigner</code>/<code>zipalign</code>
+    (client builds), <code>ldd</code>-free raw disassembly for the packer, and Python for everything
+    else. Android devices were redroid instances, which matters later: they run ARM64 through a
+    translator on x86_64, and that changes what a debugger can see.
+  </p>
+  <div class="note">
+    <b>Rule zero.</b> The client is the specification. Any question the XML cannot answer
+    ("does this field mean count or capacity?", "is this 0-based?") is answered by the function that
+    reads it — never by a plausible guess.
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="chapter" id="target">
+  <span class="num">02</span>
+  <h2>The target: four layers</h2>
+  <p>
+    King God Castle is a Unity title (IL2CPP, ARM64) with a classic mobile-backend split. The
+    useful mental model is that the client downloads its own content at boot, so the game is
+    assembled from four independent layers, and each one fails differently.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Layer</th><th>Where it lives</th><th>What it decides</th><th>How it fails</th></tr>
+      <tr><td>Content</td><td>CDN XML bundle (AssetBundle)</td><td>every number, string, stage, drop table</td><td>wrong text, missing content, gate says no</td></tr>
+      <tr><td>Code</td><td><code>libil2cpp.so</code> + metadata</td><td>all game logic, all invariants</td><td>crash, silent no-op, wrong panel</td></tr>
+      <tr><td>Protocol</td><td>HTTPS + AES bodies</td><td>what the account owns</td><td>empty panel, null reference, stale state</td></tr>
+      <tr><td>Trust</td><td>TLS pinning, anti-cheat, integrity</td><td>whether the client runs at all</td><td>infinite loading, instant exit</td></tr>
+    </table>
+  </div>
+  <p>
+    Almost every wrong hypothesis in this project came from attributing a symptom to the wrong
+    layer. A blank panel is layer 3; a blank panel that <em>also</em> freezes the UI is layer 2; a
+    panel that never appears because the content is gated is layer 1.
+  </p>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="chapter" id="data">
+  <span class="num">03</span>
+  <h2>Layer 1 — the master data</h2>
+  <p>
+    The client asks the backend for a <em>patch folder</em>, then downloads an <code>xml</code>
+    bundle from the CDN. That bundle is a Unity AssetBundle containing a handful of
+    <code>TextAsset</code>s — plain XML, one file per table — plus an <code>AssetHash.txt</code>
+    that names the bundle and its md5.
+  </p>
+  <pre><b>GET /auth/getPatchFolder</b>        → { "patchFolder": "172" }
+<b>GET /patch/172/AssetHash.txt</b>     → xml:&lt;md5hex&gt;_&lt;size&gt;
+<b>GET /patch/172/xml</b>               → AssetBundle( TextAsset: Skills, Units, Stages, … )</pre>
+  <p>
+    Extraction is therefore mechanical: download the bundle, load it with UnityPy, walk the
+    <code>TextAsset</code> objects, write each <code>m_Name</code> to a file. Run that on every
+    patch and you have a versioned corpus; that is what <code>xml_history/</code> is — a pristine
+    snapshot per patch, never edited, used as the diff base.
+  </p>
+  <p>
+    The edits the server actually serves live separately (<code>server/xml_live/</code>, plus a
+    small replayable set of "mods" in code). That split matters: refreshing from the real CDN and
+    applying local changes are two different operations, and the refresh must replay the mods or
+    they vanish silently.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">What is actually in the XML</h3>
+  <p>
+    Roughly 40 tables. The ones that carry most of the project:
+    <code>Units</code>, <code>Skills</code>, <code>Buffs</code>, <code>Stages</code>,
+    <code>ShopItems</code>, <code>Gachas</code>, <code>InventoryItems</code>,
+    <code>FixedAccessoryPresets</code>, <code>Treasures</code>, <code>ChallengeSeasons</code>,
+    and a localization table per locale (<code>Strings_EN_US</code>, <code>Strings_VI</code>, …).
+  </p>
+  <p>
+    Two structural facts are worth knowing before editing anything:
+  </p>
+  <ul>
+    <li><strong>Skills are chains, not rows.</strong> A skill tier is a <code>Skill</code> that
+      inherits from another via <code>Inherit="id"</code>, frequently bouncing through
+      <code>TransformSkill</code> / <code>BuffAtCastSkill</code>. One wrong <code>Inherit</code>
+      produces a tier that silently uses the wrong base stats — no error anywhere.</li>
+    <li><strong>Text is keyed, not inline.</strong> A unit's display name is a key like
+      <code>UnitName_10810</code> resolved through the <code>Localizer</code> at runtime. Any XML
+      element that accepts a text key (e.g. <code>&lt;SubName&gt;</code>) can be pointed at an
+      <em>existing</em> key to reuse text the developers never exposed.</li>
+  </ul>
+
+  <div class="note warn">
+    <b>The gotcha that cost ten attempts.</b> A single XML comment (<code>&lt;!-- --&gt;</code>)
+    anywhere inside a <code>Strings_*.xml</code> file makes <code>Localizer.ParseTextAsset</code>
+    lose the <em>entire locale</em>: every <code>Localize(key)</code> then returns the raw key, so
+    the whole game renders as <code>SkillName_10800</code> instead of "Cathy". Comments are fine in
+    <code>Skills</code>/<code>Units</code>/<code>Stages</code> — different parser. The bundle
+    builder now refuses to run if it finds one, and that refusal is not to be bypassed.
+  </div>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Diffing a republish</h3>
+  <p>
+    Developers sometimes rewrite the <em>same</em> patch folder in place, so the folder name does
+    not change and a naive "new folder?" watcher sees nothing. The reliable signal is the bundle's
+    own md5 in <code>AssetHash.txt</code>. A row-level diff of the two XML sets answers "what
+    actually changed" — and it is worth doing before reading the official patch notes, because the
+    notes describe intent while the XML describes effect. One such diff surfaced a skill whose
+    declared range grows from 3 tiles at tier 1 to 41 at tier 3 in the <em>official</em> data.
+  </p>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="chapter" id="binary">
+  <span class="num">04</span>
+  <h2>Layer 2 — the binary that isn't shipped</h2>
+  <p>
+    Up to v170 this was a solved problem: unzip the APK, take <code>lib/arm64-v8a/libil2cpp.so</code>
+    and <code>assets/bin/Data/Managed/Metadata/global-metadata.dat</code>, feed both to
+    Il2CppDumper. From v171 the file is simply absent. In its place is an anti-cheat library that,
+    at startup, decrypts the game code into memory and maps it.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Finding the packer</h3>
+  <p>
+    The loader library's <em>filename rotates every build</em> — it has shipped as
+    <code>libaledatic.so</code>, <code>librolineng.so</code>, <code>libxenerene.so</code>,
+    <code>libbisedich.so</code>, <code>liberallisi.so</code>. Never key tooling on the name. Its
+    <code>SONAME</code> is stable: <code>libappsign4a.so</code>.
+  </p>
+  <pre>$ readelf -d lib/arm64-v8a/lib*.so | grep SONAME
+  SONAME  [libappsign4a.so]          <b>← this is the loader</b></pre>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">The unpack chain</h3>
+  <p>
+    The container is a header followed by layered transforms. In order:
+    <strong>RSA-1024</strong> (the payload key/signature block) → <strong>ChaCha20</strong> (the
+    stream) → <strong>LZ4</strong> (the payload). Reversing that offline gives a plain ELF you can
+    load, link and analyse. <code>server/patchers/unpack_neo.py</code> is that whole chain.
+  </p>
+  <p>
+    Producing the ELF is half the job. The loader also guards itself: a byte mismatch in its own
+    code is fatal before unpacking, and the parser rejects an unexpected header. Those checks are
+    the payload of the patch — twelve sites in the verified build:
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Group</th><th>Shape</th><th>Count</th><th>Why it fires</th></tr>
+      <tr><td>integrity</td><td><code>bl</code> ; <code>tbnz w0,#31,&lt;fail&gt;</code></td><td>8</td><td>code/segment hash mismatch after patching</td></tr>
+      <tr><td>parser</td><td><code>mov w8,#-1</code> ; <code>str w8,[sp,#0x94]</code> ; <code>b</code></td><td>4</td><td>header/format guard on the decrypted buffer</td></tr>
+    </table>
+  </div>
+  <p>
+    The second group is located by pattern (<code>08008012 e89700b9</code> — exactly four hits in
+    every loader seen), the first by table, and the tables <em>differ per build and do not shift by
+    a constant</em>: <code>libaledatic.so</code> maps file offset == VMA, <code>librolineng.so</code>
+    maps VMA == file − 0x4000, and the loader function itself grew between versions. Keying on "new
+    offset = old offset + delta" is a guaranteed multi-hour detour.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Metadata must match libil2cpp exactly</h3>
+  <p>
+    IL2CPP does not resolve strings at runtime by name. It resolves them by <em>index into the
+    metadata's string-literal table</em>, compiled into the code as an immediate. v171.0.01
+    inserted one literal at index 1545 of 25,730; that shifted 94% of all subsequent indices. Mixing
+    a v171.0.01 binary with v171.0.00 metadata does not warn — it renders garbage text, or crashes
+    in a place that has nothing to do with strings.
+  </p>
+  <div class="note">
+    <b>Practical consequence.</b> A client build is a triple: <em>binary</em>, <em>metadata</em>,
+    <em>content bundle</em>. Never mix triples. The build script derives all three from the same
+    source directory for exactly this reason.
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="chapter" id="read">
+  <span class="num">05</span>
+  <h2>Layer 3 — reading compiled C#</h2>
+  <p>
+    Il2CppDumper gives a <code>dump.cs</code> that is a C# skeleton: class names, field offsets,
+    method signatures, and for each method an <code>RVA:</code> line. That file is the index. It is
+    not source, and it is never enough on its own.
+  </p>
+  <pre><span style="color:var(--ink-faint)">// dump.cs</span>
+public class PvPInfoResponseModel {
+  // Fields
+  public int semiSeason;        // 0x20
+  public long[] seasonUntilAtDates; // 0x28
+  // Methods
+  public DateTime GetCurrentSeasonUntilAt(); <b>// RVA: 0x2CC27FC Offset: 0x2CBE7FC</b>
+}</pre>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">RVA, file offset, runtime address</h3>
+  <dl class="kv">
+    <div><dt>script.json</dt><dd><code>ScriptMethod[].Address</code> is an <strong>RVA</strong> in the same space as tombstone <code>pc</code> values.</dd></div>
+    <div><dt>File offset</dt><dd>RVA − 0x4000 for <code>libil2cpp.so</code> <strong>only</strong>. Other libraries differ; check, don't assume.</dd></div>
+    <div><dt>Runtime address</dt><dd><code>dlpi_addr</code> from <code>dl_iterate_phdr</code> + the symbol's VMA. libil2cpp's first LOAD is at vaddr 0, so no fudge factor.</dd></div>
+    <div><dt>dump.cs "Offset"</dt><dd>Conveniently already equals RVA − 0x4000 — which is why some tools read it directly. Verify against one known-good patch before trusting it on a new build.</dd></div>
+  </dl>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Reading a method by hand</h3>
+  <p>
+    A worked example, because this is the actual skill: <code>GetCurrentSeasonUntilAt</code>
+    delegates to the property, which does
+  </p>
+  <pre>seasonUntilAtDates[<b>semiSeason - 1</b>]</pre>
+  <p>
+    That <code>-1</code> is the whole bug. With <code>semiSeason = 0</code> the index is −1 →
+    <code>IndexOutOfRangeException</code> inside a panel's <code>MoveNext</code>, which surfaces as
+    "the PvP screen is broken and the cause is nowhere". Fix: send <code>semiSeason ≥ 1</code> and
+    a date array long enough to cover it. No client patch, no server hack — just the field the
+    method actually reads.
+  </p>
+  <p>
+    The same reading is how the season panels were made to behave. Two related checks decide
+    whether the game shows "pre-season" and blocks play:
+  </p>
+  <pre>isPreSeason  = GetSeasonStartAt(0) &gt; UtcNow      → nextSeasonStartAtDates[0] must be <b>in the past</b>
+isBreakTime  = seasonUntilAtDates[semiSeason-1] &lt;= UtcNow  → current end must be <b>in the future</b></pre>
+  <p>
+    Both are just array values with day offsets. The fix was a table of offsets, not a code change —
+    but only after reading the two predicates.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Field offsets, and ObscuredInt</h3>
+  <p>
+    `dump.cs` gives every field's offset, which is what makes a native hook viable: to read
+    "player level" from a live object you need <code>*(int*)((char*)obj + offset)</code>. Some
+    fields are <code>ObscuredInt</code>, a 20-byte struct that must be read as a pair and decrypted
+    through a thunk. Every UI read of e.g. <code>CardData.potentialTier</code> (offset 0xB8) follows
+    that pattern, which is why a naive <code>ldr w8,[x, #0xb8]</code> yields nonsense.
+  </p>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="chapter" id="gates">
+  <span class="num">06</span>
+  <h2>Layer 4 — removing the gates</h2>
+  <p>
+    Four independent things stop a patched client from talking to you. All four are small once
+    located; none are located by guessing.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">a. Certificate pinning</h3>
+  <p>
+    Unity gives three certificate-validation paths, and a self-signed cert must survive all three.
+    Each is a single method whose only correct answer is "yes":
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Method</th><th>v171 file offset</th><th>Patch</th></tr>
+      <tr><td><code>PinnedCertHandler.ValidateCertificate</code></td><td>0x2CB68D8</td><td><code>mov w0,#1 ; ret</code></td></tr>
+      <tr><td><code>UnityTlsProvider.ValidateCertificate</code></td><td>0x596EF64</td><td><code>mov w0,#1 ; ret</code></td></tr>
+      <tr><td><code>MobileTlsContext.ValidateCertificate</code></td><td>0x596D674</td><td><code>mov w0,#1 ; ret</code></td></tr>
+    </table>
+  </div>
+  <p>
+    <code>20008052 c0035fd6</code> = <code>mov w0,#1</code> then <code>ret</code>. Four bytes of
+    patch per method, and the whole TLS trust model of the client is gone.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">b. Anti-cheat</h3>
+  <p>
+    XIGNCODE refuses to boot without a handshake with Wellbia. The approach is not to emulate the
+    protocol but to replace the library: a stub <code>.so</code> that registers the same JNI entry
+    points (<code>ZCWAVE_*</code>) as no-ops, answers <code>/auth/xcdSeed</code> with a seed-shaped
+    value, and returns success to the integrity queries. The game then boots and never asks again.
+  </p>
+  <p>
+    That stub is also the project's only convenient place to run native code inside the process, so
+    it grew into the hook host (section 8).
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">c. Host names — two passes, not one</h3>
+  <p>
+    Rebinding the API host by rewriting the il2cpp <em>string literal table</em> covers most URLs.
+    Two do not live there: they are field/parameter default values, invisible to that walk, and the
+    client quietly keeps talking to the real backend.
+  </p>
+  <pre><b>pass 1</b>  stringLiteral table      → every literal URL (same-length rewrite, CRC fixed)
+<b>pass 2</b>  raw byte scan            → field-default URLs that pass 1 cannot see
+verify    metadata scan for real host strings → must find <b>0</b></pre>
+  <p>
+    The verification step is the important one: "I patched it" is not evidence, "a scan finds zero
+    real host strings" is.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">d. Asset-bundle CRC</h3>
+  <p>
+    Custom bundle bytes can never produce the original CRC, and the catalog is part of the signed
+    download. Editing the catalog to lie about the CRC corrupts the whole thing (invalid JSON,
+    length repairs, every bundle fails). So the check itself is removed at runtime, at four sites:
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>v172 file offset</th><th>Site</th><th>Patch</th></tr>
+      <tr><td>0x5FC5F10</td><td><code>AssetBundleRequestOptions.get_Crc</code></td><td><code>mov w0,wzr ; ret</code></td></tr>
+      <tr><td>0x5FC8484</td><td>direct CRC argument (<code>w1</code>)</td><td><code>mov w1,wzr</code></td></tr>
+      <tr><td>0x5FC639C</td><td>direct CRC argument (<code>w1</code>)</td><td><code>mov w1,wzr</code></td></tr>
+      <tr><td>0x5FC648C</td><td>direct CRC argument (<code>w2</code>)</td><td><code>mov w2,wzr</code></td></tr>
+    </table>
+  </div>
+  <div class="note warn">
+    <b>Every build patch is guarded.</b> The patch script checks the expected original bytes at
+    every site and aborts rather than corrupting the binary. This exists because one build once
+    shipped a hand-patched library with 21 stray bytes — including a branch that overwrote a
+    constant inside a state machine, turning a linear coroutine into infinite recursion. It was
+    diagnosed twice as an "inherent IL2CPP bug" before anyone diffed the file against pristine.
+  </div>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">e. The one patch that was wrong</h3>
+  <p>
+    Early on, 65 sites in the lobby's init were rewritten from <code>ldr x0,[xR]</code> to
+    <code>mov x0,xR</code>, on the theory that a klass-pointer fixup never ran under the ARM
+    translator. It ran. <code>xR</code> holds the GOT slot; the <code>ldr</code> is what loads the
+    class pointer out of it. The rewrite left <code>x0</code> pointing at the slot, so the static
+    field read returned garbage and the singleton looked null — which is exactly the symptom the
+    patch was supposed to fix. It stayed enabled for weeks because the lobby sometimes rendered
+    anyway.
+  </p>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="chapter" id="protocol">
+  <span class="num">07</span>
+  <h2>The protocol</h2>
+  <p>
+    The API is HTTPS with AES-128-ECB bodies and <em>no</em> meaningful header auth in practice for
+    a local server. That simplicity is what made a full reimplementation feasible.
+  </p>
+  <pre><b>key</b>      a6072ad6b9c959ff           (16 ASCII bytes, AES-128-ECB)
+<b>padding</b>  trailing spaces or zeros to a 16-byte multiple; decoder ignores the pad
+<b>request</b>  raw ciphertext or ASCII-hex of it → header <b>encryptedWithHex: true</b>
+<b>auth</b>     header <b>accesstoken: &lt;token&gt;</b>   (not Authorization: Bearer)
+<b>time</b>     header = AES-hex("beforeLogin") pre-login, AES-hex(unix_ms) after</pre>
+  <p>
+    Which means a handler can be exercised without the game at all:
+  </p>
+  <pre>KEY = b"a6072ad6b9c959ff"
+def enc(d): raw = json.dumps(d).encode().ljust(16*((len(json.dumps(d))+15)//16), b" ")
+            return AES.new(KEY, AES.MODE_ECB).encrypt(raw)
+def dec(b): pt = AES.new(KEY, AES.MODE_ECB).decrypt(b)
+            return json.loads(pt[:pt.rindex(b"}")+1])</pre>
+  <p>
+    The boot sequence is short and fully mapped:
+  </p>
+  <pre>POST /auth/shake-hand            POST /auth/checkPatchVersion
+GET  /auth/getPatchFolder        GET  /auth/xcdSeed        GET /auth/xcd
+POST /auth/register | /auth/login     → AuthResponseModel { accessToken, seed, serverTime }
+GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 more</pre>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Route → model mapping, and the empty-model trap</h3>
+  <p>
+    `dump.cs` gives every request and response class; the work is joining the client's path
+    strings to the right class. Where the join could not be proven, a name-similarity heuristic
+    was used — and every wrong guess showed up as the same symptom: a <strong>null
+    reference in a panel that received a valid-but-empty model</strong>.
+  </p>
+  <pre>[RankingPanel.&lt;ShowRanking&gt;d__14.MoveNext]
+  myRankingItem.Set(model.playerRank, true)   ← model.playerRank is null → NRE</pre>
+  <p>
+    So: unknown route → empty model → panel crash. The fix is not defensive client code; it is a
+    real response. A handful of routes needed a direct handler registered <em>before</em> the
+    generic loop, because the generic table mapped the path to the wrong model entirely
+    (<code>GET /post</code> → a "receive" model with no <code>posts</code> field).
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Closed vocabularies</h3>
+  <p>
+    Response strings are not free-form. <code>RewardResponseData.type</code> is compared against a
+    fixed literal set — <code>InventoryItem</code>, <code>Key</code>, <code>UnitExpItem</code>,
+    <code>UnitSoulItem</code>, <code>CardSoul</code>, <code>Gold</code>, <code>Cash</code>,
+    <code>Heart</code>, <code>Artifact</code>, <code>Treasure_*</code>, <code>Skin</code>,
+    <code>NameTag</code>, <code>Flag</code>… — and <strong>there is no <code>"Item"</code></strong>.
+    An unmatched type does not error: the reward renders with no icon and a nonsense count. The
+    server therefore keeps one internal vocabulary and translates once, at the wire boundary.
+  </p>
+  <p>
+    Related trap: <code>Key</code> is a <em>ShopItem</em> id, not an inventory id. ShopItem 370's
+    <code>&lt;KeyItem&gt;</code> is inventory row 380; 70000 → 70005. Collapsing one into the other
+    grants the wrong item, quietly.
+  </p>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="chapter" id="state">
+  <span class="num">08</span>
+  <h2>Player state and invariants</h2>
+  <p>
+    Two planes, and the distinction explains most "I changed it and nothing happened" reports:
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Plane</th><th>Lives in</th><th>Change latency</th></tr>
+      <tr><td>Account state / API</td><td>SQLite, one row per player, read on every request</td><td>immediate</td></tr>
+      <tr><td>Client master data</td><td>CDN xml bundle</td><td>rebuild + restart + client re-download</td></tr>
+    </table>
+  </div>
+  <p>
+    Granting a treasure is plane 1. Making the treasure <em>exist</em> for the client is plane 2.
+    Editing the wrong one produces a convincing no-op.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Invariants worth writing down</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Invariant</th><th>Where it comes from</th><th>What breaks</th></tr>
+      <tr><td>deck length == 6</td><td>two UI arrays: one indexes 6, one loops your length</td><td>IndexOutOfRange on load, or a crash on deck edit</td></tr>
+      <tr><td>card has <code>unitId</code></td><td><code>card_to_dict</code> reads it</td><td>entire <code>/card/all</code> dies → <em>every</em> hero shows "Not Owned"</td></tr>
+      <tr><td><code>potentialTier</code> ∈ {0,1}</td><td><code>Constants.PotentialTier.Max = 1</code></td><td>badge shows an awakening that cannot be changed</td></tr>
+      <tr><td>artifact <code>targets.Count</code> == opt count</td><td><code>ArtifactOptionUI.Init</code> loops on it</td><td><code>"None"</code> dictionary lookup → crash</td></tr>
+      <tr><td>one entry per <code>subStats</code> key</td><td>client merges by key on apply</td><td>7–8 stat lines; change-stat replaces only one copy</td></tr>
+      <tr><td>unit id ∈ 10000..10999</td><td>card array sizing</td><td>client crash</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Two rules that were learned the hard way</h3>
+  <p>
+    <strong>Derive time, never store it.</strong> The lobby compares <code>now</code> against a
+    <code>tomorrow</code> field and re-runs its whole fetch chain when the day turns. A stored
+    <code>tomorrow</code> froze at account creation, so the day had "turned" permanently: the
+    client re-logged in at 1 Hz — seventeen requests a second, no exception, no logcat entry,
+    ~400k requests/day. It is now computed from the clock on every response.
+  </p>
+  <p>
+    <strong>Never infer an identity.</strong> "If no id, use the active save" is correct for a demo
+    and catastrophic for a service: a client that lost its guest id got somebody else's world,
+    with a session attached. The correct answer in multiplayer is a refusal. A new guest id gets a
+    new save; an old save is re-attached deliberately, by name.
+  </p>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="chapter" id="hooks">
+  <span class="num">09</span>
+  <h2>Runtime hooks</h2>
+  <p>
+    Some things cannot be fixed from the server: a stat that must be displayed, a mail body that
+    must bypass the localizer. That is what the stub library is for — it hosts native code inside
+    the running game.
+  </p>
+  <p>
+    Two mechanisms exist, and choosing wrong produces a hook that reports success and never fires.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>methodPointer swap</th><th>inline detour</th></tr>
+      <tr><td>Intercepts</td><td>only what Unity invokes via <code>MethodInfo.methodPointer</code></td><td>every caller, including direct <code>bl</code></td></tr>
+      <tr><td>Good for</td><td><code>Update</code>, <code>Awake</code>, <code>OnEnable</code></td><td>C#→C# calls, UI callbacks</td></tr>
+      <tr><td>Cost</td><td>one pointer write</td><td>prologue jump + executable trampoline</td></tr>
+    </table>
+  </div>
+  <pre><b>detour prologue (16 bytes)</b>
+  LDR  X17, #8
+  BR   X17
+  .quad target
+<b>trampoline</b>
+  &lt;16 stolen bytes&gt; ; jump back to target+16</pre>
+  <p>
+    The guard matters: if any of the four stolen instructions is PC-relative
+    (<code>ADR</code>/<code>ADRP</code>/literal load/<code>B</code>/<code>BL</code>/conditional
+    branch), it cannot be relocated and the hook must abort. Most prologues are
+    <code>stp</code>/<code>mov</code>/<code>sub sp</code> and are fine.
+  </p>
+  <div class="note">
+    <b>Three silent failures, one session each.</b> (1) The poll loop accepted the first
+    <code>dlopen("libil2cpp.so")</code> handle — which was the <em>packer</em>, loaded long before
+    the game, so every <code>dlsym</code> failed. Accept a handle only if it exports
+    <code>il2cpp_domain_get</code>. (2) A <code>/proc/self/maps</code> scan filtered on
+    <code>r-xp</code> found nothing, because guest ARM64 pages are mapped <code>r--p</code> and
+    executed by the translator — use <code>dl_iterate_phdr</code>. (3) A diagnostic session wrapped
+    three features in <code>#if 0</code> and never restored it.
+  </div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="chapter" id="content">
+  <span class="num">10</span>
+  <h2>Content injection</h2>
+  <p>
+    Editing text is easy; making the client display something that was never authored is five
+    separate problems. The worked example is a new hero costume.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">1. The data row</h3>
+  <p>
+    A row in the unit/skin XML pointing at an asset name. Necessary, and by itself produces a
+    blank thumbnail.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">2. The bundle</h3>
+  <p>
+    Bundles are content-addressed and CRC-verified against a baked catalog. Custom bytes cannot
+    match the CRC; the catalog cannot be edited. Therefore the runtime CRC check is removed
+    (section 6d). Nothing else in the pipeline can work until this is true.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">3. The atlas — geometry, not pixels</h3>
+  <p>
+    A character's battle animation is 19 frames in a fixed grid (130×140, five columns, the last
+    bottom-right cell empty), and each frame carries a tight polygon computed for that silhouette
+    plus a pivot-derived UV transform. Reusing a wider image inside the old mesh crops and zooms it:
+    wrong pose, cut edges, bleed into the neighbouring cell. Every frame must be rebuilt as a
+    four-vertex full-cell quad.
+  </p>
+  <pre>verify: read back each serialized Sprite.image → must be exactly (130,140)
+        reconstruct the atlas → must be byte-identical to the repository PNG</pre>
+  <p>
+    Frame 18 is special: it is the prefab's default Sprite and the skin's thumbnail, so it must be
+    a front-facing standing idle with the full silhouette — not a run frame.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">4. The prefab</h3>
+  <p>
+    Clone the source character: hierarchy, components, 10 animation clips, animator controller,
+    and all PPtrs. Give the cloned sprites a <em>distinct deterministic render-data key</em>.
+    Sharing the source's key resolves the portrait back to the original — or to nothing, with no
+    error either way.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">5. The addressables catalog</h3>
+  <p>
+    Five locations must be added, not one: texture + sprite for the battle atlas, texture + sprite
+    for the illustration, and the prefab GameObject. Get four of five and the entry appears in the
+    shop with a blank thumbnail and a default large portrait.
+  </p>
+  <div class="note">
+    <b>Ordering trap.</b> The illustration bundle also needs full-rectangle render geometry —
+    reusing the source's 908×912 tight polygon on a 1024×1024 portrait yields large transparent
+    holes or a blank panel even though the texture and catalog entry are perfect.
+  </div>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="chapter" id="ops">
+  <span class="num">11</span>
+  <h2>Operations</h2>
+  <p>
+    Running it for strangers changes the problem from "does it work" to "does it keep working".
+  </p>
+  <dl class="kv">
+    <div><dt>Ports</dt><dd>HTTP 8080 (game API after the TLS workaround), TLS 8443, admin 8081, player portal 8082.</dd></div>
+    <div><dt>Device</dt><dd><code>adb reverse tcp:80 tcp:8080</code> + <code>adb reverse tcp:443 tcp:8443</code>; hosts entries point the real domains at loopback.</dd></div>
+    <div><dt>Proxy</dt><dd>Caddy terminates TLS once for three hostnames and forwards to loopback; direct-IP requests have Cloudflare headers stripped so nobody can forge the client address.</dd></div>
+    <div><dt>Deploy</dt><dd>A key whose <code>authorized_keys</code> line pins one command: refuse-if-dirty → <code>git pull --ff-only</code> → restart units.</dd></div>
+    <div><dt>CI</dt><dd>Full pytest on push; a separate workflow builds the patched client and publishes a release.</dd></div>
+    <div><dt>Cost</dt><dd>Zero, by requirement. That is why the 1.1 GB stock package is fetched from GitHub during a build and deleted after: egress is billed, release assets are not.</dd></div>
+  </dl>
+  <p>
+    Two operational failures worth naming. First, the daily-reset loop (section 8) — a service
+    problem caused by a data-model decision. Second, "the deploy did nothing": the units redirect
+    their output to files in <code>/tmp</code>, not journald, so a restart that appeared to fail
+    had actually succeeded and a config change that appeared to apply had not. Read the file the
+    process actually writes.
+  </p>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="chapter" id="debug">
+  <span class="num">12</span>
+  <h2>The debugging method</h2>
+  <p>
+    This is the part worth taking to another project, because it generalises and it is what turned
+    multi-session rabbit holes into hour-long fixes.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">a. Turn a managed exception into a real fault</h3>
+  <p>
+    An IL2CPP <code>NullReferenceException</code> reports a method and no line. Temporarily NOP the
+    null-check branches inside the suspect method; the first null object then falls through into its
+    own dereference and SIGSEGVs at a locatable PC.
+  </p>
+  <pre>#00 0x03040134  GameManager$$Init      +0x98  ldrb w8,[x19,#0x1b0]   x19 == 0
+#01 0x034E5624  Scene_Lobby$$Init      +0x270 bl GameManager.Init
+#02 0x034E368C  Scene_Lobby$$Awake     +0x6E0</pre>
+  <p>
+    That is a root cause with coordinates. It is also how the wrong patch in section 6e was proven
+    wrong: at the same instant, a healthy singleton was readable through the normal path.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">b. Find callers by scanning for <code>BL</code></h3>
+  <p>
+    When the question is "who calls this endpoint", resolve the endpoint's C# entry point, then scan
+    the binary for branch-link instructions targeting its RVA — no decompiler needed:
+  </p>
+  <pre>(w &gt;&gt; 26) == 0x25  →  imm26 = w &amp; 0x3FFFFFF, sign-extend → target = site + imm*4
+file offset = target - 0x4000</pre>
+  <p>
+    Two hops of that found the 1 Hz login loop: <code>POST /auth/login</code> ←
+    <code>RestAPI.Login</code> ← <code>Scene_Lobby.Update</code>.
+  </p>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">c. Distrust every "it worked"</h3>
+  <table>
+    <tr><th>Claim</th><th>What actually proves it</th></tr>
+    <tr><td>"hook installed"</td><td>the handler logged a call</td></tr>
+    <tr><td>"hosts patched"</td><td>a metadata scan finds zero real host strings</td></tr>
+    <tr><td>"asset injected"</td><td>each sprite reads back as 130×140 and the atlas reconstructs identically</td></tr>
+    <tr><td>"route answered"</td><td>the panel renders on a device</td></tr>
+    <tr><td>"the binary is patched"</td><td>it diffed to exactly the three intended sites and nothing else</td></tr>
+  </table>
+
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">d. Check the environment before the code</h3>
+  <p>
+    The "Loading resources…" hang was not a network bug: the client's HTTP helper had grown an
+    analytics call, and analytics initialisation throws on a device without Play Services. The
+    request went out, the response arrived, the callback died mid-flight. Two <code>ret</code>
+    stubs fixed it. In an emulator or a stripped-down environment, the platform is a layer too.
+  </p>
+  <div class="note warn">
+    <b>And the meta-rule.</b> Fabricating a plausible explanation is worse than saying "I don't know
+    yet" — one costs an hour, the other costs a week. Every long detour in this project started
+    with a confident sentence nobody had verified.
+  </div>
+</section>
+
+<section class="chapter">
+  <span class="num">Closing</span>
+  <h2>What the full record comes to</h2>
+  <p>
+    Nothing in here is advanced. There is no clever algorithm, no novel technique, no exploit
+    research. It is a sequence of ordinary skills applied in the right order, with one discipline
+    on top: <strong>verify against the layer that cannot lie</strong>.
+  </p>
+  <p>
+    The game is not the hard part. The hard part is believing the evidence instead of the
+    explanation.
+  </p>
+  <div class="cards">
+    <a class="card" href="index.html">
+      <h3>Read the narrative version</h3>
+      <p>The same project told as a story, with the arguments and the mistakes.</p>
+    </a>
+    <a class="card" href="../history/lessons.md">
+      <h3>Trap ledger</h3>
+      <p>Every failure grouped by the symptom you see when you meet it again.</p>
+    </a>
+    <a class="card" href="../history/synthesis.md">
+      <h3>Knowledge synthesis</h3>
+      <p>The decisions that still govern the code, and a map of where each answer lives.</p>
+    </a>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>
+      Published for interoperability research only. Game content remains the property of its
+      owners; the MIT license covers this project's code. No credentials, tokens, or player data
+      appear on this page.
+    </p>
+    <p><a href="full.vi.html">Đọc bản tiếng Việt →</a> · <a href="index.html">← Story</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

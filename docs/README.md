@@ -40,6 +40,7 @@ It complements the other docs - read those for the *why* and the *internals*:
 | **[history/timeline.md](history/timeline.md)** | Project timeline, phase by phase |
 | **[history/lessons.md](history/lessons.md)** | Trap ledger: every failure that cost a session |
 | **[blog/index.html](blog/index.html)** | The build log, told as a story (EN/VI) |
+| **[blog/full.html](blog/full.html)** | The full technical record: every step, offset and snippet (EN/VI) |
 | **[next-steps.md](next-steps.md)** | What to do next to close the project cleanly — and what not to do |
 
 ## The one mental model that explains everything
