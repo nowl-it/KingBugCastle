@@ -4,6 +4,8 @@ Practical playbooks for **running and modifying** the King God Castle private se
 how to grant items, unlock content, build test stages, edit master data, and deploy
 changes to a client. This is the *how-to-operate* layer.
 
+<sub>🇻🇳 <a href="README.vi.md">Đọc bằng tiếng Việt</a></sub>
+
 It complements the other docs - read those for the *why* and the *internals*:
 
 | Doc | Scope |
@@ -34,6 +36,10 @@ It complements the other docs - read those for the *why* and the *internals*:
 | **[discord-cdn-monitor.md](discord-cdn-monitor.md)** | Configure the Discord CDN-update notifier and its 30-minute monitor |
 | **[api-and-crypto.md](api-and-crypto.md)** | AES request/response format; hit the server manually with curl/python |
 | **[web-ui-reconstruction.md](web-ui-reconstruction.md)** | Faithfully reconstruct a client UI as a web UI using IL2CPP, AssetBundles, and client-render baselines |
+| **[history/timeline.md](history/timeline.md)** | Project timeline, phase by phase |
+| **[history/lessons.md](history/lessons.md)** | Trap ledger: every failure that cost a session |
+| **[blog/index.html](blog/index.html)** | The build log, told as a story (EN/VI) |
+| **[next-steps.md](next-steps.md)** | What to do next to close the project cleanly — and what not to do |
 
 ## The one mental model that explains everything
 

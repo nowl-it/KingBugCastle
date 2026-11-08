@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>King Bug Castle — building a private server for a game that doesn't want one</title>
+<meta name="description" content="A build log: 283 agent sessions, 672 commits, and one Android game reverse-engineered into a working private server.">
+<link rel="stylesheet" href="blog.css">
+<link rel="alternate" hreflang="vi" href="vi.html">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="mark">King Bug Castle</span>
+    <nav>
+      <a href="#story">Story</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#numbers">Numbers</a>
+      <span class="lang">
+        <a href="index.html" aria-current="true">EN</a>
+        <a href="vi.html">VI</a>
+      </span>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">A build log</p>
+    <h1>Reverse-engineering an Android game into a server it never expected</h1>
+    <p class="lede">
+      King God Castle is a Korean auto-battler with a single backend, a packed anti-cheat,
+      and no offline mode. This is the story of turning it into a private server — told
+      through what broke, what lied, and what finally worked.
+    </p>
+    <div class="meta">
+      <span>March — November 2026</span>
+      <span>283 agent sessions</span>
+      <span>672 commits</span>
+      <span>One person, five AI tools</span>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>533M</b><span>input tokens</span></div>
+  <div class="stat"><b>16.3M</b><span>output tokens</span></div>
+  <div class="stat"><b>44,940</b><span>conversation turns</span></div>
+  <div class="stat"><b>1.77M</b><span>lines added</span></div>
+</div>
+
+<main id="main">
+<div class="wrap" id="story">
+
+<!-- 1 -->
+<section class="chapter">
+  <span class="num">I</span>
+  <h2>The game you are not allowed to read</h2>
+  <p class="first">
+    It starts with a spreadsheet problem. King God Castle stores its entire balance —
+    every hero, every skill tier, every drop table, every localized string — in a bundle
+    of XML files that the client downloads at login. That bundle is not shipped in the
+    APK. It arrives over HTTP, in a binary container, and it is the difference between
+    "I play this game" and "I understand this game."
+  </p>
+  <p>
+    So the first month was not programming. It was archaeology. Dump the bundle. Unpack the
+    container. Line up <code>Strings_EN_US.xml</code> against <code>Strings_VI.xml</code> and
+    discover that skill descriptions are templates assembled from three separate tables.
+    Extract sprite atlases with UnityPy and find that hero portraits live in a dedicated
+    illustration bundle while the same hero's battle sprites live in an atlas of nineteen
+    130×140 cells.
+  </p>
+  <p>
+    None of it is documented anywhere. Every fact is inferred, and every inference has to
+    survive contact with the actual client. A useful habit forms in this phase: <strong>the
+    client is the specification.</strong> If a field name is ambiguous, decompile the class
+    that reads it. If a rule is unclear, find the constant. The XML tells you the shape of
+    the data; only the binary tells you what the data <em>means</em>.
+  </p>
+  <p>
+    By June the shape was clear enough to try something stupid: stand up a fake server, point
+    a patched client at it, and see how far the login screen gets.
+  </p>
+</section>
+
+<!-- 2 -->
+<section class="chapter">
+  <span class="num">II</span>
+  <h2>The binary that isn't there</h2>
+  <p>
+    It got surprisingly far. FastAPI on port 8080, a hand-written table mapping the client's
+    route names to response models, and a JSON file containing one plausible player. Login
+    worked. The lobby loaded. Then every panel that needed real data threw a null reference
+    because the response model was empty — which is how the project learned its first
+    structural lesson: <strong>a route with no model answers an <em>empty</em> model, and an
+    empty model crashes a panel.</strong>
+  </p>
+  <p>
+    Then the game updated to v171, and the ground moved. v171 ships <em>no</em>
+    <code>libil2cpp.so</code> on disk. The file that contains all the game's compiled C# is
+    packed and encrypted inside the anti-cheat library at runtime, unpacked into memory, and
+    executed from there. Every tool in the standard toolkit expects a file. There wasn't one.
+  </p>
+  <p>
+    Unpacking it took a week of disassembly: find the loader, find the integrity checks, find
+    the parser that rejects a bad header, and neutralise exactly enough of them that the
+    packer hands you a plain ELF without noticing it has been robbed. The result is a clean
+    <code>libil2cpp.so</code> plus the metadata, both matching the same build — and that
+    matching part matters more than it sounds, because the metadata carries string literal
+    <em>indices</em> that the compiled code has baked in. A version mismatch does not produce
+    a warning. It produces gibberish.
+  </p>
+  <pre><b>integrity bail-outs</b>   bl ; tbnz w0,#31,&lt;fail&gt;   ×4
+<b>parser error returns</b>  mov w8,#-1 ; str w8,[sp,#0x94] ; b   ×4</pre>
+  <p>
+    With the binary in hand, the SSL bypass is almost anticlimactic: three
+    <code>ValidateCertificate</code> methods, each replaced with <code>mov w0,#1 ; ret</code>.
+    Four bytes of honesty per method.
+  </p>
+</section>
+
+<!-- 3 -->
+<section class="chapter">
+  <span class="num">III</span>
+  <h2>Convincing a client that already knows you're lying</h2>
+  <p>
+    A private server is not a reimplementation of a game. It is a performance. The client
+    believes what you tell it, and every panel it draws is a demand for a specific shape of
+    data at a specific moment.
+  </p>
+  <p>
+    The hard part is the invariants nobody wrote down. A deck array must be at least six
+    elements, because the lobby indexes six fixed UI slots. It must also be at most six,
+    because the deck editor loops over your array while indexing its own. Both bounds were
+    confirmed by decompiling both functions. Guessing either one produced a crash that looked
+    like a completely different bug.
+  </p>
+  <div class="pull">
+    The client does not validate your data. It indexes it.
+    <cite>the single most expensive lesson of the project</cite>
+  </div>
+  <p>
+    Then there are the response fields with a vocabulary of their own. Reward types are not
+    free-form: <code>"Item"</code> is not a valid type. The client compares against a fixed
+    literal set — <code>InventoryItem</code>, <code>Key</code>, <code>UnitSoulItem</code>,
+    <code>Treasure_*</code>, <code>Skin</code>, and a dozen more — and an unmatched string
+    resolves to <em>no icon at all</em>. The reward still renders. It just renders with the
+    wrong picture and a nonsense number, which is a much harder bug to notice than a crash.
+  </p>
+  <p>
+    By the end of July, every route the client can call had a real answer. Not a stub — an
+    answer that makes the corresponding panel behave the way a player expects: shop stock,
+    mission reward claiming, territory labour, Babel towers, colosseum seasons, attendance
+    streaks, clan membership, cosmetics you own and equip, invasion first-clear rewards.
+  </p>
+</section>
+
+<!-- 4 -->
+<section class="chapter">
+  <span class="num">IV</span>
+  <h2>Two people should be able to play</h2>
+  <p>
+    A server for one person is a toy. The moment a second device connects, everything that was
+    implicitly "the save file" has to become "a save, keyed by an identity" — and identity is
+    where this project produced its most interesting failures.
+  </p>
+  <p>
+    The first attempt was reasonable: if a login arrives with no id, fall back to the active
+    save. That is correct for a single-player demo and catastrophic for a service. A client
+    that loses its guest id — cache clear, reinstall, a factory reset — logs in over and over
+    with no identity, and each time it is handed somebody else's world, with a session bound
+    to it. The server log showed the same account logging in every few minutes for weeks. It
+    looked like a stuck client. It was a stuck design.
+  </p>
+  <div class="pull">
+    "My account turned into a different player" is never a data-loss bug.
+    It is an identity bug wearing a data-loss costume.
+    <cite>after the third report of the same symptom</cite>
+  </div>
+  <p>
+    The second failure was subtler. Sign-in on Android goes through Google, and the client's
+    native path expects the backend to hand back an access token. Our fake backend answered
+    that endpoint with an empty model — no token. That was fine for as long as the device had
+    a token from an earlier session. On a fresh install it wasn't: the login went out with no
+    id, got refused, and every subsequent request served a throwaway template save. Three
+    different users reported "the game reset my account." The account was never touched. The
+    token was never minted.
+  </p>
+  <p>
+    Now an id-less login is refused in multiplayer. The template save's placeholder uid can
+    never become a save key. A new guest identity gets a new save, and an old save can be
+    re-attached deliberately. The rule is unglamorous and it holds: <strong>never guess an
+    identity.</strong>
+  </p>
+</section>
+
+<!-- 5 -->
+<section class="chapter">
+  <span class="num">V</span>
+  <h2>Free, or not at all</h2>
+  <p>
+    The hosting requirement was stated once and never negotiated: <em>nothing may cost
+    money</em>. That single constraint shaped the architecture more than any technical
+    preference.
+  </p>
+  <p>
+    The result is a free-tier ARM box running the API on 8080 and TLS on 8443, behind a
+    CDN that handles certificates, with the domain split three ways — one hostname for the
+    game client, one for the admin dashboard, one for the player portal. CI runs the full test
+    suite on every push. A separate workflow builds the patched client and publishes it as a
+    GitHub release, because release assets are free and object storage is not. The one
+    genuinely large artifact — the stock 1.1 GB game package needed as build input — is
+    downloaded from GitHub during the build and deleted immediately afterward, so it never
+    touches the instance at all.
+  </p>
+  <p>
+    Deploys run through a key that can execute exactly one command. Not a shell with a
+    restriction: a key whose <code>authorized_keys</code> line pins a command. If the hook is
+    dirty, it refuses. If it's clean, it fast-forwards and restarts. There is no path from CI
+    to a prompt.
+  </p>
+  <pre><span style="color:var(--ink-faint)">~/.ssh/authorized_keys</span>
+restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</pre>
+  <p>
+    The trade-off is real: free tiers get tiny disks. One upgrade required swapping a boot
+    volume between instances because the running one could not hold both the old and new
+    artifacts at the same time. On a paid plan that's a resize. On a free plan it's an
+    evening.
+  </p>
+</section>
+
+<!-- 6 -->
+<section class="chapter">
+  <span class="num">VI</span>
+  <h2>The bugs that were not bugs</h2>
+  <p>
+    Some of the longest investigations ended with the conclusion "the code was doing exactly
+    what it was told." Three of them are worth remembering because the pattern repeats.
+  </p>
+  <p>
+    <strong>The client logged in seventeen times per second.</strong> No exception, no error,
+    no logcat entry — just requests. The lobby's update loop compares the current time against
+    <code>tomorrow</code>, and if the day has turned, it re-fetches everything. Our save had
+    <code>tomorrow</code> stored, frozen at account creation, so the day turned once and never
+    stopped turning. The fix was three lines: derive it from the clock instead of storing it.
+    The lesson is general — <em>anything derived should never be persisted.</em>
+  </p>
+  <p>
+    <strong>The game hung on "Loading resources."</strong> The HTTP request went out and the
+    response arrived. The callback never ran. It turned out the game's own HTTP client had
+    grown an analytics call inside it, and analytics initialization throws on a device without
+    Google Play Services. The exception did not surface anywhere useful; it simply killed the
+    completion handler mid-flight. Two functions stubbed to <code>ret</code> and the loading
+    screen disappeared.
+  </p>
+  <p>
+    <strong>The binary was corrupt and we blamed the framework.</strong> A localised stack
+    overflow on a loading screen was diagnosed twice as an inherent bug in the async runtime.
+    It was actually twenty-one stray bytes in a hand-patched library — one of them a branch
+    that had overwritten a constant inside a state machine, turning a linear coroutine into
+    infinite recursion. The rule that came out of it is in the repository in bold: never
+    hand-patch the library you ship. Regenerate it from pristine bytes and validate with a
+    hash-like check that refuses to proceed if anything else moved.
+  </p>
+  <div class="pull">
+    Fabricating a plausible explanation is worse than saying "I don't know yet."
+    One of them costs an hour; the other costs a week.
+    <cite>written down after the fourth misdiagnosis</cite>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="chapter">
+  <span class="num">VII</span>
+  <h2>A skin that does not exist</h2>
+  <p>
+    The best test of whether you actually understand a system is to make it display something
+    that was never authored. Adding a new hero costume turned out to be a five-layer problem
+    disguised as a data row.
+  </p>
+  <p>
+    Layer one is obvious: a row in the unit XML pointing at a sprite name. Layer two is the
+    asset bundle — the bundle is content-addressed, and the client verifies its CRC against a
+    catalog baked into the download. Custom bytes cannot produce the original CRC, and editing
+    the catalog to lie about it corrupts the whole download. The solution is not to fake the
+    checksum but to <em>remove the check</em>: four instruction patches at runtime so the
+    catalog's CRC is simply not enforced.
+  </p>
+  <p>
+    Layer three is the sprite atlas. A hero's battle animation is nineteen frames in a fixed
+    grid, and each frame carries tight polygon geometry computed for that specific silhouette.
+    Reuse a wider image inside the old mesh and the frame is cropped and then zoomed — posed
+    wrong, cut off, bleeding into the neighbouring cell. Every one of the nineteen frames has
+    to be rebuilt with its own quad, texture rect, and pivot-derived UV transform. The
+    verification is not "does the texture look right" but "does each sprite read back as
+    exactly 130×140".
+  </p>
+  <p>
+    Layer four is the prefab: a clone of the source character with ten animation clips, an
+    animator controller, and a unique render-data key. Share the source's render key and the
+    cloned portrait silently resolves to the original — or to nothing.
+  </p>
+  <p>
+    Layer five is the addressables catalog, which needs five new locations: the texture and
+    sprite for both the battle atlas and the illustration, plus the prefab. Get four of five
+    right and the skin row appears in the shop, its thumbnail is blank, and its large portrait
+    falls back to a default illustration.
+  </p>
+  <p>
+    When it finally worked, it worked completely — animation, portrait, thumbnail, shop entry,
+    equip flow. Nothing in the game knows the character wasn't authored by the original
+    studio.
+  </p>
+</section>
+
+<!-- 8 -->
+<section class="chapter">
+  <span class="num">VIII</span>
+  <h2>What comes after the game</h2>
+  <p>
+    Once you can read the master data fluently, the game stops being the only interesting
+    artifact. The data is.
+  </p>
+  <p>
+    That produced a strategy compendium: every build-defining strategy in the roguelike mode,
+    what each one does, which ones are mutually exclusive, how the roll pool weights change as
+    you take upgrades — and a simulator that takes your three visible options, your current
+    tier, and the strategy you want, and tells you the odds. It is one static HTML file,
+    bilingual, with no build step and no dependencies, published from the repository itself.
+  </p>
+  <p>
+    It produced a dashboard: player lookup, item and hero grants, mail with arbitrary text,
+    an audit log, and a live view of API traffic. And a monitor that watches the official CDN
+    and announces, in fifteen languages, when a new version or a new patch appears.
+  </p>
+  <p>
+    The project also produced this document, which is the honest version: the misdiagnoses,
+    the shouting, the sessions that ended in "you're making things up again," and the ones
+    that ended with a working lobby.
+  </p>
+</section>
+
+<!-- timeline -->
+<section class="chapter" id="timeline">
+  <span class="num">Timeline</span>
+  <h2>Nine months, condensed</h2>
+  <ul class="rail">
+    <li><time>March 2026</time><p>First session. Workspace created; the project begins as data reading, not code.</p></li>
+    <li><time>June 26</time><p>First private server boots on port 8080 with a patched client.</p></li>
+    <li><time>July 16</time><p>v171's packed-and-encrypted game binary is unpacked from the anti-cheat library.</p></li>
+    <li><time>July 19</time><p>A hand-patched library causes an infinite recursion misdiagnosed as a framework bug. The "never hand-patch" rule is written.</p></li>
+    <li><time>July 25</time><p>Every client route answered. Save transfer, leaderboards, clans, territory, colosseum.</p></li>
+    <li><time>July 27</time><p>CI builds the patched client automatically; the black-lobby mystery is traced to a disproven patch theory.</p></li>
+    <li><time>July 31</time><p>Public deployment. The zero-cost constraint becomes architecture.</p></li>
+    <li><time>August 1</time><p>Test suite in CI, command-restricted deploy key, release pipeline. Awakening semantics decoded.</p></li>
+    <li><time>August 7</time><p>The 1 Hz login loop: a stored <code>tomorrow</code>. Now always derived.</p></li>
+    <li><time>August 13</time><p>v172 port. Analytics call inside the HTTP client breaks the callback; stubbed out.</p></li>
+    <li><time>August 18</time><p>Auth hardening. Id-less logins refused; sign-in mints a token; accessory sub-stats merged per key.</p></li>
+    <li><time>August 20</time><p>The Frieren skin ships: atlas, prefab, animations, catalog, CRC bypass.</p></li>
+    <li><time>September 15</time><p>The strategy compendium goes live as a single bilingual HTML page.</p></li>
+    <li><time>October</time><p>Whole-game source reconstruction with Ghidra; dashboard redesign; clan raids.</p></li>
+    <li><time>November 7</time><p>History harvested from five agent stores, repository cleaned, this written.</p></li>
+  </ul>
+</section>
+
+<!-- numbers -->
+<section class="chapter" id="numbers">
+  <span class="num">Numbers</span>
+  <h2>What it cost</h2>
+  <p>
+    Not money — the money was zero, by requirement. What it cost was time and tokens, and it is
+    worth being honest about the shape of that cost.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Month</th><th>Sessions</th><th>Commits</th></tr>
+      <tr><td>2026-03</td><td>2</td><td>—</td></tr>
+      <tr><td>2026-04</td><td>8</td><td>—</td></tr>
+      <tr><td>2026-05</td><td>3</td><td>—</td></tr>
+      <tr><td>2026-06</td><td>8</td><td>—</td></tr>
+      <tr><td>2026-07</td><td>53</td><td>93</td></tr>
+      <tr><td>2026-08</td><td>94</td><td>264</td></tr>
+      <tr><td>2026-09</td><td>37</td><td>284</td></tr>
+      <tr><td>2026-10</td><td>74</td><td>24</td></tr>
+      <tr><td>2026-11</td><td>3</td><td>7</td></tr>
+    </table>
+  </div>
+  <p>
+    The commit peak and the session peak do not line up, and that's informative. August was
+    breadth: every feature the client can reach, implemented. September was depth: fewer
+    sessions, more commits, fixing what breadth broke. October inverted it — many exploratory
+    sessions, few commits, because most of that work was reading.
+  </p>
+  <p>
+    Of 44,940 turns across five different agent tools, a large fraction were spent on
+    investigations that ended in "no change, here's why." That is not waste. It is the cost of
+    not shipping a confident wrong answer — the one thing a reverse-engineering project cannot
+    afford.
+  </p>
+</section>
+
+<!-- links -->
+<section class="chapter">
+  <span class="num">Repository</span>
+  <h2>Where the truth lives</h2>
+  <p>
+    The full record — every patch offset, every disproven theory, every regression test — is in
+    the repository. The docs are written for whoever comes next, including future me.
+  </p>
+  <div class="cards">
+    <a class="card" href="../README.md">
+      <h3>README</h3>
+      <p>What the project is, how to build a client, how to run the server.</p>
+    </a>
+    <a class="card" href="../dev-notes.md">
+      <h3>dev-notes.md</h3>
+      <p>The knowledge base: task → decode → exact offset → verification method.</p>
+    </a>
+    <a class="card" href="../history/timeline.md">
+      <h3>Timeline</h3>
+      <p>Dated milestones, phase by phase.</p>
+    </a>
+    <a class="card" href="../history/lessons.md">
+      <h3>Trap ledger</h3>
+      <p>Every failure that cost a session, grouped by symptom.</p>
+    </a>
+    <a class="card" href="../history/sessions.md">
+      <h3>Session log</h3>
+      <p>All 283 sessions with dates, turn counts and token totals.</p>
+    </a>
+    <a class="card" href="../strife-compendium.html">
+      <h3>Strife Compendium</h3>
+      <p>The strategy reference and roll simulator built from master data.</p>
+    </a>
+  </div>
+  <p style="margin-top:2rem">
+    Questions, builds, or bug reports:
+    <strong><a href="https://discord.gg/6tDBPs9chp">discord.gg/6tDBPs9chp</a></strong>
+  </p>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>
+      King Bug Castle is an unofficial, non-commercial research project. It is not affiliated
+      with or endorsed by the game's developer or publisher. Game assets remain the property of
+      their respective owners and are used here only for interoperability research.
+    </p>
+    <p><a href="vi.html">Đọc bằng tiếng Việt →</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

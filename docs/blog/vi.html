@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>King Bug Castle — dựng private server cho một game không muốn có nó</title>
+<meta name="description" content="Nhật ký dựng server: 283 phiên agent, 672 commit, và một game Android được reverse-engineer thành private server chạy thật.">
+<link rel="stylesheet" href="blog.css">
+<link rel="alternate" hreflang="en" href="index.html">
+</head>
+<body>
+<a class="skip" href="#main">Tới nội dung</a>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="mark">King Bug Castle</span>
+    <nav>
+      <a href="#story">Câu chuyện</a>
+      <a href="#timeline">Mốc thời gian</a>
+      <a href="#numbers">Con số</a>
+      <span class="lang">
+        <a href="index.html">EN</a>
+        <a href="vi.html" aria-current="true">VI</a>
+      </span>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Nhật ký dựng server</p>
+    <h1>Reverse-engineer một game Android thành server mà nó chưa từng có</h1>
+    <p class="lede">
+      King God Castle là một game auto-battler Hàn Quốc với đúng một backend, một lớp
+      anti-cheat đóng gói, và không có chế độ offline. Đây là câu chuyện biến nó thành
+      private server — kể qua những gì đã hỏng, những gì đã nói dối, và những gì cuối cùng
+      đã chạy được.
+    </p>
+    <div class="meta">
+      <span>Tháng 3 — tháng 11, 2026</span>
+      <span>283 phiên agent</span>
+      <span>672 commit</span>
+      <span>Một người, năm công cụ AI</span>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>533M</b><span>token vào</span></div>
+  <div class="stat"><b>16,3M</b><span>token ra</span></div>
+  <div class="stat"><b>44.940</b><span>lượt trao đổi</span></div>
+  <div class="stat"><b>1,77M</b><span>dòng code thêm</span></div>
+</div>
+
+<main id="main">
+<div class="wrap" id="story">
+
+<!-- 1 -->
+<section class="chapter">
+  <span class="num">I</span>
+  <h2>Một game mà bạn không được phép đọc</h2>
+  <p class="first">
+    Khởi đầu là một bài toán kiểu bảng tính. King God Castle lưu toàn bộ cân bằng của mình —
+    từng hero, từng bậc skill, từng bảng tỉ lệ rơi, từng chuỗi đã dịch — trong một gói XML
+    mà client tải về lúc đăng nhập. Gói đó không nằm trong APK. Nó đến qua HTTP, trong một
+    container nhị phân, và nó chính là ranh giới giữa "tôi chơi game này" và "tôi hiểu game này".
+  </p>
+  <p>
+    Nên tháng đầu tiên không phải là lập trình. Đó là khảo cổ. Tải gói về. Bung container.
+    Đặt <code>Strings_EN_US.xml</code> cạnh <code>Strings_VI.xml</code> và phát hiện ra mô tả
+    skill là template ghép từ ba bảng riêng. Trích atlas sprite bằng UnityPy và thấy chân
+    dung hero nằm trong một bundle illustration riêng, còn sprite chiến đấu của chính hero đó
+    nằm trong một atlas mười chín ô 130×140.
+  </p>
+  <p>
+    Không có tài liệu nào cho bất kỳ thứ này. Mọi sự thật đều phải suy ra, và mọi suy luận
+    đều phải sống sót khi gặp client thật. Ở giai đoạn này hình thành một thói quen hữu ích:
+    <strong>client chính là đặc tả.</strong> Tên field mơ hồ thì decompile class đọc nó. Luật
+    không rõ thì tìm hằng số. XML cho bạn hình dạng dữ liệu; chỉ có binary mới nói cho bạn
+    dữ liệu đó <em>nghĩa là gì</em>.
+  </p>
+  <p>
+    Đến tháng 6 thì hình dạng đã đủ rõ để thử một việc ngớ ngẩn: dựng một server giả, trỏ một
+    client đã patch vào đó, và xem màn hình đăng nhập đi được bao xa.
+  </p>
+</section>
+
+<!-- 2 -->
+<section class="chapter">
+  <span class="num">II</span>
+  <h2>File nhị phân không tồn tại</h2>
+  <p>
+    Nó đi được xa đến bất ngờ. FastAPI trên cổng 8080, một bảng viết tay ánh xạ tên route của
+    client sang response model, và một file JSON chứa đúng một người chơi hợp lý. Đăng nhập
+    chạy. Lobby hiện ra. Rồi mọi panel cần dữ liệu thật đều ném null reference vì response
+    model rỗng — và đó là bài học cấu trúc đầu tiên của dự án: <strong>một route không có model
+    sẽ trả về model <em>rỗng</em>, và model rỗng thì làm crash panel.</strong>
+  </p>
+  <p>
+    Rồi game lên v171, và mặt đất rung chuyển. v171 <em>không</em> có
+    <code>libil2cpp.so</code> trên đĩa. File chứa toàn bộ C# đã biên dịch của game được đóng
+    gói và mã hoá bên trong thư viện anti-cheat lúc chạy, bung vào bộ nhớ, rồi thực thi từ đó.
+    Mọi công cụ trong bộ đồ nghề tiêu chuẩn đều cần một file. Không có file nào.
+  </p>
+  <p>
+    Bung nó ra mất một tuần disassembly: tìm loader, tìm các kiểm tra toàn vẹn, tìm parser từ
+    chối header sai, và vô hiệu hoá vừa đủ để packer đưa cho bạn một ELF bình thường mà không
+    nhận ra mình vừa bị lấy trộm. Kết quả là một <code>libil2cpp.so</code> sạch cùng metadata
+    của cùng bản build — và chữ "cùng bản build" quan trọng hơn vẻ ngoài của nó, vì metadata
+    mang <em>chỉ số</em> string literal mà code đã biên dịch nằm sẵn bên trong. Lệch phiên bản
+    không tạo ra cảnh báo. Nó tạo ra chuỗi ký tự rác.
+  </p>
+  <pre><b>chốt chặn toàn vẹn</b>    bl ; tbnz w0,#31,&lt;fail&gt;   ×4
+<b>parser trả lỗi</b>        mov w8,#-1 ; str w8,[sp,#0x94] ; b   ×4</pre>
+  <p>
+    Có binary trong tay rồi thì SSL bypass gần như phản cao trào: ba hàm
+    <code>ValidateCertificate</code>, mỗi hàm thay bằng <code>mov w0,#1 ; ret</code>.
+    Bốn byte trung thực cho mỗi hàm.
+  </p>
+</section>
+
+<!-- 3 -->
+<section class="chapter">
+  <span class="num">III</span>
+  <h2>Thuyết phục một client vốn đã biết bạn đang nói dối</h2>
+  <p>
+    Private server không phải là làm lại một game. Nó là một buổi diễn. Client tin điều bạn
+    nói, và mọi panel nó vẽ ra đều là một yêu cầu về đúng một hình dạng dữ liệu tại đúng một
+    thời điểm.
+  </p>
+  <p>
+    Phần khó là những bất biến không ai ghi lại. Mảng deck phải có ít nhất sáu phần tử, vì
+    lobby đánh chỉ số vào sáu ô UI cố định. Nó cũng phải nhiều nhất sáu, vì trình sửa deck
+    lặp theo mảng của bạn trong khi đánh chỉ số vào mảng cố định của chính nó. Cả hai chặn
+    đều được xác nhận bằng cách decompile cả hai hàm. Đoán sai chặn nào cũng tạo ra một cú
+    crash trông giống hệt một bug hoàn toàn khác.
+  </p>
+  <div class="pull">
+    Client không kiểm tra dữ liệu của bạn. Nó đánh chỉ số vào đó.
+    <cite>bài học đắt nhất của dự án</cite>
+  </div>
+  <p>
+    Rồi đến những field có bộ từ vựng riêng. Loại phần thưởng không phải chuỗi tự do:
+    <code>"Item"</code> không phải một loại hợp lệ. Client so với một tập literal cố định —
+    <code>InventoryItem</code>, <code>Key</code>, <code>UnitSoulItem</code>,
+    <code>Treasure_*</code>, <code>Skin</code>, và cả chục cái nữa — và chuỗi không khớp thì
+    phân giải thành <em>không có icon</em>. Phần thưởng vẫn hiện ra. Chỉ là hiện với hình sai
+    và con số vô nghĩa, thứ khó nhận ra hơn hẳn một cú crash.
+  </p>
+  <p>
+    Đến cuối tháng 7, mọi route client có thể gọi đều có câu trả lời thật. Không phải stub —
+    mà là câu trả lời khiến panel tương ứng hành xử như người chơi mong đợi: hàng trong shop,
+    nhận thưởng nhiệm vụ, lao động lãnh địa, tháp Babel, mùa đấu trường, chuỗi điểm danh, bang
+    hội, trang phục sở hữu và mặc được, thưởng lần đầu invasion.
+  </p>
+</section>
+
+<!-- 4 -->
+<section class="chapter">
+  <span class="num">IV</span>
+  <h2>Hai người phải chơi được</h2>
+  <p>
+    Server cho một người là đồ chơi. Khoảnh khắc thiết bị thứ hai kết nối, mọi thứ ngầm hiểu
+    là "file save" phải trở thành "một save, khoá theo danh tính" — và danh tính chính là nơi
+    dự án này sinh ra những lỗi thú vị nhất.
+  </p>
+  <p>
+    Lần thử đầu tiên rất hợp lý: nếu một lần đăng nhập đến mà không có id, dùng save đang hoạt
+    động. Đúng cho một bản demo một người, và thảm hoạ cho một dịch vụ. Một client mất guest id
+    — xoá cache, cài lại, reset máy — sẽ đăng nhập hết lần này đến lần khác mà không có danh
+    tính, và mỗi lần đều được trao thế giới của người khác, kèm một session gắn vào đó. Log
+    server cho thấy cùng một tài khoản đăng nhập vài phút một lần suốt nhiều tuần. Trông như
+    client bị kẹt. Thực ra là thiết kế bị kẹt.
+  </p>
+  <div class="pull">
+    "Tài khoản của tôi biến thành người chơi khác" không bao giờ là bug mất dữ liệu.
+    Nó là bug danh tính mặc áo mất dữ liệu.
+    <cite>sau lần thứ ba nghe cùng một triệu chứng</cite>
+  </div>
+  <p>
+    Lỗi thứ hai tinh vi hơn. Đăng nhập trên Android đi qua Google, và đường native của client
+    chờ backend trả về một access token. Backend giả của chúng tôi trả lời endpoint đó bằng
+    model rỗng — không token. Điều đó không sao chừng nào thiết bị còn token từ phiên trước.
+    Với bản cài mới thì không: login đi ra mà không có id, bị từ chối, và mọi request sau đó
+    phục vụ một save template dùng một lần. Ba người dùng khác nhau báo "game reset tài khoản
+    tôi". Tài khoản chưa từng bị chạm. Token chưa từng được cấp.
+  </p>
+  <p>
+    Giờ thì login không có id bị từ chối ở chế độ nhiều người. uid placeholder của save
+    template không bao giờ được trở thành key save. Guest id mới nhận save mới, và save cũ có
+    thể được gắn lại một cách có chủ đích. Nguyên tắc không hào nhoáng nhưng vững:
+    <strong>không bao giờ đoán danh tính.</strong>
+  </p>
+</section>
+
+<!-- 5 -->
+<section class="chapter">
+  <span class="num">V</span>
+  <h2>Miễn phí, hoặc không làm</h2>
+  <p>
+    Yêu cầu về hosting được nêu một lần và không bao giờ thương lượng lại: <em>không được mất
+    một đồng nào</em>. Chính ràng buộc đó định hình kiến trúc nhiều hơn mọi sở thích kỹ thuật.
+  </p>
+  <p>
+    Kết quả là một máy ARM free-tier chạy API trên 8080 và TLS trên 8443, sau một CDN lo
+    chứng chỉ, với tên miền chia ba — một hostname cho client game, một cho dashboard quản trị,
+    một cho cổng người chơi. CI chạy toàn bộ test mỗi lần push. Một workflow riêng build client
+    đã patch và phát hành dưới dạng GitHub release, vì release asset miễn phí còn object
+    storage thì không. Thứ duy nhất thật sự lớn — gói game gốc 1,1 GB cần làm đầu vào build —
+    được tải từ GitHub trong lúc build rồi xoá ngay sau đó, nên nó không bao giờ chạm vào máy
+    chủ.
+  </p>
+  <p>
+    Deploy chạy qua một key chỉ thực thi được đúng một lệnh. Không phải một shell bị giới hạn:
+    mà là key có dòng <code>authorized_keys</code> ghim một command. Nếu working tree bẩn, nó
+    từ chối. Nếu sạch, nó fast-forward rồi restart. Không có đường nào từ CI tới một dấu nhắc
+    lệnh.
+  </p>
+  <pre><span style="color:var(--ink-faint)">~/.ssh/authorized_keys</span>
+restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</pre>
+  <p>
+    Cái giá thì có thật: free tier có ổ đĩa rất nhỏ. Một lần nâng cấp phải hoán đổi boot
+    volume giữa hai instance vì máy đang chạy không chứa nổi cả artifact cũ và mới cùng lúc.
+    Trên gói trả phí đó là một lần resize. Trên gói miễn phí đó là cả một buổi tối.
+  </p>
+</section>
+
+<!-- 6 -->
+<section class="chapter">
+  <span class="num">VI</span>
+  <h2>Những bug không phải bug</h2>
+  <p>
+    Vài cuộc điều tra dài nhất kết thúc bằng kết luận "code đang làm đúng những gì được bảo."
+    Ba trong số đó đáng nhớ vì khuôn mẫu sẽ lặp lại.
+  </p>
+  <p>
+    <strong>Client đăng nhập mười bảy lần mỗi giây.</strong> Không exception, không lỗi, không
+    dòng logcat nào — chỉ có request. Vòng update của lobby so sánh thời gian hiện tại với
+    <code>tomorrow</code>, và nếu sang ngày mới thì tải lại toàn bộ. Save của chúng tôi lưu
+    <code>tomorrow</code>, đóng băng từ lúc tạo tài khoản, nên ngày mới đã đến một lần và
+    không bao giờ ngừng đến. Sửa mất ba dòng: suy ra từ đồng hồ thay vì lưu lại. Bài học thì
+    tổng quát — <em>thứ gì suy ra được thì đừng bao giờ lưu.</em>
+  </p>
+  <p>
+    <strong>Game treo ở "Loading resources".</strong> Request HTTP đi ra và response về tới.
+    Callback không bao giờ chạy. Hoá ra client HTTP của chính game đã mọc thêm một lệnh gọi
+    analytics bên trong, và khởi tạo analytics ném exception trên thiết bị không có Google
+    Play Services. Exception không hiện ra ở đâu hữu ích; nó chỉ giết completion handler giữa
+    đường. Stub hai hàm thành <code>ret</code> và màn hình loading biến mất.
+  </p>
+  <p>
+    <strong>Binary bị hỏng và chúng tôi đổ lỗi cho framework.</strong> Một stack overflow cục
+    bộ ở màn hình loading bị chẩn đoán hai lần là bug cố hữu của runtime async. Thực ra là
+    hai mươi mốt byte lạc trong một thư viện bị patch tay — một trong số đó là một nhánh đã
+    ghi đè một hằng số bên trong state machine, biến một coroutine tuyến tính thành đệ quy vô
+    hạn. Nguyên tắc rút ra được ghi đậm trong repo: không bao giờ patch tay thư viện mà bạn
+    đem đi ship. Sinh lại nó từ byte nguyên bản, và kiểm tra bằng một phép so khớp từ chối
+    chạy tiếp nếu bất cứ thứ gì khác đã dịch chuyển.
+  </p>
+  <div class="pull">
+    Bịa ra một lời giải thích nghe hợp lý còn tệ hơn nói "tôi chưa biết".
+    Một cái giá một giờ; cái kia giá một tuần.
+    <cite>viết xuống sau lần chẩn đoán sai thứ tư</cite>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="chapter">
+  <span class="num">VII</span>
+  <h2>Một bộ trang phục chưa từng tồn tại</h2>
+  <p>
+    Phép thử tốt nhất để biết bạn có thật sự hiểu một hệ thống không là bắt nó hiển thị một
+    thứ chưa ai từng tạo ra. Thêm một trang phục mới hoá ra là bài toán năm tầng núp dưới vỏ
+    một dòng dữ liệu.
+  </p>
+  <p>
+    Tầng một thì rõ: một dòng trong XML unit trỏ tới tên sprite. Tầng hai là asset bundle —
+    bundle được định địa chỉ theo nội dung, và client kiểm tra CRC của nó so với catalog nằm
+    sẵn trong gói tải về. Byte tuỳ biến không thể tạo ra CRC gốc, còn sửa catalog để nói dối
+    sẽ làm hỏng toàn bộ gói. Giải pháp không phải giả mạo checksum mà là <em>bỏ luôn phép
+    kiểm</em>: bốn patch lệnh lúc chạy để CRC của catalog đơn giản là không bị cưỡng chế.
+  </p>
+  <p>
+    Tầng ba là atlas sprite. Hoạt ảnh chiến đấu của một hero là mười chín khung trong một lưới
+    cố định, và mỗi khung mang hình học polygon khít được tính riêng cho đúng silhouette đó.
+    Dùng lại một ảnh rộng hơn trong lưới cũ thì khung bị cắt rồi bị phóng to — dáng sai, mất
+    góc, tràn sang ô bên cạnh. Cả mười chín khung phải được dựng lại với quad, texture rect và
+    UV transform suy ra từ pivot riêng. Phép kiểm không phải "texture trông có đúng không" mà
+    là "từng sprite đọc lại có đúng 130×140 không".
+  </p>
+  <p>
+    Tầng bốn là prefab: bản sao của nhân vật gốc với mười animation clip, một animator
+    controller, và một render-data key riêng. Dùng chung render key của bản gốc thì chân dung
+    clone âm thầm phân giải về ảnh gốc — hoặc về không gì cả.
+  </p>
+  <p>
+    Tầng năm là addressables catalog, cần năm location mới: texture và sprite cho cả atlas
+    chiến đấu lẫn illustration, cộng thêm prefab. Đúng bốn trên năm thì dòng skin vẫn hiện
+    trong shop, thumbnail trắng trơn, và chân dung lớn rơi về illustration mặc định.
+  </p>
+  <p>
+    Khi nó cuối cùng chạy được, nó chạy được trọn vẹn — hoạt ảnh, chân dung, thumbnail, mục
+    trong shop, luồng mặc trang bị. Không chỗ nào trong game biết nhân vật này không do studio
+    gốc tạo ra.
+  </p>
+</section>
+
+<!-- 8 -->
+<section class="chapter">
+  <span class="num">VIII</span>
+  <h2>Những gì đến sau game</h2>
+  <p>
+    Khi đã đọc master data trôi chảy, game không còn là artifact thú vị duy nhất nữa. Dữ liệu
+    mới là.
+  </p>
+  <p>
+    Nó sinh ra một compendium chiến lược: mọi chiến lược định hình build trong chế độ roguelike,
+    mỗi cái làm gì, cái nào loại trừ nhau, trọng số pool roll đổi ra sao khi bạn lên cấp —
+    và một trình giả lập nhận ba lựa chọn đang thấy, cấp hiện tại và chiến lược bạn muốn, rồi
+    trả về tỉ lệ. Tất cả là một file HTML tĩnh, song ngữ, không build step, không dependency,
+    phát hành từ chính repository.
+  </p>
+  <p>
+    Nó sinh ra một dashboard: tra người chơi, cấp vật phẩm và hero, gửi thư với nội dung tuỳ ý,
+    audit log, và xem luồng API trực tiếp. Và một monitor theo dõi CDN chính thức, thông báo
+    bằng mười lăm ngôn ngữ khi có phiên bản mới hoặc patch mới.
+  </p>
+  <p>
+    Dự án cũng sinh ra tài liệu này, là bản trung thực: những lần chẩn đoán sai, những lần quát
+    nhau, những phiên kết thúc bằng "bạn lại bịa tiếp rồi?", và những phiên kết thúc bằng một
+    lobby chạy được.
+  </p>
+</section>
+
+<!-- timeline -->
+<section class="chapter" id="timeline">
+  <span class="num">Mốc thời gian</span>
+  <h2>Chín tháng, cô đọng</h2>
+  <ul class="rail">
+    <li><time>Tháng 3/2026</time><p>Phiên đầu tiên. Workspace được tạo; dự án khởi đầu bằng việc đọc dữ liệu, không phải viết code.</p></li>
+    <li><time>26/6</time><p>Private server đầu tiên khởi động trên cổng 8080 với client đã patch.</p></li>
+    <li><time>16/7</time><p>Binary game của v171 (bị đóng gói và mã hoá) được bung ra khỏi thư viện anti-cheat.</p></li>
+    <li><time>19/7</time><p>Một thư viện patch tay gây đệ quy vô hạn, bị chẩn đoán nhầm thành bug framework. Luật "không patch tay" ra đời.</p></li>
+    <li><time>25/7</time><p>Mọi route client đều có trả lời. Chuyển save, leaderboard, bang hội, lãnh địa, đấu trường.</p></li>
+    <li><time>27/7</time><p>CI tự build client đã patch; bí ẩn "lobby đen" truy về một giả thuyết patch đã bị bác bỏ.</p></li>
+    <li><time>31/7</time><p>Deploy công khai. Ràng buộc "không mất đồng nào" trở thành kiến trúc.</p></li>
+    <li><time>1/8</time><p>Test suite trong CI, deploy key giới hạn command, pipeline release. Giải mã ngữ nghĩa thức tỉnh.</p></li>
+    <li><time>7/8</time><p>Vòng login 1 Hz: do <code>tomorrow</code> bị lưu. Nay luôn suy ra.</p></li>
+    <li><time>13/8</time><p>Port v172. Lệnh analytics bên trong HTTP client phá callback; được stub.</p></li>
+    <li><time>18/8</time><p>Siết auth. Login không id bị từ chối; đăng nhập cấp token; sub-stat trang sức gộp theo key.</p></li>
+    <li><time>20/8</time><p>Skin Frieren hoàn tất: atlas, prefab, animation, catalog, bypass CRC.</p></li>
+    <li><time>15/9</time><p>Compendium chiến lược lên sóng dưới dạng một trang HTML song ngữ.</p></li>
+    <li><time>Tháng 10</time><p>Tái dựng toàn bộ mã nguồn game bằng Ghidra; thiết kế lại dashboard; clan raid.</p></li>
+    <li><time>7/11</time><p>Thu thập lịch sử từ năm nơi lưu, dọn repo, viết tài liệu này.</p></li>
+  </ul>
+</section>
+
+<!-- numbers -->
+<section class="chapter" id="numbers">
+  <span class="num">Con số</span>
+  <h2>Cái giá</h2>
+  <p>
+    Không phải tiền — tiền bằng không, theo yêu cầu. Cái giá là thời gian và token, và cần
+    trung thực về hình dạng của cái giá đó.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Tháng</th><th>Phiên</th><th>Commit</th></tr>
+      <tr><td>2026-03</td><td>2</td><td>—</td></tr>
+      <tr><td>2026-04</td><td>8</td><td>—</td></tr>
+      <tr><td>2026-05</td><td>3</td><td>—</td></tr>
+      <tr><td>2026-06</td><td>8</td><td>—</td></tr>
+      <tr><td>2026-07</td><td>53</td><td>93</td></tr>
+      <tr><td>2026-08</td><td>94</td><td>264</td></tr>
+      <tr><td>2026-09</td><td>37</td><td>284</td></tr>
+      <tr><td>2026-10</td><td>74</td><td>24</td></tr>
+      <tr><td>2026-11</td><td>3</td><td>7</td></tr>
+    </table>
+  </div>
+  <p>
+    Đỉnh commit và đỉnh phiên không trùng nhau, và điều đó có ý nghĩa. Tháng 8 là bề rộng:
+    mọi tính năng client chạm tới được, đều được cài. Tháng 9 là chiều sâu: ít phiên hơn,
+    nhiều commit hơn, sửa những gì bề rộng đã làm hỏng. Tháng 10 đảo ngược — nhiều phiên khảo
+    sát, ít commit, vì phần lớn là đọc.
+  </p>
+  <p>
+    Trong 44.940 lượt trao đổi qua năm công cụ agent khác nhau, một phần lớn dành cho những
+    cuộc điều tra kết thúc bằng "không đổi gì, đây là lý do." Đó không phải lãng phí. Đó là
+    cái giá của việc không ship một câu trả lời sai đầy tự tin — thứ duy nhất mà một dự án
+    reverse-engineering không thể cho phép mình mắc.
+  </p>
+</section>
+
+<!-- links -->
+<section class="chapter">
+  <span class="num">Repository</span>
+  <h2>Sự thật nằm ở đâu</h2>
+  <p>
+    Toàn bộ bản ghi — từng offset patch, từng giả thuyết đã bị bác bỏ, từng regression test —
+    nằm trong repository. Docs được viết cho người đến sau, kể cả chính tôi trong tương lai.
+  </p>
+  <div class="cards">
+    <a class="card" href="../../README.vi.md">
+      <h3>README</h3>
+      <p>Dự án là gì, build client thế nào, chạy server ra sao.</p>
+    </a>
+    <a class="card" href="../dev-notes.md">
+      <h3>dev-notes.md</h3>
+      <p>Cơ sở tri thức: việc cần làm → cách giải mã → offset chính xác → cách kiểm chứng.</p>
+    </a>
+    <a class="card" href="../history/timeline.vi.md">
+      <h3>Dòng thời gian</h3>
+      <p>Các cột mốc theo ngày, từng giai đoạn.</p>
+    </a>
+    <a class="card" href="../history/lessons.md">
+      <h3>Sổ tay bẫy</h3>
+      <p>Mọi thất bại từng tốn một phiên, nhóm theo triệu chứng.</p>
+    </a>
+    <a class="card" href="../history/sessions.md">
+      <h3>Nhật ký phiên</h3>
+      <p>Cả 283 phiên với ngày, số lượt và tổng token.</p>
+    </a>
+    <a class="card" href="../strife-compendium.html">
+      <h3>Strife Compendium</h3>
+      <p>Tài liệu chiến lược và trình giả lập roll dựng từ master data.</p>
+    </a>
+  </div>
+  <p style="margin-top:2rem">
+    Câu hỏi, build, hoặc báo lỗi:
+    <strong><a href="https://discord.gg/6tDBPs9chp">discord.gg/6tDBPs9chp</a></strong>
+  </p>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>
+      King Bug Castle là dự án nghiên cứu không chính thức, phi thương mại. Nó không liên kết
+      và không được bảo trợ bởi nhà phát triển hay nhà phát hành của game. Tài sản trong game
+      vẫn thuộc về chủ sở hữu tương ứng và chỉ được dùng ở đây cho mục đích nghiên cứu khả
+      năng tương tác.
+    </p>
+    <p><a href="index.html">Read in English →</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

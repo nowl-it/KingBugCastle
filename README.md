@@ -7,6 +7,8 @@
   ![FastAPI](https://img.shields.io/badge/FastAPI-0.103.1-009688.svg?style=flat&logo=fastapi)
   ![Reverse Engineering](https://img.shields.io/badge/Reverse_Engineering-IL2CPP-purple.svg?style=flat)
   ![Binary Patching](https://img.shields.io/badge/Patching-ARM64-red.svg?style=flat)
+
+  <sub>🇻🇳 <a href="README.vi.md">Đọc bằng tiếng Việt</a> · 📓 <a href="docs/blog/index.html">Project build log</a></sub>
 </div>
 
 <br/>

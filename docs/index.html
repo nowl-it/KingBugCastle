@@ -1,12 +1,136 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Strife Compendium</title>
-  <script>location.replace(`strife-compendium.html${location.search}${location.hash}`)</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>King God Castle — private server notes</title>
+<meta name="description" content="Documentation, build log and master-data references for a King God Castle private server.">
+<style>
+  :root{
+    --bg:#0c0b0a;--bg-soft:#141210;--panel:#1a1714;--line:#2e2823;
+    --ink:#e8e1d7;--dim:#a89d90;--faint:#6f655b;--gold:#d9a441;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme: light){
+    :root{--bg:#f6f2ec;--bg-soft:#efe9e0;--panel:#fff;--line:#ddd3c6;--ink:#1d1915;--dim:#5b5148;--faint:#8c8177;--gold:#96681a;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.7;font-size:17px}
+  .wrap{max-width:60rem;margin:0 auto;padding:0 1.35rem}
+  header{padding:5.5rem 0 3rem;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 1.5rem}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,7vw,3.8rem);line-height:1.04;letter-spacing:-.02em;margin:0 0 1.2rem;text-wrap:balance}
+  .lede{font-size:1.15rem;color:var(--dim);max-width:40rem;margin:0}
+  h2{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);font-weight:500;margin:3.5rem 0 1.1rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+  a.card{background:var(--panel);padding:1.5rem 1.4rem;text-decoration:none;color:inherit;display:block;transition:background .12s}
+  a.card:hover{background:var(--bg-soft)}
+  a.card h3{font-size:.95rem;font-weight:650;margin:0 0 .5rem;letter-spacing:.01em}
+  a.card p{margin:0;font-size:.86rem;color:var(--faint);line-height:1.6}
+  a.card .lang{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.7rem}
+  footer{padding:3rem 0 5rem;margin-top:4rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--faint)}
+  footer a{color:var(--dim)}
+</style>
+<script>
+  // Backwards compatibility: old links pointed here with ?lang=… meant for the compendium.
+  if (location.search.includes('lang=')) {
+    location.replace('strife-compendium.html' + location.search + location.hash);
+  }
+</script>
 </head>
 <body>
-  <p><a href="strife-compendium.html">Chiến Lược & Tarot (Strife Compendium)</a></p>
+<header>
+  <div class="wrap">
+    <p class="kicker">King Bug Castle</p>
+    <h1>Notes from building a private server for a game that doesn't want one</h1>
+    <p class="lede">
+      Documentation, offsets, build log and master-data references for the King God Castle
+      private-server project. Everything here is reverse-engineering research against a
+      client we own.
+    </p>
+  </div>
+</header>
+
+<div class="wrap">
+  <h2>Start here</h2>
+  <div class="grid">
+    <a class="card" href="blog/index.html">
+      <span class="lang">Blog · EN / VI</span>
+      <h3>The build log</h3>
+      <p>Nine months, 283 agent sessions, one working server. What broke, what lied, what worked.</p>
+    </a>
+    <a class="card" href="strife-compendium.html">
+      <span class="lang">Reference · EN / VI</span>
+      <h3>Strife Compendium</h3>
+      <p>Every strategy and tarot in the roguelike mode, mutual exclusions, and a roll simulator.</p>
+    </a>
+    <a class="card" href="README.md">
+      <span class="lang">Docs · EN</span>
+      <h3>Operator handbook</h3>
+      <p>Index of every playbook: grant items, un-gate content, edit master data, build a client.</p>
+    </a>
+  </div>
+
+  <h2>Reference</h2>
+  <div class="grid">
+    <a class="card" href="../README.md">
+      <h3>Repository README</h3>
+      <p>What this project is, prerequisites, and how to run the whole thing end to end.</p>
+    </a>
+    <a class="card" href="history/timeline.md">
+      <h3>Timeline</h3>
+      <p>Dated milestones from first data read to final cleanup.</p>
+    </a>
+    <a class="card" href="history/lessons.md">
+      <h3>Trap ledger</h3>
+      <p>Every failure that cost a session, organised by what you see when it happens.</p>
+    </a>
+    <a class="card" href="history/sessions.md">
+      <h3>Session log</h3>
+      <p>283 sessions with dates, turn counts and token totals.</p>
+    </a>
+    <a class="card" href="dev-notes.md">
+      <h3>dev-notes.md</h3>
+      <p>The full reasoning chain: decode → offset → verification for each subsystem.</p>
+    </a>
+    <a class="card" href="master-data-2026-09-08.html">
+      <h3>Master-data diff</h3>
+      <p>Illustrated report on the 2026-09-08 content republish.</p>
+    </a>
+  </div>
+
+  <h2>Playbooks</h2>
+  <div class="grid">
+    <a class="card" href="private-build.md">
+      <h3>Build a client</h3>
+      <p>Unpack the binary, apply patches, sign, and ship.</p>
+    </a>
+    <a class="card" href="deploy-and-run.md">
+      <h3>Deploy &amp; run</h3>
+      <p>Ports, hostnames, TLS, service units, and how to verify a deploy.</p>
+    </a>
+    <a class="card" href="cdn-master-data.md">
+      <h3>Master data</h3>
+      <p>Edit XML, rebuild the CDN bundle, and the Localizer gotchas.</p>
+    </a>
+    <a class="card" href="save-editing.md">
+      <h3>Save editing</h3>
+      <p>Grant, migrate and repair player state without breaking client invariants.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>
+      Unofficial, non-commercial research project. Not affiliated with the game's developer or
+      publisher. ·
+      <a href="https://discord.gg/6tDBPs9chp">Discord</a> ·
+      <a href="blog/vi.html">Tiếng Việt</a>
+    </p>
+  </div>
+</footer>
 </body>
 </html>
