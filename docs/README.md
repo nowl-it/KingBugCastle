@@ -32,6 +32,7 @@ It complements the other docs - read those for the *why* and the *internals*:
 | **[save-editing.md](save-editing.md)** | Grant currency / items / units / skins / treasures by editing player state or sending mail |
 | **[content-unlock.md](content-unlock.md)** | Unlock version-gated content (`MinVersion`) - treasures, skins, units, stages |
 | **[stages-and-spawns.md](stages-and-spawns.md)** | How stage enemies are defined; build a training-dummy test stage |
+| **[getting-the-data.md](getting-the-data.md)** | Get the data from scratch: stock package, CDN master-data bundle (incl. the 175+ encrypted container), `dump.cs` |
 | **[cdn-master-data.md](cdn-master-data.md)** | Edit master-data XML and push it to the client via the CDN xml bundle |
 | **[discord-cdn-monitor.md](discord-cdn-monitor.md)** | Configure the Discord CDN-update notifier and its 30-minute monitor |
 | **[api-and-crypto.md](api-and-crypto.md)** | AES request/response format; hit the server manually with curl/python |

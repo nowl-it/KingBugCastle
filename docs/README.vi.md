@@ -30,6 +30,7 @@ Nó bổ trợ cho các tài liệu khác - đọc những tài liệu đó đ�
 | **[save-editing.md](save-editing.md)** | Cấp tiền tệ / vật phẩm / unit / skin / treasure bằng cách sửa state hoặc gửi thư |
 | **[content-unlock.md](content-unlock.md)** | Mở khoá nội dung bị chặn phiên bản (`MinVersion`) - treasure, skin, unit, stage |
 | **[stages-and-spawns.md](stages-and-spawns.md)** | Cách định nghĩa quái trong stage; dựng stage training-dummy |
+| **[getting-the-data.md](getting-the-data.md)** | Lấy dữ liệu từ đầu: gói client gốc, bundle master data trên CDN (kể cả container mã hoá từ 175+), `dump.cs` |
 | **[cdn-master-data.md](cdn-master-data.md)** | Sửa XML master data và đẩy tới client qua bundle xml trên CDN |
 | **[discord-cdn-monitor.md](discord-cdn-monitor.md)** | Cấu hình thông báo CDN qua Discord và monitor 30 phút |
 | **[api-and-crypto.md](api-and-crypto.md)** | Định dạng AES request/response; gọi server thủ công bằng curl/python |
