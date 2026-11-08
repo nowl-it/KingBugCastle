@@ -10,13 +10,14 @@ hiểu, vẫn build được, và không phải đoán.
 
 ## Nên làm ngay (đóng gói bàn giao)
 
-### 1. Trang docs chưa thực sự được deploy — `S`
-`docs/index.html` và `docs/blog/` chỉ có tác dụng nếu GitHub Pages được bật cho thư mục `/docs`.
-Kiểm tra: Settings → Pages → Source = *Deploy from a branch* → `main` / `/docs`. Nếu chưa bật,
-bật một lần là xong — không cần workflow.
+### 1. Trang docs đã được deploy — không cần làm gì thêm — `S`
+GitHub Pages đã bật (source: branch `main`, thư mục `/docs`, legacy build) và tự dựng lại sau mỗi
+push — không cần workflow `pages.yml`. Địa chỉ:
+`https://nowl-it.github.io/KingBugCastle/` (landing) · `/blog/` (blog) · `/blog/vi.html`.
 
-Nếu muốn chắc chắn nó không bị tắt nhầm, thêm `.github/workflows/pages.yml` (~20 dòng,
-`actions/upload-pages-artifact` + `deploy-pages`). Không cần thiết nếu chỉ bật tay một lần.
+Việc duy nhất cần làm: nếu sau này đổi tên repo hoặc chuyển sang custom domain, kiểm tra lại
+đường dẫn tương đối trong `docs/index.html` và `docs/blog/*.html` (đều là relative nên chỉ hỏng
+khi đổi cấu trúc thư mục, không phải khi đổi domain).
 
 ### 2. Tag bản cuối + ghi chú lưu trữ — `S`
 ```bash
