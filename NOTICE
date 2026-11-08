@@ -1,0 +1,26 @@
+# NOTICE
+
+King Bug Castle is an unofficial, non-commercial reverse-engineering research project.
+It is not affiliated with, endorsed by, or connected to Awesomepiece or the publishers of
+King God Castle.
+
+## Code
+
+The MIT license in `LICENSE` covers the **source code in this repository**: the FastAPI
+server, the patchers and build scripts, the test suite, the dashboard, the documentation,
+and the blog.
+
+## Game content
+
+Game data, master-data XML, string tables, sprite atlases, illustrations, audio, and any
+other material derived from the game client remain the property of their respective
+owners. They appear here only as the minimum necessary artifact for interoperability
+research, and are **not** covered by the MIT license.
+
+Nothing in this repository grants a license to redistribute game content. If you fork
+this project, do not republish game assets as if they were yours.
+
+## Trademarks
+
+"King God Castle" and any associated names, logos and marks belong to their owners. They
+are used here descriptively, to identify the software this project interoperates with.

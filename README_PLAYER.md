@@ -3,6 +3,8 @@
 A fan-made private-server build of King God Castle. Not affiliated with Awesomepiece.
 Research / interoperability use only.
 
+<sub>🇻🇳 <a href="README_PLAYER.vi.md">Đọc bằng tiếng Việt</a></sub>
+
 You received a single file: **`KingBugCastle.xapk`**. The server address is already baked
 in - **no root, no hosts file, no config**. It installs side-by-side with the real game
 (different package `com.nowl.castle`), so you can keep both.

@@ -15,6 +15,9 @@
 
 > **⚠️ MIỄN TRỪ TRÁCH NHIỆM:** Đây là dự án do người hâm mộ làm, phi lợi nhuận, **chỉ nhằm mục đích học tập, nghiên cứu và tương tác giữa các hệ thống**. Dự án không liên kết, không được bảo trợ và không có quan hệ với Awesomepiece. Toàn bộ logic game phía server được mô phỏng cục bộ. Client chỉ được patch để bỏ qua certificate pinning và các kiểm tra anti-cheat cục bộ (XIGNCODE3 / NEO), phục vụ phát triển offline và bắt lưu lượng nội bộ.
 
+> **📄 Giấy phép:** MIT chỉ áp dụng cho **code**. Nội dung game (master data, hình ảnh, âm thanh,
+> nhãn hiệu) vẫn thuộc về chủ sở hữu — xem **[NOTICE](NOTICE)**.
+
 ---
 
 ## 💬 Cộng đồng & Discord
@@ -114,7 +117,7 @@ Muốn đi sâu vào nội bộ server, pipeline patch và các phản hồi API
 
 ### 🎮 Cho người dùng cuối / người chơi
 Bạn vừa tải bản `.zip` release và muốn biết cách cài lên thiết bị/emulator?
-👉 **Đọc [Hướng dẫn cài đặt cho người chơi](README_PLAYER.md)**
+👉 **Đọc [Hướng dẫn cài đặt cho người chơi](README_PLAYER.vi.md)**
 
 ### 🧠 Cho người làm reverse engineering
 Muốn hiểu cách dump IL2CPP, ánh xạ route, phá SSL pinning và trích xuất binary đóng gói NEO?

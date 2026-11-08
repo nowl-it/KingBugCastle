@@ -15,6 +15,9 @@
 
 > **⚠️ DISCLAIMER:** This is a fan-made, non-profit project created **strictly for educational, interoperability, and research purposes**. It is not affiliated with, endorsed by, or associated with Awesomepiece. The server-authoritative game logic is fully emulated locally. The client is only patched to bypass certificate pinning and local anti-cheat (XIGNCODE3 / NEO) checks to allow for offline development and local traffic interception.
 
+> **📄 Licensing:** the MIT license covers the **code** only. Game content (master data, art,
+> audio, trademarks) stays with its owners - see **[NOTICE](NOTICE)**.
+
 ---
 
 ## 💬 Community & Discord
@@ -114,7 +117,7 @@ Want to dig into the server internals, patch pipeline, and API responses?
 
 ### 🎮 For End-Users / Players
 Did you just download the `.zip` release and want to know how to install it on your device/emulator?
-👉 **Read the [Player Installation Guide](README_PLAYER.md)**
+👉 **Read the [Player Installation Guide](README_PLAYER.md)** · [bản tiếng Việt](README_PLAYER.vi.md)
 
 ### 🧠 For Reverse Engineers
 Want to understand how we dumped IL2CPP, mapped the routes, defeated SSL pinning, and extracted NEO packed binaries?
