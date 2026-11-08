@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Toàn bộ hồ sơ kỹ thuật — King Bug Castle</title>
+<title>Toàn bộ hồ sơ kỹ thuật - King Bug Castle</title>
 <meta name="description" content="Từng bước reverse engineering: trích master data, bung IL2CPP, bypass SSL, mô phỏng protocol, hook runtime, inject nội dung và phương pháp debug.">
 <link rel="stylesheet" href="blog.css">
 <link rel="alternate" hreflang="en" href="full.html">
@@ -50,10 +50,10 @@
   <ol>
     <li><a href="#method">Phương pháp và công cụ</a></li>
     <li><a href="#target">Mục tiêu: bốn lớp</a></li>
-    <li><a href="#data">Lớp 1 — master data</a></li>
-    <li><a href="#binary">Lớp 2 — binary không được ship</a></li>
-    <li><a href="#read">Lớp 3 — đọc C# đã biên dịch</a></li>
-    <li><a href="#gates">Lớp 4 — bỏ các cổng chặn</a></li>
+    <li><a href="#data">Lớp 1 - master data</a></li>
+    <li><a href="#binary">Lớp 2 - binary không được ship</a></li>
+    <li><a href="#read">Lớp 3 - đọc C# đã biên dịch</a></li>
+    <li><a href="#gates">Lớp 4 - bỏ các cổng chặn</a></li>
     <li><a href="#protocol">Protocol</a></li>
     <li><a href="#state">State người chơi và bất biến</a></li>
     <li><a href="#hooks">Hook runtime</a></li>
@@ -73,8 +73,8 @@
   </p>
   <dl class="kv">
     <div><dt>Quan sát</dt><dd>Lưu lượng TLS/HTTP của client, logcat, ảnh chụp màn hình từ thiết bị thật hoặc emulator.</dd></div>
-    <div><dt>Khai báo</dt><dd>XML master data — game <em>nói</em> nội dung của nó là gì.</dd></div>
-    <div><dt>Biên dịch</dt><dd><code>libil2cpp.so</code> + <code>global-metadata.dat</code> — game <em>thực sự</em> làm gì.</dd></div>
+    <div><dt>Khai báo</dt><dd>XML master data - game <em>nói</em> nội dung của nó là gì.</dd></div>
+    <div><dt>Biên dịch</dt><dd><code>libil2cpp.so</code> + <code>global-metadata.dat</code> - game <em>thực sự</em> làm gì.</dd></div>
     <div><dt>Tổng hợp</dt><dd>Một server tạo ra đúng những byte mà lớp biên dịch chờ đợi, đúng thời điểm nó chờ.</dd></div>
   </dl>
   <p>
@@ -82,12 +82,12 @@
     <code>Ghidra</code> (decompiler), <code>capstone</code> (vài lệnh mỗi lần),
     <code>UnityPy</code> (asset bundle), <code>apktool</code>/<code>apksigner</code>/<code>zipalign</code>
     (build client), disassembly thô cho packer, và Python cho mọi thứ còn lại. Thiết bị test là
-    redroid — điều này quan trọng về sau: nó chạy ARM64 qua translator trên x86_64, và điều đó
+    redroid - điều này quan trọng về sau: nó chạy ARM64 qua translator trên x86_64, và điều đó
     thay đổi những gì debugger nhìn thấy.
   </p>
   <div class="note">
     <b>Luật số 0.</b> Client là đặc tả. Mọi câu hỏi XML không trả lời được ("field này là số lượng
-    hay sức chứa?", "đánh chỉ số từ 0 hay 1?") đều được trả lời bởi chính hàm đọc nó — không bao
+    hay sức chứa?", "đánh chỉ số từ 0 hay 1?") đều được trả lời bởi chính hàm đọc nó - không bao
     giờ bằng một phỏng đoán nghe hợp lý.
   </div>
 </section>
@@ -120,10 +120,10 @@
 <!-- 3 -->
 <section class="chapter" id="data">
   <span class="num">03</span>
-  <h2>Lớp 1 — master data</h2>
+  <h2>Lớp 1 - master data</h2>
   <p>
     Client hỏi backend một <em>patch folder</em>, rồi tải bundle <code>xml</code> từ CDN. Bundle đó
-    là một Unity AssetBundle chứa vài <code>TextAsset</code> — XML thuần, mỗi bảng một file — cộng
+    là một Unity AssetBundle chứa vài <code>TextAsset</code> - XML thuần, mỗi bảng một file - cộng
     <code>AssetHash.txt</code> ghi tên bundle và md5.
   </p>
   <pre><b>GET /auth/getPatchFolder</b>        → { "patchFolder": "172" }
@@ -132,7 +132,7 @@
   <p>
     Nên việc trích xuất là cơ học: tải bundle, nạp bằng UnityPy, duyệt các object
     <code>TextAsset</code>, ghi mỗi <code>m_Name</code> ra file. Chạy vậy với mọi patch là có một
-    corpus có phiên bản; <code>xml_history/</code> chính là nó — ảnh chụp nguyên bản theo từng patch,
+    corpus có phiên bản; <code>xml_history/</code> chính là nó - ảnh chụp nguyên bản theo từng patch,
     không bao giờ sửa, dùng làm nền để diff.
   </p>
   <p>
@@ -157,7 +157,7 @@
     <li><strong>Skill là chuỗi, không phải dòng.</strong> Một bậc skill là <code>Skill</code> kế
       thừa từ cái khác qua <code>Inherit="id"</code>, thường nhảy qua
       <code>TransformSkill</code> / <code>BuffAtCastSkill</code>. Một <code>Inherit</code> sai tạo
-      ra bậc dùng nhầm chỉ số gốc — không có lỗi nào cả.</li>
+      ra bậc dùng nhầm chỉ số gốc - không có lỗi nào cả.</li>
     <li><strong>Text là key, không nội tuyến.</strong> Tên hiển thị của unit là key dạng
       <code>UnitName_10810</code>, phân giải qua <code>Localizer</code> lúc chạy. Bất kỳ element XML
       nào nhận text key (ví dụ <code>&lt;SubName&gt;</code>) đều có thể trỏ tới một key
@@ -168,7 +168,7 @@
     <b>Cái bẫy tốn mười lần thử.</b> Một comment XML (<code>&lt;!-- --&gt;</code>) bất kỳ trong file
     <code>Strings_*.xml</code> làm <code>Localizer.ParseTextAsset</code> mất <em>toàn bộ locale</em>:
     mọi <code>Localize(key)</code> trả về key thô, cả game hiện <code>SkillName_10800</code> thay vì
-    "Cathy". Comment trong <code>Skills</code>/<code>Units</code>/<code>Stages</code> thì không sao —
+    "Cathy". Comment trong <code>Skills</code>/<code>Units</code>/<code>Stages</code> thì không sao -
     parser khác. Bộ build bundle nay từ chối chạy nếu thấy comment, và việc từ chối đó không được
     lách.
   </div>
@@ -177,7 +177,7 @@
   <p>
     Đôi khi dev ghi đè <em>cùng</em> patch folder tại chỗ, nên tên folder không đổi và một watcher
     ngây thơ ("có folder mới không?") không thấy gì. Tín hiệu đáng tin là md5 của bundle trong
-    <code>AssetHash.txt</code>. Diff theo dòng giữa hai bộ XML trả lời "thực sự đổi cái gì" — và
+    <code>AssetHash.txt</code>. Diff theo dòng giữa hai bộ XML trả lời "thực sự đổi cái gì" - và
     nên làm trước khi đọc patch note chính thức, vì patch note nói ý định còn XML nói kết quả. Một
     lần diff như vậy phát hiện một skill có tầm khai báo tăng từ 3 ô ở bậc 1 lên 41 ô ở bậc 3
     trong dữ liệu <em>chính thức</em>.
@@ -187,7 +187,7 @@
 <!-- 4 -->
 <section class="chapter" id="binary">
   <span class="num">04</span>
-  <h2>Lớp 2 — binary không được ship</h2>
+  <h2>Lớp 2 - binary không được ship</h2>
   <p>
     Đến v170 thì đây là bài đã giải: unzip APK, lấy <code>lib/arm64-v8a/libil2cpp.so</code> và
     <code>assets/bin/Data/Managed/Metadata/global-metadata.dat</code>, đưa cả hai cho Il2CppDumper.
@@ -197,7 +197,7 @@
 
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Tìm packer</h3>
   <p>
-    <em>Tên file của thư viện loader xoay vòng mỗi build</em> — đã từng là
+    <em>Tên file của thư viện loader xoay vòng mỗi build</em> - đã từng là
     <code>libaledatic.so</code>, <code>librolineng.so</code>, <code>libxenerene.so</code>,
     <code>libbisedich.so</code>, <code>liberallisi.so</code>. Đừng bao giờ khoá tooling vào tên.
     <code>SONAME</code> của nó thì ổn định: <code>libappsign4a.so</code>.
@@ -215,7 +215,7 @@
   <p>
     Có được ELF mới là nửa việc. Loader còn tự bảo vệ: một byte lệch trong code của chính nó là
     chết trước khi bung, và parser từ chối header bất thường. Những kiểm tra đó là nội dung của
-    patch — mười hai vị trí trong bản build đã kiểm chứng:
+    patch - mười hai vị trí trong bản build đã kiểm chứng:
   </p>
   <div class="table-wrap">
     <table>
@@ -225,7 +225,7 @@
     </table>
   </div>
   <p>
-    Nhóm thứ hai tìm bằng pattern (<code>08008012 e89700b9</code> — đúng bốn hit trong mọi loader
+    Nhóm thứ hai tìm bằng pattern (<code>08008012 e89700b9</code> - đúng bốn hit trong mọi loader
     đã gặp), nhóm đầu bằng bảng, và <em>bảng khác nhau theo build, không dịch theo một hằng số</em>:
     <code>libaledatic.so</code> map file offset == VMA, <code>librolineng.so</code> map VMA == file
     − 0x4000, và bản thân hàm loader đã lớn lên giữa các phiên bản. Khoá vào "offset mới = offset
@@ -237,7 +237,7 @@
     IL2CPP không phân giải chuỗi theo tên lúc chạy. Nó phân giải theo <em>chỉ số trong bảng string
     literal của metadata</em>, được biên dịch vào code dưới dạng immediate. v171.0.01 chèn một
     literal ở index 1545/25.730; việc đó dịch 94% các chỉ số phía sau. Trộn binary v171.0.01 với
-    metadata v171.0.00 không cảnh báo — nó hiện text rác, hoặc crash ở một chỗ chẳng liên quan gì
+    metadata v171.0.00 không cảnh báo - nó hiện text rác, hoặc crash ở một chỗ chẳng liên quan gì
     tới chuỗi.
   </p>
   <div class="note">
@@ -250,9 +250,9 @@
 <!-- 5 -->
 <section class="chapter" id="read">
   <span class="num">05</span>
-  <h2>Lớp 3 — đọc C# đã biên dịch</h2>
+  <h2>Lớp 3 - đọc C# đã biên dịch</h2>
   <p>
-    Il2CppDumper cho ra <code>dump.cs</code> — một khung C#: tên class, offset field, chữ ký hàm,
+    Il2CppDumper cho ra <code>dump.cs</code> - một khung C#: tên class, offset field, chữ ký hàm,
     và với mỗi hàm một dòng <code>RVA:</code>. File đó là mục lục. Nó không phải source, và không
     bao giờ đủ một mình.
   </p>
@@ -270,7 +270,7 @@ public class PvPInfoResponseModel {
     <div><dt>script.json</dt><dd><code>ScriptMethod[].Address</code> là <strong>RVA</strong>, cùng không gian với <code>pc</code> trong tombstone.</dd></div>
     <div><dt>File offset</dt><dd>RVA − 0x4000 với <code>libil2cpp.so</code> <strong>mà thôi</strong>. Thư viện khác khác; phải kiểm, đừng giả định.</dd></div>
     <div><dt>Địa chỉ runtime</dt><dd><code>dlpi_addr</code> từ <code>dl_iterate_phdr</code> + VMA của symbol. LOAD đầu của libil2cpp ở vaddr 0 nên không cần bù trừ.</dd></div>
-    <div><dt>"Offset" trong dump.cs</dt><dd>May mắn là đã bằng RVA − 0x4000 — nên vài tool đọc trực tiếp. Hãy đối chiếu với một patch đã biết đúng trước khi tin nó trên build mới.</dd></div>
+    <div><dt>"Offset" trong dump.cs</dt><dd>May mắn là đã bằng RVA − 0x4000 - nên vài tool đọc trực tiếp. Hãy đối chiếu với một patch đã biết đúng trước khi tin nó trên build mới.</dd></div>
   </dl>
 
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Đọc một hàm bằng tay</h3>
@@ -283,7 +283,7 @@ public class PvPInfoResponseModel {
     Cái <code>-1</code> đó là toàn bộ bug. Với <code>semiSeason = 0</code>, chỉ số là −1 →
     <code>IndexOutOfRangeException</code> bên trong <code>MoveNext</code> của một panel, và biểu
     hiện ra là "màn PvP hỏng, nguyên nhân không ở đâu cả". Sửa: gửi <code>semiSeason ≥ 1</code> và
-    mảng ngày đủ dài. Không patch client, không hack server — chỉ là field mà hàm đó thực sự đọc.
+    mảng ngày đủ dài. Không patch client, không hack server - chỉ là field mà hàm đó thực sự đọc.
   </p>
   <p>
     Cũng cách đọc đó làm các panel mùa hoạt động đúng. Hai kiểm tra liên quan quyết định game có
@@ -292,7 +292,7 @@ public class PvPInfoResponseModel {
   <pre>isPreSeason  = GetSeasonStartAt(0) &gt; UtcNow      → nextSeasonStartAtDates[0] phải <b>trong quá khứ</b>
 isBreakTime  = seasonUntilAtDates[semiSeason-1] &lt;= UtcNow  → kết thúc hiện tại phải <b>trong tương lai</b></pre>
   <p>
-    Cả hai chỉ là giá trị mảng với offset ngày. Sửa là một bảng offset, không phải sửa code — nhưng
+    Cả hai chỉ là giá trị mảng với offset ngày. Sửa là một bảng offset, không phải sửa code - nhưng
     chỉ sau khi đọc hai vị từ đó.
   </p>
 
@@ -300,7 +300,7 @@ isBreakTime  = seasonUntilAtDates[semiSeason-1] &lt;= UtcNow  → kết thúc hi
   <p>
     `dump.cs` cho offset mọi field, và đó là thứ khiến hook native khả thi: để đọc "level người
     chơi" từ một object sống, bạn cần <code>*(int*)((char*)obj + offset)</code>. Một số field là
-    <code>ObscuredInt</code> — struct 20 byte phải đọc theo cặp rồi giải mã qua một thunk. Mọi lần
+    <code>ObscuredInt</code> - struct 20 byte phải đọc theo cặp rồi giải mã qua một thunk. Mọi lần
     UI đọc <code>CardData.potentialTier</code> (offset 0xB8) theo đúng khuôn đó, nên một
     <code>ldr w8,[x, #0xb8]</code> ngây thơ sẽ ra rác.
   </p>
@@ -309,7 +309,7 @@ isBreakTime  = seasonUntilAtDates[semiSeason-1] &lt;= UtcNow  → kết thúc hi
 <!-- 6 -->
 <section class="chapter" id="gates">
   <span class="num">06</span>
-  <h2>Lớp 4 — bỏ các cổng chặn</h2>
+  <h2>Lớp 4 - bỏ các cổng chặn</h2>
   <p>
     Bốn thứ độc lập ngăn một client đã patch nói chuyện với bạn. Cả bốn đều nhỏ khi đã định vị
     được; không cái nào định vị được bằng cách đoán.
@@ -345,7 +345,7 @@ isBreakTime  = seasonUntilAtDates[semiSeason-1] &lt;= UtcNow  → kết thúc hi
     thành host hook (phần 9).
   </p>
 
-  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">c. Tên host — hai lượt, không phải một</h3>
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">c. Tên host - hai lượt, không phải một</h3>
   <p>
     Đổi host API bằng cách viết lại <em>bảng string literal</em> của il2cpp phủ được hầu hết URL.
     Hai cái không nằm ở đó: chúng là giá trị mặc định của field/parameter, vô hình với cách duyệt
@@ -377,7 +377,7 @@ kiểm     quét metadata tìm chuỗi host thật → phải ra <b>0</b></pre>
   <div class="note warn">
     <b>Mọi patch build đều có guard.</b> Script patch kiểm byte gốc mong đợi tại từng vị trí và
     dừng lại thay vì làm hỏng binary. Điều này tồn tại vì có lần một bản build ship thư viện patch
-    tay với 21 byte lạc — trong đó một nhánh ghi đè hằng số bên trong state machine, biến coroutine
+    tay với 21 byte lạc - trong đó một nhánh ghi đè hằng số bên trong state machine, biến coroutine
     tuyến tính thành đệ quy vô hạn. Nó bị chẩn đoán hai lần là "bug cố hữu của IL2CPP" trước khi ai
     đó diff file với bản nguyên.
   </div>
@@ -388,7 +388,7 @@ kiểm     quét metadata tìm chuỗi host thật → phải ra <b>0</b></pre>
     <code>mov x0,xR</code>, theo giả thuyết một fixup con trỏ klass không chạy dưới translator ARM.
     Nó chạy. <code>xR</code> giữ GOT slot; <code>ldr</code> chính là lệnh nạp con trỏ class ra khỏi
     slot. Viết lại khiến <code>x0</code> trỏ vào slot, nên đọc static field ra rác và singleton
-    trông như null — đúng triệu chứng mà patch định sửa. Nó được bật suốt nhiều tuần vì lobby đôi
+    trông như null - đúng triệu chứng mà patch định sửa. Nó được bật suốt nhiều tuần vì lobby đôi
     khi vẫn render.
   </p>
 </section>
@@ -425,7 +425,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Ánh xạ route → model, và cái bẫy model rỗng</h3>
   <p>
     `dump.cs` cho mọi class request/response; việc còn lại là nối chuỗi path của client với đúng
-    class. Chỗ không chứng minh được thì dùng heuristic giống tên — và mọi lần đoán sai đều ra cùng
+    class. Chỗ không chứng minh được thì dùng heuristic giống tên - và mọi lần đoán sai đều ra cùng
     một triệu chứng: <strong>null reference trong một panel đã nhận model hợp lệ nhưng rỗng</strong>.
   </p>
   <pre>[RankingPanel.&lt;ShowRanking&gt;d__14.MoveNext]
@@ -440,10 +440,10 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Bộ từ vựng đóng</h3>
   <p>
     Chuỗi trong response không tự do. <code>RewardResponseData.type</code> được so với một tập
-    literal cố định — <code>InventoryItem</code>, <code>Key</code>, <code>UnitExpItem</code>,
+    literal cố định - <code>InventoryItem</code>, <code>Key</code>, <code>UnitExpItem</code>,
     <code>UnitSoulItem</code>, <code>CardSoul</code>, <code>Gold</code>, <code>Cash</code>,
     <code>Heart</code>, <code>Artifact</code>, <code>Treasure_*</code>, <code>Skin</code>,
-    <code>NameTag</code>, <code>Flag</code>… — và <strong>không có <code>"Item"</code></strong>.
+    <code>NameTag</code>, <code>Flag</code>… - và <strong>không có <code>"Item"</code></strong>.
     Type không khớp không báo lỗi: phần thưởng hiện không icon và một con số vô nghĩa. Vì vậy server
     giữ một bộ từ vựng nội bộ và dịch đúng một lần, ở ranh giới wire.
   </p>
@@ -481,7 +481,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
       <tr><td>card có <code>unitId</code></td><td><code>card_to_dict</code> đọc nó</td><td>cả <code>/card/all</code> chết → <em>mọi</em> hero hiện "Not Owned"</td></tr>
       <tr><td><code>potentialTier</code> ∈ {0,1}</td><td><code>Constants.PotentialTier.Max = 1</code></td><td>badge hiện thức tỉnh không đổi được</td></tr>
       <tr><td><code>targets.Count</code> của artifact == số opt</td><td><code>ArtifactOptionUI.Init</code> lặp theo nó</td><td>tra từ điển <code>"None"</code> → crash</td></tr>
-      <tr><td>một entry mỗi key <code>subStats</code></td><td>client gộp theo key khi apply</td><td>7–8 dòng stat; đổi stat chỉ thay một bản</td></tr>
+      <tr><td>một entry mỗi key <code>subStats</code></td><td>client gộp theo key khi apply</td><td>7-8 dòng stat; đổi stat chỉ thay một bản</td></tr>
       <tr><td>unit id ∈ 10000..10999</td><td>kích thước mảng card</td><td>client crash</td></tr>
     </table>
   </div>
@@ -490,7 +490,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
   <p>
     <strong>Suy ra thời gian, đừng lưu.</strong> Lobby so <code>now</code> với field
     <code>tomorrow</code> và chạy lại cả chuỗi fetch khi sang ngày. Một <code>tomorrow</code> bị lưu
-    và đóng băng lúc tạo tài khoản làm "ngày mới" đến vĩnh viễn: client login lại 1 Hz — mười bảy
+    và đóng băng lúc tạo tài khoản làm "ngày mới" đến vĩnh viễn: client login lại 1 Hz - mười bảy
     request mỗi giây, không exception, không dòng logcat, ~400k request/ngày. Nay nó được tính từ
     đồng hồ ở mỗi response.
   </p>
@@ -508,7 +508,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
   <h2>Hook runtime</h2>
   <p>
     Có thứ không sửa được từ server: một chỉ số phải được hiển thị, một nội dung thư phải đi vòng
-    qua localizer. Đó là việc của thư viện stub — nó chứa code native bên trong game đang chạy.
+    qua localizer. Đó là việc của thư viện stub - nó chứa code native bên trong game đang chạy.
   </p>
   <p>
     Có hai cơ chế, và chọn sai tạo ra hook báo cài thành công nhưng không bao giờ chạy.
@@ -535,11 +535,11 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
   </p>
   <div class="note">
     <b>Ba thất bại im lặng, mỗi cái một phiên.</b> (1) Vòng poll nhận handle
-    <code>dlopen("libil2cpp.so")</code> đầu tiên — hoá ra là <em>packer</em>, được nạp từ rất lâu
+    <code>dlopen("libil2cpp.so")</code> đầu tiên - hoá ra là <em>packer</em>, được nạp từ rất lâu
     trước game, nên mọi <code>dlsym</code> fail. Chỉ nhận handle nếu nó export
     <code>il2cpp_domain_get</code>. (2) Quét <code>/proc/self/maps</code> lọc <code>r-xp</code>
     không thấy gì, vì trang ARM64 của guest được map <code>r--p</code> và được translator thực
-    thi — phải dùng <code>dl_iterate_phdr</code>. (3) Một phiên chẩn đoán bọc ba tính năng trong
+    thi - phải dùng <code>dl_iterate_phdr</code>. (3) Một phiên chẩn đoán bọc ba tính năng trong
     <code>#if 0</code> và không bao giờ khôi phục.
   </div>
 </section>
@@ -565,7 +565,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
     bước này thì không bước nào khác trong pipeline chạy được.
   </p>
 
-  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">3. Atlas — hình học, không phải pixel</h3>
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">3. Atlas - hình học, không phải pixel</h3>
   <p>
     Hoạt ảnh chiến đấu của một nhân vật là 19 khung trong lưới cố định (130×140, năm cột, ô cuối
     cùng bên phải để trống), và mỗi khung mang một polygon khít tính cho đúng silhouette đó cộng UV
@@ -576,14 +576,14 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
       dựng lại atlas → phải giống hệt file PNG trong repo</pre>
   <p>
     Khung 18 đặc biệt: nó là Sprite mặc định của prefab và là thumbnail của skin, nên phải là dáng
-    đứng nhìn thẳng với silhouette đầy đủ — không phải khung chạy.
+    đứng nhìn thẳng với silhouette đầy đủ - không phải khung chạy.
   </p>
 
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">4. Prefab</h3>
   <p>
     Clone nhân vật gốc: hierarchy, component, 10 animation clip, animator controller, và mọi PPtr.
     Gán cho sprite clone một <em>render-data key riêng, tất định</em>. Dùng chung key với bản gốc thì
-    chân dung phân giải về ảnh gốc — hoặc về không gì cả, cả hai đều không báo lỗi.
+    chân dung phân giải về ảnh gốc - hoặc về không gì cả, cả hai đều không báo lỗi.
   </p>
 
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">5. Catalog addressables</h3>
@@ -593,7 +593,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
     thumbnail trắng và chân dung lớn mặc định.
   </p>
   <div class="note">
-    <b>Bẫy thứ tự.</b> Bundle illustration cũng cần hình học render phủ đủ hình chữ nhật — dùng lại
+    <b>Bẫy thứ tự.</b> Bundle illustration cũng cần hình học render phủ đủ hình chữ nhật - dùng lại
     polygon khít 908×912 của bản gốc trên chân dung 1024×1024 tạo ra lỗ trong suốt lớn hoặc panel
     trắng, dù texture và entry catalog đều hoàn hảo.
   </div>
@@ -615,7 +615,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
     <div><dt>Chi phí</dt><dd>Bằng 0, theo yêu cầu. Đó là lý do gói game gốc 1,1 GB được tải từ GitHub trong lúc build rồi xoá: egress bị tính tiền, release asset thì không.</dd></div>
   </dl>
   <p>
-    Hai lỗi vận hành đáng gọi tên. Thứ nhất, vòng reset ngày (phần 8) — một vấn đề dịch vụ sinh ra
+    Hai lỗi vận hành đáng gọi tên. Thứ nhất, vòng reset ngày (phần 8) - một vấn đề dịch vụ sinh ra
     từ một quyết định mô hình dữ liệu. Thứ hai, "deploy chẳng làm gì": các unit chuyển output ra
     file trong <code>/tmp</code> chứ không vào journald, nên một lần restart trông như fail thực ra
     đã thành công, và một thay đổi cấu hình trông như đã áp thực ra chưa. Hãy đọc đúng file mà tiến
@@ -649,7 +649,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … kho�
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">b. Tìm caller bằng cách quét <code>BL</code></h3>
   <p>
     Khi câu hỏi là "ai gọi endpoint này", hãy tìm entry point C# của endpoint rồi quét binary tìm
-    lệnh branch-link trỏ tới RVA của nó — không cần decompiler:
+    lệnh branch-link trỏ tới RVA của nó - không cần decompiler:
   </p>
   <pre>(w &gt;&gt; 26) == 0x25  →  imm26 = w &amp; 0x3FFFFFF, sign-extend → target = site + imm*4
 file offset = target - 0x4000</pre>
@@ -676,7 +676,7 @@ file offset = target - 0x4000</pre>
     hay môi trường bị lược bớt, platform cũng là một lớp.
   </p>
   <div class="note warn">
-    <b>Và luật ở tầng trên.</b> Bịa một lời giải thích nghe hợp lý tệ hơn nói "tôi chưa biết" — một
+    <b>Và luật ở tầng trên.</b> Bịa một lời giải thích nghe hợp lý tệ hơn nói "tôi chưa biết" - một
     cái giá một giờ, cái kia giá một tuần. Mọi cuộc đi đường vòng dài trong dự án này đều bắt đầu
     bằng một câu khẳng định đầy tự tin mà chưa ai kiểm chứng.
   </div>

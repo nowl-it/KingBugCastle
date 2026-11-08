@@ -1,4 +1,4 @@
-# Lessons — the trap ledger
+# Lessons - the trap ledger
 
 Every entry below cost at least one session. They are grouped by *what you see*, because
 that is how you will meet them again.
@@ -28,7 +28,7 @@ the singleton.
 ### Two offset conventions coexist. Mixing them wastes days
 - `script.json` `ScriptMethod[].Address` and tombstone `pc` values are **RVAs**.
 - The SSL patch table and some build patches are **raw file offsets**.
-- File offset = `RVA − 0x4000` for `libil2cpp.so` — *not* for every library.
+- File offset = `RVA − 0x4000` for `libil2cpp.so` - *not* for every library.
   `libaledatic.so` maps file == VMA; `librolineng.so` maps VMA == file − 0x4000; the NEO loader
   function itself grew between builds so offsets do **not** shift by a constant.
 **Rule:** resolve crash frames via `script.json`, never by parsing `dump.cs` offsets, and
@@ -38,7 +38,7 @@ never by assuming the delta carries over to a different `.so`.
 Bumping the game version shifts offsets even when the prologue bytes are byte-identical. The
 project keeps one stub table per version (`_NRE_STUBS_V17100` … `_NRE_STUBS_V17310`) and picks
 by `VER`. The cross-check that a re-derivation landed on the right method is *byte-identical
-prologues across versions* — with `ShopItem.Init` as the documented exception (immediates
+prologues across versions* - with `ShopItem.Init` as the documented exception (immediates
 changed; match by instruction shape and recompute the `cbz` displacement).
 
 ### A hook that "installed successfully" may never fire
@@ -52,11 +52,11 @@ Three separate silent failures, one session each:
 
 ### Pick the right hook mechanism or your handler never runs
 - **methodPointer swap** intercepts only methods Unity invokes via
-  `MethodInfo.methodPointer` — MonoBehaviour messages (`Update`/`Awake`/`OnEnable`).
+  `MethodInfo.methodPointer` - MonoBehaviour messages (`Update`/`Awake`/`OnEnable`).
 - **inline detour** (prologue jump + trampoline) intercepts **all** callers, including direct
   C#→C# `bl`. Guard: abort if any stolen instruction is PC-relative.
 
-`PostListItem.Set` needed the second kind — it is a UITableView cell callback, and neither
+`PostListItem.Set` needed the second kind - it is a UITableView cell callback, and neither
 `PostListItem` nor `PostBoxPanel` defines a Unity message.
 
 ### Frida cannot help here
@@ -102,7 +102,7 @@ corruption blocks *every* bundle. Force CRC to zero at the four runtime sites in
 ## 3. Client-contract traps
 
 ### `RewardResponseData.type` has no `"Item"`
-`GetByRewardTypeAndID` compares against a fixed literal set — `InventoryItem`, `Key`,
+`GetByRewardTypeAndID` compares against a fixed literal set - `InventoryItem`, `Key`,
 `UnitExpItem`, `UnitSoulItem`, `CardSoul`, `Gold`, `Cash`, `Heart`, `Artifact`, `Treasure_*`,
 `Skin`, `NameTag`, `Flag`, … An unmatched type resolves to no icon, and the reward renders with
 the **wrong icon and a nonsense count**.
@@ -120,7 +120,7 @@ the native hook write the literal straight into the `Text`.
 
 ### `ShopItem.Init` crashes on an empty list
 The method indexes `get_Item(0)` without checking `Count`. The patch checks `Count == 0` and
-jumps to the method's own epilogue — same shape across versions, only the final `bl` target
+jumps to the method's own epilogue - same shape across versions, only the final `bl` target
 differs.
 
 ### Deck length is a two-sided invariant
@@ -135,7 +135,7 @@ key. Padding to 4 to "be safe" is what crashes it.
 
 ### Dimension heroes never get deleted to reset them
 Deleting a dimension hero from `st.cards` removes it entirely and shows "Not Owned". Set
-`overcome` instead. And `card_to_dict()` reads `c["unitId"]` — a card missing it kills the whole
+`overcome` instead. And `card_to_dict()` reads `c["unitId"]` - a card missing it kills the whole
 `/card/all` response, making **all** heroes show "Not Owned".
 
 ### `cardExpResults` is mandatory for any gacha that grants a hero
@@ -151,7 +151,7 @@ only after a restart. Both gacha buy paths must emit it.
   client value persisted because no lower bound existed. Now one key, clamped ≥ 0, with an
   in-place migration for existing saves.
 - **Accessory sub-stats:** `FixedAccessoryPresets` tier lines are additive duplicates of the same
-  key, so seeded accessories showed 7–8 lines instead of one stat with a summed value. Merge by
+  key, so seeded accessories showed 7-8 lines instead of one stat with a summed value. Merge by
   key at creation *and* in the change handler (remove all entries for `targetSubStat`, insert one
   `newStat`).
 
@@ -169,7 +169,7 @@ that presents a new guest id gets a **new** save, and the old one can be re-atta
 ### "My account became KingBug" means the login carried no id
 `GET /auth` used to answer an empty model, so a fresh install never received a token; its
 `/auth/login` went out id-less and every subsequent request hit the throwaway template save.
-Diagnosis recipe: check `sessions` for the login time — **zero new rows** means the sign-in
+Diagnosis recipe: check `sessions` for the login time - **zero new rows** means the sign-in
 endpoint answered without a token.
 
 ### Awakening is one tier, and the seed must be 0
@@ -180,7 +180,7 @@ level 16 + tier 0 for the upgrade affordance; the server endpoint does not re-ch
 ### Accessory unlock keys off *invasion difficulty*, not hard-mode clears
 `ResourceChallengeSeason.Constants`: Treasure 1, **Accessory 6**, RiftWeapon 11, Max 25.
 The `[Corruption]` tag on the lock text is a red herring. `r_player()` must emit
-`difficulty: unlocked` per theme — it used the loop variable once, so `.First().difficulty`
+`difficulty: unlocked` per theme - it used the loop variable once, so `.First().difficulty`
 returned 1 and accessory/rift stayed locked while treasure worked, masking the bug.
 
 ---
@@ -188,7 +188,7 @@ returned 1 and accessory/rift stayed locked while treasure worked, masking the b
 ## 5. Process traps
 
 ### `il2cpp` (the dumper) blocks on "press any key"
-Every invocation that forgets to feed stdin hangs until the session is killed — and it was paid
+Every invocation that forgets to feed stdin hangs until the session is killed - and it was paid
 for in tokens more than once. Documented in `docs/dev-notes.md`; drive stdin explicitly.
 
 ### A route with no model answers an empty model, which crashes panels
@@ -199,18 +199,18 @@ Related: `deck_units` must be exactly 6 elements and names must never be null, o
 `RankingItem.Set` feeds null sprites to Unity UI.
 
 ### The TLS log is the only source of truth for what the client calls
-No `ranking*` string literals exist in either `.so` — API paths are static string fields
+No `ranking*` string literals exist in either `.so` - API paths are static string fields
 populated from server data. Hunting paths by string search is a dead end; read
 `/tmp/kgc_pub_tls.log`.
 
 ### `/auth/xcdSeed` index shifting
 v171.0.01 **inserted** a literal at index 1545 of 25730, shifting 94% of all literal indices.
-Mixing a v171.0.01 lib with v171.0.00 metadata is not "close enough" — libil2cpp compiles those
+Mixing a v171.0.01 lib with v171.0.00 metadata is not "close enough" - libil2cpp compiles those
 indices in. Lib and metadata must come from the same build.
 
 ### Deploys that only restart a unit file silently do nothing
 `kgc.service` runs `serve_public.sh` and redirects uvicorn to `/tmp/kgc_pub_http.log` and
-`/tmp/kgc_pub_tls.log` — **not** journald. Trace lines live in those files. The Caddy sync path
+`/tmp/kgc_pub_tls.log` - **not** journald. Trace lines live in those files. The Caddy sync path
 shipped as a 502 once because the deployed file and the unit were out of step.
 
 ---
@@ -218,7 +218,7 @@ shipped as a 502 once because the deployed file and the unit were out of step.
 ## The three rules that would have prevented most of the above
 
 1. **Read the real function before patching the symptom.** Decompile, then edit.
-2. **Derive, never store.** Time boundaries, gates, offsets, CRC — anything copied into state
+2. **Derive, never store.** Time boundaries, gates, offsets, CRC - anything copied into state
    goes stale.
 3. **One representation per fact.** Two keys, two codepaths, or two sources of truth will
    diverge, and the divergence will be silent.

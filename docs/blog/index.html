@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>King Bug Castle — building a private server for a game that doesn't want one</title>
+<title>King Bug Castle - building a private server for a game that doesn't want one</title>
 <meta name="description" content="A build log: 283 agent sessions, 672 commits, and one Android game reverse-engineered into a working private server.">
 <link rel="stylesheet" href="blog.css">
 <link rel="alternate" hreflang="vi" href="vi.html">
@@ -33,11 +33,11 @@
     <h1>Reverse-engineering an Android game into a server it never expected</h1>
     <p class="lede">
       King God Castle is a Korean auto-battler with a single backend, a packed anti-cheat,
-      and no offline mode. This is the story of turning it into a private server — told
+      and no offline mode. This is the story of turning it into a private server - told
       through what broke, what lied, and what finally worked.
     </p>
     <div class="meta">
-      <span>March — November 2026</span>
+      <span>March - November 2026</span>
       <span>283 agent sessions</span>
       <span>672 commits</span>
       <span>One person, five AI tools</span>
@@ -61,8 +61,8 @@
   <span class="num">I</span>
   <h2>The game you are not allowed to read</h2>
   <p class="first">
-    It starts with a spreadsheet problem. King God Castle stores its entire balance —
-    every hero, every skill tier, every drop table, every localized string — in a bundle
+    It starts with a spreadsheet problem. King God Castle stores its entire balance -
+    every hero, every skill tier, every drop table, every localized string - in a bundle
     of XML files that the client downloads at login. That bundle is not shipped in the
     APK. It arrives over HTTP, in a binary container, and it is the difference between
     "I play this game" and "I understand this game."
@@ -96,7 +96,7 @@
     It got surprisingly far. FastAPI on port 8080, a hand-written table mapping the client's
     route names to response models, and a JSON file containing one plausible player. Login
     worked. The lobby loaded. Then every panel that needed real data threw a null reference
-    because the response model was empty — which is how the project learned its first
+    because the response model was empty - which is how the project learned its first
     structural lesson: <strong>a route with no model answers an <em>empty</em> model, and an
     empty model crashes a panel.</strong>
   </p>
@@ -110,7 +110,7 @@
     Unpacking it took a week of disassembly: find the loader, find the integrity checks, find
     the parser that rejects a bad header, and neutralise exactly enough of them that the
     packer hands you a plain ELF without noticing it has been robbed. The result is a clean
-    <code>libil2cpp.so</code> plus the metadata, both matching the same build — and that
+    <code>libil2cpp.so</code> plus the metadata, both matching the same build - and that
     matching part matters more than it sounds, because the metadata carries string literal
     <em>indices</em> that the compiled code has baked in. A version mismatch does not produce
     a warning. It produces gibberish.
@@ -147,13 +147,13 @@
   <p>
     Then there are the response fields with a vocabulary of their own. Reward types are not
     free-form: <code>"Item"</code> is not a valid type. The client compares against a fixed
-    literal set — <code>InventoryItem</code>, <code>Key</code>, <code>UnitSoulItem</code>,
-    <code>Treasure_*</code>, <code>Skin</code>, and a dozen more — and an unmatched string
+    literal set - <code>InventoryItem</code>, <code>Key</code>, <code>UnitSoulItem</code>,
+    <code>Treasure_*</code>, <code>Skin</code>, and a dozen more - and an unmatched string
     resolves to <em>no icon at all</em>. The reward still renders. It just renders with the
     wrong picture and a nonsense number, which is a much harder bug to notice than a crash.
   </p>
   <p>
-    By the end of July, every route the client can call had a real answer. Not a stub — an
+    By the end of July, every route the client can call had a real answer. Not a stub - an
     answer that makes the corresponding panel behave the way a player expects: shop stock,
     mission reward claiming, territory labour, Babel towers, colosseum seasons, attendance
     streaks, clan membership, cosmetics you own and equip, invasion first-clear rewards.
@@ -166,13 +166,13 @@
   <h2>Two people should be able to play</h2>
   <p>
     A server for one person is a toy. The moment a second device connects, everything that was
-    implicitly "the save file" has to become "a save, keyed by an identity" — and identity is
+    implicitly "the save file" has to become "a save, keyed by an identity" - and identity is
     where this project produced its most interesting failures.
   </p>
   <p>
     The first attempt was reasonable: if a login arrives with no id, fall back to the active
     save. That is correct for a single-player demo and catastrophic for a service. A client
-    that loses its guest id — cache clear, reinstall, a factory reset — logs in over and over
+    that loses its guest id - cache clear, reinstall, a factory reset - logs in over and over
     with no identity, and each time it is handed somebody else's world, with a session bound
     to it. The server log showed the same account logging in every few minutes for weeks. It
     looked like a stuck client. It was a stuck design.
@@ -185,7 +185,7 @@
   <p>
     The second failure was subtler. Sign-in on Android goes through Google, and the client's
     native path expects the backend to hand back an access token. Our fake backend answered
-    that endpoint with an empty model — no token. That was fine for as long as the device had
+    that endpoint with an empty model - no token. That was fine for as long as the device had
     a token from an earlier session. On a fresh install it wasn't: the login went out with no
     id, got refused, and every subsequent request served a throwaway template save. Three
     different users reported "the game reset my account." The account was never touched. The
@@ -210,11 +210,11 @@
   </p>
   <p>
     The result is a free-tier ARM box running the API on 8080 and TLS on 8443, behind a
-    CDN that handles certificates, with the domain split three ways — one hostname for the
+    CDN that handles certificates, with the domain split three ways - one hostname for the
     game client, one for the admin dashboard, one for the player portal. CI runs the full test
     suite on every push. A separate workflow builds the patched client and publishes it as a
     GitHub release, because release assets are free and object storage is not. The one
-    genuinely large artifact — the stock 1.1 GB game package needed as build input — is
+    genuinely large artifact - the stock 1.1 GB game package needed as build input - is
     downloaded from GitHub during the build and deleted immediately afterward, so it never
     touches the instance at all.
   </p>
@@ -244,11 +244,11 @@ restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</p
   </p>
   <p>
     <strong>The client logged in seventeen times per second.</strong> No exception, no error,
-    no logcat entry — just requests. The lobby's update loop compares the current time against
+    no logcat entry - just requests. The lobby's update loop compares the current time against
     <code>tomorrow</code>, and if the day has turned, it re-fetches everything. Our save had
     <code>tomorrow</code> stored, frozen at account creation, so the day turned once and never
     stopped turning. The fix was three lines: derive it from the clock instead of storing it.
-    The lesson is general — <em>anything derived should never be persisted.</em>
+    The lesson is general - <em>anything derived should never be persisted.</em>
   </p>
   <p>
     <strong>The game hung on "Loading resources."</strong> The HTTP request went out and the
@@ -261,7 +261,7 @@ restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</p
   <p>
     <strong>The binary was corrupt and we blamed the framework.</strong> A localised stack
     overflow on a loading screen was diagnosed twice as an inherent bug in the async runtime.
-    It was actually twenty-one stray bytes in a hand-patched library — one of them a branch
+    It was actually twenty-one stray bytes in a hand-patched library - one of them a branch
     that had overwritten a constant inside a state machine, turning a linear coroutine into
     infinite recursion. The rule that came out of it is in the repository in bold: never
     hand-patch the library you ship. Regenerate it from pristine bytes and validate with a
@@ -285,7 +285,7 @@ restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</p
   </p>
   <p>
     Layer one is obvious: a row in the unit XML pointing at a sprite name. Layer two is the
-    asset bundle — the bundle is content-addressed, and the client verifies its CRC against a
+    asset bundle - the bundle is content-addressed, and the client verifies its CRC against a
     catalog baked into the download. Custom bytes cannot produce the original CRC, and editing
     the catalog to lie about it corrupts the whole download. The solution is not to fake the
     checksum but to <em>remove the check</em>: four instruction patches at runtime so the
@@ -294,7 +294,7 @@ restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</p
   <p>
     Layer three is the sprite atlas. A hero's battle animation is nineteen frames in a fixed
     grid, and each frame carries tight polygon geometry computed for that specific silhouette.
-    Reuse a wider image inside the old mesh and the frame is cropped and then zoomed — posed
+    Reuse a wider image inside the old mesh and the frame is cropped and then zoomed - posed
     wrong, cut off, bleeding into the neighbouring cell. Every one of the nineteen frames has
     to be rebuilt with its own quad, texture rect, and pivot-derived UV transform. The
     verification is not "does the texture look right" but "does each sprite read back as
@@ -303,7 +303,7 @@ restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</p
   <p>
     Layer four is the prefab: a clone of the source character with ten animation clips, an
     animator controller, and a unique render-data key. Share the source's render key and the
-    cloned portrait silently resolves to the original — or to nothing.
+    cloned portrait silently resolves to the original - or to nothing.
   </p>
   <p>
     Layer five is the addressables catalog, which needs five new locations: the texture and
@@ -312,7 +312,7 @@ restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</p
     falls back to a default illustration.
   </p>
   <p>
-    When it finally worked, it worked completely — animation, portrait, thumbnail, shop entry,
+    When it finally worked, it worked completely - animation, portrait, thumbnail, shop entry,
     equip flow. Nothing in the game knows the character wasn't authored by the original
     studio.
   </p>
@@ -329,7 +329,7 @@ restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</p
   <p>
     That produced a strategy compendium: every build-defining strategy in the roguelike mode,
     what each one does, which ones are mutually exclusive, how the roll pool weights change as
-    you take upgrades — and a simulator that takes your three visible options, your current
+    you take upgrades - and a simulator that takes your three visible options, your current
     tier, and the strategy you want, and tells you the odds. It is one static HTML file,
     bilingual, with no build step and no dependencies, published from the repository itself.
   </p>
@@ -373,16 +373,16 @@ restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</p
   <span class="num">Numbers</span>
   <h2>What it cost</h2>
   <p>
-    Not money — the money was zero, by requirement. What it cost was time and tokens, and it is
+    Not money - the money was zero, by requirement. What it cost was time and tokens, and it is
     worth being honest about the shape of that cost.
   </p>
   <div class="table-wrap">
     <table>
       <tr><th>Month</th><th>Sessions</th><th>Commits</th></tr>
-      <tr><td>2026-03</td><td>2</td><td>—</td></tr>
-      <tr><td>2026-04</td><td>8</td><td>—</td></tr>
-      <tr><td>2026-05</td><td>3</td><td>—</td></tr>
-      <tr><td>2026-06</td><td>8</td><td>—</td></tr>
+      <tr><td>2026-03</td><td>2</td><td>-</td></tr>
+      <tr><td>2026-04</td><td>8</td><td>-</td></tr>
+      <tr><td>2026-05</td><td>3</td><td>-</td></tr>
+      <tr><td>2026-06</td><td>8</td><td>-</td></tr>
       <tr><td>2026-07</td><td>53</td><td>93</td></tr>
       <tr><td>2026-08</td><td>94</td><td>264</td></tr>
       <tr><td>2026-09</td><td>37</td><td>284</td></tr>
@@ -393,13 +393,13 @@ restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</p
   <p>
     The commit peak and the session peak do not line up, and that's informative. August was
     breadth: every feature the client can reach, implemented. September was depth: fewer
-    sessions, more commits, fixing what breadth broke. October inverted it — many exploratory
+    sessions, more commits, fixing what breadth broke. October inverted it - many exploratory
     sessions, few commits, because most of that work was reading.
   </p>
   <p>
     Of 44,940 turns across five different agent tools, a large fraction were spent on
     investigations that ended in "no change, here's why." That is not waste. It is the cost of
-    not shipping a confident wrong answer — the one thing a reverse-engineering project cannot
+    not shipping a confident wrong answer - the one thing a reverse-engineering project cannot
     afford.
   </p>
 </section>
@@ -409,7 +409,7 @@ restrict,command="/home/ubuntu/kgc/server/deploy_hook.sh" ssh-ed25519 AAAA…</p
   <span class="num">Repository</span>
   <h2>Where the truth lives</h2>
   <p>
-    The full record — every patch offset, every disproven theory, every regression test — is in
+    The full record - every patch offset, every disproven theory, every regression test - is in
     the repository. The docs are written for whoever comes next, including future me.
   </p>
   <div class="cards">

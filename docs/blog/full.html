@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The full technical record — King Bug Castle</title>
+<title>The full technical record - King Bug Castle</title>
 <meta name="description" content="Every step of the reverse engineering: master-data extraction, IL2CPP unpacking, SSL bypass, protocol emulation, runtime hooks, content injection and debugging method.">
 <link rel="stylesheet" href="blog.css">
 <link rel="alternate" hreflang="vi" href="full.vi.html">
@@ -51,10 +51,10 @@
   <ol>
     <li><a href="#method">Method and tools</a></li>
     <li><a href="#target">The target: four layers</a></li>
-    <li><a href="#data">Layer 1 — the master data</a></li>
-    <li><a href="#binary">Layer 2 — the binary that isn't shipped</a></li>
-    <li><a href="#read">Layer 3 — reading compiled C#</a></li>
-    <li><a href="#gates">Layer 4 — removing the gates</a></li>
+    <li><a href="#data">Layer 1 - the master data</a></li>
+    <li><a href="#binary">Layer 2 - the binary that isn't shipped</a></li>
+    <li><a href="#read">Layer 3 - reading compiled C#</a></li>
+    <li><a href="#gates">Layer 4 - removing the gates</a></li>
     <li><a href="#protocol">The protocol</a></li>
     <li><a href="#state">Player state and invariants</a></li>
     <li><a href="#hooks">Runtime hooks</a></li>
@@ -74,8 +74,8 @@
   </p>
   <dl class="kv">
     <div><dt>Observed</dt><dd>TLS/HTTP traffic from the client, logcat, screenshots from a real device or emulator.</dd></div>
-    <div><dt>Declared</dt><dd>Master-data XML — what the game says its content is.</dd></div>
-    <div><dt>Compiled</dt><dd><code>libil2cpp.so</code> + <code>global-metadata.dat</code> — what the game actually does.</dd></div>
+    <div><dt>Declared</dt><dd>Master-data XML - what the game says its content is.</dd></div>
+    <div><dt>Compiled</dt><dd><code>libil2cpp.so</code> + <code>global-metadata.dat</code> - what the game actually does.</dd></div>
     <div><dt>Synthesised</dt><dd>A server that produces exactly the bytes the compiled layer expects, in the moment it expects them.</dd></div>
   </dl>
   <p>
@@ -89,7 +89,7 @@
   <div class="note">
     <b>Rule zero.</b> The client is the specification. Any question the XML cannot answer
     ("does this field mean count or capacity?", "is this 0-based?") is answered by the function that
-    reads it — never by a plausible guess.
+    reads it - never by a plausible guess.
   </div>
 </section>
 
@@ -121,11 +121,11 @@
 <!-- ============ 3 ============ -->
 <section class="chapter" id="data">
   <span class="num">03</span>
-  <h2>Layer 1 — the master data</h2>
+  <h2>Layer 1 - the master data</h2>
   <p>
     The client asks the backend for a <em>patch folder</em>, then downloads an <code>xml</code>
     bundle from the CDN. That bundle is a Unity AssetBundle containing a handful of
-    <code>TextAsset</code>s — plain XML, one file per table — plus an <code>AssetHash.txt</code>
+    <code>TextAsset</code>s - plain XML, one file per table - plus an <code>AssetHash.txt</code>
     that names the bundle and its md5.
   </p>
   <pre><b>GET /auth/getPatchFolder</b>        → { "patchFolder": "172" }
@@ -134,7 +134,7 @@
   <p>
     Extraction is therefore mechanical: download the bundle, load it with UnityPy, walk the
     <code>TextAsset</code> objects, write each <code>m_Name</code> to a file. Run that on every
-    patch and you have a versioned corpus; that is what <code>xml_history/</code> is — a pristine
+    patch and you have a versioned corpus; that is what <code>xml_history/</code> is - a pristine
     snapshot per patch, never edited, used as the diff base.
   </p>
   <p>
@@ -159,7 +159,7 @@
     <li><strong>Skills are chains, not rows.</strong> A skill tier is a <code>Skill</code> that
       inherits from another via <code>Inherit="id"</code>, frequently bouncing through
       <code>TransformSkill</code> / <code>BuffAtCastSkill</code>. One wrong <code>Inherit</code>
-      produces a tier that silently uses the wrong base stats — no error anywhere.</li>
+      produces a tier that silently uses the wrong base stats - no error anywhere.</li>
     <li><strong>Text is keyed, not inline.</strong> A unit's display name is a key like
       <code>UnitName_10810</code> resolved through the <code>Localizer</code> at runtime. Any XML
       element that accepts a text key (e.g. <code>&lt;SubName&gt;</code>) can be pointed at an
@@ -171,7 +171,7 @@
     anywhere inside a <code>Strings_*.xml</code> file makes <code>Localizer.ParseTextAsset</code>
     lose the <em>entire locale</em>: every <code>Localize(key)</code> then returns the raw key, so
     the whole game renders as <code>SkillName_10800</code> instead of "Cathy". Comments are fine in
-    <code>Skills</code>/<code>Units</code>/<code>Stages</code> — different parser. The bundle
+    <code>Skills</code>/<code>Units</code>/<code>Stages</code> - different parser. The bundle
     builder now refuses to run if it finds one, and that refusal is not to be bypassed.
   </div>
 
@@ -180,7 +180,7 @@
     Developers sometimes rewrite the <em>same</em> patch folder in place, so the folder name does
     not change and a naive "new folder?" watcher sees nothing. The reliable signal is the bundle's
     own md5 in <code>AssetHash.txt</code>. A row-level diff of the two XML sets answers "what
-    actually changed" — and it is worth doing before reading the official patch notes, because the
+    actually changed" - and it is worth doing before reading the official patch notes, because the
     notes describe intent while the XML describes effect. One such diff surfaced a skill whose
     declared range grows from 3 tiles at tier 1 to 41 at tier 3 in the <em>official</em> data.
   </p>
@@ -189,7 +189,7 @@
 <!-- ============ 4 ============ -->
 <section class="chapter" id="binary">
   <span class="num">04</span>
-  <h2>Layer 2 — the binary that isn't shipped</h2>
+  <h2>Layer 2 - the binary that isn't shipped</h2>
   <p>
     Up to v170 this was a solved problem: unzip the APK, take <code>lib/arm64-v8a/libil2cpp.so</code>
     and <code>assets/bin/Data/Managed/Metadata/global-metadata.dat</code>, feed both to
@@ -199,7 +199,7 @@
 
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Finding the packer</h3>
   <p>
-    The loader library's <em>filename rotates every build</em> — it has shipped as
+    The loader library's <em>filename rotates every build</em> - it has shipped as
     <code>libaledatic.so</code>, <code>librolineng.so</code>, <code>libxenerene.so</code>,
     <code>libbisedich.so</code>, <code>liberallisi.so</code>. Never key tooling on the name. Its
     <code>SONAME</code> is stable: <code>libappsign4a.so</code>.
@@ -217,7 +217,7 @@
   <p>
     Producing the ELF is half the job. The loader also guards itself: a byte mismatch in its own
     code is fatal before unpacking, and the parser rejects an unexpected header. Those checks are
-    the payload of the patch — twelve sites in the verified build:
+    the payload of the patch - twelve sites in the verified build:
   </p>
   <div class="table-wrap">
     <table>
@@ -227,7 +227,7 @@
     </table>
   </div>
   <p>
-    The second group is located by pattern (<code>08008012 e89700b9</code> — exactly four hits in
+    The second group is located by pattern (<code>08008012 e89700b9</code> - exactly four hits in
     every loader seen), the first by table, and the tables <em>differ per build and do not shift by
     a constant</em>: <code>libaledatic.so</code> maps file offset == VMA, <code>librolineng.so</code>
     maps VMA == file − 0x4000, and the loader function itself grew between versions. Keying on "new
@@ -239,7 +239,7 @@
     IL2CPP does not resolve strings at runtime by name. It resolves them by <em>index into the
     metadata's string-literal table</em>, compiled into the code as an immediate. v171.0.01
     inserted one literal at index 1545 of 25,730; that shifted 94% of all subsequent indices. Mixing
-    a v171.0.01 binary with v171.0.00 metadata does not warn — it renders garbage text, or crashes
+    a v171.0.01 binary with v171.0.00 metadata does not warn - it renders garbage text, or crashes
     in a place that has nothing to do with strings.
   </p>
   <div class="note">
@@ -252,7 +252,7 @@
 <!-- ============ 5 ============ -->
 <section class="chapter" id="read">
   <span class="num">05</span>
-  <h2>Layer 3 — reading compiled C#</h2>
+  <h2>Layer 3 - reading compiled C#</h2>
   <p>
     Il2CppDumper gives a <code>dump.cs</code> that is a C# skeleton: class names, field offsets,
     method signatures, and for each method an <code>RVA:</code> line. That file is the index. It is
@@ -272,7 +272,7 @@ public class PvPInfoResponseModel {
     <div><dt>script.json</dt><dd><code>ScriptMethod[].Address</code> is an <strong>RVA</strong> in the same space as tombstone <code>pc</code> values.</dd></div>
     <div><dt>File offset</dt><dd>RVA − 0x4000 for <code>libil2cpp.so</code> <strong>only</strong>. Other libraries differ; check, don't assume.</dd></div>
     <div><dt>Runtime address</dt><dd><code>dlpi_addr</code> from <code>dl_iterate_phdr</code> + the symbol's VMA. libil2cpp's first LOAD is at vaddr 0, so no fudge factor.</dd></div>
-    <div><dt>dump.cs "Offset"</dt><dd>Conveniently already equals RVA − 0x4000 — which is why some tools read it directly. Verify against one known-good patch before trusting it on a new build.</dd></div>
+    <div><dt>dump.cs "Offset"</dt><dd>Conveniently already equals RVA − 0x4000 - which is why some tools read it directly. Verify against one known-good patch before trusting it on a new build.</dd></div>
   </dl>
 
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Reading a method by hand</h3>
@@ -285,7 +285,7 @@ public class PvPInfoResponseModel {
     That <code>-1</code> is the whole bug. With <code>semiSeason = 0</code> the index is −1 →
     <code>IndexOutOfRangeException</code> inside a panel's <code>MoveNext</code>, which surfaces as
     "the PvP screen is broken and the cause is nowhere". Fix: send <code>semiSeason ≥ 1</code> and
-    a date array long enough to cover it. No client patch, no server hack — just the field the
+    a date array long enough to cover it. No client patch, no server hack - just the field the
     method actually reads.
   </p>
   <p>
@@ -295,7 +295,7 @@ public class PvPInfoResponseModel {
   <pre>isPreSeason  = GetSeasonStartAt(0) &gt; UtcNow      → nextSeasonStartAtDates[0] must be <b>in the past</b>
 isBreakTime  = seasonUntilAtDates[semiSeason-1] &lt;= UtcNow  → current end must be <b>in the future</b></pre>
   <p>
-    Both are just array values with day offsets. The fix was a table of offsets, not a code change —
+    Both are just array values with day offsets. The fix was a table of offsets, not a code change -
     but only after reading the two predicates.
   </p>
 
@@ -312,7 +312,7 @@ isBreakTime  = seasonUntilAtDates[semiSeason-1] &lt;= UtcNow  → current end mu
 <!-- ============ 6 ============ -->
 <section class="chapter" id="gates">
   <span class="num">06</span>
-  <h2>Layer 4 — removing the gates</h2>
+  <h2>Layer 4 - removing the gates</h2>
   <p>
     Four independent things stop a patched client from talking to you. All four are small once
     located; none are located by guessing.
@@ -348,7 +348,7 @@ isBreakTime  = seasonUntilAtDates[semiSeason-1] &lt;= UtcNow  → current end mu
     it grew into the hook host (section 8).
   </p>
 
-  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">c. Host names — two passes, not one</h3>
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">c. Host names - two passes, not one</h3>
   <p>
     Rebinding the API host by rewriting the il2cpp <em>string literal table</em> covers most URLs.
     Two do not live there: they are field/parameter default values, invisible to that walk, and the
@@ -380,7 +380,7 @@ verify    metadata scan for real host strings → must find <b>0</b></pre>
   <div class="note warn">
     <b>Every build patch is guarded.</b> The patch script checks the expected original bytes at
     every site and aborts rather than corrupting the binary. This exists because one build once
-    shipped a hand-patched library with 21 stray bytes — including a branch that overwrote a
+    shipped a hand-patched library with 21 stray bytes - including a branch that overwrote a
     constant inside a state machine, turning a linear coroutine into infinite recursion. It was
     diagnosed twice as an "inherent IL2CPP bug" before anyone diffed the file against pristine.
   </div>
@@ -391,7 +391,7 @@ verify    metadata scan for real host strings → must find <b>0</b></pre>
     <code>mov x0,xR</code>, on the theory that a klass-pointer fixup never ran under the ARM
     translator. It ran. <code>xR</code> holds the GOT slot; the <code>ldr</code> is what loads the
     class pointer out of it. The rewrite left <code>x0</code> pointing at the slot, so the static
-    field read returned garbage and the singleton looked null — which is exactly the symptom the
+    field read returned garbage and the singleton looked null - which is exactly the symptom the
     patch was supposed to fix. It stayed enabled for weeks because the lobby sometimes rendered
     anyway.
   </p>
@@ -430,7 +430,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
   <p>
     `dump.cs` gives every request and response class; the work is joining the client's path
     strings to the right class. Where the join could not be proven, a name-similarity heuristic
-    was used — and every wrong guess showed up as the same symptom: a <strong>null
+    was used - and every wrong guess showed up as the same symptom: a <strong>null
     reference in a panel that received a valid-but-empty model</strong>.
   </p>
   <pre>[RankingPanel.&lt;ShowRanking&gt;d__14.MoveNext]
@@ -445,10 +445,10 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">Closed vocabularies</h3>
   <p>
     Response strings are not free-form. <code>RewardResponseData.type</code> is compared against a
-    fixed literal set — <code>InventoryItem</code>, <code>Key</code>, <code>UnitExpItem</code>,
+    fixed literal set - <code>InventoryItem</code>, <code>Key</code>, <code>UnitExpItem</code>,
     <code>UnitSoulItem</code>, <code>CardSoul</code>, <code>Gold</code>, <code>Cash</code>,
     <code>Heart</code>, <code>Artifact</code>, <code>Treasure_*</code>, <code>Skin</code>,
-    <code>NameTag</code>, <code>Flag</code>… — and <strong>there is no <code>"Item"</code></strong>.
+    <code>NameTag</code>, <code>Flag</code>… - and <strong>there is no <code>"Item"</code></strong>.
     An unmatched type does not error: the reward renders with no icon and a nonsense count. The
     server therefore keeps one internal vocabulary and translates once, at the wire boundary.
   </p>
@@ -486,7 +486,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
       <tr><td>card has <code>unitId</code></td><td><code>card_to_dict</code> reads it</td><td>entire <code>/card/all</code> dies → <em>every</em> hero shows "Not Owned"</td></tr>
       <tr><td><code>potentialTier</code> ∈ {0,1}</td><td><code>Constants.PotentialTier.Max = 1</code></td><td>badge shows an awakening that cannot be changed</td></tr>
       <tr><td>artifact <code>targets.Count</code> == opt count</td><td><code>ArtifactOptionUI.Init</code> loops on it</td><td><code>"None"</code> dictionary lookup → crash</td></tr>
-      <tr><td>one entry per <code>subStats</code> key</td><td>client merges by key on apply</td><td>7–8 stat lines; change-stat replaces only one copy</td></tr>
+      <tr><td>one entry per <code>subStats</code> key</td><td>client merges by key on apply</td><td>7-8 stat lines; change-stat replaces only one copy</td></tr>
       <tr><td>unit id ∈ 10000..10999</td><td>card array sizing</td><td>client crash</td></tr>
     </table>
   </div>
@@ -496,7 +496,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
     <strong>Derive time, never store it.</strong> The lobby compares <code>now</code> against a
     <code>tomorrow</code> field and re-runs its whole fetch chain when the day turns. A stored
     <code>tomorrow</code> froze at account creation, so the day had "turned" permanently: the
-    client re-logged in at 1 Hz — seventeen requests a second, no exception, no logcat entry,
+    client re-logged in at 1 Hz - seventeen requests a second, no exception, no logcat entry,
     ~400k requests/day. It is now computed from the clock on every response.
   </p>
   <p>
@@ -513,7 +513,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
   <h2>Runtime hooks</h2>
   <p>
     Some things cannot be fixed from the server: a stat that must be displayed, a mail body that
-    must bypass the localizer. That is what the stub library is for — it hosts native code inside
+    must bypass the localizer. That is what the stub library is for - it hosts native code inside
     the running game.
   </p>
   <p>
@@ -541,11 +541,11 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
   </p>
   <div class="note">
     <b>Three silent failures, one session each.</b> (1) The poll loop accepted the first
-    <code>dlopen("libil2cpp.so")</code> handle — which was the <em>packer</em>, loaded long before
+    <code>dlopen("libil2cpp.so")</code> handle - which was the <em>packer</em>, loaded long before
     the game, so every <code>dlsym</code> failed. Accept a handle only if it exports
     <code>il2cpp_domain_get</code>. (2) A <code>/proc/self/maps</code> scan filtered on
     <code>r-xp</code> found nothing, because guest ARM64 pages are mapped <code>r--p</code> and
-    executed by the translator — use <code>dl_iterate_phdr</code>. (3) A diagnostic session wrapped
+    executed by the translator - use <code>dl_iterate_phdr</code>. (3) A diagnostic session wrapped
     three features in <code>#if 0</code> and never restored it.
   </div>
 </section>
@@ -572,7 +572,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
     (section 6d). Nothing else in the pipeline can work until this is true.
   </p>
 
-  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">3. The atlas — geometry, not pixels</h3>
+  <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">3. The atlas - geometry, not pixels</h3>
   <p>
     A character's battle animation is 19 frames in a fixed grid (130×140, five columns, the last
     bottom-right cell empty), and each frame carries a tight polygon computed for that silhouette
@@ -584,14 +584,14 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
         reconstruct the atlas → must be byte-identical to the repository PNG</pre>
   <p>
     Frame 18 is special: it is the prefab's default Sprite and the skin's thumbnail, so it must be
-    a front-facing standing idle with the full silhouette — not a run frame.
+    a front-facing standing idle with the full silhouette - not a run frame.
   </p>
 
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">4. The prefab</h3>
   <p>
     Clone the source character: hierarchy, components, 10 animation clips, animator controller,
     and all PPtrs. Give the cloned sprites a <em>distinct deterministic render-data key</em>.
-    Sharing the source's key resolves the portrait back to the original — or to nothing, with no
+    Sharing the source's key resolves the portrait back to the original - or to nothing, with no
     error either way.
   </p>
 
@@ -602,7 +602,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
     shop with a blank thumbnail and a default large portrait.
   </p>
   <div class="note">
-    <b>Ordering trap.</b> The illustration bundle also needs full-rectangle render geometry —
+    <b>Ordering trap.</b> The illustration bundle also needs full-rectangle render geometry -
     reusing the source's 908×912 tight polygon on a 1024×1024 portrait yields large transparent
     holes or a blank panel even though the texture and catalog entry are perfect.
   </div>
@@ -624,7 +624,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
     <div><dt>Cost</dt><dd>Zero, by requirement. That is why the 1.1 GB stock package is fetched from GitHub during a build and deleted after: egress is billed, release assets are not.</dd></div>
   </dl>
   <p>
-    Two operational failures worth naming. First, the daily-reset loop (section 8) — a service
+    Two operational failures worth naming. First, the daily-reset loop (section 8) - a service
     problem caused by a data-model decision. Second, "the deploy did nothing": the units redirect
     their output to files in <code>/tmp</code>, not journald, so a restart that appeared to fail
     had actually succeeded and a config change that appeared to apply had not. Read the file the
@@ -658,7 +658,7 @@ GET  /player  /player/currencies  /card/all  /deck  /treasure  /shop   … ~350 
   <h3 style="font-family:var(--sans);font-size:1rem;margin-top:2rem">b. Find callers by scanning for <code>BL</code></h3>
   <p>
     When the question is "who calls this endpoint", resolve the endpoint's C# entry point, then scan
-    the binary for branch-link instructions targeting its RVA — no decompiler needed:
+    the binary for branch-link instructions targeting its RVA - no decompiler needed:
   </p>
   <pre>(w &gt;&gt; 26) == 0x25  →  imm26 = w &amp; 0x3FFFFFF, sign-extend → target = site + imm*4
 file offset = target - 0x4000</pre>
@@ -686,7 +686,7 @@ file offset = target - 0x4000</pre>
   </p>
   <div class="note warn">
     <b>And the meta-rule.</b> Fabricating a plausible explanation is worse than saying "I don't know
-    yet" — one costs an hour, the other costs a week. Every long detour in this project started
+    yet" - one costs an hour, the other costs a week. Every long detour in this project started
     with a confident sentence nobody had verified.
   </div>
 </section>

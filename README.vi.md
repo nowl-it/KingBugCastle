@@ -1,6 +1,6 @@
 <div align="center">
   <h1>🏰 King Bug Castle (KBC)</h1>
-  <p><strong>Private Server &amp; Bộ công cụ Reverse Engineering đầy đủ cho "King God Castle" (v170.1.00 – v174.1.00)</strong></p>
+  <p><strong>Private Server &amp; Bộ công cụ Reverse Engineering đầy đủ cho "King God Castle" (v170.1.00 - v174.1.00)</strong></p>
 
   [![Discord](https://img.shields.io/badge/Discord-Tham%20gia%20cộng%20đồng-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/6tDBPs9chp)
   ![Python](https://img.shields.io/badge/Python-3.11+-blue.svg?style=flat&logo=python)
@@ -16,7 +16,7 @@
 > **⚠️ MIỄN TRỪ TRÁCH NHIỆM:** Đây là dự án do người hâm mộ làm, phi lợi nhuận, **chỉ nhằm mục đích học tập, nghiên cứu và tương tác giữa các hệ thống**. Dự án không liên kết, không được bảo trợ và không có quan hệ với Awesomepiece. Toàn bộ logic game phía server được mô phỏng cục bộ. Client chỉ được patch để bỏ qua certificate pinning và các kiểm tra anti-cheat cục bộ (XIGNCODE3 / NEO), phục vụ phát triển offline và bắt lưu lượng nội bộ.
 
 > **📄 Giấy phép:** MIT chỉ áp dụng cho **code**. Nội dung game (master data, hình ảnh, âm thanh,
-> nhãn hiệu) vẫn thuộc về chủ sở hữu — xem **[NOTICE](NOTICE)**.
+> nhãn hiệu) vẫn thuộc về chủ sở hữu - xem **[NOTICE](NOTICE)**.
 
 ---
 
@@ -44,7 +44,7 @@ Bằng cách dump metadata IL2CPP và nghiên cứu lưu lượng mạng, dự �
 
 * 🚀 **Mô phỏng API đầy đủ**: Server Python/FastAPI tái tạo chính xác hành vi của `axis-game.awesomepiece.com` và `kgc-k8s-1.awesomepiece.com`.
 * 🛡️ **Pipeline thích ứng client (ARM64)**: Pipeline Python tự động (`rebuild_arm64.py` cho v170, `build_private.py` cho v171+) chuẩn bị client cho môi trường local/offline, bao gồm việc chấp nhận chứng chỉ tự ký khi phát triển cục bộ.
-* 📦 **Bộ bung XIGNCODE NEO**: Các bản hiện đại (v171+) không có `libil2cpp.so` trên đĩa — mã game được mã hoá bên trong thư viện anti-cheat. `server/patchers/unpack_neo.py` phục hồi một ELF có thể liên kết được hoàn toàn offline (RSA-1024 → ChaCha20 → LZ4), cho phép inject chính mã game của bản build đó.
+* 📦 **Bộ bung XIGNCODE NEO**: Các bản hiện đại (v171+) không có `libil2cpp.so` trên đĩa - mã game được mã hoá bên trong thư viện anti-cheat. `server/patchers/unpack_neo.py` phục hồi một ELF có thể liên kết được hoàn toàn offline (RSA-1024 → ChaCha20 → LZ4), cho phép inject chính mã game của bản build đó.
 * 👻 **Lớp tương thích anti-cheat**: Mô phỏng trao đổi seed của Wellbia (`/auth/xcdSeed`) và cung cấp một stub native thoả mãn các kiểm tra lúc khởi động để game chạy offline hoàn toàn.
 * ⚔️ **Đầy đủ gameplay & hệ thống con**: Cài đặt trọn vẹn cơ chế gồm Rift Weapon & Crystal, hệ thống Trang sức (nâng cấp, phân rã, đổi dòng, preset), Clan Raid, vòng lặp trận đấu, Đấu trường, Bảng xếp hạng, Pass & Journey, và Story Mode.
 * 🛠️ **Bộ công cụ `kgc-cli`**: Tiện ích dòng lệnh dùng để trích xuất asset cực nhanh, mirror CDN S3 và diff dữ liệu XML.
@@ -58,7 +58,7 @@ Bằng cách dump metadata IL2CPP và nghiên cứu lưu lượng mạng, dự �
 
 * **Hệ điều hành**: **Linux, macOS hoặc Windows.** Server và pipeline build thuần Python + vài công cụ Java/adb. (redroid chỉ chạy trên Linux, nhưng BlueStacks / LDPlayer / máy thật chạy được trên mọi OS.)
 * **Python**: 3.9 trở lên.
-* **Công cụ hệ thống** (có trên `PATH`): `apktool`, `apksigner`, `zipalign`, `adb`, và một JRE. `python3 setup.py` sẽ kiểm tra và in gợi ý cài theo từng OS. **Không cần Android NDK/SDK** — các thành phần `.so` native được ship sẵn bản build.
+* **Công cụ hệ thống** (có trên `PATH`): `apktool`, `apksigner`, `zipalign`, `adb`, và một JRE. `python3 setup.py` sẽ kiểm tra và in gợi ý cài theo từng OS. **Không cần Android NDK/SDK** - các thành phần `.so` native được ship sẵn bản build.
 * **Thiết bị**: **redroid** (Linux/Docker, chạy với `androidboot.redroid_gpu_mode=guest`), **BlueStacks**, **LDPlayer**, hoặc **điện thoại Android thật** (bật USB debugging).
 * **Cài một lần**: `python3 setup.py` rồi `pip install -r server/requirements.txt`. Xem **[SETUP.md](SETUP.md)**.
 
@@ -70,8 +70,8 @@ Server mô phỏng được thiết kế để chặn và xử lý toàn bộ l�
 
 ### Thành phần hệ thống
 
-1. **Backend FastAPI (`server.py` + các module route theo miền)**: đóng vai server game trung tâm (`axis-game.awesomepiece.com`), trả lời mọi endpoint client gọi. *Luật* phản hồi là dữ liệu, không phải code — JSON phẳng trong `server/data/` — còn tiến trình người chơi lưu trong SQLite (`server/state/players.db`, chế độ WAL, mỗi tài khoản một dòng, quản lý qua `playerdb.py`).
-2. **Bộ patch nhị phân (`rebuild_arm64.py` cho v170, `build_private.py` cho v171+)**: chuẩn bị client cho local/offline — xử lý chứng chỉ trở nên dễ dãi với chứng chỉ tự ký cục bộ, và bỏ qua các điểm gây NRE đã biết trong UI.
+1. **Backend FastAPI (`server.py` + các module route theo miền)**: đóng vai server game trung tâm (`axis-game.awesomepiece.com`), trả lời mọi endpoint client gọi. *Luật* phản hồi là dữ liệu, không phải code - JSON phẳng trong `server/data/` - còn tiến trình người chơi lưu trong SQLite (`server/state/players.db`, chế độ WAL, mỗi tài khoản một dòng, quản lý qua `playerdb.py`).
+2. **Bộ patch nhị phân (`rebuild_arm64.py` cho v170, `build_private.py` cho v171+)**: chuẩn bị client cho local/offline - xử lý chứng chỉ trở nên dễ dãi với chứng chỉ tự ký cục bộ, và bỏ qua các điểm gây NRE đã biết trong UI.
 3. **CDN XML cục bộ**: game tải "Patch Assets" (bảng XML) lúc khởi động. Dự án mirror CDN S3 chính thức về cục bộ và backend trỏ game vào CDN của mình (`kgc-cdn-1.awesomepiece.com`), cho phép thêm vật phẩm, sửa text và đổi luật chơi qua `rebuild_xml_bundle.py`.
 4. **Stub XIGNCODE3 + host hook native (`jni/stub.cpp`)**: module anti-cheat độc quyền chặn game khởi động nếu không tới được server Wellbia. Dự án thay `libxigncode.so` bằng thư viện native của mình: đăng ký các phương thức JNI `ZCWAVE_*` rỗng, giả lập bắt tay `/auth/xcdSeed`, và cài các hook il2cpp cho tính năng trong game.
 
@@ -101,15 +101,15 @@ Toàn bộ quá trình teardown và dựng lại đều đã được ghi chép.
 
 ### 🎓 Tiếp quản / bảo trì dự án
 Mới nhận repo, hoặc quay lại sau một thời gian?
-👉 **Đọc [HANDOVER.md](HANDOVER.md)** — checklist ngày đầu, công việc định kỳ, và sổ tay các bẫy.
+👉 **Đọc [HANDOVER.md](HANDOVER.md)** - checklist ngày đầu, công việc định kỳ, và sổ tay các bẫy.
 
 ### 🚀 Tự chạy server (bắt đầu ở đây)
 Đã clone repo và muốn có server chạy được + client cho redroid / BlueStacks / LDPlayer / máy thật?
-👉 **Đọc [SETUP.md](SETUP.md)** — một script, mọi OS, mọi thiết bị.
+👉 **Đọc [SETUP.md](SETUP.md)** - một script, mọi OS, mọi thiết bị.
 
 ### 🛠️ Vận hành & sửa server (cấp vật phẩm, mở khoá nội dung, tạo stage test)
 Server đã chạy và bạn muốn cấp tiền tệ/skin/treasure, mở khoá nội dung, hoặc tạo stage toàn dummy?
-👉 **Đọc [Cơ sở tri thức vận hành](docs/README.vi.md)** — các playbook thực dụng.
+👉 **Đọc [Cơ sở tri thức vận hành](docs/README.vi.md)** - các playbook thực dụng.
 
 ### 👨‍💻 Cho lập trình viên backend & người đóng góp
 Muốn đi sâu vào nội bộ server, pipeline patch và các phản hồi API?
@@ -124,7 +124,7 @@ Muốn hiểu cách dump IL2CPP, ánh xạ route, phá SSL pinning và trích xu
 👉 **Đọc [Cơ sở tri thức & ghi chú teardown](KNOWLEDGE.md)** và **[Hướng dẫn trích xuất NEO](docs/mftl-extraction.md)**.
 
 ### 📓 Nhật ký dự án
-Toàn bộ hành trình — dòng thời gian, sổ tay các bẫy, và bản kể chuyện song ngữ:
+Toàn bộ hành trình - dòng thời gian, sổ tay các bẫy, và bản kể chuyện song ngữ:
 👉 **[Blog](docs/blog/vi.html)** · **[Dòng thời gian](docs/history/timeline.vi.md)** · **[Nhật ký phiên](docs/history/sessions.md)**
 
 ---
@@ -133,11 +133,11 @@ Toàn bộ hành trình — dòng thời gian, sổ tay các bẫy, và bản k�
 
 | Thư mục | Mục đích |
 | --- | --- |
-| 📁 `docs/` | Cơ sở tri thức vận hành — playbook cấp vật phẩm, mở khoá nội dung, sửa stage/master data ([`docs/README.vi.md`](docs/README.vi.md)). |
+| 📁 `docs/` | Cơ sở tri thức vận hành - playbook cấp vật phẩm, mở khoá nội dung, sửa stage/master data ([`docs/README.vi.md`](docs/README.vi.md)). |
 | 📁 `server/` | Backend FastAPI, các module route, và script build client (`rebuild_arm64.py`, `build_private.py`). |
 | 📁 `server/routes/` | Handler route theo miền (`rift.py`, `accessory.py`, `shop.py`, `pvp.py`, `clan.py`, v.v.). |
 | 📁 `server/data/` | Model JSON tĩnh và template phản hồi (Docs: [`server/data/README.md`](server/data/README.md)). |
-| 📁 `server/patchers/` | Các patcher APK/nhị phân mà script build gọi — rebind host, đổi tên gói, sửa metadata, và `unpack_neo.py`. |
+| 📁 `server/patchers/` | Các patcher APK/nhị phân mà script build gọi - rebind host, đổi tên gói, sửa metadata, và `unpack_neo.py`. |
 | 📁 `server/xml_live/` | Master data được sửa trực tiếp. Sửa ở đây, rồi `rebuild_xml_bundle.py` để đẩy lên client. |
 | 📁 `server/webui-next/` | Dashboard quản trị + player portal (Next.js/React; `pnpm run build` export tĩnh ra `out/`, đó là thứ được ship). |
 | 📁 `api/` | Tích hợp phụ trợ và endpoint cho công cụ ngoài. |

@@ -1,4 +1,4 @@
-# Knowledge synthesis — what nine months of transcripts actually contain
+# Knowledge synthesis - what nine months of transcripts actually contain
 
 This is the distilled output of harvesting **every** conversation about this project from
 five agent tools. It is not a timeline (`timeline.md`) and not a failure list
@@ -13,7 +13,7 @@ actually be lost?"*
 | Codex | `~/.codex/state_5.sqlite` (`threads`; rollout JSONL already deleted) | 31 | 31 |
 | Claude Code | `~/.claude/history.jsonl` | 22 | 1,282 |
 | Qoder | `~/.qoder/projects/-home-nowl-Code-kgc/*.jsonl` | 14 | 14 |
-| Antigravity | `~/.config/Antigravity/User/globalStorage/state.vscdb` (protobuf — titles only) | 1 | 11 |
+| Antigravity | `~/.config/Antigravity/User/globalStorage/state.vscdb` (protobuf - titles only) | 1 | 11 |
 | **Total** | | **283** | **44,940** |
 
 Reproduce with `scripts/history/extract_chats.py` (writes to `.tmp/corpus/`, gitignored) and
@@ -21,7 +21,7 @@ Reproduce with `scripts/history/extract_chats.py` (writes to `.tmp/corpus/`, git
 
 Codex dominates input volume (287 M tokens across 31 threads) because a single thread there
 is one long autonomous run; OpenCode dominates turn count because it is one prompt per turn.
-Claude and Qoder stores carry no token usage at all — a gap in those tools' history formats,
+Claude and Qoder stores carry no token usage at all - a gap in those tools' history formats,
 not in the project.
 
 ---
@@ -33,8 +33,8 @@ The working model never changed:
 1. **The user brings intent and judgement, not code.** Instructions are short and outcome-shaped
    ("cấp cho tôi 1 cái rift crystal để test", "game báo failed to connect server"). Almost no
    prompt describes an implementation.
-2. **The agent is expected to find the truth itself** — decompile, dump, diff, read the master
-   data — and to say when it cannot.
+2. **The agent is expected to find the truth itself** - decompile, dump, diff, read the master
+   data - and to say when it cannot.
 3. **The user verifies on a real device, every single time.** Screenshots come back as evidence.
    Nothing is "done" because the agent says so; it is done when the panel renders.
 4. **Context lives in the repository, not in the conversation.** `AGENTS.md`, `dev-notes.md`,
@@ -43,7 +43,7 @@ The working model never changed:
 
 The failure mode this model punishes hardest is **plausible invention**. 12% of all user
 prompts contain an explicit bug report and 22% contain an iteration marker ("lại", "vẫn",
-"nữa") — the single most repeated sentence in the corpus is
+"nữa") - the single most repeated sentence in the corpus is
 *"Continue if you have next steps, or stop and ask for clarification if you are unsure how to
 proceed"* (44 times), which is the harness's own prompt, but the pattern is unmistakable: the
 user spent a large share of the project re-verifying claims rather than receiving new work.
@@ -82,11 +82,11 @@ Each of these was argued about at least once and should not be reopened casually
 | One key per fact (altar points, accessory sub-stats) | duplicated keys diverged silently | `test_building.py`, `test_accessory.py` |
 | Never hand-patch the shipped `.so`; regenerate from pristine | 21 stray bytes caused an "inherent framework bug" | `make_v171_ssl_so.py --check` |
 | The `ldr → mov` klass patches stay off | the theory was disproven by a diagnostic NRE trap | `AGENTS.md` §black lobby |
-| Free tier only | user mandate, not a preference — it shaped CDN, storage and CI | `docs/public-hosting.md` |
+| Free tier only | user mandate, not a preference - it shaped CDN, storage and CI | `docs/public-hosting.md` |
 | Client lib and metadata must come from the same build | string-literal indices are compiled in; mismatch = gibberish | `docs/mftl-extraction.md` |
 | Version offsets are per-build tables, never a delta | the NEO loader itself changed shape between versions | `server/builders/build_private.py` |
 
-## 4. Failure taxonomy — how this project actually lost time
+## 4. Failure taxonomy - how this project actually lost time
 
 Four kinds, in descending cost:
 
@@ -107,7 +107,7 @@ Services; CMS/CF headers trusted on a loopback proxy; a proxy config that change
 did not. The code was correct for an environment that no longer existed.
 
 Notably absent from the list: algorithmic difficulty. Nothing here is hard computer science.
-The difficulty is entirely *epistemic* — knowing which layer is lying.
+The difficulty is entirely *epistemic* - knowing which layer is lying.
 
 ## 5. Where each answer now lives
 
@@ -135,7 +135,7 @@ another project:
 2. **Invariants outrank features.** Every fixed-size array, closed vocabulary and required field
    cost more than any feature that was added. Write them down as tests the moment you learn one.
 3. **Prefer provable absence to plausible presence.** "I have not decompiled this yet" is a
-   cheaper sentence than a wrong root cause — by an order of magnitude, measured in sessions.
+   cheaper sentence than a wrong root cause - by an order of magnitude, measured in sessions.
 4. **Derive, don't store.** Time boundaries, hashes, gates, offsets: anything copied into state
    is a scheduled bug with an unknown date.
 5. **One writer, one key.** Every duplicated representation in this project eventually produced
@@ -146,7 +146,7 @@ another project:
 1. Read `docs/dev-notes.md` **before** touching a task; it is the decoded past.
 2. Start the server with `python3 -m uvicorn server.server:app` (namespace package).
 3. Two servers: HTTP `:8080`, TLS `:8443`; device needs both `adb reverse` rules.
-4. `il2cpp` (the dumper) blocks on "press any key" — feed stdin or you will hang.
+4. `il2cpp` (the dumper) blocks on "press any key" - feed stdin or you will hang.
 5. Resolve crash frames through `script.json`; file offset = RVA − 0x4000 **for libil2cpp only**.
 6. Never edit `libil2cpp*_ssl.so` by hand; regenerate and run `--check`.
 7. Master-data edits need `rebuild_xml_bundle.py` + restart + client re-download.

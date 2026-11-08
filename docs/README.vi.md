@@ -1,10 +1,10 @@
-# KGC Private Server — Cơ sở tri thức vận hành
+# KGC Private Server - Cơ sở tri thức vận hành
 
 Playbook thực dụng để **chạy và sửa** private server King God Castle: cấp vật phẩm, mở khoá
 nội dung, dựng stage test, sửa master data, và đẩy thay đổi tới client. Đây là tầng
 *hướng dẫn vận hành*.
 
-Nó bổ trợ cho các tài liệu khác — đọc những tài liệu đó để hiểu *vì sao* và *bên trong*:
+Nó bổ trợ cho các tài liệu khác - đọc những tài liệu đó để hiểu *vì sao* và *bên trong*:
 
 | Tài liệu | Phạm vi |
 |-----|-------|
@@ -28,7 +28,7 @@ Nó bổ trợ cho các tài liệu khác — đọc những tài liệu đó đ
 | **[emulator-note.md](emulator-note.md)** | Ghi chú cho người chơi (VI): vì sao bản gốc v171+ không chạy được trên emulator |
 | **[multi-account-login.md](multi-account-login.md)** | Nhiều tài khoản/thiết bị, cầu đăng nhập Google web (`GLOGIN_DEV=1`), mã chuyển tài khoản |
 | **[save-editing.md](save-editing.md)** | Cấp tiền tệ / vật phẩm / unit / skin / treasure bằng cách sửa state hoặc gửi thư |
-| **[content-unlock.md](content-unlock.md)** | Mở khoá nội dung bị chặn phiên bản (`MinVersion`) — treasure, skin, unit, stage |
+| **[content-unlock.md](content-unlock.md)** | Mở khoá nội dung bị chặn phiên bản (`MinVersion`) - treasure, skin, unit, stage |
 | **[stages-and-spawns.md](stages-and-spawns.md)** | Cách định nghĩa quái trong stage; dựng stage training-dummy |
 | **[cdn-master-data.md](cdn-master-data.md)** | Sửa XML master data và đẩy tới client qua bundle xml trên CDN |
 | **[discord-cdn-monitor.md](discord-cdn-monitor.md)** | Cấu hình thông báo CDN qua Discord và monitor 30 phút |
@@ -39,20 +39,20 @@ Nó bổ trợ cho các tài liệu khác — đọc những tài liệu đó đ
 | **[history/lessons.md](history/lessons.md)** | Sổ tay các bẫy: mọi thất bại từng tốn một phiên |
 | **[blog/vi.html](blog/vi.html)** | Blog kể chuyện dựng server (VI/EN) |
 | **[blog/full.vi.html](blog/full.vi.html)** | Toàn bộ hồ sơ kỹ thuật: từng bước, offset, đoạn code (VI/EN) |
-| **[next-steps.md](next-steps.md)** | Việc nên làm tiếp để đóng dự án gọn gàng — và những gì không nên làm |
+| **[next-steps.md](next-steps.md)** | Việc nên làm tiếp để đóng dự án gọn gàng - và những gì không nên làm |
 
 ## Mô hình tư duy duy nhất giải thích mọi thứ
 
 Có **hai mặt phẳng dữ liệu tách biệt**, và biết thay đổi của mình rơi vào mặt phẳng nào sẽ
 tiết kiệm hàng giờ:
 
-1. **State server / phản hồi API** — `server/state/players.db` (SQLite, mỗi người chơi một
+1. **State server / phản hồi API** - `server/state/players.db` (SQLite, mỗi người chơi một
    dòng, luôn thông qua `server/playerdb.py`) + các handler trong `server.py` và module route.
    Quyết định *tài khoản game* sở hữu gì và REST API trả về gì (tiền tệ, card, treasure, thư).
-   Sửa ở đây có hiệu lực **ngay từng request** (`load_state()` đọc lại dòng mỗi lần gọi) —
+   Sửa ở đây có hiệu lực **ngay từng request** (`load_state()` đọc lại dòng mỗi lần gọi) -
    không cần restart, không cần client tải lại.
 
-2. **Master data phía client** — **xml AssetBundle** trên CDN (`server/real_cdn/xml`), dựng từ
+2. **Master data phía client** - **xml AssetBundle** trên CDN (`server/real_cdn/xml`), dựng từ
    `server/xml_live/*.xml`. Quyết định cái *client* đọc: spawn trong stage, định nghĩa
    skin/unit/treasure, text đã dịch, gate `MinVersion`. Sửa ở đây cần
    `rebuild_xml_bundle.py` → restart server → client tải lại (AssetHash đổi).
@@ -62,6 +62,6 @@ tiết kiệm hàng giờ:
 > Xem từng playbook.
 
 ### Ranh giới đã biết
-- ID unit của người chơi nằm trong khoảng `10000`–`10999`. ID ngoài khoảng này không phải unit
+- ID unit của người chơi nằm trong khoảng `10000`-`10999`. ID ngoài khoảng này không phải unit
   hợp lệ và có thể làm crash client nếu cấp vào mảng card. `server/playerdb.py` tự lọc bỏ.
 - Pool gacha đã bị giới hạn trong khoảng này để tránh cấp unit test hoặc unit của quái.

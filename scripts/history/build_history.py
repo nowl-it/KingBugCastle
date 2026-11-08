@@ -62,8 +62,8 @@ def main() -> int:
              "`scripts/history/extract_chats.py`; the raw transcripts stay out of git.", "",
              "| date | agent | turns | title |", "|---|---|---|---|"]
     for r in index:
-        title = re.sub(r"\s+", " ", (r.get("title") or "")).strip()[:90] or "—"
-        title = title.replace("|", "\\|")
+        title = re.sub(r"\s+", " ", (r.get("title") or "")).strip()[:90] or "-"
+        title = title.replace("|", "\\|").replace("\u2014", "-").replace("\u2013", "-")
         lines.append(f"| {(r.get('start') or '?')[:10]} | {SOURCE_LABEL.get(r['source'], r['source'])} "
                      f"| {r.get('turns') or 0} | {title} |")
 
