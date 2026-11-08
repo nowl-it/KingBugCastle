@@ -36,6 +36,7 @@ It complements the other docs - read those for the *why* and the *internals*:
 | **[discord-cdn-monitor.md](discord-cdn-monitor.md)** | Configure the Discord CDN-update notifier and its 30-minute monitor |
 | **[api-and-crypto.md](api-and-crypto.md)** | AES request/response format; hit the server manually with curl/python |
 | **[web-ui-reconstruction.md](web-ui-reconstruction.md)** | Faithfully reconstruct a client UI as a web UI using IL2CPP, AssetBundles, and client-render baselines |
+| **[history/synthesis.md](history/synthesis.md)** | What nine months of transcripts contain: operating model, decisions, failure taxonomy, knowledge map |
 | **[history/timeline.md](history/timeline.md)** | Project timeline, phase by phase |
 | **[history/lessons.md](history/lessons.md)** | Trap ledger: every failure that cost a session |
 | **[blog/index.html](blog/index.html)** | The build log, told as a story (EN/VI) |

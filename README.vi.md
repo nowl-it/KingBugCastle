@@ -45,7 +45,7 @@ Bằng cách dump metadata IL2CPP và nghiên cứu lưu lượng mạng, dự �
 * 👻 **Lớp tương thích anti-cheat**: Mô phỏng trao đổi seed của Wellbia (`/auth/xcdSeed`) và cung cấp một stub native thoả mãn các kiểm tra lúc khởi động để game chạy offline hoàn toàn.
 * ⚔️ **Đầy đủ gameplay & hệ thống con**: Cài đặt trọn vẹn cơ chế gồm Rift Weapon & Crystal, hệ thống Trang sức (nâng cấp, phân rã, đổi dòng, preset), Clan Raid, vòng lặp trận đấu, Đấu trường, Bảng xếp hạng, Pass & Journey, và Story Mode.
 * 🛠️ **Bộ công cụ `kgc-cli`**: Tiện ích dòng lệnh dùng để trích xuất asset cực nhanh, mirror CDN S3 và diff dữ liệu XML.
-* 🗃️ **State hot-reload & Dashboard quản trị web**: Trạng thái người chơi nằm trong SQLite (`server/state/players.db`, qua `playerdb.py`), kèm dashboard Vue 3 (`/admin`) để sửa tài nguyên tức thì, gửi thư và quản lý server.
+* 🗃️ **State hot-reload & Dashboard quản trị web**: Trạng thái người chơi nằm trong SQLite (`server/state/players.db`, qua `playerdb.py`), kèm dashboard quản trị Next.js/React và player portal (`server/webui-next`, export tĩnh) để sửa tài nguyên tức thì, gửi thư và quản lý server.
 
 ---
 
@@ -136,11 +136,11 @@ Toàn bộ hành trình — dòng thời gian, sổ tay các bẫy, và bản k�
 | 📁 `server/data/` | Model JSON tĩnh và template phản hồi (Docs: [`server/data/README.md`](server/data/README.md)). |
 | 📁 `server/patchers/` | Các patcher APK/nhị phân mà script build gọi — rebind host, đổi tên gói, sửa metadata, và `unpack_neo.py`. |
 | 📁 `server/xml_live/` | Master data được sửa trực tiếp. Sửa ở đây, rồi `rebuild_xml_bundle.py` để đẩy lên client. |
-| 📁 `server/webui/` | Dashboard quản trị (Vue 3, vendored — không cần bước build). |
+| 📁 `server/webui-next/` | Dashboard quản trị + player portal (Next.js/React; `pnpm run build` export tĩnh ra `out/`, đó là thứ được ship). |
 | 📁 `api/` | Tích hợp phụ trợ và endpoint cho công cụ ngoài. |
 | 📁 `scripts/` | Script shell và Python tự động hoá việc tải CDN và trích xuất asset. |
 | 📁 `xml_history/` | Ảnh chụp nguyên bản master data CDN theo từng patch (để tham chiếu; server không đọc từ đây). |
-| 📁 `il2cpp/` & `ghidra/` | Metadata đã dump (`dump.cs`), string literal, và project Ghidra. |
+| 📁 `il2cpp/` | Metadata đã dump (`dump.cs`), `script.json` (RVA → method), string literal, và `libil2cpp*.so` nguyên bản dùng cho build. Project Ghidra chỉ có cục bộ, không track. |
 | ⚙️ `kgc-cli` | Công cụ nhị phân chính cho các thao tác dữ liệu. |
 
 ---

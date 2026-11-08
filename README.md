@@ -45,7 +45,7 @@ By dumping the IL2CPP metadata and studying network traffic, we have successfull
 * 👻 **Anti-Cheat Compatibility Layer**: Emulates the Wellbia seed exchange (`/auth/xcdSeed`) and provides a native stub that satisfies the boot-time checks so the game can run fully offline.
 * ⚔️ **Full Gameplay & Subsystem Support**: Complete mechanics implementation including Rift Weapons & Crystals, Accessory System (Upgrade, Dismantle, Reroll, Presets), Clan Raids, Battle loop, Colosseum, Leaderboards, Pass & Journey, and Story Mode.
 * 🛠️ **`kgc-cli` Toolkit**: A proprietary command-line utility used for lightning-fast asset extraction, S3 CDN mirroring, and XML data diffing.
-* 🗃️ **Hot-Reloading State & Web Admin Dashboard**: Player state lives in SQLite (`server/state/players.db`, via `playerdb.py`), with a modern Vue 3 admin dashboard (`/admin`) for instant resource editing, mail delivery, and server management.
+* 🗃️ **Hot-Reloading State & Web Admin Dashboard**: Player state lives in SQLite (`server/state/players.db`, via `playerdb.py`), with a Next.js/React admin dashboard and player portal (`server/webui-next`, static export) for instant resource editing, mail delivery, and server management.
 
 ---
 
@@ -132,11 +132,11 @@ Want to understand how we dumped IL2CPP, mapped the routes, defeated SSL pinning
 | 📁 `server/data/` | Static JSON models and response templates (Docs: [`server/data/README.md`](server/data/README.md)). |
 | 📁 `server/patchers/` | The APK/binary patchers the build scripts call - host rebind, package rename, metadata edits, and `unpack_neo.py`. |
 | 📁 `server/xml_live/` | Live-edited master data. Edit here, then `rebuild_xml_bundle.py` to push it to the client. |
-| 📁 `server/webui/` | The admin dashboard (Vue 3, vendored - no build step). |
+| 📁 `server/webui-next/` | The admin dashboard + player portal (Next.js/React; `pnpm run build` exports static files to `out/`, which is what ships). |
 | 📁 `api/` | Auxiliary integrations and external tool endpoints. |
 | 📁 `scripts/` | Shell and Python automation scripts for fetching CDN data and extracting assets. |
 | 📁 `xml_history/` | Pristine per-patch snapshots of the CDN master data (reference; not what the server reads). |
-| 📁 `il2cpp/` & `ghidra/` | Dumped metadata (`dump.cs`), string literals, and Ghidra project files. |
+| 📁 `il2cpp/` | Dumped metadata (`dump.cs`), `script.json` (RVA → method), string literals, and the pristine `libil2cpp*.so` used by the build. Ghidra projects are local-only and not tracked. |
 | ⚙️ `kgc-cli` | The core executable binary tool for data operations. |
 
 ---

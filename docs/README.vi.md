@@ -34,6 +34,7 @@ Nó bổ trợ cho các tài liệu khác — đọc những tài liệu đó đ
 | **[discord-cdn-monitor.md](discord-cdn-monitor.md)** | Cấu hình thông báo CDN qua Discord và monitor 30 phút |
 | **[api-and-crypto.md](api-and-crypto.md)** | Định dạng AES request/response; gọi server thủ công bằng curl/python |
 | **[web-ui-reconstruction.md](web-ui-reconstruction.md)** | Dựng lại UI client thành web UI trung thực bằng IL2CPP, AssetBundle và baseline render |
+| **[history/synthesis.md](history/synthesis.md)** | Chín tháng transcript chứa gì: cách vận hành, quyết định, phân loại thất bại, bản đồ tri thức |
 | **[history/timeline.vi.md](history/timeline.vi.md)** | Dòng thời gian dự án, theo giai đoạn |
 | **[history/lessons.md](history/lessons.md)** | Sổ tay các bẫy: mọi thất bại từng tốn một phiên |
 | **[blog/vi.html](blog/vi.html)** | Blog kể chuyện dựng server (VI/EN) |
