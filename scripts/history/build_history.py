@@ -27,6 +27,23 @@ SOURCE_LABEL = {
     "antigravity": "Antigravity",
 }
 
+# Session titles come from raw transcripts and can quote real account ids. The site is
+# published, so scrub the identifying shapes here instead of trusting each title.
+# Real values are mapped in server/secrets/redacted-identifiers.md (gitignored).
+_SCRUB = [
+    (re.compile(r"\bp-[0-9a-f]{12}\b"), "p-<redacted>"),
+    (re.compile(r"\bgoogle_\d{15,}\b"), "google_<redacted>"),
+    (re.compile(r"\bguest-\d{6,}(?:-\d{6,})?\b"), "guest-<redacted>"),
+    (re.compile(r"\b[0-9a-f]{8}-[0-9a-f]{16}\b", re.I), "<device-udid>"),
+    (re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}\b"), "<email>"),
+]
+
+
+def scrub(text: str) -> str:
+    for pat, repl in _SCRUB:
+        text = pat.sub(repl, text)
+    return text
+
 
 def main() -> int:
     index = json.loads((CORPUS / "index.json").read_text(encoding="utf-8"))
@@ -64,6 +81,7 @@ def main() -> int:
     for r in index:
         title = re.sub(r"\s+", " ", (r.get("title") or "")).strip()[:90] or "-"
         title = title.replace("|", "\\|").replace("\u2014", "-").replace("\u2013", "-")
+        title = scrub(title)
         lines.append(f"| {(r.get('start') or '?')[:10]} | {SOURCE_LABEL.get(r['source'], r['source'])} "
                      f"| {r.get('turns') or 0} | {title} |")
 

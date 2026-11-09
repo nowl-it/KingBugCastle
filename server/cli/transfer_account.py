@@ -1,14 +1,12 @@
 """Transfer player save data from one account UID to another on the KGC server.
 
-Default:
-    Source: p-f5c46011ecf1
-    Target: p-757f50460ed8
+Both uids are required - this moves a save, so it must not have a baked-in default
+to fire against by accident.
 
 Usage:
-    python3 cli/transfer_account.py
-    python3 cli/transfer_account.py --src p-f5c46011ecf1 --dst p-757f50460ed8
-    python3 cli/transfer_account.py --dry-run
-    python3 cli/transfer_account.py --force
+    python3 cli/transfer_account.py --src p-<uid> --dst p-<uid> --dry-run
+    python3 cli/transfer_account.py --src p-<uid> --dst p-<uid>
+    python3 cli/transfer_account.py --src p-<uid> --dst p-<uid> --force
 """
 import argparse
 import copy
@@ -178,8 +176,8 @@ def transfer_account(src_uid: str, dst_uid: str, force: bool = False, dry_run: b
 
 def main():
     parser = argparse.ArgumentParser(description="Transfer KGC player save data from one account to another.")
-    parser.add_argument("--src", default="p-f5c46011ecf1", help="Source account UID (default: p-f5c46011ecf1)")
-    parser.add_argument("--dst", default="p-757f50460ed8", help="Target account UID (default: p-757f50460ed8)")
+    parser.add_argument("--src", required=True, help="Source account UID")
+    parser.add_argument("--dst", required=True, help="Target account UID")
     parser.add_argument("--force", action="store_true", help="Force transfer even if already marked completed in meta")
     parser.add_argument("--dry-run", action="store_true", help="Inspect without modifying the database")
     args = parser.parse_args()

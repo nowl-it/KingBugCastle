@@ -74,11 +74,11 @@ function msg(el, text, cls) {
 }
 
 function whenText(ts) {
-  if (!ts) return "–";
+  if (!ts) return "-";
   return new Date(ts * 1000).toLocaleString(LANG === "vi" ? "vi-VN" : "en-GB", { hour12: false });
 }
 
-const when = (ts) => (ts ? esc(whenText(ts)) : '<span class="muted">–</span>');
+const when = (ts) => (ts ? esc(whenText(ts)) : '<span class="muted">-</span>');
 
 function renderAccList(accs) {
   $("accCount").textContent = accs.length;
@@ -92,9 +92,9 @@ function renderAccList(accs) {
   for (const a of accs) {
     const off = a.enabled ? "" : ` <span class="pill off">${t("off")}</span>`;
     h += `<tr><td class="code">${esc(a.uid)}${off}</td>` +
-         `<td>${a.label ? esc(a.label) : '<span class="muted">–</span>'}</td>` +
+         `<td>${a.label ? esc(a.label) : '<span class="muted">-</span>'}</td>` +
          `<td>${when(a.added_at)}</td><td>${when(a.last_run_at)}</td>` +
-         `<td>${a.last_result ? esc(stateName(a.last_result)) : '<span class="muted">–</span>'}</td></tr>`;
+         `<td>${a.last_result ? esc(stateName(a.last_result)) : '<span class="muted">-</span>'}</td></tr>`;
   }
   $("acclist").innerHTML = h + "</tbody></table></div>";
 }
@@ -110,7 +110,7 @@ function renderCodeList(codes) {
           `<th>${t("th_seen")}</th></tr></thead><tbody>`;
   for (const c of codes) {
     const src = String(c.source || "");
-    const srcLabel = src.startsWith("discord:") ? "discord" : (src || "–");
+    const srcLabel = src.startsWith("discord:") ? "discord" : (src || "-");
     const quote = c.source_text ? ` title="${esc(c.source_text.slice(0, 400))}"` : "";
     h += `<tr><td class="code"${quote}>${esc(c.code)}</td>` +
          `<td><span class="pill">${esc(codeStatus(c.status))}</span></td>` +
@@ -135,7 +135,7 @@ function renderMatrix(accs, codes, mx) {
       h += st
         ? `<td><span class="st" data-s="${st === "ok" ? "ok" : (st === "error" ? "wait" : "bad")}"` +
           ` title="${esc(stateName(st))}">${emoji(st)}</span></td>`
-        : '<td><span class="muted">–</span></td>';
+        : '<td><span class="muted">-</span></td>';
     }
     h += "</tr>";
   }
@@ -147,7 +147,7 @@ let lastData = null;
 function render(data) {
   lastData = data;
   $("mode").textContent = data.discord_mode === "poll" ? t("mode_poll") : t("mode_manual");
-  $("rate").textContent = data.rate_remaining ?? "–";
+  $("rate").textContent = data.rate_remaining ?? "-";
   $("lastrun").textContent = data.last_run && data.last_run.finished_at
     ? whenText(data.last_run.finished_at) : t("never");
   $("run").disabled = !!data.running;

@@ -96,7 +96,7 @@
   }
 }
 
-/* Player Portal — deliberately isolated from the admin dashboard's component skin. */
+/* Player Portal - deliberately isolated from the admin dashboard's component skin. */
 .portal-page,
 .portal-loading {
   min-height: 100dvh;

@@ -4,6 +4,8 @@ Playbook thực dụng để **chạy và sửa** private server King God Castle
 nội dung, dựng stage test, sửa master data, và đẩy thay đổi tới client. Đây là tầng
 *hướng dẫn vận hành*.
 
+<sub>🇬🇧 <a href="README.md">Read in English</a></sub>
+
 Nó bổ trợ cho các tài liệu khác - đọc những tài liệu đó để hiểu *vì sao* và *bên trong*:
 
 | Tài liệu | Phạm vi |
@@ -40,7 +42,20 @@ Nó bổ trợ cho các tài liệu khác - đọc những tài liệu đó đ�
 | **[history/lessons.md](history/lessons.md)** | Sổ tay các bẫy: mọi thất bại từng tốn một phiên |
 | **[blog/vi.html](blog/vi.html)** | Blog kể chuyện dựng server (VI/EN) |
 | **[blog/full.vi.html](blog/full.vi.html)** | Toàn bộ hồ sơ kỹ thuật: từng bước, offset, đoạn code (VI/EN) |
-| **[next-steps.md](next-steps.md)** | Việc nên làm tiếp để đóng dự án gọn gàng - và những gì không nên làm |
+| **[next-steps.md](next-steps.md)** | Việc nên làm tiếp để đóng dự án gọn gàng - và những gì không nên làm (VI) |
+
+## Ngôn ngữ
+
+Mọi trang dành cho người đọc đều song ngữ: `../README.md`/`README.vi.md`, mục lục này,
+`README_PLAYER*`, blog (`blog/index.html` + `vi.html`, `blog/full.html` + `full.vi.html`), và
+`history/timeline.md` + `timeline.vi.md`. Trang nào có bản song sinh thì link tới nó ở đầu trang.
+
+Tầng tài liệu tham chiếu giữ **chỉ tiếng Anh**: `dev-notes.md`, `history/lessons.md`,
+`history/synthesis.md`, `../AGENTS.md`, và các playbook trong thư mục này. Chúng được đọc bởi
+người đang ngồi trước log, dịch nửa vời làm cả hai bản tệ đi.
+
+Hai trang **chỉ có tiếng Việt**, cả hai đều ghi `(VI)` trong mục lục ở trên: `next-steps.md`
+(lời khuyên cho người vận hành) và `emulator-note.md` (đưa cho người chơi).
 
 ## Mô hình tư duy duy nhất giải thích mọi thứ
 

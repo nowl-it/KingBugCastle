@@ -474,7 +474,7 @@ site + imm*4`; file offset = `RVA - 0x4000`). That is how `Scene_Lobby.Update` w
 
 ### Auth: id-less logins are refused; the template uid is never a save key (2026-08-18, de175b6)
 
-Two fixes from the "player p-0c10a24bc780 lost all data" report (it did not - see below):
+Two fixes from the "player p-redacted-a1 lost all data" report (it did not - see below):
 
 1. **`_uid_for_login` fell back to `playerdb.active()` when `login_id` was empty**, so any
    `/auth/login` with no id and no token was handed the active save (dev-0001) *with a
@@ -495,15 +495,15 @@ Two fixes from the "player p-0c10a24bc780 lost all data" report (it did not - se
    `""` and every key fallback is `st.get("uid") or "dev-0001"` so it can never persist.
 
 **Incident facts (verified, DB + backup diff, 2026-08-18)**: the player's save
-`p-0c10a24bc780` (login `guest-501689756-756593919`, name "Player5893", level 100, 73 cards,
+`p-redacted-a1` (login `guest-<redacted-a>`, name "Player5893", level 100, 73 cards,
 6.19M gold) was **never touched by the altar fix** - only normal gameplay + the
 `buildingPoints`→`buildingPoint` key migration. Same 37 uids before/after the scan; binding
 intact; no session since Aug 16. "Became guest-0001" was a dashboard artifact + the
 empty-id bug above. If a client presents a *new* guest id, a fresh `p-<hash>` save is minted
 and the old one can be re-attached (`playerdb.bind_login(old_id, new_uid)` or copy the JSON).
 Full write-up: `docs/multi-account-login.md` ("If a player's client lost its guest id").
-**`dev-0001` IS NightOwL since 2026-08-18**: the user's account (uid `p-410890b421a5`,
-Google `google_102274623045401309225`) was merged onto `dev-0001` and the old KingBug
+**`dev-0001` IS NightOwL since 2026-08-18**: the user's account (uid `p-redacted-a2`,
+Google `google_<redacted-a>`) was merged onto `dev-0001` and the old KingBug
 `dev-0001` save deleted (`server/state/backups/players.db.bak-uidmerge-*` holds the pre-merge
 DB). NightOwL's 14 sessions + 174 items + 74 cards carried over; its 600+ KingBug-era
 sessions were dropped with the old save.

@@ -163,7 +163,7 @@ def check_overcome_spends_only_the_selected_ingots():
 
 
 def check_special_transcends_from_one_five_star_duplicate():
-    """The live rule (player p-c2bb01fe32df): 1 duplicate Legacy = 1 full tier =
+    """The live rule (player p-redacted-a5): 1 duplicate Legacy = 1 full tier =
     need_material ingots (Special 6), and a copy transcended to N stars is worth
     (N + 1) tiers. The old unit-per-copy math counted a 0-star copy as a single
     ingot and rejected a Special transcend ('need 6, got 1'). Verify the base case

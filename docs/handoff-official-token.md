@@ -1,7 +1,7 @@
 # Handoff: obtain a live official-server `accesstoken` for KGC (King God Castle)
 
 > This is a self-contained brief for a fresh agent. It records what has been **proved**, what has
-> been **tried and failed**, and the two remaining paths. Read `docs/dev-notes.md` §33–§35 for the
+> been **tried and failed**, and the two remaining paths. Read `docs/dev-notes.md` §33-§35 for the
 > full evidence; this file is the distilled brief.
 
 ## Goal
@@ -13,13 +13,13 @@ production, not from our private server.
 ## Hard constraints
 
 - Respond in **Vietnamese**.
-- **Never use the shell `timeout` command** — let scripts run to completion; prefer background runs.
+- **Never use the shell `timeout` command** - let scripts run to completion; prefer background runs.
 - No phone-passcode / device-interaction commands unless the user has explicitly sanctioned it.
 - **Production request budget is ~290 and shrinking.** Every `prod_probe.py` run without
   `--player` silently costs **3** requests (format matrix on `/auth/getPatchFolder`). Print the
   intended mode and count requests before running.
-- The repo has many unrelated user changes — **commit narrowly**.
-- The iPhone `00008101-000125E62122001E` ("NOwL", iOS 26.7.1, `PasswordProtected=False`, game
+- The repo has many unrelated user changes - **commit narrowly**.
+- The iPhone `<device-udid>` ("NOwL", iOS 26.7.1, `PasswordProtected=False`, game
   174.0.00) is on USB. Keep the screen unlocked during any backup.
 
 ## What is PROVED (do not re-derive)
@@ -28,7 +28,7 @@ production, not from our private server.
    lowercase-hex zero-padded body, `version: 174.0.00` header (**set via `KGC_VERSION=174.0.00`
    env, do not edit the default**), `platform`, `time`. `GET /auth/getPatchFolder` answers
    `HTTP 200 {"code":200,"patchFolder":"LIVE/2026_10_06_xGrY0WbLgR"}`. Header shape is *not*
-   the reason tokens fail — the same dead token returns `401` under both shapes.
+   the reason tokens fail - the same dead token returns `401` under both shapes.
 2. **The token in the iOS plist is genuine.** `accessToken` is itself 3DES-encrypted with
    `MD5("APPROJECTL2")`; decryption yields the 32-char token. Only `HandleAuthResponse`
    (RVA `0x364452C`) writes prefs, and it is called from `Auth` **and** `ReAuth`, so the plist
@@ -51,13 +51,13 @@ production, not from our private server.
 
 | Attempt | Result |
 |---|---|
-| House Arrest / AFC into the game container | `InstallationLookupFailed` — no file-sharing shortcut |
+| House Arrest / AFC into the game container | `InstallationLookupFailed` - no file-sharing shortcut |
 | Incremental MobileBackup2 (`KGC_BACKUP_COMPLETE=1`) | device error **205 "Manifest references files not in backup"** because our instrumented upload discards files |
-| A run that *prints* `Starting INCREMENTAL stream backup` | device **still streams everything**, still 115 s — it never committed a snapshot |
+| A run that *prints* `Starting INCREMENTAL stream backup` | device **still streams everything**, still 115 s - it never committed a snapshot |
 | Stock unfiltered `Mobilebackup2Service` backup (one-time bootstrap) | started 01:09, died `ConnectionTerminatedError` at 01:14; **not retried** |
 | Timed relaunch during capture (several windows) | `402` (too old) or `401` (login not yet certified) |
-| `POST /auth/login`, `/auth`, `/auth/auth`, `/auth/xcd` minting the token directly | all gated by the XIGNCODE cookie — cannot be minted outside the genuine client |
-| Passive MITM harvester (2026-08-24) | not reproducible — cert pinning |
+| `POST /auth/login`, `/auth`, `/auth/auth`, `/auth/xcd` minting the token directly | all gated by the XIGNCODE cookie - cannot be minted outside the genuine client |
+| Passive MITM harvester (2026-08-24) | not reproducible - cert pinning |
 
 ## The core tension
 
@@ -77,21 +77,21 @@ it then lives ~100 s.
 
 ## The two remaining paths
 
-### Path A — make capture fast, then use the T=0 window
+### Path A - make capture fast, then use the T=0 window
 
 1. Retry the **stock, unfiltered** backup so the device finally commits incremental state:
    ```python
    async with Mobilebackup2Service(ld) as mb:
        await mb.backup(full=True, backup_directory=str(BACKUP))
    ```
-   Note `__init__` takes **no** `backup_directory` — pass it to `backup()`. Keep the phone unlocked;
-   expect 15–30 min and a few GB (63 GB free).
+   Note `__init__` takes **no** `backup_directory` - pass it to `backup()`. Keep the phone unlocked;
+   expect 15-30 min and a few GB (63 GB free).
 2. Then run the chained
    `capture_and_probe.py && KGC_VERSION=174.0.00 python3 api/find_player.py --name "잠이- 졸려"`
    and have the user force-quit + reopen the game **exactly when the capture starts**.
 3. If captures drop to a few seconds, the TTL race disappears entirely.
 
-### Path B — compute the cookie locally and mint on demand (the real prize)
+### Path B - compute the cookie locally and mint on demand (the real prize)
 
 Port `ZCWAVE_SendCommand(cmd=0x20)` to Python. Then
 `GET /auth/xcdSeed?version=174.0.00` → build cookie → `GET /auth/xcd?cookie=…` → `accessToken`,
@@ -116,7 +116,7 @@ Key facts for whoever continues:
   `0x301A0`, target = `0xD290 + table[w8]*4`; cmds `0x1c`/`0x20` → `0xD2D0` →
   `handler = *(u64*)0x44040; handler(cmd, ap)`.
 - **Trap:** `.rela.plt` is *not* in PLT-slot order in these libs. Map by `r_offset` (GOT address),
-  not by relocation index — otherwise `bl 0x87D0` reads as `usleep` when it is really
+  not by relocation index - otherwise `bl 0x87D0` reads as `usleep` when it is really
   `ZCWAVE_SendCommandVa` (GOT `0x43E20`).
 - Reusable tools: `tools/xign_xref.py`, `tools/xign_bl.py`, `tools/xign_absrefs.py`.
 - Open risk: the cookie may embed a device fingerprint set by `setUserInfo`/init, in which case a
@@ -124,6 +124,6 @@ Key facts for whoever continues:
 
 ## Also still open
 
-`api/find_player.py` only scans **top rankings** — even with a live token it reported
+`api/find_player.py` only scans **top rankings** - even with a live token it reported
 "not found in top rankings" (and skipped Strife because `/colosseum` also needs the token).
 Either widen the sweep or obtain the Account ID directly.

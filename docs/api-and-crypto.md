@@ -6,7 +6,7 @@ without the client.
 ## Cipher
 
 - **AES-128-ECB**, key `a6072ad6b9c959ff` (16 ASCII bytes, same as `server/crypto.py`). Used for both
-  request bodies and responses. The older `b53019bb76da6b34` (v169) gets **HTTP 400** from prod —
+  request bodies and responses. The older `b53019bb76da6b34` (v169) gets **HTTP 400** from prod -
   verified 2026-10-09, see `docs/dev-notes.md` §33.
 - **Padding**: the server pads the plaintext JSON with **trailing spaces** to a 16-byte multiple, then
   decodes the first JSON object and ignores trailing pad bytes (Newtonsoft tolerates trailing spaces,
@@ -14,7 +14,7 @@ without the client.
   header name `encryptedWithHex`.
 - Response header: `encryptedWithHex: true`, body = raw AES-ECB ciphertext.
 - Auth header on real requests: `accesstoken: <token>` (NOT `Authorization: Bearer`). Time header =
-  AES hex of the same scheme (NOT md5 — see `docs/dev-notes.md` §31: pre-login value is the
+  AES hex of the same scheme (NOT md5 - see `docs/dev-notes.md` §31: pre-login value is the
   constant `AES_hex("beforeLogin")`, post-login `AES_hex(unix_ms)`). For local testing against
   your own server these are not enforced.
 

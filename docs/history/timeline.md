@@ -4,6 +4,8 @@ A dated record of how the project moved from "can I read this game's data?" to a
 publicly hosted private server with its own client builds, a dashboard, a wiki and a
 strategy compendium.
 
+<sub>🇻🇳 <a href="timeline.vi.md">Đọc bằng tiếng Việt</a></sub>
+
 Numbers here are pulled from `docs/history/stats.json` (harvested from five agent
 transcripts), `git log`, and the commits themselves.
 

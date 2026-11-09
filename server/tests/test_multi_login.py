@@ -246,12 +246,12 @@ def check_guest_register_cannot_take_over_a_google_save():
     into that save - dev-0001 for the operator."""
     from fastapi.testclient import TestClient
     with TestClient(server.app, client=("10.7.7.7", 55000)) as tc:
-        owner = tc.post("/auth/register", json={"id": "google_102274623045401309225",
+        owner = tc.post("/auth/register", json={"id": "google_<redacted-a>",
                                                 "type": GOOGLE})
         owner_out = server.aes_decrypt(owner.content)
         assert owner_out.get("success") is True, owner_out
         # Guest button on the same device: must NOT get the Google save.
-        taken = tc.post("/auth/register", json={"id": "google_102274623045401309225",
+        taken = tc.post("/auth/register", json={"id": "google_<redacted-a>",
                                                 "type": GUEST})
         taken_out = server.aes_decrypt(taken.content)
         assert taken_out.get("success") is False, \
@@ -259,7 +259,7 @@ def check_guest_register_cannot_take_over_a_google_save():
         assert taken_out.get("accessToken") is None, \
             "refused guest register must not mint a session"
         # The same id via Google login still works (owner re-attaches to own save).
-        again = tc.post("/auth/register", json={"id": "google_102274623045401309225",
+        again = tc.post("/auth/register", json={"id": "google_<redacted-a>",
                                                 "type": GOOGLE})
         again_out = server.aes_decrypt(again.content)
         assert again_out.get("success") is True, "legit Google login was blocked"

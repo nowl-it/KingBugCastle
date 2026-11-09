@@ -42,7 +42,20 @@ It complements the other docs - read those for the *why* and the *internals*:
 | **[history/lessons.md](history/lessons.md)** | Trap ledger: every failure that cost a session |
 | **[blog/index.html](blog/index.html)** | The build log, told as a story (EN/VI) |
 | **[blog/full.html](blog/full.html)** | The full technical record: every step, offset and snippet (EN/VI) |
-| **[next-steps.md](next-steps.md)** | What to do next to close the project cleanly - and what not to do |
+| **[next-steps.md](next-steps.md)** | What to do next to close the project cleanly - and what not to do (VI) |
+
+## Languages
+
+Every reader-facing page is bilingual: `../README.md`/`README.vi.md`, this index, `README_PLAYER*`,
+the blog (`blog/index.html` + `vi.html`, `blog/full.html` + `full.vi.html`), and
+`history/timeline.md` + `timeline.vi.md`. A page that has a twin links to it at the top.
+
+The reference layers stay **English only**: `dev-notes.md`, `history/lessons.md`,
+`history/synthesis.md`, `../AGENTS.md`, and the playbooks in this folder. They are read by whoever
+is at the keyboard while a log is open, and half-translating them makes both halves worse.
+
+Two pages are **Vietnamese only**, and both say `(VI)` in the index above: `next-steps.md` (advice
+for the operator) and `emulator-note.md` (handed to players).
 
 ## The one mental model that explains everything
 

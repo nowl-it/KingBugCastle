@@ -74,12 +74,12 @@ still points at the old id. To hand it back:
    copy the old save's JSON over the new row (`playerdb.save(new_uid, old_state)`).
 3. The client picks the save up on the next `/player` fetch.
 
-Verified intact 2026-08-18: `p-0c10a24bc780` (login `guest-501689756-756593919`,
+Verified intact 2026-08-18: `p-redacted-a1` (login `guest-<redacted-a>`,
 name "Player5893", level 100, 73 cards) - full save diffed against the pre-fix
-backup, nothing lost. The same save was **migrated to `p-2787e1889bcd`** the same
-day (that player registered a new Google account, `google_116626847976667271433`):
+backup, nothing lost. The same save was **migrated to `p-redacted-a6`** the same
+day (that player registered a new Google account, `google_<redacted-e>`):
 `playerdb.save(new_uid, old_state)` + `bind_login(old_login, new_uid)` +
-`delete(old_uid)`, pre-state in `server/state/backups/players.db.bak-migrate-2787-*`.
+`delete(old_uid)`, pre-state in `server/state/backups/players.db.bak-migrate-*`.
 
 `Constants.AccountType` (from the client): `0` Test, `1` Google, `2` GameCenter,
 `3` AppleID, `4` Guest. The register `type` is stored on the save so

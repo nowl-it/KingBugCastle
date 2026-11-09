@@ -1,6 +1,6 @@
-# Resume card — ShopPanel → gacha (cập nhật 2026-10-21)
+# Resume card - ShopPanel → gacha (cập nhật 2026-10-21)
 
-Đọc `docs/dev-notes.md` §74–§77c trước. Trạng thái verify cuối cùng:
+Đọc `docs/dev-notes.md` §74-§77c trước. Trạng thái verify cuối cùng:
 gate `gate_s77e` exit 0 / 0 `error CS`; capture `cap_s77` 0 NRE / `play capture ok`.
 
 ## Lệnh verify (dùng lại y nguyên)
