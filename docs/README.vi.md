@@ -4,7 +4,7 @@ Playbook thực dụng để **chạy và sửa** private server King God Castle
 nội dung, dựng stage test, sửa master data, và đẩy thay đổi tới client. Đây là tầng
 *hướng dẫn vận hành*.
 
-<sub>🇬🇧 <a href="README.md">Read in English</a></sub>
+<sub>🇬🇧 <a href="https://github.com/nowl-it/KingBugCastle/blob/main/docs/README.md">Read in English</a></sub>
 
 Nó bổ trợ cho các tài liệu khác - đọc những tài liệu đó để hiểu *vì sao* và *bên trong*:
 

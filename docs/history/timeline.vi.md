@@ -3,7 +3,7 @@
 Bản ghi theo ngày tháng về hành trình từ "tôi có đọc được dữ liệu game này không?" đến một
 private server công khai có client build riêng, dashboard, wiki và một trang chiến lược.
 
-<sub>🇬🇧 <a href="timeline.md">Read in English</a></sub>
+<sub>🇬🇧 [Read in English](timeline.md)</sub>
 
 Các con số lấy từ `docs/history/stats.json` (thu thập từ năm nơi lưu phiên chat),
 `git log` và chính các commit.
